@@ -13,8 +13,8 @@
 
     #include "CoreTools/Helper/Assertion/PhysicsCustomAssertMacro.h"
     #include "Mathematics/Algebra/Vector3ToolsDetail.h"
+    #include "Mathematics/Meshes/BasicMesh.h"
     #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
-
     #include <queue>
     #include <stack>
 
@@ -28,6 +28,7 @@
     #include SYSTEM_WARNING_DISABLE(26429)
     #include SYSTEM_WARNING_DISABLE(26472)
     #include SYSTEM_WARNING_DISABLE(26492)
+
 namespace Physics
 {
     template <typename Real>
@@ -39,7 +40,7 @@ namespace Physics
         const auto vertices = mPolytope->GetVertices();
         const int numTriangles = mPolytope->GetNumTriangles();
         const auto indices = mPolytope->GetIndices();
-        BasicMesh mesh(numVertices, vertices.data(), numTriangles, indices.data());
+        BasicMesh mesh(numVertices, numTriangles, indices);
 
         // Create the set of unique arcs which are used to create the BSP tree.
         std::multiset<SphericalArc> arcs;
@@ -66,7 +67,7 @@ namespace Physics
     }
 
     template <typename Real>
-    void ExtremalQuery3BSP<Real>::GetExtremeVertices(const ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection) noexcept
+    void ExtremalQuery3BSP<Real>::GetExtremeVertices(const typename ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection) noexcept
     {
         // Do a nonrecursive depth-first search of the BSP tree to determine
         // spherical polygon contains the incoming direction D.  Index 0 is the
@@ -142,9 +143,9 @@ namespace Physics
         // The typecast is to allow modifying the vertices.  As long as the
         // sorting algorithm is correct, this is a safe thing to do.
         const int numVertices = mesh.GetNumVertices();
-        BasicMesh::Vertex* vertices = const_cast<BasicMesh::Vertex*>(mesh.GetVertices());
+        auto vertices = mesh.GetVertices();
 
-        const BasicMesh::Triangle* triangles = mesh.GetTriangles();
+        const auto triangles = mesh.GetTriangles();
         for (int i = 0; i < numVertices; ++i)
         {
             // This copy circumvents the constness of the mesh vertices, which
@@ -152,27 +153,27 @@ namespace Physics
             BasicMesh::Vertex& vertex = vertices[i];
 
             // This is a consequence of the mesh being a polyhedron.
-            PHYSICS_ASSERTION_0(vertex.NumVertices == vertex.NumTriangles, "Unexpected condition\n");
+            PHYSICS_ASSERTION_0(vertex.numVertices == vertex.numTriangles, "Unexpected condition\n");
 
             // Once we have the first vertex to sort and an initial triangle
             // sharing it, we can walk around the vertex following triangle
             // adjacency links.  It is safe to overwrite the vertex data.
-            int t = vertex.T[0];
+            int t = vertex.t[0];
             const BasicMesh::Triangle* tri = &triangles[t];
 
-            for (int adj = 0; adj < vertex.NumVertices; ++adj)
+            for (int adj = 0; adj < vertex.numVertices; ++adj)
             {
                 int prev = 0, curr = 0;
                 for (prev = 2, curr = 0; curr < 3; prev = curr++)
                 {
-                    if (tri->V[curr] == i)
+                    if (tri->v[curr] == i)
                     {
-                        vertex.V[adj] = tri->V[prev];
-                        vertex.E[adj] = tri->E[prev];
-                        vertex.T[adj] = t;
+                        vertex.v[adj] = tri->v[prev];
+                        vertex.e[adj] = tri->e[prev];
+                        vertex.t[adj] = t;
 
                         // The next triangle to visit.
-                        t = tri->T[prev];
+                        t = tri->t[prev];
                         tri = &triangles[t];
                         break;
                     }
@@ -186,8 +187,8 @@ namespace Physics
     void ExtremalQuery3BSP<Real>::CreateSphericalArcs(const BasicMesh& mesh, std::multiset<SphericalArc>& arcs)
     {
         const int numEdges = mesh.GetNumEdges();
-        const BasicMesh::Edge* edges = mesh.GetEdges();
-        const BasicMesh::Triangle* triangles = mesh.GetTriangles();
+        const auto edges = mesh.GetEdges();
+        const auto triangles = mesh.GetTriangles();
 
         const int prev[3] = { 2, 0, 1 };
         const int next[3] = { 1, 2, 0 };
@@ -197,20 +198,20 @@ namespace Physics
             const BasicMesh::Edge& edge = edges[i];
 
             SphericalArc arc;
-            arc.NIndex[0] = edge.T[0];
-            arc.NIndex[1] = edge.T[1];
+            arc.NIndex[0] = edge.t[0];
+            arc.NIndex[1] = edge.t[1];
             arc.Separation = 1;
 
             arc.Normal = Mathematics::Vector3Tools<Real>::CrossProduct(mFaceNormals[arc.NIndex[0]], (mFaceNormals[arc.NIndex[1]]));
 
-            const BasicMesh::Triangle& adj = triangles[edge.T[0]];
+            const BasicMesh::Triangle& adj = triangles[edge.t[0]];
             int j;
             for (j = 0; j < 3; ++j)
             {
-                if (adj.V[j] != edge.V[0] && adj.V[j] != edge.V[1])
+                if (adj.v[j] != edge.v[0] && adj.v[j] != edge.v[1])
                 {
-                    arc.PosVertex = adj.V[prev[j]];
-                    arc.NegVertex = adj.V[next[j]];
+                    arc.PosVertex = adj.v[prev[j]];
+                    arc.NegVertex = adj.v[next[j]];
                     break;
                 }
             }
@@ -230,26 +231,26 @@ namespace Physics
         SortVertexAdjacents(mesh);
 
         const int numVertices = mesh.GetNumVertices();
-        const BasicMesh::Vertex* vertices = mesh.GetVertices();
+        const auto vertices = mesh.GetVertices();
         std::queue<std::pair<int, int>> queue;
         for (int i = 0; i < numVertices; ++i)
         {
             const BasicMesh::Vertex& vertex = vertices[i];
 
-            queue.push(std::make_pair(0, vertex.NumTriangles));
+            queue.push(std::make_pair(0, vertex.numTriangles));
             while (!queue.empty())
             {
                 const std::pair<int, int> arc = queue.front();
                 queue.pop();
                 int i0 = arc.first, i1 = arc.second;
                 const int separation = i1 - i0;
-                if (separation > 1 && separation != vertex.NumTriangles - 1)
+                if (separation > 1 && separation != vertex.numTriangles - 1)
                 {
-                    if (i1 < vertex.NumTriangles)
+                    if (i1 < vertex.numTriangles)
                     {
                         SphericalArc sphericalArc;
-                        sphericalArc.NIndex[0] = vertex.T[i0];
-                        sphericalArc.NIndex[1] = vertex.T[i1];
+                        sphericalArc.NIndex[0] = vertex.t[i0];
+                        sphericalArc.NIndex[1] = vertex.t[i1];
                         sphericalArc.Separation = separation;
 
                         sphericalArc.Normal = Mathematics::Vector3Tools<Real>::CrossProduct(mFaceNormals[sphericalArc.NIndex[0]], (mFaceNormals[sphericalArc.NIndex[1]]));

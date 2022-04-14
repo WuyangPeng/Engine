@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 16:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 16:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -11,63 +14,79 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26456)
-Rendering::PickRecordImpl ::PickRecordImpl() noexcept
-    : m_Intersected{}, m_Parameter{ 0.0f }, m_Triangle{ -1 }
-{
-    m_Bary[0] = 1.0f;
-    m_Bary[1] = 0.0f;
-    m_Bary[2] = 0.0f;
 
+Rendering::PickRecordImpl::PickRecordImpl() noexcept
+    : intersected{}, parameter{ 0.0f }, triangle{ -1 }, bary{}
+{
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PickRecordImpl ::PickRecordImpl(const PickRecordImpl& rhs)
-    : m_Intersected{ (rhs.m_Intersected == nullptr) ? ConstSpatialSharedPtr() : boost::polymorphic_pointer_cast<Spatial>(rhs.m_Intersected->Clone()) },
-      m_Parameter{ rhs.m_Parameter }, m_Triangle{ rhs.m_Triangle }
+Rendering::PickRecordImpl::PickRecordImpl(const PickRecordImpl& rhs)
+    : intersected{ (rhs.intersected == nullptr) ? ConstSpatialSharedPtr() : boost::polymorphic_pointer_cast<Spatial>(rhs.intersected->Clone()) },
+      parameter{ rhs.parameter },
+      triangle{ rhs.triangle },
+      bary{ rhs.bary }
 {
-    m_Bary[0] = rhs.m_Bary[0];
-    m_Bary[1] = rhs.m_Bary[1];
-    m_Bary[2] = rhs.m_Bary[2];
-
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PickRecordImpl& Rendering::PickRecordImpl ::operator=(const PickRecordImpl& rhs)
+Rendering::PickRecordImpl& Rendering::PickRecordImpl::operator=(const PickRecordImpl& rhs)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (!rhs.m_Intersected)
+    if (!rhs.intersected)
     {
-        m_Intersected.reset();
+        intersected.reset();
     }
     else
     {
-        m_Intersected = boost::polymorphic_pointer_cast<Spatial>(rhs.m_Intersected->Clone());
+        intersected = boost::polymorphic_pointer_cast<Spatial>(rhs.intersected->Clone());
     }
 
-    m_Parameter = rhs.m_Parameter;
-    m_Triangle = rhs.m_Triangle;
+    parameter = rhs.parameter;
+    triangle = rhs.triangle;
 
-    m_Bary[0] = rhs.m_Bary[0];
-    m_Bary[1] = rhs.m_Bary[1];
-    m_Bary[2] = rhs.m_Bary[2];
+    bary.at(0) = rhs.bary.at(0);
+    bary.at(1) = rhs.bary.at(1);
+    bary.at(2) = rhs.bary.at(2);
 
     return *this;
 }
 
+Rendering::PickRecordImpl& Rendering::PickRecordImpl::operator=(PickRecordImpl&& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    intersected = std::move(rhs.intersected);
+
+    parameter = std::move(rhs.parameter);
+    triangle = std::move(rhs.triangle);
+
+    bary = std::move(rhs.bary);
+
+    return *this;
+}
+
+Rendering::PickRecordImpl::PickRecordImpl(PickRecordImpl&& rhs) noexcept
+    : intersected{ std::move(rhs.intersected) }, parameter{ std::move(rhs.parameter) }, triangle{ std::move(rhs.triangle) }, bary{ std::move(rhs.bary) }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::PickRecordImpl ::IsValid() const noexcept
+
+bool Rendering::PickRecordImpl::IsValid() const noexcept
 {
     try
     {
-        if (-1 <= m_Triangle && 0.0f <= m_Bary[0] && m_Bary[0] <= 1.0f &&
-            0.0f <= m_Bary[1] && m_Bary[1] <= 1.0f && 0.0f <= m_Bary[2] && m_Bary[2] <= 1.0f &&
-            Mathematics::MathF::Approximate(1.0f, m_Bary[0] + m_Bary[1] + m_Bary[2]))
+        if (-1 <= triangle &&
+            0.0f <= bary.at(0) &&
+            bary.at(0) <= 1.0f &&
+            0.0f <= bary.at(1) &&
+            bary.at(1) <= 1.0f &&
+            0.0f <= bary.at(2) &&
+            bary.at(2) <= 1.0f &&
+            Mathematics::MathF::Approximate(1.0f, bary.at(0) + bary.at(1) + bary.at(2)))
         {
             return true;
         }
@@ -81,79 +100,72 @@ bool Rendering::PickRecordImpl ::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-float Rendering::PickRecordImpl ::GetParameter() const noexcept
-
+float Rendering::PickRecordImpl::GetParameter() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Parameter;
+    return parameter;
 }
 
-void Rendering::PickRecordImpl ::SetParameter(float parameter) noexcept
+void Rendering::PickRecordImpl::SetParameter(float aParameter) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Parameter = parameter;
+    parameter = aParameter;
 }
 
-int Rendering::PickRecordImpl ::GetTriangle() const noexcept
+int Rendering::PickRecordImpl::GetTriangle() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Triangle;
+    return triangle;
 }
 
-void Rendering::PickRecordImpl ::SetTriangle(int triangle) noexcept
+void Rendering::PickRecordImpl::SetTriangle(int aTriangle) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Triangle = triangle;
+    triangle = aTriangle;
 }
 
-float Rendering::PickRecordImpl ::GetBary(int index) const
+float Rendering::PickRecordImpl::GetBary(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_1(0 <= index && index < sm_BarySize, "索引越界");
-    CoreTools::DisableNoexcept();
-    if (0 <= index && index < sm_BarySize)
-    {
-        return m_Bary[index];
-    }
-    else
-    {
-        return 0.0f;
-    }
+    RENDERING_ASSERTION_1(0 <= index && index < barySize, "索引越界");
+
+    return bary.at(index);
 }
 
-void Rendering::PickRecordImpl ::SetBary(float firstBary, float secondBary)
+void Rendering::PickRecordImpl::SetBary(float firstBary, float secondBary)
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
-    RENDERING_ASSERTION_1(0.0f <= firstBary && firstBary <= 1.0f, "firstBary的取值在0.0和1.0之间");
-    RENDERING_ASSERTION_1(0.0f <= secondBary && secondBary <= 1.0f, "secondBary的取值在0.0和1.0之间");
 
-    m_Bary[0] = firstBary;
-    m_Bary[1] = secondBary;
-    m_Bary[2] = 1.0f - firstBary - secondBary;
+    RENDERING_ASSERTION_0(0.0f <= firstBary && firstBary <= 1.0f, "firstBary的取值在0.0和1.0之间");
+    RENDERING_ASSERTION_0(0.0f <= secondBary && secondBary <= 1.0f, "secondBary的取值在0.0和1.0之间");
+
+    bary.at(0) = firstBary;
+    bary.at(1) = secondBary;
+    bary.at(2) = 1.0f - firstBary - secondBary;
 }
 
-Rendering::ConstSpatialSharedPtr Rendering::PickRecordImpl ::GetIntersected() const noexcept
+Rendering::ConstSpatialSharedPtr Rendering::PickRecordImpl::GetIntersected() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Intersected;
+    return intersected;
 }
 
-void Rendering::PickRecordImpl ::SetIntersected(const ConstSpatialSharedPtr& intersected) noexcept
+void Rendering::PickRecordImpl::SetIntersected(const ConstSpatialSharedPtr& aIntersected) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Intersected = intersected;
+    intersected = aIntersected;
 }
 
-bool Rendering ::operator==(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept
+bool Rendering::operator==(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept
 {
     const auto lhsParameter = lhs.GetParameter();
     const auto rhsParameter = rhs.GetParameter();
@@ -161,9 +173,7 @@ bool Rendering ::operator==(const PickRecordImpl& lhs, const PickRecordImpl& rhs
     return memcmp(&lhsParameter, &rhsParameter, sizeof(float)) == 0;
 }
 
-bool Rendering ::operator<(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept
+bool Rendering::operator<(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept
 {
     return lhs.GetParameter() < rhs.GetParameter();
 }
-
-#include STSTEM_WARNING_POP

@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 14:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 15:06)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RenderTargetImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
@@ -17,69 +21,55 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Resources/Texture2D.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26418)
 
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::RenderTargetImpl ::RenderTargetImpl(int numTargets, TextureFormat format, int width, int height, bool hasMipmaps, bool hasDepthStencil)
-    : m_ColorTextures{ numTargets }, m_DepthStencilTexture{}, m_HasMipmaps{ hasMipmaps }
+Rendering::RenderTargetImpl::RenderTargetImpl(int numTargets, TextureFormat format, int width, int height, bool hasMipmaps, bool hasDepthStencil)
+    : colorTextures{},
+      depthStencilTexture{ hasDepthStencil ? CoreTools::ObjectAssociated{ std::make_shared<Texture2D>(TextureFormat::D24S8, width, height, 1, BufferUsage::DepthStencil) } : CoreTools::ObjectAssociated<Texture2D>{} },
+      hasMipmaps{ hasMipmaps }
 {
     RENDERING_ASSERTION_0(0 < numTargets, "目标的数量必须至少为1。\n");
 
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+    for (auto i = 0; i < numTargets; ++i)
     {
-        m_ColorTextures[i] = std::make_shared<Texture2D>(format, width, height, (hasMipmaps ? 0 : 1), BufferUsage::RenderTarget);
-    }
-
-    if (hasDepthStencil)
-    {
-        m_DepthStencilTexture = std::make_shared<Texture2D>(TextureFormat::D24S8, width, height, 1, BufferUsage::DepthStencil);
+        colorTextures.emplace_back(CoreTools::ObjectAssociated{ std::make_shared<Texture2D>(format, width, height, (hasMipmaps ? 0 : 1), BufferUsage::RenderTarget) });
     }
 
     RENDERING_SELF_CLASS_IS_VALID_4;
 }
 
-Rendering::RenderTargetImpl::RenderTargetImpl()
-    : m_ColorTextures{ 0 }, m_DepthStencilTexture{}, m_HasMipmaps{ false }
+Rendering::RenderTargetImpl::RenderTargetImpl() noexcept
+    : colorTextures{}, depthStencilTexture{}, hasMipmaps{ false }
 {
     RENDERING_SELF_CLASS_IS_VALID_4;
 }
 
 // private
-void Rendering::RenderTargetImpl ::Swap(RenderTargetImpl& rhs) noexcept
+void Rendering::RenderTargetImpl::Swap(RenderTargetImpl& rhs) noexcept
 {
-    std::swap(m_ColorTextures, rhs.m_ColorTextures);
-    std::swap(m_DepthStencilTexture, rhs.m_DepthStencilTexture);
-    std::swap(m_HasMipmaps, rhs.m_HasMipmaps);
+    std::swap(colorTextures, rhs.colorTextures);
+    std::swap(depthStencilTexture, rhs.depthStencilTexture);
+    std::swap(hasMipmaps, rhs.hasMipmaps);
 }
 
-Rendering::RenderTargetImpl ::RenderTargetImpl(const RenderTargetImpl& rhs)
-    : m_ColorTextures{ 0 }, m_DepthStencilTexture{}, m_HasMipmaps{ rhs.m_HasMipmaps }
+Rendering::RenderTargetImpl::RenderTargetImpl(const RenderTargetImpl& rhs)
+    : colorTextures{ 0 }, depthStencilTexture{}, hasMipmaps{ rhs.hasMipmaps }
 {
-    for (auto i = 0u; i < rhs.m_ColorTextures.size(); ++i)
+    for (auto i = 0u; i < rhs.colorTextures.size(); ++i)
     {
-        m_ColorTextures[i] = std::make_shared<Texture2D>(*rhs.m_ColorTextures[i]);
+        colorTextures.at(i) = CoreTools::ObjectAssociated{ std::make_shared<Texture2D>(*rhs.colorTextures.at(i).object), rhs.colorTextures.at(i).associated };
     }
 
-    if (rhs.m_DepthStencilTexture)
+    if (rhs.depthStencilTexture.object != nullptr)
     {
-        m_DepthStencilTexture = std::make_shared<Texture2D>(*rhs.m_DepthStencilTexture);
+        depthStencilTexture = CoreTools::ObjectAssociated{ std::make_shared<Texture2D>(*rhs.depthStencilTexture.object), rhs.depthStencilTexture.associated };
     }
 
     RENDERING_SELF_CLASS_IS_VALID_4;
 }
 
-Rendering::RenderTargetImpl& Rendering::RenderTargetImpl ::operator=(const RenderTargetImpl& rhs)
+Rendering::RenderTargetImpl& Rendering::RenderTargetImpl::operator=(const RenderTargetImpl& rhs)
 {
     RENDERING_CLASS_IS_VALID_4;
 
@@ -90,14 +80,32 @@ Rendering::RenderTargetImpl& Rendering::RenderTargetImpl ::operator=(const Rende
     return *this;
 }
 
+Rendering::RenderTargetImpl& Rendering::RenderTargetImpl::operator=(RenderTargetImpl&& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_4;
+
+    RenderTargetImpl temp{ std::move(rhs) };
+
+    Swap(temp);
+
+    return *this;
+}
+
+Rendering::RenderTargetImpl::RenderTargetImpl(RenderTargetImpl&& rhs) noexcept
+    : colorTextures{ std::move(rhs.colorTextures) }, depthStencilTexture{ std::move(rhs.depthStencilTexture) }, hasMipmaps{ std::move(rhs.hasMipmaps) }
+{
+    RENDERING_SELF_CLASS_IS_VALID_4;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RenderTargetImpl ::IsValid() const noexcept
+
+bool Rendering::RenderTargetImpl::IsValid() const noexcept
 {
     try
     {
-        for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+        for (const auto& colorTexture : colorTextures)
         {
-            if (m_ColorTextures[i] && m_ColorTextures[i]->HasMipmaps() != m_HasMipmaps)
+            if (colorTexture.object && colorTexture.object->HasMipmaps() != hasMipmaps)
             {
                 return false;
             }
@@ -110,210 +118,200 @@ bool Rendering::RenderTargetImpl ::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-int Rendering::RenderTargetImpl ::GetNumTargets() const
+int Rendering::RenderTargetImpl::GetNumTargets() const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
 
-    return boost::numeric_cast<int>(m_ColorTextures.size());
+    return boost::numeric_cast<int>(colorTextures.size());
 }
 
-Rendering::TextureFormat Rendering::RenderTargetImpl ::GetFormat() const
+Rendering::TextureFormat Rendering::RenderTargetImpl::GetFormat() const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
-    RENDERING_ASSERTION_0(!m_ColorTextures.empty(), "m_ColorTextures大小为空。\n");
+    RENDERING_ASSERTION_0(!colorTextures.empty(), "m_ColorTextures大小为空。\n");
 
-    return m_ColorTextures[0]->GetFormat();
+    return colorTextures.at(0).object->GetFormat();
 }
 
-int Rendering::RenderTargetImpl ::GetWidth() const
+int Rendering::RenderTargetImpl::GetWidth() const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
-    RENDERING_ASSERTION_0(!m_ColorTextures.empty(), "m_ColorTextures大小为空。\n");
+    RENDERING_ASSERTION_0(!colorTextures.empty(), "m_ColorTextures大小为空。\n");
 
-    return m_ColorTextures[0]->GetWidth();
+    return colorTextures.at(0).object->GetWidth();
 }
 
-int Rendering::RenderTargetImpl ::GetHeight() const
+int Rendering::RenderTargetImpl::GetHeight() const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
-    RENDERING_ASSERTION_0(!m_ColorTextures.empty(), "m_ColorTextures大小为空。\n");
+    RENDERING_ASSERTION_0(!colorTextures.empty(), "m_ColorTextures大小为空。\n");
 
-    return m_ColorTextures[0]->GetHeight();
+    return colorTextures.at(0).object->GetHeight();
 }
 
-Rendering::RenderTargetImpl::ConstTexture2DSharedPtr Rendering::RenderTargetImpl ::GetColorTexture(int index) const
+Rendering::RenderTargetImpl::ConstTexture2DSharedPtr Rendering::RenderTargetImpl::GetColorTexture(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_ColorTextures.size()), "索引错误！\n");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(colorTextures.size()), "索引错误！\n");
 
-    return m_ColorTextures[index];
+    return colorTextures.at(index).object;
 }
 
-Rendering::RenderTargetImpl::ConstTexture2DSharedPtr Rendering::RenderTargetImpl ::GetDepthStencilTexture() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_4;
-
-    return m_DepthStencilTexture;
-}
-
-bool Rendering::RenderTargetImpl ::HasMipmaps() const noexcept
+Rendering::RenderTargetImpl::ConstTexture2DSharedPtr Rendering::RenderTargetImpl::GetDepthStencilTexture() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
 
-    return m_HasMipmaps;
+    return depthStencilTexture.object;
 }
 
-bool Rendering::RenderTargetImpl ::HasDepthStencil() const noexcept
+bool Rendering::RenderTargetImpl::HasMipmaps() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
 
-    return m_DepthStencilTexture != nullptr;
+    return hasMipmaps;
 }
 
-CoreTools::ObjectSharedPtr Rendering::RenderTargetImpl ::GetObjectByName(const string& name)
+bool Rendering::RenderTargetImpl::HasDepthStencil() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_4;
+
+    return depthStencilTexture.object != nullptr;
+}
+
+CoreTools::ObjectSharedPtr Rendering::RenderTargetImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DisableNoexcept();
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+
+    for (const auto& colorTexture : colorTextures)
     {
-        if (m_ColorTextures[i]->GetName() == name)
+        if (colorTexture.object->GetName() == name)
         {
-            return m_ColorTextures[i];
+            return colorTexture.object;
         }
     }
 
-    if (m_DepthStencilTexture != nullptr && m_DepthStencilTexture->GetName() == name)
+    if (depthStencilTexture.object != nullptr && depthStencilTexture.object->GetName() == name)
     {
-        return m_DepthStencilTexture;
+        return depthStencilTexture.object;
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return CoreTools::ObjectSharedPtr{};
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::RenderTargetImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::RenderTargetImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DisableNoexcept();
-    vector<CoreTools::ObjectSharedPtr> objects;
 
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+    vector<CoreTools::ObjectSharedPtr> objects{};
+
+    for (const auto& colorTexture : colorTextures)
     {
-        if (m_ColorTextures[i]->GetName() == name)
+        if (colorTexture.object->GetName() == name)
         {
-            objects.push_back(m_ColorTextures[i]);
+            objects.emplace_back(colorTexture.object);
         }
     }
 
-    if (m_DepthStencilTexture != nullptr && m_DepthStencilTexture->GetName() == name)
+    if (depthStencilTexture.object != nullptr && depthStencilTexture.object->GetName() == name)
     {
-        objects.push_back(m_DepthStencilTexture);
+        objects.emplace_back(depthStencilTexture.object);
     }
 
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::RenderTargetImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::RenderTargetImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DisableNoexcept();
-    for (unsigned i = 0; i < m_ColorTextures.size(); ++i)
+
+    for (const auto& colorTexture : colorTextures)
     {
-        if (m_ColorTextures[i]->GetName() == name)
+        if (colorTexture.object->GetName() == name)
         {
-            return m_ColorTextures[i];
+            return colorTexture.object;
         }
     }
 
-    if (m_DepthStencilTexture != nullptr && m_DepthStencilTexture->GetName() == name)
+    if (depthStencilTexture.object != nullptr && depthStencilTexture.object->GetName() == name)
     {
-        return m_DepthStencilTexture;
+        return depthStencilTexture.object;
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return CoreTools::ConstObjectSharedPtr{};
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::RenderTargetImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::RenderTargetImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DisableNoexcept();
-    vector<CoreTools::ConstObjectSharedPtr> objects;
 
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
+    vector<CoreTools::ConstObjectSharedPtr> objects{};
+
+    for (const auto& colorTexture : colorTextures)
     {
-        if (m_ColorTextures[i]->GetName() == name)
+        if (colorTexture.object->GetName() == name)
         {
-            objects.push_back(m_ColorTextures[i]);
+            objects.emplace_back(colorTexture.object);
         }
     }
 
-    if (m_DepthStencilTexture != nullptr && m_DepthStencilTexture->GetName() == name)
+    if (depthStencilTexture.object != nullptr && depthStencilTexture.object->GetName() == name)
     {
-        objects.push_back(m_DepthStencilTexture);
+        objects.emplace_back(depthStencilTexture.object);
     }
 
     return objects;
 }
 
-int Rendering::RenderTargetImpl ::GetStreamingSize() const
+int Rendering::RenderTargetImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(int());
-    size += boost::numeric_cast<int>(m_ColorTextures.size() * CORE_TOOLS_STREAM_SIZE(m_ColorTextures[0]));
-    size += CORE_TOOLS_STREAM_SIZE(m_DepthStencilTexture);
-    size += CORE_TOOLS_STREAM_SIZE(m_HasMipmaps);
+    auto size = CORE_TOOLS_STREAM_SIZE(int{});
+    size += boost::numeric_cast<int32_t>(colorTextures.size() * CORE_TOOLS_STREAM_SIZE(colorTextures.at(0).object));
+    size += CORE_TOOLS_STREAM_SIZE(depthStencilTexture.object);
+    size += CORE_TOOLS_STREAM_SIZE(hasMipmaps);
 
     return size;
 }
 
-void Rendering::RenderTargetImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::RenderTargetImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
 
-    //   target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
-    //   target.WriteSharedPtr(m_DepthStencilTexture);
-    target.Write(m_HasMipmaps);
+    target.WriteObjectAssociatedContainerWithNumber(colorTextures);
+    target.WriteObjectAssociated(depthStencilTexture);
+    target.Write(hasMipmaps);
 }
 
-void Rendering::RenderTargetImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::RenderTargetImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_4;
 
-    auto numTargets = 0;
+    int32_t numTargets{};
 
     source.Read(numTargets);
-    m_ColorTextures.resize(numTargets);
+    colorTextures.resize(numTargets);
 
-    //source.ReadSharedPtr(boost::numeric_cast<int>(m_ColorTextures.size()), &m_ColorTextures[0]);
-    // source.ReadSharedPtr(m_DepthStencilTexture);
-    m_HasMipmaps = source.ReadBool();
+    source.ReadObjectAssociatedContainer(numTargets, colorTextures);
+    source.ReadObjectAssociated(depthStencilTexture);
+    hasMipmaps = source.ReadBool();
 }
 
-void Rendering::RenderTargetImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::RenderTargetImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_4;
-    CoreTools::DisableNoexcept();
-    source;
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
-    {
-        //source.ResolveObjectSharedPtrLink(m_ColorTextures[i]);
-    }
-    // source.ResolveObjectSharedPtrLink(m_DepthStencilTexture);
+
+    source.ResolveLinkContainer(colorTextures);
+    source.ResolveLink(depthStencilTexture);
 }
 
-void Rendering::RenderTargetImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::RenderTargetImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_4;
-    CoreTools::DisableNoexcept();
-    target;
-    for (auto i = 0u; i < m_ColorTextures.size(); ++i)
-    {
-        // target.RegisterSharedPtr(m_ColorTextures[i]);
-    }
 
-    // target.RegisterSharedPtr(m_DepthStencilTexture);
+    target.RegisterContainer(colorTextures);
+    target.Register(depthStencilTexture);
 }
-
-#include STSTEM_WARNING_POP

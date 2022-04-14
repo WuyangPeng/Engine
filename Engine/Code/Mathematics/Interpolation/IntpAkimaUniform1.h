@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 12:45)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_H
 #define MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_H
@@ -13,32 +16,30 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpAkimaUniform1 : public IntpAkima1<Real>
-	{
-	public:
-		// Construction and destruction.  IntpAkimaUniform1 accepts
-		// responsibility for deleting the input array.  The interpolator is for
-		// uniformly spaced x-values.
-		IntpAkimaUniform1(int quantity, Real xMin, Real xSpacing, Real* F);
-		virtual ~IntpAkimaUniform1();
+    template <typename Real>
+    class IntpAkimaUniform1 : public IntpAkima1<Real>
+    {
+    public:
+        using ClassType = IntpAkimaUniform1<Real>;
+        using ParentType = IntpAkima1<Real>;
 
-		virtual Real GetXMin() const;
-		virtual Real GetXMax() const;
-		Real GetXSpacing() const;
+    public:
+        IntpAkimaUniform1(int quantity, Real xMin, Real xSpacing, const std::vector<Real>& f);
 
-	protected:
-		using IntpAkima1<Real>::quantity;
-		using IntpAkima1<Real>::mPoly;
-		using IntpAkima1<Real>::ComputeDerivative;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		virtual bool Lookup(Real x, int& index, Real& dx) const;
+        NODISCARD Real GetXMin() const noexcept override;
+        NODISCARD Real GetXMax() const noexcept override;
+        NODISCARD Real GetXSpacing() const noexcept;
 
-		Real mXMin, mXMax, mXSpacing;
-	};
+    protected:
+        NODISCARD bool Lookup(Real x, int& index, Real& dx) const noexcept override;
 
-	using IntpAkimaUniform1f = IntpAkimaUniform1<float>;
-	using IntpAkimaUniform1d = IntpAkimaUniform1<double>;
+    private:
+        Real xMin;
+        Real xMax;
+        Real xSpacing;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_H

@@ -1,17 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.1 (2020/08/30 14:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 16:21)
 
 #ifndef RENDERING_DATA_TYPES_BOUND_ACHIEVE_H
 #define RENDERING_DATA_TYPES_BOUND_ACHIEVE_H
 
 #include "Bound.h"
-#include "Transform.h"
+#include "TransformDetail.h"
 #include "CoreTools/Base/SpanIteratorDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -21,15 +21,15 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename T>
 Rendering::Bound<T>::Bound(const APoint& center, T radius)
-    : m_Center{ center }, m_Radius{ radius }
+    : center{ center }, radius{ radius }
 {
     // 半径必须为正数。零半径表示边界无效。
-    if (m_Radius < Math::GetValue(0))
+    if (radius < Math::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("半径必须为正数"s));
     }
@@ -38,35 +38,37 @@ Rendering::Bound<T>::Bound(const APoint& center, T radius)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool Rendering::Bound<T>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= m_Radius)
+    if (Math::GetValue(0) <= radius)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-void Rendering::Bound<T>::SetCenter(const APoint& center) noexcept
+void Rendering::Bound<T>::SetCenter(const APoint& newCenter) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Center = center;
+    center = newCenter;
 }
 
 template <typename T>
-void Rendering::Bound<T>::SetRadius(T radius)
+void Rendering::Bound<T>::SetRadius(T mewRadius)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (radius < Math::GetValue(0))
+    if (mewRadius < Math::GetValue(0))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("半径必须为正数"s));
     }
 
-    m_Radius = radius;
+    radius = mewRadius;
 }
 
 template <typename T>
@@ -74,7 +76,7 @@ const typename Rendering::Bound<T>::APoint& Rendering::Bound<T>::GetCenter() con
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Center;
+    return center;
 }
 
 template <typename T>
@@ -82,7 +84,7 @@ T Rendering::Bound<T>::GetRadius() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Radius;
+    return radius;
 }
 
 template <typename T>
@@ -90,7 +92,7 @@ int Rendering::Bound<T>::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return MATHEMATICS_STREAM_SIZE(m_Center) + CORE_TOOLS_STREAM_SIZE(m_Radius);
+    return MATHEMATICS_STREAM_SIZE(center) + CORE_TOOLS_STREAM_SIZE(radius);
 }
 
 template <typename T>
@@ -98,8 +100,8 @@ typename Rendering::Bound<T>::NumericalValueSymbol Rendering::Bound<T>::WhichSid
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto signedDistance = plane.DistanceTo(m_Center);
-    const auto difference = signedDistance - m_Radius;
+    const auto signedDistance = plane.DistanceTo(center);
+    const auto difference = signedDistance - radius;
 
     if (difference < -Math::GetZeroTolerance())
     {
@@ -120,43 +122,43 @@ void Rendering::Bound<T>::GrowToContain(const Bound<T>& bound)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (bound.m_Radius <= Math::GetZeroTolerance())
+    if (bound.radius <= Math::GetZeroTolerance())
     {
         // 输入边界是无效的，不影响增长
         return;
     }
 
-    if (m_Radius <= Math::GetZeroTolerance())
+    if (radius <= Math::GetZeroTolerance())
     {
         // 当前边界是无效的，所以只赋值输入边界
         *this = bound;
         return;
     }
 
-    const auto centerDifference = bound.m_Center - m_Center;
-    auto lengthSqruared = centerDifference.SquaredLength();
-    const auto radiusDifference = bound.m_Radius - m_Radius;
+    const auto centerDifference = bound.center - center;
+    const auto lengthSqruared = centerDifference.SquaredLength();
+    const auto radiusDifference = bound.radius - radius;
     const auto radiusDifferenceSqruared = radiusDifference * radiusDifference;
 
     if (lengthSqruared <= radiusDifferenceSqruared)
     {
         if (Math::GetValue(0) <= radiusDifference)
         {
-            m_Center = bound.m_Center;
-            m_Radius = bound.m_Radius;
+            center = bound.center;
+            radius = bound.radius;
         }
 
         return;
     }
 
-    auto length = Math::Sqrt(lengthSqruared);
+    const auto length = Math::Sqrt(lengthSqruared);
     if (Math::GetZeroTolerance() < length)
     {
-        auto coefficient = (length + radiusDifference) / (Math::GetValue(2) * length);
-        m_Center += coefficient * centerDifference;
+        const auto coefficient = (length + radiusDifference) / (Math::GetValue(2) * length);
+        center += coefficient * centerDifference;
     }
 
-    m_Radius = Math::GetRational(1, 2) * (length + m_Radius + bound.m_Radius);
+    radius = Math::GetRational(1, 2) * (length + radius + bound.radius);
 }
 
 template <typename T>
@@ -164,7 +166,7 @@ const Rendering::Bound<T> Rendering::Bound<T>::TransformBy(const Transform& tran
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    Bound<T> bound{ transform * m_Center, transform.GetNorm() * m_Radius };
+    Bound<T> bound{ transform * center, transform.GetNorm() * radius };
 
     return bound;
 }
@@ -176,7 +178,7 @@ void Rendering::Bound<T>::ComputeFromData(int numElements, int stride, SpanConst
 
     std::vector<APoint> aPoint{};
 
-    const auto difference = stride - CORE_TOOLS_STREAM_SIZE(m_Radius) * APoint::sm_APointSize;
+    const auto difference = stride - CORE_TOOLS_STREAM_SIZE(radius) * APoint::aPointSize;
 
     if (difference < 0)
     {
@@ -203,7 +205,7 @@ void Rendering::Bound<T>::ComputeFromData(const Vector3DContainer& data)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    std::vector<APoint> aPoint;
+    std::vector<APoint> aPoint{};
 
     for (const auto& value : data)
     {
@@ -225,13 +227,13 @@ void Rendering::Bound<T>::ComputeFromData(const APointContainer& data)
         sum += position;
     }
 
-    m_Center = sum / boost::numeric_cast<T>(data.size());
+    center = sum / boost::numeric_cast<T>(data.size());
 
     // 半径是位置到中心的最大距离
     auto maxRadiusSquared = Math::GetValue(0);
     for (const auto& position : data)
     {
-        const auto difference = position - m_Center;
+        const auto difference = position - center;
 
         auto radiusSquared = difference.SquaredLength();
 
@@ -241,7 +243,7 @@ void Rendering::Bound<T>::ComputeFromData(const APointContainer& data)
         }
     }
 
-    m_Radius = Math::Sqrt(maxRadiusSquared);
+    radius = Math::Sqrt(maxRadiusSquared);
 }
 
 template <typename T>
@@ -249,7 +251,7 @@ bool Rendering::Bound<T>::TestIntersection(const APoint& origin, const AVector& 
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    if (m_Radius <= Math::GetZeroTolerance())
+    if (radius <= Math::GetZeroTolerance())
     {
         // 边界是无效的，不相交。
         return false;
@@ -275,10 +277,10 @@ bool Rendering::Bound<T>::TestLineIntersection(const APoint& origin, const AVect
     RENDERING_ASSERTION_2(Math::Approximate(tMax, Math::maxReal), "tmax对线必须是无穷大。\n");
 
     // 测试球——直线相交
-    const auto pointDifference = origin - m_Center;
-    auto difference = pointDifference.SquaredLength() - m_Radius * m_Radius;
-    auto dot = Dot(direction, pointDifference);
-    auto discriminant = dot * dot - difference;
+    const auto pointDifference = origin - center;
+    const auto difference = pointDifference.SquaredLength() - radius * radius;
+    const auto dot = Dot(direction, pointDifference);
+    const auto discriminant = dot * dot - difference;
 
     return 0.0f <= discriminant;
 }
@@ -290,8 +292,8 @@ bool Rendering::Bound<T>::TestRayIntersection(const APoint& origin, const AVecto
     RENDERING_ASSERTION_2(Math::Approximate(tMin, Math::GetValue(0)), "tmin在射线中必须是零。\n");
 
     // 测试球——射线相交
-    const auto pointDifference = origin - m_Center;
-    auto difference = pointDifference.SquaredLength() - m_Radius * m_Radius;
+    const auto pointDifference = origin - center;
+    auto difference = pointDifference.SquaredLength() - radius * radius;
     if (difference <= 0.0f)
     {
         // 射线原点在球内部
@@ -324,8 +326,8 @@ bool Rendering::Bound<T>::TestSegmentIntersection(const APoint& origin, const AV
     const auto segmentExtent = Math::GetRational(1, 2) * (tMin + tMax);
     const auto segmentOrigin = origin + segmentExtent * direction;
 
-    const auto pointDifference = segmentOrigin - m_Center;
-    auto difference = pointDifference.SquaredLength() - m_Radius * m_Radius;
+    const auto pointDifference = segmentOrigin - center;
+    auto difference = pointDifference.SquaredLength() - radius * radius;
     auto dot = Dot(direction, pointDifference);
     auto discriminant = dot * dot - difference;
     if (discriminant < 0.0f)
@@ -350,14 +352,14 @@ void Rendering::Bound<T>::ReadAggregate(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    APoint center{};
-    auto radius = Math::GetValue(0);
+    APoint aCenter{};
+    auto aRadius = Math::GetValue(0);
 
-    source.ReadAggregate(center);
-    source.Read(radius);
+    source.ReadAggregate(aCenter);
+    source.Read(aRadius);
 
-    SetCenter(center);
-    SetRadius(radius);
+    SetCenter(aCenter);
+    SetRadius(aRadius);
 }
 
 template <typename T>

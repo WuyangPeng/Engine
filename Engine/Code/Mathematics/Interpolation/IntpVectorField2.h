@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 21:11)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_H
 #define MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_H
-
-// Given points (x0[i],y0[i]) which are mapped to (x1[i],y1[i]) for
-// 0 <= i < N, interpolate positions (xIn,yIn) to (xOut,yOut).
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -16,34 +16,24 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpVectorField2
-	{
-	public:
-		// Construction and destruction.  If you want IntpVectorField2 to delete
-		// the input arrays during destruction, set owner to 'true'.  Otherwise,
-		// you own the arrays and must delete them yourself.
-		//
-		// The computation type is for the Delaunay triangulation and should be
-		// one of Query::{QT_INT64,QT_INTEGER,QT_RATIONAL,QT_REAL}.
-		IntpVectorField2(const std::vector<Vector2<Real> >& domain,Vector2<Real>* range, bool owner, QueryType queryType);
+    template <typename Real>
+    class IntpVectorField2
+    {
+    public:
+        using ClassType = IntpVectorField2<Real>;
 
-		~IntpVectorField2();
+    public:
+        IntpVectorField2(const std::vector<Vector2<Real>>& domain, const std::vector<Vector2<Real>>& range, QueryType queryType);
 
-		// Return 'true' if and only if (xIn,yIn) is in the convex hull of the
-		// input points.  In this case, (xOut,yOut) is valid.  If the return
-		// value is 'false', (xOut,yOut) is invalid and should not be used.
-		bool Evaluate(const Vector2<Real>& input, Vector2<Real>& output);
+        CLASS_INVARIANT_DECLARE;
 
-	protected:
-		Delaunay2<Real>* mDT;
-		IntpQdrNonuniform2<Real>* mXInterp;
-		IntpQdrNonuniform2<Real>* mYInterp;
-	};
+        NODISCARD bool Evaluate(const Vector2<Real>& input, Vector2<Real>& output);
 
-	using IntpVectorField2f = IntpVectorField2<float>;
-	using IntpVectorField2d = IntpVectorField2<double>;
-
+    private:
+        std::shared_ptr<Delaunay2<Real>> dt;
+        std::shared_ptr<IntpQdrNonuniform2<Real>> xInterp;
+        std::shared_ptr<IntpQdrNonuniform2<Real>> yInterp;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_H

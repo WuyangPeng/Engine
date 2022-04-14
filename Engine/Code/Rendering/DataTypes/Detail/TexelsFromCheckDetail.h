@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/21 15:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:19)
 
 #ifndef RENDERING_DATA_TYPES_TEXELS_FROM_CHECK_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXELS_FROM_CHECK_DETAIL_H
@@ -18,20 +18,22 @@
 
 template <Rendering::TextureFormat Format>
 Rendering::TexelsFromCheck<Format>::TexelsFromCheck(size_t inTexelsSize) noexcept
-    : m_InTexelsSize{ inTexelsSize }
+    : inTexelsSize{ inTexelsSize }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <Rendering::TextureFormat Format>
 bool Rendering::TexelsFromCheck<Format>::IsValid() const noexcept
 {
-    if (0 < m_InTexelsSize)
+    if (0 < inTexelsSize)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <Rendering::TextureFormat Format>
@@ -39,7 +41,7 @@ size_t Rendering::TexelsFromCheck<Format>::GetOutTexelsLength() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_InTexelsSize / sm_Step;
+    return inTexelsSize / step;
 }
 
 template <Rendering::TextureFormat Format>
@@ -47,11 +49,11 @@ void Rendering::TexelsFromCheck<Format>::CheckInTexels() noexcept(g_Assert < 1 |
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_1(m_InTexelsSize % sm_Step == 0, "输入数组大小%d不是%d的倍数。", m_InTexelsSize, sm_Step);
+    RENDERING_ASSERTION_1(inTexelsSize % step == 0, "输入数组大小%d不是%d的倍数。", inTexelsSize, step);
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TexelsFromCheck<Format>::CheckOutTexels([[maybe_unused]] size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TexelsFromCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 

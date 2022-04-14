@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 14:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/07 14:01)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_H
@@ -11,104 +14,101 @@
 
 #include "ConvexHull1.h"
 #include "ConvexHull2.h"
-#include "Mathematics/Query/Query3.h" 
+#include "Mathematics/Query/Query3.h"
+
+#include <set>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class ConvexHull3 : public ConvexHull<Real>
-	{
-	public:
-		// The input to the constructor is the array of vertices whose convex hull
-		// is required.  If you want ConvexHull3 to delete the vertices during
-		// destruction, set bOwner to 'true'.  Otherwise, you own the vertices and
-		// must delete them yourself.
-		//
-		// You have a choice of speed versus accuracy.  The fastest choice is
-		// Query::QT_INT64, but it gives up a lot of precision, scaling the points
-		// to [0,2^{20}]^3.  The choice Query::QT_INTEGER gives up less precision,
-		// scaling the points to [0,2^{24}]^3.  The choice Query::QT_RATIONAL uses
-		// exact arithmetic, but is the slowest choice.  The choice Query::QT_REAL
-		// uses floating-point arithmetic, but is not robust in all cases.
-		ConvexHull3 (const std::vector<Vector3<Real> >& vertices, Real epsilon, bool bOwner, QueryType eQueryType);
-		virtual ~ConvexHull3 ();
-		
-		// If GetDimension() returns 1, then the points lie on a line.  You must
-		// create a ConvexHull1 object using the function provided.
-		const Vector3<Real>& GetLineOrigin () const;
-		const Vector3<Real>& GetLineDirection () const;
-		ConvexHull1<Real>* GetConvexHull1 () const;
-		
-		// If GetDimension() returns 2, then the points lie on a plane.  The plane
-		// has two direction vectors (inputs 0 or 1).  You must create a
-		// ConvexHull2 object using the function provided.
-		const Vector3<Real>& GetPlaneOrigin () const;
-		const Vector3<Real>& GetPlaneDirection (int i) const;
-		ConvexHull2<Real>* GetConvexHull2 () const;
-		
-		// Support for streaming to/from disk.
-		ConvexHull3 (const System::TChar* filename);
-		bool Load (const System::TChar* filename);
-		bool Save (const System::TChar* filename) const;
-		
-	private:
-		using ConvexHull<Real>::mQueryType;
-		using ConvexHull<Real>::mNumVertices;
-		using ConvexHull<Real>::mDimension;
-		using ConvexHull<Real>::mNumSimplices;
-		using ConvexHull<Real>::mIndices;  
-		using ConvexHull<Real>::mEpsilon;
-		using ConvexHull<Real>::mOwner;
-		
-		class Triangle
-		{
-		public:
-			Triangle (int v0, int v1, int v2);
-			
-			int GetSign (int i, const Query3<Real>* query);
-			void AttachTo (Triangle* adj0, Triangle* adj1, Triangle* adj2);
-			int DetachFrom (int adjIndex, Triangle* adj);
-			
-			int V[3];
-			Triangle* Adj[3];
-			int Sign;
-			int Time;
-			bool OnStack;
-		};
-		
-		bool Update (int i);
-		void ExtractIndices ();
-		void DeleteHull ();
-		
-		// The input points.
-		std::vector<Vector3<Real> > mVertices;
-		
-		// Support for robust queries.
-		std::vector<Vector3<Real> > mSVertices;
-		Query3<Real>* mQuery;
-		
-		// The line of containment if the dimension is 1.
-		Vector3<Real> m_LineOrigin, m_LineDirection;
-		
-		// The plane of containment if the dimension is 2.
-		Vector3<Real> mPlaneOrigin, mPlaneDirection[2];
-		
-		// The current hull.
-		std::set<Triangle*> mHull;
-		
-		class TerminatorData
-		{
-		public:
-			TerminatorData (int v0 = -1, int v1 = -1, int nullIndex = -1,Triangle* tri = 0);
-			
-			int V[2];
-			int NullIndex;
-			Triangle* T;
-		};
-	};
-	
-	using ConvexHull3f = ConvexHull3<float>;
-	using ConvexHull3d = ConvexHull3<double>;
+    template <typename Real>
+    class ConvexHull3 : public ConvexHull<Real>
+    {
+    public:
+        using ClassType = ConvexHull3<Real>;
+        using ParentType = ConvexHull<Real>;
+        using Vector3 = Vector3<Real>;
+        using Vertices = std::vector<Vector3>;
+        using ConvexHull1 = ConvexHull1<Real>;
+        using ConvexHull2 = ConvexHull2<Real>;
+        using String = System::String;
+        using IndicesType = ParentType::IndicesType;
+        using Math = Math<Real>;
+
+    public:
+        ConvexHull3(const Vertices& vertices, Real epsilon, QueryType queryType);
+        explicit ConvexHull3(const String& filename);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        NODISCARD Vector3 GetLineOrigin() const noexcept;
+        NODISCARD Vector3 GetLineDirection() const noexcept;
+        NODISCARD ConvexHull1 GetConvexHull1() const;
+
+        NODISCARD Vector3 GetPlaneOrigin() const noexcept;
+        NODISCARD Vector3 GetPlaneDirection(int i) const;
+        NODISCARD ConvexHull2 GetConvexHull2() const;
+
+        void LoadFile(const String& filename);
+        void SaveFile(const String& filename) const;
+
+    private:
+        class Triangle;
+
+        using Query3 = Query3<Real>;
+        using Query3SharedPtr = std::shared_ptr<Query3>;
+        using TriangleSharedPtr = std::shared_ptr<Triangle>;
+        using TriangleWeakPtr = std::weak_ptr<Triangle>;
+
+    private:
+        class Triangle : private std::enable_shared_from_this<Triangle>
+        {
+        public:
+            Triangle(int32_t v0, int32_t v1, int32_t v2);
+
+            NODISCARD PlaneQueryType GetSign(int32_t i, const Query3& query);
+            void AttachTo(const TriangleSharedPtr& adj0, const TriangleSharedPtr& adj1, const TriangleSharedPtr& adj2);
+            NODISCARD int32_t DetachFrom(int32_t adjIndex, const TriangleSharedPtr& adj);
+
+            std::array<int32_t, 3> v;
+            std::array<TriangleWeakPtr, 3> triangle;
+            PlaneQueryType sign;
+            int time;
+            bool onStack;
+        };
+
+        NODISCARD bool Update(int32_t i);
+        void ExtractIndices();
+        void DeleteHull() noexcept;
+        void Init();
+
+    private:
+        Vertices vertices;
+
+        Vertices sVertices;
+        Query3SharedPtr query;
+
+        Vector3 lineOrigin;
+        Vector3 lineDirection;
+
+        Vector3 planeOrigin;
+        std::array<Vector3, 2> planeDirection;
+
+        std::set<TriangleSharedPtr> hull;
+
+        class TerminatorData
+        {
+        public:
+            TerminatorData() noexcept;
+            TerminatorData(int32_t v0, int32_t v1, int32_t nullIndex, const TriangleWeakPtr& tri) noexcept;
+
+            std::array<int32_t, 2> v;
+            int32_t nullIndex;
+            TriangleWeakPtr t;
+        };
+    };
+
+    using ConvexHull3F = ConvexHull3<float>;
+    using ConvexHull3D = ConvexHull3<double>;
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_H
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_H

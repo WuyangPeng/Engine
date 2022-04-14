@@ -28,7 +28,7 @@ namespace Rendering
 		void StencilStateTest();
 		void WireStateTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

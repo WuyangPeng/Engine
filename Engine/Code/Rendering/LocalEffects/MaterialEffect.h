@@ -28,12 +28,13 @@ namespace Rendering
         MaterialEffect();
 
         // Create an instance of the effect with unique parameters.
-        VisualEffectInstance* CreateInstance(Material* material) const;
+        VisualEffectInstance* CreateInstance(Material* material) const noexcept;
 
         // Convenience for creating an instance.  The application does not have to
         // create the effect explicitly in order to create an instance from it.
-        static VisualEffectInstance* CreateUniqueInstance(Material* material);
+        static VisualEffectInstance* CreateUniqueInstance(Material* material) noexcept;
         ObjectInterfaceSharedPtr CloneObject() const override;
+
     private:
         static int msDx9VRegisters[2];
         static int msOglVRegisters[2];
@@ -45,7 +46,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(MaterialEffect);
-    CORE_TOOLS_SHARED_PTR_DECLARE( MaterialEffect);
+    CORE_TOOLS_SHARED_PTR_DECLARE(MaterialEffect);
 #include STSTEM_WARNING_POP
 }
 

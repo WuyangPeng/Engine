@@ -21,13 +21,13 @@ using std::string;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-Rendering::ShaderBaseDataImpl ::ShaderBaseDataImpl(int number)
+Rendering::ShaderBaseDataImpl::ShaderBaseDataImpl(int number)
     : m_SingleShaderBaseData(number)
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderBaseDataImpl ::ShaderBaseDataImpl() noexcept
+Rendering::ShaderBaseDataImpl::ShaderBaseDataImpl() noexcept
     : m_SingleShaderBaseData()
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -35,7 +35,7 @@ Rendering::ShaderBaseDataImpl ::ShaderBaseDataImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderBaseDataImpl)
 
-void Rendering::ShaderBaseDataImpl ::SetData(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseDataImpl::SetData(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderBaseData.size()), "Ë÷Òý´íÎó");
@@ -43,21 +43,21 @@ void Rendering::ShaderBaseDataImpl ::SetData(int index, const string& name, Shad
     m_SingleShaderBaseData[index].SetData(name, type, semantic);
 }
 
-void Rendering::ShaderBaseDataImpl ::InsertData(const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseDataImpl::InsertData(const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_SingleShaderBaseData.push_back(SingleShaderBaseData(name, type, semantic));
 }
 
-int Rendering::ShaderBaseDataImpl ::GetNumber() const
+int Rendering::ShaderBaseDataImpl::GetNumber() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_SingleShaderBaseData.size());
 }
 
-const string Rendering::ShaderBaseDataImpl ::GetName(int index) const
+const string Rendering::ShaderBaseDataImpl::GetName(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderBaseData.size()), "Ë÷Òý´íÎó");
@@ -65,7 +65,7 @@ const string Rendering::ShaderBaseDataImpl ::GetName(int index) const
     return m_SingleShaderBaseData[index].GetName();
 }
 
-Rendering::ShaderFlags::VariableType Rendering::ShaderBaseDataImpl ::GetType(int index) const
+Rendering::ShaderFlags::VariableType Rendering::ShaderBaseDataImpl::GetType(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderBaseData.size()), "Ë÷Òý´íÎó");
@@ -73,7 +73,7 @@ Rendering::ShaderFlags::VariableType Rendering::ShaderBaseDataImpl ::GetType(int
     return m_SingleShaderBaseData[index].GetType();
 }
 
-Rendering::ShaderFlags::VariableSemantic Rendering::ShaderBaseDataImpl ::GetSemantic(int index) const
+Rendering::ShaderFlags::VariableSemantic Rendering::ShaderBaseDataImpl::GetSemantic(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderBaseData.size()), "Ë÷Òý´íÎó");
@@ -81,7 +81,7 @@ Rendering::ShaderFlags::VariableSemantic Rendering::ShaderBaseDataImpl ::GetSema
     return m_SingleShaderBaseData[index].GetSemantic();
 }
 
-void Rendering::ShaderBaseDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderBaseDataImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -92,7 +92,7 @@ void Rendering::ShaderBaseDataImpl ::Load(CoreTools::BufferSource& source)
     for_each(m_SingleShaderBaseData.begin(), m_SingleShaderBaseData.end(), std::bind(&SingleShaderBaseData::Load, std::placeholders::_1, std::ref(source)));
 }
 
-void Rendering::ShaderBaseDataImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::ShaderBaseDataImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -102,7 +102,7 @@ void Rendering::ShaderBaseDataImpl ::Save(CoreTools::BufferTarget& target) const
     for_each(m_SingleShaderBaseData.begin(), m_SingleShaderBaseData.end(), std::bind(&SingleShaderBaseData::Save, std::placeholders::_1, std::ref(target)));
 }
 
-int Rendering::ShaderBaseDataImpl ::GetStreamingSize() const
+int Rendering::ShaderBaseDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -115,7 +115,7 @@ int Rendering::ShaderBaseDataImpl ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::ShaderBaseDataImpl ::Resize(int number)
+void Rendering::ShaderBaseDataImpl::Resize(int number)
 {
     RENDERING_CLASS_IS_VALID_9;
 

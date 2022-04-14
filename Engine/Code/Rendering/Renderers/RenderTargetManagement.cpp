@@ -33,7 +33,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,GetR
 										  Rendering::RenderTargetManagement::PlatformRenderTargetSharedPtr)
  
 Rendering::ConstTexture2DSharedPtr  Rendering::RenderTargetManagement
-     ::ReadColor(int index,RenderTargetConstPtr renderTarget)
+::ReadColor(int index,RenderTargetConstPtr renderTarget)
 {
 	;
     

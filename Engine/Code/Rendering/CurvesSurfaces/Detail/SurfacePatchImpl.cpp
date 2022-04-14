@@ -15,20 +15,20 @@
 #include STSTEM_WARNING_PUSH 
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26415)
-Rendering::SurfacePatchImpl ::SurfacePatchImpl() noexcept
+Rendering::SurfacePatchImpl::SurfacePatchImpl() noexcept
     : m_UMin{ 0.0f }, m_UMax{ 0.0f }, m_VMin{ 0.0f }, m_VMax{ 0.0f }, m_Rectangular{ true }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SurfacePatchImpl ::SurfacePatchImpl(float uMin, float uMax, float vMin, float vMax, bool rectangular) noexcept
+Rendering::SurfacePatchImpl::SurfacePatchImpl(float uMin, float uMax, float vMin, float vMax, bool rectangular) noexcept
     : m_UMin{ uMin }, m_UMax{ uMax }, m_VMin{ vMin }, m_VMax{ vMax }, m_Rectangular{ rectangular }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::SurfacePatchImpl ::IsValid() const noexcept
+bool Rendering::SurfacePatchImpl::IsValid() const noexcept
 {
     if (m_UMin <= m_UMax && m_VMin <= m_VMin)
         return true;
@@ -37,7 +37,7 @@ bool Rendering::SurfacePatchImpl ::IsValid() const noexcept
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::SurfacePatchImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::SurfacePatchImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -48,7 +48,7 @@ void Rendering::SurfacePatchImpl ::Load(CoreTools::BufferSource& source)
     m_Rectangular = source.ReadBool();
 }
 
-void Rendering::SurfacePatchImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::SurfacePatchImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -59,7 +59,7 @@ void Rendering::SurfacePatchImpl ::Save(CoreTools::BufferTarget& target) const
     target.Write(m_Rectangular);
 }
 
-int Rendering::SurfacePatchImpl ::GetStreamingSize() const noexcept
+int Rendering::SurfacePatchImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -72,35 +72,35 @@ int Rendering::SurfacePatchImpl ::GetStreamingSize() const noexcept
     return size;
 }
 
-float Rendering::SurfacePatchImpl ::GetUMin() const noexcept
+float Rendering::SurfacePatchImpl::GetUMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_UMin;
 }
 
-float Rendering::SurfacePatchImpl ::GetUMax() const noexcept
+float Rendering::SurfacePatchImpl::GetUMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_UMax;
 }
 
-float Rendering::SurfacePatchImpl ::GetVMin() const noexcept
+float Rendering::SurfacePatchImpl::GetVMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_VMin;
 }
 
-float Rendering::SurfacePatchImpl ::GetVMax() const noexcept
+float Rendering::SurfacePatchImpl::GetVMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_VMax;
 }
 
-bool Rendering::SurfacePatchImpl ::IsRectangular() const noexcept
+bool Rendering::SurfacePatchImpl::IsRectangular() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

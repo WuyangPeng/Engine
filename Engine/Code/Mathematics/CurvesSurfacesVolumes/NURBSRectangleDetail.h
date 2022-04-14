@@ -1,482 +1,527 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 19:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 16:12)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_DETAIL_H
 
 #include "NURBSRectangle.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-namespace Mathematics
-{
+#include <gsl/util>
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
-	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
+Mathematics::NURBSRectangle<Real>::NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+    : ParentType{ Math<Real>::GetValue(0), Math<Real>::GetValue(1), Math<Real>::GetValue(0), Math<Real>::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{},
+      ctrlWeight{},
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? (uOpen ? 1 : uDegree) : 0) },
+      vReplicate{ (vLoop ? (vOpen ? 1 : vDegree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1,"Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
-    mLoop[0] = uLoop;
-    mLoop[1] = vLoop;
-
-    mNumUCtrlPoints = numUCtrlPoints;
-    mNumVCtrlPoints = numVCtrlPoints;
-    mUReplicate = (uLoop ? (uOpen ? 1 : uDegree) : 0);
-    mVReplicate = (vLoop ? (vOpen ? 1 : vDegree) : 0);
     CreateControl(ctrlPoint, ctrlWeight);
 
-    mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uOpen);
-    mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vOpen);
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uOpen);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vOpen);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,  int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
-    :  ParametricSurface<Real>(Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true)
+Mathematics::NURBSRectangle<Real>::NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, const std::vector<Real>& vKnot)
+    : ParentType{ Math<Real>::GetValue(0), Math<Real>::GetValue(1), Math<Real>::GetValue(0), Math<Real>::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{},
+      ctrlWeight{},
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? (uOpen ? 1 : uDegree) : 0) },
+      vReplicate{ vLoop ? 1 : 0 }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,  "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
-    mLoop[0] = uLoop;
-    mLoop[1] = vLoop;
-
-    mNumUCtrlPoints = numUCtrlPoints;
-    mNumVCtrlPoints = numVCtrlPoints;
-    mUReplicate = (uLoop ? (uOpen ? 1 : uDegree) : 0);
-    mVReplicate = (vLoop ? 1 : 0);
     CreateControl(ctrlPoint, ctrlWeight);
 
-    mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uOpen);
-    mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vKnot);
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uOpen);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vKnot);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
-	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
+Mathematics::NURBSRectangle<Real>::NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, const std::vector<Real>& uKnot, bool vOpen)
+    : ParentType{ Math<Real>::GetValue(0), Math<Real>::GetValue(1), Math<Real>::GetValue(0), Math<Real>::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{},
+      ctrlWeight{},
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? 1 : 0) },
+      vReplicate{ (vLoop ? (vOpen ? 1 : vDegree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,"Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1,"Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
-    mLoop[0] = uLoop;
-    mLoop[1] = vLoop;
-
-    mNumUCtrlPoints = numUCtrlPoints;
-    mNumVCtrlPoints = numVCtrlPoints;
-    mUReplicate = (uLoop ? 1 : 0);
-    mVReplicate = (vLoop ? (vOpen ? 1 : vDegree) : 0);
     CreateControl(ctrlPoint, ctrlWeight);
 
-    mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uKnot);
-    mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vOpen);
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uKnot);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vOpen);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight,int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot,Real* vKnot)
-	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
+Mathematics::NURBSRectangle<Real>::NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, const std::vector<Real>& uKnot, const std::vector<Real>& vKnot)
+    : ParentType{ Math<Real>::GetValue(0), Math<Real>::GetValue(1), Math<Real>::GetValue(0), Math<Real>::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{},
+      ctrlWeight{},
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? 1 : 0) },
+      vReplicate{ (vLoop ? 1 : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1,"Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1,"Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
-    mLoop[0] = uLoop;
-    mLoop[1] = vLoop;
+    CreateControl(ctrlPoint, ctrlWeight);
 
-    mNumUCtrlPoints = numUCtrlPoints;
-    mNumVCtrlPoints = numVCtrlPoints;
-    mUReplicate = (uLoop ? 1 : 0);
-    mVReplicate = (vLoop ? 1 : 0);
-    CreateControl(ctrlPoint,ctrlWeight);
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uKnot);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vKnot);
 
-    mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uKnot);
-    mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vKnot);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-NURBSRectangle<Real>::~NURBSRectangle ()
+void Mathematics::NURBSRectangle<Real>::CreateControl(const std::vector<std::vector<Vector3<Real>>>& newCtrlPoint, const std::vector<std::vector<Real>>& newCtrlWeight)
 {
-    DELETE2(mCtrlPoint);
-    DELETE2(mCtrlWeight);
-}
+    const auto newNumUCtrlPoints = numUCtrlPoints + uReplicate;
+    const auto newNumVCtrlPoints = numVCtrlPoints + vReplicate;
 
-template <typename Real>
-void NURBSRectangle<Real>::CreateControl (Vector3<Real>** ctrlPoint, Real** ctrlWeight)
-{
-	auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
-	auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
+    ctrlPoint.resize(newNumUCtrlPoints, std::vector<Vector3<Real>>(newNumVCtrlPoints));
 
-    mCtrlPoint = nullptr;  // NEW2<Vector3<Real> >(newNumUCtrlPoints, newNumVCtrlPoints);
-
-    mCtrlWeight = nullptr;  // NEW2<Real>(newNumUCtrlPoints, newNumVCtrlPoints);
+    ctrlWeight.resize(newNumUCtrlPoints, std::vector<Real>(newNumVCtrlPoints));
 
     for (auto i = 1; i < newNumUCtrlPoints; ++i)
     {
-        mCtrlPoint[i] = &mCtrlPoint[0][i*newNumVCtrlPoints];
-        mCtrlWeight[i] = &mCtrlWeight[0][i*newNumVCtrlPoints];
+        ctrlPoint.at(i) = newCtrlPoint.at(gsl::narrow_cast<size_t>(i) * newNumVCtrlPoints);
+        ctrlWeight.at(i) = newCtrlWeight.at(gsl::narrow_cast<size_t>(i) * newNumVCtrlPoints);
     }
 
     for (auto iu = 0; iu < newNumUCtrlPoints; iu++)
     {
-		auto uOld = iu % mNumUCtrlPoints;
+        const auto uOld = iu % numUCtrlPoints;
         for (auto iv = 0; iv < newNumVCtrlPoints; iv++)
         {
-			auto vOld = iv % mNumVCtrlPoints;
-            mCtrlPoint[iu][iv] = ctrlPoint[uOld][vOld];
-            mCtrlWeight[iu][iv] = ctrlWeight[uOld][vOld];
+            const auto vOld = iv % numVCtrlPoints;
+            ctrlPoint.at(iu).at(iv) = newCtrlPoint.at(uOld).at(vOld);
+            ctrlWeight.at(iu).at(iv) = newCtrlWeight.at(uOld).at(vOld);
+        }
+    }
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::NURBSRectangle<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::NURBSRectangle<Real>::GetNumCtrlPoints(int dim) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).GetNumCtrlPoints();
+}
+
+template <typename Real>
+int Mathematics::NURBSRectangle<Real>::GetDegree(int dim) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).GetDegree();
+}
+
+template <typename Real>
+bool Mathematics::NURBSRectangle<Real>::IsOpen(int dim) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).IsOpen();
+}
+
+template <typename Real>
+bool Mathematics::NURBSRectangle<Real>::IsUniform(int dim) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).IsUniform();
+}
+
+template <typename Real>
+bool Mathematics::NURBSRectangle<Real>::IsLoop(int dim) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return loop.at(dim);
+}
+
+template <typename Real>
+void Mathematics::NURBSRectangle<Real>::SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (0 <= uIndex && uIndex < numUCtrlPoints && 0 <= vIndex && vIndex < numVCtrlPoints)
+    {
+        ctrlPoint.at(uIndex).at(vIndex) = ctrl;
+
+        const auto doUReplicate = (uIndex < uReplicate);
+        const auto doVReplicate = (vIndex < vReplicate);
+
+        auto uExt = 0;
+        auto vExt = 0;
+        if (doUReplicate)
+        {
+            uExt = numUCtrlPoints + uIndex;
+            ctrlPoint.at(uExt).at(vIndex) = ctrl;
+        }
+
+        if (doVReplicate)
+        {
+            vExt = numVCtrlPoints + vIndex;
+            ctrlPoint.at(uIndex).at(vExt) = ctrl;
+        }
+
+        if (doUReplicate && doVReplicate)
+        {
+            ctrlPoint.at(uExt).at(vExt) = ctrl;
         }
     }
 }
 
 template <typename Real>
-int NURBSRectangle<Real>::GetNumCtrlPoints (int dim) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::GetControlPoint(int uIndex, int vIndex) const
 {
-    return mBasis[dim].GetNumCtrlPoints();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ctrlPoint.at(uIndex).at(vIndex);
 }
 
 template <typename Real>
-int NURBSRectangle<Real>::GetDegree (int dim) const
+void Mathematics::NURBSRectangle<Real>::SetControlWeight(int uIndex, int vIndex, Real weight)
 {
-    return mBasis[dim].GetDegree();
-}
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-template <typename Real>
-bool NURBSRectangle<Real>::IsOpen (int dim) const
-{
-    return mBasis[dim].IsOpen();
-}
-
-template <typename Real>
-bool NURBSRectangle<Real>::IsUniform (int dim) const
-{
-    return mBasis[dim].IsUniform();
-}
-
-template <typename Real>
-bool NURBSRectangle<Real>::IsLoop (int dim) const
-{
-    return mLoop[dim];
-}
-
-template <typename Real>
-void NURBSRectangle<Real>::SetControlPoint (int uIndex, int vIndex, const Vector3<Real>& ctrl)
-{
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints  &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    if (0 <= uIndex && uIndex < numUCtrlPoints && 0 <= vIndex && vIndex < numVCtrlPoints)
     {
-        // Set the control point.
-        mCtrlPoint[uIndex][vIndex] = ctrl;
+        ctrlWeight.at(uIndex).at(vIndex) = weight;
 
-        // Set the replicated control point.
-		auto doUReplicate = (uIndex < mUReplicate);
-		auto doVReplicate = (vIndex < mVReplicate);
-        int uExt = 0, vExt = 0;
+        const auto doUReplicate = (uIndex < uReplicate);
+        const auto doVReplicate = (vIndex < vReplicate);
+        auto uExt = 0;
+        auto vExt = 0;
 
         if (doUReplicate)
         {
-            uExt = mNumUCtrlPoints + uIndex;
-            mCtrlPoint[uExt][vIndex] = ctrl;
+            uExt = numUCtrlPoints + uIndex;
+            ctrlWeight.at(uExt).at(vIndex) = weight;
         }
+
         if (doVReplicate)
         {
-            vExt = mNumVCtrlPoints + vIndex;
-            mCtrlPoint[uIndex][vExt] = ctrl;
+            vExt = numVCtrlPoints + vIndex;
+            ctrlWeight.at(uIndex).at(vExt) = weight;
         }
+
         if (doUReplicate && doVReplicate)
         {
-            mCtrlPoint[uExt][vExt] = ctrl;
+            ctrlWeight.at(uExt).at(vExt) = weight;
         }
     }
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::GetControlPoint (int uIndex, int vIndex) const
+Real Mathematics::NURBSRectangle<Real>::GetControlWeight(int uIndex, int vIndex) const
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints  &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
-    {
-        return mCtrlPoint[uIndex][vIndex];
-    }
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector3<Real>(Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal);
+    return ctrlWeight.at(uIndex).at(vIndex);
 }
 
 template <typename Real>
-void NURBSRectangle<Real>::SetControlWeight (int uIndex, int vIndex, Real weight)
+void Mathematics::NURBSRectangle<Real>::SetKnot(int dim, int i, Real knot)
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints  &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (0 <= dim && dim <= 1)
     {
-        // Set the control weight.
-        mCtrlWeight[uIndex][vIndex] = weight;
-
-        // Set the replicated control weight.
-        bool doUReplicate = (uIndex < mUReplicate );
-        bool doVReplicate = (vIndex < mVReplicate);
-        int uExt = 0, vExt = 0;
-
-        if (doUReplicate)
-        {
-            uExt = mNumUCtrlPoints + uIndex;
-            mCtrlWeight[uExt][vIndex] = weight;
-        }
-        if (doVReplicate)
-        {
-            vExt = mNumVCtrlPoints + vIndex;
-            mCtrlWeight[uIndex][vExt] = weight;
-        }
-        if (doUReplicate && doVReplicate)
-        {
-            mCtrlWeight[uExt][vExt] = weight;
-        }
+        basis.at(dim).SetKnot(i, knot);
     }
 }
 
 template <typename Real>
-Real NURBSRectangle<Real>::GetControlWeight (int uIndex, int vIndex) const
+Real Mathematics::NURBSRectangle<Real>::GetKnot(int dim, int i) const
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints  &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (0 <= dim && dim <= 1)
     {
-        return mCtrlWeight[uIndex][vIndex];
+        return basis.at(dim).GetKnot(i);
     }
 
     return Math<Real>::maxReal;
 }
 
 template <typename Real>
-void NURBSRectangle<Real>::SetKnot (int dim, int i, Real knot)
+void Mathematics::NURBSRectangle<Real>::Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const
 {
-    if (0 <= dim && dim <= 1)
-    {
-        mBasis[dim].SetKnot(i,knot);
-    }
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-Real NURBSRectangle<Real>::GetKnot (int dim, int i) const
-{
-    if (0 <= dim && dim <= 1)
+    auto iumin = 0;
+    auto iumax = 0;
+    if (derUU != nullptr)
     {
-        return mBasis[dim].GetKnot(i);
+        basis.at(0).Compute(u, 0, iumin, iumax);
+        basis.at(0).Compute(u, 1, iumin, iumax);
+        basis.at(0).Compute(u, 2, iumin, iumax);
     }
-
-    return Math<Real>::maxReal;
-}
-
-template <typename Real>
-void NURBSRectangle<Real>::Get (Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const
-{
-    int iu, iumin, iumax;
-    if (derUU)
+    else if (derUV != nullptr || derU != nullptr)
     {
-        mBasis[0].Compute(u, 0, iumin, iumax);
-        mBasis[0].Compute(u, 1, iumin, iumax);
-        mBasis[0].Compute(u, 2, iumin, iumax);
-    }
-    else if (derUV || derU)
-    {
-        mBasis[0].Compute(u, 0, iumin, iumax);
-        mBasis[0].Compute(u, 1, iumin, iumax);
+        basis.at(0).Compute(u, 0, iumin, iumax);
+        basis.at(0).Compute(u, 1, iumin, iumax);
     }
     else
     {
-        mBasis[0].Compute(u, 0, iumin, iumax);
+        basis.at(0).Compute(u, 0, iumin, iumax);
     }
 
-    int iv, ivmin, ivmax;
-    if (derVV)
+    auto ivmin = 0;
+    auto ivmax = 0;
+    if (derVV != nullptr)
     {
-        mBasis[1].Compute(v, 0, ivmin, ivmax);
-        mBasis[1].Compute(v, 1, ivmin, ivmax);
-        mBasis[1].Compute(v, 2, ivmin, ivmax);
+        basis.at(1).Compute(v, 0, ivmin, ivmax);
+        basis.at(1).Compute(v, 1, ivmin, ivmax);
+        basis.at(1).Compute(v, 2, ivmin, ivmax);
     }
-    else if (derUV || derV)
+    else if (derUV != nullptr || derV != nullptr)
     {
-        mBasis[1].Compute(v, 0, ivmin, ivmax);
-        mBasis[1].Compute(v, 1, ivmin, ivmax);
+        basis.at(1).Compute(v, 0, ivmin, ivmax);
+        basis.at(1).Compute(v, 1, ivmin, ivmax);
     }
     else
     {
-        mBasis[1].Compute(v, 0, ivmin, ivmax);
+        basis.at(1).Compute(v, 0, ivmin, ivmax);
     }
 
-    Real tmp;
-
-	auto X = Vector3<Real>::sm_Zero;
+    auto x = Vector3<Real>::GetZero();
     Real w = Math<Real>::GetValue(0);
-    for (iu = iumin; iu <= iumax; ++iu)
+    for (auto iu = iumin; iu <= iumax; ++iu)
     {
-        for (iv = ivmin; iv <= ivmax; ++iv)
+        for (auto iv = ivmin; iv <= ivmax; ++iv)
         {
-            tmp = mBasis[0].GetD0(iu)*mBasis[1].GetD0(iv)*mCtrlWeight[iu][iv];
-            X += tmp*mCtrlPoint[iu][iv];
+            auto tmp = basis.at(0).GetD0(iu) * basis.at(1).GetD0(iv) * ctrlWeight.at(iu).at(iv);
+            x += tmp * ctrlPoint.at(iu).at(iv);
             w += tmp;
         }
     }
-    Real invW = (Math::GetValue(1))/w;
-    Vector3<Real> P = invW*X;
-    if (pos)
+    auto invW = (Math<Real>::GetValue(1)) / w;
+    auto p = invW * x;
+    if (pos != nullptr)
     {
-        *pos = P;
+        *pos = p;
     }
 
-    if (!derU && !derV && !derUU && !derUV && !derVV)
+    if (derU == nullptr && derV == nullptr && derUU == nullptr && derUV == nullptr && derVV == nullptr)
     {
         return;
     }
 
-    Real wDerU = Math<Real>::GetValue(0);
-    Real wDerV = Math<Real>::GetValue(0);
-    Vector3<Real> PDerU = Vector3<Real>::sm_Zero;
-    Vector3<Real> PDerV = Vector3<Real>::sm_Zero;
+    auto wDerU = Math<Real>::GetValue(0);
+    auto wDerV = Math<Real>::GetValue(0);
+    auto pDerU = Vector3<Real>::GetZero();
+    auto pDerV = Vector3<Real>::GetZero();
 
-    if (derU || derUU || derUV)
+    if (derU != nullptr || derUU != nullptr || derUV != nullptr)
     {
-        Vector3<Real> XDerU = Vector3<Real>::sm_Zero;
-        for (iu = iumin; iu <= iumax; ++iu)
+        auto xDerU = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
         {
-            for (iv = ivmin; iv <= ivmax; ++iv)
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
             {
-                tmp = mBasis[0].GetD1(iu)*mBasis[1].GetD0(iv)* mCtrlWeight[iu][iv];
-                XDerU += tmp*mCtrlPoint[iu][iv];
+                auto tmp = basis.at(0).GetD1(iu) * basis.at(1).GetD0(iv) * ctrlWeight.at(iu).at(iv);
+                xDerU += tmp * ctrlPoint.at(iu).at(iv);
                 wDerU += tmp;
             }
         }
-        PDerU = invW*(XDerU - wDerU*P);
-        if (derU)
+        pDerU = invW * (xDerU - wDerU * p);
+        if (derU != nullptr)
         {
-            *derU = PDerU;
+            *derU = pDerU;
         }
     }
 
-    if (derV || derVV || derUV)
+    if (derV != nullptr || derVV != nullptr || derUV != nullptr)
     {
-        Vector3<Real> XDerV = Vector3<Real>::sm_Zero;
-        for (iu = iumin; iu <= iumax; ++iu)
+        auto XDerV = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
         {
-            for (iv = ivmin; iv <= ivmax; ++iv)
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
             {
-                tmp = mBasis[0].GetD0(iu)*mBasis[1].GetD1(iv)* mCtrlWeight[iu][iv];
-                XDerV += tmp*mCtrlPoint[iu][iv];
+                auto tmp = basis.at(0).GetD0(iu) * basis.at(1).GetD1(iv) * ctrlWeight.at(iu).at(iv);
+                XDerV += tmp * ctrlPoint.at(iu).at(iv);
                 wDerV += tmp;
             }
         }
-        PDerV = invW*(XDerV - wDerV*P);
-        if (derV)
+        pDerV = invW * (XDerV - wDerV * p);
+        if (derV != nullptr)
         {
-            *derV = PDerV;
+            *derV = pDerV;
         }
     }
 
-    if (!derUU && !derUV && !derVV)
+    if (derUU == nullptr && derUV == nullptr && derVV == nullptr)
     {
         return;
     }
 
-    if (derUU)
+    if (derUU != nullptr)
     {
-        Vector3<Real> XDerUU = Vector3<Real>::sm_Zero;
-        Real wDerUU = Math<Real>::GetValue(0);
-        for (iu = iumin; iu <= iumax; ++iu)
+        auto xDerUU = Vector3<Real>::GetZero();
+        auto wDerUU = Math<Real>::GetValue(0);
+        for (auto iu = iumin; iu <= iumax; ++iu)
         {
-            for (iv = ivmin; iv <= ivmax; ++iv)
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
             {
-                tmp = mBasis[0].GetD2(iu)*mBasis[1].GetD0(iv)* mCtrlWeight[iu][iv];
-                XDerUU += tmp*mCtrlPoint[iu][iv];
+                auto tmp = basis.at(0).GetD2(iu) * basis.at(1).GetD0(iv) * ctrlWeight.at(iu).at(iv);
+                xDerUU += tmp * ctrlPoint.at(iu).at(iv);
                 wDerUU += tmp;
             }
         }
-        *derUU = invW*(XDerUU - (Math::GetValue(2))*wDerU*PDerU - wDerUU*P);
+        *derUU = invW * (xDerUU - (Math<Real>::GetValue(2)) * wDerU * pDerU - wDerUU * p);
     }
 
-    if (derUV)
+    if (derUV != nullptr)
     {
-        Vector3<Real> XDerUV = Vector3<Real>::sm_Zero;
-        Real wDerUV = Math<Real>::GetValue(0);
-        for (iu = iumin; iu <= iumax; ++iu)
+        auto xDerUV = Vector3<Real>::GetZero();
+        auto wDerUV = Math<Real>::GetValue(0);
+        for (auto iu = iumin; iu <= iumax; ++iu)
         {
-            for (iv = ivmin; iv <= ivmax; ++iv)
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
             {
-                tmp = mBasis[0].GetD1(iu)*mBasis[1].GetD1(iv)* mCtrlWeight[iu][iv];
-                XDerUV += tmp*mCtrlPoint[iu][iv];
+                auto tmp = basis.at(0).GetD1(iu) * basis.at(1).GetD1(iv) * ctrlWeight.at(iu).at(iv);
+                xDerUV += tmp * ctrlPoint.at(iu).at(iv);
                 wDerUV += tmp;
             }
         }
-        *derUV = invW*(XDerUV - wDerU*PDerV - wDerV*PDerU - wDerUV*P);
+        *derUV = invW * (xDerUV - wDerU * pDerV - wDerV * pDerU - wDerUV * p);
     }
 
-    if (derVV)
+    if (derVV != nullptr)
     {
-        Vector3<Real> XDerVV = Vector3<Real>::sm_Zero;
-        Real wDerVV = Math<Real>::GetValue(0);
-        for (iu = iumin; iu <= iumax; ++iu)
+        auto xDerVV = Vector3<Real>::GetZero();
+        auto wDerVV = Math<Real>::GetValue(0);
+        for (auto iu = iumin; iu <= iumax; ++iu)
         {
-            for (iv = ivmin; iv <= ivmax; ++iv)
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
             {
-                tmp = mBasis[0].GetD0(iu)*mBasis[1].GetD2(iv)*  mCtrlWeight[iu][iv];
-                XDerVV += tmp*mCtrlPoint[iu][iv];
+                auto tmp = basis.at(0).GetD0(iu) * basis.at(1).GetD2(iv) * ctrlWeight.at(iu).at(iv);
+                xDerVV += tmp * ctrlPoint.at(iu).at(iv);
                 wDerVV += tmp;
             }
         }
-        *derVV = invW*(XDerVV - (Math::GetValue(2))*wDerV*PDerV - wDerVV*P);
+        *derVV = invW * (xDerVV - (Math<Real>::GetValue(2)) * wDerV * pDerV - wDerVV * p);
     }
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::P (Real u, Real v) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::P(Real u, Real v) const
 {
-    Vector3<Real> pos;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> pos{};
     Get(u, v, &pos, 0, 0, 0, 0, 0);
+
     return pos;
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::PU (Real u, Real v) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::PU(Real u, Real v) const
 {
-    Vector3<Real> derU;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derU{};
     Get(u, v, 0, &derU, 0, 0, 0, 0);
+
     return derU;
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::PV (Real u, Real v) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::PV(Real u, Real v) const
 {
-    Vector3<Real> derV;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derV{};
     Get(u, v, 0, 0, &derV, 0, 0, 0);
+
     return derV;
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::PUU (Real u, Real v) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::PUU(Real u, Real v) const
 {
-    Vector3<Real> derUU;
+    Vector3<Real> derUU{};
     Get(u, v, 0, 0, 0, &derUU, 0, 0);
+
     return derUU;
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::PUV (Real u, Real v) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::PUV(Real u, Real v) const
 {
-    Vector3<Real> derUV;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derUV{};
     Get(u, v, 0, 0, 0, 0, &derUV, 0);
+
     return derUV;
 }
 
 template <typename Real>
-Vector3<Real> NURBSRectangle<Real>::PVV (Real u, Real v) const
+Mathematics::Vector3<Real> Mathematics::NURBSRectangle<Real>::PVV(Real u, Real v) const
 {
-    Vector3<Real> derVV;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derVV{};
     Get(u, v, 0, 0, 0, 0, 0, &derVV);
+
     return derVV;
 }
 
-
-
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_DETAIL_H

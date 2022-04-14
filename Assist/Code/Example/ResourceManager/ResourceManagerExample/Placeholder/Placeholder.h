@@ -7,23 +7,23 @@
 #ifndef RESOURCE_MANAGER_EXAMPLE_PLACEHOLDER_H
 #define RESOURCE_MANAGER_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/ResourceManager/ResourceManagerExample/ResourceManagerExampleDll.h" 
+#include "Example/ResourceManager/ResourceManagerExample/ResourceManagerExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ResourceManagerExample
 {
-	 class RESOURCE_MANAGER_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class RESOURCE_MANAGER_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // RESOURCE_MANAGER_EXAMPLE_PLACEHOLDER_H
+#endif  // RESOURCE_MANAGER_EXAMPLE_PLACEHOLDER_H

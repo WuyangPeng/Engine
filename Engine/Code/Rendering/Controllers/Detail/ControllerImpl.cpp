@@ -17,7 +17,7 @@
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26415)
 Rendering::ControllerImpl
-    ::ControllerImpl () noexcept
+::ControllerImpl () noexcept
 	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::MathD::maxReal }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -27,7 +27,7 @@ Rendering::ControllerImpl
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::ControllerImpl
-    ::IsValid() const noexcept
+::IsValid() const noexcept
 {
     if(m_MinTime <= m_MaxTime)
         return true;
@@ -37,21 +37,21 @@ bool Rendering::ControllerImpl
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::ControllerImpl 
-    ::SetApplicationTime(double applicationTime) noexcept
+::SetApplicationTime(double applicationTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_ApplicationTime = applicationTime;
 }
 
-double Rendering::ControllerImpl ::GetApplicationTime() const noexcept
+double Rendering::ControllerImpl::GetApplicationTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_ApplicationTime;
 }
 
-bool Rendering::ControllerImpl ::Update(double applicationTime) noexcept
+bool Rendering::ControllerImpl::Update(double applicationTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -65,7 +65,7 @@ bool Rendering::ControllerImpl ::Update(double applicationTime) noexcept
 }
 
 double Rendering::ControllerImpl
-    ::GetControlTime (double applicationTime)
+::GetControlTime (double applicationTime)
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -115,56 +115,56 @@ double Rendering::ControllerImpl
 }
             
 Rendering::ControllerRepeatType  Rendering::ControllerImpl
-      ::GetRepeat() const noexcept
+::GetRepeat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Repeat;
 }
 
-double Rendering::ControllerImpl ::GetMinTime() const noexcept
+double Rendering::ControllerImpl::GetMinTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_MinTime;
 }
 
-double Rendering::ControllerImpl ::GetMaxTime() const noexcept
+double Rendering::ControllerImpl::GetMaxTime() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_MaxTime;
 }
 
-double Rendering::ControllerImpl ::GetPhase() const noexcept
+double Rendering::ControllerImpl::GetPhase() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Phase;
 }
 
-double Rendering::ControllerImpl ::GetFrequency() const noexcept
+double Rendering::ControllerImpl::GetFrequency() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Frequency;
 }
 
-bool Rendering::ControllerImpl ::IsActive() const noexcept
+bool Rendering::ControllerImpl::IsActive() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
     return m_Active;
 }
             
-void Rendering::ControllerImpl ::SetRepeat(ControllerRepeatType repeat) noexcept
+void Rendering::ControllerImpl::SetRepeat(ControllerRepeatType repeat) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Repeat = repeat;
 }
 
-void Rendering::ControllerImpl ::SetTime(double minTime, double maxTime) noexcept
+void Rendering::ControllerImpl::SetTime(double minTime, double maxTime) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -172,28 +172,28 @@ void Rendering::ControllerImpl ::SetTime(double minTime, double maxTime) noexcep
 	m_MaxTime = maxTime;
 }
 
-void Rendering::ControllerImpl ::SetPhase(double phase) noexcept
+void Rendering::ControllerImpl::SetPhase(double phase) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Phase = phase;
 }
 
-void Rendering::ControllerImpl ::SetFrequency(double frequency) noexcept
+void Rendering::ControllerImpl::SetFrequency(double frequency) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Frequency = frequency;
 }
 
-void Rendering::ControllerImpl ::SetActive(bool active) noexcept
+void Rendering::ControllerImpl::SetActive(bool active) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
     m_Active = active;
 }
 
-void Rendering::ControllerImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ControllerImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     
@@ -208,7 +208,7 @@ void Rendering::ControllerImpl ::Load(CoreTools::BufferSource& source)
 }
 
 void Rendering::ControllerImpl
-    ::Save( CoreTools::BufferTarget& target ) const
+::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -220,7 +220,7 @@ void Rendering::ControllerImpl
         target.Write(m_Active);
 }
 
-int Rendering::ControllerImpl ::GetStreamingSize() const noexcept
+int Rendering::ControllerImpl::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     

@@ -22,6 +22,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26489)
@@ -40,8 +41,9 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BoxSurface);
 
-Rendering::BoxSurface ::BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6])
-    : mVolume{ volume }, mNumUSamples{ numUSamples }, mNumVSamples{ numVSamples }, mNumWSamples{ numWSamples }, mDoSort{ false }
+Rendering::BoxSurface::BoxSurface(Mathematics::BSplineVolume<float>* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6])
+    : ParentType{ NodeCreate::Init },
+      mVolume{ volume }, mNumUSamples{ numUSamples }, mNumVSamples{ numVSamples }, mNumWSamples{ numWSamples }, mDoSort{ false }
 {
     int permute[3];
     TrianglesMeshSharedPtr mesh;
@@ -92,18 +94,18 @@ Rendering::BoxSurface ::BoxSurface(Mathematics::BSplineVolumef* volume, int numU
     //	AttachChild(mesh);
 }
 
-Rendering::BoxSurface ::~BoxSurface(){
+Rendering::BoxSurface::~BoxSurface(){
 
     EXCEPTION_TRY{
         //DELETE0(mVolume);
     } EXCEPTION_ALL_CATCH(Rendering)
 }
 
-Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface ::CreateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, bool ccw, float faceValue, int permute[3])
+Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, bool ccw, float faceValue, int permute[3])
 {
     const auto numVertices = numRows * numCols;
     const auto vstride = vformat->GetStride();
-    VertexBufferSharedPtr vbuffer{ std::make_shared<VertexBuffer>(numVertices, vstride) };
+    VertexBufferSharedPtr vbuffer{ VertexBuffer::Create(numVertices, vstride) };
     VertexBufferAccessor vba{ vformat, vbuffer };
 
     float param[3];
@@ -118,13 +120,13 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface ::CreateFace(int numRows
         for (col = 0; col < numCols; ++col, ++i)
         {
             param[permute[0]] = col * colFactor;
-            vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
+            //vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
 
             if (vba.HasNormal())
             {
-                const auto cDer = mVolume->GetDerivative(permute[0], param);
-                const auto rDer = mVolume->GetDerivative(permute[1], param);
-                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
+                // const auto cDer = mVolume->GetDerivative(permute[0], param);
+                // const auto rDer = mVolume->GetDerivative(permute[1], param);
+                //  vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
             }
 
             constexpr auto numUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
@@ -141,7 +143,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface ::CreateFace(int numRows
     }
 
     const auto numTriangles = 2 * (numRows - 1) * (numCols - 1);
-    IndexBufferSharedPtr ibuffer = std::make_shared<IndexBuffer>(3 * numTriangles, (int)sizeof(int));
+    IndexBufferSharedPtr ibuffer = IndexBuffer::Create(3 * numTriangles, (int)sizeof(int));
 
     int* indices = (int*)ibuffer.get();
     for (row = 0, i = 0; row < numRows - 1; ++row)
@@ -178,7 +180,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface ::CreateFace(int numRows
     return mesh;
 }
 
-void Rendering::BoxSurface ::UpdateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, bool ccw, float faceValue, int permute[3])
+void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, bool ccw, float faceValue, int permute[3])
 {
     VertexBufferAccessor vba{ vformat, vbuffer };
 
@@ -194,20 +196,20 @@ void Rendering::BoxSurface ::UpdateFace(int numRows, int numCols, VertexFormatSh
         {
             param[permute[0]] = col * colFactor;
 
-            vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
+            // vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
 
             if (vba.HasNormal())
             {
-                const auto cDer = mVolume->GetDerivative(permute[0], param);
-                const auto rDer = mVolume->GetDerivative(permute[1], param);
+                // const auto cDer = mVolume->GetDerivative(permute[0], param);
+                // const auto rDer = mVolume->GetDerivative(permute[1], param);
 
-                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
+                //  vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
             }
         }
     }
 }
 
-void Rendering::BoxSurface ::UpdateSurface()
+void Rendering::BoxSurface::UpdateSurface()
 {
     int permute[3];
     TrianglesMeshSharedPtr mesh;
@@ -279,7 +281,7 @@ void Rendering::BoxSurface ::UpdateSurface()
     RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
 }
 
-void Rendering::BoxSurface ::EnableSorting()
+void Rendering::BoxSurface::EnableSorting()
 {
     for (auto face = 0; face < 6; face++)
     {
@@ -302,7 +304,7 @@ void Rendering::BoxSurface ::EnableSorting()
     mDoSort = true;
 }
 
-void Rendering::BoxSurface ::DisableSorting()
+void Rendering::BoxSurface::DisableSorting()
 {
     for (auto face = 0; face < 6; face++)
     {
@@ -325,7 +327,7 @@ void Rendering::BoxSurface ::DisableSorting()
     mDoSort = false;
 }
 
-void Rendering::BoxSurface ::SortFaces(const AVector& worldViewDirection)
+void Rendering::BoxSurface::SortFaces(const AVector& worldViewDirection)
 {
     if (!mDoSort)
     {
@@ -433,12 +435,12 @@ void Rendering::BoxSurface ::SortFaces(const AVector& worldViewDirection)
 
 // Streaming support.
 
-Rendering::BoxSurface ::BoxSurface(LoadConstructor value)
+Rendering::BoxSurface::BoxSurface(LoadConstructor value)
     : Node(value), mVolume(0), mNumUSamples(0), mNumVSamples(0), mNumWSamples(0), mDoSort(false)
 {
 }
 
-void Rendering::BoxSurface ::Load(CoreTools::BufferSource& source)
+void Rendering::BoxSurface::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -452,7 +454,7 @@ void Rendering::BoxSurface ::Load(CoreTools::BufferSource& source)
     source.Read(uDegree);
     source.Read(vDegree);
     source.Read(wDegree);
-    mVolume = new Mathematics::BSplineVolumef(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
+    mVolume = new Mathematics::BSplineVolume<float>(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
     for (int u = 0; u < numUCtrlPoints; ++u)
     {
         for (int v = 0; v < numVCtrlPoints; ++v)
@@ -474,7 +476,7 @@ void Rendering::BoxSurface ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::BoxSurface ::Link(CoreTools::ObjectLink& source)
+void Rendering::BoxSurface::Link(CoreTools::ObjectLink& source)
 {
     Node::Link(source);
 }
@@ -484,12 +486,12 @@ void Rendering::BoxSurface::PostLink()
     Node::PostLink();
 }
 
-uint64_t Rendering::BoxSurface ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::BoxSurface::Register(CoreTools::ObjectRegister& target) const
 {
     return Node::Register(target);
 }
 
-void Rendering::BoxSurface ::Save(CoreTools::BufferTarget& target) const
+void Rendering::BoxSurface::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -527,7 +529,7 @@ void Rendering::BoxSurface ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::BoxSurface ::GetStreamingSize() const
+int Rendering::BoxSurface::GetStreamingSize() const
 {
     int size = Node::GetStreamingSize();
 
@@ -550,22 +552,22 @@ int Rendering::BoxSurface ::GetStreamingSize() const
     return size;
 }
 
-const Mathematics::BSplineVolumef* Rendering::BoxSurface ::GetVolume() const noexcept
+const Mathematics::BSplineVolume<float>* Rendering::BoxSurface::GetVolume() const noexcept
 {
     return mVolume;
 }
 
-int Rendering::BoxSurface ::GetNumUSamples() const noexcept
+int Rendering::BoxSurface::GetNumUSamples() const noexcept
 {
     return mNumUSamples;
 }
 
-int Rendering::BoxSurface ::GetNumVSamples() const noexcept
+int Rendering::BoxSurface::GetNumVSamples() const noexcept
 {
     return mNumVSamples;
 }
 
-int Rendering::BoxSurface ::GetNumWSamples() const noexcept
+int Rendering::BoxSurface::GetNumWSamples() const noexcept
 {
     return mNumWSamples;
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 14:44)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_H
@@ -14,45 +17,38 @@
 
 namespace Mathematics
 {
+    template <typename Real, typename TVector>
+    class BSplineReduction
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-template <typename Real, typename TVector>
-class   BSplineReduction
-{
-public:
-    // The input quantity numCtrlPoints must be 2 or larger.  The caller is
-    // responsible for deleting the input array ctrlPoints and the output array
-    // akCtrlOut.  The degree degree of the input curve must satisfy the
-    // condition 1 <= degree <= numCtrlPoints-1.  The degree of the output
-    // curve is the same as that of the input curve.  The value fraction
-    // must be in [0,1].  If the fraction is 1, the output curve is identical
-    // to the input curve.  If the fraction is too small to produce a valid
-    // number of control points, the output control quantity is chosen to be
-    // outNumCtrlPoints = degree+1.
+        using ClassType = BSplineReduction<Real, TVector>;
+        using CtrlPointsType = std::vector<TVector>;
 
-    BSplineReduction (int numCtrlPoints, const TVector* ctrlPoints, int degree, Real fraction, int& outNumCtrlPoints, TVector*& outCtrlPoints);
+    public:
+        BSplineReduction(const CtrlPointsType& ctrlPoints, int degree, Real fraction);
 
-    ~BSplineReduction ();
+        CLASS_INVARIANT_DECLARE;
 
-private:
-    Real MinSupport (int basis, int i) const;
-    Real MaxSupport (int basis, int i) const;
-    Real F (int basis, int i, int j, Real t);
-    static Real Integrand (Real t, const BSplineReduction* data);
+        NODISCARD CtrlPointsType GetOutCtrlPoints() const;
 
-    int mDegree;
-    int quantity[2];
-    int mNumKnots[2];  // N+D+2
-    Real* mKnot[2];
+    private:
+        NODISCARD Real MinSupport(int basisIndex, int i) const;
+        NODISCARD Real MaxSupport(int basisIndex, int i) const;
+        NODISCARD Real F(int basisIndex, int i, int j, Real t) const;
+        NODISCARD static Real Integrand(Real t, const BSplineReduction* data);
 
-    // For the integration-based least-squares fitting.
-    int mBasis[2], mIndex[2];
-};
+    private:
+        CtrlPointsType outCtrlPoints;
+        int degree;
+        std::array<int, 2> quantity;
+        std::array<int, 2> numKnots;
+        std::vector<std::array<Real, 2>> knot;
 
-using BSplineReduction2f = BSplineReduction<float,Vector2F>;
-using BSplineReduction2d = BSplineReduction<double,Vector2D>;
-using BSplineReduction3f = BSplineReduction<float,Vector3F>;
-using BSplineReduction3d = BSplineReduction<double,Vector3D>;
-
+        std::array<int, 2> basis;
+        std::array<int, 2> index;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_H

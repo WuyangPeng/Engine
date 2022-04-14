@@ -21,7 +21,7 @@ namespace Rendering
 	    void InitTest(); 
 		void CopyTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

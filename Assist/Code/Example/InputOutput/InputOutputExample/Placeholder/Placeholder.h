@@ -7,23 +7,23 @@
 #ifndef INPUT_OUTPUT_EXAMPLE_PLACEHOLDER_H
 #define INPUT_OUTPUT_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/InputOutput/InputOutputExample/InputOutputExampleDll.h" 
+#include "Example/InputOutput/InputOutputExample/InputOutputExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace InputOutputExample
 {
-	 class INPUT_OUTPUT_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class INPUT_OUTPUT_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // INPUT_OUTPUT_EXAMPLE_PLACEHOLDER_H
+#endif  // INPUT_OUTPUT_EXAMPLE_PLACEHOLDER_H

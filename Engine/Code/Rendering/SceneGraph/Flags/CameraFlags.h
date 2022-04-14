@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 10:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 11:01)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_FLAGS_H
 #define RENDERING_SCENE_GRAPH_CAMERA_FLAGS_H
@@ -13,15 +16,15 @@ namespace Rendering
     // 视图矩阵映射到深度[-1,1] 是OpenGL使用。
     enum class DepthType
     {
-        ZeroToOne, // [0,1]
+        ZeroToOne,  // [0,1]
         MinusOneToOne,  // [-1,1]
         Quantity
-    }; 
- 
+    };
+
     // 视图平截头体参数[rmin,rmax], [umin,umax],和[dmin,dmax]。
     // 区间[rmin,rmax]测量正确的方向R,这些都是“左”和“右”平截头体的值。
     // 区间[umin,umax]测量正确的方向U,这些都是“底”和“顶”平截头体的值。
-    // 区间[dmin,dmax]测量正确的方向D,这些都是“近”和“远”平截头体的值。 
+    // 区间[dmin,dmax]测量正确的方向D,这些都是“近”和“远”平截头体的值。
     // 平截头体的值存储在一个数组与以下映射:
     enum class ViewFrustum
     {
@@ -42,4 +45,4 @@ namespace Rendering
     };
 }
 
-#endif // RENDERING_SCENE_GRAPH_CAMERA_FLAGS_H
+#endif  // RENDERING_SCENE_GRAPH_CAMERA_FLAGS_H

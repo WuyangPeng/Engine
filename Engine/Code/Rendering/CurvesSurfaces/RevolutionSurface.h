@@ -51,12 +51,12 @@ namespace Rendering
 
         // Construction and destruction.  The caller is responsible for deleting
         // the input curve.
-        RevolutionSurface(Mathematics::Curve2f* curve, float xCenter, TopologyType topology,
+        RevolutionSurface(Mathematics::Curve2<float>* curve, float xCenter, TopologyType topology,
                           int numCurveSamples, int numRadialSamples, bool sampleByArcLength,
                           bool outsideView, VertexFormatSharedPtr vformat);
 
         ~RevolutionSurface();
-         
+
         RevolutionSurface(const RevolutionSurface&) = default;
         RevolutionSurface& operator=(const RevolutionSurface&) = default;
         RevolutionSurface(RevolutionSurface&&) = default;
@@ -65,8 +65,8 @@ namespace Rendering
         // Mmber access.
         int GetCurveSamples() const noexcept;
         int GetRadialSamples() const noexcept;
-        void SetCurve(Mathematics::Curve2f* curve) noexcept;
-        const Mathematics::Curve2f* GetCurve() const noexcept;
+        void SetCurve(Mathematics::Curve2<float>* curve) noexcept;
+        const Mathematics::Curve2<float>* GetCurve() const noexcept;
         TopologyType GetTopology() const noexcept;
         void SetSampleByArcLength(bool sampleByArcLength) noexcept;
         bool GetSampleByArcLength() const noexcept;
@@ -78,13 +78,13 @@ namespace Rendering
         void UpdateSurface();
 
     protected:
-        void ComputeSampleData();
+        void ComputeSampleData() noexcept;
         void UpdateDisk();
         void UpdateCylinder();
         void UpdateSphere();
         void UpdateTorus();
 
-        Mathematics::Curve2f* mCurve;
+        Mathematics::Curve2<float>* mCurve;
         float mXCenter;
         TopologyType mTopology;
         int mNumCurveSamples, mNumRadialSamples;

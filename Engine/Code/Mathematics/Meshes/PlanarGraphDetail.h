@@ -1,71 +1,85 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 13:26)
 
 #ifndef MATHEMATICS_MESHES_PLANAR_GRAPH_DETAIL_H
 #define MATHEMATICS_MESHES_PLANAR_GRAPH_DETAIL_H
 
 #include "PlanarGraph.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::PlanarGraph()
+Mathematics::PlanarGraph<Point2>::PlanarGraph() noexcept
+    : vertices{}, edges{}
 {
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::PlanarGraph<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Point2>
+const typename Mathematics::PlanarGraph<Point2>::Vertices& Mathematics::PlanarGraph<Point2>::GetVertices() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertices;
 }
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::~PlanarGraph()
+std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Vertex> Mathematics::PlanarGraph<Point2>::GetVertex(int index) const
 {
-    typename Vertices::iterator iter = mVertices.begin();
-    typename Vertices::iterator end = mVertices.end();
-    for (/**/; iter != end; ++iter)
-    {
-        Vertex* vertex = iter->second;
-        DELETE0(vertex);
-    }
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Point2>
-const typename Mathematics::PlanarGraph<Point2>::Vertices& Mathematics::PlanarGraph<Point2>::GetVertices() const
-{
-    return mVertices;
-}
+    const auto iter = vertices.find(index);
 
-template <typename Point2>
-const typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>::GetVertex(int index) const
-{
-    typename Vertices::const_iterator iter = mVertices.find(index);
-    return (iter != mVertices.end() ? iter->second : 0);
+    return (iter != vertices.end() ? iter->second : 0);
 }
 
 template <typename Point2>
 bool Mathematics::PlanarGraph<Point2>::InsertVertex(const Point2& position, int index)
 {
-    typename Vertices::iterator iter = mVertices.find(index);
-    if (iter != mVertices.end())
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto iter = vertices.find(index);
+    if (iter != vertices.end())
     {
         return false;
     }
 
-    // Insert the vertex into the vertex set.  The adjacency array has already
-    // been initialized to empty.
-    Vertex* vertex = nullptr;  // NEW0 Vertex(position, index);
-    mVertices[index] = vertex;
+    auto vertex = std::make_shared<Vertex>(position, index);
+    vertices[index] = vertex;
+
     return true;
 }
 
 template <typename Point2>
 bool Mathematics::PlanarGraph<Point2>::RemoveVertex(int index)
 {
-    typename Vertices::iterator iter = mVertices.find(index);
-    if (iter != mVertices.end())
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto iter = vertices.find(index);
+    if (iter != vertices.end())
     {
-        Vertex* vertex = iter->second;
-        if (vertex->Adjacent.size() == 0)
+        auto vertex = iter->second;
+        if (vertex->adjacent.size() == 0)
         {
-            mVertices.erase(iter);
-            DELETE0(vertex);
+            vertices.erase(iter);
+
             return true;
         }
     }
@@ -74,39 +88,36 @@ bool Mathematics::PlanarGraph<Point2>::RemoveVertex(int index)
 }
 
 template <typename Point2>
-const typename Mathematics::PlanarGraph<Point2>::Edges& Mathematics::PlanarGraph<Point2>::GetEdges() const
+const typename Mathematics::PlanarGraph<Point2>::Edges& Mathematics::PlanarGraph<Point2>::GetEdges() const noexcept
 {
-    return mEdges;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return edges;
 }
 
 template <typename Point2>
 bool Mathematics::PlanarGraph<Point2>::InsertEdge(int index0, int index1)
 {
-    // Look up the vertices.  If one or the other does not exist, there is
-    // nothing to do.  The typecast supports conceptual constness from the
-    // users perspective.
-    Vertex* vertex0 = (Vertex*)GetVertex(index0);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto vertex0 = GetVertex(index0);
     if (!vertex0)
     {
         return false;
     }
 
-    Vertex* vertex1 = (Vertex*)GetVertex(index1);
+    auto vertex1 = GetVertex(index1);
     if (!vertex1)
     {
         return false;
     }
 
-    EdgeKey eKey(index0, index1);
-    std::map<EdgeKey, bool>::iterator iter = mEdges.find(eKey);
-    if (iter == mEdges.end())
+    const EdgeKey eKey{ index0, index1 };
+    const auto iter = edges.find(eKey);
+    if (iter == edges.end())
     {
-        // The edge does not exist, insert it into the set.  The edge is
-        // tagged as "not a cycle".
-        mEdges[eKey] = false;
+        edges[eKey] = false;
 
-        // Update the vertex-adjacency information.  The graph is undirected,
-        // so each vertex must know about the other.
         vertex0->Insert(vertex1);
         vertex1->Insert(vertex0);
         return true;
@@ -118,30 +129,26 @@ bool Mathematics::PlanarGraph<Point2>::InsertEdge(int index0, int index1)
 template <typename Point2>
 bool Mathematics::PlanarGraph<Point2>::RemoveEdge(int index0, int index1)
 {
-    // Look up the vertices.  If one or the other does not exist, there is
-    // nothing to do.  The typecast supports conceptual constness from the
-    // users perspective.
-    Vertex* vertex0 = (Vertex*)GetVertex(index0);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto vertex0 = GetVertex(index0);
     if (!vertex0)
     {
         return false;
     }
 
-    Vertex* vertex1 = (Vertex*)GetVertex(index1);
+    auto vertex1 = GetVertex(index1);
     if (!vertex1)
     {
         return false;
     }
 
-    EdgeKey eKey(index0, index1);
-    std::map<EdgeKey, bool>::iterator iter = mEdges.find(eKey);
-    if (iter != mEdges.end())
+    const EdgeKey eKey{ index0, index1 };
+    const auto iter = edges.find(eKey);
+    if (iter != edges.end())
     {
-        // The edge exists, remove it from the set.
-        mEdges.erase(iter);
+        edges.erase(iter);
 
-        // Update the vertex-adjacency information.  The graph is undirected,
-        // so each vertex knows about the other.
         vertex0->Remove(vertex1);
         vertex1->Remove(vertex0);
         return true;
@@ -151,45 +158,49 @@ bool Mathematics::PlanarGraph<Point2>::RemoveEdge(int index0, int index1)
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::ExtractPrimitives(std::vector<Primitive*>& primitives)
+std::vector<std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Primitive>> Mathematics::PlanarGraph<Point2>::ExtractPrimitives()
 {
-    // Create a heap of vertices sorted lexicographically.
-    std::set<VertexPtr> heap;
-    typename Vertices::iterator iter = mVertices.begin();
-    typename Vertices::iterator end = mVertices.end();
-    for (/**/; iter != end; ++iter)
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    std::vector<std::shared_ptr<Primitive>> primitives{};
+
+    std::set<VertexPtr> heap{};
+
+    for (const auto& value : vertices)
     {
-        heap.insert(iter->second);
+        heap.emplace(value.second);
     }
 
     while (!heap.empty())
     {
-        // Get the vertex of minimum x-value.
-        VertexPtr VPtr = *heap.begin();
-        Vertex* V0 = (Vertex*)VPtr;
+        auto vPtr = *heap.begin();
+        auto v0 = vPtr;
 
-        if (V0->Adjacent.size() == 0)
+        if (v0.Get()->adjacent.size() == 0)
         {
-            ExtractIsolatedVertex(V0, heap, primitives);
+            ExtractIsolatedVertex(v0.Get(), heap, primitives);
         }
-        else if (V0->Adjacent.size() == 1)
+        else if (v0.Get()->adjacent.size() == 1)
         {
-            ExtractFilament(V0, V0->Adjacent[0], heap, primitives);
+            ExtractFilament(v0.Get(), v0.Get()->adjacent.at(0).lock(), heap, primitives);
         }
         else
         {
-            // The primitive can be a filament or a minimal cycle.
-            ExtractPrimitive(V0, heap, primitives);
+            ExtractPrimitive(v0.Get(), heap, primitives);
         }
     }
+
+    return primitives;
 }
 
 template <typename Point2>
 void Mathematics::PlanarGraph<Point2>::SetCycleEdge(int index0, int index1, bool cycleEdge)
 {
-    EdgeKey eKey(index0, index1);
-    typename Edges::iterator iter = mEdges.find(eKey);
-    if (iter != mEdges.end())
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const EdgeKey eKey{ index0, index1 };
+    const auto iter = edges.find(eKey);
+    if (iter != edges.end())
     {
         iter->second = cycleEdge;
     }
@@ -198,9 +209,11 @@ void Mathematics::PlanarGraph<Point2>::SetCycleEdge(int index0, int index1, bool
 template <typename Point2>
 bool Mathematics::PlanarGraph<Point2>::GetCycleEdge(int index0, int index1) const
 {
-    EdgeKey eKey(index0, index1);
-    typename Edges::const_iterator iter = mEdges.find(eKey);
-    if (iter != mEdges.end())
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const EdgeKey eKey{ index0, index1 };
+    const auto iter = edges.find(eKey);
+    if (iter != edges.end())
     {
         return iter->second;
     }
@@ -209,46 +222,46 @@ bool Mathematics::PlanarGraph<Point2>::GetCycleEdge(int index0, int index1) cons
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::ExtractIsolatedVertex(Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractIsolatedVertex(const std::shared_ptr<Vertex>& v0, std::set<VertexPtr>& heap, std::vector<std::shared_ptr<Primitive>>& primitives)
 {
-    Primitive* primitive = nullptr;  // NEW0 Primitive(PT_ISOLATED_VERTEX);
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    primitive->Sequence.push_back(std::make_pair(V0->Position, V0->Index));
-    heap.erase(V0);
-    RemoveVertex(V0->Index);
+    auto primitive = std::make_shared<Primitive>(PrimitiveType::IsolatedVertex);
 
-    primitives.push_back(primitive);
+    primitive->sequence.emplace_back(v0->position, v0->index);
+    heap.erase(VertexPtr{ v0 });
+    RemoveVertex(v0->index);
+
+    primitives.emplace_back(primitive);
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::ExtractFilament(Vertex* V0, Vertex* V1, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractFilament(std::shared_ptr<Vertex> v0, std::shared_ptr<Vertex> v1, std::set<VertexPtr>& heap, std::vector<std::shared_ptr<Primitive>>& primitives)
 {
-    // (V0,V1) is the first edge of the purported filament.
-    MATHEMATICS_ASSERTION_0(V0->Adjacent.size() != 2, "Unexpected condition\n");
-    if (GetCycleEdge(V0->Index, V1->Index))
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    MATHEMATICS_ASSERTION_0(v0->adjacent.size() != 2, "意外情况\n");
+    if (GetCycleEdge(v0->index, v1->index))
     {
-        // The edge is from an earlier visited minimal cycle.  Delete the
-        // purported filament because it is an imposter.
-        if (V0->Adjacent.size() >= 3)
+        if (v0->adjacent.size() >= 3)
         {
-            // V0 is a branch point.  Break the connection.
-            RemoveEdge(V0->Index, V1->Index);
-            V0 = V1;
-            if (V0->Adjacent.size() == 1)
+            RemoveEdge(v0->index, v1->index);
+            v0 = v1;
+            if (v0->adjacent.size() == 1)
             {
-                V1 = V0->Adjacent[0];
+                v1 = v0->adjacent.at(0).lock();
             }
         }
 
-        while (V0->Adjacent.size() == 1)
+        while (v0->adjacent.size() == 1)
         {
-            V1 = V0->Adjacent[0];
-            if (GetCycleEdge(V0->Index, V1->Index))
+            v1 = v0->adjacent.at(0).lock();
+            if (GetCycleEdge(v0->index, v1->index))
             {
-                heap.erase(V0);
-                RemoveEdge(V0->Index, V1->Index);
-                RemoveVertex(V0->Index);
-                V0 = V1;
+                heap.erase(VertexPtr{ v0 });
+                RemoveEdge(v0->index, v1->index);
+                RemoveVertex(v0->index);
+                v0 = v1;
             }
             else
             {
@@ -256,284 +269,252 @@ void Mathematics::PlanarGraph<Point2>::ExtractFilament(Vertex* V0, Vertex* V1, s
             }
         }
 
-        if (V0->Adjacent.size() == 0)
+        if (v0->adjacent.size() == 0)
         {
-            heap.erase(V0);
-            RemoveVertex(V0->Index);
+            heap.erase(VertexPtr{ v0 });
+            RemoveVertex(v0->index);
         }
     }
     else
     {
-        // A real filament has been found.
-        Primitive* primitive = nullptr;  // NEW0 Primitive(PT_FILAMENT);
+        auto primitive = std::make_shared<Primitive>(PrimitiveType::Filament);
 
-        if (V0->Adjacent.size() >= 3)
+        if (v0->adjacent.size() >= 3)
         {
-            // V0 is a branch point.  Store it and break the connection.
-            primitive->Sequence.push_back(
-                std::make_pair(V0->Position, V0->Index));
-            RemoveEdge(V0->Index, V1->Index);
-            V0 = V1;
-            if (V0->Adjacent.size() == 1)
+            primitive->sequence.emplace_back(v0->position, v0->index);
+            RemoveEdge(v0->index, v1->index);
+            v0 = v1;
+            if (v0->adjacent.size() == 1)
             {
-                V1 = V0->Adjacent[0];
+                v1 = v0->adjacent.at(0).lock();
             }
         }
 
-        while (V0->Adjacent.size() == 1)
+        while (v0->adjacent.size() == 1)
         {
-            V1 = V0->Adjacent[0];
-            primitive->Sequence.push_back(
-                std::make_pair(V0->Position, V0->Index));
-            heap.erase(V0);
-            RemoveEdge(V0->Index, V1->Index);
-            RemoveVertex(V0->Index);
-            V0 = V1;
+            v1 = v0->adjacent.at(0).lock();
+            primitive->sequence.emplace_back(v0->position, v0->index);
+            heap.erase(VertexPtr{ v0 });
+            RemoveEdge(v0->index, v1->index);
+            RemoveVertex(v0->index);
+            v0 = v1;
         }
 
-        primitive->Sequence.push_back(
-            std::make_pair(V0->Position, V0->Index));
+        primitive->sequence.emplace_back(v0->position, v0->index);
 
-        if (V0->Adjacent.size() == 0)
+        if (v0->adjacent.size() == 0)
         {
-            heap.erase(V0);
-            RemoveVertex(V0->Index);
+            heap.erase(VertexPtr{ v0 });
+            RemoveVertex(v0->index);
         }
 
-        primitives.push_back(primitive);
+        primitives.emplace_back(primitive);
     }
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::ExtractPrimitive(Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractPrimitive(std::shared_ptr<Vertex> v0, std::set<VertexPtr>& heap, std::vector<std::shared_ptr<Primitive>>& primitives)
 {
-    std::set<Vertex*> visited;
-    std::vector<std::pair<Point2, int>> sequence;
-    sequence.push_back(std::make_pair(V0->Position, V0->Index));
-    Vertex* V1 = GetClockwiseMost(0, V0);
-    Vertex* VPrev = V0;
-    Vertex* VCurr = V1;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    while (VCurr && VCurr != V0 && visited.find(VCurr) == visited.end())
+    std::set<std::shared_ptr<Vertex>> visited{};
+    std::vector<std::pair<Point2, int>> sequence{};
+    sequence.emplace_back(v0->position, v0->index);
+    auto v1 = GetClockwiseMost(0, v0);
+    auto vPrev = v0;
+    auto vCurr = v1;
+
+    while (vCurr && vCurr != v0 && visited.find(vCurr) == visited.end())
     {
-        sequence.push_back(std::make_pair(VCurr->Position, VCurr->Index));
-        visited.insert(VCurr);
-        Vertex* VNext = GetCounterclockwiseMost(VPrev, VCurr);
-        VPrev = VCurr;
-        VCurr = VNext;
+        sequence.emplace_back(vCurr->position, vCurr->index);
+        visited.emplace(vCurr);
+        auto VNext = GetCounterclockwiseMost(vPrev, vCurr);
+        vPrev = vCurr;
+        vCurr = VNext;
     }
 
-    if (!VCurr)
+    if (!vCurr)
     {
-        // A filament has been found.  It is not necessarily rooted at V0.
-        MATHEMATICS_ASSERTION_0(VPrev->Adjacent.size() == 1, "Unexpected condition\n");
-        ExtractFilament(VPrev, VPrev->Adjacent[0], heap, primitives);
+        ExtractFilament(vPrev, vPrev->adjacent.at(0).lock(), heap, primitives);
     }
-    else if (VCurr == V0)
+    else if (vCurr == v0)
     {
-        // A minimal cycle has been found.
-        Primitive* primitive = nullptr;  // NEW0 Primitive(PT_MINIMAL_CYCLE);
-        primitive->Sequence = sequence;
-        primitives.push_back(primitive);
+        auto primitive = std::make_shared<Primitive>(PrimitiveType::MinimalCycle);
+        primitive->sequence = sequence;
+        primitives.emplace_back(primitive);
 
-        // Mark the edges to indicate they are part of a cycle.
-        int sQuantity = (int)sequence.size();
-        for (int i0 = sQuantity - 1, i1 = 0; i1 < sQuantity; i0 = i1++)
+        auto sQuantity = boost::numeric_cast<int>(sequence.size());
+        for (auto i0 = sQuantity - 1, i1 = 0; i1 < sQuantity; i0 = i1++)
         {
-            int iV0 = sequence[i0].second;
-            int iV1 = sequence[i1].second;
+            auto iV0 = sequence.at(i0).second;
+            auto iV1 = sequence.at(i1).second;
             SetCycleEdge(iV0, iV1, true);
         }
 
-        // Remove any vertices and edges not needed by other primitives.
-        RemoveEdge(V0->Index, V1->Index);
+        RemoveEdge(v0->index, v1->index);
 
-        // Since the edges are marked, the calls to GetFilament in this block
-        // will only delete more edges but not create a primitive.
-        if (V0->Adjacent.size() == 1)
+        if (v0->adjacent.size() == 1)
         {
-            ExtractFilament(V0, V0->Adjacent[0], heap, primitives);
+            ExtractFilament(v0, v0->adjacent.at(0).lock(), heap, primitives);
         }
 
-        if (V1->Adjacent.size() == 1)
+        if (v1->adjacent.size() == 1)
         {
-            ExtractFilament(V1, V1->Adjacent[0], heap, primitives);
+            ExtractFilament(v1, v1->adjacent.at(0).lock(), heap, primitives);
         }
     }
-    else  // VCurr has been visited before
+    else
     {
-        // A cycle has been found, but it is not guaranteed to be a minimal
-        // cycle.  V0 is therefore part of a filament.
-
-        // Find a filament starting vertex.
-        while (V0->Adjacent.size() == 2)
+        while (v0->adjacent.size() == 2)
         {
-            if (V0->Adjacent[0] != V1)
+            if (v0->adjacent.at(0).lock() != v1)
             {
-                V1 = V0;
-                V0 = V0->Adjacent[0];
+                v1 = v0;
+                v0 = v0->adjacent.at(0).lock();
             }
             else
             {
-                V1 = V0;
-                V0 = V0->Adjacent[1];
+                v1 = v0;
+                v0 = v0->adjacent.at(1).lock();
             }
         }
 
-        // Create the primitive.
-        ExtractFilament(V0, V1, heap, primitives);
+        ExtractFilament(v0, v1, heap, primitives);
     }
 }
 
 template <typename Point2>
-typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>::GetClockwiseMost(Vertex* VPrev, Vertex* VCurr)
+std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Vertex> Mathematics::PlanarGraph<Point2>::GetClockwiseMost(const std::shared_ptr<Vertex>& vPrev, const std::shared_ptr<Vertex>& vCurr)
 {
-    Vertex* VNext = 0;
-    Point2 DCurr =
-        (VPrev ? (VCurr->Position - VPrev->Position) : Point2(0, -1));
-    Point2 DNext;
-    bool VCurrConvex = false;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    for (int i = 0; i < (int)VCurr->Adjacent.size(); ++i)
+    std::shared_ptr<Vertex> vNext{};
+    auto dCurr = (vPrev ? (vCurr->position - vPrev->position) : Point2{ 0, -1 });
+    Point2 dNext{};
+    auto vCurrConvex = false;
+
+    for (auto i = 0u; i < vCurr->adjacent.size(); ++i)
     {
-        // Get an adjacent vertex.
-        Vertex* VAdj = VCurr->Adjacent[i];
+        auto vAdj = vCurr->adjacent.at(i).lock();
 
-        // No backtracking allowed.
-        if (VAdj == VPrev)
+        if (vAdj == vPrev)
         {
             continue;
         }
 
-        // The potential direction to move in.
-        Point2 DAdj = VAdj->Position - VCurr->Position;
+        auto dAdj = vAdj->position - vCurr->position;
 
-        // Select the first candidate.
-        if (!VNext)
+        if (!vNext)
         {
-            VNext = VAdj;
-            DNext = DAdj;
-            VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
+            vNext = vAdj;
+            dNext = dAdj;
+            vCurrConvex = (dNext[0] * dCurr[1] - dNext[1] * dCurr[0] <= 0);
             continue;
         }
 
-        // Update if the next candidate is clockwise of the current
-        // clockwise-most vertex.
-        if (VCurrConvex)
+        if (vCurrConvex)
         {
-            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] < 0 || DNext[0] * DAdj[1] - DNext[1] * DAdj[0] < 0)
+            if (dCurr[0] * dAdj[1] - dCurr[1] * dAdj[0] < 0 || dNext[0] * dAdj[1] - dNext[1] * dAdj[0] < 0)
             {
-                VNext = VAdj;
-                DNext = DAdj;
-                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
+                vNext = vAdj;
+                dNext = dAdj;
+                vCurrConvex = (dNext[0] * dCurr[1] - dNext[1] * dCurr[0] <= 0);
             }
         }
         else
         {
-            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] < 0 && DNext[0] * DAdj[1] - DNext[1] * DAdj[0] < 0)
+            if (dCurr[0] * dAdj[1] - dCurr[1] * dAdj[0] < 0 && dNext[0] * dAdj[1] - dNext[1] * dAdj[0] < 0)
             {
-                VNext = VAdj;
-                DNext = DAdj;
-                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
+                vNext = vAdj;
+                dNext = dAdj;
+                vCurrConvex = (dNext[0] * dCurr[1] - dNext[1] * dCurr[0] <= 0);
             }
         }
     }
 
-    return VNext;
+    return vNext;
 }
 
 template <typename Point2>
-typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>::GetCounterclockwiseMost(Vertex* VPrev, Vertex* VCurr)
+std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Vertex> Mathematics::PlanarGraph<Point2>::GetCounterclockwiseMost(const std::shared_ptr<Vertex>& vPrev, const std::shared_ptr<Vertex>& vCurr)
 {
-    Vertex* VNext = 0;
-    Point2 DCurr =
-        (VPrev ? VCurr->Position - VPrev->Position : Point2(0, -1));
-    Point2 DNext;
-    bool VCurrConvex = false;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    for (int i = 0; i < (int)VCurr->Adjacent.size(); ++i)
+    std::shared_ptr<Vertex> vNext{};
+    auto dCurr = (vPrev ? vCurr->position - vPrev->position : Point2(0, -1));
+    Point2 dNext{};
+    auto vCurrConvex = false;
+
+    for (auto i = 0u; i < vCurr->adjacent.size(); ++i)
     {
-        // Get an adjacent vertex.
-        Vertex* VAdj = VCurr->Adjacent[i];
+        auto vAdj = vCurr->adjacent.at(i).lock();
 
-        // No backtracking allowed.
-        if (VAdj == VPrev)
+        if (vAdj == vPrev)
         {
             continue;
         }
 
-        // The potential direction to move in.
-        Point2 DAdj = VAdj->Position - VCurr->Position;
+        auto dAdj = vAdj->position - vCurr->position;
 
-        // Select the first candidate.
-        if (!VNext)
+        if (!vNext)
         {
-            VNext = VAdj;
-            DNext = DAdj;
-            VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
+            vNext = vAdj;
+            dNext = dAdj;
+            vCurrConvex = (dNext[0] * dCurr[1] - dNext[1] * dCurr[0] <= 0);
             continue;
         }
 
-        // Update if the next candidate is clockwise of the current
-        // clockwise-most vertex.
-        if (VCurrConvex)
+        if (vCurrConvex)
         {
-            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] > 0 && DNext[0] * DAdj[1] - DNext[1] * DAdj[0] > 0)
+            if (dCurr[0] * dAdj[1] - dCurr[1] * dAdj[0] > 0 && dNext[0] * dAdj[1] - dNext[1] * dAdj[0] > 0)
             {
-                VNext = VAdj;
-                DNext = DAdj;
-                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
+                vNext = vAdj;
+                dNext = dAdj;
+                vCurrConvex = (dNext[0] * dCurr[1] - dNext[1] * dCurr[0] <= 0);
             }
         }
         else
         {
-            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] > 0 || DNext[0] * DAdj[1] - DNext[1] * DAdj[0] > 0)
+            if (dCurr[0] * dAdj[1] - dCurr[1] * dAdj[0] > 0 || dNext[0] * dAdj[1] - dNext[1] * dAdj[0] > 0)
             {
-                VNext = VAdj;
-                DNext = DAdj;
-                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
+                vNext = vAdj;
+                dNext = dAdj;
+                vCurrConvex = (dNext[0] * dCurr[1] - dNext[1] * dCurr[0] <= 0);
             }
         }
     }
 
-    return VNext;
+    return vNext;
 }
 
 // PlanarGraph::Vertex
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::Vertex ::Vertex(const Point2& position, int index)
-    : Position(position), Index(index)
+Mathematics::PlanarGraph<Point2>::Vertex::Vertex(const Point2& position, int index) noexcept
+    : position{ position }, index{ index }
 {
 }
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::Vertex ::~Vertex()
+void Mathematics::PlanarGraph<Point2>::Vertex::Insert(const std::shared_ptr<Vertex>& adjacentVertex)
 {
+    adjacent.emplace_back(adjacentVertex);
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::Vertex ::Insert(Vertex* adjacent)
+void Mathematics::PlanarGraph<Point2>::Vertex::Remove(const std::shared_ptr<Vertex>& adjacentVertex)
 {
-    Adjacent.push_back(adjacent);
-}
-
-template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::Vertex ::Remove(Vertex* adjacent)
-{
-    // Maintain a compact array.
-    int numAdjacents = (int)Adjacent.size();
-    for (int i = 0; i < numAdjacents; ++i)
+    auto numAdjacents = boost::numeric_cast<int>(adjacent.size());
+    for (auto i = 0; i < numAdjacents; ++i)
     {
-        if (adjacent == Adjacent[i])
+        if (adjacentVertex == adjacent.at(i).lock())
         {
-            // Maintain a compact array.
             --numAdjacents;
             if (i < numAdjacents)
             {
-                Adjacent[i] = Adjacent[numAdjacents];
+                adjacent.at(i) = adjacent.at(numAdjacents);
             }
-            Adjacent.pop_back();
+            adjacent.pop_back();
             return;
         }
     }
@@ -542,33 +523,39 @@ void Mathematics::PlanarGraph<Point2>::Vertex ::Remove(Vertex* adjacent)
 // PlanarGraph::Primitive
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::Primitive ::Primitive(PrimitiveType type)
-    : Type(type)
+Mathematics::PlanarGraph<Point2>::Primitive::Primitive(PrimitiveType type) noexcept
+    : primitiveType{ type }
 {
 }
 
 // PlanarGraph::VertexPtr
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::VertexPtr ::VertexPtr(Vertex* vertex)
-    : mVertex(vertex)
+Mathematics::PlanarGraph<Point2>::VertexPtr::VertexPtr(const std::shared_ptr<Vertex>& vertex) noexcept
+    : vertex{ vertex }
 {
+}
+
+template <typename Point2>
+std::shared_ptr<typename Mathematics::PlanarGraph<Point2>::Vertex> Mathematics::PlanarGraph<Point2>::VertexPtr::Get() noexcept
+{
+    return vertex;
 }
 
 template <typename Point2>
 bool Mathematics::PlanarGraph<Point2>::VertexPtr::operator<(const VertexPtr& vertexPtr) const
 {
-    if (mVertex->Position[0] < vertexPtr.mVertex->Position[0])
+    if (vertex->position[0] < vertexPtr.vertex->position[0])
     {
         return true;
     }
 
-    if (mVertex->Position[0] > vertexPtr.mVertex->Position[0])
+    if (vertex->position[0] > vertexPtr.vertex->position[0])
     {
         return false;
     }
 
-    return mVertex->Position[1] < vertexPtr.mVertex->Position[1];
+    return vertex->position[1] < vertexPtr.vertex->position[1];
 }
 
 #endif  // MATHEMATICS_MESHES_PLANAR_GRAPH_DETAIL_H

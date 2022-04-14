@@ -161,7 +161,7 @@ Rendering::ShaderSamplerDataImpl::Colour Rendering::ShaderSamplerDataImpl
 	return m_SingleShaderSamplerData[index].GetBorderColor();
 }
 
-void Rendering::ShaderSamplerDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderSamplerDataImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

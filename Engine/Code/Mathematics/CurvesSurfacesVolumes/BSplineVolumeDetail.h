@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 16:38)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_DETAIL_H
@@ -10,100 +13,101 @@
 #include "BSplineVolume.h"
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26451)
-namespace Mathematics
-{
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-BSplineVolume<Real>::BSplineVolume (int numUCtrlPoints, int numVCtrlPoints, int numWCtrlPoints, int uDegree, int vDegree, int wDegree)
+Mathematics::BSplineVolume<Real>::BSplineVolume(int numUCtrlPoints, int numVCtrlPoints, int numWCtrlPoints, int uDegree, int vDegree, int wDegree)
+    : ctrlPoint{}, basis{}
 {
-    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numWCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= wDegree && wDegree <= numWCtrlPoints - 1,  "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numWCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= wDegree && wDegree <= numWCtrlPoints - 1, "无效输入。\n");
 
-    mCtrlPoint = nullptr;  // NEW3<Vector3<Real> >(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints);
-    memset(mCtrlPoint[0][0], 0, numUCtrlPoints*numVCtrlPoints*numWCtrlPoints* sizeof(Vector3<Real>));
-
-    mBasis[0].Create(numUCtrlPoints, uDegree, true);
-    mBasis[1].Create(numVCtrlPoints, vDegree, true);
-    mBasis[2].Create(numWCtrlPoints, wDegree, true);
-}
-
-template <typename Real>
-BSplineVolume<Real>::~BSplineVolume ()
-{
-	EXCEPTION_TRY
-{
-DELETE3(mCtrlPoint);
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-    
-}
-
-template <typename Real>
-int BSplineVolume<Real>::GetNumCtrlPoints (int dim) const noexcept
-{
-    return mBasis[dim].GetNumCtrlPoints();
-}
-
-template <typename Real>
-int BSplineVolume<Real>::GetDegree (int dim) const noexcept
-{
-    return mBasis[dim].GetDegree();
-}
-
-template <typename Real>
-void BSplineVolume<Real>::SetControlPoint (int uIndex, int vIndex,
-    int wIndex, const Vector3<Real>& ctrlPoint) noexcept
-{
-    if (0 <= uIndex && uIndex < mBasis[0].GetNumCtrlPoints()  &&  0 <= vIndex && vIndex < mBasis[1].GetNumCtrlPoints() &&  0 <= wIndex && wIndex < mBasis[2].GetNumCtrlPoints())
+    for (auto i = 0; i < numUCtrlPoints; ++i)
     {
-        mCtrlPoint[uIndex][vIndex][wIndex] = ctrlPoint;
-    }
-}
-
-template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetControlPoint (int uIndex, int vIndex,
-    int wIndex) const noexcept
-{
-    if (0 <= uIndex && uIndex < mBasis[0].GetNumCtrlPoints() &&  0 <= vIndex && vIndex < mBasis[1].GetNumCtrlPoints()  &&  0 <= wIndex && wIndex < mBasis[2].GetNumCtrlPoints())
-    {
-        return mCtrlPoint[uIndex][vIndex][wIndex];
+        ctrlPoint.emplace_back(numVCtrlPoints, std::vector<Vector3<Real>>(numWCtrlPoints));
     }
 
-	return Vector3<Real>{ Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal };
+    basis.at(0).Create(numUCtrlPoints, uDegree, true);
+    basis.at(1).Create(numVCtrlPoints, vDegree, true);
+    basis.at(2).Create(numWCtrlPoints, wDegree, true);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::BSplineVolume<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::BSplineVolume<Real>::GetNumCtrlPoints(int dim) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).GetNumCtrlPoints();
 }
 
 template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetPosition (Real u, Real v, Real w) const
+int Mathematics::BSplineVolume<Real>::GetDegree(int dim) const noexcept
 {
-    int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
-    mBasis[0].Compute(u, 0, iumin, iumax);
-    mBasis[1].Compute(v, 0, ivmin, ivmax);
-    mBasis[2].Compute(w, 0, iwmin, iwmax);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto pos = Vector3<Real>::GetZero();
+    return basis.at(dim).GetDegree();
+}
+
+template <typename Real>
+void Mathematics::BSplineVolume<Real>::SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3<Real>& newCtrlPoint)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    ctrlPoint.at(uIndex).at(vIndex).at(wIndex) = newCtrlPoint;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetControlPoint(int uIndex, int vIndex, int wIndex) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ctrlPoint.at(uIndex).at(vIndex).at(wIndex);
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetPosition(Real u, Real v, Real w) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto iumin = 0;
+    auto iumax = 0;
+    auto ivmin = 0;
+    auto ivmax = 0;
+    auto iwmin = 0;
+    auto iwmax = 0;
+
+    basis.at(0).Compute(u, 0, iumin, iumax);
+    basis.at(1).Compute(v, 0, ivmin, ivmax);
+    basis.at(2).Compute(w, 0, iwmin, iwmax);
+
+    auto pos = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
-		auto tmp0 = mBasis[0].GetD0(iu);
+        auto tmp0 = basis.at(0).GetD0(iu);
         for (auto iv = ivmin; iv <= ivmax; ++iv)
         {
-			auto tmp1 = mBasis[1].GetD0(iv);
+            auto tmp1 = basis.at(1).GetD0(iv);
             for (auto iw = iwmin; iw <= iwmax; ++iw)
             {
-				auto tmp2 = mBasis[2].GetD0(iw);
-				auto prod = tmp0*tmp1*tmp2;
-                pos += prod*mCtrlPoint[iu][iv][iw];
+                auto tmp2 = basis.at(2).GetD0(iw);
+                auto prod = tmp0 * tmp1 * tmp2;
+                pos += prod * ctrlPoint.at(iu).at(iv).at(iw);
             }
         }
     }
@@ -112,25 +116,32 @@ Vector3<Real> BSplineVolume<Real>::GetPosition (Real u, Real v, Real w) const
 }
 
 template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetDerivativeU (Real u, Real v, Real w)  const
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetDerivativeU(Real u, Real v, Real w) const
 {
-    int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
-    mBasis[0].Compute(u, 1, iumin, iumax);
-    mBasis[1].Compute(v, 0, ivmin, ivmax);
-    mBasis[2].Compute(w, 0, iwmin, iwmax);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto derU = Vector3<Real>::GetZero();
+    auto iumin = 0;
+    auto iumax = 0;
+    auto ivmin = 0;
+    auto ivmax = 0;
+    auto iwmin = 0;
+    auto iwmax = 0;
+    basis.at(0).Compute(u, 1, iumin, iumax);
+    basis.at(1).Compute(v, 0, ivmin, ivmax);
+    basis.at(2).Compute(w, 0, iwmin, iwmax);
+
+    auto derU = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
-		auto tmp0 = mBasis[0].GetD1(iu);
+        auto tmp0 = basis.at(0).GetD1(iu);
         for (auto iv = ivmin; iv <= ivmax; ++iv)
         {
-			auto tmp1 = mBasis[1].GetD0(iv);
+            auto tmp1 = basis.at(1).GetD0(iv);
             for (auto iw = iwmin; iw <= iwmax; ++iw)
             {
-				auto tmp2 = mBasis[2].GetD0(iw);
-				auto prod = tmp0*tmp1*tmp2;
-                derU += prod*mCtrlPoint[iu][iv][iw];
+                auto tmp2 = basis.at(2).GetD0(iw);
+                auto prod = tmp0 * tmp1 * tmp2;
+                derU += prod * ctrlPoint.at(iu).at(iv).at(iw);
             }
         }
     }
@@ -139,25 +150,32 @@ Vector3<Real> BSplineVolume<Real>::GetDerivativeU (Real u, Real v, Real w)  cons
 }
 
 template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetDerivativeV (Real u, Real v, Real w) const
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetDerivativeV(Real u, Real v, Real w) const
 {
-    int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
-    mBasis[0].Compute(u, 0, iumin, iumax);
-    mBasis[1].Compute(v, 1, ivmin, ivmax);
-    mBasis[2].Compute(w, 0, iwmin, iwmax);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto derV = Vector3<Real>::GetZero();
+    auto iumin = 0;
+    auto iumax = 0;
+    auto ivmin = 0;
+    auto ivmax = 0;
+    auto iwmin = 0;
+    auto iwmax = 0;
+    basis.at(0).Compute(u, 0, iumin, iumax);
+    basis.at(1).Compute(v, 1, ivmin, ivmax);
+    basis.at(2).Compute(w, 0, iwmin, iwmax);
+
+    auto derV = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
-		auto tmp0 = mBasis[0].GetD0(iu);
+        auto tmp0 = basis.at(0).GetD0(iu);
         for (auto iv = ivmin; iv <= ivmax; ++iv)
         {
-			auto tmp1 = mBasis[1].GetD1(iv);
+            auto tmp1 = basis.at(1).GetD1(iv);
             for (auto iw = iwmin; iw <= iwmax; ++iw)
             {
-				auto tmp2 = mBasis[2].GetD0(iw);
-				auto prod = tmp0*tmp1*tmp2;
-                derV += prod*mCtrlPoint[iu][iv][iw];
+                auto tmp2 = basis.at(2).GetD0(iw);
+                auto prod = tmp0 * tmp1 * tmp2;
+                derV += prod * ctrlPoint.at(iu).at(iv).at(iw);
             }
         }
     }
@@ -166,25 +184,32 @@ Vector3<Real> BSplineVolume<Real>::GetDerivativeV (Real u, Real v, Real w) const
 }
 
 template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetDerivativeW (Real u, Real v, Real w)  const
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetDerivativeW(Real u, Real v, Real w) const
 {
-    int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
-    mBasis[0].Compute(u, 0, iumin, iumax);
-    mBasis[1].Compute(v, 0, ivmin, ivmax);
-    mBasis[2].Compute(w, 1, iwmin, iwmax);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	auto derW = Vector3<Real>::GetZero();
+    auto iumin = 0;
+    auto iumax = 0;
+    auto ivmin = 0;
+    auto ivmax = 0;
+    auto iwmin = 0;
+    auto iwmax = 0;
+    basis.at(0).Compute(u, 0, iumin, iumax);
+    basis.at(1).Compute(v, 0, ivmin, ivmax);
+    basis.at(2).Compute(w, 1, iwmin, iwmax);
+
+    auto derW = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
-		auto tmp0 = mBasis[0].GetD0(iu);
-		for (auto iv = ivmin; iv <= ivmax; ++iv)
+        auto tmp0 = basis.at(0).GetD0(iu);
+        for (auto iv = ivmin; iv <= ivmax; ++iv)
         {
-			auto tmp1 = mBasis[1].GetD0(iv);
+            auto tmp1 = basis.at(1).GetD0(iv);
             for (auto iw = iwmin; iw <= iwmax; ++iw)
             {
-				auto tmp2 = mBasis[2].GetD1(iw);
-				auto prod = tmp0*tmp1*tmp2;
-                derW += prod*mCtrlPoint[iu][iv][iw];
+                auto tmp2 = basis.at(2).GetD1(iw);
+                auto prod = tmp0 * tmp1 * tmp2;
+                derW += prod * ctrlPoint.at(iu).at(iv).at(iw);
             }
         }
     }
@@ -193,29 +218,31 @@ Vector3<Real> BSplineVolume<Real>::GetDerivativeW (Real u, Real v, Real w)  cons
 }
 
 template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetPosition (Real pos[3]) const
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetPosition(const std::array<Real, 3>& pos) const
 {
-    return GetPosition(pos[0], pos[1], pos[2]);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return GetPosition(pos.at(0), pos.at(1), pos.at(2));
 }
 
 template <typename Real>
-Vector3<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
+Mathematics::Vector3<Real> Mathematics::BSplineVolume<Real>::GetDerivative(int i, const std::array<Real, 3>& pos) const
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
     switch (i)
     {
-    case 0:  return GetDerivativeU(pos[0], pos[1], pos[2]);
-    case 1:  return GetDerivativeV(pos[0], pos[1], pos[2]);
-    case 2:
-        return GetDerivativeW(pos[0], pos[1], pos[2]);
-    default:
-        break;
+        case 0:
+            return GetDerivativeU(pos.at(0), pos.at(1), pos.at(2));
+        case 1:
+            return GetDerivativeV(pos.at(0), pos.at(1), pos.at(2));
+        case 2:
+            return GetDerivativeW(pos.at(0), pos.at(1), pos.at(2));
+        default:
+            break;
     }
 
-    MATHEMATICS_ASSERTION_0(false, "Derivatives larger than order 3 not supported\n");
     return Vector3<Real>::GetZero();
 }
 
-}
-#include STSTEM_WARNING_POP
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_DETAIL_H

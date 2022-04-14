@@ -121,6 +121,8 @@ Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 	::CreateUniqueInstance (Material* material, Texture2D* texture, ShaderFlags::SamplerFilter filter,ShaderFlags::SamplerCoordinate coordinate0,ShaderFlags::SamplerCoordinate coordinate1)
 {
     const MaterialTextureEffect* effect = nullptr;  // CoreTools::New0 < MaterialTextureEffect>();
+    if (effect == nullptr)
+        return nullptr;
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -187,7 +189,7 @@ void Rendering::MaterialTextureEffect
 	}
 }
 
-uint64_t Rendering::MaterialTextureEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::MaterialTextureEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }

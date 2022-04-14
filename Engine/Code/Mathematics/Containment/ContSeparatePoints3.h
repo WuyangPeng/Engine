@@ -1,21 +1,14 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/11 22:55)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_H
 #define MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_H
-
-// Separate two point sets, if possible, by computing a plane for which the
-// point sets lie on opposite sides.  The algorithm computes the convex hull
-// of the point sets, then uses the method of separating axes to determine if
-// the two convex polyhedra are disjoint.  The convex hull calculation is
-// O(n*log(n)).  There is a randomized linear approach that takes O(n), but
-// I have not yet implemented it.
-//
-// The return value of the function is 'true' if and only if there is a
-// separation.  If 'true', the returned plane is a separating plane.
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -23,28 +16,32 @@
 
 namespace Mathematics
 {
-	
-	// Assumes that both sets have at least 4 noncoplanar points.
-	template <typename Real>
-	class SeparatePoints3
-	{
-	public:
-		SeparatePoints3 (const std::vector<Vector3<Real> >& points0, const std::vector<Vector3<Real> >& points1, Plane3<Real>& separatingPlane);
-		
-		// Return the result of the constructor call.  If 'true', the output
-		// plane 'separatingPlane' is valid.
-		operator bool ();
-		
-	private:
-		static int OnSameSide(const Plane3<Real>& plane, int numTriangles, const int* indices, const std::vector<Vector3<Real> >& points);
-		
-		static int WhichSide(const Plane3<Real>& plane, int numTriangles, const int* indices, const std::vector<Vector3<Real> >& points);
-		
-		bool mSeparated;
-	};
-	
-	using SeparatePoints3f = SeparatePoints3<float>;
-	using SeparatePoints3d = SeparatePoints3<double>;
+    template <typename Real>
+    class ContSeparatePoints3
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = ContSeparatePoints3<Real>;
+
+    public:
+        ContSeparatePoints3(const std::vector<Vector3<Real>>& points0, const std::vector<Vector3<Real>>& points1, Plane3<Real>& separatingPlane);
+
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD operator bool() noexcept;
+
+    private:
+        NODISCARD static int OnSameSide(const Plane3<Real>& plane, const std::vector<int>& indices, const std::vector<Vector3<Real>>& points);
+
+        NODISCARD static int WhichSide(const Plane3<Real>& plane, const std::vector<int>& indices, const std::vector<Vector3<Real>>& points);
+
+    private:
+        bool separated;
+    };
+
+    using SeparatePoints3F = ContSeparatePoints3<float>;
+    using SeparatePoints3D = ContSeparatePoints3<double>;
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_H

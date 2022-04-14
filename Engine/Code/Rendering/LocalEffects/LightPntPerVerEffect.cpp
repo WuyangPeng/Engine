@@ -32,6 +32,7 @@
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(26815)
@@ -40,7 +41,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, LightPntPerVerEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightPntPerVerEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightPntPerVerEffect);
 
-Rendering::LightPntPerVerEffect ::LightPntPerVerEffect()
+Rendering::LightPntPerVerEffect::LightPntPerVerEffect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.LightPntPerVer", 2, 2, 12, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -94,7 +95,7 @@ Rendering::LightPntPerVerEffect ::LightPntPerVerEffect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::LightPntPerVerEffect ::CreateInstance(Light* light, Material* material) const
+Rendering::VisualEffectInstance* Rendering::LightPntPerVerEffect::CreateInstance(Light* light, Material* material) const
 {
     VisualEffectInstance* instance = nullptr;  //    CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -116,18 +117,20 @@ Rendering::VisualEffectInstance* Rendering::LightPntPerVerEffect ::CreateInstanc
 Rendering::VisualEffectInstance* Rendering::LightPntPerVerEffect::CreateUniqueInstance(
     Light* light, Material* material)
 {
-    const LightPntPerVerEffect* effect = nullptr;  //  CoreTools::New0<LightPntPerVerEffect>();
-    return effect->CreateInstance(light, material);
+    light;
+    material;
+    //const LightPntPerVerEffect* effect = nullptr;  //  CoreTools::New0<LightPntPerVerEffect>();
+    return nullptr;  //  effect->CreateInstance(light, material);
 }
 
 // Streaming support.
 
-Rendering::LightPntPerVerEffect ::LightPntPerVerEffect(LoadConstructor value)
+Rendering::LightPntPerVerEffect::LightPntPerVerEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::LightPntPerVerEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::LightPntPerVerEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -136,12 +139,12 @@ void Rendering::LightPntPerVerEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightPntPerVerEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::LightPntPerVerEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightPntPerVerEffect ::PostLink()
+void Rendering::LightPntPerVerEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -168,12 +171,12 @@ void Rendering::LightPntPerVerEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::LightPntPerVerEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightPntPerVerEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightPntPerVerEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightPntPerVerEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -182,7 +185,7 @@ void Rendering::LightPntPerVerEffect ::Save(CoreTools::BufferTarget& target) con
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightPntPerVerEffect ::GetStreamingSize() const
+int Rendering::LightPntPerVerEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }
@@ -394,7 +397,7 @@ std::string Rendering::LightPntPerVerEffect::msVPrograms[System::EnumCastUnderly
     "END\n"
 };
 
-std::string Rendering::LightPntPerVerEffect ::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
+std::string Rendering::LightPntPerVerEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // PP_NONE
     "",
 

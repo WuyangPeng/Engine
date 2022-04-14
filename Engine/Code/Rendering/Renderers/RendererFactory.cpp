@@ -26,7 +26,7 @@
 using std::make_shared;
 
 Rendering::RendererFactory::RendererPtr Rendering::RendererFactory
-      ::Create(const std::string& fileName)
+::Create(const std::string& fileName)
 {
 	RendererParameter rendererParameter{ fileName };
 	auto ptr =  Create(rendererParameter.GetRendererType(),rendererParameter.GetRendererBasis());
@@ -36,7 +36,7 @@ Rendering::RendererFactory::RendererPtr Rendering::RendererFactory
 }
 
 Rendering::RendererFactory::RendererPtr Rendering::RendererFactory
-      ::Create(RendererTypes type,const RendererBasis& basis)
+::Create(RendererTypes type,const RendererBasis& basis)
 {
     switch(type)
     {
@@ -58,13 +58,13 @@ Rendering::RendererFactory::RendererPtr Rendering::RendererFactory
 }
 
 Rendering::RendererFactory::RendererPtr Rendering::RendererFactory
-      ::CreateDefault(const RendererBasis& basis)
+::CreateDefault(const RendererBasis& basis)
 {
     return make_shared<OpenGLRenderer>(basis); 
 }
 
 Rendering::RendererFactory::RendererInputPtr Rendering::RendererFactory
-      ::CreateInput(RendererTypes type)
+::CreateInput(RendererTypes type)
 {
     switch(type)
     {
@@ -86,7 +86,7 @@ Rendering::RendererFactory::RendererInputPtr Rendering::RendererFactory
 }
 
 Rendering::RendererFactory::RendererInputPtr Rendering::RendererFactory
-      ::CreateDefaultInput()
+::CreateDefaultInput()
 {
     return make_shared<OpenGLRendererInput>();
 }

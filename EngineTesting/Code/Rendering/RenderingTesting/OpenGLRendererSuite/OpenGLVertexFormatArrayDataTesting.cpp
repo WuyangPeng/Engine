@@ -1,18 +1,15 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/09 11:32)
 
 #include "OpenGLVertexFormatArrayDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLVertexFormatArrayDataTesting) 
-
-void Rendering::OpenGLVertexFormatArrayDataTesting
-	::MainTest()
-{ 
-	 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLVertexFormatArrayDataTesting)
+#include SYSTEM_WARNING_DISABLE(26440)
+void Rendering::OpenGLVertexFormatArrayDataTesting::MainTest()
+{
 }
- 

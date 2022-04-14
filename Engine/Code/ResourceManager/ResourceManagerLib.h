@@ -1,38 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/17 10:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/25 21:01)
 
 #ifndef SOUND_RESOURCE_MANAGER_LIB_H
 #define SOUND_RESOURCE_MANAGER_LIB_H
- 
-#include "Helper/UserMacro.h" 
 
-#if defined(TCRE_USE_MSVC) 
+#include "Helper/UserMacro.h"
 
-	#ifndef BUILDING_RESOURCE_MANAGER_STATIC
+#if defined(TCRE_USE_MSVC)
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"ResourceManagerD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"ResourceManager.lib")
-		#endif // _DEBUG
+    #ifndef BUILDING_RESOURCE_MANAGER_STATIC
 
-	#else // !BUILDING_RESOURCE_MANAGER_STATIC
+        #ifdef _DEBUG
+            #pragma comment(lib, "ResourceManagerD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "ResourceManager.lib")
+        #endif  // _DEBUG
 
-		#include "DllLib.h"
-		#include "System/SystemLib.h"
-		#include "CoreTools/CoreToolsLib.h"
+    #else  // !BUILDING_RESOURCE_MANAGER_STATIC
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"ResourceManagerStaticD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"ResourceManagerStatic.lib")
-		#endif // _DEBUG
+        #include "DllLib.h"
 
-	#endif // BUILDING_RESOURCE_MANAGER_STATIC
+        #ifdef _DEBUG
+            #pragma comment(lib, "ResourceManagerStaticD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "ResourceManagerStatic.lib")
+        #endif  // _DEBUG
 
-#endif // TCRE_USE_MSVC  
+    #endif  // BUILDING_RESOURCE_MANAGER_STATIC
 
-#endif // SOUND_RESOURCE_MANAGER_LIB_H
+#endif  // TCRE_USE_MSVC
+
+#endif  // SOUND_RESOURCE_MANAGER_LIB_H

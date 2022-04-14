@@ -41,7 +41,7 @@ void Rendering::PointControllerTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::PointControllerTesting
 	::InitTest()
 {

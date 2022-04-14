@@ -30,17 +30,17 @@ Rendering:: OpenGLRendererInput
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLRendererInput)
  
 
-void Rendering::OpenGLRendererInput ::SetWindowID(int windowID) noexcept
+void Rendering::OpenGLRendererInput::SetWindowID(int windowID) noexcept
 {
 	SetWindowHandle(reinterpret_cast<HWnd>(static_cast<size_t>(windowID)));
 }
 
-void Rendering::OpenGLRendererInput ::SetWindowHandle(HWnd windowID) noexcept
+void Rendering::OpenGLRendererInput::SetWindowHandle(HWnd windowID) noexcept
 {
 	m_WindowHandle  = windowID;
 }
 
-Rendering::RendererTypes Rendering::OpenGLRendererInput ::GetRendererType() const noexcept
+Rendering::RendererTypes Rendering::OpenGLRendererInput::GetRendererType() const noexcept
 {
 	return RendererTypes::OpenGL;
 }

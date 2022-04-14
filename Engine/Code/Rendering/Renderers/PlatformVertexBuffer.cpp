@@ -13,27 +13,27 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Rendering::PlatformVertexBuffer ::PlatformVertexBuffer(Renderer* renderer, const VertexBuffer* vertexBuffer)
+Rendering::PlatformVertexBuffer::PlatformVertexBuffer(Renderer* renderer, const VertexBuffer* vertexBuffer)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, vertexBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PlatformVertexBuffer ::~PlatformVertexBuffer()
+Rendering::PlatformVertexBuffer::~PlatformVertexBuffer()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformVertexBuffer)
 
-void Rendering::PlatformVertexBuffer ::Enable(Renderer* renderer, unsigned int vertexSize, unsigned int streamIndex, unsigned int offset)
+void Rendering::PlatformVertexBuffer::Enable(Renderer* renderer, unsigned int vertexSize, unsigned int streamIndex, unsigned int offset)
 {
     ;
 
     return impl->Enable(renderer, vertexSize, streamIndex, offset);
 }
 
-void Rendering::PlatformVertexBuffer ::Disable(Renderer* renderer, unsigned int streamIndex)
+void Rendering::PlatformVertexBuffer::Disable(Renderer* renderer, unsigned int streamIndex)
 {
     ;
 

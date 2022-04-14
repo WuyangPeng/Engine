@@ -88,7 +88,7 @@ Rendering::ShaderProfileData
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ShaderProfileData)
 
 void Rendering::ShaderProfileData
-    ::SetBaseRegister( int profile, int index, int baseRegister )
+::SetBaseRegister( int profile, int index, int baseRegister )
 {
 	;
 

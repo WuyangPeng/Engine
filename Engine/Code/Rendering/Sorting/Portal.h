@@ -59,7 +59,7 @@ namespace Rendering
 	protected:
 		// Support for the graph update.
 		friend class ConvexRegion;
-            void UpdateWorldData(const FloatTransform& worldTransform) noexcept;
+            void UpdateWorldData(const TransformF& worldTransform) noexcept;
 
 		// Support for culling.
 		bool ReducedFrustum(const Culler& culler, float reducedFrustum[6]);

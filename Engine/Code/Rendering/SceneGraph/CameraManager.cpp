@@ -1,66 +1,63 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 17:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 10:57)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CameraManager.h"
 #include "Detail/CameraManagerImpl.h"
-#include "CoreTools/Threading/Mutex.h"
-#include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Threading/Mutex.h"
+#include "CoreTools/Threading/ScopedMutex.h"
 
-using std::string;
 using std::make_shared;
 using std::make_unique;
+using std::string;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, CameraManager);
 
-Rendering::CameraManager::CameraManagerUniquePtr Rendering::CameraManager
-::sm_CameraManager{ };
+Rendering::CameraManager::CameraManagerUniquePtr Rendering::CameraManager::cameraManager{};
 
-void Rendering::CameraManager
-::Create()
+void Rendering::CameraManager::Create()
 {
-	sm_CameraManager = make_unique<Rendering::CameraManager>(CameraManagerCreate::Init);
+    cameraManager = make_unique<Rendering::CameraManager>(CameraManagerCreate::Init);
 }
 
-void Rendering::CameraManager
-::Destroy() noexcept
+void Rendering::CameraManager::Destroy() noexcept
 {
-	sm_CameraManager.reset();
+    cameraManager.reset();
 }
 
-Rendering::CameraManager ::CameraManager([[maybe_unused]] CameraManagerCreate cameraManagerCreate)
-    : impl{ 0 }
+Rendering::CameraManager::CameraManager(MAYBE_UNUSED CameraManagerCreate cameraManagerCreate)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
- 
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, CameraManager)
 
-void Rendering::CameraManager
-	::SetDefaultDepthType(RendererTypes type)
+void Rendering::CameraManager::SetDefaultDepthType(RendererTypes type)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	impl->SetDefaultDepthType(type);
+    impl->SetDefaultDepthType(type);
 }
 
-Rendering::DepthType Rendering::CameraManager
-	::GetDepthType() const
+Rendering::DepthType Rendering::CameraManager::GetDepthType() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetDepthType();
+    return impl->GetDepthType();
 }

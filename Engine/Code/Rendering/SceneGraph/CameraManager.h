@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 11:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 10:55)
 
 #ifndef RENDERING_SCENE_GRAPH_CAMERA_MANAGE_H
 #define RENDERING_SCENE_GRAPH_CAMERA_MANAGE_H
@@ -15,14 +18,8 @@
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
-#include <boost/noncopyable.hpp>
 RENDERING_EXPORT_UNIQUE_PTR(CameraManager);
 RENDERING_NON_COPY_EXPORT_IMPL(CameraManagerImpl);
-
-namespace CoreTools
-{
-    class Mutex;
-}
 
 namespace Rendering
 {
@@ -49,14 +46,13 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         void SetDefaultDepthType(RendererTypes type);
-        DepthType GetDepthType() const;
+        NODISCARD DepthType GetDepthType() const;
 
-    private:
     private:
         using CameraManagerUniquePtr = std::unique_ptr<CameraManager>;
 
     private:
-        static CameraManagerUniquePtr sm_CameraManager;
+        static CameraManagerUniquePtr cameraManager;
         PackageType impl;
     };
 }

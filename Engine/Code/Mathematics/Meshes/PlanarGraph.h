@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 13:25)
 
 #ifndef MATHEMATICS_MESHES_PLANAR_GRAPH_H
 #define MATHEMATICS_MESHES_PLANAR_GRAPH_H
@@ -11,115 +14,102 @@
 
 #include "EdgeKey.h"
 
-
-// The Point2 template class must represent a 2-tuple, each component of some
-// scalar type Numeric.  Point2 must define the following member functions.
-//     Point2::Point2 ();
-//     Point2::(Numeric, Numeric);
-//     Point2::~Point2 ();
-//     Point2& Point2::operator= (const Point2&);
-//     Point2 Point2::operator- (const Point2&) const;
-//     Numeric Point2::operator[] (int i) const;
+#include <map>
+#include <set>
 
 namespace Mathematics
 {
-	template <typename Point2>
-	class PlanarGraph
-	{
-	public:
-		PlanarGraph ();
-		virtual ~PlanarGraph ();
-		
-		class Vertex
-		{
-		public:
-			Vertex (const Point2& position, int index);
-			~Vertex ();
-			
-			void Insert (Vertex* adjacent);
-			void Remove (Vertex* adjacent);
-			
-			// The planar position for the vertex.
-			Point2 Position;
-			
-			// A unique identifier for the vertex.
-			int Index;
-			
-			// The adjacent vertices.
-			std::vector<Vertex*> Adjacent;
-		};
-		
-		typedef std::map<int,Vertex*> Vertices;
-		typedef std::map<EdgeKey,bool> Edges;
-		
-		const Vertices& GetVertices () const;
-		const Vertex* GetVertex (int iIndex) const;
-		bool InsertVertex (const Point2& position, int iIndex);
-		bool RemoveVertex (int iIndex);
-		
-		const Edges& GetEdges () const;
-		bool InsertEdge (int iIndex0, int iIndex1);
-		bool RemoveEdge (int iIndex0, int iIndex1);
-		
-		// Traverse the graph and extract the isolated vertices, filaments, and
-		// minimal cycles.  See MinimalCycleBasis.pdf for the details.
-		
-		enum PrimitiveType
-		{
-			PT_ISOLATED_VERTEX,
-			PT_FILAMENT,
-			PT_MINIMAL_CYCLE
-		};
-		
-		class Primitive
-		{
-		public:
-			Primitive (PrimitiveType type);
-			
-			PrimitiveType Type;
-			std::vector<std::pair<Point2,int> > Sequence;
-		};
-		
-		// The extraction of primitives destroys the graph.  If you need the
-		// graph to persist, make a copy of it and call this function from the
-		// copy.
-		void ExtractPrimitives (std::vector<Primitive*>& primitives);
-		
-	protected:
-		// For sorting of the heap of vertex pointers.
-		class VertexPtr
-		{
-		public:
-			VertexPtr (Vertex* vertex);
-			
-			inline operator Vertex* ()
-			{
-				return mVertex;
-			}
-			
-			// Lexicographical ordering of vertices.  The query (x0,y0) < (x1,y1)
-			// is true iff ((x0 < x1) || ((x0 == x1) && (y0 < y1))).
-			bool operator< (const VertexPtr& vertexPtr) const;
-			
-		private:
-			Vertex* mVertex;
-		};
-		
-		void SetCycleEdge (int index0, int index1, bool cycleEdge);
-		bool GetCycleEdge (int index0, int index1) const;
-		
-		void ExtractIsolatedVertex (Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives);
-		
-		void ExtractFilament (Vertex* V0, Vertex* V1,  std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives);
-		
-		void ExtractPrimitive (Vertex* V0, std::set<VertexPtr>& heap,   std::vector<Primitive*>& primitives);
-		
-		Vertex* GetClockwiseMost (Vertex* VPrev, Vertex* VCurr);
-		Vertex* GetCounterclockwiseMost (Vertex* VPrev, Vertex* VCurr);
-		
-		Vertices mVertices;
-		Edges mEdges;
-	};
+    template <typename Point2>
+    class PlanarGraph
+    {
+    public:
+        using ClassType = PlanarGraph<Point2>;
+
+    public:
+        PlanarGraph() noexcept;
+        virtual ~PlanarGraph() noexcept = default;
+        PlanarGraph(const PlanarGraph& rhs) = default;
+        PlanarGraph& operator=(const PlanarGraph& rhs) = default;
+        PlanarGraph(PlanarGraph&& rhs) noexcept = default;
+        PlanarGraph& operator=(PlanarGraph&& rhs) noexcept = default;
+
+        CLASS_INVARIANT_DECLARE;
+
+        class Vertex
+        {
+        public:
+            Vertex(const Point2& position, int index) noexcept;
+
+            void Insert(const std::shared_ptr<Vertex>& adjacentVertex);
+            void Remove(const std::shared_ptr<Vertex>& adjacentVertex);
+
+            Point2 position;
+
+            int index;
+
+            std::vector<std::weak_ptr<Vertex>> adjacent;
+        };
+
+        using Vertices = std::map<int, std::shared_ptr<Vertex>>;
+        using Edges = std::map<EdgeKey, bool>;
+
+        NODISCARD const Vertices& GetVertices() const noexcept;
+        NODISCARD std::shared_ptr<Vertex> GetVertex(int iIndex) const;
+        bool InsertVertex(const Point2& position, int iIndex);
+        bool RemoveVertex(int iIndex);
+
+        NODISCARD const Edges& GetEdges() const noexcept;
+        bool InsertEdge(int iIndex0, int iIndex1);
+        bool RemoveEdge(int iIndex0, int iIndex1);
+
+        enum class PrimitiveType
+        {
+            IsolatedVertex,
+            Filament,
+            MinimalCycle
+        };
+
+        class Primitive
+        {
+        public:
+            explicit Primitive(PrimitiveType type) noexcept;
+
+            PrimitiveType primitiveType;
+            std::vector<std::pair<Point2, int>> sequence;
+        };
+
+        NODISCARD std::vector<std::shared_ptr<Primitive>> ExtractPrimitives();
+
+    protected:
+        class VertexPtr
+        {
+        public:
+            explicit VertexPtr(const std::shared_ptr<Vertex>& vertex) noexcept;
+
+            NODISCARD std::shared_ptr<Vertex> Get() noexcept;
+
+            NODISCARD bool operator<(const VertexPtr& vertexPtr) const;
+
+        private:
+            std::shared_ptr<Vertex> vertex;
+        };
+
+        void SetCycleEdge(int index0, int index1, bool cycleEdge);
+        NODISCARD bool GetCycleEdge(int index0, int index1) const;
+
+        void ExtractIsolatedVertex(const std::shared_ptr<Vertex>& v0, std::set<VertexPtr>& heap, std::vector<std::shared_ptr<Primitive>>& primitives);
+
+        void ExtractFilament(std::shared_ptr<Vertex> v0, std::shared_ptr<Vertex> v1, std::set<VertexPtr>& heap, std::vector<std::shared_ptr<Primitive>>& primitives);
+
+        void ExtractPrimitive(std::shared_ptr<Vertex> v0, std::set<VertexPtr>& heap, std::vector<std::shared_ptr<Primitive>>& primitives);
+
+        NODISCARD std::shared_ptr<Vertex> GetClockwiseMost(const std::shared_ptr<Vertex>& vPrev, const std::shared_ptr<Vertex>& vCurr);
+        NODISCARD std::shared_ptr<Vertex> GetCounterclockwiseMost(const std::shared_ptr<Vertex>& vPrev, const std::shared_ptr<Vertex>& vCurr);
+
+    private:
+        Vertices vertices;
+        Edges edges;
+    };
 }
 
-#endif // MATHEMATICS_MESHES_PLANAR_GRAPH_H
+#endif  // MATHEMATICS_MESHES_PLANAR_GRAPH_H

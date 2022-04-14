@@ -1,13 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 14:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/07 14:08)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_DETAIL_H
 
 #include "ConvexHull3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3InformationDetail.h"
 #include "Mathematics/Query/Query3Filtered.h"
 #include "Mathematics/Query/Query3Int64.h"
 #include "Mathematics/Query/Query3Integer.h"
@@ -17,119 +22,117 @@
 #include <stack>
 
 template <typename Real>
-Mathematics::ConvexHull3<Real>::ConvexHull3(const std::vector<Vector3<Real>>& vertices, Real epsilon, bool bOwner, QueryType eQueryType)
-    : ConvexHull<Real>{ vertices.size(), epsilon, bOwner, eQueryType }, m_LineOrigin{ Vector3<Real>::sm_Zero },
-      m_LineDirection{ Vector3<Real>::sm_Zero }, mPlaneOrigin{ Vector3<Real>::sm_Zero }
+Mathematics::ConvexHull3<Real>::ConvexHull3(const Vertices& vertices, Real epsilon, QueryType queryType)
+    : ParentType{ boost::numeric_cast<int>(vertices.size()), epsilon, queryType },
+      vertices{ vertices },
+      sVertices{},
+      query{},
+      lineOrigin{},
+      lineDirection{},
+      planeOrigin{},
+      planeDirection{},
+      hull{}
 {
-    mVertices = vertices;
-    mPlaneDirection[0] = Vector3<Real>::sm_Zero;
-    mPlaneDirection[1] = Vector3<Real>::sm_Zero;
+    Init();
 
-    mQuery = 0;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-    Vector3Information<Real> info{ mVertices, epsilon };
+template <typename Real>
+void Mathematics::ConvexHull3<Real>::Init()
+{
+    Vector3Information<Real> info{ vertices, this->GetEpsilon() };
     if (info.GetDimension() == 0)
     {
-        // The values of mDimension and mIndices were already initialized by
-        // the ConvexHull base class.
         return;
     }
 
     if (info.GetDimension() == 1)
     {
-        // The set is (nearly) collinear.  The caller is responsible for
-        // creating a ConvexHull1 object.
-        mDimension = 1;
-        m_LineOrigin = info.GetOrigin();
-        m_LineDirection = info.GetDirectionX();
+        this->SetDimension(1);
+        lineOrigin = info.GetOrigin();
+        lineDirection = info.GetDirectionX();
+
         return;
     }
 
     if (info.GetDimension() == 2)
     {
-        // The set is (nearly) coplanar.  The caller is responsible for
-        // creating a ConvexHull2 object.
-        mDimension = 2;
-        mPlaneOrigin = info.GetOrigin();
-        mPlaneDirection[0] = info.GetDirectionX();
-        mPlaneDirection[1] = info.GetDirectionY();
+        this->SetDimension(2);
+        planeOrigin = info.GetOrigin();
+        planeDirection.at(0) = info.GetDirectionX();
+        planeDirection.at(1) = info.GetDirectionY();
+
         return;
     }
 
-    mDimension = 3;
+    this->SetDimension(3);
 
-    auto i0 = info.GetMinExtremeIndex();
-    auto i1 = info.GetPerpendicularExtremeIndex();
-    auto i2 = info.GetTetrahedronExtremeIndex();
-    auto i3 = info.GetMaxExtremeIndex();
+    const auto i0 = info.GetMinExtremeIndex();
+    const auto i1 = info.GetPerpendicularExtremeIndex();
+    const auto i2 = info.GetTetrahedronExtremeIndex();
+    const auto i3 = info.GetMaxExtremeIndex();
 
-    mSVertices.resize(mNumVertices);
-    int i;
+    const auto mNumVertices = this->GetNumVertices();
+    const auto eQueryType = this->GetQueryType();
+    sVertices.resize(mNumVertices);
 
     if (eQueryType != QueryType::Rational && eQueryType != QueryType::Filtered)
     {
-        // Transform the vertices to the cube [0,1]^3.
-        auto minValue = info.GetMinExtreme();
-        auto scale = (Math::GetValue(1)) / info.GetMaxRange();
-        for (i = 0; i < mNumVertices; ++i)
+        const auto minValue = info.GetMinExtreme();
+        const auto scale = Math::GetValue(1) / info.GetMaxRange();
+        for (auto i = 0; i < mNumVertices; ++i)
         {
-            mSVertices[i] = (mVertices[i] - minValue) * scale;
+            sVertices.at(i) = (vertices.at(i) - minValue) * scale;
         }
 
-        Real expand;
+        Real expand{};
         if (eQueryType == QueryType::Int64)
         {
-            // Scale the vertices to the square [0,2^{20}]^2 to allow use of
-            // 64-bit integers.
-            expand = (Real)(1 << 20);
-            // mQuery = NEW0 Query3Int64<Real>(mSVertices);
+            expand = Math::GetValue(1 << 20);
+            query = std::make_shared<Query3Int64<Real>>(sVertices);
         }
         else if (eQueryType == QueryType::Interger)
         {
-            // Scale the vertices to the square [0,2^{24}]^2 to allow use of
-            // Integer.
-            expand = (Real)(1 << 24);
-            // mQuery = NEW0 Query3Integer<Real>(mSVertices);
+            expand = Math::GetValue(1 << 24);
+            query = std::make_shared<Query3Integer<Real>>(sVertices);
         }
-        else  // eQueryType == Query::QT_REAL
+        else
         {
-            // No scaling for floating point.
             expand = Math::GetValue(1);
-            // mQuery = NEW0 Query3<Real>(mSVertices);
+            query = std::make_shared<Query3>(sVertices);
         }
 
-        for (i = 0; i < mNumVertices; ++i)
+        for (auto i = 0; i < mNumVertices; ++i)
         {
-            mSVertices[i] *= expand;
+            sVertices.at(i) *= expand;
         }
     }
     else
     {
-        // No transformation needed for exact rational arithmetic or filtered
-        // predicates.
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector3<Real>));
+        sVertices = vertices;
 
         if (eQueryType == QueryType::Rational)
         {
-            // mQuery = NEW0 Query3Rational<Real>(mSVertices);
+            query = std::make_shared<Query3Rational<Real>>(sVertices);
         }
-        else  // eQueryType == Query::QT_FILTERED
+        else
         {
-            // mQuery = NEW0 Query3Filtered<Real>(mSVertices, mEpsilon);
+            query = std::make_shared<Query3Filtered<Real>>(sVertices, this->GetEpsilon());
         }
     }
 
-    Triangle* tri0;
-    Triangle* tri1;
-    Triangle* tri2;
-    Triangle* tri3;
+    TriangleSharedPtr tri0{};
+    TriangleSharedPtr tri1{};
+    TriangleSharedPtr tri2{};
+    TriangleSharedPtr tri3{};
 
     if (info.IsExtremeCCW())
     {
-        //         tri0 = NEW0 Triangle(i0, i1, i3);
-        //         tri1 = NEW0 Triangle(i0, i2, i1);
-        //         tri2 = NEW0 Triangle(i0, i3, i2);
-        //         tri3 = NEW0 Triangle(i1, i2, i3);
+        tri0 = std::make_shared<Triangle>(i0, i1, i3);
+        tri1 = std::make_shared<Triangle>(i0, i2, i1);
+        tri2 = std::make_shared<Triangle>(i0, i3, i2);
+        tri3 = std::make_shared<Triangle>(i1, i2, i3);
         tri0->AttachTo(tri1, tri3, tri2);
         tri1->AttachTo(tri2, tri3, tri0);
         tri2->AttachTo(tri0, tri3, tri1);
@@ -137,23 +140,23 @@ Mathematics::ConvexHull3<Real>::ConvexHull3(const std::vector<Vector3<Real>>& ve
     }
     else
     {
-        //         tri0 = NEW0 Triangle(i0, i3, i1);
-        //         tri1 = NEW0 Triangle(i0, i1, i2);
-        //         tri2 = NEW0 Triangle(i0, i2, i3);
-        //         tri3 = NEW0 Triangle(i1, i3, i2);
+        tri0 = std::make_shared<Triangle>(i0, i3, i1);
+        tri1 = std::make_shared<Triangle>(i0, i1, i2);
+        tri2 = std::make_shared<Triangle>(i0, i2, i3);
+        tri3 = std::make_shared<Triangle>(i1, i3, i2);
         tri0->AttachTo(tri2, tri3, tri1);
         tri1->AttachTo(tri0, tri3, tri2);
         tri2->AttachTo(tri1, tri3, tri0);
         tri3->AttachTo(tri0, tri2, tri1);
     }
 
-    mHull.clear();
-    mHull.insert(tri0);
-    mHull.insert(tri1);
-    mHull.insert(tri2);
-    mHull.insert(tri3);
+    hull.clear();
+    hull.insert(tri0);
+    hull.insert(tri1);
+    hull.insert(tri2);
+    hull.insert(tri3);
 
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < mNumVertices; ++i)
     {
         if (!Update(i))
         {
@@ -166,162 +169,201 @@ Mathematics::ConvexHull3<Real>::ConvexHull3(const std::vector<Vector3<Real>>& ve
 }
 
 template <typename Real>
-Mathematics::ConvexHull3<Real>::~ConvexHull3()
+Mathematics::Vector3<Real> Mathematics::ConvexHull3<Real>::GetLineOrigin() const noexcept
 {
-    //DELETE0(mQuery);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetLineOrigin() const
+Mathematics::Vector3<Real> Mathematics::ConvexHull3<Real>::GetLineDirection() const noexcept
 {
-    return m_LineOrigin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineDirection;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetLineDirection() const
+Mathematics::Vector3<Real> Mathematics::ConvexHull3<Real>::GetPlaneOrigin() const noexcept
 {
-    return m_LineDirection;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return planeOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetPlaneOrigin() const
+Mathematics::Vector3<Real> Mathematics::ConvexHull3<Real>::GetPlaneDirection(int i) const
 {
-    return mPlaneOrigin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return planeDirection.at(i);
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetPlaneDirection(int i) const
+Mathematics::ConvexHull1<Real> Mathematics::ConvexHull3<Real>::GetConvexHull1() const
 {
-    return mPlaneDirection[i];
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-template <typename Real>
-Mathematics::ConvexHull1<Real>* Mathematics::ConvexHull3<Real>::GetConvexHull1() const
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 1)
     {
-        return 0;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为1。"));
     }
 
-    //auto projection = NEW1<Real>(mNumVertices);
-    for (int i = 0; i < mNumVertices; ++i)
-    {
-        auto diff = mVertices[i] - m_LineOrigin;
-        //projection[i] = Vector3Tools<Real>::DotProduct(m_LineDirection, diff);
-    }
-
-    return nullptr;  //    NEW0 ConvexHull1<Real>(mNumVertices, projection, mEpsilon, true, mQueryType);
-}
-
-template <typename Real>
-Mathematics::ConvexHull2<Real>* Mathematics::ConvexHull3<Real>::GetConvexHull2() const
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
-    {
-        return 0;
-    }
-
-    std::vector<Vector2<Real>> projection(mNumVertices);
+    const auto mNumVertices = this->GetNumVertices();
+    typename ConvexHull1::Vertices projection{};
     for (auto i = 0; i < mNumVertices; ++i)
     {
-        auto diff = mVertices[i] - mPlaneOrigin;
-        projection[i][0] = Vector3Tools<Real>::DotProduct(mPlaneDirection[0], diff);
-        projection[i][1] = Vector3Tools<Real>::DotProduct(mPlaneDirection[1], diff);
+        auto diff = vertices.at(i) - lineOrigin;
+        projection.emplace_back(Vector3Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    return nullptr;  //    NEW0 ConvexHull2<Real>(projection, mEpsilon, true, mQueryType);
+    return ConvexHull1{ projection, this->GetEpsilon(), this->GetQueryType() };
 }
 
 template <typename Real>
-Mathematics::ConvexHull3<Real>::ConvexHull3(const System::TChar* filename)
-    : ConvexHull<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{}, mSVertices{}, mQuery{ 0 }
+Mathematics::ConvexHull2<Real> Mathematics::ConvexHull3<Real>::GetConvexHull2() const
 {
-    bool loaded = Load(filename);
-    MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
+    }
+
+    const auto numVertices = this->GetNumVertices();
+    typename ConvexHull2::Vertices projection(numVertices);
+    for (auto i = 0; i < numVertices; ++i)
+    {
+        auto diff = vertices.at(i) - planeOrigin;
+        projection.at(i)[0] = Vector3Tools<Real>::DotProduct(planeDirection.at(0), diff);
+        projection.at(i)[1] = Vector3Tools<Real>::DotProduct(planeDirection.at(1), diff);
+    }
+
+    return ConvexHull2{ projection, this->GetEpsilon(), this->GetQueryType() };
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull3<Real>::Load(const System::TChar* filename)
+Mathematics::ConvexHull3<Real>::ConvexHull3(const String& filename)
+    : ParentType{ 0, Math::GetValue(0), QueryType::Real },
+      vertices{},
+      sVertices{},
+      query{},
+      lineOrigin{},
+      lineDirection{},
+      planeOrigin{},
+      planeDirection{},
+      hull{}
 {
+    LoadFile(filename);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ConvexHull3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::ConvexHull3<Real>::LoadFile(const String& filename)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
     CoreTools::ReadFileManager inFile{ filename };
 
-    ConvexHull<Real>::Load(inFile);
+    if (!ParentType::Load(inFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("加载文件失败\n"));
+    }
 
-    //  DELETE0(mQuery);
+    const auto numVertices = this->GetNumVertices();
+    vertices.resize(numVertices);
+    sVertices.resize(numVertices);
 
-    mOwner = true;
-    mVertices.resize(mNumVertices);
-    mSVertices.resize(mNumVertices);
+    const auto size = Vector3::pointSize * numVertices;
 
-    inFile.Read(sizeof(Real), 3 * mNumVertices, &mVertices[0]);
-    inFile.Read(sizeof(Real), 3 * mNumVertices, &mSVertices[0]);
-    inFile.Read(sizeof(Real), 3, &m_LineOrigin);
-    inFile.Read(sizeof(Real), 3, &m_LineDirection);
-    inFile.Read(sizeof(Real), 3, &mPlaneOrigin);
-    inFile.Read(sizeof(Real), 6, mPlaneDirection);
+    inFile.Read(sizeof(Real), size, vertices.data());
+    inFile.Read(sizeof(Real), size, sVertices.data());
+    inFile.Read(sizeof(Real), Vector3::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector3::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector3::pointSize, &planeOrigin);
+    inFile.Read(sizeof(Real), Vector3::pointSize * 2, planeDirection.data());
 
-    switch (mQueryType)
+    switch (this->GetQueryType())
     {
         case QueryType::Int64:
         {
-            // mQuery = NEW0 Query3Int64<Real>(mSVertices);
+            query = std::make_shared<Query3Int64<Real>>(sVertices);
             break;
         }
         case QueryType::Interger:
         {
-            //  mQuery = NEW0 Query3Integer<Real>(mSVertices);
+            query = std::make_shared<Query3Integer<Real>>(sVertices);
             break;
         }
         case QueryType::Rational:
         {
-            //  mQuery = NEW0 Query3Rational<Real>(mSVertices);
+            query = std::make_shared<Query3Rational<Real>>(sVertices);
             break;
         }
         case QueryType::Real:
         {
-            //  mQuery = NEW0 Query3<Real>(mSVertices);
+            query = std::make_shared<Query3>(sVertices);
             break;
         }
         case QueryType::Filtered:
         {
-            //  mQuery = NEW0 Query3Filtered<Real>(mSVertices,            mEpsilon);
+            query = std::make_shared<Query3Filtered<Real>>(sVertices, this->GetEpsilon());
             break;
         }
     }
-
-    return true;
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull3<Real>::Save(const System::TChar* filename) const
+void Mathematics::ConvexHull3<Real>::SaveFile(const String& filename) const
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
     CoreTools::WriteFileManager outFile{ filename };
-    ConvexHull<Real>::Save(outFile);
 
-    outFile.Write(sizeof(Real), 3 * mNumVertices, &mVertices[0]);
-    outFile.Write(sizeof(Real), 3 * mNumVertices, &mSVertices[0]);
-    outFile.Write(sizeof(Real), 3, &m_LineOrigin);
-    outFile.Write(sizeof(Real), 3, &m_LineDirection);
-    outFile.Write(sizeof(Real), 3, &mPlaneOrigin);
-    outFile.Write(sizeof(Real), 6, mPlaneDirection);
+    if (!ParentType::Save(outFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("保存文件失败\n"));
+    }
 
-    return true;
+    const auto numVertices = this->GetNumVertices();
+
+    const auto size = Vector3::pointSize * numVertices;
+
+    outFile.Write(sizeof(Real), size, vertices.data());
+    outFile.Write(sizeof(Real), size, sVertices.data());
+    outFile.Write(sizeof(Real), Vector3::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector3::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector3::pointSize, &planeOrigin);
+    outFile.Write(sizeof(Real), Vector3::pointSize * 2, planeDirection.data());
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull3<Real>::Update(int i)
+bool Mathematics::ConvexHull3<Real>::Update(int32_t i)
 {
-    // Locate a triangle visible to the input point (if possible).
-    Triangle* visible = 0;
-    Triangle* tri;
-    auto iter = mHull.begin();
-    auto end = mHull.end();
-    for (; iter != end; ++iter)
+    TriangleSharedPtr visible{};
+
+    for (const auto& tri : hull)
     {
-        tri = *iter;
-        if (tri->GetSign(i, mQuery) > 0)
+        if (0 < System::EnumCastUnderlying(tri->GetSign(i, *query)))
         {
             visible = tri;
             break;
@@ -330,188 +372,169 @@ bool Mathematics::ConvexHull3<Real>::Update(int i)
 
     if (!visible)
     {
-        // The point is inside the current hull; nothing to do.
         return true;
     }
 
-    // Locate and remove the visible triangles.
-    std::stack<Triangle*> visibleSet;
-    std::map<int, TerminatorData> terminator;
-    visibleSet.push(visible);
-    visible->OnStack = true;
-    int j, v0, v1;
+    std::stack<TriangleSharedPtr> visibleSet{};
+    std::map<int, TerminatorData> terminator{};
+    visibleSet.emplace(visible);
+    visible->onStack = true;
+
     while (!visibleSet.empty())
     {
-        tri = visibleSet.top();
+        TriangleSharedPtr tri = visibleSet.top();
         visibleSet.pop();
-        tri->OnStack = false;
-        for (j = 0; j < 3; ++j)
+        tri->onStack = false;
+        for (auto j = 0; j < 3; ++j)
         {
-            Triangle* adj = tri->Adj[j];
+            auto adj = tri->triangle.at(j).lock();
             if (adj)
             {
-                // Detach triangle and adjacent triangle from each other.
-                int nullIndex = tri->DetachFrom(j, adj);
+                const auto nullIndex = tri->DetachFrom(j, adj);
 
-                if (adj->GetSign(i, mQuery) > 0)
+                if (0 < System::EnumCastUnderlying(adj->GetSign(i, *query)))
                 {
-                    if (!adj->OnStack)
+                    if (!adj->onStack)
                     {
-                        // Adjacent triangle is visible.
-                        visibleSet.push(adj);
-                        adj->OnStack = true;
+                        visibleSet.emplace(adj);
+                        adj->onStack = true;
                     }
                 }
                 else
                 {
-                    // Adjacent triangle is invisible.
-                    v0 = tri->V[j];
-                    v1 = tri->V[(j + 1) % 3];
-                    terminator[v0] = TerminatorData(v0, v1, nullIndex, adj);
+                    auto v0 = tri->v.at(j);
+                    auto v1 = tri->v.at((j + 1) % 3);
+                    terminator[v0] = TerminatorData{ v0, v1, nullIndex, adj };
                 }
             }
         }
-        mHull.erase(tri);
-        DELETE0(tri);
+
+        hull.erase(tri);
     }
 
-    // Insert the new edges formed by the input point and the terminator
-    // between visible and invisible triangles.
-    int size = (int)terminator.size();
-    MATHEMATICS_ASSERTION_0(size >= 3, "Terminator must be at least a triangle\n");
+    const auto size = boost::numeric_cast<int>(terminator.size());
+    MATHEMATICS_ASSERTION_0(3 <= size, "Terminator必须至少是一个三角形。\n");
+
     auto edge = terminator.begin();
-    v0 = edge->second.V[0];
-    v1 = edge->second.V[1];
-  //  tri = NEW0 Triangle(i, v0, v1);
-    mHull.insert(tri);
+    auto v0 = edge->second.v.at(0);
+    auto v1 = edge->second.v.at(1);
+    auto tri = std::make_shared<Triangle>(i, v0, v1);
+    hull.emplace(tri);
 
-    // Save information for linking first/last inserted new triangles.
-    auto saveV0 = edge->second.V[0];
-    Triangle* saveTri = tri;
+    auto saveV0 = edge->second.v.at(0);
+    auto saveTri = tri;
 
-    // Establish adjacency links across terminator edge.
-    tri->Adj[1] = edge->second.T;
-    edge->second.T->Adj[edge->second.NullIndex] = tri;
-    for (j = 1; j < size; ++j)
+    tri->triangle.at(1) = edge->second.t;
+    edge->second.t.lock()->triangle.at(edge->second.nullIndex) = tri;
+    for (auto j = 1; j < size; ++j)
     {
         edge = terminator.find(v1);
-        MATHEMATICS_ASSERTION_0(edge != terminator.end(), "Unexpected condition\n");
+        if (edge == terminator.cend())
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("意外情况\n"));
+        }
+
         v0 = v1;
-        v1 = edge->second.V[1];
-      //  Triangle* next = NEW0 Triangle(i, v0, v1);
-      //  mHull.insert(next);
+        v1 = edge->second.v.at(1);
+        auto next = std::make_shared<Triangle>(i, v0, v1);
+        hull.emplace(next);
 
-        // Establish adjacency links across terminator edge.
-      //  next->Adj[1] = edge->second.T;
-      //  edge->second.T->Adj[edge->second.NullIndex] = next;
+        next->triangle.at(1) = edge->second.t.lock();
+        edge->second.t.lock()->triangle.at(edge->second.nullIndex) = next;
 
-        // Establish adjacency links with previously inserted triangle.
-    //    next->Adj[0] = tri;
-       // tri->Adj[2] = next;
+        next->triangle.at(0) = tri;
+        tri->triangle.at(2) = next;
 
-       // tri = next;
+        tri = next;
     }
-    MATHEMATICS_ASSERTION_0(v1 == saveV0, "Expecting initial vertex\n");
 
-    // Establish adjacency links between first/last triangles.
-    saveTri->Adj[0] = tri;
-    tri->Adj[2] = saveTri;
+    MATHEMATICS_ASSERTION_0(v1 == saveV0, "期望初始顶点\n");
+
+    saveTri->triangle.at(0) = tri;
+    tri->triangle.at(2) = saveTri;
+
     return true;
 }
 
 template <typename Real>
 void Mathematics::ConvexHull3<Real>::ExtractIndices()
 {
-    mNumSimplices = (int)mHull.size();
-//    mIndices = NEW1<int>(3 * mNumSimplices);
+    this->SetNumSimplices(boost::numeric_cast<int>(hull.size()));
 
-    auto iter = mHull.begin();
-    auto end = mHull.end();
-    for (auto i = 0; iter != end; ++iter)
+    for (const auto& tri : hull)
     {
-        auto tri = *iter;
-        for (int j = 0; j < 3; ++j, ++i)
+        for (int j = 0; j < 3; ++j)
         {
-            mIndices[i] = tri->V[j];
+            this->AddIndex(tri->v.at(j));
         }
-        DELETE0(tri);
     }
-    mHull.clear();
+    hull.clear();
 }
 
 template <typename Real>
-void Mathematics::ConvexHull3<Real>::DeleteHull()
+void Mathematics::ConvexHull3<Real>::DeleteHull() noexcept
 {
-    auto iter = mHull.begin();
-    auto end = mHull.end();
-    for (/**/; iter != end; ++iter)
-    {
-        Triangle* tri = *iter;
-        DELETE0(tri);
-    }
-    mHull.clear();
+    hull.clear();
 }
 
 // ConvexHull3::Triangle
 
 template <typename Real>
-Mathematics::ConvexHull3<Real>::Triangle ::Triangle(int v0, int v1, int v2)
-    : Sign{ 0 }, Time{ -1 }, OnStack{ false }
+Mathematics::ConvexHull3<Real>::Triangle::Triangle(int32_t v0, int32_t v1, int32_t v2)
+    : v{ v0, v1, v2 }, triangle{}, sign{ 0 }, time{ -1 }, onStack{ false }
 {
-    V[0] = v0;
-    V[1] = v1;
-    V[2] = v2;
-    Adj[0] = 0;
-    Adj[1] = 0;
-    Adj[2] = 0;
 }
 
 template <typename Real>
-int Mathematics::ConvexHull3<Real>::Triangle ::GetSign(int i, const Query3<Real>* query)
+Mathematics::PlaneQueryType Mathematics::ConvexHull3<Real>::Triangle::GetSign(int32_t i, const Query3& query)
 {
-    if (i != Time)
+    if (i != time)
     {
-        Time = i;
-        Sign = query->ToPlane(i, V[0], V[1], V[2]);
+        time = i;
+        sign = query.ToPlane(i, v.at(0), v.at(1), v.at(2));
     }
 
-    return Sign;
+    return sign;
 }
 
 template <typename Real>
-void Mathematics::ConvexHull3<Real>::Triangle ::AttachTo(Triangle* adj0, Triangle* adj1, Triangle* adj2)
+void Mathematics::ConvexHull3<Real>::Triangle::AttachTo(const TriangleSharedPtr& adj0, const TriangleSharedPtr& adj1, const TriangleSharedPtr& adj2)
 {
-    // assert:  The input adjacent triangles are correctly ordered.
-    Adj[0] = adj0;
-    Adj[1] = adj1;
-    Adj[2] = adj2;
+    triangle.at(0) = adj0;
+    triangle.at(1) = adj1;
+    triangle.at(2) = adj2;
 }
 
 template <typename Real>
-int Mathematics::ConvexHull3<Real>::Triangle ::DetachFrom(int adjIndex, Triangle* adj)
+int Mathematics::ConvexHull3<Real>::Triangle::DetachFrom(int32_t adjIndex, const TriangleSharedPtr& adj)
 {
-    MATHEMATICS_ASSERTION_0(0 <= adjIndex && adjIndex < 3 && Adj[adjIndex] == adj, "Invalid inputs\n");
+    MATHEMATICS_ASSERTION_0(0 <= adjIndex && adjIndex < 3 && triangle.at(adjIndex).lock() == adj, "无效输入。\n");
 
-    Adj[adjIndex] = 0;
-    for (int i = 0; i < 3; ++i)
+    triangle.at(adjIndex).reset();
+    for (auto i = 0; i < 3; ++i)
     {
-        if (adj->Adj[i] == this)
+        if (adj->triangle.at(i).lock() == this->shared_from_this())
         {
-            adj->Adj[i] = 0;
+            adj->triangle.at(i).reset();
             return i;
         }
     }
+
     return -1;
 }
 
 // ConvexHull3::TerminatorData
 
 template <typename Real>
-Mathematics::ConvexHull3<Real>::TerminatorData ::TerminatorData(int v0, int v1, int nullIndex, Triangle* tri)
-    : NullIndex{ nullIndex }, T{ tri }
+Mathematics::ConvexHull3<Real>::TerminatorData::TerminatorData() noexcept
+    : v{ -1, -1 }, nullIndex{ -1 }, t{}
 {
-    V[0] = v0;
-    V[1] = v1;
+}
+
+template <typename Real>
+Mathematics::ConvexHull3<Real>::TerminatorData::TerminatorData(int32_t v0, int32_t v1, int32_t nullIndex, const TriangleWeakPtr& tri) noexcept
+    : v{ v0, v1 }, nullIndex{ nullIndex }, t{ tri }
+{
 }
 
 #endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL3_DETAIL_H

@@ -6,13 +6,12 @@
 
 #include "Toolset/Rendering/RenderingToolset/RenderingToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-RenderingToolset::Placeholder
-	::Placeholder() 
+RenderingToolset::Placeholder::Placeholder() noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(RenderingToolset, Placeholder)

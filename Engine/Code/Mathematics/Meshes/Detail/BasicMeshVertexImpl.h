@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 16:24)
 
 #ifndef MATHEMATICS_MESHES_BASIC_BESH_VERTEX_IMPL_H
 #define MATHEMATICS_MESHES_BASIC_BESH_VERTEX_IMPL_H
@@ -17,25 +20,24 @@ namespace Mathematics
     {
     public:
         using ClassType = BasicMeshVertexImpl;
-        
+
     public:
-        BasicMeshVertexImpl(MAYBE_UNUSED int count) noexcept;
-        
+        BasicMeshVertexImpl() noexcept;
+
         CLASS_INVARIANT_DECLARE;
-        
-        int GetVertex(int index) const;
-        int GetEdge(int index) const;
-        int GetTriangle(int index) const;    
-        
-        void InsertEdge (int vertex, int edge);
-        void InsertTriangle (int triangle0);
-        
-    private:        
-        std::vector<int> m_Vertex;
-        std::vector<int> m_Edge;
-        std::vector<int> triangle;
+
+        NODISCARD int GetVertex(int index) const;
+        NODISCARD int GetEdge(int index) const;
+        NODISCARD int GetTriangle(int index) const;
+
+        void InsertEdge(int vertex, int edge);
+        void InsertTriangle(int triangle);
+
+    private:
+        std::vector<int> vertices;
+        std::vector<int> edges;
+        std::vector<int> triangles;
     };
 }
 
-#endif // MATHEMATICS_MESHES_BASIC_BESH_VERTEX_IMPL_H
-
+#endif  // MATHEMATICS_MESHES_BASIC_BESH_VERTEX_IMPL_H

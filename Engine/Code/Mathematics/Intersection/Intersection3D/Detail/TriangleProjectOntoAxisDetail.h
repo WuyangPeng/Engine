@@ -33,7 +33,7 @@ void Mathematics::TriangleProjectOntoAxis<Real>::Project(const Triangle3& triang
                    Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(1)),
                    Vector3Tools<Real>::DotProduct(axis, triangle.GetVertex(2)) };
 
-    auto minmaxElement = minmax_element(dot.begin(), dot.end());
+    const auto minmaxElement = minmax_element(dot.begin(), dot.end());
 
     min = *minmaxElement.first;
     max = *minmaxElement.second;

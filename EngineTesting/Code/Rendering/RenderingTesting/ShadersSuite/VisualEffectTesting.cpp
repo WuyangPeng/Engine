@@ -14,10 +14,11 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 
 
-#include <boost/lexical_cast.hpp>
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 
 using std::string;
-
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26409)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, VisualEffectTesting) 
 
 void Rendering::VisualEffectTesting

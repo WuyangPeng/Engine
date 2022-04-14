@@ -123,20 +123,22 @@ Rendering::VisualEffectInstance* Rendering::LightDirPerPixEffect::CreateInstance
 }
 
 Rendering::VisualEffectInstance* Rendering::LightDirPerPixEffect::CreateUniqueInstance(
-    Light* light, Material* material)
+    Light* light, Material* material) noexcept
 {
-    const LightDirPerPixEffect* effect =  nullptr;  // CoreTools::New0<LightDirPerPixEffect>();
-    return effect->CreateInstance(light, material);
+    light;
+    material;
+    // const LightDirPerPixEffect* effect =  nullptr;  // CoreTools::New0<LightDirPerPixEffect>();
+    return nullptr;  //  effect->CreateInstance(light, material);
 }
 
 // Streaming support.
 
-Rendering::LightDirPerPixEffect ::LightDirPerPixEffect(LoadConstructor value)
+Rendering::LightDirPerPixEffect::LightDirPerPixEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::LightDirPerPixEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::LightDirPerPixEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -145,12 +147,12 @@ void Rendering::LightDirPerPixEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightDirPerPixEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::LightDirPerPixEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightDirPerPixEffect ::PostLink()
+void Rendering::LightDirPerPixEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -182,12 +184,12 @@ void Rendering::LightDirPerPixEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::LightDirPerPixEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightDirPerPixEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightDirPerPixEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightDirPerPixEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -196,7 +198,7 @@ void Rendering::LightDirPerPixEffect ::Save(CoreTools::BufferTarget& target) con
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightDirPerPixEffect ::GetStreamingSize() const
+int Rendering::LightDirPerPixEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

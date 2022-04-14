@@ -89,7 +89,7 @@ void Rendering::AlphaStateTesting
 	 ASSERT_APPROXIMATE(secondAlphaState.GetReference(),0.51f,1e-8f);
 	 ASSERT_APPROXIMATE(firstAlphaState.GetReference(),0.5f,1e-8f);
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::AlphaStateTesting
 	::StreamTest()
 {

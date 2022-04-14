@@ -39,7 +39,7 @@ namespace Rendering
         //   w=0 face:  (u,v) in [0,1]^2, origin at vertex (0,0,0)
         //   w=1 face:  (u,v) in [0,1]^2, origin at vertex (0,0,1)
 
-        BoxSurface(Mathematics::BSplineVolumef* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6]);
+        BoxSurface(Mathematics::BSplineVolume<float>* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6]);
 
         ~BoxSurface();
 
@@ -49,7 +49,7 @@ namespace Rendering
         BoxSurface& operator=(BoxSurface&&) = default;
 
         // Member access.
-        const Mathematics::BSplineVolumef* GetVolume() const noexcept;
+        const Mathematics::BSplineVolume<float>* GetVolume() const noexcept;
         int GetNumUSamples() const noexcept;
         int GetNumVSamples() const noexcept;
         int GetNumWSamples() const noexcept;
@@ -74,7 +74,7 @@ namespace Rendering
 
         void UpdateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, bool ccw, float faceValue, int permute[3]);
 
-        Mathematics::BSplineVolumef* mVolume;
+        Mathematics::BSplineVolume<float>* mVolume;
         int mNumUSamples, mNumVSamples, mNumWSamples;
         bool mDoSort;
     };

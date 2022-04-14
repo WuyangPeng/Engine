@@ -1,267 +1,284 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 15:46)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE2_DETAIL_H
 
 #include "BSplineCurve2.h"
-
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
-
-
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26429)
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::BSplineCurve2<Real>
-	::BSplineCurve2 (int numCtrlPoints,const Vector2<Real>* ctrlPoint, int degree, bool loop, bool open)
-	:SingleCurve2<Real>{ Math::GetValue(0), Math::GetValue(1) }, mLoop{ loop }, mCtrlPoint{}
+Mathematics::BSplineCurve2<Real>::BSplineCurve2(const std::vector<Vector2<Real>>& ctrlPoint, int degree, bool loop, bool open)
+    : ParentType{ Math::GetValue(0), Math::GetValue(1) },
+      numCtrlPoints{ boost::numeric_cast<int>(ctrlPoint.size()) },
+      loop{ loop },
+      ctrlPoint{},
+      basis{},
+      replicate{ (loop ? (open ? 1 : degree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "无效输入。\n");
 
-    mNumCtrlPoints = numCtrlPoints;
-    mReplicate = (loop ? (open ? 1 : degree) : 0);
     CreateControl(ctrlPoint);
-    mBasis.Create(mNumCtrlPoints+mReplicate, degree, open);
+    basis.Create(numCtrlPoints + replicate, degree, open);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-Mathematics::BSplineCurve2<Real>
-	::BSplineCurve2 (int numCtrlPoints,const Vector2<Real>* ctrlPoint, int degree, bool loop, const Real* knot)
-	:SingleCurve2<Real>(Math ::GetValue(0), Math::GetValue(1)), mLoop(loop), mCtrlPoint{}
+Mathematics::BSplineCurve2<Real>::BSplineCurve2(const std::vector<Vector2<Real>>& ctrlPoint, int degree, bool loop, const std::vector<Real>& knot)
+    : ParentType(Math ::GetValue(0), Math::GetValue(1)),
+      numCtrlPoints{ boost::numeric_cast<int>(ctrlPoint.size()) },
+      loop(loop),
+      ctrlPoint{},
+      basis{},
+      replicate{ (loop ? 1 : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "无效输入。\n");
 
-    mNumCtrlPoints = numCtrlPoints;
-    mReplicate = (loop ? 1 : 0);
     CreateControl(ctrlPoint);
-    mBasis.Create(mNumCtrlPoints + mReplicate, degree, knot);
+    basis.Create(numCtrlPoints + replicate, degree, knot);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+
+#ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-Mathematics::BSplineCurve2<Real>
-	::~BSplineCurve2 ()
+bool Mathematics::BSplineCurve2<Real>::IsValid() const noexcept
 {
-	EXCEPTION_TRY
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-  //DELETE1(mCtrlPoint);
-#include STSTEM_WARNING_POP
+    return true;
 }
-EXCEPTION_ALL_CATCH(Mathematics)  
-   
-}
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void Mathematics::BSplineCurve2<Real>
-	::CreateControl (const Vector2<Real>* ctrlPoint)
+void Mathematics::BSplineCurve2<Real>::CreateControl(const std::vector<Vector2<Real>>& newCtrlPoint)
 {
-	const auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-  //  mCtrlPoint = NEW1<Vector2<Real> >(newNumCtrlPoints);
-    memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector2<Real>));
+    const auto newNumCtrlPoints = numCtrlPoints + replicate;
 
-    for (auto i = 0; i < mReplicate; ++i)
+    ctrlPoint.resize(newNumCtrlPoints);
+
+    for (auto i = 0; i < replicate; ++i)
     {
-        mCtrlPoint[mNumCtrlPoints + i] = ctrlPoint[i];
+        const auto index = numCtrlPoints + i;
+        ctrlPoint.at(index) = newCtrlPoint.at(i);
     }
 }
 
 template <typename Real>
-int Mathematics::BSplineCurve2<Real>
-	::GetNumCtrlPoints () const noexcept
+int Mathematics::BSplineCurve2<Real>::GetNumCtrlPoints() const noexcept
 {
-    return mNumCtrlPoints;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numCtrlPoints;
 }
 
 template <typename Real>
-int Mathematics::BSplineCurve2<Real>
-	::GetDegree () const noexcept
+int Mathematics::BSplineCurve2<Real>::GetDegree() const noexcept
 {
-    return mBasis.GetDegree();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.GetDegree();
 }
 
 template <typename Real>
-bool Mathematics::BSplineCurve2<Real>
-	::IsOpen () const noexcept
+bool Mathematics::BSplineCurve2<Real>::IsOpen() const noexcept
 {
-    return mBasis.IsOpen();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.IsOpen();
 }
 
 template <typename Real>
-bool Mathematics::BSplineCurve2<Real>
-	::IsUniform () const noexcept
+bool Mathematics::BSplineCurve2<Real>::IsUniform() const noexcept
 {
-    return mBasis.IsUniform();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.IsUniform();
 }
 
 template <typename Real>
-bool Mathematics::BSplineCurve2<Real>
-	::IsLoop () const noexcept
+bool Mathematics::BSplineCurve2<Real>::IsLoop() const noexcept
 {
-    return mLoop;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return loop;
 }
 
 template <typename Real>
-void Mathematics::BSplineCurve2<Real>
-	::SetControlPoint (int i, const Vector2<Real>& ctrl) noexcept
+void Mathematics::BSplineCurve2<Real>::SetControlPoint(int i, const Vector2<Real>& ctrl)
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (0 <= i && i < numCtrlPoints)
     {
-        // Set the control point.
-        mCtrlPoint[i] = ctrl;
+        ctrlPoint.at(i) = ctrl;
 
-        // Set the replicated control point.
-        if (i < mReplicate)
+        if (i < replicate)
         {
-            mCtrlPoint[mNumCtrlPoints + i] = ctrl;
+            const auto index = numCtrlPoints + i;
+            ctrlPoint.at(index) = ctrl;
         }
     }
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
-	::GetControlPoint (int i) const noexcept
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>::GetControlPoint(int i) const
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (0 <= i && i < numCtrlPoints)
     {
-        return mCtrlPoint[i];
+        return ctrlPoint.at(i);
     }
 
     return Vector2<Real>{ Math::maxReal, Math::maxReal };
 }
 
 template <typename Real>
-void Mathematics::BSplineCurve2<Real>
-	::SetKnot (int i, Real knot)
+void Mathematics::BSplineCurve2<Real>::SetKnot(int i, Real knot)
 {
-    mBasis.SetKnot(i, knot);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    basis.SetKnot(i, knot);
 }
 
 template <typename Real>
-Real Mathematics::BSplineCurve2<Real>
-	::GetKnot (int i) const
+Real Mathematics::BSplineCurve2<Real>::GetKnot(int i) const
 {
-    return mBasis.GetKnot(i);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.GetKnot(i);
 }
 
 template <typename Real>
-void Mathematics::BSplineCurve2<Real>
-	::Get (Real t, Vector2<Real>* pos, Vector2<Real>* der1, Vector2<Real>* der2, Vector2<Real>* der3) const
+void Mathematics::BSplineCurve2<Real>::Get(Real t, Vector2<Real>* pos, Vector2<Real>* der1, Vector2<Real>* der2, Vector2<Real>* der3) const
 {
-    int i = 0, imin = 0, imax = 0;
-    if (der3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto imin = 0;
+    auto imax = 0;
+    if (der3 != nullptr)
     {
-        mBasis.Compute(t, 0, imin, imax);
-        mBasis.Compute(t, 1, imin, imax);
-        mBasis.Compute(t, 2, imin, imax);
-        mBasis.Compute(t, 3, imin, imax);
+        basis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 1, imin, imax);
+        basis.Compute(t, 2, imin, imax);
+        basis.Compute(t, 3, imin, imax);
     }
-    else if (der2)
+    else if (der2 != nullptr)
     {
-        mBasis.Compute(t, 0, imin, imax);
-        mBasis.Compute(t, 1, imin, imax);
-        mBasis.Compute(t, 2, imin, imax);
+        basis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 1, imin, imax);
+        basis.Compute(t, 2, imin, imax);
     }
-    else if (der1)
+    else if (der1 != nullptr)
     {
-        mBasis.Compute(t, 0, imin, imax);
-        mBasis.Compute(t, 1, imin, imax);
+        basis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 1, imin, imax);
     }
-    else  // pos
+    else
     {
-        mBasis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 0, imin, imax);
     }
 
-    if (pos)
+    if (pos != nullptr)
     {
         *pos = Vector2<Real>::GetZero();
-        for (i = imin; i <= imax; ++i)
+        for (auto i = imin; i <= imax; ++i)
         {
-            *pos += mCtrlPoint[i]*mBasis.GetD0(i);
+            *pos += ctrlPoint.at(i) * basis.GetD0(i);
         }
     }
 
     if (der1)
     {
         *der1 = Vector2<Real>::GetZero();
-        for (i = imin; i <= imax; ++i)
+        for (auto i = imin; i <= imax; ++i)
         {
-            *der1 += mCtrlPoint[i]*mBasis.GetD1(i);
+            *der1 += ctrlPoint.at(i) * basis.GetD1(i);
         }
     }
 
     if (der2)
     {
         *der2 = Vector2<Real>::GetZero();
-        for (i = imin; i <= imax; ++i)
+        for (auto i = imin; i <= imax; ++i)
         {
-            *der2 += mCtrlPoint[i]*mBasis.GetD2(i);
+            *der2 += ctrlPoint.at(i) * basis.GetD2(i);
         }
     }
 
     if (der3)
     {
         *der3 = Vector2<Real>::GetZero();
-        for (i = imin; i <= imax; ++i)
+        for (auto i = imin; i <= imax; ++i)
         {
-            *der3 += mCtrlPoint[i]*mBasis.GetD3(i);
+            *der3 += ctrlPoint.at(i) * basis.GetD3(i);
         }
     }
 }
 
 template <typename Real>
-Mathematics::BSplineBasis<Real>& Mathematics::BSplineCurve2<Real>
-	::GetBasis () noexcept
+Mathematics::BSplineBasis<Real>& Mathematics::BSplineCurve2<Real>::GetBasis() noexcept
 {
-    return mBasis;
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    return basis;
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
-	::GetPosition (Real t) const
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>::GetPosition(Real t) const
 {
-    Vector2<Real> pos;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector2<Real> pos{};
     Get(t, &pos, 0, 0, 0);
+
     return pos;
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
-	::GetFirstDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>::GetFirstDerivative(Real t) const
 {
-    Vector2<Real> der1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector2<Real> der1{};
     Get(t, 0, &der1, 0, 0);
+
     return der1;
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
-	::GetSecondDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>::GetSecondDerivative(Real t) const
 {
-    Vector2<Real> der2;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector2<Real> der2{};
     Get(t, 0, 0, &der2, 0);
+
     return der2;
 }
 
 template <typename Real>
-Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
-	::GetThirdDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>::GetThirdDerivative(Real t) const
 {
-    Vector2<Real> der3;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector2<Real> der3{};
     Get(t, 0, 0, 0, &der3);
+
     return der3;
 }
-#include STSTEM_WARNING_POP
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE2_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE2_DETAIL_H

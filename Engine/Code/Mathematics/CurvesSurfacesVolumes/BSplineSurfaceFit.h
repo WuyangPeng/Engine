@@ -1,61 +1,55 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 15:32)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_SURFACE_FIT_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_SURFACE_FIT_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "BSplineFitBasis.h" 
-#include "Mathematics/Algebra/Vector3.h"
+#include "BSplineFitBasis.h"
 #include "Mathematics/Algebra/BandedMatrix.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class BSplineSurfaceFit
-	{
-	public:
-		// Construction and destruction.  The preconditions for calling the
-		// constructor are
-		//   1 <= degree0 && degree0 + 1 < numControls0 <= numSamples0
-		//   1 <= degree1 && degree1 + 1 < numControls1 <= numSamples1
-		BSplineSurfaceFit(int degree0, int numControls0, int numSamples0,int degree1, int numControls1, int numSamples1,Vector3<Real>** samples);
+    template <typename Real>
+    class BSplineSurfaceFit
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		~BSplineSurfaceFit();
+        using ClassType = BSplineSurfaceFit<Real>;
 
-		// Access to input sample information.
-		int GetSampleQuantity(int i) const;
-		Vector3<Real>** GetSamplePoints() const;
+    public:
+        BSplineSurfaceFit(int degree0, int numControls0, int numSamples0, int degree1, int numControls1, int numSamples1, const std::vector<std::vector<Vector3<Real>>>& samples);
 
-		// Access to output control point and surface information.
-		int GetDegree(int i) const;
-		int GetControlQuantity(int i) const;
-		Vector3<Real>** GetControlPoints() const;
-		const BSplineFitBasis<Real>& GetBasis(int i) const;
+        CLASS_INVARIANT_DECLARE;
 
-		// Evaluation of the B-spline surface.  It is defined for 0 <= u <= 1
-		// and 0 <= v <= 1.  If a parameter value is outside [0,1], it is clamped
-		// to [0,1].
-		Vector3<Real> GetPosition(Real u, Real v) const;
+        NODISCARD int GetSampleQuantity(int i) const;
+        NODISCARD std::vector<std::vector<Vector3<Real>>> GetSamplePoints() const;
 
-	private:
-		// Input sample information.
-		int mNumSamples[2];
-		Vector3<Real>** mSamples;
+        NODISCARD int GetDegree(int i) const;
+        NODISCARD int GetControlQuantity(int i) const;
+        NODISCARD std::vector<std::vector<Vector3<Real>>> GetControlPoints() const;
+        NODISCARD const BSplineFitBasis<Real>& GetBasis(int i) const;
 
-		// The fitted B-spline surface, open and with uniform knots.
-		int mDegree[2];
-		int mNumControls[2];
-		Vector3<Real>** mControls;
-		BSplineFitBasis<Real>* mBasis[2];
-	};
+        NODISCARD Vector3<Real> GetPosition(Real u, Real v) const;
 
-	using BSplineSurfaceFitf = BSplineSurfaceFit<float>;
-	using BSplineSurfaceFitd = BSplineSurfaceFit<double>;
+    private:
+        std::array<int, 2> numSamples;
+        std::vector<std::vector<Vector3<Real>>> samples;
+
+        std::array<int, 2> degree;
+        std::array<int, 2> numControls;
+        std::vector<std::vector<Vector3<Real>>> controls;
+        std::array<std::shared_ptr<BSplineFitBasis<Real>>, 2> basis;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_SURFACE_FIT_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_SURFACE_FIT_H

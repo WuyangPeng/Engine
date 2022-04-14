@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 21:30)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORMN_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORMN_H
@@ -13,57 +16,35 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpBSplineUniformN	: public IntpBSplineUniform<Real>
-	{
-	public:
-		// Construction and destruction.  IntpBSplineUniformN accepts
-		// responsibility for deleting the input array data.  The input array
-		// dim is copied.
-		IntpBSplineUniformN(int dims, int degree, const int* dim, Real* data);
-		virtual ~IntpBSplineUniformN();
+    template <typename Real>
+    class IntpBSplineUniformN : public IntpBSplineUniform<Real>
+    {
+    public:
+        using ClassType = IntpBSplineUniformN<Real>;
+        using ParentType = IntpBSplineUniform<Real>;
 
-		int Index(int* I) const;
+    public:
+        IntpBSplineUniformN(int dims, int degree, const std::vector<int>& dim, const std::vector<Real>& data);
 
-		// Spline evaluation for function interpolation (no derivatives).
-		virtual Real operator() (Real* X);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Spline evaluation, derivative counts given in dx[].
-		virtual Real operator() (int* dx, Real* X);
+        NODISCARD int Index(const std::vector<int>& i) const;
 
-	private:
-		using IntpBSplineUniform<Real>::mDims;
-		using IntpBSplineUniform<Real>::mDegree;
-		using IntpBSplineUniform<Real>::mDp1;
-		using IntpBSplineUniform<Real>::mDp1ToN;
-		using IntpBSplineUniform<Real>::mDim;
-		using IntpBSplineUniform<Real>::mData;
-		using IntpBSplineUniform<Real>::mGridMin;
-		using IntpBSplineUniform<Real>::mGridMax;
-		using IntpBSplineUniform<Real>::mBase;
-		using IntpBSplineUniform<Real>::mOldBase;
-		using IntpBSplineUniform<Real>::mMatrix;
-		using IntpBSplineUniform<Real>::mCache;
-		using IntpBSplineUniform<Real>::mInter;
-		using IntpBSplineUniform<Real>::mPoly;
-		using IntpBSplineUniform<Real>::mProduct;
-		using IntpBSplineUniform<Real>::mSkip;
-		using IntpBSplineUniform<Real>::mEvaluateCallback;
-		using IntpBSplineUniform<Real>::SetPolynomial;
+        NODISCARD Real operator()(const std::vector<Real>& x) override;
+        NODISCARD Real operator()(const std::vector<int>& dx, const std::vector<Real>& x) override;
 
-		int* mEvI;
-		int* mCiLoop;
-		int* mCiDelta;
-		int* mOpI;
-		int* mOpJ;
-		int* mOpDelta;
+    private:
+        void EvaluateUnknownData() override;
+        void ComputeIntermediate() override;
 
-		void EvaluateUnknownData();
-		void ComputeIntermediate();
-	};
-
-	using IntpBSplineUniformNf = IntpBSplineUniformN<float>;
-	using IntpBSplineUniformNd = IntpBSplineUniformN<double>;
+    private:
+        std::vector<int> evI;
+        std::vector<int> ciLoop;
+        std::vector<int> ciDelta;
+        std::vector<int> opI;
+        std::vector<int> opJ;
+        std::vector<int> opDelta;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORMN_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORMN_H

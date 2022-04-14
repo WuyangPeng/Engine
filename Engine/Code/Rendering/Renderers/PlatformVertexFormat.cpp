@@ -13,13 +13,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Rendering::PlatformVertexFormat ::PlatformVertexFormat(Renderer* renderer, const VertexFormat* vertexFormat)
+Rendering::PlatformVertexFormat::PlatformVertexFormat(Renderer* renderer, const VertexFormat* vertexFormat)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, vertexFormat }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PlatformVertexFormat ::~PlatformVertexFormat()
+Rendering::PlatformVertexFormat::~PlatformVertexFormat()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

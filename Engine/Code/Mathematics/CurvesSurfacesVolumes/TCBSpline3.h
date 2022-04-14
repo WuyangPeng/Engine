@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 21:19)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_H
@@ -13,60 +16,63 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class   TCBSpline3 : public MultipleCurve3<Real>
-	{
-	public:
-		// Construction and destruction.  TCBSpline3 accepts responsibility for
-		// deleting the input arrays.
-		TCBSpline3(int numSegments, Real* times, Vector3<Real>* points, Real* tension, Real* continuity, Real* bias);
+    template <typename Real>
+    class TCBSpline3 : public MultipleCurve3<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		virtual ~TCBSpline3();
+        using ClassType = TCBSpline3<Real>;
+        using ParentType = MultipleCurve3<Real>;
 
-		const Vector3<Real>* GetPoints() const;
-		const Real* GetTensions() const;
-		const Real* GetContinuities() const;
-		const Real* GetBiases() const;
+    public:
+        TCBSpline3(int numSegments,
+                   const std::vector<Real>& times,
+                   const std::vector<Vector3<Real>>& points,
+                   const std::vector<Real>& tension,
+                   const std::vector<Real>& continuity,
+                   const std::vector<Real>& bias);
 
-		virtual Vector3<Real> GetPosition(Real t) const;
-		virtual Vector3<Real> GetFirstDerivative(Real t) const;
-		virtual Vector3<Real> GetSecondDerivative(Real t) const;
-		virtual Vector3<Real> GetThirdDerivative(Real t) const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	protected:
-		using MultipleCurve3<Real>::mNumSegments;
-		using MultipleCurve3<Real>::mTimes;
-		using MultipleCurve3<Real>::GetKeyInfo;
-		using MultipleCurve3<Real>::GetSpeedWithData;
+        NODISCARD std::vector<Vector3<Real>> GetPoints() const;
+        NODISCARD std::vector<Real> GetTensions() const;
+        NODISCARD std::vector<Real> GetContinuities() const;
+        NODISCARD std::vector<Real> GetBiases() const;
 
-		void ComputePoly(int i0, int i1, int i2, int i3);
+        NODISCARD Vector3<Real> GetPosition(Real t) const override;
+        NODISCARD Vector3<Real> GetFirstDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetSecondDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetThirdDerivative(Real t) const override;
 
-		virtual Real GetSpeedKey(int key, Real t) const;
-		virtual Real GetLengthKey(int key, Real t0, Real t1) const;
+    protected:
+        void ComputePoly(int i0, int i1, int i2, int i3);
 
-		Vector3<Real>* mPoints;
-		Real* mTension;
-		Real* mContinuity;
-		Real* mBias;
-		Vector3<Real>* mA;
-		Vector3<Real>* mB;
-		Vector3<Real>* mC;
-		Vector3<Real>* mD;
+        NODISCARD Real GetSpeedKey(int key, Real t) const override;
+        NODISCARD Real GetLengthKey(int key, Real t0, Real t1) const override;
 
-		class   SplineKey
-		{
-		public:
-			SplineKey(const TCBSpline3* spline, int key);
+    private:
+        class SplineKey
+        {
+        public:
+            SplineKey(const TCBSpline3* spline, int key) noexcept;
 
-			const TCBSpline3* Spline;
-			int Key;
-		};
+            const TCBSpline3* spline;
+            int key;
+        };
 
-		static Real GetSpeedWithDataKey(Real t, const SplineKey* data);
-	};
+        static Real GetSpeedWithDataKey(Real t, const SplineKey* data);
 
-	using TCBSpline3f = TCBSpline3<float>;
-	using TCBSpline3d = TCBSpline3<double>;
+    private:
+        std::vector<Vector3<Real>> points;
+        std::vector<Real> tension;
+        std::vector<Real> continuity;
+        std::vector<Real> bias;
+        std::vector<Vector3<Real>> a;
+        std::vector<Vector3<Real>> b;
+        std::vector<Vector3<Real>> c;
+        std::vector<Vector3<Real>> d;
+    };
 }
- 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_H
+
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_H

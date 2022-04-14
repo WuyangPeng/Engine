@@ -7,23 +7,23 @@
 #ifndef SOUND_EFFECT_TOOLSET_PLACEHOLDER_H
 #define SOUND_EFFECT_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/SoundEffect/SoundEffectToolset/SoundEffectToolsetDll.h" 
+#include "Toolset/SoundEffect/SoundEffectToolset/SoundEffectToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace SoundEffectToolset
 {
-	 class SOUND_EFFECT_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class SOUND_EFFECT_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // SOUND_EFFECT_TOOLSET_PLACEHOLDER_H
+#endif  // SOUND_EFFECT_TOOLSET_PLACEHOLDER_H

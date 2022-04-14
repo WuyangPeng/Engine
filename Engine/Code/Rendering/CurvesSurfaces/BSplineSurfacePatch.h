@@ -29,7 +29,7 @@ namespace Rendering
         // the input arrays if they were dynamically allocated.  Internal copies
         // of the arrays are made, so to dynamically change control points or
         // knots you must use the 'SetControlPoint' and 'SetKnot' member functions
-        // of BSplineRectanglef.  Spline types for curves are
+        // of BSplineRectangle<float>.  Spline types for curves are
         //   open uniform (OU)
         //   periodic uniform (PU)
         //   open nonuniform (ON)
@@ -64,6 +64,7 @@ namespace Rendering
         const AVector GetDerivativesUV(float u, float v) const override;
         const AVector GetDerivativesVV(float u, float v) const override;
         ObjectInterfaceSharedPtr CloneObject() const override;
+
     protected:
         // The class has four constructors, not counting the default one used
         // for streaming.  The correct constructor needs to be called on a stream
@@ -72,13 +73,13 @@ namespace Rendering
         // constructors listed previously.
         int mConstructor;
 
-        Mathematics::BSplineRectanglef* mPatch;
+        //Mathematics::BSplineRectangle<float> mPatch;
     };
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(BSplineSurfacePatch);
-    CORE_TOOLS_SHARED_PTR_DECLARE( BSplineSurfacePatch);
+    CORE_TOOLS_SHARED_PTR_DECLARE(BSplineSurfacePatch);
 #include STSTEM_WARNING_POP
 }
 

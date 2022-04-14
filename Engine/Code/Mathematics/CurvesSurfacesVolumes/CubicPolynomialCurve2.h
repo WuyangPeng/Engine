@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 21:35)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE2_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE2_H
@@ -13,47 +16,40 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class   CubicPolynomialCurve2: public PolynomialCurve2<Real>
-	{
-	public:
-		// Construction and destruction.  CubicPolynomialCurve2 accepts
-		// responsibility for deleting the input polynomials.
-		CubicPolynomialCurve2(Polynomial<Real>* xPoly, Polynomial<Real>* yPoly);
-		virtual ~CubicPolynomialCurve2();
+    template <typename Real>
+    class CubicPolynomialCurve2 : public PolynomialCurve2<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		// Tessellation data.
-		int GetNumVertices() const;
-		const Vector2<Real>* GetVertices() const;
-		Vector2<Real>* GetVertices();
+        using ClassType = CubicPolynomialCurve2<Real>;
+        using ParentType = PolynomialCurve2<Real>;
+        using Math = ParentType::Math;
 
-		// Tessellation by recursive subdivision.
-		void Tessellate(int level);
+    public:
+        CubicPolynomialCurve2(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly);
 
-	protected:
-		using PolynomialCurve2<Real>::mTMin;
-		using PolynomialCurve2<Real>::mTMax;
-		using PolynomialCurve2<Real>::GetPosition;
-		using PolynomialCurve2<Real>::GetSecondDerivative;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Support for precomputation.
-		class   IntervalParameters
-		{
-		public:
-			int I0, I1;
-			Vector2<Real> Xuu[2];
-		};
+        NODISCARD int GetNumVertices() const;
+        NODISCARD std::vector<Vector2<Real>> GetVertices() const;
 
-		// Subdivide curve into two halves.
-		void Subdivide(int level, Real dsqr, Vector2<Real>* X, IntervalParameters& IP);
+        void Tessellate(int level);
 
-		// Tessellation data.
-		int mNumVertices;
-		Vector2<Real>* mVertices;
-	};
+    protected:
+        class IntervalParameters
+        {
+        public:
+            int i0;
+            int i1;
+            std::array<Vector2<Real>, 2> xuu;
+        };
 
-	using CubicPolynomialCurve2f = CubicPolynomialCurve2<float>;
-	using CubicPolynomialCurve2d = CubicPolynomialCurve2<double>;
+        void Subdivide(int level, Real dsqr, std::vector<Vector2<Real>>& x, IntervalParameters& ip);
+
+    private:
+        std::vector<Vector2<Real>> vertices;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE2_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE2_H

@@ -1,415 +1,447 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 14:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/07 10:52)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL2_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL2_DETAIL_H
 
+#include "ConvexHull1Detail.h"
 #include "ConvexHull2.h"
+#include "Mathematics/Algebra/Vector2InformationDetail.h"
 #include "Mathematics/Query/Query2Filtered.h"
 #include "Mathematics/Query/Query2Int64.h"
 #include "Mathematics/Query/Query2Integer.h"
 #include "Mathematics/Query/Query2Rational.h"
 
 template <typename Real>
-Mathematics::ConvexHull2<Real>::ConvexHull2(const std::vector<Vector2<Real>>& vertices, Real epsilon, bool owner, QueryType queryType)
-    : ConvexHull<Real>{ vertices.size(), epsilon, owner, queryType }, mVertices{ vertices }, mSVertices{}, mQuery{ 0 },
-      m_LineOrigin{ Vector2<Real>::sm_Zero }, m_LineDirection{ Vector2<Real>::sm_Zero }
+Mathematics::ConvexHull2<Real>::ConvexHull2(const Vertices& vertices, Real epsilon, QueryType queryType)
+    : ParentType{ boost::numeric_cast<int>(vertices.size()), epsilon, queryType },
+      vertices{ vertices },
+      sVertices{},
+      query{},
+      lineOrigin{},
+      lineDirection{}
 {
-    Vector2Information<Real> info{ mVertices, epsilon };
+    Init();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename Real>
+void Mathematics::ConvexHull2<Real>::Init()
+{
+    Vector2Information<Real> info{ vertices, this->GetEpsilon() };
     if (info.GetDimension() == 0)
     {
-        // The values of mDimension and mIndices were already initialized by
-        // the ConvexHull base class.
         return;
     }
 
     if (info.GetDimension() == 1)
     {
-        // The set is (nearly) collinear.  The caller is responsible for
-        // creating a ConvexHull1 object.
-        mDimension = 1;
-        m_LineOrigin = info.GetOrigin();
-        m_LineDirection = info.GetDirectionX();
+        this->SetDimension(1);
+        lineOrigin = info.GetOrigin();
+        lineDirection = info.GetDirectionX();
+
         return;
     }
 
-    mDimension = 2;
+    this->SetDimension(2);
 
     auto i0 = info.GetMinExtremeIndex();
     auto i1 = info.GetPerpendicularExtremeIndex();
     auto i2 = info.GetMaxExtremeIndex();
 
-    mSVertices.resize(mNumVertices);
-    int i;
+    const auto mNumVertices = this->GetNumVertices();
+    sVertices.resize(mNumVertices);
+
+    const auto queryType = this->GetQueryType();
 
     if (queryType != QueryType::Rational && queryType != QueryType::Filtered)
     {
-        // Transform the vertices to the square [0,1]^2.
-        auto minValue = info.GetMinExtreme();
-        auto scale = (Math::GetValue(1)) / info.GetMaxRange();
-        for (i = 0; i < mNumVertices; ++i)
+        const auto minValue = info.GetMinExtreme();
+        auto scale = Math::GetValue(1) / info.GetMaxRange();
+        for (auto i = 0; i < mNumVertices; ++i)
         {
-            mSVertices[i] = (mVertices[i] - minValue) * scale;
+            sVertices.at(i) = (vertices.at(i) - minValue) * scale;
         }
 
-        Real expand;
+        Real expand{};
         if (queryType == QueryType::Int64)
         {
-            // Scale the vertices to the square [0,2^{20}]^2 to allow use of
-            // 64-bit integers.
-            expand = (Real)(1 << 20);
-            //  mQuery = NEW0 Query2Int64<Real>(mSVertices);
+            expand = Math::GetValue(1 << 20);
+            query = std::make_shared<Query2Int64<Real>>(sVertices);
         }
         else if (queryType == QueryType::Interger)
         {
-            // Scale the vertices to the square [0,2^{24}]^2 to allow use of
-            // Integer.
-            expand = (Real)(1 << 24);
-            //mQuery = NEW0 Query2Integer<Real>(mSVertices);
+            expand = Math::GetValue(1 << 24);
+            query = std::make_shared<Query2Integer<Real>>(sVertices);
         }
-        else  // queryType == Query::QT_REAL
+        else
         {
-            // No scaling for floating point.
             expand = Math::GetValue(1);
-            //mQuery = NEW0 Query2<Real>(mSVertices);
+            query = std::make_shared<Query2>(sVertices);
         }
 
-        for (i = 0; i < mNumVertices; ++i)
+        for (auto i = 0; i < mNumVertices; ++i)
         {
-            mSVertices[i] *= expand;
+            sVertices.at(i) *= expand;
         }
     }
     else
     {
-        // No transformation needed for exact rational arithmetic or filtered
-        // predicates.
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector2<Real>));
+        sVertices = vertices;
 
         if (queryType == QueryType::Rational)
         {
-            //mQuery = NEW0 Query2Rational<Real>(mSVertices);
+            query = std::make_shared<Query2Rational<Real>>(sVertices);
         }
-        else  // queryType == Query::QT_FILTERED
+        else
         {
-            //mQuery = NEW0 Query2Filtered<Real>(mSVertices,mEpsilon);
+            query = std::make_shared<Query2Filtered<Real>>(sVertices, this->GetEpsilon());
         }
     }
 
-    Edge* edge0;
-    Edge* edge1;
-    Edge* edge2;
+    EdgeSharedPtr edge0{};
+    EdgeSharedPtr edge1{};
+    EdgeSharedPtr edge2{};
 
     if (info.IsExtremeCCW())
     {
-        //         edge0 = NEW0 Edge(i0, i1);
-        // 		edge1 = NEW0 Edge(i1, i2);
-        // 		edge2 = NEW0 Edge(i2, i0);
+        edge0 = std::make_shared<Edge>(i0, i1);
+        edge1 = std::make_shared<Edge>(i1, i2);
+        edge2 = std::make_shared<Edge>(i2, i0);
     }
     else
     {
-        // 		edge0 = NEW0 Edge(i0, i2);
-        // 		edge1 = NEW0 Edge(i2, i1);
-        // 		edge2 = NEW0 Edge(i1, i0);
+        edge0 = std::make_shared<Edge>(i0, i2);
+        edge1 = std::make_shared<Edge>(i2, i1);
+        edge2 = std::make_shared<Edge>(i1, i0);
     }
 
     edge0->Insert(edge2, edge1);
     edge1->Insert(edge0, edge2);
     edge2->Insert(edge1, edge0);
 
-    Edge* hull = edge0;
-    for (i = 0; i < mNumVertices; ++i)
+    auto hull = edge0;
+    for (auto i = 0; i < mNumVertices; ++i)
     {
-        if (!Update(hull, i))
+        const auto result = Update(i, hull);
+        if (!result.second)
         {
             hull->DeleteAll();
             return;
         }
+
+        hull = result.first;
     }
 
-    hull->GetIndices(mNumSimplices, mIndices);
+    this->SetIndex(hull->GetIndices());
     hull->DeleteAll();
 }
 
 template <typename Real>
-Mathematics::ConvexHull2<Real>::~ConvexHull2()
+Mathematics::Vector2<Real> Mathematics::ConvexHull2<Real>::GetLineOrigin() const noexcept
 {
-    DELETE0(mQuery);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>& Mathematics::ConvexHull2<Real>::GetLineOrigin() const
+Mathematics::Vector2<Real> Mathematics::ConvexHull2<Real>::GetLineDirection() const noexcept
 {
-    return m_LineOrigin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineDirection;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>& Mathematics::ConvexHull2<Real>::GetLineDirection() const
+Mathematics::ConvexHull1<Real> Mathematics::ConvexHull2<Real>::GetConvexHull1() const
 {
-    return m_LineDirection;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-template <typename Real>
-Mathematics::ConvexHull1<Real>* Mathematics::ConvexHull2<Real>::GetConvexHull1() const
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    const int dimension = this->GetDimension();
+
+    if (dimension != 1)
     {
-        return 0;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为1。"));
     }
 
-//     auto projection = NEW1<Real>(mNumVertices);
-//     for (auto i = 0; i < mNumVertices; ++i)
-//     {
-//         auto diff = mVertices[i] - m_LineOrigin;
-//         projection[i] = Vector2Tools<Real>::DotProduct(m_LineDirection, diff);
-//     }
+    typename ConvexHull1::Vertices projection{};
+    for (const auto& value : vertices)
+    {
+        auto diff = value - lineOrigin;
+        projection.emplace_back(Vector2Tools<Real>::DotProduct(lineDirection, diff));
+    }
 
-    return nullptr;
-    //NEW0 ConvexHull1<Real>(mNumVertices, projection, mEpsilon, true, mQueryType);
+    ConvexHull1 convexHull1(projection, this->GetEpsilon(), this->GetQueryType());
+
+    return convexHull1;
 }
 
 template <typename Real>
-Mathematics::ConvexHull2<Real>::ConvexHull2(const System::TChar* filename)
-    : ConvexHull<Real>{ Real{ 0 }, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{ 0 }, mSVertices{}, mQuery{ 0 }
+Mathematics::ConvexHull2<Real>::ConvexHull2(const String& filename)
+    : ParentType{ 0, Math::GetValue(0), QueryType::Real },
+      vertices{},
+      sVertices{},
+      query{},
+      lineOrigin{},
+      lineDirection{}
 {
-    auto loaded = Load(filename);
-    MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
+    LoadFile(filename);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-bool Mathematics::ConvexHull2<Real>::Load(const System::TChar* filename)
+bool Mathematics::ConvexHull2<Real>::IsValid() const noexcept
 {
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::ConvexHull2<Real>::LoadFile(const String& filename)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
     CoreTools::ReadFileManager inFile{ filename };
 
-    ConvexHull<Real>::Load(inFile);
+    if (!ParentType::Load(inFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("加载文件失败\n"));
+    }
 
-    //DELETE0(mQuery);
-    mSVertices.resize(0);
+    query.reset();
+    sVertices.resize(0);
 
-    mOwner = true;
-    mVertices.resize(mNumVertices);
-    mSVertices.resize(mNumVertices);
+    const auto numVertices = this->GetNumVertices();
 
-    inFile.Read(sizeof(Real), 2 * mNumVertices, &mVertices[0]);
-    inFile.Read(sizeof(Real), 2 * mNumVertices, &mSVertices[0]);
-    inFile.Read(sizeof(Real), 2, &m_LineOrigin);
-    inFile.Read(sizeof(Real), 2, &m_LineDirection);
+    vertices.resize(numVertices);
+    sVertices.resize(numVertices);
 
-    switch (mQueryType)
+    const auto size = Vector2::pointSize * numVertices;
+
+    inFile.Read(sizeof(Real), size, vertices.data());
+    inFile.Read(sizeof(Real), size, sVertices.data());
+    inFile.Read(sizeof(Real), Vector2::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector2::pointSize, &lineDirection);
+
+    switch (this->GetQueryType())
     {
         case QueryType::Int64:
         {
-         //   mQuery = NEW0 Query2Int64<Real>(mSVertices);
+            query = std::make_shared<Query2Int64<Real>>(sVertices);
             break;
         }
         case QueryType::Interger:
         {
-          //  mQuery = NEW0 Query2Integer<Real>(mSVertices);
+            query = std::make_shared<Query2Integer<Real>>(sVertices);
             break;
         }
         case QueryType::Rational:
         {
-           // mQuery = NEW0 Query2Rational<Real>(mSVertices);
+            query = std::make_shared<Query2Rational<Real>>(sVertices);
             break;
         }
         case QueryType::Real:
         {
-           // mQuery = NEW0 Query2<Real>(mSVertices);
+            query = std::make_shared<Query2>(sVertices);
             break;
         }
         case QueryType::Filtered:
         {
-          //  mQuery = NEW0 Query2Filtered<Real>(mSVertices, mEpsilon);
+            query = std::make_shared<Query2Filtered<Real>>(sVertices, this->GetEpsilon());
             break;
         }
     }
-
-    return true;
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull2<Real>::Save(const System::TChar* filename) const
+void Mathematics::ConvexHull2<Real>::SaveFile(const String& filename) const
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
     CoreTools::WriteFileManager outFile{ filename };
 
-    ConvexHull<Real>::Save(outFile);
+    if (!ParentType::Save(outFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("保存文件失败\n"));
+    }
 
-    outFile.Write(sizeof(Real), 2 * mNumVertices, &mVertices[0]);
-    outFile.Write(sizeof(Real), 2 * mNumVertices, &mSVertices[0]);
-    outFile.Write(sizeof(Real), 2, &m_LineOrigin);
-    outFile.Write(sizeof(Real), 2, &m_LineDirection);
+    const auto numVertices = this->GetNumVertices();
 
-    return true;
+    const auto size = Vector2::pointSize * numVertices;
+
+    outFile.Write(sizeof(Real), size, vertices.data());
+    outFile.Write(sizeof(Real), size, sVertices.data());
+    outFile.Write(sizeof(Real), Vector2::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector2::pointSize, &lineDirection);
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull2<Real>::Update(Edge*& hull, int i)
+typename Mathematics::ConvexHull2<Real>::Result Mathematics::ConvexHull2<Real>::Update(int i, const EdgeSharedPtr& edg)
 {
-    // Locate an edge visible to the input point (if possible).
-    Edge* visible = 0;
-    Edge* current = hull;
+    auto hull = edg;
+    EdgeSharedPtr visible{};
+    auto current = hull;
     do
     {
-        if (current->GetSign(i, mQuery) > 0)
+        if (0 < System::EnumCastUnderlying(current->GetSign(i, *query)))
         {
             visible = current;
             break;
         }
 
-        current = current->E[1];
+        current = current->e.at(1).lock();
     } while (current != hull);
 
     if (!visible)
     {
-        // The point is inside the current hull; nothing to do.
-        return true;
+        return { hull, true };
     }
 
-    // Remove the visible edges.
-    Edge* adj0 = visible->E[0];
-    MATHEMATICS_ASSERTION_0(adj0 != 0, "Expecting nonnull adjacent\n");
+    auto adj0 = visible->e.at(0).lock();
+
     if (!adj0)
     {
-        return false;
+        return { hull, false };
     }
 
-    Edge* adj1 = visible->E[1];
-    MATHEMATICS_ASSERTION_0(adj1 != 0, "Expecting nonnull adjacent\n");
+    auto adj1 = visible->e.at(1).lock();
+
     if (!adj1)
     {
-        return false;
+        return { hull, false };
     }
 
     visible->DeleteSelf();
 
-    while (adj0->GetSign(i, mQuery) > 0)
+    while (0 < System::EnumCastUnderlying(adj0->GetSign(i, *query)))
     {
         hull = adj0;
-        adj0 = adj0->E[0];
-        MATHEMATICS_ASSERTION_0(adj0 != 0, "Expecting nonnull adjacent\n");
+        adj0 = adj0->e.at(0).lock();
+
         if (!adj0)
         {
-            return false;
+            return { hull, false };
         }
 
-        adj0->E[1]->DeleteSelf();
+        adj0->e.at(1).lock()->DeleteSelf();
     }
 
-    while (adj1->GetSign(i, mQuery) > 0)
+    while (0 < System::EnumCastUnderlying(adj1->GetSign(i, *query)))
     {
         hull = adj1;
-        adj1 = adj1->E[1];
-        MATHEMATICS_ASSERTION_0(adj1 != 0, "Expecting nonnull adjacent\n");
+        adj1 = adj1->e.at(1).lock();
+
         if (!adj1)
         {
-            return false;
+            return { hull, false };
         }
 
-        adj1->E[0]->DeleteSelf();
+        adj1->e.at(0).lock()->DeleteSelf();
     }
 
-    // Insert the new edges formed by the input point and the end points of
-    // the polyline of invisible edges.
-//     Edge* edge0 = NEW0 Edge(adj0->V[1], i);
-//     Edge* edge1 = NEW0 Edge(i, adj1->V[0]);
-//     edge0->Insert(adj0, edge1);
-//     edge1->Insert(edge0, adj1);
-//     hull = edge0;
+    auto edge0 = std::make_shared<Edge>(adj0->v.at(1), i);
+    auto edge1 = std::make_shared<Edge>(i, adj1->v.at(0));
+    edge0->Insert(adj0, edge1);
+    edge1->Insert(edge0, adj1);
 
-    return true;
+    return { edge0, true };
 }
 
 // ConvexHull2::Edge
 
 template <typename Real>
-Mathematics::ConvexHull2<Real>::Edge ::Edge(int v0, int v1)
-    : Sign{ 0 }, Time{ -1 }
+Mathematics::ConvexHull2<Real>::Edge::Edge(int32_t v0, int32_t v1)
+    : v{ v0, v1 }, e{}, sign{ LineQueryType::OnLine }, time{ -1 }
 {
-    V[0] = v0;
-    V[1] = v1;
-    E[0] = 0;
-    E[1] = 0;
 }
 
 template <typename Real>
-int Mathematics::ConvexHull2<Real>::Edge ::GetSign(int i, const Query2<Real>* query)
+Mathematics::LineQueryType Mathematics::ConvexHull2<Real>::Edge::GetSign(int32_t i, const Query2& query)
 {
-    if (i != Time)
+    if (i != time)
     {
-        Time = i;
-        Sign = query->ToLine(i, V[0], V[1]);
+        time = i;
+        sign = query.ToLine(i, v.at(0), v.at(1));
     }
 
-    return Sign;
+    return sign;
 }
 
 template <typename Real>
-void Mathematics::ConvexHull2<Real>::Edge ::Insert(Edge* adj0, Edge* adj1)
+void Mathematics::ConvexHull2<Real>::Edge::Insert(const EdgeSharedPtr& adj0, const EdgeSharedPtr& adj1)
 {
-    adj0->E[1] = this;
-    adj1->E[0] = this;
-    E[0] = adj0;
-    E[1] = adj1;
+    adj0->e.at(1) = this->shared_from_this();
+    adj1->e.at(0) = this->shared_from_this();
+    e.at(0) = adj0;
+    e.at(1) = adj1;
 }
 
 template <typename Real>
-void Mathematics::ConvexHull2<Real>::Edge ::DeleteSelf()
+void Mathematics::ConvexHull2<Real>::Edge::DeleteSelf()
 {
-    if (E[0])
+    if (e.at(0).lock())
     {
-        E[0]->E[1] = 0;
+        e.at(0).lock()->e.at(1).reset();
     }
 
-    if (E[1])
+    if (e.at(1).lock())
     {
-        E[1]->E[0] = 0;
+        e.at(1).lock()->e.at(0).reset();
     }
-
-    Edge* tmpThis = this;
-    DELETE0(tmpThis);
 }
 
 template <typename Real>
-void Mathematics::ConvexHull2<Real>::Edge ::DeleteAll()
+void Mathematics::ConvexHull2<Real>::Edge::DeleteAll()
 {
-    Edge* adj = E[1];
-    while (adj && adj != this)
+    auto adj = e.at(1).lock();
+    while (adj && adj != this->shared_from_this())
     {
-        Edge* save = adj->E[1];
-        DELETE0(adj);
+        auto save = adj->e.at(1).lock();
+
         adj = save;
     }
 
-    MATHEMATICS_ASSERTION_0(adj == this, "Unexpected condition\n");
-    Edge* tmpThis = this;
-    DELETE0(tmpThis);
+    MATHEMATICS_ASSERTION_0(adj == this->shared_from_this(), "意外情况。\n");
 }
 
 template <typename Real>
-void Mathematics::ConvexHull2<Real>::Edge ::GetIndices(int& numIndices, int*& indices)
+typename Mathematics::ConvexHull2<Real>::IndicesType Mathematics::ConvexHull2<Real>::Edge::GetIndices()
 {
-    // Count the number of edge vertices and allocate the index array.
-    numIndices = 0;
-    Edge* current = this;
+    auto numIndices = 0;
+    auto current = this->shared_from_this();
     do
     {
         ++numIndices;
-        current = current->E[1];
-    } while (current != this);
-    //indices = NEW1<int>(numIndices);
+        current = current->e.at(1).lock();
+    } while (current != this->shared_from_this());
 
-    // Fill the index array.
+    IndicesType indices(numIndices);
+
     numIndices = 0;
-    current = this;
+    current = this->shared_from_this();
     do
     {
-        indices[numIndices] = current->V[0];
+        indices.at(numIndices) = current->v.at(0);
         ++numIndices;
-        current = current->E[1];
-    } while (current != this);
+        current = current->e.at(1).lock();
+    } while (current != this->shared_from_this());
+
+    return indices;
 }
 
 #endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL2_DETAIL_H

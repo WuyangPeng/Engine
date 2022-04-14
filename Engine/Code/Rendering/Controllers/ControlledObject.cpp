@@ -34,7 +34,7 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ControlledObject);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ControlledObject);
 
 Rendering::ControlledObject
-    ::ControlledObject()
+::ControlledObject()
 	:ParentType{}, impl{}, m_Object{ nullptr }
 {
     impl = make_shared<ImplType>(this);
@@ -44,7 +44,7 @@ Rendering::ControlledObject
 
  
 Rendering::ControlledObject
-    ::ControlledObject(const ControlledObject& rhs)
+::ControlledObject(const ControlledObject& rhs)
 	:ParentType(rhs), impl{}, m_Object{ rhs.m_Object }
 {
 	impl = make_shared<ImplType>(this);
@@ -70,7 +70,7 @@ Rendering::ControlledObject& Rendering::ControlledObject
 	return *this;
 } 
 
-Rendering::ControlledObject ::ControlledObject(ControlledObject&& rhs) noexcept
+Rendering::ControlledObject::ControlledObject(ControlledObject&& rhs) noexcept
     : ParentType(std::move(rhs)), impl{ std::move(rhs.impl) }, m_Object{ std::move(rhs.m_Object) }
 {
    
@@ -78,7 +78,7 @@ Rendering::ControlledObject ::ControlledObject(ControlledObject&& rhs) noexcept
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ControlledObject& Rendering::ControlledObject ::operator=(ControlledObject&& rhs) noexcept
+Rendering::ControlledObject& Rendering::ControlledObject::operator=(ControlledObject&& rhs) noexcept
 {
 
 
@@ -109,14 +109,14 @@ void Rendering::ControlledObject
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControlledObject)
 
-const Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObject() const noexcept
+const Rendering::ControllerInterface* Rendering::ControlledObject::GetControllerObject() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_Object;
 }
 
-Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObject() noexcept
+Rendering::ControllerInterface* Rendering::ControlledObject::GetControllerObject() noexcept
 {
 	;
 
@@ -125,7 +125,7 @@ Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObjec
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,  Update, double,bool)
 
-void Rendering::ControlledObject ::SetObject(ControllerInterface* object) noexcept
+void Rendering::ControlledObject::SetObject(ControllerInterface* object) noexcept
 {
 	;
 
@@ -143,7 +143,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,UpdateContr
 
  
 Rendering::ControlledObject
-   ::ControlledObject (LoadConstructor value)
+::ControlledObject (LoadConstructor value)
 	:ParentType{ value }, impl{}
 {
 	impl = make_shared<ImplType>(this);
@@ -152,7 +152,7 @@ Rendering::ControlledObject
 }
 
 int Rendering::ControlledObject
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -165,7 +165,7 @@ int Rendering::ControlledObject
 	return size;
 }
 
-uint64_t Rendering::ControlledObject ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::ControlledObject::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -180,7 +180,7 @@ uint64_t Rendering::ControlledObject ::Register(CoreTools::ObjectRegister& targe
     return uniqueID;
 }
 
-void Rendering::ControlledObject ::Save(CoreTools::BufferTarget& target) const
+void Rendering::ControlledObject::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -196,7 +196,7 @@ void Rendering::ControlledObject ::Save(CoreTools::BufferTarget& target) const
 }
 
 void Rendering::ControlledObject
-    ::Link (CoreTools::ObjectLink& source)
+::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -212,14 +212,14 @@ void Rendering::ControlledObject
 }
 
 void Rendering::ControlledObject
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
 	ParentType::PostLink();
 }
 
-void Rendering::ControlledObject ::Load(CoreTools::BufferSource& source)
+void Rendering::ControlledObject::Load(CoreTools::BufferSource& source)
 {
 	;
     

@@ -1,170 +1,167 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 16:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 16:20)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VertexFormatElement.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/Helper/StreamMacro.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectInterface.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-Rendering::VertexFormatElement
-	::VertexFormatElement() noexcept
-	:m_StreamIndex{ 0 }, m_Offset{ 0 }, m_VertexFormatType{}
+Rendering::VertexFormatElement::VertexFormatElement() noexcept
+    : streamIndex{ 0 }, offset{ 0 }, vertexFormatType{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VertexFormatElement ::VertexFormatElement(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept
-    : m_StreamIndex{ streamIndex }, m_Offset{ offset }, m_VertexFormatType{ vertexFormatType }
+Rendering::VertexFormatElement::VertexFormatElement(int32_t streamIndex, int32_t offset, const VertexFormatType& vertexFormatType) noexcept
+    : streamIndex{ streamIndex }, offset{ offset }, vertexFormatType{ vertexFormatType }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,VertexFormatElement)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexFormatElement)
 
-unsigned int Rendering::VertexFormatElement ::GetStreamIndex() const noexcept
+int32_t Rendering::VertexFormatElement::GetStreamIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_StreamIndex;
+    return streamIndex;
 }
 
-void Rendering::VertexFormatElement ::SetStreamIndex(unsigned int streamIndex) noexcept
-{
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_StreamIndex = streamIndex;
-}
-
-unsigned int Rendering::VertexFormatElement ::GetOffset() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	return m_Offset;
-}
-
-void Rendering::VertexFormatElement ::SetOffset(unsigned int offset) noexcept
-{
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_Offset = offset;
-}
-
-Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatElement
-	::GetType() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	return m_VertexFormatType.GetType();
-}
-
-void Rendering::VertexFormatElement ::SetType(AttributeType type) noexcept
-{
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_VertexFormatType.SetType(type);
-}
-
-Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatElement ::GetUsage() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	return m_VertexFormatType.GetUsage();
-}
-
-void Rendering::VertexFormatElement ::SetUsage(AttributeUsage usage) noexcept
-{
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_VertexFormatType.SetUsage(usage);
-}
-
-unsigned int Rendering::VertexFormatElement ::GetUsageIndex() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	return m_VertexFormatType.GetUsageIndex();
-}
-
-void Rendering::VertexFormatElement ::SetUsageIndex(unsigned int usageIndex) noexcept
-{
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_VertexFormatType.SetUsageIndex(usageIndex);
-}
-
-int Rendering::VertexFormatElement ::GetStreamingSize() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	auto size = CORE_TOOLS_STREAM_SIZE(m_StreamIndex);
-	size += CORE_TOOLS_STREAM_SIZE(m_Offset);
-	size += m_VertexFormatType.GetStreamingSize();
-
-	return size;
-}
-
-void Rendering::VertexFormatElement
-	::Save( CoreTools::BufferTarget& target ) const 
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	target.Write(m_StreamIndex);
-	target.Write(m_Offset);
-	m_VertexFormatType.Save(target);
-}
-
-void Rendering::VertexFormatElement
-	::Load( CoreTools::BufferSource& source )
-{	
-	RENDERING_CLASS_IS_VALID_9;
-
-	source.Read(m_StreamIndex);
-	source.Read(m_Offset);
-	m_VertexFormatType.Load(source);
-}
-
-void Rendering::VertexFormatElement ::SetVertexFormatType(const VertexFormatType& vertexFormatType) noexcept
-{
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_VertexFormatType = vertexFormatType;
-}
-
-void Rendering::VertexFormatElement ::Set(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept
+void Rendering::VertexFormatElement::SetStreamIndex(int32_t aStreamIndex) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-	SetStreamIndex(streamIndex);
-	SetOffset(offset);
-	SetVertexFormatType(vertexFormatType);
+    streamIndex = aStreamIndex;
 }
 
-void Rendering::VertexFormatElement
-	::SaveToFile( WriteFileManager& outFile ) const
+int32_t Rendering::VertexFormatElement::GetOffset() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	outFile.Write(sizeof(unsigned int),&m_StreamIndex);
-	outFile.Write(sizeof(unsigned int),&m_Offset);
-	m_VertexFormatType.SaveToFile(outFile);	 
+    return offset;
 }
 
-void Rendering::VertexFormatElement
-	::ReadFromFile( ReadFileManager& inFile )
+void Rendering::VertexFormatElement::SetOffset(int32_t aOffset) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	inFile.Read(sizeof(unsigned int),&m_StreamIndex);
-	inFile.Read(sizeof(unsigned int),&m_Offset);
-	m_VertexFormatType.ReadFromFile(inFile);
+    offset = aOffset;
+}
+
+Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatElement::GetType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return vertexFormatType.GetType();
+}
+
+void Rendering::VertexFormatElement::SetType(AttributeType type) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    vertexFormatType.SetType(type);
+}
+
+Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatElement::GetUsage() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return vertexFormatType.GetUsage();
+}
+
+void Rendering::VertexFormatElement::SetUsage(AttributeUsage usage) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    vertexFormatType.SetUsage(usage);
+}
+
+int32_t Rendering::VertexFormatElement::GetUsageIndex() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return vertexFormatType.GetUsageIndex();
+}
+
+void Rendering::VertexFormatElement::SetUsageIndex(int32_t usageIndex) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    vertexFormatType.SetUsageIndex(usageIndex);
+}
+
+int Rendering::VertexFormatElement::GetStreamingSize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto size = CORE_TOOLS_STREAM_SIZE(streamIndex);
+    size += CORE_TOOLS_STREAM_SIZE(offset);
+    size += vertexFormatType.GetStreamingSize();
+
+    return size;
+}
+
+void Rendering::VertexFormatElement::Save(CoreTools::BufferTarget& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    target.Write(streamIndex);
+    target.Write(offset);
+    vertexFormatType.Save(target);
+}
+
+void Rendering::VertexFormatElement::Load(CoreTools::BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    source.Read(streamIndex);
+    source.Read(offset);
+    vertexFormatType.Load(source);
+}
+
+void Rendering::VertexFormatElement::SetVertexFormatType(const VertexFormatType& aVertexFormatType) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    vertexFormatType = aVertexFormatType;
+}
+
+void Rendering::VertexFormatElement::Set(int32_t aStreamIndex, int32_t aOffset, const VertexFormatType& aVertexFormatType) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    SetStreamIndex(aStreamIndex);
+    SetOffset(aOffset);
+    SetVertexFormatType(aVertexFormatType);
+}
+
+void Rendering::VertexFormatElement::SaveToFile(WriteFileManager& outFile) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    outFile.Write(sizeof(int32_t), &streamIndex);
+    outFile.Write(sizeof(int32_t), &offset);
+    vertexFormatType.SaveToFile(outFile);
+}
+
+void Rendering::VertexFormatElement::ReadFromFile(ReadFileManager& inFile)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    inFile.Read(sizeof(int32_t), &streamIndex);
+    inFile.Read(sizeof(int32_t), &offset);
+    vertexFormatType.ReadFromFile(inFile);
 }

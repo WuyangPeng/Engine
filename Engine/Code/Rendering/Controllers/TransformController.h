@@ -38,14 +38,14 @@ namespace Rendering
 		using Matrix = Mathematics::MatrixF;
 
 	public:
-		explicit TransformController(const FloatTransform& localTransform); 
+		explicit TransformController(const TransformF& localTransform); 
 		  
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 		
 		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TransformController); 
 	 
-		void SetTransform(const FloatTransform& localTransform) noexcept;
-		const FloatTransform GetTransform() const noexcept;
+		void SetTransform(const TransformF& localTransform) noexcept;
+		const TransformF GetTransform() const noexcept;
 
 		void SetTranslate(const APoint& translate);
 		void SetRotate(const Matrix& rotate);

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/22 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:50)
 
 #include "Rendering/RenderingExport.h"
 
@@ -388,7 +388,7 @@ Rendering::ColourConvertTo::OutTexelsType Rendering::ColourConvertTo::ConvertToA
 
 Rendering::ColourConvertTo::ConvertToFunction Rendering::ColourConvertTo::GetConvertToFunction(TextureFormat textureFormat)
 {
-    using FunctionContainer = array<ConvertToFunction, sm_ConvertToQuantity>;
+    using FunctionContainer = array<ConvertToFunction, convertToQuantity>;
 
     static FunctionContainer functionContainer{ nullptr,
                                                 &ConvertToR5G6B5,

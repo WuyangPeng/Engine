@@ -19,7 +19,7 @@ namespace Rendering
 	private:
 		void MainTest();	 
 	 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

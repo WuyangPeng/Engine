@@ -195,10 +195,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\Log.json">
+    <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\Testing.json">
+    <None Include="Configuration\Log.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Renderer.json">
@@ -210,61 +210,28 @@
     <None Include="Configuration\RenderingTesting.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\EnvironmentVariable.json">
+    <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Resource\ResourcesSuite\Buffer.vb">
-      <Filter>资源文件\ResourcesSuite</Filter>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
     </None>
-    <None Include="Resource\ResourcesSuite\Buffer.ib">
-      <Filter>资源文件\ResourcesSuite</Filter>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
     </None>
-    <None Include="Resource\ResourcesSuite\WriteBuffer.vb">
-      <Filter>资源文件\ResourcesSuite</Filter>
+    <None Include="Resource\ShadersSuite\SecondSaveVisualEffect.trve">
+      <Filter>资源文件\ShadersSuite</Filter>
     </None>
-    <None Include="Resource\ResourcesSuite\WriteBuffer.ib">
-      <Filter>资源文件\ResourcesSuite</Filter>
+    <None Include="Resource\ShadersSuite\FirstSaveVisualEffect.trve">
+      <Filter>资源文件\ShadersSuite</Filter>
     </None>
-    <None Include="Resource\ResourcesSuite\Texture2D.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\Texture3D.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\TextureCube.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\Texture1D.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\MipmapsTexture2D.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\MipmapsTexture3D.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\MipmapsTextureCube.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\MipmapsTexture1D.trt">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\ResourcesSuite\VertexBuffer.vb">
-      <Filter>资源文件\ResourcesSuite</Filter>
-    </None>
-    <None Include="Resource\SceneGraphSuite\VisualSave.trv">
-      <Filter>资源文件\SceneGraphSuite</Filter>
-    </None>
-    <None Include="Resource\SceneGraphSuite\Visual.trv">
-      <Filter>资源文件\SceneGraphSuite</Filter>
+    <None Include="Resource\ShadersSuite\LoadVisualEffect.trve">
+      <Filter>资源文件\ShadersSuite</Filter>
     </None>
     <None Include="Resource\SceneGraphSuite\PolypointSaveCopy.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
-    <None Include="Resource\SceneGraphSuite\PolypointSave.trv">
-      <Filter>资源文件\SceneGraphSuite</Filter>
-    </None>
-    <None Include="Resource\SceneGraphSuite\Polypoint.trv">
+    <None Include="Resource\SceneGraphSuite\PolysegmentsContiguous.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
     <None Include="Resource\SceneGraphSuite\PolysegmentsDisjoint.trv">
@@ -276,13 +243,7 @@
     <None Include="Resource\SceneGraphSuite\PolysegmentsDisjointSaveCopy.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
-    <None Include="Resource\SceneGraphSuite\PolysegmentsContiguous.trv">
-      <Filter>资源文件\SceneGraphSuite</Filter>
-    </None>
-    <None Include="Resource\SceneGraphSuite\TrianglesParticlesSave.trv">
-      <Filter>资源文件\SceneGraphSuite</Filter>
-    </None>
-    <None Include="Resource\SceneGraphSuite\TrianglesParticles.trv">
+    <None Include="Resource\SceneGraphSuite\TrianglesFan.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
     <None Include="Resource\SceneGraphSuite\TrianglesFanSave.trv">
@@ -294,23 +255,68 @@
     <None Include="Resource\SceneGraphSuite\TrianglesMeshSave.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
+    <None Include="Resource\SceneGraphSuite\TrianglesParticles.trv">
+      <Filter>资源文件\SceneGraphSuite</Filter>
+    </None>
+    <None Include="Resource\SceneGraphSuite\TrianglesParticlesSave.trv">
+      <Filter>资源文件\SceneGraphSuite</Filter>
+    </None>
     <None Include="Resource\SceneGraphSuite\TrianglesStrip.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
     <None Include="Resource\SceneGraphSuite\TrianglesStripSave.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
-    <None Include="Resource\SceneGraphSuite\TrianglesFan.trv">
+    <None Include="Resource\SceneGraphSuite\Visual.trv">
       <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
-    <None Include="Resource\ShadersSuite\FirstSaveVisualEffect.trve">
-      <Filter>资源文件\ShadersSuite</Filter>
+    <None Include="Resource\SceneGraphSuite\VisualSave.trv">
+      <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
-    <None Include="Resource\ShadersSuite\LoadVisualEffect.trve">
-      <Filter>资源文件\ShadersSuite</Filter>
+    <None Include="Resource\SceneGraphSuite\Polypoint.trv">
+      <Filter>资源文件\SceneGraphSuite</Filter>
     </None>
-    <None Include="Resource\ShadersSuite\SecondSaveVisualEffect.trve">
-      <Filter>资源文件\ShadersSuite</Filter>
+    <None Include="Resource\SceneGraphSuite\PolypointSave.trv">
+      <Filter>资源文件\SceneGraphSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\MipmapsTexture1D.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\MipmapsTexture2D.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\MipmapsTexture3D.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\MipmapsTextureCube.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\Texture1D.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\Texture2D.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\Texture3D.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\TextureCube.trt">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\VertexBuffer.vb">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\WriteBuffer.ib">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\WriteBuffer.vb">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\Buffer.ib">
+      <Filter>资源文件\ResourcesSuite</Filter>
+    </None>
+    <None Include="Resource\ResourcesSuite\Buffer.vb">
+      <Filter>资源文件\ResourcesSuite</Filter>
     </None>
     <None Include="Resource\DetailSuite\ClodMesh.trv">
       <Filter>资源文件\DetailSuite</Filter>
@@ -318,26 +324,6 @@
     <None Include="Resource\DetailSuite\CreateClodMesh.trv">
       <Filter>资源文件\DetailSuite</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\TestingHelper.h">
@@ -1389,5 +1375,37 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\ColourManagerTesting.cpp">
       <Filter>DataTypesSuite 源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+	<Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>    
   </ItemGroup>
 </Project>

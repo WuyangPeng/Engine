@@ -1,150 +1,114 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 21:28)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "ETNonmanifoldMesh.h"
-
-#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+
 #include <gsl/util>
 #include <fstream>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26402)
-#include SYSTEM_WARNING_DISABLE(26429)
-Mathematics::ETNonmanifoldMesh ::ETNonmanifoldMesh(ECreator eCreator, TCreator tCreator) noexcept
+
+Mathematics::ETNonmanifoldMesh::ETNonmanifoldMesh(EdgeCreator eCreator, TriangleCreator tCreator) noexcept
+    : edgeCreator{ eCreator ? eCreator : CreateEdge },
+      edgeMap{},
+      triangleCreator{ tCreator ? tCreator : CreateTriangle },
+      triangleMap{}
 {
-    mECreator = (eCreator ? eCreator : CreateEdge);
-    mTCreator = (tCreator ? tCreator : CreateTriangle);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::ETNonmanifoldMesh ::~ETNonmanifoldMesh(){
-    EXCEPTION_TRY{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-        EMapIterator eiter = mEMap.begin();
-const EMapIterator eend = mEMap.end();
-for (/**/; eiter != eend; ++eiter)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, ETNonmanifoldMesh)
+
+Mathematics::ETNonmanifoldMesh::EdgeSharedPtr Mathematics::ETNonmanifoldMesh::CreateEdge(int v0, int v1)
 {
-    //  Edge* edge = eiter->second;
-    //DELETE0(edge);
+    return std::make_shared<Edge>(v0, v1);
 }
 
-TMapIterator titer = mTMap.begin();
-const TMapIterator tend = mTMap.end();
-for (/**/; titer != tend; ++titer)
+Mathematics::ETNonmanifoldMesh::TriangleSharedPtr Mathematics::ETNonmanifoldMesh::CreateTriangle(int v0, int v1, int v2)
 {
-    //  Triangle* tri = titer->second;
-    // DELETE0(tri);
-}
-#include STSTEM_WARNING_POP
-}
-EXCEPTION_ALL_CATCH(Mathematics)
+    return std::make_shared<Triangle>(v0, v1, v2);
 }
 
-Mathematics::ETNonmanifoldMesh::EPtr Mathematics::ETNonmanifoldMesh ::CreateEdge(int v0, int v1) noexcept
+Mathematics::ETNonmanifoldMesh::TriangleSharedPtr Mathematics::ETNonmanifoldMesh::InsertTriangle(int v0, int v1, int v2)
 {
-    v0;
-    v1;
-    return nullptr;  //    NEW0 Edge(v0, v1);
-}
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh ::CreateTriangle(int v0, int v1, int v2) noexcept
-{
-    v0;
-    v1;
-    v2;
-    return nullptr;  // NEW0 Triangle(v0, v1, v2);
-}
-
-Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh ::InsertTriangle(int v0, int v1, int v2)
-{
-    const TriangleKey tKey(v0, v1, v2);
-    const TMapIterator titer = mTMap.find(tKey);
-    if (titer != mTMap.end())
+    const TriangleKey tKey{ v0, v1, v2 };
+    const auto titer = triangleMap.find(tKey);
+    if (titer != triangleMap.end())
     {
-        // Triangle already exists.
-        return 0;
+        return nullptr;
     }
 
-    // Add new triangle.
-    TPtr tri = mTCreator(v0, v1, v2);
-    mTMap[tKey] = tri;
+    auto tri = triangleCreator(v0, v1, v2);
+    triangleMap[tKey] = tri;
 
-    // Add edges to mesh.
-    for (int i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
+    for (auto i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
     {
-        const EdgeKey eKey(tri->V[i0], tri->V[i1]);
-        EPtr edge = nullptr;
-        const EMapIterator eiter = mEMap.find(eKey);
-        if (eiter == mEMap.end())
+        const EdgeKey eKey{ tri->v.at(i0), tri->v.at(i1) };
+        EdgeSharedPtr edge{};
+        const auto eiter = edgeMap.find(eKey);
+        if (eiter == edgeMap.end())
         {
-            // First time edge encountered.
-            edge = mECreator(tri->V[i0], tri->V[i1]);
-            mEMap[eKey] = edge;
+            edge = edgeCreator(tri->v.at(i0), tri->v.at(i1));
+            edgeMap[eKey] = edge;
         }
         else
         {
-            // Edge previously encountered and created.
             edge = eiter->second;
         }
 
-        // Update edge and triangle.
-        edge->T.insert(tri);
-        tri->E[i0] = edge;
+        edge->t.insert(tri);
+        tri->e.at(i0) = edge;
     }
 
     return tri;
 }
 
-bool Mathematics::ETNonmanifoldMesh ::RemoveTriangle(int v0, int v1, int v2)
+bool Mathematics::ETNonmanifoldMesh::RemoveTriangle(int v0, int v1, int v2)
 {
-    const TriangleKey tKey(v0, v1, v2);
-    const TMapIterator titer = mTMap.find(tKey);
-    if (titer == mTMap.end())
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const TriangleKey tKey{ v0, v1, v2 };
+    const auto titer = triangleMap.find(tKey);
+    if (titer == triangleMap.end())
     {
-        // Triangle does not exist.
         return false;
     }
 
-    TPtr tri = titer->second;
-    for (int i = 0; i < 3; ++i)
+    auto tri = titer->second;
+    for (auto i = 0; i < 3; ++i)
     {
-        // Inform edges you are going away.
-        EPtr edge = tri->E[i];
-        edge->T.erase(tri);
+        auto edge = tri->e.at(i);
+        edge->t.erase(tri);
 
-        // Remove edge if you had the last reference to it.
-        if (edge->T.size() == 0)
+        if (edge->t.size() == 0)
         {
-            const EdgeKey eKey(edge->V[0], edge->V[1]);
-            mEMap.erase(eKey);
-            // DELETE0(edge);
+            const EdgeKey eKey{ edge->v.at(0), edge->v.at(1) };
+            edgeMap.erase(eKey);
         }
     }
 
-    mTMap.erase(tKey);
-    // DELETE0(tri);
+    triangleMap.erase(tKey);
+
     return true;
 }
 
-bool Mathematics::ETNonmanifoldMesh ::IsManifold() const noexcept
+bool Mathematics::ETNonmanifoldMesh::IsManifold() const noexcept
 {
-    EMapCIterator eiter = mEMap.begin();
-    const EMapCIterator eend = mEMap.end();
-    for (/**/; eiter != eend; ++eiter)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    for (const auto& value : edgeMap)
     {
-        if (eiter->second->T.size() > 2)
+        if (value.second->t.size() > 2)
         {
             return false;
         }
@@ -152,13 +116,13 @@ bool Mathematics::ETNonmanifoldMesh ::IsManifold() const noexcept
     return true;
 }
 
-bool Mathematics::ETNonmanifoldMesh ::IsClosed() const noexcept
+bool Mathematics::ETNonmanifoldMesh::IsClosed() const noexcept
 {
-    EMapCIterator eiter = mEMap.begin();
-    const EMapCIterator eend = mEMap.end();
-    for (/**/; eiter != eend; ++eiter)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    for (const auto& value : edgeMap)
     {
-        if (eiter->second->T.size() != 2)
+        if (value.second->t.size() != 2)
         {
             return false;
         }
@@ -166,196 +130,166 @@ bool Mathematics::ETNonmanifoldMesh ::IsClosed() const noexcept
     return true;
 }
 
-bool Mathematics::ETNonmanifoldMesh ::IsConnected() const
+bool Mathematics::ETNonmanifoldMesh::IsConnected() const
 {
-    // Perform a breadth-first search to locate the connected component
-    // containing the first triangle in the triangle map.
-    if (mTMap.begin() == mTMap.end())
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (triangleMap.begin() == triangleMap.end())
     {
-        // No triangles in the mesh, by default mesh is connected.
         return true;
     }
 
-    // Start search at first triangle in mesh.
-    std::set<Triangle*> component, boundary;
-    boundary.insert(mTMap.begin()->second);
+    std::set<TriangleSharedPtr> component{};
+    std::set<TriangleSharedPtr> boundary{ triangleMap.begin()->second };
 
     while (boundary.size() > 0)
     {
-        std::set<Triangle*> exterior;
+        std::set<TriangleSharedPtr> exterior{};
 
-        // Process boundary triangles.
-        std::set<Triangle*>::iterator titer = boundary.begin();
-        const std::set<Triangle*>::iterator tend = boundary.end();
-        for (/**/; titer != tend; ++titer)
+        for (const auto& tri : boundary)
         {
-            // Boundary triangle is adjacent to current connected component.
-            TPtr tri = *titer;
             component.insert(tri);
 
-            // Locate adjacent, exterior triangles for later processing.
-            for (int i = 0; i < 3; ++i)
+            for (auto i = 0; i < 3; ++i)
             {
-                EPtr edge = tri->E[i];
-                std::set<Triangle*>::const_iterator aiter =
-                    edge->T.begin();
-                const std::set<Triangle*>::const_iterator aend =
-                    edge->T.end();
-                for (/**/; aiter != aend; ++aiter)
+                auto edge = tri->e.at(i);
+
+                for (const auto& value : edge->t)
                 {
-                    if (*aiter != tri && component.find(*aiter) == component.end() && boundary.find(*aiter) == boundary.end())
+                    if (value != tri && component.find(value) == component.end() && boundary.find(value) == boundary.end())
                     {
-                        exterior.insert(*aiter);
+                        exterior.insert(value);
                     }
                 }
             }
         }
 
-        // Exterior triangles are next in line to be processed.
         boundary = exterior;
     }
 
-    return component.size() == mTMap.size();
+    return component.size() == triangleMap.size();
 }
 
-void Mathematics::ETNonmanifoldMesh ::RemoveComponent(int& numIndices, int* indices)
+std::vector<int> Mathematics::ETNonmanifoldMesh::RemoveComponent()
 {
-    // Do a breadth-first search of the mesh to find connected components.
-    // The input array is assumed to be large enough to hold the component.
-    // (See the comments in ETNonmanifoldMesh.h for RemoveComponent.)
-    numIndices = 0;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (mTMap.size() == 0)
+    std::vector<int> indices{};
+
+    if (triangleMap.size() == 0)
     {
-        return;
+        return indices;
     }
 
-    // Find the connected component containing the first triangle in the mesh.
-    std::set<Triangle*> visited;
-    visited.insert(mTMap.begin()->second);
+    std::set<TriangleSharedPtr> visited{ triangleMap.begin()->second };
 
-    // Traverse the connected component.
     while (!visited.empty())
     {
-        // Start at the current triangle.
-        Triangle* tri = *visited.begin();
+        auto tri = *visited.begin();
 
-        // Add adjacent triangles to the set for recursive processing.
-        for (int i = 0; i < 3; ++i)
+        for (auto i = 0; i < 3; ++i)
         {
-            EPtr edge = tri->E[i];
-            std::set<Triangle*>::const_iterator aiter = edge->T.begin();
-            const std::set<Triangle*>::const_iterator aend = edge->T.end();
-            for (/**/; aiter != aend; ++aiter)
+            auto edge = tri->e.at(i);
+
+            for (const auto& value : edge->t)
             {
-                if (*aiter != tri)
+                if (value != tri)
                 {
-                    visited.insert(*aiter);
+                    visited.insert(value);
                 }
             }
         }
 
-        // Add triangle to connectivity array.
-        indices[numIndices++] = tri->V[0];
-        indices[numIndices++] = tri->V[1];
-        indices[numIndices++] = tri->V[2];
+        indices.emplace_back(tri->v.at(0));
+        indices.emplace_back(tri->v.at(1));
+        indices.emplace_back(tri->v.at(2));
 
-        // Remove the current triangle (visited, no longer needed).
         visited.erase(tri);
-        RemoveTriangle(tri->V[0], tri->V[1], tri->V[2]);
+        RemoveTriangle(tri->v.at(0), tri->v.at(1), tri->v.at(2));
     }
+
+    return indices;
 }
 
-void Mathematics::ETNonmanifoldMesh ::Print(const char* filename)
+void Mathematics::ETNonmanifoldMesh::Print(const std::string& filename)
 {
-    std::ofstream outfile(filename);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    std::ofstream outfile{ filename };
     if (!outfile)
     {
         return;
     }
 
-    // Assign unique indices to the edges.
-    std::map<Edge*, int> eIndex;
-    eIndex[(Edge*)0] = 0;
-    int i = 1;
-    EMapIterator eiter = mEMap.begin();
-    EMapIterator eend = mEMap.end();
-    for (/**/; eiter != eend; ++eiter)
+    std::map<EdgeSharedPtr, int> eIndex{};
+    eIndex[nullptr] = 0;
+
+    auto i = 1;
+    for (const auto& value : edgeMap)
     {
-        if (eiter->second)
+        if (value.second)
         {
-            eIndex[eiter->second] = i;
+            eIndex[value.second] = i;
             ++i;
         }
     }
 
-    // Assign unique indices to the triangles.
-    std::map<Triangle*, int> tIndex;
-    Triangle* triNull{};
-    tIndex[triNull] = 0;
+    std::map<TriangleSharedPtr, int> tIndex{};
+
+    tIndex[nullptr] = 0;
     i = 1;
-    TMapIterator titer = mTMap.begin();
-    TMapIterator tend = mTMap.end();
-    for (/**/; titer != tend; ++titer)
+
+    for (const auto& value : triangleMap)
     {
-        if (titer->second)
+        if (value.second)
         {
-            tIndex[titer->second] = i;
+            tIndex[value.second] = i;
             ++i;
         }
     }
 
-    // Print edges.
-    outfile << "edge quantity = " << mEMap.size() << std::endl;
-    eiter = mEMap.begin();
-    eend = mEMap.end();
-    for (/**/; eiter != eend; ++eiter)
-    {
-        Edge* edge = eiter->second;
-        outfile << 'e' << eIndex[edge] << " <"
-                << 'v' << edge->V[0] << ",v" << edge->V[1] << "; ";
+    outfile << "edge quantity = " << edgeMap.size() << std::endl;
 
-        std::set<Triangle*>::const_iterator aiter = edge->T.begin();
-        const std::set<Triangle*>::const_iterator aend = edge->T.end();
-        for (/**/; aiter != aend; ++aiter)
+    for (const auto& value : edgeMap)
+    {
+        auto edge = value.second;
+        outfile << 'e' << eIndex[edge] << " <" << 'v' << edge->v.at(0) << ",v" << edge->v.at(1) << "; ";
+
+        for (const auto& aiter : edge->t)
         {
-            outfile << 't' << tIndex[*aiter] << ',';
+            outfile << 't' << tIndex[aiter] << ',';
         }
         outfile << '>' << std::endl;
     }
     outfile << std::endl;
 
-    // Print triangles.
-    outfile << "triangle quantity = " << mTMap.size() << std::endl;
-    titer = mTMap.begin();
-    tend = mTMap.end();
-    for (/**/; titer != tend; ++titer)
+    outfile << "triangle quantity = " << triangleMap.size() << std::endl;
+
+    for (const auto& value : triangleMap)
     {
-        Triangle* tri = titer->second;
-        outfile << 't' << tIndex[tri] << " <"
-                << 'v' << tri->V[0] << ",v" << tri->V[1] << ",v"
-                << tri->V[2] << "; ";
-        if (tri->E[0])
+        auto tri = value.second;
+        outfile << 't' << tIndex[tri] << " <" << 'v' << tri->v.at(0) << ",v" << tri->v.at(1) << ",v" << tri->v.at(2) << "; ";
+        if (tri->e.at(0))
         {
-            outfile << 'e' << eIndex[tri->E[0]];
+            outfile << 'e' << eIndex[tri->e.at(0)];
         }
         else
         {
             outfile << '*';
         }
         outfile << ',';
-        if (tri->E[1])
+        if (tri->e.at(1))
         {
-            outfile << 'e' << eIndex[tri->E[1]];
+            outfile << 'e' << eIndex[tri->e.at(1)];
         }
         else
         {
             outfile << '*';
         }
         outfile << ',';
-        if (tri->E[2])
+        if (tri->e.at(2))
         {
-            outfile << 'e' << eIndex[tri->E[2]];
+            outfile << 'e' << eIndex[tri->e.at(2)];
         }
         else
         {
@@ -364,57 +298,44 @@ void Mathematics::ETNonmanifoldMesh ::Print(const char* filename)
         outfile << '>' << std::endl;
     }
     outfile << std::endl;
+}
+
+const Mathematics::ETNonmanifoldMesh::EdgeMap& Mathematics::ETNonmanifoldMesh::GetEdges() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return edgeMap;
+}
+
+int Mathematics::ETNonmanifoldMesh::GetNumTriangles() const noexcept
+{
+    return gsl::narrow_cast<int>(triangleMap.size());
+}
+
+const Mathematics::ETNonmanifoldMesh::TriangleMap& Mathematics::ETNonmanifoldMesh::GetTriangles() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return triangleMap;
+}
+
+int Mathematics::ETNonmanifoldMesh::GetNumEdges() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return gsl::narrow_cast<int>(edgeMap.size());
 }
 
 // ETNonmanifoldMesh::Edge
 
-Mathematics::ETNonmanifoldMesh::Edge ::Edge(int v0, int v1) noexcept
-{
-    V[0] = v0;
-    V[1] = v1;
-}
-
-Mathematics::ETNonmanifoldMesh::Edge ::~Edge()
+Mathematics::ETNonmanifoldMesh::Edge::Edge(int v0, int v1) noexcept
+    : v{ v0, v1 }, t{}
 {
 }
 
 // ETNonmanifoldMesh::Triangle
 
-Mathematics::ETNonmanifoldMesh::Triangle ::Triangle(int v0, int v1, int v2) noexcept
-    : E{}, V{}
-{
-    V[0] = v0;
-    V[1] = v1;
-    V[2] = v2;
-
-    for (int i = 0; i < 3; ++i)
-    {
-        E[i] = 0;
-    }
-}
-
-Mathematics::ETNonmanifoldMesh::Triangle ::~Triangle()
+Mathematics::ETNonmanifoldMesh::Triangle::Triangle(int v0, int v1, int v2) noexcept
+    : e{}, v{ v0, v1, v2 }
 {
 }
-
-int Mathematics::ETNonmanifoldMesh ::GetNumEdges() const noexcept
-{
-    return gsl::narrow_cast<int>(mEMap.size());
-}
-
-const Mathematics::ETNonmanifoldMesh::EMap& Mathematics::ETNonmanifoldMesh ::GetEdges() const noexcept
-{
-    return mEMap;
-}
-
-int Mathematics::ETNonmanifoldMesh ::GetNumTriangles() const noexcept
-{
-    return gsl::narrow_cast<int>(mTMap.size());
-}
-
-const Mathematics::ETNonmanifoldMesh::TMap& Mathematics::ETNonmanifoldMesh ::GetTriangles() const noexcept
-{
-    return mTMap;
-}
-
-#include STSTEM_WARNING_POP

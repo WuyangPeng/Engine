@@ -282,44 +282,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -1058,9 +1020,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Spatial.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SpatialData.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
@@ -1086,9 +1045,6 @@
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Visual.cpp">
-      <Filter>SceneGraph 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisualData.cpp">
       <Filter>SceneGraph 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.cpp">
@@ -1394,6 +1350,15 @@
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Colour.cpp">
       <Filter>DataTypes 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.cpp">
+      <Filter>DataTypes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.cpp">
+      <Filter>SceneGraph 源文件\Detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingLib.h">
@@ -1584,9 +1549,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\CurvesSurfaces\SurfacePatchFrame.h">
       <Filter>CurvesSurfaces 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.h">
-      <Filter>DataTypes 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Transform.h">
       <Filter>DataTypes 头文件</Filter>
@@ -2362,9 +2324,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisualData.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Camera.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
@@ -2426,9 +2385,6 @@
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Spatial.h">
-      <Filter>SceneGraph 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SpatialData.h">
       <Filter>SceneGraph 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.h">
@@ -2914,20 +2870,63 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\BoundDetail.h">
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrixDetail.h">
-      <Filter>DataTypes 模板文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.h">
-      <Filter>DataTypes 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImplDetail.h">
-      <Filter>DataTypes 模板文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformAchieve.h">
-      <Filter>DataTypes 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformDetail.h">
       <Filter>DataTypes 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrixDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesInternalFwd.h">
+      <Filter>Resources 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.h">
+      <Filter>SceneGraph 头文件\Detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
   </ItemGroup>
 </Project>

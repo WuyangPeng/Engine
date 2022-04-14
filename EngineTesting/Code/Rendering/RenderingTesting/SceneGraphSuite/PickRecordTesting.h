@@ -21,7 +21,7 @@ namespace Rendering
 	    void BaseTest();
 		void OperatorTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

@@ -1,249 +1,191 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 17:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 11:27)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Camera.h"
 #include "Detail/CameraImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26456)
-CORE_TOOLS_RTTI_DEFINE(Rendering,Camera);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Camera);
-CORE_TOOLS_FACTORY_DEFINE(Rendering,Camera); 
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Camera)
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                       \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }                                                                                       
-    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Camera);
+CORE_TOOLS_RTTI_DEFINE(Rendering, Camera);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Camera);
+CORE_TOOLS_FACTORY_DEFINE(Rendering, Camera);
 
-Rendering::Camera
-    ::Camera (bool isPerspective,float epsilon)
-	:ParentType{ "Camera" }, impl{ make_shared<ImplType>(isPerspective,epsilon) }
+Rendering::Camera::Camera(bool isPerspective, float epsilon)
+    : ParentType{ "Camera" }, impl{ isPerspective, epsilon }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Camera)
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Camera)
-
-void Rendering::Camera
-     ::SetFrame (const APoint& position,const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
+void Rendering::Camera::SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
 {
-	;
-   
-    return impl->SetFrame(position,directionVector,upVector,rightVector);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetFrame(position, directionVector, upVector, rightVector);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPosition,APoint,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Camera, SetPosition, APoint, void)
 
-void Rendering::Camera
-    ::SetAxes (const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
+void Rendering::Camera::SetAxes(const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
 {
-	;
-    
-    return impl->SetAxes(directionVector,upVector,rightVector);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetAxes(directionVector, upVector, rightVector);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetEpsilon, float)
-    IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetPosition,const Rendering::Camera::APoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera, GetDirectionVector,const Rendering::Camera::AVector)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetUpVector,const Rendering::Camera::AVector)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetRightVector,const Rendering::Camera::AVector)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Camera,GetViewMatrix,const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPosition, Rendering::Camera::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDirectionVector, Rendering::Camera::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetUpVector, Rendering::Camera::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetRightVector, Rendering::Camera::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetViewMatrix, Rendering::Camera::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, IsPerspective, bool)
 
-void Rendering::Camera
-    ::SetFrustum (float directionMin, float directionMax,float upMin, float upMax,float rightMin, float rightMax)
+void Rendering::Camera::SetFrustum(float directionMin, float directionMax, float upMin, float upMax, float rightMin, float rightMax)
 {
-	;
-    
-    return impl->SetFrustum(directionMin,directionMax,upMin,upMax,rightMin,rightMax);
+    RENDERING_CLASS_IS_VALID_1;
 
+    return impl->SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Camera,SetFrustum,const float*,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Camera, SetFrustum, const float*, void)
 
-void Rendering::Camera
-    ::SetFrustum (float upFovDegrees, float aspectRatio,float directionMin,float directionMax)
+void Rendering::Camera::SetFrustum(float upFovDegrees, float aspectRatio, float directionMin, float directionMax)
 {
-	;
-    
-    return impl->SetFrustum(upFovDegrees,aspectRatio,directionMin,directionMax);
+    RENDERING_CLASS_IS_VALID_1;
 
+    return impl->SetFrustum(upFovDegrees, aspectRatio, directionMin, directionMax);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetFrustum, const float*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetFrustumData, const Rendering::CameraFrustumData)
- 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetFrustumData, Rendering::CameraFrustumData)
+
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDirectionMin, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDirectionMax, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetUpMin, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetUpMax, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetRightMin, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetRightMax, float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetProjectionMatrix, const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetProjectionMatrix, Rendering::Camera::Matrix)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetProjectionMatrix,Matrix,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Camera, SetProjectionMatrix, Matrix, void)
 
-void Rendering::Camera
-    ::SetProjectionMatrix (const APoint& p00, const APoint& p10,const APoint& p11, const APoint& p01,float nearExtrude, float farExtrude)
+void Rendering::Camera::SetProjectionMatrix(const APoint& p00, const APoint& p10, const APoint& p11, const APoint& p01, float nearExtrude, float farExtrude)
 {
-	;
-    
-    return impl->SetProjectionMatrix(p00,p10,p11,p01,nearExtrude,farExtrude);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetProjectionMatrix(p00, p10, p11, p01, nearExtrude, farExtrude);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDepthType, Rendering::DepthType)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetProjectionViewMatrix, const Rendering::Camera::Matrix)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetProjectionViewMatrix, Rendering::Camera::Matrix)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPreViewMatrix,Matrix,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPreViewMatrix, const Rendering::Camera::Matrix)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Camera, SetPreViewMatrix, Matrix, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPreViewMatrix, Rendering::Camera::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, PreViewIsIdentity, bool)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPostProjectionMatrix,Matrix,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPostProjectionMatrix, const Rendering::Camera::Matrix)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Camera, SetPostProjectionMatrix, Matrix, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetPostProjectionMatrix, Rendering::Camera::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, PostProjectionIsIdentity, bool)
 
-const Rendering::Camera::AxesAlignBoundingBox2D Rendering::Camera
-      ::ComputeBoundingAABB (int numVertices,const char* vertices,int stride,const Matrix& worldMatrix) const
+Rendering::Camera::AxesAlignBoundingBox2D Rendering::Camera::ComputeBoundingAABB(int numVertices, const char* vertices, int stride, const Matrix& worldMatrix) const
 {
-	;
-    
-    return impl->ComputeBoundingAABB(numVertices,vertices,stride,worldMatrix);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->ComputeBoundingAABB(numVertices, vertices, stride, worldMatrix);
 }
 
-
-Rendering::Camera
-    ::Camera (LoadConstructor value)
-	:ParentType{ value }, impl{ make_shared<ImplType>() }
+Rendering::Camera::Camera(LoadConstructor value)
+    : ParentType{ value }, impl{ Math::GetZeroTolerance() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::Camera
-    ::GetStreamingSize () const
+int Rendering::Camera::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = ParentType::GetStreamingSize();
-    
-	size += impl->GetStreamingSize();
-    
-	return size;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+
+    size += impl->GetStreamingSize();
+
+    return size;
 }
 
-uint64_t Rendering::Camera
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::Camera::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	return ParentType::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::Camera
-    ::Save (CoreTools::BufferTarget& target) const
+void Rendering::Camera::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	impl->Save(target);
-    
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    impl->Save(target);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Camera
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::Camera::Link(CoreTools::ObjectLink& source)
 {
-	;
-    
-	ParentType::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
 }
 
-void Rendering::Camera
-    ::PostLink ()
+void Rendering::Camera::PostLink()
 {
-	;
-    
-	ParentType::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-void Rendering::Camera
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::Camera::Load(CoreTools::BufferSource& source)
 {
-	;
-  
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
-	
-	impl->Load(source);
-    
+
+    impl->Load(source);
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Camera,SetDepthType,DepthType, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Camera, SetDepthType, DepthType, void)
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Camera::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+
+    return std::make_shared<ClassType>(*this);
 }
- 
-
-
-#include STSTEM_WARNING_POP

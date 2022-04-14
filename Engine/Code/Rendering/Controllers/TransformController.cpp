@@ -28,12 +28,13 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26440)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TransformController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TransformController); 
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TransformController);
 
 Rendering::TransformController
-	::TransformController(const FloatTransform& localTransform)
+	::TransformController(const TransformF& localTransform)
 	:ParentType{}, impl{ make_shared<ImplType>(localTransform) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -76,9 +77,9 @@ Rendering::TransformController
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TransformController) 
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController,SetTransform,FloatTransform,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController,SetTransform,TransformF,void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController,GetTransform,const Rendering::FloatTransform)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController,GetTransform,const Rendering::TransformF)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetTranslate, APoint,void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetRotate, Matrix,void)
@@ -134,13 +135,13 @@ Rendering::ControllerInterfaceSharedPtr Rendering::TransformController
  
 Rendering::TransformController
 	::TransformController(LoadConstructor value)
-	:ParentType{ value }, impl{ make_shared<ImplType>(FloatTransform()) }
+	:ParentType{ value }, impl{ make_shared<ImplType>(TransformF()) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 int Rendering::TransformController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -151,7 +152,7 @@ int Rendering::TransformController
 	return size;
 }
 
-uint64_t Rendering::TransformController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::TransformController::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -159,7 +160,7 @@ uint64_t Rendering::TransformController ::Register(CoreTools::ObjectRegister& ta
 }
 
 void Rendering::TransformController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -173,7 +174,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Link (CoreTools::ObjectLink& source)
+::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -181,7 +182,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
@@ -189,7 +190,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Load (CoreTools::BufferSource& source)
+::Load (CoreTools::BufferSource& source)
 {
 	;
     

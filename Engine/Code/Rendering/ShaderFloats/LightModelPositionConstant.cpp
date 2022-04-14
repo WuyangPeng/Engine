@@ -35,7 +35,7 @@ Rendering::LightModelPositionConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightModelPositionConstant)
 
-void Rendering::LightModelPositionConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::LightModelPositionConstant::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	 

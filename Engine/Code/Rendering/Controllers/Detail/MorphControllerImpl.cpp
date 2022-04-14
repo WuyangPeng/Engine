@@ -50,21 +50,21 @@ bool Rendering::MorphControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT	
 
-int Rendering::MorphControllerImpl ::GetNumVertices() const noexcept
+int Rendering::MorphControllerImpl::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumVertices;
 }
 
-int Rendering::MorphControllerImpl ::GetNumTargets() const noexcept
+int Rendering::MorphControllerImpl::GetNumTargets() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumTargets;
 }
 
-int Rendering::MorphControllerImpl ::GetNumKeys() const noexcept
+int Rendering::MorphControllerImpl::GetNumKeys() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

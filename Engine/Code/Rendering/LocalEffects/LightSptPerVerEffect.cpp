@@ -42,7 +42,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, LightSptPerVerEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightSptPerVerEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSptPerVerEffect);
 
-Rendering::LightSptPerVerEffect ::LightSptPerVerEffect()
+Rendering::LightSptPerVerEffect::LightSptPerVerEffect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.LightSptPerVer", 2, 2, 14, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -99,7 +99,7 @@ Rendering::LightSptPerVerEffect ::LightSptPerVerEffect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateInstance(Light* light, Material* material) const
+Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect::CreateInstance(Light* light, Material* material) const
 {
     VisualEffectInstance* instance = nullptr;  // CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -120,20 +120,22 @@ Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateInstanc
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateUniqueInstance(Light* light, Material* material)
+Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect::CreateUniqueInstance(Light* light, Material* material) noexcept
 {
-    const LightSptPerVerEffect* effect = nullptr;  //  CoreTools::New0<LightSptPerVerEffect>();
-    return effect->CreateInstance(light, material);
+    light;
+    material;
+    //const LightSptPerVerEffect* effect = nullptr;  //  CoreTools::New0<LightSptPerVerEffect>();
+    return nullptr;  // effect->CreateInstance(light, material);
 }
 
 // Streaming support.
 
-Rendering::LightSptPerVerEffect ::LightSptPerVerEffect(LoadConstructor value)
+Rendering::LightSptPerVerEffect::LightSptPerVerEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::LightSptPerVerEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::LightSptPerVerEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -142,12 +144,12 @@ void Rendering::LightSptPerVerEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightSptPerVerEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::LightSptPerVerEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightSptPerVerEffect ::PostLink()
+void Rendering::LightSptPerVerEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -174,12 +176,12 @@ void Rendering::LightSptPerVerEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::LightSptPerVerEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightSptPerVerEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightSptPerVerEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightSptPerVerEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -188,7 +190,7 @@ void Rendering::LightSptPerVerEffect ::Save(CoreTools::BufferTarget& target) con
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightSptPerVerEffect ::GetStreamingSize() const
+int Rendering::LightSptPerVerEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

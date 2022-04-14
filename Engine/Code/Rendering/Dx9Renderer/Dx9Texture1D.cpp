@@ -11,7 +11,7 @@
 
 #include "CoreTools/Contract/Noexcept.h"
 
-Rendering::Dx9Texture1D ::Dx9Texture1D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture1D* texture)
+Rendering::Dx9Texture1D::Dx9Texture1D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture1D* texture)
 
 {	
 	CoreTools::DisableNoexcept();
@@ -49,7 +49,7 @@ Rendering::Dx9Texture1D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9Texture1D)
 
-void Rendering::Dx9Texture1D ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9Texture1D::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -65,7 +65,7 @@ void Rendering::Dx9Texture1D ::Enable([[maybe_unused]] Renderer* renderer, [[may
 		textureUnit, DXGetErrorString(hr));*/
 }
 
-void Rendering::Dx9Texture1D ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9Texture1D::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -92,7 +92,7 @@ void Rendering::Dx9Texture1D ::Disable([[maybe_unused]] Renderer* renderer, [[ma
 	textureUnit, DXGetErrorString(hr));*/
 }
 
-void* Rendering::Dx9Texture1D ::Lock([[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
+void* Rendering::Dx9Texture1D::Lock([[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -110,7 +110,7 @@ void* Rendering::Dx9Texture1D ::Lock([[maybe_unused]] int level, [[maybe_unused]
 	return nullptr;
 }
 
-void Rendering::Dx9Texture1D ::Unlock([[maybe_unused]] int level)
+void Rendering::Dx9Texture1D::Unlock([[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

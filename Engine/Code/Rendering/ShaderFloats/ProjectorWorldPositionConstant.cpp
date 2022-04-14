@@ -61,7 +61,7 @@ void Rendering::ProjectorWorldPositionConstant
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProjectorWorldPositionConstant,GetProjector, const Rendering::ConstProjectorSharedPtr )
 
-void Rendering::ProjectorWorldPositionConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::ProjectorWorldPositionConstant::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

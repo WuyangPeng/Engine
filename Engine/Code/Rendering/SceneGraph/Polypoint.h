@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 11:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 16:40)
 
 #ifndef RENDERING_SCENE_GRAPH_POLYPOINT_H
 #define RENDERING_SCENE_GRAPH_POLYPOINT_H
@@ -13,40 +16,43 @@
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE Polypoint : public Visual
-	{
-	public:
-		using ClassType = Polypoint;
-		using ParentType = Visual;
-		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using PolypointSharedPtr = std::shared_ptr<ClassType>;
-		using ConstPolypointSharedPtr = std::shared_ptr<ClassType>;
+    class RENDERING_DEFAULT_DECLARE Polypoint : public Visual
+    {
+    public:
+        using ClassType = Polypoint;
+        using ParentType = Visual;
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        using PolypointSharedPtr = std::shared_ptr<ClassType>;
+        using ConstPolypointSharedPtr = std::shared_ptr<ClassType>;
 
-	public:
-		Polypoint(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer);
-	 
-                
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
-		
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Polypoint);	
- 
-		// 允许应用程序指定的数量小于最大值用于绘制。
-                int GetMaxNumPoints() const ;
-		void SetNumPoints (int numPoints);
-                int GetNumPoints() const noexcept;
+    public:
+        Polypoint(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer);
 
-		  ControllerInterfaceSharedPtr Clone() const override;
-                ObjectInterfaceSharedPtr CloneObject() const override;
-	private:	
-		// 当前活动点的数量。
-		int m_NumPoints;
-	};
-	
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Polypoint);
+
+        // 允许应用程序指定的数量小于最大值用于绘制。
+        NODISCARD int GetMaxNumPoints() const noexcept;
+        void SetNumPoints(int numPoints) noexcept;
+        NODISCARD int GetNumPoints() const noexcept;
+
+        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+    private:
+        // 当前活动点的数量。
+        int pointsCount;
+    };
+
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426) 
-	CORE_TOOLS_STREAM_REGISTER(Polypoint);
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_STREAM_REGISTER(Polypoint);
+
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SHARED_PTR_DECLARE( Polypoint); 
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(Polypoint);
 }
 
-#endif // RENDERING_SCENE_GRAPH_POLYPOINT_H
+#endif  // RENDERING_SCENE_GRAPH_POLYPOINT_H

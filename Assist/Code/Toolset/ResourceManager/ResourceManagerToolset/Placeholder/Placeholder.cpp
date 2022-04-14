@@ -6,13 +6,12 @@
 
 #include "Toolset/ResourceManager/ResourceManagerToolset/ResourceManagerToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ResourceManagerClassInvariantMacro.h"
 
-ResourceManagerToolset::Placeholder
-	::Placeholder() 
+ResourceManagerToolset::Placeholder ::Placeholder() noexcept
 {
-	RESOURCE_MANAGER_SELF_CLASS_IS_VALID_9;
+    RESOURCE_MANAGER_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ResourceManagerToolset, Placeholder)

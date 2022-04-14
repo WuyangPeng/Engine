@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/23 21:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:56)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,13 +21,13 @@
 using std::ostream;
 
 Rendering::HalfFloat::HalfFloat(float value) noexcept
-    : m_HalfFloat{ ConvertHalfFloat(value) }
+    : halfFloat{ ConvertHalfFloat(value) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::HalfFloat::HalfFloat(int value)
-    : m_HalfFloat{ ConvertHalfFloat(boost::numeric_cast<float>(value)) }
+    : halfFloat{ ConvertHalfFloat(boost::numeric_cast<float>(value)) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -37,22 +37,24 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)  // 这里必须使用reinterpret_cast
-    const auto bits = reinterpret_cast<IntegerType&>(value);
+
+    const auto bits = reinterpret_cast<FloatIntegerType&>(value);
+
 #include STSTEM_WARNING_POP
 
-    auto exponent = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::exponent) >> FloatTraitsType::exponentShifting);
-    if (g_ExponentDifference < exponent)
+    auto halfExponent = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::exponent) >> FloatTraitsType::exponentShifting);
+    if (exponentDifference < halfExponent)
     {
-        constexpr auto maxExponent = g_ExponentDifference + ((1 << g_ExponentDigits) - 1);
-        if (exponent < maxExponent)
+        constexpr auto maxExponent = exponentDifference + ((1 << exponentDigits) - 1);
+        if (halfExponent < maxExponent)
         {
-            if (exponent != 0)
+            if (halfExponent != 0)
             {
                 // 截断23位小数到10位。
-                const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> g_SymbolShiftingDifference);
-                const auto mantissa = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::mantissa) >> g_ExponentShiftingDifference);
-                exponent = (exponent - g_ExponentDifference) << g_ExponentShifting;
-                return sign | exponent | mantissa;
+                const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> symbolShiftingDifference);
+                const auto halfMantissa = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::mantissa) >> exponentShiftingDifference);
+                halfExponent = (halfExponent - exponentDifference) << exponentShifting;
+                return sign | halfExponent | halfMantissa;
             }
             else
             {
@@ -63,15 +65,15 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
         else
         {
             // E = 30, M = 1023 (半浮点数的最大量级)
-            const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> g_SymbolShiftingDifference);
-            return sign | gsl::narrow_cast<OriginalType>(g_Exponent - 1);
+            const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> symbolShiftingDifference);
+            return sign | gsl::narrow_cast<OriginalType>(exponent - 1);
         }
     }
     else
     {
         // E = 1, M = 0 (半浮点数的最小量级)
-        const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> g_SymbolShiftingDifference);
-        return sign | gsl::narrow_cast<OriginalType>(1 << g_ExponentShifting);
+        const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> symbolShiftingDifference);
+        return sign | gsl::narrow_cast<OriginalType>(1 << exponentShifting);
     }
 }
 
@@ -81,17 +83,19 @@ float Rendering::HalfFloat::ToFloat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto exponent = gsl::narrow_cast<FloatIntegerType>(m_HalfFloat & g_Exponent) >> g_ExponentShifting;
-    if (exponent != 0)
+    auto halfExponent = gsl::narrow_cast<FloatIntegerType>(halfFloat & exponent) >> exponentShifting;
+    if (halfExponent != 0)
     {
-        const auto sign = gsl::narrow_cast<FloatIntegerType>(m_HalfFloat & g_Symbol) << g_SymbolShiftingDifference;
-        const auto mantissa = gsl::narrow_cast<FloatIntegerType>(m_HalfFloat & g_Mantissa) << g_ExponentShiftingDifference;
-        exponent = (exponent + g_ExponentDifference) << FloatTraitsType::exponentShifting;
-        const auto result = sign | exponent | mantissa;
+        const auto sign = gsl::narrow_cast<FloatIntegerType>(halfFloat & symbol) << symbolShiftingDifference;
+        const auto halfMantissa = gsl::narrow_cast<FloatIntegerType>(halfFloat & mantissa) << exponentShiftingDifference;
+        halfExponent = (halfExponent + exponentDifference) << FloatTraitsType::exponentShifting;
+        const auto result = sign | halfExponent | halfMantissa;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)  // 这里必须使用reinterpret_cast
+
         return reinterpret_cast<const float&>(result);
+
 #include STSTEM_WARNING_POP
     }
     else
@@ -105,10 +109,10 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ToOriginalType() const 
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_HalfFloat;
+    return halfFloat;
 }
 
-const Rendering::HalfFloat Rendering::HalfFloat::operator-() const noexcept
+Rendering::HalfFloat Rendering::HalfFloat::operator-() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -125,7 +129,7 @@ Rendering::HalfFloat& Rendering::HalfFloat::operator+=(const HalfFloat& rhs) noe
 
     value += rhs.ToFloat();
 
-    m_HalfFloat = ConvertHalfFloat(value);
+    halfFloat = ConvertHalfFloat(value);
 
     return *this;
 }
@@ -138,7 +142,7 @@ Rendering::HalfFloat& Rendering::HalfFloat::operator-=(const HalfFloat& rhs) noe
 
     value -= rhs.ToFloat();
 
-    m_HalfFloat = ConvertHalfFloat(value);
+    halfFloat = ConvertHalfFloat(value);
 
     return *this;
 }
@@ -151,7 +155,7 @@ Rendering::HalfFloat& Rendering::HalfFloat::operator*=(const HalfFloat& rhs) noe
 
     value *= rhs.ToFloat();
 
-    m_HalfFloat = ConvertHalfFloat(value);
+    halfFloat = ConvertHalfFloat(value);
 
     return *this;
 }
@@ -160,13 +164,13 @@ Rendering::HalfFloat& Rendering::HalfFloat::operator/=(const HalfFloat& rhs)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    if (m_HalfFloat != 0)
+    if (halfFloat != 0)
     {
         auto value = ToFloat();
 
         value /= rhs.ToFloat();
 
-        m_HalfFloat = ConvertHalfFloat(value);
+        halfFloat = ConvertHalfFloat(value);
     }
     else
     {

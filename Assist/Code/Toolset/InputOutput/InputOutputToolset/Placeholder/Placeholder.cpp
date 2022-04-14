@@ -6,13 +6,12 @@
 
 #include "Toolset/InputOutput/InputOutputToolset/InputOutputToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/InputOutputClassInvariantMacro.h"
 
-InputOutputToolset::Placeholder
-	::Placeholder() 
+InputOutputToolset::Placeholder ::Placeholder() noexcept
 {
-	INPUT_OUTPUT_SELF_CLASS_IS_VALID_9;
+    INPUT_OUTPUT_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(InputOutputToolset, Placeholder)

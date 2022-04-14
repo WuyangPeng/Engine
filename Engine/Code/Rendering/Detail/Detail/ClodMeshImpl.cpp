@@ -24,13 +24,13 @@
 using std::string;
 using std::vector;
 
-Rendering::ClodMeshImpl ::ClodMeshImpl() noexcept
+Rendering::ClodMeshImpl::ClodMeshImpl() noexcept
     : m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ClodMeshImpl ::ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept
+Rendering::ClodMeshImpl::ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept
     : m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{ recordArray }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -38,7 +38,7 @@ Rendering::ClodMeshImpl ::ClodMeshImpl(const CollapseRecordArraySharedPtr& recor
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshImpl)
 
-void Rendering::ClodMeshImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ClodMeshImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -47,7 +47,7 @@ void Rendering::ClodMeshImpl ::Load(CoreTools::BufferSource& source)
     //source.ReadSharedPtr(m_RecordArray);
 }
 
-void Rendering::ClodMeshImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::ClodMeshImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -56,7 +56,7 @@ void Rendering::ClodMeshImpl ::Save(CoreTools::BufferTarget& target) const
     //	target.WriteSharedPtr(m_RecordArray);
 }
 
-int Rendering::ClodMeshImpl ::GetStreamingSize() const
+int Rendering::ClodMeshImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -68,42 +68,42 @@ int Rendering::ClodMeshImpl ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::ClodMeshImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::ClodMeshImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
     //source.ResolveObjectSharedPtrLink(m_RecordArray);
 }
 
-void Rendering::ClodMeshImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::ClodMeshImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
     //target.RegisterSharedPtr(m_RecordArray);
 }
 
-int Rendering::ClodMeshImpl ::GetNumRecords() const
+int Rendering::ClodMeshImpl::GetNumRecords() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_RecordArray->GetNumRecords();
 }
 
-int Rendering::ClodMeshImpl ::GetTargetRecord() const noexcept
+int Rendering::ClodMeshImpl::GetTargetRecord() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_TargetRecord;
 }
 
-void Rendering::ClodMeshImpl ::SetTargetRecord(int targetRecord) noexcept
+void Rendering::ClodMeshImpl::SetTargetRecord(int targetRecord) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_TargetRecord = targetRecord;
 }
 
-void Rendering::ClodMeshImpl ::SelectLevelOfDetail(VertexBufferSharedPtr vertexbuffer, IndexBufferSharedPtr indexbuffer, int targetRecord)
+void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBufferSharedPtr vertexbuffer, IndexBufferSharedPtr indexbuffer, int targetRecord)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -152,32 +152,32 @@ void Rendering::ClodMeshImpl ::SelectLevelOfDetail(VertexBufferSharedPtr vertexb
 
     if (bufferChanged)
     {
-        RENDERER_MANAGE_SINGLETON.UpdateAll(indexbuffer.get());
+        RENDERER_MANAGE_SINGLETON.UpdateAll(indexbuffer);
     }
 }
 
-CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_RecordArray->GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::ClodMeshImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::ClodMeshImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_RecordArray->GetAllObjectsByName(name);
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::ClodMeshImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ClodMeshImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_RecordArray->GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::ClodMeshImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::ClodMeshImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -30,8 +30,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainBase);
 
-Rendering::TerrainBase ::TerrainBase(const System::String& heightName, VertexFormatSharedPtr vformat, CameraSharedPtr camera)
-    : mMode(0), mVFormat(vformat), mCameraRow(-1), mCameraCol(-1), mCamera(camera)
+Rendering::TerrainBase::TerrainBase(const System::String& heightName, VertexFormatSharedPtr vformat, CameraSharedPtr camera)
+    : ParentType{ NodeCreate::Init }, mMode(0), mVFormat(vformat), mCameraRow(-1), mCameraCol(-1), mCamera(camera)
 {
     // Load global terrain information.
     LoadHeader(heightName);
@@ -62,7 +62,7 @@ Rendering::TerrainBase ::TerrainBase(const System::String& heightName, VertexFor
     }
 }
 
-Rendering::TerrainBase ::~TerrainBase(){
+Rendering::TerrainBase::~TerrainBase(){
     EXCEPTION_TRY{
         for (int row = 0; row < mNumRows; ++row){
             for (int col = 0; col < mNumCols; ++col){
@@ -74,7 +74,7 @@ Rendering::TerrainBase ::~TerrainBase(){
 EXCEPTION_ALL_CATCH(Rendering)
 }
 
-Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::GetPage(int row, int col)
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase::GetPage(int row, int col)
 {
     if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
     {
@@ -85,7 +85,7 @@ Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::GetPage(int row, int co
     return TerrainPageSharedPtr();
 }
 
-Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::GetCurrentPage(float x, float y) const noexcept
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase::GetCurrentPage(float x, float y) const noexcept
 {
     const float invLength = 1.0f / (mSpacing * (float)(mSize - 1));
 
@@ -106,7 +106,7 @@ Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::GetCurrentPage(float x,
     return mPages[row][col];
 }
 
-float Rendering::TerrainBase ::GetHeight(float x, float y) const
+float Rendering::TerrainBase::GetHeight(float x, float y) const
 {
     TerrainPageSharedPtr page = GetCurrentPage(x, y);
 
@@ -117,7 +117,7 @@ float Rendering::TerrainBase ::GetHeight(float x, float y) const
     return page->GetHeight(x, y);
 }
 
-Mathematics::AVectorF Rendering::TerrainBase ::GetNormal(float x, float y) const
+Mathematics::AVectorF Rendering::TerrainBase::GetNormal(float x, float y) const
 {
     const float xp = x + mSpacing;
     const float xm = x - mSpacing;
@@ -149,7 +149,7 @@ Mathematics::AVectorF Rendering::TerrainBase ::GetNormal(float x, float y) const
     return normal;
 }
 
-void Rendering::TerrainBase ::LoadHeader(const System::String& heightName)
+void Rendering::TerrainBase::LoadHeader(const System::String& heightName)
 {
     // Load the data into temporary variables.  EndianCopy uses memcpy, so
     // if you were to load directly into the class members and use memcpy,
@@ -171,7 +171,7 @@ void Rendering::TerrainBase ::LoadHeader(const System::String& heightName)
     header.Read(sizeof(float), &mSpacing);
 }
 
-void Rendering::TerrainBase ::LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
+void Rendering::TerrainBase::LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
 {
     const int numHeights = mSize * mSize;
     unsigned short* heights = nullptr;  // NEW1<unsigned short>(numHeights);
@@ -184,7 +184,7 @@ void Rendering::TerrainBase ::LoadPage(int row, int col, const System::String& h
     }
     else
     {
-        memset(heights, 0, numHeights * sizeof(unsigned short));
+      //  memset(heights, 0, numHeights * sizeof(unsigned short));
     }
 
     const float length = mSpacing * (float)(mSize - 1);
@@ -194,7 +194,7 @@ void Rendering::TerrainBase ::LoadPage(int row, int col, const System::String& h
     mPages[row][col] = page;
 }
 
-Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase::ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
 {
     if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
     {
@@ -207,7 +207,7 @@ Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::ReplacePage(int row, in
     return TerrainPageSharedPtr();
 }
 
-Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::ReplacePage(int row, int col, TerrainPageSharedPtr newPage)
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase::ReplacePage(int row, int col, TerrainPageSharedPtr newPage)
 {
     if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
     {
@@ -220,7 +220,7 @@ Rendering::TerrainPageSharedPtr Rendering::TerrainBase ::ReplacePage(int row, in
     return TerrainPageSharedPtr();
 }
 
-void Rendering::TerrainBase ::OnCameraMotion()
+void Rendering::TerrainBase::OnCameraMotion()
 {
     RENDERING_ASSERTION_0(mCamera != 0, "Camera must exist\n");
     if (!mCamera)
@@ -294,7 +294,7 @@ void Rendering::TerrainBase ::OnCameraMotion()
 
 // Name support.
 
-CoreTools::ObjectSharedPtr Rendering::TerrainBase ::GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::TerrainBase::GetObjectByName(const std::string& name)
 {
     CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
     if (found)
@@ -327,7 +327,7 @@ CoreTools::ObjectSharedPtr Rendering::TerrainBase ::GetObjectByName(const std::s
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::TerrainBase ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::TerrainBase::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
@@ -348,7 +348,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::TerrainBase ::GetAllObjectsBy
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::TerrainBase ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::TerrainBase::GetConstObjectByName(const std::string& name) const
 {
     CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -382,7 +382,7 @@ CoreTools::ConstObjectSharedPtr Rendering::TerrainBase ::GetConstObjectByName(co
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::TerrainBase ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::TerrainBase::GetAllConstObjectsByName(const std::string& name) const
 {
     std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -426,7 +426,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::TerrainBase::CloneObject() const
     return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
-void Rendering::TerrainBase ::Load(CoreTools::BufferSource& source)
+void Rendering::TerrainBase::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -456,7 +456,7 @@ void Rendering::TerrainBase ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::TerrainBase ::Link(CoreTools::ObjectLink& source)
+void Rendering::TerrainBase::Link(CoreTools::ObjectLink& source)
 {
     Node::Link(source);
 
@@ -471,12 +471,12 @@ void Rendering::TerrainBase ::Link(CoreTools::ObjectLink& source)
     }
 }
 
-void Rendering::TerrainBase ::PostLink()
+void Rendering::TerrainBase::PostLink()
 {
     Node::PostLink();
 }
 
-uint64_t Rendering::TerrainBase ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::TerrainBase::Register(CoreTools::ObjectRegister& target) const
 {
     const uint64_t id = Node::Register(target);
     if (0 < id)
@@ -495,7 +495,7 @@ uint64_t Rendering::TerrainBase ::Register(CoreTools::ObjectRegister& target) co
     return id;
 }
 
-void Rendering::TerrainBase ::Save(CoreTools::BufferTarget& target) const
+void Rendering::TerrainBase::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -524,7 +524,7 @@ void Rendering::TerrainBase ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::TerrainBase ::GetStreamingSize() const
+int Rendering::TerrainBase::GetStreamingSize() const
 {
     int size = Node::GetStreamingSize();
     size += CORE_TOOLS_STREAM_SIZE(mMode);
@@ -542,32 +542,32 @@ int Rendering::TerrainBase ::GetStreamingSize() const
     return size;
 }
 
-int Rendering::TerrainBase ::GetRowQuantity() const noexcept
+int Rendering::TerrainBase::GetRowQuantity() const noexcept
 {
     return mNumRows;
 }
 
-int Rendering::TerrainBase ::GetColQuantity() const noexcept
+int Rendering::TerrainBase::GetColQuantity() const noexcept
 {
     return mNumCols;
 }
 
-int Rendering::TerrainBase ::GetSize() const noexcept
+int Rendering::TerrainBase::GetSize() const noexcept
 {
     return mSize;
 }
 
-float Rendering::TerrainBase ::GetMinElevation() const noexcept
+float Rendering::TerrainBase::GetMinElevation() const noexcept
 {
     return mMinElevation;
 }
 
-float Rendering::TerrainBase ::GetMaxElevation() const noexcept
+float Rendering::TerrainBase::GetMaxElevation() const noexcept
 {
     return mMaxElevation;
 }
 
-float Rendering::TerrainBase ::GetSpacing() const noexcept
+float Rendering::TerrainBase::GetSpacing() const noexcept
 {
     return mSpacing;
 }

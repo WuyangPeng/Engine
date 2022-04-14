@@ -8,20 +8,19 @@
 
 #include "Example/Rendering/RenderingExample/RenderingExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_RENDERING_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_RENDERING_EXAMPLE_STATIC
+#else  // BUILDING_RENDERING_EXAMPLE_STATIC
 
-	namespace RenderingExample
-	{
-		void StaticDllLib()
-		{
+namespace RenderingExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_RENDERING_EXAMPLE_STATIC
+#endif  // !BUILDING_RENDERING_EXAMPLE_STATIC

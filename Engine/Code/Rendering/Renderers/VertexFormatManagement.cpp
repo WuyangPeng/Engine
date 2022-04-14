@@ -14,7 +14,7 @@
 
 using std::make_shared;
 
-Rendering::VertexFormatManagement ::VertexFormatManagement(RendererPtr ptr)
+Rendering::VertexFormatManagement::VertexFormatManagement(RendererPtr ptr)
     : impl{ ptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

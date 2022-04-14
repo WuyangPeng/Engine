@@ -25,7 +25,7 @@ void Rendering::PlatformTexture3DTesting
 }
 
 void Rendering::PlatformTexture3DTesting
-	::Texture3DTest()
+	::Texture3DTest() noexcept
 {
 // 	Texture3DSmartPointer firstTexture3D = LoadTexture::Load3DFromFile(SYSTEM_TEXT("Resource/OpenGLRendererSuite/Texture3D.trt"));
 // 

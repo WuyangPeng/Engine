@@ -17,8 +17,8 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 
-
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26409)
 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, DlodNodeTesting) 
@@ -248,7 +248,7 @@ void Rendering::DlodNodeTesting
 }
 
 void Rendering::DlodNodeTesting
-   ::ChildTest()
+  ::ChildTest()
 {
 //     CoreTools::OutTopLevel outTopLevel;
 // 	CoreTools::ObjectInterfaceSharedPtr firstNode(new DlodNode(4));

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/25 13:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 15:53)
 
 #ifndef RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXTURE_COLOUR_DETAIL_H
@@ -17,8 +17,8 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <Rendering::TextureFormat Format>
-Rendering::TextureColour<Format>::TextureColour(ValueType value1, ValueType value2) noexcept
-    : m_Colour{}, m_IsClamp{ true }
+Rendering::TextureColour<Format>::TextureColour(ValueType value0, ValueType value1) noexcept
+    : colour{}, isClamp{ true }
 {
     constexpr auto valid1 = std::is_same_v<RedType, TrueType> &&
                             std::is_same_v<GreenType, TrueType> &&
@@ -34,7 +34,7 @@ Rendering::TextureColour<Format>::TextureColour(ValueType value1, ValueType valu
 
     static_assert(valid1 || valid2, "Format type is error!");
 
-    SetColour(value1, value2);
+    SetColour(value0, value1);
 
     RENDERING_SELF_CLASS_IS_VALID_3;
 }
@@ -46,8 +46,8 @@ void Rendering::TextureColour<Format>::SetColour(ValueType value1, ValueType val
 
     RENDERING_CLASS_IS_VALID_3;
 
-    m_Colour[0] = value1;
-    m_Colour[1] = value2;
+    colour[0] = value1;
+    colour[1] = value2;
 }
 
 template <>
@@ -64,7 +64,7 @@ RENDERING_DEFAULT_DECLARE void Rendering::TextureColour<Rendering::TextureFormat
 
 template <Rendering::TextureFormat Format>
 Rendering::TextureColour<Format>::TextureColour(ValueType value) noexcept
-    : m_Colour{}, m_IsClamp{ true }
+    : colour{}, isClamp{ true }
 {
     static_assert(!std::is_same_v<GreenType, TrueType>, "GreenType isn't TrueType!");
     static_assert(!std::is_same_v<BlueType, TrueType>, "BlueType isn't TrueType!");
@@ -81,7 +81,7 @@ void Rendering::TextureColour<Format>::SetColour(ValueType value) noexcept
 
     RENDERING_CLASS_IS_VALID_3;
 
-    m_Colour[0] = value;
+    colour[0] = value;
 }
 
 template <>
@@ -134,16 +134,16 @@ template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
 void Rendering::TextureColour<Format>::ConvertingColourFormat(const TextureColour<RhsFormat>& colour)
 {
-    constexpr auto rhsRedMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_RedMaxValue;
-    constexpr auto rhsGreenMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_GreenMaxValue;
-    constexpr auto rhsBlueMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_BlueMaxValue;
-    constexpr auto rhsLuminanceMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_LuminanceMaxValue;
+    constexpr auto rhsRedMaxValue = ColourTextureFormatTraits<RhsFormat>::redMaxValue;
+    constexpr auto rhsGreenMaxValue = ColourTextureFormatTraits<RhsFormat>::greenMaxValue;
+    constexpr auto rhsBlueMaxValue = ColourTextureFormatTraits<RhsFormat>::blueMaxValue;
+    constexpr auto rhsLuminanceMaxValue = ColourTextureFormatTraits<RhsFormat>::luminanceMaxValue;
 
-    Converting<RhsFormat, sm_Red, TextureColour<RhsFormat>::sm_Red>(colour, sm_RedMaxValue, rhsRedMaxValue, std::is_same<ColourTextureFormatTraits<Format>::RedType, TrueType>());
-    Converting<RhsFormat, sm_Green, TextureColour<RhsFormat>::sm_Green>(colour, sm_GreenMaxValue, rhsGreenMaxValue, std::is_same<ColourTextureFormatTraits<Format>::GreenType, TrueType>());
-    Converting<RhsFormat, sm_Blue, TextureColour<RhsFormat>::sm_Blue>(colour, sm_BlueMaxValue, rhsBlueMaxValue, std::is_same<ColourTextureFormatTraits<Format>::BlueType, TrueType>());
+    Converting<RhsFormat, redIndex, TextureColour<RhsFormat>::redIndex>(colour, redMaxValue, rhsRedMaxValue, std::is_same<ColourTextureFormatTraits<Format>::RedType, TrueType>());
+    Converting<RhsFormat, greenIndex, TextureColour<RhsFormat>::greenIndex>(colour, greenMaxValue, rhsGreenMaxValue, std::is_same<ColourTextureFormatTraits<Format>::GreenType, TrueType>());
+    Converting<RhsFormat, blueIndex, TextureColour<RhsFormat>::blueIndex>(colour, blueMaxValue, rhsBlueMaxValue, std::is_same<ColourTextureFormatTraits<Format>::BlueType, TrueType>());
     ConvertingAlpha(colour, std::is_same<AlphaType, TrueType>(), std::is_same<TextureColour<RhsFormat>::AlphaType, TrueType>());
-    Converting<RhsFormat, sm_Luminance, TextureColour<RhsFormat>::sm_Luminance>(colour, sm_LuminanceMaxValue, rhsLuminanceMaxValue, std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, TrueType>());
+    Converting<RhsFormat, luminanceIndex, TextureColour<RhsFormat>::luminanceIndex>(colour, luminanceMaxValue, rhsLuminanceMaxValue, std::is_same<ColourTextureFormatTraits<Format>::LuminanceType, TrueType>());
 }
 
 // private
@@ -151,23 +151,27 @@ template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex, bool HaveBit>
 void Rendering::TextureColour<Format>::Converting(const TextureColour<RhsFormat>& colour, MinType maxValue, typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::integral_constant<bool, HaveBit>&)
 {
-    constexpr auto rhsMinValue = ColourTextureFormatTraits<RhsFormat>::sm_MinValue;
+    constexpr auto rhsMinValue = ColourTextureFormatTraits<RhsFormat>::minValue;
 
-    ConvertingBit<RhsFormat, Index, RhsIndex>(colour, maxValue, rhsMinValue, rhsMaxValue, std::integral_constant<bool, sm_IsFloatingPoint>(),
-                                              std::integral_constant<bool, ColourTextureFormatTraits<RhsFormat>::sm_IsFloatingPoint>());
+    ConvertingBit<RhsFormat, Index, RhsIndex>(colour,
+                                              maxValue,
+                                              rhsMinValue,
+                                              rhsMaxValue,
+                                              std::integral_constant<bool, isFloatingPoint>(),
+                                              std::integral_constant<bool, ColourTextureFormatTraits<RhsFormat>::isFloatingPoint>());
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex>
-void Rendering::TextureColour<Format>::Converting([[maybe_unused]] const TextureColour<RhsFormat>& colour, [[maybe_unused]] MinType maxValue, [[maybe_unused]] typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::false_type&) noexcept
+void Rendering::TextureColour<Format>::Converting(MAYBE_UNUSED const TextureColour<RhsFormat>& colour, MAYBE_UNUSED MinType maxValue, MAYBE_UNUSED typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::false_type&) noexcept
 {
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat, bool HaveAlpha, bool RhsHaveAlpha>
-void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const TextureColour<RhsFormat>& colour, const std::integral_constant<bool, HaveAlpha>&, const std::integral_constant<bool, RhsHaveAlpha>&) noexcept
+void Rendering::TextureColour<Format>::ConvertingAlpha(MAYBE_UNUSED const TextureColour<RhsFormat>& colour, const std::integral_constant<bool, HaveAlpha>&, const std::integral_constant<bool, RhsHaveAlpha>&) noexcept
 {
 }
 
@@ -176,87 +180,103 @@ template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
 void Rendering::TextureColour<Format>::ConvertingAlpha(const TextureColour<RhsFormat>& colour, const std::true_type&, const std::true_type&)
 {
-    constexpr auto rhsAlphaMaxValue = ColourTextureFormatTraits<RhsFormat>::sm_AlphaMaxValue;
+    constexpr auto rhsAlphaMaxValue = ColourTextureFormatTraits<RhsFormat>::alphaMaxValue;
 
-    Converting<RhsFormat, sm_Alpha, TextureColour<RhsFormat>::sm_Alpha>(colour, sm_AlphaMaxValue, rhsAlphaMaxValue, std::is_same<ColourTextureFormatTraits<Format>::AlphaType, TrueType>());
+    Converting<RhsFormat, alphaIndex, TextureColour<RhsFormat>::alphaIndex>(colour, alphaMaxValue, rhsAlphaMaxValue, std::is_same<ColourTextureFormatTraits<Format>::AlphaType, TrueType>());
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat>
-void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const TextureColour<RhsFormat>& colour, const std::true_type&, const std::false_type&) noexcept
+void Rendering::TextureColour<Format>::ConvertingAlpha([[maybe_unused]] const TextureColour<RhsFormat>& textureColour, const std::true_type&, const std::false_type&) noexcept
 {
-    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize, "index is crossing!");
+    static_assert(0 <= alphaIndex && alphaIndex < arraySize, "index is crossing!");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Alpha] = sm_AlphaMaxValue;
+
+    colour[alphaIndex] = alphaMaxValue;
+
 #include STSTEM_WARNING_POP
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex, bool IsFloatingPoint, bool RhsIsFloatingPoint>
-void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsFormat>& colour, MinType maxValue, typename TextureColour<RhsFormat>::MinType rhsMinValue,
-                                                     typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::integral_constant<bool, IsFloatingPoint>&,
+void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsFormat>& textureColour,
+                                                     MinType maxValue,
+                                                     typename TextureColour<RhsFormat>::MinType rhsMinValue,
+                                                     typename TextureColour<RhsFormat>::MinType rhsMaxValue,
+                                                     const std::integral_constant<bool, IsFloatingPoint>&,
                                                      const std::integral_constant<bool, RhsIsFloatingPoint>&)
 {
-    static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
-    static_assert(0 <= RhsIndex && RhsIndex < ColourTextureFormatTraits<RhsFormat>::sm_ArraySize, "index is crossing!");
+    static_assert(0 <= Index && Index < arraySize, "index is crossing!");
+    static_assert(0 <= RhsIndex && RhsIndex < ColourTextureFormatTraits<RhsFormat>::arraySize, "index is crossing!");
 
     using RhsValueType = typename TextureColour<RhsFormat>::ValueType;
 
     const auto rhsFormatDistance = rhsMaxValue - rhsMinValue;
-    const auto lhsFormatDistance = maxValue - sm_MinValue;
-    const auto difference = colour[RhsIndex] - rhsMinValue;
+    const auto lhsFormatDistance = maxValue - minValue;
+    const auto difference = textureColour[RhsIndex] - rhsMinValue;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance) + sm_MinValue;
+#include SYSTEM_WARNING_DISABLE(26467)
+
+    colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance) + minValue;
+
 #include STSTEM_WARNING_POP
 }
 
 // private
 template <Rendering::TextureFormat Format>
 template <Rendering::TextureFormat RhsFormat, int Index, int RhsIndex>
-void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsFormat>& colour, MinType maxValue, typename TextureColour<RhsFormat>::MinType rhsMinValue,
-                                                     typename TextureColour<RhsFormat>::MinType rhsMaxValue, const std::false_type&, const std::true_type&)
+void Rendering::TextureColour<Format>::ConvertingBit(const TextureColour<RhsFormat>& textureColour,
+                                                     MinType maxValue,
+                                                     typename TextureColour<RhsFormat>::MinType rhsMinValue,
+                                                     typename TextureColour<RhsFormat>::MinType rhsMaxValue,
+                                                     const std::false_type&,
+                                                     const std::true_type&)
 {
-    static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
-    static_assert(0 <= RhsIndex && RhsIndex < ColourTextureFormatTraits<RhsFormat>::sm_ArraySize, "index is crossing!");
+    static_assert(0 <= Index && Index < arraySize, "index is crossing!");
+    static_assert(0 <= RhsIndex && RhsIndex < ColourTextureFormatTraits<RhsFormat>::arraySize, "index is crossing!");
 
     using RhsValueType = typename TextureColour<RhsFormat>::ValueType;
 
     const auto rhsFormatDistance = rhsMaxValue - rhsMinValue;
-    const auto lhsFormatDistance = maxValue - sm_MinValue;
-    const auto difference = colour[RhsIndex] - rhsMinValue;
+    const auto lhsFormatDistance = maxValue - minValue;
+    const auto difference = textureColour[RhsIndex] - rhsMinValue;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance + 0.5f) + sm_MinValue;
+#include SYSTEM_WARNING_DISABLE(26467)
+
+    colour[Index] = boost::numeric_cast<ValueType>(difference * lhsFormatDistance / rhsFormatDistance + 0.5f) + minValue;
+
 #include STSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <Rendering::TextureFormat Format>
 bool Rendering::TextureColour<Format>::IsValid() const noexcept
 {
-    if (!m_IsClamp)
+    if (!isClamp)
     {
         return true;
     }
 
     try
     {
-        auto iter = sm_MaxValue.cbegin();
-        for (auto value : m_Colour)
+        auto iter = maxValue.cbegin();
+        for (auto value : colour)
         {
-            if (iter == sm_MaxValue.cend())
+            if (iter == maxValue.cend())
             {
                 return false;
             }
 
-            if (value < sm_MinValue || *iter < value)
+            if (value < minValue || *iter < value)
             {
                 return false;
             }
@@ -271,6 +291,7 @@ bool Rendering::TextureColour<Format>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <Rendering::TextureFormat Format>
@@ -278,34 +299,36 @@ bool Rendering::TextureColour<Format>::IsClamp() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-    return m_IsClamp;
+    return isClamp;
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TextureColour<Format>::SetClamp(bool isClamp) noexcept
+void Rendering::TextureColour<Format>::SetClamp(bool newIsClamp) noexcept
 {
     RENDERING_CLASS_IS_VALID_3;
 
-    if (m_IsClamp == false && isClamp == true)
+    if (isClamp == false && newIsClamp == true)
     {
-        m_IsClamp = true;
+        isClamp = true;
         Standardization();
     }
 
-    m_IsClamp = isClamp;
+    isClamp = newIsClamp;
 }
 
 template <Rendering::TextureFormat Format>
 typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetRed() const noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::RedType, TrueType>, "RedType is TrueType!");
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    return m_Colour[sm_Red];
+
+    return colour[redIndex];
+
 #include STSTEM_WARNING_POP
 }
 
@@ -313,13 +336,15 @@ template <Rendering::TextureFormat Format>
 typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetGreen() const noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::GreenType, TrueType>, "GreenType is TrueType!");
-    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
+    static_assert(0 <= greenIndex && greenIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    return m_Colour[sm_Green];
+
+    return colour[greenIndex];
+
 #include STSTEM_WARNING_POP
 }
 
@@ -327,13 +352,15 @@ template <Rendering::TextureFormat Format>
 typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetBlue() const noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::BlueType, TrueType>, "BlueType is TrueType!");
-    static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
+    static_assert(0 <= blueIndex && blueIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    return m_Colour[sm_Blue];
+
+    return colour[blueIndex];
+
 #include STSTEM_WARNING_POP
 }
 
@@ -341,13 +368,15 @@ template <Rendering::TextureFormat Format>
 typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetAlpha() const noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::AlphaType, TrueType>, "AlphaType is TrueType!");
-    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+    static_assert(0 <= alphaIndex && alphaIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    return m_Colour[sm_Alpha];
+
+    return colour[alphaIndex];
+
 #include STSTEM_WARNING_POP
 }
 
@@ -355,13 +384,15 @@ template <Rendering::TextureFormat Format>
 typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Format>::GetLuminance() const noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::LuminanceType, Rendering::TrueType>, "LuminanceType is TrueType!");
-    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+    static_assert(0 <= luminanceIndex && luminanceIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_CONST_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    return m_Colour[sm_Luminance];
+
+    return colour[luminanceIndex];
+
 #include STSTEM_WARNING_POP
 }
 
@@ -370,7 +401,7 @@ const typename Rendering::TextureColour<Format>::ValueType* Rendering::TextureCo
 {
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-    return m_Colour.data();
+    return colour.data();
 }
 
 template <Rendering::TextureFormat Format>
@@ -378,20 +409,22 @@ typename Rendering::TextureColour<Format>::ValueType Rendering::TextureColour<Fo
 {
     RENDERING_CLASS_IS_VALID_CONST_3;
 
-    return m_Colour.at(index);
+    return colour.at(index);
 }
 
 template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetRed(ValueType red) noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::RedType, TrueType>, "RedType is TrueType!");
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Red] = red;
+
+    colour[redIndex] = red;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -399,13 +432,15 @@ template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetGreen(ValueType green) noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::GreenType, TrueType>, "GreenType is TrueType!");
-    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
+    static_assert(0 <= greenIndex && greenIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Green] = green;
+
+    colour[greenIndex] = green;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -413,13 +448,15 @@ template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetBlue(ValueType blue) noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::BlueType, TrueType>, "BlueType is TrueType!");
-    static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
+    static_assert(0 <= blueIndex && blueIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Blue] = blue;
+
+    colour[blueIndex] = blue;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -427,13 +464,15 @@ template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetAlpha(ValueType alpha) noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::AlphaType, TrueType>, "AlphaType is TrueType!");
-    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+    static_assert(0 <= alphaIndex && alphaIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Alpha] = alpha;
+
+    colour[alphaIndex] = alpha;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -441,13 +480,15 @@ template <Rendering::TextureFormat Format>
 void Rendering::TextureColour<Format>::SetLuminance(ValueType luminance) noexcept
 {
     static_assert(std::is_same_v<TextureColour<Format>::LuminanceType, TrueType>, "LuminanceType is TrueType!");
-    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+    static_assert(0 <= luminanceIndex && luminanceIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Luminance] = luminance;
+
+    colour[luminanceIndex] = luminance;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -456,10 +497,10 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator+=(c
 {
     RENDERING_CLASS_IS_VALID_3;
 
-    auto rhsIter = rhs.m_Colour.cbegin();
-    for (auto& value : m_Colour)
+    auto rhsIter = rhs.colour.cbegin();
+    for (auto& value : colour)
     {
-        if (rhsIter != rhs.m_Colour.cend())
+        if (rhsIter != rhs.colour.cend())
         {
             value += *rhsIter;
         }
@@ -477,10 +518,10 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator-=(c
 {
     RENDERING_CLASS_IS_VALID_3;
 
-    auto rhsIter = rhs.m_Colour.cbegin();
-    for (auto& value : m_Colour)
+    auto rhsIter = rhs.colour.cbegin();
+    for (auto& value : colour)
     {
-        if (rhsIter != rhs.m_Colour.cend())
+        if (rhsIter != rhs.colour.cend())
         {
             value -= *rhsIter;
         }
@@ -498,11 +539,11 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator*=(c
 {
     RENDERING_CLASS_IS_VALID_3;
 
-    Multiply<sm_Red>(std::is_same<RedType, TrueType>(), sm_RedMaxValue, rhs);
-    Multiply<sm_Green>(std::is_same<GreenType, TrueType>(), sm_GreenMaxValue, rhs);
-    Multiply<sm_Blue>(std::is_same<BlueType, TrueType>(), sm_BlueMaxValue, rhs);
-    Multiply<sm_Alpha>(std::is_same<AlphaType, TrueType>(), sm_AlphaMaxValue, rhs);
-    Multiply<sm_Luminance>(std::is_same<LuminanceType, TrueType>(), sm_LuminanceMaxValue, rhs);
+    Multiply<redIndex>(std::is_same<RedType, TrueType>(), redMaxValue, rhs);
+    Multiply<greenIndex>(std::is_same<GreenType, TrueType>(), greenMaxValue, rhs);
+    Multiply<blueIndex>(std::is_same<BlueType, TrueType>(), blueMaxValue, rhs);
+    Multiply<alphaIndex>(std::is_same<AlphaType, TrueType>(), alphaMaxValue, rhs);
+    Multiply<luminanceIndex>(std::is_same<LuminanceType, TrueType>(), luminanceMaxValue, rhs);
 
     Standardization();
 
@@ -511,19 +552,22 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator*=(c
 
 template <Rendering::TextureFormat Format>
 template <int Index, bool HaveBit>
-void Rendering::TextureColour<Format>::Multiply(const std::integral_constant<bool, HaveBit>&, MinType maxValue, const TextureColour& colour)
+void Rendering::TextureColour<Format>::Multiply(const std::integral_constant<bool, HaveBit>&, MinType maxValue, const TextureColour& textureColour)
 {
-    static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
+    static_assert(0 <= Index && Index < arraySize, "index is crossing!");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[Index] = boost::numeric_cast<ValueType>(m_Colour[Index] * colour[Index] / maxValue);
+#include SYSTEM_WARNING_DISABLE(26467)
+
+    colour[Index] = boost::numeric_cast<ValueType>(textureColour[Index] * textureColour[Index] / maxValue);
+
 #include STSTEM_WARNING_POP
 }
 
 template <Rendering::TextureFormat Format>
 template <int Index>
-void Rendering::TextureColour<Format>::Multiply(const std::false_type&, [[maybe_unused]] MinType maxValue, [[maybe_unused]] const TextureColour& colour) noexcept
+void Rendering::TextureColour<Format>::Multiply(const std::false_type&, MAYBE_UNUSED MinType maxValue, MAYBE_UNUSED const TextureColour& textureColour) noexcept
 {
 }
 
@@ -535,10 +579,16 @@ Rendering::TextureColour<Format>& Rendering::TextureColour<Format>::operator*=(R
 
     RENDERING_CLASS_IS_VALID_3;
 
-    for (auto& value : m_Colour)
+    for (auto& value : colour)
     {
         auto multiply = value * rhs;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26467)
+
         value = boost::numeric_cast<ValueType>(multiply);
+
+#include STSTEM_WARNING_POP
     }
 
     Standardization();
@@ -569,10 +619,16 @@ void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::integral_c
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
     }
 
-    for (auto& value : m_Colour)
+    for (auto& value : colour)
     {
         auto divide = value / rhs;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26467)
+
         value = boost::numeric_cast<ValueType>(divide);
+
+#include STSTEM_WARNING_POP
     }
 
     Standardization();
@@ -588,23 +644,29 @@ void Rendering::TextureColour<Format>::Divide(RhsType rhs, const std::false_type
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
     }
 
-    for (auto& value : m_Colour)
+    for (auto& value : colour)
     {
         auto divide = value / rhs;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26467)
+
         value = boost::numeric_cast<ValueType>(divide);
+
+#include STSTEM_WARNING_POP
     }
 
     Standardization();
 }
 
 template <Rendering::TextureFormat Format>
-bool Rendering ::Approximate(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs, typename TextureColour<Format>::ValueType epsilon)
+bool Rendering::Approximate(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs, typename TextureColour<Format>::ValueType epsilon)
 {
-    static_assert(ColourTextureFormatTraits<Format>::sm_IsFloatingPoint, "Format is Floating Point!");
+    static_assert(ColourTextureFormatTraits<Format>::isFloatingPoint, "Format is Floating Point!");
 
     using ValueType = typename TextureColour<Format>::ValueType;
 
-    for (auto i = 0; i < ColourTextureFormatTraits<Format>::sm_ArraySize; ++i)
+    for (auto i = 0; i < ColourTextureFormatTraits<Format>::arraySize; ++i)
     {
         if (epsilon < Mathematics::Math<ValueType>::FAbs(lhs[i] - rhs[i]))
         {
@@ -616,11 +678,11 @@ bool Rendering ::Approximate(const TextureColour<Format>& lhs, const TextureColo
 }
 
 template <Rendering::TextureFormat Format>
-bool Rendering ::operator==(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs)
+bool Rendering::operator==(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs)
 {
-    static_assert(!ColourTextureFormatTraits<Format>::sm_IsFloatingPoint, "Format isn't Floating Point!");
+    static_assert(!ColourTextureFormatTraits<Format>::isFloatingPoint, "Format isn't Floating Point!");
 
-    for (auto i = 0; i < ColourTextureFormatTraits<Format>::sm_ArraySize; ++i)
+    for (auto i = 0; i < ColourTextureFormatTraits<Format>::arraySize; ++i)
     {
         if (lhs[i] != rhs[i])
         {

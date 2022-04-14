@@ -39,7 +39,7 @@ Rendering::WorldMatrixConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,WorldMatrixConstant)
 
-void Rendering::WorldMatrixConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::WorldMatrixConstant::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
  

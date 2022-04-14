@@ -269,20 +269,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
-    <Text Include="Resource\Schedule.txt" />
-    <Text Include="Resource\Todo\Level 0.txt" />
-    <Text Include="Resource\Todo\Level 1.txt" />
-    <Text Include="Resource\Todo\Level 2.txt" />
-    <Text Include="Resource\Todo\Level 3.txt" />
-    <Text Include="Resource\Todo\Level 4.txt" />
-    <Text Include="Resource\Todo\Level 5.txt" />
-    <Text Include="Resource\Todo\Level 6.txt" />
-    <Text Include="Resource\Todo\Level 7.txt" />
-    <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\AglRenderer\AglRenderer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\AglRenderer\AglRendererData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Controllers\BlendTransformController.cpp" />
@@ -338,6 +324,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\SpecializedIO.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TextureColour.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Transform.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DataTypes\Utility.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\BillboardNode.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Detail\ClodMesh.cpp" />
@@ -525,9 +512,11 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Light.cpp" />
@@ -544,7 +533,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SaveVisual.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Spatial.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\SpatialData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TriangleIndex.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglePosition.cpp" />
@@ -554,7 +542,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Visual.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\VisualData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelPositionConstant.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldDirectionVectorConstant.cpp" />
@@ -719,18 +706,15 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsFromCheckDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsToCheck.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TexelsToCheckDetail.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImpl.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformImplDetail.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrix.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Detail\TransformMatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Flags\TextureFormat.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\HalfFloat.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\SpecializedIO.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColour.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TextureColourDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Transform.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformAchieve.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformDetail.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrixDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\Utility.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Demogl\Demogl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Demogl\DemoglFwd.h" />
@@ -971,6 +955,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Resources\RenderTarget.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Resources.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesFwd.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Resources\SaveTexture.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture1D.h" />
@@ -1008,9 +993,11 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordContainerImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\PickRecordImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\SpatialData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\StandardMeshImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\TrianglePositionImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisibleSetImpl.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualImpl.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\WorldCoordinateFrame.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Flags\CameraFlags.h" />
@@ -1033,7 +1020,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SceneGraphFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\ScreenTarget.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Spatial.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\SpatialData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\StandardMesh.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TriangleIndex.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglePosition.h" />
@@ -1043,7 +1029,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\TrianglesStrip.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisibleSet.h" />
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Visual.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\VisualData.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelDirectionVectorConstant.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraModelPositionConstant.h" />
     <ClInclude Include="..\..\..\Code\Rendering\ShaderFloats\CameraWorldDirectionVectorConstant.h" />
@@ -1154,6 +1139,22 @@
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\WglRendererFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Wing\Wing.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Wing\WingFwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

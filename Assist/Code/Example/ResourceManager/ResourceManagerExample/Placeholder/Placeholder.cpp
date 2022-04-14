@@ -6,13 +6,12 @@
 
 #include "Example/ResourceManager/ResourceManagerExample/ResourceManagerExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ResourceManagerClassInvariantMacro.h"
 
-ResourceManagerExample::Placeholder
-	::Placeholder() 
+ResourceManagerExample::Placeholder ::Placeholder() noexcept
 {
-	RESOURCE_MANAGER_SELF_CLASS_IS_VALID_9;
+    RESOURCE_MANAGER_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ResourceManagerExample, Placeholder)

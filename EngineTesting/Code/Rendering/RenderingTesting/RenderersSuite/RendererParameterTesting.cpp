@@ -11,7 +11,7 @@
 #include "Rendering/Renderers/RendererParameter.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RendererParameterTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26496)
 void Rendering::RendererParameterTesting
 	::MainTest()
 { 

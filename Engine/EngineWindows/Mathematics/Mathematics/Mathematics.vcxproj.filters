@@ -163,9 +163,6 @@
     <Filter Include="Intersection 源文件">
       <UniqueIdentifier>{6630f29e-945b-4128-b75f-8b63b477e16b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Meshes 模板文件\Detail">
-      <UniqueIdentifier>{3065b8bd-3193-45cd-b8f9-68c559301ced}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Meshes 源文件">
       <UniqueIdentifier>{218f3257-0c04-4102-b350-d25b7edec86a}</UniqueIdentifier>
     </Filter>
@@ -282,6 +279,18 @@
     </Filter>
     <Filter Include="Approximation 源文件\Detail">
       <UniqueIdentifier>{67fa1615-c8a1-4b00-b463-07ca937fae81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComputationalGeometry 源文件">
+      <UniqueIdentifier>{86c5d8c0-1f01-4499-8575-89f29c452e65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Containment 源文件">
+      <UniqueIdentifier>{95db50b9-870a-4b96-ac30-ca389d4d970d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interpolation 源文件">
+      <UniqueIdentifier>{a4252d97-dd03-445b-ae36-36393780968a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes 头文件\Detail">
+      <UniqueIdentifier>{fa7f744c-4a57-4f74-b735-6dd93a51b781}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1590,6 +1599,267 @@
     <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Triangle3.cpp">
       <Filter>Intersection 源文件\Intersection3D</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull1.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull2.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull3.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay1.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay2.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay3.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\IncrementalDelaunay2.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\ComputationalGeometry\TriangulateEC.cpp">
+      <Filter>ComputationalGeometry 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContBox2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContBox3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContCapsule3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContCylinder3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContEllipse2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContEllipse2MinCR.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContEllipsoid3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContEllipsoid3MinCR.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContLozenge3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContMinBox2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContMinBox3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContMinCircle2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContMinSphere3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContPointInPolygon2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContPointInPolyhedron3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContScribeCircle3Sphere3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContSeparatePoints2.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContSeparatePoints3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ContSphere3.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ScribeCircle2Circumscribe.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Containment\ScribeCircle2Inscribe.cpp">
+      <Filter>Containment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineCurveFit.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\RiemannianGeodesic.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineRectangle.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\Surface.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\ParametricSurface.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineGeodesic.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineReduction.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineSurfaceFit.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\BSplineVolume.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\PolynomialCurve2.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\PolynomialCurve3.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CubicPolynomialCurve2.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\CubicPolynomialCurve3.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\EllipsoidGeodesic.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\ImplicitSurface.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\MultipleCurve2.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\MultipleCurve3.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline1.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline2.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NaturalSpline3.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSCurve2.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSCurve3.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\NURBSRectangle.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\QuadricSurface.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\TCBSpline2.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\TCBSpline3.cpp">
+      <Filter>CurvesSurfacesVolumes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpAkima1.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaNonuniform1.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform1.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaUniform3.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBicubic2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBilinear2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform1.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform3.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniform4.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpBSplineUniformN.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpLinearNonuniform2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpLinearNonuniform3.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpQdrNonuniform2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpSphere2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpThinPlateSpline2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpThinPlateSpline3.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpTricubic3.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpTrilinear3.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Interpolation\IntpVectorField2.cpp">
+      <Filter>Interpolation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\ConformalMap.cpp">
+      <Filter>Meshes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\MeshCurvature.cpp">
+      <Filter>Meshes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\MeshSmoother.cpp">
+      <Filter>Meshes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\PlanarGraph.cpp">
+      <Filter>Meshes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Meshes\UniqueVerticesTriangles.cpp">
+      <Filter>Meshes 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Miscellaneous\GridGraph2.cpp">
+      <Filter>Miscellaneous 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Miscellaneous\PerspProjEllipsoid.cpp">
+      <Filter>Miscellaneous 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Miscellaneous\TangentsToCircles.cpp">
+      <Filter>Miscellaneous 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h">
@@ -2136,9 +2406,6 @@
       <Filter>ComputationalGeometry 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\ConvexHull3.h">
-      <Filter>ComputationalGeometry 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay.h">
       <Filter>ComputationalGeometry 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay1.h">
@@ -3797,9 +4064,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Triangle3.h">
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.h">
-      <Filter>Meshes 模板文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Meshes\TSManifoldMesh.h">
       <Filter>Meshes 头文件</Filter>
     </ClInclude>
@@ -3878,9 +4142,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\PerspProjEllipsoidDetail.h">
       <Filter>Miscellaneous 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\QuadToQuadTransformsDetail.h">
-      <Filter>Miscellaneous 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\TangentsToCirclesDetail.h">
       <Filter>Miscellaneous 模板文件</Filter>
     </ClInclude>
@@ -3897,9 +4158,6 @@
       <Filter>Miscellaneous 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\NormalCompression.h">
-      <Filter>Miscellaneous 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\QuadToQuadTransforms.h">
       <Filter>Miscellaneous 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Miscellaneous\RandomHypersphere.h">
@@ -5443,6 +5701,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFitPowersDataDetail.h">
       <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\ComputationalGeometry\Delaunay.h">
+      <Filter>ComputationalGeometry 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.h">
+      <Filter>Meshes 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

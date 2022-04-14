@@ -22,7 +22,7 @@ void Rendering::SurfacePatchTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
- 
+ #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::SurfacePatchTesting
 	::ParameterTest()
 {
@@ -95,7 +95,7 @@ void Rendering::SurfacePatchTesting
 // 	float once = 2.0f * curvatureTensor(0, 1) * metricTensor(0, 1) - curvatureTensor(0, 0) * metricTensor(1, 1) - curvatureTensor(1, 1) * metricTensor(0, 0);
 // 	float twice = metricTensor(0, 0) * metricTensor(1, 1) - metricTensor(0, 1) * metricTensor(1, 0);
 // 	 
-// 	float discriminant = Mathematics::FloatMath::Sqrt(Mathematics::FloatMath::FAbs(once * once - 4.0f * constant * twice));
+// 	float discriminant = Mathematics::MathF::Sqrt(Mathematics::MathF::FAbs(once * once - 4.0f * constant * twice));
 // 	float principalCurvature0 = -0.5f * (once + discriminant);
 // 	float principalCurvature1 = 0.5f * (-once + discriminant);
 // 
@@ -104,9 +104,9 @@ void Rendering::SurfacePatchTesting
 // 	 
 // 	float a0 = curvatureTensor(0, 1) - principalCurvature0 * metricTensor(0, 1);
 // 	float a1 = principalCurvature0 * metricTensor(0, 0) - curvatureTensor(0, 0);
-// 	float length = Mathematics::FloatMath::Sqrt(a0 * a0 + a1 * a1);
+// 	float length = Mathematics::MathF::Sqrt(a0 * a0 + a1 * a1);
 // 	Mathematics::AVectorf principalDirection0;
-// 	if (Mathematics::FloatMath::sm_ZeroTolerance <= length)
+// 	if (Mathematics::MathF::sm_ZeroTolerance <= length)
 // 	{
 // 		principalDirection0 = a0 * derivativesU + a1 * derivativesV;
 // 	}
@@ -114,8 +114,8 @@ void Rendering::SurfacePatchTesting
 // 	{
 // 		a0 = curvatureTensor(1, 1) - principalCurvature0 * metricTensor(1, 1);
 // 		a1 = principalCurvature0*metricTensor(0, 1) - curvatureTensor(0, 1);
-// 		length = Mathematics::FloatMath::Sqrt(a0 * a0 + a1 * a1);
-// 		if (Mathematics::FloatMath::sm_ZeroTolerance <= length)
+// 		length = Mathematics::MathF::Sqrt(a0 * a0 + a1 * a1);
+// 		if (Mathematics::MathF::sm_ZeroTolerance <= length)
 // 		{
 // 			principalDirection0 = a0 * derivativesU + a1 * derivativesV;
 // 		}

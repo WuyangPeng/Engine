@@ -21,13 +21,13 @@ using std::string;
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::ShaderBaseData ::ShaderBaseData(int number)
+Rendering::ShaderBaseData::ShaderBaseData(int number)
     : impl{ number }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ShaderBaseData)
-Rendering::ShaderBaseData ::ShaderBaseData()
+Rendering::ShaderBaseData::ShaderBaseData()
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -35,14 +35,14 @@ Rendering::ShaderBaseData ::ShaderBaseData()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderBaseData)
 
-void Rendering::ShaderBaseData ::SetData(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
+void Rendering::ShaderBaseData::SetData(int index, const string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     impl->SetData(index, name, type, semantic);
 }
 
-void Rendering::ShaderBaseData ::InsertData(const string& name, ShaderFlags::VariableType type,
+void Rendering::ShaderBaseData::InsertData(const string& name, ShaderFlags::VariableType type,
                                             ShaderFlags::VariableSemantic semantic)
 {
     RENDERING_CLASS_IS_VALID_1;

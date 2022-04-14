@@ -14,7 +14,7 @@
 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, WireStateTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::WireStateTesting
 	::MainTest()
 { 

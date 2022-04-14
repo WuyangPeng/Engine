@@ -11,7 +11,7 @@
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
  
-Rendering::OpenGLTexture2D ::OpenGLTexture2D([[maybe_unused]] Renderer* renderer, const Texture2D* texture)
+Rendering::OpenGLTexture2D::OpenGLTexture2D([[maybe_unused]] Renderer* renderer, const Texture2D* texture)
     : m_OpenGLTextureData{ texture }
 {	
 	 
@@ -23,7 +23,7 @@ Rendering::OpenGLTexture2D ::OpenGLTexture2D([[maybe_unused]] Renderer* renderer
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture2D)
 
-void Rendering::OpenGLTexture2D ::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+void Rendering::OpenGLTexture2D::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -32,7 +32,7 @@ void Rendering::OpenGLTexture2D ::Enable([[maybe_unused]] Renderer* renderer, in
  
 }
 
-void Rendering::OpenGLTexture2D ::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+void Rendering::OpenGLTexture2D::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

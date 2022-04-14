@@ -17,8 +17,8 @@ using std::vector;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::VisibleSet ::VisibleSet()
-    : impl{0}
+Rendering::VisibleSet::VisibleSet()
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

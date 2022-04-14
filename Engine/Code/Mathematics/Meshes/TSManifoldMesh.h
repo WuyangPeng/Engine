@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 14:58)
 
 #ifndef MATHEMATICS_MESHES_TS_MANIFOLD_MESH_H
 #define MATHEMATICS_MESHES_TS_MANIFOLD_MESH_H
@@ -13,114 +16,94 @@
 #include "TriangleKey.h"
 #include "UnorderedTriangleKey.h"
 
-#include "System/Helper/PragmaWarning.h"
+#include <array>
 #include <map>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+#include <memory>
+#include <string>
+
 namespace Mathematics
 {
     class TSManifoldMesh
     {
     public:
-        // Triangle data types.
+        using ClassType = TSManifoldMesh;
+
+    public:
         class Triangle;
-        typedef Triangle* (*TCreator)(int, int, int);
-        typedef std::map<UnorderedTriangleKey, Triangle*> TMap;
-        typedef TMap::iterator TMapIterator;
-        typedef TMap::const_iterator TMapCIterator;
+        using TriangleSharedPtr = std::shared_ptr<Triangle>;
+        using TriangleCreator = TriangleSharedPtr (*)(int, int, int);
+        using TriangleMap = std::map<UnorderedTriangleKey, TriangleSharedPtr>;
 
-        // Tetrahedron data types.
         class Tetrahedron;
-        typedef Tetrahedron* (*SCreator)(int, int, int, int);
-        typedef std::map<TetrahedronKey, Tetrahedron*> SMap;
-        typedef SMap::iterator SMapIterator;
-        typedef SMap::const_iterator SMapCIterator;
+        using TetrahedronSharedPtr = std::shared_ptr<Tetrahedron>;
+        using TetrahedronCreator = TetrahedronSharedPtr (*)(int, int, int, int);
+        using TetrahedronMap = std::map<TetrahedronKey, TetrahedronSharedPtr>;
 
-        // Triangle object.
-        class MATHEMATICS_DEFAULT_DECLARE Triangle
+        class Triangle
         {
         public:
-            virtual ~Triangle();
+            virtual ~Triangle() noexcept = default;
             Triangle(int v0, int v1, int v2) noexcept;
-            Triangle(const Triangle&) = default;
-            Triangle& operator=(const Triangle&) = default;
-            Triangle(Triangle&&) = default;
-            Triangle& operator=(Triangle&&) = default;
-            // Vertices of the face.
-            int V[3];
+            Triangle(const Triangle& rhs) = default;
+            Triangle& operator=(const Triangle& rhs) = default;
+            Triangle(Triangle&& rhs) noexcept = default;
+            Triangle& operator=(Triangle&& rhs) noexcept = default;
 
-            // Tetrahedra sharing the face.
-            Tetrahedron* T[2];
+            std::array<int, 3> v;
+
+            std::array<TetrahedronSharedPtr, 2> t;
         };
 
-        // Tetrahedron object.
-        class MATHEMATICS_DEFAULT_DECLARE Tetrahedron
+        class Tetrahedron
         {
         public:
-            virtual ~Tetrahedron();
+            virtual ~Tetrahedron() noexcept = default;
             Tetrahedron(int v0, int v1, int v2, int v3) noexcept;
-            Tetrahedron(const Tetrahedron&) = default;
-            Tetrahedron& operator=(const Tetrahedron&) = default;
-            Tetrahedron(Tetrahedron&&) = default;
-            Tetrahedron& operator=(Tetrahedron&&) = default;
-            // Vertices, listed in an order so that each face vertices in
-            // counterclockwise order when viewed from outside the tetrahedron.
-            int V[4];
+            Tetrahedron(const Tetrahedron& rhs) = default;
+            Tetrahedron& operator=(const Tetrahedron& rhs) = default;
+            Tetrahedron(Tetrahedron&& rhs) noexcept = default;
+            Tetrahedron& operator=(Tetrahedron&& rhs) noexcept = default;
 
-            // Adjacent faces.  T[i] points to the triangle face opposite V[i].
-            //   T[0] points to face (V[1],V[2],V[3])
-            //   T[1] points to face (V[0],V[3],V[2])
-            //   T[2] points to face (V[0],V[1],V[3])
-            //   T[3] points to face (V[0],V[2],V[1])
-            Triangle* T[4];
+            std::array<int, 4> v;
 
-            // Adjacent tetrahedra.  S[i] points to the adjacent tetrahedron
-            // sharing face T[i].
-            Tetrahedron* S[4];
+            std::array<TriangleSharedPtr, 4> t;
+
+            using TetrahedronSharedPtr = std::shared_ptr<Tetrahedron>;
+
+            std::array<TetrahedronSharedPtr, 4> s;
         };
 
-        // Construction and destruction.
-        virtual ~TSManifoldMesh();
-        TSManifoldMesh(TCreator tCreator = 0, SCreator sCreator = 0) noexcept;
+        virtual ~TSManifoldMesh() noexcept = default;
+        TSManifoldMesh(TriangleCreator tCreator = nullptr, TetrahedronCreator sCreator = nullptr) noexcept;
 
-        TSManifoldMesh(const TSManifoldMesh&) = default;
-        TSManifoldMesh& operator=(const TSManifoldMesh&) = default;
-        TSManifoldMesh(TSManifoldMesh&&) = default;
-        TSManifoldMesh& operator=(TSManifoldMesh&&) = default;
+        TSManifoldMesh(const TSManifoldMesh& rhs) = default;
+        TSManifoldMesh& operator=(const TSManifoldMesh& rhs) = default;
+        TSManifoldMesh(TSManifoldMesh&& rhs) noexcept = default;
+        TSManifoldMesh& operator=(TSManifoldMesh&& rhs) noexcept = default;
 
-        // Member access.
-        const TMap& GetTriangles() const noexcept;
-        const SMap& GetTetrahedra() const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-        // If <v0,v1,v2,v3> is not in the mesh, a Tetrahedron object is created
-        // and returned; otherwise, <v0,v1,v2,v3> is in the mesh and nullptr is
-        // returned.  If the insertion leads to a nonmanifold mesh, the call
-        // fails with a null pointer returned.
-        Tetrahedron* Insert(int v0, int v1, int v2, int v3);
+        NODISCARD const TriangleMap& GetTriangles() const noexcept;
+        NODISCARD const TetrahedronMap& GetTetrahedra() const noexcept;
 
-        // If <v0,v1,v2,v3> is in the mesh, it is removed and 'true' is returned;
-        // otherwise, <v0,v1,v2,v3> is not in the mesh and 'false' is returned.
+        TetrahedronSharedPtr Insert(int v0, int v1, int v2, int v3);
+
         bool Remove(int v0, int v1, int v2, int v3);
 
-        // A manifold mesh is closed if each face is shared twice.
-        bool IsClosed() const noexcept;
+        NODISCARD bool IsClosed() const noexcept;
 
-        // For debugging.  The function returns 'true' iff the text file has been
-        // created and saved.
-        bool Print(const char* filename);
+        NODISCARD bool Print(const std::string& filename);
 
     protected:
-        // The triangle data and default triangle creation.
-        static Triangle* CreateTriangle(int v0, int v1, int v2) noexcept;
-        TCreator mTCreator;
-        TMap mTMap;
+        NODISCARD static TriangleSharedPtr CreateTriangle(int v0, int v1, int v2);
+        NODISCARD static TetrahedronSharedPtr CreateTetrahedron(int v0, int v1, int v2, int v3);
 
-        // The tetrahedron data and default tetrahedron creation.
-        static Tetrahedron* CreateTetrahedron(int v0, int v1, int v2, int v3) noexcept;
-        SCreator mSCreator;
-        SMap mSMap;
+    private:
+        TriangleCreator triangleCreator;
+        TriangleMap triangleMap;
+        TetrahedronCreator tetrahedronCreator;
+        TetrahedronMap tetrahedronMap;
     };
 }
-#include STSTEM_WARNING_POP
+
 #endif  // MATHEMATICS_MESHES_TS_MANIFOLD_MESH_H

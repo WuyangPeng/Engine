@@ -1,125 +1,115 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 10:41)
 
 #ifndef MATHEMATICS_MESHES_MESH_CURVATURE_DETAIL_H
 #define MATHEMATICS_MESHES_MESH_CURVATURE_DETAIL_H
 
 #include "MeshCurvature.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3<Real>* vertices, int numTriangles, const int* indices)
+Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const std::vector<Vector3<Real>>& vertices, int numTriangles, const std::vector<int>& indices)
+    : numVertices{ numVertices },
+      vertices{ vertices },
+      numTriangles{ numTriangles },
+      indices{ indices },
+      normals(numVertices),
+      minCurvatures(numVertices),
+      maxCurvatures(numVertices),
+      minDirections(numVertices),
+      maxDirections(numVertices)
 {
-    mNumVertices = numVertices;
-    mVertices = vertices;
-    mNumTriangles = numTriangles;
-    mIndices = indices;
-
-    // Compute normal vectors.
-    mNormals = nullptr;  // NEW1<Vector3<Real>>(mNumVertices);
-    memset(mNormals, 0, mNumVertices * sizeof(Vector3<Real>));
-    int i, v0, v1, v2;
-    for (i = 0; i < mNumTriangles; ++i)
+    auto index = 0;
+    for (auto i = 0; i < numTriangles; ++i)
     {
-        // Get vertex indices.
-        v0 = *indices++;
-        v1 = *indices++;
-        v2 = *indices++;
+        auto v0 = indices.at(index++);
+        auto v1 = indices.at(index++);
+        auto v2 = indices.at(index++);
 
-        // Compute the normal (length provides a weighted sum).
-        Vector3<Real> edge1 = mVertices[v1] - mVertices[v0];
-        Vector3<Real> edge2 = mVertices[v2] - mVertices[v0];
-        Vector3<Real> normal = Vector3Tools<Real>::CrossProduct(edge1, edge2);
+        auto edge1 = vertices.at(v1) - vertices.at(v0);
+        auto edge2 = vertices.at(v2) - vertices.at(v0);
+        const auto normal = Vector3Tools<Real>::CrossProduct(edge1, edge2);
 
-        mNormals[v0] += normal;
-        mNormals[v1] += normal;
-        mNormals[v2] += normal;
-    }
-    for (i = 0; i < mNumVertices; ++i)
-    {
-        mNormals[i].Normalize();
+        normals.at(v0) += normal;
+        normals.at(v1) += normal;
+        normals.at(v2) += normal;
     }
 
-    // Compute the matrix of normal derivatives.
-    Matrix3<Real>* DNormal = nullptr;  //  NEW1<Matrix3<Real> >(mNumVertices);
-    Matrix3<Real>* WWTrn = nullptr;  // NEW1<Matrix3<Real> >(mNumVertices);
-    Matrix3<Real>* DWTrn = nullptr;  //  NEW1<Matrix3<Real> >(mNumVertices);
-    bool* DWTrnZero = nullptr;  //  NEW1<bool>(mNumVertices);
-    memset(WWTrn, 0, mNumVertices * sizeof(Matrix3<Real>));
-    memset(DWTrn, 0, mNumVertices * sizeof(Matrix3<Real>));
-    memset(DWTrnZero, 0, mNumVertices * sizeof(bool));
-
-    int row, col;
-    indices = mIndices;
-    for (i = 0; i < mNumTriangles; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        // Get vertex indices.
-        int V[3];
-        V[0] = *indices++;
-        V[1] = *indices++;
-        V[2] = *indices++;
+        normals.at(i).Normalize();
+    }
 
-        for (int j = 0; j < 3; j++)
+    std::vector<Matrix3<Real>> dNormal(numVertices);
+    std::vector<Matrix3<Real>> wwTrn(numVertices);
+    std::vector<Matrix3<Real>> dwTrn(numVertices);
+    std::vector<bool> dwTrnZero(numVertices);
+
+    index = 0;
+    for (auto i = 0; i < numTriangles; ++i)
+    {
+        std::array<int, 3> v{};
+        v.at(0) = indices.at(index++);
+        v.at(1) = indices.at(index++);
+        v.at(2) = indices.at(index++);
+
+        for (auto j = 0; j < 3; j++)
         {
-            v0 = V[j];
-            v1 = V[(j + 1) % 3];
-            v2 = V[(j + 2) % 3];
+            auto v0 = v.at(j);
+            auto v1 = v.at((j + 1) % 3);
+            auto v2 = v.at((j + 2) % 3);
 
-            // Compute edge from V0 to V1, project to tangent plane of vertex,
-            // and compute difference of adjacent normals.
-            Vector3<Real> E = mVertices[v1] - mVertices[v0];
-            Vector3<Real> W = E - (Vector3Tools<Real>::DotProduct(E, mNormals[v0])) * mNormals[v0];
-            Vector3<Real> D = mNormals[v1] - mNormals[v0];
-            for (row = 0; row < 3; ++row)
+            auto e = vertices.at(v1) - vertices.at(v0);
+            auto w = e - (Vector3Tools<Real>::DotProduct(e, normals.at(v0))) * normals.at(v0);
+            auto d = normals.at(v1) - normals.at(v0);
+            for (auto row = 0; row < 3; ++row)
             {
-                for (col = 0; col < 3; ++col)
+                for (auto col = 0; col < 3; ++col)
                 {
-                    WWTrn[v0][row][col] += W[row] * W[col];
-                    DWTrn[v0][row][col] += D[row] * W[col];
+                    wwTrn.at(v0)[row][col] += w[row] * w[col];
+                    dwTrn.at(v0)[row][col] += d[row] * w[col];
                 }
             }
 
-            // Compute edge from V0 to V2, project to tangent plane of vertex,
-            // and compute difference of adjacent normals.
-            E = mVertices[v2] - mVertices[v0];
-            W = E - (Vector3Tools<Real>::DotProduct(E, mNormals[v0])) * mNormals[v0];
-            D = mNormals[v2] - mNormals[v0];
-            for (row = 0; row < 3; ++row)
+            e = vertices.at(v2) - vertices.at(v0);
+            w = e - (Vector3Tools<Real>::DotProduct(e, normals.at(v0))) * normals.at(v0);
+            d = normals.at(v2) - normals.at(v0);
+            for (auto row = 0; row < 3; ++row)
             {
-                for (col = 0; col < 3; ++col)
+                for (auto col = 0; col < 3; ++col)
                 {
-                    WWTrn[v0][row][col] += W[row] * W[col];
-                    DWTrn[v0][row][col] += D[row] * W[col];
+                    wwTrn.at(v0)[row][col] += w[row] * w[col];
+                    dwTrn.at(v0)[row][col] += d[row] * w[col];
                 }
             }
         }
     }
 
-    // Add in N*N^T to W*W^T for numerical stability.  In theory 0*0^T gets
-    // added to D*W^T, but of course no update is needed in the
-    // implementation.  Compute the matrix of normal derivatives.
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        for (row = 0; row < 3; ++row)
+        for (auto row = 0; row < 3; ++row)
         {
-            for (col = 0; col < 3; ++col)
+            for (auto col = 0; col < 3; ++col)
             {
-                WWTrn[i][row][col] = (Real{ 0.5 }) * WWTrn[i][row][col] +
-                                     mNormals[i][row] * mNormals[i][col];
-                DWTrn[i][row][col] *= Real{ 0.5 };
+                wwTrn.at(i)[row][col] = Math<Real>::GetRational(1, 2) * wwTrn.at(i)[row][col] + normals.at(i)[row] * normals.at(i)[col];
+                dwTrn.at(i)[row][col] *= Math<Real>::GetRational(1, 2);
             }
         }
 
-        // Compute the max-abs entry of D*W^T.  If this entry is (nearly)
-        // zero, flag the DNormal matrix as singular.
-        Real maxAbs = Math<Real>::GetValue(0);
-        for (row = 0; row < 3; ++row)
+        auto maxAbs = Math<Real>::GetValue(0);
+        for (auto row = 0; row < 3; ++row)
         {
-            for (col = 0; col < 3; ++col)
+            for (auto col = 0; col < 3; ++col)
             {
-                Real absEntry = Math<Real>::FAbs(DWTrn[i][row][col]);
+                Real absEntry = Math<Real>::FAbs(dwTrn.at(i)[row][col]);
                 if (absEntry > maxAbs)
                 {
                     maxAbs = absEntry;
@@ -128,163 +118,149 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3<R
         }
         if (maxAbs < static_cast<Real>(1e-07))
         {
-            DWTrnZero[i] = true;
+            dwTrnZero.at(i) = true;
         }
 
-        DNormal[i] = DWTrn[i] * WWTrn[i].Inverse();
+        dNormal.at(i) = dwTrn.at(i) * wwTrn.at(i).Inverse();
     }
 
-    DELETE1(WWTrn);
-    DELETE1(DWTrn);
-
-    // If N is a unit-length normal at a vertex, let U and V be unit-length
-    // tangents so that {U, V, N} is an orthonormal set.  Define the matrix
-    // J = [U | V], a 3-by-2 matrix whose columns are U and V.  Define J^T
-    // to be the transpose of J, a 2-by-3 matrix.  Let dN/dX denote the
-    // matrix of first-order derivatives of the normal vector field.  The
-    // shape matrix is
-    //   S = (J^T * J)^{-1} * J^T * dN/dX * J = J^T * dN/dX * J
-    // where the superscript of -1 denotes the inverse.  (The formula allows
-    // for J built from non-perpendicular vectors.) The matrix S is 2-by-2.
-    // The principal curvatures are the eigenvalues of S.  If k is a principal
-    // curvature and W is the 2-by-1 eigenvector corresponding to it, then
-    // S*W = k*W (by definition).  The corresponding 3-by-1 tangent vector at
-    // the vertex is called the principal direction for k, and is J*W.
-    mMinCurvatures = nullptr;  // NEW1<Real>(mNumVertices);
-    mMaxCurvatures = nullptr;  //  NEW1<Real>(mNumVertices);
-    mMinDirections = nullptr;  //  NEW1<Vector3<Real>>(mNumVertices);
-    mMaxDirections = nullptr;  // NEW1<Vector3<Real>>(mNumVertices);
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        // Compute U and V given N.
-        Vector3<Real> U, V;
-        Vector3OrthonormalBasis<Real> Vector3OrthonormalBasis =
-            Vector3Tools<Real>::GenerateComplementBasis(mNormals[i]);
-        U = Vector3OrthonormalBasis.GetUVector();
-        V = Vector3OrthonormalBasis.GetVVector();
+        const auto vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(normals.at(i));
+        const auto u = vector3OrthonormalBasis.GetUVector();
+        const auto v = vector3OrthonormalBasis.GetVVector();
 
-        if (DWTrnZero[i])
+        if (dwTrnZero.at(i))
         {
-            // At a locally planar point.
-            mMinCurvatures[i] = Math<Real>::GetValue(0);
-            mMaxCurvatures[i] = Math<Real>::GetValue(0);
-            mMinDirections[i] = U;
-            mMaxDirections[i] = V;
+            minCurvatures.at(i) = Math<Real>::GetValue(0);
+            maxCurvatures.at(i) = Math<Real>::GetValue(0);
+            minDirections.at(i) = u;
+            maxDirections.at(i) = v;
             continue;
         }
 
-        // Compute S = J^T * dN/dX * J.  In theory S is symmetric, but
-        // because we have estimated dN/dX, we must slightly adjust our
-        // calculations to make sure S is symmetric.
-        Real s01 = Vector3Tools<Real>::DotProduct(U, DNormal[i] * V);
-        Real s10 = Vector3Tools<Real>::DotProduct(V, DNormal[i] * U);
-        Real sAvr = (Real{ 0.5 }) * (s01 + s10);
-        Matrix2<Real> S(
-            Vector3Tools<Real>::DotProduct(U, DNormal[i] * U), sAvr,
-            sAvr, Vector3Tools<Real>::DotProduct(V, DNormal[i] * V));
+        auto s01 = Vector3Tools<Real>::DotProduct(u, dNormal.at(i) * v);
+        auto s10 = Vector3Tools<Real>::DotProduct(v, dNormal.at(i) * u);
+        auto sAvr = Math<Real>::GetRational(1, 2) * (s01 + s10);
+        Matrix2<Real> s{ Vector3Tools<Real>::DotProduct(u, dNormal.at(i) * u), sAvr, sAvr, Vector3Tools<Real>::DotProduct(v, dNormal.at(i) * v) };
 
-        // Compute the eigenvalues of S (min and max curvatures).
-        Real trace = S[0][0] + S[1][1];
-        Real det = S[0][0] * S[1][1] - S[0][1] * S[1][0];
-        Real discr = trace * trace - ((Real)4.0) * det;
-        Real rootDiscr = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-        mMinCurvatures[i] = (Real{ 0.5 }) * (trace - rootDiscr);
-        mMaxCurvatures[i] = (Real{ 0.5 }) * (trace + rootDiscr);
+        auto trace = s[0][0] + s[1][1];
+        auto det = s[0][0] * s[1][1] - s[0][1] * s[1][0];
+        auto discr = trace * trace - (Math<Real>::GetValue(4)) * det;
+        auto rootDiscr = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
+        minCurvatures.at(i) = Math<Real>::GetRational(1, 2) * (trace - rootDiscr);
+        maxCurvatures.at(i) = Math<Real>::GetRational(1, 2) * (trace + rootDiscr);
 
-        // Compute the eigenvectors of S.
-        Vector2<Real> W0(S[0][1], mMinCurvatures[i] - S[0][0]);
-        Vector2<Real> W1(mMinCurvatures[i] - S[1][1], S[1][0]);
-        if (Vector2Tools<Real>::GetLengthSquared(W0) >= Vector2Tools<Real>::GetLengthSquared(W1))
+        Vector2<Real> w0{ s[0][1], minCurvatures.at(i) - s[0][0] };
+        Vector2<Real> w1{ minCurvatures.at(i) - s[1][1], s[1][0] };
+        if (Vector2Tools<Real>::GetLengthSquared(w0) >= Vector2Tools<Real>::GetLengthSquared(w1))
         {
-            W0.Normalize();
-            mMinDirections[i] = W0.GetX() * U + W0.GetY() * V;
+            w0.Normalize();
+            minDirections.at(i) = w0.GetX() * u + w0.GetY() * v;
         }
         else
         {
-            W1.Normalize();
-            mMinDirections[i] = W1.GetX() * U + W1.GetY() * V;
+            w1.Normalize();
+            minDirections.at(i) = w1.GetX() * u + w1.GetY() * v;
         }
 
-        W0 = Vector2<Real>(S[0][1], mMaxCurvatures[i] - S[0][0]);
-        W1 = Vector2<Real>(mMaxCurvatures[i] - S[1][1], S[1][0]);
-        if (Vector2Tools<Real>::GetLengthSquared(W0) >= Vector2Tools<Real>::GetLengthSquared(W1))
+        w0 = Vector2<Real>(s[0][1], maxCurvatures.at(i) - s[0][0]);
+        w1 = Vector2<Real>(maxCurvatures.at(i) - s[1][1], s[1][0]);
+        if (Vector2Tools<Real>::GetLengthSquared(w0) >= Vector2Tools<Real>::GetLengthSquared(w1))
         {
-            W0.Normalize();
-            mMaxDirections[i] = W0.GetX() * U + W0.GetY() * V;
+            w0.Normalize();
+            maxDirections.at(i) = w0.GetX() * u + w0.GetY() * v;
         }
         else
         {
-            W1.Normalize();
-            mMaxDirections[i] = W1.GetX() * U + W1.GetY() * V;
+            w1.Normalize();
+            maxDirections.at(i) = w1.GetX() * u + w1.GetY() * v;
         }
     }
 
-//     DELETE1(DWTrnZero);
-//     DELETE1(DNormal);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::MeshCurvature<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::MeshCurvature<Real>::GetNumVertices() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numVertices;
 }
 
 template <typename Real>
-Mathematics::MeshCurvature<Real>::~MeshCurvature()
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshCurvature<Real>::GetVertices() const
 {
-//     DELETE1(mNormals);
-//     DELETE1(mMinCurvatures);
-//     DELETE1(mMaxCurvatures);
-//     DELETE1(mMinDirections);
-//     DELETE1(mMaxDirections);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertices;
 }
 
 template <typename Real>
-int Mathematics::MeshCurvature<Real>::GetNumVertices() const
+int Mathematics::MeshCurvature<Real>::GetNumTriangles() const noexcept
 {
-    return mNumVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numTriangles;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetVertices() const
+std::vector<int> Mathematics::MeshCurvature<Real>::GetIndices() const
 {
-    return mVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return indices;
 }
 
 template <typename Real>
-int Mathematics::MeshCurvature<Real>::GetNumTriangles() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshCurvature<Real>::GetNormals() const
 {
-    return mNumTriangles;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return normals;
 }
 
 template <typename Real>
-const int* Mathematics::MeshCurvature<Real>::GetIndices() const
+std::vector<Real> Mathematics::MeshCurvature<Real>::GetMinCurvatures() const
 {
-    return mIndices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return minCurvatures;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetNormals() const
+std::vector<Real> Mathematics::MeshCurvature<Real>::GetMaxCurvatures() const
 {
-    return mNormals;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return maxCurvatures;
 }
 
 template <typename Real>
-const Real* Mathematics::MeshCurvature<Real>::GetMinCurvatures() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshCurvature<Real>::GetMinDirections() const
 {
-    return mMinCurvatures;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return minDirections;
 }
 
 template <typename Real>
-const Real* Mathematics::MeshCurvature<Real>::GetMaxCurvatures() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshCurvature<Real>::GetMaxDirections() const
 {
-    return mMaxCurvatures;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetMinDirections() const
-{
-    return mMinDirections;
-}
-
-template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetMaxDirections() const
-{
-    return mMaxDirections;
+    return maxDirections;
 }
 
 #endif  // MATHEMATICS_MESHES_MESH_CURVATURE_DETAIL_H

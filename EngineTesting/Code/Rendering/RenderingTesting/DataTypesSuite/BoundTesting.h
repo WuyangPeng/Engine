@@ -25,7 +25,7 @@ namespace Rendering
 	    void LineIntersectionTest();
 	    void BoundIntersectionTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

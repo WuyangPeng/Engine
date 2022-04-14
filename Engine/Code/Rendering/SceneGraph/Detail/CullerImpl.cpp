@@ -1,197 +1,189 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 16:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 14:10)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CullerImpl.h"
-#include "Mathematics/Algebra/PlaneDetail.h"
- 
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26429)
+#include "Mathematics/Algebra/PlaneDetail.h"
 
-Rendering::CullerImpl
-    ::CullerImpl (const ConstCameraSharedPtr& camera)
-	:m_Camera{ camera }, m_Frustum{ false }, m_PlaneQuantity{ System::EnumCastUnderlying(ViewFrustum::Quantity) }, m_PlaneState{ 0 }, m_VisibleSet{}
+Rendering::CullerImpl::CullerImpl(const ConstCameraSharedPtr& camera)
+    : camera{ camera },
+      frustum{ false },
+      planeQuantity{ System::EnumCastUnderlying(ViewFrustum::Quantity) },
+      plane{},
+      planeState{ 0 },
+      visibleSet{}
 {
-    // 数据成员m_Frustum, m_Plane,和 m_PlaneState是未初始化的。
-    // 它们初始化在调用ComputeVisibleSet
-    
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::CullerImpl
-    ::IsValid() const noexcept
+
+bool Rendering::CullerImpl::IsValid() const noexcept
 {
-	if (0 < m_PlaneQuantity &&  m_Camera )
+    if (0 < planeQuantity && camera != nullptr)
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::CullerImpl ::SetCamera(const ConstCameraSharedPtr& camera) noexcept
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::CullerImpl::SetCamera(const ConstCameraSharedPtr& aCamera) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    m_Camera = camera;
+
+    camera = aCamera;
 }
 
-Rendering::ConstCameraSharedPtr Rendering::CullerImpl ::GetCamera() const noexcept
+Rendering::ConstCameraSharedPtr Rendering::CullerImpl::GetCamera() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_Camera;
+
+    return camera;
 }
 
-void Rendering::CullerImpl
-    ::SetFrustum (const float* frustum)
+void Rendering::CullerImpl::SetFrustum(const float* aFrustum)
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    // 复制平截头体的值。
-    m_Frustum.SetFrustum(frustum);
-    
-    auto directionMin2 = m_Frustum.GetDirectionMin() * m_Frustum.GetDirectionMin();
-	auto upMin2 = m_Frustum.GetUpMin() * m_Frustum.GetUpMin();
-	auto upMax2 = m_Frustum.GetUpMax() * m_Frustum.GetUpMax();
-	auto rightMin2 = m_Frustum.GetRightMin() * m_Frustum.GetRightMin();
-	auto rightMax2 = m_Frustum.GetRightMax() * m_Frustum.GetRightMax();
-    
-    // 获取相机坐标系。
-	auto position = m_Camera->GetPosition();
-	auto directionVector = m_Camera->GetDirectionVector();
-	auto upVector = m_Camera->GetUpVector();
-	auto rightVector = m_Camera->GetRightVector();
-	auto directionDotEye = Dot(position,directionVector);
 
-	auto epsilon = m_Camera->GetEpsilon();
-    
+    // 复制平截头体的值。
+    frustum.SetFrustum(aFrustum);
+
+    const auto directionMin2 = frustum.GetDirectionMin() * frustum.GetDirectionMin();
+    const auto upMin2 = frustum.GetUpMin() * frustum.GetUpMin();
+    const auto upMax2 = frustum.GetUpMax() * frustum.GetUpMax();
+    const auto rightMin2 = frustum.GetRightMin() * frustum.GetRightMin();
+    const auto rightMax2 = frustum.GetRightMax() * frustum.GetRightMax();
+
+    // 获取相机坐标系。
+    const auto position = camera->GetPosition();
+    const auto directionVector = camera->GetDirectionVector();
+    const auto upVector = camera->GetUpVector();
+    const auto rightVector = camera->GetRightVector();
+    const auto directionDotEye = Dot(position, directionVector);
+
+    const auto epsilon = camera->GetEpsilon();
+
     // 更新近平面
-	m_Plane[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] = Plane{ directionVector,directionDotEye + m_Frustum.GetDirectionMin(),epsilon };
-    
+    plane.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin)) = Plane{ directionVector, directionDotEye + frustum.GetDirectionMin(), epsilon };
+
     // 更新远平面
-	m_Plane[System::EnumCastUnderlying(ViewFrustum::DirectionMax)] = Plane{ -directionVector,-(directionDotEye + m_Frustum.GetDirectionMax()),epsilon };
-    
+    plane.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax)) = Plane{ -directionVector, -(directionDotEye + frustum.GetDirectionMax()), epsilon };
+
     // 更新底部平面
-	auto invLength = Math::InvSqrt(directionMin2 + upMin2);
-	auto c0 = -m_Frustum.GetUpMin() * invLength;
-	auto c1 = +m_Frustum.GetDirectionMin() * invLength;
-	auto normal = c0 * directionVector + c1 * upVector;
-	auto constant = Dot(position,normal);
-	m_Plane[System::EnumCastUnderlying(ViewFrustum::UpMin)] = Plane{ normal,constant,epsilon };
-    
+    auto invLength = Math::InvSqrt(directionMin2 + upMin2);
+    auto c0 = -frustum.GetUpMin() * invLength;
+    auto c1 = +frustum.GetDirectionMin() * invLength;
+    auto normal = c0 * directionVector + c1 * upVector;
+    auto constant = Dot(position, normal);
+    plane.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) = Plane{ normal, constant, epsilon };
+
     // 更新顶部平面
     invLength = Math::InvSqrt(directionMin2 + upMax2);
-    c0 = +m_Frustum.GetUpMax() * invLength;
-    c1 = -m_Frustum.GetDirectionMin() * invLength;
+    c0 = +frustum.GetUpMax() * invLength;
+    c1 = -frustum.GetDirectionMin() * invLength;
     normal = c0 * directionVector + c1 * upVector;
-    constant = Dot(position,normal);
-    m_Plane[System::EnumCastUnderlying(ViewFrustum::UpMax)] = Plane(normal,constant,epsilon);
-    
+    constant = Dot(position, normal);
+    plane.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) = Plane(normal, constant, epsilon);
+
     // 更新左平面
     invLength = Math::InvSqrt(directionMin2 + rightMin2);
-    c0 = -m_Frustum.GetRightMin() * invLength;
-    c1 = +m_Frustum.GetDirectionMin() * invLength;
+    c0 = -frustum.GetRightMin() * invLength;
+    c1 = +frustum.GetDirectionMin() * invLength;
     normal = c0 * directionVector + c1 * rightVector;
-    constant = Dot(position,normal);
-    m_Plane[System::EnumCastUnderlying(ViewFrustum::RightMin)] = Plane(normal,constant,epsilon);
-    
+    constant = Dot(position, normal);
+    plane.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) = Plane(normal, constant, epsilon);
+
     // 更新右平面
     invLength = Math::InvSqrt(directionMin2 + rightMax2);
-    c0 = +m_Frustum.GetRightMax() * invLength;
-    c1 = -m_Frustum.GetDirectionMin() * invLength;
+    c0 = +frustum.GetRightMax() * invLength;
+    c1 = -frustum.GetDirectionMin() * invLength;
     normal = c0 * directionVector + c1 * rightVector;
-    constant = Dot(position,normal);
-    m_Plane[System::EnumCastUnderlying(ViewFrustum::RightMax)] = Plane(normal,constant,epsilon);
-    
+    constant = Dot(position, normal);
+    plane.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) = Plane(normal, constant, epsilon);
+
     // 所有平面最初是激活的。
-    m_PlaneState = 0xFFFFFFFF;
+    planeState = 0xFFFFFFFF;
 }
 
-const float* Rendering::CullerImpl ::GetFrustum() const noexcept
+const float* Rendering::CullerImpl::GetFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_Frustum.GetFrustum ();
-} 
 
-void Rendering::CullerImpl
-    ::Insert(const VisualSharedPtr& visible)
+    return frustum.GetFrustum();
+}
+
+void Rendering::CullerImpl::Insert(const VisualSharedPtr& visible)
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    m_VisibleSet.Insert(visible);
+
+    visibleSet.Insert(visible);
 }
 
-int Rendering::CullerImpl ::GetPlaneQuantity() const noexcept
+int Rendering::CullerImpl::GetPlaneQuantity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_PlaneQuantity;
+
+    return planeQuantity;
 }
 
-const Rendering::CullerImpl::Plane* Rendering::CullerImpl ::GetPlanes() const noexcept
+const Rendering::CullerImpl::Plane* Rendering::CullerImpl::GetPlanes() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_Plane;
+
+    return plane.data();
 }
 
-void Rendering::CullerImpl ::SetPlaneState(unsigned int planeState) noexcept
+void Rendering::CullerImpl::SetPlaneState(int aPlaneState) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    m_PlaneState = planeState;
+
+    planeState = aPlaneState;
 }
 
-unsigned int Rendering::CullerImpl ::GetPlaneState() const noexcept
+int Rendering::CullerImpl::GetPlaneState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_PlaneState;
+
+    return planeState;
 }
 
-void Rendering::CullerImpl ::PushPlane(const Plane& plane) noexcept
+void Rendering::CullerImpl::PushPlane(const Plane& aPlane) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    if (m_PlaneQuantity < MaxPlaneQuantity)
+
+    if (planeQuantity < MaxPlaneQuantity)
     {
         // 用户定义的平面数量是有限的。
-        m_Plane[m_PlaneQuantity] = plane;
-        ++m_PlaneQuantity;
+        plane.at(planeQuantity) = aPlane;
+        ++planeQuantity;
     }
 }
 
-void Rendering::CullerImpl ::PopPlane() noexcept
+void Rendering::CullerImpl::PopPlane() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    if (System::EnumCastUnderlying(ViewFrustum::Quantity) < m_PlaneQuantity)
+
+    if (System::EnumCastUnderlying(ViewFrustum::Quantity) < planeQuantity)
     {
         // 平截头体平面可能不从堆栈中删除。
-        --m_PlaneQuantity;
+        --planeQuantity;
     }
 }
 
-bool Rendering::CullerImpl
-    ::IsVisible (const FloatBound& bound) noexcept
+bool Rendering::CullerImpl::IsVisible(const BoundF& bound) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
+
     if (bound.GetRadius() <= Math::GetZeroTolerance())
     {
         // 节点是一个虚拟节点不可见。
@@ -199,38 +191,42 @@ bool Rendering::CullerImpl
     }
 
     // 从最后压入的平面开始,这可能是约束最大的平面
-	auto index = m_PlaneQuantity - 1;
-	auto mask = (1 << index);
+    auto index = planeQuantity - 1;
+    auto mask = (1 << index);
 
     for (; 0 <= index; --index)
     {
-        if (m_PlaneState & mask)
+        if (planeState & mask)
         {
-			auto side = bound.WhichSide(m_Plane[index]);
+            const auto side = bound.WhichSide(plane.at(index));
 
-            if (side ==  Mathematics::NumericalValueSymbol::Negative)
+            if (side == Mathematics::NumericalValueSymbol::Negative)
             {
                 // 对象在平面的负边，所以剔除。
                 return false;
             }
 
-            if (side ==  Mathematics::NumericalValueSymbol::Positive)
+            if (side == Mathematics::NumericalValueSymbol::Positive)
             {
                 // 对象在平面的正边。没有必要对平面比较子对象,所以将其标记为非活动。
-                m_PlaneState &= ~mask;
+                planeState &= ~mask;
             }
         }
-   
+
         mask >>= 1;
     }
 
     return true;
 }
 
-bool Rendering::CullerImpl
-    ::IsVisible (int numVertices, const APoint* vertices, bool ignoreNearPlane) const noexcept
+bool Rendering::CullerImpl::IsVisible(int numVertices, const APoint* vertices, bool ignoreNearPlane) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
+
+    if (vertices == nullptr)
+    {
+        return false;
+    }
 
     // 当测试多边形是一个入口时，布尔变量ignoreNearPlane应该设置为“true”。
     // 这就避免了当入口视图中的金字塔(眼+左/右/上/下),但在眼睛附近和平面之间的这种情况。
@@ -238,19 +234,25 @@ bool Rendering::CullerImpl
     // 这种情况通常发生在摄像机移动通过入口从当前区域到相邻的区域。
 
     // 从最后压入的平面开始,这可能是约束最大的平面
-    for (auto index = m_PlaneQuantity - 1;0 <= index;--index)
+    for (auto index = planeQuantity - 1; 0 <= index; --index)
     {
-        const auto& plane = m_Plane[index];
+        const auto& aPlane = plane.at(index);
         if (ignoreNearPlane && index == System::EnumCastUnderlying(ViewFrustum::DirectionMin))
         {
             continue;
         }
 
-		auto which = numVertices;
+        auto which = numVertices;
         for (auto j = 0; j < numVertices; ++j)
         {
-			auto side = plane.WhichSide(vertices[j]);
-            if (side !=  Mathematics::NumericalValueSymbol::Negative)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            const auto side = aPlane.WhichSide(vertices[j]);
+
+#include STSTEM_WARNING_POP
+
+            if (side != Mathematics::NumericalValueSymbol::Negative)
             {
                 // 平面外的多边形并不完全。
                 which = j;
@@ -268,34 +270,33 @@ bool Rendering::CullerImpl
     return true;
 }
 
-Mathematics::NumericalValueSymbol Rendering::CullerImpl
-    ::WhichSide (const Plane& plane) const
+Mathematics::NumericalValueSymbol Rendering::CullerImpl::WhichSide(const Plane& aPlane) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
+
     // 平面是N * (X - C) = 0,这里*表示点积。
     // 有符号距离从摄像机位置E到平面是N * (E - C)。
-	auto nDotEMinusC = plane.DistanceTo(m_Camera->GetPosition());
+    auto nDotEMinusC = aPlane.DistanceTo(camera->GetPosition());
 
-	auto normal = plane.GetNormal();
-	auto nDotDirection = Dot(normal,m_Camera->GetDirectionVector());
-	auto nDotUp = Dot(normal, m_Camera->GetUpVector());
-	auto nDotRight = Dot(normal, m_Camera->GetRightVector());
-	auto directionRatio = m_Frustum.GetDirectionMax() / m_Frustum.GetDirectionMin();
+    const auto normal = aPlane.GetNormal();
+    const auto nDotDirection = Dot(normal, camera->GetDirectionVector());
+    const auto nDotUp = Dot(normal, camera->GetUpVector());
+    const auto nDotRight = Dot(normal, camera->GetRightVector());
+    const auto directionRatio = frustum.GetDirectionMax() / frustum.GetDirectionMin();
 
-	auto positive = 0;
-	auto negative = 0;
+    auto positive = 0;
+    auto negative = 0;
 
     // 检查近平面顶点。
-	auto pDirectionMin = m_Frustum.GetDirectionMin() * nDotDirection;
-	auto nearUpMin = m_Frustum.GetUpMin() * nDotUp;
-	auto nearUpMax = m_Frustum.GetUpMax() * nDotUp;
-	auto nearRightMin = m_Frustum.GetRightMin() * nDotRight;
-	auto nearRightMax = m_Frustum.GetRightMax() * nDotRight;
+    const auto pDirectionMin = frustum.GetDirectionMin() * nDotDirection;
+    const auto nearUpMin = frustum.GetUpMin() * nDotUp;
+    const auto nearUpMax = frustum.GetUpMax() * nDotUp;
+    const auto nearRightMin = frustum.GetRightMin() * nDotRight;
+    const auto nearRightMax = frustum.GetRightMax() * nDotRight;
 
     // V = E + dmin * D + umin * U + rmin * R
     // N * (V - C) = N * (E - C) + dmin * (N * D) + umin * (N * U) + rmin * (N * R)
-	auto signDistance = nDotEMinusC + pDirectionMin + nearUpMin + nearRightMin;
+    auto signDistance = nDotEMinusC + pDirectionMin + nearUpMin + nearRightMin;
     if (0.0f < signDistance)
     {
         ++positive;
@@ -342,11 +343,11 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl
     }
 
     // 检查远平面顶点。 (s = dmax / dmin)
-	auto pDirectionMax = m_Frustum.GetDirectionMax() * nDotDirection;
-	auto farUpMin = directionRatio * nearUpMin;
-	auto farUpMax = directionRatio * nearUpMax;
-	auto farRightMin = directionRatio * nearRightMin;
-	auto farRightMax = directionRatio * nearRightMax;
+    const auto pDirectionMax = frustum.GetDirectionMax() * nDotDirection;
+    const auto farUpMin = directionRatio * nearUpMin;
+    const auto farUpMax = directionRatio * nearUpMax;
+    const auto farRightMin = directionRatio * nearRightMin;
+    const auto farRightMax = directionRatio * nearRightMax;
 
     // V = E + dmax * D + umin * U + rmin * R
     // N * (V - C) = N * (E - C) + dmax * (N * D) + s * umin * (N * U) + s * rmin * (N * R)
@@ -408,45 +409,41 @@ Mathematics::NumericalValueSymbol Rendering::CullerImpl
         return Mathematics::NumericalValueSymbol::Positive;
     }
 
-    // 平截头体完全在负面。 
+    // 平截头体完全在负面。
     return Mathematics::NumericalValueSymbol::Negative;
 }
 
-void Rendering::CullerImpl ::Clear() noexcept
+void Rendering::CullerImpl::Clear() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_VisibleSet.Clear();
+    visibleSet.Clear();
 }
 
-int  Rendering::CullerImpl
-    ::GetNumVisible () const
+int Rendering::CullerImpl::GetNumVisible() const
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    return m_VisibleSet.GetNumVisible ();
+    return visibleSet.GetNumVisible();
 }
 
-const Rendering::ConstVisualSharedPtr  Rendering::CullerImpl
-    ::GetVisible (int index) const
+Rendering::ConstVisualSharedPtr Rendering::CullerImpl::GetVisible(int index) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    return m_VisibleSet.GetVisible (index);
-
+    return visibleSet.GetVisible(index);
 }
 
-Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl ::begin() noexcept
+Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl::begin() noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VisibleSet.begin();
+    return visibleSet.begin();
 }
 
-Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl ::end() noexcept
+Rendering::CullerImpl::VisualContainerIter Rendering::CullerImpl::end() noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VisibleSet.end();
+    return visibleSet.end();
 }
-#include STSTEM_WARNING_POP

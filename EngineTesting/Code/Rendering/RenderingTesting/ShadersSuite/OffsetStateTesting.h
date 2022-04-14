@@ -20,9 +20,9 @@ namespace Rendering
 		void MainTest();
 	    void InitTest(); 
 		void CopyTest();
-		void StreamTest();
+            void StreamTest() noexcept;
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

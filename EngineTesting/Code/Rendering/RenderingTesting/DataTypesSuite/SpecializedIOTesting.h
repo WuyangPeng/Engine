@@ -24,7 +24,7 @@ namespace Rendering
 		void IntColourTest();
 		void FloatColourTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

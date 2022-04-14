@@ -1,236 +1,291 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 13:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 21:49)
 
 #ifndef MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_DETAIL_H
 #define MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_DETAIL_H
 
 #include "GridGraph2.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::GridGraph2<Real>::GridGraph2(int xSize, int ySize)
+    : relaxationCallback{ nullptr },
+      xSize{ xSize },
+      ySize{ ySize },
+      numVertices{ xSize * ySize },
+      vertices(numVertices),
+      pathQuantity{ 0 },
+      path(numVertices),
+      pending(numVertices),
+      numProcessed{ 0 }
 {
-    template <typename Real>
-    GridGraph2<Real>::GridGraph2(int xSize, int ySize)
+    MATHEMATICS_ASSERTION_0(xSize > 0 && ySize > 0, "无效输入。\n");
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::GridGraph2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetXSize() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xSize;
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetYSize() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ySize;
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetVertexQuantity() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numVertices;
+}
+
+template <typename Real>
+void Mathematics::GridGraph2<Real>::SetWeight(int x, int y, int dx, int dy, Real weight)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    MATHEMATICS_ASSERTION_0(0 <= x && x < xSize && 0 <= y && y < ySize, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "无效输入。\n");
+
+    vertices.at(GetIndex(x, y)).SetWeight(dx, dy, weight);
+}
+
+template <typename Real>
+Real Mathematics::GridGraph2<Real>::GetWeight(int x, int y, int dx, int dy) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    MATHEMATICS_ASSERTION_0(0 <= x && x < xSize && 0 <= y && y < ySize, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "无效输入。\n");
+
+    return vertices.at(GetIndex(x, y)).GetWeight(dx, dy);
+}
+
+template <typename Real>
+void Mathematics::GridGraph2<Real>::ComputeMinimumWeightPath(int x0, int y0, int x1, int y1)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    pathQuantity = 0;
+
+    if (x0 < 0 || x0 >= xSize || y0 < 0 || y0 >= ySize || x1 < 0 || x1 >= xSize || y1 < 0 || y1 >= ySize)
     {
-        MATHEMATICS_ASSERTION_0(xSize > 0 && ySize > 0, "Invalid input\n");
-
-        mXSize = xSize;
-        mYSize = ySize;
-        mNumVertices = mXSize * mYSize;
-        mVertices = nullptr;  // NEW1<Vertex>(mNumVertices);
-
-        mPathQuantity = 0;
-        mPath = nullptr;  //  NEW1<int>(mNumVertices);
-        mPending = nullptr;  // NEW1<int>(mNumVertices);
-
-        RelaxationCallback = 0;
-        mNumProcessed = 0;
+        return;
     }
 
-    template <typename Real>
-    GridGraph2<Real>::~GridGraph2()
+    auto pendingQuantity = numVertices;
+
+    for (auto i = 0; i < numVertices; ++i)
     {
-        // 		DELETE1(mVertices);
-        // 		DELETE1(mPath);
-        // 		DELETE1(mPending);
+        auto& vertex = vertices.at(i);
+        vertex.SetEstimate(Math<Real>::maxReal);
+        vertex.SetPredecessor(-1);
+        pending.at(i) = i;
+    }
+    vertices.at(GetIndex(x0, y0)).SetEstimate(Math<Real>::GetValue(0));
+
+    numProcessed = 0;
+    if (relaxationCallback)
+    {
+        relaxationCallback();
     }
 
-    template <typename Real>
-    int GridGraph2<Real>::GetXSize() const
+    while (pendingQuantity > 0)
     {
-        return mXSize;
-    }
-
-    template <typename Real>
-    int GridGraph2<Real>::GetYSize() const
-    {
-        return mYSize;
-    }
-
-    template <typename Real>
-    int GridGraph2<Real>::GetVertexQuantity() const
-    {
-        return mNumVertices;
-    }
-
-    template <typename Real>
-    void GridGraph2<Real>::SetWeight(int x, int y, int dx, int dy, Real weight)
-    {
-        MATHEMATICS_ASSERTION_0(0 <= x && x < mXSize && 0 <= y && y < mYSize, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "Invalid input\n");
-
-        mVertices[GetIndex(x, y)].SetWeight(dx, dy, weight);
-    }
-
-    template <typename Real>
-    Real GridGraph2<Real>::GetWeight(int x, int y, int dx, int dy) const
-    {
-        MATHEMATICS_ASSERTION_0(0 <= x && x < mXSize && 0 <= y && y < mYSize, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(abs(dx) <= 1 && abs(dy) <= 1, "Invalid input\n");
-
-        return mVertices[GetIndex(x, y)].GetWeight(dx, dy);
-    }
-
-    template <typename Real>
-    void GridGraph2<Real>::ComputeMinimumWeightPath(int x0, int y0, int x1,
-                                                    int y1)
-    {
-        mPathQuantity = 0;
-
-        if (x0 < 0 || x0 >= mXSize || y0 < 0 || y0 >= mYSize || x1 < 0 || x1 >= mXSize || y1 < 0 || y1 >= mYSize)
+        auto minimum = vertices.at(pending.at(0)).GetEstimate();
+        auto minIndex = 0;
+        for (auto i = 1; i < pendingQuantity; ++i)
         {
-            return;
-        }
-
-        // Initialize the minimum weight estimates and the predecessors for the
-        // graph vertices.
-        int pendingQuantity = mNumVertices;
-        int i;
-        for (i = 0; i < mNumVertices; ++i)
-        {
-            Vertex& vertex = mVertices[i];
-            vertex.Estimate = Math<Real>::maxReal;
-            vertex.Predecessor = -1;
-            mPending[i] = i;
-        }
-        mVertices[GetIndex(x0, y0)].Estimate = Math<Real>::GetValue(0);
-
-        mNumProcessed = 0;
-        if (RelaxationCallback)
-        {
-            RelaxationCallback();
-        }
-
-        while (pendingQuantity > 0)
-        {
-            // ***** TO DO.  Replace this by an efficient priority queue.
-            // Find the vertex with minimum estimate.
-            Real minimum = mVertices[mPending[0]].Estimate;
-            int minIndex = 0;
-            for (i = 1; i < pendingQuantity; ++i)
+            auto value = vertices.at(pending.at(i)).GetEstimate();
+            if (value < minimum)
             {
-                Real value = mVertices[mPending[i]].Estimate;
-                if (value < minimum)
-                {
-                    minimum = value;
-                    minIndex = i;
-                }
+                minimum = value;
+                minIndex = i;
             }
+        }
 
-            // Remove the minimum-estimate vertex from the pending array.  Keep
-            // the array elements contiguous.
-            int minVertexIndex = mPending[minIndex];
-            --pendingQuantity;
-            if (minIndex != pendingQuantity)
-            {
-                mPending[minIndex] = mPending[pendingQuantity];
-            }
-            // ***** END TO DO.
+        auto minVertexIndex = pending.at(minIndex);
+        --pendingQuantity;
+        if (minIndex != pendingQuantity)
+        {
+            pending.at(minIndex) = pending.at(pendingQuantity);
+        }
 
-            // Relax the paths from the minimum-estimate vertex.
-            Vertex& minVertex = mVertices[minVertexIndex];
-            int xmin = GetX(minVertexIndex);
-            int ymin = GetY(minVertexIndex);
-            for (int dy = -1; dy <= 1; ++dy)
+        auto& minVertex = vertices.at(minVertexIndex);
+        const auto xmin = GetX(minVertexIndex);
+        const auto ymin = GetY(minVertexIndex);
+        for (auto dy = -1; dy <= 1; ++dy)
+        {
+            for (auto dx = -1; dx <= 1; ++dx)
             {
-                for (int dx = -1; dx <= 1; ++dx)
+                if (dx != 0 || dy != 0)
                 {
-                    if (dx != 0 || dy != 0)
+                    const auto xadj = xmin + dx;
+                    const auto yadj = ymin + dy;
+                    if (0 <= xadj && xadj < xSize && 0 <= yadj && yadj < ySize)
                     {
-                        int xadj = xmin + dx;
-                        int yadj = ymin + dy;
-                        if (0 <= xadj && xadj < mXSize && 0 <= yadj && yadj < mYSize)
-                        {
-                            Vertex& adjacent = mVertices[GetIndex(xadj, yadj)];
+                        auto& adjacent = vertices.at(GetIndex(xadj, yadj));
 
-                            Real weight = GetWeight(xmin, ymin, dx, dy);
-                            Real newEstimate = minVertex.Estimate + weight;
-                            if (adjacent.Estimate > newEstimate)
-                            {
-                                adjacent.Estimate = newEstimate;
-                                adjacent.Predecessor = minVertexIndex;
-                            }
+                        auto weight = GetWeight(xmin, ymin, dx, dy);
+                        auto newEstimate = minVertex.GetEstimate() + weight;
+                        if (adjacent.GetEstimate() > newEstimate)
+                        {
+                            adjacent.SetEstimate(newEstimate);
+                            adjacent.SetPredecessor(minVertexIndex);
                         }
                     }
                 }
             }
-
-            ++mNumProcessed;
-            if (RelaxationCallback)
-            {
-                RelaxationCallback();
-            }
         }
 
-        // Construct the path.
-        int* current = mPath;
-        i = GetIndex(x1, y1);
-        while (i >= 0)
+        ++numProcessed;
+        if (relaxationCallback)
         {
-            ++mPathQuantity;
-            *current++ = i;
-            i = mVertices[i].Predecessor;
+            relaxationCallback();
         }
     }
 
-    template <typename Real>
-    int GridGraph2<Real>::GetPathQuantity() const
+    auto value = 0;
+    auto i = GetIndex(x1, y1);
+    while (i >= 0)
     {
-        return mPathQuantity;
+        ++pathQuantity;
+        path.at(value++) = i;
+
+        i = vertices.at(i).GetPredecessor();
     }
-
-    template <typename Real>
-    void GridGraph2<Real>::GetPathPoint(int i, int& x, int& y) const
-    {
-        if (0 <= i && i < mPathQuantity)
-        {
-            x = GetX(mPath[i]);
-            y = GetY(mPath[i]);
-        }
-    }
-
-    template <typename Real>
-    int GridGraph2<Real>::GetNumProcessed() const
-    {
-        return mNumProcessed;
-    }
-
-    // GridGraph2::Vertex
-
-    template <typename Real>
-    GridGraph2<Real>::Vertex::Vertex()
-    {
-        for (int i = 0; i < 8; ++i)
-        {
-            mWeight[i] = Math<Real>::maxReal;
-        }
-        Estimate = Math<Real>::maxReal;
-        Predecessor = -1;
-    }
-
-    template <typename Real>
-    void GridGraph2<Real>::Vertex::SetWeight(int dx, int dy, Real weight)
-    {
-        mWeight[GridGraph2<Real>::msIndex[dy + 1][dx + 1]] = weight;
-    }
-
-    template <typename Real>
-    Real GridGraph2<Real>::Vertex::GetWeight(int dx, int dy) const
-    {
-        return mWeight[GridGraph2<Real>::msIndex[dy + 1][dx + 1]];
-    }
-
-    // Explicit instantiation.
-
-    template <typename Real>
-    const int GridGraph2<Real>::msIndex[3][3] = {
-        { 0, 1, 2 },
-        { 3, -1, 4 },
-        { 5, 6, 7 }
-    };
-
 }
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetPathQuantity() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return pathQuantity;
+}
+
+template <typename Real>
+void Mathematics::GridGraph2<Real>::GetPathPoint(int i, int& x, int& y) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (0 <= i && i < pathQuantity)
+    {
+        x = GetX(path.at(i));
+        y = GetY(path.at(i));
+    }
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetNumProcessed() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numProcessed;
+}
+
+// GridGraph2::Vertex
+
+template <typename Real>
+Mathematics::GridGraph2<Real>::Vertex::Vertex() noexcept
+    : estimate{ Math<Real>::maxReal },
+      predecessor{ -1 },
+      weight{ Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal }
+{
+}
+
+template <typename Real>
+void Mathematics::GridGraph2<Real>::Vertex::SetWeight(int dx, int dy, Real newWeight)
+{
+    const auto x = dx + 1;
+    const auto y = dy + 1;
+    weight.at(index.at(y).at(x)) = newWeight;
+}
+
+template <typename Real>
+Real Mathematics::GridGraph2<Real>::Vertex::GetWeight(int dx, int dy) const
+{
+    const auto x = dx + 1;
+    const auto y = dy + 1;
+    return weight.at(index.at(y).at(x));
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetIndex(int x, int y) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return x + xSize * y;
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetX(int newIndex) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return newIndex % xSize;
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::GetY(int newIndex) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return newIndex / xSize;
+}
+
+template <typename Real>
+Real Mathematics::GridGraph2<Real>::Vertex::GetEstimate() const noexcept
+{
+    return estimate;
+}
+
+template <typename Real>
+void Mathematics::GridGraph2<Real>::Vertex::SetEstimate(Real val) noexcept
+{
+    estimate = val;
+}
+
+template <typename Real>
+int Mathematics::GridGraph2<Real>::Vertex::GetPredecessor() const noexcept
+{ 
+    return predecessor;
+}
+
+template <typename Real>
+void Mathematics::GridGraph2<Real>::Vertex::SetPredecessor(int val) noexcept
+{
+    predecessor = val;
+}
+
+template <typename Real>
+const std::array<std::array<int, 3>, 3> Mathematics::GridGraph2<Real>::index{ std::array<int, 3>{ 0, 1, 2 }, std::array<int, 3>{ 3, -1, 4 }, std::array<int, 3>{ 5, 6, 7 } };
 
 #endif  // MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_DETAIL_H

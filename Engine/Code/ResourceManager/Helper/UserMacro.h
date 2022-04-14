@@ -1,15 +1,18 @@
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// Copyright (c) 2011-2018
-//
-// 引擎版本：0.0.0.1 (2018/07/20 10:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/25 21:03)
 
 #ifndef RESOURCE_MANAGER_MACRO_USER_MACRO_H
 #define RESOURCE_MANAGER_MACRO_USER_MACRO_H
 
 #include "CoreTools/Helper/UserMacro.h"
 
-#define CLOSE_USE_X (0x01) 
+#define CLOSE_USE_X (0x01)
 #define CLOSE_RESOURCE_MANAGER_MAX (((CLOSE_USE_X) << 1) - 1)
 
 // 编译测试（默认为0，最大值为0x01）
@@ -18,13 +21,13 @@
 static_assert(0 <= COMPILE_RESOURCE_MANAGER_CLOSE, "COMPILE_RESOURCE_MANAGER_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_RESOURCE_MANAGER_CLOSE <= CLOSE_RESOURCE_MANAGER_MAX, "COMPILE_RESOURCE_MANAGER_CLOSE Must be less than or equal CLOSE_RESOURCE_MANAGER_MAX.");
 
+#if !defined(COMPILE_RESOURCE_MANAGER_CLOSE) || (COMPILE_RESOURCE_MANAGER_CLOSE & CLOSE_USE_X) != CLOSE_USE_X
+    #define RESOURCE_MANAGER_USE_X
+#endif  // !defined(COMPILE_RESOURCE_MANAGER_CLOSE) || (COMPILE_RESOURCE_MANAGER_CLOSE & CLOSE_USE_X) != CLOSE_USE_X
+
 // 是否编译为静态库
 #ifdef BUILDING_STATIC
-	#define  BUILDING_RESOURCE_MANAGER_STATIC
-#endif // BUILDING_STATIC
+    #define BUILDING_RESOURCE_MANAGER_STATIC
+#endif  // BUILDING_STATIC
 
-#if !defined(COMPILE_RESOURCE_MANAGER_CLOSE) || (COMPILE_RESOURCE_MANAGER_CLOSE & CLOSE_USE_X) != CLOSE_USE_X
-	#define RESOURCE_MANAGER_USE_X
-#endif // !defined(COMPILE_RESOURCE_MANAGER_CLOSE) || (COMPILE_RESOURCE_MANAGER_CLOSE & CLOSE_USE_X) != CLOSE_USE_X   
- 
-#endif // RESOURCE_MANAGER_MACRO_USER_MACRO_H
+#endif  // RESOURCE_MANAGER_MACRO_USER_MACRO_H

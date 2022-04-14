@@ -1,72 +1,50 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 16:01)
 
 #ifndef MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_H
-#define MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_H 
+#define MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_H
 
 #include "Mathematics/MathematicsDll.h"
- 
 
 #include "CoreTools/DataTypes/Tuple.h"
 
+#include <vector>
+
 namespace Mathematics
 {
-	template <int N, typename Real>
-	class UniqueVerticesTriangles
-	{
-	public:
-		// Construction and destruction.  A vertex is an N-tuple of Real values,
-		// usually starting with position and optionally followed by attributes
-		// such as normal vector, colors, and texture coordinates.
-		//
-		// TO DO:  Allow the user to specify an epsilon e > 0 so that vertices V0
-		// and V1 are considered to be the same when |V1-V0| <= e.  The current
-		// code uses e = 0.
-    
-		// Triangle soup.  The input vertex array consists of triples of vertices,
-		// each triple representing a triangle.  The array 'inVertices' must have
-		// 3*numTriangles tuples.  The caller is responsible for deleting the
-		// input vertex array if it was dynamically allocated.  An array
-		// 'outVertices' of 'numOutVertices' unique vertices and an array
-		// 'outIndices' of 'numTriangles' unique index triples are computed.  The
-		// indices are relative to the array of unique vertices and each index
-		// triple represents a triangle.  The output arrays are dynamically
-		// allocated.  The caller is responsible for deleting them.
-		UniqueVerticesTriangles (int numTriangles, const CoreTools::Tuple<N,Real>* inVertices, int& numOutVertices,
-                                 CoreTools::Tuple<N,Real>*& outVertices, int*& outIndices);
+    template <int N, typename Real>
+    class UniqueVerticesTriangles
+    {
+    public:
+        using ClassType = UniqueVerticesTriangles<N, Real>;
 
-		// Indexed triangles.  The input vertex array consists of all vertices
-		// referenced by the input index array.  The array 'inVertices' must have
-		// 'numInVertices' tuples.  The array 'inIndices' must have 3*numTriangles
-		// elements.  The caller is responsible for deleting the input arrays if
-		// they were dynamically allocated.  An array 'outVertices' of
-		// 'numOutVertices' unique vertices and an array 'outIndices' of
-		// 'numTriangles' unique index triples are computed.  The indices are
-		// relative to the array of unique vertices and each index triple
-		// represents a triangle.  The output arrays are dynamically allocated.
-		// The caller is responsible for deleting them.
-		UniqueVerticesTriangles (int numInVertices,const CoreTools::Tuple<N,Real>* inVertices, int numTriangles,
-								 const int* inIndices, int& numOutVertices,CoreTools::Tuple<N,Real>*& outVertices, int*& outIndices);
-		
-		~UniqueVerticesTriangles ();
+    public:
+        UniqueVerticesTriangles(int numTriangles, const std::vector<CoreTools::Tuple<N, Real>>& inVertices);
+        UniqueVerticesTriangles(int numInVertices, const std::vector<CoreTools::Tuple<N, Real>>& inVertices, int numTriangles, const std::vector<int>& inIndices);
 
-		// The input vertices have indices 0 <= i < VInNum.  The output vertices
-		// have indices 0 <= j < VOutNum.  The construction leads to a mapping of
-		// input indices i to output indices j.  Duplicate vertices have different
-		// input indices but the same output index.  The following function gives
-		// you access to the mapping.  If the input index is invalid (i < 0 or
-		// i >= VINum), the return value is -1.
-		int GetOutputIndexFor (int inputIndex) const;
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-		void ConstructUniqueVertices (int numInVertices,  const CoreTools::Tuple<N,Real>* inVertices, int& numOutVertices,CoreTools::Tuple<N,Real>*& outVertices);
+        NODISCARD int GetOutputIndexFor(int inputIndex) const;
+        NODISCARD std::vector<CoreTools::Tuple<N, Real>> GetOutVertices() const;
+        NODISCARD std::vector<int> GetOutIndices() const;
 
-		int mNumInVertices, mNumOutVertices;
-		int* mInToOutMapping;
-	};
+    private:
+        void ConstructUniqueVertices(const std::vector<CoreTools::Tuple<N, Real>>& inVertices);
+
+    private:
+        int numInVertices;
+        int numOutVertices;
+        std::vector<int> inToOutMapping;
+
+        std::vector<CoreTools::Tuple<N, Real>> outVertices;
+        std::vector<int> outIndices;
+    };
 }
 
-#endif // MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_H
+#endif  // MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_H

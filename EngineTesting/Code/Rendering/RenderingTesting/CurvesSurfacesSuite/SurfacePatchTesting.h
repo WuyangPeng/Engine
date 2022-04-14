@@ -21,7 +21,7 @@ namespace Rendering
 		void ParameterTest();
 		void DerivativesTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

@@ -59,7 +59,7 @@ const Rendering::CollapseRecord Rendering::CollapseRecordArrayImpl
 	return m_CollapseRecord.at(index);
 }
 
-void Rendering::CollapseRecordArrayImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::CollapseRecordArrayImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

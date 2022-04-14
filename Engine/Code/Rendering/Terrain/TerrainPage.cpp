@@ -215,55 +215,55 @@ int Rendering::TerrainPage
 
 
  int Rendering::TerrainPage
-	 ::GetSize () const noexcept
+	::GetSize () const noexcept
 {
 	return mSize;
 }
 
  const unsigned short* Rendering::TerrainPage
-	 ::GetHeights () const noexcept
+	::GetHeights () const noexcept
 {
 	return mHeights;
 }
 
  const Mathematics:: Float2& Rendering::TerrainPage
-	 ::GetOrigin () const noexcept
+	::GetOrigin () const noexcept
 {
 	return mOrigin;
 }
 
  float Rendering::TerrainPage
-	 ::GetMinElevation () const noexcept
+	::GetMinElevation () const noexcept
 {
 	return mMinElevation;
 }
 
  float Rendering::TerrainPage
-	 ::GetMaxElevation () const noexcept
+	::GetMaxElevation () const noexcept
 {
 	return mMaxElevation;
 }
 
  float Rendering::TerrainPage
-	 ::GetSpacing () const noexcept
+	::GetSpacing () const noexcept
 {
 	return mSpacing;
 }
 
  float Rendering::TerrainPage
-	 ::GetX (int x) const
+	::GetX (int x) const
 {
      return mOrigin[0] + mSpacing * (float)x;
  }
 
  float Rendering::TerrainPage
-	 ::GetY (int y) const
+	::GetY (int y) const
 {
      return mOrigin[1] + mSpacing * (float)y;
  }
 
  float Rendering::TerrainPage
-	 ::GetHeight (int index) const noexcept
+	::GetHeight (int index) const noexcept
 {
 	return mMinElevation + mMultiplier*(float)mHeights[index];
 }

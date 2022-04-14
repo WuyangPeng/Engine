@@ -1,94 +1,94 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 13:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 18:16)
 
 #ifndef MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_H
 #define MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <array>
+#include <vector>
+
 namespace Mathematics
 {
-	template <typename Real>
-	class   GridGraph2
-	{
-	public:
-		// The 2D grid is chosen to be 8-connected.  Each vertex (x,y) has 8
-		// neighbors: (x-1,y-1), (x,y-1), (x+1,y-1), (x-1,y), (x+1,y),
-		// (x-1,y+1), (x,y+1), (x+1,y+1).  The graph is undirected.
-		GridGraph2(int xSize, int ySize);
-		virtual ~GridGraph2();
+    template <typename Real>
+    class GridGraph2
+    {
+    public:
+        using ClassType = GridGraph2<Real>;
+        using RelaxationCallbackFunction = void (*)();
 
-		// Access to the graph sizes.
-		int GetXSize() const;
-		int GetYSize() const;
-		int GetVertexQuantity() const;
+    public:
+        GridGraph2(int xSize, int ySize);
+        virtual ~GridGraph2() noexcept = default;
+        GridGraph2(const GridGraph2& rhs) = default;
+        GridGraph2& operator=(const GridGraph2& rhs) = default;
+        GridGraph2(GridGraph2&& rhs) noexcept = default;
+        GridGraph2& operator=(GridGraph2&& rhs) noexcept = default;
 
-		// Basic access to the edge weights of the graph.
-		void SetWeight(int x, int y, int dx, int dy, Real weight);
-		Real GetWeight(int x, int y, int dx, int dy) const;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		// Compute the minimum-weight path from (x0,y0) to (x1,y1).
-		void ComputeMinimumWeightPath(int x0, int y0, int x1, int y1);
+        NODISCARD int GetXSize() const noexcept;
+        NODISCARD int GetYSize() const noexcept;
+        NODISCARD int GetVertexQuantity() const noexcept;
 
-		// The path is stored internally.  Access it using these functions.  If
-		// the input index i is out of range, the returned values are -1.
-		int GetPathQuantity() const;
-		void GetPathPoint(int i, int& x, int& y) const;
+        void SetWeight(int x, int y, int dx, int dy, Real weight);
+        NODISCARD Real GetWeight(int x, int y, int dx, int dy) const;
 
-		// A callback that is executed during relaxation step.
-		typedef void(*RelaxationCallbackFunction)();
-		RelaxationCallbackFunction RelaxationCallback;
+        void ComputeMinimumWeightPath(int x0, int y0, int x1, int y1);
 
-		int GetNumProcessed() const;
+        NODISCARD int GetPathQuantity() const noexcept;
+        void GetPathPoint(int i, int& x, int& y) const;
 
-	protected:
-		class   Vertex
-		{
-		public:
-			Vertex();
-			void SetWeight(int dx, int dy, Real weight);
-			Real GetWeight(int dx, int dy) const;
+        NODISCARD int GetNumProcessed() const noexcept;
 
-			// Support for minimum-weight paths.
-			Real Estimate;
-			int Predecessor;
+    protected:
+        class Vertex
+        {
+        public:
+            Vertex() noexcept;
 
-		private:
-			// Weights for the eight neighbors.
-			//   weight[0] for (x-1,y-1)
-			//   weight[1] for (x  ,y-1)
-			//   weight[2] for (x+1,y-1)
-			//   weight[3] for (x-1,y  )
-			//   weight[4] for (x+1,y  )
-			//   weight[5] for (x-1,y+1)
-			//   weight[6] for (x  ,y+1)
-			//   weight[7] for (x+1,y+1)
-			Real mWeight[8];
-		};
+            void SetWeight(int dx, int dy, Real newWeight);
+            NODISCARD Real GetWeight(int dx, int dy) const;
 
-		// The 2-dimensional grid is stored as a 1-dimensional array.
-		inline int GetIndex(int x, int y) const { return x + mXSize * y; }
-		inline int GetX(int index) const { return index % mXSize; }
-		inline int GetY(int index) const { return index / mXSize; }
+            NODISCARD Real GetEstimate() const noexcept;
+            void SetEstimate(Real val) noexcept;
 
-		int mXSize, mYSize, mNumVertices;
-		Vertex* mVertices;
+            NODISCARD int GetPredecessor() const noexcept;
+            void SetPredecessor(int val) noexcept;
 
-		int mPathQuantity;
-		int* mPath;
-		int* mPending;
-		int mNumProcessed;
+        private:
+            Real estimate;
+            int predecessor;
 
-		friend class Vertex;
-		static const int msIndex[3][3];  // index[dy][dx]
-	};
+            std::array<Real, 8> weight;
+        };
 
-	using GridGraph2f = GridGraph2<float>;
-	using GridGraph2d = GridGraph2<double>;
+        NODISCARD int GetIndex(int x, int y) const noexcept;
+        NODISCARD int GetX(int newIndex) const noexcept;
+        NODISCARD int GetY(int newIndex) const noexcept;
 
+    private:
+        RelaxationCallbackFunction relaxationCallback;
+
+        int xSize;
+        int ySize;
+        int numVertices;
+        std::vector<Vertex> vertices;
+
+        int pathQuantity;
+        std::vector<int> path;
+        std::vector<int> pending;
+        int numProcessed;
+
+        static const std::array<std::array<int, 3>, 3> index;
+    };
 }
 
-#endif // MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_H
+#endif  // MATHEMATICS_MISCELLANEOUS_GRID_GRAPH2_H

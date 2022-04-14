@@ -16,7 +16,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
-Rendering::PlatformTexture3DImpl ::PlatformTexture3DImpl() noexcept
+Rendering::PlatformTexture3DImpl::PlatformTexture3DImpl() noexcept
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

@@ -37,7 +37,7 @@ void Rendering::IKControllerTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::IKControllerTesting
 	::InitTest()
 {

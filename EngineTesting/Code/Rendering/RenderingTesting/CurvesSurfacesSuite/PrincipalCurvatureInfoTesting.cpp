@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
  
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PrincipalCurvatureInfoTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::PrincipalCurvatureInfoTesting
 	::MainTest()
 { 

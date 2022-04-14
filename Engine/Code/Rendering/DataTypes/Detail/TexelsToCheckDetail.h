@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/22 2:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:20)
 
 #ifndef RENDERING_DATA_TYPES_TEXELS_TO_CHECK_DETAIL_H
 #define RENDERING_DATA_TYPES_TEXELS_TO_CHECK_DETAIL_H
@@ -18,20 +18,22 @@
 
 template <Rendering::TextureFormat Format>
 Rendering::TexelsToCheck<Format>::TexelsToCheck(size_t inTexelsSize) noexcept
-    : m_InTexelsSize{ inTexelsSize }
+    : inTexelsSize{ inTexelsSize }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <Rendering::TextureFormat Format>
 bool Rendering::TexelsToCheck<Format>::IsValid() const noexcept
 {
-    if (0 < m_InTexelsSize)
+    if (0 < inTexelsSize)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <Rendering::TextureFormat Format>
@@ -39,11 +41,11 @@ size_t Rendering::TexelsToCheck<Format>::GetOutTexelsLength() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_InTexelsSize * sm_Step;
+    return inTexelsSize * step;
 }
 
 template <Rendering::TextureFormat Format>
-void Rendering::TexelsToCheck<Format>::CheckOutTexels([[maybe_unused]] size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Rendering::TexelsToCheck<Format>::CheckOutTexels(MAYBE_UNUSED size_t outTexelsSize) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_1;
 

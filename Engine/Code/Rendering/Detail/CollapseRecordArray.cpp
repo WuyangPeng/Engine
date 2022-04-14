@@ -69,7 +69,7 @@ CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, CollapseRecordArray)
     }
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, CollapseRecordArray);
 
-Rendering::CollapseRecordArray ::CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord)
+Rendering::CollapseRecordArray::CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord)
     : ParentType{ "CollapseRecordArray" }, impl{ make_shared<ImplType>(collapseRecord) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

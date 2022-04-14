@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_INPUT_OUTPUT_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_INPUT_OUTPUT_STATIC
+#else  // BUILDING_INPUT_OUTPUT_STATIC
 
-	namespace InputOutputToolset
-	{
-		void StaticDllLib()
-		{
+namespace InputOutputToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_INPUT_OUTPUT_STATIC
+#endif  // !BUILDING_INPUT_OUTPUT_STATIC

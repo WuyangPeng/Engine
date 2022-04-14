@@ -1,48 +1,63 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/11 16:54)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYGON2_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYGON2_DETAIL_H
 
 #include "ContPointInPolygon2.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::PointInPolygon2<Real>
-	::PointInPolygon2(int numPoints, const Vector2<Real>* points)
-	: mNumPoints{ numPoints }, mPoints{ points }
+Mathematics::ContPointInPolygon2<Real>::ContPointInPolygon2(const std::vector<Vector2<Real>>& points)
+    : points{ points }
 {
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename Real>
-bool Mathematics::PointInPolygon2<Real>
-	::Contains(const Vector2<Real>& p) const
-{
-	auto inside = false;
-    for (auto i = 0, j = mNumPoints-1; i < mNumPoints; j = i++)
-    {
-        const auto& U0 = mPoints[i];
-        const auto& U1 = mPoints[j];
-        Real rhs, lhs;
+#ifdef OPEN_CLASS_INVARIANT
 
-		if (p.GetY() < U1.GetY())  // U1 above ray
+template <typename Real>
+bool Mathematics::ContPointInPolygon2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ContPointInPolygon2<Real>::Contains(const Vector2<Real>& p) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto mNumPoints = boost::numeric_cast<int>(points.size());
+    auto inside = false;
+    for (auto i = 0, j = mNumPoints - 1; i < mNumPoints; j = i++)
+    {
+        const auto& u0 = points.at(i);
+        const auto& u1 = points.at(j);
+
+        if (p.GetY() < u1.GetY())
         {
-			if (U0.GetY() <= p.GetY())  // U0 on or below ray
+            if (u0.GetY() <= p.GetY())
             {
-				lhs = (p.GetY() - U0.GetY())*(U1.GetX() - U0.GetX());
-				rhs = (p.GetX() - U0.GetX())*(U1.GetY() - U0.GetY());
+                auto lhs = (p.GetY() - u0.GetY()) * (u1.GetX() - u0.GetX());
+                auto rhs = (p.GetX() - u0.GetX()) * (u1.GetY() - u0.GetY());
                 if (lhs > rhs)
                 {
                     inside = !inside;
                 }
             }
         }
-		else if (p.GetY() < U0.GetY())  // U1 on or below ray, U0 above ray
+        else if (p.GetY() < u0.GetY())
         {
-			lhs = (p.GetY() - U0.GetY())*(U1.GetX() - U0.GetX());
-			rhs = (p.GetX() - U0.GetX())*(U1.GetY() - U0.GetY());
+            auto lhs = (p.GetY() - u0.GetY()) * (u1.GetX() - u0.GetX());
+            auto rhs = (p.GetX() - u0.GetX()) * (u1.GetY() - u0.GetY());
             if (lhs < rhs)
             {
                 inside = !inside;
@@ -53,16 +68,18 @@ bool Mathematics::PointInPolygon2<Real>
 }
 
 template <typename Real>
-bool Mathematics::PointInPolygon2<Real>
-	::ContainsConvexOrderN(const Vector2<Real>& p) const
+bool Mathematics::ContPointInPolygon2<Real>::ContainsConvexOrderN(const Vector2<Real>& p) const
 {
-    for (int i1 = 0, i0 = mNumPoints-1; i1 < mNumPoints; i0 = i1++)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto mNumPoints = boost::numeric_cast<int>(points.size());
+    for (int i1 = 0, i0 = mNumPoints - 1; i1 < mNumPoints; i0 = i1++)
     {
-		auto nx = mPoints[i1].GetY() - mPoints[i0].GetY();
-		auto ny = mPoints[i0].GetX() - mPoints[i1].GetX();
-		auto dx = p.GetX() - mPoints[i0].GetX();
-		auto dy = p.GetY() - mPoints[i0].GetY();
-        if (nx*dx + ny*dy > Math<Real>::GetValue(0))
+        auto nx = points.at(i1).GetY() - points.at(i0).GetY();
+        auto ny = points.at(i0).GetX() - points.at(i1).GetX();
+        auto dx = p.GetX() - points.at(i0).GetX();
+        auto dy = p.GetY() - points.at(i0).GetY();
+        if (nx * dx + ny * dy > Math<Real>::GetValue(0))
         {
             return false;
         }
@@ -71,60 +88,61 @@ bool Mathematics::PointInPolygon2<Real>
 }
 
 template <typename Real>
-bool Mathematics::PointInPolygon2<Real>
-	::ContainsConvexOrderLogN(const Vector2<Real>& p) const
+bool Mathematics::ContPointInPolygon2<Real>::ContainsConvexOrderLogN(const Vector2<Real>& p) const
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
     return SubContainsPoint(p, 0, 0);
 }
 
 template <typename Real>
-bool Mathematics::PointInPolygon2<Real>
-	::ContainsQuadrilateral(const Vector2<Real>& p) const
+bool Mathematics::ContPointInPolygon2<Real>::ContainsQuadrilateral(const Vector2<Real>& p) const
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto mNumPoints = boost::numeric_cast<int>(points.size());
     if (mNumPoints != 4)
     {
         return false;
     }
 
-	auto nx = mPoints[2].GetY() - mPoints[0].GetY();
-	auto ny = mPoints[0].GetX() - mPoints[2].GetX();
-	auto dx = p.GetX() - mPoints[0].GetX();
-	auto dy = p.GetY() - mPoints[0].GetY();
+    auto nx = points.at(2).GetY() - points.at(0).GetY();
+    auto ny = points.at(0).GetX() - points.at(2).GetX();
+    auto dx = p.GetX() - points.at(0).GetX();
+    auto dy = p.GetY() - points.at(0).GetY();
 
-    if (nx*dx + ny*dy > Math<Real>::GetValue(0))
+    if (nx * dx + ny * dy > Math<Real>::GetValue(0))
     {
-        // P potentially in <V0,V1,V2>
-		nx = mPoints[1].GetY() - mPoints[0].GetY();
-		ny = mPoints[0].GetX() - mPoints[1].GetX();
-        if (nx*dx + ny*dy > Real{0.0})
+        nx = points.at(1).GetY() - points.at(0).GetY();
+        ny = points.at(0).GetX() - points.at(1).GetX();
+        if (nx * dx + ny * dy > Math<Real>::GetValue(0))
         {
             return false;
         }
 
-		nx = mPoints[2].GetY() - mPoints[1].GetY();
-		ny = mPoints[1].GetX() - mPoints[2].GetX();
-		dx = p.GetX() - mPoints[1].GetX();
-		dy = p.GetY() - mPoints[1].GetY();
-        if (nx*dx + ny*dy > Math<Real>::GetValue(0))
+        nx = points.at(2).GetY() - points.at(1).GetY();
+        ny = points.at(1).GetX() - points.at(2).GetX();
+        dx = p.GetX() - points.at(1).GetX();
+        dy = p.GetY() - points.at(1).GetY();
+        if (nx * dx + ny * dy > Math<Real>::GetValue(0))
         {
             return false;
         }
     }
     else
     {
-        // P potentially in <V0,V2,V3>
-		nx = mPoints[0].GetY() - mPoints[3].GetY();
-		ny = mPoints[3].GetX() - mPoints[0].GetX();
-        if (nx*dx + ny*dy > Math<Real>::GetValue(0))
+        nx = points.at(0).GetY() - points.at(3).GetY();
+        ny = points.at(3).GetX() - points.at(0).GetX();
+        if (nx * dx + ny * dy > Math<Real>::GetValue(0))
         {
             return false;
         }
 
-		nx = mPoints[3].GetY() - mPoints[2].GetY();
-		ny = mPoints[2].GetX() - mPoints[3].GetX();
-		dx = p.GetX() - mPoints[3].GetX();
-		dy = p.GetY() - mPoints[3].GetY();
-        if (nx*dx + ny*dy > Math<Real>::GetValue(0))
+        nx = points.at(3).GetY() - points.at(2).GetY();
+        ny = points.at(2).GetX() - points.at(3).GetX();
+        dx = p.GetX() - points.at(3).GetX();
+        dy = p.GetY() - points.at(3).GetY();
+        if (nx * dx + ny * dy > Math<Real>::GetValue(0))
         {
             return false;
         }
@@ -133,23 +151,23 @@ bool Mathematics::PointInPolygon2<Real>
 }
 
 template <typename Real>
-bool Mathematics::PointInPolygon2<Real>
-	::SubContainsPoint(const Vector2<Real>& p, int i0, int i1) const
+bool Mathematics::ContPointInPolygon2<Real>::SubContainsPoint(const Vector2<Real>& p, int i0, int i1) const
 {
-    Real nx, ny, dx, dy;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    int diff = i1 - i0;
+    const auto mNumPoints = boost::numeric_cast<int>(points.size());
+
+    const auto diff = i1 - i0;
     if (diff == 1 || (diff < 0 && diff + mNumPoints == 1))
     {
-		nx = mPoints[i1].GetY() - mPoints[i0].GetY();
-		ny = mPoints[i0].GetX() - mPoints[i1].GetX();
-		dx = p.GetX() - mPoints[i0].GetX();
-		dy = p.GetY() - mPoints[i0].GetY();
-        return nx*dx + ny*dy <= Math<Real>::GetValue(0);
+        auto nx = points.at(i1).GetY() - points.at(i0).GetY();
+        auto ny = points.at(i0).GetX() - points.at(i1).GetX();
+        auto dx = p.GetX() - points.at(i0).GetX();
+        auto dy = p.GetY() - points.at(i0).GetY();
+        return nx * dx + ny * dy <= Math<Real>::GetValue(0);
     }
 
-    // Bisect the index range.
-    int mid;
+    auto mid = 0;
     if (i0 < i1)
     {
         mid = (i0 + i1) >> 1;
@@ -163,21 +181,18 @@ bool Mathematics::PointInPolygon2<Real>
         }
     }
 
-    // Determine which side of the splitting line contains the point.
-	nx = mPoints[mid].GetY() - mPoints[i0].GetY();
-	ny = mPoints[i0].GetX() - mPoints[mid].GetX();
-	dx = p.GetX() - mPoints[i0].GetX();
-	dy = p.GetY() - mPoints[i0].GetY();
-    if (nx*dx + ny*dy > Math<Real>::GetValue(0))
+    auto nx = points.at(mid).GetY() - points.at(i0).GetY();
+    auto ny = points.at(i0).GetX() - points.at(mid).GetX();
+    auto dx = p.GetX() - points.at(i0).GetX();
+    auto dy = p.GetY() - points.at(i0).GetY();
+    if (nx * dx + ny * dy > Math<Real>::GetValue(0))
     {
-        // P potentially in <V(i0),V(i0+1),...,V(mid-1),V(mid)>
         return SubContainsPoint(p, i0, mid);
     }
     else
     {
-        // P potentially in <V(mid),V(mid+1),...,V(i1-1),V(i1)>
         return SubContainsPoint(p, mid, i1);
     }
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYGON2_DETAIL_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYGON2_DETAIL_H

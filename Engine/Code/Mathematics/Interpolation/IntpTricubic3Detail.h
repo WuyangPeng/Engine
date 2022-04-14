@@ -1,477 +1,522 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 10:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 17:46)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_TRICUBIC3_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_TRICUBIC3_DETAIL_H
 
 #include "IntpTricubic3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/MemoryTools/Array3Detail.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpTricubic3<Real>::IntpTricubic3(int xBound, int yBound, int zBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, Real zMin, Real zSpacing, const CoreTools::Array3<Real>& f, bool catmullRom)
+    : xBound{ xBound },
+      yBound{ yBound },
+      zBound{ zBound },
+      quantity{ xBound * yBound * zBound },
+      xMin{ xMin },
+      xMax{ xMin + xSpacing * (boost::numeric_cast<size_t>(xBound) - 1) },
+      xSpacing{ xSpacing },
+      invXSpacing{ (Math<Real>::GetValue(1)) / xSpacing },
+      yMin{ yMin },
+      yMax{ yMin + ySpacing * (boost::numeric_cast<size_t>(yBound) - 1) },
+      ySpacing{ ySpacing },
+      invYSpacing{ (Math<Real>::GetValue(1)) / ySpacing },
+      zMin{ zMin },
+      zMax{ yMin + zSpacing * (boost::numeric_cast<size_t>(zBound) - 1) },
+      zSpacing{ zSpacing },
+      invZSpacing{ (Math<Real>::GetValue(1)) / zSpacing },
+      f{ f },
+      blend{ (catmullRom ? crBlend : bsBlend) }
 {
-	template <typename Real>
-	IntpTricubic3<Real>::IntpTricubic3(int xBound, int yBound, int zBound,Real xMin, Real xSpacing, Real yMin, Real ySpacing, Real zMin,Real zSpacing, Real*** F, bool catmullRom)
-	{
-		// At least a 4x4x4 block of data points are needed to construct the
-		// tricubic interpolation.
-		MATHEMATICS_ASSERTION_0(xBound >= 4 && yBound >= 4 && zBound >= 4 && F,"Invalid input\n");
-		MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0),"Invalid input\n");
+    MATHEMATICS_ASSERTION_0(xBound >= 4 && yBound >= 4 && zBound >= 4, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0), "无效输入。\n");
 
-		mXBound = xBound;
-		mYBound = yBound;
-		mZBound = zBound;
-		quantity = xBound * yBound*zBound;
-
-		mXMin = xMin;
-		mXSpacing = xSpacing;
-		mInvXSpacing = (Math::GetValue(1)) / xSpacing;
-		mXMax = xMin + xSpacing * (xBound - 1);
-
-		mYMin = yMin;
-		mYSpacing = ySpacing;
-		mInvYSpacing = (Math::GetValue(1)) / ySpacing;
-		mYMax = yMin + ySpacing * (yBound - 1);
-
-		mZMin = zMin;
-		mZSpacing = zSpacing;
-		mInvZSpacing = (Math::GetValue(1)) / zSpacing;
-		mZMax = yMin + zSpacing * (zBound - 1);
-
-		mF = F;
-
-		mBlend = (catmullRom ? msCRBlend : msBSBlend);
-	}
-
-	template <typename Real>
-	int IntpTricubic3<Real>::GetXBound() const
-	{
-		return mXBound;
-	}
-
-	template <typename Real>
-	int IntpTricubic3<Real>::GetYBound() const
-	{
-		return mYBound;
-	}
-
-	template <typename Real>
-	int IntpTricubic3<Real>::GetZBound() const
-	{
-		return mZBound;
-	}
-
-	template <typename Real>
-	int IntpTricubic3<Real>::GetQuantity() const
-	{
-		return quantity;
-	}
-
-	template <typename Real>
-	Real*** IntpTricubic3<Real>::GetF() const
-	{
-		return mF;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetXMin() const
-	{
-		return mXMin;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetXMax() const
-	{
-		return mXMax;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetXSpacing() const
-	{
-		return mXSpacing;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetYMin() const
-	{
-		return mYMin;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetYMax() const
-	{
-		return mYMax;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetYSpacing() const
-	{
-		return mYSpacing;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetZMin() const
-	{
-		return mZMin;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetZMax() const
-	{
-		return mZMax;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::GetZSpacing() const
-	{
-		return mZSpacing;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::operator() (Real x, Real y, Real z) const
-	{
-		// Compute x-index and clamp to image.
-		Real xIndex = (x - mXMin)*mInvXSpacing;
-		int ix = (int)xIndex;
-		if (ix < 0 || ix > mXBound - 1)
-		{
-			return Math<Real>::maxReal;
-		}
-
-		// Compute y-index and clamp to image.
-		Real yIndex = (y - mYMin)*mInvYSpacing;
-		int iy = (int)yIndex;
-		if (iy < 0 || iy > mYBound - 1)
-		{
-			return Math<Real>::maxReal;
-		}
-
-		// Compute z-index and clamp to image.
-		Real zIndex = (z - mZMin)*mInvZSpacing;
-		int iz = (int)zIndex;
-		if (iz < 0 || iz > mZBound - 1)
-		{
-			return Math<Real>::maxReal;
-		}
-
-		Real U[4];
-		U[0] = Math::GetValue(1);
-		U[1] = xIndex - ix;
-		U[2] = U[1] * U[1];
-		U[3] = U[1] * U[2];
-
-		Real V[4];
-		V[0] = Math::GetValue(1);
-		V[1] = yIndex - iy;
-		V[2] = V[1] * V[1];
-		V[3] = V[1] * V[2];
-
-		Real W[4];
-		W[0] = Math::GetValue(1);
-		W[1] = zIndex - iz;
-		W[2] = W[1] * W[1];
-		W[3] = W[1] * W[2];
-
-		// Compute P = M*U, Q = M*V, Real = M*W.
-		Real P[4], Q[4], r[4];
-		int row, col;
-		for (row = 0; row < 4; ++row)
-		{
-			P[row] = Math<Real>::GetValue(0);
-			Q[row] = Math<Real>::GetValue(0);
-			r[row] = Math<Real>::GetValue(0);
-			for (col = 0; col < 4; ++col)
-			{
-				P[row] += mBlend[row][col] * U[col];
-				Q[row] += mBlend[row][col] * V[col];
-				r[row] += mBlend[row][col] * W[col];
-			}
-		}
-
-		// Compute the tensor product (M*U)(M*V)(M*W)*D where D is the 4x4x4
-		// subimage containing (x,y,z).
-		--ix;
-		--iy;
-		--iz;
-		Real result = Math<Real>::GetValue(0);
-		for (int slice = 0; slice < 4; ++slice)
-		{
-			int zClamp = iz + slice;
-			if (zClamp < 0)
-			{
-				zClamp = 0;
-			}
-			else if (zClamp > mZBound - 1)
-			{
-				zClamp = mZBound - 1;
-			}
-
-			for (row = 0; row < 4; ++row)
-			{
-				int yClamp = iy + row;
-				if (yClamp < 0)
-				{
-					yClamp = 0;
-				}
-				else if (yClamp > mYBound - 1)
-				{
-					yClamp = mYBound - 1;
-				}
-
-				for (col = 0; col < 4; ++col)
-				{
-					int xClamp = ix + col;
-					if (xClamp < 0)
-					{
-						xClamp = 0;
-					}
-					else if (xClamp > mXBound - 1)
-					{
-						xClamp = mXBound - 1;
-					}
-
-					result += P[col] * Q[row] * Real[slice] * mF[zClamp][yClamp][xClamp];
-				}
-			}
-		}
-
-		return result;
-	}
-
-	template <typename Real>
-	Real IntpTricubic3<Real>::operator() (int xOrder, int yOrder, int zOrder,Real x, Real y, Real z) const
-	{
-		// Compute x-index and clamp to image.
-		Real xIndex = (x - mXMin)*mInvXSpacing;
-		int ix = (int)xIndex;
-		if (ix < 0 || ix > mXBound - 1)
-		{
-			return Math<Real>::maxReal;
-		}
-
-		// Compute y-index and clamp to image.
-		Real yIndex = (y - mYMin)*mInvYSpacing;
-		int iy = (int)yIndex;
-		if (iy < 0 || iy > mYBound - 1)
-		{
-			return Math<Real>::maxReal;
-		}
-
-		// Compute z-index and clamp to image.
-		Real zIndex = (z - mZMin)*mInvZSpacing;
-		int iz = (int)zIndex;
-		if (iz < 0 || iz > mZBound - 1)
-		{
-			return Math<Real>::maxReal;
-		}
-
-		Real U[4], dx, xMult;
-		switch (xOrder)
-		{
-		case 0:
-			dx = xIndex - ix;
-			U[0] = Math::GetValue(1);
-			U[1] = dx;
-			U[2] = dx * U[1];
-			U[3] = dx * U[2];
-			xMult = Math::GetValue(1);
-			break;
-		case 1:
-			dx = xIndex - ix;
-			U[0] = Math<Real>::GetValue(0);
-			U[1] = Math::GetValue(1);
-			U[2] = (Math::GetValue(2))*dx;
-			U[3] = (static_cast<Real>(3))*dx*dx;
-			xMult = mInvXSpacing;
-			break;
-		case 2:
-			dx = xIndex - ix;
-			U[0] = Math<Real>::GetValue(0);
-			U[1] = Math<Real>::GetValue(0);
-			U[2] = Math::GetValue(2);
-			U[3] = ((Real)6)*dx;
-			xMult = mInvXSpacing * mInvXSpacing;
-			break;
-		case 3:
-			U[0] = Math<Real>::GetValue(0);
-			U[1] = Math<Real>::GetValue(0);
-			U[2] = Math<Real>::GetValue(0);
-			U[3] = (Real)6;
-			xMult = mInvXSpacing * mInvXSpacing*mInvXSpacing;
-			break;
-		default:
-			return Math<Real>::GetValue(0);
-		}
-
-		Real V[4], dy, yMult;
-		switch (yOrder)
-		{
-		case 0:
-			dy = yIndex - iy;
-			V[0] = Math::GetValue(1);
-			V[1] = dy;
-			V[2] = dy * V[1];
-			V[3] = dy * V[2];
-			yMult = Math::GetValue(1);
-			break;
-		case 1:
-			dy = yIndex - iy;
-			V[0] = Math<Real>::GetValue(0);
-			V[1] = Math::GetValue(1);
-			V[2] = (Math::GetValue(2))*dy;
-			V[3] = (static_cast<Real>(3))*dy*dy;
-			yMult = mInvYSpacing;
-			break;
-		case 2:
-			dy = yIndex - iy;
-			V[0] = Math<Real>::GetValue(0);
-			V[1] = Math<Real>::GetValue(0);
-			V[2] = Math::GetValue(2);
-			V[3] = ((Real)6)*dy;
-			yMult = mInvYSpacing * mInvYSpacing;
-			break;
-		case 3:
-			V[0] = Math<Real>::GetValue(0);
-			V[1] = Math<Real>::GetValue(0);
-			V[2] = Math<Real>::GetValue(0);
-			V[3] = (Real)6;
-			yMult = mInvYSpacing * mInvYSpacing*mInvYSpacing;
-			break;
-		default:
-			return Math<Real>::GetValue(0);
-		}
-
-		Real W[4], dz, zMult;
-		switch (zOrder)
-		{
-		case 0:
-			dz = zIndex - iz;
-			W[0] = Math::GetValue(1);
-			W[1] = dz;
-			W[2] = dz * W[1];
-			W[3] = dz * W[2];
-			zMult = Math::GetValue(1);
-			break;
-		case 1:
-			dz = zIndex - iz;
-			W[0] = Math<Real>::GetValue(0);
-			W[1] = Math::GetValue(1);
-			W[2] = (Math::GetValue(2))*dz;
-			W[3] = (static_cast<Real>(3))*dz*dz;
-			zMult = mInvZSpacing;
-			break;
-		case 2:
-			dz = zIndex - iz;
-			W[0] = Math<Real>::GetValue(0);
-			W[1] = Math<Real>::GetValue(0);
-			W[2] = Math::GetValue(2);
-			W[3] = ((Real)6)*dz;
-			zMult = mInvZSpacing * mInvZSpacing;
-			break;
-		case 3:
-			W[0] = Math<Real>::GetValue(0);
-			W[1] = Math<Real>::GetValue(0);
-			W[2] = Math<Real>::GetValue(0);
-			W[3] = (Real)6;
-			zMult = mInvZSpacing * mInvZSpacing*mInvZSpacing;
-			break;
-		default:
-			return Math<Real>::GetValue(0);
-		}
-
-		// Compute P = M*U, Q = M*V, and Real = M*W.
-		Real P[4], Q[4], r[4];
-		int row, col;
-		for (row = 0; row < 4; ++row)
-		{
-			P[row] = Math<Real>::GetValue(0);
-			Q[row] = Math<Real>::GetValue(0);
-			r[row] = Math<Real>::GetValue(0);
-			for (col = 0; col < 4; ++col)
-			{
-				P[row] += mBlend[row][col] * U[col];
-				Q[row] += mBlend[row][col] * V[col];
-				r[row] += mBlend[row][col] * W[col];
-			}
-		}
-
-		// Compute the tensor product (M*U)(M*V)(M*W)*D where D is the 4x4x4
-		// subimage containing (x,y,z).
-		--ix;
-		--iy;
-		--iz;
-		Real result = Math<Real>::GetValue(0);
-		for (int slice = 0; slice < 4; ++slice)
-		{
-			int zClamp = iz + slice;
-			if (zClamp < 0)
-			{
-				zClamp = 0;
-			}
-			else if (zClamp > mZBound - 1)
-			{
-				zClamp = mZBound - 1;
-			}
-
-			for (row = 0; row < 4; ++row)
-			{
-				int yClamp = iy + row;
-				if (yClamp < 0)
-				{
-					yClamp = 0;
-				}
-				else if (yClamp > mYBound - 1)
-				{
-					yClamp = mYBound - 1;
-				}
-
-				for (col = 0; col < 4; ++col)
-				{
-					int xClamp = ix + col;
-					if (xClamp < 0)
-					{
-						xClamp = 0;
-					}
-					else if (xClamp > mXBound - 1)
-					{
-						xClamp = mXBound - 1;
-					}
-
-					result += P[col] * Q[row] * Real[slice] * mF[zClamp][yClamp][xClamp];
-				}
-			}
-		}
-		result *= xMult * yMult*zMult;
-
-		return result;
-	}
-
-
-
-	// Explicit instantiation.
-
-	template <typename Real>
-	const Real IntpTricubic3<Real>::msCRBlend[4][4] =
-	{
-		{ 0.0f, -0.5f,  1.0f, -0.5f },
-		{ 1.0f,  0.0f, -2.5f,  1.5f },
-		{ 0.0f,  0.5f,  2.0f, -1.5f },
-		{ 0.0f,  0.0f, -0.5f,  0.5f }
-	};
-
-	template <typename Real>
-	const Real IntpTricubic3<Real>::msBSBlend[4][4] =
-	{
-		{ 1.0f / 6.0f, -3.0f / 6.0f,  3.0f / 6.0f, -1.0f / 6.0f },
-		{ 4.0f / 6.0f,  0.0f / 6.0f, -6.0f / 6.0f,  3.0f / 6.0f },
-		{ 1.0f / 6.0f,  3.0f / 6.0f,  3.0f / 6.0f, -3.0f / 6.0f },
-		{ 0.0f / 6.0f,  0.0f / 6.0f,  0.0f / 6.0f,  1.0f / 6.0f }
-	};
-
-
-
-
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_TRICUBIC3_DETAIL_H
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpTricubic3<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::IntpTricubic3<Real>::GetXBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xBound;
+}
+
+template <typename Real>
+int Mathematics::IntpTricubic3<Real>::GetYBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yBound;
+}
+
+template <typename Real>
+int Mathematics::IntpTricubic3<Real>::GetZBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zBound;
+}
+
+template <typename Real>
+int Mathematics::IntpTricubic3<Real>::GetQuantity() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return quantity;
+}
+
+template <typename Real>
+CoreTools::Array3<Real> Mathematics::IntpTricubic3<Real>::GetF() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return f;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetXMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMin;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetXMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetXSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xSpacing;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetYMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yMin;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetYMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetYSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ySpacing;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetZMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zMin;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetZMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::GetZSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zSpacing;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::operator()(Real x, Real y, Real z) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto xIndex = (x - xMin) * invXSpacing;
+    auto ix = boost::numeric_cast<int>(xIndex);
+    if (ix < 0 || ix > xBound - 1)
+    {
+        return Math<Real>::maxReal;
+    }
+
+    auto yIndex = (y - yMin) * invYSpacing;
+    auto iy = boost::numeric_cast<int>(yIndex);
+    if (iy < 0 || iy > yBound - 1)
+    {
+        return Math<Real>::maxReal;
+    }
+
+    auto zIndex = (z - zMin) * invZSpacing;
+    auto iz = boost::numeric_cast<int>(zIndex);
+    if (iz < 0 || iz > zBound - 1)
+    {
+        return Math<Real>::maxReal;
+    }
+
+    std::array<Real, 4> u{};
+    u.at(0) = Math<Real>::GetValue(1);
+    u.at(1) = xIndex - ix;
+    u.at(2) = u.at(1) * u.at(1);
+    u.at(3) = u.at(1) * u.at(2);
+
+    std::array<Real, 4> v{};
+    v.at(0) = Math<Real>::GetValue(1);
+    v.at(1) = yIndex - iy;
+    v.at(2) = v.at(1) * v.at(1);
+    v.at(3) = v.at(1) * v.at(2);
+
+    std::array<Real, 4> w{};
+    w.at(0) = Math<Real>::GetValue(1);
+    w.at(1) = zIndex - iz;
+    w.at(2) = w.at(1) * w.at(1);
+    w.at(3) = w.at(1) * w.at(2);
+
+    std::array<Real, 4> p{};
+    std::array<Real, 4> q{};
+    std::array<Real, 4> r{};
+
+    for (auto row = 0; row < 4; ++row)
+    {
+        p.at(row) = Math<Real>::GetValue(0);
+        q.at(row) = Math<Real>::GetValue(0);
+        r.at(row) = Math<Real>::GetValue(0);
+        for (auto col = 0; col < 4; ++col)
+        {
+            p.at(row) += blend.at(row).at(col) * u.at(col);
+            q.at(row) += blend.at(row).at(col) * v.at(col);
+            r.at(row) += blend.at(row).at(col) * w.at(col);
+        }
+    }
+
+    --ix;
+    --iy;
+    --iz;
+    auto result = Math<Real>::GetValue(0);
+    for (auto slice = 0; slice < 4; ++slice)
+    {
+        auto zClamp = iz + slice;
+        if (zClamp < 0)
+        {
+            zClamp = 0;
+        }
+        else if (zClamp > zBound - 1)
+        {
+            zClamp = zBound - 1;
+        }
+
+        for (auto row = 0; row < 4; ++row)
+        {
+            auto yClamp = iy + row;
+            if (yClamp < 0)
+            {
+                yClamp = 0;
+            }
+            else if (yClamp > yBound - 1)
+            {
+                yClamp = yBound - 1;
+            }
+
+            for (auto col = 0; col < 4; ++col)
+            {
+                auto xClamp = ix + col;
+                if (xClamp < 0)
+                {
+                    xClamp = 0;
+                }
+                else if (xClamp > xBound - 1)
+                {
+                    xClamp = xBound - 1;
+                }
+
+                result += p.at(col) * q.at(row) * r.at(slice) * f.Get(xClamp, yClamp, zClamp);
+            }
+        }
+    }
+
+    return result;
+}
+
+template <typename Real>
+Real Mathematics::IntpTricubic3<Real>::operator()(int xOrder, int yOrder, int zOrder, Real x, Real y, Real z) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto xIndex = (x - xMin) * invXSpacing;
+    auto ix = boost::numeric_cast<int>(xIndex);
+    if (ix < 0 || ix > xBound - 1)
+    {
+        return Math<Real>::maxReal;
+    }
+
+    auto yIndex = (y - yMin) * invYSpacing;
+    auto iy = boost::numeric_cast<int>(yIndex);
+
+    if (iy < 0 || iy > yBound - 1)
+    {
+        return Math<Real>::maxReal;
+    }
+
+    auto zIndex = (z - zMin) * invZSpacing;
+    auto iz = boost::numeric_cast<int>(zIndex);
+    if (iz < 0 || iz > zBound - 1)
+    {
+        return Math<Real>::maxReal;
+    }
+
+    std::array<Real, 4> u{};
+    Real xMult{};
+    switch (xOrder)
+    {
+        case 0:
+        {
+            auto dx = xIndex - ix;
+            u.at(0) = Math<Real>::GetValue(1);
+            u.at(1) = dx;
+            u.at(2) = dx * u.at(1);
+            u.at(3) = dx * u.at(2);
+            xMult = Math<Real>::GetValue(1);
+        }
+        break;
+        case 1:
+        {
+            auto dx = xIndex - ix;
+            u.at(0) = Math<Real>::GetValue(0);
+            u.at(1) = Math<Real>::GetValue(1);
+            u.at(2) = (Math<Real>::GetValue(2)) * dx;
+            u.at(3) = (Math<Real>::GetValue(3)) * dx * dx;
+            xMult = invXSpacing;
+        }
+        break;
+        case 2:
+        {
+            auto dx = xIndex - ix;
+            u.at(0) = Math<Real>::GetValue(0);
+            u.at(1) = Math<Real>::GetValue(0);
+            u.at(2) = Math<Real>::GetValue(2);
+            u.at(3) = (Math<Real>::GetValue(6)) * dx;
+            xMult = invXSpacing * invXSpacing;
+        }
+        break;
+        case 3:
+        {
+            u.at(0) = Math<Real>::GetValue(0);
+            u.at(1) = Math<Real>::GetValue(0);
+            u.at(2) = Math<Real>::GetValue(0);
+            u.at(3) = Math<Real>::GetValue(6);
+            xMult = invXSpacing * invXSpacing * invXSpacing;
+        }
+        break;
+        default:
+            return Math<Real>::GetValue(0);
+    }
+
+    std::array<Real, 4> v{};
+    Real yMult{};
+    switch (yOrder)
+    {
+        case 0:
+        {
+            auto dy = yIndex - iy;
+            v.at(0) = Math<Real>::GetValue(1);
+            v.at(1) = dy;
+            v.at(2) = dy * v.at(1);
+            v.at(3) = dy * v.at(2);
+            yMult = Math<Real>::GetValue(1);
+        }
+        break;
+        case 1:
+        {
+            auto dy = yIndex - iy;
+            v.at(0) = Math<Real>::GetValue(0);
+            v.at(1) = Math<Real>::GetValue(1);
+            v.at(2) = (Math<Real>::GetValue(2)) * dy;
+            v.at(3) = (Math<Real>::GetValue(3)) * dy * dy;
+            yMult = invYSpacing;
+        }
+        break;
+        case 2:
+        {
+            auto dy = yIndex - iy;
+            v.at(0) = Math<Real>::GetValue(0);
+            v.at(1) = Math<Real>::GetValue(0);
+            v.at(2) = Math<Real>::GetValue(2);
+            v.at(3) = (Math<Real>::GetValue(6)) * dy;
+            yMult = invYSpacing * invYSpacing;
+        }
+        break;
+        case 3:
+        {
+            v.at(0) = Math<Real>::GetValue(0);
+            v.at(1) = Math<Real>::GetValue(0);
+            v.at(2) = Math<Real>::GetValue(0);
+            v.at(3) = Math<Real>::GetValue(6);
+            yMult = invYSpacing * invYSpacing * invYSpacing;
+        }
+        break;
+        default:
+            return Math<Real>::GetValue(0);
+    }
+
+    std::array<Real, 4> w{};
+    Real zMult{};
+    switch (zOrder)
+    {
+        case 0:
+        {
+            auto dz = zIndex - iz;
+            w.at(0) = Math<Real>::GetValue(1);
+            w.at(1) = dz;
+            w.at(2) = dz * w.at(1);
+            w.at(3) = dz * w.at(2);
+            zMult = Math<Real>::GetValue(1);
+        }
+        break;
+        case 1:
+        {
+            auto dz = zIndex - iz;
+            w.at(0) = Math<Real>::GetValue(0);
+            w.at(1) = Math<Real>::GetValue(1);
+            w.at(2) = (Math<Real>::GetValue(2)) * dz;
+            w.at(3) = (Math<Real>::GetValue(3)) * dz * dz;
+            zMult = invZSpacing;
+        }
+        break;
+        case 2:
+        {
+            auto dz = zIndex - iz;
+            w.at(0) = Math<Real>::GetValue(0);
+            w.at(1) = Math<Real>::GetValue(0);
+            w.at(2) = Math<Real>::GetValue(2);
+            w.at(3) = (Math<Real>::GetValue(6)) * dz;
+            zMult = invZSpacing * invZSpacing;
+        }
+        break;
+        case 3:
+        {
+            w.at(0) = Math<Real>::GetValue(0);
+            w.at(1) = Math<Real>::GetValue(0);
+            w.at(2) = Math<Real>::GetValue(0);
+            w.at(3) = Math<Real>::GetValue(6);
+            zMult = invZSpacing * invZSpacing * invZSpacing;
+        }
+        break;
+        default:
+            return Math<Real>::GetValue(0);
+    }
+
+    std::array<Real, 4> p{};
+    std::array<Real, 4> q{};
+    std::array<Real, 4> r{};
+
+    for (auto row = 0; row < 4; ++row)
+    {
+        p.at(row) = Math<Real>::GetValue(0);
+        q.at(row) = Math<Real>::GetValue(0);
+        r.at(row) = Math<Real>::GetValue(0);
+        for (auto col = 0; col < 4; ++col)
+        {
+            p.at(row) += blend.at(row).at(col) * u.at(col);
+            q.at(row) += blend.at(row).at(col) * v.at(col);
+            r.at(row) += blend.at(row).at(col) * w.at(col);
+        }
+    }
+
+    --ix;
+    --iy;
+    --iz;
+    auto result = Math<Real>::GetValue(0);
+    for (auto slice = 0; slice < 4; ++slice)
+    {
+        auto zClamp = iz + slice;
+        if (zClamp < 0)
+        {
+            zClamp = 0;
+        }
+        else if (zClamp > zBound - 1)
+        {
+            zClamp = zBound - 1;
+        }
+
+        for (auto row = 0; row < 4; ++row)
+        {
+            auto yClamp = iy + row;
+            if (yClamp < 0)
+            {
+                yClamp = 0;
+            }
+            else if (yClamp > yBound - 1)
+            {
+                yClamp = yBound - 1;
+            }
+
+            for (auto col = 0; col < 4; ++col)
+            {
+                auto xClamp = ix + col;
+                if (xClamp < 0)
+                {
+                    xClamp = 0;
+                }
+                else if (xClamp > xBound - 1)
+                {
+                    xClamp = xBound - 1;
+                }
+
+                result += p.at(col) * q.at(row) * r.at(slice) * f.Get(xClamp, yClamp, zClamp);
+            }
+        }
+    }
+    result *= xMult * yMult * zMult;
+
+    return result;
+}
+
+template <typename Real>
+const std::array<std::array<Real, 4>, 4> Mathematics::IntpTricubic3<Real>::crBlend{ std::array<Real, 4>{ Math<Real>::GetValue(0), Math<Real>::GetRational(-1, 2), Math<Real>::GetValue(1), Math<Real>::GetRational(-1, 2) },
+                                                                                    std::array<Real, 4>{ Math<Real>::GetValue(1), Math<Real>::GetValue(0), Math<Real>::GetRational(-5, 2), Math<Real>::GetRational(3, 2) },
+                                                                                    std::array<Real, 4>{ Math<Real>::GetValue(0), Math<Real>::GetRational(1, 2), Math<Real>::GetValue(2), -Math<Real>::GetRational(-3, 2) },
+                                                                                    std::array<Real, 4>{ Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetRational(-1, 2), Math<Real>::GetRational(1, 2) } };
+
+template <typename Real>
+const std::array<std::array<Real, 4>, 4> Mathematics::IntpTricubic3<Real>::bsBlend{ std::array<Real, 4>{ Math<Real>::GetRational(1, 6), Math<Real>::GetRational(-3, 6), Math<Real>::GetRational(3, 6), Math<Real>::GetRational(-1, 6) },
+                                                                                    std::array<Real, 4>{ Math<Real>::GetRational(4, 6), Math<Real>::GetRational(0, 6), Math<Real>::GetRational(-6, 6), Math<Real>::GetRational(3, 6) },
+                                                                                    std::array<Real, 4>{ Math<Real>::GetRational(1, 6), Math<Real>::GetRational(3, 6), Math<Real>::GetRational(3, 6), Math<Real>::GetRational(-3, 6) },
+                                                                                    std::array<Real, 4>{ Math<Real>::GetRational(0, 6), Math<Real>::GetRational(0, 6), Math<Real>::GetRational(0, 6), Math<Real>::GetRational(1, 6) } };
+
+#endif  // MATHEMATICS_INTERPOLATION_INTP_TRICUBIC3_DETAIL_H

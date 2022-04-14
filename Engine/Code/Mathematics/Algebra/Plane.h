@@ -42,7 +42,8 @@ namespace Mathematics
         // 平面表示为Dot(N,X) - c = 0，其中N = (n0,n1,n2,0)是一个单位长度的法线向量，
         // c是平面常数，且X = (x0,x1,x2,1) 是在平面上的任意点。
         // 用户必须保证法线的向量是单位长度，存储作为一个4元组是(n0,n1,n2,-c)。
-        explicit Plane(const T epsilon = Math::GetZeroTolerance()) noexcept;
+        Plane() noexcept;
+        explicit Plane(const T epsilon) noexcept;
 
         // 使用AVector构造平面必须保证输入的法线为单位向量，
         // 使用HomogeneousPoint或三个T构造平面，只需保证输入的法线向量是非零向量。

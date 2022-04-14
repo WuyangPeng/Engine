@@ -21,7 +21,7 @@ namespace Rendering
 		void CameraTest();
 		void TrianglesMeshTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

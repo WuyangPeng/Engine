@@ -1,139 +1,124 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 16:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 16:15)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VertexFormatType.h"
-#include "CoreTools/Helper/StreamMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectInterface.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "System/Helper/EnumCast.h"
-#include STSTEM_WARNING_PUSH
- 
-#include SYSTEM_WARNING_DISABLE(26418)
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectInterface.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::VertexFormatType ::VertexFormatType() noexcept
-    : m_Type{ VertexFormatFlags::AttributeType::None }, m_Usage{ VertexFormatFlags::AttributeUsage::None }, m_UsageIndex{ 0 }
+Rendering::VertexFormatType::VertexFormatType() noexcept
+    : attributeType{ VertexFormatFlags::AttributeType::None }, attributeUsage{ VertexFormatFlags::AttributeUsage::None }, usageIndex{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VertexFormatType ::VertexFormatType(AttributeType type, AttributeUsage usage, unsigned int usageIndex) noexcept
-    : m_Type{ type }, m_Usage{ usage }, m_UsageIndex{ usageIndex }
+Rendering::VertexFormatType::VertexFormatType(AttributeType type, AttributeUsage usage, int32_t usageIndex) noexcept
+    : attributeType{ type }, attributeUsage{ usage }, usageIndex{ usageIndex }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexFormatType)
 
-Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatType ::GetType() const noexcept
+Rendering::VertexFormatFlags::AttributeType Rendering::VertexFormatType::GetType() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Type;
+    return attributeType;
 }
 
-void Rendering::VertexFormatType ::SetType(AttributeType type) noexcept
+void Rendering::VertexFormatType::SetType(AttributeType type) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Type = type;
+    attributeType = type;
 }
 
-Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatType ::GetUsage() const noexcept
+Rendering::VertexFormatFlags::AttributeUsage Rendering::VertexFormatType::GetUsage() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Usage;
+    return attributeUsage;
 }
 
-void Rendering::VertexFormatType ::SetUsage(AttributeUsage usage) noexcept
+void Rendering::VertexFormatType::SetUsage(AttributeUsage usage) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Usage = usage;
+    attributeUsage = usage;
 }
 
-unsigned int Rendering::VertexFormatType ::GetUsageIndex() const noexcept
+int32_t Rendering::VertexFormatType::GetUsageIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_UsageIndex;
+    return usageIndex;
 }
 
-void Rendering::VertexFormatType ::SetUsageIndex(unsigned int usageIndex) noexcept
+void Rendering::VertexFormatType::SetUsageIndex(int32_t aUsageIndex) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_UsageIndex = usageIndex;
+    usageIndex = aUsageIndex;
 }
 
-int Rendering::VertexFormatType ::GetStreamingSize() const noexcept
+int Rendering::VertexFormatType::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	int size = CORE_TOOLS_STREAM_SIZE(m_Type);
-	size += CORE_TOOLS_STREAM_SIZE(m_Usage);
-	size += CORE_TOOLS_STREAM_SIZE(m_UsageIndex);
+    auto size = CORE_TOOLS_STREAM_SIZE(attributeType);
+    size += CORE_TOOLS_STREAM_SIZE(attributeUsage);
+    size += CORE_TOOLS_STREAM_SIZE(usageIndex);
 
-	return size;
+    return size;
 }
 
-void Rendering::VertexFormatType
-	::Save( CoreTools::BufferTarget& target ) const 
+void Rendering::VertexFormatType::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteEnum(m_Type);
-        target.WriteEnum(m_Usage);
-	target.Write(m_UsageIndex);
+    target.WriteEnum(attributeType);
+    target.WriteEnum(attributeUsage);
+    target.Write(usageIndex);
 }
 
-void Rendering::VertexFormatType
-	::Load( CoreTools::BufferSource& source )
-{	
-	RENDERING_CLASS_IS_VALID_9;
-
-	source.ReadEnum(m_Type);
-	source.ReadEnum(m_Usage);
-	source.Read(m_UsageIndex);
-}
-
-void Rendering::VertexFormatType
-	::SaveToFile( WriteFileManager& outFile ) const
+void Rendering::VertexFormatType::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	 const auto type = System::EnumCastUnderlying(m_Type);
-        const auto usage = System::EnumCastUnderlying(m_Usage);
-
-	outFile.Write(sizeof(int), &type);
-	outFile.Write(sizeof(int), &usage);
-	outFile.Write(sizeof(unsigned int),&m_UsageIndex);
+    source.ReadEnum(attributeType);
+    source.ReadEnum(attributeUsage);
+    source.Read(usageIndex);
 }
 
-void Rendering::VertexFormatType
-	::ReadFromFile( ReadFileManager& inFile )
+void Rendering::VertexFormatType::SaveToFile(WriteFileManager& outFile) const
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto type = 0;
-	auto usage = 0;
-
-	inFile.Read(sizeof(int),&type);
-	inFile.Read(sizeof(int),&usage);
-	inFile.Read(sizeof(unsigned int),&m_UsageIndex);
-
-	m_Type = System::UnderlyingCastEnum<AttributeType>(type);
-	m_Usage = System::UnderlyingCastEnum<AttributeUsage>(usage);
+    outFile.Write(sizeof(AttributeType), &attributeType);
+    outFile.Write(sizeof(AttributeUsage), &attributeUsage);
+    outFile.Write(sizeof(unsigned int), &usageIndex);
 }
-#include STSTEM_WARNING_POP
+
+void Rendering::VertexFormatType::ReadFromFile(ReadFileManager& inFile)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    inFile.Read(sizeof(AttributeType), &attributeType);
+    inFile.Read(sizeof(AttributeUsage), &attributeUsage);
+    inFile.Read(sizeof(int32_t), &usageIndex);
+}

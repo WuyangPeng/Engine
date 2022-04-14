@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 17:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 17:54)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_H
@@ -14,44 +17,35 @@
 namespace Mathematics
 {
     template <typename Real>
-    class  BSplineFitBasis
+    class BSplineFitBasis
     {
     public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = BSplineFitBasis<Real>;
         using Math = Math<Real>;
 
     public:
-        // Construction and destruction.  This class is only for open uniform
-        // B-spline basis functions.  The input is the number of control points
-        // for a B-spline curve using this basis and the degree of that curve.
         BSplineFitBasis(int quantity, int degree);
-        ~BSplineFitBasis();
-        BSplineFitBasis(const BSplineFitBasis&) = default;
-        BSplineFitBasis& operator=(const BSplineFitBasis&) = default;
-        BSplineFitBasis(BSplineFitBasis&&) = default;
-        BSplineFitBasis& operator=(BSplineFitBasis&&) = default;
-        // Data member access.
-        int GetQuantity() const noexcept;
-        int GetDegree() const noexcept;
 
-        // Evaluate the basis functions.  This function fills in the values
-        // returned by GetValue(i) for 0 <= i <= degree.  The return indices iMin
-        // and iMax are relative to the array of control points.  The GetValue(i)
-        // are the coefficients for the control points ctrl[iMin] throught
-        // ctrl[iMax] in the curve evaluation (i.e. the curve has local control).
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD int GetDegree() const noexcept;
+
         void Compute(Real t, int& imin, int& imax) const;
-        Real GetValue(int i) const;
+        NODISCARD Real GetValue(int i) const;
 
     private:
-        // The number of control points and degree for the curve.
-        int quantity, mDegree;
+        int quantity;
+        int degree;
 
-        // The storage for knots and basis evaluation.
-        mutable Real* mValue;  // mValue[0..degree]
-        mutable Real* mKnot;  // mKnot[2*degree]
+        mutable std::vector<Real> value;
+        mutable std::vector<Real> knot;
     };
 
-    using BSplineFitBasisf = BSplineFitBasis<float>;
-    using BSplineFitBasisd = BSplineFitBasis<double>;
+    using BSplineFitBasisF = BSplineFitBasis<float>;
+    using BSplineFitBasisD = BSplineFitBasis<double>;
 }
 
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_H

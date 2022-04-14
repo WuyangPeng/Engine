@@ -1,106 +1,124 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 14:19)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_H
 #define MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <vector>
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpAkimaUniform3
-	{
-	public:
-		// Construction and destruction.  Interp3DAkimaUniform does not accept
-		// responsibility for deleting the input array.  The application must do
-		// so.  The interpolator is for uniformly spaced (x,y,z)-values.  The
-		// function values are assumed to be organized as f(x,y,z) = F[z][y][x].
-		IntpAkimaUniform3(int xBound, int yBound, int zBound, Real xMin,Real xSpacing, Real yMin, Real ySpacing, Real zMin, Real zSpacing,Real*** F);
+    template <typename Real>
+    class IntpAkimaUniform3
+    {
+    public:
+        using ClassType = IntpAkimaUniform3<Real>;
+        using Container = std::vector<std::vector<std::vector<Real>>>;
 
-		~IntpAkimaUniform3();
+    public:
+        IntpAkimaUniform3(int xBound, int yBound, int zBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, Real zMin, Real zSpacing, const Container& f);
 
-		class  Polynomial
-		{
-		public:
-			Polynomial();
+        CLASS_INVARIANT_DECLARE;
 
-			// P(x,y,z) = sum_{i=0}^3 sum_{j=0}^3 sum_{k=0}^3 a_{ijk} x^i y^j z^k
-			Real& A(int ix, int iy, int iz);
+        class Polynomial
+        {
+        public:
+            Polynomial() noexcept;
 
-			Real operator() (Real x, Real y, Real z) const;
-			Real operator() (int xOrder, int yOrder, int zOrder, Real x,Real y, Real z) const;
+            // P(x,y,z) = sum_{i=0}^3 sum_{j=0}^3 sum_{k=0}^3 a_{ijk} x^i y^j z^k
+            NODISCARD Real& A(int ix, int iy, int iz);
 
-		protected:
-			Real mCoeff[4][4][4];
-		};
+            NODISCARD Real operator()(Real x, Real y, Real z) const;
+            NODISCARD Real operator()(int xOrder, int yOrder, int zOrder, Real x, Real y, Real z) const;
 
-		int GetXBound() const;
-		int GetYBound() const;
-		int GetZBound() const;
-		int GetQuantity() const;
-		Real*** GetF() const;
-		Polynomial*** GetPolynomials() const;
-		const Polynomial& GetPolynomial(int ix, int iy, int iz) const;
+        private:
+            std::array<std::array<std::array<Real, 4>, 4>, 4> coeff;
+        };
 
-		Real GetXMin() const;
-		Real GetXMax() const;
-		Real GetXSpacing() const;
-		Real GetYMin() const;
-		Real GetYMax() const;
-		Real GetYSpacing() const;
-		Real GetZMin() const;
-		Real GetZMax() const;
-		Real GetZSpacing() const;
+        using PolynomialContainer = std::vector<std::vector<std::vector<Polynomial>>>;
 
-		// Evaluate the function and its derivatives.  The application is
-		// responsible for ensuring that xmin <= x <= xmax, ymin <= y <= ymax,
-		// and zmin <= z <= zmax.  If (x,y,z) is outside the extremes, the
-		// function returns MAXREAL.  The first operator is for function
-		// evaluation.  The second operator is for function or derivative
-		// evaluations.  The uiXOrder argument is the order of the x-derivative,
-		// the uiYOrder argument is the order of the y-derivative, and the
-		// uiZOrder argument is the order of the z-derivative.  All orders are
-		// zero to get the function value itself.
-		Real operator() (Real x, Real y, Real z) const;
-		Real operator() (int xOrder, int yOrder, int zOrder, Real x,Real y, Real z) const;
+        NODISCARD int GetXBound() const noexcept;
+        NODISCARD int GetYBound() const noexcept;
+        NODISCARD int GetZBound() const noexcept;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD Container GetF() const;
+        NODISCARD PolynomialContainer GetPolynomials() const;
+        NODISCARD const Polynomial& GetPolynomial(int ix, int iy, int iz) const;
 
-	private:
-		Real ComputeDerivative(Real* slope) const;
-		void Construct(Polynomial& poly, Real F[2][2][2], Real FX[2][2][2],Real FY[2][2][2], Real FZ[2][2][2], Real FXY[2][2][2],Real FXZ[2][2][2], Real FYZ[2][2][2], Real FXYZ[2][2][2]);
+        NODISCARD Real GetXMin() const noexcept;
+        NODISCARD Real GetXMax() const noexcept;
+        NODISCARD Real GetXSpacing() const noexcept;
+        NODISCARD Real GetYMin() const noexcept;
+        NODISCARD Real GetYMax() const noexcept;
+        NODISCARD Real GetYSpacing() const noexcept;
+        NODISCARD Real GetZMin() const noexcept;
+        NODISCARD Real GetZMax() const noexcept;
+        NODISCARD Real GetZSpacing() const noexcept;
 
-		bool XLookup(Real x, int& xIndex, Real& dx) const;
-		bool YLookup(Real y, int& yIndex, Real& dy) const;
-		bool ZLookup(Real z, int& zIndex, Real& dz) const;
+        NODISCARD Real operator()(Real x, Real y, Real z) const;
+        NODISCARD Real operator()(int xOrder, int yOrder, int zOrder, Real x, Real y, Real z) const;
 
-		int mXBound, mYBound, mZBound, quantity;
-		Real*** mF;
-		Polynomial*** mPoly;
-		Real mXMin, mXMax, mXSpacing;
-		Real mYMin, mYMax, mYSpacing;
-		Real mZMin, mZMax, mZSpacing;
+    private:
+        using ConstructType = std::array<std::array<std::array<Real, 2>, 2>, 2>;
 
-	private:
-		// These methods exist to split up the constructor into chunks of code
-		// that compile quickly.
+    private:
+        NODISCARD Real ComputeDerivative(const std::vector<Real>& slope) const;
+        void Construct(Polynomial& poly,
+                       const ConstructType& f,
+                       const ConstructType& fx,
+                       const ConstructType& fy,
+                       const ConstructType& fz,
+                       const ConstructType& fxy,
+                       const ConstructType& fxz,
+                       const ConstructType& fyz,
+                       const ConstructType& fxyz);
 
-		Real*** GetFX();
-		Real*** GetFY();
-		Real*** GetFZ();
-		Real*** GetFXY();
-		Real*** GetFXZ();
-		Real*** GetFYZ();
-		Real*** GetFXYZ();
+        NODISCARD bool XLookup(Real x, int& xIndex, Real& dx) const noexcept;
+        NODISCARD bool YLookup(Real y, int& yIndex, Real& dy) const noexcept;
+        NODISCARD bool ZLookup(Real z, int& zIndex, Real& dz) const noexcept;
 
-		void GetPolynomials(Real*** FX, Real*** FY, Real*** FZ,Real*** FXY, Real*** FXZ, Real*** FYZ,Real*** FXYZ);
-	};
+    private:
+        NODISCARD Container GetFX();
+        NODISCARD Container GetFY();
+        NODISCARD Container GetFZ();
+        NODISCARD Container GetFXY();
+        NODISCARD Container GetFXZ();
+        NODISCARD Container GetFYZ();
+        NODISCARD Container GetFXYZ();
 
-	using IntpAkimaUniform3f = IntpAkimaUniform3<float>;
-	using IntpAkimaUniform3d = IntpAkimaUniform3<double>;
+        void GetPolynomials(const Container& fx,
+                            const Container& fy,
+                            const Container& fz,
+                            const Container& fxy,
+                            const Container& fxz,
+                            const Container& fyz,
+                            const Container& fxyz);
 
+    private:
+        int xBound;
+        int yBound;
+        int zBound;
+        int quantity;
+        Container fContainer;
+        PolynomialContainer polynomialContainer;
+        Real xMin;
+        Real xMax;
+        Real xSpacing;
+        Real yMin;
+        Real yMax;
+        Real ySpacing;
+        Real zMin;
+        Real zMax;
+        Real zSpacing;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_H

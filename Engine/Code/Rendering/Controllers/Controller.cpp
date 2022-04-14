@@ -33,19 +33,19 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Controller);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Controller);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Controller);
 
-Rendering::Controller ::Controller()
+Rendering::Controller::Controller()
     : ParentType{}, impl{ make_shared<ImplType>() }, m_Object{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Controller ::Controller(const Controller& rhs)
+Rendering::Controller::Controller(const Controller& rhs)
     : ParentType(rhs), impl{ make_shared<ImplType>(*rhs.impl) }, m_Object{ rhs.m_Object }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Controller& Rendering::Controller ::operator=(const Controller& rhs)
+Rendering::Controller& Rendering::Controller::operator=(const Controller& rhs)
 {
     ;
 
@@ -58,13 +58,13 @@ Rendering::Controller& Rendering::Controller ::operator=(const Controller& rhs)
     return *this;
 }
 
-Rendering::Controller ::Controller(Controller&& rhs) noexcept
+Rendering::Controller::Controller(Controller&& rhs) noexcept
     : ParentType(std::move(rhs)), impl{ std::move(rhs.impl) }, m_Object{ std::move(rhs.m_Object) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Controller& Rendering::Controller ::operator=(Controller&& rhs) noexcept
+Rendering::Controller& Rendering::Controller::operator=(Controller&& rhs) noexcept
 {
     ;
 
@@ -79,21 +79,21 @@ Rendering::Controller& Rendering::Controller ::operator=(Controller&& rhs) noexc
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Controller)
 
-const Rendering::ControllerInterface* Rendering::Controller ::GetControllerObject() const noexcept
+const Rendering::ControllerInterface* Rendering::Controller::GetControllerObject() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return m_Object;
 }
 
-Rendering::ControllerInterface* Rendering::Controller ::GetControllerObject() noexcept
+Rendering::ControllerInterface* Rendering::Controller::GetControllerObject() noexcept
 {
     ;
 
     return m_Object;
 }
 
-void Rendering::Controller ::SetObject(ControllerInterface* object)
+void Rendering::Controller::SetObject(ControllerInterface* object)
 {
     ;
 
@@ -120,7 +120,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetPha
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetFrequency, double, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetActive, bool, void)
 
-CoreTools::ObjectSharedPtr Rendering::Controller ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const string& name)
 {
     ;
 
@@ -128,7 +128,7 @@ CoreTools::ObjectSharedPtr Rendering::Controller ::GetObjectByName(const string&
     return ParentType::GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::Controller ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByName(const string& name)
 {
     ;
 
@@ -137,7 +137,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::Controller ::GetAllObjectsByName(c
     ;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::Controller ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::Controller::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -145,7 +145,7 @@ CoreTools::ConstObjectSharedPtr Rendering::Controller ::GetConstObjectByName(con
     return ParentType::GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -154,13 +154,13 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller ::GetAllConstObjec
     ;
 }
 
-Rendering::Controller ::Controller(LoadConstructor value)
+Rendering::Controller::Controller(LoadConstructor value)
     : ParentType{ value }, impl{ make_shared<ImplType>() }, m_Object{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::Controller ::GetStreamingSize() const
+int Rendering::Controller::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -173,7 +173,7 @@ int Rendering::Controller ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Controller ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Controller::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -187,7 +187,7 @@ uint64_t Rendering::Controller ::Register(CoreTools::ObjectRegister& target) con
     return uniqueID;
 }
 
-void Rendering::Controller ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Controller::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -202,7 +202,7 @@ void Rendering::Controller ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Controller ::Link(CoreTools::ObjectLink& source)
+void Rendering::Controller::Link(CoreTools::ObjectLink& source)
 {
     ;
 
@@ -215,14 +215,14 @@ void Rendering::Controller ::Link(CoreTools::ObjectLink& source)
 	m_Object = object.GetData();*/
 }
 
-void Rendering::Controller ::PostLink()
+void Rendering::Controller::PostLink()
 {
     ;
 
     ParentType::PostLink();
 }
 
-void Rendering::Controller ::Load(CoreTools::BufferSource& source)
+void Rendering::Controller::Load(CoreTools::BufferSource& source)
 {
     ;
 
@@ -241,7 +241,7 @@ void Rendering::Controller ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Controller ::SetTime(double minTime, double maxTime) noexcept
+void Rendering::Controller::SetTime(double minTime, double maxTime) noexcept
 {
     ;
 

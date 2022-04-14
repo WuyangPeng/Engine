@@ -1,150 +1,102 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 15:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 10:52)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Texture1D.h"
 #include "Detail/Texture1DImpl.h"
-#include "Rendering/Renderers/RendererManager.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26456)
-CORE_TOOLS_RTTI_DEFINE(Rendering,Texture1D);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Texture1D);
-CORE_TOOLS_FACTORY_DEFINE(Rendering,Texture1D); 
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/Renderers/RendererManager.h"
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                       \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }                                                                                       
-    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Texture1D);
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Texture1D)
+
+CORE_TOOLS_RTTI_DEFINE(Rendering, Texture1D);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture1D);
+CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture1D);
 
 using std::make_shared;
 
-Rendering::Texture1D
-    ::Texture1D(TextureFormat format, int dimension0,int numLevels,BufferUsage usage)
-    :ParentType{},
-	impl{ make_shared<ImplType>(format,dimension0,numLevels,usage) }
+Rendering::Texture1D::Texture1D(TextureFormat format, int dimension0, int numLevels, BufferUsage usage)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ format, dimension0, numLevels, usage }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Texture1D
-    ::~Texture1D()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-    
-    EXCEPTION_TRY
-    {
-        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
-    }
-    EXCEPTION_ALL_CATCH(Rendering)
-    
-}
-
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Texture1D)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Texture1D,GetFormat,Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetFormat, Rendering::TextureFormat)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetTextureType, Rendering::TextureFlags)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetUsage, Rendering::BufferUsage)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetNumLevels, int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetNumDimensions, int)
 
-
-int Rendering::Texture1D
-    ::GetDimension (int index, int level) const
+int Rendering::Texture1D::GetDimension(int index, int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return impl->GetDimension(index,level);
+
+    return impl->GetDimension(index, level);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, GetNumLevelBytes, int, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetNumTotalBytes, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,GetLevelOffset,int,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, GetLevelOffset, int, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture1D,GetPixelSize,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture1D, GetPixelSize, int)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, IsCompressed, bool)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture1D,IsMipmapable,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture1D, IsMipmapable, bool)
 
-void Rendering::Texture1D
-    ::SetUserField (int index, int userField)
+void Rendering::Texture1D::SetUserField(int index, int userField)
 {
-	;
-    
-    return impl->SetUserField(index,userField);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetUserField(index, userField);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,GetUserField,int,int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, GetUserField, int, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture1D,GetLength,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture1D,HasMipmaps,bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,GetTextureData,int,char*)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,GetTextureData,int,const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture1D, GetLength, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Texture1D, HasMipmaps, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, GetTextureData, int, char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, GetTextureData, int, const char*)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,SaveToFile,WriteFileManager&,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,ReadFromFile,ReadFileManager&,void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, SaveToFile, WriteFileManager&, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, ReadFromFile, ReadFileManager&, void)
 
-void Rendering::Texture1D
-    ::GenerateMipmaps ()
+void Rendering::Texture1D::GenerateMipmaps()
 {
-	;
-  
-    if(!impl->HasMipmaps())
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (!impl->HasMipmaps())
     {
-		// 如果没有最大miplevels，销毁纹理绑定。稍后重建后重新。
-        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
-        
+        // 如果没有最大miplevels，销毁纹理绑定。稍后重建后重新。
+        RENDERER_MANAGE_SINGLETON.UnbindAll(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()));
+
         impl->GenerateMipmaps();
-        
-       const auto numLevels = impl->GetNumLevels();
-        
+
+        const auto numLevels = impl->GetNumLevels();
+
         for (auto level = 0; level < numLevels; ++level)
         {
-           RENDERER_MANAGE_SINGLETON.UpdateAll(this, level);
+            RENDERER_MANAGE_SINGLETON.UpdateAll(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), level);
         }
     }
     else
@@ -153,83 +105,75 @@ void Rendering::Texture1D
     }
 }
 
-Rendering::Texture1D
-   ::Texture1D (LoadConstructor value)
-	:ParentType{ value }, impl{ make_shared<ImplType>() }
+Rendering::Texture1D::Texture1D(LoadConstructor value)
+    : ParentType{ value }, impl{ CoreTools::DisableNotThrow::Disable }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::Texture1D
-    ::GetStreamingSize () const
+int Rendering::Texture1D::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = ParentType::GetStreamingSize();
-    
-	size += impl->GetStreamingSize();
-    
-	return size;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+
+    size += impl->GetStreamingSize();
+
+    return size;
 }
 
-uint64_t Rendering::Texture1D
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::Texture1D::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	return ParentType::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::Texture1D
-    ::Save (CoreTools::BufferTarget& target) const
+void Rendering::Texture1D::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	impl->Save(target);
-    
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    impl->Save(target);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Texture1D
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::Texture1D::Link(CoreTools::ObjectLink& source)
 {
-	;
-    
-	ParentType::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
 }
 
-void Rendering::Texture1D
-    ::PostLink ()
+void Rendering::Texture1D::PostLink()
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	ParentType::PostLink();
+    ParentType::PostLink();
 }
 
-void Rendering::Texture1D
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::Texture1D::Load(CoreTools::BufferSource& source)
 {
-	;
-    
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
-	
-	impl->Load(source);
-    
+
+    impl->Load(source);
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::TextureSharedPtr Rendering::Texture1D
-	::Clone() const
+Rendering::TextureSharedPtr Rendering::Texture1D::Clone() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return TextureSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Texture1D::CloneObject() const
@@ -238,6 +182,3 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Texture1D::CloneObject() const
 
     return Clone();
 }
-
-
-#include STSTEM_WARNING_POP

@@ -1,83 +1,81 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 11:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 14:37)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_CUBE_H
 #define RENDERING_RESOURCES_TEXTURE_CUBE_H
 
 #include "Texture.h"
-EXPORT_SHARED_PTR(Rendering, TextureCubeImpl, RENDERING_DEFAULT_DECLARE);
- 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(TextureCube, TextureCubeImpl);
+
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE TextureCube : public Texture
     {
     public:
-        void Swap(TextureCube& rhs) noexcept;
-         
-             public:
-                 TYPE_DECLARE(TextureCube);
-                 using ClassShareType = CoreTools::CopyUnsharedClasses;
-                 ~TextureCube() noexcept;
-                 TextureCube(const TextureCube& rhs);
-                 TextureCube& operator=(const TextureCube& rhs);
-                 TextureCube(TextureCube&& rhs) noexcept;
-                 TextureCube& operator=(TextureCube&& rhs) noexcept;
-		using ParentType = Texture;
-		using TextureCubeSharedPtr = std::shared_ptr<ClassType>;
-		using ConstTextureCubeSharedPtr = std::shared_ptr<ClassType>;
-        
+        COPY_UNSHARED_TYPE_DECLARE(TextureCube);
+        using ParentType = Texture;
+        using TextureCubeSharedPtr = std::shared_ptr<ClassType>;
+        using ConstTextureCubeSharedPtr = std::shared_ptr<ClassType>;
+
     public:
-		TextureCube (TextureFormat format, int dimension, int numLevels, BufferUsage usage = BufferUsage::Texture);
-		 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;        
-        
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TextureCube); 
-        
-          TextureFormat GetFormat () const noexcept override;
-                TextureFlags GetTextureType() const noexcept override;
-          BufferUsage GetUsage() const noexcept override;
-                int GetNumLevels() const noexcept override;
-        
-          int GetNumDimensions() const noexcept override;
-          int GetDimension (int index, int level) const override;
-          int GetNumLevelBytes (int level) const override;
-          int GetNumTotalBytes() const noexcept override;
-          int GetLevelOffset (int level) const override;
-        
-          int GetPixelSize () const override;
-          bool IsCompressed() const noexcept override;
-          bool IsMipmapable () const override;
-          void SaveToFile (WriteFileManager& outFile) const override;
-          void ReadFromFile (ReadFileManager& inFile) override;
+        TextureCube(TextureFormat format, int dimension, int numLevels, BufferUsage usage = BufferUsage::Texture);
 
-		  void SetUserField (int index, int userField) override;
-          int GetUserField (int index) const override;
-        
-          void GenerateMipmaps () override;
-          bool HasMipmaps () const override;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        int GetWidth () const;
-        int GetHeight () const;
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TextureCube);
 
-        char* GetTextureData (int face,int level);
-		const char* GetTextureData (int face,int level) const;
+        NODISCARD TextureFormat GetFormat() const noexcept override;
+        NODISCARD TextureFlags GetTextureType() const noexcept override;
+        NODISCARD BufferUsage GetUsage() const noexcept override;
+        NODISCARD int GetNumLevels() const noexcept override;
 
-		  TextureSharedPtr Clone() const override;
-                ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD int GetNumDimensions() const noexcept override;
+        NODISCARD int GetDimension(int index, int level) const override;
+        NODISCARD int GetNumLevelBytes(int level) const override;
+        NODISCARD int GetNumTotalBytes() const noexcept override;
+        NODISCARD int GetLevelOffset(int level) const override;
+
+        NODISCARD int GetPixelSize() const override;
+        NODISCARD bool IsCompressed() const noexcept override;
+        NODISCARD bool IsMipmapable() const override;
+        void SaveToFile(WriteFileManager& outFile) const override;
+        void ReadFromFile(ReadFileManager& inFile) override;
+
+        void SetUserField(int index, int userField) override;
+        NODISCARD int GetUserField(int index) const override;
+
+        void GenerateMipmaps() override;
+        NODISCARD bool HasMipmaps() const override;
+
+        NODISCARD int GetWidth() const;
+        NODISCARD int GetHeight() const;
+
+        NODISCARD char* GetTextureData(int face, int level);
+        NODISCARD const char* GetTextureData(int face, int level) const;
+
+        NODISCARD TextureSharedPtr Clone() const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
     private:
-		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        PackageType impl;
     };
+
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)  
+#include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(TextureCube);
+
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SHARED_PTR_DECLARE( TextureCube); 
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(TextureCube);
 }
-#include STSTEM_WARNING_POP
-#endif // RENDERING_RESOURCES_TEXTURE_CUBE_H
+
+#endif  // RENDERING_RESOURCES_TEXTURE_CUBE_H

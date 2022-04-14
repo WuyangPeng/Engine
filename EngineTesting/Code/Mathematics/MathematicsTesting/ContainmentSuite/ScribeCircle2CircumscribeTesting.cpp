@@ -40,7 +40,7 @@ void Mathematics::ScribeCircle2CircumscribeTesting
 		Vector2 v1(firstRandomDistribution(generator),firstRandomDistribution(generator));
 		Vector2 v2(firstRandomDistribution(generator),firstRandomDistribution(generator));
 
-		ScribeCircle2Circumscribed scribeCircle2Circumscribe(v0,v1,v2);
+		ScribeCircle2CircumscribeD scribeCircle2Circumscribe(v0,v1,v2);
 		
 		if(scribeCircle2Circumscribe.IsCircleConstructed())
 		{

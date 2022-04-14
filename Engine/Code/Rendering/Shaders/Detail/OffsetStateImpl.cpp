@@ -18,7 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-Rendering::OffsetStateImpl ::OffsetStateImpl() noexcept
+Rendering::OffsetStateImpl::OffsetStateImpl() noexcept
     : m_FillEnabled{ false }, m_LineEnabled{ false }, m_PointEnabled{ false }, m_Scale{ 0.0f }, m_Bias{ 0.0f }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;	
@@ -26,7 +26,7 @@ Rendering::OffsetStateImpl ::OffsetStateImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OffsetStateImpl)
 
-void Rendering::OffsetStateImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::OffsetStateImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
 

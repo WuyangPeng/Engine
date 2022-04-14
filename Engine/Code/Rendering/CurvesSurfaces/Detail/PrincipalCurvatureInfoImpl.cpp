@@ -9,7 +9,7 @@
 #include "PrincipalCurvatureInfoImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::PrincipalCurvatureInfoImpl ::PrincipalCurvatureInfoImpl(float principalCurvature0, float principalCurvature1, const AVector& principalDirection0, const AVector& principalDirection1) noexcept
+Rendering::PrincipalCurvatureInfoImpl::PrincipalCurvatureInfoImpl(float principalCurvature0, float principalCurvature1, const AVector& principalDirection0, const AVector& principalDirection1) noexcept
     : m_PrincipalCurvature0{ principalCurvature0 }, m_PrincipalCurvature1{ principalCurvature1 },
 	 m_PrincipalDirection0{ principalDirection0 }, m_PrincipalDirection1{ principalDirection1 }
 {
@@ -24,28 +24,28 @@ bool Rendering::PrincipalCurvatureInfoImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-float Rendering::PrincipalCurvatureInfoImpl ::GetPrincipalCurvature0() const noexcept
+float Rendering::PrincipalCurvatureInfoImpl::GetPrincipalCurvature0() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_PrincipalCurvature0;
 }
 
-float Rendering::PrincipalCurvatureInfoImpl ::GetPrincipalCurvature1() const noexcept
+float Rendering::PrincipalCurvatureInfoImpl::GetPrincipalCurvature1() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_PrincipalCurvature1;
 }
 
-const Rendering::PrincipalCurvatureInfoImpl::AVector Rendering::PrincipalCurvatureInfoImpl ::GetPrincipalDirection0() const noexcept
+const Rendering::PrincipalCurvatureInfoImpl::AVector Rendering::PrincipalCurvatureInfoImpl::GetPrincipalDirection0() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_PrincipalDirection0;
 }
 
-const Rendering::PrincipalCurvatureInfoImpl::AVector Rendering::PrincipalCurvatureInfoImpl ::GetPrincipalDirection1() const noexcept
+const Rendering::PrincipalCurvatureInfoImpl::AVector Rendering::PrincipalCurvatureInfoImpl::GetPrincipalDirection1() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -1,197 +1,218 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 19:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 21:20)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_DETAIL_H
 
 #include "TCBSpline3.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 
 template <typename Real>
-TCBSpline3<Real>::TCBSpline3 (int numSegments, Real* times,Vector3<Real>* points, Real* tension, Real* continuity, Real* bias)
-    :MultipleCurve3<Real>(numSegments,times)
+Mathematics::TCBSpline3<Real>::TCBSpline3(int numSegments,
+                                          const std::vector<Real>& times,
+                                          const std::vector<Vector3<Real>>& points,
+                                          const std::vector<Real>& tension,
+                                          const std::vector<Real>& continuity,
+                                          const std::vector<Real>& bias)
+    : MultipleCurve3<Real>(numSegments, times),
+      points{ points },
+      tension{ tension },
+      continuity{ continuity },
+      bias{ bias },
+      a(numSegments),
+      b(numSegments),
+      c(numSegments),
+      d(numSegments)
 {
-    // TO DO.  Add 'boundary type' just as in natural splines.
-    MATHEMATICS_ASSERTION_0(mNumSegments >= 3, "Not enough segments\n");
+    MATHEMATICS_ASSERTION_0(numSegments >= 3, "未有足够的线段。\n");
 
-    // All four of these arrays have mNumSegments+1 elements.
-    mPoints = points;
-    mTension = tension;
-    mContinuity = continuity;
-    mBias = bias;
-
-    mA = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
-    mB = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
-    mC = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
-    mD = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
-
-    // For now, treat the first point as if it occurred twice.
     ComputePoly(0, 0, 1, 2);
 
-    for (int i = 1; i < mNumSegments - 1; ++i)
+    for (auto i = 1; i < numSegments - 1; ++i)
     {
         ComputePoly(i - 1, i, i + 1, i + 2);
     }
 
-    // For now, treat the last point as if it occurred twice.
-    ComputePoly(mNumSegments - 2, mNumSegments - 1, mNumSegments, mNumSegments);
+    ComputePoly(numSegments - 2, numSegments - 1, numSegments, numSegments);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::TCBSpline3<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+std::vector<Mathematics::Vector3<Real>> Mathematics::TCBSpline3<Real>::GetPoints() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return points;
 }
 
 template <typename Real>
-TCBSpline3<Real>::~TCBSpline3 ()
+std::vector<Real> Mathematics::TCBSpline3<Real>::GetTensions() const
 {
-    DELETE1(mPoints);
-    DELETE1(mTension);
-    DELETE1(mContinuity);
-    DELETE1(mBias);
-    DELETE1(mA);
-    DELETE1(mB);
-    DELETE1(mC);
-    DELETE1(mD);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return tension;
 }
 
 template <typename Real>
-const Vector3<Real>* TCBSpline3<Real>::GetPoints () const
+std::vector<Real> Mathematics::TCBSpline3<Real>::GetContinuities() const
 {
-    return mPoints;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return continuity;
 }
 
 template <typename Real>
-const Real* TCBSpline3<Real>::GetTensions () const
+std::vector<Real> Mathematics::TCBSpline3<Real>::GetBiases() const
 {
-    return mTension;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return bias;
 }
 
 template <typename Real>
-const Real* TCBSpline3<Real>::GetContinuities () const
+void Mathematics::TCBSpline3<Real>::ComputePoly(int i0, int i1, int i2, int i3)
 {
-    return mContinuity;
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto diff = points.at(i2) - points.at(i1);
+    auto dt = this->GetTimes(i2) - this->GetTimes(i1);
+
+    auto oneMinusT0 = Math<Real>::GetValue(1) - tension.at(i1);
+    auto oneMinusC0 = Math<Real>::GetValue(1) - continuity.at(i1);
+    auto onePlusC0 = Math<Real>::GetValue(1) + continuity.at(i1);
+    auto oneMinusB0 = Math<Real>::GetValue(1) - bias.at(i1);
+    auto onePlusB0 = Math<Real>::GetValue(1) + bias.at(i1);
+    auto adj0 = (Math<Real>::GetValue(2)) * dt / (this->GetTimes(i2) - this->GetTimes(i0));
+    auto out0 = Math<Real>::GetRational(1, 2) * adj0 * oneMinusT0 * onePlusC0 * onePlusB0;
+    auto out1 = Math<Real>::GetRational(1, 2) * adj0 * oneMinusT0 * oneMinusC0 * oneMinusB0;
+
+    auto tOut = out1 * diff + out0 * (points.at(i1) - points.at(i0));
+
+    auto oneMinusT1 = Math<Real>::GetValue(1) - tension.at(i2);
+    auto oneMinusC1 = Math<Real>::GetValue(1) - continuity.at(i2);
+    auto onePlusC1 = Math<Real>::GetValue(1) + continuity.at(i2);
+    auto oneMinusB1 = Math<Real>::GetValue(1) - bias.at(i2);
+    auto onePlusB1 = Math<Real>::GetValue(1) + bias.at(i2);
+    auto adj1 = (Math<Real>::GetValue(2)) * dt / (this->GetTimes(i3) - this->GetTimes(i1));
+    auto in0 = Math<Real>::GetRational(1, 2) * adj1 * oneMinusT1 * oneMinusC1 * onePlusB1;
+    auto in1 = Math<Real>::GetRational(1, 2) * adj1 * oneMinusT1 * onePlusC1 * oneMinusB1;
+
+    auto tIn = in1 * (points.at(i3) - points.at(i2)) + in0 * diff;
+
+    a.at(i1) = points.at(i1);
+    b.at(i1) = tOut;
+    c.at(i1) = (Math<Real>::GetValue(3)) * diff - (Math<Real>::GetValue(2)) * tOut - tIn;
+    d.at(i1) = (Math<Real>::GetValue(-2)) * diff + tOut + tIn;
 }
 
 template <typename Real>
-const Real* TCBSpline3<Real>::GetBiases () const
+Mathematics::Vector3<Real> Mathematics::TCBSpline3<Real>::GetPosition(Real t) const
 {
-    return mBias;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+    dt /= (this->GetTimes(key + 1) - this->GetTimes(key));
+
+    return a.at(key) + dt * (b.at(key) + dt * (c.at(key) + dt * d.at(key)));
 }
 
 template <typename Real>
-void TCBSpline3<Real>::ComputePoly (int i0, int i1, int i2, int i3)
+Mathematics::Vector3<Real> Mathematics::TCBSpline3<Real>::GetFirstDerivative(Real t) const
 {
-    Vector3<Real> diff = mPoints[i2] - mPoints[i1];
-    Real dt = mTimes[i2] - mTimes[i1];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Build multipliers at P1.
-    Real oneMinusT0 = Math::GetValue(1) - mTension[i1];
-    Real oneMinusC0 = Math::GetValue(1) - mContinuity[i1];
-    Real onePlusC0 = Math::GetValue(1) + mContinuity[i1];
-    Real oneMinusB0 = Math::GetValue(1) - mBias[i1];
-    Real onePlusB0 = Math::GetValue(1) + mBias[i1];
-    Real adj0 = (Math::GetValue(2))*dt/(mTimes[i2] - mTimes[i0]);
-    Real out0 = (Real{0.5})*adj0*oneMinusT0*onePlusC0*onePlusB0;
-    Real out1 = (Real{0.5})*adj0*oneMinusT0*oneMinusC0*oneMinusB0;
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+    dt /= (this->GetTimes(key + 1) - this->GetTimes(key));
 
-    // Build outgoing tangent at P1.
-    Vector3<Real> TOut = out1*diff + out0*(mPoints[i1] - mPoints[i0]);
-
-    // Build multipliers at point P2.
-    Real oneMinusT1 = Math::GetValue(1) - mTension[i2];
-    Real oneMinusC1 = Math::GetValue(1) - mContinuity[i2];
-    Real onePlusC1 = Math::GetValue(1) + mContinuity[i2];
-    Real oneMinusB1 = Math::GetValue(1) - mBias[i2];
-    Real onePlusB1 = Math::GetValue(1) + mBias[i2];
-    Real adj1 = (Math::GetValue(2))*dt/(mTimes[i3] - mTimes[i1]);
-    Real in0 = (Real{0.5})*adj1*oneMinusT1*oneMinusC1*onePlusB1;
-    Real in1 = (Real{0.5})*adj1*oneMinusT1*onePlusC1*oneMinusB1;
-
-    // Build incoming tangent at P2.
-    Vector3<Real> TIn = in1*(mPoints[i3] - mPoints[i2]) + in0*diff;
-
-    mA[i1] = mPoints[i1];
-    mB[i1] = TOut;
-    mC[i1] = (static_cast<Real>(3))*diff - (Math::GetValue(2))*TOut - TIn;
-    mD[i1] = ((Real)-2)*diff + TOut + TIn;
+    return b.at(key) + dt * (c.at(key) * (Math<Real>::GetValue(2)) + d.at(key) * ((Math<Real>::GetValue(3)) * dt));
 }
 
 template <typename Real>
-Vector3<Real> TCBSpline3<Real>::GetPosition (Real t) const
+Mathematics::Vector3<Real> Mathematics::TCBSpline3<Real>::GetSecondDerivative(Real t) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    dt /= (mTimes[key + 1] - mTimes[key]);
-    return mA[key] + dt*(mB[key] + dt*(mC[key] + dt*mD[key]));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+    dt /= (this->GetTimes(key + 1) - this->GetTimes(key));
+
+    return c.at(key) * (Math<Real>::GetValue(2)) + d.at(key) * (Math<Real>::GetValue(6) * dt);
 }
 
 template <typename Real>
-Vector3<Real> TCBSpline3<Real>::GetFirstDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::TCBSpline3<Real>::GetThirdDerivative(Real t) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    dt /= (mTimes[key + 1] - mTimes[key]);
-    return mB[key] + dt*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*dt));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+    dt /= (this->GetTimes(key + 1) - this->GetTimes(key));
+
+    return Math<Real>::GetValue(6) * d.at(key);
 }
 
 template <typename Real>
-Vector3<Real> TCBSpline3<Real>::GetSecondDerivative (Real t) const
+Real Mathematics::TCBSpline3<Real>::GetSpeedKey(int key, Real t) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    dt /= (mTimes[key + 1] - mTimes[key]);
-    return mC[key]*(Math::GetValue(2)) + mD[key]*(((Real)6)*dt);
+    const auto velocity = b.at(key) + t * (c.at(key) * (Math<Real>::GetValue(2)) + d.at(key) * ((Math<Real>::GetValue(3)) * t));
+
+    return Vector3Tools<Real>::GetLength(velocity);
 }
 
 template <typename Real>
-Vector3<Real> TCBSpline3<Real>::GetThirdDerivative (Real t) const
+Real Mathematics::TCBSpline3<Real>::GetLengthKey(int key, Real t0, Real t1) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    dt /= (mTimes[key + 1] - mTimes[key]);
-    return ((Real)6)*mD[key];
+    const SplineKey data{ this, key };
+
+    return RombergIntegral<Real, SplineKey>(8, t0, t1, GetSpeedWithDataKey, &data).GetValue();
 }
-
-template <typename Real>
-Real TCBSpline3<Real>::GetSpeedKey (int key, Real t) const
-{
-    Vector3<Real> velocity = mB[key] + t*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*t));
-
-	return Vector3Tools<Real>::GetLength( velocity);
-}
-
-template <typename Real>
-Real TCBSpline3<Real>::GetLengthKey (int key, Real t0, Real t1) const
-{
-    SplineKey data(this, key);
-	return RombergIntegral<Real, SplineKey>(8, t0, t1, GetSpeedWithDataKey, &data).GetValue();
-}
-
 
 template <typename Real>
 Real Mathematics::TCBSpline3<Real>::GetSpeedWithDataKey(Real t, const SplineKey* data)
 {
-	return GetSpeedWithData(t, (void*)data);
-}
+    MATHEMATICS_CLASS_IS_VALID_9;
 
+    if (data != nullptr)
+    {
+        return data->spline->GetSpeedKey(data->key, t);
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("data指针为空。"));
+    }
+}
 
 // TCBSpline3::SplineKey
 
 template <typename Real>
-TCBSpline3<Real>::SplineKey::SplineKey (const TCBSpline3* spline, int key)
-    :Spline(spline),Key(key)
+Mathematics::TCBSpline3<Real>::SplineKey::SplineKey(const TCBSpline3* spline, int key) noexcept
+    : spline{ spline }, key{ key }
 {
 }
 
-
-
- 
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_TCB_SPLINE3_DETAIL_H

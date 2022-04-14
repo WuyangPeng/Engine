@@ -1,167 +1,153 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 19:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 11:03)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_PARAMETRIC_SURFACE_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_PARAMETRIC_SURFACE_DETAIL_H
 
 #include "ParametricSurface.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Matrix2Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-ParametricSurface<Real>::ParametricSurface (Real umin, Real umax, Real vmin, Real vmax, bool rectangular)
+Mathematics::ParametricSurface<Real>::ParametricSurface(Real umin, Real umax, Real vmin, Real vmax, bool rectangular)
+    : ParentType{}, uMin{ umin }, uMax{ umax }, vMin{ vmin }, vMax{ vmax }, rectangular{ rectangular }
 {
-    MATHEMATICS_ASSERTION_0(umin < umax && vmin < vmax, "Invalid domain\n");
+    MATHEMATICS_ASSERTION_0(umin < umax && vmin < vmax, "无效域\n");
 
-    mUMin = umin;
-    mUMax = umax;
-    mVMin = vmin;
-    mVMax = vmax;
-    mRectangular = rectangular;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
- 
+#ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-Real ParametricSurface<Real>::GetUMin() const noexcept
+bool Mathematics::ParametricSurface<Real>::IsValid() const noexcept
 {
-    return mUMin;
+    return ParentType::IsValid();
 }
 
-template <typename Real>
-Real ParametricSurface<Real>::GetUMax() const noexcept
-{
-    return mUMax;
-}
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-Real ParametricSurface<Real>::GetVMin() const noexcept
+Real Mathematics::ParametricSurface<Real>::GetUMin() const noexcept
 {
-    return mVMin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return uMin;
 }
 
 template <typename Real>
-Real ParametricSurface<Real>::GetVMax() const noexcept
+Real Mathematics::ParametricSurface<Real>::GetUMax() const noexcept
 {
-    return mVMax;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return uMax;
 }
 
 template <typename Real>
-bool ParametricSurface<Real>::IsRectangular() const noexcept
+Real Mathematics::ParametricSurface<Real>::GetVMin() const noexcept
 {
-    return mRectangular;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vMin;
 }
 
 template <typename Real>
-void ParametricSurface<Real>::GetFrame (Real u, Real v,Vector3<Real>& position, Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const
+Real Mathematics::ParametricSurface<Real>::GetVMax() const noexcept
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vMax;
+}
+
+template <typename Real>
+bool Mathematics::ParametricSurface<Real>::IsRectangular() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return rectangular;
+}
+
+template <typename Real>
+void Mathematics::ParametricSurface<Real>::GetFrame(Real u, Real v, Vector3<Real>& position, Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
     position = P(u, v);
 
     tangent0 = PU(u, v);
     tangent1 = PV(u, v);
-    tangent0.Normalize();  // T0
-    tangent1.Normalize();  // temporary T1 just to compute N
-	normal = Vector3Tools<Real>::CrossProduct(tangent0,tangent1);  // N
+    tangent0.Normalize();
+    tangent1.Normalize();
+    normal = Vector3Tools<Real>::CrossProduct(tangent0, tangent1);
 
-    // The normalized first derivatives are not necessarily orthogonal.
-    // Recompute T1 so that {T0,T1,N} is an orthonormal set.
-	tangent1 = Vector3Tools<Real>::CrossProduct(normal,tangent0);
+    tangent1 = Vector3Tools<Real>::CrossProduct(normal, tangent0);
 }
 
 template <typename Real>
-void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real& curv0, Real& curv1, Vector3<Real>& dir0, Vector3<Real>& dir1)
+void Mathematics::ParametricSurface<Real>::ComputePrincipalCurvatureInfo(Real u, Real v, Real& curv0, Real& curv1, Vector3<Real>& dir0, Vector3<Real>& dir1)
 {
-    // Tangents:  T0 = (x_u,y_u,z_u), T1 = (x_v,y_v,z_v)
-    // Normal:    N = Cross(T0,T1)/Length(Cross(T0,T1))
-    // Metric Tensor:    G = +-                      -+
-    //                       | Dot(T0,T0)  Dot(T0,T1) |
-    //                       | Dot(T1,T0)  Dot(T1,T1) |
-    //                       +-                      -+
-    //
-    // Curvature Tensor:  B = +-                          -+
-    //                        | -Dot(N,T0_u)  -Dot(N,T0_v) |
-    //                        | -Dot(N,T1_u)  -Dot(N,T1_v) |
-    //                        +-                          -+
-    //
-    // Principal curvatures k are the generalized eigenvalues of
-    //
-    //     Bw = kGw
-    //
-    // If k is a curvature and w=(a,b) is the corresponding solution to
-    // Bw = kGw, then the principal direction as a 3D vector is d = a*U+b*V.
-    //
-    // Let k1 and k2 be the principal curvatures.  The mean curvature
-    // is (k1+k2)/2 and the Gaussian curvature is k1*k2.
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    // Compute derivatives.
-	auto derU = PU(u,v);
-	auto derV = PV(u,v);
-	auto derUU = PUU(u,v);
-	auto derUV = PUV(u,v);
-	auto derVV = PVV(u,v);
+    const auto derU = PU(u, v);
+    const auto derV = PV(u, v);
+    const auto derUU = PUU(u, v);
+    const auto derUV = PUV(u, v);
+    const auto derVV = PVV(u, v);
 
-    // Compute the metric tensor.
-    Matrix2<Real> metricTensor;
-	metricTensor[0][0] = Vector3Tools<Real>::DotProduct(derU,derU);
-	metricTensor[0][1] = Vector3Tools<Real>::DotProduct(derU,derV);
+    Matrix2<Real> metricTensor{};
+    metricTensor[0][0] = Vector3Tools<Real>::DotProduct(derU, derU);
+    metricTensor[0][1] = Vector3Tools<Real>::DotProduct(derU, derV);
     metricTensor[1][0] = metricTensor[0][1];
-	metricTensor[1][1] = Vector3Tools<Real>::DotProduct(derV,derV);
+    metricTensor[1][1] = Vector3Tools<Real>::DotProduct(derV, derV);
 
-    // Compute the curvature tensor.
-	auto normal = Vector3Tools<Real>::CrossProduct(derU,derV);
-    Matrix2<Real> curvatureTensor;
-	curvatureTensor[0][0] = -Vector3Tools<Real>::DotProduct(normal,derUU);
-	curvatureTensor[0][1] = -Vector3Tools<Real>::DotProduct(normal,derUV);
+    const auto normal = Vector3Tools<Real>::CrossProduct(derU, derV);
+    Matrix2<Real> curvatureTensor{};
+    curvatureTensor[0][0] = -Vector3Tools<Real>::DotProduct(normal, derUU);
+    curvatureTensor[0][1] = -Vector3Tools<Real>::DotProduct(normal, derUV);
     curvatureTensor[1][0] = curvatureTensor[0][1];
-	curvatureTensor[1][1] = -Vector3Tools<Real>::DotProduct(normal,derVV);
+    curvatureTensor[1][1] = -Vector3Tools<Real>::DotProduct(normal, derVV);
 
-    // Characteristic polynomial is 0 = det(B-kG) = c2*k^2+c1*k+c0.
-	auto c0 = curvatureTensor.Determinant();
-	auto c1 = (Math::GetValue(2))*curvatureTensor[0][1]* metricTensor[0][1] -  curvatureTensor[0][0]*metricTensor[1][1] - curvatureTensor[1][1]*metricTensor[0][0];
-	auto c2 = metricTensor.Determinant();
+    auto c0 = curvatureTensor.Determinant();
+    auto c1 = Math::GetValue(2) * curvatureTensor[0][1] * metricTensor[0][1] - curvatureTensor[0][0] * metricTensor[1][1] - curvatureTensor[1][1] * metricTensor[0][0];
+    auto c2 = metricTensor.Determinant();
 
-    // Principal curvatures are roots of characteristic polynomial.
-	auto temp = Math<Real>::Sqrt(Math<Real>::FAbs(c1*c1 - ((Real)4)*c0*c2));
-	auto mult = (Real{0.5})/c2;
-    curv0 = -mult*(c1+temp);
-    curv1 = mult*(-c1+temp);
+    auto temp = Math::Sqrt(Math::FAbs(c1 * c1 - Math::GetValue(4) * c0 * c2));
+    auto mult = Math::GetRational(1, 2) / c2;
+    curv0 = -mult * (c1 + temp);
+    curv1 = mult * (-c1 + temp);
 
-    // Principal directions are solutions to (B-kG)w = 0,
-    // w1 = (b12-k1*g12,-(b11-k1*g11)) OR (b22-k1*g22,-(b12-k1*g12)).
-	auto a0 = curvatureTensor[0][1] - curv0*metricTensor[0][1];
-	auto a1 = curv0*metricTensor[0][0] - curvatureTensor[0][0];
-	auto length = Math<Real>::Sqrt(a0*a0 + a1*a1);
-    if (length >= Math<Real>::GetZeroTolerance())
+    auto a0 = curvatureTensor[0][1] - curv0 * metricTensor[0][1];
+    auto a1 = curv0 * metricTensor[0][0] - curvatureTensor[0][0];
+    auto length = Math::Sqrt(a0 * a0 + a1 * a1);
+    if (length >= Math::GetZeroTolerance())
     {
-        dir0 = a0*derU + a1*derV;
+        dir0 = a0 * derU + a1 * derV;
     }
     else
     {
-        a0 = curvatureTensor[1][1] - curv0*metricTensor[1][1];
-        a1 = curv0*metricTensor[0][1] - curvatureTensor[0][1];
-        length = Math<Real>::Sqrt(a0*a0 + a1*a1);
-        if (length >= Math<Real>::GetZeroTolerance())
+        a0 = curvatureTensor[1][1] - curv0 * metricTensor[1][1];
+        a1 = curv0 * metricTensor[0][1] - curvatureTensor[0][1];
+        length = Math::Sqrt(a0 * a0 + a1 * a1);
+        if (length >= Math::GetZeroTolerance())
         {
-            dir0 = a0*derU + a1*derV;
+            dir0 = a0 * derU + a1 * derV;
         }
         else
         {
-            // Umbilic (surface is locally sphere, any direction principal).
             dir0 = derU;
         }
     }
     dir0.Normalize();
 
-    // Second tangent is cross product of first tangent and normal.
-	dir1 = Vector3Tools<Real>::CrossProduct(dir0,normal);
+    dir1 = Vector3Tools<Real>::CrossProduct(dir0, normal);
 }
 
-
-
-}
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_PARAMETRIC_SURFACE_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_PARAMETRIC_SURFACE_DETAIL_H

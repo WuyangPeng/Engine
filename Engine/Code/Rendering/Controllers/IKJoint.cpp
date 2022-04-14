@@ -84,7 +84,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,GetGoalsNum,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetGoalsSharedPtr,int,const Rendering::ConstIKGoalSharedPtr)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,UpdateWorldTransform,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,UpdateWorldRotateAndTranslate,void)
+ 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,UpdateLocalTranslate,MatrixRotationAxis,bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,UpdateLocalRotate,MatrixRotationAxis,bool)
 
@@ -97,7 +97,7 @@ Rendering::IKJoint
 }
 
 int Rendering::IKJoint
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -109,7 +109,7 @@ int Rendering::IKJoint
 }
 
 uint64_t Rendering::IKJoint
-    ::Register( CoreTools::ObjectRegister& target ) const
+::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -123,7 +123,7 @@ uint64_t Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -137,7 +137,7 @@ void Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::Link (CoreTools::ObjectLink& source)
+::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -147,7 +147,7 @@ void Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
@@ -155,7 +155,7 @@ void Rendering::IKJoint
 }
 
 void Rendering::IKJoint
-    ::Load (CoreTools::BufferSource& source)
+::Load (CoreTools::BufferSource& source)
 {
 	;
     
@@ -187,6 +187,13 @@ void Rendering::IKJoint
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowTranslation,MatrixRotationAxis,bool)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowRotation,MatrixRotationAxis,bool)
+
+void Rendering::IKJoint::UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->UpdateWorldRotateAndTranslate();
+}
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::IKJoint::CloneObject() const
 {

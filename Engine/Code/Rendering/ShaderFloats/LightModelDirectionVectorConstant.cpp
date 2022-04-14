@@ -34,7 +34,7 @@ Rendering::LightModelDirectionVectorConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightModelDirectionVectorConstant)
 
-void Rendering::LightModelDirectionVectorConstant ::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::LightModelDirectionVectorConstant::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

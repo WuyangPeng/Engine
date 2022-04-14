@@ -23,7 +23,7 @@ namespace Rendering
 	    void SpatialPtrTest();
 	    void VisibleTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

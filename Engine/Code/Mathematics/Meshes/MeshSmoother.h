@@ -1,8 +1,12 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 11:25)
+
 #ifndef MATHEMATICS_MESHES_MESH_SMOOTHER_H
 #define MATHEMATICS_MESHES_MESH_SMOOTHER_H
 
@@ -12,52 +16,53 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  MeshSmoother
-	{
-	public:
-		// The caller is responsible for deleting the input arrays.
-		MeshSmoother (int numVertices, Vector3<Real>* vertices, int numTriangles,const int* indices);
-		
-		virtual ~MeshSmoother ();
-		
-		// For deferred construction and destruction.  The caller is responsible
-		// for deleting the input arrays.
-		MeshSmoother ();
-		void Create (int numVertices, Vector3<Real>* vertices, int numTriangles, const int* indices);
-		void Destroy ();
-		
-		// Input values from the constructor.
-		int GetNumVertices () const;
-		const Vector3<Real>* GetVertices () const;
-		int GetNumTriangles () const;
-		const int* GetIndices () const;
-		
-		// Derived quantites from the input mesh.
-		const Vector3<Real>* GetNormals () const;
-		const Vector3<Real>* GetMeans () const;
-		
-		// Apply one iteration of the smoother.  The input time is supported for
-		// applications where the surface evolution is time-dependent.
-		void Update (Real t = Math<Real>::GetValue(0));
-		
-	protected:
-		virtual bool VertexInfluenced (int i, Real t);
-		virtual Real GetTangentWeight (int i, Real t);
-		virtual Real GetNormalWeight (int i, Real t);
-		
-		int mNumVertices;
-		Vector3<Real>* mVertices;
-		int mNumTriangles;
-		const int* mIndices;
-		
-		Vector3<Real>* mNormals;
-		Vector3<Real>* mMeans;
-		int* mNeighborCounts;
-	};
-	
-	using MeshSmootherf = MeshSmoother<float>;
-	using MeshSmootherd = MeshSmoother<double>;
+    template <typename Real>
+    class MeshSmoother
+    {
+    public:
+        using ClassType = MeshSmoother<Real>;
+
+    public:
+        MeshSmoother(int numVertices, const std::vector<Vector3<Real>>& vertices, int numTriangles, const std::vector<int>& indices);
+
+        MeshSmoother() noexcept;
+
+        virtual ~MeshSmoother() noexcept = default;
+        MeshSmoother(const MeshSmoother& rhs) = default;
+        MeshSmoother& operator=(const MeshSmoother& rhs) = default;
+        MeshSmoother(MeshSmoother&& rhs) noexcept = default;
+        MeshSmoother& operator=(MeshSmoother&& rhs) noexcept = default;
+
+        CLASS_INVARIANT_DECLARE;
+
+        void Create(int newNumVertices, const std::vector<Vector3<Real>>& newVertices, int newNumTriangles, const std::vector<int>& newIndices);
+        void Destroy() noexcept;
+
+        NODISCARD int GetNumVertices() const noexcept;
+        NODISCARD std::vector<Vector3<Real>> GetVertices() const;
+        NODISCARD int GetNumTriangles() const noexcept;
+        NODISCARD std::vector<int> GetIndices() const;
+
+        NODISCARD std::vector<Vector3<Real>> GetNormals() const;
+        NODISCARD std::vector<Vector3<Real>> GetMeans() const;
+
+        void Update(Real t = Math<Real>::GetValue(0));
+
+    protected:
+        NODISCARD virtual bool VertexInfluenced(MAYBE_UNUSED int i, MAYBE_UNUSED Real t);
+        NODISCARD virtual Real GetTangentWeight(MAYBE_UNUSED int i, MAYBE_UNUSED Real t);
+        NODISCARD virtual Real GetNormalWeight(MAYBE_UNUSED int i, MAYBE_UNUSED Real t);
+
+    private:
+        int numVertices;
+        std::vector<Vector3<Real>> vertices;
+        int numTriangles;
+        std::vector<int> indices;
+
+        std::vector<Vector3<Real>> normals;
+        std::vector<Vector3<Real>> means;
+        std::vector<int> neighborCounts;
+    };
 }
 
-#endif // MATHEMATICS_MESHES_MESH_SMOOTHER_H
+#endif  // MATHEMATICS_MESHES_MESH_SMOOTHER_H

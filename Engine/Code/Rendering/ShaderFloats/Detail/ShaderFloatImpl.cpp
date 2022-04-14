@@ -232,7 +232,7 @@ bool Rendering::ShaderFloatImpl
 	return m_AllowUpdater;
 }
 
-void Rendering::ShaderFloatImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderFloatImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	 

@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.438
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManager", "ResourceManager\ResourceManager.vcxproj", "{39309DF3-41D1-4607-AAFF-D56F9465CD03}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagerTesting", "..\..\..\EngineTesting\EngineWindows\ResourceManager\ResourceManagerTesting\ResourceManagerTesting.vcxproj", "{C2583F75-CA83-4E34-B33A-9FCB8C4035AE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{39309DF3-41D1-4607-AAFF-D56F9465CD03} = {39309DF3-41D1-4607-AAFF-D56F9465CD03}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManagerToolset", "..\..\..\Assist\AssistWindows\Toolset\ResourceManager\ResourceManagerToolset\ResourceManagerToolset.vcxproj", "{88778369-18B1-47BD-8838-17C8EFA4B3B0}"
 	ProjectSection(ProjectDependencies) = postProject

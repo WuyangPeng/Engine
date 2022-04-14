@@ -12,8 +12,6 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
-
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -53,13 +51,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, Triangles);
 
-Rendering::Triangles ::Triangles(VisualPrimitiveType type)
+Rendering::Triangles::Triangles(VisualPrimitiveType type)
     : ParentType{ type }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Triangles ::Triangles(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
+Rendering::Triangles::Triangles(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
     : ParentType{ type, vertexformat, vertexbuffer, indexbuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -67,7 +65,7 @@ Rendering::Triangles ::Triangles(VisualPrimitiveType type, const VertexFormatSha
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Triangles)
 
-const Rendering::TrianglePosition Rendering::Triangles ::GetModelTriangle(int index) const
+const Rendering::TrianglePosition Rendering::Triangles::GetModelTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -85,7 +83,7 @@ const Rendering::TrianglePosition Rendering::Triangles ::GetModelTriangle(int in
     return trianglePosition;
 }
 
-const Rendering::TrianglePosition Rendering::Triangles ::GetWorldTriangle(int index) const
+const Rendering::TrianglePosition Rendering::Triangles::GetWorldTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -98,14 +96,14 @@ const Rendering::TrianglePosition Rendering::Triangles ::GetWorldTriangle(int in
     return TrianglePosition{ firstPosition, secondPosition, thirdPosition };
 }
 
-int Rendering::Triangles ::GetNumVertices() const
+int Rendering::Triangles::GetNumVertices() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return GetConstVertexBuffer()->GetNumElements();
 }
 
-const Rendering::Triangles::Vector3D Rendering::Triangles ::GetPosition(int vertexIndex) const
+Rendering::Triangles::Vector3D Rendering::Triangles::GetPosition(int vertexIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -126,7 +124,7 @@ const Rendering::Triangles::Vector3D Rendering::Triangles ::GetPosition(int vert
     }
 }
 
-void Rendering::Triangles ::UpdateModelSpace(VisualUpdateType type)
+void Rendering::Triangles::UpdateModelSpace(VisualUpdateType type)
 {
     ;
 
@@ -137,7 +135,7 @@ void Rendering::Triangles ::UpdateModelSpace(VisualUpdateType type)
         return;
     }
 
-    VertexBufferAccessor vertexBufferAccessor{ this };
+    VertexBufferAccessor vertexBufferAccessor{ *this };
     if (vertexBufferAccessor.HasNormal())
     {
         UpdateModelNormals(vertexBufferAccessor);
@@ -162,7 +160,7 @@ void Rendering::Triangles ::UpdateModelSpace(VisualUpdateType type)
 }
 
 // private
-void Rendering::Triangles ::UpdateModelNormals(const VertexBufferAccessor& vertexBufferAccessor)
+void Rendering::Triangles::UpdateModelNormals(const VertexBufferAccessor& vertexBufferAccessor)
 {
     // 从包含顶点的平面加权平均计算法线。
     GetVertexBuffer()->ClearModelNormals(vertexBufferAccessor);
@@ -194,7 +192,7 @@ void Rendering::Triangles ::UpdateModelNormals(const VertexBufferAccessor& verte
 }
 
 // private
-void Rendering::Triangles ::UpdateModelTangentsUseGeometry(const VertexBufferAccessor& vertexBufferAccessor)
+void Rendering::Triangles::UpdateModelTangentsUseGeometry(const VertexBufferAccessor& vertexBufferAccessor)
 {
     // 计算矩阵的法线的导数。
     NormalDerivatives normalDerivatives{ vertexBufferAccessor };
@@ -231,7 +229,7 @@ void Rendering::Triangles ::UpdateModelTangentsUseGeometry(const VertexBufferAcc
 }
 
 // private
-void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBufferAccessor& vertexBufferAccessor)
+void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBufferAccessor& vertexBufferAccessor)
 {
     // 每个顶点可以多次访问,所以只在第一次访问时计算切线空间。
     // 使用零向量作为标志不计算切向量。
@@ -310,7 +308,7 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
 }
 
 // private
-const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const APoint& position0, const Vector2D& textureCoord0, const APoint& position1, const Vector2D& textureCoord1, const APoint& position2, const Vector2D& textureCoord2)
+const Rendering::Triangles::AVector Rendering::Triangles::ComputeTangent(const APoint& position0, const Vector2D& textureCoord0, const APoint& position1, const Vector2D& textureCoord1, const APoint& position2, const Vector2D& textureCoord2)
 {
     // 计算顶点P0位置的变化。
     const auto differenceP1P0 = position1 - position0;
@@ -355,16 +353,16 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     return (differenceV1V0 * differenceP2P0 - differenceV2V0 * differenceP1P0) / det;
 }
 
-const Rendering::PickRecordContainer Rendering::Triangles ::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const
+Rendering::PickRecordContainer Rendering::Triangles::ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    PickRecordContainer container;
+    auto container = PickRecordContainer::Create();
 
     if (GetWorldBound().TestIntersection(origin, direction, tMin, tMax))
     {
         // 将线性组件转换到模型空间坐标。
-        auto worldInverseTransform = GetWorldTransform().GetInverseTransform();
+        const auto worldInverseTransform = GetWorldTransform().GetInverseTransform();
         const auto modelOriginPoint = worldInverseTransform * origin;
         const auto modelOrigin = modelOriginPoint.GetVector3();
 
@@ -389,12 +387,12 @@ const Rendering::PickRecordContainer Rendering::Triangles ::ExecuteRecursive(con
                 auto vertex2 = vertexBufferAccessor.GetPosition<Vector3D>(triangleIndex.GetThirdIndex());
                 const Triangle3 triangle{ vertex0, vertex1, vertex2 };
 
-                Mathematics::FloatStaticFindIntersectorLine3Triangle3 intersector{ line, triangle };
+                Mathematics::StaticFindIntersectorLine3Triangle3<float> intersector{ line, triangle };
 
                 if (intersector.IsIntersection() && tMin <= intersector.GetLineParameter() &&
                     intersector.GetLineParameter() <= tMax)  //&& SMART_POINTER_SINGLETON.IsSmartPointer(this))
                 {
-                    PickRecord record;
+                    auto record = PickRecord::Create();
 
                     record.SetIntersected(ConstSpatialSharedPtr(this));
                     record.SetParameter(intersector.GetLineParameter());

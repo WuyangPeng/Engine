@@ -1,224 +1,276 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 19:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 17:07)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_DETAIL_H
- 
+
 #include "QuadricSurface.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Rational/RationalVector3Detail.h"
+#include "Mathematics/Rational/SignRationalDetail.h"
 
 template <typename Real>
-QuadricSurface<Real>::QuadricSurface ()
+Mathematics::QuadricSurface<Real>::QuadricSurface() noexcept
+    : ParentType{}, coeff{}, a{}, b{}, c{}
 {
-    memset(mCoeff,0,10*sizeof(Real));
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-QuadricSurface<Real>::QuadricSurface (const Real coeff[10])
+Mathematics::QuadricSurface<Real>::QuadricSurface(const std::array<Real, 10>& coeff)
+    : ParentType{}, coeff{ coeff }, a{}, b{ coeff.at(1), coeff.at(2), coeff.at(3) }, c{ coeff.at(0) }
 {
-    for (int i = 0; i < 10; ++i)
-    {
-        mCoeff[i] = coeff[i];
-    }
+    a[0][0] = coeff.at(4);
+    a[0][1] = Math<Real>::GetRational(1, 2) * coeff.at(5);
+    a[0][2] = Math<Real>::GetRational(1, 2) * coeff.at(6);
+    a[1][0] = a[0][1];
+    a[1][1] = coeff.at(7);
+    a[1][2] = Math<Real>::GetRational(1, 2) * coeff.at(8);
+    a[2][0] = a[0][2];
+    a[2][1] = a[1][2];
+    a[2][2] = coeff.at(9);
 
-    // Compute A, B, C.
-    mC = mCoeff[0];
-    mB[0] = mCoeff[1];
-    mB[1] = mCoeff[2];
-    mB[2] = mCoeff[3];
-    mA[0][0] = mCoeff[4];
-    mA[0][1] = (Real{0.5})*mCoeff[5];
-    mA[0][2] = (Real{0.5})*mCoeff[6];
-    mA[1][0] = mA[0][1];
-    mA[1][1] = mCoeff[7];
-    mA[1][2] = (Real{0.5})*mCoeff[8];
-    mA[2][0] = mA[0][2];
-    mA[2][1] = mA[1][2];
-    mA[2][2] = mCoeff[9];
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::QuadricSurface<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+const Real* Mathematics::QuadricSurface<Real>::GetCoefficients() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return coeff.data();
 }
 
 template <typename Real>
-const Real* QuadricSurface<Real>::GetCoefficients () const
+const Mathematics::Matrix3<Real>& Mathematics::QuadricSurface<Real>::GetA() const noexcept
 {
-    return mCoeff;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return a;
 }
 
 template <typename Real>
-const Matrix3<Real>& QuadricSurface<Real>::GetA () const
+const Mathematics::Vector3<Real>& Mathematics::QuadricSurface<Real>::GetB() const noexcept
 {
-    return mA;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return b;
 }
 
 template <typename Real>
-const Vector3<Real>& QuadricSurface<Real>::GetB () const
+Real Mathematics::QuadricSurface<Real>::GetC() const noexcept
 {
-    return mB;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return c;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::GetC () const
+Real Mathematics::QuadricSurface<Real>::F(const Vector3<Real>& pos) const
 {
-    return mC;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-Real QuadricSurface<Real>::F (const Vector3<Real>& pos) const
-{
-	Real f = Vector3Tools<Real>::DotProduct(pos,(mA*pos + mB)) + mC;
+    auto f = Vector3Tools<Real>::DotProduct(pos, (a * pos + b)) + c;
+
     return f;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FX (const Vector3<Real>& pos) const
+Real Mathematics::QuadricSurface<Real>::FX(const Vector3<Real>& pos) const
 {
-    Real sum = mA[0][0]*pos[0] + mA[0][1]*pos[1] + mA[0][2]*pos[2];
-    Real fx = (Math::GetValue(2))*sum + mB[0];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto sum = a[0][0] * pos[0] + a[0][1] * pos[1] + a[0][2] * pos[2];
+    auto fx = (Math<Real>::GetValue(2)) * sum + b[0];
+
     return fx;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FY (const Vector3<Real>& pos) const
+Real Mathematics::QuadricSurface<Real>::FY(const Vector3<Real>& pos) const
 {
-    Real sum = mA[1][0]*pos[0] + mA[1][1]*pos[1] + mA[1][2]*pos[2];
-    Real fy = (Math::GetValue(2))*sum + mB[1];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto sum = a[1][0] * pos[0] + a[1][1] * pos[1] + a[1][2] * pos[2];
+    auto fy = (Math<Real>::GetValue(2)) * sum + b[1];
+
     return fy;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FZ (const Vector3<Real>& pos) const
+Real Mathematics::QuadricSurface<Real>::FZ(const Vector3<Real>& pos) const
 {
-    Real sum = mA[2][0]*pos[0] + mA[2][1]*pos[1] + mA[2][2]*pos[2];
-    Real fz = (Math::GetValue(2))*sum + mB[2];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto sum = a[2][0] * pos[0] + a[2][1] * pos[1] + a[2][2] * pos[2];
+    auto fz = (Math<Real>::GetValue(2)) * sum + b[2];
+
     return fz;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FXX (const Vector3<Real>&) const
+Real Mathematics::QuadricSurface<Real>::FXX(const Vector3<Real>&) const
 {
-    Real fxx = (Math::GetValue(2))*mA[0][0];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto fxx = (Math<Real>::GetValue(2)) * a[0][0];
+
     return fxx;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FXY (const Vector3<Real>&) const
+Real Mathematics::QuadricSurface<Real>::FXY(const Vector3<Real>&) const
 {
-    Real fxy = (Math::GetValue(2))*mA[0][1];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto fxy = (Math<Real>::GetValue(2)) * a[0][1];
+
     return fxy;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FXZ (const Vector3<Real>&) const
+Real Mathematics::QuadricSurface<Real>::FXZ(const Vector3<Real>&) const
 {
-    Real fxz = (Math::GetValue(2))*mA[0][2];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto fxz = (Math<Real>::GetValue(2)) * a[0][2];
+
     return fxz;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FYY (const Vector3<Real>&) const
+Real Mathematics::QuadricSurface<Real>::FYY(const Vector3<Real>&) const
 {
-    Real fyy = (Math::GetValue(2))*mA[1][1];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto fyy = (Math<Real>::GetValue(2)) * a[1][1];
+
     return fyy;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FYZ (const Vector3<Real>&) const
+Real Mathematics::QuadricSurface<Real>::FYZ(const Vector3<Real>&) const
 {
-    Real fyz = (Math::GetValue(2))*mA[1][2];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto fyz = (Math<Real>::GetValue(2)) * a[1][2];
+
     return fyz;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FZZ (const Vector3<Real>&) const
+Real Mathematics::QuadricSurface<Real>::FZZ(const Vector3<Real>&) const
 {
-    Real fzz = (Math::GetValue(2))*mA[2][2];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto fzz = (Math<Real>::GetValue(2)) * a[2][2];
+
     return fzz;
 }
 
 template <typename Real>
-int QuadricSurface<Real>::GetType () const
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::GetType() const
 {
-    // Convert the coefficients to their rational representations and
-    // compute various derived quantities.
-    RReps reps(mCoeff);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Use Sturm sequences to determine the signs of the roots.
-    int positiveRoots, negativeRoots, zeroRoots;
+    RReps reps{ coeff };
+
+    auto positiveRoots = 0;
+    auto negativeRoots = 0;
+    auto zeroRoots = 0;
+
     GetRootSigns(reps, positiveRoots, negativeRoots, zeroRoots);
 
-    // Classify the solution set to the equation.
-    int type = QT_NONE;
+    auto type = Type::None;
     switch (zeroRoots)
     {
-    case 0:
-        type = ClassifyZeroRoots0(reps,positiveRoots);
-        break;
-    case 1:
-        type = ClassifyZeroRoots1(reps,positiveRoots);
-        break;
-    case 2:
-        type = ClassifyZeroRoots2(reps,positiveRoots);
-        break;
-    case 3:
-        type = ClassifyZeroRoots3(reps);
-        break;
+        case 0:
+            type = ClassifyZeroRoots0(reps, positiveRoots);
+            break;
+        case 1:
+            type = ClassifyZeroRoots1(reps, positiveRoots);
+            break;
+        case 2:
+            type = ClassifyZeroRoots2(reps, positiveRoots);
+            break;
+        case 3:
+            type = ClassifyZeroRoots3(reps);
+            break;
+        default:
+            break;
     }
     return type;
 }
 
 template <typename Real>
-void QuadricSurface<Real>::GetRootSigns (RReps& reps,int& positiveRoots, int& negativeRoots, int& zeroRoots)
+void Mathematics::QuadricSurface<Real>::GetRootSigns(RReps& reps, int& positiveRoots, int& negativeRoots, int& zeroRoots)
 {
-    // Use Sturm sequences to determine the signs of the roots.
-    int signChangeMI, signChange0, signChangePI, distinctNonzeroRoots;
-    QRational value[4];
-	if (reps.C0 != QRational(0))
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto signChangeMI = 0;
+    auto signChange0 = 0;
+    auto signChangePI = 0;
+    auto distinctNonzeroRoots = 0;
+    std::array<QRational, 4> value{};
+    if (reps.c0 != QRational{ 0 })
     {
-        reps.C3 = QRational(2,9)*reps.C2*reps.C2 - QRational(2,3)*reps.C1;
-        reps.C4 = reps.C0 - QRational(1,9)*reps.C1*reps.C2;
+        reps.c3 = QRational{ 2, 9 } * reps.c2 * reps.c2 - QRational{ 2, 3 } * reps.c1;
+        reps.c4 = reps.c0 - QRational{ 1, 9 } * reps.c1 * reps.c2;
 
-		if (reps.C3 != QRational(0))
+        if (reps.c3 != QRational{ 0 })
         {
-            reps.C5 = -(reps.C1 + ((QRational(2)*reps.C2*reps.C3 +
-                QRational(3)*reps.C4)*reps.C4)/(reps.C3*reps.C3));
+            reps.c5 = -(reps.c1 + ((QRational{ 2 } * reps.c2 * reps.c3 + QRational{ 3 } * reps.c4) * reps.c4) / (reps.c3 * reps.c3));
 
-			value[0] = QRational(1);
-            value[1] = -reps.C3;
-            value[2] = reps.C5;
+            value.at(0) = QRational{ 1 };
+            value.at(1) = -reps.c3;
+            value.at(2) = reps.c5;
             signChangeMI = 1 + GetSignChanges(3, value);
 
-            value[0] = -reps.C0;
-            value[1] = reps.C1;
-            value[2] = reps.C4;
-            value[3] = reps.C5;
+            value.at(0) = -reps.c0;
+            value.at(1) = reps.c1;
+            value.at(2) = reps.c4;
+            value.at(3) = reps.c5;
             signChange0 = GetSignChanges(4, value);
 
-			value[0] = QRational(1);
-            value[1] = reps.C3;
-            value[2] = reps.C5;
+            value.at(0) = QRational{ 1 };
+            value.at(1) = reps.c3;
+            value.at(2) = reps.c5;
             signChangePI = GetSignChanges(3, value);
         }
         else
         {
-            value[0] = -reps.C0;
-            value[1] = reps.C1;
-            value[2] = reps.C4;
+            value.at(0) = -reps.c0;
+            value.at(1) = reps.c1;
+            value.at(2) = reps.c4;
             signChange0 = GetSignChanges(3, value);
 
-			value[0] = QRational(1);
-            value[1] = reps.C4;
+            value.at(0) = QRational{ 1 };
+            value.at(1) = reps.c4;
             signChangePI = GetSignChanges(2, value);
             signChangeMI = 1 + signChangePI;
         }
 
         positiveRoots = signChange0 - signChangePI;
-        MATHEMATICS_ASSERTION_0(positiveRoots >= 0, "Unexpected condition\n");
+        MATHEMATICS_ASSERTION_0(positiveRoots >= 0, "意外情况\n");
         negativeRoots = signChangeMI - signChange0;
-        MATHEMATICS_ASSERTION_0(negativeRoots >= 0, "Unexpected condition\n");
+        MATHEMATICS_ASSERTION_0(negativeRoots >= 0, "意外情况\n");
         zeroRoots = 0;
 
         distinctNonzeroRoots = positiveRoots + negativeRoots;
@@ -234,13 +286,9 @@ void QuadricSurface<Real>::GetRootSigns (RReps& reps,int& positiveRoots, int& ne
             }
             else
             {
-                // One root is positive and one is negative.  One root has
-                // multiplicity 2, the other of multiplicity 1.  Distinguish
-                // between the two cases by computing the sign of the
-                // polynomial at the inflection point L = c2/3.
-                QRational X = QRational(1,3)*reps.C2;
-                QRational poly = X*(X*(X-reps.C2)+reps.C1)-reps.C0;
-				if (poly > QRational(0))
+                auto x = QRational{ 1, 3 } * reps.c2;
+                auto poly = x * (x * (x - reps.c2) + reps.c1) - reps.c0;
+                if (poly > QRational{ 0 })
                 {
                     positiveRoots = 2;
                 }
@@ -252,7 +300,6 @@ void QuadricSurface<Real>::GetRootSigns (RReps& reps,int& positiveRoots, int& ne
         }
         else if (distinctNonzeroRoots == 1)
         {
-            // Root of multiplicity 3.
             if (positiveRoots == 1)
             {
                 positiveRoots = 3;
@@ -266,27 +313,27 @@ void QuadricSurface<Real>::GetRootSigns (RReps& reps,int& positiveRoots, int& ne
         return;
     }
 
-	if (reps.C1 != QRational(0))
+    if (reps.c1 != QRational{ 0 })
     {
-        reps.C3 = QRational(1,4)*reps.C2*reps.C2 - reps.C1;
+        reps.c3 = QRational{ 1, 4 } * reps.c2 * reps.c2 - reps.c1;
 
-		value[0] = QRational(- 1);
-        value[1] = reps.C3;
-        signChangeMI = 1 + GetSignChanges(2,value);
+        value.at(0) = QRational{ -1 };
+        value.at(1) = reps.c3;
+        signChangeMI = 1 + GetSignChanges(2, value);
 
-        value[0] = reps.C1;
-        value[1] = -reps.C2;
-        value[2] = reps.C3;
-        signChange0 = GetSignChanges(3,value);
+        value.at(0) = reps.c1;
+        value.at(1) = -reps.c2;
+        value.at(2) = reps.c3;
+        signChange0 = GetSignChanges(3, value);
 
-		value[0] = QRational(1);
-        value[1] = reps.C3;
-        signChangePI = GetSignChanges(2,value);
+        value.at(0) = QRational{ 1 };
+        value.at(1) = reps.c3;
+        signChangePI = GetSignChanges(2, value);
 
         positiveRoots = signChange0 - signChangePI;
-        MATHEMATICS_ASSERTION_0(positiveRoots >= 0, "Unexpected condition\n");
+        MATHEMATICS_ASSERTION_0(positiveRoots >= 0, "意外情况\n");
         negativeRoots = signChangeMI - signChange0;
-        MATHEMATICS_ASSERTION_0(negativeRoots >= 0, "Unexpected condition\n");
+        MATHEMATICS_ASSERTION_0(negativeRoots >= 0, "意外情况\n");
         zeroRoots = 1;
 
         distinctNonzeroRoots = positiveRoots + negativeRoots;
@@ -298,10 +345,10 @@ void QuadricSurface<Real>::GetRootSigns (RReps& reps,int& positiveRoots, int& ne
         return;
     }
 
-	if (reps.C2 != QRational(0))
+    if (reps.c2 != QRational{ 0 })
     {
         zeroRoots = 2;
-		if (reps.C2 > QRational(0))
+        if (reps.c2 > QRational{ 0 })
         {
             positiveRoots = 1;
             negativeRoots = 0;
@@ -320,18 +367,20 @@ void QuadricSurface<Real>::GetRootSigns (RReps& reps,int& positiveRoots, int& ne
 }
 
 template <typename Real>
-int QuadricSurface<Real>::GetSignChanges (int quantity,const QRational* value)
+int Mathematics::QuadricSurface<Real>::GetSignChanges(int quantity, const std::array<QRational, 4>& value)
 {
-    int signChanges = 0;
-    QRational zero(0);
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    QRational prev = value[0];
-    for (int i = 1; i < quantity; ++i)
+    auto signChanges = 0;
+    const QRational zero{ 0 };
+
+    auto prev = value.at(0);
+    for (auto i = 1; i < quantity; ++i)
     {
-        QRational next = value[i];
+        const auto& next = value.at(i);
         if (next != zero)
         {
-            if (prev*next < zero)
+            if (prev * next < zero)
             {
                 ++signChanges;
             }
@@ -344,302 +393,290 @@ int QuadricSurface<Real>::GetSignChanges (int quantity,const QRational* value)
 }
 
 template <typename Real>
-int QuadricSurface<Real>::ClassifyZeroRoots0 (const RReps& reps, int positiveRoots)
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::ClassifyZeroRoots0(const RReps& reps, int positiveRoots)
 {
-    // The inverse matrix is
-    // +-                      -+
-    // |  Sub00  -Sub01   Sub02 |
-    // | -Sub01   Sub11  -Sub12 | * (1/det)
-    // |  Sub02  -Sub12   Sub22 |
-    // +-                      -+
-    QRational fourDet = QRational(4)*reps.C0;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    QRational qForm = reps.B0*(reps.Sub00*reps.B0 -reps.Sub01*reps.B1 + reps.Sub02*reps.B2) - reps.B1*(reps.Sub01*reps.B0 - reps.Sub11*reps.B1 +
-					  reps.Sub12*reps.B2) + reps.B2*(reps.Sub02*reps.B0 - reps.Sub12*reps.B1 + reps.Sub22*reps.B2);
+    const auto fourDet = QRational{ 4 } * reps.c0;
 
-    QRational r = QRational(1,4)*qForm/fourDet - reps.C;
-	if (r > QRational(0))
+    const auto qForm = reps.b0 * (reps.sub00 * reps.b0 - reps.sub01 * reps.b1 + reps.sub02 * reps.b2) - reps.b1 * (reps.sub01 * reps.b0 - reps.sub11 * reps.b1 + reps.sub12 * reps.b2) + reps.b2 * (reps.sub02 * reps.b0 - reps.sub12 * reps.b1 + reps.sub22 * reps.b2);
+
+    const auto r = QRational{ 1, 4 } * qForm / fourDet - reps.c;
+    if (r > QRational{ 0 })
     {
         if (positiveRoots == 3)
         {
-            return QT_ELLIPSOID;
+            return Type::Ellipsoid;
         }
         else if (positiveRoots == 2)
         {
-            return QT_HYPERBOLOID_ONE_SHEET;
+            return Type::HyperboloidOneSheet;
         }
         else if (positiveRoots == 1)
         {
-            return QT_HYPERBOLOID_TWO_SHEETS;
+            return Type::HyperboloidTwoSheets;
         }
         else
         {
-            return QT_NONE;
+            return Type::None;
         }
     }
-	else if (r < QRational(0))
+    else if (r < QRational{ 0 })
     {
         if (positiveRoots == 3)
         {
-            return QT_NONE;
+            return Type::None;
         }
         else if (positiveRoots == 2)
         {
-            return QT_HYPERBOLOID_TWO_SHEETS;
+            return Type::HyperboloidTwoSheets;
         }
         else if (positiveRoots == 1)
         {
-            return QT_HYPERBOLOID_ONE_SHEET;
+            return Type::HyperboloidOneSheet;
         }
         else
         {
-            return QT_ELLIPSOID;
+            return Type::Ellipsoid;
         }
     }
 
-    // else Real == 0
     if (positiveRoots == 3 || positiveRoots == 0)
     {
-        return QT_POINT;
+        return Type::Point;
     }
 
-    return QT_ELLIPTIC_CONE;
+    return Type::EllipticCone;
 }
 
 template <typename Real>
-int QuadricSurface<Real>::ClassifyZeroRoots1 (const RReps& reps,int positiveRoots)
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::ClassifyZeroRoots1(const RReps& reps, int positiveRoots)
 {
-    // Generate an orthonormal set {p0,p1,p2}, where p0 is an eigenvector
-    // of A corresponding to eigenvalue zero.
-    QSVector P0, P1, P2;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (reps.Sub00 != QRational(0) || reps.Sub01 != QRational(0) || reps.Sub02 != QRational(0))
+    QSVector p0{};
+    QSVector p1{};
+    QSVector p2{};
+
+    if (reps.sub00 != QRational{ 0 } || reps.sub01 != QRational{ 0 } || reps.sub02 != QRational{ 0 })
     {
-        // Rows 1 and 2 are linearly independent.
-        P0 = QSVector(reps.Sub00, -reps.Sub01, reps.Sub02);
-        P1 = QSVector(reps.A01, reps.A11, reps.A12);
-		P2 = Cross(P0, P1);
-        return ClassifyZeroRoots1(reps, positiveRoots, P0, P1, P2);
+        p0 = QSVector{ reps.sub00, -reps.sub01, reps.sub02 };
+        p1 = QSVector{ reps.a01, reps.a11, reps.a12 };
+        p2 = Cross(p0, p1);
+
+        return ClassifyZeroRoots1(reps, positiveRoots, p0, p1, p2);
     }
 
-	if (reps.Sub01 != QRational(0) || reps.Sub11 != QRational(0) || reps.Sub12 != QRational(0))
+    if (reps.sub01 != QRational{ 0 } || reps.sub11 != QRational{ 0 } || reps.sub12 != QRational{ 0 })
     {
-        // Rows 2 and 0 are linearly independent.
-        P0 = QSVector(-reps.Sub01, reps.Sub11, -reps.Sub12);
-        P1 = QSVector(reps.A02, reps.A12, reps.A22);
-		P2 = Cross(P0,P1);
-        return ClassifyZeroRoots1(reps, positiveRoots, P0, P1, P2);
+        p0 = QSVector{ -reps.sub01, reps.sub11, -reps.sub12 };
+        p1 = QSVector{ reps.a02, reps.a12, reps.a22 };
+        p2 = Cross(p0, p1);
+
+        return ClassifyZeroRoots1(reps, positiveRoots, p0, p1, p2);
     }
 
-    // Rows 0 and 1 are linearly independent.
-    P0 = QSVector(reps.Sub02, -reps.Sub12, reps.Sub22);
-    P1 = QSVector(reps.A00, reps.A01, reps.A02);
-	P2 = Cross(P0,P1);
-    return ClassifyZeroRoots1(reps, positiveRoots, P0, P1, P2);
+    p0 = QSVector{ reps.sub02, -reps.sub12, reps.sub22 };
+    p1 = QSVector{ reps.a00, reps.a01, reps.a02 };
+    p2 = Cross(p0, p1);
+
+    return ClassifyZeroRoots1(reps, positiveRoots, p0, p1, p2);
 }
 
 template <typename Real>
-int QuadricSurface<Real>::ClassifyZeroRoots1 (const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1,const QSVector& P2)
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::ClassifyZeroRoots1(const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2)
 {
-	QRational E0 = P0.GetX()*reps.B0 + P0.GetY()*reps.B1 +P0.GetZ()*reps.B2;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (E0 != QRational(0))
+    const auto e0 = P0.GetX() * reps.b0 + P0.GetY() * reps.b1 + P0.GetZ() * reps.b2;
+
+    if (e0 != QRational{ 0 })
     {
         if (positiveRoots == 1)
         {
-            return QT_HYPERBOLIC_PARABOLOID;
+            return Type::HyperbolicParaboloid;
         }
         else
         {
-            return QT_ELLIPTIC_PARABOLOID;
+            return Type::EllipticParaboloid;
         }
     }
 
-    // Matrix F.
-	QRational F11 = P1.GetX()*(reps.A00*P1.GetX() + reps.A01*P1.GetY() +
-					reps.A02*P1.GetZ()) + P1.GetY()*(reps.A01*P1.GetX() +
-					reps.A11*P1.GetY() + reps.A12*P1.GetZ()) + P1.GetZ()*(
-					reps.A02*P1.GetX() + reps.A12*P1.GetY() + reps.A22*P1.GetZ());
+    const auto f11 = P1.GetX() * (reps.a00 * P1.GetX() + reps.a01 * P1.GetY() + reps.a02 * P1.GetZ()) +
+                     P1.GetY() * (reps.a01 * P1.GetX() + reps.a11 * P1.GetY() + reps.a12 * P1.GetZ()) +
+                     P1.GetZ() * (reps.a02 * P1.GetX() + reps.a12 * P1.GetY() + reps.a22 * P1.GetZ());
 
-	QRational F12 = P2.GetX()*(reps.A00*P1.GetX() + reps.A01*P1.GetY() +
-					reps.A02*P1.GetZ()) + P2.GetY()*(reps.A01*P1.GetX() +
-					reps.A11*P1.GetY() + reps.A12*P1.GetZ()) + P2.GetZ()*(
-					reps.A02*P1.GetX() + reps.A12*P1.GetY() + reps.A22*P1.GetZ());
+    const auto f12 = P2.GetX() * (reps.a00 * P1.GetX() + reps.a01 * P1.GetY() + reps.a02 * P1.GetZ()) +
+                     P2.GetY() * (reps.a01 * P1.GetX() + reps.a11 * P1.GetY() + reps.a12 * P1.GetZ()) +
+                     P2.GetZ() * (reps.a02 * P1.GetX() + reps.a12 * P1.GetY() + reps.a22 * P1.GetZ());
 
-	QRational F22 = P2.GetX()*(reps.A00*P2.GetX() + reps.A01*P2.GetY() +
-					reps.A02*P2.GetZ()) + P2.GetY()*(reps.A01*P2.GetX() +
-					reps.A11*P2.GetY() + reps.A12*P2.GetZ()) + P2.GetZ()*(
-					reps.A02*P2.GetX() + reps.A12*P2.GetY() + reps.A22*P2.GetZ());
+    const auto f22 = P2.GetX() * (reps.a00 * P2.GetX() + reps.a01 * P2.GetY() + reps.a02 * P2.GetZ()) +
+                     P2.GetY() * (reps.a01 * P2.GetX() + reps.a11 * P2.GetY() + reps.a12 * P2.GetZ()) +
+                     P2.GetZ() * (reps.a02 * P2.GetX() + reps.a12 * P2.GetY() + reps.a22 * P2.GetZ());
 
-    // Vector g.
-	QRational G1 = P1.GetX()*reps.B0 + P1.GetY()*reps.B1 + P1.GetZ()*reps.B2;
-	QRational G2 = P2.GetX()*reps.B0 + P2.GetY()*reps.B1 + P2.GetZ()*reps.B2;
+    const auto g1 = P1.GetX() * reps.b0 + P1.GetY() * reps.b1 + P1.GetZ() * reps.b2;
+    const auto g2 = P2.GetX() * reps.b0 + P2.GetY() * reps.b1 + P2.GetZ() * reps.b2;
 
-    // Compute g^T*F^{-1}*g/4 - c.
-    QRational fourDet = QRational(4)*(F11*F22 - F12*F12);
-    QRational r = (G1*(F22*G1-F12*G2)+G2*(F11*G2-F12*G1))/fourDet - reps.C;
+    const auto fourDet = QRational{ 4 } * (f11 * f22 - f12 * f12);
+    const auto r = (g1 * (f22 * g1 - f12 * g2) + g2 * (f11 * g2 - f12 * g1)) / fourDet - reps.c;
 
-	if (r > QRational(0))
+    if (r > QRational{ 0 })
     {
         if (positiveRoots == 2)
         {
-            return QT_ELLIPTIC_CYLINDER;
+            return Type::EllipticCylinder;
         }
         else if (positiveRoots == 1)
         {
-            return QT_HYPERBOLIC_CYLINDER;
+            return Type::HyperbolicCylinder;
         }
         else
         {
-            return QT_NONE;
+            return Type::None;
         }
     }
-	else if (r < QRational(0))
+    else if (r < QRational{ 0 })
     {
         if (positiveRoots == 2)
         {
-            return QT_NONE;
+            return Type::None;
         }
         else if (positiveRoots == 1)
         {
-            return QT_HYPERBOLIC_CYLINDER;
+            return Type::HyperbolicCylinder;
         }
         else
         {
-            return QT_ELLIPTIC_CYLINDER;
+            return Type::EllipticCylinder;
         }
     }
 
-    // else Real == 0
-    return (positiveRoots == 1 ? QT_TWO_PLANES : QT_LINE);
+    return (positiveRoots == 1 ? Type::TowPlane : Type::Line);
 }
 
 template <typename Real>
-int QuadricSurface<Real>::ClassifyZeroRoots2 (const RReps& reps, int positiveRoots)
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::ClassifyZeroRoots2(const RReps& reps, int positiveRoots)
 {
-    // Generate an orthonormal set {p0,p1,p2}, where p0 and p1 are
-    // eigenvectors of A corresponding to eigenvalue zero.  The vector p2 is
-    // an eigenvector of A corresponding to eigenvalue c2.
-    QSVector P0, P1, P2;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (reps.A00 != QRational(0) || reps.A01 != QRational(0) || reps.A02 != QRational(0))
+    QSVector p0{};
+    QSVector p1{};
+    QSVector p2{};
+
+    if (reps.a00 != QRational{ 0 } || reps.a01 != QRational{ 0 } || reps.a02 != QRational{ 0 })
     {
-        // row 0 is not zero
-        P2 = QSVector(reps.A00,reps.A01,reps.A02);
+        p2 = QSVector{ reps.a00, reps.a01, reps.a02 };
     }
-	else if (reps.A01 != QRational(0) || reps.A11 != QRational(0) || reps.A12 != QRational(0))
+    else if (reps.a01 != QRational{ 0 } || reps.a11 != QRational{ 0 } || reps.a12 != QRational{ 0 })
     {
-        // row 1 is not zero
-        P2 = QSVector(reps.A01,reps.A11,reps.A12);
+        p2 = QSVector{ reps.a01, reps.a11, reps.a12 };
     }
     else
     {
-        // row 2 is not zero
-        P2 = QSVector(reps.A02,reps.A12,reps.A22);
+        p2 = QSVector{ reps.a02, reps.a12, reps.a22 };
     }
 
-	if (P2.GetX() != QRational(0))
+    if (p2.GetX() != QRational{ 0 })
     {
-		P1.SetX( P2.GetY());
-		P1.SetY(-P2.GetX());
-		P1.SetZ(QRational(0));
+        p1.SetX(p2.GetY());
+        p1.SetY(-p2.GetX());
+        p1.SetZ(QRational{ 0 });
     }
     else
     {
-		P1.SetX(QRational(0));
-		P1.SetY( P2.GetZ());
-		P1.SetZ( -P2.GetY());
+        p1.SetX(QRational{ 0 });
+        p1.SetY(p2.GetZ());
+        p1.SetZ(-p2.GetY());
     }
-	P0 = Cross(P1,P2);
+    p0 = Cross(p1, p2);
 
-    return ClassifyZeroRoots2(reps, positiveRoots, P0, P1, P2);
+    return ClassifyZeroRoots2(reps, positiveRoots, p0, p1, p2);
 }
 
 template <typename Real>
-int QuadricSurface<Real>::ClassifyZeroRoots2 (const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2)
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::ClassifyZeroRoots2(const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2)
 {
-	QRational E0 = P0.GetX()*reps.B0 + P0.GetY()*reps.B1 + P0.GetZ()*reps.B1;
-	if (E0 != QRational(0))
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto e0 = P0.GetX() * reps.b0 + P0.GetY() * reps.b1 + P0.GetZ() * reps.b1;
+    if (e0 != QRational{ 0 })
     {
-        return QT_PARABOLIC_CYLINDER;
+        return Type::ParabolicCylinder;
     }
 
-	QRational E1 = P1.GetX()*reps.B0 + P1.GetY()*reps.B1 + P1.GetZ()*reps.B1;
-	if (E1 != QRational(0))
+    const auto e1 = P1.GetX() * reps.b0 + P1.GetY() * reps.b1 + P1.GetZ() * reps.b1;
+    if (e1 != QRational{ 0 })
     {
-        return QT_PARABOLIC_CYLINDER;
+        return Type::ParabolicCylinder;
     }
 
-	QRational F1 = reps.C2*(Dot(P2,P2));
-	QRational E2 = P2.GetX()*reps.B0 + P2.GetY()*reps.B1 + P2.GetZ()*reps.B1;
-    QRational r = E2*E2/(QRational(4)*F1) - reps.C;
-	if (r > QRational(0))
+    const auto f1 = reps.c2 * (Dot(P2, P2));
+    const auto e2 = P2.GetX() * reps.b0 + P2.GetY() * reps.b1 + P2.GetZ() * reps.b1;
+    const auto r = e2 * e2 / (QRational{ 4 } * f1) - reps.c;
+    if (r > QRational{ 0 })
     {
         if (positiveRoots == 1)
         {
-            return QT_TWO_PLANES;
+            return Type::TowPlane;
         }
         else
         {
-            return QT_NONE;
+            return Type::None;
         }
     }
-	else if (r < QRational(0))
+    else if (r < QRational{ 0 })
     {
         if (positiveRoots == 1)
         {
-            return QT_NONE;
+            return Type::None;
         }
         else
         {
-            return QT_TWO_PLANES;
+            return Type::TowPlane;
         }
     }
 
-    // else Real == 0
-    return QT_PLANE;
+    return Type::Plane;
 }
 
 template <typename Real>
-int QuadricSurface<Real>::ClassifyZeroRoots3 (const RReps& reps)
+typename Mathematics::QuadricSurface<Real>::Type Mathematics::QuadricSurface<Real>::ClassifyZeroRoots3(const RReps& reps)
 {
-	if (reps.B0 != QRational(0) || reps.B1 != QRational(0) || reps.B2 != QRational(0))
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (reps.b0 != QRational{ 0 } || reps.b1 != QRational{ 0 } || reps.b2 != QRational{ 0 })
     {
-        return QT_PLANE;
+        return Type::Plane;
     }
 
-    return QT_NONE;
+    return Type::None;
 }
 
 template <typename Real>
-QuadricSurface<Real>::RReps::RReps (const Real coeff[10])
+Mathematics::QuadricSurface<Real>::RReps::RReps(const std::array<Real, 10>& coeff)
 {
-    QRational oneHalf(1,2);
+    const QRational oneHalf{ 1, 2 };
 
-    C = QRational(coeff[0]);
-    B0 = QRational(coeff[1]);
-    B1 = QRational(coeff[2]);
-    B2 = QRational(coeff[3]);
-    A00 = QRational(coeff[4]);
-    A01 = oneHalf*QRational(coeff[5]);
-    A02 = oneHalf*QRational(coeff[6]);
-    A11 = QRational(coeff[7]);
-    A12 = oneHalf*QRational(coeff[8]);
-    A22 = QRational(coeff[9]);
+    c = QRational{ coeff.at(0) };
+    b0 = QRational{ coeff.at(1) };
+    b1 = QRational{ coeff.at(2) };
+    b2 = QRational{ coeff.at(3) };
+    a00 = QRational{ coeff.at(4) };
+    a01 = oneHalf * QRational{ coeff.at(5) };
+    a02 = oneHalf * QRational{ coeff.at(6) };
+    a11 = QRational{ coeff.at(7) };
+    a12 = oneHalf * QRational{ coeff.at(8) };
+    a22 = QRational{ coeff.at(9) };
 
-    Sub00 = A11*A22 - A12*A12;
-    Sub01 = A01*A22 - A12*A02;
-    Sub02 = A01*A12 - A02*A11;
-    Sub11 = A00*A22 - A02*A02;
-    Sub12 = A00*A12 - A02*A01;
-    Sub22 = A00*A11 - A01*A01;
-    C0 = A00*Sub00 - A01*Sub01 + A02*Sub02;
-    C1 = Sub00 + Sub11 + Sub22;
-    C2 = A00 + A11 + A22;
+    sub00 = a11 * a22 - a12 * a12;
+    sub01 = a01 * a22 - a12 * a02;
+    sub02 = a01 * a12 - a02 * a11;
+    sub11 = a00 * a22 - a02 * a02;
+    sub12 = a00 * a12 - a02 * a01;
+    sub22 = a00 * a11 - a01 * a01;
+    c0 = a00 * sub00 - a01 * sub01 + a02 * sub02;
+    c1 = sub00 + sub11 + sub22;
+    c2 = a00 + a11 + a22;
 }
 
- 
-
-}
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_DETAIL_H

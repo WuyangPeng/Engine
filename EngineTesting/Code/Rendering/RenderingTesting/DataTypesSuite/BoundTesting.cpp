@@ -17,7 +17,13 @@
 #include <vector>
 
 using std::vector;
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26429)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering,BoundTesting) 
 
 void Rendering::BoundTesting
@@ -43,7 +49,7 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 // 
-//         float firstRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float firstRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 //         Bound firstBound(firstCenter, firstRadius);
 // 
@@ -54,7 +60,7 @@ void Rendering::BoundTesting
 //                                    firstFloatRandomDistribution(generator),
 //                                    firstFloatRandomDistribution(generator));
 // 
-//         float secondRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float secondRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 //         firstBound.SetCenter(secondCenter);
 // 
@@ -108,7 +114,7 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 // 
-//         float firstRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float firstRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 //         Bound firstBound(firstCenter, firstRadius);  
 // 
@@ -116,7 +122,7 @@ void Rendering::BoundTesting
 //                                    firstFloatRandomDistribution(generator),
 //                                    firstFloatRandomDistribution(generator));
 // 
-//         float secondRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float secondRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 //         Bound secondBound(secondCenter, secondRadius);
 // 		Bound thirdBound(firstBound);
@@ -143,8 +149,8 @@ void Rendering::BoundTesting
 //         }
 //         else
 //         {
-//             float length = Mathematics::FloatMath::Sqrt(lengthSqruared);
-//             if (Mathematics::FloatMath::sm_ZeroTolerance < length)
+//             float length = Mathematics::MathF::Sqrt(lengthSqruared);
+//             if (Mathematics::MathF::sm_ZeroTolerance < length)
 //             {
 //                 float coefficient = (length + radiusDifference) / (2.0f * length);
 // 
@@ -173,7 +179,7 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 // 
-//         float firstRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float firstRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 //         Bound firstBound(firstCenter, firstRadius); 
 // 
@@ -251,7 +257,7 @@ void Rendering::BoundTesting
 // 	        }
 // 	    }
 // 
-//         ASSERT_APPROXIMATE(Mathematics::FloatMath::Sqrt(radius),firstBound.GetRadius(),1e-8f); 
+//         ASSERT_APPROXIMATE(Mathematics::MathF::Sqrt(radius),firstBound.GetRadius(),1e-8f); 
 	} 
 }
 
@@ -267,7 +273,7 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 // 
-//         float firstRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float firstRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 //         Bound firstBound(firstCenter, firstRadius);   
 // 
@@ -281,15 +287,15 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 // 
-//         float firstLength = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float firstLength = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 // 
 // 	    ASSERT_TRUE(firstBound.TestIntersection(firstCenter,firstVector,
-// 	                                            -Mathematics::FloatMath::sm_MaxReal,
-// 	                                            Mathematics::FloatMath::sm_MaxReal));
+// 	                                            -Mathematics::MathF::maxReal,
+// 	                                            Mathematics::MathF::maxReal));
 // 
 // 	    ASSERT_TRUE(firstBound.TestIntersection(firstCenter,firstVector,
 // 	                                            0.0f,
-// 	                                            Mathematics::FloatMath::sm_MaxReal));
+// 	                                            Mathematics::MathF::maxReal));
 // 		
 //         Bound::AVector difference = firstOrigin - firstCenter;
 //         float a = difference.SquaredLength() - firstRadius * firstRadius;
@@ -297,13 +303,13 @@ void Rendering::BoundTesting
 //         if (a <= 0.0f)
 //         {
 //             ASSERT_TRUE(firstBound.TestIntersection(firstOrigin,firstVector,
-// 	                                                -Mathematics::FloatMath::sm_MaxReal,
-// 	                                                Mathematics::FloatMath::sm_MaxReal));
+// 	                                                -Mathematics::MathF::maxReal,
+// 	                                                Mathematics::MathF::maxReal));
 // 
 // 	    
 //             ASSERT_TRUE(firstBound.TestIntersection(firstOrigin,firstVector,
 //                                                     0.0f,
-//                                                     Mathematics::FloatMath::sm_MaxReal));
+//                                                     Mathematics::MathF::maxReal));
 //         }
 // 		else
 // 		{
@@ -312,16 +318,16 @@ void Rendering::BoundTesting
 // 			{
 //                 ASSERT_FALSE(firstBound.TestIntersection(firstOrigin,firstVector,
 //                                                          0.0f,
-//                                                          Mathematics::FloatMath::sm_MaxReal));
+//                                                          Mathematics::MathF::maxReal));
 // 			}
 //             else
 //             {
 //                 float discr = dot * dot - a;
-//                 ASSERT_EQUAL(0.0f <= discr,firstBound.TestIntersection(firstOrigin,firstVector,0.0f,Mathematics::FloatMath::sm_MaxReal));
+//                 ASSERT_EQUAL(0.0f <= discr,firstBound.TestIntersection(firstOrigin,firstVector,0.0f,Mathematics::MathF::maxReal));
 //             }
 // 
 // 			float discr = dot * dot - a;
-// 			ASSERT_EQUAL(0.0f <= discr,firstBound.TestIntersection(firstOrigin,firstVector,-Mathematics::FloatMath::sm_MaxReal,Mathematics::FloatMath::sm_MaxReal));
+// 			ASSERT_EQUAL(0.0f <= discr,firstBound.TestIntersection(firstOrigin,firstVector,-Mathematics::MathF::maxReal,Mathematics::MathF::maxReal));
 // 		}
 // 
 //         float segmentExtent = 0.5f * (0.0f + firstLength);
@@ -346,7 +352,7 @@ void Rendering::BoundTesting
 //         }
 // 		else
 // 		{
-// 			ASSERT_EQUAL(0.0f < qm && Mathematics::FloatMath::FAbs(dot) < segmentExtent,
+// 			ASSERT_EQUAL(0.0f < qm && Mathematics::MathF::FAbs(dot) < segmentExtent,
 //                          firstBound.TestIntersection(firstCenter, firstVector,0.0f, firstLength));
 // 		}       
 	}
@@ -365,7 +371,7 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 //         
-//         float firstRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float firstRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 //         
 //         Bound firstBound(firstCenter, firstRadius);
 //         
@@ -379,7 +385,7 @@ void Rendering::BoundTesting
 //                                   firstFloatRandomDistribution(generator),
 //                                   firstFloatRandomDistribution(generator));
 //         
-//         float secondRadius = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float secondRadius = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 //         
 //         Bound secondBound(secondCenter, secondRadius);
 //         
@@ -389,7 +395,7 @@ void Rendering::BoundTesting
 //         
 //         secondVector.Normalize();
 //         
-//         float max = Mathematics::FloatMath::FAbs(firstFloatRandomDistribution(generator));
+//         float max = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
 //         
 //         Bound::AVector difference = firstBound.GetCenter() - secondBound.GetCenter();
 //         float radiusSum = firstBound.GetRadius() + secondBound.GetRadius();

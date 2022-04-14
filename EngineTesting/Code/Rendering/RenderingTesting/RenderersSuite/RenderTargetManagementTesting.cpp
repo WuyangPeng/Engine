@@ -12,7 +12,7 @@
 #include "Rendering/Renderers/RendererManager.h" 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformRenderTargetTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::PlatformRenderTargetTesting
 	::MainTest()
 { 

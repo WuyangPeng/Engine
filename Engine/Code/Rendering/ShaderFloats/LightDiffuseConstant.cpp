@@ -34,7 +34,7 @@ Rendering::LightDiffuseConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,LightDiffuseConstant)
 
-void Rendering::LightDiffuseConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::LightDiffuseConstant::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

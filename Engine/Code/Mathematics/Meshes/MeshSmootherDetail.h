@@ -1,182 +1,228 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 11:27)
 
 #ifndef MATHEMATICS_MESHES_MESH_SMOOTHER_DETAIL_H
 #define MATHEMATICS_MESHES_MESH_SMOOTHER_DETAIL_H
 
 #include "MeshSmoother.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::MeshSmoother<Real>::MeshSmoother()
+Mathematics::MeshSmoother<Real>::MeshSmoother() noexcept
+    : numVertices{},
+      vertices{},
+      numTriangles{},
+      indices{},
+      normals{},
+      means{},
+      neighborCounts{}
 {
-    mNumVertices = 0;
-    mVertices = 0;
-    mNumTriangles = 0;
-    mIndices = 0;
-    mNormals = 0;
-    mMeans = 0;
-    mNeighborCounts = 0;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-Mathematics::MeshSmoother<Real>::MeshSmoother(int numVertices, Vector3<Real>* vertices, int numTriangles, const int* indices)
+Mathematics::MeshSmoother<Real>::MeshSmoother(int numVertices, const std::vector<Vector3<Real>>& vertices, int numTriangles, const std::vector<int>& indices)
+    : numVertices{},
+      vertices{},
+      numTriangles{},
+      indices{},
+      normals{},
+      means{},
+      neighborCounts{}
 {
-    mVertices = 0;
-    mNormals = 0;
-    mIndices = 0;
-    mMeans = 0;
-    mNeighborCounts = 0;
-
     Create(numVertices, vertices, numTriangles, indices);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-Mathematics::MeshSmoother<Real>::~MeshSmoother()
+bool Mathematics::MeshSmoother<Real>::IsValid() const noexcept
 {
-    Destroy();
+    return true;
 }
 
+#endif  // OPEN_CLASS_INVARIANT
+
 template <typename Real>
-void Mathematics::MeshSmoother<Real>::Create(int numVertices, Vector3<Real>* vertices, int numTriangles, const int* indices)
+void Mathematics::MeshSmoother<Real>::Create(int newNumVertices, const std::vector<Vector3<Real>>& newVertices, int newNumTriangles, const std::vector<int>& newIndices)
 {
-    // Remove previously allocated smoother data.
+    MATHEMATICS_CLASS_IS_VALID_9;
+
     Destroy();
 
-    mNumVertices = numVertices;
-    mVertices = vertices;
-    mNumTriangles = numTriangles;
-    mIndices = indices;
+    numVertices = newNumVertices;
+    vertices = newVertices;
+    numTriangles = newNumTriangles;
+    indices = newIndices;
 
-    mNormals = nullptr;  //  NEW1<Vector3<Real> >(mNumVertices);
-    mMeans = nullptr;  // NEW1<Vector3<Real> >(mNumVertices);
-    mNeighborCounts = nullptr;  // NEW1<int>(mNumVertices);
+    normals.resize(numVertices);
+    means.resize(numVertices);
+    neighborCounts.resize(numVertices);
 
-    // Count the number of vertex neighbors.
-    memset(mNeighborCounts, 0, mNumVertices * sizeof(int));
-    const int* current = mIndices;
-    for (int i = 0; i < mNumTriangles; ++i)
+    auto index = 0;
+    for (auto i = 0; i < numTriangles; ++i)
     {
-        mNeighborCounts[*current++] += 2;
-        mNeighborCounts[*current++] += 2;
-        mNeighborCounts[*current++] += 2;
+        neighborCounts.at(indices.at(index++)) += 2;
+        neighborCounts.at(indices.at(index++)) += 2;
+        neighborCounts.at(indices.at(index++)) += 2;
     }
 }
 
 template <typename Real>
-void Mathematics::MeshSmoother<Real>::Destroy()
+void Mathematics::MeshSmoother<Real>::Destroy() noexcept
 {
-    //     DELETE1(mNormals);
-    //     DELETE1(mMeans);
-    //     DELETE1(mNeighborCounts);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    numVertices = 0;
+    vertices.clear();
+    numTriangles = 0;
+    indices.clear();
+
+    normals.clear();
+    means.clear();
+    neighborCounts.clear();
 }
 
 template <typename Real>
 void Mathematics::MeshSmoother<Real>::Update(Real t)
 {
-    memset(mNormals, 0, mNumVertices * sizeof(Vector3<Real>));
-    memset(mMeans, 0, mNumVertices * sizeof(Vector3<Real>));
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    const int* current = mIndices;
-    int i;
-    for (i = 0; i < mNumTriangles; ++i)
+    normals.clear();
+    means.clear();
+
+    auto index = 0;
+
+    for (auto i = 0; i < numTriangles; ++i)
     {
-        int v0 = *current++;
-        int v1 = *current++;
-        int v2 = *current++;
+        auto v0 = indices.at(index++);
+        auto v1 = indices.at(index++);
+        auto v2 = indices.at(index++);
 
-        Vector3<Real>& V0 = mVertices[v0];
-        Vector3<Real>& V1 = mVertices[v1];
-        Vector3<Real>& V2 = mVertices[v2];
+        auto& vertix0 = vertices.at(v0);
+        auto& vertix1 = vertices.at(v1);
+        auto& vertix2 = vertices.at(v2);
 
-        Vector3<Real> edge1 = V1 - V0;
-        Vector3<Real> edge2 = V2 - V0;
-        Vector3<Real> normal = Vector3Tools<Real>::CrossProduct(edge1, edge2);
+        auto edge1 = vertix1 - vertix0;
+        auto edge2 = vertix2 - vertix0;
+        const auto normal = Vector3Tools<Real>::CrossProduct(edge1, edge2);
 
-        mNormals[v0] += normal;
-        mNormals[v1] += normal;
-        mNormals[v2] += normal;
+        normals.at(v0) += normal;
+        normals.at(v1) += normal;
+        normals.at(v2) += normal;
 
-        mMeans[v0] += V1 + V2;
-        mMeans[v1] += V2 + V0;
-        mMeans[v2] += V0 + V1;
+        means.at(v0) += vertix1 + vertix2;
+        means.at(v1) += vertix2 + vertix0;
+        means.at(v2) += vertix0 + vertix1;
     }
 
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        mNormals[i].Normalize();
-        mMeans[i] /= (Real)mNeighborCounts[i];
+        normals.at(i).Normalize();
+        means.at(i) /= Math<Real>::GetValue(neighborCounts.at(i));
     }
 
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
         if (VertexInfluenced(i, t))
         {
-            Vector3<Real> localDiff = mMeans[i] - mVertices[i];
-            Vector3<Real> surfaceNormal = Vector3Tools<Real>::DotProduct(localDiff, mNormals[i]) * mNormals[i];
-            Vector3<Real> tangent = localDiff - surfaceNormal;
+            auto localDiff = means.at(i) - vertices.at(i);
+            auto surfaceNormal = Vector3Tools<Real>::DotProduct(localDiff, normals.at(i)) * normals.at(i);
+            auto tangent = localDiff - surfaceNormal;
 
-            Real tanWeight = GetTangentWeight(i, t);
-            Real norWeight = GetNormalWeight(i, t);
-            mVertices[i] += tanWeight * tangent + norWeight * mNormals[i];
+            auto tanWeight = GetTangentWeight(i, t);
+            auto norWeight = GetNormalWeight(i, t);
+            vertices.at(i) += tanWeight * tangent + norWeight * normals.at(i);
         }
     }
 }
 
 template <typename Real>
-bool Mathematics::MeshSmoother<Real>::VertexInfluenced(int, Real)
+bool Mathematics::MeshSmoother<Real>::VertexInfluenced(MAYBE_UNUSED int i, MAYBE_UNUSED Real t)
 {
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
     return true;
 }
 
 template <typename Real>
-Real Mathematics::MeshSmoother<Real>::GetTangentWeight(int, Real)
+Real Mathematics::MeshSmoother<Real>::GetTangentWeight(MAYBE_UNUSED int i, MAYBE_UNUSED Real t)
 {
-    return Real{ 0.5 };
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return Math<Real>::GetRational(1, 2);
 }
 
 template <typename Real>
-Real Mathematics::MeshSmoother<Real>::GetNormalWeight(int, Real)
+Real Mathematics::MeshSmoother<Real>::GetNormalWeight(MAYBE_UNUSED int i, MAYBE_UNUSED Real t)
 {
-    return Real{ 0.0 };
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    CoreTools::DisableNoexcept();
+
+    return Math<Real>::GetValue(0);
 }
 
 template <typename Real>
-int Mathematics::MeshSmoother<Real>::GetNumVertices() const
+int Mathematics::MeshSmoother<Real>::GetNumVertices() const noexcept
 {
-    return mNumVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numVertices;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshSmoother<Real>::GetVertices() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshSmoother<Real>::GetVertices() const
 {
-    return mVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertices;
 }
 
 template <typename Real>
-int Mathematics::MeshSmoother<Real>::GetNumTriangles() const
+int Mathematics::MeshSmoother<Real>::GetNumTriangles() const noexcept
 {
-    return mNumTriangles;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numTriangles;
 }
 
 template <typename Real>
-const int* Mathematics::MeshSmoother<Real>::GetIndices() const
+std::vector<int> Mathematics::MeshSmoother<Real>::GetIndices() const
 {
-    return mIndices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return indices;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshSmoother<Real>::GetNormals() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshSmoother<Real>::GetNormals() const
 {
-    return mNormals;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return normals;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::MeshSmoother<Real>::GetMeans() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::MeshSmoother<Real>::GetMeans() const
 {
-    return mMeans;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return means;
 }
 
 #endif  // MATHEMATICS_MESHES_MESH_SMOOTHER_DETAIL_H

@@ -1,161 +1,147 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/22 17:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.8.0.5 (2022/04/02 16:40)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Polypoint.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, Polypoint);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polypoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polypoint);
 
-Rendering::Polypoint
-	::Polypoint(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer)
-	:ParentType{ VisualPrimitiveType::Polypoint,vertexformat, vertexbuffer,IndexBufferSharedPtr() }, m_NumPoints{ vertexbuffer->GetNumElements() }
+Rendering::Polypoint::Polypoint(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer)
+    : ParentType{ VisualPrimitiveType::Polypoint, vertexformat, vertexbuffer, IndexBufferSharedPtr() }, pointsCount{ vertexbuffer->GetNumElements() }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
- 
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::Polypoint
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid() && 0 <= m_NumPoints)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-int Rendering::Polypoint
-	::GetMaxNumPoints() const
+bool Rendering::Polypoint::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return GetConstVertexBuffer()->GetNumElements();
+    if (ParentType::IsValid() && 0 <= pointsCount)
+        return true;
+    else
+        return false;
 }
 
-void Rendering::Polypoint
-	::SetNumPoints(int numPoints)
-{
-	;
+#endif  // OPEN_CLASS_INVARIANT
 
-const	auto numVertices = GetMaxNumPoints();
+int Rendering::Polypoint::GetMaxNumPoints() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return GetConstVertexBuffer()->GetNumElements();
+}
+
+void Rendering::Polypoint::SetNumPoints(int numPoints) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto numVertices = GetMaxNumPoints();
     if (0 <= numPoints && numPoints <= numVertices)
     {
-        m_NumPoints = numPoints;
+        pointsCount = numPoints;
     }
     else
     {
-		m_NumPoints = numVertices;
+        pointsCount = numVertices;
     }
 }
 
-int Rendering::Polypoint
-	::GetNumPoints() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_NumPoints;
-}
- 
-Rendering::Polypoint
-	::Polypoint(LoadConstructor value)
-	:ParentType{ value }, m_NumPoints{ 0 }
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-int Rendering::Polypoint
-    ::GetStreamingSize () const
+int Rendering::Polypoint::GetNumPoints() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
+
+    return pointsCount;
+}
+
+Rendering::Polypoint::Polypoint(LoadConstructor value)
+    : ParentType{ value }, pointsCount{ 0 }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+int Rendering::Polypoint::GetStreamingSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     auto size = ParentType::GetStreamingSize();
-    
-	size += CORE_TOOLS_STREAM_SIZE(m_NumPoints);
 
-	return size;
+    size += CORE_TOOLS_STREAM_SIZE(pointsCount);
+
+    return size;
 }
 
-uint64_t Rendering::Polypoint
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::Polypoint::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	return ParentType::Register(target);	 
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::Polypoint
-    ::Save (CoreTools::BufferTarget& target) const
+void Rendering::Polypoint::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	target.Write(m_NumPoints);
-     
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    target.Write(pointsCount);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Polypoint
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::Polypoint::Link(CoreTools::ObjectLink& source)
 {
-	;
-    
-	ParentType::Link(source);	
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
 }
 
-void Rendering::Polypoint
-    ::PostLink ()
+void Rendering::Polypoint::PostLink()
 {
-	;
-    
-	ParentType::PostLink();     
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-void Rendering::Polypoint
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::Polypoint::Load(CoreTools::BufferSource& source)
 {
-	;
-    
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
-	
-	source.Read(m_NumPoints);
-        
+
+    source.Read(pointsCount);
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::ControllerInterfaceSharedPtr Rendering::Polypoint
-	::Clone() const 
+Rendering::ControllerInterfaceSharedPtr Rendering::Polypoint::Clone() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Polypoint::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

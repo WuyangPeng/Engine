@@ -39,7 +39,7 @@ namespace Rendering
 		void ConvertingTest();
 		void OperatorTest();
 	
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

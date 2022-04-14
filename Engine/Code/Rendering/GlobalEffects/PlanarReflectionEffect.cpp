@@ -29,14 +29,14 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarReflectionEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PlanarReflectionEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PlanarReflectionEffect);
 
-Rendering::PlanarReflectionEffect ::PlanarReflectionEffect(int numPlanes)
+Rendering::PlanarReflectionEffect::PlanarReflectionEffect(int numPlanes)
     : mNumPlanes{ numPlanes }, mAlphaState{ std::make_shared<AlphaState>() }, mDepthState{ std::make_shared<DepthState>() }, mStencilState{ std::make_shared<StencilState>() }
 {
     mPlanes = nullptr;  // NEW1<TrianglesMeshSharedPtr>(mNumPlanes);
     mReflectances = nullptr;  // NEW1<float>(mNumPlanes);
 }
 
-Rendering::PlanarReflectionEffect ::~PlanarReflectionEffect()
+Rendering::PlanarReflectionEffect::~PlanarReflectionEffect()
 {
     EXCEPTION_TRY
     {
@@ -46,7 +46,7 @@ Rendering::PlanarReflectionEffect ::~PlanarReflectionEffect()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::PlanarReflectionEffect ::Draw(std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet)
+void Rendering::PlanarReflectionEffect::Draw(std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet)
 {
     // Save the current global state overrides for restoration later.
     const auto saveDState = renderer->GetOverrideDepthState();
@@ -214,7 +214,7 @@ void Rendering::PlanarReflectionEffect ::Draw(std::shared_ptr<Renderer> renderer
     }
 }
 
-void Rendering::PlanarReflectionEffect ::GetReflectionMatrixAndModelPlane(int i, Mathematics::MatrixF& reflection, Mathematics::PlaneF& modelPlane)
+void Rendering::PlanarReflectionEffect::GetReflectionMatrixAndModelPlane(int i, Mathematics::MatrixF& reflection, Mathematics::PlaneF& modelPlane)
 {
     // Compute the equation for the mirror plane in world coordinates.
     auto vertex = mPlanes[i]->GetWorldTriangle(0);
@@ -249,7 +249,7 @@ CoreTools::ObjectSharedPtr Rendering::PlanarReflectionEffect::
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarReflectionEffect ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarReflectionEffect::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects;
     auto found = ParentType::GetObjectByName(name);
@@ -268,7 +268,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarReflectionEffect ::GetA
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::PlanarReflectionEffect ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::PlanarReflectionEffect::GetConstObjectByName(const std::string& name) const
 {
     auto found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -288,7 +288,7 @@ CoreTools::ConstObjectSharedPtr Rendering::PlanarReflectionEffect ::GetConstObje
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarReflectionEffect ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarReflectionEffect::GetAllConstObjectsByName(const std::string& name) const
 {
     auto objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -304,12 +304,12 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarReflectionEffect :
 
 // Streaming support.
 
-Rendering::PlanarReflectionEffect ::PlanarReflectionEffect(LoadConstructor value)
+Rendering::PlanarReflectionEffect::PlanarReflectionEffect(LoadConstructor value)
     : ParentType{ value }, mNumPlanes{ 0 }, mPlanes{ 0 }, mReflectances{ 0 }
 {
 }
 
-int Rendering::PlanarReflectionEffect ::GetStreamingSize() const
+int Rendering::PlanarReflectionEffect::GetStreamingSize() const
 {
     auto size = ParentType::GetStreamingSize();
     size += CORE_TOOLS_STREAM_SIZE(mNumPlanes);
@@ -318,7 +318,7 @@ int Rendering::PlanarReflectionEffect ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::PlanarReflectionEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::PlanarReflectionEffect::Register(CoreTools::ObjectRegister& target) const
 {
     const auto id = ParentType::Register(target);
     if (0 < id)
@@ -330,7 +330,7 @@ uint64_t Rendering::PlanarReflectionEffect ::Register(CoreTools::ObjectRegister&
     return id;
 }
 
-void Rendering::PlanarReflectionEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::PlanarReflectionEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -342,17 +342,17 @@ void Rendering::PlanarReflectionEffect ::Save(CoreTools::BufferTarget& target) c
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::PlanarReflectionEffect ::Link([[maybe_unused]] CoreTools::ObjectLink& source)
+void Rendering::PlanarReflectionEffect::Link([[maybe_unused]] CoreTools::ObjectLink& source)
 {
     CoreTools::DisableNoexcept();
 }
 
-void Rendering::PlanarReflectionEffect ::PostLink()
+void Rendering::PlanarReflectionEffect::PostLink()
 {
     CoreTools::DisableNoexcept();
 }
 
-void Rendering::PlanarReflectionEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::PlanarReflectionEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -364,12 +364,12 @@ void Rendering::PlanarReflectionEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-int Rendering::PlanarReflectionEffect ::GetNumPlanes() const noexcept
+int Rendering::PlanarReflectionEffect::GetNumPlanes() const noexcept
 {
     return mNumPlanes;
 }
 
-void Rendering::PlanarReflectionEffect ::SetPlane(int i, TrianglesMeshSharedPtr plane)
+void Rendering::PlanarReflectionEffect::SetPlane(int i, TrianglesMeshSharedPtr plane) noexcept
 {
     // The culling flag is set to "always" because this effect is responsible
     // for drawing the TriMesh.  This prevents drawing attempts by another
@@ -378,17 +378,17 @@ void Rendering::PlanarReflectionEffect ::SetPlane(int i, TrianglesMeshSharedPtr 
     mPlanes[i]->SetCullingMode(CullingMode::Always);
 }
 
-Rendering::ConstTrianglesMeshSharedPtr Rendering::PlanarReflectionEffect ::GetPlane(int i) const noexcept
+Rendering::ConstTrianglesMeshSharedPtr Rendering::PlanarReflectionEffect::GetPlane(int i) const noexcept
 {
     return mPlanes[i];
 }
 
-void Rendering::PlanarReflectionEffect ::SetReflectance(int i, float reflectance) noexcept
+void Rendering::PlanarReflectionEffect::SetReflectance(int i, float reflectance) noexcept
 {
     mReflectances[i] = reflectance;
 }
 
-float Rendering::PlanarReflectionEffect ::GetReflectance(int i) const noexcept
+float Rendering::PlanarReflectionEffect::GetReflectance(int i) const noexcept
 {
     return mReflectances[i];
 }

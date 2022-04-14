@@ -31,7 +31,7 @@ namespace Rendering
         // be 2D.  The minimum and maximum texture coordinates are specified in
         // the constructor.  If you have none, set tcoordMin and tcoordMax to
         // null.
-        RectangleSurface(Mathematics::ParametricSurfacef* surface, int numUSamples, int numVSamples,
+        RectangleSurface(Mathematics::ParametricSurface<float>* surface, int numUSamples, int numVSamples,
                          VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax);
 
         ~RectangleSurface();
@@ -41,8 +41,8 @@ namespace Rendering
         RectangleSurface& operator=(RectangleSurface&&) = default;
 
         // Member access.
-        void SetSurface(Mathematics::ParametricSurfacef* surface) noexcept;
-        const Mathematics::ParametricSurfacef* GetSurface() const noexcept;
+        void SetSurface(Mathematics::ParametricSurface<float>* surface) noexcept;
+        const Mathematics::ParametricSurface<float>* GetSurface() const noexcept;
         int GetNumUSamples() const noexcept;
         int GetNumVSamples() const noexcept;
 
@@ -52,7 +52,7 @@ namespace Rendering
         void UpdateSurface();
 
     protected:
-        Mathematics::ParametricSurfacef* mSurface;
+        Mathematics::ParametricSurface<float>* mSurface;
         int mNumUSamples, mNumVSamples;
     };
 #include STSTEM_WARNING_PUSH

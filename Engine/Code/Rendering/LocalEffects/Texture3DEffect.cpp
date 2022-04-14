@@ -31,7 +31,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture3DEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture3DEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture3DEffect);
 
-Rendering::Texture3DEffect ::Texture3DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1, ShaderFlags::SamplerCoordinate coordinate2)
+Rendering::Texture3DEffect::Texture3DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1, ShaderFlags::SamplerCoordinate coordinate2)
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Texture2D", 2, 2, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -84,12 +84,12 @@ Rendering::Texture3DEffect ::Texture3DEffect(ShaderFlags::SamplerFilter filter, 
     InsertTechnique(technique);
 }
 
-Rendering::PixelShader* Rendering::Texture3DEffect ::GetPixelShader() const
+Rendering::PixelShader* Rendering::Texture3DEffect::GetPixelShader() const
 {
     return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture3DEffect ::CreateInstance(Texture3D* texture) const
+Rendering::VisualEffectInstance* Rendering::Texture3DEffect::CreateInstance(Texture3D* texture) const
 {
     VisualEffectInstance* instance = nullptr;  //  CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -104,10 +104,12 @@ Rendering::VisualEffectInstance* Rendering::Texture3DEffect ::CreateInstance(Tex
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture3DEffect ::CreateUniqueInstance(Texture3D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0,
+Rendering::VisualEffectInstance* Rendering::Texture3DEffect::CreateUniqueInstance(Texture3D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0,
                                                                                    ShaderFlags::SamplerCoordinate coordinate1, ShaderFlags::SamplerCoordinate coordinate2)
 {
     const Texture3DEffect* effect = nullptr;  // CoreTools::New0<Texture3DEffect>();
+    if (effect == nullptr)
+        return nullptr;
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -118,12 +120,12 @@ Rendering::VisualEffectInstance* Rendering::Texture3DEffect ::CreateUniqueInstan
 
 // Streaming support.
 
-Rendering::Texture3DEffect ::Texture3DEffect(LoadConstructor value)
+Rendering::Texture3DEffect::Texture3DEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::Texture3DEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::Texture3DEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -132,12 +134,12 @@ void Rendering::Texture3DEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Texture3DEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::Texture3DEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::Texture3DEffect ::PostLink()
+void Rendering::Texture3DEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -169,12 +171,12 @@ void Rendering::Texture3DEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::Texture3DEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Texture3DEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::Texture3DEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Texture3DEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -183,7 +185,7 @@ void Rendering::Texture3DEffect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::Texture3DEffect ::GetStreamingSize() const
+int Rendering::Texture3DEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

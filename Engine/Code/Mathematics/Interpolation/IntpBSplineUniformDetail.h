@@ -1,374 +1,439 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 12:28)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_DETAIL_H
 
 #include "IntpBSplineUniform.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpBSplineUniform<Real>::IntpBSplineUniform(int dims, int degree, const std::vector<int>& dim, const std::vector<Real>& data)
+    : dims{ dims },
+      degree{ degree },
+      dp1{ degree + 1 },
+      dp1ToN{ 1 },
+      dp1To2N{},
+      dim{ dim },
+      data{ data },
+      domMin(dims),
+      domMax(dims),
+      gridMin(dims),
+      gridMax(dims),
+      base(dims),
+      oldBase(dims),
+      matrix{ BlendMatrix(degree) },
+      cache{},
+      inter{},
+      poly{ dims, dp1 },
+      coeff{ dp1, dp1 },
+      product{},
+      skip{},
+      evaluateCallback{ nullptr }
 {
-    template <typename Real>
-    IntpBSplineUniform<Real>::IntpBSplineUniform(int dims, int degree, const int* dim, Real* data)
+    MATHEMATICS_ASSERTION_0(dims > 0 && degree > 0, "无效输入。\n");
+
+    for (auto i = 0; i < dims; ++i)
     {
-        // Get input data.
-        MATHEMATICS_ASSERTION_0(dims > 0 && degree > 0 && dim && data, "Invalid input\n");
-        int i;
-        for (i = 0; i < dims; ++i)
-        {
-            MATHEMATICS_ASSERTION_0(dim[i] > degree + 1, "Invalid input\n");
-        }
+        MATHEMATICS_ASSERTION_0(dim.at(i) > degree + 1, "无效输入。\n");
+    }
 
-        mDims = dims;
-        mDegree = degree;
-        mDim = nullptr;  //  NEW1<int>(mDims);
-        memcpy(mDim, dim, mDims * sizeof(int));
-        mData = data;
+    for (auto i = 0; i < dims; ++i)
+    {
+        dp1ToN *= dp1;
+    }
+    dp1To2N = dp1ToN * dp1ToN;
 
-        // Setup degree constants.
-        mDp1 = mDegree + 1;
-        mDp1ToN = 1;
-        for (i = 0; i < mDims; ++i)
+    for (auto i = 0; i < dims; ++i)
+    {
+        auto domSup = Math<Real>::GetValue(dim.at(i) - degree + 1);
+        auto next = (Math<Real>::GetRational(1, 2)) * (Math<Real>::GetValue(1) + domSup);
+        do
         {
-            mDp1ToN *= mDp1;
-        }
-        mDp1To2N = mDp1ToN * mDp1ToN;
+            domMax.at(i) = next;
+            next = (Math<Real>::GetRational(1, 2)) * (next + domSup);
+        } while (next < domSup);
+        domMin.at(i) = Math<Real>::GetValue(1);
+    }
 
-        // Compute domain [min,max] for B-spline.
-        mDomMin = nullptr;  //NEW1<Real>(mDims);
-        mDomMax = nullptr;  //NEW1<Real>(mDims);
-        for (i = 0; i < mDims; ++i)
+    for (auto i = 0; i < dims; ++i)
+    {
+        gridMin.at(i) = -1;
+        gridMax.at(i) = -1;
+    }
+
+    for (auto i = 0; i < dims; ++i)
+    {
+        oldBase.at(i) = -1;
+    }
+
+    cache.resize(dp1ToN);
+    inter.resize(dp1ToN);
+
+    for (auto row = 0; row <= degree; ++row)
+    {
+        for (auto col = row; col <= degree; ++col)
         {
-            Real domSup = (Real)(mDim[i] - mDegree + 1);
-            Real next = (Math::GetRational(1, 2)) * (Math::GetValue(1) + domSup);
-            do
+            coeff[row][col] = Math<Real>::GetValue(1);
+            for (auto i = 0; i <= row - 1; ++i)
             {
-                mDomMax[i] = next;
-                next = (Math::GetRational(1, 2)) * (next + domSup);
-            } while (next < domSup);
-            mDomMin[i] = Math::GetValue(1);
+                coeff[row][col] *= Math<Real>::GetValue(col - i);
+            }
+        }
+    }
+
+    product.resize(dp1To2N);
+    skip.resize(dp1To2N);
+    const auto coordSize = 2 * dims;
+    std::vector<int> coord(coordSize);
+
+    for (auto j = 0; j < dp1To2N; ++j)
+    {
+        auto temp = j;
+        for (auto i = 0; i < 2 * dims; ++i)
+        {
+            coord.at(i) = temp % dp1;
+            temp /= dp1;
         }
 
-        // Initialize grid extremes.
-        mGridMin = nullptr;  // NEW1<int>(mDims);
-        mGridMax = nullptr;  // NEW1<int>(mDims);
-        for (i = 0; i < mDims; ++i)
+        product.at(j) = Math<Real>::GetValue(1);
+        for (auto i = 0; i < dims; ++i)
         {
-            mGridMin[i] = -1;
-            mGridMax[i] = -1;
+            const auto nextIndex = i + dims;
+            product.at(j) *= matrix[coord.at(i)][coord.at(nextIndex)];
         }
 
-        // Initialize base indices.
-        mBase = nullptr;  //  NEW1<int>(mDims);
-        mOldBase = nullptr;  //  NEW1<int>(mDims);
-        for (i = 0; i < mDims; ++i)
+        skip.at(j) = 1;
+    }
+
+    for (auto i = 0; i < dp1To2N;)
+    {
+        auto j = i + 1;
+        for (; j < dp1To2N && product.at(j) == Math<Real>::GetValue(0); ++j)
         {
-            mOldBase[i] = -1;
+            ++skip.at(i);
         }
+        i = j;
+    }
 
-        // Generate spline blending matrix.
-        mMatrix = BlendMatrix(mDegree);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
 
-        // Cache for optimizing ComputeIntermediate().
-        mCache = nullptr;  // NEW1<Real>(mDp1ToN);
+#ifdef OPEN_CLASS_INVARIANT
 
-        // Storage for intermediate tensor product.
-        mInter = nullptr;  // NEW1<Real>(mDp1ToN);
+template <typename Real>
+bool Mathematics::IntpBSplineUniform<Real>::IsValid() const noexcept
+{
+    return true;
+}
 
-        // Polynomial allocations.
-        mPoly = nullptr;  // NEW1<Real*>(mDims);
-        for (i = 0; i < mDims; ++i)
+#endif  // OPEN_CLASS_INVARIAN
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetDimension() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return dims;
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetDegree() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return degree;
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetDomainMin(int i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return domMin.at(i);
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetDomainMax(int i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return domMax.at(i);
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetGridMin(int i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return gridMin.at(i);
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetGridMax(int i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return gridMax.at(i);
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniform<Real>::SetPolynomial(int order, Real diff, VariableLengthVector<Real>& polynomial)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto diffPower = Math<Real>::GetValue(1);
+    for (auto i = order; i <= degree; ++i)
+    {
+        polynomial[i] = coeff[order][i] * diffPower;
+        diffPower *= diff;
+    }
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::Choose(int n, int k) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (n <= 1 || k >= n)
+    {
+        return 1;
+    }
+
+    auto result = 1;
+
+    for (auto i = 0; i < k; ++i)
+    {
+        result *= n - i;
+    }
+    for (auto i = 1; i <= k; ++i)
+    {
+        result /= i;
+    }
+
+    return result;
+}
+
+template <typename Real>
+Mathematics::VariableMatrix<Real> Mathematics::IntpBSplineUniform<Real>::BlendMatrix(int degree)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto degP1 = degree + 1;
+
+    std::vector<std::vector<std::vector<int>>> aMat(degP1, std::vector<std::vector<int>>(degP1, std::vector<int>(degP1)));
+    std::vector<std::vector<std::vector<int>>> bMat(degP1, std::vector<std::vector<int>>(degP1, std::vector<int>(degP1)));
+
+    aMat.at(0).at(0).at(0) = 1;
+    bMat.at(0).at(0).at(0) = 1;
+
+    for (auto k = 1; k <= degree; ++k)
+    {
+        for (auto row = 0; row <= k; ++row)
         {
-            mPoly[i] = nullptr;  //  NEW1<Real>(mDp1);
-        }
-
-        // Coefficients for polynomial calculations.
-        mCoeff = nullptr;  //  NEW1<Real*>(mDp1);
-        for (int row = 0; row <= mDegree; ++row)
-        {
-            mCoeff[row] = nullptr;  // NEW1<Real>(mDp1);
-            for (int col = row; col <= mDegree; ++col)
+            for (auto col = 0; col <= k; ++col)
             {
-                mCoeff[row][col] = Math::GetValue(1);
-                for (i = 0; i <= row - 1; ++i)
+                const auto previousK = k - 1;
+                const auto previousCol = col - 1;
+                const auto previousRow = row - 1;
+                aMat.at(k).at(row).at(col) = 0;
+                if (col >= 1)
                 {
-                    mCoeff[row][col] *= (Real)(col - i);
-                }
-            }
-        }
-
-        // Tensor product of m with itself N times.
-        mProduct = nullptr;  // NEW1<Real>(mDp1To2N);
-        mSkip = nullptr;  // NEW1<int>(mDp1To2N);
-        int* coord = nullptr;  //  NEW1<int>(2 * mDims);  // for address decoding
-        int j;
-        for (j = 0; j < mDp1To2N; ++j)
-        {
-            int temp = j;
-            for (i = 0; i < 2 * mDims; ++i)
-            {
-                coord[i] = temp % mDp1;
-                temp /= mDp1;
-            }
-
-            mProduct[j] = Math::GetValue(1);
-            for (i = 0; i < mDims; ++i)
-            {
-                mProduct[j] *= mMatrix[coord[i]][coord[i + mDims]];
-            }
-
-            mSkip[j] = 1;
-        }
-        // DELETE1(coord);
-
-        // Compute increments to skip zero values of mtensor.
-        for (i = 0; i < mDp1To2N; /**/)
-        {
-            for (j = i + 1; j < mDp1To2N && mProduct[j] == Math<Real>::GetValue(0); ++j)
-            {
-                mSkip[i]++;
-            }
-            i = j;
-        }
-
-        mEvaluateCallback = 0;
-    }
-
-    template <typename Real>
-    IntpBSplineUniform<Real>::~IntpBSplineUniform()
-    {
-        // 		DELETE1(mDim);
-        // 		DELETE1(mDomMin);
-        // 		DELETE1(mDomMax);
-        // 		DELETE1(mGridMin);
-        // 		DELETE1(mGridMax);
-        // 		DELETE1(mBase);
-        // 		DELETE1(mOldBase);
-        // 		DELETE1(mCache);
-        // 		DELETE1(mInter);
-        // 		DELETE1(mProduct);
-        // 		DELETE1(mSkip);
-
-        int i;
-        for (i = 0; i < mDims; ++i)
-        {
-            //DELETE1(mPoly[i]);
-        }
-        //DELETE1(mPoly);
-
-        for (i = 0; i <= mDegree; ++i)
-        {
-            // 			DELETE1(mMatrix[i]);
-            // 			DELETE1(mCoeff[i]);
-        }
-        /*DELETE1(mMatrix);*/
-        //DELETE1(mCoeff);
-    }
-
-    template <typename Real>
-    int IntpBSplineUniform<Real>::GetDimension() const
-    {
-        return mDims;
-    }
-
-    template <typename Real>
-    int IntpBSplineUniform<Real>::GetDegree() const
-    {
-        return mDegree;
-    }
-
-    template <typename Real>
-    Real IntpBSplineUniform<Real>::GetDomainMin(int i) const
-    {
-        return mDomMin[i];
-    }
-
-    template <typename Real>
-    Real IntpBSplineUniform<Real>::GetDomainMax(int i) const
-    {
-        return mDomMax[i];
-    }
-
-    template <typename Real>
-    int IntpBSplineUniform<Real>::GetGridMin(int i) const
-    {
-        return mGridMin[i];
-    }
-
-    template <typename Real>
-    int IntpBSplineUniform<Real>::GetGridMax(int i) const
-    {
-        return mGridMax[i];
-    }
-
-    template <typename Real>
-    void IntpBSplineUniform<Real>::SetPolynomial(int order, Real diff, Real* poly)
-    {
-        Real diffPower = Math::GetValue(1);
-        for (int i = order; i <= mDegree; ++i)
-        {
-            poly[i] = mCoeff[order][i] * diffPower;
-            diffPower *= diff;
-        }
-    }
-
-    template <typename Real>
-    int IntpBSplineUniform<Real>::Choose(int n, int k)
-    {
-        // Computes combination "n choose k".
-        if (n <= 1 || k >= n)
-        {
-            return 1;
-        }
-
-        int result = 1;
-        int i;
-        for (i = 0; i < k; ++i)
-        {
-            result *= n - i;
-        }
-        for (i = 1; i <= k; ++i)
-        {
-            result /= i;
-        }
-
-        return result;
-    }
-
-    template <typename Real>
-    Real** IntpBSplineUniform<Real>::BlendMatrix(int degree)
-    {
-        int degP1 = degree + 1;
-        int row, col, i, j, k;
-
-        // Allocate triple arrays.
-        int*** AMat = nullptr;  //  NEW1<int**>(degP1);
-        int*** BMat = nullptr;  // NEW1<int**>(degP1);
-        for (k = 0; k <= degree; ++k)
-        {
-            AMat[k] = nullptr;  //NEW1<int*>(degP1);
-            BMat[k] = nullptr;  // NEW1<int*>(degP1);
-            for (row = 0; row <= degree; ++row)
-            {
-                AMat[k][row] = nullptr;  // NEW1<int>(degP1);
-                BMat[k][row] = nullptr;  //NEW1<int>(degP1);
-                for (col = 0; col <= degree; ++col)
-                {
-                    AMat[k][row][col] = 0;
-                    BMat[k][row][col] = 0;
-                }
-            }
-        }
-
-        AMat[0][0][0] = 1;
-        BMat[0][0][0] = 1;
-
-        for (k = 1; k <= degree; ++k)
-        {
-            // Compute A[].
-            for (row = 0; row <= k; ++row)
-            {
-                for (col = 0; col <= k; ++col)
-                {
-                    AMat[k][row][col] = 0;
-                    if (col >= 1)
-                    {
-                        AMat[k][row][col] += AMat[k - 1][row][col - 1];
-                        if (row >= 1)
-                        {
-                            AMat[k][row][col] -= BMat[k - 1][row - 1][col - 1];
-                        }
-                    }
+                    aMat.at(k).at(row).at(col) += aMat.at(previousK).at(row).at(previousCol);
                     if (row >= 1)
                     {
-                        AMat[k][row][col] += (k + 1) * BMat[k - 1][row - 1][col];
+                        aMat.at(k).at(row).at(col) -= bMat.at(previousK).at(previousRow).at(previousCol);
                     }
                 }
-            }
-
-            // Compute B[].
-            for (row = 0; row <= k; ++row)
-            {
-                for (col = 0; col <= k; ++col)
+                if (row >= 1)
                 {
-                    BMat[k][row][col] = 0;
-                    for (i = col; i <= k; ++i)
-                    {
-                        if ((i - col) % 2)
-                        {
-                            BMat[k][row][col] -= Choose(i, col) * AMat[k][row][i];
-                        }
-                        else
-                        {
-                            BMat[k][row][col] += Choose(i, col) * AMat[k][row][i];
-                        }
-                    }
+                    aMat.at(k).at(row).at(col) += (k + 1) * bMat.at(previousK).at(previousRow).at(col);
                 }
             }
         }
 
-        Real** CMat = nullptr;  // NEW1<Real*>(degP1);
-        for (row = 0; row <= degree; ++row)
+        for (auto row = 0; row <= k; ++row)
         {
-            CMat[row] = nullptr;  // NEW1<Real>(degP1);
-            for (col = 0; col <= degree; ++col)
+            for (auto col = 0; col <= k; ++col)
             {
-                CMat[row][col] = 0;
-                for (i = col; i <= degree; ++i)
+                bMat.at(k).at(row).at(col) = 0;
+                for (auto i = col; i <= k; ++i)
                 {
-                    int prod = 1;
-                    for (j = 1; j <= i - col; ++j)
+                    if ((i - col) % 2)
                     {
-                        prod *= degree - row;
+                        bMat.at(k).at(row).at(col) -= Choose(i, col) * aMat.at(k).at(row).at(i);
                     }
-                    CMat[row][col] += prod * Choose(i, col) *
-                                      AMat[degree][degree - row][i];
+                    else
+                    {
+                        bMat.at(k).at(row).at(col) += Choose(i, col) * aMat.at(k).at(row).at(i);
+                    }
                 }
             }
         }
-
-        Real factorial = 1;
-        for (k = 1; k <= degree; ++k)
-        {
-            factorial *= k;
-        }
-        Real invFactorial = (Math::GetValue(1)) / factorial;
-        Real** matrix = nullptr;  //NEW1<Real*>(degP1);
-        for (row = 0; row <= degree; ++row)
-        {
-            matrix[row] = nullptr;  // NEW1<Real>(degP1);
-            for (col = 0; col <= degree; ++col)
-            {
-                matrix[row][col] = CMat[row][col] * invFactorial;
-            }
-        }
-
-        // Deallocate triple arrays.
-        for (k = 0; k <= degree; ++k)
-        {
-            for (row = 0; row <= degree; ++row)
-            {
-//                 DELETE1(BMat[k][row]);
-//                 DELETE1(AMat[k][row]);
-            }
-//             DELETE1(BMat[k]);
-//             DELETE1(AMat[k]);
-        }
-//         DELETE1(BMat);
-//         DELETE1(AMat);
-
-        // Deallocate integer matrix.
-        for (k = 0; k <= degree; ++k)
-        {
-           // DELETE1(CMat[k]);
-        }
-       // DELETE1(CMat);
-
-        return matrix;
     }
+
+    VariableMatrix<Real> cMat{ degP1, degP1 };
+    for (auto row = 0; row <= degree; ++row)
+    {
+        for (auto col = 0; col <= degree; ++col)
+        {
+            cMat[row][col] = 0;
+            for (auto i = col; i <= degree; ++i)
+            {
+                auto prod = 1;
+                for (auto j = 1; j <= i - col; ++j)
+                {
+                    prod *= degree - row;
+                }
+                const auto index = degree - row;
+                cMat[row][col] += Math<Real>::GetValue(prod) * Choose(i, col) * aMat.at(degree).at(index).at(i);
+            }
+        }
+    }
+
+    auto factorial = Math<Real>::GetValue(1);
+    for (auto k = 1; k <= degree; ++k)
+    {
+        factorial *= k;
+    }
+    auto invFactorial = (Math<Real>::GetValue(1)) / factorial;
+    VariableMatrix<Real> matrix{ degP1, degP1 };
+    for (auto row = 0; row <= degree; ++row)
+    {
+        for (auto col = 0; col <= degree; ++col)
+        {
+            matrix[row][col] = cMat[row][col] * invFactorial;
+        }
+    }
+
+    return matrix;
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniform<Real>::SetBase(int index, int value)
+{
+    base.at(index) = value;
+}
+
+template <typename Real>
+bool Mathematics::IntpBSplineUniform<Real>::IsBaseChange(int index) const
+{
+    if (oldBase.at(index) != base.at(index))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniform<Real>::SwitchToNewLocalGrid(int index)
+{
+    oldBase.at(index) = base.at(index);
+    gridMin.at(index) = base.at(index) - 1;
+    gridMax.at(index) = gridMin.at(index) + degree;
+}
+
+template <typename Real>
+bool Mathematics::IntpBSplineUniform<Real>::HasEvaluateCallback() const noexcept
+{
+    return evaluateCallback != nullptr;
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetBase(int index) const
+{
+    return base.at(index);
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>& Mathematics::IntpBSplineUniform<Real>::GetPolynomial(int index)
+{
+    return poly[index];
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetInter(int index) const
+{
+    return inter.at(index);
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetData(int index) const
+{
+    return data.at(index);
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniform<Real>::SetData(int index)
+{
+    if (evaluateCallback != nullptr)
+    {
+        data.at(index) = evaluateCallback(index);
+    }
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniform<Real>::SetInter(int index, Real value)
+{
+    inter.at(index) = value;
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetMatrix(int row, int column) const
+{
+    return matrix[row][column];
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetDim(int index) const
+{
+    return dim.at(index);
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetDP1() const noexcept
+{
+    return dp1;
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetDP1ToN() const noexcept
+{
+    return dp1ToN;
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniform<Real>::SetCache(int index, Real value)
+{
+    cache.at(index) = value;
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetCache(int index) const
+{
+    return cache.at(index);
+}
+
+template <typename Real>
+int Mathematics::IntpBSplineUniform<Real>::GetSkip(int index) const
+{
+    return skip.at(index);
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniform<Real>::GetProduct(int index) const
+{
+    return product.at(index);
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_DETAIL_H

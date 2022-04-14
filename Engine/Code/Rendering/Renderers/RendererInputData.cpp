@@ -35,7 +35,7 @@ void Rendering::RendererInputData
 	sm_RendererInputData.reset();
 }
 
-Rendering::RendererInputData ::RendererInputData([[maybe_unused]] RendererInputDataCreate rendererInputDataCreate)
+Rendering::RendererInputData::RendererInputData([[maybe_unused]] RendererInputDataCreate rendererInputDataCreate)
     : impl{ 0  }
 {
  

@@ -19,7 +19,7 @@
 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, BillboardNodeTesting) 
-
+ #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::BillboardNodeTesting
 	::MainTest()
 { 
@@ -225,10 +225,10 @@ void Rendering::BillboardNodeTesting
 // 	Mathematics::APointf modelPosition = thirdTransform.GetInverseTransform() * camera->GetPosition();
 // 	Mathematics::APointf secondModelPosition = fourthTransform.GetInverseTransform() * camera->GetPosition();
 // 		 
-// 	float angle = Mathematics::FloatMath::ATan2(modelPosition[0], modelPosition[2]);
+// 	float angle = Mathematics::MathF::ATan2(modelPosition[0], modelPosition[2]);
 // 	Mathematics::Matrixf orient(Mathematics::AVectorf::sm_UnitY, angle);
 // 
-// 	float secondAngle = Mathematics::FloatMath::ATan2(secondModelPosition[0], secondModelPosition[2]);
+// 	float secondAngle = Mathematics::MathF::ATan2(secondModelPosition[0], secondModelPosition[2]);
 // 	Mathematics::Matrixf secondOrient(Mathematics::AVectorf::sm_UnitY, secondAngle);
 // 
 // 	Mathematics::Matrixf rotate = thirdTransform.GetRotate() * orient;
@@ -259,7 +259,7 @@ void Rendering::BillboardNodeTesting
 // 
 // 	secondModelPosition = fourthTransform.GetInverseTransform() * camera->GetPosition();
 // 		 
-// 	secondAngle = Mathematics::FloatMath::ATan2(secondModelPosition[0], secondModelPosition[2]);
+// 	secondAngle = Mathematics::MathF::ATan2(secondModelPosition[0], secondModelPosition[2]);
 // 	secondOrient = Mathematics::Matrixf(Mathematics::AVectorf::sm_UnitY, secondAngle);
 //     rotate = fourthTransform.GetRotate() * secondOrient;
 // 	fourthTransform.SetRotate(rotate);

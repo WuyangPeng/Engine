@@ -24,9 +24,9 @@ void CoreTools::ObjectLink::ResolveLink(T& object)
 
     static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
-    if (object.m_Associated != 0)
+    if (object.associated != 0)
     {
-        object.m_Object = boost::polymorphic_pointer_cast<T::ObjectType>(GetObjectInterface(object.m_Associated));
+        object.object = boost::polymorphic_pointer_cast<T::ObjectType>(GetObjectInterface(object.associated));
     }
 }
 

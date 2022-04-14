@@ -28,7 +28,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26440)
 
-Rendering::VisualEffectImpl ::VisualEffectImpl()
+Rendering::VisualEffectImpl::VisualEffectImpl()
     : m_Techniques{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -36,28 +36,28 @@ Rendering::VisualEffectImpl ::VisualEffectImpl()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VisualEffectImpl)
 
-int Rendering::VisualEffectImpl ::GetStreamingSize() const
+int Rendering::VisualEffectImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return CORE_TOOLS_STREAM_SIZE(m_Techniques);
 }
 
-void Rendering::VisualEffectImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::VisualEffectImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
     //	target.WriteSharedPtr(m_Techniques);
 }
 
-void Rendering::VisualEffectImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::VisualEffectImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
     //	source.ReadSharedPtr(m_Techniques);
 }
 
-void Rendering::VisualEffectImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::VisualEffectImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -67,7 +67,7 @@ void Rendering::VisualEffectImpl ::Link(CoreTools::ObjectLink& source)
     }
 }
 
-void Rendering::VisualEffectImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::VisualEffectImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -77,7 +77,7 @@ void Rendering::VisualEffectImpl ::Register(CoreTools::ObjectRegister& target) c
     }
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -93,7 +93,7 @@ CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl ::GetObjectByName(const s
     return CoreTools::ObjectSharedPtr();
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -109,7 +109,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectImpl ::GetAllObjectsBy
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -125,7 +125,7 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl ::GetConstObjectByNa
     return CoreTools::ConstObjectSharedPtr();
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -141,21 +141,21 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectImpl ::GetAllCons
     return objects;
 }
 
-void Rendering::VisualEffectImpl ::InsertTechnique(const VisualTechniqueSharedPtr& technique)
+void Rendering::VisualEffectImpl::InsertTechnique(const VisualTechniqueSharedPtr& technique)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Techniques.push_back(technique);
 }
 
-int Rendering::VisualEffectImpl ::GetNumTechniques() const
+int Rendering::VisualEffectImpl::GetNumTechniques() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_Techniques.size());
 }
 
-const Rendering::ConstVisualTechniqueSharedPtr Rendering::VisualEffectImpl ::GetTechnique(int techniqueIndex) const
+const Rendering::ConstVisualTechniqueSharedPtr Rendering::VisualEffectImpl::GetTechnique(int techniqueIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -163,7 +163,7 @@ const Rendering::ConstVisualTechniqueSharedPtr Rendering::VisualEffectImpl ::Get
     return m_Techniques[techniqueIndex];
 }
 
-int Rendering::VisualEffectImpl ::GetNumPasses(int techniqueIndex) const
+int Rendering::VisualEffectImpl::GetNumPasses(int techniqueIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -171,7 +171,7 @@ int Rendering::VisualEffectImpl ::GetNumPasses(int techniqueIndex) const
     return m_Techniques[techniqueIndex]->GetNumPasses();
 }
 
-const Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectImpl ::GetPass(int techniqueIndex, int passIndex) const
+const Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectImpl::GetPass(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -179,7 +179,7 @@ const Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectImpl ::GetPass(
     return m_Techniques[techniqueIndex]->GetPass(passIndex);
 }
 
-const Rendering::ConstVertexShaderSharedPtr Rendering::VisualEffectImpl ::GetVertexShader(int techniqueIndex, int passIndex) const
+const Rendering::ConstVertexShaderSharedPtr Rendering::VisualEffectImpl::GetVertexShader(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -187,7 +187,7 @@ const Rendering::ConstVertexShaderSharedPtr Rendering::VisualEffectImpl ::GetVer
     return m_Techniques[techniqueIndex]->GetVertexShader(passIndex);
 }
 
-const Rendering::ConstPixelShaderSharedPtr Rendering::VisualEffectImpl ::GetPixelShader(int techniqueIndex, int passIndex) const
+const Rendering::ConstPixelShaderSharedPtr Rendering::VisualEffectImpl::GetPixelShader(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -195,7 +195,7 @@ const Rendering::ConstPixelShaderSharedPtr Rendering::VisualEffectImpl ::GetPixe
     return m_Techniques[techniqueIndex]->GetPixelShader(passIndex);
 }
 
-const Rendering::ConstAlphaStateSharedPtr Rendering::VisualEffectImpl ::GetAlphaState(int techniqueIndex, int passIndex) const
+const Rendering::ConstAlphaStateSharedPtr Rendering::VisualEffectImpl::GetAlphaState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -203,7 +203,7 @@ const Rendering::ConstAlphaStateSharedPtr Rendering::VisualEffectImpl ::GetAlpha
     return m_Techniques[techniqueIndex]->GetAlphaState(passIndex);
 }
 
-const Rendering::ConstCullStateSharedPtr Rendering::VisualEffectImpl ::GetCullState(int techniqueIndex, int passIndex) const
+const Rendering::ConstCullStateSharedPtr Rendering::VisualEffectImpl::GetCullState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -211,7 +211,7 @@ const Rendering::ConstCullStateSharedPtr Rendering::VisualEffectImpl ::GetCullSt
     return m_Techniques[techniqueIndex]->GetCullState(passIndex);
 }
 
-const Rendering::ConstDepthStateSharedPtr Rendering::VisualEffectImpl ::GetDepthState(int techniqueIndex, int passIndex) const
+const Rendering::ConstDepthStateSharedPtr Rendering::VisualEffectImpl::GetDepthState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -219,7 +219,7 @@ const Rendering::ConstDepthStateSharedPtr Rendering::VisualEffectImpl ::GetDepth
     return m_Techniques[techniqueIndex]->GetDepthState(passIndex);
 }
 
-const Rendering::ConstOffsetStateSharedPtr Rendering::VisualEffectImpl ::GetOffsetState(int techniqueIndex, int passIndex) const
+const Rendering::ConstOffsetStateSharedPtr Rendering::VisualEffectImpl::GetOffsetState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -227,7 +227,7 @@ const Rendering::ConstOffsetStateSharedPtr Rendering::VisualEffectImpl ::GetOffs
     return m_Techniques[techniqueIndex]->GetOffsetState(passIndex);
 }
 
-const Rendering::ConstStencilStateSharedPtr Rendering::VisualEffectImpl ::GetStencilState(int techniqueIndex, int passIndex) const
+const Rendering::ConstStencilStateSharedPtr Rendering::VisualEffectImpl::GetStencilState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -235,7 +235,7 @@ const Rendering::ConstStencilStateSharedPtr Rendering::VisualEffectImpl ::GetSte
     return m_Techniques[techniqueIndex]->GetStencilState(passIndex);
 }
 
-const Rendering::ConstWireStateSharedPtr Rendering::VisualEffectImpl ::GetWireState(int techniqueIndex, int passIndex) const
+const Rendering::ConstWireStateSharedPtr Rendering::VisualEffectImpl::GetWireState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
@@ -243,7 +243,7 @@ const Rendering::ConstWireStateSharedPtr Rendering::VisualEffectImpl ::GetWireSt
     return m_Techniques[techniqueIndex]->GetWireState(passIndex);
 }
 
-void Rendering::VisualEffectImpl ::SaveVisualTechnique(WriteFileManager& manager) const
+void Rendering::VisualEffectImpl::SaveVisualTechnique(WriteFileManager& manager) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -256,7 +256,7 @@ void Rendering::VisualEffectImpl ::SaveVisualTechnique(WriteFileManager& manager
     }
 }
 
-void Rendering::VisualEffectImpl ::LoadVisualTechnique(ReadFileManager& manager)
+void Rendering::VisualEffectImpl::LoadVisualTechnique(ReadFileManager& manager)
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -26,7 +26,11 @@ void Rendering::SpecializedIOTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(IntColourTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(FloatColourTest);
 }
- 
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26490)
 void Rendering::SpecializedIOTesting
 	::StreamSizeTest()
 {
@@ -78,7 +82,7 @@ void Rendering::SpecializedIOTesting
 {
 // 	std::default_random_engine generator;
 // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
-// 	std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::FloatMath::sm_TwoPI);
+// 	std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::MathF::sm_TwoPI);
 // 
 // 	Transform firstTransform;
 // 	Transform secondTransform;
@@ -262,7 +266,7 @@ void Rendering::SpecializedIOTesting
 // 	    Bound firstBound(Bound::APoint(floatRandomDistribution(generator),
 // 			                           floatRandomDistribution(generator), 
 // 			                           floatRandomDistribution(generator)),
-// 			             Mathematics::FloatMath::FAbs(floatRandomDistribution(generator)));
+// 			             Mathematics::MathF::FAbs(floatRandomDistribution(generator)));
 // 
 // 	    target.WriteAggregate(firstBound);
 // 

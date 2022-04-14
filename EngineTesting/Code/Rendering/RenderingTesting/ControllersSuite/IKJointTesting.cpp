@@ -36,7 +36,7 @@ void Rendering::IKJointTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::IKJointTesting
 	::InitTest()
 {
@@ -313,22 +313,22 @@ void Rendering::IKJointTesting
 // 
 // 	Mathematics::APointf translate = object->GetLocalTransform().GetTranslate();
 // 	float desired = translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)] + distance;
-// 	if (-Mathematics::FloatMath::sm_MaxReal < desired)
+// 	if (-Mathematics::MathF::maxReal < desired)
 // 	{
-// 		if (desired < Mathematics::FloatMath::sm_MaxReal)
+// 		if (desired < Mathematics::MathF::maxReal)
 // 		{
 // 			translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)] = desired;
 // 		}
 // 		else
 // 		{
-// 			distance = Mathematics::FloatMath::sm_MaxReal - translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)];
-// 			translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)] = Mathematics::FloatMath::sm_MaxReal;
+// 			distance = Mathematics::MathF::maxReal - translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)];
+// 			translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)] = Mathematics::MathF::maxReal;
 // 		}
 // 	}
 // 	else
 // 	{
-// 		distance = -Mathematics::FloatMath::sm_MaxReal - translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)];
-// 		translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)] = -Mathematics::FloatMath::sm_MaxReal;
+// 		distance = -Mathematics::MathF::maxReal - translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)];
+// 		translate[System::EnumCastUnderlying(Mathematics::MatrixRotationAxis::X)] = -Mathematics::MathF::maxReal;
 // 	}
 // 
 // 	float newNorm = 0.0f;
@@ -365,7 +365,7 @@ void Rendering::IKJointTesting
 // 		denom -= goal->GetWeight() * Dot(goalMinusPoint, axisCrossAxisCrossEffectorMinusPoint);
 // 	} 
 // 
-// 	float theta = Mathematics::FloatMath::ATan2(numer, denom);
+// 	float theta = Mathematics::MathF::ATan2(numer, denom);
 // 
 // 	Mathematics::Matrixf rotate = object->GetLocalTransform().GetRotate();
 // 	Mathematics::Matrix3f rotateMatrix3 = rotate.GetMatrix3();
@@ -373,22 +373,22 @@ void Rendering::IKJointTesting
 // 
 // 	// 截断到范围
 // 	desired = euler.GetAngle(Mathematics::MatrixRotationAxis::Y) + theta;
-// 	if (-Mathematics::FloatMath::sm_PI < desired)
+// 	if (-Mathematics::MathF::sm_PI < desired)
 // 	{
-// 		if (desired < Mathematics::FloatMath::sm_PI)
+// 		if (desired < Mathematics::MathF::sm_PI)
 // 		{
 // 			euler.SetAngle(Mathematics::MatrixRotationAxis::Y, desired);
 // 		}
 // 		else
 // 		{
-// 			theta = Mathematics::FloatMath::sm_PI - euler.GetAngle(Mathematics::MatrixRotationAxis::Y);
-// 			euler.SetAngle(Mathematics::MatrixRotationAxis::Y, Mathematics::FloatMath::sm_PI);
+// 			theta = Mathematics::MathF::sm_PI - euler.GetAngle(Mathematics::MatrixRotationAxis::Y);
+// 			euler.SetAngle(Mathematics::MatrixRotationAxis::Y, Mathematics::MathF::sm_PI);
 // 		}
 // 	}
 // 	else
 // 	{
-// 		theta = -Mathematics::FloatMath::sm_PI - euler.GetAngle(Mathematics::MatrixRotationAxis::Y);
-// 		euler.SetAngle(Mathematics::MatrixRotationAxis::Y, -Mathematics::FloatMath::sm_PI);
+// 		theta = -Mathematics::MathF::sm_PI - euler.GetAngle(Mathematics::MatrixRotationAxis::Y);
+// 		euler.SetAngle(Mathematics::MatrixRotationAxis::Y, -Mathematics::MathF::sm_PI);
 // 	}
 // 
 // 	// 测试步骤是否应该采取。

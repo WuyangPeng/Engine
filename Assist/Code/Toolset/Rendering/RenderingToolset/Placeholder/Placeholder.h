@@ -7,23 +7,23 @@
 #ifndef RENDERING_TOOLSET_PLACEHOLDER_H
 #define RENDERING_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Rendering/RenderingToolset/RenderingToolsetDll.h" 
+#include "Toolset/Rendering/RenderingToolset/RenderingToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace RenderingToolset
 {
-	 class RENDERING_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class RENDERING_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // RENDERING_TOOLSET_PLACEHOLDER_H
+#endif  // RENDERING_TOOLSET_PLACEHOLDER_H

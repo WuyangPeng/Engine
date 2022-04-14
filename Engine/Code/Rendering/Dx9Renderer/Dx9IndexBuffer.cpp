@@ -10,7 +10,7 @@
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Contract/Noexcept.h"
-Rendering::Dx9IndexBuffer ::Dx9IndexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const IndexBuffer* indexBuffer) noexcept
+Rendering::Dx9IndexBuffer::Dx9IndexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const IndexBuffer* indexBuffer) noexcept
     : ParentType{}
 {
  
@@ -31,7 +31,7 @@ bool Rendering::Dx9IndexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9IndexBuffer ::Enable([[maybe_unused]] Renderer* renderer)
+void Rendering::Dx9IndexBuffer::Enable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -40,7 +40,7 @@ void Rendering::Dx9IndexBuffer ::Enable([[maybe_unused]] Renderer* renderer)
 	CoreTools::DisableNoexcept();
 }
 
-void Rendering::Dx9IndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
+void Rendering::Dx9IndexBuffer::Disable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -49,7 +49,7 @@ void Rendering::Dx9IndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
 	CoreTools::DisableNoexcept();
 }
 
-void* Rendering::Dx9IndexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
+void* Rendering::Dx9IndexBuffer::Lock([[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

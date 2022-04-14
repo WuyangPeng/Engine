@@ -25,6 +25,13 @@ Mathematics::Plane<T>::Plane(const T epsilon) noexcept
 }
 
 template <typename T>
+Mathematics::Plane<T>::Plane() noexcept
+    : Plane{ Math::GetZeroTolerance() }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename T>
 Mathematics::Plane<T>::Plane(T normalX, T normalY, T normalZ, T constant, const T epsilon)
     : homogeneousPoint{ normalX, normalY, normalZ, -constant }, epsilon{ epsilon }
 {

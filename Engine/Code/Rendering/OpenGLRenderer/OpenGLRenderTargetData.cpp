@@ -13,7 +13,7 @@
 
 using std::make_shared;
 
-Rendering::OpenGLRenderTargetData ::OpenGLRenderTargetData(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::OpenGLRenderTargetData::OpenGLRenderTargetData(Renderer* renderer, const RenderTarget* renderTarget)
     : impl{ renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -25,7 +25,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTarget
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, OpenGLRenderTargetData, Disable, Renderer*, void)
 
-Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTargetData ::ReadColor(int index, Renderer* renderer)
+Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTargetData::ReadColor(int index, Renderer* renderer)
 {
     ;
 

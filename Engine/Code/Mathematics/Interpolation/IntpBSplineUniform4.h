@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 20:59)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM4_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM4_H
@@ -13,50 +16,30 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpBSplineUniform4 : public IntpBSplineUniform<Real>
-	{
-	public:
-		// Construction.  IntpBSplineUniform4 accepts responsibility for
-		// deleting the input array data.
-		IntpBSplineUniform4(int degree, const int* dim, Real* data);
+    template <typename Real>
+    class IntpBSplineUniform4 : public IntpBSplineUniform<Real>
+    {
+    public:
+        using ClassType = IntpBSplineUniform4<Real>;
+        using ParentType = IntpBSplineUniform<Real>;
 
-		int Index(int ix, int iy, int iz, int iw) const;
+    public:
+        IntpBSplineUniform4(int degree, const std::vector<int>& dim, const std::vector<Real>& data);
 
-		// Spline evaluation for function interpolation (no derivatives).
-		Real operator() (Real x, Real y, Real z, Real w);
-		virtual Real operator() (Real* X);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Spline evaluation, derivative counts given in dx, dy, dz, dw, dx[].
-		Real operator() (int dx, int dy, int dz, int dw, Real x, Real y,Real z, Real w);
-		virtual Real operator() (int* dx, Real* X);
+        NODISCARD int Index(int ix, int iy, int iz, int iw) const;
 
-	private:
-		using IntpBSplineUniform<Real>::mDegree;
-		using IntpBSplineUniform<Real>::mDp1;
-		using IntpBSplineUniform<Real>::mDp1ToN;
-		using IntpBSplineUniform<Real>::mDim;
-		using IntpBSplineUniform<Real>::mData;
-		using IntpBSplineUniform<Real>::mGridMin;
-		using IntpBSplineUniform<Real>::mGridMax;
-		using IntpBSplineUniform<Real>::mBase;
-		using IntpBSplineUniform<Real>::mOldBase;
-		using IntpBSplineUniform<Real>::mMatrix;
-		using IntpBSplineUniform<Real>::mCache;
-		using IntpBSplineUniform<Real>::mInter;
-		using IntpBSplineUniform<Real>::mPoly;
-		using IntpBSplineUniform<Real>::mProduct;
-		using IntpBSplineUniform<Real>::mSkip;
-		using IntpBSplineUniform<Real>::mEvaluateCallback;
-		using IntpBSplineUniform<Real>::SetPolynomial;
+        NODISCARD Real operator()(Real x, Real y, Real z, Real w);
+        NODISCARD Real operator()(const std::vector<Real>& x) override;
 
-		void EvaluateUnknownData();
-		void ComputeIntermediate();
-	};
+        NODISCARD Real operator()(int dx, int dy, int dz, int dw, Real x, Real y, Real z, Real w);
+        NODISCARD Real operator()(const std::vector<int>& dx, const std::vector<Real>& x) override;
 
-	using IntpBSplineUniform4f = IntpBSplineUniform4<float>;
-	using IntpBSplineUniform4d = IntpBSplineUniform4<double>;
-
+    private:
+        void EvaluateUnknownData() override;
+        void ComputeIntermediate() override;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM4_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM4_H

@@ -227,12 +227,11 @@ void CoreTools::BufferTarget::WriteObjectAssociated(const T& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    if (object.m_Object != nullptr)
+    if (object.object != nullptr)
     {
-        WriteUniqueID(object.m_Object);
+        WriteUniqueID(object.object);
     }
     else
     {
@@ -265,7 +264,7 @@ void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithoutNumber(const 
 
     for (const auto& object : objects)
     {
-        Write(object);
+        Write(object.associated);
     }
 }
 

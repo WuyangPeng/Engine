@@ -29,31 +29,40 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, BSplineSurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BSplineSurfacePatch);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BSplineSurfacePatch);
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(1)
 {
-    mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen);
+    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen;
+
+    //mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen);
 }
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(2)
 {
-    mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vKnots);
+    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen;
+    vKnots;
+    // mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vKnots);
 }
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(3)
 {
-    mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vOpen);
+    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, vOpen;
+    uKnots;
+    // mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vOpen);
 }
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(4)
 {
-    mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vKnots);
+    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop;
+    vKnots;
+    uKnots;
+    //  mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vKnots);
 }
 
-Rendering::BSplineSurfacePatch ::~BSplineSurfacePatch()
+Rendering::BSplineSurfacePatch::~BSplineSurfacePatch()
 {
     EXCEPTION_TRY
     {
@@ -62,50 +71,62 @@ Rendering::BSplineSurfacePatch ::~BSplineSurfacePatch()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-const Mathematics::APointF Rendering::BSplineSurfacePatch ::GetPosition(float u, float v) const
+const Mathematics::APointF Rendering::BSplineSurfacePatch::GetPosition(float u, float v) const
 {
-    Mathematics::Vector3F p = mPatch->P(u, v);
+    Mathematics::Vector3F p{};  //   = mPatch->P(u, v);
     return APoint(p[0], p[1], p[2]);
+    u;
+    v;
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesU(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesU(float u, float v) const
 {
-    Mathematics::Vector3F pu = mPatch->PU(u, v);
+    Mathematics::Vector3F pu{};  //   mPatch->PU(u, v);
     return AVector(pu[0], pu[1], pu[2]);
+    u;
+    v;
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesV(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesV(float u, float v) const
 {
-    Mathematics::Vector3F pv = mPatch->PV(u, v);
+    Mathematics::Vector3F pv{};  //   mPatch->PV(u, v);
     return AVector(pv[0], pv[1], pv[2]);
+    u;
+    v;
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesUU(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesUU(float u, float v) const
 {
-    Mathematics::Vector3F puu = mPatch->PUU(u, v);
+    Mathematics::Vector3F puu{};  //   mPatch->PUU(u, v);
     return AVector(puu[0], puu[1], puu[2]);
+    u;
+    v;
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesUV(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesUV(float u, float v) const
 {
-    Mathematics::Vector3F puv = mPatch->PUV(u, v);
+    Mathematics::Vector3F puv{};  //   mPatch->PUV(u, v);
     return AVector(puv[0], puv[1], puv[2]);
+    u;
+    v;
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesVV(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesVV(float u, float v) const
 {
-    Mathematics::Vector3F pvv = mPatch->PVV(u, v);
+    Mathematics::Vector3F pvv{};  //   mPatch->PVV(u, v);
     return AVector(pvv[0], pvv[1], pvv[2]);
+    u;
+    v;
 }
 
 // Streaming support.
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(LoadConstructor value)
-    : SurfacePatch(value), mConstructor(0), mPatch(0)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(LoadConstructor value)
+    : SurfacePatch(value), mConstructor(0)  //, mPatch(0)
 {
 }
 
-void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
+void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -116,13 +137,13 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
     int numCtrlPoints0, numCtrlPoints1;
     source.Read(numCtrlPoints0);
     source.Read(numCtrlPoints1);
-    Mathematics::Vector3F** ctrl = nullptr;  //    NEW2<Mathematics::Vector3F>(numCtrlPoints1, numCtrlPoints0);
+    std::vector<std::vector<Mathematics::Vector3F>> ctrl(numCtrlPoints1, std::vector<Mathematics::Vector3F>(numCtrlPoints0));
     int i0 = 0, i1 = 0;
     for (i0 = 0; i0 < numCtrlPoints0; ++i0)
     {
         for (i1 = 0; i1 < numCtrlPoints1; ++i1)
         {
-            source.ReadAggregate(ctrl[i0][i1]);
+            source.ReadAggregate(ctrl.at(i0).at(i1));
         }
     }
 
@@ -135,8 +156,8 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
     loop1 = source.ReadBool();
 
     bool open0 = false, open1 = false;
-//     float* knot0 = nullptr;
-//     float* knot1 = nullptr;
+    //     float* knot0 = nullptr;
+    //     float* knot1 = nullptr;
     int numKnots0 = 0, numKnots1 = 0;
 
     switch (mConstructor)
@@ -145,14 +166,14 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
             open0 = source.ReadBool();
             open1 = source.ReadBool();
 
-            mPatch = nullptr;  // new Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, open1);
+            //    mPatch = nullptr;  // new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, open1);
             break;
         case 2:
             open0 = source.ReadBool();
             numKnots1 = numCtrlPoints1 - degree1 - 1;
             //   source.Read(numKnots1, knot1);
 
-            mPatch = nullptr;  // new Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1);
+            //   mPatch = nullptr;  // new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1);
 
             //DELETE1(knot1);
             break;
@@ -161,9 +182,9 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
             //    source.Read(numKnots0, knot0);
             open1 = source.ReadBool();
 
-            mPatch = nullptr;  //  new Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, open1);
-
-          //  DELETE1(knot0);
+            //   mPatch = nullptr;  //  new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, open1);
+            //
+            //  DELETE1(knot0);
             break;
         case 4:
             numKnots0 = numCtrlPoints0 - degree0 - 1;
@@ -171,10 +192,10 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
             numKnots1 = numCtrlPoints1 - degree1 - 1;
             //   source.Read(numKnots1, knot1);
 
-            mPatch = nullptr;  // new Mathematics::BSplineRectanglef(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, knot1);
+            //  mPatch = nullptr;  // new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, knot1);
 
-          //  DELETE1(knot0);
-          //  DELETE1(knot1);
+            //  DELETE1(knot0);
+            //  DELETE1(knot1);
             break;
         default:
             RENDERING_ASSERTION_0(false, "Unexpected condition\n");
@@ -183,22 +204,22 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::BSplineSurfacePatch ::Link(CoreTools::ObjectLink& source)
+void Rendering::BSplineSurfacePatch::Link(CoreTools::ObjectLink& source)
 {
     SurfacePatch::Link(source);
 }
 
-void Rendering::BSplineSurfacePatch ::PostLink()
+void Rendering::BSplineSurfacePatch::PostLink()
 {
     SurfacePatch::PostLink();
 }
 
-uint64_t Rendering::BSplineSurfacePatch ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::BSplineSurfacePatch::Register(CoreTools::ObjectRegister& target) const
 {
     return SurfacePatch::Register(target);
 }
 
-void Rendering::BSplineSurfacePatch ::Save(CoreTools::BufferTarget& target) const
+void Rendering::BSplineSurfacePatch::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -206,8 +227,8 @@ void Rendering::BSplineSurfacePatch ::Save(CoreTools::BufferTarget& target) cons
 
     target.Write(mConstructor);
 
-    const int numCtrlPoints0 = mPatch->GetNumCtrlPoints(0);
-    const int numCtrlPoints1 = mPatch->GetNumCtrlPoints(1);
+    constexpr int numCtrlPoints0 = 10;  //= mPatch->GetNumCtrlPoints(0);
+    constexpr int numCtrlPoints1 = 10;  //= mPatch->GetNumCtrlPoints(1);
     target.Write(numCtrlPoints0);
     target.Write(numCtrlPoints1);
     int i0 = 0, i1 = 0;
@@ -215,61 +236,62 @@ void Rendering::BSplineSurfacePatch ::Save(CoreTools::BufferTarget& target) cons
     {
         for (i1 = 0; i1 < numCtrlPoints1; ++i1)
         {
-            target.WriteAggregate(mPatch->GetControlPoint(i0, i1));
+            // target.WriteAggregate(mPatch->GetControlPoint(i0, i1));
         }
     }
 
-    const int degree0 = mPatch->GetDegree(0);
-    const int degree1 = mPatch->GetDegree(1);
+    constexpr int degree0 = 0;  // = mPatch->GetDegree(0);
+    constexpr int degree1 = 0;  // = mPatch->GetDegree(1);
     target.Write(degree0);
     target.Write(degree1);
 
-    const bool loop0 = mPatch->IsLoop(0);
-    const bool loop1 = mPatch->IsLoop(1);
+    constexpr bool loop0 = 0;  // = mPatch->IsLoop(0);
+    constexpr bool loop1 = 0;  // = mPatch->IsLoop(1);
     target.Write(loop0);
     target.Write(loop1);
 
-    bool open0 = false, open1 = false;
+    constexpr bool open0 = false;
+    constexpr auto open1 = false;
     int numKnots0 = 0, numKnots1 = 0;
 
     switch (mConstructor)
     {
         case 1:
-            open0 = mPatch->IsOpen(0);
+            // open0 = mPatch->IsOpen(0);
             target.Write(open0);
-            open1 = mPatch->IsOpen(1);
+            //  open1 = mPatch->IsOpen(1);
             target.Write(open1);
             break;
         case 2:
-            open0 = mPatch->IsOpen(0);
+            //open0 = mPatch->IsOpen(0);
             target.Write(open0);
             numKnots1 = numCtrlPoints1 - degree1 - 1;
             for (i1 = 0; i1 < numKnots1; ++i1)
             {
-                target.Write(mPatch->GetKnot(1, i1));
+                //     target.Write(mPatch->GetKnot(1, i1));
             }
             break;
         case 3:
             numKnots0 = numCtrlPoints0 - degree0 - 1;
             for (i0 = 0; i0 < numKnots0; ++i0)
             {
-                target.Write(mPatch->GetKnot(0, i0));
+                //  target.Write(mPatch->GetKnot(0, i0));
             }
 
-            open1 = mPatch->IsOpen(1);
+            // open1 = mPatch->IsOpen(1);
             target.Write(open1);
             break;
         case 4:
             numKnots0 = numCtrlPoints0 - degree0 - 1;
             for (i0 = 0; i0 < numKnots0; ++i0)
             {
-                target.Write(mPatch->GetKnot(0, i0));
+                // target.Write(mPatch->GetKnot(0, i0));
             }
 
             numKnots1 = numCtrlPoints1 - degree1 - 1;
             for (i1 = 0; i1 < numKnots1; ++i1)
             {
-                target.Write(mPatch->GetKnot(1, i1));
+                //  target.Write(mPatch->GetKnot(1, i1));
             }
             break;
         default:
@@ -279,15 +301,15 @@ void Rendering::BSplineSurfacePatch ::Save(CoreTools::BufferTarget& target) cons
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::BSplineSurfacePatch ::GetStreamingSize() const
+int Rendering::BSplineSurfacePatch::GetStreamingSize() const
 {
     int size = SurfacePatch::GetStreamingSize();
     size += sizeof(mConstructor);
 
-    const int numCtrlPoints0 = mPatch->GetNumCtrlPoints(0);
-    const int numCtrlPoints1 = mPatch->GetNumCtrlPoints(1);
-    const int degree0 = mPatch->GetDegree(0);
-    const int degree1 = mPatch->GetDegree(1);
+    constexpr int numCtrlPoints0 = 0;  //= mPatch->GetNumCtrlPoints(0);
+    constexpr int numCtrlPoints1 = 0;  // = mPatch->GetNumCtrlPoints(1);
+    constexpr int degree0 = 0;  //   = mPatch->GetDegree(0);
+    constexpr int degree1 = 0;  //    = mPatch->GetDegree(1);
     constexpr bool loop0 = false;
     size += sizeof(numCtrlPoints0);
     size += sizeof(numCtrlPoints1);
@@ -302,15 +324,15 @@ int Rendering::BSplineSurfacePatch ::GetStreamingSize() const
             break;
         case 2:
             size += CORE_TOOLS_STREAM_SIZE(loop0);  // open0
-            size += (numCtrlPoints1 - degree1 - 1) * sizeof(float);  // knot1[]
+            //  size += (numCtrlPoints1 - degree1 - 1) * sizeof(float);  // knot1[]
             break;
         case 3:
-            size += (numCtrlPoints0 - degree0 - 1) * sizeof(float);  // knot0[]
+            //       size += (numCtrlPoints0 - degree0 - 1) * sizeof(float);  // knot0[]
             size += CORE_TOOLS_STREAM_SIZE(loop0);  // open1
             break;
         case 4:
-            size += (numCtrlPoints0 - degree0 - 1) * sizeof(float);  // knot0[]
-            size += (numCtrlPoints1 - degree1 - 1) * sizeof(float);  // knot1[]
+            //  size += (numCtrlPoints0 - degree0 - 1) * sizeof(float);  // knot0[]
+            //   size += (numCtrlPoints1 - degree1 - 1) * sizeof(float);  // knot1[]
             break;
         default:
             RENDERING_ASSERTION_0(false, "Unexpected condition\n");

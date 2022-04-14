@@ -35,7 +35,7 @@ Rendering::SkinControllerImpl
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SkinControllerImpl ::SkinControllerImpl() noexcept
+Rendering::SkinControllerImpl::SkinControllerImpl() noexcept
     : m_NumVertices{ 0 }, m_NumBones{ 0 }, m_Size{ 0 },
 	 m_Bones{}, m_Weights{}, m_Offsets{}
 {
@@ -53,14 +53,14 @@ bool Rendering::SkinControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-int Rendering::SkinControllerImpl ::GetNumVertices() const noexcept
+int Rendering::SkinControllerImpl::GetNumVertices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumVertices;
 }
 
-int Rendering::SkinControllerImpl ::GetNumBones() const noexcept
+int Rendering::SkinControllerImpl::GetNumBones() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

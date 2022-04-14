@@ -1,73 +1,103 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 12:27)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Algebra/VariableMatrix.h"
+
+#include <vector>
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpBSplineUniform
-	{
-	public:
-		// Construction and destruction.  IntpBSplineUniform accepts
-		// responsibility for deleting the input array data.  The input array
-		// dim is copied.
-		IntpBSplineUniform(int dims, int degree, const int* dim, Real* data);
-		virtual ~IntpBSplineUniform();
+    template <typename Real>
+    class IntpBSplineUniform
+    {
+    public:
+        using ClassType = IntpBSplineUniform<Real>;
 
-		int GetDimension() const;
-		int GetDegree() const;
-		Real GetDomainMin(int i) const;
-		Real GetDomainMax(int i) const;
-		int GetGridMin(int i) const;
-		int GetGridMax(int i) const;
+    public:
+        IntpBSplineUniform(int dims, int degree, const std::vector<int>& dim, const std::vector<Real>& data);
+        virtual ~IntpBSplineUniform() noexcept = default;
+        IntpBSplineUniform(const IntpBSplineUniform& rhs) = default;
+        IntpBSplineUniform& operator=(const IntpBSplineUniform& rhs) = default;
+        IntpBSplineUniform(IntpBSplineUniform&& rhs) = default;
+        IntpBSplineUniform& operator=(IntpBSplineUniform&& rhs) = default;
 
-		// spline evaluation for function interpolation (no derivatives)
-		virtual Real operator() (Real* X) = 0;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		// spline evaluation, derivative counts given in dx[]
-		virtual Real operator() (int* dx, Real* X) = 0;
+        NODISCARD int GetDimension() const noexcept;
+        NODISCARD int GetDegree() const noexcept;
+        NODISCARD Real GetDomainMin(int i) const;
+        NODISCARD Real GetDomainMax(int i) const;
+        NODISCARD int GetGridMin(int i) const;
+        NODISCARD int GetGridMax(int i) const;
 
-	protected:
-		int mDims;       // N, number of dimensions
-		int mDegree;     // D, degree of polynomial spline
-		int mDp1;        // D+1
-		int mDp1ToN;     // power(D+1,N)
-		int mDp1To2N;    // power(D+1,2N)
-		int* mDim;       // dimension sizes dim[0] through dim[N-1]
-		Real* mData;     // N-dimensional array of data
-		Real* mDomMin;   // minimum allowed value of spline input vector
-		Real* mDomMax;   // maximum allowed value of spline input vector
-		int* mGridMin;   // minimum allowed value for current local grid
-		int* mGridMax;   // maximum allowed value for current local grid
-		int* mBase;      // base indices for grid of local control points
-		int* mOldBase;   // old base indices for grid of local control points
-		Real** mMatrix;  // (D+1)x(D+1) blending matrix
-		Real* mCache;    // cache for subblock of data
-		Real* mInter;    // intermediate product of data with blending matrix
-		Real** mPoly;    // poly[N][D+1], store polynomials and derivatives
-		Real** mCoeff;   // coefficients for polynomial construction
-		Real* mProduct;  // outer tensor product of m with itself N times
-		int* mSkip;      // for skipping zero values of mtensor
+        NODISCARD virtual Real operator()(const std::vector<Real>& x) = 0;
+        NODISCARD virtual Real operator()(const std::vector<int>& dx, const std::vector<Real>& x) = 0;
 
-		Real(*mEvaluateCallback)(int);
+    protected:
+        NODISCARD virtual void EvaluateUnknownData() = 0;
+        NODISCARD virtual void ComputeIntermediate() = 0;
+        void SetPolynomial(int order, Real diff, VariableLengthVector<Real>& polynomial);
 
-		virtual void EvaluateUnknownData() = 0;
-		virtual void ComputeIntermediate() = 0;
-		void SetPolynomial(int order, Real diff, Real* poly);
+        NODISCARD static int Choose(int n, int k) noexcept;
+        NODISCARD static VariableMatrix<Real> BlendMatrix(int degree);
 
-		static int Choose(int n, int k);  // n choose k
-		static Real** BlendMatrix(int degree);
-	};
+        void SetBase(int index, int value);
+        NODISCARD bool IsBaseChange(int index) const;
+        void SwitchToNewLocalGrid(int index);
+        NODISCARD bool HasEvaluateCallback() const noexcept;
+        NODISCARD int GetBase(int index) const;
+        NODISCARD VariableLengthVector<Real>& GetPolynomial(int index);
+        NODISCARD Real GetInter(int index) const;
+        NODISCARD Real GetData(int index) const;
+        void SetData(int index);
+        void SetInter(int index, Real value);
+        NODISCARD Real GetMatrix(int row, int column) const;
+        NODISCARD int GetDim(int index) const;
+        NODISCARD int GetDP1() const noexcept;
+        NODISCARD int GetDP1ToN() const noexcept;
+        void SetCache(int index, Real value);
+        NODISCARD Real GetCache(int index) const;
+        NODISCARD int GetSkip(int index) const;
+        NODISCARD Real GetProduct(int index) const;
 
-	using IntpBSplineUniformf = IntpBSplineUniform<float>;
-	using IntpBSplineUniformd = IntpBSplineUniform<double>;
+    private:
+        using EvaluateCallback = Real (*)(int);
+
+    private:
+        int dims;
+        int degree;
+        int dp1;
+        int dp1ToN;
+        int dp1To2N;
+        std::vector<int> dim;
+        std::vector<Real> data;
+        std::vector<Real> domMin;
+        std::vector<Real> domMax;
+        std::vector<int> gridMin;
+        std::vector<int> gridMax;
+        std::vector<int> base;
+        std::vector<int> oldBase;
+        VariableMatrix<Real> matrix;
+        std::vector<Real> cache;
+        std::vector<Real> inter;
+        VariableMatrix<Real> poly;
+        VariableMatrix<Real> coeff;
+        std::vector<Real> product;
+        std::vector<int> skip;
+
+        EvaluateCallback evaluateCallback;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM_H

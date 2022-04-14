@@ -23,7 +23,7 @@ namespace Rendering
 	    void UpdateTest();
 		void StreamTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

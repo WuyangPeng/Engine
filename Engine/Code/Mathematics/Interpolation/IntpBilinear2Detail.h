@@ -1,174 +1,198 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 10:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 20:43)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_DETAIL_H
 
 #include "IntpBilinear2.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-IntpBilinear2<Real>::IntpBilinear2 (int xBound, int yBound, Real xMin,  Real xSpacing, Real yMin, Real ySpacing, Real** F)
+Mathematics::IntpBilinear2<Real>::IntpBilinear2(int xBound, int yBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, const VariableMatrix<Real>& f)
+    : xBound{ xBound },
+      yBound{ yBound },
+      quantity{ xBound * yBound },
+      xMin{ xMin },
+      xMax{ xMin + xSpacing * Math<Real>::GetValue(xBound - 1) },
+      xSpacing{ xSpacing },
+      invXSpacing{ (Math<Real>::GetValue(1)) / xSpacing },
+      yMin{ yMin },
+      yMax{ yMin + ySpacing * Math<Real>::GetValue(yBound - 1) },
+      ySpacing{ ySpacing },
+      invYSpacing{ (Math<Real>::GetValue(1)) / ySpacing },
+      f{ f }
 {
-    // At least a 2x2 block of data points are needed.
-    MATHEMATICS_ASSERTION_0(xBound >= 2 && yBound >= 2 && F, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0), "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(xBound >= 2 && yBound >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0), "无效输入。\n");
 
-    mXBound = xBound;
-    mYBound = yBound;
-    quantity = xBound*yBound;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
 
-    mXMin = xMin;
-    mXSpacing = xSpacing;
-    mInvXSpacing = (Math::GetValue(1))/xSpacing;
-    mYMin = yMin;
-    mYSpacing = ySpacing;
-    mInvYSpacing = (Math::GetValue(1))/ySpacing;
-    mXMax = xMin + xSpacing*(xBound - 1);
-    mYMax = yMin + ySpacing*(yBound - 1);
+#ifdef OPEN_CLASS_INVARIANT
 
-    mF = F;
+template <typename Real>
+bool Mathematics::IntpBilinear2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIAN
+
+template <typename Real>
+int Mathematics::IntpBilinear2<Real>::GetXBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xBound;
 }
 
 template <typename Real>
-int IntpBilinear2<Real>::GetXBound () const
+int Mathematics::IntpBilinear2<Real>::GetYBound() const noexcept
 {
-    return mXBound;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yBound;
 }
 
 template <typename Real>
-int IntpBilinear2<Real>::GetYBound () const
+int Mathematics::IntpBilinear2<Real>::GetQuantity() const noexcept
 {
-    return mYBound;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-int IntpBilinear2<Real>::GetQuantity () const
-{
     return quantity;
 }
 
 template <typename Real>
-Real** IntpBilinear2<Real>::GetF () const
+Mathematics::VariableMatrix<Real> Mathematics::IntpBilinear2<Real>::GetF() const
 {
-    return mF;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return f;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::GetXMin () const
+Real Mathematics::IntpBilinear2<Real>::GetXMin() const noexcept
 {
-    return mXMin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMin;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::GetXMax () const
+Real Mathematics::IntpBilinear2<Real>::GetXMax() const noexcept
 {
-    return mXMax;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMax;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::GetXSpacing () const
+Real Mathematics::IntpBilinear2<Real>::GetXSpacing() const noexcept
 {
-    return mXSpacing;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xSpacing;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::GetYMin () const
+Real Mathematics::IntpBilinear2<Real>::GetYMin() const noexcept
 {
-    return mYMin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yMin;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::GetYMax () const
+Real Mathematics::IntpBilinear2<Real>::GetYMax() const noexcept
 {
-    return mYMax;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yMax;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::GetYSpacing () const
+Real Mathematics::IntpBilinear2<Real>::GetYSpacing() const noexcept
 {
-    return mYSpacing;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ySpacing;
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::operator() (Real x, Real y) const
+Real Mathematics::IntpBilinear2<Real>::operator()(Real x, Real y) const
 {
-    // Check for inputs not in the domain of the function.
-    if (x < mXMin || x > mXMax || y < mYMin || y > mYMax)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (x < xMin || x > xMax || y < yMin || y > yMax)
     {
         return Math<Real>::maxReal;
     }
 
-    // Compute x-index and clamp to image.
-    Real xIndex = (x - mXMin)*mInvXSpacing;
-    int ix = (int)xIndex;
+    auto xIndex = (x - xMin) * invXSpacing;
+    auto ix = boost::numeric_cast<int>(xIndex);
     if (ix < 0)
     {
         ix = 0;
     }
-    else if (ix >= mXBound)
+    else if (ix >= xBound)
     {
-        ix = mXBound - 1;
+        ix = xBound - 1;
     }
 
-    // Compute y-index and clamp to image.
-    Real yIndex = (y - mYMin)*mInvYSpacing;
-    int iy = (int)yIndex;
+    auto yIndex = (y - yMin) * invYSpacing;
+    auto iy = boost::numeric_cast<int>(yIndex);
     if (iy < 0)
     {
         iy = 0;
     }
-    else if (iy >= mYBound)
+    else if (iy >= yBound)
     {
-        iy = mYBound - 1;
+        iy = yBound - 1;
     }
 
-    Real U[2];
-    U[0] = static_cast<Real>(1.0);
-    U[1] = xIndex - ix;
+    std::array<Real, 2> u{ Math<Real>::GetValue(1), xIndex - ix };
 
-    Real V[2];
-    V[0] = static_cast<Real>(1.0);
-    V[1] = yIndex - iy;
+    std::array<Real, 2> v{ Math<Real>::GetValue(1), yIndex - iy };
 
-    // Compute P = M*U and Q = M*V.
-    Real P[2], Q[2];
-    int row, col;
-    for (row = 0; row < 2; ++row)
+    std::array<Real, 2> p{};
+    std::array<Real, 2> q{};
+
+    for (auto row = 0; row < 2; ++row)
     {
-        P[row] = Math<Real>::GetValue(0);
-        Q[row] = Math<Real>::GetValue(0);
-        for (col = 0; col < 2; ++col)
+        p.at(row) = Math<Real>::GetValue(0);
+        q.at(row) = Math<Real>::GetValue(0);
+        for (auto col = 0; col < 2; ++col)
         {
-            P[row] += msBlend[row][col]*U[col];
-            Q[row] += msBlend[row][col]*V[col];
+            p.at(row) += blend.at(row).at(col) * u.at(col);
+            q.at(row) += blend.at(row).at(col) * v.at(col);
         }
     }
 
-    // Compute (M*U)^t D (M*V) where D is the 2x2 subimage containing (x,y).
-    Real result = Math<Real>::GetValue(0);
-    for (row = 0; row < 2; ++row)
+    auto result = Math<Real>::GetValue(0);
+    for (auto row = 0; row < 2; ++row)
     {
-        int yClamp = iy + row;
-        if (yClamp >= mYBound)
+        auto yClamp = iy + row;
+        if (yClamp >= yBound)
         {
-            yClamp = mYBound - 1;
+            yClamp = yBound - 1;
         }
 
-        for (col = 0; col < 2; ++col)
+        for (auto col = 0; col < 2; ++col)
         {
-            int xClamp = ix + col;
-            if (xClamp >= mXBound)
+            auto xClamp = ix + col;
+            if (xClamp >= xBound)
             {
-                xClamp = mXBound - 1;
+                xClamp = xBound - 1;
             }
 
-            result += Q[row]*mF[yClamp][xClamp]*P[col];
+            result += q.at(row) * f[yClamp][xClamp] * p.at(col);
         }
     }
 
@@ -176,129 +200,124 @@ Real IntpBilinear2<Real>::operator() (Real x, Real y) const
 }
 
 template <typename Real>
-Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
-    const
+Real Mathematics::IntpBilinear2<Real>::operator()(int xOrder, int yOrder, Real x, Real y) const
 {
-    // Check for inputs not in the domain of the function.
-    if (x < mXMin || x > mXMax || y < mYMin || y > mYMax)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (x < xMin || x > xMax || y < yMin || y > yMax)
     {
         return Math<Real>::maxReal;
     }
 
-    // Compute x-index and clamp to image.
-    Real xIndex = (x - mXMin)*mInvXSpacing;
-    int ix = (int)xIndex;
+    auto xIndex = (x - xMin) * invXSpacing;
+    auto ix = boost::numeric_cast<int>(xIndex);
     if (ix < 0)
     {
         ix = 0;
     }
-    else if (ix >= mXBound)
+    else if (ix >= xBound)
     {
-        ix = mXBound - 1;
+        ix = xBound - 1;
     }
 
-    // Compute y-index and clamp to image.
-    Real yIndex = (y - mYMin)*mInvYSpacing;
-    int iy = (int)yIndex;
+    auto yIndex = (y - yMin) * invYSpacing;
+    auto iy = boost::numeric_cast<int>(yIndex);
     if (iy < 0)
     {
         iy = 0;
     }
-    else if (iy >= mYBound)
+    else if (iy >= yBound)
     {
-        iy = mYBound - 1;
+        iy = yBound - 1;
     }
 
-    Real U[2], dx, xMult;
+    std::array<Real, 2> u{};
+    Real xMult{};
     switch (xOrder)
     {
-    case 0:
-        dx = xIndex - ix;
-        U[0] = Math::GetValue(1);
-        U[1] = dx;
-        xMult = Math::GetValue(1);
+        case 0:
+        {
+            auto dx = xIndex - ix;
+            u.at(0) = Math<Real>::GetValue(1);
+            u.at(1) = dx;
+            xMult = Math<Real>::GetValue(1);
+        }
         break;
-    case 1:
-        dx = xIndex - ix;
-        U[0] = Math<Real>::GetValue(0);
-        U[1] = Math::GetValue(1);
-        xMult = mInvXSpacing;
+        case 1:
+        {
+            u.at(0) = Math<Real>::GetValue(0);
+            u.at(1) = Math<Real>::GetValue(1);
+            xMult = invXSpacing;
+        }
         break;
-    default:
-        return Math<Real>::GetValue(0);
+        default:
+            return Math<Real>::GetValue(0);
     }
 
-    Real V[2], dy, yMult;
+    std::array<Real, 2> v{};
+    Real yMult{};
     switch (yOrder)
     {
-    case 0:
-        dy = yIndex - iy;
-        V[0] = Math::GetValue(1);
-        V[1] = dy;
-        yMult = Math::GetValue(1);
+        case 0:
+        {
+            auto dy = yIndex - iy;
+            v.at(0) = Math<Real>::GetValue(1);
+            v.at(1) = dy;
+            yMult = Math<Real>::GetValue(1);
+        }
         break;
-    case 1:
-        dy = yIndex - iy;
-        V[0] = Math<Real>::GetValue(0);
-        V[1] = Math::GetValue(1);
-        yMult = mInvYSpacing;
+        case 1:
+        {
+            v.at(0) = Math<Real>::GetValue(0);
+            v.at(1) = Math<Real>::GetValue(1);
+            yMult = invYSpacing;
+        }
         break;
-    default:
-        return Math<Real>::GetValue(0);
+        default:
+            return Math<Real>::GetValue(0);
     }
 
-    // Compute P = M*U and Q = M*V.
-    Real P[2], Q[2];
-    int row, col;
-    for (row = 0; row < 2; ++row)
+    std::array<Real, 2> p{};
+    std::array<Real, 2> q{};
+
+    for (auto row = 0; row < 2; ++row)
     {
-        P[row] = Math<Real>::GetValue(0);
-        Q[row] = Math<Real>::GetValue(0);
-        for (col = 0; col < 2; ++col)
+        p.at(row) = Math<Real>::GetValue(0);
+        q.at(row) = Math<Real>::GetValue(0);
+        for (auto col = 0; col < 2; ++col)
         {
-            P[row] += msBlend[row][col]*U[col];
-            Q[row] += msBlend[row][col]*V[col];
+            p.at(row) += blend.at(row).at(col) * u.at(col);
+            q.at(row) += blend.at(row).at(col) * v.at(col);
         }
     }
 
-    // Compute (M*U)^t D (M*V) where D is the 2x2 subimage containing (x,y).
-    Real result = Math<Real>::GetValue(0);
-    for (row = 0; row < 2; ++row)
+    auto result = Math<Real>::GetValue(0);
+    for (auto row = 0; row < 2; ++row)
     {
-        int yClamp = iy + row;
-        if (yClamp >= mYBound)
+        auto yClamp = iy + row;
+        if (yClamp >= yBound)
         {
-            yClamp = mYBound - 1;
+            yClamp = yBound - 1;
         }
 
-        for (col = 0; col < 2; ++col)
+        for (auto col = 0; col < 2; ++col)
         {
-            int xClamp = ix + col;
-            if (xClamp >= mXBound)
+            auto xClamp = ix + col;
+            if (xClamp >= xBound)
             {
-                xClamp = mXBound - 1;
+                xClamp = xBound - 1;
             }
 
-            result += Q[row]*mF[yClamp][xClamp]*P[col];
+            result += q.at(row) * f[yClamp][xClamp] * p.at(col);
         }
     }
-    result *= xMult*yMult;
+    result *= xMult * yMult;
 
     return result;
 }
 
-
-
- 
-
 template <typename Real>
-const Real IntpBilinear2<Real>::msBlend[2][2] =
-{
-    { 1.0f, -1.0f },
-    { 0.0f,  1.0f }
-};
+const std::array<std::array<Real, 2>, 2> Mathematics::IntpBilinear2<Real>::blend{ std::array<Real, 2>{ 1.0f, -1.0f },
+                                                                                  std::array<Real, 2>{ 0.0f, 1.0f } };
 
-
-}
-
-#endif // MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_DETAIL_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_DETAIL_H

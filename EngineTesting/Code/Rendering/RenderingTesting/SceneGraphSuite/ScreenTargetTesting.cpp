@@ -6,7 +6,7 @@
 
 #include "ScreenTargetTesting.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Rendering/SceneGraph/ScreenTarget.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -15,7 +15,10 @@
 #include "Rendering/Shaders/ShaderManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
 #include <vector>
 
 using std::vector;

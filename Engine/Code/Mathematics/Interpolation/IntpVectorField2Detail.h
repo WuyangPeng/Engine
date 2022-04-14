@@ -1,62 +1,59 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 21:11)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_DETAIL_H
 
 #include "IntpVectorField2.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpVectorField2<Real>::IntpVectorField2(const std::vector<Vector2<Real>>& domain, const std::vector<Vector2<Real>>& range, QueryType queryType)
+    : dt{}, xInterp{}, yInterp{}
 {
-    template <typename Real>
-    IntpVectorField2<Real>::IntpVectorField2(const std::vector<Vector2<Real>>& domain, Vector2<Real>* range, bool owner, QueryType queryType)
+    std::vector<Real> xOutput(domain.size());
+    std::vector<Real> yOutput(domain.size());
+    for (auto i = 0u; i < domain.size(); ++i)
     {
-        int quantity = domain.size();
-        // Repackage the output vectors into individual components.  This is
-        // required because of the format that the quadratic interpolator expects
-        // for its input data.
-        Real* xOutput = nullptr;  // NEW1<Real>(quantity);
-        Real* yOutput = nullptr;  //  NEW1<Real>(quantity);
-        for (int i = 0; i < quantity; ++i)
-        {
-            xOutput[i] = range[i][0];
-            yOutput[i] = range[i][1];
-        }
-
-        if (owner)
-        {
-            // DELETE1(range);
-        }
-
-        // Common triangulator for the interpolators.
-        mDT = nullptr;  // NEW0 Delaunay2<Real>(domain, Real{ 0.001 }, owner,queryType);
-
-        // Create interpolator for x-coordinate of vector field.
-        mXInterp = nullptr;  // NEW0 IntpQdrNonuniform2<Real>(*mDT, xOutput, true);
-
-        // Create interpolator for y-coordinate of vector field, but share the
-        // already created triangulation for the x-interpolator.
-        mYInterp = nullptr;  // NEW0 IntpQdrNonuniform2<Real>(*mDT, yOutput, true);
+        xOutput.at(i) = range.at(i)[0];
+        yOutput.at(i) = range.at(i)[1];
     }
 
-    template <typename Real>
-    IntpVectorField2<Real>::~IntpVectorField2()
-    {
-        DELETE0(mDT);
-        DELETE0(mXInterp);
-        DELETE0(mYInterp);
-    }
+    dt = std::make_shared<Delaunay2<Real>>(domain, static_cast<Real>(0.001), queryType);
 
-    template <typename Real>
-    bool IntpVectorField2<Real>::Evaluate(const Vector2<Real>& input,
-                                          Vector2<Real>& output)
-    {
-        Real xDeriv, yDeriv;
-        return mXInterp->Evaluate(input, output[0], xDeriv, yDeriv) && mYInterp->Evaluate(input, output[1], xDeriv, yDeriv);
-    }
+    xInterp = std::make_shared<IntpQdrNonuniform2<Real>>(*dt, xOutput);
+
+    yInterp = std::make_shared<IntpQdrNonuniform2<Real>>(*dt, yOutput);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpVectorField2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpVectorField2<Real>::Evaluate(const Vector2<Real>& input, Vector2<Real>& output)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    Real xDeriv{};
+    Real yDeriv{};
+
+    return xInterp->Evaluate(input, output[0], xDeriv, yDeriv) && yInterp->Evaluate(input, output[1], xDeriv, yDeriv);
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_VECTOR_FIELD2_DETAIL_H

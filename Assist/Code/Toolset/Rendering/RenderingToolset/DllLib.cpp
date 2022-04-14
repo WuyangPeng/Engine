@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_RENDERING_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_RENDERING_STATIC
+#else  // BUILDING_RENDERING_STATIC
 
-	namespace RenderingToolset
-	{
-		void StaticDllLib()
-		{
-			
-		}
-	}
+namespace RenderingToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-#endif // !BUILDING_RENDERING_STATIC
+#endif  // !BUILDING_RENDERING_STATIC

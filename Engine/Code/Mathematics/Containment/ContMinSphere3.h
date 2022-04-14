@@ -1,62 +1,65 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/11 14:56)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_MIN_SPHERE3_H
 #define MATHEMATICS_CONTAINMENT_CONT_MIN_SPHERE3_H
 
-// Compute the minimum volume sphere containing the input set of points.  The
-// algorithm randomly permutes the input points so that the construction
-// occurs in 'expected' O(N) time.
-
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Sphere3.h"   
+#include "Mathematics/Objects3D/Sphere3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class MinSphere3
-	{
-	public:
-		// The epsilon value is a floating-point tolerance used for various
-		// computations.
-		MinSphere3 (int numPoints, const Vector3<Real>* points,Sphere3<Real>& minimal, Real epsilon = static_cast<Real>(1e-03));
-		
-	private:
-		// Indices of points that support current minimum volume sphere.
-		class Support
-		{
-		public:
-			bool Contains (int index, Vector3<Real>** points, Real epsilon);
-			
-			int Quantity;
-			int Index[4];
-		};
-		
-		// Test whether point P is inside sphere S.
-		bool Contains (const Vector3<Real>& point, const Sphere3<Real>& sphere,  Real& distDiff);
-		
-		Sphere3<Real> ExactSphere1 (const Vector3<Real>& P);
-		Sphere3<Real> ExactSphere2 (const Vector3<Real>& P0,const Vector3<Real>& P1);
-		Sphere3<Real> ExactSphere3 (const Vector3<Real>& P0, const Vector3<Real>& P1, const Vector3<Real>& P2);
-		Sphere3<Real> ExactSphere4 (const Vector3<Real>& P0,const Vector3<Real>& P1,  const Vector3<Real>& P2,   const Vector3<Real>& P3);
-		
-		Sphere3<Real> UpdateSupport1 (int i, Vector3<Real>** permuted, Support& support);
-		Sphere3<Real> UpdateSupport2 (int i, Vector3<Real>** permuted,Support& support);
-		Sphere3<Real> UpdateSupport3 (int i, Vector3<Real>** permuted,Support& support);
-		Sphere3<Real> UpdateSupport4 (int i, Vector3<Real>** permuted,Support& support);
-		
-		typedef Sphere3<Real> (MinSphere3<Real>::*UpdateFunction)(int, Vector3<Real>**, Support&);
-		
-		Real mEpsilon;
-		UpdateFunction mUpdate[5];
-	};
-	
-	using MinSphere3f = MinSphere3<float>;
-	using MinSphere3d = MinSphere3<double>;
+    template <typename Real>
+    class ContMinSphere3
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = ContMinSphere3<Real>;
+
+    public:
+        ContMinSphere3(const std::vector<Vector3<Real>>& points, Sphere3<Real>& minimal, Real epsilon = static_cast<Real>(1e-03));
+
+        CLASS_INVARIANT_DECLARE;
+
+    private:
+        class Support
+        {
+        public:
+            bool Contains(int index, const std::vector<Vector3<Real>>& points, Real epsilon);
+
+            int quantity;
+            std::array<int, 4> index;
+        };
+
+        NODISCARD bool Contains(const Vector3<Real>& point, const Sphere3<Real>& sphere, Real& distDiff);
+
+        NODISCARD Sphere3<Real> ExactSphere1(const Vector3<Real>& p) noexcept;
+        NODISCARD Sphere3<Real> ExactSphere2(const Vector3<Real>& p0, const Vector3<Real>& p1);
+        NODISCARD Sphere3<Real> ExactSphere3(const Vector3<Real>& p0, const Vector3<Real>& p1, const Vector3<Real>& p2);
+        NODISCARD Sphere3<Real> ExactSphere4(const Vector3<Real>& p0, const Vector3<Real>& p1, const Vector3<Real>& p2, const Vector3<Real>& p3);
+
+        NODISCARD Sphere3<Real> UpdateSupport1(int i, const std::vector<Vector3<Real>>& permuted, Support& support);
+        NODISCARD Sphere3<Real> UpdateSupport2(int i, const std::vector<Vector3<Real>>& permuted, Support& support);
+        NODISCARD Sphere3<Real> UpdateSupport3(int i, const std::vector<Vector3<Real>>& permuted, Support& support);
+        NODISCARD Sphere3<Real> UpdateSupport4(int i, const std::vector<Vector3<Real>>& permuted, Support& support);
+
+        using UpdateFunction = Sphere3<Real> (ClassType::*)(int, const std::vector<Vector3<Real>>&, Support&);
+
+    private:
+        Real epsilon;
+        std::array<UpdateFunction, 5> update;
+    };
+
+    using MinSphere3F = ContMinSphere3<float>;
+    using MinSphere3D = ContMinSphere3<double>;
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_MIN_SPHERE3_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_MIN_SPHERE3_H

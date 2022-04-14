@@ -74,15 +74,15 @@ CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, BillboardNode)
     }
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, BillboardNode);
 
-Rendering::BillboardNode ::BillboardNode(const CameraSharedPtr& camera)
-    : ParentType{}, impl{ make_shared<ImplType>(camera) }
+Rendering::BillboardNode::BillboardNode(const CameraSharedPtr& camera)
+    : ParentType{ NodeCreate::Init }, impl{ make_shared<ImplType>(camera) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, BillboardNode)
 
-Rendering::ControllerInterfaceSharedPtr Rendering::BillboardNode ::Clone() const
+Rendering::ControllerInterfaceSharedPtr Rendering::BillboardNode::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -93,7 +93,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BillboardNode, AlignTo, Ca
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BillboardNode, GetCamera, const Rendering::ConstCameraSharedPtr)
 
-bool Rendering::BillboardNode ::UpdateWorldData(double applicationTime)
+bool Rendering::BillboardNode::UpdateWorldData(double applicationTime)
 {
     ;
 

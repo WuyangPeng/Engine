@@ -73,13 +73,13 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, VisualPass)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, VisualPass)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, VisualPass)
 
-Rendering::VisualPass ::VisualPass()
+Rendering::VisualPass::VisualPass()
     : ParentType{ "VisualPass" }, impl{ make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::VisualPass ::~VisualPass()
+Rendering::VisualPass::~VisualPass()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

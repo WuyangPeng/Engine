@@ -16,7 +16,7 @@
 using std::make_shared;
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, CollapseRecord)
-Rendering::CollapseRecord ::CollapseRecord(int vKeep, int vThrow, int numVertices, int numTriangles)
+Rendering::CollapseRecord::CollapseRecord(int vKeep, int vThrow, int numVertices, int numTriangles)
     : impl{ vKeep, vThrow, numVertices, numTriangles }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -42,7 +42,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CollapseRecord, GetStreamingSize,
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CollapseRecord, ClearIndices, void)
 
-bool Rendering ::operator==(const CollapseRecord& lhs, const CollapseRecord& rhs)
+bool Rendering::operator==(const CollapseRecord& lhs, const CollapseRecord& rhs)
 {
     if (lhs.GetVKeep() == rhs.GetVKeep() &&
         lhs.GetVThrow() == rhs.GetVThrow() &&

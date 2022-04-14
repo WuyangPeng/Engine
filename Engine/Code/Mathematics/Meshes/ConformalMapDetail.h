@@ -1,336 +1,345 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 17:02)
 
 #ifndef MATHEMATICS_MESHES_CONFORMAL_MAP_DETAIL_H
 #define MATHEMATICS_MESHES_CONFORMAL_MAP_DETAIL_H
 
 #include "ConformalMap.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
 template <typename Real>
-Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3<Real>* points, int numTriangles, const int* indices, int punctureTriangle)
+Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const std::vector<Vector3<Real>>& points, int numTriangles, const std::vector<int>& indices, int punctureTriangle)
+    : planes{},
+      planeMin{},
+      planeMax{},
+      spheres{},
+      radius{}
 {
-    // Construct a vertex-triangle-edge representation of mesh.
-    BasicMesh mesh(numPoints, points, numTriangles, indices);
-    int numEdges = mesh.GetNumEdges();
-    const BasicMesh::Edge* edges = mesh.GetEdges();
-    const BasicMesh::Triangle* triangles = mesh.GetTriangles();
+    BasicMesh mesh{ numPoints, numTriangles, indices };
+    const auto numEdges = mesh.GetNumEdges();
+    const auto edges = mesh.GetEdges();
+    const auto triangles = mesh.GetTriangles();
 
-    mPlanes = nullptr;  // NEW1<Vector2<Real> >(numPoints);
-    mSpheres = nullptr;  // NEW1<Vector3<Real> >(numPoints);
+    planes.resize(numPoints);
+    spheres.resize(numPoints);
 
-    // Construct sparse matrix A nondiagonal entries.
-    typename LinearSystem<Real>::SparseMatrix AMat(numEdges, numEdges);
-    int i, e, t, v0, v1, v2;
-    Real value = Math<Real>::GetValue(0);
-    for (e = 0; e < numEdges; ++e)
+    typename LinearSystem<Real>::SparseMatrix aMat{ numEdges, numEdges };
+
+    auto value = Math<Real>::GetValue(0);
+    for (auto e = 0; e < numEdges; ++e)
     {
-        const BasicMesh::Edge& edge = edges[e];
-        v0 = edge.V[0];
-        v1 = edge.V[1];
+        const auto& edge = edges.at(e);
+        auto v0 = edge.v.at(0);
+        auto v1 = edge.v.at(1);
 
-        Vector3<Real> E0, E1;
-
-        const BasicMesh::Triangle& T0 = triangles[edge.T[0]];
-        for (i = 0; i < 3; ++i)
+        const auto& t0 = triangles.at(edge.t.at(0));
+        for (auto i = 0; i < 3; ++i)
         {
-            v2 = T0.V[i];
+            auto v2 = t0.v.at(i);
             if (v2 != v0 && v2 != v1)
             {
-                E0 = points[v0] - points[v2];
-                E1 = points[v1] - points[v2];
-                value = Vector3Tools<Real>::DotProduct(E0, E1) /
-                        Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(E0, E1));
+                auto e0 = points.at(v0) - points.at(v2);
+                auto e1 = points.at(v1) - points.at(v2);
+                value = Vector3Tools<Real>::DotProduct(e0, e1) / Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(e0, e1));
             }
         }
 
-        const BasicMesh::Triangle& T1 = triangles[edge.T[1]];
-        for (i = 0; i < 3; ++i)
+        const auto& t1 = triangles.at(edge.t.at(1));
+        for (auto i = 0; i < 3; ++i)
         {
-            v2 = T1.V[i];
+            auto v2 = t1.v.at(i);
             if (v2 != v0 && v2 != v1)
             {
-                E0 = points[v0] - points[v2];
-                E1 = points[v1] - points[v2];
-                value += Vector3Tools<Real>::DotProduct(E0, E1) / Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(E0, E1));
+                auto e0 = points.at(v0) - points.at(v2);
+                auto e1 = points.at(v1) - points.at(v2);
+                value += Vector3Tools<Real>::DotProduct(e0, e1) / Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(e0, e1));
             }
         }
 
-        value *= -Math::GetRational(1, 2);
-        AMat(v0, v1) = value;
+        value *= -Math<Real>::GetRational(1, 2);
+        aMat(v0, v1) = value;
     }
 
-    // Aonstruct sparse matrix A diagonal entries.
-    Real* tmp = nullptr;  // NEW1<Real>(numPoints);
-    memset(tmp, 0, numPoints * sizeof(Real));
-    typename LinearSystem<Real>::SparseMatrix::ConstIter iter = AMat.begin();
-    typename LinearSystem<Real>::SparseMatrix::ConstIter end = AMat.GetEnd();
-    for (/**/; iter != end; ++iter)
+    std::vector<Real> tmp(numPoints);
+
+    for (auto iter = aMat.GetBegin(); iter != aMat.GetEnd(); ++iter)
     {
-        v0 = iter.GetKey().GetRow();
-        v1 = iter.GetKey().GetColumn();
+        const auto v0 = iter.GetKey().GetRow();
+        const auto v1 = iter.GetKey().GetColumn();
         value = iter.GetMapped();
-        MATHEMATICS_ASSERTION_0(v0 != v1, "Unexpected condition\n");
-        tmp[v0] -= value;
-        tmp[v1] -= value;
+        MATHEMATICS_ASSERTION_0(v0 != v1, "意外情况\n");
+        tmp.at(v0) -= value;
+        tmp.at(v1) -= value;
     }
-    for (int v = 0; v < numPoints; ++v)
+
+    for (auto v = 0; v < numPoints; ++v)
     {
-        AMat(v, v) = tmp[v];
+        aMat(v, v) = tmp.at(v);
     }
 
-    MATHEMATICS_ASSERTION_0(numPoints + numEdges == (int)AMat.GetRowsNumber(),
-                            "Mismatch in sizes\n");
+    MATHEMATICS_ASSERTION_0(numPoints + numEdges == boost::numeric_cast<int>(aMat.GetRowsNumber()), "尺寸不匹配。\n");
 
-    // Construct column vector B (happens to be sparse).
-    const BasicMesh::Triangle& tri = triangles[punctureTriangle];
-    v0 = tri.V[0];
-    v1 = tri.V[1];
-    v2 = tri.V[2];
-    Vector3<Real> V0 = points[v0];
-    Vector3<Real> V1 = points[v1];
-    Vector3<Real> V2 = points[v2];
-    Vector3<Real> E10 = V1 - V0;
-    Vector3<Real> E20 = V2 - V0;
-    Vector3<Real> E12 = V1 - V2;
-    Vector3<Real> cross = Vector3Tools<Real>::CrossProduct(E20, E10);
-    Real len10 = Vector3Tools<Real>::GetLength(E10);
-    Real invLen10 = (Math::GetValue(1)) / len10;
-    Real twoArea = Vector3Tools<Real>::GetLength(cross);
-    Real invLenCross = (Math::GetValue(1)) / twoArea;
-    Real invProd = invLen10 * invLenCross;
-    Real re0 = -invLen10;
-    Real im0 = invProd * Vector3Tools<Real>::DotProduct(E12, E10);
-    Real re1 = invLen10;
-    Real im1 = invProd * Vector3Tools<Real>::DotProduct(E20, E10);
-    Real re2 = Math<Real>::GetValue(0);
-    Real im2 = -len10 * invLenCross;
+    const auto& tri = triangles.at(punctureTriangle);
+    auto v0 = tri.v.at(0);
+    auto v1 = tri.v.at(1);
+    auto v2 = tri.v.at(2);
+    const auto& points0 = points.at(v0);
+    const auto& points1 = points.at(v1);
+    const auto& points2 = points.at(v2);
+    const auto e10 = points1 - points0;
+    const auto e20 = points2 - points0;
+    const auto e12 = points1 - points2;
+    const auto cross = Vector3Tools<Real>::CrossProduct(e20, e10);
+    auto len10 = Vector3Tools<Real>::GetLength(e10);
+    auto invLen10 = (Math<Real>::GetValue(1)) / len10;
+    auto twoArea = Vector3Tools<Real>::GetLength(cross);
+    auto invLenCross = (Math<Real>::GetValue(1)) / twoArea;
+    auto invProd = invLen10 * invLenCross;
+    auto re0 = -invLen10;
+    auto im0 = invProd * Vector3Tools<Real>::DotProduct(e12, e10);
+    auto re1 = invLen10;
+    auto im1 = invProd * Vector3Tools<Real>::DotProduct(e20, e10);
+    auto re2 = Math<Real>::GetValue(0);
+    auto im2 = -len10 * invLenCross;
 
-    // Solve sparse system for real parts.
-    memset(tmp, 0, numPoints * sizeof(Real));
-    tmp[v0] = re0;
-    tmp[v1] = re1;
-    tmp[v2] = re2;
-    Real* result = nullptr;  // NEW1<Real>(numPoints);
+    tmp.clear();
+    tmp.resize(numPoints);
+    tmp.at(v0) = re0;
+    tmp.at(v1) = re1;
+    tmp.at(v2) = re2;
+    std::vector<Real> result;
     try
     {
-        LinearSystem<Real>().SolveSymmetricConjugateGradient(AMat, tmp, result);
-    }
-    catch (CoreTools::Error&)
-    {
-    }
-    for (i = 0; i < numPoints; ++i)
-    {
-        mPlanes[i].SetX(result[i]);
-    }
-
-    // Solve sparse system for imaginary parts.
-    memset(tmp, 0, numPoints * sizeof(Real));
-    tmp[v0] = -im0;
-    tmp[v1] = -im1;
-    tmp[v2] = -im2;
-
-    try
-    {
-        LinearSystem<Real>().SolveSymmetricConjugateGradient(AMat, tmp, result);
+        result = LinearSystem<Real>().SolveSymmetricConjugateGradient(aMat, tmp);
     }
     catch (CoreTools::Error&)
     {
     }
 
-    for (i = 0; i < numPoints; ++i)
+    for (auto i = 0; i < numPoints; ++i)
     {
-        mPlanes[i].SetY(result[i]);
-    }
-    DELETE1(tmp);
-    DELETE1(result);
-
-    // Scale to [-1,1]^2 for numerical conditioning in later steps.
-    Real fmin = mPlanes[0].GetX(), fmax = fmin;
-    for (i = 0; i < numPoints; i++)
-    {
-        if (mPlanes[i].GetX() < fmin)
-        {
-            fmin = mPlanes[i].GetX();
-        }
-        else if (mPlanes[i].GetX() > fmax)
-        {
-            fmax = mPlanes[i].GetX();
-        }
-        if (mPlanes[i].GetY() < fmin)
-        {
-            fmin = mPlanes[i].GetY();
-        }
-        else if (mPlanes[i].GetY() > fmax)
-        {
-            fmax = mPlanes[i].GetY();
-        }
-    }
-    Real halfRange = (Math::GetRational(1, 2)) * (fmax - fmin);
-    Real invHalfRange = (Math::GetValue(1)) / halfRange;
-    for (i = 0; i < numPoints; ++i)
-    {
-        mPlanes[i].SetX(-Math::GetValue(1) + invHalfRange * (mPlanes[i].GetX() - fmin));
-        mPlanes[i].SetY(-Math::GetValue(1) + invHalfRange * (mPlanes[i].GetY() - fmin));
+        planes.at(i).SetX(result.at(i));
     }
 
-    // Map plane points to sphere using inverse stereographic projection.
-    // The main issue is selecting a translation in (x,y) and a radius of
-    // the projection sphere.  Both factors strongly influence the final
-    // result.
+    tmp.clear();
+    tmp.resize(numPoints);
+    tmp.at(v0) = -im0;
+    tmp.at(v1) = -im1;
+    tmp.at(v2) = -im2;
 
-    // Use the average as the south pole.  The points tend to be clustered
-    // approximately in the middle of the conformally mapped punctured
-    // triangle, so the average is a good choice to place the pole.
-    Vector2<Real> origin(Math<Real>::GetValue(0), Math<Real>::GetValue(0));
-    for (i = 0; i < numPoints; ++i)
+    try
     {
-        origin += mPlanes[i];
+        result = LinearSystem<Real>().SolveSymmetricConjugateGradient(aMat, tmp);
     }
-    origin /= (Real)numPoints;
-    for (i = 0; i < numPoints; ++i)
+    catch (CoreTools::Error&)
     {
-        mPlanes[i] -= origin;
     }
 
-    mPlaneMin = mPlanes[0];
-    mPlaneMax = mPlanes[0];
-    for (i = 1; i < numPoints; ++i)
+    for (auto i = 0; i < numPoints; ++i)
     {
-        if (mPlanes[i].GetX() < mPlaneMin.GetX())
-        {
-            mPlaneMin.SetX(mPlanes[i].GetX());
-        }
-        else if (mPlanes[i].GetX() > mPlaneMax.GetX())
-        {
-            mPlaneMax.SetX(mPlanes[i].GetX());
-        }
+        planes.at(i).SetY(result.at(i));
+    }
 
-        if (mPlanes[i].GetY() < mPlaneMin.GetY())
+    auto fmin = planes.at(0).GetX();
+    auto fmax = fmin;
+    for (auto i = 0; i < numPoints; i++)
+    {
+        if (planes.at(i).GetX() < fmin)
         {
-            mPlaneMin.SetY(mPlanes[i].GetY());
+            fmin = planes.at(i).GetX();
         }
-        else if (mPlanes[i].GetY() > mPlaneMax.GetY())
+        else if (planes.at(i).GetX() > fmax)
         {
-            mPlaneMax.SetY(mPlanes[i].GetY());
+            fmax = planes.at(i).GetX();
+        }
+        if (planes.at(i).GetY() < fmin)
+        {
+            fmin = planes.at(i).GetY();
+        }
+        else if (planes.at(i).GetY() > fmax)
+        {
+            fmax = planes.at(i).GetY();
         }
     }
 
-    // Select the radius of the sphere so that the projected punctured
-    // triangle has an area whose fraction of total spherical area is the
-    // same fraction as the area of the punctured triangle to the total area
-    // of the original triangle mesh.
-    Real twoTotalArea = Math<Real>::GetValue(0);
-    for (t = 0; t < numTriangles; ++t)
+    auto halfRange = (Math<Real>::GetRational(1, 2)) * (fmax - fmin);
+    auto invHalfRange = (Math<Real>::GetValue(1)) / halfRange;
+    for (auto i = 0; i < numPoints; ++i)
     {
-        const BasicMesh::Triangle& T0 = triangles[t];
-        const Vector3<Real>& V0 = points[T0.V[0]];
-        const Vector3<Real>& V1 = points[T0.V[1]];
-        const Vector3<Real>& V2 = points[T0.V[2]];
-        Vector3<Real> E0 = V1 - V0, E1 = V2 - V0;
-        twoTotalArea += Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(E0, E1));
+        planes.at(i).SetX(-Math<Real>::GetValue(1) + invHalfRange * (planes.at(i).GetX() - fmin));
+        planes.at(i).SetY(-Math<Real>::GetValue(1) + invHalfRange * (planes.at(i).GetY() - fmin));
     }
-    mRadius = ComputeRadius(mPlanes[v0], mPlanes[v1], mPlanes[v2], twoArea / twoTotalArea);
-    Real radiusSqr = mRadius * mRadius;
 
-    // Inverse stereographic projection to obtain sphere coordinates.  The
-    // sphere is centered at the origin and has radius 1.
-    for (i = 0; i < numPoints; i++)
+    Vector2<Real> origin{ Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
+    for (auto i = 0; i < numPoints; ++i)
     {
-        Real rSqr = Vector3Tools<Real>::GetLengthSquared(mPlanes[i]);
-        Real mult = (Math::GetValue(1)) / (rSqr + radiusSqr);
-        Real x = (Math::GetValue(2)) * mult * radiusSqr * mPlanes[i].GetX();
-        Real y = (Math::GetValue(2)) * mult * radiusSqr * mPlanes[i].GetY();
-        Real z = mult * mRadius * (rSqr - radiusSqr);
-        mSpheres[i] = Vector3<Real>(x, y, z) / mRadius;
+        origin += planes.at(i);
     }
+    origin /= Math<Real>::GetValue(numPoints);
+    for (auto i = 0; i < numPoints; ++i)
+    {
+        planes.at(i) -= origin;
+    }
+
+    planeMin = planes.at(0);
+    planeMax = planes.at(0);
+    for (auto i = 1; i < numPoints; ++i)
+    {
+        if (planes.at(i).GetX() < planeMin.GetX())
+        {
+            planeMin.SetX(planes.at(i).GetX());
+        }
+        else if (planes.at(i).GetX() > planeMax.GetX())
+        {
+            planeMax.SetX(planes.at(i).GetX());
+        }
+
+        if (planes.at(i).GetY() < planeMin.GetY())
+        {
+            planeMin.SetY(planes.at(i).GetY());
+        }
+        else if (planes.at(i).GetY() > planeMax.GetY())
+        {
+            planeMax.SetY(planes.at(i).GetY());
+        }
+    }
+
+    auto twoTotalArea = Math<Real>::GetValue(0);
+    for (auto t = 0; t < numTriangles; ++t)
+    {
+        const auto& triangle = triangles.at(t);
+        const auto& trianglePoint0 = points.at(triangle.v.at(0));
+        const auto& trianglePoint1 = points.at(triangle.v.at(1));
+        const auto& trianglePoint2 = points.at(triangle.v.at(2));
+        const auto e0 = trianglePoint1 - trianglePoint0;
+        const auto e1 = trianglePoint2 - trianglePoint0;
+        twoTotalArea += Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(e0, e1));
+    }
+    radius = ComputeRadius(planes.at(v0), planes.at(v1), planes.at(v2), twoArea / twoTotalArea);
+    auto radiusSqr = radius * radius;
+
+    for (auto i = 0; i < numPoints; i++)
+    {
+        auto rSqr = Vector3Tools<Real>::GetLengthSquared(planes.at(i));
+        auto mult = (Math<Real>::GetValue(1)) / (rSqr + radiusSqr);
+        auto x = (Math<Real>::GetValue(2)) * mult * radiusSqr * planes.at(i).GetX();
+        auto y = (Math<Real>::GetValue(2)) * mult * radiusSqr * planes.at(i).GetY();
+        auto z = mult * radius * (rSqr - radiusSqr);
+        spheres.at(i) = Vector3<Real>(x, y, z) / radius;
+    }
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ConformalMap<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+std::vector<Mathematics::Vector2<Real>> Mathematics::ConformalMap<Real>::GetPlaneCoordinates() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return planes;
 }
 
 template <typename Real>
-Mathematics::ConformalMap<Real>::~ConformalMap()
+const Mathematics::Vector2<Real>& Mathematics::ConformalMap<Real>::GetPlaneMin() const noexcept
 {
-    DELETE1(mPlanes);
-    DELETE1(mSpheres);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return planeMin;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>* Mathematics::ConformalMap<Real>::GetPlaneCoordinates() const
+const Mathematics::Vector2<Real>& Mathematics::ConformalMap<Real>::GetPlaneMax() const noexcept
 {
-    return mPlanes;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return planeMax;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>& Mathematics::ConformalMap<Real>::GetPlaneMin() const
+std::vector<Mathematics::Vector3<Real>> Mathematics::ConformalMap<Real>::GetSphereCoordinates() const
 {
-    return mPlaneMin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return spheres;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>& Mathematics::ConformalMap<Real>::GetPlaneMax() const
+Real Mathematics::ConformalMap<Real>::GetSphereRadius() const noexcept
 {
-    return mPlaneMax;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return radius;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::ConformalMap<Real>::GetSphereCoordinates() const
+Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2<Real>& v0, const Vector2<Real>& v1, const Vector2<Real>& v2, Real areaFraction) const
 {
-    return mSpheres;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-Real Mathematics::ConformalMap<Real>::GetSphereRadius() const
-{
-    return mRadius;
-}
+    auto r0Sqr = Vector3Tools<Real>::GetLengthSquared(v0);
+    auto r1Sqr = Vector3Tools<Real>::GetLengthSquared(v1);
+    auto r2Sqr = Vector3Tools<Real>::GetLengthSquared(v2);
+    auto diffR10 = r1Sqr - r0Sqr;
+    auto diffR20 = r2Sqr - r0Sqr;
+    auto diffX10 = v1.GetX() - v0.GetX();
+    auto diffY10 = v1.GetY() - v0.GetY();
+    auto diffX20 = v2.GetX() - v0.GetX();
+    auto diffY20 = v2.GetY() - v0.GetY();
+    auto diffRX10 = v1.GetX() * r0Sqr - v0.GetX() * r1Sqr;
+    auto diffRY10 = v1.GetY() * r0Sqr - v0.GetY() * r1Sqr;
+    auto diffRX20 = v2.GetX() * r0Sqr - v0.GetX() * r2Sqr;
+    auto diffRY20 = v2.GetY() * r0Sqr - v0.GetY() * r2Sqr;
 
-template <typename Real>
-Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2<Real>& V0, const Vector2<Real>& V1, const Vector2<Real>& V2, Real areaFraction) const
-{
-    Real r0Sqr = Vector3Tools<Real>::GetLengthSquared(V0);
-    Real r1Sqr = Vector3Tools<Real>::GetLengthSquared(V1);
-    Real r2Sqr = Vector3Tools<Real>::GetLengthSquared(V2);
-    Real diffR10 = r1Sqr - r0Sqr;
-    Real diffR20 = r2Sqr - r0Sqr;
-    Real diffX10 = V1.GetX() - V0.GetX();
-    Real diffY10 = V1.GetY() - V0.GetY();
-    Real diffX20 = V2.GetX() - V0.GetX();
-    Real diffY20 = V2.GetY() - V0.GetY();
-    Real diffRX10 = V1.GetX() * r0Sqr - V0.GetX() * r1Sqr;
-    Real diffRY10 = V1.GetY() * r0Sqr - V0.GetY() * r1Sqr;
-    Real diffRX20 = V2.GetX() * r0Sqr - V0.GetX() * r2Sqr;
-    Real diffRY20 = V2.GetY() * r0Sqr - V0.GetY() * r2Sqr;
+    auto c0 = diffR20 * diffRY10 - diffR10 * diffRY20;
+    auto c1 = diffR20 * diffY10 - diffR10 * diffY20;
+    auto d0 = diffR10 * diffRX20 - diffR20 * diffRX10;
+    auto d1 = diffR10 * diffX20 - diffR20 * diffX10;
+    auto e0 = diffRX10 * diffRY20 - diffRX20 * diffRY10;
+    auto e1 = diffRX10 * diffY20 - diffRX20 * diffY10;
+    auto e2 = diffX10 * diffY20 - diffX20 * diffY10;
 
-    Real c0 = diffR20 * diffRY10 - diffR10 * diffRY20;
-    Real c1 = diffR20 * diffY10 - diffR10 * diffY20;
-    Real d0 = diffR10 * diffRX20 - diffR20 * diffRX10;
-    Real d1 = diffR10 * diffX20 - diffR20 * diffX10;
-    Real e0 = diffRX10 * diffRY20 - diffRX20 * diffRY10;
-    Real e1 = diffRX10 * diffY20 - diffRX20 * diffY10;
-    Real e2 = diffX10 * diffY20 - diffX20 * diffY10;
-
-    Polynomial<Real> poly0(6);
+    Polynomial<Real> poly0{ 6 };
     poly0[0] = Math<Real>::GetValue(0);
     poly0[1] = Math<Real>::GetValue(0);
     poly0[2] = e0 * e0;
-    poly0[3] = c0 * c0 + d0 * d0 + (Math::GetValue(2)) * e0 * e1;
-    poly0[4] = (Math::GetValue(2)) * (c0 * c1 + d0 * d1 + e0 * e1) + e1 * e1;
-    poly0[5] = c1 * c1 + d1 * d1 + (Math::GetValue(2)) * e1 * e2;
+    poly0[3] = c0 * c0 + d0 * d0 + (Math<Real>::GetValue(2)) * e0 * e1;
+    poly0[4] = (Math<Real>::GetValue(2)) * (c0 * c1 + d0 * d1 + e0 * e1) + e1 * e1;
+    poly0[5] = c1 * c1 + d1 * d1 + (Math<Real>::GetValue(2)) * e1 * e2;
     poly0[6] = e2 * e2;
 
-    Polynomial<Real> qpoly0(1), qpoly1(1), qpoly2(1);
+    Polynomial<Real> qpoly0{ 1 };
+    Polynomial<Real> qpoly1{ 1 };
+    Polynomial<Real> qpoly2{ 1 };
     qpoly0[0] = r0Sqr;
-    qpoly0[1] = Math::GetValue(1);
+    qpoly0[1] = Math<Real>::GetValue(1);
     qpoly1[0] = r1Sqr;
-    qpoly1[1] = Math::GetValue(1);
+    qpoly1[1] = Math<Real>::GetValue(1);
     qpoly2[0] = r2Sqr;
-    qpoly2[1] = Math::GetValue(1);
+    qpoly2[1] = Math<Real>::GetValue(1);
 
-    Real tmp = areaFraction * Math<Real>::GetPI();
-    Real amp = tmp * tmp;
+    auto tmp = areaFraction * Math<Real>::GetPI();
+    auto amp = tmp * tmp;
 
-    Polynomial<Real> poly1 = amp * qpoly0;
+    auto poly1 = amp * qpoly0;
     poly1 = poly1 * qpoly0;
     poly1 = poly1 * qpoly0;
     poly1 = poly1 * qpoly0;
@@ -339,26 +348,25 @@ Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2<Real>& V0, con
     poly1 = poly1 * qpoly2;
     poly1 = poly1 * qpoly2;
 
-    Polynomial<Real> final = poly1 - poly0;
+    auto final = poly1 - poly0;
     MATHEMATICS_ASSERTION_0(final.GetDegree() <= 8, "Unexpected condition\n");
 
-    // Bound a root near zero and apply bisection to find t.
-    Real tmin = Math<Real>::GetValue(0), fmin = final(tmin);
-    Real tmax = Math::GetValue(1), fmax = final(tmax);
+    auto tmin = Math<Real>::GetValue(0), fmin = final(tmin);
+    auto tmax = Math<Real>::GetValue(1), fmax = final(tmax);
     MATHEMATICS_ASSERTION_0(fmin > Math<Real>::GetValue(0) && fmax < Math<Real>::GetValue(0), "Unexpected condition\n");
 
-    // Determine the number of iterations to get 'digits' of accuracy.
-    const int digits = 6;
-    Real tmp0 = Math<Real>::Log(tmax - tmin);
-    Real tmp1 = ((Real)digits) * Math<Real>::Log(static_cast<Real>(10));
-    Real arg = (tmp0 + tmp1) / Math<Real>::Log(Math::GetValue(2));
-    int maxIter = (int)(arg + Math::GetRational(1, 2));
-    Real tmid = Math<Real>::GetValue(0), fmid;
-    for (int i = 0; i < maxIter; ++i)
+    constexpr auto digits = 6;
+    auto tmp0 = Math<Real>::Log(tmax - tmin);
+    auto tmp1 = Math<Real>::GetValue(digits) * Math<Real>::Log(Math<Real>::GetValue(10));
+    auto arg = (tmp0 + tmp1) / Math<Real>::Log(Math<Real>::GetValue(2));
+    auto maxIter = boost::numeric_cast<int>(arg + Math<Real>::GetRational(1, 2));
+    auto tmid = Math<Real>::GetValue(0);
+
+    for (auto i = 0; i < maxIter; ++i)
     {
-        tmid = (Math::GetRational(1, 2)) * (tmin + tmax);
-        fmid = final(tmid);
-        Real product = fmid * fmin;
+        tmid = (Math<Real>::GetRational(1, 2)) * (tmin + tmax);
+        auto fmid = final(tmid);
+        auto product = fmid * fmin;
         if (product < Math<Real>::GetValue(0))
         {
             tmax = tmid;
@@ -371,8 +379,7 @@ Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2<Real>& V0, con
         }
     }
 
-    Real radius = Math<Real>::Sqrt(tmid);
-    return radius;
+    return Math<Real>::Sqrt(tmid);
 }
 
 #endif  // MATHEMATICS_MESHES_CONFORMAL_MAP_DETAIL_H

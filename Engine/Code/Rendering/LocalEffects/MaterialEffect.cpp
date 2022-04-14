@@ -31,7 +31,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialEffect);
 
-Rendering::MaterialEffect ::MaterialEffect()
+Rendering::MaterialEffect::MaterialEffect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Material", 1, 2, 2, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -75,29 +75,31 @@ Rendering::MaterialEffect ::MaterialEffect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::MaterialEffect ::CreateInstance(Material* material) const
+Rendering::VisualEffectInstance* Rendering::MaterialEffect::CreateInstance(Material* material) const noexcept
 {
     material;
     VisualEffectInstance* instance = nullptr;  // CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
-   // instance->SetVertexConstant(0, "PVWMatrix", ShaderFloatSharedPtr(CoreTools::New0<ProjectionViewMatrixConstant>()));
-   // instance->SetVertexConstant(0, "MaterialDiffuse", ShaderFloatSharedPtr(CoreTools::New0<MaterialDiffuseConstant>(MaterialSharedPtr(material))));
+    // instance->SetVertexConstant(0, "PVWMatrix", ShaderFloatSharedPtr(CoreTools::New0<ProjectionViewMatrixConstant>()));
+    // instance->SetVertexConstant(0, "MaterialDiffuse", ShaderFloatSharedPtr(CoreTools::New0<MaterialDiffuseConstant>(MaterialSharedPtr(material))));
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::MaterialEffect ::CreateUniqueInstance(Material* material)
+Rendering::VisualEffectInstance* Rendering::MaterialEffect::CreateUniqueInstance(Material* material) noexcept
 {
     const MaterialEffect* effect = nullptr;  // CoreTools::New0<MaterialEffect>();
+    if (effect == nullptr)
+        return nullptr;
     return effect->CreateInstance(material);
 }
 
 // Streaming support.
 
-Rendering::MaterialEffect ::MaterialEffect(LoadConstructor value)
+Rendering::MaterialEffect::MaterialEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::MaterialEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::MaterialEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -106,7 +108,7 @@ void Rendering::MaterialEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::MaterialEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::MaterialEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
@@ -138,12 +140,12 @@ void Rendering::MaterialEffect::PostLink()
     }
 }
 
-uint64_t Rendering::MaterialEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::MaterialEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::MaterialEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::MaterialEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -152,7 +154,7 @@ void Rendering::MaterialEffect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::MaterialEffect ::GetStreamingSize() const
+int Rendering::MaterialEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

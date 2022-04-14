@@ -12,7 +12,7 @@
 
 #include "CoreTools/Contract/Noexcept.h"
 
-Rendering::Dx9RenderTarget ::Dx9RenderTarget([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const RenderTarget* renderTarget)
+Rendering::Dx9RenderTarget::Dx9RenderTarget([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const RenderTarget* renderTarget)
     : ParentType{}
 {
  
@@ -24,7 +24,7 @@ CoreTools::DisableNoexcept();
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Dx9RenderTarget)
 
-void Rendering::Dx9RenderTarget ::Enable([[maybe_unused]] Renderer* renderer)
+void Rendering::Dx9RenderTarget::Enable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_9; 
 
@@ -33,7 +33,7 @@ void Rendering::Dx9RenderTarget ::Enable([[maybe_unused]] Renderer* renderer)
 	CoreTools::DisableNoexcept();
 }
 
-void Rendering::Dx9RenderTarget ::Disable([[maybe_unused]] Renderer* renderer)
+void Rendering::Dx9RenderTarget::Disable([[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_9;  
 
@@ -42,7 +42,7 @@ void Rendering::Dx9RenderTarget ::Disable([[maybe_unused]] Renderer* renderer)
 	 CoreTools::DisableNoexcept();
 }
 
-Rendering::ConstTexture2DSharedPtr Rendering::Dx9RenderTarget ::ReadColor([[maybe_unused]] int index, [[maybe_unused]] Renderer* renderer)
+Rendering::ConstTexture2DSharedPtr Rendering::Dx9RenderTarget::ReadColor([[maybe_unused]] int index, [[maybe_unused]] Renderer* renderer)
 {
 	RENDERING_CLASS_IS_VALID_9;  
 

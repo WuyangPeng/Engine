@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.3 (2019/09/02 13:08)
 
 // 资源管理库单元测试包含以下模块：
@@ -16,6 +16,6 @@
 // 9.	GameWorldMap（游戏世界和地图）
 // 10.	Miscellaneous（杂项）
 
+#include "System/SystemLib.h"
 #include "CoreTools/CoreToolsLib.h"
 #include "ResourceManager/ResourceManagerLib.h"
-

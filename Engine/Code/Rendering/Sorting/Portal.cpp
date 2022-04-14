@@ -29,7 +29,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Portal);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Portal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Portal);
 
-Rendering::Portal ::Portal(int numVertices, Mathematics::APointF* modelVertices, const Mathematics::PlaneF& modelPlane, ConvexRegion* adjacentRegion, bool open)
+Rendering::Portal::Portal(int numVertices, Mathematics::APointF* modelVertices, const Mathematics::PlaneF& modelPlane, ConvexRegion* adjacentRegion, bool open)
     : ParentType("Portal"), AdjacentRegion(adjacentRegion), Open(open), mNumVertices(numVertices),
       mModelVertices(modelVertices), mModelPlane(modelPlane), mWorldPlane(modelPlane)
 {
@@ -50,7 +50,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Portal::CloneObject() const
     return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
-void Rendering::Portal ::UpdateWorldData(const FloatTransform& worldTransform) noexcept
+void Rendering::Portal::UpdateWorldData(const TransformF& worldTransform) noexcept
 {
     for (int i = 0; i < mNumVertices; ++i)
     {
@@ -61,7 +61,7 @@ void Rendering::Portal ::UpdateWorldData(const FloatTransform& worldTransform) n
     // mWorldPlane.Normalize();
 }
 
-bool Rendering::Portal ::ReducedFrustum(const Culler& culler, float reducedFrustum[6])
+bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustum[6])
 {
     // The portal polygon is transformed into the camera coordinate system
     // and projected onto the near plane.  An axis-aligned bounding rectangle
@@ -311,7 +311,7 @@ bool Rendering::Portal ::ReducedFrustum(const Culler& culler, float reducedFrust
     return true;
 }
 
-void Rendering::Portal ::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::Portal::GetVisibleSet(Culler& culler, bool noCull)
 {
     // Visit only the adjacent region if the portal is open.
     if (!Open)
@@ -361,7 +361,7 @@ void Rendering::Portal ::GetVisibleSet(Culler& culler, bool noCull)
 
 // Name support.
 
-CoreTools::ObjectSharedPtr Rendering::Portal ::GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::Portal::GetObjectByName(const std::string& name)
 {
     CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
     if (found)
@@ -378,7 +378,7 @@ CoreTools::ObjectSharedPtr Rendering::Portal ::GetObjectByName(const std::string
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
@@ -388,7 +388,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal ::GetAllObjectsByName(
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::Portal ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::Portal::GetConstObjectByName(const std::string& name) const
 {
     CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -405,7 +405,7 @@ CoreTools::ConstObjectSharedPtr Rendering::Portal ::GetConstObjectByName(const s
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal::GetAllConstObjectsByName(const std::string& name) const
 {
     std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -417,13 +417,13 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal ::GetAllConstObje
 
 // Streaming support.
 
-Rendering::Portal ::Portal(LoadConstructor value)
+Rendering::Portal::Portal(LoadConstructor value)
     : Object(value), AdjacentRegion(0), Open(false), mNumVertices(0),
       mModelVertices(0), mWorldVertices(0), mModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
 {
 }
 
-void Rendering::Portal ::Load(CoreTools::BufferSource& source)
+void Rendering::Portal::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -439,19 +439,19 @@ void Rendering::Portal ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Portal ::Link(CoreTools::ObjectLink& source)
+void Rendering::Portal::Link(CoreTools::ObjectLink& source)
 {
     Object::Link(source);
 
     //source.ResolveObjectLink(AdjacentRegion);
 }
 
-void Rendering::Portal ::PostLink()
+void Rendering::Portal::PostLink()
 {
     Object::PostLink();
 }
 
-uint64_t Rendering::Portal ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Portal::Register(CoreTools::ObjectRegister& target) const
 {
     if (Object::Register(target))
     {
@@ -461,7 +461,7 @@ uint64_t Rendering::Portal ::Register(CoreTools::ObjectRegister& target) const
     return false;
 }
 
-void Rendering::Portal ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Portal::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -479,7 +479,7 @@ void Rendering::Portal ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::Portal ::GetStreamingSize() const
+int Rendering::Portal::GetStreamingSize() const
 {
     int size = Object::GetStreamingSize();
     size += sizeof(mNumVertices);

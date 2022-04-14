@@ -20,7 +20,7 @@ namespace Rendering
 		void MainTest();	 
 		void Texture2DTest();
 		 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

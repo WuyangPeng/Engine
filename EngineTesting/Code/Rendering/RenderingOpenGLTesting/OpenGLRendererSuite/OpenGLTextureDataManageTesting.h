@@ -23,7 +23,7 @@ namespace Rendering
 		void Texture3DTest();
 		void TextureCubeTest();
 	 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

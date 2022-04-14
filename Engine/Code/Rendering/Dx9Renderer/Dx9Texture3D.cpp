@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Contract/Noexcept.h"
 
-Rendering::Dx9Texture3D ::Dx9Texture3D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture3D* texture)
+Rendering::Dx9Texture3D::Dx9Texture3D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture3D* texture)
 
 {
     CoreTools::DisableNoexcept();
@@ -50,7 +50,7 @@ Rendering::Dx9Texture3D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9Texture3D)
 
-void Rendering::Dx9Texture3D ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9Texture3D::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -65,7 +65,7 @@ void Rendering::Dx9Texture3D ::Enable([[maybe_unused]] Renderer* renderer, [[may
 	 
 }
 
-void Rendering::Dx9Texture3D ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9Texture3D::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -91,7 +91,7 @@ void Rendering::Dx9Texture3D ::Disable([[maybe_unused]] Renderer* renderer, [[ma
  
 }
 
-void* Rendering::Dx9Texture3D ::Lock([[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
+void* Rendering::Dx9Texture3D::Lock([[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -109,7 +109,7 @@ void* Rendering::Dx9Texture3D ::Lock([[maybe_unused]] int level, [[maybe_unused]
 	return nullptr;
 }
 
-void Rendering::Dx9Texture3D ::Unlock([[maybe_unused]] int level)
+void Rendering::Dx9Texture3D::Unlock([[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();

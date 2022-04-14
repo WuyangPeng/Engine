@@ -1,304 +1,236 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 16:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 16:58)
 
 #include "Rendering/RenderingExport.h"
 
-#include "Detail/VertexFormatImpl.h"
 #include "VertexFormat.h"
-#include "Rendering/Renderers/RendererManager.h" 
+#include "Detail/VertexFormatImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-#include "System/Helper/PragmaWarning/NumericCast.h"
- 
-using std::vector;
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26456)
-CORE_TOOLS_RTTI_DEFINE(Rendering,VertexFormat);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,VertexFormat);
-CORE_TOOLS_FACTORY_DEFINE(Rendering,VertexFormat); 
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/Renderers/RendererManager.h"
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                       \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }                                                                                        
-    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, VertexFormat);
+using std::make_shared;
+using std::vector;
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, VertexFormat)
+
+CORE_TOOLS_RTTI_DEFINE(Rendering, VertexFormat);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexFormat);
+CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexFormat);
 
 // private
-Rendering::VertexFormat
-	::VertexFormat( int numAttributes )
-	:ParentType{ "VertexFormat" }, impl{ make_shared<ImplType>(numAttributes) }
+Rendering::VertexFormat::VertexFormat(MAYBE_UNUSED VertexFormatCreate vertexFormatCreate, int numAttributes)
+    : ParentType{ "VertexFormat" }, impl{ numAttributes }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::VertexFormat
-	::~VertexFormat()
-{
-	EXCEPTION_TRY
-	{
-            RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
-	}
-	EXCEPTION_ALL_CATCH(Rendering)
-	
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-CLASS_INVARIANT_STUB_DEFINE(Rendering,VertexFormat)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, VertexFormat)
 
 // static
-Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
-	::Create(const vector<VertexFormatType> triple)
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(const vector<VertexFormatType>& triple)
 {
-	auto numAttributes = boost::numeric_cast<int>(triple.size());
+    auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-	VertexFormatSharedPtr vertexformat{ std::make_shared< VertexFormat>(numAttributes) };
+    auto vertexformat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
 
-	auto offset = 0u;
-	for (auto i = 0; i < numAttributes; ++i)
-	{
-		vertexformat->SetAttribute(i, 0, offset,triple[i]);
-		offset += GetTypeSize(triple[i].GetType());
-	}
+    auto offset = 0;
+    for (auto i = 0; i < numAttributes; ++i)
+    {
+        vertexformat->SetAttribute(i, 0, offset, triple.at(i));
+        offset += GetTypeSize(triple.at(i).GetType());
+    }
 
-	vertexformat->SetStride(boost::numeric_cast<int>(offset));
+    vertexformat->SetStride(offset);
 
-	return vertexformat;
+    return vertexformat;
 }
 
-Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
-	::Create(const std::vector<VertexFormatElement> triple) 
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Create(const std::vector<VertexFormatElement>& triple)
 {
-	auto numAttributes = boost::numeric_cast<int>(triple.size());
+    auto numAttributes = boost::numeric_cast<int>(triple.size());
 
-	VertexFormatSharedPtr vertexformat{ std::make_shared < VertexFormat>(numAttributes) };
+    auto vertexformat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
 
-	auto offset = 0u;
-	for (auto i = 0; i < numAttributes; ++i)
-	{
-		vertexformat->SetAttribute(i, triple[i]);
-		offset += GetTypeSize(triple[i].GetType());
-	}
+    auto offset = 0u;
+    for (auto i = 0; i < numAttributes; ++i)
+    {
+        vertexformat->SetAttribute(i, triple.at(i));
+        offset += GetTypeSize(triple.at(i).GetType());
+    }
 
-	vertexformat->SetStride(boost::numeric_cast<int>(offset));
+    vertexformat->SetStride(boost::numeric_cast<int>(offset));
 
-	return vertexformat;
+    return vertexformat;
 }
 
-void Rendering::VertexFormat
-	::SetAttribute( int attribute, unsigned int streamIndex,unsigned int offset,AttributeType type,AttributeUsage usage, unsigned int usageIndex )
+void Rendering::VertexFormat::SetAttribute(int attribute, int32_t streamIndex, int32_t offset, AttributeType type, AttributeUsage usage, int32_t usageIndex)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return impl->SetAttribute(attribute,streamIndex,offset,type,usage,usageIndex);
+    return impl->SetAttribute(attribute, streamIndex, offset, type, usage, usageIndex);
 }
 
-void Rendering::VertexFormat
-    ::SetAttribute(int attribute, unsigned int streamIndex,unsigned int offset,const VertexFormatType& vertexFormatType)
+void Rendering::VertexFormat::SetAttribute(int attribute, int32_t streamIndex, int32_t offset, const VertexFormatType& vertexFormatType)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return impl->SetAttribute(attribute, streamIndex,offset, vertexFormatType);
+    return impl->SetAttribute(attribute, streamIndex, offset, vertexFormatType);
 }
 
-void Rendering::VertexFormat
-    ::SetAttribute(int attribute,const VertexFormatElement& vertexFormatElement) 
+void Rendering::VertexFormat::SetAttribute(int attribute, const VertexFormatElement& vertexFormatElement)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return impl->SetAttribute(attribute, vertexFormatElement);
+    return impl->SetAttribute(attribute, vertexFormatElement);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,SetStride,int,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, SetStride, int, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,VertexFormat,GetNumAttributes,int)	
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetStreamIndex,int,unsigned int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetOffset,int,unsigned int)									
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetAttributeType,int,Rendering::VertexFormatFlags::AttributeType)									
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetAttributeUsage,int,Rendering::VertexFormatFlags::AttributeUsage)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,GetUsageIndex,int,unsigned int)	
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexFormat, GetNumAttributes, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetStreamIndex, int, int32_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetOffset, int, int32_t)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetAttributeType, int, Rendering::VertexFormatFlags::AttributeType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetAttributeUsage, int, Rendering::VertexFormatFlags::AttributeUsage)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VertexFormat, GetUsageIndex, int, int32_t)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VertexFormat, GetStride, int)
 
-int Rendering::VertexFormat
-    ::GetIndex( AttributeUsage usage, unsigned int usageIndex ) const noexcept
+int Rendering::VertexFormat::GetIndex(AttributeUsage usage, int32_t usageIndex) const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetIndex(usage,usageIndex);
+    return impl->GetIndex(usage, usageIndex);
 }
 
-int Rendering::VertexFormat
-	::GetComponentSize( AttributeType type ) noexcept
+int Rendering::VertexFormat::GetComponentSize(AttributeType type) noexcept
 {
-	return ImplType::GetComponentSize(type);
+    return ImplType::GetComponentSize(type);
 }
 
-int Rendering::VertexFormat ::GetNumComponents(AttributeType type) noexcept
+int Rendering::VertexFormat::GetNumComponents(AttributeType type) noexcept
 {
-	return ImplType::GetNumComponents(type);
+    return ImplType::GetNumComponents(type);
 }
 
-int Rendering::VertexFormat ::GetTypeSize(AttributeType type) noexcept
+int Rendering::VertexFormat::GetTypeSize(AttributeType type) noexcept
 {
-	return ImplType::GetTypeSize(type);
+    return ImplType::GetTypeSize(type);
 }
 
-Rendering::VertexFormat
-	::VertexFormat (LoadConstructor value)
-	:ParentType{ value }, impl{ make_shared<ImplType>(1) }
+Rendering::VertexFormat::VertexFormat(LoadConstructor value)
+    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::VertexFormat
-	::GetStreamingSize () const
+int Rendering::VertexFormat::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = ParentType::GetStreamingSize();
+    auto size = ParentType::GetStreamingSize();
 
-	size += impl->GetStreamingSize();
+    size += impl->GetStreamingSize();
 
-	return size;
+    return size;
 }
 
-uint64_t Rendering::VertexFormat
-	::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::VertexFormat::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ParentType::Register(target);
+    return ParentType::Register(target);
 }
 
-void Rendering::VertexFormat
-	::Save (CoreTools::BufferTarget& target) const
+void Rendering::VertexFormat::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-	ParentType::Save(target);
-	
-	impl->Save(target);
+    ParentType::Save(target);
 
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    impl->Save(target);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::VertexFormat
-	::Link (CoreTools::ObjectLink& source)
-{	
-	;
+void Rendering::VertexFormat::Link(CoreTools::ObjectLink& source)
+{
+    RENDERING_CLASS_IS_VALID_1;
 
-	ParentType::Link(source);
+    ParentType::Link(source);
 }
 
-void Rendering::VertexFormat
-	::PostLink ()
+void Rendering::VertexFormat::PostLink()
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	ParentType::PostLink();
+    ParentType::PostLink();
 }
 
-void Rendering::VertexFormat
-	::Load (CoreTools::BufferSource& source)
+void Rendering::VertexFormat::Load(CoreTools::BufferSource& source)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
-	
-	impl->Load(source);
+
+    impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::VertexFormat
-	::SaveToFile( WriteFileManager& outFile ) const
+void Rendering::VertexFormat::SaveToFile(WriteFileManager& outFile) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	impl->SaveToFile(outFile);
+    impl->SaveToFile(outFile);
 }
 
-void Rendering::VertexFormat
-	::ReadFromFile( ReadFileManager& inFile )
+void Rendering::VertexFormat::ReadFromFile(ReadFileManager& inFile)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	impl->ReadFromFile(inFile);
+    impl->ReadFromFile(inFile);
 }
 
-Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
-	::Clone() const
+Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat::Clone() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return VertexFormatSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
-Rendering::VertexFormatSharedPtr Rendering::VertexFormat
-	::LoadFromFile(ReadFileManager& manager)
+Rendering::VertexFormatSharedPtr Rendering::VertexFormat::LoadFromFile(ReadFileManager& manager)
 {
-	auto numAttributes = 0;
-	manager.Read(sizeof(int), &numAttributes);
+    auto numAttributes = 0;
+    manager.Read(sizeof(int32_t), &numAttributes);
 
-	VertexFormatSharedPtr vertexFormat{ std::make_shared < VertexFormat>(numAttributes) };
+    auto vertexFormat = std::make_shared<VertexFormat>(VertexFormatCreate::Init, numAttributes);
 
-	vertexFormat->ReadFromFile(manager);
+    vertexFormat->ReadFromFile(manager);
 
-	return vertexFormat;
+    return vertexFormat;
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::VertexFormat::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
 
-#include STSTEM_WARNING_POP
+    return std::make_shared<ClassType>(*this);
+}

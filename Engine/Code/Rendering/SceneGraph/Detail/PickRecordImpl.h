@@ -1,15 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 19:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 16:31)
 
 #ifndef RENDERING_SCENE_GRAPH_PICK_RECORD_IMPL_H
 #define RENDERING_SCENE_GRAPH_PICK_RECORD_IMPL_H
 
-#include "Rendering/SceneGraph/Spatial.h"
-
 #include "System/Helper/PragmaWarning/Operators.h"
+#include "Rendering/SceneGraph/Spatial.h"
 
 namespace Rendering
 {
@@ -21,42 +23,42 @@ namespace Rendering
     public:
         // 它存在支持const static PickRecord在Picker构造。
         PickRecordImpl() noexcept;
+        ~PickRecordImpl() noexcept = default;
         PickRecordImpl(const PickRecordImpl& rhs);
         PickRecordImpl& operator=(const PickRecordImpl& rhs);
-        PickRecordImpl(PickRecordImpl&& rhs) = default;
-        PickRecordImpl& operator=(PickRecordImpl&& rhs) = default;
-        ~PickRecordImpl() = default;
+        PickRecordImpl(PickRecordImpl&& rhs) noexcept;
+        PickRecordImpl& operator=(PickRecordImpl&& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        ConstSpatialSharedPtr GetIntersected() const noexcept;
-        float GetParameter() const noexcept;
-        int GetTriangle() const noexcept;
-        float GetBary(int index) const;
+        NODISCARD ConstSpatialSharedPtr GetIntersected() const noexcept;
+        NODISCARD float GetParameter() const noexcept;
+        NODISCARD int GetTriangle() const noexcept;
+        NODISCARD float GetBary(int index) const;
 
-        void SetIntersected(const ConstSpatialSharedPtr& intersected) noexcept;
-        void SetParameter(float parameter) noexcept;
-        void SetTriangle(int triangle) noexcept;
+        void SetIntersected(const ConstSpatialSharedPtr& aIntersected) noexcept;
+        void SetParameter(float aParameter) noexcept;
+        void SetTriangle(int aTriangle) noexcept;
         void SetBary(float firstBary, float secondBary);
 
     private:
         // 分割的对象
-        ConstSpatialSharedPtr m_Intersected;
+        ConstSpatialSharedPtr intersected;
 
         // 线性组件是由P + t * D参数化。成员m_Parameter是参数t在交点的值。
-        float m_Parameter;
+        float parameter;
 
         // 射线相交的三角形的索引。
-        int m_Triangle;
+        int triangle;
 
-        static const int sm_BarySize = 3;
+        static const int barySize = 3;
 
         // 交点的重心坐标。所有的坐标是在[0,1]和b0 + b1 + b2 = 1。
-        float m_Bary[sm_BarySize];
+        std::array<float, barySize> bary;
     };
 
-    bool operator==(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept;
-    bool operator<(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept;
+    NODISCARD bool operator==(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept;
+    NODISCARD bool operator<(const PickRecordImpl& lhs, const PickRecordImpl& rhs) noexcept;
 }
 
 #endif  // RENDERING_SCENE_GRAPH_PICK_RECORD_IMPL_H

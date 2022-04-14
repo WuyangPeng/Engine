@@ -1,82 +1,66 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 15:01)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE3_H
 #define MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE3_H
 
-// WARNING.  The implementation allows you to transform the inputs (x,y,z) to
-// the unit cube and perform the interpolation in that space.  The idea is
-// to keep the floating-point numbers to order 1 for numerical stability of
-// the algorithm.  The classical thin-plate spline algorithm does not include
-// this transformation.  The interpolation is invariant to translations and
-// rotations of (x,y,z) but not to scaling.
-
 #include "Mathematics/MathematicsDll.h"
+
+#include <vector>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpThinPlateSpline3
-	{
-	public:
-		// Construction and destruction.  Data points are (x,y,z,f(x,y,z)).  The
-		// smoothing parameter must be nonnegative.  If you want the class to
-		// delete the input arrays during destruction, set owner to 'true';
-		// otherwise, you own the arrays and must delete them yourself.
-		IntpThinPlateSpline3(int quantity, Real* X, Real* Y, Real* Z,Real* F, Real smooth, bool owner, bool transformToUnitCube);
+    template <typename Real>
+    class IntpThinPlateSpline3
+    {
+    public:
+        using ClassType = IntpThinPlateSpline3<Real>;
 
-		~IntpThinPlateSpline3();
+    public:
+        IntpThinPlateSpline3(int quantity, const std::vector<Real>& x, const std::vector<Real>& y, const std::vector<Real>& z, const std::vector<Real>& f, Real smooth, bool transformToUnitCube);
 
-		// Check this after the constructor call to see if the thin plate spline
-		// coefficients were successfully computed.  If so, then calls to
-		// operator()(Real,Real,Real) will work properly.
-		bool IsInitialized() const;
+        CLASS_INVARIANT_DECLARE;
 
-		// Member access.  There are 'quantity' A[] coefficients and 4 B[]
-		// coefficients.  The A[] coefficients are associated with the Green's
-		// functions G(x,y,z,*) and the B[] coefficients are associated with the
-		// affine term (linear polynomial B[0]+B[1]*x+B[2]*y+B[3]*z).
-		const Real* GetACoefficients() const;
-		const Real* GetBCoefficients() const;
-		Real GetSmooth() const;  // The smoothing parameter from the constructor.
+        NODISCARD bool IsInitialized() const noexcept;
 
-		// Compute the functional value a^T*M*a when lambda is zero or
-		// lambda*w^T*(M+lambda*I)*w when lambda is positive.  See the thin-plate
-		// splines PDF for a description of these quantities.
-		Real ComputeFunctional() const;
+        NODISCARD std::vector<Real> GetACoefficients() const;
+        NODISCARD std::array<Real, 4> GetBCoefficients() const noexcept;
+        NODISCARD Real GetSmooth() const noexcept;
 
-		// Evaluate the thin plate spline interpolator.  If IsInitialized()
-		// returns 'false', this operator will always return MAX_REAL.
-		Real operator() (Real x, Real y, Real z);
+        NODISCARD Real ComputeFunctional() const;
 
-		// Kernel(t) = |t|
-		static Real Kernel(Real t);
+        NODISCARD Real operator()(Real x, Real y, Real z);
 
-	private:
-		bool mInitialized;
-		int quantity;
+        NODISCARD static Real Kernel(Real t) noexcept;
 
-		// Input data.
-		Real* mX;
-		Real* mY;
-		Real* mZ;
-		Real mSmooth;
+    private:
+        bool initialized;
+        int quantity;
 
-		// Thin plate spline coefficients.
-		Real* mA;
-		Real mB[4];
+        std::vector<Real> xValue;
+        std::vector<Real> yValue;
+        std::vector<Real> zValue;
+        Real smooth;
 
-		// Extent of input data.
-		Real mXMin, mXMax, mXInvRange;
-		Real mYMin, mYMax, mYInvRange;
-		Real mZMin, mZMax, mZInvRange;
-	};
+        std::vector<Real> a;
+        std::array<Real, 4> b;
 
-	using IntpThinPlateSpline3f = IntpThinPlateSpline3<float>;
-	using IntpThinPlateSpline3d = IntpThinPlateSpline3<double>;
+        Real xMin;
+        Real xMax;
+        Real xInvRange;
+        Real yMin;
+        Real yMax;
+        Real yInvRange;
+        Real zMin;
+        Real zMax;
+        Real zInvRange;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE3_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE3_H

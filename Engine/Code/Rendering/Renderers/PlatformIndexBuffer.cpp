@@ -14,13 +14,13 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 
-Rendering::PlatformIndexBuffer ::PlatformIndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer)
+Rendering::PlatformIndexBuffer::PlatformIndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, indexBuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PlatformIndexBuffer ::~PlatformIndexBuffer()
+Rendering::PlatformIndexBuffer::~PlatformIndexBuffer()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

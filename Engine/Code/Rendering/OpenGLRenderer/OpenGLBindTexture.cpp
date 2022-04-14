@@ -16,9 +16,9 @@
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26472)
 Rendering::UInt Rendering
-    ::BindTexture (ShaderFlags::SamplerType target, UInt texture) noexcept
+::BindTexture (ShaderFlags::SamplerType target, UInt texture) noexcept
 {
-   const Int current = System::GetGLInteger(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
+    const Int current = System::GetGLInteger(System::OpenGLQuery(OpenGLConstant::g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
     texture;
 	//System::SetGLBindTexture(System::TextureTarget(g_OpenGLTextureTarget[System::EnumCastUnderlying(target)]),texture);
 
@@ -26,9 +26,9 @@ Rendering::UInt Rendering
 }
 
 Rendering::UInt Rendering
-    ::GetBoundTexture (ShaderFlags::SamplerType target) noexcept
+::GetBoundTexture (ShaderFlags::SamplerType target) noexcept
 {
-    const Int current = System::GetGLInteger(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
+    const Int current = System::GetGLInteger(System::OpenGLQuery(OpenGLConstant::g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
 
     return static_cast<UInt>(current);
 }

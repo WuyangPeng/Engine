@@ -144,7 +144,7 @@ bool Rendering::MorphController
 		{
 			RENDERING_ASSERTION_2(impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "顶点数不匹配\n"); 
 
-			VertexBufferAccessor vba{ visual };
+			VertexBufferAccessor vba{ *visual };
 
 			// 设置顶点为 target[0].			 
 			for (auto i = 0; i < impl->GetNumVertices(); ++i)
@@ -217,7 +217,7 @@ Rendering::MorphController
 }
 
 int Rendering::MorphController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -228,7 +228,7 @@ int Rendering::MorphController
 	return size;
 }
 
-uint64_t Rendering::MorphController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::MorphController::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -236,7 +236,7 @@ uint64_t Rendering::MorphController ::Register(CoreTools::ObjectRegister& target
 }
 
 void Rendering::MorphController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -250,7 +250,7 @@ void Rendering::MorphController
 }
 
 void Rendering::MorphController
-    ::Link (CoreTools::ObjectLink& source)
+::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -258,7 +258,7 @@ void Rendering::MorphController
 }
 
 void Rendering::MorphController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
@@ -266,7 +266,7 @@ void Rendering::MorphController
 }
 
 void Rendering::MorphController
-    ::Load (CoreTools::BufferSource& source)
+::Load (CoreTools::BufferSource& source)
 {
 	;
     

@@ -23,14 +23,14 @@ namespace Physics
 
     public:
         ExtremalQuery3BSP(const ConvexPolyhedron3* polytope);
-          ~ExtremalQuery3BSP();
+        ~ExtremalQuery3BSP();
         ExtremalQuery3BSP(const ExtremalQuery3BSP&) = delete;
-          ExtremalQuery3BSP& operator=(const ExtremalQuery3BSP&) = delete;
+        ExtremalQuery3BSP& operator=(const ExtremalQuery3BSP&) = delete;
         ExtremalQuery3BSP(ExtremalQuery3BSP&&) = delete;
-          ExtremalQuery3BSP& operator=(ExtremalQuery3BSP&&) = delete;
+        ExtremalQuery3BSP& operator=(ExtremalQuery3BSP&&) = delete;
         // Compute the extreme vertices in the specified direction and return the
         // indices of the vertices in the polyhedron vertex array.
-          void GetExtremeVertices(const ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection) noexcept override;
+        void GetExtremeVertices(const typename ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection) noexcept override;
 
         // Tree statistics.
         int GetNumNodes() const noexcept;

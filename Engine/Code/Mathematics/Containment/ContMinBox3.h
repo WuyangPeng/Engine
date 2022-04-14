@@ -1,35 +1,40 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 21:43)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_MIN_BOX3_H
 #define MATHEMATICS_CONTAINMENT_CONT_MIN_BOX3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Box3.h"   
+#include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Query/QueryBase.h"
 
 namespace Mathematics
 {
-	// Compute a minimum volume oriented box containing the specified points.
-	//
-	// This is a function class.  Use it as follows:
-	//   Box3<Real> minBox = MinBox3(numPoints, points, epsilon, queryType);
-	
-	template <typename Real>
-	class MinBox3
-	{
-	public:
-		MinBox3(const std::vector<Vector3<Real> >& points, Real epsilon, QueryType queryType);
-		
-		operator Box3<Real> () const;
+    template <typename Real>
+    class ContMinBox3
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-	private:
-		Box3<Real> mMinBox;
-	};
+        using ClassType = ContMinBox3<Real>;
+
+    public:
+        ContMinBox3(const std::vector<Vector3<Real>>& points, Real epsilon, QueryType queryType);
+
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD operator Box3<Real>() const noexcept;
+
+    private:
+        Box3<Real> minBox;
+    };
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_MIN_BOX3_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_MIN_BOX3_H

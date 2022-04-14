@@ -26,8 +26,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RectangleSurface);
 
-Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* surface, int numUSamples, int numVSamples,
-                                               VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax)
+Rendering::RectangleSurface::RectangleSurface(Mathematics::ParametricSurface<float>* surface, int numUSamples, int numVSamples,
+                                              VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax)
     : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mSurface(surface), mNumUSamples(numUSamples), mNumVSamples(numVSamples)
 {
     RENDERING_ASSERTION_0(surface && surface->IsRectangular(), "Invalid surface\n");
@@ -44,7 +44,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
     // Compute the vertices, normals, and texture coordinates.
     const int numVertices = mNumUSamples * mNumVSamples;
     const int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared<VertexBuffer>(numVertices, vstride)));
+    SetVertexBuffer(VertexBufferSharedPtr(VertexBuffer::Create(numVertices, vstride)));
     VertexBufferAccessor vba(vformat, GetVertexBuffer());
 
     float tuDelta = 0.0f, tvDelta = 0.0f;
@@ -95,8 +95,8 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
 
     // Compute the surface triangle indices.
     const int numTriangles = 2 * (mNumUSamples - 1) * (mNumVSamples - 1);
-    int numIndices = 3 * numTriangles;
-    SetIndexBuffer(IndexBufferSharedPtr(std::make_shared<IndexBuffer>(numIndices, (int)sizeof(int))));
+    const int numIndices = 3 * numTriangles;
+    SetIndexBuffer(IndexBufferSharedPtr(IndexBuffer::Create(numIndices, (int)sizeof(int))));
     // ÏÈÍ¨¹ý±àÒë
 
     int* indices = (int*)GetIndexBuffer()->GetReadOnlyData();
@@ -125,7 +125,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
     UpdateModelSpace(VisualUpdateType::Normals);
 }
 
-Rendering::RectangleSurface ::~RectangleSurface()
+Rendering::RectangleSurface::~RectangleSurface()
 {
     EXCEPTION_TRY
     {
@@ -134,7 +134,7 @@ Rendering::RectangleSurface ::~RectangleSurface()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::RectangleSurface ::UpdateSurface()
+void Rendering::RectangleSurface::UpdateSurface()
 {
     const float uMin = mSurface->GetUMin();
     const float uDelta = (mSurface->GetUMax() - uMin) / (float)(mNumUSamples - 1);
@@ -167,12 +167,12 @@ void Rendering::RectangleSurface ::UpdateSurface()
 
 // Streaming support.
 
-Rendering::RectangleSurface ::RectangleSurface(LoadConstructor value)
+Rendering::RectangleSurface::RectangleSurface(LoadConstructor value)
     : ParentType(value), mSurface(0), mNumUSamples(0), mNumVSamples(0)
 {
 }
 
-void Rendering::RectangleSurface ::Load(CoreTools::BufferSource& source)
+void Rendering::RectangleSurface::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -187,22 +187,22 @@ void Rendering::RectangleSurface ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::RectangleSurface ::Link(CoreTools::ObjectLink& source)
+void Rendering::RectangleSurface::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 }
 
-void Rendering::RectangleSurface ::PostLink()
+void Rendering::RectangleSurface::PostLink()
 {
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RectangleSurface ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::RectangleSurface::Register(CoreTools::ObjectRegister& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::RectangleSurface ::Save(CoreTools::BufferTarget& target) const
+void Rendering::RectangleSurface::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -222,7 +222,7 @@ void Rendering::RectangleSurface ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::RectangleSurface ::GetStreamingSize() const
+int Rendering::RectangleSurface::GetStreamingSize() const
 {
     int size = ParentType::GetStreamingSize();
     size += sizeof(mNumUSamples);
@@ -230,22 +230,22 @@ int Rendering::RectangleSurface ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::RectangleSurface ::SetSurface(Mathematics::ParametricSurfacef* surface) noexcept
+void Rendering::RectangleSurface::SetSurface(Mathematics::ParametricSurface<float>* surface) noexcept
 {
     mSurface = surface;
 }
 
-const Mathematics::ParametricSurfacef* Rendering::RectangleSurface ::GetSurface() const noexcept
+const Mathematics::ParametricSurface<float>* Rendering::RectangleSurface::GetSurface() const noexcept
 {
     return mSurface;
 }
 
-int Rendering::RectangleSurface ::GetNumUSamples() const noexcept
+int Rendering::RectangleSurface::GetNumUSamples() const noexcept
 {
     return mNumUSamples;
 }
 
-int Rendering::RectangleSurface ::GetNumVSamples() const noexcept
+int Rendering::RectangleSurface::GetNumVSamples() const noexcept
 {
     return mNumVSamples;
 }

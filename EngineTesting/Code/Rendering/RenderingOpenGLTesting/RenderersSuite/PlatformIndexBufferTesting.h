@@ -18,9 +18,9 @@ namespace Rendering
 
 	private:
 		void MainTest();	 
-		void IndexBufferTest();
+		void IndexBufferTest() noexcept;
 	 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

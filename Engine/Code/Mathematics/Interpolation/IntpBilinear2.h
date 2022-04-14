@@ -1,62 +1,63 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 20:43)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_H
 #define MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Algebra/VariableMatrix.h"
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpBilinear2
-	{
-	public:
-		// Construction and destruction.  IntpBilinear2 does not accept
-		// responsibility for deleting the input array.  The application must do
-		// so.  The interpolator is for uniformly spaced (x,y)-values.  The
-		// function values are assumed to be organized as f(x,y) = F[y][x].
+    template <typename Real>
+    class IntpBilinear2
+    {
+    public:
+        using ClassType = IntpBilinear2<Real>;
 
-		IntpBilinear2(int xBound, int yBound, Real xMin, Real xSpacing,
-			Real yMin, Real ySpacing, Real** F);
+    public:
+        IntpBilinear2(int xBound, int yBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, const VariableMatrix<Real>& f);
 
-		int GetXBound() const;
-		int GetYBound() const;
-		int GetQuantity() const;
-		Real** GetF() const;
+        CLASS_INVARIANT_DECLARE;
 
-		Real GetXMin() const;
-		Real GetXMax() const;
-		Real GetXSpacing() const;
-		Real GetYMin() const;
-		Real GetYMax() const;
-		Real GetYSpacing() const;
+        NODISCARD int GetXBound() const noexcept;
+        NODISCARD int GetYBound() const noexcept;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD VariableMatrix<Real> GetF() const;
 
-		// Evaluate the function and its derivatives.  The application is
-		// responsible for ensuring that xmin <= x <= xmax and ymin <= y <= ymax.
-		// If (x,y) is outside the extremes, the function returns MAXREAL.  The
-		// first operator is for function evaluation.  The second operator is for
-		// function or derivative evaluations.  The uiXOrder argument is the order
-		// of the x-derivative and the uiYOrder argument is the order of the
-		// y-derivative.  Both orders are zero to get the function value itself.
-		Real operator() (Real x, Real y) const;
-		Real operator() (int xOrder, int yOrder, Real x, Real y) const;
+        NODISCARD Real GetXMin() const noexcept;
+        NODISCARD Real GetXMax() const noexcept;
+        NODISCARD Real GetXSpacing() const noexcept;
+        NODISCARD Real GetYMin() const noexcept;
+        NODISCARD Real GetYMax() const noexcept;
+        NODISCARD Real GetYSpacing() const noexcept;
 
-	private:
-		int mXBound, mYBound, quantity;
-		Real mXMin, mXMax, mXSpacing, mInvXSpacing;
-		Real mYMin, mYMax, mYSpacing, mInvYSpacing;
-		Real** mF;
+        NODISCARD Real operator()(Real x, Real y) const;
+        NODISCARD Real operator()(int xOrder, int yOrder, Real x, Real y) const;
 
-		static const Real msBlend[2][2];
-	};
+    private:
+        int xBound;
+        int yBound;
+        int quantity;
+        Real xMin;
+        Real xMax;
+        Real xSpacing;
+        Real invXSpacing;
+        Real yMin;
+        Real yMax;
+        Real ySpacing;
+        Real invYSpacing;
+        VariableMatrix<Real> f;
 
-	using IntpBilinear2f = IntpBilinear2<float>;
-	using IntpBilinear2d = IntpBilinear2<double>;
-
+        static const std::array<std::array<Real, 2>, 2> blend;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BILINEAR2_H

@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio 16
+VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InputOutput", "InputOutput\InputOutput.vcxproj", "{D29192CF-8631-4FCF-AFFA-E9829ACAF222}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InputOutputTesting", "..\..\..\EngineTesting\EngineWindows\InputOutput\InputOutputTesting\InputOutputTesting.vcxproj", "{28AACB20-E09E-46B4-A9C9-2B7143F836B7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D29192CF-8631-4FCF-AFFA-E9829ACAF222} = {D29192CF-8631-4FCF-AFFA-E9829ACAF222}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InputOutputToolset", "..\..\..\Assist\AssistWindows\Toolset\InputOutput\InputOutputToolset\InputOutputToolset.vcxproj", "{C4F5978E-C8B4-4099-AD60-01CF2CF093DF}"
 	ProjectSection(ProjectDependencies) = postProject

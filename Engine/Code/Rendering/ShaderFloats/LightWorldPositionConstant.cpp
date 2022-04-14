@@ -23,7 +23,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightWorldPositionConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightWorldPositionConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, LightWorldPositionConstant);
 
-Rendering::LightWorldPositionConstant ::LightWorldPositionConstant(const LightSharedPtr& light)
+Rendering::LightWorldPositionConstant::LightWorldPositionConstant(const LightSharedPtr& light)
     : ParentType{ light }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -31,7 +31,7 @@ Rendering::LightWorldPositionConstant ::LightWorldPositionConstant(const LightSh
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightWorldPositionConstant)
 
-void Rendering::LightWorldPositionConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::LightWorldPositionConstant::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -43,7 +43,7 @@ void Rendering::LightWorldPositionConstant ::Update([[maybe_unused]] const Visua
  
 }
 
-Rendering::ShaderFloatSharedPtr Rendering::LightWorldPositionConstant ::Clone() const
+Rendering::ShaderFloatSharedPtr Rendering::LightWorldPositionConstant::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

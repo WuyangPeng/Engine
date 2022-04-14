@@ -12,7 +12,8 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Renderers/Renderer.h" 
 #include "Rendering/Resources/LoadTexture.h" 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTexture1DTesting) 
 
 void Rendering::PlatformTexture1DTesting

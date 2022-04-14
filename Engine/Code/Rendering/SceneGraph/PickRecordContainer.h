@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 11:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 16:26)
 
 #ifndef RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_H
 #define RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_H
@@ -11,30 +14,32 @@
 
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/SceneGraph/SceneGraphFwd.h"
+
 #include <vector>
 
-RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(PickRecordContainer,PickRecordContainerImpl);
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(PickRecordContainer, PickRecordContainerImpl);
 
 namespace Rendering
 {
-    class PickRecord;
-
     class RENDERING_DEFAULT_DECLARE PickRecordContainer
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(PickRecordContainer);
 
     public:
-        PickRecordContainer();
+        NODISCARD static PickRecordContainer Create();
+
+        explicit PickRecordContainer(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_DECLARE;
 
         void InsertPickRecord(const PickRecord& pickRecord);
         void InsertPickRecord(const PickRecordContainer& pickRecordContainerImpl);
 
-        int GetSize() const;
-        const PickRecord GetPickRecord(int index) const;
-        bool IsEmpty() const noexcept;
+        NODISCARD int GetSize() const;
+        NODISCARD PickRecord GetPickRecord(int index) const;
+        NODISCARD bool IsEmpty() const noexcept;
 
     private:
         PackageType impl;

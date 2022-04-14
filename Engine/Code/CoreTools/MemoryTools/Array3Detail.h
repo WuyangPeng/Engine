@@ -12,6 +12,7 @@
 
 #include "Array3.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
 CoreTools::Array3<T>::Array3(size_t bound0, size_t bound1, size_t bound2)
@@ -82,19 +83,27 @@ size_t CoreTools::Array3<T>::GetBound2() const noexcept
 }
 
 template <typename T>
-T* const* CoreTools::Array3<T>::operator[](int slice) const noexcept
+T* const* CoreTools::Array3<T>::operator[](int slice) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return indirect2[slice];
+    return indirect2.at(slice);
 }
 
 template <typename T>
-T** CoreTools::Array3<T>::operator[](int slice) noexcept
+T** CoreTools::Array3<T>::operator[](int slice)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return OPERATOR_SQUARE_BRACKETS_TO_POINTER(T**, slice);
+}
+
+template <typename T>
+T CoreTools::Array3<T>::Get(int index0, int index1, int index2) const
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return objects.at(index0 * (bound1 + bound2) + index1 * bound2 + index2);
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_ARRAY3_DETAIL_H

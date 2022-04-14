@@ -28,13 +28,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PixelShader);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PixelShader);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, PixelShader);
 
-Rendering::PixelShader ::PixelShader(const string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers)
+Rendering::PixelShader::PixelShader(const string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers)
     : ParentType{ programName, numInputs, numOutputs, numConstants, numSamplers }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PixelShader ::~PixelShader()
+Rendering::PixelShader::~PixelShader()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 

@@ -1,17 +1,20 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 11:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 16:20)
 
 #ifndef RENDERING_SCENE_GRAPH_PICK_RECORD_H
 #define RENDERING_SCENE_GRAPH_PICK_RECORD_H
 
 #include "Spatial.h"
-
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
-RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(PickRecord,PickRecordImpl);
+
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(PickRecord, PickRecordImpl);
 
 namespace Rendering
 {
@@ -21,23 +24,26 @@ namespace Rendering
         DELAY_COPY_UNSHARED_TYPE_DECLARE(PickRecord);
 
     public:
-        // 它存在支持const static PickRecord在Picker构造。
-        PickRecord();
+        NODISCARD static PickRecord Create();
 
+        // 它存在支持const static PickRecord在Picker构造。
+        explicit PickRecord(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+
+    public:
         CLASS_INVARIANT_DECLARE;
 
-        ConstSpatialSharedPtr GetIntersected() const;
-        float GetParameter() const;
-        int GetTriangle() const;
-        float GetBary(int index) const;
+        NODISCARD ConstSpatialSharedPtr GetIntersected() const noexcept;
+        NODISCARD float GetParameter() const noexcept;
+        NODISCARD int GetTriangle() const noexcept;
+        NODISCARD float GetBary(int index) const;
 
         void SetIntersected(const ConstSpatialSharedPtr& intersected);
         void SetParameter(float parameter);
         void SetTriangle(int triangle);
         void SetBary(float firstBary, float secondBary);
 
-        bool operator==(const PickRecord& rhs) const;
-        bool operator<(const PickRecord& rhs) const;
+        NODISCARD bool operator==(const PickRecord& rhs) const noexcept;
+        NODISCARD bool operator<(const PickRecord& rhs) const noexcept;
 
     private:
         PackageType impl;

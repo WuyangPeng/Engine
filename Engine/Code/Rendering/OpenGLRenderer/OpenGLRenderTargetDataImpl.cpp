@@ -29,7 +29,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26482)
 #include SYSTEM_WARNING_DISABLE(26485)
-Rendering::OpenGLRenderTargetDataImpl ::OpenGLRenderTargetDataImpl(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::OpenGLRenderTargetDataImpl::OpenGLRenderTargetDataImpl(Renderer* renderer, const RenderTarget* renderTarget)
     : m_NumTargets{ renderTarget->GetNumTargets() }, m_Width{ renderTarget->GetWidth() }, m_Height{ renderTarget->GetHeight() },
       m_Format{ renderTarget->GetFormat() }, m_HasMipmaps{ renderTarget->HasMipmaps() }, m_HasDepthStencil{ renderTarget->HasDepthStencil() },
       m_ColorTextures(m_NumTargets), m_DepthStencilTexture{ 0 }, m_FrameBuffer{ 0 }, m_DrawBuffers(m_NumTargets)
@@ -49,13 +49,13 @@ Rendering::OpenGLRenderTargetDataImpl ::OpenGLRenderTargetDataImpl(Renderer* ren
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::OpenGLRenderTargetDataImpl ::CreateFramebufferObject() noexcept
+void Rendering::OpenGLRenderTargetDataImpl::CreateFramebufferObject() noexcept
 {
     // 创建帧缓冲区对象。
     // m_FrameBuffer = System::GLGenFramebuffers();
 }
 
-System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl ::CreateDrawBuffers(Renderer* renderer, const RenderTarget* renderTarget)
+System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Renderer* renderer, const RenderTarget* renderTarget)
 {
     const UInt previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
 
@@ -79,7 +79,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl ::CreateDrawBuffers(Ren
     return previousBind;
 }
 
-void Rendering::OpenGLRenderTargetDataImpl ::CreateDepthStencilTexture(Renderer* renderer, const RenderTarget* renderTarget, UInt previousBind)
+void Rendering::OpenGLRenderTargetDataImpl::CreateDepthStencilTexture(Renderer* renderer, const RenderTarget* renderTarget, UInt previousBind)
 {
     previousBind;
     ConstTexture2DSharedPtr depthStencilTexture = renderTarget->GetDepthStencilTexture();
@@ -105,7 +105,7 @@ void Rendering::OpenGLRenderTargetDataImpl ::CreateDepthStencilTexture(Renderer*
    // System::SetGLBindTexture(System::TextureTarget::Texture2D, previousBind);
 }
 
-void Rendering::OpenGLRenderTargetDataImpl ::CheckFramebufferStatus()
+void Rendering::OpenGLRenderTargetDataImpl::CheckFramebufferStatus()
 {
     CoreTools::DisableNoexcept();
     //     switch (System::GlCheckFramebufferStatus())
@@ -143,7 +143,7 @@ void Rendering::OpenGLRenderTargetDataImpl ::CheckFramebufferStatus()
     // }
 }
 
-Rendering::OpenGLRenderTargetDataImpl ::~OpenGLRenderTargetDataImpl()
+Rendering::OpenGLRenderTargetDataImpl::~OpenGLRenderTargetDataImpl()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 
@@ -151,7 +151,7 @@ Rendering::OpenGLRenderTargetDataImpl ::~OpenGLRenderTargetDataImpl()
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::OpenGLRenderTargetDataImpl ::IsValid() const noexcept
+bool Rendering::OpenGLRenderTargetDataImpl::IsValid() const noexcept
 {
     if (1 <= m_NumTargets && m_ColorTextures.size() == static_cast<uint32_t>(m_NumTargets) &&
         m_DrawBuffers.size() == static_cast<uint32_t>(m_NumTargets) &&
@@ -162,7 +162,7 @@ bool Rendering::OpenGLRenderTargetDataImpl ::IsValid() const noexcept
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLRenderTargetDataImpl ::Enable([[maybe_unused]] Renderer* renderer) noexcept
+void Rendering::OpenGLRenderTargetDataImpl::Enable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -175,7 +175,7 @@ void Rendering::OpenGLRenderTargetDataImpl ::Enable([[maybe_unused]] Renderer* r
     System::SetGLDepthRange(0.0, 1.0);
 }
 
-void Rendering::OpenGLRenderTargetDataImpl ::Disable([[maybe_unused]] Renderer* renderer) noexcept
+void Rendering::OpenGLRenderTargetDataImpl::Disable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -198,7 +198,7 @@ void Rendering::OpenGLRenderTargetDataImpl ::Disable([[maybe_unused]] Renderer* 
 }
 
 Rendering::ConstTexture2DSharedPtr
-    Rendering::OpenGLRenderTargetDataImpl ::ReadColor(MAYBE_UNUSED int index, Renderer* renderer)
+    Rendering::OpenGLRenderTargetDataImpl::ReadColor(MAYBE_UNUSED int index, Renderer* renderer)
 {
     RENDERING_CLASS_IS_VALID_1;
 

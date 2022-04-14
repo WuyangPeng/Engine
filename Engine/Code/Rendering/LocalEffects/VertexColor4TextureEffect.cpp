@@ -31,7 +31,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, VertexColor4TextureEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexColor4TextureEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor4TextureEffect);
 
-Rendering::VertexColor4TextureEffect ::VertexColor4TextureEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
+Rendering::VertexColor4TextureEffect::VertexColor4TextureEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.VertexColorTexture", 3, 3, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -86,12 +86,12 @@ Rendering::VertexColor4TextureEffect ::VertexColor4TextureEffect(ShaderFlags::Sa
     InsertTechnique(technique);
 }
 
-Rendering::PixelShader* Rendering::VertexColor4TextureEffect ::GetPixelShader() const
+Rendering::PixelShader* Rendering::VertexColor4TextureEffect::GetPixelShader() const
 {
     return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 }
 
-Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect ::CreateInstance(Texture2D* texture) const
+Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect::CreateInstance(Texture2D* texture) const
 {
     VisualEffectInstance* instance = nullptr;  // CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -106,9 +106,11 @@ Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect ::CreateIn
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect ::CreateUniqueInstance(Texture2D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
+Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect::CreateUniqueInstance(Texture2D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 {
     const VertexColor4TextureEffect* effect = nullptr;  // CoreTools::New0<VertexColor4TextureEffect>();
+    if (effect == nullptr)
+        return nullptr;
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -118,12 +120,12 @@ Rendering::VisualEffectInstance* Rendering::VertexColor4TextureEffect ::CreateUn
 
 // Streaming support.
 
-Rendering::VertexColor4TextureEffect ::VertexColor4TextureEffect(LoadConstructor value)
+Rendering::VertexColor4TextureEffect::VertexColor4TextureEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::VertexColor4TextureEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::VertexColor4TextureEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -132,12 +134,12 @@ void Rendering::VertexColor4TextureEffect ::Load(CoreTools::BufferSource& source
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::VertexColor4TextureEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::VertexColor4TextureEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::VertexColor4TextureEffect ::PostLink()
+void Rendering::VertexColor4TextureEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -169,12 +171,12 @@ void Rendering::VertexColor4TextureEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::VertexColor4TextureEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::VertexColor4TextureEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::VertexColor4TextureEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::VertexColor4TextureEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -183,7 +185,7 @@ void Rendering::VertexColor4TextureEffect ::Save(CoreTools::BufferTarget& target
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::VertexColor4TextureEffect ::GetStreamingSize() const
+int Rendering::VertexColor4TextureEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

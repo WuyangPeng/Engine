@@ -78,8 +78,8 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, IKGoal)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal,GetTarget, const Rendering::ConstSpatialSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffector, const Rendering::ConstSpatialSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetTargetPosition, const Rendering::IKGoal::APoint)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKGoal,GetEffectorPosition, const Rendering::IKGoal::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetTargetPosition, const Rendering::IKGoal::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffectorPosition, const Rendering::IKGoal::APoint)
  
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, IKGoal, SetWeight, float, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetWeight, float)
@@ -92,7 +92,7 @@ Rendering::IKGoal
 }
 
 int Rendering::IKGoal
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -104,7 +104,7 @@ int Rendering::IKGoal
 }
 
 uint64_t Rendering::IKGoal
-    ::Register( CoreTools::ObjectRegister& target ) const
+::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -118,7 +118,7 @@ uint64_t Rendering::IKGoal
 }
 
 void Rendering::IKGoal
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -131,7 +131,7 @@ void Rendering::IKGoal
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKGoal ::Link(CoreTools::ObjectLink& source)
+void Rendering::IKGoal::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -141,14 +141,14 @@ void Rendering::IKGoal ::Link(CoreTools::ObjectLink& source)
 }
 
 void Rendering::IKGoal
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
 	ParentType::PostLink();	 
 }
 
-void Rendering::IKGoal ::Load(CoreTools::BufferSource& source)
+void Rendering::IKGoal::Load(CoreTools::BufferSource& source)
 {
 	;
     

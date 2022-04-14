@@ -34,13 +34,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Visual);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Visual);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, Visual);
 
-Rendering::Visual ::Visual(VisualPrimitiveType type)
+Rendering::Visual::Visual(VisualPrimitiveType type)
     : ParentType{}, impl{ make_shared<ImplType>(type) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Visual ::Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
+Rendering::Visual::Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
     : ParentType{}, impl{ make_shared<ImplType>(type, vertexformat, vertexbuffer, indexbuffer) }
 {
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
@@ -62,12 +62,12 @@ Rendering::Visual& Rendering::Visual::operator=(Visual&& rhs) noexcept
     impl = std::move(rhs.impl);
     return *this;
 }
-Rendering::Visual ::~Visual()
+Rendering::Visual::~Visual()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Visual ::Visual(const Visual& rhs)
+Rendering::Visual::Visual(const Visual& rhs)
     : ParentType(rhs), impl{ make_shared<ImplType>(rhs.GetPrimitiveType()) }
 {
     CloneData(rhs);
@@ -77,7 +77,7 @@ Rendering::Visual ::Visual(const Visual& rhs)
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Visual& Rendering::Visual ::operator=(const Visual& rhs)
+Rendering::Visual& Rendering::Visual::operator=(const Visual& rhs)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -93,7 +93,7 @@ Rendering::Visual& Rendering::Visual ::operator=(const Visual& rhs)
 }
 
 // private
-void Rendering::Visual ::CloneData(const Visual& rhs)
+void Rendering::Visual::CloneData(const Visual& rhs)
 {
     CloneVertexFormat(rhs);
     CloneVertexBuffer(rhs);
@@ -101,7 +101,7 @@ void Rendering::Visual ::CloneData(const Visual& rhs)
 }
 
 // private
-void Rendering::Visual ::CloneVertexFormat(const Visual& rhs)
+void Rendering::Visual::CloneVertexFormat(const Visual& rhs)
 {
     auto vertexFormat = rhs.GetConstVertexFormat();
 
@@ -112,7 +112,7 @@ void Rendering::Visual ::CloneVertexFormat(const Visual& rhs)
 }
 
 // private
-void Rendering::Visual ::CloneVertexBuffer(const Visual& rhs)
+void Rendering::Visual::CloneVertexBuffer(const Visual& rhs)
 {
     auto vertexBuffer = rhs.GetConstVertexBuffer();
 
@@ -123,7 +123,7 @@ void Rendering::Visual ::CloneVertexBuffer(const Visual& rhs)
 }
 
 // private
-void Rendering::Visual ::CloneIndexBuffer(const Visual& rhs)
+void Rendering::Visual::CloneIndexBuffer(const Visual& rhs)
 {
     auto indexBuffer = rhs.GetConstIndexBuffer();
 
@@ -135,84 +135,84 @@ void Rendering::Visual ::CloneIndexBuffer(const Visual& rhs)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Visual)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetPrimitiveType, Rendering::VisualPrimitiveType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetPrimitiveType, Rendering::VisualPrimitiveType)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstVertexFormat, Rendering::ConstVertexFormatSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstVertexFormat, Rendering::ConstVertexFormatSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetVertexFormat, Rendering::VertexFormatSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetVertexFormat, Rendering::VertexFormatSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, SetVertexFormat, VertexFormatSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetVertexFormat, VertexFormatSharedPtr, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstVertexBuffer, Rendering::ConstVertexBufferSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstVertexBuffer, Rendering::ConstVertexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetVertexBuffer, Rendering::VertexBufferSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetVertexBuffer, Rendering::VertexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, SetVertexBuffer, VertexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetVertexBuffer, VertexBufferSharedPtr, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetConstIndexBuffer, Rendering::ConstIndexBufferSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstIndexBuffer, Rendering::ConstIndexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual, GetIndexBuffer, Rendering::IndexBufferSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetIndexBuffer, Rendering::IndexBufferSharedPtr)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, SetIndexBuffer, IndexBufferSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetIndexBuffer, IndexBufferSharedPtr, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectInstance, const Rendering::ConstVisualEffectInstanceSharedPtr)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetEffectInstance, VisualEffectInstanceSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSharedPtr)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::FloatBound&)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::FloatBound&)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::BoundF&)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::BoundF&)
 
-void Rendering::Visual ::UpdateModelSpace([[maybe_unused]] VisualUpdateType type)
+void Rendering::Visual::UpdateModelSpace([[maybe_unused]] VisualUpdateType type)
 {
     UpdateModelBound();
 }
 
-void Rendering::Visual ::UpdateWorldBound()
+void Rendering::Visual::UpdateWorldBound()
 {
-    auto worldTransform = GetWorldTransform();
+    const auto worldTransform = GetWorldTransform();
     const auto worldBound = impl->GetWorldBound(worldTransform);
 
     BoundGrowToContain(worldBound);
 }
 
-void Rendering::Visual ::UpdateModelBound()
+void Rendering::Visual::UpdateModelBound()
 {
     impl->UpdateModelBound();
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, ComputeBounding, vector<APoint>, void)
 
-void Rendering::Visual ::GetVisibleSet(Culler& culler, [[maybe_unused]] bool noCull)
+void Rendering::Visual::GetVisibleSet(Culler& culler, [[maybe_unused]] bool noCull)
 {
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
+    //  if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
     {
         culler.Insert(VisualSharedPtr{ this });
     }
-//     else
-//     {
-//         THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
-//     }
+    //     else
+    //     {
+    //         THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
+    //     }
 }
 
-Rendering::ConstVisualSharedPtr Rendering::Visual ::GetSharedPtr() const
+Rendering::ConstVisualSharedPtr Rendering::Visual::GetSharedPtr() const
 {
     //if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
     {
         return ConstVisualSharedPtr{ this };
     }
-//     else
-//     {
-//         THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
-//     }
+    //     else
+    //     {
+    //         THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
+    //     }
 }
 
-Rendering::Visual ::Visual(LoadConstructor value)
-    : ParentType{ value }, impl{ make_shared<ImplType>() }
+Rendering::Visual::Visual(LoadConstructor value)
+    : ParentType{ value }, impl{ make_shared<ImplType>(VisualPrimitiveType::None) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::Visual ::GetStreamingSize() const
+int Rendering::Visual::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -223,7 +223,7 @@ int Rendering::Visual ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Visual ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Visual::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -237,7 +237,7 @@ uint64_t Rendering::Visual ::Register(CoreTools::ObjectRegister& target) const
     return uniqueID;
 }
 
-void Rendering::Visual ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Visual::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -250,7 +250,7 @@ void Rendering::Visual ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Visual ::Link(CoreTools::ObjectLink& source)
+void Rendering::Visual::Link(CoreTools::ObjectLink& source)
 {
     ;
 
@@ -259,14 +259,14 @@ void Rendering::Visual ::Link(CoreTools::ObjectLink& source)
     impl->Link(source);
 }
 
-void Rendering::Visual ::PostLink()
+void Rendering::Visual::PostLink()
 {
     ;
 
     ParentType::PostLink();
 }
 
-void Rendering::Visual ::Load(CoreTools::BufferSource& source)
+void Rendering::Visual::Load(CoreTools::BufferSource& source)
 {
     ;
 

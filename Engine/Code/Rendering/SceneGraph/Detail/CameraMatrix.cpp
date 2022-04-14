@@ -1,501 +1,497 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 15:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 11:33)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CameraMatrix.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26496)
-Rendering::CameraMatrix
-    ::CameraMatrix (const WorldCoordinateFrame& worldCoordinateFrame,const CameraFrustum& cameraFrustum,float epsilon)
-    : m_WorldCoordinateFrame{ worldCoordinateFrame }, m_CameraFrustum{ cameraFrustum }, m_PreViewMatrix{ Mathematics::MatrixF::GetIdentityMatrix() }, m_PreViewIsIdentity{ true },
-      m_PostProjectionMatrix{ Mathematics::MatrixF::GetIdentityMatrix() }, m_PostProjectionIsIdentity{ true }, m_DepthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() }, m_Epsilon{ epsilon }
+#include "Mathematics/Algebra/MatrixDetail.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/SceneGraph/CameraManager.h"
+
+Rendering::CameraMatrix::CameraMatrix(const WorldCoordinateFrame& worldCoordinateFrame, const CameraFrustum& cameraFrustum, float epsilon)
+    : worldCoordinateFrame{ worldCoordinateFrame },
+      cameraFrustum{ cameraFrustum },
+      projectionMatrix{ Matrix{}, Matrix{} },
+      projectionViewMatrix{ Matrix{}, Matrix{} },
+      preViewMatrix{ Mathematics::MatrixF::GetIdentityMatrix() },
+      preViewIsIdentity{ true },
+      postProjectionMatrix{ Mathematics::MatrixF::GetIdentityMatrix() },
+      postProjectionIsIdentity{ true },
+      depthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() },
+      epsilon{ epsilon }
 {
     OnFrustumChange();
-    
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::CameraMatrix
-    ::CameraMatrix (float epsilon)
-    : m_WorldCoordinateFrame{ epsilon }, m_CameraFrustum{ true }, m_PreViewMatrix{ Mathematics::MatrixF::GetIdentityMatrix() }, m_PreViewIsIdentity{ true },
-      m_PostProjectionMatrix{ Mathematics::MatrixF::GetIdentityMatrix() }, m_PostProjectionIsIdentity{ true }, m_DepthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() }, m_Epsilon{ epsilon }
+Rendering::CameraMatrix::CameraMatrix(float epsilon)
+    : worldCoordinateFrame{ epsilon },
+      cameraFrustum{ true },
+      projectionMatrix{ Matrix{}, Matrix{} },
+      projectionViewMatrix{ Matrix{}, Matrix{} },
+      preViewMatrix{ Mathematics::MatrixF::GetIdentityMatrix() },
+      preViewIsIdentity{ true },
+      postProjectionMatrix{ Mathematics::MatrixF::GetIdentityMatrix() },
+      postProjectionIsIdentity{ true },
+      depthType{ CAMERA_MANAGE_SINGLETON.GetDepthType() },
+      epsilon{ epsilon }
 {
     OnFrustumChange();
-    
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 // private
-void Rendering::CameraMatrix
-    ::OnFrustumChange ()
+void Rendering::CameraMatrix::OnFrustumChange()
 {
-    auto directionMin = m_CameraFrustum.GetDirectionMin ();
-	auto directionMax = m_CameraFrustum.GetDirectionMax ();
-	auto upMin = m_CameraFrustum.GetUpMin ();
-	auto upMax = m_CameraFrustum.GetUpMax ();
-	auto rightMin = m_CameraFrustum.GetRightMin ();
-	auto rightMax = m_CameraFrustum.GetRightMax ();
-    
+    const auto directionMin = cameraFrustum.GetDirectionMin();
+    const auto directionMax = cameraFrustum.GetDirectionMax();
+    const auto upMin = cameraFrustum.GetUpMin();
+    const auto upMax = cameraFrustum.GetUpMax();
+    const auto rightMin = cameraFrustum.GetRightMin();
+    const auto rightMax = cameraFrustum.GetRightMax();
+
     // N (near), F (far), B (bottom), T (top),
     // L (left), 和 R (right)
-    
+
     // 1 / (F - N)
-	auto invDirectionDifference = 1.0f / (directionMax - directionMin);
-    
+    const auto invDirectionDifference = 1.0f / (directionMax - directionMin);
+
     // 1 / (T - B)
-	auto invUpDifference = 1.0f / (upMax - upMin);
-    
+    const auto invUpDifference = 1.0f / (upMax - upMin);
+
     // 1 / (R - L)
-	auto invRightDifference = 1.0f / (rightMax - rightMin);
-    
+    const auto invRightDifference = 1.0f / (rightMax - rightMin);
+
     // (R + L) / ( R - L)
-	auto rightSumDivideDifference = (rightMin + rightMax) * invRightDifference;
-    
+    const auto rightSumDivideDifference = (rightMin + rightMax) * invRightDifference;
+
     // (T + B) / (T - B)
-	auto upSumDivideDifference = (upMin + upMax) * invUpDifference;
-    
+    const auto upSumDivideDifference = (upMin + upMax) * invUpDifference;
+
     // (F + N) / (F - N)
-	auto directionSumDivideDifference = (directionMin + directionMax) * invDirectionDifference;
-    
-    if (m_CameraFrustum.IsPerspective())
+    const auto directionSumDivideDifference = (directionMin + directionMax) * invDirectionDifference;
+
+    if (cameraFrustum.IsPerspective())
     {
         // 2 * N / (R - L)
-		auto twoDirectionMinMultiplyInvRightDifference =  2.0f * directionMin * invRightDifference;
-        
+        const auto twoDirectionMinMultiplyInvRightDifference = 2.0f * directionMin * invRightDifference;
+
         // 2 * N / (T - B)
-		auto twoDirectionMinMultiplyInvUpDifference =  2.0f * directionMin * invUpDifference;
+        const auto twoDirectionMinMultiplyInvUpDifference = 2.0f * directionMin * invUpDifference;
         // F / (F - N)
-		auto directionMaxMultiplyInvDirectionDifference = directionMax * invDirectionDifference;
-        
+        const auto directionMaxMultiplyInvDirectionDifference = directionMax * invDirectionDifference;
+
         // N * F / (F - N)
-		auto directionProductDivideDifference = directionMin * directionMaxMultiplyInvDirectionDifference;
-        
+        const auto directionProductDivideDifference = directionMin * directionMaxMultiplyInvDirectionDifference;
+
         // 2 * N * F / (F - N)
-		auto twoDirectionProductDivideDifference = 2.0f * directionProductDivideDifference;
-        
-        if (m_DepthType == DepthType::ZeroToOne)
+        const auto twoDirectionProductDivideDifference = 2.0f * directionProductDivideDifference;
+
+        if (depthType == DepthType::ZeroToOne)
         {
             // 映射 (x,y,z) 到 [-1,1]x[-1,1]x[0,1].
-			auto& projection = m_ProjectionMatrix[System::EnumCastUnderlying(DepthType::ZeroToOne)];
-            projection(0,0) = twoDirectionMinMultiplyInvRightDifference;
-            projection(0,1) = 0.0f;
-            projection(0,2) = -rightSumDivideDifference;
-            projection(0,3) = 0.0f;
-            projection(1,0) = 0.0f;
-            projection(1,1) = twoDirectionMinMultiplyInvUpDifference;
-            projection(1,2) = -upSumDivideDifference;
-            projection(1,3) = 0.0f;
-            projection(2,0) = 0.0f;
-            projection(2,1) = 0.0f;
-            projection(2,2) = directionMaxMultiplyInvDirectionDifference;
-            projection(2,3) = -directionProductDivideDifference;
-            projection(3,0) = 0.0f;
-            projection(3,1) = 0.0f;
-            projection(3,2) = 1.0f;
-            projection(3,3) = 0.0f;
+            auto& projection = projectionMatrix.at(System::EnumCastUnderlying(DepthType::ZeroToOne));
+            projection(0, 0) = twoDirectionMinMultiplyInvRightDifference;
+            projection(0, 1) = 0.0f;
+            projection(0, 2) = -rightSumDivideDifference;
+            projection(0, 3) = 0.0f;
+            projection(1, 0) = 0.0f;
+            projection(1, 1) = twoDirectionMinMultiplyInvUpDifference;
+            projection(1, 2) = -upSumDivideDifference;
+            projection(1, 3) = 0.0f;
+            projection(2, 0) = 0.0f;
+            projection(2, 1) = 0.0f;
+            projection(2, 2) = directionMaxMultiplyInvDirectionDifference;
+            projection(2, 3) = -directionProductDivideDifference;
+            projection(3, 0) = 0.0f;
+            projection(3, 1) = 0.0f;
+            projection(3, 2) = 1.0f;
+            projection(3, 3) = 0.0f;
         }
         else
         {
             // 映射 (x,y,z) 到 [-1,1]x[-1,1]x[-1,1].
-			auto& projection = m_ProjectionMatrix[System::EnumCastUnderlying(DepthType::MinusOneToOne)];
-            projection(0,0) = twoDirectionMinMultiplyInvRightDifference;
-            projection(0,1) = 0.0f;
-            projection(0,2) = -rightSumDivideDifference;
-            projection(0,3) = 0.0f;
-            projection(1,0) = 0.0f;
-            projection(1,1) = twoDirectionMinMultiplyInvUpDifference;
-            projection(1,2) = -upSumDivideDifference;
-            projection(1,3) = 0.0f;
-            projection(2,0) = 0.0f;
-            projection(2,1) = 0.0f;
-            projection(2,2) = directionSumDivideDifference;
-            projection(2,3) = -twoDirectionProductDivideDifference;
-            projection(3,0) = 0.0f;
-            projection(3,1) = 0.0f;
-            projection(3,2) = 1.0f;
-            projection(3,3) = 0.0f;
+            auto& projection = projectionMatrix.at(System::EnumCastUnderlying(DepthType::MinusOneToOne));
+            projection(0, 0) = twoDirectionMinMultiplyInvRightDifference;
+            projection(0, 1) = 0.0f;
+            projection(0, 2) = -rightSumDivideDifference;
+            projection(0, 3) = 0.0f;
+            projection(1, 0) = 0.0f;
+            projection(1, 1) = twoDirectionMinMultiplyInvUpDifference;
+            projection(1, 2) = -upSumDivideDifference;
+            projection(1, 3) = 0.0f;
+            projection(2, 0) = 0.0f;
+            projection(2, 1) = 0.0f;
+            projection(2, 2) = directionSumDivideDifference;
+            projection(2, 3) = -twoDirectionProductDivideDifference;
+            projection(3, 0) = 0.0f;
+            projection(3, 1) = 0.0f;
+            projection(3, 2) = 1.0f;
+            projection(3, 3) = 0.0f;
         }
     }
     else
     {
         // 2 / (R - L)
-		auto twoInvRightDifference = 2.0f * invRightDifference;
-        
+        const auto twoInvRightDifference = 2.0f * invRightDifference;
+
         // 2 / (T - B)
-		auto twoInvUpDifference = 2.0f * invUpDifference;
-        
+        const auto twoInvUpDifference = 2.0f * invUpDifference;
+
         // 2 / (F - N)
-		auto twoInvDirectionDifference = 2.0f * invDirectionDifference;
-        
+        const auto twoInvDirectionDifference = 2.0f * invDirectionDifference;
+
         // N / (F - N)
-		auto directionMinMultiplyInvDirectionDifference = directionMin * invDirectionDifference;
-        
-        if (m_DepthType == DepthType::ZeroToOne)
+        const auto directionMinMultiplyInvDirectionDifference = directionMin * invDirectionDifference;
+
+        if (depthType == DepthType::ZeroToOne)
         {
             // 映射 (x,y,z) 到 [-1,1]x[-1,1]x[0,1].
-			auto& projection = m_ProjectionMatrix[System::EnumCastUnderlying(DepthType::ZeroToOne)];
-            projection(0,0) = twoInvRightDifference;
-            projection(0,1) = 0.0f;
-            projection(0,2) = 0.0f;
-            projection(0,3) = -rightSumDivideDifference;
-            projection(1,0) = 0.0f;
-            projection(1,1) = twoInvUpDifference;
-            projection(1,2) = 0.0f;
-            projection(1,3) = -upSumDivideDifference;
-            projection(2,0) = 0.0f;
-            projection(2,1) = 0.0f;
-            projection(2,2) = invDirectionDifference;
-            projection(2,3) = -directionMinMultiplyInvDirectionDifference;
-            projection(3,0) = 0.0f;
-            projection(3,1) = 0.0f;
-            projection(3,2) = 0.0f;
-            projection(3,3) = 1.0f;
+            auto& projection = projectionMatrix.at(System::EnumCastUnderlying(DepthType::ZeroToOne));
+            projection(0, 0) = twoInvRightDifference;
+            projection(0, 1) = 0.0f;
+            projection(0, 2) = 0.0f;
+            projection(0, 3) = -rightSumDivideDifference;
+            projection(1, 0) = 0.0f;
+            projection(1, 1) = twoInvUpDifference;
+            projection(1, 2) = 0.0f;
+            projection(1, 3) = -upSumDivideDifference;
+            projection(2, 0) = 0.0f;
+            projection(2, 1) = 0.0f;
+            projection(2, 2) = invDirectionDifference;
+            projection(2, 3) = -directionMinMultiplyInvDirectionDifference;
+            projection(3, 0) = 0.0f;
+            projection(3, 1) = 0.0f;
+            projection(3, 2) = 0.0f;
+            projection(3, 3) = 1.0f;
         }
         else
         {
             // 映射 (x,y,z) 到 [-1,1]x[-1,1]x[-1,1].
-			auto& projection = m_ProjectionMatrix[System::EnumCastUnderlying(DepthType::MinusOneToOne)];
-            projection(0,0) = twoInvRightDifference;
-            projection(0,1) = 0.0f;
-            projection(0,2) = 0.0f;
-            projection(0,3) = -rightSumDivideDifference;
-            projection(1,0) = 0.0f;
-            projection(1,1) = twoInvUpDifference;
-            projection(1,2) = 0.0f;
-            projection(1,3) = -upSumDivideDifference;
-            projection(2,0) = 0.0f;
-            projection(2,1) = 0.0f;
-            projection(2,2) = twoInvDirectionDifference;
-            projection(2,3) = -directionSumDivideDifference;
-            projection(3,0) = 0.0f;
-            projection(3,1) = 0.0f;
-            projection(3,2) = 0.0f;
-            projection(3,3) = 1.0f;
+            auto& projection = projectionMatrix.at(System::EnumCastUnderlying(DepthType::MinusOneToOne));
+            projection(0, 0) = twoInvRightDifference;
+            projection(0, 1) = 0.0f;
+            projection(0, 2) = 0.0f;
+            projection(0, 3) = -rightSumDivideDifference;
+            projection(1, 0) = 0.0f;
+            projection(1, 1) = twoInvUpDifference;
+            projection(1, 2) = 0.0f;
+            projection(1, 3) = -upSumDivideDifference;
+            projection(2, 0) = 0.0f;
+            projection(2, 1) = 0.0f;
+            projection(2, 2) = twoInvDirectionDifference;
+            projection(2, 3) = -directionSumDivideDifference;
+            projection(3, 0) = 0.0f;
+            projection(3, 1) = 0.0f;
+            projection(3, 2) = 0.0f;
+            projection(3, 3) = 1.0f;
         }
     }
-    
+
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix
-    ::UpdateProjectionViewMatrix ()
+void Rendering::CameraMatrix::UpdateProjectionViewMatrix()
 {
-	auto& projectionMatrix = m_ProjectionMatrix[System::EnumCastUnderlying(m_DepthType)];
-	auto& projectionViewMatrix = m_ProjectionViewMatrix[System::EnumCastUnderlying(m_DepthType)];
-    
-    projectionViewMatrix = projectionMatrix * m_WorldCoordinateFrame.GetViewMatrix();
-    if (!m_PostProjectionIsIdentity)
+    auto& aProjectionMatrix = projectionMatrix.at(System::EnumCastUnderlying(depthType));
+    auto& aProjectionViewMatrix = projectionViewMatrix.at(System::EnumCastUnderlying(depthType));
+
+    aProjectionViewMatrix = aProjectionMatrix * worldCoordinateFrame.GetViewMatrix();
+    if (!postProjectionIsIdentity)
     {
-        projectionViewMatrix = m_PostProjectionMatrix * projectionViewMatrix;
+        aProjectionViewMatrix = postProjectionMatrix * aProjectionViewMatrix;
     }
-    if (!m_PreViewIsIdentity)
+    if (!preViewIsIdentity)
     {
-        projectionViewMatrix = projectionViewMatrix * m_PreViewMatrix;
+        aProjectionViewMatrix = aProjectionViewMatrix * preViewMatrix;
     }
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,CameraMatrix)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, CameraMatrix)
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix
-    ::GetProjectionMatrix () const noexcept
+Rendering::CameraMatrix::Matrix Rendering::CameraMatrix::GetProjectionMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_ProjectionMatrix[System::EnumCastUnderlying(m_DepthType)];
+
+    return projectionMatrix.at(System::EnumCastUnderlying(depthType));
 }
 
-void Rendering::CameraMatrix
-    ::SetProjectionMatrix (const Matrix& projectionMatrix)
+void Rendering::CameraMatrix::SetProjectionMatrix(const Matrix& aProjectionMatrix)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_ProjectionMatrix[System::EnumCastUnderlying(m_DepthType)] = projectionMatrix;
+
+    projectionMatrix.at(System::EnumCastUnderlying(depthType)) = aProjectionMatrix;
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix
-    ::SetProjectionMatrix (const APoint& p00, const APoint& p10,const APoint& p11, const APoint& p01,float nearExtrude, float farExtrude)
+void Rendering::CameraMatrix::SetProjectionMatrix(const APoint& p00, const APoint& p10, const APoint& p11, const APoint& p01, float nearExtrude, float farExtrude)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(0.0f < nearExtrude, "nearExtrude必须大于0\n");
     RENDERING_ASSERTION_1(nearExtrude < farExtrude, "farExtrude必须大于nearExtrude\n");
-    
+
     // 计算最近面的视图体积
-    auto q000 = Mathematics::APointF::GetOrigin() + nearExtrude * (p00 - Mathematics::APointF::GetOrigin());
-    auto q100 = Mathematics::APointF::GetOrigin() + nearExtrude * (p10 - Mathematics::APointF::GetOrigin());
-    auto q110 = Mathematics::APointF::GetOrigin() + nearExtrude * (p11 - Mathematics::APointF::GetOrigin());
-    auto q010 = Mathematics::APointF::GetOrigin() + nearExtrude * (p01 - Mathematics::APointF::GetOrigin());
-    
+    const auto q000 = Mathematics::APointF::GetOrigin() + nearExtrude * (p00 - Mathematics::APointF::GetOrigin());
+    const auto q100 = Mathematics::APointF::GetOrigin() + nearExtrude * (p10 - Mathematics::APointF::GetOrigin());
+    const auto q110 = Mathematics::APointF::GetOrigin() + nearExtrude * (p11 - Mathematics::APointF::GetOrigin());
+    const auto q010 = Mathematics::APointF::GetOrigin() + nearExtrude * (p01 - Mathematics::APointF::GetOrigin());
+
     // 计算最远面的视图体积
-    auto q001 = Mathematics::APointF::GetOrigin() + farExtrude * (p00 - Mathematics::APointF::GetOrigin());
-    auto q101 = Mathematics::APointF::GetOrigin() + farExtrude * (p10 - Mathematics::APointF::GetOrigin());
-    auto q111 = Mathematics::APointF::GetOrigin() + farExtrude * (p11 - Mathematics::APointF::GetOrigin());
-    auto q011 = Mathematics::APointF::GetOrigin() + farExtrude * (p01 - Mathematics::APointF::GetOrigin());
-    
+    const auto q001 = Mathematics::APointF::GetOrigin() + farExtrude * (p00 - Mathematics::APointF::GetOrigin());
+    const auto q101 = Mathematics::APointF::GetOrigin() + farExtrude * (p10 - Mathematics::APointF::GetOrigin());
+    const auto q111 = Mathematics::APointF::GetOrigin() + farExtrude * (p11 - Mathematics::APointF::GetOrigin());
+    const auto q011 = Mathematics::APointF::GetOrigin() + farExtrude * (p01 - Mathematics::APointF::GetOrigin());
+
     // 计算q111的表示
-	auto u0 = q100 - q000;
-	auto u1 = q010 - q000;
-	auto u2 = q001 - q000;
- 
-	Matrix matrix{ u0, u1, u2, q000, Mathematics::MatrixMajorFlags::Column };
-	auto inverseMatrix = matrix.Inverse(m_Epsilon);
-	auto point = inverseMatrix * q111;
- 
+    const auto u0 = q100 - q000;
+    const auto u1 = q010 - q000;
+    const auto u2 = q001 - q000;
+
+    const Matrix matrix{ u0, u1, u2, q000, Mathematics::MatrixMajorFlags::Column };
+    const auto inverseMatrix = matrix.Inverse(epsilon);
+    auto point = inverseMatrix * q111;
+
     // 计算分段线性变换的参数。
     //   y[i] = n[i] * x[i] / (d[0] * x[0] + d[1] * x[1] + d[2] * x[2] + d[3])
-	auto twoPoint0 = 2.0f * point[0];
-	auto twoPoint1 = 2.0f * point[1];
-	auto twoPoint2 = 2.0f * point[2];
-	auto d0 = +point[0] - point[1] - point[2] + 1.0f;
-	auto d1 = -point[0] + point[1] - point[2] + 1.0f;
-	auto d2 = -point[0] - point[1] + point[2] + 1.0f;
-	auto d3 = +point[0] + point[1] + point[2] - 1.0f;
- 
+    const auto twoPoint0 = 2.0f * point[0];
+    const auto twoPoint1 = 2.0f * point[1];
+    const auto twoPoint2 = 2.0f * point[2];
+    auto d0 = +point[0] - point[1] - point[2] + 1.0f;
+    auto d1 = -point[0] + point[1] - point[2] + 1.0f;
+    auto d2 = -point[0] - point[1] + point[2] + 1.0f;
+    auto d3 = +point[0] + point[1] + point[2] - 1.0f;
+
     // 计算透视投影从规范化长方体到规范化立方体[-1,1]^2 x [0,1]
-	auto twoPoint2divide0 = twoPoint2 / twoPoint0;
-	auto twoPoint2divide1 = twoPoint2 / twoPoint1;
-    
-    Matrix project;
-    project(0,0) = twoPoint2divide0 * (2.0f * d3 + d0);
-    project(0,1) = twoPoint2divide1 * d1;
-    project(0,2) = d2;
-    project(0,3) = -twoPoint2;
-    project(1,0) = twoPoint2divide0 * d0;
-    project(1,1)= twoPoint2divide1 * (2.0f * d3 + d1);
-    project(1,2) = d2;
-    project(1,3) = -twoPoint2;
-    
-    if (m_DepthType == DepthType::ZeroToOne)
+    auto twoPoint2divide0 = twoPoint2 / twoPoint0;
+    auto twoPoint2divide1 = twoPoint2 / twoPoint1;
+
+    Matrix project{};
+    project(0, 0) = twoPoint2divide0 * (2.0f * d3 + d0);
+    project(0, 1) = twoPoint2divide1 * d1;
+    project(0, 2) = d2;
+    project(0, 3) = -twoPoint2;
+    project(1, 0) = twoPoint2divide0 * d0;
+    project(1, 1) = twoPoint2divide1 * (2.0f * d3 + d1);
+    project(1, 2) = d2;
+    project(1, 3) = -twoPoint2;
+
+    if (depthType == DepthType::ZeroToOne)
     {
-        project(2,0) = 0.0f;
-        project(2,1) = 0.0f;
-        project(2,2) = d3;
-        project(2,3) = 0.0f;
+        project(2, 0) = 0.0f;
+        project(2, 1) = 0.0f;
+        project(2, 2) = d3;
+        project(2, 3) = 0.0f;
     }
     else
     {
-        project(2,0) = twoPoint2divide0 * d0;
-        project(2,1) = twoPoint2divide1 * d1;
-        project(2,2) = 2.0f * d3 + d2;
-        project(2,3) = -twoPoint2;
+        project(2, 0) = twoPoint2divide0 * d0;
+        project(2, 1) = twoPoint2divide1 * d1;
+        project(2, 2) = 2.0f * d3 + d2;
+        project(2, 3) = -twoPoint2;
     }
-    
-    project(3,0) = -twoPoint2divide0 * d0;
-    project(3,1) = -twoPoint2divide1 * d1;
-    project(3,2)  = -d2;
-    project(3,3)  = twoPoint2;
-    
+
+    project(3, 0) = -twoPoint2divide0 * d0;
+    project(3, 1) = -twoPoint2divide1 * d1;
+    project(3, 2) = -d2;
+    project(3, 3) = twoPoint2;
+
     // 需要映射挤压四边形投影视图体积到规范的长方体，
     // 然后后面跟着透视投影到规范化立方体。
     SetProjectionMatrix(project * inverseMatrix);
 }
 
-
-Rendering::DepthType Rendering::CameraMatrix ::GetDepthType() const noexcept 
+Rendering::DepthType Rendering::CameraMatrix::GetDepthType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_DepthType;
+
+    return depthType;
 }
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix ::GetProjectionViewMatrix() const noexcept
+Rendering::CameraMatrix::Matrix Rendering::CameraMatrix::GetProjectionViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_ProjectionViewMatrix[System::EnumCastUnderlying(m_DepthType)];
+
+    return projectionViewMatrix.at(System::EnumCastUnderlying(depthType));
 }
 
-void Rendering::CameraMatrix
-    ::SetPreViewMatrix (const Matrix& preViewMatrix)
+void Rendering::CameraMatrix::SetPreViewMatrix(const Matrix& aPreViewMatrix)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_PreViewMatrix = preViewMatrix;
-    m_PreViewIsIdentity = Approximate(m_PreViewMatrix, Mathematics::MatrixF::GetIdentityMatrix(), m_Epsilon);
-    
+
+    preViewMatrix = aPreViewMatrix;
+    preViewIsIdentity = Approximate(preViewMatrix, Mathematics::MatrixF::GetIdentityMatrix(), epsilon);
+
     UpdateProjectionViewMatrix();
 }
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix ::GetPreViewMatrix() const noexcept
+Rendering::CameraMatrix::Matrix Rendering::CameraMatrix::GetPreViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_PreViewMatrix;
+
+    return preViewMatrix;
 }
 
-bool Rendering::CameraMatrix ::PreViewIsIdentity() const noexcept
+bool Rendering::CameraMatrix::PreViewIsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_PreViewIsIdentity;
+
+    return preViewIsIdentity;
 }
 
-void Rendering::CameraMatrix
-    ::SetPostProjectionMatrix (const Matrix& postProjMatrix)
+void Rendering::CameraMatrix::SetPostProjectionMatrix(const Matrix& postProjMatrix)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_PostProjectionMatrix = postProjMatrix;
-    m_PostProjectionIsIdentity = Approximate(m_PostProjectionMatrix, Mathematics::MatrixF::GetIdentityMatrix(), m_Epsilon);
-    
+
+    postProjectionMatrix = postProjMatrix;
+    postProjectionIsIdentity = Approximate(postProjectionMatrix, Mathematics::MatrixF::GetIdentityMatrix(), epsilon);
+
     UpdateProjectionViewMatrix();
 }
 
-const Rendering::CameraMatrix::Matrix Rendering::CameraMatrix ::GetPostProjectionMatrix() const noexcept
+Rendering::CameraMatrix::Matrix Rendering::CameraMatrix::GetPostProjectionMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_PostProjectionMatrix;
+
+    return postProjectionMatrix;
 }
 
-bool Rendering::CameraMatrix ::PostProjectionIsIdentity() const noexcept
+bool Rendering::CameraMatrix::PostProjectionIsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_PostProjectionIsIdentity;
+
+    return postProjectionIsIdentity;
 }
 
-void Rendering::CameraMatrix
-    ::OnFrustumChange (const CameraFrustum& cameraFrustum)
+void Rendering::CameraMatrix::OnFrustumChange(const CameraFrustum& aCameraFrustum)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_CameraFrustum = cameraFrustum;
-    
+
+    cameraFrustum = aCameraFrustum;
+
     OnFrustumChange();
 }
 
-const Rendering::CameraFrustum& Rendering::CameraMatrix ::GetCameraFrustum() const noexcept
+const Rendering::CameraFrustum& Rendering::CameraMatrix::GetCameraFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    return m_CameraFrustum;   
+
+    return cameraFrustum;
 }
 
-const Rendering::WorldCoordinateFrame& Rendering::CameraMatrix ::GetWorldCoordinateFrame() const noexcept
+const Rendering::WorldCoordinateFrame& Rendering::CameraMatrix::GetWorldCoordinateFrame() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_WorldCoordinateFrame;
+
+    return worldCoordinateFrame;
 }
 
-void Rendering::CameraMatrix
-    ::SetFrame (const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
+void Rendering::CameraMatrix::SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_WorldCoordinateFrame.SetFrame(position,directionVector,upVector,rightVector);
+
+    worldCoordinateFrame.SetFrame(position, directionVector, upVector, rightVector);
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix
-    ::SetPosition (const APoint& position)
+void Rendering::CameraMatrix::SetPosition(const APoint& position)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_WorldCoordinateFrame.SetPosition(position);
+
+    worldCoordinateFrame.SetPosition(position);
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix
-    ::SetAxes (const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
+void Rendering::CameraMatrix::SetAxes(const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_WorldCoordinateFrame.SetAxes(directionVector,upVector,rightVector);
+
+    worldCoordinateFrame.SetAxes(directionVector, upVector, rightVector);
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix ::Load(CoreTools::BufferSource& source)
+void Rendering::CameraMatrix::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
-    
-    m_WorldCoordinateFrame.Load(source);
-    m_CameraFrustum.Load(source);
- 
-    source.ReadAggregate(m_PreViewMatrix);
-    m_PreViewIsIdentity = source.ReadBool();
-    source.ReadAggregate(m_PostProjectionMatrix);
-    m_PostProjectionIsIdentity = source.ReadBool();
-    source.Read(m_Epsilon);
-    
+    RENDERING_CLASS_IS_VALID_9;
+
+    worldCoordinateFrame.Load(source);
+    cameraFrustum.Load(source);
+
+    source.ReadAggregate(preViewMatrix);
+    preViewIsIdentity = source.ReadBool();
+    source.ReadAggregate(postProjectionMatrix);
+    postProjectionIsIdentity = source.ReadBool();
+    source.Read(epsilon);
+
     // 计算m_ProjectionMatrix[].
     OnFrustumChange();
 }
 
-void Rendering::CameraMatrix
-    ::Save( CoreTools::BufferTarget& target ) const
+void Rendering::CameraMatrix::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    m_WorldCoordinateFrame.Save(target);
-    m_CameraFrustum.Save(target);
- 
-    target.WriteAggregate(m_PreViewMatrix);
-    target.Write(m_PreViewIsIdentity);
-    target.WriteAggregate(m_PostProjectionMatrix);
-    target.Write(m_PostProjectionIsIdentity);
-    
-    target.Write(m_Epsilon);
-    
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    worldCoordinateFrame.Save(target);
+    cameraFrustum.Save(target);
+
+    target.WriteAggregate(preViewMatrix);
+    target.Write(preViewIsIdentity);
+    target.WriteAggregate(postProjectionMatrix);
+    target.Write(postProjectionIsIdentity);
+
+    target.Write(epsilon);
+
     // 这里不保存m_ProjectionMatrix[]和m_ProjectionViewMatrix[]。
 }
 
-int Rendering::CameraMatrix
-    ::GetStreamingSize() const
+int Rendering::CameraMatrix::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    
-	auto size = m_WorldCoordinateFrame.GetStreamingSize();
-    
-    size += m_CameraFrustum.GetStreamingSize();
- 
-    size += MATHEMATICS_STREAM_SIZE(m_PreViewMatrix);
-    size += CORE_TOOLS_STREAM_SIZE(m_PreViewIsIdentity);
-    size += MATHEMATICS_STREAM_SIZE(m_PostProjectionMatrix);
-    size += CORE_TOOLS_STREAM_SIZE(m_PostProjectionIsIdentity);
-    
-    size += CORE_TOOLS_STREAM_SIZE(m_Epsilon);
-    
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto size = worldCoordinateFrame.GetStreamingSize();
+
+    size += cameraFrustum.GetStreamingSize();
+
+    size += MATHEMATICS_STREAM_SIZE(preViewMatrix);
+    size += CORE_TOOLS_STREAM_SIZE(preViewIsIdentity);
+    size += MATHEMATICS_STREAM_SIZE(postProjectionMatrix);
+    size += CORE_TOOLS_STREAM_SIZE(postProjectionIsIdentity);
+
+    size += CORE_TOOLS_STREAM_SIZE(epsilon);
+
     return size;
 }
 
-float Rendering::CameraMatrix ::GetEpsilon() const noexcept
+float Rendering::CameraMatrix::GetEpsilon() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Epsilon;
+    return epsilon;
 }
 
-void Rendering::CameraMatrix
-	::SetDepthType(DepthType depthType)
+void Rendering::CameraMatrix::SetDepthType(DepthType aDepthType)
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	m_DepthType = depthType;
+    depthType = aDepthType;
 
-	// 设置m_DepthType并更新投影矩阵,投影矩阵取决于深度类型。
-	// 因为我们已经改变了深度类型,我们需要再次更新投影矩阵。
-	OnFrustumChange();
+    // 设置m_DepthType并更新投影矩阵,投影矩阵取决于深度类型。
+    // 因为我们已经改变了深度类型,我们需要再次更新投影矩阵。
+    OnFrustumChange();
 }
-
-#include STSTEM_WARNING_POP

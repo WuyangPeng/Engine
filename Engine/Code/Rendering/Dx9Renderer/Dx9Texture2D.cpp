@@ -11,7 +11,7 @@
 
 #include "CoreTools/Contract/Noexcept.h"
 
-Rendering::Dx9Texture2D ::Dx9Texture2D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture2D* texture)
+Rendering::Dx9Texture2D::Dx9Texture2D([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const Texture2D* texture)
 {
     CoreTools::DisableNoexcept();
 	 
@@ -103,7 +103,7 @@ Rendering::Dx9Texture2D
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9Texture2D)
 
-void Rendering::Dx9Texture2D ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9Texture2D::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -118,7 +118,7 @@ void Rendering::Dx9Texture2D ::Enable([[maybe_unused]] Renderer* renderer, [[may
  
 }
 
-void Rendering::Dx9Texture2D ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9Texture2D::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -164,7 +164,7 @@ void* Rendering::Dx9Texture2D
 	return nullptr;
 }
 
-void Rendering::Dx9Texture2D ::Unlock([[maybe_unused]] int level)
+void Rendering::Dx9Texture2D::Unlock([[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();

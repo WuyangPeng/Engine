@@ -1,17 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.1 (2020/09/06 10:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 16:36)
 
 #ifndef RENDERING_DATA_TYPES_TRANSFORM_H
 #define RENDERING_DATA_TYPES_TRANSFORM_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "TransformMatrix.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
@@ -21,24 +22,10 @@
 namespace Rendering
 {
     template <typename Real>
-    class TransformImpl;
-
-    template class RENDERING_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<TransformImpl<float>>;
-    template class RENDERING_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<TransformImpl<double>>;
-
-    template <typename Real>
-    class RENDERING_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<TransformImpl<Real>>;
-}
-
-namespace Rendering
-{
-    template <typename Real>
-    class RENDERING_TEMPLATE_DEFAULT_DECLARE Transform
+    class Transform
     {
     public:
         using ClassType = Transform<Real>;
-        using ImplType = TransformImpl<Real>;
-        using ClassShareType = CoreTools::DelayCopyUnsharedClasses;
 
         using Math = Mathematics::Math<Real>;
         using Matrix = Mathematics::Matrix<Real>;
@@ -55,20 +42,20 @@ namespace Rendering
         // 正转换是{Y,1} = H * {X,1}和逆转换是 {X,1} = H^{-1} * {Y,1}。
 
         // 默认构造函数产生单位转换。
-        Transform();
+        Transform() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 设置转换为单位矩阵。
-        void MakeIdentity();
+        void MakeIdentity() noexcept;
 
         // 设置转换的缩放值为1。
-        void MakeUnitScale();
+        void MakeUnitScale() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
 
         // 转换结构的提示。
-        [[nodiscard]] bool IsIdentity() const noexcept;  // I
-        [[nodiscard]] bool IsRotationOrScaleMatrix() const noexcept;  // R * S
-        [[nodiscard]] bool IsUniformScale() const noexcept;  // R * S，S = c * I
+        NODISCARD bool IsIdentity() const noexcept;  // I
+        NODISCARD bool IsRotationOrScaleMatrix() const noexcept;  // R * S
+        NODISCARD bool IsUniformScale() const noexcept;  // R * S，S = c * I
 
         // 成员访问
         // (1) Set* 函数设置IsIdentity提示为false。
@@ -80,65 +67,70 @@ namespace Rendering
         //     如果这个提示是false, GetUniformScale可能会产生一个断言。
         // (5) 所有Set*函数设置m_InverseNeedsUpdate为true。
         //     当GetInverseMatrix被调用，这种情况逆矩阵必须被重新计算，并设置m_InverseNeedsUpdate为false。
-        void SetRotate(const Matrix& rotate);
-        void SetMatrix(const Matrix& matrix);
-        void SetTranslate(const APoint& translate);
-        void SetScale(const APoint& scale);
-        void SetUniformScale(Real scale);
-        [[nodiscard]] const Matrix GetRotate() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        [[nodiscard]] const Matrix GetMatrix() const noexcept;
-        [[nodiscard]] const APoint GetTranslate() const noexcept;
-        [[nodiscard]] const APoint GetScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        [[nodiscard]] Real GetUniformScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetRotate(const Matrix& rotate) noexcept;
+        void SetMatrix(const Matrix& matrix) noexcept;
+        void SetTranslate(const APoint& aTranslate) noexcept;
+        void SetScale(const APoint& aScale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetUniformScale(Real aScale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD Matrix GetRotate() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD Matrix GetMatrix() const noexcept;
+        NODISCARD APoint GetTranslate() const noexcept;
+        NODISCARD APoint GetScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD Real GetUniformScale() const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
 
         // 对于M = R * S，S的绝对值的最大值被返回。
         // 对于普通M，返回最大的row绝对值和，这是最大规模的转换的合理测量。
-        [[nodiscard]] Real GetNorm() const noexcept;
+        NODISCARD Real GetNorm() const noexcept;
 
         // 矩阵-点乘法, M * p。
-        [[nodiscard]] APoint operator*(const APoint& point) const noexcept;
+        NODISCARD APoint operator*(const APoint& point) const noexcept;
 
         // 矩阵-向量乘法, M * v。
-        [[nodiscard]] AVector operator*(const AVector& vector) const noexcept;
+        NODISCARD AVector operator*(const AVector& vector) const noexcept;
 
         // 矩阵-矩阵乘法。
         Transform& operator*=(const Transform& transform);
 
         // 获取齐次矩阵。
-        [[nodiscard]] const Matrix GetHomogeneousMatrix() const noexcept;
+        NODISCARD Matrix GetHomogeneousMatrix() const noexcept;
 
         // 获取齐次矩阵的逆，当需要时重新计算。
         // H = {{M,T},{0,1}}, 这里 H^{-1} = {{M^{-1},-M^{-1}*T},{0,1}}。
-        [[nodiscard]] const Matrix GetInverseMatrix(float epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix GetInverseMatrix(float epsilon = Math::GetZeroTolerance()) const;
 
         // 获取Transform的逆。不执行测试来确保调用的转换是可逆的。
-        [[nodiscard]] const Transform GetInverseTransform(float epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Transform GetInverseTransform(float epsilon = Math::GetZeroTolerance()) const;
 
         // 流支持
-        [[nodiscard]] int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
 
         void ReadAggregate(CoreTools::BufferSource& source);
         void WriteAggregate(CoreTools::BufferTarget& target) const;
 
     private:
-        void Copy();
+        // 完整的4x4齐次矩阵H = {{M,T},{0,1}}和它的逆矩阵为H^{-1} = {M^{-1},-M^{-1}*T},{0,1}}。 逆矩阵只在需要时计算。
+        TransformMatrix<Real> transformMatrix;
 
-    private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        Matrix rotationOrGeneralMatrix;  // M (普通) or R (旋转)
+        APoint translate;  // T
+        APoint scale;  // S
+
+        mutable Matrix inverseMatrix;
+        mutable bool inverseNeedsUpdate;
     };
 
     template <typename Real>
-    const Transform<Real> operator*(const Transform<Real>& lhs, const Transform<Real>& rhs);
+    NODISCARD Transform<Real> operator*(const Transform<Real>& lhs, const Transform<Real>& rhs);
 
     template <typename Real>
-    bool Approximate(const Transform<Real>& lhs, const Transform<Real>& rhs, const Real epsilon = Mathematics::Math<Real>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Transform<Real>& lhs, const Transform<Real>& rhs, const Real epsilon = Mathematics::Math<Real>::GetZeroTolerance());
 
     // 调试输出。
     template <typename Real>
     std::ostream& operator<<(std::ostream& out, const Transform<Real>& transform);
 
-    using FloatTransform = Transform<float>;
-    using DoubleTransform = Transform<double>;
+    using TransformF = Transform<float>;
+    using TransformD = Transform<double>;
 }
 
 #endif  // RENDERING_DATA_TYPES_TRANSFORM_H

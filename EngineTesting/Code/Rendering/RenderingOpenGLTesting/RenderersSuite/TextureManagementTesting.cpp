@@ -30,7 +30,7 @@ void Rendering::TextureManagementTesting
 
 	RendererManager::Destroy();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::TextureManagementTesting
 	::Texture1DTest()
 {

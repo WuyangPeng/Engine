@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 18:13)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_H
@@ -13,52 +16,44 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class BSplineCurveFit
-	{
-	public:
-		// Construction and destruction.  The preconditions for calling the
-		// constructor are
-		//   1 <= degree && degree < numControls <= numSamples
-		// The samples point are contiguous blocks of dimension real value
-		// stored in sampleData.
+    template <typename Real>
+    class BSplineCurveFit
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		BSplineCurveFit(int dimension, int numSamples, const Real* sampleData, int degree, int numControls);
-		~BSplineCurveFit();
+        using ClassType = BSplineCurveFit<Real>;
+        using Math = Math<Real>;
 
-		// Access to input sample information.
-		int GetDimension() const;
-		int GetSampleQuantity() const;
-		const Real* GetSampleData() const;
+    public:
+        BSplineCurveFit(int dimension, int numSamples, const std::vector<Real>& sampleData, int degree, int numControls);
 
-		// Access to output control point and curve information.
-		int GetDegree() const;
-		int GetControlQuantity() const;
-		const Real* GetControlData() const;
-		const BSplineFitBasis<Real>& GetBasis() const;
+        CLASS_INVARIANT_DECLARE;
 
-		// Evaluation of the B-spline curve.  It is defined for 0 <= t <= 1.  If
-		// a t-value is outside [0,1], an open spline clamps it to [0,1].  The
-		// caller must ensure that position[] has (at least) 'dimension'
-		// elements.
-		void GetPosition(Real t, Real* position) const;
+        NODISCARD int GetDimension() const noexcept;
+        NODISCARD int GetSampleQuantity() const noexcept;
+        NODISCARD std::vector<Real> GetSampleData() const;
 
-	private:
-		// Input sample information.
-		int mDimension;
-		int mNumSamples;
-		const Real* mSampleData;
+        NODISCARD int GetDegree() const noexcept;
+        NODISCARD int GetControlQuantity() const noexcept;
+        NODISCARD std::vector<Real> GetControlData() const;
+        NODISCARD const BSplineFitBasis<Real>& GetBasis() const noexcept;
 
-		// The fitted B-spline curve, open and with uniform knots.
-		int mDegree;
-		int mNumControls;
-		Real* mControlData;
-		BSplineFitBasis<Real> mBasis;
-	};
+        NODISCARD std::vector<Real> GetPosition(Real t) const;
 
-	using BSplineCurveFitf = BSplineCurveFit<float>;
-	using BSplineCurveFitd = BSplineCurveFit<double>;
+    private:
+        int dimension;
+        int numSamples;
+        std::vector<Real> sampleData;
+
+        int degree;
+        int numControls;
+        std::vector<Real> controlData;
+        BSplineFitBasis<Real> basis;
+    };
+
+    using BSplineCurveFitf = BSplineCurveFit<float>;
+    using BSplineCurveFitd = BSplineCurveFit<double>;
 }
 
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_H

@@ -26,7 +26,7 @@ using std::string;
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 28020)
 #endif  // TCRE_USE_MSVC
-Rendering::SingleShaderSamplerDataImpl ::SingleShaderSamplerDataImpl()
+Rendering::SingleShaderSamplerDataImpl::SingleShaderSamplerDataImpl()
     : m_SamplerName{}, m_SamplerType{ ShaderFlags::SamplerType::None }, m_Filter{ ShaderFlags::SamplerFilter::Nearest },
       m_LodBias{ 0.0f }, m_Anisotropy{ 1.0f }, m_BorderColor{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
@@ -37,7 +37,7 @@ Rendering::SingleShaderSamplerDataImpl ::SingleShaderSamplerDataImpl()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderSamplerDataImpl)
 
-void Rendering::SingleShaderSamplerDataImpl ::SetSampler(const string& name, ShaderFlags::SamplerType type)
+void Rendering::SingleShaderSamplerDataImpl::SetSampler(const string& name, ShaderFlags::SamplerType type)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -45,14 +45,14 @@ void Rendering::SingleShaderSamplerDataImpl ::SetSampler(const string& name, Sha
     m_SamplerType = type;
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::SetFilter(ShaderFlags::SamplerFilter filter)
+void Rendering::SingleShaderSamplerDataImpl::SetFilter(ShaderFlags::SamplerFilter filter)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Filter = filter;
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate)
+void Rendering::SingleShaderSamplerDataImpl::SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= dimension && dimension < sm_SamplerCoordinateSize, "Ë÷Òý´íÎó");
@@ -60,49 +60,49 @@ void Rendering::SingleShaderSamplerDataImpl ::SetCoordinate(int dimension, Shade
     m_Coordinate[dimension] = coordinate;
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::SetLodBias(float lodBias)
+void Rendering::SingleShaderSamplerDataImpl::SetLodBias(float lodBias)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_LodBias = lodBias;
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::SetAnisotropy(float anisotropy)
+void Rendering::SingleShaderSamplerDataImpl::SetAnisotropy(float anisotropy)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Anisotropy = anisotropy;
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::SetBorderColor(const Colour& borderColor)
+void Rendering::SingleShaderSamplerDataImpl::SetBorderColor(const Colour& borderColor)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_BorderColor = borderColor;
 }
 
-const std::string Rendering::SingleShaderSamplerDataImpl ::GetSamplerName() const
+const std::string Rendering::SingleShaderSamplerDataImpl::GetSamplerName() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_SamplerName;
 }
 
-Rendering::ShaderFlags::SamplerType Rendering::SingleShaderSamplerDataImpl ::GetSamplerType() const
+Rendering::ShaderFlags::SamplerType Rendering::SingleShaderSamplerDataImpl::GetSamplerType() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_SamplerType;
 }
 
-Rendering::ShaderFlags::SamplerFilter Rendering::SingleShaderSamplerDataImpl ::GetFilter() const
+Rendering::ShaderFlags::SamplerFilter Rendering::SingleShaderSamplerDataImpl::GetFilter() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_Filter;
 }
 
-Rendering::ShaderFlags::SamplerCoordinate Rendering::SingleShaderSamplerDataImpl ::GetCoordinate(int dimension) const
+Rendering::ShaderFlags::SamplerCoordinate Rendering::SingleShaderSamplerDataImpl::GetCoordinate(int dimension) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= dimension && dimension < sm_SamplerCoordinateSize, "Ë÷Òý´íÎó");
@@ -110,28 +110,28 @@ Rendering::ShaderFlags::SamplerCoordinate Rendering::SingleShaderSamplerDataImpl
     return m_Coordinate[dimension];
 }
 
-float Rendering::SingleShaderSamplerDataImpl ::GetLodBias() const
+float Rendering::SingleShaderSamplerDataImpl::GetLodBias() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_LodBias;
 }
 
-float Rendering::SingleShaderSamplerDataImpl ::GetAnisotropy() const
+float Rendering::SingleShaderSamplerDataImpl::GetAnisotropy() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_Anisotropy;
 }
 
-Rendering::SingleShaderSamplerDataImpl::Colour Rendering::SingleShaderSamplerDataImpl ::GetBorderColor() const
+Rendering::SingleShaderSamplerDataImpl::Colour Rendering::SingleShaderSamplerDataImpl::GetBorderColor() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_BorderColor;
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::SingleShaderSamplerDataImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -146,7 +146,7 @@ void Rendering::SingleShaderSamplerDataImpl ::Load(CoreTools::BufferSource& sour
     source.ReadAggregate(m_BorderColor);
 }
 
-void Rendering::SingleShaderSamplerDataImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::SingleShaderSamplerDataImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -161,7 +161,7 @@ void Rendering::SingleShaderSamplerDataImpl ::Save(CoreTools::BufferTarget& targ
     target.WriteAggregate(m_BorderColor);
 }
 
-int Rendering::SingleShaderSamplerDataImpl ::GetStreamingSize() const
+int Rendering::SingleShaderSamplerDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

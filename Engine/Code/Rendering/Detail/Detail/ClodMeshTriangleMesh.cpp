@@ -1,19 +1,19 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/24 10:38)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ClodMeshTriangleMesh.h"
-#include "Mathematics/Meshes/TriangleKey.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Mathematics/Meshes/TriangleKey.h"
 
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <set>
-#include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
@@ -23,133 +23,125 @@
 #include SYSTEM_WARNING_DISABLE(26490)
 using std::set;
 
-Rendering::ClodMeshTriangleMesh
-	::ClodMeshTriangleMesh(TrianglesMeshSharedPtr mesh)
-	: m_NumVertices{ mesh->GetVertexBuffer()->GetNumElements() },m_NumIndices{ mesh->GetIndexBuffer()->GetNumElements() },m_NumTriangles{ m_NumIndices / 3 },
-	  m_IndixBuffer{ mesh->GetIndexBuffer() },m_VertexBuffer{ mesh->GetVertexBuffer() },m_VertexBufferAccessor{ mesh.get() }
+Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh(TrianglesMeshSharedPtr mesh)
+    : m_NumVertices{ mesh->GetVertexBuffer()->GetNumElements() }, m_NumIndices{ mesh->GetIndexBuffer()->GetNumElements() }, m_NumTriangles{ m_NumIndices / 3 },
+      m_IndixBuffer{ mesh->GetIndexBuffer() }, m_VertexBuffer{ mesh->GetVertexBuffer() }, m_VertexBufferAccessor{ *mesh }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshTriangleMesh)
 
-int Rendering::ClodMeshTriangleMesh
-	::GetNumVertices() const noexcept
+int Rendering::ClodMeshTriangleMesh::GetNumVertices() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_NumVertices;
+    return m_NumVertices;
 }
 
-int Rendering::ClodMeshTriangleMesh
-	::GetNumIndices() const noexcept
+int Rendering::ClodMeshTriangleMesh::GetNumIndices() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_NumIndices;
+    return m_NumIndices;
 }
 
-bool Rendering::ClodMeshTriangleMesh
-	::ValidBuffers() const
+bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	using TriangleKeySet = set<Mathematics::TriangleKey>;
-	TriangleKeySet triangles;
-	std::set<int> vertexIndices;
-	auto currentIndex = GetIndexBufferReadOnlyData();
+    using TriangleKeySet = set<Mathematics::TriangleKey>;
+    TriangleKeySet triangles;
+    std::set<int> vertexIndices;
+    auto currentIndex = GetIndexBufferReadOnlyData();
 
-	for (auto trianglesIndex = 0; trianglesIndex < m_NumTriangles; ++trianglesIndex)
-	{
-		const auto firstIndex = *currentIndex++;
-		const auto secondIndex = *currentIndex++;
-		const auto thirdIndex = *currentIndex++;
-		if (firstIndex == secondIndex || firstIndex == thirdIndex || secondIndex == thirdIndex)
-		{
-			// 现在，输入应该来自三角网格或三角扇。
-			// 边折叠算法必须进行修改，以应对为其退化添加三角形（以产生长条）的三角形带。
-			RENDERING_ASSERTION_2(false, "退化三角形是不允许的。\n");
-			return false;
-		}
+    for (auto trianglesIndex = 0; trianglesIndex < m_NumTriangles; ++trianglesIndex)
+    {
+        const auto firstIndex = *currentIndex++;
+        const auto secondIndex = *currentIndex++;
+        const auto thirdIndex = *currentIndex++;
+        if (firstIndex == secondIndex || firstIndex == thirdIndex || secondIndex == thirdIndex)
+        {
+            // 现在，输入应该来自三角网格或三角扇。
+            // 边折叠算法必须进行修改，以应对为其退化添加三角形（以产生长条）的三角形带。
+            RENDERING_ASSERTION_2(false, "退化三角形是不允许的。\n");
+            return false;
+        }
 
-		vertexIndices.insert(firstIndex);
-		vertexIndices.insert(secondIndex);
-		vertexIndices.insert(thirdIndex);
+        vertexIndices.insert(firstIndex);
+        vertexIndices.insert(secondIndex);
+        vertexIndices.insert(thirdIndex);
 
-		const auto result = triangles.insert(Mathematics::TriangleKey(firstIndex, secondIndex, thirdIndex));
+        const auto result = triangles.insert(Mathematics::TriangleKey(firstIndex, secondIndex, thirdIndex));
 
-		if (result.second == false)
-		{
-			// 索引缓冲区包含重复三角形。边折叠算法不被设计来处理重复。
-			RENDERING_ASSERTION_2(false, "索引缓冲区包含重复三角形。\n");
-			return false;
-		}
-	}
+        if (result.second == false)
+        {
+            // 索引缓冲区包含重复三角形。边折叠算法不被设计来处理重复。
+            RENDERING_ASSERTION_2(false, "索引缓冲区包含重复三角形。\n");
+            return false;
+        }
+    }
 
-	// 测试一个有效的顶点缓冲区
-	if (boost::numeric_cast<int>(vertexIndices.size()) < m_NumVertices || m_NumVertices != (*vertexIndices.rbegin() + 1))
-	{
-		// 如果下面的断言被触发时，顶点缓冲器具有不被索引缓冲器引用的顶点。
-		// 这是一个问题，因为在顶点缓冲器是基于边折叠的顺序重新排序。
-		// 引用输入顶点缓冲在任何其他索引缓冲区现在是无效的。
-		RENDERING_ASSERTION_2(false, "索引缓冲区没有引用的所有顶点。\n");
-		return false;
-	}
+    // 测试一个有效的顶点缓冲区
+    if (boost::numeric_cast<int>(vertexIndices.size()) < m_NumVertices || m_NumVertices != (*vertexIndices.rbegin() + 1))
+    {
+        // 如果下面的断言被触发时，顶点缓冲器具有不被索引缓冲器引用的顶点。
+        // 这是一个问题，因为在顶点缓冲器是基于边折叠的顺序重新排序。
+        // 引用输入顶点缓冲在任何其他索引缓冲区现在是无效的。
+        RENDERING_ASSERTION_2(false, "索引缓冲区没有引用的所有顶点。\n");
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
-const int* Rendering::ClodMeshTriangleMesh
-	::GetIndexBufferReadOnlyData() const noexcept
+const int* Rendering::ClodMeshTriangleMesh::GetIndexBufferReadOnlyData() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return  reinterpret_cast<const int*>(m_IndixBuffer->GetReadOnlyData());
+    return reinterpret_cast<const int*>(m_IndixBuffer->GetReadOnlyData());
 }
 
-int Rendering::ClodMeshTriangleMesh
-	::GetNumTriangles() const noexcept
+int Rendering::ClodMeshTriangleMesh::GetNumTriangles() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_NumTriangles;
+    return m_NumTriangles;
 }
 
-const Mathematics::Vector3F Rendering::ClodMeshTriangleMesh ::GetPosition(int index) const noexcept
+const Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(int index) const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VertexBufferAccessor.GetPosition<Mathematics::Vector3F>(index);
+    return m_VertexBufferAccessor.GetPosition<Mathematics::Vector3F>(index);
 }
 
-const char* Rendering::ClodMeshTriangleMesh ::GetVertexBufferReadOnlyData() const noexcept
+const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return  m_VertexBufferAccessor.GetData();
+    return m_VertexBufferAccessor.GetData();
 }
 
-int Rendering::ClodMeshTriangleMesh ::GetStride() const noexcept
+int Rendering::ClodMeshTriangleMesh::GetStride() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return  m_VertexBufferAccessor.GetStride();
+    return m_VertexBufferAccessor.GetStride();
 }
 
-void Rendering::ClodMeshTriangleMesh
-	::SetNewVertexBufferData(const std::vector<char>& newData)
+void Rendering::ClodMeshTriangleMesh::SetNewVertexBufferData(const std::vector<char>& newData)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_VertexBuffer->SetNewData(newData);
+    m_VertexBuffer->SetNewData(newData);
 }
 
-void Rendering::ClodMeshTriangleMesh
-	::SetNewIndexBufferData(const std::vector<char>& newData)
+void Rendering::ClodMeshTriangleMesh::SetNewIndexBufferData(const std::vector<char>& newData)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_IndixBuffer->SetNewData(newData);
+    m_IndixBuffer->SetNewData(newData);
 }
 
 #include STSTEM_WARNING_POP

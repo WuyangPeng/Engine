@@ -1,20 +1,14 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 9:42)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_H
 #define MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_H
-
-// Quadratic interpolation of a network of triangles whose vertices are of
-// the form (x,y,f(x,y)).  This code is an implementation of the algorithm
-// found in
-//
-//   Zoltan J. Cendes and Steven H. Wong,
-//   C1 quadratic interpolation over arbitrary point sets,
-//   IEEE Computer Graphics & Applications,
-//   pp. 8-16, 1987
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -22,60 +16,50 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpQdrNonuniform2
-	{
-	public:
-		// Construction and destruction.  If you want IntpQdrNonuniform2 to
-		// delete the input array during destruction, set owner to 'true'.
-		// Otherwise, you own the array and must delete it yourself.
-		//
-		// The first constructor requires you to specify function values F and
-		// first-order partial derivative values Fx and Fy.  The second
-		// constructor requires only F, but the Fx and Fy values are estimated
-		// at the sample points.
+    template <typename Real>
+    class IntpQdrNonuniform2
+    {
+    public:
+        using ClassType = IntpQdrNonuniform2<Real>;
 
-		IntpQdrNonuniform2(const Delaunay2<Real>& DT, Real* F, Real* FX,Real* FY, bool owner);
+    public:
+        IntpQdrNonuniform2(const Delaunay2<Real>& dt, const std::vector<Real>& f, const std::vector<Real>& fx, const std::vector<Real>& fy);
 
-		IntpQdrNonuniform2(const Delaunay2<Real>& DT, Real* F, bool owner);
+        IntpQdrNonuniform2(const Delaunay2<Real>& dt, const std::vector<Real>& f);
 
-		~IntpQdrNonuniform2();
+        CLASS_INVARIANT_DECLARE;
 
-		// Quadratic interpolation.  The return value is 'true' if and only if the
-		// input point is in the convex hull of the input vertices, in which case
-		// the interpolation is valid.
-		bool Evaluate(const Vector2<Real>& P, Real& F, Real& FX, Real& FY);
+        NODISCARD bool Evaluate(const Vector2<Real>& p, Real& f0, Real& fx0, Real& fy0);
 
-	private:
-		class TriangleData
-		{
-		public:
-			Vector2<Real> Center;
-			Vector2<Real> Intersect[3];
-			Real Coeff[19];
-		};
+    private:
+        void EstimateDerivatives();
+        void ProcessTriangles();
+        void ComputeCrossEdgeIntersections(int t);
+        void ComputeCoefficients(int t);
 
-		class Jet
-		{
-		public:
-			Real F, FX, FY;
-		};
+    private:
+        class TriangleData
+        {
+        public:
+            Vector2<Real> center{};
+            std::array<Vector2<Real>, 3> intersect{};
+            std::array<Real, 19> coeff{};
+        };
 
-		const Delaunay2<Real>* mDT;
-		Real* mF;
-		Real* mFX;
-		Real* mFY;
-		TriangleData* mTData;  // triangle data
-		bool mFOwner, mFXFYOwner;
+        class Jet
+        {
+        public:
+            Real f;
+            Real fx;
+            Real fy;
+        };
 
-		void EstimateDerivatives();
-		void ProcessTriangles();
-		void ComputeCrossEdgeIntersections(int t);
-		void ComputeCoefficients(int t);
-	};
-
-	using IntpQdrNonuniform2f = IntpQdrNonuniform2<float>;
-	using IntpQdrNonuniform2d = IntpQdrNonuniform2<double>;
+        Delaunay2<Real> dt;
+        std::vector<Real> f;
+        std::vector<Real> fx;
+        std::vector<Real> fy;
+        std::vector<TriangleData> tData;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_H

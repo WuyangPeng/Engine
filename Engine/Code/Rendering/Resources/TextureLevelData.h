@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 11:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 18:08)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_H
@@ -10,14 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Flags/TextureFlags.h"
-
-namespace CoreTools
-{
-    class BufferSource;
-    class BufferTarget;
-    class WriteFileManager;
-    class ReadFileManager;
-}
+#include "CoreTools/FileManager/FileManagerFwd.h"
 
 namespace Rendering
 {
@@ -36,30 +32,30 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        int GetNumDimensions() const noexcept;
-        int GetDimension(int index, int level) const;
-        int GetNumLevelBytes(int level) const;
-        int GetNumTotalBytes() const noexcept;
-        int GetLevelOffset(int level) const;
+        NODISCARD int GetNumDimensions() const noexcept;
+        NODISCARD int GetDimension(int index, int level) const;
+        NODISCARD int GetNumLevelBytes(int level) const;
+        NODISCARD int GetNumTotalBytes() const noexcept;
+        NODISCARD int GetLevelOffset(int level) const;
 
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
 
         void SaveToFile(WriteFileManager& outFile) const;
         void ReadFromFile(ReadFileManager& inFile);
 
-        void SetNumLevelBytes(int level, int numLevelBytes);
-        void SetDimension(int index, int level, int dimension);
+        void SetNumLevelBytes(int level, int aNumLevelBytes);
+        void SetDimension(int index, int level, int aDimension);
         void RecountNumTotalBytes(int numLevels, TextureFlags type) noexcept;
         void RecountLevelOffsets(int numLevels) noexcept;
 
     private:
-        int m_NumDimensions;
-        int m_Dimension[WindowSize][TextureMaximumMipmapLevels]{};
-        int m_NumLevelBytes[TextureMaximumMipmapLevels]{};
-        int m_NumTotalBytes;
-        int m_LevelOffsets[TextureMaximumMipmapLevels]{};
+        int numDimensions;
+        std::array<std::array<int, TextureMaximumMipmapLevels>, WindowSize> dimension;
+        std::array<int, TextureMaximumMipmapLevels> numLevelBytes;
+        int numTotalBytes;
+        std::array<int, TextureMaximumMipmapLevels> levelOffsets;
     };
 }
 

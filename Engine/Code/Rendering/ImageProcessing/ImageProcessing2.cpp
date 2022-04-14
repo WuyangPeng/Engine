@@ -74,7 +74,7 @@ Rendering::ImageProcessing2
 
  
 
-Rendering::Texture2DSharedPtr Rendering::ImageProcessing2 ::CreateImage(const Mathematics::Float4* imageData)
+Rendering::Texture2DSharedPtr Rendering::ImageProcessing2::CreateImage(const Mathematics::Float4* imageData)
 {
     Texture2DSharedPtr reflected(std::make_shared < Texture2D>(TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mBound0, mBound1, 1));
 
@@ -437,22 +437,22 @@ std::string Rendering::ImageProcessing2::msDrawPPrograms[System::EnumCastUnderly
 
 
  int Rendering::ImageProcessing2
-	 ::GetBound0() const noexcept
+	::GetBound0() const noexcept
 {
 	return mBound0;
 }
 
- int Rendering::ImageProcessing2 ::GetBound1() const noexcept
+ int Rendering::ImageProcessing2::GetBound1() const noexcept
 {
 	return mBound1;
 }
 
- float Rendering::ImageProcessing2 ::GetDx() const noexcept
+ float Rendering::ImageProcessing2::GetDx() const noexcept
 {
 	return mDx;
 }
 
- float Rendering::ImageProcessing2 ::GetDy() const noexcept
+ float Rendering::ImageProcessing2::GetDy() const noexcept
 {
 	return mDy;
 }

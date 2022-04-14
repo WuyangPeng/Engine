@@ -29,7 +29,7 @@ Rendering::IKGoalImpl
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::IKGoalImpl ::IKGoalImpl() noexcept
+Rendering::IKGoalImpl::IKGoalImpl() noexcept
     : m_Target{}, m_Effector{}, m_Weight{ 1.0f }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -39,7 +39,7 @@ Rendering::IKGoalImpl ::IKGoalImpl() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Rendering,IKGoalImpl)
 #endif // OPEN_CLASS_INVARIANT	
 
-int Rendering::IKGoalImpl ::GetStreamingSize() const noexcept
+int Rendering::IKGoalImpl::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -70,7 +70,7 @@ void Rendering::IKGoalImpl
 	//source.ReadSharedPtr(m_Effector);
 }
 
-void Rendering::IKGoalImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::IKGoalImpl::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
 	CoreTools::DisableNoexcept();
@@ -97,37 +97,35 @@ const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl
 	return m_Target;
 }
 
-const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl ::GetEffector() const noexcept
+const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl::GetEffector() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Effector;
 }
 
-const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl
-	::GetTargetPosition() const 
+const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl ::GetTargetPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Target->GetWorldTransform().GetTranslate();
 }
 
-const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl
-	::GetEffectorPosition() const 
+const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl ::GetEffectorPosition() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Effector->GetWorldTransform().GetTranslate();
 }
 
-void Rendering::IKGoalImpl ::SetWeight(float weight) noexcept
+void Rendering::IKGoalImpl::SetWeight(float weight) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Weight = weight;
 }
 
-float Rendering::IKGoalImpl ::GetWeight() const noexcept
+float Rendering::IKGoalImpl::GetWeight() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

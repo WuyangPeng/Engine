@@ -1,62 +1,60 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 16:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 16:28)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PickRecordContainerImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
-Rendering::PickRecordContainerImpl ::PickRecordContainerImpl() noexcept
-    : m_PickRecord{}
+Rendering::PickRecordContainerImpl::PickRecordContainerImpl() noexcept
+    : pickRecord{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PickRecordContainerImpl)
 
-void Rendering::PickRecordContainerImpl
-	::InsertPickRecord(const PickRecord& pickRecord)
+void Rendering::PickRecordContainerImpl::InsertPickRecord(const PickRecord& aPickRecord)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_PickRecord.push_back(pickRecord);
+    pickRecord.emplace_back(aPickRecord);
 }
 
-int Rendering::PickRecordContainerImpl
-	::GetSize() const
+int Rendering::PickRecordContainerImpl::GetSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_PickRecord.size());
+    return boost::numeric_cast<int>(pickRecord.size());
 }
 
-const Rendering::PickRecord Rendering::PickRecordContainerImpl
-	::GetPickRecord(int index) const 
+Rendering::PickRecord Rendering::PickRecordContainerImpl::GetPickRecord(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetSize(), "索引错误！");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetSize(), "索引错误！");
 
-	return m_PickRecord.at(index);
+    return pickRecord.at(index);
 }
 
-void Rendering::PickRecordContainerImpl
-	::InsertPickRecord(const PickRecordContainerImpl& pickRecordContainerImpl)
+void Rendering::PickRecordContainerImpl::InsertPickRecord(const PickRecordContainerImpl& pickRecordContainerImpl)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_PickRecord.insert(m_PickRecord.end(), pickRecordContainerImpl.m_PickRecord.begin(), pickRecordContainerImpl.m_PickRecord.end());
+    pickRecord.insert(pickRecord.end(), pickRecordContainerImpl.pickRecord.begin(), pickRecordContainerImpl.pickRecord.end());
 }
 
-bool Rendering::PickRecordContainerImpl ::IsEmpty() const noexcept
+bool Rendering::PickRecordContainerImpl::IsEmpty() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_PickRecord.empty();
+    return pickRecord.empty();
 }

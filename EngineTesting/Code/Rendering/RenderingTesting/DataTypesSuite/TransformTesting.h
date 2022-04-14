@@ -22,7 +22,7 @@ namespace Rendering
 	    void OperatorTest();
 	    void InverseTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

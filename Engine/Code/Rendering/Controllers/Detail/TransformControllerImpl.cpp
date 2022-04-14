@@ -13,8 +13,9 @@
  
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26440)
 Rendering::TransformControllerImpl
-	::TransformControllerImpl(const FloatTransform& localTransform) noexcept
+	::TransformControllerImpl(const TransformF& localTransform) noexcept
 	: m_LocalTransform{ localTransform }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -22,14 +23,14 @@ Rendering::TransformControllerImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TransformControllerImpl)
 
-void Rendering::TransformControllerImpl ::SetTransform(const FloatTransform& localTransform) noexcept
+void Rendering::TransformControllerImpl::SetTransform(const TransformF& localTransform) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_LocalTransform = localTransform;
 }
 
-const Rendering::FloatTransform Rendering::TransformControllerImpl ::GetTransform() const noexcept
+const Rendering::TransformF Rendering::TransformControllerImpl::GetTransform() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -61,15 +62,14 @@ void Rendering::TransformControllerImpl
 }
 
 void Rendering::TransformControllerImpl
-	::SetTranslate(const APoint& translate)
+	::SetTranslate(const APoint& translate) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_LocalTransform.SetTranslate(translate);
 }
 
-void Rendering::TransformControllerImpl
-	::SetRotate(const Matrix& rotate) 
+void Rendering::TransformControllerImpl::SetRotate(const Matrix& rotate) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -92,8 +92,7 @@ void Rendering::TransformControllerImpl
 	m_LocalTransform.SetScale(scale);
 }
 
-void Rendering::TransformControllerImpl
-	::SetMatrix(const Matrix& matrix)
+void Rendering::TransformControllerImpl::SetMatrix(const Matrix& matrix) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

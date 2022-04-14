@@ -1,175 +1,174 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/22 17:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.8.0.5 (2022/04/02 14:45)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LoadVisual.h"
-#include "VisualData.h"
-#include "Visual.h"
 #include "Polypoint.h"
 #include "Polysegment.h"
 #include "TrianglesFan.h"
 #include "TrianglesMesh.h"
 #include "TrianglesStrip.h"
-#include "CoreTools/FileManager/ReadFileManager.h"  
-
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Visual.h"
+#include "Detail/VisualData.h"
+#include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
- 
-using std::make_shared;
-using CoreTools::ReadFileManager;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26409)
-Rendering::LoadVisual
-	::LoadVisual(const System::String& name)
-	:m_Data{ make_shared<VisualData>() }
-{
-	LoadFromFile(name);
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+using CoreTools::ReadFileManager;
+using std::make_shared;
+
+Rendering::LoadVisual::LoadVisual(const System::String& name)
+    : impl{ VisualPrimitiveType::None }
+{
+    LoadFromFile(name);
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::LoadVisual
-	::IsValid() const noexcept
-{
-	if (m_Data != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-Rendering::VisualPrimitiveType Rendering::LoadVisual
-	::GetPrimitiveType() const 
+bool Rendering::LoadVisual::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_Data->GetPrimitiveType();
+    return true;
 }
 
-Rendering::VertexFormatSharedPtr Rendering::LoadVisual
-	::GetVertexFormat()
-{
-	RENDERING_CLASS_IS_VALID_1;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return m_Data->GetVertexFormat();
+Rendering::VisualPrimitiveType Rendering::LoadVisual::GetPrimitiveType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetPrimitiveType();
 }
 
-Rendering::VertexBufferSharedPtr Rendering::LoadVisual
-	::GetVertexBuffer()
+Rendering::VertexFormatSharedPtr Rendering::LoadVisual::GetVertexFormat() noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Data->GetVertexBuffer();
+    return impl->GetVertexFormat();
 }
 
-Rendering::IndexBufferSharedPtr Rendering::LoadVisual
-	::GetIndexBuffer()
+Rendering::VertexBufferSharedPtr Rendering::LoadVisual::GetVertexBuffer() noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Data->GetIndexBuffer();
+    return impl->GetVertexBuffer();
 }
 
-void Rendering::LoadVisual
-	::LoadFromFile(const System::String& name)
+Rendering::IndexBufferSharedPtr Rendering::LoadVisual::GetIndexBuffer() noexcept
 {
-	ReadFileManager manager{ name };
+    RENDERING_CLASS_IS_VALID_1;
 
-	auto type = 0;
-
-	manager.Read(sizeof(int), &type);	
-
-	if (System::EnumCastUnderlying(VisualPrimitiveType::None) < type && type < System::EnumCastUnderlying(VisualPrimitiveType::MaxQuantity))
-	{	
-		auto vertexFormat =	VertexFormat::LoadFromFile(manager);
-
-		VertexBufferSharedPtr vertexBuffer{ std::make_shared<VertexBuffer>() };
-
-		vertexBuffer->ReadFromFile(manager,vertexFormat);
-
-		IndexBufferSharedPtr indexBuffer{ std::make_shared<IndexBuffer>() };
-		indexBuffer->ReadFromFile(manager);
-
-		m_Data->SetPrimitiveType(System::UnderlyingCastEnum<VisualPrimitiveType>(type));
-		m_Data->SetVertexFormat(vertexFormat);
-		m_Data->SetVertexBuffer(vertexBuffer);
-
-		if (indexBuffer->GetNumElements() != 0)
-			m_Data->SetIndexBuffer(indexBuffer);
-		else
-			m_Data->SetIndexBuffer(IndexBufferSharedPtr{});
-	}
+    return impl->GetIndexBuffer();
 }
 
-Rendering::VisualSharedPtr Rendering::LoadVisual
-	::CreateFromFile(const System::String& name) 
+void Rendering::LoadVisual::LoadFromFile(const System::String& name)
 {
-	LoadVisual loadVisual{ name };
+    ReadFileManager manager{ name };
 
-	switch (loadVisual.GetPrimitiveType())
-	{
-	case VisualPrimitiveType::Polypoint:
-            return VisualSharedPtr{ std::make_shared < Polypoint>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer()) };
-	case VisualPrimitiveType::PolysegmentsDisjoint:
-            return VisualSharedPtr{ std::make_shared < Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), false) };
-	case VisualPrimitiveType::PolysegmentsContiguous:
-            return VisualSharedPtr{ std::make_shared < Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), true) };
-	case VisualPrimitiveType::TriangleMesh:
-            return VisualSharedPtr{ std::make_shared < TrianglesMesh>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), loadVisual.GetIndexBuffer()) };
-	case VisualPrimitiveType::TriangleStrip:
-	    {
-			auto indexBuffer = loadVisual.GetIndexBuffer();					
-			if (!indexBuffer)
-			{
-                            return VisualSharedPtr{ std::make_shared < TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
-			}
-			else
-			{
-                            return VisualSharedPtr{ std::make_shared < TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer) };
-			}			
-	    }
-	case VisualPrimitiveType::TriangleFan:
-	    {
-		auto indexBuffer = loadVisual.GetIndexBuffer();
-			if (!indexBuffer )
-			{
-                            return VisualSharedPtr{ std::make_shared < TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2) };
-			}
-			else
-			{
-                            return VisualSharedPtr{ std::make_shared < TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer) };
-			}
-	    }
-				 
-	default:
-	    {
-		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));
-	    }
-	}
+    auto type = VisualPrimitiveType::None;
+
+    manager.Read(sizeof(VisualPrimitiveType), &type);
+
+    if (VisualPrimitiveType::None < type && type < VisualPrimitiveType::MaxQuantity)
+    {
+        auto vertexFormat = VertexFormat::LoadFromFile(manager);
+
+        auto vertexBuffer = VertexBuffer::Create();
+
+        vertexBuffer->ReadFromFile(manager, *vertexFormat);
+
+        auto indexBuffer = IndexBuffer::Create();
+        indexBuffer->ReadFromFile(manager);
+
+        impl->SetPrimitiveType(type);
+        impl->SetVertexFormat(vertexFormat);
+        impl->SetVertexBuffer(vertexBuffer);
+
+        if (indexBuffer->GetNumElements() != 0)
+            impl->SetIndexBuffer(indexBuffer);
+        else
+            impl->SetIndexBuffer(nullptr);
+    }
 }
 
-Rendering::VisualSharedPtr 
-	Rendering::LoadVisual::CreateFromFile(const System::String& name, int indexSize)
+Rendering::VisualSharedPtr Rendering::LoadVisual::CreateFromFile(const System::String& name)
 {
-	LoadVisual loadVisual{ name };
+    LoadVisual loadVisual{ name };
 
-	switch (loadVisual.GetPrimitiveType())
-	{	 
-	case VisualPrimitiveType::TriangleStrip:		
-		return VisualSharedPtr{ std::make_shared < TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
-	case VisualPrimitiveType::TriangleFan:		
-		return VisualSharedPtr{ std::make_shared < TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize) };
-	default:
-	    {
-		     THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));
-	    }
-	}
+    switch (loadVisual.GetPrimitiveType())
+    {
+        case VisualPrimitiveType::Polypoint:
+        {
+            return std::make_shared<Polypoint>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer());
+        }
+        case VisualPrimitiveType::PolysegmentsDisjoint:
+        {
+            return std::make_shared<Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), false);
+        }
+        case VisualPrimitiveType::PolysegmentsContiguous:
+        {
+            return std::make_shared<Polysegment>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), true);
+        }
+        case VisualPrimitiveType::TriangleMesh:
+        {
+            return std::make_shared<TrianglesMesh>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), loadVisual.GetIndexBuffer());
+        }
+        case VisualPrimitiveType::TriangleStrip:
+        {
+            auto indexBuffer = loadVisual.GetIndexBuffer();
+            if (!indexBuffer)
+            {
+                return std::make_shared<TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2);
+            }
+            else
+            {
+                return std::make_shared<TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer);
+            }
+        }
+        case VisualPrimitiveType::TriangleFan:
+        {
+            auto indexBuffer = loadVisual.GetIndexBuffer();
+            if (!indexBuffer)
+            {
+                return std::make_shared<TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), 2);
+            }
+            else
+            {
+                return std::make_shared<TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexBuffer);
+            }
+        }
+        default:
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));
+        }
+    }
 }
 
- #include STSTEM_WARNING_POP
+Rendering::VisualSharedPtr Rendering::LoadVisual::CreateFromFile(const System::String& name, int indexSize)
+{
+    LoadVisual loadVisual{ name };
+
+    switch (loadVisual.GetPrimitiveType())
+    {
+        case VisualPrimitiveType::TriangleStrip:
+        {
+            return std::make_shared<TrianglesStrip>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize);
+        }
+        case VisualPrimitiveType::TriangleFan:
+        {
+            return std::make_shared<TrianglesFan>(loadVisual.GetVertexFormat(), loadVisual.GetVertexBuffer(), indexSize);
+        }
+        default:
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("PrimitiveType´íÎó£¡"s));
+        }
+    }
+}

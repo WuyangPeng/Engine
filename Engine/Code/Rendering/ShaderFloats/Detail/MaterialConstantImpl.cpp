@@ -26,7 +26,7 @@ Rendering::MaterialConstantImpl
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::MaterialConstantImpl ::MaterialConstantImpl() noexcept
+Rendering::MaterialConstantImpl::MaterialConstantImpl() noexcept
     : m_Material{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -45,7 +45,7 @@ const Rendering::ConstMaterialSharedPtr Rendering::MaterialConstantImpl
 		return ConstMaterialSharedPtr{};
 }
 
-void Rendering::MaterialConstantImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::MaterialConstantImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
@@ -112,14 +112,14 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::MaterialConstantImpl
 		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::MaterialConstantImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::MaterialConstantImpl::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
 	//source.ResolveObjectSharedPtrLink(m_Material);
 }
 
-void Rendering::MaterialConstantImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::MaterialConstantImpl::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/18 23:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 14:45)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_DETAIL_H
 #define RENDERING_DATA_TYPES_COLOUR_DETAIL_H
@@ -29,7 +29,7 @@
 template <typename T>
 template <typename RhsType>
 Rendering::Colour<T>::Colour(const Colour<RhsType>& colour)
-    : m_Red{}, m_Green{}, m_Blue{}, m_Alpha{}, m_IsClamp{ colour.IsClamp() }
+    : red{}, green{}, blue{}, alpha{}, isClamp{ colour.IsClamp() }
 {
     try
     {
@@ -39,7 +39,7 @@ Rendering::Colour<T>::Colour(const Colour<RhsType>& colour)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering)
             << error
-            << CoreTools::LogAppenderIOManageSign::TriggerAssert;
+            << LOG_SINGLETON_TRIGGER_ASSERT;
 
         THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"s));
     }
@@ -53,7 +53,7 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator=(const Colour<RhsType>& col
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_IsClamp = colour.IsClamp();
+    isClamp = colour.IsClamp();
 
     try
     {
@@ -63,7 +63,7 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator=(const Colour<RhsType>& col
     {
         LOG_SINGLETON_ENGINE_APPENDER(Debug, Rendering)
             << error
-            << CoreTools::LogAppenderIOManageSign::TriggerAssert;
+            << LOG_SINGLETON_TRIGGER_ASSERT;
 
         THROW_EXCEPTION(SYSTEM_TEXT("颜色数据转换失败。"s));
     }
@@ -74,11 +74,19 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator=(const Colour<RhsType>& col
 // private
 template <typename T>
 template <typename RhsType, bool TIsFloatingPoint, bool RhsIsFloatingPoint>
-void Rendering::Colour<T>::ConvertingColourFormat(const Colour<RhsType>& colour, const std::integral_constant<bool, TIsFloatingPoint>&,
+void Rendering::Colour<T>::ConvertingColourFormat(const Colour<RhsType>& colour,
+                                                  const std::integral_constant<bool, TIsFloatingPoint>&,
                                                   const std::integral_constant<bool, RhsIsFloatingPoint>&)
 {
-    InitColour(boost::numeric_cast<T>(colour.GetRed()), boost::numeric_cast<T>(colour.GetGreen()),
-               boost::numeric_cast<T>(colour.GetBlue()), boost::numeric_cast<T>(colour.GetAlpha()));
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26467)
+
+    InitColour(boost::numeric_cast<T>(colour.GetRed()),
+               boost::numeric_cast<T>(colour.GetGreen()),
+               boost::numeric_cast<T>(colour.GetBlue()),
+               boost::numeric_cast<T>(colour.GetAlpha()));
+
+#include STSTEM_WARNING_POP
 }
 
 // private
@@ -89,12 +97,12 @@ void Rendering::Colour<T>::ConvertingColourFormat(const Colour<RhsType>& colour,
     static_assert(std::is_floating_point_v<T>, "T isn't floating point!");
     static_assert(std::is_integral_v<RhsType>, "RhsType isn't integral!");
 
-    const auto red = ConvertingIntegralToFloatingPoint(colour.GetRed());
-    const auto green = ConvertingIntegralToFloatingPoint(colour.GetGreen());
-    const auto blue = ConvertingIntegralToFloatingPoint(colour.GetBlue());
-    const auto alpha = ConvertingIntegralToFloatingPoint(colour.GetAlpha());
+    const auto redFloatingPoint = ConvertingIntegralToFloatingPoint(colour.GetRed());
+    const auto greenFloatingPoint = ConvertingIntegralToFloatingPoint(colour.GetGreen());
+    const auto blueFloatingPoint = ConvertingIntegralToFloatingPoint(colour.GetBlue());
+    const auto alphaFloatingPoint = ConvertingIntegralToFloatingPoint(colour.GetAlpha());
 
-    InitColour(red, green, blue, alpha);
+    InitColour(redFloatingPoint, greenFloatingPoint, blueFloatingPoint, alphaFloatingPoint);
 }
 
 // static
@@ -106,10 +114,15 @@ T Rendering::Colour<T>::ConvertingIntegralToFloatingPoint(RhsType rhs)
     static_assert(std::is_floating_point_v<T>, "T isn't floating point!");
     static_assert(std::is_integral_v<RhsType>, "RhsType isn't integral!");
 
-    constexpr auto rhsTypeDistance = ColourDefaultTraits<RhsType>::sm_MaxValue - ColourDefaultTraits<RhsType>::sm_MinValue;
-    constexpr auto lhsTypeDistance = sm_MaxValue - sm_MinValue;
+    constexpr auto rhsTypeDistance = ColourDefaultTraits<RhsType>::maxValue - ColourDefaultTraits<RhsType>::minValue;
+    constexpr auto lhsTypeDistance = maxValue - minValue;
 
-    return (boost::numeric_cast<T>(rhs) - ColourDefaultTraits<RhsType>::sm_MinValue) * lhsTypeDistance / rhsTypeDistance + sm_MinValue;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26467)
+
+    return (boost::numeric_cast<T>(rhs) - ColourDefaultTraits<RhsType>::minValue) * lhsTypeDistance / rhsTypeDistance + minValue;
+
+#include STSTEM_WARNING_POP
 }
 
 // private
@@ -120,12 +133,12 @@ void Rendering::Colour<T>::ConvertingColourFormat(const Colour<RhsType>& colour,
     static_assert(std::is_integral_v<T>, "T isn't integral!");
     static_assert(std::is_floating_point_v<RhsType>, "RhsType isn't floating point!");
 
-    const auto red = ConvertingFloatingPointToIntegral(colour.GetRed());
-    const auto green = ConvertingFloatingPointToIntegral(colour.GetGreen());
-    const auto blue = ConvertingFloatingPointToIntegral(colour.GetBlue());
-    const auto alpha = ConvertingFloatingPointToIntegral(colour.GetAlpha());
+    const auto redFloatingPoint = ConvertingFloatingPointToIntegral(colour.GetRed());
+    const auto greenFloatingPoint = ConvertingFloatingPointToIntegral(colour.GetGreen());
+    const auto blueFloatingPoint = ConvertingFloatingPointToIntegral(colour.GetBlue());
+    const auto alphaFloatingPoint = ConvertingFloatingPointToIntegral(colour.GetAlpha());
 
-    InitColour(red, green, blue, alpha);
+    InitColour(redFloatingPoint, greenFloatingPoint, blueFloatingPoint, alphaFloatingPoint);
 }
 
 // static
@@ -137,10 +150,10 @@ T Rendering::Colour<T>::ConvertingFloatingPointToIntegral(RhsType rhs)
     static_assert(std::is_integral_v<T>, "T isn't integral!");
     static_assert(std::is_floating_point_v<RhsType>, "RhsType isn't floating point!");
 
-    constexpr auto rhsTypeDistance = ColourDefaultTraits<RhsType>::sm_MaxValue - ColourDefaultTraits<RhsType>::sm_MinValue;
-    constexpr auto lhsTypeDistance = sm_MaxValue - sm_MinValue;
+    constexpr auto rhsTypeDistance = ColourDefaultTraits<RhsType>::maxValue - ColourDefaultTraits<RhsType>::minValue;
+    constexpr auto lhsTypeDistance = maxValue - minValue;
 
-    return boost::numeric_cast<T>((rhs - ColourDefaultTraits<RhsType>::sm_MinValue) * lhsTypeDistance / rhsTypeDistance + sm_MinValue + static_cast<RhsType>(0.5f));
+    return boost::numeric_cast<T>((rhs - ColourDefaultTraits<RhsType>::minValue) * lhsTypeDistance / rhsTypeDistance + minValue + static_cast<RhsType>(0.5f));
 }
 
 template <typename T>
@@ -151,10 +164,10 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator*=(RhsType rhs)
 
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Red *= boost::numeric_cast<T>(rhs);
-    m_Green *= boost::numeric_cast<T>(rhs);
-    m_Blue *= boost::numeric_cast<T>(rhs);
-    m_Alpha *= boost::numeric_cast<T>(rhs);
+    red *= boost::numeric_cast<T>(rhs);
+    green *= boost::numeric_cast<T>(rhs);
+    blue *= boost::numeric_cast<T>(rhs);
+    alpha *= boost::numeric_cast<T>(rhs);
 
     Standardization();
 
@@ -184,10 +197,10 @@ void Rendering::Colour<T>::Divide(RhsType rhs, const std::integral_constant<bool
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
     }
 
-    m_Red /= boost::numeric_cast<T>(rhs);
-    m_Green /= boost::numeric_cast<T>(rhs);
-    m_Blue /= boost::numeric_cast<T>(rhs);
-    m_Alpha /= boost::numeric_cast<T>(rhs);
+    red /= boost::numeric_cast<T>(rhs);
+    green /= boost::numeric_cast<T>(rhs);
+    blue /= boost::numeric_cast<T>(rhs);
+    alpha /= boost::numeric_cast<T>(rhs);
 
     Standardization();
 }
@@ -202,10 +215,10 @@ void Rendering::Colour<T>::Divide(RhsType rhs, const std::false_type&)
         THROW_EXCEPTION(SYSTEM_TEXT("除零错误！"s));
     }
 
-    m_Red /= boost::numeric_cast<T>(rhs);
-    m_Green /= boost::numeric_cast<T>(rhs);
-    m_Blue /= boost::numeric_cast<T>(rhs);
-    m_Alpha /= boost::numeric_cast<T>(rhs);
+    red /= boost::numeric_cast<T>(rhs);
+    green /= boost::numeric_cast<T>(rhs);
+    blue /= boost::numeric_cast<T>(rhs);
+    alpha /= boost::numeric_cast<T>(rhs);
 
     Standardization();
 }
@@ -226,8 +239,10 @@ bool Rendering::operator==(const Rendering::Colour<T>& lhs, const Rendering::Col
 {
     if constexpr (std::is_integral_v<T>)
     {
-        return lhs.GetRed() == rhs.GetRed() && lhs.GetGreen() == rhs.GetGreen() &&
-               lhs.GetBlue() == rhs.GetBlue() && lhs.GetAlpha() == rhs.GetAlpha();
+        return lhs.GetRed() == rhs.GetRed() &&
+               lhs.GetGreen() == rhs.GetGreen() &&
+               lhs.GetBlue() == rhs.GetBlue() &&
+               lhs.GetAlpha() == rhs.GetAlpha();
     }
     else
     {
@@ -252,7 +267,7 @@ const Rendering::Colour<RhsType> Rendering::operator*(LhsType lhs, const Colour<
 }
 
 template <typename LhsType, typename RhsType>
-const Rendering::Colour<LhsType> Rendering ::operator/(const Colour<LhsType>& lhs, RhsType rhs)
+const Rendering::Colour<LhsType> Rendering::operator/(const Colour<LhsType>& lhs, RhsType rhs)
 {
     static_assert(std::is_arithmetic<RhsType>::value, "RhsType isn't arithmetic!");
 
@@ -260,12 +275,11 @@ const Rendering::Colour<LhsType> Rendering ::operator/(const Colour<LhsType>& lh
 }
 
 template <typename T>
-std::ostream& Rendering ::operator<<(std::ostream& os, const Colour<T>& colour)
+std::ostream& Rendering::operator<<(std::ostream& os, const Colour<T>& colour)
 {
     static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
-    os << "red = " << colour.GetRed() << " green = " << colour.GetGreen()
-       << " blue = " << colour.GetBlue() << " alpha = " << colour.GetAlpha();
+    os << "red = " << colour.GetRed() << " green = " << colour.GetGreen() << " blue = " << colour.GetBlue() << " alpha = " << colour.GetAlpha();
 
     return os;
 }

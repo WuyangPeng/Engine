@@ -46,7 +46,8 @@ void Rendering::ProjectorMatrixConstantTesting
 	RendererManager::Destroy();
 	CameraManager::Destroy();
 }
- 
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Rendering::ProjectorMatrixConstantTesting
 	::InitTest()
 {
@@ -166,7 +167,7 @@ void Rendering::ProjectorMatrixConstantTesting
 // 
 // 		for (unsigned dataIndex = 0; dataIndex < secondData.size(); ++dataIndex)
 // 		{
-// 			ASSERT_EQUAL_DO_NOT_USE_MESSAGE(secondData[dataIndex], thirdShaderFloat.GetRegister(dataIndex));
+// 			ASSERT_EQUAL(secondData[dataIndex], thirdShaderFloat.GetRegister(dataIndex));
 // 		}
 // 
 // 		for (int registerIndex = 0; registerIndex < 16;++registerIndex)

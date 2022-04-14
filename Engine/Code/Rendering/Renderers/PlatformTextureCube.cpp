@@ -13,41 +13,41 @@
 #include "Rendering/Renderers/Renderer.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 
-Rendering::PlatformTextureCube ::PlatformTextureCube(Renderer* renderer, const TextureCube* textureCube)
+Rendering::PlatformTextureCube::PlatformTextureCube(Renderer* renderer, const TextureCube* textureCube)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, textureCube }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PlatformTextureCube ::~PlatformTextureCube()
+Rendering::PlatformTextureCube::~PlatformTextureCube()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformTextureCube)
 
-void Rendering::PlatformTextureCube ::Enable(Renderer* renderer, int textureUnit)
+void Rendering::PlatformTextureCube::Enable(Renderer* renderer, int textureUnit)
 {
     ;
 
     return impl->Enable(renderer, textureUnit);
 }
 
-void Rendering::PlatformTextureCube ::Disable(Renderer* renderer, int textureUnit)
+void Rendering::PlatformTextureCube::Disable(Renderer* renderer, int textureUnit)
 {
     ;
 
     return impl->Disable(renderer, textureUnit);
 }
 
-void* Rendering::PlatformTextureCube ::Lock(int face, int level, BufferLocking mode)
+void* Rendering::PlatformTextureCube::Lock(int face, int level, BufferLocking mode)
 {
     ;
 
     return impl->Lock(face, level, mode);
 }
 
-void Rendering::PlatformTextureCube ::Unlock(int face, int level)
+void Rendering::PlatformTextureCube::Unlock(int face, int level)
 {
     ;
 

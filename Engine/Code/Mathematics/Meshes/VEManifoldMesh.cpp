@@ -1,136 +1,101 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 16:43)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "VEManifoldMesh.h"
-
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include <fstream>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26402)
-#include SYSTEM_WARNING_DISABLE(26409)
-Mathematics::VEManifoldMesh ::VEManifoldMesh(VCreator vCreator, ECreator eCreator) noexcept
+
+Mathematics::VEManifoldMesh::VEManifoldMesh(VertexCreator vCreator, EdgeCreator eCreator) noexcept
+    : vertexCreator{ vCreator ? vCreator : CreateVertex },
+      vertexMap{},
+      edgeCreator{ eCreator ? eCreator : CreateEdge },
+      edgeMap{}
 {
-    mVCreator = (vCreator ? vCreator : CreateVertex);
-    mECreator = (eCreator ? eCreator : CreateEdge);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-Mathematics::VEManifoldMesh ::~VEManifoldMesh(){
-    EXCEPTION_TRY{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
-        VMapIterator viter = mVMap.begin();
-const VMapIterator vend = mVMap.end();
-for (/**/; viter != vend; ++viter)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, VEManifoldMesh)
+
+Mathematics::VEManifoldMesh::VertexSharedPtr Mathematics::VEManifoldMesh::CreateVertex(int v)
 {
-    //    Vertex* vertex = viter->second;
-    //  DELETE0(vertex);
+    return std::make_shared<Vertex>(v);
 }
 
-EMapIterator eiter = mEMap.begin();
-const EMapIterator eend = mEMap.end();
-for (/**/; eiter != eend; ++eiter)
+Mathematics::VEManifoldMesh::EdgeSharedPtr Mathematics::VEManifoldMesh::CreateEdge(int v0, int v1)
 {
-    //   Edge* edge = eiter->second;
-    //DELETE0(edge);
-}
-#include STSTEM_WARNING_POP
-}
-EXCEPTION_ALL_CATCH(Mathematics)
+    return std::make_shared<Edge>(v0, v1);
 }
 
-Mathematics::VEManifoldMesh::VPtr Mathematics::VEManifoldMesh ::CreateVertex(int v) noexcept
+Mathematics::VEManifoldMesh::EdgeSharedPtr Mathematics::VEManifoldMesh::InsertEdge(int v0, int v1)
 {
-    v;
-    return nullptr;  //    NEW0 Vertex(v);
-}
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh ::CreateEdge(int v0, int v1) noexcept
-{
-    v0;
-    v1;
-    return nullptr;  //  NEW0 Edge(v0, v1);
-}
-
-Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh ::InsertEdge(int v0, int v1)
-{
-    const std::pair<int, int> ekey(v0, v1);
-    const EMapIterator eiter = mEMap.find(ekey);
-    if (eiter != mEMap.end())
+    const std::pair<int, int> ekey{ v0, v1 };
+    const auto eiter = edgeMap.find(ekey);
+    if (eiter != edgeMap.end())
     {
-        // Edge already exists.
-        return 0;
+        return nullptr;
     }
 
-    // Add new edge.
-    EPtr edge = mECreator(v0, v1);
-    mEMap[ekey] = edge;
+    auto edge = edgeCreator(v0, v1);
+    edgeMap[ekey] = edge;
 
-    // Add vertices to mesh.
-    for (int i = 0; i < 2; ++i)
+    for (auto i = 0; i < 2; ++i)
     {
         if (edge)
         {
-            const int v = edge->V[i];
-            VPtr vertex = nullptr;
-            const VMapIterator viter = mVMap.find(v);
-            if (viter == mVMap.end())
+            const auto v = edge->v.at(i);
+            VertexSharedPtr vertex{};
+            const auto viter = vertexMap.find(v);
+            if (viter == vertexMap.end())
             {
-                // First time vertex encountered.
-                vertex = mVCreator(v);
-                mVMap[v] = vertex;
+                vertex = vertexCreator(v);
+                vertexMap[v] = vertex;
 
-                // Update vertex.
-                vertex->E[0] = edge;
+                vertex->e.at(0) = edge;
             }
             else
             {
-                // Second time vertex encountered.
                 vertex = viter->second;
 
-                if (vertex == 0)
+                if (vertex == nullptr)
                 {
-                    THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"));
+                    THROW_EXCEPTION(SYSTEM_TEXT("意外情况\n"));
                 }
 
-                // Update vertex.
-                if (vertex->E[1])
+                if (vertex->e.at(1))
                 {
-                    MATHEMATICS_ASSERTION_0(false, "Mesh must be manifold\n");
-                    return 0;
+                    return nullptr;
                 }
-                vertex->E[1] = edge;
+                vertex->e.at(1) = edge;
 
-                // Update adjacent edge.
-                EPtr adjacent = vertex->E[0];
+                auto adjacent = vertex->e.at(0);
 
                 if (adjacent == 0)
                 {
-                    THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"s));
+                    THROW_EXCEPTION(SYSTEM_TEXT("意外情况\n"s));
                 }
-                for (int j = 0; j < 2; ++j)
+                for (auto j = 0; j < 2; ++j)
                 {
-                    if (adjacent->V[j] == v)
+                    if (adjacent->v.at(j) == v)
                     {
-                        adjacent->E[j] = edge;
+                        adjacent->e.at(j) = edge;
                         break;
                     }
                 }
 
-                // Update edge.
-
-                edge->E[i] = adjacent;
+                edge->e.at(i) = adjacent;
             }
         }
     }
@@ -138,78 +103,74 @@ Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh ::InsertEdge(int v
     return edge;
 }
 
-bool Mathematics::VEManifoldMesh ::RemoveEdge(int v0, int v1)
+bool Mathematics::VEManifoldMesh::RemoveEdge(int v0, int v1)
 {
-    const std::pair<int, int> ekey(v0, v1);
-    const EMapIterator eiter = mEMap.find(ekey);
-    if (eiter == mEMap.end())
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const std::pair<int, int> ekey{ v0, v1 };
+    const auto eiter = edgeMap.find(ekey);
+    if (eiter == edgeMap.end())
     {
-        // Edge does not exist.
         return false;
     }
 
-    EPtr edge = eiter->second;
-    for (int i = 0; i < 2; ++i)
+    auto edge = eiter->second;
+    for (auto i = 0; i < 2; ++i)
     {
-        // Inform vertices you are going away.
-        const VMapIterator viter = mVMap.find(edge->V[i]);
-        MATHEMATICS_ASSERTION_0(viter != mVMap.end(), "Unexpected condition\n");
-        Vertex* vertex = viter->second;
-        if (vertex == 0)
+        const auto viter = vertexMap.find(edge->v.at(i));
+        MATHEMATICS_ASSERTION_0(viter != vertexMap.end(), "意外情况\n");
+        auto vertex = viter->second;
+        if (vertex == nullptr)
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("Unexpected condition\n"s));
+            THROW_EXCEPTION(SYSTEM_TEXT("意外情况\n"s));
         }
-        if (vertex->E[0] == edge)
+        if (vertex->e.at(0) == edge)
         {
-            // One-edge vertices always have pointer in slot zero.
-            vertex->E[0] = vertex->E[1];
-            vertex->E[1] = 0;
+            vertex->e.at(0) = vertex->e.at(1);
+            vertex->e.at(1) = nullptr;
         }
-        else if (vertex->E[1] == edge)
+        else if (vertex->e.at(1) == edge)
         {
-            vertex->E[1] = 0;
+            vertex->e.at(1) = nullptr;
         }
         else
         {
-            MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
+            MATHEMATICS_ASSERTION_0(false, "意外情况\n");
             return false;
         }
 
-        // Remove vertex if you had the last reference to it.
-        if (!vertex->E[0] && !vertex->E[1])
+        if (!vertex->e.at(0) && !vertex->e.at(1))
         {
-            mVMap.erase(vertex->V);
-            //   DELETE0(vertex);
+            vertexMap.erase(vertex->v);
         }
 
-        // Inform adjacent edges you are going away.
-        EPtr adjacent = edge->E[i];
+        auto adjacent = edge->e.at(i);
         if (adjacent)
         {
-            for (int j = 0; j < 2; ++j)
+            for (auto j = 0; j < 2; ++j)
             {
-                if (adjacent->E[j] == edge)
+                if (adjacent->e.at(j) == edge)
                 {
-                    adjacent->E[j] = 0;
+                    adjacent->e.at(j) = 0;
                     break;
                 }
             }
         }
     }
 
-    mEMap.erase(ekey);
-    //  DELETE0(edge);
+    edgeMap.erase(ekey);
+
     return true;
 }
 
-bool Mathematics::VEManifoldMesh ::IsClosed() const noexcept
+bool Mathematics::VEManifoldMesh::IsClosed() const noexcept
 {
-    VMapCIterator viter = mVMap.begin();
-    const VMapCIterator vend = mVMap.end();
-    for (/**/; viter != vend; ++viter)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    for (const auto& viter : vertexMap)
     {
-        const Vertex* vertex = viter->second;
-        if (!vertex->E[0] || !vertex->E[1])
+        const auto vertex = viter.second;
+        if (!vertex->e.at(0) || !vertex->e.at(1))
         {
             return false;
         }
@@ -217,48 +178,48 @@ bool Mathematics::VEManifoldMesh ::IsClosed() const noexcept
     return true;
 }
 
-void Mathematics::VEManifoldMesh ::Print(const char* filename)
+void Mathematics::VEManifoldMesh::Print(const std::string& filename)
 {
-    std::ofstream outFile(filename);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    std::ofstream outFile{ filename };
+
     if (!outFile)
     {
         return;
     }
 
-    // Assign unique indices to the edges.
-    std::map<EPtr, int> edgeIndex;
-    edgeIndex[EPtr{}] = 0;
-    EMapIterator eiter = mEMap.begin();
-    const EMapIterator eend = mEMap.end();
-    for (int i = 1; eiter != eend; ++eiter)
+    std::map<EdgeSharedPtr, int> edgeIndex{};
+    edgeIndex[EdgeSharedPtr{}] = 0;
+
+    auto i = 1;
+    for (const auto& eiter : edgeMap)
     {
-        if (eiter->second)
+        if (eiter.second)
         {
-            edgeIndex[eiter->second] = i;
+            edgeIndex[eiter.second] = i;
             ++i;
         }
     }
 
-    // Print vertices.
-    outFile << "vertex quantity = " << mVMap.size() << std::endl;
-    VMapIterator viter = mVMap.begin();
-    const VMapIterator vend = mVMap.end();
-    for (/**/; viter != vend; ++viter)
+    outFile << "vertex quantity = " << vertexMap.size() << std::endl;
+
+    for (const auto& viter : vertexMap)
     {
-        const Vertex& vertex = *viter->second;
-        outFile << 'v' << vertex.V << " <";
-        if (vertex.E[0])
+        const Vertex& vertex = *viter.second;
+        outFile << 'v' << vertex.v << " <";
+        if (vertex.e.at(0))
         {
-            outFile << 'e' << edgeIndex[vertex.E[0]];
+            outFile << 'e' << edgeIndex[vertex.e.at(0)];
         }
         else
         {
             outFile << '*';
         }
         outFile << ',';
-        if (vertex.E[1])
+        if (vertex.e.at(1))
         {
-            outFile << 'e' << edgeIndex[vertex.E[1]];
+            outFile << 'e' << edgeIndex[vertex.e.at(1)];
         }
         else
         {
@@ -267,25 +228,23 @@ void Mathematics::VEManifoldMesh ::Print(const char* filename)
         outFile << '>' << std::endl;
     }
 
-    // Print edges.
-    outFile << "edge quantity = " << mEMap.size() << std::endl;
-    for (eiter = mEMap.begin(); eiter != eend; ++eiter)
+    outFile << "edge quantity = " << edgeMap.size() << std::endl;
+    for (const auto& eiter : edgeMap)
     {
-        const Edge& edge = *eiter->second;
-        outFile << 'e' << edgeIndex[eiter->second] << " <"
-                << 'v' << edge.V[0] << ",v" << edge.V[1] << "; ";
-        if (edge.E[0])
+        const auto& edge = *eiter.second;
+        outFile << 'e' << edgeIndex[eiter.second] << " <" << 'v' << edge.v.at(0) << ",v" << edge.v.at(1) << "; ";
+        if (edge.e.at(0))
         {
-            outFile << 'e' << edgeIndex[edge.E[0]];
+            outFile << 'e' << edgeIndex[edge.e.at(0)];
         }
         else
         {
             outFile << '*';
         }
         outFile << ',';
-        if (edge.E[1])
+        if (edge.e.at(1))
         {
-            outFile << 'e' << edgeIndex[edge.E[1]];
+            outFile << 'e' << edgeIndex[edge.e.at(1)];
         }
         else
         {
@@ -298,38 +257,28 @@ void Mathematics::VEManifoldMesh ::Print(const char* filename)
 
 // VEManifoldMesh::Vertex
 
-Mathematics::VEManifoldMesh::Vertex ::Vertex(int v) noexcept
-{
-    V = v;
-    E[0] = 0;
-    E[1] = 0;
-}
-
-Mathematics::VEManifoldMesh::Vertex ::~Vertex()
+Mathematics::VEManifoldMesh::Vertex::Vertex(int v) noexcept
+    : v{ v }, e{}
 {
 }
 
 // VEManifoldMesh::Edge
 
-Mathematics::VEManifoldMesh::Edge ::Edge(int v0, int v1) noexcept
-{
-    V[0] = v0;
-    V[1] = v1;
-    E[0] = 0;
-    E[1] = 0;
-}
-
-Mathematics::VEManifoldMesh::Edge ::~Edge()
+Mathematics::VEManifoldMesh::Edge::Edge(int v0, int v1) noexcept
+    : v{ v0, v1 }, e{}
 {
 }
 
-const Mathematics::VEManifoldMesh::VMap& Mathematics::VEManifoldMesh ::GetVertices() const noexcept
+const Mathematics::VEManifoldMesh::VertexMap& Mathematics::VEManifoldMesh::GetVertices() const noexcept
 {
-    return mVMap;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertexMap;
 }
 
-const Mathematics::VEManifoldMesh::EMap& Mathematics::VEManifoldMesh ::GetEdges() const noexcept
+const Mathematics::VEManifoldMesh::EdgeMap& Mathematics::VEManifoldMesh::GetEdges() const noexcept
 {
-    return mEMap;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return edgeMap;
 }
-#include STSTEM_WARNING_POP

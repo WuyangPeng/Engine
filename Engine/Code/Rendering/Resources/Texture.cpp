@@ -1,44 +1,38 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 15:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/30 18:04)
 
 #include "Rendering/RenderingExport.h"
 
-#include "Detail/TextureImpl.h"
 #include "Texture.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/TextureImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-CORE_TOOLS_RTTI_DEFINE(Rendering,Texture);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Texture);
-CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Texture); 
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
+CORE_TOOLS_RTTI_DEFINE(Rendering, Texture);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture);
+CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Texture);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, Texture);
 
-Rendering::Texture
-    ::Texture()
-	:ParentType{ "Texture" }
+Rendering::Texture::Texture(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ "Texture" }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
- 
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Texture)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Texture)
 
 // static
-int Rendering::Texture
-    ::GetPixelSize (TextureFormat format)
+int Rendering::Texture::GetPixelSize(TextureFormat format)
 {
-    return ImplType::GetPixelSize(format);
+    return TextureImpl::GetPixelSize(format);
 }
-
-
-#include STSTEM_WARNING_POP

@@ -26,7 +26,7 @@
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26475)
 #include SYSTEM_WARNING_DISABLE(26446)
-Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, int numTargets)
+Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, int numTargets)
     : mNumCols(numCols), mNumRows(numRows), mNumTargets(numTargets)
 {
     RENDERING_ASSERTION_0(mNumCols > 1 && mNumRows > 0, "Invalid bound.\n");
@@ -56,7 +56,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
 
     // Create the vertex buffer for the squares.
     const int vstride = vformat->GetStride();
-    VertexBufferSharedPtr vbuffer(std::make_shared<VertexBuffer>(4, vstride));
+    VertexBufferSharedPtr vbuffer(VertexBuffer::Create(4, vstride));
     VertexBufferAccessor vba(vformat, vbuffer);
 
     float xmin = 0.0f, xmax = 0.0f, ymin = 0.0f, ymax = 0.0f;
@@ -97,7 +97,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc3[0], tc3[1]), 3);
 
     // Create the index buffer for the square.
-    IndexBufferSharedPtr ibuffer(std::make_shared<IndexBuffer>(6, static_cast<int>(sizeof(int))));
+    IndexBufferSharedPtr ibuffer(IndexBuffer::Create(6, boost::numeric_cast<int>(sizeof(int))));
 
     int* indices = (int*)ibuffer->GetReadOnlyData();
     indices[0] = 0;
@@ -118,7 +118,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     }
 }
 
-Rendering::ImageProcessingBase ::~ImageProcessingBase()
+Rendering::ImageProcessingBase::~ImageProcessingBase()
 {
     EXCEPTION_TRY
     {
@@ -127,7 +127,7 @@ Rendering::ImageProcessingBase ::~ImageProcessingBase()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::ImageProcessingBase ::CreateEffect(PixelShaderSharedPtr pshader, VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
+void Rendering::ImageProcessingBase::CreateEffect(PixelShaderSharedPtr pshader, VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
 {
     // Create the pass.
     VisualPassSharedPtr pass(std::make_shared<VisualPass>());
@@ -166,7 +166,7 @@ void Rendering::ImageProcessingBase ::CreateEffect(PixelShaderSharedPtr pshader,
     instance->SetVertexConstant(0, "PVWMatrix", mPVWMatrixConstant);
 }
 
-void Rendering::ImageProcessingBase ::PreDraw()
+void Rendering::ImageProcessingBase::PreDraw()
 {
     if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
     {
@@ -176,7 +176,7 @@ void Rendering::ImageProcessingBase ::PreDraw()
     }
 }
 
-void Rendering::ImageProcessingBase ::PostDraw()
+void Rendering::ImageProcessingBase::PostDraw()
 {
     if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
 
@@ -186,7 +186,7 @@ void Rendering::ImageProcessingBase ::PostDraw()
     }
 }
 
-void Rendering::ImageProcessingBase ::Initialize(Renderer* renderer, bool openglHack)
+void Rendering::ImageProcessingBase::Initialize(Renderer* renderer, bool openglHack)
 {
     // Initialize the image processing by copying the image to a render
     // target.
@@ -255,7 +255,7 @@ void Rendering::ImageProcessingBase ::Initialize(Renderer* renderer, bool opengl
     }
 }
 
-void Rendering::ImageProcessingBase ::ExecuteStep(Renderer* renderer, bool draw)
+void Rendering::ImageProcessingBase::ExecuteStep(Renderer* renderer, bool draw)
 {
     // Draw the image.
     if (draw)
@@ -279,7 +279,7 @@ void Rendering::ImageProcessingBase ::ExecuteStep(Renderer* renderer, bool draw)
     renderer->Disable(mTargets[1]);
 }
 
-void Rendering::ImageProcessingBase ::CreateVertexShader()
+void Rendering::ImageProcessingBase::CreateVertexShader()
 {
     // void v_ScreenShader
     // (
@@ -380,42 +380,42 @@ std::string Rendering::ImageProcessingBase::msVPrograms[System::EnumCastUnderlyi
     "END\n"
 };
 
-int Rendering::ImageProcessingBase ::GetNumCols() const noexcept
+int Rendering::ImageProcessingBase::GetNumCols() const noexcept
 {
     return mNumCols;
 }
 
-int Rendering::ImageProcessingBase ::GetNumRows() const noexcept
+int Rendering::ImageProcessingBase::GetNumRows() const noexcept
 {
     return mNumRows;
 }
 
-int Rendering::ImageProcessingBase ::GetNumTargets() const noexcept
+int Rendering::ImageProcessingBase::GetNumTargets() const noexcept
 {
     return mNumTargets;
 }
 
-float Rendering::ImageProcessingBase ::GetColSpacing() const noexcept
+float Rendering::ImageProcessingBase::GetColSpacing() const noexcept
 {
     return mColSpacing;
 }
 
-float Rendering::ImageProcessingBase ::GetRowSpacing() const noexcept
+float Rendering::ImageProcessingBase::GetRowSpacing() const noexcept
 {
     return mRowSpacing;
 }
 
-const Rendering::Camera* Rendering::ImageProcessingBase ::GetCamera() const noexcept
+const Rendering::Camera* Rendering::ImageProcessingBase::GetCamera() const noexcept
 {
     return mCamera.get();
 }
 
-const Rendering::TrianglesMesh* Rendering::ImageProcessingBase ::GetRectangle() const noexcept
+const Rendering::TrianglesMesh* Rendering::ImageProcessingBase::GetRectangle() const noexcept
 {
     return mRectangle.get();
 }
 
-const Rendering::RenderTarget* Rendering::ImageProcessingBase ::GetTarget(int i) const noexcept
+const Rendering::RenderTarget* Rendering::ImageProcessingBase::GetTarget(int i) const noexcept
 {
     if (0 <= i && i < mNumTargets)
     {
@@ -424,17 +424,17 @@ const Rendering::RenderTarget* Rendering::ImageProcessingBase ::GetTarget(int i)
     return 0;
 }
 
-int Rendering::ImageProcessingBase ::Index(int col, int row) const noexcept
+int Rendering::ImageProcessingBase::Index(int col, int row) const noexcept
 {
     return col + mNumCols * row;
 }
 
-const Rendering::Texture2D* Rendering::ImageProcessingBase ::GetMainTexture() const noexcept
+const Rendering::Texture2D* Rendering::ImageProcessingBase::GetMainTexture() const noexcept
 {
     return mMainTexture.get();
 }
 
-const Rendering::VisualEffectInstance* Rendering::ImageProcessingBase ::GetMainEffectInstance() const noexcept
+const Rendering::VisualEffectInstance* Rendering::ImageProcessingBase::GetMainEffectInstance() const noexcept
 {
     return mMainEffectInstance.get();
 }

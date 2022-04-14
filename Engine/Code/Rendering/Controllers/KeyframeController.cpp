@@ -35,7 +35,7 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, KeyframeController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, KeyframeController);
 
 Rendering::KeyframeController
-	::KeyframeController( int numCommonTimes, int numTranslations, int numRotations,int numScales, const FloatTransform& localTransform )
+	::KeyframeController( int numCommonTimes, int numTranslations, int numRotations,int numScales, const TransformF& localTransform )
 	:ParentType{ localTransform },
 	impl{ make_shared<ImplType>(numCommonTimes,numTranslations,numRotations,numScales) }
 {
@@ -259,7 +259,7 @@ Rendering::KeyframeController
 }
 
 int Rendering::KeyframeController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -270,7 +270,7 @@ int Rendering::KeyframeController
 	return size;
 }
 
-uint64_t Rendering::KeyframeController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::KeyframeController::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -278,7 +278,7 @@ uint64_t Rendering::KeyframeController ::Register(CoreTools::ObjectRegister& tar
 }
 
 void Rendering::KeyframeController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -291,7 +291,7 @@ void Rendering::KeyframeController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::KeyframeController ::Link(CoreTools::ObjectLink& source)
+void Rendering::KeyframeController::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -299,14 +299,14 @@ void Rendering::KeyframeController ::Link(CoreTools::ObjectLink& source)
 }
 
 void Rendering::KeyframeController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
 	ParentType::PostLink();	 
 }
 
-void Rendering::KeyframeController ::Load(CoreTools::BufferSource& source)
+void Rendering::KeyframeController::Load(CoreTools::BufferSource& source)
 {
 	;
     

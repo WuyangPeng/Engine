@@ -32,7 +32,7 @@ Rendering::PointControllerImpl
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PointControllerImpl ::PointControllerImpl() noexcept
+Rendering::PointControllerImpl::PointControllerImpl() noexcept
     : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::AVectorF::GetUnitZ() }, m_NumPoints{ 0 },
 	 m_PointLinearSpeed{},m_PointAngularSpeed{},m_PointLinearAxis{},m_PointAngularAxis{}
 {
@@ -50,7 +50,7 @@ bool Rendering::PointControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT	
  
-int Rendering::PointControllerImpl ::GetNumPoints() const noexcept
+int Rendering::PointControllerImpl::GetNumPoints() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -129,56 +129,56 @@ void Rendering::PointControllerImpl
 	m_PointAngularAxis[index] = pointAngularAxis;
 }
 
-float Rendering::PointControllerImpl ::GetSystemLinearSpeed() const noexcept
+float Rendering::PointControllerImpl::GetSystemLinearSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearSpeed;
 }
 
-void Rendering::PointControllerImpl ::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
+void Rendering::PointControllerImpl::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearSpeed = systemLinearSpeed;
 }
 
-float Rendering::PointControllerImpl ::GetSystemAngularSpeed() const noexcept
+float Rendering::PointControllerImpl::GetSystemAngularSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularSpeed;
 }
 
-void Rendering::PointControllerImpl ::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
+void Rendering::PointControllerImpl::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemAngularSpeed = systemAngularSpeed;
 }
 
-const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl ::GetSystemLinearAxis() const noexcept
+const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl::GetSystemLinearAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearAxis;
 }
 
-void Rendering::PointControllerImpl ::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
+void Rendering::PointControllerImpl::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearAxis = systemLinearAxis;
 }
 
-const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl ::GetSystemAngularAxis() const noexcept
+const Rendering::PointControllerImpl::AVector Rendering::PointControllerImpl::GetSystemAngularAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularAxis;
 }
 
-void Rendering::PointControllerImpl ::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
+void Rendering::PointControllerImpl::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -223,7 +223,7 @@ void Rendering::PointControllerImpl
 	//target.WriteAggregateWithoutNumber(m_NumPoints, &m_PointAngularAxis[0]);
 }
 
-int Rendering::PointControllerImpl ::GetStreamingSize() const noexcept
+int Rendering::PointControllerImpl::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

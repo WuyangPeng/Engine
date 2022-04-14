@@ -27,7 +27,7 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ControllerInterface);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ControllerInterface);
 
 Rendering::ControllerInterface
-    ::ControllerInterface()
+::ControllerInterface()
 	:ParentType{ "ControllerInterface" }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -37,7 +37,7 @@ Rendering::ControllerInterface
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControllerInterface)
 
-void Rendering::ControllerInterface ::AttachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
+void Rendering::ControllerInterface::AttachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用AttachController");
@@ -47,7 +47,7 @@ void Rendering::ControllerInterface ::AttachController([[maybe_unused]] Controll
 	 
 }
 
-void Rendering::ControllerInterface ::DetachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
+void Rendering::ControllerInterface::DetachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	RENDERING_ASSERTION_1(false,"Controller禁止调用DetachController");

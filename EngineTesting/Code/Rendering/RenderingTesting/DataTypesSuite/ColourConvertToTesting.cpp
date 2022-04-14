@@ -17,7 +17,7 @@
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering,ColourConvertToTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::ColourConvertToTesting
 	::MainTest()
 {

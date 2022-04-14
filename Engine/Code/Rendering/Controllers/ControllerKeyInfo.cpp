@@ -16,7 +16,7 @@ Rendering::ControllerKeyInfo
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ControllerKeyInfo ::ControllerKeyInfo() noexcept
+Rendering::ControllerKeyInfo::ControllerKeyInfo() noexcept
     : m_NormTime{ 0.0f }, m_FirstIndex{ 0 }, m_SecondIndex{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -24,21 +24,21 @@ Rendering::ControllerKeyInfo ::ControllerKeyInfo() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,ControllerKeyInfo)
 
-float Rendering::ControllerKeyInfo ::GetNormTime() const noexcept
+float Rendering::ControllerKeyInfo::GetNormTime() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_NormTime;
 }
 
-int Rendering::ControllerKeyInfo ::GetFirstIndex() const noexcept
+int Rendering::ControllerKeyInfo::GetFirstIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_FirstIndex;
 }
 
-int Rendering::ControllerKeyInfo ::GetSecondIndex() const noexcept
+int Rendering::ControllerKeyInfo::GetSecondIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

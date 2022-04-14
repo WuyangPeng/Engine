@@ -37,7 +37,7 @@ Rendering::Float2ArrayImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Float2ArrayImpl) 
 
-void Rendering::Float2ArrayImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::Float2ArrayImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

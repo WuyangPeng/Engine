@@ -25,13 +25,13 @@ void Rendering::TransformTesting
     ASSERT_NOT_THROW_EXCEPTION_0(OperatorTest);
     ASSERT_NOT_THROW_EXCEPTION_0(InverseTest);
 }
- 
+  #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::TransformTesting
 	::BaseTest()
 {
 //     std::default_random_engine generator;
 // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
-//     std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::FloatMath::sm_TwoPI);
+//     std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::MathF::sm_TwoPI);
 //     
 //     Transform transform2;
 //     
@@ -90,7 +90,7 @@ void Rendering::TransformTesting
 //         ASSERT_TRUE(Approximate(Transform::APoint(scale[0],scale[0],scale[0]),
 //                                 transform.GetScale(),1e-8f));
 //         ASSERT_APPROXIMATE(scale[0],transform.GetUniformScale(),1e-8f);
-//         ASSERT_APPROXIMATE(Mathematics::FloatMath::FAbs(scale[0]),transform.GetNorm(),1e-8f);
+//         ASSERT_APPROXIMATE(Mathematics::MathF::FAbs(scale[0]),transform.GetNorm(),1e-8f);
 //         ASSERT_TRUE(Approximate(rotate * Transform::Matrix(scale[0],scale[0],scale[0]),
 //                                 transform.GetHomogeneousMatrix(),1e-8f));
 //         
@@ -115,16 +115,16 @@ void Rendering::TransformTesting
 //         ASSERT_TRUE(transform.IsRotationOrScaleMatrix());
 //         ASSERT_FALSE(transform.IsUniformScale());
 //         
-//         float maxScale = Mathematics::FloatMath::FAbs(scale[0]);
+//         float maxScale = Mathematics::MathF::FAbs(scale[0]);
 //         
-//         if(maxScale < Mathematics::FloatMath::FAbs(scale[1]))
+//         if(maxScale < Mathematics::MathF::FAbs(scale[1]))
 //         {
-//             maxScale = Mathematics::FloatMath::FAbs(scale[1]);
+//             maxScale = Mathematics::MathF::FAbs(scale[1]);
 //         }
 //         
-//         if(maxScale < Mathematics::FloatMath::FAbs(scale[2]))
+//         if(maxScale < Mathematics::MathF::FAbs(scale[2]))
 //         {
-//             maxScale = Mathematics::FloatMath::FAbs(scale[2]);
+//             maxScale = Mathematics::MathF::FAbs(scale[2]);
 //         }
 //         
 //         ASSERT_TRUE(Approximate(rotate,transform.GetRotate(),1e-8f));
@@ -194,14 +194,14 @@ void Rendering::TransformTesting
 //         ASSERT_FALSE(transform.IsUniformScale());
 //         
 //         float maxRowSum =
-//             Mathematics::FloatMath::FAbs(matrix(0,0)) +
-//             Mathematics::FloatMath::FAbs(matrix(0,1)) +
-//             Mathematics::FloatMath::FAbs(matrix(0,2));
+//             Mathematics::MathF::FAbs(matrix(0,0)) +
+//             Mathematics::MathF::FAbs(matrix(0,1)) +
+//             Mathematics::MathF::FAbs(matrix(0,2));
 //         
 //         float rowSum =
-//             Mathematics::FloatMath::FAbs(matrix(1,0)) +
-//             Mathematics::FloatMath::FAbs(matrix(1,1)) +
-//             Mathematics::FloatMath::FAbs(matrix(1,2));
+//             Mathematics::MathF::FAbs(matrix(1,0)) +
+//             Mathematics::MathF::FAbs(matrix(1,1)) +
+//             Mathematics::MathF::FAbs(matrix(1,2));
 //         
 //         if (maxRowSum < rowSum)
 //         {
@@ -209,9 +209,9 @@ void Rendering::TransformTesting
 //         }
 //         
 //         rowSum =
-//             Mathematics::FloatMath::FAbs(matrix(2,0)) +
-//             Mathematics::FloatMath::FAbs(matrix(2,1)) +
-//             Mathematics::FloatMath::FAbs(matrix(2,2));
+//             Mathematics::MathF::FAbs(matrix(2,0)) +
+//             Mathematics::MathF::FAbs(matrix(2,1)) +
+//             Mathematics::MathF::FAbs(matrix(2,2));
 //         
 //         if (maxRowSum < rowSum)
 //         {
@@ -231,11 +231,11 @@ void Rendering::TransformTesting
 }
 
 void Rendering::TransformTesting
-    ::OperatorTest()
+   ::OperatorTest()
 {
 //     std::default_random_engine generator;
 // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
-//     std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::FloatMath::sm_TwoPI);
+//     std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::MathF::sm_TwoPI);
 //     
 // 	for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
 // 	{
@@ -320,11 +320,11 @@ void Rendering::TransformTesting
 }
 
 void Rendering::TransformTesting
-    ::InverseTest()
+   ::InverseTest()
 {
 // 	std::default_random_engine generator;
 // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
-// 	std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::FloatMath::sm_TwoPI);
+// 	std::uniform_real<float> secondFloatRandomDistribution(0.0f,Mathematics::MathF::sm_TwoPI);
 //     
 // 	for (auto loop = 0; loop < GetTestLoopCount(); ++loop)
 // 	{
@@ -368,8 +368,8 @@ void Rendering::TransformTesting
 // 
 // 		Mathematics::Matrix3f matrix3 = matrix.GetMatrix3();
 // 
-// 		if(Mathematics::FloatMath::sm_ZeroTolerance <
-// 		   Mathematics::FloatMath::FAbs(matrix3.Determinant()))
+// 		if(Mathematics::MathF::sm_ZeroTolerance <
+// 		   Mathematics::MathF::FAbs(matrix3.Determinant()))
 // 		{
 // 			Transform secondTransform;
 // 

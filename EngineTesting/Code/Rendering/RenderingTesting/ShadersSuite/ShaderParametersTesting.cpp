@@ -16,12 +16,14 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 
-#include <boost/lexical_cast.hpp>
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ShaderParametersTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440) 
+#include SYSTEM_WARNING_DISABLE(26414) 
+#include SYSTEM_WARNING_DISABLE(26409) 
 void Rendering::ShaderParametersTesting
 	::MainTest()
 { 

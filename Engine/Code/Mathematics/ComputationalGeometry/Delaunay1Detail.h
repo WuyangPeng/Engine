@@ -1,246 +1,292 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 14:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/07 17:07)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H
 
 #include "Delaunay1.h"
-
-
+#include "DelaunayDetail.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::Delaunay1<Real>
-	::Delaunay1(int numVertices, Real* vertices, Real epsilon,bool owner, QueryType queryType)
-	:Delaunay<Real>{ numVertices, epsilon, owner, queryType }, mVertices{ vertices }
+Mathematics::Delaunay1<Real>::Delaunay1(const Vertices& vertices, Real epsilon, QueryType queryType)
+    : ParentType{ boost::numeric_cast<int>(vertices.size()), epsilon, queryType }, vertices{ vertices }
 {
-    std::vector<SortedVertex> sorted(mNumVertices);
-    int i;
-    for (i = 0; i < mNumVertices; ++i)
+    Init();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::Delaunay1<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::Delaunay1<Real>::Init()
+{
+    const auto numVertices = this->GetNumVertices();
+
+    std::vector<SortedVertex> sorted(numVertices);
+
+    for (auto i = 0; i < numVertices; ++i)
     {
-        sorted[i].Value = mVertices[i];
-        sorted[i].Index = i;
+        sorted.at(i).value = vertices.at(i);
+        sorted.at(i).index = i;
     }
     std::sort(sorted.begin(), sorted.end());
 
-	auto range = sorted[mNumVertices - 1].Value - sorted[0].Value;
-    if (range >= mEpsilon)
+    const auto endIndex = numVertices - 1;
+    auto range = sorted.at(endIndex).value - sorted.at(0).value;
+    if (this->GetEpsilon() <= range)
     {
-        mDimension = 1;
-        mNumSimplices = mNumVertices - 1;
-      /*  mIndices = NEW1<int>(2*mNumSimplices);*/
-        for (i = 0; i < mNumSimplices; ++i)
+        this->SetDimension(1);
+        this->SetNumSimplices(numVertices - 1);
+
+        const auto numSimplices = this->GetNumSimplices();
+        const auto twoNumSimplices = 2 * numSimplices;
+        IndicesType indices(twoNumSimplices);
+
+        for (auto i = 0; i < numSimplices; ++i)
         {
-            mIndices[2*i] = sorted[i].Index;
-            mIndices[2*i + 1] = sorted[i + 1].Index;
+            const auto twoI = 2 * i;
+            const auto nextTwoI = twoI + 1;
+            const auto nextI = i + 1;
+
+            indices.at(twoI) = sorted.at(i).index;
+            indices.at(nextTwoI) = sorted.at(nextI).index;
         }
 
-      //  mAdjacencies = NEW1<int>(2*mNumSimplices);
-        for (i = 0; i < mNumSimplices; ++i)
+        this->SetIndex(indices);
+
+        IndicesType adjacencies(twoNumSimplices);
+        for (auto i = 0; i < numSimplices; ++i)
         {
-            mAdjacencies[2*i] = i - 1;
-            mAdjacencies[2*i + 1] = i + 1;
+            const auto twoI = 2 * i;
+            const auto nextTwoI = twoI + 1;
+
+            adjacencies.at(twoI) = i - 1;
+            adjacencies.at(nextTwoI) = i + 1;
         }
-        mAdjacencies[2*mNumSimplices - 1] = -1;
+
+        const auto lastIndex = twoNumSimplices - 1;
+        adjacencies.at(lastIndex) = -1;
+
+        this->SetAdjacencies(adjacencies);
     }
 }
 
 template <typename Real>
-Mathematics::Delaunay1<Real>
-	::~Delaunay1()
+typename Mathematics::Delaunay1<Real>::Vertices Mathematics::Delaunay1<Real>::GetVertices() const
 {
-    if (mOwner)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return vertices;
+}
+
+template <typename Real>
+typename Mathematics::Delaunay1<Real>::HullType Mathematics::Delaunay1<Real>::GetHull() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    MATHEMATICS_ASSERTION_0(dimension == 1, "维度必须为 1。\n");
+    if (dimension != 1)
     {
-       // DELETE1(mVertices);
-    }
-}
-
-template <typename Real>
-const Real* Mathematics::Delaunay1<Real>
-	::GetVertices() const
-{
-    return mVertices;
-}
-
-template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::GetHull(int hull[2])
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
-    {
-        return false;
+        return { -1, -1, false };
     }
 
-    hull[0] = mIndices[0];
-    hull[1] = mIndices[2*mNumSimplices - 1];
-    return true;
+    return { this->GetIndex(0), this->GetIndex(2 * this->GetNumSimplices() - 1), true };
 }
 
 template <typename Real>
-int Mathematics::Delaunay1<Real>
-	::GetContainingSegment(const Real p) const
+int Mathematics::Delaunay1<Real>::GetContainingSegment(const Real p) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+    MATHEMATICS_ASSERTION_0(dimension == 1, "维度必须为 1。\n");
+
+    if (dimension != 1)
     {
         return -1;
     }
 
-    if (p < mVertices[mIndices[0]])
+    if (p < vertices.at(this->GetIndex(0)))
     {
         return -1;
     }
 
-    if (p > mVertices[mIndices[2*mNumSimplices - 1]])
+    const auto numSimplices = this->GetNumSimplices();
+    if (vertices.at(this->GetIndex(2 * numSimplices - 1)) < p)
     {
         return -1;
     }
 
-    int i;
-    for (i = 0; i < mNumSimplices; ++i)
+    auto i = 0;
+    for (; i < numSimplices; ++i)
     {
-        if (p <= mVertices[mIndices[2*i + 1]])
+        if (p <= vertices.at(this->GetIndex(2 * i + 1)))
         {
             break;
         }
     }
 
-    MATHEMATICS_ASSERTION_0(i < mNumSimplices, "Input not in hull\n");
+    MATHEMATICS_ASSERTION_0(i < numSimplices, "输入错误。\n");
+
     return i;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::GetVertexSet(int i, Real vertices[2]) const
+typename Mathematics::Delaunay1<Real>::VertexType Mathematics::Delaunay1<Real>::GetVertexSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+    MATHEMATICS_ASSERTION_0(dimension == 1, "维度必须为 1。\n");
+
+    if (dimension != 1)
     {
-        return false;
+        return { Math<Real>::GetValue(0), Math<Real>::GetValue(0), false };
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+    if (0 <= i && i < numSimplices)
     {
-        vertices[0] = mVertices[mIndices[2*i]];
-        vertices[1] = mVertices[mIndices[2*i + 1]];
-        return true;
+        return { vertices.at(this->GetIndex(2 * i)), vertices.at(this->GetIndex(2 * i + 1)), true };
     }
-    return false;
+
+    return { Math<Real>::GetValue(0), Math<Real>::GetValue(0), false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::GetIndexSet(int i, int indices[2]) const
+typename Mathematics::Delaunay1<Real>::HullType Mathematics::Delaunay1<Real>::GetIndexSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+    MATHEMATICS_ASSERTION_0(dimension == 1, "维度必须为 1。\n");
+
+    if (dimension != 1)
     {
-        return false;
+        return { -1, -1, false };
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+    if (0 <= i && i < numSimplices)
     {
-        indices[0] = mIndices[2*i];
-        indices[1] = mIndices[2*i + 1];
-        return true;
+        return { this->GetIndex(2 * i), this->GetIndex(2 * i + 1), true };
     }
-    return false;
+
+    return { -1, -1, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::GetAdjacentSet(int i, int adjacencies[2]) const
+typename Mathematics::Delaunay1<Real>::HullType Mathematics::Delaunay1<Real>::GetAdjacentSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+    MATHEMATICS_ASSERTION_0(dimension == 1, "维度必须为 1。\n");
+
+    if (dimension != 1)
     {
-        return false;
+        return { -1, -1, false };
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+    if (0 <= i && i < numSimplices)
     {
-        adjacencies[0] = mAdjacencies[2*i];
-        adjacencies[1] = mAdjacencies[2*i + 1];
-        return true;
+        return { this->GetAdjacency(2 * i), this->GetAdjacency(2 * i + 1), true };
     }
-    return false;
+
+    return { -1, -1, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::GetBarycentricSet(int i, const Real p, Real bary[2]) const
+typename Mathematics::Delaunay1<Real>::VertexType Mathematics::Delaunay1<Real>::GetBarycentricSet(int i, const Real p) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+    MATHEMATICS_ASSERTION_0(dimension == 1, "维度必须为 1。\n");
+
+    if (dimension != 1)
     {
-        return false;
+        return { Math<Real>::GetValue(0), Math<Real>::GetValue(0), false };
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+    if (0 <= i && i < numSimplices)
     {
-		auto v0 = mVertices[mIndices[2*i]];
-		auto v1 = mVertices[mIndices[2*i + 1]];
-		auto denom = v1 - v0;
-        if (denom > mEpsilon)
+        auto v0 = vertices.at(this->GetIndex(2 * i));
+        auto v1 = vertices.at(this->GetIndex(2 * i + 1));
+        auto denom = v1 - v0;
+        Real bary0{};
+        if (this->GetEpsilon() < denom)
         {
-            bary[0] = (v1 - p)/denom;
+            bary0 = (v1 - p) / denom;
         }
         else
         {
-            bary[0] = Math::GetValue(1);
+            bary0 = Math<Real>::GetValue(1);
         }
 
-        bary[1] = Math::GetValue(1) - bary[0];
-        return true;
+        return { bary0, Math<Real>::GetValue(1) - bary0, true };
     }
-    return false;
+
+    return { Math<Real>::GetValue(0), Math<Real>::GetValue(0), false };
 }
 
 template <typename Real>
-Mathematics::Delaunay1<Real>
-	::Delaunay1(const System::TChar* filename)
-	:Delaunay<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }
+Mathematics::Delaunay1<Real>::Delaunay1(const String& filename)
+    : ParentType{ 0, Math<Real>::GetValue(0), QueryType::Real }, vertices{}
 {
-    mVertices = 0;
-	auto loaded = Load(filename);
-    MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
-	
+    LoadFile(filename);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::Load(const System::TChar* filename)
+void Mathematics::Delaunay1<Real>::LoadFile(const String& filename)
 {
-	CoreTools::ReadFileManager inFile{ filename };
- 
-    Delaunay<Real>::Load(inFile);
+    CoreTools::ReadFileManager inFile{ filename };
 
-    if (mOwner)
+    if (!ParentType::Load(inFile))
     {
-        DELETE1(mVertices);
+        THROW_EXCEPTION(SYSTEM_TEXT("加载文件失败\n"));
     }
 
-    mOwner = true;
-  //  mVertices = NEW1<Real>(mNumVertices);
-    inFile.Read(sizeof(Real), mNumVertices, mVertices);
- 
-    return true;
+    vertices.resize(this->GetNumVertices());
+    inFile.Read(sizeof(Real), this->GetNumVertices(), vertices.data());
 }
 
 template <typename Real>
-bool Mathematics::Delaunay1<Real>
-	::Save(const System::TChar* filename) const
+void Mathematics::Delaunay1<Real>::SaveFile(const String& filename) const
 {
-	CoreTools::WriteFileManager outFile{ filename };
+    CoreTools::WriteFileManager outFile{ filename };
 
-    Delaunay<Real>::Save(outFile);
+    if (!ParentType::Save(outFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("保存文件失败\n"));
+    }
 
-    outFile.Write(sizeof(Real), mNumVertices, mVertices);
-	 
-    return true;
+    outFile.Write(sizeof(Real), this->GetNumVertices(), vertices.data());
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H

@@ -7,23 +7,23 @@
 #ifndef INPUT_OUTPUT_TOOLSET_PLACEHOLDER_H
 #define INPUT_OUTPUT_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/InputOutput/InputOutputToolset/InputOutputToolsetDll.h" 
+#include "Toolset/InputOutput/InputOutputToolset/InputOutputToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace InputOutputToolset
 {
-	 class INPUT_OUTPUT_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class INPUT_OUTPUT_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // INPUT_OUTPUT_TOOLSET_PLACEHOLDER_H
+#endif  // INPUT_OUTPUT_TOOLSET_PLACEHOLDER_H

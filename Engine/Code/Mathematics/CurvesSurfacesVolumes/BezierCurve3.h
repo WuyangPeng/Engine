@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 13:37)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE3_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE3_H
@@ -10,48 +13,44 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "SingleCurve3.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  BezierCurve3 : public SingleCurve3<Real>
+    template <typename Real>
+    class BezierCurve3 : public SingleCurve3<Real>
     {
     public:
-        using Math = Math<Real>;
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-	public:
-		// Construction and destruction.  BezierCurve3 accepts responsibility for
-		// deleting the input arrays.
-		BezierCurve3 (int degree, Vector3<Real>* ctrlPoint);
-		  ~BezierCurve3 ();
-		
-		BezierCurve3(const BezierCurve3&) = default;
-		BezierCurve3& operator=(const BezierCurve3&) = default;
-		BezierCurve3(BezierCurve3&&) = default;
-		BezierCurve3& operator=(BezierCurve3&&) = default;
-		
-		int GetDegree () const noexcept;
-		const Vector3<Real>* GetControlPoints () const noexcept;
-		
-		  Vector3<Real> GetPosition (Real t) const override;
-		  Vector3<Real> GetFirstDerivative (Real t) const override;
-		  Vector3<Real> GetSecondDerivative (Real t) const override;
-		  Vector3<Real> GetThirdDerivative (Real t) const override;
+        using ClassType = BezierCurve3<Real>;
+        using ParentType = SingleCurve3<Real>;
+        using Math = ParentType::Math;
 
-	protected:
-		int mDegree;
-		int mNumCtrlPoints;
-		Vector3<Real>* mCtrlPoint;
-		Vector3<Real>* mDer1CtrlPoint;
-		Vector3<Real>* mDer2CtrlPoint;
-		Vector3<Real>* mDer3CtrlPoint;
-		Real** mChoose;
-	};
-	
-	using BezierCurve3f = BezierCurve3<float>;
-	using BezierCurve3d = BezierCurve3<double>;
+    public:
+        BezierCurve3(int degree, const std::vector<Vector3<Real>>& ctrlPoint);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        NODISCARD int GetDegree() const noexcept;
+        NODISCARD std::vector<Vector3<Real>> GetControlPoints() const;
+
+        NODISCARD Vector3<Real> GetPosition(Real t) const override;
+        NODISCARD Vector3<Real> GetFirstDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetSecondDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetThirdDerivative(Real t) const override;
+
+    private:
+        int degree;
+        int numCtrlPoints;
+        std::vector<Vector3<Real>> ctrlPoint;
+        std::vector<Vector3<Real>> der1CtrlPoint;
+        std::vector<Vector3<Real>> der2CtrlPoint;
+        std::vector<Vector3<Real>> der3CtrlPoint;
+        std::vector<std::vector<Real>> choose;
+    };
+
+    using BezierCurve3F = BezierCurve3<float>;
+    using BezierCurve3D = BezierCurve3<double>;
 }
-#include STSTEM_WARNING_POP
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE3_H
+
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE3_H

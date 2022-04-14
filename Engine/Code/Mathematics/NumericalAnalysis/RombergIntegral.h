@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = RombergIntegral<Real, UserDataType>;
 
         // 最后一个参数是用户定义的数据。
-        using Function = Real (*)(Real, const UserDataType*) noexcept;
+        using Function = Real (*)(Real, const UserDataType*);
         using Math = Math<Real>;
 
     public:
@@ -42,7 +42,7 @@ namespace Mathematics
         using RomType = std::array<Container, 2>;
 
     private:
-        void Calculate() noexcept;
+        void Calculate();
 
     private:
         int order;

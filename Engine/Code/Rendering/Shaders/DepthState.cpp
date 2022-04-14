@@ -72,13 +72,13 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, DepthState)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, DepthState)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, DepthState)
 
-Rendering::DepthState ::DepthState()
+Rendering::DepthState::DepthState()
     : ParentType{ "DepthState" }, impl{ make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::DepthState ::~DepthState()
+Rendering::DepthState::~DepthState()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

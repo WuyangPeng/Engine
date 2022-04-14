@@ -26,7 +26,7 @@ namespace Rendering
 		void FileTest();
 		void UpdateModelSpaceTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

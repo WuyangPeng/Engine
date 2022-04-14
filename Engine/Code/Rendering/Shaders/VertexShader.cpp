@@ -29,14 +29,14 @@ CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, VertexShader);
 using std::string;
 
 Rendering::VertexShader
-    ::VertexShader (const string& programName, int numInputs,int numOutputs,int numConstants,int numSamplers)
+::VertexShader (const string& programName, int numInputs,int numOutputs,int numConstants,int numSamplers)
     :ParentType(programName,numInputs,numOutputs,numConstants,numSamplers)
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::VertexShader
-    ::~VertexShader()
+::~VertexShader()
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
     

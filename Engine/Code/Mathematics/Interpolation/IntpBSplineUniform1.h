@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 14:20)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM1_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM1_H
@@ -13,43 +16,28 @@
 
 namespace Mathematics
 {
+    template <typename Real>
+    class IntpBSplineUniform1 : public IntpBSplineUniform<Real>
+    {
+    public:
+        using ClassType = IntpBSplineUniform1<Real>;
+        using ParentType = IntpBSplineUniform<Real>;
 
-	template <typename Real>
-	class  IntpBSplineUniform1 : public IntpBSplineUniform<Real>
-	{
-	public:
-		// Construction.  IntpBSplineUniform1 accepts responsibility for
-		// deleting the input array data.
-		IntpBSplineUniform1(int degree, int dim, Real* data);
+    public:
+        IntpBSplineUniform1(int degree, int dim, const std::vector<Real>& data);
 
-		// Spline evaluation for function interpolation (no derivatives).
-		Real operator() (Real x);
-		virtual Real operator() (Real* X);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Spline evaluation, derivative count given in dx and dx[].
-		Real operator() (int dx, Real x);
-		virtual Real operator() (int* dx, Real* X);
+        NODISCARD Real operator()(Real x);
+        NODISCARD Real operator()(const std::vector<Real>& x) override;
 
-	private:
-		using IntpBSplineUniform<Real>::mDegree;
-		using IntpBSplineUniform<Real>::mData;
-		using IntpBSplineUniform<Real>::mGridMin;
-		using IntpBSplineUniform<Real>::mGridMax;
-		using IntpBSplineUniform<Real>::mBase;
-		using IntpBSplineUniform<Real>::mOldBase;
-		using IntpBSplineUniform<Real>::mMatrix;
-		using IntpBSplineUniform<Real>::mInter;
-		using IntpBSplineUniform<Real>::mPoly;
-		using IntpBSplineUniform<Real>::mEvaluateCallback;
-		using IntpBSplineUniform<Real>::SetPolynomial;
+        NODISCARD Real operator()(int dx, Real x);
+        NODISCARD Real operator()(const std::vector<int>& dx, const std::vector<Real>& x) override;
 
-		void EvaluateUnknownData();
-		void ComputeIntermediate();
-	};
-
-	using IntpBSplineUniform1f = IntpBSplineUniform1<float>;
-	using IntpBSplineUniform1d = IntpBSplineUniform1<double>;
-
+    private:
+        void EvaluateUnknownData() override;
+        void ComputeIntermediate() override;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM1_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORM1_H

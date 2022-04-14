@@ -54,7 +54,7 @@ Rendering::PlatformTexture2DImpl::PlatformTexture2DPtr Rendering::PlatformTextur
 }
 
 // static 
-Rendering::PlatformTexture2DImpl::PlatformTexture2DPtr Rendering::PlatformTexture2DImpl ::CreateDefault(Renderer* renderer, const Texture2D* texture2D)
+Rendering::PlatformTexture2DImpl::PlatformTexture2DPtr Rendering::PlatformTexture2DImpl::CreateDefault(Renderer* renderer, const Texture2D* texture2D)
 {
     return make_shared<OpenGLTexture2D>(renderer, texture2D);
 }

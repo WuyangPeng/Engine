@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 21:52)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_H
@@ -13,49 +16,41 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  CubicPolynomialCurve3: public PolynomialCurve3<Real>
-	{
-	public:
-		// Construction and destruction.  CubicPolynomialCurve3 accepts
-		// responsibility for deleting the input polynomials.
-		CubicPolynomialCurve3(Polynomial<Real>* xPoly, Polynomial<Real>* yPoly, Polynomial<Real>* zPoly);
+    template <typename Real>
+    class CubicPolynomialCurve3 : public PolynomialCurve3<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		virtual ~CubicPolynomialCurve3();
+        using ClassType = CubicPolynomialCurve3<Real>;
+        using ParentType = PolynomialCurve3<Real>;
+        using Math = ParentType::Math;
 
-		// Tessellation data.
-		int GetNumVertices() const;
-		const Vector3<Real>* GetVertices() const;
-		Vector3<Real>* GetVertices();
+    public:
+        CubicPolynomialCurve3(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly, const Polynomial<Real>& zPoly);
 
-		// Tessellation by recursive subdivision.
-		void Tessellate(int level);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	protected:
-		using PolynomialCurve3<Real>::mTMin;
-		using PolynomialCurve3<Real>::mTMax;
-		using PolynomialCurve3<Real>::GetPosition;
-		using PolynomialCurve3<Real>::GetSecondDerivative;
+        NODISCARD int GetNumVertices() const;
+        NODISCARD std::vector<Vector3<Real>> GetVertices() const;
 
-		// Support for precomputation.
-		class  IntervalParameters
-		{
-		public:
-			int I0, I1;
-			Vector3<Real> Xuu[2];
-		};
+        void Tessellate(int level);
 
-		// Subdivide curve into two halves.
-		void Subdivide(int level, Real dsqr, Vector3<Real>* X,
-			IntervalParameters& IP);
+    protected:
+        class IntervalParameters
+        {
+        public:
+            int i0;
+            int i1;
+            std::array<Vector3<Real>, 2> xuu;
+        };
 
-		// Tessellation data.
-		int mNumVertices;
-		Vector3<Real>* mVertices;
-	};
+        void Subdivide(int level, Real dsqr, std::vector<Vector3<Real>>& x, IntervalParameters& ip);
 
-	using CubicPolynomialCurve3f = CubicPolynomialCurve3<float>;
-	using CubicPolynomialCurve3d = CubicPolynomialCurve3<double>;
+    private:
+        std::vector<Vector3<Real>> vertices;
+    };
+
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_H

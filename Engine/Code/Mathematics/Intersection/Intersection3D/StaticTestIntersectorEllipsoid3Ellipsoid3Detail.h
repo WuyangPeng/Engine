@@ -532,7 +532,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::ResultTyp
     constexpr auto maxIterations = 256;
     for (auto i = 0; i < maxIterations; ++i)
     {
-        s = (Real{ 0.5 }) * (smin + smax);
+        s = Math::GetRational(1, 2) * (smin + smax);
         if (smin < s)
         {
             if (s < smax)
@@ -597,7 +597,7 @@ typename Mathematics::StaticTestIntersectorEllipsoid3Ellipsoid3<Real>::ResultTyp
     constexpr auto maxIterations = 256;
     for (auto i = 0; i < maxIterations; ++i)
     {
-        s = (Real{ 0.5 }) * (smin + smax);
+        s = Math::GetRational(1, 2) * (smin + smax);
         if (smin < s)
         {
             if (s < smax)

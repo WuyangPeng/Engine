@@ -1,265 +1,266 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 21:33)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORMN_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_BSPLINE_UNIFORMN_DETAIL_H
 
 #include "IntpBSplineUniformN.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpBSplineUniformN<Real>::IntpBSplineUniformN(int dims, int degree, const std::vector<int>& dim, const std::vector<Real>& data)
+    : ParentType{ dims, degree, dim, data },
+      evI(dims),
+      ciLoop(dims),
+      ciDelta(boost::numeric_cast<size_t>(dims) - 1),
+      opI(dims),
+      opJ(dims),
+      opDelta(boost::numeric_cast<size_t>(dims) - 1)
 {
-    template <typename Real>
-    IntpBSplineUniformN<Real>::IntpBSplineUniformN(int dims, int degree, const int* dim, Real* data)
-        : IntpBSplineUniform<Real>(dims, degree, dim, data)
+    auto temp = 1;
+    for (auto i = 0; i < dims - 1; ++i)
     {
-        mEvI = nullptr;  // NEW1<int>(mDims);
-        mCiLoop = nullptr;  //  NEW1<int>(mDims);
-        mCiDelta = nullptr;  // NEW1<int>(mDims - 1);
-        mOpI = nullptr;  //  NEW1<int>(mDims);
-        mOpJ = nullptr;  //  NEW1<int>(mDims);
-        mOpDelta = nullptr;  //  NEW1<int>(mDims - 1);
-
-        int temp = 1;
-        for (int i = 0; i < mDims - 1; ++i)
-        {
-            mCiDelta[i] = temp * (mDim[i] - mDp1);
-            temp *= mDim[i];
-        }
+        ciDelta.at(i) = temp * (dim.at(i) - this->GetDP1());
+        temp *= dim.at(i);
     }
 
-    template <typename Real>
-    IntpBSplineUniformN<Real>::~IntpBSplineUniformN()
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpBSplineUniformN<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::IntpBSplineUniformN<Real>::Index(const std::vector<int>& i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto index = i.at(boost::numeric_cast<size_t>(this->GetDimension()) - 1);
+    for (auto dim = this->GetDimension() - 2; dim >= 0; --dim)
     {
-        // 		DELETE1(mEvI);
-        // 		DELETE1(mCiLoop);
-        // 		DELETE1(mOpI);
-        // 		DELETE1(mOpJ);
-        // 		DELETE1(mOpDelta);
-        // 		DELETE1(mCiDelta);
+        index *= this->GetDim(dim);
+        index += i.at(dim);
+    }
+    return index;
+}
+
+template <typename Real>
+Real Mathematics::IntpBSplineUniformN<Real>::operator()(const std::vector<Real>& x)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        this->SetBase(dim, boost::numeric_cast<int>(Math<Real>::Floor(x.at(dim))));
     }
 
-    template <typename Real>
-    int IntpBSplineUniformN<Real>::Index(int* I) const
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
     {
-        int index = I[mDims - 1];
-        for (int dim = mDims - 2; dim >= 0; --dim)
+        if (this->IsBaseChange(dim))
         {
-            index *= mDim[dim];
-            index += I[dim];
-        }
-        return index;
-    }
-
-    template <typename Real>
-    Real IntpBSplineUniformN<Real>::operator()(Real* X)
-    {
-        int dim;
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            mBase[dim] = (int)Math<Real>::Floor(X[dim]);
-        }
-
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            if (mOldBase[dim] != mBase[dim])
+            for (auto k = 0; k < this->GetDimension(); ++k)
             {
-                // Switch to new local grid.
-                for (int k = 0; k < mDims; ++k)
-                {
-                    mOldBase[k] = mBase[k];
-                    mGridMin[k] = mBase[k] - 1;
-                    mGridMax[k] = mGridMin[k] + mDegree;
-                }
+                this->SwitchToNewLocalGrid(k);
+            }
 
-                // Fill in missing grid mData if necessary.
-                if (mEvaluateCallback)
-                {
-                    EvaluateUnknownData();
-                }
+            if (this->HasEvaluateCallback())
+            {
+                EvaluateUnknownData();
+            }
 
-                ComputeIntermediate();
+            ComputeIntermediate();
+            break;
+        }
+    }
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        auto& polynomial = this->GetPolynomial(dim);
+        this->SetPolynomial(0, x.at(dim) - this->GetBase(dim), polynomial);
+    }
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        opI.at(dim) = 0;
+    }
+
+    auto result = Math<Real>::GetValue(0);
+    for (auto k = 0; k < this->GetDP1ToN(); ++k)
+    {
+        auto temp = this->GetInter(k);
+        for (auto dim = 0; dim < this->GetDimension(); ++dim)
+        {
+            auto& polynomial = this->GetPolynomial(dim);
+            temp *= polynomial[opI.at(dim)];
+        }
+        result += temp;
+
+        for (auto dim = 0; dim < this->GetDimension(); ++dim)
+        {
+            if (++opI.at(dim) <= this->GetDegree())
+            {
                 break;
             }
+            opI.at(dim) = 0;
         }
+    }
+    return result;
+}
 
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            SetPolynomial(0, X[dim] - mBase[dim], mPoly[dim]);
-        }
+template <typename Real>
+Real Mathematics::IntpBSplineUniformN<Real>::operator()(const std::vector<int>& dx, const std::vector<Real>& x)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            mOpI[dim] = 0;
-        }
-
-        Real result = Math<Real>::GetValue(0);
-        int k;
-        for (k = 0; k < mDp1ToN; ++k)
-        {
-            Real temp = mInter[k];
-            for (dim = 0; dim < mDims; ++dim)
-            {
-                temp *= mPoly[dim][mOpI[dim]];
-            }
-            result += temp;
-
-            for (dim = 0; dim < mDims; ++dim)
-            {
-                if (++mOpI[dim] <= mDegree)
-                {
-                    break;
-                }
-                mOpI[dim] = 0;
-            }
-        }
-        return result;
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        this->SetBase(dim, boost::numeric_cast<int>(Math<Real>::Floor(x.at(dim))));
     }
 
-    template <typename Real>
-    Real IntpBSplineUniformN<Real>::operator()(int* dx, Real* X)
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
     {
-        int dim;
-        for (dim = 0; dim < mDims; ++dim)
+        if (this->IsBaseChange(dim))
         {
-            mBase[dim] = (int)Math<Real>::Floor(X[dim]);
+            for (auto k = 0; k < this->GetDimension(); ++k)
+            {
+                this->SwitchToNewLocalGrid(k);
+            }
+
+            if (this->HasEvaluateCallback())
+            {
+                EvaluateUnknownData();
+            }
+
+            ComputeIntermediate();
+            break;
+        }
+    }
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        auto& polynomial = this->GetPolynomial(dim);
+        this->SetPolynomial(dx.at(dim), x.at(dim) - this->GetBase(dim), polynomial);
+    }
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        opJ.at(dim) = dx.at(dim);
+    }
+
+    auto temp = 1;
+    for (auto dim = 0; dim < this->GetDimension() - 1; ++dim)
+    {
+        opDelta.at(dim) = temp * dx.at(dim);
+        temp *= this->GetDP1();
+    }
+
+    auto result = Math<Real>::GetValue(0);
+    auto k = opJ.at(boost::numeric_cast<size_t>(this->GetDimension()) - 1);
+    for (auto dim = this->GetDimension() - 2; dim >= 0; --dim)
+    {
+        k *= this->GetDP1();
+        k += opJ.at(dim);
+    }
+    for (; k < this->GetDP1ToN(); ++k)
+    {
+        auto inter = this->GetInter(k);
+        for (auto dim = 0; dim < this->GetDimension(); ++dim)
+        {
+            auto& polynomial = this->GetPolynomial(dim);
+            inter *= polynomial[opJ.at(dim)];
+        }
+        result += inter;
+
+        for (auto dim = 0; dim < this->GetDimension(); ++dim)
+        {
+            if (++opJ.at(dim) <= this->GetDegree())
+            {
+                continue;
+            }
+            opJ.at(dim) = dx.at(dim);
+            k += opDelta.at(dim);
+        }
+    }
+    return result;
+}
+
+template <typename Real>
+void Mathematics::IntpBSplineUniformN<Real>::EvaluateUnknownData()
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
+    {
+        evI.at(dim) = this->GetGridMin(dim);
+    }
+
+    for (auto j = 0; j < this->GetDP1ToN(); ++j)
+    {
+        const auto index = Index(evI);
+        if (Math<Real>::Approximate(this->GetData(index), Math<Real>::maxReal))
+        {
+            this->SetData(index);
         }
 
-        for (dim = 0; dim < mDims; ++dim)
+        for (auto dim = 0; dim < this->GetDimension(); ++dim)
         {
-            if (mOldBase[dim] != mBase[dim])
+            if (++evI.at(dim) <= this->GetGridMax(dim))
             {
-                // Switch to new local grid.
-                for (int k = 0; k < mDims; ++k)
-                {
-                    mOldBase[k] = mBase[k];
-                    mGridMin[k] = mBase[k] - 1;
-                    mGridMax[k] = mGridMin[k] + mDegree;
-                }
-
-                // Fill in missing grid mData if necessary.
-                if (mEvaluateCallback)
-                {
-                    EvaluateUnknownData();
-                }
-
-                ComputeIntermediate();
                 break;
             }
+            evI.at(dim) = this->GetGridMin(dim);
         }
-
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            SetPolynomial(dx[dim], X[dim] - mBase[dim], mPoly[dim]);
-        }
-
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            mOpJ[dim] = dx[dim];
-        }
-
-        int temp = 1;
-        for (dim = 0; dim < mDims - 1; ++dim)
-        {
-            mOpDelta[dim] = temp * dx[dim];
-            temp *= mDp1;
-        }
-
-        Real result = Math<Real>::GetValue(0);
-        int k = mOpJ[mDims - 1];
-        for (dim = mDims - 2; dim >= 0; --dim)
-        {
-            k *= mDp1;
-            k += mOpJ[dim];
-        }
-        for (/**/; k < mDp1ToN; ++k)
-        {
-            Real temp = mInter[k];
-            for (dim = 0; dim < mDims; ++dim)
-            {
-                temp *= mPoly[dim][mOpJ[dim]];
-            }
-            result += temp;
-
-            for (dim = 0; dim < mDims; ++dim)
-            {
-                if (++mOpJ[dim] <= mDegree)
-                {
-                    continue;
-                }
-                mOpJ[dim] = dx[dim];
-                k += mOpDelta[dim];
-            }
-        }
-        return result;
     }
+}
 
-    template <typename Real>
-    void IntpBSplineUniformN<Real>::EvaluateUnknownData()
+template <typename Real>
+void Mathematics::IntpBSplineUniformN<Real>::ComputeIntermediate()
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    for (auto dim = 0; dim < this->GetDimension(); ++dim)
     {
-        int dim;
-        for (dim = 0; dim < mDims; ++dim)
-        {
-            mEvI[dim] = mGridMin[dim];
-        }
+        ciLoop.at(dim) = this->GetGridMin(dim);
+    }
+    auto index = Index(ciLoop);
 
-        for (int j = 0; j < mDp1ToN; ++j)
-        {
-            int index = Index(mEvI);
-            if (mData[index] == Math<Real>::maxReal)
-            {
-                mData[index] = mEvaluateCallback(index);
-            }
+    for (auto k = 0; k < this->GetDP1ToN(); ++k, ++index)
+    {
+        this->SetCache(k, this->GetData(index));
 
-            for (dim = 0; dim < mDims; ++dim)
+        for (auto dim = 0; dim < this->GetDimension(); ++dim)
+        {
+            if (++ciLoop.at(dim) <= this->GetGridMax(dim))
             {
-                if (++mEvI[dim] <= mGridMax[dim])
-                {
-                    break;
-                }
-                mEvI[dim] = mGridMin[dim];
+                break;
             }
+            ciLoop.at(dim) = this->GetGridMin(dim);
+            index += ciDelta.at(dim);
         }
     }
 
-    template <typename Real>
-    void IntpBSplineUniformN<Real>::ComputeIntermediate()
+    for (auto i = 0, j = 0; i < this->GetDP1ToN(); ++i)
     {
-        // Fetch subblock of mData to cache.
-        int dim;
-        for (dim = 0; dim < mDims; ++dim)
+        auto sum = Math<Real>::GetValue(0);
+        for (auto k = 0; k < this->GetDP1ToN(); k += this->GetSkip(j), j += this->GetSkip(j))
         {
-            mCiLoop[dim] = mGridMin[dim];
+            sum += this->GetProduct(j) * this->GetCache(k);
         }
-        int index = Index(mCiLoop);
-        int k;
-        for (k = 0; k < mDp1ToN; ++k, ++index)
-        {
-            mCache[k] = mData[index];
-
-            for (dim = 0; dim < mDims; ++dim)
-            {
-                if (++mCiLoop[dim] <= mGridMax[dim])
-                {
-                    break;
-                }
-                mCiLoop[dim] = mGridMin[dim];
-                index += mCiDelta[dim];
-            }
-        }
-
-        // Compute and save the intermediate product.
-        for (int i = 0, j = 0; i < mDp1ToN; ++i)
-        {
-            Real sum = Math<Real>::GetValue(0);
-            for (k = 0; k < mDp1ToN; k += mSkip[j], j += mSkip[j])
-            {
-                sum += mProduct[j] * mCache[k];
-            }
-            mInter[i] = sum;
-        }
+        this->SetInter(i, sum);
     }
 }
 

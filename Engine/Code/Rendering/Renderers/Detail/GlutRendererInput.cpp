@@ -12,7 +12,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26472)
 #include SYSTEM_WARNING_DISABLE(26490)
-Rendering::GlutRendererInput ::GlutRendererInput() noexcept
+Rendering::GlutRendererInput::GlutRendererInput() noexcept
     : ParentType{}, m_WindowID{ 0 }, m_DisableVerticalSync{ true }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -29,12 +29,12 @@ void Rendering:: GlutRendererInput
 	m_WindowID  = windowID;
 }
 
-void Rendering::GlutRendererInput ::SetWindowHandle(HWnd windowID) noexcept
+void Rendering::GlutRendererInput::SetWindowHandle(HWnd windowID) noexcept
 {
 	SetWindowID(static_cast<int>(reinterpret_cast<size_t>(windowID)));
 }
 
-Rendering::RendererTypes Rendering::GlutRendererInput ::GetRendererType() const noexcept
+Rendering::RendererTypes Rendering::GlutRendererInput::GetRendererType() const noexcept
 {
 	return RendererTypes::Glut;
 }

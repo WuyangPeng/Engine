@@ -49,7 +49,7 @@ namespace Rendering
 		// 这个类的以前的行为是为了填补只能由关键帧代表的通道变换，
 		// 其中隐含依靠空间Spatial m_Object有它的应用程序适当地设置其他通道。
 		// 现在KeyframeController设置*所有*的通道。
-		KeyframeController(int numCommonTimes, int numTranslations,int numRotations, int numScales,const FloatTransform& localTransform);
+		KeyframeController(int numCommonTimes, int numTranslations,int numRotations, int numScales,const TransformF& localTransform);
 	 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;

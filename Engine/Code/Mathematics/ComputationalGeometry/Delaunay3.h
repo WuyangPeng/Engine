@@ -1,174 +1,123 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 14:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/08 15:51)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Delaunay1.h" 
+#include "Delaunay1.h"
 #include "Delaunay2.h"
-#include "Mathematics/Query/QueryBase.h"
 #include "Mathematics/Meshes/TSManifoldMesh.h"
+#include "Mathematics/Query/Query3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Delaunay3 : public Delaunay<Real>
-	{
-	public:
-		// The input to the constructor is the array of vertices whose Delaunay
-		// tetrahedralization is required.  If you want Delaunay3 to delete the
-		// vertices during destruction, set bOwner to 'true'.  Otherwise, you
-		// own the vertices and must delete them yourself.  Before using this
-		// class, you should "clean" your input points by removing duplicates.
-		//
-		// You have a choice of speed versus accuracy.  The fastest choice is
-		// Query::QT_INT64, but it gives up a lot of precision, scaling the points
-		// to [0,2^{10}]^3.  The choice Query::QT_INTEGER gives up less precision,
-		// scaling the points to [0,2^{20}]^3.  The choice Query::QT_RATIONAL uses
-		// exact arithmetic, but is the slowest choice.  The choice Query::QT_REAL
-		// uses floating-point arithmetic, but is not robust in all cases.
+    template <typename Real>
+    class Delaunay3 : public Delaunay<Real>
+    {
+    public:
+        using ClassType = Delaunay3<Real>;
+        using ParentType = Delaunay<Real>;
+        using Vector3 = Vector3<Real>;
+        using Vertices = std::vector<Vector3>;
+        using Delaunay1 = Delaunay1<Real>;
+        using Delaunay2 = Delaunay2<Real>;
+        using String = System::String;
+        using IndicesType = ParentType::IndicesType;
+        using HullType = std::pair<IndicesType, bool>;
+        using VertexType = std::tuple<Vector3, Vector3, Vector3, Vector3, bool>;
+        using IndexType = std::tuple<int32_t, int32_t, int32_t, int32_t, bool>;
+        using BaryType = std::tuple<Real, Real, Real, Real, bool>;
 
-		Delaunay3 (const std::vector<Vector3<Real> >& vertices, Real epsilon,bool owner, QueryType queryType);
-		virtual ~Delaunay3 ();
-		
-		// The input vertex array.
-		const Vector3<Real>* GetVertices () const;
-		
-		// The number of unique vertices processed.
-		int GetNumUniqueVertices () const;
-		
-		// If GetDimension() returns 1, then the points lie on a line.  You must
-		// create a Delaunay1 object using the function provided.
-		const Vector3<Real>& GetLineOrigin () const;
-		const Vector3<Real>& GetLineDirection () const;
-		Delaunay1<Real>* GetDelaunay1 () const;
+    public:
+        Delaunay3(const Vertices& vertices, Real epsilon, QueryType queryType);
+        explicit Delaunay3(const String& filename);
 
-		// If GetDimension() returns 2, then the points lie on a plane.  The plane
-		// has two direction vectors (inputs 0 or 1).  You must create a Delaunay2
-		// object using the function provided.
-		const Vector3<Real>& GetPlaneOrigin () const;
-		const Vector3<Real>& GetPlaneDirection (int i) const;
-		Delaunay2<Real>* GetDelaunay2 () const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Locate those tetrahedra faces that do not share other tetrahedra.
-		// The returned quantity is the number of triangles in the hull.  The
-		// returned array has 3*quantity indices, each triple representing a
-		// triangle.  The triangles are counterclockwise ordered when viewed
-		// from outside the hull.  The return value is 'true' iff the dimension
-		// is 3.
-		bool GetHull (int& numTriangles, int*& indices) const;
+        NODISCARD Vertices GetVertices() const;
 
-		// Support for searching the tetrahedralization for a tetrahedron that
-		// contains a point.  If there is a containing tetrahedron, the returned
-		// value is a tetrahedron index i with 0 <= i < numTriangles.  If there is
-		// not a containing tetrahedron, -1 is returned.
-		int GetContainingTetrahedron (const Vector3<Real>& p) const;
+        NODISCARD int GetNumUniqueVertices() const noexcept;
 
-		// If GetContainingTetrahedron returns a nonnegative value, the path of
-		// tetrahedra searched for the containing tetrahedra is stored in an
-		// array.  The last index of the array is returned by GetPathLast; it is
-		// one less than the number of array elements.  The array itself is
-		// returned by GetPath.
-		int GetPathLast () const;
-		const int* GetPath () const;
+        NODISCARD Vector3 GetLineOrigin() const noexcept;
+        NODISCARD Vector3 GetLineDirection() const noexcept;
+        NODISCARD Delaunay1 GetDelaunay1() const;
 
-		// If GetContainingTetrahedron returns -1, the path of tetrahedra
-		// searched may be obtained by GetPathLast and GetPath.  The input point
-		// is outside a face of the last tetrahedron in the path.  This function
-		// returns the vertex indices <v0,v1,v2> of the face, listed in
-		// counterclockwise order relative to the convex hull of the data points
-		// as viewed by an outside observer.  The final output is the index of the
-		// vertex v3 opposite the face.  The return value of the function is the
-		// index of the quadruple of vertex indices; the value is 0, 1, 2, or 3.
-		int GetLastFace (int& v0, int& v1, int& v2, int& v3) const;
+        NODISCARD Vector3 GetPlaneOrigin() const noexcept;
+        NODISCARD Vector3 GetPlaneDirection(int i) const;
+        NODISCARD Delaunay2 GetDelaunay2() const;
 
-		// Get the vertices for tetrahedron i.  The function returns 'true' if i
-		// is a valid tetrahedron index, in which case the vertices are valid.
-		// Otherwise, the function returns 'false' and the vertices are invalid.
-		bool GetVertexSet (int i, Vector3<Real> vertices[4]) const;
+        NODISCARD HullType GetHull() const;
 
-		// Get the vertex indices for tetrahedron i.  The function returns 'true'
-		// if i is a valid tetrahedron index, in which case the vertices are
-		// valid.  Otherwise, the function returns 'false' and the vertices are
-		// invalid.
-		bool GetIndexSet (int i, int indices[4]) const;
+        NODISCARD int GetContainingTetrahedron(const Vector3& p) const;
 
-		// Get the indices for tetrahedra adjacent to tetrahedron i.  The function
-		// returns 'true' if i is a valid tetrahedron index, in which case the
-		// adjacencies are valid.  Otherwise, the function returns 'false' and
-		// the adjacencies are invalid.
-		bool GetAdjacentSet (int i, int adjacencies[4]) const;
+        NODISCARD int GetPathLast() const noexcept;
+        NODISCARD IndicesType GetPath() const;
 
-		// Compute the barycentric coordinates of P with respect to tetrahedron i.
-		// The function returns 'true' if i is a valid tetrahedron index, in which
-		// case the coordinates are valid.  Otherwise, the function returns
-		// 'false' and the coordinate array is invalid.
-		bool GetBarycentricSet (int i, const Vector3<Real>& p, Real bary[4]) const;
+        NODISCARD int GetLastFace(int& v0, int& v1, int& v2, int& v3) const noexcept;
 
-		// Support for streaming to/from disk.
-		Delaunay3 (const System::TChar* filename);
-		bool Load (const System::TChar* filename);
-		bool Save (const System::TChar* filename) const;
+        NODISCARD VertexType GetVertexSet(int i) const;
 
-	private:
-		using Delaunay<Real>::mQueryType;
-		using Delaunay<Real>::mNumVertices;
-		using Delaunay<Real>::mDimension;
-		using Delaunay<Real>::mNumSimplices;
-		using Delaunay<Real>::mIndices;
-		using Delaunay<Real>::mAdjacencies;
-		using Delaunay<Real>::mEpsilon;
-		using Delaunay<Real>::mOwner;
+        NODISCARD IndexType GetIndexSet(int i) const;
 
-		typedef TSManifoldMesh::Tetrahedron Tetrahedron;
+        NODISCARD IndexType GetAdjacentSet(int i) const;
 
-		bool GetContainingTetrahedron (int i, Tetrahedron*& tetra) const;
+        NODISCARD BaryType GetBarycentricSet(int i, const Vector3& p) const;
 
-		void GetAndRemoveInsertionPolyhedron (int i,std::set<Tetrahedron*>& candidates, std::set<TriangleKey>& boundary);
+        void LoadFile(const String& filename);
+        void SaveFile(const String& filename) const;
 
-		void Update (int i);
+    private:
+        using Tetrahedron = TSManifoldMesh::Tetrahedron;
+        using TetrahedronSharedPtr = std::shared_ptr<Tetrahedron>;
+        using Query3 = Query3<Real>;
+        using Query3SharedPtr = std::shared_ptr<Query3>;
 
-		// The input vertices.
-		std::vector<Vector3<Real> > mVertices;
+    private:
+        NODISCARD bool GetContainingTetrahedron(int i, const Tetrahedron& tetra) const;
 
-		// The number of unique vertices processed.
-		int mNumUniqueVertices;
+        void GetAndRemoveInsertionPolyhedron(int i, std::set<TetrahedronSharedPtr>& candidates, std::set<TriangleKey>& boundary);
 
-		// The scaled input vertices.  This array and supporting data structures
-		// are for robust calculations.
-		std::vector<Vector3<Real> > mSVertices;
-		Query3<Real>* mQuery;
-		Vector3<Real> mMin;
-		Real mScale;
-		
-		// The current tetrahedralization.
-		TSManifoldMesh mTetraMesh;
-		
-		// The line of containment if the dimension is 1.
-		Vector3<Real> m_LineOrigin, m_LineDirection;
-		
-		// The plane of containment if the dimension is 2.
-		Vector3<Real> mPlaneOrigin, mPlaneDirection[2];
-		
-		// Store the path of tetrahedra visited in a GetContainingTetrahedron
-		// function call.
-		mutable int mPathLast;
-		mutable int* mPath;
+        void Update(int i);
+        void Init();
 
-		// If a query point is not in the convex hull of the input points, the
-		// point is outside a face of the last tetrahedron in the search path.
-		// These are the vertex indices for that face.
-		mutable int mLastFaceV0, mLastFaceV1, mLastFaceV2;
-		mutable int mLastFaceOpposite, mLastFaceOppositeIndex;
-	};
+    private:
+        Vertices vertices;
 
-	using Delaunay3f = Delaunay3<float>;
-	using Delaunay3d = Delaunay3<double>;
+        int numUniqueVertices;
+
+        Vertices sVertices;
+        Query3SharedPtr query;
+        Vector3 min;
+        Real scale;
+
+        TSManifoldMesh tetraMesh;
+
+        Vector3 lineOrigin;
+        Vector3 lineDirection;
+
+        Vector3 planeOrigin;
+        std::array<Vector3, 2> planeDirection;
+
+        mutable int pathLast;
+        mutable IndicesType path;
+
+        mutable int lastFaceV0;
+        mutable int lastFaceV1;
+        mutable int lastFaceV2;
+        mutable int lastFaceOpposite;
+        mutable int lastFaceOppositeIndex;
+    };
+
+    using Delaunay3F = Delaunay3<float>;
+    using Delaunay3D = Delaunay3<double>;
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_H
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_H

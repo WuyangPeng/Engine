@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 19:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 15:14)
 
 #ifndef RENDERING_SCENE_GRAPH_MATERIAL_IMPL_H
 #define RENDERING_SCENE_GRAPH_MATERIAL_IMPL_H
@@ -10,51 +13,51 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/ObjectSystems/Object.h"
-#include "Rendering/DataTypes/Colour.h" 
+#include "Rendering/DataTypes/Colour.h"
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE MaterialImpl
-	{
-	public:
-		using ClassType = MaterialImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-		using Colour = Colour<float>;
+    class RENDERING_HIDDEN_DECLARE MaterialImpl
+    {
+    public:
+        using ClassType = MaterialImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using Colour = Colour<float>;
 
-	public:
-		MaterialImpl();
-		MaterialImpl(const Colour& emissive, const Colour& ambient,const Colour& diffuse, const Colour& specular);
- 
-		CLASS_INVARIANT_DECLARE;
+    public:
+        MaterialImpl() noexcept;
+        MaterialImpl(const Colour& emissive, const Colour& ambient, const Colour& diffuse, const Colour& specular) noexcept;
 
-		void Load(CoreTools::BufferSource& source);
-		void Save(CoreTools::BufferTarget& target) const;
-		int GetStreamingSize() const;
+        CLASS_INVARIANT_DECLARE;
 
-		const Colour GetEmissive() const;  
-		const Colour GetAmbient() const;
-		const Colour GetDiffuse() const;
-		const Colour GetSpecular() const;
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const noexcept;
 
-		void SetEmissive(const Colour& emissive);
-		void SetAmbient(const Colour& ambient);
-		void SetDiffuse(const Colour& diffuse);
-		void SetSpecular(const Colour& specular);
+        NODISCARD Colour GetEmissive() const noexcept;
+        NODISCARD Colour GetAmbient() const noexcept;
+        NODISCARD Colour GetDiffuse() const noexcept;
+        NODISCARD Colour GetSpecular() const noexcept;
 
-		float GetAlpha() const;
-		float GetSpecularExponent() const;
+        void SetEmissive(const Colour& aEmissive) noexcept;
+        void SetAmbient(const Colour& aAmbient) noexcept;
+        void SetDiffuse(const Colour& aDiffuse) noexcept;
+        void SetSpecular(const Colour& aSpecular) noexcept;
 
-	private:
-		Colour m_Emissive;  // 默认: (0,0,0,1)
-		Colour m_Ambient;   // 默认: (0,0,0,1)		
-	
-		// 材料的alpha使用m_Diffuse的alpha通道
-		Colour m_Diffuse;   // 默认: (0,0,0,1)		
+        NODISCARD float GetAlpha() const noexcept;
+        NODISCARD float GetSpecularExponent() const noexcept;
 
-		// 材料的镜面指数使用m_Specular的alpha通道
-		Colour m_Specular;  // 默认: (0,0,0,0)
-	};
+    private:
+        Colour emissive;  // 默认: (0,0,0,1)
+        Colour ambient;  // 默认: (0,0,0,1)
+
+        // 材料的alpha使用m_Diffuse的alpha通道
+        Colour diffuse;  // 默认: (0,0,0,1)
+
+        // 材料的镜面指数使用m_Specular的alpha通道
+        Colour specular;  // 默认: (0,0,0,0)
+    };
 }
 
-#endif // RENDERING_SCENE_GRAPH_MATERIAL_IMPL_H
+#endif  // RENDERING_SCENE_GRAPH_MATERIAL_IMPL_H

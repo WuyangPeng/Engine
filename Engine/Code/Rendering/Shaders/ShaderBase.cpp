@@ -72,7 +72,7 @@ CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ShaderBase)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ShaderBase)
 
 Rendering::ShaderBase
-    ::ShaderBase (const string& programName, int numInputs,
+::ShaderBase (const string& programName, int numInputs,
               int numOutputs,int numConstants,
               int numSamplers)
 	:ParentType{ programName },impl{ make_shared<ImplType>(numInputs,numOutputs,numConstants,numSamplers) }
@@ -81,7 +81,7 @@ Rendering::ShaderBase
 }
 
 Rendering::ShaderBase
-    ::~ShaderBase ()
+::~ShaderBase ()
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -89,7 +89,7 @@ Rendering::ShaderBase
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ShaderBase)
 
 void Rendering::ShaderBase
-    ::SetInput (int index, const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic)
+::SetInput (int index, const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic)
 {
 	;
   
@@ -97,7 +97,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-   ::SetOutput (int index, const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic)
+::SetOutput (int index, const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic)
 {
 	;
   
@@ -105,7 +105,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetConstant (int index, const string& name,int numRegistersUsed)
+::SetConstant (int index, const string& name,int numRegistersUsed)
 {
 	;
 
@@ -113,7 +113,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetSampler (int index, const string& name,ShaderFlags::SamplerType type)
+::SetSampler (int index, const string& name,ShaderFlags::SamplerType type)
 {
 	;
     
@@ -121,7 +121,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetFilter (int index, ShaderFlags::SamplerFilter filter)
+::SetFilter (int index, ShaderFlags::SamplerFilter filter)
 {
 	;
 	    
@@ -129,7 +129,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetCoordinate (int index, int dimension,ShaderFlags::SamplerCoordinate coordinate)
+::SetCoordinate (int index, int dimension,ShaderFlags::SamplerCoordinate coordinate)
 {
 	;
     
@@ -137,7 +137,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetLodBias (int index, float lodBias)
+::SetLodBias (int index, float lodBias)
 {
 	;
     
@@ -145,7 +145,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetAnisotropy (int index, float anisotropy)
+::SetAnisotropy (int index, float anisotropy)
 {
 	;
        
@@ -153,7 +153,7 @@ void Rendering::ShaderBase
 }
 
 void Rendering::ShaderBase
-    ::SetBorderColor (int index, const Colour& borderColor)
+::SetBorderColor (int index, const Colour& borderColor)
 {
 	;
     
@@ -180,7 +180,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderBase,GetSamplerType,int,Re
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderBase,GetFilter,int,Rendering::ShaderFlags::SamplerFilter)
 
 Rendering::ShaderFlags::SamplerCoordinate Rendering::ShaderBase
-    ::GetCoordinate (int index, int dim) const
+::GetCoordinate (int index, int dim) const
 {    
     RENDERING_CLASS_IS_VALID_CONST_1;
     

@@ -1,306 +1,271 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 15:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/09 18:36)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_DETAIL_H
 
 #include "TriangulateEC.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Query/Query2Filtered.h"
 #include "Mathematics/Query/Query2Int64.h"
 #include "Mathematics/Query/Query2Integer.h"
-#include "Mathematics/Query/Query2Rational.h"  
+#include "Mathematics/Query/Query2Rational.h"
 
 #include <queue>
 
 template <typename Real>
-Mathematics::TriangulateEC<Real>
-	::TriangulateEC (const Positions& positions, QueryType queryType, Real epsilon, Indices& triangles)
+Mathematics::TriangulateEC<Real>::TriangulateEC(const Positions& positions, QueryType queryType, Real epsilon, Indices& triangles)
+    : vertices{}, cFirst{}, cLast{}, rFirst{}, rLast{}, eFirst{}, eLast{}, query{}, sPositions{}
 {
-    // No extra elements are needed for triangulating a simple polygon.
     InitializePositions(positions, queryType, epsilon, 0);
 
-    // Triangulate the unindexed polygon.
-    auto numVertices = boost::numeric_cast<int>(positions.size());
-    const auto* indices = 0;
-    InitializeVertices(numVertices, indices);
-    DoEarClipping(numVertices, indices, triangles);
+    const auto numVertices = boost::numeric_cast<int>(positions.size());
+
+    InitializeVertices(numVertices, Indices{});
+    DoEarClipping(numVertices, Indices{}, triangles);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::TriangulateEC<Real>
-	::TriangulateEC (const Positions& positions, QueryType queryType, Real epsilon, const Indices& polygon, Indices& triangles)
+Mathematics::TriangulateEC<Real>::TriangulateEC(const Positions& positions, QueryType queryType, Real epsilon, const Indices& polygon, Indices& triangles)
+    : vertices{}, cFirst{}, cLast{}, rFirst{}, rLast{}, eFirst{}, eLast{}, query{}, sPositions{}
 {
-    // No extra elements are needed for triangulating a simple polygon.
     InitializePositions(positions, queryType, epsilon, 0);
 
-    // Triangulate the indexed polygon.
-	auto numVertices = boost::numeric_cast<int>(positions.size());
-    const auto* indices = &polygon[0];
-    InitializeVertices(numVertices, indices);
-    DoEarClipping(numVertices, indices, triangles);
+    const auto numVertices = boost::numeric_cast<int>(positions.size());
+
+    InitializeVertices(numVertices, polygon);
+    DoEarClipping(numVertices, polygon, triangles);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::TriangulateEC<Real>
-	::TriangulateEC (const Positions& positions,QueryType queryType, Real epsilon, const Indices& outer,const Indices& inner, Indices& triangles)
+Mathematics::TriangulateEC<Real>::TriangulateEC(const Positions& positions, QueryType queryType, Real epsilon, const Indices& outer, const Indices& inner, Indices& triangles)
+    : vertices{}, cFirst{}, cLast{}, rFirst{}, rLast{}, eFirst{}, eLast{}, query{}, sPositions{}
 {
-    // Two extra elements are needed to duplicate the endpoints of the edge
-    // introduced to combine outer and inner polygons.
     InitializePositions(positions, queryType, epsilon, 2);
 
-    // Combine the outer polygon and the inner polygon into a simple polygon
-    // by inserting two edges connecting mutually visible vertices, one from
-    // the outer polygon and one from the inner polygon.
-    int nextElement = (int)positions.size();  // next available element
-    IndexMap indexMap;
-    Indices combined;
-    CombinePolygons(queryType, epsilon, nextElement, outer, inner, indexMap,combined);
+    const auto nextElement = boost::numeric_cast<int>(positions.size());
+    IndexMap indexMap{};
+    Indices combined{};
+    CombinePolygons(queryType, epsilon, nextElement, outer, inner, indexMap, combined);
 
-    // The combined polygon is now in the format of a simple polygon, albeit
-    // one with coincident edges.
-	auto numVertices = boost::numeric_cast<int>(positions.size());
-    const auto* indices = &combined[0];
-    InitializeVertices(numVertices, indices);
-    DoEarClipping(numVertices, indices, triangles);
+    auto numVertices = boost::numeric_cast<int>(positions.size());
 
-    // Map the duplicate indices back to the original indices.
+    InitializeVertices(numVertices, combined);
+    DoEarClipping(numVertices, combined, triangles);
+
     RemapIndices(indexMap, triangles);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::TriangulateEC<Real>
-	::TriangulateEC (const Positions& positions, QueryType queryType, Real epsilon, const Indices& outer,const IndicesArray& inners, Indices& triangles)
+Mathematics::TriangulateEC<Real>::TriangulateEC(const Positions& positions, QueryType queryType, Real epsilon, const Indices& outer, const IndicesArray& inners, Indices& triangles)
+    : vertices{}, cFirst{}, cLast{}, rFirst{}, rLast{}, eFirst{}, eLast{}, query{}, sPositions{}
 {
-    // Two extra elements per inner polygon are needed to duplicate the
-    // endpoints of the edges introduced to combine outer and inner polygons.
-	auto numInners = boost::numeric_cast<int>(inners.size());
-	auto extraElements = 2*numInners;
+    const auto numInners = boost::numeric_cast<int>(inners.size());
+    const auto extraElements = 2 * numInners;
     InitializePositions(positions, queryType, epsilon, extraElements);
 
-    // Combine the outer polygon and the inner polygons into a simple polygon
-    // by inserting two edges per inner polygon connecting mutually visible
-    // vertices.
-	auto nextElement = boost::numeric_cast<int>(positions.size());
-    IndexMap indexMap;
-    Indices combined;
+    auto nextElement = boost::numeric_cast<int>(positions.size());
+    IndexMap indexMap{};
+    Indices combined{};
     ProcessOuterAndInners(queryType, epsilon, outer, inners, nextElement, indexMap, combined);
 
-    // The combined polygon is now in the format of a simple polygon, albeit
-    // with coincident edges.
-	auto numVertices = boost::numeric_cast<int>(combined.size());
-    const int* indices = &combined[0];
-    InitializeVertices(numVertices, indices);
-    DoEarClipping(numVertices, indices, triangles);
+    const auto numVertices = boost::numeric_cast<int>(combined.size());
 
-    // Map the duplicate indices back to the original indices.
+    InitializeVertices(numVertices, combined);
+    DoEarClipping(numVertices, combined, triangles);
+
     RemapIndices(indexMap, triangles);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::TriangulateEC<Real>
-	::TriangulateEC (const Positions& positions,QueryType queryType, Real epsilon, const Tree* tree, Indices& triangles)
+Mathematics::TriangulateEC<Real>::TriangulateEC(const Positions& positions, QueryType queryType, Real epsilon, const TreeSharedPtr& tree, Indices& triangles)
+    : vertices{}, cFirst{}, cLast{}, rFirst{}, rLast{}, eFirst{}, eLast{}, query{}, sPositions{}
 {
-    // Two extra elements per inner polygon are needed to duplicate the
-    // endpoints of the edges introduced to combine outer and inner polygons.
-	auto extraElements = GetExtraElements(tree);
+    const auto extraElements = GetExtraElements(tree);
     InitializePositions(positions, queryType, epsilon, extraElements);
 
-	auto nextElement = boost::numeric_cast<int>(positions.size());
-    IndexMap indexMap;
+    auto nextElement = boost::numeric_cast<int>(positions.size());
+    IndexMap indexMap{};
 
-    std::queue<const Tree*> treeQueue;
-    treeQueue.push(tree);
+    std::queue<ConstTreeSharedPtr> treeQueue{};
+    treeQueue.emplace(tree);
+
     while (treeQueue.size() > 0)
     {
-        const auto* outerNode = treeQueue.front();
+        const auto outerNode = treeQueue.front();
         treeQueue.pop();
 
-		auto numChildren = boost::numeric_cast<int>(outerNode->Child.size());
-        int numVertices;
-        const int* indices;
+        auto numChildren = boost::numeric_cast<int>(outerNode->child.size());
 
         if (numChildren == 0)
         {
-            // The outer polygon is a simple polygon (no nested inner
-            // polygons).  Triangulate the simple polygon.
-            numVertices = (int)outerNode->Polygon.size();
-            indices = &outerNode->Polygon[0];
-            InitializeVertices(numVertices, indices);
-            DoEarClipping(numVertices, indices, triangles);
+            auto numVertices = boost::numeric_cast<int>(outerNode->polygon.size());
+
+            InitializeVertices(numVertices, outerNode->polygon);
+            DoEarClipping(numVertices, outerNode->polygon, triangles);
         }
         else
         {
-            // Place the next level of outer polygon nodes on the queue for
-            // triangulation.
-            std::vector<std::vector<int>*> inners(numChildren);
+            std::vector<std::vector<int>> inners(numChildren);
             for (auto i = 0; i < numChildren; ++i)
             {
-                const Tree* innerNode = outerNode->Child[i];
-                inners[i] = (std::vector<int>*)&innerNode->Polygon;
-                int numGrandChildren = (int)innerNode->Child.size();
+                const auto innerNode = outerNode->child.at(i);
+                inners.at(i) = innerNode->polygon;
+                const auto numGrandChildren = boost::numeric_cast<int>(innerNode->child.size());
                 for (auto j = 0; j < numGrandChildren; ++j)
                 {
-                    treeQueue.push(innerNode->Child[j]);
+                    treeQueue.push(innerNode->child.at(j));
                 }
             }
 
-            // Combine the outer polygon and the inner polygons into a
-            // simple polygon by inserting two edges per inner polygon
-            // connecting mutually visible vertices.
-            Indices combined;
-            ProcessOuterAndInners(queryType, epsilon, outerNode->Polygon, inners, nextElement, indexMap, combined);
+            Indices combined{};
+            ProcessOuterAndInners(queryType, epsilon, outerNode->polygon, inners, nextElement, indexMap, combined);
 
-            // The combined polygon is now in the format of a simple polygon,
-            // albeit with coincident edges.
-            numVertices = boost::numeric_cast<int>(combined.size());
-            indices = &combined[0];
-            InitializeVertices(numVertices, indices);
-            DoEarClipping(numVertices, indices, triangles);
+            auto numVertices = boost::numeric_cast<int>(combined.size());
+
+            InitializeVertices(numVertices, combined);
+            DoEarClipping(numVertices, combined, triangles);
         }
     }
 
-    // Map the duplicate indices back to the original indices.
     RemapIndices(indexMap, triangles);
 }
 
-template <typename Real>
-Mathematics::TriangulateEC<Real>
-	::~TriangulateEC ()
-{
-    DELETE0(mQuery);
-}
+#ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InitializePositions (const Positions& positions, QueryType queryType, Real epsilon, int extraElements)
+bool Mathematics::TriangulateEC<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::TriangulateEC<Real>::InitializePositions(const Positions& positions, QueryType queryType, Real epsilon, int extraElements)
 {
     auto numPositions = boost::numeric_cast<int>(positions.size());
-    MATHEMATICS_ASSERTION_0(numPositions >= 3, "Must have at least one triangle\n");
-	auto numPosExtras = numPositions + extraElements;
-    mSPositions.resize(numPosExtras);
+    MATHEMATICS_ASSERTION_0(numPositions >= 3, "必须至少是个三角形。\n");
+    const auto numPosExtras = numPositions + extraElements;
+    sPositions.resize(numPosExtras);
 
     if (queryType == QueryType::Filtered)
     {
-        MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= Math::GetValue(1),"Epsilon must be in [0,1]\n");
+        MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= Math<Real>::GetValue(1), "Epsilon 必须在0和1之间。\n");
     }
-
-    Vector2<Real> minValue, maxValue, range;
-    Real scale, rmax;
-    int i;
 
     switch (queryType)
     {
-    case QueryType::Int64:
-    {
-        // Transform the vertices to the square [0,2^{20}]^2.
-		auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
-		minValue = aabb.GetMinPoint();
-		maxValue = aabb.GetMaxPoint();
-      
-        range = maxValue - minValue;
-        rmax = (range[0] >= range[1] ? range[0] : range[1]);
-        scale = ((Real)(1 << 20))/rmax;
-        for (i = 0; i < numPositions; ++i)
+        case QueryType::Int64:
         {
-            mSPositions[i] = (positions[i] - minValue)*scale;
+            const auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
+            const auto minValue = aabb.GetMinPoint();
+            const auto maxValue = aabb.GetMaxPoint();
+
+            auto range = maxValue - minValue;
+            auto rmax = (range[0] >= range[1] ? range[0] : range[1]);
+            auto scale = Math<Real>::GetValue(1 << 20) / rmax;
+            for (auto i = 0; i < numPositions; ++i)
+            {
+                sPositions.at(i) = (positions.at(i) - minValue) * scale;
+            }
+
+            query = std::make_shared<Query2Int64<Real>>(sPositions);
+            return;
         }
 
-      //  mQuery = NEW0 Query2Int64<Real>(mSPositions);
-        return;
-    }
-
-    case QueryType::Interger:
-    {
-        // Transform the vertices to the square [0,2^{24}]^2.
-		auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
-		minValue = aabb.GetMinPoint();
-		maxValue = aabb.GetMaxPoint();
-        range = maxValue - minValue;
-        rmax = (range[0] >= range[1] ? range[0] : range[1]);
-        scale = ((Real)(1 << 24))/rmax;
-        for (i = 0; i < numPositions; ++i)
+        case QueryType::Interger:
         {
-            mSPositions[i] = (positions[i] - minValue)*scale;
+            const auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
+            const auto minValue = aabb.GetMinPoint();
+            const auto maxValue = aabb.GetMaxPoint();
+            auto range = maxValue - minValue;
+            auto rmax = (range[0] >= range[1] ? range[0] : range[1]);
+            auto scale = (Math<Real>::GetValue(1 << 24)) / rmax;
+            for (auto i = 0; i < numPositions; ++i)
+            {
+                sPositions.at(i) = (positions.at(i) - minValue) * scale;
+            }
+
+            query = std::make_shared<Query2Integer<Real>>(sPositions);
+            return;
         }
 
-     //   mQuery = NEW0 Query2Integer<Real>(mSPositions);
-        return;
-    }
-
-    case QueryType::Real:
-    {
-        // No transformation of the input data.  Make a copy that can be
-        // expanded when triangulating polygons with holes.
-        for (i = 0; i < numPositions; ++i)
+        case QueryType::Real:
         {
-            mSPositions[i] = positions[i];
+            for (auto i = 0; i < numPositions; ++i)
+            {
+                sPositions.at(i) = positions.at(i);
+            }
+
+            query = std::make_shared<Query2>(sPositions);
+            return;
         }
 
-     //   mQuery = NEW0 Query2<Real>(mSPositions);
-        return;
-    }
-
-    case QueryType::Rational:
-    {
-        // No transformation of the input data.  Make a copy that can be
-        // expanded when triangulating polygons with holes.
-        for (i = 0; i < numPositions; ++i)
+        case QueryType::Rational:
         {
-            mSPositions[i] = positions[i];
+            for (auto i = 0; i < numPositions; ++i)
+            {
+                sPositions.at(i) = positions.at(i);
+            }
+
+            query = std::make_shared<Query2Rational<Real>>(sPositions);
+            return;
         }
 
-     //   mQuery = NEW0 Query2Rational<Real>(mSPositions);
-        return;
-    }
-
-    case QueryType::Filtered:
-    {
-        // No transformation of the input data.  Make a copy that can be
-        // expanded when triangulating polygons with holes.
-        for (i = 0; i < numPositions; ++i)
+        case QueryType::Filtered:
         {
-            mSPositions[i] = positions[i];
-        }
+            for (auto i = 0; i < numPositions; ++i)
+            {
+                sPositions.at(i) = positions.at(i);
+            }
 
-      //  mQuery = NEW0 Query2Filtered<Real>(mSPositions, epsilon);
-        return;
-    }
+            query = std::make_shared<Query2Filtered<Real>>(sPositions, epsilon);
+            return;
+        }
     }
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InitializeVertices (int numVertices, const int* indices)
+void Mathematics::TriangulateEC<Real>::InitializeVertices(int numVertices, const Indices& indices)
 {
-    mVertices.clear();
-    mVertices.resize(numVertices);
-    mCFirst = -1;
-    mCLast = -1;
-    mRFirst = -1;
-    mRLast = -1;
-    mEFirst = -1;
-    mELast = -1;
+    vertices.clear();
+    vertices.resize(numVertices);
+    cFirst = -1;
+    cLast = -1;
+    rFirst = -1;
+    rLast = -1;
+    eFirst = -1;
+    eLast = -1;
 
-    // Create a circular list of the polygon vertices for dynamic removal of
-    // vertices.
-	auto numVerticesM1 = numVertices - 1;
-    int i;
-    for (i = 0; i <= numVerticesM1; ++i)
+    const auto numVerticesM1 = numVertices - 1;
+
+    for (auto i = 0; i <= numVerticesM1; ++i)
     {
-        Vertex& vertex = V(i);
-        vertex.Index = (indices ? indices[i] : i);
-        vertex.VPrev = (i > 0 ? i-1 : numVerticesM1);
-        vertex.VNext = (i < numVerticesM1 ? i+1 : 0);
+        Vertex& vertex = Get(i);
+        vertex.index = (!indices.empty() ? indices.at(i) : i);
+        vertex.vPrev = (i > 0 ? i - 1 : numVerticesM1);
+        vertex.vNext = (i < numVerticesM1 ? i + 1 : 0);
     }
 
-    // Create a circular list of the polygon vertices for dynamic removal of
-    // vertices.  Keep track of two linear sublists, one for the convex
-    // vertices and one for the reflex vertices.  This is an O(N) process
-    // where N is the number of polygon vertices.
-    for (i = 0; i <= numVerticesM1; ++i)
+    for (auto i = 0; i <= numVerticesM1; ++i)
     {
         if (IsConvex(i))
         {
@@ -314,83 +279,68 @@ void Mathematics::TriangulateEC<Real>
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::DoEarClipping (int numVertices, const int* indices, Indices& triangles)
+void Mathematics::TriangulateEC<Real>::DoEarClipping(int numVertices, const Indices& indices, Indices& triangles)
 {
-    // If the polygon is convex, just create a triangle fan.
-    int i;
-    if (mRFirst == -1)
+    if (rFirst == -1)
     {
-        int numVerticesM1 = numVertices - 1;
-        if (indices)
+        const auto numVerticesM1 = numVertices - 1;
+        if (!indices.empty())
         {
-            for (i = 1; i < numVerticesM1; ++i)
+            for (auto i = 1; i < numVerticesM1; ++i)
             {
-                triangles.push_back(indices[0]);
-                triangles.push_back(indices[i]);
-                triangles.push_back(indices[i + 1]);
+                triangles.emplace_back(indices.at(0));
+                triangles.emplace_back(indices.at(i));
+
+                const auto next = i + 1;
+                triangles.emplace_back(indices.at(next));
             }
         }
         else
         {
-            for (i = 1; i < numVerticesM1; ++i)
+            for (auto i = 1; i < numVerticesM1; ++i)
             {
-                triangles.push_back(0);
-                triangles.push_back(i);
-                triangles.push_back(i + 1);
+                triangles.emplace_back(0);
+                triangles.emplace_back(i);
+                triangles.emplace_back(i + 1);
             }
         }
         return;
     }
 
-    // Identify the ears and build a circular list of them.  Let V0, V1, and
-    // V2 be consecutive vertices forming a triangle T.  The vertex V1 is an
-    // ear if no other vertices of the polygon lie inside T.  Although it is
-    // enough to show that V1 is not an ear by finding at least one other
-    // vertex inside T, it is sufficient to search only the reflex vertices.
-    // This is an O(C*Real) process, where C is the number of convex vertices and
-    // Real is the number of reflex vertices with N = C+Real.  The order is O(N^2),
-    // for example when C = Real = N/2.
-    for (i = mCFirst; i != -1; i = V(i).SNext)
+    for (auto i = cFirst; i != -1; i = Get(i).sNext)
     {
         if (IsEar(i))
         {
             InsertEndE(i);
         }
     }
-    V(mEFirst).EPrev = mELast;
-    V(mELast).ENext = mEFirst;
+    Get(eFirst).ePrev = eLast;
+    Get(eLast).eNext = eFirst;
 
-    // Remove the ears, one at a time.
-	auto bRemoveAnEar = true;
+    auto bRemoveAnEar = true;
     while (bRemoveAnEar)
     {
-        // Add the triangle with the ear to the output list of triangles.
-		auto iVPrev = V(mEFirst).VPrev;
-		auto iVNext = V(mEFirst).VNext;
-        triangles.push_back(V(iVPrev).Index);
-        triangles.push_back(V(mEFirst).Index);
-        triangles.push_back(V(iVNext).Index);
+        auto iVPrev = Get(eFirst).vPrev;
+        auto iVNext = Get(eFirst).vNext;
+        triangles.emplace_back(Get(iVPrev).index);
+        triangles.emplace_back(Get(eFirst).index);
+        triangles.emplace_back(Get(iVNext).index);
 
-        // Remove the vertex corresponding to the ear.
-        RemoveV(mEFirst);
+        RemoveV(eFirst);
         if (--numVertices == 3)
         {
-            // Only one triangle remains, just remove the ear and copy it.
-            mEFirst = RemoveE(mEFirst);
-            iVPrev = V(mEFirst).VPrev;
-            iVNext = V(mEFirst).VNext;
-            triangles.push_back(V(iVPrev).Index);
-            triangles.push_back(V(mEFirst).Index);
-            triangles.push_back(V(iVNext).Index);
+            eFirst = RemoveE(eFirst);
+            iVPrev = Get(eFirst).vPrev;
+            iVNext = Get(eFirst).vNext;
+            triangles.emplace_back(Get(iVPrev).index);
+            triangles.emplace_back(Get(eFirst).index);
+            triangles.emplace_back(Get(iVNext).index);
             bRemoveAnEar = false;
             continue;
         }
 
-        // Removal of the ear can cause an adjacent vertex to become an ear
-        // or to stop being an ear.
-        Vertex& VPrev = V(iVPrev);
-        if (VPrev.IsEar)
+        const auto& VPrev = Get(iVPrev);
+        if (VPrev.isEar)
         {
             if (!IsEar(iVPrev))
             {
@@ -399,7 +349,7 @@ void Mathematics::TriangulateEC<Real>
         }
         else
         {
-            bool wasReflex = !VPrev.IsConvex;
+            const auto wasReflex = !VPrev.isConvex;
             if (IsConvex(iVPrev))
             {
                 if (wasReflex)
@@ -414,8 +364,8 @@ void Mathematics::TriangulateEC<Real>
             }
         }
 
-		auto& VNext = V(iVNext);
-        if (VNext.IsEar)
+        const auto& VNext = Get(iVNext);
+        if (VNext.isEar)
         {
             if (!IsEar(iVNext))
             {
@@ -424,7 +374,7 @@ void Mathematics::TriangulateEC<Real>
         }
         else
         {
-			auto wasReflex = !VNext.IsConvex;
+            const auto wasReflex = !VNext.isConvex;
             if (IsConvex(iVNext))
             {
                 if (wasReflex)
@@ -439,115 +389,104 @@ void Mathematics::TriangulateEC<Real>
             }
         }
 
-        // Remove the ear.
-        mEFirst = RemoveE(mEFirst);
+        eFirst = RemoveE(eFirst);
     }
 }
 
 template <typename Real>
-int Mathematics::TriangulateEC<Real>
-	::TriangleQuery (const Vector2<Real>& position, QueryType queryType, Real epsilon, const Vector2<Real> triangle[3]) const
+int Mathematics::TriangulateEC<Real>::TriangleQuery(const Vector2& position, QueryType queryType, Real epsilon, const std::array<Vector2, 3>& triangle) const
 {
-	std::vector<Vector2<Real> > triangleVec;
-	triangleVec.push_back(triangle[0]);
-	triangleVec.push_back(triangle[1]);
-	triangleVec.push_back(triangle[2]);
+    std::vector<Vector2> triangleVec{ triangle.begin(), triangle.end() };
 
     switch (queryType)
     {
-    case QueryType::Int64:
-        return System::EnumCastUnderlying(Query2Int64<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
+        case QueryType::Int64:
+            return System::EnumCastUnderlying(Query2Int64<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
-    case QueryType::Interger:
-        return System::EnumCastUnderlying(Query2Integer<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
+        case QueryType::Interger:
+            return System::EnumCastUnderlying(Query2Integer<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
-    case QueryType::Real:
-        return System::EnumCastUnderlying(Query2<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
+        case QueryType::Real:
+            return System::EnumCastUnderlying(Query2(triangleVec).ToTriangle(position, 0, 1, 2));
 
-    case QueryType::Rational:
-        return System::EnumCastUnderlying(Query2Rational<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
+        case QueryType::Rational:
+            return System::EnumCastUnderlying(Query2Rational<Real>(triangleVec).ToTriangle(position, 0, 1, 2));
 
-    case QueryType::Filtered:
-        return System::EnumCastUnderlying(Query2Filtered<Real>(triangleVec,epsilon).ToTriangle(position, 0, 1, 2));
+        case QueryType::Filtered:
+            return System::EnumCastUnderlying(Query2Filtered<Real>(triangleVec, epsilon).ToTriangle(position, 0, 1, 2));
     }
 
     return 1;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::CombinePolygons (QueryType queryType, Real epsilon, int nextElement, const Indices& outer,
-                       const Indices& inner, IndexMap& indexMap, Indices& combined)
+void Mathematics::TriangulateEC<Real>::CombinePolygons(QueryType queryType,
+                                                       Real epsilon,
+                                                       int nextElement,
+                                                       const Indices& outer,
+                                                       const Indices& inner,
+                                                       IndexMap& indexMap,
+                                                       Indices& combined)
 {
-	auto numOuterVertices = boost::numeric_cast<int>(outer.size());
-	auto numInnerVertices = (int)inner.size();
+    auto numOuterVertices = boost::numeric_cast<int>(outer.size());
+    auto numInnerVertices = boost::numeric_cast<int>(inner.size());
 
-    // Locate the inner-polygon vertex of maximum x-value, call this vertex M.
-    Real xmax = mSPositions[inner[0]][0];
-    int xmaxIndex = 0;
-    int i;
-    for (i = 1; i < numInnerVertices; ++i)
+    auto xmax = sPositions.at(inner.at(0))[0];
+    auto xmaxIndex = 0;
+
+    for (auto i = 1; i < numInnerVertices; ++i)
     {
-        Real x = mSPositions[inner[i]][0];
+        Real x = sPositions.at(inner.at(i))[0];
         if (x > xmax)
         {
             xmax = x;
             xmaxIndex = i;
         }
     }
-	auto M = mSPositions[inner[xmaxIndex]];
+    auto m = sPositions.at(inner.at(xmaxIndex));
 
-    // Find the edge whose intersection Intr with the ray M+t*(1,0) minimizes
-    // the ray parameter t >= 0.
-	Vector2<Real> intr{ Math<Real>::maxReal, M[1] };
-    int v0min = -1, v1min = -1, endMin = -1;
-    int i0, i1;
-	auto s = Math<Real>::maxReal;
-	auto t = Math<Real>::maxReal;
-    for (i0 = numOuterVertices - 1, i1 = 0; i1 < numOuterVertices; i0 = i1++)
+    Vector2 intr{ Math<Real>::maxReal, m[1] };
+    auto v0min = -1;
+    auto v1min = -1;
+    auto endMin = -1;
+
+    auto s = Math<Real>::maxReal;
+    auto t = Math<Real>::maxReal;
+    for (auto i0 = numOuterVertices - 1, i1 = 0; i1 < numOuterVertices; i0 = i1++)
     {
-        // Only consider edges for which the first vertex is below (or on)
-        // the ray and the second vertex is above (or on) the ray.
-		auto diff0 = mSPositions[outer[i0]] - M;
+        auto diff0 = sPositions.at(outer.at(i0)) - m;
         if (diff0[1] > Math<Real>::GetValue(0))
         {
             continue;
         }
-		auto diff1 = mSPositions[outer[i1]] - M;
+        auto diff1 = sPositions.at(outer.at(i1)) - m;
         if (diff1[1] < Math<Real>::GetValue(0))
         {
             continue;
         }
 
-        // At this time, diff0.y <= 0 and diff1.y >= 0.
-        int currentEndMin = -1;
+        auto currentEndMin = -1;
         if (diff0[1] < Math<Real>::GetValue(0))
         {
             if (diff1[1] > Math<Real>::GetValue(0))
             {
-                // The intersection of the edge and ray occurs at an interior
-                // edge point.
-                s = diff0[1]/(diff0[1] - diff1[1]);
-                t = diff0[0] + s*(diff1[0] - diff0[0]);
+                s = diff0[1] / (diff0[1] - diff1[1]);
+                t = diff0[0] + s * (diff1[0] - diff0[0]);
             }
-            else  // diff1.y == 0
+            else
             {
-                // The vertex Outer[i1] is the intersection of the edge and
-                // the ray.
                 t = diff1[0];
                 currentEndMin = i1;
             }
         }
-        else  // diff0.y == 0
+        else
         {
             if (diff1[1] > Math<Real>::GetValue(0))
             {
-                // The vertex Outer[i0] is the intersection of the edge and
-                // the ray;
                 t = diff0[0];
                 currentEndMin = i0;
             }
-            else  // diff1.y == 0
+            else
             {
                 if (diff0[0] < diff1[0])
                 {
@@ -569,38 +508,26 @@ void Mathematics::TriangulateEC<Real>
             v1min = i1;
             if (currentEndMin == -1)
             {
-                // The current closest point is an edge-interior point.
                 endMin = -1;
             }
             else
             {
-                // The current closest point is a vertex.
                 endMin = currentEndMin;
             }
         }
         else if (t == intr[0])
         {
-            // The current closest point is a vertex shared by multiple edges;
-            // thus, endMin and currentMin refer to the same point.
-            MATHEMATICS_ASSERTION_0(endMin != -1 && currentEndMin != -1, "Unexpected condition\n");
+            MATHEMATICS_ASSERTION_0(endMin != -1 && currentEndMin != -1, "意外情况\n");
 
-            // We need to select the edge closest to M.  The previous closest
-            // edge is <outer[v0min],outer[v1min]>.  The current candidate is
-            // <outer[i0],outer[i1]>.
-			auto shared = mSPositions[outer[i1]];
-            
-            // For the previous closest edge, endMin refers to a vertex of
-            // the edge.  Get the index of the other vertex.
-			auto other = (endMin == v0min ? v1min : v0min);
+            const auto& shared = sPositions.at(outer.at(i1));
 
-            // The new edge is closer if the other vertex of the old edge is
-            // left-of the new edge.
-            diff0 = mSPositions[outer[i0]] - shared;
-            diff1 = mSPositions[outer[other]] - shared;
-			auto dotperp = Vector2Tools<Real>::DotPerp(diff0,diff1);
+            const auto other = (endMin == v0min ? v1min : v0min);
+
+            diff0 = sPositions.at(outer.at(i0)) - shared;
+            diff1 = sPositions.at(outer.at(other)) - shared;
+            auto dotperp = Vector2Tools<Real>::DotPerp(diff0, diff1);
             if (dotperp > Math<Real>::GetValue(0))
             {
-                // The new edge is closer to M.
                 v0min = i0;
                 v1min = i1;
                 endMin = currentEndMin;
@@ -608,77 +535,57 @@ void Mathematics::TriangulateEC<Real>
         }
     }
 
-    // The intersection intr[0] stored only the t-value of the ray.  The
-    // actual point is (mx,my)+t*(1,0), so intr[0] must be adjusted.
-    intr[0] += M[0];
+    intr[0] += m[0];
 
-    int maxCosIndex;
+    auto maxCosIndex = 0;
     if (endMin == -1)
     {
-        // If you reach this assert, there is a good chance that you have two
-        // inner polygons that share a vertex or an edge.
-        MATHEMATICS_ASSERTION_0(v0min >= 0 && v1min >= 0, "Unexpected condition\n");
+        MATHEMATICS_ASSERTION_0(v0min >= 0 && v1min >= 0, "意外情况\n");
 
-        // Select one of Outer[v0min] and Outer[v1min] that has an x-value
-        // larger than M.x, call this vertex P.  The triangle <M,I,P> must
-        // contain an outer-polygon vertex that is visible to M, which is
-        // possibly P itself.
-        Vector2<Real> sTriangle[3];  // <P,M,I> or <P,I,M>
-        int pIndex;
-        if (mSPositions[outer[v0min]][0] > mSPositions[outer[v1min]][0])
+        std::array<Vector2, 3> sTriangle{};
+        auto pIndex = 0;
+        if (sPositions.at(outer.at(v0min))[0] > sPositions.at(outer.at(v1min))[0])
         {
-            sTriangle[0] = mSPositions[outer[v0min]];
-            sTriangle[1] = intr;
-            sTriangle[2] = M;
+            sTriangle.at(0) = sPositions.at(outer.at(v0min));
+            sTriangle.at(1) = intr;
+            sTriangle.at(2) = m;
             pIndex = v0min;
         }
         else
         {
-            sTriangle[0] = mSPositions[outer[v1min]];
-            sTriangle[1] = M;
-            sTriangle[2] = intr;
+            sTriangle.at(0) = sPositions.at(outer.at(v1min));
+            sTriangle.at(1) = m;
+            sTriangle.at(2) = intr;
             pIndex = v1min;
         }
 
-        // If any outer-polygon vertices other than P are inside the triangle
-        // <M,I,P>, then at least one of these vertices must be a reflex
-        // vertex.  It is sufficient to locate the reflex vertex Real (if any)
-        // in <M,I,P> that minimizes the angle between Real-M and (1,0).  The
-        // data member mQuery is used for the reflex query.
-		auto diff = sTriangle[0] - M;
-		auto maxSqrLen = Vector2Tools<Real>::GetLengthSquared(diff);
-		auto maxCos = diff[0]*diff[0]/maxSqrLen;
+        auto diff = sTriangle.at(0) - m;
+        auto maxSqrLen = Vector2Tools<Real>::GetLengthSquared(diff);
+        auto maxCos = diff[0] * diff[0] / maxSqrLen;
         maxCosIndex = pIndex;
-        for (i = 0; i < numOuterVertices; ++i)
+        for (auto i = 0; i < numOuterVertices; ++i)
         {
             if (i == pIndex)
             {
                 continue;
             }
 
-			auto curr = outer[i];
-			auto prev = outer[(i + numOuterVertices - 1) % numOuterVertices];
-			auto next = outer[(i + 1) % numOuterVertices];
-            if (System::EnumCastUnderlying(mQuery->ToLine(curr, prev, next)) <= 0  &&  TriangleQuery(mSPositions[curr], queryType, epsilon, sTriangle) <= 0)
+            auto curr = outer.at(i);
+            auto prev = outer.at((i + numOuterVertices - 1) % numOuterVertices);
+            auto next = outer.at((i + 1) % numOuterVertices);
+            if (System::EnumCastUnderlying(query->ToLine(curr, prev, next)) <= 0 && TriangleQuery(sPositions.at(curr), queryType, epsilon, sTriangle) <= 0)
             {
-                // The vertex is reflex and inside the <M,I,P> triangle.
-                diff = mSPositions[curr] - M;
-				auto sqrLen = Vector2Tools<Real>::GetLengthSquared(diff);
-				auto cs = diff[0]*diff[0]/sqrLen;
+                diff = sPositions.at(curr) - m;
+                auto sqrLen = Vector2Tools<Real>::GetLengthSquared(diff);
+                auto cs = diff[0] * diff[0] / sqrLen;
                 if (cs > maxCos)
                 {
-                    // The reflex vertex forms a smaller angle with the
-                    // positive x-axis, so it becomes the new visible
-                    // candidate.
                     maxSqrLen = sqrLen;
                     maxCos = cs;
                     maxCosIndex = i;
                 }
                 else if (cs == maxCos && sqrLen < maxSqrLen)
                 {
-                    // The reflex vertex has angle equal to the current
-                    // minimum but the length is smaller, so it becomes the
-                    // new visible candidate.
                     maxSqrLen = sqrLen;
                     maxCosIndex = i;
                 }
@@ -690,30 +597,24 @@ void Mathematics::TriangulateEC<Real>
         maxCosIndex = endMin;
     }
 
-    // The visible vertices are Position[Inner[xmaxIndex]] and
-    // Position[Outer[maxCosIndex]].  Two coincident edges with these
-    // endpoints are inserted to connect the outer and inner polygons into a
-    // simple polygon.  Each of the two Position[] values must be duplicated,
-    // because the original might be convex (or reflex) and the duplicate is
-    // reflex (or convex).  The ear-clipping algorithm needs to distinguish
-    // between them.
-    combined.resize(numOuterVertices + numInnerVertices + 2);
-    int cIndex = 0;
-    for (i = 0; i <= maxCosIndex; ++i, ++cIndex)
+    const auto combineSize = numOuterVertices + numInnerVertices + 2;
+    combined.resize(combineSize);
+    auto cIndex = 0;
+    for (auto i = 0; i <= maxCosIndex; ++i, ++cIndex)
     {
-        combined[cIndex] = outer[i];
+        combined.at(cIndex) = outer.at(i);
     }
 
-    for (i = 0; i < numInnerVertices; ++i, ++cIndex)
+    for (auto i = 0; i < numInnerVertices; ++i, ++cIndex)
     {
-		auto j = (xmaxIndex + i) % numInnerVertices;
-        combined[cIndex] = inner[j];
+        auto j = (xmaxIndex + i) % numInnerVertices;
+        combined.at(cIndex) = inner.at(j);
     }
 
-	auto innerIndex = inner[xmaxIndex];
-    mSPositions[nextElement] = mSPositions[innerIndex];
-    combined[cIndex] = nextElement;
-	auto iter = indexMap.find(innerIndex);
+    auto innerIndex = inner.at(xmaxIndex);
+    sPositions.at(nextElement) = sPositions.at(innerIndex);
+    combined.at(cIndex) = nextElement;
+    auto iter = indexMap.find(innerIndex);
     if (iter != indexMap.end())
     {
         innerIndex = iter->second;
@@ -722,9 +623,9 @@ void Mathematics::TriangulateEC<Real>
     ++cIndex;
     ++nextElement;
 
-	auto outerIndex = outer[maxCosIndex];
-    mSPositions[nextElement] = mSPositions[outerIndex];
-    combined[cIndex] = nextElement;
+    auto outerIndex = outer.at(maxCosIndex);
+    sPositions.at(nextElement) = sPositions.at(outerIndex);
+    combined.at(cIndex) = nextElement;
     iter = indexMap.find(outerIndex);
     if (iter != indexMap.end())
     {
@@ -734,298 +635,259 @@ void Mathematics::TriangulateEC<Real>
     ++cIndex;
     ++nextElement;
 
-    for (i = maxCosIndex + 1; i < numOuterVertices; ++i, ++cIndex)
+    for (auto i = maxCosIndex + 1; i < numOuterVertices; ++i, ++cIndex)
     {
-        combined[cIndex] = outer[i];
+        combined.at(cIndex) = outer.at(i);
     }
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::ProcessOuterAndInners (QueryType queryType, Real epsilon, const Indices& outer, const IndicesArray& inners,int& nextElement, IndexMap& indexMap, Indices& combined)
+void Mathematics::TriangulateEC<Real>::ProcessOuterAndInners(QueryType queryType, Real epsilon, const Indices& outer, const IndicesArray& inners, int& nextElement, IndexMap& indexMap, Indices& combined)
 {
-    // Sort the inner polygons based on maximum x-values.
     auto numInners = boost::numeric_cast<int>(inners.size());
-    std::vector<std::pair<Real,int> > pairs(numInners);
-    int i;
-    for (i = 0; i < numInners; ++i)
+    std::vector<std::pair<Real, int>> pairs(numInners);
+
+    for (auto i = 0; i < numInners; ++i)
     {
-        const auto& inner = *inners[i];
-		auto numVertices = boost::numeric_cast<int>(inner.size());
-        Real xmax = mSPositions[inner[0]][0];
+        const auto& inner = inners.at(i);
+        auto numVertices = boost::numeric_cast<int>(inner.size());
+        auto xmax = sPositions.at(inner.at(0))[0];
         for (auto j = 1; j < numVertices; ++j)
         {
-			auto x = mSPositions[inner[j]][0];
+            auto x = sPositions.at(inner.at(j))[0];
             if (x > xmax)
             {
                 xmax = x;
             }
         }
-        pairs[i].first = xmax;
-        pairs[i].second = i;
+        pairs.at(i).first = xmax;
+        pairs.at(i).second = i;
     }
-    std::sort(pairs.begin(),pairs.end());
+    std::sort(pairs.begin(), pairs.end());
 
-    // Merge the inner polygons with the outer polygon.
-	auto currentOuter = outer;
-    for (i = numInners - 1; i >= 0; --i)
+    auto currentOuter = outer;
+    for (auto i = numInners - 1; i >= 0; --i)
     {
-        const auto& inner = *inners[pairs[i].second];
-        Indices currentCombined;
+        const auto& inner = inners.at(pairs.at(i).second);
+        Indices currentCombined{};
         CombinePolygons(queryType, epsilon, nextElement, currentOuter, inner, indexMap, currentCombined);
         currentOuter = currentCombined;
         nextElement += 2;
     }
 
-    for (auto i = 0u; i <  currentOuter.size(); ++i)
+    for (auto i = 0u; i < currentOuter.size(); ++i)
     {
-        combined.push_back(currentOuter[i]);
+        combined.push_back(currentOuter.at(i));
     }
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::RemapIndices (const IndexMap& indexMap,  Indices& triangles) const
+void Mathematics::TriangulateEC<Real>::RemapIndices(const IndexMap& indexMap, Indices& triangles) const
 {
-    // The triangulation includes indices to the duplicated outer and inner
-    // vertices.  These indices must be mapped back to the original ones.
     const auto numTriangles = boost::numeric_cast<int>(triangles.size());
     for (auto i = 0; i < numTriangles; ++i)
     {
-		auto iter = indexMap.find(triangles[i]);
+        const auto iter = indexMap.find(triangles.at(i));
         if (iter != indexMap.end())
         {
-            triangles[i] = iter->second;
+            triangles.at(i) = iter->second;
         }
     }
 }
 
-
-
-// Vertex list handling
-
 template <typename Real>
-typename Mathematics::TriangulateEC<Real>::Vertex& Mathematics::TriangulateEC<Real>
-	::V (int i)
+typename Mathematics::TriangulateEC<Real>::Vertex& Mathematics::TriangulateEC<Real>::Get(int i)
 {
-    return mVertices[i];
+    return vertices.at(i);
 }
 
 template <typename Real>
-bool Mathematics::TriangulateEC<Real>
-	::IsConvex (int i)
+bool Mathematics::TriangulateEC<Real>::IsConvex(int i)
 {
-	auto& vertex = V(i);
-	auto curr = vertex.Index;
-	auto prev = V(vertex.VPrev).Index;
-	auto next = V(vertex.VNext).Index;
-    vertex.IsConvex = (System::EnumCastUnderlying(mQuery->ToLine(curr, prev, next)) > 0);
-    return vertex.IsConvex;
+    auto& vertex = Get(i);
+    const auto curr = vertex.index;
+    const auto prev = Get(vertex.vPrev).index;
+    const auto next = Get(vertex.vNext).index;
+    vertex.isConvex = (System::EnumCastUnderlying(query->ToLine(curr, prev, next)) > 0);
+
+    return vertex.isConvex;
 }
 
 template <typename Real>
-bool Mathematics::TriangulateEC<Real>
-	::IsEar (int i)
+bool Mathematics::TriangulateEC<Real>::IsEar(int i)
 {
-	auto& vertex = V(i);
+    auto& vertex = Get(i);
 
-    if (mRFirst == -1)
+    if (rFirst == -1)
     {
-        // The remaining polygon is convex.
-        vertex.IsEar = true;
+        vertex.isEar = true;
         return true;
     }
 
-    // Search the reflex vertices and test if any are in the triangle
-    // <V[prev],V[curr],V[next]>.
-	auto prev = V(vertex.VPrev).Index;
-	auto curr = vertex.Index;
-	auto next = V(vertex.VNext).Index;
-    vertex.IsEar = true;
-    for (auto j = mRFirst; j != -1; j = V(j).SNext)
+    const auto prev = Get(vertex.vPrev).index;
+    const auto curr = vertex.index;
+    const auto next = Get(vertex.vNext).index;
+    vertex.isEar = true;
+    for (auto j = rFirst; j != -1; j = Get(j).sNext)
     {
-        // Check if the test vertex is already one of the triangle vertices.
-        if (j == vertex.VPrev || j == i || j == vertex.VNext)
+        if (j == vertex.vPrev || j == i || j == vertex.vNext)
         {
             continue;
         }
 
-        // V[j] has been ruled out as one of the original vertices of the
-        // triangle <V[prev],V[curr],V[next]>.  When triangulating polygons
-        // with holes, V[j] might be a duplicated vertex, in which case it
-        // does not affect the earness of V[curr].
-		auto test = V(j).Index;
-        if (mSPositions[test] == mSPositions[prev]  ||  mSPositions[test] == mSPositions[curr]  ||  mSPositions[test] == mSPositions[next])
+        const auto test = Get(j).index;
+        if (sPositions.at(test) == sPositions.at(prev) || sPositions.at(test) == sPositions.at(curr) || sPositions.at(test) == sPositions.at(next))
         {
             continue;
         }
 
-        // Test if the vertex is inside or on the triangle.  When it is, it
-        // causes V[curr] not to be an ear.
-        if (System::EnumCastUnderlying(mQuery->ToTriangle(test, prev, curr, next)) <= 0)
+        if (System::EnumCastUnderlying(query->ToTriangle(test, prev, curr, next)) <= 0)
         {
-            vertex.IsEar = false;
+            vertex.isEar = false;
             break;
         }
     }
 
-    return vertex.IsEar;
+    return vertex.isEar;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InsertAfterC (int i)
+void Mathematics::TriangulateEC<Real>::InsertAfterC(int i)
 {
-    if (mCFirst == -1)
+    if (cFirst == -1)
     {
-        // add first convex vertex
-        mCFirst = i;
+        cFirst = i;
     }
     else
     {
-        V(mCLast).SNext = i;
-        V(i).SPrev = mCLast;
+        Get(cLast).sNext = i;
+        Get(i).sPrev = cLast;
     }
-    mCLast = i;
+    cLast = i;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InsertAfterR (int i)
+void Mathematics::TriangulateEC<Real>::InsertAfterR(int i)
 {
-    if (mRFirst == -1)
+    if (rFirst == -1)
     {
-        // add first reflex vertex
-        mRFirst = i;
+        rFirst = i;
     }
     else
     {
-        V(mRLast).SNext = i;
-        V(i).SPrev = mRLast;
+        Get(rLast).sNext = i;
+        Get(i).sPrev = rLast;
     }
-    mRLast = i;
+    rLast = i;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InsertEndE (int i)
+void Mathematics::TriangulateEC<Real>::InsertEndE(int i)
 {
-    if (mEFirst == -1)
+    if (eFirst == -1)
     {
-        // add first ear
-        mEFirst = i;
-        mELast = i;
+        eFirst = i;
+        eLast = i;
     }
-    V(mELast).ENext = i;
-    V(i).EPrev = mELast;
-    mELast = i;
+    Get(eLast).eNext = i;
+    Get(i).ePrev = eLast;
+    eLast = i;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InsertAfterE (int i)
+void Mathematics::TriangulateEC<Real>::InsertAfterE(int i)
 {
-	auto& first = V(mEFirst);
-    int currENext = first.ENext;
-	auto& vertex = V(i);
-    vertex.EPrev = mEFirst;
-    vertex.ENext = currENext;
-    first.ENext = i;
-    V(currENext).EPrev = i;
+    auto& first = Get(eFirst);
+    const auto currENext = first.eNext;
+    auto& vertex = Get(i);
+    vertex.ePrev = eFirst;
+    vertex.eNext = currENext;
+    first.eNext = i;
+    Get(currENext).ePrev = i;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::InsertBeforeE (int i)
+void Mathematics::TriangulateEC<Real>::InsertBeforeE(int i)
 {
-	auto& first = V(mEFirst);
-    int currEPrev = first.EPrev;
-	auto& vertex = V(i);
-    vertex.EPrev = currEPrev;
-    vertex.ENext = mEFirst;
-    first.EPrev = i;
-    V(currEPrev).ENext = i;
+    auto& first = Get(eFirst);
+    const auto currEPrev = first.ePrev;
+    auto& vertex = Get(i);
+    vertex.ePrev = currEPrev;
+    vertex.eNext = eFirst;
+    first.ePrev = i;
+    Get(currEPrev).eNext = i;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::RemoveV (int i)
+void Mathematics::TriangulateEC<Real>::RemoveV(int i)
 {
-	auto currVPrev = V(i).VPrev;
-	auto currVNext = V(i).VNext;
-    V(currVPrev).VNext = currVNext;
-    V(currVNext).VPrev = currVPrev;
+    const auto currVPrev = Get(i).vPrev;
+    const auto currVNext = Get(i).vNext;
+    Get(currVPrev).vNext = currVNext;
+    Get(currVNext).vPrev = currVPrev;
 }
 
 template <typename Real>
-int Mathematics::TriangulateEC<Real>
-	::RemoveE (int i)
+int Mathematics::TriangulateEC<Real>::RemoveE(int i)
 {
-	auto currEPrev = V(i).EPrev;
-	auto currENext = V(i).ENext;
-    V(currEPrev).ENext = currENext;
-    V(currENext).EPrev = currEPrev;
+    const auto currEPrev = Get(i).ePrev;
+    const auto currENext = Get(i).eNext;
+    Get(currEPrev).eNext = currENext;
+    Get(currENext).ePrev = currEPrev;
     return currENext;
 }
 
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::RemoveR (int i)
+void Mathematics::TriangulateEC<Real>::RemoveR(int i)
 {
-    MATHEMATICS_ASSERTION_0(mRFirst != -1 && mRLast != -1, "Reflex vertices must exist\n");
+    MATHEMATICS_ASSERTION_0(rFirst != -1 && rLast != -1, "反射顶点必须存在。\n");
 
-    if (i == mRFirst)
+    if (i == rFirst)
     {
-        mRFirst = V(i).SNext;
-        if (mRFirst != -1)
+        rFirst = Get(i).sNext;
+        if (rFirst != -1)
         {
-            V(mRFirst).SPrev = -1;
+            Get(rFirst).sPrev = -1;
         }
-        V(i).SNext = -1;
+        Get(i).sNext = -1;
     }
-    else if (i == mRLast)
+    else if (i == rLast)
     {
-        mRLast = V(i).SPrev;
-        if (mRLast != -1)
+        rLast = Get(i).sPrev;
+        if (rLast != -1)
         {
-            V(mRLast).SNext = -1;
+            Get(rLast).sNext = -1;
         }
-        V(i).SPrev = -1;
+        Get(i).sPrev = -1;
     }
     else
     {
-		auto currSPrev = V(i).SPrev;
-		auto currSNext = V(i).SNext;
-        V(currSPrev).SNext = currSNext;
-        V(currSNext).SPrev = currSPrev;
-        V(i).SNext = -1;
-        V(i).SPrev = -1;
+        const auto currSPrev = Get(i).sPrev;
+        const auto currSNext = Get(i).sNext;
+        Get(currSPrev).sNext = currSNext;
+        Get(currSNext).sPrev = currSPrev;
+        Get(i).sNext = -1;
+        Get(i).sPrev = -1;
     }
 }
 
-
-
-// Tree support.
-
 template <typename Real>
-void Mathematics::TriangulateEC<Real>
-	::Delete (Tree*& root)
+void Mathematics::TriangulateEC<Real>::Delete(TreeSharedPtr& root)
 {
     if (root)
     {
-        std::queue<Tree*> treeQueue;
-        treeQueue.push(root);
+        std::queue<TreeSharedPtr> treeQueue{};
+        treeQueue.emplace(root);
 
         while (treeQueue.size() > 0)
         {
-			auto tree = treeQueue.front();
+            auto tree = treeQueue.front();
             treeQueue.pop();
-            const auto numChildren = (int)tree->Child.size();
+            const auto numChildren = boost::numeric_cast<int>(tree->child.size());
             for (int i = 0; i < numChildren; ++i)
             {
-               treeQueue.push(tree->Child[i]);
+                treeQueue.push(tree->child.at(i));
             }
-            DELETE0(tree);
         }
 
         root = 0;
@@ -1033,27 +895,26 @@ void Mathematics::TriangulateEC<Real>
 }
 
 template <typename Real>
-int Mathematics::TriangulateEC<Real>
-	::GetExtraElements (const Tree* tree)
+int Mathematics::TriangulateEC<Real>::GetExtraElements(const TreeSharedPtr& tree)
 {
-	auto extraElements = 0;
+    auto extraElements = 0;
 
-    std::queue<const Tree*> treeQueue;
-    treeQueue.push(tree);
+    std::queue<ConstTreeSharedPtr> treeQueue;
+    treeQueue.emplace(tree);
     while (treeQueue.size() > 0)
     {
-        const Tree* root = treeQueue.front();
+        const auto root = treeQueue.front();
         treeQueue.pop();
-        const auto numChildren = boost::numeric_cast<int>(root->Child.size());
-        extraElements += 2*numChildren;
+        const auto numChildren = boost::numeric_cast<int>(root->child.size());
+        extraElements += 2 * numChildren;
 
         for (auto i = 0; i < numChildren; ++i)
         {
-            const Tree* child = root->Child[i];
-            const auto numGrandChildren = boost::numeric_cast<int>(child->Child.size());
+            const auto child = root->child.at(i);
+            const auto numGrandChildren = boost::numeric_cast<int>(child->child.size());
             for (int j = 0; j < numGrandChildren; ++j)
             {
-                treeQueue.push(child->Child[j]);
+                treeQueue.push(child->child.at(j));
             }
         }
     }
@@ -1062,11 +923,9 @@ int Mathematics::TriangulateEC<Real>
 }
 
 template <typename Real>
-Mathematics::TriangulateEC<Real>::Vertex
-	::Vertex ()
-	:Index{ -1 },IsConvex{ false },IsEar{ false },  VPrev{ -1 },VNext{ -1 }, SPrev{ -1 }, SNext{ -1 }, EPrev{ -1 }, ENext{ -1 }
+Mathematics::TriangulateEC<Real>::Vertex::Vertex() noexcept
+    : index{ -1 }, isConvex{ false }, isEar{ false }, vPrev{ -1 }, vNext{ -1 }, sPrev{ -1 }, sNext{ -1 }, ePrev{ -1 }, eNext{ -1 }
 {
 }
 
-
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_DETAIL_H
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_DETAIL_H

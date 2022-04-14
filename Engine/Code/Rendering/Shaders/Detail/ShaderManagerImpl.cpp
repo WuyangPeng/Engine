@@ -9,7 +9,7 @@
 #include "ShaderManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::ShaderManagerImpl ::ShaderManagerImpl(MAYBE_UNUSED int count) noexcept
+Rendering::ShaderManagerImpl::ShaderManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_VertexShaderProfile{ ShaderFlags::VertexShaderProfile::None }, m_PixelShaderProfile{ ShaderFlags::PixelShaderProfile::None }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -17,28 +17,28 @@ Rendering::ShaderManagerImpl ::ShaderManagerImpl(MAYBE_UNUSED int count) noexcep
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,ShaderManagerImpl)
 
-void Rendering::ShaderManagerImpl ::SetVertexProfile(VertexShaderProfile profile) noexcept
+void Rendering::ShaderManagerImpl::SetVertexProfile(VertexShaderProfile profile) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
     m_VertexShaderProfile = profile;
 }
 
-Rendering::ShaderManagerImpl::VertexShaderProfile Rendering::ShaderManagerImpl ::GetVertexProfile() const noexcept
+Rendering::ShaderManagerImpl::VertexShaderProfile Rendering::ShaderManagerImpl::GetVertexProfile() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     
     return m_VertexShaderProfile;
 }
 
-void Rendering::ShaderManagerImpl ::SetPixelProfile(PixelShaderProfile profile) noexcept
+void Rendering::ShaderManagerImpl::SetPixelProfile(PixelShaderProfile profile) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
     
     m_PixelShaderProfile = profile;
 }
 
-Rendering::ShaderManagerImpl::PixelShaderProfile Rendering::ShaderManagerImpl ::GetPixelProfile() const noexcept
+Rendering::ShaderManagerImpl::PixelShaderProfile Rendering::ShaderManagerImpl::GetPixelProfile() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     

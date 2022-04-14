@@ -50,21 +50,21 @@ const string Rendering::SingleShaderBaseDataImpl
 	return m_Name;
 }
 
-Rendering::ShaderFlags::VariableType Rendering::SingleShaderBaseDataImpl ::GetType() const noexcept
+Rendering::ShaderFlags::VariableType Rendering::SingleShaderBaseDataImpl::GetType() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Type;
 }
 
-Rendering::ShaderFlags::VariableSemantic Rendering::SingleShaderBaseDataImpl ::GetSemantic() const noexcept
+Rendering::ShaderFlags::VariableSemantic Rendering::SingleShaderBaseDataImpl::GetSemantic() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Semantic;
 }
 
-void Rendering::SingleShaderBaseDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::SingleShaderBaseDataImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

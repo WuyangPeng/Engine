@@ -18,9 +18,9 @@ namespace Rendering
 
 	private:
 		void MainTest();	 
-		void RenderTargetTest();
+		void RenderTargetTest() noexcept;
 		 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

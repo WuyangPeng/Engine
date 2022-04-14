@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 16:16)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -12,102 +15,39 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-Mathematics::BasicMeshEdge ::BasicMeshEdge() noexcept
-    : triangle{}, m_Vertex{}
-{
-    for (int i = 0; i < 2; ++i)
-    {
-        m_Vertex[i] = -1;
-        triangle[i] = -1;
-    }
 
+Mathematics::BasicMeshEdge::BasicMeshEdge() noexcept
+    : triangle{ -1, -1 }, vertices{ -1, -1 }
+{
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-Mathematics::BasicMeshEdge ::BasicMeshEdge(const BasicMeshEdge& rhs) noexcept
-    : triangle{}, m_Vertex{}
-{
-    for (int i = 0; i < 2; ++i)
-    {
-        m_Vertex[i] = rhs.m_Vertex[i];
-        triangle[i] = rhs.triangle[i];
-    }
-
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-Mathematics::BasicMeshEdge& Mathematics::BasicMeshEdge ::operator=(const BasicMeshEdge& rhs) noexcept
-{
-    MATHEMATICS_CLASS_IS_VALID_9;
-
-    for (int i = 0; i < 2; ++i)
-    {
-        m_Vertex[i] = rhs.m_Vertex[i];
-        triangle[i] = rhs.triangle[i];
-    }
-
-    return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, BasicMeshEdge)
 
-int Mathematics::BasicMeshEdge ::GetVertex(int index) const
+int Mathematics::BasicMeshEdge::GetVertex(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (0 <= index && index < 2)
-    {
-        return m_Vertex[index];
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-    }
+    return vertices.at(index);
 }
 
-int Mathematics::BasicMeshEdge ::GetTriangle(int index) const
+int Mathematics::BasicMeshEdge::GetTriangle(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (0 <= index && index < 2)
-    {
-        return triangle[index];
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-    }
+    return triangle.at(index);
 }
 
-void Mathematics::BasicMeshEdge ::SetVertex(int index, int vertex)
+void Mathematics::BasicMeshEdge::SetVertex(int index, int vertex)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (0 <= index && index < 2)
-    {
-        m_Vertex[index] = vertex;
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-    }
+    vertices.at(index) = vertex;
 }
 
-void Mathematics::BasicMeshEdge ::SetTriangle(int index, int triangle0)
+void Mathematics::BasicMeshEdge::SetTriangle(int index, int triangle0)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (0 <= index && index < 2)
-    {
-        triangle[index] = triangle0;
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-    }
+    triangle.at(index) = triangle0;
 }
-
-#include STSTEM_WARNING_POP

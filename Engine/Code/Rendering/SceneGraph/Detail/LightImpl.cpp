@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 16:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 14:47)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightImpl.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -19,40 +23,46 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
- 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::LightImpl ::LightImpl(LightType type, float epsilon) 
-    : m_Ambient{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Diffuse{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } }, m_Specular{ Colour{ 0.0f, 0.0f, 0.0f, 1.0f } },
-      m_Constant{ 1.0f }, m_Linear{ 0.0f }, m_Quadratic{ 0.0f },
-      m_Intensity{ 1.0f }, m_Angle{ Math::GetPI() }, m_CosAngle{ -1.0f },
-      m_SinAngle{ 0.0f }, m_Exponent{ 1.0f }, m_Position{ Mathematics::APointF::GetOrigin() },
-      m_DirectionVector{ -Mathematics::AVectorF::GetUnitZ() }, m_UpVector{ Mathematics::AVectorF::GetUnitY() }, m_RightVector{ Mathematics::AVectorF::GetUnitX() },
-      m_LightType{ type }, m_Epsilon{ epsilon }
+
+Rendering::LightImpl::LightImpl(LightType type, float epsilon) noexcept
+    : ambient{ 0.0f, 0.0f, 0.0f, 1.0f },
+      diffuse{ 0.0f, 0.0f, 0.0f, 1.0f },
+      specular{ 0.0f, 0.0f, 0.0f, 1.0f },
+      constant{ 1.0f },
+      linear{ 0.0f },
+      quadratic{ 0.0f },
+      intensity{ 1.0f },
+      angle{ Math::GetPI() },
+      cosAngle{ -1.0f },
+      sinAngle{ 0.0f },
+      exponent{ 1.0f },
+      position{ Mathematics::APointF::GetOrigin() },
+      directionVector{ -Mathematics::AVectorF::GetUnitZ() },
+      upVector{ Mathematics::AVectorF::GetUnitY() },
+      rightVector{ Mathematics::AVectorF::GetUnitX() },
+      lightType{ type },
+      epsilon{ epsilon }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::LightImpl ::IsValid() const noexcept
+
+bool Rendering::LightImpl::IsValid() const noexcept
 {
     try
     {
-        if (0 < m_Angle && m_Angle <= Math::GetPI() &&
-            0 <= m_Constant && 0 <= m_Linear &&
-            0 <= m_Quadratic && 0 <= m_Intensity &&
-            Math::Approximate(m_CosAngle, Math::Cos(m_Angle), m_Epsilon) &&
-            Math::Approximate(m_SinAngle, Math::Sin(m_Angle), m_Epsilon) &&
-            Math::FAbs(Dot(m_DirectionVector, m_RightVector)) <= m_Epsilon &&
-            Math::FAbs(Dot(m_RightVector, m_UpVector)) <= m_Epsilon &&
-            Math::FAbs(Dot(m_UpVector, m_DirectionVector)) <= m_Epsilon &&
-            m_DirectionVector.IsNormalize(m_Epsilon) &&
-            m_RightVector.IsNormalize(m_Epsilon) &&
-            m_UpVector.IsNormalize(m_Epsilon))
+        if (0 < angle && angle <= Math::GetPI() &&
+            0 <= constant && 0 <= linear &&
+            0 <= quadratic && 0 <= intensity &&
+            Math::Approximate(cosAngle, Math::Cos(angle), epsilon) &&
+            Math::Approximate(sinAngle, Math::Sin(angle), epsilon) &&
+            Math::FAbs(Dot(directionVector, rightVector)) <= epsilon &&
+            Math::FAbs(Dot(rightVector, upVector)) <= epsilon &&
+            Math::FAbs(Dot(upVector, directionVector)) <= epsilon &&
+            directionVector.IsNormalize(epsilon) &&
+            rightVector.IsNormalize(epsilon) &&
+            upVector.IsNormalize(epsilon))
         {
             return true;
         }
@@ -66,268 +76,268 @@ bool Rendering::LightImpl ::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::LightImpl ::SetType(LightType type)
+void Rendering::LightImpl::SetType(LightType type) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_LightType = type;
+    lightType = type;
 }
 
-Rendering::LightType Rendering::LightImpl ::GetType() const
+Rendering::LightType Rendering::LightImpl::GetType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_LightType;
+    return lightType;
 }
 
-void Rendering::LightImpl ::SetAngle(float angle)
+void Rendering::LightImpl::SetAngle(float aAngle)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_1(0.0f < angle && angle <= Math::GetPI(), "Angle超出范围在SetAngle。\n");
+    RENDERING_ASSERTION_0(0.0f < aAngle && aAngle <= Math::GetPI(), "Angle超出范围在SetAngle。\n");
 
-    m_Angle = angle;
-    m_CosAngle = Math::Cos(angle);
-    m_SinAngle = Math::Sin(angle);
+    angle = aAngle;
+    cosAngle = Math::Cos(aAngle);
+    sinAngle = Math::Sin(aAngle);
 }
 
-void Rendering::LightImpl ::SetExponent(float exponent)
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    m_Exponent = exponent;
-}
-
-float Rendering::LightImpl ::GetAngle() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Angle;
-}
-
-float Rendering::LightImpl ::GetCosAngle() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_CosAngle;
-}
-
-float Rendering::LightImpl ::GetSinAngle() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_SinAngle;
-}
-
-float Rendering::LightImpl ::GetExponent() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Exponent;
-}
-
-void Rendering::LightImpl ::SetAmbient(const Colour& ambient)
+void Rendering::LightImpl::SetExponent(float aExponent) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Ambient = ambient;
+    exponent = aExponent;
 }
 
-void Rendering::LightImpl ::SetDiffuse(const Colour& diffuse)
+float Rendering::LightImpl::GetAngle() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return angle;
+}
+
+float Rendering::LightImpl::GetCosAngle() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return cosAngle;
+}
+
+float Rendering::LightImpl::GetSinAngle() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return sinAngle;
+}
+
+float Rendering::LightImpl::GetExponent() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return exponent;
+}
+
+void Rendering::LightImpl::SetAmbient(const Colour& aAmbient) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Diffuse = diffuse;
+    ambient = aAmbient;
 }
 
-void Rendering::LightImpl ::SetSpecular(const Colour& specular)
+void Rendering::LightImpl::SetDiffuse(const Colour& aDiffuse) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Specular = specular;
+    diffuse = aDiffuse;
 }
 
-const Rendering::LightImpl::Colour Rendering::LightImpl ::GetAmbient() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Ambient;
-}
-
-const Rendering::LightImpl::Colour Rendering::LightImpl ::GetDiffuse() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Diffuse;
-}
-
-const Rendering::LightImpl::Colour Rendering::LightImpl ::GetSpecular() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Specular;
-}
-
-const Rendering::LightImpl::APoint Rendering::LightImpl::GetPosition() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Position;
-}
-
-float Rendering::LightImpl ::GetConstant() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Constant;
-}
-
-float Rendering::LightImpl ::GetLinear() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Linear;
-}
-
-float Rendering::LightImpl ::GetQuadratic() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Quadratic;
-}
-
-float Rendering::LightImpl ::GetIntensity() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_Intensity;
-}
-
-void Rendering::LightImpl ::SetAttenuation(float constant, float linear, float quadratic, float intensity)
+void Rendering::LightImpl::SetSpecular(const Colour& aSpecular) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Constant = constant;
-    m_Linear = linear;
-    m_Quadratic = quadratic;
-    m_Intensity = intensity;
+    specular = aSpecular;
 }
 
-void Rendering::LightImpl ::SetPosition(const APoint& point)
+Rendering::LightImpl::Colour Rendering::LightImpl::GetAmbient() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ambient;
+}
+
+Rendering::LightImpl::Colour Rendering::LightImpl::GetDiffuse() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return diffuse;
+}
+
+Rendering::LightImpl::Colour Rendering::LightImpl::GetSpecular() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return specular;
+}
+
+Rendering::LightImpl::APoint Rendering::LightImpl::GetPosition() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return position;
+}
+
+float Rendering::LightImpl::GetConstant() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return constant;
+}
+
+float Rendering::LightImpl::GetLinear() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return linear;
+}
+
+float Rendering::LightImpl::GetQuadratic() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return quadratic;
+}
+
+float Rendering::LightImpl::GetIntensity() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return intensity;
+}
+
+void Rendering::LightImpl::SetAttenuation(float aConstant, float aLinear, float aQuadratic, float aIntensity) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Position = point;
+    constant = aConstant;
+    linear = aLinear;
+    quadratic = aQuadratic;
+    intensity = aIntensity;
 }
 
-void Rendering::LightImpl ::SetVector(const AVector& up, const AVector& right, const AVector& direction)
+void Rendering::LightImpl::SetPosition(const APoint& point) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_UpVector = up;
-    m_RightVector = right;
-    m_DirectionVector = direction;
+    position = point;
 }
 
-const Rendering::LightImpl::AVector Rendering::LightImpl ::GetDirectionVector() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_DirectionVector;
-}
-
-const Rendering::LightImpl::AVector Rendering::LightImpl ::GetUpVector() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_UpVector;
-}
-
-const Rendering::LightImpl::AVector Rendering::LightImpl ::GetRightVector() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return m_RightVector;
-}
-
-void Rendering::LightImpl ::SetDirection(const AVector& direction)
+void Rendering::LightImpl::SetVector(const AVector& up, const AVector& right, const AVector& direction) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-const auto orthonormalBasis = GenerateOrthonormalBasis(direction, m_Epsilon);
-
-    m_UpVector = orthonormalBasis.GetUVector();
-    m_RightVector = orthonormalBasis.GetVVector();
-    m_DirectionVector = orthonormalBasis.GetWVector();
+    upVector = up;
+    rightVector = right;
+    directionVector = direction;
 }
 
-void Rendering::LightImpl ::Load(CoreTools::BufferSource& source)
+Rendering::LightImpl::AVector Rendering::LightImpl::GetDirectionVector() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return directionVector;
+}
+
+Rendering::LightImpl::AVector Rendering::LightImpl::GetUpVector() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return upVector;
+}
+
+Rendering::LightImpl::AVector Rendering::LightImpl::GetRightVector() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return rightVector;
+}
+
+void Rendering::LightImpl::SetDirection(const AVector& direction)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    source.ReadEnum(m_LightType);
-    source.ReadAggregate(m_Ambient);
-    source.ReadAggregate(m_Diffuse);
-    source.ReadAggregate(m_Specular);
-    source.Read(m_Constant);
-    source.Read(m_Linear);
-    source.Read(m_Quadratic);
-    source.Read(m_Intensity);
-    source.Read(m_Angle);
-    source.Read(m_CosAngle);
-    source.Read(m_SinAngle);
-    source.Read(m_Exponent);
-    source.ReadAggregate(m_Position);
-    source.ReadAggregate(m_DirectionVector);
-    source.ReadAggregate(m_UpVector);
-    source.ReadAggregate(m_RightVector);
+    const auto orthonormalBasis = GenerateOrthonormalBasis(direction, epsilon);
+
+    upVector = orthonormalBasis.GetUVector();
+    rightVector = orthonormalBasis.GetVVector();
+    directionVector = orthonormalBasis.GetWVector();
 }
 
-void Rendering::LightImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightImpl::Load(CoreTools::BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    source.ReadEnum(lightType);
+    source.ReadAggregate(ambient);
+    source.ReadAggregate(diffuse);
+    source.ReadAggregate(specular);
+    source.Read(constant);
+    source.Read(linear);
+    source.Read(quadratic);
+    source.Read(intensity);
+    source.Read(angle);
+    source.Read(cosAngle);
+    source.Read(sinAngle);
+    source.Read(exponent);
+    source.ReadAggregate(position);
+    source.ReadAggregate(directionVector);
+    source.ReadAggregate(upVector);
+    source.ReadAggregate(rightVector);
+}
+
+void Rendering::LightImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.WriteEnum(m_LightType);
-    target.WriteAggregate(m_Ambient);
-    target.WriteAggregate(m_Diffuse);
-    target.WriteAggregate(m_Specular);
-    target.Write(m_Constant);
-    target.Write(m_Linear);
-    target.Write(m_Quadratic);
-    target.Write(m_Intensity);
-    target.Write(m_Angle);
-    target.Write(m_CosAngle);
-    target.Write(m_SinAngle);
-    target.Write(m_Exponent);
-    target.WriteAggregate(m_Position);
-    target.WriteAggregate(m_DirectionVector);
-    target.WriteAggregate(m_UpVector);
-    target.WriteAggregate(m_RightVector);
+    target.WriteEnum(lightType);
+    target.WriteAggregate(ambient);
+    target.WriteAggregate(diffuse);
+    target.WriteAggregate(specular);
+    target.Write(constant);
+    target.Write(linear);
+    target.Write(quadratic);
+    target.Write(intensity);
+    target.Write(angle);
+    target.Write(cosAngle);
+    target.Write(sinAngle);
+    target.Write(exponent);
+    target.WriteAggregate(position);
+    target.WriteAggregate(directionVector);
+    target.WriteAggregate(upVector);
+    target.WriteAggregate(rightVector);
 }
 
-int Rendering::LightImpl ::GetStreamingSize() const
+int Rendering::LightImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_LightType);
+    auto size = CORE_TOOLS_STREAM_SIZE(lightType);
 
-    size += RENDERING_STREAM_SIZE(m_Ambient);
-    size += RENDERING_STREAM_SIZE(m_Diffuse);
-    size += RENDERING_STREAM_SIZE(m_Specular);
-    size += CORE_TOOLS_STREAM_SIZE(m_Constant);
-    size += CORE_TOOLS_STREAM_SIZE(m_Linear);
-    size += CORE_TOOLS_STREAM_SIZE(m_Quadratic);
-    size += CORE_TOOLS_STREAM_SIZE(m_Intensity);
-    size += CORE_TOOLS_STREAM_SIZE(m_Angle);
-    size += CORE_TOOLS_STREAM_SIZE(m_CosAngle);
-    size += CORE_TOOLS_STREAM_SIZE(m_SinAngle);
-    size += CORE_TOOLS_STREAM_SIZE(m_Exponent);
-    size += MATHEMATICS_STREAM_SIZE(m_Position);
-    size += MATHEMATICS_STREAM_SIZE(m_DirectionVector);
-    size += MATHEMATICS_STREAM_SIZE(m_UpVector);
-    size += MATHEMATICS_STREAM_SIZE(m_RightVector);
+    size += RENDERING_STREAM_SIZE(ambient);
+    size += RENDERING_STREAM_SIZE(diffuse);
+    size += RENDERING_STREAM_SIZE(specular);
+    size += CORE_TOOLS_STREAM_SIZE(constant);
+    size += CORE_TOOLS_STREAM_SIZE(linear);
+    size += CORE_TOOLS_STREAM_SIZE(quadratic);
+    size += CORE_TOOLS_STREAM_SIZE(intensity);
+    size += CORE_TOOLS_STREAM_SIZE(angle);
+    size += CORE_TOOLS_STREAM_SIZE(cosAngle);
+    size += CORE_TOOLS_STREAM_SIZE(sinAngle);
+    size += CORE_TOOLS_STREAM_SIZE(exponent);
+    size += MATHEMATICS_STREAM_SIZE(position);
+    size += MATHEMATICS_STREAM_SIZE(directionVector);
+    size += MATHEMATICS_STREAM_SIZE(upVector);
+    size += MATHEMATICS_STREAM_SIZE(rightVector);
 
     return size;
 }
-#include STSTEM_WARNING_POP

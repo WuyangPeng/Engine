@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 15:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/09 11:52)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_INCREMENTAL_DELAUNAY2_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_INCREMENTAL_DELAUNAY2_DETAIL_H
@@ -10,614 +13,633 @@
 #include "IncrementalDelaunay2.h"
 #include "CoreTools/DataTypes/MinHeapDetail.h"
 #include "CoreTools/DataTypes/MinHeapRecordDetail.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Rational/RationalVector2Detail.h"
+
+#include <stack>
 
 template <typename Real>
 Mathematics::IncrementalDelaunay2<Real>::IncrementalDelaunay2(Real xmin, Real ymin, Real xmax, Real ymax, Real uncertainty)
-    : mXMin{ xmin }, mXMax{ xmax }, mYMin{ ymin }, mYMax{ ymax }, mUncertainty{ uncertainty }, mNumTriangles{ 0 }, mIndices{ 0 },
-      mAdjacencies{ 0 }, mPathLast{ -1 }, mPath{ 0 }, mLastEdgeV0{ -1 }, mLastEdgeV1{ -1 }, mLastEdgeOpposite{ -1 }, mLastEdgeOppositeIndex{ -1 }
+    : xMin{ xmin },
+      xMax{ xmax },
+      yMin{ ymin },
+      yMax{ ymax },
+      vMap{},
+      vertexPool{},
+      uncertainty{ uncertainty },
+      ratVertexPool{},
+      ratVertexEvaluated{},
+      triangle{},
+      numTriangles{ 0 },
+      indices{},
+      adjacencies{},
+      pathLast{ -1 },
+      path{},
+      lastEdgeV0{ -1 },
+      lastEdgeV1{ -1 },
+      lastEdgeOpposite{ -1 },
+      lastEdgeOppositeIndex{ -1 }
 {
-    MATHEMATICS_ASSERTION_0(mXMin < mXMax && mYMin < mYMax, "Invalid bounding rectangle\n");
-    MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= mUncertainty && mUncertainty <= Math::GetValue(1), "Invalid uncertainty\n");
+    MATHEMATICS_ASSERTION_0(xMin < xMax && yMin < yMax, "矩形边界无效。\n");
+    MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= uncertainty && uncertainty <= Math<Real>::GetValue(1), "无效的不确定性。\n");
 
-    if (mUncertainty > Math<Real>::GetValue(0))
+    if (Math<Real>::GetValue(0) < uncertainty)
     {
-        //         mRatVertexPool = NEW0 std::vector<QRVector>();
-        //         mRatVertexEvaluated = NEW0 std::vector<bool>();
-    }
-    else
-    {
-        mRatVertexPool = 0;
-        mRatVertexEvaluated = 0;
+        ratVertexPool = std::make_shared<std::vector<QRVector>>();
+        ratVertexEvaluated = std::make_shared<std::vector<bool>>();
     }
 
-    // Create a supertriangle that contains the input rectangle.
-    auto x0 = (Math::GetValue(2)) * xmin - xmax;
-    auto y0 = (Math::GetValue(2)) * ymin - ymax;
-    auto x1 = (Math::GetValue(2)) * xmax - xmin + (static_cast<Real>(3)) * (ymax - ymin);
-    auto y1 = y0;
-    auto x2 = x0;
-    auto y2 = (Math::GetValue(2)) * ymax - ymin + (static_cast<Real>(3)) * (xmax - xmin);
-    Vector2<Real> superVertex0{ x0, y0 };
-    Vector2<Real> superVertex1{ x1, y1 };
-    Vector2<Real> superVertex2{ x2, y2 };
+    const auto x0 = (Math<Real>::GetValue(2)) * xmin - xmax;
+    const auto y0 = (Math<Real>::GetValue(2)) * ymin - ymax;
+    const auto x1 = (Math<Real>::GetValue(2)) * xmax - xmin + (Math<Real>::GetValue(3)) * (ymax - ymin);
+    const auto y1 = y0;
+    const auto x2 = x0;
+    const auto y2 = (Math<Real>::GetValue(2)) * ymax - ymin + (Math<Real>::GetValue(3)) * (xmax - xmin);
+    const Vector2 superVertex0{ x0, y0 };
+    const Vector2 superVertex1{ x1, y1 };
+    const Vector2 superVertex2{ x2, y2 };
 
-    // Insert the supertriangle vertices into the vertex storage.
-    mVMap[superVertex0] = 0;
-    mVMap[superVertex1] = 1;
-    mVMap[superVertex2] = 2;
-    mVertexPool.push_back(superVertex0);
-    mVertexPool.push_back(superVertex1);
-    mVertexPool.push_back(superVertex2);
+    vMap[superVertex0] = 0;
+    vMap[superVertex1] = 1;
+    vMap[superVertex2] = 2;
+    vertexPool.emplace_back(superVertex0);
+    vertexPool.emplace_back(superVertex1);
+    vertexPool.emplace_back(superVertex2);
 
-    // Inert the supertriangle into the mesh.
-   // triangle.insert(NEW0 Triangle(0, 1, 2));
+    triangle.emplace(std::make_shared<Triangle>(0, 1, 2));
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-template <typename Real>
-Mathematics::IncrementalDelaunay2<Real>::~IncrementalDelaunay2()
-{
-    //     DELETE0(mRatVertexPool);
-    //     DELETE0(mRatVertexEvaluated);
-    //     DELETE1(mIndices);
-    //     DELETE1(mAdjacencies);
-    //     DELETE1(mPath);
+#ifdef OPEN_CLASS_INVARIANT
 
-    auto iter = triangle.begin();
-    auto end = triangle.end();
-    for (/**/; iter != end; ++iter)
-    {
-        //  Triangle* tri = *iter;
-        //  DELETE0(tri);
-    }
+template <typename Real>
+bool Mathematics::IncrementalDelaunay2<Real>::IsValid() const noexcept
+{
+    return true;
 }
 
+#endif  // OPEN_CLASS_INVARIANT
+
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2<Real>& position)
+int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2& position)
 {
-    if (position[0] < mXMin || position[0] > mXMax || position[1] < mYMin || position[1] > mYMax)
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    if (position[0] < xMin || xMax < position[0] || position[1] < yMin || yMax < position[1])
     {
-        // The vertex is outside the domain specified in the constructor.
         return -1;
     }
 
-    auto viter = mVMap.find(position);
-    if (viter != mVMap.end())
+    const auto viter = vMap.find(position);
+    if (viter != vMap.end())
     {
-        // The vertex already exists, so just return its index.
         return viter->second;
     }
 
-    // Store the position in the various pools.
-    int posIndex = boost::numeric_cast<int>(mVertexPool.size());
-    mVMap[position] = posIndex;
-    mVertexPool.push_back(position);
-    if (mUncertainty > Math<Real>::GetValue(0))
+    const auto posIndex = boost::numeric_cast<int>(vertexPool.size());
+    vMap[position] = posIndex;
+    vertexPool.emplace_back(position);
+    if (Math<Real>::GetValue(0) < uncertainty)
     {
-        (*mRatVertexPool).push_back(QRVector());
-        (*mRatVertexEvaluated).push_back(false);
+        ratVertexPool->emplace_back(QRVector{});
+        ratVertexEvaluated->emplace_back(false);
     }
 
-    Triangle* tri = GetContainingTriangleInternal(position);
+    auto tri = GetContainingTriangleInternal(position);
     if (!tri)
     {
-        // All points must lie in the supertriangle, so each point must have
-        // a containing triangle.
         MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
         return -1;
     }
 
-    // Locate and remove the triangles forming the insertion polygon.
-    std::stack<Triangle*> triStack;
-    VEManifoldMesh polygon{ 0, Edge::ECreator };
-    triStack.push(tri);
-    tri->OnStack = true;
-    int j, v0, v1;
-    Edge* edge;
+    std::stack<TriangleSharedPtr> triStack{};
+    VEManifoldMesh polygon{ 0, Edge::EdgeCreator };
+    triStack.emplace(tri);
+    tri->onStack = true;
+
     while (!triStack.empty())
     {
         tri = triStack.top();
         triStack.pop();
-        tri->OnStack = false;
-        for (j = 0; j < 3; ++j)
+        tri->onStack = false;
+        for (auto j = 0; j < 3; ++j)
         {
-            Triangle* adj = tri->Adj[j];
+            auto adj = tri->adjTriangle.at(j);
             if (adj)
             {
-                // Detach triangle and adjacent triangle from each other.
-                auto nullIndex = tri->DetachFrom(j, adj);
+                const auto nullIndex = tri->DetachFrom(j, adj);
 
-                if (adj->IsInsertionComponent(posIndex, position, tri, this))
+                if (adj->IsInsertionComponent(posIndex, position, tri, *this))
                 {
-                    if (!adj->OnStack)
+                    if (!adj->onStack)
                     {
-                        // Adjacent triangle inside insertion polygon.
-                        triStack.push(adj);
-                        adj->OnStack = true;
+                        triStack.emplace(adj);
+                        adj->onStack = true;
                     }
                 }
                 else
                 {
-                    // Adjacent triangle outside insertion polygon.
-                    v0 = tri->V[j];
-                    v1 = tri->V[(j + 1) % 3];
-                    edge = (Edge*)polygon.InsertEdge(v0, v1);
-                    edge->NullIndex = nullIndex;
-                    edge->Tri = adj;
+                    auto v0 = tri->v.at(j);
+                    auto v1 = tri->v.at((j + 1) % 3);
+                    auto edge = std::dynamic_pointer_cast<Edge>(polygon.InsertEdge(v0, v1));
+                    edge->nullIndex = nullIndex;
+                    edge->tri = adj;
                 }
             }
             else
             {
-                // The triangle is in the insertion polygon, but the adjacent
-                // one does not exist.  This means one of two things:
-                // (1) We are at an edge of the supertriangle, and that edge
-                //     is part of the insertion polygon.
-                // (2) We are at an edge that was recently shared by the
-                //     triangle and the adjacent, but we detached those
-                //     triangles from each other.  These edges should be
-                //     ignored.
-                v0 = tri->V[j];
+                auto v0 = tri->v.at(j);
                 if (0 <= v0 && v0 <= 2)
                 {
-                    // v0 is a supervertex index.
-                    v1 = tri->V[(j + 1) % 3];
+                    auto v1 = tri->v.at((j + 1) % 3);
                     if (0 <= v1 && v1 <= 2)
                     {
-                        // v1 is a supervertex index.
-                        edge = (Edge*)polygon.InsertEdge(v0, v1);
-                        edge->NullIndex = -1;
-                        edge->Tri = 0;
+                        auto edge = std::dynamic_pointer_cast<Edge>(polygon.InsertEdge(v0, v1));
+                        edge->nullIndex = -1;
+                        edge->tri = 0;
                     }
                 }
             }
         }
+
         triangle.erase(tri);
-        DELETE0(tri);
     }
 
-    // Insert the new triangles formed by the input point and the edges of
-    // the insertion polygon.
     const auto& edgeMap = polygon.GetEdges();
-    MATHEMATICS_ASSERTION_0(edgeMap.size() >= 3 && polygon.IsClosed(), "Polygon must be at least a triangle\n");
-    auto iter = edgeMap.begin();
-    auto end = edgeMap.end();
-    for (/**/; iter != end; ++iter)
+
+    MATHEMATICS_ASSERTION_0(3 <= edgeMap.size() && polygon.IsClosed(), "多边形必须至少是一个三角形。\n");
+
+    for (const auto& iter : edgeMap)
     {
-        edge = (Edge*)iter->second;
+        auto edge = std::dynamic_pointer_cast<Edge>(iter.second);
 
-        // Create and insert the new triangle.
-        // tri = NEW0 Triangle(posIndex, edge->V[0], edge->V[1]);
-        triangle.insert(tri);
+        tri = std::make_shared<Triangle>(posIndex, edge->v.at(0), edge->v.at(1));
+        triangle.emplace(tri);
 
-        // Establish the adjacency links across the polygon edge.
-        tri->Adj[1] = edge->Tri;
-        if (edge->Tri)
+        tri->adjTriangle.at(1) = edge->tri;
+        if (edge->tri)
         {
-            edge->Tri->Adj[edge->NullIndex] = tri;
+            edge->tri->adjTriangle.at(edge->nullIndex) = tri;
         }
 
-        // Update the edge's triangle pointer to point to the newly created
-        // triangle.  This information is used later to establish the links
-        // between the new triangles.
-        edge->Tri = tri;
+        edge->tri = tri;
     }
 
-    // Establish the adjacency links between the new triangles.
-    Edge* adjEdge;
-    iter = edgeMap.begin();
-    end = edgeMap.end();
-    for (/**/; iter != end; ++iter)
+    for (const auto& iter : edgeMap)
     {
-        edge = (Edge*)iter->second;
-        adjEdge = (Edge*)edge->E[0];
-        edge->Tri->Adj[0] = adjEdge->Tri;
-        adjEdge = (Edge*)edge->E[1];
-        edge->Tri->Adj[2] = adjEdge->Tri;
+        auto edge = std::dynamic_pointer_cast<Edge>(iter.second);
+        auto adjEdge = std::dynamic_pointer_cast<Edge>(edge->e.at(0));
+        edge->tri->adjTriangle.at(0) = adjEdge->tri;
+        adjEdge = std::dynamic_pointer_cast<Edge>(edge->e.at(1));
+        edge->tri->adjTriangle.at(2) = adjEdge->tri;
     }
 
     return posIndex;
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::Remove(const Vector2<Real>& position)
+int Mathematics::IncrementalDelaunay2<Real>::Remove(const Vector2& position)
 {
-    auto iter = mVMap.find(position);
-    if (iter == mVMap.end())
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    const auto iter = vMap.find(position);
+    if (iter == vMap.end())
     {
-        // The vertex does not exists, so return an invalid index.
         return -1;
     }
-    int posIndex = iter->second;
+    const auto posIndex = iter->second;
 
     auto initialTri = GetContainingTriangleInternal(position);
     if (!initialTri)
     {
-        // All points must lie in the supertriangle, so each point must have
-        // a containing triangle.  Moreover, in the Remove operation, the
-        // point must be a vertex of a triangle.
-        MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
         return -1;
     }
 
-    // Construct the removal polygon.
-    std::vector<RPVertex> polygon;
+    std::vector<RPVertex> polygon{};
     auto tri = initialTri;
     do
     {
-        // Locate the vertex for the removal point.  The opposite edge is an
-        // edge of the removal polygon.
-        int i;
-        for (i = 0; i < 3; ++i)
+        auto i = 0;
+        for (; i < 3; ++i)
         {
-            if (tri->V[i] == posIndex)
+            if (tri->v.at(i) == posIndex)
             {
                 break;
             }
         }
         if (i == 3)
         {
-            MATHEMATICS_ASSERTION_0(false, "Removal point must be a triangle vertex\n");
             return -1;
         }
 
-        // The removal point is P = Tri.V[i].  The edge of the removal polygon
-        // is <V1,V2>, where V1 = Tri.V[(i+1)%3] and V2 = Tri.V[(i+2)%3)].
-        // The edge <P,V1> is shared by Tri and Adj = Tri.A[i].
-        polygon.push_back(RPVertex(tri->V[(i + 1) % 3], tri, tri->Adj[i]));
-        tri = tri->Adj[(i + 2) % 3];
+        polygon.emplace_back(RPVertex{ tri->v.at((i + 1) % 3), tri, tri->adjTriangle.at(i) });
+        tri = tri->adjTriangle.at((i + 2) % 3);
     } while (tri != initialTri);
 
-    // Triangulate the removal polygon.
     Triangulate Triangulate{ polygon, posIndex, this };
+    vMap.erase(iter);
 
-    mVMap.erase(iter);
     return posIndex;
 }
 
 template <typename Real>
-void Mathematics::IncrementalDelaunay2<Real>::GetAllTriangles(int& numTriangles, int*& indices)
+typename Mathematics::IncrementalDelaunay2<Real>::HullType Mathematics::IncrementalDelaunay2<Real>::GetAllTriangles() const
 {
-    numTriangles = (int)triangle.size();
-    // indices = NEW1<int>(3*numTriangles);
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-    int* currIndex = indices;
-    auto iter = triangle.begin();
-    auto end = triangle.end();
-    for (/**/; iter != end; ++iter)
+    IndicesType result{};
+
+    for (const auto& tri : triangle)
     {
-        Triangle* tri = *iter;
-        for (int i = 0; i < 3; ++i)
+        for (auto i = 0; i < 3; ++i)
         {
-            *currIndex++ = tri->V[i];
+            result.emplace_back(tri->v.at(i));
         }
     }
+
+    return HullType{ result, true };
 }
 
 template <typename Real>
 void Mathematics::IncrementalDelaunay2<Real>::GenerateRepresentation()
 {
-/*    DELETE1(mIndices);*/
-    mIndices = 0;
-  //  DELETE1(mAdjacencies);
-    mAdjacencies = 0;
-  //  DELETE1(mPath);
-    mPath = 0;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-    // Assign integer values to the triangles for use by the caller.
-    std::map<Triangle*, int> permute;
-    auto iter = triangle.begin();
-    auto end = triangle.end();
-    mNumTriangles = (int)triangle.size();
-    Triangle* tri;
-    int i;
-    for (i = 0; iter != end; ++iter)
+    indices.clear();
+    adjacencies.clear();
+    path.clear();
+
+    std::map<TriangleSharedPtr, int> permute{};
+
+    numTriangles = boost::numeric_cast<int>(triangle.size());
+
+    auto i = 0;
+    for (auto iter = triangle.begin(); iter != triangle.end(); ++iter)
     {
-        tri = *iter;
+        auto tri = *iter;
 
-        // Skip triangles that share a supervertex.
-        if ((0 <= tri->V[0] && tri->V[0] <= 2) || (0 <= tri->V[1] && tri->V[1] <= 2) || (0 <= tri->V[2] && tri->V[2] <= 2))
+        if ((0 <= tri->v.at(0) && tri->v.at(0) <= 2) || (0 <= tri->v.at(1) && tri->v.at(1) <= 2) || (0 <= tri->v.at(2) && tri->v.at(2) <= 2))
         {
-            --mNumTriangles;
+            --numTriangles;
             continue;
         }
 
         permute[tri] = i;
         ++i;
     }
-    permute[(Triangle*)0] = -1;
+    permute[nullptr] = -1;
 
-    // Put Delaunay triangles into an array (vertices and adjacency info).
-    if (mNumTriangles > 0)
+    if (numTriangles > 0)
     {
-        //         mIndices = NEW1<int>(3*mNumTriangles);
-        //         mAdjacencies = NEW1<int>(3*mNumTriangles);
-        i = 0;
-        iter = triangle.begin();
-        end = triangle.end();
-        for (/**/; iter != end; ++iter)
-        {
-            tri = *iter;
+        const auto size = 3 * numTriangles;
+        indices.resize(size);
+        adjacencies.resize(size);
 
-            // Skip triangles that share a supervertex.
-            if ((0 <= tri->V[0] && tri->V[0] <= 2) || (0 <= tri->V[1] && tri->V[1] <= 2) || (0 <= tri->V[2] && tri->V[2] <= 2))
+        i = 0;
+
+        for (auto iter = triangle.begin(); iter != triangle.end(); ++iter)
+        {
+            auto tri = *iter;
+
+            if ((0 <= tri->v.at(0) && tri->v.at(0) <= 2) || (0 <= tri->v.at(1) && tri->v.at(1) <= 2) || (0 <= tri->v.at(2) && tri->v.at(2) <= 2))
             {
                 continue;
             }
 
-            mIndices[i] = tri->V[0];
-            if (ContainsSupervertex(tri->Adj[0]))
+            indices.at(i) = tri->v.at(0);
+            if (ContainsSupervertex(*tri->adjTriangle.at(0)))
             {
-                mAdjacencies[i++] = -1;
+                adjacencies.at(i++) = -1;
             }
             else
             {
-                mAdjacencies[i++] = permute[tri->Adj[0]];
+                adjacencies.at(i++) = permute.at(tri->adjTriangle.at(0));
             }
 
-            mIndices[i] = tri->V[1];
-            if (ContainsSupervertex(tri->Adj[1]))
+            indices.at(i) = tri->v.at(1);
+            if (ContainsSupervertex(*tri->adjTriangle.at(1)))
             {
-                mAdjacencies[i++] = -1;
+                adjacencies.at(i++) = -1;
             }
             else
             {
-                mAdjacencies[i++] = permute[tri->Adj[1]];
+                adjacencies.at(i++) = permute[tri->adjTriangle.at(1)];
             }
 
-            mIndices[i] = tri->V[2];
-            if (ContainsSupervertex(tri->Adj[2]))
+            indices.at(i) = tri->v.at(2);
+            if (ContainsSupervertex(*tri->adjTriangle.at(2)))
             {
-                mAdjacencies[i++] = -1;
+                adjacencies.at(i++) = -1;
             }
             else
             {
-                mAdjacencies[i++] = permute[tri->Adj[2]];
+                adjacencies.at(i++) = permute[tri->adjTriangle.at(2)];
             }
         }
-        MATHEMATICS_ASSERTION_0(i == 3 * mNumTriangles, "Inconsistent condition\n");
+        MATHEMATICS_ASSERTION_0(i == 3 * numTriangles, "条件不一致。\n");
 
-        mPathLast = -1;
-       // mPath = NEW1<int>(mNumTriangles + 1);
+        pathLast = -1;
+
+        const auto pathSize = numTriangles + 1;
+        path.resize(pathSize);
     }
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::GetNumTriangles() const
+int Mathematics::IncrementalDelaunay2<Real>::GetNumTriangles() const noexcept
 {
-    return mNumTriangles;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numTriangles;
 }
 
 template <typename Real>
-const int* Mathematics::IncrementalDelaunay2<Real>::GetIndices() const
+typename Mathematics::IncrementalDelaunay2<Real>::IndicesType Mathematics::IncrementalDelaunay2<Real>::GetIndices() const
 {
-    return mIndices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return indices;
 }
 
 template <typename Real>
-const int* Mathematics::IncrementalDelaunay2<Real>::GetAdjacencies() const
+typename Mathematics::IncrementalDelaunay2<Real>::IndicesType Mathematics::IncrementalDelaunay2<Real>::GetAdjacencies() const
 {
-    return mAdjacencies;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return adjacencies;
 }
 
 template <typename Real>
-const std::vector<Mathematics::Vector2<Real>>& Mathematics::IncrementalDelaunay2<Real>::GetVertices() const
+std::vector<Mathematics::Vector2<Real>> Mathematics::IncrementalDelaunay2<Real>::GetVertices() const
 {
-    return mVertexPool;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return vertexPool;
 }
 
 template <typename Real>
-const std::map<Mathematics::Vector2<Real>, int>& Mathematics::IncrementalDelaunay2<Real>::GetUniqueVertices() const
+std::map<Mathematics::Vector2<Real>, int> Mathematics::IncrementalDelaunay2<Real>::GetUniqueVertices() const
 {
-    return mVMap;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return vMap;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetHull(int& numEdges, int*& indices)
+typename Mathematics::IncrementalDelaunay2<Real>::HullType Mathematics::IncrementalDelaunay2<Real>::GetHull() const
 {
-    numEdges = 0;
-    indices = 0;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    // Count the number of edges that are shared by triangles containing a
-    // supervertex.
-    int i, adjQuantity = 3 * mNumTriangles;
-    for (i = 0; i < adjQuantity; ++i)
+    auto numEdges = 0;
+
+    const auto adjQuantity = 3 * numTriangles;
+    for (auto i = 0; i < adjQuantity; ++i)
     {
-        if (mAdjacencies[i] == -1)
+        if (adjacencies.at(i) == -1)
         {
             ++numEdges;
         }
     }
-    MATHEMATICS_ASSERTION_0(numEdges > 0, "Unexpected condition\n");
+
+    MATHEMATICS_ASSERTION_0(numEdges > 0, "意外情况。\n");
+
     if (numEdges == 0)
     {
-        return false;
+        return { IndicesType{}, false };
     }
 
-    // Enumerate the edges.
-   // indices = NEW1<int>(2 * numEdges);
-    int* currentIndex = indices;
-    for (i = 0; i < adjQuantity; ++i)
+    IndicesType indicesType{};
+
+    for (auto i = 0; i < adjQuantity; ++i)
     {
-        if (mAdjacencies[i] == -1)
+        if (adjacencies.at(i) == -1)
         {
-            int tri = i / 3, j = i % 3;
-            *currentIndex++ = mIndices[3 * tri + j];
-            *currentIndex++ = mIndices[3 * tri + ((j + 1) % 3)];
+            const auto tri = i / 3;
+            const auto j = i % 3;
+            const auto index0 = 3 * tri + j;
+            const auto index1 = 3 * tri + ((j + 1) % 3);
+            indicesType.emplace_back(indices.at(index0));
+            indicesType.emplace_back(indices.at(index1));
         }
     }
 
-    return true;
+    return HullType{ indicesType, true };
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangle(const Vector2<Real>& test) const
+int Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangle(const Vector2& test) const
 {
-    // The mesh might not have any triangles (only collinear points were
-    // inserted).
-    if (!mPath)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    if (path.empty())
     {
         return -1;
     }
 
-    // Start at first triangle in mesh.
-    int iIndex = (mPathLast >= 0 ? mPath[mPathLast] : 0);
-    mPathLast = -1;
-    mLastEdgeV0 = -1;
-    mLastEdgeV1 = -1;
-    mLastEdgeOpposite = -1;
-    mLastEdgeOppositeIndex = -1;
+    auto pathIndex = (pathLast >= 0 ? path.at(pathLast) : 0);
+    pathLast = -1;
+    lastEdgeV0 = -1;
+    lastEdgeV1 = -1;
+    lastEdgeOpposite = -1;
+    lastEdgeOppositeIndex = -1;
 
-    // Use triangle edges as binary separating lines.
-    for (int i = 0; i < mNumTriangles; i++)
+    const auto index0 = 3 * pathIndex;
+    const auto index1 = index0 + 1;
+    const auto index2 = index0 + 2;
+
+    for (auto i = 0; i < numTriangles; i++)
     {
-        mPath[++mPathLast] = iIndex;
+        path.at(++pathLast) = pathIndex;
 
-        int* aiV = &mIndices[3 * iIndex];
-
-        if (ToLine(test, aiV[0], aiV[1]) > 0)
+        if (ToLine(test, indices.at(index0), indices.at(index1)) > 0)
         {
-            iIndex = mAdjacencies[3 * iIndex];
-            if (iIndex == -1)
+            pathIndex = adjacencies.at(index0);
+            if (pathIndex == -1)
             {
-                mLastEdgeV0 = aiV[0];
-                mLastEdgeV1 = aiV[1];
-                mLastEdgeOpposite = aiV[2];
-                mLastEdgeOppositeIndex = 2;
+                lastEdgeV0 = indices.at(index0);
+                lastEdgeV1 = indices.at(index1);
+                lastEdgeOpposite = indices.at(index2);
+                lastEdgeOppositeIndex = 2;
                 return -1;
             }
             continue;
         }
 
-        if (ToLine(test, aiV[1], aiV[2]) > 0)
+        if (ToLine(test, indices.at(index1), indices.at(index2)) > 0)
         {
-            iIndex = mAdjacencies[3 * iIndex + 1];
-            if (iIndex == -1)
+            pathIndex = adjacencies.at(index1);
+            if (pathIndex == -1)
             {
-                mLastEdgeV0 = aiV[1];
-                mLastEdgeV1 = aiV[2];
-                mLastEdgeOpposite = aiV[0];
-                mLastEdgeOppositeIndex = 0;
+                lastEdgeV0 = indices.at(index1);
+                lastEdgeV1 = indices.at(index2);
+                lastEdgeOpposite = indices.at(index0);
+                lastEdgeOppositeIndex = 0;
                 return -1;
             }
             continue;
         }
 
-        if (ToLine(test, aiV[2], aiV[0]) > 0)
+        if (ToLine(test, indices.at(index2), indices.at(index0)) > 0)
         {
-            iIndex = mAdjacencies[3 * iIndex + 2];
-            if (iIndex == -1)
+            pathIndex = adjacencies.at(index2);
+            if (pathIndex == -1)
             {
-                mLastEdgeV0 = aiV[2];
-                mLastEdgeV1 = aiV[0];
-                mLastEdgeOpposite = aiV[1];
-                mLastEdgeOppositeIndex = 1;
+                lastEdgeV0 = indices.at(index2);
+                lastEdgeV1 = indices.at(index0);
+                lastEdgeOpposite = indices.at(index1);
+                lastEdgeOppositeIndex = 1;
+
                 return -1;
             }
+
             continue;
         }
 
-        mLastEdgeV0 = -1;
-        mLastEdgeV1 = -1;
-        mLastEdgeOpposite = -1;
-        mLastEdgeOppositeIndex = -1;
-        return iIndex;
+        lastEdgeV0 = -1;
+        lastEdgeV1 = -1;
+        lastEdgeOpposite = -1;
+        lastEdgeOppositeIndex = -1;
+
+        return pathIndex;
     }
 
     return -1;
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::GetPathLast() const
+int Mathematics::IncrementalDelaunay2<Real>::GetPathLast() const noexcept
 {
-    return mPathLast;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return pathLast;
 }
 
 template <typename Real>
-const int* Mathematics::IncrementalDelaunay2<Real>::GetPath() const
+typename Mathematics::IncrementalDelaunay2<Real>::IndicesType Mathematics::IncrementalDelaunay2<Real>::GetPath() const
 {
-    return mPath;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return path;
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::GetLastEdge(int& riV0, int& riV1, int& riV2) const
+int Mathematics::IncrementalDelaunay2<Real>::GetLastEdge(int& riV0, int& riV1, int& riV2) const noexcept
 {
-    riV0 = mLastEdgeV0;
-    riV1 = mLastEdgeV1;
-    riV2 = mLastEdgeOpposite;
-    return mLastEdgeOppositeIndex;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    riV0 = lastEdgeV0;
+    riV1 = lastEdgeV1;
+    riV2 = lastEdgeOpposite;
+
+    return lastEdgeOppositeIndex;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetVertexSet(int i, Vector2<Real> akV[3]) const
+std::array<Mathematics::Vector2<Real>, 3> Mathematics::IncrementalDelaunay2<Real>::GetVertexSet(int i) const
 {
-    if (0 <= i && i < mNumTriangles)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    std::array<Mathematics::Vector2<Real>, 3> akV{};
+    if (0 <= i && i < numTriangles)
     {
-        akV[0] = mVertexPool[mIndices[3 * i]];
-        akV[1] = mVertexPool[mIndices[3 * i + 1]];
-        akV[2] = mVertexPool[mIndices[3 * i + 2]];
-        return true;
+        const auto index0 = 3 * i;
+        const auto index1 = 3 * i + 1;
+        const auto index2 = 3 * i + 2;
+
+        akV.at(0) = vertexPool.at(indices.at(index0));
+        akV.at(1) = vertexPool.at(indices.at(index1));
+        akV.at(2) = vertexPool.at(indices.at(index2));
+
+        return akV;
     }
 
-    return false;
+    return akV;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetIndexSet(int i, int aiIndex[3]) const
+std::array<int32_t, 3> Mathematics::IncrementalDelaunay2<Real>::GetIndexSet(int i) const
 {
-    if (0 <= i && i < mNumTriangles)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    std::array<int32_t, 3> aiIndex{};
+    if (0 <= i && i < numTriangles)
     {
-        aiIndex[0] = mIndices[3 * i];
-        aiIndex[1] = mIndices[3 * i + 1];
-        aiIndex[2] = mIndices[3 * i + 2];
-        return true;
+        const auto index0 = 3 * i;
+        const auto index1 = 3 * i + 1;
+        const auto index2 = 3 * i + 2;
+
+        aiIndex.at(0) = indices.at(index0);
+        aiIndex.at(1) = indices.at(index1);
+        aiIndex.at(2) = indices.at(index2);
+
+        return aiIndex;
     }
 
-    return false;
+    return aiIndex;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetAdjacentSet(int i, int aiAdjacent[3]) const
+std::array<int32_t, 3> Mathematics::IncrementalDelaunay2<Real>::GetAdjacentSet(int i) const
 {
-    if (0 <= i && i < mNumTriangles)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    std::array<int32_t, 3> aiAdjacent{};
+    if (0 <= i && i < numTriangles)
     {
-        aiAdjacent[0] = mAdjacencies[3 * i];
-        aiAdjacent[1] = mAdjacencies[3 * i + 1];
-        aiAdjacent[2] = mAdjacencies[3 * i + 2];
-        return true;
+        const auto index0 = 3 * i;
+        const auto index1 = 3 * i + 1;
+        const auto index2 = 3 * i + 2;
+
+        aiAdjacent.at(0) = adjacencies.at(index0);
+        aiAdjacent.at(1) = adjacencies.at(index1);
+        aiAdjacent.at(2) = adjacencies.at(index2);
+
+        return aiAdjacent;
     }
 
-    return false;
+    return aiAdjacent;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetBarycentricSet(int i, const Vector2<Real>& test, Real afBary[3]) const
+std::array<Real, 3> Mathematics::IncrementalDelaunay2<Real>::GetBarycentricSet(int i, const Vector2& test) const
 {
-    if (0 <= i && i < mNumTriangles)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    std::array<Real, 3> afBary{};
+    if (0 <= i && i < numTriangles)
     {
-        auto kV0 = mVertexPool[mIndices[3 * i]];
-        auto kV1 = mVertexPool[mIndices[3 * i + 1]];
-        auto kV2 = mVertexPool[mIndices[3 * i + 2]];
-        auto barycentricCoordinates = test.GetBarycentrics(kV0, kV1, kV2);
-        for (auto i = 0; i < 3; ++i)
+        const auto index0 = 3 * i;
+        const auto index1 = 3 * i + 1;
+        const auto index2 = 3 * i + 2;
+
+        const auto& kV0 = vertexPool.at(indices.at(index0));
+        const auto& kV1 = vertexPool.at(indices.at(index1));
+        const auto& kV2 = vertexPool.at(indices.at(index2));
+
+        const auto barycentricCoordinates = test.GetBarycentrics(kV0, kV1, kV2);
+        for (auto j = 0; j < 3; ++j)
         {
-            afBary[i] = barycentricCoordinates[i];
+            afBary.at(j) = barycentricCoordinates[j];
         }
 
-        return true;
+        return afBary;
     }
 
-    return false;
+    return afBary;
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::ToLine(const Vector2<Real>& test, int v0, int v1) const
+int Mathematics::IncrementalDelaunay2<Real>::ToLine(const Vector2& test, int v0, int v1) const
 {
-    if (mUncertainty < Math::GetValue(1))
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    if (uncertainty < Math<Real>::GetValue(1))
     {
-        // Order the points so that ToLine(test,v0,v1) and ToLine(test,v1,v0)
-        // return the same geometric result.
-        auto vertex0 = mVertexPool[v0];
-        auto vertex1 = mVertexPool[v1];
-        bool positive;
+        auto vertex0 = vertexPool.at(v0);
+        auto vertex1 = vertexPool.at(v1);
+        auto positive = false;
         if (vertex0 < vertex1)
         {
             positive = true;
@@ -640,93 +662,89 @@ int Mathematics::IncrementalDelaunay2<Real>::ToLine(const Vector2<Real>& test, i
             det = -det;
         }
 
-        if (mUncertainty == Math<Real>::GetValue(0))
+        if (Math<Real>::Approximate(uncertainty, Math<Real>::GetValue(0)))
         {
-            // Compute the sign test using floating-point arithmetic.
-            return (det > Math<Real>::GetValue(0) ? +1 : (det < Math<Real>::GetValue(0) ? -1 : 0));
+            return (Math<Real>::GetValue(0) < det ? +1 : (det < Math<Real>::GetValue(0) ? -1 : 0));
         }
 
-        // Use filtered predicates.
         auto length0 = Math<Real>::Sqrt(x0 * x0 + y0 * y0);
         auto length1 = Math<Real>::Sqrt(x1 * x1 + y1 * y1);
-        auto scaledUncertainty = mUncertainty * length0 * length1;
-        if (Math<Real>::FAbs(det) >= scaledUncertainty)
+        auto scaledUncertainty = uncertainty * length0 * length1;
+        if (scaledUncertainty <= Math<Real>::FAbs(det))
         {
-            // The floating-point sign test is deemed to be certain.
-            return (det > Math<Real>::GetValue(0) ? +1 : (det < Math<Real>::GetValue(0) ? -1 : 0));
+            return (Math<Real>::GetValue(0) < det ? +1 : (det < Math<Real>::GetValue(0) ? -1 : 0));
         }
     }
 
-    // Compute the determinant using exact rational arithmetic.
-    QRVector ratTest;
-    ratTest.SetX(QRational(test.GetX()));
-    ratTest.SetY(QRational(test.GetY()));
-    int indices[2] = { v0, v1 };
-    for (int i = 0; i < 2; ++i)
+    const QRVector ratTest{ QRational{ test.GetX() }, QRational{ test.GetY() } };
+
+    const std::array<int, 2> indicesArray{ v0, v1 };
+    for (auto i = 0; i < 2; ++i)
     {
-        int j = indices[i];
-        if (!(*mRatVertexEvaluated)[j])
+        auto j = indicesArray.at(i);
+        if (!ratVertexEvaluated->at(j))
         {
-            (*mRatVertexEvaluated)[j] = true;
-            (*mRatVertexPool)[j].SetX(QRational(mVertexPool[j][0]));
-            (*mRatVertexPool)[j].SetY(QRational(mVertexPool[j][1]));
+            ratVertexEvaluated->at(j) = true;
+            ratVertexPool->at(j).SetX(QRational{ vertexPool.at(j)[0] });
+            ratVertexPool->at(j).SetY(QRational{ vertexPool.at(j)[1] });
         }
     }
 
-    // Compute the sign test using rational arithmetic.
-    const auto& ratV0 = (*mRatVertexPool)[v0];
-    const auto& ratV1 = (*mRatVertexPool)[v1];
+    const auto& ratV0 = ratVertexPool->at(v0);
+    const auto& ratV1 = ratVertexPool->at(v1);
     auto ratX0 = ratTest.GetX() - ratV0.GetX();
     auto ratY0 = ratTest.GetY() - ratV0.GetY();
     auto ratX1 = ratV1.GetX() - ratV0.GetX();
     auto ratY1 = ratV1.GetY() - ratV0.GetY();
     auto ratDet = ratX0 * ratY1 - ratX1 * ratY0;
-    return (ratDet > QRational(0) ? +1 : (ratDet < QRational(0) ? -1 : 0));
+
+    return (QRational{ 0 } < ratDet ? +1 : (ratDet < QRational{ 0 } ? -1 : 0));
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::ToTriangle(const Vector2<Real>& test, int v0, int v1, int v2) const
+int Mathematics::IncrementalDelaunay2<Real>::ToTriangle(const Vector2& test, int v0, int v1, int v2) const
 {
-    auto sign0 = ToLine(test, v1, v2);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto sign0 = ToLine(test, v1, v2);
     if (sign0 > 0)
     {
         return +1;
     }
 
-    auto sign1 = ToLine(test, v0, v2);
+    const auto sign1 = ToLine(test, v0, v2);
     if (sign1 < 0)
     {
         return +1;
     }
 
-    auto sign2 = ToLine(test, v0, v1);
+    const auto sign2 = ToLine(test, v0, v1);
     if (sign2 > 0)
     {
         return +1;
     }
 
-    return ((sign0 && sign1 && sign2) ? -1 : 0);
+    return ((sign0 != 0 && sign1 != 0 && sign2 != 0) ? -1 : 0);
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>& test, int v0, int v1, int v2) const
+int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2& test, int v0, int v1, int v2) const
 {
-    if (mUncertainty < Math::GetValue(1))
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    if (uncertainty < Math<Real>::GetValue(1))
     {
-        // Order the points so that ToCircumcircle(test,u0,u1,u2) returns the
-        // same containment result for any permutation (u0,u1,u2) of
-        // (v0,v1,v2).
-        auto vertex0 = mVertexPool[v0];
-        auto vertex1 = mVertexPool[v1];
-        auto vertex2 = mVertexPool[v2];
-        Vector2<Real> save;
-        bool positive;
+        auto vertex0 = vertexPool.at(v0);
+        auto vertex1 = vertexPool.at(v1);
+        auto vertex2 = vertexPool.at(v2);
+
+        auto positive = false;
         if (vertex0 < vertex1)
         {
             if (vertex2 < vertex0)
             {
                 // (2,0,1)
-                save = vertex2;
+                auto save = vertex2;
                 vertex2 = vertex1;
                 vertex1 = vertex0;
                 vertex0 = save;
@@ -735,7 +753,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>&
             else if (vertex2 < vertex1)
             {
                 // (0,2,1)
-                save = vertex1;
+                auto save = vertex1;
                 vertex1 = vertex2;
                 vertex2 = save;
                 positive = false;
@@ -751,7 +769,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>&
             if (vertex2 < vertex1)
             {
                 // (2,1,0)
-                save = vertex0;
+                auto save = vertex0;
                 vertex0 = vertex2;
                 vertex2 = save;
                 positive = false;
@@ -759,7 +777,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>&
             else if (vertex2 < vertex0)
             {
                 // (1,2,0)
-                save = vertex0;
+                auto save = vertex0;
                 vertex0 = vertex1;
                 vertex1 = vertex2;
                 vertex2 = save;
@@ -768,7 +786,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>&
             else
             {
                 // (1,0,2)
-                save = vertex0;
+                auto save = vertex0;
                 vertex0 = vertex1;
                 vertex1 = save;
                 positive = false;
@@ -799,42 +817,38 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>&
             det = -det;
         }
 
-        if (mUncertainty == Math<Real>::GetValue(0))
+        if (Math<Real>::Approximate(uncertainty, Math<Real>::GetValue(0)))
         {
-            // Compute the sign test using floating-point arithmetic.
             return (det < Math<Real>::GetValue(0) ? +1 : (det > Math<Real>::GetValue(0) ? -1 : 0));
         }
 
-        // Use filtered predicates.
         auto length0 = Math<Real>::Sqrt(d0x * d0x + d0y * d0y + z0 * z0);
         auto length1 = Math<Real>::Sqrt(d1x * d1x + d1y * d1y + z1 * z1);
         auto length2 = Math<Real>::Sqrt(d2x * d2x + d2y * d2y + z2 * z2);
-        auto scaledUncertainty = mUncertainty * length0 * length1 * length2;
+        auto scaledUncertainty = uncertainty * length0 * length1 * length2;
         if (Math<Real>::FAbs(det) >= scaledUncertainty)
         {
             return (det < Math<Real>::GetValue(0) ? 1 : (det > Math<Real>::GetValue(0) ? -1 : 0));
         }
     }
 
-    // Compute the sign test using rational arithmetic.
-    QRVector ratTest;
-    ratTest.SetX(QRational(test[0]));
-    ratTest.SetY(QRational(test[1]));
-    int indices[3]{ v0, v1, v2 };
+    const QRVector ratTest{ QRational{ test[0] }, QRational{ test[1] } };
+
+    std::array<int, 3> indicesArray{ v0, v1, v2 };
     for (auto i = 0; i < 3; ++i)
     {
-        auto j = indices[i];
-        if (!(*mRatVertexEvaluated)[j])
+        auto j = indicesArray.at(i);
+        if (!ratVertexEvaluated->at(j))
         {
-            (*mRatVertexEvaluated)[j] = true;
-            (*mRatVertexPool)[j].SetX(QRational(mVertexPool[j][0]));
-            (*mRatVertexPool)[j].SetY(QRational(mVertexPool[j][1]));
+            ratVertexEvaluated->at(j) = true;
+            ratVertexPool->at(j).SetX(QRational{ vertexPool.at(j)[0] });
+            ratVertexPool->at(j).SetY(QRational{ vertexPool.at(j)[1] });
         }
     }
 
-    auto& ratV0 = (*mRatVertexPool)[v0];
-    auto& ratV1 = (*mRatVertexPool)[v1];
-    auto& ratV2 = (*mRatVertexPool)[v2];
+    auto& ratV0 = ratVertexPool->at(v0);
+    auto& ratV1 = ratVertexPool->at(v1);
+    auto& ratV2 = ratVertexPool->at(v2);
     auto ratS0x = ratV0.GetX() + ratTest.GetX();
     auto ratD0x = ratV0.GetX() - ratTest.GetX();
     auto ratS0y = ratV0.GetY() + ratTest.GetY();
@@ -854,25 +868,24 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>&
     auto ratC01 = ratD2y * ratZ0 - ratD0y * ratZ2;
     auto ratC02 = ratD0y * ratZ1 - ratD1y * ratZ0;
     auto ratDet = ratD0x * ratC00 + ratD1x * ratC01 + ratD2x * ratC02;
+
     return (ratDet < QRational(0) ? +1 : (ratDet > QRational(0) ? -1 : 0));
 }
 
 template <typename Real>
-typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangleInternal(const Vector2<Real>& position) const
+typename Mathematics::IncrementalDelaunay2<Real>::TriangleSharedPtr Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangleInternal(const Vector2& position) const
 {
-    // Locate which triangle in the current mesh contains vertex i.  By
-    // construction, there must be such a triangle (the vertex cannot be
-    // outside the supertriangle).
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto tri = *triangle.begin();
-    auto numTriangles = boost::numeric_cast<int>(triangle.size());
-    for (int t = 0; t < numTriangles; ++t)
+    auto numTriangle = boost::numeric_cast<int>(triangle.size());
+    for (auto t = 0; t < numTriangle; ++t)
     {
-        auto vertices = tri->V;
+        auto vertices = tri->v;
 
-        if (ToLine(position, vertices[0], vertices[1]) > 0)
+        if (ToLine(position, vertices.at(0), vertices.at(1)) > 0)
         {
-            tri = tri->Adj[0];
+            tri = tri->adjTriangle.at(0);
             if (!tri)
             {
                 break;
@@ -880,9 +893,9 @@ typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::Increme
             continue;
         }
 
-        if (ToLine(position, vertices[1], vertices[2]) > 0)
+        if (ToLine(position, vertices.at(1), vertices.at(2)) > 0)
         {
-            tri = tri->Adj[1];
+            tri = tri->adjTriangle.at(1);
             if (!tri)
             {
                 break;
@@ -890,9 +903,9 @@ typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::Increme
             continue;
         }
 
-        if (ToLine(position, vertices[2], vertices[0]) > 0)
+        if (ToLine(position, vertices.at(2), vertices.at(0)) > 0)
         {
-            tri = tri->Adj[2];
+            tri = tri->adjTriangle.at(2);
             if (!tri)
             {
                 break;
@@ -903,16 +916,17 @@ typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::Increme
         return tri;
     }
 
-    MATHEMATICS_ASSERTION_0(false, "Delaunay vertices must lie in some triangle\n");
     return 0;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::ContainsSupervertex(Triangle* tri) const
+bool Mathematics::IncrementalDelaunay2<Real>::ContainsSupervertex(const Triangle& tri) const
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
     for (auto i = 0; i < 3; ++i)
     {
-        if (0 <= tri->V[i] && tri->V[i] <= 2)
+        if (0 <= tri.v.at(i) && tri.v.at(i) <= 2)
         {
             return true;
         }
@@ -921,54 +935,74 @@ bool Mathematics::IncrementalDelaunay2<Real>::ContainsSupervertex(Triangle* tri)
 }
 
 template <typename Real>
-void Mathematics::IncrementalDelaunay2<Real>::SwapEdge(Triangle* tri0, Triangle* tri1)
+void Mathematics::IncrementalDelaunay2<Real>::SwapEdge(const TriangleSharedPtr& tri0, const TriangleSharedPtr& tri1)
 {
-    int i0, i0p1, i0p2, i1, i1p1, i1p2, j;
-    Triangle* adj;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-    // Locate the indices of the shared edge.
-    for (i0 = 0; i0 < 3; ++i0)
+    auto i0 = 0;
+    for (; i0 < 3; ++i0)
     {
-        if (tri1 == tri0->Adj[i0])
+        if (tri1 == tri0->adjTriangle.at(i0))
         {
             break;
         }
     }
     if (i0 == 3)
     {
-        MATHEMATICS_ASSERTION_0(false, "Unexpected condition.\n");
         return;
     }
-    i0p1 = (i0 + 1) % 3;
-    i0p2 = (i0 + 2) % 3;
 
-    for (i1 = 0; i1 < 3; ++i1)
+    const auto i0p1 = (i0 + 1) % 3;
+    const auto i0p2 = (i0 + 2) % 3;
+
+    auto i1 = 0;
+    for (; i1 < 3; ++i1)
     {
-        if (tri0 == tri1->Adj[i1])
+        if (tri0 == tri1->adjTriangle.at(i1))
         {
             break;
         }
     }
     if (i1 == 3)
     {
-        MATHEMATICS_ASSERTION_0(false, "Unexpected condition.\n");
         return;
     }
-    i1p1 = (i1 + 1) % 3;
-    i1p2 = (i1 + 2) % 3;
 
-    tri0->V[i0p1] = tri1->V[i1p2];
-    tri1->V[i1p1] = tri0->V[i0p2];
+    const auto i1p1 = (i1 + 1) % 3;
+    const auto i1p2 = (i1 + 2) % 3;
 
-    adj = tri1->Adj[i1p1];
-    tri0->Adj[i0] = adj;
+    tri0->v.at(i0p1) = tri1->v.at(i1p2);
+    tri1->v.at(i1p1) = tri0->v.at(i0p2);
+
+    auto adj = tri1->adjTriangle.at(i1p1);
+    tri0->adjTriangle.at(i0) = adj;
     if (adj)
     {
-        for (j = 0; j < 3; ++j)
+        auto j = 0;
+        for (; j < 3; ++j)
         {
-            if (adj->Adj[j] == tri1)
+            if (adj->adjTriangle.at(j) == tri1)
             {
-                adj->Adj[j] = tri0;
+                adj->adjTriangle.at(j) = tri0;
+                break;
+            }
+        }
+        if (j == 3)
+        {
+            return;
+        }
+    }
+
+    adj = tri0->adjTriangle.at(i0p1);
+    tri1->adjTriangle.at(i1) = adj;
+    if (adj)
+    {
+        auto j = 0;
+        for (; j < 3; ++j)
+        {
+            if (adj->adjTriangle.at(j) == tri0)
+            {
+                adj->adjTriangle.at(j) = tri1;
                 break;
             }
         }
@@ -979,176 +1013,154 @@ void Mathematics::IncrementalDelaunay2<Real>::SwapEdge(Triangle* tri0, Triangle*
         }
     }
 
-    adj = tri0->Adj[i0p1];
-    tri1->Adj[i1] = adj;
-    if (adj)
-    {
-        for (j = 0; j < 3; ++j)
-        {
-            if (adj->Adj[j] == tri0)
-            {
-                adj->Adj[j] = tri1;
-                break;
-            }
-        }
-        if (j == 3)
-        {
-            MATHEMATICS_ASSERTION_0(false, "Unexpected condition.\n");
-            return;
-        }
-    }
-
-    tri0->Adj[i0p1] = tri1;
-    tri1->Adj[i1p1] = tri0;
+    tri0->adjTriangle.at(i0p1) = tri1;
+    tri1->adjTriangle.at(i1p1) = tri0;
 }
 
 // IncrementalDelaunay2::Triangle
 
 template <typename Real>
-Mathematics::IncrementalDelaunay2<Real>::Triangle ::Triangle(int v0, int v1, int v2)
-    : Time{ -1 }, IsComponent{ false }, OnStack{ false }
+Mathematics::IncrementalDelaunay2<Real>::Triangle::Triangle(int v0, int v1, int v2) noexcept
+    : v{ v0, v1, v2 }, adjTriangle{}, time{ -1 }, isComponent{ false }, onStack{ false }
 {
-    V[0] = v0;
-    V[1] = v1;
-    V[2] = v2;
-    Adj[0] = 0;
-    Adj[1] = 0;
-    Adj[2] = 0;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::Triangle ::IsInsertionComponent(int posIndex, const Vector2<Real>& test, Triangle* adj, const IncrementalDelaunay2* delaunay)
+bool Mathematics::IncrementalDelaunay2<Real>::Triangle::IsInsertionComponent(int posIndex, const Vector2& test, const TriangleSharedPtr& adj, const IncrementalDelaunay2& delaunay)
 {
-    if (posIndex != Time)
+    if (posIndex != time)
     {
-        Time = posIndex;
+        time = posIndex;
 
-        // Determine the number of vertices in common with the supertriangle.
-        // The supertriangle vertices have indices VQ-3, VQ-2, and VQ-1, where
-        // VQ is the quantity of input vertices.
-        int common = 0, svIndex = -1, j;
-        for (j = 0; j < 3; ++j)
+        auto common = 0;
+        auto svIndex = -1;
+        for (auto j = 0; j < 3; ++j)
         {
-            // The supervertices are at indices 0, 1, and 2, so loop counter
-            // 'k' is the index into the supervertices.
             for (auto k = 0; k < 3; ++k)
             {
-                if (V[j] == k)
+                if (v.at(j) == k)
                 {
-                    common++;
+                    ++common;
                     svIndex = j;
                 }
             }
         }
 
-        int relation;
+        auto relation = 0;
         if (common == 0)
         {
-            // The classic case is that a point is in the mesh formed only by
-            // the input vertices, in which case we only test for containment
-            // in the circumcircle of the triangle.
-            relation = delaunay->ToCircumcircle(test, V[0], V[1], V[2]);
+            relation = delaunay.ToCircumcircle(test, v.at(0), v.at(1), v.at(2));
         }
         else
         {
-            // The classic problem is that points outside the mesh formed
-            // only by the input vertices must be handled from a visibility
-            // perspective rather than using circumcircles (compare with
-            // convex hull construction).  By not doing this, you can run into
-            // the pitfall that has snared many folks--the boundary edges of
-            // the final triangulation do not form a convex polygon.
-            int v0, v1;
+            auto v0 = 0;
+            auto v1 = 0;
             if (common == 1)
             {
-                v0 = V[(svIndex + 1) % 3];
-                v1 = V[(svIndex + 2) % 3];
+                v0 = v.at((svIndex + 1) % 3);
+                v1 = v.at((svIndex + 2) % 3);
             }
-            else  // iCommon == 2
+            else
             {
-                for (j = 0; j < 3; ++j)
+                auto j = 0;
+                for (; j < 3; ++j)
                 {
-                    if (Adj[j] != 0 && Adj[j] != adj)
+                    if (adjTriangle.at(j) != 0 && adjTriangle.at(j) != adj)
                     {
                         break;
                     }
                 }
-                v0 = V[j];
-                v1 = V[(j + 1) % 3];
+                v0 = v.at(j);
+                v1 = v.at((j + 1) % 3);
             }
-            relation = delaunay->ToLine(test, v0, v1);
+            relation = delaunay.ToLine(test, v0, v1);
         }
 
-        IsComponent = (relation < 0);
+        isComponent = (relation < 0);
     }
 
-    return IsComponent;
+    return isComponent;
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::Triangle ::DetachFrom(int adjIndex, Triangle* adj)
+int Mathematics::IncrementalDelaunay2<Real>::Triangle::DetachFrom(int adjIndex, const TriangleSharedPtr& adj)
 {
-    MATHEMATICS_ASSERTION_0(0 <= adjIndex && adjIndex < 3 && Adj[adjIndex] == adj, "Invalid inputs\n");
-    Adj[adjIndex] = 0;
+    MATHEMATICS_ASSERTION_0(0 <= adjIndex && adjIndex < 3 && adjTriangle.at(adjIndex) == adj, "无效输入。\n");
+
+    adjTriangle.at(adjIndex) = nullptr;
     for (auto i = 0; i < 3; ++i)
     {
-        if (adj->Adj[i] == this)
+        if (adj->adjTriangle.at(i).get() == this)
         {
-            adj->Adj[i] = 0;
+            adj->adjTriangle.at(i) = 0;
             return i;
         }
     }
+
     return -1;
 }
 
 // IncrementalDelaunay2::Edge
 
-template <typename Real>
-Mathematics::IncrementalDelaunay2<Real>::Edge ::Edge(int v0, int v1, int nullIndex, Triangle* tri)
-    : VEManifoldMesh::Edge{ v0, v1 }
-{
-    NullIndex = nullIndex;
-    Tri = tri;
-}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename Real>
-Mathematics::VEManifoldMesh::EPtr Mathematics::IncrementalDelaunay2<Real>::Edge ::ECreator(int v0, int v1)
+Mathematics::IncrementalDelaunay2<Real>::Edge::Edge(int v0, int v1, int nullIndex, const TriangleSharedPtr& tri) noexcept
+    : ParentType{ v0, v1 }, nullIndex{ nullIndex }, tri{ tri }
 {
-    return nullptr;  //    NEW0 Edge(v0, v1, 0, 0);
+}
+
+#include STSTEM_WARNING_POP
+
+template <typename Real>
+Mathematics::VEManifoldMesh::EdgeSharedPtr Mathematics::IncrementalDelaunay2<Real>::Edge::EdgeCreator(int v0, int v1)
+{
+    return std::make_shared<ClassType>(v0, v1, 0, nullptr);
 }
 
 // IncrementalDelaunay2::RPVertex
 
 template <typename Real>
-Mathematics::IncrementalDelaunay2<Real>::RPVertex ::RPVertex(int index, Triangle* tri, Triangle* adj)
-    : Index{ index }, Tri{ tri }, Adj{ adj }, IsConvex{ false }, IsEarTip{ false }, IsSuperVertex{ false },
-      Weight{ Math<Real>::maxReal }, VPrev{ -1 }, VNext{ -1 }, SPrev{ -1 }, SNext{ -1 }, EarRecord{ 0 }
+Mathematics::IncrementalDelaunay2<Real>::RPVertex::RPVertex(int index, const TriangleSharedPtr& tri, const TriangleSharedPtr& adj) noexcept
+    : index{ index },
+      tri{ tri },
+      adj{ adj },
+      isConvex{ false },
+      isEarTip{ false },
+      isSuperVertex{ false },
+      weight{ Math<Real>::maxReal },
+      vPrev{ -1 },
+      vNext{ -1 },
+      sPrev{ -1 },
+      sNext{ -1 },
+      earRecord{ 0 }
 {
 }
 
 // IncrementalDelaunay2::Triangulate
 
 template <typename Real>
-Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<RPVertex>& polygon, int removal, IncrementalDelaunay2* delaunay)
-    : mPolygon{ polygon }, mNumVertices{ boost::numeric_cast<int>(polygon.size()) },
-      mDelaunay{ delaunay }, mCFirst{ -1 }, mCLast{ -1 }, mRFirst{ -1 }, mRLast{ -1 },
-      mEHeap{ boost::numeric_cast<int>(polygon.size()), 1, Math<Real>::maxReal }
+Mathematics::IncrementalDelaunay2<Real>::Triangulate::Triangulate(std::vector<RPVertex>& polygon, int removal, IncrementalDelaunay2* delaunay)
+    : polygon{ polygon },
+      numVertices{ boost::numeric_cast<int>(polygon.size()) },
+      delaunay{ delaunay },
+      cFirst{ -1 },
+      cLast{ -1 },
+      rFirst{ -1 },
+      rLast{ -1 },
+      eHeap{ boost::numeric_cast<int>(polygon.size()), 1, Math<Real>::maxReal }
 {
-    // Create a circular list of the polygon vertices for dynamic removal of
-    // vertices.
-    auto numVerticesM1 = mNumVertices - 1;
-    int i;
-    for (i = 0; i <= numVerticesM1; ++i)
+    const auto numVerticesM1 = numVertices - 1;
+
+    for (auto i = 0; i <= numVerticesM1; ++i)
     {
-        auto& vertex = V(i);
-        vertex.VPrev = (i > 0 ? i - 1 : numVerticesM1);
-        vertex.VNext = (i < numVerticesM1 ? i + 1 : 0);
+        auto& vertex = Get(i);
+        vertex.vPrev = (i > 0 ? i - 1 : numVerticesM1);
+        vertex.vNext = (i < numVerticesM1 ? i + 1 : 0);
     }
 
-    // Create a circular list of the polygon vertices for dynamic removal of
-    // vertices.  Keep track of two linear sublists, one for the convex
-    // vertices and one for the reflex vertices.  This is an O(N) process
-    // where N is the number of polygon vertices.
-    for (i = 0; i <= numVerticesM1; ++i)
+    for (auto i = 0; i <= numVerticesM1; ++i)
     {
         if (IsConvex(i))
         {
@@ -1160,159 +1172,147 @@ Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<R
         }
     }
 
-    // Identify the ear tips and build a circular list of them.  Let V0, V1,
-    // and/ V2 be consecutive vertices forming a triangle T (the ear).  The
-    // vertex V1 is an ear tip if no other vertices of the polygon lie inside
-    // T.  Although it is enough to show that V1 is not an ear by finding at
-    // least one other vertex inside T, it is sufficient to search only the
-    // reflex vertices.  This is an O(C*Real) process, where C is the number of
-    // convex vertices and Real is the number of reflex vertices with N = C+Real.
-    // The order is O(N^2), for example when C = Real = N/2.
-    Real weight;
-    int vPrev, vNext;
-    for (i = mCFirst; i != -1; i = V(i).SNext)
+    for (auto i = cFirst; i != -1; i = Get(i).sNext)
     {
         if (IsEarTip(i))
         {
-            weight = ComputeWeight(i, removal);
-            V(i).EarRecord = mEHeap.Insert(i, weight);
-            V(i).IsEarTip = true;
+            auto weight = ComputeWeight(i, removal);
+            Get(i).earRecord = eHeap.Insert(i, weight);
+            Get(i).isEarTip = true;
         }
     }
 
-    // Remove the ears, one at a time.
-    while (mNumVertices >= 3)
+    while (numVertices >= 3)
     {
-        if (mNumVertices == 3)
+        if (numVertices == 3)
         {
-            // Only one triangle remains.  Erase the three subtriangles
-            // linked to removal point P and then insert the remaining
-            // triangle.
-            MATHEMATICS_ASSERTION_0(mEHeap.GetElementsNumber() == 3, "Unexpected condition\n");
+            MATHEMATICS_ASSERTION_0(eHeap.GetElementsNumber() == 3, "Unexpected condition\n");
 
-            auto record = mEHeap.Remove();
-            i = record.GetUniqueIndex();
-            weight = record.GetValue();
-            auto& vertex0 = V(i);
-            vPrev = vertex0.VPrev;
-            vNext = vertex0.VNext;
-            auto& vertexP = V(vPrev);
-            auto& vertexN = V(vNext);
-            Triangle* tri0 = vertex0.Tri;
-            Triangle* triP = vertexP.Tri;
-            Triangle* triN = vertexN.Tri;
+            const auto record = eHeap.Remove();
+            const auto uniqueIndex = record.GetUniqueIndex();
 
-            int i0;
+            const auto& vertex0 = Get(uniqueIndex);
+            const auto vPrev = vertex0.vPrev;
+            const auto vNext = vertex0.vNext;
+            const auto& vertexP = Get(vPrev);
+            const auto& vertexN = Get(vNext);
+            auto tri0 = vertex0.tri;
+            auto triP = vertexP.tri;
+            auto triN = vertexN.tri;
+
+            auto i0 = 0;
             for (i0 = 0; i0 < 3; ++i0)
             {
-                if (tri0->V[i0] == removal)
+                if (tri0->v.at(i0) == removal)
                 {
                     break;
                 }
             }
             if (i0 == 3)
             {
-                MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
                 break;
             }
-            tri0->V[i0] = vertexP.Index;
 
-            int ip;
-            for (ip = 0; ip < 3; ++ip)
+            tri0->v.at(i0) = vertexP.index;
+
+            auto ip = 0;
+            for (; ip < 3; ++ip)
             {
-                if (triP->V[ip] == vertexP.Index)
+                if (triP->v.at(ip) == vertexP.index)
                 {
                     break;
                 }
             }
+
             if (ip == 3)
             {
-                MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
                 break;
             }
-            Triangle* adj = triP->Adj[ip];
-            tri0->Adj[i0] = adj;
+
+            auto adj = triP->adjTriangle.at(ip);
+            tri0->adjTriangle.at(i0) = adj;
             if (adj)
             {
-                for (i = 0; i < 3; ++i)
+                auto i = 0;
+                for (; i < 3; ++i)
                 {
-                    if (adj->V[i] == vertex0.Index)
+                    if (adj->v.at(i) == vertex0.index)
                     {
-                        adj->Adj[i] = tri0;
+                        adj->adjTriangle.at(i) = tri0;
                         break;
                     }
                 }
                 if (i == 3)
                 {
-                    MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
                     break;
                 }
             }
 
-            int in;
-            for (in = 0; in < 3; ++in)
+            auto in = 0;
+            for (; in < 3; ++in)
             {
-                if (triN->V[in] == vertexN.Index)
+                if (triN->v.at(in) == vertexN.index)
                 {
                     break;
                 }
             }
+
             if (in == 3)
             {
-                MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
                 break;
             }
-            adj = triN->Adj[in];
-            tri0->Adj[(i0 + 2) % 3] = adj;
+
+            adj = triN->adjTriangle.at(in);
+            tri0->adjTriangle.at((i0 + 2) % 3) = adj;
             if (adj)
             {
-                for (i = 0; i < 3; ++i)
+                auto j = 0;
+                for (; j < 3; ++j)
                 {
-                    if (adj->V[i] == vertexP.Index)
+                    if (adj->v.at(j) == vertexP.index)
                     {
-                        adj->Adj[i] = tri0;
+                        adj->adjTriangle.at(j) = tri0;
                         break;
                     }
                 }
-                if (i == 3)
+
+                if (j == 3)
                 {
-                    MATHEMATICS_ASSERTION_0(false, "Unexpected condition\n");
                     break;
                 }
             }
 
-            mDelaunay->triangle.erase(triP);
-            mDelaunay->triangle.erase(triN);
-            DELETE0(triP);
-            DELETE0(triN);
+            delaunay->triangle.erase(triP);
+            delaunay->triangle.erase(triN);
+
             break;
         }
-        auto record = mEHeap.Remove();
-        i = record.GetUniqueIndex();
-        weight = record.GetValue();
-        vPrev = V(i).VPrev;
-        vNext = V(i).VNext;
-        mDelaunay->SwapEdge(V(i).Adj, V(i).Tri);
-        V(vPrev).Tri = V(i).Tri;
-        RemoveV(i);
 
-        // Removal of the ear can cause an adjacent vertex to become an ear
-        // or to stop being an ear.
-        auto& vertexP = V(vPrev);
-        if (vertexP.IsEarTip)
+        const auto record = eHeap.Remove();
+        auto index = record.GetUniqueIndex();
+        auto weight = record.GetValue();
+        const auto vPrev = Get(index).vPrev;
+        const auto vNext = Get(index).vNext;
+        delaunay->SwapEdge(Get(index).adj, Get(index).tri);
+        Get(vPrev).tri = Get(index).tri;
+        RemoveV(index);
+
+        const auto& vertexP = Get(vPrev);
+        if (vertexP.isEarTip)
         {
             if (!IsEarTip(vPrev))
             {
-                mEHeap.Update(V(vPrev).EarRecord, (Real)-1);
-                auto record = mEHeap.Remove();
-                i = record.GetUniqueIndex();
-                weight = record.GetValue();
-                MATHEMATICS_ASSERTION_0(i == vPrev && weight == (Real)-1, "Unexpected condition\n");
+                eHeap.Update(Get(vPrev).earRecord, Math<Real>::GetValue(-1));
+                const auto result = eHeap.Remove();
+                index = result.GetUniqueIndex();
+                weight = result.GetValue();
+
+                MATHEMATICS_ASSERTION_0(index == vPrev && weight == Math<Real>::GetValue(-1), "意外情况。\n");
             }
         }
         else
         {
-            bool wasReflex = !vertexP.IsConvex;
+            const auto wasReflex = !vertexP.isConvex;
             if (IsConvex(vPrev))
             {
                 if (wasReflex)
@@ -1323,27 +1323,27 @@ Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<R
                 if (IsEarTip(vPrev))
                 {
                     weight = ComputeWeight(vPrev, removal);
-                    V(vPrev).EarRecord = mEHeap.Insert(vPrev, weight);
-                    V(vPrev).IsEarTip = true;
+                    Get(vPrev).earRecord = eHeap.Insert(vPrev, weight);
+                    Get(vPrev).isEarTip = true;
                 }
             }
         }
 
-        RPVertex& vertexN = V(vNext);
-        if (vertexN.IsEarTip)
+        const auto& vertexN = Get(vNext);
+        if (vertexN.isEarTip)
         {
             if (!IsEarTip(vNext))
             {
-                mEHeap.Update(V(vNext).EarRecord, (Real)-1);
-                auto record = mEHeap.Remove();
-                i = record.GetUniqueIndex();
-                weight = record.GetValue();
-                MATHEMATICS_ASSERTION_0(i == vNext && weight == (Real)-1, "Unexpected condition\n");
+                eHeap.Update(Get(vNext).earRecord, Math<Real>::GetValue(-1));
+                const auto result = eHeap.Remove();
+                index = result.GetUniqueIndex();
+                weight = result.GetValue();
+                MATHEMATICS_ASSERTION_0(index == vNext && weight == Math<Real>::GetValue(-1), "意外情况。\n");
             }
         }
         else
         {
-            auto wasReflex = !vertexN.IsConvex;
+            const auto wasReflex = !vertexN.isConvex;
             if (IsConvex(vNext))
             {
                 if (wasReflex)
@@ -1354,8 +1354,8 @@ Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<R
                 if (IsEarTip(vNext))
                 {
                     weight = ComputeWeight(vNext, removal);
-                    V(vNext).EarRecord = mEHeap.Insert(vNext, weight);
-                    V(vNext).IsEarTip = true;
+                    Get(vNext).earRecord = eHeap.Insert(vNext, weight);
+                    Get(vNext).isEarTip = true;
                 }
             }
         }
@@ -1363,170 +1363,162 @@ Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<R
 }
 
 template <typename Real>
-typename Mathematics::IncrementalDelaunay2<Real>::RPVertex& Mathematics::IncrementalDelaunay2<Real>::Triangulate ::V(int i)
+typename Mathematics::IncrementalDelaunay2<Real>::RPVertex& Mathematics::IncrementalDelaunay2<Real>::Triangulate::Get(int i)
 {
-    return mPolygon[i];
+    return polygon.at(i);
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::Triangulate ::IsConvex(int i)
+bool Mathematics::IncrementalDelaunay2<Real>::Triangulate::IsConvex(int i)
 {
-    auto& vertex = V(i);
-    auto curr = mDelaunay->GetVertices()[vertex.Index];
-    auto prev = V(vertex.VPrev).Index;
-    auto next = V(vertex.VNext).Index;
-    vertex.IsConvex = (mDelaunay->ToLine(curr, prev, next) > 0);
-    return vertex.IsConvex;
+    auto& vertex = Get(i);
+    const auto curr = delaunay->GetVertices().at(vertex.index);
+    const auto prev = Get(vertex.vPrev).index;
+    const auto next = Get(vertex.vNext).index;
+    vertex.isConvex = (delaunay->ToLine(curr, prev, next) > 0);
+
+    return vertex.isConvex;
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::Triangulate ::IsEarTip(int i)
+bool Mathematics::IncrementalDelaunay2<Real>::Triangulate::IsEarTip(int i)
 {
-    auto& vertex = V(i);
+    auto& vertex = Get(i);
 
-    if (mRFirst == -1)
+    if (rFirst == -1)
     {
-        // The remaining polygon is convex.
-        vertex.IsEarTip = true;
+        vertex.isEarTip = true;
         return true;
     }
 
-    // Search the reflex vertices and test if any are in the triangle
-    // <V[prev],V[curr],V[next]>.
-    auto prev = V(vertex.VPrev).Index;
-    auto curr = vertex.Index;
-    auto next = V(vertex.VNext).Index;
-    vertex.IsEarTip = true;
-    for (auto j = mRFirst; j != -1; j = V(j).SNext)
+    const auto prev = Get(vertex.vPrev).index;
+    const auto curr = vertex.index;
+    const auto next = Get(vertex.vNext).index;
+    vertex.isEarTip = true;
+    for (auto j = rFirst; j != -1; j = Get(j).sNext)
     {
-        // Check if the test vertex is already one of the triangle vertices.
-        if (j == vertex.VPrev || j == i || j == vertex.VNext)
+        if (j == vertex.vPrev || j == i || j == vertex.vNext)
         {
             continue;
         }
 
-        // Test if the vertex is inside or on the triangle.  When it is, it
-        // causes V[curr] not to be an ear.
-        auto test = mDelaunay->GetVertices()[V(j).Index];
-        if (mDelaunay->ToTriangle(test, prev, curr, next) <= 0)
+        auto test = delaunay->GetVertices().at(Get(j).index);
+        if (delaunay->ToTriangle(test, prev, curr, next) <= 0)
         {
-            vertex.IsEarTip = false;
+            vertex.isEarTip = false;
             break;
         }
     }
 
-    return vertex.IsEarTip;
+    return vertex.isEarTip;
 }
 
 template <typename Real>
-void Mathematics::IncrementalDelaunay2<Real>::Triangulate ::InsertAfterC(int i)
+void Mathematics::IncrementalDelaunay2<Real>::Triangulate::InsertAfterC(int i)
 {
-    if (mCFirst == -1)
+    if (cFirst == -1)
     {
-        // add first convex vertex
-        mCFirst = i;
+        cFirst = i;
     }
     else
     {
-        V(mCLast).SNext = i;
-        V(i).SPrev = mCLast;
+        Get(cLast).sNext = i;
+        Get(i).sPrev = cLast;
     }
-    mCLast = i;
+
+    cLast = i;
 }
 
 template <typename Real>
-void Mathematics::IncrementalDelaunay2<Real>::Triangulate ::InsertAfterR(int i)
+void Mathematics::IncrementalDelaunay2<Real>::Triangulate::InsertAfterR(int i)
 {
-    if (mRFirst == -1)
+    if (rFirst == -1)
     {
-        // add first reflex vertex
-        mRFirst = i;
+        rFirst = i;
     }
     else
     {
-        V(mRLast).SNext = i;
-        V(i).SPrev = mRLast;
+        Get(rLast).sNext = i;
+        Get(i).sPrev = rLast;
     }
-    mRLast = i;
+
+    rLast = i;
 }
 
 template <typename Real>
-void Mathematics::IncrementalDelaunay2<Real>::Triangulate ::RemoveV(int i)
+void Mathematics::IncrementalDelaunay2<Real>::Triangulate::RemoveV(int i)
 {
-    auto currVPrev = V(i).VPrev;
-    auto currVNext = V(i).VNext;
-    V(currVPrev).VNext = currVNext;
-    V(currVNext).VPrev = currVPrev;
-    --mNumVertices;
+    const auto currVPrev = Get(i).vPrev;
+    const auto currVNext = Get(i).vNext;
+    Get(currVPrev).vNext = currVNext;
+    Get(currVNext).vPrev = currVPrev;
+    --numVertices;
 }
 
 template <typename Real>
-void Mathematics::IncrementalDelaunay2<Real>::Triangulate ::RemoveR(int i)
+void Mathematics::IncrementalDelaunay2<Real>::Triangulate::RemoveR(int i)
 {
-    MATHEMATICS_ASSERTION_0(mRFirst != -1 && mRLast != -1, "List must be nonempty\n");
+    MATHEMATICS_ASSERTION_0(rFirst != -1 && rLast != -1, "列表必须为非空。\n");
 
-    if (i == mRFirst)
+    if (i == rFirst)
     {
-        mRFirst = V(i).SNext;
-        if (mRFirst != -1)
+        rFirst = Get(i).sNext;
+        if (rFirst != -1)
         {
-            V(mRFirst).SPrev = -1;
+            Get(rFirst).sPrev = -1;
         }
-        V(i).SNext = -1;
+        Get(i).sNext = -1;
     }
-    else if (i == mRLast)
+    else if (i == rLast)
     {
-        mRLast = V(i).SPrev;
-        if (mRLast != -1)
+        rLast = Get(i).sPrev;
+        if (rLast != -1)
         {
-            V(mRLast).SNext = -1;
+            Get(rLast).sNext = -1;
         }
-        V(i).SPrev = -1;
+        Get(i).sPrev = -1;
     }
     else
     {
-        auto currSPrev = V(i).SPrev;
-        auto currSNext = V(i).SNext;
-        V(currSPrev).SNext = currSNext;
-        V(currSNext).SPrev = currSPrev;
-        V(i).SNext = -1;
-        V(i).SPrev = -1;
+        const auto currSPrev = Get(i).sPrev;
+        const auto currSNext = Get(i).sNext;
+        Get(currSPrev).sNext = currSNext;
+        Get(currSNext).sPrev = currSPrev;
+        Get(i).sNext = -1;
+        Get(i).sPrev = -1;
     }
 }
 
 template <typename Real>
-Real Mathematics::IncrementalDelaunay2<Real>::Triangulate ::ComputeWeight(int v0, int p)
+Real Mathematics::IncrementalDelaunay2<Real>::Triangulate::ComputeWeight(int v0, int p)
 {
-    auto& vertex0 = V(v0);
-    MATHEMATICS_ASSERTION_0(vertex0.IsEarTip, "Vertex must be an ear tip\n");
-    if (0 <= vertex0.Index && vertex0.Index <= 2)
+    auto& vertex0 = Get(v0);
+
+    MATHEMATICS_ASSERTION_0(vertex0.isEarTip, "顶点必须是ear tip\n");
+
+    if (0 <= vertex0.index && vertex0.index <= 2)
     {
-        // The vertex is a supervertex.  Return infinite weight so that the
-        // supervertices are processed last.
-        vertex0.IsSuperVertex = true;
-        vertex0.Weight = Math<Real>::maxReal;
-        return vertex0.Weight;
+        vertex0.isSuperVertex = true;
+        vertex0.weight = Math<Real>::maxReal;
+        return vertex0.weight;
     }
 
-    // Get the adjacent vertices.
-    int prev = vertex0.VPrev;
-    int next = vertex0.VNext;
-    auto& vertexP = V(prev);
-    auto& vertexN = V(next);
+    const auto prev = vertex0.vPrev;
+    const auto next = vertex0.vNext;
+    const auto& vertexP = Get(prev);
+    const auto& vertexN = Get(next);
 
-    const auto& posP = mDelaunay->GetVertices()[vertexP.Index];
-    const auto& pos0 = mDelaunay->GetVertices()[vertex0.Index];
-    const auto& posN = mDelaunay->GetVertices()[vertexN.Index];
-    const auto& posR = mDelaunay->GetVertices()[p];
+    const auto posP = delaunay->GetVertices().at(vertexP.index);
+    const auto pos0 = delaunay->GetVertices().at(vertex0.index);
+    const auto posN = delaunay->GetVertices().at(vertexN.index);
+    const auto posR = delaunay->GetVertices().at(p);
 
-    // Compute D.
     auto x0 = pos0[0] - posP[0];
     auto y0 = pos0[1] - posP[1];
     auto x1 = posN[0] - posP[0];
     auto y1 = posN[1] - posP[1];
     auto denom = x0 * y1 - x1 * y0;
 
-    // Compute H.
     auto s0x = posP[0] + posR[0];
     auto d0x = posP[0] - posR[0];
     auto s0y = posP[1] + posR[1];
@@ -1547,8 +1539,9 @@ Real Mathematics::IncrementalDelaunay2<Real>::Triangulate ::ComputeWeight(int v0
     auto c02 = d0y * z1 - d1y * z0;
     auto numer = d0x * c00 + d1x * c01 + d2x * c02;
 
-    vertex0.Weight = numer / denom;
-    return vertex0.Weight;
+    vertex0.weight = numer / denom;
+
+    return vertex0.weight;
 }
 
 #endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_INCREMENTAL_DELAUNAY2_DETAIL_H

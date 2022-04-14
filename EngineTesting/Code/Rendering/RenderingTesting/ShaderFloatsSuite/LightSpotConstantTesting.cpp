@@ -27,7 +27,10 @@
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, LightSpotConstantTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
 void Rendering::LightSpotConstantTesting
 	::MainTest()
 { 
@@ -91,7 +94,7 @@ void Rendering::LightSpotConstantTesting
 
 		firstLight->SetAttenuation(constant, linear, quadratic, intensity);
 
-		const int numRegisters = 1;
+		constexpr int numRegisters = 1;
 		LightSpotConstant firstShaderFloat(firstLight);
 		ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), numRegisters);
 		
@@ -138,7 +141,7 @@ void Rendering::LightSpotConstantTesting
 
 		thirdShaderFloat.SetRegister(0, secondData);
 
-		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(secondData, thirdShaderFloat.GetRegister(0));
+		ASSERT_EQUAL(secondData, thirdShaderFloat.GetRegister(0));
 
 		for (int registerIndex = 0; registerIndex < 4; ++registerIndex)
 		{

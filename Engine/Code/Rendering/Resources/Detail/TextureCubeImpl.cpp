@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 14:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 14:11)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,20 +22,10 @@
 #include <vector>
 
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26473)
-#include SYSTEM_WARNING_DISABLE(26492)
-Rendering::TextureCubeImpl ::TextureCubeImpl(TextureFormat format, int dimension, int numLevels, BufferUsage usage)
+
+Rendering::TextureCubeImpl::TextureCubeImpl(TextureFormat format, int dimension, int numLevels, BufferUsage usage)
     : ParentType{ format, TextureFlags::TextureCube, usage, numLevels },
-      m_TextureLevelData{ CalculateNumDimensions(TextureFlags::TextureCube) }
+      textureLevelData{ CalculateNumDimensions(TextureFlags::TextureCube) }
 {
     RENDERING_ASSERTION_0(0 < dimension, "dimension 必须是正数\n");
 
@@ -44,18 +37,18 @@ Rendering::TextureCubeImpl ::TextureCubeImpl(TextureFormat format, int dimension
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::TextureCubeImpl ::TextureCubeImpl()
+Rendering::TextureCubeImpl::TextureCubeImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ TextureFormat::A8R8G8B8, TextureFlags::TextureCube, BufferUsage::Texture, 0 },
-      m_TextureLevelData{ CalculateNumDimensions(TextureFlags::TextureCube) }
+      textureLevelData{ CalculateNumDimensions(TextureFlags::TextureCube) }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 // private
-void Rendering::TextureCubeImpl ::ResetDimension(int dimension)
+void Rendering::TextureCubeImpl::ResetDimension(int dimension)
 {
-    m_TextureLevelData.SetDimension(0, 0, dimension);
-    m_TextureLevelData.SetDimension(1, 0, dimension);
+    textureLevelData.SetDimension(0, 0, dimension);
+    textureLevelData.SetDimension(1, 0, dimension);
 
     const auto maxLevels = GetMaxLevels();
     const auto numLevels = GetNumLevels();
@@ -68,15 +61,15 @@ void Rendering::TextureCubeImpl ::ResetDimension(int dimension)
     }
 }
 
-int Rendering::TextureCubeImpl ::GetMaxLevels() const
+int Rendering::TextureCubeImpl::GetMaxLevels() const
 {
-    auto logDimension = Mathematics::BitHacks::Log2OfPowerOfTwo(GetWidth());
+    const auto logDimension = Mathematics::BitHacks::Log2OfPowerOfTwo(GetWidth());
 
     return logDimension + 1;
 }
 
 // private
-void Rendering::TextureCubeImpl ::ComputeNumLevelBytes()
+void Rendering::TextureCubeImpl::ComputeNumLevelBytes()
 {
     const auto type = GetTextureType();
     auto dimension0 = GetWidth();
@@ -85,9 +78,9 @@ void Rendering::TextureCubeImpl ::ComputeNumLevelBytes()
 
     for (auto level = 0; level < numLevels; ++level)
     {
-        m_TextureLevelData.SetNumLevelBytes(level, CalculateNumLevelBytes(dimension0));
-        m_TextureLevelData.SetDimension(0, level, dimension0);
-        m_TextureLevelData.SetDimension(1, level, dimension1);
+        textureLevelData.SetNumLevelBytes(level, CalculateNumLevelBytes(dimension0));
+        textureLevelData.SetDimension(0, level, dimension0);
+        textureLevelData.SetDimension(1, level, dimension1);
 
         if (1 < dimension0)
         {
@@ -100,12 +93,12 @@ void Rendering::TextureCubeImpl ::ComputeNumLevelBytes()
         }
     }
 
-    m_TextureLevelData.RecountNumTotalBytes(numLevels, type);
-    m_TextureLevelData.RecountLevelOffsets(numLevels);
+    textureLevelData.RecountNumTotalBytes(numLevels, type);
+    textureLevelData.RecountLevelOffsets(numLevels);
 }
 
 // private
-int Rendering::TextureCubeImpl ::CalculateNumLevelBytes(int dimension)
+int Rendering::TextureCubeImpl::CalculateNumLevelBytes(int dimension)
 {
     const auto format = GetFormat();
 
@@ -146,9 +139,8 @@ int Rendering::TextureCubeImpl ::CalculateNumLevelBytes(int dimension)
 }
 
 // private
-void Rendering::TextureCubeImpl ::VerifyNumLevels()
+void Rendering::TextureCubeImpl::VerifyNumLevels()
 {
-    CoreTools::DisableNoexcept();
     const auto format = GetFormat();
     const auto numLevels = GetNumLevels();
 
@@ -156,7 +148,7 @@ void Rendering::TextureCubeImpl ::VerifyNumLevels()
     {
         if (1 < numLevels)
         {
-            RENDERING_ASSERTION_1(false, "对于32位float纹理没有mipmaps\n");
+            RENDERING_ASSERTION_0(false, "对于32位float纹理没有mipmaps\n");
             SetNumLevels(1);
         }
     }
@@ -172,56 +164,56 @@ void Rendering::TextureCubeImpl ::VerifyNumLevels()
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TextureCubeImpl)
 
-int Rendering::TextureCubeImpl ::GetNumDimensions() const noexcept
+int Rendering::TextureCubeImpl::GetNumDimensions() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_TextureLevelData.GetNumDimensions();
+    return textureLevelData.GetNumDimensions();
 }
 
-int Rendering::TextureCubeImpl ::GetDimension(int index, int level) const
+int Rendering::TextureCubeImpl::GetDimension(int index, int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_TextureLevelData.GetDimension(index, level);
+    return textureLevelData.GetDimension(index, level);
 }
 
-int Rendering::TextureCubeImpl ::GetNumLevelBytes(int level) const
+int Rendering::TextureCubeImpl::GetNumLevelBytes(int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_TextureLevelData.GetNumLevelBytes(level);
+    return textureLevelData.GetNumLevelBytes(level);
 }
 
-int Rendering::TextureCubeImpl ::GetNumTotalBytes() const noexcept
+int Rendering::TextureCubeImpl::GetNumTotalBytes() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_TextureLevelData.GetNumTotalBytes();
+    return textureLevelData.GetNumTotalBytes();
 }
 
-int Rendering::TextureCubeImpl ::GetLevelOffset(int level) const
+int Rendering::TextureCubeImpl::GetLevelOffset(int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_TextureLevelData.GetLevelOffset(level);
+    return textureLevelData.GetLevelOffset(level);
 }
 
-int Rendering::TextureCubeImpl ::GetWidth() const
+int Rendering::TextureCubeImpl::GetWidth() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return GetDimension(0, 0);
 }
 
-int Rendering::TextureCubeImpl ::GetHeight() const
+int Rendering::TextureCubeImpl::GetHeight() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return GetDimension(1, 0);
 }
 
-void Rendering::TextureCubeImpl ::DoGenerateMipmaps()
+void Rendering::TextureCubeImpl::DoGenerateMipmaps()
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -231,7 +223,13 @@ void Rendering::TextureCubeImpl ::DoGenerateMipmaps()
         auto dimension = GetWidth();
 
         auto faceOffset = face * GetNumTotalBytes() / 6;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         auto texels = GetWriteData() + faceOffset;
+
+#include STSTEM_WARNING_POP
 
         for (auto level = 1; level < numLevels; ++level)
         {
@@ -246,30 +244,43 @@ void Rendering::TextureCubeImpl ::DoGenerateMipmaps()
     }
 }
 
-char* Rendering::TextureCubeImpl ::GetTextureData(int face, int level)
+char* Rendering::TextureCubeImpl::GetTextureData(int face, int level)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= level && level < GetNumLevels(), "无效等级在GetData\n");
     RENDERING_ASSERTION_0(0 <= face && face < 6, "无效面在GetData\n");
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26492)
+
     return const_cast<char*>(static_cast<const ClassType*>(this)->GetTextureData(face, level));
+
+#include STSTEM_WARNING_POP
 }
 
-const char* Rendering::TextureCubeImpl ::GetTextureData(int face, int level) const
+const char* Rendering::TextureCubeImpl::GetTextureData(int face, int level) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= level && level < GetNumLevels(), "无效等级在GetData\n");
     RENDERING_ASSERTION_0(0 <= face && face < 6, "无效面在GetData\n");
 
     const auto faceOffset = face * GetNumTotalBytes() / 6;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     return GetReadOnlyData() + faceOffset + GetLevelOffset(level);
+
+#include STSTEM_WARNING_POP
 }
 
-void Rendering::TextureCubeImpl ::GenerateNextMipmap(int dimension, const char* texels, int dimensionNext, char* texelsNext)
+void Rendering::TextureCubeImpl::GenerateNextMipmap(int dimension, const char* texels, int dimensionNext, char* texelsNext)
 {
-    texelsNext;
-    texels;
-    // vector<FloatColour> colour(dimension * dimension);
+    if (texelsNext == nullptr)
+    {
+        return;
+    }
 
     const auto format = GetFormat();
 
@@ -280,7 +291,16 @@ void Rendering::TextureCubeImpl ::GenerateNextMipmap(int dimension, const char* 
     if (fromFunction != nullptr && toFunction != nullptr)
     {
         const auto numTexels = dimension * dimension;
-        vector<char> fromVector;  // 复制texels数组
+        vector<char> fromVector{};
+        for (auto i = 0; i < numTexels; ++i)
+        {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            fromVector.emplace_back(*(texels + i));
+
+#include STSTEM_WARNING_POP
+        }
         auto colour = fromFunction(fromVector);
 
         for (auto heightIndex = 0; heightIndex < dimensionNext; ++heightIndex)
@@ -290,18 +310,20 @@ void Rendering::TextureCubeImpl ::GenerateNextMipmap(int dimension, const char* 
                 const auto index = widthIndex + dimensionNext * heightIndex;
                 const auto base = 2 * (widthIndex + dimension * heightIndex);
                 const auto fourthIndex = base + dimension + 1;
+                const auto nextBase = base + 1;
+                const auto i0 = base + dimension;
 
                 if (fourthIndex < boost::numeric_cast<int>(colour.size()))
                 {
-                    colour[index] = 0.25f * colour[base] +
-                                    0.25f * colour[base + 1] +
-                                    0.25f * colour[base + dimension] +
-                                    0.25f * colour[fourthIndex];
+                    colour.at(index) = 0.25f * colour.at(base) +
+                                       0.25f * colour.at(nextBase) +
+                                       0.25f * colour.at(i0) +
+                                       0.25f * colour.at(fourthIndex);
                 }
                 else
                 {
-                    colour[index] = 0.5f * colour[base] +
-                                    0.5f * colour[base + 1];
+                    colour.at(index) = 0.5f * colour.at(base) +
+                                       0.5f * colour.at(nextBase);
                 }
             }
         }
@@ -309,41 +331,51 @@ void Rendering::TextureCubeImpl ::GenerateNextMipmap(int dimension, const char* 
         const auto numTexelsNext = dimensionNext * dimensionNext;
 
         auto result = toFunction(colour);
+
+        for (auto value : result)
+        {
+            *texelsNext = value;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            ++texelsNext;
+
+#include STSTEM_WARNING_POP
+        }
     }
 }
 
-void Rendering::TextureCubeImpl ::LoadLevelData(CoreTools::BufferSource& source)
+void Rendering::TextureCubeImpl::LoadLevelData(CoreTools::BufferSource& source)
 {
-    m_TextureLevelData.Load(source);
+    textureLevelData.Load(source);
 }
 
-void Rendering::TextureCubeImpl ::SaveLevelData(CoreTools::BufferTarget& target) const
+void Rendering::TextureCubeImpl::SaveLevelData(CoreTools::BufferTarget& target) const
 {
-    m_TextureLevelData.Save(target);
+    textureLevelData.Save(target);
 }
 
-int Rendering::TextureCubeImpl ::GetLevelDataStreamingSize() const noexcept
+int Rendering::TextureCubeImpl::GetLevelDataStreamingSize() const noexcept
 {
-    return m_TextureLevelData.GetStreamingSize();
+    return textureLevelData.GetStreamingSize();
 }
 
-void Rendering::TextureCubeImpl ::SaveLevelDataToFile(WriteFileManager& outFile) const
+void Rendering::TextureCubeImpl::SaveLevelDataToFile(WriteFileManager& outFile) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    m_TextureLevelData.SaveToFile(outFile);
+    textureLevelData.SaveToFile(outFile);
 }
 
-void Rendering::TextureCubeImpl ::LoadLevelDataFromFile(ReadFileManager& inFile)
+void Rendering::TextureCubeImpl::LoadLevelDataFromFile(ReadFileManager& inFile)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_TextureLevelData.ReadFromFile(inFile);
+    textureLevelData.ReadFromFile(inFile);
 }
 
-void Rendering::TextureCubeImpl ::ExpandFileBufferSize()
+void Rendering::TextureCubeImpl::ExpandFileBufferSize()
 {
     ExpandFileBufferSizeOnCube();
 }
-
-#include STSTEM_WARNING_POP

@@ -30,7 +30,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26487)
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26440)
-Rendering::ShaderParametersImpl ::ShaderParametersImpl(const ConstShaderBaseSharedPtr& shader)
+Rendering::ShaderParametersImpl::ShaderParametersImpl(const ConstShaderBaseSharedPtr& shader)
     : m_Shader{ shader }, m_Constants{}, m_Textures{}
 {
     const auto numConstants = m_Shader->GetNumConstants();
@@ -48,13 +48,13 @@ Rendering::ShaderParametersImpl ::ShaderParametersImpl(const ConstShaderBaseShar
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderParametersImpl ::ShaderParametersImpl() noexcept
+Rendering::ShaderParametersImpl::ShaderParametersImpl() noexcept
     : m_Shader{}, m_Constants{}, m_Textures{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderParametersImpl ::ShaderParametersImpl(const ShaderParametersImpl& rhs)
+Rendering::ShaderParametersImpl::ShaderParametersImpl(const ShaderParametersImpl& rhs)
     : m_Shader{ rhs.m_Shader }, m_Constants{}, m_Textures{}
 {
     for (const auto& pointer : rhs.m_Constants)
@@ -70,7 +70,7 @@ Rendering::ShaderParametersImpl ::ShaderParametersImpl(const ShaderParametersImp
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderParametersImpl& Rendering::ShaderParametersImpl ::operator=(const ShaderParametersImpl& rhs)
+Rendering::ShaderParametersImpl& Rendering::ShaderParametersImpl::operator=(const ShaderParametersImpl& rhs)
 {
     ShaderParametersImpl result{ rhs };
 
@@ -79,7 +79,7 @@ Rendering::ShaderParametersImpl& Rendering::ShaderParametersImpl ::operator=(con
     return *this;
 }
 
-void Rendering::ShaderParametersImpl ::Swap(ShaderParametersImpl& rhs)
+void Rendering::ShaderParametersImpl::Swap(ShaderParametersImpl& rhs)
 {
     swap(m_Shader, rhs.m_Shader);
     m_Constants.swap(rhs.m_Constants);
@@ -88,7 +88,7 @@ void Rendering::ShaderParametersImpl ::Swap(ShaderParametersImpl& rhs)
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderParametersImpl)
 
-void Rendering::ShaderParametersImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderParametersImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -97,7 +97,7 @@ void Rendering::ShaderParametersImpl ::Load(CoreTools::BufferSource& source)
     //source.ReadSharedPtr(m_Textures);
 }
 
-void Rendering::ShaderParametersImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::ShaderParametersImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -106,7 +106,7 @@ void Rendering::ShaderParametersImpl ::Save(CoreTools::BufferTarget& target) con
     //target.WriteSharedPtr(m_Textures);
 }
 
-int Rendering::ShaderParametersImpl ::GetStreamingSize() const
+int Rendering::ShaderParametersImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -118,7 +118,7 @@ int Rendering::ShaderParametersImpl ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::ShaderParametersImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::ShaderParametersImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -135,7 +135,7 @@ void Rendering::ShaderParametersImpl ::Link(CoreTools::ObjectLink& source)
     }
 }
 
-void Rendering::ShaderParametersImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::ShaderParametersImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -152,7 +152,7 @@ void Rendering::ShaderParametersImpl ::Register(CoreTools::ObjectRegister& targe
     }
 }
 
-CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -177,7 +177,7 @@ CoreTools::ObjectSharedPtr Rendering::ShaderParametersImpl ::GetObjectByName(con
     return CoreTools::ObjectSharedPtr();
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -198,7 +198,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::ShaderParametersImpl ::GetAllObjec
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -232,7 +232,7 @@ CoreTools::ConstObjectSharedPtr Rendering::ShaderParametersImpl ::GetConstObject
     return CoreTools::ConstObjectSharedPtr{};
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::ShaderParametersImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::ShaderParametersImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -253,21 +253,21 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::ShaderParametersImpl ::GetAll
     return objects;
 }
 
-int Rendering::ShaderParametersImpl ::GetNumConstants() const
+int Rendering::ShaderParametersImpl::GetNumConstants() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_Constants.size());
 }
 
-int Rendering::ShaderParametersImpl ::GetNumTextures() const
+int Rendering::ShaderParametersImpl::GetNumTextures() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_Textures.size());
 }
 
-const Rendering::ShaderParametersImpl::ConstShaderFloatSharedPtrGather Rendering::ShaderParametersImpl ::GetConstants() const
+const Rendering::ShaderParametersImpl::ConstShaderFloatSharedPtrGather Rendering::ShaderParametersImpl::GetConstants() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -281,7 +281,7 @@ const Rendering::ShaderParametersImpl::ConstShaderFloatSharedPtrGather Rendering
     return gather;
 }
 
-const Rendering::ShaderParametersImpl::ConstTextureSharedPtrGather Rendering::ShaderParametersImpl ::GetTextures() const
+const Rendering::ShaderParametersImpl::ConstTextureSharedPtrGather Rendering::ShaderParametersImpl::GetTextures() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -295,7 +295,7 @@ const Rendering::ShaderParametersImpl::ConstTextureSharedPtrGather Rendering::Sh
     return gather;
 }
 
-int Rendering::ShaderParametersImpl ::SetConstant(const string& name, const ShaderFloatSharedPtr& shaderFloat)
+int Rendering::ShaderParametersImpl::SetConstant(const string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -313,7 +313,7 @@ int Rendering::ShaderParametersImpl ::SetConstant(const string& name, const Shad
     THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"s));
 }
 
-void Rendering::ShaderParametersImpl ::SetConstant(int handle, const ShaderFloatSharedPtr& shaderFloat)
+void Rendering::ShaderParametersImpl::SetConstant(int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= handle && handle < GetNumConstants(), "索引越界！\n");
@@ -321,7 +321,7 @@ void Rendering::ShaderParametersImpl ::SetConstant(int handle, const ShaderFloat
     m_Constants[handle] = shaderFloat;
 }
 
-int Rendering::ShaderParametersImpl ::SetTexture(const string& name, const TextureSharedPtr& texture)
+int Rendering::ShaderParametersImpl::SetTexture(const string& name, const TextureSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -339,7 +339,7 @@ int Rendering::ShaderParametersImpl ::SetTexture(const string& name, const Textu
     THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"s));
 }
 
-void Rendering::ShaderParametersImpl ::SetTexture(int handle, const TextureSharedPtr& texture)
+void Rendering::ShaderParametersImpl::SetTexture(int handle, const TextureSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= handle && handle < GetNumTextures(), "索引越界！\n");
@@ -347,7 +347,7 @@ void Rendering::ShaderParametersImpl ::SetTexture(int handle, const TextureShare
     m_Textures[handle] = texture;
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl ::GetConstant(const string& name) const
+const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl::GetConstant(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -364,7 +364,7 @@ const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl ::Get
     THROW_EXCEPTION(SYSTEM_TEXT("找不到常量！\n"s));
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl ::GetConstant(int handle) const
+const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl::GetConstant(int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= handle && handle < GetNumConstants(), "索引越界！\n");
@@ -372,7 +372,7 @@ const Rendering::ConstShaderFloatSharedPtr Rendering::ShaderParametersImpl ::Get
     return m_Constants[handle];
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl ::GetTexture(const std::string& name) const
+const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl::GetTexture(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -389,7 +389,7 @@ const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl ::GetText
     THROW_EXCEPTION(SYSTEM_TEXT("找不到纹理！\n"s));
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl ::GetTexture(int handle) const
+const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl::GetTexture(int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= handle && handle < GetNumTextures(), "索引越界！\n");
@@ -397,7 +397,7 @@ const Rendering::ConstTextureSharedPtr Rendering::ShaderParametersImpl ::GetText
     return m_Textures[handle];
 }
 
-void Rendering::ShaderParametersImpl ::UpdateConstants(const VisualSharedPtr& visual, const CameraSharedPtr& camera)
+void Rendering::ShaderParametersImpl::UpdateConstants(const VisualSharedPtr& visual, const CameraSharedPtr& camera)
 {
     RENDERING_CLASS_IS_VALID_9;
 

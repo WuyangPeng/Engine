@@ -50,11 +50,11 @@ void Mathematics::ContBox2Testing ::ContAlignedBoxTest()
             vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D box = ContBox2d::ContAlignedBox(vertices);
+        Box2D box = ContBox2D::ContAlignedBox(vertices);
 
         for (int i = 0; i < size; ++i)
         {
-            ASSERT_TRUE(ContBox2d::InBox(vertices[i], box));
+            ASSERT_TRUE(ContBox2D::InBox(vertices[i], box));
         }
     }
 }
@@ -77,11 +77,11 @@ void Mathematics::ContBox2Testing ::ContOrientedBoxTest()
             vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D box = ContBox2d::ContOrientedBox(vertices);
+        Box2D box = ContBox2D::ContOrientedBox(vertices);
 
         for (int i = 0; i < size; ++i)
         {
-            ASSERT_TRUE(ContBox2d::InBox(vertices[i], box));
+            ASSERT_TRUE(ContBox2D::InBox(vertices[i], box));
         }
     }
 }
@@ -104,7 +104,7 @@ void Mathematics::ContBox2Testing ::MergeBoxesTest()
             firstVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D firstBox = ContBox2d::ContAlignedBox(firstVertices);
+        Box2D firstBox = ContBox2D::ContAlignedBox(firstVertices);
 
         std::vector<Vector2D> secondVertices;
         int secondSize = secondRandomDistribution(generator);
@@ -114,18 +114,18 @@ void Mathematics::ContBox2Testing ::MergeBoxesTest()
             secondVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D secondBox = ContBox2d::ContOrientedBox(secondVertices);
+        Box2D secondBox = ContBox2D::ContOrientedBox(secondVertices);
 
-        Box2D thirdBox = ContBox2d::MergeBoxes(firstBox, secondBox);
+        Box2D thirdBox = ContBox2D::MergeBoxes(firstBox, secondBox);
 
         for (int i = 0; i < firstSize; ++i)
         {
-            ASSERT_TRUE(ContBox2d::InBox(firstVertices[i], thirdBox));
+            ASSERT_TRUE(ContBox2D::InBox(firstVertices[i], thirdBox));
         }
 
         for (int i = 0; i < secondSize; ++i)
         {
-            ASSERT_TRUE(ContBox2d::InBox(secondVertices[i], thirdBox));
+            ASSERT_TRUE(ContBox2D::InBox(secondVertices[i], thirdBox));
         }
     }
 }

@@ -41,7 +41,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, LightPntPerPixEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightPntPerPixEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightPntPerPixEffect);
 
-Rendering::LightPntPerPixEffect ::LightPntPerPixEffect()
+Rendering::LightPntPerPixEffect::LightPntPerPixEffect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.LightPntPerPix", 2, 3, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -106,7 +106,7 @@ Rendering::LightPntPerPixEffect ::LightPntPerPixEffect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect ::CreateInstance(Light* light, Material* material) const
+Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect::CreateInstance(Light* light, Material* material) const
 {
     VisualEffectInstance* instance = nullptr;  //    CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -124,20 +124,22 @@ Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect ::CreateInstanc
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect ::CreateUniqueInstance(Light* light, Material* material)
+Rendering::VisualEffectInstance* Rendering::LightPntPerPixEffect::CreateUniqueInstance(Light* light, Material* material) noexcept
 {
-    const LightPntPerPixEffect* effect = nullptr;  //  CoreTools::New0<LightPntPerPixEffect>();
-    return effect->CreateInstance(light, material);
+    light;
+    material;
+    //const LightPntPerPixEffect* effect = nullptr;  //  CoreTools::New0<LightPntPerPixEffect>();
+    return nullptr;  //  effect->CreateInstance(light, material);
 }
 
 // Streaming support.
 
-Rendering::LightPntPerPixEffect ::LightPntPerPixEffect(LoadConstructor value)
+Rendering::LightPntPerPixEffect::LightPntPerPixEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::LightPntPerPixEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::LightPntPerPixEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -146,12 +148,12 @@ void Rendering::LightPntPerPixEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightPntPerPixEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::LightPntPerPixEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightPntPerPixEffect ::PostLink()
+void Rendering::LightPntPerPixEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -183,12 +185,12 @@ void Rendering::LightPntPerPixEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::LightPntPerPixEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightPntPerPixEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightPntPerPixEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightPntPerPixEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -197,7 +199,7 @@ void Rendering::LightPntPerPixEffect ::Save(CoreTools::BufferTarget& target) con
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightPntPerPixEffect ::GetStreamingSize() const
+int Rendering::LightPntPerPixEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

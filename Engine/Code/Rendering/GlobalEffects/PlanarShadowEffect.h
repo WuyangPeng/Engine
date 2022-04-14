@@ -43,7 +43,7 @@ namespace Rendering
 
         // Member access.
         int GetNumPlanes() const noexcept;
-        void SetPlane(int i, TrianglesMeshSharedPtr plane);
+        void SetPlane(int i, TrianglesMeshSharedPtr plane) noexcept;
         TrianglesMeshSharedPtr GetPlane(int i) const noexcept;
         void SetProjector(int i, Light* projector) ;
         Light* GetProjector(int i) const noexcept;

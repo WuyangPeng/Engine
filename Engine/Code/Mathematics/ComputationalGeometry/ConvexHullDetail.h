@@ -1,139 +1,170 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 14:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/05 14:39)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H
 
 #include "ConvexHull.h"
-
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::ConvexHull<Real>
-	::ConvexHull(int numVertices, Real epsilon, bool owner, QueryType queryType)
-	:mQueryType{ queryType }, mNumVertices{ numVertices }, mDimension{ 0 }, mNumSimplices{ 0 }, mIndices{ 0 }, mEpsilon{ epsilon }, mOwner{ owner }
+Mathematics::ConvexHull<Real>::ConvexHull(int numVertices, Real epsilon, QueryType queryType)
+    : queryType{ queryType }, numVertices{ numVertices }, dimension{ 0 }, numSimplices{ 0 }, indices{}, epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_0(mNumVertices > 0 && mEpsilon >= Math<Real>::GetValue(0), "Invalid inputs\n");
+    MATHEMATICS_ASSERTION_0(0 < numVertices && Math<Real>::GetValue(0) <= epsilon, "无效输入\n");
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ConvexHull<Real>::IsValid() const noexcept
+{
+    if (0 < numVertices && Math<Real>::GetValue(0) <= epsilon)
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::QueryType Mathematics::ConvexHull<Real>::GetQueryType() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return queryType;
 }
 
 template <typename Real>
-Mathematics::ConvexHull<Real>
-	::~ConvexHull()
+int32_t Mathematics::ConvexHull<Real>::GetNumVertices() const noexcept
 {
-    //DELETE1(mIndices);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numVertices;
 }
 
 template <typename Real>
-int Mathematics::ConvexHull<Real>
-	::GetQueryType() const
+Real Mathematics::ConvexHull<Real>::GetEpsilon() const noexcept
 {
-    return mQueryType;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return epsilon;
 }
 
 template <typename Real>
-int Mathematics::ConvexHull<Real>
-	::GetNumVertices() const
+int32_t Mathematics::ConvexHull<Real>::GetDimension() const noexcept
 {
-    return mNumVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return dimension;
 }
 
 template <typename Real>
-Real Mathematics::ConvexHull<Real>
-	::GetEpsilon() const
+int32_t Mathematics::ConvexHull<Real>::GetNumSimplices() const noexcept
 {
-    return mEpsilon;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numSimplices;
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull<Real>
-	::GetOwner() const
+typename Mathematics::ConvexHull<Real>::IndicesType Mathematics::ConvexHull<Real>::GetIndices() const
 {
-    return mOwner;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return indices;
 }
 
 template <typename Real>
-int Mathematics::ConvexHull<Real>
-	::GetDimension() const
+bool Mathematics::ConvexHull<Real>::Load(CoreTools::ReadFileManager& inFile)
 {
-    return mDimension;
-}
+    indices.clear();
 
-template <typename Real>
-int Mathematics::ConvexHull<Real>
-	::GetNumSimplices() const
-{
-    return mNumSimplices;
-}
+    inFile.Read(sizeof(QueryType), &queryType);
+    inFile.Read(sizeof(int32_t), &numVertices);
+    inFile.Read(sizeof(int32_t), &dimension);
+    inFile.Read(sizeof(int32_t), &numSimplices);
+    inFile.Read(sizeof(Real), &epsilon);
 
-template <typename Real>
-const int* Mathematics::ConvexHull<Real>
-	::GetIndices() const
-{
-    return mIndices;
-}
-
-template <typename Real>
-bool Mathematics::ConvexHull<Real>
-	::Load(CoreTools::ReadFileManager& inFile)
-{
-    //DELETE1(mIndices);
-
-    // Fixed-size members.
-    int type;
-    inFile.Read(sizeof(int), &type);
-	mQueryType = (QueryType)type;
-
-    inFile.Read(sizeof(int), &mNumVertices);
-    inFile.Read(sizeof(int), &mDimension);
-    inFile.Read(sizeof(int), &mNumSimplices);
-    inFile.Read(sizeof(Real), &mEpsilon);
-
-    // Variable-size members.
-    int numIndices;
-    inFile.Read(sizeof(int), &numIndices);
-    if (1 <= mDimension && mDimension <= 3)
+    int32_t numIndices{};
+    inFile.Read(sizeof(int32_t), &numIndices);
+    if (1 <= dimension && dimension <= 3)
     {
-        MATHEMATICS_ASSERTION_0(numIndices == (mDimension+1)*mNumSimplices,"Inconsistent index count\n");
-       // mIndices = NEW1<int>(numIndices);
-        inFile.Read(sizeof(int), numIndices, mIndices);
+        MATHEMATICS_ASSERTION_0(numIndices == (dimension + 1) * numSimplices, "不一致的索引计数。\n");
+        indices.resize(numIndices);
+        inFile.Read(sizeof(int32_t), numIndices, indices.data());
+
         return true;
     }
 
-    mIndices = 0;
-    return mDimension == 0;
+    indices.clear();
+    return dimension == 0;
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull<Real>	
-	::Save(CoreTools::WriteFileManager& outFile) const
+bool Mathematics::ConvexHull<Real>::Save(CoreTools::WriteFileManager& outFile) const
 {
-    // Fixed-size members.
-    int type = (int)mQueryType;
-    outFile.Write(sizeof(int), &type);
+    outFile.Write(sizeof(QueryType), &queryType);
+    outFile.Write(sizeof(int32_t), &numVertices);
+    outFile.Write(sizeof(int32_t), &dimension);
+    outFile.Write(sizeof(int32_t), &numSimplices);
+    outFile.Write(sizeof(Real), &epsilon);
 
-    outFile.Write(sizeof(int), &mNumVertices);
-    outFile.Write(sizeof(int), &mDimension);
-    outFile.Write(sizeof(int), &mNumSimplices);
-    outFile.Write(sizeof(Real), &mEpsilon);
-
-    // The member mOwner is not streamed because on a Load call, this
-    // object will allocate the vertices and own this memory.
-
-    // Variable-size members.
-    int numIndices;
-    if (1 <= mDimension && mDimension <= 3)
+    int32_t numIndices{};
+    if (1 <= dimension && dimension <= 3)
     {
-        numIndices = (mDimension+1)*mNumSimplices;
-        outFile.Write(sizeof(int), &numIndices);
-        outFile.Write(sizeof(int), numIndices, mIndices);
+        numIndices = (dimension + 1) * numSimplices;
+        outFile.Write(sizeof(int32_t), &numIndices);
+        outFile.Write(sizeof(int32_t), indices.size(), indices.data());
         return true;
     }
 
     numIndices = 0;
-    outFile.Write(sizeof(int), &numIndices);
-    return mDimension == 0;
+    outFile.Write(sizeof(int32_t), &numIndices);
+
+    return dimension == 0;
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H
+template <typename Real>
+void Mathematics::ConvexHull<Real>::SetDimension(int32_t newDimension) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    dimension = newDimension;
+}
+
+template <typename Real>
+void Mathematics::ConvexHull<Real>::SetNumSimplices(int32_t newNumSimplices) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    numSimplices = newNumSimplices;
+}
+
+template <typename Real>
+void Mathematics::ConvexHull<Real>::AddIndex(int32_t index)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    indices.emplace_back(index);
+}
+
+template <typename Real>
+void Mathematics::ConvexHull<Real>::SetIndex(IndicesType indicesType)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    indices = indicesType;
+}
+
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H

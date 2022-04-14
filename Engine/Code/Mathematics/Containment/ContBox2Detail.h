@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 16:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 11:16)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_BOX2_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_BOX2_DETAIL_H
@@ -20,28 +23,32 @@ Mathematics::ContBox2<Real>::ContBox2() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::ContBox2<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 // static
 template <typename Real>
-typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContAlignedBox(const Points& points)
+typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContAlignedBox(const Points& points)
 {
     const auto aabb = Vector2Tools<Real>::ComputeExtremes(points);
-    auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
+    const auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
     return Box2{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector2::GetUnitX(), Vector2::GetUnitY(),
-                 halfDiagonal[0], halfDiagonal[1] };
+                 Vector2::GetUnitX(),
+                 Vector2::GetUnitY(),
+                 halfDiagonal[0],
+                 halfDiagonal[1] };
 }
 
 // static
 template <typename Real>
-typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContOrientedBox(const Points& points)
+typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContOrientedBox(const Points& points)
 {
     const GaussPointsFit2<Real> gaussPointsFit2{ points };
     const auto box = gaussPointsFit2.GetBox2();
@@ -52,19 +59,19 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
     // 然后包围盒中心被调整为
     // C' = C + 0.5*(min(y0) + max(y0)) * U0 + 0.5 * (min(y1) + max(y1)) * U1
 
-    std::vector<Real> firstDotCollection;
-    std::vector<Real> secondDotCollection;
+    std::vector<Real> firstDotCollection{};
+    std::vector<Real> secondDotCollection{};
     firstDotCollection.reserve(points.size());
     secondDotCollection.reserve(points.size());
 
     for (const auto& point : points)
     {
-        auto diff = point - box.GetCenter();
+        const auto diff = point - box.GetCenter();
 
-        auto firstDot = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
+        const auto firstDot = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
         firstDotCollection.push_back(firstDot);
 
-        auto secondDot = Vector2Tools<Real>::DotProduct(diff, box.GetAxis1());
+        const auto secondDot = Vector2Tools<Real>::DotProduct(diff, box.GetAxis1());
         secondDotCollection.push_back(secondDot);
     }
 
@@ -72,11 +79,12 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
 
     const auto secondBoundary = std::minmax_element(secondDotCollection.begin(), secondDotCollection.end());
 
-    auto center = box.GetCenter() + (Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * box.GetAxis0() +
-                                     Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * box.GetAxis1());
+    auto center = box.GetCenter() +
+                  (Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * box.GetAxis0() +
+                   Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * box.GetAxis1());
 
-    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
-    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
+    const auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
+    const auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
 
     return Box2{ center, box.GetAxis0(), box.GetAxis1(), firstExtent, secondExtent };
 }
@@ -85,13 +93,13 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
 template <typename Real>
 bool Mathematics::ContBox2<Real>::InBox(const Vector2& point, const Box2& box)
 {
-    auto diff = point - box.GetCenter();
-    auto firstCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
+    const auto diff = point - box.GetCenter();
+    const auto firstCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
 
     if (box.GetExtent0() + box.GetEpsilon() < firstCoeff)
         return false;
 
-    auto secondCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis1());
+    const auto secondCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis1());
 
     if (box.GetExtent1() + box.GetEpsilon() < secondCoeff)
         return false;
@@ -101,7 +109,7 @@ bool Mathematics::ContBox2<Real>::InBox(const Vector2& point, const Box2& box)
 
 // static
 template <typename Real>
-typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::MergeBoxes(const Box2& lhs, const Box2& rhs)
+typename Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::MergeBoxes(const Box2& lhs, const Box2& rhs)
 {
     // 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
     // 此值将在后面进行更新。
@@ -109,7 +117,7 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
 
     // 合并的包围盒的轴是输入包围盒轴的平均值。
     // 如果需要的话，第二个包围盒的轴被取负，这样它们形成与第一个包围盒的轴线为锐角。
-    Vector2 firstAxis;
+    Vector2 firstAxis{};
     if (Math::GetValue(0) <= Vector2Tools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
     {
         firstAxis = Math::GetRational(1, 2) * (lhs.GetAxis0() + rhs.GetAxis0());
@@ -136,19 +144,19 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
 
     lhsVertices.insert(lhsVertices.end(), rhsVertices.begin(), rhsVertices.end());
 
-    std::vector<Real> firstDotCollection;
-    std::vector<Real> secondDotCollection;
+    std::vector<Real> firstDotCollection{};
+    std::vector<Real> secondDotCollection{};
     firstDotCollection.reserve(lhsVertices.size());
     secondDotCollection.reserve(lhsVertices.size());
 
     for (const auto& point : lhsVertices)
     {
-        auto diff = point - center;
+        const auto diff = point - center;
 
-        auto firstDot = Vector2Tools<Real>::DotProduct(diff, firstAxis);
+        const auto firstDot = Vector2Tools<Real>::DotProduct(diff, firstAxis);
         firstDotCollection.push_back(firstDot);
 
-        auto secondDot = Vector2Tools<Real>::DotProduct(diff, secondAxis);
+        const auto secondDot = Vector2Tools<Real>::DotProduct(diff, secondAxis);
         secondDotCollection.push_back(secondDot);
     }
 
@@ -161,8 +169,8 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
     center += Math::GetRational(1, 2) * (*firstBoundary.first + *firstBoundary.second) * firstAxis +
               Math::GetRational(1, 2) * (*secondBoundary.first + *secondBoundary.second) * secondAxis;
 
-    auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
-    auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
+    const auto firstExtent = (*firstBoundary.second - *firstBoundary.first) * Math::GetRational(1, 2);
+    const auto secondExtent = (*secondBoundary.second - *secondBoundary.first) * Math::GetRational(1, 2);
 
     return Box2{ center, firstAxis, secondAxis, firstExtent, secondExtent };
 }

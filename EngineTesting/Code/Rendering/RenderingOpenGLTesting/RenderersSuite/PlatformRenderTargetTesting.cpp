@@ -25,7 +25,7 @@ void Rendering::PlatformRenderTargetTesting
 }
 
 void Rendering::PlatformRenderTargetTesting
-	::RenderTargetTest()
+	::RenderTargetTest() noexcept
 {
 // 	RenderTargetSmartPointer firstRenderTarget(NEW0 RenderTarget(5,TextureFormat::A8B8G8R8,1024,768,false,true));
 // 

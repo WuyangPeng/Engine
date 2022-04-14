@@ -23,7 +23,7 @@
 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, BlendTransformControllerTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::BlendTransformControllerTesting
 	::MainTest()
 {
@@ -38,7 +38,7 @@ void Rendering::BlendTransformControllerTesting
 }
 
 void Rendering::BlendTransformControllerTesting
-	::InitTest()
+	::InitTest()  
 {
 // 	SpatialTest controlledObjectTest;
 // 

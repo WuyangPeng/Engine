@@ -47,7 +47,10 @@ void Rendering::PolysegmentTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
 void Rendering::PolysegmentTesting
 	::InitTest()
 {

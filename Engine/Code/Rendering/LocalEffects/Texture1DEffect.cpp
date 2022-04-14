@@ -31,7 +31,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture1DEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture1DEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture1DEffect);
 
-Rendering::Texture1DEffect ::Texture1DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
+Rendering::Texture1DEffect::Texture1DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Texture1D", 2, 2, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -86,12 +86,12 @@ Rendering::Texture1DEffect ::Texture1DEffect(ShaderFlags::SamplerFilter filter, 
     InsertTechnique(technique);
 }
 
-Rendering::PixelShader* Rendering ::Texture1DEffect::GetPixelShader() const
+Rendering::PixelShader* Rendering::Texture1DEffect::GetPixelShader() const
 {
     return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture1DEffect ::CreateInstance(Texture1D* texture) const
+Rendering::VisualEffectInstance* Rendering::Texture1DEffect::CreateInstance(Texture1D* texture) const
 {
     VisualEffectInstance* instance = nullptr;  //  CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -106,9 +106,11 @@ Rendering::VisualEffectInstance* Rendering::Texture1DEffect ::CreateInstance(Tex
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture1DEffect ::CreateUniqueInstance(Texture1D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
+Rendering::VisualEffectInstance* Rendering::Texture1DEffect::CreateUniqueInstance(Texture1D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
 {
     const Texture1DEffect* effect = nullptr;  // New0 < Texture1DEffect>();
+    if (effect == nullptr)
+        return nullptr;
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate);
@@ -117,12 +119,12 @@ Rendering::VisualEffectInstance* Rendering::Texture1DEffect ::CreateUniqueInstan
 
 // Streaming support.
 
-Rendering::Texture1DEffect ::Texture1DEffect(LoadConstructor value)
+Rendering::Texture1DEffect::Texture1DEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::Texture1DEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::Texture1DEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -131,12 +133,12 @@ void Rendering::Texture1DEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Texture1DEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::Texture1DEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::Texture1DEffect ::PostLink()
+void Rendering::Texture1DEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -168,12 +170,12 @@ void Rendering::Texture1DEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::Texture1DEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Texture1DEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::Texture1DEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Texture1DEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -182,7 +184,7 @@ void Rendering::Texture1DEffect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::Texture1DEffect ::GetStreamingSize() const
+int Rendering::Texture1DEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

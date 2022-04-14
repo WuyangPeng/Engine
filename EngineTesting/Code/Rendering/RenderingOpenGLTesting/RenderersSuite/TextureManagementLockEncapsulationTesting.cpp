@@ -30,6 +30,7 @@ void Rendering::TextureManagementLockEncapsulationTesting
 
 	RendererManager::Destroy();
 }
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::TextureManagementLockEncapsulationTesting
 	::Texture1DTest()
 {

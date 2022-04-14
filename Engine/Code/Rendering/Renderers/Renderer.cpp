@@ -22,20 +22,20 @@ using std::string;
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
-Rendering::Renderer ::Renderer(RendererTypes type, const RendererBasis& basis)
+Rendering::Renderer::Renderer(RendererTypes type, const RendererBasis& basis)
     : impl{ CoreTools::ImplCreateUseFactory::Default, type, basis }, m_RendererID{ 0 }
 {
     // 初始化未完成
 }
 
-Rendering::Renderer ::Renderer(const std::string& fileName)
+Rendering::Renderer::Renderer(const std::string& fileName)
     : impl{ CoreTools::ImplCreateUseFactory::Default, fileName }, m_RendererID{ 0 }
 {
     // 初始化未完成
 }
 
 // private
-void Rendering::Renderer ::Init()
+void Rendering::Renderer::Init()
 {
     m_RendererID = RENDERER_MANAGE_SINGLETON.Insert(shared_from_this());
     impl->SetRealRenderer(shared_from_this());
@@ -43,13 +43,13 @@ void Rendering::Renderer ::Init()
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Renderer ::Renderer(Renderer&& rhs) noexcept
+Rendering::Renderer::Renderer(Renderer&& rhs) noexcept
     : impl{ move(rhs.impl) }, m_RendererID{ rhs.m_RendererID }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Renderer& Rendering::Renderer ::operator=(Renderer&& rhs) noexcept
+Rendering::Renderer& Rendering::Renderer::operator=(Renderer&& rhs) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -59,7 +59,7 @@ Rendering::Renderer& Rendering::Renderer ::operator=(Renderer&& rhs) noexcept
     return *this;
 }
 
-Rendering::Renderer ::~Renderer()
+Rendering::Renderer::~Renderer()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
     EXCEPTION_TRY
@@ -75,7 +75,7 @@ Rendering::Renderer ::~Renderer()
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::Renderer ::IsValid() const noexcept
+bool Rendering::Renderer::IsValid() const noexcept
 {
     if (  0 < m_RendererID)
         return true;
@@ -98,21 +98,21 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstVe
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexBufferSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexBufferSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex, int offset)
+void Rendering::Renderer::Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex, int offset)
 {
     ;
 
     return impl->Enable(vertexBuffer, streamIndex, offset);
 }
 
-void Rendering::Renderer ::Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex)
+void Rendering::Renderer::Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex)
 {
     ;
 
     return impl->Disable(vertexBuffer, streamIndex);
 }
 
-void* Rendering::Renderer ::Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode)
+void* Rendering::Renderer::Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode)
 {
     ;
 
@@ -127,7 +127,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstInd
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstIndexBufferSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstIndexBufferSharedPtr, void)
 
-void* Rendering::Renderer ::Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode)
+void* Rendering::Renderer::Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode)
 {
     ;
 
@@ -140,35 +140,35 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Update, ConstInd
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture1DSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture1DSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstTexture1DSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Enable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Enable(texture, textureUnit);
 }
 
-void Rendering::Renderer ::Disable(const ConstTexture1DSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Disable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Disable(texture, textureUnit);
 }
 
-void* Rendering::Renderer ::Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode)
+void* Rendering::Renderer::Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode)
 {
     ;
 
     return impl->Lock(texture, level, mode);
 }
 
-void Rendering::Renderer ::Unlock(const ConstTexture1DSharedPtr& texture, int level)
+void Rendering::Renderer::Unlock(const ConstTexture1DSharedPtr& texture, int level)
 {
     ;
 
     return impl->Unlock(texture, level);
 }
 
-void Rendering::Renderer ::Update(const ConstTexture1DSharedPtr& texture, int level)
+void Rendering::Renderer::Update(const ConstTexture1DSharedPtr& texture, int level)
 {
     ;
 
@@ -178,35 +178,35 @@ void Rendering::Renderer ::Update(const ConstTexture1DSharedPtr& texture, int le
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture2DSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture2DSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstTexture2DSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Enable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Enable(texture, textureUnit);
 }
 
-void Rendering::Renderer ::Disable(const ConstTexture2DSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Disable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Disable(texture, textureUnit);
 }
 
-void* Rendering::Renderer ::Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode)
+void* Rendering::Renderer::Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode)
 {
     ;
 
     return impl->Lock(texture, level, mode);
 }
 
-void Rendering::Renderer ::Unlock(const ConstTexture2DSharedPtr& texture, int level)
+void Rendering::Renderer::Unlock(const ConstTexture2DSharedPtr& texture, int level)
 {
     ;
 
     return impl->Unlock(texture, level);
 }
 
-void Rendering::Renderer ::Update(const ConstTexture2DSharedPtr& texture, int level)
+void Rendering::Renderer::Update(const ConstTexture2DSharedPtr& texture, int level)
 {
     ;
 
@@ -216,35 +216,35 @@ void Rendering::Renderer ::Update(const ConstTexture2DSharedPtr& texture, int le
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTexture3DSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTexture3DSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstTexture3DSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Enable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Enable(texture, textureUnit);
 }
 
-void Rendering::Renderer ::Disable(const ConstTexture3DSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Disable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Disable(texture, textureUnit);
 }
 
-void* Rendering::Renderer ::Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode)
+void* Rendering::Renderer::Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode)
 {
     ;
 
     return impl->Lock(texture, level, mode);
 }
 
-void Rendering::Renderer ::Unlock(const ConstTexture3DSharedPtr& texture, int level)
+void Rendering::Renderer::Unlock(const ConstTexture3DSharedPtr& texture, int level)
 {
     ;
 
     return impl->Unlock(texture, level);
 }
 
-void Rendering::Renderer ::Update(const ConstTexture3DSharedPtr& texture, int level)
+void Rendering::Renderer::Update(const ConstTexture3DSharedPtr& texture, int level)
 {
     ;
 
@@ -254,35 +254,35 @@ void Rendering::Renderer ::Update(const ConstTexture3DSharedPtr& texture, int le
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstTextureCubeSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstTextureCubeSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Enable(texture, textureUnit);
 }
 
-void Rendering::Renderer ::Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
+void Rendering::Renderer::Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
     ;
 
     return impl->Disable(texture, textureUnit);
 }
 
-void* Rendering::Renderer ::Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode)
+void* Rendering::Renderer::Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode)
 {
     ;
 
     return impl->Lock(texture, face, level, mode);
 }
 
-void Rendering::Renderer ::Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level)
+void Rendering::Renderer::Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
     ;
 
     return impl->Unlock(texture, face, level);
 }
 
-void Rendering::Renderer ::Update(const ConstTextureCubeSharedPtr& texture, int face, int level)
+void Rendering::Renderer::Update(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
     ;
 
@@ -294,7 +294,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstRen
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstRenderTargetSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstRenderTargetSharedPtr, void)
 
-Rendering::ConstTexture2DSharedPtr Rendering::Renderer ::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::Renderer::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
 {
     ;
 
@@ -304,14 +304,14 @@ Rendering::ConstTexture2DSharedPtr Rendering::Renderer ::ReadColor(int index, co
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexShaderSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstVertexShaderSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::Renderer::Enable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
     ;
 
     return impl->Enable(vshader, parameters);
 }
 
-void Rendering::Renderer ::Disable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::Renderer::Disable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
     ;
 
@@ -321,14 +321,14 @@ void Rendering::Renderer ::Disable(const ConstVertexShaderSharedPtr& vshader, co
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstPixelShaderSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstPixelShaderSharedPtr, void)
 
-void Rendering::Renderer ::Enable(const ConstPixelShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::Renderer::Enable(const ConstPixelShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
     ;
 
     return impl->Enable(vshader, parameters);
 }
 
-void Rendering::Renderer ::Disable(const ConstPixelShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::Renderer::Disable(const ConstPixelShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters)
 {
     ;
 
@@ -365,7 +365,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetViewMatrix, const Re
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetProjectionMatrix, const Rendering::Renderer::Matrix)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetPostProjectionMatrix, const Rendering::Renderer::Matrix)
 
-Rendering::PickRay Rendering::Renderer ::GetPickRay(int x, int y) const
+Rendering::PickRay Rendering::Renderer::GetPickRay(int x, int y) const
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -388,21 +388,21 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Renderer, SetAllowGreen, bo
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Renderer, SetAllowBlue, bool, void);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Renderer, SetAllowAlpha, bool, void);
 
-void Rendering::Renderer ::Draw(VisibleSet& visibleSet, const GlobalEffectSharedPtr& globalEffect)
+void Rendering::Renderer::Draw(VisibleSet& visibleSet, const GlobalEffectSharedPtr& globalEffect)
 {
     ;
 
     return impl->Draw(visibleSet, globalEffect);
 }
 
-void Rendering::Renderer ::Draw(const VisualSharedPtr& visual)
+void Rendering::Renderer::Draw(const VisualSharedPtr& visual)
 {
     ;
 
     return impl->Draw(visual);
 }
 
-void Rendering::Renderer ::Draw(const VisualSharedPtr& visual, const VisualEffectInstanceSharedPtr& instance)
+void Rendering::Renderer::Draw(const VisualSharedPtr& visual, const VisualEffectInstanceSharedPtr& instance)
 {
     ;
 
@@ -421,7 +421,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetViewport, Rendering:
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, SetDepthRange, DepthRange, void);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, GetDepthRange, Rendering::DepthRange)
 
-void Rendering::Renderer ::Resize(int width, int height)
+void Rendering::Renderer::Resize(int width, int height)
 {
     ;
 
@@ -434,35 +434,35 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, ClearStencilBuffer,
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, ClearBuffers, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, DisplayColorBuffer, void)
 
-void Rendering::Renderer ::ClearColorBuffer(int x, int y, int w, int h)
+void Rendering::Renderer::ClearColorBuffer(int x, int y, int w, int h)
 {
     ;
 
     return impl->ClearColorBuffer(x, y, w, h);
 }
 
-void Rendering::Renderer ::ClearDepthBuffer(int x, int y, int w, int h)
+void Rendering::Renderer::ClearDepthBuffer(int x, int y, int w, int h)
 {
     ;
 
     return impl->ClearDepthBuffer(x, y, w, h);
 }
 
-void Rendering::Renderer ::ClearStencilBuffer(int x, int y, int w, int h)
+void Rendering::Renderer::ClearStencilBuffer(int x, int y, int w, int h)
 {
     ;
 
     return impl->ClearStencilBuffer(x, y, w, h);
 }
 
-void Rendering::Renderer ::ClearBuffers(int x, int y, int w, int h)
+void Rendering::Renderer::ClearBuffers(int x, int y, int w, int h)
 {
     ;
 
     return impl->ClearBuffers(x, y, w, h);
 }
 
-void Rendering::Renderer ::SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha)
+void Rendering::Renderer::SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha)
 {
     ;
 
@@ -472,21 +472,21 @@ void Rendering::Renderer ::SetColorMask(bool allowRed, bool allowGreen, bool all
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, PreDraw, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, PostDraw, void)
 
-void Rendering::Renderer ::Draw(const uint8_t* screenBuffer, bool reflectY)
+void Rendering::Renderer::Draw(const uint8_t* screenBuffer, bool reflectY)
 {
     ;
 
     return impl->Draw(screenBuffer, reflectY);
 }
 
-void Rendering::Renderer ::Draw(const std::vector<ColourUByte>& screenBuffer, bool reflectY)
+void Rendering::Renderer::Draw(const std::vector<ColourUByte>& screenBuffer, bool reflectY)
 {
     ;
 
     return impl->Draw(screenBuffer.at(0).GetPoint().data(), reflectY);
 }
 
-void Rendering::Renderer ::Draw(int x, int y, const Colour& color, const std::string& message)
+void Rendering::Renderer::Draw(int x, int y, const Colour& color, const std::string& message)
 {
     ;
 
@@ -495,7 +495,7 @@ void Rendering::Renderer ::Draw(int x, int y, const Colour& color, const std::st
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, InTexture2DMap, ConstTexture2DSharedPtr, bool)
 
-void Rendering::Renderer ::InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture)
+void Rendering::Renderer::InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture)
 {
     ;
 

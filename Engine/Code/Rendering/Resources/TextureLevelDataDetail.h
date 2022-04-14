@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 13:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 18:11)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
 #define RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
@@ -10,255 +13,224 @@
 #include "Rendering/RenderingExport.h"
 
 #include "TextureLevelData.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(6385)
- 
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
 template <int WindowSize>
-Rendering::TextureLevelData<WindowSize>
-	::TextureLevelData( int numDimensions ) noexcept
-	:m_NumDimensions{ numDimensions }, m_NumTotalBytes{ 0 }
+Rendering::TextureLevelData<WindowSize>::TextureLevelData(int numDimensions) noexcept
+    : numDimensions{ numDimensions }, dimension{}, numLevelBytes{}, numTotalBytes{ 0 }, levelOffsets{}
 {
-	for (auto level = 0; level < TextureMaximumMipmapLevels;++level)
-	{
-	    for (auto i = 0; i < WindowSize; ++i)
-        {
-		     m_Dimension[i][level] = 0;		 
-        }
-
-		m_NumLevelBytes[level] = 0;
-		m_LevelOffsets[level] = 0;
-	}
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int WindowSize>
-bool Rendering::TextureLevelData<WindowSize>
-	::IsValid() const noexcept
+bool Rendering::TextureLevelData<WindowSize>::IsValid() const noexcept
 {
-	if(0 <= m_NumLevelBytes && m_NumDimensions == WindowSize)
-	    return true;
-	else
-		return false;
+    if (0 <= numTotalBytes && numDimensions == WindowSize)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <int WindowSize>
 int Rendering::TextureLevelData<WindowSize>::GetNumDimensions() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumDimensions;
+    return numDimensions;
 }
 
 template <int WindowSize>
-int Rendering::TextureLevelData<WindowSize>
-	::GetDimension( int index, int level ) const
+int Rendering::TextureLevelData<WindowSize>::GetDimension(int index, int level) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels,  "索引错误！");
-    
-    return m_Dimension[index][level];
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels, "索引错误！");
+
+    return dimension.at(index).at(level);
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-	::SetDimension( int index, int level,int dimension )
+void Rendering::TextureLevelData<WindowSize>::SetDimension(int index, int level, int aDimension)
 {
-	RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels,"索引错误！");
-    
-	if (0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels)
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels, "索引错误！");
+
+    if (0 <= index && index < WindowSize && 0 <= level && level < TextureMaximumMipmapLevels)
     {
-            m_Dimension[index][level] = dimension;
-	}
-   
+        dimension.at(index).at(level) = aDimension;
+    }
 }
 
 template <int WindowSize>
-int Rendering::TextureLevelData<WindowSize>
-	::GetNumLevelBytes( int level ) const
+int Rendering::TextureLevelData<WindowSize>::GetNumLevelBytes(int level) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= level && level < TextureMaximumMipmapLevels, "索引错误！");
-    
-    return m_NumLevelBytes[level];
+
+    return numLevelBytes.at(level);
 }
 
 template <int WindowSize>
 int Rendering::TextureLevelData<WindowSize>::GetNumTotalBytes() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_NumTotalBytes;
+
+    return numTotalBytes;
 }
 
 template <int WindowSize>
-int Rendering::TextureLevelData<WindowSize>
-	::GetLevelOffset( int level ) const
+int Rendering::TextureLevelData<WindowSize>::GetLevelOffset(int level) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= level && level < TextureMaximumMipmapLevels, "索引错误！");
-    
-    return m_LevelOffsets[level];
+
+    return levelOffsets.at(level);
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-	::SetNumLevelBytes( int level,int numLevelBytes )
+void Rendering::TextureLevelData<WindowSize>::SetNumLevelBytes(int level, int aNumLevelBytes)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= level && level < TextureMaximumMipmapLevels, "索引错误！");
-    
-	if (0 <= level && level < TextureMaximumMipmapLevels)
+
+    if (0 <= level && level < TextureMaximumMipmapLevels)
     {
-            m_NumLevelBytes[level] = numLevelBytes;
-	}
-   
+        numLevelBytes.at(level) = aNumLevelBytes;
+    }
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-	::RecountNumTotalBytes(int numLevels, TextureFlags type) noexcept
+void Rendering::TextureLevelData<WindowSize>::RecountNumTotalBytes(int numLevels, TextureFlags type) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_NumTotalBytes = 0;
-	for (auto level = 0; level < numLevels; ++level)
-	{		
-		m_NumTotalBytes += m_NumLevelBytes[level];		
-	}
-
-	if (type == TextureFlags::TextureCube)
+    numTotalBytes = 0;
+    for (auto level = 0; level < numLevels; ++level)
     {
-       m_NumTotalBytes *= 6;
+        numTotalBytes += numLevelBytes.at(level);
+    }
+
+    if (type == TextureFlags::TextureCube)
+    {
+        numTotalBytes *= 6;
     }
 }
 
 template <int WindowSize>
 void Rendering::TextureLevelData<WindowSize>::RecountLevelOffsets(int numLevels) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_LevelOffsets[0] = 0;
-	for (auto level = 0; level < numLevels - 1; ++level)
-	{
-		m_LevelOffsets[level + 1] = m_LevelOffsets[level] + m_NumLevelBytes[level];
-	}
+    levelOffsets.at(0) = 0;
+    for (auto level = 0; level < numLevels - 1; ++level)
+    {
+        const auto nextLevel = level + 1;
+        levelOffsets.at(nextLevel) = levelOffsets.at(level) + numLevelBytes.at(level);
+    }
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-    ::Load( CoreTools::BufferSource& source )
+void Rendering::TextureLevelData<WindowSize>::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumDimensions);
+    source.Read(numDimensions);
 
-	for(auto i = 0;i < WindowSize;++i)
-	{
-		//source.Read(TextureMaximumMipmapLevels, m_Dimension[i]);
-	}   
+    for (auto i = 0; i < WindowSize; ++i)
+    {
+        source.ReadContainer(dimension.at(i));
+    }
 
-	//source.Read(TextureMaximumMipmapLevels, m_NumLevelBytes);
-	source.Read(m_NumTotalBytes);
-//	source.Read(TextureMaximumMipmapLevels, m_LevelOffsets);
+    source.ReadContainer(numLevelBytes);
+    source.Read(numTotalBytes);
+    source.ReadContainer(levelOffsets);
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-    ::Save( CoreTools::BufferTarget& target ) const
+void Rendering::TextureLevelData<WindowSize>::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumDimensions);
+    target.Write(numDimensions);
 
-	for(auto i = 0;i < WindowSize;++i)
-	{
-		//target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_Dimension[i]);
-	}   
+    for (auto i = 0; i < WindowSize; ++i)
+    {
+        target.WriteContainer(dimension.at(i));
+    }
 
-   // target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_NumLevelBytes);
-    target.Write(m_NumTotalBytes);
-   // target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_LevelOffsets);
+    target.WriteContainer(numLevelBytes);
+    target.Write(numTotalBytes);
+    target.WriteContainer(levelOffsets);
 }
 
 template <int WindowSize>
 int Rendering::TextureLevelData<WindowSize>::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;    
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_NumDimensions);
+    auto size = CORE_TOOLS_STREAM_SIZE(numDimensions);
 
-    size += WindowSize * TextureMaximumMipmapLevels * CORE_TOOLS_STREAM_SIZE(m_Dimension[0][0]);   
-    size += TextureMaximumMipmapLevels * CORE_TOOLS_STREAM_SIZE(m_NumLevelBytes[0]);
-    size += CORE_TOOLS_STREAM_SIZE(m_NumTotalBytes);
-    size += TextureMaximumMipmapLevels * CORE_TOOLS_STREAM_SIZE(m_LevelOffsets[0]);
+    size += WindowSize * TextureMaximumMipmapLevels * CORE_TOOLS_STREAM_SIZE(dimension.at(0).at(0));
+    size += TextureMaximumMipmapLevels * CORE_TOOLS_STREAM_SIZE(numLevelBytes.at(0));
+    size += CORE_TOOLS_STREAM_SIZE(numTotalBytes);
+    size += TextureMaximumMipmapLevels * CORE_TOOLS_STREAM_SIZE(levelOffsets.at(0));
 
     return size;
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-	::SaveToFile( WriteFileManager& outFile ) const
+void Rendering::TextureLevelData<WindowSize>::SaveToFile(WriteFileManager& outFile) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1; 
-	
-	outFile.Write(sizeof(int),&m_NumDimensions);
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	for(auto i = 0;i < WindowSize;++i)
-	{
-		outFile.Write(sizeof(int),TextureMaximumMipmapLevels, m_Dimension[i]);
-	}   
+    outFile.Write(sizeof(int32_t), &numDimensions);
 
-    outFile.Write(sizeof(int),TextureMaximumMipmapLevels, m_NumLevelBytes);
-    outFile.Write(sizeof(int),&m_NumTotalBytes);
-    outFile.Write(sizeof(int),TextureMaximumMipmapLevels, m_LevelOffsets);
+    for (auto i = 0; i < WindowSize; ++i)
+    {
+        outFile.Write(sizeof(int32_t), TextureMaximumMipmapLevels, dimension.at(i).data());
+    }
+
+    outFile.Write(sizeof(int32_t), TextureMaximumMipmapLevels, numLevelBytes.data());
+    outFile.Write(sizeof(int32_t), &numTotalBytes);
+    outFile.Write(sizeof(int32_t), TextureMaximumMipmapLevels, levelOffsets.data());
 }
 
 template <int WindowSize>
-void Rendering::TextureLevelData<WindowSize>
-	::ReadFromFile( ReadFileManager& inFile )
+void Rendering::TextureLevelData<WindowSize>::ReadFromFile(ReadFileManager& inFile)
 {
-	RENDERING_CLASS_IS_VALID_1; 
+    RENDERING_CLASS_IS_VALID_1;
 
-const	auto oldNumDimensions = m_NumDimensions;
-        const auto oldNumTotalBytes = m_NumTotalBytes;
+    const auto oldNumDimensions = numDimensions;
+    const auto oldNumTotalBytes = numTotalBytes;
 
-	inFile.Read(sizeof(int),&m_NumDimensions);
+    inFile.Read(sizeof(int32_t), &numDimensions);
 
-	for(auto i = 0;i < WindowSize;++i)
-	{
-		inFile.Read(sizeof(int),TextureMaximumMipmapLevels,  m_Dimension[i]);
-	}   
+    for (auto i = 0; i < WindowSize; ++i)
+    {
+        inFile.Read(sizeof(int32_t), TextureMaximumMipmapLevels, dimension.at(i).data());
+    }
 
-	inFile.Read(sizeof(int),TextureMaximumMipmapLevels, m_NumLevelBytes);
-	inFile.Read(sizeof(int),&m_NumTotalBytes);
-	inFile.Read(sizeof(int),TextureMaximumMipmapLevels,m_LevelOffsets);
+    inFile.Read(sizeof(int32_t), TextureMaximumMipmapLevels, numLevelBytes.data());
+    inFile.Read(sizeof(int32_t), &numTotalBytes);
+    inFile.Read(sizeof(int32_t), TextureMaximumMipmapLevels, levelOffsets.data());
 
-	if(m_NumDimensions != WindowSize || m_NumTotalBytes < 0)
-	{
-		m_NumDimensions = oldNumDimensions;
-		m_NumTotalBytes = oldNumTotalBytes;
-		
-		THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理等级数据不正确。\n"s));		
-	}
+    if (numDimensions != WindowSize || numTotalBytes < 0)
+    {
+        numDimensions = oldNumDimensions;
+        numTotalBytes = oldNumTotalBytes;
+
+        THROW_EXCEPTION(SYSTEM_TEXT("读取的纹理等级数据不正确。\n"s));
+    }
 }
-#include STSTEM_WARNING_POP
-#endif // RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H
 
+#endif  // RENDERING_RESOURCES_TEXTURE_LEVEL_DATA_DETAIL_H

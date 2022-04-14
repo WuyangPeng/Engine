@@ -21,13 +21,13 @@
 using std::string;
 using std::vector;
 
-Rendering::BillboardNodeImpl ::BillboardNodeImpl() noexcept
+Rendering::BillboardNodeImpl::BillboardNodeImpl() noexcept
     : m_Camera{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BillboardNodeImpl ::BillboardNodeImpl(const CameraSharedPtr& camera) noexcept
+Rendering::BillboardNodeImpl::BillboardNodeImpl(const CameraSharedPtr& camera) noexcept
     : m_Camera{ camera }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -35,7 +35,7 @@ Rendering::BillboardNodeImpl ::BillboardNodeImpl(const CameraSharedPtr& camera) 
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BillboardNodeImpl)
 
-int Rendering::BillboardNodeImpl ::GetStreamingSize() const
+int Rendering::BillboardNodeImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -44,70 +44,70 @@ int Rendering::BillboardNodeImpl ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::BillboardNodeImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::BillboardNodeImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
     //target.WriteSharedPtr(m_Camera);
 }
 
-void Rendering::BillboardNodeImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::BillboardNodeImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
     //source.ReadSharedPtr(m_Camera);
 }
 
-void Rendering::BillboardNodeImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::BillboardNodeImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
     //source.ResolveObjectSharedPtrLink(m_Camera);
 }
 
-void Rendering::BillboardNodeImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::BillboardNodeImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
     //target.RegisterSharedPtr(m_Camera);
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::BillboardNodeImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::BillboardNodeImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_Camera->GetConstObjectByName(name);
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::BillboardNodeImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::BillboardNodeImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_Camera->GetAllConstObjectsByName(name);
 }
 
-CoreTools::ObjectSharedPtr Rendering::BillboardNodeImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::BillboardNodeImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_Camera->GetObjectByName(name);
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::BillboardNodeImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::BillboardNodeImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return m_Camera->GetAllObjectsByName(name);
 }
 
-void Rendering::BillboardNodeImpl ::AlignTo(const CameraSharedPtr& camera)
+void Rendering::BillboardNodeImpl::AlignTo(const CameraSharedPtr& camera)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Camera = camera;
 }
 
-const Rendering::ConstCameraSharedPtr Rendering::BillboardNodeImpl ::GetCamera() const
+const Rendering::ConstCameraSharedPtr Rendering::BillboardNodeImpl::GetCamera() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -1,40 +1,43 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 16:37)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "UnorderedTriangleKey.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <algorithm>
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "System/Helper/PragmaWarning.h" 
+
+Mathematics::UnorderedTriangleKey::UnorderedTriangleKey(int first, int second, int third) noexcept
+    : vertex{}
+{
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-Mathematics::UnorderedTriangleKey
-::UnorderedTriangleKey (int first, int second,int third) noexcept
-{
+
     if (first < second)
     {
         if (first < third)
         {
             // first是最小
-            m_Vertex[0] = first;
-            m_Vertex[1] = std::min(second, third);
-            m_Vertex[2] = std::max(second, third);
+            vertex[0] = first;
+            vertex[1] = std::min(second, third);
+            vertex[2] = std::max(second, third);
         }
         else
         {
             // third是最小
-            m_Vertex[0] = third;
-            m_Vertex[1] = std::min(first, second);
-            m_Vertex[2] = std::max(first, second);
+            vertex[0] = third;
+            vertex[1] = std::min(first, second);
+            vertex[2] = std::max(first, second);
         }
     }
     else
@@ -42,65 +45,34 @@ Mathematics::UnorderedTriangleKey
         if (second < third)
         {
             // second是最小
-            m_Vertex[0] = second;
-            m_Vertex[1] = std::min(third, first);
-            m_Vertex[2] = std::max(third, first);
+            vertex[0] = second;
+            vertex[1] = std::min(third, first);
+            vertex[2] = std::max(third, first);
         }
         else
         {
             // third是最小
-            m_Vertex[0] = third;
-            m_Vertex[1] = std::min(first, second);
-            m_Vertex[2] = std::max(first, second);
+            vertex[0] = third;
+            vertex[1] = std::min(first, second);
+            vertex[2] = std::max(first, second);
         }
     }
-   
-    
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
 
+#include STSTEM_WARNING_POP
 
-Mathematics::UnorderedTriangleKey
-	::UnorderedTriangleKey(const UnorderedTriangleKey& rhs) noexcept
-{
-    m_Vertex[0] = rhs.m_Vertex[0];
-    m_Vertex[1] = rhs.m_Vertex[1];
-    m_Vertex[2] = rhs.m_Vertex[2];
-    
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-Mathematics::UnorderedTriangleKey& Mathematics::UnorderedTriangleKey
-	::operator = (const UnorderedTriangleKey& rhs) noexcept
-{
-	MATHEMATICS_CLASS_IS_VALID_9;
-    
-    m_Vertex[0] = rhs.m_Vertex[0];
-    m_Vertex[1] = rhs.m_Vertex[1];
-    m_Vertex[2] = rhs.m_Vertex[2];
-
-	return *this;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, UnorderedTriangleKey)
 
-int Mathematics::UnorderedTriangleKey
-	::GetKey(int index) const
+int Mathematics::UnorderedTriangleKey::GetKey(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
-    
-	if (0 <= index && index < 3)
-	{
-		return m_Vertex[index];
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-	}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertex.at(index);
 }
 
-bool Mathematics
-	::operator< (const UnorderedTriangleKey& lhs,  const UnorderedTriangleKey& rhs)
+bool Mathematics::operator<(const UnorderedTriangleKey& lhs, const UnorderedTriangleKey& rhs)
 {
     if (lhs.GetKey(2) < rhs.GetKey(2))
     {
@@ -117,12 +89,10 @@ bool Mathematics
         return true;
     }
 
-     if (rhs.GetKey(1) < lhs.GetKey(1))
+    if (rhs.GetKey(1) < lhs.GetKey(1))
     {
         return false;
     }
 
     return lhs.GetKey(0) < rhs.GetKey(0);
 }
-
-#include STSTEM_WARNING_POP

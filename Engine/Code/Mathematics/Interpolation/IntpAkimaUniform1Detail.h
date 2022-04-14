@@ -1,118 +1,133 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 12:46)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_DETAIL_H
 
 #include "IntpAkimaUniform1.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpAkimaUniform1<Real>::IntpAkimaUniform1(int quantity, Real xMin, Real xSpacing, const std::vector<Real>& f)
+    : ParentType{ quantity, f }, xMin{ xMin }, xMax{ xMin + xSpacing * (boost::numeric_cast<size_t>(quantity) - 1) }, xSpacing{ xSpacing }
 {
-    template <typename Real>
-    IntpAkimaUniform1<Real>::IntpAkimaUniform1(int quantity, Real xMin, Real xSpacing, Real* F)
-        : IntpAkima1<Real>{ quantity, F }
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0), "间距必须为正。\n");
+
+    auto invDX = (Math<Real>::GetValue(1)) / xSpacing;
+    const auto slopeSize = quantity + 3;
+    std::vector<Real> slope(slopeSize);
+
+    for (auto i = 0, ip1 = 1, ip2 = 2; i < quantity - 1; ++i, ++ip1, ++ip2)
     {
-        MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0), "Spacing must be positive\n");
+        slope.at(ip2) = (this->GetF(ip1) - this->GetF(i)) * invDX;
+    }
 
-        mXMin = xMin;
-        mXMax = xMin + xSpacing * (quantity - 1);
-        mXSpacing = xSpacing;
+    const auto nextQuantity = quantity + 1;
+    const auto beforeQuantity = quantity - 1;
+    const auto quantityAndTwo = quantity + 2;
 
-        // Compute slopes.
-        auto invDX = (Math::GetValue(1)) / xSpacing;
-        Real* slope = nullptr;  // NEW1<Real>(quantity + 3);
-        int i, ip1, ip2;
-        for (i = 0, ip1 = 1, ip2 = 2; i < quantity - 1; ++i, ++ip1, ++ip2)
+    slope.at(1) = (Math<Real>::GetValue(2)) * slope.at(2) - slope.at(3);
+    slope.at(0) = (Math<Real>::GetValue(2)) * slope.at(1) - slope.at(2);
+    slope.at(nextQuantity) = (Math<Real>::GetValue(2)) * slope.at(quantity) - slope.at(beforeQuantity);
+    slope.at(quantityAndTwo) = (Math<Real>::GetValue(2)) * slope.at(nextQuantity) - slope.at(quantity);
+
+    std::vector<Real> fDer(quantity);
+    for (auto i = 0; i < quantity; ++i)
+    {
+        std::vector<Real> derivative{ slope.begin() + i, slope.end() };
+        fDer.at(i) = this->ComputeDerivative(derivative);
+    }
+
+    auto invDX2 = (Math<Real>::GetValue(1)) / (xSpacing * xSpacing);
+    auto invDX3 = invDX2 / xSpacing;
+    for (auto i = 0, ip1 = 1; i < quantity - 1; ++i, ++ip1)
+    {
+        auto& poly = this->GetPolynomial(i);
+
+        auto f0 = this->GetF(i);
+        auto f1 = this->GetF(ip1);
+        auto df = f1 - f0;
+        auto fDer0 = fDer.at(i);
+        auto fDer1 = fDer.at(ip1);
+
+        poly[0] = f0;
+        poly[1] = fDer0;
+        poly[2] = (Math<Real>::GetValue(3) * df - xSpacing * (fDer1 + (Math<Real>::GetValue(2)) * fDer0)) * invDX2;
+        poly[3] = (xSpacing * (fDer0 + fDer1) - (Math<Real>::GetValue(2)) * df) * invDX3;
+    }
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpAkimaUniform1<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform1<Real>::GetXMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMin;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform1<Real>::GetXMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform1<Real>::GetXSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xSpacing;
+}
+
+template <typename Real>
+bool Mathematics::IntpAkimaUniform1<Real>::Lookup(Real x, int& index, Real& dx) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (x >= xMin)
+    {
+        if (x <= xMax)
         {
-            slope[ip2] = (F[ip1] - F[i]) * invDX;
-        }
-
-        slope[1] = (Math::GetValue(2)) * slope[2] - slope[3];
-        slope[0] = (Math::GetValue(2)) * slope[1] - slope[2];
-        slope[quantity + 1] = (Math::GetValue(2)) * slope[quantity] - slope[quantity - 1];
-        slope[quantity + 2] = (Math::GetValue(2)) * slope[quantity + 1] - slope[quantity];
-
-        // Construct derivatives.
-        Real* FDer = nullptr;  // NEW1<Real>(quantity);
-        for (i = 0; i < quantity; ++i)
-        {
-            FDer[i] = ComputeDerivative(slope + i);
-        }
-
-        // Construct polynomials.
-        auto invDX2 = (Math::GetValue(1)) / (xSpacing * xSpacing);
-        auto invDX3 = invDX2 / xSpacing;
-        for (i = 0, ip1 = 1; i < quantity - 1; ++i, ++ip1)
-        {
-            auto& poly = mPoly[i];
-
-            auto F0 = F[i];
-            auto F1 = F[ip1];
-            auto df = F1 - F0;
-            auto FDer0 = FDer[i];
-            auto FDer1 = FDer[ip1];
-
-            poly[0] = F0;
-            poly[1] = FDer0;
-            poly[2] = ((static_cast<Real>(3)) * df - xSpacing * (FDer1 + (Math::GetValue(2)) * FDer0)) * invDX2;
-            poly[3] = (xSpacing * (FDer0 + FDer1) - (Math::GetValue(2)) * df) * invDX3;
-        }
-
-//         DELETE1(slope);
-//         DELETE1(FDer);
-    }
-
-    template <typename Real>
-    IntpAkimaUniform1<Real>::~IntpAkimaUniform1()
-    {
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform1<Real>::GetXMin() const
-    {
-        return mXMin;
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform1<Real>::GetXMax() const
-    {
-        return mXMax;
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform1<Real>::GetXSpacing() const
-    {
-        return mXSpacing;
-    }
-
-    template <typename Real>
-    bool IntpAkimaUniform1<Real>::Lookup(Real x, int& index, Real& dx) const
-    {
-        if (x >= mXMin)
-        {
-            if (x <= mXMax)
+            for (index = 0; index + 1 < this->GetQuantity(); ++index)
             {
-                for (index = 0; index + 1 < quantity; ++index)
+                const auto nextIndex = index + 1;
+                if (x < xMin + xSpacing * (nextIndex))
                 {
-                    if (x < mXMin + mXSpacing * (index + 1))
-                    {
-                        dx = x - (mXMin + mXSpacing * index);
-                        return true;
-                    }
+                    dx = x - (xMin + xSpacing * index);
+
+                    return true;
                 }
-
-                --index;
-                dx = x - (mXMin + mXSpacing * index);
-                return true;
             }
-        }
 
-        return false;
+            --index;
+            dx = x - (xMin + xSpacing * index);
+
+            return true;
+        }
     }
 
+    return false;
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM1_DETAIL_H

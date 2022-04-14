@@ -18,7 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-Rendering::OpenGLIndexBuffer ::OpenGLIndexBuffer([[maybe_unused]] Renderer* renderer, const IndexBuffer* indexBuffer)
+Rendering::OpenGLIndexBuffer::OpenGLIndexBuffer([[maybe_unused]] Renderer* renderer, const IndexBuffer* indexBuffer)
     : ParentType{}, m_Buffer{ 0 }
 {
     Init(indexBuffer);
@@ -30,7 +30,7 @@ Rendering::OpenGLIndexBuffer ::OpenGLIndexBuffer([[maybe_unused]] Renderer* rend
 
 // private
 void Rendering::OpenGLIndexBuffer
-    ::Init(const IndexBuffer* indexBuffer)
+::Init(const IndexBuffer* indexBuffer)
 {
  //   m_Buffer = System::GLElementBufferData(indexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(indexBuffer->GetUsage())]);
     
@@ -41,7 +41,7 @@ void Rendering::OpenGLIndexBuffer
 }
 
 Rendering::OpenGLIndexBuffer
-    ::~OpenGLIndexBuffer ()
+::~OpenGLIndexBuffer ()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
     
@@ -50,7 +50,7 @@ Rendering::OpenGLIndexBuffer
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::OpenGLIndexBuffer
-    ::IsValid() const noexcept
+::IsValid() const noexcept
 {
 	if(ParentType::IsValid() && 0 <= m_Buffer)
 		return true;
@@ -59,7 +59,7 @@ bool Rendering::OpenGLIndexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLIndexBuffer ::Enable([[maybe_unused]] Renderer* renderer) noexcept
+void Rendering::OpenGLIndexBuffer::Enable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -68,7 +68,7 @@ void Rendering::OpenGLIndexBuffer ::Enable([[maybe_unused]] Renderer* renderer) 
  
 }
 
-void Rendering::OpenGLIndexBuffer ::Disable([[maybe_unused]] Renderer* renderer) noexcept
+void Rendering::OpenGLIndexBuffer::Disable([[maybe_unused]] Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -78,7 +78,7 @@ void Rendering::OpenGLIndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
 }
 
 void* Rendering::OpenGLIndexBuffer
-    ::Lock (BufferLocking mode) noexcept
+::Lock (BufferLocking mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -90,7 +90,7 @@ void* Rendering::OpenGLIndexBuffer
 }
 
 void Rendering::OpenGLIndexBuffer
-    ::Unlock () noexcept
+::Unlock () noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     

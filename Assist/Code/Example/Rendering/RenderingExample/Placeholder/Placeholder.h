@@ -7,23 +7,23 @@
 #ifndef RENDERING_EXAMPLE_PLACEHOLDER_H
 #define RENDERING_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Rendering/RenderingExample/RenderingExampleDll.h" 
+#include "Example/Rendering/RenderingExample/RenderingExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace RenderingExample
 {
-	 class RENDERING_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class RENDERING_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // RENDERING_EXAMPLE_PLACEHOLDER_H
+#endif  // RENDERING_EXAMPLE_PLACEHOLDER_H

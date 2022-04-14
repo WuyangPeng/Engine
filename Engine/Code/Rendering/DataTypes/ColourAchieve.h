@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/25 20:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 14:52)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_ACHIEVE_H
 #define RENDERING_DATA_TYPES_COLOUR_ACHIEVE_H
@@ -18,39 +18,39 @@
 
 // private
 template <typename T>
-void Rendering::Colour<T>::InitColour(T red, T green, T blue, T alpha) noexcept
+void Rendering::Colour<T>::InitColour(T newRed, T newGreen, T newBlue, T newAlpha) noexcept
 {
-    m_Red = red;
-    m_Green = green;
-    m_Blue = blue;
-    m_Alpha = alpha;
+    red = newRed;
+    green = newGreen;
+    blue = newBlue;
+    alpha = newAlpha;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename T>
 bool Rendering::Colour<T>::IsValid() const noexcept
 {
-    if (!m_IsClamp)
+    if (!isClamp)
     {
         return true;
     }
 
-    if (m_Red < sm_MinValue || sm_MaxValue < m_Red)
+    if (red < minValue || maxValue < red)
     {
         return false;
     }
 
-    if (m_Green < sm_MinValue || sm_MaxValue < m_Green)
+    if (green < minValue || maxValue < green)
     {
         return false;
     }
 
-    if (m_Blue < sm_MinValue || sm_MaxValue < m_Blue)
+    if (blue < minValue || maxValue < blue)
     {
         return false;
     }
 
-    if (m_Alpha < sm_MinValue || sm_MaxValue < m_Alpha)
+    if (alpha < minValue || maxValue < alpha)
     {
         return false;
     }
@@ -60,17 +60,17 @@ bool Rendering::Colour<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-void Rendering::Colour<T>::SetClamp(bool isClamp) noexcept
+void Rendering::Colour<T>::SetClamp(bool newIsClamp) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    if (m_IsClamp == false && isClamp == true)
+    if (isClamp == false && newIsClamp == true)
     {
-        m_IsClamp = true;
+        isClamp = true;
         Standardization();
     }
 
-    m_IsClamp = isClamp;
+    isClamp = newIsClamp;
 }
 
 template <typename T>
@@ -78,7 +78,7 @@ bool Rendering::Colour<T>::IsClamp() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_IsClamp;
+    return isClamp;
 }
 
 template <typename T>
@@ -86,7 +86,7 @@ T Rendering::Colour<T>::GetRed() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Red;
+    return red;
 }
 
 template <typename T>
@@ -94,7 +94,7 @@ T Rendering::Colour<T>::GetGreen() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Green;
+    return green;
 }
 
 template <typename T>
@@ -102,7 +102,7 @@ T Rendering::Colour<T>::GetBlue() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Blue;
+    return blue;
 }
 
 template <typename T>
@@ -110,66 +110,66 @@ T Rendering::Colour<T>::GetAlpha() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Alpha;
+    return alpha;
 }
 
 template <typename T>
-const typename Rendering::Colour<T>::ArrayType Rendering::Colour<T>::GetPoint() const noexcept
+typename Rendering::Colour<T>::ArrayType Rendering::Colour<T>::GetPoint() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    ArrayType result{ m_Red, m_Green, m_Blue, m_Alpha };
+    ArrayType result{ red, green, blue, alpha };
 
     return result;
 }
 
 template <typename T>
-void Rendering::Colour<T>::SetColour(T red, T green, T blue, T alpha) noexcept
+void Rendering::Colour<T>::SetColour(T newRed, T newGreen, T newBlue, T newAlpha) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    SetRed(red);
-    SetGreen(green);
-    SetBlue(blue);
-    SetAlpha(alpha);
+    SetRed(newRed);
+    SetGreen(newGreen);
+    SetBlue(newBlue);
+    SetAlpha(newAlpha);
 }
 
 template <typename T>
-void Rendering::Colour<T>::SetRed(T red) noexcept
+void Rendering::Colour<T>::SetRed(T newRed) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Red = red;
+    red = newRed;
 
     StandardizationRed();
 }
 
 template <typename T>
-void Rendering::Colour<T>::SetGreen(T green) noexcept
+void Rendering::Colour<T>::SetGreen(T newGreen) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Green = green;
+    green = newGreen;
 
     StandardizationGreen();
 }
 
 template <typename T>
-void Rendering::Colour<T>::SetBlue(T blue) noexcept
+void Rendering::Colour<T>::SetBlue(T newBlue) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Blue = blue;
+    blue = newBlue;
 
     StandardizationBlue();
 }
 
 template <typename T>
-void Rendering::Colour<T>::SetAlpha(T alpha) noexcept
+void Rendering::Colour<T>::SetAlpha(T newAlpha) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Alpha = alpha;
+    alpha = newAlpha;
 
     StandardizationAlpha();
 }
@@ -179,10 +179,10 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator+=(const Colour& rhs) noexce
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Red += rhs.m_Red;
-    m_Green += rhs.m_Green;
-    m_Blue += rhs.m_Blue;
-    m_Alpha += rhs.m_Alpha;
+    red += rhs.red;
+    green += rhs.green;
+    blue += rhs.blue;
+    alpha += rhs.alpha;
 
     Standardization();
 
@@ -194,10 +194,10 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator-=(const Colour& rhs) noexce
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Red -= rhs.m_Red;
-    m_Green -= rhs.m_Green;
-    m_Blue -= rhs.m_Blue;
-    m_Alpha -= rhs.m_Alpha;
+    red -= rhs.red;
+    green -= rhs.green;
+    blue -= rhs.blue;
+    alpha -= rhs.alpha;
 
     Standardization();
 
@@ -207,35 +207,35 @@ Rendering::Colour<T>& Rendering::Colour<T>::operator-=(const Colour& rhs) noexce
 template <typename T>
 Rendering::Colour<T>& Rendering::Colour<T>::operator*=(const Colour& rhs) noexcept(std::is_floating_point_v<T>)
 {
-    static_assert(sm_MaxValue != 0, "sm_MaxValue != 0");
+    static_assert(maxValue != 0, "maxValue != 0");
 
     RENDERING_CLASS_IS_VALID_1;
 
     if constexpr (std::is_floating_point<T>())
     {
-        m_Red *= rhs.m_Red;
-        m_Green *= rhs.m_Green;
-        m_Blue *= rhs.m_Blue;
-        m_Alpha *= rhs.m_Alpha;
+        red *= rhs.red;
+        green *= rhs.green;
+        blue *= rhs.blue;
+        alpha *= rhs.alpha;
 
-        m_Red /= sm_MaxValue;
-        m_Green /= sm_MaxValue;
-        m_Blue /= sm_MaxValue;
-        m_Alpha /= sm_MaxValue;
+        red /= maxValue;
+        green /= maxValue;
+        blue /= maxValue;
+        alpha /= maxValue;
     }
     else
     {
-        const auto redMultiply = gsl::narrow_cast<int>(m_Red) * gsl::narrow_cast<int>(rhs.m_Red);
-        m_Red = boost::numeric_cast<T>(redMultiply / sm_MaxValue);
+        const auto redMultiply = gsl::narrow_cast<int>(red) * gsl::narrow_cast<int>(rhs.red);
+        red = boost::numeric_cast<T>(redMultiply / maxValue);
 
-        const auto greenMultiply = gsl::narrow_cast<int>(m_Green) * gsl::narrow_cast<int>(rhs.m_Green);
-        m_Green = boost::numeric_cast<T>(greenMultiply / sm_MaxValue);
+        const auto greenMultiply = gsl::narrow_cast<int>(green) * gsl::narrow_cast<int>(rhs.green);
+        green = boost::numeric_cast<T>(greenMultiply / maxValue);
 
-        const auto blueMultiply = gsl::narrow_cast<int>(m_Blue) * gsl::narrow_cast<int>(rhs.m_Blue);
-        m_Blue = boost::numeric_cast<T>(blueMultiply / sm_MaxValue);
+        const auto blueMultiply = gsl::narrow_cast<int>(blue) * gsl::narrow_cast<int>(rhs.blue);
+        blue = boost::numeric_cast<T>(blueMultiply / maxValue);
 
-        const auto alphaMultiply = gsl::narrow_cast<int>(m_Alpha) * gsl::narrow_cast<int>(rhs.m_Alpha);
-        m_Alpha = boost::numeric_cast<T>(alphaMultiply / sm_MaxValue);
+        const auto alphaMultiply = gsl::narrow_cast<int>(alpha) * gsl::narrow_cast<int>(rhs.alpha);
+        alpha = boost::numeric_cast<T>(alphaMultiply / maxValue);
     }
 
     Standardization();

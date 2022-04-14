@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 11:24)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_CAPSULE3_H
 #define MATHEMATICS_CONTAINMENT_CONT_CAPSULE3_H
@@ -13,29 +16,26 @@
 #include "Mathematics/Objects3D/Sphere3.h"
 
 namespace Mathematics
-{	
-	// Compute axis of capsule segment using least-squares fit.  Radius is
-	// maximum distance from points to axis.  Hemispherical caps are chosen
-	// as close together as possible.
-	template <typename Real>
-	Capsule3<Real> ContCapsule(const std::vector<Vector3<Real> >& points);
-	
-	// Test for containment of a point by a capsule.
-	template <typename Real>
-	bool InCapsule (const Vector3<Real>& point, const Capsule3<Real>& capsule);
-	
-	// Test for containment of a sphere by a capsule.
-	template <typename Real>
-	bool InCapsule (const Sphere3<Real>& sphere, const Capsule3<Real>& capsule);
-	
-	// Test for containment of a capsule by a capsule.
-	template <typename Real>
-	bool InCapsule (const Capsule3<Real>& testCapsule,const Capsule3<Real>& capsule);
-	
-	// Compute a capsule that contains the input capsules.  The returned capsule
-	// is not necessarily the one of smallest volume that contains the inputs.
-	template <typename Real>
-	Capsule3<Real> MergeCapsules (const Capsule3<Real>& capsule0,  const Capsule3<Real>& capsule1);
+{
+    template <typename Real>
+    class ContCapsule3 final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = ContCapsule3<Real>;
+
+    public:
+        NODISCARD static Capsule3<Real> ContCapsule(const std::vector<Vector3<Real>>& points);
+
+        NODISCARD static bool InCapsule(const Vector3<Real>& point, const Capsule3<Real>& capsule);
+
+        NODISCARD static bool InCapsule(const Sphere3<Real>& sphere, const Capsule3<Real>& capsule);
+
+        NODISCARD static bool InCapsule(const Capsule3<Real>& testCapsule, const Capsule3<Real>& capsule);
+
+        NODISCARD static Capsule3<Real> MergeCapsules(const Capsule3<Real>& capsule0, const Capsule3<Real>& capsule1);
+    };
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_CAPSULE3_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_CAPSULE3_H

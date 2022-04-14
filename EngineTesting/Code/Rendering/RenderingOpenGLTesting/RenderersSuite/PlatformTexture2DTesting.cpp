@@ -24,7 +24,7 @@ void Rendering::PlatformTexture2DTesting
 
 	RendererManager::Destroy();
 }
-
+#include SYSTEM_WARNING_DISABLE(26414)
 void Rendering::PlatformTexture2DTesting
 	::Texture2DTest()
 {

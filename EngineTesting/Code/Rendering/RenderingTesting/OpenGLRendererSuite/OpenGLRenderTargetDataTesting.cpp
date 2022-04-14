@@ -9,7 +9,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLRenderTargetDataTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::OpenGLRenderTargetDataTesting
 	::MainTest()
 { 

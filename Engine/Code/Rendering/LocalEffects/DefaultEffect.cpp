@@ -30,7 +30,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, DefaultEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, DefaultEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, DefaultEffect);
 
-Rendering::DefaultEffect ::DefaultEffect()
+Rendering::DefaultEffect::DefaultEffect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Default", 1, 1, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -75,7 +75,7 @@ Rendering::DefaultEffect ::DefaultEffect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::DefaultEffect ::CreateInstance() const
+Rendering::VisualEffectInstance* Rendering::DefaultEffect::CreateInstance() const
 {
     VisualEffectInstance* instance = nullptr;  //    CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -84,12 +84,12 @@ Rendering::VisualEffectInstance* Rendering::DefaultEffect ::CreateInstance() con
 
 // Streaming support.
 
-Rendering::DefaultEffect ::DefaultEffect(LoadConstructor value)
+Rendering::DefaultEffect::DefaultEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::DefaultEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::DefaultEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -98,12 +98,12 @@ void Rendering::DefaultEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::DefaultEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::DefaultEffect::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 }
 
-void Rendering::DefaultEffect ::PostLink()
+void Rendering::DefaultEffect::PostLink()
 {
     ParentType::PostLink();
 
@@ -130,12 +130,12 @@ void Rendering::DefaultEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::DefaultEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::DefaultEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::DefaultEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::DefaultEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -144,15 +144,15 @@ void Rendering::DefaultEffect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::DefaultEffect ::GetStreamingSize() const
+int Rendering::DefaultEffect::GetStreamingSize() const
 {
     return ParentType::GetStreamingSize();
 }
 
 // Profiles.
 
-int Rendering::DefaultEffect ::msDx9VRegisters[1]{ 0 };
-int Rendering::DefaultEffect ::msOglVRegisters[1]{ 1 };
+int Rendering::DefaultEffect::msDx9VRegisters[1]{ 0 };
+int Rendering::DefaultEffect::msOglVRegisters[1]{ 1 };
 
 int* Rendering::DefaultEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     0,

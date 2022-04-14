@@ -159,7 +159,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderFloat,DisableUpdater,vo
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderFloat,AllowUpdater, bool)
  
-void Rendering::ShaderFloat ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::ShaderFloat::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
     // ≈……˙¿‡¥Ê∏˘°£
 	;

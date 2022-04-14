@@ -1,95 +1,91 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 13:17)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_SPHERE2_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_SPHERE2_DETAIL_H
 
 #include "IntpSphere2.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpSphere2<Real>::IntpSphere2(int quantity, const std::vector<Real>& theta, const std::vector<Real>& phi, const std::vector<Real>& f, QueryType queryType)
+    : dt{}, interp{}
 {
-    template <typename Real>
-    IntpSphere2<Real>::IntpSphere2(int quantity, Real* theta, Real* phi, Real* F, bool owner, QueryType queryType)
+    const auto threeQuantity = 3 * quantity;
+    std::vector<Vector2<Real>> wrapAngles(threeQuantity);
+    std::vector<Real> wrapF(threeQuantity);
+    for (auto i = 0; i < quantity; ++i)
     {
-        // Copy the input data.  The larger arrays are used to support wrap-around
-        // in the Delaunay triangulation for the interpolator.  The Vector2<Real>
-        // object V corresponds to (V.X(),V.Y()) = (theta,phi).
-        int threeQuantity = 3 * quantity;
-        std::vector<Vector2<Real>> wrapAngles(threeQuantity);
-        Real* wrapF = nullptr;  // NEW1<Real>(threeQuantity);
-        for (int i = 0; i < quantity; ++i)
-        {
-            wrapAngles[i][0] = theta[i];
-            wrapAngles[i][1] = phi[i];
-            wrapF[i] = F[i];
-        }
-
-        if (owner)
-        {
-            DELETE1(theta);
-            DELETE1(phi);
-            DELETE1(F);
-        }
-
-        // Use periodicity to get wrap-around in the Delaunay triangulation.
-        int i0 = 0, i1 = quantity, i2 = 2 * quantity;
-        for (/**/; i0 < quantity; ++i0, ++i1, ++i2)
-        {
-            wrapAngles[i1][0] = wrapAngles[i0][0] + Math<Real>::GetTwoPI();
-            wrapAngles[i2][0] = wrapAngles[i0][0] - Math<Real>::GetTwoPI();
-            wrapAngles[i1][1] = wrapAngles[i0][1];
-            wrapAngles[i2][1] = wrapAngles[i0][1];
-            wrapF[i1] = wrapF[i0];
-            wrapF[i2] = wrapF[i0];
-        }
-
-        mDT = nullptr;  // NEW0 Delaunay2<Real>(wrapAngles, Real{ 0.001 }, true,queryType);
-        mInterp = nullptr;  //  NEW0 IntpQdrNonuniform2<Real>(*mDT, wrapF, true);
+        wrapAngles.at(i)[0] = theta.at(i);
+        wrapAngles.at(i)[1] = phi.at(i);
+        wrapF.at(i) = f.at(i);
     }
 
-    template <typename Real>
-    IntpSphere2<Real>::~IntpSphere2()
+    for (auto i0 = 0, i1 = quantity, i2 = 2 * quantity; i0 < quantity; ++i0, ++i1, ++i2)
     {
-        // 		DELETE0(mDT);
-        // 		DELETE0(mInterp);
+        wrapAngles.at(i1)[0] = wrapAngles.at(i0)[0] + Math<Real>::GetTwoPI();
+        wrapAngles.at(i2)[0] = wrapAngles.at(i0)[0] - Math<Real>::GetTwoPI();
+        wrapAngles.at(i1)[1] = wrapAngles.at(i0)[1];
+        wrapAngles.at(i2)[1] = wrapAngles.at(i0)[1];
+        wrapF.at(i1) = wrapF.at(i0);
+        wrapF.at(i2) = wrapF.at(i0);
     }
 
-    template <typename Real>
-    void IntpSphere2<Real>::GetSphericalCoords(Real x, Real y, Real z, Real& theta, Real& phi)
-    {
-        // Assumes (x,y,z) is unit length.  Returns -PI <= theta <= PI and
-        // 0 <= phiAngle <= PI.
+    dt = std::make_shared<Delaunay2<Real>>(wrapAngles, static_cast<Real>(0.001), queryType);
+    interp = std::make_shared<IntpQdrNonuniform2<Real>>(*dt, wrapF);
 
-        if (z < Math::GetValue(1))
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpSphere2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::IntpSphere2<Real>::GetSphericalCoords(Real x, Real y, Real z, Real& theta, Real& phi) noexcept
+{
+    if (z < Math<Real>::GetValue(1))
+    {
+        if (z > -Math<Real>::GetValue(1))
         {
-            if (z > -Math::GetValue(1))
-            {
-                theta = Math<Real>::ATan2(y, x);
-                phi = Math<Real>::ACos(z);
-            }
-            else
-            {
-                theta = -Math<Real>::GetPI();
-                phi = Math<Real>::GetPI();
-            }
+            theta = Math<Real>::ATan2(y, x);
+            phi = Math<Real>::ACos(z);
         }
         else
         {
             theta = -Math<Real>::GetPI();
-            phi = Math<Real>::GetValue(0);
+            phi = Math<Real>::GetPI();
         }
     }
-
-    template <typename Real>
-    bool IntpSphere2<Real>::Evaluate(Real theta, Real phi, Real& F)
+    else
     {
-        Vector2<Real> angles(theta, phi);
-        Real thetaDeriv, phiDeriv;
-        return mInterp->Evaluate(angles, F, thetaDeriv, phiDeriv);
+        theta = -Math<Real>::GetPI();
+        phi = Math<Real>::GetValue(0);
     }
+}
+
+template <typename Real>
+bool Mathematics::IntpSphere2<Real>::Evaluate(Real theta, Real phi, Real& f)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const Vector2<Real> angles{ theta, phi };
+    Real thetaDeriv{};
+    Real phiDeriv{};
+    return interp->Evaluate(angles, f, thetaDeriv, phiDeriv);
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_SPHERE2_DETAIL_H

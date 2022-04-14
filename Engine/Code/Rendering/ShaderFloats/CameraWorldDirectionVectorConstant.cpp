@@ -40,7 +40,7 @@ Rendering::CameraWorldDirectionVectorConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CameraWorldDirectionVectorConstant)
 
-void Rendering::CameraWorldDirectionVectorConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
+void Rendering::CameraWorldDirectionVectorConstant::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
  

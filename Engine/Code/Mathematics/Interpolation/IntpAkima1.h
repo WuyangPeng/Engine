@@ -1,67 +1,74 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/18 20:43)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_AKIMA1_H
 #define MATHEMATICS_INTERPOLATION_INTP_AKIMA1_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <array>
+#include <vector>
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpAkima1
-	{
-	public:
-		// Abstract base class.
-		virtual ~IntpAkima1 ();
+    template <typename Real>
+    class IntpAkima1
+    {
+    public:
+        using ClassType = IntpAkima1<Real>;
 
-		class  Polynomial
-		{
-		public:
-			// P(x) = c[0] + c[1]*x + c[2]*x^2 + c[3]*x^3
-			inline Real& operator[] (int i) { return mCoeff[i]; }
-			Real operator() (Real x) const;
-			Real operator() (int order, Real x) const;
+    public:
+        virtual ~IntpAkima1() noexcept = default;
+        IntpAkima1(const IntpAkima1& rhs) = default;
+        IntpAkima1& operator=(const IntpAkima1& rhs) = default;
+        IntpAkima1(IntpAkima1&& rhs) noexcept = default;
+        IntpAkima1& operator=(IntpAkima1&& rhs) noexcept = default;
 
-		private:
-			Real mCoeff[4];
-		};
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		int GetQuantity () const;
-		const Real* GetF () const;
-		const Polynomial* GetPolynomials () const;
-		const Polynomial& GetPolynomial (int i) const;
+        class Polynomial
+        {
+        public:
+            // P(x) = c[0] + c[1] * x + c[2] * x^2 + c[3] * x^3
+            NODISCARD Real& operator[](int i);
 
-		virtual Real GetXMin () const = 0;
-		virtual Real GetXMax () const = 0;
+            NODISCARD Real operator()(Real x) const;
+            NODISCARD Real operator()(int order, Real x) const;
 
-		// Evaluate the function and its derivatives.  The application is
-		// responsible for ensuring that xmin <= x <= xmax.  If x is outside the
-		// extremes, the function returns MAXREAL.  The first operator is for
-		// function evaluation.  The second operator is for function or derivative
-		// evaluations.  The uiOrder argument is the order of the derivative, zero
-		// for the function itself.
-		Real operator() (Real x) const;
-		Real operator() (int order, Real x) const;
+        private:
+            std::array<Real, 4> coeff;
+        };
 
-	protected:
-		// Construction.  IntpAkima1 does not accept responsibility for
-		// deleting the input array.  The application must do so.
-		IntpAkima1 (int quantity, Real* F);
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD std::vector<Real> GetF() const;
+        NODISCARD std::vector<Polynomial> GetPolynomials() const;
+        NODISCARD const Polynomial& GetPolynomial(int i) const;
 
-		Real ComputeDerivative (Real* slope) const;
-		virtual bool Lookup (Real x, int& index, Real& dx) const = 0;
+        NODISCARD virtual Real GetXMin() const = 0;
+        NODISCARD virtual Real GetXMax() const = 0;
 
-		int quantity;
-		Real* mF;
-		Polynomial* mPoly;
-	};
+        NODISCARD Real operator()(Real x) const;
+        NODISCARD Real operator()(int order, Real x) const;
 
-	using IntpAkima1f = IntpAkima1<float>;
-	using IntpAkima1d = IntpAkima1<double>;
+    protected:
+        IntpAkima1(int quantity, const std::vector<Real>& f);
+
+        NODISCARD Real ComputeDerivative(const std::vector<Real>& slope) const;
+        NODISCARD virtual bool Lookup(Real x, int& index, Real& dx) const = 0;
+        NODISCARD Real GetF(int index) const;
+        NODISCARD Polynomial& GetPolynomial(int i);
+
+    private:
+        int quantity;
+        std::vector<Real> f;
+        std::vector<Polynomial> poly;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_AKIMA1_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_AKIMA1_H

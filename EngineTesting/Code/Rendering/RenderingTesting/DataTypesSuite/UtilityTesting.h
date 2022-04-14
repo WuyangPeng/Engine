@@ -21,7 +21,7 @@ namespace Rendering
 	    void ReflectXTest();
 	    void ReflectYTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

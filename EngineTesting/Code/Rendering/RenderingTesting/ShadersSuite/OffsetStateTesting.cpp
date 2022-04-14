@@ -79,7 +79,7 @@ void Rendering::OffsetStateTesting
 }
 
 void Rendering::OffsetStateTesting
-	::StreamTest()
+	::StreamTest() noexcept
 {
 // 	CoreTools::OutTopLevel outTopLevel;	 
 // 

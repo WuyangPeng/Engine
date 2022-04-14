@@ -1,177 +1,176 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 11:15)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CameraFrustum.h"
-#include "Mathematics/Base/MathDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::CameraFrustum ::CameraFrustum(bool isPerspective) noexcept
-    : m_IsPerspective{ isPerspective }
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Base/MathDetail.h"
+
+Rendering::CameraFrustum::CameraFrustum(bool isPerspective) noexcept
+    : isPerspective{ isPerspective }, frustum{}
 {
     SetFrustum(90.0f, 1.0f, 1.0f, 10000.0f);
-    
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,CameraFrustum)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, CameraFrustum)
 
-bool Rendering::CameraFrustum ::IsPerspective() const noexcept
+bool Rendering::CameraFrustum::IsPerspective() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_IsPerspective;
+
+    return isPerspective;
 }
 
-void Rendering::CameraFrustum ::SetFrustum(float directionMin, float directionMax, float upMin, float upMax, float rightMin, float rightMax) noexcept
+void Rendering::CameraFrustum::SetFrustum(float directionMin, float directionMax, float upMin, float upMax, float rightMin, float rightMax) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] = directionMin;
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)] = directionMax;
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] = upMin;
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] = upMax;
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] = rightMin;
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] = rightMax;
+
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin)) = directionMin;
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax)) = directionMax;
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) = upMin;
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) = upMax;
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) = rightMin;
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) = rightMax;
 }
 
-void Rendering::CameraFrustum ::SetFrustum(const float* frustum) noexcept
+void Rendering::CameraFrustum::SetFrustum(const float* aFrustum) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
-    
-    SetFrustum(frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)],
-               frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)],
-               frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)],
-               frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)],
-               frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)],
-               frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)]);
-}
 
-void Rendering::CameraFrustum
-    ::SetFrustum (float upFieldOfViewDegrees, float aspectRatio,float directionMin,float directionMax) noexcept
-{
-    RENDERING_CLASS_IS_VALID_9;
-    
-  const  auto halfAngleRadians = 0.5f * upFieldOfViewDegrees * Mathematics::MathF::GetDegreeToRadian();
-    
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] = directionMin * Mathematics::MathF::Tan(halfAngleRadians);
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] = aspectRatio * m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)];
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] = -m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)];
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] = -m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)];
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] = directionMin;
-    m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)] = directionMax;
-}
-
-const float* Rendering::CameraFrustum ::GetFrustum() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum;
-}
-
-const Rendering::CameraFrustumData Rendering::CameraFrustum ::GetFrustumData() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    if (m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] == -m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] &&
-        m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] == -m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)])
+    if (aFrustum != nullptr)
     {
-    const    auto ratio = m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] / m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)];
-        const auto upFieldOfViewDegrees = 2.0f * Mathematics::MathF::ATan(ratio) * Mathematics::MathF::GetRadianToDegree();
-    const auto aspectRatio = m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] / m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)];
-        const auto directionMin = m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)];
-    const auto directionMax = m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)];
-        
-		return CameraFrustumData{ upFieldOfViewDegrees,aspectRatio, directionMin,directionMax };
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        SetFrustum(aFrustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)],
+                   aFrustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)],
+                   aFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)],
+                   aFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)],
+                   aFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)],
+                   aFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)]);
+
+#include STSTEM_WARNING_POP
     }
-    
-	return CameraFrustumData{};
 }
 
-float Rendering::CameraFrustum
-    ::GetDirectionMin () const noexcept
+void Rendering::CameraFrustum::SetFrustum(float upFieldOfViewDegrees, float aspectRatio, float directionMin, float directionMax) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    const auto halfAngleRadians = 0.5f * upFieldOfViewDegrees * Mathematics::MathF::GetDegreeToRadian();
+
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) = directionMin * Mathematics::MathF::Tan(halfAngleRadians);
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) = aspectRatio * frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax));
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) = -frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax));
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) = -frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax));
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin)) = directionMin;
+    frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax)) = directionMax;
+}
+
+const float* Rendering::CameraFrustum::GetFrustum() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)];
+
+    return frustum.data();
 }
 
-float Rendering::CameraFrustum ::GetDirectionMax() const noexcept
+Rendering::CameraFrustumData Rendering::CameraFrustum::GetFrustumData() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMax)];
+
+    if (frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) == -frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) &&
+        frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) == -frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax)))
+    {
+        const auto ratio = frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) / frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin));
+        const auto upFieldOfViewDegrees = 2.0f * Mathematics::MathF::ATan(ratio) * Mathematics::MathF::GetRadianToDegree();
+        const auto aspectRatio = frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) / frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax));
+        const auto directionMin = frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin));
+        const auto directionMax = frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax));
+
+        return CameraFrustumData{ upFieldOfViewDegrees, aspectRatio, directionMin, directionMax };
+    }
+
+    return CameraFrustumData{};
 }
 
-float Rendering::CameraFrustum ::GetUpMin() const noexcept
+float Rendering::CameraFrustum::GetDirectionMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)];
+
+    return frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMin));
 }
 
-float Rendering::CameraFrustum ::GetUpMax() const noexcept
+float Rendering::CameraFrustum::GetDirectionMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)];
+
+    return frustum.at(System::EnumCastUnderlying(ViewFrustum::DirectionMax));
 }
 
-float Rendering::CameraFrustum ::GetRightMin() const noexcept
+float Rendering::CameraFrustum::GetUpMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)];
+
+    return frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMin));
 }
 
-float Rendering::CameraFrustum ::GetRightMax() const noexcept
+float Rendering::CameraFrustum::GetUpMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    
-    return m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)];
+
+    return frustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax));
 }
 
-void Rendering::CameraFrustum ::Load(CoreTools::BufferSource& source)
+float Rendering::CameraFrustum::GetRightMin() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
- 
-   // source.Read(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
-    m_IsPerspective = source.ReadBool();
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin));
 }
 
-void Rendering::CameraFrustum
-    ::Save( CoreTools::BufferTarget& target ) const
+float Rendering::CameraFrustum::GetRightMax() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    
-   // target.WriteWithoutNumber(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
-    target.Write(m_IsPerspective);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return frustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax));
 }
 
-int Rendering::CameraFrustum ::GetStreamingSize() const noexcept
+void Rendering::CameraFrustum::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    
-	auto size = System::EnumCastUnderlying(ViewFrustum::Quantity) * CORE_TOOLS_STREAM_SIZE(m_Frustum[0]);
- 
-    size += CORE_TOOLS_STREAM_SIZE(m_IsPerspective);
-    
+    RENDERING_CLASS_IS_VALID_9;
+
+    source.ReadContainer(frustum);
+    isPerspective = source.ReadBool();
+}
+
+void Rendering::CameraFrustum::Save(CoreTools::BufferTarget& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    target.WriteContainer(frustum);
+    target.Write(isPerspective);
+}
+
+int Rendering::CameraFrustum::GetStreamingSize() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto size = System::EnumCastUnderlying(ViewFrustum::Quantity) * CORE_TOOLS_STREAM_SIZE(frustum.at(0));
+
+    size += CORE_TOOLS_STREAM_SIZE(isPerspective);
+
     return size;
 }
- #include STSTEM_WARNING_POP

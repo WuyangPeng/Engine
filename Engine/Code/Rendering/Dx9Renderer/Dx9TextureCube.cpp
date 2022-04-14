@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Contract/Noexcept.h"
 
-Rendering::Dx9TextureCube ::Dx9TextureCube([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const TextureCube* texture)
+Rendering::Dx9TextureCube::Dx9TextureCube([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const TextureCube* texture)
 
 {
     CoreTools::DisableNoexcept();
@@ -53,7 +53,7 @@ Rendering::Dx9TextureCube
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Dx9TextureCube)
 
-void Rendering::Dx9TextureCube ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9TextureCube::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -67,7 +67,7 @@ void Rendering::Dx9TextureCube ::Enable([[maybe_unused]] Renderer* renderer, [[m
  
 }
 
-void Rendering::Dx9TextureCube ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
+void Rendering::Dx9TextureCube::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] int textureUnit)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -94,7 +94,7 @@ void Rendering::Dx9TextureCube ::Disable([[maybe_unused]] Renderer* renderer, [[
  
 }
 
-void* Rendering::Dx9TextureCube ::Lock([[maybe_unused]] int face, [[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
+void* Rendering::Dx9TextureCube::Lock([[maybe_unused]] int face, [[maybe_unused]] int level, [[maybe_unused]] BufferLocking mode)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -113,7 +113,7 @@ void* Rendering::Dx9TextureCube ::Lock([[maybe_unused]] int face, [[maybe_unused
 	return nullptr;
 }
 
-void Rendering::Dx9TextureCube ::Unlock([[maybe_unused]] int face, [[maybe_unused]] int level)
+void Rendering::Dx9TextureCube::Unlock([[maybe_unused]] int face, [[maybe_unused]] int level)
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();

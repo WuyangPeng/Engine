@@ -1,360 +1,365 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/16 21:26)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H
 
 #include "NaturalSpline2.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
+#include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 
-namespace Mathematics
-{
+#include <gsl/util>
 
 template <typename Real>
-NaturalSpline2<Real>::NaturalSpline2 (BoundaryType type, int numSegments,Real* times, Vector2<Real>* points)
-	: MultipleCurve2<Real>{ numSegments, times }
+Mathematics::NaturalSpline2<Real>::NaturalSpline2(BoundaryType type, int numSegments, const std::vector<Real>& times, const std::vector<Vector2<Real>>& points)
+    : ParentType{ numSegments, times }, a{ points }, b{}, c{}, d{}
 {
-    mA = points;
-
     switch (type)
     {
-        case BT_FREE:
+        case BoundaryType::Free:
         {
             CreateFreeSpline();
             break;
         }
-        case BT_CLAMPED:
+        case BoundaryType::Clamped:
         {
-			auto derStart = mA[1] - mA[0];
-			auto derFinal = mA[mNumSegments] - mA[mNumSegments-1];
+            const auto derStart = a.at(1) - a.at(0);
+            const auto derFinal = a.at(this->GetSegments()) - a.at(gsl::narrow_cast<size_t>(this->GetSegments()) - 1);
             CreateClampedSpline(derStart, derFinal);
             break;
         }
-        case BT_CLOSED:
+        case BoundaryType::Closed:
         {
             CreateClosedSpline();
             break;
         }
     }
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-NaturalSpline2<Real>::NaturalSpline2 (int numSegments, Real* times, Vector2<Real>* points, const Vector2<Real>& derivativeStart, const Vector2<Real>& derivativeFinal)
-	:MultipleCurve2<Real>{ numSegments, times }
+Mathematics::NaturalSpline2<Real>::NaturalSpline2(int numSegments, const std::vector<Real>& times, const std::vector<Vector2<Real>>& points, const Vector2<Real>& derivativeStart, const Vector2<Real>& derivativeFinal)
+    : ParentType{ numSegments, times }, a{ points }, b{}, c{}, d{}
 {
-    mA = points;
     CreateClampedSpline(derivativeStart, derivativeFinal);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::NaturalSpline2<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::NaturalSpline2<Real>::CreateFreeSpline()
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto numSegments = this->GetSegments();
+    std::vector<Real> dt(numSegments);
+
+    for (auto i = 0; i < this->GetSegments(); ++i)
+    {
+        dt.at(i) = this->GetTimes(i + 1) - this->GetTimes(i);
+    }
+
+    std::vector<Real> d2t(numSegments);
+    for (auto i = 1; i < this->GetSegments(); ++i)
+    {
+        d2t.at(i) = this->GetTimes(i + 1) - this->GetTimes(i - 1);
+    }
+
+    std::vector<Vector2<Real>> alpha(numSegments);
+    for (auto i = 1; i < this->GetSegments(); ++i)
+    {
+        auto numer = Math<Real>::GetValue(3) * (a.at(gsl::narrow_cast<size_t>(i) + 1) * dt.at(gsl::narrow_cast<size_t>(i) - 1) - a.at(i) * d2t.at(i) + a.at(gsl::narrow_cast<size_t>(i) - 1) * dt.at(i));
+        auto invDenom = Math<Real>::GetValue(1) / (dt.at(gsl::narrow_cast<size_t>(i) - 1) * dt.at(i));
+        alpha.at(i) = invDenom * numer;
+    }
+
+    const auto size = numSegments + 1;
+    std::vector<Real> ell(size);
+    std::vector<Real> mu(numSegments);
+    std::vector<Vector2<Real>> z(size);
+
+    ell.at(0) = Math<Real>::GetValue(1);
+    mu.at(0) = Math<Real>::GetValue(0);
+    z.at(0) = Vector2<Real>::GetZero();
+    for (auto i = 1; i < this->GetSegments(); ++i)
+    {
+        ell.at(i) = (Math<Real>::GetValue(2)) * d2t.at(i) - dt.at(gsl::narrow_cast<size_t>(i) - 1) * mu.at(gsl::narrow_cast<size_t>(i) - 1);
+        auto inv = (Math<Real>::GetValue(1)) / ell.at(i);
+        mu.at(i) = inv * dt.at(i);
+        z.at(i) = inv * (alpha.at(i) - z.at(gsl::narrow_cast<size_t>(i) - 1) * dt.at(gsl::narrow_cast<size_t>(i) - 1));
+    }
+    ell.at(numSegments) = Math<Real>::GetValue(1);
+    z.at(numSegments) = Vector2<Real>::GetZero();
+
+    b.resize(numSegments);
+    c.resize(size);
+    d.resize(numSegments);
+
+    c.at(numSegments) = Vector2<Real>::GetZero();
+
+    constexpr auto oneThird = Math<Real>::GetRational(1, 3);
+    for (auto i = numSegments - 1; i >= 0; --i)
+    {
+        c.at(i) = z.at(i) - mu.at(i) * c.at(gsl::narrow_cast<size_t>(i) + 1);
+        auto inv = Math<Real>::GetValue(1) / dt.at(i);
+        b.at(i) = inv * (a.at(gsl::narrow_cast<size_t>(i) + 1) - a.at(i)) - oneThird * dt.at(i) * (c.at(gsl::narrow_cast<size_t>(i) + 1) + Math<Real>::GetValue(2) * c.at(i));
+        d.at(i) = oneThird * inv * (c.at(gsl::narrow_cast<size_t>(i) + 1) - c.at(i));
+    }
 }
 
 template <typename Real>
-NaturalSpline2<Real>::~NaturalSpline2 ()
+void Mathematics::NaturalSpline2<Real>::CreateClampedSpline(const Vector2<Real>& derivativeStart, const Vector2<Real>& derivativeFinal)
 {
-    DELETE1(mA);
-    DELETE1(mB);
-    DELETE1(mC);
-    DELETE1(mD);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto numSegments = this->GetSegments();
+    std::vector<Real> dt(numSegments);
+
+    for (auto i = 0; i < numSegments; ++i)
+    {
+        dt.at(i) = this->GetTimes(i + 1) - this->GetTimes(i);
+    }
+
+    std::vector<Real> d2t(numSegments);
+    for (auto i = 1; i < numSegments; ++i)
+    {
+        d2t.at(i) = this->GetTimes(i + 1) - this->GetTimes(i - 1);
+    }
+
+    const auto size = numSegments + 1;
+    std::vector<Vector2<Real>> alpha(size);
+    auto inv = (Math<Real>::GetValue(1)) / dt.at(0);
+    alpha.at(0) = Math<Real>::GetValue(3) * (inv * (a.at(1) - a.at(0)) - derivativeStart);
+    inv = (Math<Real>::GetValue(1)) / dt.at(gsl::narrow_cast<size_t>(numSegments) - 1);
+    alpha.at(numSegments) = Math<Real>::GetValue(3) * (derivativeFinal - inv * (a.at(numSegments) - a.at(gsl::narrow_cast<size_t>(numSegments) - 1)));
+    for (auto i = 1; i < numSegments; ++i)
+    {
+        auto numer = Math<Real>::GetValue(3) * (a.at(gsl::narrow_cast<size_t>(i) + 1) * dt.at(gsl::narrow_cast<size_t>(i) - 1) - a.at(i) * d2t.at(i) + a.at(gsl::narrow_cast<size_t>(i) - 1) * dt.at(i));
+        auto invDenom = Math<Real>::GetValue(1) / (dt.at(gsl::narrow_cast<size_t>(i) - 1) * dt.at(i));
+        alpha.at(i) = invDenom * numer;
+    }
+
+    std::vector<Real> ell(size);
+    std::vector<Real> mu(numSegments);
+    std::vector<Vector2<Real>> z(size);
+
+    ell.at(0) = (Math<Real>::GetValue(2)) * dt.at(0);
+    mu.at(0) = Math<Real>::GetRational(1, 2);
+    inv = (Math<Real>::GetValue(1)) / ell.at(0);
+    z.at(0) = inv * alpha.at(0);
+
+    for (auto i = 1; i < numSegments; ++i)
+    {
+        ell.at(i) = (Math<Real>::GetValue(2)) * d2t.at(i) - dt.at(gsl::narrow_cast<size_t>(i) - 1) * mu.at(gsl::narrow_cast<size_t>(i) - 1);
+        inv = (Math<Real>::GetValue(1)) / ell.at(i);
+        mu.at(i) = inv * dt.at(i);
+        z.at(i) = inv * (alpha.at(i) - z.at(gsl::narrow_cast<size_t>(i) - 1) * dt.at(gsl::narrow_cast<size_t>(i) - 1));
+    }
+    ell.at(numSegments) = dt.at(gsl::narrow_cast<size_t>(numSegments) - 1) * (Math<Real>::GetValue(2) - mu.at(gsl::narrow_cast<size_t>(numSegments) - 1));
+    inv = (Math<Real>::GetValue(1)) / ell.at(numSegments);
+    z.at(numSegments) = inv * (alpha.at(numSegments) - z.at(gsl::narrow_cast<size_t>(numSegments) - 1) * dt.at(gsl::narrow_cast<size_t>(numSegments) - 1));
+
+    b.resize(numSegments);
+    c.resize(size);
+    d.resize(numSegments);
+
+    c.at(numSegments) = z.at(numSegments);
+
+    constexpr auto oneThird = Math<Real>::GetRational(1, 3);
+    for (auto i = numSegments - 1; i >= 0; --i)
+    {
+        c.at(i) = z.at(i) - mu.at(i) * c.at(gsl::narrow_cast<size_t>(i) + 1);
+        inv = (Math<Real>::GetValue(1)) / dt.at(i);
+        b.at(i) = inv * (a.at(gsl::narrow_cast<size_t>(i) + 1) - a.at(i)) - oneThird * dt.at(i) * (c.at(gsl::narrow_cast<size_t>(i) + 1) + (Math<Real>::GetValue(2)) * c.at(i));
+        d.at(i) = oneThird * inv * (c.at(gsl::narrow_cast<size_t>(i) + 1) - c.at(i));
+    }
 }
 
 template <typename Real>
-void NaturalSpline2<Real>::CreateFreeSpline ()
+void Mathematics::NaturalSpline2<Real>::CreateClosedSpline()
 {
-    Real* dt = nullptr;  // NEW1<Real>(mNumSegments);
-    int i;
-    for (i = 0; i < mNumSegments; ++i)
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto numSegments = this->GetSegments();
+    std::vector<Real> dt(numSegments);
+
+    for (auto i = 0; i < numSegments; ++i)
     {
-        dt[i] = mTimes[i+1] - mTimes[i];
+        dt.at(i) = this->GetTimes(i + 1) - this->GetTimes(i);
     }
 
-    Real* d2t = nullptr;  // NEW1<Real>(mNumSegments);
-    for (i = 1; i < mNumSegments; ++i)
+    VariableMatrix<Real> mat{ numSegments + 1, numSegments + 1 };
+    mat[0][0] = Math<Real>::GetValue(1);
+    mat[0][numSegments] = Math<Real>::GetValue(-1);
+    for (auto i = 1; i <= numSegments - 1; ++i)
     {
-        d2t[i] = mTimes[i+1] - mTimes[i-1];
+        mat[i][i - 1] = dt.at(gsl::narrow_cast<size_t>(i) - 1);
+        mat[i][i] = (Math<Real>::GetValue(2)) * (dt.at(gsl::narrow_cast<size_t>(i) - 1) + dt.at(i));
+        mat[i][i + 1] = dt.at(i);
+    }
+    mat[numSegments][numSegments - 1] = dt.at(gsl::narrow_cast<size_t>(numSegments) - 1);
+    mat[numSegments][0] = (Math<Real>::GetValue(2)) * (dt.at(gsl::narrow_cast<size_t>(numSegments) - 1) + dt.at(0));
+    mat[numSegments][1] = dt.at(0);
+
+    c.resize(gsl::narrow_cast<size_t>(numSegments) + 1);
+    c.at(0) = Vector2<Real>::GetZero();
+
+    for (auto i = 1; i <= numSegments - 1; ++i)
+    {
+        auto inv0 = (Math<Real>::GetValue(1)) / dt.at(i);
+        auto inv1 = (Math<Real>::GetValue(1)) / dt.at(gsl::narrow_cast<size_t>(i) - 1);
+        c.at(i) = Math<Real>::GetValue(3) * (inv0 * (a.at(gsl::narrow_cast<size_t>(i) + 1) - a.at(i)) - inv1 * (a.at(i) - a.at(gsl::narrow_cast<size_t>(i) - 1)));
+    }
+    auto inv0 = (Math<Real>::GetValue(1)) / dt.at(0);
+    auto inv1 = (Math<Real>::GetValue(1)) / dt.at(gsl::narrow_cast<size_t>(numSegments) - 1);
+    c.at(numSegments) = Math<Real>::GetValue(3) * (inv0 * (a.at(1) - a.at(0)) - inv1 * (a.at(0) - a.at(gsl::narrow_cast<size_t>(numSegments) - 1)));
+
+    std::vector<Real> input(gsl::narrow_cast<size_t>(numSegments) + 1);
+
+    for (auto i = 0; i <= numSegments; ++i)
+    {
+        input.at(i) = c.at(i).GetX();
+    }
+    auto output = LinearSystem<Real>().Solve(mat, input);
+    for (auto i = 0; i <= numSegments; ++i)
+    {
+        c.at(i).SetX(output.at(i));
     }
 
-    Vector2<Real>* alpha = nullptr;  //  NEW1<Vector2<Real> >(mNumSegments);
-    for (i = 1; i < mNumSegments; ++i)
+    for (auto i = 0; i <= numSegments; ++i)
     {
-		auto numer = (static_cast<Real>(3))*(mA[i+1]*dt[i-1] - mA[i]*d2t[i] +mA[i-1]*dt[i]);
-		auto invDenom = (Math::GetValue(1))/(dt[i-1]*dt[i]);
-        alpha[i] = invDenom*numer;
+        input.at(i) = c.at(i).GetY();
+    }
+    output = LinearSystem<Real>().Solve(mat, input);
+    for (auto i = 0; i <= numSegments; ++i)
+    {
+        c.at(i)[1] = output.at(i);
     }
 
-    Real* ell = nullptr;  // NEW1<Real>(mNumSegments + 1);
-    Real* mu = nullptr;  // NEW1<Real>(mNumSegments);
-    Vector2<Real>* z = nullptr;  // NEW1<Vector2<Real> >(mNumSegments + 1);
-    Real inv;
-
-    ell[0] = Math::GetValue(1);
-    mu[0] = Math<Real>::GetValue(0);
-    z[0] = Vector2<Real>::sm_Zero;
-    for (i = 1; i < mNumSegments; ++i)
+    constexpr auto oneThird = Math<Real>::GetRational(1, 3);
+    b.resize(numSegments);
+    d.resize(numSegments);
+    for (auto i = 0; i < numSegments; ++i)
     {
-        ell[i] = (Math::GetValue(2))*d2t[i] - dt[i-1]*mu[i-1];
-        inv = (Math::GetValue(1))/ell[i];
-        mu[i] = inv*dt[i];
-        z[i] = inv*(alpha[i] - z[i-1]*dt[i-1]);
+        inv0 = (Math<Real>::GetValue(1)) / dt.at(i);
+        b.at(i) = inv0 * (a.at(gsl::narrow_cast<size_t>(i) + 1) - a.at(i)) - oneThird * (c.at(gsl::narrow_cast<size_t>(i) + 1) + (Math<Real>::GetValue(2)) * c.at(i)) * dt.at(i);
+        d.at(i) = oneThird * inv0 * (c.at(gsl::narrow_cast<size_t>(i) + 1) - c.at(i));
     }
-    ell[mNumSegments] = Math::GetValue(1);
-    z[mNumSegments] = Vector2<Real>::sm_Zero;
-
-    mB = nullptr;  // NEW1<Vector2<Real> >(mNumSegments);
-    mC = nullptr;  // NEW1<Vector2<Real> >(mNumSegments + 1);
-    mD = nullptr;  // NEW1<Vector2<Real> >(mNumSegments);
-
-    mC[mNumSegments] = Vector2<Real>::sm_Zero;
-
-    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
-    for (i = mNumSegments-1; i >= 0; --i)
-    {
-        mC[i] = z[i] - mu[i]*mC[i+1];
-        inv = (Math::GetValue(1))/dt[i];
-        mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (Math::GetValue(2))*mC[i]);
-        mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
-    }
-
-//     DELETE1(dt);
-//     DELETE1(d2t);
-//     DELETE1(alpha);
-//     DELETE1(ell);
-//     DELETE1(mu);
-//     DELETE1(z);
 }
 
 template <typename Real>
-void NaturalSpline2<Real>::CreateClampedSpline ( const Vector2<Real>& derivativeStart, const Vector2<Real>& derivativeFinal)
+std::vector<Mathematics::Vector2<Real>> Mathematics::NaturalSpline2<Real>::GetPoints() const
 {
-//     auto dt = nullptr;  //  NEW1<Real>(mNumSegments);
-//     int i;
-//     for (i = 0; i < mNumSegments; ++i)
-//     {
-//         dt[i] = mTimes[i+1] - mTimes[i];
-//     }
-// 
-//     Real* d2t = nullptr;  // NEW1<Real>(mNumSegments);
-//     for (i = 1; i < mNumSegments; ++i)
-//     {
-//         d2t[i] = mTimes[i+1] - mTimes[i-1];
-//     }
-// 
-// 	auto alpha = nullptr;  // NEW1<Vector2<Real> >(mNumSegments + 1);
-// 	auto inv = (Math::GetValue(1))/dt[0];
-//     alpha[0] = (static_cast<Real>(3))*(inv*(mA[1] - mA[0]) - derivativeStart);
-//     inv = (Math::GetValue(1))/dt[mNumSegments-1];
-//     alpha[mNumSegments] = (static_cast<Real>(3))*(derivativeFinal -  inv*(mA[mNumSegments] - mA[mNumSegments-1]));
-//     for (i = 1; i < mNumSegments; ++i)
-//     {
-// 		auto numer = (static_cast<Real>(3))*(mA[i+1]*dt[i-1] - mA[i]*d2t[i] + mA[i-1]*dt[i]);
-// 		auto invDenom = (Math::GetValue(1))/(dt[i-1]*dt[i]);
-//         alpha[i] = invDenom*numer;
-//     }
-// 
-//     Real* ell = nullptr;  // NEW1<Real>(mNumSegments + 1);
-//     Real* mu = nullptr;  // NEW1<Real>(mNumSegments);
-//     Vector2<Real>* z = nullptr;  //  NEW1<Vector2<Real> >(mNumSegments + 1);
-// 
-//     ell[0] = (Math::GetValue(2))*dt[0];
-//     mu[0] = Real{0.5};
-//     inv = (Math::GetValue(1))/ell[0];
-//     z[0] = inv*alpha[0];
-// 
-//     for (i = 1; i < mNumSegments; ++i)
-//     {
-//         ell[i] = (Math::GetValue(2))*d2t[i] - dt[i-1]*mu[i-1];
-//         inv = (Math::GetValue(1))/ell[i];
-//         mu[i] = inv*dt[i];
-//         z[i] = inv*(alpha[i] - z[i-1]*dt[i-1]);
-//     }
-//     ell[mNumSegments] = dt[mNumSegments-1]*(Math::GetValue(2) - mu[mNumSegments-1]);
-//     inv = (Math::GetValue(1))/ell[mNumSegments];
-//     z[mNumSegments] = inv*(alpha[mNumSegments] -  z[mNumSegments-1]*dt[mNumSegments-1]);
-// 
-//     mB = nullptr;  //  NEW1<Vector2<Real> >(mNumSegments);
-//     mC = nullptr;  // NEW1<Vector2<Real> >(mNumSegments + 1);
-//     mD = nullptr;  // NEW1<Vector2<Real> >(mNumSegments);
-// 
-//     mC[mNumSegments] = z[mNumSegments];
-// 
-//     const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
-//     for (i = mNumSegments-1; i >= 0; --i)
-//     {
-//         mC[i] = z[i] - mu[i]*mC[i+1];
-//         inv = (Math::GetValue(1))/dt[i];
-//         mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (Math::GetValue(2))*mC[i]);
-//         mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
-//     }
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-//     DELETE1(dt);
-//     DELETE1(d2t);
-//     DELETE1(alpha);
-//     DELETE1(ell);
-//     DELETE1(mu);
-//     DELETE1(z);
+    return a;
 }
 
 template <typename Real>
-void NaturalSpline2<Real>::CreateClosedSpline ()
+Mathematics::Vector2<Real> Mathematics::NaturalSpline2<Real>::GetPosition(Real t) const
 {
-    // TO DO.  A general linear system solver is used here.  The matrix
-    // corresponding to this case is actually "cyclic banded", so a faster
-    // linear solver can be used.  The current linear system code does not
-    // have such a solver.
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    Real* dt = nullptr;  // NEW1<Real>(mNumSegments);
-    int i;
-    for (i = 0; i < mNumSegments; ++i)
-    {
-        dt[i] = mTimes[i+1] - mTimes[i];
-    }
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
 
-    // Construct matrix of system.
-    VariableMatrix<Real> mat(mNumSegments+1, mNumSegments+1);
-    mat[0][0] = Math::GetValue(1);
-    mat[0][mNumSegments] = (Real)-1;
-    for (i = 1; i <= mNumSegments-1; ++i)
-    {
-        mat[i][i-1] = dt[i-1];
-        mat[i][i  ] = (Math::GetValue(2))*(dt[i-1] + dt[i]);
-        mat[i][i+1] = dt[i];
-    }
-    mat[mNumSegments][mNumSegments-1] = dt[mNumSegments-1];
-    mat[mNumSegments][0] = (Math::GetValue(2))*(dt[mNumSegments-1] + dt[0]);
-    mat[mNumSegments][1] = dt[0];
-
-    // Construct right-hand side of system.
-    mC = nullptr;  // NEW1<Vector2<Real> >(mNumSegments + 1);
-    mC[0] = Vector2<Real>::sm_Zero;
-    Real inv0, inv1;
-    for (i = 1; i <= mNumSegments-1; ++i)
-    {
-        inv0 = (Math::GetValue(1))/dt[i];
-        inv1 = (Math::GetValue(1))/dt[i-1];
-        mC[i] = (static_cast<Real>(3))*(inv0*(mA[i+1] - mA[i]) - inv1*(mA[i] - mA[i-1]));
-    }
-    inv0 = (Math::GetValue(1))/dt[0];
-    inv1 = (Math::GetValue(1))/dt[mNumSegments-1];
-    mC[mNumSegments] = (static_cast<Real>(3))*(inv0*(mA[1] - mA[0]) - inv1*(mA[0] - mA[mNumSegments-1]));
-
-    // Solve the linear systems.
-    Real* input = nullptr;  // NEW1<Real>(mNumSegments + 1);
-    Real* output = nullptr;  //  NEW1<Real>(mNumSegments + 1);
-
-    for (i = 0; i <= mNumSegments; ++i)
-    {
-		input[i] = mC[i].GetX();
-    }
-    LinearSystem<Real>().Solve(mat, input, output);
-    for (i = 0; i <= mNumSegments; ++i)
-    {
-		mC[i].SetX(output[i]);
-    }
-
-    for (i = 0; i <= mNumSegments; ++i)
-    {
-		input[i] = mC[i].GetY();
-    }
-    LinearSystem<Real>().Solve(mat, input, output);
-    for (i = 0; i <= mNumSegments; ++i)
-    {
-        mC[i][1] = output[i];
-    }
-
-    DELETE1(input);
-    DELETE1(output);
-    // End linear system solving.
-
-    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
-    mB = nullptr;  // NEW1<Vector2<Real> >(mNumSegments);
-    mD = nullptr;  // NEW1<Vector2<Real> >(mNumSegments);
-    for (i = 0; i < mNumSegments; ++i)
-    {
-        inv0 = (Math::GetValue(1))/dt[i];
-        mB[i] = inv0*(mA[i+1] - mA[i]) - oneThird*(mC[i+1] +  (Math::GetValue(2))*mC[i])*dt[i];
-        mD[i] = oneThird*inv0*(mC[i+1] - mC[i]);
-    }
-
-    DELETE1(dt);
+    return a.at(key) + dt * (b.at(key) + dt * (c.at(key) + dt * d.at(key)));
 }
 
 template <typename Real>
-const Vector2<Real>* NaturalSpline2<Real>::GetPoints () const
+Mathematics::Vector2<Real> Mathematics::NaturalSpline2<Real>::GetFirstDerivative(Real t) const
 {
-    return mA;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+
+    return b.at(key) + dt * (c.at(key) * (Math<Real>::GetValue(2)) + d.at(key) * (Math<Real>::GetValue(3) * dt));
 }
 
 template <typename Real>
-Vector2<Real> NaturalSpline2<Real>::GetPosition (Real t) const
+Mathematics::Vector2<Real> Mathematics::NaturalSpline2<Real>::GetSecondDerivative(Real t) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    return mA[key] + dt*(mB[key] + dt*(mC[key] + dt*mD[key]));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+
+    return c.at(key) * (Math<Real>::GetValue(2)) + d.at(key) * (Math<Real>::GetValue(6) * dt);
 }
 
 template <typename Real>
-Vector2<Real> NaturalSpline2<Real>::GetFirstDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::NaturalSpline2<Real>::GetThirdDerivative(Real t) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    return mB[key] + dt*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*dt));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto key = 0;
+    Real dt{};
+    this->GetKeyInfo(t, key, dt);
+
+    return Math<Real>::GetValue(6) * d.at(key);
 }
 
 template <typename Real>
-Vector2<Real> NaturalSpline2<Real>::GetSecondDerivative (Real t) const
+Real Mathematics::NaturalSpline2<Real>::GetSpeedKey(int key, Real t) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    return mC[key]*(Math::GetValue(2)) + mD[key]*(((Real)6)*dt);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto velocity = b.at(key) + t * (c.at(key) * (Math<Real>::GetValue(2)) + d.at(key) * ((Math<Real>::GetValue(3)) * t));
+
+    return Vector2Tools<Real>::GetLength(velocity);
 }
 
 template <typename Real>
-Vector2<Real> NaturalSpline2<Real>::GetThirdDerivative (Real t) const
+Real Mathematics::NaturalSpline2<Real>::GetLengthKey(int key, Real t0, Real t1) const
 {
-    int key;
-    Real dt;
-    GetKeyInfo(t, key, dt);
-    return ((Real)6)*mD[key];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const SplineKey data{ this, key };
+
+    return RombergIntegral<Real, SplineKey>(8, t0, t1, GetSpeedWithDataKey, &data).GetValue();
 }
-
-template <typename Real>
-Real NaturalSpline2<Real>::GetSpeedKey (int key, Real t) const
-{
-    Vector2<Real> velocity = mB[key] + t*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*t));
-
-	return Vector2Tools<Real>::GetLength( velocity);
-}
-
-template <typename Real>
-Real NaturalSpline2<Real>::GetLengthKey (int key, Real t0, Real t1) const
-{
-    SplineKey data(this, key);
-	return RombergIntegral<Real, SplineKey>(8, t0, t1, GetSpeedWithDataKey, &data).GetValue();
-}
-
 
 template <typename Real>
 Real Mathematics::NaturalSpline2<Real>::GetSpeedWithDataKey(Real t, const SplineKey* data)
 {
-	return GetSpeedWithData(t, (void*)data);
-
+    if (data != nullptr)
+    {
+        return data->spline->GetSpeedKey(data->key, t);
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("data指针为空。"));
+    }
 }
-
 
 // NaturalSpline2::SplineKey
 
 template <typename Real>
-NaturalSpline2<Real>::SplineKey::SplineKey (const NaturalSpline2* spline, int key)
-	: Spline{ spline }, Key{ key }
+Mathematics::NaturalSpline2<Real>::SplineKey::SplineKey(const NaturalSpline2* spline, int key) noexcept
+    : spline{ spline }, key{ key }
 {
 }
 
-
- 
-
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE2_DETAIL_H

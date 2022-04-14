@@ -115,14 +115,14 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl
 		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::LightConstantImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::LightConstantImpl::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
     //	source.ResolveObjectSharedPtrLink(m_Light);
 }
 
-void Rendering::LightConstantImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::LightConstantImpl::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

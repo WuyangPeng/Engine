@@ -22,7 +22,7 @@ namespace Rendering
 		void MainTest();
 		void BaseTest();	
 		
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

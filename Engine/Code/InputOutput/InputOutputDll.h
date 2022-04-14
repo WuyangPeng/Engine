@@ -1,37 +1,49 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 14:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/25 16:37)
 
 #ifndef INPUT_OUTPUT_DLL_H
 #define INPUT_OUTPUT_DLL_H
 
-#include "System/Helper/ExportMacro.h"
 #include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_INPUT_OUTPUT_NO_IMPORT) || defined(BUILDING_INPUT_OUTPUT_STATIC)
 
-  #define INPUT_OUTPUT_DEFAULT_DECLARE
-  #define INPUT_OUTPUT_HIDDEN_DECLARE
-  #define INPUT_OUTPUT_VISIBLE
+    #define INPUT_OUTPUT_DEFAULT_DECLARE
+    #define INPUT_OUTPUT_VISIBLE
 
-#else // !defined(BUILDING_INPUT_OUTPUT_NO_IMPORT) && !defined(BUILDING_INPUT_OUTPUT_STATIC)
- 
-   #if defined(BUILDING_INPUT_OUTPUT_EXPORT)
- 
+    #if defined(BUILDING_INPUT_OUTPUT_EXPORT)
+
+        #define INPUT_OUTPUT_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_INPUT_OUTPUT_EXPORT)
+
+        #define INPUT_OUTPUT_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_INPUT_OUTPUT_EXPORT
+
+#else  // !defined(BUILDING_INPUT_OUTPUT_NO_IMPORT) && !defined(BUILDING_INPUT_OUTPUT_STATIC)
+
+    #if defined(BUILDING_INPUT_OUTPUT_EXPORT)
+
         #define INPUT_OUTPUT_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
         #define INPUT_OUTPUT_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
 
-   #else // !defined(BUILDING_INPUT_OUTPUT_EXPORT)
+    #else  // !defined(BUILDING_INPUT_OUTPUT_EXPORT)
 
-		#define INPUT_OUTPUT_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define INPUT_OUTPUT_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
         #define INPUT_OUTPUT_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
 
-   #endif // BUILDING_INPUT_OUTPUT_EXPORT
+    #endif  // BUILDING_INPUT_OUTPUT_EXPORT
 
-   #define INPUT_OUTPUT_VISIBLE TCRE_SYMBOL_VISIBLE
+    #define INPUT_OUTPUT_VISIBLE TCRE_SYMBOL_VISIBLE
 
-#endif // defined(BUILDING_INPUT_OUTPUT_NO_IMPORT) || defined(BUILDING_INPUT_OUTPUT_STATIC)
+#endif  // defined(BUILDING_INPUT_OUTPUT_NO_IMPORT) || defined(BUILDING_INPUT_OUTPUT_STATIC)
 
-#endif // INPUT_OUTPUT_DLL_H
+#endif  // INPUT_OUTPUT_DLL_H

@@ -17,7 +17,7 @@
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-Rendering::OpenGLVertexBuffer ::OpenGLVertexBuffer([[maybe_unused]] Renderer* renderer, const VertexBuffer* vertexBuffer)
+Rendering::OpenGLVertexBuffer::OpenGLVertexBuffer([[maybe_unused]] Renderer* renderer, const VertexBuffer* vertexBuffer)
     : ParentType{}, m_Buffer{ 0 }
 {
     Init(vertexBuffer);
@@ -28,7 +28,7 @@ Rendering::OpenGLVertexBuffer ::OpenGLVertexBuffer([[maybe_unused]] Renderer* re
 }
 
 void Rendering::OpenGLVertexBuffer
-    ::Init(const VertexBuffer* vertexBuffer)
+::Init(const VertexBuffer* vertexBuffer)
 {
   //  m_Buffer = System::GLBufferData(vertexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(vertexBuffer->GetUsage())]);
 
@@ -39,7 +39,7 @@ void Rendering::OpenGLVertexBuffer
 }
 
 Rendering::OpenGLVertexBuffer
-    ::~OpenGLVertexBuffer ()
+::~OpenGLVertexBuffer ()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
     
@@ -48,7 +48,7 @@ Rendering::OpenGLVertexBuffer
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::OpenGLVertexBuffer
-    ::IsValid() const noexcept
+::IsValid() const noexcept
 {
 	if(ParentType::IsValid() && 0 <= m_Buffer)
 		return true;
@@ -57,7 +57,7 @@ bool Rendering::OpenGLVertexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLVertexBuffer ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset) noexcept
+void Rendering::OpenGLVertexBuffer::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -66,7 +66,7 @@ void Rendering::OpenGLVertexBuffer ::Enable([[maybe_unused]] Renderer* renderer,
  
 }
 
-void Rendering::OpenGLVertexBuffer ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex) noexcept
+void Rendering::OpenGLVertexBuffer::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     
@@ -76,7 +76,7 @@ void Rendering::OpenGLVertexBuffer ::Disable([[maybe_unused]] Renderer* renderer
 }
 
 void* Rendering::OpenGLVertexBuffer
-    ::Lock (BufferLocking mode) noexcept
+::Lock (BufferLocking mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     mode;
@@ -88,7 +88,7 @@ void* Rendering::OpenGLVertexBuffer
 }
 
 void Rendering::OpenGLVertexBuffer
-    ::Unlock () noexcept
+::Unlock () noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
     

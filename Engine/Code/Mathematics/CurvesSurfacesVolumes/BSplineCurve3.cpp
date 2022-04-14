@@ -1,30 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 16:51)
 
 #include "Mathematics/MathematicsExport.h"
- 
-#ifdef MATHEMATICS_EXPORT_TEMPLATE1
 
-#ifndef MATHEMATICS_INCLUDED_BSPLINE_CURVE3_DETAIL
-	#define MATHEMATICS_INCLUDED_BSPLINE_CURVE3_DETAIL
-#endif // MATHEMATICS_INCLUDED_BSPLINE_CURVE3_DETAIL
+#include "BSplineCurve3Detail.h"
 
-#include "BSplineCurve3Detail.h" 
+#ifdef MATHEMATICS_TEMPLATE_TEST
 
 namespace Mathematics
 {
-	template 
-	class BSplineCurve3<float>;
+    template class BSplineCurve3<float>;
 
-	template 
-	class BSplineCurve3<double>;
+    template class BSplineCurve3<double>;
 }
 
-#endif // MATHEMATICS_EXPORT_TEMPLATE1
- 
-
-
- 
+#endif  // MATHEMATICS_TEMPLATE_TEST

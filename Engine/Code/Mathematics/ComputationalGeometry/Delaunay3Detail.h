@@ -1,675 +1,746 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 15:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/08 15:58)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY3_DETAIL_H
 
 #include "Delaunay2.h"
 #include "Delaunay3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3Information.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Query/Query2Filtered.h"
 #include "Mathematics/Query/Query2Int64.h"
 #include "Mathematics/Query/Query2Integer.h"
 #include "Mathematics/Query/Query2Rational.h"
+#include "Mathematics/Query/Query3Filtered.h"
+#include "Mathematics/Query/Query3Int64.h"
+#include "Mathematics/Query/Query3Integer.h"
+#include "Mathematics/Query/Query3Rational.h"
 
 template <typename Real>
-Mathematics::Delaunay3<Real>::Delaunay3(const std::vector<Vector3<Real>>& vertices, Real epsilon, bool owner, QueryType queryType)
-    : Delaunay<Real>{ vertices.size(), epsilon, owner, queryType }, mVertices{ vertices }, mNumUniqueVertices{ 0 },
-      mSVertices{}, mQuery{ 0 }, m_LineOrigin{ Vector3<Real>::sm_Zero }, m_LineDirection{ Vector3<Real>::sm_Zero },
-      mPlaneOrigin{ Vector3<Real>::sm_Zero }, mPathLast{ -1 }, mPath{ 0 }, mLastFaceV0{ -1 },
-      mLastFaceV1{ -1 }, mLastFaceV2{ -1 }, mLastFaceOpposite{ -1 }, mLastFaceOppositeIndex{ -1 }
+Mathematics::Delaunay3<Real>::Delaunay3(const Vertices& vertices, Real epsilon, QueryType queryType)
+    : ParentType{ boost::numeric_cast<int>(vertices.size()), epsilon, queryType },
+      vertices{ vertices },
+      numUniqueVertices{ 0 },
+      sVertices{},
+      query{ 0 },
+      min{},
+      scale{},
+      tetraMesh{},
+      lineOrigin{},
+      lineDirection{},
+      planeOrigin{},
+      planeDirection{},
+      pathLast{ -1 },
+      path{},
+      lastFaceV0{ -1 },
+      lastFaceV1{ -1 },
+      lastFaceV2{ -1 },
+      lastFaceOpposite{ -1 },
+      lastFaceOppositeIndex{}
 {
-    mPlaneDirection[0] = Vector3<Real>::sm_Zero;
-    mPlaneDirection[1] = Vector3<Real>::sm_Zero;
+    Init();
 
-    Vector3Information<Real> info{ mVertices, mEpsilon };
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::Delaunay3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::Delaunay3<Real>::Init()
+{
+    Vector3Information<Real> info{ vertices, this->GetEpsilon() };
     if (info.GetDimension() == 0)
     {
-        // The values of mDimension, mIndices, and mAdjacencies were
-        // already initialized by the Delaunay base class.
         return;
     }
 
     if (info.GetDimension() == 1)
     {
-        // The set is (nearly) collinear.  The caller is responsible for
-        // creating a Delaunay1 object.
-        mDimension = 1;
-        m_LineOrigin = info.GetOrigin();
-        m_LineDirection = info.GetDirectionX();
+        this->SetDimension(1);
+        lineOrigin = info.GetOrigin();
+        lineDirection = info.GetDirectionX();
+
         return;
     }
 
     if (info.GetDimension() == 2)
     {
-        // The set is (nearly) coplanar.  The caller is responsible for
-        // creating a Delaunay2 object.
-        mDimension = 2;
-        mPlaneOrigin = info.GetOrigin();
-        mPlaneDirection[0] = info.GetDirectionX();
-        mPlaneDirection[1] = info.GetDirectionY();
+        this->SetDimension(2);
+        planeOrigin = info.GetOrigin();
+        planeDirection.at(0) = info.GetDirectionX();
+        planeDirection.at(1) = info.GetDirectionY();
+
         return;
     }
 
-    mDimension = 3;
+    this->SetDimension(3);
 
-    // Allocate storage for the input vertices.
-    mSVertices.resize(mNumVertices);
-    int i;
+    const auto numVertices = this->GetNumVertices();
+    sVertices.resize(numVertices);
 
+    const auto queryType = this->GetQueryType();
     if (queryType != QueryType::Rational && queryType != QueryType::Filtered)
     {
-        // Transform the vertices to the cube [0,1]^3.
-        mMin = info.GetMinExtreme();
-        mScale = (Math::GetValue(1)) / info.GetMaxRange();
-        for (i = 0; i < mNumVertices; ++i)
+        min = info.GetMinExtreme();
+        scale = Math<Real>::GetValue(1) / info.GetMaxRange();
+        for (auto i = 0; i < numVertices; ++i)
         {
-            mSVertices[i] = (mVertices[i] - mMin) * mScale;
+            sVertices.at(i) = (vertices.at(i) - min) * scale;
         }
 
-        Real expand;
+        Real expand{};
         if (queryType == QueryType::Int64)
         {
-            // Scale the vertices to the cube [0,2^{10}]^3 to allow use of
-            // 64-bit integers for tetrahedralization.
-            expand = (Real)(1 << 10);
-            // mQuery = NEW0 Query3Int64<Real>(mSVertices);
+            expand = Math<Real>::GetValue(1 << 10);
+            query = std::make_shared<Query3Int64<Real>>(sVertices);
         }
         else if (queryType == QueryType::Interger)
         {
-            // Scale the vertices to the cube [0,2^{20}]^3 to get more
-            // precision for TInteger than for 64-bit integers for
-            // tetrahedralization.
-            expand = (Real)(1 << 20);
-            //  mQuery = NEW0 Query3Integer<Real>(mSVertices);
+            expand = Math<Real>::GetValue(1 << 20);
+            query = std::make_shared<Query3Integer<Real>>(sVertices);
         }
-        else  // queryType == Query::QT_REAL
+        else
         {
-            // No scaling for floating point.
-            expand = Math::GetValue(1);
-            // mQuery = NEW0 Query3<Real>(mSVertices);
+            expand = Math<Real>::GetValue(1);
+            query = std::make_shared<Query3>(sVertices);
         }
 
-        mScale *= expand;
-        for (i = 0; i < mNumVertices; ++i)
+        scale *= expand;
+        for (auto i = 0; i < numVertices; ++i)
         {
-            mSVertices[i] *= expand;
+            sVertices.at(i) *= expand;
         }
     }
     else
     {
-        // No transformation needed for exact rational arithmetic.
-        mMin = Vector3<Real>::sm_Zero;
-        mScale = Math::GetValue(1);
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector3<Real>));
+        min = Vector3::GetZero();
+        scale = Math<Real>::GetValue(1);
+        sVertices = vertices;
 
         if (queryType == QueryType::Rational)
         {
-            //  mQuery = NEW0 Query3Rational<Real>(mSVertices);
+            query = std::make_shared<Query3Rational<Real>>(sVertices);
         }
-        else  // queryType == Query::QT_FILTERED
+        else
         {
-            //  mQuery = NEW0 Query3Filtered<Real>(mSVertices, mEpsilon);
+            query = std::make_shared<Query3Filtered<Real>>(sVertices, this->GetEpsilon());
         }
     }
 
-    // Insert the (nondegenerate) tetrahedron constructed by the call to
-    // GetInformation. This is necessary for the circumsphere-visibility
-    // algorithm to work correctly.
-    int mExtreme[4]{ info.GetMinExtremeIndex(), info.GetPerpendicularExtremeIndex(), info.GetTetrahedronExtremeIndex(), info.GetMaxExtremeIndex() };
+    std::array<int32_t, 4> extreme{ info.GetMinExtremeIndex(), info.GetPerpendicularExtremeIndex(), info.GetTetrahedronExtremeIndex(), info.GetMaxExtremeIndex() };
 
     if (!info.IsExtremeCCW())
     {
-        std::swap(mExtreme[2], mExtreme[3]);
+        std::swap(extreme.at(2), extreme.at(3));
     }
-    mTetraMesh.Insert(mExtreme[0], mExtreme[1], mExtreme[2], mExtreme[3]);
 
-    // Incrementally update the tetrahedralization.  The set of processed
-    // points is maintained to eliminate duplicates, either in the original
-    // input points or in the points obtained by snap rounding.
-    std::set<Vector3<Real>> processed;
-    for (i = 0; i < 4; ++i)
+    tetraMesh.Insert(extreme.at(0), extreme.at(1), extreme.at(2), extreme.at(3));
+
+    std::set<Vector3> processed{};
+    for (auto i = 0; i < 4; ++i)
     {
-        processed.insert(mSVertices[mExtreme[i]]);
+        processed.emplace(sVertices.at(extreme.at(i)));
     }
-    for (i = 0; i < mNumVertices; ++i)
+
+    for (auto i = 0; i < numVertices; ++i)
     {
-        if (processed.find(mSVertices[i]) == processed.end())
+        if (processed.find(sVertices.at(i)) == processed.end())
         {
             Update(i);
-            processed.insert(mSVertices[i]);
+            processed.emplace(sVertices.at(i));
         }
     }
-    mNumUniqueVertices = boost::numeric_cast<int>(processed.size());
 
-    // Assign integer values to the tetrahedra for use by the caller.
-    std::map<Tetrahedron*, int> permute;
-    i = -1;
-    permute[(Tetrahedron*)0] = i++;
-    const TSManifoldMesh::SMap& smap = mTetraMesh.GetTetrahedra();
-    TSManifoldMesh::SMapCIterator element;
-    for (element = smap.begin(); element != smap.end(); ++element)
+    numUniqueVertices = boost::numeric_cast<int>(processed.size());
+
+    std::map<TetrahedronSharedPtr, int> permute{};
+    auto i = -1;
+    permute[nullptr] = i++;
+    const auto& smap = tetraMesh.GetTetrahedra();
+
+    for (auto element = smap.begin(); element != smap.end(); ++element)
     {
         permute[element->second] = i++;
     }
 
-    // Put Delaunay tetrahedra into an array (vertices and adjacency info).
-    mNumSimplices = boost::numeric_cast<int>(mTetraMesh.GetTetrahedra().size());
-    if (mNumSimplices > 0)
+    auto numSimplices = boost::numeric_cast<int>(tetraMesh.GetTetrahedra().size());
+    this->SetNumSimplices(numSimplices);
+    if (numSimplices > 0)
     {
-        //mIndices = NEW1<int>(4 * mNumSimplices);
-        //mAdjacencies = NEW1<int>(4 * mNumSimplices);
-        i = 0;
-        for (element = smap.begin(); element != smap.end(); ++element)
+        for (auto element = smap.begin(); element != smap.end(); ++element)
         {
-            const TSManifoldMesh::Tetrahedron* tetra = element->second;
+            const auto& tetra = element->second;
             for (int j = 0; j < 4; ++j, ++i)
             {
-                mIndices[i] = tetra->V[j];
-                mAdjacencies[i] = permute[tetra->S[j]];
+                this->AddIndex(tetra->v.at(j));
+                this->AddAdjacency(permute[tetra->s.at(j)]);
             }
         }
-        MATHEMATICS_ASSERTION_0(i == 4 * mNumSimplices, "Unexpected mismatch\n");
 
-        mPathLast = -1;
-        //   mPath = NEW1<int>(mNumSimplices + 1);
-        memset(mPath, 0, (mNumSimplices + 1) * sizeof(int));
+        MATHEMATICS_ASSERTION_0(i == 4 * numSimplices, "意外的不匹配。\n");
+
+        pathLast = -1;
+
+        const auto size = numSimplices + 1;
+        path.resize(size);
     }
 }
 
 template <typename Real>
-Mathematics::Delaunay3<Real>::~Delaunay3()
+typename Mathematics::Delaunay3<Real>::Vertices Mathematics::Delaunay3<Real>::GetVertices() const
 {
-    //     DELETE0(mQuery);
-    //     DELETE1(mPath);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return vertices;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::Delaunay3<Real>::GetVertices() const
+int Mathematics::Delaunay3<Real>::GetNumUniqueVertices() const noexcept
 {
-    return &mVertices[0];
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numUniqueVertices;
 }
 
 template <typename Real>
-int Mathematics::Delaunay3<Real>::GetNumUniqueVertices() const
+Mathematics::Vector3<Real> Mathematics::Delaunay3<Real>::GetLineOrigin() const noexcept
 {
-    return mNumUniqueVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetLineOrigin() const
+Mathematics::Vector3<Real> Mathematics::Delaunay3<Real>::GetLineDirection() const noexcept
 {
-    return m_LineOrigin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineDirection;
 }
 
 template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetLineDirection() const
+Mathematics::Delaunay1<Real> Mathematics::Delaunay3<Real>::GetDelaunay1() const
 {
-    return m_LineDirection;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-template <typename Real>
-Mathematics::Delaunay1<Real>* Mathematics::Delaunay3<Real>::GetDelaunay1() const
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 1)
     {
-        return 0;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为1。"));
     }
 
-    //     Real* projection = NEW1<Real>(mNumVertices);
-    //     for (auto i = 0; i < mNumVertices; ++i)
-    //     {
-    //         auto diff = mVertices[i] - m_LineOrigin;
-    //         projection[i] = Vector3Tools<Real>::DotProduct(m_LineDirection, diff);
-    //     }
-
-    return nullptr;  //    NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true, mQueryType);
-}
-
-template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetPlaneOrigin() const
-{
-    return mPlaneOrigin;
-}
-
-template <typename Real>
-const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetPlaneDirection(int i) const
-{
-    return mPlaneDirection[i];
-}
-
-template <typename Real>
-Mathematics::Delaunay2<Real>* Mathematics::Delaunay3<Real>::GetDelaunay2() const
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
+    typename Delaunay1::Vertices projection{};
+    for (const auto& value : vertices)
     {
-        return 0;
+        auto diff = value - lineOrigin;
+        projection.emplace_back(Vector3Tools<Real>::DotProduct(lineDirection, diff));
     }
 
-    std::vector<Vector2<Real>> projection(mNumVertices);
-    for (int i = 0; i < mNumVertices; ++i)
-    {
-        auto diff = mVertices[i] - mPlaneOrigin;
-        projection[i][0] = Vector3Tools<Real>::DotProduct(mPlaneDirection[0], diff);
-        projection[i][1] = Vector3Tools<Real>::DotProduct(mPlaneDirection[1], diff);
-    }
+    Delaunay1 delaunay1{ projection, this->GetEpsilon(), this->GetQueryType() };
 
-    return nullptr;  //    NEW0 Delaunay2<Real>(projection, mEpsilon, true, mQueryType);
+    return delaunay1;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetHull(int& numTriangles, int*& indices) const
+Mathematics::Vector3<Real> Mathematics::Delaunay3<Real>::GetPlaneOrigin() const noexcept
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
-    if (mDimension != 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return planeOrigin;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::Delaunay3<Real>::GetPlaneDirection(int i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return planeDirection.at(i);
+}
+
+template <typename Real>
+Mathematics::Delaunay2<Real> Mathematics::Delaunay3<Real>::GetDelaunay2() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
     }
 
-    numTriangles = 0;
-    indices = 0;
-
-    // Count the number of triangles that are not shared by two tetrahedra.
-    int i, numAdjacent = 4 * mNumSimplices;
-    for (i = 0; i < numAdjacent; ++i)
+    const auto numVertices = this->GetNumVertices();
+    typename Delaunay2::Vertices projection(numVertices);
+    for (int i = 0; i < numVertices; ++i)
     {
-        if (mAdjacencies[i] == -1)
+        auto diff = vertices.at(i) - planeOrigin;
+        projection.at(i)[0] = Vector3Tools<Real>::DotProduct(planeDirection.at(0), diff);
+        projection.at(i)[1] = Vector3Tools<Real>::DotProduct(planeDirection.at(1), diff);
+    }
+
+    return Delaunay2{ projection, this->GetEpsilon(), this->GetQueryType() };
+}
+
+template <typename Real>
+typename Mathematics::Delaunay3<Real>::HullType Mathematics::Delaunay3<Real>::GetHull() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 3)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为3。"));
+    }
+
+    auto numTriangles = 0;
+
+    const auto numAdjacent = 4 * this->GetNumSimplices();
+    for (auto i = 0; i < numAdjacent; ++i)
+    {
+        if (this->GetAdjacency(i) == -1)
         {
-            numTriangles++;
+            ++numTriangles;
         }
     }
-    MATHEMATICS_ASSERTION_0(numTriangles > 0, "There must be at least one tetrahedron\n");
+
+    MATHEMATICS_ASSERTION_0(numTriangles > 0, "必须至少有一个四面体。\n");
+
     if (numTriangles == 0)
     {
-        return false;
+        return { IndicesType{}, false };
     }
 
-    // Enumerate the triangles.  The prototypical case is the single
-    // tetrahedron V[0] = (0,0,0), V[1] = (1,0,0), V[2] = (0,1,0), and
-    // V[3] = (0,0,1) with no adjacent tetrahedra.  The mIndices[] array
-    // is <0,1,2,3>.
-    //   i = 0, face = 0:
-    //     skip index 0, <x,1,2,3>, no swap, triangle = <1,2,3>
-    //   i = 1, face = 1:
-    //     skip index 1, <0,x,2,3>, swap,    triangle = <0,3,2>
-    //   i = 2, face = 2:
-    //     skip index 2, <0,1,x,3>, no swap, triangle = <0,1,3>
-    //   i = 3, face = 3:
-    //     skip index 3, <0,1,2,x>, swap,    triangle = <0,2,1>
-    // To guarantee counterclockwise order of triangles when viewed outside
-    // the tetrahedron, the swap of the last two indices occurs when
-    // iFace is an odd number:  (iFace % 2) != 0
-    //  indices = NEW1<int>(3 * numTriangles);
-    auto currentIndex = indices;
-    for (i = 0; i < numAdjacent; ++i)
+    auto currentIndex = 0;
+
+    const auto size = 3 * numTriangles;
+    IndicesType indices(size);
+    for (auto i = 0; i < numAdjacent; ++i)
     {
-        if (mAdjacencies[i] == -1)
+        if (this->GetAdjacency(i) == -1)
         {
-            int tetra = i / 4, face = i % 4;
+            const auto tetra = i / 4;
+            const auto face = i % 4;
             for (auto j = 0; j < 4; ++j)
             {
                 if (j != face)
                 {
-                    *currentIndex++ = mIndices[4 * tetra + j];
+                    indices.at(currentIndex++) = this->GetIndex(4 * tetra + j);
                 }
             }
+
             if ((face % 2) != 0)
             {
-                int save = *(currentIndex - 1);
-                *(currentIndex - 1) = *(currentIndex - 2);
-                *(currentIndex - 2) = save;
+                const auto lhsIndex = currentIndex - 1;
+                const auto rhsIndex = currentIndex - 2;
+                std::swap(indices.at(lhsIndex), indices.at(rhsIndex));
             }
         }
     }
 
-    return true;
+    return { indices, true };
 }
 
 template <typename Real>
-int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3<Real>& p) const
+int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3& p) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
-    if (mDimension != 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 3)
     {
-        return -1;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为3。"));
     }
 
-    // Convert to scaled coordinates.
-    auto scP = (p - mMin) * mScale;
+    auto scP = (p - min) * scale;
 
-    // Start at first tetrahedron in mesh.
-    auto index = (mPathLast >= 0 ? mPath[mPathLast] : 0);
-    mPathLast = -1;
-    mLastFaceV0 = -1;
-    mLastFaceV1 = -1;
-    mLastFaceV2 = -1;
-    mLastFaceOpposite = -1;
-    mLastFaceOppositeIndex = -1;
+    auto pathIndex = (pathLast >= 0 ? path.at(pathLast) : 0);
+    pathLast = -1;
+    lastFaceV0 = -1;
+    lastFaceV1 = -1;
+    lastFaceV2 = -1;
+    lastFaceOpposite = -1;
+    lastFaceOppositeIndex = -1;
 
-    // Use tetrahedron faces as binary separating planes.
-    for (auto i = 0; i < mNumSimplices; ++i)
+    const auto numSimplices = this->GetNumSimplices();
+
+    for (auto i = 0; i < numSimplices; ++i)
     {
-        mPath[++mPathLast] = index;
+        path.at(++pathLast) = pathIndex;
 
-        int* vertices = &mIndices[4 * index];
-
-        // <V1,V2,V3> counterclockwise when viewed outside tetrahedron.
-        if (mQuery->ToPlane(scP, vertices[1], vertices[2], vertices[3]) > 0)
+        if (System::EnumCastUnderlying(query->ToPlane(scP, this->GetIndex(4 * pathIndex + 1), this->GetIndex(4 * pathIndex + 2), this->GetIndex(4 * pathIndex + 3))) > 0)
         {
-            index = mAdjacencies[4 * index];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(4 * pathIndex);
+            if (pathIndex == -1)
             {
-                mLastFaceV0 = vertices[1];
-                mLastFaceV1 = vertices[2];
-                mLastFaceV2 = vertices[3];
-                mLastFaceOpposite = vertices[0];
-                mLastFaceOppositeIndex = 0;
+                lastFaceV0 = this->GetIndex(4 * pathIndex + 1);
+                lastFaceV1 = this->GetIndex(4 * pathIndex + 2);
+                lastFaceV2 = this->GetIndex(4 * pathIndex + 3);
+                lastFaceOpposite = this->GetIndex(4 * pathIndex);
+                lastFaceOppositeIndex = 0;
                 return -1;
             }
             continue;
         }
 
-        // <V0,V3,V2> counterclockwise when viewed outside tetrahedron.
-        if (mQuery->ToPlane(scP, vertices[0], vertices[2], vertices[3]) < 0)
+        if (System::EnumCastUnderlying(query->ToPlane(scP, this->GetIndex(4 * pathIndex), this->GetIndex(4 * pathIndex + 2), this->GetIndex(4 * pathIndex + 3))) < 0)
         {
-            index = mAdjacencies[4 * index + 1];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(4 * pathIndex + 1);
+            if (pathIndex == -1)
             {
-                mLastFaceV0 = vertices[0];
-                mLastFaceV1 = vertices[2];
-                mLastFaceV2 = vertices[3];
-                mLastFaceOpposite = vertices[1];
-                mLastFaceOppositeIndex = 1;
+                lastFaceV0 = this->GetIndex(4 * pathIndex);
+                lastFaceV1 = this->GetIndex(4 * pathIndex + 2);
+                lastFaceV2 = this->GetIndex(4 * pathIndex + 3);
+                lastFaceOpposite = this->GetIndex(4 * pathIndex + 1);
+                lastFaceOppositeIndex = 1;
                 return -1;
             }
             continue;
         }
 
-        // <V0,V1,V3> counterclockwise when viewed outside tetrahedron.
-        if (mQuery->ToPlane(scP, vertices[0], vertices[1], vertices[3]) > 0)
+        if (System::EnumCastUnderlying(query->ToPlane(scP, this->GetIndex(4 * pathIndex), this->GetIndex(4 * pathIndex + 1), this->GetIndex(4 * pathIndex + 3))) > 0)
         {
-            index = mAdjacencies[4 * index + 2];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(4 * pathIndex + 2);
+            if (pathIndex == -1)
             {
-                mLastFaceV0 = vertices[0];
-                mLastFaceV1 = vertices[1];
-                mLastFaceV2 = vertices[3];
-                mLastFaceOpposite = vertices[2];
-                mLastFaceOppositeIndex = 2;
+                lastFaceV0 = this->GetIndex(4 * pathIndex);
+                lastFaceV1 = this->GetIndex(4 * pathIndex + 1);
+                lastFaceV2 = this->GetIndex(4 * pathIndex + 3);
+                lastFaceOpposite = this->GetIndex(4 * pathIndex + 2);
+                lastFaceOppositeIndex = 2;
                 return -1;
             }
             continue;
         }
 
-        // <V0,V2,V1> counterclockwise when viewed outside tetrahedron.
-        if (mQuery->ToPlane(scP, vertices[0], vertices[1], vertices[2]) < 0)
+        if (System::EnumCastUnderlying(query->ToPlane(scP, this->GetIndex(4 * pathIndex), this->GetIndex(4 * pathIndex + 1), this->GetIndex(4 * pathIndex + 2))) < 0)
         {
-            index = mAdjacencies[4 * index + 3];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(4 * pathIndex + 3);
+            if (pathIndex == -1)
             {
-                mLastFaceV0 = vertices[0];
-                mLastFaceV1 = vertices[1];
-                mLastFaceV2 = vertices[2];
-                mLastFaceOpposite = vertices[3];
-                mLastFaceOppositeIndex = 3;
+                lastFaceV0 = this->GetIndex(4 * pathIndex);
+                lastFaceV1 = this->GetIndex(4 * pathIndex + 1);
+                lastFaceV2 = this->GetIndex(4 * pathIndex + 2);
+                lastFaceOpposite = this->GetIndex(4 * pathIndex + 3);
+                lastFaceOppositeIndex = 3;
                 return -1;
             }
             continue;
         }
 
-        mLastFaceV0 = -1;
-        mLastFaceV1 = -1;
-        mLastFaceV2 = -1;
-        mLastFaceOppositeIndex = -1;
-        return index;
+        lastFaceV0 = -1;
+        lastFaceV1 = -1;
+        lastFaceV2 = -1;
+        lastFaceOppositeIndex = -1;
+
+        return pathIndex;
     }
 
     return -1;
 }
 
 template <typename Real>
-int Mathematics::Delaunay3<Real>::GetPathLast() const
+int Mathematics::Delaunay3<Real>::GetPathLast() const noexcept
 {
-    return mPathLast;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return pathLast;
 }
 
 template <typename Real>
-const int* Mathematics::Delaunay3<Real>::GetPath() const
+typename Mathematics::Delaunay3<Real>::IndicesType Mathematics::Delaunay3<Real>::GetPath() const
 {
-    return mPath;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return path;
 }
 
 template <typename Real>
-int Mathematics::Delaunay3<Real>::GetLastFace(int& v0, int& v1, int& v2, int& v3) const
+int Mathematics::Delaunay3<Real>::GetLastFace(int& v0, int& v1, int& v2, int& v3) const noexcept
 {
-    v0 = mLastFaceV0;
-    v1 = mLastFaceV1;
-    v2 = mLastFaceV2;
-    v3 = mLastFaceOpposite;
-    return mLastFaceOppositeIndex;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    v0 = lastFaceV0;
+    v1 = lastFaceV1;
+    v2 = lastFaceV2;
+    v3 = lastFaceOpposite;
+
+    return lastFaceOppositeIndex;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetVertexSet(int i, Vector3<Real> vertices[4]) const
+typename Mathematics::Delaunay3<Real>::VertexType Mathematics::Delaunay3<Real>::GetVertexSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
-    if (mDimension != 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 3)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为3。"));
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+
+    if (0 <= i && i < numSimplices)
     {
-        vertices[0] = mVertices[mIndices[4 * i]];
-        vertices[1] = mVertices[mIndices[4 * i + 1]];
-        vertices[2] = mVertices[mIndices[4 * i + 2]];
-        vertices[3] = mVertices[mIndices[4 * i + 3]];
-        return true;
+        return { vertices.at(this->GetIndex(4 * i)),
+                 vertices.at(this->GetIndex(4 * i + 1)),
+                 vertices.at(this->GetIndex(4 * i + 2)),
+                 vertices.at(this->GetIndex(4 * i + 3)),
+                 true };
     }
 
-    return false;
+    return { Vector3{}, Vector3{}, Vector3{}, Vector3{}, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetIndexSet(int i, int indices[4]) const
+typename Mathematics::Delaunay3<Real>::IndexType Mathematics::Delaunay3<Real>::GetIndexSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
-    if (mDimension != 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 3)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为3。"));
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+
+    if (0 <= i && i < numSimplices)
     {
-        indices[0] = mIndices[4 * i];
-        indices[1] = mIndices[4 * i + 1];
-        indices[2] = mIndices[4 * i + 2];
-        indices[3] = mIndices[4 * i + 3];
-        return true;
+        return { this->GetIndex(4 * i), this->GetIndex(4 * i + 1), this->GetIndex(4 * i + 2), this->GetIndex(4 * i + 3), true };
     }
 
-    return false;
+    return { -1, -1, -1, -1, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetAdjacentSet(int i, int adjacencies[4]) const
+typename Mathematics::Delaunay3<Real>::IndexType Mathematics::Delaunay3<Real>::GetAdjacentSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
-    if (mDimension != 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 3)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为3。"));
     }
 
-    if (0 <= i && i < mNumSimplices)
+    const auto numSimplices = this->GetNumSimplices();
+
+    if (0 <= i && i < numSimplices)
     {
-        adjacencies[0] = mAdjacencies[4 * i];
-        adjacencies[1] = mAdjacencies[4 * i + 1];
-        adjacencies[2] = mAdjacencies[4 * i + 2];
-        adjacencies[3] = mAdjacencies[4 * i + 3];
-        return true;
+        return { this->GetAdjacency(4 * i), this->GetAdjacency(4 * i + 1), this->GetAdjacency(4 * i + 2), this->GetAdjacency(4 * i + 3), true };
     }
 
-    return false;
+    return { -1, -1, -1, -1, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetBarycentricSet(int i, const Vector3<Real>& p, Real bary[4]) const
+typename Mathematics::Delaunay3<Real>::BaryType Mathematics::Delaunay3<Real>::GetBarycentricSet(int i, const Vector3& p) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
-    if (mDimension != 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 3)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为3。"));
     }
 
-    if (0 <= i && i < mNumSimplices)
-    {
-        auto v0 = mVertices[mIndices[4 * i]];
-        auto v1 = mVertices[mIndices[4 * i + 1]];
-        auto v2 = mVertices[mIndices[4 * i + 2]];
-        auto v3 = mVertices[mIndices[4 * i + 3]];
-        auto barycentricCoordinates = p.GetBarycentrics(v0, v1, v2, v3);
-        for (int i = 0; i < 4; ++i)
-        {
-            bary[i] = barycentricCoordinates[i];
-        }
+    const auto numSimplices = this->GetNumSimplices();
 
-        return true;
+    if (0 <= i && i < numSimplices)
+    {
+        const auto& v0 = vertices.at(this->GetIndex(4 * i));
+        const auto& v1 = vertices.at(this->GetIndex(4 * i + 1));
+        const auto& v2 = vertices.at(this->GetIndex(4 * i + 2));
+        const auto& v3 = vertices.at(this->GetIndex(4 * i + 3));
+        const auto barycentricCoordinates = p.GetBarycentrics(v0, v1, v2, v3);
+
+        return { barycentricCoordinates[0], barycentricCoordinates[1], barycentricCoordinates[2], barycentricCoordinates[3], true };
     }
 
-    return false;
+    return { Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0), true };
 }
 
 template <typename Real>
-Mathematics::Delaunay3<Real>::Delaunay3(const System::TChar* filename)
-    : Delaunay<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{ 0 }, mSVertices{ 0 }, mQuery{ 0 }, mPath{ 0 }
+Mathematics::Delaunay3<Real>::Delaunay3(const String& filename)
+    : ParentType{ 0, Math<Real>::GetValue(0), QueryType::Real },
+      vertices{},
+      numUniqueVertices{ 0 },
+      sVertices{},
+      query{ 0 },
+      min{},
+      scale{},
+      tetraMesh{},
+      lineOrigin{},
+      lineDirection{},
+      planeOrigin{},
+      planeDirection{},
+      pathLast{ -1 },
+      path{},
+      lastFaceV0{ -1 },
+      lastFaceV1{ -1 },
+      lastFaceV2{ -1 },
+      lastFaceOpposite{ -1 },
+      lastFaceOppositeIndex{}
 {
-    bool loaded = Load(filename);
-    MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
+    LoadFile(filename);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::Load(const System::TChar* filename)
+void Mathematics::Delaunay3<Real>::LoadFile(const String& filename)
 {
     CoreTools::ReadFileManager inFile{ filename };
 
-    Delaunay<Real>::Load(inFile);
+    if (!ParentType::Load(inFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("加载文件失败\n"));
+    }
 
-//     DELETE0(mQuery);
-// 
-//     DELETE1(mPath);
+    const auto numVertices = this->GetNumVertices();
 
-    mOwner = true;
-    mVertices.resize(mNumVertices);
-    mSVertices.resize(mNumVertices);
-    // mPath = NEW1<int>(mNumSimplices + 1);
+    query.reset();
+    path.clear();
+    vertices.resize(numVertices);
+    sVertices.resize(numVertices);
 
-    inFile.Read(sizeof(int), &mNumUniqueVertices);
-    inFile.Read(sizeof(int), &mPathLast);
-    inFile.Read(sizeof(int), &mLastFaceV0);
-    inFile.Read(sizeof(int), &mLastFaceV1);
-    inFile.Read(sizeof(int), &mLastFaceV2);
-    inFile.Read(sizeof(int), &mLastFaceOpposite);
-    inFile.Read(sizeof(int), &mLastFaceOppositeIndex);
-    inFile.Read(sizeof(int), mNumSimplices + 1, mPath);
+    const auto numSimplices = this->GetNumSimplices();
+    const auto pathSize = numSimplices + 1;
+    path.resize(pathSize);
 
-    inFile.Read(sizeof(Real), 3 * mNumVertices, &mVertices[0]);
-    inFile.Read(sizeof(Real), 3 * mNumVertices, &mSVertices[0]);
-    inFile.Read(sizeof(Real), 3, &mMin);
-    inFile.Read(sizeof(Real), 3, &mScale);
-    inFile.Read(sizeof(Real), 3, &m_LineOrigin);
-    inFile.Read(sizeof(Real), 3, &m_LineDirection);
-    inFile.Read(sizeof(Real), 3, &mPlaneOrigin);
-    inFile.Read(sizeof(Real), 6, mPlaneDirection);
+    inFile.Read(sizeof(int32_t), &numUniqueVertices);
+    inFile.Read(sizeof(int32_t), &pathLast);
+    inFile.Read(sizeof(int32_t), &lastFaceV0);
+    inFile.Read(sizeof(int32_t), &lastFaceV1);
+    inFile.Read(sizeof(int32_t), &lastFaceV2);
+    inFile.Read(sizeof(int32_t), &lastFaceOpposite);
+    inFile.Read(sizeof(int32_t), &lastFaceOppositeIndex);
+    inFile.Read(sizeof(int32_t), pathSize, path.data());
 
-    switch (mQueryType)
+    const auto threeNumVertices = Vector3::pointSize * numVertices;
+
+    inFile.Read(sizeof(Real), threeNumVertices, vertices.data());
+    inFile.Read(sizeof(Real), threeNumVertices, sVertices.data());
+    inFile.Read(sizeof(Real), Vector3::pointSize, &min);
+    inFile.Read(sizeof(Real), Vector3::pointSize, &scale);
+    inFile.Read(sizeof(Real), Vector3::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector3::pointSize, &lineDirection);
+    inFile.Read(sizeof(Real), Vector3::pointSize, &planeOrigin);
+    inFile.Read(sizeof(Real), 6, planeDirection.data());
+
+    const auto queryType = this->GetQueryType();
+    switch (queryType)
     {
         case QueryType::Int64:
         {
-            mQuery = nullptr;  //  NEW0 Query3Int64<Real>(mSVertices);
+            query = std::make_shared<Query3Int64<Real>>(sVertices);
             break;
         }
         case QueryType::Interger:
         {
-            mQuery = nullptr;  //  NEW0 Query3Integer<Real>(mSVertices);
+            query = std::make_shared<Query3Integer<Real>>(sVertices);
             break;
         }
         case QueryType::Rational:
         {
-            mQuery = nullptr;  // NEW0 Query3Rational<Real>(mSVertices);
+            query = std::make_shared<Query3Rational<Real>>(sVertices);
             break;
         }
         case QueryType::Real:
         {
-            mQuery = nullptr;  // NEW0 Query3<Real>(mSVertices);
+            query = std::make_shared<Query3>(sVertices);
             break;
         }
         case QueryType::Filtered:
         {
-            mQuery = nullptr;  // NEW0 Query3Filtered<Real>(mSVertices,                                               mEpsilon);
+            query = std::make_shared<Query3Filtered<Real>>(sVertices, this->GetEpsilon());
             break;
         }
     }
-
-    return true;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::Save(const System::TChar* filename) const
+void Mathematics::Delaunay3<Real>::SaveFile(const String& filename) const
 {
     CoreTools::WriteFileManager outFile{ filename };
 
-    Delaunay<Real>::Save(outFile);
+    if (!ParentType::Save(outFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("保存文件失败\n"));
+    }
 
-    outFile.Write(sizeof(int), &mNumUniqueVertices);
-    outFile.Write(sizeof(int), &mPathLast);
-    outFile.Write(sizeof(int), &mLastFaceV0);
-    outFile.Write(sizeof(int), &mLastFaceV1);
-    outFile.Write(sizeof(int), &mLastFaceV2);
-    outFile.Write(sizeof(int), &mLastFaceOpposite);
-    outFile.Write(sizeof(int), &mLastFaceOpposite);
-    outFile.Write(sizeof(int), mNumSimplices + 1, mPath);
+    const auto numSimplices = this->GetNumSimplices();
+    const auto pathSize = numSimplices + 1;
 
-    outFile.Write(sizeof(Real), 3 * mNumVertices, &mVertices[0]);
-    outFile.Write(sizeof(Real), 3 * mNumVertices, &mSVertices[0]);
-    outFile.Write(sizeof(Real), 3, &mMin);
-    outFile.Write(sizeof(Real), 3, &mScale);
-    outFile.Write(sizeof(Real), 3, &m_LineOrigin);
-    outFile.Write(sizeof(Real), 3, &m_LineDirection);
-    outFile.Write(sizeof(Real), 3, &mPlaneOrigin);
-    outFile.Write(sizeof(Real), 6, mPlaneDirection);
+    outFile.Write(sizeof(int32_t), &numUniqueVertices);
+    outFile.Write(sizeof(int32_t), &pathLast);
+    outFile.Write(sizeof(int32_t), &lastFaceV0);
+    outFile.Write(sizeof(int32_t), &lastFaceV1);
+    outFile.Write(sizeof(int32_t), &lastFaceV2);
+    outFile.Write(sizeof(int32_t), &lastFaceOpposite);
+    outFile.Write(sizeof(int32_t), &lastFaceOpposite);
+    outFile.Write(sizeof(int32_t), pathSize, path.data());
 
-    return true;
+    const auto numVertices = this->GetNumVertices();
+    const auto threeNumVertices = Vector3::pointSize * numVertices;
+
+    outFile.Write(sizeof(Real), threeNumVertices, vertices.data());
+    outFile.Write(sizeof(Real), threeNumVertices, sVertices.data());
+    outFile.Write(sizeof(Real), Vector3::pointSize, &min);
+    outFile.Write(sizeof(Real), Vector3::pointSize, &scale);
+    outFile.Write(sizeof(Real), Vector3::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector3::pointSize, &lineDirection);
+    outFile.Write(sizeof(Real), Vector3::pointSize, &planeOrigin);
+    outFile.Write(sizeof(Real), 6, planeDirection.data());
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetContainingTetrahedron(int i, Tetrahedron*& tetra) const
+bool Mathematics::Delaunay3<Real>::GetContainingTetrahedron(int i, const Tetrahedron& tetra) const
 {
-    const auto numTetra = mTetraMesh.GetTetrahedra().size();
+    const auto numTetra = tetraMesh.GetTetrahedra().size();
     for (auto t = 0u; t < numTetra; ++t)
     {
-        int j;
-        for (j = 0; j < 4; ++j)
+        auto j = 0;
+        for (; j < 4; ++j)
         {
-            const int face[3]{ TetrahedronKey::oppositeFace[j][0], TetrahedronKey::oppositeFace[j][1], TetrahedronKey::oppositeFace[j][2] };
-            if (mQuery->ToPlane(i, tetra->V[face[0]], tetra->V[face[1]], tetra->V[face[2]]) > 0)
+            const std::array<int, 3> face{ TetrahedronKey::oppositeFace.at(j).at(0), TetrahedronKey::oppositeFace.at(j).at(1), TetrahedronKey::oppositeFace.at(j).at(2) };
+            if (System::EnumCastUnderlying(query->ToPlane(i, tetra.v.at(face.at(0)), tetra.v.at(face.at(1)), tetra.v.at(face.at(2)))) > 0)
             {
-                // Point i sees face <v0,v1,v2> from outside the tetrahedron.
-                if (tetra->S[j])
+                if (tetra.s.at(j))
                 {
-                    // Traverse to the tetrahedron sharing the face.
-                    tetra = tetra->S[j];
                     break;
                 }
                 else
                 {
-                    // We reached a hull face, so the point is outside the
-                    // hull.  TODO (for WM6):  Once a hull data structure is
-                    // in place, return tetra->S[j] as the candidate for
-                    // starting a search for visible hull faces.
                     return false;
                 }
             }
@@ -677,55 +748,51 @@ bool Mathematics::Delaunay3<Real>::GetContainingTetrahedron(int i, Tetrahedron*&
 
         if (j == 4)
         {
-            // The point is inside all four faces, so the point is inside
-            // a tetrahedron.
             return true;
         }
     }
 
-    MATHEMATICS_ASSERTION_0(false, "Unexpected termination of GetContainingTetrahedron\n");
     return false;
 }
 
 template <typename Real>
-void Mathematics::Delaunay3<Real>::GetAndRemoveInsertionPolyhedron(int i, std::set<Tetrahedron*>& candidates, std::set<TriangleKey>& boundary)
+void Mathematics::Delaunay3<Real>::GetAndRemoveInsertionPolyhedron(int i, std::set<TetrahedronSharedPtr>& candidates, std::set<TriangleKey>& boundary)
 {
-    // Locate the tetrahedra that make up the insertion polyhedron.
-    TSManifoldMesh polyhedron;
-    while (candidates.size() > 0)
+    TSManifoldMesh polyhedron{};
+    while (!candidates.empty())
     {
         auto tetra = *candidates.begin();
         candidates.erase(candidates.begin());
 
         for (auto j = 0; j < 4; ++j)
         {
-            auto adj = tetra->S[j];
+            auto adj = tetra->s.at(j);
             if (adj && candidates.find(adj) == candidates.end())
             {
-                if (mQuery->ToCircumsphere(i, adj->V[0], adj->V[1], adj->V[2], adj->V[3]) <= 0)
+                if (System::EnumCastUnderlying(query->ToCircumsphere(i, adj->v.at(0), adj->v.at(1), adj->v.at(2), adj->v.at(3))) <= 0)
                 {
-                    // Point i is in the circumsphere.
-                    candidates.insert(adj);
+                    candidates.emplace(adj);
                 }
             }
         }
 
-        polyhedron.Insert(tetra->V[0], tetra->V[1], tetra->V[2], tetra->V[3]);
-        mTetraMesh.Remove(tetra->V[0], tetra->V[1], tetra->V[2], tetra->V[3]);
+        polyhedron.Insert(tetra->v.at(0), tetra->v.at(1), tetra->v.at(2), tetra->v.at(3));
+        tetraMesh.Remove(tetra->v.at(0), tetra->v.at(1), tetra->v.at(2), tetra->v.at(3));
     }
 
-    // Get the boundary triangles of the insertion polyhedron.
     const auto& smap = polyhedron.GetTetrahedra();
-    TSManifoldMesh::SMapCIterator element;
-    for (element = smap.begin(); element != smap.end(); ++element)
+
+    for (auto element = smap.begin(); element != smap.end(); ++element)
     {
-        const auto* tetra = element->second;
+        auto tetra = element->second;
         for (int j = 0; j < 4; ++j)
         {
-            if (!tetra->S[j])
+            if (!tetra->s.at(j))
             {
-                const int face[3]{ TetrahedronKey::oppositeFace[j][0], TetrahedronKey::oppositeFace[j][1], TetrahedronKey::oppositeFace[j][2] };
-                boundary.insert(TriangleKey(tetra->V[face[0]], tetra->V[face[1]], tetra->V[face[2]]));
+                const std::array<int, 3> face{ TetrahedronKey::oppositeFace.at(j).at(0),
+                                               TetrahedronKey::oppositeFace.at(j).at(1),
+                                               TetrahedronKey::oppositeFace.at(j).at(2) };
+                boundary.emplace(tetra->v.at(face.at(0)), tetra->v.at(face.at(1)), tetra->v.at(face.at(2)));
             }
         }
     }
@@ -734,108 +801,84 @@ void Mathematics::Delaunay3<Real>::GetAndRemoveInsertionPolyhedron(int i, std::s
 template <typename Real>
 void Mathematics::Delaunay3<Real>::Update(int i)
 {
-    const auto& smap = mTetraMesh.GetTetrahedra();
-    auto* tetra = smap.begin()->second;
-    if (GetContainingTetrahedron(i, tetra))
+    const auto& smap = tetraMesh.GetTetrahedra();
+    auto tetra = smap.begin()->second;
+    if (GetContainingTetrahedron(i, *tetra))
     {
-        // The point is inside the convex hull.  The insertion polyhedron
-        // contains only tetrahedra in the current tetrahedralization; the
-        // hull does not change.
+        std::set<TetrahedronSharedPtr> candidates{ tetra };
 
-        // Use a depth-first search for those tetrahedra whose circumspheres
-        // contain point i.
-        std::set<Tetrahedron*> candidates;
-        candidates.insert(tetra);
-
-        // Get the boundary of the insertion polyhedron C that contains the
-        // tetrahedra whose circumspheres contain point i.  C contains the
-        // point i.
-        std::set<TriangleKey> boundary;
+        std::set<TriangleKey> boundary{};
         GetAndRemoveInsertionPolyhedron(i, candidates, boundary);
 
-        // The insertion polyhedron consists of the tetrahedra formed by
-        // point i and the faces of C.
-        std::set<TriangleKey>::const_iterator key;
-        for (key = boundary.begin(); key != boundary.end(); ++key)
+        for (const auto& key : boundary)
         {
-            mTetraMesh.Insert(i, key->GetKey(0), key->GetKey(1), key->GetKey(2));
+            tetraMesh.Insert(i, key.GetKey(0), key.GetKey(1), key.GetKey(2));
         }
     }
     else
     {
-        // The point is outside the convex hull.  The insertion polyhedron
-        // is formed by point i and any tetrahedra in the current
-        // tetrahedralization whose circumspheres contain point i.
+        std::set<TriangleKey> hull{};
 
-        // Locate the convex hull of the tetrahedra.  TODO:  In WM6, maintain
-        // a hull data structure that is updated incrementally.
-        std::set<TriangleKey> hull;
-        const auto& smap = mTetraMesh.GetTetrahedra();
-        TSManifoldMesh::SMapCIterator element;
-        for (element = smap.begin(); element != smap.end(); ++element)
+        for (auto element = smap.begin(); element != smap.end(); ++element)
         {
-            const auto* tetra = element->second;
+            auto value = element->second;
             for (int j = 0; j < 4; ++j)
             {
-                if (!tetra->S[j])
+                if (!value->s.at(j))
                 {
-                    const int face[3]{ TetrahedronKey::oppositeFace[j][0], TetrahedronKey::oppositeFace[j][1], TetrahedronKey::oppositeFace[j][2] };
-                    hull.insert(TriangleKey(tetra->V[face[0]], tetra->V[face[1]], tetra->V[face[2]]));
+                    const std::array<int, 3> face{ TetrahedronKey::oppositeFace.at(j).at(0),
+                                                   TetrahedronKey::oppositeFace.at(j).at(1),
+                                                   TetrahedronKey::oppositeFace.at(j).at(2) };
+                    hull.emplace(value->v.at(face.at(0)), value->v.at(face.at(1)), value->v.at(face.at(2)));
                 }
             }
         }
 
-        // TODO:  Until the hull change in WM6, for now just iterate over all
-        // the hull faces and use the ones visible to point i to locate the
-        // insertion polyhedron.
-        const auto& trimap = mTetraMesh.GetTriangles();
-        std::set<Tetrahedron*> candidates;
-        std::set<TriangleKey> visible;
-        std::set<TriangleKey>::const_iterator key;
-        for (key = hull.begin(); key != hull.end(); ++key)
+        const auto& trimap = tetraMesh.GetTriangles();
+        std::set<TetrahedronSharedPtr> candidates{};
+        std::set<TriangleKey> visible{};
+
+        for (const auto& key : hull)
         {
-            if (mQuery->ToPlane(i, key->GetKey(0), key->GetKey(1), key->GetKey(2)) > 0)
+            if (System::EnumCastUnderlying(query->ToPlane(i, key.GetKey(0), key.GetKey(1), key.GetKey(2))) > 0)
             {
-                auto iter = trimap.find(UnorderedTriangleKey(key->GetKey(0), key->GetKey(1), key->GetKey(2)));
-                MATHEMATICS_ASSERTION_0(iter != trimap.end(), "Unexpected condition\n");
-                MATHEMATICS_ASSERTION_0(iter->second->T[1] == 0, "Unexpected condition\n");
-                auto adj = iter->second->T[0];
+                const auto iter = trimap.find(UnorderedTriangleKey(key.GetKey(0), key.GetKey(1), key.GetKey(2)));
+                if (iter == trimap.end())
+                {
+                    THROW_EXCEPTION(SYSTEM_TEXT("意外情况\n"));
+                }
+
+                MATHEMATICS_ASSERTION_0(iter->second->t.at(1) == 0, "意外情况\n");
+
+                auto adj = iter->second->t.at(0);
                 if (adj && candidates.find(adj) == candidates.end())
                 {
-                    if (mQuery->ToCircumsphere(i, adj->V[0], adj->V[1], adj->V[2], adj->V[3]) <= 0)
+                    if (System::EnumCastUnderlying(query->ToCircumsphere(i, adj->v.at(0), adj->v.at(1), adj->v.at(2), adj->v.at(3))) <= 0)
                     {
-                        // Point i is in the circumsphere.
-                        candidates.insert(adj);
+                        candidates.emplace(adj);
                     }
                     else
                     {
-                        // Point i is not in the circumsphere but the hull face
-                        // is visible.
-                        visible.insert(*key);
+                        visible.emplace(key);
                     }
                 }
             }
         }
 
-        // Get the boundary of the insertion subpolyhedron C that contains the
-        // tetrahedra whose circumspheres contain point i.
-        std::set<TriangleKey> boundary;
+        std::set<TriangleKey> boundary{};
         GetAndRemoveInsertionPolyhedron(i, candidates, boundary);
 
-        // The insertion polyhedron P consists of the tetrahedra formed by
-        // point i and the back faces of C *and* the visible faces of
-        // mTetraMesh-C.
-        for (key = boundary.begin(); key != boundary.end(); ++key)
+        for (const auto& key : boundary)
         {
-            if (mQuery->ToPlane(i, key->GetKey(0), key->GetKey(1), key->GetKey(2)) < 0)
+            if (System::EnumCastUnderlying(query->ToPlane(i, key.GetKey(0), key.GetKey(1), key.GetKey(2))) < 0)
             {
-                // This is a back face of the boundary.
-                mTetraMesh.Insert(i, key->GetKey(0), key->GetKey(1), key->GetKey(2));
+                tetraMesh.Insert(i, key.GetKey(0), key.GetKey(1), key.GetKey(2));
             }
         }
-        for (key = visible.begin(); key != visible.end(); ++key)
+
+        for (const auto& key : visible)
         {
-            mTetraMesh.Insert(i, key->GetKey(0), key->GetKey(2), key->GetKey(1));
+            tetraMesh.Insert(i, key.GetKey(0), key.GetKey(2), key.GetKey(1));
         }
     }
 }

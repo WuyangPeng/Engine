@@ -1,309 +1,342 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 19:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 15:57)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_CURVE3_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_CURVE3_DETAIL_H
 
 #include "NURBSCurve3.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-NURBSCurve3<Real>::NURBSCurve3 (int numCtrlPoints, const Vector3<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, bool open)
-	: SingleCurve3<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }, mLoop{ loop }
+Mathematics::NURBSCurve3<Real>::NURBSCurve3(int numCtrlPoints, const std::vector<Vector3<Real>>& ctrlPoint, const std::vector<Real>& ctrlWeight, int degree, bool loop, bool open)
+    : ParentType{ Math<Real>::GetValue(0), Math<Real>::GetValue(1) },
+      numCtrlPoints{ numCtrlPoints },
+      ctrlPoint{},
+      ctrlWeight{},
+      loop{ loop },
+      basis{},
+      replicate{ (loop ? (open ? 1 : degree) : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "无效输入。\n");
 
-    mNumCtrlPoints = numCtrlPoints;
-    mReplicate = (loop ? (open ? 1 : degree) : 0);
     CreateControl(ctrlPoint, ctrlWeight);
-    mBasis.Create(mNumCtrlPoints + mReplicate, degree, open);
+    basis.Create(numCtrlPoints + replicate, degree, open);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-NURBSCurve3<Real>::NURBSCurve3 (int numCtrlPoints, const Vector3<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, const Real* knot)
-	: SingleCurve3<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }, mLoop{ loop }
+Mathematics::NURBSCurve3<Real>::NURBSCurve3(int numCtrlPoints, const std::vector<Vector3<Real>>& ctrlPoint, const std::vector<Real>& ctrlWeight, int degree, bool loop, const std::vector<Real>& knot)
+    : ParentType{ Math<Real>::GetValue(0), Math<Real>::GetValue(1) },
+      numCtrlPoints{ numCtrlPoints },
+      ctrlPoint{},
+      ctrlWeight{},
+      loop{ loop },
+      basis{},
+      replicate{ (loop ? 1 : 0) }
 {
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints-1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "无效输入。\n");
 
-    mNumCtrlPoints = numCtrlPoints;
-    mReplicate = (loop ? 1 : 0);
     CreateControl(ctrlPoint, ctrlWeight);
-    mBasis.Create(mNumCtrlPoints + mReplicate, degree, knot);
+    basis.Create(numCtrlPoints + replicate, degree, knot);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-NURBSCurve3<Real>::~NURBSCurve3 ()
+bool Mathematics::NURBSCurve3<Real>::IsValid() const noexcept
 {
-    DELETE1(mCtrlPoint);
-    DELETE1(mCtrlWeight);
+    return ParentType::IsValid();
 }
 
+#endif  // OPEN_CLASS_INVARIANT
+
 template <typename Real>
-void NURBSCurve3<Real>::CreateControl (const Vector3<Real>* ctrlPoint,const Real* ctrlWeight)
+void Mathematics::NURBSCurve3<Real>::CreateControl(const std::vector<Vector3<Real>>& newCtrlPoint, const std::vector<Real>& newCtrlWeight)
 {
-	auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
+    const auto newNumCtrlPoints = numCtrlPoints + replicate;
 
-    mCtrlPoint = nullptr;  // NEW1<Vector3<Real> >(newNumCtrlPoints);
-    memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector3<Real>));
+    ctrlPoint.resize(newNumCtrlPoints);
+    ctrlWeight.resize(newNumCtrlPoints);
 
-    mCtrlWeight = nullptr;  //  NEW1<Real>(newNumCtrlPoints);
-    memcpy(mCtrlWeight, ctrlWeight, mNumCtrlPoints*sizeof(Real));
-
-    for (auto i = 0; i < mReplicate; ++i)
+    for (auto i = 0; i < replicate; ++i)
     {
-        mCtrlPoint[mNumCtrlPoints+i] = ctrlPoint[i];
-        mCtrlWeight[mNumCtrlPoints+i] = ctrlWeight[i];
+        const auto index = numCtrlPoints + i;
+        ctrlPoint.at(index) = newCtrlPoint.at(i);
+        ctrlWeight.at(index) = newCtrlWeight.at(i);
     }
 }
 
 template <typename Real>
-int NURBSCurve3<Real>::GetNumCtrlPoints () const
+int Mathematics::NURBSCurve3<Real>::GetNumCtrlPoints() const noexcept
 {
-    return mNumCtrlPoints;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numCtrlPoints;
 }
 
 template <typename Real>
-int NURBSCurve3<Real>::GetDegree () const
+int Mathematics::NURBSCurve3<Real>::GetDegree() const noexcept
 {
-    return mBasis.GetDegree();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.GetDegree();
 }
 
 template <typename Real>
-bool NURBSCurve3<Real>::IsOpen () const
+bool Mathematics::NURBSCurve3<Real>::IsOpen() const noexcept
 {
-    return mBasis.IsOpen();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.IsOpen();
 }
 
 template <typename Real>
-bool NURBSCurve3<Real>::IsUniform () const
+bool Mathematics::NURBSCurve3<Real>::IsUniform() const noexcept
 {
-    return mBasis.IsUniform();
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.IsUniform();
 }
 
 template <typename Real>
-bool NURBSCurve3<Real>::IsLoop () const
+bool Mathematics::NURBSCurve3<Real>::IsLoop() const noexcept
 {
-    return mLoop;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return loop;
 }
 
 template <typename Real>
-void NURBSCurve3<Real>::SetControlPoint (int i, const Vector3<Real>& ctrl)
+void Mathematics::NURBSCurve3<Real>::SetControlPoint(int i, const Vector3<Real>& ctrl)
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (0 <= i && i < numCtrlPoints)
     {
-        // Set the control point.
-        mCtrlPoint[i] = ctrl;
+        ctrlPoint.at(i) = ctrl;
 
-        // Set the replicated control point.
-        if (i < mReplicate)
+        if (i < replicate)
         {
-            mCtrlPoint[mNumCtrlPoints+i] = ctrl;
+            const auto index = numCtrlPoints + i;
+            ctrlPoint.at(index) = ctrl;
         }
     }
 }
 
 template <typename Real>
-Vector3<Real> NURBSCurve3<Real>::GetControlPoint (int i) const
+Mathematics::Vector3<Real> Mathematics::NURBSCurve3<Real>::GetControlPoint(int i) const
 {
-    if (0 <= i && i < mNumCtrlPoints)
-    {
-        return mCtrlPoint[i];
-    }
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector3<Real>(Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal);
+    return ctrlPoint.at(i);
 }
 
 template <typename Real>
-void NURBSCurve3<Real>::SetControlWeight (int i, Real weight)
+void Mathematics::NURBSCurve3<Real>::SetControlWeight(int i, Real weight)
 {
-    if (0 <= i && i < mNumCtrlPoints)
-    {
-        // Set the control weight.
-        mCtrlWeight[i] = weight;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-        // Set the replicated control weight.
-        if (i < mReplicate)
+    if (0 <= i && i < numCtrlPoints)
+    {
+        ctrlWeight.at(i) = weight;
+
+        if (i < replicate)
         {
-            mCtrlWeight[mNumCtrlPoints+i] = weight;
+            const auto index = numCtrlPoints + i;
+            ctrlWeight.at(index) = weight;
         }
     }
 }
 
 template <typename Real>
-Real NURBSCurve3<Real>::GetControlWeight (int i) const
+Real Mathematics::NURBSCurve3<Real>::GetControlWeight(int i) const
 {
-    if (0 <= i && i < mNumCtrlPoints)
-    {
-        return mCtrlWeight[i];
-    }
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Math<Real>::maxReal;
+    return ctrlWeight.at(i);
 }
 
 template <typename Real>
-void NURBSCurve3<Real>::SetKnot (int i, Real knot)
+void Mathematics::NURBSCurve3<Real>::SetKnot(int i, Real knot)
 {
-    mBasis.SetKnot(i, knot);
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    basis.SetKnot(i, knot);
 }
 
 template <typename Real>
-Real NURBSCurve3<Real>::GetKnot (int i) const
+Real Mathematics::NURBSCurve3<Real>::GetKnot(int i) const
 {
-    return mBasis.GetKnot(i);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.GetKnot(i);
 }
 
 template <typename Real>
-void NURBSCurve3<Real>::Get (Real t, Vector3<Real>* pos, Vector3<Real>* der1, Vector3<Real>* der2, Vector3<Real>* der3) const
+void Mathematics::NURBSCurve3<Real>::Get(Real t, Vector3<Real>* pos, Vector3<Real>* der1, Vector3<Real>* der2, Vector3<Real>* der3) const
 {
-    int i, imin, imax;
-    if (der3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto imin = 0;
+    auto imax = 0;
+    if (der3 != nullptr)
     {
-        mBasis.Compute(t, 0, imin, imax);
-        mBasis.Compute(t, 1, imin, imax);
-        mBasis.Compute(t, 2, imin, imax);
-        mBasis.Compute(t, 3, imin, imax);
+        basis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 1, imin, imax);
+        basis.Compute(t, 2, imin, imax);
+        basis.Compute(t, 3, imin, imax);
     }
-    else if (der2)
+    else if (der2 != nullptr)
     {
-        mBasis.Compute(t, 0, imin, imax);
-        mBasis.Compute(t, 1, imin, imax);
-        mBasis.Compute(t, 2, imin, imax);
+        basis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 1, imin, imax);
+        basis.Compute(t, 2, imin, imax);
     }
-    else if (der1)
+    else if (der1 != nullptr)
     {
-        mBasis.Compute(t, 0, imin, imax);
-        mBasis.Compute(t, 1, imin, imax);
+        basis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 1, imin, imax);
     }
-    else  // pos
+    else
     {
-        mBasis.Compute(t, 0, imin, imax);
+        basis.Compute(t, 0, imin, imax);
     }
 
-    Real tmp;
-
-    // Compute position.
-	auto X = Vector3<Real>::sm_Zero;
-    Real w = Math<Real>::GetValue(0);
-    for (i = imin; i <= imax; ++i)
+    auto x = Vector3<Real>::GetZero();
+    auto w = Math<Real>::GetValue(0);
+    for (auto i = imin; i <= imax; ++i)
     {
-        tmp = mBasis.GetD0(i)*mCtrlWeight[i];
-        X += tmp*mCtrlPoint[i];
+        auto tmp = basis.GetD0(i) * ctrlWeight.at(i);
+        x += tmp * ctrlPoint.at(i);
         w += tmp;
     }
-	auto invW = (Math::GetValue(1))/w;
-	auto P = invW*X;
-    if (pos)
+    auto invW = (Math<Real>::GetValue(1)) / w;
+    auto p = invW * x;
+    if (pos != nullptr)
     {
-        *pos = P;
+        *pos = p;
     }
 
-    if (!der1 && !der2 && !der3)
+    if (der1 == nullptr && der2 == nullptr && der3 == nullptr)
     {
         return;
     }
 
-    // Compute first derivative.
-    Vector3<Real> XDer1 = Vector3<Real>::sm_Zero;
-    Real wDer1 = Math<Real>::GetValue(0);
-    for (i = imin; i <= imax; ++i)
+    auto xDer1 = Vector3<Real>::GetZero();
+    auto wDer1 = Math<Real>::GetValue(0);
+    for (auto i = imin; i <= imax; ++i)
     {
-        tmp = mBasis.GetD1(i)*mCtrlWeight[i];
-        XDer1 += tmp*mCtrlPoint[i];
+        auto tmp = basis.GetD1(i) * ctrlWeight.at(i);
+        xDer1 += tmp * ctrlPoint.at(i);
         wDer1 += tmp;
     }
-    Vector3<Real> PDer1 = invW*(XDer1 - wDer1*P);
-    if (der1)
+
+    auto pDer1 = invW * (xDer1 - wDer1 * p);
+    if (der1 != nullptr)
     {
-        *der1 = PDer1;
+        *der1 = pDer1;
     }
 
-    if (!der2 && !der3)
+    if (der2 == nullptr && der3 == nullptr)
     {
         return;
     }
 
-    // Compute second derivative.
-    Vector3<Real> XDer2 = Vector3<Real>::sm_Zero;
-    Real wDer2 = Math<Real>::GetValue(0);
-    for (i = imin; i <= imax; ++i)
+    auto xDer2 = Vector3<Real>::GetZero();
+    auto wDer2 = Math<Real>::GetValue(0);
+    for (auto i = imin; i <= imax; ++i)
     {
-        tmp = mBasis.GetD2(i)*mCtrlWeight[i];
-        XDer2 += tmp*mCtrlPoint[i];
+        auto tmp = basis.GetD2(i) * ctrlWeight.at(i);
+        xDer2 += tmp * ctrlPoint.at(i);
         wDer2 += tmp;
     }
-    Vector3<Real> PDer2 = invW*(XDer2 - (Math::GetValue(2))*wDer1*PDer1 - wDer2*P);
-    if (der2)
+
+    auto pDer2 = invW * (xDer2 - (Math<Real>::GetValue(2)) * wDer1 * pDer1 - wDer2 * p);
+    if (der2 != nullptr)
     {
-        *der2 = PDer2;
+        *der2 = pDer2;
     }
 
-    if (!der3)
+    if (der3 == nullptr)
     {
         return;
     }
 
-    // Compute third derivative.
-    Vector3<Real> XDer3 = Vector3<Real>::sm_Zero;
-    Real wDer3 = Math<Real>::GetValue(0);
-    for (i = imin; i <= imax; ++i)
+    auto xDer3 = Vector3<Real>::GetZero();
+    auto wDer3 = Math<Real>::GetValue(0);
+    for (auto i = imin; i <= imax; ++i)
     {
-        tmp = mBasis.GetD3(i)*mCtrlWeight[i];
-        XDer3 += tmp*mCtrlPoint[i];
+        auto tmp = basis.GetD3(i) * ctrlWeight.at(i);
+        xDer3 += tmp * ctrlPoint.at(i);
         wDer3 += tmp;
     }
-    if (der3)
+    if (der3 != nullptr)
     {
-        *der3 = invW*(XDer3 - (static_cast<Real>(3))*wDer1*PDer2 - (static_cast<Real>(3))*wDer2*PDer1 - wDer3*P);
+        *der3 = invW * (xDer3 - Math<Real>::GetValue(3) * wDer1 * pDer2 - Math<Real>::GetValue(3) * wDer2 * pDer1 - wDer3 * p);
     }
 }
 
 template <typename Real>
-BSplineBasis<Real>& NURBSCurve3<Real>::GetBasis ()
+Mathematics::BSplineBasis<Real>& Mathematics::NURBSCurve3<Real>::GetBasis() noexcept
 {
-    return mBasis;
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    return basis;
 }
 
 template <typename Real>
-Vector3<Real> NURBSCurve3<Real>::GetPosition (Real t) const
+Mathematics::Vector3<Real> Mathematics::NURBSCurve3<Real>::GetPosition(Real t) const
 {
-    Vector3<Real> pos;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> pos{};
     Get(t, &pos, 0, 0, 0);
+
     return pos;
 }
 
 template <typename Real>
-Vector3<Real> NURBSCurve3<Real>::GetFirstDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::NURBSCurve3<Real>::GetFirstDerivative(Real t) const
 {
-    Vector3<Real> der1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> der1{};
     Get(t, 0, &der1, 0, 0);
+
     return der1;
 }
 
 template <typename Real>
-Vector3<Real> NURBSCurve3<Real>::GetSecondDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::NURBSCurve3<Real>::GetSecondDerivative(Real t) const
 {
-    Vector3<Real> der2;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> der2{};
     Get(t, 0, 0, &der2, 0);
+
     return der2;
 }
 
 template <typename Real>
-Vector3<Real> NURBSCurve3<Real>::GetThirdDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::NURBSCurve3<Real>::GetThirdDerivative(Real t) const
 {
-    Vector3<Real> der3;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> der3{};
     Get(t, 0, 0, 0, &der3);
+
     return der3;
 }
 
-
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_CURVE3_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_CURVE3_DETAIL_H

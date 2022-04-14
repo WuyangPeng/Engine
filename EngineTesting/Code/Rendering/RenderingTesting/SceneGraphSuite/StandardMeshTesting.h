@@ -32,7 +32,7 @@ namespace Rendering
 		void DodecahedronTest();
 		void IcosahedronTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

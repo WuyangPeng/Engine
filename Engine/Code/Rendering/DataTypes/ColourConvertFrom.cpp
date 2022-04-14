@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/21 21:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:16)
 
 #include "Rendering/RenderingExport.h"
 
@@ -34,9 +34,9 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     {
         auto current = Increase<textureFormat>(source);
 
-        auto red = GetSmallRed<textureFormat>(current);
-        auto green = GetSmallGreen<textureFormat>(current);
-        auto blue = GetSmallBlue<textureFormat>(current);
+        const auto red = GetSmallRed<textureFormat>(current);
+        const auto green = GetSmallGreen<textureFormat>(current);
+        const auto blue = GetSmallBlue<textureFormat>(current);
 
         outTexels.emplace_back(red, green, blue, 0.0f);
     }
@@ -61,10 +61,10 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     {
         auto current = Increase<textureFormat>(source);
 
-        auto red = GetSmallRed<textureFormat>(current);
-        auto green = GetSmallGreen<textureFormat>(current);
-        auto blue = GetSmallBlue<textureFormat>(current);
-        auto alpha = GetSmallAlpha<textureFormat>(current);
+        const auto red = GetSmallRed<textureFormat>(current);
+        const auto green = GetSmallGreen<textureFormat>(current);
+        const auto blue = GetSmallBlue<textureFormat>(current);
+        const auto alpha = GetSmallAlpha<textureFormat>(current);
 
         outTexels.emplace_back(red, green, blue, alpha);
     }
@@ -89,10 +89,10 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     {
         auto current = Increase<textureFormat>(source);
 
-        auto red = GetSmallRed<textureFormat>(current);
-        auto green = GetSmallGreen<textureFormat>(current);
-        auto blue = GetSmallBlue<textureFormat>(current);
-        auto alpha = GetSmallAlpha<textureFormat>(current);
+        const auto red = GetSmallRed<textureFormat>(current);
+        const auto green = GetSmallGreen<textureFormat>(current);
+        const auto blue = GetSmallBlue<textureFormat>(current);
+        const auto alpha = GetSmallAlpha<textureFormat>(current);
 
         outTexels.emplace_back(red, green, blue, alpha);
     }
@@ -191,9 +191,9 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     const auto outTexelsLength = texelsCheck.GetOutTexelsLength();
     for (auto i = 0u; i < outTexelsLength; ++i)
     {
-        auto blue = Increase<textureFormat>(source);
-        auto green = Increase<textureFormat>(source);
-        auto red = Increase<textureFormat>(source);
+        const auto blue = Increase<textureFormat>(source);
+        const auto green = Increase<textureFormat>(source);
+        const auto red = Increase<textureFormat>(source);
 
         const ByteColour colour{ red, green, blue, 0 };
 
@@ -218,10 +218,10 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     const auto outTexelsLength = texelsCheck.GetOutTexelsLength();
     for (auto i = 0u; i < outTexelsLength; ++i)
     {
-        auto blue = Increase<textureFormat>(source);
-        auto green = Increase<textureFormat>(source);
-        auto red = Increase<textureFormat>(source);
-        auto alpha = Increase<textureFormat>(source);
+        const auto blue = Increase<textureFormat>(source);
+        const auto green = Increase<textureFormat>(source);
+        const auto red = Increase<textureFormat>(source);
+        const auto alpha = Increase<textureFormat>(source);
 
         const ByteColour colour{ red, green, blue, alpha };
 
@@ -246,10 +246,10 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     const auto outTexelsLength = texelsCheck.GetOutTexelsLength();
     for (auto i = 0u; i < outTexelsLength; ++i)
     {
-        auto red = Increase<textureFormat>(source);
-        auto green = Increase<textureFormat>(source);
-        auto blue = Increase<textureFormat>(source);
-        auto alpha = Increase<textureFormat>(source);
+        const auto red = Increase<textureFormat>(source);
+        const auto green = Increase<textureFormat>(source);
+        const auto blue = Increase<textureFormat>(source);
+        const auto alpha = Increase<textureFormat>(source);
 
         const ByteColour colour{ red, green, blue, alpha };
 
@@ -422,7 +422,7 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     const auto outTexelsLength = texelsCheck.GetOutTexelsLength();
     for (auto i = 0u; i < outTexelsLength; ++i)
     {
-        auto red = source.Increase<float>();
+        const auto red = source.Increase<float>();
 
         outTexels.emplace_back(red, 0.0f, 0.0f, 0.0f);
     }
@@ -445,8 +445,8 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     const auto outTexelsLength = texelsCheck.GetOutTexelsLength();
     for (auto i = 0u; i < outTexelsLength; ++i)
     {
-        auto red = source.Increase<float>();
-        auto green = source.Increase<float>();
+        const auto red = source.Increase<float>();
+        const auto green = source.Increase<float>();
 
         outTexels.emplace_back(red, green, 0.0f, 0.0f);
     }
@@ -469,10 +469,10 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
     const auto outTexelsLength = texelsCheck.GetOutTexelsLength();
     for (auto i = 0u; i < outTexelsLength; ++i)
     {
-        auto red = source.Increase<float>();
-        auto green = source.Increase<float>();
-        auto blue = source.Increase<float>();
-        auto alpha = source.Increase<float>();
+        const auto red = source.Increase<float>();
+        const auto green = source.Increase<float>();
+        const auto blue = source.Increase<float>();
+        const auto alpha = source.Increase<float>();
 
         outTexels.emplace_back(red, green, blue, alpha);
     }
@@ -484,7 +484,7 @@ Rendering::ColourConvertFrom::OutTexelsType Rendering::ColourConvertFrom::Conver
 
 Rendering::ColourConvertFrom::ConvertFromFunction Rendering::ColourConvertFrom::GetConvertFromFunction(TextureFormat textureFormat)
 {
-    using FunctionContainer = array<ConvertFromFunction, sm_ConvertFromQuantity>;
+    using FunctionContainer = array<ConvertFromFunction, convertFromQuantity>;
 
     static FunctionContainer functionContainer{ nullptr,
                                                 &ConvertFromR5G6B5,

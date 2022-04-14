@@ -15,8 +15,10 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 
-
-#include <boost/lexical_cast.hpp>
+#include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 
 using std::string;
 

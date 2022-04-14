@@ -21,7 +21,7 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
-
+#include SYSTEM_WARNING_DISABLE(26440)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, KeyframeControllerTesting) 
 
 void Rendering::KeyframeControllerTesting

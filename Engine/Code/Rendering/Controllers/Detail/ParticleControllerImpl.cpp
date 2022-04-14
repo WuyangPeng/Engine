@@ -50,77 +50,77 @@ bool Rendering::ParticleControllerImpl
 #endif // OPEN_CLASS_INVARIANT	
 
 
-int Rendering::ParticleControllerImpl ::GetNumParticles() const noexcept
+int Rendering::ParticleControllerImpl::GetNumParticles() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumParticles;
 }
 
-float Rendering::ParticleControllerImpl ::GetSystemLinearSpeed() const noexcept
+float Rendering::ParticleControllerImpl::GetSystemLinearSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearSpeed;
 }
 
-void Rendering::ParticleControllerImpl ::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
+void Rendering::ParticleControllerImpl::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearSpeed = systemLinearSpeed;
 }
 
-float Rendering::ParticleControllerImpl ::GetSystemAngularSpeed() const noexcept
+float Rendering::ParticleControllerImpl::GetSystemAngularSpeed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularSpeed;
 }
 
-void Rendering::ParticleControllerImpl ::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
+void Rendering::ParticleControllerImpl::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemAngularSpeed = systemAngularSpeed;
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl ::GetSystemLinearAxis() const noexcept
+const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetSystemLinearAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemLinearAxis;
 }
 
-void Rendering::ParticleControllerImpl ::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
+void Rendering::ParticleControllerImpl::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemLinearAxis = systemLinearAxis;
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl ::GetSystemAngularAxis() const noexcept
+const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetSystemAngularAxis() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemAngularAxis;
 }
 
-void Rendering::ParticleControllerImpl ::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
+void Rendering::ParticleControllerImpl::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_SystemAngularAxis = systemAngularAxis;
 }
 
-float Rendering::ParticleControllerImpl ::GetSystemSizeChange() const noexcept
+float Rendering::ParticleControllerImpl::GetSystemSizeChange() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SystemSizeChange;
 }
 
-void Rendering::ParticleControllerImpl ::SetSystemSizeChange(float systemSizeChange) noexcept
+void Rendering::ParticleControllerImpl::SetSystemSizeChange(float systemSizeChange) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

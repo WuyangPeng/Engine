@@ -28,7 +28,7 @@ void Rendering::IKGoalTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::IKGoalTesting
 	::InitTest()
 {

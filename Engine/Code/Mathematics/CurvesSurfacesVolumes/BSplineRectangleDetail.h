@@ -1,400 +1,411 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 18:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 10:27)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_RECTANGLE_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_RECTANGLE_DETAIL_H
 
 #include "BSplineRectangle.h"
-
-#include "System/Helper/PragmaWarning.h"
+#include "ParametricSurfaceDetail.h"
+#include "SurfaceDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26489)
-namespace Mathematics
+template <typename Real>
+Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+    : ParentType{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0), Math::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{ ctrlPoint },
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? (uOpen ? 1 : uDegree) : 0) },
+      vReplicate{ (vLoop ? (vOpen ? 1 : vDegree) : 0) }
 {
-    template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
-        : ParametricSurface<Real>{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0), Math::GetValue(1), true }
-    {
-        MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
 
-        mLoop[0] = uLoop;
-        mLoop[1] = vLoop;
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uOpen);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vOpen);
 
-        mNumUCtrlPoints = numUCtrlPoints;
-        mNumVCtrlPoints = numVCtrlPoints;
-        mUReplicate = (uLoop ? (uOpen ? 1 : uDegree) : 0);
-        mVReplicate = (vLoop ? (vOpen ? 1 : vDegree) : 0);
-        CreateControl(ctrlPoint);
-
-        mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uOpen);
-        mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vOpen);
-    }
-
-    template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
-        : ParametricSurface<Real>{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true }
-    {
-        MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "Invalid input\n");
-
-        mLoop[0] = uLoop;
-        mLoop[1] = vLoop;
-
-        mNumUCtrlPoints = numUCtrlPoints;
-        mNumVCtrlPoints = numVCtrlPoints;
-        mUReplicate = (uLoop ? (uOpen ? 1 : uDegree) : 0);
-        mVReplicate = (vLoop ? 1 : 0);
-        CreateControl(ctrlPoint);
-
-        mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uOpen);
-        mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vKnot);
-    }
-
-    template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
-        : ParametricSurface<Real>{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true }
-    {
-        MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "Invalid input\n");
-
-        mLoop[0] = uLoop;
-        mLoop[1] = vLoop;
-
-        mNumUCtrlPoints = numUCtrlPoints;
-        mNumVCtrlPoints = numVCtrlPoints;
-        mUReplicate = (uLoop ? 1 : 0);
-        mVReplicate = (vLoop ? (vOpen ? 1 : vDegree) : 0);
-        CreateControl(ctrlPoint);
-
-        mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uKnot);
-        mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vOpen);
-    }
-
-    template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot)
-        : ParametricSurface<Real>{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true }
-    {
-        MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "Invalid input\n");
-
-        mLoop[0] = uLoop;
-        mLoop[1] = vLoop;
-
-        mNumUCtrlPoints = numUCtrlPoints;
-        mNumVCtrlPoints = numVCtrlPoints;
-        mUReplicate = (uLoop ? 1 : 0);
-        mVReplicate = (vLoop ? 1 : 0);
-        CreateControl(ctrlPoint);
-
-        mBasis[0].Create(mNumUCtrlPoints + mUReplicate, uDegree, uKnot);
-        mBasis[1].Create(mNumVCtrlPoints + mVReplicate, vDegree, vKnot);
-    }
-
-    template <typename Real>
-    BSplineRectangle<Real>::~BSplineRectangle()
-    {
-        EXCEPTION_TRY
-        {
-            //DELETE2(mCtrlPoint);
-        }
-        EXCEPTION_ALL_CATCH(Mathematics)
-    }
-
-    template <typename Real>
-    void BSplineRectangle<Real>::CreateControl(Vector3<Real>** ctrlPoint)
-    {
-        const auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
-        const auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
-        mCtrlPoint = nullptr;  // NEW2<Vector3<Real>>(newNumVCtrlPoints, newNumUCtrlPoints);
-
-        for (auto u = 0; u < newNumUCtrlPoints; ++u)
-        {
-            auto uOld = u % mNumUCtrlPoints;
-            for (auto v = 0; v < newNumVCtrlPoints; ++v)
-            {
-                auto vOld = v % mNumVCtrlPoints;
-                mCtrlPoint[u][v] = ctrlPoint[uOld][vOld];
-            }
-        }
-    }
-
-    template <typename Real>
-    int BSplineRectangle<Real>::GetNumCtrlPoints(int dim) const noexcept
-    {
-        return mBasis[dim].GetNumCtrlPoints();
-    }
-
-    template <typename Real>
-    int BSplineRectangle<Real>::GetDegree(int dim) const noexcept
-    {
-        return mBasis[dim].GetDegree();
-    }
-
-    template <typename Real>
-    bool BSplineRectangle<Real>::IsOpen(int dim) const noexcept
-    {
-        return mBasis[dim].IsOpen();
-    }
-
-    template <typename Real>
-    bool BSplineRectangle<Real>::IsUniform(int dim) const
-    {
-        return mBasis[dim].IsUniform();
-    }
-
-    template <typename Real>
-    bool BSplineRectangle<Real>::IsLoop(int dim) const noexcept
-    {
-        return mLoop[dim];
-    }
-
-    template <typename Real>
-    void BSplineRectangle<Real>::SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl)
-    {
-        if (0 <= uIndex && uIndex < mNumUCtrlPoints && 0 <= vIndex && vIndex < mNumVCtrlPoints)
-        {
-            // Set the control point.
-            mCtrlPoint[uIndex][vIndex] = ctrl;
-
-            // Set the replicated control point.
-            auto doUReplicate = (uIndex < mUReplicate);
-            auto doVReplicate = (vIndex < mVReplicate);
-            int iUExt = 0, iVExt = 0;
-
-            if (doUReplicate)
-            {
-                iUExt = mNumUCtrlPoints + uIndex;
-                mCtrlPoint[iUExt][vIndex] = ctrl;
-            }
-            if (doVReplicate)
-            {
-                iVExt = mNumVCtrlPoints + vIndex;
-                mCtrlPoint[uIndex][iVExt] = ctrl;
-            }
-            if (doUReplicate && doVReplicate)
-            {
-                mCtrlPoint[iUExt][iVExt] = ctrl;
-            }
-        }
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::GetControlPoint(int uIndex, int vIndex) const noexcept
-    {
-        if (0 <= uIndex && uIndex < mNumUCtrlPoints && 0 <= vIndex && vIndex < mNumVCtrlPoints)
-        {
-            return mCtrlPoint[uIndex][vIndex];
-        }
-
-        return Vector3<Real>{ Math ::maxReal, Math ::maxReal, Math ::maxReal };
-    }
-
-    template <typename Real>
-    void BSplineRectangle<Real>::SetKnot(int dim, int i, Real knot)
-    {
-        if (0 <= dim && dim <= 1)
-        {
-            mBasis[dim].SetKnot(i, knot);
-        }
-    }
-
-    template <typename Real>
-    Real BSplineRectangle<Real>::GetKnot(int dim, int i) const
-    {
-        if (0 <= dim && dim <= 1)
-        {
-            return mBasis[dim].GetKnot(i);
-        }
-
-        return Math ::maxReal;
-    }
-
-    template <typename Real>
-    void BSplineRectangle<Real>::Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const
-    {
-        int iu = 0, iumin = 0, iumax = 0;
-        if (derUU)
-        {
-            mBasis[0].Compute(u, 0, iumin, iumax);
-            mBasis[0].Compute(u, 1, iumin, iumax);
-            mBasis[0].Compute(u, 2, iumin, iumax);
-        }
-        else if (derUV || derU)
-        {
-            mBasis[0].Compute(u, 0, iumin, iumax);
-            mBasis[0].Compute(u, 1, iumin, iumax);
-        }
-        else
-        {
-            mBasis[0].Compute(u, 0, iumin, iumax);
-        }
-
-        int iv = 0, ivmin = 0, ivmax = 0;
-        if (derVV)
-        {
-            mBasis[1].Compute(v, 0, ivmin, ivmax);
-            mBasis[1].Compute(v, 1, ivmin, ivmax);
-            mBasis[1].Compute(v, 2, ivmin, ivmax);
-        }
-        else if (derUV || derV)
-        {
-            mBasis[1].Compute(v, 0, ivmin, ivmax);
-            mBasis[1].Compute(v, 1, ivmin, ivmax);
-        }
-        else
-        {
-            mBasis[1].Compute(v, 0, ivmin, ivmax);
-        }
-
-        Real tmp{};
-
-        if (pos)
-        {
-            *pos = Vector3<Real>::GetZero();
-            for (iu = iumin; iu <= iumax; ++iu)
-            {
-                for (iv = ivmin; iv <= ivmax; ++iv)
-                {
-                    tmp = mBasis[0].GetD0(iu) * mBasis[1].GetD0(iv);
-                    *pos += tmp * mCtrlPoint[iu][iv];
-                }
-            }
-        }
-
-        if (derU)
-        {
-            *derU = Vector3<Real>::GetZero();
-            for (iu = iumin; iu <= iumax; ++iu)
-            {
-                for (iv = ivmin; iv <= ivmax; ++iv)
-                {
-                    tmp = mBasis[0].GetD1(iu) * mBasis[1].GetD0(iv);
-                    *derU += tmp * mCtrlPoint[iu][iv];
-                }
-            }
-        }
-
-        if (derV)
-        {
-            *derV = Vector3<Real>::GetZero();
-            for (iu = iumin; iu <= iumax; ++iu)
-            {
-                for (iv = ivmin; iv <= ivmax; ++iv)
-                {
-                    tmp = mBasis[0].GetD0(iu) * mBasis[1].GetD1(iv);
-                    *derV += tmp * mCtrlPoint[iu][iv];
-                }
-            }
-        }
-
-        if (derUU)
-        {
-            *derUU = Vector3<Real>::GetZero();
-            for (iu = iumin; iu <= iumax; ++iu)
-            {
-                for (iv = ivmin; iv <= ivmax; ++iv)
-                {
-                    tmp = mBasis[0].GetD2(iu) * mBasis[1].GetD0(iv);
-                    *derUU += tmp * mCtrlPoint[iu][iv];
-                }
-            }
-        }
-
-        if (derUV)
-        {
-            *derUV = Vector3<Real>::GetZero();
-            for (iu = iumin; iu <= iumax; ++iu)
-            {
-                for (iv = ivmin; iv <= ivmax; ++iv)
-                {
-                    tmp = mBasis[0].GetD1(iu) * mBasis[1].GetD1(iv);
-                    *derUV += tmp * mCtrlPoint[iu][iv];
-                }
-            }
-        }
-
-        if (derVV)
-        {
-            *derVV = Vector3<Real>::GetZero();
-            for (iu = iumin; iu <= iumax; ++iu)
-            {
-                for (iv = ivmin; iv <= ivmax; ++iv)
-                {
-                    tmp = mBasis[0].GetD0(iu) * mBasis[1].GetD2(iv);
-                    *derVV += tmp * mCtrlPoint[iu][iv];
-                }
-            }
-        }
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::P(Real u, Real v) const
-    {
-        Vector3<Real> pos;
-        Get(u, v, &pos, 0, 0, 0, 0, 0);
-        return pos;
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::PU(Real u, Real v) const
-    {
-        Vector3<Real> derU;
-        Get(u, v, 0, &derU, 0, 0, 0, 0);
-        return derU;
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::PV(Real u, Real v) const
-    {
-        Vector3<Real> derV;
-        Get(u, v, 0, 0, &derV, 0, 0, 0);
-        return derV;
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::PUU(Real u, Real v) const
-    {
-        Vector3<Real> derUU;
-        Get(u, v, 0, 0, 0, &derUU, 0, 0);
-        return derUU;
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::PUV(Real u, Real v) const
-    {
-        Vector3<Real> derUV;
-        Get(u, v, 0, 0, 0, 0, &derUV, 0);
-        return derUV;
-    }
-
-    template <typename Real>
-    Vector3<Real> BSplineRectangle<Real>::PVV(Real u, Real v) const
-    {
-        Vector3<Real> derVV;
-        Get(u, v, 0, 0, 0, 0, 0, &derVV);
-        return derVV;
-    }
-
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#include STSTEM_WARNING_POP
+template <typename Real>
+Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
+    : ParentType{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{ ctrlPoint },
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? (uOpen ? 1 : uDegree) : 0) },
+      vReplicate{ (vLoop ? 1 : 0) }
+{
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
+
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uOpen);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vKnot);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename Real>
+Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
+    : ParentType{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{ ctrlPoint },
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? 1 : 0) },
+      vReplicate{ (vLoop ? (vOpen ? 1 : vDegree) : 0) }
+{
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
+
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uKnot);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vOpen);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename Real>
+Mathematics::BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot)
+    : ParentType{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true },
+      numUCtrlPoints{ numUCtrlPoints },
+      numVCtrlPoints{ numVCtrlPoints },
+      ctrlPoint{ ctrlPoint },
+      loop{ uLoop, vLoop },
+      basis{},
+      uReplicate{ (uLoop ? 1 : 0) },
+      vReplicate{ (vLoop ? 1 : 0) }
+{
+    MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= uDegree && uDegree <= numUCtrlPoints - 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numVCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= vDegree && vDegree <= numVCtrlPoints - 1, "无效输入。\n");
+
+    basis.at(0).Create(numUCtrlPoints + uReplicate, uDegree, uKnot);
+    basis.at(1).Create(numVCtrlPoints + vReplicate, vDegree, vKnot);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::BSplineRectangle<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::BSplineRectangle<Real>::GetNumCtrlPoints(int dim) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).GetNumCtrlPoints();
+}
+
+template <typename Real>
+int Mathematics::BSplineRectangle<Real>::GetDegree(int dim) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).GetDegree();
+}
+
+template <typename Real>
+bool Mathematics::BSplineRectangle<Real>::IsOpen(int dim) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).IsOpen();
+}
+
+template <typename Real>
+bool Mathematics::BSplineRectangle<Real>::IsUniform(int dim) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis.at(dim).IsUniform();
+}
+
+template <typename Real>
+bool Mathematics::BSplineRectangle<Real>::IsLoop(int dim) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return loop.at(dim);
+}
+
+template <typename Real>
+void Mathematics::BSplineRectangle<Real>::SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (0 <= uIndex && uIndex < numUCtrlPoints && 0 <= vIndex && vIndex < numVCtrlPoints)
+    {
+        ctrlPoint.at(uIndex).at(vIndex) = ctrl;
+
+        const auto doUReplicate = (uIndex < uReplicate);
+        const auto doVReplicate = (vIndex < vReplicate);
+        auto iUExt = 0;
+        auto iVExt = 0;
+
+        if (doUReplicate)
+        {
+            iUExt = numUCtrlPoints + uIndex;
+            ctrlPoint.at(iUExt).at(vIndex) = ctrl;
+        }
+        if (doVReplicate)
+        {
+            iVExt = numVCtrlPoints + vIndex;
+            ctrlPoint.at(uIndex).at(iVExt) = ctrl;
+        }
+        if (doUReplicate && doVReplicate)
+        {
+            ctrlPoint.at(iUExt).at(iVExt) = ctrl;
+        }
+    }
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::GetControlPoint(int uIndex, int vIndex) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (0 <= uIndex && uIndex < numUCtrlPoints && 0 <= vIndex && vIndex < numVCtrlPoints)
+    {
+        return ctrlPoint.at(uIndex).at(vIndex);
+    }
+
+    return Vector3<Real>{ Math ::maxReal, Math ::maxReal, Math ::maxReal };
+}
+
+template <typename Real>
+void Mathematics::BSplineRectangle<Real>::SetKnot(int dim, int i, Real knot)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (0 <= dim && dim <= 1)
+    {
+        basis.at(dim).SetKnot(i, knot);
+    }
+}
+
+template <typename Real>
+Real Mathematics::BSplineRectangle<Real>::GetKnot(int dim, int i) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (0 <= dim && dim <= 1)
+    {
+        return basis.at(dim).GetKnot(i);
+    }
+
+    return Math ::maxReal;
+}
+
+template <typename Real>
+void Mathematics::BSplineRectangle<Real>::Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto iumin = 0;
+    auto iumax = 0;
+    if (derUU != nullptr)
+    {
+        basis.at(0).Compute(u, 0, iumin, iumax);
+        basis.at(0).Compute(u, 1, iumin, iumax);
+        basis.at(0).Compute(u, 2, iumin, iumax);
+    }
+    else if ((derUV != nullptr) || (derU != nullptr))
+    {
+        basis.at(0).Compute(u, 0, iumin, iumax);
+        basis.at(0).Compute(u, 1, iumin, iumax);
+    }
+    else
+    {
+        basis.at(0).Compute(u, 0, iumin, iumax);
+    }
+
+    auto ivmin = 0;
+    auto ivmax = 0;
+    if (derVV != nullptr)
+    {
+        basis.at(1).Compute(v, 0, ivmin, ivmax);
+        basis.at(1).Compute(v, 1, ivmin, ivmax);
+        basis.at(1).Compute(v, 2, ivmin, ivmax);
+    }
+    else if ((derUV != nullptr) || (derV != nullptr))
+    {
+        basis.at(1).Compute(v, 0, ivmin, ivmax);
+        basis.at(1).Compute(v, 1, ivmin, ivmax);
+    }
+    else
+    {
+        basis.at(1).Compute(v, 0, ivmin, ivmax);
+    }
+
+    if (pos != nullptr)
+    {
+        *pos = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
+        {
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
+            {
+                auto tmp = basis.at(0).GetD0(iu) * basis.at(1).GetD0(iv);
+                *pos += tmp * ctrlPoint.at(iu).at(iv);
+            }
+        }
+    }
+
+    if (derU != nullptr)
+    {
+        *derU = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
+        {
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
+            {
+                auto tmp = basis.at(0).GetD1(iu) * basis.at(1).GetD0(iv);
+                *derU += tmp * ctrlPoint.at(iu).at(iv);
+            }
+        }
+    }
+
+    if (derV != nullptr)
+    {
+        *derV = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
+        {
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
+            {
+                auto tmp = basis.at(0).GetD0(iu) * basis.at(1).GetD1(iv);
+                *derV += tmp * ctrlPoint.at(iu).at(iv);
+            }
+        }
+    }
+
+    if (derUU != nullptr)
+    {
+        *derUU = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
+        {
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
+            {
+                auto tmp = basis.at(0).GetD2(iu) * basis.at(1).GetD0(iv);
+                *derUU += tmp * ctrlPoint.at(iu).at(iv);
+            }
+        }
+    }
+
+    if (derUV != nullptr)
+    {
+        *derUV = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
+        {
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
+            {
+                auto tmp = basis.at(0).GetD1(iu) * basis.at(1).GetD1(iv);
+                *derUV += tmp * ctrlPoint.at(iu).at(iv);
+            }
+        }
+    }
+
+    if (derVV != nullptr)
+    {
+        *derVV = Vector3<Real>::GetZero();
+        for (auto iu = iumin; iu <= iumax; ++iu)
+        {
+            for (auto iv = ivmin; iv <= ivmax; ++iv)
+            {
+                auto tmp = basis.at(0).GetD0(iu) * basis.at(1).GetD2(iv);
+                *derVV += tmp * ctrlPoint.at(iu).at(iv);
+            }
+        }
+    }
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::P(Real u, Real v) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> pos{};
+    Get(u, v, &pos, 0, 0, 0, 0, 0);
+
+    return pos;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::PU(Real u, Real v) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derU{};
+    Get(u, v, 0, &derU, 0, 0, 0, 0);
+
+    return derU;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::PV(Real u, Real v) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derV{};
+    Get(u, v, 0, 0, &derV, 0, 0, 0);
+
+    return derV;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::PUU(Real u, Real v) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derUU{};
+    Get(u, v, 0, 0, 0, &derUU, 0, 0);
+
+    return derUU;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::PUV(Real u, Real v) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derUV{};
+    Get(u, v, 0, 0, 0, 0, &derUV, 0);
+
+    return derUV;
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::BSplineRectangle<Real>::PVV(Real u, Real v) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Vector3<Real> derVV{};
+    Get(u, v, 0, 0, 0, 0, 0, &derVV);
+
+    return derVV;
+}
+
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_RECTANGLE_DETAIL_H

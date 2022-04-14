@@ -1,46 +1,51 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 17:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 19:07)
 
 #include "Rendering/RenderingExport.h"
 
 #include "WorldCoordinateFrame.h"
-#include "Mathematics/Algebra/APointDetail.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
-#include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::WorldCoordinateFrame ::WorldCoordinateFrame(float epsilon)  
-    : m_Position{ Mathematics::APointF::GetOrigin() }, m_DirectionVector{ -Mathematics::AVectorF::GetUnitZ() }, m_UpVector{ Mathematics::AVectorF::GetUnitY() },
-      m_RightVector{ Mathematics::AVectorF::GetUnitX() }, m_ViewMatrix{ Mathematics::MatrixF::GetZeroMatrix() }, m_Epsilon{ epsilon }
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/AVectorOrthonormalizeDetail.h"
+#include "Mathematics/Algebra/AlgebraAggregate.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
+
+Rendering::WorldCoordinateFrame::WorldCoordinateFrame(float epsilon)  
+    : worldPosition{ Mathematics::APointF::GetOrigin() },
+      worldDirectionVector{ -Mathematics::AVectorF::GetUnitZ() },
+      worldUpVector{ Mathematics::AVectorF::GetUnitY() },
+      worldRightVector{ Mathematics::AVectorF::GetUnitX() },
+      viewMatrix{ Mathematics::MatrixF::GetZeroMatrix() },
+      epsilon{ epsilon }
 {
-    OnFrameChange ();
-    
+    OnFrameChange();
+
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::WorldCoordinateFrame
-    ::IsValid() const noexcept
+
+bool Rendering::WorldCoordinateFrame::IsValid() const noexcept
 {
     try
     {
-        if (m_DirectionVector.IsNormalize(m_Epsilon) && m_UpVector.IsNormalize(m_Epsilon) && m_RightVector.IsNormalize(m_Epsilon) &&
-            Math::FAbs(Dot(m_DirectionVector, m_UpVector)) <= m_Epsilon &&
-            Math::FAbs(Dot(m_UpVector, m_RightVector)) <= m_Epsilon &&
-            Math::FAbs(Dot(m_RightVector, m_DirectionVector)) <= m_Epsilon)
+        if (worldDirectionVector.IsNormalize(epsilon) &&
+            worldUpVector.IsNormalize(epsilon) &&
+            worldRightVector.IsNormalize(epsilon) &&
+            Math::FAbs(Dot(worldDirectionVector, worldUpVector)) <= epsilon &&
+            Math::FAbs(Dot(worldUpVector, worldRightVector)) <= epsilon &&
+            Math::FAbs(Dot(worldRightVector, worldDirectionVector)) <= epsilon)
         {
             return true;
         }
@@ -53,152 +58,141 @@ bool Rendering::WorldCoordinateFrame
     {
         return false;
     }
-    
 }
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::WorldCoordinateFrame
-    ::SetFrame (const APoint& position,const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::WorldCoordinateFrame::SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    m_Position = position;
-    
+
+    worldPosition = position;
+
     SetAxes(directionVector, upVector, rightVector);
 }
 
-void Rendering::WorldCoordinateFrame
-    ::SetPosition (const APoint& position)
+void Rendering::WorldCoordinateFrame::SetPosition(const APoint& position)
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    m_Position = position;
-    
-    OnFrameChange ();
+
+    worldPosition = position;
+
+    OnFrameChange();
 }
 
-void Rendering::WorldCoordinateFrame
-    ::SetAxes (const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
+void Rendering::WorldCoordinateFrame::SetAxes(const AVector& directionVector, const AVector& upVector, const AVector& rightVector)
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    m_DirectionVector = directionVector;
-    m_UpVector = upVector;
-    m_RightVector = rightVector;
-    
-    auto det = Dot(m_DirectionVector,Cross(m_UpVector,m_RightVector));
-    if (m_Epsilon < Mathematics::MathF::FAbs(1.0f - det))
+
+    worldDirectionVector = directionVector;
+    worldUpVector = upVector;
+    worldRightVector = rightVector;
+
+    auto det = Dot(worldDirectionVector, Cross(worldUpVector, worldRightVector));
+    if (epsilon < Mathematics::MathF::FAbs(1.0f - det))
     {
         // 输入向量并没有形成一个标准正交集合。这里重新正交化
-        const auto orthonormalize = Orthonormalize(m_DirectionVector, m_UpVector, m_RightVector, m_Epsilon);
-        
-        m_DirectionVector = orthonormalize.GetUVector();
-        m_UpVector = orthonormalize.GetVVector();
-        m_RightVector = orthonormalize.GetWVector();
+        const auto orthonormalize = Orthonormalize(worldDirectionVector, worldUpVector, worldRightVector, epsilon);
+
+        worldDirectionVector = orthonormalize.GetUVector();
+        worldUpVector = orthonormalize.GetVVector();
+        worldRightVector = orthonormalize.GetWVector();
     }
-    
-    OnFrameChange ();
-}
 
-const Rendering::WorldCoordinateFrame::APoint Rendering::WorldCoordinateFrame
-    ::GetPosition () const
+    OnFrameChange();
+}
+ 
+Rendering::WorldCoordinateFrame::APoint Rendering::WorldCoordinateFrame::GetPosition() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_Position;
+
+    return worldPosition;
 }
 
-const Rendering::WorldCoordinateFrame::AVector Rendering::WorldCoordinateFrame
-    ::GetDirectionVector () const
+Rendering::WorldCoordinateFrame::AVector Rendering::WorldCoordinateFrame::GetDirectionVector() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_DirectionVector;
+
+    return worldDirectionVector;
 }
 
-const Rendering::WorldCoordinateFrame::AVector Rendering::WorldCoordinateFrame
-    ::GetUpVector () const
+Rendering::WorldCoordinateFrame::AVector Rendering::WorldCoordinateFrame::GetUpVector() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_UpVector;
+
+    return worldUpVector;
 }
 
-const Rendering::WorldCoordinateFrame::AVector Rendering::WorldCoordinateFrame
-    ::GetRightVector () const
+Rendering::WorldCoordinateFrame::AVector Rendering::WorldCoordinateFrame::GetRightVector() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_RightVector;
+
+    return worldRightVector;
 }
 
-const Rendering::WorldCoordinateFrame::Matrix Rendering::WorldCoordinateFrame
-    ::GetViewMatrix () const
+Rendering::WorldCoordinateFrame::Matrix Rendering::WorldCoordinateFrame::GetViewMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-    return m_ViewMatrix;
+
+    return viewMatrix;
 }
 
 // private
-void Rendering::WorldCoordinateFrame ::OnFrameChange()  
+void Rendering::WorldCoordinateFrame::OnFrameChange()
 {
-    m_ViewMatrix(0,0) = m_RightVector[0];
-    m_ViewMatrix(0,1) = m_RightVector[1];
-    m_ViewMatrix(0,2) = m_RightVector[2];
-    m_ViewMatrix(0,3) = -Dot(m_Position,m_RightVector);
-    m_ViewMatrix(1,0) = m_UpVector[0];
-    m_ViewMatrix(1,1) = m_UpVector[1];
-    m_ViewMatrix(1,2) = m_UpVector[2];
-    m_ViewMatrix(1,3) = -Dot(m_Position,m_UpVector);
-    m_ViewMatrix(2,0) = m_DirectionVector[0];
-    m_ViewMatrix(2,1) = m_DirectionVector[1];
-    m_ViewMatrix(2,2) = m_DirectionVector[2];
-    m_ViewMatrix(2,3) = -Dot(m_Position,m_DirectionVector);
-    m_ViewMatrix(3,0) = 0.0f;
-    m_ViewMatrix(3,1) = 0.0f;
-    m_ViewMatrix(3,2) = 0.0f;
-    m_ViewMatrix(3,3) = 1.0f;
+    viewMatrix(0, 0) = worldRightVector[0];
+    viewMatrix(0, 1) = worldRightVector[1];
+    viewMatrix(0, 2) = worldRightVector[2];
+    viewMatrix(0, 3) = -Dot(worldPosition, worldRightVector);
+    viewMatrix(1, 0) = worldUpVector[0];
+    viewMatrix(1, 1) = worldUpVector[1];
+    viewMatrix(1, 2) = worldUpVector[2];
+    viewMatrix(1, 3) = -Dot(worldPosition, worldUpVector);
+    viewMatrix(2, 0) = worldDirectionVector[0];
+    viewMatrix(2, 1) = worldDirectionVector[1];
+    viewMatrix(2, 2) = worldDirectionVector[2];
+    viewMatrix(2, 3) = -Dot(worldPosition, worldDirectionVector);
+    viewMatrix(3, 0) = 0.0f;
+    viewMatrix(3, 1) = 0.0f;
+    viewMatrix(3, 2) = 0.0f;
+    viewMatrix(3, 3) = 1.0f;
 }
 
-void Rendering::WorldCoordinateFrame ::Load(CoreTools::BufferSource& source)
+void Rendering::WorldCoordinateFrame::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
-    
-	source.ReadAggregate(m_Position);
-    source.ReadAggregate(m_DirectionVector);
-    source.ReadAggregate(m_UpVector);
-    source.ReadAggregate(m_RightVector);
-    source.Read(m_Epsilon);
-    
-    OnFrameChange ();
+    RENDERING_CLASS_IS_VALID_1;
+
+    source.ReadAggregate(worldPosition);
+    source.ReadAggregate(worldDirectionVector);
+    source.ReadAggregate(worldUpVector);
+    source.ReadAggregate(worldRightVector);
+    source.Read(epsilon);
+
+    OnFrameChange();
 }
 
-void Rendering::WorldCoordinateFrame
-    ::Save( CoreTools::BufferTarget& target ) const
+void Rendering::WorldCoordinateFrame::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	target.WriteAggregate(m_Position);
-        target.WriteAggregate(m_DirectionVector);
-        target.WriteAggregate(m_UpVector);
-        target.WriteAggregate(m_RightVector);
-    target.Write(m_Epsilon);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    target.WriteAggregate(worldPosition);
+    target.WriteAggregate(worldDirectionVector);
+    target.WriteAggregate(worldUpVector);
+    target.WriteAggregate(worldRightVector);
+    target.Write(epsilon);
 }
 
-int Rendering::WorldCoordinateFrame
-    ::GetStreamingSize() const
+int Rendering::WorldCoordinateFrame::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = MATHEMATICS_STREAM_SIZE(m_Position);
-    
-    size += MATHEMATICS_STREAM_SIZE(m_DirectionVector);
-    size += MATHEMATICS_STREAM_SIZE(m_UpVector);
-    size += MATHEMATICS_STREAM_SIZE(m_RightVector);
-    
-    size += CORE_TOOLS_STREAM_SIZE(m_Epsilon);
-    
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = MATHEMATICS_STREAM_SIZE(worldPosition);
+
+    size += MATHEMATICS_STREAM_SIZE(worldDirectionVector);
+    size += MATHEMATICS_STREAM_SIZE(worldUpVector);
+    size += MATHEMATICS_STREAM_SIZE(worldRightVector);
+
+    size += CORE_TOOLS_STREAM_SIZE(epsilon);
+
     return size;
 }
- #include STSTEM_WARNING_POP

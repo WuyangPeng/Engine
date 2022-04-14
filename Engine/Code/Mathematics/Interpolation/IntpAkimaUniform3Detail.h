@@ -1,1258 +1,1279 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 15:25)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_DETAIL_H
 
 #include "IntpAkimaUniform3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpAkimaUniform3<Real>::IntpAkimaUniform3(int xBound, int yBound, int zBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, Real zMin, Real zSpacing, const Container& f)
+    : xBound{ xBound },
+      yBound{ yBound },
+      zBound{ zBound },
+      quantity{ xBound * yBound * zBound },
+      fContainer{ f },
+      polynomialContainer{},
+      xMin{ xMin },
+      xMax{ xMin + xSpacing * Math<Real>::GetValue(xBound - 1) },
+      xSpacing{ xSpacing },
+      yMin{ yMin },
+      yMax{ yMin + ySpacing * Math<Real>::GetValue(yBound - 1) },
+      ySpacing{ ySpacing },
+      zMin{ zMin },
+      zMax{ zMin + zSpacing * Math<Real>::GetValue(zBound - 1) },
+      zSpacing{ zSpacing }
 {
-    template <typename Real>
-    IntpAkimaUniform3<Real>::IntpAkimaUniform3(int xBound, int yBound, int zBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, Real zMin, Real zSpacing, Real*** F)
+    MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3 && zBound >= 3, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0), "无效输入。\n");
+
+    auto fx = GetFX();
+    auto fy = GetFY();
+    auto fz = GetFZ();
+
+    auto fxy = GetFXY();
+    auto fxz = GetFXZ();
+    auto fyz = GetFYZ();
+
+    auto fxyz = GetFXYZ();
+
+    GetPolynomials(fx, fy, fz, fxy, fxz, fyz, fxyz);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpAkimaUniform3<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFX()
+{
+    // xslope[z][y][x]
+    const auto xSlopeSize = xBound + 3;
+    Container slope(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xSlopeSize)));
+    auto invDX = (Math<Real>::GetValue(1)) / xSpacing;
+    for (auto iz = 0; iz < zBound; ++iz)
     {
-        // At least a 3x3x3 block of data points are needed to construct the
-        // estimates of the boundary derivatives.
-        MATHEMATICS_ASSERTION_0(xBound >= 3 && yBound >= 3 && zBound >= 3 && F, "Invalid input\n");
-        MATHEMATICS_ASSERTION_0(xSpacing > Math<Real>::GetValue(0) && ySpacing > Math<Real>::GetValue(0) && zSpacing > Math<Real>::GetValue(0), "Invalid input\n");
+        for (auto iy = 0; iy < yBound; ++iy)
+        {
+            for (auto ix = 0; ix < xBound - 1; ++ix)
+            {
+                slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(ix) + 2) = (fContainer.at(iz).at(iy).at(boost::numeric_cast<size_t>(ix) + 1) - fContainer.at(iz).at(iy).at(ix)) * invDX;
+            }
 
-        mXBound = xBound;
-        mYBound = yBound;
-        mZBound = zBound;
-        mXMin = xMin;
-        mXSpacing = xSpacing;
-        mYMin = yMin;
-        mYSpacing = ySpacing;
-        mZMin = zMin;
-        mZSpacing = zSpacing;
-        mF = F;
-
-        quantity = mXBound * mYBound * mZBound;
-        mXMax = xMin + xSpacing * (mXBound - 1);
-        mYMax = yMin + ySpacing * (mYBound - 1);
-        mZMax = zMin + zSpacing * (mZBound - 1);
-
-        // Construct first-order derivatives.
-        Real*** FX = GetFX();
-        Real*** FY = GetFY();
-        Real*** FZ = GetFZ();
-
-        // Construct second-order derivatives.
-        Real*** FXY = GetFXY();
-        Real*** FXZ = GetFXZ();
-        Real*** FYZ = GetFYZ();
-
-        // Construct third-order derivatives.
-        Real*** FXYZ = GetFXYZ();
-
-        // Construct polynomials.
-        GetPolynomials(FX, FY, FZ, FXY, FXZ, FYZ, FXYZ);
-
-        DELETE3(FX);
-        DELETE3(FY);
-        DELETE3(FZ);
-        DELETE3(FXY);
-        DELETE3(FXZ);
-        DELETE3(FYZ);
-        DELETE3(FXYZ);
+            slope.at(iz).at(iy).at(1) = (Math<Real>::GetValue(2)) * slope.at(iz).at(iy).at(2) - slope.at(iz).at(iy).at(3);
+            slope.at(iz).at(iy).at(0) = (Math<Real>::GetValue(2)) * slope.at(iz).at(iy).at(1) - slope.at(iz).at(iy).at(2);
+            slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(xBound) + 1) = (Math<Real>::GetValue(2)) * slope.at(iz).at(iy).at(xBound) - slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(xBound) - 1);
+            slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(xBound) + 2) = (Math<Real>::GetValue(2)) * slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(xBound) + 1) - slope.at(iz).at(iy).at(xBound);
+        }
     }
 
-    template <typename Real>
-    IntpAkimaUniform3<Real>::~IntpAkimaUniform3()
+    Container fx(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+
+    for (auto iz = 0; iz < zBound; ++iz)
     {
-        DELETE3(mPoly);
+        for (auto iy = 0; iy < yBound; ++iy)
+        {
+            for (auto ix = 0; ix < xBound; ++ix)
+            {
+                std::vector<Real> derivative{ slope.at(iz).at(iy).at(ix), slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(ix) + 1), slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(ix) + 2), slope.at(iz).at(iy).at(boost::numeric_cast<size_t>(ix) + 3) };
+                fx.at(iz).at(iy).at(ix) = ComputeDerivative(derivative);
+            }
+        }
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFX()
+    return fx;
+}
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFY()
+{
+    // yslope[z][x][y]
+    const auto ySlopeSize = yBound + 3;
+    Container slope(zBound, std::vector<std::vector<Real>>(xBound, std::vector<Real>(ySlopeSize)));
+    auto invDY = (Math<Real>::GetValue(1)) / ySpacing;
+    for (auto iz = 0; iz < zBound; ++iz)
     {
-        int ix, iy, iz;
-
-        // xslope[z][y][x]
-        Real*** slope = nullptr;  // NEW3<Real>(mXBound + 3, mYBound, mZBound);
-        Real invDX = (Math::GetValue(1)) / mXSpacing;
-        for (iz = 0; iz < mZBound; ++iz)
+        for (auto ix = 0; ix < xBound; ++ix)
         {
-            for (iy = 0; iy < mYBound; ++iy)
+            for (auto iy = 0; iy < yBound - 1; ++iy)
             {
-                for (ix = 0; ix < mXBound - 1; ++ix)
-                {
-                    slope[iz][iy][ix + 2] = (mF[iz][iy][ix + 1] - mF[iz][iy][ix]) * invDX;
-                }
-
-                slope[iz][iy][1] = (Math::GetValue(2)) * slope[iz][iy][2] - slope[iz][iy][3];
-                slope[iz][iy][0] = (Math::GetValue(2)) * slope[iz][iy][1] - slope[iz][iy][2];
-                slope[iz][iy][mXBound + 1] = (Math::GetValue(2)) * slope[iz][iy][mXBound] - slope[iz][iy][mXBound - 1];
-                slope[iz][iy][mXBound + 2] = (Math::GetValue(2)) * slope[iz][iy][mXBound + 1] - slope[iz][iy][mXBound];
+                slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(iy) + 2) = (fContainer.at(iz).at(boost::numeric_cast<size_t>(iy) + 1).at(ix) - fContainer.at(iz).at(iy).at(ix)) * invDY;
             }
-        }
 
-        Real*** FX = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        for (iz = 0; iz < mZBound; ++iz)
-        {
-            for (iy = 0; iy < mYBound; ++iy)
-            {
-                for (ix = 0; ix < mXBound; ++ix)
-                {
-                    FX[iz][iy][ix] = ComputeDerivative(slope[iz][iy] + ix);
-                }
-            }
+            slope.at(iz).at(ix).at(1) = (Math<Real>::GetValue(2)) * slope.at(iz).at(ix).at(2) - slope.at(iz).at(ix).at(3);
+            slope.at(iz).at(ix).at(0) = (Math<Real>::GetValue(2)) * slope.at(iz).at(ix).at(1) - slope.at(iz).at(ix).at(2);
+            slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(yBound) + 1) = (Math<Real>::GetValue(2)) * slope.at(iz).at(ix).at(yBound) - slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(yBound) - 1);
+            slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(yBound) + 2) = (Math<Real>::GetValue(2)) * slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(yBound) + 1) - slope.at(iz).at(ix).at(yBound);
         }
-
-      //  DELETE3(slope);
-        return FX;
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFY()
+    Container fy(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+    for (auto iz = 0; iz < zBound; ++iz)
     {
-        int ix, iy, iz;
-
-        // yslope[z][x][y]
-        Real*** slope = nullptr;  // NEW3<Real>(mYBound + 3, mXBound, mZBound);
-        Real invDY = (Math::GetValue(1)) / mYSpacing;
-        for (iz = 0; iz < mZBound; ++iz)
+        for (auto ix = 0; ix < xBound; ++ix)
         {
-            for (ix = 0; ix < mXBound; ++ix)
+            for (auto iy = 0; iy < yBound; ++iy)
             {
-                for (iy = 0; iy < mYBound - 1; ++iy)
-                {
-                    slope[iz][ix][iy + 2] = (mF[iz][iy + 1][ix] - mF[iz][iy][ix]) * invDY;
-                }
-
-                slope[iz][ix][1] = (Math::GetValue(2)) * slope[iz][ix][2] - slope[iz][ix][3];
-                slope[iz][ix][0] = (Math::GetValue(2)) * slope[iz][ix][1] - slope[iz][ix][2];
-                slope[iz][ix][mYBound + 1] = (Math::GetValue(2)) * slope[iz][ix][mYBound] - slope[iz][ix][mYBound - 1];
-                slope[iz][ix][mYBound + 2] = (Math::GetValue(2)) * slope[iz][ix][mYBound + 1] - slope[iz][ix][mYBound];
+                std::vector<Real> derivative{ slope.at(iz).at(ix).at(iy), slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(iy) + 1), slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(iy) + 2), slope.at(iz).at(ix).at(boost::numeric_cast<size_t>(iy) + 3) };
+                fy.at(iz).at(iy).at(ix) = ComputeDerivative(derivative);
             }
         }
-
-        Real*** FY = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        for (iz = 0; iz < mZBound; ++iz)
-        {
-            for (ix = 0; ix < mXBound; ++ix)
-            {
-                for (iy = 0; iy < mYBound; ++iy)
-                {
-                    FY[iz][iy][ix] = ComputeDerivative(slope[iz][ix] + iy);
-                }
-            }
-        }
-
-        DELETE3(slope);
-        return FY;
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFZ()
+    return fy;
+}
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFZ()
+{
+    // zslope[y][x][z]
+    const auto zSlopeSize = zBound + 3;
+    Container slope(yBound, std::vector<std::vector<Real>>(xBound, std::vector<Real>(zSlopeSize)));
+
+    auto invDZ = (Math<Real>::GetValue(1)) / zSpacing;
+    for (auto iy = 0; iy < yBound; ++iy)
     {
-        int ix, iy, iz;
-
-        // zslope[y][x][z]
-        Real*** slope = nullptr;  // NEW3<Real>(mZBound + 3, mXBound, mYBound);
-        Real invDZ = (Math::GetValue(1)) / mZSpacing;
-        for (iy = 0; iy < mYBound; ++iy)
+        for (auto ix = 0; ix < xBound; ++ix)
         {
-            for (ix = 0; ix < mXBound; ++ix)
+            for (auto iz = 0; iz < zBound - 1; ++iz)
             {
-                for (iz = 0; iz < mZBound - 1; ++iz)
-                {
-                    slope[iy][ix][iz + 2] = (mF[iz + 1][iy][ix] - mF[iz][iy][ix]) * invDZ;
-                }
-
-                slope[iy][ix][1] = (Math::GetValue(2)) * slope[iy][ix][2] - slope[iy][ix][3];
-                slope[iy][ix][0] = (Math::GetValue(2)) * slope[iy][ix][1] - slope[iy][ix][2];
-                slope[iy][ix][mZBound + 1] = (Math::GetValue(2)) * slope[iy][ix][mZBound] - slope[iy][ix][mZBound - 1];
-                slope[iy][ix][mZBound + 2] = (Math::GetValue(2)) * slope[iy][ix][mZBound + 1] - slope[iy][ix][mZBound];
+                slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(iz) + 2) = (fContainer.at(boost::numeric_cast<size_t>(iz) + 1).at(iy).at(ix) - fContainer.at(iz).at(iy).at(ix)) * invDZ;
             }
-        }
 
-        Real*** FZ = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        for (iy = 0; iy < mYBound; ++iy)
-        {
-            for (ix = 0; ix < mXBound; ++ix)
-            {
-                for (iz = 0; iz < mZBound; ++iz)
-                {
-                    FZ[iz][iy][ix] = ComputeDerivative(slope[iy][ix] + iz);
-                }
-            }
+            slope.at(iy).at(ix).at(1) = (Math<Real>::GetValue(2)) * slope.at(iy).at(ix).at(2) - slope.at(iy).at(ix).at(3);
+            slope.at(iy).at(ix).at(0) = (Math<Real>::GetValue(2)) * slope.at(iy).at(ix).at(1) - slope.at(iy).at(ix).at(2);
+            slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(zBound) + 1) = (Math<Real>::GetValue(2)) * slope.at(iy).at(ix).at(zBound) - slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(zBound) - 1);
+            slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(zBound) + 2) = (Math<Real>::GetValue(2)) * slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(zBound) + 1) - slope.at(iy).at(ix).at(zBound);
         }
-
-        DELETE3(slope);
-        return FZ;
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFXY()
+    Container fz(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+
+    for (auto iy = 0; iy < yBound; ++iy)
     {
-        int ix, iy, iz;
-
-        int ix0 = mXBound - 1, ix1 = ix0 - 1, ix2 = ix1 - 1;
-        int iy0 = mYBound - 1, iy1 = iy0 - 1, iy2 = iy1 - 1;
-
-        Real*** FXY = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        Real invDXDY = (Math::GetValue(1)) / (mXSpacing * mYSpacing);
-        for (iz = 0; iz < mZBound; ++iz)
+        for (auto ix = 0; ix < xBound; ++ix)
         {
-            // corners of z-slice
-            FXY[iz][0][0] = (Real{ 0.25 }) * invDXDY * (((Real)9) * mF[iz][0][0] - (static_cast<Real>(12)) * mF[iz][0][1] + (static_cast<Real>(3)) * mF[iz][0][2] - (static_cast<Real>(12)) * mF[iz][1][0] + (static_cast<Real>(16)) * mF[iz][1][1] - ((Real)4) * mF[iz][1][2] + (static_cast<Real>(3)) * mF[iz][2][0] - ((Real)4) * mF[iz][2][1] + mF[iz][2][2]);
-
-            FXY[iz][0][mXBound - 1] = (Real{ 0.25 }) * invDXDY * (((Real)9) * mF[iz][0][ix0] - (static_cast<Real>(12)) * mF[iz][0][ix1] + (static_cast<Real>(3)) * mF[iz][0][ix2] - (static_cast<Real>(12)) * mF[iz][1][ix0] + (static_cast<Real>(16)) * mF[iz][1][ix1] - ((Real)4) * mF[iz][1][ix2] + (static_cast<Real>(3)) * mF[iz][2][ix0] - ((Real)4) * mF[iz][2][ix1] + mF[iz][2][ix2]);
-
-            FXY[iz][mYBound - 1][0] = (Real{ 0.25 }) * invDXDY * (((Real)9) * mF[iz][iy0][0] - (static_cast<Real>(12)) * mF[iz][iy0][1] + (static_cast<Real>(3)) * mF[iz][iy0][2] - (static_cast<Real>(12)) * mF[iz][iy1][0] + (static_cast<Real>(16)) * mF[iz][iy1][1] - ((Real)4) * mF[iz][iy1][2] + (static_cast<Real>(3)) * mF[iz][iy2][0] - ((Real)4) * mF[iz][iy2][1] + mF[iz][iy2][2]);
-
-            FXY[iz][mYBound - 1][mXBound - 1] = (Real{ 0.25 }) * invDXDY * (((Real)9) * mF[iz][iy0][ix0] - (static_cast<Real>(12)) * mF[iz][iy0][ix1] + (static_cast<Real>(3)) * mF[iz][iy0][ix2] - (static_cast<Real>(12)) * mF[iz][iy1][ix0] + (static_cast<Real>(16)) * mF[iz][iy1][ix1] - ((Real)4) * mF[iz][iy1][ix2] + (static_cast<Real>(3)) * mF[iz][iy2][ix0] - ((Real)4) * mF[iz][iy2][ix1] + mF[iz][iy2][ix2]);
-
-            // x-edges of z-slice
-            for (ix = 1; ix < mXBound - 1; ++ix)
+            for (auto iz = 0; iz < zBound; ++iz)
             {
-                FXY[iz][0][ix] = (Real{ 0.25 }) * invDXDY * ((static_cast<Real>(3)) * (mF[iz][0][ix - 1] - mF[iz][0][ix + 1]) - ((Real)4) * (mF[iz][1][ix - 1] - mF[iz][1][ix + 1]) + (mF[iz][2][ix - 1] - mF[iz][2][ix + 1]));
-
-                FXY[iz][mYBound - 1][ix] = (Real{ 0.25 }) * invDXDY * ((static_cast<Real>(3)) * (mF[iz][iy0][ix - 1] - mF[iz][iy0][ix + 1]) - ((Real)4) * (mF[iz][iy1][ix - 1] - mF[iz][iy1][ix + 1]) + (mF[iz][iy2][ix - 1] - mF[iz][iy2][ix + 1]));
-            }
-
-            // y-edges of z-slice
-            for (iy = 1; iy < mYBound - 1; ++iy)
-            {
-                FXY[iz][iy][0] = (Real{ 0.25 }) * invDXDY * ((static_cast<Real>(3)) * (mF[iz][iy - 1][0] - mF[iz][iy + 1][0]) - ((Real)4) * (mF[iz][iy - 1][1] - mF[iz][iy + 1][1]) + (mF[iz][iy - 1][2] - mF[iz][iy + 1][2]));
-
-                FXY[iz][iy][mXBound - 1] = (Real{ 0.25 }) * invDXDY * ((static_cast<Real>(3)) * (mF[iz][iy - 1][ix0] - mF[iz][iy + 1][ix0]) - ((Real)4) * (mF[iz][iy - 1][ix1] - mF[iz][iy + 1][ix1]) + (mF[iz][iy - 1][ix2] - mF[iz][iy + 1][ix2]));
-            }
-
-            // interior of z-slice
-            for (iy = 1; iy < mYBound - 1; ++iy)
-            {
-                for (ix = 1; ix < mXBound - 1; ++ix)
-                {
-                    FXY[iz][iy][ix] = (Real{ 0.25 }) * invDXDY * (mF[iz][iy - 1][ix - 1] - mF[iz][iy - 1][ix + 1] - mF[iz][iy + 1][ix - 1] + mF[iz][iy + 1][ix + 1]);
-                }
+                std::vector<Real> derivative{ slope.at(iy).at(ix).at(iz), slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(iz) + 1), slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(iz) + 2), slope.at(iy).at(ix).at(boost::numeric_cast<size_t>(iz) + 3) };
+                fz.at(iz).at(iy).at(ix) = ComputeDerivative(derivative);
             }
         }
-
-        return FXY;
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFXZ()
+    return fz;
+}
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFXY()
+{
+    const auto ix0 = xBound - 1;
+    const auto ix1 = ix0 - 1;
+    const auto ix2 = ix1 - 1;
+    const auto iy0 = yBound - 1;
+    const auto iy1 = iy0 - 1;
+    const auto iy2 = iy1 - 1;
+
+    Container fxy(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+    auto invDXDY = (Math<Real>::GetValue(1)) / (xSpacing * ySpacing);
+    for (auto iz = 0; iz < zBound; ++iz)
     {
-        int ix, iy, iz;
+        const auto xBoundMinus1 = xBound - 1;
+        const auto yBoundMinus1 = yBound - 1;
 
-        int ix0 = mXBound - 1, ix1 = ix0 - 1, ix2 = ix1 - 1;
-        int iz0 = mZBound - 1, iz1 = iz0 - 1, iz2 = iz1 - 1;
+        fxy.at(iz).at(0).at(0) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * fContainer.at(iz).at(0).at(0) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(0).at(1) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(0).at(2) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(1).at(0) + (Math<Real>::GetValue(16)) * fContainer.at(iz).at(1).at(1) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(1).at(2) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(2).at(0) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(2).at(1) + fContainer.at(iz).at(2).at(2));
 
-        Real*** FXZ = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        Real invDXDZ = (Math::GetValue(1)) / (mXSpacing * mZSpacing);
-        for (iy = 0; iy < mYBound; ++iy)
+        fxy.at(iz).at(0).at(xBoundMinus1) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * fContainer.at(iz).at(0).at(ix0) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(0).at(ix1) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(0).at(ix2) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(1).at(ix0) + (Math<Real>::GetValue(16)) * fContainer.at(iz).at(1).at(ix1) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(1).at(ix2) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(2).at(ix0) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(2).at(ix1) + fContainer.at(iz).at(2).at(ix2));
+
+        fxy.at(iz).at(yBoundMinus1).at(0) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * fContainer.at(iz).at(iy0).at(0) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(iy0).at(1) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(iy0).at(2) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(iy1).at(0) + (Math<Real>::GetValue(16)) * fContainer.at(iz).at(iy1).at(1) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(iy1).at(2) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(iy2).at(0) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(iy2).at(1) + fContainer.at(iz).at(iy2).at(2));
+
+        fxy.at(iz).at(yBoundMinus1).at(xBoundMinus1) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(9)) * fContainer.at(iz).at(iy0).at(ix0) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(iy0).at(ix1) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(iy0).at(ix2) - (Math<Real>::GetValue(12)) * fContainer.at(iz).at(iy1).at(ix0) + (Math<Real>::GetValue(16)) * fContainer.at(iz).at(iy1).at(ix1) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(iy1).at(ix2) + (Math<Real>::GetValue(3)) * fContainer.at(iz).at(iy2).at(ix0) - (Math<Real>::GetValue(4)) * fContainer.at(iz).at(iy2).at(ix1) + fContainer.at(iz).at(iy2).at(ix2));
+
+        for (auto ix = 1; ix < xBound - 1; ++ix)
         {
-            // corners of z-slice
-            FXZ[0][iy][0] = (Real{ 0.25 }) * invDXDZ * (((Real)9) * mF[0][iy][0] - (static_cast<Real>(12)) * mF[0][iy][1] + (static_cast<Real>(3)) * mF[0][iy][2] - (static_cast<Real>(12)) * mF[1][iy][0] + (static_cast<Real>(16)) * mF[1][iy][1] - ((Real)4) * mF[1][iy][2] + (static_cast<Real>(3)) * mF[2][iy][0] - ((Real)4) * mF[2][iy][1] + mF[2][iy][2]);
+            const auto nextIX = ix + 1;
+            const auto previousIX = ix - 1;
+            fxy.at(iz).at(0).at(ix) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (fContainer.at(iz).at(0).at(previousIX) - fContainer.at(iz).at(0).at(nextIX)) - (Math<Real>::GetValue(4)) * (fContainer.at(iz).at(1).at(previousIX) - fContainer.at(iz).at(1).at(nextIX)) + (fContainer.at(iz).at(2).at(previousIX) - fContainer.at(iz).at(2).at(nextIX)));
 
-            FXZ[0][iy][mXBound - 1] = (Real{ 0.25 }) * invDXDZ * (((Real)9) * mF[0][iy][ix0] - (static_cast<Real>(12)) * mF[0][iy][ix1] + (static_cast<Real>(3)) * mF[0][iy][ix2] - (static_cast<Real>(12)) * mF[1][iy][ix0] + (static_cast<Real>(16)) * mF[1][iy][ix1] - ((Real)4) * mF[1][iy][ix2] + (static_cast<Real>(3)) * mF[2][iy][ix0] - ((Real)4) * mF[2][iy][ix1] + mF[2][iy][ix2]);
-
-            FXZ[mZBound - 1][iy][0] = (Real{ 0.25 }) * invDXDZ * (((Real)9) * mF[iz0][iy][0] - (static_cast<Real>(12)) * mF[iz0][iy][1] + (static_cast<Real>(3)) * mF[iz0][iy][2] - (static_cast<Real>(12)) * mF[iz1][iy][0] + (static_cast<Real>(16)) * mF[iz1][iy][1] - ((Real)4) * mF[iz1][iy][2] + (static_cast<Real>(3)) * mF[iz2][iy][0] - ((Real)4) * mF[iz2][iy][1] + mF[iz2][iy][2]);
-
-            FXZ[mZBound - 1][iy][mXBound - 1] = (Real{ 0.25 }) * invDXDZ * (((Real)9) * mF[iz0][iy][ix0] - (static_cast<Real>(12)) * mF[iz0][iy][ix1] + (static_cast<Real>(3)) * mF[iz0][iy][ix2] - (static_cast<Real>(12)) * mF[iz1][iy][ix0] + (static_cast<Real>(16)) * mF[iz1][iy][ix1] - ((Real)4) * mF[iz1][iy][ix2] + (static_cast<Real>(3)) * mF[iz2][iy][ix0] - ((Real)4) * mF[iz2][iy][ix1] + mF[iz2][iy][ix2]);
-
-            // x-edges of y-slice
-            for (ix = 1; ix < mXBound - 1; ++ix)
-            {
-                FXZ[0][iy][ix] = (Real{ 0.25 }) * invDXDZ * ((static_cast<Real>(3)) * (mF[0][iy][ix - 1] - mF[0][iy][ix + 1]) - ((Real)4) * (mF[1][iy][ix - 1] - mF[1][iy][ix + 1]) + (mF[2][iy][ix - 1] - mF[2][iy][ix + 1]));
-
-                FXZ[mZBound - 1][iy][ix] = (Real{ 0.25 }) * invDXDZ * ((static_cast<Real>(3)) * (mF[iz0][iy][ix - 1] - mF[iz0][iy][ix + 1]) - ((Real)4) * (mF[iz1][iy][ix - 1] - mF[iz1][iy][ix + 1]) + (mF[iz2][iy][ix - 1] - mF[iz2][iy][ix + 1]));
-            }
-
-            // z-edges of y-slice
-            for (iz = 1; iz < mZBound - 1; ++iz)
-            {
-                FXZ[iz][iy][0] = (Real{ 0.25 }) * invDXDZ * ((static_cast<Real>(3)) * (mF[iz - 1][iy][0] - mF[iz + 1][iy][0]) - ((Real)4) * (mF[iz - 1][iy][1] - mF[iz + 1][iy][1]) + (mF[iz - 1][iy][2] - mF[iz + 1][iy][2]));
-
-                FXZ[iz][iy][mXBound - 1] = (Real{ 0.25 }) * invDXDZ * ((static_cast<Real>(3)) * (mF[iz - 1][iy][ix0] - mF[iz + 1][iy][ix0]) - ((Real)4) * (mF[iz - 1][iy][ix1] - mF[iz + 1][iy][ix1]) + (mF[iz - 1][iy][ix2] - mF[iz + 1][iy][ix2]));
-            }
-
-            // interior of y-slice
-            for (iz = 1; iz < mZBound - 1; ++iz)
-            {
-                for (ix = 1; ix < mXBound - 1; ++ix)
-                {
-                    FXZ[iz][iy][ix] = (Real{ 0.25 }) * invDXDZ * (mF[iz - 1][iy][ix - 1] - mF[iz - 1][iy][ix + 1] - mF[iz + 1][iy][ix - 1] + mF[iz + 1][iy][ix + 1]);
-                }
-            }
+            fxy.at(iz).at(yBoundMinus1).at(ix) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (fContainer.at(iz).at(iy0).at(previousIX) - fContainer.at(iz).at(iy0).at(nextIX)) - (Math<Real>::GetValue(4)) * (fContainer.at(iz).at(iy1).at(previousIX) - fContainer.at(iz).at(iy1).at(nextIX)) + (fContainer.at(iz).at(iy2).at(previousIX) - fContainer.at(iz).at(iy2).at(nextIX)));
         }
 
-        return FXZ;
+        for (auto iy = 1; iy < yBound - 1; ++iy)
+        {
+            const auto nextIY = iy + 1;
+            const auto previousIY = iy - 1;
+            fxy.at(iz).at(iy).at(0) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (fContainer.at(iz).at(previousIY).at(0) - fContainer.at(iz).at(nextIY).at(0)) - (Math<Real>::GetValue(4)) * (fContainer.at(iz).at(previousIY).at(1) - fContainer.at(iz).at(nextIY).at(1)) + (fContainer.at(iz).at(previousIY).at(2) - fContainer.at(iz).at(nextIY).at(2)));
+
+            fxy.at(iz).at(iy).at(yBoundMinus1) = Math<Real>::GetRational(1, 4) * invDXDY * ((Math<Real>::GetValue(3)) * (fContainer.at(iz).at(previousIY).at(ix0) - fContainer.at(iz).at(nextIY).at(ix0)) - (Math<Real>::GetValue(4)) * (fContainer.at(iz).at(previousIY).at(ix1) - fContainer.at(iz).at(nextIY).at(ix1)) + (fContainer.at(iz).at(previousIY).at(ix2) - fContainer.at(iz).at(nextIY).at(ix2)));
+        }
+
+        for (auto iy = 1; iy < yBound - 1; ++iy)
+        {
+            for (auto ix = 1; ix < xBound - 1; ++ix)
+            {
+                const auto previousIX = ix - 1;
+                const auto previousIY = iy - 1;
+
+                const auto nextIX = ix + 1;
+                const auto nextIY = iy + 1;
+
+                fxy.at(iz).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDXDY * (fContainer.at(iz).at(previousIY).at(previousIX) - fContainer.at(iz).at(previousIY).at(nextIX) - fContainer.at(iz).at(nextIY).at(previousIX) + fContainer.at(iz).at(nextIY).at(nextIX));
+            }
+        }
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFYZ()
+    return fxy;
+}
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFXZ()
+{
+    const auto ix0 = xBound - 1;
+    const auto ix1 = ix0 - 1;
+    const auto ix2 = ix1 - 1;
+    const auto iz0 = zBound - 1;
+    const auto iz1 = iz0 - 1;
+    const auto iz2 = iz1 - 1;
+
+    Container fxz(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+
+    auto invDXDZ = (Math<Real>::GetValue(1)) / (xSpacing * zSpacing);
+    for (auto iy = 0; iy < yBound; ++iy)
     {
-        int ix, iy, iz;
+        fxz.at(0).at(iy).at(0) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(9)) * fContainer.at(0).at(iy).at(0) - (Math<Real>::GetValue(12)) * fContainer.at(0).at(iy).at(1) + (Math<Real>::GetValue(3)) * fContainer.at(0).at(iy).at(2) - (Math<Real>::GetValue(12)) * fContainer.at(1).at(iy).at(0) + (Math<Real>::GetValue(16)) * fContainer.at(1).at(iy).at(1) - (Math<Real>::GetValue(4)) * fContainer.at(1).at(iy).at(2) + (Math<Real>::GetValue(3)) * fContainer.at(2).at(iy).at(0) - (Math<Real>::GetValue(4)) * fContainer.at(2).at(iy).at(1) + fContainer.at(2).at(iy).at(2));
 
-        int iy0 = mYBound - 1, iy1 = iy0 - 1, iy2 = iy1 - 1;
-        int iz0 = mZBound - 1, iz1 = iz0 - 1, iz2 = iz1 - 1;
+        fxz.at(0).at(iy).at(ix0) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(9)) * fContainer.at(0).at(iy).at(ix0) - (Math<Real>::GetValue(12)) * fContainer.at(0).at(iy).at(ix1) + (Math<Real>::GetValue(3)) * fContainer.at(0).at(iy).at(ix2) - (Math<Real>::GetValue(12)) * fContainer.at(1).at(iy).at(ix0) + (Math<Real>::GetValue(16)) * fContainer.at(1).at(iy).at(ix1) - (Math<Real>::GetValue(4)) * fContainer.at(1).at(iy).at(ix2) + (Math<Real>::GetValue(3)) * fContainer.at(2).at(iy).at(ix0) - (Math<Real>::GetValue(4)) * fContainer.at(2).at(iy).at(ix1) + fContainer.at(2).at(iy).at(ix2));
 
-        Real*** FYZ = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        Real invDYDZ = (Math::GetValue(1)) / (mYSpacing * mZSpacing);
-        for (ix = 0; ix < mXBound; ++ix)
+        fxz.at(iz0).at(iy).at(0) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(9)) * fContainer.at(iz0).at(iy).at(0) - (Math<Real>::GetValue(12)) * fContainer.at(iz0).at(iy).at(1) + (Math<Real>::GetValue(3)) * fContainer.at(iz0).at(iy).at(2) - (Math<Real>::GetValue(12)) * fContainer.at(iz1).at(iy).at(0) + (Math<Real>::GetValue(16)) * fContainer.at(iz1).at(iy).at(1) - (Math<Real>::GetValue(4)) * fContainer.at(iz1).at(iy).at(2) + (Math<Real>::GetValue(3)) * fContainer.at(iz2).at(iy).at(0) - (Math<Real>::GetValue(4)) * fContainer.at(iz2).at(iy).at(1) + fContainer.at(iz2).at(iy).at(2));
+
+        fxz.at(iz0).at(iy).at(ix0) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(9)) * fContainer.at(iz0).at(iy).at(ix0) - (Math<Real>::GetValue(12)) * fContainer.at(iz0).at(iy).at(ix1) + (Math<Real>::GetValue(3)) * fContainer.at(iz0).at(iy).at(ix2) - (Math<Real>::GetValue(12)) * fContainer.at(iz1).at(iy).at(ix0) + (Math<Real>::GetValue(16)) * fContainer.at(iz1).at(iy).at(ix1) - (Math<Real>::GetValue(4)) * fContainer.at(iz1).at(iy).at(ix2) + (Math<Real>::GetValue(3)) * fContainer.at(iz2).at(iy).at(ix0) - (Math<Real>::GetValue(4)) * fContainer.at(iz2).at(iy).at(ix1) + fContainer.at(iz2).at(iy).at(ix2));
+
+        for (auto ix = 1; ix < xBound - 1; ++ix)
         {
-            // corners of x-slice
-            FYZ[0][0][ix] = (Real{ 0.25 }) * invDYDZ * (((Real)9) * mF[0][0][ix] - (static_cast<Real>(12)) * mF[0][1][ix] + (static_cast<Real>(3)) * mF[0][2][ix] - (static_cast<Real>(12)) * mF[1][0][ix] + (static_cast<Real>(16)) * mF[1][1][ix] - ((Real)4) * mF[1][2][ix] + (static_cast<Real>(3)) * mF[2][0][ix] - ((Real)4) * mF[2][1][ix] + mF[2][2][ix]);
+            const auto previousIX = ix - 1;
+            const auto nextIX = ix + 1;
+            fxz.at(0).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(0).at(iy).at(previousIX) - fContainer.at(0).at(iy).at(nextIX)) - (Math<Real>::GetValue(4)) * (fContainer.at(1).at(iy).at(previousIX) - fContainer.at(1).at(iy).at(nextIX)) + (fContainer.at(2).at(iy).at(previousIX) - fContainer.at(2).at(iy).at(nextIX)));
 
-            FYZ[0][mYBound - 1][ix] = (Real{ 0.25 }) * invDYDZ * (((Real)9) * mF[0][iy0][ix] - (static_cast<Real>(12)) * mF[0][iy1][ix] + (static_cast<Real>(3)) * mF[0][iy2][ix] - (static_cast<Real>(12)) * mF[1][iy0][ix] + (static_cast<Real>(16)) * mF[1][iy1][ix] - ((Real)4) * mF[1][iy2][ix] + (static_cast<Real>(3)) * mF[2][iy0][ix] - ((Real)4) * mF[2][iy1][ix] + mF[2][iy2][ix]);
-
-            FYZ[mZBound - 1][0][ix] = (Real{ 0.25 }) * invDYDZ * (((Real)9) * mF[iz0][0][ix] - (static_cast<Real>(12)) * mF[iz0][1][ix] + (static_cast<Real>(3)) * mF[iz0][2][ix] - (static_cast<Real>(12)) * mF[iz1][0][ix] + (static_cast<Real>(16)) * mF[iz1][1][ix] - ((Real)4) * mF[iz1][2][ix] + (static_cast<Real>(3)) * mF[iz2][0][ix] - ((Real)4) * mF[iz2][1][ix] + mF[iz2][2][ix]);
-
-            FYZ[mZBound - 1][mYBound - 1][ix] = (Real{ 0.25 }) * invDYDZ * (((Real)9) * mF[iz0][iy0][ix] - (static_cast<Real>(12)) * mF[iz0][iy1][ix] + (static_cast<Real>(3)) * mF[iz0][iy2][ix] - (static_cast<Real>(12)) * mF[iz1][iy0][ix] + (static_cast<Real>(16)) * mF[iz1][iy1][ix] - ((Real)4) * mF[iz1][iy2][ix] + (static_cast<Real>(3)) * mF[iz2][iy0][ix] - ((Real)4) * mF[iz2][iy1][ix] + mF[iz2][iy2][ix]);
-
-            // y-edges of x-slice
-            for (iy = 1; iy < mYBound - 1; ++iy)
-            {
-                FYZ[0][iy][ix] = (Real{ 0.25 }) * invDYDZ * ((static_cast<Real>(3)) * (mF[0][iy - 1][ix] - mF[0][iy + 1][ix]) - ((Real)4) * (mF[1][iy - 1][ix] - mF[1][iy + 1][ix]) + (mF[2][iy - 1][ix] - mF[2][iy + 1][ix]));
-
-                FYZ[mZBound - 1][iy][ix] = (Real{ 0.25 }) * invDYDZ * ((static_cast<Real>(3)) * (mF[iz0][iy - 1][ix] - mF[iz0][iy + 1][ix]) - ((Real)4) * (mF[iz1][iy - 1][ix] - mF[iz1][iy + 1][ix]) + (mF[iz2][iy - 1][ix] - mF[iz2][iy + 1][ix]));
-            }
-
-            // z-edges of x-slice
-            for (iz = 1; iz < mZBound - 1; ++iz)
-            {
-                FYZ[iz][0][ix] = (Real{ 0.25 }) * invDYDZ * ((static_cast<Real>(3)) * (mF[iz - 1][0][ix] - mF[iz + 1][0][ix]) - ((Real)4) * (mF[iz - 1][1][ix] - mF[iz + 1][1][ix]) + (mF[iz - 1][2][ix] - mF[iz + 1][2][ix]));
-
-                FYZ[iz][mYBound - 1][ix] = (Real{ 0.25 }) * invDYDZ * ((static_cast<Real>(3)) * (mF[iz - 1][iy0][ix] - mF[iz + 1][iy0][ix]) - ((Real)4) * (mF[iz - 1][iy1][ix] - mF[iz + 1][iy1][ix]) + (mF[iz - 1][iy2][ix] - mF[iz + 1][iy2][ix]));
-            }
-
-            // interior of x-slice
-            for (iz = 1; iz < mZBound - 1; ++iz)
-            {
-                for (iy = 1; iy < mYBound - 1; ++iy)
-                {
-                    FYZ[iz][iy][ix] = (Real{ 0.25 }) * invDYDZ * (mF[iz - 1][iy - 1][ix] - mF[iz - 1][iy + 1][ix] - mF[iz + 1][iy - 1][ix] + mF[iz + 1][iy + 1][ix]);
-                }
-            }
+            fxz.at(iz0).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(iz0).at(iy).at(previousIX) - fContainer.at(iz0).at(iy).at(nextIX)) - (Math<Real>::GetValue(4)) * (fContainer.at(iz1).at(iy).at(previousIX) - fContainer.at(iz1).at(iy).at(nextIX)) + (fContainer.at(iz2).at(iy).at(previousIX) - fContainer.at(iz2).at(iy).at(nextIX)));
         }
 
-        return FYZ;
+        for (auto iz = 1; iz < zBound - 1; ++iz)
+        {
+            const auto previousIZ = iz - 1;
+            const auto nextIZ = iz + 1;
+            fxz.at(iz).at(iy).at(0) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(previousIZ).at(iy).at(0) - fContainer.at(nextIZ).at(iy).at(0)) - (Math<Real>::GetValue(4)) * (fContainer.at(previousIZ).at(iy).at(1) - fContainer.at(nextIZ).at(iy).at(1)) + (fContainer.at(previousIZ).at(iy).at(2) - fContainer.at(nextIZ).at(iy).at(2)));
+
+            fxz.at(iz).at(iy).at(ix0) = Math<Real>::GetRational(1, 4) * invDXDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(previousIZ).at(iy).at(ix0) - fContainer.at(nextIZ).at(iy).at(ix0)) - (Math<Real>::GetValue(4)) * (fContainer.at(previousIZ).at(iy).at(ix1) - fContainer.at(nextIZ).at(iy).at(ix1)) + (fContainer.at(previousIZ).at(iy).at(ix2) - fContainer.at(nextIZ).at(iy).at(ix2)));
+        }
+
+        for (auto iz = 1; iz < zBound - 1; ++iz)
+        {
+            const auto previousIZ = iz - 1;
+            const auto nextIZ = iz + 1;
+
+            for (auto ix = 1; ix < xBound - 1; ++ix)
+            {
+                const auto previousIX = ix - 1;
+                const auto nextIX = ix + 1;
+
+                fxz.at(iz).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDXDZ * (fContainer.at(previousIZ).at(iy).at(previousIX) - fContainer.at(previousIZ).at(iy).at(nextIX) - fContainer.at(nextIZ).at(iy).at(previousIX) + fContainer.at(nextIZ).at(iy).at(nextIX));
+            }
+        }
     }
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetFXYZ()
+    return fxz;
+}
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFYZ()
+{
+    const auto iy0 = yBound - 1;
+    const auto iy1 = iy0 - 1;
+    const auto iy2 = iy1 - 1;
+    const auto iz0 = zBound - 1;
+    const auto iz1 = iz0 - 1;
+    const auto iz2 = iz1 - 1;
+
+    Container fyz(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+
+    auto invDYDZ = (Math<Real>::GetValue(1)) / (ySpacing * zSpacing);
+    for (auto ix = 0; ix < xBound; ++ix)
     {
-        int ix, iy, iz, ix0, iy0, iz0;
+        fyz.at(0).at(0).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(9)) * fContainer.at(0).at(0).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(0).at(1).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(0).at(2).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(1).at(0).at(ix) + (Math<Real>::GetValue(16)) * fContainer.at(1).at(1).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(1).at(2).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(2).at(0).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(2).at(1).at(ix) + fContainer.at(2).at(2).at(ix));
 
-        Real*** FXYZ = nullptr;  // NEW3<Real>(mXBound, mYBound, mZBound);
-        Real invDXDYDZ = (Math::GetValue(1)) / (mXSpacing * mYSpacing * mZSpacing);
+        fyz.at(0).at(iy0).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(9)) * fContainer.at(0).at(iy0).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(0).at(iy1).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(0).at(iy2).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(1).at(iy0).at(ix) + (Math<Real>::GetValue(16)) * fContainer.at(1).at(iy1).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(1).at(iy2).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(2).at(iy0).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(2).at(iy1).at(ix) + fContainer.at(2).at(iy2).at(ix));
 
-        // convolution masks
-        //   centered difference, O(h^2)
-        Real CDer[3] = { -Real{ 0.5 }, Math<Real>::GetValue(0), Real{ 0.5 } };
-        //   one-sided difference, O(h^2)
-        Real ODer[3] = { -static_cast<Real>(1.5), Math::GetValue(2), -Real{ 0.5 } };
-        Real mask;
+        fyz.at(iz0).at(0).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(9)) * fContainer.at(iz0).at(0).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(iz0).at(1).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(iz0).at(2).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(iz1).at(0).at(ix) + (Math<Real>::GetValue(16)) * fContainer.at(iz1).at(1).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(iz1).at(2).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(iz2).at(0).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(iz2).at(1).at(ix) + fContainer.at(iz2).at(2).at(ix));
 
-        // corners
-        FXYZ[0][0][0] = Math<Real>::GetValue(0);
-        FXYZ[0][0][mXBound - 1] = Math<Real>::GetValue(0);
-        FXYZ[0][mYBound - 1][0] = Math<Real>::GetValue(0);
-        FXYZ[0][mYBound - 1][mXBound - 1] = Math<Real>::GetValue(0);
-        FXYZ[mZBound - 1][0][0] = Math<Real>::GetValue(0);
-        FXYZ[mZBound - 1][0][mXBound - 1] = Math<Real>::GetValue(0);
-        FXYZ[mZBound - 1][mYBound - 1][0] = Math<Real>::GetValue(0);
-        FXYZ[mZBound - 1][mYBound - 1][mXBound - 1] = Math<Real>::GetValue(0);
-        for (iz = 0; iz <= 2; ++iz)
+        fyz.at(iz0).at(iy0).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(9)) * fContainer.at(iz0).at(iy0).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(iz0).at(iy1).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(iz0).at(iy2).at(ix) - (Math<Real>::GetValue(12)) * fContainer.at(iz1).at(iy0).at(ix) + (Math<Real>::GetValue(16)) * fContainer.at(iz1).at(iy1).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(iz1).at(iy2).at(ix) + (Math<Real>::GetValue(3)) * fContainer.at(iz2).at(iy0).at(ix) - (Math<Real>::GetValue(4)) * fContainer.at(iz2).at(iy1).at(ix) + fContainer.at(iz2).at(iy2).at(ix));
+
+        for (auto iy = 1; iy < yBound - 1; ++iy)
         {
-            for (iy = 0; iy <= 2; ++iy)
+            const auto previousIY = iy - 1;
+            const auto nextIY = iy + 1;
+
+            fyz.at(0).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(0).at(previousIY).at(ix) - fContainer.at(0).at(nextIY).at(ix)) - (Math<Real>::GetValue(4)) * (fContainer.at(1).at(previousIY).at(ix) - fContainer.at(1).at(nextIY).at(ix)) + (fContainer.at(2).at(previousIY).at(ix) - fContainer.at(2).at(nextIY).at(ix)));
+
+            fyz.at(iz0).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(iz0).at(previousIY).at(ix) - fContainer.at(iz0).at(nextIY).at(ix)) - (Math<Real>::GetValue(4)) * (fContainer.at(iz1).at(previousIY).at(ix) - fContainer.at(iz1).at(nextIY).at(ix)) + (fContainer.at(iz2).at(previousIY).at(ix) - fContainer.at(iz2).at(nextIY).at(ix)));
+        }
+
+        for (auto iz = 1; iz < zBound - 1; ++iz)
+        {
+            const auto previousIZ = iz - 1;
+            const auto nextIZ = iz + 1;
+
+            fyz.at(iz).at(0).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(previousIZ).at(0).at(ix) - fContainer.at(nextIZ).at(0).at(ix)) - (Math<Real>::GetValue(4)) * (fContainer.at(previousIZ).at(1).at(ix) - fContainer.at(nextIZ).at(1).at(ix)) + (fContainer.at(previousIZ).at(2).at(ix) - fContainer.at(nextIZ).at(2).at(ix)));
+
+            fyz.at(iz).at(iy0).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * ((Math<Real>::GetValue(3)) * (fContainer.at(previousIZ).at(iy0).at(ix) - fContainer.at(nextIZ).at(iy0).at(ix)) - (Math<Real>::GetValue(4)) * (fContainer.at(previousIZ).at(iy1).at(ix) - fContainer.at(nextIZ).at(iy1).at(ix)) + (fContainer.at(previousIZ).at(iy2).at(ix) - fContainer.at(nextIZ).at(iy2).at(ix)));
+        }
+
+        for (auto iz = 1; iz < zBound - 1; ++iz)
+        {
+            const auto previousIZ = iz - 1;
+            const auto nextIZ = iz + 1;
+
+            for (auto iy = 1; iy < yBound - 1; ++iy)
             {
-                for (ix = 0; ix <= 2; ++ix)
+                const auto previousIY = iy - 1;
+                const auto nextIY = iy + 1;
+
+                fyz.at(iz).at(iy).at(ix) = Math<Real>::GetRational(1, 4) * invDYDZ * (fContainer.at(previousIZ).at(previousIY).at(ix) - fContainer.at(previousIZ).at(nextIY).at(ix) - fContainer.at(nextIZ).at(previousIY).at(ix) + fContainer.at(nextIZ).at(nextIY).at(ix));
+            }
+        }
+    }
+
+    return fyz;
+}
+
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetFXYZ()
+{
+    Container fxyz(zBound, std::vector<std::vector<Real>>(yBound, std::vector<Real>(xBound)));
+
+    auto invDXDYDZ = (Math<Real>::GetValue(1)) / (xSpacing * ySpacing * zSpacing);
+
+    std::array<Real, 3> cDer{ -Math<Real>::GetRational(1, 2), Math<Real>::GetValue(0), Math<Real>::GetRational(1, 2) };
+
+    std::array<Real, 3> oDer{ -static_cast<Real>(1.5), Math<Real>::GetValue(2), -Math<Real>::GetRational(1, 2) };
+
+    const auto xPreviousBound = xBound - 1;
+    const auto yPreviousBound = yBound - 1;
+    const auto zPreviousBound = zBound - 1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26451)
+
+    fxyz.at(0).at(0).at(0) = Math<Real>::GetValue(0);
+    fxyz.at(0).at(0).at(xPreviousBound) = Math<Real>::GetValue(0);
+    fxyz.at(0).at(yPreviousBound).at(0) = Math<Real>::GetValue(0);
+    fxyz.at(0).at(yPreviousBound).at(xPreviousBound) = Math<Real>::GetValue(0);
+    fxyz.at(zPreviousBound).at(0).at(0) = Math<Real>::GetValue(0);
+    fxyz.at(zPreviousBound).at(0).at(xPreviousBound) = Math<Real>::GetValue(0);
+    fxyz.at(zPreviousBound).at(yPreviousBound).at(0) = Math<Real>::GetValue(0);
+    fxyz.at(zPreviousBound).at(yPreviousBound).at(xPreviousBound) = Math<Real>::GetValue(0);
+    for (auto iz = 0; iz <= 2; ++iz)
+    {
+        for (auto iy = 0; iy <= 2; ++iy)
+        {
+            for (auto ix = 0; ix <= 2; ++ix)
+            {
+                auto mask = invDXDYDZ * oDer.at(ix) * oDer.at(iy) * oDer.at(iz);
+
+                fxyz.at(0).at(0).at(0) += mask * fContainer.at(iz).at(iy).at(ix);
+
+                fxyz.at(0).at(0).at(xPreviousBound) += mask * fContainer.at(iz).at(iy).at(xBound - 1 - ix);
+
+                fxyz.at(0).at(yPreviousBound).at(0) += mask * fContainer.at(iz).at(yBound - 1 - iy).at(ix);
+
+                fxyz.at(0).at(yPreviousBound).at(xPreviousBound) += mask * fContainer.at(iz).at(yBound - 1 - iy).at(xBound - 1 - ix);
+
+                fxyz.at(zPreviousBound).at(0).at(0) += mask * fContainer.at(zBound - 1 - iz).at(iy).at(ix);
+
+                fxyz.at(zPreviousBound).at(0).at(xPreviousBound) += mask * fContainer.at(zBound - 1 - iz).at(iy).at(xBound - 1 - ix);
+
+                fxyz.at(zPreviousBound).at(yPreviousBound).at(0) += mask * fContainer.at(zBound - 1 - iz).at(yBound - 1 - iy).at(ix);
+
+                fxyz.at(zPreviousBound).at(yPreviousBound).at(xPreviousBound) += mask * fContainer.at(zBound - 1 - iz).at(yBound - 1 - iy).at(xBound - 1 - ix);
+            }
+        }
+    }
+
+    for (auto ix0 = 1; ix0 < xBound - 1; ++ix0)
+    {
+        fxyz.at(0).at(0).at(ix0) = Math<Real>::GetValue(0);
+        fxyz.at(0).at(yPreviousBound).at(ix0) = Math<Real>::GetValue(0);
+        fxyz.at(zPreviousBound).at(0).at(ix0) = Math<Real>::GetValue(0);
+        fxyz.at(zPreviousBound).at(yPreviousBound).at(ix0) = Math<Real>::GetValue(0);
+        for (auto iz = 0; iz <= 2; ++iz)
+        {
+            for (auto iy = 0; iy <= 2; ++iy)
+            {
+                for (auto ix = 0; ix <= 2; ++ix)
                 {
-                    mask = invDXDYDZ * ODer[ix] * ODer[iy] * ODer[iz];
+                    auto mask = invDXDYDZ * cDer.at(ix) * oDer.at(iy) * oDer.at(iz);
 
-                    FXYZ[0][0][0] += mask *
-                                     mF[iz][iy][ix];
+                    fxyz.at(0).at(0).at(ix0) += mask * fContainer.at(iz).at(iy).at(ix0 + ix - 1);
 
-                    FXYZ[0][0][mXBound - 1] += mask *
-                                               mF[iz][iy][mXBound - 1 - ix];
+                    fxyz.at(0).at(yPreviousBound).at(ix0) += mask * fContainer.at(iz).at(yBound - 1 - iy).at(ix0 + ix - 1);
 
-                    FXYZ[0][mYBound - 1][0] += mask *
-                                               mF[iz][mYBound - 1 - iy][ix];
+                    fxyz.at(zPreviousBound).at(0).at(ix0) += mask * fContainer.at(zBound - 1 - iz).at(iy).at(ix0 + ix - 1);
 
-                    FXYZ[0][mYBound - 1][mXBound - 1] += mask *
-                                                         mF[iz][mYBound - 1 - iy][mXBound - 1 - ix];
-
-                    FXYZ[mZBound - 1][0][0] += mask *
-                                               mF[mZBound - 1 - iz][iy][ix];
-
-                    FXYZ[mZBound - 1][0][mXBound - 1] += mask *
-                                                         mF[mZBound - 1 - iz][iy][mXBound - 1 - ix];
-
-                    FXYZ[mZBound - 1][mYBound - 1][0] += mask *
-                                                         mF[mZBound - 1 - iz][mYBound - 1 - iy][ix];
-
-                    FXYZ[mZBound - 1][mYBound - 1][mXBound - 1] += mask *
-                                                                   mF[mZBound - 1 - iz][mYBound - 1 - iy][mXBound - 1 - ix];
+                    fxyz.at(zPreviousBound).at(yPreviousBound).at(ix0) += mask * fContainer.at(zBound - 1 - iz).at(yBound - 1 - iy).at(ix0 + ix - 1);
                 }
             }
         }
+    }
 
-        // x-edges
-        for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
+    for (auto iy0 = 1; iy0 < yBound - 1; ++iy0)
+    {
+        fxyz.at(0).at(iy0).at(0) = Math<Real>::GetValue(0);
+        fxyz.at(0).at(iy0).at(xPreviousBound) = Math<Real>::GetValue(0);
+        fxyz.at(zPreviousBound).at(iy0).at(0) = Math<Real>::GetValue(0);
+        fxyz.at(zPreviousBound).at(iy0).at(xPreviousBound) = Math<Real>::GetValue(0);
+        for (auto iz = 0; iz <= 2; ++iz)
         {
-            FXYZ[0][0][ix0] = Math<Real>::GetValue(0);
-            FXYZ[0][mYBound - 1][ix0] = Math<Real>::GetValue(0);
-            FXYZ[mZBound - 1][0][ix0] = Math<Real>::GetValue(0);
-            FXYZ[mZBound - 1][mYBound - 1][ix0] = Math<Real>::GetValue(0);
-            for (iz = 0; iz <= 2; ++iz)
+            for (auto iy = 0; iy <= 2; ++iy)
             {
-                for (iy = 0; iy <= 2; ++iy)
+                for (auto ix = 0; ix <= 2; ++ix)
                 {
-                    for (ix = 0; ix <= 2; ++ix)
+                    auto mask = invDXDYDZ * oDer.at(ix) * cDer.at(iy) * oDer.at(iz);
+
+                    fxyz.at(0).at(iy0).at(0) += mask * fContainer.at(iz).at(iy0 + iy - 1).at(ix);
+
+                    fxyz.at(0).at(iy0).at(xPreviousBound) += mask * fContainer.at(iz).at(iy0 + iy - 1).at(xBound - 1 - ix);
+
+                    fxyz.at(zPreviousBound).at(iy0).at(0) += mask * fContainer.at(zBound - 1 - iz).at(iy0 + iy - 1).at(ix);
+
+                    fxyz.at(zPreviousBound).at(iy0).at(xPreviousBound) += mask * fContainer.at(zBound - 1 - iz).at(iy0 + iy - 1).at(xBound - 1 - ix);
+                }
+            }
+        }
+    }
+
+    for (auto iz0 = 1; iz0 < zBound - 1; ++iz0)
+    {
+        fxyz.at(iz0).at(0).at(0) = Math<Real>::GetValue(0);
+        fxyz.at(iz0).at(0).at(xPreviousBound) = Math<Real>::GetValue(0);
+        fxyz.at(iz0).at(yPreviousBound).at(0) = Math<Real>::GetValue(0);
+        fxyz.at(iz0).at(yPreviousBound).at(xPreviousBound) = Math<Real>::GetValue(0);
+        for (auto iz = 0; iz <= 2; ++iz)
+        {
+            for (auto iy = 0; iy <= 2; ++iy)
+            {
+                for (auto ix = 0; ix <= 2; ++ix)
+                {
+                    auto mask = invDXDYDZ * oDer.at(ix) * oDer.at(iy) * cDer.at(iz);
+
+                    fxyz.at(iz0).at(0).at(0) += mask * fContainer.at(iz0 + iz - 1).at(iy).at(ix);
+
+                    fxyz.at(iz0).at(0).at(xPreviousBound) += mask * fContainer.at(iz0 + iz - 1).at(iy).at(xBound - 1 - ix);
+
+                    fxyz.at(iz0).at(yPreviousBound).at(0) += mask * fContainer.at(iz0 + iz - 1).at(yBound - 1 - iy).at(ix);
+
+                    fxyz.at(iz0).at(yPreviousBound).at(xPreviousBound) += mask * fContainer.at(iz0 + iz - 1).at(yBound - 1 - iy).at(xBound - 1 - ix);
+                }
+            }
+        }
+    }
+
+    for (auto iy0 = 1; iy0 < yBound - 1; ++iy0)
+    {
+        for (auto ix0 = 1; ix0 < xBound - 1; ++ix0)
+        {
+            fxyz.at(0).at(iy0).at(ix0) = Math<Real>::GetValue(0);
+            fxyz.at(zPreviousBound).at(iy0).at(ix0) = Math<Real>::GetValue(0);
+            for (auto iz = 0; iz <= 2; ++iz)
+            {
+                for (auto iy = 0; iy <= 2; ++iy)
+                {
+                    for (auto ix = 0; ix <= 2; ++ix)
                     {
-                        mask = invDXDYDZ * CDer[ix] * ODer[iy] * ODer[iz];
+                        auto mask = invDXDYDZ * cDer.at(ix) * cDer.at(iy) * oDer.at(iz);
 
-                        FXYZ[0][0][ix0] += mask *
-                                           mF[iz][iy][ix0 + ix - 1];
+                        fxyz.at(0).at(iy0).at(ix0) += mask * fContainer.at(iz).at(iy0 + iy - 1).at(ix0 + ix - 1);
 
-                        FXYZ[0][mYBound - 1][ix0] += mask *
-                                                     mF[iz][mYBound - 1 - iy][ix0 + ix - 1];
-
-                        FXYZ[mZBound - 1][0][ix0] += mask *
-                                                     mF[mZBound - 1 - iz][iy][ix0 + ix - 1];
-
-                        FXYZ[mZBound - 1][mYBound - 1][ix0] += mask *
-                                                               mF[mZBound - 1 - iz][mYBound - 1 - iy][ix0 + ix - 1];
+                        fxyz.at(zPreviousBound).at(iy0).at(ix0) += mask * fContainer.at(zBound - 1 - iz).at(iy0 + iy - 1).at(ix0 + ix - 1);
                     }
                 }
             }
         }
+    }
 
-        // y-edges
-        for (iy0 = 1; iy0 < mYBound - 1; ++iy0)
+    for (auto iz0 = 1; iz0 < zBound - 1; ++iz0)
+    {
+        for (auto ix0 = 1; ix0 < xBound - 1; ++ix0)
         {
-            FXYZ[0][iy0][0] = Math<Real>::GetValue(0);
-            FXYZ[0][iy0][mXBound - 1] = Math<Real>::GetValue(0);
-            FXYZ[mZBound - 1][iy0][0] = Math<Real>::GetValue(0);
-            FXYZ[mZBound - 1][iy0][mXBound - 1] = Math<Real>::GetValue(0);
-            for (iz = 0; iz <= 2; ++iz)
+            fxyz.at(iz0).at(0).at(ix0) = Math<Real>::GetValue(0);
+            fxyz.at(iz0).at(yPreviousBound).at(ix0) = Math<Real>::GetValue(0);
+            for (auto iz = 0; iz <= 2; ++iz)
             {
-                for (iy = 0; iy <= 2; ++iy)
+                for (auto iy = 0; iy <= 2; ++iy)
                 {
-                    for (ix = 0; ix <= 2; ++ix)
+                    for (auto ix = 0; ix <= 2; ++ix)
                     {
-                        mask = invDXDYDZ * ODer[ix] * CDer[iy] * ODer[iz];
+                        auto mask = invDXDYDZ * cDer.at(ix) * oDer.at(iy) * cDer.at(iz);
 
-                        FXYZ[0][iy0][0] += mask *
-                                           mF[iz][iy0 + iy - 1][ix];
+                        fxyz.at(iz0).at(0).at(ix0) += mask * fContainer.at(iz0 + iz - 1).at(iy).at(ix0 + ix - 1);
 
-                        FXYZ[0][iy0][mXBound - 1] += mask *
-                                                     mF[iz][iy0 + iy - 1][mXBound - 1 - ix];
-
-                        FXYZ[mZBound - 1][iy0][0] += mask *
-                                                     mF[mZBound - 1 - iz][iy0 + iy - 1][ix];
-
-                        FXYZ[mZBound - 1][iy0][mXBound - 1] += mask *
-                                                               mF[mZBound - 1 - iz][iy0 + iy - 1][mXBound - 1 - ix];
+                        fxyz.at(iz0).at(yPreviousBound).at(ix0) += mask * fContainer.at(iz0 + iz - 1).at(yBound - 1 - iy).at(ix0 + ix - 1);
                     }
                 }
             }
         }
+    }
 
-        // z-edges
-        for (iz0 = 1; iz0 < mZBound - 1; ++iz0)
+    for (auto iz0 = 1; iz0 < zBound - 1; ++iz0)
+    {
+        for (auto iy0 = 1; iy0 < yBound - 1; ++iy0)
         {
-            FXYZ[iz0][0][0] = Math<Real>::GetValue(0);
-            FXYZ[iz0][0][mXBound - 1] = Math<Real>::GetValue(0);
-            FXYZ[iz0][mYBound - 1][0] = Math<Real>::GetValue(0);
-            FXYZ[iz0][mYBound - 1][mXBound - 1] = Math<Real>::GetValue(0);
-            for (iz = 0; iz <= 2; ++iz)
+            fxyz.at(iz0).at(iy0).at(0) = Math<Real>::GetValue(0);
+            fxyz.at(iz0).at(iy0).at(xPreviousBound) = Math<Real>::GetValue(0);
+            for (auto iz = 0; iz <= 2; ++iz)
             {
-                for (iy = 0; iy <= 2; ++iy)
+                for (auto iy = 0; iy <= 2; ++iy)
                 {
-                    for (ix = 0; ix <= 2; ++ix)
+                    for (auto ix = 0; ix <= 2; ++ix)
                     {
-                        mask = invDXDYDZ * ODer[ix] * ODer[iy] * CDer[iz];
+                        auto mask = invDXDYDZ * oDer.at(ix) * cDer.at(iy) * cDer.at(iz);
 
-                        FXYZ[iz0][0][0] += mask *
-                                           mF[iz0 + iz - 1][iy][ix];
+                        fxyz.at(iz0).at(iy0).at(0) += mask * fContainer.at(iz0 + iz - 1).at(iy0 + iy - 1).at(ix);
 
-                        FXYZ[iz0][0][mXBound - 1] += mask *
-                                                     mF[iz0 + iz - 1][iy][mXBound - 1 - ix];
-
-                        FXYZ[iz0][mYBound - 1][0] += mask *
-                                                     mF[iz0 + iz - 1][mYBound - 1 - iy][ix];
-
-                        FXYZ[iz0][mYBound - 1][mXBound - 1] += mask *
-                                                               mF[iz0 + iz - 1][mYBound - 1 - iy][mXBound - 1 - ix];
+                        fxyz.at(iz0).at(iy0).at(xPreviousBound) += mask * fContainer.at(iz0 + iz - 1).at(iy0 + iy - 1).at(xBound - 1 - ix);
                     }
                 }
             }
         }
+    }
 
-        // xy-faces
-        for (iy0 = 1; iy0 < mYBound - 1; ++iy0)
+    for (auto iz0 = 1; iz0 < zBound - 1; ++iz0)
+    {
+        for (auto iy0 = 1; iy0 < yBound - 1; ++iy0)
         {
-            for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
+            for (auto ix0 = 1; ix0 < xBound - 1; ++ix0)
             {
-                FXYZ[0][iy0][ix0] = Math<Real>::GetValue(0);
-                FXYZ[mZBound - 1][iy0][ix0] = Math<Real>::GetValue(0);
-                for (iz = 0; iz <= 2; ++iz)
+                fxyz.at(iz0).at(iy0).at(ix0) = Math<Real>::GetValue(0);
+
+                for (auto iz = 0; iz <= 2; ++iz)
                 {
-                    for (iy = 0; iy <= 2; ++iy)
+                    for (auto iy = 0; iy <= 2; ++iy)
                     {
-                        for (ix = 0; ix <= 2; ++ix)
+                        for (auto ix = 0; ix <= 2; ++ix)
                         {
-                            mask = invDXDYDZ * CDer[ix] * CDer[iy] * ODer[iz];
+                            auto mask = invDXDYDZ * cDer.at(ix) * cDer.at(iy) * cDer.at(iz);
 
-                            FXYZ[0][iy0][ix0] += mask *
-                                                 mF[iz][iy0 + iy - 1][ix0 + ix - 1];
-
-                            FXYZ[mZBound - 1][iy0][ix0] += mask *
-                                                           mF[mZBound - 1 - iz][iy0 + iy - 1][ix0 + ix - 1];
+                            fxyz.at(iz0).at(iy0).at(ix0) += mask * fContainer.at(iz0 + iz - 1).at(iy0 + iy - 1).at(ix0 + ix - 1);
                         }
                     }
                 }
             }
         }
-
-        // xz-faces
-        for (iz0 = 1; iz0 < mZBound - 1; ++iz0)
-        {
-            for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
-            {
-                FXYZ[iz0][0][ix0] = Math<Real>::GetValue(0);
-                FXYZ[iz0][mYBound - 1][ix0] = Math<Real>::GetValue(0);
-                for (iz = 0; iz <= 2; ++iz)
-                {
-                    for (iy = 0; iy <= 2; ++iy)
-                    {
-                        for (ix = 0; ix <= 2; ++ix)
-                        {
-                            mask = invDXDYDZ * CDer[ix] * ODer[iy] * CDer[iz];
-
-                            FXYZ[iz0][0][ix0] += mask *
-                                                 mF[iz0 + iz - 1][iy][ix0 + ix - 1];
-
-                            FXYZ[iz0][mYBound - 1][ix0] += mask *
-                                                           mF[iz0 + iz - 1][mYBound - 1 - iy][ix0 + ix - 1];
-                        }
-                    }
-                }
-            }
-        }
-
-        // yz-faces
-        for (iz0 = 1; iz0 < mZBound - 1; ++iz0)
-        {
-            for (iy0 = 1; iy0 < mYBound - 1; ++iy0)
-            {
-                FXYZ[iz0][iy0][0] = Math<Real>::GetValue(0);
-                FXYZ[iz0][iy0][mXBound - 1] = Math<Real>::GetValue(0);
-                for (iz = 0; iz <= 2; ++iz)
-                {
-                    for (iy = 0; iy <= 2; ++iy)
-                    {
-                        for (ix = 0; ix <= 2; ++ix)
-                        {
-                            mask = invDXDYDZ * ODer[ix] * CDer[iy] * CDer[iz];
-
-                            FXYZ[iz0][iy0][0] += mask *
-                                                 mF[iz0 + iz - 1][iy0 + iy - 1][ix];
-
-                            FXYZ[iz0][iy0][mXBound - 1] += mask *
-                                                           mF[iz0 + iz - 1][iy0 + iy - 1][mXBound - 1 - ix];
-                        }
-                    }
-                }
-            }
-        }
-
-        // interiors
-        for (iz0 = 1; iz0 < mZBound - 1; ++iz0)
-        {
-            for (iy0 = 1; iy0 < mYBound - 1; ++iy0)
-            {
-                for (ix0 = 1; ix0 < mXBound - 1; ++ix0)
-                {
-                    FXYZ[iz0][iy0][ix0] = Math<Real>::GetValue(0);
-
-                    for (iz = 0; iz <= 2; ++iz)
-                    {
-                        for (iy = 0; iy <= 2; ++iy)
-                        {
-                            for (ix = 0; ix <= 2; ++ix)
-                            {
-                                mask = invDXDYDZ * CDer[ix] * CDer[iy] * CDer[iz];
-
-                                FXYZ[iz0][iy0][ix0] += mask *
-                                                       mF[iz0 + iz - 1][iy0 + iy - 1][ix0 + ix - 1];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return FXYZ;
     }
 
-    template <typename Real>
-    void IntpAkimaUniform3<Real>::GetPolynomials(Real*** FX, Real*** FY,
-                                                 Real*** FZ, Real*** FXY, Real*** FXZ, Real*** FYZ, Real*** FXYZ)
+#include STSTEM_WARNING_POP
+
+    return fxyz;
+}
+
+template <typename Real>
+void Mathematics::IntpAkimaUniform3<Real>::GetPolynomials(const Container& fx,
+                                                          const Container& fy,
+                                                          const Container& fz,
+                                                          const Container& fxy,
+                                                          const Container& fxz,
+                                                          const Container& fyz,
+                                                          const Container& fxyz)
+{
+    polynomialContainer.resize(boost::numeric_cast<size_t>(zBound) - 1, std::vector<std::vector<Polynomial>>(boost::numeric_cast<size_t>(yBound) - 1, std::vector<Polynomial>(boost::numeric_cast<size_t>(xBound) - 1)));
+    for (auto iz = 0; iz < zBound - 1; ++iz)
     {
-        mPoly = nullptr;  // NEW3<Polynomial>(mXBound - 1, mYBound - 1, mZBound - 1);
-        for (int iz = 0; iz < mZBound - 1; ++iz)
+        for (auto iy = 0; iy < yBound - 1; ++iy)
         {
-            for (int iy = 0; iy < mYBound - 1; ++iy)
+            for (auto ix = 0; ix < xBound - 1; ++ix)
             {
-                for (int ix = 0; ix < mXBound - 1; ++ix)
-                {
-                    // Note the 'transposing' of the 2x2x2 blocks (to match
-                    // notation used in the polynomial definition).
-                    Real G[2][2][2] = {
-                        { { mF[iz][iy][ix],
-                            mF[iz + 1][iy][ix] },
-                          { mF[iz][iy + 1][ix],
-                            mF[iz + 1][iy + 1][ix] } },
-                        { { mF[iz][iy][ix + 1],
-                            mF[iz + 1][iy][ix + 1] },
-                          { mF[iz][iy + 1][ix + 1],
-                            mF[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType g{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fContainer.at(iz).at(iy).at(ix),
+                                                                                          fContainer.at(iz + 1).at(iy).at(ix) },
+                                                                     std::array<Real, 2>{ fContainer.at(iz).at(iy + 1).at(ix),
+                                                                                          fContainer.at(iz + 1).at(iy + 1).at(ix) } },
+                                 std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fContainer.at(iz).at(iy).at(ix + 1),
+                                                                                          fContainer.at(iz + 1).at(iy).at(ix + 1) },
+                                                                     std::array<Real, 2>{ fContainer.at(iz).at(iy + 1).at(ix + 1),
+                                                                                          fContainer.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GX[2][2][2] = {
-                        { { FX[iz][iy][ix],
-                            FX[iz + 1][iy][ix] },
-                          { FX[iz][iy + 1][ix],
-                            FX[iz + 1][iy + 1][ix] } },
-                        { { FX[iz][iy][ix + 1],
-                            FX[iz + 1][iy][ix + 1] },
-                          { FX[iz][iy + 1][ix + 1],
-                            FX[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gx{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fx.at(iz).at(iy).at(ix),
+                                                                                           fx.at(iz + 1).at(iy).at(ix) },
+                                                                      std::array<Real, 2>{ fx.at(iz).at(iy + 1).at(ix),
+                                                                                           fx.at(iz + 1).at(iy + 1).at(ix) } },
+                                  std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fx.at(iz).at(iy).at(ix + 1),
+                                                                                           fx.at(iz + 1).at(iy).at(ix + 1) },
+                                                                      std::array<Real, 2>{ fx.at(iz).at(iy + 1).at(ix + 1),
+                                                                                           fx.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GY[2][2][2] = {
-                        { { FY[iz][iy][ix],
-                            FY[iz + 1][iy][ix] },
-                          { FY[iz][iy + 1][ix],
-                            FY[iz + 1][iy + 1][ix] } },
-                        { { FY[iz][iy][ix + 1],
-                            FY[iz + 1][iy][ix + 1] },
-                          { FY[iz][iy + 1][ix + 1],
-                            FY[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gy{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fy.at(iz).at(iy).at(ix),
+                                                                                           fy.at(iz + 1).at(iy).at(ix) },
+                                                                      std::array<Real, 2>{ fy.at(iz).at(iy + 1).at(ix),
+                                                                                           fy.at(iz + 1).at(iy + 1).at(ix) } },
+                                  std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fy.at(iz).at(iy).at(ix + 1),
+                                                                                           fy.at(iz + 1).at(iy).at(ix + 1) },
+                                                                      std::array<Real, 2>{ fy.at(iz).at(iy + 1).at(ix + 1),
+                                                                                           fy.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GZ[2][2][2] = {
-                        { { FZ[iz][iy][ix],
-                            FZ[iz + 1][iy][ix] },
-                          { FZ[iz][iy + 1][ix],
-                            FZ[iz + 1][iy + 1][ix] } },
-                        { { FZ[iz][iy][ix + 1],
-                            FZ[iz + 1][iy][ix + 1] },
-                          { FZ[iz][iy + 1][ix + 1],
-                            FZ[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fz.at(iz).at(iy).at(ix),
+                                                                                           fz.at(iz + 1).at(iy).at(ix) },
+                                                                      std::array<Real, 2>{ fz.at(iz).at(iy + 1).at(ix),
+                                                                                           fz.at(iz + 1).at(iy + 1).at(ix) } },
+                                  std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fz.at(iz).at(iy).at(ix + 1),
+                                                                                           fz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                      std::array<Real, 2>{ fz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                           fz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GXY[2][2][2] = {
-                        { { FXY[iz][iy][ix],
-                            FXY[iz + 1][iy][ix] },
-                          { FXY[iz][iy + 1][ix],
-                            FXY[iz + 1][iy + 1][ix] } },
-                        { { FXY[iz][iy][ix + 1],
-                            FXY[iz + 1][iy][ix + 1] },
-                          { FXY[iz][iy + 1][ix + 1],
-                            FXY[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gxy{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxy.at(iz).at(iy).at(ix),
+                                                                                            fxy.at(iz + 1).at(iy).at(ix) },
+                                                                       std::array<Real, 2>{ fxy.at(iz).at(iy + 1).at(ix),
+                                                                                            fxy.at(iz + 1).at(iy + 1).at(ix) } },
+                                   std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxy.at(iz).at(iy).at(ix + 1),
+                                                                                            fxy.at(iz + 1).at(iy).at(ix + 1) },
+                                                                       std::array<Real, 2>{ fxy.at(iz).at(iy + 1).at(ix + 1),
+                                                                                            fxy.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GXZ[2][2][2] = {
-                        { { FXZ[iz][iy][ix],
-                            FXZ[iz + 1][iy][ix] },
-                          { FXZ[iz][iy + 1][ix],
-                            FXZ[iz + 1][iy + 1][ix] } },
-                        { { FXZ[iz][iy][ix + 1],
-                            FXZ[iz + 1][iy][ix + 1] },
-                          { FXZ[iz][iy + 1][ix + 1],
-                            FXZ[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gxz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxz.at(iz).at(iy).at(ix),
+                                                                                            fxz.at(iz + 1).at(iy).at(ix) },
+                                                                       std::array<Real, 2>{ fxz.at(iz).at(iy + 1).at(ix),
+                                                                                            fxz.at(iz + 1).at(iy + 1).at(ix) } },
+                                   std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxz.at(iz).at(iy).at(ix + 1),
+                                                                                            fxz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                       std::array<Real, 2>{ fxz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                            fxz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GYZ[2][2][2] = {
-                        { { FYZ[iz][iy][ix],
-                            FYZ[iz + 1][iy][ix] },
-                          { FYZ[iz][iy + 1][ix],
-                            FYZ[iz + 1][iy + 1][ix] } },
-                        { { FYZ[iz][iy][ix + 1],
-                            FYZ[iz + 1][iy][ix + 1] },
-                          { FYZ[iz][iy + 1][ix + 1],
-                            FYZ[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gyz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fyz.at(iz).at(iy).at(ix),
+                                                                                            fyz.at(iz + 1).at(iy).at(ix) },
+                                                                       std::array<Real, 2>{ fyz.at(iz).at(iy + 1).at(ix),
+                                                                                            fyz.at(iz + 1).at(iy + 1).at(ix) } },
+                                   std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fyz.at(iz).at(iy).at(ix + 1),
+                                                                                            fyz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                       std::array<Real, 2>{ fyz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                            fyz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Real GXYZ[2][2][2] = {
-                        { { FXYZ[iz][iy][ix],
-                            FXYZ[iz + 1][iy][ix] },
-                          { FXYZ[iz][iy + 1][ix],
-                            FXYZ[iz + 1][iy + 1][ix] } },
-                        { { FXYZ[iz][iy][ix + 1],
-                            FXYZ[iz + 1][iy][ix + 1] },
-                          { FXYZ[iz][iy + 1][ix + 1],
-                            FXYZ[iz + 1][iy + 1][ix + 1] } }
-                    };
+                ConstructType gxyz{ std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxyz.at(iz).at(iy).at(ix),
+                                                                                             fxyz.at(iz + 1).at(iy).at(ix) },
+                                                                        std::array<Real, 2>{ fxyz.at(iz).at(iy + 1).at(ix),
+                                                                                             fxyz.at(iz + 1).at(iy + 1).at(ix) } },
+                                    std::array<std::array<Real, 2>, 2>{ std::array<Real, 2>{ fxyz.at(iz).at(iy).at(ix + 1),
+                                                                                             fxyz.at(iz + 1).at(iy).at(ix + 1) },
+                                                                        std::array<Real, 2>{ fxyz.at(iz).at(iy + 1).at(ix + 1),
+                                                                                             fxyz.at(iz + 1).at(iy + 1).at(ix + 1) } } };
 
-                    Construct(mPoly[iz][iy][ix], G, GX, GY, GZ, GXY, GXZ, GYZ,
-                              GXYZ);
-                }
+                Construct(polynomialContainer.at(iz).at(iy).at(ix), g, gx, gy, gz, gxy, gxz, gyz, gxyz);
             }
         }
     }
+}
 
-    template <typename Real>
-    int IntpAkimaUniform3<Real>::GetXBound() const
-    {
-        return mXBound;
-    }
+template <typename Real>
+int Mathematics::IntpAkimaUniform3<Real>::GetXBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    int IntpAkimaUniform3<Real>::GetYBound() const
-    {
-        return mYBound;
-    }
+    return xBound;
+}
 
-    template <typename Real>
-    int IntpAkimaUniform3<Real>::GetZBound() const
-    {
-        return mZBound;
-    }
+template <typename Real>
+int Mathematics::IntpAkimaUniform3<Real>::GetYBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    int IntpAkimaUniform3<Real>::GetQuantity() const
-    {
-        return quantity;
-    }
+    return yBound;
+}
 
-    template <typename Real>
-    Real*** IntpAkimaUniform3<Real>::GetF() const
-    {
-        return mF;
-    }
+template <typename Real>
+int Mathematics::IntpAkimaUniform3<Real>::GetZBound() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    typename IntpAkimaUniform3<Real>::Polynomial***
-        IntpAkimaUniform3<Real>::GetPolynomials() const
-    {
-        return mPoly;
-    }
+    return zBound;
+}
 
-    template <typename Real>
-    const typename IntpAkimaUniform3<Real>::Polynomial&
-        IntpAkimaUniform3<Real>::GetPolynomial(int ix, int iy, int iz) const
-    {
-        return mPoly[iz][iy][ix];
-    }
+template <typename Real>
+int Mathematics::IntpAkimaUniform3<Real>::GetQuantity() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetXMin() const
-    {
-        return mXMin;
-    }
+    return quantity;
+}
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetXMax() const
-    {
-        return mXMax;
-    }
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::Container Mathematics::IntpAkimaUniform3<Real>::GetF() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetXSpacing() const
-    {
-        return mXSpacing;
-    }
+    return fContainer;
+}
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetYMin() const
-    {
-        return mYMin;
-    }
+template <typename Real>
+typename Mathematics::IntpAkimaUniform3<Real>::PolynomialContainer Mathematics::IntpAkimaUniform3<Real>::GetPolynomials() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetYMax() const
-    {
-        return mYMax;
-    }
+    return polynomialContainer;
+}
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetYSpacing() const
-    {
-        return mYSpacing;
-    }
+template <typename Real>
+const typename Mathematics::IntpAkimaUniform3<Real>::Polynomial& Mathematics::IntpAkimaUniform3<Real>::GetPolynomial(int ix, int iy, int iz) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetZMin() const
-    {
-        return mZMin;
-    }
+    return polynomialContainer.at(iz).at(iy).at(ix);
+}
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetZMax() const
-    {
-        return mZMax;
-    }
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetXMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::GetZSpacing() const
-    {
-        return mZSpacing;
-    }
+    return xMin;
+}
 
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::ComputeDerivative(Real* slope) const
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetXMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetXSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xSpacing;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetYMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yMin;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetYMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetYSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ySpacing;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetZMin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zMin;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetZMax() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zMax;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::GetZSpacing() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return zSpacing;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::ComputeDerivative(const std::vector<Real>& slope) const
+{
+    if (slope.at(1) != slope.at(2))
     {
-        if (slope[1] != slope[2])
+        if (slope.at(0) != slope.at(1))
         {
-            if (slope[0] != slope[1])
+            if (slope.at(2) != slope.at(3))
             {
-                if (slope[2] != slope[3])
-                {
-                    Real ad0 = Math<Real>::FAbs(slope[3] - slope[2]);
-                    Real ad1 = Math<Real>::FAbs(slope[0] - slope[1]);
-                    return (ad0 * slope[1] + ad1 * slope[2]) / (ad0 + ad1);
-                }
-                else
-                {
-                    return slope[2];
-                }
+                auto ad0 = Math<Real>::FAbs(slope.at(3) - slope.at(2));
+                auto ad1 = Math<Real>::FAbs(slope.at(0) - slope.at(1));
+                return (ad0 * slope.at(1) + ad1 * slope.at(2)) / (ad0 + ad1);
             }
             else
             {
-                if (slope[2] != slope[3])
-                {
-                    return slope[1];
-                }
-                else
-                {
-                    return (Math::GetRational(1, 2)) * (slope[1] + slope[2]);
-                }
+                return slope.at(2);
             }
         }
         else
         {
-            return slope[1];
-        }
-    }
-
-    template <typename Real>
-    void IntpAkimaUniform3<Real>::Construct(Polynomial& poly, Real F[2][2][2], Real FX[2][2][2], Real FY[2][2][2], Real FZ[2][2][2], Real FXY[2][2][2], Real FXZ[2][2][2], Real FYZ[2][2][2], Real FXYZ[2][2][2])
-    {
-        Real dx = mXSpacing, dy = mYSpacing, dz = mZSpacing;
-        Real invDX = (Math::GetValue(1)) / dx, invDX2 = invDX * invDX;
-        Real invDY = (Math::GetValue(1)) / dy, invDY2 = invDY * invDY;
-        Real invDZ = (Math::GetValue(1)) / dz, invDZ2 = invDZ * invDZ;
-        Real b0, b1, b2, b3, b4, b5, b6, b7;
-
-        poly.A(0, 0, 0) = F[0][0][0];
-        poly.A(1, 0, 0) = FX[0][0][0];
-        poly.A(0, 1, 0) = FY[0][0][0];
-        poly.A(0, 0, 1) = FZ[0][0][0];
-        poly.A(1, 1, 0) = FXY[0][0][0];
-        poly.A(1, 0, 1) = FXZ[0][0][0];
-        poly.A(0, 1, 1) = FYZ[0][0][0];
-        poly.A(1, 1, 1) = FXYZ[0][0][0];
-
-        // solve for Aij0
-        b0 = (F[1][0][0] - poly(0, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
-        b1 = (FX[1][0][0] - poly(1, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
-        poly.A(2, 0, 0) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(3, 0, 0) = (-(Math::GetValue(2)) * b0 + b1) * invDX;
-
-        b0 = (F[0][1][0] - poly(0, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
-        b1 = (FY[0][1][0] - poly(0, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
-        poly.A(0, 2, 0) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(0, 3, 0) = (-(Math::GetValue(2)) * b0 + b1) * invDY;
-
-        b0 = (FY[1][0][0] - poly(0, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
-        b1 = (FXY[1][0][0] - poly(1, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
-        poly.A(2, 1, 0) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(3, 1, 0) = (-(Math::GetValue(2)) * b0 + b1) * invDX;
-
-        b0 = (FX[0][1][0] - poly(1, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
-        b1 = (FXY[0][1][0] - poly(1, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
-        poly.A(1, 2, 0) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(1, 3, 0) = (-(Math::GetValue(2)) * b0 + b1) * invDY;
-
-        b0 = (F[1][1][0] - poly(0, 0, 0, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY2;
-        b1 = (FX[1][1][0] - poly(1, 0, 0, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY2;
-        b2 = (FY[1][1][0] - poly(0, 1, 0, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY;
-        b3 = (FXY[1][1][0] - poly(1, 1, 0, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY;
-        poly.A(2, 2, 0) = ((Real)9) * b0 - (static_cast<Real>(3)) * b1 - (static_cast<Real>(3)) * b2 + b3;
-        poly.A(3, 2, 0) = (-((Real)6) * b0 + (static_cast<Real>(3)) * b1 + (Math::GetValue(2)) * b2 - b3) * invDX;
-        poly.A(2, 3, 0) = (-((Real)6) * b0 + (Math::GetValue(2)) * b1 + (static_cast<Real>(3)) * b2 - b3) * invDY;
-        poly.A(3, 3, 0) = (((Real)4) * b0 - (Math::GetValue(2)) * b1 - (Math::GetValue(2)) * b2 + b3) *
-                          invDX * invDY;
-
-        // solve for Ai0k
-        b0 = (F[0][0][1] - poly(0, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
-        b1 = (FZ[0][0][1] - poly(0, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
-        poly.A(0, 0, 2) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(0, 0, 3) = (-(Math::GetValue(2)) * b0 + b1) * invDZ;
-
-        b0 = (FZ[1][0][0] - poly(0, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
-        b1 = (FXZ[1][0][0] - poly(1, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
-        poly.A(2, 0, 1) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(3, 0, 1) = (-(Math::GetValue(2)) * b0 + b1) * invDX;
-
-        b0 = (FX[0][0][1] - poly(1, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
-        b1 = (FXZ[0][0][1] - poly(1, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
-        poly.A(1, 0, 2) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(1, 0, 3) = (-(Math::GetValue(2)) * b0 + b1) * invDZ;
-
-        b0 = (F[1][0][1] - poly(0, 0, 0, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ2;
-        b1 = (FX[1][0][1] - poly(1, 0, 0, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ2;
-        b2 = (FZ[1][0][1] - poly(0, 0, 1, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ;
-        b3 = (FXZ[1][0][1] - poly(1, 0, 1, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ;
-        poly.A(2, 0, 2) = ((Real)9) * b0 - (static_cast<Real>(3)) * b1 - (static_cast<Real>(3)) * b2 + b3;
-        poly.A(3, 0, 2) = (-((Real)6) * b0 + (static_cast<Real>(3)) * b1 + (Math::GetValue(2)) * b2 - b3) * invDX;
-        poly.A(2, 0, 3) = (-((Real)6) * b0 + (Math::GetValue(2)) * b1 + (static_cast<Real>(3)) * b2 - b3) * invDZ;
-        poly.A(3, 0, 3) = (((Real)4) * b0 - (Math::GetValue(2)) * b1 - (Math::GetValue(2)) * b2 + b3) *
-                          invDX * invDZ;
-
-        // solve for A0jk
-        b0 = (FZ[0][1][0] - poly(0, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
-        b1 = (FYZ[0][1][0] - poly(0, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
-        poly.A(0, 2, 1) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(0, 3, 1) = (-(Math::GetValue(2)) * b0 + b1) * invDY;
-
-        b0 = (FY[0][0][1] - poly(0, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
-        b1 = (FYZ[0][0][1] - poly(0, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
-        poly.A(0, 1, 2) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(0, 1, 3) = (-(Math::GetValue(2)) * b0 + b1) * invDZ;
-
-        b0 = (F[0][1][1] - poly(0, 0, 0, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ2;
-        b1 = (FY[0][1][1] - poly(0, 1, 0, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ2;
-        b2 = (FZ[0][1][1] - poly(0, 0, 1, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ;
-        b3 = (FYZ[0][1][1] - poly(0, 1, 1, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ;
-        poly.A(0, 2, 2) = ((Real)9) * b0 - (static_cast<Real>(3)) * b1 - (static_cast<Real>(3)) * b2 + b3;
-        poly.A(0, 3, 2) = (-((Real)6) * b0 + (static_cast<Real>(3)) * b1 + (Math::GetValue(2)) * b2 - b3) * invDY;
-        poly.A(0, 2, 3) = (-((Real)6) * b0 + (Math::GetValue(2)) * b1 + (static_cast<Real>(3)) * b2 - b3) * invDZ;
-        poly.A(0, 3, 3) = (((Real)4) * b0 - (Math::GetValue(2)) * b1 - (Math::GetValue(2)) * b2 + b3) *
-                          invDY * invDZ;
-
-        // solve for Aij1
-        b0 = (FYZ[1][0][0] - poly(0, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
-        b1 = (FXYZ[1][0][0] - poly(1, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
-        poly.A(2, 1, 1) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(3, 1, 1) = (-(Math::GetValue(2)) * b0 + b1) * invDX;
-
-        b0 = (FXZ[0][1][0] - poly(1, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
-        b1 = (FXYZ[0][1][0] - poly(1, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
-        poly.A(1, 2, 1) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(1, 3, 1) = (-(Math::GetValue(2)) * b0 + b1) * invDY;
-
-        b0 = (FZ[1][1][0] - poly(0, 0, 1, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY2;
-        b1 = (FXZ[1][1][0] - poly(1, 0, 1, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY2;
-        b2 = (FYZ[1][1][0] - poly(0, 1, 1, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY;
-        b3 = (FXYZ[1][1][0] - poly(1, 1, 1, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY;
-        poly.A(2, 2, 1) = ((Real)9) * b0 - (static_cast<Real>(3)) * b1 - (static_cast<Real>(3)) * b2 + b3;
-        poly.A(3, 2, 1) = (-((Real)6) * b0 + (static_cast<Real>(3)) * b1 + (Math::GetValue(2)) * b2 - b3) * invDX;
-        poly.A(2, 3, 1) = (-((Real)6) * b0 + (Math::GetValue(2)) * b1 + (static_cast<Real>(3)) * b2 - b3) * invDY;
-        poly.A(3, 3, 1) = (((Real)4) * b0 - (Math::GetValue(2)) * b1 - (Math::GetValue(2)) * b2 + b3) *
-                          invDX * invDY;
-
-        // solve for Ai1k
-        b0 = (FXY[0][0][1] - poly(1, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
-        b1 = (FXYZ[0][0][1] - poly(1, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
-        poly.A(1, 1, 2) = (static_cast<Real>(3)) * b0 - b1;
-        poly.A(1, 1, 3) = (-(Math::GetValue(2)) * b0 + b1) * invDZ;
-
-        b0 = (FY[1][0][1] - poly(0, 1, 0, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ2;
-        b1 = (FXY[1][0][1] - poly(1, 1, 0, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ2;
-        b2 = (FYZ[1][0][1] - poly(0, 1, 1, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ;
-        b3 = (FXYZ[1][0][1] - poly(1, 1, 1, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ;
-        poly.A(2, 1, 2) = ((Real)9) * b0 - (static_cast<Real>(3)) * b1 - (static_cast<Real>(3)) * b2 + b3;
-        poly.A(3, 1, 2) = (-((Real)6) * b0 + (static_cast<Real>(3)) * b1 + (Math::GetValue(2)) * b2 - b3) * invDX;
-        poly.A(2, 1, 3) = (-((Real)6) * b0 + (Math::GetValue(2)) * b1 + (static_cast<Real>(3)) * b2 - b3) * invDZ;
-        poly.A(3, 1, 3) = (((Real)4) * b0 - (Math::GetValue(2)) * b1 - (Math::GetValue(2)) * b2 + b3) *
-                          invDX * invDZ;
-
-        // solve for A1jk
-        b0 = (FX[0][1][1] - poly(1, 0, 0, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ2;
-        b1 = (FXY[0][1][1] - poly(1, 1, 0, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ2;
-        b2 = (FXZ[0][1][1] - poly(1, 0, 1, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ;
-        b3 = (FXYZ[0][1][1] - poly(1, 1, 1, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ;
-        poly.A(1, 2, 2) = ((Real)9) * b0 - (static_cast<Real>(3)) * b1 - (static_cast<Real>(3)) * b2 + b3;
-        poly.A(1, 3, 2) = (-((Real)6) * b0 + (static_cast<Real>(3)) * b1 + (Math::GetValue(2)) * b2 - b3) * invDY;
-        poly.A(1, 2, 3) = (-((Real)6) * b0 + (Math::GetValue(2)) * b1 + (static_cast<Real>(3)) * b2 - b3) * invDZ;
-        poly.A(1, 3, 3) = (((Real)4) * b0 - (Math::GetValue(2)) * b1 - (Math::GetValue(2)) * b2 + b3) *
-                          invDY * invDZ;
-
-        // solve for remaining Aijk with i >= 2, j >= 2, k >= 2
-        b0 = (F[1][1][1] - poly(0, 0, 0, dx, dy, dz)) * invDX2 * invDY2 * invDZ2;
-        b1 = (FX[1][1][1] - poly(1, 0, 0, dx, dy, dz)) * invDX * invDY2 * invDZ2;
-        b2 = (FY[1][1][1] - poly(0, 1, 0, dx, dy, dz)) * invDX2 * invDY * invDZ2;
-        b3 = (FZ[1][1][1] - poly(0, 0, 1, dx, dy, dz)) * invDX2 * invDY2 * invDZ;
-        b4 = (FXY[1][1][1] - poly(1, 1, 0, dx, dy, dz)) * invDX * invDY * invDZ2;
-        b5 = (FXZ[1][1][1] - poly(1, 0, 1, dx, dy, dz)) * invDX * invDY2 * invDZ;
-        b6 = (FYZ[1][1][1] - poly(0, 1, 1, dx, dy, dz)) * invDX2 * invDY * invDZ;
-        b7 = (FXYZ[1][1][1] - poly(1, 1, 1, dx, dy, dz)) * invDX * invDY * invDZ;
-        poly.A(2, 2, 2) = (static_cast<Real>(27)) * b0 - ((Real)9) * b1 - ((Real)9) * b2 - ((Real)9) * b3 + (static_cast<Real>(3)) * b4 + (static_cast<Real>(3)) * b5 + (static_cast<Real>(3)) * b6 - b7;
-        poly.A(3, 2, 2) = (((Real)-18) * b0 + ((Real)9) * b1 + ((Real)6) * b2 + ((Real)6) * b3 - (static_cast<Real>(3)) * b4 - (static_cast<Real>(3)) * b5 - (Math::GetValue(2)) * b6 + b7) * invDX;
-        poly.A(2, 3, 2) = (((Real)-18) * b0 + ((Real)6) * b1 + ((Real)9) * b2 + ((Real)6) * b3 - (static_cast<Real>(3)) * b4 - (Math::GetValue(2)) * b5 - (static_cast<Real>(3)) * b6 + b7) * invDY;
-        poly.A(2, 2, 3) = (((Real)-18) * b0 + ((Real)6) * b1 + ((Real)6) * b2 + ((Real)9) * b3 - (Math::GetValue(2)) * b4 - (static_cast<Real>(3)) * b5 - (static_cast<Real>(3)) * b6 + b7) * invDZ;
-        poly.A(3, 3, 2) = ((static_cast<Real>(12)) * b0 - ((Real)6) * b1 - ((Real)6) * b2 - ((Real)4) * b3 + (static_cast<Real>(3)) * b4 + (Math::GetValue(2)) * b5 + (Math::GetValue(2)) * b6 - b7) * invDX * invDY;
-        poly.A(3, 2, 3) = ((static_cast<Real>(12)) * b0 - ((Real)6) * b1 - ((Real)4) * b2 - ((Real)6) * b3 + (Math::GetValue(2)) * b4 + (static_cast<Real>(3)) * b5 + (Math::GetValue(2)) * b6 - b7) * invDX * invDZ;
-        poly.A(2, 3, 3) = ((static_cast<Real>(12)) * b0 - ((Real)4) * b1 - ((Real)6) * b2 - ((Real)6) * b3 + (Math::GetValue(2)) * b4 + (Math::GetValue(2)) * b5 + (static_cast<Real>(3)) * b6 - b7) * invDY * invDZ;
-        poly.A(3, 3, 3) = (((Real)-8) * b0 + ((Real)4) * b1 + ((Real)4) * b2 + ((Real)4) * b3 - (Math::GetValue(2)) * b4 - (Math::GetValue(2)) * b5 - (Math::GetValue(2)) * b6 + b7) * invDX * invDY * invDZ;
-    }
-
-    template <typename Real>
-    bool IntpAkimaUniform3<Real>::XLookup(Real x, int& xIndex, Real& dx) const
-    {
-        if (x >= mXMin)
-        {
-            if (x <= mXMax)
+            if (slope.at(2) != slope.at(3))
             {
-                for (xIndex = 0; xIndex + 1 < mXBound; ++xIndex)
-                {
-                    if (x < mXMin + mXSpacing * (xIndex + 1))
-                    {
-                        dx = x - (mXMin + mXSpacing * xIndex);
-                        return true;
-                    }
-                }
-
-                --xIndex;
-                dx = x - (mXMin + mXSpacing * xIndex);
-                return true;
+                return slope.at(1);
+            }
+            else
+            {
+                return (Math<Real>::GetRational(1, 2)) * (slope.at(1) + slope.at(2));
             }
         }
-
-        return false;
     }
-
-    template <typename Real>
-    bool IntpAkimaUniform3<Real>::YLookup(Real y, int& yIndex, Real& dy) const
+    else
     {
-        if (y >= mYMin)
+        return slope.at(1);
+    }
+}
+
+template <typename Real>
+void Mathematics::IntpAkimaUniform3<Real>::Construct(Polynomial& poly,
+                                                     const ConstructType& f,
+                                                     const ConstructType& fx,
+                                                     const ConstructType& fy,
+                                                     const ConstructType& fz,
+                                                     const ConstructType& fxy,
+                                                     const ConstructType& fxz,
+                                                     const ConstructType& fyz,
+                                                     const ConstructType& fxyz)
+{
+    auto dx = xSpacing;
+    auto dy = ySpacing;
+    auto dz = zSpacing;
+    auto invDX = (Math<Real>::GetValue(1)) / dx, invDX2 = invDX * invDX;
+    auto invDY = (Math<Real>::GetValue(1)) / dy, invDY2 = invDY * invDY;
+    auto invDZ = (Math<Real>::GetValue(1)) / dz, invDZ2 = invDZ * invDZ;
+
+    poly.A(0, 0, 0) = f.at(0).at(0).at(0);
+    poly.A(1, 0, 0) = fx.at(0).at(0).at(0);
+    poly.A(0, 1, 0) = fy.at(0).at(0).at(0);
+    poly.A(0, 0, 1) = fz.at(0).at(0).at(0);
+    poly.A(1, 1, 0) = fxy.at(0).at(0).at(0);
+    poly.A(1, 0, 1) = fxz.at(0).at(0).at(0);
+    poly.A(0, 1, 1) = fyz.at(0).at(0).at(0);
+    poly.A(1, 1, 1) = fxyz.at(0).at(0).at(0);
+
+    auto b0 = (f.at(1).at(0).at(0) - poly(0, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
+    auto b1 = (fx.at(1).at(0).at(0) - poly(1, 0, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
+    poly.A(2, 0, 0) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(3, 0, 0) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDX;
+
+    b0 = (f.at(0).at(1).at(0) - poly(0, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
+    b1 = (fy.at(0).at(1).at(0) - poly(0, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
+    poly.A(0, 2, 0) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(0, 3, 0) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDY;
+
+    b0 = (fy.at(1).at(0).at(0) - poly(0, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
+    b1 = (fxy.at(1).at(0).at(0) - poly(1, 1, 0, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
+    poly.A(2, 1, 0) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(3, 1, 0) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDX;
+
+    b0 = (fx.at(0).at(1).at(0) - poly(1, 0, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
+    b1 = (fxy.at(0).at(1).at(0) - poly(1, 1, 0, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
+    poly.A(1, 2, 0) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(1, 3, 0) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDY;
+
+    b0 = (f.at(1).at(1).at(0) - poly(0, 0, 0, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY2;
+    b1 = (fx.at(1).at(1).at(0) - poly(1, 0, 0, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY2;
+    auto b2 = (fy.at(1).at(1).at(0) - poly(0, 1, 0, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY;
+    auto b3 = (fxy.at(1).at(1).at(0) - poly(1, 1, 0, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY;
+    poly.A(2, 2, 0) = (Math<Real>::GetValue(9)) * b0 - (Math<Real>::GetValue(3)) * b1 - (Math<Real>::GetValue(3)) * b2 + b3;
+    poly.A(3, 2, 0) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(3)) * b1 + (Math<Real>::GetValue(2)) * b2 - b3) * invDX;
+    poly.A(2, 3, 0) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(2)) * b1 + (Math<Real>::GetValue(3)) * b2 - b3) * invDY;
+    poly.A(3, 3, 0) = ((Math<Real>::GetValue(4)) * b0 - (Math<Real>::GetValue(2)) * b1 - (Math<Real>::GetValue(2)) * b2 + b3) * invDX * invDY;
+
+    b0 = (f.at(0).at(0).at(1) - poly(0, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
+    b1 = (fz.at(0).at(0).at(1) - poly(0, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
+    poly.A(0, 0, 2) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(0, 0, 3) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDZ;
+
+    b0 = (fz.at(1).at(0).at(0) - poly(0, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
+    b1 = (fxz.at(1).at(0).at(0) - poly(1, 0, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
+    poly.A(2, 0, 1) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(3, 0, 1) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDX;
+
+    b0 = (fx.at(0).at(0).at(1) - poly(1, 0, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
+    b1 = (fxz.at(0).at(0).at(1) - poly(1, 0, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
+    poly.A(1, 0, 2) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(1, 0, 3) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDZ;
+
+    b0 = (f.at(1).at(0).at(1) - poly(0, 0, 0, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ2;
+    b1 = (fx.at(1).at(0).at(1) - poly(1, 0, 0, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ2;
+    b2 = (fz.at(1).at(0).at(1) - poly(0, 0, 1, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ;
+    b3 = (fxz.at(1).at(0).at(1) - poly(1, 0, 1, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ;
+    poly.A(2, 0, 2) = (Math<Real>::GetValue(9)) * b0 - (Math<Real>::GetValue(3)) * b1 - (Math<Real>::GetValue(3)) * b2 + b3;
+    poly.A(3, 0, 2) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(3)) * b1 + (Math<Real>::GetValue(2)) * b2 - b3) * invDX;
+    poly.A(2, 0, 3) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(2)) * b1 + (Math<Real>::GetValue(3)) * b2 - b3) * invDZ;
+    poly.A(3, 0, 3) = ((Math<Real>::GetValue(4)) * b0 - (Math<Real>::GetValue(2)) * b1 - (Math<Real>::GetValue(2)) * b2 + b3) * invDX * invDZ;
+
+    b0 = (fz.at(0).at(1).at(0) - poly(0, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
+    b1 = (fyz.at(0).at(1).at(0) - poly(0, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
+    poly.A(0, 2, 1) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(0, 3, 1) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDY;
+
+    b0 = (fy.at(0).at(0).at(1) - poly(0, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
+    b1 = (fyz.at(0).at(0).at(1) - poly(0, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
+    poly.A(0, 1, 2) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(0, 1, 3) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDZ;
+
+    b0 = (f.at(0).at(1).at(1) - poly(0, 0, 0, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ2;
+    b1 = (fy.at(0).at(1).at(1) - poly(0, 1, 0, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ2;
+    b2 = (fz.at(0).at(1).at(1) - poly(0, 0, 1, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ;
+    b3 = (fyz.at(0).at(1).at(1) - poly(0, 1, 1, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ;
+    poly.A(0, 2, 2) = (Math<Real>::GetValue(9)) * b0 - (Math<Real>::GetValue(3)) * b1 - (Math<Real>::GetValue(3)) * b2 + b3;
+    poly.A(0, 3, 2) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(3)) * b1 + (Math<Real>::GetValue(2)) * b2 - b3) * invDY;
+    poly.A(0, 2, 3) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(2)) * b1 + (Math<Real>::GetValue(3)) * b2 - b3) * invDZ;
+    poly.A(0, 3, 3) = ((Math<Real>::GetValue(4)) * b0 - (Math<Real>::GetValue(2)) * b1 - (Math<Real>::GetValue(2)) * b2 + b3) * invDY * invDZ;
+
+    b0 = (fyz.at(1).at(0).at(0) - poly(0, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX2;
+    b1 = (fxyz.at(1).at(0).at(0) - poly(1, 1, 1, dx, Math<Real>::GetValue(0), Math<Real>::GetValue(0))) * invDX;
+    poly.A(2, 1, 1) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(3, 1, 1) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDX;
+
+    b0 = (fxz.at(0).at(1).at(0) - poly(1, 0, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY2;
+    b1 = (fxyz.at(0).at(1).at(0) - poly(1, 1, 1, Math<Real>::GetValue(0), dy, Math<Real>::GetValue(0))) * invDY;
+    poly.A(1, 2, 1) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(1, 3, 1) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDY;
+
+    b0 = (fz.at(1).at(1).at(0) - poly(0, 0, 1, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY2;
+    b1 = (fxz.at(1).at(1).at(0) - poly(1, 0, 1, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY2;
+    b2 = (fyz.at(1).at(1).at(0) - poly(0, 1, 1, dx, dy, Math<Real>::GetValue(0))) * invDX2 * invDY;
+    b3 = (fxyz.at(1).at(1).at(0) - poly(1, 1, 1, dx, dy, Math<Real>::GetValue(0))) * invDX * invDY;
+    poly.A(2, 2, 1) = (Math<Real>::GetValue(9)) * b0 - (Math<Real>::GetValue(3)) * b1 - (Math<Real>::GetValue(3)) * b2 + b3;
+    poly.A(3, 2, 1) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(3)) * b1 + (Math<Real>::GetValue(2)) * b2 - b3) * invDX;
+    poly.A(2, 3, 1) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(2)) * b1 + (Math<Real>::GetValue(3)) * b2 - b3) * invDY;
+    poly.A(3, 3, 1) = ((Math<Real>::GetValue(4)) * b0 - (Math<Real>::GetValue(2)) * b1 - (Math<Real>::GetValue(2)) * b2 + b3) * invDX * invDY;
+
+    b0 = (fxy.at(0).at(0).at(1) - poly(1, 1, 0, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ2;
+    b1 = (fxyz.at(0).at(0).at(1) - poly(1, 1, 1, Math<Real>::GetValue(0), Math<Real>::GetValue(0), dz)) * invDZ;
+    poly.A(1, 1, 2) = (Math<Real>::GetValue(3)) * b0 - b1;
+    poly.A(1, 1, 3) = (-(Math<Real>::GetValue(2)) * b0 + b1) * invDZ;
+
+    b0 = (fy.at(1).at(0).at(1) - poly(0, 1, 0, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ2;
+    b1 = (fxy.at(1).at(0).at(1) - poly(1, 1, 0, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ2;
+    b2 = (fyz.at(1).at(0).at(1) - poly(0, 1, 1, dx, Math<Real>::GetValue(0), dz)) * invDX2 * invDZ;
+    b3 = (fxyz.at(1).at(0).at(1) - poly(1, 1, 1, dx, Math<Real>::GetValue(0), dz)) * invDX * invDZ;
+    poly.A(2, 1, 2) = (Math<Real>::GetValue(9)) * b0 - (Math<Real>::GetValue(3)) * b1 - (Math<Real>::GetValue(3)) * b2 + b3;
+    poly.A(3, 1, 2) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(3)) * b1 + (Math<Real>::GetValue(2)) * b2 - b3) * invDX;
+    poly.A(2, 1, 3) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(2)) * b1 + (Math<Real>::GetValue(3)) * b2 - b3) * invDZ;
+    poly.A(3, 1, 3) = ((Math<Real>::GetValue(4)) * b0 - (Math<Real>::GetValue(2)) * b1 - (Math<Real>::GetValue(2)) * b2 + b3) * invDX * invDZ;
+
+    b0 = (fx.at(0).at(1).at(1) - poly(1, 0, 0, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ2;
+    b1 = (fxy.at(0).at(1).at(1) - poly(1, 1, 0, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ2;
+    b2 = (fxz.at(0).at(1).at(1) - poly(1, 0, 1, Math<Real>::GetValue(0), dy, dz)) * invDY2 * invDZ;
+    b3 = (fxyz.at(0).at(1).at(1) - poly(1, 1, 1, Math<Real>::GetValue(0), dy, dz)) * invDY * invDZ;
+    poly.A(1, 2, 2) = (Math<Real>::GetValue(9)) * b0 - (Math<Real>::GetValue(3)) * b1 - (Math<Real>::GetValue(3)) * b2 + b3;
+    poly.A(1, 3, 2) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(3)) * b1 + (Math<Real>::GetValue(2)) * b2 - b3) * invDY;
+    poly.A(1, 2, 3) = (-(Math<Real>::GetValue(6)) * b0 + (Math<Real>::GetValue(2)) * b1 + (Math<Real>::GetValue(3)) * b2 - b3) * invDZ;
+    poly.A(1, 3, 3) = ((Math<Real>::GetValue(4)) * b0 - (Math<Real>::GetValue(2)) * b1 - (Math<Real>::GetValue(2)) * b2 + b3) * invDY * invDZ;
+
+    b0 = (f.at(1).at(1).at(1) - poly(0, 0, 0, dx, dy, dz)) * invDX2 * invDY2 * invDZ2;
+    b1 = (fx.at(1).at(1).at(1) - poly(1, 0, 0, dx, dy, dz)) * invDX * invDY2 * invDZ2;
+    b2 = (fy.at(1).at(1).at(1) - poly(0, 1, 0, dx, dy, dz)) * invDX2 * invDY * invDZ2;
+    b3 = (fz.at(1).at(1).at(1) - poly(0, 0, 1, dx, dy, dz)) * invDX2 * invDY2 * invDZ;
+    auto b4 = (fxy.at(1).at(1).at(1) - poly(1, 1, 0, dx, dy, dz)) * invDX * invDY * invDZ2;
+    auto b5 = (fxz.at(1).at(1).at(1) - poly(1, 0, 1, dx, dy, dz)) * invDX * invDY2 * invDZ;
+    auto b6 = (fyz.at(1).at(1).at(1) - poly(0, 1, 1, dx, dy, dz)) * invDX2 * invDY * invDZ;
+    auto b7 = (fxyz.at(1).at(1).at(1) - poly(1, 1, 1, dx, dy, dz)) * invDX * invDY * invDZ;
+    poly.A(2, 2, 2) = (Math<Real>::GetValue(27)) * b0 - (Math<Real>::GetValue(9)) * b1 - (Math<Real>::GetValue(9)) * b2 - (Math<Real>::GetValue(9)) * b3 + (Math<Real>::GetValue(3)) * b4 + (Math<Real>::GetValue(3)) * b5 + (Math<Real>::GetValue(3)) * b6 - b7;
+    poly.A(3, 2, 2) = ((Math<Real>::GetValue(-18)) * b0 + (Math<Real>::GetValue(9)) * b1 + (Math<Real>::GetValue(6)) * b2 + (Math<Real>::GetValue(6)) * b3 - (Math<Real>::GetValue(3)) * b4 - (Math<Real>::GetValue(3)) * b5 - (Math<Real>::GetValue(2)) * b6 + b7) * invDX;
+    poly.A(2, 3, 2) = ((Math<Real>::GetValue(-18)) * b0 + (Math<Real>::GetValue(6)) * b1 + (Math<Real>::GetValue(9)) * b2 + (Math<Real>::GetValue(6)) * b3 - (Math<Real>::GetValue(3)) * b4 - (Math<Real>::GetValue(2)) * b5 - (Math<Real>::GetValue(3)) * b6 + b7) * invDY;
+    poly.A(2, 2, 3) = ((Math<Real>::GetValue(-18)) * b0 + (Math<Real>::GetValue(6)) * b1 + (Math<Real>::GetValue(6)) * b2 + (Math<Real>::GetValue(9)) * b3 - (Math<Real>::GetValue(2)) * b4 - (Math<Real>::GetValue(3)) * b5 - (Math<Real>::GetValue(3)) * b6 + b7) * invDZ;
+    poly.A(3, 3, 2) = ((Math<Real>::GetValue(12)) * b0 - (Math<Real>::GetValue(6)) * b1 - (Math<Real>::GetValue(6)) * b2 - (Math<Real>::GetValue(4)) * b3 + (Math<Real>::GetValue(3)) * b4 + (Math<Real>::GetValue(2)) * b5 + (Math<Real>::GetValue(2)) * b6 - b7) * invDX * invDY;
+    poly.A(3, 2, 3) = ((Math<Real>::GetValue(12)) * b0 - (Math<Real>::GetValue(6)) * b1 - (Math<Real>::GetValue(4)) * b2 - (Math<Real>::GetValue(6)) * b3 + (Math<Real>::GetValue(2)) * b4 + (Math<Real>::GetValue(3)) * b5 + (Math<Real>::GetValue(2)) * b6 - b7) * invDX * invDZ;
+    poly.A(2, 3, 3) = ((Math<Real>::GetValue(12)) * b0 - (Math<Real>::GetValue(4)) * b1 - (Math<Real>::GetValue(6)) * b2 - (Math<Real>::GetValue(6)) * b3 + (Math<Real>::GetValue(2)) * b4 + (Math<Real>::GetValue(2)) * b5 + (Math<Real>::GetValue(3)) * b6 - b7) * invDY * invDZ;
+    poly.A(3, 3, 3) = ((Math<Real>::GetValue(-8)) * b0 + (Math<Real>::GetValue(4)) * b1 + (Math<Real>::GetValue(4)) * b2 + (Math<Real>::GetValue(4)) * b3 - (Math<Real>::GetValue(2)) * b4 - (Math<Real>::GetValue(2)) * b5 - (Math<Real>::GetValue(2)) * b6 + b7) * invDX * invDY * invDZ;
+}
+
+template <typename Real>
+bool Mathematics::IntpAkimaUniform3<Real>::XLookup(Real x, int& xIndex, Real& dx) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (x >= xMin)
+    {
+        if (x <= xMax)
         {
-            if (y <= mYMax)
+            for (xIndex = 0; xIndex + 1 < xBound; ++xIndex)
             {
-                for (yIndex = 0; yIndex + 1 < mYBound; ++yIndex)
+                if (x < xMin + xSpacing * Math<Real>::GetValue(xIndex + 1))
                 {
-                    if (y < mYMin + mYSpacing * (yIndex + 1))
-                    {
-                        dy = y - (mYMin + mYSpacing * yIndex);
-                        return true;
-                    }
-                }
-
-                --yIndex;
-                dy = y - (mYMin + mYSpacing * yIndex);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    template <typename Real>
-    bool IntpAkimaUniform3<Real>::ZLookup(Real z, int& zIndex, Real& dz) const
-    {
-        if (z >= mZMin)
-        {
-            if (z <= mZMax)
-            {
-                for (zIndex = 0; zIndex + 1 < mZBound; ++zIndex)
-                {
-                    if (z < mZMin + mZSpacing * (zIndex + 1))
-                    {
-                        dz = z - (mZMin + mZSpacing * zIndex);
-                        return true;
-                    }
-                }
-
-                --zIndex;
-                dz = z - (mZMin + mZSpacing * zIndex);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::operator()(Real x, Real y, Real z) const
-    {
-        int ix, iy, iz;
-        Real dx, dy, dz;
-
-        if (XLookup(x, ix, dx) && YLookup(y, iy, dy) && ZLookup(z, iz, dz))
-        {
-            return mPoly[iz][iy][ix](dx, dy, dz);
-        }
-
-        return Math<Real>::maxReal;
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::operator()(int xOrder, int yOrder,
-                                             int zOrder, Real x, Real y, Real z) const
-    {
-        int ix, iy, iz;
-        Real dx, dy, dz;
-
-        if (XLookup(x, ix, dx) && YLookup(y, iy, dy) && ZLookup(z, iz, dz))
-        {
-            return mPoly[iz][iy][ix](xOrder, yOrder, zOrder, dx, dy, dz);
-        }
-
-        return Math<Real>::maxReal;
-    }
-
-    // IntrpAkimaUniform3::Polynomial
-
-    template <typename Real>
-    IntpAkimaUniform3<Real>::Polynomial::Polynomial()
-    {
-        memset(&mCoeff[0][0][0], 0, 64 * sizeof(Real));
-    }
-
-    template <typename Real>
-    Real& IntpAkimaUniform3<Real>::Polynomial::A(int ix, int iy, int iz)
-    {
-        return mCoeff[ix][iy][iz];
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::Polynomial::operator()(Real x, Real y, Real z)
-        const
-    {
-        Real xPow[4] = { Math::GetValue(1), x, x * x, x * x * x };
-        Real yPow[4] = { Math::GetValue(1), y, y * y, y * y * y };
-        Real zPow[4] = { Math::GetValue(1), z, z * z, z * z * z };
-
-        Real p = Math<Real>::GetValue(0);
-        for (int iz = 0; iz <= 3; ++iz)
-        {
-            for (int iy = 0; iy <= 3; ++iy)
-            {
-                for (int ix = 0; ix <= 3; ++ix)
-                {
-                    p += mCoeff[ix][iy][iz] * xPow[ix] * yPow[iy] * zPow[iz];
-                }
-            }
-        }
-
-        return p;
-    }
-
-    template <typename Real>
-    Real IntpAkimaUniform3<Real>::Polynomial::operator()(int xOrder, int yOrder,
-                                                         int zOrder, Real x, Real y, Real z) const
-    {
-        Real xPow[4];
-        switch (xOrder)
-        {
-            case 0:
-                xPow[0] = Math::GetValue(1);
-                xPow[1] = x;
-                xPow[2] = x * x;
-                xPow[3] = x * x * x;
-                break;
-            case 1:
-                xPow[0] = Math<Real>::GetValue(0);
-                xPow[1] = Math::GetValue(1);
-                xPow[2] = (Math::GetValue(2)) * x;
-                xPow[3] = (static_cast<Real>(3)) * x * x;
-                break;
-            case 2:
-                xPow[0] = Math<Real>::GetValue(0);
-                xPow[1] = Math<Real>::GetValue(0);
-                xPow[2] = Math::GetValue(2);
-                xPow[3] = ((Real)6) * x;
-                break;
-            case 3:
-                xPow[0] = Math<Real>::GetValue(0);
-                xPow[1] = Math<Real>::GetValue(0);
-                xPow[2] = Math<Real>::GetValue(0);
-                xPow[3] = (Real)6;
-                break;
-            default:
-                return Math<Real>::GetValue(0);
-        }
-
-        Real yPow[4];
-        switch (yOrder)
-        {
-            case 0:
-                yPow[0] = Math::GetValue(1);
-                yPow[1] = y;
-                yPow[2] = y * y;
-                yPow[3] = y * y * y;
-                break;
-            case 1:
-                yPow[0] = Math<Real>::GetValue(0);
-                yPow[1] = Math::GetValue(1);
-                yPow[2] = (Math::GetValue(2)) * y;
-                yPow[3] = (static_cast<Real>(3)) * y * y;
-                break;
-            case 2:
-                yPow[0] = Math<Real>::GetValue(0);
-                yPow[1] = Math<Real>::GetValue(0);
-                yPow[2] = Math::GetValue(2);
-                yPow[3] = ((Real)6) * y;
-                break;
-            case 3:
-                yPow[0] = Math<Real>::GetValue(0);
-                yPow[1] = Math<Real>::GetValue(0);
-                yPow[2] = Math<Real>::GetValue(0);
-                yPow[3] = (Real)6;
-                break;
-            default:
-                return Math<Real>::GetValue(0);
-        }
-
-        Real zPow[4];
-        switch (zOrder)
-        {
-            case 0:
-                zPow[0] = Math::GetValue(1);
-                zPow[1] = z;
-                zPow[2] = z * z;
-                zPow[3] = z * z * z;
-                break;
-            case 1:
-                zPow[0] = Math<Real>::GetValue(0);
-                zPow[1] = Math::GetValue(1);
-                zPow[2] = (Math::GetValue(2)) * z;
-                zPow[3] = (static_cast<Real>(3)) * z * z;
-                break;
-            case 2:
-                zPow[0] = Math<Real>::GetValue(0);
-                zPow[1] = Math<Real>::GetValue(0);
-                zPow[2] = Math::GetValue(2);
-                zPow[3] = ((Real)6) * z;
-                break;
-            case 3:
-                zPow[0] = Math<Real>::GetValue(0);
-                zPow[1] = Math<Real>::GetValue(0);
-                zPow[2] = Math<Real>::GetValue(0);
-                zPow[3] = (Real)6;
-                break;
-            default:
-                return Math<Real>::GetValue(0);
-        }
-
-        Real p = Math<Real>::GetValue(0);
-
-        for (int iz = 0; iz <= 3; ++iz)
-        {
-            for (int iy = 0; iy <= 3; ++iy)
-            {
-                for (int ix = 0; ix <= 3; ++ix)
-                {
-                    p += mCoeff[ix][iy][iz] * xPow[ix] * yPow[iy] * zPow[iz];
+                    dx = x - (xMin + xSpacing * xIndex);
+                    return true;
                 }
             }
-        }
 
-        return p;
+            --xIndex;
+            dx = x - (xMin + xSpacing * xIndex);
+            return true;
+        }
     }
+
+    return false;
+}
+
+template <typename Real>
+bool Mathematics::IntpAkimaUniform3<Real>::YLookup(Real y, int& yIndex, Real& dy) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (y >= yMin)
+    {
+        if (y <= yMax)
+        {
+            for (yIndex = 0; yIndex + 1 < yBound; ++yIndex)
+            {
+                if (y < yMin + ySpacing * Math<Real>::GetValue(yIndex + 1))
+                {
+                    dy = y - (yMin + ySpacing * yIndex);
+                    return true;
+                }
+            }
+
+            --yIndex;
+            dy = y - (yMin + ySpacing * yIndex);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+template <typename Real>
+bool Mathematics::IntpAkimaUniform3<Real>::ZLookup(Real z, int& zIndex, Real& dz) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (z >= zMin)
+    {
+        if (z <= zMax)
+        {
+            for (zIndex = 0; zIndex + 1 < zBound; ++zIndex)
+            {
+                if (z < zMin + zSpacing * Math<Real>::GetValue(zIndex + 1))
+                {
+                    dz = z - (zMin + zSpacing * zIndex);
+                    return true;
+                }
+            }
+
+            --zIndex;
+            dz = z - (zMin + zSpacing * zIndex);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::operator()(Real x, Real y, Real z) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto ix = 0;
+    auto iy = 0;
+    auto iz = 0;
+    Real dx{};
+    Real dy{};
+    Real dz{};
+
+    if (XLookup(x, ix, dx) && YLookup(y, iy, dy) && ZLookup(z, iz, dz))
+    {
+        return polynomialContainer.at(iz).at(iy).at(ix)(dx, dy, dz);
+    }
+
+    return Math<Real>::maxReal;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::operator()(int xOrder, int yOrder, int zOrder, Real x, Real y, Real z) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto ix = 0;
+    auto iy = 0;
+    auto iz = 0;
+    Real dx{};
+    Real dy{};
+    Real dz{};
+
+    if (XLookup(x, ix, dx) && YLookup(y, iy, dy) && ZLookup(z, iz, dz))
+    {
+        return polynomialContainer.at(iz).at(iy).at(ix)(xOrder, yOrder, zOrder, dx, dy, dz);
+    }
+
+    return Math<Real>::maxReal;
+}
+
+// IntrpAkimaUniform3::Polynomial
+
+template <typename Real>
+Mathematics::IntpAkimaUniform3<Real>::Polynomial::Polynomial() noexcept
+    : coeff{}
+{
+}
+
+template <typename Real>
+Real& Mathematics::IntpAkimaUniform3<Real>::Polynomial::A(int ix, int iy, int iz)
+{
+    return coeff.at(ix).at(iy).at(iz);
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::Polynomial::operator()(Real x, Real y, Real z) const
+{
+    std::array<Real, 4> xPow{ Math<Real>::GetValue(1), x, x * x, x * x * x };
+    std::array<Real, 4> yPow{ Math<Real>::GetValue(1), y, y * y, y * y * y };
+    std::array<Real, 4> zPow{ Math<Real>::GetValue(1), z, z * z, z * z * z };
+
+    auto p = Math<Real>::GetValue(0);
+    for (auto iz = 0; iz <= 3; ++iz)
+    {
+        for (auto iy = 0; iy <= 3; ++iy)
+        {
+            for (auto ix = 0; ix <= 3; ++ix)
+            {
+                p += coeff.at(ix).at(iy).at(iz) * xPow.at(ix) * yPow.at(iy) * zPow.at(iz);
+            }
+        }
+    }
+
+    return p;
+}
+
+template <typename Real>
+Real Mathematics::IntpAkimaUniform3<Real>::Polynomial::operator()(int xOrder, int yOrder, int zOrder, Real x, Real y, Real z) const
+{
+    std::array<Real, 4> xPow{};
+    switch (xOrder)
+    {
+        case 0:
+            xPow.at(0) = Math<Real>::GetValue(1);
+            xPow.at(1) = x;
+            xPow.at(2) = x * x;
+            xPow.at(3) = x * x * x;
+            break;
+        case 1:
+            xPow.at(0) = Math<Real>::GetValue(0);
+            xPow.at(1) = Math<Real>::GetValue(1);
+            xPow.at(2) = (Math<Real>::GetValue(2)) * x;
+            xPow.at(3) = (Math<Real>::GetValue(3)) * x * x;
+            break;
+        case 2:
+            xPow.at(0) = Math<Real>::GetValue(0);
+            xPow.at(1) = Math<Real>::GetValue(0);
+            xPow.at(2) = Math<Real>::GetValue(2);
+            xPow.at(3) = (Math<Real>::GetValue(6)) * x;
+            break;
+        case 3:
+            xPow.at(0) = Math<Real>::GetValue(0);
+            xPow.at(1) = Math<Real>::GetValue(0);
+            xPow.at(2) = Math<Real>::GetValue(0);
+            xPow.at(3) = Math<Real>::GetValue(6);
+            break;
+        default:
+            return Math<Real>::GetValue(0);
+    }
+
+    std::array<Real, 4> yPow{};
+    switch (yOrder)
+    {
+        case 0:
+            yPow.at(0) = Math<Real>::GetValue(1);
+            yPow.at(1) = y;
+            yPow.at(2) = y * y;
+            yPow.at(3) = y * y * y;
+            break;
+        case 1:
+            yPow.at(0) = Math<Real>::GetValue(0);
+            yPow.at(1) = Math<Real>::GetValue(1);
+            yPow.at(2) = (Math<Real>::GetValue(2)) * y;
+            yPow.at(3) = (Math<Real>::GetValue(3)) * y * y;
+            break;
+        case 2:
+            yPow.at(0) = Math<Real>::GetValue(0);
+            yPow.at(1) = Math<Real>::GetValue(0);
+            yPow.at(2) = Math<Real>::GetValue(2);
+            yPow.at(3) = (Math<Real>::GetValue(6)) * y;
+            break;
+        case 3:
+            yPow.at(0) = Math<Real>::GetValue(0);
+            yPow.at(1) = Math<Real>::GetValue(0);
+            yPow.at(2) = Math<Real>::GetValue(0);
+            yPow.at(3) = Math<Real>::GetValue(6);
+            break;
+        default:
+            return Math<Real>::GetValue(0);
+    }
+
+    std::array<Real, 4> zPow{};
+    switch (zOrder)
+    {
+        case 0:
+            zPow.at(0) = Math<Real>::GetValue(1);
+            zPow.at(1) = z;
+            zPow.at(2) = z * z;
+            zPow.at(3) = z * z * z;
+            break;
+        case 1:
+            zPow.at(0) = Math<Real>::GetValue(0);
+            zPow.at(1) = Math<Real>::GetValue(1);
+            zPow.at(2) = (Math<Real>::GetValue(2)) * z;
+            zPow.at(3) = (Math<Real>::GetValue(3)) * z * z;
+            break;
+        case 2:
+            zPow.at(0) = Math<Real>::GetValue(0);
+            zPow.at(1) = Math<Real>::GetValue(0);
+            zPow.at(2) = Math<Real>::GetValue(2);
+            zPow.at(3) = (Math<Real>::GetValue(6)) * z;
+            break;
+        case 3:
+            zPow.at(0) = Math<Real>::GetValue(0);
+            zPow.at(1) = Math<Real>::GetValue(0);
+            zPow.at(2) = Math<Real>::GetValue(0);
+            zPow.at(3) = Math<Real>::GetValue(6);
+            break;
+        default:
+            return Math<Real>::GetValue(0);
+    }
+
+    auto p = Math<Real>::GetValue(0);
+
+    for (auto iz = 0; iz <= 3; ++iz)
+    {
+        for (auto iy = 0; iy <= 3; ++iy)
+        {
+            for (auto ix = 0; ix <= 3; ++ix)
+            {
+                p += coeff.at(ix).at(iy).at(iz) * xPow.at(ix) * yPow.at(iy) * zPow.at(iz);
+            }
+        }
+    }
+
+    return p;
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_AKIMA_UNIFORM3_DETAIL_H

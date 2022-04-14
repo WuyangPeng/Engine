@@ -6,13 +6,12 @@
 
 #include "Example/Rendering/RenderingExample/RenderingExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-RenderingExample::Placeholder
-	::Placeholder() 
+RenderingExample::Placeholder::Placeholder() noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(RenderingExample, Placeholder)

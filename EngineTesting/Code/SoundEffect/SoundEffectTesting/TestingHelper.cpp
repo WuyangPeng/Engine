@@ -1,99 +1,100 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/09/02 10:57)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/SoundEffectClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(SoundEffect, TestingHelper, "“Ù–ßø‚")
+using namespace std::literals;
+
+SoundEffect::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "“Ù–ßø‚"s }
+{
+    InitSuite();
+
+    SOUND_EFFECT_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(SoundEffect, TestingHelper)
 
 // private
-void SoundEffect::TestingHelper ::AddSuites()
+void SoundEffect::TestingHelper ::InitSuite()
 {
-	AddMacroSuite();
-	AddConfigurationSuite();
-	AddInterfaceSuite();
-	AddCsynUtilSuite();
-	AddDirectSoundSuite();
-	AddOggSuite();
-	AddOpenALSuite();
-	AddVorbisSuite();
-	AddFreeAlutSuite();
+    AddMacroSuite();
+    AddConfigurationSuite();
+    AddInterfaceSuite();
+    AddCsynUtilSuite();
+    AddDirectSoundSuite();
+    AddOggSuite();
+    AddOpenALSuite();
+    AddVorbisSuite();
+    AddFreeAlutSuite();
 }
 
-void SoundEffect::TestingHelper
-	::AddMacroSuite()
+void SoundEffect::TestingHelper ::AddMacroSuite()
 {
-	ADD_TEST_BEGIN(macroSuite, "∫Í");
+    auto macroSuite = GenerateSuite("∫Í");
 
-	ADD_TEST_END(macroSuite);
+    AddSuite(macroSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddConfigurationSuite()
+void SoundEffect::TestingHelper ::AddConfigurationSuite()
 {
-	ADD_TEST_BEGIN(configurationSuite, "≈‰÷√");
+    auto configurationSuite = GenerateSuite("≈‰÷√");
 
-	ADD_TEST_END(configurationSuite);
+    AddSuite(configurationSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddInterfaceSuite()
+void SoundEffect::TestingHelper ::AddInterfaceSuite()
 {
-	ADD_TEST_BEGIN(interfaceSuite, "Ω”ø⁄");
+    auto interfaceSuite = GenerateSuite("Ω”ø⁄");
 
-	ADD_TEST_END(interfaceSuite);
+    AddSuite(interfaceSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddCsynUtilSuite()
+void SoundEffect::TestingHelper ::AddCsynUtilSuite()
 {
-	ADD_TEST_BEGIN(csynUtilSuite, "CsynUtil");
+    auto csynUtilSuite = GenerateSuite("CsynUtil");
 
-	ADD_TEST_END(csynUtilSuite);
+    AddSuite(csynUtilSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddDirectSoundSuite()
+void SoundEffect::TestingHelper ::AddDirectSoundSuite()
 {
-	ADD_TEST_BEGIN(directSoundSuite, "DirectSound");
+    auto directSoundSuite = GenerateSuite("DirectSound");
 
-	ADD_TEST_END(directSoundSuite);
+    AddSuite(directSoundSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddOggSuite()
+void SoundEffect::TestingHelper ::AddOggSuite()
 {
-	ADD_TEST_BEGIN(oggSuite, "Ogg");
+    auto oggSuite = GenerateSuite("Ogg");
 
-	ADD_TEST_END(oggSuite);
+    AddSuite(oggSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddOpenALSuite()
+void SoundEffect::TestingHelper ::AddOpenALSuite()
 {
-	ADD_TEST_BEGIN(openALSuite, "OpenAL");
+    auto openALSuite = GenerateSuite("OpenAL");
 
-	ADD_TEST_END(openALSuite);
+    AddSuite(openALSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddVorbisSuite()
+void SoundEffect::TestingHelper ::AddVorbisSuite()
 {
-	ADD_TEST_BEGIN(vorbisSuite, "Vorbis");
+    auto vorbisSuite = GenerateSuite("Vorbis");
 
-	ADD_TEST_END(vorbisSuite);
+    AddSuite(vorbisSuite);
 }
 
-void SoundEffect::TestingHelper
-	::AddFreeAlutSuite()
+void SoundEffect::TestingHelper ::AddFreeAlutSuite()
 {
-	ADD_TEST_BEGIN(freeAlutSuite, "FreeAlut");
+    auto freeAlutSuite = GenerateSuite("FreeAlut");
 
-	ADD_TEST_END(freeAlutSuite);
+    AddSuite(freeAlutSuite);
 }
-

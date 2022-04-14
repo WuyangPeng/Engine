@@ -1,17 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 16:15)
 
 #ifndef MATHEMATICS_MESHES_BASIC_BESH_EDGE_H
 #define MATHEMATICS_MESHES_BASIC_BESH_EDGE_H
 
-#include "System/Helper/PragmaWarning.h"
 #include "Mathematics/MathematicsDll.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+
+#include <array>
+
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE BasicMeshEdge
@@ -22,26 +24,19 @@ namespace Mathematics
     public:
         BasicMeshEdge() noexcept;
 
-        BasicMeshEdge(const BasicMeshEdge& rhs) noexcept;
-        BasicMeshEdge& operator=(const BasicMeshEdge& rhs) noexcept;
-
-        ~BasicMeshEdge() noexcept = default;
-        BasicMeshEdge(BasicMeshEdge&& rhs) = default;
-        BasicMeshEdge& operator=(BasicMeshEdge&& rhs) = default;
-
         CLASS_INVARIANT_DECLARE;
 
-        int GetVertex(int index) const;
+        NODISCARD int GetVertex(int index) const;
 
-        int GetTriangle(int index) const;
+        NODISCARD int GetTriangle(int index) const;
 
         void SetVertex(int index, int vertex);
         void SetTriangle(int index, int triangle0);
 
     private:
-        int m_Vertex[2];
-        int triangle[2];
+        std::array<int, 3> vertices;
+        std::array<int, 3> triangle;
     };
 }
-#include STSTEM_WARNING_POP
+
 #endif  // MATHEMATICS_MESHES_BASIC_BESH_EDGE_H

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/19 12:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 14:27)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_H
 #define RENDERING_DATA_TYPES_COLOUR_H
@@ -13,13 +13,14 @@
 #include "Rendering/RenderingDll.h"
 
 #include "ColourDefaultTraits.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 
 #include <array>
 #include <iosfwd>
 #include <type_traits>
 
-// 颜色类会将值截断为[sm_MinValue,sm_MaxValue]，
+// 颜色类会将值截断为[minValue,maxValue]，
 // 如果要求颜色类的平均值，先将Clamp值设置为false，然后再进行数值运算，之后将Clamp值重新设置为true。
 namespace Rendering
 {
@@ -32,17 +33,17 @@ namespace Rendering
         using ClassType = Colour<T>;
         using ValueType = T;
 
-        static constexpr auto sm_ArraySize = 4;
-        using ArrayType = std::array<T, sm_ArraySize>;
+        static constexpr auto arraySize = 4;
+        using ArrayType = std::array<T, arraySize>;
 
     public:
         constexpr Colour() noexcept
-            : Colour{ sm_MinValue, sm_MinValue, sm_MinValue, sm_MaxValue }
+            : Colour{ minValue, minValue, minValue, maxValue }
         {
         }
 
-        constexpr Colour(T red, T green, T blue, T alpha = sm_MaxValue) noexcept
-            : m_Red{ red }, m_Green{ green }, m_Blue{ blue }, m_Alpha{ alpha }, m_IsClamp{ true }
+        constexpr Colour(T red, T green, T blue, T alpha = maxValue) noexcept
+            : red{ red }, green{ green }, blue{ blue }, alpha{ alpha }, isClamp{ true }
         {
             Standardization();
         }
@@ -55,20 +56,20 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetClamp(bool isClamp) noexcept;
-        [[nodiscard]] bool IsClamp() const noexcept;
+        void SetClamp(bool newIsClamp) noexcept;
+        NODISCARD bool IsClamp() const noexcept;
 
-        [[nodiscard]] T GetRed() const noexcept;
-        [[nodiscard]] T GetGreen() const noexcept;
-        [[nodiscard]] T GetBlue() const noexcept;
-        [[nodiscard]] T GetAlpha() const noexcept;
-        [[nodiscard]] const ArrayType GetPoint() const noexcept;
+        NODISCARD T GetRed() const noexcept;
+        NODISCARD T GetGreen() const noexcept;
+        NODISCARD T GetBlue() const noexcept;
+        NODISCARD T GetAlpha() const noexcept;
+        NODISCARD ArrayType GetPoint() const noexcept;
 
-        void SetColour(T red, T green, T blue, T alpha = sm_MaxValue) noexcept;
-        void SetRed(T red) noexcept;
-        void SetGreen(T green) noexcept;
-        void SetBlue(T blue) noexcept;
-        void SetAlpha(T alpha) noexcept;
+        void SetColour(T newRed, T newGreen, T newBlue, T newAlpha = maxValue) noexcept;
+        void SetRed(T newRed) noexcept;
+        void SetGreen(T newGreen) noexcept;
+        void SetBlue(T newBlue) noexcept;
+        void SetAlpha(T newAlpha) noexcept;
 
         Colour& operator+=(const Colour& rhs) noexcept;
         Colour& operator-=(const Colour& rhs) noexcept;
@@ -80,12 +81,12 @@ namespace Rendering
         Colour& operator/=(RhsType rhs);
 
     private:
-        static constexpr T Clamp(T colour) noexcept
+        NODISCARD static constexpr T Clamp(T colour) noexcept
         {
-            if (colour < sm_MinValue)
-                return sm_MinValue;
-            else if (sm_MaxValue < colour)
-                return sm_MaxValue;
+            if (colour < minValue)
+                return minValue;
+            else if (maxValue < colour)
+                return maxValue;
             else
                 return colour;
         }
@@ -100,46 +101,47 @@ namespace Rendering
 
         constexpr void StandardizationRed() noexcept
         {
-            if (m_IsClamp)
+            if (isClamp)
             {
-                m_Red = Clamp(m_Red);
+                red = Clamp(red);
             }
         }
 
         constexpr void StandardizationGreen()
         {
-            if (m_IsClamp)
+            if (isClamp)
             {
-                m_Green = Clamp(m_Green);
+                green = Clamp(green);
             }
         }
 
         constexpr void StandardizationBlue()
         {
-            if (m_IsClamp)
+            if (isClamp)
             {
-                m_Blue = Clamp(m_Blue);
+                blue = Clamp(blue);
             }
         }
 
         constexpr void StandardizationAlpha()
         {
-            if (m_IsClamp)
+            if (isClamp)
             {
-                m_Alpha = Clamp(m_Alpha);
+                alpha = Clamp(alpha);
             }
         }
 
         template <typename RhsType>
-        static T ConvertingIntegralToFloatingPoint(RhsType rhs);
+        NODISCARD static T ConvertingIntegralToFloatingPoint(RhsType rhs);
 
         template <typename RhsType>
-        static T ConvertingFloatingPointToIntegral(RhsType rhs);
+        NODISCARD static T ConvertingFloatingPointToIntegral(RhsType rhs);
 
         void InitColour(T red, T green, T blue, T alpha) noexcept;
 
         template <typename RhsType, bool TIsFloatingPoint, bool RhsIsFloatingPoint>
-        void ConvertingColourFormat(const Colour<RhsType>& colour, const std::integral_constant<bool, TIsFloatingPoint>&,
+        void ConvertingColourFormat(const Colour<RhsType>& colour,
+                                    const std::integral_constant<bool, TIsFloatingPoint>&,
                                     const std::integral_constant<bool, RhsIsFloatingPoint>&);
 
         template <typename RhsType>
@@ -155,28 +157,28 @@ namespace Rendering
         void Divide(RhsType rhs, const std::false_type&);
 
     private:
-        static constexpr auto sm_MinValue = static_cast<T>(ColourDefaultTraits<T>::sm_MinValue);
-        static constexpr auto sm_MaxValue = static_cast<T>(ColourDefaultTraits<T>::sm_MaxValue);
+        static constexpr auto minValue = static_cast<T>(ColourDefaultTraits<T>::minValue);
+        static constexpr auto maxValue = static_cast<T>(ColourDefaultTraits<T>::maxValue);
 
-        T m_Red{};
-        T m_Green{};
-        T m_Blue{};
-        T m_Alpha{};
-        bool m_IsClamp{ true };
+        T red{};
+        T green{};
+        T blue{};
+        T alpha{};
+        bool isClamp{ true };
     };
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const Colour<T>& lhs, const Colour<T>& rhs, T epsilon) noexcept;
+    NODISCARD bool Approximate(const Colour<T>& lhs, const Colour<T>& rhs, T epsilon) noexcept;
 
     template <typename T>
-    [[nodiscard]] bool operator==(const Colour<T>& lhs, const Colour<T>& rhs) noexcept;
+    NODISCARD bool operator==(const Colour<T>& lhs, const Colour<T>& rhs) noexcept;
 
     template <typename LhsType, typename RhsType>
-    [[nodiscard]] const Colour<LhsType> operator*(const Colour<LhsType>& lhs, RhsType rhs);
+    NODISCARD const Colour<LhsType> operator*(const Colour<LhsType>& lhs, RhsType rhs);
     template <typename LhsType, typename RhsType>
-    [[nodiscard]] const Colour<RhsType> operator*(LhsType lhs, const Colour<RhsType>& rhs);
+    NODISCARD const Colour<RhsType> operator*(LhsType lhs, const Colour<RhsType>& rhs);
     template <typename LhsType, typename RhsType>
-    [[nodiscard]] const Colour<LhsType> operator/(const Colour<LhsType>& lhs, RhsType rhs);
+    NODISCARD const Colour<LhsType> operator/(const Colour<LhsType>& lhs, RhsType rhs);
 
     template <typename T>
     std::ostream& operator<<(std::ostream& os, const Colour<T>& colour);

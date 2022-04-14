@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 09:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/30 18:14)
 
 #ifndef RENDERING_RESOURCES_BUFFER_PARAMETER_H
 #define RENDERING_RESOURCES_BUFFER_PARAMETER_H
@@ -11,28 +14,28 @@
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE BufferParameter
-	{
-	public:
-		using ClassType = BufferParameter;
+    class RENDERING_HIDDEN_DECLARE BufferParameter
+    {
+    public:
+        using ClassType = BufferParameter;
 
-	public:	
-		BufferParameter() noexcept;
-            BufferParameter(int offset, int componentSize, int numComponents) noexcept;
+    public:
+        BufferParameter() noexcept;
+        BufferParameter(int offset, int componentSize, int numComponents) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
-		
-		void Set(int offset, int componentSize, int numComponents) noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-		int GetOffset() const noexcept;
-                int GetComponentSize() const noexcept;
-                int GetNumComponents() const noexcept;
-		
-	private:
-		int m_Offset;
-		int m_ComponentSize;
-		int m_NumComponents;
-	};
+        void Set(int aOffset, int aComponentSize, int aNumComponents) noexcept;
+
+        NODISCARD int GetOffset() const noexcept;
+        NODISCARD int GetComponentSize() const noexcept;
+        NODISCARD int GetNumComponents() const noexcept;
+
+    private:
+        int offset;
+        int componentSize;
+        int numComponents;
+    };
 }
 
-#endif // RENDERING_RESOURCES_BUFFER_PARAMETER_H
+#endif  // RENDERING_RESOURCES_BUFFER_PARAMETER_H

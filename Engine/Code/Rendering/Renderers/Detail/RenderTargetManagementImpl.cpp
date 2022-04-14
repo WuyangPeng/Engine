@@ -87,7 +87,7 @@ void Rendering::RenderTargetManagementImpl
 }
 
 Rendering::ConstTexture2DSharedPtr  Rendering::RenderTargetManagementImpl
-     ::ReadColor(int index,RenderTargetConstPtr renderTarget)
+::ReadColor(int index,RenderTargetConstPtr renderTarget)
 {
   	RENDERING_CLASS_IS_VALID_1;
     

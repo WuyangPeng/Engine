@@ -94,14 +94,14 @@ void Rendering::BlendTransformControllerImpl
         m_GeometricScale = source.ReadBool();
 }
 
-bool Rendering::BlendTransformControllerImpl ::IsGeometricRotation() const noexcept
+bool Rendering::BlendTransformControllerImpl::IsGeometricRotation() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_GeometricRotation;
 }
 
-bool Rendering::BlendTransformControllerImpl ::IsGeometricScale() const noexcept
+bool Rendering::BlendTransformControllerImpl::IsGeometricScale() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -200,35 +200,35 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::BlendTransformControlle
 	return firstObjects;
 }
 
-const Rendering::ConstTransformControllerSharedPtr Rendering::BlendTransformControllerImpl ::GetFirstController() const noexcept
+const Rendering::ConstTransformControllerSharedPtr Rendering::BlendTransformControllerImpl::GetFirstController() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_FirstController;
 }
 
-bool Rendering::BlendTransformControllerImpl ::IsRotationScaleMatrices() const noexcept
+bool Rendering::BlendTransformControllerImpl::IsRotationScaleMatrices() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_RotationScaleMatrices;
 }
 
-const Rendering::ConstTransformControllerSharedPtr Rendering::BlendTransformControllerImpl ::GetSecondController() const noexcept
+const Rendering::ConstTransformControllerSharedPtr Rendering::BlendTransformControllerImpl::GetSecondController() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
 	return m_SecondController;
 }
 
-void Rendering::BlendTransformControllerImpl ::SetWeight(float weight) noexcept
+void Rendering::BlendTransformControllerImpl::SetWeight(float weight) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_Weight = weight;
 }
 
-float Rendering::BlendTransformControllerImpl ::GetWeight() const noexcept
+float Rendering::BlendTransformControllerImpl::GetWeight() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

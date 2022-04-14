@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 16:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 11:20)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_BOX3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_BOX3_DETAIL_H
@@ -22,26 +25,32 @@ Mathematics::ContBox3<Real>::ContBox3() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::ContBox3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
+typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContAlignedBox(const Points& points)
 {
     const auto aabb = Vector3Tools<Real>::ComputeExtremes(points);
     auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
     return Box3{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector3::GetUnitX(), Vector3::GetUnitY(), Vector3::GetUnitZ(),
-                 halfDiagonal[0], halfDiagonal[1], halfDiagonal[2] };
+                 Vector3::GetUnitX(),
+                 Vector3::GetUnitY(),
+                 Vector3::GetUnitZ(),
+                 halfDiagonal[0],
+                 halfDiagonal[1],
+                 halfDiagonal[2] };
 }
 
 template <typename Real>
-typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrientedBox(const Points& points)
+typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::ContOrientedBox(const Points& points)
 {
     const GaussPointsFit3<Real> gaussPointsFit3{ points };
     const auto box = gaussPointsFit3.GetBox3();
@@ -52,9 +61,9 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::Co
     // 然后包围盒中心被调整为
     //   C' = C + 0.5 * (min(y0) + max(y0)) * U0 + 0.5 * (min(y1) + max(y1)) * U1 +
     //        0.5 * (min(y2) + max(y2)) * U2
-    std::vector<Real> firstDotCollection;
-    std::vector<Real> secondDotCollection;
-    std::vector<Real> thirdDotCollection;
+    std::vector<Real> firstDotCollection{};
+    std::vector<Real> secondDotCollection{};
+    std::vector<Real> thirdDotCollection{};
     firstDotCollection.reserve(points.size());
     secondDotCollection.reserve(points.size());
     thirdDotCollection.reserve(points.size());
@@ -114,7 +123,7 @@ bool Mathematics::ContBox3<Real>::InBox(const Vector3& point, const Box3& box)
 }
 
 template <typename Real>
-typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBoxes(const Box3& lhs, const Box3& rhs)
+typename Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::MergeBoxes(const Box3& lhs, const Box3& rhs)
 {
     // 在包围盒中心的第一个猜想。输入包围盒顶点投影到确定的平均包围盒的轴，
     // 此值将在后面进行更新。
@@ -156,9 +165,9 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::Me
 
     lhsVertices.insert(lhsVertices.end(), rhsVertices.begin(), rhsVertices.end());
 
-    std::vector<Real> firstDotCollection;
-    std::vector<Real> secondDotCollection;
-    std::vector<Real> thirdDotCollection;
+    std::vector<Real> firstDotCollection{};
+    std::vector<Real> secondDotCollection{};
+    std::vector<Real> thirdDotCollection{};
     firstDotCollection.reserve(lhsVertices.size());
     secondDotCollection.reserve(lhsVertices.size());
     thirdDotCollection.reserve(lhsVertices.size());
@@ -168,13 +177,13 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::Me
         auto diff = point - center;
 
         auto firstDot = Vector3Tools<Real>::DotProduct(diff, sumRotationColumn.at(0));
-        firstDotCollection.push_back(firstDot);
+        firstDotCollection.emplace_back(firstDot);
 
         auto secondDot = Vector3Tools<Real>::DotProduct(diff, sumRotationColumn.at(1));
-        secondDotCollection.push_back(secondDot);
+        secondDotCollection.emplace_back(secondDot);
 
         auto thirdDot = Vector3Tools<Real>::DotProduct(diff, sumRotationColumn.at(2));
-        thirdDotCollection.push_back(thirdDot);
+        thirdDotCollection.emplace_back(thirdDot);
     }
 
     const auto firstBoundary = std::minmax_element(firstDotCollection.begin(), firstDotCollection.end());

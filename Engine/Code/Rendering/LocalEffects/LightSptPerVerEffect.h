@@ -27,14 +27,13 @@ namespace Rendering
     public:
         // Construction and destruction.
         LightSptPerVerEffect();
- 
 
         // Create an instance of the effect with unique parameters.
         VisualEffectInstance* CreateInstance(Light* light, Material* material) const;
 
         // Convenience for creating an instance.  The application does not have to
         // create the effect explicitly in order to create an instance from it.
-        static VisualEffectInstance* CreateUniqueInstance(Light* light, Material* material);
+        static VisualEffectInstance* CreateUniqueInstance(Light* light, Material* material) noexcept;
 
     private:
         static int msDx9VRegisters[14];
@@ -47,7 +46,7 @@ namespace Rendering
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(LightSptPerVerEffect);
-    CORE_TOOLS_SHARED_PTR_DECLARE( LightSptPerVerEffect);
+    CORE_TOOLS_SHARED_PTR_DECLARE(LightSptPerVerEffect);
 #include STSTEM_WARNING_POP
 }
 

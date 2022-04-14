@@ -24,8 +24,18 @@ namespace CoreTools
         using ObjectType = T;
         using ObjectSharedPtr = std::shared_ptr<T>;
 
+        ObjectAssociated() noexcept
+            : object{ nullptr }, associated{ 0 }
+        {
+        }
+
         ObjectAssociated(const ObjectSharedPtr& object, uint64_t associated) noexcept
             : object{ object }, associated{ associated }
+        {
+        }
+
+        explicit ObjectAssociated(const ObjectSharedPtr& object) noexcept
+            : object{ object }, associated{ 0 }
         {
         }
 

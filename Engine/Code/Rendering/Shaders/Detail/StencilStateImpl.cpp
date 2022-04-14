@@ -32,7 +32,7 @@ Rendering::StencilStateImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StencilStateImpl)
 
-void Rendering::StencilStateImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::StencilStateImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

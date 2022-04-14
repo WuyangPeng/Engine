@@ -1,14 +1,14 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 23:26)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_H
 #define MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_H
-
-// Linear interpolation of a network of triangles whose vertices are of the
-// form (x,y,z,f(x,y,z)).
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -16,30 +16,23 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpLinearNonuniform3
-	{
-	public:
-		// Construction and destruction.  If you want IntpLinearNonuniform3 to
-		// delete the input array during destruction, set owner to 'true'.
-		// Otherwise, you own the array and must delete it yourself.
-		IntpLinearNonuniform3(const Delaunay3<Real>& DT, Real* F, bool owner);
-		~IntpLinearNonuniform3();
+    template <typename Real>
+    class IntpLinearNonuniform3
+    {
+    public:
+        using ClassType = IntpLinearNonuniform3<Real>;
 
-		// Linear interpolation.  The return value is 'true' if and only if the
-		// input point is in the convex hull of the input vertices, in which case
-		// the interpolation is valid.
-		bool Evaluate(const Vector3<Real>& P, Real& F);
+    public:
+        IntpLinearNonuniform3(const Delaunay3<Real>& dt, const std::vector<Real>& f);
 
-	private:
-		const Delaunay3<Real>* mDT;
-		Real* mF;
-		bool mOwner;
-	};
+        CLASS_INVARIANT_DECLARE;
 
-	using IntpLinearNonuniform3f = IntpLinearNonuniform3<float>;
-	using IntpLinearNonuniform3d = IntpLinearNonuniform3<double>;
+        NODISCARD bool Evaluate(const Vector3<Real>& p, Real& result);
 
+    private:
+        Delaunay3<Real> dt;
+        std::vector<Real> f;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_H

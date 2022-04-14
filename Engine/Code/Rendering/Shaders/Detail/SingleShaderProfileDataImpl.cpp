@@ -20,7 +20,7 @@ using std::string;
 
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-Rendering::SingleShaderProfileDataImpl ::SingleShaderProfileDataImpl(int numConstants, int numSamplers)
+Rendering::SingleShaderProfileDataImpl::SingleShaderProfileDataImpl(int numConstants, int numSamplers)
     : m_BaseRegister(numConstants), m_TextureUnit(numSamplers), m_Program{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -28,7 +28,7 @@ Rendering::SingleShaderProfileDataImpl ::SingleShaderProfileDataImpl(int numCons
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderProfileDataImpl)
 
-void Rendering::SingleShaderProfileDataImpl ::SetBaseRegister(int index, int baseRegister)
+void Rendering::SingleShaderProfileDataImpl::SetBaseRegister(int index, int baseRegister)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_BaseRegister.size()), "Ë÷Òý´íÎó");
@@ -36,7 +36,7 @@ void Rendering::SingleShaderProfileDataImpl ::SetBaseRegister(int index, int bas
     m_BaseRegister[index] = baseRegister;
 }
 
-void Rendering::SingleShaderProfileDataImpl ::SetTextureUnit(int index, int textureUnit)
+void Rendering::SingleShaderProfileDataImpl::SetTextureUnit(int index, int textureUnit)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_TextureUnit.size()), "Ë÷Òý´íÎó");
@@ -44,14 +44,14 @@ void Rendering::SingleShaderProfileDataImpl ::SetTextureUnit(int index, int text
     m_TextureUnit[index] = textureUnit;
 }
 
-void Rendering::SingleShaderProfileDataImpl ::SetProgram(const string& program)
+void Rendering::SingleShaderProfileDataImpl::SetProgram(const string& program)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Program = program;
 }
 
-int Rendering::SingleShaderProfileDataImpl ::GetBaseRegister(int index) const
+int Rendering::SingleShaderProfileDataImpl::GetBaseRegister(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_BaseRegister.size()), "Ë÷Òý´íÎó");
@@ -59,7 +59,7 @@ int Rendering::SingleShaderProfileDataImpl ::GetBaseRegister(int index) const
     return m_BaseRegister[index];
 }
 
-int Rendering::SingleShaderProfileDataImpl ::GetTextureUnit(int index) const
+int Rendering::SingleShaderProfileDataImpl::GetTextureUnit(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_TextureUnit.size()), "Ë÷Òý´íÎó");
@@ -67,28 +67,28 @@ int Rendering::SingleShaderProfileDataImpl ::GetTextureUnit(int index) const
     return m_TextureUnit[index];
 }
 
-const std::string Rendering::SingleShaderProfileDataImpl ::GetProgram() const
+const std::string Rendering::SingleShaderProfileDataImpl::GetProgram() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_Program;
 }
 
-int Rendering::SingleShaderProfileDataImpl ::GetBaseRegisterSize() const
+int Rendering::SingleShaderProfileDataImpl::GetBaseRegisterSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_BaseRegister.size());
 }
 
-int Rendering::SingleShaderProfileDataImpl ::GetTextureUnitSize() const
+int Rendering::SingleShaderProfileDataImpl::GetTextureUnitSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_TextureUnit.size());
 }
 
-void Rendering::SingleShaderProfileDataImpl ::ResetData(int numConstants, int numSamplers)
+void Rendering::SingleShaderProfileDataImpl::ResetData(int numConstants, int numSamplers)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -96,7 +96,7 @@ void Rendering::SingleShaderProfileDataImpl ::ResetData(int numConstants, int nu
     m_TextureUnit.resize(numSamplers);
 }
 
-void Rendering::SingleShaderProfileDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::SingleShaderProfileDataImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -105,7 +105,7 @@ void Rendering::SingleShaderProfileDataImpl ::Load(CoreTools::BufferSource& sour
     m_Program = source.ReadString();
 }
 
-void Rendering::SingleShaderProfileDataImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::SingleShaderProfileDataImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -114,7 +114,7 @@ void Rendering::SingleShaderProfileDataImpl ::Save(CoreTools::BufferTarget& targ
     target.Write(m_Program);
 }
 
-int Rendering::SingleShaderProfileDataImpl ::GetStreamingSize() const
+int Rendering::SingleShaderProfileDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

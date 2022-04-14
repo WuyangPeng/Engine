@@ -1,58 +1,60 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 13:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/24 21:49)
 
 #ifndef MATHEMATICS_MISCELLANEOUS_PERS_PPROJ_ELLIPSOID_DETAIL_H
 #define MATHEMATICS_MISCELLANEOUS_PERS_PPROJ_ELLIPSOID_DETAIL_H
 
 #include "PerspProjEllipsoid.h"
+#include "Mathematics/Objects2D/Ellipse2Detail.h"
+#include "Mathematics/Objects3D/Ellipsoid3Detail.h"
+#include "Mathematics/Objects3D/Plane3Detail.h"
 
-namespace Mathematics
+template <typename Real>
+void Mathematics::PerspProjEllipsoid<Real>::PerspectiveProjectEllipsoid(const Ellipsoid3<Real>& ellipsoid,
+                                                                        const Vector3<Real>& eye,
+                                                                        const Plane3<Real>& plane,
+                                                                        const Vector3<Real>& u,
+                                                                        const Vector3<Real>& v,
+                                                                        Vector3<Real>& p,
+                                                                        Ellipse2<Real>& ellipse)
 {
+    auto ellipsoid3Coefficients = ellipsoid.ToCoefficients();
+    const auto a = ellipsoid3Coefficients.GetMatrix();
+    const auto b = ellipsoid3Coefficients.GetVector();
+    const auto c = ellipsoid3Coefficients.GetConstants();
 
-	template <typename Real>
-	void PerspectiveProjectEllipsoid(const Ellipsoid3<Real>& ellipsoid,const Vector3<Real>& eye, const Plane3<Real>& plane,
-									 const Vector3<Real>& U, const Vector3<Real>& V, Vector3<Real>& P,Ellipse2<Real>& ellipse)
-	{
-		// Get coefficients for ellipsoid as X^T*A*X + B^T*X + C = 0.
+    const auto ae = a * eye;
+    auto eae = Vector3Tools<Real>::DotProduct(eye, ae);
+    auto be = Vector3Tools<Real>::DotProduct(b, eye);
+    auto quadE = (Math<Real>::GetValue(4)) * (eae + be + c);
+    auto bp2AE = b + (Math<Real>::GetValue(2)) * ae;
+    auto mat = Matrix3<Real>(bp2AE, bp2AE) - quadE * a;
 
-		Ellipsoid3Coefficients<Real> ellipsoid3Coefficients = ellipsoid.ToCoefficients();
-		Matrix3<Real> A = ellipsoid3Coefficients.GetMatrix();
-		Vector3<Real> B = ellipsoid3Coefficients.GetVector();
-		Real C = ellipsoid3Coefficients.GetConstants();
+    const auto mu = mat * u;
+    const auto mv = mat * v;
+    const auto mn = mat * plane.GetNormal();
+    auto dmnde = -plane.DistanceTo(eye);
+    p = eye + dmnde * plane.GetNormal();
 
-		// Compute matrix M (see PerspectiveProjectionEllipsoid.pdf).
-		Vector3<Real> AE = A * eye;
-		Real EAE = Vector3Tools<Real>::DotProduct(eye, AE);
-		Real BE = Vector3Tools<Real>::DotProduct(B, eye);
-		Real QuadE = ((Real)4)*(EAE + BE + C);
-		Vector3<Real> Bp2AE = B + (Math::GetValue(2))*AE;
-		Matrix3<Real> mat = Matrix3<Real>(Bp2AE, Bp2AE) - QuadE * A;
+    Matrix2<Real> aOut{};
+    Vector2<Real> bOut{};
+    Real cOut{};
+    aOut[0][0] = Vector3Tools<Real>::DotProduct(u, mu);
+    aOut[0][1] = Vector3Tools<Real>::DotProduct(u, mv);
+    aOut[1][1] = Vector3Tools<Real>::DotProduct(v, mv);
+    aOut[1][0] = aOut[0][1];
+    bOut[0] = (Math<Real>::GetValue(2)) * dmnde * (Vector3Tools<Real>::DotProduct(u, mn));
+    bOut[1] = (Math<Real>::GetValue(2)) * dmnde * (Vector3Tools<Real>::DotProduct(v, mn));
+    cOut = dmnde * dmnde * (Vector3Tools<Real>::DotProduct(plane.GetNormal(), mn));
 
-		// Compute coefficients for projected ellipse.
-		Vector3<Real> MU = mat * U;
-		Vector3<Real> MV = mat * V;
-		Vector3<Real> MN = mat * plane.GetNormal();
-		Real DmNdE = -plane.DistanceTo(eye);
-		P = eye + DmNdE * plane.GetNormal();
-
-		Matrix2<Real> AOut;
-		Vector2<Real> BOut;
-		Real COut;
-		AOut[0][0] = Vector3Tools<Real>::DotProduct(U, MU);
-		AOut[0][1] = Vector3Tools<Real>::DotProduct(U, MV);
-		AOut[1][1] = Vector3Tools<Real>::DotProduct(V, MV);
-		AOut[1][0] = AOut[0][1];
-		BOut[0] = (Math::GetValue(2))*DmNdE*(Vector3Tools<Real>::DotProduct(U, MN));
-		BOut[1] = (Math::GetValue(2))*DmNdE*(Vector3Tools<Real>::DotProduct(V, MN));
-		COut = DmNdE * DmNdE*(Vector3Tools<Real>::DotProduct(plane.GetNormal(), MN));
-
-		Ellipse2Coefficients<Real>  ellipsoid3Coefficients1(AOut, BOut, COut);
-		ellipse.FromCoefficients(ellipsoid3Coefficients1);
-	} 
+    Ellipse2Coefficients<Real> ellipsoid3Coefficients1{ aOut, bOut, cOut };
+    ellipse.FromCoefficients(ellipsoid3Coefficients1);
 }
 
-
-#endif // MATHEMATICS_MISCELLANEOUS_PERS_PPROJ_ELLIPSOID_DETAIL_H
+#endif  // MATHEMATICS_MISCELLANEOUS_PERS_PPROJ_ELLIPSOID_DETAIL_H

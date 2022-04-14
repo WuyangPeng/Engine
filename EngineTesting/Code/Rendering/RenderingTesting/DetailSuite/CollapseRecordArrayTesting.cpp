@@ -18,7 +18,7 @@
 
 
 using std::vector;
-
+ #include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, CollapseRecordArrayTesting) 
 
 void Rendering::CollapseRecordArrayTesting
@@ -51,11 +51,11 @@ void Rendering::CollapseRecordArrayTesting
 	CollapseRecordArray collapseRecordArray(collapseRecordVector);
 
 	ASSERT_EQUAL(collapseRecordArray.GetNumRecords(),static_cast<int>(collapseRecordVector.size()));
-	ASSERT_EQUAL_DO_NOT_USE_MESSAGE(collapseRecordVector, collapseRecordArray.GetRecords());
+	ASSERT_EQUAL(collapseRecordVector, collapseRecordArray.GetRecords());
 
 	for (int i = 0; i < collapseRecordArray.GetNumRecords(); ++i)
 	{
-		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(collapseRecordArray.GetRecord(i), collapseRecordVector[i]);
+		ASSERT_EQUAL(collapseRecordArray.GetRecord(i), collapseRecordVector[i]);
 	}
 }
 
@@ -131,10 +131,10 @@ void Rendering::CollapseRecordArrayTesting
 // 
 // 
 // 	ASSERT_EQUAL(firstCollapseRecordArray->GetNumRecords(), secondCollapseRecordArray->GetNumRecords());
-// 	ASSERT_EQUAL_DO_NOT_USE_MESSAGE(firstCollapseRecordArray->GetRecords(), secondCollapseRecordArray->GetRecords());
+// 	ASSERT_EQUAL(firstCollapseRecordArray->GetRecords(), secondCollapseRecordArray->GetRecords());
 // 
 // 	for (int i = 0; i < firstCollapseRecordArray->GetNumRecords(); ++i)
 // 	{
-// 		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(firstCollapseRecordArray->GetRecord(i), secondCollapseRecordArray->GetRecord(i));
+// 		ASSERT_EQUAL(firstCollapseRecordArray->GetRecord(i), secondCollapseRecordArray->GetRecord(i));
 // 	}
 }

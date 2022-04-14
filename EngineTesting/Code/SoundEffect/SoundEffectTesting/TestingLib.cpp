@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.2 (2019/09/02 10:57)
 
 // 音效库单元测试包含以下模块：
@@ -15,6 +15,6 @@
 // 8.	vorbis（vorbis）
 // 9.	FreeAlut（FreeAlut）
 
+#include "System/SystemLib.h"
 #include "CoreTools/CoreToolsLib.h"
 #include "SoundEffect/SoundEffectLib.h"
-

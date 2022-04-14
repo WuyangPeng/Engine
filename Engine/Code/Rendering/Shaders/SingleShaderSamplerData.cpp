@@ -21,7 +21,7 @@ using std::string;
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::SingleShaderSamplerData ::SingleShaderSamplerData()
+Rendering::SingleShaderSamplerData::SingleShaderSamplerData()
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -29,7 +29,7 @@ Rendering::SingleShaderSamplerData ::SingleShaderSamplerData()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderSamplerData)
 
-void Rendering::SingleShaderSamplerData ::SetSampler(const string& name, ShaderFlags::SamplerType type)
+void Rendering::SingleShaderSamplerData::SetSampler(const string& name, ShaderFlags::SamplerType type)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -39,7 +39,7 @@ void Rendering::SingleShaderSamplerData ::SetSampler(const string& name, ShaderF
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SingleShaderSamplerData)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, SetFilter, ShaderFlags::SamplerFilter, void)
 
-void Rendering::SingleShaderSamplerData ::SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate)
+void Rendering::SingleShaderSamplerData::SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate)
 {
     RENDERING_CLASS_IS_VALID_1;
 

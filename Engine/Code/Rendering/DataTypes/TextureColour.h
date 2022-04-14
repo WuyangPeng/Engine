@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/25 10:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 15:15)
 
 #ifndef RENDERING_DATA_TYPES_TEXTURE_COLOUR_H
 #define RENDERING_DATA_TYPES_TEXTURE_COLOUR_H
@@ -16,7 +16,7 @@
 #include <array>
 #include <type_traits>
 
-// 颜色类会将值截断为[sm_MinValue,sm_MaxValue]，
+// 颜色类会将值截断为[minValue,maxValue]，
 // 如果要求颜色类的平均值，先将Clamp值设置为false，然后再进行数值运算，之后将Clamp值重新设置为true。
 namespace Rendering
 {
@@ -27,7 +27,7 @@ namespace Rendering
         using ClassType = TextureColour<Format>;
         using ValueType = typename ColourTextureFormatTraits<Format>::ColourType;
         using Channel = typename ColourTextureFormatTraits<Format>::Channel;
-        using MinType = decltype(ColourTextureFormatTraits<Format>::sm_MinValue);
+        using MinType = decltype(ColourTextureFormatTraits<Format>::minValue);
 
         using RedType = typename ColourTextureFormatTraits<Format>::RedType;
         using GreenType = typename ColourTextureFormatTraits<Format>::GreenType;
@@ -35,20 +35,20 @@ namespace Rendering
         using AlphaType = typename ColourTextureFormatTraits<Format>::AlphaType;
         using LuminanceType = typename ColourTextureFormatTraits<Format>::LuminanceType;
 
-        static constexpr auto sm_Red = System::EnumCastUnderlying(Channel::Red);
-        static constexpr auto sm_Green = System::EnumCastUnderlying(Channel::Green);
-        static constexpr auto sm_Blue = System::EnumCastUnderlying(Channel::Blue);
-        static constexpr auto sm_Alpha = System::EnumCastUnderlying(Channel::Alpha);
-        static constexpr auto sm_Luminance = System::EnumCastUnderlying(Channel::Luminance);
+        static constexpr auto redIndex = System::EnumCastUnderlying(Channel::Red);
+        static constexpr auto greenIndex = System::EnumCastUnderlying(Channel::Green);
+        static constexpr auto blueIndex = System::EnumCastUnderlying(Channel::Blue);
+        static constexpr auto alphaIndex = System::EnumCastUnderlying(Channel::Alpha);
+        static constexpr auto luminanceIndex = System::EnumCastUnderlying(Channel::Luminance);
 
     public:
         constexpr TextureColour() noexcept
-            : m_Colour{}, m_IsClamp{ true }
+            : colour{}, isClamp{ true }
         {
         }
 
         constexpr TextureColour(ValueType red, ValueType green, ValueType blue, ValueType alpha) noexcept
-            : m_Colour{}, m_IsClamp{ true }
+            : colour{}, isClamp{ true }
         {
             static_assert(std::is_same_v<RedType, TrueType>, "RedType is TrueType!");
             static_assert(std::is_same_v<GreenType, TrueType>, "GreenType is TrueType!");
@@ -56,39 +56,41 @@ namespace Rendering
             static_assert(std::is_same_v<AlphaType, TrueType>, "AlphaType is TrueType!");
             static_assert(!std::is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-            static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-            static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
-            static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
-            static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+            static_assert(0 <= redIndex && redIndex < arraySize);
+            static_assert(0 <= greenIndex && greenIndex < arraySize);
+            static_assert(0 <= blueIndex && blueIndex < arraySize);
+            static_assert(0 <= alphaIndex && alphaIndex < arraySize);
 
             SetColour(red, green, blue, alpha);
         }
 
         // 如果存在alpha，则设为最大值
         TextureColour(ValueType red, ValueType green, ValueType blue) noexcept
-            : m_Colour{}, m_IsClamp{ true }
+            : colour{}, isClamp{ true }
         {
             static_assert(std::is_same_v<RedType, TrueType>, "RedType is TrueType!");
             static_assert(std::is_same_v<GreenType, TrueType>, "GreenType is TrueType!");
             static_assert(std::is_same_v<BlueType, TrueType>, "BlueType is TrueType!");
             static_assert(!std::is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-            static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-            static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
-            static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
+            static_assert(0 <= redIndex && redIndex < arraySize);
+            static_assert(0 <= greenIndex && greenIndex < arraySize);
+            static_assert(0 <= blueIndex && blueIndex < arraySize);
 
-            if constexpr (sm_Alpha != -1)
+            if constexpr (alphaIndex != -1)
             {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-                m_Colour[sm_Alpha] = sm_AlphaMaxValue;
+
+                colour[alphaIndex] = alphaMaxValue;
+
 #include STSTEM_WARNING_POP
             }
 
             SetColour(red, green, blue);
         }
 
-        TextureColour(ValueType value1, ValueType value2) noexcept;
+        TextureColour(ValueType value0, ValueType value1) noexcept;
 
         explicit TextureColour(ValueType value) noexcept;
 
@@ -109,17 +111,19 @@ namespace Rendering
             static_assert(std::is_same_v<AlphaType, TrueType>, "AlphaType is TrueType!");
             static_assert(!std::is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-            static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-            static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
-            static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
-            static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+            static_assert(0 <= redIndex && redIndex < arraySize);
+            static_assert(0 <= greenIndex && greenIndex < arraySize);
+            static_assert(0 <= blueIndex && blueIndex < arraySize);
+            static_assert(0 <= alphaIndex && alphaIndex < arraySize);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-            m_Colour[sm_Red] = red;
-            m_Colour[sm_Green] = green;
-            m_Colour[sm_Blue] = blue;
-            m_Colour[sm_Alpha] = alpha;
+
+            colour[redIndex] = red;
+            colour[greenIndex] = green;
+            colour[blueIndex] = blue;
+            colour[alphaIndex] = alpha;
+
 #include STSTEM_WARNING_POP
 
             Standardization();
@@ -132,15 +136,17 @@ namespace Rendering
             static_assert(std::is_same_v<BlueType, TrueType>, "BlueType is TrueType!");
             static_assert(!std::is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-            static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-            static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
-            static_assert(0 <= sm_Blue && sm_Blue < sm_ArraySize);
+            static_assert(0 <= redIndex && redIndex < arraySize);
+            static_assert(0 <= greenIndex && greenIndex < arraySize);
+            static_assert(0 <= blueIndex && blueIndex < arraySize);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-            m_Colour[sm_Red] = red;
-            m_Colour[sm_Green] = green;
-            m_Colour[sm_Blue] = blue;
+
+            colour[redIndex] = red;
+            colour[greenIndex] = green;
+            colour[blueIndex] = blue;
+
 #include STSTEM_WARNING_POP
 
             Standardization();
@@ -150,16 +156,16 @@ namespace Rendering
 
         void SetColour(ValueType value) noexcept;
 
-        [[nodiscard]] bool IsClamp() const noexcept;
-        void SetClamp(bool isClamp) noexcept;
+        NODISCARD bool IsClamp() const noexcept;
+        void SetClamp(bool newIsClamp) noexcept;
 
-        [[nodiscard]] ValueType GetRed() const noexcept;
-        [[nodiscard]] ValueType GetGreen() const noexcept;
-        [[nodiscard]] ValueType GetBlue() const noexcept;
-        [[nodiscard]] ValueType GetAlpha() const noexcept;
-        [[nodiscard]] ValueType GetLuminance() const noexcept;
-        [[nodiscard]] const ValueType* GetPoint() const noexcept;
-        [[nodiscard]] ValueType operator[](int index) const;
+        NODISCARD ValueType GetRed() const noexcept;
+        NODISCARD ValueType GetGreen() const noexcept;
+        NODISCARD ValueType GetBlue() const noexcept;
+        NODISCARD ValueType GetAlpha() const noexcept;
+        NODISCARD ValueType GetLuminance() const noexcept;
+        NODISCARD const ValueType* GetPoint() const noexcept;
+        NODISCARD ValueType operator[](int index) const;
 
         void SetRed(ValueType red) noexcept;
         void SetGreen(ValueType green) noexcept;
@@ -177,41 +183,41 @@ namespace Rendering
         TextureColour& operator/=(RhsType rhs);
 
     private:
-        static constexpr auto sm_MinValue = ColourTextureFormatTraits<Format>::sm_MinValue;
-        static constexpr auto sm_RedMaxValue = ColourTextureFormatTraits<Format>::sm_RedMaxValue;
-        static constexpr auto sm_GreenMaxValue = ColourTextureFormatTraits<Format>::sm_GreenMaxValue;
-        static constexpr auto sm_BlueMaxValue = ColourTextureFormatTraits<Format>::sm_BlueMaxValue;
-        static constexpr auto sm_AlphaMaxValue = ColourTextureFormatTraits<Format>::sm_AlphaMaxValue;
-        static constexpr auto sm_LuminanceMaxValue = ColourTextureFormatTraits<Format>::sm_LuminanceMaxValue;
+        static constexpr auto minValue = ColourTextureFormatTraits<Format>::minValue;
+        static constexpr auto redMaxValue = ColourTextureFormatTraits<Format>::redMaxValue;
+        static constexpr auto greenMaxValue = ColourTextureFormatTraits<Format>::greenMaxValue;
+        static constexpr auto blueMaxValue = ColourTextureFormatTraits<Format>::blueMaxValue;
+        static constexpr auto alphaMaxValue = ColourTextureFormatTraits<Format>::alphaMaxValue;
+        static constexpr auto luminanceMaxValue = ColourTextureFormatTraits<Format>::luminanceMaxValue;
 
-        static constexpr auto sm_IsFloatingPoint = ColourTextureFormatTraits<Format>::sm_IsFloatingPoint;
-        static constexpr auto sm_ArraySize = ColourTextureFormatTraits<Format>::sm_ArraySize;
-        static constexpr auto sm_MaxValue = ColourTextureFormatTraits<Format>::sm_MaxValue;
+        static constexpr auto isFloatingPoint = ColourTextureFormatTraits<Format>::isFloatingPoint;
+        static constexpr auto arraySize = ColourTextureFormatTraits<Format>::arraySize;
+        static constexpr auto maxValue = ColourTextureFormatTraits<Format>::maxValue;
 
-        static_assert((sm_Red == -1) || (0 <= sm_Red && sm_Red < sm_ArraySize));
-        static_assert((sm_Green == -1) || (0 <= sm_Green && sm_Green < sm_ArraySize));
-        static_assert((sm_Blue == -1) || (0 <= sm_Blue && sm_Blue < sm_ArraySize));
-        static_assert((sm_Alpha == -1) || (0 <= sm_Alpha && sm_Alpha < sm_ArraySize));
-        static_assert((sm_Luminance == -1) || (0 <= sm_Luminance && sm_Luminance < sm_ArraySize));
+        static_assert((redIndex == -1) || (0 <= redIndex && redIndex < arraySize));
+        static_assert((greenIndex == -1) || (0 <= greenIndex && greenIndex < arraySize));
+        static_assert((blueIndex == -1) || (0 <= blueIndex && blueIndex < arraySize));
+        static_assert((alphaIndex == -1) || (0 <= alphaIndex && alphaIndex < arraySize));
+        static_assert((luminanceIndex == -1) || (0 <= luminanceIndex && luminanceIndex < arraySize));
 
     private:
-        static constexpr ValueType Clamp(ValueType colour, ValueType maxValue) noexcept
+        NODISCARD static constexpr ValueType Clamp(ValueType colour, ValueType max) noexcept
         {
-            if (colour < sm_MinValue)
-                return sm_MinValue;
-            else if (maxValue < colour)
-                return maxValue;
+            if (colour < minValue)
+                return minValue;
+            else if (max < colour)
+                return max;
             else
                 return colour;
         }
 
         constexpr void Standardization() noexcept
         {
-            Standardization<sm_Red>(std::is_same<RedType, TrueType>(), sm_RedMaxValue);
-            Standardization<sm_Green>(std::is_same<GreenType, TrueType>(), sm_GreenMaxValue);
-            Standardization<sm_Blue>(std::is_same<BlueType, TrueType>(), sm_BlueMaxValue);
-            Standardization<sm_Alpha>(std::is_same<AlphaType, TrueType>(), sm_AlphaMaxValue);
-            Standardization<sm_Luminance>(std::is_same<LuminanceType, TrueType>(), sm_LuminanceMaxValue);
+            Standardization<redIndex>(std::is_same<RedType, TrueType>(), redMaxValue);
+            Standardization<greenIndex>(std::is_same<GreenType, TrueType>(), greenMaxValue);
+            Standardization<blueIndex>(std::is_same<BlueType, TrueType>(), blueMaxValue);
+            Standardization<alphaIndex>(std::is_same<AlphaType, TrueType>(), alphaMaxValue);
+            Standardization<luminanceIndex>(std::is_same<LuminanceType, TrueType>(), luminanceMaxValue);
         }
 
         template <int Index>
@@ -222,13 +228,15 @@ namespace Rendering
         template <int Index>
         constexpr void Standardization(const std::true_type&, ValueType maxValue) noexcept
         {
-            if (m_IsClamp)
+            if (isClamp)
             {
-                static_assert(0 <= Index && Index < sm_ArraySize, "index is crossing!");
+                static_assert(0 <= Index && Index < arraySize, "index is crossing!");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-                m_Colour[Index] = Clamp(m_Colour[Index], maxValue);
+
+                colour[Index] = Clamp(colour[Index], maxValue);
+
 #include STSTEM_WARNING_POP
             }
         }
@@ -237,43 +245,47 @@ namespace Rendering
         void ConvertingColourFormat(const TextureColour<RhsFormat>& colour);
 
         template <TextureFormat RhsFormat, int Index, int RhsIndex, bool HaveBit>
-        void Converting(const TextureColour<RhsFormat>& colour, MinType maxValue,
+        void Converting(const TextureColour<RhsFormat>& colour,
+                        MinType maxValue,
                         typename TextureColour<RhsFormat>::MinType rhsMaxValue,
                         const std::integral_constant<bool, HaveBit>&);
 
         template <TextureFormat RhsFormat, int Index, int RhsIndex>
-        void Converting(const TextureColour<RhsFormat>& colour, MinType maxValue,
-                        typename TextureColour<RhsFormat>::MinType rhsMaxValue,
+        void Converting(MAYBE_UNUSED const TextureColour<RhsFormat>& colour,
+                        MAYBE_UNUSED MinType maxValue,
+                        MAYBE_UNUSED typename TextureColour<RhsFormat>::MinType rhsMaxValue,
                         const std::false_type&) noexcept;
 
         template <TextureFormat RhsFormat, bool HaveAlpha, bool RhsHaveAlpha>
-        void ConvertingAlpha(const TextureColour<RhsFormat>& colour,
+        void ConvertingAlpha(MAYBE_UNUSED const TextureColour<RhsFormat>& textureColour,
                              const std::integral_constant<bool, HaveAlpha>&,
                              const std::integral_constant<bool, RhsHaveAlpha>&) noexcept;
 
         template <TextureFormat RhsFormat>
-        void ConvertingAlpha(const TextureColour<RhsFormat>& colour, const std::true_type&, const std::true_type&);
+        void ConvertingAlpha(const TextureColour<RhsFormat>& textureColour, const std::true_type&, const std::true_type&);
 
         template <TextureFormat RhsFormat>
-        void ConvertingAlpha(const TextureColour<RhsFormat>& colour, const std::true_type&, const std::false_type&) noexcept;
+        void ConvertingAlpha(const TextureColour<RhsFormat>& textureColour, const std::true_type&, const std::false_type&) noexcept;
 
         template <TextureFormat RhsFormat, int Index, int RhsIndex, bool IsFloatingPoint, bool RhsIsFloatingPoint>
-        void ConvertingBit(const TextureColour<RhsFormat>& colour, MinType maxValue,
+        void ConvertingBit(const TextureColour<RhsFormat>& colour,
+                           MinType maxValue,
                            typename TextureColour<RhsFormat>::MinType rhsMinValue,
                            typename TextureColour<RhsFormat>::MinType rhsMaxValue,
                            const std::integral_constant<bool, IsFloatingPoint>&,
                            const std::integral_constant<bool, RhsIsFloatingPoint>&);
 
         template <TextureFormat RhsFormat, int Index, int RhsIndex>
-        void ConvertingBit(const TextureColour<RhsFormat>& colour, MinType maxValue,
+        void ConvertingBit(const TextureColour<RhsFormat>& colour,
+                           MinType maxValue,
                            typename TextureColour<RhsFormat>::MinType rhsMinValue,
                            typename TextureColour<RhsFormat>::MinType rhsMaxValue,
                            const std::false_type&, const std::true_type&);
 
         template <int Index, bool HaveBit>
-        void Multiply(const std::integral_constant<bool, HaveBit>&, MinType maxValue, const TextureColour& colour);
+        void Multiply(const std::integral_constant<bool, HaveBit>&, MinType maxValue, const TextureColour& textureColour);
         template <int Index>
-        void Multiply(const std::false_type&, MinType maxValue, const TextureColour& colour) noexcept;
+        void Multiply(const std::false_type&, MAYBE_UNUSED MinType maxValue, MAYBE_UNUSED const TextureColour& textureColour) noexcept;
 
         template <typename RhsType, bool RhsIsFloatingPoint>
         void Divide(RhsType rhs, const std::integral_constant<bool, RhsIsFloatingPoint>&);
@@ -282,22 +294,22 @@ namespace Rendering
         void Divide(RhsType rhs, const std::false_type&);
 
     private:
-        std::array<ValueType, sm_ArraySize> m_Colour{};
-        bool m_IsClamp{ true };
+        std::array<ValueType, arraySize> colour{};
+        bool isClamp{ true };
     };
 
     template <TextureFormat Format>
-    [[nodiscard]] bool Approximate(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs, typename TextureColour<Format>::ValueType epsilon);
+    NODISCARD bool Approximate(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs, typename TextureColour<Format>::ValueType epsilon);
 
     template <TextureFormat Format>
-    [[nodiscard]] bool operator==(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs);
+    NODISCARD bool operator==(const TextureColour<Format>& lhs, const TextureColour<Format>& rhs);
 
     template <TextureFormat LhsFormat, typename RhsType>
-    [[nodiscard]] const TextureColour<LhsFormat> operator*(const TextureColour<LhsFormat>& lhs, RhsType rhs);
+    NODISCARD const TextureColour<LhsFormat> operator*(const TextureColour<LhsFormat>& lhs, RhsType rhs);
     template <typename LhsType, TextureFormat RhsFormat>
-    [[nodiscard]] const TextureColour<RhsFormat> operator*(LhsType lhs, const TextureColour<RhsFormat>& rhs);
+    NODISCARD const TextureColour<RhsFormat> operator*(LhsType lhs, const TextureColour<RhsFormat>& rhs);
     template <TextureFormat LhsFormat, typename RhsType>
-    [[nodiscard]] const TextureColour<LhsFormat> operator/(const TextureColour<LhsFormat>& lhs, RhsType rhs);
+    NODISCARD const TextureColour<LhsFormat> operator/(const TextureColour<LhsFormat>& lhs, RhsType rhs);
 }
 
 #endif  // RENDERING_DATA_TYPES_TEXTURE_COLOUR_H

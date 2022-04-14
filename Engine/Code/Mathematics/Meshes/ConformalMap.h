@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 16:59)
 
 #ifndef MATHEMATICS_MESHES_CONFORMAL_MAP_H
 #define MATHEMATICS_MESHES_CONFORMAL_MAP_H
@@ -17,51 +20,35 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  ConformalMap
-	{
-	public:
-		// The input mesh should be a closed, manifold surface.  That is, it must
-		// have the topology of a sphere.
-		//
-		// The number of vertices in the input is numPoints.  The vertex array
-		// is usually passed as points, but this input can be any data type you
-		// prefer (points+attributes).  The number of triangles is numTriangles.
-		// The triangles are represented as triples of indices into the vertex
-		// array.  These triples are stored in indices.  The caller is responsible
-		// for deleting the input arrays.
-		ConformalMap (int numPoints, const Vector3<Real>* points,int numTriangles, const int* indices, int punctureTriangle = 0);
+    template <typename Real>
+    class ConformalMap
+    {
+    public:
+        using ClassType = ConformalMap<Real>;
 
-		~ConformalMap ();
+    public:
+        ConformalMap(int numPoints, const std::vector<Vector3<Real>>& points, int numTriangles, const std::vector<int>& indices, int punctureTriangle = 0);
 
-		// Conformal mapping of mesh to plane.  The array of coordinates has a
-		// one-to-one correspondence with the input vertex array.
-		const Vector2<Real>* GetPlaneCoordinates () const;
-		const Vector2<Real>& GetPlaneMin () const;
-		const Vector2<Real>& GetPlaneMax () const;
+        CLASS_INVARIANT_DECLARE;
 
-		// Conformal mapping of mesh to sphere (centered at origin).  The array
-		// of coordinates has a one-to-one correspondence with the input vertex
-		// array.
-		const Vector3<Real>* GetSphereCoordinates () const;
-		Real GetSphereRadius () const;
+        NODISCARD std::vector<Vector2<Real>> GetPlaneCoordinates() const;
+        NODISCARD const Vector2<Real>& GetPlaneMin() const noexcept;
+        NODISCARD const Vector2<Real>& GetPlaneMax() const noexcept;
 
-	private:
-		Real ComputeRadius (const Vector2<Real>& V0, const Vector2<Real>& V1,const Vector2<Real>& V2, Real areaFraction) const;
+        NODISCARD std::vector<Vector3<Real>> GetSphereCoordinates() const;
+        NODISCARD Real GetSphereRadius() const noexcept;
 
-		// Conformal mapping to a plane.  The plane's (px,py) points correspond to
-		// the mesh's (mx,my,mz) points.
-		Vector2<Real>* mPlanes;
-		Vector2<Real> mPlaneMin, mPlaneMax;
+    private:
+        NODISCARD Real ComputeRadius(const Vector2<Real>& v0, const Vector2<Real>& v1, const Vector2<Real>& v2, Real areaFraction) const;
 
-		// Conformal mapping to a sphere.  The sphere's (sx,sy,sz) points
-		// correspond to the mesh's (mx,my,mz) points.
-		Vector3<Real>* mSpheres;
-		Real mRadius;
-	};
+    private:
+        std::vector<Vector2<Real>> planes;
+        Vector2<Real> planeMin;
+        Vector2<Real> planeMax;
 
-	using ConformalMapf = ConformalMap<float>;
-	using ConformalMapd = ConformalMap<double>;
+        std::vector<Vector3<Real>> spheres;
+        Real radius;
+    };
 }
 
-#endif // MATHEMATICS_MESHES_CONFORMAL_MAP_H
+#endif  // MATHEMATICS_MESHES_CONFORMAL_MAP_H

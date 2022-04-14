@@ -17,13 +17,13 @@ using std::string;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::SingleShaderProfileData ::SingleShaderProfileData(int numConstants, int numSamplers)
+Rendering::SingleShaderProfileData::SingleShaderProfileData(int numConstants, int numSamplers)
     : impl{ numConstants, numSamplers }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SingleShaderProfileData ::SingleShaderProfileData()
+Rendering::SingleShaderProfileData::SingleShaderProfileData()
     : impl{ 0, 0 }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -31,21 +31,21 @@ Rendering::SingleShaderProfileData ::SingleShaderProfileData()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderProfileData)
 
-void Rendering::SingleShaderProfileData ::SetBaseRegister(int index, int baseRegister)
+void Rendering::SingleShaderProfileData::SetBaseRegister(int index, int baseRegister)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetBaseRegister(index, baseRegister);
 }
 
-void Rendering::SingleShaderProfileData ::SetTextureUnit(int index, int textureUnit)
+void Rendering::SingleShaderProfileData::SetTextureUnit(int index, int textureUnit)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetTextureUnit(index, textureUnit);
 }
 
-void Rendering::SingleShaderProfileData ::ResetData(int numConstants, int numSamplers)
+void Rendering::SingleShaderProfileData::ResetData(int numConstants, int numSamplers)
 {
     RENDERING_CLASS_IS_VALID_1;
 

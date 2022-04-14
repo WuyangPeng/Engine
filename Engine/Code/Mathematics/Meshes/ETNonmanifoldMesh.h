@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 21:27)
 
 #ifndef MATHEMATICS_MESHES_ET_NONMANIFOLD_MESH_H
 #define MATHEMATICS_MESHES_ET_NONMANIFOLD_MESH_H
@@ -12,121 +15,92 @@
 #include "EdgeKey.h"
 #include "TriangleKey.h"
 
-#include "System/Helper/PragmaWarning.h"
 #include <map>
 #include <set>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+
 namespace Mathematics
 {
     class ETNonmanifoldMesh
     {
     public:
-        // Edge data types.
+        using ClassType = ETNonmanifoldMesh;
+
         class Edge;
-        typedef Edge* EPtr;
-        typedef const Edge* ECPtr;
-        typedef EPtr (*ECreator)(int, int);
-        typedef std::map<EdgeKey, Edge*> EMap;
-        typedef EMap::iterator EMapIterator;
-        typedef EMap::const_iterator EMapCIterator;
+        using EdgeSharedPtr = std::shared_ptr<Edge>;
+        using ConstEdgeSharedPtr = std::shared_ptr<const Edge>;
+        using EdgeCreator = EdgeSharedPtr (*)(int, int);
+        using EdgeMap = std::map<EdgeKey, EdgeSharedPtr>;
 
-        // Triangle data types.
         class Triangle;
-        typedef Triangle* TPtr;
-        typedef const Triangle* TCPtr;
-        typedef TPtr (*TCreator)(int, int, int);
-        typedef std::map<TriangleKey, Triangle*> TMap;
-        typedef TMap::iterator TMapIterator;
-        typedef TMap::const_iterator TMapCIterator;
+        using TriangleSharedPtr = std::shared_ptr<Triangle>;
+        using ConstTriangleSharedPtr = std::shared_ptr<const Triangle>;
+        using TriangleCreator = TriangleSharedPtr (*)(int, int, int);
+        using TriangleMap = std::map<TriangleKey, TriangleSharedPtr>;
 
-        // Edge object.
         class Edge
         {
         public:
             Edge(int v0, int v1) noexcept;
-            virtual ~Edge();
-            Edge(const Edge&) = default;
-            Edge& operator=(const Edge&) = default;
-            Edge(Edge&&) = default;
-            Edge& operator=(Edge&&) = default;
+            virtual ~Edge() noexcept = default;
+            Edge(const Edge& rhs) = default;
+            Edge& operator=(const Edge& rhs) = default;
+            Edge(Edge&& rhs) noexcept = default;
+            Edge& operator=(Edge&& rhs) noexcept = default;
 
-            int V[2];
-            std::set<Triangle*> T;
+            std::array<int, 2> v;
+            std::set<TriangleSharedPtr> t;
         };
 
-        class MATHEMATICS_DEFAULT_DECLARE Triangle
+        class Triangle
         {
         public:
             Triangle(int v0, int v1, int v2) noexcept;
-            virtual ~Triangle();
-            Triangle(const Triangle&) = default;
-            Triangle& operator=(const Triangle&) = default;
-            Triangle(Triangle&&) = default;
-            Triangle& operator=(Triangle&&) = default;
+            virtual ~Triangle() noexcept = default;
+            Triangle(const Triangle& rhs) = default;
+            Triangle& operator=(const Triangle& rhs) = default;
+            Triangle(Triangle&& rhs) noexcept = default;
+            Triangle& operator=(Triangle&& rhs) noexcept = default;
 
-            // vertices (V[0],V[1],V[2])
-            int V[3];
+            std::array<int, 3> v;
 
-            // adjacent edges
-            // E[0] represents edge (V[0],V[1])
-            // E[1] represents edge (V[1],V[2])
-            // E[2] represents edge (V[2],V[0])
-            EPtr E[3];
+            std::array<EdgeSharedPtr, 3> e;
         };
 
-        ETNonmanifoldMesh(ECreator eCreator = 0, TCreator tCreator = 0) noexcept;
-        virtual ~ETNonmanifoldMesh();
-        ETNonmanifoldMesh(const ETNonmanifoldMesh&) = default;
-        ETNonmanifoldMesh& operator=(const ETNonmanifoldMesh&) = default;
-        ETNonmanifoldMesh(ETNonmanifoldMesh&&) = default;
-        ETNonmanifoldMesh& operator=(ETNonmanifoldMesh&&) = default;
+        explicit ETNonmanifoldMesh(EdgeCreator eCreator = nullptr, TriangleCreator tCreator = nullptr) noexcept;
+        virtual ~ETNonmanifoldMesh() noexcept = default;
+        ETNonmanifoldMesh(const ETNonmanifoldMesh& rhs) = default;
+        ETNonmanifoldMesh& operator=(const ETNonmanifoldMesh& rhs) = default;
+        ETNonmanifoldMesh(ETNonmanifoldMesh&& rhs) noexcept = default;
+        ETNonmanifoldMesh& operator=(ETNonmanifoldMesh&& rhs) noexcept = default;
 
-        // Member access.
-        int GetNumEdges() const noexcept;
-        const EMap& GetEdges() const noexcept;
-        int GetNumTriangles() const noexcept;
-        const TMap& GetTriangles() const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-        // Mesh manipulation.
-        TPtr InsertTriangle(int v0, int v1, int v2);
+        NODISCARD int GetNumEdges() const noexcept;
+        NODISCARD const EdgeMap& GetEdges() const noexcept;
+        NODISCARD int GetNumTriangles() const noexcept;
+        NODISCARD const TriangleMap& GetTriangles() const noexcept;
+
+        TriangleSharedPtr InsertTriangle(int v0, int v1, int v2);
         bool RemoveTriangle(int v0, int v1, int v2);
 
-        // Topological operations.
-        bool IsManifold() const noexcept;
-        bool IsClosed() const noexcept;
-        bool IsConnected() const;
+        NODISCARD bool IsManifold() const noexcept;
+        NODISCARD bool IsClosed() const noexcept;
+        NODISCARD bool IsConnected() const;
 
-        // Extract a connected component from the mesh and remove all the
-        // triangles of the component from the mesh.  This is useful for computing
-        // the components in a very large mesh that uses a lot of memory.  The
-        // intention is that the function is called until all components are
-        // found.  The typical code is
-        //
-        //     ETNonmanifoldMesh mesh = <some mesh>;
-        //     int numTotalIndices = 3*mesh.GetNumTriangles();
-        //     int* indices = NEW1<int>(numTotalIndices);
-        //     for (int numIndices = 0; numIndices < numTotalIndices; /**/ )
-        //     {
-        //         int currNumIndices;
-        //         int* currIndices = indices + numIndices;
-        //         mesh.RemoveComponent(currNumIndices, currIndices);
-        //         numIndices += currNumIndices;
-        //     }
-        void RemoveComponent(int& numIndices, int* indices);
+        NODISCARD std::vector<int> RemoveComponent();
 
-        void Print(const char* filename);
+        void Print(const std::string& filename);
 
     protected:
-        static EPtr CreateEdge(int v0, int v1) noexcept;
-        ECreator mECreator;
-        EMap mEMap;
+        NODISCARD static EdgeSharedPtr CreateEdge(int v0, int v1);
+        NODISCARD static TriangleSharedPtr CreateTriangle(int v0, int v1, int v2);
 
-        static TPtr CreateTriangle(int v0, int v1, int v2) noexcept;
-        TCreator mTCreator;
-        TMap mTMap;
+    private:
+        EdgeCreator edgeCreator;
+        EdgeMap edgeMap;
+        TriangleCreator triangleCreator;
+        TriangleMap triangleMap;
     };
 }
-#include STSTEM_WARNING_POP
+
 #endif  // MATHEMATICS_MESHES_ET_NONMANIFOLD_MESH_H

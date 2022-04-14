@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 18:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 10:47)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_SURFACE_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_SURFACE_H
@@ -12,23 +15,29 @@
 namespace Mathematics
 {
     template <typename Real>
-    class Surface
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Surface
     {
     public:
-        // Abstract base class.
-        virtual ~Surface();
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        Surface(const Surface&) = default;
-        Surface& operator=(const Surface&) = default;
-        Surface(Surface&&) = default;
-        Surface& operator=(Surface&&) = default;
+        using ClassType = Surface<Real>;
+
+    public:
+        virtual ~Surface() noexcept = default;
+
+        Surface(const Surface& rhs) noexcept = default;
+        Surface& operator=(const Surface& rhs) noexcept = default;
+        Surface(Surface&& rhs) noexcept = default;
+        Surface& operator=(Surface&& rhs) noexcept = default;
+
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     protected:
-        Surface() noexcept;
+        Surface() noexcept = default;
     };
 
-    using Surfacef = Surface<float>;
-    using Surfaced = Surface<double>;
+    using SurfaceF = Surface<float>;
+    using SurfaceD = Surface<double>;
 }
 
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_SURFACE_H

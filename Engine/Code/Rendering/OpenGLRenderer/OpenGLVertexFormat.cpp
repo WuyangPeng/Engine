@@ -16,7 +16,7 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
  
-Rendering::OpenGLVertexFormat ::OpenGLVertexFormat([[maybe_unused]] Renderer* renderer, const VertexFormat* vertexFormat)
+Rendering::OpenGLVertexFormat::OpenGLVertexFormat([[maybe_unused]] Renderer* renderer, const VertexFormat* vertexFormat)
     : ParentType{}, m_Stride(vertexFormat->GetStride()), m_Position(), m_Normal(), m_Tangent(), m_Binormal(),
 	 m_TexCoord(),m_Color(),m_BlendIndices(),m_BlendWeight(),m_FogCoord(),m_PSize()
 {
@@ -29,7 +29,7 @@ Rendering::OpenGLVertexFormat ::OpenGLVertexFormat([[maybe_unused]] Renderer* re
 
 // private
 void Rendering::OpenGLVertexFormat
-    ::Init(const VertexFormat* vertexFormat)
+::Init(const VertexFormat* vertexFormat)
 {
 	m_Position.Init(vertexFormat);
 	m_Normal.Init(vertexFormat);
@@ -57,7 +57,7 @@ bool Rendering::OpenGLVertexFormat
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLVertexFormat ::Enable([[maybe_unused]] Renderer* renderer) noexcept
+void Rendering::OpenGLVertexFormat::Enable([[maybe_unused]] Renderer* renderer) noexcept
 {	
 	// 数据指针允许使用顶点缓冲
 	RENDERING_CLASS_IS_VALID_1;
@@ -78,7 +78,7 @@ void Rendering::OpenGLVertexFormat ::Enable([[maybe_unused]] Renderer* renderer)
  
 }
 
-void Rendering::OpenGLVertexFormat ::Disable([[maybe_unused]] Renderer* renderer) noexcept
+void Rendering::OpenGLVertexFormat::Disable([[maybe_unused]] Renderer* renderer) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

@@ -25,7 +25,7 @@
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, MorphControllerTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::MorphControllerTesting
 	::MainTest()
 {

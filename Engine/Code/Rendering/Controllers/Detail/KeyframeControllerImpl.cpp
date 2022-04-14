@@ -103,7 +103,7 @@ bool Rendering::KeyframeControllerImpl
 }
 #endif // OPEN_CLASS_INVARIANT	
 
-int Rendering::KeyframeControllerImpl ::GetStreamingSize() const noexcept
+int Rendering::KeyframeControllerImpl::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -195,7 +195,7 @@ void Rendering::KeyframeControllerImpl
 	}
 }
 
-void Rendering::KeyframeControllerImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::KeyframeControllerImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -284,7 +284,7 @@ void Rendering::KeyframeControllerImpl
 	m_CommonTimes[index] = commonTimes;
 }
 
-int Rendering::KeyframeControllerImpl ::GetNumTranslations() const noexcept
+int Rendering::KeyframeControllerImpl::GetNumTranslations() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -327,7 +327,7 @@ void Rendering::KeyframeControllerImpl
 	m_Translations[index] = translations;
 }
 
-int Rendering::KeyframeControllerImpl ::GetNumRotations() const noexcept
+int Rendering::KeyframeControllerImpl::GetNumRotations() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -370,7 +370,7 @@ void Rendering::KeyframeControllerImpl
 	m_Rotations[index] = rotations;
 }
 
-int Rendering::KeyframeControllerImpl ::GetNumScales() const noexcept
+int Rendering::KeyframeControllerImpl::GetNumScales() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

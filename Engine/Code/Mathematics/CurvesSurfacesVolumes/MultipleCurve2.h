@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/16 13:46)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_MULTIPLE_CURVE2_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_MULTIPLE_CURVE2_H
@@ -13,49 +16,41 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class   MultipleCurve2 : public Curve2<Real>
-	{
-	public:
-		// Construction and destruction for abstract base class.  MultipleCurve2
-		// accepts responsibility for deleting the input array.
-		MultipleCurve2(int numSegments, Real* times);
-		virtual ~MultipleCurve2();
+    template <typename Real>
+    class MultipleCurve2 : public Curve2<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		// Member access.
-		int GetSegments() const;
-		const Real* GetTimes() const;
+        using ClassType = MultipleCurve2<Real>;
+        using ParentType = Curve2<Real>;
 
-		// Length-from-time and time-from-length.
-		virtual Real GetLength(Real t0, Real t1) const;
-		virtual Real GetTime(Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const;
+    public:
+        MultipleCurve2(int numSegments, const std::vector<Real>& times);
 
-	protected:
-		using Curve2<Real>::mTMin;
-		using Curve2<Real>::mTMax;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		int mNumSegments;
-		Real* mTimes;
+        NODISCARD int GetSegments() const noexcept;
+        NODISCARD std::vector<Real> GetTimes() const;
+        NODISCARD Real GetTimes(int index) const;
 
-		// These quantities are allocated by GetLength when they are needed the
-		// first time.  The allocations occur in InitializeLength (called by
-		// GetLength), so this member function must be 'const'. In order to
-		// allocate the arrays in a 'const' function, they must be declared as
-		// 'mutable'.
-		mutable Real* mLengths;
-		mutable Real* mAccumLengths;
+        NODISCARD Real GetLength(Real t0, Real t1) const override;
+        NODISCARD Real GetTime(Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const override;
 
-		void GetKeyInfo(Real t, int& key, Real& dt) const;
+    protected:
+        void GetKeyInfo(Real t, int& key, Real& dt) const;
 
-		void InitializeLength() const;
-		virtual Real GetSpeedKey(int key, Real t) const = 0;
-		virtual Real GetLengthKey(int key, Real t0, Real t1) const = 0;
+        void InitializeLength() const;
+        NODISCARD virtual Real GetSpeedKey(int key, Real t) const = 0;
+        NODISCARD virtual Real GetLengthKey(int key, Real t0, Real t1) const = 0;
 
-		static Real GetSpeedWithData(Real t, void* data);
-	};
+    private:
+        int numSegments;
+        std::vector<Real> times;
 
-	using MultipleCurve2f = MultipleCurve2<float>;
-	using MultipleCurve2d = MultipleCurve2<double>;
+        mutable std::vector<Real> lengths;
+        mutable std::vector<Real> accumLengths;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_MULTIPLE_CURVE2_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_MULTIPLE_CURVE2_H

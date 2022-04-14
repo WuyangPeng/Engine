@@ -436,6 +436,7 @@ Mathematics::Matrix<Real>& Mathematics::Matrix<Real>::operator+=(const Matrix& r
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 
         m_Entry[i] += rhs.m_Entry[i];
 

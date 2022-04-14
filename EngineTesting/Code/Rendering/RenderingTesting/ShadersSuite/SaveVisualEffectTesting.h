@@ -18,11 +18,11 @@ namespace Rendering
 
 	private:
 		void MainTest();
-	    void CreateVisualEffectFile(); 
+            void CreateVisualEffectFile() noexcept; 
 		void SaveFile();
 		void SaveTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

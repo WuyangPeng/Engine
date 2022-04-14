@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 13:02)
 
 #ifndef MATHEMATICS_MESHES_EDGE_KEY_H
 #define MATHEMATICS_MESHES_EDGE_KEY_H
@@ -11,42 +14,35 @@
 
 #include "System/Helper/UnicodeUsing.h"
 
+#include <array>
 #include <iosfwd>
- #include "System/Helper/PragmaWarning.h"
-    #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE EdgeKey
     {
     public:
-        typedef EdgeKey ClassType;
-        
-    public:
-        EdgeKey (int first, int second) noexcept;
-		EdgeKey() noexcept;
-        
-        EdgeKey(const EdgeKey& rhs) noexcept;
-        EdgeKey& operator = (const EdgeKey& rhs) noexcept;
-		
-		~EdgeKey() = default;
-		EdgeKey(EdgeKey&& rhs) = default;
-        EdgeKey& operator = (EdgeKey&& rhs) = default;
-        
-		CLASS_INVARIANT_DECLARE;
-        
-        int GetKey(int index) const;
-		void SetKey(int index,int value);
-        
-    private:
-        int m_Vertex[2];
-    };
-    
-    bool MATHEMATICS_DEFAULT_DECLARE operator< (const EdgeKey& lhs,  const EdgeKey& rhs);
-    
-	MATHEMATICS_DEFAULT_DECLARE System::OStream& operator<<(System::OStream& os, const EdgeKey& edgeKey);
-}
-#include STSTEM_WARNING_POP
+        using ClassType = EdgeKey;
 
-#endif // MATHEMATICS_MESHES_EDGE_KEY_H
+    public:
+        EdgeKey(int first, int second) noexcept;
+        EdgeKey() noexcept;
+
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD int GetKey(int index) const;
+        void SetKey(int index, int value);
+
+    private:
+        NODISCARD std::array<int, 2> Init(int first, int second) noexcept;
+
+    private:
+        std::array<int, 2> vertex;
+    };
+
+    NODISCARD bool MATHEMATICS_DEFAULT_DECLARE operator<(const EdgeKey& lhs, const EdgeKey& rhs);
+
+    MATHEMATICS_DEFAULT_DECLARE System::OStream& operator<<(System::OStream& os, const EdgeKey& edgeKey);
+}
+
+#endif  // MATHEMATICS_MESHES_EDGE_KEY_H

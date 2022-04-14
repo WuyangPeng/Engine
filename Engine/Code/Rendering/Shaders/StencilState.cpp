@@ -72,13 +72,13 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, StencilState)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, StencilState)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, StencilState)
 
-Rendering::StencilState ::StencilState()
+Rendering::StencilState::StencilState()
     : ParentType{ "StencilState" }, impl{ make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::StencilState ::~StencilState()
+Rendering::StencilState::~StencilState()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

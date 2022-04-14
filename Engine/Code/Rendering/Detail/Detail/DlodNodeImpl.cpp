@@ -54,7 +54,7 @@ bool Rendering::DlodNodeImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::DlodNodeImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::DlodNodeImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -179,7 +179,7 @@ void Rendering::DlodNodeImpl
 }
 
 void Rendering::DlodNodeImpl
-	::SetWorldCenter( const FloatTransform& transform ) noexcept
+	::SetWorldCenter( const TransformF& transform ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

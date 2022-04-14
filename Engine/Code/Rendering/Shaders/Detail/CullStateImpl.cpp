@@ -25,35 +25,35 @@ Rendering::CullStateImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,CullStateImpl)
 
-bool Rendering::CullStateImpl ::IsEnabled() const noexcept
+bool Rendering::CullStateImpl::IsEnabled() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Enabled;
 }
 
-void Rendering::CullStateImpl ::SetEnabled(bool enabled) noexcept
+void Rendering::CullStateImpl::SetEnabled(bool enabled) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_Enabled = enabled;
 }
 
-bool Rendering::CullStateImpl ::IsCCWOrder() const noexcept
+bool Rendering::CullStateImpl::IsCCWOrder() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_CCWOrder;
 }
 
-void Rendering::CullStateImpl ::SetCCWOrder(bool cCWOrder) noexcept
+void Rendering::CullStateImpl::SetCCWOrder(bool cCWOrder) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	m_CCWOrder = cCWOrder;
 }
 
-void Rendering::CullStateImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::CullStateImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -70,7 +70,7 @@ void Rendering::CullStateImpl
 	target.Write(m_CCWOrder);
 }
 
-int Rendering::CullStateImpl ::GetStreamingSize() const noexcept
+int Rendering::CullStateImpl::GetStreamingSize() const noexcept
 {	
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -39,7 +39,7 @@ Rendering::ProjectionViewMatrixConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ProjectionViewMatrixConstant)
 
-void Rendering::ProjectionViewMatrixConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
+void Rendering::ProjectionViewMatrixConstant::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

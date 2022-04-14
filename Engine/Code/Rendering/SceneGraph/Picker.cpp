@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 17:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 16:19)
 
 #include "Rendering/RenderingExport.h"
 
@@ -11,13 +14,13 @@
 #include "Detail/PickRecordContainerImpl.h"
 #include "Detail/PickRecordImpl.h"
 #include "Detail/PickerImpl.h"
-
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-using std::make_shared;
+
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Picker)
-Rendering::Picker ::Picker(const ConstSpatialSharedPtr& scene, const APoint& origin, const AVector& direction, float tMin, float tMax)
+
+Rendering::Picker::Picker(const Spatial& scene, const APoint& origin, const AVector& direction, float tMin, float tMax)
     : impl{ scene, origin, direction, tMin, tMax }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -27,6 +30,6 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, Picker)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Picker, IsRecordsExist, bool)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker, GetClosestToZero, const Rendering::PickRecord)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker, GetClosestNonnegative, const Rendering::PickRecord)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker, GetClosestNonpositive, const Rendering::PickRecord)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker, GetClosestToZero, Rendering::PickRecord)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker, GetClosestNonnegative, Rendering::PickRecord)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Picker, GetClosestNonpositive, Rendering::PickRecord)

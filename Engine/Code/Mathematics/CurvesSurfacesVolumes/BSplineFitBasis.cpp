@@ -1,30 +1,22 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 17:54)
 
 #include "Mathematics/MathematicsExport.h"
- 
-#ifdef MATHEMATICS_EXPORT_TEMPLATE1
 
-#ifndef MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL
-	#define MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL
-#endif // MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL
+#include "BSplineFitBasisDetail.h"
 
-#include "BSplineFitBasisDetail.h" 
+#ifdef MATHEMATICS_TEMPLATE_TEST
 
 namespace Mathematics
 {
-	template 
-	class BSplineFitBasis<float>;
-
-	template 
-	class BSplineFitBasis<double>;
+    template class BSplineFitBasis<float>;
+    template class BSplineFitBasis<double>;
 }
 
-#endif // MATHEMATICS_EXPORT_TEMPLATE1
- 
-
-
- 
+#endif  // MATHEMATICS_TEMPLATE_TEST

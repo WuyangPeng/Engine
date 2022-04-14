@@ -1,70 +1,76 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 19:08)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_DETAIL_H
 
 #include "ContEllipsoid3MinCR.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Random.h"
 
 template <typename Real>
-Mathematics::ContEllipsoid3MinCR<Real>
-	::ContEllipsoid3MinCR (int numPoints,const Vector3<Real>* points, const Vector3<Real>& C,const Matrix3<Real>& R, Real D[3])
+Mathematics::ContEllipsoid3MinCR<Real>::ContEllipsoid3MinCR(const std::vector<Vector3<Real>>& points, const Vector3<Real>& c, const Matrix3<Real>& r, std::array<Real, 3>& d)
 {
-    // Compute the constraint coefficients, of the form (A[0],A[1]) for
-    // each i.
-    std::vector<Vector3<Real> > A(numPoints);
-    for (auto i = 0; i < numPoints; ++i)
+    std::vector<Vector3<Real>> a(points.size());
+    for (auto i = 0u; i < points.size(); ++i)
     {
-		auto diff = points[i] - C;  // P[i] - C
-		auto prod = diff*R;  // Real^T*(P[i] - C) = (u,v,w)
+        const auto diff = points.at(i) - c;
+        const auto prod = diff * r;
 
-		A[i].SetX(prod.GetX()*prod.GetX());  // u^2
-		A[i].SetY(prod.GetY()*prod.GetY());  // v^2
-		A[i].SetZ(prod.GetZ()*prod.GetZ());  // w^2
+        a.at(i).SetX(prod.GetX() * prod.GetX());
+        a.at(i).SetY(prod.GetY() * prod.GetY());
+        a.at(i).SetZ(prod.GetZ() * prod.GetZ());
     }
 
-    // TODO:  Sort the constraints to eliminate redundant ones.  It is clear
-    // how to do this in ContEllipse2MinCR.  How to do this in 3D?
+    MaxProduct(a, d);
 
-    MaxProduct(A, D);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-void Mathematics::ContEllipsoid3MinCR<Real>
-	::FindEdgeMax (std::vector<Vector3<Real> >& A,int& plane0, int& plane1, Real D[3])
+bool Mathematics::ContEllipsoid3MinCR<Real>::IsValid() const noexcept
 {
-    // Compute direction to local maximum point on line of intersection.
-	auto xDir = A[plane0][1]*A[plane1][2] - A[plane1][1]*A[plane0][2];
-	auto yDir = A[plane0][2]*A[plane1][0] - A[plane1][2]*A[plane0][0];
-	auto zDir = A[plane0][0]*A[plane1][1] - A[plane1][0]*A[plane0][1];
+    return true;
+}
 
-    // Build quadratic Q'(t) = (d/dt)(x(t)y(t)z(t)) = a0+a1*t+a2*t^2.
-	auto a0 = D[0]*D[1]*zDir + D[0]*D[2]*yDir + D[1]*D[2]*xDir;
-	auto a1 = (Math::GetValue(2))*(D[2]*xDir*yDir + D[1]*xDir*zDir + D[0]*yDir*zDir);
-	auto a2 = (static_cast<Real>(3))*(xDir*yDir*zDir);
+#endif  // OPEN_CLASS_INVARIANT
 
-    // Find root to Q'(t) = 0 corresponding to maximum.
-    Real tFinal;
-    if (a2 != Math<Real>::GetValue(0))
+template <typename Real>
+void Mathematics::ContEllipsoid3MinCR<Real>::FindEdgeMax(std::vector<Vector3<Real>>& a, int& plane0, const int& plane1, std::array<Real, 3>& d)
+{
+    auto xDir = a.at(plane0)[1] * a.at(plane1)[2] - a.at(plane1)[1] * a.at(plane0)[2];
+    auto yDir = a.at(plane0)[2] * a.at(plane1)[0] - a.at(plane1)[2] * a.at(plane0)[0];
+    auto zDir = a.at(plane0)[0] * a.at(plane1)[1] - a.at(plane1)[0] * a.at(plane0)[1];
+
+    auto a0 = d.at(0) * d.at(1) * zDir + d.at(0) * d.at(2) * yDir + d.at(1) * d.at(2) * xDir;
+    auto a1 = Math<Real>::GetValue(2) * (d.at(2) * xDir * yDir + d.at(1) * xDir * zDir + d.at(0) * yDir * zDir);
+    auto a2 = Math<Real>::GetValue(3) * (xDir * yDir * zDir);
+
+    Real tFinal{};
+    if (Math<Real>::Approximate(a2, Math<Real>::GetValue(0)))
     {
-		auto invA2 = (Math::GetValue(1))/a2;
-		auto discr = a1*a1 - ((Real)4)*a0*a2;
+        auto invA2 = Math<Real>::GetValue(1) / a2;
+        auto discr = a1 * a1 - Math<Real>::GetValue(4) * a0 * a2;
         discr = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-        tFinal = -(Real{0.5})*(a1 + discr)*invA2;
-        if (a1 + (Math::GetValue(2))*a2*tFinal > Math<Real>::GetValue(0))
+        tFinal = (a1 + discr) * invA2 / Math<Real>::GetValue(-2);
+        if (a1 + (Math<Real>::GetValue(2)) * a2 * tFinal > Math<Real>::GetValue(0))
         {
-            tFinal = (Real{0.5})*(-a1 + discr)*invA2;
+            tFinal = Math<Real>::GetRational(1, 2) * (-a1 + discr) * invA2;
         }
     }
-    else if (a1 != Math<Real>::GetValue(0))
+    else if (Math<Real>::Approximate(a1, Math<Real>::GetValue(0)))
     {
-        tFinal = -a0/a1;
+        tFinal = -a0 / a1;
     }
-    else if (a0 != Math<Real>::GetValue(0))
+    else if (Math<Real>::Approximate(a0, Math<Real>::GetValue(0)))
     {
         tFinal = (a0 >= Math<Real>::GetValue(0) ? Math<Real>::maxReal : -Math<Real>::maxReal);
     }
@@ -75,17 +81,15 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
     if (tFinal < Math<Real>::GetValue(0))
     {
-        // Make (xDir,yDir,zDir) point in direction of increase of Q.
         tFinal = -tFinal;
         xDir = -xDir;
         yDir = -yDir;
         zDir = -zDir;
     }
 
-    // Sort remaining planes along line from current point to local maximum.
-	auto tMax = tFinal;
-    int plane2 = -1;
-    const auto numPoints = boost::numeric_cast<int>(A.size());
+    auto tMax = tFinal;
+    auto plane2 = -1;
+    const auto numPoints = boost::numeric_cast<int>(a.size());
     for (auto i = 0; i < numPoints; ++i)
     {
         if (i == plane0 || i == plane1)
@@ -93,28 +97,23 @@ void Mathematics::ContEllipsoid3MinCR<Real>
             continue;
         }
 
-		auto norDotDir = A[i][0]*xDir + A[i][1]*yDir + A[i][2]*zDir;
+        auto norDotDir = a.at(i)[0] * xDir + a.at(i)[1] * yDir + a.at(i)[2] * zDir;
         if (norDotDir <= Math<Real>::GetValue(0))
         {
             continue;
         }
 
-        // Theoretically the numerator must be nonnegative since an invariant
-        // in the algorithm is that (x0,y0,z0) is on the convex hull of the
-        // constraints.  However, some numerical error may make this a small
-        // negative number.  In that case set tmax = 0 (no change in
-        // position).
-		auto numer = Math::GetValue(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
+        auto numer = Math<Real>::GetValue(1) - a.at(i)[0] * d.at(0) - a.at(i)[1] * d.at(1) - a.at(i)[2] * d.at(2);
         if (numer < Math<Real>::GetValue(0))
         {
-            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "Unexpected condition\n");
+            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "意外情况\n");
 
             plane2 = i;
             tMax = Math<Real>::GetValue(0);
             break;
         }
 
-		auto t = numer/norDotDir;
+        auto t = numer / norDotDir;
         if (0 <= t && t < tMax)
         {
             plane2 = i;
@@ -122,110 +121,102 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
     }
 
-    D[0] += tMax*xDir;
-    D[1] += tMax*yDir;
-    D[2] += tMax*zDir;
+    d.at(0) += tMax * xDir;
+    d.at(1) += tMax * yDir;
+    d.at(2) += tMax * zDir;
 
     if (tMax == tFinal)
     {
         return;
     }
 
-	if (tMax > Math<Real>::GetZeroTolerance())
+    if (tMax > Math<Real>::GetZeroTolerance())
     {
         plane0 = plane2;
-        FindFacetMax(A, plane0, D);
+        FindFacetMax(a, plane0, d);
         return;
     }
-
-    // tmax == 0, so return with D[0], D[1], and D[2] unchanged.
 }
 
 template <typename Real>
-void Mathematics::ContEllipsoid3MinCR<Real>
-	::FindFacetMax (std::vector<Vector3<Real> >& A,int& plane0, Real D[3])
+void Mathematics::ContEllipsoid3MinCR<Real>::FindFacetMax(std::vector<Vector3<Real>>& a, int& plane0, std::array<Real, 3>& d)
 {
-    Real tFinal, xDir, yDir, zDir;
+    Real tFinal{};
+    Real xDir{};
+    Real yDir{};
+    Real zDir{};
 
-	if (A[plane0][0] > Math<Real>::GetZeroTolerance() &&  A[plane0][1] > Math<Real>::GetZeroTolerance()	&&  A[plane0][2] > Math<Real>::GetZeroTolerance())
+    if (a.at(plane0)[0] > Math<Real>::GetZeroTolerance() && a.at(plane0)[1] > Math<Real>::GetZeroTolerance() && a.at(plane0)[2] > Math<Real>::GetZeroTolerance())
     {
-        // Compute local maximum point on plane.
-        const auto oneThird = (Real)(1.0/3.0);
-		auto xMax = oneThird/A[plane0][0];
-		auto yMax = oneThird/A[plane0][1];
-		auto zMax = oneThird/A[plane0][2];
+        constexpr auto oneThird = Math<Real>::GetRational(1, 3);
+        auto xMax = oneThird / a.at(plane0)[0];
+        auto yMax = oneThird / a.at(plane0)[1];
+        auto zMax = oneThird / a.at(plane0)[2];
 
-        // Compute direction to local maximum point on plane.
-        tFinal = Math::GetValue(1);
-        xDir = xMax - D[0];
-        yDir = yMax - D[1];
-        zDir = zMax - D[2];
+        tFinal = Math<Real>::GetValue(1);
+        xDir = xMax - d.at(0);
+        yDir = yMax - d.at(1);
+        zDir = zMax - d.at(2);
     }
     else
     {
         tFinal = Math<Real>::maxReal;
 
-		if (A[plane0][0] > Math<Real>::GetZeroTolerance())
+        if (a.at(plane0)[0] > Math<Real>::GetZeroTolerance())
         {
             xDir = Math<Real>::GetValue(0);
         }
         else
         {
-            xDir = Math::GetValue(1);
+            xDir = Math<Real>::GetValue(1);
         }
 
-		if (A[plane0][1] > Math<Real>::GetZeroTolerance())
+        if (a.at(plane0)[1] > Math<Real>::GetZeroTolerance())
         {
             yDir = Math<Real>::GetValue(0);
         }
         else
         {
-            yDir = Math::GetValue(1);
+            yDir = Math<Real>::GetValue(1);
         }
 
-		if (A[plane0][2] > Math<Real>::GetZeroTolerance())
+        if (a.at(plane0)[2] > Math<Real>::GetZeroTolerance())
         {
             zDir = Math<Real>::GetValue(0);
         }
         else
         {
-            zDir = Math::GetValue(1);
+            zDir = Math<Real>::GetValue(1);
         }
     }
-    
-    // Sort remaining planes along line from current point.
-    Real tMax = tFinal;
-    int plane1 = -1;
-    const auto numPoints = boost::numeric_cast<int>(A.size());
-    for (int i = 0; i < numPoints; ++i)
+
+    auto tMax = tFinal;
+    auto plane1 = -1;
+    const auto numPoints = boost::numeric_cast<int>(a.size());
+    for (auto i = 0; i < numPoints; ++i)
     {
         if (i == plane0)
         {
             continue;
         }
 
-		auto norDotDir = A[i][0]*xDir + A[i][1]*yDir + A[i][2]*zDir;
+        auto norDotDir = a.at(i)[0] * xDir + a.at(i)[1] * yDir + a.at(i)[2] * zDir;
         if (norDotDir <= Math<Real>::GetValue(0))
         {
             continue;
         }
 
-        // Theoretically the numerator must be nonnegative since an invariant
-        // in the algorithm is that (x0,y0,z0) is on the convex hull of the
-        // constraints.  However, some numerical error may make this a small
-        // negative number.  In that case, set tmax = 0 (no change in
-        // position).
-		auto numer = Math::GetValue(1) - A[i][0]*D[0] - A[i][1]*D[1] - A[i][2]*D[2];
+        auto numer = Math<Real>::GetValue(1) - a.at(i)[0] * d.at(0) - a.at(i)[1] * d.at(1) - a.at(i)[2] * d.at(2);
         if (numer < Math<Real>::GetValue(0))
         {
-			MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(),  "Unexpected condition\n");
+            MATHEMATICS_ASSERTION_0(numer >= -Math<Real>::GetZeroTolerance(), "意外情况\n");
 
             plane1 = i;
             tMax = Math<Real>::GetValue(0);
             break;
         }
 
-		auto t = numer/norDotDir;
+        auto t = numer / norDotDir;
         if (0 <= t && t < tMax)
         {
             plane1 = i;
@@ -233,64 +224,54 @@ void Mathematics::ContEllipsoid3MinCR<Real>
         }
     }
 
-    D[0] += tMax*xDir;
-    D[1] += tMax*yDir;
-    D[2] += tMax*zDir;
+    d.at(0) += tMax * xDir;
+    d.at(1) += tMax * yDir;
+    d.at(2) += tMax * zDir;
 
-    if (tMax == Math::GetValue(1))
+    if (Math<Real>::Approximate(tMax, Math<Real>::GetValue(1)))
     {
         return;
     }
 
-	if (tMax > Math<Real>::GetZeroTolerance())
+    if (tMax > Math<Real>::GetZeroTolerance())
     {
         plane0 = plane1;
-        FindFacetMax(A, plane0, D);
+        FindFacetMax(a, plane0, d);
         return;
     }
 
-    FindEdgeMax(A, plane0, plane1, D);
+    FindEdgeMax(a, plane0, plane1, d);
 }
 
 template <typename Real>
-void Mathematics::ContEllipsoid3MinCR<Real>
-	::MaxProduct (std::vector<Vector3<Real> >& A, Real D[3])
+void Mathematics::ContEllipsoid3MinCR<Real>::MaxProduct(std::vector<Vector3<Real>>& a, std::array<Real, 3>& d)
 {
-    // Maximize x*y*z subject to x >= 0, y >= 0, z >= 0, and
-    // A[i]*x+B[i]*y+C[i]*z <= 1 for 0 <= i < N where A[i] >= 0,
-    // B[i] >= 0, and C[i] >= 0.
+    constexpr auto maxJitter = static_cast<Real>(1e-12);
+    const auto numPoints = boost::numeric_cast<int>(a.size());
 
-    // Jitter the lines to avoid cases where more than three planes
-    // intersect at the same point.  Should also break parallelism
-    // and planes parallel to the coordinate planes.
-    const auto maxJitter = static_cast<Real>(1e-12);
-    const auto numPoints = boost::numeric_cast<int>(A.size());
-    int i;
-    for (i = 0; i < numPoints; ++i)
+    for (auto i = 0; i < numPoints; ++i)
     {
-		A[i][0] += maxJitter*Random<Real>::UnitRandom();
-		A[i][1] += maxJitter*Random<Real>::UnitRandom();
-		A[i][2] += maxJitter*Random<Real>::UnitRandom();
+        a.at(i)[0] += maxJitter * Random<Real>::UnitRandom();
+        a.at(i)[1] += maxJitter * Random<Real>::UnitRandom();
+        a.at(i)[2] += maxJitter * Random<Real>::UnitRandom();
     }
 
-    // Sort lines along the z-axis (x = 0 and y = 0).
-    int plane = -1;
-    Real zmax = Math<Real>::GetValue(0);
-    for (i = 0; i < numPoints; ++i)
+    auto plane = -1;
+    auto zmax = Math<Real>::GetValue(0);
+    for (auto i = 0; i < numPoints; ++i)
     {
-        if (A[i][2] > zmax)
+        if (a.at(i)[2] > zmax)
         {
-            zmax = A[i][2];
+            zmax = a.at(i)[2];
             plane = i;
         }
     }
-    MATHEMATICS_ASSERTION_0(plane != -1, "Unexpected condition\n");
+    MATHEMATICS_ASSERTION_0(plane != -1, "意外情况\n");
 
-    // Walk along convex hull searching for maximum.
-    D[0] = Math<Real>::GetValue(0);
-    D[1] = Math<Real>::GetValue(0);
-    D[2] = (Math::GetValue(1))/zmax;
-    FindFacetMax(A, plane, D);
+    d.at(0) = Math<Real>::GetValue(0);
+    d.at(1) = Math<Real>::GetValue(0);
+    d.at(2) = (Math<Real>::GetValue(1)) / zmax;
+    FindFacetMax(a, plane, d);
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_DETAIL_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_DETAIL_H

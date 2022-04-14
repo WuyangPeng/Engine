@@ -24,12 +24,12 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegion);
 
-Rendering::ConvexRegion ::ConvexRegion(int numPortals, Portal** portals)
-    : mNumPortals(numPortals), mPortals(portals), mVisited(false)
+Rendering::ConvexRegion::ConvexRegion(int numPortals, Portal** portals)
+    : ParentType{ NodeCreate::Init }, mNumPortals(numPortals), mPortals(portals), mVisited(false)
 {
 }
 
-Rendering::ConvexRegion ::~ConvexRegion()
+Rendering::ConvexRegion::~ConvexRegion()
 {
     EXCEPTION_TRY
     {
@@ -42,7 +42,7 @@ Rendering::ConvexRegion ::~ConvexRegion()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-bool Rendering::ConvexRegion ::UpdateWorldData(double applicationTime)
+bool Rendering::ConvexRegion::UpdateWorldData(double applicationTime)
 {
     // Update the region walls and contained objects.
     const bool result = Node::UpdateWorldData(applicationTime);
@@ -56,7 +56,7 @@ bool Rendering::ConvexRegion ::UpdateWorldData(double applicationTime)
     return result;
 }
 
-void Rendering::ConvexRegion ::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::ConvexRegion::GetVisibleSet(Culler& culler, bool noCull)
 {
     if (!mVisited)
     {
@@ -76,7 +76,7 @@ void Rendering::ConvexRegion ::GetVisibleSet(Culler& culler, bool noCull)
 }
 
 // Name support.
-CoreTools::ObjectSharedPtr Rendering::ConvexRegion ::GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::ConvexRegion::GetObjectByName(const std::string& name)
 {
     CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
     if (found)
@@ -94,7 +94,7 @@ CoreTools::ObjectSharedPtr Rendering::ConvexRegion ::GetObjectByName(const std::
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::ConvexRegion ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::ConvexRegion::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
@@ -108,7 +108,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::ConvexRegion ::GetAllObjectsB
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::ConvexRegion ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ConvexRegion::GetConstObjectByName(const std::string& name) const
 {
     CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -128,7 +128,7 @@ CoreTools::ConstObjectSharedPtr Rendering::ConvexRegion ::GetConstObjectByName(c
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ConvexRegion ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ConvexRegion::GetAllConstObjectsByName(const std::string& name) const
 {
     std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -144,12 +144,12 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ConvexRegion ::GetAllCon
 
 // Streaming support.
 
-Rendering::ConvexRegion ::ConvexRegion(LoadConstructor value)
+Rendering::ConvexRegion::ConvexRegion(LoadConstructor value)
     : Node(value), mNumPortals(0), mPortals(0), mVisited(false)
 {
 }
 
-void Rendering::ConvexRegion ::Load(CoreTools::BufferSource& source)
+void Rendering::ConvexRegion::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -160,19 +160,19 @@ void Rendering::ConvexRegion ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::ConvexRegion ::Link(CoreTools::ObjectLink& source)
+void Rendering::ConvexRegion::Link(CoreTools::ObjectLink& source)
 {
     Node::Link(source);
 
     //  source.ResolveObjectLink(mNumPortals, mPortals);
 }
 
-void Rendering::ConvexRegion ::PostLink()
+void Rendering::ConvexRegion::PostLink()
 {
     Node::PostLink();
 }
 
-uint64_t Rendering::ConvexRegion ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::ConvexRegion::Register(CoreTools::ObjectRegister& target) const
 {
     if (Node::Register(target))
     {
@@ -182,7 +182,7 @@ uint64_t Rendering::ConvexRegion ::Register(CoreTools::ObjectRegister& target) c
     return false;
 }
 
-void Rendering::ConvexRegion ::Save(CoreTools::BufferTarget& target) const
+void Rendering::ConvexRegion::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -193,7 +193,7 @@ void Rendering::ConvexRegion ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::ConvexRegion ::GetStreamingSize() const
+int Rendering::ConvexRegion::GetStreamingSize() const
 {
     int size = Node::GetStreamingSize();
     size += sizeof(mNumPortals);
@@ -201,12 +201,12 @@ int Rendering::ConvexRegion ::GetStreamingSize() const
     return size;
 }
 
-int Rendering::ConvexRegion ::GetNumPortals() const noexcept
+int Rendering::ConvexRegion::GetNumPortals() const noexcept
 {
     return mNumPortals;
 }
 
-Rendering::Portal* Rendering::ConvexRegion ::GetPortal(int i) const noexcept
+Rendering::Portal* Rendering::ConvexRegion::GetPortal(int i) const noexcept
 {
     return mPortals[i];
 }

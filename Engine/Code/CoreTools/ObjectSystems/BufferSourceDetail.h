@@ -333,7 +333,10 @@ void CoreTools::BufferSource::ReadContainer(std::array<T, Size>& container)
 
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    ReadContainer(Size, container);
+    for (auto& value : container)
+    {
+        value = Read<T>();
+    }
 }
 
 template <typename T>
@@ -654,11 +657,10 @@ void CoreTools::BufferSource::ReadObjectAssociated(T& datum)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    using ValueType = typename T::value_type;
-    static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    datum.m_Object.reset();
-    source.Read(CORE_TOOLS_STREAM_SIZE(datum.m_Associated), &datum.m_Associated);
+    datum.object.reset();
+    source.Read(CORE_TOOLS_STREAM_SIZE(datum.associated), &datum.associated);
 }
 
 template <typename T>

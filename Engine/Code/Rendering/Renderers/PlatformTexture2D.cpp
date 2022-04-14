@@ -13,13 +13,13 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 
-Rendering::PlatformTexture2D ::PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D)
+Rendering::PlatformTexture2D::PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, texture2D }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PlatformTexture2D ::~PlatformTexture2D()
+Rendering::PlatformTexture2D::~PlatformTexture2D()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -28,21 +28,21 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformTexture2D)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PlatformTexture2D, Unlock, int, void)
 
-void Rendering::PlatformTexture2D ::Enable(Renderer* renderer, int textureUnit)
+void Rendering::PlatformTexture2D::Enable(Renderer* renderer, int textureUnit)
 {
     ;
 
     return impl->Enable(renderer, textureUnit);
 }
 
-void Rendering::PlatformTexture2D ::Disable(Renderer* renderer, int textureUnit)
+void Rendering::PlatformTexture2D::Disable(Renderer* renderer, int textureUnit)
 {
     ;
 
     return impl->Disable(renderer, textureUnit);
 }
 
-void* Rendering::PlatformTexture2D ::Lock(int level, BufferLocking mode)
+void* Rendering::PlatformTexture2D::Lock(int level, BufferLocking mode)
 {
     ;
 

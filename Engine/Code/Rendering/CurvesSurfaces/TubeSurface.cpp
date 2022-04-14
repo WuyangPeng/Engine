@@ -25,11 +25,12 @@
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26493)
 #include SYSTEM_WARNING_DISABLE(26429)
+ 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TubeSurface);
 
-Rendering::TubeSurface ::TubeSurface(Mathematics::Curve3f* medial, RadialFunction radial, bool closed, const Mathematics::Vector3F& upVector, int numMedialSamples, int numSliceSamples,
+Rendering::TubeSurface::TubeSurface(Mathematics::Curve3<float>* medial, RadialFunction radial, bool closed, const Mathematics::Vector3F& upVector, int numMedialSamples, int numSliceSamples,
                                      bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax, VertexFormatSharedPtr vformat)
     : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mMedial(medial), mRadial(radial), mNumMedialSamples(numMedialSamples),
       mNumSliceSamples(numSliceSamples), mUpVector(upVector), mSin(0), mCos(0), mClosed(closed), mSampleByArcLength(sampleByArcLength)
@@ -47,7 +48,7 @@ Rendering::TubeSurface ::TubeSurface(Mathematics::Curve3f* medial, RadialFunctio
 
     SetVertexFormat(vformat);
     const int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared<VertexBuffer>(numVertices, vstride)));
+    SetVertexBuffer(VertexBufferSharedPtr(VertexBuffer::Create(numVertices, vstride)));
 
     ComputeSinCos();
     ComputeVertices();
@@ -70,7 +71,7 @@ Rendering::TubeSurface ::TubeSurface(Mathematics::Curve3f* medial, RadialFunctio
     UpdateModelSpace(VisualUpdateType::Normals);
 }
 
-Rendering::TubeSurface ::~TubeSurface()
+Rendering::TubeSurface::~TubeSurface()
 {
     EXCEPTION_TRY
     {
@@ -81,7 +82,7 @@ Rendering::TubeSurface ::~TubeSurface()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::TubeSurface ::ComputeSinCos()
+void Rendering::TubeSurface::ComputeSinCos() noexcept
 {
     // Compute slice vertex coefficients.  The first and last coefficients
     // are duplicated to allow a closed cross section that has two different
@@ -89,7 +90,10 @@ void Rendering::TubeSurface ::ComputeSinCos()
 
     mSin = nullptr;  // NEW1<float>(mNumSliceSamples + 1);
     mCos = nullptr;  //  NEW1<float>(mNumSliceSamples + 1);
-
+    if (mSin == nullptr)
+        return;
+    if (mCos == nullptr)
+        return;
     const float invSliceSamples = 1.0f / (float)mNumSliceSamples;
     for (int i = 0; i < mNumSliceSamples; ++i)
     {
@@ -101,7 +105,7 @@ void Rendering::TubeSurface ::ComputeSinCos()
     mCos[mNumSliceSamples] = mCos[0];
 }
 
-void Rendering::TubeSurface ::ComputeVertices()
+void Rendering::TubeSurface::ComputeVertices()
 {
     const float tMin = mMedial->GetMinTime();
     const float tRange = mMedial->GetMaxTime() - tMin;
@@ -128,7 +132,7 @@ void Rendering::TubeSurface ::ComputeVertices()
         denom = 1.0f / (float)(mNumMedialSamples - 1);
     }
 
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     for (int m = 0, v = 0; m < mNumMedialSamples; ++m, ++v)
     {
@@ -187,12 +191,12 @@ void Rendering::TubeSurface ::ComputeVertices()
     }
 }
 
-void Rendering::TubeSurface ::ComputeNormals()
+void Rendering::TubeSurface::ComputeNormals()
 {
     int s = 0, sM1 = 0, sP1 = 0, m = 0, mM1 = 0, mP1 = 0;
     const Mathematics::Vector3F dir0, dir1;
 
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     // Compute the interior normals (central differences).
     for (m = 1; m <= mNumMedialSamples - 2; ++m)
@@ -288,9 +292,9 @@ void Rendering::TubeSurface ::ComputeNormals()
     }
 }
 
-void Rendering::TubeSurface ::ComputeUVs(const Mathematics::Float2& tcoordMin, const Mathematics::Float2& tcoordMax)
+void Rendering::TubeSurface::ComputeUVs(const Mathematics::Float2& tcoordMin, const Mathematics::Float2& tcoordMax)
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     Mathematics::Float2 tcoordRange(tcoordMax[0] - tcoordMin[0], tcoordMax[1] - tcoordMin[1]);
     const int mMax = (mClosed ? mNumMedialSamples : mNumMedialSamples - 1);
@@ -317,7 +321,7 @@ void Rendering::TubeSurface ::ComputeUVs(const Mathematics::Float2& tcoordMin, c
     }
 }
 
-void Rendering::TubeSurface ::ComputeIndices(bool insideView)
+void Rendering::TubeSurface::ComputeIndices(bool insideView)
 {
     insideView;
     int numTriangles = 0;
@@ -330,7 +334,7 @@ void Rendering::TubeSurface ::ComputeIndices(bool insideView)
         numTriangles = 2 * mNumSliceSamples * (mNumMedialSamples - 1);
     }
 
-    SetIndexBuffer(IndexBufferSharedPtr(std::make_shared<IndexBuffer>(3 * numTriangles, (int)sizeof(int))));
+    SetIndexBuffer(IndexBufferSharedPtr(IndexBuffer::Create(3 * numTriangles, (int)sizeof(int))));
 
     /*
     int* indices = (int*)mIBuffer->GetData();
@@ -395,18 +399,18 @@ void Rendering::TubeSurface ::ComputeIndices(bool insideView)
     }*/
 }
 
-void Rendering::TubeSurface ::GetTMinSlice(Mathematics::Vector3F* slice)
+void Rendering::TubeSurface::GetTMinSlice(Mathematics::Vector3F* slice)
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
     for (int i = 0; i <= mNumSliceSamples; ++i)
     {
         slice[i] = vba.GetPosition<Mathematics::Vector3F>(i);
     }
 }
 
-void Rendering::TubeSurface ::GetTMaxSlice(Mathematics::Vector3F* slice)
+void Rendering::TubeSurface::GetTMaxSlice(Mathematics::Vector3F* slice)
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
     int j = GetVertexBuffer()->GetNumElements() - mNumSliceSamples - 1;
     for (int i = 0; i <= mNumSliceSamples; ++i, ++j)
     {
@@ -414,7 +418,7 @@ void Rendering::TubeSurface ::GetTMaxSlice(Mathematics::Vector3F* slice)
     }
 }
 
-void Rendering::TubeSurface ::UpdateSurface()
+void Rendering::TubeSurface::UpdateSurface()
 {
     ComputeVertices();
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
@@ -428,13 +432,13 @@ void Rendering::TubeSurface ::UpdateSurface()
 
 // Streaming support.
 
-Rendering::TubeSurface ::TubeSurface(LoadConstructor value)
+Rendering::TubeSurface::TubeSurface(LoadConstructor value)
     : ParentType(value), mMedial(0), mRadial(0), mNumMedialSamples(0), mNumSliceSamples(0), mUpVector(),
       mSin(0), mCos(0), mClosed(false), mSampleByArcLength(false)
 {
 }
 
-void Rendering::TubeSurface ::Load(CoreTools::BufferSource& source)
+void Rendering::TubeSurface::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -455,22 +459,22 @@ void Rendering::TubeSurface ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::TubeSurface ::Link(CoreTools::ObjectLink& source)
+void Rendering::TubeSurface::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 }
 
-void Rendering::TubeSurface ::PostLink()
+void Rendering::TubeSurface::PostLink()
 {
     ParentType::PostLink();
 }
 
-uint64_t Rendering::TubeSurface ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::TubeSurface::Register(CoreTools::ObjectRegister& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::TubeSurface ::Save(CoreTools::BufferTarget& target) const
+void Rendering::TubeSurface::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -497,7 +501,7 @@ void Rendering::TubeSurface ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::TubeSurface ::GetStreamingSize() const
+int Rendering::TubeSurface::GetStreamingSize() const
 {
     int size = ParentType::GetStreamingSize();
     size += sizeof(mNumMedialSamples);
@@ -510,47 +514,47 @@ int Rendering::TubeSurface ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::TubeSurface ::SetMedial(Mathematics::Curve3f* medial) noexcept
+void Rendering::TubeSurface::SetMedial(Mathematics::Curve3<float>* medial) noexcept
 {
     mMedial = medial;
 }
 
-const Mathematics::Curve3f* Rendering::TubeSurface ::GetMedial() const noexcept
+const Mathematics::Curve3<float>* Rendering::TubeSurface::GetMedial() const noexcept
 {
     return mMedial;
 }
 
-void Rendering::TubeSurface ::SetRadial(RadialFunction radial) noexcept
+void Rendering::TubeSurface::SetRadial(RadialFunction radial) noexcept
 {
     mRadial = radial;
 }
 
-Rendering::TubeSurface::RadialFunction Rendering::TubeSurface ::GetRadial() const noexcept
+Rendering::TubeSurface::RadialFunction Rendering::TubeSurface::GetRadial() const noexcept
 {
     return mRadial;
 }
 
-void Rendering::TubeSurface ::SetUpVector(const Mathematics::Vector3F& upVector) noexcept
+void Rendering::TubeSurface::SetUpVector(const Mathematics::Vector3F& upVector) noexcept
 {
     mUpVector = upVector;
 }
 
-const Mathematics::Vector3F& Rendering::TubeSurface ::GetUpVector() const noexcept
+const Mathematics::Vector3F& Rendering::TubeSurface::GetUpVector() const noexcept
 {
     return mUpVector;
 }
 
-int Rendering::TubeSurface ::GetNumMedialSamples() const noexcept
+int Rendering::TubeSurface::GetNumMedialSamples() const noexcept
 {
     return mNumMedialSamples;
 }
 
-int Rendering::TubeSurface ::GetNumSliceSamples() const noexcept
+int Rendering::TubeSurface::GetNumSliceSamples() const noexcept
 {
     return mNumSliceSamples;
 }
 
-int Rendering::TubeSurface ::Index(int s, int m) noexcept
+int Rendering::TubeSurface::Index(int s, int m) noexcept
 {
     return s + (mNumSliceSamples + 1) * m;
 }

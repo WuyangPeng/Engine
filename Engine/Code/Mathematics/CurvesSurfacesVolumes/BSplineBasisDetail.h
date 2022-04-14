@@ -1,207 +1,218 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 18:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 14:04)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_BASIS_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_BASIS_DETAIL_H
 
 #include "BSplineBasis.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
+#include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-    #include "System/Helper/PragmaWarning.h"
-    #include "CoreTools/Contract/Noexcept.h"
-    #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-    #include "CoreTools/Helper/ExceptionMacro.h"
-    #include "Mathematics/Base/MathDetail.h"
-    #include <memory>
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26481)
-    #include SYSTEM_WARNING_DISABLE(26429)
+#include <memory>
 
 template <typename Real>
 Mathematics::BSplineBasis<Real>::BSplineBasis() noexcept
-    : mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{}, mDegree{}, mKnot{}, mOpen{}, mUniform{}, mBD0{}
+    : ctrlPointsCount{}, degree{}, knot{}, open{}, uniform{}, bD0{}, bD1{}, bD2{}, bD3{}
 {
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::BSplineBasis<Real>::BSplineBasis(int numCtrlPoints, int degree, bool open)
-    : mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{}, mDegree{}, mKnot{}, mOpen{}, mUniform{}, mBD0{}
+    : ctrlPointsCount{}, degree{}, knot{}, open{}, uniform{}, bD0{}, bD1{}, bD2{}, bD3{}
 {
     Create(numCtrlPoints, degree, open);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int degree, bool open)
+void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int newDegree, bool newOpen)
 {
-    mUniform = true;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    int i = 0;
-    const auto numKnots = Initialize(numCtrlPoints, degree, open);
-    const auto temp = mNumCtrlPoints - mDegree;
-    auto factor = (Math::GetValue(1)) / (temp);
-    if (mOpen)
+    uniform = true;
+
+    const auto numKnots = Initialize(numCtrlPoints, newDegree, newOpen);
+    const auto temp = ctrlPointsCount - degree;
+    const auto factor = (Math::GetValue(1)) / (temp);
+
+    if (open)
     {
-        for (i = 0; i <= mDegree; ++i)
+        auto i = 0;
+        for (; i <= degree; ++i)
         {
-            mKnot[i] = Math::GetValue(0);
+            knot.at(i) = Math::GetValue(0);
         }
 
-        for (/**/; i < mNumCtrlPoints; ++i)
+        for (; i < ctrlPointsCount; ++i)
         {
-            const auto temp1 = i - mDegree;
-            mKnot[i] = temp1 * factor;
+            const auto value = i - degree;
+            knot.at(i) = value * factor;
         }
 
-        for (/**/; i < numKnots; ++i)
+        for (; i < numKnots; ++i)
         {
-            mKnot[i] = Math::GetValue(1);
+            knot.at(i) = Math::GetValue(1);
         }
     }
     else
     {
-        for (i = 0; i < numKnots; ++i)
+        for (auto i = 0; i < numKnots; ++i)
         {
-            const auto temp2 = i - mDegree;
-            mKnot[i] = temp2 * factor;
+            const auto value = i - degree;
+            knot.at(i) = value * factor;
         }
     }
 }
 
 template <typename Real>
-Mathematics::BSplineBasis<Real>::BSplineBasis(int numCtrlPoints, int degree, const Real* interiorKnot)
-    : mBD1{}, mBD2{}, mBD3{}, mNumCtrlPoints{}, mDegree{}, mKnot{}, mOpen{}, mUniform{}, mBD0{}
+Mathematics::BSplineBasis<Real>::BSplineBasis(int numCtrlPoints, int degree, const std::vector<Real>& interiorKnot)
+    : ctrlPointsCount{}, degree{}, knot{}, open{}, uniform{}, bD0{}, bD1{}, bD2{}, bD3{}
 {
     Create(numCtrlPoints, degree, interiorKnot);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int degree, const Real* interiorKnot)
+void Mathematics::BSplineBasis<Real>::Create(int numCtrlPoints, int newDegree, const std::vector<Real>& interiorKnot)
 {
-    mUniform = false;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-    int i = 0;
-    const auto numKnots = Initialize(numCtrlPoints, degree, true);
-    for (i = 0; i <= mDegree; ++i)
+    uniform = false;
+
+    const auto numKnots = Initialize(numCtrlPoints, newDegree, true);
+    auto i = 0;
+    for (; i <= degree; ++i)
     {
-        mKnot[i] = Math ::GetValue(0);
+        knot.at(i) = Math ::GetValue(0);
     }
 
-    for (auto j = 0; i < mNumCtrlPoints; ++i, ++j)
+    for (auto j = 0; i < ctrlPointsCount; ++i, ++j)
     {
-        mKnot[i] = interiorKnot[j];
+        knot.at(i) = interiorKnot.at(j);
     }
 
-    for (/**/; i < numKnots; ++i)
+    for (; i < numKnots; ++i)
     {
-        mKnot[i] = Math::GetValue(1);
+        knot.at(i) = Math::GetValue(1);
     }
 }
+
+#ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-Mathematics::BSplineBasis<Real>::~BSplineBasis()
+bool Mathematics::BSplineBasis<Real>::IsValid() const noexcept
 {
-    EXCEPTION_TRY
-    {
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26447)
-        //DELETE1(mKnot);
-        Deallocate(mBD0);
-        Deallocate(mBD1);
-        Deallocate(mBD2);
-        Deallocate(mBD3);
-    #include STSTEM_WARNING_POP
-    }
-    EXCEPTION_ALL_CATCH(Mathematics)
+    return true;
 }
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
 int Mathematics::BSplineBasis<Real>::GetNumCtrlPoints() const noexcept
 {
-    return mNumCtrlPoints;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ctrlPointsCount;
 }
 
 template <typename Real>
 int Mathematics::BSplineBasis<Real>::GetDegree() const noexcept
 {
-    return mDegree;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return degree;
 }
 
 template <typename Real>
 bool Mathematics::BSplineBasis<Real>::IsOpen() const noexcept
 {
-    return mOpen;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return open;
 }
 
 template <typename Real>
 bool Mathematics::BSplineBasis<Real>::IsUniform() const noexcept
 {
-    return mUniform;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return uniform;
 }
 
 template <typename Real>
-Real Mathematics::BSplineBasis<Real>::GetD0(int i) const noexcept
+Real Mathematics::BSplineBasis<Real>::GetD0(int i) const
 {
-    return mBD0[mDegree][i];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return bD0.at(degree).at(i);
 }
 
 template <typename Real>
-Real Mathematics::BSplineBasis<Real>::GetD1(int i) const noexcept
+Real Mathematics::BSplineBasis<Real>::GetD1(int i) const
 {
-    return mBD1[mDegree][i];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return bD1.at(degree).at(i);
 }
 
 template <typename Real>
-Real Mathematics::BSplineBasis<Real>::GetD2(int i) const noexcept
+Real Mathematics::BSplineBasis<Real>::GetD2(int i) const
 {
-    return mBD2[mDegree][i];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return bD2.at(degree).at(i);
 }
 
 template <typename Real>
-Real Mathematics::BSplineBasis<Real>::GetD3(int i) const noexcept
+Real Mathematics::BSplineBasis<Real>::GetD3(int i) const
 {
-    return mBD3[mDegree][i];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return bD3.at(degree).at(i);
 }
 
 template <typename Real>
-Real** Mathematics::BSplineBasis<Real>::Allocate() const
+std::vector<std::vector<Real>> Mathematics::BSplineBasis<Real>::Allocate() const
 {
-    const auto numRows = mDegree + 1;
-    const auto numCols = mNumCtrlPoints + mDegree;
-    Real** data = nullptr;  // NEW2<Real>(numCols, numRows);
-    const auto num = numRows * numCols;
-    memset(data[0], 0, num * sizeof(Real));
+    const auto numRows = degree + 1;
+    const auto numCols = ctrlPointsCount + degree;
+    std::vector<std::vector<Real>> data(numRows, std::vector<Real>(numCols));
+
     return data;
 }
 
 template <typename Real>
-void Mathematics::BSplineBasis<Real>::Deallocate(Real** data)
+int Mathematics::BSplineBasis<Real>::Initialize(int numCtrlPoints, int newDegree, bool newOpen)
 {
-    CoreTools::DisableNoexcept();
-    data;
-    //  DELETE2(data);
-}
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-template <typename Real>
-int Mathematics::BSplineBasis<Real>::Initialize(int numCtrlPoints, int degree, bool open)
-{
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree <= numCtrlPoints - 1, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= newDegree && newDegree <= numCtrlPoints - 1, "无效输入。\n");
 
-    mNumCtrlPoints = numCtrlPoints;
-    mDegree = degree;
-    mOpen = open;
+    ctrlPointsCount = numCtrlPoints;
+    degree = newDegree;
+    open = newOpen;
 
-    const int numKnots = mNumCtrlPoints + mDegree + 1;
-    mKnot = nullptr;  // NEW1<Real>(numKnots);
+    const int numKnots = ctrlPointsCount + degree + 1;
+    knot.resize(numKnots);
 
-    mBD0 = Allocate();
-    mBD1 = 0;
-    mBD2 = 0;
-    mBD3 = 0;
+    bD0 = Allocate();
+    bD1.clear();
+    bD2.clear();
+    bD3.clear();
 
     return numKnots;
 }
@@ -209,62 +220,52 @@ int Mathematics::BSplineBasis<Real>::Initialize(int numCtrlPoints, int degree, b
 template <typename Real>
 void Mathematics::BSplineBasis<Real>::SetKnot(int j, Real value)
 {
-    if (!mUniform)
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (!uniform)
     {
-        // Access only allowed to elements d+1 <= i <= n.
-        const auto i = j + mDegree + 1;
-        if (mDegree + 1 <= i && i <= mNumCtrlPoints)
+        const auto i = j + degree + 1;
+        if (degree + 1 <= i && i <= ctrlPointsCount)
         {
-            mKnot[i] = value;
+            knot.at(i) = value;
         }
-        else
-        {
-            MATHEMATICS_ASSERTION_0(false, "Knot index out of range.\n");
-        }
-    }
-    else
-    {
-        MATHEMATICS_ASSERTION_0(false, "Knots cannot be set for uniform splines.\n");
     }
 }
 
 template <typename Real>
 Real Mathematics::BSplineBasis<Real>::GetKnot(int j) const
 {
-    // Access only allowed to elements d+1 <= i <= n.
-    const auto i = j + mDegree + 1;
-    if (mDegree + 1 <= i && i <= mNumCtrlPoints)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto i = j + degree + 1;
+    if (degree + 1 <= i && i <= ctrlPointsCount)
     {
-        return mKnot[i];
+        return knot.at(i);
     }
-
-    MATHEMATICS_ASSERTION_0(false, "Knot index out of range.\n");
-
-    CoreTools::DisableNoexcept();
 
     return Math::maxReal;
 }
 
 template <typename Real>
-int Mathematics::BSplineBasis<Real>::GetKey(Real& t) const noexcept
+int Mathematics::BSplineBasis<Real>::GetKey(Real& t) const
 {
-    if (mOpen)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (open)
     {
-        // Open splines clamp to [0,1].
         if (t <= Math::GetValue(0))
         {
             t = Math::GetValue(0);
-            return mDegree;
+            return degree;
         }
         else if (t >= Math::GetValue(1))
         {
             t = Math::GetValue(1);
-            return mNumCtrlPoints - 1;
+            return ctrlPointsCount - 1;
         }
     }
     else
     {
-        // Periodic splines wrap to [0,1).
         if (t < Math::GetValue(0) || t >= Math::GetValue(1))
         {
             t -= Math::Floor(t);
@@ -273,15 +274,15 @@ int Mathematics::BSplineBasis<Real>::GetKey(Real& t) const noexcept
 
     int i = 0;
 
-    if (mUniform)
+    if (uniform)
     {
-        i = mDegree + static_cast<int>((mNumCtrlPoints - mDegree) * t);
+        i = degree + static_cast<int>((ctrlPointsCount - degree) * t);
     }
     else
     {
-        for (i = mDegree + 1; i <= mNumCtrlPoints; ++i)
+        for (i = degree + 1; i <= ctrlPointsCount; ++i)
         {
-            if (t < mKnot[i])
+            if (t < knot.at(i))
             {
                 break;
             }
@@ -293,113 +294,124 @@ int Mathematics::BSplineBasis<Real>::GetKey(Real& t) const noexcept
 }
 
 template <typename Real>
-void Mathematics::BSplineBasis<Real>::Compute(Real t, unsigned int order, int& minIndex, int& maxIndex) const
+void Mathematics::BSplineBasis<Real>::Compute(Real t, int order, int& minIndex, int& maxIndex) const
 {
-    MATHEMATICS_ASSERTION_0(order <= 3, "Only derivatives to third order supported\n");
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    MATHEMATICS_ASSERTION_0(order <= 3, "仅支持三阶导数。\n");
 
     if (order >= 1)
     {
-        if (!mBD1)
+        if (bD1.empty())
         {
-            mBD1 = Allocate();
+            bD1 = Allocate();
         }
 
         if (order >= 2)
         {
-            if (!mBD2)
+            if (bD2.empty())
             {
-                mBD2 = Allocate();
+                bD2 = Allocate();
             }
 
             if (order >= 3)
             {
-                if (!mBD3)
+                if (bD3.empty())
                 {
-                    mBD3 = Allocate();
+                    bD3 = Allocate();
                 }
             }
         }
     }
 
     auto i = GetKey(t);
-    mBD0[0][i] = Math::GetValue(1);
+    bD0.at(0).at(i) = Math::GetValue(1);
 
     if (order >= 1)
     {
-        mBD1[0][i] = Math::GetValue(0);
+        bD1.at(0).at(i) = Math::GetValue(0);
         if (order >= 2)
         {
-            mBD2[0][i] = Math::GetValue(0);
+            bD2.at(0).at(i) = Math::GetValue(0);
             if (order >= 3)
             {
-                mBD3[0][i] = Math::GetValue(0);
+                bD3.at(0).at(i) = Math::GetValue(0);
             }
         }
     }
 
-    Real n0 = t - mKnot[i], n1 = mKnot[i + 1] - t;
-    Real invD0 = 0, invD1 = 0;
-    int j = 0;
-    for (j = 1; j <= mDegree; j++)
-    {
-        invD0 = (Math::GetValue(1)) / (mKnot[i + j] - mKnot[i]);
-        invD1 = (Math::GetValue(1)) / (mKnot[i + 1] - mKnot[i - j + 1]);
+    const auto nextI = i + 1;
+    auto n0 = t - knot.at(i);
+    auto n1 = knot.at(nextI) - t;
+    Real invD0{};
+    Real invD1{};
 
-        mBD0[j][i] = n0 * mBD0[j - 1][i] * invD0;
-        mBD0[j][i - j] = n1 * mBD0[j - 1][i - j + 1] * invD1;
+    for (auto j = 1; j <= degree; j++)
+    {
+        const auto iAddJ = i + j;
+        const auto iReduceJ = i - j;
+        const auto nextIReduceJ = iReduceJ + 1;
+        const auto previousJ = j - 1;
+        invD0 = (Math::GetValue(1)) / (knot.at(iAddJ) - knot.at(i));
+        invD1 = (Math::GetValue(1)) / (knot.at(nextI) - knot.at(nextIReduceJ));
+
+        bD0.at(j).at(i) = n0 * bD0.at(previousJ).at(i) * invD0;
+        bD0.at(j).at(iReduceJ) = n1 * bD0.at(previousJ).at(nextIReduceJ) * invD1;
 
         if (order >= 1)
         {
-            mBD1[j][i] = (n0 * mBD1[j - 1][i] + mBD0[j - 1][i]) * invD0;
-            mBD1[j][i - j] = (n1 * mBD1[j - 1][i - j + 1] - mBD0[j - 1][i - j + 1]) * invD1;
+            bD1.at(j).at(i) = (n0 * bD1.at(previousJ).at(i) + bD0.at(previousJ).at(i)) * invD0;
+            bD1.at(j).at(iReduceJ) = (n1 * bD1.at(previousJ).at(nextIReduceJ) - bD0.at(previousJ).at(nextIReduceJ)) * invD1;
 
             if (order >= 2)
             {
-                mBD2[j][i] = (n0 * mBD2[j - 1][i] + (Math::GetValue(2)) * mBD1[j - 1][i]) * invD0;
-                mBD2[j][i - j] = (n1 * mBD2[j - 1][i - j + 1] - (Math::GetValue(2)) * mBD1[j - 1][i - j + 1]) * invD1;
+                bD2.at(j).at(i) = (n0 * bD2.at(previousJ).at(i) + (Math::GetValue(2)) * bD1.at(previousJ).at(i)) * invD0;
+                bD2.at(j).at(iReduceJ) = (n1 * bD2.at(previousJ).at(nextIReduceJ) - (Math::GetValue(2)) * bD1.at(previousJ).at(nextIReduceJ)) * invD1;
 
                 if (order >= 3)
                 {
-                    mBD3[j][i] = (n0 * mBD3[j - 1][i] + (static_cast<Real>(3)) * mBD2[j - 1][i]) * invD0;
-                    mBD3[j][i - j] = (n1 * mBD3[j - 1][i - j + 1] - (static_cast<Real>(3)) * mBD2[j - 1][i - j + 1]) * invD1;
+                    bD3.at(j).at(i) = (n0 * bD3.at(previousJ).at(i) + Math::GetValue(3) * bD2.at(previousJ).at(i)) * invD0;
+                    bD3.at(j).at(iReduceJ) = (n1 * bD3.at(previousJ).at(nextIReduceJ) - Math::GetValue(3) * bD2.at(previousJ).at(nextIReduceJ)) * invD1;
                 }
             }
         }
     }
 
-    for (j = 2; j <= mDegree; ++j)
+    for (auto j = 2; j <= degree; ++j)
     {
         for (int k = i - j + 1; k < i; ++k)
         {
-            n0 = t - mKnot[k];
-            n1 = mKnot[k + j + 1] - t;
-            invD0 = (Math::GetValue(1)) / (mKnot[k + j] - mKnot[k]);
-            invD1 = (Math::GetValue(1)) / (mKnot[k + j + 1] - mKnot[k + 1]);
+            const auto kAddJ = k + j;
+            const auto nextK = k + 1;
+            const auto nextKAddJ = kAddJ + 1;
+            const auto previousJ = j - 1;
 
-            mBD0[j][k] = n0 * mBD0[j - 1][k] * invD0 + n1 * mBD0[j - 1][k + 1] * invD1;
+            n0 = t - knot.at(k);
+            n1 = knot.at(nextKAddJ) - t;
+            invD0 = (Math::GetValue(1)) / (knot.at(kAddJ) - knot.at(k));
+            invD1 = (Math::GetValue(1)) / (knot.at(nextKAddJ) - knot.at(nextK));
+
+            bD0.at(j).at(k) = n0 * bD0.at(previousJ).at(k) * invD0 + n1 * bD0.at(previousJ).at(nextK) * invD1;
 
             if (order >= 1)
             {
-                mBD1[j][k] = (n0 * mBD1[j - 1][k] + mBD0[j - 1][k]) * invD0 + (n1 * mBD1[j - 1][k + 1] - mBD0[j - 1][k + 1]) * invD1;
+                bD1.at(j).at(k) = (n0 * bD1.at(previousJ).at(k) + bD0.at(previousJ).at(k)) * invD0 + (n1 * bD1.at(previousJ).at(nextK) - bD0.at(previousJ).at(nextK)) * invD1;
 
                 if (order >= 2)
                 {
-                    mBD2[j][k] = (n0 * mBD2[j - 1][k] + (Math::GetValue(2)) * mBD1[j - 1][k]) * invD0 + (n1 * mBD2[j - 1][k + 1] - (Math::GetValue(2)) * mBD1[j - 1][k + 1]) * invD1;
+                    bD2.at(j).at(k) = (n0 * bD2.at(previousJ).at(k) + (Math::GetValue(2)) * bD1.at(previousJ).at(k)) * invD0 + (n1 * bD2.at(previousJ).at(nextK) - (Math::GetValue(2)) * bD1.at(previousJ).at(nextK)) * invD1;
 
                     if (order >= 3)
                     {
-                        mBD3[j][k] = (n0 * mBD3[j - 1][k] + (static_cast<Real>(3)) * mBD2[j - 1][k]) * invD0 + (n1 * mBD3[j - 1][k + 1] - (static_cast<Real>(3)) * mBD2[j - 1][k + 1]) * invD1;
+                        bD3.at(j).at(k) = (n0 * bD3.at(previousJ).at(k) + Math::GetValue(3) * bD2.at(previousJ).at(k)) * invD0 + (n1 * bD3.at(previousJ).at(nextK) - Math::GetValue(3) * bD2.at(previousJ).at(nextK)) * invD1;
                     }
                 }
             }
         }
     }
 
-    minIndex = i - mDegree;
+    minIndex = i - degree;
     maxIndex = i;
 }
-    #include STSTEM_WARNING_POP
-
-#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
 
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_BASIS_DETAIL_H

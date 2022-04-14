@@ -18,9 +18,9 @@ namespace Rendering
 
 	private:
 		void MainTest();	
-		void OpenGLRenderTargetDataTest();
+		void OpenGLRenderTargetDataTest() noexcept;
 	 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

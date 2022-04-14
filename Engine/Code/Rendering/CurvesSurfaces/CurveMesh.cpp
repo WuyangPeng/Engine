@@ -28,7 +28,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CurveMesh);
 
-Rendering::CurveMesh ::CurveMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, CurveSegmentSharedPtr* segments,
+Rendering::CurveMesh::CurveMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, CurveSegmentSharedPtr* segments,
                                  FloatArray* params, bool allowDynamicChange)
     : Polysegment(vformat, vbuffer, true), mOrigVBuffer(vbuffer), mOrigParams(params), mSegments(segments),
       mNumFullVertices(vbuffer->GetNumElements()), mNumSegments(vbuffer->GetNumElements() - 1), mLevel(0), mAllowDynamicChange(allowDynamicChange)
@@ -44,7 +44,7 @@ Rendering::CurveMesh ::CurveMesh(VertexFormatSharedPtr vformat, VertexBufferShar
     }
 }
 
-Rendering::CurveMesh ::~CurveMesh()
+Rendering::CurveMesh::~CurveMesh()
 {
     EXCEPTION_TRY
     {
@@ -54,7 +54,7 @@ Rendering::CurveMesh ::~CurveMesh()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::CurveMesh ::SetLevel(int level)
+void Rendering::CurveMesh::SetLevel(int level)
 {
     if (!mOrigVBuffer)
     {
@@ -99,12 +99,12 @@ void Rendering::CurveMesh ::SetLevel(int level)
     RENDERER_MANAGE_SINGLETON.BindAll(GetVertexBuffer().get());
 }
 
-int Rendering::CurveMesh ::GetLevel() const noexcept
+int Rendering::CurveMesh::GetLevel() const noexcept
 {
     return mLevel;
 }
 
-void Rendering::CurveMesh ::Allocate(int& numTotalVertices, int& numTotalEdges, Edge*& edges)
+void Rendering::CurveMesh::Allocate(int& numTotalVertices, int& numTotalEdges, Edge*& edges)
 {
     // The number of original vertices.
     int numOrigVertices = mNumSegments + 1;
@@ -124,7 +124,7 @@ void Rendering::CurveMesh ::Allocate(int& numTotalVertices, int& numTotalEdges, 
 
     // Allocate storage for the subdivision.
     int vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared<VertexBuffer>(numTotalVertices, vstride)));
+    SetVertexBuffer(VertexBufferSharedPtr(VertexBuffer::Create(numTotalVertices, vstride)));
     // edges = NEW1<Edge>(numTotalEdges);
     if (mAllowDynamicChange)
     {
@@ -169,7 +169,7 @@ void Rendering::CurveMesh ::Allocate(int& numTotalVertices, int& numTotalEdges, 
     memcpy(fullData, origData, vstride);
 }
 
-void Rendering::CurveMesh ::Subdivide(int& numVertices, int& numEdges, Edge* edges)
+void Rendering::CurveMesh::Subdivide(int& numVertices, int& numEdges, Edge* edges)
 {
     // The subdivision is computed in-place, so you need to fill in the new
     // edge slots starting from the end of the array and working towards the
@@ -259,7 +259,7 @@ void Rendering::CurveMesh ::Subdivide(int& numVertices, int& numEdges, Edge* edg
     numEdges = 2 * numEdges;
 }
 
-void Rendering::CurveMesh ::OnDynamicChange()
+void Rendering::CurveMesh::OnDynamicChange()
 {
     if (mAllowDynamicChange)
     {
@@ -276,7 +276,7 @@ void Rendering::CurveMesh ::OnDynamicChange()
     }
 }
 
-void Rendering::CurveMesh ::Lock()
+void Rendering::CurveMesh::Lock()
 {
     CoreTools::DisableNoexcept();
     if (mOrigVBuffer)
@@ -291,12 +291,12 @@ void Rendering::CurveMesh ::Lock()
     // the vertices of the mesh, even though the mesh is "locked".
 }
 
-bool Rendering::CurveMesh ::IsLocked() const noexcept
+bool Rendering::CurveMesh::IsLocked() const noexcept
 {
     return !mOrigVBuffer;
 }
 
-void Rendering::CurveMesh ::InitializeCurveInfo() noexcept
+void Rendering::CurveMesh::InitializeCurveInfo() noexcept
 {
     // Because vertices are shared by edges, the last visited edge for a
     // vertex donates its segment and parameter values to that vertex.
@@ -315,7 +315,7 @@ void Rendering::CurveMesh ::InitializeCurveInfo() noexcept
     }
 }
 
-Rendering::CurveMesh::Edge ::Edge() noexcept
+Rendering::CurveMesh::Edge::Edge() noexcept
 {
     Segment.reset();
     V[0] = -1;
@@ -324,14 +324,14 @@ Rendering::CurveMesh::Edge ::Edge() noexcept
     Param[1] = 0.0f;
 }
 
-Rendering::CurveMesh::CurveInfo ::CurveInfo() noexcept
+Rendering::CurveMesh::CurveInfo::CurveInfo() noexcept
 {
     Segment.reset();
     Param = 0.0f;
 }
 
 // Name support.
-CoreTools::ObjectSharedPtr Rendering::CurveMesh ::GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::CurveMesh::GetObjectByName(const std::string& name)
 {
     CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
     if (found)
@@ -364,7 +364,7 @@ CoreTools::ObjectSharedPtr Rendering::CurveMesh ::GetObjectByName(const std::str
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::CurveMesh ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::CurveMesh::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
@@ -386,7 +386,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::CurveMesh ::GetAllObjectsByNa
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::CurveMesh ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::CurveMesh::GetConstObjectByName(const std::string& name) const
 {
     CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -419,7 +419,7 @@ CoreTools::ConstObjectSharedPtr Rendering::CurveMesh ::GetConstObjectByName(cons
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::CurveMesh ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::CurveMesh::GetAllConstObjectsByName(const std::string& name) const
 {
     std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -443,12 +443,12 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::CurveMesh ::GetAllConstO
 
 // Streaming support.
 
-Rendering::CurveMesh ::CurveMesh(LoadConstructor value)
+Rendering::CurveMesh::CurveMesh(LoadConstructor value)
     : Polysegment(value), mSegments(0), mNumFullVertices(0), mNumSegments(0), mLevel(0), mAllowDynamicChange(false), mCInfo(0)
 {
 }
 
-void Rendering::CurveMesh ::Load(CoreTools::BufferSource& source)
+void Rendering::CurveMesh::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -480,7 +480,7 @@ void Rendering::CurveMesh ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::CurveMesh ::Link(CoreTools::ObjectLink& source)
+void Rendering::CurveMesh::Link(CoreTools::ObjectLink& source)
 {
     Polysegment::Link(source);
 
@@ -496,12 +496,12 @@ void Rendering::CurveMesh ::Link(CoreTools::ObjectLink& source)
     }
 }
 
-void Rendering::CurveMesh ::PostLink()
+void Rendering::CurveMesh::PostLink()
 {
     Polysegment::PostLink();
 }
 
-uint64_t Rendering::CurveMesh ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::CurveMesh::Register(CoreTools::ObjectRegister& target) const
 {
     const uint64_t id = Polysegment::Register(target);
     if (0 < id)
@@ -521,7 +521,7 @@ uint64_t Rendering::CurveMesh ::Register(CoreTools::ObjectRegister& target) cons
     return id;
 }
 
-void Rendering::CurveMesh ::Save(CoreTools::BufferTarget& target) const
+void Rendering::CurveMesh::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -547,7 +547,7 @@ void Rendering::CurveMesh ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::CurveMesh ::GetStreamingSize() const
+int Rendering::CurveMesh::GetStreamingSize() const
 {
     int size = Polysegment::GetStreamingSize();
     size += CORE_TOOLS_STREAM_SIZE(mNumFullVertices);

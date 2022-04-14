@@ -27,7 +27,7 @@ using std::vector;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26415)
-Rendering::IKControllerImpl ::IKControllerImpl() noexcept
+Rendering::IKControllerImpl::IKControllerImpl() noexcept
     : m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -204,21 +204,21 @@ int Rendering::IKControllerImpl
 	return m_Iterations;
 }
 
-void Rendering::IKControllerImpl ::SetIterations(int iterations) noexcept
+void Rendering::IKControllerImpl::SetIterations(int iterations) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	m_Iterations = iterations;
 }
 
-bool Rendering::IKControllerImpl ::IsOrderEndToRoot() const noexcept
+bool Rendering::IKControllerImpl::IsOrderEndToRoot() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_OrderEndToRoot;
 }
 
-void Rendering::IKControllerImpl ::SetOrderEndToRoot(bool orderEndToRoot) noexcept
+void Rendering::IKControllerImpl::SetOrderEndToRoot(bool orderEndToRoot) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
 

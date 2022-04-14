@@ -19,7 +19,7 @@
 using std::make_shared;
 using boost::property_tree::ptree_error;
 
-Rendering::RendererDataImpl ::RendererDataImpl(MAYBE_UNUSED int count)
+Rendering::RendererDataImpl::RendererDataImpl(MAYBE_UNUSED int count)
     : m_Renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default, RendererBasis()) }
 {
 	m_Renderer->Init();
@@ -41,7 +41,7 @@ bool Rendering::RendererDataImpl
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::RendererDataImpl
-    ::LoadConfiguration(const std::string& fileName)
+::LoadConfiguration(const std::string& fileName)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -60,7 +60,7 @@ void Rendering::RendererDataImpl
 }
 
 void Rendering::RendererDataImpl
-    ::ClearColor()
+::ClearColor()
 {
 	RENDERING_CLASS_IS_VALID_1;
 

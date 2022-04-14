@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/24 13:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:51)
 
 #ifndef RENDERING_DATA_TYPES_HALF_FLOAT_H
 #define RENDERING_DATA_TYPES_HALF_FLOAT_H
@@ -67,16 +67,16 @@ namespace Rendering
         explicit HalfFloat(int value);
 
         explicit constexpr HalfFloat(OriginalType value) noexcept
-            : m_HalfFloat{ value }
+            : halfFloat{ value }
         {
         }
 
         CLASS_INVARIANT_DECLARE;
 
-        float ToFloat() const noexcept;
-        OriginalType ToOriginalType() const noexcept;
+        NODISCARD float ToFloat() const noexcept;
+        NODISCARD OriginalType ToOriginalType() const noexcept;
 
-        const HalfFloat operator-() const noexcept;
+        NODISCARD HalfFloat operator-() const noexcept;
 
         HalfFloat& operator+=(const HalfFloat& rhs) noexcept;
         HalfFloat& operator-=(const HalfFloat& rhs) noexcept;
@@ -84,42 +84,42 @@ namespace Rendering
         HalfFloat& operator/=(const HalfFloat& rhs);
 
     private:
-        static OriginalType ConvertHalfFloat(float value) noexcept;
+        NODISCARD static OriginalType ConvertHalfFloat(float value) noexcept;
 
     private:
         using IntegerType = OriginalType;
-        static constexpr IntegerType g_Symbol{ 0x8000 };
-        static constexpr uint32_t g_SymbolShifting{ 15 };
-        static constexpr IntegerType g_Exponent{ 0x7C00 };
-        static constexpr uint32_t g_ExponentShifting{ 10 };
-        static constexpr uint32_t g_RealExponentDifference{ 0xF };
-        static constexpr IntegerType g_Mantissa{ 0x03FF };
-        static constexpr IntegerType g_QuietNaN{ 0x0200 };
-        static constexpr auto g_ExponentDigits = g_SymbolShifting - g_ExponentShifting;
+        static constexpr IntegerType symbol{ 0x8000 };
+        static constexpr uint32_t symbolShifting{ 15 };
+        static constexpr IntegerType exponent{ 0x7C00 };
+        static constexpr uint32_t exponentShifting{ 10 };
+        static constexpr uint32_t realExponentDifference{ 0xF };
+        static constexpr IntegerType mantissa{ 0x03FF };
+        static constexpr IntegerType quietNaN{ 0x0200 };
+        static constexpr auto exponentDigits = symbolShifting - exponentShifting;
 
         using FloatTraitsType = typename Mathematics::IntegerTraits<float>::TraitsType;
         using FloatIntegerType = typename FloatTraitsType::IntegerType;
 
-        static constexpr auto g_SymbolShiftingDifference = FloatTraitsType::symbolShifting - g_SymbolShifting;
-        static constexpr auto g_ExponentShiftingDifference = FloatTraitsType::exponentShifting - g_ExponentShifting;
-        static constexpr auto g_ExponentDifference = ((1 << FloatTraitsType::exponentDigits) - (1 << g_ExponentDigits)) / 2;
+        static constexpr auto symbolShiftingDifference = FloatTraitsType::symbolShifting - symbolShifting;
+        static constexpr auto exponentShiftingDifference = FloatTraitsType::exponentShifting - exponentShifting;
+        static constexpr auto exponentDifference = ((1 << FloatTraitsType::exponentDigits) - (1 << exponentDigits)) / 2;
 
     private:
-        OriginalType m_HalfFloat;
+        OriginalType halfFloat;
     };
 
-    bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
-    bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
+    NODISCARD bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
+    NODISCARD bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
 
-    bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::MathF::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+    NODISCARD bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::MathF::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     RENDERING_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& outFile, const HalfFloat& halfFloat);
 
-    float RENDERING_DEFAULT_DECLARE operator*(float lhs, const HalfFloat& rhs) noexcept;
-    float RENDERING_DEFAULT_DECLARE operator*(const HalfFloat& lhs, float rhs) noexcept;
-    float RENDERING_DEFAULT_DECLARE operator/(float lhs, const HalfFloat& rhs);
+    NODISCARD float RENDERING_DEFAULT_DECLARE operator*(float lhs, const HalfFloat& rhs) noexcept;
+    NODISCARD float RENDERING_DEFAULT_DECLARE operator*(const HalfFloat& lhs, float rhs) noexcept;
+    NODISCARD float RENDERING_DEFAULT_DECLARE operator/(float lhs, const HalfFloat& rhs);
 
-    HalfFloat RENDERING_DEFAULT_DECLARE FAbs(const HalfFloat& value) noexcept;
+    NODISCARD HalfFloat RENDERING_DEFAULT_DECLARE FAbs(const HalfFloat& value) noexcept;
 }
 
 #endif  // RENDERING_DATA_TYPES_HALF_FLOAT_H

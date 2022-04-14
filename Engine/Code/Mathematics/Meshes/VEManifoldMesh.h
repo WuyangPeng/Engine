@@ -1,107 +1,101 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 16:43)
 
 #ifndef MATHEMATICS_MESHES_VE_MANIFOLD_MESH_H
 #define MATHEMATICS_MESHES_VE_MANIFOLD_MESH_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "System/Helper/PragmaWarning.h"
+#include <array>
 #include <map>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+#include <memory>
+#include <string>
+
 namespace Mathematics
 {
     class VEManifoldMesh
     {
     public:
-        // Vertex data types.
+        using ClassType = VEManifoldMesh;
+
+    public:
         class Vertex;
-        typedef Vertex* VPtr;
-        typedef const Vertex* VCPtr;
-        typedef VPtr (*VCreator)(int);
-        typedef std::map<int, Vertex*> VMap;
-        typedef VMap::iterator VMapIterator;
-        typedef VMap::const_iterator VMapCIterator;
+        using VertexSharedPtr = std::shared_ptr<Vertex>;
+        using ConstVertexSharedPtr = std::shared_ptr<const Vertex>;
+        using VertexCreator = VertexSharedPtr (*)(int);
+        using VertexMap = std::map<int, VertexSharedPtr>;
 
-        // Edge data types.
         class Edge;
-        typedef Edge* EPtr;
-        typedef const Edge* ECPtr;
-        typedef EPtr (*ECreator)(int, int);
-        typedef std::map<std::pair<int, int>, Edge*> EMap;
-        typedef EMap::iterator EMapIterator;
-        typedef EMap::const_iterator EMapCIterator;
+        using EdgeSharedPtr = std::shared_ptr<Edge>;
+        using ConstEdgeSharedPtr = std::shared_ptr<const Edge>;
+        using EdgeCreator = EdgeSharedPtr (*)(int, int);
+        using EdgeMap = std::map<std::pair<int, int>, EdgeSharedPtr>;
 
-        // Vertex object.
-        class MATHEMATICS_DEFAULT_DECLARE Vertex
+        class Vertex
         {
         public:
             Vertex(int v) noexcept;
-            virtual ~Vertex();
-            Vertex(const Vertex&) = default;
-            Vertex& operator=(const Vertex&) = default;
-            Vertex(Vertex&&) = default;
-            Vertex& operator=(Vertex&&) = default;
-            int V;
-            EPtr E[2];
+            virtual ~Vertex() noexcept = default;
+            Vertex(const Vertex& rhs) = default;
+            Vertex& operator=(const Vertex& rhs) = default;
+            Vertex(Vertex&& rhs) noexcept = default;
+            Vertex& operator=(Vertex&& rhs) noexcept = default;
+
+            int v;
+            std::array<EdgeSharedPtr, 2> e;
         };
 
-        // Edge object.
-        class MATHEMATICS_DEFAULT_DECLARE Edge
+        class Edge
         {
         public:
             Edge(int v0, int v1) noexcept;
-            virtual ~Edge();
-            Edge(const Edge&) = default;
-            Edge& operator=(const Edge&) = default;
-            Edge(Edge&&) = default;
-            Edge& operator=(Edge&&) = default;
-            // Vertices, listed as a directed edge <V[0],V[1]>.
-            int V[2];
+            virtual ~Edge() noexcept = default;
+            Edge(const Edge& rhs) = default;
+            Edge& operator=(const Edge& rhs) = default;
+            Edge(Edge&& rhs) noexcept = default;
+            Edge& operator=(Edge&& rhs) noexcept = default;
 
-            // Adjacent edges:
-            //   T[0] points to edge sharing V[0]
-            //   T[1] points to edge sharing V[1]
-            EPtr E[2];
+            std::array<int, 2> v;
+
+            std::array<EdgeSharedPtr, 2> e;
         };
 
-        // Construction and destruction.
-        VEManifoldMesh(VCreator vCreator = 0, ECreator eCreator = 0) noexcept;
-        virtual ~VEManifoldMesh();
-        VEManifoldMesh(const VEManifoldMesh&) = default;
-        VEManifoldMesh& operator=(const VEManifoldMesh&) = default;
-        VEManifoldMesh(VEManifoldMesh&&) = default;
-        VEManifoldMesh& operator=(VEManifoldMesh&&) = default;
-        // Member access.
-        const VMap& GetVertices() const noexcept;
-        const EMap& GetEdges() const noexcept;
+        VEManifoldMesh(VertexCreator vCreator = nullptr, EdgeCreator eCreator = nullptr) noexcept;
+        virtual ~VEManifoldMesh() noexcept = default;
+        VEManifoldMesh(const VEManifoldMesh& rhs) = default;
+        VEManifoldMesh& operator=(const VEManifoldMesh& rhs) = default;
+        VEManifoldMesh(VEManifoldMesh&& rhs) = default;
+        VEManifoldMesh& operator=(VEManifoldMesh&& rhs) = default;
 
-        // Mesh manipulation.
-        EPtr InsertEdge(int v0, int v1);
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD const VertexMap& GetVertices() const noexcept;
+        NODISCARD const EdgeMap& GetEdges() const noexcept;
+
+        EdgeSharedPtr InsertEdge(int v0, int v1);
         bool RemoveEdge(int v0, int v1);
 
-        // Manifold mesh is closed if each vertex is shared twice.
-        bool IsClosed() const noexcept;
+        NODISCARD bool IsClosed() const noexcept;
 
-        // For debugging.
-        void Print(const char* filename);
+        NODISCARD void Print(const std::string& filename);
 
     protected:
-        // The vertex data.
-        static VPtr CreateVertex(int v0) noexcept;
-        VCreator mVCreator;
-        VMap mVMap;
+        NODISCARD static VertexSharedPtr CreateVertex(int v0);
+        NODISCARD static EdgeSharedPtr CreateEdge(int v0, int v1);
 
-        // The edge data.
-        static EPtr CreateEdge(int v0, int v1) noexcept;
-        ECreator mECreator;
-        EMap mEMap;
+    private:
+        VertexCreator vertexCreator;
+        VertexMap vertexMap;
+
+        EdgeCreator edgeCreator;
+        EdgeMap edgeMap;
     };
 }
-#include STSTEM_WARNING_POP
+
 #endif  // MATHEMATICS_MESHES_VE_MANIFOLD_MESH_H

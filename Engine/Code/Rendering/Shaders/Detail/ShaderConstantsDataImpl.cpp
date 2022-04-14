@@ -81,7 +81,7 @@ int Rendering::ShaderConstantsDataImpl
 	return m_SingleShaderConstantsData[index].GetNumRegistersUsed();
 }
  
-void Rendering::ShaderConstantsDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderConstantsDataImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

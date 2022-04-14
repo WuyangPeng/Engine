@@ -47,7 +47,7 @@ namespace Rendering
 		const APoint GetWorldCenter () const noexcept;
 
 		void SetModelCenter(const APoint& modelCenter) noexcept;
-                void SetWorldCenter(const FloatTransform& transform) noexcept;
+                void SetWorldCenter(const TransformF& transform) noexcept;
 		
 		// 获得子节点的距离间隔。
 		int GetNumLevelsOfDetail () const noexcept;

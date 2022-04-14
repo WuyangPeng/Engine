@@ -1,103 +1,92 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/19 13:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.8.0.5 (2022/03/31 18:35)
 
 #ifndef RENDERING_RESOURCES_VERTEX_BUFFER_ACCESSOR_ARRAY_DATA_DETAIL_H
 #define RENDERING_RESOURCES_VERTEX_BUFFER_ACCESSOR_ARRAY_DATA_DETAIL_H
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
+#include "VertexBuffer.h"
 #include "VertexBufferAccessorArrayData.h"
 #include "VertexFormat.h"
-#include "VertexBuffer.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(6385)
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-Rendering::VertexBufferAccessorArrayData<usage, number>
-	::VertexBufferAccessorArrayData()	 
+
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+Rendering::VertexBufferAccessorArrayData<usage, number>::VertexBufferAccessorArrayData()
+    : data{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-Rendering::VertexBufferAccessorArrayData<usage, number>
-	::VertexBufferAccessorArrayData(const ConstVertexFormatSharedPtr& vertexformat, const ConstVertexBufferSharedPtr& vertexbuffer)
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+Rendering::VertexBufferAccessorArrayData<usage, number>::VertexBufferAccessorArrayData(const VertexFormat& vertexformat, const VertexBuffer& vertexbuffer)
+    : data{}
 {
-	Init(vertexformat, vertexbuffer);
+    Init(vertexformat, vertexbuffer);
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-bool Rendering::VertexBufferAccessorArrayData<usage,number>
-	::IsValid() const noexcept
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+bool Rendering::VertexBufferAccessorArrayData<usage, number>::IsValid() const noexcept
 {
-	return true;
+    return true;
 }
-#endif // OPEN_CLASS_INVARIAN
+#endif  // OPEN_CLASS_INVARIAN
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-void Rendering::VertexBufferAccessorArrayData<usage,number>
-	::Init( const ConstVertexFormatSharedPtr& vertexformat,const ConstVertexBufferSharedPtr& vertexbuffer )
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+void Rendering::VertexBufferAccessorArrayData<usage, number>::Init(const VertexFormat& vertexformat, const VertexBuffer& vertexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	for (auto unit = 0; unit < System::EnumCastUnderlying(number); ++unit)
-	{
-		m_Data[unit].Init(vertexformat, vertexbuffer, unit);
-	}
-}
- 
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-const char* Rendering::VertexBufferAccessorArrayData<usage, number>
-	::GetData(int stride,int unit,  int index) const
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
-
-	return m_Data[unit].GetData(stride, index);
+    for (auto unit = 0; unit < System::EnumCastUnderlying(number); ++unit)
+    {
+        data.at(unit).Init(vertexformat, vertexbuffer, unit);
+    }
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-bool Rendering::VertexBufferAccessorArrayData<usage,number>
-	::HasData(int unit) const
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+const char* Rendering::VertexBufferAccessorArrayData<usage, number>::GetData(int stride, int unit, int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
 
-	return m_Data[unit].HasData();
+    return data.at(unit).GetData(stride, index);
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-int Rendering::VertexBufferAccessorArrayData<usage,number>
-	::GetDataChannels(int unit) const
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+bool Rendering::VertexBufferAccessorArrayData<usage, number>::HasData(int unit) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
 
-	return m_Data[unit].GetDataChannels();
+    return data.at(unit).HasData();
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage,Rendering::VertexFormatFlags::MaximumNumber number>
-const float* Rendering::VertexBufferAccessorArrayData<usage, number>
-	::GetDataTuple(int stride, int unit, int index) const
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+int Rendering::VertexBufferAccessorArrayData<usage, number>::GetDataChannels(int unit) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
 
-	return m_Data[unit].GetDataTuple(stride,index);
-} 
-#include STSTEM_WARNING_POP
-#endif // RENDERING_RESOURCES_VERTEX_BUFFER_ACCESSOR_ARRAY_DATA_DETAIL_H
+    return data.at(unit).GetDataChannels();
+}
 
+template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+const float* Rendering::VertexBufferAccessorArrayData<usage, number>::GetDataTuple(int stride, int unit, int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= unit && unit < System::EnumCastUnderlying(number), "Ë÷Òý´íÎó¡£\n");
 
+    return data.at(unit).GetDataTuple(stride, index);
+}
 
+#endif  // RENDERING_RESOURCES_VERTEX_BUFFER_ACCESSOR_ARRAY_DATA_DETAIL_H

@@ -11,7 +11,11 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random>
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26490)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering,HalfFloatTesting) 
 
 void Rendering::HalfFloatTesting
@@ -38,7 +42,7 @@ void Rendering::HalfFloatTesting
 		float secondValue = firstHalfFloat.ToFloat();
 
 		// 精度只有1/2^10
-		ASSERT_APPROXIMATE(firstValue,secondValue,Mathematics::FloatMath::FAbs(firstValue / 1024.0f));
+		ASSERT_APPROXIMATE(firstValue,secondValue,Mathematics::MathF::FAbs(firstValue / 1024.0f));
 
 		HalfFloat secondHalfFloat(secondValue);
 
@@ -66,7 +70,7 @@ void Rendering::HalfFloatTesting
 		float secondValue = firstHalfFloat.ToFloat();
 
 		// 精度只有1/2^10
-		ASSERT_APPROXIMATE(firstValue,secondValue,Mathematics::FloatMath::FAbs(firstValue * 1024.0f));
+		ASSERT_APPROXIMATE(firstValue,secondValue,Mathematics::MathF::FAbs(firstValue * 1024.0f));
 
 		HalfFloat secondHalfFloat(secondValue);
 

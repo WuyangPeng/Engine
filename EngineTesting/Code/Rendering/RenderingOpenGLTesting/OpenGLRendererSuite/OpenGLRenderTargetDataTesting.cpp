@@ -25,7 +25,7 @@ void Rendering::OpenGLRenderTargetDataTesting
 }
 
 void Rendering::OpenGLRenderTargetDataTesting
-	::OpenGLRenderTargetDataTest()
+	::OpenGLRenderTargetDataTest() noexcept
 {
 // 	RenderTargetSmartPointer firstRenderTarget(NEW0 RenderTarget(5,TextureFormat::A8B8G8R8,1024,768,false,true));
 // 

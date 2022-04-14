@@ -19,19 +19,19 @@ using std::make_unique;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, ShaderManager);
 
-Rendering::ShaderManager::ShaderManagerUniquePtr Rendering::ShaderManager ::sm_ShaderManager{};
+Rendering::ShaderManager::ShaderManagerUniquePtr Rendering::ShaderManager::sm_ShaderManager{};
 
-void Rendering::ShaderManager ::Create()
+void Rendering::ShaderManager::Create()
 {
     sm_ShaderManager = make_unique<Rendering::ShaderManager>(ShaderManagerCreate::Init);
 }
 
-void Rendering::ShaderManager ::Destroy() noexcept
+void Rendering::ShaderManager::Destroy() noexcept
 {
     sm_ShaderManager.reset();
 }
 
-Rendering::ShaderManager ::ShaderManager([[maybe_unused]] ShaderManagerCreate shaderManagerCreate)
+Rendering::ShaderManager::ShaderManager([[maybe_unused]] ShaderManagerCreate shaderManagerCreate)
     : impl{ 0 }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -39,7 +39,7 @@ Rendering::ShaderManager ::ShaderManager([[maybe_unused]] ShaderManagerCreate sh
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderManager)
 
-void Rendering::ShaderManager ::SetVertexProfile(VertexShaderProfile profile)
+void Rendering::ShaderManager::SetVertexProfile(VertexShaderProfile profile)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -48,7 +48,7 @@ void Rendering::ShaderManager ::SetVertexProfile(VertexShaderProfile profile)
     return impl->SetVertexProfile(profile);
 }
 
-Rendering::ShaderManager::VertexShaderProfile Rendering::ShaderManager ::GetVertexProfile() const
+Rendering::ShaderManager::VertexShaderProfile Rendering::ShaderManager::GetVertexProfile() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -57,7 +57,7 @@ Rendering::ShaderManager::VertexShaderProfile Rendering::ShaderManager ::GetVert
     return impl->GetVertexProfile();
 }
 
-void Rendering::ShaderManager ::SetPixelProfile(PixelShaderProfile profile)
+void Rendering::ShaderManager::SetPixelProfile(PixelShaderProfile profile)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -66,7 +66,7 @@ void Rendering::ShaderManager ::SetPixelProfile(PixelShaderProfile profile)
     return impl->SetPixelProfile(profile);
 }
 
-Rendering::ShaderManager::PixelShaderProfile Rendering::ShaderManager ::GetPixelProfile() const
+Rendering::ShaderManager::PixelShaderProfile Rendering::ShaderManager::GetPixelProfile() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

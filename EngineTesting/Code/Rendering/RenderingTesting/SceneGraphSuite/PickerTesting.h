@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/04 17:59)
 
 #ifndef RENDERING_SCENE_GRAPH_SUITE_PICKER_TESTING_H
@@ -11,20 +11,20 @@
 
 namespace Rendering
 {
-	class PickerTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PickerTesting); 
+    class PickerTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PickerTesting);
 
-	private:
-		void MainTest();
-	    void BaseTest();
+    private:
+        void MainTest();
+        void BaseTest();
 
-		virtual void DoRunUnitTest() override;
+        void DoRunUnitTest() override;
 
-	private:
-		int m_TestLoopCount;
-	};
+    private:
+        int m_TestLoopCount{};
+    };
 }
 
-#endif // RENDERING_SCENE_GRAPH_SUITE_PICKER_TESTING_H
+#endif  // RENDERING_SCENE_GRAPH_SUITE_PICKER_TESTING_H

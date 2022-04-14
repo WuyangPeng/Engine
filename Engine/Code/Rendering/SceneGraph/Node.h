@@ -1,78 +1,89 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 11:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 15:23)
 
 #ifndef RENDERING_SCENE_GRAPH_NODE_H
 #define RENDERING_SCENE_GRAPH_NODE_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Spatial.h"
 #include "Culler.h"
-EXPORT_SHARED_PTR(Rendering, NodeImpl, RENDERING_DEFAULT_DECLARE);
- 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+#include "Spatial.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(Node, NodeImpl);
+
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Node : public Spatial
     {
     public:
-        void Swap(Node& rhs) noexcept;
-        
-            public:
-                TYPE_DECLARE(Node);
-                using ClassShareType = CoreTools::CopyUnsharedClasses;
-                ~Node() noexcept;
-                Node(const Node& rhs);
-                Node& operator=(const Node& rhs);
-                Node(Node&& rhs) noexcept;
-                Node& operator=(Node&& rhs) noexcept;
+        COPY_UNSHARED_TYPE_DECLARE(Node);
         using ParentType = Spatial;
-        
+        using NodeSharedPtr = std::shared_ptr<ClassType>;
+
     public:
-        Node (); 
-        
-		CLASS_INVARIANT_OVERRIDE_DECLARE;        
-        
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Node);
-		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
-        
-        int GetNumChildren () const;
-        
-		int AttachChild(SpatialSharedPtr  child);
-        int DetachChild(SpatialSharedPtr child) noexcept;
-		SpatialSharedPtr DetachChildAt(int index);
-		SpatialSharedPtr GetChild(int index);
-		ConstSpatialSharedPtr GetConstChild(int index) const;
-        
-          void GetVisibleSet(Culler& culler, bool noCull) override;
-        
-          ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD static NodeSharedPtr Create();
 
-		  const PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
-          ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
-		  bool UpdateWorldData(double applicationTime) override;
+        enum class NodeCreate
+        {
+            Init,
+        };
 
-		bool UpdateImplWorldData(double applicationTime);
-        
-    private:
-                void UpdateWorldBound() override;
+    public:
+        explicit Node(MAYBE_UNUSED NodeCreate nodeCreate);
+        ~Node() noexcept = default;
+        Node(const Node& rhs);
+        Node& operator=(const Node& rhs);
+        Node(Node&& rhs) noexcept;
+        Node& operator=(Node&& rhs) noexcept;
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Node);
+        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+
+        NODISCARD int GetNumChildren() const;
+
+        int AttachChild(SpatialSharedPtr child);
+        int DetachChild(SpatialSharedPtr child);
+        SpatialSharedPtr DetachChildAt(int index);
+        NODISCARD SpatialSharedPtr GetChild(int index);
+        NODISCARD ConstSpatialSharedPtr GetConstChild(int index) const;
+
+        void GetVisibleSet(Culler& culler, bool noCull) override;
+
+        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+
+        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+    protected:
+        NODISCARD bool UpdateWorldData(double applicationTime) override;
+
+        NODISCARD bool UpdateImplWorldData(double applicationTime);
 
     private:
-		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        void UpdateWorldBound() override;
+
+    private:
+        PackageType impl;
     };
+
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426) 
+#include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(Node);
+
 #include STSTEM_WARNING_POP
 
-	CORE_TOOLS_SHARED_PTR_DECLARE( Node); 
+    CORE_TOOLS_SHARED_PTR_DECLARE(Node);
 }
-#include STSTEM_WARNING_POP
 
-#endif // RENDERING_SCENE_GRAPH_NODE_H
+#endif  // RENDERING_SCENE_GRAPH_NODE_H

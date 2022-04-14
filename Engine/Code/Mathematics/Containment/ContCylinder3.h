@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 14:31)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_CYLINDER3_H
 #define MATHEMATICS_CONTAINMENT_CONT_CYLINDER3_H
@@ -13,11 +16,17 @@
 
 namespace Mathematics
 {
-	// Compute the cylinder axis segment using least-squares fit.  The radius is
-	// the maximum distance from points to the axis.  The height is determined by
-	// projection of points onto the axis and determining the containing interval.
-	template <typename Real>
-	Cylinder3<Real> ContCylinder (const std::vector<Vector3<Real> >& points);
+    template <typename Real>
+    class ContCylinder3 final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = ContCylinder3<Real>;
+
+    public:
+        NODISCARD static Cylinder3<Real> ContCylinder(const std::vector<Vector3<Real>>& points);
+    };
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_CYLINDER3_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_CYLINDER3_H

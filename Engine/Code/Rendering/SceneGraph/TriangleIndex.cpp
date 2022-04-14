@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 
-Rendering::TriangleIndex ::TriangleIndex(int firstIndex, int secondIndex, int thirdIndex) noexcept
+Rendering::TriangleIndex::TriangleIndex(int firstIndex, int secondIndex, int thirdIndex) noexcept
     : m_FirstIndex{ firstIndex }, m_SecondIndex{ secondIndex }, m_ThirdIndex{ thirdIndex }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -28,21 +28,21 @@ bool Rendering::TriangleIndex
 
 #endif // OPEN_CLASS_INVARIANT
 
-int Rendering::TriangleIndex ::GetFirstIndex() const noexcept
+int Rendering::TriangleIndex::GetFirstIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_FirstIndex;
 }
 
-int Rendering::TriangleIndex ::GetSecondIndex() const noexcept
+int Rendering::TriangleIndex::GetSecondIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_SecondIndex;
 }
 
-int Rendering::TriangleIndex ::GetThirdIndex() const noexcept
+int Rendering::TriangleIndex::GetThirdIndex() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 

@@ -1,100 +1,110 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 14:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/05 15:40)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL1_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL1_DETAIL_H
 
 #include "ConvexHull1.h"
-
-
+#include "ConvexHullDetail.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
-Mathematics::ConvexHull1<Real>
-	::ConvexHull1(int numVertices, Real* vertices, Real epsilon, bool owner, QueryType queryType)
-	:ConvexHull<Real>{ numVertices, epsilon, owner, queryType }, mVertices{ vertices }
+Mathematics::ConvexHull1<Real>::ConvexHull1(const Vertices& vertices, Real epsilon, QueryType queryType)
+    : ParentType{ boost::numeric_cast<int>(vertices.size()), epsilon, queryType }, vertices{ vertices }
 {
-    MATHEMATICS_ASSERTION_0(mVertices != 0, "Must provide vertices\n");
+    const auto numVertices = this->GetNumVertices();
+    std::vector<SortedVertex> sortedArray(numVertices);
 
-    std::vector<SortedVertex> sortedArray(mNumVertices);
-    int i;
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        sortedArray[i].Value = mVertices[i];
-        sortedArray[i].Index = i;
+        sortedArray.at(i).value = vertices.at(i);
+        sortedArray.at(i).index = i;
     }
     std::sort(sortedArray.begin(), sortedArray.end());
 
-    auto range = sortedArray[mNumVertices-1].Value - sortedArray[0].Value;
-    if (range >= mEpsilon)
+    const auto lastIndex = numVertices - 1;
+
+    auto range = sortedArray.at(lastIndex).value - sortedArray.at(0).value;
+    if (this->GetEpsilon() <= range)
     {
-        mDimension = 1;
-        mNumSimplices = 2;
-     //   mIndices = NEW1<int>(2);
-        mIndices[0] = sortedArray[0].Index;
-        mIndices[1] = sortedArray[mNumVertices-1].Index;
-    }
-}
+        this->SetDimension(1);
+        this->SetNumSimplices(2);
 
-template <typename Real>
-Mathematics::ConvexHull1<Real>
-	::~ConvexHull1()
-{
-    if (mOwner)
-    {
-        DELETE1(mVertices);
-    }
-}
-
-template <typename Real>
-const Real* Mathematics::ConvexHull1<Real>
-	::GetVertices() const
-{
-    return mVertices;
-}
-
-template <typename Real>
-Mathematics::ConvexHull1<Real>
-	::ConvexHull1(const System::TChar* filename)
-	:ConvexHull<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{ 0 }
-{
-    bool loaded = Load(filename);
-    MATHEMATICS_ASSERTION_0(loaded, "Failed to load file\n");
-	
-}
-
-template <typename Real>
-bool Mathematics::ConvexHull1<Real>
-	::Load(const System::TChar* filename)
-{
-	CoreTools::ReadFileManager inFile{ filename };
-
-    ConvexHull<Real>::Load(inFile);
-
-    if (mOwner)
-    {
-        DELETE1(mVertices);
+        this->AddIndex(sortedArray.at(0).index);
+        this->AddIndex(sortedArray.at(lastIndex).index);
     }
 
-    mOwner = true;
-   // mVertices = NEW1<Real>(mNumVertices);
-    inFile.Read(sizeof(Real), mNumVertices, mVertices);
- 
-    return true;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-bool Mathematics::ConvexHull1<Real>
-	::Save(const System::TChar* filename) const
+Mathematics::ConvexHull1<Real>::ConvexHull1(const String& filename)
+    : ParentType{ 0, Math<Real>::GetValue(0), QueryType::Real }, vertices{ 0 }
 {
-	CoreTools::WriteFileManager outFile{ filename };
-  
-    ConvexHull<Real>::Save(outFile);
-    outFile.Write(sizeof(Real), mNumVertices, mVertices);
+    LoadFile(filename);
 
-    return true;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL1_DETAIL_H
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ConvexHull1<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+typename Mathematics::ConvexHull1<Real>::Vertices Mathematics::ConvexHull1<Real>::GetVertices() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return vertices;
+}
+
+template <typename Real>
+void Mathematics::ConvexHull1<Real>::LoadFile(const String& filename)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    CoreTools::ReadFileManager inFile{ filename };
+
+    if (!ParentType::Load(inFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("加载文件失败\n"));
+    }
+
+    const auto numVertices = this->GetNumVertices();
+
+    vertices.resize(numVertices);
+
+    inFile.Read(sizeof(Real), numVertices, vertices.data());
+}
+
+template <typename Real>
+void Mathematics::ConvexHull1<Real>::SaveFile(const String& filename) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    CoreTools::WriteFileManager outFile{ filename };
+
+    if (!ParentType::Save(outFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("保存文件失败\n"));
+    }
+
+    outFile.Write(sizeof(Real), vertices.size(), vertices.data());
+}
+
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL1_DETAIL_H

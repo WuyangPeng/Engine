@@ -13,7 +13,7 @@
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
 
-Rendering::Dx9VertexBuffer ::Dx9VertexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexBuffer* vertexBuffer) noexcept
+Rendering::Dx9VertexBuffer::Dx9VertexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexBuffer* vertexBuffer) noexcept
     : ParentType{}
 {
  
@@ -27,7 +27,7 @@ Rendering::Dx9VertexBuffer ::Dx9VertexBuffer([[maybe_unused]] Renderer* renderer
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::Dx9VertexBuffer
-    ::IsValid() const noexcept
+::IsValid() const noexcept
 {
 	if(ParentType::IsValid())
 		return true;
@@ -36,7 +36,7 @@ bool Rendering::Dx9VertexBuffer
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9VertexBuffer ::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset)
+void Rendering::Dx9VertexBuffer::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset)
 {
     RENDERING_CLASS_IS_VALID_1;   
  
@@ -44,14 +44,14 @@ void Rendering::Dx9VertexBuffer ::Enable([[maybe_unused]] Renderer* renderer, [[
      
 }
 
-void Rendering::Dx9VertexBuffer ::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex)
+void Rendering::Dx9VertexBuffer::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex)
 {
     RENDERING_CLASS_IS_VALID_1; 
     CoreTools::DisableNoexcept();
   
 }
 
-void* Rendering::Dx9VertexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
+void* Rendering::Dx9VertexBuffer::Lock([[maybe_unused]] BufferLocking mode)
 {
     RENDERING_CLASS_IS_VALID_1;
     CoreTools::DisableNoexcept();
@@ -61,7 +61,7 @@ void* Rendering::Dx9VertexBuffer ::Lock([[maybe_unused]] BufferLocking mode)
 }
 
 void Rendering::Dx9VertexBuffer
-    ::Unlock ()
+::Unlock ()
 {
     RENDERING_CLASS_IS_VALID_1;
     CoreTools::DisableNoexcept();

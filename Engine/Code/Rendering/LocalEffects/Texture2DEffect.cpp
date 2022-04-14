@@ -31,7 +31,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2DEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture2DEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2DEffect);
 
-Rendering::Texture2DEffect ::Texture2DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
+Rendering::Texture2DEffect::Texture2DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Texture2D", 2, 2, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -84,12 +84,12 @@ Rendering::Texture2DEffect ::Texture2DEffect(ShaderFlags::SamplerFilter filter, 
     InsertTechnique(technique);
 }
 
-Rendering::PixelShader* Rendering::Texture2DEffect ::GetPixelShader() const
+Rendering::PixelShader* Rendering::Texture2DEffect::GetPixelShader() const
 {
     return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture2DEffect ::CreateInstance(Texture2D* texture) const
+Rendering::VisualEffectInstance* Rendering::Texture2DEffect::CreateInstance(Texture2D* texture) const
 {
     VisualEffectInstance* instance = nullptr;  // CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -104,9 +104,11 @@ Rendering::VisualEffectInstance* Rendering::Texture2DEffect ::CreateInstance(Tex
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture2DEffect ::CreateUniqueInstance(Texture2D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
+Rendering::VisualEffectInstance* Rendering::Texture2DEffect::CreateUniqueInstance(Texture2D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate0, ShaderFlags::SamplerCoordinate coordinate1)
 {
     const Texture2DEffect* effect = nullptr;  //CoreTools::New0 < Texture2DEffect>();
+    if (effect == nullptr)
+        return nullptr;
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -116,12 +118,12 @@ Rendering::VisualEffectInstance* Rendering::Texture2DEffect ::CreateUniqueInstan
 
 // Streaming support.
 
-Rendering::Texture2DEffect ::Texture2DEffect(LoadConstructor value)
+Rendering::Texture2DEffect::Texture2DEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::Texture2DEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::Texture2DEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -130,12 +132,12 @@ void Rendering::Texture2DEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Texture2DEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::Texture2DEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::Texture2DEffect ::PostLink()
+void Rendering::Texture2DEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -167,12 +169,12 @@ void Rendering::Texture2DEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::Texture2DEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Texture2DEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::Texture2DEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Texture2DEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -181,7 +183,7 @@ void Rendering::Texture2DEffect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::Texture2DEffect ::GetStreamingSize() const
+int Rendering::Texture2DEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

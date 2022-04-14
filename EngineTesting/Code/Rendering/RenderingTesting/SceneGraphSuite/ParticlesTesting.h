@@ -25,7 +25,7 @@ namespace Rendering
 		void StreamTest();
 		void FileTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

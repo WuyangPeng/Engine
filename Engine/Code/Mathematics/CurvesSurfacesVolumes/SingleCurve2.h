@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 18:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 10:18)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE2_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE2_H
@@ -14,28 +17,29 @@
 namespace Mathematics
 {
     template <typename Real>
-    class  SingleCurve2 : public Curve2<Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SingleCurve2 : public Curve2<Real>
     {
     public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = SingleCurve2<Real>;
+        using ParentType = Curve2<Real>;
         using Math = Math<Real>;
 
     public:
-        // Abstract base class.
         SingleCurve2(Real tmin, Real tmax) noexcept;
 
-        // Length-from-time and time-from-length.
-        Real GetLength(Real t0, Real t1) const override;
-        Real GetTime(Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const override;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        NODISCARD Real GetLength(Real t0, Real t1) const override;
+        NODISCARD Real GetTime(Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const override;
 
     protected:
-        using Curve2<Real>::GetSpeed;
-        using Curve2<Real>::GetTotalLength;
-
-        static Real GetSpeedWithData(Real t, const SingleCurve2<Real>* data);
+        NODISCARD static Real GetSpeedWithData(Real t, const SingleCurve2<Real>* data);
     };
 
-    using SingleCurve2f = SingleCurve2<float>;
-    using SingleCurve2d = SingleCurve2<double>;
+    using SingleCurve2F = SingleCurve2<float>;
+    using SingleCurve2D = SingleCurve2<double>;
 }
 
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE2_H

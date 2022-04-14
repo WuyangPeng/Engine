@@ -1,55 +1,57 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 14:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/30 18:14)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BufferParameter.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::BufferParameter ::BufferParameter() noexcept
-    : m_Offset{ 0 }, m_ComponentSize{ 0 }, m_NumComponents{ 0 }
+Rendering::BufferParameter::BufferParameter() noexcept
+    : offset{ 0 }, componentSize{ 0 }, numComponents{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BufferParameter ::BufferParameter(int offset, int componentSize, int numComponents) noexcept
-    : m_Offset{ offset }, m_ComponentSize{ componentSize }, m_NumComponents{ numComponents }
+Rendering::BufferParameter::BufferParameter(int offset, int componentSize, int numComponents) noexcept
+    : offset{ offset }, componentSize{ componentSize }, numComponents{ numComponents }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BufferParameter)
 
-void Rendering::BufferParameter ::Set(int offset, int componentSize, int numComponents) noexcept
+void Rendering::BufferParameter::Set(int aOffset, int aComponentSize, int aNumComponents) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Offset = offset;
-	m_ComponentSize = componentSize;
-	m_NumComponents = numComponents;
+    offset = aOffset;
+    componentSize = aComponentSize;
+    numComponents = aNumComponents;
 }
 
-int Rendering::BufferParameter ::GetOffset() const noexcept
+int Rendering::BufferParameter::GetOffset() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;	
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Offset;
+    return offset;
 }
 
-int Rendering::BufferParameter ::GetComponentSize() const noexcept
+int Rendering::BufferParameter::GetComponentSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_ComponentSize;
+    return componentSize;
 }
 
-int Rendering::BufferParameter ::GetNumComponents() const noexcept
+int Rendering::BufferParameter::GetNumComponents() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_NumComponents;
+    return numComponents;
 }
-

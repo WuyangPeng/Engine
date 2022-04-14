@@ -1,67 +1,81 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/11 18:34)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYHEDRON3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYHEDRON3_DETAIL_H
 
-#include "ContPointInPolyhedron3.h"
 #include "ContPointInPolygon2.h"
-
+#include "ContPointInPolyhedron3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorRay3Plane3.h"
 #include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorRay3Plane3.h"
 #include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorRay3Triangle3.h"
 
 template <typename Real>
-Mathematics::PointInPolyhedron3<Real>
-	::PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces, const TriangleFace* faces,int numRays, const Vector3<Real>* directions)
-	:mPoints{ points },mNumFaces{ numFaces },mTFaces{ faces },mCFaces{ 0 },mSFaces{ 0 },mMethod{ 0 },mNumRays{ numRays },mDirections{ directions }
+Mathematics::ContPointInPolyhedron3<Real>::ContPointInPolyhedron3(const std::vector<Vector3<Real>>& points, const std::vector<TriangleFace>& faces, const std::vector<Vector3<Real>>& directions)
+    : points{ points }, tFaces{ faces }, cFaces{ 0 }, sFaces{ 0 }, method{ 0 }, directions{ directions }
 {
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-Mathematics::PointInPolyhedron3<Real>
-	::PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces,const ConvexFace* faces, int numRays, const Vector3<Real>* directions, unsigned int method)
-	:mPoints{ points },mNumFaces{ numFaces },mTFaces{ 0 },mCFaces{ faces },mSFaces{ 0 },mMethod{ method },mNumRays{ numRays },mDirections{ directions }
+Mathematics::ContPointInPolyhedron3<Real>::ContPointInPolyhedron3(const std::vector<Vector3<Real>>& points, const std::vector<ConvexFace>& faces, const std::vector<Vector3<Real>>& directions, int method)
+    : points{ points }, tFaces{ 0 }, cFaces{ faces }, sFaces{ 0 }, method{ method }, directions{ directions }
 {
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-Mathematics::PointInPolyhedron3<Real>
-	::PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces,const SimpleFace* faces,int numRays, const Vector3<Real>* directions, unsigned int method)
-	:mPoints{ points },mNumFaces{ numFaces },mTFaces{ 0 },mCFaces{ 0 },mSFaces{ faces },mMethod{ method },mNumRays{ numRays },mDirections{ directions }
+Mathematics::ContPointInPolyhedron3<Real>::ContPointInPolyhedron3(const std::vector<Vector3<Real>>& points, const std::vector<SimpleFace>& faces, const std::vector<Vector3<Real>>& directions, int method)
+    : points{ points }, tFaces{ 0 }, cFaces{ 0 }, sFaces{ faces }, method{ method }, directions{ directions }
 {
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::Contains(const Vector3<Real>& p) const
+bool Mathematics::ContPointInPolyhedron3<Real>::IsValid() const noexcept
 {
-    if (mTFaces)
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ContPointInPolyhedron3<Real>::Contains(const Vector3<Real>& p) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (!tFaces.empty())
     {
         return ContainsT0(p);
     }
 
-    if (mCFaces)
+    if (!cFaces.empty())
     {
-        if (mMethod == 0)
+        if (method == 0)
         {
             return ContainsC0(p);
         }
 
-        return ContainsC1C2(p, mMethod);
+        return ContainsC1C2(p, method);
     }
 
-    if (mSFaces)
+    if (!sFaces.empty())
     {
-        if (mMethod == 0)
+        if (method == 0)
         {
             return ContainsS0(p);
         }
 
-        if (mMethod == 1)
+        if (method == 1)
         {
             return ContainsS1(p);
         }
@@ -71,28 +85,23 @@ bool Mathematics::PointInPolyhedron3<Real>
 }
 
 template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::FastNoIntersect(const Ray3<Real>& ray,const Plane3<Real>& plane)
+bool Mathematics::ContPointInPolyhedron3<Real>::FastNoIntersect(const Ray3<Real>& ray, const Plane3<Real>& plane) noexcept
 {
-    auto planeDistance = Vector3Tools<Real>::DotProduct(plane.GetNormal(),ray.GetOrigin()) - plane.GetConstant();
-	auto planeAngle = Vector3Tools<Real>::DotProduct(plane.GetNormal(),ray.GetDirection());
+    auto planeDistance = Vector3Tools<Real>::DotProduct(plane.GetNormal(), ray.GetOrigin()) - plane.GetConstant();
+    auto planeAngle = Vector3Tools<Real>::DotProduct(plane.GetNormal(), ray.GetDirection());
 
     if (planeDistance < Math<Real>::GetValue(0))
     {
-        // The ray origin is on the negative side of the plane.
         if (planeAngle <= Math<Real>::GetValue(0))
         {
-            // The ray points away from the plane.
             return true;
         }
     }
 
     if (planeDistance > Math<Real>::GetValue(0))
     {
-        // The ray origin is on the positive side of the plane.
         if (planeAngle >= Math<Real>::GetValue(0))
         {
-            // The ray points away from the plane.
             return true;
         }
     }
@@ -101,34 +110,29 @@ bool Mathematics::PointInPolyhedron3<Real>
 }
 
 template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsT0(const Vector3<Real>& p) const
+bool Mathematics::ContPointInPolyhedron3<Real>::ContainsT0(const Vector3<Real>& p) const
 {
-	auto insideCount = 0;
+    auto insideCount = 0;
 
-    for (auto j = 0; j < mNumRays; ++j)
+    const auto numRays = boost::numeric_cast<int>(directions.size());
+    for (auto j = 0; j < numRays; ++j)
     {
-		Ray3<Real> ray{ p,mDirections[j] };
+        const Ray3<Real> ray{ p, directions.at(j) };
 
-        // Zero intersections to start with.
-		auto odd = false;
+        auto odd = false;
 
-        const TriangleFace* face = mTFaces;
-        for (auto i = 0; i < mNumFaces; ++i, ++face)
+        const auto mNumFaces = boost::numeric_cast<int>(tFaces.size());
+        for (auto i = 0; i < mNumFaces; ++i)
         {
-            // Attempt to quickly cull the triangle.
-            if (FastNoIntersect(ray, face->Plane))
+            if (FastNoIntersect(ray, tFaces.at(i).plane))
             {
                 continue;
             }
 
-            // Get the triangle vertices.
-			Triangle3<Real> triangle{ mPoints[face->Indices[0]],mPoints[face->Indices[1]],mPoints[face->Indices[2]] };
-           
-            // Test for intersection.
+            const Triangle3<Real> triangle{ points.at(tFaces.at(i).indices.at(0)), points.at(tFaces.at(i).indices.at(1)), points.at(tFaces.at(i).indices.at(2)) };
+
             if (StaticTestIntersectorRay3Triangle3<Real>(ray, triangle).IsIntersection())
             {
-                // The ray intersects the triangle.
                 odd = !odd;
             }
         }
@@ -139,185 +143,167 @@ bool Mathematics::PointInPolyhedron3<Real>
         }
     }
 
-    return insideCount > mNumRays/2;
+    return insideCount > numRays / 2;
 }
 
 template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsC0(const Vector3<Real>& p) const
+bool Mathematics::ContPointInPolyhedron3<Real>::ContainsC0(const Vector3<Real>& p) const
 {
-    int insideCount = 0;  
+    auto insideCount = 0;
 
-    for (auto j = 0; j < mNumRays; ++j)
+    const auto numRays = boost::numeric_cast<int>(directions.size());
+    for (auto j = 0; j < numRays; ++j)
     {
-		Ray3<Real> ray{ p,mDirections[j] };
+        const Ray3<Real> ray{ p, directions.at(j) };
 
-        // Zero intersections to start with.
-		auto odd = false;
-
-        const ConvexFace* face = mCFaces;
-        for (auto i = 0; i < mNumFaces; ++i, ++face)
-        {
-            // Attempt to quickly cull the triangle.
-            if (FastNoIntersect(ray, face->Plane))
-            {
-                continue;
-            }
-
-            // Process the triangles in a trifan of the face.
-            const auto numVerticesM1 = boost::numeric_cast<int>(face->Indices.size() - 1);
-      
-            for (auto k = 1; k < numVerticesM1; ++k)
-            {               
-				Triangle3<Real> triangle{ mPoints[face->Indices[0]], mPoints[face->Indices[k]],mPoints[face->Indices[k + 1]] };
-
-                if (StaticTestIntersectorRay3Triangle3<Real>(ray, triangle).IsIntersection())
-                {
-                    // The ray intersects the triangle.
-                    odd = !odd;
-                }
-            }
-        }
-
-        if (odd)
-        {
-            insideCount++;
-        }
-    }
-
-    return insideCount > mNumRays/2;
-}
-
-template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsS0(const Vector3<Real>& p) const
-{
-	auto insideCount = 0;
-
-    for (auto j = 0; j < mNumRays; ++j)
-    {
-		Ray3<Real> ray{ p,mDirections[j] };
-
-        // Zero intersections to start with.
-		auto odd = false;
-
-        const SimpleFace* face = mSFaces;
-        for (auto i = 0; i < mNumFaces; ++i, ++face)
-        {
-            // Attempt to quickly cull the triangle.
-            if (FastNoIntersect(ray, face->Plane))
-            {
-                continue;
-            }
-
-            // The triangulation must exist to use it.
-            const int numTriangles = boost::numeric_cast<int>(face->Triangles.size()/3);
-            MATHEMATICS_ASSERTION_0(numTriangles > 0, "Triangulation must exist\n");
-
-            // Process the triangles in a triangulation of the face.
-            const int* currIndex = &face->Triangles[0];
-            for (int t = 0; t < numTriangles; ++t)
-            {
-                // Get the triangle vertices.
-				Triangle3<Real> triangle{ mPoints[*currIndex],mPoints[*(currIndex + 1)],mPoints[*(currIndex + 2)] };
-				currIndex += 3;
-
-                // Test for intersection.
-                if (StaticTestIntersectorRay3Triangle3<Real>(ray, triangle).IsIntersection())
-                {
-                    // The ray intersects the triangle.
-                    odd = !odd;
-                }
-            }
-        }
-
-        if (odd)
-        {
-            insideCount++;
-        }
-    }
-
-    return insideCount > mNumRays/2;
-}
-
-template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsC1C2(const Vector3<Real>& p, unsigned int method) const
-{
-	auto insideCount = 0;
-
-    for (int j = 0; j < mNumRays; ++j)
-    {
-		Ray3<Real> ray{ p,mDirections[j] };
-
-        // Zero intersections to start with.
         auto odd = false;
 
-        const ConvexFace* face = mCFaces;
-        for (auto i = 0; i < mNumFaces; ++i, ++face)
+        const auto numFaces = boost::numeric_cast<int>(cFaces.size());
+        for (auto i = 0; i < numFaces; ++i)
         {
-            // Attempt to quickly cull the triangle.
-            if (FastNoIntersect(ray, face->Plane))
+            const auto& face = cFaces.at(i);
+            if (FastNoIntersect(ray, face.plane))
             {
                 continue;
             }
 
-            // Compute the ray-plane intersection.
-			StaticFindIntersectorRay3Plane3<Real> calc{ ray, face->Plane };
-			auto intersects = calc.IsIntersection();
+            const auto numVerticesM1 = boost::numeric_cast<int>(face.indices.size() - 1);
 
-            // If you trigger this MATHEMATICS_ASSERTION_0, numerical round-off errors have
-            // led to a discrepancy between FastNoIntersect and the Find()
-            // result.
-            MATHEMATICS_ASSERTION_0(intersects, "Unexpected condition\n");
-            
-
-			auto intr = ray.GetOrigin() + calc.GetRayParameter()*ray.GetDirection();
-
-            // Get a coordinate system for the plane.  Use vertex 0 as the
-            // origin.
-            const auto& V0 = mPoints[face->Indices[0]];
-            Vector3<Real> U0, U1;
-			auto  Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(face->Plane.GetNormal());
-			U0 = Vector3OrthonormalBasis.GetUVector();
-			U1 = Vector3OrthonormalBasis.GetVVector();
-
-            // Project the intersection onto the plane.
-			auto diff = intr - V0;
-			Vector2<Real> projIntersect{ Vector3Tools<Real>::DotProduct(U0,diff),Vector3Tools<Real>::DotProduct(U1,diff) };
-
-            // Project the face vertices onto the plane of the face.
-            if (face->Indices.size() > mProjVertices.size())
+            for (auto k = 1; k < numVerticesM1; ++k)
             {
-                mProjVertices.resize(face->Indices.size());
-            }
+                const auto nextK = k + 1;
+                const Triangle3<Real> triangle{ points.at(face.indices.at(0)), points.at(face.indices.at(k)), points.at(face.indices.at(nextK)) };
 
-            // Project the remaining vertices.  Vertex 0 is always the origin.
-            const int numIndices = boost::numeric_cast<int>(face->Indices.size());
-            mProjVertices[0] = Vector2<Real>::sm_Zero;
-            for (int k = 1; k < numIndices; ++k)
-            {
-                diff = mPoints[face->Indices[k]] - V0;
-                mProjVertices[k][0] = Vector3Tools<Real>::DotProduct(U0,diff);
-                mProjVertices[k][1] = Vector3Tools<Real>::DotProduct(U1,diff);
-            }
-
-            // Test whether the intersection point is in the convex polygon.
-			PointInPolygon2<Real> PIP{ boost::numeric_cast<int>(mProjVertices.size()),&mProjVertices[0] };
-
-            if (method == 1)
-            {
-                if (PIP.ContainsConvexOrderN(projIntersect))
+                if (StaticTestIntersectorRay3Triangle3<Real>(ray, triangle).IsIntersection())
                 {
-                    // The ray intersects the triangle.
+                    odd = !odd;
+                }
+            }
+        }
+
+        if (odd)
+        {
+            insideCount++;
+        }
+    }
+
+    return insideCount > numRays / 2;
+}
+
+template <typename Real>
+bool Mathematics::ContPointInPolyhedron3<Real>::ContainsS0(const Vector3<Real>& p) const
+{
+    auto insideCount = 0;
+
+    const auto numRays = boost::numeric_cast<int>(directions.size());
+    for (auto j = 0; j < numRays; ++j)
+    {
+        const Ray3<Real> ray{ p, directions.at(j) };
+
+        auto odd = false;
+
+        const auto numFaces = boost::numeric_cast<int>(sFaces.size());
+        for (auto i = 0; i < numFaces; ++i)
+        {
+            const auto& face = sFaces.at(i);
+
+            if (FastNoIntersect(ray, face.plane))
+            {
+                continue;
+            }
+
+            const int numTriangles = boost::numeric_cast<int>(face.triangles.size() / 3);
+            MATHEMATICS_ASSERTION_0(numTriangles > 0, "三角测量必须存在。\n");
+
+            auto currIndex = 0;
+            for (auto t = 0; t < numTriangles; ++t)
+            {
+                const auto nextCurrIndex = currIndex + 1;
+                const auto nextCurrIndex1 = currIndex + 2;
+                const Triangle3<Real> triangle{ points.at(face.triangles.at(currIndex)), points.at(face.triangles.at(nextCurrIndex)), points.at(face.triangles.at(nextCurrIndex1)) };
+                currIndex += 3;
+
+                if (StaticTestIntersectorRay3Triangle3<Real>(ray, triangle).IsIntersection())
+                {
+                    odd = !odd;
+                }
+            }
+        }
+
+        if (odd)
+        {
+            insideCount++;
+        }
+    }
+
+    return insideCount > numRays / 2;
+}
+
+template <typename Real>
+bool Mathematics::ContPointInPolyhedron3<Real>::ContainsC1C2(const Vector3<Real>& p, int pMethod) const
+{
+    auto insideCount = 0;
+
+    const auto numRays = boost::numeric_cast<int>(directions.size());
+    for (auto j = 0; j < numRays; ++j)
+    {
+        const Ray3<Real> ray{ p, directions.at(j) };
+
+        auto odd = false;
+
+        const auto numFaces = boost::numeric_cast<int>(cFaces.size());
+        for (auto i = 0; i < numFaces; ++i)
+        {
+            const auto& face = cFaces.at(i);
+
+            if (FastNoIntersect(ray, face.plane))
+            {
+                continue;
+            }
+
+            StaticFindIntersectorRay3Plane3<Real> calc{ ray, face.plane };
+            const auto intersects = calc.IsIntersection();
+
+            MATHEMATICS_ASSERTION_0(intersects, "意外情况。\n");
+
+            auto intr = ray.GetOrigin() + calc.GetRayParameter() * ray.GetDirection();
+
+            const auto& v0 = points.at(face.indices.at(0));
+
+            const auto vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(face.plane.GetNormal());
+            const auto u0 = vector3OrthonormalBasis.GetUVector();
+            const auto u1 = vector3OrthonormalBasis.GetVVector();
+
+            auto diff = intr - v0;
+            const Vector2<Real> projIntersect{ Vector3Tools<Real>::DotProduct(u0, diff), Vector3Tools<Real>::DotProduct(u1, diff) };
+
+            if (face.indices.size() > projVertices.size())
+            {
+                projVertices.resize(face.indices.size());
+            }
+
+            const auto numIndices = boost::numeric_cast<int>(face.indices.size());
+            projVertices.at(0) = Vector2<Real>::GetZero();
+            for (auto k = 1; k < numIndices; ++k)
+            {
+                diff = points.at(face.indices.at(k)) - v0;
+                projVertices.at(k)[0] = Vector3Tools<Real>::DotProduct(u0, diff);
+                projVertices.at(k)[1] = Vector3Tools<Real>::DotProduct(u1, diff);
+            }
+
+            ContPointInPolygon2<Real> pip{ projVertices };
+
+            if (pMethod == 1)
+            {
+                if (pip.ContainsConvexOrderN(projIntersect))
+                {
                     odd = !odd;
                 }
             }
             else
             {
-                if (PIP.ContainsConvexOrderLogN(projIntersect))
+                if (pip.ContainsConvexOrderLogN(projIntersect))
                 {
-                    // The ray intersects the triangle.
                     odd = !odd;
                 }
             }
@@ -329,78 +315,65 @@ bool Mathematics::PointInPolyhedron3<Real>
         }
     }
 
-    return insideCount > mNumRays/2;
+    return insideCount > numRays / 2;
 }
 
 template <typename Real>
-bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsS1(const Vector3<Real>& p) const
+bool Mathematics::ContPointInPolyhedron3<Real>::ContainsS1(const Vector3<Real>& p) const
 {
-    int insideCount = 0;
+    auto insideCount = 0;
 
+    const auto mNumRays = boost::numeric_cast<int>(directions.size());
     for (auto j = 0; j < mNumRays; ++j)
     {
-		Ray3<Real> ray{ p,mDirections[j] };
+        const Ray3<Real> ray{ p, directions.at(j) };
 
-        // Zero intersections to start with.
-        bool odd = false;
+        auto odd = false;
 
-        const SimpleFace* face = mSFaces;
-        for (auto i = 0; i < mNumFaces; ++i, ++face)
+        const auto numFaces = boost::numeric_cast<int>(sFaces.size());
+        for (auto i = 0; i < numFaces; ++i)
         {
-            // Attempt to quickly cull the triangle.
-            if (FastNoIntersect(ray, face->Plane))
+            const auto& face = sFaces.at(i);
+
+            if (FastNoIntersect(ray, face.plane))
             {
                 continue;
             }
 
-            // Compute the ray-plane intersection.
-			StaticFindIntersectorRay3Plane3<Real> calc{ ray, face->Plane };
-			auto intersects = calc.IsIntersection();
+            StaticFindIntersectorRay3Plane3<Real> calc{ ray, face.plane };
+            const auto intersects = calc.IsIntersection();
 
-            // If you trigger this MATHEMATICS_ASSERTION_0, numerical round-off errors have
-            // led to a discrepancy between FastNoIntersect and the Find()
-            // result.
-            MATHEMATICS_ASSERTION_0(intersects, "Unexpected condition\n");
-            
+            MATHEMATICS_ASSERTION_0(intersects, "意外结果。\n");
 
-			auto intr = ray.GetOrigin() + calc.GetRayParameter()*ray.GetDirection();
+            auto intr = ray.GetOrigin() + calc.GetRayParameter() * ray.GetDirection();
 
-            // Get a coordinate system for the plane.  Use vertex 0 as the
-            // origin.
-            const auto& V0 = mPoints[face->Indices[0]];
-            Vector3<Real> U0, U1;
-            
-			auto  Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(face->Plane.GetNormal());
-			U0 = Vector3OrthonormalBasis.GetUVector();
-			U1 = Vector3OrthonormalBasis.GetVVector();
+            const auto& v0 = points.at(face.indices.at(0));
 
-            // Project the intersection onto the plane.
-			auto diff = intr - V0;
-			auto projIntersect(Vector3Tools<Real>::DotProduct(U0,diff), Vector3Tools<Real>::DotProduct(U1,diff));
+            const auto vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(face.plane.GetNormal());
+            const auto u0 = vector3OrthonormalBasis.GetUVector();
+            const auto u1 = vector3OrthonormalBasis.GetVVector();
 
-            // Project the face vertices onto the plane of the face.
-            if (face->Indices.size() > mProjVertices.size())
+            auto diff = intr - v0;
+            const Vector2<Real> projIntersect(Vector3Tools<Real>::DotProduct(u0, diff), Vector3Tools<Real>::DotProduct(u1, diff));
+
+            if (face.indices.size() > projVertices.size())
             {
-                mProjVertices.resize(face->Indices.size());
+                projVertices.resize(face.indices.size());
             }
 
-            // Project the remaining vertices.  Vertex 0 is always the origin.
-            const int numIndices = (int)face->Indices.size();
-            mProjVertices[0] = Vector2<Real>::sm_Zero;
+            const int numIndices = boost::numeric_cast<int>(face.indices.size());
+            projVertices.at(0) = Vector2<Real>::GetZero();
             for (auto k = 1; k < numIndices; ++k)
             {
-                diff = mPoints[face->Indices[k]] - V0;
-                mProjVertices[k][0] = Vector3Tools<Real>::DotProduct(U0,diff);
-                mProjVertices[k][1] =  Vector3Tools<Real>::DotProduct(U1,diff);
+                diff = points.at(face.indices.at(k)) - v0;
+                projVertices.at(k)[0] = Vector3Tools<Real>::DotProduct(u0, diff);
+                projVertices.at(k)[1] = Vector3Tools<Real>::DotProduct(u1, diff);
             }
 
-            // Test whether the intersection point is in the convex polygon.
-			PointInPolygon2<Real> PIP{ boost::numeric_cast<int>(mProjVertices.size()),  &mProjVertices[0] };
+            ContPointInPolygon2<Real> pip{ projVertices };
 
-            if (PIP.Contains(projIntersect))
+            if (pip.Contains(projIntersect))
             {
-                // The ray intersects the triangle.
                 odd = !odd;
             }
         }
@@ -411,7 +384,7 @@ bool Mathematics::PointInPolyhedron3<Real>
         }
     }
 
-    return insideCount > mNumRays/2;
+    return insideCount > mNumRays / 2;
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYHEDRON3_DETAIL_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_POINT_IN_POLYHEDRON3_DETAIL_H

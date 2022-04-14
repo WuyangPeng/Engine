@@ -6,14 +6,24 @@
 
 #include "Testing.h"
 #include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(Rendering, TestingHelper, "渲染库")
+using namespace std::literals;
 
-// private
-void Rendering::TestingHelper ::AddSuites()
+Rendering::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "渲染库"s }
+{
+    InitSuite();
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TestingHelper)
+
+void Rendering::TestingHelper::InitSuite()
 {
     AddMacroSuite();
     AddDataTypesSuite();
@@ -57,17 +67,17 @@ void Rendering::TestingHelper ::AddSuites()
     AddNvtoolkitSuite();
 }
 
-void Rendering::TestingHelper ::AddMacroSuite()
+void Rendering::TestingHelper::AddMacroSuite()
 {
-    ADD_TEST_BEGIN(macroSuite, "宏");
+    auto macroSuite = GenerateSuite("宏");
 
-    ADD_TEST_END(macroSuite);
+    AddSuite(macroSuite);
 }
 
 // private
-void Rendering::TestingHelper ::AddDataTypesSuite()
+void Rendering::TestingHelper::AddDataTypesSuite()
 {
-    ADD_TEST_BEGIN(dataTypeSuite, "数据类型");
+    auto dataTypeSuite = GenerateSuite("数据类型");
 
     ADD_TEST(dataTypeSuite, HalfFloatTesting);
     ADD_TEST(dataTypeSuite, ColourDefaultTraitsTesting);
@@ -81,12 +91,12 @@ void Rendering::TestingHelper ::AddDataTypesSuite()
     ADD_TEST(dataTypeSuite, BoundTesting);
     ADD_TEST(dataTypeSuite, SpecializedIOTesting);
 
-    ADD_TEST_END(dataTypeSuite);
+    AddSuite(dataTypeSuite);
 }
 
-void Rendering::TestingHelper ::AddResourcesSuite()
+void Rendering::TestingHelper::AddResourcesSuite()
 {
-    ADD_TEST_BEGIN(resourcesSuite, "资源");
+    auto resourcesSuite = GenerateSuite("资源");
 
     ADD_TEST(resourcesSuite, BufferTesting);
     ADD_TEST(resourcesSuite, Texture1DTesting);
@@ -99,13 +109,13 @@ void Rendering::TestingHelper ::AddResourcesSuite()
     ADD_TEST(resourcesSuite, VertexFormatTesting);
     ADD_TEST(resourcesSuite, VertexBufferAccessorTesting);
 
-    ADD_TEST_END(resourcesSuite);
+    AddSuite(resourcesSuite);
 }
 
 // private
-void Rendering::TestingHelper ::AddSceneGraphSuite()
+void Rendering::TestingHelper::AddSceneGraphSuite()
 {
-    ADD_TEST_BEGIN(sceneGraphSuite, "场景图");
+    auto sceneGraphSuite = GenerateSuite("场景图");
 
     ADD_TEST(sceneGraphSuite, CameraFrustumDataTesting);
     ADD_TEST(sceneGraphSuite, CameraManageTesting);
@@ -133,13 +143,13 @@ void Rendering::TestingHelper ::AddSceneGraphSuite()
     ADD_TEST(sceneGraphSuite, ScreenTargetTesting);
     ADD_TEST(sceneGraphSuite, StandardMeshTesting);
 
-    ADD_TEST_END(sceneGraphSuite);
+    AddSuite(sceneGraphSuite);
 }
 
 // private
-void Rendering::TestingHelper ::AddControllersSuite()
+void Rendering::TestingHelper::AddControllersSuite()
 {
-    ADD_TEST_BEGIN(controllersSuite, "控制器");
+    auto controllersSuite = GenerateSuite("控制器");
 
     ADD_TEST(controllersSuite, ControllerTesting);
     ADD_TEST(controllersSuite, ControlledObjectTesting);
@@ -155,12 +165,12 @@ void Rendering::TestingHelper ::AddControllersSuite()
     ADD_TEST(controllersSuite, IKControllerTesting);
     ADD_TEST(controllersSuite, BlendTransformControllerTesting);
 
-    ADD_TEST_END(controllersSuite);
+    AddSuite(controllersSuite);
 }
 
-void Rendering::TestingHelper ::AddShaderFloatsSuite()
+void Rendering::TestingHelper::AddShaderFloatsSuite()
 {
-    ADD_TEST_BEGIN(shaderFloatsSuite, "浮点着色器");
+    auto shaderFloatsSuite = GenerateSuite("浮点着色器");
 
     ADD_TEST(shaderFloatsSuite, ShaderFloatTesting);
     ADD_TEST(shaderFloatsSuite, CameraModelDirectionVectorConstantTesting);
@@ -189,12 +199,12 @@ void Rendering::TestingHelper ::AddShaderFloatsSuite()
     ADD_TEST(shaderFloatsSuite, ProjectorWorldPositionConstantTesting);
     ADD_TEST(shaderFloatsSuite, ProjectorMatrixConstantTesting);
 
-    ADD_TEST_END(shaderFloatsSuite);
+    AddSuite(shaderFloatsSuite);
 }
 
-void Rendering::TestingHelper ::AddDetailSuite()
+void Rendering::TestingHelper::AddDetailSuite()
 {
-    ADD_TEST_BEGIN(detailSuite, "细节");
+    auto detailSuite = GenerateSuite("细节");
 
     ADD_TEST(detailSuite, SwitchNodeTesting);
     ADD_TEST(detailSuite, BillboardNodeTesting);
@@ -204,12 +214,12 @@ void Rendering::TestingHelper ::AddDetailSuite()
     ADD_TEST(detailSuite, ClodMeshTesting);
     ADD_TEST(detailSuite, DlodNodeTesting);
 
-    ADD_TEST_END(detailSuite);
+    AddSuite(detailSuite);
 }
 
-void Rendering::TestingHelper ::AddShadersSuite()
+void Rendering::TestingHelper::AddShadersSuite()
 {
-    ADD_TEST_BEGIN(shadersSuite, "着色器");
+    auto shadersSuite = GenerateSuite("着色器");
 
     ADD_TEST(shadersSuite, SingleShaderBaseDataTesting);
     ADD_TEST(shadersSuite, ShaderBaseDataTesting);
@@ -236,26 +246,26 @@ void Rendering::TestingHelper ::AddShadersSuite()
     ADD_TEST(shadersSuite, LoadVisualEffectTesting);
     ADD_TEST(shadersSuite, VisualEffectInstanceTesting);
 
-    ADD_TEST_END(shadersSuite);
+    AddSuite(shadersSuite);
 }
 
-void Rendering::TestingHelper ::AddLocalEffectsSuite()
+void Rendering::TestingHelper::AddLocalEffectsSuite()
 {
-    ADD_TEST_BEGIN(localEffectsSuite, "局部特效");
+    auto localEffectsSuite = GenerateSuite("局部特效");
 
-    ADD_TEST_END(localEffectsSuite);
+    AddSuite(localEffectsSuite);
 }
 
-void Rendering::TestingHelper ::AddGlobalEffectsSuite()
+void Rendering::TestingHelper::AddGlobalEffectsSuite()
 {
-    ADD_TEST_BEGIN(globalEffectsSuite, "全局特效");
+    auto globalEffectsSuite = GenerateSuite("全局特效");
 
-    ADD_TEST_END(globalEffectsSuite);
+    AddSuite(globalEffectsSuite);
 }
 
-void Rendering::TestingHelper ::AddCurvesSurfacesSuite()
+void Rendering::TestingHelper::AddCurvesSurfacesSuite()
 {
-    ADD_TEST_BEGIN(curvesSurfacesSuite, "曲线曲面");
+    auto curvesSurfacesSuite = GenerateSuite("曲线曲面");
 
     ADD_TEST(curvesSurfacesSuite, FloatArrayTesting);
     ADD_TEST(curvesSurfacesSuite, Float2ArrayTesting);
@@ -263,82 +273,82 @@ void Rendering::TestingHelper ::AddCurvesSurfacesSuite()
     ADD_TEST(curvesSurfacesSuite, PrincipalCurvatureInfoTesting);
     ADD_TEST(curvesSurfacesSuite, SurfacePatchTesting);
 
-    ADD_TEST_END(curvesSurfacesSuite);
+    AddSuite(curvesSurfacesSuite);
 }
 
-void Rendering::TestingHelper ::AddIlluminationSuite()
+void Rendering::TestingHelper::AddIlluminationSuite()
 {
-    ADD_TEST_BEGIN(illuminationSuite, "光照");
+    auto illuminationSuite = GenerateSuite("光照");
 
-    ADD_TEST_END(illuminationSuite);
+    AddSuite(illuminationSuite);
 }
 
-void Rendering::TestingHelper ::AddImageProcessingSuite()
+void Rendering::TestingHelper::AddImageProcessingSuite()
 {
-    ADD_TEST_BEGIN(imageProcessingSuite, "图像处理");
+    auto imageProcessingSuite = GenerateSuite("图像处理");
 
-    ADD_TEST_END(imageProcessingSuite);
+    AddSuite(imageProcessingSuite);
 }
 
-void Rendering::TestingHelper ::AddPictureSuite()
+void Rendering::TestingHelper::AddPictureSuite()
 {
-    ADD_TEST_BEGIN(pictureSuite, "图像");
+    auto pictureSuite = GenerateSuite("图像");
 
-    ADD_TEST_END(pictureSuite);
+    AddSuite(pictureSuite);
 }
 
-void Rendering::TestingHelper ::AddSortingSuite()
+void Rendering::TestingHelper::AddSortingSuite()
 {
-    ADD_TEST_BEGIN(sortingSuite, "排序");
+    auto sortingSuite = GenerateSuite("排序");
 
-    ADD_TEST_END(sortingSuite);
+    AddSuite(sortingSuite);
 }
 
-void Rendering::TestingHelper ::AddTerrainSuite()
+void Rendering::TestingHelper::AddTerrainSuite()
 {
-    ADD_TEST_BEGIN(terrainSuite, "地形处理");
+    auto terrainSuite = GenerateSuite("地形处理");
 
-    ADD_TEST_END(terrainSuite);
+    AddSuite(terrainSuite);
 }
 
-void Rendering::TestingHelper ::AddVertexSuite()
+void Rendering::TestingHelper::AddVertexSuite()
 {
-    ADD_TEST_BEGIN(vertexSuite, "顶点");
+    auto vertexSuite = GenerateSuite("顶点");
 
-    ADD_TEST_END(vertexSuite);
+    AddSuite(vertexSuite);
 }
 
-void Rendering::TestingHelper ::AddTextFontsSuite()
+void Rendering::TestingHelper::AddTextFontsSuite()
 {
-    ADD_TEST_BEGIN(textFontsSuite, "文本及字体");
+    auto textFontsSuite = GenerateSuite("文本及字体");
 
-    ADD_TEST_END(textFontsSuite);
+    AddSuite(textFontsSuite);
 }
 
-void Rendering::TestingHelper ::AddConsoleGraphSuite()
+void Rendering::TestingHelper::AddConsoleGraphSuite()
 {
-    ADD_TEST_BEGIN(consoleGraphSuite, "控制台图形");
+    auto consoleGraphSuite = GenerateSuite("控制台图形");
 
-    ADD_TEST_END(consoleGraphSuite);
+    AddSuite(consoleGraphSuite);
 }
 
-void Rendering::TestingHelper ::AddOpenGLAPISuite()
+void Rendering::TestingHelper::AddOpenGLAPISuite()
 {
-    ADD_TEST_BEGIN(openGLAPISuite, "OpenGLAPI");
+    auto openGLAPISuite = GenerateSuite("OpenGLAPI");
 
-    ADD_TEST_END(openGLAPISuite);
+    AddSuite(openGLAPISuite);
 }
 
-void Rendering::TestingHelper ::AddDirectAPISuite()
+void Rendering::TestingHelper::AddDirectAPISuite()
 {
-    ADD_TEST_BEGIN(directAPISuite, "DirectAPI");
+    auto directAPISuite = GenerateSuite("DirectAPI");
 
-    ADD_TEST_END(directAPISuite);
+    AddSuite(directAPISuite);
 }
 
-void Rendering::TestingHelper ::AddRenderersSuite()
+void Rendering::TestingHelper::AddRenderersSuite()
 {
-    ADD_TEST_BEGIN(renderersSuite, "渲染器");
+    auto renderersSuite = GenerateSuite("渲染器");
 
     ADD_TEST(renderersSuite, RendererBasisTesting);
     ADD_TEST(renderersSuite, RendererParameterTesting);
@@ -359,12 +369,12 @@ void Rendering::TestingHelper ::AddRenderersSuite()
     ADD_TEST(renderersSuite, PlatformRenderTargetTesting);
     ADD_TEST(renderersSuite, RenderTargetManagementTesting);
 
-    ADD_TEST_END(renderersSuite);
+    AddSuite(renderersSuite);
 }
 
-void Rendering::TestingHelper ::AddOpenGLRendererSuite()
+void Rendering::TestingHelper::AddOpenGLRendererSuite()
 {
-    ADD_TEST_BEGIN(openGLRendererSuite, "OpenGL渲染器");
+    auto openGLRendererSuite = GenerateSuite("OpenGL渲染器");
 
     ADD_TEST(openGLRendererSuite, OpenGLBindTextureTesting);
     ADD_TEST(openGLRendererSuite, OpenGLVertexFormatDataTesting);
@@ -373,124 +383,124 @@ void Rendering::TestingHelper ::AddOpenGLRendererSuite()
     ADD_TEST(openGLRendererSuite, OpenGLTextureDataManageTesting);
     ADD_TEST(openGLRendererSuite, OpenGLRenderTargetDataTesting);
 
-    ADD_TEST_END(openGLRendererSuite);
+    AddSuite(openGLRendererSuite);
 }
 
-void Rendering::TestingHelper ::AddDx9RendererSuite()
+void Rendering::TestingHelper::AddDx9RendererSuite()
 {
-    ADD_TEST_BEGIN(dx9RendererSuite, "Dx9渲染器");
+    auto dx9RendererSuite = GenerateSuite("Dx9渲染器");
 
-    ADD_TEST_END(dx9RendererSuite);
+    AddSuite(dx9RendererSuite);
 }
 
-void Rendering::TestingHelper ::AddAglRendererSuite()
+void Rendering::TestingHelper::AddAglRendererSuite()
 {
-    ADD_TEST_BEGIN(aglRendererSuite, "Agl渲染器");
+    auto aglRendererSuite = GenerateSuite("Agl渲染器");
 
-    ADD_TEST_END(aglRendererSuite);
+    AddSuite(aglRendererSuite);
 }
 
-void Rendering::TestingHelper ::AddGlutRendererSuite()
+void Rendering::TestingHelper::AddGlutRendererSuite()
 {
-    ADD_TEST_BEGIN(glutRendererSuite, "Glut渲染器");
+    auto glutRendererSuite = GenerateSuite("Glut渲染器");
 
-    ADD_TEST_END(glutRendererSuite);
+    AddSuite(glutRendererSuite);
 }
 
-void Rendering::TestingHelper ::AddGlxRendererSuite()
+void Rendering::TestingHelper::AddGlxRendererSuite()
 {
-    ADD_TEST_BEGIN(glxRendererSuite, "Glx渲染器");
+    auto glxRendererSuite = GenerateSuite("Glx渲染器");
 
-    ADD_TEST_END(glxRendererSuite);
+    AddSuite(glxRendererSuite);
 }
 
-void Rendering::TestingHelper ::AddWglRendererSuite()
+void Rendering::TestingHelper::AddWglRendererSuite()
 {
-    ADD_TEST_BEGIN(wglRendererSuite, "Wgl渲染器");
+    auto wglRendererSuite = GenerateSuite("Wgl渲染器");
 
-    ADD_TEST_END(wglRendererSuite);
+    AddSuite(wglRendererSuite);
 }
 
-void Rendering::TestingHelper ::AddLib3dsSuite()
+void Rendering::TestingHelper::AddLib3dsSuite()
 {
-    ADD_TEST_BEGIN(lib3dsSuite, "Lib3ds");
+    auto lib3dsSuite = GenerateSuite("Lib3ds");
 
-    ADD_TEST_END(lib3dsSuite);
+    AddSuite(lib3dsSuite);
 }
 
-void Rendering::TestingHelper ::AddAbuseSuite()
+void Rendering::TestingHelper::AddAbuseSuite()
 {
-    ADD_TEST_BEGIN(abuseSuite, "Abuse");
+    auto abuseSuite = GenerateSuite("Abuse");
 
-    ADD_TEST_END(abuseSuite);
+    AddSuite(abuseSuite);
 }
 
-void Rendering::TestingHelper ::AddDemoglSuite()
+void Rendering::TestingHelper::AddDemoglSuite()
 {
-    ADD_TEST_BEGIN(demoglSuite, "Demogl");
+    auto demoglSuite = GenerateSuite("Demogl");
 
-    ADD_TEST_END(demoglSuite);
+    AddSuite(demoglSuite);
 }
 
-void Rendering::TestingHelper ::AddDevILSuite()
+void Rendering::TestingHelper::AddDevILSuite()
 {
-    ADD_TEST_BEGIN(devILSuite, "DevIL");
+    auto devILSuite = GenerateSuite("DevIL");
 
-    ADD_TEST_END(devILSuite);
+    AddSuite(devILSuite);
 }
 
-void Rendering::TestingHelper ::AddFBXSuite()
+void Rendering::TestingHelper::AddFBXSuite()
 {
-    ADD_TEST_BEGIN(fBXSuite, "FBX");
+    auto fBXSuite = GenerateSuite("FBX");
 
-    ADD_TEST_END(fBXSuite);
+    AddSuite(fBXSuite);
 }
 
-void Rendering::TestingHelper ::AddJPEGSuite()
+void Rendering::TestingHelper::AddJPEGSuite()
 {
-    ADD_TEST_BEGIN(jPEGSuite, "JPEG");
+    auto jPEGSuite = GenerateSuite("JPEG");
 
-    ADD_TEST_END(jPEGSuite);
+    AddSuite(jPEGSuite);
 }
 
-void Rendering::TestingHelper ::AddTIFFSuite()
+void Rendering::TestingHelper::AddTIFFSuite()
 {
-    ADD_TEST_BEGIN(tIFFSuite, "TIFF");
+    auto tIFFSuite = GenerateSuite("TIFF");
 
-    ADD_TEST_END(tIFFSuite);
+    AddSuite(tIFFSuite);
 }
 
-void Rendering::TestingHelper ::AddOpenvidiaSuite()
+void Rendering::TestingHelper::AddOpenvidiaSuite()
 {
-    ADD_TEST_BEGIN(openvidiaSuite, "Openvidia");
+    auto openvidiaSuite = GenerateSuite("Openvidia");
 
-    ADD_TEST_END(openvidiaSuite);
+    AddSuite(openvidiaSuite);
 }
 
-void Rendering::TestingHelper ::AddNethackSuite()
+void Rendering::TestingHelper::AddNethackSuite()
 {
-    ADD_TEST_BEGIN(nethackSuite, "Nethack");
+    auto nethackSuite = GenerateSuite("Nethack");
 
-    ADD_TEST_END(nethackSuite);
+    AddSuite(nethackSuite);
 }
 
-void Rendering::TestingHelper ::AddWingSuite()
+void Rendering::TestingHelper::AddWingSuite()
 {
-    ADD_TEST_BEGIN(wingSuite, "Wing");
+    auto wingSuite = GenerateSuite("Wing"); 
 
-    ADD_TEST_END(wingSuite);
+    AddSuite(wingSuite);
 }
 
-void Rendering::TestingHelper ::AddWargamerSuite()
+void Rendering::TestingHelper::AddWargamerSuite()
 {
-    ADD_TEST_BEGIN(wargamerSuite, "Wargamer");
+    auto wargamerSuite = GenerateSuite("Wargamer");  
 
-    ADD_TEST_END(wargamerSuite);
+    AddSuite(wargamerSuite);
 }
 
-void Rendering::TestingHelper ::AddNvtoolkitSuite()
+void Rendering::TestingHelper::AddNvtoolkitSuite()
 {
-    ADD_TEST_BEGIN(nvtoolkitSuite, "Nvtoolkit");
+    auto nvtoolkitSuite = GenerateSuite("Nvtoolkit");   
 
-    ADD_TEST_END(nvtoolkitSuite);
+    AddSuite(nvtoolkitSuite);
 }

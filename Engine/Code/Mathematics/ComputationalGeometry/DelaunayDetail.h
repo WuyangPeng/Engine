@@ -1,152 +1,222 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 15:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/07 16:18)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY_DETAIL_H
 
 #include "Delaunay.h"
-
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Delaunay<Real>
-	::Delaunay(int numVertices, Real epsilon, bool owner, QueryType queryType)
-	:mQueryType{ queryType }, mNumVertices{ numVertices }, mDimension{ 0 }, mNumSimplices{ 0 }, mIndices{ 0 }, mAdjacencies{ 0 }, mEpsilon{ epsilon }, mOwner{ owner }
+Mathematics::Delaunay<Real>::Delaunay(int numVertices, Real epsilon, QueryType queryType)
+    : queryType{ queryType }, numVertices{ numVertices }, dimension{ 0 }, numSimplices{ 0 }, indices{}, adjacencies{}, epsilon{ epsilon }
 {
-    MATHEMATICS_ASSERTION_0(mNumVertices >= 0 && mEpsilon >= Math<Real>::GetValue(0), "Invalid inputs\n");
+    MATHEMATICS_ASSERTION_0(0 < numVertices && Math<Real>::GetValue(0) <= epsilon, "无效输入\n");
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::Delaunay<Real>::IsValid() const noexcept
+{
+    if (0 < numVertices && Math<Real>::GetValue(0) <= epsilon)
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::QueryType Mathematics::Delaunay<Real>::GetQueryType() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return queryType;
 }
 
 template <typename Real>
-Mathematics::Delaunay<Real>
-	::~Delaunay()
+int Mathematics::Delaunay<Real>::GetNumVertices() const noexcept
 {
-//     DELETE1(mIndices);
-//     DELETE1(mAdjacencies);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numVertices;
 }
 
 template <typename Real>
-Mathematics::QueryType Mathematics::Delaunay<Real>
-	::GetQueryType() const
+Real Mathematics::Delaunay<Real>::GetEpsilon() const noexcept
 {
-    return mQueryType;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return epsilon;
 }
 
 template <typename Real>
-int Mathematics::Delaunay<Real>
-	::GetNumVertices() const
+int Mathematics::Delaunay<Real>::GetDimension() const noexcept
 {
-    return mNumVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return dimension;
 }
 
 template <typename Real>
-Real Mathematics::Delaunay<Real>
-	::GetEpsilon() const
+int Mathematics::Delaunay<Real>::GetNumSimplices() const noexcept
 {
-    return mEpsilon;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numSimplices;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay<Real>
-	::GetOwner() const
+typename Mathematics::Delaunay<Real>::IndicesType Mathematics::Delaunay<Real>::GetIndices() const
 {
-    return mOwner;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return indices;
 }
 
 template <typename Real>
-int Mathematics::Delaunay<Real>
-	::GetDimension() const
+int32_t Mathematics::Delaunay<Real>::GetIndex(int index) const
 {
-    return mDimension;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return indices.at(index);
 }
 
 template <typename Real>
-int Mathematics::Delaunay<Real>
-	::GetNumSimplices() const
+int32_t Mathematics::Delaunay<Real>::GetAdjacency(int index) const
 {
-    return mNumSimplices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return adjacencies.at(index);
 }
 
 template <typename Real>
-const int* Mathematics::Delaunay<Real>
-	::GetIndices() const
+typename Mathematics::Delaunay<Real>::IndicesType Mathematics::Delaunay<Real>::GetAdjacencies() const
 {
-    return mIndices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return adjacencies;
 }
 
 template <typename Real>
-const int* Mathematics::Delaunay<Real>
-	::GetAdjacencies() const
+bool Mathematics::Delaunay<Real>::Load(CoreTools::ReadFileManager& inFile)
 {
-    return mAdjacencies;
-}
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-template <typename Real>
-bool Mathematics::Delaunay<Real>
-	::Load(CoreTools::ReadFileManager& inFile)
-{
-//     DELETE1(mIndices);
-//     DELETE1(mAdjacencies);
+    indices.clear();
+    adjacencies.clear();
 
-    // Fixed-size members.
-    int type;
-    inFile.Read(sizeof(int), &type);
-    mQueryType = (QueryType)type;
+    inFile.Read(sizeof(QueryType), &queryType);
+    inFile.Read(sizeof(int32_t), &numVertices);
+    inFile.Read(sizeof(int32_t), &dimension);
+    inFile.Read(sizeof(int32_t), &numSimplices);
+    inFile.Read(sizeof(Real), &epsilon);
 
-    inFile.Read(sizeof(int), &mNumVertices);
-    inFile.Read(sizeof(int), &mDimension);
-    inFile.Read(sizeof(int), &mNumSimplices);
-    inFile.Read(sizeof(Real), &mEpsilon);
-
-    // Variable-size members.
-    int numIndices;
-    inFile.Read(sizeof(int), &numIndices);
-    if (1 <= mDimension && mDimension <= 3)
+    auto numIndices = 0;
+    inFile.Read(sizeof(int32_t), &numIndices);
+    if (1 <= dimension && dimension <= 3)
     {
-        MATHEMATICS_ASSERTION_0(numIndices == (mDimension+1)*mNumSimplices,"Inconsistent index count\n");
-      //  mIndices = NEW1<int>(numIndices);
-		//mAdjacencies = NEW1<int>(numIndices);
-        inFile.Read(sizeof(int), numIndices, mIndices);
-        inFile.Read(sizeof(int), numIndices, mAdjacencies);
+        MATHEMATICS_ASSERTION_0(numIndices == (dimension + 1) * numSimplices, "不一致的索引计数。\n");
+
+        indices.resize(numIndices);
+        adjacencies.resize(numIndices);
+        inFile.Read(sizeof(int32_t), numIndices, indices.data());
+        inFile.Read(sizeof(int32_t), numIndices, adjacencies.data());
+
         return true;
     }
 
-    mIndices = 0;
-    mAdjacencies = 0;
-    return mDimension == 0;
+    indices.clear();
+    adjacencies.clear();
+
+    return dimension == 0;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay<Real>
-	::Save(CoreTools::WriteFileManager& outFile) const
+bool Mathematics::Delaunay<Real>::Save(CoreTools::WriteFileManager& outFile) const
 {
-    // Fixed-size members.
-    int type = (int)mQueryType;
-    outFile.Write(sizeof(int), &type);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    outFile.Write(sizeof(int), &mNumVertices);
-    outFile.Write(sizeof(int), &mDimension);
-    outFile.Write(sizeof(int), &mNumSimplices);
-    outFile.Write(sizeof(Real), &mEpsilon);
+    outFile.Write(sizeof(QueryType), &queryType);
 
-    // The member mOwner is not streamed because on a Load call, this
-    // object will allocate the vertices and own this memory.
+    outFile.Write(sizeof(int32_t), &numVertices);
+    outFile.Write(sizeof(int32_t), &dimension);
+    outFile.Write(sizeof(int32_t), &numSimplices);
+    outFile.Write(sizeof(Real), &epsilon);
 
-    // Variable-size members.
-    int numIndices;
-    if (1 <= mDimension && mDimension <= 3)
+    if (1 <= dimension && dimension <= 3)
     {
-        numIndices = (mDimension+1)*mNumSimplices;
-        outFile.Write(sizeof(int), &numIndices);
-        outFile.Write(sizeof(int), numIndices, mIndices);
-        outFile.Write(sizeof(int), numIndices, mAdjacencies);
+        const auto numIndices = (dimension + 1) * numSimplices;
+        outFile.Write(sizeof(int32_t), &numIndices);
+        outFile.Write(sizeof(int32_t), numIndices, indices.data());
+        outFile.Write(sizeof(int32_t), numIndices, adjacencies.data());
+
         return true;
     }
 
-    numIndices = 0;
-    outFile.Write(sizeof(int), &numIndices);
-    return mDimension == 0;
+    constexpr auto numIndices = 0;
+    outFile.Write(sizeof(int32_t), &numIndices);
+
+    return dimension == 0;
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY_DETAIL_H
+template <typename Real>
+void Mathematics::Delaunay<Real>::SetDimension(int32_t newDimension) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    dimension = newDimension;
+}
+
+template <typename Real>
+void Mathematics::Delaunay<Real>::SetNumSimplices(int32_t newNumSimplices) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    numSimplices = newNumSimplices;
+}
+
+template <typename Real>
+void Mathematics::Delaunay<Real>::AddIndex(int32_t index)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    indices.emplace_back(index);
+}
+
+template <typename Real>
+void Mathematics::Delaunay<Real>::SetIndex(IndicesType indicesType)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    indices = indicesType;
+}
+
+template <typename Real>
+void Mathematics::Delaunay<Real>::SetAdjacencies(IndicesType indicesType)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    adjacencies = indicesType;
+}
+
+template <typename Real>
+void Mathematics::Delaunay<Real>::AddAdjacency(int32_t index)
+{
+    MATHEMATICS_CLASS_IS_VALID_1;
+
+    adjacencies.emplace_back(index);
+}
+
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY_DETAIL_H

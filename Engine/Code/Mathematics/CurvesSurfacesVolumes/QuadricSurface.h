@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 17:57)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_H
@@ -14,108 +17,110 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class   QuadricSurface : public ImplicitSurface<Real>
-	{
-	public:
-		// A quadric surface is defined implicitly by
-		//
-		//   0 = a0 + a1*x[0] + a2*x[1] + a3*x[2] + a4*x[0]^2 + a5*x[0]*x[1] +
-		//       a6*x[0]*x[2] + a7*x[1]^2 + a8*x[1]*x[2] + a9*x[2]^2
-		//
-		//     = a0 + [a1 a2 a3]*X + X^T*[a4   a5/2 a6/2]*X
-		//                               [a5/2 a7   a8/2]
-		//                               [a6/2 a8/2 a9  ]
-		//     = C + B^T*X + X^T*A*X
-		//
-		// The matrix A is symmetric.
+    template <typename Real>
+    class QuadricSurface : public ImplicitSurface<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		QuadricSurface();  // all coefficients zero
-		QuadricSurface(const Real coeff[10]);
+        using ClassType = QuadricSurface<Real>;
+        using ParentType = ImplicitSurface<Real>;
 
-		// Member access.
-		const Real* GetCoefficients() const;
-		const Matrix3<Real>& GetA() const;
-		const Vector3<Real>& GetB() const;
-		Real GetC() const;
+    public:
+        QuadricSurface() noexcept;
+        explicit QuadricSurface(const std::array<Real, 10>& coeff);
 
-		// The quadric function.
-		virtual Real F(const Vector3<Real>& pos) const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// First-order partial derivatives.
-		virtual Real FX(const Vector3<Real>& pos) const;
-		virtual Real FY(const Vector3<Real>& pos) const;
-		virtual Real FZ(const Vector3<Real>& pos) const;
+        NODISCARD const Real* GetCoefficients() const noexcept;
+        NODISCARD const Matrix3<Real>& GetA() const noexcept;
+        NODISCARD const Vector3<Real>& GetB() const noexcept;
+        NODISCARD Real GetC() const noexcept;
 
-		// Second-order partial derivatives.
-		virtual Real FXX(const Vector3<Real>& pos) const;
-		virtual Real FXY(const Vector3<Real>& pos) const;
-		virtual Real FXZ(const Vector3<Real>& pos) const;
-		virtual Real FYY(const Vector3<Real>& pos) const;
-		virtual Real FYZ(const Vector3<Real>& pos) const;
-		virtual Real FZZ(const Vector3<Real>& pos) const;
+        NODISCARD Real F(const Vector3<Real>& pos) const override;
 
-		enum  // solution type
-		{
-			QT_NONE,
-			QT_POINT,
-			QT_LINE,
-			QT_PLANE,
-			QT_TWO_PLANES,
-			QT_PARABOLIC_CYLINDER,
-			QT_ELLIPTIC_CYLINDER,
-			QT_HYPERBOLIC_CYLINDER,
-			QT_ELLIPTIC_PARABOLOID,
-			QT_HYPERBOLIC_PARABOLOID,
-			QT_ELLIPTIC_CONE,
-			QT_HYPERBOLOID_ONE_SHEET,
-			QT_HYPERBOLOID_TWO_SHEETS,
-			QT_ELLIPSOID
-		};
+        NODISCARD Real FX(const Vector3<Real>& pos) const override;
+        NODISCARD Real FY(const Vector3<Real>& pos) const override;
+        NODISCARD Real FZ(const Vector3<Real>& pos) const override;
 
-		// Classification of the equation using exact arithmetic.
-		int GetType() const;
+        NODISCARD Real FXX(const Vector3<Real>& pos) const override;
+        NODISCARD Real FXY(const Vector3<Real>& pos) const override;
+        NODISCARD Real FXZ(const Vector3<Real>& pos) const override;
+        NODISCARD Real FYY(const Vector3<Real>& pos) const override;
+        NODISCARD Real FYZ(const Vector3<Real>& pos) const override;
+        NODISCARD Real FZZ(const Vector3<Real>& pos) const override;
 
-	protected:
-		Real mCoeff[10];
-		Matrix3<Real> mA;
-		Vector3<Real> mB;
-		Real mC;
+        enum class Type
+        {
+            None,
+            Point,
+            Line,
+            Plane,
+            TowPlane,
+            ParabolicCylinder,
+            EllipticCylinder,
+            HyperbolicCylinder,
+            EllipticParaboloid,
+            HyperbolicParaboloid,
+            EllipticCone,
+            HyperboloidOneSheet,
+            HyperboloidTwoSheets,
+            Ellipsoid
+        };
 
-	private:
-		using QRational = SignRational<4 * sizeof(Real)>;
-		using QSVector = RationalVector3<4 * sizeof(Real)>;
+        NODISCARD Type GetType() const;
 
-		class RReps
-		{
-		public:
-			RReps(const Real coeff[10]);
+    private:
+        using QRational = SignRational<4 * sizeof(Real)>;
+        using QSVector = RationalVector3<4 * sizeof(Real)>;
 
-			// Quadratic coefficients.
-			QRational A00, A01, A02, A11, A12, A22, B0, B1, B2, C;
+        class RReps
+        {
+        public:
+            RReps(const std::array<Real, 10>& coeff);
 
-			// 2-by-2 determinants
-			QRational Sub00, Sub01, Sub02, Sub11, Sub12, Sub22;
+            QRational a00;
+            QRational a01;
+            QRational a02;
+            QRational a11;
+            QRational a12;
+            QRational a22;
+            QRational b0;
+            QRational b1;
+            QRational b2;
+            QRational c;
 
-			// Characteristic polynomial L^3 - C2*L^2 + C1*L - C0.
-			QRational C0, C1, C2;
+            QRational sub00;
+            QRational sub01;
+            QRational sub02;
+            QRational sub11;
+            QRational sub12;
+            QRational sub22;
 
-			// For Sturm sequences.
-			QRational C3, C4, C5;
-		};
+            QRational c0;
+            QRational c1;
+            QRational c2;
 
-		static void GetRootSigns(RReps& reps, int& positiveRoots, int& negativeRoots, int& zeroRoots);
-		static int GetSignChanges(int quantity, const QRational* value);
-		static int ClassifyZeroRoots0(const RReps& reps, int positiveRoots);
-		static int ClassifyZeroRoots1(const RReps& reps, int positiveRoots);
-		static int ClassifyZeroRoots1(const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2);
-		static int ClassifyZeroRoots2(const RReps& reps, int positiveRoots);
-		static int ClassifyZeroRoots2(const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2);
-		static int ClassifyZeroRoots3(const RReps& reps);
-	};
+            QRational c3;
+            QRational c4;
+            QRational c5;
+        };
 
-	using QuadricSurfacef = QuadricSurface<float>;
-	using QuadricSurfaced = QuadricSurface<double>;
+        NODISCARD static void GetRootSigns(RReps& reps, int& positiveRoots, int& negativeRoots, int& zeroRoots);
+        NODISCARD static int GetSignChanges(int quantity, const std::array<QRational, 4>& value);
+        NODISCARD static Type ClassifyZeroRoots0(const RReps& reps, int positiveRoots);
+        NODISCARD static Type ClassifyZeroRoots1(const RReps& reps, int positiveRoots);
+        NODISCARD static Type ClassifyZeroRoots1(const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2);
+        NODISCARD static Type ClassifyZeroRoots2(const RReps& reps, int positiveRoots);
+        NODISCARD static Type ClassifyZeroRoots2(const RReps& reps, int positiveRoots, const QSVector& P0, const QSVector& P1, const QSVector& P2);
+        NODISCARD static Type ClassifyZeroRoots3(const RReps& reps);
+
+    private:
+        std::array<Real, 10> coeff;
+        Matrix3<Real> a;
+        Vector3<Real> b;
+        Real c;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_QUADRIC_SURFACE_H

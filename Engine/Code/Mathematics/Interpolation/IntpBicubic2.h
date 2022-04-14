@@ -1,66 +1,65 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 09:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/19 18:54)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_BICUBIC2_H
 #define MATHEMATICS_INTERPOLATION_INTP_BICUBIC2_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Algebra/VariableMatrix.h"
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  IntpBicubic2
-	{
-	public:
-		// Construction and destruction.  IntpBicubic2 does not accept
-		// responsibility for deleting the input array.  The application must do
-		// so.  The interpolator is for uniformly spaced (x,y)-values.  The
-		// function values are assumed to be organized as f(x,y) = F[y][x].
-		// Exact interpolation is achieved by setting catmullRom to 'true',
-		// giving you the Catmull-Rom blending matrix.  If a smooth interpolation
-		// is desired, set catmullRom to 'false' to obtain B-spline blending.
+    template <typename Real>
+    class IntpBicubic2
+    {
+    public:
+        using ClassType = IntpBicubic2<Real>;
 
-		IntpBicubic2(int xBound, int yBound, Real xMin, Real xSpacing,Real yMin, Real ySpacing, Real** F, bool catmullRom);
+    public:
+        IntpBicubic2(int xBound, int yBound, Real xMin, Real xSpacing, Real yMin, Real ySpacing, const VariableMatrix<Real>& f, bool catmullRom);
 
-		int GetXBound() const;
-		int GetYBound() const;
-		int GetQuantity() const;
-		Real** GetF() const;
+        CLASS_INVARIANT_DECLARE;
 
-		Real GetXMin() const;
-		Real GetXMax() const;
-		Real GetXSpacing() const;
-		Real GetYMin() const;
-		Real GetYMax() const;
-		Real GetYSpacing() const;
+        NODISCARD int GetXBound() const noexcept;
+        NODISCARD int GetYBound() const noexcept;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD VariableMatrix<Real> GetF() const;
 
-		// Evaluate the function and its derivatives.  The application is
-		// responsible for ensuring that xmin <= x <= xmax and ymin <= y <= ymax.
-		// If (x,y) is outside the extremes, the function returns MAXREAL.  The
-		// first operator is for function evaluation.  The second operator is for
-		// function or derivative evaluations.  The uiXOrder argument is the order
-		// of the x-derivative and the uiYOrder argument is the order of the
-		// y-derivative.  Both orders are zero to get the function value itself.
-		Real operator() (Real x, Real y) const;
-		Real operator() (int xOrder, int yOrder, Real x, Real y) const;
+        NODISCARD Real GetXMin() const noexcept;
+        NODISCARD Real GetXMax() const noexcept;
+        NODISCARD Real GetXSpacing() const noexcept;
+        NODISCARD Real GetYMin() const noexcept;
+        NODISCARD Real GetYMax() const noexcept;
+        NODISCARD Real GetYSpacing() const noexcept;
 
-	private:
-		int mXBound, mYBound, quantity;
-		Real mXMin, mXMax, mXSpacing, mInvXSpacing;
-		Real mYMin, mYMax, mYSpacing, mInvYSpacing;
-		Real** mF;
-		const Real(*mBlend)[4];
+        NODISCARD Real operator()(Real x, Real y) const;
+        NODISCARD Real operator()(int xOrder, int yOrder, Real x, Real y) const;
 
-		static const Real msCRBlend[4][4];
-		static const Real msBSBlend[4][4];
-	};
+    private:
+        int xBound;
+        int yBound;
+        int quantity;
+        Real xMin;
+        Real xMax;
+        Real xSpacing;
+        Real invXSpacing;
+        Real yMin;
+        Real yMax;
+        Real ySpacing;
+        Real invYSpacing;
+        VariableMatrix<Real> f;
+        const std::array<std::array<Real, 4>, 4>& blend;
 
-	using IntpBicubic2f = IntpBicubic2<float>;
-	using IntpBicubic2d = IntpBicubic2<double>;
-
+        static const std::array<std::array<Real, 4>, 4> crBlend;
+        static const std::array<std::array<Real, 4>, 4> bsBlend;
+    };
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_BICUBIC2_H
+#endif  // MATHEMATICS_INTERPOLATION_INTP_BICUBIC2_H

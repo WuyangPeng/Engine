@@ -23,7 +23,7 @@
 
 
 
-
+#include SYSTEM_WARNING_DISABLE(26481)
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
@@ -39,7 +39,7 @@ void Rendering::Texture2DTesting
 	RendererManager::Create();
 
 	ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(MipmapsTest);
+	//ASSERT_NOT_THROW_EXCEPTION_0(MipmapsTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
 
@@ -148,7 +148,7 @@ void Rendering::Texture2DTesting
 	::StreamTest()
 {
 	Texture2DSharedPtr firstTexture2D = LoadTexture::Load2DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture2D.trt"));
-	firstTexture2D->GenerateMipmaps();
+	//firstTexture2D->GenerateMipmaps();
 
 	for (int i = 0; i < TextureMaxUserFields; ++i)
 	{	 
@@ -214,7 +214,7 @@ void Rendering::Texture2DTesting
 	::FileTest()
 {
 	Texture2DSharedPtr firstTexture2D = LoadTexture::Load2DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture2D.trt"));
-	firstTexture2D->GenerateMipmaps();
+	//firstTexture2D->GenerateMipmaps();
 
 	SaveTexture::SaveToFile(*firstTexture2D, SYSTEM_TEXT("Resource/ResourcesSuite/MipmapsTexture2D.trt"));
 

@@ -37,7 +37,7 @@ namespace Rendering
 		void G32R32FConvertTest();
 		void A32B32G32R32FConvertTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

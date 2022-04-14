@@ -16,7 +16,7 @@
 
 using std::string;
 
-Rendering::RendererManagerImpl ::RendererManagerImpl(MAYBE_UNUSED int count) noexcept
+Rendering::RendererManagerImpl::RendererManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_Renderers()
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -24,7 +24,7 @@ Rendering::RendererManagerImpl ::RendererManagerImpl(MAYBE_UNUSED int count) noe
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererManagerImpl)
 
-int64_t Rendering::RendererManagerImpl ::Insert(RendererPtr ptr)
+int64_t Rendering::RendererManagerImpl::Insert(RendererPtr ptr)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -43,14 +43,14 @@ int64_t Rendering::RendererManagerImpl ::Insert(RendererPtr ptr)
     return id;
 }
 
-bool Rendering::RendererManagerImpl ::Erase(int64_t rendererID)
+bool Rendering::RendererManagerImpl::Erase(int64_t rendererID)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     return 0 < m_Renderers.erase(rendererID);
 }
 
-void Rendering::RendererManagerImpl ::BindAll(VertexFormatConstPtr vertexFormat)
+void Rendering::RendererManagerImpl::BindAll(VertexFormatConstPtr vertexFormat)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -69,7 +69,7 @@ void Rendering::RendererManagerImpl ::BindAll(VertexFormatConstPtr vertexFormat)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManagerImpl::BindAll(VertexBufferConstPtr vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -88,7 +88,7 @@ void Rendering::RendererManagerImpl ::BindAll(VertexBufferConstPtr vertexBuffer)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManagerImpl::BindAll(IndexBufferConstPtr indexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -107,7 +107,7 @@ void Rendering::RendererManagerImpl ::BindAll(IndexBufferConstPtr indexBuffer)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(Texture1DConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(Texture1DConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -126,7 +126,7 @@ void Rendering::RendererManagerImpl ::BindAll(Texture1DConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(Texture2DConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(Texture2DConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -145,7 +145,7 @@ void Rendering::RendererManagerImpl ::BindAll(Texture2DConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(Texture3DConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(Texture3DConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -164,7 +164,7 @@ void Rendering::RendererManagerImpl ::BindAll(Texture3DConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(TextureCubeConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(TextureCubeConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -183,7 +183,7 @@ void Rendering::RendererManagerImpl ::BindAll(TextureCubeConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(RenderTargetConstPtr renderTarget)
+void Rendering::RendererManagerImpl::BindAll(RenderTargetConstPtr renderTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -202,7 +202,7 @@ void Rendering::RendererManagerImpl ::BindAll(RenderTargetConstPtr renderTarget)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(VertexShaderConstPtr vertexShader)
+void Rendering::RendererManagerImpl::BindAll(VertexShaderConstPtr vertexShader)
 {
     RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -219,7 +219,7 @@ void Rendering::RendererManagerImpl ::BindAll(VertexShaderConstPtr vertexShader)
     }
 }
 
-void Rendering::RendererManagerImpl ::BindAll(PixelShaderConstPtr pixelShader)
+void Rendering::RendererManagerImpl::BindAll(PixelShaderConstPtr pixelShader)
 {
     RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -233,7 +233,7 @@ void Rendering::RendererManagerImpl ::BindAll(PixelShaderConstPtr pixelShader)
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(VertexFormatConstPtr vertexFormat)
+void Rendering::RendererManagerImpl::UnbindAll(VertexFormatConstPtr vertexFormat)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -252,7 +252,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(VertexFormatConstPtr vertexForma
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManagerImpl::UnbindAll(VertexBufferConstPtr vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
   //  if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
@@ -270,7 +270,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(VertexBufferConstPtr vertexBuffe
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManagerImpl::UnbindAll(IndexBufferConstPtr indexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -289,7 +289,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(IndexBufferConstPtr indexBuffer)
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(Texture1DConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(Texture1DConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -308,7 +308,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(Texture1DConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(Texture2DConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(Texture2DConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -327,7 +327,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(Texture2DConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(Texture3DConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(Texture3DConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -346,7 +346,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(Texture3DConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(TextureCubeConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(TextureCubeConstPtr texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -365,7 +365,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(TextureCubeConstPtr texture)
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(RenderTargetConstPtr renderTarget)
+void Rendering::RendererManagerImpl::UnbindAll(RenderTargetConstPtr renderTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -384,7 +384,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(RenderTargetConstPtr renderTarge
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(VertexShaderConstPtr vertexShader)
+void Rendering::RendererManagerImpl::UnbindAll(VertexShaderConstPtr vertexShader)
 {
     RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -398,7 +398,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(VertexShaderConstPtr vertexShade
     }
 }
 
-void Rendering::RendererManagerImpl ::UnbindAll(PixelShaderConstPtr pixelShader)
+void Rendering::RendererManagerImpl::UnbindAll(PixelShaderConstPtr pixelShader)
 {
     RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
@@ -412,7 +412,7 @@ void Rendering::RendererManagerImpl ::UnbindAll(PixelShaderConstPtr pixelShader)
     }
 }
 
-void Rendering::RendererManagerImpl ::UpdateAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManagerImpl::UpdateAll(VertexBufferConstPtr vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -432,7 +432,7 @@ void Rendering::RendererManagerImpl ::UpdateAll(VertexBufferConstPtr vertexBuffe
     }
 }
 
-void Rendering::RendererManagerImpl ::UpdateAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManagerImpl::UpdateAll(IndexBufferConstPtr indexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
   //  if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
@@ -450,7 +450,7 @@ void Rendering::RendererManagerImpl ::UpdateAll(IndexBufferConstPtr indexBuffer)
     }
 }
 
-void Rendering::RendererManagerImpl ::UpdateAll(Texture1DConstPtr texture, int level)
+void Rendering::RendererManagerImpl::UpdateAll(Texture1DConstPtr texture, int level)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -469,7 +469,7 @@ void Rendering::RendererManagerImpl ::UpdateAll(Texture1DConstPtr texture, int l
     }
 }
 
-void Rendering::RendererManagerImpl ::UpdateAll(Texture2DConstPtr texture, int level)
+void Rendering::RendererManagerImpl::UpdateAll(Texture2DConstPtr texture, int level)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -488,7 +488,7 @@ void Rendering::RendererManagerImpl ::UpdateAll(Texture2DConstPtr texture, int l
     }
 }
 
-void Rendering::RendererManagerImpl ::UpdateAll(Texture3DConstPtr texture, int level)
+void Rendering::RendererManagerImpl::UpdateAll(Texture3DConstPtr texture, int level)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -507,7 +507,7 @@ void Rendering::RendererManagerImpl ::UpdateAll(Texture3DConstPtr texture, int l
     }
 }
 
-void Rendering::RendererManagerImpl ::UpdateAll(TextureCubeConstPtr texture, int face, int level)
+void Rendering::RendererManagerImpl::UpdateAll(TextureCubeConstPtr texture, int face, int level)
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -42,7 +42,7 @@ void Rendering::WireStateImpl
 	target.Write(m_Enabled);
 }
 
-int Rendering::WireStateImpl ::GetStreamingSize() const noexcept
+int Rendering::WireStateImpl::GetStreamingSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -51,14 +51,14 @@ int Rendering::WireStateImpl ::GetStreamingSize() const noexcept
 	return size;
 }
 
-bool Rendering::WireStateImpl ::IsEnabled() const noexcept
+bool Rendering::WireStateImpl::IsEnabled() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Enabled;
 }
 
-void Rendering::WireStateImpl ::SetEnabled(bool enabled) noexcept
+void Rendering::WireStateImpl::SetEnabled(bool enabled) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

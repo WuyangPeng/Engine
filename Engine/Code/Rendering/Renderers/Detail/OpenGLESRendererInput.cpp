@@ -25,7 +25,7 @@ Rendering:: OpenGLESRendererInput
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLESRendererInput)
  
 
-void Rendering::OpenGLESRendererInput ::SetWindowID(int windowID) noexcept
+void Rendering::OpenGLESRendererInput::SetWindowID(int windowID) noexcept
 {
 	SetWindowHandle(reinterpret_cast<HWnd>(static_cast<size_t>(windowID)));
 
@@ -37,7 +37,7 @@ void Rendering:: OpenGLESRendererInput
 	m_WindowHandle  = windowID;
 }
 
-Rendering::RendererTypes Rendering::OpenGLESRendererInput ::GetRendererType() const noexcept
+Rendering::RendererTypes Rendering::OpenGLESRendererInput::GetRendererType() const noexcept
 {
 	return RendererTypes::OpenGLES;
 }

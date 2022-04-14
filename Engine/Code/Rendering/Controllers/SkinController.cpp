@@ -166,10 +166,10 @@ bool Rendering::SkinController
 			if (vertexBuffer)
 			{
 				RENDERING_ASSERTION_2(impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "控制器必须和缓冲器具有相同数量的顶点\n");
-				VertexBufferAccessor vba{ visual };
+				VertexBufferAccessor vba{ *visual };
 
 				// 皮肤顶点在骨骼世界坐标系统计算，所以视觉世界变换必须为单位。
-                                visual->SetWorldTransform(FloatTransform{});
+                                visual->SetWorldTransform(TransformF{});
 
 				// 计算的皮肤顶点位置。
 				for (auto vertex = 0; vertex < impl->GetNumVertices(); ++vertex)
@@ -224,7 +224,7 @@ Rendering::SkinController
 }
 
 int Rendering::SkinController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -235,7 +235,7 @@ int Rendering::SkinController
 	return size;
 }
 
-uint64_t Rendering::SkinController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::SkinController::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -249,7 +249,7 @@ uint64_t Rendering::SkinController ::Register(CoreTools::ObjectRegister& target)
 }
 
 void Rendering::SkinController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -263,7 +263,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::Link (CoreTools::ObjectLink& source)
+::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -273,7 +273,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
@@ -281,7 +281,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::Load (CoreTools::BufferSource& source)
+::Load (CoreTools::BufferSource& source)
 {
 	;
     

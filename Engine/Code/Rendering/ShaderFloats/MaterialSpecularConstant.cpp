@@ -34,7 +34,7 @@ Rendering::MaterialSpecularConstant
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,MaterialSpecularConstant)
 
-void Rendering::MaterialSpecularConstant ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::MaterialSpecularConstant::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

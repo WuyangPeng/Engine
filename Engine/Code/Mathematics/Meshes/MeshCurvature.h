@@ -1,56 +1,62 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 10:49)
 
 #ifndef MATHEMATICS_MESHES_MESH_CURVATURE_H
 #define MATHEMATICS_MESHES_MESH_CURVATURE_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Matrix3.h"
 #include "Mathematics/Algebra/Matrix2.h"
+#include "Mathematics/Algebra/Matrix3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  MeshCurvature
-	{
-	public:
-		// The caller is responsible for deleting the input arrays.
-		MeshCurvature (int numVertices, const Vector3<Real>* vertices, int numTriangles, const int* indices);
+    template <typename Real>
+    class MeshCurvature
+    {
+    public:
+        using ClassType = MeshCurvature<Real>;
 
-		virtual ~MeshCurvature ();
+    public:
+        MeshCurvature(int numVertices, const std::vector<Vector3<Real>>& vertices, int numTriangles, const std::vector<int>& indices);
 
-		// Input values from the constructor.
-		int GetNumVertices () const;
-		const Vector3<Real>* GetVertices () const;
-		int GetNumTriangles () const;
-		const int* GetIndices () const;
+        virtual ~MeshCurvature() noexcept = default;
+        MeshCurvature(const MeshCurvature& rhs) = default;
+        MeshCurvature& operator=(const MeshCurvature& rhs) = default;
+        MeshCurvature(MeshCurvature&& rhs) noexcept = default;
+        MeshCurvature& operator=(MeshCurvature&& rhs) noexcept = default;
 
-		// Derived quantites from the input mesh.
-		const Vector3<Real>* GetNormals () const;
-		const Real* GetMinCurvatures () const;
-		const Real* GetMaxCurvatures () const;
-		const Vector3<Real>* GetMinDirections () const;
-		const Vector3<Real>* GetMaxDirections () const;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-	protected:
-		int mNumVertices;
-		const Vector3<Real>* mVertices;
-		int mNumTriangles;
-		const int* mIndices;
+        NODISCARD int GetNumVertices() const noexcept;
+        NODISCARD std::vector<Vector3<Real>> GetVertices() const;
+        NODISCARD int GetNumTriangles() const noexcept;
+        NODISCARD std::vector<int> GetIndices() const;
 
-		Vector3<Real>* mNormals;
-		Real* mMinCurvatures;
-		Real* mMaxCurvatures;
-		Vector3<Real>* mMinDirections;
-		Vector3<Real>* mMaxDirections;
-	};
+        NODISCARD std::vector<Vector3<Real>> GetNormals() const;
+        NODISCARD std::vector<Real> GetMinCurvatures() const;
+        NODISCARD std::vector<Real> GetMaxCurvatures() const;
+        NODISCARD std::vector<Vector3<Real>> GetMinDirections() const;
+        NODISCARD std::vector<Vector3<Real>> GetMaxDirections() const;
 
-	using MeshCurvaturef = MeshCurvature<float>;
-	using MeshCurvatured = MeshCurvature<double>;
+    private:
+        int numVertices;
+        std::vector<Vector3<Real>> vertices;
+        int numTriangles;
+        std::vector<int> indices;
+
+        std::vector<Vector3<Real>> normals;
+        std::vector<Real> minCurvatures;
+        std::vector<Real> maxCurvatures;
+        std::vector<Vector3<Real>> minDirections;
+        std::vector<Vector3<Real>> maxDirections;
+    };
 }
 
-#endif // MATHEMATICS_MESHES_MESH_CURVATURE_H
+#endif  // MATHEMATICS_MESHES_MESH_CURVATURE_H

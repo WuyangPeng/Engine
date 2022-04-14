@@ -43,7 +43,7 @@ Rendering::ShaderProfileDataImpl
 CLASS_INVARIANT_STUB_DEFINE(Rendering,ShaderProfileDataImpl)
 
 void Rendering::ShaderProfileDataImpl
-    ::SetBaseRegister( int profile, int index, int baseRegister )
+::SetBaseRegister( int profile, int index, int baseRegister )
 {
 	RENDERING_CLASS_IS_VALID_9;
 	RENDERING_ASSERTION_0(0 <= profile && profile < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"Ë÷Òý´íÎó");
@@ -96,21 +96,21 @@ const std::string Rendering::ShaderProfileDataImpl
 	return m_ShaderProfileData[profile].GetProgram();
 }
 
-int Rendering::ShaderProfileDataImpl ::GetBaseRegisterSize() const noexcept
+int Rendering::ShaderProfileDataImpl::GetBaseRegisterSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_NumConstants;
 }
 
-int Rendering::ShaderProfileDataImpl ::GetTextureUnitSize() const noexcept
+int Rendering::ShaderProfileDataImpl::GetTextureUnitSize() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_NumSamplers;
 }
 
-void Rendering::ShaderProfileDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ShaderProfileDataImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 

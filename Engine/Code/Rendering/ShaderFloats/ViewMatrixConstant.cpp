@@ -38,7 +38,7 @@ Rendering::ViewMatrixConstant
  
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ViewMatrixConstant)
 
-void Rendering::ViewMatrixConstant ::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
+void Rendering::ViewMatrixConstant::Update([[maybe_unused]] const Visual* visual, const Camera* camera)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

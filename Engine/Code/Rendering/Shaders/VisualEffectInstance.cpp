@@ -73,13 +73,13 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, VisualEffectInstance)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, VisualEffectInstance)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, VisualEffectInstance)
 
-Rendering::VisualEffectInstance ::VisualEffectInstance(const VisualEffectSharedPtr& effect, int techniqueIndex)
+Rendering::VisualEffectInstance::VisualEffectInstance(const VisualEffectSharedPtr& effect, int techniqueIndex)
     : ParentType{ "VisualEffectInstance" }, impl{ make_shared<ImplType>(effect, techniqueIndex) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::VisualEffectInstance ::~VisualEffectInstance()
+Rendering::VisualEffectInstance::~VisualEffectInstance()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -95,112 +95,112 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstV
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, const Rendering::ShaderParametersSharedPtr)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetVertexParameters, int, const Rendering::ShaderParametersSharedPtr)
 
-void Rendering::VisualEffectInstance ::SetVertexTexture(int pass, int handle, const TextureSharedPtr& texture)
+void Rendering::VisualEffectInstance::SetVertexTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
     ;
 
     return impl->SetVertexTexture(pass, handle, texture);
 }
 
-void Rendering::VisualEffectInstance ::SetPixelTexture(int pass, int handle, const TextureSharedPtr& texture)
+void Rendering::VisualEffectInstance::SetPixelTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
     ;
 
     return impl->SetPixelTexture(pass, handle, texture);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance ::GetVertexConstant(int pass, const std::string& name) const
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetVertexConstant(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexConstant(pass, name);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance ::GetVertexConstant(int pass, int handle) const
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetVertexConstant(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexConstant(pass, handle);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance ::GetPixelConstant(int pass, const std::string& name) const
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetPixelConstant(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelConstant(pass, name);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance ::GetPixelConstant(int pass, int handle) const
+const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetPixelConstant(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelConstant(pass, handle);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance ::GetVertexTexture(int pass, const std::string& name) const
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetVertexTexture(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexTexture(pass, name);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance ::GetVertexTexture(int pass, int handle) const
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetVertexTexture(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexTexture(pass, handle);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance ::GetPixelTexture(int pass, const std::string& name) const
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixelTexture(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelTexture(pass, name);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance ::GetPixelTexture(int pass, int handle) const
+const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixelTexture(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelTexture(pass, handle);
 }
 
-void Rendering::VisualEffectInstance ::SetPixelConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
+void Rendering::VisualEffectInstance::SetPixelConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
     ;
 
     return impl->SetPixelConstant(pass, handle, shaderFloat);
 }
 
-void Rendering::VisualEffectInstance ::SetVertexConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
+void Rendering::VisualEffectInstance::SetVertexConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
     ;
 
     return impl->SetVertexConstant(pass, handle, shaderFloat);
 }
 
-int Rendering::VisualEffectInstance ::SetPixelTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
+int Rendering::VisualEffectInstance::SetPixelTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
     ;
 
     return impl->SetPixelTexture(pass, name, texture);
 }
 
-int Rendering::VisualEffectInstance ::SetVertexTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
+int Rendering::VisualEffectInstance::SetVertexTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
     ;
 
     return impl->SetVertexTexture(pass, name, texture);
 }
 
-int Rendering::VisualEffectInstance ::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
+int Rendering::VisualEffectInstance::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
     ;
 
     return impl->SetPixelConstant(pass, name, shaderFloat);
 }
 
-int Rendering::VisualEffectInstance ::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
+int Rendering::VisualEffectInstance::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
     ;
 

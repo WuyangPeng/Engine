@@ -1,88 +1,98 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/16 11:24)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_ELLIPSOID_GEODESIC_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_ELLIPSOID_GEODESIC_DETAIL_H
 
 #include "EllipsoidGeodesic.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-EllipsoidGeodesic<Real>::EllipsoidGeodesic (Real xExtent, Real yExtent,Real zExtent)
-	: RiemannianGeodesic<Real>{ 2 }
+Mathematics::EllipsoidGeodesic<Real>::EllipsoidGeodesic(Real xExtent, Real yExtent, Real zExtent)
+    : ParentType{ 2 }, xExtent{ xExtent }, yExtent{ yExtent }, zExtent{ zExtent }
 {
-    mXExtent = xExtent;
-    mYExtent = yExtent;
-    mZExtent = zExtent;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-EllipsoidGeodesic<Real>::~EllipsoidGeodesic ()
+bool Mathematics::EllipsoidGeodesic<Real>::IsValid() const noexcept
 {
+    return ParentType::IsValid();
 }
 
-template <typename Real>
-Vector3<Real> EllipsoidGeodesic<Real>::ComputePosition (const VariableLengthVector<Real>& point)
-{
-	auto cos0 = Math<Real>::Cos(point[0]);
-	auto sin0 = Math<Real>::Sin(point[0]);
-	auto cos1 = Math<Real>::Cos(point[1]);
-	auto sin1 = Math<Real>::Sin(point[1]);
-
-	return Vector3<Real>{ mXExtent*cos0*sin1, mYExtent*sin0*sin1, mZExtent*cos1 };
-}
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void EllipsoidGeodesic<Real>::ComputeMetric(const VariableLengthVector<Real>& point)
+Mathematics::Vector3<Real> Mathematics::EllipsoidGeodesic<Real>::ComputePosition(const VariableLengthVector<Real>& point)
 {
-	auto cos0 = Math<Real>::Cos(point[0]);
-	auto sin0 = Math<Real>::Sin(point[0]);
-	auto cos1 = Math<Real>::Cos(point[1]);
-	auto sin1 = Math<Real>::Sin(point[1]);
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	Vector3<Real> der0{ -mXExtent * sin0*sin1, mYExtent*cos0*sin1, Math<Real>::GetValue(0) };
-	Vector3<Real> der1{ mXExtent*cos0*cos1,  mYExtent*sin0*cos1,-mZExtent * sin1 };
+    auto cos0 = Math::Cos(point[0]);
+    auto sin0 = Math::Sin(point[0]);
+    auto cos1 = Math::Cos(point[1]);
+    auto sin1 = Math::Sin(point[1]);
 
-	mMetric[0][0] = Vector3Tools<Real>::DotProduct(der0,der0);
-	mMetric[0][1] = Vector3Tools<Real>::DotProduct(der0,der1);
-    mMetric[1][0] = mMetric[0][1];
-	mMetric[1][1] = Vector3Tools<Real>::DotProduct(der1,der1);
+    return Vector3<Real>{ xExtent * cos0 * sin1, yExtent * sin0 * sin1, zExtent * cos1 };
 }
 
 template <typename Real>
-void EllipsoidGeodesic<Real>::ComputeChristoffel1 (const VariableLengthVector<Real>& point)
+void Mathematics::EllipsoidGeodesic<Real>::ComputeMetric(const VariableLengthVector<Real>& point)
 {
-	auto cos0 = Math<Real>::Cos(point[0]);
-	auto sin0 = Math<Real>::Sin(point[0]);
-	auto cos1 = Math<Real>::Cos(point[1]);
-	auto sin1 = Math<Real>::Sin(point[1]);
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	Vector3<Real> der0{ -mXExtent * sin0*sin1, mYExtent*cos0*sin1, Math<Real>::GetValue(0) };
+    auto cos0 = Math::Cos(point[0]);
+    auto sin0 = Math::Sin(point[0]);
+    auto cos1 = Math::Cos(point[1]);
+    auto sin1 = Math::Sin(point[1]);
 
-	Vector3<Real> der1{ mXExtent*cos0*cos1,  mYExtent*sin0*cos1,-mZExtent * sin1 };
+    const Vector3<Real> der0{ -xExtent * sin0 * sin1, yExtent * cos0 * sin1, Math::GetValue(0) };
+    const Vector3<Real> der1{ xExtent * cos0 * cos1, yExtent * sin0 * cos1, -zExtent * sin1 };
 
-	Vector3<Real> der00{ -mXExtent * cos0*sin1, -mYExtent * sin0*sin1, Math<Real>::GetValue(0) };
-
-	Vector3<Real> der01{ -mXExtent * sin0*cos1, mYExtent*cos0*cos1, Math<Real>::GetValue(0) };
-
-	Vector3<Real> der11{ -mXExtent * cos0*sin1, -mYExtent * sin0*sin1,-mZExtent * cos1 };
-
-	mChristoffel1[0][0][0] = Vector3Tools<Real>::DotProduct(der00,der0);
-	mChristoffel1[0][0][1] = Vector3Tools<Real>::DotProduct(der01,der0);
-    mChristoffel1[0][1][0] = mChristoffel1[0][0][1];
-	mChristoffel1[0][1][1] = Vector3Tools<Real>::DotProduct(der11,der0);
-
-	mChristoffel1[1][0][0] = Vector3Tools<Real>::DotProduct(der00,der1);
-	mChristoffel1[1][0][1] = Vector3Tools<Real>::DotProduct(der01,der1);
-    mChristoffel1[1][1][0] = mChristoffel1[1][0][1];
-	mChristoffel1[1][1][1] = Vector3Tools<Real>::DotProduct(der11,der1);
+    this->SetMetric(0, 0, Vector3Tools<Real>::DotProduct(der0, der0));
+    this->SetMetric(0, 1, Vector3Tools<Real>::DotProduct(der0, der1));
+    this->SetMetric(1, 0, this->GetMetric(0, 1));
+    this->SetMetric(1, 1, Vector3Tools<Real>::DotProduct(der1, der1));
 }
 
+template <typename Real>
+void Mathematics::EllipsoidGeodesic<Real>::ComputeChristoffel1(const VariableLengthVector<Real>& point)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto cos0 = Math::Cos(point[0]);
+    auto sin0 = Math::Sin(point[0]);
+    auto cos1 = Math::Cos(point[1]);
+    auto sin1 = Math::Sin(point[1]);
+
+    const Vector3<Real> der0{ -xExtent * sin0 * sin1, yExtent * cos0 * sin1, Math::GetValue(0) };
+
+    const Vector3<Real> der1{ xExtent * cos0 * cos1, yExtent * sin0 * cos1, -zExtent * sin1 };
+
+    const Vector3<Real> der00{ -xExtent * cos0 * sin1, -yExtent * sin0 * sin1, Math::GetValue(0) };
+
+    const Vector3<Real> der01{ -xExtent * sin0 * cos1, yExtent * cos0 * cos1, Math::GetValue(0) };
+
+    const Vector3<Real> der11{ -xExtent * cos0 * sin1, -yExtent * sin0 * sin1, -zExtent * cos1 };
+
+    this->SetChristoffel1(0, 0, 0, Vector3Tools<Real>::DotProduct(der00, der0));
+    this->SetChristoffel1(0, 0, 1, Vector3Tools<Real>::DotProduct(der01, der0));
+    this->SetChristoffel1(0, 1, 0, this->GeChristoffel1(0, 0, 1));
+    this->SetChristoffel1(0, 1, 1, Vector3Tools<Real>::DotProduct(der11, der0));
+
+    this->SetChristoffel1(1, 0, 0, Vector3Tools<Real>::DotProduct(der00, der1));
+    this->SetChristoffel1(1, 0, 1, Vector3Tools<Real>::DotProduct(der01, der1));
+    this->SetChristoffel1(1, 1, 0, this->GeChristoffel1(1, 0, 1));
+    this->SetChristoffel1(1, 0, 1, Vector3Tools<Real>::DotProduct(der11, der1));
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_ELLIPSOID_GEODESIC_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_ELLIPSOID_GEODESIC_DETAIL_H

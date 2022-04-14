@@ -29,25 +29,25 @@ namespace Rendering
         using Matrix = Mathematics::MatrixF;
 
     public:
-        explicit TransformControllerImpl(const FloatTransform& localTransform) noexcept;
+        explicit TransformControllerImpl(const TransformF& localTransform) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const FloatTransform& localTransform) noexcept;
-        const FloatTransform GetTransform() const noexcept;
+        void SetTransform(const TransformF& localTransform) noexcept;
+        const TransformF GetTransform() const noexcept;
 
-        void SetTranslate(const APoint& translate);
-        void SetRotate(const Matrix& rotate);
+        void SetTranslate(const APoint& translate) noexcept;
+        void SetRotate(const Matrix& rotate) noexcept;
         void SetUniformScale(float scale);
         void SetScale(const APoint& scale);
-        void SetMatrix(const Matrix& matrix);
+        void SetMatrix(const Matrix& matrix) noexcept;
 
         int GetStreamingSize() const noexcept;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
 
     private:
-        FloatTransform m_LocalTransform;
+        TransformF m_LocalTransform;
     };
 }
 

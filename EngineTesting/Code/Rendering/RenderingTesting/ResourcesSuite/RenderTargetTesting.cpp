@@ -17,7 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 
 
 

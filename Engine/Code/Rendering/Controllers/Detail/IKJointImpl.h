@@ -51,7 +51,7 @@ namespace Rendering
         // Joint¸üÐÂ¡£
         const AVector GetAxis(MatrixRotationAxis axisIndex) const;
         void UpdateWorldTransform();
-        void UpdateWorldRotateAndTranslate();
+        void UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
         bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
         bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
 

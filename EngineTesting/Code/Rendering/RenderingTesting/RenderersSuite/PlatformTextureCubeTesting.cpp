@@ -9,7 +9,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"   
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTextureCubeTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::PlatformTextureCubeTesting
 	::MainTest()
 { 

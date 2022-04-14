@@ -1,38 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/03 13:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/25 13:48)
 
 #ifndef SOUND_EFFECT_LIB_H
 #define SOUND_EFFECT_LIB_H
 
-#include "Helper/UserMacro.h" 
+#include "Helper/UserMacro.h"
 
-#if defined(TCRE_USE_MSVC) 
+#if defined(TCRE_USE_MSVC)
 
-	#ifndef BUILDING_SOUND_EFFECT_STATIC
+    #ifndef BUILDING_SOUND_EFFECT_STATIC
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"SoundEffectD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"SoundEffect.lib")
-		#endif // _DEBUG
+        #ifdef _DEBUG
+            #pragma comment(lib, "SoundEffectD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "SoundEffect.lib")
+        #endif  // _DEBUG
 
-	#else // !BUILDING_SOUND_EFFECT_STATIC
+    #else  // !BUILDING_SOUND_EFFECT_STATIC
 
-		#include "DllLib.h"
-		#include "System/SystemLib.h"
-		#include "CoreTools/CoreToolsLib.h"
+        #include "DllLib.h"
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"SoundEffectStaticD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"SoundEffectStatic.lib")
-		#endif // _DEBUG
+        #ifdef _DEBUG
+            #pragma comment(lib, "SoundEffectStaticD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "SoundEffectStatic.lib")
+        #endif  // _DEBUG
 
-	#endif // BUILDING_SOUND_EFFECT_STATIC
+    #endif  // BUILDING_SOUND_EFFECT_STATIC
 
-#endif // TCRE_USE_MSVC  
+#endif  // TCRE_USE_MSVC
 
-#endif // SOUND_EFFECT_LIB_H
+#endif  // SOUND_EFFECT_LIB_H

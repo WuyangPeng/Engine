@@ -1,765 +1,786 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 14:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/08 15:00)
 
 #ifndef MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY2_DETAIL_H
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY2_DETAIL_H
 
+#include "ConvexHull1.h"
+#include "Delaunay1.h"
 #include "Delaunay2.h"
-
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Mathematics/Algebra/BarycentricCoordinates.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2Information.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Query/Query2Filtered.h"
 #include "Mathematics/Query/Query2Int64.h"
 #include "Mathematics/Query/Query2Integer.h"
 #include "Mathematics/Query/Query2Rational.h"
-#include "Mathematics/Algebra/BarycentricCoordinates.h"
 
 template <typename Real>
-const int Mathematics::Delaunay2<Real>
-	::msIndex[3][2]{{0,1},{1,2},{2,0}};
+const std::array<std::array<int32_t, 2>, 3> Mathematics::Delaunay2<Real>::index{ std::array<int32_t, 2>{ 0, 1 }, std::array<int32_t, 2>{ 1, 2 }, std::array<int32_t, 2>{ 2, 0 } };
 
 template <typename Real>
-Mathematics::Delaunay2<Real>
-	::Delaunay2 (const std::vector<Vector2<Real> >& vertices,Real epsilon, bool owner, QueryType queryType)
-	:Delaunay<Real>{ vertices.size(), epsilon, owner, queryType },mVertices{ vertices },
-	 mNumUniqueVertices{ 0 },mSVertices{},mQuery{ 0 },m_LineOrigin{ Vector2<Real>::sm_Zero },
-	 m_LineDirection{ Vector2<Real>::sm_Zero },mPathLast{ -1 },mPath{ 0 },mLastEdgeV0{ -1 },
-	 mLastEdgeV1{ -1 },mLastEdgeOpposite{ -1 },mLastEdgeOppositeIndex{ -1 }
+Mathematics::Delaunay2<Real>::Delaunay2(const Vertices& vertices, Real epsilon, QueryType queryType)
+    : ParentType{ boost::numeric_cast<int>(vertices.size()), epsilon, queryType },
+      vertices{ vertices },
+      numUniqueVertices{ 0 },
+      sVertices{},
+      query{},
+      min{},
+      scale{},
+      triMesh{},
+      lineOrigin{},
+      lineDirection{},
+      pathLast{ -1 },
+      path{},
+      lastEdgeV0{ -1 },
+      lastEdgeV1{ -1 },
+      lastEdgeOpposite{ -1 },
+      lastEdgeOppositeIndex{ -1 }
 {
-    Vector2Information<Real> info(mVertices, epsilon);
+    Init();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::Delaunay2<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::Delaunay2<Real>::Init()
+{
+    Vector2Information<Real> info{ vertices, this->GetEpsilon() };
     if (info.GetDimension() == 0)
     {
-        // The values of mDimension, mIndices, and mAdjacencies were
-        // already initialized by the Delaunay base class.
         return;
     }
 
     if (info.GetDimension() == 1)
     {
-        // The set is (nearly) collinear.  The caller is responsible for
-        // creating a Delaunay1 object.
-        mDimension = 1;
-        m_LineOrigin = info.GetOrigin();
-        m_LineDirection = info.GetDirectionX();
+        this->SetDimension(1);
+
+        lineOrigin = info.GetOrigin();
+        lineDirection = info.GetDirectionX();
+
         return;
     }
 
-    mDimension = 2;
+    this->SetDimension(1);
 
-    // Allocate storage for the input vertices and the supertriangle
-    // vertices.
-    mSVertices.resize(mNumVertices);
-    int i;
+    const auto numVertices = this->GetNumVertices();
+    sVertices.resize(numVertices);
+
+    const auto queryType = this->GetQueryType();
 
     if (queryType != QueryType::Rational && queryType != QueryType::Filtered)
     {
-        // Transform the vertices to the square [0,1]^2.
-        mMin = info.GetMinExtreme();
-        mScale = (Math::GetValue(1))/info.GetMaxRange();
-        for (i = 0; i < mNumVertices; ++i)
+        min = info.GetMinExtreme();
+        scale = Math<Real>::GetValue(1) / info.GetMaxRange();
+        for (auto i = 0; i < numVertices; ++i)
         {
-            mSVertices[i] = (mVertices[i] - mMin)*mScale;
+            sVertices.at(i) = (vertices.at(i) - min) * scale;
         }
 
-        Real expand;
+        Real expand{};
         if (queryType == QueryType::Int64)
         {
-            // Scale the vertices to the square [0,2^{16}]^2 to allow use of
-            // 64-bit integers for triangulation.
-            expand = (Real)(1 << 16);
-         //   mQuery = NEW0 Query2Int64<Real>(mSVertices);
+            expand = Math<Real>::GetValue(1 << 16);
+            query = std::make_shared<Query2Int64<Real>>(sVertices);
         }
         else if (queryType == QueryType::Interger)
         {
-            // Scale the vertices to the square [0,2^{20}]^2 to get more
-            // precision for TInteger than for 64-bit integers for
-            // triangulation.
-            expand = (Real)(1 << 20);
-         //   mQuery = NEW0 Query2Integer<Real>(mSVertices);
+            expand = Math<Real>::GetValue(1 << 20);
+            query = std::make_shared<Query2Integer<Real>>(sVertices);
         }
-        else // queryType == Query::QT_REAL
+        else
         {
-            // No scaling for floating point.
-            expand = Math::GetValue(1);
-         //   mQuery = NEW0 Query2<Real>(mSVertices);
+            expand = Math<Real>::GetValue(1);
+            query = std::make_shared<Query2>(sVertices);
         }
 
-        mScale *= expand;
-        for (i = 0; i < mNumVertices; ++i)
+        scale *= expand;
+        for (auto i = 0; i < numVertices; ++i)
         {
-            mSVertices[i] *= expand;
+            sVertices.at(i) *= expand;
         }
     }
     else
     {
-        // No transformation needed for exact rational arithmetic.
-        mMin = Vector2<Real>::sm_Zero;
-        mScale = Math::GetValue(1);
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices*sizeof(Vector2<Real>));
+        min = Vector2::GetZero();
+        scale = Math<Real>::GetValue(1);
+        sVertices = vertices;
 
         if (queryType == QueryType::Rational)
         {
-          //  mQuery = NEW0 Query2Rational<Real>(mSVertices);
+            query = std::make_shared<Query2Rational<Real>>(sVertices);
         }
-        else // queryType == Query::QT_FILTERED
+        else
         {
-           // mQuery = NEW0 Query2Filtered<Real>(mSVertices,mEpsilon);
+            query = std::make_shared<Query2Filtered<Real>>(sVertices, this->GetEpsilon());
         }
     }
 
-    // Insert the (nondegenerate) triangle constructed by the call to
-    // GetInformation. This is necessary for the circumcircle-visibility
-    // algorithm to work correctly.
-	int mExtreme[3]{info.GetMinExtremeIndex(),info.GetPerpendicularExtremeIndex(),info.GetMaxExtremeIndex()};
+    std::array<int32_t, 3> extreme{ info.GetMinExtremeIndex(), info.GetPerpendicularExtremeIndex(), info.GetMaxExtremeIndex() };
 
     if (!info.IsExtremeCCW())
     {
-        std::swap(mExtreme[1], mExtreme[2]);
+        std::swap(extreme.at(1), extreme.at(2));
     }
-    mTriMesh.InsertTriangle(mExtreme[0], mExtreme[1], mExtreme[2]);
 
-    // Incrementally update the triangulation.  The set of processed points
-    // is maintained to eliminate duplicates, either in the original input
-    // points or in the points obtained by snap rounding.
-    std::set<Vector2<Real> > processed;
-    for (i = 0; i < 3; ++i)
+    triMesh.InsertTriangle(extreme.at(0), extreme.at(1), extreme.at(2));
+
+    std::set<Vector2> processed{};
+    for (auto i = 0; i < 3; ++i)
     {
-        processed.insert(mSVertices[mExtreme[i]]);
+        processed.insert(sVertices.at(extreme.at(i)));
     }
-    for (i = 0; i < mNumVertices; ++i)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        if (processed.find(mSVertices[i]) == processed.end())
+        if (processed.find(sVertices.at(i)) == processed.end())
         {
             Update(i);
-            processed.insert(mSVertices[i]);
+            processed.insert(sVertices.at(i));
         }
     }
-    mNumUniqueVertices = boost::numeric_cast<int>(processed.size());
+    numUniqueVertices = boost::numeric_cast<int>(processed.size());
 
-    // Assign integer values to the triangles for use by the caller.
-    std::map<Triangle*,int> permute;
-    i = -1;
-    permute[(Triangle*)0] = i++;
-    const auto& tmap = mTriMesh.GetTriangles();
-    ETManifoldMesh::TMapCIterator element;
-    for (element = tmap.begin(); element != tmap.end(); ++element)
+    std::map<TriangleSharedPtr, int> permute{};
+    auto i = -1;
+    permute[TriangleSharedPtr{}] = i++;
+    const auto& tmap = triMesh.GetTriangles();
+
+    for (auto element = tmap.begin(); element != tmap.end(); ++element)
     {
         permute[element->second] = i++;
     }
 
-    // Put Delaunay triangles into an array (vertices and adjacency info).
-    mNumSimplices = (int)mTriMesh.GetTriangles().size();
-    if (mNumSimplices > 0)
+    auto numSimplices = boost::numeric_cast<int>(triMesh.GetTriangles().size());
+    this->SetNumSimplices(numSimplices);
+    if (0 < numSimplices)
     {
-       // mIndices = NEW1<int>(3*mNumSimplices);
-       // mAdjacencies = NEW1<int>(3*mNumSimplices);
-        i = 0;
-        for (element = tmap.begin(); element != tmap.end(); ++element)
+        for (auto element = tmap.begin(); element != tmap.end(); ++element)
         {
-            const ETManifoldMesh::Triangle* tri = element->second;
-            for (int j = 0; j < 3; ++j, ++i)
+            const auto& tri = element->second;
+            for (int j = 0; j < 3; ++j)
             {
-                mIndices[i] = tri->V[j];
-                mAdjacencies[i] = permute[tri->T[j]];
+                this->AddIndex(tri->v.at(j));
+                this->AddAdjacency(permute[tri->t.at(j)]);
             }
         }
-        MATHEMATICS_ASSERTION_0(i == 3*mNumSimplices, "Unexpected mismatch\n");
+        MATHEMATICS_ASSERTION_0(i == 3 * numSimplices, "意外的不匹配。\n");
 
-        mPathLast = -1;
-      //  mPath = NEW1<int>(mNumSimplices + 1);
-        memset(mPath, 0, (mNumSimplices + 1)*sizeof(int));
+        pathLast = -1;
+
+        const auto size = numSimplices + 1;
+        path.resize(size);
     }
 }
 
 template <typename Real>
-Mathematics::Delaunay2<Real>
-	::~Delaunay2 ()
+typename Mathematics::Delaunay2<Real>::Vertices Mathematics::Delaunay2<Real>::GetVertices() const
 {
-//     DELETE0(mQuery);
-//     DELETE1(mPath);
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return vertices;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>* Mathematics::Delaunay2<Real>
-	::GetVertices () const
+int Mathematics::Delaunay2<Real>::GetNumUniqueVertices() const noexcept
 {
-    return &mVertices[0];
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return numUniqueVertices;
 }
 
 template <typename Real>
-int Mathematics::Delaunay2<Real>
-	::GetNumUniqueVertices () const
+Mathematics::Vector2<Real> Mathematics::Delaunay2<Real>::GetLineOrigin() const noexcept
 {
-    return mNumUniqueVertices;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>& Mathematics::Delaunay2<Real>
-	::GetLineOrigin () const
+Mathematics::Vector2<Real> Mathematics::Delaunay2<Real>::GetLineDirection() const noexcept
 {
-    return m_LineOrigin;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return lineDirection;
 }
 
 template <typename Real>
-const Mathematics::Vector2<Real>& Mathematics::Delaunay2<Real>
-	::GetLineDirection () const
+Mathematics::Delaunay1<Real> Mathematics::Delaunay2<Real>::GetDelaunay1() const
 {
-    return m_LineDirection;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-template <typename Real>
-Mathematics::Delaunay1<Real>* Mathematics::Delaunay2<Real>
-	::GetDelaunay1 () const
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 1, "The dimension must be 1\n");
-    if (mDimension != 1)
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 1)
     {
-        return 0;
-    }
-// 
-//     Real* projection = NEW1<Real>(mNumVertices);
-//     for (int i = 0; i < mNumVertices; ++i)
-//     {
-//         Vector2<Real> diff = mVertices[i] - m_LineOrigin;
-//         projection[i] = Vector2Tools<Real>::DotProduct(m_LineDirection,diff);
-//     }
-
-    return nullptr;  //NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true,mQueryType);
-}
-
-template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::GetHull (int& numEdges, int*& indices)
-{
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
-    {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为1。"));
     }
 
-    numEdges = 0;
-    indices = 0;
-
-    // Count the number of edges that are not shared by two triangles.
-    int i, numAdjacent = 3*mNumSimplices;
-    for (i = 0; i < numAdjacent; ++i)
+    typename Delaunay1::Vertices projection{};
+    for (const auto& value : vertices)
     {
-        if (mAdjacencies[i] == -1)
+        auto diff = value - lineOrigin;
+        projection.emplace_back(Vector2Tools<Real>::DotProduct(lineDirection, diff));
+    }
+
+    Delaunay1 delaunay1(projection, this->GetEpsilon(), this->GetQueryType());
+
+    return delaunay1;
+}
+
+template <typename Real>
+typename Mathematics::Delaunay2<Real>::HullType Mathematics::Delaunay2<Real>::GetHull() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
+    }
+
+    auto numEdges = 0;
+
+    const int numAdjacent = 3 * this->GetNumSimplices();
+    for (auto i = 0; i < numAdjacent; ++i)
+    {
+        if (this->GetAdjacency(i) == -1)
         {
-            numEdges++;
+            ++numEdges;
         }
     }
-    MATHEMATICS_ASSERTION_0(numEdges > 0, "There must be at least one triangle\n");
+
+    MATHEMATICS_ASSERTION_0(0 < numEdges, "必须至少有一个三角形。\n");
     if (numEdges == 0)
     {
-        return false;
+        return { IndicesType{}, false };
     }
 
-    // Enumerate the edges.
-   // indices = NEW1<int>(2*numEdges);
-    int* currentIndex = indices;
-    for (i = 0; i < numAdjacent; ++i)
+    const auto size = 2 * numEdges;
+    IndicesType indices(size);
+
+    auto currentIndex = 0;
+    for (auto i = 0; i < numAdjacent; ++i)
     {
-        if (mAdjacencies[i] == -1)
+        if (this->GetAdjacency(i) == -1)
         {
-            int tri = i/3, j = i%3;
-            *currentIndex++ = mIndices[3*tri + j];
-            *currentIndex++ = mIndices[3*tri + ((j+1)%3)];
+            const auto tri = i / 3;
+            const auto j = i % 3;
+            indices.at(currentIndex++) = this->GetIndex(3 * tri + j);
+            indices.at(currentIndex++) = this->GetIndex(3 * tri + ((j + 1) % 3));
         }
     }
 
-    return true;
+    return { indices, true };
 }
 
 template <typename Real>
-int Mathematics::Delaunay2<Real>
-	::GetContainingTriangle (const Vector2<Real>& p) const
+int Mathematics::Delaunay2<Real>::GetContainingTriangle(const Vector2& p) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
     {
-        return -1;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
     }
 
-    // Convert to scaled coordinates.
-	auto scP = (p - mMin)*mScale;
+    auto scP = (p - min) * scale;
 
-    // Start at first triangle in mesh.
-    auto index = (mPathLast >= 0 ? mPath[mPathLast] : 0);
-    mPathLast = -1;
-    mLastEdgeV0 = -1;
-    mLastEdgeV1 = -1;
-    mLastEdgeOpposite = -1;
-    mLastEdgeOppositeIndex = -1;
+    auto pathIndex = (pathLast >= 0 ? path.at(pathLast) : 0);
+    pathLast = -1;
+    lastEdgeV0 = -1;
+    lastEdgeV1 = -1;
+    lastEdgeOpposite = -1;
+    lastEdgeOppositeIndex = -1;
 
-    // Use triangle edges as binary separating lines.
+    const auto mNumSimplices = this->GetNumSimplices();
+
     for (auto i = 0; i < mNumSimplices; ++i)
     {
-        mPath[++mPathLast] = index;
+        path.at(++pathLast) = pathIndex;
 
-        int* vertices = &mIndices[3*index];
-
-        if (mQuery->ToLine(scP, vertices[0], vertices[1]) > 0)
+        if (System::EnumCastUnderlying(query->ToLine(scP, this->GetIndex(3 * pathIndex), this->GetIndex(3 * pathIndex + 1))) > 0)
         {
-            index = mAdjacencies[3*index];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(3 * pathIndex);
+            if (pathIndex == -1)
             {
-                mLastEdgeV0 = vertices[0];
-                mLastEdgeV1 = vertices[1];
-                mLastEdgeOpposite = vertices[2];
-                mLastEdgeOppositeIndex = 2;
+                lastEdgeV0 = this->GetIndex(3 * pathIndex);
+                lastEdgeV1 = this->GetIndex(3 * pathIndex + 1);
+                lastEdgeOpposite = this->GetIndex(3 * pathIndex + 2);
+                lastEdgeOppositeIndex = 2;
                 return -1;
             }
             continue;
         }
 
-        if (mQuery->ToLine(scP, vertices[1], vertices[2]) > 0)
+        if (System::EnumCastUnderlying(query->ToLine(scP, this->GetIndex(3 * pathIndex + 1), this->GetIndex(3 * pathIndex + 2))) > 0)
         {
-            index = mAdjacencies[3*index + 1];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(3 * pathIndex + 1);
+            if (pathIndex == -1)
             {
-                mLastEdgeV0 = vertices[1];
-                mLastEdgeV1 = vertices[2];
-                mLastEdgeOpposite = vertices[0];
-                mLastEdgeOppositeIndex = 0;
+                lastEdgeV0 = this->GetIndex(3 * pathIndex + 1);
+                lastEdgeV1 = this->GetIndex(3 * pathIndex + 2);
+                lastEdgeOpposite = this->GetIndex(3 * pathIndex);
+                lastEdgeOppositeIndex = 0;
                 return -1;
             }
             continue;
         }
 
-        if (mQuery->ToLine(scP, vertices[2], vertices[0]) > 0)
+        if (System::EnumCastUnderlying(query->ToLine(scP, this->GetIndex(3 * pathIndex + 2), this->GetIndex(3 * pathIndex))) > 0)
         {
-            index = mAdjacencies[3*index + 2];
-            if (index == -1)
+            pathIndex = this->GetAdjacency(3 * pathIndex + 2);
+            if (pathIndex == -1)
             {
-                mLastEdgeV0 = vertices[2];
-                mLastEdgeV1 = vertices[0];
-                mLastEdgeOpposite = vertices[1];
-                mLastEdgeOppositeIndex = 1;
+                lastEdgeV0 = this->GetIndex(3 * pathIndex + 2);
+                lastEdgeV1 = this->GetIndex(3 * pathIndex);
+                lastEdgeOpposite = this->GetIndex(3 * pathIndex + 1);
+                lastEdgeOppositeIndex = 1;
                 return -1;
             }
             continue;
         }
 
-        mLastEdgeV0 = -1;
-        mLastEdgeV1 = -1;
-        mLastEdgeOpposite = -1;
-        mLastEdgeOppositeIndex = -1;
-        return index;
+        lastEdgeV0 = -1;
+        lastEdgeV1 = -1;
+        lastEdgeOpposite = -1;
+        lastEdgeOppositeIndex = -1;
+
+        return pathIndex;
     }
 
     return -1;
 }
 
 template <typename Real>
-int Mathematics::Delaunay2<Real>
-	::GetPathLast () const
+int Mathematics::Delaunay2<Real>::GetPathLast() const noexcept
 {
-    return mPathLast;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return pathLast;
 }
 
 template <typename Real>
-const int* Mathematics::Delaunay2<Real>
-	::GetPath () const
+typename Mathematics::Delaunay2<Real>::IndicesType Mathematics::Delaunay2<Real>::GetPath() const
 {
-    return mPath;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return path;
 }
 
 template <typename Real>
-int Mathematics::Delaunay2<Real>
-	::GetLastEdge (int& v0, int& v1, int& v2) const
+int Mathematics::Delaunay2<Real>::GetLastEdge(int& v0, int& v1, int& v2) const noexcept
 {
-    v0 = mLastEdgeV0;
-    v1 = mLastEdgeV1;
-    v2 = mLastEdgeOpposite;
-    return mLastEdgeOppositeIndex;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    v0 = lastEdgeV0;
+    v1 = lastEdgeV1;
+    v2 = lastEdgeOpposite;
+
+    return lastEdgeOppositeIndex;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::GetVertexSet (int i, Vector2<Real> vertices[3]) const
+typename Mathematics::Delaunay2<Real>::VertexType Mathematics::Delaunay2<Real>::GetVertexSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
     }
+
+    const auto mNumSimplices = this->GetNumSimplices();
 
     if (0 <= i && i < mNumSimplices)
     {
-        vertices[0] = mVertices[mIndices[3*i  ]];
-        vertices[1] = mVertices[mIndices[3*i + 1]];
-        vertices[2] = mVertices[mIndices[3*i + 2]];
-        return true;
+        return { vertices.at(this->GetIndex(3 * i)), vertices.at(this->GetIndex(3 * i + 1)), vertices.at(this->GetIndex(3 * i + 2)), true };
     }
 
-    return false;
+    return { Vector2{}, Vector2{}, Vector2{}, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::GetIndexSet (int i, int indices[3]) const
+typename Mathematics::Delaunay2<Real>::IndexType Mathematics::Delaunay2<Real>::GetIndexSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
     }
+
+    const auto mNumSimplices = this->GetNumSimplices();
 
     if (0 <= i && i < mNumSimplices)
     {
-        indices[0] = mIndices[3*i  ];
-        indices[1] = mIndices[3*i + 1];
-        indices[2] = mIndices[3*i + 2];
-        return true;
+        return { this->GetIndex(3 * i), this->GetIndex(3 * i + 1), this->GetIndex(3 * i + 2), true };
     }
 
-    return false;
+    return { -1, -1, -1, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::GetAdjacentSet (int i, int adjacencies[3]) const
+typename Mathematics::Delaunay2<Real>::IndexType Mathematics::Delaunay2<Real>::GetAdjacentSet(int i) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
     }
+
+    const auto mNumSimplices = this->GetNumSimplices();
 
     if (0 <= i && i < mNumSimplices)
     {
-        adjacencies[0] = mAdjacencies[3*i  ];
-        adjacencies[1] = mAdjacencies[3*i + 1];
-        adjacencies[2] = mAdjacencies[3*i + 2];
-        return true;
+        return { this->GetAdjacency(3 * i), this->GetAdjacency(3 * i + 1), this->GetAdjacency(3 * i + 2), true };
     }
 
-    return false;
+    return { -1, -1, -1, false };
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::GetBarycentricSet (int i, const Vector2<Real>& p,Real bary[3]) const
+typename Mathematics::Delaunay2<Real>::BaryType Mathematics::Delaunay2<Real>::GetBarycentricSet(int i, const Vector2& p) const
 {
-    MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
-    if (mDimension != 2)
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    const auto dimension = this->GetDimension();
+
+    if (dimension != 2)
     {
-        return false;
+        THROW_EXCEPTION(SYSTEM_TEXT("维度必须为2。"));
     }
+
+    const auto mNumSimplices = this->GetNumSimplices();
 
     if (0 <= i && i < mNumSimplices)
     {
-		auto v0 = mVertices[mIndices[3*i  ]];
-		auto v1 = mVertices[mIndices[3*i + 1]];
-		auto v2 = mVertices[mIndices[3*i + 2]];
-		auto coordinates = p.GetBarycentrics(v0, v1, v2);
-       bary[0] = coordinates[0];
-	   bary[1] = coordinates[1];
-	   bary[2] = coordinates[2];
-        return true;
+        const auto& v0 = vertices.at(this->GetIndex(3 * i));
+        const auto& v1 = vertices.at(this->GetIndex(3 * i + 1));
+        const auto& v2 = vertices.at(this->GetIndex(3 * i + 2));
+        const auto coordinates = p.GetBarycentrics(v0, v1, v2);
+
+        return { coordinates[0], coordinates[1], coordinates[2], true };
     }
 
-    return false;
+    return { Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0), true };
 }
 
 template <typename Real>
-Mathematics::Delaunay2<Real>
-	::Delaunay2 (const System::TChar* filename)
-	:Delaunay<Real>{ 0, Math<Real>::GetValue(0), false, QueryType::Real }, mVertices{ 0 }, mSVertices{ 0 }, mQuery{ 0 }, mPath{ 0 }
+Mathematics::Delaunay2<Real>::Delaunay2(const String& filename)
+    : ParentType{ 0, Math<Real>::GetValue(0), QueryType::Real },
+      vertices{},
+      numUniqueVertices{ 0 },
+      sVertices{},
+      query{},
+      min{},
+      scale{},
+      triMesh{},
+      lineOrigin{},
+      lineDirection{},
+      pathLast{ -1 },
+      path{},
+      lastEdgeV0{ -1 },
+      lastEdgeV1{ -1 },
+      lastEdgeOpposite{ -1 },
+      lastEdgeOppositeIndex{ -1 }
 {
-    bool loaded = Load(filename);
-    MATHEMATICS_ASSERTION_0(loaded, "Cannot open file %s\n", filename);
-    
+    LoadFile(filename);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::Load (const System::TChar* filename)
+void Mathematics::Delaunay2<Real>::LoadFile(const String& filename)
 {
-	CoreTools::ReadFileManager inFile{ filename };
- 
-	Delaunay<Real>::Load(inFile);
-// 
-//     DELETE0(mQuery);
-//     DELETE1(mPath);
-   
-    mOwner = true;
-    mVertices.resize(mNumVertices);
-    mSVertices.resize(mNumVertices);
-  //  mPath = NEW1<int>(mNumSimplices + 1);
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-    inFile.Read(sizeof(int), &mNumUniqueVertices);
-    inFile.Read(sizeof(int), &mPathLast);
-    inFile.Read(sizeof(int), &mLastEdgeV0);
-    inFile.Read(sizeof(int), &mLastEdgeV1);
-    inFile.Read(sizeof(int), &mLastEdgeOpposite);
-    inFile.Read(sizeof(int), &mLastEdgeOppositeIndex);
-    inFile.Read(sizeof(int), mNumSimplices + 1, mPath);
+    CoreTools::ReadFileManager inFile{ filename };
 
-    inFile.Read(sizeof(Real), 2*mNumVertices, &mVertices[0]);
-    inFile.Read(sizeof(Real), 2*mNumVertices, &mSVertices[0]);
-    inFile.Read(sizeof(Real), 2, &mMin);
-    inFile.Read(sizeof(Real), 2, &mScale);
-    inFile.Read(sizeof(Real), 2, &m_LineOrigin);
-    inFile.Read(sizeof(Real), 2, &m_LineDirection); 
-
-    switch (mQueryType)
+    if (!ParentType::Load(inFile))
     {
-    case QueryType::Int64:
-    {
-       // mQuery = NEW0 Query2Int64<Real>(mSVertices);
-        break;
-    }
-    case QueryType::Interger:
-    {
-       // mQuery = NEW0 Query2Integer<Real>(mSVertices);
-        break;
-    }
-    case QueryType::Rational:
-    {
-       // mQuery = NEW0 Query2Rational<Real>(mSVertices);
-        break;
-    }
-    case QueryType::Real:
-    {
-       // mQuery = NEW0 Query2<Real>(mSVertices);
-        break;
-    }
-    case QueryType::Filtered:
-    {
-       // mQuery = NEW0 Query2Filtered<Real>(mSVertices, mEpsilon);
-        break;
-    }
+        THROW_EXCEPTION(SYSTEM_TEXT("加载文件失败\n"));
     }
 
-    return true;
+    query.reset();
+    path.clear();
+
+    const auto numVertices = this->GetNumVertices();
+    const auto numSimplices = this->GetNumSimplices();
+
+    vertices.resize(numVertices);
+    sVertices.resize(numVertices);
+    const auto pathSize = numSimplices + 1;
+    path.resize(pathSize);
+
+    inFile.Read(sizeof(int32_t), &numUniqueVertices);
+    inFile.Read(sizeof(int32_t), &pathLast);
+    inFile.Read(sizeof(int32_t), &lastEdgeV0);
+    inFile.Read(sizeof(int32_t), &lastEdgeV1);
+    inFile.Read(sizeof(int32_t), &lastEdgeOpposite);
+    inFile.Read(sizeof(int32_t), &lastEdgeOppositeIndex);
+    inFile.Read(sizeof(int32_t), pathSize, path.data());
+
+    const auto twoNumVertices = Vector2::pointSize * numVertices;
+
+    inFile.Read(sizeof(Real), twoNumVertices, vertices.data());
+    inFile.Read(sizeof(Real), twoNumVertices, sVertices.data());
+    inFile.Read(sizeof(Real), Vector2::pointSize, &min);
+    inFile.Read(sizeof(Real), Vector2::pointSize, &scale);
+    inFile.Read(sizeof(Real), Vector2::pointSize, &lineOrigin);
+    inFile.Read(sizeof(Real), Vector2::pointSize, &lineDirection);
+
+    switch (this->GetQueryType())
+    {
+        case QueryType::Int64:
+        {
+            query = std::make_shared<Query2Int64<Real>>(sVertices);
+            break;
+        }
+        case QueryType::Interger:
+        {
+            query = std::make_shared<Query2Integer<Real>>(sVertices);
+            break;
+        }
+        case QueryType::Rational:
+        {
+            query = std::make_shared<Query2Rational<Real>>(sVertices);
+            break;
+        }
+        case QueryType::Real:
+        {
+            query = std::make_shared<Query2>(sVertices);
+            break;
+        }
+        case QueryType::Filtered:
+        {
+            query = std::make_shared<Query2Filtered<Real>>(sVertices, this->GetEpsilon());
+            break;
+        }
+    }
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::Save (const System::TChar* filename) const
+void Mathematics::Delaunay2<Real>::SaveFile(const String& filename) const
 {
-	CoreTools::WriteFileManager outFile{ filename };
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Delaunay<Real>::Save(outFile);
+    CoreTools::WriteFileManager outFile{ filename };
 
-    outFile.Write(sizeof(int), &mNumUniqueVertices);
-    outFile.Write(sizeof(int), &mPathLast);
-    outFile.Write(sizeof(int), &mLastEdgeV0);
-    outFile.Write(sizeof(int), &mLastEdgeV1);
-    outFile.Write(sizeof(int), &mLastEdgeOpposite);
-    outFile.Write(sizeof(int), &mLastEdgeOppositeIndex);
-    outFile.Write(sizeof(int), mNumSimplices + 1, mPath);
+    if (!ParentType::Save(outFile))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("保存文件失败\n"));
+    }
 
-    outFile.Write(sizeof(Real), 2*mNumVertices, &mVertices[0]);
-    outFile.Write(sizeof(Real), 2*mNumVertices, &mVertices[0]);
-    outFile.Write(sizeof(Real), 2, &mMin);
-    outFile.Write(sizeof(Real), 2, &mScale);
-    outFile.Write(sizeof(Real), 2, &m_LineOrigin);
-    outFile.Write(sizeof(Real), 2, &m_LineDirection);
- 
-    return true;
+    const auto numSimplices = this->GetNumSimplices();
+    const auto pathSize = numSimplices + 1;
+
+    outFile.Write(sizeof(int32_t), &numUniqueVertices);
+    outFile.Write(sizeof(int32_t), &pathLast);
+    outFile.Write(sizeof(int32_t), &lastEdgeV0);
+    outFile.Write(sizeof(int32_t), &lastEdgeV1);
+    outFile.Write(sizeof(int32_t), &lastEdgeOpposite);
+    outFile.Write(sizeof(int32_t), &lastEdgeOppositeIndex);
+    outFile.Write(sizeof(int32_t), pathSize, path.data());
+
+    const auto numVertices = this->GetNumVertices();
+
+    const auto twoNumVertices = Vector2::pointSize * numVertices;
+
+    outFile.Write(sizeof(Real), twoNumVertices, vertices.data());
+    outFile.Write(sizeof(Real), twoNumVertices, vertices.data());
+    outFile.Write(sizeof(Real), Vector2::pointSize, &min);
+    outFile.Write(sizeof(Real), Vector2::pointSize, &scale);
+    outFile.Write(sizeof(Real), Vector2::pointSize, &lineOrigin);
+    outFile.Write(sizeof(Real), Vector2::pointSize, &lineDirection);
 }
 
 template <typename Real>
-bool Mathematics::Delaunay2<Real>
-	::GetContainingTriangle (int i, Triangle*& tri) const
+bool Mathematics::Delaunay2<Real>::GetContainingTriangle(int i, const Triangle& tri) const
 {
-	const auto numTriangles = mTriMesh.GetTriangles().size();
+    const auto numTriangles = triMesh.GetTriangles().size();
     for (auto t = 0u; t < numTriangles; ++t)
     {
         int j;
         for (j = 0; j < 3; ++j)
         {
-            const int edge[2] = { msIndex[j][0], msIndex[j][1] };
-            if (mQuery->ToLine(i, tri->V[edge[0]], tri->V[edge[1]]) > 0)
+            const std::array<int, 2> edge{ index.at(j).at(0), index.at(j).at(1) };
+            if (System::EnumCastUnderlying(query->ToLine(i, tri.v.at(edge.at(0)), tri.v.at(edge.at(1)))) > 0)
             {
-                // Point i sees edge <v0,v1> from outside the triangle.
-                if (tri->T[j])
+                if (tri.t.at(j))
                 {
-                    // Traverse to the triangle sharing the face.
-                    tri = tri->T[j];
                     break;
                 }
                 else
                 {
-                    // We reached a hull edge, so the point is outside the
-                    // hull.  TODO (for WM6):  Once a hull data structure is
-                    // in place, return tri->T[j] as the candidate for
-                    // starting a search for visible hull edges.
                     return false;
                 }
             }
-
         }
 
         if (j == 3)
         {
-            // The point is inside all four edges, so the point is inside
-            // a triangle.
             return true;
         }
     }
 
-    MATHEMATICS_ASSERTION_0(false, "Unexpected termination of GetContainingTriangle\n");
     return false;
 }
 
 template <typename Real>
-void Mathematics::Delaunay2<Real>
-	::GetAndRemoveInsertionPolygon (int i, std::set<Triangle*>& candidates, std::set<OrderedEdgeKey>& boundary)
+void Mathematics::Delaunay2<Real>::GetAndRemoveInsertionPolygon(int i, std::set<TriangleSharedPtr>& candidates, std::set<OrderedEdgeKey>& boundary)
 {
-    // Locate the triangles that make up the insertion polygon.
-    ETManifoldMesh polygon;
-    while (candidates.size() > 0)
+    ETManifoldMesh polygon{};
+    while (!candidates.empty())
     {
-        Triangle* tri = *candidates.begin();
+        auto tri = *candidates.begin();
         candidates.erase(candidates.begin());
 
         for (int j = 0; j < 3; ++j)
         {
-            Triangle* adj = tri->T[j];
+            auto adj = tri->t.at(j);
             if (adj && candidates.find(adj) == candidates.end())
             {
-                if (mQuery->ToCircumcircle(i, adj->V[0], adj->V[1],  adj->V[2]) <= 0)
+                if (System::EnumCastUnderlying(query->ToCircumcircle(i, adj->v.at(0), adj->v.at(1), adj->v.at(2))) <= 0)
                 {
-                    // Point i is in the circumcircle.
                     candidates.insert(adj);
                 }
             }
         }
 
-        polygon.InsertTriangle(tri->V[0], tri->V[1], tri->V[2]);
-        mTriMesh.RemoveTriangle(tri->V[0], tri->V[1], tri->V[2]);
+        polygon.InsertTriangle(tri->v.at(0), tri->v.at(1), tri->v.at(2));
+        triMesh.RemoveTriangle(tri->v.at(0), tri->v.at(1), tri->v.at(2));
     }
 
-    // Get the boundary edges of the insertion polygon.
-    const ETManifoldMesh::TMap& tmap = polygon.GetTriangles();
-    ETManifoldMesh::TMapCIterator element;
-    for (element = tmap.begin(); element != tmap.end(); ++element)
+    const auto& triangles = polygon.GetTriangles();
+
+    for (const auto& element : triangles)
     {
-        const ETManifoldMesh::Triangle* tri = element->second;
+        auto tri = element.second;
         for (int j = 0; j < 3; ++j)
         {
-            if (!tri->T[j])
+            if (!tri->t.at(j))
             {
-                const int edge[2] = { msIndex[j][0], msIndex[j][1] };
-                boundary.insert(OrderedEdgeKey(tri->V[edge[0]], tri->V[edge[1]]));
+                const std::array<int, 2> edge{ index.at(j).at(0), index.at(j).at(1) };
+                boundary.insert(OrderedEdgeKey{ tri->v.at(edge.at(0)), tri->v.at(edge.at(1)) });
             }
         }
     }
 }
 
 template <typename Real>
-void Mathematics::Delaunay2<Real>
-	::Update (int i)
+void Mathematics::Delaunay2<Real>::Update(int i)
 {
-    const ETManifoldMesh::TMap& tmap = mTriMesh.GetTriangles();
-    ETManifoldMesh::Triangle* tri = tmap.begin()->second;
-    if (GetContainingTriangle(i, tri))
+    const auto& triangles = triMesh.GetTriangles();
+    auto tri = triangles.begin()->second;
+    if (GetContainingTriangle(i, *tri))
     {
-        // The point is inside the convex hull.  The insertion polygon
-        // contains only triangles in the current triangulation; the
-        // hull does not change.
+        std::set<TriangleSharedPtr> candidates{ tri };
 
-        // Use a depth-first search for those triangles whose circumcircles
-        // contain point i.
-        std::set<Triangle*> candidates;
-        candidates.insert(tri);
-
-        // Get the boundary of the insertion polygon C that contains the
-        // triangles whose circumcircles contain point i.  C contains the
-        // point i.
-        std::set<OrderedEdgeKey> boundary;
+        std::set<OrderedEdgeKey> boundary{};
         GetAndRemoveInsertionPolygon(i, candidates, boundary);
 
-        // The insertion polygon consists of the triangles formed by
-        // point i and the faces of C.
-        std::set<OrderedEdgeKey>::const_iterator key = boundary.begin();
-        for (key = boundary.begin(); key != boundary.end(); ++key)
+        for (const auto& key : boundary)
         {
-            mTriMesh.InsertTriangle(i, key->GetKey(0), key->GetKey(1));
+            triMesh.InsertTriangle(i, key.GetKey(0), key.GetKey(1));
         }
     }
     else
     {
-        // The point is outside the convex hull.  The insertion polygon
-        // is formed by point i and any triangles in the current
-        // triangulation whose circumcircles contain point i.
+        std::set<OrderedEdgeKey> hull{};
 
-        // Locate the convex hull of the triangles.  TODO:  In WM6, maintain
-        // a hull data structure that is updated incrementally.
-        std::set<OrderedEdgeKey> hull;
-        const ETManifoldMesh::TMap& tmap = mTriMesh.GetTriangles();
-        ETManifoldMesh::TMapCIterator element;
-        for (element = tmap.begin(); element != tmap.end(); ++element)
+        for (const auto& element : triangles)
         {
-            const ETManifoldMesh::Triangle* tri = element->second;
+            auto value = element.second;
             for (int j = 0; j < 3; ++j)
             {
-                if (!tri->T[j])
+                if (!value->t.at(j))
                 {
-                    const int edge[2] = { msIndex[j][0], msIndex[j][1] };
-                    hull.insert(OrderedEdgeKey(tri->V[edge[0]], tri->V[edge[1]]));
+                    const std::array<int, 2> edge{ index.at(j).at(0), index.at(j).at(1) };
+                    hull.insert(OrderedEdgeKey{ value->v.at(edge.at(0)), value->v.at(edge.at(1)) });
                 }
             }
         }
 
-        // TODO:  Until the hull change in WM6, for now just iterate over all
-        // the hull edges and use the ones visible to point i to locate the
-        // insertion polygon.
-        const ETManifoldMesh::EMap& edgemap = mTriMesh.GetEdges();
-        std::set<Triangle*> candidates;
-        std::set<OrderedEdgeKey> visible;
-        std::set<OrderedEdgeKey>::const_iterator key;
-        for (key = hull.begin(); key != hull.end(); ++key)
+        const auto& edgemap = triMesh.GetEdges();
+        std::set<TriangleSharedPtr> candidates{};
+        std::set<OrderedEdgeKey> visible{};
+
+        for (const auto& key : hull)
         {
-            if (mQuery->ToLine(i, key->GetKey(0), key->GetKey(1)) > 0)
+            if (System::EnumCastUnderlying(query->ToLine(i, key.GetKey(0), key.GetKey(1))) > 0)
             {
-                auto iter = edgemap.find(EdgeKey(key->GetKey(0), key->GetKey(1)));
-                MATHEMATICS_ASSERTION_0(iter != edgemap.end(), "Unexpected condition\n");
-                MATHEMATICS_ASSERTION_0(iter->second->T[1] == 0, "Unexpected condition\n");
-                Triangle* adj = iter->second->T[0];
+                const auto iter = edgemap.find(EdgeKey(key.GetKey(0), key.GetKey(1)));
+                if (iter == edgemap.end())
+                {
+                    THROW_EXCEPTION(SYSTEM_TEXT("意外情况\n"));
+                }
+
+                MATHEMATICS_ASSERTION_0(iter->second->t.at(1) == 0, "意外情况\n");
+
+                auto adj = iter->second->t.at(0);
                 if (adj && candidates.find(adj) == candidates.end())
                 {
-                    if (mQuery->ToCircumcircle(i, adj->V[0], adj->V[1], adj->V[2]) <= 0)
+                    if (System::EnumCastUnderlying(query->ToCircumcircle(i, adj->v.at(0), adj->v.at(1), adj->v.at(2))) <= 0)
                     {
-                        // Point i is in the circumcircle.
                         candidates.insert(adj);
                     }
                     else
                     {
-                        // Point i is not in the circumcircle but the hull edge
-                        // is visible.
-                        visible.insert(*key);
+                        visible.insert(key);
                     }
                 }
             }
         }
 
-        // Get the boundary of the insertion subpolygon C that contains the
-        // triangles whose circumcircles contain point i.
-        std::set<OrderedEdgeKey> boundary;
+        std::set<OrderedEdgeKey> boundary{};
         GetAndRemoveInsertionPolygon(i, candidates, boundary);
 
-        // The insertion polygon P consists of the triangles formed by
-        // point i and the back edges of C *and* the visible edges of
-        // mTriMesh-C.
-        for (key = boundary.begin(); key != boundary.end(); ++key)
+        for (const auto& value : boundary)
         {
-            if (mQuery->ToLine(i, key->GetKey(0), key->GetKey(1)) < 0)
+            if (System::EnumCastUnderlying(query->ToLine(i, value.GetKey(0), value.GetKey(1))) < 0)
             {
-                // This is a back edge of the boundary.
-                mTriMesh.InsertTriangle(i, key->GetKey(0), key->GetKey(1));
+                triMesh.InsertTriangle(i, value.GetKey(0), value.GetKey(1));
             }
         }
-        for (key = visible.begin(); key != visible.end(); ++key)
+
+        for (const auto& value : visible)
         {
-            mTriMesh.InsertTriangle(i, key->GetKey(1), key->GetKey(0));
+            triMesh.InsertTriangle(i, value.GetKey(1), value.GetKey(0));
         }
     }
 }
 
-#endif // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY2_DETAIL_H
+#endif  // MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY2_DETAIL_H

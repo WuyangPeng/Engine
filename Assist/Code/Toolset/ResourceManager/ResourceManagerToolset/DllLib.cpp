@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_RESOURCE_MANAGER_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_RESOURCE_MANAGER_STATIC
+#else  // BUILDING_RESOURCE_MANAGER_STATIC
 
-	namespace ResourceManagerToolset
-	{
-		void StaticDllLib()
-		{
+namespace ResourceManagerToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_RESOURCE_MANAGER_STATIC
+#endif  // !BUILDING_RESOURCE_MANAGER_STATIC

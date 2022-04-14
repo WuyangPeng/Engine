@@ -25,10 +25,9 @@ void Rendering::RenderTargetManagementTesting
 	RendererManager::Destroy();
 }
 
-void Rendering::RenderTargetManagementTesting
-	::RenderTargetTest()
+void Rendering::RenderTargetManagementTesting::RenderTargetTest() noexcept
 {
-// 	RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
+    // 	RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
 // 	renderer->Init();
 // 	RenderTargetManagement management(renderer);
 // 

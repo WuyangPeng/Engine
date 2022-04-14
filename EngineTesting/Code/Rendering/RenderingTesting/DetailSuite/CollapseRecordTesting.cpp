@@ -18,7 +18,7 @@ void Rendering::CollapseRecordTesting
 { 
 	ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
 }
- 
+ #include SYSTEM_WARNING_DISABLE(26446)
 void Rendering::CollapseRecordTesting
 	::InitTest()
 {
@@ -41,7 +41,7 @@ void Rendering::CollapseRecordTesting
 		ASSERT_EQUAL(firstCollapseRecord.GetIndex(i), indices[i]);
 	}
 
-	ASSERT_EQUAL_DO_NOT_USE_MESSAGE(firstCollapseRecord.GetIndices(), indices);
+	ASSERT_EQUAL(firstCollapseRecord.GetIndices(), indices);
 
 	firstCollapseRecord.SetVKeep(5);
 	ASSERT_EQUAL(firstCollapseRecord.GetVKeep(), 5);

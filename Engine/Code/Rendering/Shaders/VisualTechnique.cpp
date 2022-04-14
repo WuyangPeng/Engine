@@ -73,13 +73,13 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, VisualTechnique)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, VisualTechnique)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, VisualTechnique)
 
-Rendering::VisualTechnique ::VisualTechnique()
+Rendering::VisualTechnique::VisualTechnique()
     : ParentType("VisualTechnique"), impl{ make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::VisualTechnique ::~VisualTechnique()
+Rendering::VisualTechnique::~VisualTechnique()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

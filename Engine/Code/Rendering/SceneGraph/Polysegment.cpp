@@ -1,201 +1,184 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 18:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 16:43)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Polysegment.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, Polysegment);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Polysegment);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Polysegment);
 
-Rendering::Polysegment
-	::Polysegment(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,bool contiguous) 
-	:ParentType{ contiguous ? VisualPrimitiveType::PolysegmentsContiguous : VisualPrimitiveType::PolysegmentsDisjoint,vertexformat, vertexbuffer,IndexBufferSharedPtr() },
-	 m_NumSegments{ 0 }, m_Contiguous{ contiguous }
+Rendering::Polysegment::Polysegment(const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, bool contiguous)
+    : ParentType{ contiguous ? VisualPrimitiveType::PolysegmentsContiguous : VisualPrimitiveType::PolysegmentsDisjoint, vertexformat, vertexbuffer, IndexBufferSharedPtr{} },
+      numSegments{ 0 }, contiguous{ contiguous }
 {
     const auto numVertices = vertexbuffer->GetNumElements();
-	RENDERING_ASSERTION_1(2 <= numVertices,"Polysegments必须至少有两点\n");
+    RENDERING_ASSERTION_1(2 <= numVertices, "Polysegments必须至少有两点\n");
 
-	if (m_Contiguous)
-	{
-		m_NumSegments = numVertices - 1;
-	}
-	else
-	{
-		RENDERING_ASSERTION_1((numVertices & 1) == 0, "分离片段需要偶数的顶点\n");
+    if (contiguous)
+    {
+        numSegments = numVertices - 1;
+    }
+    else
+    {
+        RENDERING_ASSERTION_1((numVertices & 1) == 0, "分离片段需要偶数的顶点\n");
 
-		m_NumSegments = numVertices / 2;
-	}
+        numSegments = numVertices / 2;
+    }
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
-
-	 
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-   
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::Polysegment
-	::IsValid() const noexcept
+
+bool Rendering::Polysegment::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && 0 <= m_NumSegments)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-
-int Rendering::Polysegment
-	::GetMaxNumSegments() const 
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	auto numVertices = GetConstVertexBuffer()->GetNumElements();
-	return m_Contiguous ? numVertices - 1 : numVertices / 2;
+    if (ParentType::IsValid() && 0 <= numSegments)
+        return true;
+    else
+        return false;
 }
 
-void Rendering::Polysegment
-	::SetNumSegments(int numSegments)
-{
-	RENDERING_CLASS_IS_VALID_1;
+#endif  // OPEN_CLASS_INVARIANT
 
-	auto numVertices = GetConstVertexBuffer()->GetNumElements();
-	if (m_Contiguous)
-	{
-            const auto numVerticesMinus1 = numVertices - 1;
-		if (0 <= numSegments && numSegments <= numVerticesMinus1)
-		{
-			m_NumSegments = numSegments;
-		}
-		else
-		{
-			m_NumSegments = numVerticesMinus1;
-		}
-	}
-	else
-	{
-            const auto numVerticesDivide2 = numVertices / 2;
-		if (0 <= numSegments && numSegments <= numVerticesDivide2)
-		{
-			m_NumSegments = numSegments;
-		}
-		else
-		{
-			m_NumSegments = numVerticesDivide2;
-		}
-	}
-}
-
-int Rendering::Polysegment
-	::GetNumSegments() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_NumSegments;
-}
-
-
-bool Rendering::Polysegment ::GetContiguous() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_Contiguous;
-}
-
-Rendering::ControllerInterfaceSharedPtr Rendering::Polysegment
-	::Clone() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
-
-Rendering::Polysegment
-	::Polysegment(LoadConstructor value)
-	:ParentType{ value },m_NumSegments{ 0 },m_Contiguous{ false }
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-int Rendering::Polysegment
-    ::GetStreamingSize () const
+int Rendering::Polysegment::GetMaxNumSegments() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = ParentType::GetStreamingSize();
-    
-	size += CORE_TOOLS_STREAM_SIZE(m_NumSegments);
-	size += CORE_TOOLS_STREAM_SIZE(m_Contiguous);
 
-	return size;
+    auto numVertices = GetConstVertexBuffer()->GetNumElements();
+    return contiguous ? numVertices - 1 : numVertices / 2;
 }
 
-uint64_t Rendering::Polysegment
-    ::Register( CoreTools::ObjectRegister& target ) const
+void Rendering::Polysegment::SetNumSegments(int aNumSegments) noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	return ParentType::Register(target);	 
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto numVertices = GetConstVertexBuffer()->GetNumElements();
+    if (contiguous)
+    {
+        const auto numVerticesMinus1 = numVertices - 1;
+        if (0 <= aNumSegments && aNumSegments <= numVerticesMinus1)
+        {
+            numSegments = aNumSegments;
+        }
+        else
+        {
+            numSegments = numVerticesMinus1;
+        }
+    }
+    else
+    {
+        const auto numVerticesDivide2 = numVertices / 2;
+        if (0 <= aNumSegments && aNumSegments <= numVerticesDivide2)
+        {
+            numSegments = aNumSegments;
+        }
+        else
+        {
+            numSegments = numVerticesDivide2;
+        }
+    }
 }
 
-void Rendering::Polysegment
-    ::Save (CoreTools::BufferTarget& target) const
+int Rendering::Polysegment::GetNumSegments() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	target.Write(m_NumSegments);
-	target.Write(m_Contiguous);
-     
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return numSegments;
 }
 
-void Rendering::Polysegment
-    ::Link (CoreTools::ObjectLink& source)
+bool Rendering::Polysegment::GetContiguous() const noexcept
 {
-	;
-    
-	ParentType::Link(source);	
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return contiguous;
 }
 
-void Rendering::Polysegment
-    ::PostLink ()
+Rendering::ControllerInterfaceSharedPtr Rendering::Polysegment::Clone() const
 {
-	;
-    
-	ParentType::PostLink();     
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::Polysegment
-    ::Load (CoreTools::BufferSource& source)
+Rendering::Polysegment::Polysegment(LoadConstructor value)
+    : ParentType{ value }, numSegments{ 0 }, contiguous{ false }
 {
-	;
-    
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+int Rendering::Polysegment::GetStreamingSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+
+    size += CORE_TOOLS_STREAM_SIZE(numSegments);
+    size += CORE_TOOLS_STREAM_SIZE(contiguous);
+
+    return size;
+}
+
+uint64_t Rendering::Polysegment::Register(CoreTools::ObjectRegister& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
+}
+
+void Rendering::Polysegment::Save(CoreTools::BufferTarget& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    target.Write(numSegments);
+    target.Write(contiguous);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+}
+
+void Rendering::Polysegment::Link(CoreTools::ObjectLink& source)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
+}
+
+void Rendering::Polysegment::PostLink()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
+}
+
+void Rendering::Polysegment::Load(CoreTools::BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
-	
-	source.Read(m_NumSegments);
-	m_Contiguous = source.ReadBool();
-        
+
+    source.Read(numSegments);
+    contiguous = source.ReadBool();
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
@@ -203,7 +186,5 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Polysegment::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
- #include STSTEM_WARNING_POP

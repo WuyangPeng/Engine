@@ -12,6 +12,7 @@
 
 #include "Stream.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 
 #include <type_traits>
 #include <vector>
@@ -38,6 +39,20 @@ namespace CoreTools
     struct StreamSize<T, typename std::enable_if_t<std::is_pointer_v<T>>>
     {
         NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED T value) noexcept
+        {
+            return GetStreamSize();
+        }
+
+        NODISCARD constexpr static int GetStreamSize() noexcept
+        {
+            return g_ObjectSize;
+        }
+    };
+
+    template <typename T>
+    struct StreamSize<ObjectAssociated<T>>
+    {
+        NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const ObjectAssociated<T>& value) noexcept
         {
             return GetStreamSize();
         }

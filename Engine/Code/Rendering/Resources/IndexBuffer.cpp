@@ -1,423 +1,538 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 15:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/30 11:49)
 
 #include "Rendering/RenderingExport.h"
 
 #include "IndexBuffer.h"
-
-#include "Rendering/Renderers/RendererManager.h" 
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/FileManager/ReadFileManager.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/FileManager/ReadFileManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/Renderers/RendererManager.h"
 
-#include "CoreTools/Helper/ExceptionMacro.h" 
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26455)
-CORE_TOOLS_RTTI_DEFINE(Rendering,IndexBuffer);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,IndexBuffer);
-CORE_TOOLS_FACTORY_DEFINE(Rendering,IndexBuffer); 
 
-Rendering::IndexBuffer
-	::IndexBuffer()
-	:ParentType{}, m_Offset{ 0 }
+CORE_TOOLS_RTTI_DEFINE(Rendering, IndexBuffer);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IndexBuffer);
+CORE_TOOLS_FACTORY_DEFINE(Rendering, IndexBuffer);
+
+Rendering::IndexBuffer::IndexBuffer(MAYBE_UNUSED IndexBufferCreate indexBufferCreate)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, offset{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IndexBuffer
-	::IndexBuffer( int numIndices, int indexSize,BufferUsage usage )
-	:ParentType{ numIndices,indexSize,usage }, m_Offset{ 0 }
+Rendering::IndexBuffer::IndexBuffer(MAYBE_UNUSED IndexBufferCreate indexBufferCreate, int numIndices, int indexSize, BufferUsage usage)
+    : ParentType{ numIndices, indexSize, usage }, offset{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IndexBuffer
-	::~IndexBuffer ()
-{EXCEPTION_TRY
+Rendering::IndexBuffer::IndexBufferSharedPtr Rendering::IndexBuffer::Create()
 {
-RENDERER_MANAGE_SINGLETON.UnbindAll(this); 
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-	
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    return std::make_shared<ClassType>(IndexBufferCreate::Init);
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,IndexBuffer)
-	
-void Rendering::IndexBuffer
-    ::SetOffset( int offset ) noexcept
+Rendering::IndexBuffer::IndexBufferSharedPtr Rendering::IndexBuffer::Create(int numIndices, int indexSize, BufferUsage usage)
 {
-	RENDERING_CLASS_IS_VALID_1;
-
-	m_Offset = offset;
+    return std::make_shared<ClassType>(IndexBufferCreate::Init, numIndices, indexSize, usage);
 }
 
-int Rendering::IndexBuffer
-	::GetOffset() const noexcept
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, IndexBuffer)
+
+void Rendering::IndexBuffer::SetOffset(int aOffset) noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Offset;
+    offset = aOffset;
 }
 
-Rendering::IndexBuffer
-	::IndexBuffer (LoadConstructor value)
-	:ParentType{ value }, m_Offset{ 0 }
+int Rendering::IndexBuffer::GetOffset() const noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return offset;
 }
 
-int Rendering::IndexBuffer
-	::GetStreamingSize () const
+Rendering::IndexBuffer::IndexBuffer(LoadConstructor value)
+    : ParentType{ value }, offset{ 0 }
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	auto size = ParentType::GetStreamingSize();
-
-	size += CORE_TOOLS_STREAM_SIZE(m_Offset);
-
-	return size;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-uint64_t Rendering::IndexBuffer
-	::Register( CoreTools::ObjectRegister& target ) const
+int Rendering::IndexBuffer::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ParentType::Register(target);
+    auto size = ParentType::GetStreamingSize();
+
+    size += CORE_TOOLS_STREAM_SIZE(offset);
+
+    return size;
 }
 
-void Rendering::IndexBuffer
-	::Save (CoreTools::BufferTarget& target) const
+uint64_t Rendering::IndexBuffer::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-
-	ParentType::Save(target);
-	
-	target.Write(m_Offset);
-
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    return ParentType::Register(target);
 }
 
-void Rendering::IndexBuffer
-	::Link (CoreTools::ObjectLink& source)
-{	
-	;
-
-	ParentType::Link(source);
-}
-
-void Rendering::IndexBuffer
-	::PostLink ()
+void Rendering::IndexBuffer::Save(CoreTools::BufferTarget& target) const
 {
-	;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	ParentType::PostLink();
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    target.Write(offset);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IndexBuffer
-	::Load (CoreTools::BufferSource& source)
+void Rendering::IndexBuffer::Link(CoreTools::ObjectLink& source)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
+}
+
+void Rendering::IndexBuffer::PostLink()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
+}
+
+void Rendering::IndexBuffer::Load(CoreTools::BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
-	
-	source.Read(m_Offset);
+
+    source.Read(offset);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::IndexBuffer
-	::SaveToFile(WriteFileManager& outFile) const
+void Rendering::IndexBuffer::SaveToFile(WriteFileManager& outFile) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	ParentType::SaveBufferDataToFile(outFile);
+    ParentType::SaveBufferDataToFile(outFile);
 
-	outFile.Write(sizeof(int), &m_Offset);
+    outFile.Write(sizeof(int32_t), &offset);
 }
 
-void Rendering::IndexBuffer
-	::ReadFromFile(ReadFileManager& inFile)
-{
-	;
-
-	ParentType::ReadBufferDataFromFile(inFile);
-
-	if (GetNumElements() != 0)
-	{
-		inFile.Read(sizeof(int), &m_Offset);
-	}		
-}
-
-Rendering::IndexBufferSharedPtr Rendering::IndexBuffer
-	::Clone() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return IndexBufferSharedPtr(std::make_shared<ClassType>(*this));
-}
-
-void Rendering::IndexBuffer
-	::InitIndexBuffer()
-{
-	;
-
-	auto indexSize = GetElementSize();
-
-	RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
-
-	auto numVertices = GetNumElements();
-
-	if (indexSize == 2)
-	{
-		auto indices = reinterpret_cast<short*>(GetAccessWriteData(0));
-		for (auto i = 0; i < numVertices; ++i)
-		{
-			indices[i] = static_cast<short>(i);
-		}
-	}
-	else // indexSize == 4
-	{
-		auto indices = reinterpret_cast<int*>(GetAccessWriteData(0));
-		for (auto i = 0; i < numVertices; ++i)
-		{
-			indices[i] = i;
-		}
-	}
-}
-
-void Rendering::IndexBuffer
-	::InitIndexBuffer(const vector<int> indices) 
-{
-	;
-
-	auto indexSize = GetElementSize();
-
-	RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
-
-	auto numVertices = boost::numeric_cast<size_t>(GetNumElements());
-
-	RENDERING_ASSERTION_1(numVertices == indices.size(), "索引数不对应。");
-
-	if (indexSize == 2)
-	{
-		auto accessWriteData = reinterpret_cast<short*>(GetAccessWriteData(0));
-		for (auto i = 0u; i < numVertices; ++i)
-		{
-			accessWriteData[i] = static_cast<short>(indices[i]);
-		}
-	}
-	else // indexSize == 4
-	{
-		auto accessWriteData = reinterpret_cast<int*>(GetAccessWriteData(0));
-		for (auto i = 0u; i < numVertices; ++i)
-		{
-			accessWriteData[i] = indices[i];
-		}
-	}
-}
-
-void Rendering::IndexBuffer
-	::InitIndexBufferInParticles() 
-{
-	;
-
-	auto indexSize = GetElementSize();
-
-	RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
-
-	auto numVertices = GetNumElements();
-	auto numParticles = numVertices / 6;
-
-	if (indexSize == 2)
-	{
-		auto indices = reinterpret_cast<short*>(GetAccessWriteData(0));
-		for (short i = 0; i < numParticles; ++i)
-		{
-			indices[i * 6] = 4 * i;
-			indices[i * 6 + 1] = 4 * i + 1;
-			indices[i * 6 + 2] = 4 * i + 2;
-			indices[i * 6 + 3] = 4 * i;
-			indices[i * 6 + 4] = 4 * i + 2;
-			indices[i * 6 + 5] = 4 * i + 3;	
-		}
-	}
-	else // indexSize == 4
-	{
-		auto indices = reinterpret_cast<int*>(GetAccessWriteData(0));
-		for (auto i = 0; i < numParticles; ++i)
-		{
-			indices[i * 6] = 4 * i;
-			indices[i * 6 + 1] = 4 * i + 1;
-			indices[i * 6 + 2] = 4 * i + 2;
-			indices[i * 6 + 3] = 4 * i;
-			indices[i * 6 + 4] = 4 * i + 2;
-			indices[i * 6 + 5] = 4 * i + 3;
-		}
-	} 
-}
-
-void Rendering::IndexBuffer
-	::InitIndexBufferInRectangle(int index, int firstRectangleIndex, int secondRectangleIndex,  int thirdRectangleIndex, int fourthRectangleIndex) 
-{
-	;
-
-	auto indexSize = GetElementSize();
-
-	RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
-
-	auto numVertices = GetNumElements();
-	auto numRectangles = numVertices / 6;
-
-	if (0 <= index && index < numRectangles)
-	{
-		if (indexSize == 2)
-		{
-			auto indices = reinterpret_cast<short*>(GetAccessWriteData(0));
-
-			indices[index * 6] = static_cast<short>(firstRectangleIndex);
-			indices[index * 6 + 1] = static_cast<short>(secondRectangleIndex);
-			indices[index * 6 + 2] = static_cast<short>(thirdRectangleIndex);
-			indices[index * 6 + 3] = static_cast<short>(firstRectangleIndex);
-			indices[index * 6 + 4] = static_cast<short>(thirdRectangleIndex);
-			indices[index * 6 + 5] = static_cast<short>(fourthRectangleIndex);
-		}
-		else // indexSize == 4
-		{
-			auto indices = reinterpret_cast<int*>(GetAccessWriteData(0));
-
-			indices[index * 6] = firstRectangleIndex;
-			indices[index * 6 + 1] = secondRectangleIndex;
-			indices[index * 6 + 2] = thirdRectangleIndex;
-			indices[index * 6 + 3] = firstRectangleIndex;
-			indices[index * 6 + 4] = thirdRectangleIndex;
-			indices[index * 6 + 5] = fourthRectangleIndex;
-		}
-	}	
-}
-
-void Rendering::IndexBuffer
-	::InitIndexBufferInDisk(int radialSamplesMinus1, int shellSamplesMinus1)
-{
-	;
-
-	auto indexSize = GetElementSize();
-
-	RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
-
-	if (indexSize == 2)
-	{
-		auto indices = reinterpret_cast<short*>(GetAccessWriteData(0));
-
-		auto firstIndex = radialSamplesMinus1;
-	
-		for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
-		{
-			indices[0] = 0;
-			indices[1] = static_cast<short>(1 + shellSamplesMinus1 * firstIndex);
-			indices[2] = static_cast<short>(1 + shellSamplesMinus1 * secondIndex);
-			indices += 3;
-		
-			for (auto shellIndex = 1; shellIndex < shellSamplesMinus1; ++shellIndex)
-			{
-				auto index00 = static_cast<short>(shellIndex + shellSamplesMinus1 * firstIndex);
-				auto index01 = static_cast<short>(shellIndex + shellSamplesMinus1 * secondIndex);
-				short index10 = index00 + 1;
-				short index11 = index01 + 1;
-
-				indices[0] = index00;
-				indices[1] = index10;
-				indices[2] = index11;
-				indices[3] = index00;
-				indices[4] = index11;
-				indices[5] = index01;
-			
-				indices += 6;
-			}
-
-			firstIndex = secondIndex;
-		}
-
-	}
-	else // indexSize == 4
-	{
-		auto indices = reinterpret_cast<int*>(GetAccessWriteData(0));
-
-		auto firstIndex = radialSamplesMinus1;
-	
-		for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
-		{
-			indices[0] = 0;
-			indices[1] = 1 + shellSamplesMinus1 * firstIndex;
-			indices[2] = 1 + shellSamplesMinus1 * secondIndex;
-			indices += 3;
-		
-			for (auto shellIndex = 1; shellIndex < shellSamplesMinus1; ++shellIndex)
-			{
-				auto index00 = shellIndex + shellSamplesMinus1 * firstIndex;
-				auto index01 = shellIndex + shellSamplesMinus1 * secondIndex;
-				auto index10 = index00 + 1;
-				auto index11 = index01 + 1;
-
-				indices[0] = index00;
-				indices[1] = index10;
-				indices[2] = index11;
-				indices[3] = index00;
-				indices[4] = index11;
-				indices[5] = index01;
-			
-				indices += 6;
-			}
-
-			firstIndex = secondIndex;
-		}
-	} 
-}
-
-void Rendering::IndexBuffer ::SetIndexBuffer(int index, [[maybe_unused]] int original, int current)
+void Rendering::IndexBuffer::ReadFromFile(ReadFileManager& inFile)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-	auto accessWriteData = reinterpret_cast<int*>(GetAccessWriteData(0));
+    ParentType::ReadBufferDataFromFile(inFile);
 
-	RENDERING_ASSERTION_2(accessWriteData[index] == original, "原来的索引错误\n");
+    if (GetNumElements() != 0)
+    {
+        inFile.Read(sizeof(int32_t), &offset);
+    }
+}
 
- 
+Rendering::IndexBufferSharedPtr Rendering::IndexBuffer::Clone() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	accessWriteData[index] = current;
+    return std::make_shared<ClassType>(*this);
+}
+
+void Rendering::IndexBuffer::InitIndexBuffer()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = GetNumElements();
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const auto indices = reinterpret_cast<int16_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (int16_t i{}; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i] = i;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+        if (indices != nullptr)
+        {
+            for (auto i = 0; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i] = i;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+}
+
+void Rendering::IndexBuffer::InitIndexBuffer(const vector<int>& indices)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = boost::numeric_cast<size_t>(GetNumElements());
+
+    RENDERING_ASSERTION_1(numVertices == indices.size(), "索引数不对应。");
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto accessWriteData = reinterpret_cast<int16_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (accessWriteData != nullptr)
+        {
+            for (auto i = 0u; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                accessWriteData[i] = boost::numeric_cast<int16_t>(indices.at(i));
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto accessWriteData = reinterpret_cast<int32_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (accessWriteData != nullptr)
+        {
+            for (auto i = 0u; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                accessWriteData[i] = indices.at(i);
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+}
+
+void Rendering::IndexBuffer::InitIndexBufferInParticles()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = GetNumElements();
+    const auto numParticles = numVertices / 6;
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int16_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (int16_t i{}; i < numParticles; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i * 6] = 4 * i;
+                indices[i * 6 + 1] = 4 * i + 1;
+                indices[i * 6 + 2] = 4 * i + 2;
+                indices[i * 6 + 3] = 4 * i;
+                indices[i * 6 + 4] = 4 * i + 2;
+                indices[i * 6 + 5] = 4 * i + 3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (auto i = 0; i < numParticles; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i * 6] = 4 * i;
+                indices[i * 6 + 1] = 4 * i + 1;
+                indices[i * 6 + 2] = 4 * i + 2;
+                indices[i * 6 + 3] = 4 * i;
+                indices[i * 6 + 4] = 4 * i + 2;
+                indices[i * 6 + 5] = 4 * i + 3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+}
+
+void Rendering::IndexBuffer::InitIndexBufferInRectangle(int index, int rectangleIndex0, int rectangleIndex1, int rectangleIndex2, int rectangleIndex3)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = GetNumElements();
+    const auto numRectangles = numVertices / 6;
+
+    if (0 <= index && index < numRectangles)
+    {
+        if (indexSize == 2)
+        {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+            auto indices = reinterpret_cast<int16_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+            if (indices != nullptr)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[index * 6] = boost::numeric_cast<int16_t>(rectangleIndex0);
+                indices[index * 6 + 1] = boost::numeric_cast<int16_t>(rectangleIndex1);
+                indices[index * 6 + 2] = boost::numeric_cast<int16_t>(rectangleIndex2);
+                indices[index * 6 + 3] = boost::numeric_cast<int16_t>(rectangleIndex0);
+                indices[index * 6 + 4] = boost::numeric_cast<int16_t>(rectangleIndex2);
+                indices[index * 6 + 5] = boost::numeric_cast<int16_t>(rectangleIndex3);
+
+#include STSTEM_WARNING_POP
+            }
+        }
+        else  // indexSize == 4
+        {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+            auto indices = reinterpret_cast<int32_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+            if (indices != nullptr)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[index * 6] = rectangleIndex0;
+                indices[index * 6 + 1] = rectangleIndex1;
+                indices[index * 6 + 2] = rectangleIndex2;
+                indices[index * 6 + 3] = rectangleIndex0;
+                indices[index * 6 + 4] = rectangleIndex2;
+                indices[index * 6 + 5] = rectangleIndex3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+}
+
+void Rendering::IndexBuffer::InitIndexBufferInDisk(int radialSamplesMinus1, int shellSamplesMinus1)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int16_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            auto firstIndex = radialSamplesMinus1;
+
+            for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[0] = 0;
+                indices[1] = boost::numeric_cast<int16_t>(1 + shellSamplesMinus1 * firstIndex);
+                indices[2] = boost::numeric_cast<int16_t>(1 + shellSamplesMinus1 * secondIndex);
+                indices += 3;
+
+                for (auto shellIndex = 1; shellIndex < shellSamplesMinus1; ++shellIndex)
+                {
+                    const auto index00 = boost::numeric_cast<int16_t>(shellIndex + shellSamplesMinus1 * firstIndex);
+                    const auto index01 = boost::numeric_cast<int16_t>(shellIndex + shellSamplesMinus1 * secondIndex);
+                    const auto index10 = boost::numeric_cast<int16_t>(index00 + 1);
+                    const auto index11 = boost::numeric_cast<int16_t>(index01 + 1);
+
+                    indices[0] = index00;
+                    indices[1] = index10;
+                    indices[2] = index11;
+                    indices[3] = index00;
+                    indices[4] = index11;
+                    indices[5] = index01;
+
+                    indices += 6;
+                }
+
+#include STSTEM_WARNING_POP
+
+                firstIndex = secondIndex;
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            auto firstIndex = radialSamplesMinus1;
+
+            for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[0] = 0;
+                indices[1] = 1 + shellSamplesMinus1 * firstIndex;
+                indices[2] = 1 + shellSamplesMinus1 * secondIndex;
+                indices += 3;
+
+                for (auto shellIndex = 1; shellIndex < shellSamplesMinus1; ++shellIndex)
+                {
+                    const auto index00 = shellIndex + shellSamplesMinus1 * firstIndex;
+                    const auto index01 = shellIndex + shellSamplesMinus1 * secondIndex;
+                    const auto index10 = index00 + 1;
+                    const auto index11 = index01 + 1;
+
+                    indices[0] = index00;
+                    indices[1] = index10;
+                    indices[2] = index11;
+                    indices[3] = index00;
+                    indices[4] = index11;
+                    indices[5] = index01;
+
+                    indices += 6;
+                }
+
+#include STSTEM_WARNING_POP
+
+                firstIndex = secondIndex;
+            }
+        }
+    }
+}
+
+void Rendering::IndexBuffer::SetIndexBuffer(int index, MAYBE_UNUSED int original, int current)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    auto accessWriteData = reinterpret_cast<int32_t*>(GetAccessWriteData(0));
+
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+    if (accessWriteData != nullptr)
+    {
+        RENDERING_ASSERTION_2(accessWriteData[index] == original, "原来的索引错误\n");
+
+        accessWriteData[index] = current;
+    }
+
+#include STSTEM_WARNING_POP
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::IndexBuffer::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
- #include STSTEM_WARNING_POP

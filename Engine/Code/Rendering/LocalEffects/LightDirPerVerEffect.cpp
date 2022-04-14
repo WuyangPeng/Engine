@@ -32,6 +32,7 @@
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26493)
+#include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26485)
 #include SYSTEM_WARNING_DISABLE(26815)
 #include SYSTEM_WARNING_DISABLE(26455)
@@ -116,18 +117,20 @@ Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateInstance
 Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateUniqueInstance(
     Light* light, Material* material)
 {
-    const LightDirPerVerEffect* effect = nullptr;  //   CoreTools::New0<LightDirPerVerEffect>();
-    return effect->CreateInstance(light, material);
+    light;
+    material;
+    //const LightDirPerVerEffect* effect = nullptr;  //   CoreTools::New0<LightDirPerVerEffect>();
+    return nullptr;  //  effect->CreateInstance(light, material);
 }
 
 // Streaming support.
 
-Rendering::LightDirPerVerEffect ::LightDirPerVerEffect(LoadConstructor value)
+Rendering::LightDirPerVerEffect::LightDirPerVerEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::LightDirPerVerEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::LightDirPerVerEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -136,12 +139,12 @@ void Rendering::LightDirPerVerEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightDirPerVerEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::LightDirPerVerEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightDirPerVerEffect ::PostLink()
+void Rendering::LightDirPerVerEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -168,12 +171,12 @@ void Rendering::LightDirPerVerEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::LightDirPerVerEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::LightDirPerVerEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightDirPerVerEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightDirPerVerEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -182,7 +185,7 @@ void Rendering::LightDirPerVerEffect ::Save(CoreTools::BufferTarget& target) con
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightDirPerVerEffect ::GetStreamingSize() const
+int Rendering::LightDirPerVerEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

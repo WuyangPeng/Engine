@@ -14,7 +14,7 @@
 #include "Rendering/Renderers/PlatformIndexBuffer.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, BufferLockManageTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::BufferLockManageTesting
 	::MainTest()
 { 

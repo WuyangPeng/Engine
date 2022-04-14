@@ -4,17 +4,24 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/26 0:53)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/ResourceManagerClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(ResourceManagerExample, TestingHelper, "资源管理例子")
+using namespace std::literals;
 
-// private
-void ResourceManagerExample::TestingHelper
-	::AddSuites()
+ResourceManagerExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "资源管理例子"s }
 {
-	 
+    InitSuite();
+
+    RESOURCE_MANAGER_SELF_CLASS_IS_VALID_1;
 }
- 
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ResourceManagerExample, TestingHelper)
+
+void ResourceManagerExample::TestingHelper::InitSuite() noexcept
+{
+}

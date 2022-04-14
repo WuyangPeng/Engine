@@ -1,27 +1,32 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒıÇæ°æ±¾£º0.0.0.2 (2019/07/16 11:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒıÇæ°æ±¾£º0.8.0.4 (2022/03/22 16:29)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "BasicMeshVertex.h"
 #include "Detail/BasicMeshVertexImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Mathematics::BasicMeshVertex
-	::BasicMeshVertex ()
-	:impl{ 0  }
+Mathematics::BasicMeshVertex Mathematics::BasicMeshVertex::Create()
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    return BasicMeshVertex{ CoreTools::DisableNotThrow::Disable };
 }
-#include STSTEM_WARNING_POP
+
+Mathematics::BasicMeshVertex::BasicMeshVertex(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, BasicMeshVertex)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, BasicMeshVertex, GetVertex, int, int);
@@ -30,11 +35,10 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, BasicMeshVertex, GetEdge, int
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, BasicMeshVertex, GetTriangle, int, int);
 
-void Mathematics::BasicMeshVertex
-	::InsertEdge (int vertex, int edge)
+void Mathematics::BasicMeshVertex::InsertEdge(int vertex, int edge)
 {
-	;
-    
+    MATHEMATICS_CLASS_IS_VALID_9;
+
     return impl->InsertEdge(vertex, edge);
 }
 

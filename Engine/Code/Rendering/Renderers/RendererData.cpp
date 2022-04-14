@@ -22,19 +22,19 @@ using std::string;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, RendererData);
 
-Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData ::sm_RendererData{};
+Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData::sm_RendererData{};
 
-void Rendering::RendererData ::Create()
+void Rendering::RendererData::Create()
 {
     sm_RendererData = make_unique<Rendering::RendererData>(RendererDataCreate::Init);
 }
 
-void Rendering::RendererData ::Destroy() noexcept
+void Rendering::RendererData::Destroy() noexcept
 {
     sm_RendererData.reset();
 }
 
-Rendering::RendererData ::RendererData([[maybe_unused]] RendererDataCreate rendererDataCreate)
+Rendering::RendererData::RendererData([[maybe_unused]] RendererDataCreate rendererDataCreate)
     : impl{0}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -42,7 +42,7 @@ Rendering::RendererData ::RendererData([[maybe_unused]] RendererDataCreate rende
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererData)
 
-void Rendering::RendererData ::LoadConfiguration(const string& fileName)
+void Rendering::RendererData::LoadConfiguration(const string& fileName)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -53,7 +53,7 @@ void Rendering::RendererData ::LoadConfiguration(const string& fileName)
     RENDERER_INPUT_DATA_SINGLETON.Rebuild(impl->GetRendererType());
 }
 
-void Rendering::RendererData ::ClearColor()
+void Rendering::RendererData::ClearColor()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -62,7 +62,7 @@ void Rendering::RendererData ::ClearColor()
     return impl->ClearColor();
 }
 
-void Rendering::RendererData ::Resize(int width, int height)
+void Rendering::RendererData::Resize(int width, int height)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -71,7 +71,7 @@ void Rendering::RendererData ::Resize(int width, int height)
     return impl->Resize(width, height);
 }
 
-void Rendering::RendererData ::DrawMessage(int x, int y, const Colour& color, const std::string& message)
+void Rendering::RendererData::DrawMessage(int x, int y, const Colour& color, const std::string& message)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -80,7 +80,7 @@ void Rendering::RendererData ::DrawMessage(int x, int y, const Colour& color, co
     return impl->DrawMessage(x, y, color, message);
 }
 
-Rendering::TextureFormat Rendering::RendererData ::GetColorFormat() const
+Rendering::TextureFormat Rendering::RendererData::GetColorFormat() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -89,7 +89,7 @@ Rendering::TextureFormat Rendering::RendererData ::GetColorFormat() const
     return impl->GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererData ::GetDepthStencilFormat() const
+Rendering::TextureFormat Rendering::RendererData::GetDepthStencilFormat() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -98,7 +98,7 @@ Rendering::TextureFormat Rendering::RendererData ::GetDepthStencilFormat() const
     return impl->GetDepthStencilFormat();
 }
 
-int Rendering::RendererData ::GetNumMultisamples() const
+int Rendering::RendererData::GetNumMultisamples() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -107,7 +107,7 @@ int Rendering::RendererData ::GetNumMultisamples() const
     return impl->GetNumMultisamples();
 }
 
-Rendering::RendererData::Colour Rendering::RendererData ::GetClearColor() const
+Rendering::RendererData::Colour Rendering::RendererData::GetClearColor() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -116,7 +116,7 @@ Rendering::RendererData::Colour Rendering::RendererData ::GetClearColor() const
     return impl->GetClearColor();
 }
 
-const std::string Rendering::RendererData ::GetWindowTitle() const
+const std::string Rendering::RendererData::GetWindowTitle() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -125,7 +125,7 @@ const std::string Rendering::RendererData ::GetWindowTitle() const
     return impl->GetWindowTitle();
 }
 
-int Rendering::RendererData ::GetXPosition() const
+int Rendering::RendererData::GetXPosition() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -134,7 +134,7 @@ int Rendering::RendererData ::GetXPosition() const
     return impl->GetXPosition();
 }
 
-int Rendering::RendererData ::GetYPosition() const
+int Rendering::RendererData::GetYPosition() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -143,7 +143,7 @@ int Rendering::RendererData ::GetYPosition() const
     return impl->GetYPosition();
 }
 
-int Rendering::RendererData ::GetWidth() const
+int Rendering::RendererData::GetWidth() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -152,7 +152,7 @@ int Rendering::RendererData ::GetWidth() const
     return impl->GetWidth();
 }
 
-int Rendering::RendererData ::GetHeight() const
+int Rendering::RendererData::GetHeight() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -161,7 +161,7 @@ int Rendering::RendererData ::GetHeight() const
     return impl->GetHeight();
 }
 
-bool Rendering::RendererData ::IsAllowResize() const
+bool Rendering::RendererData::IsAllowResize() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

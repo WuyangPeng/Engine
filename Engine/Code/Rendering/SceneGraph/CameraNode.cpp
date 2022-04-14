@@ -1,133 +1,84 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 17:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 11:45)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CameraNode.h"
 #include "Detail/CameraNodeImpl.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 
 using std::make_shared;
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26434)
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, CameraNode)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, CameraNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CameraNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, CameraNode);
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                                                                   \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, CameraNode);
-
-Rendering::CameraNode ::CameraNode(const CameraSharedPtr& camera)
-    : ParentType{}, impl{ make_shared<ImplType>(camera) }
+Rendering::CameraNode::CameraNode(const CameraSharedPtr& camera)
+    : ParentType{ NodeCreate::Init }, impl{ camera }
 {
-    if (!impl->IsNullPtr())
-    {
-        auto transform = impl->GetLocalTransform();
+    const auto transform = impl->GetLocalTransform();
 
-        SetLocalTransform(transform);
-    }
+    SetLocalTransform(transform);
 
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::CameraNode ::~CameraNode()
-{
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CameraNode)
 
-void Rendering::CameraNode ::SetCamera(const CameraSharedPtr& camera)
+void Rendering::CameraNode::SetCamera(const CameraSharedPtr& camera)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     impl->SetCamera(camera);
 
-    if (!impl->IsNullPtr())
-    {
-        auto transform = impl->GetLocalTransform();
+    const auto transform = impl->GetLocalTransform();
 
-        SetLocalTransform(transform);
+    SetLocalTransform(transform);
 
-        Update();
-    }
+    Update();
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode, GetCamera, const Rendering::ConstCameraSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode, GetCamera, Rendering::ConstCameraSharedPtr)
 
-bool Rendering::CameraNode ::UpdateWorldData(double applicationTime)
+bool Rendering::CameraNode::UpdateWorldData(double applicationTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     const auto result = ParentType::UpdateWorldData(applicationTime);
 
-    if (!impl->IsNullPtr())
-    {
-        auto worldTransform = GetWorldTransform();
-        auto cameraPosition = worldTransform.GetTranslate();
-        const auto rotate = worldTransform.GetRotate();
+    const auto worldTransform = GetWorldTransform();
+    const auto cameraPosition = worldTransform.GetTranslate();
+    const auto rotate = worldTransform.GetRotate();
 
-        auto cameraDirectionVector = rotate.GetColumn(0);
-        auto cameraUpVector = rotate.GetColumn(1);
-        auto cameraRightVector = rotate.GetColumn(2);
+    const auto cameraDirectionVector = rotate.GetColumn(0);
+    const auto cameraUpVector = rotate.GetColumn(1);
+    const auto cameraRightVector = rotate.GetColumn(2);
 
-        impl->SetFrame(cameraPosition, Mathematics::AVector{ cameraDirectionVector }, Mathematics::AVector{ cameraUpVector }, Mathematics::AVector{ cameraRightVector });
-    }
+    impl->SetFrame(cameraPosition, Mathematics::AVector{ cameraDirectionVector }, Mathematics::AVector{ cameraUpVector }, Mathematics::AVector{ cameraRightVector });
 
     return result;
 }
 
-CoreTools::ObjectSharedPtr Rendering::CameraNode ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::CameraNode::GetObjectByName(const string& name)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     auto found = ParentType::GetObjectByName(name);
     if (found != nullptr)
@@ -136,33 +87,23 @@ CoreTools::ObjectSharedPtr Rendering::CameraNode ::GetObjectByName(const string&
     }
     else
     {
-        if (!impl->IsNullPtr())
-        {
-            return impl->GetObjectByName(name);
-        }
-        else
-        {
-            return CoreTools::ObjectSharedPtr();
-        }
+        return impl->GetObjectByName(name);
     }
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode::GetAllObjectsByName(const string& name)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     auto parentObjects = ParentType::GetAllObjectsByName(name);
 
-    if (!impl->IsNullPtr())
-    {
-        auto implObjects = impl->GetAllObjectsByName(name);
-        parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());
-    }
+    auto implObjects = impl->GetAllObjectsByName(name);
+    parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());
 
     return parentObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::CameraNode ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::CameraNode::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -173,39 +114,29 @@ CoreTools::ConstObjectSharedPtr Rendering::CameraNode ::GetConstObjectByName(con
     }
     else
     {
-        if (!impl->IsNullPtr())
-        {
-            return impl->GetConstObjectByName(name);
-        }
-        else
-        {
-            return CoreTools::ConstObjectSharedPtr{};
-        }
+        return impl->GetConstObjectByName(name);
     }
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     auto parentObjects = ParentType::GetAllConstObjectsByName(name);
 
-    if (!impl->IsNullPtr())
-    {
-        auto implObjects = impl->GetAllConstObjectsByName(name);
-        parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());
-    }
+    auto implObjects = impl->GetAllConstObjectsByName(name);
+    parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());
 
     return parentObjects;
 }
 
-Rendering::CameraNode ::CameraNode(LoadConstructor value)
-    : ParentType{ value }, impl{ make_shared<ImplType>(CameraSharedPtr{}) }
+Rendering::CameraNode::CameraNode(LoadConstructor value)
+    : ParentType{ value }, impl{ CameraSharedPtr{} }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::CameraNode ::GetStreamingSize() const
+int Rendering::CameraNode::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -216,7 +147,7 @@ int Rendering::CameraNode ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::CameraNode ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::CameraNode::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -229,7 +160,7 @@ uint64_t Rendering::CameraNode ::Register(CoreTools::ObjectRegister& target) con
     return uniqueID;
 }
 
-void Rendering::CameraNode ::Save(CoreTools::BufferTarget& target) const
+void Rendering::CameraNode::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -242,25 +173,25 @@ void Rendering::CameraNode ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::CameraNode ::Link(CoreTools::ObjectLink& source)
+void Rendering::CameraNode::Link(CoreTools::ObjectLink& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
 
     impl->Link(source);
 }
 
-void Rendering::CameraNode ::PostLink()
+void Rendering::CameraNode::PostLink()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
 }
 
-void Rendering::CameraNode ::Load(CoreTools::BufferSource& source)
+void Rendering::CameraNode::Load(CoreTools::BufferSource& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -271,17 +202,16 @@ void Rendering::CameraNode ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-Rendering::CameraNode::ControllerInterfaceSharedPtr Rendering::CameraNode ::Clone() const
+Rendering::CameraNode::ControllerInterfaceSharedPtr Rendering::CameraNode::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::CameraNode::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
 
-#include STSTEM_WARNING_POP
+    return std::make_shared<ClassType>(*this);
+}

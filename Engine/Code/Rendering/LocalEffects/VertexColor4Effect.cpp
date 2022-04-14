@@ -29,7 +29,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, VertexColor4Effect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VertexColor4Effect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VertexColor4Effect);
 
-Rendering::VertexColor4Effect ::VertexColor4Effect()
+Rendering::VertexColor4Effect::VertexColor4Effect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.VertexColor4", 2, 2, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -74,27 +74,29 @@ Rendering::VertexColor4Effect ::VertexColor4Effect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::VertexColor4Effect ::CreateInstance() const
+Rendering::VisualEffectInstance* Rendering::VertexColor4Effect::CreateInstance() const
 {
     VisualEffectInstance* instance = nullptr;  // CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::VertexColor4Effect ::CreateUniqueInstance()
+Rendering::VisualEffectInstance* Rendering::VertexColor4Effect::CreateUniqueInstance()
 {
     const VertexColor4Effect* effect = nullptr;  // CoreTools::New0 < VertexColor4Effect>();
+    if (effect == nullptr)
+        return nullptr;
     return effect->CreateInstance();
 }
 
 // Streaming support.
 
-Rendering::VertexColor4Effect ::VertexColor4Effect(LoadConstructor value)
+Rendering::VertexColor4Effect::VertexColor4Effect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::VertexColor4Effect ::Load(CoreTools::BufferSource& source)
+void Rendering::VertexColor4Effect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -103,12 +105,12 @@ void Rendering::VertexColor4Effect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::VertexColor4Effect ::Link(CoreTools::ObjectLink& source)
+void Rendering::VertexColor4Effect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::VertexColor4Effect ::PostLink()
+void Rendering::VertexColor4Effect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -135,12 +137,12 @@ void Rendering::VertexColor4Effect ::PostLink()
     }
 }
 
-uint64_t Rendering::VertexColor4Effect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::VertexColor4Effect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::VertexColor4Effect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::VertexColor4Effect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -149,7 +151,7 @@ void Rendering::VertexColor4Effect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::VertexColor4Effect ::GetStreamingSize() const
+int Rendering::VertexColor4Effect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

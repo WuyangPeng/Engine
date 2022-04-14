@@ -1,236 +1,195 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/11 10:40)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_MIN_CIRCLE2_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_MIN_CIRCLE2_DETAIL_H
 
 #include "ContMinCircle2.h"
-
-
-// All internal minimal circle calculations store the squared radius in the
-// radius member of Circle2.  Only at the end is a sqrt computed.
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::MinCircle2<Real>
-	::MinCircle2(int numPoints, const Vector2<Real>* points, Circle2<Real>& minimal, Real epsilon)
-	:mEpsilon{ epsilon }
+Mathematics::ContMinCircle2<Real>::ContMinCircle2(const std::vector<Vector2<Real>>& points, Circle2<Real>& minimal, Real epsilon)
+    : epsilon{ epsilon }, update{ nullptr, &ContMinCircle2<Real>::UpdateSupport1, &ContMinCircle2<Real>::UpdateSupport2, &ContMinCircle2<Real>::UpdateSupport3 }
 {
-    mUpdate[0] = 0;
-    mUpdate[1] = &MinCircle2<Real>::UpdateSupport1;
-    mUpdate[2] = &MinCircle2<Real>::UpdateSupport2;
-    mUpdate[3] = &MinCircle2<Real>::UpdateSupport3;
-
-    Support support;
-    Real distDiff;
+    const auto numPoints = boost::numeric_cast<int>(points.size());
+    Support support{};
+    Real distDiff{};
 
     if (numPoints >= 1)
     {
-        // Create identity permutation (0,1,...,numPoints-1).
-        Vector2<Real>** permuted = nullptr;  //  NEW1<Vector2<Real>*>(numPoints);
-        int i;
-        for (i = 0; i < numPoints; ++i)
+        std::vector<Vector2<Real>> permuted(numPoints);
+
+        for (auto i = 0; i < numPoints; ++i)
         {
-            permuted[i] = (Vector2<Real>*)&points[i];
+            permuted.at(i) = points.at(i);
         }
-        
-        // Generate random permutation.
-        for (i = numPoints - 1; i > 0; --i)
+
+        for (auto i = numPoints - 1; i > 0; --i)
         {
-            int j = rand() % (i+1);
+            const auto j = rand() % (i + 1);
             if (j != i)
             {
-                Vector2<Real>* save = permuted[i];
-                permuted[i] = permuted[j];
-                permuted[j] = save;
+                Vector2<Real> save = permuted.at(i);
+                permuted.at(i) = permuted.at(j);
+                permuted.at(j) = save;
             }
         }
-        
-        minimal = ExactCircle1(*permuted[0]);
-        support.Quantity = 1;
-        support.Index[0] = 0;
 
-        // The previous version of the processing loop is
-        //  i = 1;
-        //  while (i < numPoints)
-        //  {
-        //      if (!support.Contains(i, permuted, mEpsilon))
-        //      {
-        //          if (!Contains(*permuted[i], minimal, distDiff))
-        //          {
-        //              UpdateFunction update = mUpdate[support.Quantity];
-        //              Circle2<Real> circle = (this->*update)(i, permuted,
-        //                  support);
-        //              if (circle.Radius > minimal.Radius)
-        //              {
-        //                  minimal = circle;
-        //                  i = 0;
-        //                  continue;
-        //              }
-        //          }
-        //      }
-        //      ++i;
-        //  }
-        // This loop restarts from the beginning of the point list each time
-        // the circle needs updating.  Linus K鋖lberg (Computer Science at
-        // M鋖ardalen University in Sweden) discovered that performance is
-        // better when the remaining points in the array are processed before
-        // restarting.  The points processed before the point that caused the
-        // update are likely to be enclosed by the new circle (or near the
-        // circle boundary) because they were enclosed by the previous circle.
-        // The chances are better that points after the current one will cause
-        // growth of the bounding circle.
-        for (int i = 1 % numPoints, n = 0; i != n; i = (i + 1) % numPoints)
+        minimal = ExactCircle1(permuted.at(0));
+        support.quantity = 1;
+        support.index.at(0) = 0;
+
+        for (auto i = 1 % numPoints, n = 0; i != n; i = (i + 1) % numPoints)
         {
-            if (!support.Contains(i, permuted, mEpsilon))
+            if (!support.Contains(i, permuted, epsilon))
             {
-                if (!Contains(*permuted[i], minimal, distDiff))
+                if (!Contains(permuted.at(i), minimal, distDiff))
                 {
-                    UpdateFunction update = mUpdate[support.Quantity];
-                    Circle2<Real> circle =(this->*update)(i, permuted,  support);
-					if (circle.GetRadius() > minimal.GetRadius())
+                    auto updateFunction = update.at(support.quantity);
+                    if (updateFunction != nullptr)
                     {
-                        minimal = circle;
-                        n = i;
+                        Circle2<Real> circle{};
+                        circle = (this->*updateFunction)(i, permuted, support);
+                        if (circle.GetRadius() > minimal.GetRadius())
+                        {
+                            minimal = circle;
+                            n = i;
+                        }
                     }
                 }
             }
         }
-        
-        DELETE1(permuted);
     }
     else
     {
-        MATHEMATICS_ASSERTION_0(false, "Input must contain points\n");
+        MATHEMATICS_ASSERTION_0(false, "输入必须包含点。\n");
     }
 
-	minimal.SetCircle(minimal.GetCenter(),Math<Real>::Sqrt(minimal.GetRadius()));
+    minimal.SetCircle(minimal.GetCenter(), Math<Real>::Sqrt(minimal.GetRadius()));
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-bool Mathematics::MinCircle2<Real>
-	::Contains(const Vector2<Real>& point,  const Circle2<Real>& circle, Real& distDiff)
+bool Mathematics::ContMinCircle2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ContMinCircle2<Real>::Contains(const Vector2<Real>& point, const Circle2<Real>& circle, Real& distDiff)
 {
     auto diff = point - circle.GetCenter();
-	auto test = Vector2Tools<Real>::GetLengthSquared(diff);
+    auto test = Vector2Tools<Real>::GetLengthSquared(diff);
 
-    // NOTE:  In this algorithm, Circle2 is storing the *squared radius*,
-    // so the next line of code is not in error.
     distDiff = test - circle.GetRadius();
 
     return distDiff <= Math<Real>::GetValue(0);
 }
 
 template <typename Real>
-Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::ExactCircle1(const Vector2<Real>& P)
+Mathematics::Circle2<Real> Mathematics::ContMinCircle2<Real>::ExactCircle1(const Vector2<Real>& p) noexcept
 {
-	Circle2<Real> minimal{ P, Math<Real>::GetValue(0) };
+    Circle2<Real> minimal{ p, Math<Real>::GetValue(0) };
+
     return minimal;
 }
 
 template <typename Real>
-Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::ExactCircle2(const Vector2<Real>& P0, const Vector2<Real>& P1)
+Mathematics::Circle2<Real> Mathematics::ContMinCircle2<Real>::ExactCircle2(const Vector2<Real>& p0, const Vector2<Real>& p1)
 {
-	auto diff = P1 - P0;
-	Circle2<Real> minimal{ (Real{0.5})*(P0 + P1), (Real{0.25})*Vector2Tools<Real>::GetLengthSquared(diff) };
-  
+    auto diff = p1 - p0;
+    Circle2<Real> minimal{ Math<Real>::GetRational(1, 2) * (p0 + p1), Math<Real>::GetRational(1, 4) * Vector2Tools<Real>::GetLengthSquared(diff) };
+
     return minimal;
 }
 
 template <typename Real>
-Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::ExactCircle3(const Vector2<Real>& P0, const Vector2<Real>& P1, const Vector2<Real>& P2)
+Mathematics::Circle2<Real> Mathematics::ContMinCircle2<Real>::ExactCircle3(const Vector2<Real>& p0, const Vector2<Real>& p1, const Vector2<Real>& p2)
 {
-	auto E10 = P1 - P0;
-	auto E20 = P2 - P0;
+    auto e10 = p1 - p0;
+    auto e20 = p2 - p0;
 
-    Real A[2][2] { { E10.GetX(), E10.GetY() },
-				   { E20.GetX(), E20.GetY() } };
+    std::array<std::array<Real, 2>, 2> a{ std::array<Real, 2>{ e10.GetX(), e10.GetY() }, std::array<Real, 2>{ e20.GetX(), e20.GetY() } };
 
-    Real B[2] { (Real{0.5})*Vector2Tools<Real>::GetLengthSquared(E10),
-				(Real{0.5})*Vector2Tools<Real>::GetLengthSquared(E20)  };
+    Vector2 b{ Math<Real>::GetRational(1, 2) * Vector2Tools<Real>::GetLengthSquared(e10),
+               Math<Real>::GetRational(1, 2) * Vector2Tools<Real>::GetLengthSquared(e20) };
 
-  
-	auto det = A[0][0]*A[1][1] - A[0][1]*A[1][0];
+    auto det = a.at(0).at(0) * a.at(1).at(1) - a.at(0).at(1) * a.at(1).at(0);
 
-	Vector2<Real> center;
-	Real radius;
-    if (Math<Real>::FAbs(det) > mEpsilon)
+    Vector2<Real> center{};
+    Real radius{};
+    if (Math<Real>::FAbs(det) > epsilon)
     {
-		auto invDet = (Math::GetValue(1))/det;
-        Vector2<Real> Q;
-		Q.SetX((A[1][1] * B[0] - A[0][1] * B[1])*invDet);
-		Q.SetY((A[0][0] * B[1] - A[1][0] * B[0])*invDet);
-		center = P0 + Q;
-		radius = Vector2Tools<Real>::GetLengthSquared(Q);
+        auto invDet = (Math<Real>::GetValue(1)) / det;
+        Vector2<Real> q{};
+        q.SetX((a.at(1).at(1) * b[0] - a.at(0).at(1) * b[1]) * invDet);
+        q.SetY((a.at(0).at(0) * b[1] - a.at(1).at(0) * b[0]) * invDet);
+        center = p0 + q;
+        radius = Vector2Tools<Real>::GetLengthSquared(q);
     }
     else
     {
-		center = Vector2<Real>::sm_Zero;
-		radius = Math<Real>::maxReal;
+        center = Vector2<Real>::GetZero();
+        radius = Math<Real>::maxReal;
     }
 
-	Circle2<Real> minimal{ center,radius };
-    return minimal;
-}
-
-template <typename Real>
-Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::UpdateSupport1(int i, Vector2<Real>** permuted, Support& support)
-{
-    const auto& P0 = *permuted[support.Index[0]];
-    const auto& P1 = *permuted[i];
-
-	auto minimal = ExactCircle2(P0, P1);
-    support.Quantity = 2;
-    support.Index[1] = i;
+    Circle2<Real> minimal{ center, radius };
 
     return minimal;
 }
 
 template <typename Real>
-Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::UpdateSupport2(int i,Vector2<Real>** permuted, Support& support)
+Mathematics::Circle2<Real> Mathematics::ContMinCircle2<Real>::UpdateSupport1(int i, const std::vector<Vector2<Real>>& permuted, Support& support)
 {
-    const Vector2<Real>* point[2]
+    const auto& p0 = permuted.at(support.index.at(0));
+    const auto& p1 = permuted.at(i);
+
+    auto minimal = ExactCircle2(p0, p1);
+    support.quantity = 2;
+    support.index.at(1) = i;
+
+    return minimal;
+}
+
+template <typename Real>
+Mathematics::Circle2<Real> Mathematics::ContMinCircle2<Real>::UpdateSupport2(int i, const std::vector<Vector2<Real>>& permuted, Support& support)
+{
+    std::array<Vector2<Real>, 2> point{ permuted.at(support.index.at(0)), permuted.at(support.index.at(1)) };
+    const auto& p2 = permuted.at(i);
+
+    constexpr auto numType2 = 2;
+    const std::array<std::array<int, 2>, numType2> type2 = { std::array<int, 2>{ 0, 1 }, std::array<int, 2>{ 1, 0 } };
+
+    constexpr auto numType3 = 1;
+
+    std::array<Circle2<Real>, numType2 + numType3> circle{};
+    auto indexCircle = 0;
+    auto minRSqr = Math<Real>::maxReal;
+    auto indexMinRSqr = -1;
+    Real distDiff{};
+    auto minDistDiff = Math<Real>::maxReal;
+    auto indexMinDistDiff = -1;
+
+    for (auto j = 0; j < numType2; ++j, ++indexCircle)
     {
-        permuted[support.Index[0]],  // P0
-        permuted[support.Index[1]]   // P1
-    };
-    const auto& P2 = *permuted[i];
-
-    // Permutations of type 2, used for calling ExactCircle2(...).
-    const int numType2 = 2;
-    const int type2[numType2][2] =
-    {
-        {0, /*2*/ 1},
-        {1, /*2*/ 0}
-    };
-
-    // Permutations of type 3, used for calling ExactCircle3(...).
-    const int numType3 = 1;  // {0, 1, 2}
-
-    Circle2<Real> circle[numType2 + numType3];
-    int indexCircle = 0;
-	auto minRSqr = Math<Real>::maxReal;
-    int indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::maxReal;
-    int indexMinDistDiff = -1;
-
-    // Permutations of type 2.
-    int j;
-    for (j = 0; j < numType2; ++j, ++indexCircle)
-    {
-        circle[indexCircle] = ExactCircle2(*point[type2[j][0]], P2);
-        if (circle[indexCircle].GetRadius() < minRSqr)
+        circle.at(indexCircle) = ExactCircle2(point.at(type2.at(j).at(0)), p2);
+        if (circle.at(indexCircle).GetRadius() < minRSqr)
         {
-            if (Contains(*point[type2[j][1]], circle[indexCircle], distDiff))
+            if (Contains(point.at(type2.at(j).at(1)), circle.at(indexCircle), distDiff))
             {
-				minRSqr = circle[indexCircle].GetRadius();
+                minRSqr = circle.at(indexCircle).GetRadius();
                 indexMinRSqr = indexCircle;
             }
             else if (distDiff < minDistDiff)
@@ -241,88 +200,68 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
         }
     }
 
-    // Permutations of type 3.
-    circle[indexCircle] = ExactCircle3(*point[0], *point[1], P2);
-	if (circle[indexCircle].GetRadius() < minRSqr)
+    circle.at(indexCircle) = ExactCircle3(point.at(0), point.at(1), p2);
+    if (circle.at(indexCircle).GetRadius() < minRSqr)
     {
-		minRSqr = circle[indexCircle].GetRadius();
+        minRSqr = circle.at(indexCircle).GetRadius();
         indexMinRSqr = indexCircle;
     }
 
-    // Theoreticaly, indexMinRSqr >= 0, but floating-point round-off errors
-    // can lead to indexMinRSqr == -1.  When this happens, the minimal sphere
-    // is chosen to be the one that has the minimum absolute errors between
-    // the sphere and points (barely) outside the sphere.
     if (indexMinRSqr == -1)
     {
         indexMinRSqr = indexMinDistDiff;
     }
 
-	auto minimal = circle[indexMinRSqr];
+    auto minimal = circle.at(indexMinRSqr);
     switch (indexMinRSqr)
     {
-    case 0:
-        support.Index[1] = i;
-        break;
-    case 1:
-        support.Index[0] = i;
-        break;
-    case 2:
-        support.Quantity = 3;
-        support.Index[2] = i;
-        break;
+        case 0:
+            support.index.at(1) = i;
+            break;
+        case 1:
+            support.index.at(0) = i;
+            break;
+        case 2:
+            support.quantity = 3;
+            support.index.at(2) = i;
+            break;
+        default:
+            break;
     }
 
     return minimal;
 }
 
 template <typename Real>
-Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::UpdateSupport3(int i, Vector2<Real>** permuted, Support& support)
+Mathematics::Circle2<Real> Mathematics::ContMinCircle2<Real>::UpdateSupport3(int i, const std::vector<Vector2<Real>>& permuted, Support& support)
 {
-    const Vector2<Real>* point[3]
-    {
-        permuted[support.Index[0]],  // P0
-        permuted[support.Index[1]],  // P1
-        permuted[support.Index[2]]   // P2
-    };
-    const auto& P3 = *permuted[i];
+    std::array<Vector2<Real>, 3> point{ permuted.at(support.index.at(0)), permuted.at(support.index.at(1)), permuted.at(support.index.at(2)) };
 
-    // Permutations of type 2, used for calling ExactCircle2(...).
-    const int numType2 = 3;
-    const int type2[numType2][3] =
-    {
-        {0, /*3*/ 1, 2},
-        {1, /*3*/ 0, 2},
-        {2, /*3*/ 0, 1}
-    };
+    const auto& p3 = permuted.at(i);
 
-    // Permutations of type 2, used for calling ExactCircle3(...).
-    const int numType3 = 3;
-    const int type3[numType3][3] =
-    {
-        {0, 1, /*3*/ 2},
-        {0, 2, /*3*/ 1},
-        {1, 2, /*3*/ 0}
-    };
+    constexpr auto numType2 = 3;
+    const std::array<std::array<int, 3>, numType2> type2{ std::array<int, 3>{ 0, 1, 2 }, std::array<int, 3>{ 1, 0, 2 }, std::array<int, 3>{ 2, 0, 1 } };
 
-    Circle2<Real> circle[numType2 + numType3];
-    int indexCircle = 0;
-	auto minRSqr = Math<Real>::maxReal;
-	auto indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::maxReal;
-	auto indexMinDistDiff = -1;
+    constexpr auto numType3 = 3;
+    const std::array<std::array<int, 3>, numType3> type3{ std::array<int, 3>{ 0, 1, 2 }, std::array<int, 3>{ 0, 2, 1 }, std::array<int, 3>{ 1, 2, 0 } };
 
-    // Permutations of type 2.
-    int j;
-    for (j = 0; j < numType2; ++j, ++indexCircle)
+    std::array<Circle2<Real>, numType2 + numType3> circle{};
+
+    auto indexCircle = 0;
+    auto minRSqr = Math<Real>::maxReal;
+    auto indexMinRSqr = -1;
+    Real distDiff{};
+    auto minDistDiff = Math<Real>::maxReal;
+    auto indexMinDistDiff = -1;
+
+    for (auto j = 0; j < numType2; ++j, ++indexCircle)
     {
-        circle[indexCircle] = ExactCircle2(*point[type2[j][0]], P3);
-        if (circle[indexCircle].GetRadius() < minRSqr)
+        circle.at(indexCircle) = ExactCircle2(point.at(type2.at(j).at(0)), p3);
+        if (circle.at(indexCircle).GetRadius() < minRSqr)
         {
-            if (Contains(*point[type2[j][1]], circle[indexCircle], distDiff) &&  Contains(*point[type2[j][2]], circle[indexCircle], distDiff))
+            if (Contains(point.at(type2.at(j).at(1)), circle.at(indexCircle), distDiff) && Contains(point.at(type2.at(j).at(2)), circle.at(indexCircle), distDiff))
             {
-				minRSqr = circle[indexCircle].GetRadius();
+                minRSqr = circle.at(indexCircle).GetRadius();
                 indexMinRSqr = indexCircle;
             }
             else if (distDiff < minDistDiff)
@@ -333,15 +272,14 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
         }
     }
 
-    // Permutations of type 3.
-    for (j = 0; j < numType3; ++j, ++indexCircle)
+    for (auto j = 0; j < numType3; ++j, ++indexCircle)
     {
-        circle[indexCircle] = ExactCircle3(*point[type3[j][0]],*point[type3[j][1]], P3);
-		if (circle[indexCircle].GetRadius() < minRSqr)
+        circle.at(indexCircle) = ExactCircle3(point.at(type3.at(j).at(0)), point.at(type3.at(j).at(1)), p3);
+        if (circle.at(indexCircle).GetRadius() < minRSqr)
         {
-            if (Contains(*point[type3[j][2]], circle[indexCircle], distDiff))
+            if (Contains(point.at(type3.at(j).at(2)), circle.at(indexCircle), distDiff))
             {
-				minRSqr = circle[indexCircle].GetRadius();
+                minRSqr = circle.at(indexCircle).GetRadius();
                 indexMinRSqr = indexCircle;
             }
             else if (distDiff < minDistDiff)
@@ -352,58 +290,57 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
         }
     }
 
-    // Theoreticaly, indexMinRSqr >= 0, but floating-point round-off errors
-    // can lead to indexMinRSqr == -1.  When this happens, the minimal circle
-    // is chosen to be the one that has the minimum absolute errors between
-    // the circle and points (barely) outside the circle.
     if (indexMinRSqr == -1)
     {
         indexMinRSqr = indexMinDistDiff;
     }
 
-	auto minimal = circle[indexMinRSqr];
+    auto minimal = circle.at(indexMinRSqr);
+
     switch (indexMinRSqr)
     {
-    case 0:
-        support.Quantity = 2;
-        support.Index[1] = i;
-        break;
-    case 1:
-        support.Quantity = 2;
-        support.Index[0] = i;
-        break;
-    case 2:
-        support.Quantity = 2;
-        support.Index[0] = support.Index[2];
-        support.Index[1] = i;
-        break;
-    case 3:
-        support.Index[2] = i;
-        break;
-    case 4:
-        support.Index[1] = i;
-        break;
-    case 5:
-        support.Index[0] = i;
-        break;
+        case 0:
+            support.quantity = 2;
+            support.index.at(1) = i;
+            break;
+        case 1:
+            support.quantity = 2;
+            support.index.at(0) = i;
+            break;
+        case 2:
+            support.quantity = 2;
+            support.index.at(0) = support.index.at(2);
+            support.index.at(1) = i;
+            break;
+        case 3:
+            support.index.at(2) = i;
+            break;
+        case 4:
+            support.index.at(1) = i;
+            break;
+        case 5:
+            support.index.at(0) = i;
+            break;
+        default:
+            break;
     }
 
     return minimal;
 }
 
 template <typename Real>
-bool Mathematics::MinCircle2<Real>::Support
-	::Contains(int index, Vector2<Real>** points, Real epsilon)
+bool Mathematics::ContMinCircle2<Real>::Support::Contains(int pointIndex, const std::vector<Vector2<Real>>& points, Real epsilon) const
 {
-    for (auto i = 0; i < Quantity; ++i)
+    for (auto i = 0; i < quantity; ++i)
     {
-		auto diff = *points[index] - *points[Index[i]];
-		if (Vector2Tools<Real>::GetLengthSquared(diff) < epsilon)
+        auto diff = points.at(pointIndex) - points.at(index.at(i));
+        if (Vector2Tools<Real>::GetLengthSquared(diff) < epsilon)
         {
             return true;
         }
     }
+
     return false;
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_MIN_CIRCLE2_DETAIL_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_MIN_CIRCLE2_DETAIL_H

@@ -44,7 +44,7 @@ void Rendering::SkinControllerTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::SkinControllerTesting
 	::InitTest()
 {
@@ -306,7 +306,7 @@ void Rendering::SkinControllerTesting
 // 		for (int bone = 0; bone < firstControllerTestPtr->GetNumBones(); ++bone)
 // 		{
 // 			float weight = firstControllerTestPtr->GetWeights(bone, vertex);
-// 			if (Mathematics::FloatMath::sm_ZeroTolerance < Mathematics::FloatMath::FAbs(weight))
+// 			if (Mathematics::MathF::sm_ZeroTolerance < Mathematics::MathF::FAbs(weight))
 // 			{
 // 				Mathematics::APointf offset = firstControllerTestPtr->GetOffsets(bone, vertex);
 // 				Mathematics::APointf worldOffset =

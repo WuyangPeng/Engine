@@ -23,7 +23,8 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 
 #include <random>
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ViewMatrixConstantTesting) 
@@ -50,7 +51,7 @@ void Rendering::ViewMatrixConstantTesting
 void Rendering::ViewMatrixConstantTesting
 	::InitTest()
 {
-	const int numRegisters = 4;
+	constexpr int numRegisters = 4;
 	ViewMatrixConstant firstShaderFloat;
 	ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), numRegisters);
 
@@ -110,7 +111,7 @@ void Rendering::ViewMatrixConstantTesting
 
 	for (unsigned dataIndex = 0; dataIndex < secondData.size(); ++dataIndex)
 	{
-		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(secondData[dataIndex], thirdShaderFloat.GetRegister(dataIndex));
+		ASSERT_EQUAL(secondData[dataIndex], thirdShaderFloat.GetRegister(dataIndex));
 	}
 	
 	for (int registerIndex = 0; registerIndex < 16;++registerIndex)

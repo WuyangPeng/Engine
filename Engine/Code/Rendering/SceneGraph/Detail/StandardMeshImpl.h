@@ -1,17 +1,20 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 19:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 16:56)
 
 #ifndef RENDERING_SCENE_GRAPH_STANDARD_MESH_IMPL_H
 #define RENDERING_SCENE_GRAPH_STANDARD_MESH_IMPL_H
 
-#include "Rendering/RenderingDll.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "Rendering/RenderingDll.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 
@@ -27,51 +30,50 @@ namespace Rendering
         using Math = Mathematics::MathF;
 
     public:
-        StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const FloatTransform* transform = nullptr);
+        StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const TransformF* transform = nullptr);
 
+        ~StandardMeshImpl() noexcept = default;
         StandardMeshImpl(const StandardMeshImpl& rhs);
         StandardMeshImpl& operator=(const StandardMeshImpl& rhs);
-
-        StandardMeshImpl(StandardMeshImpl&& rhs) = default;
-        StandardMeshImpl& operator=(StandardMeshImpl&& rhs) = default;
-        ~StandardMeshImpl() = default;
+        StandardMeshImpl(StandardMeshImpl&& rhs) noexcept;
+        StandardMeshImpl& operator=(StandardMeshImpl&& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const FloatTransform& transform) noexcept;
-        const FloatTransform& GetTransform() const noexcept;
+        void SetTransform(const TransformF& aTransform) noexcept;
+        NODISCARD const TransformF& GetTransform() const noexcept;
 
-        const TrianglesMeshSharedPtr Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const;
-        const TrianglesMeshSharedPtr Disk(int shellSamples, int radialSamples, float radius) const;
-        const TrianglesMeshSharedPtr Box(float xExtent, float yExtent, float zExtent) const;
-        const TrianglesMeshSharedPtr CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
-        const TrianglesMeshSharedPtr CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
-        const TrianglesMeshSharedPtr Sphere(int zSamples, int radialSamples, float radius) const;
-        const TrianglesMeshSharedPtr Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const;
+        NODISCARD TrianglesMeshSharedPtr Rectangle(int xSamples, int ySamples, float xExtent, float yExtent) const;
+        NODISCARD TrianglesMeshSharedPtr Disk(int shellSamples, int radialSamples, float radius) const;
+        NODISCARD TrianglesMeshSharedPtr Box(float xExtent, float yExtent, float zExtent) const;
+        NODISCARD TrianglesMeshSharedPtr CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
+        NODISCARD TrianglesMeshSharedPtr CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
+        NODISCARD TrianglesMeshSharedPtr Sphere(int zSamples, int radialSamples, float radius) const;
+        NODISCARD TrianglesMeshSharedPtr Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const;
 
-        const TrianglesMeshSharedPtr Tetrahedron() const;
-        const TrianglesMeshSharedPtr Hexahedron() const;
-        const TrianglesMeshSharedPtr Octahedron() const;
-        const TrianglesMeshSharedPtr Dodecahedron() const;
-        const TrianglesMeshSharedPtr Icosahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Tetrahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Hexahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Octahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Dodecahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Icosahedron() const;
 
     private:
         void Init();
-        void TransformData(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const;
+        void TransformData(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const;
         void ReverseTriangleOrder(int numTriangles, int* indices) const noexcept;
-        void CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const;
-        void CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, const VertexBufferSharedPtr& vertexBuffer) const;
+        void CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const;
+        void CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const;
 
     private:
-        static constexpr auto sm_MaxUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
+        static constexpr auto maxUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
 
-        VertexFormatSharedPtr m_VertexFormat;
-        FloatTransform m_Transform;
-        bool m_IsStatic;
-        bool m_Inside;
-        bool m_HasNormals;
-        bool m_HasTextureCoords[sm_MaxUnits]{};
-        BufferUsage m_Usage;
+        VertexFormatSharedPtr vertexFormat;
+        TransformF transform;
+        bool isStatic;
+        bool inside;
+        bool hasNormals;
+        std::array<bool, maxUnits> hasTextureCoords{};
+        BufferUsage usage;
     };
 }
 

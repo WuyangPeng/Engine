@@ -7,23 +7,23 @@
 #ifndef SOUND_EFFECT_EXAMPLE_PLACEHOLDER_H
 #define SOUND_EFFECT_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/SoundEffect/SoundEffectExample/SoundEffectExampleDll.h" 
+#include "Example/SoundEffect/SoundEffectExample/SoundEffectExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace SoundEffectExample
 {
-	 class SOUND_EFFECT_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class SOUND_EFFECT_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // SOUND_EFFECT_EXAMPLE_PLACEHOLDER_H
+#endif  // SOUND_EFFECT_EXAMPLE_PLACEHOLDER_H

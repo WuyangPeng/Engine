@@ -1,48 +1,56 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 16:59)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Polynomial.h"  
 #include "SingleCurve2.h"
+#include "Mathematics/Algebra/Polynomial.h"
 
 namespace Mathematics
 {
+    template <typename Real>
+    class PolynomialCurve2 : public SingleCurve2<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-	template <typename Real>
-	class   PolynomialCurve2 : public SingleCurve2<Real>
-	{
-	public:
-		// Construction and destruction.  PolynomialCurve2 accepts responsibility
-		// for deleting the input polynomials.
-		PolynomialCurve2(Polynomial<Real>* xPoly, Polynomial<Real>* yPoly);
-		virtual ~PolynomialCurve2();
+        using ClassType = PolynomialCurve2<Real>;
+        using ParentType = SingleCurve2<Real>;
+        using Math = ParentType::Math;
 
-		int GetDegree() const;
-		const Polynomial<Real>* GetXPolynomial() const;
-		const Polynomial<Real>* GetYPolynomial() const;
+    public:
+        PolynomialCurve2(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly);
 
-		virtual Vector2<Real> GetPosition(Real t) const;
-		virtual Vector2<Real> GetFirstDerivative(Real t) const;
-		virtual Vector2<Real> GetSecondDerivative(Real t) const;
-		virtual Vector2<Real> GetThirdDerivative(Real t) const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	protected:
-		Polynomial<Real>* mXPoly;
-		Polynomial<Real>* mYPoly;
-		Polynomial<Real> mXDer1, mYDer1;
-		Polynomial<Real> mXDer2, mYDer2;
-		Polynomial<Real> mXDer3, mYDer3;
-	};
+        NODISCARD int GetDegree() const;
+        NODISCARD Polynomial<Real> GetXPolynomial() const;
+        NODISCARD Polynomial<Real> GetYPolynomial() const;
 
-	using PolynomialCurve2f = PolynomialCurve2<float>;
-	using PolynomialCurve2d = PolynomialCurve2<double>;
+        NODISCARD Vector2<Real> GetPosition(Real t) const override;
+        NODISCARD Vector2<Real> GetFirstDerivative(Real t) const override;
+        NODISCARD Vector2<Real> GetSecondDerivative(Real t) const override;
+        NODISCARD Vector2<Real> GetThirdDerivative(Real t) const override;
+
+    private:
+        Polynomial<Real> xPoly;
+        Polynomial<Real> yPoly;
+        Polynomial<Real> xDer1;
+        Polynomial<Real> yDer1;
+        Polynomial<Real> xDer2;
+        Polynomial<Real> yDer2;
+        Polynomial<Real> xDer3;
+        Polynomial<Real> yDer3;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_H

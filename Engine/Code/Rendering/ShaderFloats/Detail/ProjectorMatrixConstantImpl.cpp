@@ -48,7 +48,7 @@ bool Rendering::ProjectorMatrixConstantImpl
 }
 #endif // OPEN_CLASS_INVARIANT 
 
-void Rendering::ProjectorMatrixConstantImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::ProjectorMatrixConstantImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

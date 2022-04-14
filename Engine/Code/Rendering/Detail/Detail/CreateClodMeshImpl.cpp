@@ -27,7 +27,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26472)
 #include SYSTEM_WARNING_DISABLE(26490)
 #include SYSTEM_WARNING_DISABLE(26496)
-Rendering::CreateClodMeshImpl ::CreateClodMeshImpl(TrianglesMeshSharedPtr mesh)
+Rendering::CreateClodMeshImpl::CreateClodMeshImpl(TrianglesMeshSharedPtr mesh)
     : m_ClodMeshTriangleMesh{ mesh }, m_Graph{ m_ClodMeshTriangleMesh.GetNumVertices(), m_ClodMeshTriangleMesh.GetNumIndices() }, m_Collapses{}, m_CollapseRecord{}
 {
     Compute();
@@ -37,7 +37,7 @@ Rendering::CreateClodMeshImpl ::CreateClodMeshImpl(TrianglesMeshSharedPtr mesh)
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, CreateClodMeshImpl)
 
-Rendering::CollapseRecordArraySharedPtr Rendering::CreateClodMeshImpl ::GetCollapseRecordArray() const
+Rendering::CollapseRecordArraySharedPtr Rendering::CreateClodMeshImpl::GetCollapseRecordArray() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -45,7 +45,7 @@ Rendering::CollapseRecordArraySharedPtr Rendering::CreateClodMeshImpl ::GetColla
 }
 
 // private
-void Rendering::CreateClodMeshImpl ::Compute()
+void Rendering::CreateClodMeshImpl::Compute()
 {
     // 确保顶点和索引缓冲区是有效在边缘折叠。
     if (!m_ClodMeshTriangleMesh.ValidBuffers())
@@ -105,7 +105,7 @@ void Rendering::CreateClodMeshImpl ::Compute()
 }
 
 // private
-void Rendering::CreateClodMeshImpl ::CreateVertexEdgeTriangleGraph()
+void Rendering::CreateClodMeshImpl::CreateVertexEdgeTriangleGraph()
 {
     auto currentIndex = m_ClodMeshTriangleMesh.GetIndexBufferReadOnlyData();
 
@@ -120,7 +120,7 @@ void Rendering::CreateClodMeshImpl ::CreateVertexEdgeTriangleGraph()
     }
 }
 
-float Rendering::CreateClodMeshImpl ::ComputeMetric(const EdgeKey& edgeKey)
+float Rendering::CreateClodMeshImpl::ComputeMetric(const EdgeKey& edgeKey)
 {
     // 这些权重可以调整，以任何你喜欢的值。
     constexpr auto lengthWeight = 10.0f;
@@ -153,7 +153,7 @@ float Rendering::CreateClodMeshImpl ::ComputeMetric(const EdgeKey& edgeKey)
     return Mathematics::MathF::maxReal;
 }
 
-const Mathematics::Vector3F Rendering::CreateClodMeshImpl ::GetNormal(const TriangleKey& triangleKey)
+const Mathematics::Vector3F Rendering::CreateClodMeshImpl::GetNormal(const TriangleKey& triangleKey)
 {
     auto position0 = m_ClodMeshTriangleMesh.GetPosition(triangleKey.GetKey(0));
     auto position1 = m_ClodMeshTriangleMesh.GetPosition(triangleKey.GetKey(1));
@@ -164,7 +164,7 @@ const Mathematics::Vector3F Rendering::CreateClodMeshImpl ::GetNormal(const Tria
     return Mathematics::Vector3ToolsF::CrossProduct(edgeDirection0, edgeDirection1);
 }
 
-int Rendering::CreateClodMeshImpl ::CanCollapse(const EdgeKey& edgeKey)
+int Rendering::CreateClodMeshImpl::CanCollapse(const EdgeKey& edgeKey)
 {
     const auto& vertex0 = m_Graph.GetClodMeshVertex(edgeKey.GetKey(0));
     const auto& vertex1 = m_Graph.GetClodMeshVertex(edgeKey.GetKey(1));
@@ -224,7 +224,7 @@ int Rendering::CreateClodMeshImpl ::CanCollapse(const EdgeKey& edgeKey)
     return indexThrow;
 }
 
-void Rendering::CreateClodMeshImpl ::Collapse(const EdgeKey& edgeKey, int indexThrow)
+void Rendering::CreateClodMeshImpl::Collapse(const EdgeKey& edgeKey, int indexThrow)
 {
     // 得到的边的端点被崩塌。
     auto vKeep = edgeKey.GetKey(1 - indexThrow);
@@ -300,12 +300,12 @@ void Rendering::CreateClodMeshImpl ::Collapse(const EdgeKey& edgeKey, int indexT
     }
 }
 
-bool Rendering::CreateClodMeshImpl ::ValidResults()
+bool Rendering::CreateClodMeshImpl::ValidResults()
 {
     return m_Graph.ValidResults(m_ClodMeshTriangleMesh.GetNumTriangles(), m_ClodMeshTriangleMesh.GetNumVertices(), static_cast<int>(m_Collapses.size()));
 }
 
-void Rendering::CreateClodMeshImpl ::ReorderBuffers()
+void Rendering::CreateClodMeshImpl::ReorderBuffers()
 {
     // 构建老顶点顺序和新的顶点顺序之间的映射。
     std::vector<int> vertexNewToOld(m_ClodMeshTriangleMesh.GetNumVertices());
@@ -386,7 +386,7 @@ void Rendering::CreateClodMeshImpl ::ReorderBuffers()
     }
 }
 
-void Rendering::CreateClodMeshImpl ::ComputeRecords()
+void Rendering::CreateClodMeshImpl::ComputeRecords()
 {
     if (m_Collapses.size() == 0)
         return;

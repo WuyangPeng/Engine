@@ -1,65 +1,61 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 10:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/20 23:27)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_DETAIL_H
 
 #include "IntpLinearNonuniform3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpLinearNonuniform3<Real>::IntpLinearNonuniform3(const Delaunay3<Real>& dt, const std::vector<Real>& f)
+    : dt{ dt }, f{ f }
 {
-	template <typename Real>
-	IntpLinearNonuniform3<Real>::IntpLinearNonuniform3(const Delaunay3<Real>& DT, Real* F, bool owner)
-		:mDT(&DT),mF(F),mOwner(owner)
-	{
-	}
-
-	template <typename Real>
-	IntpLinearNonuniform3<Real>::~IntpLinearNonuniform3()
-	{
-		if (mOwner)
-		{
-			DELETE1(mF);
-		}
-	}
-
-	template <typename Real>
-	bool IntpLinearNonuniform3<Real>::Evaluate(const Vector3<Real>& P, Real& F)
-	{
-		int i = mDT->GetContainingTetrahedron(P);
-		if (i == -1)
-		{
-			return false;
-		}
-
-		// Get the barycentric coordinates of P with respect to the tetrahedron,
-		// P = b0*V0 + b1*V1 + b2*V2 + b3*V3, where b0+b1+b2+b3 = 1.
-		Real bary[4];
-		bool valid = mDT->GetBarycentricSet(i, P, bary);
-		MATHEMATICS_ASSERTION_0(valid, "Unexpected condition\n");
-		if (!valid)
-		{
-			return false;
-		}
-
-		// Get the vertex indices for look up into the function-value array.
-		int index[4];
-		valid = mDT->GetIndexSet(i, index);
-		MATHEMATICS_ASSERTION_0(valid, "Unexpected condition\n");
-		if (!valid)
-		{
-			return false;
-		}
-
-		// Result is a barycentric combination of function values.
-		F = bary[0] * mF[index[0]] + bary[1] * mF[index[1]] +
-			bary[2] * mF[index[2]] + bary[3] * mF[index[3]];
-
-		return true;
-	}
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-#endif // MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_DETAIL_H
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpLinearNonuniform3<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpLinearNonuniform3<Real>::Evaluate(const Vector3<Real>& p, Real& result)
+{
+    const auto i = dt.GetContainingTetrahedron(p);
+    if (i == -1)
+    {
+        return false;
+    }
+
+    auto bary = dt.GetBarycentricSet(i, p);
+    if (!std::get<4>(bary))
+    {
+        return false;
+    }
+
+    auto index = dt.GetIndexSet(i);
+
+    if (!std::get<4>(index))
+    {
+        return false;
+    }
+
+    result = std::get<0>(bary) * f.at(std::get<0>(index)) + std::get<1>(bary) * f.at(std::get<1>(index)) + std::get<2>(bary) * f.at(std::get<2>(index)) + std::get<3>(bary) * f.at(std::get<3>(index));
+
+    return true;
+}
+
+#endif  // MATHEMATICS_INTERPOLATION_INTP_LINEAR_NONUNIFORM3_DETAIL_H

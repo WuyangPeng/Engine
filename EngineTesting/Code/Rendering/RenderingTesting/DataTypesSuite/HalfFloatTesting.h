@@ -23,7 +23,7 @@ namespace Rendering
 		void UInt16Test();
 		void OperatorTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -1,189 +1,181 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/11 23:01)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_DETAIL_H
 
 #include "ContSeparatePoints3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/ComputationalGeometry/ConvexHull3.h"
 
-template <typename Real>
-Mathematics::SeparatePoints3<Real>
-	::SeparatePoints3(const std::vector<Vector3<Real> >& points0,  const std::vector<Vector3<Real> >& points1, Plane3<Real>& separatingPlane)
-{
-    // Construct convex hull of point set 0.
-	ConvexHull3<Real> hull0{ points0, 0.001f, false, QueryType::Int64 };
+#include <gsl/util>
 
-    // Code does not currently handle point/segment/polygon hull.
-    MATHEMATICS_ASSERTION_0(hull0.GetDimension() == 3, "Code currently supports only noncoplanar points\n");
+template <typename Real>
+Mathematics::ContSeparatePoints3<Real>::ContSeparatePoints3(const std::vector<Vector3<Real>>& points0, const std::vector<Vector3<Real>>& points1, Plane3<Real>& separatingPlane)
+    : separated{}
+{
+    ConvexHull3<Real> hull0{ points0, Math<Real>::GetRational(1, 1000), QueryType::Int64 };
+
+    MATHEMATICS_ASSERTION_0(hull0.GetDimension() == 3, "代码目前仅支持非共线点\n");
     if (hull0.GetDimension() < 3)
     {
         return;
     }
 
-	auto numTriangles0 = hull0.GetNumSimplices();
-    const int* indices0 = hull0.GetIndices();
+    const auto numTriangles0 = hull0.GetNumSimplices();
+    auto indices0 = hull0.GetIndices();
 
-    // Construct convex hull of point set 1.
-	ConvexHull3<Real> hull1{ points1, 0.001f, false, QueryType::Int64 };
+    ConvexHull3<Real> hull1{ points1, Math<Real>::GetRational(1, 1000), QueryType::Int64 };
 
-    // Code does not currently handle point/segment/polygon hull.
-    MATHEMATICS_ASSERTION_0(hull1.GetDimension() == 3,"Code currently supports only noncoplanar points\n");
+    MATHEMATICS_ASSERTION_0(hull1.GetDimension() == 3, "代码目前仅支持非共线点\n");
     if (hull1.GetDimension() < 3)
     {
         return;
     }
 
-	auto numTriangles1 = hull1.GetNumSimplices();
-    const int* indices1 = hull1.GetIndices();
+    const auto numTriangles1 = hull1.GetNumSimplices();
+    auto indices1 = hull1.GetIndices();
 
-    // Test faces of hull 0 for possible separation of points.
-    int i, i0, i1, i2, side0, side1;
-    Vector3<Real> diff0, diff1;
-    for (i = 0; i < numTriangles0; ++i)
+    Vector3<Real> diff0{};
+    Vector3<Real> diff1{};
+    for (auto i = 0; i < numTriangles0; ++i)
     {
-        // Look up face (assert: i0 != i1 && i0 != i2 && i1 != i2).
-        i0 = indices0[3*i  ];
-        i1 = indices0[3*i+1];
-        i2 = indices0[3*i+2];
+        auto i0 = indices0.at(3 * gsl::narrow_cast<size_t>(i));
+        auto i1 = indices0.at(3 * gsl::narrow_cast<size_t>(i) + 1);
+        auto i2 = indices0.at(3 * gsl::narrow_cast<size_t>(i) + 2);
 
-        // Compute potential separating plane (assert: normal != (0,0,0)).
-		separatingPlane = Plane3<Real>{ points0[i0], points0[i1], points0[i2] };
+        separatingPlane = Plane3<Real>{ points0.at(i0), points0.at(i1), points0.at(i2) };
 
-        // Determine if hull 1 is on same side of plane.
-        side1 = OnSameSide(separatingPlane, numTriangles1, indices1, points1);
+        const auto side1 = OnSameSide(separatingPlane, indices1, points1);
 
         if (side1)
         {
-            // Determine which side of plane hull 0 lies.
-            side0 = WhichSide(separatingPlane, numTriangles0, indices0, points0);
-            if (side0*side1 <= 0)  // Plane separates hulls.
+            const auto side0 = WhichSide(separatingPlane, indices0, points0);
+            if (side0 * side1 <= 0)
             {
-                mSeparated = true;
+                separated = true;
                 return;
             }
         }
     }
 
-    // Test faces of hull 1 for possible separation of points.
-    for (i = 0; i < numTriangles1; ++i)
+    for (auto i = 0; i < numTriangles1; ++i)
     {
-        // Look up edge (assert: i0 != i1 && i0 != i2 && i1 != i2).
-        i0 = indices1[3*i  ];
-        i1 = indices1[3*i+1];
-        i2 = indices1[3*i+2];
+        auto i0 = indices1.at(3 * gsl::narrow_cast<size_t>(i));
+        auto i1 = indices1.at(3 * gsl::narrow_cast<size_t>(i) + 1);
+        auto i2 = indices1.at(3 * gsl::narrow_cast<size_t>(i) + 2);
 
-        // Compute perpendicular to face (assert: normal != (0,0,0)).
-		separatingPlane = Plane3<Real>{ points1[i0], points1[i1], points1[i2] };
+        separatingPlane = Plane3<Real>{ points1.at(i0), points1.at(i1), points1.at(i2) };
 
-        // Determine if hull 0 is on same side of plane.
-        side0 = OnSameSide(separatingPlane, numTriangles0, indices0, points0);
+        const auto side0 = OnSameSide(separatingPlane, indices0, points0);
         if (side0)
         {
-            // Determine which side of plane hull 1 lies.
-            side1 = WhichSide(separatingPlane, numTriangles1, indices1,points1);
-            if (side0*side1 <= 0)  // Plane separates hulls.
+            const auto side1 = WhichSide(separatingPlane, indices1, points1);
+            if (side0 * side1 <= 0)
             {
-                mSeparated = true;
+                separated = true;
                 return;
             }
         }
     }
 
-    // Build edge set for hull 0.
-    std::set<std::pair<int,int> > edgeSet0;
-    for (i = 0; i < numTriangles0; ++i)
+    std::set<std::pair<int, int>> edgeSet0{};
+    for (auto i = 0; i < numTriangles0; ++i)
     {
-        // Look up face (assert: i0 != i1 && i0 != i2 && i1 != i2).
-        i0 = indices0[3*i  ];
-        i1 = indices0[3*i+1];
-        i2 = indices0[3*i+2];
+        auto i0 = indices0.at(3 * gsl::narrow_cast<size_t>(i));
+        auto i1 = indices0.at(3 * gsl::narrow_cast<size_t>(i) + 1);
+        auto i2 = indices0.at(3 * gsl::narrow_cast<size_t>(i) + 2);
         edgeSet0.insert(std::make_pair(i0, i1));
         edgeSet0.insert(std::make_pair(i0, i2));
         edgeSet0.insert(std::make_pair(i1, i2));
     }
 
-    // Build edge list for hull 1.
-    std::set<std::pair<int,int> > edgeSet1;
-    for (i = 0; i < numTriangles1; ++i)
+    std::set<std::pair<int, int>> edgeSet1{};
+    for (auto i = 0; i < numTriangles1; ++i)
     {
-        // Look up face (assert: i0 != i1 && i0 != i2 && i1 != i2).
-        i0 = indices1[3*i  ];
-        i1 = indices1[3*i+1];
-        i2 = indices1[3*i+2];
+        auto i0 = indices1.at(3 * gsl::narrow_cast<size_t>(i));
+        auto i1 = indices1.at(3 * gsl::narrow_cast<size_t>(i) + 1);
+        auto i2 = indices1.at(3 * gsl::narrow_cast<size_t>(i) + 2);
         edgeSet1.insert(std::make_pair(i0, i1));
         edgeSet1.insert(std::make_pair(i0, i2));
         edgeSet1.insert(std::make_pair(i1, i2));
     }
 
-    // Test planes whose normals are cross products of two edges, one from
-    // each hull.
-	auto e0iter = edgeSet0.begin();
-	auto e0end = edgeSet0.end();
-    for (/**/; e0iter != e0end; ++e0iter)
+    for (auto e0iter = edgeSet0.begin(); e0iter != edgeSet0.end(); ++e0iter)
     {
-        // Get edge.
-        diff0 = points0[e0iter->second] - points0[e0iter->first];
+        diff0 = points0.at(e0iter->second) - points0.at(e0iter->first);
 
-        std::set<std::pair<int,int> >::iterator e1iter = edgeSet0.begin();
-        std::set<std::pair<int,int> >::iterator e1end = edgeSet0.end();
-        for (/**/; e1iter != e1end; ++e1iter)
+        for (auto e1iter = edgeSet0.begin(); e1iter != edgeSet0.end(); ++e1iter)
         {
-            diff1 = points1[e1iter->second] - points1[e1iter->first];
+            diff1 = points1.at(e1iter->second) - points1.at(e1iter->first);
 
-            // Compute potential separating plane.
-            separatingPlane = Plane3<Real>(Vector3Tools<Real>::UnitCrossProduct(diff0,diff1),points0[e0iter->first]);
+            separatingPlane = Plane3<Real>(Vector3Tools<Real>::UnitCrossProduct(diff0, diff1), points0.at(e0iter->first));
 
-            // Determine if hull 0 is on same side of plane.
-            side0 = OnSameSide(separatingPlane, numTriangles0, indices0,points0);
-            side1 = OnSameSide(separatingPlane, numTriangles1, indices1,points1);
+            const auto side0 = OnSameSide(separatingPlane, indices0, points0);
+            const auto side1 = OnSameSide(separatingPlane, indices1, points1);
 
-            if (side0*side1 < 0)  // Plane separates hulls.
+            if (side0 * side1 < 0)
             {
-                mSeparated = true;
+                separated = true;
                 return;
             }
         }
     }
 
-    mSeparated = false;
+    separated = false;
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ContSeparatePoints3<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::ContSeparatePoints3<Real>::operator bool() noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return separated;
 }
 
 template <typename Real>
-Mathematics::SeparatePoints3<Real>
-	::operator bool()
+int Mathematics::ContSeparatePoints3<Real>::OnSameSide(const Plane3<Real>& plane, const std::vector<int>& indices, const std::vector<Vector3<Real>>& points)
 {
-    return mSeparated;
-}
+    auto posSide = 0;
+    auto negSide = 0;
 
-template <typename Real>
-int Mathematics::SeparatePoints3<Real>
-	::OnSameSide(const Plane3<Real>& plane,int numTriangles, const int* indices,const std::vector<Vector3<Real> >& points)
-{
-    // test if all points on same side of plane (nx,ny,nz)*(x,y,z) = c
-    int posSide = 0, negSide = 0;
-
+    const auto numTriangles = boost::numeric_cast<int>(indices.size());
     for (auto t = 0; t < numTriangles; ++t)
     {
         for (auto i = 0; i < 3; ++i)
         {
-			auto v = indices[3*t + i];
-			auto c0 = Vector3Tools<Real>::DotProduct(plane.GetNormal(),points[v]);
-			if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
+            const auto index = 3 * t + i;
+            auto v = indices.at(index);
+            auto c0 = Vector3Tools<Real>::DotProduct(plane.GetNormal(), points.at(v));
+            if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
             {
                 ++posSide;
             }
-			else if (c0 < plane.GetConstant() - Math<Real>::GetZeroTolerance())
+            else if (c0 < plane.GetConstant() - Math<Real>::GetZeroTolerance())
             {
                 ++negSide;
             }
-            
+
             if (posSide && negSide)
             {
-                // Plane splits point set.
                 return 0;
             }
         }
@@ -193,31 +185,28 @@ int Mathematics::SeparatePoints3<Real>
 }
 
 template <typename Real>
-int Mathematics::SeparatePoints3<Real>
-	::WhichSide(const Plane3<Real>& plane,int numTriangles, const int* indices, const std::vector<Vector3<Real> >& points)
+int Mathematics::ContSeparatePoints3<Real>::WhichSide(const Plane3<Real>& plane, const std::vector<int>& indices, const std::vector<Vector3<Real>>& points)
 {
-    // Establish which side of plane hull is on.
+    const auto numTriangles = boost::numeric_cast<int>(indices.size());
     for (auto t = 0; t < numTriangles; ++t)
     {
         for (auto i = 0; i < 3; ++i)
         {
-			auto v = indices[3*t + i];
-			auto c0 = Vector3Tools<Real>::DotProduct(plane.GetNormal(),points[v]);
+            const auto index = 3 * t + i;
+            auto v = indices.at(index);
+            auto c0 = Vector3Tools<Real>::DotProduct(plane.GetNormal(), points.at(v));
             if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
             {
-                // Positive side.
                 return +1;
             }
-			if (c0 < plane.GetConstant() - Math<Real>::GetZeroTolerance())
+            if (c0 < plane.GetConstant() - Math<Real>::GetZeroTolerance())
             {
-                // Negative side.
                 return -1;
             }
         }
     }
 
-    // Hull is effectively collinear.
     return 0;
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_DETAIL_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_SEPARATE_POINTS3_DETAIL_H

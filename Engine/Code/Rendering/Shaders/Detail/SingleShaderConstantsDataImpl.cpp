@@ -24,7 +24,7 @@ Rendering::SingleShaderConstantsDataImpl
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SingleShaderConstantsDataImpl ::SingleShaderConstantsDataImpl() noexcept
+Rendering::SingleShaderConstantsDataImpl::SingleShaderConstantsDataImpl() noexcept
     : m_Name{}, m_NumRegistersUsed{ 0 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -58,14 +58,14 @@ const string Rendering::SingleShaderConstantsDataImpl
 	return m_Name;
 }
 
-int Rendering::SingleShaderConstantsDataImpl ::GetNumRegistersUsed() const noexcept
+int Rendering::SingleShaderConstantsDataImpl::GetNumRegistersUsed() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	return m_NumRegistersUsed;
 }
 
-void Rendering::SingleShaderConstantsDataImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::SingleShaderConstantsDataImpl::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

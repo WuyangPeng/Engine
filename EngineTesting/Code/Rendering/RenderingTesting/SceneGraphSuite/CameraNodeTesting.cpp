@@ -42,7 +42,13 @@ void Rendering::CameraNodeTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
- 
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26409)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26429)
 void Rendering::CameraNodeTesting
 	::InitTest()
 {
@@ -237,7 +243,7 @@ void Rendering::CameraNodeTesting
 }
 
 void Rendering::CameraNodeTesting
-   ::ChildTest()
+  ::ChildTest()
 {
 //     CoreTools::OutTopLevel outTopLevel;
 // 	CameraSharedPtr firstCamera(new Camera(true, 1e-5f));

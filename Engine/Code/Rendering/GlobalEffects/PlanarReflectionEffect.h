@@ -40,7 +40,7 @@ namespace Rendering
 
         // Member access.
         int GetNumPlanes() const noexcept;
-        void SetPlane(int i, TrianglesMeshSharedPtr plane);
+        void SetPlane(int i, TrianglesMeshSharedPtr plane) noexcept;
         ConstTrianglesMeshSharedPtr GetPlane(int i) const noexcept;
         void SetReflectance(int i, float reflectance) noexcept;
         float GetReflectance(int i) const noexcept;

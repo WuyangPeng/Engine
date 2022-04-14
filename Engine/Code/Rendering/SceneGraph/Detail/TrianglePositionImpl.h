@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 19:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 19:03)
 
 #ifndef RENDERING_SCENE_GRAPH_TRIANGLES_POSITION_IMPL_H
 #define RENDERING_SCENE_GRAPH_TRIANGLES_POSITION_IMPL_H
@@ -24,14 +27,14 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        const APoint GetFirstPosition() const noexcept;
-        const APoint GetSecondPosition() const noexcept;
-        const APoint GetThirdPosition() const noexcept;
+        NODISCARD APoint GetFirstPosition() const noexcept;
+        NODISCARD APoint GetSecondPosition() const noexcept;
+        NODISCARD APoint GetThirdPosition() const noexcept;
 
     private:
-        APoint m_FirstPosition;
-        APoint m_SecondPosition;
-        APoint m_ThirdPosition;
+        APoint firstPosition;
+        APoint secondPosition;
+        APoint thirdPosition;
     };
 }
 

@@ -6,13 +6,12 @@
 
 #include "Toolset/SoundEffect/SoundEffectToolset/SoundEffectToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/SoundEffectClassInvariantMacro.h"
 
-SoundEffectToolset::Placeholder
-	::Placeholder() 
+SoundEffectToolset::Placeholder ::Placeholder() noexcept
 {
-	SOUND_EFFECT_SELF_CLASS_IS_VALID_9;
+    SOUND_EFFECT_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(SoundEffectToolset, Placeholder)

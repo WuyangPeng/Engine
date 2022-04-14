@@ -1,108 +1,107 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.3 (2019/09/02 13:08)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/ResourceManagerClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(ResourceManager, TestingHelper, "资源管理库") 
+using namespace std::literals;
 
-// private
-void ResourceManager::TestingHelper ::AddSuites()
+ResourceManager::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "资源管理库"s }
 {
-	AddMacroSuite(); 
-	AddThreeDimensionalModelSuite();
-	AddTextureSuite();
-	AddMaterialSuite();
-	AddFontSuite();
-	AddSkeletonSuite();
-	AddCollisionSuite();
-	AddPhysicalParametersSuite();
-	AddGameWorldMapSuite();
-	AddMiscellaneousSuite();
+    InitSuite();
+
+    RESOURCE_MANAGER_SELF_CLASS_IS_VALID_1;
 }
 
-void ResourceManager::TestingHelper
-	::AddMacroSuite()
-{
-	ADD_TEST_BEGIN(macroSuite, "宏");
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ResourceManager, TestingHelper)
 
-	ADD_TEST_END(macroSuite);
+void ResourceManager::TestingHelper::InitSuite()
+{
+    AddMacroSuite();
+    AddThreeDimensionalModelSuite();
+    AddTextureSuite();
+    AddMaterialSuite();
+    AddFontSuite();
+    AddSkeletonSuite();
+    AddCollisionSuite();
+    AddPhysicalParametersSuite();
+    AddGameWorldMapSuite();
+    AddMiscellaneousSuite();
 }
 
-void ResourceManager::TestingHelper
-	::AddThreeDimensionalModelSuite()
+void ResourceManager::TestingHelper ::AddMacroSuite()
 {
-	ADD_TEST_BEGIN(threeDimensionalModelSuite, "三维模型资源");
+    auto macroSuite = GenerateSuite("宏");
 
-	ADD_TEST_END(threeDimensionalModelSuite);
+    AddSuite(macroSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddTextureSuite()
+void ResourceManager::TestingHelper ::AddThreeDimensionalModelSuite()
 {
-	ADD_TEST_BEGIN(textureSuite, "纹理资源");
+    auto threeDimensionalModelSuite = GenerateSuite("三维模型资源");
 
-	ADD_TEST_END(textureSuite);
+    AddSuite(threeDimensionalModelSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddMaterialSuite()
+void ResourceManager::TestingHelper ::AddTextureSuite()
 {
-	ADD_TEST_BEGIN(materialSuite, "材质资源");
+    auto textureSuite = GenerateSuite("纹理资源");
 
-	ADD_TEST_END(materialSuite);
+    AddSuite(textureSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddFontSuite()
+void ResourceManager::TestingHelper ::AddMaterialSuite()
 {
-	ADD_TEST_BEGIN(fontSuite, "字体资源");
+    auto materialSuite = GenerateSuite("材质资源");
 
-	ADD_TEST_END(fontSuite);
+    AddSuite(materialSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddSkeletonSuite()
+void ResourceManager::TestingHelper ::AddFontSuite()
 {
-	ADD_TEST_BEGIN(skeletonSuite, "骨骼资源");
+    auto fontSuite = GenerateSuite("字体资源");
 
-	ADD_TEST_END(skeletonSuite);
+    AddSuite(fontSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddCollisionSuite()
+void ResourceManager::TestingHelper ::AddSkeletonSuite()
 {
-	ADD_TEST_BEGIN(collisionSuite, "碰撞资源");
+    auto skeletonSuite = GenerateSuite("骨骼资源");
 
-	ADD_TEST_END(collisionSuite);
+    AddSuite(skeletonSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddPhysicalParametersSuite()
+void ResourceManager::TestingHelper ::AddCollisionSuite()
 {
-	ADD_TEST_BEGIN(physicalParametersSuite, "物理参数");
+    auto collisionSuite = GenerateSuite("碰撞资源");
 
-	ADD_TEST_END(physicalParametersSuite);
+    AddSuite(collisionSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddGameWorldMapSuite()
+void ResourceManager::TestingHelper ::AddPhysicalParametersSuite()
 {
-	ADD_TEST_BEGIN(gameWorldMapSuite, "游戏世界和地图");
+    auto physicalParametersSuite = GenerateSuite("物理参数");
 
-	ADD_TEST_END(gameWorldMapSuite);
+    AddSuite(physicalParametersSuite);
 }
 
-void ResourceManager::TestingHelper
-	::AddMiscellaneousSuite()
+void ResourceManager::TestingHelper ::AddGameWorldMapSuite()
 {
-	ADD_TEST_BEGIN(miscellaneousSuite, "杂项");
+    auto gameWorldMapSuite = GenerateSuite("游戏世界和地图");
 
-	ADD_TEST_END(miscellaneousSuite);
+    AddSuite(gameWorldMapSuite);
 }
 
+void ResourceManager::TestingHelper ::AddMiscellaneousSuite()
+{
+    auto miscellaneousSuite = GenerateSuite("杂项");
+
+    AddSuite(miscellaneousSuite);
+}

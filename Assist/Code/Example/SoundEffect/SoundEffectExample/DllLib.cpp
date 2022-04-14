@@ -8,20 +8,19 @@
 
 #include "Example/SoundEffect/SoundEffectExample/SoundEffectExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_SOUND_EFFECT_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_SOUND_EFFECT_EXAMPLE_STATIC
+#else  // BUILDING_SOUND_EFFECT_EXAMPLE_STATIC
 
-	namespace SoundEffectExample
-	{
-		void StaticDllLib()
-		{
+namespace SoundEffectExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_SOUND_EFFECT_EXAMPLE_STATIC
+#endif  // !BUILDING_SOUND_EFFECT_EXAMPLE_STATIC

@@ -31,7 +31,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Texture2ColorBlendEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture2ColorBlendEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture2ColorBlendEffect);
 
-Rendering::Texture2ColorBlendEffect ::Texture2ColorBlendEffect()
+Rendering::Texture2ColorBlendEffect::Texture2ColorBlendEffect()
 {
     VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Texture2ColorBlend", 3, 3, 1, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
@@ -85,12 +85,12 @@ Rendering::Texture2ColorBlendEffect ::Texture2ColorBlendEffect()
     InsertTechnique(technique);
 }
 
-Rendering::PixelShader* Rendering ::Texture2ColorBlendEffect::GetPixelShader() const
+Rendering::PixelShader* Rendering::Texture2ColorBlendEffect::GetPixelShader() const
 {
     return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect ::CreateInstance(Texture2D* texture0, Texture2D* texture1) const
+Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect::CreateInstance(Texture2D* texture0, Texture2D* texture1) const
 {
     VisualEffectInstance* instance = nullptr;  //CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
@@ -114,10 +114,12 @@ Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect ::CreateIns
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect ::CreateUniqueInstance(Texture2D* texture0, ShaderFlags::SamplerFilter filter0, ShaderFlags::SamplerCoordinate coordinate00, ShaderFlags::SamplerCoordinate coordinate01,
+Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect::CreateUniqueInstance(Texture2D* texture0, ShaderFlags::SamplerFilter filter0, ShaderFlags::SamplerCoordinate coordinate00, ShaderFlags::SamplerCoordinate coordinate01,
                                                                                             Texture2D* texture1, ShaderFlags::SamplerFilter filter1, ShaderFlags::SamplerCoordinate coordinate10, ShaderFlags::SamplerCoordinate coordinate11)
 {
     const Texture2ColorBlendEffect* effect = nullptr;  // CoreTools::New0<Texture2ColorBlendEffect>();
+    if (effect == nullptr)
+        return nullptr;
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter0);
     pshader->SetCoordinate(0, 0, coordinate00);
@@ -130,12 +132,12 @@ Rendering::VisualEffectInstance* Rendering::Texture2ColorBlendEffect ::CreateUni
 
 // Streaming support.
 
-Rendering::Texture2ColorBlendEffect ::Texture2ColorBlendEffect(LoadConstructor value)
+Rendering::Texture2ColorBlendEffect::Texture2ColorBlendEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::Texture2ColorBlendEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::Texture2ColorBlendEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -144,12 +146,12 @@ void Rendering::Texture2ColorBlendEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Texture2ColorBlendEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::Texture2ColorBlendEffect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::Texture2ColorBlendEffect ::PostLink()
+void Rendering::Texture2ColorBlendEffect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -181,12 +183,12 @@ void Rendering::Texture2ColorBlendEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::Texture2ColorBlendEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::Texture2ColorBlendEffect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::Texture2ColorBlendEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::Texture2ColorBlendEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -195,7 +197,7 @@ void Rendering::Texture2ColorBlendEffect ::Save(CoreTools::BufferTarget& target)
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::Texture2ColorBlendEffect ::GetStreamingSize() const
+int Rendering::Texture2ColorBlendEffect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

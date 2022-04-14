@@ -1,94 +1,84 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 13:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/24 22:02)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "RandomHypersphere.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Base/RandomDetail.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26461)
-static void RecurseRandomPoint (int dimension, double* point)
+
+static void RecurseRandomPoint(int dimension, std::vector<double>& point, int index)
 {
-    // Select random point on circle.
-    const double angle = Mathematics::RandomD::IntervalRandom(0.0,Mathematics::MathD::GetTwoPI());
-    const double cs = Mathematics::MathD::Cos(angle);
-   const  double sn = Mathematics::MathD::Sin(angle);
+    const auto angle = Mathematics::RandomD::IntervalRandom(0.0, Mathematics::MathD::GetTwoPI());
+    const auto cs = Mathematics::MathD::Cos(angle);
+    const auto sn = Mathematics::MathD::Sin(angle);
 
     if (dimension > 3)
     {
-        // Split components into two sets and adjust values.
-        int i = 0;
-		int half = dimension/2;
-        for (i = 0; i < half; ++i)
+        const auto half = dimension / 2;
+        for (auto i = 0; i < half; ++i)
         {
-            point[i] *= cs;
+            const auto pointIndex = index + i;
+            point.at(pointIndex) *= cs;
         }
-        for (i = half; i < dimension; ++i)
+        for (auto i = half; i < dimension; ++i)
         {
-            point[i] *= sn;
+            const auto pointIndex = index + i;
+            point.at(pointIndex) *= sn;
         }
 
-        // Recurse on each half of the components.
-        RecurseRandomPoint(half, point);
-        RecurseRandomPoint(dimension - half, point + half);
+        RecurseRandomPoint(half, point, index);
+        RecurseRandomPoint(dimension - half, point, index + half);
     }
     else if (dimension == 3)
     {
-        const double value = Mathematics::RandomD::SymmetricRandom();
-        const double complement = Mathematics::MathD::Sqrt(Mathematics::MathD::FAbs(1.0 - value*value));
-        point[0] *= value;
-        point[1] *= complement*cs;
-        point[2] *= complement*sn;
+        const auto value = Mathematics::RandomD::SymmetricRandom();
+        const auto complement = Mathematics::MathD::Sqrt(Mathematics::MathD::FAbs(1.0 - value * value));
+        point.at(index) *= value;
+        point.at(boost::numeric_cast<size_t>(index) + 1) *= complement * cs;
+        point.at(boost::numeric_cast<size_t>(index) + 2) *= complement * sn;
     }
     else if (dimension == 2)
     {
-        point[0] *= cs;
-        point[1] *= sn;
+        point.at(index) *= cs;
+        point.at(boost::numeric_cast<size_t>(index) + 1) *= sn;
     }
 }
 
-void Mathematics::RandomPointOnHypersphere (int dimension, double* point)
+void Mathematics::RandomPointOnHypersphere(int dimension, std::vector<double>& point)
 {
-    for (int i = 0; i < dimension; ++i)
+    for (auto i = 0; i < dimension; ++i)
     {
-        point[i] = 1.0;
+        point.at(i) = 1.0;
     }
 
-    RecurseRandomPoint(dimension, point);
+    RecurseRandomPoint(dimension, point, 0);
 }
 
-void Mathematics::Histogram (int dimension, double angle, int numPoints,double** points, int* histogram) noexcept
+void Mathematics::Histogram(int dimension, double angle, int numPoints, std::vector<std::vector<double>>& points, std::vector<int>& histogram)
 {
-    // Count the number of points located in the cone of specified angle
-    // about each of the samples.
-    const double cs = MathD::Cos(angle);
+    const auto cs = MathD::Cos(angle);
 
-    for (int i = 0; i < numPoints; ++i)
+    for (auto i = 0; i < numPoints; ++i)
     {
-        histogram[i] = 0;
-        for (int j = 0; j < numPoints; ++j)
+        histogram.at(i) = 0;
+        for (auto j = 0; j < numPoints; ++j)
         {
-            // Compute dot product between points P[i] and P[j].
-            double dot = 0;
-            for (int k = 0; k < dimension; ++k)
+            auto dot = 0.0;
+            for (auto k = 0; k < dimension; ++k)
             {
-                dot += points[i][k]*points[j][k];
+                dot += points.at(i).at(k) * points.at(j).at(k);
             }
             if (dot >= cs)
             {
-                histogram[i]++;
+                ++histogram.at(i);
             }
         }
     }
 }
-
-#include STSTEM_WARNING_POP

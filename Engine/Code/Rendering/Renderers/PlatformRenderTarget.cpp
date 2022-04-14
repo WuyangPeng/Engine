@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/OpenGLRenderTarget.h"
 
-Rendering::PlatformRenderTarget ::PlatformRenderTarget(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::PlatformRenderTarget::PlatformRenderTarget(Renderer* renderer, const RenderTarget* renderTarget)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -26,7 +26,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PlatformRenderTarget, Enabl
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PlatformRenderTarget, Disable, Renderer*, void)
 
-Rendering::ConstTexture2DSharedPtr Rendering::PlatformRenderTarget ::ReadColor(int index, Renderer* renderer)
+Rendering::ConstTexture2DSharedPtr Rendering::PlatformRenderTarget::ReadColor(int index, Renderer* renderer)
 {
     ;
 

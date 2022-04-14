@@ -1,109 +1,78 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/17 16:11)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "ParametricSurface.h"
 #include "BSplineBasis.h"
+#include "ParametricSurface.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class   NURBSRectangle : public ParametricSurface<Real>
-	{
-	public:
-		// Construction and destruction.   The caller is responsible for deleting
-		// the input arrays if they were dynamically allocated.  Internal copies
-		// of the arrays are made, so to dynamically change control points,
-		// control weights, or knots, you must use the 'SetControlPoint',
-		// 'GetControlPoint', 'SetControlWeight', 'GetControlWeight', and 'Knot'
-		// member functions.
+    template <typename Real>
+    class NURBSRectangle : public ParametricSurface<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		// The homogeneous input points are (x,y,z,w) where the (x,y,z) values are
-		// stored in the akCtrlPoint array and the w values are stored in the
-		// afCtrlWeight array.  The output points from curve evaluations are of
-		// the form (x',y',z') = (x/w,y/w,z/w).
+        using ClassType = NURBSRectangle<Real>;
+        using ParentType = ParametricSurface<Real>;
 
-		// Spline types for curves are
-		//   open uniform (OU)
-		//   periodic uniform (PU)
-		//   open nonuniform (ON)
-		// For tensor product surfaces, you have to choose a type for each of two
-		// dimensions, leading to nine possible spline types for surfaces.  The
-		// constructors below represent these choices.
+    public:
+        NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
 
-		// (OU,OU), (OU,PU), (PU,OU), or (PU,PU)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
+        NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, const std::vector<Real>& vKnot);
 
-		// (OU,ON) or (PU,ON)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot);
+        NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, const std::vector<Real>& uKnot, bool vOpen);
 
-		// (ON,OU) or (ON,PU)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints,Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree,int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen);
+        NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Vector3<Real>>>& ctrlPoint, const std::vector<std::vector<Real>>& ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, const std::vector<Real>& uKnot, const std::vector<Real>& vKnot);
 
-		// (ON,ON)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints,Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree,int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		virtual ~NURBSRectangle();
+        NODISCARD int GetNumCtrlPoints(int dim) const;
+        NODISCARD int GetDegree(int dim) const;
+        NODISCARD bool IsOpen(int dim) const;
+        NODISCARD bool IsUniform(int dim) const;
+        NODISCARD bool IsLoop(int dim) const;
 
-		int GetNumCtrlPoints(int dim) const;
-		int GetDegree(int dim) const;
-		bool IsOpen(int dim) const;
-		bool IsUniform(int dim) const;
-		bool IsLoop(int dim) const;
+        void SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl);
+        NODISCARD Vector3<Real> GetControlPoint(int uIndex, int vIndex) const;
+        void SetControlWeight(int uIndex, int vIndex, Real weight);
+        NODISCARD Real GetControlWeight(int uIndex, int vIndex) const;
 
-		// Control points and weights may be changed at any time.  If either input
-		// index is invalid, GetControlPoint returns a vector whose components
-		// are all MAX_REAL, and GetControlWeight returns MAX_REAL.
-		void SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl);
-		Vector3<Real> GetControlPoint(int uIndex, int vIndex) const;
-		void SetControlWeight(int uIndex, int vIndex, Real weight);
-		Real GetControlWeight(int uIndex, int vIndex) const;
+        void SetKnot(int dim, int i, Real knot);
+        NODISCARD Real GetKnot(int dim, int i) const;
 
-		// The knot values can be changed only if the surface is nonuniform in the
-		// selected dimension and only if the input index is valid.  If these
-		// conditions are not satisfied, GetKnot returns MAX_REAL.
-		void SetKnot(int dim, int i, Real knot);
-		Real GetKnot(int dim, int i) const;
+        NODISCARD Vector3<Real> P(Real u, Real v) const override;
+        NODISCARD Vector3<Real> PU(Real u, Real v) const override;
+        NODISCARD Vector3<Real> PV(Real u, Real v) const override;
+        NODISCARD Vector3<Real> PUU(Real u, Real v) const override;
+        NODISCARD Vector3<Real> PUV(Real u, Real v) const override;
+        NODISCARD Vector3<Real> PVV(Real u, Real v) const override;
 
-		// The spline is defined for 0 <= u <= 1 and 0 <= v <= 1.  The input
-		// values should be in this domain.  Any inputs smaller than 0 are clamped
-		// to 0.  Any inputs larger than 1 are clamped to 1.
-		virtual Vector3<Real> P(Real u, Real v) const;
-		virtual Vector3<Real> PU(Real u, Real v) const;
-		virtual Vector3<Real> PV(Real u, Real v) const;
-		virtual Vector3<Real> PUU(Real u, Real v) const;
-		virtual Vector3<Real> PUV(Real u, Real v) const;
-		virtual Vector3<Real> PVV(Real u, Real v) const;
+        void Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const;
 
-		// If you need position and derivatives at the same time, it is more
-		// efficient to call these functions.  Pass the addresses of those
-		// quantities whose values you want.  You may pass 0 in any argument
-		// whose value you do not want.
-		void Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU,Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV,Vector3<Real>* derVV) const;
+    protected:
+        void CreateControl(const std::vector<std::vector<Vector3<Real>>>& newCtrlPoint, const std::vector<std::vector<Real>>& newCtrlWeight);
 
-	protected:
-		// Replicate the necessary number of control points when the Create
-		// function has bLoop equal to true, in which case the spline surface
-		// must be a closed surface in the corresponding dimension.
-		void CreateControl(Vector3<Real>** ctrlPoint, Real** ctrlWeight);
-
-		int mNumUCtrlPoints, mNumVCtrlPoints;
-		Vector3<Real>** mCtrlPoint;  // ctrl[unum][vnum]
-		Real** mCtrlWeight;    // weight[unum][vnum]
-		bool mLoop[2];
-		BSplineBasis<Real> mBasis[2];
-		int mUReplicate, mVReplicate;
-	};
-
-	using NURBSRectanglef = NURBSRectangle<float>;
-	using NURBSRectangled = NURBSRectangle<double>;
+    private:
+        int numUCtrlPoints;
+        int numVCtrlPoints;
+        std::vector<std::vector<Vector3<Real>>> ctrlPoint;
+        std::vector<std::vector<Real>> ctrlWeight;
+        std::array<bool, 2> loop;
+        std::array<BSplineBasis<Real>, 2> basis;
+        int uReplicate;
+        int vReplicate;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_NURBS_RECTANGLE_H

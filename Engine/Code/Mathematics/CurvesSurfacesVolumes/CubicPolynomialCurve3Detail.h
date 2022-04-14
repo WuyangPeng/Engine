@@ -1,117 +1,106 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 21:55)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_DETAIL_H
 
 #include "CubicPolynomialCurve3.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-CubicPolynomialCurve3<Real>::CubicPolynomialCurve3 (Polynomial<Real>* xPoly, Polynomial<Real>* yPoly, Polynomial<Real>* zPoly)
-	: PolynomialCurve3<Real>{ xPoly, yPoly, zPoly }
+Mathematics::CubicPolynomialCurve3<Real>::CubicPolynomialCurve3(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly, const Polynomial<Real>& zPoly)
+    : ParentType{ xPoly, yPoly, zPoly }, vertices{}
 {
-    MATHEMATICS_ASSERTION_0(xPoly && yPoly && zPoly, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(xPoly->GetDegree() == 3, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(yPoly->GetDegree() == 3, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(xPoly->GetDegree() == 3, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == 3, "无效输入\n");
+    MATHEMATICS_ASSERTION_0(yPoly.GetDegree() == 3, "无效输入\n");
+    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == 3, "无效输入\n");
+}
 
-    mNumVertices = 0;
-    mVertices = 0;
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::CubicPolynomialCurve3<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::CubicPolynomialCurve3<Real>::GetNumVertices() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(vertices.size());
 }
 
 template <typename Real>
-CubicPolynomialCurve3<Real>::~CubicPolynomialCurve3 ()
+std::vector<Mathematics::Vector3<Real>> Mathematics::CubicPolynomialCurve3<Real>::GetVertices() const
 {
-    DELETE1(mVertices);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertices;
 }
 
 template <typename Real>
-int CubicPolynomialCurve3<Real>::GetNumVertices () const
+void Mathematics::CubicPolynomialCurve3<Real>::Tessellate(int level)
 {
-    return mNumVertices;
-}
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-template <typename Real>
-const Vector3<Real>* CubicPolynomialCurve3<Real>::GetVertices () const
-{
-    return mVertices;
-}
+    const auto twoPowL = (1 << level);
+    const auto numVertices = twoPowL + 1;
 
-template <typename Real>
-Vector3<Real>* CubicPolynomialCurve3<Real>::GetVertices ()
-{
-    return mVertices;
-}
+    vertices.resize(numVertices);
 
-template <typename Real>
-void CubicPolynomialCurve3<Real>::Tessellate (int level)
-{
-    // Vertices V = (2^L+1).
-	auto twoPowL = (1 << level);
-    mNumVertices = twoPowL + 1;
-    DELETE1(mVertices);
-    mVertices = nullptr;  // NEW1<Vector3<Real> >(mNumVertices);
+    IntervalParameters ip{};
+    ip.i0 = 0;
+    ip.i1 = twoPowL;
 
-    // Indices of endpoints, I[t].
-    IntervalParameters IP;
-    IP.I0 = 0;
-    IP.I1 = twoPowL;
+    vertices.at(ip.i0) = this->GetPosition(this->GetMinTime());
+    vertices.at(ip.i1) = this->GetPosition(this->GetMaxTime());
 
-    // Vertices for subdivision.
-    Vector3<Real>* X = mVertices;
-    X[IP.I0] = GetPosition(mTMin);
-    X[IP.I1] = GetPosition(mTMax);
-
-    // Recursive subdivision.
     if (level > 0)
     {
-        IP.Xuu[0] = GetSecondDerivative(mTMin);
-        IP.Xuu[1] = GetSecondDerivative(mTMax);
-        Subdivide(--level, Real{0.25}, X, IP);
+        ip.xuu.at(0) = this->GetSecondDerivative(this->GetMinTime());
+        ip.xuu.at(1) = this->GetSecondDerivative(this->GetMaxTime());
+        Subdivide(--level, Math::GetRational(1, 4), vertices, ip);
     }
 }
 
 template <typename Real>
-void CubicPolynomialCurve3<Real>::Subdivide (int level, Real dsqr, Vector3<Real>* X, IntervalParameters& IP)
+void Mathematics::CubicPolynomialCurve3<Real>::Subdivide(int level, Real dsqr, std::vector<Vector3<Real>>& x, IntervalParameters& ip)
 {
-    // Subdivision index.
-	auto IMid = (IP.I0 + IP.I1) >> 1;
+    const auto iMid = (ip.i0 + ip.i1) >> 1;
 
-    // Vertices.
-	auto XuuM = (Real{0.5})*(IP.Xuu[0] + IP.Xuu[1]);
-    X[IMid] = (Real{0.5})*(X[IP.I0] + X[IP.I1] - dsqr*XuuM);
+    auto xuuM = Math::GetRational(1, 2) * (ip.xuu.at(0) + ip.xuu.at(1));
+    x.at(iMid) = Math::GetRational(1, 2) * (x.at(ip.i0) + x.at(ip.i1) - dsqr * xuuM);
 
-    // Recurse on two children.
     if (level > 0)
     {
         --level;
-        dsqr *= Real{0.25};
+        dsqr *= Math::GetRational(1, 4);
 
-        IntervalParameters subIP;
+        IntervalParameters subIP{};
 
-        // Subinterval [t0,tM].
-        subIP.I0 = IP.I0;
-        subIP.I1 = IMid;
-        subIP.Xuu[0] = IP.Xuu[0];
-        subIP.Xuu[1] = XuuM;
-        Subdivide(level, dsqr, X, subIP);
+        subIP.i0 = ip.i0;
+        subIP.i1 = iMid;
+        subIP.xuu.at(0) = ip.xuu.at(0);
+        subIP.xuu.at(1) = xuuM;
+        Subdivide(level, dsqr, x, subIP);
 
-        // Subinterval [tM,t1].
-        subIP.I0 = IMid;
-        subIP.I1 = IP.I1;
-        subIP.Xuu[0] = XuuM;
-        subIP.Xuu[1] = IP.Xuu[1];
-        Subdivide(level, dsqr, X, subIP);
+        subIP.i0 = iMid;
+        subIP.i1 = ip.i1;
+        subIP.xuu.at(0) = xuuM;
+        subIP.xuu.at(1) = ip.xuu.at(1);
+        Subdivide(level, dsqr, x, subIP);
     }
 }
 
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_CUBIC_POLYNOMIAL_CURVE3_DETAIL_H

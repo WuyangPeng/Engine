@@ -11,7 +11,7 @@
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::OpenGLTexture1D ::OpenGLTexture1D([[maybe_unused]] Renderer* renderer, const Texture1D* texture)
+Rendering::OpenGLTexture1D::OpenGLTexture1D([[maybe_unused]] Renderer* renderer, const Texture1D* texture)
     : m_OpenGLTextureData{ texture }
 {	
 	 
@@ -23,7 +23,7 @@ Rendering::OpenGLTexture1D ::OpenGLTexture1D([[maybe_unused]] Renderer* renderer
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture1D)
 
-void Rendering::OpenGLTexture1D ::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+void Rendering::OpenGLTexture1D::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -32,7 +32,7 @@ void Rendering::OpenGLTexture1D ::Enable([[maybe_unused]] Renderer* renderer, in
  
 }
 
-void Rendering::OpenGLTexture1D ::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+void Rendering::OpenGLTexture1D::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

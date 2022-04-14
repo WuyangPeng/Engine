@@ -34,7 +34,7 @@ namespace Rendering
 		
 		// Convenience for creating an instance.  The application does not have to
 		// create the effect explicitly in order to create an instance from it.
-		static VisualEffectInstance* CreateUniqueInstance (Light* light,   Material* material);
+                static VisualEffectInstance* CreateUniqueInstance(Light* light, Material* material) noexcept;
 		
 	private:
 		static int msDx9VRegisters[1];

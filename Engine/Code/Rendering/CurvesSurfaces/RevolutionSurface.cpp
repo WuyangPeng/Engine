@@ -28,12 +28,13 @@
 #include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26493)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RevolutionSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RevolutionSurface);
 
-Rendering::RevolutionSurface ::RevolutionSurface(Mathematics::Curve2f* curve, float xCenter, TopologyType topology, int numCurveSamples,
-                                                 int numRadialSamples, bool sampleByArcLength, bool outsideView, VertexFormatSharedPtr vformat)
+Rendering::RevolutionSurface::RevolutionSurface(Mathematics::Curve2<float>* curve, float xCenter, TopologyType topology, int numCurveSamples,
+                                                int numRadialSamples, bool sampleByArcLength, bool outsideView, VertexFormatSharedPtr vformat)
     : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mCurve(curve), mXCenter(xCenter), mTopology(topology),
       mNumCurveSamples(numCurveSamples), mNumRadialSamples(numRadialSamples), mSin(0), mCos(0), mSamples(0), mSampleByArcLength(sampleByArcLength)
 {
@@ -78,7 +79,7 @@ Rendering::RevolutionSurface ::RevolutionSurface(Mathematics::Curve2f* curve, fl
     SetIndexBuffer(mesh->GetIndexBuffer());
 }
 
-Rendering::RevolutionSurface ::~RevolutionSurface()
+Rendering::RevolutionSurface::~RevolutionSurface()
 {
     EXCEPTION_TRY
     {
@@ -89,13 +90,17 @@ Rendering::RevolutionSurface ::~RevolutionSurface()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::RevolutionSurface ::ComputeSampleData()
+void Rendering::RevolutionSurface::ComputeSampleData() noexcept
 {
     // Compute slice vertex coefficients.  The first and last coefficients
     // are duplicated to allow a closed cross section that has two different
     // pairs of texture coordinates at the shared vertex.
     mSin = nullptr;  // NEW1<float>(mNumRadialSamples + 1);
     mCos = nullptr;  // NEW1<float>(mNumRadialSamples + 1);
+    if (mSin == nullptr)
+        return;
+    if (mCos == nullptr)
+        return;
     const float invNumRadialSamples = 1.0f / (float)mNumRadialSamples;
     for (int i = 0; i < mNumRadialSamples; ++i)
     {
@@ -103,6 +108,7 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
         mCos[i] = Mathematics::MathF::Cos(angle);
         mSin[i] = Mathematics::MathF::Sin(angle);
     }
+
     mSin[mNumRadialSamples] = mSin[0];
     mCos[mNumRadialSamples] = mCos[0];
 
@@ -110,7 +116,7 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
     mSamples = nullptr;  // NEW1<Mathematics::Vector3F>(mNumCurveSamples);
 }
 
-void Rendering::RevolutionSurface ::UpdateSurface()
+void Rendering::RevolutionSurface::UpdateSurface()
 {
     // Parameters for evaluating curve.
     const float tMin = mCurve->GetMinTime();
@@ -187,7 +193,7 @@ CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::RevolutionSurfac
 
 void Rendering::RevolutionSurface::UpdateDisk()
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     // Get the initial ray.
     int c = 0;
@@ -217,7 +223,7 @@ void Rendering::RevolutionSurface::UpdateDisk()
 
 void Rendering::RevolutionSurface::UpdateSphere()
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     int numVertices = GetVertexBuffer()->GetNumElements();
 
@@ -259,9 +265,9 @@ void Rendering::RevolutionSurface::UpdateSphere()
     }
 }
 
-void Rendering::RevolutionSurface ::UpdateCylinder()
+void Rendering::RevolutionSurface::UpdateCylinder()
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     // Set the initial and final ray.
     int c = 0, i = 0;
@@ -295,9 +301,9 @@ void Rendering::RevolutionSurface ::UpdateCylinder()
     }
 }
 
-void Rendering::RevolutionSurface ::UpdateTorus()
+void Rendering::RevolutionSurface::UpdateTorus()
 {
-    VertexBufferAccessor vba(this);
+    VertexBufferAccessor vba(*this);
 
     // Set the initial and final ray.
     int numVertices = GetVertexBuffer()->GetNumElements();
@@ -341,13 +347,13 @@ void Rendering::RevolutionSurface ::UpdateTorus()
 
 // Streaming support.
 
-Rendering::RevolutionSurface ::RevolutionSurface(LoadConstructor value)
+Rendering::RevolutionSurface::RevolutionSurface(LoadConstructor value)
     : ParentType(value), mCurve(0), mXCenter(0.0f), mTopology(TopologyType::MAX_TOPOLOGY_TYPES), mNumCurveSamples(0),
       mNumRadialSamples(0), mSin(0), mCos(0), mSamples(0), mSampleByArcLength(false)
 {
 }
 
-void Rendering::RevolutionSurface ::Load(CoreTools::BufferSource& source)
+void Rendering::RevolutionSurface::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -367,22 +373,22 @@ void Rendering::RevolutionSurface ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::RevolutionSurface ::Link(CoreTools::ObjectLink& source)
+void Rendering::RevolutionSurface::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 }
 
-void Rendering::RevolutionSurface ::PostLink()
+void Rendering::RevolutionSurface::PostLink()
 {
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RevolutionSurface ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::RevolutionSurface::Register(CoreTools::ObjectRegister& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::RevolutionSurface ::Save(CoreTools::BufferTarget& target) const
+void Rendering::RevolutionSurface::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -407,7 +413,7 @@ void Rendering::RevolutionSurface ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::RevolutionSurface ::GetStreamingSize() const
+int Rendering::RevolutionSurface::GetStreamingSize() const
 {
     int size = ParentType::GetStreamingSize();
     size += sizeof(mXCenter);
@@ -420,37 +426,37 @@ int Rendering::RevolutionSurface ::GetStreamingSize() const
     return size;
 }
 
-int Rendering::RevolutionSurface ::GetCurveSamples() const noexcept
+int Rendering::RevolutionSurface::GetCurveSamples() const noexcept
 {
     return mNumCurveSamples;
 }
 
-int Rendering::RevolutionSurface ::GetRadialSamples() const noexcept
+int Rendering::RevolutionSurface::GetRadialSamples() const noexcept
 {
     return mNumRadialSamples;
 }
 
-void Rendering::RevolutionSurface ::SetCurve(Mathematics::Curve2f* curve) noexcept
+void Rendering::RevolutionSurface::SetCurve(Mathematics::Curve2<float>* curve) noexcept
 {
     mCurve = curve;
 }
 
-const Mathematics::Curve2f* Rendering::RevolutionSurface ::GetCurve() const noexcept
+const Mathematics::Curve2<float>* Rendering::RevolutionSurface::GetCurve() const noexcept
 {
     return mCurve;
 }
 
-Rendering::RevolutionSurface::TopologyType Rendering::RevolutionSurface ::GetTopology() const noexcept
+Rendering::RevolutionSurface::TopologyType Rendering::RevolutionSurface::GetTopology() const noexcept
 {
     return mTopology;
 }
 
-void Rendering::RevolutionSurface ::SetSampleByArcLength(bool sampleByArcLength) noexcept
+void Rendering::RevolutionSurface::SetSampleByArcLength(bool sampleByArcLength) noexcept
 {
     mSampleByArcLength = sampleByArcLength;
 }
 
-bool Rendering::RevolutionSurface ::GetSampleByArcLength() const noexcept
+bool Rendering::RevolutionSurface::GetSampleByArcLength() const noexcept
 {
     return mSampleByArcLength;
 }

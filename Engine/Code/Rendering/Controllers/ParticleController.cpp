@@ -206,7 +206,7 @@ void Rendering::ParticleController
 		const auto numActive = m_Particles->GetNumActive();
 		for (auto i = 0; i < numActive; ++i)
 		{
-			auto position = m_Particles->GetPosition(i);
+			auto position = m_Particles->GetParticlesPosition(i);
 			auto size = m_Particles->GetSize(i);
 
 			const auto dSize = ctrlTime * GetParticleSizeChange(i);
@@ -231,7 +231,7 @@ Rendering::ParticleController
 }
 
 int Rendering::ParticleController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -242,7 +242,7 @@ int Rendering::ParticleController
 	return size;
 }
 
-uint64_t Rendering::ParticleController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::ParticleController::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -250,7 +250,7 @@ uint64_t Rendering::ParticleController ::Register(CoreTools::ObjectRegister& tar
 }
 
 void Rendering::ParticleController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -264,7 +264,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Link (CoreTools::ObjectLink& source)
+::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -272,7 +272,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
@@ -286,7 +286,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Load (CoreTools::BufferSource& source)
+::Load (CoreTools::BufferSource& source)
 {
 	;
     

@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Rendering::SurfacePatchFrame ::SurfacePatchFrame(const APoint& position, const AVector& tangent0,
+Rendering::SurfacePatchFrame::SurfacePatchFrame(const APoint& position, const AVector& tangent0,
                                                  const AVector& tangent1, const AVector& normal)
     : impl(position, tangent0, tangent1, normal)
 {

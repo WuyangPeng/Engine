@@ -30,7 +30,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarShadowEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PlanarShadowEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PlanarShadowEffect);
 
-Rendering::PlanarShadowEffect ::PlanarShadowEffect(int numPlanes, Node* shadowCaster)
+Rendering::PlanarShadowEffect::PlanarShadowEffect(int numPlanes, Node* shadowCaster)
     : mNumPlanes{ numPlanes }, mShadowCaster{ shadowCaster }
 {
     mPlanes = nullptr;  // NEW1<TrianglesMeshSharedPtr>(mNumPlanes);
@@ -41,7 +41,7 @@ Rendering::PlanarShadowEffect ::PlanarShadowEffect(int numPlanes, Node* shadowCa
     mDepthState = std::make_shared<DepthState>();
     mStencilState = std::make_shared<StencilState>();
 
-    mMaterial = std::make_shared<Material>();
+    mMaterial = Material::Create();
     mMaterialEffect = std::make_shared<MaterialEffect>();
     mMaterialEffectInstance.reset(mMaterialEffect->CreateInstance(mMaterial.get()));
 
@@ -51,18 +51,18 @@ Rendering::PlanarShadowEffect ::PlanarShadowEffect(int numPlanes, Node* shadowCa
     const_cast<ShaderFloat*>(sfloat.get())->EnableUpdater();
 }
 
-Rendering::PlanarShadowEffect ::~PlanarShadowEffect()
+Rendering::PlanarShadowEffect::~PlanarShadowEffect()
 {
     EXCEPTION_TRY
     {
-//         DELETE1(mPlanes);
-//         DELETE1(mProjectors);
-//         DELETE1(mShadowColors);
+        //         DELETE1(mPlanes);
+        //         DELETE1(mProjectors);
+        //         DELETE1(mShadowColors);
     }
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::PlanarShadowEffect ::Draw(std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet)
+void Rendering::PlanarShadowEffect::Draw(std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet)
 {
     // Draw the potentially visible portions of the shadow caster.
     const int numVisible = visibleSet.GetNumVisible();
@@ -163,7 +163,7 @@ void Rendering::PlanarShadowEffect ::Draw(std::shared_ptr<Renderer> renderer, Vi
     renderer->SetOverrideDepthState(saveDState);
 }
 
-bool Rendering::PlanarShadowEffect ::GetProjectionMatrix(int i, Mathematics::MatrixF& projection)
+bool Rendering::PlanarShadowEffect::GetProjectionMatrix(int i, Mathematics::MatrixF& projection)
 {
     // Compute the equation for the shadow plane in world coordinates.
     //Mathematics::APointf vertex[3];
@@ -239,7 +239,7 @@ CoreTools::ObjectSharedPtr Rendering::PlanarShadowEffect::
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarShadowEffect ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarShadowEffect::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects;
     CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
@@ -262,7 +262,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarShadowEffect ::GetAllOb
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::PlanarShadowEffect ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::PlanarShadowEffect::GetConstObjectByName(const std::string& name) const
 {
     CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -284,7 +284,7 @@ CoreTools::ConstObjectSharedPtr Rendering::PlanarShadowEffect ::GetConstObjectBy
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarShadowEffect ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarShadowEffect::GetAllConstObjectsByName(const std::string& name) const
 {
     std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -304,12 +304,12 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarShadowEffect ::Get
 
 // Streaming support.
 
-Rendering::PlanarShadowEffect ::PlanarShadowEffect(LoadConstructor value)
+Rendering::PlanarShadowEffect::PlanarShadowEffect(LoadConstructor value)
     : GlobalEffect(value), mNumPlanes(0), mPlanes(0), mProjectors(0), mShadowColors(0)
 {
 }
 
-void Rendering::PlanarShadowEffect ::Load(CoreTools::BufferSource& source)
+void Rendering::PlanarShadowEffect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -323,7 +323,7 @@ void Rendering::PlanarShadowEffect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::PlanarShadowEffect ::Link(CoreTools::ObjectLink& source)
+void Rendering::PlanarShadowEffect::Link(CoreTools::ObjectLink& source)
 {
     GlobalEffect::Link(source);
 
@@ -332,19 +332,19 @@ void Rendering::PlanarShadowEffect ::Link(CoreTools::ObjectLink& source)
     //  source.ResolveObjectSharedPtrLink(mShadowCaster);
 }
 
-void Rendering::PlanarShadowEffect ::PostLink()
+void Rendering::PlanarShadowEffect::PostLink()
 {
     GlobalEffect::PostLink();
 
     mAlphaState = std::make_shared<AlphaState>();
     mDepthState = std::make_shared<DepthState>();
     mStencilState = std::make_shared<StencilState>();
-    mMaterial = std::make_shared<Material>();
+    mMaterial = Material::Create();
     mMaterialEffect = std::make_shared<MaterialEffect>();
     mMaterialEffectInstance.reset(mMaterialEffect->CreateInstance(mMaterial.get()));
 }
 
-uint64_t Rendering::PlanarShadowEffect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::PlanarShadowEffect::Register(CoreTools::ObjectRegister& target) const
 {
     const uint64_t id = GlobalEffect::Register(target);
     if (0 < id)
@@ -357,7 +357,7 @@ uint64_t Rendering::PlanarShadowEffect ::Register(CoreTools::ObjectRegister& tar
     return id;
 }
 
-void Rendering::PlanarShadowEffect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::PlanarShadowEffect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -371,7 +371,7 @@ void Rendering::PlanarShadowEffect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::PlanarShadowEffect ::GetStreamingSize() const
+int Rendering::PlanarShadowEffect::GetStreamingSize() const
 {
     int size = GlobalEffect::GetStreamingSize();
     size += CORE_TOOLS_STREAM_SIZE(mNumPlanes);
@@ -382,12 +382,12 @@ int Rendering::PlanarShadowEffect ::GetStreamingSize() const
     return size;
 }
 
-int Rendering::PlanarShadowEffect ::GetNumPlanes() const noexcept
+int Rendering::PlanarShadowEffect::GetNumPlanes() const noexcept
 {
     return mNumPlanes;
 }
 
-void Rendering::PlanarShadowEffect ::SetPlane(int i, TrianglesMeshSharedPtr plane)
+void Rendering::PlanarShadowEffect::SetPlane(int i, TrianglesMeshSharedPtr plane) noexcept
 {
     // The culling flag is set to "always" because this effect is responsible
     // for drawing the TriMesh.  This prevents drawing attempts by another
@@ -396,27 +396,27 @@ void Rendering::PlanarShadowEffect ::SetPlane(int i, TrianglesMeshSharedPtr plan
     mPlanes[i]->SetCullingMode(CullingMode::Always);
 }
 
-Rendering::TrianglesMeshSharedPtr Rendering::PlanarShadowEffect ::GetPlane(int i) const noexcept
+Rendering::TrianglesMeshSharedPtr Rendering::PlanarShadowEffect::GetPlane(int i) const noexcept
 {
     return mPlanes[i];
 }
 
-void Rendering::PlanarShadowEffect ::SetProjector(int i, Light* projector)
+void Rendering::PlanarShadowEffect::SetProjector(int i, Light* projector)
 {
     mProjectors[i].reset(projector);
 }
 
-Rendering::Light* Rendering::PlanarShadowEffect ::GetProjector(int i) const noexcept
+Rendering::Light* Rendering::PlanarShadowEffect::GetProjector(int i) const noexcept
 {
     return mProjectors[i].get();
 }
 
-void Rendering::PlanarShadowEffect ::SetShadowColor(int i, const Mathematics::Float4& shadowColor) noexcept
+void Rendering::PlanarShadowEffect::SetShadowColor(int i, const Mathematics::Float4& shadowColor) noexcept
 {
     mShadowColors[i] = shadowColor;
 }
 
-const Mathematics::Float4& Rendering::PlanarShadowEffect ::GetShadowColor(int i) const noexcept
+const Mathematics::Float4& Rendering::PlanarShadowEffect::GetShadowColor(int i) const noexcept
 {
     return mShadowColors[i];
 }

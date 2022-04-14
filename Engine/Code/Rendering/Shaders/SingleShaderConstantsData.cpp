@@ -20,13 +20,13 @@ using std::string;
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::SingleShaderConstantsData ::SingleShaderConstantsData(const string& name, int numRegistersUsed)
+Rendering::SingleShaderConstantsData::SingleShaderConstantsData(const string& name, int numRegistersUsed)
     : impl{ name, numRegistersUsed }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SingleShaderConstantsData ::SingleShaderConstantsData()
+Rendering::SingleShaderConstantsData::SingleShaderConstantsData()
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -34,7 +34,7 @@ Rendering::SingleShaderConstantsData ::SingleShaderConstantsData()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderConstantsData)
 
-void Rendering::SingleShaderConstantsData ::SetConstant(const string& name, int numRegistersUsed)
+void Rendering::SingleShaderConstantsData::SetConstant(const string& name, int numRegistersUsed)
 {
     RENDERING_CLASS_IS_VALID_1;
 

@@ -14,7 +14,7 @@
 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, CullStateTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::CullStateTesting
 	::MainTest()
 { 

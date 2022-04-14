@@ -1,38 +1,48 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 14:48)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_DETAIL_H
 
 #include "BSplineReduction.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Intersection/StaticFindIntersector1Detail.h"
+#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
+#include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 
-namespace Mathematics
-{
+#include <gsl/util>
 
 template <typename Real, typename TVector>
-BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVector* ctrlPoints, int degree, Real fraction, int& outNumCtrlPoints,TVector*& outCtrlPoints)
+Mathematics::BSplineReduction<Real, TVector>::BSplineReduction(const CtrlPointsType& ctrlPoints, int degree, Real fraction)
+    : outCtrlPoints{},
+      degree{ degree },
+      quantity{},
+      numKnots{},
+      knot{},
+      basis{},
+      index{}
 {
-    // Check for valid input.  If invalid, return a "null" curve.
-    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(ctrlPoints != 0, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree < numCtrlPoints, "Invalid input\n");
-    if (numCtrlPoints < 2 || !ctrlPoints || degree < 1 ||  degree >= numCtrlPoints)
+    const auto numCtrlPoints = boost::numeric_cast<int>(ctrlPoints.size());
+
+    MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree < numCtrlPoints, "无效输入。\n");
+
+    if (numCtrlPoints < 2 || degree < 1 || degree >= numCtrlPoints)
     {
-        outNumCtrlPoints = 0;
-        outCtrlPoints = 0;
         return;
     }
 
-    // Clamp the number of control points to [degree+1,quantity-1].
-    outNumCtrlPoints = boost::numeric_cast<int>(fraction*numCtrlPoints);
+    auto outNumCtrlPoints = boost::numeric_cast<int>(fraction * numCtrlPoints);
     if (outNumCtrlPoints > numCtrlPoints)
     {
         outNumCtrlPoints = numCtrlPoints;
-        outCtrlPoints = nullptr;  // NEW1<TVector>(outNumCtrlPoints);
-        memcpy(outCtrlPoints, ctrlPoints, numCtrlPoints*sizeof(TVector));
+        outCtrlPoints = ctrlPoints;
         return;
     }
     if (outNumCtrlPoints < degree + 1)
@@ -40,157 +50,167 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
         outNumCtrlPoints = degree + 1;
     }
 
-    // Allocate output control points and set all to the zero vector.
-    outCtrlPoints = nullptr;  // NEW1<TVector>(outNumCtrlPoints);
+    outCtrlPoints.resize(outNumCtrlPoints);
 
-    // Set up basis function parameters.  Function 0 corresponds to the
-    // output curve.  Function 1 corresponds to the input curve.
-    mDegree = degree;
-    quantity[0] = outNumCtrlPoints;
-    quantity[1] = numCtrlPoints;
+    quantity.at(0) = outNumCtrlPoints;
+    quantity.at(1) = numCtrlPoints;
 
     for (auto j = 0; j <= 1; ++j)
     {
-        mNumKnots[j] = quantity[j] + mDegree + 1;
-        mKnot[j] = nullptr;  // NEW1<Real>(mNumKnots[j]);
+        numKnots.at(j) = quantity.at(j) + degree + 1;
 
-        int i;
-        for (i = 0; i <= mDegree; ++i)
+        for (auto k = 0; k <= 2; ++k)
         {
-            mKnot[j][i] = Math<Real>::GetValue(0);
+            knot.at(j).at(k) = Math<Real>::GetValue(numKnots.at(k));
         }
 
-		auto factor = (Math::GetValue(1))/(Real)(quantity[j] - mDegree);
-        for (/**/; i < quantity[j]; ++i)
+        auto i = 0;
+        for (; i <= degree; ++i)
         {
-            mKnot[j][i] = (i-mDegree)*factor;
+            knot.at(j).at(i) = Math<Real>::GetValue(0);
         }
 
-        for (/**/; i < mNumKnots[j]; i++)
+        auto factor = (Math<Real>::GetValue(1)) / Math<Real>::GetValue(quantity.at(j) - degree);
+        for (; i < quantity.at(j); ++i)
         {
-            mKnot[j][i] = Math::GetValue(1);
+            knot.at(j).at(i) = Math<Real>::GetValue(i - degree) * factor;
         }
-    }
 
-    // Construct matrix A (depends only on the output basis function).
-    Real value, tmin, tmax;
-    int i0, i1;
-
-    mBasis[0] = 0;
-    mBasis[1] = 0;
-
-	BandedMatrix<Real> A{ quantity[0], mDegree, mDegree };
-    for (i0 = 0; i0 < quantity[0]; ++i0)
-    {
-        mIndex[0] = i0;
-        tmax = MaxSupport(0, i0);
-
-        for (i1 = i0; i1 <= i0 + mDegree && i1 < quantity[0]; ++i1)
+        for (; i < numKnots.at(j); i++)
         {
-            mIndex[1] = i1;
-            tmin = MinSupport(0, i1);
-
-            value = RombergIntegral<Real,BSplineReduction>(8, tmin, tmax,Integrand, this).GetValue();
-            A(i0, i1) = value;
-            A(i1, i0) = value;
+            knot.at(j).at(i) = Math<Real>::GetValue(1);
         }
     }
 
-    // Construct A^{-1}.
-	VariableMatrix<Real> invA{ quantity[0], quantity[0] };
-    invA = LinearSystem<Real>().Invert(A); // 错误抛出异常
-    //MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
-   // WM5_UNUSED(solved);
+    basis.at(0) = 0;
+    basis.at(1) = 0;
 
-    // Construct B (depends on both input and output basis functions).
-    mBasis[1] = 1;
-	VariableMatrix<Real> B{ quantity[0], quantity[1] };
-    for (i0 = 0; i0 < quantity[0]; ++i0)
+    BandedMatrix<Real> a{ quantity.at(0), degree, degree };
+    for (auto i0 = 0; i0 < quantity.at(0); ++i0)
     {
-        mIndex[0] = i0;
-		auto tmin0 = MinSupport(0, i0);
-		auto tmax0 = MaxSupport(0, i0);
+        index.at(0) = i0;
+        auto tmax = MaxSupport(0, i0);
 
-        for (i1 = 0; i1 < quantity[1]; ++i1)
+        for (auto i1 = i0; i1 <= i0 + degree && i1 < quantity.at(0); ++i1)
         {
-            mIndex[1] = i1;
-			auto tmin1 = MinSupport(1, i1);
-			auto tmax1 = MaxSupport(1, i1);
+            index.at(1) = i1;
+            auto tmin = MinSupport(0, i1);
 
-			StaticFindIntersector1<Real> intr{ tmin0, tmax0, tmin1, tmax1 };
-         
-            int quantity = intr.GetNumIntersections();
+            auto value = RombergIntegral<Real, BSplineReduction>(8, tmin, tmax, Integrand, this).GetValue();
+            a(i0, i1) = value;
+            a(i1, i0) = value;
+        }
+    }
 
-            if (quantity == 2)
+    VariableMatrix<Real> invA{ quantity.at(0), quantity.at(0) };
+    invA = LinearSystem<Real>().Invert(a);
+
+    basis.at(1) = 1;
+    VariableMatrix<Real> b{ quantity.at(0), quantity.at(1) };
+    for (auto i0 = 0; i0 < quantity.at(0); ++i0)
+    {
+        index.at(0) = i0;
+        auto tmin0 = MinSupport(0, i0);
+        auto tmax0 = MaxSupport(0, i0);
+
+        for (auto i1 = 0; i1 < quantity.at(1); ++i1)
+        {
+            index.at(1) = i1;
+            auto tmin1 = MinSupport(1, i1);
+            auto tmax1 = MaxSupport(1, i1);
+
+            StaticFindIntersector1<Real> intr{ tmin0, tmax0, tmin1, tmax1 };
+
+            const auto numIntersections = intr.GetNumIntersections();
+
+            if (numIntersections == 2)
             {
-				value = RombergIntegral<Real, BSplineReduction>{ 8,intr.GetIntersection(0), intr.GetIntersection(1),Integrand, this }.GetValue();
-                B[i0][i1] = value;
+                auto value = RombergIntegral<Real, BSplineReduction>{ 8, intr.GetIntersection(0), intr.GetIntersection(1), Integrand, this }.GetValue();
+                b[i0][i1] = value;
             }
             else
             {
-                B[i0][i1] = Math<Real>::GetValue(0);
+                b[i0][i1] = Math<Real>::GetValue(0);
             }
         }
     }
 
-    // Construct A^{-1}*B.
-	auto prod = invA*B;
+    auto prod = invA * b;
 
-    // Construct the control points for the least-squares curve.
-    memset(outCtrlPoints,0,outNumCtrlPoints*sizeof(TVector));
-    for (i0 = 0; i0 < quantity[0]; ++i0)
+    for (auto i0 = 0; i0 < quantity.at(0); ++i0)
     {
-        for (i1 = 0; i1 < quantity[1]; ++i1)
+        for (auto i1 = 0; i1 < quantity.at(1); ++i1)
         {
-            outCtrlPoints[i0] += ctrlPoints[i1]*prod[i0][i1];
+            outCtrlPoints.at(i0) += ctrlPoints.at(i1) * prod[i0][i1];
         }
     }
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real, typename TVector>
+bool Mathematics::BSplineReduction<Real, TVector>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real, typename TVector>
+typename Mathematics::BSplineReduction<Real, TVector>::CtrlPointsType Mathematics::BSplineReduction<Real, TVector>::GetOutCtrlPoints() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return outCtrlPoints;
 }
 
 template <typename Real, typename TVector>
-BSplineReduction<Real,TVector>::~BSplineReduction ()
+Real Mathematics::BSplineReduction<Real, TVector>::MinSupport(int basisIndex, int i) const
 {
-    DELETE1(mKnot[0]);
-    DELETE1(mKnot[1]);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return knot.at(basisIndex).at(i);
 }
 
 template <typename Real, typename TVector>
-Real BSplineReduction<Real,TVector>::MinSupport (int basis, int i) const
+Real Mathematics::BSplineReduction<Real, TVector>::MaxSupport(int basisIndex, int i) const
 {
-    return mKnot[basis][i];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto knotIndex = i + 1 + degree;
+
+    return knot.at(basisIndex).at(knotIndex);
 }
 
 template <typename Real, typename TVector>
-Real BSplineReduction<Real,TVector>::MaxSupport (int basis, int i) const
+Real Mathematics::BSplineReduction<Real, TVector>::F(int basisIndex, int i, int j, Real t) const
 {
-    return mKnot[basis][i+1+mDegree];
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real, typename TVector>
-Real BSplineReduction<Real,TVector>::F (int basis, int i, int j, Real t)
-{
     if (j > 0)
     {
-		auto result = Math<Real>::GetValue(0);
+        auto result = Math<Real>::GetValue(0);
 
-		auto denom = mKnot[basis][i + j] - mKnot[basis][i];
+        auto denom = knot.at(basisIndex).at(gsl::narrow_cast<size_t>(i) + j) - knot.at(basisIndex).at(i);
         if (denom > Math<Real>::GetValue(0))
         {
-            result += (t - mKnot[basis][i])*F(basis, i, j - 1, t)/denom;
+            result += (t - knot.at(basisIndex).at(i)) * F(basisIndex, i, j - 1, t) / denom;
         }
 
-        denom = mKnot[basis][i + j + 1] - mKnot[basis][i + 1];
+        denom = knot.at(basisIndex).at(gsl::narrow_cast<size_t>(i) + j + 1) - knot.at(basisIndex).at(gsl::narrow_cast<size_t>(i) + 1);
         if (denom > Math<Real>::GetValue(0))
         {
-            result += (mKnot[basis][i + j + 1] - t) * F(basis, i + 1, j - 1, t)/denom;
+            result += (knot.at(basisIndex).at(gsl::narrow_cast<size_t>(i) + j + 1) - t) * F(basisIndex, i + 1, j - 1, t) / denom;
         }
 
         return result;
     }
 
-    if (mKnot[basis][i] <= t && t < mKnot[basis][i + 1])
+    if (knot.at(basisIndex).at(i) <= t && t < knot.at(basisIndex).at(gsl::narrow_cast<size_t>(i) + 1))
     {
-        return Math::GetValue(1);
+        return Math<Real>::GetValue(1);
     }
     else
     {
@@ -199,16 +219,19 @@ Real BSplineReduction<Real,TVector>::F (int basis, int i, int j, Real t)
 }
 
 template <typename Real, typename TVector>
-Real BSplineReduction<Real,TVector>::Integrand (Real t, const BSplineReduction* data)
+Real Mathematics::BSplineReduction<Real, TVector>::Integrand(Real t, const BSplineReduction* data)
 {
-	auto& self = *(BSplineReduction<Real,TVector>*)data;
+    if (data != nullptr)
+    {
+        auto value0 = data->F(data->basis.at(0), data->index.at(0), data->degree, t);
+        auto value1 = data->F(data->basis.at(1), data->index.at(1), data->degree, t);
 
-	auto value0 = self.F(self.mBasis[0], self.mIndex[0], self.mDegree, t);
-	auto value1 = self.F(self.mBasis[1], self.mIndex[1], self.mDegree, t);
-    return value0*value1;
+        return value0 * value1;
+    }
+    else
+    {
+        return Math<Real>::GetValue(0);
+    }
 }
 
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_REDUCTION_DETAIL_H

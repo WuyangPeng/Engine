@@ -1,103 +1,118 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 11:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/23 16:02)
 
 #ifndef MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_DETAIL_H
 #define MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_DETAIL_H
 
 #include "UniqueVerticesTriangles.h"
+#include "CoreTools/DataTypes/TupleDetail.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+
+#include <map>
 
 template <int N, typename Real>
-Mathematics::UniqueVerticesTriangles<N, Real>::UniqueVerticesTriangles(int numTriangles, const CoreTools::Tuple<N, Real>* inVertices, int& numOutVertices,
-                                                                       CoreTools::Tuple<N, Real>*& outVertices, int*& outIndices)
+Mathematics::UniqueVerticesTriangles<N, Real>::UniqueVerticesTriangles(int numTriangles, const std::vector<CoreTools::Tuple<N, Real>>& inVertices)
+    : numInVertices{ 3 * numTriangles },
+      numOutVertices{},
+      inToOutMapping{},
+      outVertices{},
+      outIndices{}
 {
-    MATHEMATICS_ASSERTION_0(numTriangles > 0 && inVertices, "Invalid inputs to UniqueVerticesTriangles constructor\n");
+    ConstructUniqueVertices(inVertices);
 
-    ConstructUniqueVertices(3 * numTriangles, inVertices, numOutVertices, outVertices);
+    outIndices = inToOutMapping;
 
-    // The input index array is implicitly {<0,1,2>,<3,4,5>,...,<n-3,n-2,n-1>}
-    // where n is the number of vertices.  The output index array is the same
-    // as the mapping array.
-    int numIndices = 3 * numTriangles;
-    outIndices = nullptr;  // NEW1<int>(numIndices);
-    size_t numBytes = numIndices * sizeof(int);
-    memcpy(outIndices, mInToOutMapping, numBytes);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int N, typename Real>
-Mathematics::UniqueVerticesTriangles<N, Real>::UniqueVerticesTriangles(int numInVertices, const CoreTools::Tuple<N, Real>* inVertices, int numTriangles, const int* inIndices,
-                                                                       int& numOutVertices, CoreTools::Tuple<N, Real>*& outVertices, int*& outIndices)
+Mathematics::UniqueVerticesTriangles<N, Real>::UniqueVerticesTriangles(int numInVertices, const std::vector<CoreTools::Tuple<N, Real>>& inVertices, int numTriangles, const std::vector<int>& inIndices)
+    : numInVertices{ numInVertices },
+      numOutVertices{},
+      inToOutMapping{},
+      outVertices{},
+      outIndices{}
 {
-    MATHEMATICS_ASSERTION_0(numInVertices > 0 && inVertices && numTriangles > 0 && inIndices, "Invalid inputs to UniqueVerticesTriangles constructor\n");
+    ConstructUniqueVertices(inVertices);
 
-    ConstructUniqueVertices(numInVertices, inVertices, numOutVertices, outVertices);
-
-    // The input index array needs it indices mapped to the unique vertex
-    // indices.
-    int numIndices = 3 * numTriangles;
-    outIndices = nullptr;  // NEW1<int>(numIndices);
-    for (int i = 0; i < numIndices; ++i)
+    const auto numIndices = 3 * numTriangles;
+    outIndices.resize(numIndices);
+    for (auto i = 0; i < numIndices; ++i)
     {
-        MATHEMATICS_ASSERTION_0(0 <= inIndices[i] && inIndices[i] < numInVertices, "Invalid condition in UniqueVerticesTriangles constructor\n");
-
-        outIndices[i] = mInToOutMapping[inIndices[i]];
-
-        MATHEMATICS_ASSERTION_0(0 <= outIndices[i] && outIndices[i] < numOutVertices, "Invalid condition in UniqueVerticesTriangles constructor\n");
+        outIndices.at(i) = inToOutMapping.at(inIndices.at(i));
     }
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+
+#ifdef OPEN_CLASS_INVARIANT
 
 template <int N, typename Real>
-Mathematics::UniqueVerticesTriangles<N, Real>::~UniqueVerticesTriangles()
+bool Mathematics::UniqueVerticesTriangles<N, Real>::IsValid() const noexcept
 {
-    // DELETE1(mInToOutMapping);
+    return true;
 }
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <int N, typename Real>
 int Mathematics::UniqueVerticesTriangles<N, Real>::GetOutputIndexFor(int inputIndex) const
 {
-    MATHEMATICS_ASSERTION_0(0 <= inputIndex && inputIndex < mNumInVertices, "Invalid condition in GetOutputIndexFor\n");
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return mInToOutMapping[inputIndex];
+    return inToOutMapping.at(inputIndex);
 }
 
 template <int N, typename Real>
-void Mathematics::UniqueVerticesTriangles<N, Real>::ConstructUniqueVertices(int numInVertices, const CoreTools::Tuple<N, Real>* inVertices, int& numOutVertices, CoreTools::Tuple<N, Real>*& outVertices)
+void Mathematics::UniqueVerticesTriangles<N, Real>::ConstructUniqueVertices(const std::vector<CoreTools::Tuple<N, Real>>& inVertices)
 {
-    // Construct the unique vertices.
-    mNumInVertices = numInVertices;
-    mInToOutMapping = nullptr;  // NEW1<int>(mNumInVertices);
-    std::map<CoreTools::Tuple<N, Real>, int> table;
-    mNumOutVertices = 0;
-    typename std::map<CoreTools::Tuple<N, Real>, int>::iterator iter;
-    for (int i = 0; i < mNumInVertices; ++i)
+    inToOutMapping.resize(numInVertices);
+    std::map<CoreTools::Tuple<N, Real>, int> table{};
+    numOutVertices = 0;
+
+    for (auto i = 0; i < numInVertices; ++i)
     {
-        iter = table.find(inVertices[i]);
+        const auto iter = table.find(inVertices.at(i));
         if (iter != table.end())
         {
-            // Vertex i is a duplicate of one inserted earlier into the
-            // table.  Map vertex i to the first-found copy.
-            mInToOutMapping[i] = iter->second;
+            inToOutMapping.at(i) = iter->second;
         }
         else
         {
-            // Vertex i is the first occurrence of such a point.
-            table.insert(std::make_pair(inVertices[i], mNumOutVertices));
-            mInToOutMapping[i] = mNumOutVertices;
-            mNumOutVertices++;
+            table.emplace(inVertices.at(i), numOutVertices);
+            inToOutMapping.at(i) = numOutVertices;
+            numOutVertices++;
         }
     }
 
-    // Pack the unique vertices into an array in the correct order.
-    numOutVertices = mNumOutVertices;
-    outVertices = nullptr;  // NEW1<CoreTools::Tuple<N,Real> >(mNumOutVertices);
-    for (iter = table.begin(); iter != table.end(); iter++)
+    outVertices.resize(numOutVertices);
+    for (const auto& value : table)
     {
-        MATHEMATICS_ASSERTION_0(0 <= iter->second && iter->second < mNumOutVertices, "Invalid condition in ConstructUniqueVertices\n");
-
-        outVertices[iter->second] = iter->first;
+        outVertices.at(value.second) = value.first;
     }
+}
+
+template <int N, typename Real>
+std::vector<CoreTools::Tuple<N, Real>> Mathematics::UniqueVerticesTriangles<N, Real>::GetOutVertices() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return outVertices;
+}
+
+template <int N, typename Real>
+std::vector<int> Mathematics::UniqueVerticesTriangles<N, Real>::GetOutIndices() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return outIndices;
 }
 
 #endif  // MATHEMATICS_MESHES_UNIQUE_VERTICES_TRIANGLES_DETAIL_H

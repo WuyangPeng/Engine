@@ -52,22 +52,22 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Visual);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        VisualPrimitiveType GetPrimitiveType() const;
+        VisualPrimitiveType GetPrimitiveType() const noexcept;
 
-        void SetVertexFormat(const VertexFormatSharedPtr& vertexformat);
-        ConstVertexFormatSharedPtr GetConstVertexFormat() const;
-        VertexFormatSharedPtr GetVertexFormat();
+        void SetVertexFormat(const VertexFormatSharedPtr& vertexformat) noexcept;
+        ConstVertexFormatSharedPtr GetConstVertexFormat() const noexcept;
+        VertexFormatSharedPtr GetVertexFormat() noexcept;
 
-        void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer);
-        ConstVertexBufferSharedPtr GetConstVertexBuffer() const;
-        VertexBufferSharedPtr GetVertexBuffer();
+        void SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) noexcept;
+        ConstVertexBufferSharedPtr GetConstVertexBuffer() const noexcept;
+        VertexBufferSharedPtr GetVertexBuffer() noexcept;
 
-        void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer);
-        ConstIndexBufferSharedPtr GetConstIndexBuffer() const;
-        IndexBufferSharedPtr GetIndexBuffer();
+        void SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer) noexcept;
+        ConstIndexBufferSharedPtr GetConstIndexBuffer() const noexcept;
+        IndexBufferSharedPtr GetIndexBuffer() noexcept;
 
-        const FloatBound& GetModelBound() const noexcept;
-        FloatBound& GetModelBound() noexcept;
+        const BoundF& GetModelBound() const noexcept;
+        BoundF& GetModelBound() noexcept;
 
         // 存取绘制对象的视觉效果。
         void SetEffectInstance(const VisualEffectInstanceSharedPtr& effect) noexcept;

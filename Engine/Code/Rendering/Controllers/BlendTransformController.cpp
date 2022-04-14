@@ -40,7 +40,7 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, BlendTransformController);
 Rendering::BlendTransformController
 	::BlendTransformController(const TransformControllerSharedPtr& firstController,const TransformControllerSharedPtr& secondController, 
 							   bool rotationScaleMatrices,bool geometricRotation,bool geometricScale) 
-	: ParentType{ FloatTransform{} }, impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
+	: ParentType{ TransformF{} }, impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
 {
      RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -89,7 +89,7 @@ Rendering::ControllerInterfaceSharedPtr Rendering::BlendTransformController
 	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
 }
 
-CoreTools::ObjectInterfaceSharedPtr Rendering::BlendTransformController ::CloneObject() const
+CoreTools::ObjectInterfaceSharedPtr Rendering::BlendTransformController::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -104,7 +104,7 @@ Rendering::BlendTransformController
 }
 
 int Rendering::BlendTransformController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -116,7 +116,7 @@ int Rendering::BlendTransformController
 }
 
 uint64_t Rendering::BlendTransformController
-    ::Register( CoreTools::ObjectRegister& target ) const
+::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
@@ -130,7 +130,7 @@ uint64_t Rendering::BlendTransformController
 }
 
 void Rendering::BlendTransformController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -143,7 +143,7 @@ void Rendering::BlendTransformController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::BlendTransformController ::Link(CoreTools::ObjectLink& source)
+void Rendering::BlendTransformController::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -153,14 +153,14 @@ void Rendering::BlendTransformController ::Link(CoreTools::ObjectLink& source)
 }
 
 void Rendering::BlendTransformController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
 	ParentType::PostLink();	 
 }
 
-void Rendering::BlendTransformController ::Load(CoreTools::BufferSource& source)
+void Rendering::BlendTransformController::Load(CoreTools::BufferSource& source)
 {
 	;
     

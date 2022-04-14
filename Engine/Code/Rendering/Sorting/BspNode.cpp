@@ -25,7 +25,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, BspNode);
 
 Rendering::BspNode
 	::BspNode ()
-    : ModelPlane(0.0f, 0.0f, 0.0f, 0.0f),mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
+    : ParentType{ NodeCreate::Init }, ModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
 {
 	SpatialSharedPtr spatialSharedPtr;
 	AttachChild(spatialSharedPtr);  // left child
@@ -35,7 +35,7 @@ Rendering::BspNode
 
 Rendering::BspNode
 	::BspNode(const Mathematics::PlaneF& modelPlane)
-    :ModelPlane(modelPlane),mWorldPlane(modelPlane)
+    : ParentType{ NodeCreate::Init }, ModelPlane(modelPlane), mWorldPlane(modelPlane)
 {
 	SpatialSharedPtr spatialSharedPtr;
 	AttachChild(spatialSharedPtr);  // left child
@@ -359,7 +359,7 @@ Rendering::SpatialSharedPtr Rendering::BspNode
 }
 
  const Mathematics::PlaneF& Rendering::BspNode
-	 ::GetWorldPlane() const noexcept
+	::GetWorldPlane() const noexcept
 {
 	return mWorldPlane;
 }

@@ -4,17 +4,25 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/25 21:36)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/SoundEffectClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(SoundEffectExample, TestingHelper, "音效例子")
+using namespace std::literals;
+
+SoundEffectExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "音效例子"s }
+{
+    InitSuite();
+
+    SOUND_EFFECT_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(SoundEffectExample, TestingHelper)
 
 // private
-void SoundEffectExample::TestingHelper
-	::AddSuites()
+void SoundEffectExample::TestingHelper ::InitSuite() noexcept
 {
-	 
 }
- 

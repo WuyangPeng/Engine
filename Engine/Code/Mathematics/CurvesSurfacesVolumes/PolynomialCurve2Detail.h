@@ -1,87 +1,100 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 19:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 17:01)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_DETAIL_H
 
 #include "PolynomialCurve2.h"
-
-namespace Mathematics
-{
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-PolynomialCurve2<Real>::PolynomialCurve2 (Polynomial<Real>* xPoly,
-	Polynomial<Real>* yPoly)
-	: SingleCurve2<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }
+Mathematics::PolynomialCurve2<Real>::PolynomialCurve2(const Polynomial<Real>& xPoly, const Polynomial<Real>& yPoly)
+    : ParentType{ Math::GetValue(0), Math::GetValue(1) },
+      xPoly{ xPoly },
+      yPoly{ yPoly },
+      xDer1{ xPoly.GetDerivative() },
+      yDer1{ yPoly.GetDerivative() },
+      xDer2{ xDer1.GetDerivative() },
+      yDer2{ yDer1.GetDerivative() },
+      xDer3{ xDer2.GetDerivative() },
+      yDer3{ yDer2.GetDerivative() }
 {
-    MATHEMATICS_ASSERTION_0(xPoly && yPoly, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(xPoly->GetDegree() == yPoly->GetDegree(), "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(xPoly.GetDegree() == yPoly.GetDegree(), "无效输入\n");
 
-    mXPoly = xPoly;
-    mYPoly = yPoly;
-    mXDer1 = mXPoly->GetDerivative();
-    mYDer1 = mYPoly->GetDerivative();
-    mXDer2 = mXDer1.GetDerivative();
-    mYDer2 = mYDer1.GetDerivative();
-    mXDer3 = mXDer2.GetDerivative();
-    mYDer3 = mYDer2.GetDerivative();
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-template <typename Real>
-PolynomialCurve2<Real>::~PolynomialCurve2 ()
-{
-    DELETE0(mXPoly);
-    DELETE0(mYPoly);
-}
+#ifdef OPEN_CLASS_INVARIANT
 
 template <typename Real>
-int PolynomialCurve2<Real>::GetDegree () const
+bool Mathematics::PolynomialCurve2<Real>::IsValid() const noexcept
 {
-    return mXPoly->GetDegree();
+    return ParentType::IsValid();
 }
 
+#endif  // OPEN_CLASS_INVARIANT
+
 template <typename Real>
-const Polynomial<Real>* PolynomialCurve2<Real>::GetXPolynomial() const
+int Mathematics::PolynomialCurve2<Real>::GetDegree() const
 {
-    return mXPoly;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xPoly.GetDegree();
 }
 
 template <typename Real>
-const Polynomial<Real>* PolynomialCurve2<Real>::GetYPolynomial() const
+Mathematics::Polynomial<Real> Mathematics::PolynomialCurve2<Real>::GetXPolynomial() const
 {
-    return mYPoly;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return xPoly;
 }
 
 template <typename Real>
-Vector2<Real> PolynomialCurve2<Real>::GetPosition (Real t) const
+Mathematics::Polynomial<Real> Mathematics::PolynomialCurve2<Real>::GetYPolynomial() const
 {
-    return Vector2<Real>((*mXPoly)(t), (*mYPoly)(t));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return yPoly;
 }
 
 template <typename Real>
-Vector2<Real> PolynomialCurve2<Real>::GetFirstDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetPosition(Real t) const
 {
-    return Vector2<Real>(mXDer1(t), mYDer1(t));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return Vector2<Real>{ (xPoly)(t), (yPoly)(t) };
 }
 
 template <typename Real>
-Vector2<Real> PolynomialCurve2<Real>::GetSecondDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetFirstDerivative(Real t) const
 {
-    return Vector2<Real>(mXDer2(t) ,mYDer2(t));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return Vector2<Real>{ xDer1(t), yDer1(t) };
 }
 
 template <typename Real>
-Vector2<Real> PolynomialCurve2<Real>::GetThirdDerivative (Real t) const
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetSecondDerivative(Real t) const
 {
-    return Vector2<Real>(mXDer3(t), mYDer3(t));
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return Vector2<Real>{ xDer2(t), yDer2(t) };
 }
 
- 
+template <typename Real>
+Mathematics::Vector2<Real> Mathematics::PolynomialCurve2<Real>::GetThirdDerivative(Real t) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
+    return Vector2<Real>{ xDer3(t), yDer3(t) };
 }
 
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_POLYNOMIAL_CURVE2_DETAIL_H

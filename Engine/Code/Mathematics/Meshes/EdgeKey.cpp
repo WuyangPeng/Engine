@@ -1,120 +1,68 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/22 13:06)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "EdgeKey.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <ostream>
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-Mathematics::EdgeKey
-	::EdgeKey (int first, int second) noexcept
+
+Mathematics::EdgeKey ::EdgeKey(int first, int second) noexcept
+    : vertex{ Init(first, second) }
 {
-    if (first < second)
-    {
-        // first是最小
-        m_Vertex[0] = first;
-        m_Vertex[1] = second;
-    }
-    else
-    {
-        // second是最小
-        m_Vertex[0] = second;
-        m_Vertex[1] = first;
-    }
-    
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-
-Mathematics::EdgeKey
-	::EdgeKey(const EdgeKey& rhs) noexcept
+std::array<int, 2> Mathematics::EdgeKey::Init(int first, int second) noexcept
 {
-    m_Vertex[0] = rhs.m_Vertex[0];
-    m_Vertex[1] = rhs.m_Vertex[1];
-    
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    return (first < second) ? std::array<int, 2>{ first, second } : std::array<int, 2>{ second, first };
 }
 
-Mathematics::EdgeKey
-	::EdgeKey() noexcept
+Mathematics::EdgeKey::EdgeKey() noexcept
+    : vertex{ -1, -1 }
 {
-    m_Vertex[0] = -1;
-	m_Vertex[1] = -1;
-    
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-Mathematics::EdgeKey& Mathematics::EdgeKey
-	::operator = (const EdgeKey& rhs) noexcept
-{ 
-    MATHEMATICS_CLASS_IS_VALID_9;
-    
-    m_Vertex[0] = rhs.m_Vertex[0];
-    m_Vertex[1] = rhs.m_Vertex[1];
-
-	return *this;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, EdgeKey)
 
-int Mathematics::EdgeKey
-	::GetKey(int index) const
+int Mathematics::EdgeKey::GetKey(int index) const
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_9; 
-    
-	if (0 <= index && index < 2)
-	{
-		return m_Vertex[index];
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-	}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return vertex.at(index);
 }
 
-void Mathematics::EdgeKey
-	::SetKey(int index,int value)
+void Mathematics::EdgeKey ::SetKey(int index, int value)
 {
-	MATHEMATICS_CLASS_IS_VALID_9; 
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	if (0 <= index && index < 2)
-	{
-		m_Vertex[index] = value;
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-	}
-	
+    vertex.at(index) = value;
 }
 
-bool Mathematics
-	::operator< (const EdgeKey& lhs, const EdgeKey& rhs)
-{    
-    if (lhs.GetKey(1) < rhs.GetKey(1))    
-        return true;    
+bool Mathematics::operator<(const EdgeKey& lhs, const EdgeKey& rhs)
+{
+    if (lhs.GetKey(1) < rhs.GetKey(1))
+        return true;
     else if (rhs.GetKey(1) < lhs.GetKey(1))
-		return false;    
-	else
-		return lhs.GetKey(0) < rhs.GetKey(0);
+        return false;
+    else
+        return lhs.GetKey(0) < rhs.GetKey(0);
 }
 
-System::OStream& Mathematics
-	::operator<<(System::OStream& os, const EdgeKey& edgeKey)
+System::OStream& Mathematics::operator<<(System::OStream& os, const EdgeKey& edgeKey)
 {
-	os << edgeKey.GetKey(0) << "-" << edgeKey.GetKey(1);
+    os << edgeKey.GetKey(0) << "-" << edgeKey.GetKey(1);
 
-	return os;
+    return os;
 }
-#include STSTEM_WARNING_POP

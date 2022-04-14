@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/15 16:37)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_H
@@ -14,52 +17,37 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class  BSplineVolume
-	{
-	public:
-		// Construction and destruction of an open uniform B-spline volume.  The
-		// class will allocate space for the control points.  The caller is
-		// responsible for setting the values with the member function
-		// ControlPoint.
+    template <typename Real>
+    class BSplineVolume
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		BSplineVolume(int numUCtrlPoints, int numVCtrlPoints, int numWCtrlPoints, int uDegree, int vDegree, int wDegree);
+        using ClassType = BSplineVolume<Real>;
 
-		~BSplineVolume();
-		
-		BSplineVolume(const BSplineVolume&)= default;
-		BSplineVolume& operator=(const BSplineVolume&)= default;
-		BSplineVolume(BSplineVolume&&)= default;
-		BSplineVolume& operator=(BSplineVolume&&)= default;
+    public:
+        BSplineVolume(int numUCtrlPoints, int numVCtrlPoints, int numWCtrlPoints, int uDegree, int vDegree, int wDegree);
 
-		int GetNumCtrlPoints(int dim) const noexcept;
-		int GetDegree(int dim) const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-		// Control points may be changed at any time.  If any input index is
-		// invalid, the returned point is a vector whose components are all
-		// MAX_REAL.
-		void SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3<Real>& ctrlPoint) noexcept;
-		Vector3<Real> GetControlPoint(int uIndex, int vIndex, int wIndex) const noexcept;
+        NODISCARD int GetNumCtrlPoints(int dim) const noexcept;
+        NODISCARD int GetDegree(int dim) const noexcept;
 
-		// The spline is defined for 0 <= u <= 1, 0 <= v <= 1, and 0 <= w <= 1.
-		// The input values should be in this domain.  Any inputs smaller than 0
-		// are clamped to 0.  Any inputs larger than 1 are clamped to 1.
-		Vector3<Real> GetPosition(Real u, Real v, Real w) const;
-		Vector3<Real> GetDerivativeU(Real u, Real v, Real w) const;
-		Vector3<Real> GetDerivativeV(Real u, Real v, Real w) const;
-		Vector3<Real> GetDerivativeW(Real u, Real v, Real w) const;
+        void SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3<Real>& newCtrlPoint);
+        NODISCARD Vector3<Real> GetControlPoint(int uIndex, int vIndex, int wIndex) const;
 
-		// for array indexing:  i = 0 for u, i = 1 for v, i = 2 for w
-		Vector3<Real> GetPosition(Real pos[3]) const;
-		Vector3<Real> GetDerivative(int i, Real pos[3]) const;
+        NODISCARD Vector3<Real> GetPosition(Real u, Real v, Real w) const;
+        NODISCARD Vector3<Real> GetDerivativeU(Real u, Real v, Real w) const;
+        NODISCARD Vector3<Real> GetDerivativeV(Real u, Real v, Real w) const;
+        NODISCARD Vector3<Real> GetDerivativeW(Real u, Real v, Real w) const;
 
-	private:
-		Vector3<Real>*** mCtrlPoint;  // ctrl[unum][vnum][wnum]
-		BSplineBasis<Real> mBasis[3];
-	};
+        NODISCARD Vector3<Real> GetPosition(const std::array<Real, 3>& pos) const;
+        NODISCARD Vector3<Real> GetDerivative(int i, const std::array<Real, 3>& pos) const;
 
-	using BSplineVolumef = BSplineVolume<float>;
-	using BSplineVolumed = BSplineVolume<double>;
+    private:
+        std::vector<std::vector<std::vector<Vector3<Real>>>> ctrlPoint;
+        std::array<BSplineBasis<Real>, 3> basis;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_H

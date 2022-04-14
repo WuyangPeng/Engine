@@ -27,7 +27,7 @@ namespace Rendering
 		void AttributeUsageFogCoordTest();
 		void AttributeUsagePsizeTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

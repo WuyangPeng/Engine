@@ -27,11 +27,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        size_t GetBound0() const noexcept;
-        size_t GetBound1() const noexcept;
+        NODISCARD size_t GetBound0() const noexcept;
+        NODISCARD size_t GetBound1() const noexcept;
 
-        T const* operator[](int row) const noexcept;
-        T* operator[](int row) noexcept;
+        NODISCARD T const* operator[](int row) const noexcept;
+        NODISCARD T* operator[](int row) noexcept;
 
     private:
         void SetPointers();

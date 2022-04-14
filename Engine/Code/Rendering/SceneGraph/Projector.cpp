@@ -1,134 +1,117 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 18:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/02 16:47)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Projector.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, Projector);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Projector);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Projector);
 
-Rendering::Projector
-	::Projector(DepthType depthType, bool isPerspective , float epsilon ) 
-	:ParentType{ isPerspective, epsilon }
+Rendering::Projector::Projector(DepthType depthType, bool isPerspective, float epsilon)
+    : ParentType{ isPerspective, epsilon }
 {
-	// 覆盖Camera构造函数设定的深度类型。
-	SetDepthType(depthType);
+    // 覆盖Camera构造函数设定的深度类型。
+    SetDepthType(depthType);
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Projector)
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Projector)
- 
-Rendering::Projector
-    ::Projector (LoadConstructor value)
-	:ParentType{ value }
+Rendering::Projector::Projector(LoadConstructor value)
+    : ParentType{ value }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::Projector
-    ::GetStreamingSize () const
+int Rendering::Projector::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = ParentType::GetStreamingSize();
-    
-	size += CORE_TOOLS_STREAM_SIZE(DepthType());
-	
-	return size;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+
+    size += CORE_TOOLS_STREAM_SIZE(DepthType{});
+
+    return size;
 }
 
-uint64_t Rendering::Projector
-    ::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::Projector::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	return ParentType::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::Projector
-    ::Save (CoreTools::BufferTarget& target) const
+void Rendering::Projector::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	target.WriteEnum(GetDepthType());
-    
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    target.WriteEnum(GetDepthType());
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Projector
-    ::Link (CoreTools::ObjectLink& source)
+void Rendering::Projector::Link(CoreTools::ObjectLink& source)
 {
-	;
-    
-	ParentType::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
 }
 
-void Rendering::Projector
-    ::PostLink ()
+void Rendering::Projector::PostLink()
 {
-	;
-    
-	ParentType::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-void Rendering::Projector
-    ::Load (CoreTools::BufferSource& source)
+void Rendering::Projector::Load(CoreTools::BufferSource& source)
 {
-	;
-  
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
 
-	auto depthType = DepthType::Quantity;	
-	source.ReadEnum(depthType);
-	SetDepthType(depthType);	
-    
+    auto depthType = DepthType::Quantity;
+    source.ReadEnum(depthType);
+    SetDepthType(depthType);
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-const Rendering::Projector::Matrix Rendering::Projector
-	::GetBiasScaleMatrix(int index)
+Rendering::Projector::Matrix Rendering::Projector::GetBiasScaleMatrix(int index)
 {
-	static Matrix s_BiasScaleMatrix[2]
-	{
-		Matrix(0.5f, 0.0f, 0.0f, 0.5f,
-		       0.0f, -0.5f, 0.0f, 0.5f,
-			   0.0f, 0.0f, 1.0f, 0.0f,
-			   0.0f, 0.0f, 0.0f, 1.0f),
+    static std::array<Matrix, 2> biasScaleMatrix{ Matrix{ 0.5f, 0.0f, 0.0f, 0.5f,
+                                                          0.0f, -0.5f, 0.0f, 0.5f,
+                                                          0.0f, 0.0f, 1.0f, 0.0f,
+                                                          0.0f, 0.0f, 0.0f, 1.0f },
 
-		Matrix(0.5f, 0.0f, 0.0f, 0.5f,
-		       0.0f, +0.5f, 0.0f, 0.5f,
-			   0.0f, 0.0f, 1.0f, 0.0f,
-			   0.0f, 0.0f, 0.0f, 1.0f)
-	};
+                                                  Matrix{ 0.5f, 0.0f, 0.0f, 0.5f,
+                                                          0.0f, +0.5f, 0.0f, 0.5f,
+                                                          0.0f, 0.0f, 1.0f, 0.0f,
+                                                          0.0f, 0.0f, 0.0f, 1.0f } };
 
-	RENDERING_ASSERTION_0(index == 0 || index == 1, "索引错误！");
+    RENDERING_ASSERTION_0(index == 0 || index == 1, "索引错误！");
 
-	return s_BiasScaleMatrix[index];
+    return biasScaleMatrix.at(index);
 }
-
- #include STSTEM_WARNING_POP

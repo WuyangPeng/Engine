@@ -15,6 +15,7 @@
 namespace Rendering
 {
 	class Renderer;
+    enum class BufferLocking;
 
     template <typename PlatformBufferType>
 	class BufferManagement 

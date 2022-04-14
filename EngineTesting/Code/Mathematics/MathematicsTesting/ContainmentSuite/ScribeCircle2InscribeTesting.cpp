@@ -41,7 +41,7 @@ void Mathematics::ScribeCircle2InscribeTesting
 		Vector2 v1(firstRandomDistribution(generator),firstRandomDistribution(generator));
 		Vector2 v2(firstRandomDistribution(generator),firstRandomDistribution(generator));
 
-		ScribeCircle2Inscribed scribeCircle2Inscribed(v0, v1, v2);
+		ScribeCircle2InscribeD scribeCircle2Inscribed(v0, v1, v2);
 		
 		if (scribeCircle2Inscribed.IsCircleConstructed())
 		{

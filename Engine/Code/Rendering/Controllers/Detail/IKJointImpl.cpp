@@ -33,7 +33,7 @@
 using std::string;
 using std::vector;
 
-Rendering::IKJointImpl ::IKJointImpl() noexcept
+Rendering::IKJointImpl::IKJointImpl() noexcept
     : m_Object{}, m_Goals{}
 {
     Init();
@@ -41,7 +41,7 @@ Rendering::IKJointImpl ::IKJointImpl() noexcept
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::IKJointImpl ::IKJointImpl(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals)
+Rendering::IKJointImpl::IKJointImpl(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals)
     : m_Object{ object }, m_Goals{ goals }
 {
     Init();
@@ -50,7 +50,7 @@ Rendering::IKJointImpl ::IKJointImpl(const SpatialSharedPtr& object, const IKGoa
 }
 
 // private
-void Rendering::IKJointImpl ::Init() noexcept
+void Rendering::IKJointImpl::Init() noexcept
 {
     for (auto i = 0; i < sm_NumAxis; ++i)
     {
@@ -65,7 +65,7 @@ void Rendering::IKJointImpl ::Init() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, IKJointImpl)
 
-int Rendering::IKJointImpl ::GetStreamingSize() const
+int Rendering::IKJointImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -86,7 +86,7 @@ int Rendering::IKJointImpl ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::IKJointImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::IKJointImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     CoreTools::DisableNoexcept();
@@ -101,7 +101,7 @@ void Rendering::IKJointImpl ::Save(CoreTools::BufferTarget& target) const
     //target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
-void Rendering::IKJointImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::IKJointImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -122,7 +122,7 @@ void Rendering::IKJointImpl ::Load(CoreTools::BufferSource& source)
     }
 }
 
-void Rendering::IKJointImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::IKJointImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -131,7 +131,7 @@ void Rendering::IKJointImpl ::Link(CoreTools::ObjectLink& source)
     //	source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
-void Rendering::IKJointImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::IKJointImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -140,7 +140,7 @@ void Rendering::IKJointImpl ::Register(CoreTools::ObjectRegister& target) const
     //	target.RegisterSharedPtr(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
 }
 
-CoreTools::ObjectSharedPtr Rendering::IKJointImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::IKJointImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -164,7 +164,7 @@ CoreTools::ObjectSharedPtr Rendering::IKJointImpl ::GetObjectByName(const string
     }
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -179,7 +179,7 @@ vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl ::GetAllObjectsByName(
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -204,7 +204,7 @@ CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl ::GetConstObjectByName(co
     }
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -219,7 +219,7 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl ::GetAllConstObje
     return objects;
 }
 
-const Rendering::IKJointImpl::AVector Rendering::IKJointImpl ::GetAxis(MatrixRotationAxis axisIndex) const
+const Rendering::IKJointImpl::AVector Rendering::IKJointImpl::GetAxis(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -242,7 +242,7 @@ const Rendering::IKJointImpl::AVector Rendering::IKJointImpl ::GetAxis(MatrixRot
     }
 }
 
-void Rendering::IKJointImpl ::UpdateWorldTransform()
+void Rendering::IKJointImpl::UpdateWorldTransform()
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -257,7 +257,7 @@ void Rendering::IKJointImpl ::UpdateWorldTransform()
     }
 }
 
-void Rendering::IKJointImpl ::UpdateWorldRotateAndTranslate()
+void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -284,7 +284,7 @@ void Rendering::IKJointImpl ::UpdateWorldRotateAndTranslate()
     }
 }
 
-bool Rendering::IKJointImpl ::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
+bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -352,7 +352,7 @@ bool Rendering::IKJointImpl ::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
     return true;
 }
 
-bool Rendering::IKJointImpl ::UpdateLocalRotate(MatrixRotationAxis axisIndex)
+bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -434,14 +434,14 @@ bool Rendering::IKJointImpl ::UpdateLocalRotate(MatrixRotationAxis axisIndex)
     return true;
 }
 
-const Rendering::ConstSpatialSharedPtr Rendering::IKJointImpl ::GetObjectSharedPtr() const noexcept
+const Rendering::ConstSpatialSharedPtr Rendering::IKJointImpl::GetObjectSharedPtr() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_Object;
 }
 
-const Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl ::GetGoalsSharedPtr(int index) const
+const Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl::GetGoalsSharedPtr(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Goals.size()), "Ë÷Òý´íÎó£¡");
@@ -449,14 +449,14 @@ const Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl ::GetGoalsSharedPtr
     return m_Goals[index];
 }
 
-int Rendering::IKJointImpl ::GetGoalsNum() const
+int Rendering::IKJointImpl::GetGoalsNum() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_Goals.size());
 }
 
-void Rendering::IKJointImpl ::SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation)
+void Rendering::IKJointImpl::SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "Ë÷Òý´íÎó£¡");
@@ -464,7 +464,7 @@ void Rendering::IKJointImpl ::SetAllowTranslation(MatrixRotationAxis axisIndex, 
     m_AllowTranslation[System::EnumCastUnderlying(axisIndex)] = allowTranslation;
 }
 
-void Rendering::IKJointImpl ::SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation)
+void Rendering::IKJointImpl::SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "Ë÷Òý´íÎó£¡");
@@ -472,7 +472,7 @@ void Rendering::IKJointImpl ::SetAllowRotation(MatrixRotationAxis axisIndex, boo
     m_AllowRotation[System::EnumCastUnderlying(axisIndex)] = allowRotation;
 }
 
-bool Rendering::IKJointImpl ::IsAllowTranslation(MatrixRotationAxis axisIndex) const
+bool Rendering::IKJointImpl::IsAllowTranslation(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "Ë÷Òý´íÎó£¡");
@@ -480,7 +480,7 @@ bool Rendering::IKJointImpl ::IsAllowTranslation(MatrixRotationAxis axisIndex) c
     return m_AllowTranslation[System::EnumCastUnderlying(axisIndex)];
 }
 
-bool Rendering::IKJointImpl ::IsAllowRotation(MatrixRotationAxis axisIndex) const
+bool Rendering::IKJointImpl::IsAllowRotation(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "Ë÷Òý´íÎó£¡");

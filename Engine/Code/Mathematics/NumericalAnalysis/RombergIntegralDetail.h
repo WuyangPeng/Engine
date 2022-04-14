@@ -27,10 +27,11 @@ Mathematics::RombergIntegral<Real, UserDataType>::RombergIntegral(int order, Rea
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-// private
 template <typename Real, typename UserDataType>
-void Mathematics::RombergIntegral<Real, UserDataType>::Calculate() noexcept
+void Mathematics::RombergIntegral<Real, UserDataType>::Calculate()
 {
+    CoreTools::DisableNoexcept();
+
     auto difference = end - begin;
 
 #include STSTEM_WARNING_PUSH

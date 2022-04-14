@@ -1,45 +1,44 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 17:22)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_H
 #define MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Matrix3.h" 
+#include "Mathematics/Algebra/Matrix3.h"
 
 namespace Mathematics
 {
-	// Compute the minimum-volume ellipsoid, (X-C)^T Real D Real^T (X-C) = 1, given the
-	// center C and orientation matrix Real.  The columns of Real are the axes of the
-	// ellipsoid.  The algorithm computes the diagonal matrix D.  The minimum
-	// volume is (4*pi/3)/sqrt(D[0]*D[1]*D[2]), where D = diag(D[0],D[1],D[2]).
-	// The problem is equivalent to maximizing the product D[0]*D[1]*D[2] for a
-	// given C and Real, and subject to the constraints
-	//   (P[i]-C)^T Real D Real^T (P[i]-C) <= 1
-	// for all input points P[i] with 0 <= i < N.  Each constraint has the form
-	//   A[0]*D[0] + A[1]*D[1] + A[2]*D[2] <= 1
-	// where A[0] >= 0, A[1] >= 0, and A[2] >= 0.
-	
-	template <typename Real>
-	class ContEllipsoid3MinCR
-	{
-	public:
-		ContEllipsoid3MinCR (int numPoints, const Vector3<Real>* points, const Vector3<Real>& C, const Matrix3<Real>& R, Real D[3]);
-		
-	private:
-		void FindEdgeMax (std::vector<Vector3<Real> >& A, int& plane0, int& plane1, Real D[3]);
-		
-		void FindFacetMax (std::vector<Vector3<Real> >& A, int& plane0,  Real D[3]);
-		
-		void MaxProduct (std::vector<Vector3<Real> >& A, Real D[3]);
-	};
-	
-	using ContEllipsoid3MinCRf = ContEllipsoid3MinCR<float>;
-	using ContEllipsoid3MinCRd = ContEllipsoid3MinCR<double>;
+    template <typename Real>
+    class ContEllipsoid3MinCR
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+
+        using ClassType = ContEllipsoid3MinCR<Real>;
+
+    public:
+        ContEllipsoid3MinCR(const std::vector<Vector3<Real>>& points, const Vector3<Real>& c, const Matrix3<Real>& r, std::array<Real, 3>& d);
+
+        CLASS_INVARIANT_DECLARE;
+
+    private:
+        void FindEdgeMax(std::vector<Vector3<Real>>& a, int& plane0, const int& plane1, std::array<Real, 3>& d);
+
+        void FindFacetMax(std::vector<Vector3<Real>>& a, int& plane0, std::array<Real, 3>& d);
+
+        void MaxProduct(std::vector<Vector3<Real>>& a, std::array<Real, 3>& d);
+    };
+
+    using ContEllipsoid3MinCRF = ContEllipsoid3MinCR<float>;
+    using ContEllipsoid3MinCRD = ContEllipsoid3MinCR<double>;
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_ELLIPSOID3_MINCR_H

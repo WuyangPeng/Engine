@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/19 11:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/31 16:19)
 
 #ifndef RENDERING_RESOURCES_VERTEX_FORMAT_ELEMENT_H
 #define RENDERING_RESOURCES_VERTEX_FORMAT_ELEMENT_H
@@ -11,14 +14,7 @@
 
 #include "VertexFormatType.h"
 #include "Flags/VertexFormatFlags.h"
-
-namespace CoreTools
-{
-    class BufferTarget;
-    class BufferSource;
-    class WriteFileManager;
-    class ReadFileManager;
-}
+#include "CoreTools/FileManager/FileManagerFwd.h"
 
 namespace Rendering
 {
@@ -36,24 +32,24 @@ namespace Rendering
 
     public:
         VertexFormatElement() noexcept;
-        VertexFormatElement(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept;
+        VertexFormatElement(int32_t streamIndex, int32_t offset, const VertexFormatType& vertexFormatType) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        unsigned int GetStreamIndex() const noexcept;
-        void SetStreamIndex(unsigned int streamIndex) noexcept;
-        unsigned int GetOffset() const noexcept;
-        void SetOffset(unsigned int offset) noexcept;
-        AttributeType GetType() const noexcept;
+        NODISCARD int32_t GetStreamIndex() const noexcept;
+        void SetStreamIndex(int32_t aStreamIndex) noexcept;
+        NODISCARD int32_t GetOffset() const noexcept;
+        void SetOffset(int32_t aOffset) noexcept;
+        NODISCARD AttributeType GetType() const noexcept;
         void SetType(AttributeType type) noexcept;
-        AttributeUsage GetUsage() const noexcept;
+        NODISCARD AttributeUsage GetUsage() const noexcept;
         void SetUsage(AttributeUsage usage) noexcept;
-        unsigned int GetUsageIndex() const noexcept;
-        void SetUsageIndex(unsigned int usageIndex) noexcept;
-        void SetVertexFormatType(const VertexFormatType& vertexFormatType) noexcept;
-        void Set(unsigned int streamIndex, unsigned int offset, const VertexFormatType& vertexFormatType) noexcept;
+        NODISCARD int32_t GetUsageIndex() const noexcept;
+        void SetUsageIndex(int32_t usageIndex) noexcept;
+        void SetVertexFormatType(const VertexFormatType& aVertexFormatType) noexcept;
+        void Set(int32_t aStreamIndex, int32_t aOffset, const VertexFormatType& aVertexFormatType) noexcept;
 
-        int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
 
@@ -61,9 +57,9 @@ namespace Rendering
         void ReadFromFile(ReadFileManager& inFile);
 
     private:
-        unsigned int m_StreamIndex;
-        unsigned int m_Offset;
-        VertexFormatType m_VertexFormatType;
+        int32_t streamIndex;
+        int32_t offset;
+        VertexFormatType vertexFormatType;
     };
 }
 

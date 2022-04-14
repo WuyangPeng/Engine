@@ -8,20 +8,19 @@
 
 #include "Example/InputOutput/InputOutputExample/InputOutputExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_INPUT_OUTPUT_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_INPUT_OUTPUT_EXAMPLE_STATIC
+#else  // BUILDING_INPUT_OUTPUT_EXAMPLE_STATIC
 
-	namespace InputOutputExample
-	{
-		void StaticDllLib()
-		{
+namespace InputOutputExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_INPUT_OUTPUT_EXAMPLE_STATIC
+#endif  // !BUILDING_INPUT_OUTPUT_EXAMPLE_STATIC

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/24 21:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 15:57)
 
 #include "Rendering/RenderingExport.h"
 
@@ -22,15 +22,17 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8L8>::SetColour(ValueTy
     static_assert(is_same_v<AlphaType, TrueType>, "AlphaType is TrueType!");
     static_assert(is_same_v<LuminanceType, TrueType>, "LuminanceType is TrueType!");
 
-    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
-    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+    static_assert(0 <= alphaIndex && alphaIndex < arraySize);
+    static_assert(0 <= luminanceIndex && luminanceIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Alpha] = alpha;
-    m_Colour[sm_Luminance] = luminance;
+
+    colour[alphaIndex] = alpha;
+    colour[luminanceIndex] = luminance;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -45,15 +47,17 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16>::SetColour(Value
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(!is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
+    static_assert(0 <= greenIndex && greenIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Green] = green;
-    m_Colour[sm_Red] = red;
+
+    colour[greenIndex] = green;
+    colour[redIndex] = red;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -68,15 +72,17 @@ void Rendering::TextureColour<Rendering::TextureFormat::G16R16F>::SetColour(Valu
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(!is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
+    static_assert(0 <= greenIndex && greenIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Green] = green;
-    m_Colour[sm_Red] = red;
+
+    colour[greenIndex] = green;
+    colour[redIndex] = red;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -91,15 +97,17 @@ void Rendering::TextureColour<Rendering::TextureFormat::G32R32F>::SetColour(Valu
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(!is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
-    static_assert(0 <= sm_Green && sm_Green < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
+    static_assert(0 <= greenIndex && greenIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Green] = green;
-    m_Colour[sm_Red] = red;
+
+    colour[greenIndex] = green;
+    colour[redIndex] = red;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -114,13 +122,15 @@ void Rendering::TextureColour<Rendering::TextureFormat::A8>::SetColour(ValueType
     static_assert(is_same_v<AlphaType, TrueType>, "AlphaType is TrueType!");
     static_assert(!is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-    static_assert(0 <= sm_Alpha && sm_Alpha < sm_ArraySize);
+    static_assert(0 <= alphaIndex && alphaIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Alpha] = alpha;
+
+    colour[alphaIndex] = alpha;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -135,13 +145,15 @@ void Rendering::TextureColour<Rendering::TextureFormat::L8>::SetColour(ValueType
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(is_same_v<LuminanceType, TrueType>, "LuminanceType is TrueType!");
 
-    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+    static_assert(0 <= luminanceIndex && luminanceIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Luminance] = luminance;
+
+    colour[luminanceIndex] = luminance;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -156,13 +168,15 @@ void Rendering::TextureColour<Rendering::TextureFormat::L16>::SetColour(ValueTyp
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(is_same_v<LuminanceType, TrueType>, "LuminanceType is TrueType!");
 
-    static_assert(0 <= sm_Luminance && sm_Luminance < sm_ArraySize);
+    static_assert(0 <= luminanceIndex && luminanceIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Luminance] = luminance;
+
+    colour[luminanceIndex] = luminance;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -177,13 +191,15 @@ void Rendering::TextureColour<Rendering::TextureFormat::R16F>::SetColour(ValueTy
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(!is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Red] = red;
+
+    colour[redIndex] = red;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -198,13 +214,15 @@ void Rendering::TextureColour<Rendering::TextureFormat::R32F>::SetColour(ValueTy
     static_assert(!is_same_v<AlphaType, TrueType>, "AlphaType isn't TrueType!");
     static_assert(!is_same_v<LuminanceType, TrueType>, "LuminanceType isn't TrueType!");
 
-    static_assert(0 <= sm_Red && sm_Red < sm_ArraySize);
+    static_assert(0 <= redIndex && redIndex < arraySize);
 
     RENDERING_CLASS_IS_VALID_3;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)  // 通过使用静态断言，固定大小数组使用常量索引是被允许的。
-    m_Colour[sm_Red] = red;
+
+    colour[redIndex] = red;
+
 #include STSTEM_WARNING_POP
 
     Standardization();
@@ -240,7 +258,7 @@ namespace Rendering
         colour2 = colour7;
 
         colour6.SetClamp(false);
-        [[maybe_unused]] const auto isClamp = colour2.IsClamp();
+        MAYBE_UNUSED const auto isClamp = colour2.IsClamp();
 
         colour1.SetRed(30);
         colour2.SetGreen(50);
@@ -248,14 +266,14 @@ namespace Rendering
         colour5.SetAlpha(5);
         colour4.SetLuminance(2);
 
-        [[maybe_unused]] const auto red = colour1.GetRed();
-        [[maybe_unused]] const auto greeen = colour2.GetGreen();
-        [[maybe_unused]] const auto blue = colour3.GetBlue();
-        [[maybe_unused]] const auto alpha = colour5.GetAlpha();
-        [[maybe_unused]] const auto luminance = colour4.GetLuminance();
+        MAYBE_UNUSED const auto red = colour1.GetRed();
+        MAYBE_UNUSED const auto greeen = colour2.GetGreen();
+        MAYBE_UNUSED const auto blue = colour3.GetBlue();
+        MAYBE_UNUSED const auto alpha = colour5.GetAlpha();
+        MAYBE_UNUSED const auto luminance = colour4.GetLuminance();
 
-        [[maybe_unused]] const auto point = colour1.GetPoint();
-        [[maybe_unused]] const auto value = colour1[1];
+        MAYBE_UNUSED const auto point = colour1.GetPoint();
+        MAYBE_UNUSED const auto value = colour1[1];
 
         colour3 += colour2;
         colour2 -= colour1;

@@ -1,215 +1,221 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 17:44)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H
 
 #include "BSplineCurveFit.h"
-#include "Mathematics/Base/MathDetail.h"
+#include "BSplineFitBasisDetail.h"
 #include "Mathematics/Algebra/BandedMatrixSolveDetail.h"
-
-namespace Mathematics
-{
+#include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-BSplineCurveFit<Real>::BSplineCurveFit (int dimension, int numSamples,
-    const Real* sampleData, int degree, int numControls)
-	: mBasis{ numControls, degree }
+Mathematics::BSplineCurveFit<Real>::BSplineCurveFit(int dimension, int numSamples, const std::vector<Real>& sampleData, int degree, int numControls)
+    : dimension{ dimension },
+      numSamples{ numSamples },
+      sampleData{ sampleData },
+      degree{ degree },
+      numControls{ numControls },
+      controlData(gsl::narrow_cast<size_t>(dimension) * gsl::narrow_cast<size_t>(numControls)),
+      basis{ numControls, degree }
 {
-    MATHEMATICS_ASSERTION_0(dimension >= 1, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree < numControls, "Invalid input\n");
-    MATHEMATICS_ASSERTION_0(numControls <= numSamples, "Invalid input\n");
+    MATHEMATICS_ASSERTION_0(dimension >= 1, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree < numControls, "无效输入。\n");
+    MATHEMATICS_ASSERTION_0(numControls <= numSamples, "无效输入。\n");
 
-    mDimension = dimension;
-    mNumSamples = numSamples;
-    mSampleData = sampleData;
-    mDegree = degree;
-    mNumControls = numControls;
-    mControlData = nullptr;  //  NEW1<Real>(mDimension*numControls);
+    BSplineFitBasis<Real> dBasis{ numControls, degree };
+    auto tMultiplier = Math::GetValue(1) / static_cast<Real>(gsl::narrow_cast<size_t>(numSamples) - 1);
 
-    // The double-precision basis functions are used to help with the
-    // numerical round-off errors.
-	BSplineFitBasis<Real> dBasis{ mNumControls,mDegree };
-	auto tMultiplier = 1.0f/(Real)(mNumSamples - 1);
+    BandedMatrixSolve<Real> ataMat{ numControls, degree + 1, degree + 1 };
 
-    // Fit the data points with a B-spline curve using a least-squares error
-    // metric.  The problem is of the form A^T*A*Q = A^T*P, where A^T*A is a
-    // banded matrix, P contains the sample data, and Q is the unknown vector
-    // of control points.
-
-    Real t;
-    int i0, i1, i2, imin, imax, j;
-
-    // Construct the matrix A^T*A.
-    auto ATAMat = nullptr;  // NEW0 BandedMatrixSolve<Real>(mNumControls,mDegree + 1, mDegree + 1);
-
-    for (i0 = 0; i0 < mNumControls; ++i0)
+    for (auto i0 = 0; i0 < numControls; ++i0)
     {
-        for (i1 = 0; i1 < i0; ++i1)
+        for (auto i1 = 0; i1 < i0; ++i1)
         {
-           // (*ATAMat)(i0, i1) = (*ATAMat)(i1, i0);
+            ataMat(i0, i1) = ataMat(i1, i0);
         }
 
-		auto i1Max = i0 + mDegree;
-        if (i1Max >= mNumControls)
+        auto i1Max = i0 + degree;
+        if (i1Max >= numControls)
         {
-            i1Max = mNumControls - 1;
+            i1Max = numControls - 1;
         }
 
-        for (i1 = i0; i1 <= i1Max; ++i1)
+        for (auto i1 = i0; i1 <= i1Max; ++i1)
         {
-			auto value = 0.0;
-            for (i2 = 0; i2 < mNumSamples; ++i2)
+            auto value = Math::GetValue(0);
+            for (auto i2 = 0; i2 < numSamples; ++i2)
             {
-                t = tMultiplier*(Real)i2;
+                auto t = tMultiplier * Math::GetValue(i2);
+                auto imin = 0;
+                auto imax = 0;
                 dBasis.Compute(t, imin, imax);
                 if (imin <= i0 && i0 <= imax && imin <= i1 && i1 <= imax)
                 {
-					auto dB0 = dBasis.GetValue(i0 - imin);
-					auto dB1 = dBasis.GetValue(i1 - imin);
-                    value += dB0*dB1;
+                    auto dB0 = dBasis.GetValue(i0 - imin);
+                    auto dB1 = dBasis.GetValue(i1 - imin);
+                    value += dB0 * dB1;
                 }
             }
-           // (*ATAMat)(i0, i1) = value;
+
+            ataMat(i0, i1) = value;
         }
     }
 
-    // Construct the matrix A^T.
-	VariableMatrix<Real> ATMat{ mNumSamples, mNumControls };
-    //memset(ATMat[0], 0, mNumControls*mNumSamples*sizeof(double));
-    for (i0 = 0; i0 < mNumControls; ++i0)
+    VariableMatrix<Real> atMat{ numSamples, numControls };
+
+    for (auto i0 = 0; i0 < numControls; ++i0)
     {
-        for (i1 = 0; i1 < mNumSamples; ++i1)
+        for (auto i1 = 0; i1 < numSamples; ++i1)
         {
-            t = tMultiplier*(Real)i1;
+            auto t = tMultiplier * Math::GetValue(i1);
+            auto imin = 0;
+            auto imax = 0;
             dBasis.Compute(t, imin, imax);
             if (imin <= i0 && i0 <= imax)
             {
-                ATMat[i0][i1] = dBasis.GetValue(i0 - imin);
+                atMat[i0][i1] = dBasis.GetValue(i0 - imin);
             }
         }
     }
 
-    // Compute X0 = (A^T*A)^{-1}*A^T by solving the linear system
-    // A^T*A*X = A^T.
-    //bool solved = ATAMat->SolveSystem(ATMat,mNumSamples);
-	//bool solved = 
-	ATMat = 	ATAMat->SolveSystem(ATMat); // 错误会抛出异常
-   // MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
-   // solved;
+    atMat = ataMat.SolveSystem(atMat);
 
-    // The control points for the fitted curve are stored in the vector
-    // Q = X0*P, where P is the vector of sample data.
-    memset(mControlData, 0, mNumControls*mDimension*sizeof(Real));
-    for (i0 = 0; i0 < mNumControls; ++i0)
+    for (auto i0 = 0; i0 < numControls; ++i0)
     {
-        Real* Q = mControlData + i0*mDimension;
-        for (i1 = 0; i1 < mNumSamples; ++i1)
+        for (auto i1 = 0; i1 < numSamples; ++i1)
         {
-            const Real* P = mSampleData + i1*mDimension;
-			auto xValue = (Real)ATMat[i0][i1];
-            for (j = 0; j < mDimension; j++)
+            auto xValue = atMat[i0][i1];
+            for (auto j = 0; j < dimension; ++j)
             {
-                Q[j] += xValue*P[j];
+                const auto controlDataIndex = i0 * dimension + j;
+                const auto sampleDataIndex = i1 * dimension + j;
+                controlData.at(controlDataIndex) += xValue * sampleData.at(sampleDataIndex);
             }
         }
     }
 
-    // Set the first and last output control points to match the first and
-    // last input samples.  This supports the application of fitting keyframe
-    // data with B-spline curves.  The user expects that the curve passes
-    // through the first and last positions in order to support matching two
-    // consecutive keyframe sequences.
-    Real* cEnd0 = mControlData;
-    const Real* sEnd0 = mSampleData;
-    Real* cEnd1 = &mControlData[mDimension*(mNumControls-1)];
-    const Real* sEnd1 = &mSampleData[mDimension*(mNumSamples-1)];
-    for (j = 0; j < mDimension; j++)
+    auto index = 0;
+    for (auto j = 0; j < dimension; j++)
     {
-        *cEnd0++ = *sEnd0++;
-        *cEnd1++ = *sEnd1++;
+        controlData.at(index) = sampleData.at(index);
+
+        const auto controlDataIndex = index + dimension * (numControls - 1);
+        const auto sampleDataIndex = index + dimension * (numSamples - 1);
+        controlData.at(controlDataIndex) = sampleData.at(sampleDataIndex);
+
+        ++index;
     }
 
-    //DELETE2(ATMat);
-    //DELETE0(ATAMat);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::BSplineCurveFit<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::BSplineCurveFit<Real>::GetDimension() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return dimension;
 }
 
 template <typename Real>
-BSplineCurveFit<Real>::~BSplineCurveFit ()
+int Mathematics::BSplineCurveFit<Real>::GetSampleQuantity() const noexcept
 {
-    //DELETE1(mControlData);
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numSamples;
 }
 
 template <typename Real>
-int BSplineCurveFit<Real>::GetDimension () const
+std::vector<Real> Mathematics::BSplineCurveFit<Real>::GetSampleData() const
 {
-    return mDimension;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return sampleData;
 }
 
 template <typename Real>
-int BSplineCurveFit<Real>::GetSampleQuantity () const
+int Mathematics::BSplineCurveFit<Real>::GetDegree() const noexcept
 {
-    return mNumSamples;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return degree;
 }
 
 template <typename Real>
-const Real* BSplineCurveFit<Real>::GetSampleData () const
+int Mathematics::BSplineCurveFit<Real>::GetControlQuantity() const noexcept
 {
-    return mSampleData;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return numControls;
 }
 
 template <typename Real>
-int BSplineCurveFit<Real>::GetDegree () const
+std::vector<Real> Mathematics::BSplineCurveFit<Real>::GetControlData() const
 {
-    return mDegree;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return controlData;
 }
 
 template <typename Real>
-int BSplineCurveFit<Real>::GetControlQuantity () const
+const Mathematics::BSplineFitBasis<Real>& Mathematics::BSplineCurveFit<Real>::GetBasis() const noexcept
 {
-    return mNumControls;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return basis;
 }
 
 template <typename Real>
-const Real* BSplineCurveFit<Real>::GetControlData () const
+std::vector<Real> Mathematics::BSplineCurveFit<Real>::GetPosition(Real t) const
 {
-    return mControlData;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-const BSplineFitBasis<Real>& BSplineCurveFit<Real>::GetBasis () const
-{
-    return mBasis;
-}
+    std::vector<Real> position{};
 
-template <typename Real>
-void BSplineCurveFit<Real>::GetPosition (Real t, Real* position) const
-{
-    int imin, imax;
-    mBasis.Compute(t, imin, imax);
+    auto imin = 0;
+    auto imax = 0;
+    basis.Compute(t, imin, imax);
 
-    Real* source = &mControlData[mDimension*imin];
-	auto basisValue = mBasis.GetValue(0);
-    int j;
-    for (j = 0; j < mDimension; ++j)
+    auto basisValue = basis.GetValue(0);
+
+    auto index = 0;
+    for (auto j = 0; j < dimension; ++j)
     {
-        position[j] = basisValue*(*source++);
+        const auto controlDataIndex = dimension * imin + index;
+        position.emplace_back(basisValue * controlData.at(controlDataIndex));
+        ++index;
     }
 
-    for (auto i = imin+1, index = 1; i <= imax; ++i, ++index)
+    index = 1;
+    for (auto i = imin + 1; i <= imax; ++i)
     {
-        basisValue = mBasis.GetValue(index);
-        for (j = 0; j < mDimension; ++j)
+        basisValue = basis.GetValue(index);
+        for (auto j = 0; j < dimension; ++j)
         {
-            position[j] += basisValue*(*source++);
+            const auto controlDataIndex = dimension * imin + index;
+            position.at(j) += basisValue * controlData.at(controlDataIndex);
+            ++index;
         }
     }
+
+    return position;
 }
 
-}
-
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE_FIT_DETAIL_H

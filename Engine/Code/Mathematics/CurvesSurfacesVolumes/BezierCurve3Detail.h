@@ -1,215 +1,194 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 13:39)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H
 
 #include "BezierCurve3.h"
-
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
-
-
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "Mathematics/Algebra/Vector3Detail.h"
-#include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
+#include "Mathematics/Algebra/Vector3Detail.h"
+
+#include <gsl/util>
+
 template <typename Real>
-Mathematics::BezierCurve3<Real>
-	::BezierCurve3 (int degree, Vector3<Real>* ctrlPoint)
-	:SingleCurve3<Real>{ Math ::GetValue(0), Math::GetValue(1) }
+Mathematics::BezierCurve3<Real>::BezierCurve3(int degree, const std::vector<Vector3<Real>>& ctrlPoint)
+    : ParentType{ Math ::GetValue(0), Math::GetValue(1) },
+      degree{ degree },
+      numCtrlPoints{ degree + 1 },
+      ctrlPoint{ ctrlPoint },
+      der1CtrlPoint{},
+      der2CtrlPoint{},
+      der3CtrlPoint{},
+      choose{ numCtrlPoints, std::vector<Real>(numCtrlPoints) }
 {
-    MATHEMATICS_ASSERTION_0(degree >= 2, "The degree must be three or larger\n");
+    MATHEMATICS_ASSERTION_0(degree >= 2, "维度必须是3或更大。\n");
 
-    int i = 0;
-	int j = 0;
-
-    mDegree = degree;
-    mNumCtrlPoints = mDegree + 1;
-    mCtrlPoint = ctrlPoint;
-
-    // Compute first-order differences.
-    mDer1CtrlPoint = NEW1<Vector3<Real> >(mNumCtrlPoints - 1);
-    for (i = 0; i < mNumCtrlPoints - 1; ++i)
+    for (auto i = 0; i < numCtrlPoints - 1; ++i)
     {
-        mDer1CtrlPoint[i] = mCtrlPoint[i + 1];
-		mDer1CtrlPoint[i] -= mCtrlPoint[i];
+        der1CtrlPoint.emplace_back(ctrlPoint.at(gsl::narrow_cast<size_t>(i) + 1));
+        der1CtrlPoint.at(i) -= ctrlPoint.at(i);
     }
 
-    // Compute second-order differences.
-    mDer2CtrlPoint = NEW1<Vector3<Real> >(mNumCtrlPoints - 2);
-    for (i = 0; i < mNumCtrlPoints - 2; ++i)
+    for (auto i = 0; i < numCtrlPoints - 2; ++i)
     {
-        mDer2CtrlPoint[i] = mDer1CtrlPoint[i + 1] - mDer1CtrlPoint[i];
+        der2CtrlPoint.emplace_back(der1CtrlPoint.at(gsl::narrow_cast<size_t>(i) + 1) - der1CtrlPoint.at(i));
     }
 
-    // Compute third-order differences.
     if (degree >= 3)
     {
-        mDer3CtrlPoint = NEW1<Vector3<Real> >(mNumCtrlPoints - 3);
-        for (i = 0; i < mNumCtrlPoints - 3; ++i)
+        for (auto i = 0; i < numCtrlPoints - 3; ++i)
         {
-            mDer3CtrlPoint[i] = mDer2CtrlPoint[i + 1] - mDer2CtrlPoint[i];
+            der3CtrlPoint.emplace_back(der2CtrlPoint.at(gsl::narrow_cast<size_t>(i) + 1) - der2CtrlPoint.at(i));
         }
     }
-    else
-    {
-        mDer3CtrlPoint = 0;
-    }
 
-    // Compute combinatorial values Choose(N,K), store in mChoose[N][K].
-    // The values mChoose[r][c] are invalid for r < c (use only the
-    // entries for r >= c).
-    mChoose = NEW2<Real>(mNumCtrlPoints, mNumCtrlPoints);
-
-    mChoose[0][0] = Math::GetValue(1);
-    mChoose[1][0] = Math::GetValue(1);
-    mChoose[1][1] = Math::GetValue(1);
-    for (i = 2; i <= mDegree; ++i)
+    choose.at(0).at(0) = Math::GetValue(1);
+    choose.at(1).at(0) = Math::GetValue(1);
+    choose.at(1).at(1) = Math::GetValue(1);
+    for (auto i = 2; i <= degree; ++i)
     {
-        mChoose[i][0] = Math::GetValue(1);
-        mChoose[i][i] = Math::GetValue(1);
-        for (j = 1; j < i; ++j)
+        choose.at(i).at(0) = Math::GetValue(1);
+        choose.at(i).at(i) = Math::GetValue(1);
+        for (auto j = 1; j < i; ++j)
         {
-            mChoose[i][j] = mChoose[i-1][j-1] + mChoose[i-1][j];
+            choose.at(i).at(j) = choose.at(gsl::narrow_cast<size_t>(i) - 1).at(gsl::narrow_cast<size_t>(j) - 1) + choose.at(gsl::narrow_cast<size_t>(i) - 1).at(j);
         }
     }
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::BezierCurve3<Real>::IsValid() const noexcept
+{
+    return ParentType::IsValid();
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::BezierCurve3<Real>::GetDegree() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return degree;
 }
 
 template <typename Real>
-Mathematics::BezierCurve3<Real>
-	::~BezierCurve3 ()
+std::vector<Mathematics::Vector3<Real>> Mathematics::BezierCurve3<Real>::GetControlPoints() const
 {
-	EXCEPTION_TRY
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
- DELETE2(mChoose);
-    DELETE1(mDer3CtrlPoint);
-    DELETE1(mDer2CtrlPoint);
-    DELETE1(mDer1CtrlPoint);
-    DELETE1(mCtrlPoint);
-#include STSTEM_WARNING_POP
-}
-EXCEPTION_ALL_CATCH(Mathematics)  
-    
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ctrlPoint;
 }
 
 template <typename Real>
-int Mathematics::BezierCurve3<Real>
-	::GetDegree () const noexcept
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetPosition(Real t) const
 {
-    return mDegree;
-}
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-template <typename Real>
-const Mathematics::Vector3<Real>* Mathematics::BezierCurve3<Real>
-	::GetControlPoints () const noexcept
-{
-    return mCtrlPoint;
-}
+    auto oneMinusT = Math::GetValue(1) - t;
+    auto powT = t;
+    auto result = oneMinusT * ctrlPoint.at(0);
 
-template <typename Real>
-Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
-	::GetPosition (Real t) const
-{
-	auto oneMinusT = Math::GetValue(1) - t;
-	auto powT = t;
-	auto result = oneMinusT*mCtrlPoint[0];
-
-    for (auto i = 1; i < mDegree; ++i)
+    for (auto i = 1; i < degree; ++i)
     {
-		auto coeff = mChoose[mDegree][i]*powT;
-        result = (result+coeff*mCtrlPoint[i])*oneMinusT;
+        auto coeff = choose.at(degree).at(i) * powT;
+        result = (result + ctrlPoint.at(i) * coeff) * oneMinusT;
         powT *= t;
     }
 
-    result += powT*mCtrlPoint[mDegree];
+    result += ctrlPoint.at(degree) * powT;
 
     return result;
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
-	::GetFirstDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetFirstDerivative(Real t) const
 {
-	auto oneMinusT = Math::GetValue(1) - t;
-	auto powT = t;
-	auto result = oneMinusT*mDer1CtrlPoint[0];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	const auto degreeM1 = mDegree - 1;
+    auto oneMinusT = Math::GetValue(1) - t;
+    auto powT = t;
+    auto result = oneMinusT * der1CtrlPoint.at(0);
+
+    const auto degreeM1 = degree - 1;
     for (auto i = 1; i < degreeM1; ++i)
     {
-		auto coeff = mChoose[degreeM1][i]*powT;
-        result = (result+coeff*mDer1CtrlPoint[i])*oneMinusT;
+        auto coeff = choose.at(degreeM1).at(i) * powT;
+        result = (result + der1CtrlPoint.at(i) * coeff) * oneMinusT;
         powT *= t;
     }
 
-    result += powT*mDer1CtrlPoint[degreeM1];
-    result *= static_cast<Real>(mDegree);
+    result += der1CtrlPoint.at(degreeM1) * powT;
+    result *= static_cast<Real>(degree);
 
     return result;
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
-	::GetSecondDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetSecondDerivative(Real t) const
 {
-	auto oneMinusT = Math::GetValue(1) - t;
-	auto powT = t;
-	auto result = oneMinusT*mDer2CtrlPoint[0];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	const auto degreeM2 = mDegree - 2;
+    auto oneMinusT = Math::GetValue(1) - t;
+    auto powT = t;
+    auto result = oneMinusT * der2CtrlPoint.at(0);
+
+    const auto degreeM2 = degree - 2;
     for (auto i = 1; i < degreeM2; ++i)
     {
-		auto coeff = mChoose[degreeM2][i]*powT;
-        result = (result+coeff*mDer2CtrlPoint[i])*oneMinusT;
+        auto coeff = choose.at(degreeM2).at(i) * powT;
+        result = (result + der2CtrlPoint.at(i) * coeff) * oneMinusT;
         powT *= t;
     }
 
-    result += powT*mDer2CtrlPoint[degreeM2];
-	const auto temp = mDegree - 1;
-	const auto temp2 = mDegree * temp;
+    result += der2CtrlPoint.at(degreeM2) * powT;
+    const auto temp = degree - 1;
+    const auto temp2 = degree * temp;
     result *= static_cast<Real>(temp2);
 
     return result;
 }
 
 template <typename Real>
-Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
-	::GetThirdDerivative (Real t) const
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>::GetThirdDerivative(Real t) const
 {
-    if (mDegree < 3)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    if (degree < 3)
     {
         return Vector3<Real>::GetZero();
     }
 
-	auto oneMinusT = Math::GetValue(1) - t;
-	auto powT = t;
-	auto result = oneMinusT*mDer3CtrlPoint[0];
+    auto oneMinusT = Math::GetValue(1) - t;
+    auto powT = t;
+    auto result = oneMinusT * der3CtrlPoint.at(0);
 
-    const int degreeM3 = mDegree - 3;
+    const int degreeM3 = degree - 3;
     for (auto i = 1; i < degreeM3; ++i)
     {
-		auto coeff = mChoose[degreeM3][i]*powT;
-        result = (result+coeff*mDer3CtrlPoint[i])*oneMinusT;
+        auto coeff = choose.at(degreeM3).at(i) * powT;
+        result = (result + coeff * der3CtrlPoint.at(i)) * oneMinusT;
         powT *= t;
     }
 
-    result += powT*mDer3CtrlPoint[degreeM3];
-	const auto temp1 = mDegree - 1;
-	const auto temp2 = mDegree - 2;
-	const auto temp3 = mDegree * temp1*temp2;
+    result += powT * der3CtrlPoint.at(degreeM3);
+    const auto temp1 = degree - 1;
+    const auto temp2 = degree - 2;
+    const auto temp3 = degree * temp1 * temp2;
     result *= static_cast<Real>(temp3);
 
     return result;
 }
-#include STSTEM_WARNING_POP
 
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
-
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H

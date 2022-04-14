@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/22 13:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 13:49)
 
 #ifndef RENDERING_DATA_TYPES_COLOUR_CONVERT_TO_DETAIL_H
 #define RENDERING_DATA_TYPES_COLOUR_CONVERT_TO_DETAIL_H
@@ -14,7 +14,6 @@
 #include "ColourDetail.h"
 #include "ColourTextureFormatTraits.h"
 #include "Detail/TexelsToCheckDetail.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Base/SpanIteratorDetail.h"
 
 template <Rendering::TextureFormat Format>
@@ -24,8 +23,8 @@ uint16_t Rendering::ColourConvertTo::GetSmall(const FloatColour& colour) noexcep
     const auto green = GetGreen<Format>(colour);
     const auto blue = GetBlue<Format>(colour);
 
-    constexpr auto greenShift = ColourTextureFormatTraits<Format>::sm_BlueBytes;
-    constexpr auto redShift = greenShift + ColourTextureFormatTraits<Format>::sm_GreenBytes;
+    constexpr auto greenShift = ColourTextureFormatTraits<Format>::blueBytes;
+    constexpr auto redShift = greenShift + ColourTextureFormatTraits<Format>::greenBytes;
 
     auto result = blue;
     result |= (green << greenShift);
@@ -34,7 +33,7 @@ uint16_t Rendering::ColourConvertTo::GetSmall(const FloatColour& colour) noexcep
     if constexpr (std::is_same_v<ColourTextureFormatTraits<Format>::AlphaType, TrueType>)
     {
         const auto alpha = GetAlpha<Format>(colour);
-        constexpr auto alphaShift = redShift + ColourTextureFormatTraits<Format>::sm_RedBytes;
+        constexpr auto alphaShift = redShift + ColourTextureFormatTraits<Format>::redBytes;
 
         result |= (alpha << alphaShift);
     }

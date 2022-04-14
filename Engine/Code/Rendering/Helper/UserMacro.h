@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.0 (2020/08/16 23:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/28 16:41)
 
 #ifndef RENDERING_HELPER_USER_MACRO_H
 #define RENDERING_HELPER_USER_MACRO_H
@@ -15,7 +15,7 @@
 
 #define RENDERING_ClOSE_BEGIN (0x01)
 
-#define CLOSE_USE_RENDERING_TEMPLATE_TEST (RENDERING_ClOSE_BEGIN) // 默认关闭
+#define CLOSE_USE_RENDERING_TEMPLATE_TEST (RENDERING_ClOSE_BEGIN)  // 默认关闭
 #define CLOSE_USE_VALIDATE_CAMERA_FRAME_ONCE (RENDERING_ClOSE_BEGIN << 1)
 #define CLOSE_USE_ASSERT_ON_CHANGED_MAX_PROFILES (RENDERING_ClOSE_BEGIN << 2)
 #define CLOSE_USE_RESET_STATE_AFTER_DRAW (RENDERING_ClOSE_BEGIN << 3)  // 默认关闭
@@ -28,8 +28,8 @@
 
 #define CLOSE_RENDERING_MAX (((RENDERING_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0x18，最大值为0xFF）
-#define COMPILE_RENDERING_CLOSE 0x92
+// 编译测试（默认为0x19，最大值为0xFF）
+#define COMPILE_RENDERING_CLOSE 0x18
 
 static_assert(0 <= COMPILE_RENDERING_CLOSE, "COMPILE_RENDERING_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_RENDERING_CLOSE <= CLOSE_RENDERING_MAX, "COMPILE_RENDERING_CLOSE Must be less than or equal CLOSE_RENDERING_MAX.");

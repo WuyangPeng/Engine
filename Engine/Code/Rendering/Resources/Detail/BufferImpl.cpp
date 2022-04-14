@@ -1,311 +1,298 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 14:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/30 10:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BufferImpl.h"
 #include "BufferParameter.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Base/SpanIteratorDetail.h"
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
+#include <gsl/util>
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26492)
-Rendering::BufferImpl
-	::BufferImpl() noexcept
-	:m_NumElements{ 0 }, m_ElementSize{ 0 }, m_Usage{ BufferUsage::Quantity }, m_Data{}
+Rendering::BufferImpl::BufferImpl() noexcept
+    : numElements{ 0 }, elementSize{ 0 }, usage{ BufferUsage::Quantity }, data{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::BufferImpl
-	::BufferImpl(int numElements, int elementSize, BufferUsage usage)
-	:m_NumElements{ numElements }, m_ElementSize{ elementSize }, m_Usage{ usage }, m_Data(m_NumElements * m_ElementSize)
+Rendering::BufferImpl::BufferImpl(int numElements, int elementSize, BufferUsage usage)
+    : numElements{ numElements },
+      elementSize{ elementSize },
+      usage{ usage },
+      data(gsl::narrow_cast<size_t>(numElements) * elementSize)
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::BufferImpl
-	::IsValid() const noexcept
-{
-	if(0 <= m_NumElements && 0 <= m_ElementSize && m_NumElements * m_ElementSize <= static_cast<int>(m_Data.size()))
-	    return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-int Rendering::BufferImpl ::GetNumElements() const noexcept
+bool Rendering::BufferImpl::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_NumElements;
+    if (0 <= numElements && 0 <= elementSize && numElements * elementSize <= gsl::narrow_cast<int>(data.size()))
+        return true;
+    else
+        return false;
 }
 
-int Rendering::BufferImpl
-	::GetElementSize() const noexcept
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return m_ElementSize;
+int32_t Rendering::BufferImpl::GetNumElements() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return numElements;
 }
 
-Rendering::BufferUsage Rendering::BufferImpl ::GetUsage() const noexcept
+int32_t Rendering::BufferImpl::GetElementSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Usage;
+    return elementSize;
 }
 
-void Rendering::BufferImpl
-	::SetNumElements( int numElements )
+Rendering::BufferUsage Rendering::BufferImpl::GetUsage() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_1(numElements <= boost::numeric_cast<int>(m_Data.size()) / m_ElementSize, "设置的长度溢出！");
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	CoreTools::DisableNoexcept();
-
-	m_NumElements = numElements;
+    return usage;
 }
 
-int Rendering::BufferImpl
-	::GetNumBytes() const
+void Rendering::BufferImpl::SetNumElements(int32_t newNumElements) noexcept(g_Assert < 1 || g_RenderingAssert < 1)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_1(newNumElements <= boost::numeric_cast<int>(data.size()) / elementSize, "设置的长度溢出！");
 
-	return boost::numeric_cast<int>(m_Data.size());
+    numElements = newNumElements;
 }
 
-const char* Rendering::BufferImpl ::GetReadOnlyData() const noexcept
+int Rendering::BufferImpl::GetNumBytes() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return &m_Data[0];
+    return boost::numeric_cast<int>(data.size());
 }
 
-const char* Rendering::BufferImpl
-	::GetReadOnlyData(int index) const 
+const char* Rendering::BufferImpl::GetReadOnlyData() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (0 <= index && index < GetNumBytes())
-	{
-		return &m_Data[index];
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引越界！"s));
-	}
+    return data.data();
 }
 
-void Rendering::BufferImpl
-	::Load( CoreTools::BufferSource& source )
+Rendering::BufferImpl::SpanIterator Rendering::BufferImpl::GetSpanIterator() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	source.Read(m_NumElements);
-	source.Read(m_ElementSize);
-	source.ReadEnum(m_Usage);
-
-	auto size = 0;
-	source.Read(size);
-	m_Data.resize(size);
-
-//	source.Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
+    return SpanIterator{ data.begin(), data.end() };
 }
 
-void Rendering::BufferImpl
-	::Save( CoreTools::BufferTarget& target ) const
+const char* Rendering::BufferImpl::GetReadOnlyData(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumElements);
-	target.Write(m_ElementSize);
-        target.WriteEnum(m_Usage);
-        target.WriteContainerWithNumber(m_Data);
+    return &data.at(index);
 }
 
-int Rendering::BufferImpl
-	::GetStreamingSize() const
+void Rendering::BufferImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_NumElements);
+    source.Read(numElements);
+    source.Read(elementSize);
+    source.ReadEnum(usage);
 
-	size += CORE_TOOLS_STREAM_SIZE(m_ElementSize);
-	size += CORE_TOOLS_STREAM_SIZE(m_Usage);
-	auto numBytes = boost::numeric_cast<int>(m_Data.size());
-	size += CORE_TOOLS_STREAM_SIZE(numBytes);
-	size += numBytes * CORE_TOOLS_STREAM_SIZE(m_Data[0]);
+    int32_t size{};
+    source.Read(size);
+    data.resize(size);
 
-	return size;
+    source.ReadContainer(data);
 }
 
-void Rendering::BufferImpl
-    ::SaveBufferDataToFile(WriteFileManager& outFile) const
+void Rendering::BufferImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	SaveHeadToFile(outFile);
-
-	const auto numBytes = GetNumBytes();
-	outFile.Write(sizeof(int), &numBytes);
-	 
-	outFile.Write(m_ElementSize, numBytes / m_ElementSize, &m_Data[0]);
+    target.Write(numElements);
+    target.Write(elementSize);
+    target.WriteEnum(usage);
+    target.WriteContainerWithNumber(data);
 }
 
-void Rendering::BufferImpl
-	::SaveBufferDataToFile(WriteFileManager& outFile,const ConstVertexFormatSharedPtr& vertexformat) const 
+int Rendering::BufferImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	const auto stride = vertexformat->GetStride();
+    auto size = CORE_TOOLS_STREAM_SIZE(numElements);
 
-	RENDERING_ASSERTION_1(stride == GetElementSize(), "格式步进值和顶点大小必须匹配。\n");
+    size += CORE_TOOLS_STREAM_SIZE(elementSize);
+    size += CORE_TOOLS_STREAM_SIZE(usage);
+    auto numBytes = boost::numeric_cast<int32_t>(data.size());
+    size += CORE_TOOLS_STREAM_SIZE(numBytes);
+    size += numBytes * CORE_TOOLS_STREAM_SIZE(decltype(data[0]){});
 
-	// 建立一个顶点缓冲属性的表。
-	// 每个属性都有一个偏移量,属性组件的大小,和组件大小的数量
-	// 例如,属性使用偏移量0和类型AT_FLOAT3为(offset,size,numComponents) = (0,4,3)。
-	BufferParameter table[System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes)];
-	const auto numAttributes = vertexformat->GetNumAttributes();
-	for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
+    return size;
+}
+
+void Rendering::BufferImpl::SaveBufferDataToFile(WriteFileManager& outFile) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    SaveHeadToFile(outFile);
+
+    const auto numBytes = gsl::narrow_cast<int32_t>(GetNumBytes());
+    outFile.Write(sizeof(int32_t), &numBytes);
+
+    outFile.Write(elementSize, numBytes / elementSize, data.data());
+}
+
+void Rendering::BufferImpl::SaveBufferDataToFile(WriteFileManager& outFile, const VertexFormat& vertexformat) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    const auto stride = vertexformat.GetStride();
+
+    RENDERING_ASSERTION_1(stride == GetElementSize(), "格式步进值和顶点大小必须匹配。\n");
+
+    // 建立一个顶点缓冲属性的表。
+    // 每个属性都有一个偏移量,属性组件的大小,和组件大小的数量
+    // 例如,属性使用偏移量0和类型AT_FLOAT3为(offset,size,numComponents) = (0,4,3)。
+    std::array<BufferParameter, System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes)> table{};
+    const auto numAttributes = vertexformat.GetNumAttributes();
+    for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
     {
-            const auto type = vertexformat->GetAttributeType(attributesIndex);
-        const auto offset = vertexformat->GetOffset(attributesIndex);
-            const auto componentSize = VertexFormat::GetComponentSize(type);
+        const auto type = vertexformat.GetAttributeType(attributesIndex);
+        const auto offset = vertexformat.GetOffset(attributesIndex);
+        const auto componentSize = VertexFormat::GetComponentSize(type);
         const auto numComponents = VertexFormat::GetNumComponents(type);
 
-		table[attributesIndex].Set(offset, componentSize, numComponents);
+        table.at(attributesIndex).Set(offset, componentSize, numComponents);
     }
 
- 	// 一次写入顶点，允许字节交换(字节顺序)。
-	const auto numElements = GetNumElements();
-	auto vertexIndex = 0;
-	for (auto i = 0; i < numElements; ++i)
+    // 一次写入顶点，允许字节交换(字节顺序)。
+
+    auto vertexIndex = 0;
+    for (auto i = 0; i < numElements; ++i)
     {
-		for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
+        for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
         {
-			outFile.Write(table[attributesIndex].GetComponentSize(), table[attributesIndex].GetNumComponents(), &m_Data[vertexIndex + table[attributesIndex].GetOffset()]);
+            const auto beginIndex = vertexIndex + table.at(attributesIndex).GetOffset();
+            outFile.Write(table.at(attributesIndex).GetComponentSize(), table.at(attributesIndex).GetNumComponents(), &data.at(beginIndex));
         }
 
-		vertexIndex += stride;
+        vertexIndex += stride;
     }
 }
 
-void Rendering::BufferImpl
-	::SaveHeadToFile(WriteFileManager& outFile) const
+void Rendering::BufferImpl::SaveHeadToFile(WriteFileManager& outFile) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	outFile.Write(sizeof(int), &m_NumElements);
-	outFile.Write(sizeof(int), &m_ElementSize);
-	outFile.Write(sizeof(int), &m_Usage);
+    outFile.Write(sizeof(int32_t), &numElements);
+    outFile.Write(sizeof(int32_t), &elementSize);
+    outFile.Write(sizeof(BufferUsage), &usage);
 }
 
-void Rendering::BufferImpl
-    ::ReadBufferDataFromFile(ReadFileManager& inFile)
+void Rendering::BufferImpl::ReadBufferDataFromFile(ReadFileManager& inFile)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	inFile.Read(sizeof(int), &m_NumElements);
+    inFile.Read(sizeof(int32_t), &numElements);
 
-	if (m_NumElements != 0)
-	{
-		inFile.Read(sizeof(int), &m_ElementSize);
-		inFile.Read(sizeof(int), &m_Usage);
-
-		auto numBytes = 0;
-		inFile.Read(sizeof(int), &numBytes);
-		m_Data.resize(numBytes);
-
-		inFile.Read(m_ElementSize, numBytes / m_ElementSize, &m_Data[0]);
-	}	
-}
-
-void Rendering::BufferImpl
-	::ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat)
-{
-	RENDERING_CLASS_IS_VALID_1;
-
-	const auto stride = vertexformat->GetStride();
-
-	RENDERING_ASSERTION_1(stride == GetElementSize(), "格式步进值和顶点大小必须匹配。\n");
-
-	// 建立一个顶点缓冲属性的表。
-	// 每个属性都有一个偏移量,属性组件的大小,和组件大小的数量
-	// 例如,属性使用偏移量0和类型AT_FLOAT3为(offset,size,numComponents) = (0,4,3)。
-	BufferParameter table[System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes)];
-	const auto numAttributes = vertexformat->GetNumAttributes();
-	for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
+    if (numElements != 0)
     {
-            const auto type = vertexformat->GetAttributeType(attributesIndex);
-        const auto offset = vertexformat->GetOffset(attributesIndex);
-            const auto componentSize = VertexFormat::GetComponentSize(type);
+        inFile.Read(sizeof(int32_t), &elementSize);
+        inFile.Read(sizeof(BufferUsage), &usage);
+
+        int32_t numBytes{};
+        inFile.Read(sizeof(int32_t), &numBytes);
+        data.resize(numBytes);
+
+        inFile.Read(elementSize, numBytes / elementSize, data.data());
+    }
+}
+
+void Rendering::BufferImpl::ReadBufferDataFromFile(ReadFileManager& inFile, const VertexFormat& vertexformat)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto stride = vertexformat.GetStride();
+
+    RENDERING_ASSERTION_1(stride == GetElementSize(), "格式步进值和顶点大小必须匹配。\n");
+
+    // 建立一个顶点缓冲属性的表。
+    // 每个属性都有一个偏移量,属性组件的大小,和组件大小的数量
+    // 例如,属性使用偏移量0和类型AT_FLOAT3为(offset,size,numComponents) = (0,4,3)。
+    std::array<BufferParameter, System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes)> table{};
+    const auto numAttributes = vertexformat.GetNumAttributes();
+    for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
+    {
+        const auto type = vertexformat.GetAttributeType(attributesIndex);
+        const auto offset = vertexformat.GetOffset(attributesIndex);
+        const auto componentSize = VertexFormat::GetComponentSize(type);
         const auto numComponents = VertexFormat::GetNumComponents(type);
 
-		table[attributesIndex].Set(offset, componentSize, numComponents);
+        table.at(attributesIndex).Set(offset, componentSize, numComponents);
     }
 
+    // 一次读取顶点，允许字节交换(字节顺序)。
 
-	// 一次读取顶点，允许字节交换(字节顺序)。
-	const auto numElements = GetNumElements();
-	auto vertexIndex = 0;
-	for (auto i = 0; i < numElements; ++i, vertexIndex += stride)
-	{
-		for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
-		{
-			inFile.Read(table[attributesIndex].GetComponentSize(), table[attributesIndex].GetNumComponents(), &m_Data[vertexIndex + table[attributesIndex].GetOffset()]);
-		}
-	}
+    auto vertexIndex = 0;
+    for (auto i = 0; i < numElements; ++i, vertexIndex += stride)
+    {
+        for (auto attributesIndex = 0; attributesIndex < numAttributes; ++attributesIndex)
+        {
+            const auto beginIndex = vertexIndex + table.at(attributesIndex).GetOffset();
+            inFile.Read(table.at(attributesIndex).GetComponentSize(), table.at(attributesIndex).GetNumComponents(), &data.at(beginIndex));
+        }
+    }
 }
 
-void Rendering::BufferImpl
-	::ReadHeadFromFile(ReadFileManager& inFile) 
+void Rendering::BufferImpl::ReadHeadFromFile(ReadFileManager& inFile)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	inFile.Read(sizeof(int), &m_NumElements);
-	inFile.Read(sizeof(int), &m_ElementSize);
-	inFile.Read(sizeof(int), &m_Usage);
+    inFile.Read(sizeof(int32_t), &numElements);
+    inFile.Read(sizeof(int32_t), &elementSize);
+    inFile.Read(sizeof(BufferUsage), &usage);
 
-	m_Data.resize(m_NumElements * m_ElementSize);
+    const auto dataSize = numElements * elementSize;
+
+    data.resize(dataSize);
 }
 
-char* Rendering::BufferImpl
-	::GetAccessWriteData(int index)
+char* Rendering::BufferImpl::GetAccessWriteData(int index)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return const_cast<char*>(GetReadOnlyData(index));
-}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
 
-void Rendering::BufferImpl
-	::SetNewData(const std::vector<char>& newData)
-{
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(m_Data.size() == newData.size(), "数据大小不相等\n");
-
-	m_Data = newData;
-}
+    return const_cast<char*>(GetReadOnlyData(index));
 
 #include STSTEM_WARNING_POP
+}
+
+void Rendering::BufferImpl::SetNewData(const std::vector<char>& newData)
+{
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(data.size() == newData.size(), "数据大小不相等\n");
+
+    data = newData;
+}

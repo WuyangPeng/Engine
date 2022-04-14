@@ -1,80 +1,64 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/16 15:32)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE1_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE1_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include <vector>
+
 namespace Mathematics
 {
-	template <typename Real>
-	class   NaturalSpline1
-	{
-	public:
-		// Construction and destruction.  NaturalSpline1 accepts responsibility
-		// for deleting the input arrays.  Each input array must have numSamples
-		// elements, where numSamples >= 2 is required.  If f(t) is the function
-		// to be fit, then values[i] = f(times[i]) is the sample.  The time
-		// samples must be increasing:  times[i+1] > times[i] for all i.  The
-		// spline curve is referred to as S(t).  In the comments, tmin refers to
-		// times[0] and tmax refers to times[numSamples-1].
+    template <typename Real>
+    class NaturalSpline1
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		// Set free to 'true' for free splines or to 'false' for periodic
-		// splines.  In the periodic case, the implementation uses f(tmin) for
-		// computing coefficients.  It does not use f(tmax), which is assumed to
-		// be equal to f(tmin).
-		//
-		// Free:  S"(tmin) = 0,  S"(tmax) = 0
-		// Periodic:  S(tmin) = S(tmax), S'(tmin) = S'(tmax), S"(tmin) = S"(tmax)
-		NaturalSpline1(bool free, int numSamples, Real* times, Real* values);
+        using ClassType = NaturalSpline1<Real>;
 
-		// Clamped:  S'(tmin) = slopeFirst, S'(tmax) = slopeLast
-		NaturalSpline1(int numSamples, Real* times, Real* values, Real slopeFirst, Real slopeLast);
+    public:
+        NaturalSpline1(bool free, int numSamples, const std::vector<Real>& times, const std::vector<Real>& values);
 
-		~NaturalSpline1();
+        NaturalSpline1(int numSamples, const std::vector<Real>& times, const std::vector<Real>& values, Real slopeFirst, Real slopeLast);
 
-		// Evaluators for S(t), S'(t), S''(t), and S'''(t).
-		Real GetFunction(Real t) const;
-		Real GetFirstDerivative(Real t) const;
-		Real GetSecondDerivative(Real t) const;
-		Real GetThirdDerivative(Real t) const;
+        CLASS_INVARIANT_DECLARE;
 
-		// Access the coefficients of the polynomials.
-		int GetNumSegments() const;
-		const Real* GetA() const;
-		const Real* GetB() const;
-		const Real* GetC() const;
-		const Real* GetD() const;
+        NODISCARD Real GetFunction(Real t) const;
+        NODISCARD Real GetFirstDerivative(Real t) const;
+        NODISCARD Real GetSecondDerivative(Real t) const;
+        NODISCARD Real GetThirdDerivative(Real t) const;
 
-	private:
-		void CreateFreeSpline();
-		void CreateClampedSpline(Real slopeFirst, Real slopeLast);
-		void CreatePeriodicSpline();
+        NODISCARD int GetNumSegments() const noexcept;
+        NODISCARD std::vector<Real> GetA() const;
+        NODISCARD std::vector<Real> GetB() const;
+        NODISCARD std::vector<Real> GetC() const;
+        NODISCARD std::vector<Real> GetD() const;
 
-		void GetKeyInfo(Real t, int& key, Real& dt) const;
+    private:
+        void CreateFreeSpline();
+        void CreateClampedSpline(Real slopeFirst, Real slopeLast);
+        void CreatePeriodicSpline();
 
-		int mNumSamples, mNumSegments;
-		Real* mTimes;
+        void GetKeyInfo(Real t, int& key, Real& dt) const;
 
-		// The cubic polynomial coefficients.  All arrays have
-		// mNumSegments elements.  The i-th polynomial is
-		// S_i(t) =
-		//   mA[i] +
-		//   mB[i]*(t - mTimes[i]) +
-		//   mC[i]*(t - mTimes[i])^2 +
-		//   mD[i]*(t - mTimes[i])^3
-		Real* mA;
-		Real* mB;
-		Real* mC;
-		Real* mD;
-	};
+    private:
+        int numSamples;
+        int numSegments;
+        std::vector<Real> times;
 
-	using NaturalSpline1f = NaturalSpline1<float>;
-	using NaturalSpline1d = NaturalSpline1<double>;
+        std::vector<Real> a;
+        std::vector<Real> b;
+        std::vector<Real> c;
+        std::vector<Real> d;
+    };
 }
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE1_H
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_NATURAL_SPLINE1_H

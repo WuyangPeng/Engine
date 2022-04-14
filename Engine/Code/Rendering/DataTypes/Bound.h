@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.0.1 (2020/08/30 14:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/03/29 16:18)
 
 #ifndef RENDERING_DATA_TYPES_BOUND_H
 #define RENDERING_DATA_TYPES_BOUND_H
@@ -53,24 +53,24 @@ namespace Rendering
         Bound(const APoint& center, T radius);
 
         constexpr Bound() noexcept
-            : m_Center{}, m_Radius{}
+            : center{}, radius{}
         {
         }
 
         CLASS_INVARIANT_DECLARE;
 
         // 任何边界必须定义一个中心和一个半径。
-        void SetCenter(const APoint& center) noexcept;
-        void SetRadius(T radius);
-        [[nodiscard]] const APoint& GetCenter() const noexcept;
-        [[nodiscard]] T GetRadius() const noexcept;
+        void SetCenter(const APoint& newCenter) noexcept;
+        void SetRadius(T mewRadius);
+        NODISCARD const APoint& GetCenter() const noexcept;
+        NODISCARD T GetRadius() const noexcept;
 
-        [[nodiscard]] int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
 
         // 边界上的操作。
-        [[nodiscard]] NumericalValueSymbol WhichSide(const Plane& plane) const noexcept;
+        NODISCARD NumericalValueSymbol WhichSide(const Plane& plane) const noexcept;
         void GrowToContain(const Bound& bound);
-        [[nodiscard]] const Bound TransformBy(const Transform& transform) const;
+        NODISCARD const Bound TransformBy(const Transform& transform) const;
         void ComputeFromData(int numElements, int stride, SpanConstIterator data);
         void ComputeFromData(const APointContainer& data);
         void ComputeFromData(const Vector3DContainer& data);
@@ -80,34 +80,34 @@ namespace Rendering
         // line: tmin = -Mathf::maxReal, tmax = Mathf::maxReal
         // ray: tmin = 0.0f, tmax = Mathf::maxReal
         // segment: tmin >= 0.0f, tmax > tmin
-        [[nodiscard]] bool TestIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
+        NODISCARD bool TestIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
 
         void ReadAggregate(CoreTools::BufferSource& source);
         void WriteAggregate(CoreTools::BufferTarget& target) const;
 
     private:
-        [[nodiscard]] bool TestLineIntersection(const APoint& origin, const AVector& direction, T tMax) const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        [[nodiscard]] bool TestRayIntersection(const APoint& origin, const AVector& direction, T tMin) const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        [[nodiscard]] bool TestSegmentIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
+        NODISCARD bool TestLineIntersection(const APoint& origin, const AVector& direction, T tMax) const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD bool TestRayIntersection(const APoint& origin, const AVector& direction, T tMin) const noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD bool TestSegmentIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
 
     private:
-        APoint m_Center{};
-        T m_Radius{};
+        APoint center{};
+        T radius{};
     };
 
     // 测试两个固定的边界是否相交。
     template <typename T>
-    [[nodiscard]] bool TestIntersection(const Bound<T>& lhsBound, const Bound<T>& rhsBound) noexcept;
+    NODISCARD bool TestIntersection(const Bound<T>& lhsBound, const Bound<T>& rhsBound) noexcept;
 
     // 测试两个运动的边界是否相交。 lhsVelocity是lhsBound的速度，而rhsVelocity是rhsBound的速度。
     template <typename T>
-    [[nodiscard]] bool TestIntersection(const Bound<T>& lhsBound, const Mathematics::AVector<T>& lhsVelocity, const Bound<T>& rhsBound, const Mathematics::AVector<T>& rhsVelocity, float tMax);
+    NODISCARD bool TestIntersection(const Bound<T>& lhsBound, const Mathematics::AVector<T>& lhsVelocity, const Bound<T>& rhsBound, const Mathematics::AVector<T>& rhsVelocity, float tMax);
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const Bound<T>& lhs, const Bound<T>& rhs, const float epsilon = Mathematics::Math<T>::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+    NODISCARD bool Approximate(const Bound<T>& lhs, const Bound<T>& rhs, const float epsilon = Mathematics::Math<T>::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-    using FloatBound = Bound<float>;
-    using DoubleBound = Bound<double>;
+    using BoundF = Bound<float>;
+    using BoundD = Bound<double>;
 }
 
 #endif  // RENDERING_DATA_TYPES_BOUND_H

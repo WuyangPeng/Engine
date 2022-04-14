@@ -1,316 +1,308 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/17 16:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 21:20)
+
 #ifndef MATHEMATICS_CONTAINMENT_CONT_MIN_BOX2_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_MIN_BOX2_DETAIL_H
 
 #include "ContMinBox2.h"
-
 #include "Mathematics/ComputationalGeometry/ConvexHull2.h"
+#include "Mathematics/ComputationalGeometry/ConvexHull2Detail.h"
 
 template <typename Real>
-Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2<Real>>& points, Real epsilon, QueryType queryType, bool isConvexPolygon)
+Mathematics::ContMinBox2<Real>::ContMinBox2(const std::vector<Vector2<Real>>& points, Real epsilon, QueryType queryType, bool isConvexPolygon)
 {
-    // Get the convex hull of the points.
-    std::vector<Vector2<Real>> hullPoints;
+    std::vector<Vector2<Real>> hullPoints{};
     if (isConvexPolygon)
     {
         hullPoints = points;
     }
     else
     {
-        ConvexHull2<Real> hull{ points, epsilon, false, queryType };
-        auto hullDim = hull.GetDimension();
-        auto hullNumSimplices = hull.GetNumSimplices();
-        const int* hullIndices = hull.GetIndices();
+        ConvexHull2<Real> hull{ points, epsilon, queryType };
+        const auto hullDim = hull.GetDimension();
+        const auto hullNumSimplices = hull.GetNumSimplices();
+        auto hullIndices = hull.GetIndices();
 
         if (hullDim == 0)
         {
-            mMinBox = Box2<Real>{ points[0], Vector2<Real>::GetUnitX(), Vector2<Real>::GetUnitY(), Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
+            minBox = Box2<Real>{ points.at(0), Vector2<Real>::GetUnitX(), Vector2<Real>::GetUnitY(), Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
             return;
         }
 
         if (hullDim == 1)
         {
             auto hull1 = hull.GetConvexHull1();
-            hullIndices = hull1->GetIndices();
+            hullIndices = hull1.GetIndices();
 
-            auto center = (Real{ 0.5 }) * (points[hullIndices[0]] + points[hullIndices[1]]);
-            auto diff = points[hullIndices[1]] - points[hullIndices[0]];
+            auto center = Math<Real>::GetRational(1, 2) * (points.at(hullIndices.at(0)) + points.at(hullIndices.at(1)));
+            auto diff = points.at(hullIndices.at(1)) - points.at(hullIndices.at(0));
 
             auto length = Vector2Tools<Real>::GetLength(diff);
             diff.Normalize();
 
-            mMinBox = Box2<Real>{ center, diff, Vector2Tools<Real>::GetPerp(mMinBox.GetAxis0()), (Real{ 0.5 }) * length, Math<Real>::GetValue(0) };
+            minBox = Box2<Real>{ center, diff, Vector2Tools<Real>::GetPerp(minBox.GetAxis0()), Math<Real>::GetRational(1, 2) * length, Math<Real>::GetValue(0) };
 
-            DELETE0(hull1);
             return;
         }
 
         hullPoints.resize(hullNumSimplices);
         for (auto i = 0; i < hullNumSimplices; ++i)
         {
-            hullPoints[i] = points[hullIndices[i]];
+            hullPoints.at(i) = points.at(hullIndices.at(i));
         }
     }
-    auto numPoints = hullPoints.size();
-    // The input points are V[0] through V[N-1] and are assumed to be the
-    // vertices of a convex polygon that are counterclockwise ordered.  The
-    // input points must not contain three consecutive collinear points.
+    const auto numPoints = boost::numeric_cast<int>(hullPoints.size());
 
-    // Unit-length edge directions of convex polygon.  These could be
-    // precomputed and passed to this routine if the application requires it.
-    auto numPointsM1 = hullPoints.size() - 1;
-    Vector2<Real>* edges = nullptr;  // NEW1<Vector2<Real>>(numPoints);
-    bool* visited = nullptr;  //  NEW1<bool>(numPoints);
-    int i;
-    for (i = 0; i < numPointsM1; ++i)
+    const auto numPointsM1 = boost::numeric_cast<int>(hullPoints.size()) - 1;
+    std::vector<Vector2<Real>> edges(numPoints);
+    std::vector<bool> visited(numPoints);
+
+    for (auto i = 0; i < numPointsM1; ++i)
     {
-        edges[i] = hullPoints[i + 1] - hullPoints[i];
-        edges[i].Normalize();
-        visited[i] = false;
+        const auto next = i + 1;
+        edges.at(i) = hullPoints.at(next) - hullPoints.at(i);
+        edges.at(i).Normalize();
+        visited.at(i) = false;
     }
-    edges[numPointsM1] = hullPoints[0] - hullPoints[numPointsM1];
-    edges[numPointsM1].Normalize();
-    visited[numPointsM1] = false;
+    edges.at(numPointsM1) = hullPoints.at(0) - hullPoints.at(numPointsM1);
+    edges.at(numPointsM1).Normalize();
+    visited.at(numPointsM1) = false;
 
-    // Find the smallest axis-aligned box containing the points.  Keep track
-    // of the extremum indices, L (left), Real (right), B (bottom), and T (top)
-    // so that the following constraints are met:
-    //   V[L].X() <= V[i].X() for all i and V[(L+1)%N].X() > V[L].X()
-    //   V[Real].X() >= V[i].X() for all i and V[(Real+1)%N].X() < V[Real].X()
-    //   V[B].Y() <= V[i].Y() for all i and V[(B+1)%N].Y() > V[B].Y()
-    //   V[T].Y() >= V[i].Y() for all i and V[(T+1)%N].Y() < V[T].Y()
-    Real xmin = hullPoints[0].GetX(), xmax = xmin;
-    Real ymin = hullPoints[0].GetY(), ymax = ymin;
-    int LIndex = 0, RIndex = 0, BIndex = 0, TIndex = 0;
-    for (i = 1; i < numPoints; ++i)
+    auto xmin = hullPoints.at(0).GetX();
+    auto xmax = xmin;
+    auto ymin = hullPoints.at(0).GetY();
+    auto ymax = ymin;
+    auto lIndex = 0;
+    auto rIndex = 0;
+    auto bIndex = 0;
+    auto tIndex = 0;
+    for (auto i = 1; i < numPoints; ++i)
     {
-        if (hullPoints[i].GetX() <= xmin)
+        if (hullPoints.at(i).GetX() <= xmin)
         {
-            xmin = hullPoints[i].GetX();
-            LIndex = i;
+            xmin = hullPoints.at(i).GetX();
+            lIndex = i;
         }
-        if (hullPoints[i].GetX() >= xmax)
+        if (hullPoints.at(i).GetX() >= xmax)
         {
-            xmax = hullPoints[i].GetX();
-            RIndex = i;
+            xmax = hullPoints.at(i).GetX();
+            rIndex = i;
         }
 
-        if (hullPoints[i].GetY() <= ymin)
+        if (hullPoints.at(i).GetY() <= ymin)
         {
-            ymin = hullPoints[i].GetY();
-            BIndex = i;
+            ymin = hullPoints.at(i).GetY();
+            bIndex = i;
         }
-        if (hullPoints[i].GetY() >= ymax)
+        if (hullPoints.at(i).GetY() >= ymax)
         {
-            ymax = hullPoints[i].GetY();
-            TIndex = i;
+            ymax = hullPoints.at(i).GetY();
+            tIndex = i;
         }
     }
 
-    // Apply wrap-around tests to ensure the constraints mentioned above are
-    // satisfied.
-    if (LIndex == numPointsM1)
+    if (lIndex == numPointsM1)
     {
-        if (hullPoints[0].GetX() <= xmin)
+        if (hullPoints.at(0).GetX() <= xmin)
         {
-            xmin = hullPoints[0].GetX();
-            LIndex = 0;
+            xmin = hullPoints.at(0).GetX();
+            lIndex = 0;
         }
     }
 
-    if (RIndex == numPointsM1)
+    if (rIndex == numPointsM1)
     {
-        if (hullPoints[0].GetX() >= xmax)
+        if (hullPoints.at(0).GetX() >= xmax)
         {
-            xmax = hullPoints[0].GetX();
-            RIndex = 0;
+            xmax = hullPoints.at(0).GetX();
+            rIndex = 0;
         }
     }
 
-    if (BIndex == numPointsM1)
+    if (bIndex == numPointsM1)
     {
-        if (hullPoints[0].GetY() <= ymin)
+        if (hullPoints.at(0).GetY() <= ymin)
         {
-            ymin = hullPoints[0].GetY();
-            BIndex = 0;
+            ymin = hullPoints.at(0).GetY();
+            bIndex = 0;
         }
     }
 
-    if (TIndex == numPointsM1)
+    if (tIndex == numPointsM1)
     {
-        if (hullPoints[0].GetY() >= ymax)
+        if (hullPoints.at(0).GetY() >= ymax)
         {
-            ymax = hullPoints[0].GetY();
-            TIndex = 0;
+            ymax = hullPoints.at(0).GetY();
+            tIndex = 0;
         }
     }
 
-    // The dimensions of the axis-aligned box.  The extents store width and
-    // height for now.
-    Vector2<Real> center{ (Real{ 0.5 }) * (xmin + xmax), (Real{ 0.5 }) * (ymin + ymax) };
+    const Vector2<Real> center{ Math<Real>::GetRational(1, 2) * (xmin + xmax), Math<Real>::GetRational(1, 2) * (ymin + ymax) };
 
-    mMinBox = Box2<Real>{ center, Vector2<Real>::GetUnitX(), Vector2<Real>::GetUnitY(), (Real{ 0.5 }) * (xmax - xmin), (Real{ 0.5 }) * (ymax - ymin) };
+    minBox = Box2<Real>{ center, Vector2<Real>::GetUnitX(), Vector2<Real>::GetUnitY(), Math<Real>::GetRational(1, 2) * (xmax - xmin), Math<Real>::GetRational(1, 2) * (ymax - ymin) };
 
-    auto minAreaDiv4 = mMinBox.GetExtent0() * mMinBox.GetExtent1();
+    auto minAreaDiv4 = minBox.GetExtent0() * minBox.GetExtent1();
 
-    // The rotating calipers algorithm.
-    auto U = Vector2<Real>::GetUnitX();
-    auto V = Vector2<Real>::GetUnitY();
+    auto u = Vector2<Real>::GetUnitX();
+    auto v = Vector2<Real>::GetUnitY();
 
-    bool done = false;
+    auto done = false;
     while (!done)
     {
-        // Determine the edge that forms the smallest angle with the current
-        // box edges.
-        int flag = F_NONE;
+        auto flag = MinBox2Flag::None;
         auto maxDot = Math<Real>::GetValue(0);
 
-        auto dot = Vector2Tools<Real>::DotProduct(U, edges[BIndex]);
+        auto dot = Vector2Tools<Real>::DotProduct(u, edges.at(bIndex));
         if (dot > maxDot)
         {
             maxDot = dot;
-            flag = F_BOTTOM;
+            flag = MinBox2Flag::Bottom;
         }
 
-        dot = Vector2Tools<Real>::DotProduct(V, edges[RIndex]);
+        dot = Vector2Tools<Real>::DotProduct(v, edges.at(rIndex));
         if (dot > maxDot)
         {
             maxDot = dot;
-            flag = F_RIGHT;
+            flag = MinBox2Flag::Right;
         }
 
-        dot = -Vector2Tools<Real>::DotProduct(U, edges[TIndex]);
+        dot = -Vector2Tools<Real>::DotProduct(u, edges.at(tIndex));
         if (dot > maxDot)
         {
             maxDot = dot;
-            flag = F_TOP;
+            flag = MinBox2Flag::Top;
         }
 
-        dot = -Vector2Tools<Real>::DotProduct(V, edges[LIndex]);
+        dot = -Vector2Tools<Real>::DotProduct(v, edges.at(lIndex));
         if (dot > maxDot)
         {
             maxDot = dot;
-            flag = F_LEFT;
+            flag = MinBox2Flag::Left;
         }
 
         switch (flag)
         {
-            case F_BOTTOM:
-                if (visited[BIndex])
+            case MinBox2Flag::Bottom:
+                if (visited.at(bIndex))
                 {
                     done = true;
                 }
                 else
                 {
-                    // Compute box axes with E[B] as an edge.
-                    U = edges[BIndex];
-                    V = -Vector2Tools<Real>::GetPerp(U);
-                    UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
+                    u = edges.at(bIndex);
+                    v = -Vector2Tools<Real>::GetPerp(u);
+                    UpdateBox(hullPoints.at(lIndex), hullPoints.at(rIndex), hullPoints.at(bIndex), hullPoints.at(tIndex), u, v, minAreaDiv4);
 
-                    // Mark edge visited and rotate the calipers.
-                    visited[BIndex] = true;
-                    if (++BIndex == numPoints)
+                    visited.at(bIndex) = true;
+                    if (++bIndex == numPoints)
                     {
-                        BIndex = 0;
+                        bIndex = 0;
                     }
                 }
                 break;
-            case F_RIGHT:
-                if (visited[RIndex])
+            case MinBox2Flag::Right:
+                if (visited.at(rIndex))
                 {
                     done = true;
                 }
                 else
                 {
-                    // Compute box axes with E[Real] as an edge.
-                    V = edges[RIndex];
-                    U = Vector2Tools<Real>::GetPerp(V);
-                    UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
+                    v = edges.at(rIndex);
+                    u = Vector2Tools<Real>::GetPerp(v);
+                    UpdateBox(hullPoints.at(lIndex), hullPoints.at(rIndex), hullPoints.at(bIndex), hullPoints.at(tIndex), u, v, minAreaDiv4);
 
-                    // Mark edge visited and rotate the calipers.
-                    visited[RIndex] = true;
-                    if (++RIndex == numPoints)
+                    visited.at(rIndex) = true;
+                    if (++rIndex == numPoints)
                     {
-                        RIndex = 0;
+                        rIndex = 0;
                     }
                 }
                 break;
-            case F_TOP:
-                if (visited[TIndex])
+            case MinBox2Flag::Top:
+                if (visited.at(tIndex))
                 {
                     done = true;
                 }
                 else
                 {
-                    // Compute box axes with E[T] as an edge.
-                    U = -edges[TIndex];
-                    V = -Vector2Tools<Real>::GetPerp(U);
-                    UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
+                    u = -edges.at(tIndex);
+                    v = -Vector2Tools<Real>::GetPerp(u);
+                    UpdateBox(hullPoints.at(lIndex), hullPoints.at(rIndex), hullPoints.at(bIndex), hullPoints.at(tIndex), u, v, minAreaDiv4);
 
-                    // Mark edge visited and rotate the calipers.
-                    visited[TIndex] = true;
-                    if (++TIndex == numPoints)
+                    visited.at(tIndex) = true;
+                    if (++tIndex == numPoints)
                     {
-                        TIndex = 0;
+                        tIndex = 0;
                     }
                 }
                 break;
-            case F_LEFT:
-                if (visited[LIndex])
+            case MinBox2Flag::Left:
+                if (visited.at(lIndex))
                 {
                     done = true;
                 }
                 else
                 {
-                    // Compute box axes with E[L] as an edge.
-                    V = -edges[LIndex];
-                    U = Vector2Tools<Real>::GetPerp(V);
-                    UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
+                    v = -edges.at(lIndex);
+                    u = Vector2Tools<Real>::GetPerp(v);
+                    UpdateBox(hullPoints.at(lIndex), hullPoints.at(rIndex), hullPoints.at(bIndex), hullPoints.at(tIndex), u, v, minAreaDiv4);
 
-                    // Mark edge visited and rotate the calipers.
-                    visited[LIndex] = true;
-                    if (++LIndex == numPoints)
+                    visited.at(lIndex) = true;
+                    if (++lIndex == numPoints)
                     {
-                        LIndex = 0;
+                        lIndex = 0;
                     }
                 }
                 break;
-            case F_NONE:
-                // The polygon is a rectangle.
+            case MinBox2Flag::None:
+
                 done = true;
                 break;
         }
     }
 
-//     DELETE1(visited);
-//     DELETE1(edges);
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::ContMinBox2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::ContMinBox2<Real>::operator Mathematics::Box2<Real>() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return minBox;
 }
 
 template <typename Real>
-Mathematics::MinBox2<Real>::operator Mathematics::Box2<Real>() const
+void Mathematics::ContMinBox2<Real>::UpdateBox(const Vector2<Real>& lPoint, const Vector2<Real>& rPoint, const Vector2<Real>& bPoint, const Vector2<Real>& tPoint, const Vector2<Real>& u, const Vector2<Real>& v, Real& minAreaDiv4)
 {
-    return mMinBox;
-}
-
-template <typename Real>
-void Mathematics::MinBox2<Real>::UpdateBox(const Vector2<Real>& LPoint, const Vector2<Real>& RPoint, const Vector2<Real>& BPoint, const Vector2<Real>& TPoint, const Vector2<Real>& U, const Vector2<Real>& V, Real& minAreaDiv4)
-{
-    auto RLDiff = RPoint - LPoint;
-    auto TBDiff = TPoint - BPoint;
-    auto extent0 = (Real{ 0.5 }) * (Vector2Tools<Real>::DotProduct(U, RLDiff));
-    auto extent1 = (Real{ 0.5 }) * (Vector2Tools<Real>::DotProduct(V, TBDiff));
+    auto RLDiff = rPoint - lPoint;
+    auto TBDiff = tPoint - bPoint;
+    auto extent0 = Math<Real>::GetRational(1, 2) * (Vector2Tools<Real>::DotProduct(u, RLDiff));
+    auto extent1 = Math<Real>::GetRational(1, 2) * (Vector2Tools<Real>::DotProduct(v, TBDiff));
     auto areaDiv4 = extent0 * extent1;
     if (areaDiv4 < minAreaDiv4)
     {
         minAreaDiv4 = areaDiv4;
 
-        auto LBDiff = LPoint - BPoint;
+        auto LBDiff = lPoint - bPoint;
 
-        mMinBox = Box2<Real>{ LPoint + U * extent0 + V * (extent1 - Vector2Tools<Real>::DotProduct(V, LBDiff)), U, V, extent0, extent1 };
+        minBox = Box2<Real>{ lPoint + u * extent0 + v * (extent1 - Vector2Tools<Real>::DotProduct(v, LBDiff)), u, v, extent0, extent1 };
     }
 }
 

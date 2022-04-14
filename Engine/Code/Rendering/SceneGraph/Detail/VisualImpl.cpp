@@ -1,258 +1,254 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 17:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 19:22)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VisualImpl.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
-
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/Shaders/VisualEffectInstance.h"
 
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26473)
-Rendering::VisualImpl ::VisualImpl(VisualPrimitiveType type)
-    : m_VisualData{ type }, m_ModelBound{}, m_Effect{}
+
+Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type) noexcept
+    : visualData{ type }, modelBound{}, effect{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualImpl ::VisualImpl(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
-    : m_VisualData{ type, vertexformat, vertexbuffer, indexbuffer }, m_ModelBound{}, m_Effect{}
+Rendering::VisualImpl::VisualImpl(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer) noexcept
+    : visualData{ type, vertexformat, vertexbuffer, indexbuffer }, modelBound{}, effect{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VisualImpl)
 
-Rendering::VisualPrimitiveType
-    Rendering::VisualImpl::GetPrimitiveType() const
+Rendering::VisualPrimitiveType Rendering::VisualImpl::GetPrimitiveType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VisualData.GetPrimitiveType();
+    return visualData.GetPrimitiveType();
 }
 
-Rendering::ConstVertexFormatSharedPtr
-    Rendering::VisualImpl::GetConstVertexFormat() const
+Rendering::ConstVertexFormatSharedPtr Rendering::VisualImpl::GetConstVertexFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VisualData.GetConstVertexFormat();
+    return visualData.GetConstVertexFormat();
 }
 
-const Rendering::VisualEffectInstanceSharedPtr Rendering::VisualImpl ::GetEffectInstance() noexcept
+Rendering::VisualEffectInstanceSharedPtr Rendering::VisualImpl::GetEffectInstance() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_Effect;
+    return effect.object;
 }
 
-const Rendering::ConstVisualEffectInstanceSharedPtr Rendering::VisualImpl ::GetConstEffectInstance() const noexcept
+Rendering::ConstVisualEffectInstanceSharedPtr Rendering::VisualImpl::GetConstEffectInstance() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Effect;
+    return effect.object;
 }
 
-void Rendering::VisualImpl ::SetEffectInstance(const VisualEffectInstanceSharedPtr& effect) noexcept
+void Rendering::VisualImpl::SetEffectInstance(const VisualEffectInstanceSharedPtr& aEffect) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Effect = effect;
+    effect.object = aEffect;
 }
 
-Rendering::FloatBound& Rendering::VisualImpl ::GetModelBound() noexcept
+Rendering::BoundF& Rendering::VisualImpl::GetModelBound() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return const_cast<FloatBound&>(static_cast<const ClassType*>(this)->GetModelBound());
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
+
+    return const_cast<BoundF&>(static_cast<const ClassType*>(this)->GetModelBound());
+
+#include STSTEM_WARNING_POP
 }
 
-const Rendering::FloatBound& Rendering::VisualImpl ::GetModelBound() const noexcept
+const Rendering::BoundF& Rendering::VisualImpl::GetModelBound() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_ModelBound;
+    return modelBound;
 }
 
-Rendering::IndexBufferSharedPtr
-    Rendering::VisualImpl ::GetIndexBuffer()
+Rendering::IndexBufferSharedPtr Rendering::VisualImpl::GetIndexBuffer() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_VisualData.GetIndexBuffer();
+    return visualData.GetIndexBuffer();
 }
 
-Rendering::VertexBufferSharedPtr
-    Rendering::VisualImpl ::GetVertexBuffer()
+Rendering::VertexBufferSharedPtr Rendering::VisualImpl::GetVertexBuffer() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_VisualData.GetVertexBuffer();
+    return visualData.GetVertexBuffer();
 }
 
-Rendering::ConstIndexBufferSharedPtr
-    Rendering::VisualImpl ::GetConstIndexBuffer() const
+Rendering::ConstIndexBufferSharedPtr Rendering::VisualImpl::GetConstIndexBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VisualData.GetConstIndexBuffer();
+    return visualData.GetConstIndexBuffer();
 }
 
-void Rendering::VisualImpl ::SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer)
+void Rendering::VisualImpl::SetIndexBuffer(const IndexBufferSharedPtr& indexbuffer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VisualData.SetIndexBuffer(indexbuffer);
+    visualData.SetIndexBuffer(indexbuffer);
 }
 
-Rendering::ConstVertexBufferSharedPtr
-    Rendering::VisualImpl ::GetConstVertexBuffer() const
+Rendering::ConstVertexBufferSharedPtr Rendering::VisualImpl::GetConstVertexBuffer() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VisualData.GetConstVertexBuffer();
+    return visualData.GetConstVertexBuffer();
 }
 
-void Rendering::VisualImpl ::SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer)
+void Rendering::VisualImpl::SetVertexBuffer(const VertexBufferSharedPtr& vertexbuffer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VisualData.SetVertexBuffer(vertexbuffer);
+    visualData.SetVertexBuffer(vertexbuffer);
 }
 
-Rendering::VertexFormatSharedPtr Rendering::VisualImpl ::GetVertexFormat()
+Rendering::VertexFormatSharedPtr Rendering::VisualImpl::GetVertexFormat() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_VisualData.GetVertexFormat();
+    return visualData.GetVertexFormat();
 }
 
-void Rendering::VisualImpl ::SetVertexFormat(const VertexFormatSharedPtr& vertexformat)
+void Rendering::VisualImpl::SetVertexFormat(const VertexFormatSharedPtr& vertexformat) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VisualData.SetVertexFormat(vertexformat);
+    visualData.SetVertexFormat(vertexformat);
 }
 
-const Rendering::FloatBound
-    Rendering::VisualImpl ::GetWorldBound(const FloatTransform& worldTransform)
+Rendering::BoundF Rendering::VisualImpl::GetWorldBound(const TransformF& worldTransform)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_ModelBound.TransformBy(worldTransform);
+    return modelBound.TransformBy(worldTransform);
 }
 
-void Rendering::VisualImpl ::UpdateModelBound()
+void Rendering::VisualImpl::UpdateModelBound()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (m_VisualData.IsVertexSharedPtrValid())
+    if (visualData.IsVertexSharedPtrValid())
     {
         DoUpdateModelBound();
     }
 }
 
-void Rendering::VisualImpl ::ComputeBounding(const vector<APoint>& positions)
+void Rendering::VisualImpl::ComputeBounding(const vector<APoint>& positions)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_ModelBound.ComputeFromData(positions);
+    modelBound.ComputeFromData(positions);
 }
 
-void Rendering::VisualImpl ::DoUpdateModelBound()
+void Rendering::VisualImpl::DoUpdateModelBound()
 {
-    const auto numVertices = m_VisualData.GetVertexBufferNumElements();
-    const auto stride = m_VisualData.GetVertexFormatStride();
-    //auto data = m_VisualData.GetVertexBufferReadOnlyData();
-    const auto positionOffset = m_VisualData.GetPositionOffset();
+    const auto numVertices = visualData.GetVertexBufferNumElements();
+    const auto stride = visualData.GetVertexFormatStride();
+    const auto data = visualData.GetVertexBufferReadOnlyData();
+    const auto positionOffset = visualData.GetPositionOffset();
 
-    //m_ModelBound.ComputeFromData(numVertices, stride, data + positionOffset);
+    modelBound.ComputeFromData(numVertices, stride, data);
 }
 
-void Rendering::VisualImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::VisualImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VisualData.Load(source);
-    source.ReadAggregate(m_ModelBound);
-    //source.ReadSharedPtr(m_Effect);
+    visualData.Load(source);
+    source.ReadAggregate(modelBound);
+    source.ReadObjectAssociated(effect);
 }
 
-void Rendering::VisualImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::VisualImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    m_VisualData.Save(target);
-    target.WriteAggregate(m_ModelBound);
-    //	target.WriteSharedPtr(m_Effect);
+    visualData.Save(target);
+    target.WriteAggregate(modelBound);
+    target.WriteObjectAssociated(effect);
 }
 
-int Rendering::VisualImpl ::GetStreamingSize() const
+int Rendering::VisualImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = m_VisualData.GetStreamingSize();
+    auto size = visualData.GetStreamingSize();
 
-    size += RENDERING_STREAM_SIZE(m_ModelBound);
-    size += CORE_TOOLS_STREAM_SIZE(m_Effect);
+    size += RENDERING_STREAM_SIZE(modelBound);
+    size += CORE_TOOLS_STREAM_SIZE(effect);
 
     return size;
 }
 
-void Rendering::VisualImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::VisualImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    m_VisualData.Register(target);
-    //	target.RegisterSharedPtr(m_Effect);
+    visualData.Register(target);
+    target.Register(effect);
 }
 
-void Rendering::VisualImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::VisualImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VisualData.Link(source);
-    //source.ResolveObjectSharedPtrLink(m_Effect);
+    visualData.Link(source);
+    source.ResolveLink(effect);
 }
 
-CoreTools::ObjectSharedPtr Rendering::VisualImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::VisualImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = m_VisualData.GetObjectByName(name);
+    auto object = visualData.GetObjectByName(name);
     if (object != nullptr)
         return object;
 
-    object = m_Effect->GetObjectByName(name);
+    object = effect.object->GetObjectByName(name);
     if (object != nullptr)
         return object;
     else
-        return CoreTools::ObjectSharedPtr{};
+        return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto visualDataObjects = m_VisualData.GetAllObjectsByName(name);
-    auto effectObjects = m_Effect->GetAllObjectsByName(name);
+    auto visualDataObjects = visualData.GetAllObjectsByName(name);
+    auto effectObjects = effect.object->GetAllObjectsByName(name);
 
-    vector<CoreTools::ObjectSharedPtr> entirelyObjects;
+    vector<CoreTools::ObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
 
@@ -261,29 +257,29 @@ vector<CoreTools::ObjectSharedPtr> Rendering::VisualImpl ::GetAllObjectsByName(c
     return entirelyObjects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::VisualImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::VisualImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = m_VisualData.GetConstObjectByName(name);
+    auto object = visualData.GetConstObjectByName(name);
     if (object != nullptr)
         return object;
 
-    object = m_Effect->GetConstObjectByName(name);
+    object = effect.object->GetConstObjectByName(name);
     if (object != nullptr)
         return object;
     else
-        return CoreTools::ConstObjectSharedPtr{};
+        return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto visualDataObjects = m_VisualData.GetAllConstObjectsByName(name);
-    auto effectObjects = m_Effect->GetAllConstObjectsByName(name);
+    auto visualDataObjects = visualData.GetAllConstObjectsByName(name);
+    auto effectObjects = effect.object->GetAllConstObjectsByName(name);
 
-    vector<CoreTools::ConstObjectSharedPtr> entirelyObjects;
+    vector<CoreTools::ConstObjectSharedPtr> entirelyObjects{};
 
     entirelyObjects.insert(entirelyObjects.end(), visualDataObjects.begin(), visualDataObjects.end());
 
@@ -291,5 +287,3 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualImpl ::GetAllConstObjec
 
     return entirelyObjects;
 }
-
-#include STSTEM_WARNING_POP

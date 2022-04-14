@@ -4,17 +4,25 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/25 22:55)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
+#include "CoreTools/Helper/ClassInvariant/InputOutputClassInvariantMacro.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(InputOutputExample, TestingHelper, "输入输出例子")
+using namespace std::literals;
 
-// private
-void InputOutputExample::TestingHelper
-	::AddSuites()
+InputOutputExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "输入输出例子"s }
 {
-	 
+    InitSuite();
+
+    INPUT_OUTPUT_SELF_CLASS_IS_VALID_1;
 }
- 
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(InputOutputExample, TestingHelper)
+
+void InputOutputExample::TestingHelper::InitSuite() noexcept
+
+{
+}

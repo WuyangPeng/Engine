@@ -40,7 +40,7 @@ void Rendering::ColourConvertFromTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(G32R32FConvertTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(A32B32G32R32FConvertTest);
 }
- 
+ #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::ColourConvertFromTesting
 	::R5G6B5ConvertTest()
 {

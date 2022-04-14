@@ -91,7 +91,7 @@ Rendering::IKController
 }
 
 int Rendering::IKController
-    ::GetStreamingSize () const
+::GetStreamingSize () const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -102,7 +102,7 @@ int Rendering::IKController
 	return size;
 }
 
-uint64_t Rendering::IKController ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::IKController::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
@@ -116,7 +116,7 @@ uint64_t Rendering::IKController ::Register(CoreTools::ObjectRegister& target) c
 }
 
 void Rendering::IKController
-    ::Save (CoreTools::BufferTarget& target) const
+::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -129,7 +129,7 @@ void Rendering::IKController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKController ::Link(CoreTools::ObjectLink& source)
+void Rendering::IKController::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -139,14 +139,14 @@ void Rendering::IKController ::Link(CoreTools::ObjectLink& source)
 }
 
 void Rendering::IKController
-    ::PostLink ()
+::PostLink ()
 {
 	;
     
 	ParentType::PostLink();	 
 }
 
-void Rendering::IKController ::Load(CoreTools::BufferSource& source)
+void Rendering::IKController::Load(CoreTools::BufferSource& source)
 {
 	;
     

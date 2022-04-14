@@ -1,33 +1,35 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 16:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/10 21:00)
 
 #ifndef MATHEMATICS_CONTAINMENT_CONT_LOZENGE3_DETAIL_H
 #define MATHEMATICS_CONTAINMENT_CONT_LOZENGE3_DETAIL_H
 
 #include "ContLozenge3.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/GaussPointsFit3.h"
-#include "Mathematics/Distance/Distance3D/DistancePoint3Line3.h" 
-#include "Mathematics/Distance/Distance3D/DistancePoint3Rectangle3.h" 
+#include "Mathematics/Distance/Distance3D/DistancePoint3Line3.h"
+#include "Mathematics/Distance/Distance3D/DistancePoint3Rectangle3.h"
 
 template <typename Real>
-Mathematics::Lozenge3<Real> Mathematics
-	::ContLozenge (const std::vector<Vector3<Real> >& points)
+Mathematics::Lozenge3<Real> Mathematics::ContLozenge3<Real>::ContLozenge(const std::vector<Vector3<Real>>& points)
 {
-    // Fit with Gaussian.  Axis(0) corresponds to the smallest eigenvalue.
-	auto box = GaussPointsFit3<Real>(points).GetBox3();
+    auto box = GaussPointsFit3<Real>(points).GetBox3();
 
-	auto diff = points[0] - box.GetCenter();
-	auto wMin = Vector3Tools<Real>::DotProduct(box.GetAxis(0),diff);
-	auto wMax = wMin;
-    Real w;
-   
-	for (auto i = 1u; i < points.size(); ++i)
+    auto diff = points.at(0) - box.GetCenter();
+    auto wMin = Vector3Tools<Real>::DotProduct(box.GetAxis(0), diff);
+    auto wMax = wMin;
+
+    for (auto i = 1u; i < points.size(); ++i)
     {
-		diff = points[i] - box.GetCenter();
-		w = Vector3Tools<Real>::DotProduct(box.GetAxis(0),diff);
+        diff = points.at(i) - box.GetCenter();
+        auto w = Vector3Tools<Real>::DotProduct(box.GetAxis(0), diff);
         if (w < wMin)
         {
             wMin = w;
@@ -38,27 +40,32 @@ Mathematics::Lozenge3<Real> Mathematics
         }
     }
 
-	auto radius = (Real{0.5})*(wMax - wMin);
-	auto rSqr = radius*radius;
-	auto newCenter = box.GetCenter() + ((Real{0.5})*(wMax + wMin))*box.GetAxis(0);
-	box = Box3<Real>{ newCenter, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(),
-					  box.GetFirstExtent(), box.GetSecondExtent(), box.GetThirdExtent() };
+    auto radius = Math<Real>::GetRational(1, 2) * (wMax - wMin);
+    auto rSqr = radius * radius;
+    auto newCenter = box.GetCenter() + (Math<Real>::GetRational(1, 2) * (wMax + wMin)) * box.GetAxis(0);
+    box = Box3<Real>{ newCenter,
+                      box.GetAxis0(),
+                      box.GetAxis1(),
+                      box.GetAxis2(),
+                      box.GetExtent0(),
+                      box.GetExtent1(),
+                      box.GetExtent2() };
 
-	auto aMin = Math<Real>::maxReal;
-	auto aMax = -aMin;
-	auto bMin = Math<Real>::maxReal;
-	auto bMax = -bMin;
-	auto discr, radical, u, v, test;
-	for (auto i = 0u; i < points.size(); ++i)
+    auto aMin = Math<Real>::maxReal;
+    auto aMax = -aMin;
+    auto bMin = Math<Real>::maxReal;
+    auto bMax = -bMin;
+
+    for (auto i = 0u; i < points.size(); ++i)
     {
-        diff = points[i] - box.GetCenter();
-        u = Vector3Tools<Real>::DotProduct(box.GetAxis(2),diff);
-		v = Vector3Tools<Real>::DotProduct(box.GetAxis(1), diff);
-		w = Vector3Tools<Real>::DotProduct(box.GetAxis(0), diff);
-        discr = rSqr - w*w;
-        radical = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
+        diff = points.at(i) - box.GetCenter();
+        auto u = Vector3Tools<Real>::DotProduct(box.GetAxis(2), diff);
+        auto v = Vector3Tools<Real>::DotProduct(box.GetAxis(1), diff);
+        auto w = Vector3Tools<Real>::DotProduct(box.GetAxis(0), diff);
+        auto discr = rSqr - w * w;
+        auto radical = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 
-        test = u + radical;
+        auto test = u + radical;
         if (test < aMin)
         {
             aMin = test;
@@ -83,30 +90,27 @@ Mathematics::Lozenge3<Real> Mathematics
         }
     }
 
-    // The enclosing region might be a capsule or a sphere.
     if (aMin >= aMax)
     {
-        test = (Real{0.5})*(aMin + aMax);
+        auto test = Math<Real>::GetRational(1, 2) * (aMin + aMax);
         aMin = test;
         aMax = test;
     }
     if (bMin >= bMax)
     {
-        test = (Real{0.5})*(bMin + bMax);
+        auto test = Math<Real>::GetRational(1, 2) * (bMin + bMax);
         bMin = test;
         bMax = test;
     }
 
-    // Make correction for points inside mitered corner but outside quarter
-    // sphere.
-	for (unsigned i = 0; i < points.size(); ++i)
+    for (auto i = 0u; i < points.size(); ++i)
     {
-        diff = points[i] - box.GetCenter();
-		u = Vector2Tools<Real>::DotProduct(box.GetAxis(2),diff);
-		v = Vector2Tools<Real>::DotProduct(box.GetAxis(1),diff);
+        diff = points.at(i) - box.GetCenter();
+        auto u = Vector2Tools<Real>::DotProduct(box.GetAxis(2), diff);
+        auto v = Vector2Tools<Real>::DotProduct(box.GetAxis(1), diff);
 
-        Real* aExtreme = 0;
-        Real* bExtreme = 0;
+        Real* aExtreme{ nullptr };
+        Real* bExtreme{ nullptr };
 
         if (u > aMax)
         {
@@ -137,74 +141,71 @@ Mathematics::Lozenge3<Real> Mathematics
 
         if (aExtreme)
         {
-			auto deltaU = u - *aExtreme;
-			auto deltaV = v - *bExtreme;
-			auto deltaSumSqr = deltaU*deltaU + deltaV*deltaV;
-			w = Vector2Tools<Real>::DotProduct(box.GetAxis(0),diff);
-			auto wSqr = w*w;
-            test = deltaSumSqr + wSqr;
+            auto deltaU = u - *aExtreme;
+            auto deltaV = v - *bExtreme;
+            auto deltaSumSqr = deltaU * deltaU + deltaV * deltaV;
+            auto w = Vector2Tools<Real>::DotProduct(box.GetAxis(0), diff);
+            auto wSqr = w * w;
+            auto test = deltaSumSqr + wSqr;
             if (test > rSqr)
             {
-                discr = (rSqr - wSqr)/deltaSumSqr;
+                auto discr = (rSqr - wSqr) / deltaSumSqr;
                 Real t = -Math<Real>::Sqrt(Math<Real>::FAbs(discr));
-                *aExtreme = u + t*deltaU;
-                *bExtreme = v + t*deltaV;
+                *aExtreme = u + t * deltaU;
+                *bExtreme = v + t * deltaV;
             }
         }
     }
 
-	Vector3<Real> center;
-	Vector3<Real> axis[2]{ box.GetAxis(2), box.GetAxis(1) };
-	Real extent[2];
+    Vector3<Real> center;
+    std::array<Vector3<Real>, 2> axis{ box.GetAxis(2), box.GetAxis(1) };
+    Vector2<Real> extent{};
 
-	if (aMin < aMax)
-	{
-		if (bMin < bMax)
-		{
-			// Container is a lozenge.
-			center = box.GetCenter() + aMin*box.GetAxis(2) + bMin*box.GetAxis(1);
-			extent[0] = (Real{0.5})*(aMax - aMin);
-			extent[1] = (Real{0.5})*(bMax - bMin);
-		}
-		else
-		{
-			// Container is a capsule.
-			center = box.GetCenter() + aMin*box.GetAxis(2) + ((Real{0.5})*(bMin + bMax))*box.GetAxis(1);
-			extent[0] = (Real{0.5})*(aMax - aMin);
-			extent[1] = Math<Real>::GetValue(0);
-		}
-	}
-	else
-	{
-		if (bMin < bMax)
-		{
-			// Container is a capsule.
-			center = box.GetCenter() + bMin*box.GetAxis(1) + ((Real{0.5})*(aMin + aMax))*box.GetAxis(2);
-			extent[0] = Math<Real>::GetValue(0);
-			extent[1] = (Real{0.5})*(bMax - bMin);
-		}
-		else
-		{
-			// Container is a sphere.
-			center = box.GetCenter() +
-				((Real{0.5})*(aMin + aMax))*box.GetAxis(2) +
-				((Real{0.5})*(bMin + bMax))*box.GetAxis(1);
-			extent[0] = Math<Real>::GetValue(0);
-			extent[1] = Math<Real>::GetValue(0);
-		}
-	}
-	Rectangle3<Real> rectangle{ center,axis[0],axis[1],extent[0],extent[1] };
-	Lozenge3<Real> lozenge{ rectangle,radius };
+    if (aMin < aMax)
+    {
+        if (bMin < bMax)
+        {
+            center = box.GetCenter() + aMin * box.GetAxis(2) + bMin * box.GetAxis(1);
+            extent[0] = Math<Real>::GetRational(1, 2) * (aMax - aMin);
+            extent[1] = Math<Real>::GetRational(1, 2) * (bMax - bMin);
+        }
+        else
+        {
+            center = box.GetCenter() + aMin * box.GetAxis(2) + (Math<Real>::GetRational(1, 2) * (bMin + bMax)) * box.GetAxis(1);
+            extent[0] = Math<Real>::GetRational(1, 2) * (aMax - aMin);
+            extent[1] = Math<Real>::GetValue(0);
+        }
+    }
+    else
+    {
+        if (bMin < bMax)
+        {
+            center = box.GetCenter() + bMin * box.GetAxis(1) + (Math<Real>::GetRational(1, 2) * (aMin + aMax)) * box.GetAxis(2);
+            extent[0] = Math<Real>::GetValue(0);
+            extent[1] = Math<Real>::GetRational(1, 2) * (bMax - bMin);
+        }
+        else
+        {
+            center = box.GetCenter() +
+                     (Math<Real>::GetRational(1, 2) * (aMin + aMax)) * box.GetAxis(2) +
+                     (Math<Real>::GetRational(1, 2) * (bMin + bMax)) * box.GetAxis(1);
+            extent[0] = Math<Real>::GetValue(0);
+            extent[1] = Math<Real>::GetValue(0);
+        }
+    }
+
+    const Rectangle3<Real> rectangle{ center, axis.at(0), axis.at(1), extent[0], extent[1] };
+    Lozenge3<Real> lozenge{ rectangle, radius };
 
     return lozenge;
 }
 
 template <typename Real>
-bool Mathematics
-	::InLozenge (const Vector3<Real>& point, const Lozenge3<Real>& lozenge)
+bool Mathematics::ContLozenge3<Real>::InLozenge(const Vector3<Real>& point, const Lozenge3<Real>& lozenge)
 {
-	auto dist = DistancePoint3Rectangle3<Real>(point, lozenge.GetRectangle()).Get().GetDistance();
+    auto dist = DistancePoint3Rectangle3<Real>(point, lozenge.GetRectangle()).Get().GetDistance();
+
     return dist <= lozenge.GetRadius();
 }
 
-#endif // MATHEMATICS_CONTAINMENT_CONT_LOZENGE3_DETAIL_H
+#endif  // MATHEMATICS_CONTAINMENT_CONT_LOZENGE3_DETAIL_H

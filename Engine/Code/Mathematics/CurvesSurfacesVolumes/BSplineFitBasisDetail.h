@@ -1,155 +1,144 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 18:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 17:55)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_DETAIL_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_DETAIL_H
 
 #include "BSplineFitBasis.h"
-
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
-
-
 #include "CoreTools/Contract/Assertion.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-template <typename Real>
-Mathematics::BSplineFitBasis<Real>
-	::BSplineFitBasis (int quantity, int degree)
-{
-    MATHEMATICS_ASSERTION_0(1 <= degree && degree < quantity, "Invalid inputs.\n");
-    quantity = quantity;
-    mDegree = degree;
 
-    mValue = NEW1<Real>(degree + 1);
-    mKnot = NEW1<Real>(2*degree);
-}
+#include <gsl/util>
 
 template <typename Real>
-Mathematics::BSplineFitBasis<Real>
-	::~BSplineFitBasis ()
+Mathematics::BSplineFitBasis<Real>::BSplineFitBasis(int quantity, int degree)
+    : quantity{ quantity },
+      degree{ degree },
+      value(gsl::narrow_cast<size_t>(degree) + 1),
+      knot(2 * gsl::narrow_cast<size_t>(degree))
 {
-	EXCEPTION_TRY
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26447)
- DELETE1(mValue);
-    DELETE1(mKnot);
-#include STSTEM_WARNING_POP
-}
-EXCEPTION_ALL_CATCH(Mathematics) 
-    
+    MATHEMATICS_ASSERTION_0(1 <= degree && degree < quantity, "无效输入。\n");
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-int Mathematics::BSplineFitBasis<Real>
-	::GetQuantity () const noexcept
+bool Mathematics::BSplineFitBasis<Real>::IsValid() const noexcept
 {
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::BSplineFitBasis<Real>::GetQuantity() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
     return quantity;
 }
 
 template <typename Real>
-int Mathematics::BSplineFitBasis<Real>
-	::GetDegree () const noexcept
+int Mathematics::BSplineFitBasis<Real>::GetDegree() const noexcept
 {
-    return mDegree;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return degree;
 }
 
 template <typename Real>
-void Mathematics::BSplineFitBasis<Real>
-	::Compute (Real t, int& imin, int& imax) const
+void Mathematics::BSplineFitBasis<Real>::Compute(Real t, int& imin, int& imax) const
 {
-    MATHEMATICS_ASSERTION_0(Math::GetValue(0) <= t && t <= Math::GetValue(1), "Invalid input.\n");
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    // Use scaled time and scaled knots so that 1/(Q-D) does not need to
-    // be explicitly stored by the class object.  Determine the extreme
-    // indices affected by local control.
-	const auto temp = quantity - mDegree;
-	auto QmD = static_cast<Real>(temp);
-    Real tValue { };
+    MATHEMATICS_ASSERTION_0(Math::GetValue(0) <= t && t <= Math::GetValue(1), "无效输入。\n");
+
+    const auto temp = quantity - degree;
+    auto qmd = static_cast<Real>(temp);
+    Real tValue{};
     if (t <= Math::GetValue(0))
     {
         tValue = Math::GetValue(0);
         imin = 0;
-        imax = mDegree;
+        imax = degree;
     }
     else if (t >= Math::GetValue(1))
     {
-        tValue = QmD;
+        tValue = qmd;
         imax = quantity - 1;
-        imin = imax - mDegree;
+        imin = imax - degree;
     }
     else
     {
-        tValue = QmD*t;
+        tValue = qmd * t;
         imin = static_cast<int>(tValue);
-        imax = imin + mDegree;
+        imax = imin + degree;
     }
 
-    // Precompute the knots.
-    for (int i0 = 0, i1 = imax+1-mDegree; i0 < 2*mDegree; ++i0, ++i1)
+    for (int i0 = 0, i1 = imax + 1 - degree; i0 < 2 * degree; ++i0, ++i1)
     {
-        if (i1 <= mDegree)
+        if (i1 <= degree)
         {
-            mKnot[i0] = Math::GetValue(0);
+            knot.at(i0) = Math::GetValue(0);
         }
         else if (i1 >= quantity)
         {
-            mKnot[i0] = QmD;
+            knot.at(i0) = qmd;
         }
         else
         {
-			const auto temp2 = i1 - mDegree;
-            mKnot[i0] = static_cast<Real>(temp2);
+            const auto temp2 = i1 - degree;
+            knot.at(i0) = static_cast<Real>(temp2);
         }
     }
 
-    // Initialize the basis function evaluation table.  The first degree-1
-    // entries are zero, but they do not have to be set explicitly.
-    mValue[mDegree] = Math::GetValue(1);
+    value.at(degree) = Math::GetValue(1);
 
-    // Update the basis function evaluation table, each iteration overwriting
-    // the results from the previous iteration.
-    for (auto row = mDegree-1; row >= 0; --row)
+    for (auto row = degree - 1; row >= 0; --row)
     {
-		auto k0 = mDegree, k1 = row;
-		auto knot0 = mKnot[k0], knot1 = mKnot[k1];
-		auto invDenom = (Math::GetValue(1))/(knot0 - knot1);
-		Real c1 = (knot0 - tValue)*invDenom;
-		Real c0{ };
-        mValue[row] = c1*mValue[row + 1];
+        auto k0 = degree;
+        auto k1 = row;
+        auto knot0 = knot.at(k0);
+        auto knot1 = knot.at(k1);
+        auto invDenom = (Math::GetValue(1)) / (knot0 - knot1);
+        auto c1 = (knot0 - tValue) * invDenom;
+        Real c0{};
+        value.at(row) = c1 * value.at(gsl::narrow_cast<size_t>(row) + 1);
 
-        for (auto col = row + 1; col < mDegree; ++col)
+        for (auto col = row + 1; col < degree; ++col)
         {
-            c0 = (tValue - knot1)*invDenom;
-            mValue[col] *= c0;
+            c0 = (tValue - knot1) * invDenom;
+            value.at(col) *= c0;
 
-            knot0 = mKnot[++k0];
-            knot1 = mKnot[++k1];
-            invDenom = (Math::GetValue(1))/(knot0 - knot1);
-            c1 = (knot0 - tValue)*invDenom;
-            mValue[col] += c1*mValue[col + 1];
+            knot0 = knot.at(++k0);
+            knot1 = knot.at(++k1);
+            invDenom = (Math::GetValue(1)) / (knot0 - knot1);
+            c1 = (knot0 - tValue) * invDenom;
+            value.at(col) += c1 * value.at(gsl::narrow_cast<size_t>(col) + 1);
         }
 
-        c0 = (tValue - knot1)*invDenom;
-        mValue[mDegree] *= c0;
+        c0 = (tValue - knot1) * invDenom;
+        value.at(degree) *= c0;
     }
 }
 
 template <typename Real>
-Real Mathematics::BSplineFitBasis<Real>
-	::GetValue (int i) const
+Real Mathematics::BSplineFitBasis<Real>::GetValue(int i) const
 {
-    MATHEMATICS_ASSERTION_0(0 <= i && i <= mDegree, "Invalid index\n");
-    return mValue[i];
-}
-#include STSTEM_WARNING_POP
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_DETAIL_H
+    return value.at(i);
+}
+
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_DETAIL_H

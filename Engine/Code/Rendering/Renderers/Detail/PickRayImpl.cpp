@@ -18,7 +18,7 @@ Rendering::PickRayImpl
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::PickRayImpl ::PickRayImpl() noexcept
+Rendering::PickRayImpl::PickRayImpl() noexcept
     : m_Result{ false }, m_Origin{}, m_Direction{   }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
@@ -34,14 +34,14 @@ bool Rendering::PickRayImpl
 	return m_Result;
 }
 
-Mathematics::APointF Rendering::PickRayImpl ::GetOrigin() const noexcept
+Mathematics::APointF Rendering::PickRayImpl::GetOrigin() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	return m_Origin;
 }
 
-Mathematics::AVectorF Rendering::PickRayImpl ::GetDirection() const noexcept
+Mathematics::AVectorF Rendering::PickRayImpl::GetDirection() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 

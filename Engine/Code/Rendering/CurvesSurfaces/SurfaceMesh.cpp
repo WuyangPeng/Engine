@@ -32,7 +32,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, SurfaceMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfaceMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SurfaceMesh);
 
-Rendering::SurfaceMesh ::SurfaceMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, IndexBufferSharedPtr ibuffer,
+Rendering::SurfaceMesh::SurfaceMesh(VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, IndexBufferSharedPtr ibuffer,
                                      Float2ArraySharedPtr params, SurfacePatchSharedPtr* patches, bool allowDynamicChange)
     : ParentType(vformat, vbuffer, ibuffer), mOrigVBuffer(vbuffer), mOrigIBuffer(ibuffer), mOrigParams(params), mPatches(patches),
       mNumFullVertices(vbuffer->GetNumElements()), mNumPatches(ibuffer->GetNumElements() / 3), mLevel(0), mAllowDynamicChange(allowDynamicChange)
@@ -48,7 +48,7 @@ Rendering::SurfaceMesh ::SurfaceMesh(VertexFormatSharedPtr vformat, VertexBuffer
     }
 }
 
-Rendering::SurfaceMesh ::~SurfaceMesh()
+Rendering::SurfaceMesh::~SurfaceMesh()
 {
     EXCEPTION_TRY
     {
@@ -58,7 +58,7 @@ Rendering::SurfaceMesh ::~SurfaceMesh()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::SurfaceMesh ::SetLevel(int level)
+void Rendering::SurfaceMesh::SetLevel(int level)
 {
     if (!mOrigVBuffer)
     {
@@ -100,7 +100,7 @@ void Rendering::SurfaceMesh ::SetLevel(int level)
     mNumFullVertices = numTotalVertices;
 
     const int numTotalIndices = 3 * numTotalTriangles;
-    SetIndexBuffer(IndexBufferSharedPtr(std::make_shared<IndexBuffer>(numTotalIndices, (int)sizeof(int))));
+    SetIndexBuffer(IndexBufferSharedPtr(IndexBuffer::Create(numTotalIndices, (int)sizeof(int))));
 
     int* indices = (int*)GetIndexBuffer()->GetReadOnlyData();
     for (i = 0; i < numTotalTriangles; ++i)
@@ -111,19 +111,19 @@ void Rendering::SurfaceMesh ::SetLevel(int level)
             *indices++ = tri.V[j];
         }
     }
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetIndexBuffer().get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(GetIndexBuffer());
 
     //   DELETE1(triangles);
     OnDynamicChange();
     UpdateModelSpace(VisualUpdateType::Normals);
 }
 
-int Rendering::SurfaceMesh ::GetLevel() const noexcept
+int Rendering::SurfaceMesh::GetLevel() const noexcept
 {
     return mLevel;
 }
 
-void Rendering::SurfaceMesh ::Allocate(int& numTotalVertices, int& numTotalEdges, EdgeMap& edgeMap, int& numTotalTriangles, Triangle*& triangles)
+void Rendering::SurfaceMesh::Allocate(int& numTotalVertices, int& numTotalEdges, EdgeMap& edgeMap, int& numTotalTriangles, Triangle*& triangles)
 {
     // The number of original vertices.
     int numOrigVertices = mOrigVBuffer->GetNumElements();
@@ -165,7 +165,7 @@ void Rendering::SurfaceMesh ::Allocate(int& numTotalVertices, int& numTotalEdges
 
     // Allocate storage for the subdivision.
     int vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBufferSharedPtr(std::make_shared<VertexBuffer>(numTotalVertices, vstride)));
+    SetVertexBuffer(VertexBufferSharedPtr(VertexBuffer::Create(numTotalVertices, vstride)));
     // triangles = NEW1<Triangle>(numTotalTriangles);
     if (mAllowDynamicChange)
     {
@@ -214,7 +214,7 @@ void Rendering::SurfaceMesh ::Allocate(int& numTotalVertices, int& numTotalEdges
     RENDERING_ASSERTION_0(numOrigEdges == (int)edgeMap.size(), "Unexpected condition\n");
 }
 
-void Rendering::SurfaceMesh ::Subdivide(int& numVertices, int& numEdges, EdgeMap& edgeMap, int& numTriangles, Triangle* triangles)
+void Rendering::SurfaceMesh::Subdivide(int& numVertices, int& numEdges, EdgeMap& edgeMap, int& numTriangles, Triangle* triangles)
 {
     numVertices;
     numEdges;
@@ -380,7 +380,7 @@ void Rendering::SurfaceMesh ::Subdivide(int& numVertices, int& numEdges, EdgeMap
     numEdges = (int)edgeMap.size();
 }
 
-void Rendering::SurfaceMesh ::InsertInto(EdgeMap& edgeMap, SurfacePatchSharedPtr patch, int v0, int v1, const Mathematics::Float2& param0, const Mathematics::Float2& param1, int newReferences)
+void Rendering::SurfaceMesh::InsertInto(EdgeMap& edgeMap, SurfacePatchSharedPtr patch, int v0, int v1, const Mathematics::Float2& param0, const Mathematics::Float2& param1, int newReferences)
 {
     Mathematics::EdgeKey key(v0, v1);
     const EdgeMap::iterator iter = edgeMap.find(key);
@@ -399,7 +399,7 @@ void Rendering::SurfaceMesh ::InsertInto(EdgeMap& edgeMap, SurfacePatchSharedPtr
     }
 }
 
-void Rendering::SurfaceMesh ::OnDynamicChange()
+void Rendering::SurfaceMesh::OnDynamicChange()
 {
     if (mAllowDynamicChange)
     {
@@ -415,7 +415,7 @@ void Rendering::SurfaceMesh ::OnDynamicChange()
     }
 }
 
-void Rendering::SurfaceMesh ::Lock()
+void Rendering::SurfaceMesh::Lock()
 {
     CoreTools::DisableNoexcept();
     if (mOrigVBuffer)
@@ -431,12 +431,12 @@ void Rendering::SurfaceMesh ::Lock()
     // the vertices of the mesh, even though the mesh is "locked".
 }
 
-bool Rendering::SurfaceMesh ::IsLocked() const noexcept
+bool Rendering::SurfaceMesh::IsLocked() const noexcept
 {
     return !mOrigVBuffer;
 }
 
-void Rendering::SurfaceMesh ::InitializeSurfaceInfo() noexcept
+void Rendering::SurfaceMesh::InitializeSurfaceInfo() noexcept
 {
     // Because vertices are shared by triangles, the last visited triangle
     // for a vertex donates its patch and parameter values to that vertex.
@@ -460,7 +460,7 @@ void Rendering::SurfaceMesh ::InitializeSurfaceInfo() noexcept
 
 // SurfaceMesh::Edge
 
-Rendering::SurfaceMesh::Edge ::Edge(int v0, int v1)
+Rendering::SurfaceMesh::Edge::Edge(int v0, int v1)
     : Patch(), VMid(-1), ParamMid(0.0f, 0.0f), References(0)
 {
     V[0] = v0;
@@ -469,14 +469,14 @@ Rendering::SurfaceMesh::Edge ::Edge(int v0, int v1)
     Param[1] = Mathematics::Float2(0.0f, 0.0f);
 }
 
-bool Rendering::SurfaceMesh::Edge ::operator<(const Edge& edge) const
+bool Rendering::SurfaceMesh::Edge::operator<(const Edge& edge) const
 {
     return Mathematics::EdgeKey(V[0], V[1]) < Mathematics::EdgeKey(edge.V[0], edge.V[1]);
 }
 
 // SurfaceMesh::Triangle
 
-Rendering::SurfaceMesh::Triangle ::Triangle() noexcept
+Rendering::SurfaceMesh::Triangle::Triangle() noexcept
     : Patch(nullptr)
 {
     for (int i = 0; i < 3; ++i)
@@ -487,13 +487,13 @@ Rendering::SurfaceMesh::Triangle ::Triangle() noexcept
 
 // SurfaceMesh::SurfaceInfo
 
-Rendering::SurfaceMesh::SurfaceInfo ::SurfaceInfo()
+Rendering::SurfaceMesh::SurfaceInfo::SurfaceInfo()
     : Patch(nullptr), Param(0.0f, 0.0f)
 {
 }
 // Name support.
 
-CoreTools::ObjectSharedPtr Rendering::SurfaceMesh ::GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::SurfaceMesh::GetObjectByName(const std::string& name)
 {
     CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
     if (found)
@@ -532,7 +532,7 @@ CoreTools::ObjectSharedPtr Rendering::SurfaceMesh ::GetObjectByName(const std::s
     return CoreTools::ObjectSharedPtr();
 }
 
-std::vector<CoreTools::ObjectSharedPtr> Rendering::SurfaceMesh ::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::SurfaceMesh::GetAllObjectsByName(const std::string& name)
 {
     std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
@@ -556,7 +556,7 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::SurfaceMesh ::GetAllObjectsBy
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::SurfaceMesh ::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::SurfaceMesh::GetConstObjectByName(const std::string& name) const
 {
     CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
     if (found)
@@ -595,7 +595,7 @@ CoreTools::ConstObjectSharedPtr Rendering::SurfaceMesh ::GetConstObjectByName(co
     return CoreTools::ConstObjectSharedPtr();
 }
 
-std::vector<CoreTools::ConstObjectSharedPtr> Rendering::SurfaceMesh ::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::SurfaceMesh::GetAllConstObjectsByName(const std::string& name) const
 {
     std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
@@ -621,12 +621,12 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::SurfaceMesh ::GetAllCons
 
 // Streaming support.
 
-Rendering::SurfaceMesh ::SurfaceMesh(LoadConstructor value)
+Rendering::SurfaceMesh::SurfaceMesh(LoadConstructor value)
     : ParentType(value), mPatches(0), mNumFullVertices(0), mNumPatches(0), mLevel(0), mAllowDynamicChange(false), mSInfo(0)
 {
 }
 
-void Rendering::SurfaceMesh ::Load(CoreTools::BufferSource& source)
+void Rendering::SurfaceMesh::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -659,7 +659,7 @@ void Rendering::SurfaceMesh ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::SurfaceMesh ::Link(CoreTools::ObjectLink& source)
+void Rendering::SurfaceMesh::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 
@@ -676,12 +676,12 @@ void Rendering::SurfaceMesh ::Link(CoreTools::ObjectLink& source)
     }
 }
 
-void Rendering::SurfaceMesh ::PostLink()
+void Rendering::SurfaceMesh::PostLink()
 {
     ParentType::PostLink();
 }
 
-uint64_t Rendering::SurfaceMesh ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::SurfaceMesh::Register(CoreTools::ObjectRegister& target) const
 {
     const uint64_t id = ParentType::Register(target);
     if (0 < id)
@@ -702,7 +702,7 @@ uint64_t Rendering::SurfaceMesh ::Register(CoreTools::ObjectRegister& target) co
     return id;
 }
 
-void Rendering::SurfaceMesh ::Save(CoreTools::BufferTarget& target) const
+void Rendering::SurfaceMesh::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -729,7 +729,7 @@ void Rendering::SurfaceMesh ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::SurfaceMesh ::GetStreamingSize() const
+int Rendering::SurfaceMesh::GetStreamingSize() const
 {
     int size = ParentType::GetStreamingSize();
     size += sizeof(mNumFullVertices);

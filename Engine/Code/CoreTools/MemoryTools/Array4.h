@@ -27,13 +27,13 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        size_t GetBound0() const noexcept;
-        size_t GetBound1() const noexcept;
-        size_t GetBound2() const noexcept;
-        size_t GetBound3() const noexcept;
+        NODISCARD size_t GetBound0() const noexcept;
+        NODISCARD size_t GetBound1() const noexcept;
+        NODISCARD size_t GetBound2() const noexcept;
+        NODISCARD size_t GetBound3() const noexcept;
 
-        T** const* operator[](int cuboid) const noexcept;
-        T*** operator[](int cuboid) noexcept;
+        NODISCARD T** const* operator[](int cuboid) const noexcept;
+        NODISCARD T*** operator[](int cuboid) noexcept;
 
     private:
         void SetPointers();

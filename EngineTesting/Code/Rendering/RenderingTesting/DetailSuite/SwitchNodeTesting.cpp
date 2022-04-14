@@ -19,8 +19,8 @@
 
 
 
-
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26409)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, SwitchNodeTesting) 
 
 void Rendering::SwitchNodeTesting
@@ -249,7 +249,7 @@ void Rendering::SwitchNodeTesting
 }
 
 void Rendering::SwitchNodeTesting
-   ::ChildTest()
+  ::ChildTest()
 {
 //     CoreTools::OutTopLevel outTopLevel;
 // 	CoreTools::ObjectInterfaceSharedPtr firstNode(new SwitchNode);

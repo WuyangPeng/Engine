@@ -1,115 +1,72 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 17:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/14 16:51)
 
 #ifndef MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE3_H
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "SingleCurve3.h"
 #include "BSplineBasis.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+#include "SingleCurve3.h"
+
 namespace Mathematics
 {
-	template <typename Real>
-	class  BSplineCurve3 : public SingleCurve3<Real>
-	{
-        public:
-			using Math = Math<Real>;
-	public:
-		// Construction and destruction.  The caller is responsible for deleting
-		// the input arrays if they were dynamically allocated.  Internal copies
-		// of the arrays are made, so to dynamically change control points or
-		// knots you must use the 'SetControlPoint', 'GetControlPoint', and
-		// 'Knot' member functions.
+    template <typename Real>
+    class BSplineCurve3 : public SingleCurve3<Real>
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		// Uniform spline.  The number of control points is n+1 >= 2.  The degree
-		// of the B-spline is d and must satisfy 1 <= d <= n.  The knots are
-		// implicitly calculated in [0,1].  If open is 'true', the spline is
-		// open and the knots are
-		//   t[i] = 0,               0 <= i <= d
-		//          (i-d)/(n+1-d),   d+1 <= i <= n
-		//          1,               n+1 <= i <= n+d+1
-		// If open is 'false', the spline is periodic and the knots are
-		//   t[i] = (i-d)/(n+1-d),   0 <= i <= n+d+1
-		// If loop is 'true', extra control points are added to generate a closed
-		// curve.  For an open spline, the control point array is reallocated and
-		// one extra control point is added, set to the first control point
-		// C[n+1] = C[0].  For a periodic spline, the control point array is
-		// reallocated and the first d points are replicated.  In either case the
-		// knot array is calculated accordingly.
+        using ClassType = BSplineCurve3<Real>;
+        using ParentType = SingleCurve3<Real>;
+        using Math = ParentType::Math;
 
-		BSplineCurve3 (int numCtrlPoints, const Vector3<Real>* ctrlPoint, int degree, bool loop, bool open);
+    public:
+        BSplineCurve3(const std::vector<Vector3<Real>>& ctrlPoint, int degree, bool loop, bool open);
+        BSplineCurve3(const std::vector<Vector3<Real>>& ctrlPoint, int degree, bool loop, const std::vector<Real>& knot);
 
-		// Open, nonuniform spline.  The knot array must have n-d elements.  The
-		// elements must be nondecreasing.  Each element must be in [0,1].
-		BSplineCurve3 (int numCtrlPoints, const Vector3<Real>* ctrlPoint, int degree, bool loop, const Real* knot);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		~BSplineCurve3 ();
-		
-		BSplineCurve3(const BSplineCurve3&) = default;
-		BSplineCurve3& operator=(const BSplineCurve3&) = default;
-		BSplineCurve3(BSplineCurve3&&) = default;
-		BSplineCurve3& operator=(BSplineCurve3&&) = default;
+        NODISCARD int GetNumCtrlPoints() const noexcept;
+        NODISCARD int GetDegree() const noexcept;
+        NODISCARD bool IsOpen() const noexcept;
+        NODISCARD bool IsUniform() const noexcept;
+        NODISCARD bool IsLoop() const noexcept;
 
-		int GetNumCtrlPoints () const noexcept;
-		int GetDegree () const noexcept;
-		bool IsOpen () const noexcept;
-		bool IsUniform () const noexcept;
-		bool IsLoop () const noexcept;
+        void SetControlPoint(int i, const Vector3<Real>& ctrl);
+        NODISCARD Vector3<Real> GetControlPoint(int i) const;
 
-		// Control points may be changed at any time.  The input index should be
-		// valid (0 <= i <= n).  If it is invalid, GetControlPoint returns a
-		// vector whose components are all MAX_REAL.
-                void SetControlPoint(int i, const Vector3<Real>& ctrl) noexcept;
-                Vector3<Real> GetControlPoint(int i) const noexcept;
+        void SetKnot(int i, Real knot);
+        NODISCARD Real GetKnot(int i) const;
 
-		// The knot values can be changed only if the basis function is nonuniform
-		// and the input index is valid (0 <= i <= n-d-1).  If these conditions
-		// are not satisfied, GetKnot returns MAX_REAL.
-		void SetKnot (int i, Real knot);
-		Real GetKnot (int i) const;
+        NODISCARD Vector3<Real> GetPosition(Real t) const override;
+        NODISCARD Vector3<Real> GetFirstDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetSecondDerivative(Real t) const override;
+        NODISCARD Vector3<Real> GetThirdDerivative(Real t) const override;
 
-		// The spline is defined for 0 <= t <= 1.  If a t-value is outside [0,1],
-		// an open spline clamps t to [0,1].  That is, if t > 1, t is set to 1;
-		// if t < 0, t is set to 0.  A periodic spline wraps to to [0,1].  That
-		// is, if t is outside [0,1], then t is set to t-floor(t).
-		  Vector3<Real> GetPosition (Real t) const override;
-		  Vector3<Real> GetFirstDerivative (Real t) const override;
-		  Vector3<Real> GetSecondDerivative (Real t) const override;
-		  Vector3<Real> GetThirdDerivative (Real t) const override;
+        void Get(Real t, Vector3<Real>* pos, Vector3<Real>* der1, Vector3<Real>* der2, Vector3<Real>* der3) const;
 
-		// If you need position and derivatives at the same time, it is more
-		// efficient to call these functions.  Pass the addresses of those
-		// quantities whose values you want.  You may pass 0 in any argument
-		// whose value you do not want.
-		void Get (Real t, Vector3<Real>* pos, Vector3<Real>* der1,
-			Vector3<Real>* der2, Vector3<Real>* der3) const;
+        NODISCARD BSplineBasis<Real>& GetBasis() noexcept;
 
-		// Access the basis function to compute it without control points.  This
-		// is useful for least squares fitting of curves.
-		BSplineBasis<Real>& GetBasis () noexcept;
+    protected:
+        void CreateControl(const std::vector<Vector3<Real>>& newCtrlPoint);
 
-	protected:
-		// Replicate the necessary number of control points when the Create
-		// function has loop equal to true, in which case the spline curve must
-		// be a closed curve.
-		void CreateControl (const Vector3<Real>* ctrlPoint);
-		
-		int mNumCtrlPoints;
-		Vector3<Real>* mCtrlPoint;  // ctrl[n+1]
-		bool mLoop;
-		BSplineBasis<Real> mBasis;
-		int mReplicate;  // the number of replicated control points
-	};
-	
-	using BSplineCurve3f = BSplineCurve3<float>;
-	using BSplineCurve3d = BSplineCurve3<double>;
+    private:
+        int numCtrlPoints;
+        std::vector<Vector3<Real>> ctrlPoint;
+        bool loop;
+        BSplineBasis<Real> basis;
+        int replicate;
+    };
+
+    using BSplineCurve3F = BSplineCurve3<float>;
+    using BSplineCurve3D = BSplineCurve3<double>;
 }
-#include STSTEM_WARNING_POP
-#endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE3_H
+
+#endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE3_H

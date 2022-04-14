@@ -15,7 +15,7 @@
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, UtilityTesting) 
-
+ #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::UtilityTesting
 	::MainTest()
 {
@@ -51,7 +51,7 @@ void Rendering::UtilityTesting
 // 		Utility::ReflectX(xSize,ySize,numBytesPerPixel,&firstPixels[0]);
 // 		Utility::ReflectX(xSize,ySize,numBytesPerPixel,&firstPixels[0]);
 // 
-// 		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(firstPixels,secondPixels);
+// 		ASSERT_EQUAL(firstPixels,secondPixels);
 // 
 // 		Utility::ReflectX(xSize,ySize,numBytesPerPixel,&firstPixels[0]);
 // 
@@ -99,7 +99,7 @@ void Rendering::UtilityTesting
 // 		Utility::ReflectY(xSize,ySize,numBytesPerPixel,&firstPixels[0]);
 // 		Utility::ReflectY(xSize,ySize,numBytesPerPixel,&firstPixels[0]);
 // 
-// 		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(firstPixels,secondPixels);		
+// 		ASSERT_EQUAL(firstPixels,secondPixels);		
 // 
 // 		Utility::ReflectY(xSize,ySize,numBytesPerPixel,&firstPixels[0]);
 // 

@@ -44,11 +44,11 @@ namespace Rendering
         using RendererPtr = std::shared_ptr<Renderer>;
         using VertexFormatConstPtr = const VertexFormat*;
         using VertexBufferConstPtr = const VertexBuffer*;
-        using IndexBufferConstPtr = const IndexBuffer*;
-        using Texture1DConstPtr = const Texture1D*;
-        using Texture2DConstPtr = const Texture2D*;
-        using Texture3DConstPtr = const Texture3D*;
-        using TextureCubeConstPtr = const TextureCube*;
+        using IndexBufferConstPtr = std::shared_ptr<const IndexBuffer>;
+        using Texture1DConstPtr = std::shared_ptr<const Texture1D>;
+        using Texture2DConstPtr = std::shared_ptr<const Texture2D>;
+        using Texture3DConstPtr = std::shared_ptr<const Texture3D>;
+        using TextureCubeConstPtr = std::shared_ptr<const TextureCube>;
         using RenderTargetConstPtr = const RenderTarget*;
         using VertexShaderConstPtr = const VertexShader*;
         using PixelShaderConstPtr = const PixelShader*;

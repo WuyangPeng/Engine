@@ -32,7 +32,7 @@ void Rendering::Float2ArrayTesting
 
 	CoreTools::InitTerm::ExecuteTerminators();
 }
- 
+ #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::Float2ArrayTesting
 	::InitTest()
 {

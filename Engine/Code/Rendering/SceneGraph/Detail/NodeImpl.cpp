@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 16:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 15:46)
 
 #include "Rendering/RenderingExport.h"
 
 #include "NodeImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -17,33 +21,25 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Node.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::NodeImpl ::NodeImpl(Node* realThis)
-    : m_Child{}, m_RealThis{ realThis }
+
+Rendering::NodeImpl::NodeImpl(Node* realThis) noexcept
+    : spatialChild{}, realThis{ realThis }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::NodeImpl ::~NodeImpl()
+Rendering::NodeImpl::~NodeImpl() noexcept
 {
     EXCEPTION_TRY
     {
-        for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+        for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
         {
-            if (*iter != nullptr)
+            if (iter->object != nullptr)
             {
-                (*iter)->SetObject(nullptr);
-                iter->reset();
+                iter->object->SetObject(nullptr);
+                iter->object.reset();
             }
         }
     }
@@ -54,14 +50,14 @@ Rendering::NodeImpl ::~NodeImpl()
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, NodeImpl)
 
-int Rendering::NodeImpl ::GetNumChildren() const
+int Rendering::NodeImpl::GetNumChildren() const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return boost::numeric_cast<int>(m_Child.size());
+    return boost::numeric_cast<int>(spatialChild.size());
 }
 
-int Rendering::NodeImpl ::AttachChild(SpatialSharedPtr child)
+int Rendering::NodeImpl::AttachChild(const SpatialSharedPtr& child)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -77,30 +73,30 @@ int Rendering::NodeImpl ::AttachChild(SpatialSharedPtr child)
         return -1;
     }
 
-    child->SetParent(m_RealThis);
+    child->SetParent(realThis);
 
     // 插入子节点到第一个可用插槽(如果有的话)。
     const auto index = GetFirstNullIndex();
-    if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    if (0 <= index && index < boost::numeric_cast<int>(spatialChild.size()))
     {
-        m_Child[index] = child;
+        spatialChild.at(index).object = child;
         return index;
     }
     else
     {
         // 所有插槽都被使用，附加子节点到数组后面。
-        const auto numChildren = boost::numeric_cast<int>(m_Child.size());
-        m_Child.push_back(child);
+        const auto numChildren = boost::numeric_cast<int>(spatialChild.size());
+        spatialChild.emplace_back(child);
         return numChildren;
     }
 }
 
 // private
-int Rendering::NodeImpl ::GetFirstNullIndex() const noexcept
+int Rendering::NodeImpl::GetFirstNullIndex() const
 {
-    for (auto index = 0u; index < m_Child.size(); ++index)
+    for (auto index = 0u; index < spatialChild.size(); ++index)
     {
-        if (!m_Child[index])
+        if (!spatialChild.at(index).object)
         {
             return index;
         }
@@ -109,18 +105,18 @@ int Rendering::NodeImpl ::GetFirstNullIndex() const noexcept
     return -1;
 }
 
-int Rendering::NodeImpl ::DetachChild(SpatialSharedPtr child) noexcept
+int Rendering::NodeImpl::DetachChild(const SpatialSharedPtr& child)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (child)
+    if (child != nullptr)
     {
-        for (auto index = 0u; index < m_Child.size(); ++index)
+        for (auto index = 0u; index < spatialChild.size(); ++index)
         {
-            if (m_Child[index] == child)
+            if (spatialChild.at(index).object == child)
             {
-                m_Child[index]->SetParent(nullptr);
-                m_Child[index].reset();
+                spatialChild.at(index).object->SetParent(nullptr);
+                spatialChild.at(index).object.reset();
 
                 return index;
             }
@@ -130,25 +126,26 @@ int Rendering::NodeImpl ::DetachChild(SpatialSharedPtr child) noexcept
     return -1;
 }
 
-Rendering::SpatialSharedPtr Rendering::NodeImpl ::DetachChildAt(int index)
+Rendering::SpatialSharedPtr Rendering::NodeImpl::DetachChildAt(int index)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    if (0 <= index && index < boost::numeric_cast<int>(spatialChild.size()))
     {
-        auto child = m_Child[index];
+        auto child = spatialChild.at(index).object;
         if (child)
         {
             child->SetParent(nullptr);
-            m_Child[index].reset();
+            spatialChild.at(index).object.reset();
         }
 
         return child;
     }
-    return SpatialSharedPtr{};
+
+    return nullptr;
 }
 
-Rendering::SpatialSharedPtr Rendering::NodeImpl ::SetChild(int index, const SpatialSharedPtr& child)
+Rendering::SpatialSharedPtr Rendering::NodeImpl::SetChild(int index, const SpatialSharedPtr& child)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -157,11 +154,11 @@ Rendering::SpatialSharedPtr Rendering::NodeImpl ::SetChild(int index, const Spat
         RENDERING_ASSERTION_1(!child->GetParent(), "子节点已被附加到另一NodeImpl。\n");
     }
 
-    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+    const auto numChildren = boost::numeric_cast<int>(spatialChild.size());
     if (0 <= index && index < numChildren)
     {
         // 从插槽中移除当前的子节点。
-        auto previousChild = m_Child[index];
+        auto previousChild = spatialChild.at(index).object;
         if (previousChild != nullptr)
         {
             previousChild->SetParent(nullptr);
@@ -170,10 +167,10 @@ Rendering::SpatialSharedPtr Rendering::NodeImpl ::SetChild(int index, const Spat
         // 插入一个新的子节点到插槽。
         if (child != nullptr)
         {
-            child->SetParent(m_RealThis);
+            child->SetParent(realThis);
         }
 
-        m_Child[index] = child;
+        spatialChild.at(index).object = child;
 
         return previousChild;
     }
@@ -181,47 +178,47 @@ Rendering::SpatialSharedPtr Rendering::NodeImpl ::SetChild(int index, const Spat
     // 索引超出了范围，附加子节点到数组。
     if (child)
     {
-        child->SetParent(m_RealThis);
+        child->SetParent(realThis);
     }
 
-    m_Child.push_back(child);
+    spatialChild.emplace_back(child);
 
-    return SpatialSharedPtr{};
+    return nullptr;
 }
 
-Rendering::SpatialSharedPtr Rendering::NodeImpl ::GetChild(int index)
+Rendering::SpatialSharedPtr Rendering::NodeImpl::GetChild(int index)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    if (0 <= index && index < boost::numeric_cast<int>(spatialChild.size()))
     {
-        return m_Child[index];
+        return spatialChild.at(index).object;
     }
 
-    return SpatialSharedPtr{};
+    return nullptr;
 }
 
-Rendering::ConstSpatialSharedPtr Rendering::NodeImpl ::GetConstChild(int index) const
+Rendering::ConstSpatialSharedPtr Rendering::NodeImpl::GetConstChild(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    if (0 <= index && index < boost::numeric_cast<int>(m_Child.size()))
+    if (0 <= index && index < boost::numeric_cast<int>(spatialChild.size()))
     {
-        return m_Child[index];
+        return spatialChild.at(index).object;
     }
 
-    return ConstSpatialSharedPtr{};
+    return nullptr;
 }
 
-bool Rendering::NodeImpl ::UpdateWorldData(double applicationTime)
+bool Rendering::NodeImpl::UpdateWorldData(double applicationTime)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     auto result = true;
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;
+        auto child = iter->object;
 
         if (child)
         {
@@ -235,16 +232,16 @@ bool Rendering::NodeImpl ::UpdateWorldData(double applicationTime)
     return result;
 }
 
-const Rendering::FloatBound Rendering::NodeImpl ::GetWorldBound()
+Rendering::BoundF Rendering::NodeImpl::GetWorldBound()
 {
     RENDERING_CLASS_IS_VALID_9;
 
     // 从一个无效的边界开始。
-    FloatBound bound{ Mathematics::APointF::GetOrigin(), 0.0f };
+    BoundF bound{ Mathematics::APointF::GetOrigin(), 0.0f };
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;
+        auto child = iter->object;
 
         if (child != nullptr)
         {
@@ -258,13 +255,13 @@ const Rendering::FloatBound Rendering::NodeImpl ::GetWorldBound()
     return bound;
 }
 
-void Rendering::NodeImpl ::GetVisibleSet(Culler& culler, bool noCull)
+void Rendering::NodeImpl::GetVisibleSet(Culler& culler, bool noCull)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;
+        auto child = iter->object;
 
         if (child != nullptr)
         {
@@ -275,13 +272,13 @@ void Rendering::NodeImpl ::GetVisibleSet(Culler& culler, bool noCull)
 
 // 名字支持。
 
-CoreTools::ObjectSharedPtr Rendering::NodeImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::NodeImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;
+        auto child = iter->object;
 
         if (child != nullptr && child->GetName() == name)
         {
@@ -289,35 +286,35 @@ CoreTools::ObjectSharedPtr Rendering::NodeImpl ::GetObjectByName(const string& n
         }
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
-vector<CoreTools::ObjectSharedPtr> Rendering::NodeImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::NodeImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ObjectSharedPtr> objects;
+    vector<CoreTools::ObjectSharedPtr> objects{};
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;
+        auto child = iter->object;
 
         if (child != nullptr && child->GetName() == name)
         {
-            objects.push_back(child);
+            objects.emplace_back(child);
         }
     }
 
     return objects;
 }
 
-CoreTools::ConstObjectSharedPtr Rendering::NodeImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::NodeImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;  //->PolymorphicCastConstObjectSharedPtr<ConstSpatialSharedPtr>();
+        auto child = iter->object;
 
         if (child != nullptr && child->GetName() == name)
         {
@@ -325,22 +322,22 @@ CoreTools::ConstObjectSharedPtr Rendering::NodeImpl ::GetConstObjectByName(const
         }
     }
 
-    return CoreTools::ConstObjectSharedPtr{};
+    return nullptr;
 }
 
-vector<CoreTools::ConstObjectSharedPtr> Rendering::NodeImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::NodeImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects;
+    vector<CoreTools::ConstObjectSharedPtr> objects{};
 
-    for (auto iter = m_Child.begin(), end = m_Child.end(); iter != end; ++iter)
+    for (auto iter = spatialChild.begin(); iter != spatialChild.end(); ++iter)
     {
-        auto child = *iter;  //->PolymorphicCastConstObjectSharedPtr<ConstSpatialSharedPtr>();
+        auto child = iter->object;
 
         if (child != nullptr && child->GetName() == name)
         {
-            objects.push_back(child);
+            objects.emplace_back(child);
         }
     }
 
@@ -349,79 +346,68 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::NodeImpl ::GetAllConstObjects
 
 // 流支持
 
-void Rendering::NodeImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::NodeImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    int numChildren{ 0 };
-    source.Read(numChildren);
-
-    m_Child.resize(numChildren);
-
-    if (!m_Child.empty())
-    {
-        //  source.ReadSharedPtr(boost::numeric_cast<int>(m_Child.size()),&m_Child[0]);
-    }
+    source.ReadObjectAssociatedContainer(spatialChild);
 }
 
-void Rendering::NodeImpl ::Link(CoreTools::ObjectLink& source)
+void Rendering::NodeImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
+
+    source.ResolveLinkContainer(spatialChild);
+}
+
+void Rendering::NodeImpl::Clear() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    spatialChild.clear();
+}
+
+void Rendering::NodeImpl::ChangeRealThis(Node* aRealThis) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    realThis = aRealThis;
+}
+
+void Rendering::NodeImpl::Register(CoreTools::ObjectRegister& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto numChildren = boost::numeric_cast<int>(spatialChild.size());
 
     for (auto i = 0; i < numChildren; ++i)
     {
-        //  if (m_Child[i].GetAddress() != 0)
+        if (spatialChild.at(i).object)
         {
-            //     source.ResolveObjectSharedPtrLink(m_Child[i]);
-            //       SetChild(i, m_Child[i]);
+            target.Register(spatialChild.at(i));
         }
     }
 }
 
-void Rendering::NodeImpl ::Register(CoreTools::ObjectRegister& target) const
+void Rendering::NodeImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
 
-    for (auto i = 0; i < numChildren; ++i)
-    {
-        if (m_Child[i])
-        {
-            // target.RegisterSharedPtr(m_Child[i]);
-        }
-    }
+    target.WriteObjectAssociatedContainerWithNumber(spatialChild);
 }
 
-void Rendering::NodeImpl ::Save(CoreTools::BufferTarget& target) const
+int Rendering::NodeImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto numChildren = boost::numeric_cast<int>(m_Child.size());
-    target.Write(numChildren);
-
-    if (!m_Child.empty())
-    {
-        //	target.WriteSharedPtrWithoutNumber(boost::numeric_cast<int>(m_Child.size()), &m_Child[0]);
-    }
-}
-
-int Rendering::NodeImpl ::GetStreamingSize() const
-{
-    RENDERING_CLASS_IS_VALID_CONST_9;
-
-    auto numChildren = boost::numeric_cast<int>(m_Child.size());
+    auto numChildren = boost::numeric_cast<int32_t>(spatialChild.size());
 
     auto size = CORE_TOOLS_STREAM_SIZE(numChildren);
 
     if (0 < numChildren)
     {
-        size += numChildren * CORE_TOOLS_STREAM_SIZE(m_Child[0]);
+        size += numChildren * CORE_TOOLS_STREAM_SIZE(spatialChild.at(0));
     }
 
     return size;
 }
-
-#include STSTEM_WARNING_POP

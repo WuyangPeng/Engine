@@ -1,40 +1,43 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/19 19:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.5 (2022/04/01 16:27)
 
 #ifndef RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_IMPL_H
 #define RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/SceneGraph/PickRecord.h" 
+#include "Rendering/SceneGraph/PickRecord.h"
 
 #include <vector>
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE PickRecordContainerImpl
-	{
-	public:
-		using ClassType = PickRecordContainerImpl;
+    class RENDERING_HIDDEN_DECLARE PickRecordContainerImpl
+    {
+    public:
+        using ClassType = PickRecordContainerImpl;
 
-	public:	
-		PickRecordContainerImpl() noexcept;
+    public:
+        PickRecordContainerImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void InsertPickRecord(const PickRecord& pickRecord);
-		void InsertPickRecord(const PickRecordContainerImpl& pickRecordContainerImpl);
+        void InsertPickRecord(const PickRecord& aPickRecord);
+        void InsertPickRecord(const PickRecordContainerImpl& pickRecordContainerImpl);
 
-		int GetSize() const;
-		const PickRecord GetPickRecord(int index) const;
-                bool IsEmpty() const noexcept;
+        NODISCARD int GetSize() const;
+        NODISCARD PickRecord GetPickRecord(int index) const;
+        NODISCARD bool IsEmpty() const noexcept;
 
-	private:
-		std::vector<PickRecord> m_PickRecord;
-	};
+    private:
+        std::vector<PickRecord> pickRecord;
+    };
 }
 
-#endif // RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_IMPL_H
+#endif  // RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_IMPL_H

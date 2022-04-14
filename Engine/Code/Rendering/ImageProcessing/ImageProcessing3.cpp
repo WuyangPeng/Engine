@@ -88,7 +88,7 @@ void Rendering::ImageProcessing3
     z = (u / mBound0) + (v / mBound1) * mFactor0;
 }
 
-void Rendering::ImageProcessing3 ::Map3Dto2D(int x, int y, int z, int& u, int& v) const noexcept
+void Rendering::ImageProcessing3::Map3Dto2D(int x, int y, int z, int& u, int& v) const noexcept
 {
     u = x + (z % mFactor0) * mBound0;
     v = y + (z / mFactor0) * mBound1;
@@ -676,42 +676,42 @@ std::string Rendering::ImageProcessing3::msDrawPPrograms[System::EnumCastUnderly
 
 
  int Rendering::ImageProcessing3
-	 ::GetBound0() const noexcept
+	::GetBound0() const noexcept
 {
 	return mBound0;
 }
 
- int Rendering::ImageProcessing3 ::GetBound1() const noexcept
+ int Rendering::ImageProcessing3::GetBound1() const noexcept
 {
 	return mBound1;
 }
 
- int Rendering::ImageProcessing3 ::GetBound2() const noexcept
+ int Rendering::ImageProcessing3::GetBound2() const noexcept
 {
 	return mBound2;
 }
 
- int Rendering::ImageProcessing3 ::GetFactor0() const noexcept
+ int Rendering::ImageProcessing3::GetFactor0() const noexcept
 {
 	return mFactor0;
 }
 
- int Rendering::ImageProcessing3 ::GetFactor1() const noexcept
+ int Rendering::ImageProcessing3::GetFactor1() const noexcept
 { 
 	return mFactor1;
 }
 
- float Rendering::ImageProcessing3 ::GetDx() const noexcept
+ float Rendering::ImageProcessing3::GetDx() const noexcept
 {
 	return mDx;
 }
 
- float Rendering::ImageProcessing3 ::GetDy() const noexcept
+ float Rendering::ImageProcessing3::GetDy() const noexcept
 {
 	return mDy;
 }
 
- float Rendering::ImageProcessing3 ::GetDz() const noexcept
+ float Rendering::ImageProcessing3::GetDz() const noexcept
 {
 	return mDz;
 }

@@ -74,27 +74,29 @@ Rendering::VertexColor3Effect::VertexColor3Effect()
     InsertTechnique(technique);
 }
 
-Rendering::VisualEffectInstance* Rendering::VertexColor3Effect ::CreateInstance() const
+Rendering::VisualEffectInstance* Rendering::VertexColor3Effect::CreateInstance() const noexcept
 {
     VisualEffectInstance* instance = nullptr;  //CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
-   // instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(CoreTools::New0<ProjectionViewMatrixConstant>()));
+    // instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(CoreTools::New0<ProjectionViewMatrixConstant>()));
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::VertexColor3Effect ::CreateUniqueInstance()
+Rendering::VisualEffectInstance* Rendering::VertexColor3Effect::CreateUniqueInstance() noexcept
 {
     const VertexColor3Effect* effect = nullptr;  //CoreTools::New0 < VertexColor3Effect>();
+    if (effect == nullptr)
+        return nullptr;
     return effect->CreateInstance();
 }
 
 // Streaming support.
 
-Rendering::VertexColor3Effect ::VertexColor3Effect(LoadConstructor value)
+Rendering::VertexColor3Effect::VertexColor3Effect(LoadConstructor value)
     : VisualEffect{ value }
 {
 }
 
-void Rendering::VertexColor3Effect ::Load(CoreTools::BufferSource& source)
+void Rendering::VertexColor3Effect::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -103,12 +105,12 @@ void Rendering::VertexColor3Effect ::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::VertexColor3Effect ::Link(CoreTools::ObjectLink& source)
+void Rendering::VertexColor3Effect::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::VertexColor3Effect ::PostLink()
+void Rendering::VertexColor3Effect::PostLink()
 {
     VisualEffect::PostLink();
 
@@ -135,12 +137,12 @@ void Rendering::VertexColor3Effect ::PostLink()
     }
 }
 
-uint64_t Rendering::VertexColor3Effect ::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::VertexColor3Effect::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::VertexColor3Effect ::Save(CoreTools::BufferTarget& target) const
+void Rendering::VertexColor3Effect::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -149,7 +151,7 @@ void Rendering::VertexColor3Effect ::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::VertexColor3Effect ::GetStreamingSize() const
+int Rendering::VertexColor3Effect::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }

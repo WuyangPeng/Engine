@@ -1,295 +1,294 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 14:19)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE2_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE2_DETAIL_H
 
 #include "IntpThinPlateSpline2.h"
+#include "CoreTools/Exception/Error.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, const std::vector<Real>& x, const std::vector<Real>& y, const std::vector<Real>& f, Real smooth, bool transformToUnitSquare)
+    : initialized{ false },
+      quantity{ quantity },
+      xValue(quantity),
+      yValue(quantity),
+      smooth{ smooth },
+      a(quantity),
+      b{},
+      xMin{},
+      xMax{},
+      xInvRange{},
+      yMin{},
+      yMax{},
+      yInvRange{}
 {
-    template <typename Real>
-    IntpThinPlateSpline2<Real>::IntpThinPlateSpline2(int quantity, Real* X, Real* Y, Real* F, Real smooth, bool owner, bool transformToUnitSquare)
-        : mSmooth(smooth)
+    MATHEMATICS_ASSERTION_0(quantity >= 3 && smooth >= Math<Real>::GetValue(0), "无限输入。\n");
+
+    if (transformToUnitSquare)
     {
-        MATHEMATICS_ASSERTION_0(quantity >= 3 && X && Y && F && smooth >= Math<Real>::GetValue(0), "Invalid input\n");
-
-        mInitialized = false;
-        quantity = quantity;
-        mX = nullptr;  // NEW1<Real>(quantity);
-        mY = nullptr;  // NEW1<Real>(quantity);
-        mA = nullptr;  // NEW1<Real>(quantity);
-
-        int i, row, col;
-
-        if (transformToUnitSquare)
+        xMin = x.at(0);
+        xMax = xMin;
+        for (auto i = 1; i < quantity; ++i)
         {
-            // Map input (x,y) to unit square.  This is not part of the classical
-            // thin-plate spline algorithm, because the interpolation is not
-            // invariant to scalings.
-            mXMin = X[0];
-            mXMax = mXMin;
-            for (i = 1; i < quantity; ++i)
+            if (x.at(i) < xMin)
             {
-                if (X[i] < mXMin)
-                {
-                    mXMin = X[i];
-                }
-                if (X[i] > mXMax)
-                {
-                    mXMax = X[i];
-                }
+                xMin = x.at(i);
             }
-            mXInvRange = (Math::GetValue(1)) / (mXMax - mXMin);
-            for (i = 0; i < quantity; ++i)
+            if (x.at(i) > xMax)
             {
-                mX[i] = (X[i] - mXMin) * mXInvRange;
-            }
-
-            mYMin = Y[0];
-            mYMax = mYMin;
-            for (i = 1; i < quantity; ++i)
-            {
-                if (Y[i] < mYMin)
-                {
-                    mYMin = Y[i];
-                }
-                if (Y[i] > mYMax)
-                {
-                    mYMax = Y[i];
-                }
-            }
-            mYInvRange = (Math::GetValue(1)) / (mYMax - mYMin);
-            for (i = 0; i < quantity; ++i)
-            {
-                mY[i] = (Y[i] - mYMin) * mYInvRange;
+                xMax = x.at(i);
             }
         }
-        else
+        xInvRange = (Math<Real>::GetValue(1)) / (xMax - xMin);
+        for (auto i = 0; i < quantity; ++i)
         {
-            // The classical thin-plate spline uses the data as is.  The values
-            // mXMax and mYMax are not used, but they are initialized anyway
-            // (to irrelevant numbers).
-            mXMin = Math<Real>::GetValue(0);
-            mXMax = Math::GetValue(1);
-            mXInvRange = Math::GetValue(1);
-            mYMin = Math<Real>::GetValue(0);
-            mYMax = Math::GetValue(1);
-            mYInvRange = Math::GetValue(1);
-            memcpy(mX, X, quantity * sizeof(Real));
-            memcpy(mY, Y, quantity * sizeof(Real));
+            xValue.at(i) = (x.at(i) - xMin) * xInvRange;
         }
 
-        // Compute matrix A = M + lambda*I [NxN matrix].
-        VariableMatrix<Real> AMat(quantity, quantity);
-        for (row = 0; row < quantity; ++row)
+        yMin = y.at(0);
+        yMax = yMin;
+        for (auto i = 1; i < quantity; ++i)
         {
-            for (col = 0; col < quantity; ++col)
+            if (y.at(i) < yMin)
             {
-                if (row == col)
-                {
-                    AMat[row][col] = mSmooth;
-                }
-                else
-                {
-                    Real dx = mX[row] - mX[col];
-                    Real dy = mY[row] - mY[col];
-                    Real t = Math<Real>::Sqrt(dx * dx + dy * dy);
-                    AMat[row][col] = Kernel(t);
-                }
+                yMin = y.at(i);
+            }
+            if (y.at(i) > yMax)
+            {
+                yMax = y.at(i);
             }
         }
-
-        // Compute matrix B [Nx3 matrix].
-        VariableMatrix<Real> BMat(quantity, 3);
-        for (row = 0; row < quantity; ++row)
+        yInvRange = (Math<Real>::GetValue(1)) / (yMax - yMin);
+        for (auto i = 0; i < quantity; ++i)
         {
-            BMat[row][0] = Math::GetValue(1);
-            BMat[row][1] = mX[row];
-            BMat[row][2] = mY[row];
+            yValue.at(i) = (y.at(i) - yMin) * yInvRange;
         }
+    }
+    else
+    {
+        xMin = Math<Real>::GetValue(0);
+        xMax = Math<Real>::GetValue(1);
+        xInvRange = Math<Real>::GetValue(1);
+        yMin = Math<Real>::GetValue(0);
+        yMax = Math<Real>::GetValue(1);
+        yInvRange = Math<Real>::GetValue(1);
+    }
 
-        // Compute A^{-1}.
-        VariableMatrix<Real> invAMat(quantity, quantity);
-        try
+    VariableMatrix<Real> aMat{ quantity, quantity };
+    for (auto row = 0; row < quantity; ++row)
+    {
+        for (auto col = 0; col < quantity; ++col)
         {
-            invAMat = LinearSystem<Real>().Inverse(AMat);
-        }
-        catch (CoreTools::Error&)
-        {
-            return;
-        }
-
-        // Compute P = B^t A^{-1}  [3xN matrix].
-        VariableMatrix<Real> PMat = TransposeTimes(BMat, invAMat);
-
-        // Compute Q = P B = B^t A^{-1} B  [3x3 matrix].
-        VariableMatrix<Real> QMat = PMat * BMat;
-
-        // Compute Q^{-1}.
-        VariableMatrix<Real> invQMat(3, 3);
-        try
-        {
-            invQMat = LinearSystem<Real>().Inverse(QMat);
-        }
-        catch (CoreTools::Error&)
-        {
-            return;
-        }
-
-        // Compute P*z.
-        Real prod[3];
-        for (row = 0; row < 3; ++row)
-        {
-            prod[row] = Math<Real>::GetValue(0);
-            for (i = 0; i < quantity; ++i)
+            if (row == col)
             {
-                prod[row] += PMat[row][i] * F[i];
+                aMat[row][col] = smooth;
             }
-        }
-
-        // Compute 'b' vector for smooth thin plate spline.
-        for (row = 0; row < 3; ++row)
-        {
-            mB[row] = Math<Real>::GetValue(0);
-            for (i = 0; i < 3; ++i)
+            else
             {
-                mB[row] += invQMat[row][i] * prod[i];
+                auto dx = xValue.at(row) - xValue.at(col);
+                auto dy = yValue.at(row) - yValue.at(col);
+                auto t = Math<Real>::Sqrt(dx * dx + dy * dy);
+                aMat[row][col] = Kernel(t);
             }
-        }
-
-        // Compute z-B*b.
-        Real* tmp = nullptr;  // NEW1<Real>(quantity);
-        for (row = 0; row < quantity; ++row)
-        {
-            tmp[row] = F[row];
-            for (i = 0; i < 3; ++i)
-            {
-                tmp[row] -= BMat[row][i] * mB[i];
-            }
-        }
-
-        // Compute 'a' vector for smooth thin plate spline.
-        for (row = 0; row < quantity; ++row)
-        {
-            mA[row] = Math<Real>::GetValue(0);
-            for (i = 0; i < quantity; ++i)
-            {
-                mA[row] += invAMat[row][i] * tmp[i];
-            }
-        }
-     //   DELETE1(tmp);
-
-        mInitialized = true;
-
-        if (owner)
-        {
-//             DELETE1(X);
-//             DELETE1(Y);
-//             DELETE1(F);
         }
     }
 
-    template <typename Real>
-    IntpThinPlateSpline2<Real>::~IntpThinPlateSpline2()
+    VariableMatrix<Real> bMat{ quantity, 3 };
+    for (auto row = 0; row < quantity; ++row)
     {
-//         DELETE1(mX);
-//         DELETE1(mY);
-//         DELETE1(mA);
+        bMat[row][0] = Math<Real>::GetValue(1);
+        bMat[row][1] = xValue.at(row);
+        bMat[row][2] = yValue.at(row);
     }
 
-    template <typename Real>
-    bool IntpThinPlateSpline2<Real>::IsInitialized() const
+    VariableMatrix<Real> invAMat(quantity, quantity);
+    try
     {
-        return mInitialized;
+        invAMat = LinearSystem<Real>().Inverse(aMat);
+    }
+    catch (CoreTools::Error&)
+    {
+        return;
     }
 
-    template <typename Real>
-    const Real* IntpThinPlateSpline2<Real>::GetACoefficients() const
+    VariableMatrix<Real> pMat = TransposeTimes(bMat, invAMat);
+
+    VariableMatrix<Real> qMat = pMat * bMat;
+
+    VariableMatrix<Real> invQMat{ 3, 3 };
+    try
     {
-        return mA;
+        invQMat = LinearSystem<Real>().Inverse(qMat);
+    }
+    catch (CoreTools::Error&)
+    {
+        return;
     }
 
-    template <typename Real>
-    const Real* IntpThinPlateSpline2<Real>::GetBCoefficients() const
+    std::array<Real, 3> prod{};
+    for (auto row = 0; row < 3; ++row)
     {
-        return mB;
-    }
-
-    template <typename Real>
-    Real IntpThinPlateSpline2<Real>::GetSmooth() const
-    {
-        return mSmooth;
-    }
-
-    template <typename Real>
-    Real IntpThinPlateSpline2<Real>::ComputeFunctional() const
-    {
-        Real functional = Math<Real>::GetValue(0);
-        for (int row = 0; row < quantity; ++row)
+        prod.at(row) = Math<Real>::GetValue(0);
+        for (auto i = 0; i < quantity; ++i)
         {
-            for (int col = 0; col < quantity; ++col)
+            prod.at(row) += pMat[row][i] * f.at(i);
+        }
+    }
+
+    for (auto row = 0; row < 3; ++row)
+    {
+        b.at(row) = Math<Real>::GetValue(0);
+        for (auto i = 0; i < 3; ++i)
+        {
+            b.at(row) += invQMat[row][i] * prod.at(i);
+        }
+    }
+
+    std::vector<Real> tmp(quantity);
+    for (auto row = 0; row < quantity; ++row)
+    {
+        tmp.at(row) = f.at(row);
+        for (auto i = 0; i < 3; ++i)
+        {
+            tmp.at(row) -= bMat[row][i] * b.at(i);
+        }
+    }
+
+    for (auto row = 0; row < quantity; ++row)
+    {
+        a.at(row) = Math<Real>::GetValue(0);
+        for (auto i = 0; i < quantity; ++i)
+        {
+            a.at(row) += invAMat[row][i] * tmp.at(i);
+        }
+    }
+
+    initialized = true;
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpThinPlateSpline2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpThinPlateSpline2<Real>::IsInitialized() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return initialized;
+}
+
+template <typename Real>
+std::vector<Real> Mathematics::IntpThinPlateSpline2<Real>::GetACoefficients() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return a;
+}
+
+template <typename Real>
+std::array<Real, 3> Mathematics::IntpThinPlateSpline2<Real>::GetBCoefficients() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return b;
+}
+
+template <typename Real>
+Real Mathematics::IntpThinPlateSpline2<Real>::GetSmooth() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return smooth;
+}
+
+template <typename Real>
+Real Mathematics::IntpThinPlateSpline2<Real>::ComputeFunctional() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto functional = Math<Real>::GetValue(0);
+    for (auto row = 0; row < quantity; ++row)
+    {
+        for (auto col = 0; col < quantity; ++col)
+        {
+            if (row == col)
             {
-                if (row == col)
-                {
-                    functional += mSmooth * mA[row] * mA[col];
-                }
-                else
-                {
-                    Real dx = mX[row] - mX[col];
-                    Real dy = mY[row] - mY[col];
-                    Real t = Math<Real>::Sqrt(dx * dx + dy * dy);
-                    Real k = Kernel(t);
-                    functional += k * mA[row] * mA[col];
-                }
+                functional += smooth * a.at(row) * a.at(col);
+            }
+            else
+            {
+                auto dx = xValue.at(row) - xValue.at(col);
+                auto dy = yValue.at(row) - yValue.at(col);
+                auto t = Math<Real>::Sqrt(dx * dx + dy * dy);
+                auto k = Kernel(t);
+                functional += k * a.at(row) * a.at(col);
             }
         }
-
-        if (mSmooth > Math<Real>::GetValue(0))
-        {
-            functional *= mSmooth;
-        }
-
-        return functional;
     }
 
-    template <typename Real>
-    Real IntpThinPlateSpline2<Real>::operator()(Real x, Real y)
+    if (smooth > Math<Real>::GetValue(0))
     {
-        if (mInitialized)
-        {
-            // Map (x,y) to the unit square.
-            x = (x - mXMin) * mXInvRange;
-            y = (y - mYMin) * mYInvRange;
-
-            Real result = mB[0] + mB[1] * x + mB[2] * y;
-            for (int i = 0; i < quantity; ++i)
-            {
-                Real dx = x - mX[i];
-                Real dy = y - mY[i];
-                Real t = Math<Real>::Sqrt(dx * dx + dy * dy);
-                result += mA[i] * Kernel(t);
-            }
-            return result;
-        }
-
-        return Math<Real>::maxReal;
+        functional *= smooth;
     }
 
-    template <typename Real>
-    Real IntpThinPlateSpline2<Real>::Kernel(Real t)
+    return functional;
+}
+
+template <typename Real>
+Real Mathematics::IntpThinPlateSpline2<Real>::operator()(Real x, Real y)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (initialized)
     {
-        if (t > Math<Real>::GetValue(0))
+        x = (x - xMin) * xInvRange;
+        y = (y - yMin) * yInvRange;
+
+        auto result = b.at(0) + b.at(1) * x + b.at(2) * y;
+        for (int i = 0; i < quantity; ++i)
         {
-            Real t2 = t * t;
-            return t2 * Math<Real>::Log(t2);
+            auto dx = x - xValue.at(i);
+            auto dy = y - yValue.at(i);
+            auto t = Math<Real>::Sqrt(dx * dx + dy * dy);
+            result += a.at(i) * Kernel(t);
         }
-        return Math<Real>::GetValue(0);
+        return result;
     }
 
+    return Math<Real>::maxReal;
+}
+
+template <typename Real>
+Real Mathematics::IntpThinPlateSpline2<Real>::Kernel(Real t) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (t > Math<Real>::GetValue(0))
+    {
+        auto t2 = t * t;
+        return t2 * Math<Real>::Log(t2);
+    }
+
+    return Math<Real>::GetValue(0);
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_THIN_PLATE_SPLINE2_DETAIL_H

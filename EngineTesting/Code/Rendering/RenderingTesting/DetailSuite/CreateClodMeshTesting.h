@@ -21,7 +21,7 @@ namespace Rendering
 		void CreateTrianglesMeshFile();
 	    void InitTest();	 
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

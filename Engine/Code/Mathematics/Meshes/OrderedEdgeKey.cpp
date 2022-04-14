@@ -1,85 +1,55 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/16 11:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/07 22:01)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "OrderedEdgeKey.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-Mathematics::OrderedEdgeKey
-	::OrderedEdgeKey (int first, int second) noexcept
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+
+Mathematics::OrderedEdgeKey ::OrderedEdgeKey(int first, int second) noexcept
+    : first{ first }, second{ second }
 {
-    m_Vertex[0] = first;
-    m_Vertex[1] = second;
-    
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-
-Mathematics::OrderedEdgeKey
-	::OrderedEdgeKey(const OrderedEdgeKey& rhs) noexcept
-{ 
-    m_Vertex[0] = rhs.m_Vertex[0];
-    m_Vertex[1] = rhs.m_Vertex[1];
-    
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-Mathematics::OrderedEdgeKey& Mathematics::OrderedEdgeKey
-	::operator = (const OrderedEdgeKey& rhs) noexcept
-{
-	MATHEMATICS_CLASS_IS_VALID_9;
-    
-    m_Vertex[0] = rhs.m_Vertex[0];
-    m_Vertex[1] = rhs.m_Vertex[1];
-
-	return *this;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, OrderedEdgeKey)
 
-int Mathematics::OrderedEdgeKey
-	::GetKey(int index) const
+int Mathematics::OrderedEdgeKey ::GetKey(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9; 
-    
-	if (0 <= index && index < 2)
-	{
-		return m_Vertex[index];
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
-	}
-    
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    switch (index)
+    {
+        case 0:
+            return first;
+        case 1:
+            return second;
+        default:
+            THROW_EXCEPTION(SYSTEM_TEXT("索引错误！"s));
+    }
 }
 
-bool Mathematics
-	::operator< (const OrderedEdgeKey& lhs, const OrderedEdgeKey& rhs)
+bool Mathematics ::operator<(const OrderedEdgeKey& lhs, const OrderedEdgeKey& rhs)
 {
-    
     if (lhs.GetKey(1) < rhs.GetKey(1))
     {
         return true;
     }
-    
-    if (rhs.GetKey(1) < lhs.GetKey(1))
+    else if (rhs.GetKey(1) < lhs.GetKey(1))
     {
         return false;
     }
-    
-    return lhs.GetKey(0) < rhs.GetKey(0);
+    else
+    {
+        return lhs.GetKey(0) < rhs.GetKey(0);
+    }
 }
-
-#include STSTEM_WARNING_POP
-
-

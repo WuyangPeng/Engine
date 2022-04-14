@@ -14,7 +14,7 @@ using std::make_shared;
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::RendererInputDataImpl ::RendererInputDataImpl(MAYBE_UNUSED int count)
+Rendering::RendererInputDataImpl::RendererInputDataImpl(MAYBE_UNUSED int count)
     : m_RendererInput{ make_shared<RendererInput>(Rendering::RendererTypes::Default) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -34,7 +34,7 @@ bool Rendering::RendererInputDataImpl
 #endif // OPEN_CLASS_INVARIANT
 
 void Rendering::RendererInputDataImpl
-    ::Rebuild(RendererTypes type)
+::Rebuild(RendererTypes type)
 {
 	RENDERING_CLASS_IS_VALID_1;
 

@@ -1,415 +1,369 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.2 (2019/07/16 10:21)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.4 (2022/03/21 9:43)
 
 #ifndef MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_DETAIL_H
 #define MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_DETAIL_H
 
 #include "IntpQdrNonuniform2.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Containment/ScribeCircle2Inscribe.h"
 
-namespace Mathematics
+template <typename Real>
+Mathematics::IntpQdrNonuniform2<Real>::IntpQdrNonuniform2(const Delaunay2<Real>& dt, const std::vector<Real>& f, const std::vector<Real>& fx, const std::vector<Real>& fy)
+    : dt{ dt }, f{ f }, fx{ fx }, fy{ fy }, tData{}
 {
-    template <typename Real>
-    IntpQdrNonuniform2<Real>::IntpQdrNonuniform2(const Delaunay2<Real>& DT, Real* F, Real* FX, Real* FY, bool owner)
-        : mDT(&DT), mF(F), mFX(FX), mFY(FY), mFOwner(owner), mFXFYOwner(owner)
+    ProcessTriangles();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename Real>
+Mathematics::IntpQdrNonuniform2<Real>::IntpQdrNonuniform2(const Delaunay2<Real>& dt, const std::vector<Real>& f)
+    : dt{ dt }, f{ f }, fx{}, fy{}, tData{}
+{
+    EstimateDerivatives();
+    ProcessTriangles();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::IntpQdrNonuniform2<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+void Mathematics::IntpQdrNonuniform2<Real>::EstimateDerivatives()
+{
+    const auto numVertices = dt.GetNumVertices();
+    const auto vertices = dt.GetVertices();
+    const auto numTriangles = dt.GetNumSimplices();
+    const auto indices = dt.GetIndices();
+
+    fx.resize(numVertices);
+    fy.resize(numVertices);
+    std::vector<Real> fz(numVertices);
+
+    auto index = 0;
+    for (auto i = 0; i < numTriangles; ++i)
     {
-        ProcessTriangles();
+        auto v0 = indices.at(index++);
+        auto v1 = indices.at(index++);
+        auto v2 = indices.at(index++);
+
+        auto dx1 = vertices.at(v1).GetX() - vertices.at(v0).GetX();
+        auto dy1 = vertices.at(v1).GetY() - vertices.at(v0).GetY();
+        auto dz1 = f.at(v1) - f.at(v0);
+        auto dx2 = vertices.at(v2).GetX() - vertices.at(v0).GetX();
+        auto dy2 = vertices.at(v2).GetY() - vertices.at(v0).GetY();
+        auto dz2 = f.at(v2) - f.at(v0);
+        auto nx = dy1 * dz2 - dy2 * dz1;
+        auto ny = dz1 * dx2 - dz2 * dx1;
+        auto nz = dx1 * dy2 - dx2 * dy1;
+        if (nz < Math<Real>::GetValue(0))
+        {
+            nx = -nx;
+            ny = -ny;
+            nz = -nz;
+        }
+
+        fx.at(v0) += nx;
+        fy.at(v0) += ny;
+        fz.at(v0) += nz;
+        fx.at(v1) += nx;
+        fy.at(v1) += ny;
+        fz.at(v1) += nz;
+        fx.at(v2) += nx;
+        fy.at(v2) += ny;
+        fz.at(v2) += nz;
     }
 
-    template <typename Real>
-    IntpQdrNonuniform2<Real>::IntpQdrNonuniform2(const Delaunay2<Real>& DT, Real* F, bool owner)
-        : mDT(&DT), mF(F), mFOwner(owner), mFXFYOwner(true)
+    for (auto i = 0; i < numVertices; ++i)
     {
-        EstimateDerivatives();
-        ProcessTriangles();
+        if (Math<Real>::FAbs(fz.at(i)) > Math<Real>::GetZeroTolerance())
+        {
+            auto inv = -(Math<Real>::GetValue(1)) / fz.at(i);
+            fx.at(i) *= inv;
+            fy.at(i) *= inv;
+        }
+        else
+        {
+            fx.at(i) = Math<Real>::GetValue(0);
+            fy.at(i) = Math<Real>::GetValue(0);
+        }
+    }
+}
+
+template <typename Real>
+void Mathematics::IntpQdrNonuniform2<Real>::ProcessTriangles()
+{
+    const auto vertices = dt.GetVertices();
+    const auto numTriangles = dt.GetNumSimplices();
+    const auto indices = dt.GetIndices();
+    tData.resize(numTriangles);
+
+    auto index = 0;
+    for (auto i = 0; i < numTriangles; ++i)
+    {
+        auto v0 = indices.at(index++);
+        auto v1 = indices.at(index++);
+        auto v2 = indices.at(index++);
+        ScribeCircle2Inscribe<Real> inscribe{ vertices.at(v0), vertices.at(v1), vertices.at(v2) };
+        const auto circle = inscribe.GetCircle2();
+        tData.at(i).center = circle.GetCenter();
     }
 
-    template <typename Real>
-    IntpQdrNonuniform2<Real>::~IntpQdrNonuniform2()
+    for (auto i = 0; i < numTriangles; ++i)
     {
-        if (mFOwner)
-        {
-            DELETE1(mF);
-        }
-
-        if (mFXFYOwner)
-        {
-            DELETE1(mFX);
-            DELETE1(mFY);
-        }
-
-        DELETE1(mTData);
+        ComputeCrossEdgeIntersections(i);
     }
 
-    template <typename Real>
-    void IntpQdrNonuniform2<Real>::EstimateDerivatives()
+    for (auto i = 0; i < numTriangles; ++i)
     {
-        int numVertices = mDT->GetNumVertices();
-        const Vector2<Real>* vertices = mDT->GetVertices();
-        int numTriangles = mDT->GetNumSimplices();
-        const int* indices = mDT->GetIndices();
-
-        mFX = nullptr;  // NEW1<Real>(numVertices);
-        mFY = nullptr;  //  NEW1<Real>(numVertices);
-        Real* FZ = nullptr;  // NEW1<Real>(numVertices);
-        memset(mFX, 0, numVertices * sizeof(Real));
-        memset(mFY, 0, numVertices * sizeof(Real));
-        memset(FZ, 0, numVertices * sizeof(Real));
-
-        // Accumulate normals at spatial locations (averaging process).
-        int i;
-        for (i = 0; i < numTriangles; ++i)
-        {
-            // Get three vertices of triangle.
-            int v0 = *indices++;
-            int v1 = *indices++;
-            int v2 = *indices++;
-
-            // Compute normal vector of triangle (with positive z-component).
-            Real dx1 = vertices[v1].GetX() - vertices[v0].GetX();
-            Real dy1 = vertices[v1].GetY() - vertices[v0].GetY();
-            Real dz1 = mF[v1] - mF[v0];
-            Real dx2 = vertices[v2].GetX() - vertices[v0].GetX();
-            Real dy2 = vertices[v2].GetY() - vertices[v0].GetY();
-            Real dz2 = mF[v2] - mF[v0];
-            Real nx = dy1 * dz2 - dy2 * dz1;
-            Real ny = dz1 * dx2 - dz2 * dx1;
-            Real nz = dx1 * dy2 - dx2 * dy1;
-            if (nz < Math<Real>::GetValue(0))
-            {
-                nx = -nx;
-                ny = -ny;
-                nz = -nz;
-            }
-
-            mFX[v0] += nx;
-            mFY[v0] += ny;
-            FZ[v0] += nz;
-            mFX[v1] += nx;
-            mFY[v1] += ny;
-            FZ[v1] += nz;
-            mFX[v2] += nx;
-            mFY[v2] += ny;
-            FZ[v2] += nz;
-        }
-
-        // Scale the normals to form (x,y,-1).
-        for (i = 0; i < numVertices; ++i)
-        {
-            if (Math<Real>::FAbs(FZ[i]) > Math<Real>::GetZeroTolerance())
-            {
-                Real inv = -(Math::GetValue(1)) / FZ[i];
-                mFX[i] *= inv;
-                mFY[i] *= inv;
-            }
-            else
-            {
-                mFX[i] = Math<Real>::GetValue(0);
-                mFY[i] = Math<Real>::GetValue(0);
-            }
-        }
-
-        // DELETE1(FZ);
+        ComputeCoefficients(i);
     }
+}
 
-    template <typename Real>
-    void IntpQdrNonuniform2<Real>::ProcessTriangles()
+template <typename Real>
+void Mathematics::IntpQdrNonuniform2<Real>::ComputeCrossEdgeIntersections(int i)
+{
+    auto v = dt.GetVertexSet(i);
+    std::array<Vector2<Real>, 3> vertexSet{ std::get<0>(v), std::get<1>(v), std::get<2>(v) };
+
+    const auto adjacent = dt.GetAdjacentSet(i);
+    std::array<Vector2<Real>, 3> u{};
+    std::array<int32_t, 3> adjacentSet{ std::get<0>(adjacent), std::get<1>(adjacent), std::get<2>(adjacent) };
+    for (auto j = 0; j < 3; ++j)
     {
-        // Add degenerate triangles to boundary triangles so that interpolation
-        // at the boundary can be treated in the same way as interpolation in
-        // the interior.
-
-        // Compute centers of inscribed circles for triangles.
-        const Vector2<Real>* vertices = mDT->GetVertices();
-        int numTriangles = mDT->GetNumSimplices();
-        const int* indices = mDT->GetIndices();
-        mTData = nullptr;  //  NEW1<TriangleData>(numTriangles);
-        int i;
-        for (i = 0; i < numTriangles; ++i)
+        const auto a = adjacentSet.at(j);
+        if (a >= 0)
         {
-            int v0 = *indices++;
-            int v1 = *indices++;
-            int v2 = *indices++;
-            ScribeCircle2Inscribe<Real> inscribe(vertices[v0], vertices[v1], vertices[v2]);
-            Circle2<Real> circle = inscribe.GetCircle2();
-            mTData[i].Center = circle.GetCenter();
+            u.at(j) = tData.at(a).center;
         }
-
-        // Compute cross-edge intersections.
-        for (i = 0; i < numTriangles; ++i)
+        else
         {
-            ComputeCrossEdgeIntersections(i);
-        }
-
-        // Compute Bezier coefficients.
-        for (i = 0; i < numTriangles; ++i)
-        {
-            ComputeCoefficients(i);
+            u.at(j) = (Math<Real>::GetRational(1, 2)) * (vertexSet.at((j + 2) % 3) + vertexSet.at((j + 1) % 3));
         }
     }
 
-    template <typename Real>
-    void IntpQdrNonuniform2<Real>::ComputeCrossEdgeIntersections(int i)
+    auto m00 = std::get<0>(v).GetY() - std::get<1>(v).GetY();
+    auto m01 = std::get<1>(v).GetX() - std::get<0>(v).GetX();
+    auto m10 = tData.at(i).center.GetY() - u.at(0).GetY();
+    auto m11 = u.at(0).GetX() - tData.at(i).center.GetX();
+    auto r0 = m00 * std::get<0>(v).GetX() + m01 * std::get<0>(v).GetY();
+    auto r1 = m10 * tData.at(i).center.GetX() + m11 * tData.at(i).center.GetY();
+    auto invDet = (Math<Real>::GetValue(1)) / (m00 * m11 - m01 * m10);
+    tData.at(i).intersect.at(0)[0] = (m11 * r0 - m01 * r1) * invDet;
+    tData.at(i).intersect.at(0)[1] = (m00 * r1 - m10 * r0) * invDet;
+
+    m00 = std::get<1>(v).GetY() - std::get<2>(v).GetY();
+    m01 = std::get<2>(v).GetX() - std::get<1>(v).GetX();
+    m10 = tData.at(i).center.GetY() - u.at(1).GetY();
+    m11 = u.at(1).GetX() - tData.at(i).center.GetX();
+    r0 = m00 * std::get<1>(v).GetX() + m01 * std::get<1>(v).GetY();
+    r1 = m10 * tData.at(i).center.GetX() + m11 * tData.at(i).center.GetY();
+    invDet = (Math<Real>::GetValue(1)) / (m00 * m11 - m01 * m10);
+    tData.at(i).intersect.at(1)[0] = (m11 * r0 - m01 * r1) * invDet;
+    tData.at(i).intersect.at(1)[1] = (m00 * r1 - m10 * r0) * invDet;
+
+    m00 = std::get<0>(v).GetY() - std::get<2>(v).GetY();
+    m01 = std::get<2>(v).GetX() - std::get<0>(v).GetX();
+    m10 = tData.at(i).center.GetY() - u.at(2).GetY();
+    m11 = u.at(2).GetX() - tData.at(i).center.GetX();
+    r0 = m00 * std::get<0>(v).GetX() + m01 * std::get<0>(v).GetY();
+    r1 = m10 * tData.at(i).center.GetX() + m11 * tData.at(i).center.GetY();
+    invDet = (Math<Real>::GetValue(1)) / (m00 * m11 - m01 * m10);
+    tData.at(i).intersect.at(2)[0] = (m11 * r0 - m01 * r1) * invDet;
+    tData.at(i).intersect.at(2)[1] = (m00 * r1 - m10 * r0) * invDet;
+}
+
+template <typename Real>
+void Mathematics::IntpQdrNonuniform2<Real>::ComputeCoefficients(int i)
+{
+    auto v = dt.GetVertexSet(i);
+    std::array<Vector2<Real>, 3> vertexSet{ std::get<0>(v), std::get<1>(v), std::get<2>(v) };
+
+    const auto invDet = dt.GetIndexSet(i);
+    std::array<int32_t, 3> indexSet{ std::get<0>(invDet), std::get<1>(invDet), std::get<2>(invDet) };
+    TriangleData& triangleData = tData.at(i);
+
+    std::array<Jet, 3> jet{};
+
+    for (auto j = 0; j < 3; ++j)
     {
-        // Get the vertices of triangle i.
-        Vector2<Real> V[3];
-        mDT->GetVertexSet(i, V);
-
-        // Fet centers of adjacent triangles.
-        int adjacent[3];
-        mDT->GetAdjacentSet(i, adjacent);
-        Vector2<Real> U[3];
-        for (int j = 0; j < 3; ++j)
-        {
-            int a = adjacent[j];
-            if (a >= 0)
-            {
-                // Get center of adjacent triangle's circumscribing circle.
-                U[j] = mTData[a].Center;
-            }
-            else
-            {
-                // No adjacent triangle, use center of edge.
-                U[j] = (Math::GetRational(1, 2)) * (V[(j + 2) % 3] + V[(j + 1) % 3]);
-            }
-        }
-
-        Real m00, m01, m10, m11, r0, r1, invDet;
-
-        // intersection on edge <V0,V1>
-        m00 = V[0].GetY() - V[1].GetY();
-        m01 = V[1].GetX() - V[0].GetX();
-        m10 = mTData[i].Center.GetY() - U[0].GetY();
-        m11 = U[0].GetX() - mTData[i].Center.GetX();
-        r0 = m00 * V[0].GetX() + m01 * V[0].GetY();
-        r1 = m10 * mTData[i].Center.GetX() + m11 * mTData[i].Center.GetY();
-        invDet = (Math::GetValue(1)) / (m00 * m11 - m01 * m10);
-        mTData[i].Intersect[0][0] = (m11 * r0 - m01 * r1) * invDet;
-        mTData[i].Intersect[0][1] = (m00 * r1 - m10 * r0) * invDet;
-
-        // intersection on edge <V1,V2>
-        m00 = V[1].GetY() - V[2].GetY();
-        m01 = V[2].GetX() - V[1].GetX();
-        m10 = mTData[i].Center.GetY() - U[1].GetY();
-        m11 = U[1].GetX() - mTData[i].Center.GetX();
-        r0 = m00 * V[1].GetX() + m01 * V[1].GetY();
-        r1 = m10 * mTData[i].Center.GetX() + m11 * mTData[i].Center.GetY();
-        invDet = (Math::GetValue(1)) / (m00 * m11 - m01 * m10);
-        mTData[i].Intersect[1][0] = (m11 * r0 - m01 * r1) * invDet;
-        mTData[i].Intersect[1][1] = (m00 * r1 - m10 * r0) * invDet;
-
-        // intersection on edge <V0,V2>
-        m00 = V[0].GetY() - V[2].GetY();
-        m01 = V[2].GetX() - V[0].GetX();
-        m10 = mTData[i].Center.GetY() - U[2].GetY();
-        m11 = U[2].GetX() - mTData[i].Center.GetX();
-        r0 = m00 * V[0].GetX() + m01 * V[0].GetY();
-        r1 = m10 * mTData[i].Center.GetX() + m11 * mTData[i].Center.GetY();
-        invDet = (Math::GetValue(1)) / (m00 * m11 - m01 * m10);
-        mTData[i].Intersect[2][0] = (m11 * r0 - m01 * r1) * invDet;
-        mTData[i].Intersect[2][1] = (m00 * r1 - m10 * r0) * invDet;
+        auto k = indexSet.at(j);
+        jet.at(j).f = f.at(k);
+        jet.at(j).fx = fx.at(k);
+        jet.at(j).fy = fy.at(k);
     }
 
-    template <typename Real>
-    void IntpQdrNonuniform2<Real>::ComputeCoefficients(int i)
+    const auto adjacent = dt.GetAdjacentSet(i);
+    std::array<int32_t, 3> adjacentSet{ std::get<0>(adjacent), std::get<1>(adjacent), std::get<2>(adjacent) };
+    std::array<Vector2<Real>, 3> u{};
+    for (auto j = 0; j < 3; ++j)
     {
-        // Get the vertices of triangle i.
-        Vector2<Real> V[3];
-        mDT->GetVertexSet(i, V);
-
-        // Get the vertex indices of triangle i.
-        int invDet[3];
-        mDT->GetIndexSet(i, invDet);
-
-        // Get the additional information for triangle i.
-        TriangleData& tData = mTData[i];
-
-        // get the sample data at main triangle vertices
-        Jet jet[3];
-        int j;
-        for (j = 0; j < 3; ++j)
+        auto a = adjacentSet.at(j);
+        if (a >= 0)
         {
-            int k = invDet[j];
-            jet[j].F = mF[k];
-            jet[j].FX = mFX[k];
-            jet[j].FY = mFY[k];
+            u.at(j) = tData.at(a).center;
         }
-
-        // Get centers of adjacent triangles.
-        int adjacent[3];
-        mDT->GetAdjacentSet(i, adjacent);
-        Vector2<Real> U[3];
-        for (j = 0; j < 3; ++j)
+        else
         {
-            int a = adjacent[j];
-            if (a >= 0)
-            {
-                // Get center of adjacent triangle's circumscribing circle.
-                U[j] = mTData[a].Center;
-            }
-            else
-            {
-                // No adjacent triangle, use center of edge.
-                U[j] = (Math::GetRational(1, 2)) * (V[(j + 2) % 3] + V[(j + 1) % 3]);
-            }
+            u.at(j) = (Math<Real>::GetRational(1, 2)) * (vertexSet.at((j + 2) % 3) + vertexSet.at((j + 1) % 3));
         }
-
-        // Compute intermediate terms.
-        Real cenT[3], cen0[3], cen1[3], cen2[3];
-        mDT->GetBarycentricSet(i, tData.Center, cenT);
-        mDT->GetBarycentricSet(i, U[0], cen0);
-        mDT->GetBarycentricSet(i, U[1], cen1);
-        mDT->GetBarycentricSet(i, U[2], cen2);
-
-        Real alpha = (cenT[1] * cen1[0] - cenT[0] * cen1[1]) / (cen1[0] - cenT[0]);
-        Real beta = (cenT[2] * cen2[1] - cenT[1] * cen2[2]) / (cen2[1] - cenT[1]);
-        Real gamma = (cenT[0] * cen0[2] - cenT[2] * cen0[0]) / (cen0[2] - cenT[2]);
-        Real oneMinusAlpha = Math::GetValue(1) - alpha;
-        Real oneMinusBeta = Math::GetValue(1) - beta;
-        Real oneMinusGamma = Math::GetValue(1) - gamma;
-
-        Real tmp, A[9], B[9];
-
-        tmp = cenT[0] * V[0].GetX() + cenT[1] * V[1].GetX() + cenT[2] * V[2].GetX();
-        A[0] = (Math::GetRational(1, 2)) * (tmp - V[0].GetX());
-        A[1] = (Math::GetRational(1, 2)) * (tmp - V[1].GetX());
-        A[2] = (Math::GetRational(1, 2)) * (tmp - V[2].GetX());
-        A[3] = (Math::GetRational(1, 2)) * beta * (V[2].GetX() - V[0].GetX());
-        A[4] = (Math::GetRational(1, 2)) * oneMinusGamma * (V[1].GetX() - V[0].GetX());
-        A[5] = (Math::GetRational(1, 2)) * gamma * (V[0].GetX() - V[1].GetX());
-        A[6] = (Math::GetRational(1, 2)) * oneMinusAlpha * (V[2].GetX() - V[1].GetX());
-        A[7] = (Math::GetRational(1, 2)) * alpha * (V[1].GetX() - V[2].GetX());
-        A[8] = (Math::GetRational(1, 2)) * oneMinusBeta * (V[0].GetX() - V[2].GetX());
-
-        tmp = cenT[0] * V[0].GetY() + cenT[1] * V[1].GetY() + cenT[2] * V[2].GetY();
-        B[0] = (Math::GetRational(1, 2)) * (tmp - V[0].GetY());
-        B[1] = (Math::GetRational(1, 2)) * (tmp - V[1].GetY());
-        B[2] = (Math::GetRational(1, 2)) * (tmp - V[2].GetY());
-        B[3] = (Math::GetRational(1, 2)) * beta * (V[2].GetY() - V[0].GetY());
-        B[4] = (Math::GetRational(1, 2)) * oneMinusGamma * (V[1].GetY() - V[0].GetY());
-        B[5] = (Math::GetRational(1, 2)) * gamma * (V[0].GetY() - V[1].GetY());
-        B[6] = (Math::GetRational(1, 2)) * oneMinusAlpha * (V[2].GetY() - V[1].GetY());
-        B[7] = (Math::GetRational(1, 2)) * alpha * (V[1].GetY() - V[2].GetY());
-        B[8] = (Math::GetRational(1, 2)) * oneMinusBeta * (V[0].GetY() - V[2].GetY());
-
-        // Compute Bezier coefficients.
-        tData.Coeff[2] = jet[0].F;
-        tData.Coeff[4] = jet[1].F;
-        tData.Coeff[6] = jet[2].F;
-
-        tData.Coeff[14] = jet[0].F + A[0] * jet[0].FX + B[0] * jet[0].FY;
-        tData.Coeff[7] = jet[0].F + A[3] * jet[0].FX + B[3] * jet[0].FY;
-        tData.Coeff[8] = jet[0].F + A[4] * jet[0].FX + B[4] * jet[0].FY;
-        tData.Coeff[16] = jet[1].F + A[1] * jet[1].FX + B[1] * jet[1].FY;
-        tData.Coeff[9] = jet[1].F + A[5] * jet[1].FX + B[5] * jet[1].FY;
-        tData.Coeff[10] = jet[1].F + A[6] * jet[1].FX + B[6] * jet[1].FY;
-        tData.Coeff[18] = jet[2].F + A[2] * jet[2].FX + B[2] * jet[2].FY;
-        tData.Coeff[11] = jet[2].F + A[7] * jet[2].FX + B[7] * jet[2].FY;
-        tData.Coeff[12] = jet[2].F + A[8] * jet[2].FX + B[8] * jet[2].FY;
-
-        tData.Coeff[5] = alpha * tData.Coeff[10] + oneMinusAlpha * tData.Coeff[11];
-        tData.Coeff[17] = alpha * tData.Coeff[16] + oneMinusAlpha * tData.Coeff[18];
-        tData.Coeff[1] = beta * tData.Coeff[12] + oneMinusBeta * tData.Coeff[7];
-        tData.Coeff[13] = beta * tData.Coeff[18] + oneMinusBeta * tData.Coeff[14];
-        tData.Coeff[3] = gamma * tData.Coeff[8] + oneMinusGamma * tData.Coeff[9];
-        tData.Coeff[15] = gamma * tData.Coeff[14] + oneMinusGamma * tData.Coeff[16];
-        tData.Coeff[0] = cenT[0] * tData.Coeff[14] + cenT[1] * tData.Coeff[16] + cenT[2] * tData.Coeff[18];
     }
 
-    template <typename Real>
-    bool IntpQdrNonuniform2<Real>::Evaluate(const Vector2<Real>& P, Real& F, Real& FX, Real& FY)
+    auto cenT = dt.GetBarycentricSet(i, triangleData.center);
+    auto cen0 = dt.GetBarycentricSet(i, u.at(0));
+    auto cen1 = dt.GetBarycentricSet(i, u.at(1));
+    auto cen2 = dt.GetBarycentricSet(i, u.at(2));
+
+    auto alpha = (std::get<1>(cenT) * std::get<0>(cen1) - std::get<0>(cenT) * std::get<1>(cen1)) / (std::get<0>(cen1) - std::get<0>(cenT));
+    auto beta = (std::get<2>(cenT) * std::get<1>(cen2) - std::get<1>(cenT) * std::get<2>(cen2)) / (std::get<1>(cen2) - std::get<1>(cenT));
+    auto gamma = (std::get<0>(cenT) * std::get<2>(cen0) - std::get<2>(cenT) * std::get<0>(cen0)) / (std::get<2>(cen0) - std::get<2>(cenT));
+    auto oneMinusAlpha = Math<Real>::GetValue(1) - alpha;
+    auto oneMinusBeta = Math<Real>::GetValue(1) - beta;
+    auto oneMinusGamma = Math<Real>::GetValue(1) - gamma;
+
+    std::array<Real, 9> a{};
+    std::array<Real, 9> b{};
+
+    auto tmp = std::get<0>(cenT) * std::get<0>(v).GetX() + std::get<1>(cenT) * std::get<1>(v).GetX() + std::get<2>(cenT) * std::get<2>(v).GetX();
+    a.at(0) = (Math<Real>::GetRational(1, 2)) * (tmp - std::get<0>(v).GetX());
+    a.at(1) = (Math<Real>::GetRational(1, 2)) * (tmp - std::get<1>(v).GetX());
+    a.at(2) = (Math<Real>::GetRational(1, 2)) * (tmp - std::get<2>(v).GetX());
+    a.at(3) = (Math<Real>::GetRational(1, 2)) * beta * (std::get<2>(v).GetX() - std::get<0>(v).GetX());
+    a.at(4) = (Math<Real>::GetRational(1, 2)) * oneMinusGamma * (std::get<1>(v).GetX() - std::get<0>(v).GetX());
+    a.at(5) = (Math<Real>::GetRational(1, 2)) * gamma * (std::get<0>(v).GetX() - std::get<1>(v).GetX());
+    a.at(6) = (Math<Real>::GetRational(1, 2)) * oneMinusAlpha * (std::get<2>(v).GetX() - std::get<1>(v).GetX());
+    a.at(7) = (Math<Real>::GetRational(1, 2)) * alpha * (std::get<1>(v).GetX() - std::get<2>(v).GetX());
+    a.at(8) = (Math<Real>::GetRational(1, 2)) * oneMinusBeta * (std::get<0>(v).GetX() - std::get<2>(v).GetX());
+
+    tmp = std::get<0>(cenT) * std::get<0>(v).GetY() + std::get<1>(cenT) * std::get<1>(v).GetY() + std::get<2>(cenT) * std::get<2>(v).GetY();
+    b.at(0) = (Math<Real>::GetRational(1, 2)) * (tmp - std::get<0>(v).GetY());
+    b.at(1) = (Math<Real>::GetRational(1, 2)) * (tmp - std::get<1>(v).GetY());
+    b.at(2) = (Math<Real>::GetRational(1, 2)) * (tmp - std::get<2>(v).GetY());
+    b.at(3) = (Math<Real>::GetRational(1, 2)) * beta * (std::get<2>(v).GetY() - std::get<0>(v).GetY());
+    b.at(4) = (Math<Real>::GetRational(1, 2)) * oneMinusGamma * (std::get<1>(v).GetY() - std::get<0>(v).GetY());
+    b.at(5) = (Math<Real>::GetRational(1, 2)) * gamma * (std::get<0>(v).GetY() - std::get<1>(v).GetY());
+    b.at(6) = (Math<Real>::GetRational(1, 2)) * oneMinusAlpha * (std::get<2>(v).GetY() - std::get<1>(v).GetY());
+    b.at(7) = (Math<Real>::GetRational(1, 2)) * alpha * (std::get<1>(v).GetY() - std::get<2>(v).GetY());
+    b.at(8) = (Math<Real>::GetRational(1, 2)) * oneMinusBeta * (std::get<0>(v).GetY() - std::get<2>(v).GetY());
+
+    triangleData.coeff.at(2) = jet.at(0).f;
+    triangleData.coeff.at(4) = jet.at(1).f;
+    triangleData.coeff.at(6) = jet.at(2).f;
+
+    triangleData.coeff.at(14) = jet.at(0).f + a.at(0) * jet.at(0).fx + b.at(0) * jet.at(0).fy;
+    triangleData.coeff.at(7) = jet.at(0).f + a.at(3) * jet.at(0).fx + b.at(3) * jet.at(0).fy;
+    triangleData.coeff.at(8) = jet.at(0).f + a.at(4) * jet.at(0).fx + b.at(4) * jet.at(0).fy;
+    triangleData.coeff.at(16) = jet.at(1).f + a.at(1) * jet.at(1).fx + b.at(1) * jet.at(1).fy;
+    triangleData.coeff.at(9) = jet.at(1).f + a.at(5) * jet.at(1).fx + b.at(5) * jet.at(1).fy;
+    triangleData.coeff.at(10) = jet.at(1).f + a.at(6) * jet.at(1).fx + b.at(6) * jet.at(1).fy;
+    triangleData.coeff.at(18) = jet.at(2).f + a.at(2) * jet.at(2).fx + b.at(2) * jet.at(2).fy;
+    triangleData.coeff.at(11) = jet.at(2).f + a.at(7) * jet.at(2).fx + b.at(7) * jet.at(2).fy;
+    triangleData.coeff.at(12) = jet.at(2).f + a.at(8) * jet.at(2).fx + b.at(8) * jet.at(2).fy;
+
+    triangleData.coeff.at(5) = alpha * triangleData.coeff.at(10) + oneMinusAlpha * triangleData.coeff.at(11);
+    triangleData.coeff.at(17) = alpha * triangleData.coeff.at(16) + oneMinusAlpha * triangleData.coeff.at(18);
+    triangleData.coeff.at(1) = beta * triangleData.coeff.at(12) + oneMinusBeta * triangleData.coeff.at(7);
+    triangleData.coeff.at(13) = beta * triangleData.coeff.at(18) + oneMinusBeta * triangleData.coeff.at(14);
+    triangleData.coeff.at(3) = gamma * triangleData.coeff.at(8) + oneMinusGamma * triangleData.coeff.at(9);
+    triangleData.coeff.at(15) = gamma * triangleData.coeff.at(14) + oneMinusGamma * triangleData.coeff.at(16);
+    triangleData.coeff.at(0) = std::get<0>(cenT) * triangleData.coeff.at(14) + std::get<1>(cenT) * triangleData.coeff.at(16) + std::get<2>(cenT) * triangleData.coeff.at(18);
+}
+
+template <typename Real>
+bool Mathematics::IntpQdrNonuniform2<Real>::Evaluate(const Vector2<Real>& p, Real& f0, Real& fx0, Real& fy0)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    const auto i = dt.GetContainingTriangle(p);
+    if (i == -1)
     {
-        int i = mDT->GetContainingTriangle(P);
-        if (i == -1)
-        {
-            return false;
-        }
-
-        // Get triangle information.
-        Vector2<Real> V[3];
-        mDT->GetVertexSet(i, V);
-        int invDet[3];
-        mDT->GetIndexSet(i, invDet);
-        TriangleData& tData = mTData[i];
-
-        // Determine which of the six subtriangles contains the target point.
-        Vector2<Real> sub0 = tData.Center;
-        Vector2<Real> sub1;
-        Vector2<Real> sub2 = tData.Intersect[2];
-        Real bary[3];
-        int index;
-        for (index = 1; index <= 6; ++index)
-        {
-            sub1 = sub2;
-            if (index % 2)
-            {
-                sub2 = V[index / 2];
-            }
-            else
-            {
-                sub2 = tData.Intersect[index / 2 - 1];
-            }
-
-            BarycentricCoordinates<Real, 3> barycentricCoordinates = P.GetBarycentrics(sub0, sub1, sub2);
-            bary[0] = barycentricCoordinates[0];
-            bary[1] = barycentricCoordinates[1];
-            bary[2] = barycentricCoordinates[2];
-            if (bary[0] >= Math<Real>::GetValue(0) && bary[1] >= Math<Real>::GetValue(0) && bary[2] >= Math<Real>::GetValue(0))
-            {
-                // P is in triangle <Sub0,Sub1,Sub2>
-                break;
-            }
-        }
-
-        // This should not happen theoretically, but it can happen due to
-        // numerical round-off errors.  Just in case, select an index and go
-        // with it.  Probably better is to keep track of the dot products in
-        // InTriangle and find the one closest to zero and use a triangle that
-        // contains the edge as the one that contains the input point.
-        MATHEMATICS_ASSERTION_0(index <= 6, "Unexpected condition\n");
-        if (index > 6)
-        {
-            // Use this index because bary[] was computed last for it.
-            index = 5;
-        }
-
-        // Fetch Bezier control points.
-        Real bez[6] = {
-            tData.Coeff[0],
-            tData.Coeff[12 + index],
-            tData.Coeff[13 + (index % 6)],
-            tData.Coeff[index],
-            tData.Coeff[6 + index],
-            tData.Coeff[1 + (index % 6)]
-        };
-
-        // Evaluate Bezier quadratic.
-        F = bary[0] * (bez[0] * bary[0] + bez[1] * bary[1] + bez[2] * bary[2]) +
-            bary[1] * (bez[1] * bary[0] + bez[3] * bary[1] + bez[4] * bary[2]) +
-            bary[2] * (bez[2] * bary[0] + bez[4] * bary[1] + bez[5] * bary[2]);
-
-        // Evaluate barycentric derivatives of F.
-        Real FU = (static_cast<Real>(2.0)) * (bez[0] * bary[0] + bez[1] * bary[1] + bez[2] * bary[2]);
-        Real FV = (static_cast<Real>(2.0)) * (bez[1] * bary[0] + bez[3] * bary[1] + bez[4] * bary[2]);
-        Real FW = (static_cast<Real>(2.0)) * (bez[2] * bary[0] + bez[4] * bary[1] + bez[5] * bary[2]);
-        Real duw = FU - FW;
-        Real dvw = FV - FW;
-
-        // Convert back to (x,y) coordinates.
-        Real m00 = sub0.GetX() - sub2.GetX();
-        Real m10 = sub0.GetY() - sub2.GetY();
-        Real m01 = sub1.GetX() - sub2.GetX();
-        Real m11 = sub1.GetY() - sub2.GetY();
-        Real inv = (Math::GetValue(1)) / (m00 * m11 - m10 * m01);
-
-        FX = inv * (m11 * duw - m10 * dvw);
-        FY = inv * (m00 * dvw - m01 * duw);
-
-        return true;
+        return false;
     }
+
+    const auto v = dt.GetVertexSet(i);
+    std::array<Vector2<Real>, 3> vertexSet{ std::get<0>(v), std::get<1>(v), std::get<2>(v) };
+
+    const auto invDet = dt.GetIndexSet(i);
+    TriangleData& triangleData = tData.at(i);
+
+    const auto sub0 = triangleData.center;
+    Vector2<Real> sub1{};
+    auto sub2 = triangleData.intersect.at(2);
+    std::array<Real, 3> bary{};
+    auto index = 1;
+    for (; index <= 6; ++index)
+    {
+        sub1 = sub2;
+        if (index % 2)
+        {
+            sub2 = vertexSet.at(index / 2);
+        }
+        else
+        {
+            const auto triangleIndex = index / 2 - 1;
+            sub2 = triangleData.intersect.at(triangleIndex);
+        }
+
+        const auto barycentricCoordinates = p.GetBarycentrics(sub0, sub1, sub2);
+        bary.at(0) = barycentricCoordinates[0];
+        bary.at(1) = barycentricCoordinates[1];
+        bary.at(2) = barycentricCoordinates[2];
+        if (bary.at(0) >= Math<Real>::GetValue(0) && bary.at(1) >= Math<Real>::GetValue(0) && bary.at(2) >= Math<Real>::GetValue(0))
+        {
+            break;
+        }
+    }
+
+    MATHEMATICS_ASSERTION_0(index <= 6, "意外情况\n");
+    if (index > 6)
+    {
+        index = 5;
+    }
+
+    std::array<Real, 6> bez{ triangleData.coeff.at(0),
+                             triangleData.coeff.at(12 + boost::numeric_cast<size_t>(index)),
+                             triangleData.coeff.at(13 + (boost::numeric_cast<size_t>(index) % 6)),
+                             triangleData.coeff.at(index),
+                             triangleData.coeff.at(6 + boost::numeric_cast<size_t>(index)),
+                             triangleData.coeff.at(1 + (boost::numeric_cast<size_t>(index) % 6)) };
+
+    f0 = bary.at(0) * (bez.at(0) * bary.at(0) + bez.at(1) * bary.at(1) + bez.at(2) * bary.at(2)) +
+         bary.at(1) * (bez.at(1) * bary.at(0) + bez.at(3) * bary.at(1) + bez.at(4) * bary.at(2)) +
+         bary.at(2) * (bez.at(2) * bary.at(0) + bez.at(4) * bary.at(1) + bez.at(5) * bary.at(2));
+
+    auto fu = Math<Real>::GetValue(2) * (bez.at(0) * bary.at(0) + bez.at(1) * bary.at(1) + bez.at(2) * bary.at(2));
+    auto fv = Math<Real>::GetValue(2) * (bez.at(1) * bary.at(0) + bez.at(3) * bary.at(1) + bez.at(4) * bary.at(2));
+    auto fw = Math<Real>::GetValue(2) * (bez.at(2) * bary.at(0) + bez.at(4) * bary.at(1) + bez.at(5) * bary.at(2));
+    auto duw = fu - fw;
+    auto dvw = fv - fw;
+
+    auto m00 = sub0.GetX() - sub2.GetX();
+    auto m10 = sub0.GetY() - sub2.GetY();
+    auto m01 = sub1.GetX() - sub2.GetX();
+    auto m11 = sub1.GetY() - sub2.GetY();
+    auto inv = (Math<Real>::GetValue(1)) / (m00 * m11 - m10 * m01);
+
+    fx0 = inv * (m11 * duw - m10 * dvw);
+    fy0 = inv * (m00 * dvw - m01 * duw);
+
+    return true;
 }
 
 #endif  // MATHEMATICS_INTERPOLATION_INTP_QUADRATIC_NONUNIFORM2_DETAIL_H

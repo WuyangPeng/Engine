@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::OpenGLRenderTarget
-    ::OpenGLRenderTarget (Renderer* renderer,const RenderTarget* renderTarget)
+::OpenGLRenderTarget (Renderer* renderer,const RenderTarget* renderTarget)
 	: ParentType{}, m_OpenGLRenderTargetData{ renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -23,7 +23,7 @@ Rendering::OpenGLRenderTarget
 CLASS_INVARIANT_STUB_DEFINE(Rendering, OpenGLRenderTarget)
 
 void Rendering::OpenGLRenderTarget
-    ::Enable (Renderer* renderer) noexcept
+::Enable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9; 
 
@@ -31,7 +31,7 @@ void Rendering::OpenGLRenderTarget
 }
 
 void Rendering::OpenGLRenderTarget
-    ::Disable (Renderer* renderer) noexcept
+::Disable (Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;  
 
@@ -39,7 +39,7 @@ void Rendering::OpenGLRenderTarget
 }
 
 Rendering::ConstTexture2DSharedPtr Rendering::OpenGLRenderTarget
-    ::ReadColor(int index,Renderer* renderer)
+::ReadColor(int index,Renderer* renderer)
 {
     RENDERING_CLASS_IS_VALID_9;  
 

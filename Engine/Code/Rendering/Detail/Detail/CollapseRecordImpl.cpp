@@ -15,14 +15,14 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26415)
-Rendering::CollapseRecordImpl ::CollapseRecordImpl(int vKeep, int vThrow, int numVertices, int numTriangles) noexcept
+Rendering::CollapseRecordImpl::CollapseRecordImpl(int vKeep, int vThrow, int numVertices, int numTriangles) noexcept
     : m_VKeep{ vKeep }, m_VThrow{ vThrow }, m_NumVertices{ numVertices }, m_NumTriangles{ numTriangles }, m_Indices{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::CollapseRecordImpl ::IsValid() const noexcept
+bool Rendering::CollapseRecordImpl::IsValid() const noexcept
 {
     if (0 <= m_NumTriangles && 0 <= m_NumVertices)
         return true;
@@ -31,63 +31,63 @@ bool Rendering::CollapseRecordImpl ::IsValid() const noexcept
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-int Rendering::CollapseRecordImpl ::GetVKeep() const noexcept
+int Rendering::CollapseRecordImpl::GetVKeep() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_VKeep;
 }
 
-void Rendering::CollapseRecordImpl ::SetVKeep(int vKeep) noexcept
+void Rendering::CollapseRecordImpl::SetVKeep(int vKeep) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_VKeep = vKeep;
 }
 
-int Rendering::CollapseRecordImpl ::GetNumVertices() const noexcept
+int Rendering::CollapseRecordImpl::GetNumVertices() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_NumVertices;
 }
 
-void Rendering::CollapseRecordImpl ::SetNumVertices(int numVertices) noexcept
+void Rendering::CollapseRecordImpl::SetNumVertices(int numVertices) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_NumVertices = numVertices;
 }
 
-int Rendering::CollapseRecordImpl ::GetNumTriangles() const noexcept
+int Rendering::CollapseRecordImpl::GetNumTriangles() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_NumTriangles;
 }
 
-void Rendering::CollapseRecordImpl ::SetNumTriangles(int numTriangles) noexcept
+void Rendering::CollapseRecordImpl::SetNumTriangles(int numTriangles) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_NumTriangles = numTriangles;
 }
 
-void Rendering::CollapseRecordImpl ::SetIndices(const std::vector<int>& indices)
+void Rendering::CollapseRecordImpl::SetIndices(const std::vector<int>& indices)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_Indices = indices;
 }
 
-const std::vector<int> Rendering::CollapseRecordImpl ::GetIndices() const
+const std::vector<int> Rendering::CollapseRecordImpl::GetIndices() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_Indices;
 }
 
-int Rendering::CollapseRecordImpl ::GetIndex(int index) const
+int Rendering::CollapseRecordImpl::GetIndex(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < GetIndicesSize(), "Ë÷Òý´íÎó£¡");
@@ -95,28 +95,28 @@ int Rendering::CollapseRecordImpl ::GetIndex(int index) const
     return m_Indices.at(index);
 }
 
-int Rendering::CollapseRecordImpl ::GetIndicesSize() const
+int Rendering::CollapseRecordImpl::GetIndicesSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return boost::numeric_cast<int>(m_Indices.size());
 }
 
-int Rendering::CollapseRecordImpl ::GetVThrow() const noexcept
+int Rendering::CollapseRecordImpl::GetVThrow() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return m_VThrow;
 }
 
-void Rendering::CollapseRecordImpl ::SetVThrow(int vThrow) noexcept
+void Rendering::CollapseRecordImpl::SetVThrow(int vThrow) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
     m_VThrow = vThrow;
 }
 
-void Rendering::CollapseRecordImpl ::Load(CoreTools::BufferSource& source)
+void Rendering::CollapseRecordImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -127,7 +127,7 @@ void Rendering::CollapseRecordImpl ::Load(CoreTools::BufferSource& source)
     m_Indices = source.ReadVectorWithoutNumber<int>();
 }
 
-void Rendering::CollapseRecordImpl ::Save(CoreTools::BufferTarget& target) const
+void Rendering::CollapseRecordImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -138,7 +138,7 @@ void Rendering::CollapseRecordImpl ::Save(CoreTools::BufferTarget& target) const
     target.WriteContainerWithNumber(m_Indices);
 }
 
-int Rendering::CollapseRecordImpl ::GetStreamingSize() const
+int Rendering::CollapseRecordImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -151,7 +151,7 @@ int Rendering::CollapseRecordImpl ::GetStreamingSize() const
     return size;
 }
 
-void Rendering::CollapseRecordImpl ::ClearIndices() noexcept
+void Rendering::CollapseRecordImpl::ClearIndices() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 

@@ -16,7 +16,7 @@ void Rendering::SurfacePatchFrameTesting
 { 
 	ASSERT_NOT_THROW_EXCEPTION_0(InitTest);	
 }
- 
+ #include SYSTEM_WARNING_DISABLE(26440)
 void Rendering::SurfacePatchFrameTesting
 	::InitTest()
 {
