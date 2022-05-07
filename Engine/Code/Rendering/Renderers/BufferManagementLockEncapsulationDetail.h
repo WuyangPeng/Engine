@@ -1,63 +1,61 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 16:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:23)
 
 #ifndef RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_DETAIL_H
 #define RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_DETAIL_H
 
-#include "Rendering/RenderingExport.h"
+#include "BufferManagementLockEncapsulation.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-#include "BufferManagementLockEncapsulation.h" 
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-#include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/Helper/ExceptionMacro.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26487)
 template <typename BufferManagementType>
-Rendering::BufferManagementLockEncapsulation<BufferManagementType>
-	::BufferManagementLockEncapsulation(BufferManagementType& manager) noexcept
-	:m_Manager{ manager }, m_Buffer{ nullptr }
+Rendering::BufferManagementLockEncapsulation<BufferManagementType>::BufferManagementLockEncapsulation(BufferManagementType& manager) noexcept
+    : manager{ manager }, buffer{ nullptr }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename BufferManagementType>
-Rendering::BufferManagementLockEncapsulation<BufferManagementType>
-	::~BufferManagementLockEncapsulation()
-{EXCEPTION_TRY
+Rendering::BufferManagementLockEncapsulation<BufferManagementType>::~BufferManagementLockEncapsulation() noexcept
 {
-if (m_Buffer != nullptr)
-	{
-		m_Manager.Unlock(m_Buffer);
-	}
-}
-EXCEPTION_ALL_CATCH(Rendering) 
-	
+    EXCEPTION_TRY
+    {
+        if (buffer != nullptr)
+        {
+            manager.Unlock(buffer);
+        }
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename BufferManagementType>
-bool Rendering::BufferManagementLockEncapsulation< BufferManagementType>
-	::IsValid() const noexcept
+bool Rendering::BufferManagementLockEncapsulation<BufferManagementType>::IsValid() const noexcept
 {
     return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename BufferManagementType>
-void* Rendering::BufferManagementLockEncapsulation<BufferManagementType>
-	::Lock(BufferConstPtr buffer,BufferLocking mode) 
+void* Rendering::BufferManagementLockEncapsulation<BufferManagementType>::Lock(ConstBufferSharedPtr aBuffer, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	auto videoMemory = m_Manager.Lock(buffer,mode);
-	m_Buffer = buffer;
+    auto videoMemory = manager.Lock(aBuffer, mode);
+    buffer = aBuffer;
 
-	return videoMemory;
+    return videoMemory;
 }
-  #include STSTEM_WARNING_POP
-#endif // RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_DETAIL_H
+
+#endif  // RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_DETAIL_H

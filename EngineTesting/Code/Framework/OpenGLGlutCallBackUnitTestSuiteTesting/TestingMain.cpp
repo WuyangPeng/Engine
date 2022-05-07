@@ -3,7 +3,7 @@
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
 // ÒıÇæ²âÊÔ°æ±¾£º0.0.0.4 (2019/09/17 09:42)
-
+#include "System/Helper/GLExtensionsMacro.h"
 #include "Framework/OpenGLGlutCallBackUnitTestSuiteTesting/TestingHelper.h"
 #include "Framework/Helper/MainFunctionMacro.h"
 #include "Framework/WindowCreate/WindowSize.h"

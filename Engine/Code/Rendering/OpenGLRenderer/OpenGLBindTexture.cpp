@@ -1,36 +1,31 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 15:36)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "OpenGLBindTexture.h"
 #include "OpenGLMapping.h"
-#include "System/OpenGL/OpenGLAPI.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26472)
-Rendering::UInt Rendering
-::BindTexture (ShaderFlags::SamplerType target, UInt texture) noexcept
-{
-    const Int current = System::GetGLInteger(System::OpenGLQuery(OpenGLConstant::g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
-    texture;
-	//System::SetGLBindTexture(System::TextureTarget(g_OpenGLTextureTarget[System::EnumCastUnderlying(target)]),texture);
+#include "System/OpenGL/OpenGLAPI.h"
 
-    return static_cast<UInt>(current);
+#include <gsl/util>
+
+Rendering::UInt Rendering::BindTexture(ShaderFlags::SamplerType target, MAYBE_UNUSED UInt texture)
+{
+    const auto current = System::GetGLInteger(System::UnderlyingCastEnum<System::OpenGLQuery>(OpenGLConstant::GetOpenGLTextureTargetBinding(System::EnumCastUnderlying(target))));
+
+    return gsl::narrow_cast<UInt>(current);
 }
 
-Rendering::UInt Rendering
-::GetBoundTexture (ShaderFlags::SamplerType target) noexcept
+Rendering::UInt Rendering::GetBoundTexture(ShaderFlags::SamplerType target)
 {
-    const Int current = System::GetGLInteger(System::OpenGLQuery(OpenGLConstant::g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
+    const auto current = System::GetGLInteger(System::UnderlyingCastEnum<System::OpenGLQuery>(OpenGLConstant::GetOpenGLTextureTargetBinding(System::EnumCastUnderlying(target))));
 
-    return static_cast<UInt>(current);
+    return gsl::narrow_cast<UInt>(current);
 }
-
-#include STSTEM_WARNING_POP

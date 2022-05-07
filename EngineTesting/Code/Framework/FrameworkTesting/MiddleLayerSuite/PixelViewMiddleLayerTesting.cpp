@@ -5,11 +5,11 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.1.0 (2020/06/27 10:05)
 
 #include "PixelViewMiddleLayerTesting.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/AssertMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
@@ -93,7 +93,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	ASSERT_TRUE(middleLayer.Paint());
 	ASSERT_TRUE(middleLayer.Move(point));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide, size));
+	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, size));
 
 	ASSERT_TRUE(middleLayer.KeyUp(0, point));
 	ASSERT_TRUE(middleLayer.KeyDown(0, point));
@@ -167,7 +167,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -201,7 +201,7 @@ void Framework::PixelViewMiddleLayerTesting
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
 	const uniform_int<> thickRandom{ minThick, maxThick };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -248,7 +248,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -270,8 +270,8 @@ void Framework::PixelViewMiddleLayerTesting
 		const auto xDifference = boost::numeric_cast<double>(xMin - xMax);
 		const auto yDifference = boost::numeric_cast<double>(yMin - yMax);
 
-		auto distanceX = Mathematics::DoubleMath::FAbs(xDifference);
-                auto distanceY = Mathematics::DoubleMath::FAbs(yDifference);
+		auto distanceX = Mathematics::MathD::FAbs(xDifference);
+                auto distanceY = Mathematics::MathD::FAbs(yDifference);
 
 		if (distanceY < distanceX)
 		{
@@ -287,7 +287,7 @@ void Framework::PixelViewMiddleLayerTesting
 			{
 				constexpr auto deviation = 0.5;
 				const auto difference = widthIndex - xMin;
-                                auto step = Mathematics::DoubleMath::Floor(Mathematics::DoubleMath::FAbs(difference * slope) + deviation);
+                                auto step = Mathematics::MathD::Floor(Mathematics::MathD::FAbs(difference * slope) + deviation);
 				if (yMax < yMin)
 				{
 					step = -step;
@@ -324,7 +324,7 @@ void Framework::PixelViewMiddleLayerTesting
 			{
 				constexpr auto deviation = 0.5;
 				const auto difference = heightIndex - yMin;
-                                auto step = Mathematics::DoubleMath::Floor(Mathematics::DoubleMath::FAbs(difference * slope) + deviation);
+                                auto step = Mathematics::MathD::Floor(Mathematics::MathD::FAbs(difference * slope) + deviation);
 				if (xMax < xMin)
 				{
 					step = -step;
@@ -359,7 +359,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -416,7 +416,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -477,7 +477,7 @@ void Framework::PixelViewMiddleLayerTesting
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
 	const uniform_int<> radiusRandom{ minRadius, maxRadius };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -492,7 +492,7 @@ void Framework::PixelViewMiddleLayerTesting
 		const auto x = sizeRandom(generator);
 		const auto y = sizeRandom(generator);
 
-		const Mathematics::DoubleVector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
+		const Mathematics::Vector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
 
 		auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer(width, height);
 
@@ -504,8 +504,8 @@ void Framework::PixelViewMiddleLayerTesting
 			{
 				const auto colour = pixelViewMiddleLayer.GetPixel(widthIndex, heightIndex);
 
-				const Mathematics::DoubleVector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
-                                auto distance = Mathematics::DoubleVector2DTools::Distance(center, vector2D);
+				const Mathematics::Vector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
+                                auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
 
 				if (radius + 0.5 < distance)
 				{
@@ -520,7 +520,7 @@ void Framework::PixelViewMiddleLayerTesting
 					// ºÏ≤‚±ﬂΩÁ÷µ			 
 
 					auto difference = widthIndex - x;
-                                        auto didifferenceAbsolute = Mathematics::DoubleMath::FAbs(difference);
+                                        auto didifferenceAbsolute = Mathematics::MathD::FAbs(difference);
 
 					const auto separateRadius = GetSeparateRadius(radius);
 
@@ -596,7 +596,7 @@ void Framework::PixelViewMiddleLayerTesting
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
 	const uniform_int<> radiusRandom{ minRadius, maxRadius };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -611,7 +611,7 @@ void Framework::PixelViewMiddleLayerTesting
 		const auto x = sizeRandom(generator);
 		const auto y = sizeRandom(generator);
 
-		const Mathematics::DoubleVector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
+		const Mathematics::Vector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
 
 		auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer(width, height);
 
@@ -623,10 +623,10 @@ void Framework::PixelViewMiddleLayerTesting
 			{
 				const auto colour = pixelViewMiddleLayer.GetPixel(widthIndex, heightIndex);
 
-				const Mathematics::DoubleVector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
-                                auto distance = Mathematics::DoubleVector2DTools::Distance(center, vector2D);
+				const Mathematics::Vector2D vector2D{ boost::numeric_cast<double>(widthIndex), boost::numeric_cast<double>(heightIndex) };
+                                auto distance = Mathematics::Vector2ToolsD::Distance(center, vector2D);
 
-				if (Mathematics::DoubleMath::FAbs(radius - distance) <= 0.5)
+				if (Mathematics::MathD::FAbs(radius - distance) <= 0.5)
 				{
 					bool isClearColour = false;
 					auto dec = 3 - 2 * radius;
@@ -689,7 +689,7 @@ void Framework::PixelViewMiddleLayerTesting
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
 	const uniform_int<> thickRandom{ minThick, maxThick };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -727,7 +727,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -775,7 +775,7 @@ void Framework::PixelViewMiddleLayerTesting
 
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -826,7 +826,7 @@ void Framework::PixelViewMiddleLayerTesting
 	default_random_engine generator{ GetEngineRandomSeed() };
 	const uniform_int<> sizeRandom{ minSize, maxSize };
 	const uniform_int<> radiusRandom{ minRadius, maxRadius };
-	const uniform_int<uint8_t> colourRandom{ sm_MinColour, sm_MaxColour };
+	const uniform_int<uint8_t> colourRandom{ minColour, maxColour };
 
 	constexpr auto width = maxSize + 1;
 	constexpr auto height = maxSize + 1;
@@ -841,7 +841,7 @@ void Framework::PixelViewMiddleLayerTesting
 		const auto x = sizeRandom(generator);
 		const auto y = sizeRandom(generator);
 
-		const Mathematics::DoubleVector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
+		const Mathematics::Vector2D center{ boost::numeric_cast<double>(x), boost::numeric_cast<double>(y) };
 
 		auto pixelViewMiddleLayer = CreateTestPixelViewMiddleLayer(width, height);
 
@@ -910,7 +910,7 @@ Framework::PixelViewMiddleLayer Framework::PixelViewMiddleLayerTesting
 	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
 	ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
 	ASSERT_TRUE(middleLayer.Initialize());
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide, windowSize));
+	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, windowSize));
 
 	ASSERT_EQUAL(middleLayer.GetScreenWidth(), width);
 	ASSERT_EQUAL(middleLayer.GetScreenHeight(), height);

@@ -9,20 +9,19 @@
 #include "Example/Animation/AnimationExample/AnimationExample.h"
 
 #include "System/SystemLib.h"
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_ANIMATION_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_ANIMATION_EXAMPLE_STATIC
+#else  // BUILDING_ANIMATION_EXAMPLE_STATIC
 
-	namespace AnimationExample
-	{
-		void StaticDllLib()
-		{
+namespace AnimationExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_ANIMATION_EXAMPLE_STATIC
+#endif  // !BUILDING_ANIMATION_EXAMPLE_STATIC

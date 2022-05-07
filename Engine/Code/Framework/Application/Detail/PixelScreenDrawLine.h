@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:25)
 
 #ifndef FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
 #define FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
@@ -16,50 +19,49 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE PixelScreenDrawLine
-	{
-	public:
-		using ClassType = PixelScreenDrawLine;
+    class FRAMEWORK_HIDDEN_DECLARE PixelScreenDrawLine
+    {
+    public:
+        using ClassType = PixelScreenDrawLine;
 
-	public:
-		PixelScreenDrawLine(int xMin, int yMin, int xMax, int yMax);
+    public:
+        PixelScreenDrawLine(int xMin, int yMin, int xMax, int yMax);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
 #ifdef OPEN_CLASS_INVARIANT
-		bool IsEndpointCorrect() const;
-#endif // OPEN_CLASS_INVARIANT
 
-		int GetSize() const;
-		const WindowPoint& operator[](int index) const;
+        bool IsEndpointCorrect() const;
 
-	private:
-		using WindowPointContainer = std::vector<WindowPoint>;
+#endif  // OPEN_CLASS_INVARIANT
 
-	private:
-		void Calculate();
-		void DrawLineOnX();
-		void DrawLineOnY();
+        NODISCARD int GetSize() const;
+        NODISCARD const WindowPoint& operator[](int index) const;
 
-	private:
-		int m_XMin;
-		int m_YMin;
-		int m_XMax;
-		int m_YMax;
+    private:
+        using WindowPointContainer = std::vector<WindowPoint>;
 
-		// 线段的方向。
-		int m_DistanceX;
-		int m_DistanceY;
+    private:
+        void Calculate();
+        void DrawLineOnX();
+        void DrawLineOnY();
 
-		// 增量或减量取决于线的方向。
-		int m_StepX;
-		int m_StepY;
+    private:
+        int xMin;
+        int yMin;
+        int xMax;
+        int yMax;
 
-		WindowPointContainer m_Line;
-	};
+        // 线段的方向。
+        int distanceX;
+        int distanceY;
+
+        // 增量或减量取决于线的方向。
+        int stepX;
+        int stepY;
+
+        WindowPointContainer line;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H
-
-
-
+#endif  // FRAMEWORK_APPLICATION_PIXEL_SCREEN_DRAW_LINE_H

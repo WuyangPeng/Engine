@@ -7,34 +7,34 @@
 #ifndef FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_REGISTER_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_REGISTER_TESTING_H
 
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 namespace Framework
 {
-	class WindowRegisterTesting final : public CoreTools::UnitTest
-	{
-	public:
-		using ClassType = WindowRegisterTesting;
-		using ParentType = UnitTest;
-		using HInstance = System::WindowHInstance;
+    class WindowRegisterTesting final : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = WindowRegisterTesting;
+        using ParentType = UnitTest;
+        using HInstance = System::WindowsHInstance;
 
-	public:
-		explicit WindowRegisterTesting(const OStreamShared& stream, HInstance instance);
+    public:
+        explicit WindowRegisterTesting(const OStreamShared& stream, HInstance instance);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	private:
-		void DoRunUnitTest() final;
+    private:
+        void DoRunUnitTest() final;
 
-		void MainTest();
+        void MainTest();
 
-		void RegisterTest();		
+        void RegisterTest();
 
-	private:
-		HInstance m_Instance;
-		int m_Count;
-	};
+    private:
+        HInstance m_Instance;
+        int m_Count;
+    };
 }
 
-#endif // FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_REGISTER_TESTING_H
+#endif  // FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_REGISTER_TESTING_H

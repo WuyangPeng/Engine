@@ -1,91 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 18:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.6 (2022/04/03 15:45)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Culler.h"
 #include "Spatial.h"
 #include "Detail/SpatialData.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 using std::make_shared;
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26492)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26473)
-#include SYSTEM_WARNING_DISABLE(26456)
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Spatial)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, Spatial);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Spatial);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Spatial);
 
-Rendering::Spatial::Spatial()
-    : ParentType{}, m_Parent{ nullptr }, m_SpatialDataPtr{ make_shared<SpatialData>() }
+Rendering::Spatial::Spatial(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, parent{ nullptr }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::Spatial::~Spatial()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::Spatial::Spatial(const Spatial& rhs)
-    : ParentType(rhs), m_Parent{ rhs.m_Parent }, m_SpatialDataPtr{ make_shared<SpatialData>(*rhs.m_SpatialDataPtr) }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::Spatial& Rendering::Spatial::operator=(const Spatial& rhs)
-{
-    ;
-
-    ParentType::operator=(rhs);
-
-    m_Parent = rhs.m_Parent;
-
-    m_SpatialDataPtr = make_shared<SpatialData>(*rhs.m_SpatialDataPtr);
-
-    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Rendering::Spatial::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_SpatialDataPtr != nullptr)
+    if (ParentType::IsValid())
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::Spatial::SetParent(Spatial* parent) noexcept
+void Rendering::Spatial::SetParent(Spatial* aParent) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    m_Parent = parent;
+    parent = aParent;
 }
 
 bool Rendering::Spatial::Update(double applicationTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return Update(applicationTime, true);
 }
 
 bool Rendering::Spatial::Update(double applicationTime, bool initiator)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     const auto result = UpdateWorldData(applicationTime);
     UpdateWorldBound();
@@ -99,18 +77,18 @@ bool Rendering::Spatial::Update(double applicationTime, bool initiator)
 
 bool Rendering::Spatial::UpdateWorldData(double applicationTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     // 更新世界变换。
-    if (!m_SpatialDataPtr->GetWorldTransformIsCurrent())
+    if (!impl->GetWorldTransformIsCurrent())
     {
-        if (m_Parent != nullptr)
+        if (parent != nullptr)
         {
-            m_SpatialDataPtr->SetLocalTransformToWorldTransform(m_Parent->GetWorldTransform());
+            impl->SetLocalTransformToWorldTransform(parent->GetWorldTransform());
         }
         else
         {
-            m_SpatialDataPtr->SetLocalTransformToWorldTransform();
+            impl->SetLocalTransformToWorldTransform();
         }
     }
 
@@ -120,34 +98,40 @@ bool Rendering::Spatial::UpdateWorldData(double applicationTime)
 
 void Rendering::Spatial::PropagateBoundToRoot()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (m_Parent)
+    if (parent)
     {
-        m_Parent->UpdateWorldBound();
-        m_Parent->PropagateBoundToRoot();
+        parent->UpdateWorldBound();
+        parent->PropagateBoundToRoot();
     }
 }
 
 Rendering::Spatial* Rendering::Spatial::GetParent() noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
+#include SYSTEM_WARNING_DISABLE(26492)
 
     return const_cast<Spatial*>(static_cast<const ClassType*>(this)->GetParent());
+
+#include STSTEM_WARNING_POP
 }
 
 const Rendering::Spatial* Rendering::Spatial::GetParent() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Parent;
+    return parent;
 }
 
 void Rendering::Spatial::OnGetVisibleSet(Culler& culler, bool noCull)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    const auto cullingMode = m_SpatialDataPtr->GetCullingMode();
+    const auto cullingMode = impl->GetCullingMode();
 
     if (cullingMode == CullingMode::Always)
     {
@@ -160,7 +144,7 @@ void Rendering::Spatial::OnGetVisibleSet(Culler& culler, bool noCull)
     }
 
     const auto savePlaneState = culler.GetPlaneState();
-    if (noCull || culler.IsVisible(m_SpatialDataPtr->GetWorldBound()))
+    if (noCull || culler.IsVisible(impl->GetWorldBound()))
     {
         GetVisibleSet(culler, noCull);
     }
@@ -169,84 +153,84 @@ void Rendering::Spatial::OnGetVisibleSet(Culler& culler, bool noCull)
 
 void Rendering::Spatial::SetLocalTransform(const TransformF& transform) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->SetLocalTransform(transform);
+    return impl->SetLocalTransform(transform);
 }
 
 void Rendering::Spatial::SetWorldTransform(const TransformF& transform) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->DirectSetWorldTransform(transform);
+    return impl->DirectSetWorldTransform(transform);
 }
 
 void Rendering::Spatial::SetWorldBound(const BoundF& bound) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->DirectSetWorldBound(bound);
+    return impl->DirectSetWorldBound(bound);
 }
 
 void Rendering::Spatial::SetCullingMode(CullingMode culling) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->SetCullingMode(culling);
+    return impl->SetCullingMode(culling);
 }
 
 void Rendering::Spatial::InitWorldBound()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->InitWorldBound();
+    return impl->InitWorldBound();
 }
 
 void Rendering::Spatial::BoundGrowToContain(const BoundF& worldBound)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->SetWorldBound(worldBound);
+    return impl->SetWorldBound(worldBound);
 }
 
-const Rendering::TransformF Rendering::Spatial::GetLocalTransform() const noexcept
+Rendering::TransformF Rendering::Spatial::GetLocalTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_SpatialDataPtr->GetLocalTransform();
+    return impl->GetLocalTransform();
 }
 
-const Rendering::TransformF Rendering::Spatial::GetWorldTransform() const noexcept
+Rendering::TransformF Rendering::Spatial::GetWorldTransform() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_SpatialDataPtr->GetWorldTransform();
+    return impl->GetWorldTransform();
 }
 
-const Rendering::BoundF Rendering::Spatial::GetWorldBound() const noexcept
+Rendering::BoundF Rendering::Spatial::GetWorldBound() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_SpatialDataPtr->GetWorldBound();
+    return impl->GetWorldBound();
 }
 
 Rendering::CullingMode Rendering::Spatial::GetCullingMode() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_SpatialDataPtr->GetCullingMode();
+    return impl->GetCullingMode();
 }
 
 bool Rendering::Spatial::GetWorldBoundIsCurrent() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_SpatialDataPtr->GetWorldBoundIsCurrent();
+    return impl->GetWorldBoundIsCurrent();
 }
 
 // 流支持
 Rendering::Spatial::Spatial(LoadConstructor value)
-    : ParentType{ value }, m_Parent{ nullptr }, m_SpatialDataPtr{ make_shared<SpatialData>() }
+    : ParentType{ value }, parent{ nullptr }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -257,9 +241,9 @@ int Rendering::Spatial::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += m_SpatialDataPtr->GetStreamingSize();
+    size += impl->GetStreamingSize();
 
-    // m_Parent 不保存
+    // parent 不保存
 
     return size;
 }
@@ -282,7 +266,7 @@ void Rendering::Spatial::Save(CoreTools::BufferTarget& target) const
 
     ParentType::Save(target);
 
-    m_SpatialDataPtr->Save(target);
+    impl->Save(target);
 
     // m_Parent没有保存。它将被设置在 Node::Link，
     // 当子节点的指针链接解析Node::SetChild。
@@ -292,7 +276,7 @@ void Rendering::Spatial::Save(CoreTools::BufferTarget& target) const
 
 void Rendering::Spatial::Link(CoreTools::ObjectLink& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
 
@@ -302,22 +286,22 @@ void Rendering::Spatial::Link(CoreTools::ObjectLink& source)
 
 void Rendering::Spatial::PostLink()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
 
-    m_Parent = dynamic_cast<Spatial*>(GetControllerObject());
+    parent = dynamic_cast<Spatial*>(GetControllerObject());
 }
 
 void Rendering::Spatial::Load(CoreTools::BufferSource& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    m_SpatialDataPtr->Load(source);
+    impl->Load(source);
 
     // m_Parent没有保存。它将被设置在 Node::Link，
     // 当子节点的指针链接解析Node::SetChild。
@@ -334,23 +318,21 @@ Rendering::PickRecordContainer Rendering::Spatial::ExecuteRecursive([[maybe_unus
 
 void Rendering::Spatial::SetLocalTransformTranslate(const APoint& translate) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->SetLocalTransformTranslate(translate);
+    return impl->SetLocalTransformTranslate(translate);
 }
 
 void Rendering::Spatial::SetLocalTransformRotate(const Matrix& rotate) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_SpatialDataPtr->SetLocalTransformRotate(rotate);
+    return impl->SetLocalTransformRotate(rotate);
 }
 
 void Rendering::Spatial::SetWorldTransformOnUpdate(const TransformF& transform) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    m_SpatialDataPtr->SetWorldTransformOnUpdate(transform);
+    impl->SetWorldTransformOnUpdate(transform);
 }
-
-#include STSTEM_WARNING_POP

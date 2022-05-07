@@ -1,44 +1,41 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 17:15)
 
 #ifndef RENDERING_RENDERERS_BUFFER_LOCK_MANAGE_H
 #define RENDERING_RENDERERS_BUFFER_LOCK_MANAGE_H
 
 #include "Rendering/RenderingDll.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace Rendering
 {
     template <typename PlatformBufferType>
-	class BufferLockManager : boost::noncopyable
-	{
-	public:
-		using ClassType = BufferLockManager<PlatformBufferType>;
+    class BufferLockManager
+    {
+    public:
+        using ClassType = BufferLockManager<PlatformBufferType>;
 
-	public:
-		explicit BufferLockManager(PlatformBufferType& manager) noexcept;
-		~BufferLockManager();
-		BufferLockManager(const BufferLockManager&) = delete;
-		BufferLockManager& operator=(const BufferLockManager&) = delete;
-		BufferLockManager(BufferLockManager&&) = delete;
-		BufferLockManager& operator=(BufferLockManager&&) = delete;
+    public:
+        explicit BufferLockManager(PlatformBufferType& manager) noexcept;
+        ~BufferLockManager() noexcept;
+        BufferLockManager(const BufferLockManager& rhs) = delete;
+        BufferLockManager& operator=(const BufferLockManager& rhs) = delete;
+        BufferLockManager(BufferLockManager&& rhs) noexcept = delete;
+        BufferLockManager& operator=(BufferLockManager&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void* Lock(BufferLocking mode) noexcept;
-	
-	private:
-		PlatformBufferType& m_Manager;
-		bool m_Lock;
-	};
+        NODISCARD void* Lock(BufferLocking mode) noexcept;
+
+    private:
+        PlatformBufferType& manager;
+        bool lock;
+    };
 }
 
-#endif // RENDERING_RENDERERS_BUFFER_LOCK_MANAGE_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_BUFFER_LOCK_MANAGE_H

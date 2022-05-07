@@ -1,262 +1,234 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 15:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 14:44)
 
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutProcessManager.h"
 #include "Detail/OpenGLGlutProcessManagerImpl.h"
-#include "CoreTools/Threading/ScopedMutex.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Threading/ScopedMutex.h"
 
-using std::make_unique;
 using std::make_shared;
+using std::make_unique;
 using namespace std::literals;
 
 SINGLETON_GET_PTR_DEFINE(Framework, OpenGLGlutProcessManager);
 
-Framework::OpenGLGlutProcessManager::OpenGLGlutProcessManagerUniquePtr Framework::OpenGLGlutProcessManager
-	::sm_OpenGLGlutProcessManager{ };
+Framework::OpenGLGlutProcessManager::OpenGLGlutProcessManagerUniquePtr Framework::OpenGLGlutProcessManager::openGLGlutProcessManager{};
 
-void Framework::OpenGLGlutProcessManager
-	::Create()
-{	
-	sm_OpenGLGlutProcessManager = make_unique<Framework::OpenGLGlutProcessManager>(OpenGLGlutProcessManagerCreate::Init);	
+void Framework::OpenGLGlutProcessManager::Create()
+{
+    openGLGlutProcessManager = make_unique<Framework::OpenGLGlutProcessManager>(OpenGLGlutProcessManagerCreate::Init);
 }
 
-void Framework::OpenGLGlutProcessManager
-	::Destroy() noexcept
+void Framework::OpenGLGlutProcessManager::Destroy() noexcept
 {
-	sm_OpenGLGlutProcessManager.reset();
+    openGLGlutProcessManager.reset();
 }
 
-Framework::OpenGLGlutProcessManager ::OpenGLGlutProcessManager([[maybe_unused]] OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
-    : impl{  0 }
+Framework::OpenGLGlutProcessManager::OpenGLGlutProcessManager(MAYBE_UNUSED OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
- 
-
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, OpenGLGlutProcessManager)
 
-Framework::OpenGLGlutProcessManager::RenderSceneCallback Framework::OpenGLGlutProcessManager
-	::GetRenderSceneCallback() noexcept
+Framework::OpenGLGlutProcessManager::RenderSceneCallback Framework::OpenGLGlutProcessManager::GetRenderSceneCallback() noexcept
 {
-	return ImplType::RenderScene;
+    return ImplType::RenderScene;
 }
 
-Framework::OpenGLGlutProcessManager::ChangeSizeCallback Framework::OpenGLGlutProcessManager
-	::GetChangeSizeCallback() noexcept
+Framework::OpenGLGlutProcessManager::ChangeSizeCallback Framework::OpenGLGlutProcessManager::GetChangeSizeCallback() noexcept
 {
-	return ImplType::ChangeSize;
+    return ImplType::ChangeSize;
 }
 
-Framework::OpenGLGlutProcessManager::TimerFunctionCallback Framework::OpenGLGlutProcessManager
-	::GetTimerFunctionCallback() noexcept
+Framework::OpenGLGlutProcessManager::TimerFunctionCallback Framework::OpenGLGlutProcessManager::GetTimerFunctionCallback() noexcept
 {
-	return ImplType::TimerFunction;
+    return ImplType::TimerFunction;
 }
 
-Framework::OpenGLGlutProcessManager::SpecialKeysDownCallback Framework::OpenGLGlutProcessManager
-	::GetSpecialKeysDownCallback() noexcept
+Framework::OpenGLGlutProcessManager::SpecialKeysDownCallback Framework::OpenGLGlutProcessManager::GetSpecialKeysDownCallback() noexcept
 {
-	return ImplType::SpecialKeysDown;
+    return ImplType::SpecialKeysDown;
 }
 
-Framework::OpenGLGlutProcessManager::KeyboardDownCallback Framework::OpenGLGlutProcessManager
-	::GetKeyboardDownCallback() noexcept
+Framework::OpenGLGlutProcessManager::KeyboardDownCallback Framework::OpenGLGlutProcessManager::GetKeyboardDownCallback() noexcept
 {
-	return ImplType::KeyboardDown;
+    return ImplType::KeyboardDown;
 }
 
-Framework::OpenGLGlutProcessManager::MouseFunctionCallback Framework::OpenGLGlutProcessManager
-	::GetMouseFunctionCallback() noexcept
+Framework::OpenGLGlutProcessManager::MouseFunctionCallback Framework::OpenGLGlutProcessManager::GetMouseFunctionCallback() noexcept
 {
-	return ImplType::MouseFunction;
+    return ImplType::MouseFunction;
 }
 
-Framework::OpenGLGlutProcessManager::MotionFunctionCallback Framework::OpenGLGlutProcessManager
-	::GetMotionFunctionCallback() noexcept
+Framework::OpenGLGlutProcessManager::MotionFunctionCallback Framework::OpenGLGlutProcessManager::GetMotionFunctionCallback() noexcept
 {
-	return ImplType::MotionFunction;
+    return ImplType::MotionFunction;
 }
 
-Framework::OpenGLGlutProcessManager::IdleFunctionCallback Framework::OpenGLGlutProcessManager
-	::GetIdleFunctionCallback() noexcept
+Framework::OpenGLGlutProcessManager::IdleFunctionCallback Framework::OpenGLGlutProcessManager::GetIdleFunctionCallback() noexcept
 {
-	return ImplType::IdleFunction;
+    return ImplType::IdleFunction;
 }
 
-Framework::OpenGLGlutProcessManager::ProcessMenuCallback Framework::OpenGLGlutProcessManager
-	::GetProcessMenuCallback() noexcept
+Framework::OpenGLGlutProcessManager::ProcessMenuCallback Framework::OpenGLGlutProcessManager::GetProcessMenuCallback() noexcept
 {
-	return ImplType::ProcessMenu;
+    return ImplType::ProcessMenu;
 }
 
-Framework::OpenGLGlutProcessManager::TerminateCallback Framework::OpenGLGlutProcessManager
-	::GetTerminateCallback() noexcept
+Framework::OpenGLGlutProcessManager::TerminateCallback Framework::OpenGLGlutProcessManager::GetTerminateCallback() noexcept
 {
-	return ImplType::TerminateFunction;
+    return ImplType::TerminateFunction;
 }
 
-Framework::OpenGLGlutProcessManager::SpecialKeysUpCallback Framework::OpenGLGlutProcessManager
-	::GetSpecialKeysUpCallback() noexcept
+Framework::OpenGLGlutProcessManager::SpecialKeysUpCallback Framework::OpenGLGlutProcessManager::GetSpecialKeysUpCallback() noexcept
 {
-	return ImplType::SpecialKeysUp;
+    return ImplType::SpecialKeysUp;
 }
 
-Framework::OpenGLGlutProcessManager::KeyboardUpCallback Framework::OpenGLGlutProcessManager
-	::GetKeyboardUpCallback() noexcept
+Framework::OpenGLGlutProcessManager::KeyboardUpCallback Framework::OpenGLGlutProcessManager::GetKeyboardUpCallback() noexcept
 {
-	return ImplType::KeyboardUp;
+    return ImplType::KeyboardUp;
 }
 
-Framework::OpenGLGlutProcessManager::PassiveMotionFunctionCallback Framework::OpenGLGlutProcessManager
-	::GetPassiveMotionCallback() noexcept
+Framework::OpenGLGlutProcessManager::PassiveMotionFunctionCallback Framework::OpenGLGlutProcessManager::GetPassiveMotionCallback() noexcept
 {
-	return ImplType::PassiveMotion;
+    return ImplType::PassiveMotion;
 }
 
-Framework::OpenGLGlutProcessManager::OpenGLGlutCallBackInterfaceSharedPtr Framework::OpenGLGlutProcessManager
-	::GetOpenGLGlutCallBackInterface() const
+Framework::OpenGLGlutProcessManager::OpenGLGlutCallBackInterfaceSharedPtr Framework::OpenGLGlutProcessManager::GetOpenGLGlutCallBackInterface() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetOpenGLGlutCallBack();
+    return impl->GetOpenGLGlutCallBack();
 }
 
-void Framework::OpenGLGlutProcessManager
-	::SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& openGLGlutCallBack)
+void Framework::OpenGLGlutProcessManager::SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& openGLGlutCallBack)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->SetOpenGLGlutCallBack(openGLGlutCallBack);
+    return impl->SetOpenGLGlutCallBack(openGLGlutCallBack);
 }
 
-void Framework::OpenGLGlutProcessManager
-	::ClearOpenGLGlutCallBack()
+void Framework::OpenGLGlutProcessManager::ClearOpenGLGlutCallBack()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->ClearOpenGLGlutCallBack();
+    return impl->ClearOpenGLGlutCallBack();
 }
 
-void Framework::OpenGLGlutProcessManager
-	::SetWindowID(int window)
+void Framework::OpenGLGlutProcessManager::SetWindowID(int window)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->SetWindowID(window);
+    return impl->SetWindowID(window);
 }
 
-int Framework::OpenGLGlutProcessManager
-	::GetWindowID() const
+int Framework::OpenGLGlutProcessManager::GetWindowID() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetWindowID();
+    return impl->GetWindowID();
 }
 
-int Framework::OpenGLGlutProcessManager
-	::GetMillisecond() const
+int Framework::OpenGLGlutProcessManager::GetMillisecond() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetMillisecond();
+    return impl->GetMillisecond();
 }
 
-void Framework::OpenGLGlutProcessManager
-	::SetMillisecond(int millisecond)
+void Framework::OpenGLGlutProcessManager::SetMillisecond(int millisecond)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->SetMillisecond(millisecond);
+    return impl->SetMillisecond(millisecond);
 }
 
-void Framework::OpenGLGlutProcessManager
-	::SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase)
+void Framework::OpenGLGlutProcessManager::SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->SetMainFunctionHelper(mainFunctionHelperBase);
+    return impl->SetMainFunctionHelper(mainFunctionHelperBase);
 }
 
-void Framework::OpenGLGlutProcessManager
-	::ClearMainFunctionHelper()
+void Framework::OpenGLGlutProcessManager::ClearMainFunctionHelper()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->ClearMainFunctionHelper();
+    return impl->ClearMainFunctionHelper();
 }
 
-Framework::OpenGLGlutProcessManager::MainFunctionHelperBaseSharedPtr Framework::OpenGLGlutProcessManager
-	::GetMainFunctionHelper()
+Framework::OpenGLGlutProcessManager::MainFunctionHelperBaseSharedPtr Framework::OpenGLGlutProcessManager::GetMainFunctionHelper()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetMainFunctionHelper();
+    return impl->GetMainFunctionHelper();
 }
 
-bool Framework::OpenGLGlutProcessManager
-	::PreCreate()
+bool Framework::OpenGLGlutProcessManager::PreCreate()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->PreCreate();
+    return impl->PreCreate();
 }
 
-bool Framework::OpenGLGlutProcessManager
-	::Initialize()
+bool Framework::OpenGLGlutProcessManager::Initialize()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->Initialize();
+    return impl->Initialize();
 }
 
-void Framework::OpenGLGlutProcessManager
-	::PreIdle()
+void Framework::OpenGLGlutProcessManager::PreIdle()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->PreIdle();
+    return impl->PreIdle();
 }
 
-void Framework::OpenGLGlutProcessManager
-	::Terminate()
+void Framework::OpenGLGlutProcessManager::Terminate()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->Terminate();
+    return impl->Terminate();
 }

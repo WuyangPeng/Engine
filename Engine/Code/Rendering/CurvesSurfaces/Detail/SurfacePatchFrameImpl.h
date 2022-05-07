@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 15:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 15:35)
 
 #ifndef RENDERING_CURVES_SURFACES_SURFACE_PATCH_FRAME_IMPL_H
 #define RENDERING_CURVES_SURFACES_SURFACE_PATCH_FRAME_IMPL_H
@@ -26,16 +29,16 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        const APoint GetPosition() const noexcept;
-        const AVector GetTangent0() const noexcept;
-        const AVector GetTangent1() const noexcept;
-        const AVector GetNormal() const noexcept;
+        NODISCARD APoint GetPosition() const noexcept;
+        NODISCARD AVector GetTangent0() const noexcept;
+        NODISCARD AVector GetTangent1() const noexcept;
+        NODISCARD AVector GetNormal() const noexcept;
 
     private:
-        APoint m_Position;
-        AVector m_Tangent0;
-        AVector m_Tangent1;
-        AVector m_Normal;
+        APoint position;
+        AVector tangent0;
+        AVector tangent1;
+        AVector normal;
     };
 }
 

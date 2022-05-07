@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 10:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:38)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,99 +17,93 @@
 
 using namespace std::literals;
 
-Framework::WindowMessageLoopImpl
-	::WindowMessageLoopImpl(DisplayFunction function) noexcept
-	:m_Function{ function }, m_LastTime{ }, m_Msg{ }
+Framework::WindowMessageLoopImpl::WindowMessageLoopImpl(DisplayFunction function) noexcept
+    : function{ function }, lastTime{}, msg{}
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageLoopImpl)
 
-System::WindowsWParam Framework::WindowMessageLoopImpl
-	::EnterMessageLoop(HWnd hwnd)
+System::WindowsWParam Framework::WindowMessageLoopImpl::EnterMessageLoop(WindowsHWnd hwnd)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (m_Function != nullptr)
-	{
-		return EnterNewMessageLoop(hwnd);
-	}
-	else
-	{
-		return EnterOldMessageLoop();
-	}
+    if (function != nullptr)
+    {
+        return EnterNewMessageLoop(hwnd);
+    }
+    else
+    {
+        return EnterOldMessageLoop();
+    }
 }
 
 // private
-System::WindowsWParam Framework::WindowMessageLoopImpl
-	::EnterOldMessageLoop() noexcept
+System::WindowsWParam Framework::WindowMessageLoopImpl::EnterOldMessageLoop() noexcept
 {
-	while (System::GetSystemMessage(&m_Msg))
-	{
-            [[maybe_unused]] const auto result1 = System::TranslateSystemMessage(&m_Msg);
-            [[maybe_unused]] const auto result2 = System::DispatchSystemMessage(&m_Msg);
-	}
+    while (System::GetSystemMessage(&msg))
+    {
+        System::TranslateSystemMessage(&msg);
+        System::DispatchSystemMessage(&msg);
+    }
 
-	return m_Msg.wParam;
+    return msg.wParam;
 }
 
 // private
-System::WindowsWParam Framework::WindowMessageLoopImpl
-	::EnterNewMessageLoop(HWnd hwnd)
+System::WindowsWParam Framework::WindowMessageLoopImpl::EnterNewMessageLoop(WindowsHWnd hwnd)
 {
-	// 启动消息循环。
-	auto applicationRunning = true;
+    // 启动消息循环。
+    auto applicationRunning = true;
 
-	do
-	{
-		if (System::PeekSystemMessage(&m_Msg))
-		{
-			if (!ProcessingMessage(hwnd))
-			{
-				applicationRunning = false;
-				continue;
-			}
-		}
-		else
-		{
-			Idle(hwnd);
-		}
+    do
+    {
+        if (System::PeekSystemMessage(&msg))
+        {
+            if (!ProcessingMessage(hwnd))
+            {
+                applicationRunning = false;
+                continue;
+            }
+        }
+        else
+        {
+            Idle(hwnd);
+        }
 
-	} while (applicationRunning);
+    } while (applicationRunning);
 
-	return m_Msg.wParam;
+    return msg.wParam;
 }
 
 // private
-bool Framework::WindowMessageLoopImpl
-	::ProcessingMessage(HWnd hwnd) noexcept
+bool Framework::WindowMessageLoopImpl::ProcessingMessage(WindowsHWnd hwnd) noexcept
 {
-	if (System::UnderlyingCastEnum<System::WindowsMessages>(m_Msg.message) == System::WindowsMessages::Quit)
-	{
-		return false;
-	}
+    if (System::UnderlyingCastEnum<System::WindowsMessages>(msg.message) == System::WindowsMessages::Quit)
+    {
+        return false;
+    }
 
-	System::WindowsHAccel accel{ nullptr };
-	if (!System::SystemTranslateAccelerator(hwnd, accel, &m_Msg))
-	{
-            [[maybe_unused]] const auto result1 = System::TranslateSystemMessage(&m_Msg);
-            [[maybe_unused]] const auto result2 = System::DispatchSystemMessage(&m_Msg);
-	}
+    System::WindowsHAccel accel{ nullptr };
+    if (!System::SystemTranslateAccelerator(hwnd, accel, &msg))
+    {
+        System::TranslateSystemMessage(&msg);
+        System::DispatchSystemMessage(&msg);
+    }
 
-	return true;
+    return true;
 }
 
 // private
-void Framework::WindowMessageLoopImpl
-	::Idle(HWnd hwnd)
+void Framework::WindowMessageLoopImpl::Idle(WindowsHWnd hwnd)
 {
-	FRAMEWORK_ASSERTION_0(m_Function != nullptr, "空闲函数指针为空！");
+    FRAMEWORK_ASSERTION_0(function != nullptr, "空闲函数指针为空！");
 
-	const auto timeDelta = m_LastTime.GetThisElapsedMillisecondTime();
+    if (function != nullptr)
+    {
+        const auto timeDelta = lastTime.GetThisElapsedMillisecondTime();
 
-	if (m_Function)
-	{
-		m_Function(hwnd, timeDelta);
-	}
+        function(hwnd, timeDelta);
+    }
 }

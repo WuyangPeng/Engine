@@ -1,72 +1,75 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 15:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 14:03)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_IMPL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_IMPL_H
 
-#include "Framework/FrameworkDll.h" 
+#include "Framework/FrameworkDll.h"
 
-#include "Framework/OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
 
 #include <memory>
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE OpenGLGlutProcessManagerImpl
-	{
-	public:
-		using ClassType = OpenGLGlutProcessManagerImpl;
-		using MainFunctionHelperBaseSharedPtr = std::shared_ptr<MainFunctionHelperBase>;
-		using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;		
+    class FRAMEWORK_HIDDEN_DECLARE OpenGLGlutProcessManagerImpl
+    {
+    public:
+        using ClassType = OpenGLGlutProcessManagerImpl;
+        using MainFunctionHelperBaseSharedPtr = std::shared_ptr<MainFunctionHelperBase>;
+        using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
 
-	public:
-                OpenGLGlutProcessManagerImpl(MAYBE_UNUSED int count) noexcept;
+    public:
+        OpenGLGlutProcessManagerImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-	public:
-		static OpenGLGlutCallBackInterfaceSharedPtr GetOpenGLGlutCallBack() noexcept;
+    public:
+        NODISCARD static OpenGLGlutCallBackInterfaceSharedPtr GetOpenGLGlutCallBack() noexcept;
 
-		static void SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& openGLGlutCallBack) noexcept;
-		static void ClearOpenGLGlutCallBack() noexcept;
-		static void SetWindowID(int window);
-		static int GetWindowID();
-		static void SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase) noexcept;
-		static void ClearMainFunctionHelper() noexcept;
-		static MainFunctionHelperBaseSharedPtr GetMainFunctionHelper();
-		static void SetMillisecond(int millisecond);
-		static int GetMillisecond();
+        static void SetOpenGLGlutCallBack(const OpenGLGlutCallBackInterfaceSharedPtr& aOpenGLGlutCallBack) noexcept;
+        static void ClearOpenGLGlutCallBack() noexcept;
+        static void SetWindowID(int window);
+        NODISCARD static int GetWindowID();
+        static void SetMainFunctionHelper(const MainFunctionHelperBaseSharedPtr& mainFunctionHelperBase) noexcept;
+        static void ClearMainFunctionHelper() noexcept;
+        NODISCARD static MainFunctionHelperBaseSharedPtr GetMainFunctionHelper();
+        static void SetMillisecond(int millisecond);
+        NODISCARD static int GetMillisecond();
 
-		static bool PreCreate();
-		static bool Initialize();
-		static void PreIdle();
-		static void Terminate();
+        NODISCARD static bool PreCreate();
+        NODISCARD static bool Initialize();
+        static void PreIdle();
+        static void Terminate();
 
-		static void RenderScene();
-		static void ChangeSize(int width, int height);
-		static void TimerFunction(int timer);
-		static void SpecialKeysDown(int key, int xCoordinate, int yCoordinate);
-		static void KeyboardDown(unsigned char key, int xCoordinate, int yCoordinate);
-		static void SpecialKeysUp(int key, int xCoordinate, int yCoordinate);
-		static void KeyboardUp(unsigned char key, int xCoordinate, int yCoordinate);
-		static void MouseFunction(int button, int state, int xCoordinate, int yCoordinate);
-		static void MotionFunction(int xCoordinate, int yCoordinate);
-		static void PassiveMotion(int xCoordinate, int yCoordinate);
-		static void IdleFunction();
-		static void ProcessMenu(int menuValue);
-		static void TerminateFunction();
+        static void RenderScene();
+        static void ChangeSize(int width, int height);
+        static void TimerFunction(int timer);
+        static void SpecialKeysDown(int key, int xCoordinate, int yCoordinate);
+        static void KeyboardDown(unsigned char key, int xCoordinate, int yCoordinate);
+        static void SpecialKeysUp(int key, int xCoordinate, int yCoordinate);
+        static void KeyboardUp(unsigned char key, int xCoordinate, int yCoordinate);
+        static void MouseFunction(int button, int state, int xCoordinate, int yCoordinate);
+        static void MotionFunction(int xCoordinate, int yCoordinate);
+        static void PassiveMotion(int xCoordinate, int yCoordinate);
+        static void IdleFunction();
+        static void ProcessMenu(int menuValue);
+        static void TerminateFunction();
 
-	private:
-		using MainFunctionHelperBaseWeakPtr = std::weak_ptr<MainFunctionHelperBase>;
+    private:
+        using MainFunctionHelperBaseWeakPtr = std::weak_ptr<MainFunctionHelperBase>;
 
-	private:
-		static OpenGLGlutCallBackInterfaceSharedPtr sm_OpenGLGlutCallBack;
-		static MainFunctionHelperBaseWeakPtr sm_MainFunctionHelper;
-	};
+    private:
+        static OpenGLGlutCallBackInterfaceSharedPtr openGLGlutCallBack;
+        static MainFunctionHelperBaseWeakPtr mainFunctionHelper;
+    };
 }
 
-#endif // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_IMPL_H
+#endif  // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_MANAGE_IMPL_H

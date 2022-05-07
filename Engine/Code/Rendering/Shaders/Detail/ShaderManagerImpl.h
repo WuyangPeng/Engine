@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 14:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 13:37)
 
 #ifndef RENDERING_SHADERS_SHADER_MANAGE_IMPL_H
 #define RENDERING_SHADERS_SHADER_MANAGE_IMPL_H
@@ -21,19 +24,19 @@ namespace Rendering
         using PixelShaderProfile = ShaderFlags::PixelShaderProfile;
 
     public:
-        ShaderManagerImpl(MAYBE_UNUSED int count) noexcept;
+        ShaderManagerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         void SetVertexProfile(VertexShaderProfile profile) noexcept;
-        VertexShaderProfile GetVertexProfile() const noexcept;
+        NODISCARD VertexShaderProfile GetVertexProfile() const noexcept;
 
         void SetPixelProfile(PixelShaderProfile profile) noexcept;
-        PixelShaderProfile GetPixelProfile() const noexcept;
+        NODISCARD PixelShaderProfile GetPixelProfile() const noexcept;
 
     private:
-        VertexShaderProfile m_VertexShaderProfile;
-        PixelShaderProfile m_PixelShaderProfile;
+        VertexShaderProfile vertexShaderProfile;
+        PixelShaderProfile pixelShaderProfile;
     };
 }
 

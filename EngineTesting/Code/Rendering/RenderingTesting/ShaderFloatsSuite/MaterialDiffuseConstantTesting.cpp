@@ -30,7 +30,7 @@ UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, MaterialDiffuseConstantTesting)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26409)
 #include SYSTEM_WARNING_DISABLE(26496)
-void Rendering::MaterialDiffuseConstantTesting ::MainTest()
+void Rendering::MaterialDiffuseConstantTesting::MainTest()
 {
     CameraManager::Create();
     RendererManager::Create();
@@ -48,7 +48,7 @@ void Rendering::MaterialDiffuseConstantTesting ::MainTest()
     CameraManager::Destroy();
 }
 
-void Rendering::MaterialDiffuseConstantTesting ::InitTest()
+void Rendering::MaterialDiffuseConstantTesting::InitTest()
 {
     std::default_random_engine generator;
     std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
@@ -133,7 +133,7 @@ void Rendering::MaterialDiffuseConstantTesting ::InitTest()
     }
 }
 
-void Rendering::MaterialDiffuseConstantTesting ::CopyTest()
+void Rendering::MaterialDiffuseConstantTesting::CopyTest()
 {
     std::default_random_engine generator;
     std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
@@ -192,7 +192,7 @@ void Rendering::MaterialDiffuseConstantTesting ::CopyTest()
     }
 }
 
-void Rendering::MaterialDiffuseConstantTesting ::StreamTest()
+void Rendering::MaterialDiffuseConstantTesting::StreamTest()
 {
     // 	std::default_random_engine generator;
     // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
@@ -264,7 +264,7 @@ void Rendering::MaterialDiffuseConstantTesting ::StreamTest()
     // 	}
 }
 
-void Rendering::MaterialDiffuseConstantTesting ::UpdateTest()
+void Rendering::MaterialDiffuseConstantTesting::UpdateTest()
 {
     // 	std::default_random_engine generator;
     // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);

@@ -1,41 +1,40 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 11:12)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateManagerImpl.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTemplateManagerImpl
-	::sm_Extension(SYSTEM_TEXT(".h"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTemplateManagerImpl
-	::GenerateTemplateManagerImpl(const System::String& templateFileName,  const Replace& replace)
-	:ParentType(templateFileName, sm_Extension,replace) 
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+#include "CoreTools/Helper/ExceptionMacro.h"
 
- 
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTemplateManagerImpl::extension{ SYSTEM_TEXT(".h"s) };
+
+AssistTools::GenerateTemplateManagerImpl::GenerateTemplateManagerImpl(const System::String& templateFileName, const Replace& replace)
+    : ParentType{ templateFileName, extension, replace }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateManagerImpl)
 
-void AssistTools::GenerateTemplateManagerImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& projectCapital,const System::String& managerCapital) const
+void AssistTools::GenerateTemplateManagerImpl::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& projectCapital, const System::String& managerCapital) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable = GetCopyrightVariable(copyrightData);
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital));
+    auto newVariable = GetCopyrightVariable(copyrightData);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital);
 
-	return ParentType::Generate (resourceDirectory, newProjectName, newVariable);
+    return ParentType::Generate(resourceDirectory, newProjectName, newVariable);
 }
 
 /*
@@ -51,8 +50,8 @@ void AssistTools::GenerateTemplateManagerImpl
 #ifndef %ProjectCapital%_%ManagerCapital%_H
 #define %ProjectCapital%_%ManagerCapital%_H
  
-#include "Macro/Macro.h" 
 #include "Engine/Engine.h"
+#include "Macro/Macro.h" 
 
 #endif // %ProjectCapital%_%ManagerCapital%_H 
 
@@ -67,8 +66,8 @@ dll.h
 #ifndef %ProjectCapital%_%ManagerCapital%_DLL_H
 #define %ProjectCapital%_%ManagerCapital%_DLL_H
 
-#include "System/Helper/ExportMacro.h"
 #include "Macro/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_%ProjectCapital%_%ManagerCapital%_NO_IMPORT) || defined(BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC)
 
@@ -126,8 +125,8 @@ fwd.h
 #ifndef %ProjectCapital%_%ManagerCapital%_FWD_H
 #define %ProjectCapital%_%ManagerCapital%_FWD_H
 
-#include "Macro/MacroFwd.h" 
 #include "Engine/EngineFwd.h"
+#include "Macro/MacroFwd.h" 
 
 #endif // %ProjectCapital%_%ManagerCapital%_FWD_H
 
@@ -180,20 +179,20 @@ MiddleLayer.h
 #ifndef %ProjectCapital%_%ManagerCapital%_H
 #define %ProjectCapital%_%ManagerCapital%_H
  
-#include "Macro/Macro.h" 
-#include "ArtificialIntellegence/ArtificialIntellegence.h"
 #include "Audio/Audio.h"
 #include "CameraSystems/CameraSystems.h"
 #include "Event/Event.h"
 #include "GUI/GUI.h"
 #include "Input/Input.h"
+#include "Macro/Macro.h" 
 #include "Message/Message.h"
-#include "Network/Network.h"
 #include "ObjectLogic/ObjectLogic.h"
 #include "PhysicalModelling/PhysicalModelling.h"
-#include "Rendering/Rendering.h"
 #include "Resource/Resource.h"
 #include "System/System.h"
+#include "Network/Network.h"
+#include "Rendering/Rendering.h"
+#include "ArtificialIntellegence/ArtificialIntellegence.h"
 
 #endif // %ProjectCapital%_%ManagerCapital%_H 
 
@@ -208,20 +207,20 @@ MiddleLayerFwd.h
 #ifndef %ProjectCapital%_%ManagerCapital%_FWD_H
 #define %ProjectCapital%_%ManagerCapital%_FWD_H
 
-#include "Macro/MacroFwd.h" 
-#include "ArtificialIntellegence/ArtificialIntellegenceFwd.h"
 #include "Audio/AudioFwd.h"
 #include "CameraSystems/CameraSystemsFwd.h"
 #include "Event/EventFwd.h"
 #include "GUI/GUIFwd.h"
 #include "Input/InputFwd.h"
+#include "Macro/MacroFwd.h" 
 #include "Message/MessageFwd.h"
-#include "Network/NetworkFwd.h"
 #include "ObjectLogic/ObjectLogicFwd.h"
 #include "PhysicalModelling/PhysicalModellingFwd.h"
-#include "Rendering/RenderingFwd.h"
 #include "Resource/ResourceFwd.h"
 #include "System/SystemFwd.h"
+#include "Network/NetworkFwd.h"
+#include "Rendering/RenderingFwd.h"
+#include "ArtificialIntellegence/ArtificialIntellegenceFwd.h"
 
 #endif // %ProjectCapital%_%ManagerCapital%_FWD_H
 

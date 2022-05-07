@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 15:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 17:15)
 
 #ifndef RENDERING_CURVES_SURFACES_BSPLINE_SURFACE_PATCH_H
 #define RENDERING_CURVES_SURFACES_BSPLINE_SURFACE_PATCH_H
@@ -25,62 +28,42 @@ namespace Rendering
         using ParentType = SurfacePatch;
 
     public:
-        // Construction and destruction.   The caller is responsible for deleting
-        // the input arrays if they were dynamically allocated.  Internal copies
-        // of the arrays are made, so to dynamically change control points or
-        // knots you must use the 'SetControlPoint' and 'SetKnot' member functions
-        // of BSplineRectangle<float>.  Spline types for curves are
-        //   open uniform (OU)
-        //   periodic uniform (PU)
-        //   open nonuniform (ON)
-        // For tensor product surfaces, you have to choose a type for each of two
-        // dimensions, leading to nine possible spline types for surfaces.  The
-        // constructors below represent these choices.
-
         // (OU,OU), (OU,PU), (PU,OU), or (PU,PU)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
 
         // (OU,ON) or (PU,ON)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots);
 
         // (ON,OU) or (ON,PU)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen);
 
         // (ON,ON)
-        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots);
+        BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots);
 
-        ~BSplineSurfacePatch();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        BSplineSurfacePatch(const BSplineSurfacePatch&) = default;
-        BSplineSurfacePatch& operator=(const BSplineSurfacePatch&) = default;
-        BSplineSurfacePatch(BSplineSurfacePatch&&) = default;
-        BSplineSurfacePatch& operator=(BSplineSurfacePatch&&) = default;
+        NODISCARD APoint GetPosition(float u, float v) const override;
+        NODISCARD AVector GetDerivativesU(float u, float v) const override;
+        NODISCARD AVector GetDerivativesV(float u, float v) const override;
+        NODISCARD AVector GetDerivativesUU(float u, float v) const override;
+        NODISCARD AVector GetDerivativesUV(float u, float v) const override;
+        NODISCARD AVector GetDerivativesVV(float u, float v) const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
-        // Position and derivatives up to second order.
-        const APoint GetPosition(float u, float v) const override;
-        const AVector GetDerivativesU(float u, float v) const override;
-        const AVector GetDerivativesV(float u, float v) const override;
-        const AVector GetDerivativesUU(float u, float v) const override;
-        const AVector GetDerivativesUV(float u, float v) const override;
-        const AVector GetDerivativesVV(float u, float v) const override;
-        ObjectInterfaceSharedPtr CloneObject() const override;
+    private:
+        int constructor;
 
-    protected:
-        // The class has four constructors, not counting the default one used
-        // for streaming.  The correct constructor needs to be called on a stream
-        // load operation, so this data member stores that information.  The
-        // value is 1, 2, 3, or 4 and refers to the order of the four nondefault
-        // constructors listed previously.
-        int mConstructor;
-
-        //Mathematics::BSplineRectangle<float> mPatch;
+        std::shared_ptr<Mathematics::BSplineRectangle<float>> patch;
     };
-#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(BSplineSurfacePatch);
-    CORE_TOOLS_SHARED_PTR_DECLARE(BSplineSurfacePatch);
+
 #include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(BSplineSurfacePatch);
 }
 
 #endif  // RENDERING_CURVES_SURFACES_BSPLINE_SURFACE_PATCH_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 17:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/18 15:36)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,303 +21,256 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26429)
- 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TubeSurface);
 
-Rendering::TubeSurface::TubeSurface(Mathematics::Curve3<float>* medial, RadialFunction radial, bool closed, const Mathematics::Vector3F& upVector, int numMedialSamples, int numSliceSamples,
-                                     bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax, VertexFormatSharedPtr vformat)
-    : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mMedial(medial), mRadial(radial), mNumMedialSamples(numMedialSamples),
-      mNumSliceSamples(numSliceSamples), mUpVector(upVector), mSin(0), mCos(0), mClosed(closed), mSampleByArcLength(sampleByArcLength)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, TubeSurface)
+
+Rendering::TubeSurface::TubeSurface(const std::shared_ptr<Mathematics::Curve3<float>>& medial,
+                                    RadialFunction radial,
+                                    bool closed,
+                                    const Mathematics::Vector3F& upVector,
+                                    int numMedialSamples,
+                                    int numSliceSamples,
+                                    bool sampleByArcLength,
+                                    bool insideView,
+                                    const Mathematics::Float2& tcoordMin,
+                                    const Mathematics::Float2& tcoordMax,
+                                    VertexFormatSharedPtr vformat)
+    : ParentType{ vformat, nullptr, nullptr },
+      medial{ medial },
+      radial{ radial },
+      numMedialSamples{ numMedialSamples },
+      numSliceSamples{ numSliceSamples },
+      upVector{ upVector },
+      sin{},
+      cos{},
+      closed{ closed },
+      sampleByArcLength{ sampleByArcLength }
 {
-    // Compute the surface vertices.
-    int numVertices = 0;
-    if (mClosed)
+    auto numVertices = 0;
+    if (closed)
     {
-        numVertices = (mNumSliceSamples + 1) * (mNumMedialSamples + 1);
+        numVertices = (numSliceSamples + 1) * (numMedialSamples + 1);
     }
     else
     {
-        numVertices = (mNumSliceSamples + 1) * mNumMedialSamples;
+        numVertices = (numSliceSamples + 1) * numMedialSamples;
     }
 
     SetVertexFormat(vformat);
-    const int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSharedPtr(VertexBuffer::Create(numVertices, vstride)));
+    const auto vstride = vformat->GetStride();
+    SetVertexBuffer(VertexBuffer::Create(numVertices, vstride));
 
     ComputeSinCos();
     ComputeVertices();
 
-    // Compute the surface normals.
     if (GetVertexFormat()->GetIndex(VertexFormatFlags::AttributeUsage::Normal) >= 0)
     {
         ComputeNormals();
     }
 
-    // Compute the surface textures coordinates.
-    if (tcoordMin && tcoordMax)
-    {
-        ComputeUVs(*tcoordMin, *tcoordMax);
-    }
+    ComputeUVs(tcoordMin, tcoordMax);
 
-    // Compute the surface triangle connectivity.
     ComputeIndices(insideView);
 
     UpdateModelSpace(VisualUpdateType::Normals);
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::TubeSurface::~TubeSurface()
+void Rendering::TubeSurface::ComputeSinCos()
 {
-    EXCEPTION_TRY
-    {
-        //  DELETE0(mMedial);
-        //     DELETE1(mSin);
-        //     DELETE1(mCos);
-    }
-    EXCEPTION_ALL_CATCH(Rendering)
-}
+    RENDERING_CLASS_IS_VALID_1;
 
-void Rendering::TubeSurface::ComputeSinCos() noexcept
-{
-    // Compute slice vertex coefficients.  The first and last coefficients
-    // are duplicated to allow a closed cross section that has two different
-    // pairs of texture coordinates at the shared vertex.
+    const auto size = numSliceSamples + 1;
+    sin.resize(size);
+    cos.resize(size);
 
-    mSin = nullptr;  // NEW1<float>(mNumSliceSamples + 1);
-    mCos = nullptr;  //  NEW1<float>(mNumSliceSamples + 1);
-    if (mSin == nullptr)
-        return;
-    if (mCos == nullptr)
-        return;
-    const float invSliceSamples = 1.0f / (float)mNumSliceSamples;
-    for (int i = 0; i < mNumSliceSamples; ++i)
+    const auto invSliceSamples = 1.0f / boost::numeric_cast<float>(numSliceSamples);
+    for (auto i = 0; i < numSliceSamples; ++i)
     {
-        const float angle = Mathematics::MathF::GetTwoPI() * invSliceSamples * i;
-        mCos[i] = Mathematics::MathF::Cos(angle);
-        mSin[i] = Mathematics::MathF::Sin(angle);
+        const auto angle = Mathematics::MathF::GetTwoPI() * invSliceSamples * i;
+        cos.at(i) = Mathematics::MathF::Cos(angle);
+        sin.at(i) = Mathematics::MathF::Sin(angle);
     }
-    mSin[mNumSliceSamples] = mSin[0];
-    mCos[mNumSliceSamples] = mCos[0];
+    sin.at(numSliceSamples) = sin.at(0);
+    cos.at(numSliceSamples) = cos.at(0);
 }
 
 void Rendering::TubeSurface::ComputeVertices()
 {
-    const float tMin = mMedial->GetMinTime();
-    const float tRange = mMedial->GetMaxTime() - tMin;
+    RENDERING_CLASS_IS_VALID_1;
 
-    // Sampling by arc length requires the total length of the curve.
-    float totalLength = 0.0f;
-    if (mSampleByArcLength)
+    const auto tMin = medial->GetMinTime();
+    const auto tRange = medial->GetMaxTime() - tMin;
+
+    auto totalLength = 0.0f;
+    if (sampleByArcLength)
     {
-        totalLength = mMedial->GetTotalLength();
+        totalLength = medial->GetTotalLength();
     }
     else
     {
         totalLength = 0.0f;
     }
 
-    // Vertex construction requires a normalized time (uses a division).
-    float denom = 0.0f;
-    if (mClosed)
+    auto denom = 0.0f;
+    if (closed)
     {
-        denom = 1.0f / (float)mNumMedialSamples;
+        denom = 1.0f / boost::numeric_cast<float>(numMedialSamples);
     }
     else
     {
-        denom = 1.0f / (float)(mNumMedialSamples - 1);
+        denom = 1.0f / boost::numeric_cast<float>(numMedialSamples - 1);
     }
 
-    VertexBufferAccessor vba(*this);
+    VertexBufferAccessor vba{ *this };
 
-    for (int m = 0, v = 0; m < mNumMedialSamples; ++m, ++v)
+    for (auto m = 0, v = 0; m < numMedialSamples; ++m, ++v)
     {
-        float t = 0.0f;
-        if (mSampleByArcLength)
+        auto t = 0.0f;
+        if (sampleByArcLength)
         {
-            t = mMedial->GetTime(m * totalLength * denom);
+            t = medial->GetTime(m * totalLength * denom);
         }
         else
         {
             t = tMin + m * tRange * denom;
         }
 
-        //  float radius = mRadial(t);
+        const auto radius = radial(t);
 
-        // Compute frame.
-        Mathematics::Vector3F position, tangent, normal, binormal;
-        if (mUpVector != Mathematics::Vector3F::GetZero())
+        Mathematics::Vector3F position{};
+        Mathematics::Vector3F tangent{};
+        Mathematics::Vector3F normal{};
+        Mathematics::Vector3F binormal{};
+        if (upVector != Mathematics::Vector3F::GetZero())
         {
-            // Always use 'up' vector N rather than curve normal.  You must
-            // constrain the curve so that T and N are never parallel.  To
-            // build the frame from this, let
-            //     B = Cross(T,N)/Length(Cross(T,N))
-            // and replace
-            //     N = Cross(B,T)/Length(Cross(B,T)).
-            position = mMedial->GetPosition(t);
-            tangent = mMedial->GetTangent(t);
-            binormal = Mathematics::Vector3ToolsF::UnitCrossProduct(tangent, mUpVector);
+            position = medial->GetPosition(t);
+            tangent = medial->GetTangent(t);
+            binormal = Mathematics::Vector3ToolsF::UnitCrossProduct(tangent, upVector);
             normal = Mathematics::Vector3ToolsF::UnitCrossProduct(binormal, tangent);
         }
         else
         {
-            // Use Frenet frame to create slices.
-            mMedial->GetFrame(t, position, tangent, normal, binormal);
+            medial->GetFrame(t, position, tangent, normal, binormal);
         }
 
-        // Compute slice vertices, duplication at end point as noted earlier.
-        // int save = v;
-        for (int i = 0; i < mNumSliceSamples; ++i, ++v)
+        auto save = vba.GetPosition<Mathematics::APointF>(v);
+        for (auto i = 0; i < numSliceSamples; ++i, ++v)
         {
-            // vba.Position<Mathematics::Vector3Df>(v) = position + radius*(mCos[i]*normal +  mSin[i]*binormal);
+            GetVertexBuffer()->SetPosition(vba, v, Mathematics::APointF{ position + radius * (cos.at(i) * normal + sin.at(i) * binormal) });
         }
-
-        // vba.Position<Mathematics::Vector3Df>(v) = vba.Position<Mathematics::Vector3Df>(save);
+        GetVertexBuffer()->SetPosition(vba, v, save);
     }
 
-    if (mClosed)
+    if (closed)
     {
-        for (int i = 0; i <= mNumSliceSamples; ++i)
+        for (auto i = 0; i <= numSliceSamples; ++i)
         {
-            // int i1 = Index(i, mNumMedialSamples);
-            // int i0 = Index(i, 0);
+            const auto i1 = Index(i, numMedialSamples);
+            const auto i0 = Index(i, 0);
 
-            // vba.Position<Mathematics::Vector3Df>(i1) = vba.Position<Mathematics::Vector3Df>(i0);
+            GetVertexBuffer()->SetPosition(vba, i1, vba.GetPosition<Mathematics::APointF>(i0));
         }
     }
 }
 
 void Rendering::TubeSurface::ComputeNormals()
 {
-    int s = 0, sM1 = 0, sP1 = 0, m = 0, mM1 = 0, mP1 = 0;
-    const Mathematics::Vector3F dir0, dir1;
+    RENDERING_CLASS_IS_VALID_1;
 
-    VertexBufferAccessor vba(*this);
+    VertexBufferAccessor vba{ *this };
 
-    // Compute the interior normals (central differences).
-    for (m = 1; m <= mNumMedialSamples - 2; ++m)
+    for (auto m = 1; m <= numMedialSamples - 2; ++m)
     {
-        for (s = 0; s < mNumSliceSamples; ++s)
+        for (auto s = 0; s < numSliceSamples; ++s)
         {
-            sM1 = (s > 0 ? s - 1 : mNumSliceSamples - 1);
-            sP1 = s + 1;
-            mM1 = m - 1;
-            mP1 = m + 1;
+            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
+            const auto sP1 = s + 1;
+            const auto mM1 = m - 1;
+            const auto mP1 = m + 1;
 
-            /*
-            dir0 = vba.Position<Mathematics::Vector3Df>(Index(sM1, m)) -
-                vba.Position<Mathematics::Vector3Df>(Index(sP1, m));
-            dir1 = vba.Position<Mathematics::Vector3Df>(Index(s, mM1)) -
-                vba.Position<Mathematics::Vector3Df>(Index(s, mP1));
-            vba.Normal<Mathematics::Vector3Df>(Index(s, m)) = dir0.UnitCross(dir1);*/
+            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, m)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, m));
+            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, mM1)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, mP1));
+
+            GetVertexBuffer()->SetTriangleNormal(vba, Index(s, m), UnitCross(dir0, dir1));
         }
-
-        /*
-        vba.Normal<Mathematics::Vector3Df>(Index(mNumSliceSamples, m)) =
-            vba.Normal<Mathematics::Vector3Df>(Index(0, m));*/
+        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, m), vba.GetNormal<Mathematics::AVectorF>(Index(0, m)));
     }
 
-    // Compute the boundary normals.
-    if (mClosed)
+    if (closed)
     {
-        // Compute with central differences.
-        for (s = 0; s < mNumSliceSamples; ++s)
+        for (auto s = 0; s < numSliceSamples; ++s)
         {
-            sM1 = (s > 0 ? s - 1 : mNumSliceSamples - 1);
-            sP1 = s + 1;
+            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
+            const auto sP1 = s + 1;
 
-            // m = 0
+            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, 0)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, 0));
+            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, numMedialSamples - 1)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, 1));
+            GetVertexBuffer()->SetTriangleNormal(vba, s, UnitCross(dir0, dir1));
 
-            /*
-            dir0 = vba.Position<Mathematics::Vector3Df>(Index(sM1, 0)) -
-                vba.Position<Mathematics::Vector3Df>(Index(sP1, 0));
-            dir1 = vba.Position<Mathematics::Vector3Df>(Index(s, mNumMedialSamples - 1)) -
-                vba.Position<Mathematics::Vector3Df>(Index(s, 1));
-            vba.Normal<Mathematics::Vector3Df>(s) = dir0.UnitCross(dir1);
-
-            // m = max
-            vba.Normal<Mathematics::Vector3Df>(Index(s, mNumMedialSamples)) =
-                vba.Normal<Mathematics::Vector3Df>(Index(s, 0));*/
+            GetVertexBuffer()->SetTriangleNormal(vba, Index(s, numMedialSamples), vba.GetNormal<Mathematics::AVectorF>(Index(s, 0)));
         }
 
-        /*
-        vba.Normal<Mathematics::Vector3Df>(Index(mNumSliceSamples, 0)) =
-            vba.Normal<Mathematics::Vector3Df>(Index(0, 0));
-        vba.Normal<Mathematics::Vector3Df>(Index(mNumSliceSamples, mNumMedialSamples)) =
-            vba.Normal<Mathematics::Vector3Df>(Index(0, mNumMedialSamples));*/
+        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, 0), vba.GetNormal<Mathematics::AVectorF>(Index(0, 0)));
+        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, numMedialSamples), vba.GetNormal<Mathematics::AVectorF>(Index(0, numMedialSamples)));
     }
     else
     {
-        // Compute with one-sided differences.
-
-        // m = 0
-        for (s = 0; s < mNumSliceSamples; ++s)
+        for (auto s = 0; s < numSliceSamples; ++s)
         {
-            sM1 = (s > 0 ? s - 1 : mNumSliceSamples - 1);
-            sP1 = s + 1;
+            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
+            const auto sP1 = s + 1;
 
-            /*
-            dir0 = vba.Position<Mathematics::Vector3Df>(Index(sM1, 0)) -
-                vba.Position<Mathematics::Vector3Df>(Index(sP1, 0));
-            dir1 = vba.Position<Mathematics::Vector3Df>(Index(s, 0)) -
-                vba.Position<Mathematics::Vector3Df>(Index(s, 1));
-            vba.Normal<Mathematics::Vector3Df>(Index(s, 0)) = dir0.UnitCross(dir1);*/
+            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, 0)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, 0));
+            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, 0)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, 1));
+            GetVertexBuffer()->SetTriangleNormal(vba, Index(s, 0), UnitCross(dir0, dir1));
         }
 
-        /*
-        vba.Normal<Mathematics::Vector3Df>(Index(mNumSliceSamples, 0)) =
-            vba.Normal<Mathematics::Vector3Df>(Index(0, 0));*/
+        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, 0), vba.GetNormal<Mathematics::AVectorF>(Index(0, 0)));
 
-        // m = max-1
-        for (s = 0; s < mNumSliceSamples; ++s)
+        for (auto s = 0; s < numSliceSamples; ++s)
         {
-            sM1 = (s > 0 ? s - 1 : mNumSliceSamples - 1);
-            sP1 = s + 1;
+            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
+            const auto sP1 = s + 1;
 
-            /*
-            dir0 = vba.Position<Mathematics::Vector3Df>(Index(sM1, mNumMedialSamples - 1)) -
-                vba.Position<Mathematics::Vector3Df>(Index(sP1, mNumMedialSamples - 1));
-            dir1 = vba.Position<Mathematics::Vector3Df>(Index(s, mNumMedialSamples - 2)) -
-                vba.Position<Mathematics::Vector3Df>(Index(s, mNumMedialSamples - 1));
-            vba.Normal<Mathematics::Vector3Df>(s) = dir0.UnitCross(dir1);*/
+            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, numMedialSamples - 1)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, numMedialSamples - 1));
+            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, numMedialSamples - 2)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, numMedialSamples - 1));
+            GetVertexBuffer()->SetTriangleNormal(vba, s, UnitCross(dir0, dir1));
         }
 
-        /*
-        vba.Normal<Mathematics::Vector3Df>(Index(mNumSliceSamples, mNumMedialSamples - 1)) =
-            vba.Normal<Mathematics::Vector3Df>(Index(0, mNumMedialSamples - 1));*/
+        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, numMedialSamples - 1), vba.GetNormal<Mathematics::AVectorF>(Index(0, numMedialSamples - 1)));
     }
 }
 
 void Rendering::TubeSurface::ComputeUVs(const Mathematics::Float2& tcoordMin, const Mathematics::Float2& tcoordMax)
 {
-    VertexBufferAccessor vba(*this);
+    RENDERING_CLASS_IS_VALID_1;
 
-    Mathematics::Float2 tcoordRange(tcoordMax[0] - tcoordMin[0], tcoordMax[1] - tcoordMin[1]);
-    const int mMax = (mClosed ? mNumMedialSamples : mNumMedialSamples - 1);
-    for (int m = 0, v = 0; m <= mMax; m++)
+    VertexBufferAccessor vba{ *this };
+
+    Mathematics::Float2 tcoordRange{ tcoordMax[0] - tcoordMin[0], tcoordMax[1] - tcoordMin[1] };
+    const auto mMax = (closed ? numMedialSamples : numMedialSamples - 1);
+    for (auto m = 0, v = 0; m <= mMax; m++)
     {
-        const float mRatio = ((float)m) / ((float)mMax);
-        const float mValue = tcoordMin[1] + mRatio * tcoordRange[1];
-        for (int s = 0; s <= mNumSliceSamples; ++s, ++v)
+        const auto mRatio = Mathematics::MathF::GetValue(m) / Mathematics::MathF::GetValue(mMax);
+        const auto mValue = tcoordMin[1] + mRatio * tcoordRange[1];
+        for (auto s = 0; s <= numSliceSamples; ++s, ++v)
         {
-            const float sRatio = ((float)s) / ((float)mNumSliceSamples);
-            const float sValue = tcoordMin[0] + sRatio * tcoordRange[0];
-            const Mathematics::Float2 tcoord(sValue, mValue);
-            constexpr int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
-            for (int unit = 0; unit < numTCoords; ++unit)
+            const auto sRatio = Mathematics::MathF::GetValue(s) / Mathematics::MathF::GetValue(numSliceSamples);
+            const auto sValue = tcoordMin[0] + sRatio * tcoordRange[0];
+            const Mathematics::Float2 tcoord{ sValue, mValue };
+            constexpr auto numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
+            for (auto unit = 0; unit < numTCoords; ++unit)
             {
                 if (vba.HasTextureCoord(unit))
                 {
-                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "Texture coordinate must be 2D\n");
+                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "纹理坐标必须是2D\n");
 
-                    // vba.TCoord<Float2>(unit, v) = tcoord;
+                    GetVertexBuffer()->SetTextureCoord(vba, v, Mathematics::Vector2F{ tcoord[0], tcoord[1] }, unit);
                 }
             }
         }
@@ -323,103 +279,113 @@ void Rendering::TubeSurface::ComputeUVs(const Mathematics::Float2& tcoordMin, co
 
 void Rendering::TubeSurface::ComputeIndices(bool insideView)
 {
-    insideView;
-    int numTriangles = 0;
-    if (mClosed)
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto numTriangles = 0;
+    if (closed)
     {
-        numTriangles = 2 * mNumSliceSamples * mNumMedialSamples;
+        numTriangles = 2 * numSliceSamples * numMedialSamples;
     }
     else
     {
-        numTriangles = 2 * mNumSliceSamples * (mNumMedialSamples - 1);
+        numTriangles = 2 * numSliceSamples * (numMedialSamples - 1);
     }
 
-    SetIndexBuffer(IndexBufferSharedPtr(IndexBuffer::Create(3 * numTriangles, (int)sizeof(int))));
+    SetIndexBuffer(IndexBuffer::Create(3 * numTriangles, sizeof(int)));
 
-    /*
-    int* indices = (int*)mIBuffer->GetData();
-    int m, mStart, i0, i1, i2, i3, i;
-    for (m = 0, mStart = 0; m < mNumMedialSamples - 1; ++m)
+    auto indices = GetIndexBuffer()->GetWriteSpanIterator();
+    auto start = 0;
+    for (auto m = 0; m < numMedialSamples - 1; ++m)
     {
-        i0 = mStart;
-        i1 = i0 + 1;
-        mStart += mNumSliceSamples + 1;
-        i2 = mStart;
-        i3 = i2 + 1;
-        for (i = 0; i < mNumSliceSamples; ++i, indices += 6)
+        auto i0 = start;
+        auto i1 = i0 + 1;
+        start += numSliceSamples + 1;
+        auto i2 = start;
+        auto i3 = i2 + 1;
+        for (auto i = 0; i < numSliceSamples; ++i, indices += 6)
         {
             if (insideView)
             {
-                indices[0] = i0++;
-                indices[1] = i2;
-                indices[2] = i1;
-                indices[3] = i1++;
-                indices[4] = i2++;
-                indices[5] = i3++;
+                indices.Increase<int32_t>(i0++);
+                indices.Increase<int32_t>(i2);
+                indices.Increase<int32_t>(i1);
+                indices.Increase<int32_t>(i1++);
+                indices.Increase<int32_t>(i2++);
+                indices.Increase<int32_t>(i3++);
             }
-            else  // outside view
+            else
             {
-                indices[0] = i0++;
-                indices[1] = i1;
-                indices[2] = i2;
-                indices[3] = i1++;
-                indices[4] = i3++;
-                indices[5] = i2++;
+                indices.Increase<int32_t>(i0++);
+                indices.Increase<int32_t>(i1);
+                indices.Increase<int32_t>(i2);
+                indices.Increase<int32_t>(i1++);
+                indices.Increase<int32_t>(i3++);
+                indices.Increase<int32_t>(i2++);
             }
         }
     }
-	
-    if (mClosed)
+
+    if (closed)
     {
-        i0 = mStart;
-        i1 = i0 + 1;
-        i2 = 0;
-        i3 = i2 + 1;
-        for (i = 0; i < mNumSliceSamples; ++i, indices += 6)
+        auto i0 = start;
+        auto i1 = i0 + 1;
+        auto i2 = 0;
+        auto i3 = i2 + 1;
+        for (auto i = 0; i < numSliceSamples; ++i, indices += 6)
         {
             if (insideView)
             {
-                indices[0] = i0++;
-                indices[1] = i2;
-                indices[2] = i1;
-                indices[3] = i1++;
-                indices[4] = i2++;
-                indices[5] = i3++;
+                indices.Increase<int32_t>(i0++);
+                indices.Increase<int32_t>(i2);
+                indices.Increase<int32_t>(i1);
+                indices.Increase<int32_t>(i1++);
+                indices.Increase<int32_t>(i2++);
+                indices.Increase<int32_t>(i3++);
             }
-            else  // outside view
+            else
             {
-                indices[0] = i0++;
-                indices[1] = i1;
-                indices[2] = i2;
-                indices[3] = i1++;
-                indices[4] = i3++;
-                indices[5] = i2++;
+                indices.Increase<int32_t>(i0++);
+                indices.Increase<int32_t>(i1);
+                indices.Increase<int32_t>(i2);
+                indices.Increase<int32_t>(i1++);
+                indices.Increase<int32_t>(i3++);
+                indices.Increase<int32_t>(i2++);
             }
         }
-    }*/
-}
-
-void Rendering::TubeSurface::GetTMinSlice(Mathematics::Vector3F* slice)
-{
-    VertexBufferAccessor vba(*this);
-    for (int i = 0; i <= mNumSliceSamples; ++i)
-    {
-        slice[i] = vba.GetPosition<Mathematics::Vector3F>(i);
     }
 }
 
-void Rendering::TubeSurface::GetTMaxSlice(Mathematics::Vector3F* slice)
+std::vector<Mathematics::Vector3F> Rendering::TubeSurface::GetTMinSlice()
 {
-    VertexBufferAccessor vba(*this);
-    int j = GetVertexBuffer()->GetNumElements() - mNumSliceSamples - 1;
-    for (int i = 0; i <= mNumSliceSamples; ++i, ++j)
+    RENDERING_CLASS_IS_VALID_1;
+
+    std::vector<Mathematics::Vector3F> slice{};
+    VertexBufferAccessor vba{ *this };
+    for (auto i = 0; i <= numSliceSamples; ++i)
     {
-        slice[i] = vba.GetPosition<Mathematics::Vector3F>(j);
+        slice.emplace_back(vba.GetPosition<Mathematics::Vector3F>(i));
     }
+    return slice;
+}
+
+std::vector<Mathematics::Vector3F> Rendering::TubeSurface::GetTMaxSlice()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    std::vector<Mathematics::Vector3F> slice{};
+    VertexBufferAccessor vba{ *this };
+    auto j = GetVertexBuffer()->GetNumElements() - numSliceSamples - 1;
+    for (auto i = 0; i <= numSliceSamples; ++i, ++j)
+    {
+        slice.emplace_back(vba.GetPosition<Mathematics::Vector3F>(j));
+    }
+    return slice;
 }
 
 void Rendering::TubeSurface::UpdateSurface()
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     ComputeVertices();
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
 
@@ -427,136 +393,161 @@ void Rendering::TubeSurface::UpdateSurface()
     {
         ComputeNormals();
     }
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer().get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer());
 }
 
-// Streaming support.
-
 Rendering::TubeSurface::TubeSurface(LoadConstructor value)
-    : ParentType(value), mMedial(0), mRadial(0), mNumMedialSamples(0), mNumSliceSamples(0), mUpVector(),
-      mSin(0), mCos(0), mClosed(false), mSampleByArcLength(false)
+    : ParentType{ value },
+      medial{},
+      radial{},
+      numMedialSamples{},
+      numSliceSamples{},
+      upVector{},
+      sin{},
+      cos{},
+      closed{ false },
+      sampleByArcLength{ false }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 void Rendering::TubeSurface::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(mNumMedialSamples);
-    source.Read(mNumSliceSamples);
-    source.ReadAggregate(mUpVector);
-    //   source.Read(mNumSliceSamples+1, mSin);
-    //   source.Read(mNumSliceSamples+1, mCos);
-    mClosed = source.ReadBool();
-    mSampleByArcLength = source.ReadBool();
+    source.Read(numMedialSamples);
+    source.Read(numSliceSamples);
+    source.ReadAggregate(upVector);
+    sin = source.ReadContainerWithNumber<std::vector<float>>(numSliceSamples + 1);
+    cos = source.ReadContainerWithNumber<std::vector<float>>(numSliceSamples + 1);
 
-    // TODO.  See note in TubeSurface::Save.
-    mMedial = 0;
-    mRadial = 0;
+    closed = source.ReadBool();
+    sampleByArcLength = source.ReadBool();
+
+    medial = nullptr;
+    radial = nullptr;
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::TubeSurface::Link(CoreTools::ObjectLink& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     ParentType::Link(source);
 }
 
 void Rendering::TubeSurface::PostLink()
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     ParentType::PostLink();
 }
 
 uint64_t Rendering::TubeSurface::Register(CoreTools::ObjectRegister& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return ParentType::Register(target);
 }
 
 void Rendering::TubeSurface::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target.Write(mNumMedialSamples);
-    target.Write(mNumSliceSamples);
-    target.WriteAggregate(mUpVector);
-    //  target.WriteWithNumber(mNumSliceSamples + 1, mSin);
-    //  target.WriteWithNumber(mNumSliceSamples + 1, mCos);
-    target.Write(mClosed);
-    target.Write(mSampleByArcLength);
-
-    // TODO.  The class Curve3 is abstract and does not know about the data
-    // representation for the derived-class object that is passed to the
-    // TubeSurface constructor.  RadialFunction is a type of function.  Saving
-    // the function pointer is useless since on loading, there is no current
-    // way to 'link' to the correct function pointer.  Because of this, any
-    // loaded TubeSurface object will require the application to manually set
-    // the curve and function via the Medial() and Radial() members.
-    //
-    // Streaming support should  be added to the curve classes.
+    target.Write(numMedialSamples);
+    target.Write(numSliceSamples);
+    target.WriteAggregate(upVector);
+    target.WriteContainerWithoutNumber(sin);
+    target.WriteContainerWithoutNumber(cos);
+    target.Write(closed);
+    target.Write(sampleByArcLength);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 int Rendering::TubeSurface::GetStreamingSize() const
 {
-    int size = ParentType::GetStreamingSize();
-    size += sizeof(mNumMedialSamples);
-    size += sizeof(mNumSliceSamples);
-    size += sizeof(mUpVector);
-    size += (mNumSliceSamples + 1) * sizeof(mSin[0]);
-    size += (mNumSliceSamples + 1) * sizeof(mCos[0]);
-    size += CORE_TOOLS_STREAM_SIZE(mClosed);
-    size += CORE_TOOLS_STREAM_SIZE(mSampleByArcLength);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto size = ParentType::GetStreamingSize();
+    size += CORE_TOOLS_STREAM_SIZE(numMedialSamples);
+    size += CORE_TOOLS_STREAM_SIZE(numSliceSamples);
+    size += CORE_TOOLS_STREAM_SIZE(upVector);
+    size += CORE_TOOLS_STREAM_SIZE(sin);
+    size += CORE_TOOLS_STREAM_SIZE(cos);
+    size += CORE_TOOLS_STREAM_SIZE(closed);
+    size += CORE_TOOLS_STREAM_SIZE(sampleByArcLength);
     return size;
 }
 
-void Rendering::TubeSurface::SetMedial(Mathematics::Curve3<float>* medial) noexcept
+void Rendering::TubeSurface::SetMedial(const std::shared_ptr<Mathematics::Curve3<float>>& aMedial) noexcept
 {
-    mMedial = medial;
+    RENDERING_CLASS_IS_VALID_9;
+
+    medial = aMedial;
 }
 
-const Mathematics::Curve3<float>* Rendering::TubeSurface::GetMedial() const noexcept
+std::shared_ptr<Mathematics::Curve3<float>> Rendering::TubeSurface::GetMedial() const noexcept
 {
-    return mMedial;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return medial;
 }
 
-void Rendering::TubeSurface::SetRadial(RadialFunction radial) noexcept
+void Rendering::TubeSurface::SetRadial(RadialFunction aRadial) noexcept
 {
-    mRadial = radial;
+    RENDERING_CLASS_IS_VALID_9;
+
+    radial = aRadial;
 }
 
 Rendering::TubeSurface::RadialFunction Rendering::TubeSurface::GetRadial() const noexcept
 {
-    return mRadial;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return radial;
 }
 
-void Rendering::TubeSurface::SetUpVector(const Mathematics::Vector3F& upVector) noexcept
+void Rendering::TubeSurface::SetUpVector(const Mathematics::Vector3F& aUpVector) noexcept
 {
-    mUpVector = upVector;
+    RENDERING_CLASS_IS_VALID_9;
+
+    upVector = aUpVector;
 }
 
 const Mathematics::Vector3F& Rendering::TubeSurface::GetUpVector() const noexcept
 {
-    return mUpVector;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return upVector;
 }
 
 int Rendering::TubeSurface::GetNumMedialSamples() const noexcept
 {
-    return mNumMedialSamples;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return numMedialSamples;
 }
 
 int Rendering::TubeSurface::GetNumSliceSamples() const noexcept
 {
-    return mNumSliceSamples;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return numSliceSamples;
 }
 
 int Rendering::TubeSurface::Index(int s, int m) noexcept
 {
-    return s + (mNumSliceSamples + 1) * m;
-}
+    RENDERING_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_POP
+    return s + (numSliceSamples + 1) * m;
+}

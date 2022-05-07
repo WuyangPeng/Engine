@@ -5,6 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/09 16:44)
 
 #include "BoundTreeTesting.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -20,14 +21,21 @@
 #include "Physics/CollisionDetection/BoundTreeDetail.h"
 
 #include <random>
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26435)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26498)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26490)
 using CoreTools::WriteFileManager;
 using std::vector;
 
 namespace Physics
 {
-    template class BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound>;
-    template class BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound>;
+    template class BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
+    template class BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Physics, BoundTreeTesting)
@@ -143,9 +151,9 @@ void Physics::BoundTreeTesting ::InitTest()
 {
     Rendering::VisualSharedPtr firstTrianglesMesh = Rendering::LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/CollisionDetectionSuite/TrianglesMesh.trv"));
 
-    Rendering::TrianglesMeshSharedPtr secondTrianglesMesh;  //        = firstTrianglesMesh.PolymorphicDowncastObjectSmartPointer<Rendering::TrianglesMeshSmartPointer>();
+    Rendering::TrianglesMeshSharedPtr secondTrianglesMesh = boost::polymorphic_pointer_cast<Rendering::TrianglesMesh>(firstTrianglesMesh);
 
-    typedef BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound> BoundTree;
+    typedef BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF> BoundTree;
     BoundTree firstBoundTree(secondTrianglesMesh);
 
     Rendering::TrianglesMeshSharedPtr thirdTrianglesMesh = firstBoundTree.GetMesh();
@@ -156,14 +164,14 @@ void Physics::BoundTreeTesting ::InitTest()
 
     ASSERT_EQUAL(secondTrianglesMesh, fifthTrianglesMesh);
 
-    BoundTree::BoundTreeChildPtr firstChild = firstBoundTree.GetBeginChild();
+    BoundTree::BoundTreeChildSharedPtr firstChild = firstBoundTree.GetBeginChild();
 
     int numTriangles = secondTrianglesMesh->GetNumTriangles();
-    std::vector<Mathematics::FloatAPoint> centroids;
-    const float oneThird = 1.0f / 3.0f;
+    std::vector<Mathematics::APointF> centroids;
+    constexpr float oneThird = 1.0f / 3.0f;
     for (int index = 0; index < numTriangles; ++index)
     {
-        Mathematics::FloatAPoint vertex[3];
+        Mathematics::APointF vertex[3];
         Rendering::TrianglePosition trianglePosition = secondTrianglesMesh->GetModelTriangle(index);
 
         centroids.push_back(oneThird * (trianglePosition.GetFirstPosition() + trianglePosition.GetSecondPosition() + trianglePosition.GetThirdPosition()));
@@ -175,17 +183,17 @@ void Physics::BoundTreeTesting ::InitTest()
         inSplit.push_back(index);
     }
 
-    typedef BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound> BoundTreeChild;
+    typedef BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF> BoundTreeChild;
 
-    BoundTree::BoundTreeChildPtr secondChild(new BoundTreeChild(secondTrianglesMesh, 1,
-                                                                centroids, 0, numTriangles - 1,
-                                                                inSplit, false));
+    BoundTree::BoundTreeChildSharedPtr secondChild(std::make_shared<BoundTreeChild>(secondTrianglesMesh, 1,
+                                                                                    centroids, 0, numTriangles - 1,
+                                                                                    inSplit, false));
 
     ASSERT_TRUE(Approximate(firstChild->GetWorldBound(), secondChild->GetWorldBound(), 1e-8f));
     ASSERT_EQUAL(firstChild->IsInteriorNode(), secondChild->IsInteriorNode());
     ASSERT_EQUAL(firstChild->IsLeafNode(), secondChild->IsLeafNode());
     ASSERT_EQUAL(firstChild->GetNumTriangles(), secondChild->GetNumTriangles());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(firstChild->GetTriangles(), secondChild->GetTriangles());
+    ASSERT_EQUAL(firstChild->GetTriangles(), secondChild->GetTriangles());
 
     firstBoundTree.UpdateWorldBound();
     secondChild->UpdateWorldBound();

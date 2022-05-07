@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 15:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 13:57)
 
 #ifndef RENDERING_SHADERS_DEPTH_STATE_H
 #define RENDERING_SHADERS_DEPTH_STATE_H
@@ -10,64 +13,56 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Flags/DepthStateFlags.h"
+#include "CoreTools/FileManager/FileManagerFwd.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include "CoreTools/ObjectSystems/Object.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 
-namespace CoreTools
-{
-    class WriteFileManager;
-    class ReadFileManager;
-}
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(DepthState, DepthStateImpl);
 
- 
-EXPORT_SHARED_PTR(Rendering, DepthStateImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE DepthState : public CoreTools::Object
     {
     public:
-        void Swap(DepthState& rhs) noexcept;
-     
-         public:
-             TYPE_DECLARE(DepthState);
-             using ClassShareType = CoreTools::CopyUnsharedClasses;
-             ~DepthState() noexcept;
-             DepthState(const DepthState& rhs);
-             DepthState& operator=(const DepthState& rhs);
-             DepthState(DepthState&& rhs) noexcept;
-             DepthState& operator=(DepthState&& rhs) noexcept;
+        COPY_UNSHARED_TYPE_DECLARE(DepthState);
         using ParentType = Object;
         using CompareMode = DepthStateFlags::CompareMode;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        DepthState(); 
+        explicit DepthState(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(DepthState);
 
-        bool IsEnabled() const;
-        bool IsWritable() const;
-        CompareMode GetCompare() const;
+        NODISCARD bool IsEnabled() const noexcept;
+        NODISCARD bool IsWritable() const noexcept;
+        NODISCARD CompareMode GetCompare() const noexcept;
 
-        void SetEnabled(bool enabled);
-        void SetWritable(bool writable);
-        void SetCompare(CompareMode compare);
+        void SetEnabled(bool enabled) noexcept;
+        void SetWritable(bool writable) noexcept;
+        void SetCompare(CompareMode compare) noexcept;
 
         void SaveState(WriteFileManager& manager) const;
         void LoadState(ReadFileManager& manager);
-        ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        PackageType impl;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(DepthState);
+
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SHARED_PTR_DECLARE( DepthState);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(DepthState);
 }
 
 #endif  // RENDERING_SHADERS_DEPTH_STATE_H

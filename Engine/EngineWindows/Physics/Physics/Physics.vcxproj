@@ -141,34 +141,34 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
-  </PropertyGroup>  
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;PHYSICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -179,7 +179,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -192,7 +192,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;PHYSICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -207,7 +207,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -220,7 +220,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;PHYSIC_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -231,20 +231,20 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;PHYSICS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -259,7 +259,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -269,22 +269,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
-    <Text Include="Resource\Schedule.txt" />
-    <Text Include="Resource\Todo\Level 0.txt" />
-    <Text Include="Resource\Todo\Level 1.txt" />
-    <Text Include="Resource\Todo\Level 2.txt" />
-    <Text Include="Resource\Todo\Level 3.txt" />
-    <Text Include="Resource\Todo\Level 4.txt" />
-    <Text Include="Resource\Todo\Level 5.txt" />
-    <Text Include="Resource\Todo\Level 6.txt" />
-    <Text Include="Resource\Todo\Level 7.txt" />
-    <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTree.cpp" />
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeChild.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeProjectionInfo.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeSplitTriangles.cpp" />
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\CollisionGroup.cpp" />
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\CollisionRecord.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\Detail\BoundTreeSplitTrianglesImpl.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\Physics\DllMain.cpp" />
@@ -364,12 +354,26 @@
     <ClInclude Include="..\..\..\Code\Physics\PhysicsImport.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsLib.h" />
     <ClInclude Include="..\..\..\Code\Physics\PhysicsNoImport.h" />
-    <ClInclude Include="..\..\..\Code\Physics\RigidBody\PolyhedralMassProperties.h" />
-    <ClInclude Include="..\..\..\Code\Physics\RigidBody\PolyhedralMassPropertiesDetail.h" />
     <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBody.h" />
     <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyFwd.h" />
     <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyManager.h" />
     <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyManagerDetail.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

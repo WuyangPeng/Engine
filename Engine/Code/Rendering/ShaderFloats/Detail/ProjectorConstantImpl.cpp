@@ -1,138 +1,119 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 17:31)
-
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/07 18:09)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ProjectorConstantImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::vector;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
-Rendering::ProjectorConstantImpl
-	::ProjectorConstantImpl(const ProjectorSharedPtr& projector)
-	:m_Projector{ projector }
+using std::vector;
+
+Rendering::ProjectorConstantImpl::ProjectorConstantImpl(const ProjectorSharedPtr& projector) noexcept
+    : projector{ projector }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ProjectorConstantImpl
-	::ProjectorConstantImpl()
-	:m_Projector{}
+Rendering::ProjectorConstantImpl::ProjectorConstantImpl() noexcept
+    : projector{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ProjectorConstantImpl
-	::~ProjectorConstantImpl()
+CLASS_INVARIANT_STUB_DEFINE(Rendering, ProjectorConstantImpl)
+
+Rendering::ConstProjectorSharedPtr Rendering::ProjectorConstantImpl::GetProjector() const noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,ProjectorConstantImpl)
-
-const Rendering::ConstProjectorSharedPtr Rendering::ProjectorConstantImpl
-	::GetProjector() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_9;	
-
-	if (m_Projector )
-		return m_Projector ;
-	else
-		return ConstProjectorSharedPtr{};
+    if (projector.object)
+        return projector.object;
+    else
+        return nullptr;
 }
 
 void Rendering::ProjectorConstantImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
-    source;
-	//source.ReadSharedPtr(m_Projector);
+    RENDERING_CLASS_IS_VALID_9;
+
+    source.ReadObjectAssociated(projector);
 }
 
-void Rendering::ProjectorConstantImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::ProjectorConstantImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-	//target.WriteSharedPtr(m_Projector);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    target.WriteObjectAssociated(projector);
 }
 
-int Rendering::ProjectorConstantImpl
-	::GetStreamingSize() const
+int Rendering::ProjectorConstantImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return CORE_TOOLS_STREAM_SIZE(m_Projector);
+    return CORE_TOOLS_STREAM_SIZE(projector);
 }
 
-const CoreTools::ObjectSharedPtr Rendering::ProjectorConstantImpl
-	::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ProjectorConstantImpl::GetObjectByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector )
-		return m_Projector->GetObjectByName(name);
-	else
-		return CoreTools::ObjectSharedPtr{};
+    if (projector.object)
+        return projector.object->GetObjectByName(name);
+    else
+        return nullptr;
 }
 
-const vector<CoreTools::ObjectSharedPtr> Rendering::ProjectorConstantImpl
-	::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::ProjectorConstantImpl::GetAllObjectsByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector )
-		return m_Projector->GetAllObjectsByName(name);
-	else
-		return vector<CoreTools::ObjectSharedPtr>{};
+    if (projector.object)
+        return projector.object->GetAllObjectsByName(name);
+    else
+        return vector<CoreTools::ObjectSharedPtr>{};
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::ProjectorConstantImpl
-	::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ProjectorConstantImpl::GetConstObjectByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector )
-		return m_Projector->GetConstObjectByName(name);
-	else
-		return CoreTools::ConstObjectSharedPtr{};
+    if (projector.object)
+        return projector.object->GetConstObjectByName(name);
+    else
+        return nullptr;
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> Rendering::ProjectorConstantImpl
-	::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::ProjectorConstantImpl::GetAllConstObjectsByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	if (m_Projector )
-		return m_Projector->GetAllConstObjectsByName(name);
-	else
-		return vector<CoreTools::ConstObjectSharedPtr>{};
+    if (projector.object)
+        return projector.object->GetAllConstObjectsByName(name);
+    else
+        return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
 void Rendering::ProjectorConstantImpl::Link(CoreTools::ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
-    source;
-	//source.ResolveObjectSharedPtrLink(m_Projector);
+    RENDERING_CLASS_IS_VALID_9;
+
+    source.ResolveLink(projector);
 }
 
 void Rendering::ProjectorConstantImpl::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-	//target.RegisterSharedPtr(m_Projector);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    target.Register(projector);
 }
-
-
-#include STSTEM_WARNING_POP

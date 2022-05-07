@@ -1,50 +1,41 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 21:19)
 
 #ifndef RENDERING_RENDERERS_DX9_TEXTURE_CUBE_H
 #define RENDERING_RENDERERS_DX9_TEXTURE_CUBE_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/Windows/Flags/WindowsFlags.h" 
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "Rendering/Renderers/Detail/PlatformTextureCubeImpl.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 namespace Rendering
 {
-	class RendererImpl;
-	class TextureCube;
-	
-	class RENDERING_HIDDEN_DECLARE Dx9TextureCube : public PlatformTextureCubeImpl
-	{
-	public:
-		using ClassType = Dx9TextureCube;
-		using ParentType = PlatformTextureCubeImpl;
+    class RENDERING_HIDDEN_DECLARE Dx9TextureCube : public PlatformTextureCubeImpl
+    {
+    public:
+        using ClassType = Dx9TextureCube;
+        using ParentType = PlatformTextureCubeImpl;
 
-	public:		
-		Dx9TextureCube(Renderer* renderer, const TextureCube* texture);
- 
-                ~Dx9TextureCube();
-                Dx9TextureCube(const Dx9TextureCube&) = default;
-                Dx9TextureCube& operator=(const Dx9TextureCube&) = default;
-                Dx9TextureCube(Dx9TextureCube&&) = default;
-                Dx9TextureCube& operator=(Dx9TextureCube&&) = default;
+    public:
+        Dx9TextureCube(Renderer* renderer, const TextureCube* texture) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
-		
-		// 纹理操作
-		 void Enable (Renderer* renderer, int textureUnit) override;
-		 void Disable (Renderer* renderer, int textureUnit) override;
-		 void* Lock (int face,int level, BufferLocking mode) override;
-		 void Unlock (int face,int level) override;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	private:
-		//IDirect3DCubeTexture9* mTexture;
-	};
+        // 纹理操作
+        void Enable(Renderer* renderer, int textureUnit) noexcept override;
+        void Disable(Renderer* renderer, int textureUnit) noexcept override;
+        NODISCARD void* Lock(int face, int level, BufferLocking mode) noexcept override;
+        void Unlock(int face, int level) noexcept override;
+    };
 }
 
-#endif // RENDERING_RENDERERS_DX9_TEXTURE_CUBE_H
-
-
+#endif  // RENDERING_RENDERERS_DX9_TEXTURE_CUBE_H

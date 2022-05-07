@@ -1,103 +1,92 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 14:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 16:53)
 
 #include "Rendering/RenderingExport.h"
 
 #include "TransformControllerImpl.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
- 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26440)
-Rendering::TransformControllerImpl
-	::TransformControllerImpl(const TransformF& localTransform) noexcept
-	: m_LocalTransform{ localTransform }
+#include "Rendering/DataTypes/SpecializedIO.h"
+
+Rendering::TransformControllerImpl::TransformControllerImpl(const TransformF& localTransform) noexcept
+    : localTransform{ localTransform }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,TransformControllerImpl)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, TransformControllerImpl)
 
-void Rendering::TransformControllerImpl::SetTransform(const TransformF& localTransform) noexcept
+void Rendering::TransformControllerImpl::SetTransform(const TransformF& aLocalTransform) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_LocalTransform = localTransform;
+    localTransform = aLocalTransform;
 }
 
-const Rendering::TransformF Rendering::TransformControllerImpl::GetTransform() const noexcept
+Rendering::TransformF Rendering::TransformControllerImpl::GetTransform() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_LocalTransform;
+    return localTransform;
 }
 
-int Rendering::TransformControllerImpl
-	::GetStreamingSize() const noexcept
+int Rendering::TransformControllerImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return RENDERING_STREAM_SIZE(m_LocalTransform);
+    return RENDERING_STREAM_SIZE(localTransform);
 }
 
-void Rendering::TransformControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+void Rendering::TransformControllerImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteAggregate(m_LocalTransform);
+    target.WriteAggregate(localTransform);
 }
 
-void Rendering::TransformControllerImpl
-	::Load(CoreTools::BufferSource& source) 
+void Rendering::TransformControllerImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadAggregate(m_LocalTransform);
+    source.ReadAggregate(localTransform);
 }
 
-void Rendering::TransformControllerImpl
-	::SetTranslate(const APoint& translate) noexcept
+void Rendering::TransformControllerImpl::SetTranslate(const APoint& translate) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_LocalTransform.SetTranslate(translate);
+    localTransform.SetTranslate(translate);
 }
 
 void Rendering::TransformControllerImpl::SetRotate(const Matrix& rotate) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_LocalTransform.SetRotate(rotate);
+    localTransform.SetRotate(rotate);
 }
 
-void Rendering::TransformControllerImpl
-	::SetUniformScale(float scale) 
+void Rendering::TransformControllerImpl::SetUniformScale(float scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_LocalTransform.SetUniformScale(scale);
+    localTransform.SetUniformScale(scale);
 }
 
-void Rendering::TransformControllerImpl
-	::SetScale(const APoint& scale)
+void Rendering::TransformControllerImpl::SetScale(const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_LocalTransform.SetScale(scale);
+    localTransform.SetScale(scale);
 }
 
 void Rendering::TransformControllerImpl::SetMatrix(const Matrix& matrix) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_LocalTransform.SetMatrix(matrix);
+    localTransform.SetMatrix(matrix);
 }
-
-
-#include STSTEM_WARNING_POP

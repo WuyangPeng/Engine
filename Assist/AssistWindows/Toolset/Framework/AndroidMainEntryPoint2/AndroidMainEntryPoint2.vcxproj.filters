@@ -30,14 +30,30 @@
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2Lib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -68,21 +84,5 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2Lib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\AndroidMainEntryPoint2\AndroidMainEntryPoint2Main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

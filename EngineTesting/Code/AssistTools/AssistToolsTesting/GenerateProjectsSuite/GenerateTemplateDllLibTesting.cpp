@@ -13,7 +13,7 @@
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateDllLib)
 
 void AssistTools::GenerateTemplateDllLibTesting
-    ::MainTest()
+   ::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(DefaultGenerateToTest); 

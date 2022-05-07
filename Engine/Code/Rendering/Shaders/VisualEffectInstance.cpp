@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 17:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 18:57)
 
 #include "Rendering/RenderingExport.h"
 
@@ -18,54 +21,20 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26456)
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, VisualEffectInstance)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, VisualEffectInstance);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VisualEffectInstance);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VisualEffectInstance);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, VisualEffectInstance);
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                                                                   \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, VisualEffectInstance);
-
 Rendering::VisualEffectInstance::VisualEffectInstance(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-    SELF_CLASS_IS_VALID_0;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
+
 CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, VisualEffectInstance)
 CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, VisualEffectInstance)
 CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, VisualEffectInstance)
@@ -74,91 +43,86 @@ CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, VisualEffectInstance)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, VisualEffectInstance)
 
 Rendering::VisualEffectInstance::VisualEffectInstance(const VisualEffectSharedPtr& effect, int techniqueIndex)
-    : ParentType{ "VisualEffectInstance" }, impl{ make_shared<ImplType>(effect, techniqueIndex) }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::VisualEffectInstance::~VisualEffectInstance()
+    : ParentType{ "VisualEffectInstance" }, impl{ effect, techniqueIndex }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, VisualEffectInstance)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetEffect, const Rendering::ConstVisualEffectSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetTechniqueIndex, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualEffectInstance, GetNumPasses, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPass, int, const Rendering::ConstVisualPassSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPixelParameters, int, const Rendering::ConstShaderParametersSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstVertexParameters, int, const Rendering::ConstShaderParametersSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, const Rendering::ShaderParametersSharedPtr)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetVertexParameters, int, const Rendering::ShaderParametersSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffectInstance, GetEffect, Rendering::ConstVisualEffectSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffectInstance, GetTechniqueIndex, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffectInstance, GetNumPasses, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPass, int, Rendering::ConstVisualPassSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstPixelParameters, int, Rendering::ConstShaderParametersSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetConstVertexParameters, int, Rendering::ConstShaderParametersSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetPixelParameters, int, Rendering::ShaderParametersSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, VisualEffectInstance, GetVertexParameters, int, Rendering::ShaderParametersSharedPtr)
 
 void Rendering::VisualEffectInstance::SetVertexTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetVertexTexture(pass, handle, texture);
 }
 
 void Rendering::VisualEffectInstance::SetPixelTexture(int pass, int handle, const TextureSharedPtr& texture)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPixelTexture(pass, handle, texture);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetVertexConstant(int pass, const std::string& name) const
+Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetVertexConstant(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexConstant(pass, name);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetVertexConstant(int pass, int handle) const
+Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetVertexConstant(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexConstant(pass, handle);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetPixelConstant(int pass, const std::string& name) const
+Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetPixelConstant(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelConstant(pass, name);
 }
 
-const Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetPixelConstant(int pass, int handle) const
+Rendering::ConstShaderFloatSharedPtr Rendering::VisualEffectInstance::GetPixelConstant(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelConstant(pass, handle);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetVertexTexture(int pass, const std::string& name) const
+Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetVertexTexture(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexTexture(pass, name);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetVertexTexture(int pass, int handle) const
+Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetVertexTexture(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetVertexTexture(pass, handle);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixelTexture(int pass, const std::string& name) const
+Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixelTexture(int pass, const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetPixelTexture(pass, name);
 }
 
-const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixelTexture(int pass, int handle) const
+Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixelTexture(int pass, int handle) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -167,42 +131,42 @@ const Rendering::ConstTextureSharedPtr Rendering::VisualEffectInstance::GetPixel
 
 void Rendering::VisualEffectInstance::SetPixelConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPixelConstant(pass, handle, shaderFloat);
 }
 
 void Rendering::VisualEffectInstance::SetVertexConstant(int pass, int handle, const ShaderFloatSharedPtr& shaderFloat)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetVertexConstant(pass, handle, shaderFloat);
 }
 
 int Rendering::VisualEffectInstance::SetPixelTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPixelTexture(pass, name, texture);
 }
 
 int Rendering::VisualEffectInstance::SetVertexTexture(int pass, const std::string& name, const TextureSharedPtr& texture)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetVertexTexture(pass, name, texture);
 }
 
 int Rendering::VisualEffectInstance::SetPixelConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPixelConstant(pass, name, shaderFloat);
 }
 
 int Rendering::VisualEffectInstance::SetVertexConstant(int pass, const std::string& name, const ShaderFloatSharedPtr& shaderFloat)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetVertexConstant(pass, name, shaderFloat);
 }
@@ -210,7 +174,6 @@ int Rendering::VisualEffectInstance::SetVertexConstant(int pass, const std::stri
 CoreTools::ObjectInterfaceSharedPtr Rendering::VisualEffectInstance::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
 
-#include STSTEM_WARNING_POP
+    return std::make_shared<ClassType>(*this);
+}

@@ -1,62 +1,59 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/26 17:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/20 11:39)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "PlatformIndexBufferImpl.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Dx9Renderer/Dx9IndexBuffer.h"
 #include "Rendering/OpenGLRenderer/OpenGLIndexBuffer.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/Renderers/Renderer.h"
 
 using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
+
 Rendering::PlatformIndexBufferImpl::PlatformIndexBufferImpl() noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::PlatformIndexBufferImpl
-	::~PlatformIndexBufferImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;	
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformIndexBufferImpl)
 
-// static 
-Rendering::PlatformIndexBufferImpl:: PlatformIndexBufferPtr Rendering::PlatformIndexBufferImpl
-	::Create(Renderer* renderer, const IndexBuffer* indexBuffer)
+// static
+Rendering::PlatformIndexBufferImpl::PlatformIndexBufferSharedPtr Rendering::PlatformIndexBufferImpl::Create(Renderer* renderer, const IndexBuffer* indexBuffer)
 {
-    switch(renderer->GetRendererType())
+    if (renderer == nullptr)
     {
-    case RendererTypes::Default:
-        return CreateDefault(renderer, indexBuffer);
-    case RendererTypes::Window:
-        return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
-    case RendererTypes::Glut:
-        return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
-    case RendererTypes::OpenGL:
-        return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
-    case RendererTypes::Dx9:
-        return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
-    case RendererTypes::OpenGLES:
-        return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
-    default:
-        return CreateDefault(renderer, indexBuffer);
+        THROW_EXCEPTION(SYSTEM_TEXT("renderer Îª¿Õ¡£"s));
+    }
+
+    switch (renderer->GetRendererType())
+    {
+        case RendererTypes::Default:
+            return CreateDefault(renderer, indexBuffer);
+        case RendererTypes::Window:
+            return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
+        case RendererTypes::Glut:
+            return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+        case RendererTypes::OpenGL:
+            return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+        case RendererTypes::Dx9:
+            return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
+        case RendererTypes::OpenGLES:
+            return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+        default:
+            return CreateDefault(renderer, indexBuffer);
     }
 }
 
-// static 
-Rendering::PlatformIndexBufferImpl:: PlatformIndexBufferPtr Rendering::PlatformIndexBufferImpl
-	:: CreateDefault(Renderer* renderer, const IndexBuffer* indexBuffer)
+// static
+Rendering::PlatformIndexBufferImpl::PlatformIndexBufferSharedPtr Rendering::PlatformIndexBufferImpl::CreateDefault(Renderer* renderer, const IndexBuffer* indexBuffer)
 {
-    return make_shared <OpenGLIndexBuffer>(renderer, indexBuffer);
+    return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
 }
-#include STSTEM_WARNING_POP

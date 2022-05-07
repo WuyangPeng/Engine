@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:34)
 
 #ifndef RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_H
 #define RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_H
@@ -11,38 +14,32 @@
 
 #include "Rendering/Resources/Flags/BufferFlags.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace Rendering
 {
-	template <typename PlatformTextureType>
-	class TextureLockManager : boost::noncopyable
-	{
-	public:
-		typedef TextureLockManager<PlatformTextureType> ClassType;
+    template <typename PlatformTextureType>
+    class TextureLockManager
+    {
+    public:
+        using ClassType = TextureLockManager<PlatformTextureType>;
 
-	public:
-		explicit TextureLockManager(PlatformTextureType& manager);
-		~TextureLockManager();
-		TextureLockManager(const TextureLockManager&) = delete;
-		TextureLockManager& operator=(const TextureLockManager&) = delete;
-		TextureLockManager( TextureLockManager&&) = delete;
-		TextureLockManager& operator=( TextureLockManager&&) = delete;
+    public:
+        explicit TextureLockManager(PlatformTextureType& manager);
+        ~TextureLockManager() noexcept;
+        TextureLockManager(const TextureLockManager& rhs) noexcept = delete;
+        TextureLockManager& operator=(const TextureLockManager& rhs) noexcept = delete;
+        TextureLockManager(TextureLockManager&& rhs) noexcept = delete;
+        TextureLockManager& operator=(TextureLockManager&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
- 
-		void* Lock(int level, BufferLocking mode);
-		void* Lock(int face, int level, BufferLocking mode);
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-		PlatformTextureType& m_Manager;
-		int m_Level;
-		int m_Face;
-	};
+        NODISCARD void* Lock(int alevel, BufferLocking mode);
+        NODISCARD void* Lock(int aFace, int alevel, BufferLocking mode);
+
+    private:
+        PlatformTextureType& manager;
+        int level;
+        int face;
+    };
 }
 
-#endif // RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_H

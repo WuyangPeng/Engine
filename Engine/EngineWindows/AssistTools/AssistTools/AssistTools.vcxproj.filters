@@ -60,44 +60,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>  
-	<Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>	
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -106,30 +68,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.cpp">
       <Filter>BmpColorToGray 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.cpp">
-      <Filter>BmpColorToGray 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.cpp">
-      <Filter>BmpColorToGray 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.cpp">
-      <Filter>BmpToTf 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.cpp">
-      <Filter>FeaturesImporter 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoaderCodes.cpp">
-      <Filter>FeaturesImporter 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.cpp">
-      <Filter>FeaturesImporter 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoaderCodes.cpp">
-      <Filter>FeaturesImporter 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.cpp">
-      <Filter>FxCompiler 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.cpp">
       <Filter>GenerateProjects 源文件</Filter>
@@ -213,15 +151,6 @@
       <Filter>GenerateProjects 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.cpp">
-      <Filter>GenerateProjects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.cpp">
-      <Filter>GenerateProjects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.cpp">
-      <Filter>GenerateProjects 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.cpp">
       <Filter>GenerateProjects 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateBaseImpl.cpp">
@@ -317,9 +246,6 @@
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTestingTemplateVcxprojImpl.cpp">
       <Filter>GenerateProjects 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.cpp">
-      <Filter>BmpToTf 源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistToolsLib.h">
@@ -352,22 +278,10 @@
     <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.h">
       <Filter>BmpColorToGray 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.h">
-      <Filter>BmpColorToGray 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.h">
-      <Filter>BmpColorToGray 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtf.h">
       <Filter>BmpToTf 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtfFwd.h">
-      <Filter>BmpToTf 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.h">
-      <Filter>BmpToTf 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.h">
       <Filter>BmpToTf 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporter.h">
@@ -375,15 +289,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporterFwd.h">
       <Filter>FeaturesImporter 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.h">
-      <Filter>FeaturesImporter 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.h">
-      <Filter>FeaturesImporter 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.h">
-      <Filter>FxCompiler 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompiler.h">
       <Filter>FxCompiler 头文件</Filter>
@@ -479,15 +384,6 @@
       <Filter>GenerateProjects 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.h">
-      <Filter>GenerateProjects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.h">
-      <Filter>GenerateProjects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.h">
-      <Filter>GenerateProjects 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.h">
       <Filter>GenerateProjects 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\Flags\GenerateTemplateReplaceFlags.h">
@@ -598,5 +494,45 @@
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\Helper.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
   </ItemGroup>
 </Project>

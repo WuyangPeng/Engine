@@ -11,16 +11,11 @@
 #include "Framework/MiddleLayer/ModelViewControllerMiddleLayerContainerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-#include "Framework/MiddleLayer/MiddleLayerInterface.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "Framework/MiddleLayer/MiddleLayerInterface.h"
 
-ModelViewController::ModelViewControllerMessage ::ModelViewControllerMessage(int64_t delta)
-    : ParentType(delta), m_Alloc(CoreTools::DisableNotThrow::Disable)
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-ModelViewController::ModelViewControllerMessage ::~ModelViewControllerMessage()
+ModelViewController::ModelViewControllerMessage::ModelViewControllerMessage(int64_t delta)
+    : ParentType(delta), m_Alloc(CoreTools::ConsoleAlloc::Create())
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

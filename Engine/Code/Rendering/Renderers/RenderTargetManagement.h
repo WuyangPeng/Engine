@@ -1,61 +1,51 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 14:38)
 
 #ifndef RENDERING_RENDERERS_RENDER_TARGET_MANAGEMENT_H
 #define RENDERING_RENDERERS_RENDER_TARGET_MANAGEMENT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "RenderersFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
-#include "../Resources/RenderTarget.h"
+#include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/Resources/RenderTarget.h"
+#include "Rendering/Resources/Texture2D.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(RenderTargetManagementImpl);
 
-
 namespace Rendering
 {
-    class Renderer;
-	class RenderTarget;
-	class PlatformRenderTarget;
+    class RENDERING_DEFAULT_DECLARE RenderTargetManagement
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(RenderTargetManagement);
+        using ConstRenderTargetSharedPtr = std::shared_ptr<const RenderTarget>;
+        using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
+        using RendererSharedPtr = std::shared_ptr<Renderer>;
 
-	class RENDERING_DEFAULT_DECLARE RenderTargetManagement  
-	{
-	public:
-		NON_COPY_TYPE_DECLARE(RenderTargetManagement);
-		using RenderTargetConstPtr = std::shared_ptr<const RenderTarget>;
-		using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
-	    using RendererPtr = std::shared_ptr<Renderer>;
+    public:
+        explicit RenderTargetManagement(const RendererSharedPtr& renderer);
 
-	public:
-		explicit RenderTargetManagement(RendererPtr ptr);
-            ~RenderTargetManagement() noexcept = default;
-                RenderTargetManagement(const RenderTargetManagement& rhs) noexcept = delete;
-            RenderTargetManagement& operator=(const RenderTargetManagement& rhs) noexcept = delete;
-                RenderTargetManagement(RenderTargetManagement&& rhs) noexcept = delete;
-            RenderTargetManagement& operator=(RenderTargetManagement&& rhs) noexcept = delete;
-		CLASS_INVARIANT_DECLARE;
-        
-        void Bind (RenderTargetConstPtr renderTarget);
-        void Unbind (RenderTargetConstPtr renderTarget);
-        void Enable (RenderTargetConstPtr renderTarget);
-        void Disable (RenderTargetConstPtr renderTarget);
-        ConstTexture2DSharedPtr ReadColor(int index,RenderTargetConstPtr renderTarget);
+        CLASS_INVARIANT_DECLARE;
 
-        PlatformRenderTargetSharedPtr GetResource (RenderTargetConstPtr renderTarget);
-        
-	private:
+        void Bind(const ConstRenderTargetSharedPtr& renderTarget);
+        void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
+        void Enable(const ConstRenderTargetSharedPtr& renderTarget);
+        void Disable(const ConstRenderTargetSharedPtr& renderTarget);
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
+
+        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstRenderTargetSharedPtr& renderTarget);
+
+    private:
         PackageType impl;
-	};
+    };
 }
 
-#endif // RENDERING_RENDERERS_RENDER_TARGET_MANAGEMENT_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_RENDER_TARGET_MANAGEMENT_H

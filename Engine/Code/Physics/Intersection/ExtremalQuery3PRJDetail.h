@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 17:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 15:22)
 
 #ifndef PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_DETAIL_H
 #define PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_DETAIL_H
@@ -10,47 +13,4 @@
 #include "ExtremalQuery3PRJ.h"
 #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
 
-namespace Physics
-{
-	template <typename Real>
-	ExtremalQuery3PRJ<Real>::ExtremalQuery3PRJ(const ConvexPolyhedron3* polytope)
-		:ExtremalQuery3<Real>(polytope)
-	{
-		mCentroid = mPolytope->ComputeVertexAverage();
-	}
-
-	template <typename Real>
-	ExtremalQuery3PRJ<Real>::~ExtremalQuery3PRJ()
-	{
-	}
-
-	template <typename Real>
-	void ExtremalQuery3PRJ<Real>::GetExtremeVertices(const ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection,int& negativeDirection)
-	{
-		typename ExtremalQuery3<Real>::Vector3D diff = mPolytope->GetVertex(0) - ExtremalQuery3<Real>::mCentroid;
-		Real minValue = Mathematics::Vector3Tools<Real>::DotProduct(direction, diff);
-		Real maxValue = minValue;
-		negativeDirection = 0;
-		positiveDirection = 0;
-
-		const int numVertices = mPolytope->GetNumVertices();
-		for (int i = 1; i < numVertices; ++i)
-		{
-			diff = mPolytope->GetVertex(i) - mCentroid;
-			Real dot = Mathematics::Vector3Tools<Real>::DotProduct(direction, diff);
-			if (dot < minValue)
-			{
-				negativeDirection = i;
-				minValue = dot;
-			}
-			else if (dot > maxValue)
-			{
-				positiveDirection = i;
-				maxValue = dot;
-			}
-		}
-	}
-}
-
-
-#endif // PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_DETAIL_H
+#endif  // PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_DETAIL_H

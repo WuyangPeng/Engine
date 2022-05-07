@@ -1,44 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 10:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 15:53)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererInputDataImpl.h"
-#include "Rendering/Renderers/RendererInput.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/Renderers/RendererInput.h"
 
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Rendering::RendererInputDataImpl::RendererInputDataImpl(MAYBE_UNUSED int count)
-    : m_RendererInput{ make_shared<RendererInput>(Rendering::RendererTypes::Default) }
+Rendering::RendererInputDataImpl::RendererInputDataImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : rendererInput{ std::make_shared<RendererInput>(Rendering::RendererTypes::Default) }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
-
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererInputDataImpl
-	::IsValid() const noexcept
+
+bool Rendering::RendererInputDataImpl::IsValid() const noexcept
 {
-    if(m_RendererInput != nullptr)
+    if (rendererInput != nullptr)
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::RendererInputDataImpl
-::Rebuild(RendererTypes type)
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::RendererInputDataImpl::Rebuild(RendererTypes type)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_RendererInput = make_shared<RendererInput>(type);
+    rendererInput = std::make_shared<RendererInput>(type);
 }
-
-#include STSTEM_WARNING_POP

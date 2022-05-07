@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
 AssistToolsToolset::Placeholder
-	::Placeholder() 
+	::Placeholder() noexcept
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }

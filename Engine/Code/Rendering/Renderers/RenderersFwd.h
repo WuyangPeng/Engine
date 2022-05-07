@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 19:24)
 
 #ifndef RENDERING_RENDERERS_FWD_H
 #define RENDERING_RENDERERS_FWD_H
@@ -11,44 +14,47 @@
 
 namespace Rendering
 {
-     class RendererBasis;
-	 class RendererParameter;
-	 class PlatformVertexFormat;
-	 class VertexFormatManagement;
-	 class PlatformIndexBuffer;
-	 class PlatformVertexBuffer;
+    class RendererBasis;
+    class RendererParameter;
+    class PlatformVertexFormat;
+    class VertexFormatManagement;
+    class PlatformIndexBuffer;
+    class PlatformVertexBuffer;
 
-	 template <typename PlatformBufferType>
-	 class BufferLockManager;
+    template <typename PlatformBufferType>
+    class BufferLockManager;
 
-	 template <typename PlatformBufferType>
-	 class BufferManagement;
+    template <typename PlatformBufferType>
+    class BufferManagement;
 
-	 template <typename BufferManagementType>
-	 class BufferManagementLockEncapsulation;
+    template <typename BufferManagementType>
+    class BufferManagementLockEncapsulation;
 
-	 class PlatformTexture1D;
-	 class PlatformTexture2D;
-	 class PlatformTexture3D;
-	 class PlatformTextureCube;
+    class PlatformTexture1D;
+    class PlatformTexture2D;
+    class PlatformTexture3D;
+    class PlatformTextureCube;
 
-	 template <typename PlatformTextureType>
-	 class TextureLockManager;
+    template <typename PlatformTextureType>
+    class TextureLockManager;
 
-	 template <typename TextureManagementType>
-	 class TextureManagementLockEncapsulation;
+    template <typename TextureManagementType>
+    class TextureManagementLockEncapsulation;
 
-	 template <typename PlatformTextureType>
-	 class TextureManagement;
+    template <typename PlatformTextureType>
+    class TextureManagement;
 
-	 class PlatformRenderTarget;
-	 class RenderTargetManagement;
+    class PlatformRenderTarget;
+    class RenderTargetManagement;
 
-	 enum class RendererTypes;
+    enum class RendererTypes;
 
-	 class Renderer;
-	 using RendererSharedPtr = std::shared_ptr<Renderer>; 
-	 using ConstRendererSharedPtr = std::shared_ptr<const Renderer>;
+    class Renderer;
+    using RendererSharedPtr = std::shared_ptr<Renderer>;
+    using ConstRendererSharedPtr = std::shared_ptr<const Renderer>;
+
+    class SamplerState;
+    class RendererInput;
 }
 
-#endif // RENDERING_RENDERERS_FWD_H
+#endif  // RENDERING_RENDERERS_FWD_H

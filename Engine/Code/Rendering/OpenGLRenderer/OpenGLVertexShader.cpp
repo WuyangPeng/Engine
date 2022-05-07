@@ -1,74 +1,32 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/29 11:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/23 15:57)
 
 #include "Rendering/RenderingExport.h"
- 
+
 #include "OpenGLVertexShader.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-using namespace Rendering;
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-
-PdrVertexShader::PdrVertexShader (Renderer*, const VertexShader* vshader)
+Rendering::PdrVertexShader::PdrVertexShader(Renderer*, MAYBE_UNUSED const VertexShader* vshader) noexcept
+    : ParentType{}, shader{}
 {
-	vshader;
-   /* const char* programText =
-        vshader->GetProgram(VertexShader::GetProfile())->c_str();
-    int programLength = (int)strlen(programText);
-
-    glEnable(GL_VERTEX_PROGRAM_ARB);
-    glGenProgramsARB(1, &mShader);
-    glBindProgramARB(GL_VERTEX_PROGRAM_ARB, mShader);
-    glProgramStringARB(GL_VERTEX_PROGRAM_ARB, GL_PROGRAM_FORMAT_ASCII_ARB,
-        programLength, programText);
-    glDisable(GL_VERTEX_PROGRAM_ARB);*/
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-PdrVertexShader::~PdrVertexShader ()
+CLASS_INVARIANT_STUB_DEFINE(Rendering, PdrVertexShader)
+
+void Rendering::PdrVertexShader::Enable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexShader* vshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
 {
-   // glDeleteProgramsARB(1, &mShader);
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-void PdrVertexShader::Enable (Renderer* renderer,const VertexShader* vshader, const ShaderParameters* parameters)
+void Rendering::PdrVertexShader::Disable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexShader* vshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
 {
-	renderer; vshader; parameters;
-  /*  // Enable the buffer by setting the state.
-    glEnable(GL_VERTEX_PROGRAM_ARB);
-    glBindProgramARB(GL_VERTEX_PROGRAM_ARB, mShader);
-
-    // Set the shader constants.
-    int profile = VertexShader::GetProfile();
-    const int numConstants = vshader->GetNumConstants();
-    for (int i = 0; i < numConstants; ++i)
-    {
-        const int numRegisters = vshader->GetNumRegistersUsed(i);
-        const float* data = parameters->GetConstant(i)->GetData();
-        int baseRegister = vshader->GetBaseRegister(profile, i);
-        for (int j = 0; j < numRegisters; ++j)
-        {
-            glProgramLocalParameter4fvARB(GL_VERTEX_PROGRAM_ARB,
-                (GLuint)baseRegister, data);
-            baseRegister++;
-            data += 4;
-        }
-    }
-
-    SetSamplerState(renderer, vshader, profile, parameters,
-        renderer->mData->mMaxVShaderImages, renderer->mData->mCurrentSS);*/
+    RENDERING_CLASS_IS_VALID_1;
 }
-
-void PdrVertexShader::Disable (Renderer* renderer,
-    const VertexShader* vshader, const ShaderParameters* parameters)
-{
-	renderer; vshader; parameters;
-   /* glDisable(GL_VERTEX_PROGRAM_ARB);
-    int profile = VertexShader::GetProfile();
-    DisableTextures(renderer, vshader, profile, parameters,
-        renderer->mData->mMaxVShaderImages);*/
-}
-
-#include STSTEM_WARNING_POP
+ 

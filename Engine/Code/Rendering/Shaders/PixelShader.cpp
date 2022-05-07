@@ -1,13 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 16:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 14:42)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PixelShader.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -15,42 +19,22 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Renderers/RendererManager.h"
 
-using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26486)
 CORE_TOOLS_RTTI_DEFINE(Rendering, PixelShader);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PixelShader);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PixelShader);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, PixelShader);
 
-Rendering::PixelShader::PixelShader(const string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers)
+Rendering::PixelShader::PixelShader(const std::string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers)
     : ParentType{ programName, numInputs, numOutputs, numConstants, numSamplers }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PixelShader::~PixelShader()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-
-    EXCEPTION_TRY
-    {
-        RENDERER_MANAGE_SINGLETON.UnbindAll(this);
-    }
-    EXCEPTION_ALL_CATCH(Rendering)
-}
-
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, PixelShader)
 
-CoreTools::ObjectInterfaceSharedPtr Rendering::PixelShader::CloneObject() const 
+CoreTools::ObjectInterfaceSharedPtr Rendering::PixelShader::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
 
-#include STSTEM_WARNING_POP
+    return std::make_shared<ClassType>(*this);
+}

@@ -7,23 +7,23 @@
 #ifndef IMAGICS_EXAMPLE_PLACEHOLDER_H
 #define IMAGICS_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Imagics/ImagicsExample/ImagicsExampleDll.h" 
+#include "Example/Imagics/ImagicsExample/ImagicsExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ImagicsExample
 {
-	 class IMAGICS_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class IMAGICS_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // IMAGICS_EXAMPLE_PLACEHOLDER_H
+#endif  // IMAGICS_EXAMPLE_PLACEHOLDER_H

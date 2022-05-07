@@ -103,6 +103,13 @@ Rendering::BufferImpl::SpanIterator Rendering::BufferImpl::GetSpanIterator() con
     return SpanIterator{ data.begin(), data.end() };
 }
 
+Rendering::BufferImpl::WriteSpanIterator Rendering::BufferImpl::GetWriteSpanIterator() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return WriteSpanIterator{ data.begin(), data.end() };
+}
+
 const char* Rendering::BufferImpl::GetReadOnlyData(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;

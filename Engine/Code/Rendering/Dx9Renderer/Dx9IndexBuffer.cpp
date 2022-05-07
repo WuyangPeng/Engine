@@ -1,69 +1,54 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 17:17)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "Dx9IndexBuffer.h"
-
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Contract/Noexcept.h"
-Rendering::Dx9IndexBuffer::Dx9IndexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const IndexBuffer* indexBuffer) noexcept
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+
+Rendering::Dx9IndexBuffer::Dx9IndexBuffer(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const IndexBuffer* indexBuffer) noexcept
     : ParentType{}
 {
- 
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
- 
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::Dx9IndexBuffer
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9IndexBuffer::Enable([[maybe_unused]] Renderer* renderer)
+bool Rendering::Dx9IndexBuffer::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
-
- 
-	
-	CoreTools::DisableNoexcept();
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
-void Rendering::Dx9IndexBuffer::Disable([[maybe_unused]] Renderer* renderer)
-{
-	RENDERING_CLASS_IS_VALID_1;
+#endif  // OPEN_CLASS_INVARIANT
 
- 
-	
-	CoreTools::DisableNoexcept();
+void Rendering::Dx9IndexBuffer::Enable(MAYBE_UNUSED Renderer* renderer) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-void* Rendering::Dx9IndexBuffer::Lock([[maybe_unused]] BufferLocking mode)
+void Rendering::Dx9IndexBuffer::Disable(MAYBE_UNUSED Renderer* renderer) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
-
- 
-	
-	CoreTools::DisableNoexcept();
-
-	return nullptr;
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-void Rendering::Dx9IndexBuffer
-	::Unlock() 
+void* Rendering::Dx9IndexBuffer::Lock(MAYBE_UNUSED BufferLocking mode) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
-	
-	CoreTools::DisableNoexcept();
+    RENDERING_CLASS_IS_VALID_1;
+
+    return nullptr;
+}
+
+void Rendering::Dx9IndexBuffer::Unlock() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
 }

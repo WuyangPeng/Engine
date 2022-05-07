@@ -1,25 +1,20 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 17:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 13:51)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "PlatformShaderImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::PlatformShaderImpl
-	::PlatformShaderImpl()	noexcept
+Rendering::PlatformShaderImpl::PlatformShaderImpl() noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-Rendering::PlatformShaderImpl
-	::~PlatformShaderImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;	
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformShaderImpl)
- 

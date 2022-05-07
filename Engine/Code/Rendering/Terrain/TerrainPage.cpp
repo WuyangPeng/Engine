@@ -1,271 +1,281 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 19:08)
 
 #include "Rendering/RenderingExport.h"
 
-#include "TerrainPage.h" 
-#include "Rendering/SceneGraph/StandardMesh.h"
+#include "TerrainPage.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/SceneGraph/StandardMesh.h"
 
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/Helper/ExceptionMacro.h" 
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26493)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TerrainPage);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainPage);
-CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainPage); 
+CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainPage);
 
-Rendering::TerrainPage
-	::TerrainPage (VertexFormatSharedPtr vformat, int size, unsigned short* heights, const Mathematics::Float2& origin, float minElevation, float maxElevation, float spacing)
-	:ParentType(vformat,VertexBufferSharedPtr(),IndexBufferSharedPtr()),mSize(size),mSizeM1(size - 1),
-     mHeights(heights),mOrigin(origin), mMinElevation(minElevation), mMaxElevation(maxElevation), mSpacing(spacing)
+Rendering::TerrainPage::TerrainPage(const VertexFormatSharedPtr& vformat, int size, const std::vector<uint16_t>& heights, const Mathematics::Float2& origin, float minElevation, float maxElevation, float spacing)
+    : ParentType{ vformat, nullptr, nullptr },
+      pageSize{ size },
+      sizeM1{ size - 1 },
+      heights{ heights },
+      origin{ origin },
+      minElevation{ minElevation },
+      maxElevation{ maxElevation },
+      spacing{ spacing },
+      invSpacing{ 1.0f / spacing },
+      multiplier{ (maxElevation - minElevation) / 65535.0f }
 {
-    // size = 2^p + 1, p <= 7
-    RENDERING_ASSERTION_0(size ==  3 || size ==  5 || size ==   9 || size == 17 || size == 33 || size == 65 || size == 129, "Invalid page size\n");
+    RENDERING_ASSERTION_0(size == 3 || size == 5 || size == 9 || size == 17 || size == 33 || size == 65 || size == 129, "页面大小无效\n");
 
-    mInvSpacing = 1.0f/mSpacing;
-    mMultiplier = (mMaxElevation - mMinElevation)/65535.0f;
-
-    // Create a mesh for the page.
-    const float ext = mSpacing*mSizeM1;
-    TrianglesMeshSharedPtr mesh = StandardMesh(vformat).Rectangle(mSize, mSize, ext, ext);
+    const auto ext = spacing * sizeM1;
+    auto mesh = StandardMesh(vformat).Rectangle(pageSize, pageSize, ext, ext);
     SetVertexFormat(vformat);
-    SetVertexBuffer( mesh->GetVertexBuffer());
-    SetIndexBuffer(mesh->GetIndexBuffer());     
+    SetVertexBuffer(mesh->GetVertexBuffer());
+    SetIndexBuffer(mesh->GetIndexBuffer());
 
-    // Modify the vertices to use the terrain data.
-	VertexBufferAccessor vba(GetVertexFormat(), GetVertexBuffer());
-	int numVertices = GetVertexBuffer()->GetNumElements();
-    for (int i = 0; i < numVertices; ++i)
+    VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
+    auto numVertices = GetVertexBuffer()->GetNumElements();
+    for (auto i = 0; i < numVertices; ++i)
     {
-         const int x = i % mSize;
-         const int y = i / mSize;
+        const auto x = i % pageSize;
+        const auto y = i / pageSize;
 
-		 GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF(GetX(x), GetY(y), GetHeight(i)));       
+        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ GetX(x), GetY(y), GetHeight(i) });
     }
 
-	UpdateModelSpace(VisualUpdateType::Normals);
+    UpdateModelSpace(VisualUpdateType::Normals);
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::TerrainPage
-	::~TerrainPage ()
-{
-	EXCEPTION_TRY
-{
- //DELETE1(mHeights);
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-    
-}
+CLASS_INVARIANT_STUB_DEFINE(Rendering, TerrainPage)
 
-float Rendering::TerrainPage
-	::GetHeight (float x, float y) const
+float Rendering::TerrainPage::GetHeight(float x, float y) const
 {
-    const float xGrid = (x - mOrigin[0]) * mInvSpacing;
-    if (xGrid < 0.0f || xGrid >= (float)mSizeM1)
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto xGrid = (x - origin[0]) * invSpacing;
+    if (xGrid < 0.0f || xGrid >= (float)sizeM1)
     {
-        // Location not in page.
         return Mathematics::MathF::maxReal;
     }
 
-    const float yGrid = (y - mOrigin[1])*mInvSpacing;
-    if (yGrid < 0.0f || yGrid >= (float)mSizeM1)
+    const auto yGrid = (y - origin[1]) * invSpacing;
+    if (yGrid < 0.0f || yGrid >= (float)sizeM1)
     {
-        // Location not in page.
         return Mathematics::MathF::maxReal;
     }
 
-	const float fCol = Mathematics::MathF::Floor(xGrid);
-    const int iCol = (int)fCol;
-	const float fRow = Mathematics::MathF::Floor(yGrid);
-    const int iRow = (int)fRow;
+    const auto fCol = Mathematics::MathF::Floor(xGrid);
+    const auto iCol = boost::numeric_cast<int>(fCol);
+    const auto fRow = Mathematics::MathF::Floor(yGrid);
+    const auto iRow = boost::numeric_cast<int>(fRow);
 
-   const int index = iCol + mSize*iRow;
-  const  float dx = xGrid - fCol;
-  const float dy = yGrid - fRow;
-    float h00 = 0.0f, h10= 0.0f, h01= 0.0f, h11= 0.0f, height= 0.0f;
+    const auto index = iCol + pageSize * iRow;
+    const auto dx = xGrid - fCol;
+    const auto dy = yGrid - fRow;
+    auto height = 0.0f;
 
     if ((iCol & 1) == (iRow & 1))
     {
-        const float diff = dx - dy;
-        h00 = mMinElevation + mMultiplier*mHeights[index];
-        h11 = mMinElevation + mMultiplier*mHeights[index + 1 + mSize];
+        const auto diff = dx - dy;
+        const auto h00 = minElevation + multiplier * heights.at(index);
+        const auto nextIndex = index + 1 + pageSize;
+        const auto h11 = minElevation + multiplier * heights.at(nextIndex);
         if (diff > 0.0f)
         {
-            h10 = mMinElevation + mMultiplier*mHeights[index + 1];
-            height = (1.0f - diff - dy)*h00 + diff*h10 + dy*h11;
+            const auto index1 = index + 1;
+            const auto h10 = minElevation + multiplier * heights.at(index1);
+            height = (1.0f - diff - dy) * h00 + diff * h10 + dy * h11;
         }
         else
         {
-            h01 = mMinElevation + mMultiplier*mHeights[index + mSize];
-            height = (1.0f + diff - dx)*h00 - diff*h01 + dx*h11;
+            const auto index1 = index + pageSize;
+            const auto h01 = minElevation + multiplier * heights.at(index1);
+            height = (1.0f + diff - dx) * h00 - diff * h01 + dx * h11;
         }
     }
     else
     {
-        const float sum = dx + dy;
-        h10 = mMinElevation + mMultiplier*mHeights[index + 1];
-        h01 = mMinElevation + mMultiplier*mHeights[index + mSize];
+        const auto sum = dx + dy;
+        const auto index0 = index + 1;
+        const auto index1 = index + pageSize;
+        const auto h10 = minElevation + multiplier * heights.at(index0);
+        const auto h01 = minElevation + multiplier * heights.at(index1);
         if (sum <= 1.0f)
         {
-            h00 = mMinElevation + mMultiplier*mHeights[index];
-            height = (1.0f - sum)*h00 + dx*h10 + dy*h01;
+            const auto h00 = minElevation + multiplier * heights.at(index);
+            height = (1.0f - sum) * h00 + dx * h10 + dy * h01;
         }
         else
         {
-            h11 = mMinElevation + mMultiplier*mHeights[index + 1 + mSize];
-            height = (sum - 1.0f)*h11 + (1.0f - dy)*h10 + (1.0f - dx)*h01;
+            const auto nextIndex = index + 1 + pageSize;
+            const auto h11 = minElevation + multiplier * heights.at(nextIndex);
+            height = (sum - 1.0f) * h11 + (1.0f - dy) * h10 + (1.0f - dx) * h01;
         }
     }
 
     return height;
 }
 
-
-
-// Streaming support.
-
-Rendering::TerrainPage
-	::TerrainPage (LoadConstructor value)
-    : ParentType(value), mSize(0), mSizeM1(0), mHeights(0),mOrigin(Mathematics::Float2(0.0f, 0.0f)),
-    mMinElevation(0.0f), mMaxElevation(0.0f), mSpacing(0.0f), mInvSpacing(0.0f),  mMultiplier(0.0f)
+Rendering::TerrainPage::TerrainPage(LoadConstructor value)
+    : ParentType{ value },
+      pageSize{ 0 },
+      sizeM1{ 0 },
+      heights{ 0 },
+      origin{ Mathematics::Float2{ 0.0f, 0.0f } },
+      minElevation{ 0.0f },
+      maxElevation{ 0.0f },
+      spacing{ 0.0f },
+      invSpacing{ 0.0f },
+      multiplier{ 0.0f }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::TerrainPage
-	::Load(CoreTools::BufferSource& source)
+void Rendering::TerrainPage::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-	ParentType::Load(source);
+    ParentType::Load(source);
 
-    source.Read(mSize);
-    const int numVertices = mSize*mSize;
-  //  source.Read(numVertices, mHeights);
-    source.ReadAggregate(mOrigin);
-    source.Read(mMinElevation);
-    source.Read(mMaxElevation);
-    source.Read(mSpacing);
+    source.Read(pageSize);
 
-    mSizeM1 = mSize - 1;
-    mInvSpacing = 1.0f/mSpacing;
-    mMultiplier = (mMaxElevation - mMinElevation)/65535.0f;
+    heights = source.ReadContainerWithNumber<std::vector<uint16_t>>(pageSize * pageSize);
+    source.ReadAggregate(origin);
+    source.Read(minElevation);
+    source.Read(maxElevation);
+    source.Read(spacing);
+
+    sizeM1 = pageSize - 1;
+    invSpacing = 1.0f / spacing;
+    multiplier = (maxElevation - minElevation) / 65535.0f;
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::TerrainPage
-	::Link(CoreTools::ObjectLink& source)
+void Rendering::TerrainPage::Link(CoreTools::ObjectLink& source)
 {
-	ParentType::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
 }
 
-void Rendering::TerrainPage
-	::PostLink ()
+void Rendering::TerrainPage::PostLink()
 {
-	ParentType::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-uint64_t Rendering::TerrainPage
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::TerrainPage::Register(CoreTools::ObjectRegister& target) const
 {
-	return ParentType::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::TerrainPage
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::TerrainPage::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-	ParentType::Save(target);
+    ParentType::Save(target);
 
-    target.Write(mSize);
-    const int numVertices = mSize*mSize;
-   // target.WriteWithNumber(numVertices, mHeights);
-    target.WriteAggregate(mOrigin);
-    target.Write(mMinElevation);
-    target.Write(mMaxElevation);
-    target.Write(mSpacing);
+    target.Write(pageSize);
+
+    target.WriteContainerWithoutNumber(heights);
+    target.WriteAggregate(origin);
+    target.Write(minElevation);
+    target.Write(maxElevation);
+    target.Write(spacing);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::TerrainPage
-	::GetStreamingSize () const
+int Rendering::TerrainPage::GetStreamingSize() const
 {
-	int size = ParentType::GetStreamingSize();
-    size += sizeof(mSize);
-    size += mSize*mSize*sizeof(mHeights[0]);
-    size += sizeof(mOrigin);
-    size += sizeof(mMinElevation);
-    size += sizeof(mMaxElevation);
-    size += sizeof(mSpacing);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto size = ParentType::GetStreamingSize();
+    size += CORE_TOOLS_STREAM_SIZE(pageSize);
+    size += pageSize * pageSize * CORE_TOOLS_STREAM_SIZE(heights.at(0));
+    size += CORE_TOOLS_STREAM_SIZE(origin);
+    size += CORE_TOOLS_STREAM_SIZE(minElevation);
+    size += CORE_TOOLS_STREAM_SIZE(maxElevation);
+    size += CORE_TOOLS_STREAM_SIZE(spacing);
     return size;
 }
 
-
- int Rendering::TerrainPage
-	::GetSize () const noexcept
+int Rendering::TerrainPage::GetSize() const noexcept
 {
-	return mSize;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return pageSize;
 }
 
- const unsigned short* Rendering::TerrainPage
-	::GetHeights () const noexcept
+std::vector<uint16_t> Rendering::TerrainPage::GetHeights() const noexcept
 {
-	return mHeights;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return heights;
 }
 
- const Mathematics:: Float2& Rendering::TerrainPage
-	::GetOrigin () const noexcept
+const Mathematics::Float2& Rendering::TerrainPage::GetOrigin() const noexcept
 {
-	return mOrigin;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return origin;
 }
 
- float Rendering::TerrainPage
-	::GetMinElevation () const noexcept
+float Rendering::TerrainPage::GetMinElevation() const noexcept
 {
-	return mMinElevation;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return minElevation;
 }
 
- float Rendering::TerrainPage
-	::GetMaxElevation () const noexcept
+float Rendering::TerrainPage::GetMaxElevation() const noexcept
 {
-	return mMaxElevation;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return maxElevation;
 }
 
- float Rendering::TerrainPage
-	::GetSpacing () const noexcept
+float Rendering::TerrainPage::GetSpacing() const noexcept
 {
-	return mSpacing;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return spacing;
 }
 
- float Rendering::TerrainPage
-	::GetX (int x) const
+float Rendering::TerrainPage::GetX(int x) const
 {
-     return mOrigin[0] + mSpacing * (float)x;
- }
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
- float Rendering::TerrainPage
-	::GetY (int y) const
-{
-     return mOrigin[1] + mSpacing * (float)y;
- }
-
- float Rendering::TerrainPage
-	::GetHeight (int index) const noexcept
-{
-	return mMinElevation + mMultiplier*(float)mHeights[index];
+    return origin[0] + spacing * boost::numeric_cast<float>(x);
 }
 
-#include STSTEM_WARNING_POP
+float Rendering::TerrainPage::GetY(int y) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return origin[1] + spacing * boost::numeric_cast<float>(y);
+}
+
+float Rendering::TerrainPage::GetHeight(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return minElevation + multiplier * boost::numeric_cast<float>(heights.at(index));
+}

@@ -1,31 +1,34 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 16:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 13:26)
 
 #ifndef FRAMEWORK_CONSOLE_CONSOLE_CALL_BACK_INTERFACE_H
 #define FRAMEWORK_CONSOLE_CONSOLE_CALL_BACK_INTERFACE_H
 
-#include "Framework/FrameworkDll.h" 
+#include "Framework/FrameworkDll.h"
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE ConsoleCallBackInterface
-	{
-	public:
-		using ClassType = ConsoleCallBackInterface;
-	
-	public:
-		ConsoleCallBackInterface() noexcept = default;
-		virtual ~ConsoleCallBackInterface() noexcept = default;
-		ConsoleCallBackInterface(const ConsoleCallBackInterface&) noexcept = default;
-		ConsoleCallBackInterface& operator=(const ConsoleCallBackInterface&) noexcept = default;
-		ConsoleCallBackInterface(ConsoleCallBackInterface&&) noexcept = default;
-		ConsoleCallBackInterface& operator=(ConsoleCallBackInterface&&) noexcept = default;
+    class FRAMEWORK_DEFAULT_DECLARE ConsoleCallBackInterface
+    {
+    public:
+        using ClassType = ConsoleCallBackInterface;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;  
-	};
+    public:
+        ConsoleCallBackInterface() noexcept = default;
+        virtual ~ConsoleCallBackInterface() noexcept = default;
+        ConsoleCallBackInterface(const ConsoleCallBackInterface& rhs) noexcept = default;
+        ConsoleCallBackInterface& operator=(const ConsoleCallBackInterface& rhs) noexcept = default;
+        ConsoleCallBackInterface(ConsoleCallBackInterface&& rhs) noexcept = default;
+        ConsoleCallBackInterface& operator=(ConsoleCallBackInterface&& rhs) noexcept = default;
+
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+    };
 }
 
-#endif // FRAMEWORK_CONSOLE_CONSOLE_CALL_BACK_INTERFACE_H
+#endif  // FRAMEWORK_CONSOLE_CONSOLE_CALL_BACK_INTERFACE_H

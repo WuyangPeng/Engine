@@ -1,46 +1,48 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 14:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 17:11)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ControllerKeyInfo.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
- 
-Rendering::ControllerKeyInfo
-	::ControllerKeyInfo(float normTime, int firstIndex, int secondIndex) noexcept
-	:m_NormTime{ normTime }, m_FirstIndex{ firstIndex }, m_SecondIndex{ secondIndex }
+
+Rendering::ControllerKeyInfo::ControllerKeyInfo(float normTime, int firstIndex, int secondIndex) noexcept
+    : normTime{ normTime }, firstIndex{ firstIndex }, secondIndex{ secondIndex }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::ControllerKeyInfo::ControllerKeyInfo() noexcept
-    : m_NormTime{ 0.0f }, m_FirstIndex{ 0 }, m_SecondIndex{ 0 }
+    : normTime{ 0.0f }, firstIndex{ 0 }, secondIndex{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,ControllerKeyInfo)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, ControllerKeyInfo)
 
 float Rendering::ControllerKeyInfo::GetNormTime() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_NormTime;
+    return normTime;
 }
 
 int Rendering::ControllerKeyInfo::GetFirstIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_FirstIndex;
+    return firstIndex;
 }
 
 int Rendering::ControllerKeyInfo::GetSecondIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_SecondIndex;
+    return secondIndex;
 }

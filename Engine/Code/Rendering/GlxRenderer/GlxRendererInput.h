@@ -1,30 +1,24 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 13:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/24 11:10)
 
 #ifndef RENDERING_GLX_RENDERER_GLX_RENDERER_INPUT_H
 #define RENDERING_GLX_RENDERER_GLX_RENDERER_INPUT_H
 
-#include "Rendering/RenderingDll.h" 
-
-//#include "Wm5GlxExtensions.h"
+#include "Rendering/RenderingDll.h"
 
 namespace Rendering
 {
-
-	class RendererInput
-	{
-	public:
-		// Input parameter.
-		//Display* mDisplay;
-
-		// Output parameter.
-		//XVisualInfo* mVisual;
-		//GLXContext mContext;
-	};
+    class RendererInput
+    {
+    public:
+    };
 
 }
 
-#endif // RENDERING_GLX_RENDERER_GLX_RENDERER_INPUT_H
+#endif  // RENDERING_GLX_RENDERER_GLX_RENDERER_INPUT_H

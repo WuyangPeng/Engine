@@ -11,7 +11,7 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, MaterialTesting)
 
-void Rendering::MaterialTesting ::MainTest()
+void Rendering::MaterialTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializers();
 
@@ -20,7 +20,7 @@ void Rendering::MaterialTesting ::MainTest()
     CoreTools::InitTerm::ExecuteTerminators();
 }
 
-void Rendering::MaterialTesting ::BaseTest()
+void Rendering::MaterialTesting::BaseTest()
 {
     auto firstMaterial = Material::Create();
 

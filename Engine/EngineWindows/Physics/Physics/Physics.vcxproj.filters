@@ -81,44 +81,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\..\Code\Physics\DllLib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -154,6 +116,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Physics\LCPSolver\LCPSolverManager.cpp">
       <Filter>LCPSolver 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTreeChild.cpp">
+      <Filter>CollisionDetection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\BoundTree.cpp">
+      <Filter>CollisionDetection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\CollisionRecord.cpp">
+      <Filter>CollisionDetection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\CollisionDetection\CollisionGroup.cpp">
+      <Filter>CollisionDetection 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,13 +326,7 @@
     <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyManager.h">
       <Filter>RigidBody 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\RigidBody\PolyhedralMassProperties.h">
-      <Filter>RigidBody 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Physics\RigidBody\RigidBodyManagerDetail.h">
-      <Filter>RigidBody 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Physics\RigidBody\PolyhedralMassPropertiesDetail.h">
       <Filter>RigidBody 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Physics\DllLib.h">
@@ -376,5 +344,45 @@
     <ClInclude Include="..\..\..\Code\Physics\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
   </ItemGroup>
 </Project>

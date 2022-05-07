@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 16:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:35)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_H
@@ -12,37 +15,37 @@
 
 namespace Framework
 {
-	template <typename AndroidProcess>
-	class AndroidFrameBuild
-	{
-	public:
-		using ClassType = AndroidFrameBuild<AndroidProcess>;
-		using AndroidApp = System::AndroidApp;
+    template <typename AndroidProcess>
+    class AndroidFrameBuild
+    {
+    public:
+        using ClassType = AndroidFrameBuild<AndroidProcess>;
+        using AndroidApp = System::AndroidApp;
 
-	public:
-		explicit AndroidFrameBuild(AndroidApp* state);
-		virtual ~AndroidFrameBuild() = default;
-		AndroidFrameBuild(const AndroidFrameBuild& rhs) noexcept = default;
-		AndroidFrameBuild& operator=(const AndroidFrameBuild& rhs) noexcept = default;
-		AndroidFrameBuild(AndroidFrameBuild&& rhs) noexcept = default;
-		AndroidFrameBuild& operator=(AndroidFrameBuild&& rhs) noexcept = default;
+    public:
+        explicit AndroidFrameBuild(AndroidApp* state);
+        virtual ~AndroidFrameBuild() noexcept = default;
+        AndroidFrameBuild(const AndroidFrameBuild& rhs) noexcept = default;
+        AndroidFrameBuild& operator=(const AndroidFrameBuild& rhs) noexcept = default;
+        AndroidFrameBuild(AndroidFrameBuild&& rhs) noexcept = default;
+        AndroidFrameBuild& operator=(AndroidFrameBuild&& rhs) noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		void EnterMessageLoop();
+        void EnterMessageLoop();
 
-		AndroidApp* GetAndroidApp() noexcept;
+        NODISCARD AndroidApp* GetAndroidApp() noexcept;
 
-	private:
-		bool InitApplication();
+    private:
+        NODISCARD bool InitApplication();
 
-	private:
-		static constexpr auto sm_Interval = 60;
+    private:
+        static constexpr auto interval = 60;
 
-		AndroidApp* m_State;
-		AndroidProcess m_AndroidProcess;
-		AndroidMessageLoop m_AndroidMessageLoop;
-	};
+        AndroidApp* state;
+        AndroidProcess androidProcess;
+        AndroidMessageLoop androidMessageLoop;
+    };
 }
 
-#endif // FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_H
+#endif  // FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_H

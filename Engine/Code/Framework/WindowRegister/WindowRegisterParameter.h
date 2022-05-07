@@ -1,44 +1,49 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 11:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 17:17)
 
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_PARAMETER_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_PARAMETER_H
 
 #include "Framework/FrameworkDll.h"
 
+#include "System/Windows/Flags/WindowsClassStyleFlags.h"
 #include "System/Windows/Flags/WindowsFlags.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "System/Windows/Flags/WindowsClassStyleFlags.h"
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE WindowRegisterParameter
-	{
-	public:
-		using ClassType = WindowRegisterParameter;
-		using HInstance = System::WindowsHInstance;
-		using WindowClassStyle = System::WindowsClassStyle;
+    class FRAMEWORK_DEFAULT_DECLARE WindowRegisterParameter
+    {
+    public:
+        using ClassType = WindowRegisterParameter;
+        using HInstance = System::WindowsHInstance;
+        using WindowClassStyle = System::WindowsClassStyle;
 
-	public:
-		explicit WindowRegisterParameter(HInstance instance, WindowClassStyle styles = WindowClassStyle::CommonUse,
-										 int windowClassExtra = 0, int windowExtra = 0);
+    public:
+        explicit WindowRegisterParameter(HInstance instance,
+                                         WindowClassStyle styles = WindowClassStyle::CommonUse,
+                                         int windowClassExtra = 0,
+                                         int windowExtra = 0);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		HInstance GetHInstance() const noexcept;
-		WindowClassStyle GetStyle() const noexcept;
-		int GetWindowClassExtra() const noexcept;
-		int GetWindowExtra() const noexcept;
+        NODISCARD HInstance GetHInstance() const noexcept;
+        NODISCARD WindowClassStyle GetStyle() const noexcept;
+        NODISCARD int GetWindowClassExtra() const noexcept;
+        NODISCARD int GetWindowExtra() const noexcept;
 
-	private:
-		HInstance m_Instance;
-		WindowClassStyle m_Style;
-		int m_WindowClassExtra;
-		int m_WindowExtra;
-	};
+    private:
+        HInstance instance;
+        WindowClassStyle style;
+        int windowClassExtra;
+        int windowExtra;
+    };
 }
 
-#endif // FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_PARAMETER_H
+#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_PARAMETER_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 09:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 15:15)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_H
@@ -11,37 +14,32 @@
 
 #include "WindowCreateFwd.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
 #include <string>
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(WindowCreateHandleImpl);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE WindowCreateHandle 
-	{
-	public:
-		NON_COPY_TYPE_DECLARE(WindowCreateHandle);
-		using HWnd = System::WindowsHWnd;
+    class FRAMEWORK_DEFAULT_DECLARE WindowCreateHandle
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(WindowCreateHandle);
+        using WindowsHWnd = System::WindowsHWnd;
 
-	public:
-		WindowCreateHandle(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size);
-		~WindowCreateHandle() noexcept = default;
-		WindowCreateHandle(const WindowCreateHandle& rhs) noexcept = delete;
-		WindowCreateHandle& operator=(const WindowCreateHandle& rhs) noexcept = delete;
-		WindowCreateHandle(WindowCreateHandle&& rhs) noexcept;
-		WindowCreateHandle& operator=(WindowCreateHandle&& rhs) noexcept;
+    public:
+        WindowCreateHandle(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		HWnd GetHwnd() const noexcept;
+        NODISCARD WindowsHWnd GetHwnd() const noexcept;
 
-		void SetMainWindow();
+        void SetMainWindow();
 
-	private:
-                PackageType impl;
-	};
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_H
+#endif  // FRAMEWORK_WINDOW_CREATE_WINDOW_CREATE_HANDLE_H

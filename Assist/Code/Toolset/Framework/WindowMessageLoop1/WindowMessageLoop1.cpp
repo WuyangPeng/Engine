@@ -11,7 +11,7 @@
 
 using namespace std::literals;
 
-Framework::WindowMessageLoop1 ::WindowMessageLoop1(HInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+Framework::WindowMessageLoop1::WindowMessageLoop1(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ instance, commandLine, information, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -19,12 +19,12 @@ Framework::WindowMessageLoop1 ::WindowMessageLoop1(HInstance instance, const cha
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowMessageLoop1)
 
-int Framework::WindowMessageLoop1 ::EnterMessageLoop()
+int Framework::WindowMessageLoop1::EnterMessageLoop()
 {
     auto hwnd = GetHwnd();
 
     System::String className{};
-    [[maybe_unused]] auto value = System::GetSystemClassName(hwnd, className);
+    [[maybe_unused]] const auto value = System::GetSystemClassName(hwnd, className);
 
     EnterOldMessageLoop(className);
     EnterNewMessageLoop(className);
@@ -35,14 +35,13 @@ int Framework::WindowMessageLoop1 ::EnterMessageLoop()
 #include STSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26461)
-void Framework::WindowMessageLoop1 ::DisplayFunction([[maybe_unused]] HWnd hwnd, [[maybe_unused]] int64_t timeDelta) noexcept
+void Framework::WindowMessageLoop1::DisplayFunction([[maybe_unused]] WindowsHWnd hwnd, [[maybe_unused]] int64_t timeDelta) noexcept
 {
-    
 }
 
 #include STSTEM_WARNING_POP
 
-void Framework::WindowMessageLoop1 ::EnterOldMessageLoop(const String& className)
+void Framework::WindowMessageLoop1::EnterOldMessageLoop(const String& className)
 {
     auto instance = System::GetHInstance();
 
@@ -58,7 +57,7 @@ void Framework::WindowMessageLoop1 ::EnterOldMessageLoop(const String& className
     loop.EnterMessageLoop(create.GetHwnd());
 }
 
-void Framework::WindowMessageLoop1 ::EnterNewMessageLoop(const String& className)
+void Framework::WindowMessageLoop1::EnterNewMessageLoop(const String& className)
 {
     auto instance = System::GetHInstance();
 

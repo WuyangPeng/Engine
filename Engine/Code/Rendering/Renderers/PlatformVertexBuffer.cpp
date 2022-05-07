@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒıÇæ°æ±¾£º0.0.0.3 (2019/07/29 10:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒıÇæ°æ±¾£º0.8.0.6 (2022/04/21 19:00)
 
 #include "Rendering/RenderingExport.h"
 
@@ -19,23 +22,18 @@ Rendering::PlatformVertexBuffer::PlatformVertexBuffer(Renderer* renderer, const 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::PlatformVertexBuffer::~PlatformVertexBuffer()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformVertexBuffer)
 
 void Rendering::PlatformVertexBuffer::Enable(Renderer* renderer, unsigned int vertexSize, unsigned int streamIndex, unsigned int offset)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Enable(renderer, vertexSize, streamIndex, offset);
 }
 
 void Rendering::PlatformVertexBuffer::Disable(Renderer* renderer, unsigned int streamIndex)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Disable(renderer, streamIndex);
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 18:16)
 
 #ifndef RENDERING_DX9_RENDERER_DX9_SHADER_H
 #define RENDERING_DX9_RENDERER_DX9_SHADER_H
@@ -10,31 +13,28 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Dx9RendererData.h"
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Shaders/ShaderBase.h"
 #include "Rendering/Shaders/ShaderParameters.h"
 
 namespace Rendering
 {
-	class Renderer;
+    class Dx9Shader
+    {
+    public:
+        using ClassType = Dx9Shader;
 
-	class Dx9Shader
-	{
-	public:
-		// Construction and destruction.  The derived classes are PdrVertexShader
-		// and PdrPixelShader.  Both classes hide the base-class destructor.  This
-		// is not a problem because the derived-class destructors are called
-		// explicitly when the shaders are destroyed by Renderer.
-            Dx9Shader() noexcept;
- ;
-
-	protected:
-		void SetSamplerState(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, 
-							 int maxSamplers,DWORD base, Dx9RendererData::SamplerState* currentSS);
-
-		void DisableTextures(Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers,DWORD base);
-	};
-
+    public:
+        Dx9Shader() noexcept;
+        virtual ~Dx9Shader() noexcept = default;
+        Dx9Shader(const Dx9Shader& rhs) noexcept = default;
+        Dx9Shader& operator=(const Dx9Shader& rhs) noexcept = default;
+        Dx9Shader(Dx9Shader&& rhs) noexcept = default;
+        Dx9Shader& operator=(Dx9Shader&& rhs) noexcept = default;
+        ;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+    };
 
 }
 
-#endif // RENDERING_DX9_RENDERER_DX9_SHADER_H
+#endif  // RENDERING_DX9_RENDERER_DX9_SHADER_H

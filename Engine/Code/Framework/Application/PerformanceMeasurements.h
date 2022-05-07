@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 13:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 10:52)
 
 #ifndef FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_H
 #define FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_H
@@ -11,9 +14,10 @@
 
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+
 #include <string>
 
-FRAMEWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(PerformanceMeasurements,PerformanceMeasurementsImpl);
+FRAMEWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(PerformanceMeasurements, PerformanceMeasurementsImpl);
 
 namespace Framework
 {
@@ -27,8 +31,8 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        double GetFrameRate() const;
-        std::string GetFrameRateMessage() const;
+        NODISCARD double GetFrameRate() const;
+        NODISCARD std::string GetFrameRateMessage() const;
 
         void ResetTime();
         void MeasureTime();

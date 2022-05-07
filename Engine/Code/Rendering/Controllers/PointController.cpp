@@ -1,63 +1,46 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 16:57)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PointController.h"
 #include "Detail/PointControllerImpl.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffer.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/SceneGraph/Polypoint.h"
 #include "Rendering/SceneGraph/Visual.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26456)
+
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PointController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PointController);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, PointController);
 
-Rendering::PointController::PointController()
-    : ParentType{}, impl{ make_shared<ImplType>() }, m_Points{ nullptr }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, PointController)
+
+Rendering::PointController::PointController(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, points{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
- 
-Rendering::PointController::PointController(const PointController& rhs)
-    : ParentType(rhs), impl{ make_shared<ImplType>(*rhs.impl) }, m_Points{ dynamic_cast<Polypoint*>(GetControllerObject()) }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::PointController& Rendering::PointController::operator=(const PointController& rhs)
-{
-    ;
-
-    ParentType::operator=(rhs);
-    impl = make_shared<ImplType>(*rhs.impl);
-    m_Points = dynamic_cast<Polypoint*>(GetControllerObject());
-
-    return *this;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, PointController)
@@ -67,34 +50,34 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetNumP
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController, GetPointLinearSpeed, int, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController, GetPointAngularSpeed, int, float)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController, GetPointLinearAxis, int, const Rendering::PointController::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController, GetPointLinearAxis, int, Rendering::PointController::AVector)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController, GetPointAngularAxis, int, const Rendering::PointController::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PointController, GetPointAngularAxis, int, Rendering::PointController::AVector)
 
 void Rendering::PointController::SetPointLinearSpeed(int index, float pointLinearSpeed)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPointLinearSpeed(index, pointLinearSpeed);
 }
 
 void Rendering::PointController::SetPointAngularSpeed(int index, float pointAngularSpeed)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPointAngularSpeed(index, pointAngularSpeed);
 }
 
 void Rendering::PointController::SetPointLinearAxis(int index, const AVector& pointLinearAxis)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPointLinearAxis(index, pointLinearAxis);
 }
 
 void Rendering::PointController::SetPointAngularAxis(int index, const AVector& pointAngularAxis)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPointAngularAxis(index, pointAngularAxis);
 }
@@ -103,50 +86,50 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSyst
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, PointController, SetSystemLinearSpeed, float, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemAngularSpeed, float)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, PointController, SetSystemAngularSpeed, float, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemLinearAxis, const Rendering::PointController::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemLinearAxis, Rendering::PointController::AVector)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, SetSystemLinearAxis, AVector, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemAngularAxis, const Rendering::PointController::AVector)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PointController, GetSystemAngularAxis, Rendering::PointController::AVector)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, PointController, SetSystemAngularAxis, AVector, void)
 
 void Rendering::PointController::Reallocate(int numPoints)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     if (0 < numPoints)
-        impl = make_shared<ImplType>(numPoints);
+        impl = PackageType{ numPoints };
     else
-        impl = make_shared<ImplType>();
+        impl = PackageType{ CoreTools::ImplCreateUseDefaultConstruction::Default };
 }
 
 void Rendering::PointController::SetObject(ControllerInterface* object)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 
     ParentType::SetObject(object);
 
     if (object != nullptr)
     {
-        m_Points = dynamic_cast<Polypoint*>(object);
-        Reallocate(m_Points->GetVertexBuffer()->GetNumElements());
+        points = dynamic_cast<Polypoint*>(object);
+        Reallocate(points->GetVertexBuffer()->GetNumElements());
     }
     else
     {
-        m_Points = nullptr;
+        points = nullptr;
         Reallocate(0);
     }
 }
 
 void Rendering::PointController::SetObjectInCopy(ControllerInterface* object)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::SetObject(object);
 }
 
 bool Rendering::PointController::Update(double applicationTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     if (Controller::Update(applicationTime))
     {
@@ -163,13 +146,13 @@ bool Rendering::PointController::Update(double applicationTime)
 
 void Rendering::PointController::UpdateSystemMotion(float ctrlTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (m_Points != nullptr)
+    if (points != nullptr)
     {
         const auto distance = ctrlTime * GetSystemLinearSpeed();
         auto deltaTrn = distance * GetSystemLinearAxis();
-        auto localTransform = m_Points->GetLocalTransform();
+        auto localTransform = points->GetLocalTransform();
         const auto translate = localTransform.GetTranslate() + deltaTrn;
         localTransform.SetTranslate(translate);
 
@@ -178,25 +161,25 @@ void Rendering::PointController::UpdateSystemMotion(float ctrlTime)
         const auto rotate = deltaRot * localTransform.GetRotate();
         localTransform.SetRotate(rotate);
 
-        m_Points->SetLocalTransform(localTransform);
+        points->SetLocalTransform(localTransform);
     }
 }
 
 void Rendering::PointController::UpdatePointMotion(float ctrlTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (m_Points != nullptr)
+    if (points != nullptr)
     {
-        VertexBufferAccessor vba{* m_Points };
+        VertexBufferAccessor vba{ *points };
 
-        const auto numPoints = m_Points->GetNumPoints();
+        const auto numPoints = points->GetNumPoints();
         for (auto i = 0; i < numPoints; ++i)
         {
             const auto distance = ctrlTime * GetPointLinearSpeed(i);
             auto position = vba.GetPosition<Mathematics::APointF>(i);
             auto deltaTrn = distance * GetPointLinearAxis(i);
-            m_Points->GetVertexBuffer()->SetPosition(vba, i, position + deltaTrn);
+            points->GetVertexBuffer()->SetPosition(vba, i, position + deltaTrn);
         }
 
         if (vba.HasNormal())
@@ -207,16 +190,16 @@ void Rendering::PointController::UpdatePointMotion(float ctrlTime)
                 auto normal = vba.GetNormal<AVector>(i);
                 normal.Normalize();
                 const Mathematics::MatrixF deltaRot{ GetPointAngularAxis(i), angle };
-                m_Points->GetVertexBuffer()->SetTriangleNormal(vba, i, deltaRot * normal);
+                points->GetVertexBuffer()->SetTriangleNormal(vba, i, deltaRot * normal);
             }
         }
 
-        RENDERER_MANAGE_SINGLETON.UpdateAll(m_Points->GetConstVertexBuffer().get());
+        RENDERER_MANAGE_SINGLETON.UpdateAll(points->GetConstVertexBuffer());
     }
 }
 
 Rendering::PointController::PointController(LoadConstructor value)
-    : ParentType{ value }, impl{ make_shared<ImplType>() }, m_Points{ nullptr }
+    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, points{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -254,14 +237,14 @@ void Rendering::PointController::Save(CoreTools::BufferTarget& target) const
 
 void Rendering::PointController::Link(CoreTools::ObjectLink& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
 }
 
 void Rendering::PointController::PostLink()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
 
@@ -269,12 +252,12 @@ void Rendering::PointController::PostLink()
 
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Visual::GetCurrentRttiType()), "无效类\n");
 
-    m_Points = dynamic_cast<Polypoint*>(object);
+    points = dynamic_cast<Polypoint*>(object);
 }
 
 void Rendering::PointController::Load(CoreTools::BufferSource& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -284,5 +267,3 @@ void Rendering::PointController::Load(CoreTools::BufferSource& source)
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
-
-#include STSTEM_WARNING_POP

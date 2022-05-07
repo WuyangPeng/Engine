@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 17:21)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 16:29)
 
 #ifndef RENDERING_SHADER_FLOATS_VIEW_WORLD_MATRIX_CONSTANT_H
 #define RENDERING_SHADER_FLOATS_VIEW_WORLD_MATRIX_CONSTANT_H
@@ -13,36 +16,39 @@
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE ViewWorldMatrixConstant : public ShaderFloat
-	{
-	public:
-		using ClassType = ViewWorldMatrixConstant;
-		using ParentType = ShaderFloat;
-		using ClassShareType = CoreTools::CopyUnsharedClasses;
+    class RENDERING_DEFAULT_DECLARE ViewWorldMatrixConstant : public ShaderFloat
+    {
+    public:
+        using ClassType = ViewWorldMatrixConstant;
+        using ParentType = ShaderFloat;
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
 
-	public:
-		ViewWorldMatrixConstant(); 
-		
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
-		
-		CORE_TOOLS_OBJECT_FACTORY_DECLARE(ViewWorldMatrixConstant);
-		CORE_TOOLS_RTTI_OVERRIDE_DECLARE; 
+    public:
+        explicit ViewWorldMatrixConstant(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
 
-		  void Update(const Visual* visual, const Camera* camera) override;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		  void SetNumRegisters(int numRegisters) override;
+        CORE_TOOLS_OBJECT_FACTORY_DECLARE(ViewWorldMatrixConstant);
+        CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-		  ShaderFloatSharedPtr Clone() const override;
+        void Update(const Visual* visual, const Camera* camera) override;
 
-	private:
-		constexpr static auto sm_NumRegisters = 4;
-	};
+        void SetNumRegisters(int aNumRegisters) override;
+
+        NODISCARD ShaderFloatSharedPtr Clone() const override;
+
+    private:
+        constexpr static auto numRegisters = 4;
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(ViewWorldMatrixConstant);
+
+    CORE_TOOLS_STREAM_REGISTER(ViewWorldMatrixConstant);
+
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SHARED_PTR_DECLARE( ViewWorldMatrixConstant);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(ViewWorldMatrixConstant);
 }
 
-#endif // RENDERING_SHADER_FLOATS_VIEW_WORLD_MATRIX_CONSTANT_H
-
+#endif  // RENDERING_SHADER_FLOATS_VIEW_WORLD_MATRIX_CONSTANT_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:15)
 
 #ifndef FRAMEWORK_APPLICATION_GLUT_FONT_INFORMATION_H
 #define FRAMEWORK_APPLICATION_GLUT_FONT_INFORMATION_H
@@ -11,19 +14,19 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE GlutFontInformation final : public FontInformationImpl
-	{
-	public:
-		using ClassType = GlutFontInformation;
-		using ParentType = FontInformationImpl;
+    class FRAMEWORK_HIDDEN_DECLARE GlutFontInformation final : public FontInformationImpl
+    {
+    public:
+        using ClassType = GlutFontInformation;
+        using ParentType = FontInformationImpl;
 
-	public: 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    public:
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		int GetStringWidth(const String& text) const final;
-		int GetCharacterWidth(const TChar character) const noexcept final;
-		int GetFontHeight() const noexcept final;
-	};
+        NODISCARD int GetStringWidth(const String& text) const final;
+        NODISCARD int GetCharacterWidth(const TChar character) const noexcept final;
+        NODISCARD int GetFontHeight() const noexcept final;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_WINDOW_FONT_INFORMATION_H
+#endif  // FRAMEWORK_APPLICATION_WINDOW_FONT_INFORMATION_H

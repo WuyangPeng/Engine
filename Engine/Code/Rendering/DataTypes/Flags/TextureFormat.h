@@ -12,6 +12,10 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/Helper/EnumMacro.h"
+
+#include <iostream>
+
 namespace Rendering
 {
     // 目前支持的格式。根据需要可以添加。
@@ -64,6 +68,8 @@ namespace Rendering
 
         Max = Quantity
     };
+
+    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(TextureFormat);
 }
 
 #endif  // RENDERING_DATA_TYPES_TEXTURE_FORMAT_H

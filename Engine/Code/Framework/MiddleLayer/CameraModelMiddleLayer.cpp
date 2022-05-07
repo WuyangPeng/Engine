@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 14:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 11:20)
 
 #include "Framework/FrameworkExport.h"
 
@@ -12,45 +15,43 @@
 #include "Detail/CameraModelMiddleLayerImpl.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 #include "Framework/WindowCreate/WindowPoint.h"
 
 using std::make_shared;
 using std::move;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-Framework::CameraModelMiddleLayer ::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{0}, m_TimeDelta{ System::g_Microseconds }
+
+Framework::CameraModelMiddleLayer::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, timeDelta{ System::g_Microseconds }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::CameraModelMiddleLayer ::CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept
-    : ParentType{ move(rhs) }, impl{ move(rhs.impl) }, m_TimeDelta{ rhs.m_TimeDelta }
+Framework::CameraModelMiddleLayer::CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept
+    : ParentType{ move(rhs) }, impl{ move(rhs.impl) }, timeDelta{ rhs.timeDelta }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::CameraModelMiddleLayer& Framework::CameraModelMiddleLayer ::operator=(CameraModelMiddleLayer&& rhs) noexcept
+Framework::CameraModelMiddleLayer& Framework::CameraModelMiddleLayer::operator=(CameraModelMiddleLayer&& rhs) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     ParentType::operator=(move(rhs));
 
     impl = move(rhs.impl);
-    m_TimeDelta = rhs.m_TimeDelta;
+    timeDelta = rhs.timeDelta;
 
     return *this;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraModelMiddleLayer)
 
-bool Framework::CameraModelMiddleLayer ::Initialize()
+bool Framework::CameraModelMiddleLayer::Initialize()
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     if (ParentType::Initialize())
     {
@@ -75,9 +76,9 @@ bool Framework::CameraModelMiddleLayer ::Initialize()
     }
 }
 
-void Framework::CameraModelMiddleLayer ::Terminate()
+void Framework::CameraModelMiddleLayer::Terminate()
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     auto cameraViewMiddleLayer = boost::polymorphic_pointer_cast<CameraViewMiddleLayer>(GetViewMiddleLayer());
 
@@ -86,17 +87,19 @@ void Framework::CameraModelMiddleLayer ::Terminate()
     impl->Terminate();
 }
 
-bool Framework::CameraModelMiddleLayer ::Idle(int64_t timeDelta)
+bool Framework::CameraModelMiddleLayer::Idle(int64_t aTimeDelta)
 {
-    if (ParentType::Idle(timeDelta))
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    if (ParentType::Idle(aTimeDelta))
     {
-        m_TimeDelta -= timeDelta;
-        if (m_TimeDelta <= 0)
+        timeDelta -= aTimeDelta;
+        if (timeDelta <= 0)
         {
             MoveCamera();
             MoveObject();
 
-            m_TimeDelta += System::g_Microseconds;
+            timeDelta += System::g_Microseconds;
         }
 
         return true;
@@ -107,16 +110,16 @@ bool Framework::CameraModelMiddleLayer ::Idle(int64_t timeDelta)
     }
 }
 
-void Framework::CameraModelMiddleLayer ::InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
+void Framework::CameraModelMiddleLayer::InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     return impl->InitializeCameraMotion(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor);
 }
 
-void Framework::CameraModelMiddleLayer ::InitializeObjectMotion()
+void Framework::CameraModelMiddleLayer::InitializeObjectMotion()
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     return impl->InitializeObjectMotion();
 }
@@ -142,38 +145,45 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, MoveO
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, RotateTrackBall, void);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetTrackBallDow, bool, void);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, SetSaveRotate, void);
+
+void Framework::CameraModelMiddleLayer::SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    return impl->SetSaveRotate();
+}
+
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetDoRoll, NumericalValueSymbol, void);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetDoYaw, NumericalValueSymbol, void);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Framework, CameraModelMiddleLayer, SetDoPitch, NumericalValueSymbol, void);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraModelMiddleLayer, GetTrackBallDow, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraPosition, const Framework::CameraModelMiddleLayer::APoint);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraDirectionVector, const Framework::CameraModelMiddleLayer::AVector);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraUpVector, const Framework::CameraModelMiddleLayer::AVector);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraRightVector, const Framework::CameraModelMiddleLayer::AVector);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraPosition, Framework::CameraModelMiddleLayer::APoint);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraDirectionVector, Framework::CameraModelMiddleLayer::AVector);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraUpVector, Framework::CameraModelMiddleLayer::AVector);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetCameraRightVector, Framework::CameraModelMiddleLayer::AVector);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetRotationSpeed, float);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetTranslationSpeed, float);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetMotionObjectLocalTransform, const Framework::CameraModelMiddleLayer::Transform);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, CameraModelMiddleLayer, GetMotionObjectLocalTransform, Framework::CameraModelMiddleLayer::Transform);
 
-void Framework::CameraModelMiddleLayer ::SetBeginTrack(float xTrack, float yTrack) noexcept
+void Framework::CameraModelMiddleLayer::SetBeginTrack(float xTrack, float yTrack) noexcept
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     return impl->SetBeginTrack(xTrack, yTrack);
 }
 
-void Framework::CameraModelMiddleLayer ::SetEndTrack(float xTrack, float yTrack) noexcept
+void Framework::CameraModelMiddleLayer::SetEndTrack(float xTrack, float yTrack) noexcept
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     return impl->SetEndTrack(xTrack, yTrack);
 }
 
-void Framework::CameraModelMiddleLayer ::RotateTrackBall(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer)
+void Framework::CameraModelMiddleLayer::RotateTrackBall(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer)
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     const auto xTrack = cameraViewMiddleLayer.GetXTrack(point.GetWindowX());
     const auto yTrack = cameraViewMiddleLayer.GetYTrack(point.GetWindowY());
@@ -184,9 +194,9 @@ void Framework::CameraModelMiddleLayer ::RotateTrackBall(const WindowPoint& poin
     RotateTrackBall();
 }
 
-void Framework::CameraModelMiddleLayer ::SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer)
+void Framework::CameraModelMiddleLayer::SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     // 得到起点。
     SetTrackBallDow(true);
@@ -197,5 +207,3 @@ void Framework::CameraModelMiddleLayer ::SetBeginTrack(const WindowPoint& point,
 
     SetBeginTrack(xTrack, yTrack);
 }
-
-#include STSTEM_WARNING_POP

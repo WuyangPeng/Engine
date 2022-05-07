@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:02)
 
 #ifndef FRAMEWORK_APPLICATION_MOUSE_BUTTONS_H
 #define FRAMEWORK_APPLICATION_MOUSE_BUTTONS_H
@@ -13,40 +16,40 @@
 
 namespace Framework
 {
-	struct WindowMouseButtons
-	{
-		static constexpr auto sm_MouseLeftButton = 0;
-		static constexpr auto sm_MouseMiddleButton = 1;
-		static constexpr auto sm_MouseRightButton = 2;
-	};
+    struct WindowMouseButtons
+    {
+        static constexpr auto mouseLeftButton = 0;
+        static constexpr auto mouseMiddleButton = 1;
+        static constexpr auto mouseRightButton = 2;
+    };
 
-	struct GlutMouseButtons
-	{
-		static constexpr auto sm_MouseLeftButton = System::EnumCastUnderlying(System::GlutModifiersCodes::LeftButton);
-		static constexpr auto sm_MouseMiddleButton = System::EnumCastUnderlying(System::GlutModifiersCodes::MiddleButton);
-		static constexpr auto sm_MouseRightButton = System::EnumCastUnderlying(System::GlutModifiersCodes::RightButton);
-	}; 
+    struct GlutMouseButtons
+    {
+        static constexpr auto mouseLeftButton = System::EnumCastUnderlying(System::GlutModifiersCodes::LeftButton);
+        static constexpr auto mouseMiddleButton = System::EnumCastUnderlying(System::GlutModifiersCodes::MiddleButton);
+        static constexpr auto mouseRightButton = System::EnumCastUnderlying(System::GlutModifiersCodes::RightButton);
+    };
 
-	struct AndroidMouseButtons
-	{
-		static constexpr auto sm_MouseLeftButton = 0;
-		static constexpr auto sm_MouseMiddleButton = 1;
-		static constexpr auto sm_MouseRightButton = 2;
-	};
+    struct AndroidMouseButtons
+    {
+        static constexpr auto mouseLeftButton = 0;
+        static constexpr auto mouseMiddleButton = 1;
+        static constexpr auto mouseRightButton = 2;
+    };
 
-	struct LinuxMouseButtons
-	{
-		static constexpr auto sm_MouseLeftButton = 0;
-		static constexpr auto sm_MouseMiddleButton = 1;
-		static constexpr auto sm_MouseRightButton = 2;
-	};
+    struct LinuxMouseButtons
+    {
+        static constexpr auto mouseLeftButton = 0;
+        static constexpr auto mouseMiddleButton = 1;
+        static constexpr auto mouseRightButton = 2;
+    };
 
-	struct MacintoshMouseButtons
-	{
-		static constexpr auto sm_MouseLeftButton = 0;
-		static constexpr auto sm_MouseMiddleButton = 1;
-		static constexpr auto sm_MouseRightButton = 2;
-	};
+    struct MacintoshMouseButtons
+    {
+        static constexpr auto mouseLeftButton = 0;
+        static constexpr auto mouseMiddleButton = 1;
+        static constexpr auto mouseRightButton = 2;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_MOUSE_BUTTONS_H
+#endif  // FRAMEWORK_APPLICATION_MOUSE_BUTTONS_H

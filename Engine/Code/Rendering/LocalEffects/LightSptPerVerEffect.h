@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 09:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/14 14:34)
 
 #ifndef RENDERING_LOCAL_EFFECTS_LIGHT_SPT_PER_VER_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_LIGHT_SPT_PER_VER_EFFECT_H
@@ -25,29 +28,23 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(LightSptPerVerEffect);
 
     public:
-        // Construction and destruction.
-        LightSptPerVerEffect();
+        explicit LightSptPerVerEffect(CoreTools::DisableNotThrow disableNotThrow);
 
-        // Create an instance of the effect with unique parameters.
-        VisualEffectInstance* CreateInstance(Light* light, Material* material) const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // Convenience for creating an instance.  The application does not have to
-        // create the effect explicitly in order to create an instance from it.
-        static VisualEffectInstance* CreateUniqueInstance(Light* light, Material* material) noexcept;
+        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const LightSharedPtr& light, const MaterialSharedPtr& material);
 
-    private:
-        static int msDx9VRegisters[14];
-        static int msOglVRegisters[14];
-        static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const LightSharedPtr& light, const MaterialSharedPtr& material);
     };
-#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(LightSptPerVerEffect);
-    CORE_TOOLS_SHARED_PTR_DECLARE(LightSptPerVerEffect);
+
 #include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(LightSptPerVerEffect);
 }
 
 #endif  // RENDERING_LOCAL_EFFECTS_LIGHT_SPT_PER_VER_EFFECT_H

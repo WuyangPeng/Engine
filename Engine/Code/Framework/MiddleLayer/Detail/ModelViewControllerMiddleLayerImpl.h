@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 16:01)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_IMPL_H
@@ -13,37 +16,36 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE ModelViewControllerMiddleLayerImpl
-	{
-	public:
-		using ClassType = ModelViewControllerMiddleLayerImpl;
-		using MiddleLayerWeakPtr = std::weak_ptr<MiddleLayerInterface>;
-		using MiddleLayerSharedPtr = MiddleLayerInterfaceSharedPtr;
-		using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
+    class FRAMEWORK_HIDDEN_DECLARE ModelViewControllerMiddleLayerImpl
+    {
+    public:
+        using ClassType = ModelViewControllerMiddleLayerImpl;
+        using MiddleLayerWeakPtr = std::weak_ptr<MiddleLayerInterface>;
+        using MiddleLayerSharedPtr = MiddleLayerInterfaceSharedPtr;
+        using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
 
-	public:
-                ModelViewControllerMiddleLayerImpl(MAYBE_UNUSED int count) noexcept;
+    public:
+        ModelViewControllerMiddleLayerImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void SetModelMiddleLayer(const MiddleLayerSharedPtr& modelMiddleLayer) noexcept;
-		void SetViewMiddleLayer(const MiddleLayerSharedPtr& viewMiddleLayer) noexcept;
-		void SetControllerMiddleLayer(const MiddleLayerSharedPtr& controllerMiddleLayer) noexcept;
+        void SetModelMiddleLayer(const MiddleLayerSharedPtr& modelMiddleLayer) noexcept;
+        void SetViewMiddleLayer(const MiddleLayerSharedPtr& viewMiddleLayer) noexcept;
+        void SetControllerMiddleLayer(const MiddleLayerSharedPtr& controllerMiddleLayer) noexcept;
 
-		const MiddleLayerSharedPtr GetModelMiddleLayer() noexcept;
-		const MiddleLayerSharedPtr GetViewMiddleLayer() noexcept;
-		const MiddleLayerSharedPtr GetControllerMiddleLayer() noexcept;
+        NODISCARD MiddleLayerSharedPtr GetModelMiddleLayer() noexcept;
+        NODISCARD MiddleLayerSharedPtr GetViewMiddleLayer() noexcept;
+        NODISCARD MiddleLayerSharedPtr GetControllerMiddleLayer() noexcept;
 
-		const ConstMiddleLayerSharedPtr GetConstModelMiddleLayer() const noexcept;
-		const ConstMiddleLayerSharedPtr GetConstViewMiddleLayer() const noexcept;
-		const ConstMiddleLayerSharedPtr GetConstControllerMiddleLayer() const noexcept;		
+        NODISCARD ConstMiddleLayerSharedPtr GetConstModelMiddleLayer() const noexcept;
+        NODISCARD ConstMiddleLayerSharedPtr GetConstViewMiddleLayer() const noexcept;
+        NODISCARD ConstMiddleLayerSharedPtr GetConstControllerMiddleLayer() const noexcept;
 
-	private:
-		MiddleLayerWeakPtr m_ModelMiddleLayer;
-		MiddleLayerWeakPtr m_ViewMiddleLayer;
-		MiddleLayerWeakPtr m_ControllerMiddleLayer;
-	};
+    private:
+        MiddleLayerWeakPtr model;
+        MiddleLayerWeakPtr view;
+        MiddleLayerWeakPtr controller;
+    };
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_IMPL_H
-
+#endif  // FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_IMPL_H

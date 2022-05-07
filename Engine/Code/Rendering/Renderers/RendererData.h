@@ -1,89 +1,83 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 19:10)
 
 #ifndef FRAMEWORK_APPLICATION_RENDERER_DATA_H
 #define FRAMEWORK_APPLICATION_RENDERER_DATA_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/Windows/Flags/WindowsFlags.h"
+#include "CoreTools/Base/SingletonDetail.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Base/SingletonDetail.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "System/Windows/Flags/WindowsFlags.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
-RENDERING_EXPORT_UNIQUE_PTR(RendererData);
-RENDERING_NON_COPY_EXPORT_IMPL(RendererDataImpl); 
 
-namespace CoreTools
-{
-	class Mutex;
-}
+RENDERING_EXPORT_UNIQUE_PTR(RendererData);
+RENDERING_NON_COPY_EXPORT_IMPL(RendererDataImpl);
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE RendererData : public CoreTools::Singleton<RendererData>
-	{
-	public:
-            NON_COPY_TYPE_DECLARE(RendererData);
-		using ParentType = Singleton<RendererData>;
-		using Colour = Rendering::Colour<float>;
-		using TextureFormat = Rendering::TextureFormat;
-		using WindowStyles = System::WindowsStyles;
+    class RENDERING_DEFAULT_DECLARE RendererData : public CoreTools::Singleton<RendererData>
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(RendererData);
+        using ParentType = Singleton<RendererData>;
+        using Colour = Rendering::Colour<float>;
+        using TextureFormat = Rendering::TextureFormat;
+        using WindowStyles = System::WindowsStyles;
 
-	private:
-		enum class RendererDataCreate
-		{
-			Init,
-		};
+    private:
+        enum class RendererDataCreate
+        {
+            Init,
+        };
 
-	public:
-		explicit RendererData(RendererDataCreate rendererDataCreate);
+    public:
+        explicit RendererData(RendererDataCreate rendererDataCreate);
 
-		static void Create();
-		static void Destroy() noexcept;
+        static void Create();
+        static void Destroy() noexcept;
 
-		SINGLETON_GET_PTR_DECLARE(RendererData);
+        SINGLETON_GET_PTR_DECLARE(RendererData);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void LoadConfiguration(const std::string& fileName);
+        void LoadConfiguration(const std::string& fileName);
 
-		void ClearColor();
-		void Resize(int width,int height);
+        void ClearColor();
+        void Resize(int width, int height);
 
-		void DrawMessage (int x,int y,const Colour& color,const std::string& message);
+        void DrawMessage(int x, int y, const Colour& color, const std::string& message);
 
-		TextureFormat GetColorFormat() const;
-		TextureFormat GetDepthStencilFormat() const;
-		int GetNumMultisamples() const;
-		Colour GetClearColor() const;
+        NODISCARD TextureFormat GetColorFormat() const;
+        NODISCARD TextureFormat GetDepthStencilFormat() const;
+        NODISCARD int GetNumMultisamples() const;
+        NODISCARD Colour GetClearColor() const;
 
-		const std::string GetWindowTitle() const;
-		int GetXPosition () const;
-		int GetYPosition () const;
-		int GetWidth () const;
-		int GetHeight () const;
-		bool IsAllowResize() const;
+        NODISCARD std::string GetWindowTitle() const;
+        NODISCARD int GetXPosition() const;
+        NODISCARD int GetYPosition() const;
+        NODISCARD int GetWidth() const;
+        NODISCARD int GetHeight() const;
+        NODISCARD bool IsAllowResize() const;
 
-	private:
-		using RendererDataUniquePtr = std::unique_ptr<RendererData>;
+    private:
+        using RendererDataUniquePtr = std::unique_ptr<RendererData>;
 
-	private:
-		static RendererDataUniquePtr sm_RendererData;
-            PackageType impl;
-	};
+    private:
+        static RendererDataUniquePtr rendererData;
+        PackageType impl;
+    };
 }
 
 #define RENDERER_DATA_SINGLETON Rendering::RendererData::GetSingleton()
 
-#endif // FRAMEWORK_APPLICATION_RENDERER_DATA_H
-
-
-
-	
+#endif  // FRAMEWORK_APPLICATION_RENDERER_DATA_H

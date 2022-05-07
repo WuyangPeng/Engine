@@ -6,13 +6,12 @@
 
 #include "Toolset/ArtificialIntellegence/ArtificialIntellegenceToolset/ArtificialIntellegenceToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
 
-ArtificialIntellegenceToolset::Placeholder
-	::Placeholder() 
+ArtificialIntellegenceToolset::Placeholder ::Placeholder() noexcept
 {
-	ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
+    ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ArtificialIntellegenceToolset, Placeholder)

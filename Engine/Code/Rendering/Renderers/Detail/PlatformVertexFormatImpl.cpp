@@ -1,63 +1,57 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/26 17:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/20 14:08)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "PlatformVertexFormatImpl.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Dx9Renderer/Dx9VertexFormat.h"
 #include "Rendering/OpenGLRenderer/OpenGLVertexFormat.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-Rendering::PlatformVertexFormatImpl
-	::PlatformVertexFormatImpl() noexcept	
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+#include "Rendering/Renderers/Renderer.h"
 
-Rendering::PlatformVertexFormatImpl
-	::~PlatformVertexFormatImpl()
+Rendering::PlatformVertexFormatImpl::PlatformVertexFormatImpl() noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;	
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformVertexFormatImpl)
 
-// static 
-Rendering::PlatformVertexFormatImpl::PlatformVertexFormatPtr Rendering::PlatformVertexFormatImpl
-	::Create(Renderer* renderer, const VertexFormat* vertexFormat)
+// static
+Rendering::PlatformVertexFormatImpl::PlatformVertexFormatSharedPtr Rendering::PlatformVertexFormatImpl::Create(Renderer* renderer, const VertexFormat* vertexFormat)
 {
-    switch(renderer->GetRendererType())
+    if (renderer == nullptr)
     {
-    case RendererTypes::Default:
-        return CreateDefault(renderer, vertexFormat);
-    case RendererTypes::Window:
-        return make_shared <Dx9VertexFormat>(renderer, vertexFormat);
-    case RendererTypes::Glut:
-        return make_shared <OpenGLVertexFormat>(renderer, vertexFormat);
-    case RendererTypes::OpenGL:
-        return make_shared <OpenGLVertexFormat>(renderer, vertexFormat);
-    case RendererTypes::Dx9:
-        return make_shared <Dx9VertexFormat>(renderer, vertexFormat);
-    case RendererTypes::OpenGLES:
-        return make_shared <OpenGLVertexFormat>(renderer, vertexFormat);
-    default:
-        return CreateDefault(renderer, vertexFormat);
+        THROW_EXCEPTION(SYSTEM_TEXT("renderer Îª¿Õ¡£"s));
+    }
+
+    switch (renderer->GetRendererType())
+    {
+        case RendererTypes::Default:
+            return CreateDefault(renderer, vertexFormat);
+        case RendererTypes::Window:
+            return make_shared<Dx9VertexFormat>(renderer, vertexFormat);
+        case RendererTypes::Glut:
+            return make_shared<OpenGLVertexFormat>(renderer, vertexFormat);
+        case RendererTypes::OpenGL:
+            return make_shared<OpenGLVertexFormat>(renderer, vertexFormat);
+        case RendererTypes::Dx9:
+            return make_shared<Dx9VertexFormat>(renderer, vertexFormat);
+        case RendererTypes::OpenGLES:
+            return make_shared<OpenGLVertexFormat>(renderer, vertexFormat);
+        default:
+            return CreateDefault(renderer, vertexFormat);
     }
 }
 
-// static 
-Rendering::PlatformVertexFormatImpl::PlatformVertexFormatPtr Rendering::PlatformVertexFormatImpl
-	:: CreateDefault(Renderer* renderer, const VertexFormat* vertexFormat)
+// static
+Rendering::PlatformVertexFormatImpl::PlatformVertexFormatSharedPtr Rendering::PlatformVertexFormatImpl::CreateDefault(Renderer* renderer, const VertexFormat* vertexFormat)
 {
-    return make_shared <OpenGLVertexFormat>(renderer, vertexFormat);
+    return make_shared<OpenGLVertexFormat>(renderer, vertexFormat);
 }
-
-#include STSTEM_WARNING_POP

@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/UnitTestSuiteMacro.h" 
 #include "Framework/MiddleLayer/PixelViewMiddleLayer.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include <random> 
 
 namespace Framework
@@ -63,8 +63,8 @@ namespace Framework
 		int GetSeparateRadius(int radius) const noexcept;
 
 	private:
-		static constexpr auto sm_MinColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::sm_MinValue);
-		static constexpr auto sm_MaxColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::sm_MaxValue);
+		static constexpr auto minColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::minValue);
+		static constexpr auto maxColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::maxValue);
 		static constexpr Colour sm_Black{ };
 
 		std::uniform_int<uint8_t> m_Random;

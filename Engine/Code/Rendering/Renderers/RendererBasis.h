@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 19:08)
 
 #ifndef RENDERING_RENDERERS_RENDERER_BASIS_H
 #define RENDERING_RENDERERS_RENDERER_BASIS_H
@@ -13,38 +16,34 @@
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE RendererBasis 
-	{
-	public:
-		using ClassType = RendererBasis;
+    class RENDERING_DEFAULT_DECLARE RendererBasis
+    {
+    public:
+        using ClassType = RendererBasis;
 
-	public:
-		RendererBasis() noexcept;
-		RendererBasis(int width,int height,TextureFormat colorFormat,TextureFormat depthStencilFormat,  int numMultisamples) noexcept;
+    public:
+        RendererBasis() noexcept;
+        RendererBasis(int width, int height, TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
-	
-		int GetWidth () const noexcept;
-		int GetHeight () const noexcept;	
-		TextureFormat GetColorFormat() const noexcept;
-		TextureFormat GetDepthStencilFormat() const noexcept;
-		int GetNumMultisamples() const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-		void SetSize(int width,int height) noexcept;
-		void SetTextureFormat(TextureFormat colorFormat,TextureFormat depthStencilFormat) noexcept;
-		void SetMultisamplesNumber(int numMultisamples) noexcept;
+        NODISCARD int GetWidth() const noexcept;
+        NODISCARD int GetHeight() const noexcept;
+        NODISCARD TextureFormat GetColorFormat() const noexcept;
+        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD int GetNumMultisamples() const noexcept;
 
-	private:
-		int m_WindowWidth;
-		int m_WindowHeight;		
-        TextureFormat m_ColorFormat;
-        TextureFormat m_DepthStencilFormat;
-        int m_MultisamplesNumber;	 
-	};
+        void SetSize(int width, int height) noexcept;
+        void SetTextureFormat(TextureFormat aColorFormat, TextureFormat aDepthStencilFormat) noexcept;
+        void SetMultisamplesNumber(int numMultisamples) noexcept;
+
+    private:
+        int windowWidth;
+        int windowHeight;
+        TextureFormat colorFormat;
+        TextureFormat depthStencilFormat;
+        int multisamplesNumber;
+    };
 }
 
-#endif // RENDERING_RENDERERS_RENDERER_BASIS_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_RENDERER_BASIS_H

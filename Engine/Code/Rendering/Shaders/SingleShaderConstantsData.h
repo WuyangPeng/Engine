@@ -1,54 +1,52 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 15:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 16:45)
 
 #ifndef RENDERING_SHADERS_SINGLE_SHADER_CONSTANTS_DATA_H
 #define RENDERING_SHADERS_SINGLE_SHADER_CONSTANTS_DATA_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 
 #include <string>
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
-RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(SingleShaderConstantsData,SingleShaderConstantsDataImpl);
 
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;		
-}
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(SingleShaderConstantsData, SingleShaderConstantsDataImpl);
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE SingleShaderConstantsData
-	{	
-	public:
-            DELAY_COPY_UNSHARED_TYPE_DECLARE(SingleShaderConstantsData);
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-	
-	public:		
-		SingleShaderConstantsData();
-		explicit SingleShaderConstantsData(const std::string& name,int numRegistersUsed);
+    class RENDERING_DEFAULT_DECLARE SingleShaderConstantsData
+    {
+    public:
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(SingleShaderConstantsData);
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
 
-		CLASS_INVARIANT_DECLARE;
-		
-		void SetConstant (const std::string& name,int numRegistersUsed);
+    public:
+        explicit SingleShaderConstantsData(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        SingleShaderConstantsData(const std::string& name, int numRegistersUsed);
 
-		const std::string GetConstantName () const;
-		int GetNumRegistersUsed () const noexcept;	
+        CLASS_INVARIANT_DECLARE;
 
-		void Load(CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
-		int GetStreamingSize () const;
-		
-	private:
-                PackageType impl;
-	};
+        void SetConstant(const std::string& name, int numRegistersUsed);
+
+        NODISCARD std::string GetConstantName() const;
+        NODISCARD int GetNumRegistersUsed() const noexcept;
+
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const;
+
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // RENDERING_SHADERS_SINGLE_SHADER_CONSTANTS_DATA_H
+#endif  // RENDERING_SHADERS_SINGLE_SHADER_CONSTANTS_DATA_H

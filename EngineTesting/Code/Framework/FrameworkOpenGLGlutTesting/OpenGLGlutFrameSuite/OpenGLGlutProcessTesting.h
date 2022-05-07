@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/11 11:09)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_PROCESS_TESTING_H
@@ -12,32 +12,31 @@
 
 namespace Framework
 {
-	class OpenGLGlutProcessOpenGLGlutCallBack : public OpenGLGlutCallBackInterface
-	{
-	public:
-		using ClassType = OpenGLGlutProcessOpenGLGlutCallBack;
-		using ParentType = OpenGLGlutCallBackInterface;
+    class OpenGLGlutProcessOpenGLGlutCallBack : public OpenGLGlutCallBackInterface
+    {
+    public:
+        using ClassType = OpenGLGlutProcessOpenGLGlutCallBack;
+        using ParentType = OpenGLGlutCallBackInterface;
 
-	public:
-		OpenGLGlutProcessOpenGLGlutCallBack();
-		virtual ~OpenGLGlutProcessOpenGLGlutCallBack();
+    public:
+        OpenGLGlutProcessOpenGLGlutCallBack();
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
-	};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
 
-	class OpenGLGlutProcessTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OpenGLGlutProcessTesting); 
+    class OpenGLGlutProcessTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OpenGLGlutProcessTesting);
 
-	private:
-		void MainTest();	
-		void SetWindowIDSucceedTest();
-		void CallbackSucceedTest();	
-		void SetMillisecondSucceedTest();	
+    private:
+        void MainTest();
+        void SetWindowIDSucceedTest();
+        void CallbackSucceedTest();
+        void SetMillisecondSucceedTest();
 
-		void DoRunUnitTest() final;	
-	};
+        void DoRunUnitTest() final;
+    };
 }
 
-#endif // FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_PROCESS_TESTING_H
+#endif  // FRAMEWORK_OPENGL_GLUT_FRAME_SUITE_OPENGL_GLUT_PROCESS_TESTING_H

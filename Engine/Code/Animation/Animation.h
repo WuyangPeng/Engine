@@ -1,20 +1,23 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.4.0.0 (2020/07/16 15:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/27 16:47)
 
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include "AnimationManager/AnimationManager.h"
+#include "Gradient/Gradient.h"
 #include "Helper/Helper.h"
-#include "Sprite/Sprite.h"
-#include "Texture/Texture.h"
+#include "MorphTarget/MorphTarget.h"
+#include "PerVertex/PerVertex.h"
 #include "RigidBodyHierarchy/RigidBodyHierarchy.h"
 #include "Skeleton/Skeleton.h"
-#include "PerVertex/PerVertex.h"
-#include "MorphTarget/MorphTarget.h"
-#include "Gradient/Gradient.h"
-#include "AnimationManager/AnimationManager.h"
+#include "Sprite/Sprite.h"
+#include "Texture/Texture.h"
 
-#endif // ANIMATION_H
+#endif  // ANIMATION_H

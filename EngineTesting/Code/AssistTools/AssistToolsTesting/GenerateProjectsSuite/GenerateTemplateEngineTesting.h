@@ -30,7 +30,7 @@ namespace AssistTools
 		void DefaultInputManagerHeaderGenerateToTest(const System::String& testFileName, const System::String& resultName);
 		void DefaultInputManagerCppGenerateToTest(const System::String& testFileName, const System::String& resultName);
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

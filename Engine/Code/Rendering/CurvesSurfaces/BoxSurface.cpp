@@ -1,141 +1,118 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 16:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 16:11)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BoxSurface.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Base/SpanIteratorDetail.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Base/Float.h"
+#include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineVolumeDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26492)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26815)
-#include SYSTEM_WARNING_DISABLE(26409)
 CORE_TOOLS_RTTI_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BoxSurface);
 
-Rendering::BoxSurface::BoxSurface(Mathematics::BSplineVolume<float>* volume, int numUSamples, int numVSamples, int numWSamples, VertexFormatSharedPtr vformat[6])
+Rendering::BoxSurface::BoxSurface(const Mathematics::BSplineVolume<float>& volume, int numUSamples, int numVSamples, int numWSamples, const std::array<VertexFormatSharedPtr, 6>& vformat)
     : ParentType{ NodeCreate::Init },
-      mVolume{ volume }, mNumUSamples{ numUSamples }, mNumVSamples{ numVSamples }, mNumWSamples{ numWSamples }, mDoSort{ false }
+      volume{ std::make_shared<Mathematics::BSplineVolume<float>>(volume) },
+      numUSamples{ numUSamples },
+      numVSamples{ numVSamples },
+      numWSamples{ numWSamples },
+      doSort{ false }
 {
-    int permute[3];
-    TrianglesMeshSharedPtr mesh;
+    std::array<int, 3> permute{ 1, 2, 0 };
 
-    // u faces
-    permute[0] = 1;
-    permute[1] = 2;
-    permute[2] = 0;
-
-    // u = 0
-    mesh = CreateFace(mNumWSamples, mNumVSamples, vformat[0], false, 0.0f, permute);
+    auto mesh = CreateFace(numWSamples, numVSamples, vformat.at(0), false, 0.0f, permute);
     mesh->SetName("u0");
-    //	AttachChild(mesh);
+    AttachChild(mesh);
 
-    // u = 1
-    mesh = CreateFace(mNumWSamples, mNumVSamples, vformat[1], true, 1.0f, permute);
+    mesh = CreateFace(numWSamples, numVSamples, vformat.at(1), true, 1.0f, permute);
     mesh->SetName("u1");
-    //AttachChild(mesh);
+    AttachChild(mesh);
 
-    // v faces
-    permute[0] = 0;
-    permute[1] = 2;
-    permute[2] = 1;
+    permute.at(0) = 0;
+    permute.at(1) = 2;
+    permute.at(2) = 1;
 
-    // v = 0
-    mesh = CreateFace(mNumWSamples, mNumUSamples, vformat[2], true, 0.0f, permute);
+    mesh = CreateFace(numWSamples, numUSamples, vformat.at(2), true, 0.0f, permute);
     mesh->SetName("v0");
-    //	AttachChild(mesh);
+    AttachChild(mesh);
 
-    // v = 1
-    mesh = CreateFace(mNumWSamples, mNumUSamples, vformat[3], false, 1.0f, permute);
+    mesh = CreateFace(numWSamples, numUSamples, vformat.at(3), false, 1.0f, permute);
     mesh->SetName("v1");
-    //	AttachChild(mesh);
+    AttachChild(mesh);
 
-    // w faces
-    permute[0] = 0;
-    permute[1] = 1;
-    permute[2] = 2;
+    permute.at(0) = 0;
+    permute.at(1) = 1;
+    permute.at(2) = 2;
 
-    // w = 0
-    mesh = CreateFace(mNumVSamples, mNumUSamples, vformat[4], false, 0.0f, permute);
+    mesh = CreateFace(numVSamples, numUSamples, vformat.at(4), false, 0.0f, permute);
     mesh->SetName("w0");
-    // 	AttachChild(mesh);
+    AttachChild(mesh);
 
-    // w = 1
-    mesh = CreateFace(mNumVSamples, mNumUSamples, vformat[5], true, 1.0f, permute);
+    mesh = CreateFace(numVSamples, numUSamples, vformat.at(5), true, 1.0f, permute);
     mesh->SetName("w1");
-    //	AttachChild(mesh);
+    AttachChild(mesh);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BoxSurface::~BoxSurface(){
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, BoxSurface)
 
-    EXCEPTION_TRY{
-        //DELETE0(mVolume);
-    } EXCEPTION_ALL_CATCH(Rendering)
-}
-
-Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, bool ccw, float faceValue, int permute[3])
+Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows, int numCols, const VertexFormatSharedPtr& vformat, bool ccw, float faceValue, const std::array<int, 3>& permute)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     const auto numVertices = numRows * numCols;
     const auto vstride = vformat->GetStride();
-    VertexBufferSharedPtr vbuffer{ VertexBuffer::Create(numVertices, vstride) };
+    auto vbuffer = VertexBuffer::Create(numVertices, vstride);
     VertexBufferAccessor vba{ vformat, vbuffer };
 
-    float param[3];
-    param[permute[2]] = faceValue;
+    std::array<float, 3> param{};
+    param.at(permute.at(2)) = faceValue;
     const auto sign = (ccw ? 1.0f : -1.0f);
-    const auto rowFactor = 1.0f / static_cast<float>(numRows - 1);
-    const auto colFactor = 1.0f / static_cast<float>(numCols - 1);
-    int row = 0, col = 0, i = 0;
-    for (row = 0, i = 0; row < numRows; ++row)
+    const auto rowFactor = 1.0f / boost::numeric_cast<float>(numRows - 1);
+    const auto colFactor = 1.0f / boost::numeric_cast<float>(numCols - 1);
+
+    for (auto row = 0, i = 0; row < numRows; ++row)
     {
-        param[permute[1]] = row * rowFactor;
-        for (col = 0; col < numCols; ++col, ++i)
+        param.at(permute.at(1)) = row * rowFactor;
+        for (auto col = 0; col < numCols; ++col, ++i)
         {
-            param[permute[0]] = col * colFactor;
-            //vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
+            param.at(permute.at(0)) = col * colFactor;
+            vbuffer->SetPosition(vba, i, APoint{ volume->GetPosition(param) });
 
             if (vba.HasNormal())
             {
-                // const auto cDer = mVolume->GetDerivative(permute[0], param);
-                // const auto rDer = mVolume->GetDerivative(permute[1], param);
-                //  vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
+                const auto cDer = volume->GetDerivative(permute.at(0), param);
+                const auto rDer = volume->GetDerivative(permute.at(1), param);
+                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
             }
 
             constexpr auto numUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
             for (auto unit = 0; unit < numUnits; ++unit)
             {
-                const Mathematics::Vector2F tcoord{ param[permute[0]], param[permute[1]] };
+                const Mathematics::Vector2F tcoord{ param.at(permute.at(0)), param.at(permute.at(1)) };
                 if (vba.HasTextureCoord(unit))
                 {
-                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "Texture coordinate must be 2D\n");
+                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "纹理坐标必须是 2D\n");
                     vbuffer->SetTextureCoord(vba, i, tcoord, unit);
                 }
             }
@@ -143,67 +120,68 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
     }
 
     const auto numTriangles = 2 * (numRows - 1) * (numCols - 1);
-    IndexBufferSharedPtr ibuffer = IndexBuffer::Create(3 * numTriangles, (int)sizeof(int));
+    auto ibuffer = IndexBuffer::Create(3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
+    auto spanIterator = ibuffer->GetWriteSpanIterator();
 
-    int* indices = (int*)ibuffer.get();
-    for (row = 0, i = 0; row < numRows - 1; ++row)
+    for (auto row = 0, i = 0; row < numRows - 1; ++row)
     {
-        int i0 = i;
-        int i1 = i0 + 1;
+        auto i0 = i;
+        auto i1 = i0 + 1;
         i += numCols;
-        int i2 = i;
-        int i3 = i2 + 1;
-        for (col = 0; col < numCols - 1; ++col, indices += 6)
+        auto i2 = i;
+        auto i3 = i2 + 1;
+        for (auto col = 0; col < numCols - 1; ++col)
         {
             if (ccw)
             {
-                indices[0] = i0++;
-                indices[1] = i1;
-                indices[2] = i2;
-                indices[3] = i1++;
-                indices[4] = i3++;
-                indices[5] = i2++;
+                spanIterator.Increase(i0++);
+                spanIterator.Increase(i1);
+                spanIterator.Increase(i2);
+                spanIterator.Increase(i1++);
+                spanIterator.Increase(i3++);
+                spanIterator.Increase(i2++);
             }
             else
             {
-                indices[0] = i0++;
-                indices[1] = i2;
-                indices[2] = i1;
-                indices[3] = i1++;
-                indices[4] = i2++;
-                indices[5] = i3++;
+                spanIterator.Increase(i0++);
+                spanIterator.Increase(i2);
+                spanIterator.Increase(i1);
+                spanIterator.Increase(i1++);
+                spanIterator.Increase(i2++);
+                spanIterator.Increase(i3++);
             }
         }
     }
 
-    TrianglesMeshSharedPtr mesh{ std::make_shared<TrianglesMesh>(vformat, vbuffer, ibuffer) };
-    return mesh;
+    return std::make_shared<TrianglesMesh>(vformat, vbuffer, ibuffer);
 }
 
-void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, VertexBufferSharedPtr vbuffer, bool ccw, float faceValue, int permute[3])
+void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, const VertexFormatSharedPtr& vformat, const VertexBufferSharedPtr& vbuffer, bool ccw, float faceValue, const std::array<int, 3>& permute)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     VertexBufferAccessor vba{ vformat, vbuffer };
 
-    float param[3];
-    param[permute[2]] = faceValue;
+    std::array<float, 3> param{};
+    param.at(permute.at(2)) = faceValue;
     const auto sign = (ccw ? 1.0f : -1.0f);
-    const auto rowFactor = 1.0f / (float)(numRows - 1);
-    const auto colFactor = 1.0f / (float)(numCols - 1);
+    const auto rowFactor = 1.0f / boost::numeric_cast<float>(numRows - 1);
+    const auto colFactor = 1.0f / boost::numeric_cast<float>(numCols - 1);
     for (auto row = 0, i = 0; row < numRows; ++row)
     {
-        param[permute[1]] = row * rowFactor;
+        param.at(permute.at(1)) = row * rowFactor;
         for (auto col = 0; col < numCols; ++col, ++i)
         {
-            param[permute[0]] = col * colFactor;
+            param.at(permute.at(0)) = col * colFactor;
 
-            // vbuffer->SetPosition(vba, i, APoint{ mVolume->GetPosition(param) });
+            vbuffer->SetPosition(vba, i, APoint{ volume->GetPosition(param) });
 
             if (vba.HasNormal())
             {
-                // const auto cDer = mVolume->GetDerivative(permute[0], param);
-                // const auto rDer = mVolume->GetDerivative(permute[1], param);
+                const auto cDer = volume->GetDerivative(permute.at(0), param);
+                const auto rDer = volume->GetDerivative(permute.at(1), param);
 
-                //  vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
+                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
             }
         }
     }
@@ -211,372 +189,232 @@ void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, VertexFormatSha
 
 void Rendering::BoxSurface::UpdateSurface()
 {
-    int permute[3];
-    TrianglesMeshSharedPtr mesh;
-    VertexFormatSharedPtr vformat;
-    VertexBufferSharedPtr vbuffer;
+    RENDERING_CLASS_IS_VALID_9;
 
-    // u faces
-    permute[0] = 1;
-    permute[1] = 2;
-    permute[2] = 0;
+    std::array<int, 3> permute{ 1, 2, 0 };
 
-    // u = 0
-    mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(0));
-    vformat = mesh->GetVertexFormat();
-    vbuffer = mesh->GetVertexBuffer();
-    UpdateFace(mNumWSamples, mNumVSamples, vformat, vbuffer, false, 0.0f, permute);
+    auto mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(0));
+    auto vformat = mesh->GetVertexFormat();
+    auto vbuffer = mesh->GetVertexBuffer();
+    UpdateFace(numWSamples, numVSamples, vformat, vbuffer, false, 0.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
 
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
 
-    // u = 1
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(1));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
-    UpdateFace(mNumWSamples, mNumVSamples, vformat, vbuffer, true, 1.0f, permute);
+    UpdateFace(numWSamples, numVSamples, vformat, vbuffer, true, 1.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
 
-    // v faces
-    permute[0] = 0;
-    permute[1] = 2;
-    permute[2] = 1;
+    permute.at(0) = 0;
+    permute.at(1) = 2;
+    permute.at(2) = 1;
 
-    // v = 0
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(2));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
-    UpdateFace(mNumWSamples, mNumUSamples, vformat, vbuffer, true, 0.0f, permute);
+    UpdateFace(numWSamples, numUSamples, vformat, vbuffer, true, 0.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
 
-    // v = 1
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(3));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
-    UpdateFace(mNumWSamples, mNumUSamples, vformat, vbuffer, false, 1.0f, permute);
+    UpdateFace(numWSamples, numUSamples, vformat, vbuffer, false, 1.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
 
-    // w faces
-    permute[0] = 0;
-    permute[1] = 1;
-    permute[2] = 2;
+    permute.at(0) = 0;
+    permute.at(1) = 1;
+    permute.at(2) = 2;
 
-    // w = 0
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(4));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
-    UpdateFace(mNumVSamples, mNumUSamples, vformat, vbuffer, false, 0.0f, permute);
+    UpdateFace(numVSamples, numUSamples, vformat, vbuffer, false, 0.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
 
-    // w = 1
     mesh = boost::polymorphic_pointer_cast<TrianglesMesh>(GetChild(5));
     vformat = mesh->GetVertexFormat();
     vbuffer = mesh->GetVertexBuffer();
-    UpdateFace(mNumVSamples, mNumUSamples, vformat, vbuffer, true, 1.0f, permute);
+    UpdateFace(numVSamples, numUSamples, vformat, vbuffer, true, 1.0f, permute);
     mesh->UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer.get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(vbuffer);
 }
-
-void Rendering::BoxSurface::EnableSorting()
-{
-    for (auto face = 0; face < 6; face++)
-    {
-        auto mesh = boost::polymorphic_pointer_cast<Visual>(GetChild(face));
-
-        auto effect = mesh->GetConstEffectInstance();
-        const auto numPasses = effect->GetNumPasses();
-        for (auto p = 0; p < numPasses; ++p)
-        {
-            const auto pass = effect->GetConstPass(p);
-            CullState* cstate = const_cast<CullState*>(pass->GetCullState().get());
-            cstate->SetEnabled(false);
-            DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().get());
-            dstate->SetEnabled(false);
-            dstate->SetWritable(true);
-            dstate->SetCompare(DepthStateFlags::CompareMode::LessEqual);
-        }
-    }
-
-    mDoSort = true;
-}
-
-void Rendering::BoxSurface::DisableSorting()
-{
-    for (auto face = 0; face < 6; face++)
-    {
-        auto mesh = boost::polymorphic_pointer_cast<Visual>(GetChild(face));
-        auto effect = mesh->GetConstEffectInstance();
-        const auto numPasses = effect->GetNumPasses();
-        for (auto p = 0; p < numPasses; ++p)
-        {
-            const auto pass = effect->GetConstPass(p);
-
-            CullState* cstate = const_cast<CullState*>(pass->GetCullState().get());
-            cstate->SetEnabled(false);
-            DepthState* dstate = const_cast<DepthState*>(pass->GetDepthState().get());
-            dstate->SetEnabled(false);
-            dstate->SetWritable(true);
-            dstate->SetCompare(DepthStateFlags::CompareMode::LessEqual);
-        }
-    }
-
-    mDoSort = false;
-}
-
-void Rendering::BoxSurface::SortFaces(const AVector& worldViewDirection)
-{
-    if (!mDoSort)
-    {
-        // Sorting must be enabled in order to sort.
-        return;
-    }
-
-    // Inverse transform the world view direction into the local space of
-    // the box.
-    auto localDir = GetWorldTransform().GetInverseMatrix() * worldViewDirection;
-
-    // Store back-facing faces in the front of the array.  Store front-facing
-    // faces in the rear of the array.
-    SpatialSharedPtr sorted[6];
-    int backFace = 0, frontFace = 5;
-
-    for (auto i = 0; i < 6; ++i)
-    {
-        const auto& name = GetChild(i)->GetName();
-        if (name[0] == 'u')
-        {
-            if (name[1] == '0')
-            {
-                if (localDir[0] > 0.0f)
-                {
-                    sorted[frontFace--] = GetChild(i);
-                }
-                else
-                {
-                    sorted[backFace++] = GetChild(i);
-                }
-            }
-            else  // name[1] == '1'
-            {
-                if (localDir[0] < 0.0f)
-                {
-                    sorted[frontFace--] = GetChild(i);
-                }
-                else
-                {
-                    sorted[backFace++] = GetChild(i);
-                }
-            }
-        }
-        else if (name[0] == 'v')
-        {
-            if (name[1] == '0')
-            {
-                if (localDir[1] > 0.0f)
-                {
-                    sorted[frontFace--] = GetChild(i);
-                }
-                else
-                {
-                    sorted[backFace++] = GetChild(i);
-                }
-            }
-            else  // name[1] == '1'
-            {
-                if (localDir[1] < 0.0f)
-                {
-                    sorted[frontFace--] = GetChild(i);
-                }
-                else
-                {
-                    sorted[backFace++] = GetChild(i);
-                }
-            }
-        }
-        else  // name[0] == 'w'
-        {
-            if (name[1] == '0')
-            {
-                if (localDir[2] > 0.0f)
-                {
-                    sorted[frontFace--] = GetChild(i);
-                }
-                else
-                {
-                    sorted[backFace++] = GetChild(i);
-                }
-            }
-            else  // name[1] == '1'
-            {
-                if (localDir[2] < 0.0f)
-                {
-                    sorted[frontFace--] = GetChild(i);
-                }
-                else
-                {
-                    sorted[backFace++] = GetChild(i);
-                }
-            }
-        }
-        DetachChildAt(i);
-    }
-    RENDERING_ASSERTION_0(backFace - frontFace == 1, "Unexpected condition\n");
-
-    // Reassign the sorted children to the node parent.
-    for (auto i = 0; i < 6; ++i)
-    {
-        // SetChild(i, sorted[i]);
-    }
-}
-
-// Streaming support.
 
 Rendering::BoxSurface::BoxSurface(LoadConstructor value)
-    : Node(value), mVolume(0), mNumUSamples(0), mNumVSamples(0), mNumWSamples(0), mDoSort(false)
+    : ParentType{ value },
+      volume{},
+      numUSamples{ 0 },
+      numVSamples{ 0 },
+      numWSamples{ 0 },
+      doSort{ false }
 {
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 void Rendering::BoxSurface::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    Node::Load(source);
+    ParentType::Load(source);
 
-    int numUCtrlPoints, numVCtrlPoints, numWCtrlPoints;
-    int uDegree, vDegree, wDegree;
+    int32_t numUCtrlPoints{ 0 };
+    int32_t numVCtrlPoints{ 0 };
+    int32_t numWCtrlPoints{ 0 };
+    int32_t uDegree{ 0 };
+    int32_t vDegree{ 0 };
+    int32_t wDegree{ 0 };
     source.Read(numUCtrlPoints);
     source.Read(numVCtrlPoints);
     source.Read(numWCtrlPoints);
     source.Read(uDegree);
     source.Read(vDegree);
     source.Read(wDegree);
-    mVolume = new Mathematics::BSplineVolume<float>(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
-    for (int u = 0; u < numUCtrlPoints; ++u)
+    volume = std::make_shared<Mathematics::BSplineVolume<float>>(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
+    for (auto u = 0; u < numUCtrlPoints; ++u)
     {
-        for (int v = 0; v < numVCtrlPoints; ++v)
+        for (auto v = 0; v < numVCtrlPoints; ++v)
         {
-            for (int w = 0; w < numWCtrlPoints; ++w)
+            for (auto w = 0; w < numWCtrlPoints; ++w)
             {
-                Mathematics::Vector3F ctrl;
+                Mathematics::Vector3F ctrl{};
                 source.ReadAggregate(ctrl);
-                mVolume->SetControlPoint(u, v, w, ctrl);
+                volume->SetControlPoint(u, v, w, ctrl);
             }
         }
     }
 
-    source.Read(mNumUSamples);
-    source.Read(mNumVSamples);
-    source.Read(mNumWSamples);
-    mDoSort = source.ReadBool();
+    source.Read(numUSamples);
+    source.Read(numVSamples);
+    source.Read(numWSamples);
+    doSort = source.ReadBool();
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::BoxSurface::Link(CoreTools::ObjectLink& source)
 {
-    Node::Link(source);
+    RENDERING_CLASS_IS_VALID_9;
+
+    ParentType::Link(source);
 }
 
 void Rendering::BoxSurface::PostLink()
 {
-    Node::PostLink();
+    RENDERING_CLASS_IS_VALID_9;
+
+    ParentType::PostLink();
 }
 
 uint64_t Rendering::BoxSurface::Register(CoreTools::ObjectRegister& target) const
 {
-    return Node::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return ParentType::Register(target);
 }
 
 void Rendering::BoxSurface::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    Node::Save(target);
+    ParentType::Save(target);
 
-    const int numUCtrlPoints = mVolume->GetNumCtrlPoints(0);
-    const int numVCtrlPoints = mVolume->GetNumCtrlPoints(1);
-    const int numWCtrlPoints = mVolume->GetNumCtrlPoints(2);
-    const int uDegree = mVolume->GetDegree(0);
-    const int vDegree = mVolume->GetDegree(1);
-    const int wDegree = mVolume->GetDegree(2);
+    const auto numUCtrlPoints = volume->GetNumCtrlPoints(0);
+    const auto numVCtrlPoints = volume->GetNumCtrlPoints(1);
+    const auto numWCtrlPoints = volume->GetNumCtrlPoints(2);
+    const auto uDegree = volume->GetDegree(0);
+    const auto vDegree = volume->GetDegree(1);
+    const auto wDegree = volume->GetDegree(2);
     target.Write(numUCtrlPoints);
     target.Write(numVCtrlPoints);
     target.Write(numWCtrlPoints);
     target.Write(uDegree);
     target.Write(vDegree);
     target.Write(wDegree);
-    for (int u = 0; u < numUCtrlPoints; ++u)
+    for (auto u = 0; u < numUCtrlPoints; ++u)
     {
-        for (int v = 0; v < numVCtrlPoints; ++v)
+        for (auto v = 0; v < numVCtrlPoints; ++v)
         {
-            for (int w = 0; w < numWCtrlPoints; ++w)
+            for (auto w = 0; w < numWCtrlPoints; ++w)
             {
-                const Mathematics::Vector3F ctrl = mVolume->GetControlPoint(u, v, w);
+                const auto ctrl = volume->GetControlPoint(u, v, w);
                 target.WriteAggregate(ctrl);
             }
         }
     }
 
-    target.Write(mNumUSamples);
-    target.Write(mNumVSamples);
-    target.Write(mNumWSamples);
-    target.Write(mDoSort);
+    target.Write(numUSamples);
+    target.Write(numVSamples);
+    target.Write(numWSamples);
+    target.Write(doSort);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 int Rendering::BoxSurface::GetStreamingSize() const
 {
-    int size = Node::GetStreamingSize();
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const int numUCtrlPoints = mVolume->GetNumCtrlPoints(0);
-    const int numVCtrlPoints = mVolume->GetNumCtrlPoints(1);
-    const int numWCtrlPoints = mVolume->GetNumCtrlPoints(2);
-    size += sizeof(numUCtrlPoints);
-    size += sizeof(numVCtrlPoints);
-    size += sizeof(numWCtrlPoints);
-    size += sizeof(int);  // uDegree
-    size += sizeof(int);  // vDegree
-    size += sizeof(int);  // wDegree
-    size += numUCtrlPoints * numVCtrlPoints * numWCtrlPoints * sizeof(Mathematics::Vector3F);
+    auto size = Node::GetStreamingSize();
 
-    size += sizeof(mNumUSamples);
-    size += sizeof(mNumVSamples);
-    size += sizeof(mNumWSamples);
-    size += CORE_TOOLS_STREAM_SIZE(mDoSort);
+    const auto numUCtrlPoints = volume->GetNumCtrlPoints(0);
+    const auto numVCtrlPoints = volume->GetNumCtrlPoints(1);
+    const auto numWCtrlPoints = volume->GetNumCtrlPoints(2);
+    size += CORE_TOOLS_STREAM_SIZE(numUCtrlPoints);
+    size += CORE_TOOLS_STREAM_SIZE(numVCtrlPoints);
+    size += CORE_TOOLS_STREAM_SIZE(numWCtrlPoints);
+    size += CORE_TOOLS_STREAM_SIZE(int{});  // uDegree
+    size += CORE_TOOLS_STREAM_SIZE(int{});  // vDegree
+    size += CORE_TOOLS_STREAM_SIZE(int{});  // wDegree
+    size += numUCtrlPoints * numVCtrlPoints * numWCtrlPoints * CORE_TOOLS_STREAM_SIZE(Mathematics::Vector3F{});
+
+    size += CORE_TOOLS_STREAM_SIZE(numUSamples);
+    size += CORE_TOOLS_STREAM_SIZE(numVSamples);
+    size += CORE_TOOLS_STREAM_SIZE(numWSamples);
+    size += CORE_TOOLS_STREAM_SIZE(doSort);
 
     return size;
 }
 
-const Mathematics::BSplineVolume<float>* Rendering::BoxSurface::GetVolume() const noexcept
+const Mathematics::BSplineVolume<float>& Rendering::BoxSurface::GetVolume() const noexcept
 {
-    return mVolume;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return *volume;
 }
 
 int Rendering::BoxSurface::GetNumUSamples() const noexcept
 {
-    return mNumUSamples;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return numUSamples;
 }
 
 int Rendering::BoxSurface::GetNumVSamples() const noexcept
 {
-    return mNumVSamples;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return numVSamples;
 }
 
 int Rendering::BoxSurface::GetNumWSamples() const noexcept
 {
-    return mNumWSamples;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return numWSamples;
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::BoxSurface::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

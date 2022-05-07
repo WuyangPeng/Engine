@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 15:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 15:05)
 
 #ifndef RENDERING_SHADERS_SHADER_BASE_DATA_H
 #define RENDERING_SHADERS_SHADER_BASE_DATA_H
@@ -10,19 +13,15 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Flags/ShaderFlags.h"
-#include "CoreTools/Helper/ExportMacro.h"
-
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+
 #include <string>
 #include <vector>
-RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(ShaderBaseData,ShaderBaseDataImpl);
 
-namespace CoreTools
-{
-    class BufferSource;
-    class BufferTarget;
-}
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(ShaderBaseData, ShaderBaseDataImpl);
 
 namespace Rendering
 {
@@ -34,7 +33,6 @@ namespace Rendering
         using BufferTarget = CoreTools::BufferTarget;
 
     public:
-        ShaderBaseData();
         explicit ShaderBaseData(int number);
 
         CLASS_INVARIANT_DECLARE;
@@ -45,14 +43,14 @@ namespace Rendering
 
         void SetData(int index, const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic);
 
-        int GetNumber() const;
-        const std::string GetName(int index) const;
-        ShaderFlags::VariableType GetType(int index) const;
-        ShaderFlags::VariableSemantic GetSemantic(int index) const;
+        NODISCARD int GetNumber() const;
+        NODISCARD std::string GetName(int index) const;
+        NODISCARD ShaderFlags::VariableType GetType(int index) const;
+        NODISCARD ShaderFlags::VariableSemantic GetSemantic(int index) const;
 
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const;
+        NODISCARD int GetStreamingSize() const;
 
     private:
         PackageType impl;

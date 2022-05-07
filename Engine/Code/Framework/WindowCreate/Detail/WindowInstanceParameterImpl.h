@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 09:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 15:06)
 
 #ifndef FRAMEWORK_WINDOW_CREATE_WINDOW_INSTANCE_PARAMETER_IMPL_H
 #define FRAMEWORK_WINDOW_CREATE_WINDOW_INSTANCE_PARAMETER_IMPL_H
@@ -16,25 +19,25 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE WindowInstanceParameterImpl
-	{
-	public:
-		using ClassType = WindowInstanceParameterImpl;
-		using String = System::String;
-		using HInstance = System::WindowsHInstance;
+    class FRAMEWORK_HIDDEN_DECLARE WindowInstanceParameterImpl
+    {
+    public:
+        using ClassType = WindowInstanceParameterImpl;
+        using String = System::String;
+        using WindowsHInstance = System::WindowsHInstance;
 
-	public:
-		WindowInstanceParameterImpl(HInstance instance, const String& className);
+    public:
+        WindowInstanceParameterImpl(WindowsHInstance instance, const String& className);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		HInstance GetHInstance() const noexcept;
-		String GetWindowClassName() const;
+        NODISCARD WindowsHInstance GetHInstance() const noexcept;
+        NODISCARD String GetWindowClassName() const;
 
-	private:
-		HInstance m_HInstance;
-		String m_ClassName;
-	};
+    private:
+        WindowsHInstance hInstance;
+        String className;
+    };
 }
 
-#endif // FRAMEWORK_WINDOW_CREATE_WINDOW_INSTANCE_PARAMETER_IMPL_H
+#endif  // FRAMEWORK_WINDOW_CREATE_WINDOW_INSTANCE_PARAMETER_IMPL_H

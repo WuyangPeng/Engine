@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.1.0 (2020/06/26 22:08)
 
 #include "ViewMiddleLayerTesting.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/AssertMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
 #include "Framework/WindowCreate/WindowPoint.h"
@@ -81,7 +81,7 @@ void Framework::ViewMiddleLayerTesting
 
 	ASSERT_TRUE(middleLayer.Paint());
 	ASSERT_TRUE(middleLayer.Move(point));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide, size));
+	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, size));
 
 	ASSERT_TRUE(middleLayer.KeyUp(0, point));
 	ASSERT_TRUE(middleLayer.KeyDown(0, point));
@@ -110,13 +110,13 @@ void Framework::ViewMiddleLayerTesting
 
 	auto clearColor = middleLayer.GetClearColor();
 	const decltype(clearColor) blackColour{ 0.0f, 0.0f, 0.0f, 1.0f };
-        ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, blackColour, Mathematics::FloatMath::sm_Epsilon);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, blackColour, Mathematics::MathF::epsilon);
 
 	const decltype(clearColor) redColour{ 1.0f, 0.0f, 0.0f, 1.0f };
 	middleLayer.SetClearColor(redColour);
 	
 	clearColor = middleLayer.GetClearColor();	
-	ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, redColour, Mathematics::FloatMath::sm_Epsilon);
+	ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, redColour, Mathematics::MathF::epsilon);
 
 	middleLayer.DrawFrameRate(WindowPoint{ }, blackColour);
 	ASSERT_TRUE(middleLayer.Paint()); 	

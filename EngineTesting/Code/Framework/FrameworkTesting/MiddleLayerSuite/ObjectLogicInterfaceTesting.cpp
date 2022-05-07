@@ -7,7 +7,7 @@
 #include "ObjectLogicInterfaceTesting.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "Framework/MiddleLayer/ObjectLogicInterface.h" 
 #include "Framework/MiddleLayer/NetworkManagerInterface.h"
 #include "Framework/MiddleLayer/InputManagerInterface.h"
@@ -17,7 +17,7 @@
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
@@ -63,7 +63,7 @@ void Framework::ObjectLogicInterfaceTesting
 	ASSERT_TRUE(middleLayer.Create());	
 	ASSERT_TRUE(middleLayer.Paint());
 	ASSERT_TRUE(middleLayer.Move(WindowPoint()));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide,WindowSize()));
+	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide,WindowSize()));
 	ASSERT_TRUE(middleLayer.KeyDown(0,WindowPoint()));
 	ASSERT_TRUE(middleLayer.KeyUp(0,WindowPoint()));
 	ASSERT_TRUE(middleLayer.SpecialKeyDown (0,WindowPoint()));

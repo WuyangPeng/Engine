@@ -1,71 +1,32 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/29 11:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/22 20:50)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLPixelShader.h"
 #include "CoreTools/Contract/Noexcept.h"
- 
-using namespace Rendering;
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-
-PdrPixelShader::PdrPixelShader (Renderer*, const PixelShader* pshader)
+Rendering::PdrPixelShader::PdrPixelShader(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const PixelShader* pshader) noexcept
+    : ParentType{}, shader{}
 {
-    CoreTools::DisableNoexcept();
-	pshader;
-   /* const char* programText = pshader->GetProgram(PixelShader::GetProfile())->c_str();
-    int programLength = (int)strlen(programText);
-
-    glEnable(GL_FRAGMENT_PROGRAM_ARB);
-    glGenProgramsARB(1, &mShader);
-    glBindProgramARB(GL_FRAGMENT_PROGRAM_ARB, mShader);
-    glProgramStringARB(GL_FRAGMENT_PROGRAM_ARB, GL_PROGRAM_FORMAT_ASCII_ARB,programLength, programText);
-    glDisable(GL_FRAGMENT_PROGRAM_ARB);*/
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-PdrPixelShader::~PdrPixelShader ()
+CLASS_INVARIANT_STUB_DEFINE(Rendering, PdrPixelShader)
+
+void Rendering::PdrPixelShader::Enable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const PixelShader* pshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
 {
-    //glDeleteProgramsARB(1, &mShader);
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-void PdrPixelShader::Enable (Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters)
+void Rendering::PdrPixelShader::Disable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const PixelShader* pshader, MAYBE_UNUSED const ShaderParameters* parameters) noexcept
 {
-    CoreTools::DisableNoexcept();
-	renderer; pshader; parameters;
-	/*
-    // Enable the buffer by setting the state.
-    glEnable(GL_FRAGMENT_PROGRAM_ARB);
-    glBindProgramARB(GL_FRAGMENT_PROGRAM_ARB, mShader);
-
-    // Set the shader constants.
-    int profile = PixelShader::GetProfile();
-    const int numConstants = pshader->GetNumConstants();
-    for (int i = 0; i < numConstants; ++i)
-    {
-        const int numRegisters = pshader->GetNumRegistersUsed(i);
-        const float* data = parameters->GetConstant(i)->GetData();
-        int baseRegister = pshader->GetBaseRegister(profile, i);
-        for (int j = 0; j < numRegisters; ++j)
-        {
-            glProgramLocalParameter4fvARB(GL_FRAGMENT_PROGRAM_ARB,(GLuint)baseRegister, data);
-            baseRegister++;
-            data += 4;
-        }
-    }
-
-    SetSamplerState(renderer, pshader, profile, parameters,renderer->mData->mMaxPShaderImages, renderer->mData->mCurrentSS);*/
+    RENDERING_CLASS_IS_VALID_1;
 }
-
-void PdrPixelShader::Disable (Renderer* renderer, const PixelShader* pshader,
-    const ShaderParameters* parameters)
-{
-    CoreTools::DisableNoexcept();
-	renderer; pshader; parameters;
-   /* glDisable(GL_FRAGMENT_PROGRAM_ARB);
-    int profile = PixelShader::GetProfile();
-    DisableTextures(renderer, pshader, profile, parameters,renderer->mData->mMaxPShaderImages);*/
-}
-

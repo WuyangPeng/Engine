@@ -1,50 +1,64 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 13:42)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateVcxprojImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"  
-#include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTestingTemplateVcxprojImpl
-	::sm_Extension(SYSTEM_TEXT(".vcxproj"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTestingTemplateVcxprojImpl
-::GenerateTestingTemplateVcxprojImpl(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName,
-                                     const System::String& includeName, const System::String& testingIncludeName,
-									 const System::String& debugLibName, const System::String& releaseLibName)
-	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName), m_ModuleName(moduleName),
-	 m_IncludeName(includeName), m_TestingIncludeName(testingIncludeName),
-	 m_DebugLibName(debugLibName), m_ReleaseLibName(releaseLibName)
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTestingTemplateVcxprojImpl::extension{ SYSTEM_TEXT(".vcxproj"s) };
+
+AssistTools::GenerateTestingTemplateVcxprojImpl::GenerateTestingTemplateVcxprojImpl(const System::String& templateFileName,
+                                                                                    const System::String& projectName,
+                                                                                    const System::String& moduleName,
+                                                                                    const System::String& includeName,
+                                                                                    const System::String& testingIncludeName,
+                                                                                    const System::String& debugLibName,
+                                                                                    const System::String& releaseLibName)
+    : ParentType{ templateFileName, extension },
+      projectName{ projectName },
+      moduleName{ moduleName },
+      includeName{ includeName },
+      testingIncludeName{ testingIncludeName },
+      debugLibName{ debugLibName },
+      releaseLibName{ releaseLibName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateVcxprojImpl)
 
-void AssistTools::GenerateTestingTemplateVcxprojImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newModuleName, const System::String& newIncludeName, 
-                 const System::String& newTestingIncludeName,const System::String& newDebugLibName, const System::String& newReleaseLibName) const
+void AssistTools::GenerateTestingTemplateVcxprojImpl::GenerateTo(const System::String& resourceDirectory,
+                                                                 const System::String& solutionName,
+                                                                 const System::String& newModuleName,
+                                                                 const System::String& newIncludeName,
+                                                                 const System::String& newTestingIncludeName,
+                                                                 const System::String& newDebugLibName,
+                                                                 const System::String& newReleaseLibName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable;
-	newVariable.insert(make_pair(m_ProjectName, solutionName));
-	newVariable.insert(make_pair(m_ModuleName, newModuleName));
-	newVariable.insert(make_pair(m_IncludeName, newIncludeName));
-	newVariable.insert(make_pair(m_TestingIncludeName, newTestingIncludeName));
-	newVariable.insert(make_pair(m_DebugLibName, newDebugLibName));
-	newVariable.insert(make_pair(m_ReleaseLibName, newReleaseLibName));
+    VariableType newVariable{};
+    newVariable.emplace(projectName, solutionName);
+    newVariable.emplace(moduleName, newModuleName);
+    newVariable.emplace(includeName, newIncludeName);
+    newVariable.emplace(testingIncludeName, newTestingIncludeName);
+    newVariable.emplace(debugLibName, newDebugLibName);
+    newVariable.emplace(releaseLibName, newReleaseLibName);
 
-	return ParentType::Generate (resourceDirectory, solutionName + newModuleName + GetTesting(), newVariable);
+    return ParentType::Generate(resourceDirectory, solutionName + newModuleName + GetTesting(), newVariable);
 }
- 
+
 /*
 示例模板：
 <?xml version="1.0" encoding="utf-8"?>

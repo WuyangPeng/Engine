@@ -1,53 +1,58 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 21:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 17:53)
 
 #ifndef FRAMEWORK_WINDOWS_API_FRAME_BUILD_H
 #define FRAMEWORK_WINDOWS_API_FRAME_BUILD_H
 
-#include "Framework/WindowCreate/WindowCreate.h"
 #include "Framework/Application/ApplicationFwd.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
+#include "Framework/WindowCreate/WindowCreate.h"
 #include "Framework/WindowProcess/WindowProcess.h"
 #include "Framework/WindowRegister/WindowRegister.h"
-#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 
 namespace Framework
 {
-	template <typename Process>
-	class WindowsAPIFrameBuild
-	{
-	public:
-		using ClassType = WindowsAPIFrameBuild<Process>;
-		using String = System::String;
-		using HWnd = System::WindowsHWnd; 
-		using HInstance = System::WindowsHInstance;
+    template <typename Process>
+    class WindowsAPIFrameBuild
+    {
+    public:
+        using ClassType = WindowsAPIFrameBuild<Process>;
+        using String = System::String;
+        using HWnd = System::WindowsHWnd;
+        using HInstance = System::WindowsHInstance;
 
-	public:
-		explicit WindowsAPIFrameBuild(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,
-									  const EnvironmentDirectory& environmentDirectory);
-		virtual ~WindowsAPIFrameBuild() noexcept = default;
-		WindowsAPIFrameBuild(const WindowsAPIFrameBuild& rhs) noexcept = delete;
-		WindowsAPIFrameBuild& operator=(const WindowsAPIFrameBuild& rhs) noexcept = delete;
-		WindowsAPIFrameBuild(WindowsAPIFrameBuild&& rhs) noexcept;
-		WindowsAPIFrameBuild& operator=(WindowsAPIFrameBuild&& rhs) noexcept;
+    public:
+        explicit WindowsAPIFrameBuild(HInstance instance,
+                                      const char* commandLine,
+                                      const WindowApplicationInformation& information,
+                                      const EnvironmentDirectory& environmentDirectory);
+        virtual ~WindowsAPIFrameBuild() noexcept = default;
+        WindowsAPIFrameBuild(const WindowsAPIFrameBuild& rhs) noexcept = delete;
+        WindowsAPIFrameBuild& operator=(const WindowsAPIFrameBuild& rhs) noexcept = delete;
+        WindowsAPIFrameBuild(WindowsAPIFrameBuild&& rhs) noexcept;
+        WindowsAPIFrameBuild& operator=(WindowsAPIFrameBuild&& rhs) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		HWnd GetHwnd() const noexcept;
-		HInstance GetHInstance() const noexcept;
+        NODISCARD HWnd GetHwnd() const noexcept;
+        NODISCARD HInstance GetHInstance() const noexcept;
 
-		int EnterMessageLoop();
+        int EnterMessageLoop();
 
-	private:
-		using WindowRegister = WindowRegisterHandle<Process>;
+    private:
+        using WindowRegister = WindowRegisterHandle<Process>;
 
-	private:
-		WindowRegister m_WindowRegister;
-		WindowCreateHandle m_WindowCreate;
-		WindowMessageLoop m_WindowMessageLoop;
-	};
+    private:
+        WindowRegister windowRegister;
+        WindowCreateHandle windowCreate;
+        WindowMessageLoop windowMessageLoop;
+    };
 }
 
-#endif // FRAMEWORK_WINDOWS_API_FRAME_BUILD_H
+#endif  // FRAMEWORK_WINDOWS_API_FRAME_BUILD_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.3.0.1 (2020/05/21 14:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/05/06 15:30)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_DETAIL_H
@@ -11,1186 +14,2351 @@
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Noexcept.h"
 
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-									  MessageManager, EventManager, SystemManager, ResourceManager,
-									  AudioManager, CameraSystemsManager, RenderingManager, GUIManager>
-	::EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController)
-	:ParentType{ modelViewController },
-	 m_NetworkManager{ std::make_shared<NetworkManagerType>(modelViewController) },
-	 m_InputManager{ std::make_shared<InputManagerType>(modelViewController) },
-	 m_ObjectLogicManager{ std::make_shared<ObjectLogicManagerType>(modelViewController) },
-	 m_PhysicalModellingManager{ std::make_shared<PhysicalModellingManagerType>(modelViewController) },
-	 m_MessageManager{ std::make_shared<MessageManagerType>(modelViewController) },
-	 m_EventManager{ std::make_shared<EventManagerType>(modelViewController) },
-	 m_SystemManager{ std::make_shared<SystemManagerType>(modelViewController) },
-	 m_ResourceManager{ std::make_shared<ResourceManagerType>(modelViewController) },
-	 m_AudioManager{ std::make_shared<AudioManagerType>(modelViewController) },
-	 m_CameraSystemsManager{ std::make_shared<CameraSystemsManagerType>(modelViewController) },
-	 m_RenderingManager{ std::make_shared<RenderingManagerType>(modelViewController) },
-	 m_GUIManager{ std::make_shared<GUIManagerType>(modelViewController) }
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                      InputManager,
+                                      NetworkManager,
+                                      ObjectLogicManager,
+                                      PhysicalModellingManager,
+                                      MessageManager,
+                                      EventManager,
+                                      SystemManager,
+                                      ResourceManager,
+                                      AudioManager,
+                                      CameraSystemsManager,
+                                      RenderingManager,
+                                      GUIManager>::EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController)
+    : ParentType{ modelViewController },
+      network{ std::make_shared<NetworkManagerType>(modelViewController) },
+      input{ std::make_shared<InputManagerType>(modelViewController) },
+      objectLogic{ std::make_shared<ObjectLogicManagerType>(modelViewController) },
+      physicalModelling{ std::make_shared<PhysicalModellingManagerType>(modelViewController) },
+      message{ std::make_shared<MessageManagerType>(modelViewController) },
+      event{ std::make_shared<EventManagerType>(modelViewController) },
+      system{ std::make_shared<SystemManagerType>(modelViewController) },
+      resource{ std::make_shared<ResourceManagerType>(modelViewController) },
+      audio{ std::make_shared<AudioManagerType>(modelViewController) },
+      cameraSystems{ std::make_shared<CameraSystemsManagerType>(modelViewController) },
+      rendering{ std::make_shared<RenderingManagerType>(modelViewController) },
+      gui{ std::make_shared<GUIManagerType>(modelViewController) }
 {
-	Init();
+    Init();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Init()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Init()
 {
-	InitNetworkManager();
-	InitInputManager();
-	InitObjectLogicManager();
-	InitPhysicalModellingManager();
-	InitMessageManager();
-	InitEventManager();
-	InitSystemManager();
-	InitResourceManager();
-	InitAudioManager();
-	InitCameraSystemsManager();
-	InitRenderingManager();
-	InitGUIManager();
+    InitNetworkManager();
+    InitInputManager();
+    InitObjectLogicManager();
+    InitPhysicalModellingManager();
+    InitMessageManager();
+    InitEventManager();
+    InitSystemManager();
+    InitResourceManager();
+    InitAudioManager();
+    InitCameraSystemsManager();
+    InitRenderingManager();
+    InitGUIManager();
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitNetworkManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitNetworkManager()
 {
-	m_NetworkManager->SetInputManager(m_InputManager);
-	m_NetworkManager->SetObjectLogicManager(m_ObjectLogicManager);
+    network->SetInputManager(input);
+    network->SetObjectLogicManager(objectLogic);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitInputManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitInputManager()
 {
-	m_InputManager->SetNetworkManager(m_NetworkManager);
-	m_InputManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_InputManager->SetSystemManager(m_SystemManager);
-	m_InputManager->SetCameraSystemsManager(m_CameraSystemsManager);
+    input->SetNetworkManager(network);
+    input->SetObjectLogicManager(objectLogic);
+    input->SetSystemManager(system);
+    input->SetCameraSystemsManager(cameraSystems);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitObjectLogicManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitObjectLogicManager()
 {
-	m_ObjectLogicManager->SetNetworkManager(m_NetworkManager);
-	m_ObjectLogicManager->SetInputManager(m_InputManager);
-	m_ObjectLogicManager->SetPhysicalModellingManager(m_PhysicalModellingManager);
-	m_ObjectLogicManager->SetMessageManager(m_MessageManager);
-	m_ObjectLogicManager->SetSystemManager(m_SystemManager);
+    objectLogic->SetNetworkManager(network);
+    objectLogic->SetInputManager(input);
+    objectLogic->SetPhysicalModellingManager(physicalModelling);
+    objectLogic->SetMessageManager(message);
+    objectLogic->SetSystemManager(system);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitPhysicalModellingManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitPhysicalModellingManager()
 {
-	m_PhysicalModellingManager->SetObjectLogicManager(m_ObjectLogicManager);
+    physicalModelling->SetObjectLogicManager(objectLogic);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitMessageManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitMessageManager()
 {
-	m_MessageManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_MessageManager->SetSystemManager(m_SystemManager);
+    message->SetObjectLogicManager(objectLogic);
+    message->SetSystemManager(system);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitEventManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitEventManager()
 {
-	m_EventManager->SetMessageManager(m_MessageManager);
-	m_EventManager->SetSystemManager(m_SystemManager);
+    event->SetMessageManager(message);
+    event->SetSystemManager(system);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitSystemManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitSystemManager()
 {
-	m_SystemManager->SetInputManager(m_InputManager);
-	m_SystemManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_SystemManager->SetMessageManager(m_MessageManager);
-	m_SystemManager->SetEventManager(m_EventManager);
-	m_SystemManager->SetResourceManager(m_ResourceManager);
-	m_SystemManager->SetAudioManager(m_AudioManager);
-	m_SystemManager->SetCameraSystemsManager(m_CameraSystemsManager);
-	m_SystemManager->SetRenderingManager(m_RenderingManager);
+    system->SetInputManager(input);
+    system->SetObjectLogicManager(objectLogic);
+    system->SetMessageManager(message);
+    system->SetEventManager(event);
+    system->SetResourceManager(resource);
+    system->SetAudioManager(audio);
+    system->SetCameraSystemsManager(cameraSystems);
+    system->SetRenderingManager(rendering);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitResourceManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitResourceManager()
 {
-	m_ResourceManager->SetSystemManager(m_SystemManager);
-	m_ResourceManager->SetAudioManager(m_AudioManager);
-	m_ResourceManager->SetRenderingManager(m_RenderingManager);
-	m_ResourceManager->SetGUIManager(m_GUIManager);
+    resource->SetSystemManager(system);
+    resource->SetAudioManager(audio);
+    resource->SetRenderingManager(rendering);
+    resource->SetGUIManager(gui);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitAudioManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitAudioManager()
 {
-	m_AudioManager->SetSystemManager(m_SystemManager);
-	m_AudioManager->SetResourceManager(m_ResourceManager);
-}
-
-
-// private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitCameraSystemsManager()
-{
-	m_CameraSystemsManager->SetSystemManager(m_SystemManager);
-	m_CameraSystemsManager->SetRenderingManager(m_RenderingManager);
-	m_CameraSystemsManager->SetGUIManager(m_GUIManager);
-}
-
-// private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitRenderingManager()
-{
-	m_RenderingManager->SetSystemManager(m_SystemManager);
+    audio->SetSystemManager(system);
+    audio->SetResourceManager(resource);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitGUIManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitCameraSystemsManager()
 {
-	m_GUIManager->SetRenderingManager(m_RenderingManager);
-}
-
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-									  MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-									  CameraSystemsManager, RenderingManager, GUIManager>
-	::~EngineMiddleLayerContainer()
-{
-	CoreTools::NoexceptNoReturn(*this, &ClassType::SetEngineManagerNullptr);
-
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    cameraSystems->SetSystemManager(system);
+    cameraSystems->SetRenderingManager(rendering);
+    cameraSystems->SetGUIManager(gui);
 }
 
 // private
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										  CameraSystemsManager, RenderingManager, GUIManager>
-	::SetEngineManagerNullptr()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitRenderingManager()
 {
-	MiddleLayerInterfaceSharedPtr nullPointer;
-
-	m_SystemManager->SetEngineManager(nullPointer);
+    rendering->SetSystemManager(system);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-									  MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-									  CameraSystemsManager, RenderingManager, GUIManager>
-	::EngineMiddleLayerContainer(EngineMiddleLayerContainer&& rhs) noexcept
-	:ParentType{ std::move(rhs) },
-	 m_NetworkManager{ std::move(rhs.m_NetworkManager) },
-	 m_InputManager{ std::move(rhs.m_InputManager) },
-	 m_ObjectLogicManager{ std::move(rhs.m_ObjectLogicManager) },
-	 m_PhysicalModellingManager{ std::move(rhs.m_PhysicalModellingManager) },
-	 m_MessageManager{ std::move(rhs.m_MessageManager) },
-	 m_EventManager{ std::move(rhs.m_EventManager) },
-	 m_SystemManager{ std::move(rhs.m_SystemManager) },
-	 m_ResourceManager{ std::move(rhs.m_ResourceManager) },
-	 m_AudioManager{ std::move(rhs.m_AudioManager) },
-	 m_CameraSystemsManager{ std::move(rhs.m_CameraSystemsManager) },
-	 m_RenderingManager{ std::move(rhs.m_RenderingManager) },
-	 m_GUIManager{ std::move(rhs.m_GUIManager) }
+// private
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitGUIManager()
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    gui->SetRenderingManager(rendering);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager> 
-Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager, MessageManager, EventManager, SystemManager, ResourceManager, AudioManager, CameraSystemsManager, RenderingManager, GUIManager>&
-	Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager, MessageManager, EventManager, SystemManager, ResourceManager, AudioManager, CameraSystemsManager, RenderingManager, GUIManager>
-	::operator=(EngineMiddleLayerContainer&& rhs) noexcept
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                      InputManager,
+                                      NetworkManager,
+                                      ObjectLogicManager,
+                                      PhysicalModellingManager,
+                                      MessageManager,
+                                      EventManager,
+                                      SystemManager,
+                                      ResourceManager,
+                                      AudioManager,
+                                      CameraSystemsManager,
+                                      RenderingManager,
+                                      GUIManager>::~EngineMiddleLayerContainer() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    CoreTools::NoexceptNoReturn(*this, &ClassType::SetEngineManagerNullptr);
 
-	ParentType::operator=(std::move(rhs));
-	m_NetworkManager = std::move(rhs.m_NetworkManager);
-	m_InputManager = std::move(rhs.m_InputManager);
-	m_ObjectLogicManager = std::move(rhs.m_ObjectLogicManager);
-	m_PhysicalModellingManager = std::move(rhs.m_PhysicalModellingManager);
-	m_MessageManager = std::move(rhs.m_MessageManager);
-	m_EventManager = std::move(rhs.m_EventManager);
-	m_SystemManager = std::move(rhs.m_SystemManager);
-	m_ResourceManager = std::move(rhs.m_ResourceManager);
-	m_AudioManager = std::move(rhs.m_AudioManager);
-	m_CameraSystemsManager = std::move(rhs.m_CameraSystemsManager);
-	m_RenderingManager = std::move(rhs.m_RenderingManager);
-	m_GUIManager = std::move(rhs.m_GUIManager);
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
 
-	return *this;
+// private
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetEngineManagerNullptr()
+{
+    system->SetEngineManager(nullptr);
+}
+
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                      InputManager,
+                                      NetworkManager,
+                                      ObjectLogicManager,
+                                      PhysicalModellingManager,
+                                      MessageManager,
+                                      EventManager,
+                                      SystemManager,
+                                      ResourceManager,
+                                      AudioManager,
+                                      CameraSystemsManager,
+                                      RenderingManager,
+                                      GUIManager>::EngineMiddleLayerContainer(EngineMiddleLayerContainer&& rhs) noexcept
+    : ParentType{ std::move(rhs) },
+      network{ std::move(rhs.network) },
+      input{ std::move(rhs.input) },
+      objectLogic{ std::move(rhs.objectLogic) },
+      physicalModelling{ std::move(rhs.physicalModelling) },
+      message{ std::move(rhs.message) },
+      event{ std::move(rhs.event) },
+      system{ std::move(rhs.system) },
+      resource{ std::move(rhs.resource) },
+      audio{ std::move(rhs.audio) },
+      cameraSystems{ std::move(rhs.cameraSystems) },
+      rendering{ std::move(rhs.rendering) },
+      gui{ std::move(rhs.gui) }
+{
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                      InputManager,
+                                      NetworkManager,
+                                      ObjectLogicManager,
+                                      PhysicalModellingManager,
+                                      MessageManager,
+                                      EventManager,
+                                      SystemManager,
+                                      ResourceManager,
+                                      AudioManager,
+                                      CameraSystemsManager,
+                                      RenderingManager,
+                                      GUIManager>&
+    Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                          InputManager,
+                                          NetworkManager,
+                                          ObjectLogicManager,
+                                          PhysicalModellingManager,
+                                          MessageManager,
+                                          EventManager,
+                                          SystemManager,
+                                          ResourceManager,
+                                          AudioManager,
+                                          CameraSystemsManager,
+                                          RenderingManager,
+                                          GUIManager>::operator=(EngineMiddleLayerContainer&& rhs) noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    ParentType::operator=(std::move(rhs));
+    network = std::move(rhs.network);
+    input = std::move(rhs.input);
+    objectLogic = std::move(rhs.objectLogic);
+    physicalModelling = std::move(rhs.physicalModelling);
+    message = std::move(rhs.message);
+    event = std::move(rhs.event);
+    system = std::move(rhs.system);
+    resource = std::move(rhs.resource);
+    audio = std::move(rhs.audio);
+    cameraSystems = std::move(rhs.cameraSystems);
+    rendering = std::move(rhs.rendering);
+    gui = std::move(rhs.gui);
+
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::IsValid() const noexcept
+
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::IsValid() const noexcept
 {
-	if (ParentType::IsValid() &&
-		m_NetworkManager != nullptr&&
-		m_InputManager != nullptr &&
-		m_ObjectLogicManager != nullptr &&
-		m_PhysicalModellingManager != nullptr &&
-		m_MessageManager != nullptr &&
-		m_EventManager != nullptr &&
-		m_SystemManager != nullptr &&
-		m_ResourceManager != nullptr &&
-		m_AudioManager != nullptr &&
-		m_CameraSystemsManager != nullptr &&
-		m_RenderingManager != nullptr &&
-		m_GUIManager != nullptr)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-#endif // OPEN_CLASS_INVARIANT
-
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	auto manager = inputManager;
-
-	m_InputManager = boost::polymorphic_pointer_downcast<InputManagerInterface>(manager);
-
-	InitInputManager();
-	ResetInputManager();
-}
-
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	auto manager = networkManager;
-
-	m_NetworkManager = boost::polymorphic_pointer_downcast<NetworkManagerInterface>(manager);
-
-	InitNetworkManager();
-	ResetNetworkManager();
+    if (ParentType::IsValid() &&
+        network != nullptr &&
+        input != nullptr &&
+        objectLogic != nullptr &&
+        physicalModelling != nullptr &&
+        message != nullptr &&
+        event != nullptr &&
+        system != nullptr &&
+        resource != nullptr &&
+        audio != nullptr &&
+        cameraSystems != nullptr &&
+        rendering != nullptr &&
+        gui != nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetObjectLogicManager(const MiddleLayerInterfaceSharedPtr& objectLogicManager)
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = objectLogicManager;
+    input = boost::polymorphic_pointer_downcast<InputManagerInterface>(inputManager);
 
-	m_ObjectLogicManager = boost::polymorphic_pointer_downcast<ObjectLogicManagerInterface>(manager);
-
-	InitObjectLogicManager();
-	ResetObjectLogicManager();
+    InitInputManager();
+    ResetInputManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = physicalModellingManager;
+    network = boost::polymorphic_pointer_downcast<NetworkManagerInterface>(networkManager);
 
-	m_PhysicalModellingManager = boost::polymorphic_pointer_downcast<PhysicalModellingManagerInterface>(manager);
-
-	InitPhysicalModellingManager();
-	ResetPhysicalModellingManager();
+    InitNetworkManager();
+    ResetNetworkManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetObjectLogicManager(const MiddleLayerInterfaceSharedPtr& objectLogicManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = messageManager;
+    objectLogic = boost::polymorphic_pointer_downcast<ObjectLogicManagerInterface>(objectLogicManager);
 
-	m_MessageManager = boost::polymorphic_pointer_downcast<MessageManagerInterface>(manager);
-
-	InitMessageManager();
-	ResetMessageManager();
+    InitObjectLogicManager();
+    ResetObjectLogicManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetEventManager(const MiddleLayerInterfaceSharedPtr& eventManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = eventManager;
+    physicalModelling = boost::polymorphic_pointer_downcast<PhysicalModellingManagerInterface>(physicalModellingManager);
 
-	m_EventManager = boost::polymorphic_pointer_downcast<EventManagerInterface>(manager);
-
-	InitEventManager();
-	ResetEventManager();
+    InitPhysicalModellingManager();
+    ResetPhysicalModellingManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = systemManager;
+    message = boost::polymorphic_pointer_downcast<MessageManagerInterface>(messageManager);
 
-	m_SystemManager = boost::polymorphic_pointer_downcast<SystemManagerInterface>(manager);
-
-	InitSystemManager();
-	InitSystemEngineInterface();
-	ResetSystemManager();
+    InitMessageManager();
+    ResetMessageManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetResourceManager(const MiddleLayerInterfaceSharedPtr& resourceManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetEventManager(const MiddleLayerInterfaceSharedPtr& eventManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = resourceManager;
+    event = boost::polymorphic_pointer_downcast<EventManagerInterface>(eventManager);
 
-	m_ResourceManager = boost::polymorphic_pointer_downcast<ResourceManagerInterface>(manager);
-
-	InitResourceManager();
-	ResetResourceManager();
+    InitEventManager();
+    ResetEventManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetAudioManager(const MiddleLayerInterfaceSharedPtr& audioManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = audioManager;
+    system = boost::polymorphic_pointer_downcast<SystemManagerInterface>(systemManager);
 
-	m_AudioManager = boost::polymorphic_pointer_downcast<AudioManagerInterface>(manager);
-
-	InitAudioManager();
-	ResetAudioManager();
+    InitSystemManager();
+    InitSystemEngineInterface();
+    ResetSystemManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetCameraSystemsManager(const MiddleLayerInterfaceSharedPtr& cameraSystemsManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetResourceManager(const MiddleLayerInterfaceSharedPtr& resourceManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = cameraSystemsManager;
+    resource = boost::polymorphic_pointer_downcast<ResourceManagerInterface>(resourceManager);
 
-	m_CameraSystemsManager = boost::polymorphic_pointer_downcast<CameraSystemsManagerInterface>(manager);
-
-	InitCameraSystemsManager();
-	ResetCameraSystemsManager();
+    InitResourceManager();
+    ResetResourceManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetRenderingManager(const MiddleLayerInterfaceSharedPtr& renderingManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetAudioManager(const MiddleLayerInterfaceSharedPtr& audioManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = renderingManager;
+    audio = boost::polymorphic_pointer_downcast<AudioManagerInterface>(audioManager);
 
-	m_RenderingManager = boost::polymorphic_pointer_downcast<RenderingManagerInterface>(manager);
-
-	InitRenderingManager();
-	ResetRenderingManager();
+    InitAudioManager();
+    ResetAudioManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SetGUIManager(const MiddleLayerInterfaceSharedPtr& guiManager)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetCameraSystemsManager(const MiddleLayerInterfaceSharedPtr& cameraSystemsManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = guiManager;
+    cameraSystems = boost::polymorphic_pointer_downcast<CameraSystemsManagerInterface>(cameraSystemsManager);
 
-	m_GUIManager = boost::polymorphic_pointer_downcast<GUIManagerInterface>(manager);
-
-	InitGUIManager();
-	ResetGUIManager();
+    InitCameraSystemsManager();
+    ResetCameraSystemsManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetNetworkManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetRenderingManager(const MiddleLayerInterfaceSharedPtr& renderingManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_InputManager->SetNetworkManager(m_NetworkManager);
-	m_ObjectLogicManager->SetNetworkManager(m_NetworkManager);
+    rendering = boost::polymorphic_pointer_downcast<RenderingManagerInterface>(renderingManager);
+
+    InitRenderingManager();
+    ResetRenderingManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetInputManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SetGUIManager(const MiddleLayerInterfaceSharedPtr& guiManager)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_NetworkManager->SetInputManager(m_InputManager);
-	m_ObjectLogicManager->SetInputManager(m_InputManager);
-	m_SystemManager->SetInputManager(m_InputManager);
+    gui = boost::polymorphic_pointer_downcast<GUIManagerInterface>(guiManager);
+
+    InitGUIManager();
+    ResetGUIManager();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetObjectLogicManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetNetworkManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_NetworkManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_InputManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_PhysicalModellingManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_MessageManager->SetObjectLogicManager(m_ObjectLogicManager);
-	m_SystemManager->SetObjectLogicManager(m_ObjectLogicManager);
+    input->SetNetworkManager(network);
+    objectLogic->SetNetworkManager(network);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetPhysicalModellingManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetInputManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_ObjectLogicManager->SetPhysicalModellingManager(m_PhysicalModellingManager);
+    network->SetInputManager(input);
+    objectLogic->SetInputManager(input);
+    system->SetInputManager(input);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetMessageManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetObjectLogicManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_ObjectLogicManager->SetMessageManager(m_MessageManager);
-	m_EventManager->SetMessageManager(m_MessageManager);
-	m_SystemManager->SetMessageManager(m_MessageManager);
+    network->SetObjectLogicManager(objectLogic);
+    input->SetObjectLogicManager(objectLogic);
+    physicalModelling->SetObjectLogicManager(objectLogic);
+    message->SetObjectLogicManager(objectLogic);
+    system->SetObjectLogicManager(objectLogic);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetEventManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetPhysicalModellingManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SystemManager->SetEventManager(m_EventManager);
+    objectLogic->SetPhysicalModellingManager(physicalModelling);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetSystemManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetMessageManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_InputManager->SetSystemManager(m_SystemManager);
-	m_ObjectLogicManager->SetSystemManager(m_SystemManager);
-	m_MessageManager->SetSystemManager(m_SystemManager);
-	m_EventManager->SetSystemManager(m_SystemManager);
-	m_ResourceManager->SetSystemManager(m_SystemManager);
-	m_AudioManager->SetSystemManager(m_SystemManager);
-	m_CameraSystemsManager->SetSystemManager(m_SystemManager);
-	m_RenderingManager->SetSystemManager(m_SystemManager);
+    objectLogic->SetMessageManager(message);
+    event->SetMessageManager(message);
+    system->SetMessageManager(message);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetResourceManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetEventManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SystemManager->SetResourceManager(m_ResourceManager);
-	m_AudioManager->SetResourceManager(m_ResourceManager);
+    system->SetEventManager(event);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetAudioManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetSystemManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SystemManager->SetAudioManager(m_AudioManager);
-	m_ResourceManager->SetAudioManager(m_AudioManager);
+    input->SetSystemManager(system);
+    objectLogic->SetSystemManager(system);
+    message->SetSystemManager(system);
+    event->SetSystemManager(system);
+    resource->SetSystemManager(system);
+    audio->SetSystemManager(system);
+    cameraSystems->SetSystemManager(system);
+    rendering->SetSystemManager(system);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetCameraSystemsManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetResourceManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_InputManager->SetCameraSystemsManager(m_CameraSystemsManager);
-	m_SystemManager->SetCameraSystemsManager(m_CameraSystemsManager);
+    system->SetResourceManager(resource);
+    audio->SetResourceManager(resource);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetRenderingManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetAudioManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_SystemManager->SetRenderingManager(m_RenderingManager);
-	m_ResourceManager->SetRenderingManager(m_RenderingManager);
-	m_CameraSystemsManager->SetRenderingManager(m_RenderingManager);
-	m_GUIManager->SetRenderingManager(m_RenderingManager);
+    system->SetAudioManager(audio);
+    resource->SetAudioManager(audio);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::ResetGUIManager()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetCameraSystemsManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_ResourceManager->SetGUIManager(m_GUIManager);
-	m_CameraSystemsManager->SetGUIManager(m_GUIManager);
+    input->SetCameraSystemsManager(cameraSystems);
+    system->SetCameraSystemsManager(cameraSystems);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetRenderingManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::PreCreate(environmentDirectory) &&
-		InitSystemEngineInterface() &&
-		m_SystemManager->PreCreate(environmentDirectory) &&
-		m_NetworkManager->PreCreate(environmentDirectory) &&
-		m_InputManager->PreCreate(environmentDirectory) &&
-		m_ObjectLogicManager->PreCreate(environmentDirectory) &&
-		m_PhysicalModellingManager->PreCreate(environmentDirectory) &&
-		m_MessageManager->PreCreate(environmentDirectory) &&
-		m_EventManager->PreCreate(environmentDirectory) &&
-		m_AudioManager->PreCreate(environmentDirectory) &&
-		m_ResourceManager->PreCreate(environmentDirectory) &&
-		m_CameraSystemsManager->PreCreate(environmentDirectory) &&
-		m_GUIManager->PreCreate(environmentDirectory) &&
-		m_RenderingManager->PreCreate(environmentDirectory))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    system->SetRenderingManager(rendering);
+    resource->SetRenderingManager(rendering);
+    cameraSystems->SetRenderingManager(rendering);
+    gui->SetRenderingManager(rendering);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Initialize()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::ResetGUIManager()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Initialize() &&
-		m_SystemManager->Initialize() &&
-		m_NetworkManager->Initialize() &&
-		m_InputManager->Initialize() &&
-		m_ObjectLogicManager->Initialize() &&
-		m_PhysicalModellingManager->Initialize() &&
-		m_MessageManager->Initialize() &&
-		m_EventManager->Initialize() &&
-		m_AudioManager->Initialize() &&
-		m_ResourceManager->Initialize() &&
-		m_CameraSystemsManager->Initialize() &&
-		m_GUIManager->Initialize() &&
-		m_RenderingManager->Initialize())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    resource->SetGUIManager(gui);
+    cameraSystems->SetGUIManager(gui);
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::PreIdle()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::PreIdle();
-	m_SystemManager->PreIdle();
-	m_NetworkManager->PreIdle();
-	m_InputManager->PreIdle();
-	m_ObjectLogicManager->PreIdle();
-	m_PhysicalModellingManager->PreIdle();
-	m_MessageManager->PreIdle();
-	m_EventManager->PreIdle();
-	m_AudioManager->PreIdle();
-	m_ResourceManager->PreIdle();
-	m_CameraSystemsManager->PreIdle();
-	m_GUIManager->PreIdle();
-	m_RenderingManager->PreIdle();
+    if (ParentType::PreCreate(environmentDirectory) &&
+        InitSystemEngineInterface() &&
+        system->PreCreate(environmentDirectory) &&
+        network->PreCreate(environmentDirectory) &&
+        input->PreCreate(environmentDirectory) &&
+        objectLogic->PreCreate(environmentDirectory) &&
+        physicalModelling->PreCreate(environmentDirectory) &&
+        message->PreCreate(environmentDirectory) &&
+        event->PreCreate(environmentDirectory) &&
+        audio->PreCreate(environmentDirectory) &&
+        resource->PreCreate(environmentDirectory) &&
+        cameraSystems->PreCreate(environmentDirectory) &&
+        gui->PreCreate(environmentDirectory) &&
+        rendering->PreCreate(environmentDirectory))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-void Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Terminate()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Initialize()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::Terminate();
-	m_NetworkManager->Terminate();
-	m_InputManager->Terminate();
-	m_ObjectLogicManager->Terminate();
-	m_PhysicalModellingManager->Terminate();
-	m_MessageManager->Terminate();
-	m_EventManager->Terminate();
-	m_AudioManager->Terminate();
-	m_ResourceManager->Terminate();
-	m_CameraSystemsManager->Terminate();
-	m_GUIManager->Terminate();
-	m_SystemManager->Terminate();
-	m_RenderingManager->Terminate();
+    if (ParentType::Initialize() &&
+        system->Initialize() &&
+        network->Initialize() &&
+        input->Initialize() &&
+        objectLogic->Initialize() &&
+        physicalModelling->Initialize() &&
+        message->Initialize() &&
+        event->Initialize() &&
+        audio->Initialize() &&
+        resource->Initialize() &&
+        cameraSystems->Initialize() &&
+        gui->Initialize() &&
+        rendering->Initialize())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Paint()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::PreIdle()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Paint() &&
-		m_RenderingManager->Paint())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    ParentType::PreIdle();
+    system->PreIdle();
+    network->PreIdle();
+    input->PreIdle();
+    objectLogic->PreIdle();
+    physicalModelling->PreIdle();
+    message->PreIdle();
+    event->PreIdle();
+    audio->PreIdle();
+    resource->PreIdle();
+    cameraSystems->PreIdle();
+    gui->PreIdle();
+    rendering->PreIdle();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Move(const WindowPoint& point)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+void Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Terminate()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Move(point) &&
-		m_RenderingManager->Move(point))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    ParentType::Terminate();
+    network->Terminate();
+    input->Terminate();
+    objectLogic->Terminate();
+    physicalModelling->Terminate();
+    message->Terminate();
+    event->Terminate();
+    audio->Terminate();
+    resource->Terminate();
+    cameraSystems->Terminate();
+    gui->Terminate();
+    system->Terminate();
+    rendering->Terminate();
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Paint()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Resize(windowDisplay, size) &&
-		m_RenderingManager->Resize(windowDisplay, size))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Paint() &&
+        rendering->Paint())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::KeyDown(int key, const WindowPoint& point)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Move(const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::KeyDown(key, point) &&
-		m_InputManager->KeyDown(key, point))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Move(point) &&
+        rendering->Move(point))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::KeyUp(int key, const WindowPoint& point)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::KeyUp(key, point) &&
-		m_InputManager->KeyUp(key, point))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Resize(windowDisplay, size) &&
+        rendering->Resize(windowDisplay, size))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SpecialKeyDown(int key, const WindowPoint& point)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::KeyDown(int key, const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::SpecialKeyDown(key, point) &&
-		m_InputManager->SpecialKeyDown(key, point))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::KeyDown(key, point) &&
+        input->KeyDown(key, point))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::SpecialKeyUp(int key, const WindowPoint& point)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::KeyUp(int key, const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::SpecialKeyUp(key, point) &&
-		m_InputManager->SpecialKeyUp(key, point))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::KeyUp(key, point) &&
+        input->KeyUp(key, point))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::MouseClick(MouseButtonsTypes button, MouseStateTypes state,
-				 const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::MouseClick(button, state, point, virtualKeys) &&
-		m_InputManager->MouseClick(button, state, point, virtualKeys))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::SpecialKeyDown(key, point) &&
+        input->SpecialKeyDown(key, point))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Motion(point, virtualKeys) &&
-		m_InputManager->Motion(point, virtualKeys))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::SpecialKeyUp(key, point) &&
+        input->SpecialKeyUp(key, point))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::PassiveMotion(const WindowPoint& point)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::PassiveMotion(point) &&
-		m_InputManager->PassiveMotion(point))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::MouseClick(button, state, point, virtualKeys) &&
+        input->MouseClick(button, state, point, virtualKeys))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::MouseWheel(delta, point, virtualKeys) &&
-		m_InputManager->MouseWheel(delta, point, virtualKeys))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Motion(point, virtualKeys) &&
+        input->Motion(point, virtualKeys))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Create()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::PassiveMotion(const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Create() &&
-		m_SystemManager->Create() &&
-		m_NetworkManager->Create() &&
-		m_InputManager->Create() &&
-		m_ObjectLogicManager->Create() &&
-		m_PhysicalModellingManager->Create() &&
-		m_MessageManager->Create() &&
-		m_EventManager->Create() &&
-		m_AudioManager->Create() &&
-		m_ResourceManager->Create() &&
-		m_CameraSystemsManager->Create() &&
-		m_GUIManager->Create() &&
-		m_RenderingManager->Create())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::PassiveMotion(point) &&
+        input->PassiveMotion(point))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Destroy()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Destroy() &&
-		m_NetworkManager->Destroy() &&
-		m_InputManager->Destroy() &&
-		m_ObjectLogicManager->Destroy() &&
-		m_PhysicalModellingManager->Destroy() &&
-		m_MessageManager->Destroy() &&
-		m_EventManager->Destroy() &&
-		m_AudioManager->Destroy() &&
-		m_ResourceManager->Destroy() &&
-		m_CameraSystemsManager->Destroy() &&
-		m_GUIManager->Destroy() &&
-		m_RenderingManager->Destroy() &&
-		m_SystemManager->Destroy())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::MouseWheel(delta, point, virtualKeys) &&
+        input->MouseWheel(delta, point, virtualKeys))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::Idle(int64_t timeDelta)
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Create()
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Idle(timeDelta) &&
-		m_SystemManager->Idle(timeDelta) &&
-		m_NetworkManager->Idle(timeDelta) &&
-		m_InputManager->Idle(timeDelta) &&
-		m_ObjectLogicManager->Idle(timeDelta) &&
-		m_PhysicalModellingManager->Idle(timeDelta) &&
-		m_MessageManager->Idle(timeDelta) &&
-		m_EventManager->Idle(timeDelta) &&
-		m_AudioManager->Idle(timeDelta) &&
-		m_ResourceManager->Idle(timeDelta) &&
-		m_CameraSystemsManager->Idle(timeDelta) &&
-		m_GUIManager->Idle(timeDelta) &&
-		m_RenderingManager->Idle(timeDelta))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Create() &&
+        system->Create() &&
+        network->Create() &&
+        input->Create() &&
+        objectLogic->Create() &&
+        physicalModelling->Create() &&
+        message->Create() &&
+        event->Create() &&
+        audio->Create() &&
+        resource->Create() &&
+        cameraSystems->Create() &&
+        gui->Create() &&
+        rendering->Create())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, template<typename> class InputManager, typename NetworkManager, typename ObjectLogicManager, typename PhysicalModellingManager,
-		  typename MessageManager, typename EventManager, typename SystemManager, typename ResourceManager,
-		  typename AudioManager, typename CameraSystemsManager, typename RenderingManager, typename GUIManager>
-bool Framework::EngineMiddleLayerContainer<ApplicationTrait, InputManager, NetworkManager, ObjectLogicManager, PhysicalModellingManager,
-										   MessageManager, EventManager, SystemManager, ResourceManager, AudioManager,
-										   CameraSystemsManager, RenderingManager, GUIManager>
-	::InitSystemEngineInterface()
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Destroy()
 {
-	m_SystemManager->SetEngineManager(shared_from_this());
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return true;
+    if (ParentType::Destroy() &&
+        network->Destroy() &&
+        input->Destroy() &&
+        objectLogic->Destroy() &&
+        physicalModelling->Destroy() &&
+        message->Destroy() &&
+        event->Destroy() &&
+        audio->Destroy() &&
+        resource->Destroy() &&
+        cameraSystems->Destroy() &&
+        gui->Destroy() &&
+        rendering->Destroy() &&
+        system->Destroy())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_DETAIL_H
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::Idle(int64_t timeDelta)
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
 
+    if (ParentType::Idle(timeDelta) &&
+        system->Idle(timeDelta) &&
+        network->Idle(timeDelta) &&
+        input->Idle(timeDelta) &&
+        objectLogic->Idle(timeDelta) &&
+        physicalModelling->Idle(timeDelta) &&
+        message->Idle(timeDelta) &&
+        event->Idle(timeDelta) &&
+        audio->Idle(timeDelta) &&
+        resource->Idle(timeDelta) &&
+        cameraSystems->Idle(timeDelta) &&
+        gui->Idle(timeDelta) &&
+        rendering->Idle(timeDelta))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                           InputManager,
+                                           NetworkManager,
+                                           ObjectLogicManager,
+                                           PhysicalModellingManager,
+                                           MessageManager,
+                                           EventManager,
+                                           SystemManager,
+                                           ResourceManager,
+                                           AudioManager,
+                                           CameraSystemsManager,
+                                           RenderingManager,
+                                           GUIManager>::InitSystemEngineInterface()
+{
+    system->SetEngineManager(shared_from_this());
+
+    return true;
+}
+
+#endif  // FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_CONTAINER_DETAIL_H

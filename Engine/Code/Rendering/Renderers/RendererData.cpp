@@ -1,14 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 10:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 19:10)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererData.h"
 #include "RendererInputData.h"
 #include "Detail/RendererDataImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -22,20 +26,20 @@ using std::string;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, RendererData);
 
-Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData::sm_RendererData{};
+Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData::rendererData{};
 
 void Rendering::RendererData::Create()
 {
-    sm_RendererData = make_unique<Rendering::RendererData>(RendererDataCreate::Init);
+    rendererData = make_unique<Rendering::RendererData>(RendererDataCreate::Init);
 }
 
 void Rendering::RendererData::Destroy() noexcept
 {
-    sm_RendererData.reset();
+    rendererData.reset();
 }
 
-Rendering::RendererData::RendererData([[maybe_unused]] RendererDataCreate rendererDataCreate)
-    : impl{0}
+Rendering::RendererData::RendererData(MAYBE_UNUSED RendererDataCreate rendererDataCreate)
+    : impl{ CoreTools::DisableNotThrow::Disable }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -46,7 +50,7 @@ void Rendering::RendererData::LoadConfiguration(const string& fileName)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     impl->LoadConfiguration(fileName);
     CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(impl->GetRendererType());
@@ -57,7 +61,7 @@ void Rendering::RendererData::ClearColor()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->ClearColor();
 }
@@ -66,7 +70,7 @@ void Rendering::RendererData::Resize(int width, int height)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Resize(width, height);
 }
@@ -75,7 +79,7 @@ void Rendering::RendererData::DrawMessage(int x, int y, const Colour& color, con
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->DrawMessage(x, y, color, message);
 }
@@ -116,7 +120,7 @@ Rendering::RendererData::Colour Rendering::RendererData::GetClearColor() const
     return impl->GetClearColor();
 }
 
-const std::string Rendering::RendererData::GetWindowTitle() const
+std::string Rendering::RendererData::GetWindowTitle() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

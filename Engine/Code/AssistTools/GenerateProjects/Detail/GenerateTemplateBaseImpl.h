@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:21)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/28 16:37)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_BASE_IMPL_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_BASE_IMPL_H
@@ -11,51 +14,46 @@
 
 #include "GenerateTemplateImpl.h"
 #include "AssistTools/GenerateProjects/Flags/GenerateTemplateReplaceFlags.h"
+#include "AssistTools/GenerateProjects/GenerateProjectsFwd.h"
 
 #include <map>
 
 namespace AssistTools
 {
-	class CopyrightData;
+    class ASSIST_TOOLS_HIDDEN_DECLARE GenerateTemplateBaseImpl : public GenerateTemplateImpl
+    {
+    public:
+        using ClassType = GenerateTemplateBaseImpl;
+        using ParentType = GenerateTemplateImpl;
+        using Replace = std::map<GenerateTemplateReplace, System::String>;
 
-	class ASSIST_TOOLS_HIDDEN_DECLARE GenerateTemplateBaseImpl : public GenerateTemplateImpl
-	{
-	public:
-		using ClassType = GenerateTemplateBaseImpl ;
-		using ParentType = GenerateTemplateImpl ;
-		using Replace = std::map<GenerateTemplateReplace, System::String> ;
+    public:
+        GenerateTemplateBaseImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace);
 
-	public:
-		GenerateTemplateBaseImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace);
-		
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    protected:
+        NODISCARD System::String GetOriginal(GenerateTemplateReplace flag) const;
 
-	protected:
-		const System::String GetOriginal(GenerateTemplateReplace flag) const;
+        NODISCARD VariableType GetCopyrightVariable(const CopyrightData& copyrightData) const;
 
-		const VariableType GetCopyrightVariable(const CopyrightData& copyrightData) const;
+    private:
+        static const System::String defaultEndYear;
+        static const System::String defaultProjectChineseName;
+        static const System::String defaultManagerChineseName;
+        static const System::String defaultVersions;
+        static const System::String defaultDate;
+        static const System::String defaultHour;
+        static const System::String defaultMinute;
+        static const System::String defaultProjectCapital;
+        static const System::String defaultManagerCapital;
+        static const System::String defaultSolutionName;
+        static const System::String defaultProjectName;
+        static const System::String defaultManagerName;
+        static const System::String defaultInterfaceName;
 
-	private:	
-		typedef Replace::const_iterator ReplaceConstIter;
-
-	private:
-		static const System::String sm_DefaultEndYear;
-		static const System::String sm_DefaultProjectChineseName;
-		static const System::String sm_DefaultManagerChineseName;
-		static const System::String sm_DefaultVersions;
-		static const System::String sm_DefaultDate;
-		static const System::String sm_DefaultHour;
-		static const System::String sm_DefaultMinute;
-		static const System::String sm_DefaultProjectCapital;
-		static const System::String sm_DefaultManagerCapital;
-		static const System::String sm_DefaultSolutionName;
-		static const System::String sm_DefaultProjectName;		
-		static const System::String sm_DefaultManagerName;		
-		static const System::String sm_DefaultInterfaceName;
-
-		Replace m_Replace;
-	};
+        Replace replace;
+    };
 }
 
-#endif // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_BASE_IMPL_H
+#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_BASE_IMPL_H

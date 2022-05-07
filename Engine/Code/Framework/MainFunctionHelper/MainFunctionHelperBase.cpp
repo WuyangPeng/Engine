@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/20 11:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 15:21)
 
 #include "Framework/FrameworkExport.h"
 
@@ -19,40 +22,37 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 #include "CoreTools/ObjectSystems/InitTerm.h"
 
 using std::make_shared;
 using std::move;
 using namespace std::literals;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-Framework::MainFunctionHelperBase ::MainFunctionHelperBase(const EnvironmentDirectory& environmentDirectory)
-    : impl{}, m_MainFunctionSchedule{ MainFunctionSchedule::Failure }
+
+Framework::MainFunctionHelperBase::MainFunctionHelperBase(const EnvironmentDirectory& environmentDirectory)
+    : impl{}, mainFunctionSchedule{ MainFunctionSchedule::Failure }
 {
     MainFunctionHelperInit(environmentDirectory);
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::MainFunctionHelperBase ::MainFunctionHelperBase(MainFunctionHelperBase&& rhs) noexcept
-    : impl{ move(rhs.impl) }, m_MainFunctionSchedule{ rhs.m_MainFunctionSchedule }
+Framework::MainFunctionHelperBase::MainFunctionHelperBase(MainFunctionHelperBase&& rhs) noexcept
+    : impl{ move(rhs.impl) }, mainFunctionSchedule{ rhs.mainFunctionSchedule }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::MainFunctionHelperBase& Framework::MainFunctionHelperBase ::operator=(MainFunctionHelperBase&& rhs) noexcept
+Framework::MainFunctionHelperBase& Framework::MainFunctionHelperBase::operator=(MainFunctionHelperBase&& rhs) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     impl = move(rhs.impl);
-    m_MainFunctionSchedule = rhs.m_MainFunctionSchedule;
+    mainFunctionSchedule = rhs.mainFunctionSchedule;
 
     return *this;
 }
 
-Framework::MainFunctionHelperBase ::~MainFunctionHelperBase() noexcept
+Framework::MainFunctionHelperBase::~MainFunctionHelperBase() noexcept
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
@@ -60,16 +60,18 @@ Framework::MainFunctionHelperBase ::~MainFunctionHelperBase() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::MainFunctionHelperBase ::IsValid() const noexcept
+
+bool Framework::MainFunctionHelperBase::IsValid() const noexcept
 {
-    if ((m_MainFunctionSchedule == MainFunctionSchedule::Max) ^ (impl == nullptr))
+    if ((mainFunctionSchedule == MainFunctionSchedule::Max) ^ (impl == nullptr))
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-System::String Framework::MainFunctionHelperBase ::GetEngineInstallationDirectory() const
+System::String Framework::MainFunctionHelperBase::GetEngineInstallationDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
@@ -79,19 +81,19 @@ System::String Framework::MainFunctionHelperBase ::GetEngineInstallationDirector
         return DirectoryDefaultName::GetDefaultNullName();
 }
 
-void Framework::MainFunctionHelperBase ::Destroy()
+void Framework::MainFunctionHelperBase::Destroy()
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (MainFunctionSchedule::Failure < m_MainFunctionSchedule)
+    if (MainFunctionSchedule::Failure < mainFunctionSchedule)
     {
         MainFunctionHelperDestroy();
     }
 }
 
-int Framework::MainFunctionHelperBase ::Run()
+int Framework::MainFunctionHelperBase::Run()
 {
-    ;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
     EXCEPTION_TRY
     {
@@ -106,7 +108,7 @@ int Framework::MainFunctionHelperBase ::Run()
 }
 
 // private
-void Framework::MainFunctionHelperBase ::MainFunctionHelperInit(const EnvironmentDirectory& environmentDirectory)
+void Framework::MainFunctionHelperBase::MainFunctionHelperInit(const EnvironmentDirectory& environmentDirectory)
 {
     EXCEPTION_TRY
     {
@@ -116,120 +118,111 @@ void Framework::MainFunctionHelperBase ::MainFunctionHelperInit(const Environmen
 }
 
 // private
-void Framework::MainFunctionHelperBase ::DoMainFunctionHelperInit(const EnvironmentDirectory& environmentDirectory)
+void Framework::MainFunctionHelperBase::DoMainFunctionHelperInit(const EnvironmentDirectory& environmentDirectory)
 {
     InitUniqueIDManager();
     InitLog(environmentDirectory);
     InitInitTerm();
-    InitEnvironment(); 
+    InitEnvironment();
     InitImpl(environmentDirectory);
 }
 
 // private
-void Framework::MainFunctionHelperBase ::InitUniqueIDManager()
+void Framework::MainFunctionHelperBase::InitUniqueIDManager()
 {
     CoreTools::UniqueIDManager::Create(CoreTools::UniqueIDSelect::Max);
-    m_MainFunctionSchedule = MainFunctionSchedule::UniqueID;
+    mainFunctionSchedule = MainFunctionSchedule::UniqueID;
 }
 
-void Framework::MainFunctionHelperBase ::InitLog(const EnvironmentDirectory& environmentDirectory)
+void Framework::MainFunctionHelperBase::InitLog(const EnvironmentDirectory& environmentDirectory)
 {
     CoreTools::Log::Create();
     auto logFileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Log.json"s);
     LOG_SINGLETON.LoadConfiguration(CoreTools::StringConversion::StandardConversionMultiByte(logFileName));
-    m_MainFunctionSchedule = MainFunctionSchedule::Log;
+    mainFunctionSchedule = MainFunctionSchedule::Log;
 }
 
-void Framework::MainFunctionHelperBase ::InitInitTerm()
+void Framework::MainFunctionHelperBase::InitInitTerm()
 {
     CoreTools::InitTerm::ExecuteInitializers();
-    m_MainFunctionSchedule = MainFunctionSchedule::InitTerm;
+    mainFunctionSchedule = MainFunctionSchedule::InitTerm;
 }
 
-void Framework::MainFunctionHelperBase ::InitEnvironment()
+void Framework::MainFunctionHelperBase::InitEnvironment()
 {
     CoreTools::Environment::Create();
-    m_MainFunctionSchedule = MainFunctionSchedule::Environment;
+    mainFunctionSchedule = MainFunctionSchedule::Environment;
 }
 
-void Framework::MainFunctionHelperBase ::InitImpl(const EnvironmentDirectory& environmentDirectory)
+void Framework::MainFunctionHelperBase::InitImpl(const EnvironmentDirectory& environmentDirectory)
 {
     impl = make_shared<ImplType>(environmentDirectory);
-    m_MainFunctionSchedule = MainFunctionSchedule::Max;
+    mainFunctionSchedule = MainFunctionSchedule::Max;
 }
 
 // private
-void Framework::MainFunctionHelperBase ::MainFunctionHelperDestroy()
+void Framework::MainFunctionHelperBase::MainFunctionHelperDestroy()
 {
     DestroyImpl();
-    DestroySmartPointer();
     DestroyEnvironment();
     DestroyInitTerm();
     DestroyLog();
     DestroyUniqueIDManager();
 }
 
-void Framework::MainFunctionHelperBase ::DestroyImpl() noexcept
+void Framework::MainFunctionHelperBase::DestroyImpl() noexcept
 {
-    if (MainFunctionSchedule::Max <= m_MainFunctionSchedule)
+    if (MainFunctionSchedule::Max <= mainFunctionSchedule)
     {
         impl.reset();
-        m_MainFunctionSchedule = MainFunctionSchedule::SmartPointer;
+        mainFunctionSchedule = MainFunctionSchedule::Environment;
     }
 }
 
-void Framework::MainFunctionHelperBase ::DestroySmartPointer() noexcept
+void Framework::MainFunctionHelperBase::DestroyEnvironment() noexcept
 {
-    if (MainFunctionSchedule::SmartPointer <= m_MainFunctionSchedule)
-    {
-        m_MainFunctionSchedule = MainFunctionSchedule::Environment;
-    }
-}
-
-void Framework::MainFunctionHelperBase ::DestroyEnvironment() noexcept
-{
-    if (MainFunctionSchedule::Environment <= m_MainFunctionSchedule)
+    if (MainFunctionSchedule::Environment <= mainFunctionSchedule)
     {
         CoreTools::Environment::Destroy();
-        m_MainFunctionSchedule = MainFunctionSchedule::InitTerm;
+        mainFunctionSchedule = MainFunctionSchedule::InitTerm;
     }
 }
 
-void Framework::MainFunctionHelperBase ::DestroyInitTerm()
+void Framework::MainFunctionHelperBase::DestroyInitTerm()
 {
-    if (MainFunctionSchedule::InitTerm <= m_MainFunctionSchedule)
+    if (MainFunctionSchedule::InitTerm <= mainFunctionSchedule)
     {
         CoreTools::InitTerm::ExecuteTerminators();
-        m_MainFunctionSchedule = MainFunctionSchedule::Memory;
+        mainFunctionSchedule = MainFunctionSchedule::Log;
     }
 }
 
-void Framework::MainFunctionHelperBase ::DestroyLog() noexcept
+void Framework::MainFunctionHelperBase::DestroyLog() noexcept
 {
-    if (MainFunctionSchedule::Log <= m_MainFunctionSchedule)
+    if (MainFunctionSchedule::Log <= mainFunctionSchedule)
     {
         CoreTools::Log::Destroy();
-        m_MainFunctionSchedule = MainFunctionSchedule::UniqueID;
+        mainFunctionSchedule = MainFunctionSchedule::UniqueID;
     }
 }
 
-void Framework::MainFunctionHelperBase ::DestroyUniqueIDManager() noexcept
+void Framework::MainFunctionHelperBase::DestroyUniqueIDManager() noexcept
 {
-    if (MainFunctionSchedule::UniqueID <= m_MainFunctionSchedule)
+    if (MainFunctionSchedule::UniqueID <= mainFunctionSchedule)
     {
         CoreTools::UniqueIDManager::Destroy();
-        m_MainFunctionSchedule = MainFunctionSchedule::Failure;
+        mainFunctionSchedule = MainFunctionSchedule::Failure;
     }
 }
 
 // protected
-bool Framework::MainFunctionHelperBase ::IsDestroy() const noexcept
+bool Framework::MainFunctionHelperBase::IsDestroy() const noexcept
 {
-    return (MainFunctionSchedule::Failure == m_MainFunctionSchedule);
+    return (MainFunctionSchedule::Failure == mainFunctionSchedule);
 }
 
 // protected
-Framework::EnvironmentDirectory Framework::MainFunctionHelperBase ::GetEnvironmentDirectory() const
+Framework::EnvironmentDirectory Framework::MainFunctionHelperBase::GetEnvironmentDirectory() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
@@ -242,5 +235,3 @@ Framework::EnvironmentDirectory Framework::MainFunctionHelperBase ::GetEnvironme
         THROW_EXCEPTION(SYSTEM_TEXT("获取环境目录失败！"s));
     }
 }
-
-#include STSTEM_WARNING_POP

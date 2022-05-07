@@ -1,96 +1,91 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 15:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 16:01)
 
 #ifndef RENDERING_RENDERERS_RENDERER_MANAGE_IMPL_H
 #define RENDERING_RENDERERS_RENDERER_MANAGE_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/Shaders/ShadersFwd.h"
+
 #include <map>
 #include <memory>
 
 namespace Rendering
 {
-    class Renderer;
-    class VertexFormat;
-    class VertexBuffer;
-    class IndexBuffer;
-    class Texture1D;
-    class Texture2D;
-    class Texture3D;
-    class TextureCube;
-    class RenderTarget;
-    class VertexShader;
-    class PixelShader;
-
     class RendererManagerImpl
     {
     public:
         using ClassType = RendererManagerImpl;
-        using RendererPtr = std::shared_ptr<Renderer>;
-        using VertexFormatConstPtr = const VertexFormat*;
-        using VertexBufferConstPtr = const VertexBuffer*;
-        using IndexBufferConstPtr = std::shared_ptr<const IndexBuffer>;
-        using Texture1DConstPtr = std::shared_ptr<const Texture1D>;
-        using Texture2DConstPtr = std::shared_ptr<const Texture2D>;
-        using Texture3DConstPtr = std::shared_ptr<const Texture3D>;
-        using TextureCubeConstPtr = std::shared_ptr<const TextureCube>;
-        using RenderTargetConstPtr = const RenderTarget*;
-        using VertexShaderConstPtr = const VertexShader*;
-        using PixelShaderConstPtr = const PixelShader*;
+        using RendererSharedPtr = std::shared_ptr<Renderer>;
+        using ConstVertexFormatSharedPtr = std::shared_ptr<const VertexFormat>;
+        using ConstVertexBufferSharedPtr = std::shared_ptr<const VertexBuffer>;
+        using ConstIndexBufferSharedPtr = std::shared_ptr<const IndexBuffer>;
+        using ConstTexture1DSharedPtr = std::shared_ptr<const Texture1D>;
+        using ConstTexture2DSharedPtr = std::shared_ptr<const Texture2D>;
+        using ConstTexture3DSharedPtr = std::shared_ptr<const Texture3D>;
+        using ConstTextureCubeSharedPtr = std::shared_ptr<const TextureCube>;
+        using ConstRenderTargetSharedPtr = std::shared_ptr<const RenderTarget>;
+        using ConstVertexShaderSharedPtr = std::shared_ptr<const VertexShader>;
+        using ConstPixelShaderSharedPtr = std::shared_ptr<const PixelShader>;
 
     public:
-        RendererManagerImpl(MAYBE_UNUSED int count) noexcept;
+        RendererManagerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        int64_t Insert(RendererPtr ptr);
+        int64_t Insert(const RendererSharedPtr& renderer);
         bool Erase(int64_t rendererID);
 
-        void BindAll(VertexFormatConstPtr vertexFormat);
-        void UnbindAll(VertexFormatConstPtr vertexFormat);
+        void BindAll(const ConstVertexFormatSharedPtr& vertexFormat);
+        void UnbindAll(const ConstVertexFormatSharedPtr& vertexFormat);
 
-        void BindAll(VertexBufferConstPtr vertexBuffer);
-        void UnbindAll(VertexBufferConstPtr vertexBuffer);
-        void UpdateAll(VertexBufferConstPtr vertexBuffer);
+        void BindAll(const ConstVertexBufferSharedPtr& vertexBuffer);
+        void UnbindAll(const ConstVertexBufferSharedPtr& vertexBuffer);
+        void UpdateAll(const ConstVertexBufferSharedPtr& vertexBuffer);
 
-        void BindAll(IndexBufferConstPtr indexBuffer);
-        void UnbindAll(IndexBufferConstPtr indexBuffer);
-        void UpdateAll(IndexBufferConstPtr indexBuffer);
+        void BindAll(const ConstIndexBufferSharedPtr& indexBuffer);
+        void UnbindAll(const ConstIndexBufferSharedPtr& indexBuffer);
+        void UpdateAll(const ConstIndexBufferSharedPtr& indexBuffer);
 
-        void BindAll(Texture1DConstPtr texture);
-        void UnbindAll(Texture1DConstPtr texture);
-        void UpdateAll(Texture1DConstPtr texture, int level);
+        void BindAll(const ConstTexture1DSharedPtr& texture);
+        void UnbindAll(const ConstTexture1DSharedPtr& texture);
+        void UpdateAll(const ConstTexture1DSharedPtr& texture, int level);
 
-        void BindAll(Texture2DConstPtr texture);
-        void UnbindAll(Texture2DConstPtr texture);
-        void UpdateAll(Texture2DConstPtr texture, int level);
+        void BindAll(const ConstTexture2DSharedPtr& texture);
+        void UnbindAll(const ConstTexture2DSharedPtr& texture);
+        void UpdateAll(const ConstTexture2DSharedPtr& texture, int level);
 
-        void BindAll(Texture3DConstPtr texture);
-        void UnbindAll(Texture3DConstPtr texture);
-        void UpdateAll(Texture3DConstPtr texture, int level);
+        void BindAll(const ConstTexture3DSharedPtr& texture);
+        void UnbindAll(const ConstTexture3DSharedPtr& texture);
+        void UpdateAll(const ConstTexture3DSharedPtr& texture, int level);
 
-        void BindAll(TextureCubeConstPtr texture);
-        void UnbindAll(TextureCubeConstPtr texture);
-        void UpdateAll(TextureCubeConstPtr texture, int face, int level);
+        void BindAll(const ConstTextureCubeSharedPtr& texture);
+        void UnbindAll(const ConstTextureCubeSharedPtr& texture);
+        void UpdateAll(const ConstTextureCubeSharedPtr& texture, int face, int level);
 
-        void BindAll(RenderTargetConstPtr renderTarget);
-        void UnbindAll(RenderTargetConstPtr renderTarget);
+        void BindAll(const ConstRenderTargetSharedPtr& renderTarget);
+        void UnbindAll(const ConstRenderTargetSharedPtr& renderTarget);
 
-        void BindAll(VertexShaderConstPtr vertexShader);
-        void UnbindAll(VertexShaderConstPtr vertexShader);
+        void BindAll(const ConstVertexShaderSharedPtr& vertexShader);
+        void UnbindAll(const ConstVertexShaderSharedPtr& vertexShader);
 
-        void BindAll(PixelShaderConstPtr pixelShader);
-        void UnbindAll(PixelShaderConstPtr pixelShader);
+        void BindAll(const ConstPixelShaderSharedPtr& pixelShader);
+        void UnbindAll(const ConstPixelShaderSharedPtr& pixelShader);
 
     private:
         using RendererSet = std::map<int64_t, std::weak_ptr<Renderer>>;
 
     private:
-        RendererSet m_Renderers;
+        RendererSet renderers;
     };
 }
 

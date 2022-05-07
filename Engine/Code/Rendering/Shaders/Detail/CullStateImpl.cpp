@@ -1,109 +1,104 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 15:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 17:04)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CullStateImpl.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::CullStateImpl
-	::CullStateImpl() noexcept
-	:m_Enabled{ true }, m_CCWOrder{ true }
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
+Rendering::CullStateImpl::CullStateImpl() noexcept
+    : enabled{ true }, ccwOrder{ true }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,CullStateImpl)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, CullStateImpl)
 
 bool Rendering::CullStateImpl::IsEnabled() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Enabled;
+    return enabled;
 }
 
-void Rendering::CullStateImpl::SetEnabled(bool enabled) noexcept
+void Rendering::CullStateImpl::SetEnabled(bool aEnabled) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = enabled;
+    enabled = aEnabled;
 }
 
 bool Rendering::CullStateImpl::IsCCWOrder() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_CCWOrder;
+    return ccwOrder;
 }
 
-void Rendering::CullStateImpl::SetCCWOrder(bool cCWOrder) noexcept
+void Rendering::CullStateImpl::SetCCWOrder(bool aCCWOrder) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_CCWOrder = cCWOrder;
+    ccwOrder = aCCWOrder;
 }
 
 void Rendering::CullStateImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
-	m_CCWOrder = source.ReadBool();
+    enabled = source.ReadBool();
+    ccwOrder = source.ReadBool();
 }
 
-void Rendering::CullStateImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::CullStateImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Enabled);
-	target.Write(m_CCWOrder);
+    target.Write(enabled);
+    target.Write(ccwOrder);
 }
 
 int Rendering::CullStateImpl::GetStreamingSize() const noexcept
-{	
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Enabled);
-	size += CORE_TOOLS_STREAM_SIZE(m_CCWOrder);
-
-	return size;
-}
-
-void Rendering::CullStateImpl
-	::SaveState(WriteFileManager& manager) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-const auto enabled = m_Enabled ? 1 : 0;
-        const auto ccwOrder = m_CCWOrder ? 1 : 0;
+    auto size = CORE_TOOLS_STREAM_SIZE(enabled);
+    size += CORE_TOOLS_STREAM_SIZE(ccwOrder);
 
-	manager.Write(sizeof(int), &enabled);
-	manager.Write(sizeof(int), &ccwOrder);
+    return size;
 }
 
-void Rendering::CullStateImpl
-	::LoadState(ReadFileManager& manager)
+void Rendering::CullStateImpl::SaveState(WriteFileManager& manager) const
 {
-	RENDERING_CLASS_IS_VALID_9;
-	
-	int enabled{ 0 };
-	int ccwOrder{ 0 };
-	manager.Read(sizeof(int), &enabled);
-	manager.Read(sizeof(int), &ccwOrder);
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	m_Enabled = (enabled == 1) ? true : false;
-	m_CCWOrder = (ccwOrder == 1) ? true : false; 
+    const auto enabledWrite = enabled ? 1 : 0;
+    const auto ccwOrderWrite = ccwOrder ? 1 : 0;
+
+    manager.Write(sizeof(int32_t), &enabledWrite);
+    manager.Write(sizeof(int32_t), &ccwOrderWrite);
 }
 
-#include STSTEM_WARNING_POP
+void Rendering::CullStateImpl::LoadState(ReadFileManager& manager)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    int enabledRead{ 0 };
+    int ccwOrderRead{ 0 };
+    manager.Read(sizeof(int32_t), &enabledRead);
+    manager.Read(sizeof(int32_t), &ccwOrderRead);
+
+    enabled = (enabledRead == 1) ? true : false;
+    ccwOrder = (ccwOrderRead == 1) ? true : false;
+}

@@ -29,6 +29,16 @@ namespace CoreTools
         {
         }
 
+        WeakObjectAssociated() noexcept
+            : object{}, associated{ 0 }
+        {
+        }
+
+        explicit WeakObjectAssociated(const ObjectWeakPtr& object) noexcept
+            : object{ object }, associated{ 0 }
+        {
+        }
+
         ObjectWeakPtr object;
         uint64_t associated;
     };

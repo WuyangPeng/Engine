@@ -9,6 +9,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"
 
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
@@ -35,7 +36,7 @@ void Rendering::ShaderFloatTesting::MainTest()
 void Rendering::ShaderFloatTesting::InitTest()
 {
     constexpr int firstNumRegisters = 5;
-    ShaderFloat firstShaderFloat;
+    ShaderFloat firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
     ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), 0);
 
     firstShaderFloat.SetNumRegisters(firstNumRegisters);
@@ -92,7 +93,7 @@ void Rendering::ShaderFloatTesting::CopyTest()
     constexpr int firstNumRegisters = 5;
     constexpr int secondNumRegisters = 15;
 
-    ShaderFloat firstShaderFloat;
+    ShaderFloat firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
     ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), 0);
 
     ShaderFloat secondShaderFloat(firstShaderFloat);

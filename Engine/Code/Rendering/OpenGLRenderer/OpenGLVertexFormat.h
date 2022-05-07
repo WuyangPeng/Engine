@@ -1,70 +1,71 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 14:45)
 
 #ifndef RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_H
 #define RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "OpenGLVertexFormatData.h"
 #include "OpenGLVertexFormatArrayData.h"
+#include "OpenGLVertexFormatData.h"
 #include "Rendering/Renderers/Detail/PlatformVertexFormatImpl.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 namespace Rendering
 {
-    class Renderer;
-    class VertexFormat;
-
-	class RENDERING_HIDDEN_DECLARE OpenGLVertexFormat : public PlatformVertexFormatImpl
+    class RENDERING_HIDDEN_DECLARE OpenGLVertexFormat : public PlatformVertexFormatImpl
     {
-	public:
-		using ClassType = OpenGLVertexFormat;
-		using ParentType = PlatformVertexFormatImpl;
-		using UInt = System::OpenGLUInt;
-		using AttributeType = VertexFormatFlags::AttributeType;
+    public:
+        using ClassType = OpenGLVertexFormat;
+        using ParentType = PlatformVertexFormatImpl;
+        using UInt = System::OpenGLUInt;
+        using AttributeType = VertexFormatFlags::AttributeType;
 
-	public:
-	   OpenGLVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat);
- 
+    public:
+        OpenGLVertexFormat(Renderer* renderer, const VertexFormat* vertexFormat);
 
-	   CLASS_INVARIANT_OVERRIDE_DECLARE;
-	   
-	   // 顶点格式操作。
-	     void Enable (Renderer* renderer) noexcept override;
-	     void Disable (Renderer* renderer) noexcept override;
-	   
-	private:
-		void Init(const VertexFormat* vertexFormat);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	private:
-		using OpenGLVertexFormatPosition = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Position>;
-		using OpenGLVertexFormatNormal = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Normal>;
-		using OpenGLVertexFormatTangent = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Tangent>;
-		using OpenGLVertexFormatBinormal = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Binormal>;
-		using OpenGLVertexFormatTexCoord = OpenGLVertexFormatArrayData<VertexFormatFlags::AttributeUsage::TextureCoord,VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>;
-		using OpenGLVertexFormatColor = OpenGLVertexFormatArrayData<VertexFormatFlags::AttributeUsage::Color,VertexFormatFlags::MaximumNumber::ColorUnits>;
-		using OpenGLVertexFormatBlendIndices = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::BlendIndices>;
-		using OpenGLVertexFormatBlendWeight = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::BlendWeight>;
-		using OpenGLVertexFormatFogCoord = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::FogCoord>;
-		using OpenGLVertexFormatPsize = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Psize>;
+        // 顶点格式操作。
+        void Enable(Renderer* renderer) noexcept override;
+        void Disable(Renderer* renderer) noexcept override;
 
-	private:
-		int m_Stride;
+    private:
+        void Init(const VertexFormat* vertexFormat);
 
-		OpenGLVertexFormatPosition m_Position;
-		OpenGLVertexFormatNormal m_Normal;
-		OpenGLVertexFormatTangent m_Tangent;
-		OpenGLVertexFormatBinormal m_Binormal;
-		OpenGLVertexFormatTexCoord m_TexCoord;
-		OpenGLVertexFormatColor m_Color;
-		OpenGLVertexFormatBlendIndices m_BlendIndices;
-		OpenGLVertexFormatBlendWeight m_BlendWeight;
-		OpenGLVertexFormatFogCoord m_FogCoord;
-		OpenGLVertexFormatPsize m_PSize;
-	};
+    private:
+        using OpenGLVertexFormatPosition = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Position>;
+        using OpenGLVertexFormatNormal = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Normal>;
+        using OpenGLVertexFormatTangent = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Tangent>;
+        using OpenGLVertexFormatBinormal = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Binormal>;
+        using OpenGLVertexFormatTexCoord = OpenGLVertexFormatArrayData<VertexFormatFlags::AttributeUsage::TextureCoord, VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>;
+        using OpenGLVertexFormatColor = OpenGLVertexFormatArrayData<VertexFormatFlags::AttributeUsage::Color, VertexFormatFlags::MaximumNumber::ColorUnits>;
+        using OpenGLVertexFormatBlendIndices = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::BlendIndices>;
+        using OpenGLVertexFormatBlendWeight = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::BlendWeight>;
+        using OpenGLVertexFormatFogCoord = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::FogCoord>;
+        using OpenGLVertexFormatPsize = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Psize>;
+
+    private:
+        int stride;
+
+        OpenGLVertexFormatPosition position;
+        OpenGLVertexFormatNormal normal;
+        OpenGLVertexFormatTangent tangent;
+        OpenGLVertexFormatBinormal binormal;
+        OpenGLVertexFormatTexCoord texCoord;
+        OpenGLVertexFormatColor color;
+        OpenGLVertexFormatBlendIndices blendIndices;
+        OpenGLVertexFormatBlendWeight blendWeight;
+        OpenGLVertexFormatFogCoord fogCoord;
+        OpenGLVertexFormatPsize pSize;
+    };
 }
 
-#endif // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_H
+#endif  // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_H

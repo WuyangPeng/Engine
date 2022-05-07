@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 13:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 10:26)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_ENGINE_TESTING_NAME_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_ENGINE_TESTING_NAME_H
@@ -12,10 +15,10 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
+
 #include <vector>
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineTestingNameImpl);
@@ -30,17 +33,12 @@ namespace Framework
 
     public:
         explicit EngineTestingName(const String& endName);
-        ~EngineTestingName() noexcept = default;
-        EngineTestingName(const EngineTestingName&) noexcept = delete;
-        EngineTestingName& operator=(const EngineTestingName&) noexcept = delete;
-        EngineTestingName(EngineTestingName&&) noexcept = delete;
-        EngineTestingName& operator=(EngineTestingName&&) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
         void PrintSelect(CoreTools::OStreamShared stream);
-        bool IsSelectValid(int select) const;
-        const String GetEngineTestingName(int select) const;
+        NODISCARD bool IsSelectValid(int select) const;
+        NODISCARD String GetEngineTestingName(int select) const;
 
     private:
         PackageType impl;

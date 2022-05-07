@@ -7,23 +7,23 @@
 #ifndef ARTIFICIAL_INTELLEGENCE_TOOLSET_PLACEHOLDER_H
 #define ARTIFICIAL_INTELLEGENCE_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/ArtificialIntellegence/ArtificialIntellegenceToolset/ArtificialIntellegenceToolsetDll.h" 
+#include "Toolset/ArtificialIntellegence/ArtificialIntellegenceToolset/ArtificialIntellegenceToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ArtificialIntellegenceToolset
 {
-	 class ARTIFICIAL_INTELLEGENCE_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class ARTIFICIAL_INTELLEGENCE_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // ARTIFICIAL_INTELLEGENCE_TOOLSET_PLACEHOLDER_H
+#endif  // ARTIFICIAL_INTELLEGENCE_TOOLSET_PLACEHOLDER_H

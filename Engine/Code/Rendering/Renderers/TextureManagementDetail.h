@@ -1,177 +1,170 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 16:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:40)
 
 #ifndef RENDERING_RENDERERS_TEXTURE_MANAGEMENT_DETAIL_H
 #define RENDERING_RENDERERS_TEXTURE_MANAGEMENT_DETAIL_H
 
-#include "Rendering/RenderingExport.h"
-
-#include "TextureManagement.h"
 #include "PlatformTexture1D.h"
 #include "PlatformTexture2D.h"
 #include "PlatformTexture3D.h"
 #include "PlatformTextureCube.h"
+#include "TextureManagement.h"
 #include "TextureManagementLockEncapsulationDetail.h"
+#include "System/Helper/PragmaWarning.h"
+#include "System/MemoryTools/MemoryHelper.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Rendering/OpenGLRenderer/TextureDataTraits.h"
 #include "Rendering/Resources/Texture1D.h"
 #include "Rendering/Resources/Texture2D.h"
 #include "Rendering/Resources/Texture3D.h"
 #include "Rendering/Resources/TextureCube.h"
-#include "Rendering/OpenGLRenderer/TextureDataTraits.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26487)
+
 template <typename PlatformTextureType>
-Rendering::TextureManagement<PlatformTextureType>
-	::TextureManagement(RendererPtr ptr)
-	: m_Renderer{ ptr }, m_Textures{}
+Rendering::TextureManagement<PlatformTextureType>::TextureManagement(const RendererSharedPtr& renderer)
+    : renderer{ renderer }, textures{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename PlatformTextureType>
-bool Rendering::TextureManagement <PlatformTextureType>
-	::IsValid() const noexcept
+bool Rendering::TextureManagement<PlatformTextureType>::IsValid() const noexcept
 {
-	if(m_Renderer.lock())
+    if (renderer.lock())
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::Bind (TextureConstPtr texture)
+void Rendering::TextureManagement<PlatformTextureType>::Bind(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (m_Textures.find(texture) == m_Textures.end())
+    if (textures.find(texture) == textures.end())
     {
-		PlatformTextureSharedPtr platformTexture{ std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get()) };
-		m_Textures.insert({ texture, platformTexture });
+        auto platformTexture = std::make_shared<PlatformTextureType>(renderer.lock().get(), texture.get());
+        textures.emplace(texture, platformTexture);
     }
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::Unbind (TextureConstPtr texture)
+void Rendering::TextureManagement<PlatformTextureType>::Unbind(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Textures.erase(texture);
+    textures.erase(texture);
 }
- 
-template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::Enable (TextureConstPtr texture, int textureUnit)
-{
-	RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
-    PlatformTextureSharedPtr platformTexture;
-    if (iter != m_Textures.end())
+template <typename PlatformTextureType>
+void Rendering::TextureManagement<PlatformTextureType>::Enable(const ConstTextureSharedPtr& texture, int textureUnit)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto iter = textures.find(texture);
+    PlatformTextureSharedPtr platformTexture{};
+    if (iter != textures.end())
     {
         platformTexture = iter->second;
     }
     else
     {
         // 延迟构造。
-		platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get());
-		m_Textures.insert({ texture,  platformTexture });
+        platformTexture = std::make_shared<PlatformTextureType>(renderer.lock().get(), texture.get());
+        textures.emplace(texture, platformTexture);
     }
 
-     platformTexture->Enable(m_Renderer.lock().get(), textureUnit);
+    platformTexture->Enable(renderer.lock().get(), textureUnit);
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::Disable(TextureConstPtr texture, int textureUnit)
+void Rendering::TextureManagement<PlatformTextureType>::Disable(const ConstTextureSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
- 
-    if (iter != m_Textures.end())
+    const auto iter = textures.find(texture);
+
+    if (iter != textures.end())
     {
-		auto platformTexture = iter->second;
+        auto platformTexture = iter->second;
 
-        platformTexture->Disable(m_Renderer.lock().get(), textureUnit);
+        platformTexture->Disable(renderer.lock().get(), textureUnit);
     }
 }
 
 template <typename PlatformTextureType>
-void* Rendering::TextureManagement <PlatformTextureType>
-	::Lock (TextureConstPtr texture,int level,BufferLocking mode)
+void* Rendering::TextureManagement<PlatformTextureType>::Lock(const ConstTextureSharedPtr& texture, int level, BufferLocking mode)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType != TextureFlags::TextureCube,"sm_TextureType != TextureCube ");
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType != TextureFlags::TextureCube, "sm_TextureType != TextureCube ");
 
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
-    PlatformTextureSharedPtr platformTexture;
-    if (iter != m_Textures.end())
+    const auto iter = textures.find(texture);
+    PlatformTextureSharedPtr platformTexture{};
+    if (iter != textures.end())
     {
         platformTexture = iter->second;
     }
     else
     {
         // 延迟构造。
-        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get());
-        m_Textures.insert(std::make_pair(texture, platformTexture));
+        platformTexture = std::make_shared<PlatformTextureType>(renderer.lock().get(), texture.get());
+        textures.emplace(texture, platformTexture);
     }
 
-     return platformTexture->Lock(level ,mode);
+    return platformTexture->Lock(level, mode);
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::Unlock (TextureConstPtr texture,int level)
+void Rendering::TextureManagement<PlatformTextureType>::Unlock(const ConstTextureSharedPtr& texture, int level)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType != TextureFlags::TextureCube);
-	
-	RENDERING_CLASS_IS_VALID_1;
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType != TextureFlags::TextureCube);
 
-const auto iter = m_Textures.find(texture);
- 
-    if (iter != m_Textures.end())
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto iter = textures.find(texture);
+
+    if (iter != textures.end())
     {
-		auto platformTexture = iter->second;
+        auto platformTexture = iter->second;
 
         platformTexture->Unlock(level);
     }
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::Update (TextureConstPtr texture,int level)
+void Rendering::TextureManagement<PlatformTextureType>::Update(const ConstTextureSharedPtr& texture, int level)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType != TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType != TextureFlags::TextureCube);
 
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	const auto numBytes = texture->GetNumLevelBytes(level);
-	auto srcData = texture->GetTextureData(level);
+    const auto numBytes = texture->GetNumLevelBytes(level);
+    auto srcData = texture->GetTextureData(level);
 
-	TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
+    TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
 
-	auto trgData = encapsulation.Lock(texture, level, BufferLocking::WriteOnly);
-    memcpy(trgData, srcData, numBytes);    
+    auto trgData = encapsulation.Lock(texture, level, BufferLocking::WriteOnly);
+    System::MemoryCopy(trgData, srcData, numBytes);
 }
 
 template <typename PlatformTextureType>
-typename Rendering::TextureManagement<PlatformTextureType>::PlatformTextureSharedPtr Rendering::TextureManagement<PlatformTextureType>
-	::GetResource (TextureConstPtr texture)
+typename Rendering::TextureManagement<PlatformTextureType>::PlatformTextureSharedPtr Rendering::TextureManagement<PlatformTextureType>::GetResource(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
-    if (iter != m_Textures.end())
+    const auto iter = textures.find(texture);
+    if (iter != textures.end())
     {
         return iter->second;
     }
@@ -182,89 +175,83 @@ const auto iter = m_Textures.find(texture);
 }
 
 template <typename PlatformTextureType>
-void* Rendering::TextureManagement <PlatformTextureType>
-	::LockCube (TextureConstPtr texture,int face,int level,BufferLocking mode)
+void* Rendering::TextureManagement<PlatformTextureType>::LockCube(const ConstTextureSharedPtr& texture, int face, int level, BufferLocking mode)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType == TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType == TextureFlags::TextureCube);
 
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
-    PlatformTextureSharedPtr platformTexture;
-    if (iter != m_Textures.end())
+    const auto iter = textures.find(texture);
+    PlatformTextureSharedPtr platformTexture{};
+    if (iter != textures.end())
     {
         platformTexture = iter->second;
     }
     else
     {
         // 延迟构造。
-        platformTexture = std::make_shared<PlatformTextureType>(m_Renderer.lock().get(), texture.get());
-		m_Textures.insert({ texture, platformTexture });
+        platformTexture = std::make_shared<PlatformTextureType>(renderer.lock().get(), texture.get());
+        textures.emplace(texture, platformTexture);
     }
 
-     return platformTexture->Lock( face,level ,mode);
+    return platformTexture->Lock(face, level, mode);
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement <PlatformTextureType>
-	::UnlockCube (TextureConstPtr texture,int face,int level)
+void Rendering::TextureManagement<PlatformTextureType>::UnlockCube(const ConstTextureSharedPtr& texture, int face, int level)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType == TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType == TextureFlags::TextureCube);
 
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
- 
-    if (iter != m_Textures.end())
+    const auto iter = textures.find(texture);
+
+    if (iter != textures.end())
     {
-		auto platformTexture = iter->second;
+        auto platformTexture = iter->second;
 
-        platformTexture->Unlock(face,level);
+        platformTexture->Unlock(face, level);
     }
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement < PlatformTextureType>
-	::UpdateCube (TextureConstPtr texture,int face,int level)
+void Rendering::TextureManagement<PlatformTextureType>::UpdateCube(const ConstTextureSharedPtr& texture, int face, int level)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType == TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType == TextureFlags::TextureCube);
 
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	const auto numBytes = texture->GetNumLevelBytes(level);
-	auto srcData = texture->GetTextureData(face,level);
+    const auto numBytes = texture->GetNumLevelBytes(level);
+    auto srcData = texture->GetTextureData(face, level);
 
-	TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
+    TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
 
-	auto trgData = encapsulation.LockCube(texture, face,level, BufferLocking::WriteOnly);
-    memcpy(trgData, srcData, numBytes);    
+    auto trgData = encapsulation.LockCube(texture, face, level, BufferLocking::WriteOnly);
+    System::MemoryCopy(trgData, srcData, numBytes);
 }
 
 template <typename PlatformTextureType>
-bool Rendering::TextureManagement<PlatformTextureType>
-	::IsInTextureMap( TextureConstPtr texture )
+bool Rendering::TextureManagement<PlatformTextureType>::IsInTextureMap(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Textures.find(texture) != m_Textures.end();
+    return textures.find(texture) != textures.end();
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement<PlatformTextureType>
-	::InsertTextureMap( TextureConstPtr texture,const PlatformTextureSharedPtr& platformTexture )
+void Rendering::TextureManagement<PlatformTextureType>::InsertTextureMap(const ConstTextureSharedPtr& texture, const PlatformTextureSharedPtr& platformTexture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Textures.insert({ texture, platformTexture });
+    textures.emplace(texture, platformTexture);
 }
 
 template <typename PlatformTextureType>
-void Rendering::TextureManagement<PlatformTextureType>
-	::RemoveTextureMap( TextureConstPtr texture )
+void Rendering::TextureManagement<PlatformTextureType>::RemoveTextureMap(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Textures.erase(texture);
+    textures.erase(texture);
 }
-#include STSTEM_WARNING_POP
-#endif // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_DETAIL_H
+
+#endif  // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_DETAIL_H

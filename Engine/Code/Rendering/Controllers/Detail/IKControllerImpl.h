@@ -1,27 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 11:23)
 
 #ifndef RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_IK_CONTROLLER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Controllers/IKGoal.h"
 #include "Rendering/Controllers/IKJoint.h"
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
 
 #include <vector>
-
-namespace CoreTools
-{
-    class BufferTarget;
-    class BufferSource;
-    class ObjectLink;
-    class ObjectRegister;
-    class Object;
-}
 
 namespace Rendering
 {
@@ -29,8 +25,8 @@ namespace Rendering
     {
     public:
         using ClassType = IKControllerImpl;
-        using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
-        using IKJointSharedPtrVector = std::vector<IKJointSharedPtr>;
+        using IKGoalSharedPtrVector = std::vector<CoreTools::ObjectAssociated<IKGoal>>;
+        using IKJointSharedPtrVector = std::vector<CoreTools::ObjectAssociated<IKJoint>>;
         using Object = CoreTools::Object;
         using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
         using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
@@ -41,30 +37,30 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        int GetStreamingSize() const;
+        NODISCARD int GetStreamingSize() const;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
         void Link(CoreTools::ObjectLink& source);
         void Register(CoreTools::ObjectRegister& target) const;
 
-        const ObjectSharedPtr GetObjectByName(const std::string& name);
-        const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
-        const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
-        const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
+        NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name);
+        NODISCARD std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
+        NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+        NODISCARD std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
 
-        int GetIterations() const noexcept;
-        void SetIterations(int iterations) noexcept;
-        bool IsOrderEndToRoot() const noexcept;
-        void SetOrderEndToRoot(bool orderEndToRoot) noexcept;
+        NODISCARD int GetIterations() const noexcept;
+        void SetIterations(int aIterations) noexcept;
+        NODISCARD bool IsOrderEndToRoot() const noexcept;
+        void SetOrderEndToRoot(bool aOrderEndToRoot) noexcept;
 
-        const IKJointSharedPtr GetJointsSharedPtr(int index);
-        int GetJointsNum() const;
+        NODISCARD IKJointSharedPtr GetJointsSharedPtr(int index);
+        NODISCARD int GetJointsNum() const;
 
     private:
-        int m_Iterations;  // 默认 = 128
-        bool m_OrderEndToRoot;  // 默认 = true
+        int iterations;  // 默认 = 128
+        bool orderEndToRoot;  // 默认 = true
 
-        IKJointSharedPtrVector m_Joints;
+        IKJointSharedPtrVector joints;
     };
 }
 

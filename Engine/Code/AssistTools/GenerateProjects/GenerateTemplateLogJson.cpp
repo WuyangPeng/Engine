@@ -1,28 +1,29 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 13:47)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateLogJson.h"
 #include "Detail/GenerateTemplateLogJsonImpl.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
- 
-AssistTools::GenerateTemplateLogJson
-	::GenerateTemplateLogJson(const System::String& templateFileName, const System::String& projectName)
-    : impl( templateFileName, projectName )
+
+AssistTools::GenerateTemplateLogJson::GenerateTemplateLogJson(const System::String& templateFileName, const System::String& projectName)
+    : impl{ templateFileName, projectName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateLogJson)
 
-void AssistTools::GenerateTemplateLogJson
-	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newFileName) const
+void AssistTools::GenerateTemplateLogJson::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newFileName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return impl->GenerateTo(resourceDirectory, solutionName, newFileName);
+    return impl->GenerateTo(resourceDirectory, solutionName, newFileName);
 }

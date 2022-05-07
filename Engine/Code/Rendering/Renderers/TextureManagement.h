@@ -1,68 +1,67 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:37)
 
 #ifndef RENDERING_RENDERERS_TEXTURE_MANAGEMENT_H
 #define RENDERING_RENDERERS_TEXTURE_MANAGEMENT_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "RenderersFwd.h"
+
 #include <map>
 #include <memory>
 
 namespace Rendering
 {
-	class Renderer;
-
     template <typename PlatformTextureType>
-	class TextureManagement 
-	{
-	public:
-		using ClassType = TextureManagement <PlatformTextureType>;
-		using TextureType = typename PlatformTextureType::TextureType;
-		using TextureConstPtr = std::shared_ptr<const TextureType>;
-		using PlatformTextureSharedPtr = std::shared_ptr<PlatformTextureType>;
-	    using RendererPtr = std::shared_ptr<Renderer>;
+    class TextureManagement
+    {
+    public:
+        using ClassType = TextureManagement<PlatformTextureType>;
+        using TextureType = typename PlatformTextureType::TextureType;
+        using ConstTextureSharedPtr = std::shared_ptr<const TextureType>;
+        using PlatformTextureSharedPtr = std::shared_ptr<PlatformTextureType>;
+        using RendererSharedPtr = std::shared_ptr<Renderer>;
 
-	public:
-		explicit TextureManagement(RendererPtr ptr);
+    public:
+        explicit TextureManagement(const RendererSharedPtr& renderer);
 
-		CLASS_INVARIANT_DECLARE;
-	
-       // 1D、2D、3D、Cube纹理管理。纹理对象必须是已经由应用程序代码分配。
-       void Bind (TextureConstPtr texture); 
-       void Unbind (TextureConstPtr texture);
- 
-       void Enable (TextureConstPtr texture, int textureUnit);
-       void Disable (TextureConstPtr texture, int textureUnit);
+        CLASS_INVARIANT_DECLARE;
 
-       void* Lock (TextureConstPtr texture,int level,BufferLocking mode);
-       void Unlock (TextureConstPtr texture,int level);
-       void Update (TextureConstPtr texture,int level);
+        // 1D、2D、3D、Cube纹理管理。纹理对象必须是已经由应用程序代码分配。
+        void Bind(const ConstTextureSharedPtr& texture);
+        void Unbind(const ConstTextureSharedPtr& texture);
 
-       void* LockCube (TextureConstPtr texture,int face,int level,BufferLocking mode);
-       void UnlockCube (TextureConstPtr texture,int face,int level);
-       void UpdateCube (TextureConstPtr texture,int face,int level);
+        void Enable(const ConstTextureSharedPtr& texture, int textureUnit);
+        void Disable(const ConstTextureSharedPtr& texture, int textureUnit);
 
-       PlatformTextureSharedPtr GetResource (TextureConstPtr buffer);
+        NODISCARD void* Lock(const ConstTextureSharedPtr& texture, int level, BufferLocking mode);
+        void Unlock(const ConstTextureSharedPtr& texture, int level);
+        void Update(const ConstTextureSharedPtr& texture, int level);
 
-	   bool IsInTextureMap (TextureConstPtr texture);	  
-	   void InsertTextureMap (TextureConstPtr texture,const PlatformTextureSharedPtr& platformTexture);
-	   void RemoveTextureMap(TextureConstPtr texture);
+        NODISCARD void* LockCube(const ConstTextureSharedPtr& texture, int face, int level, BufferLocking mode);
+        void UnlockCube(const ConstTextureSharedPtr& texture, int face, int level);
+        void UpdateCube(const ConstTextureSharedPtr& texture, int face, int level);
+        NODISCARD
+        PlatformTextureSharedPtr GetResource(const ConstTextureSharedPtr& buffer);
 
-	private:
-       using TextureMap = std::map<TextureConstPtr, PlatformTextureSharedPtr>;
+        NODISCARD bool IsInTextureMap(const ConstTextureSharedPtr& texture);
+        void InsertTextureMap(const ConstTextureSharedPtr& texture, const PlatformTextureSharedPtr& platformTexture);
+        void RemoveTextureMap(const ConstTextureSharedPtr& texture);
 
-	private:
-		std::weak_ptr<Renderer> m_Renderer;
-	   TextureMap m_Textures;	 
-	};
+    private:
+        using TextureMap = std::map<ConstTextureSharedPtr, PlatformTextureSharedPtr>;
+
+    private:
+        std::weak_ptr<Renderer> renderer;
+        TextureMap textures;
+    };
 }
 
-#endif // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_H

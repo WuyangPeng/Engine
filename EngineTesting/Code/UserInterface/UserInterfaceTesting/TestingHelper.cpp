@@ -1,82 +1,81 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.4 (2019/09/09 20:18)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/UserInterfaceClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(UserInterface, TestingHelper, "用户界面库")
-
-// private
-void UserInterface::TestingHelper
-	::AddSuites()
+UserInterface::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "用户界面库" }
 {
-	AddMacroSuite(); 
-	AddConfigurationSuite();
-	AddInterfaceSuite();
-	AddWxWidgetsSuite();
-	AddFLTKSuite();
-	AddTrixulSuite();
-	AddXFree86Suite();
+    InitSuite();
+
+    USER_INTERFACE_SELF_CLASS_IS_VALID_9;
 }
 
-void UserInterface::TestingHelper
-	::AddMacroSuite()
-{
-	ADD_TEST_BEGIN(macroSuite, "宏"); 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(UserInterface, TestingHelper)
 
-	ADD_TEST_END(macroSuite);
-}
- 
-void UserInterface::TestingHelper
-	::AddConfigurationSuite()
+void UserInterface::TestingHelper::InitSuite()
 {
-	ADD_TEST_BEGIN(configurationSuite, "配置"); 
-
-	ADD_TEST_END(configurationSuite);
+    AddMacroSuite();
+    AddConfigurationSuite();
+    AddInterfaceSuite();
+    AddWxWidgetsSuite();
+    AddFLTKSuite();
+    AddTrixulSuite();
+    AddXFree86Suite();
 }
 
-void UserInterface::TestingHelper
-	::AddInterfaceSuite()
+void UserInterface::TestingHelper ::AddMacroSuite()
 {
-	ADD_TEST_BEGIN(interfaceSuite, "接口"); 
+    auto macroSuite = GenerateSuite("宏");
 
-	ADD_TEST_END(interfaceSuite);
+    AddSuite(macroSuite);
 }
 
-void UserInterface::TestingHelper
-	::AddWxWidgetsSuite()
+void UserInterface::TestingHelper ::AddConfigurationSuite()
 {
-	ADD_TEST_BEGIN(wxWidgetsSuite, "wxWidgets"); 
+    auto configurationSuite = GenerateSuite("配置");
 
-	ADD_TEST_END(wxWidgetsSuite);
+    AddSuite(configurationSuite);
 }
 
-void UserInterface::TestingHelper
-	::AddFLTKSuite()
+void UserInterface::TestingHelper ::AddInterfaceSuite()
 {
-	ADD_TEST_BEGIN(fLTKSuite, "FLTK"); 
+    auto interfaceSuite = GenerateSuite("接口");
 
-	ADD_TEST_END(fLTKSuite);
+    AddSuite(interfaceSuite);
 }
 
-void UserInterface::TestingHelper
-	::AddTrixulSuite()
+void UserInterface::TestingHelper ::AddWxWidgetsSuite()
 {
-	ADD_TEST_BEGIN(trixulSuite, "Trixul"); 
+    auto wxWidgetsSuite = GenerateSuite("wxWidgets");
 
-	ADD_TEST_END(trixulSuite);
+    AddSuite(wxWidgetsSuite);
 }
 
-void UserInterface::TestingHelper
-	::AddXFree86Suite()
+void UserInterface::TestingHelper ::AddFLTKSuite()
 {
-	ADD_TEST_BEGIN(xFree86Suite, "XFree86"); 
+    auto fLTKSuite = GenerateSuite("FLTK");
 
-	ADD_TEST_END(xFree86Suite);
+    AddSuite(fLTKSuite);
 }
 
+void UserInterface::TestingHelper ::AddTrixulSuite()
+{
+    auto trixulSuite = GenerateSuite("Trixul");
+
+    AddSuite(trixulSuite);
+}
+
+void UserInterface::TestingHelper ::AddXFree86Suite()
+{
+    auto xFree86Suite = GenerateSuite("XFree86");
+
+    AddSuite(xFree86Suite);
+}

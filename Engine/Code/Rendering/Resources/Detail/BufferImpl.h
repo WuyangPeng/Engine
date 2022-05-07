@@ -29,6 +29,7 @@ namespace Rendering
         using ReadFileManager = CoreTools::ReadFileManager;
         using WriteFileManager = CoreTools::WriteFileManager;
         using SpanIterator = CoreTools::SpanIterator<std::vector<char>::const_iterator>;
+        using WriteSpanIterator = CoreTools::SpanIterator<std::vector<char>::iterator>;
 
     public:
         BufferImpl() noexcept;
@@ -54,6 +55,7 @@ namespace Rendering
         NODISCARD const char* GetReadOnlyData() const noexcept;
         NODISCARD const char* GetReadOnlyData(int index) const;
         NODISCARD SpanIterator GetSpanIterator() const noexcept;
+        NODISCARD WriteSpanIterator GetWriteSpanIterator() noexcept;
 
         void SaveBufferDataToFile(WriteFileManager& outFile) const;
         void ReadBufferDataFromFile(ReadFileManager& inFile);

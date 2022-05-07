@@ -6,14 +6,23 @@
 
 #include "Testing.h"
 #include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(AssistTools, TestingHelper, "辅助工具库")
+AssistTools::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "辅助工具库" }
+{
+    InitSuite();
+
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, TestingHelper)
 
 // private
-void AssistTools::TestingHelper ::AddSuites()
+void AssistTools::TestingHelper::InitSuite()  
 {
     AddMacroSuite();
     AddGenerateProjectsSuite();
@@ -23,16 +32,16 @@ void AssistTools::TestingHelper ::AddSuites()
     AddWmfxCompilerSuite();
 }
 
-void AssistTools::TestingHelper ::AddMacroSuite()
+void AssistTools::TestingHelper::AddMacroSuite()
 {
-    ADD_TEST_BEGIN(macroSuite, "宏");
+    auto macroSuite = GenerateSuite("宏");
 
-    ADD_TEST_END(macroSuite);
+    AddSuite(macroSuite);
 }
 
-void AssistTools::TestingHelper ::AddGenerateProjectsSuite()
+void AssistTools::TestingHelper::AddGenerateProjectsSuite()
 {
-    ADD_TEST_BEGIN(generateProjectsSuite, "生成项目");
+    auto generateProjectsSuite = GenerateSuite("生成项目");
 
     ADD_TEST(generateProjectsSuite, GenerateTemplateSolutionTesting);
     ADD_TEST(generateProjectsSuite, GenerateTemplateVcxprojTesting);
@@ -63,33 +72,33 @@ void AssistTools::TestingHelper ::AddGenerateProjectsSuite()
     ADD_TEST(generateProjectsSuite, GenerateTestingTemplateEngineDirectoryTesting);
     ADD_TEST(generateProjectsSuite, GenerateTestingTemplateCodeDirectoryTesting);
 
-    ADD_TEST_END(generateProjectsSuite);
+    AddSuite(generateProjectsSuite);
 }
 
-void AssistTools::TestingHelper ::AddFeaturesImporterSuite()
+void AssistTools::TestingHelper::AddFeaturesImporterSuite()
 {
-    ADD_TEST_BEGIN(featuresImporterSuite, "特征导入");
+    auto featuresImporterSuite = GenerateSuite("特征导入");
 
-    ADD_TEST_END(featuresImporterSuite);
+    AddSuite(featuresImporterSuite);
 }
 
-void AssistTools::TestingHelper ::AddBmpColorToGraySuite()
+void AssistTools::TestingHelper::AddBmpColorToGraySuite()
 {
-    ADD_TEST_BEGIN(bmpColorToGraySuite, "灰态Bmp颜色");
+    auto bmpColorToGraySuite = GenerateSuite("灰态Bmp颜色");
 
-    ADD_TEST_END(bmpColorToGraySuite);
+    AddSuite(bmpColorToGraySuite);
 }
 
-void AssistTools::TestingHelper ::AddBmpToWmtfSuite()
+void AssistTools::TestingHelper::AddBmpToWmtfSuite()
 {
-    ADD_TEST_BEGIN(bmpToWmtfSuite, "Bmp转换Wmtf");
+    auto bmpToWmtfSuite = GenerateSuite("Bmp转换Wmtf");
 
-    ADD_TEST_END(bmpToWmtfSuite);
+    AddSuite(bmpToWmtfSuite);
 }
 
-void AssistTools::TestingHelper ::AddWmfxCompilerSuite()
+void AssistTools::TestingHelper::AddWmfxCompilerSuite()
 {
-    ADD_TEST_BEGIN(wmfxCompilerSuite, "Wmfx编译器");
+    auto wmfxCompilerSuite = GenerateSuite("Wmfx编译器");
 
-    ADD_TEST_END(wmfxCompilerSuite);
+    AddSuite(wmfxCompilerSuite);
 }

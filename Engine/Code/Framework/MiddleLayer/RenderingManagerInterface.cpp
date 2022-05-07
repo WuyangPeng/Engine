@@ -1,175 +1,165 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 13:54)
 
 #include "Framework/FrameworkExport.h"
 
 #include "RenderingManagerInterface.h"
 #include "Flags/RenderingMiddleLayerFlags.h"
-#include "Detail/ViewMiddleLayerImpl.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Detail/ViewMiddleLayerImpl.h"
 #include "CoreTools/CharacterString/StringConversion.h"
-#include "Framework/WindowCreate/WindowSize.h"
-#include "Framework/MainFunctionHelper/Flags/Directory.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
+#include "Framework/MainFunctionHelper/Flags/Directory.h"
+#include "Framework/WindowCreate/WindowSize.h"
 
 using std::make_shared;
- 
-Framework::RenderingManagerInterface
-	::RenderingManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(RenderingMiddleLayer::Count)  },
-	 m_ViewMiddleLayer{ make_shared<ViewMiddleLayerImpl>(0) }
+
+Framework::RenderingManagerInterface::RenderingManagerInterface(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform },
+      impl{ System::EnumCastUnderlying(RenderingMiddleLayer::Count) },
+      viewMiddleLayer{ make_shared<ViewMiddleLayerImpl>() }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-} 
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::RenderingManagerInterface
-	::IsValid() const noexcept
+
+bool Framework::RenderingManagerInterface::IsValid() const noexcept
 {
-	if (ParentType::IsValid() &&   m_ViewMiddleLayer != nullptr)
-		return true;
-	else
-		return false;
+    if (ParentType::IsValid() && viewMiddleLayer != nullptr)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
- 
+
+#endif  // OPEN_CLASS_INVARIANT
+
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Rendering, System)
 
-bool Framework::RenderingManagerInterface
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::RenderingManagerInterface::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::PreCreate(environmentDirectory))
-	{
-		auto rendererFileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
+    if (ParentType::PreCreate(environmentDirectory))
+    {
+        auto rendererFileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
 
-		m_ViewMiddleLayer->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName));
+        viewMiddleLayer->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName));
 
-		return true;
-	}		
-	else
-	{
-		return false;
-	}		
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool Framework::RenderingManagerInterface
-	::Initialize() 
+bool Framework::RenderingManagerInterface::Initialize()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Initialize())
-	{
-		m_ViewMiddleLayer->ClearColorBuffer();
+    if (ParentType::Initialize())
+    {
+        viewMiddleLayer->ClearColorBuffer();
 
-		return true;
-	}		
-	else
-	{
-		return false;
-	}		
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool Framework::RenderingManagerInterface
-	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
+bool Framework::RenderingManagerInterface::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Resize(windowDisplay, size))
-	{
-		m_ViewMiddleLayer->Resize(size.GetWindowWidth(), size.GetWindowHeight());
+    if (ParentType::Resize(windowDisplay, size))
+    {
+        viewMiddleLayer->Resize(size.GetWindowWidth(), size.GetWindowHeight());
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool Framework::RenderingManagerInterface
-	::KeyUp(int key, const WindowPoint& point)
+bool Framework::RenderingManagerInterface::KeyUp(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::KeyUp(key, point);
+    return ParentType::KeyUp(key, point);
 }
 
-bool Framework::RenderingManagerInterface
-	::KeyDown(int key, const WindowPoint& point)
+bool Framework::RenderingManagerInterface::KeyDown(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::KeyDown(key, point);
+    return ParentType::KeyDown(key, point);
 }
 
-bool Framework::RenderingManagerInterface
-	::SpecialKeyUp(int key, const WindowPoint& point)
+bool Framework::RenderingManagerInterface::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::SpecialKeyUp(key, point);
+    return ParentType::SpecialKeyUp(key, point);
 }
 
-bool Framework::RenderingManagerInterface
-	::SpecialKeyDown(int key, const WindowPoint& point)
+bool Framework::RenderingManagerInterface::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::SpecialKeyDown(key, point);
+    return ParentType::SpecialKeyDown(key, point);
 }
 
-bool Framework::RenderingManagerInterface
-	::PassiveMotion(const WindowPoint& point)
+bool Framework::RenderingManagerInterface::PassiveMotion(const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::PassiveMotion(point);
+    return ParentType::PassiveMotion(point);
 }
 
-bool Framework::RenderingManagerInterface
-	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::RenderingManagerInterface::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::Motion(point, virtualKeys);
+    return ParentType::Motion(point, virtualKeys);
 }
 
-bool Framework::RenderingManagerInterface
-	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::RenderingManagerInterface::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::MouseWheel(delta, point, virtualKeys);
+    return ParentType::MouseWheel(delta, point, virtualKeys);
 }
 
-bool Framework::RenderingManagerInterface
-	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::RenderingManagerInterface::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::MouseClick(button, state, point, virtualKeys);
+    return ParentType::MouseClick(button, state, point, virtualKeys);
 }
 
-const Rendering::RendererSharedPtr Framework::RenderingManagerInterface
-	::GetRenderer() noexcept
+Rendering::RendererSharedPtr Framework::RenderingManagerInterface::GetRenderer() noexcept
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return m_ViewMiddleLayer->GetRenderer();
+    return viewMiddleLayer->GetRenderer();
 }
 
-const Rendering::ConstRendererSharedPtr Framework::RenderingManagerInterface
-	::GetRenderer() const noexcept
+Rendering::ConstRendererSharedPtr Framework::RenderingManagerInterface::GetRenderer() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_ViewMiddleLayer->GetRenderer();
+    return viewMiddleLayer->GetRenderer();
 }
-

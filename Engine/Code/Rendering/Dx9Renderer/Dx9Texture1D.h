@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 11:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 21:03)
 
 #ifndef RENDERING_RENDERERS_DX9_TEXTURE_1D_H
 #define RENDERING_RENDERERS_DX9_TEXTURE_1D_H
@@ -11,12 +14,11 @@
 
 #include "System/Windows/Flags/WindowsFlags.h"
 #include "Rendering/Renderers/Detail/PlatformTexture1DImpl.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 namespace Rendering
 {
-    class Renderer;
-    class Texture1D;
-
     class RENDERING_HIDDEN_DECLARE Dx9Texture1D : public PlatformTexture1DImpl
     {
     public:
@@ -24,23 +26,15 @@ namespace Rendering
         using ParentType = PlatformTexture1DImpl;
 
     public:
-        Dx9Texture1D(Renderer* renderer, const Texture1D* texture);
-        ~Dx9Texture1D();
-        Dx9Texture1D(const Dx9Texture1D&) = default;
-        Dx9Texture1D& operator=(const Dx9Texture1D&) = default;
-        Dx9Texture1D(Dx9Texture1D&&) = default;
-        Dx9Texture1D& operator=(Dx9Texture1D&&) = default;
+        Dx9Texture1D(Renderer* renderer, const Texture1D* texture) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         // 纹理操作
-        void Enable(Renderer* renderer, int textureUnit) override;
-        void Disable(Renderer* renderer, int textureUnit) override;
-        void* Lock(int level, BufferLocking mode) override;
-        void Unlock(int level) override;
-
-    private:
-        //IDirect3DTexture9* mTexture;
+        void Enable(Renderer* renderer, int textureUnit) noexcept override;
+        void Disable(Renderer* renderer, int textureUnit) noexcept override;
+        NODISCARD void* Lock(int level, BufferLocking mode) noexcept override;
+        void Unlock(int level) noexcept override;
     };
 }
 

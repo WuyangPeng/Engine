@@ -14,16 +14,15 @@
 
 #ifndef BUILDING_ANIMATION_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_ANIMATION_STATIC
+#else  // BUILDING_ANIMATION_STATIC
 
-	namespace AnimationToolset
-	{
-		void StaticDllLib()
-		{
+namespace AnimationToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_ANIMATION_STATIC
+#endif  // !BUILDING_ANIMATION_STATIC

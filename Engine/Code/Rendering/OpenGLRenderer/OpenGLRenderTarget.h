@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 21:28)
 
 #ifndef RENDERING_RENDERERS_OPENGL_RENDER_TARGET_H
 #define RENDERING_RENDERERS_OPENGL_RENDER_TARGET_H
@@ -11,31 +14,29 @@
 
 #include "OpenGLRenderTargetData.h"
 #include "Rendering/Renderers/Detail/PlatformRenderTargetImpl.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 namespace Rendering
 {
-	class Renderer;
-	class RenderTarget;
-
     class OpenGLRenderTarget : public PlatformRenderTargetImpl
     {
     public:
-		using ClassType = OpenGLRenderTarget;
-		using ParentType = PlatformRenderTargetImpl;
-        
-    public:
-        OpenGLRenderTarget (Renderer* renderer,const RenderTarget* renderTarget);
- 
-        
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        using ClassType = OpenGLRenderTarget;
+        using ParentType = PlatformRenderTargetImpl;
 
-          void Enable (Renderer* renderer) noexcept override;
-		  void Disable (Renderer* renderer) noexcept override;
-          ConstTexture2DSharedPtr ReadColor(int index,Renderer* renderer) override;
-   
+    public:
+        OpenGLRenderTarget(Renderer* renderer, const RenderTarget* renderTarget);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        void Enable(Renderer* renderer) noexcept override;
+        void Disable(Renderer* renderer) noexcept override;
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer) override;
+
     private:
-        OpenGLRenderTargetData m_OpenGLRenderTargetData;
+        OpenGLRenderTargetData openGLRenderTargetData;
     };
 }
 
-#endif // RENDERING_RENDERERS_OPENGL_RENDER_TARGET_H
+#endif  // RENDERING_RENDERERS_OPENGL_RENDER_TARGET_H

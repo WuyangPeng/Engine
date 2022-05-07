@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 11:27)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,151 +16,139 @@
 
 using std::string;
 
-Framework::WindowApplicationInformationImpl
-	::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
-	:m_WindowTitle{ windowTitle }, m_Size{ size }, m_Position{ point },
-	 m_Style{ allowResize ? WindowStyles::Default :
-	          // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
-	          WindowStyles::Overlapped | WindowStyles::Caption | WindowStyles::SysMenu | WindowStyles::MinimizeBox | WindowStyles::Visible },
-	 m_WindowName{ SYSTEM_TEXT("Window") }, m_WindowPictorial{ System::WindowsBrushTypes::WhiteBrush }
+Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
+    : windowTitle{ windowTitle },
+      size{ size },
+      position{ point },
+      style{ allowResize ?
+                 WindowsStyles::Default :
+                 // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
+                 WindowsStyles::Overlapped | WindowsStyles::Caption | WindowsStyles::SysMenu | WindowsStyles::MinimizeBox | WindowsStyles::Visible },
+      windowName{ SYSTEM_TEXT("Window") },
+      windowPictorial{ System::WindowsBrushTypes::WhiteBrush }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowApplicationInformationImpl
-	::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size)
-	:WindowApplicationInformationImpl{ windowTitle,size,WindowPoint{ },true }
+Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size)
+    : WindowApplicationInformationImpl{ windowTitle, size, WindowPoint{}, true }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::WindowApplicationInformationImpl
-	::WindowApplicationInformationImpl(HInstance instance, const RendererParameter& rendererParameter)
-	:m_WindowTitle{ CoreTools::StringConversion::MultiByteConversionStandard(rendererParameter.GetWindowTitle()) },
-	 m_Size{ rendererParameter.GetWidth(),rendererParameter.GetHeight() },
-	 m_Position{ rendererParameter.GetXPosition(),rendererParameter.GetYPosition() },
-	 m_Style{ rendererParameter.IsAllowResize() ? WindowStyles::Default :
-			  // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
-			  WindowStyles::Overlapped | WindowStyles::Caption | WindowStyles::SysMenu | WindowStyles::MinimizeBox | WindowStyles::Visible },
-	 m_WindowName{ rendererParameter.GetWindowClassName(),rendererParameter.GetWindowMenuName() },
-	 m_WindowPictorial{ GetWindowPictorial(instance,rendererParameter) }
+Framework::WindowApplicationInformationImpl::WindowApplicationInformationImpl(WindowsHInstance instance, const RendererParameter& rendererParameter)
+    : windowTitle{ CoreTools::StringConversion::MultiByteConversionStandard(rendererParameter.GetWindowTitle()) },
+      size{ rendererParameter.GetWidth(), rendererParameter.GetHeight() },
+      position{ rendererParameter.GetXPosition(), rendererParameter.GetYPosition() },
+      style{ rendererParameter.IsAllowResize() ?
+                 WindowsStyles::Default :
+                 // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
+                 WindowsStyles::Overlapped | WindowsStyles::Caption | WindowsStyles::SysMenu | WindowsStyles::MinimizeBox | WindowsStyles::Visible },
+      windowName{ rendererParameter.GetWindowClassName(), rendererParameter.GetWindowMenuName() },
+      windowPictorial{ GetWindowPictorial(instance, rendererParameter) }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 // private
-Framework::WindowPictorial Framework::WindowApplicationInformationImpl
-	::GetWindowPictorial(HInstance instance, const RendererParameter& rendererParameter)
+Framework::WindowPictorial Framework::WindowApplicationInformationImpl::GetWindowPictorial(WindowsHInstance instance, const RendererParameter& rendererParameter)
 {
-	const auto icon = rendererParameter.GetIcon();
-	const auto isIconDefault = rendererParameter.IsIconDefault();
-	const auto cursor = rendererParameter.GetCursor();
-	const auto isCursorDefault = rendererParameter.IsCursorDefault();
-	const auto windowBrushTypes = rendererParameter.GetBackground();
+    const auto icon = rendererParameter.GetIcon();
+    const auto isIconDefault = rendererParameter.IsIconDefault();
+    const auto cursor = rendererParameter.GetCursor();
+    const auto isCursorDefault = rendererParameter.IsCursorDefault();
+    const auto windowBrushTypes = rendererParameter.GetBackground();
 
-	return WindowPictorial{ instance, isIconDefault,icon,isCursorDefault,cursor,windowBrushTypes };
+    return WindowPictorial{ instance, isIconDefault, icon, isCursorDefault, cursor, windowBrushTypes };
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowApplicationInformationImpl)
 
-const System::String Framework::WindowApplicationInformationImpl
-	::GetWindowTitle() const
+System::String Framework::WindowApplicationInformationImpl::GetWindowTitle() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_WindowTitle;
+    return windowTitle;
 }
 
-int Framework::WindowApplicationInformationImpl
-	::GetXPosition() const noexcept
+int Framework::WindowApplicationInformationImpl::GetXPosition() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Position.GetWindowX();
+    return position.GetWindowX();
 }
 
-int Framework::WindowApplicationInformationImpl
-	::GetYPosition() const noexcept
+int Framework::WindowApplicationInformationImpl::GetYPosition() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Position.GetWindowY();
+    return position.GetWindowY();
 }
 
-int Framework::WindowApplicationInformationImpl
-	::GetWidth() const noexcept
+int Framework::WindowApplicationInformationImpl::GetWidth() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Size.GetWindowWidth();
+    return size.GetWindowWidth();
 }
 
-int Framework::WindowApplicationInformationImpl
-	::GetHeight() const noexcept
+int Framework::WindowApplicationInformationImpl::GetHeight() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Size.GetWindowHeight();
+    return size.GetWindowHeight();
 }
 
-float Framework::WindowApplicationInformationImpl
-	::GetAspectRatio() const noexcept
+float Framework::WindowApplicationInformationImpl::GetAspectRatio() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	const auto height = GetHeight();
+    const auto height = GetHeight();
 
-	if (height != 0)
-		return GetWidth() / static_cast<float>(height);
-	else
-		return 0.0f;
+    if (height != 0)
+        return GetWidth() / static_cast<float>(height);
+    else
+        return 0.0f;
 }
 
-const string Framework::WindowApplicationInformationImpl
-	::GetWindowTitleWithMultiByte() const
+string Framework::WindowApplicationInformationImpl::GetWindowTitleWithMultiByte() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return CoreTools::StringConversion::StandardConversionMultiByte(m_WindowTitle);
+    return CoreTools::StringConversion::StandardConversionMultiByte(windowTitle);
 }
 
-const Framework::WindowSize Framework::WindowApplicationInformationImpl
-	::GetWindowSize() const noexcept
+Framework::WindowSize Framework::WindowApplicationInformationImpl::GetWindowSize() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Size;
+    return size;
 }
 
-System::WindowsStyles Framework::WindowApplicationInformationImpl
-	::GetStyle() const noexcept
+System::WindowsStyles Framework::WindowApplicationInformationImpl::GetStyle() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Style;
+    return style;
 }
 
-void Framework::WindowApplicationInformationImpl
-	::SetWindowSize(const WindowSize& size) noexcept
+void Framework::WindowApplicationInformationImpl::SetWindowSize(const WindowSize& aSize) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	m_Size = size;
+    size = aSize;
 }
 
-Framework::WindowName Framework::WindowApplicationInformationImpl
-	::GetWindowName() const noexcept
+Framework::WindowName Framework::WindowApplicationInformationImpl::GetWindowName() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_WindowName;
+    return windowName;
 }
 
-Framework::WindowPictorial Framework::WindowApplicationInformationImpl
-	::GetWindowPictorial() const noexcept
+Framework::WindowPictorial Framework::WindowApplicationInformationImpl::GetWindowPictorial() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_WindowPictorial;
+    return windowPictorial;
 }
-

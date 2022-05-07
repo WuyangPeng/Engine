@@ -24,6 +24,7 @@
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include <random>
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::vector;
 
@@ -52,7 +53,7 @@ void Rendering::WorldMatrixConstantTesting
 	::InitTest()
 {
 	constexpr int numRegisters = 4;
-	WorldMatrixConstant firstShaderFloat;
+    WorldMatrixConstant firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), numRegisters);
 
 	firstShaderFloat.SetNumRegisters(numRegisters);
@@ -74,12 +75,13 @@ void Rendering::WorldMatrixConstantTesting
 		ASSERT_APPROXIMATE(firstData[i], firstShaderFloat.GetRegisters()[i], 1e-8f);
 	}
 	
-	const WorldMatrixConstant secondShaderFloat;
+	const WorldMatrixConstant secondShaderFloat{ CoreTools::DisableNotThrow::Disable };
+        ;
 	ASSERT_EQUAL(secondShaderFloat.GetNumRegisters(), numRegisters);
 	ASSERT_UNEQUAL_NULL_PTR(secondShaderFloat.GetData());
 	ASSERT_TRUE(secondShaderFloat.AllowUpdater());	
  
-	WorldMatrixConstant thirdShaderFloat;
+	WorldMatrixConstant thirdShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(thirdShaderFloat.GetNumRegisters(), numRegisters);
 
 	ASSERT_UNEQUAL_NULL_PTR(thirdShaderFloat.GetData());
@@ -123,7 +125,7 @@ void Rendering::WorldMatrixConstantTesting
 void Rendering::WorldMatrixConstantTesting
 	::CopyTest()
 {
-	WorldMatrixConstant firstShaderFloat;
+    WorldMatrixConstant firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), 4);
 
 	WorldMatrixConstant secondShaderFloat(firstShaderFloat);
@@ -140,7 +142,7 @@ void Rendering::WorldMatrixConstantTesting
 		ASSERT_APPROXIMATE(firstShaderFloat[registerIndex], static_cast<float>(registerIndex), 1e-8f);
 	}
 	
-	WorldMatrixConstant thirdShaderFloat;
+	WorldMatrixConstant thirdShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	thirdShaderFloat = firstShaderFloat;	
 	firstShaderFloat = secondShaderFloat;
 

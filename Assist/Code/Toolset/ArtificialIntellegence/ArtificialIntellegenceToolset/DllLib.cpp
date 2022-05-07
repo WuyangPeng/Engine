@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+#else  // BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
 
-	namespace ArtificialIntellegenceToolset
-	{
-		void StaticDllLib()
-		{
+namespace ArtificialIntellegenceToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC
+#endif  // !BUILDING_ARTIFICIAL_INTELLEGENCE_STATIC

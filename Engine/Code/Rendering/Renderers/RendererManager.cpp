@@ -1,13 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 10:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 11:45)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererManager.h"
 #include "Detail/RendererManagerImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
@@ -21,20 +25,20 @@ using std::string;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, RendererManager);
 
-Rendering::RendererManager::RendererManagerUniquePtr Rendering::RendererManager::sm_RendererManager{};
+Rendering::RendererManager::RendererManagerUniquePtr Rendering::RendererManager::rendererManager{};
 
 void Rendering::RendererManager::Create()
 {
-    sm_RendererManager = make_unique<Rendering::RendererManager>(RendererManagerCreate::Init);
+    rendererManager = make_unique<Rendering::RendererManager>(RendererManagerCreate::Init);
 }
 
 void Rendering::RendererManager::Destroy() noexcept
 {
-    sm_RendererManager.reset();
+    rendererManager.reset();
 }
 
-Rendering::RendererManager::RendererManager([[maybe_unused]] RendererManagerCreate rendererManagerCreate)
-    : impl{0}
+Rendering::RendererManager::RendererManager(MAYBE_UNUSED RendererManagerCreate rendererManagerCreate)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -45,7 +49,7 @@ int64_t Rendering::RendererManager::Insert(RendererPtr ptr)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Insert(ptr);
 }
@@ -54,241 +58,241 @@ bool Rendering::RendererManager::Erase(int64_t rendererID)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Erase(rendererID);
 }
 
-void Rendering::RendererManager::BindAll(VertexFormatConstPtr vertexFormat)
+void Rendering::RendererManager::BindAll(const ConstVertexFormatSharedPtr& vertexFormat)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(vertexFormat);
 }
 
-void Rendering::RendererManager::BindAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManager::BindAll(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(vertexBuffer);
 }
 
-void Rendering::RendererManager::BindAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManager::BindAll(const ConstIndexBufferSharedPtr& indexBuffer)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(indexBuffer);
 }
 
-void Rendering::RendererManager::BindAll(Texture1DConstPtr texture)
+void Rendering::RendererManager::BindAll(const ConstTexture1DSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(texture);
 }
 
-void Rendering::RendererManager::BindAll(Texture2DConstPtr texture)
+void Rendering::RendererManager::BindAll(const ConstTexture2DSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(texture);
 }
 
-void Rendering::RendererManager::BindAll(Texture3DConstPtr texture)
+void Rendering::RendererManager::BindAll(const ConstTexture3DSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(texture);
 }
 
-void Rendering::RendererManager::BindAll(TextureCubeConstPtr texture)
+void Rendering::RendererManager::BindAll(const ConstTextureCubeSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(texture);
 }
 
-void Rendering::RendererManager::BindAll(RenderTargetConstPtr renderTarget)
+void Rendering::RendererManager::BindAll(const ConstRenderTargetSharedPtr& renderTarget)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(renderTarget);
 }
 
-void Rendering::RendererManager::BindAll(VertexShaderConstPtr vertexShader)
+void Rendering::RendererManager::BindAll(const ConstVertexShaderSharedPtr& vertexShader)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(vertexShader);
 }
 
-void Rendering::RendererManager::BindAll(PixelShaderConstPtr pixelShader)
+void Rendering::RendererManager::BindAll(const ConstPixelShaderSharedPtr& pixelShader)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->BindAll(pixelShader);
 }
 
-void Rendering::RendererManager::UnbindAll(VertexFormatConstPtr vertexFormat)
+void Rendering::RendererManager::UnbindAll(const ConstVertexFormatSharedPtr& vertexFormat)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(vertexFormat);
 }
 
-void Rendering::RendererManager::UnbindAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManager::UnbindAll(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(vertexBuffer);
 }
 
-void Rendering::RendererManager::UnbindAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManager::UnbindAll(const ConstIndexBufferSharedPtr& indexBuffer)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(indexBuffer);
 }
 
-void Rendering::RendererManager::UnbindAll(Texture1DConstPtr texture)
+void Rendering::RendererManager::UnbindAll(const ConstTexture1DSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(texture);
 }
 
-void Rendering::RendererManager::UnbindAll(Texture2DConstPtr texture)
+void Rendering::RendererManager::UnbindAll(const ConstTexture2DSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(texture);
 }
 
-void Rendering::RendererManager::UnbindAll(Texture3DConstPtr texture)
+void Rendering::RendererManager::UnbindAll(const ConstTexture3DSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(texture);
 }
 
-void Rendering::RendererManager::UnbindAll(TextureCubeConstPtr texture)
+void Rendering::RendererManager::UnbindAll(const ConstTextureCubeSharedPtr& texture)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(texture);
 }
 
-void Rendering::RendererManager::UnbindAll(RenderTargetConstPtr renderTarget)
+void Rendering::RendererManager::UnbindAll(const ConstRenderTargetSharedPtr& renderTarget)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(renderTarget);
 }
 
-void Rendering::RendererManager::UnbindAll(VertexShaderConstPtr vertexShader)
+void Rendering::RendererManager::UnbindAll(const ConstVertexShaderSharedPtr& vertexShader)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(vertexShader);
 }
 
-void Rendering::RendererManager::UnbindAll(PixelShaderConstPtr pixelShader)
+void Rendering::RendererManager::UnbindAll(const ConstPixelShaderSharedPtr& pixelShader)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UnbindAll(pixelShader);
 }
 
-void Rendering::RendererManager::UpdateAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManager::UpdateAll(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UpdateAll(vertexBuffer);
 }
 
-void Rendering::RendererManager::UpdateAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManager::UpdateAll(const ConstIndexBufferSharedPtr& indexBuffer)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UpdateAll(indexBuffer);
 }
 
-void Rendering::RendererManager::UpdateAll(Texture1DConstPtr texture, int level)
+void Rendering::RendererManager::UpdateAll(const ConstTexture1DSharedPtr& texture, int level)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UpdateAll(texture, level);
 }
 
-void Rendering::RendererManager::UpdateAll(Texture2DConstPtr texture, int level)
+void Rendering::RendererManager::UpdateAll(const ConstTexture2DSharedPtr& texture, int level)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UpdateAll(texture, level);
 }
 
-void Rendering::RendererManager::UpdateAll(Texture3DConstPtr texture, int level)
+void Rendering::RendererManager::UpdateAll(const ConstTexture3DSharedPtr& texture, int level)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UpdateAll(texture, level);
 }
 
-void Rendering::RendererManager::UpdateAll(TextureCubeConstPtr texture, int face, int level)
+void Rendering::RendererManager::UpdateAll(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->UpdateAll(texture, face, level);
 }

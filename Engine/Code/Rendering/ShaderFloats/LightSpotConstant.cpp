@@ -1,13 +1,15 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 17:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 14:37)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightSpotConstant.h"
-
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
@@ -16,10 +18,7 @@
 #include "Rendering/SceneGraph/Visual.h"
 
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, LightSpotConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightSpotConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSpotConstant);
@@ -33,7 +32,7 @@ Rendering::LightSpotConstant::LightSpotConstant(const LightSharedPtr& light)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, LightSpotConstant)
 
-void Rendering::LightSpotConstant::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::LightSpotConstant::Update(MAYBE_UNUSED const Visual* visual, MAYBE_UNUSED const Camera* camera)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -42,15 +41,11 @@ void Rendering::LightSpotConstant::Update([[maybe_unused]] const Visual* visual,
     vector<float> data{ light->GetAngle(), light->GetCosAngle(), light->GetSinAngle(), light->GetExponent() };
 
     SetRegister(0, data);
-
-    ;
 }
 
 Rendering::ShaderFloatSharedPtr Rendering::LightSpotConstant::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

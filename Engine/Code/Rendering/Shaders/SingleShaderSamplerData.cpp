@@ -1,27 +1,28 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 17:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 17:22)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SingleShaderSamplerData.h"
 #include "Detail/SingleShaderSamplerDataImpl.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+
 using std::make_shared;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Rendering::SingleShaderSamplerData::SingleShaderSamplerData()
+
+Rendering::SingleShaderSamplerData::SingleShaderSamplerData(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -52,21 +53,20 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, Se
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderSamplerData, SetBorderColor, Colour, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetSamplerName, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetSamplerName, string)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetSamplerType, Rendering::ShaderFlags::SamplerType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderSamplerData, GetSamplerType, Rendering::ShaderFlags::SamplerType)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetFilter, Rendering::ShaderFlags::SamplerFilter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderSamplerData, GetFilter, Rendering::ShaderFlags::SamplerFilter)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, GetCoordinate, int, Rendering::ShaderFlags::SamplerCoordinate)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetLodBias, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderSamplerData, GetLodBias, float)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetAnisotropy, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderSamplerData, GetAnisotropy, float)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetBorderColor, Rendering::SingleShaderSamplerDataImpl::Colour)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderSamplerData, GetBorderColor, Rendering::SingleShaderSamplerDataImpl::Colour)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, Load, CoreTools::BufferSource&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, Save, CoreTools::BufferTarget&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetStreamingSize, int)
-#include STSTEM_WARNING_POP

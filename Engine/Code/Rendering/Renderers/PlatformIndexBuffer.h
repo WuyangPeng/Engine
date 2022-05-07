@@ -1,52 +1,47 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:53)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_H
 #define RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
-#include "Rendering/Resources/Flags/BufferFlags.h"
+#include "RenderersFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/Resources/Flags/BufferFlags.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
-RENDERING_NON_COPY_EXPORT_IMPL(PlatformIndexBufferImpl); 
+RENDERING_NON_COPY_EXPORT_IMPL(PlatformIndexBufferImpl);
 
 namespace Rendering
 {
-	class Renderer;
-	class IndexBuffer;
-	
-	class RENDERING_DEFAULT_DECLARE PlatformIndexBuffer  
-	{
-	public:
-            NON_COPY_TYPE_DECLARE(PlatformIndexBuffer); 
-		using BufferType = IndexBuffer;
+    class RENDERING_DEFAULT_DECLARE PlatformIndexBuffer
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(PlatformIndexBuffer);
+        using BufferType = IndexBuffer;
 
-	public:
-		PlatformIndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer);
-		~PlatformIndexBuffer ();
-		PlatformIndexBuffer(const PlatformIndexBuffer&) = delete;
-		PlatformIndexBuffer& operator=(const PlatformIndexBuffer&) = delete;
-		PlatformIndexBuffer( PlatformIndexBuffer&&) = delete;
-		PlatformIndexBuffer& operator=( PlatformIndexBuffer&&) = delete;
+    public:
+        PlatformIndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer);
 
-		CLASS_INVARIANT_DECLARE;
-		
-		// 缓冲区操作
-		void Enable (Renderer* renderer);
-		void Disable (Renderer* renderer);
-		void* Lock (BufferLocking mode);
-		void Unlock ();		
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-                PackageType impl;
-	};
+        // 缓冲区操作
+        void Enable(Renderer* renderer);
+        void Disable(Renderer* renderer);
+        NODISCARD void* Lock(BufferLocking mode);
+        void Unlock();
+
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_H
+#endif  // RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_H

@@ -1,365 +1,337 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/28 18:54)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateCodeDirectoryImpl.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateDllLib.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateDllMain.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateEngine.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateHeader.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateHelper.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateMessage.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateLib.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateMacro.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateMain.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateManager.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateManagerLib.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateDllMain.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateDllLib.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateMacro.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateEngine.h" 
+#include "AssistTools/GenerateProjects/GenerateTemplateMessage.h"
 
-using  std::string;
- 
-AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateTemplateCodeDirectoryImpl(const System::String& directory, const string& configurationFileName)
-	:ParentType(directory, configurationFileName)
+using std::string;
+using namespace std::literals;
+
+AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateTemplateCodeDirectoryImpl(const System::String& directory, const string& configurationFileName)
+    : ParentType{ directory, configurationFileName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
- 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateCodeDirectoryImpl)
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital,const System::String& projectName, const System::String& newCoreName, const System::String& CoreNameCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital, const System::String& aProjectName, const System::String& newCoreName, const System::String& CoreNameCapital) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	GenerateToHeader(exportDirectory, newSolutionName, copyrightData, projectCapital);
-	GenerateToHelper(exportDirectory, newSolutionName, copyrightData, projectCapital);
-	GenerateToMessage(exportDirectory, newSolutionName, copyrightData, projectCapital);
-	GenerateToLib(exportDirectory, newSolutionName, copyrightData);
-	GenerateToMain(exportDirectory, newSolutionName, copyrightData, projectName); 
+    GenerateToHeader(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToHelper(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToMessage(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToLib(exportDirectory, newSolutionName, copyrightData);
+    GenerateToMain(exportDirectory, newSolutionName, copyrightData, aProjectName);
 
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, newCoreName, projectCapital, CoreNameCapital);
-	GenerateToCoreEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Core"), projectCapital, SYSTEM_TEXT("CORE"));
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, newCoreName, projectCapital, CoreNameCapital);
+    GenerateToCoreEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Core"s), projectCapital, SYSTEM_TEXT("CORE"s));
 
-	GenerateToManagerMiddleLayer(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("MiddleLayer"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER"));
- 
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToManagerMiddleLayer(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("MiddleLayer"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER"s));
+
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, projectCapital);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToHeader(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToHeader(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateH.txt"));	 
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateH.txt"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateHeader generateTemplateHeader(fileName, replace);
-	generateTemplateHeader.GenerateTo(fullDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateTemplateHeader generateTemplateHeader{ fileName, replace };
+    generateTemplateHeader.GenerateTo(fullDirectory, newSolutionName, copyrightData, projectCapital);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToHelper(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToHelper(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateToHelperHeader(exportDirectory, newSolutionName, copyrightData, projectCapital);
-	GenerateToHelperSource(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToHelperHeader(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToHelperSource(exportDirectory, newSolutionName, copyrightData, projectCapital);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToHelperHeader(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToHelperHeader(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateHelperH.txt"));
-	const System::String newProjectName(newSolutionName + SYSTEM_TEXT("Helper"));
-	const System::String extension(SYSTEM_TEXT(".h"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateHelperH.txt"s) };
+    const System::String newProjectName{ newSolutionName + SYSTEM_TEXT("Helper"s) };
+    const System::String extension{ SYSTEM_TEXT(".h") };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateHelper generateTemplateHelper(fileName, extension, replace);
-	generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
+    GenerateTemplateHelper generateTemplateHelper{ fileName, extension, replace };
+    generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToHelperSource(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToHelperSource(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateHelperCpp.txt"));
-	const System::String extension(SYSTEM_TEXT(".cpp"));
-	const System::String newProjectName(newSolutionName + SYSTEM_TEXT("Helper"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateHelperCpp.txt"s) };
+    const System::String extension{ SYSTEM_TEXT(".cpp"s) };
+    const System::String newProjectName{ newSolutionName + SYSTEM_TEXT("Helper"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateHelper generateTemplateHelper(fileName, extension, replace);
-	generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
+    GenerateTemplateHelper generateTemplateHelper{ fileName, extension, replace };
+    generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToMessage(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToMessage(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateToMessageHeader(exportDirectory, newSolutionName, copyrightData, projectCapital);
-	GenerateToMessageSource(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToMessageHeader(exportDirectory, newSolutionName, copyrightData, projectCapital);
+    GenerateToMessageSource(exportDirectory, newSolutionName, copyrightData, projectCapital);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToMessageHeader(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToMessageHeader(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMessageH.txt"));
-	const System::String newProjectName(newSolutionName + SYSTEM_TEXT("Message"));
-	const System::String extension(SYSTEM_TEXT(".h"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const auto fileName = GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMessageH.txt"s);
+    const auto newProjectName = newSolutionName + SYSTEM_TEXT("Message"s);
+    const auto extension = SYSTEM_TEXT(".h"s);
+    const auto fullDirectory = exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName;
 
-	GenerateTemplateMessage generateTemplateHelper(fileName, extension, replace);
-	generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
+    GenerateTemplateMessage generateTemplateHelper{ fileName, extension, replace };
+    generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToMessageSource(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToMessageSource(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMessageCpp.txt"));
-	const System::String newProjectName(newSolutionName + SYSTEM_TEXT("Message"));
-	const System::String extension(SYSTEM_TEXT(".cpp"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMessageCpp.txt"s) };
+    const System::String newProjectName{ newSolutionName + SYSTEM_TEXT("Message"s) };
+    const System::String extension{ SYSTEM_TEXT(".cpp"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateMessage generateTemplateHelper(fileName, extension, replace);
-	generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
+    GenerateTemplateMessage generateTemplateHelper{ fileName, extension, replace };
+    generateTemplateHelper.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateLibCpp.txt"));
-	const System::String newProjectName(newSolutionName + SYSTEM_TEXT("Lib"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateLibCpp.txt"s) };
+    const System::String newProjectName{ newSolutionName + SYSTEM_TEXT("Lib"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateLib generateTemplateLib(fileName,  replace);
-	generateTemplateLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName);
+    GenerateTemplateLib generateTemplateLib{ fileName, replace };
+    generateTemplateLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToMain(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData,const System::String& projectName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToMain(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aProjectName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMainCpp.txt"));
-	const System::String newProjectName(newSolutionName + SYSTEM_TEXT("Main"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMainCpp.txt"s) };
+    const System::String newProjectName{ newSolutionName + SYSTEM_TEXT("Main"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateMain generateTemplateLib(fileName, replace);
-	generateTemplateLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, projectName);
+    GenerateTemplateMain generateTemplateLib{ fileName, replace };
+    generateTemplateLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aProjectName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManager(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManager(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerDllH.txt"), SYSTEM_TEXT("Dll"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerExportH.txt"), SYSTEM_TEXT("Export"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerFwdH.txt"), SYSTEM_TEXT("Fwd"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerH.txt"), SYSTEM_TEXT(""), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerImportH.txt"), SYSTEM_TEXT("Import"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"), SYSTEM_TEXT("NoImport"), projectCapital, managerCapitalName);
-	GenerateToManagerLib(exportDirectory, newSolutionName, copyrightData, managerName, projectCapital, managerCapitalName);
-	GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, managerName);
-	GenerateToManagerDllLib(exportDirectory, newSolutionName, copyrightData, managerName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateExportMacroH.txt"), SYSTEM_TEXT("ExportMacro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerClassInvariantMacroH.txt"), newSolutionName + managerName + SYSTEM_TEXT("ClassInvariantMacro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerCustomAssertMacroH.txt"), newSolutionName + managerName + SYSTEM_TEXT("CustomAssertMacro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateMacroH.txt"), SYSTEM_TEXT("Macro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateMacroFwdH.txt"), SYSTEM_TEXT("MacroFwd"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateUserMacroH.txt"), SYSTEM_TEXT("UserMacro"), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerDllH.txt"s), SYSTEM_TEXT("Dll"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerExportH.txt"s), SYSTEM_TEXT("Export"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerFwdH.txt"s), SYSTEM_TEXT("Fwd"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerH.txt"s), SYSTEM_TEXT(""s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerImportH.txt"s), SYSTEM_TEXT("Import"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"s), SYSTEM_TEXT("NoImport"s), projectCapital, managerCapitalName);
+    GenerateToManagerLib(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
+    GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, aManagerName);
+    GenerateToManagerDllLib(exportDirectory, newSolutionName, copyrightData, aManagerName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateExportMacroH.txt"s), SYSTEM_TEXT("ExportMacro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerClassInvariantMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("ClassInvariantMacro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerCustomAssertMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("CustomAssertMacro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateMacroH.txt"s), SYSTEM_TEXT("Macro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateMacroFwdH.txt"s), SYSTEM_TEXT("MacroFwd"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateUserMacroH.txt"s), SYSTEM_TEXT("UserMacro"s), projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerMiddleLayer(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerMiddleLayer(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerDllH.txt"), SYSTEM_TEXT("Dll"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerExportH.txt"), SYSTEM_TEXT("Export"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerMiddleLayerFwdH.txt"), SYSTEM_TEXT("Fwd"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerMiddleLayerH.txt"), SYSTEM_TEXT(""), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerImportH.txt"), SYSTEM_TEXT("Import"), projectCapital, managerCapitalName);
-	GenerateToManager(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"), SYSTEM_TEXT("NoImport"), projectCapital, managerCapitalName);
-	GenerateToManagerLib(exportDirectory, newSolutionName, copyrightData, managerName, projectCapital, managerCapitalName);
-	GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, managerName);
-	GenerateToManagerDllLibMiddleLayer(exportDirectory, newSolutionName, copyrightData, managerName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateExportMacroH.txt"), SYSTEM_TEXT("ExportMacro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerClassInvariantMacroH.txt"), newSolutionName + managerName + SYSTEM_TEXT("ClassInvariantMacro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateManagerCustomAssertMacroH.txt"), newSolutionName + managerName + SYSTEM_TEXT("CustomAssertMacro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateMacroH.txt"), SYSTEM_TEXT("Macro"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateMacroFwdH.txt"), SYSTEM_TEXT("MacroFwd"), projectCapital, managerCapitalName);
-	GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, managerName, SYSTEM_TEXT("GameTemplateUserMacroH.txt"), SYSTEM_TEXT("UserMacro"), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerDllH.txt"s), SYSTEM_TEXT("Dll"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerExportH.txt"s), SYSTEM_TEXT("Export"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerMiddleLayerFwdH.txt"s), SYSTEM_TEXT("Fwd"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerMiddleLayerH.txt"s), SYSTEM_TEXT(""s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerImportH.txt"s), SYSTEM_TEXT("Import"s), projectCapital, managerCapitalName);
+    GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"s), SYSTEM_TEXT("NoImport"s), projectCapital, managerCapitalName);
+    GenerateToManagerLib(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
+    GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, aManagerName);
+    GenerateToManagerDllLibMiddleLayer(exportDirectory, newSolutionName, copyrightData, aManagerName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateExportMacroH.txt"s), SYSTEM_TEXT("ExportMacro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerClassInvariantMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("ClassInvariantMacro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerCustomAssertMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("CustomAssertMacro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateMacroH.txt"s), SYSTEM_TEXT("Macro"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateMacroFwdH.txt"s), SYSTEM_TEXT("MacroFwd"s), projectCapital, managerCapitalName);
+    GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateUserMacroH.txt"s), SYSTEM_TEXT("UserMacro"s), projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManager(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& testFileName, const System::String& resultSuffix, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManager(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& testFileName, const System::String& resultSuffix, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + testFileName);
-	const System::String newProjectName(newSolutionName + managerName + resultSuffix);
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + testFileName };
+    const System::String newProjectName{ newSolutionName + aManagerName + resultSuffix };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName };
 
-	GenerateTemplateManager generateTemplateManager(fileName, replace);
-	generateTemplateManager.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, managerCapitalName);	 
+    GenerateTemplateManager generateTemplateManager{ fileName, replace };
+    generateTemplateManager.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateManagerLibH.txt"));
-	const System::String newProjectName(newSolutionName + managerName + SYSTEM_TEXT("Lib"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateManagerLibH.txt"s) };
+    const System::String newProjectName{ newSolutionName + aManagerName + SYSTEM_TEXT("Lib"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName };
 
-	GenerateTemplateManagerLib generateTemplateManagerLib(fileName, replace);
-	generateTemplateManagerLib.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, managerCapitalName, newSolutionName, managerName);
+    GenerateTemplateManagerLib generateTemplateManagerLib{ fileName, replace };
+    generateTemplateManagerLib.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, managerCapitalName, newSolutionName, aManagerName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerDllMain(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllMain(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllMainCpp.txt"));
-	const System::String newProjectName(SYSTEM_TEXT("DllMain"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllMainCpp.txt"s) };
+    const System::String newProjectName{ SYSTEM_TEXT("DllMain"s) };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName };
 
-	GenerateTemplateDllMain generateTemplateDllMain(fileName, replace);
-	generateTemplateDllMain.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, managerName);
+    GenerateTemplateDllMain generateTemplateDllMain{ fileName, replace };
+    generateTemplateDllMain.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerDllLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllLibCpp.txt"));
-	const System::String newProjectName(SYSTEM_TEXT("DllLib"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllLibCpp.txt"s) };
+    const System::String newProjectName{ SYSTEM_TEXT("DllLib") };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName };
 
-	System::String managerChineseName = GetReplacing(managerName + SYSTEM_TEXT("ChineseName"));
+    auto managerChineseName = GetReplacing(aManagerName + SYSTEM_TEXT("ChineseName"s));
 
-	GenerateTemplateDllLib generateTemplateDllLib(fileName, replace);
-	generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, managerName, managerChineseName);
+    GenerateTemplateDllLib generateTemplateDllLib{ fileName, replace };
+    generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerChineseName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerDllLibMiddleLayer(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLibMiddleLayer(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllLibMiddleLayerCpp.txt"));
-	const System::String newProjectName(SYSTEM_TEXT("DllLib"));
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllLibMiddleLayerCpp.txt"s) };
+    const System::String newProjectName{ SYSTEM_TEXT("DllLib") };
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName };
 
-	System::String managerChineseName = GetReplacing(managerName + SYSTEM_TEXT("ChineseName"));
+    auto managerChineseName = GetReplacing(aManagerName + SYSTEM_TEXT("ChineseName"s));
 
-	GenerateTemplateDllLib generateTemplateDllLib(fileName, replace);
-	generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, managerName, managerChineseName);
+    GenerateTemplateDllLib generateTemplateDllLib{ fileName, replace };
+    generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerChineseName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerMacro(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& testFileName, const System::String& resultSuffix, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerMacro(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& testFileName, const System::String& resultSuffix, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + testFileName);
-	const System::String newProjectName(resultSuffix);
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName + GetForwardSlash() + SYSTEM_TEXT("Macro"));
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + testFileName };
+    const auto& newProjectName = resultSuffix;
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName + GetForwardSlash() + SYSTEM_TEXT("Macro"s) };
 
-	GenerateTemplateMacro generateTemplateMacro(fileName, replace);
-	generateTemplateMacro.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, managerName, projectCapital, managerCapitalName);
+    GenerateTemplateMacro generateTemplateMacro{ fileName, replace };
+    generateTemplateMacro.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
-	GenerateToInputManagerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Input"), SYSTEM_TEXT("InputInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_INPUT"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Network"), SYSTEM_TEXT("NetworkManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_NETWORK"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("ObjectLogic"), SYSTEM_TEXT("ObjectLogicInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_OBJECT_LOGIC"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("ArtificialIntellegence"), SYSTEM_TEXT("ArtificialIntellegenceInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_ARTIFICIAL_INTELLEGENCE"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("PhysicalModelling"), SYSTEM_TEXT("PhysicalModellingManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_PHYSICAL_MODELLING"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Message"), SYSTEM_TEXT("MessageManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_MESSAGE"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Event"), SYSTEM_TEXT("EventManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_EVENT"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("System"), SYSTEM_TEXT("SystemManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_SYSTEM"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Resource"), SYSTEM_TEXT("ResourceManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_RESOURCE"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Audio"), SYSTEM_TEXT("AudioManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_AUDIO"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("CameraSystems"), SYSTEM_TEXT("CameraSystemsManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_CAMERA_SYSTEMS"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Rendering"), SYSTEM_TEXT("RenderingManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_RENDERING"));
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("GUI"), SYSTEM_TEXT("GUIManagerInterface"), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_GUI"));
+    GenerateToInputManagerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Input"s), SYSTEM_TEXT("InputInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_INPUT"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Network"s), SYSTEM_TEXT("NetworkManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_NETWORK"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("ObjectLogic"s), SYSTEM_TEXT("ObjectLogicInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_OBJECT_LOGIC"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("ArtificialIntellegence"s), SYSTEM_TEXT("ArtificialIntellegenceInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_ARTIFICIAL_INTELLEGENCE"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("PhysicalModelling"s), SYSTEM_TEXT("PhysicalModellingManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_PHYSICAL_MODELLING"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Message"s), SYSTEM_TEXT("MessageManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_MESSAGE"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Event"s), SYSTEM_TEXT("EventManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_EVENT"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("System"s), SYSTEM_TEXT("SystemManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_SYSTEM"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Resource"s), SYSTEM_TEXT("ResourceManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_RESOURCE"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Audio"s), SYSTEM_TEXT("AudioManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_AUDIO"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("CameraSystems"s), SYSTEM_TEXT("CameraSystemsManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_CAMERA_SYSTEMS"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("Rendering"s), SYSTEM_TEXT("RenderingManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_RENDERING"s));
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, SYSTEM_TEXT("GUI"s), SYSTEM_TEXT("GUIManagerInterface"s), projectCapital, SYSTEM_TEXT("MIDDLE_LAYER_GUI"s));
 }
 
-
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToMiddleLayerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& managerInterfaceName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToMiddleLayerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& managerInterfaceName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineH.txt"), managerName, SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"), managerName  + SYSTEM_TEXT("Fwd"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerH.txt"), managerName + SYSTEM_TEXT("Manager"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerCpp.txt"), managerName + SYSTEM_TEXT("Manager"), SYSTEM_TEXT(".cpp"), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineH.txt"s), aManagerName, SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"s), aManagerName + SYSTEM_TEXT("Fwd"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerH.txt"s), aManagerName + SYSTEM_TEXT("Manager"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerCpp.txt"s), aManagerName + SYSTEM_TEXT("Manager"s), SYSTEM_TEXT(".cpp"s), projectCapital, managerCapitalName);
 }
 
-
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& managerInterfaceName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& managerInterfaceName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineH.txt"), SYSTEM_TEXT("Engine"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"), SYSTEM_TEXT("EngineFwd"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerH.txt"), managerName, SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerCpp.txt"), managerName, SYSTEM_TEXT(".cpp"), projectCapital, managerCapitalName);
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineH.txt"s), SYSTEM_TEXT("Engine"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"s), SYSTEM_TEXT("EngineFwd"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerH.txt"s), aManagerName, SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateOtherManagerCpp.txt"s), aManagerName, SYSTEM_TEXT(".cpp"s), projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToInputManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& managerInterfaceName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToInputManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& managerInterfaceName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerEngineH.txt"), SYSTEM_TEXT("Input"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerEngineFwdH.txt"), SYSTEM_TEXT("InputFwd"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerH.txt"), managerName + SYSTEM_TEXT("Manager"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerDetailH.txt"), managerName + SYSTEM_TEXT("Manager") + SYSTEM_TEXT("Detail"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName); 
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerEngineH.txt"s), SYSTEM_TEXT("Input"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerEngineFwdH.txt"s), SYSTEM_TEXT("InputFwd"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerH.txt"s), aManagerName + SYSTEM_TEXT("Manager"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToMiddleLayerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, managerInterfaceName, SYSTEM_TEXT("GameTemplateInputManagerDetailH.txt"s), aManagerName + SYSTEM_TEXT("Manager"s) + SYSTEM_TEXT("Detail"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToCoreEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToCoreEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateToCoreEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerName, SYSTEM_TEXT("GameTemplateEngineH.txt"), SYSTEM_TEXT("Engine"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToCoreEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerName, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"), SYSTEM_TEXT("EngineFwd"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerName, SYSTEM_TEXT("GameTemplatePlaceholderH.txt"), SYSTEM_TEXT("Placeholder"), SYSTEM_TEXT(".h"), projectCapital, managerCapitalName);
-	GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, managerName, managerName, SYSTEM_TEXT("GameTemplatePlaceholderCpp.txt"), SYSTEM_TEXT("Placeholder"), SYSTEM_TEXT(".cpp"), projectCapital, managerCapitalName);
+    GenerateToCoreEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, aManagerName, SYSTEM_TEXT("GameTemplateEngineH.txt"s), SYSTEM_TEXT("Engine"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToCoreEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, aManagerName, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"s), SYSTEM_TEXT("EngineFwd"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, aManagerName, SYSTEM_TEXT("GameTemplatePlaceholderH.txt"s), SYSTEM_TEXT("Placeholder"s), SYSTEM_TEXT(".h"s), projectCapital, managerCapitalName);
+    GenerateToManagerEngine(exportDirectory, newSolutionName, copyrightData, aManagerName, aManagerName, SYSTEM_TEXT("GameTemplatePlaceholderCpp.txt"s), SYSTEM_TEXT("Placeholder"s), SYSTEM_TEXT(".cpp"s), projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToCoreEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& managerInterfaceName, const System::String& testFileName, const System::String& resultSuffix, const System::String& extension, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToCoreEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& managerInterfaceName, const System::String& testFileName, const System::String& resultSuffix, const System::String& extension, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + testFileName);
-	const System::String newProjectName(resultSuffix);
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName + GetForwardSlash() + SYSTEM_TEXT("Engine"));
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + testFileName };
+    const auto& newProjectName = resultSuffix;
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName + GetForwardSlash() + SYSTEM_TEXT("Engine"s) };
 
-	GenerateTemplateEngine generateTemplateEngine(fileName, extension, replace);
-	generateTemplateEngine.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, SYSTEM_TEXT("Placeholder"), managerInterfaceName, projectCapital, managerCapitalName);
+    GenerateTemplateEngine generateTemplateEngine{ fileName, extension, replace };
+    generateTemplateEngine.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, SYSTEM_TEXT("Placeholder"), managerInterfaceName, projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& managerInterfaceName, const System::String& testFileName, const System::String& resultSuffix, const System::String& extension,  const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& managerInterfaceName, const System::String& testFileName, const System::String& resultSuffix, const System::String& extension, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + testFileName);
-	const System::String newProjectName(resultSuffix);
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + managerName + GetForwardSlash() + SYSTEM_TEXT("Engine"));
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + testFileName };
+    const auto& newProjectName = resultSuffix;
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName + GetForwardSlash() + SYSTEM_TEXT("Engine"s) };
 
-	GenerateTemplateEngine generateTemplateEngine(fileName, extension, replace);
-	generateTemplateEngine.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, managerName, managerInterfaceName, projectCapital, managerCapitalName);
+    GenerateTemplateEngine generateTemplateEngine{ fileName, extension, replace };
+    generateTemplateEngine.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerInterfaceName, projectCapital, managerCapitalName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl
-	::GenerateToMiddleLayerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& managerName, const System::String& managerInterfaceName, const System::String& testFileName, const System::String& resultSuffix, const System::String& extension, const System::String& projectCapital, const System::String& managerCapitalName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToMiddleLayerEngine(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& managerInterfaceName, const System::String& testFileName, const System::String& resultSuffix, const System::String& extension, const System::String& projectCapital, const System::String& managerCapitalName) const
 {
-	GenerateTemplateHeader::Replace replace;
-	const System::String fileName(GetDirectory() + GetForwardSlash() + testFileName);
-	const System::String newProjectName(resultSuffix);
-	const System::String fullDirectory(exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + SYSTEM_TEXT("MiddleLayer") + GetForwardSlash() + managerName);
+    GenerateTemplateHeader::Replace replace{};
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + testFileName };
+    const auto& newProjectName = resultSuffix;
+    const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + SYSTEM_TEXT("MiddleLayer"s) + GetForwardSlash() + aManagerName };
 
-	GenerateTemplateEngine generateTemplateEngine(fileName, extension, replace);
-	generateTemplateEngine.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, managerName + SYSTEM_TEXT("Manager"), managerInterfaceName, projectCapital, managerCapitalName);
+    GenerateTemplateEngine generateTemplateEngine{ fileName, extension, replace };
+    generateTemplateEngine.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName + SYSTEM_TEXT("Manager"), managerInterfaceName, projectCapital, managerCapitalName);
 }
-

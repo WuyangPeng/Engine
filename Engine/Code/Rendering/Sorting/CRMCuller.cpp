@@ -1,33 +1,30 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 16:10)
 
 #include "Rendering/RenderingExport.h"
 
-#include "CRMCuller.h" 
+#include "CRMCuller.h"
 
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26486)
- #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::CRMCuller
-	::CRMCuller(const ConstCameraSharedPtr& camera )  
-    :Culler(camera)
+Rendering::CRMCuller::CRMCuller(const ConstCameraSharedPtr& camera)
+    : ParentType{ camera }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_STUB_DEFINE(Rendering, CRMCuller)
 
-void Rendering::CRMCuller
-	::Insert(const VisualSharedPtr& visible)
+void Rendering::CRMCuller::Insert(const VisualSharedPtr& visible)
 {
-    if (mUnique.find(visible) == mUnique.end())
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (unique.find(visible) == unique.end())
     {
-        // The object was not in the set of unique objects, so insert it.
-        Culler::Insert(visible);
+        ParentType::Insert(visible);
     }
 }
-
-#include STSTEM_WARNING_POP

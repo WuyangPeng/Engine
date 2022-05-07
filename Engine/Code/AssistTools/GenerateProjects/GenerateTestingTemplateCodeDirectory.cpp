@@ -1,33 +1,33 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 13:49)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateCodeDirectory.h"
 #include "Detail/GenerateTestingTemplateCodeDirectoryImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 
-using  std::string;
- 
-AssistTools::GenerateTestingTemplateCodeDirectory
-	::GenerateTestingTemplateCodeDirectory(const System::String& directory, const string& configurationFileName)
-	:impl(directory, configurationFileName)
+using std::string;
+
+AssistTools::GenerateTestingTemplateCodeDirectory::GenerateTestingTemplateCodeDirectory(const System::String& directory, const string& configurationFileName)
+    : impl{ directory, configurationFileName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-} 
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingTemplateCodeDirectory)
 
-void AssistTools::GenerateTestingTemplateCodeDirectory
-	::GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData,const System::String& projectCapital, const System::String& newCoreName, const System::String& CoreNameCapital) const
+void AssistTools::GenerateTestingTemplateCodeDirectory::GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital, const System::String& newCoreName, const System::String& CoreNameCapital) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return impl->GenerateTo(exportDirectory, newSolutionName, copyrightData, projectCapital, newCoreName, CoreNameCapital);
+    return impl->GenerateTo(exportDirectory, newSolutionName, copyrightData, projectCapital, newCoreName, CoreNameCapital);
 }
- 

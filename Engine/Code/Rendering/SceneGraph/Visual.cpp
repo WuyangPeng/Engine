@@ -1,74 +1,55 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 18:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/03 20:01)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Culler.h"
 #include "Visual.h"
 #include "Detail/VisualImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-
-#include "CoreTools/Helper/ExceptionMacro.h"
-
 using std::make_shared;
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26456)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Visual)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, Visual);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Visual);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Visual);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, Visual);
 
 Rendering::Visual::Visual(VisualPrimitiveType type)
-    : ParentType{}, impl{ make_shared<ImplType>(type) }
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ type }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::Visual::Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer)
-    : ParentType{}, impl{ make_shared<ImplType>(type, vertexformat, vertexbuffer, indexbuffer) }
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ type, vertexformat, vertexbuffer, indexbuffer }
 {
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
-Rendering::Visual::Visual(Visual&& rhs) noexcept
-    : ParentType{
-          std::move(rhs)
-      },
-      impl{ std::move(rhs.impl) }
-{
-    SELF_CLASS_IS_VALID_0;
-}
-Rendering::Visual& Rendering::Visual::operator=(Visual&& rhs) noexcept
-{
-    CLASS_IS_VALID_0;
-    ParentType::operator=(std::move(rhs));
-    impl = std::move(rhs.impl);
-    return *this;
-}
-Rendering::Visual::~Visual()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
 
 Rendering::Visual::Visual(const Visual& rhs)
-    : ParentType(rhs), impl{ make_shared<ImplType>(rhs.GetPrimitiveType()) }
+    : ParentType(rhs), impl{ rhs.GetPrimitiveType() }
 {
     CloneData(rhs);
 
@@ -83,11 +64,28 @@ Rendering::Visual& Rendering::Visual::operator=(const Visual& rhs)
 
     ParentType::operator=(rhs);
 
-    impl = make_shared<ImplType>(rhs.GetPrimitiveType());
+    impl = PackageType{ rhs.GetPrimitiveType() };
 
     CloneData(rhs);
 
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
+
+    return *this;
+}
+
+Rendering::Visual::Visual(Visual&& rhs) noexcept
+    : ParentType{ std::move(rhs) },
+      impl{ std::move(rhs.impl) }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+Rendering::Visual& Rendering::Visual::operator=(Visual&& rhs) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::operator=(std::move(rhs));
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -155,14 +153,14 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetIndexBuff
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetIndexBuffer, IndexBufferSharedPtr, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectInstance, const Rendering::ConstVisualEffectInstanceSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetConstEffectInstance, Rendering::ConstVisualEffectInstanceSharedPtr)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, Visual, SetEffectInstance, VisualEffectInstanceSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, const Rendering::VisualEffectInstanceSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetEffectInstance, Rendering::VisualEffectInstanceSharedPtr)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, const Rendering::BoundF&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Visual, GetModelBound, Rendering::BoundF&)
 
-void Rendering::Visual::UpdateModelSpace([[maybe_unused]] VisualUpdateType type)
+void Rendering::Visual::UpdateModelSpace(MAYBE_UNUSED VisualUpdateType type)
 {
     UpdateModelBound();
 }
@@ -182,32 +180,18 @@ void Rendering::Visual::UpdateModelBound()
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual, ComputeBounding, vector<APoint>, void)
 
-void Rendering::Visual::GetVisibleSet(Culler& culler, [[maybe_unused]] bool noCull)
+void Rendering::Visual::GetVisibleSet(Culler& culler, MAYBE_UNUSED bool noCull)
 {
-    //  if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
-    {
-        culler.Insert(VisualSharedPtr{ this });
-    }
-    //     else
-    //     {
-    //         THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
-    //     }
+    culler.Insert(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()));
 }
 
 Rendering::ConstVisualSharedPtr Rendering::Visual::GetSharedPtr() const
 {
-    //if (SMART_POINTER_SINGLETON.IsSmartPointer(this))
-    {
-        return ConstVisualSharedPtr{ this };
-    }
-    //     else
-    //     {
-    //         THROW_EXCEPTION(SYSTEM_TEXT("子类智能指针不存在。"s));
-    //     }
+    return boost::polymorphic_pointer_cast<const ClassType>(shared_from_this());
 }
 
 Rendering::Visual::Visual(LoadConstructor value)
-    : ParentType{ value }, impl{ make_shared<ImplType>(VisualPrimitiveType::None) }
+    : ParentType{ value }, impl{ VisualPrimitiveType::None }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -252,7 +236,7 @@ void Rendering::Visual::Save(CoreTools::BufferTarget& target) const
 
 void Rendering::Visual::Link(CoreTools::ObjectLink& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
 
@@ -261,14 +245,14 @@ void Rendering::Visual::Link(CoreTools::ObjectLink& source)
 
 void Rendering::Visual::PostLink()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
 }
 
 void Rendering::Visual::Load(CoreTools::BufferSource& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -278,5 +262,3 @@ void Rendering::Visual::Load(CoreTools::BufferSource& source)
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
-
-#include STSTEM_WARNING_POP

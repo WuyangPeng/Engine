@@ -1,128 +1,116 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/12 13:27)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderConstantsDataImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <algorithm>
 
 using std::string;
- #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-Rendering::ShaderConstantsDataImpl
-	::ShaderConstantsDataImpl( int number )
-	:m_SingleShaderConstantsData{ number }
+
+Rendering::ShaderConstantsDataImpl::ShaderConstantsDataImpl(int number)
+    : singleShaderConstantsData{ number, SingleShaderConstantsData{ CoreTools::DisableNotThrow::Disable } }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::ShaderConstantsDataImpl
-	::ShaderConstantsDataImpl() noexcept
-	:m_SingleShaderConstantsData()
+Rendering::ShaderConstantsDataImpl::ShaderConstantsDataImpl() noexcept
+    : singleShaderConstantsData()
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderConstantsDataImpl)
 
-void Rendering::ShaderConstantsDataImpl
-	::SetConstant (int index, const string& name,int numRegistersUsed)
+void Rendering::ShaderConstantsDataImpl::SetConstant(int index, const string& name, int numRegistersUsed)
 {
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderConstantsData.size()), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderConstantsData.size()), "Ë÷Òý´íÎó");
 
-	m_SingleShaderConstantsData[index].SetConstant(name, numRegistersUsed);
+    singleShaderConstantsData.at(index).SetConstant(name, numRegistersUsed);
 }
 
-
-void Rendering::ShaderConstantsDataImpl
-	::InsertData(const string& name, int numRegistersUsed)
+void Rendering::ShaderConstantsDataImpl::InsertData(const string& name, int numRegistersUsed)
 {
-	RENDERING_CLASS_IS_VALID_9;
-	 
-	m_SingleShaderConstantsData.emplace_back(name, numRegistersUsed);
+    RENDERING_CLASS_IS_VALID_9;
+
+    singleShaderConstantsData.emplace_back(name, numRegistersUsed);
 }
 
-
-int Rendering::ShaderConstantsDataImpl
-	::GetNumConstants() const
+int Rendering::ShaderConstantsDataImpl::GetNumConstants() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_SingleShaderConstantsData.size());
+    return boost::numeric_cast<int>(singleShaderConstantsData.size());
 }
 
-const string Rendering::ShaderConstantsDataImpl
-	::GetConstantName( int index ) const
+string Rendering::ShaderConstantsDataImpl::GetConstantName(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderConstantsData.size()), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderConstantsData.size()), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderConstantsData[index].GetConstantName();
+    return singleShaderConstantsData.at(index).GetConstantName();
 }
 
-int Rendering::ShaderConstantsDataImpl
-	::GetNumRegistersUsed(int index) const
+int Rendering::ShaderConstantsDataImpl::GetNumRegistersUsed(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_SingleShaderConstantsData.size()), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(singleShaderConstantsData.size()), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderConstantsData[index].GetNumRegistersUsed();
+    return singleShaderConstantsData.at(index).GetNumRegistersUsed();
 }
- 
+
 void Rendering::ShaderConstantsDataImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	uint32_t number{ 0 };
-	source.Read(number);
-	m_SingleShaderConstantsData.resize(number);
-	 
-	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Load,std::placeholders::_1,std::ref(source)));	 
+    int32_t number{ 0 };
+    source.Read(number);
+    singleShaderConstantsData.resize(number, SingleShaderConstantsData{ CoreTools::DisableNotThrow::Disable });
+
+    for_each(singleShaderConstantsData.begin(), singleShaderConstantsData.end(), std::bind(&SingleShaderConstantsData::Load, std::placeholders::_1, std::ref(source)));
 }
 
-void Rendering::ShaderConstantsDataImpl
-	::Save( CoreTools::BufferTarget& target ) const
+void Rendering::ShaderConstantsDataImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	const uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderConstantsData.size());
-	target.Write(size);
+    const auto size = boost::numeric_cast<int32_t>(singleShaderConstantsData.size());
+    target.Write(size);
 
-	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Save, std::placeholders::_1,std::ref(target)));
+    for_each(singleShaderConstantsData.begin(), singleShaderConstantsData.end(), std::bind(&SingleShaderConstantsData::Save, std::placeholders::_1, std::ref(target)));
 }
 
-int Rendering::ShaderConstantsDataImpl
-	::GetStreamingSize() const
+int Rendering::ShaderConstantsDataImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(uint32_t());
-	for(const auto& data: m_SingleShaderConstantsData)
-	{
-		size += data.GetStreamingSize();
-	}
+    auto size = CORE_TOOLS_STREAM_SIZE(int32_t());
+    for (const auto& data : singleShaderConstantsData)
+    {
+        size += data.GetStreamingSize();
+    }
 
-	return size;
+    return size;
 }
 
-void Rendering::ShaderConstantsDataImpl
-	::Resize(int number)
+void Rendering::ShaderConstantsDataImpl::Resize(int number)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_SingleShaderConstantsData.resize(number);
+    singleShaderConstantsData.resize(number, SingleShaderConstantsData{ CoreTools::DisableNotThrow::Disable });
 }
-
-#include STSTEM_WARNING_POP

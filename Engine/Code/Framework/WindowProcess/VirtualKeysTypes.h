@@ -1,53 +1,56 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 10:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:25)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_VIRTUAL_KEYS_TYPES_H
 #define FRAMEWORK_WINDOW_PROCESS_VIRTUAL_KEYS_TYPES_H
 
-#include "Framework/FrameworkDll.h" 
+#include "Framework/FrameworkDll.h"
 
 #include "System/Windows/Using/WindowsUsing.h"
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE VirtualKeysTypes
-	{
-	public:
-		using ClassType = VirtualKeysTypes;
-		using WParam = System::WindowsWParam;
+    class FRAMEWORK_DEFAULT_DECLARE VirtualKeysTypes
+    {
+    public:
+        using ClassType = VirtualKeysTypes;
+        using WParam = System::WindowsWParam;
 
-	public:
-		// 只支持GLUT
-		VirtualKeysTypes() noexcept = default;
+    public:
+        // 只支持GLUT
+        VirtualKeysTypes() noexcept = default;
 
-		// 只支持Window
-		explicit VirtualKeysTypes(WParam wParam) noexcept;
+        // 只支持Window
+        explicit VirtualKeysTypes(WParam wParam) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool IsCtrlKeyDown() const noexcept;
-		bool IsLeftMouseDown() const noexcept;
-		bool IsMiddleMouseDown() const noexcept;
-		bool IsRightMouseDown() const noexcept;
-		bool IsShiftKeyDown() const noexcept;
-		bool IsMouseDown() const noexcept;
+        NODISCARD bool IsCtrlKeyDown() const noexcept;
+        NODISCARD bool IsLeftMouseDown() const noexcept;
+        NODISCARD bool IsMiddleMouseDown() const noexcept;
+        NODISCARD bool IsRightMouseDown() const noexcept;
+        NODISCARD bool IsShiftKeyDown() const noexcept;
+        NODISCARD bool IsMouseDown() const noexcept;
 
-		// 只支持GLUT
-		void SetModifiers(int modifiers) noexcept;
-		void SetMouseButtonsTypes(int button) noexcept;
-		void ClearMouseButtonsTypes() noexcept;
-		void ClearKeyDownTypes() noexcept;
+        // 只支持GLUT
+        void SetModifiers(int modifiers) noexcept;
+        void SetMouseButtonsTypes(int button) noexcept;
+        void ClearMouseButtonsTypes() noexcept;
+        void ClearKeyDownTypes() noexcept;
 
-	private:
-		bool m_IsCtrlKeyDown{ false };
-		bool m_IsLeftMouseDown{ false };
-		bool m_IsMiddleMouseDown{ false };
-		bool m_IsRightMouseDown{ false };
-		bool m_IsShiftKeyDown{ false };
-	};
+    private:
+        bool isCtrlKeyDown{ false };
+        bool isLeftMouseDown{ false };
+        bool isMiddleMouseDown{ false };
+        bool isRightMouseDown{ false };
+        bool isShiftKeyDown{ false };
+    };
 }
 
-#endif // FRAMEWORK_WINDOW_PROCESS_VIRTUAL_KEYS_TYPES_H
+#endif  // FRAMEWORK_WINDOW_PROCESS_VIRTUAL_KEYS_TYPES_H

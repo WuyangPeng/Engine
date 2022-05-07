@@ -1,12 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 13:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 13:47)
 
 #include "Rendering/RenderingExport.h"
 
 #include "IKJointImpl.h"
+#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
@@ -17,50 +24,35 @@
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/DataTypes/TransformDetail.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
+
 using std::string;
 using std::vector;
 
 Rendering::IKJointImpl::IKJointImpl() noexcept
-    : m_Object{}, m_Goals{}
+    : allowTranslation{},
+      minTranslation{ -Mathematics::MathF::maxReal, -Mathematics::MathF::maxReal, -Mathematics::MathF::maxReal },
+      maxTranslation{ Mathematics::MathF::maxReal, Mathematics::MathF::maxReal, Mathematics::MathF::maxReal },
+      allowRotation{},
+      minRotation{ -Mathematics::MathF::GetPI(), -Mathematics::MathF::GetPI(), -Mathematics::MathF::GetPI() },
+      maxRotation{ Mathematics::MathF::GetPI(), Mathematics::MathF::GetPI(), Mathematics::MathF::GetPI() },
+      object{},
+      goals{}
 {
-    Init();
-
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::IKJointImpl::IKJointImpl(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals)
-    : m_Object{ object }, m_Goals{ goals }
+    : allowTranslation{},
+      minTranslation{ -Mathematics::MathF::maxReal, -Mathematics::MathF::maxReal, -Mathematics::MathF::maxReal },
+      maxTranslation{ Mathematics::MathF::maxReal, Mathematics::MathF::maxReal, Mathematics::MathF::maxReal },
+      allowRotation{},
+      minRotation{ -Mathematics::MathF::GetPI(), -Mathematics::MathF::GetPI(), -Mathematics::MathF::GetPI() },
+      maxRotation{ Mathematics::MathF::GetPI(), Mathematics::MathF::GetPI(), Mathematics::MathF::GetPI() },
+      object{ object },
+      goals{ goals }
 {
-    Init();
-
     RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-// private
-void Rendering::IKJointImpl::Init() noexcept
-{
-    for (auto i = 0; i < sm_NumAxis; ++i)
-    {
-        m_AllowTranslation[i] = false;
-        m_MinTranslation[i] = -Mathematics::MathF::maxReal;
-        m_MaxTranslation[i] = Mathematics::MathF::maxReal;
-        m_AllowRotation[i] = false;
-        m_MinRotation[i] = -Mathematics::MathF::GetPI();
-        m_MaxRotation[i] = Mathematics::MathF::GetPI();
-    }
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, IKJointImpl)
@@ -69,18 +61,18 @@ int Rendering::IKJointImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = sm_NumAxis * CORE_TOOLS_STREAM_SIZE(m_AllowTranslation[0]);
-    size += sm_NumAxis * CORE_TOOLS_STREAM_SIZE(m_MinTranslation[0]);
-    size += sm_NumAxis * CORE_TOOLS_STREAM_SIZE(m_MaxTranslation[0]);
-    size += sm_NumAxis * CORE_TOOLS_STREAM_SIZE(m_AllowRotation[0]);
-    size += sm_NumAxis * CORE_TOOLS_STREAM_SIZE(m_MinRotation[0]);
-    size += sm_NumAxis * CORE_TOOLS_STREAM_SIZE(m_MaxRotation[0]);
-    size += CORE_TOOLS_STREAM_SIZE(m_Object);
-    size += CORE_TOOLS_STREAM_SIZE(boost::numeric_cast<int>(m_Goals.size()));
+    auto size = numAxis * CORE_TOOLS_STREAM_SIZE(allowTranslation.at(0));
+    size += numAxis * CORE_TOOLS_STREAM_SIZE(minTranslation.at(0));
+    size += numAxis * CORE_TOOLS_STREAM_SIZE(maxTranslation.at(0));
+    size += numAxis * CORE_TOOLS_STREAM_SIZE(allowRotation.at(0));
+    size += numAxis * CORE_TOOLS_STREAM_SIZE(minRotation.at(0));
+    size += numAxis * CORE_TOOLS_STREAM_SIZE(maxRotation.at(0));
+    size += CORE_TOOLS_STREAM_SIZE(object);
+    size += CORE_TOOLS_STREAM_SIZE(boost::numeric_cast<int32_t>(goals.size()));
 
-    if (!m_Goals.empty())
+    if (!goals.empty())
     {
-        size += boost::numeric_cast<int>(m_Goals.size() * CORE_TOOLS_STREAM_SIZE(m_Goals[0]));
+        size += boost::numeric_cast<int32_t>(goals.size() * CORE_TOOLS_STREAM_SIZE(goals.at(0)));
     }
 
     return size;
@@ -89,78 +81,68 @@ int Rendering::IKJointImpl::GetStreamingSize() const
 void Rendering::IKJointImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    CoreTools::DisableNoexcept();
-    target;
-    //target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowTranslation);
-    //target.WriteWithoutNumber(sm_NumAxis, m_MinTranslation);
-    //target.WriteWithoutNumber(sm_NumAxis, m_MaxTranslation);
-    //target.WriteBoolWithoutNumber(sm_NumAxis, m_AllowRotation);
-    //target.WriteWithoutNumber(sm_NumAxis, m_MinRotation);
-    //target.WriteWithoutNumber(sm_NumAxis, m_MaxRotation);
-    //	target.WriteSharedPtr(m_Object);
-    //target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+
+    target.WriteContainer(allowTranslation);
+    target.WriteContainer(minTranslation);
+    target.WriteContainer(maxTranslation);
+    target.WriteContainer(allowRotation);
+    target.WriteContainer(minRotation);
+    target.WriteContainer(maxRotation);
+    target.WriteObjectAssociated(object);
+    target.WriteObjectAssociatedContainerWithNumber(goals);
 }
 
 void Rendering::IKJointImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    //	source.ReadBool(sm_NumAxis, m_AllowTranslation);
-    // source.Read(sm_NumAxis, m_MinTranslation);
-    // source.Read(sm_NumAxis, m_MaxTranslation);
-    //   source.ReadBool(sm_NumAxis, m_AllowRotation);
-    // source.Read(sm_NumAxis, m_MinRotation);
-    // source.Read(sm_NumAxis, m_MaxRotation);
-    //	source.ReadSharedPtr(m_Object);
-
-    int size{ 0 };
-    source.Read(size);
-    if (0 < size)
-    {
-        m_Goals.resize(size);
-        //source.ReadSharedPtr(size, &m_Goals[0]);
-    }
+    source.ReadContainer(allowTranslation);
+    source.ReadContainer(minTranslation);
+    source.ReadContainer(maxTranslation);
+    source.ReadContainer(allowRotation);
+    source.ReadContainer(minRotation);
+    source.ReadContainer(maxRotation);
+    source.ReadObjectAssociated(object);
+    source.ReadObjectAssociatedContainer(goals);
 }
 
 void Rendering::IKJointImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    CoreTools::DisableNoexcept();
-    // 	source.ResolveObjectSharedPtrLink(m_Object);
-    //	source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+
+    source.ResolveLink(object);
+    source.ResolveLinkContainer(goals);
 }
 
 void Rendering::IKJointImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    CoreTools::DisableNoexcept();
-    //	target.RegisterSharedPtr(m_Object);
-    //	target.RegisterSharedPtr(boost::numeric_cast<int>(m_Goals.size()), &m_Goals[0]);
+
+    target.Register(object);
+    target.RegisterContainer(goals);
 }
 
 CoreTools::ObjectSharedPtr Rendering::IKJointImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = m_Object->GetObjectByName(name);
+    auto result = object.object->GetObjectByName(name);
 
-    if (object != nullptr)
-        return object;
+    if (result != nullptr)
+        return result;
     else
     {
-        for (auto& pointer : m_Goals)
+        for (auto& pointer : goals)
         {
-            object = pointer->GetObjectByName(name);
+            result = pointer.object->GetObjectByName(name);
 
-            if (object != nullptr)
+            if (result != nullptr)
             {
-                return object;
+                return result;
             }
         }
 
-        return CoreTools::ObjectSharedPtr{};
+        return nullptr;
     }
 }
 
@@ -168,11 +150,11 @@ vector<CoreTools::ObjectSharedPtr> Rendering::IKJointImpl::GetAllObjectsByName(c
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto objects = m_Object->GetAllObjectsByName(name);
+    auto objects = object.object->GetAllObjectsByName(name);
 
-    for (auto& pointer : m_Goals)
+    for (auto& pointer : goals)
     {
-        auto pointerObjects = pointer->GetAllObjectsByName(name);
+        auto pointerObjects = pointer.object->GetAllObjectsByName(name);
         objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
     }
 
@@ -183,24 +165,24 @@ CoreTools::ConstObjectSharedPtr Rendering::IKJointImpl::GetConstObjectByName(con
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto object = m_Object->GetConstObjectByName(name);
+    auto result = object.object->GetConstObjectByName(name);
 
-    if (object != nullptr)
+    if (result != nullptr)
     {
-        return object;
+        return result;
     }
     else
     {
-        for (auto& pointer : m_Goals)
+        for (auto& pointer : goals)
         {
-            object = pointer->GetConstObjectByName(name);
-            if (object != nullptr)
+            result = pointer.object->GetConstObjectByName(name);
+            if (result != nullptr)
             {
-                return object;
+                return result;
             }
         }
 
-        return CoreTools::ConstObjectSharedPtr{};
+        return nullptr;
     }
 }
 
@@ -208,22 +190,22 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::IKJointImpl::GetAllConstObjec
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto objects = m_Object->GetAllConstObjectsByName(name);
+    auto objects = object.object->GetAllConstObjectsByName(name);
 
-    for (const auto& pointer : m_Goals)
+    for (const auto& pointer : goals)
     {
-        auto pointerObjects = pointer->GetAllConstObjectsByName(name);
+        auto pointerObjects = pointer.object->GetAllConstObjectsByName(name);
         objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
     }
 
     return objects;
 }
 
-const Rendering::IKJointImpl::AVector Rendering::IKJointImpl::GetAxis(MatrixRotationAxis axisIndex) const
+Rendering::IKJointImpl::AVector Rendering::IKJointImpl::GetAxis(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const Rendering::Spatial* const parent = m_Object->GetParent();
+    const auto* const parent = object.object->GetParent();
     if (parent != nullptr)
     {
         return AVector{ parent->GetWorldTransform().GetRotate().GetColumn(System::EnumCastUnderlying(axisIndex)) };
@@ -246,14 +228,14 @@ void Rendering::IKJointImpl::UpdateWorldTransform()
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const Rendering::Spatial* const parent = m_Object->GetParent();
+    const auto* const parent = object.object->GetParent();
     if (parent != nullptr)
     {
-        m_Object->SetWorldTransform(parent->GetWorldTransform() * m_Object->GetLocalTransform());
+        object.object->SetWorldTransform(parent->GetWorldTransform() * object.object->GetLocalTransform());
     }
     else
     {
-        m_Object->SetWorldTransform(m_Object->GetLocalTransform());
+        object.object->SetWorldTransform(object.object->GetLocalTransform());
     }
 }
 
@@ -261,26 +243,26 @@ void Rendering::IKJointImpl::UpdateWorldRotateAndTranslate() noexcept(g_Assert <
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const Rendering::Spatial* const parent = m_Object->GetParent();
+    const auto* const parent = object.object->GetParent();
     if (parent != nullptr)
     {
-        auto transform = m_Object->GetWorldTransform();
+        auto transform = object.object->GetWorldTransform();
 
-        const auto rotate = parent->GetWorldTransform().GetRotate() * m_Object->GetLocalTransform().GetRotate();
+        const auto rotate = parent->GetWorldTransform().GetRotate() * object.object->GetLocalTransform().GetRotate();
         transform.SetRotate(rotate);
 
-        auto translate = parent->GetWorldTransform() * m_Object->GetLocalTransform().GetTranslate();
+        const auto translate = parent->GetWorldTransform() * object.object->GetLocalTransform().GetTranslate();
 
         transform.SetTranslate(translate);
-        m_Object->SetWorldTransform(transform);
+        object.object->SetWorldTransform(transform);
     }
     else
     {
-        auto transform = m_Object->GetWorldTransform();
+        auto transform = object.object->GetWorldTransform();
 
-        transform.SetRotate(m_Object->GetLocalTransform().GetRotate());
-        transform.SetTranslate(m_Object->GetLocalTransform().GetTranslate());
-        m_Object->SetWorldTransform(transform);
+        transform.SetRotate(object.object->GetLocalTransform().GetRotate());
+        transform.SetTranslate(object.object->GetLocalTransform().GetTranslate());
+        object.object->SetWorldTransform(transform);
     }
 }
 
@@ -288,17 +270,17 @@ bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto axis = GetAxis(axisIndex);
+    const auto axis = GetAxis(axisIndex);
 
     auto oldNorm = 0.0f;
     auto numer = 0.0f;
     auto denom = 0.0f;
-    for (const auto& goal : m_Goals)
+    for (const auto& goal : goals)
     {
-        auto goalMinusEffector = goal->GetTargetPosition() - goal->GetEffectorPosition();
+        const auto goalMinusEffector = goal.object->GetTargetPosition() - goal.object->GetEffectorPosition();
         oldNorm += goalMinusEffector.SquaredLength();
-        numer += goal->GetWeight() * Dot(axis, goalMinusEffector);
-        denom += goal->GetWeight();
+        numer += goal.object->GetWeight() * Dot(axis, goalMinusEffector);
+        denom += goal.object->GetWeight();
     }
 
     if (Mathematics::MathF::FAbs(denom) <= Mathematics::MathF::GetZeroTolerance())
@@ -311,33 +293,33 @@ bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
     auto distance = numer / denom;
 
     // 截断到范围
-    auto translate = m_Object->GetLocalTransform().GetTranslate();
+    auto translate = object.object->GetLocalTransform().GetTranslate();
     auto desired = translate[System::EnumCastUnderlying(axisIndex)] + distance;
-    if (desired > m_MinTranslation[System::EnumCastUnderlying(axisIndex)])
+    if (desired > minTranslation.at(System::EnumCastUnderlying(axisIndex)))
     {
-        if (desired < m_MaxTranslation[System::EnumCastUnderlying(axisIndex)])
+        if (desired < maxTranslation.at(System::EnumCastUnderlying(axisIndex)))
         {
             translate[System::EnumCastUnderlying(axisIndex)] = desired;
         }
         else
         {
-            distance = m_MaxTranslation[System::EnumCastUnderlying(axisIndex)] - translate[System::EnumCastUnderlying(axisIndex)];
-            translate[System::EnumCastUnderlying(axisIndex)] = m_MaxTranslation[System::EnumCastUnderlying(axisIndex)];
+            distance = maxTranslation.at(System::EnumCastUnderlying(axisIndex)) - translate[System::EnumCastUnderlying(axisIndex)];
+            translate[System::EnumCastUnderlying(axisIndex)] = maxTranslation.at(System::EnumCastUnderlying(axisIndex));
         }
     }
     else
     {
-        distance = m_MinTranslation[System::EnumCastUnderlying(axisIndex)] - translate[System::EnumCastUnderlying(axisIndex)];
-        translate[System::EnumCastUnderlying(axisIndex)] = m_MinTranslation[System::EnumCastUnderlying(axisIndex)];
+        distance = minTranslation.at(System::EnumCastUnderlying(axisIndex)) - translate[System::EnumCastUnderlying(axisIndex)];
+        translate[System::EnumCastUnderlying(axisIndex)] = minTranslation.at(System::EnumCastUnderlying(axisIndex));
     }
 
     // 测试步骤是否应该采取。
     auto newNorm = 0.0f;
     auto step = distance * axis;
-    for (const auto& goal : m_Goals)
+    for (const auto& goal : goals)
     {
-        auto newEffector = goal->GetEffectorPosition() + step;
-        auto difference = goal->GetTargetPosition() - newEffector;
+        const auto newEffector = goal.object->GetEffectorPosition() + step;
+        const auto difference = goal.object->GetTargetPosition() - newEffector;
         newNorm += difference.SquaredLength();
     }
     if (oldNorm <= newNorm)
@@ -347,7 +329,7 @@ bool Rendering::IKJointImpl::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
     }
 
     // 更新本地的转换。
-    m_Object->SetLocalTransformTranslate(translate);
+    object.object->SetLocalTransformTranslate(translate);
 
     return true;
 }
@@ -356,22 +338,22 @@ bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto axis = GetAxis(axisIndex);
+    const auto axis = GetAxis(axisIndex);
 
     auto numer = 0.0f;
     auto denom = 0.0f;
     auto oldNorm = 0.0f;
 
-    for (const auto& goal : m_Goals)
+    for (const auto& goal : goals)
     {
-        auto effectorMinusPoint = goal->GetEffectorPosition() - m_Object->GetWorldTransform().GetTranslate();
-        auto goalMinusPoint = goal->GetTargetPosition() - m_Object->GetWorldTransform().GetTranslate();
-        auto goalMinusEffector = goal->GetTargetPosition() - goal->GetEffectorPosition();
+        const auto effectorMinusPoint = goal.object->GetEffectorPosition() - object.object->GetWorldTransform().GetTranslate();
+        const auto goalMinusPoint = goal.object->GetTargetPosition() - object.object->GetWorldTransform().GetTranslate();
+        const auto goalMinusEffector = goal.object->GetTargetPosition() - goal.object->GetEffectorPosition();
         oldNorm += goalMinusEffector.SquaredLength();
-        auto axisCrossEffectorMinusPoint = Cross(axis, effectorMinusPoint);
-        auto axisCrossAxisCrossEffectorMinusPoint = Cross(axis, axisCrossEffectorMinusPoint);
-        numer += goal->GetWeight() * Dot(goalMinusPoint, axisCrossEffectorMinusPoint);
-        denom -= goal->GetWeight() * Dot(goalMinusPoint, axisCrossAxisCrossEffectorMinusPoint);
+        const auto axisCrossEffectorMinusPoint = Cross(axis, effectorMinusPoint);
+        const auto axisCrossAxisCrossEffectorMinusPoint = Cross(axis, axisCrossEffectorMinusPoint);
+        numer += goal.object->GetWeight() * Dot(goalMinusPoint, axisCrossEffectorMinusPoint);
+        denom -= goal.object->GetWeight() * Dot(goalMinusPoint, axisCrossAxisCrossEffectorMinusPoint);
     }
 
     if (numer * numer + denom * denom <= Mathematics::MathF::GetZeroTolerance())
@@ -384,38 +366,38 @@ bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
     auto theta = Mathematics::MathF::ATan2(numer, denom);
 
     // 局部因子旋转欧拉角。
-    auto rotate = m_Object->GetLocalTransform().GetRotate();
+    auto rotate = object.object->GetLocalTransform().GetRotate();
     auto rotateMatrix3 = rotate.GetMatrix3();
     auto euler = rotateMatrix3.ExtractEulerZYX();
 
     // 截断到范围
     auto desired = euler.GetAngle(axisIndex) + theta;
-    if (desired > m_MinRotation[System::EnumCastUnderlying(axisIndex)])
+    if (desired > minRotation.at(System::EnumCastUnderlying(axisIndex)))
     {
-        if (desired < m_MaxRotation[System::EnumCastUnderlying(axisIndex)])
+        if (desired < maxRotation.at(System::EnumCastUnderlying(axisIndex)))
         {
             euler.SetAngle(axisIndex, desired);
         }
         else
         {
-            theta = m_MaxRotation[System::EnumCastUnderlying(axisIndex)] - euler.GetAngle(axisIndex);
-            euler.SetAngle(axisIndex, m_MaxRotation[System::EnumCastUnderlying(axisIndex)]);
+            theta = maxRotation.at(System::EnumCastUnderlying(axisIndex)) - euler.GetAngle(axisIndex);
+            euler.SetAngle(axisIndex, maxRotation.at(System::EnumCastUnderlying(axisIndex)));
         }
     }
     else
     {
-        theta = m_MinRotation[System::EnumCastUnderlying(axisIndex)] - euler.GetAngle(axisIndex);
-        euler.SetAngle(axisIndex, m_MinRotation[System::EnumCastUnderlying(axisIndex)]);
+        theta = minRotation.at(System::EnumCastUnderlying(axisIndex)) - euler.GetAngle(axisIndex);
+        euler.SetAngle(axisIndex, minRotation.at(System::EnumCastUnderlying(axisIndex)));
     }
 
     // 测试步骤是否应该采取。
     auto newNorm = 0.0f;
     rotate.MakeRotation(axis, theta);
-    for (const auto& goal : m_Goals)
+    for (const auto& goal : goals)
     {
-        auto effectorMinusPoint = goal->GetEffectorPosition() - m_Object->GetWorldTransform().GetTranslate();
-        auto newEffector = m_Object->GetWorldTransform().GetTranslate() + rotate * effectorMinusPoint;
-        auto goalMinusEffector = goal->GetTargetPosition() - newEffector;
+        const auto effectorMinusPoint = goal.object->GetEffectorPosition() - object.object->GetWorldTransform().GetTranslate();
+        const auto newEffector = object.object->GetWorldTransform().GetTranslate() + rotate * effectorMinusPoint;
+        const auto goalMinusEffector = goal.object->GetTargetPosition() - newEffector;
         newNorm += goalMinusEffector.SquaredLength();
     }
 
@@ -429,62 +411,61 @@ bool Rendering::IKJointImpl::UpdateLocalRotate(MatrixRotationAxis axisIndex)
     rotateMatrix3.MakeEulerZYX(euler.GetZ0Angle(), euler.GetY0Angle(), euler.GetX0Angle());
 
     rotate = Mathematics::MatrixF{ rotateMatrix3 };
-    m_Object->SetLocalTransformRotate(rotate);
+    object.object->SetLocalTransformRotate(rotate);
 
     return true;
 }
 
-const Rendering::ConstSpatialSharedPtr Rendering::IKJointImpl::GetObjectSharedPtr() const noexcept
+Rendering::ConstSpatialSharedPtr Rendering::IKJointImpl::GetObjectSharedPtr() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Object;
+    return object.object;
 }
 
-const Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl::GetGoalsSharedPtr(int index) const
+Rendering::ConstIKGoalSharedPtr Rendering::IKJointImpl::GetGoalsSharedPtr(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Goals.size()), "索引错误！");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(goals.size()), "索引错误！");
 
-    return m_Goals[index];
+    return goals.at(index).object;
 }
 
 int Rendering::IKJointImpl::GetGoalsNum() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Goals.size());
+    return boost::numeric_cast<int>(goals.size());
 }
 
-void Rendering::IKJointImpl::SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation)
+void Rendering::IKJointImpl::SetAllowTranslation(MatrixRotationAxis axisIndex, bool aAllowTranslation)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "索引错误！");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "索引错误！");
 
-    m_AllowTranslation[System::EnumCastUnderlying(axisIndex)] = allowTranslation;
+    allowTranslation.at(System::EnumCastUnderlying(axisIndex)) = aAllowTranslation;
 }
 
-void Rendering::IKJointImpl::SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation)
+void Rendering::IKJointImpl::SetAllowRotation(MatrixRotationAxis axisIndex, bool aAllowRotation)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "索引错误！");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "索引错误！");
 
-    m_AllowRotation[System::EnumCastUnderlying(axisIndex)] = allowRotation;
+    allowRotation.at(System::EnumCastUnderlying(axisIndex)) = aAllowRotation;
 }
 
 bool Rendering::IKJointImpl::IsAllowTranslation(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "索引错误！");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "索引错误！");
 
-    return m_AllowTranslation[System::EnumCastUnderlying(axisIndex)];
+    return allowTranslation.at(System::EnumCastUnderlying(axisIndex));
 }
 
 bool Rendering::IKJointImpl::IsAllowRotation(MatrixRotationAxis axisIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < sm_NumAxis, "索引错误！");
+    RENDERING_ASSERTION_0(0 <= System::EnumCastUnderlying(axisIndex) && System::EnumCastUnderlying(axisIndex) < numAxis, "索引错误！");
 
-    return m_AllowRotation[System::EnumCastUnderlying(axisIndex)];
+    return allowRotation.at(System::EnumCastUnderlying(axisIndex));
 }
-#include STSTEM_WARNING_POP

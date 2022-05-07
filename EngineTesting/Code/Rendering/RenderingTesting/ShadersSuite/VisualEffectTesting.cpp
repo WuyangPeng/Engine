@@ -15,6 +15,7 @@
 
 
 #include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::string;
 #include SYSTEM_WARNING_DISABLE(26493)
@@ -118,7 +119,7 @@ void Rendering::VisualEffectTesting
 												static_cast<float>(i + 3) / 10.0f));
 	}
 
-	AlphaStateSharedPtr alphaState(new AlphaState);
+	AlphaStateSharedPtr alphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
 	alphaState->SetBlendEnabled(true);
 	alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
 	alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
@@ -127,17 +128,17 @@ void Rendering::VisualEffectTesting
 	alphaState->SetReference(0.5f);
 	alphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
 
-	CullStateSharedPtr cullState(new CullState);
+	CullStateSharedPtr cullState(new CullState(CoreTools::DisableNotThrow::Disable) );
 
 	cullState->SetEnabled(false);
 	cullState->SetCCWOrder(false);
 
-	DepthStateSharedPtr depthState(new DepthState);
+	DepthStateSharedPtr depthState(new DepthState(CoreTools::DisableNotThrow::Disable));
 	depthState->SetEnabled(false);
 	depthState->SetWritable(false);
 	depthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
 
-	OffsetStateSharedPtr offsetState(new OffsetState);
+	OffsetStateSharedPtr offsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
 
 	offsetState->SetFillEnabled(true);
 	offsetState->SetLineEnabled(true);
@@ -145,7 +146,7 @@ void Rendering::VisualEffectTesting
 	offsetState->SetScale(1.5f);
 	offsetState->SetBias(1.6f);
 
-	StencilStateSharedPtr stencilState(new StencilState);
+	StencilStateSharedPtr stencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
 
 	stencilState->SetEnabled(true);
 	stencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
@@ -156,11 +157,11 @@ void Rendering::VisualEffectTesting
 	stencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
 	stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-	WireStateSharedPtr wireState(new WireState);
+	WireStateSharedPtr wireState(new WireState(CoreTools::DisableNotThrow::Disable));
 
 	wireState->SetEnabled(true);
 
-	VisualPassSharedPtr firstVisualPass(new VisualPass);	
+	VisualPassSharedPtr firstVisualPass(new VisualPass(CoreTools::DisableNotThrow::Disable));	
 
 	firstVisualPass->SetVertexShader(vertexShader);
 	firstVisualPass->SetPixelShader(pixelShader);
@@ -171,20 +172,20 @@ void Rendering::VisualEffectTesting
 	firstVisualPass->SetStencilState(stencilState);
 	firstVisualPass->SetWireState(wireState);
 
-	VisualPassSharedPtr secondVisualPass(new VisualPass);
+	VisualPassSharedPtr secondVisualPass(new VisualPass(CoreTools::DisableNotThrow::Disable));
 	 
-	VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique);
+	VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique(CoreTools::DisableNotThrow::Disable));
 
 	firstVisualTechnique->InsertPass(firstVisualPass);
 	firstVisualTechnique->InsertPass(secondVisualPass);
 
-	VisualTechniqueSharedPtr secondVisualTechnique(new VisualTechnique);
+	VisualTechniqueSharedPtr secondVisualTechnique(new VisualTechnique(CoreTools::DisableNotThrow::Disable));
 
 	secondVisualTechnique->InsertPass(secondVisualPass);
 	secondVisualTechnique->InsertPass(firstVisualPass);
 	secondVisualTechnique->InsertPass(firstVisualPass);
 
-	VisualEffectSharedPtr visualEffect(new VisualEffect);
+	VisualEffectSharedPtr visualEffect(new VisualEffect{ CoreTools::DisableNotThrow::Disable });
 
 	ASSERT_EQUAL(visualEffect->GetNumTechniques(), 0);
 
@@ -330,7 +331,7 @@ void Rendering::VisualEffectTesting
 												static_cast<float>(i + 3) / 10.0f));
 	}
 
-	AlphaStateSharedPtr alphaState(new AlphaState);
+	AlphaStateSharedPtr alphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
 	alphaState->SetBlendEnabled(true);
 	alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
 	alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
@@ -339,17 +340,17 @@ void Rendering::VisualEffectTesting
 	alphaState->SetReference(0.5f);
 	alphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
 
-	CullStateSharedPtr cullState(new CullState);
+	CullStateSharedPtr cullState(new CullState(CoreTools::DisableNotThrow::Disable));
 
 	cullState->SetEnabled(false);
 	cullState->SetCCWOrder(false);
 
-	DepthStateSharedPtr depthState(new DepthState);
+	DepthStateSharedPtr depthState(new DepthState(CoreTools::DisableNotThrow::Disable));
 	depthState->SetEnabled(false);
 	depthState->SetWritable(false);
 	depthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
 
-	OffsetStateSharedPtr offsetState(new OffsetState);
+	OffsetStateSharedPtr offsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
 
 	offsetState->SetFillEnabled(true);
 	offsetState->SetLineEnabled(true);
@@ -357,7 +358,7 @@ void Rendering::VisualEffectTesting
 	offsetState->SetScale(1.5f);
 	offsetState->SetBias(1.6f);
 
-	StencilStateSharedPtr stencilState(new StencilState);
+	StencilStateSharedPtr stencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
 
 	stencilState->SetEnabled(true);
 	stencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
@@ -368,11 +369,11 @@ void Rendering::VisualEffectTesting
 	stencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
 	stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-	WireStateSharedPtr wireState(new WireState);
+	WireStateSharedPtr wireState(new WireState(CoreTools::DisableNotThrow::Disable));
 
 	wireState->SetEnabled(true);
 
-	VisualPassSharedPtr firstVisualPass(new VisualPass);	
+	VisualPassSharedPtr firstVisualPass(new VisualPass(CoreTools::DisableNotThrow::Disable));	
 
 	firstVisualPass->SetVertexShader(vertexShader);
 	firstVisualPass->SetPixelShader(pixelShader);
@@ -383,20 +384,20 @@ void Rendering::VisualEffectTesting
 	firstVisualPass->SetStencilState(stencilState);
 	firstVisualPass->SetWireState(wireState);
 
-	VisualPassSharedPtr secondVisualPass(new VisualPass);
+	VisualPassSharedPtr secondVisualPass(new VisualPass(CoreTools::DisableNotThrow::Disable));
 
-	VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique);
+	VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique(CoreTools::DisableNotThrow::Disable));
 
 	firstVisualTechnique->InsertPass(firstVisualPass);
 	firstVisualTechnique->InsertPass(secondVisualPass);
 
-	VisualTechniqueSharedPtr secondVisualTechnique(new VisualTechnique);
+	VisualTechniqueSharedPtr secondVisualTechnique(new VisualTechnique(CoreTools::DisableNotThrow::Disable));
 
 	secondVisualTechnique->InsertPass(secondVisualPass);
 	secondVisualTechnique->InsertPass(firstVisualPass);
 	secondVisualTechnique->InsertPass(firstVisualPass);
 
-	VisualEffectSharedPtr firstVisualEffect(new VisualEffect);
+	VisualEffectSharedPtr firstVisualEffect(new VisualEffect{ CoreTools::DisableNotThrow::Disable });
 	firstVisualEffect->InsertTechnique(firstVisualTechnique);
 	firstVisualEffect->InsertTechnique(secondVisualTechnique);
 
@@ -518,7 +519,7 @@ void Rendering::VisualEffectTesting
 												static_cast<float>(i + 3) / 10.0f));
 	}
 
-	AlphaStateSharedPtr alphaState(new AlphaState);
+	AlphaStateSharedPtr alphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
 	alphaState->SetBlendEnabled(true);
 	alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
 	alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
@@ -527,17 +528,17 @@ void Rendering::VisualEffectTesting
 	alphaState->SetReference(0.5f);
 	alphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
 
-	CullStateSharedPtr cullState(new CullState);
+	CullStateSharedPtr cullState(new CullState(CoreTools::DisableNotThrow::Disable));
 
 	cullState->SetEnabled(false);
 	cullState->SetCCWOrder(false);
 
-	DepthStateSharedPtr depthState(new DepthState);
+	DepthStateSharedPtr depthState(new DepthState(CoreTools::DisableNotThrow::Disable));
 	depthState->SetEnabled(false);
 	depthState->SetWritable(false);
 	depthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
 
-	OffsetStateSharedPtr offsetState(new OffsetState);
+	OffsetStateSharedPtr offsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
 
 	offsetState->SetFillEnabled(true);
 	offsetState->SetLineEnabled(true);
@@ -545,7 +546,7 @@ void Rendering::VisualEffectTesting
 	offsetState->SetScale(1.5f);
 	offsetState->SetBias(1.6f);
 
-	StencilStateSharedPtr stencilState(new StencilState);
+	StencilStateSharedPtr stencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
 
 	stencilState->SetEnabled(true);
 	stencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
@@ -556,7 +557,7 @@ void Rendering::VisualEffectTesting
 	stencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
 	stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-	WireStateSharedPtr wireState(new WireState);
+	WireStateSharedPtr wireState(new WireState(CoreTools::DisableNotThrow::Disable));
 
 	wireState->SetEnabled(true);
 

@@ -1,244 +1,225 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 13:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/06 11:33)
 
 #include "Rendering/RenderingExport.h"
 
 #include "IKControllerImpl.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
- 
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "Mathematics/Algebra/AlgebraAggregate.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 
 using std::string;
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
+
 Rendering::IKControllerImpl::IKControllerImpl() noexcept
-    : m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{}
+    : iterations{ 128 }, orderEndToRoot{ true }, joints{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::IKControllerImpl
-	::IKControllerImpl(const IKJointSharedPtrVector& joints) 
-	:m_Iterations{ 128 }, m_OrderEndToRoot{ true }, m_Joints{ joints }
+Rendering::IKControllerImpl::IKControllerImpl(const IKJointSharedPtrVector& joints)
+    : iterations{ 128 }, orderEndToRoot{ true }, joints{ joints }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::IKControllerImpl
-	::IsValid() const  noexcept
+
+bool Rendering::IKControllerImpl::IsValid() const noexcept
 {
-	if (0 <= m_Iterations)
-		return true;
-	else 
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT	
-
-int Rendering::IKControllerImpl
-	::GetStreamingSize() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Iterations);
-	size += CORE_TOOLS_STREAM_SIZE(m_OrderEndToRoot);
-
-	auto jointSize = boost::numeric_cast<int>(m_Joints.size());
-	size += CORE_TOOLS_STREAM_SIZE(jointSize);
-
-	if (0 < jointSize)
-	{
-		size += jointSize * CORE_TOOLS_STREAM_SIZE(m_Joints.at(0));
-	}		
-
-	return size;
+    if (0 <= iterations)
+        return true;
+    else
+        return false;
 }
 
-void Rendering::IKControllerImpl
-	::Save(CoreTools::BufferTarget& target) const
+#endif  // OPEN_CLASS_INVARIANT
+
+int Rendering::IKControllerImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_Iterations);
-	target.Write(m_OrderEndToRoot);
+    auto size = CORE_TOOLS_STREAM_SIZE(iterations);
+    size += CORE_TOOLS_STREAM_SIZE(orderEndToRoot);
 
-	if (!m_Joints.empty())
-	{
-		//target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
-	}		
+    auto jointSize = boost::numeric_cast<int>(joints.size());
+    size += CORE_TOOLS_STREAM_SIZE(jointSize);
+
+    if (0 < jointSize)
+    {
+        size += jointSize * CORE_TOOLS_STREAM_SIZE(joints.at(0));
+    }
+
+    return size;
 }
 
-void Rendering::IKControllerImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::IKControllerImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	source.Read(m_Iterations);
-        m_OrderEndToRoot = source.ReadBool();
+    target.Write(iterations);
+    target.Write(orderEndToRoot);
 
-	auto size = 0;
-	source.Read(size);
-
-	if (0 < size)
-	{
-		m_Joints.resize(size);
-		//source.ReadSharedPtr(size, &m_Joints[0]);
-	}
+    target.WriteObjectAssociatedContainerWithNumber(joints);
 }
 
-void Rendering::IKControllerImpl
-	::Link(CoreTools::ObjectLink& source)
+void Rendering::IKControllerImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	CoreTools::DisableNoexcept();
+    source.Read(iterations);
+    orderEndToRoot = source.ReadBool();
 
-	if (0 < m_Joints.size())
-        {
-            source;
-		//source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
-	}
+    auto size = 0;
+    source.Read(size);
+
+    if (0 < size)
+    {
+        joints.resize(size);
+        source.ReadObjectAssociatedContainer(size, joints);
+    }
 }
 
-void Rendering::IKControllerImpl
-	::Register(CoreTools::ObjectRegister& target) const
+void Rendering::IKControllerImpl::Link(CoreTools::ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
+
     CoreTools::DisableNoexcept();
-	if (0 < m_Joints.size())
+
+    if (0 < joints.size())
+    {
+        source.ResolveLinkContainer(joints);
+    }
+}
+
+void Rendering::IKControllerImpl::Register(CoreTools::ObjectRegister& target) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    if (0 < joints.size())
+    {
+        target.RegisterContainer(joints);
+    }
+}
+
+CoreTools::ObjectSharedPtr Rendering::IKControllerImpl::GetObjectByName(const string& name)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    for (auto& pointer : joints)
+    {
+        auto found = pointer.object->GetObjectByName(name);
+        if (found != nullptr)
         {
-            target;
-	//	target.RegisterSharedPtr(boost::numeric_cast<int>(m_Joints.size()), &m_Joints[0]);
-	}
+            return found;
+        }
+    }
+
+    return nullptr;
 }
 
-const CoreTools::ObjectSharedPtr Rendering::IKControllerImpl
-	::GetObjectByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::IKControllerImpl::GetAllObjectsByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	for(auto& pointer: m_Joints)
-	{
-		auto found  = pointer->GetObjectByName(name);
-		if (found != nullptr)
-		{
-			return found;
-		}				
-	}
+    vector<CoreTools::ObjectSharedPtr> objects{};
 
-	return CoreTools::ObjectSharedPtr{};
+    for (auto& pointer : joints)
+    {
+        auto pointerObjects = pointer.object->GetAllObjectsByName(name);
+
+        objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
+    }
+
+    return objects;
 }
 
-const vector<CoreTools::ObjectSharedPtr> Rendering::IKControllerImpl
-	::GetAllObjectsByName(const string& name)
+CoreTools::ConstObjectSharedPtr Rendering::IKControllerImpl::GetConstObjectByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	vector<CoreTools::ObjectSharedPtr> objects;
+    for (const auto& pointer : joints)
+    {
+        auto found = pointer.object->GetConstObjectByName(name);
+        if (found != nullptr)
+        {
+            return found;
+        }
+    }
 
-	for (auto& pointer : m_Joints)
-	{
-		auto pointerObjects = pointer->GetAllObjectsByName(name);
- 
-		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());	 
-	}
-
-	return objects;
+    return nullptr;
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::IKControllerImpl
-	::GetConstObjectByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::IKControllerImpl::GetAllConstObjectsByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	for (const auto& pointer : m_Joints)
-	{
-		auto found  = pointer->GetConstObjectByName(name);
-		if (found != nullptr)
-		{
-			return found;
-		}				
-	}
+    vector<CoreTools::ConstObjectSharedPtr> objects{};
 
-	return CoreTools::ConstObjectSharedPtr{};
+    for (const auto& pointer : joints)
+    {
+        auto pointerObjects = pointer.object->GetAllConstObjectsByName(name);
+
+        objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
+    }
+
+    return objects;
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> Rendering::IKControllerImpl
-	::GetAllConstObjectsByName(const string& name) const
+int Rendering::IKControllerImpl::GetIterations() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	vector<CoreTools::ConstObjectSharedPtr> objects;
-
-	for (const auto& pointer : m_Joints)
-	{
-		auto pointerObjects = pointer->GetAllConstObjectsByName(name);
- 
-		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());	 
-	}
-
-	return objects;
+    return iterations;
 }
 
-int Rendering::IKControllerImpl
-	::GetIterations() const noexcept
+void Rendering::IKControllerImpl::SetIterations(int aIterations) noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Iterations;
-}
-
-void Rendering::IKControllerImpl::SetIterations(int iterations) noexcept
-{
-	RENDERING_CLASS_IS_VALID_1;
-
-	m_Iterations = iterations;
+    iterations = aIterations;
 }
 
 bool Rendering::IKControllerImpl::IsOrderEndToRoot() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OrderEndToRoot;
+    return orderEndToRoot;
 }
 
-void Rendering::IKControllerImpl::SetOrderEndToRoot(bool orderEndToRoot) noexcept
+void Rendering::IKControllerImpl::SetOrderEndToRoot(bool aOrderEndToRoot) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OrderEndToRoot = orderEndToRoot;
+    orderEndToRoot = aOrderEndToRoot;
 }
 
-int Rendering::IKControllerImpl
-	::GetJointsNum() const
+int Rendering::IKControllerImpl::GetJointsNum() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return boost::numeric_cast<int>(m_Joints.size());
+    return boost::numeric_cast<int>(joints.size());
 }
 
-const Rendering::IKJointSharedPtr Rendering::IKControllerImpl
-	::GetJointsSharedPtr(int index)
+Rendering::IKJointSharedPtr Rendering::IKControllerImpl::GetJointsSharedPtr(int index)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Joints.size()), "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(joints.size()), "Ë÷Òý´íÎó£¡");
 
-	return m_Joints.at(index);
+    return joints.at(index).object;
 }
-#include STSTEM_WARNING_POP

@@ -1,67 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 18:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/03 16:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "TriangleIndex.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::TriangleIndex::TriangleIndex(int firstIndex, int secondIndex, int thirdIndex) noexcept
-    : m_FirstIndex{ firstIndex }, m_SecondIndex{ secondIndex }, m_ThirdIndex{ thirdIndex }
+    : index0{ firstIndex }, index1{ secondIndex }, index2{ thirdIndex }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::TriangleIndex
-	::IsValid() const  noexcept
+
+bool Rendering::TriangleIndex::IsValid() const noexcept
 {
-	if (0 <= m_FirstIndex && 0 <= m_SecondIndex && 0 <= m_ThirdIndex)
-		return true;
-	else
-		return false;		
+    if (0 <= index0 && 0 <= index1 && 0 <= index2)
+        return true;
+    else
+        return false;
 }
 
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 int Rendering::TriangleIndex::GetFirstIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_FirstIndex;
+    return index0;
 }
 
 int Rendering::TriangleIndex::GetSecondIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_SecondIndex;
+    return index1;
 }
 
 int Rendering::TriangleIndex::GetThirdIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_ThirdIndex;
+    return index2;
 }
 
-int Rendering::TriangleIndex
-	::operator[](int index) const
+int Rendering::TriangleIndex::operator[](int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < 3, "索引越界！");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < 3, "索引越界！");
 
-	switch (index)
-	{
-	case 0:
-		return m_FirstIndex;
-	case 1:
-		return m_SecondIndex;
-	default:
-		return m_ThirdIndex;	 
-	}
+    switch (index)
+    {
+        case 0:
+            return index0;
+        case 1:
+            return index1;
+        default:
+            return index2;
+    }
 }

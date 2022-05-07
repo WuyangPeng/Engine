@@ -1,38 +1,49 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 14:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/24 16:11)
 
 #ifndef PHYSICS_DLL_H
 #define PHYSICS_DLL_H
 
-#include "System/Helper/ExportMacro.h"
 #include "Helper/UserMacro.h"
- 
+#include "System/Helper/ExportMacro.h"
+
 #if defined(BUILDING_PHYSICS_NO_IMPORT) || defined(BUILDING_PHYSICS_STATIC)
 
-  #define PHYSICS_DEFAULT_DECLARE
-  #define PHYSICS_HIDDEN_DECLARE 
-  #define PHYSICS_VISIBLE
+    #define PHYSICS_DEFAULT_DECLARE
+    #define PHYSICS_VISIBLE
 
-#else // !defined(BUILDING_PHYSICS_NO_IMPORT) && !defined(BUILDING_PHYSICS_STATIC)
- 
-   #if defined(BUILDING_PHYSICS_EXPORT)
- 
+    #if defined(BUILDING_PHYSICS_EXPORT)
+
+        #define PHYSICS_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_PHYSICS_EXPORT)
+
+        #define PHYSICS_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_PHYSICS_EXPORT
+
+#else  // !defined(BUILDING_PHYSICS_NO_IMPORT) && !defined(BUILDING_PHYSICS_STATIC)
+
+    #if defined(BUILDING_PHYSICS_EXPORT)
+
         #define PHYSICS_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
         #define PHYSICS_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
 
-   #else // !defined(BUILDING_PHYSICS_EXPORT)
+    #else  // !defined(BUILDING_PHYSICS_EXPORT)
 
-		#define PHYSICS_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define PHYSICS_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
         #define PHYSICS_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
 
-   #endif // BUILDING_PHYSICS_EXPORT
+    #endif  // BUILDING_PHYSICS_EXPORT
 
-   #define SYSTEM_VISIBLE TCRE_SYMBOL_VISIBLE
+    #define SYSTEM_VISIBLE TCRE_SYMBOL_VISIBLE
 
-#endif // defined(BUILDING_PHYSICS_NO_IMPORT) || defined(BUILDING_PHYSICS_STATIC)
+#endif  // defined(BUILDING_PHYSICS_NO_IMPORT) || defined(BUILDING_PHYSICS_STATIC)
 
-#endif // PHYSICS_DLL_H
- 
+#endif  // PHYSICS_DLL_H

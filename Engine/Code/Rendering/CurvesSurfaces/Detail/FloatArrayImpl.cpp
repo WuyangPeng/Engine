@@ -1,94 +1,82 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/25 16:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 15:31)
 
 #include "Rendering/RenderingExport.h"
 
 #include "FloatArrayImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::FloatArrayImpl
-	::FloatArrayImpl( const FloatVector& elements )
-	:m_Elements{ elements }
+Rendering::FloatArrayImpl::FloatArrayImpl(const FloatVector& elements)
+    : elements{ elements }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::FloatArrayImpl
-	::FloatArrayImpl() noexcept
-	:m_Elements{}
+Rendering::FloatArrayImpl::FloatArrayImpl() noexcept
+    : elements{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,FloatArrayImpl)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, FloatArrayImpl)
 
 void Rendering::FloatArrayImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Elements = source.ReadVectorWithoutNumber<float>();
+    elements = source.ReadVectorWithoutNumber<float>();
 }
 
-void Rendering::FloatArrayImpl
-	::Save( CoreTools::BufferTarget& target ) const
+void Rendering::FloatArrayImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.WriteContainerWithNumber(m_Elements);
+    target.WriteContainerWithNumber(elements);
 }
 
-int Rendering::FloatArrayImpl
-	::GetStreamingSize() const
+int Rendering::FloatArrayImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return CORE_TOOLS_STREAM_SIZE(m_Elements); 
+    return CORE_TOOLS_STREAM_SIZE(elements);
 }
 
-int Rendering::FloatArrayImpl
-	::GetNumElements() const
+int Rendering::FloatArrayImpl::GetNumElements() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_Elements.size());
+    return boost::numeric_cast<int>(elements.size());
 }
 
-const float* Rendering::FloatArrayImpl
-	::GetData() const noexcept
+const float* Rendering::FloatArrayImpl::GetData() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return &m_Elements[0];
+    return elements.data();
 }
 
-const float& Rendering::FloatArrayImpl
-	::operator[]( int index ) const
+const float& Rendering::FloatArrayImpl::operator[](int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Elements.size()), "无效索引！\n");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(elements.size()), "无效索引！\n");
 
-	return m_Elements[index];
+    return elements.at(index);
 }
 
-float& Rendering::FloatArrayImpl
-	::operator[]( int index )
+float& Rendering::FloatArrayImpl::operator[](int index)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	return OPERATOR_SQUARE_BRACKETS(float,index);
+    return OPERATOR_SQUARE_BRACKETS(float, index);
 }
-
-#include STSTEM_WARNING_POP

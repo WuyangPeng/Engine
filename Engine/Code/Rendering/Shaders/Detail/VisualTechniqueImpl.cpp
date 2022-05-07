@@ -1,35 +1,31 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/12 18:24)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VisualTechniqueImpl.h"
-
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 using std::vector;
 
-Rendering::VisualTechniqueImpl::VisualTechniqueImpl()
-    : m_Passes{}
+Rendering::VisualTechniqueImpl::VisualTechniqueImpl() noexcept
+    : passes{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -40,40 +36,40 @@ int Rendering::VisualTechniqueImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return CORE_TOOLS_STREAM_SIZE(m_Passes);
+    return CORE_TOOLS_STREAM_SIZE(passes);
 }
 
 void Rendering::VisualTechniqueImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    //target.WriteSharedPtr(m_Passes);
+
+    target.WriteObjectAssociatedContainerWithNumber(passes);
 }
 
 void Rendering::VisualTechniqueImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    //source.ReadSharedPtr(m_Passes);
+
+    source.ReadObjectAssociatedContainer(passes);
 }
 
 void Rendering::VisualTechniqueImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    if (!m_Passes.empty())
+
+    if (!passes.empty())
     {
-        //source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
+        source.ResolveLinkContainer(passes);
     }
 }
 
 void Rendering::VisualTechniqueImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    if (!m_Passes.empty())
+
+    if (!passes.empty())
     {
-        //target.RegisterSharedPtr(boost::numeric_cast<int>(m_Passes.size()), &m_Passes[0]);
+        target.RegisterContainer(passes);
     }
 }
 
@@ -82,113 +78,113 @@ void Rendering::VisualTechniqueImpl::InsertPass(const VisualPassSharedPtr& pass)
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_2(pass != nullptr, "ÊäÈëµÄpass±ØÐëÊÇÓÐÐ§µÄ¡£");
 
-    m_Passes.push_back(pass);
+    passes.emplace_back(pass);
 }
 
 int Rendering::VisualTechniqueImpl::GetNumPasses() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Passes.size());
+    return boost::numeric_cast<int>(passes.size());
 }
 
-const Rendering::ConstVisualPassSharedPtr Rendering::VisualTechniqueImpl::GetPass(int passIndex) const
+Rendering::ConstVisualPassSharedPtr Rendering::VisualTechniqueImpl::GetPass(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex];
+    return passes.at(passIndex).object;
 }
 
-const Rendering::ConstVertexShaderSharedPtr Rendering::VisualTechniqueImpl::GetVertexShader(int passIndex) const
+Rendering::ConstVertexShaderSharedPtr Rendering::VisualTechniqueImpl::GetVertexShader(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetVertexShader();
+    return passes.at(passIndex).object->GetVertexShader();
 }
 
-const Rendering::ConstPixelShaderSharedPtr Rendering::VisualTechniqueImpl::GetPixelShader(int passIndex) const
+Rendering::ConstPixelShaderSharedPtr Rendering::VisualTechniqueImpl::GetPixelShader(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetPixelShader();
+    return passes.at(passIndex).object->GetPixelShader();
 }
 
-const Rendering::ConstAlphaStateSharedPtr Rendering::VisualTechniqueImpl::GetAlphaState(int passIndex) const
+Rendering::ConstAlphaStateSharedPtr Rendering::VisualTechniqueImpl::GetAlphaState(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetAlphaState();
+    return passes.at(passIndex).object->GetAlphaState();
 }
 
-const Rendering::ConstCullStateSharedPtr Rendering::VisualTechniqueImpl::GetCullState(int passIndex) const
+Rendering::ConstCullStateSharedPtr Rendering::VisualTechniqueImpl::GetCullState(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetCullState();
+    return passes.at(passIndex).object->GetCullState();
 }
 
-const Rendering::ConstDepthStateSharedPtr Rendering::VisualTechniqueImpl::GetDepthState(int passIndex) const
+Rendering::ConstDepthStateSharedPtr Rendering::VisualTechniqueImpl::GetDepthState(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetDepthState();
+    return passes.at(passIndex).object->GetDepthState();
 }
 
-const Rendering::ConstOffsetStateSharedPtr Rendering::VisualTechniqueImpl::GetOffsetState(int passIndex) const
+Rendering::ConstOffsetStateSharedPtr Rendering::VisualTechniqueImpl::GetOffsetState(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetOffsetState();
+    return passes.at(passIndex).object->GetOffsetState();
 }
 
-const Rendering::ConstStencilStateSharedPtr Rendering::VisualTechniqueImpl::GetStencilState(int passIndex) const
+Rendering::ConstStencilStateSharedPtr Rendering::VisualTechniqueImpl::GetStencilState(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetStencilState();
+    return passes.at(passIndex).object->GetStencilState();
 }
 
-const Rendering::ConstWireStateSharedPtr Rendering::VisualTechniqueImpl::GetWireState(int passIndex) const
+Rendering::ConstWireStateSharedPtr Rendering::VisualTechniqueImpl::GetWireState(int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= passIndex && passIndex < GetNumPasses(), "Ë÷Òý´íÎó£¡");
 
-    return m_Passes[passIndex]->GetWireState();
+    return passes.at(passIndex).object->GetWireState();
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualTechniqueImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (auto& pointer : m_Passes)
+    for (auto& pointer : passes)
     {
-        auto found = pointer->GetObjectByName(name);
+        auto found = pointer.object->GetObjectByName(name);
         if (found != nullptr)
         {
             return found;
         }
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
 vector<CoreTools::ObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ObjectSharedPtr> objects;
+    vector<CoreTools::ObjectSharedPtr> objects{};
 
-    for (auto& pointer : m_Passes)
+    for (auto& pointer : passes)
     {
-        auto singleObjects = pointer->GetAllObjectsByName(name);
+        auto singleObjects = pointer.object->GetAllObjectsByName(name);
 
         objects.insert(objects.end(), singleObjects.begin(), singleObjects.end());
     }
@@ -200,27 +196,27 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualTechniqueImpl::GetConstObjectBy
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (const auto& pointer : m_Passes)
+    for (const auto& pointer : passes)
     {
-        auto found = pointer->GetConstObjectByName(name);
+        auto found = pointer.object->GetConstObjectByName(name);
         if (found != nullptr)
         {
             return found;
         }
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
 vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualTechniqueImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects;
+    vector<CoreTools::ConstObjectSharedPtr> objects{};
 
-    for (const auto& pointer : m_Passes)
+    for (const auto& pointer : passes)
     {
-        auto singleObjects = pointer->GetAllConstObjectsByName(name);
+        auto singleObjects = pointer.object->GetAllConstObjectsByName(name);
 
         objects.insert(objects.end(), singleObjects.begin(), singleObjects.end());
     }
@@ -233,11 +229,11 @@ void Rendering::VisualTechniqueImpl::SaveVisualPass(WriteFileManager& manager) c
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     const auto numPasses = GetNumPasses();
-    manager.Write(sizeof(int), &numPasses);
+    manager.Write(sizeof(int32_t), &numPasses);
     for (auto i = 0; i < numPasses; ++i)
     {
-        m_Passes[i]->SaveShader(manager);
-        m_Passes[i]->SaveState(manager);
+        passes.at(i).object->SaveShader(manager);
+        passes.at(i).object->SaveState(manager);
     }
 }
 
@@ -246,16 +242,15 @@ void Rendering::VisualTechniqueImpl::LoadVisualPass(ReadFileManager& manager)
     RENDERING_CLASS_IS_VALID_9;
 
     auto numPasses = 0;
-    manager.Read(sizeof(int), &numPasses);
+    manager.Read(sizeof(int32_t), &numPasses);
 
     for (auto i = 0; i < numPasses; ++i)
     {
-        VisualPassSharedPtr pass{ std::make_shared<VisualPass>() };
+        auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
 
         pass->LoadShader(manager);
         pass->LoadState(manager);
 
-        InsertPass(pass);
+        InsertPass(std::move(pass));
     }
 }
-#include STSTEM_WARNING_POP

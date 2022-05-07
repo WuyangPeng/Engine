@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 22:25)
 
 #include "Rendering/RenderingExport.h"
 
@@ -10,51 +13,39 @@
 #include "OpenGLTextureDataDetail.h"
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
- 
-Rendering::OpenGLTextureCube::OpenGLTextureCube([[maybe_unused]] Renderer* renderer, const TextureCube* texture)
-    : m_OpenGLTextureData{ texture }
-{	
-	 
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
- 
-
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTextureCube)
-
-void Rendering::OpenGLTextureCube::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+Rendering::OpenGLTextureCube::OpenGLTextureCube(MAYBE_UNUSED Renderer* renderer, const TextureCube* texture)
+    : openGLTextureData{ texture }
 {
-	RENDERING_CLASS_IS_VALID_9;
-
-	m_OpenGLTextureData.Enable(textureUnit);
-
- 
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLTextureCube::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLTextureCube)
+
+void Rendering::OpenGLTextureCube::Enable(MAYBE_UNUSED Renderer* renderer, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OpenGLTextureData.Disable(textureUnit);
-
-	 
+    openGLTextureData.Enable(textureUnit);
 }
 
-void* Rendering::OpenGLTextureCube
-	::Lock( int face,int level, BufferLocking mode ) noexcept
+void Rendering::OpenGLTextureCube::Disable(MAYBE_UNUSED Renderer* renderer, int textureUnit) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	return m_OpenGLTextureData.Lock(face ,level,mode);
+    openGLTextureData.Disable(textureUnit);
 }
 
-void Rendering::OpenGLTextureCube
-	::Unlock( int face,int level ) noexcept
+void* Rendering::OpenGLTextureCube::Lock(int face, int level, BufferLocking mode) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OpenGLTextureData.Unlock(face ,level);
+    return openGLTextureData.Lock(face, level, mode);
 }
- 
- 
+
+void Rendering::OpenGLTextureCube::Unlock(int face, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    openGLTextureData.Unlock(face, level);
+}

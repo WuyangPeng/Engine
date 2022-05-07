@@ -1,4 +1,4 @@
-@ingroup group_Script_Documentation
+@ingroup group_Rendering_Documentation
 
 ----------------------------
 äÖÈ¾¿âÄ£¿é

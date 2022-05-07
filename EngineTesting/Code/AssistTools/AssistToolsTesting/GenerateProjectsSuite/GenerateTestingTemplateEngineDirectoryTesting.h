@@ -33,7 +33,7 @@ namespace AssistTools
 		void TestingJsonExistTest(const System::String& managerName);
 		void EnvironmentVariableExistTest(const System::String& managerName);
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

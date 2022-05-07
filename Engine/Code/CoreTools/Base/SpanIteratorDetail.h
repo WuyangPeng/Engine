@@ -204,6 +204,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
     }
 
 #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
 #include SYSTEM_WARNING_DISABLE(26490)
 
     return reinterpret_cast<const T&>(*current);

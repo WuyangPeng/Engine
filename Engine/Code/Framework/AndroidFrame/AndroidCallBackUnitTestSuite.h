@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 16:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:28)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_UNIT_TEST_SUITE_H
@@ -11,21 +14,20 @@
 
 #include "AndroidCallBackInterface.h"
 #include "AndroidProcess.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
- 
-EXPORT_SHARED_PTR(Framework, AndroidCallBackUnitTestSuiteImpl, FRAMEWORK_DEFAULT_DECLARE);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(AndroidCallBackUnitTestSuiteImpl);
 EXPORT_SHARED_PTR(Framework, WindowMessageUnitTestSuiteStream, FRAMEWORK_DEFAULT_DECLARE);
+
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE AndroidCallBackUnitTestSuite : public AndroidCallBackInterface
     {
     public:
-        using ClassType = AndroidCallBackUnitTestSuite;
+        NON_COPY_TYPE_DECLARE(AndroidCallBackUnitTestSuite);
         using ParentType = AndroidCallBackInterface;
-        using ClassShareType = CoreTools::NonCopyClasses;
-        using ImplType = AndroidCallBackUnitTestSuiteImpl;
         using StreamType = WindowMessageUnitTestSuiteStream;
         using Suite = CoreTools::Suite;
         using OStreamShared = CoreTools::OStreamShared;
@@ -34,20 +36,20 @@ namespace Framework
     public:
         AndroidCallBackUnitTestSuite(int64_t delta, const std::string& suiteName);
         ~AndroidCallBackUnitTestSuite() noexcept = default;
-        AndroidCallBackUnitTestSuite(const AndroidCallBackUnitTestSuite&) noexcept = delete;
-        AndroidCallBackUnitTestSuite& operator=(const AndroidCallBackUnitTestSuite&) noexcept = delete;
+        AndroidCallBackUnitTestSuite(const AndroidCallBackUnitTestSuite& rhs) noexcept = delete;
+        AndroidCallBackUnitTestSuite& operator=(const AndroidCallBackUnitTestSuite& rhs) noexcept = delete;
         AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept;
         AndroidCallBackUnitTestSuite& operator=(AndroidCallBackUnitTestSuite&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        bool Initialize() override;
+        NODISCARD bool Initialize() override;
 
-        int KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent) override;
+        NODISCARD int KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent) override;
         void Display(AndroidApp* androidApp, int64_t timeDelta) override;
 
-        int GetPassedNumber() const noexcept;
-        bool IsPrintRun() const noexcept;
+        NODISCARD int GetPassedNumber() const noexcept;
+        NODISCARD bool IsPrintRun() const noexcept;
 
         template <typename TestType, typename... Types>
         void AddTest(Suite& suite, const std::string& suiteName, const std::string& testName, Types&&... args)
@@ -59,28 +61,27 @@ namespace Framework
 
         void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
-        [[nodiscard]] Suite GenerateSuite(const std::string& name);
+        NODISCARD Suite GenerateSuite(const std::string& name);
 
     protected:
-        OStreamShared GetStreamShared() const noexcept;
+        NODISCARD OStreamShared GetStreamShared() const noexcept;
 
         void AddSuite(const Suite& suite);
 
     private:
-        using AndroidCallBackUnitTestSuiteImplPtr = std::shared_ptr<ImplType>;
         using StreamTypeSharedPtr = std::shared_ptr<StreamType>;
 
     private:
         virtual void InitSuite() = 0;
 
-        bool AddSuiteOnInitialize();
+        NODISCARD bool AddSuiteOnInitialize();
         void RunUnitTest();
         void ResetTestData();
 
     private:
-        StreamTypeSharedPtr m_StreamType;
-        AndroidCallBackUnitTestSuiteImplPtr impl;
-        bool m_IsInit;
+        StreamTypeSharedPtr streamType;
+        PackageType impl;
+        bool isInit;
     };
 
     using AndroidProcessUnitTestSuite = AndroidProcess<AndroidCallBackUnitTestSuite>;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 15:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 13:54)
 
 #ifndef PHYSICS_COLLISION_DETECTION_BOUND_TREE_SPLIT_TRIANGLES_IMPL_H
 #define PHYSICS_COLLISION_DETECTION_BOUND_TREE_SPLIT_TRIANGLES_IMPL_H
@@ -15,34 +18,33 @@
 #include <vector>
 
 namespace Physics
-{ 
-	class PHYSICS_HIDDEN_DECLARE BoundTreeSplitTrianglesImpl  
-	{
-	public:
-		using ClassType = BoundTreeSplitTrianglesImpl;
-		using AVector = Mathematics::AVectorF;
-		using APoint = Mathematics::APointF;
-		using Centroids = std::vector<APoint>;
-		using Split = std::vector<int>;
-		 
-	public:
-		BoundTreeSplitTrianglesImpl(const Centroids& centroids,int beginIndex, int endIndex,const Split& inSplit,const APoint& origin,const AVector& direction);
+{
+    class PHYSICS_HIDDEN_DECLARE BoundTreeSplitTrianglesImpl
+    {
+    public:
+        using ClassType = BoundTreeSplitTrianglesImpl;
+        using AVector = Mathematics::AVectorF;
+        using APoint = Mathematics::APointF;
+        using Centroids = std::vector<APoint>;
+        using Split = std::vector<int>;
 
-		CLASS_INVARIANT_DECLARE;
-	
-		int GetFirstOutSplitIndex() const noexcept;
-                int GetSecondOutSplitIndex() const noexcept;
-		const Split GetOutSplit() const;
+    public:
+        BoundTreeSplitTrianglesImpl(const Centroids& centroids, int beginIndex, int endIndex, const Split& inSplit, const APoint& origin, const AVector& direction);
 
-	private:
-		void SplitTriangles(const Centroids& centroids,int beginIndex, int endIndex,
-							const Split& inSplit,const APoint& origin,const AVector& direction);
-	 
-	private:	
-		int m_FirstOutSplitIndex;
-		int m_SecondOutSplitIndex;
-		Split m_OutSplit;
-	};
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD int GetFirstOutSplitIndex() const noexcept;
+        NODISCARD int GetSecondOutSplitIndex() const noexcept;
+        NODISCARD Split GetOutSplit() const;
+
+    private:
+        void SplitTriangles(const Centroids& centroids, int beginIndex, int endIndex, const Split& inSplit, const APoint& origin, const AVector& direction);
+
+    private:
+        int outSplitIndex0;
+        int outSplitIndex1;
+        Split outSplit;
+    };
 }
 
-#endif // PHYSICS_COLLISION_DETECTION_BOUND_TREE_SPLIT_TRIANGLES_IMPL_H
+#endif  // PHYSICS_COLLISION_DETECTION_BOUND_TREE_SPLIT_TRIANGLES_IMPL_H

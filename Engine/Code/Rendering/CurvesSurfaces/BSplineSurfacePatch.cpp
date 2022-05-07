@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 16:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 17:51)
 
 #include "Rendering/RenderingExport.h"
 
@@ -10,7 +13,6 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
@@ -18,187 +20,188 @@
 #include "Mathematics/CurvesSurfacesVolumes/BSplineRectangleDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/SurfaceDetail.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, BSplineSurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BSplineSurfacePatch);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BSplineSurfacePatch);
 
-Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
-    : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(1)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+    : ParentType{ 0.0f, 1.0f, 0.0f, 1.0f, true },
+      constructor{ 1 },
+      patch{ std::make_shared<Mathematics::BSplineRectangle<float>>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen) }
 {
-    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen;
-
-    //mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen);
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots)
-    : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(2)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots)
+    : ParentType{ 0.0f, 1.0f, 0.0f, 1.0f, true },
+      constructor{ 2 },
+      patch{ std::make_shared<Mathematics::BSplineRectangle<float>>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vKnots) }
 {
-    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen;
-    vKnots;
-    // mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vKnots);
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen)
-    : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(3)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen)
+    : ParentType{ 0.0f, 1.0f, 0.0f, 1.0f, true },
+      constructor{ 3 },
+      patch{ std::make_shared<Mathematics::BSplineRectangle<float>>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vOpen) }
 {
-    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, vOpen;
-    uKnots;
-    // mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vOpen);
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots)
-    : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(4)
+Rendering::BSplineSurfacePatch::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, const std::vector<std::vector<Mathematics::Vector3F>>& ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots)
+    : ParentType{ 0.0f, 1.0f, 0.0f, 1.0f, true },
+      constructor{ 4 },
+      patch{ std::make_shared<Mathematics::BSplineRectangle<float>>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vKnots) }
 {
-    numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop;
-    vKnots;
-    uKnots;
-    //  mPatch = new Mathematics::BSplineRectangle<float>(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vKnots);
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::BSplineSurfacePatch::~BSplineSurfacePatch()
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, BSplineSurfacePatch)
+
+Mathematics::APointF Rendering::BSplineSurfacePatch::GetPosition(float u, float v) const
 {
-    EXCEPTION_TRY
-    {
-        // DELETE1(mPatch);
-    }
-    EXCEPTION_ALL_CATCH(Rendering)
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto p = patch->P(u, v);
+
+    return APoint{ p[0], p[1], p[2] };
 }
 
-const Mathematics::APointF Rendering::BSplineSurfacePatch::GetPosition(float u, float v) const
+Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesU(float u, float v) const
 {
-    Mathematics::Vector3F p{};  //   = mPatch->P(u, v);
-    return APoint(p[0], p[1], p[2]);
-    u;
-    v;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto pu = patch->PU(u, v);
+
+    return AVector{ pu[0], pu[1], pu[2] };
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesU(float u, float v) const
+Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesV(float u, float v) const
 {
-    Mathematics::Vector3F pu{};  //   mPatch->PU(u, v);
-    return AVector(pu[0], pu[1], pu[2]);
-    u;
-    v;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto pv = patch->PV(u, v);
+
+    return AVector{ pv[0], pv[1], pv[2] };
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesV(float u, float v) const
+Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesUU(float u, float v) const
 {
-    Mathematics::Vector3F pv{};  //   mPatch->PV(u, v);
-    return AVector(pv[0], pv[1], pv[2]);
-    u;
-    v;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto puu = patch->PUU(u, v);
+
+    return AVector{ puu[0], puu[1], puu[2] };
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesUU(float u, float v) const
+Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesUV(float u, float v) const
 {
-    Mathematics::Vector3F puu{};  //   mPatch->PUU(u, v);
-    return AVector(puu[0], puu[1], puu[2]);
-    u;
-    v;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto puv = patch->PUV(u, v);
+
+    return AVector{ puv[0], puv[1], puv[2] };
 }
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesUV(float u, float v) const
+Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesVV(float u, float v) const
 {
-    Mathematics::Vector3F puv{};  //   mPatch->PUV(u, v);
-    return AVector(puv[0], puv[1], puv[2]);
-    u;
-    v;
-}
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-const Mathematics::AVectorF Rendering::BSplineSurfacePatch::GetDerivativesVV(float u, float v) const
-{
-    Mathematics::Vector3F pvv{};  //   mPatch->PVV(u, v);
-    return AVector(pvv[0], pvv[1], pvv[2]);
-    u;
-    v;
-}
+    auto pvv = patch->PVV(u, v);
 
-// Streaming support.
+    return AVector{ pvv[0], pvv[1], pvv[2] };
+}
 
 Rendering::BSplineSurfacePatch::BSplineSurfacePatch(LoadConstructor value)
-    : SurfacePatch(value), mConstructor(0)  //, mPatch(0)
+    : SurfacePatch{ value }, constructor{ 0 }, patch{}
 {
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     SurfacePatch::Load(source);
 
-    source.Read(mConstructor);
+    source.Read(constructor);
 
-    int numCtrlPoints0, numCtrlPoints1;
+    int32_t numCtrlPoints0{ 0 };
+    int32_t numCtrlPoints1{ 0 };
     source.Read(numCtrlPoints0);
     source.Read(numCtrlPoints1);
     std::vector<std::vector<Mathematics::Vector3F>> ctrl(numCtrlPoints1, std::vector<Mathematics::Vector3F>(numCtrlPoints0));
-    int i0 = 0, i1 = 0;
-    for (i0 = 0; i0 < numCtrlPoints0; ++i0)
+
+    for (auto i0 = 0; i0 < numCtrlPoints0; ++i0)
     {
-        for (i1 = 0; i1 < numCtrlPoints1; ++i1)
+        for (auto i1 = 0; i1 < numCtrlPoints1; ++i1)
         {
             source.ReadAggregate(ctrl.at(i0).at(i1));
         }
     }
 
-    int degree0, degree1;
+    int32_t degree0{ 0 };
+    int32_t degree1{ 0 };
     source.Read(degree0);
     source.Read(degree1);
 
-    bool loop0 = false, loop1 = false;
-    loop0 = source.ReadBool();
-    loop1 = source.ReadBool();
+    auto loop0 = source.ReadBool();
+    auto loop1 = source.ReadBool();
 
-    bool open0 = false, open1 = false;
-    //     float* knot0 = nullptr;
-    //     float* knot1 = nullptr;
-    int numKnots0 = 0, numKnots1 = 0;
+    auto open0 = false;
+    auto open1 = false;
+    std::vector<float> knot0{};
+    std::vector<float> knot1{};
+    auto numKnots0 = 0;
+    auto numKnots1 = 0;
 
-    switch (mConstructor)
+    switch (constructor)
     {
         case 1:
+        {
             open0 = source.ReadBool();
             open1 = source.ReadBool();
 
-            //    mPatch = nullptr;  // new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, open1);
-            break;
+            patch = std::make_shared<Mathematics::BSplineRectangle<float>>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, open1);
+        }
+        break;
         case 2:
+        {
             open0 = source.ReadBool();
             numKnots1 = numCtrlPoints1 - degree1 - 1;
-            //   source.Read(numKnots1, knot1);
+            knot1 = source.ReadContainerWithNumber<std::vector<float>>(numKnots1);
 
-            //   mPatch = nullptr;  // new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1);
-
-            //DELETE1(knot1);
-            break;
+            patch = std::make_shared<Mathematics::BSplineRectangle<float>>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, open0, knot1.data());
+        }
+        break;
         case 3:
+        {
             numKnots0 = numCtrlPoints0 - degree0 - 1;
-            //    source.Read(numKnots0, knot0);
+            knot0 = source.ReadContainerWithNumber<std::vector<float>>(numKnots0);
+
             open1 = source.ReadBool();
 
-            //   mPatch = nullptr;  //  new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, open1);
-            //
-            //  DELETE1(knot0);
-            break;
+            patch = std::make_shared<Mathematics::BSplineRectangle<float>>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0.data(), open1);
+        }
+        break;
         case 4:
+        {
             numKnots0 = numCtrlPoints0 - degree0 - 1;
-            //   source.Read(numKnots0, knot0);
+            knot0 = source.ReadContainerWithNumber<std::vector<float>>(numKnots0);
             numKnots1 = numCtrlPoints1 - degree1 - 1;
-            //   source.Read(numKnots1, knot1);
+            knot1 = source.ReadContainerWithNumber<std::vector<float>>(numKnots1);
 
-            //  mPatch = nullptr;  // new Mathematics::BSplineRectangle<float>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0, knot1);
-
-            //  DELETE1(knot0);
-            //  DELETE1(knot1);
-            break;
+            patch = std::make_shared<Mathematics::BSplineRectangle<float>>(numCtrlPoints0, numCtrlPoints1, ctrl, degree0, degree1, loop0, loop1, knot0.data(), knot1.data());
+        }
+        break;
         default:
-            RENDERING_ASSERTION_0(false, "Unexpected condition\n");
+        {
+            RENDERING_ASSERTION_0(false, "意外情况\n");
+        }
+        break;
     }
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
@@ -206,96 +209,116 @@ void Rendering::BSplineSurfacePatch::Load(CoreTools::BufferSource& source)
 
 void Rendering::BSplineSurfacePatch::Link(CoreTools::ObjectLink& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     SurfacePatch::Link(source);
 }
 
 void Rendering::BSplineSurfacePatch::PostLink()
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     SurfacePatch::PostLink();
 }
 
 uint64_t Rendering::BSplineSurfacePatch::Register(CoreTools::ObjectRegister& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return SurfacePatch::Register(target);
 }
 
 void Rendering::BSplineSurfacePatch::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     SurfacePatch::Save(target);
 
-    target.Write(mConstructor);
+    target.Write(constructor);
 
-    constexpr int numCtrlPoints0 = 10;  //= mPatch->GetNumCtrlPoints(0);
-    constexpr int numCtrlPoints1 = 10;  //= mPatch->GetNumCtrlPoints(1);
+    const auto numCtrlPoints0 = patch->GetNumCtrlPoints(0);
+    const auto numCtrlPoints1 = patch->GetNumCtrlPoints(1);
     target.Write(numCtrlPoints0);
     target.Write(numCtrlPoints1);
-    int i0 = 0, i1 = 0;
-    for (i0 = 0; i0 < numCtrlPoints0; ++i0)
+
+    for (auto i0 = 0; i0 < numCtrlPoints0; ++i0)
     {
-        for (i1 = 0; i1 < numCtrlPoints1; ++i1)
+        for (auto i1 = 0; i1 < numCtrlPoints1; ++i1)
         {
-            // target.WriteAggregate(mPatch->GetControlPoint(i0, i1));
+            target.WriteAggregate(patch->GetControlPoint(i0, i1));
         }
     }
 
-    constexpr int degree0 = 0;  // = mPatch->GetDegree(0);
-    constexpr int degree1 = 0;  // = mPatch->GetDegree(1);
+    const auto degree0 = patch->GetDegree(0);
+    const auto degree1 = patch->GetDegree(1);
     target.Write(degree0);
     target.Write(degree1);
 
-    constexpr bool loop0 = 0;  // = mPatch->IsLoop(0);
-    constexpr bool loop1 = 0;  // = mPatch->IsLoop(1);
+    const auto loop0 = patch->IsLoop(0);
+    const auto loop1 = patch->IsLoop(1);
     target.Write(loop0);
     target.Write(loop1);
 
-    constexpr bool open0 = false;
-    constexpr auto open1 = false;
-    int numKnots0 = 0, numKnots1 = 0;
+    auto open0 = false;
+    auto open1 = false;
+    auto numKnots0 = 0;
+    auto numKnots1 = 0;
 
-    switch (mConstructor)
+    switch (constructor)
     {
         case 1:
-            // open0 = mPatch->IsOpen(0);
+        {
+            open0 = patch->IsOpen(0);
             target.Write(open0);
-            //  open1 = mPatch->IsOpen(1);
+            open1 = patch->IsOpen(1);
             target.Write(open1);
-            break;
+        }
+        break;
         case 2:
-            //open0 = mPatch->IsOpen(0);
+        {
+            open0 = patch->IsOpen(0);
             target.Write(open0);
             numKnots1 = numCtrlPoints1 - degree1 - 1;
-            for (i1 = 0; i1 < numKnots1; ++i1)
+            for (auto i1 = 0; i1 < numKnots1; ++i1)
             {
-                //     target.Write(mPatch->GetKnot(1, i1));
+                target.Write(patch->GetKnot(1, i1));
             }
-            break;
+        }
+        break;
         case 3:
+        {
             numKnots0 = numCtrlPoints0 - degree0 - 1;
-            for (i0 = 0; i0 < numKnots0; ++i0)
+            for (auto i0 = 0; i0 < numKnots0; ++i0)
             {
-                //  target.Write(mPatch->GetKnot(0, i0));
+                target.Write(patch->GetKnot(0, i0));
             }
 
-            // open1 = mPatch->IsOpen(1);
+            open1 = patch->IsOpen(1);
             target.Write(open1);
-            break;
+        }
+        break;
         case 4:
+        {
             numKnots0 = numCtrlPoints0 - degree0 - 1;
-            for (i0 = 0; i0 < numKnots0; ++i0)
+            for (auto i0 = 0; i0 < numKnots0; ++i0)
             {
-                // target.Write(mPatch->GetKnot(0, i0));
+                target.Write(patch->GetKnot(0, i0));
             }
 
             numKnots1 = numCtrlPoints1 - degree1 - 1;
-            for (i1 = 0; i1 < numKnots1; ++i1)
+            for (auto i1 = 0; i1 < numKnots1; ++i1)
             {
-                //  target.Write(mPatch->GetKnot(1, i1));
+                target.Write(patch->GetKnot(1, i1));
             }
-            break;
+        }
+        break;
         default:
-            RENDERING_ASSERTION_0(false, "Unexpected condition\n");
+        {
+            RENDERING_ASSERTION_0(false, "意外情况\n");
+        }
+        break;
     }
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
@@ -303,39 +326,54 @@ void Rendering::BSplineSurfacePatch::Save(CoreTools::BufferTarget& target) const
 
 int Rendering::BSplineSurfacePatch::GetStreamingSize() const
 {
-    int size = SurfacePatch::GetStreamingSize();
-    size += sizeof(mConstructor);
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-    constexpr int numCtrlPoints0 = 0;  //= mPatch->GetNumCtrlPoints(0);
-    constexpr int numCtrlPoints1 = 0;  // = mPatch->GetNumCtrlPoints(1);
-    constexpr int degree0 = 0;  //   = mPatch->GetDegree(0);
-    constexpr int degree1 = 0;  //    = mPatch->GetDegree(1);
-    constexpr bool loop0 = false;
-    size += sizeof(numCtrlPoints0);
-    size += sizeof(numCtrlPoints1);
-    size += sizeof(degree0);
-    size += sizeof(degree1);
+    auto size = SurfacePatch::GetStreamingSize();
+    size += sizeof(constructor);
+
+    const auto numCtrlPoints0 = patch->GetNumCtrlPoints(0);
+    const auto numCtrlPoints1 = patch->GetNumCtrlPoints(1);
+    const auto degree0 = patch->GetDegree(0);
+    const auto degree1 = patch->GetDegree(1);
+    constexpr auto loop0 = false;
+    size += CORE_TOOLS_STREAM_SIZE(numCtrlPoints0);
+    size += CORE_TOOLS_STREAM_SIZE(numCtrlPoints1);
+    size += CORE_TOOLS_STREAM_SIZE(degree0);
+    size += CORE_TOOLS_STREAM_SIZE(degree1);
     size += 2 * CORE_TOOLS_STREAM_SIZE(loop0);  // loop0, loop1
 
-    switch (mConstructor)
+    switch (constructor)
     {
         case 1:
+        {
             size += 2 * CORE_TOOLS_STREAM_SIZE(loop0);  // open0, open1
-            break;
+        }
+        break;
         case 2:
+        {
             size += CORE_TOOLS_STREAM_SIZE(loop0);  // open0
-            //  size += (numCtrlPoints1 - degree1 - 1) * sizeof(float);  // knot1[]
-            break;
+
+            size += (numCtrlPoints1 - degree1 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot1[]
+        }
+        break;
         case 3:
-            //       size += (numCtrlPoints0 - degree0 - 1) * sizeof(float);  // knot0[]
+        {
+            size += (numCtrlPoints0 - degree0 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot0[]
+
             size += CORE_TOOLS_STREAM_SIZE(loop0);  // open1
-            break;
+        }
+        break;
         case 4:
-            //  size += (numCtrlPoints0 - degree0 - 1) * sizeof(float);  // knot0[]
-            //   size += (numCtrlPoints1 - degree1 - 1) * sizeof(float);  // knot1[]
-            break;
+        {
+            size += (numCtrlPoints0 - degree0 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot0[]
+            size += (numCtrlPoints1 - degree1 - 1) * CORE_TOOLS_STREAM_SIZE(float{});  // knot1[]
+        }
+        break;
         default:
-            RENDERING_ASSERTION_0(false, "Unexpected condition\n");
+        {
+            RENDERING_ASSERTION_0(false, "意外情况\n");
+        }
+        break;
     }
 
     return size;
@@ -345,7 +383,5 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::BSplineSurfacePatch::CloneObject(
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

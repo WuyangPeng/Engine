@@ -145,7 +145,7 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
 
     UpdateModelSpace(VisualUpdateType::Normals);
 
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer().get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer());
 }
 
 void Rendering::Particles::GetVisibleSet(Culler& culler, bool noCull)

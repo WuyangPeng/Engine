@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:00)
 
 #ifndef FRAMEWORK_APPLICATION_APPLICATION_TRAIT_H
 #define FRAMEWORK_APPLICATION_APPLICATION_TRAIT_H
@@ -10,82 +13,82 @@
 #include "KeyIdentifiers.h"
 #include "KeyboardModifiers.h"
 #include "MouseButtons.h"
-#include "MouseState.h"
 #include "MouseModifiers.h"
+#include "MouseState.h"
 
 namespace Framework
 {
-	enum class PlatformTypes
-	{
-		Window,
-		Glut,
-		Android,
-		Linux,
-		Macintosh
-	};
+    enum class PlatformTypes
+    {
+        Window,
+        Glut,
+        Android,
+        Linux,
+        Macintosh
+    };
 
-	template <PlatformTypes types>
-	struct ApplicationTrait;
+    template <PlatformTypes types>
+    struct ApplicationTrait;
 
-	template<>
-	struct ApplicationTrait<PlatformTypes::Window>
-	{
-		using KeyIdentifiers = WindowKeyIdentifiers;
-		using KeyboardModifiers = WindowKeyboardModifiers;
-		using MouseButtons = WindowMouseButtons;
-		using MouseState = WindowMouseState;
-		using MouseModifiers = WindowMouseModifiers;
-	};
+    template <>
+    struct ApplicationTrait<PlatformTypes::Window>
+    {
+        using KeyIdentifiers = WindowKeyIdentifiers;
+        using KeyboardModifiers = WindowKeyboardModifiers;
+        using MouseButtons = WindowMouseButtons;
+        using MouseState = WindowMouseState;
+        using MouseModifiers = WindowMouseModifiers;
+    };
 
-	using WindowApplicationTrait = ApplicationTrait<PlatformTypes::Window>;
+    using WindowApplicationTrait = ApplicationTrait<PlatformTypes::Window>;
 
-	template<>
-	struct ApplicationTrait<PlatformTypes::Glut>
-	{
-		using KeyIdentifiers = GlutKeyIdentifiers;
-		using KeyboardModifiers = GlutKeyboardModifiers;
-		using MouseButtons = GlutMouseButtons;
-		using MouseState = GlutMouseState;
-		using MouseModifiers = GlutMouseModifiers;
-	};
+    template <>
+    struct ApplicationTrait<PlatformTypes::Glut>
+    {
+        using KeyIdentifiers = GlutKeyIdentifiers;
+        using KeyboardModifiers = GlutKeyboardModifiers;
+        using MouseButtons = GlutMouseButtons;
+        using MouseState = GlutMouseState;
+        using MouseModifiers = GlutMouseModifiers;
+    };
 
-	using GlutApplicationTrait = ApplicationTrait<PlatformTypes::Glut>;
+    using GlutApplicationTrait = ApplicationTrait<PlatformTypes::Glut>;
 
-	template<>
-	struct ApplicationTrait<PlatformTypes::Android>
-	{
-		using KeyIdentifiers = AndroidKeyIdentifiers;
-		using KeyboardModifiers = AndroidKeyboardModifiers;
-		using MouseButtons = AndroidMouseButtons;
-		using MouseState = AndroidMouseState;
-		using MouseModifiers = AndroidMouseModifiers;
-	};
+    template <>
+    struct ApplicationTrait<PlatformTypes::Android>
+    {
+        using KeyIdentifiers = AndroidKeyIdentifiers;
+        using KeyboardModifiers = AndroidKeyboardModifiers;
+        using MouseButtons = AndroidMouseButtons;
+        using MouseState = AndroidMouseState;
+        using MouseModifiers = AndroidMouseModifiers;
+    };
 
-	using AndroidApplicationTrait = ApplicationTrait<PlatformTypes::Android>;
+    using AndroidApplicationTrait = ApplicationTrait<PlatformTypes::Android>;
 
-	template<>
-	struct ApplicationTrait<PlatformTypes::Linux>
-	{
-		using KeyIdentifiers = LinuxKeyIdentifiers;
-		using KeyboardModifiers = LinuxKeyboardModifiers;
-		using MouseButtons = LinuxMouseButtons;
-		using MouseState = LinuxMouseState;
-		using MouseModifiers = LinuxMouseModifiers;
-	};
+    template <>
+    struct ApplicationTrait<PlatformTypes::Linux>
+    {
+        using KeyIdentifiers = LinuxKeyIdentifiers;
+        using KeyboardModifiers = LinuxKeyboardModifiers;
+        using MouseButtons = LinuxMouseButtons;
+        using MouseState = LinuxMouseState;
+        using MouseModifiers = LinuxMouseModifiers;
+    };
 
-	using LinuxApplicationTrait = ApplicationTrait<PlatformTypes::Linux>;
+    using LinuxApplicationTrait = ApplicationTrait<PlatformTypes::Linux>;
 
-	template<>
-	struct ApplicationTrait<PlatformTypes::Macintosh>
-	{
-		using KeyIdentifiers = MacintoshKeyIdentifiers;
-		using KeyboardModifiers = MacintoshKeyboardModifiers;
-		using MouseButtons = MacintoshMouseButtons;
-		using MouseState = MacintoshMouseState;
-		using MouseModifiers = MacintoshMouseModifiers;
-	};
+    template <>
+    struct ApplicationTrait<PlatformTypes::Macintosh>
+    {
+        using KeyIdentifiers = MacintoshKeyIdentifiers;
+        using KeyboardModifiers = MacintoshKeyboardModifiers;
+        using MouseButtons = MacintoshMouseButtons;
+        using MouseState = MacintoshMouseState;
+        using MouseModifiers = MacintoshMouseModifiers;
+    };
 
-	using MacintoshApplicationTrait = ApplicationTrait<PlatformTypes::Macintosh>;
+    using MacintoshApplicationTrait = ApplicationTrait<PlatformTypes::Macintosh>;
 }
 
-#endif // FRAMEWORK_APPLICATION_APPLICATION_TRAIT_H
+#endif  // FRAMEWORK_APPLICATION_APPLICATION_TRAIT_H

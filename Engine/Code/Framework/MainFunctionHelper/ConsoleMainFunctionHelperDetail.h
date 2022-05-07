@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/20 21:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:20)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_DETAIL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_DETAIL_H
@@ -10,160 +13,148 @@
 #include "ConsoleMainFunctionHelper.h"
 #include "Flags/MainFunctionSchedule.h"
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
-template <template<typename> class Build, typename Process>
-Framework::ConsoleMainFunctionHelper<Build, Process>
-	::ConsoleMainFunctionHelper(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
-	:ParentType{ argc,argv,consoleTitle,environmentDirectory }, m_Build{ }, m_ConsoleMainFunctionSchedule{ ConsoleMainFunctionSchedule::Failure }
+template <template <typename> class Build, typename Process>
+Framework::ConsoleMainFunctionHelper<Build, Process>::ConsoleMainFunctionHelper(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ argc, argv, consoleTitle, environmentDirectory }, build{}, consoleMainFunctionSchedule{ ConsoleMainFunctionSchedule::Failure }
 {
-	Initializers();
+    Initializers();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template <template<typename> class Build, typename Process>
-Framework::ConsoleMainFunctionHelper<Build, Process>
-	::ConsoleMainFunctionHelper(ConsoleMainFunctionHelper&& rhs) noexcept
-	:ParentType{ std::move(rhs) }, m_Build{ std::move(rhs.m_Build) }, m_ConsoleMainFunctionSchedule{ rhs.m_ConsoleMainFunctionSchedule }
+template <template <typename> class Build, typename Process>
+Framework::ConsoleMainFunctionHelper<Build, Process>::ConsoleMainFunctionHelper(ConsoleMainFunctionHelper&& rhs) noexcept
+    : ParentType{ std::move(rhs) }, build{ std::move(rhs.build) }, consoleMainFunctionSchedule{ rhs.consoleMainFunctionSchedule }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template <template<typename> class Build, typename Process>
-Framework::ConsoleMainFunctionHelper<Build, Process>& Framework::ConsoleMainFunctionHelper<Build, Process>
-	::operator=(ConsoleMainFunctionHelper&& rhs) noexcept
+template <template <typename> class Build, typename Process>
+Framework::ConsoleMainFunctionHelper<Build, Process>& Framework::ConsoleMainFunctionHelper<Build, Process>::operator=(ConsoleMainFunctionHelper&& rhs) noexcept
 {
-	ParentType::operator=(std::move(rhs));
+    ParentType::operator=(std::move(rhs));
 
-	m_Build = std::move(rhs.m_Build);
-	m_ConsoleMainFunctionSchedule = rhs.m_ConsoleMainFunctionSchedule;
+    build = std::move(rhs.build);
+    consoleMainFunctionSchedule = rhs.consoleMainFunctionSchedule;
 
-	return *this;
+    return *this;
 }
 
-template <template<typename> class Build, typename Process>
-Framework::ConsoleMainFunctionHelper<Build, Process>
-	::~ConsoleMainFunctionHelper() noexcept
+template <template <typename> class Build, typename Process>
+Framework::ConsoleMainFunctionHelper<Build, Process>::~ConsoleMainFunctionHelper() noexcept
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
-	CoreTools::NoexceptNoReturn(*this, &ClassType::Destroy);
+    CoreTools::NoexceptNoReturn(*this, &ClassType::Destroy);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <template<typename> class Build, typename Process>
-bool Framework::ConsoleMainFunctionHelper<Build, Process>
-	::IsValid() const noexcept
+
+template <template <typename> class Build, typename Process>
+bool Framework::ConsoleMainFunctionHelper<Build, Process>::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && ((ConsoleMainFunctionSchedule::Max <= m_ConsoleMainFunctionSchedule) ^ (m_Build == nullptr)))
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::Destroy()
-{
-	;
-
-	if (ConsoleMainFunctionSchedule::Failure < m_ConsoleMainFunctionSchedule)
-	{
-		Terminators();
-	}
-
-	ParentType::Destroy();
+    if (ParentType::IsValid() && ((ConsoleMainFunctionSchedule::Max <= consoleMainFunctionSchedule) ^ (build == nullptr)))
+        return true;
+    else
+        return false;
 }
 
-// private
-template <template<typename > class Build, typename CallBack>
-int Framework::ConsoleMainFunctionHelper<Build, CallBack>
-	::DoRun() noexcept
+#endif  // OPEN_CLASS_INVARIANT
+
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::Destroy()
 {
-	return RunConsoleMainLoop();
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    if (ConsoleMainFunctionSchedule::Failure < consoleMainFunctionSchedule)
+    {
+        Terminators();
+    }
+
+    ParentType::Destroy();
 }
 
 // private
-template <template<typename> class Build, typename Process>
-int Framework::ConsoleMainFunctionHelper<Build, Process>
-	::RunConsoleMainLoop() noexcept
+template <template <typename> class Build, typename CallBack>
+int Framework::ConsoleMainFunctionHelper<Build, CallBack>::DoRun() noexcept
 {
-	if (m_Build != nullptr)
-	{
-		m_Build->EnterMessageLoop();
-	}	
-
-	return 0;
+    return RunConsoleMainLoop();
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::Initializers()
+template <template <typename> class Build, typename Process>
+int Framework::ConsoleMainFunctionHelper<Build, Process>::RunConsoleMainLoop() noexcept
 {
-	EXCEPTION_TRY
-	{
-		InitConsoleProcess();
-		InitImpl();
-	}
-	EXCEPTION_ENTRY_POINT_CATCH
+    if (build != nullptr)
+    {
+        build->EnterMessageLoop();
+    }
+
+    return 0;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::InitConsoleProcess() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::Initializers()
 {
-	m_ConsoleMainFunctionSchedule = ConsoleMainFunctionSchedule::ConsoleProcess;
+    EXCEPTION_TRY
+    {
+        InitConsoleProcess();
+        InitImpl();
+    }
+    EXCEPTION_ENTRY_POINT_CATCH
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::InitImpl()
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::InitConsoleProcess() noexcept
 {
-	m_Build = std::make_shared<BuildType>();
-	m_ConsoleMainFunctionSchedule = ConsoleMainFunctionSchedule::Max;
+    consoleMainFunctionSchedule = ConsoleMainFunctionSchedule::ConsoleProcess;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::Terminators()
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::InitImpl()
 {
-	EXCEPTION_TRY
-	{
-		DestroyImpl();
-		DestroyConsoleProcess();
-	}
-	EXCEPTION_ENTRY_POINT_CATCH
+    build = std::make_shared<BuildType>();
+    consoleMainFunctionSchedule = ConsoleMainFunctionSchedule::Max;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::DestroyImpl() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::Terminators()
 {
-	if (ConsoleMainFunctionSchedule::Max <= m_ConsoleMainFunctionSchedule)
-	{
-		m_Build.reset();
-		m_ConsoleMainFunctionSchedule = ConsoleMainFunctionSchedule::ConsoleProcess;
-	}
+    EXCEPTION_TRY
+    {
+        DestroyImpl();
+        DestroyConsoleProcess();
+    }
+    EXCEPTION_ENTRY_POINT_CATCH
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::ConsoleMainFunctionHelper<Build, Process>
-	::DestroyConsoleProcess() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::DestroyImpl() noexcept
 {
-	if (ConsoleMainFunctionSchedule::ConsoleProcess <= m_ConsoleMainFunctionSchedule)
-	{
-		m_ConsoleMainFunctionSchedule = ConsoleMainFunctionSchedule::Failure;
-	}
+    if (ConsoleMainFunctionSchedule::Max <= consoleMainFunctionSchedule)
+    {
+        build.reset();
+        consoleMainFunctionSchedule = ConsoleMainFunctionSchedule::ConsoleProcess;
+    }
 }
 
-#endif // FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_DETAIL_H
+// private
+template <template <typename> class Build, typename Process>
+void Framework::ConsoleMainFunctionHelper<Build, Process>::DestroyConsoleProcess() noexcept
+{
+    if (ConsoleMainFunctionSchedule::ConsoleProcess <= consoleMainFunctionSchedule)
+    {
+        consoleMainFunctionSchedule = ConsoleMainFunctionSchedule::Failure;
+    }
+}
+
+#endif  // FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_DETAIL_H

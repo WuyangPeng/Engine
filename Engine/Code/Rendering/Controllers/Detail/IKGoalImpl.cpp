@@ -1,202 +1,189 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 13:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/06 13:35)
 
 #include "Rendering/RenderingExport.h"
 
 #include "IKGoalImpl.h"
 
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 using std::string;
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::IKGoalImpl
-	::IKGoalImpl(const SpatialSharedPtr& target,const SpatialSharedPtr& effector,float weight) noexcept
-	:m_Target{ target }, m_Effector{ effector }, m_Weight{ weight }
+
+Rendering::IKGoalImpl::IKGoalImpl(const SpatialSharedPtr& target, const SpatialSharedPtr& effector, float weight) noexcept
+    : goalTarget{ target }, effector{ effector }, weight{ weight }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::IKGoalImpl::IKGoalImpl() noexcept
-    : m_Target{}, m_Effector{}, m_Weight{ 1.0f }
+    : goalTarget{}, effector{}, weight{ 1.0f }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-CLASS_INVARIANT_STUB_DEFINE(Rendering,IKGoalImpl)
-#endif // OPEN_CLASS_INVARIANT	
+CLASS_INVARIANT_STUB_DEFINE(Rendering, IKGoalImpl)
 
 int Rendering::IKGoalImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Weight);
-	size += CORE_TOOLS_STREAM_SIZE(m_Target);
-	size += CORE_TOOLS_STREAM_SIZE(m_Effector);
+    auto size = CORE_TOOLS_STREAM_SIZE(weight);
+    size += CORE_TOOLS_STREAM_SIZE(goalTarget);
+    size += CORE_TOOLS_STREAM_SIZE(effector);
 
-	return size;
+    return size;
 }
 
-void Rendering::IKGoalImpl
-	::Save(CoreTools::BufferTarget& target) const 
+void Rendering::IKGoalImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Weight);
-	//target.WriteSharedPtr(m_Target);
-	//target.WriteSharedPtr(m_Effector);
+    target.Write(weight);
+    target.WriteObjectAssociated(goalTarget);
+    target.WriteObjectAssociated(effector);
 }
 
-void Rendering::IKGoalImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::IKGoalImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	source.Read(m_Weight);
-	//source.ReadSharedPtr(m_Target);
-	//source.ReadSharedPtr(m_Effector);
+    source.Read(weight);
+    source.ReadObjectAssociated(goalTarget);
+    source.ReadObjectAssociated(effector);
 }
 
 void Rendering::IKGoalImpl::Link(CoreTools::ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_9;	
-	CoreTools::DisableNoexcept();
-	source;
-	//source.ResolveObjectSharedPtrLink(m_Target);
-	//source.ResolveObjectSharedPtrLink(m_Effector);
+    RENDERING_CLASS_IS_VALID_9;
+
+    source.ResolveLink(goalTarget);
+    source.ResolveLink(effector);
 }
 
-void Rendering::IKGoalImpl
-	::Register(CoreTools::ObjectRegister& target) const 
+void Rendering::IKGoalImpl::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    CoreTools::DisableNoexcept();
-	//target.RegisterSharedPtr(m_Target);
-	//target.RegisterSharedPtr(m_Effector);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    target.Register(goalTarget);
+    target.Register(effector);
 }
 
-const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl
-	::GetTarget() const noexcept
+Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl::GetTarget() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Target;
+    return goalTarget.object;
 }
 
-const Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl::GetEffector() const noexcept
+Rendering::ConstSpatialSharedPtr Rendering::IKGoalImpl::GetEffector() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Effector;
+    return effector.object;
 }
 
-const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl ::GetTargetPosition() const noexcept
+Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl::GetTargetPosition() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Target->GetWorldTransform().GetTranslate();
+    return goalTarget.object->GetWorldTransform().GetTranslate();
 }
 
-const Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl ::GetEffectorPosition() const noexcept
+Rendering::IKGoalImpl::APoint Rendering::IKGoalImpl::GetEffectorPosition() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Effector->GetWorldTransform().GetTranslate();
+    return effector.object->GetWorldTransform().GetTranslate();
 }
 
-void Rendering::IKGoalImpl::SetWeight(float weight) noexcept
+void Rendering::IKGoalImpl::SetWeight(float aWeight) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Weight = weight;
+    weight = aWeight;
 }
 
 float Rendering::IKGoalImpl::GetWeight() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Weight;
+    return weight;
 }
 
-const CoreTools::ObjectSharedPtr Rendering::IKGoalImpl
-	::GetObjectByName(const string& name) 
+CoreTools::ObjectSharedPtr Rendering::IKGoalImpl::GetObjectByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	auto targetObject = m_Target->GetObjectByName(name);
+    auto targetObject = goalTarget.object->GetObjectByName(name);
 
-	if (targetObject != nullptr)
-	{
-		return targetObject;
-	}		
-	else
-	{
-		auto effectorObject = m_Effector->GetObjectByName(name);
-		if (effectorObject != nullptr)
-			return effectorObject;
-		else
-			return CoreTools::ObjectSharedPtr{};
-	}		
+    if (targetObject != nullptr)
+    {
+        return targetObject;
+    }
+    else
+    {
+        auto effectorObject = effector.object->GetObjectByName(name);
+        if (effectorObject != nullptr)
+            return effectorObject;
+        else
+            return nullptr;
+    }
 }
 
-const vector<CoreTools::ObjectSharedPtr> Rendering::IKGoalImpl
-	::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::IKGoalImpl::GetAllObjectsByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	auto objects = m_Target->GetAllObjectsByName(name);
-	auto effectorObject = m_Effector->GetAllObjectsByName(name);
+    auto objects = goalTarget.object->GetAllObjectsByName(name);
+    auto effectorObject = effector.object->GetAllObjectsByName(name);
 
-	objects.insert(objects.end(), effectorObject.begin(), effectorObject.end());
+    objects.insert(objects.end(), effectorObject.begin(), effectorObject.end());
 
-	return objects;
+    return objects;
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::IKGoalImpl
-	::GetConstObjectByName(const string& name) const 
+CoreTools::ConstObjectSharedPtr Rendering::IKGoalImpl::GetConstObjectByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	auto targetObject = m_Target->GetConstObjectByName(name);
+    auto targetObject = goalTarget.object->GetConstObjectByName(name);
 
-	if (targetObject != nullptr)
-	{
-		return targetObject;
-	}		
-	else
-	{
-		auto effectorObject = m_Effector->GetConstObjectByName(name);
-		if (effectorObject != nullptr)
-			return effectorObject;
-		else
-			return CoreTools::ConstObjectSharedPtr{};
-	}		
+    if (targetObject != nullptr)
+    {
+        return targetObject;
+    }
+    else
+    {
+        auto effectorObject = effector.object->GetConstObjectByName(name);
+        if (effectorObject != nullptr)
+            return effectorObject;
+        else
+            return nullptr;
+    }
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> Rendering::IKGoalImpl
-	::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::IKGoalImpl::GetAllConstObjectsByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	auto objects = m_Target->GetAllConstObjectsByName(name);
-	auto effectorObject = m_Effector->GetAllConstObjectsByName(name);
+    auto objects = goalTarget.object->GetAllConstObjectsByName(name);
+    auto effectorObject = effector.object->GetAllConstObjectsByName(name);
 
-	objects.insert(objects.end(), effectorObject.begin(), effectorObject.end());
+    objects.insert(objects.end(), effectorObject.begin(), effectorObject.end());
 
-	return objects;
+    return objects;
 }
-#include STSTEM_WARNING_POP

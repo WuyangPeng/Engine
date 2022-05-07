@@ -1,142 +1,125 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 15:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 17:09)
 
 #include "Rendering/RenderingExport.h"
 
 #include "DepthStateImpl.h"
+#include "System/Helper/EnumCast.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/EnumCast.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::DepthStateImpl
-	::DepthStateImpl() noexcept
-	:m_Enabled{ true },m_Writable{ true },m_Compare{ DepthStateFlags::CompareMode::LessEqual }
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
+Rendering::DepthStateImpl::DepthStateImpl() noexcept
+    : enabled{ true }, writable{ true }, compare{ DepthStateFlags::CompareMode::LessEqual }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, DepthStateImpl)
 
-void Rendering::DepthStateImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::DepthStateImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
-	m_Writable = source.ReadBool();
-	source.ReadEnum(m_Compare);
+    enabled = source.ReadBool();
+    writable = source.ReadBool();
+    source.ReadEnum(compare);
 }
 
-void Rendering::DepthStateImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::DepthStateImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Enabled);
-	target.Write(m_Writable);
-        target.WriteEnum(m_Compare);
+    target.Write(enabled);
+    target.Write(writable);
+    target.WriteEnum(compare);
 }
 
-int Rendering::DepthStateImpl
-	::GetStreamingSize() const
-{	
-	RENDERING_CLASS_IS_VALID_CONST_9;
-
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Enabled);
-	size += CORE_TOOLS_STREAM_SIZE(m_Writable);
-	size += CORE_TOOLS_STREAM_SIZE(m_Compare);
-
-	return size;
-}
-
-bool Rendering::DepthStateImpl
-	::IsEnabled() const
+int Rendering::DepthStateImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Enabled;
+    auto size = CORE_TOOLS_STREAM_SIZE(enabled);
+    size += CORE_TOOLS_STREAM_SIZE(writable);
+    size += CORE_TOOLS_STREAM_SIZE(compare);
+
+    return size;
 }
 
-bool Rendering::DepthStateImpl
-	::IsWritable() const
+bool Rendering::DepthStateImpl::IsEnabled() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Writable;
+    return enabled;
 }
 
-Rendering::DepthStateImpl::CompareMode Rendering::DepthStateImpl
-	::GetCompare() const
+bool Rendering::DepthStateImpl::IsWritable() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Compare;
+    return writable;
 }
 
-void Rendering::DepthStateImpl
-	::SetEnabled(bool enabled)
+Rendering::DepthStateImpl::CompareMode Rendering::DepthStateImpl::GetCompare() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	m_Enabled = enabled;
+    return compare;
 }
 
-void Rendering::DepthStateImpl
-	::SetWritable(bool writable)
+void Rendering::DepthStateImpl::SetEnabled(bool aEnabled) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Writable = writable;
+    enabled = aEnabled;
 }
 
-void Rendering::DepthStateImpl
-	::SetCompare(CompareMode compare)
+void Rendering::DepthStateImpl::SetWritable(bool aWritable) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Compare = compare;
+    writable = aWritable;
 }
 
-void Rendering::DepthStateImpl
-	::SaveState(WriteFileManager& manager) const
+void Rendering::DepthStateImpl::SetCompare(CompareMode aCompare) noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-const auto enabled = m_Enabled ? 1 : 0;
-        const auto writable = m_Writable ? 1 : 0;
-        const	auto compare = System::EnumCastUnderlying(m_Compare);
-
-	manager.Write(sizeof(int), &enabled);
-	manager.Write(sizeof(int), &writable);
-	manager.Write(sizeof(int), &compare);
+    compare = aCompare;
 }
 
-void Rendering::DepthStateImpl
-	::LoadState(ReadFileManager& manager)
+void Rendering::DepthStateImpl::SaveState(WriteFileManager& manager) const
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	int enabled{ 0 };
-	int writable{ 0 };
-	int compare{ 0 };
-	manager.Read(sizeof(int), &enabled);
-	manager.Read(sizeof(int), &writable);
-	manager.Read(sizeof(int), &compare);
+    const auto enabledWrite = enabled ? 1 : 0;
+    const auto writableWrite = writable ? 1 : 0;
 
-	m_Enabled = (enabled == 1) ? true : false;
-	m_Writable = (writable == 1) ? true : false; 
-	m_Compare = System::UnderlyingCastEnum<CompareMode>(compare);
+    manager.Write(sizeof(int32_t), &enabledWrite);
+    manager.Write(sizeof(int32_t), &writableWrite);
+    manager.Write(sizeof(CompareMode), &compare);
 }
 
-#include STSTEM_WARNING_POP
+void Rendering::DepthStateImpl::LoadState(ReadFileManager& manager)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    int32_t enabledRead{ 0 };
+    int32_t writableRead{ 0 };
+
+    manager.Read(sizeof(int32_t), &enabledRead);
+    manager.Read(sizeof(int32_t), &writableRead);
+    manager.Read(sizeof(CompareMode), &compare);
+
+    enabled = (enabledRead == 1) ? true : false;
+    writable = (writableRead == 1) ? true : false;
+}

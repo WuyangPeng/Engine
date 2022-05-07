@@ -1,24 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 15:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 15:24)
 
 #ifndef RENDERING_CURVES_SURFACES_FLOAT2_ARRAY_IMPL_H
 #define RENDERING_CURVES_SURFACES_FLOAT2_ARRAY_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Base/Float.h"
 
 #include <vector>
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-    class BufferSource;
-    class BufferTarget;
-}
 
 namespace Rendering
 {
@@ -39,16 +36,16 @@ namespace Rendering
 
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const;
+        NODISCARD int GetStreamingSize() const;
 
-        int GetNumElements() const;
-        const Float2* GetData() const noexcept;
+        NODISCARD int GetNumElements() const;
+        NODISCARD const Float2* GetData() const noexcept;
 
-        const Float2& operator[](int index) const;
-        Float2& operator[](int index);
+        NODISCARD const Float2& operator[](int index) const;
+        NODISCARD Float2& operator[](int index);
 
     private:
-        Float2Vector m_Elements;
+        Float2Vector elements;
     };
 }
 

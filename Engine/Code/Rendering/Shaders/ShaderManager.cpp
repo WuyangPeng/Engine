@@ -1,13 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 17:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 15:48)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderManager.h"
 #include "Detail/ShaderManagerImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -19,20 +23,20 @@ using std::make_unique;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, ShaderManager);
 
-Rendering::ShaderManager::ShaderManagerUniquePtr Rendering::ShaderManager::sm_ShaderManager{};
+Rendering::ShaderManager::ShaderManagerUniquePtr Rendering::ShaderManager::shaderManager{};
 
 void Rendering::ShaderManager::Create()
 {
-    sm_ShaderManager = make_unique<Rendering::ShaderManager>(ShaderManagerCreate::Init);
+    shaderManager = make_unique<Rendering::ShaderManager>(ShaderManagerCreate::Init);
 }
 
 void Rendering::ShaderManager::Destroy() noexcept
 {
-    sm_ShaderManager.reset();
+    shaderManager.reset();
 }
 
-Rendering::ShaderManager::ShaderManager([[maybe_unused]] ShaderManagerCreate shaderManagerCreate)
-    : impl{ 0 }
+Rendering::ShaderManager::ShaderManager(MAYBE_UNUSED ShaderManagerCreate shaderManagerCreate)
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -43,7 +47,7 @@ void Rendering::ShaderManager::SetVertexProfile(VertexShaderProfile profile)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetVertexProfile(profile);
 }
@@ -61,7 +65,7 @@ void Rendering::ShaderManager::SetPixelProfile(PixelShaderProfile profile)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetPixelProfile(profile);
 }

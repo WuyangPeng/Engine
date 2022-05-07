@@ -20,12 +20,16 @@ namespace ArtificialIntellegence
     class TestingHelper : public CoreTools::CMainFunctionTestingHelper
     {
     public:
-        CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(TestingHelper);
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
 
-        int DoRun() override;
+    public:
+        TestingHelper(int argc, char** argv);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void AddSuites();
+        void InitSuite();
 
         void AddMacroSuite();
         void AddMiscellaneousSuite();
@@ -33,10 +37,7 @@ namespace ArtificialIntellegence
         void AddFiniteStateMachineSuite();
         void AddFuzzyStateMachineSuite();
         void AddGeneticAlgorithmSuite();
-        void AddNeuralNetworkSuite();
-
-    private:
-        CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
+        void AddNeuralNetworkSuite(); 
     };
 }
 

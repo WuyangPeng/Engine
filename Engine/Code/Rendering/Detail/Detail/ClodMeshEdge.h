@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 18:40)
 
 #ifndef RENDERING_DETAIL_CLOD_MESH_EDGE_H
 #define RENDERING_DETAIL_CLOD_MESH_EDGE_H
@@ -15,37 +18,37 @@
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE ClodMeshEdge
-	{
-	public:
-		using ClassType = ClodMeshEdge;
-		using TriangleKey = Mathematics::TriangleKey;
-		using TriangleKeySet = std::set<TriangleKey>;
-		using TriangleKeySetConstIter = TriangleKeySet::const_iterator;
+    class RENDERING_HIDDEN_DECLARE ClodMeshEdge
+    {
+    public:
+        using ClassType = ClodMeshEdge;
+        using TriangleKey = Mathematics::TriangleKey;
+        using TriangleKeySet = std::set<TriangleKey>;
+        using TriangleKeySetConstIter = TriangleKeySet::const_iterator;
 
-	public:
-		ClodMeshEdge() noexcept;
+    public:
+        ClodMeshEdge() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void InsertTriangleKey(const TriangleKey& triangleKey);
-		void EraseTriangleKey(const TriangleKey& triangleKey);
-			 
-		int GetTriangleKeySize() const noexcept;
-	
-		TriangleKeySetConstIter GetTriangleKeyBegin() const noexcept; 
-		TriangleKeySetConstIter GetTriangleKeyEnd() const noexcept;
+        void InsertTriangleKey(const TriangleKey& triangleKey);
+        void EraseTriangleKey(const TriangleKey& triangleKey);
 
-		int GetMinHeapRecordIndex() const noexcept;
-		void SetMinHeapRecordIndex(int index) noexcept;
+        NODISCARD int GetTriangleKeySize() const;
 
-		const TriangleKey GetBeginTriangleKey() const;
-		const TriangleKey GetEndTriangleKey() const;
+        NODISCARD TriangleKeySetConstIter GetTriangleKeyBegin() const noexcept;
+        NODISCARD TriangleKeySetConstIter GetTriangleKeyEnd() const noexcept;
 
-	private:	
-		TriangleKeySet m_AdjTriangles;
-		int m_MinHeapRecordIndex;
-	};
+        NODISCARD int GetMinHeapRecordIndex() const noexcept;
+        void SetMinHeapRecordIndex(int index) noexcept;
+
+        NODISCARD TriangleKey GetBeginTriangleKey() const;
+        NODISCARD TriangleKey GetEndTriangleKey() const;
+
+    private:
+        TriangleKeySet adjTriangles;
+        int minHeapRecordIndex;
+    };
 }
 
-#endif // RENDERING_DETAIL_CLOD_MESH_EDGE_H
+#endif  // RENDERING_DETAIL_CLOD_MESH_EDGE_H

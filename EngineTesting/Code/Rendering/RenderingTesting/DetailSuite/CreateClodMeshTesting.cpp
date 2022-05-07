@@ -31,6 +31,7 @@
 #include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26414)
 using CoreTools::WriteFileManager;
 using std::vector;
 
@@ -204,7 +205,7 @@ void Rendering::CreateClodMeshTesting::InitTest()
                                                   firstTrianglesMesh->GetVertexBuffer(),
                                                   firstTrianglesMesh->GetIndexBuffer()));
 
-    CreateClodMesh createClodMesh(mesh);
+    CreateClodMesh createClodMesh(*mesh);
 
     CollapseRecordArraySharedPtr collapse = createClodMesh.GetCollapseRecordArray();
 

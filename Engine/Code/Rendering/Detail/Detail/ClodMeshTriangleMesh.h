@@ -1,54 +1,57 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/09 18:52)
 
 #ifndef RENDERING_DETAIL_CLOD_MESH_TRIANGLE_MESH_H
 #define RENDERING_DETAIL_CLOD_MESH_TRIANGLE_MESH_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Rendering/Resources/IndexBuffer.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/SceneGraph/TrianglesMesh.h"
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE ClodMeshTriangleMesh
-	{
-	public:
-		using ClassType = ClodMeshTriangleMesh;
-		
-	public:
-		explicit ClodMeshTriangleMesh(TrianglesMeshSharedPtr mesh);
+    class RENDERING_HIDDEN_DECLARE ClodMeshTriangleMesh
+    {
+    public:
+        using ClassType = ClodMeshTriangleMesh;
 
-		CLASS_INVARIANT_DECLARE;
+    public:
+        explicit ClodMeshTriangleMesh(TrianglesMesh& mesh);
 
-		int GetNumVertices() const noexcept;
-		int GetNumIndices() const noexcept;
-		int GetNumTriangles() const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-		bool ValidBuffers() const;
-                const int* GetIndexBufferReadOnlyData() const noexcept;
+        NODISCARD int GetNumVertices() const noexcept;
+        NODISCARD int GetNumIndices() const noexcept;
+        NODISCARD int GetNumTriangles() const noexcept;
 
-		const Mathematics::Vector3F GetPosition(int index) const noexcept;
+        NODISCARD bool ValidBuffers() const;
+        NODISCARD const int* GetIndexBufferReadOnlyData() const noexcept;
 
-		const char* GetVertexBufferReadOnlyData() const noexcept;
-                int GetStride() const noexcept;
+        NODISCARD Mathematics::Vector3F GetPosition(int index) const noexcept;
 
-		void SetNewVertexBufferData(const std::vector<char>& newData);
-		void SetNewIndexBufferData(const std::vector<char>& newData);
-	
-	private:
-		// 三角网络数据抽取。
-		int m_NumVertices;
-		int m_NumIndices;
-		int m_NumTriangles;
-		IndexBufferSharedPtr m_IndixBuffer;
-		VertexBufferSharedPtr m_VertexBuffer;
-		VertexBufferAccessor m_VertexBufferAccessor;
-	};
+        NODISCARD const char* GetVertexBufferReadOnlyData() const noexcept;
+        NODISCARD int GetStride() const noexcept;
+
+        void SetNewVertexBufferData(const std::vector<char>& newData);
+        void SetNewIndexBufferData(const std::vector<char>& newData);
+
+    private:
+        // 三角网络数据抽取。
+        int numVertices;
+        int numIndices;
+        int numTriangles;
+        IndexBufferSharedPtr indixBuffer;
+        VertexBufferSharedPtr vertexBuffer;
+        VertexBufferAccessor vertexBufferAccessor;
+    };
 }
 
-#endif // RENDERING_DETAIL_CLOD_MESH_TRIANGLE_MESH_H
+#endif  // RENDERING_DETAIL_CLOD_MESH_TRIANGLE_MESH_H

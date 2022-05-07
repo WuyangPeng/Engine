@@ -1,41 +1,40 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 19:12)
 
 #ifndef RENDERING_RENDERERS_RENDERER_FACTORY_H
 #define RENDERING_RENDERERS_RENDERER_FACTORY_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
 #include "Flags/RendererTypes.h"
+#include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/Renderers/RenderersInternalFwd.h"
 
 #include <string>
 
 namespace Rendering
 {
-    class RendererImpl;
-	class RendererBasis;
-	class RendererInputImpl;
-
-    class RENDERING_DEFAULT_DECLARE RendererFactory  
+    class RENDERING_DEFAULT_DECLARE RendererFactory
     {
-    public: 
-        using RendererPtr = std::shared_ptr<RendererImpl>;
-        using RendererInputPtr = std::shared_ptr<RendererInputImpl>;
-        
     public:
-         static RendererPtr Create(RendererTypes type,const RendererBasis& basis);
-		 static RendererPtr Create(const std::string& fileName);
-         static RendererInputPtr CreateInput(RendererTypes type);
+        using RendererSharedPtr = std::shared_ptr<RendererImpl>;
+        using RendererInputSharedPtr = std::shared_ptr<RendererInputImpl>;
+
+    public:
+        NODISCARD static RendererSharedPtr Create(RendererTypes type, const RendererBasis& basis);
+        NODISCARD static RendererSharedPtr Create(const std::string& fileName);
+        NODISCARD static RendererInputSharedPtr CreateInput(RendererTypes type);
 
     private:
-         static RendererPtr CreateDefault(const RendererBasis& basis);
-         static RendererInputPtr CreateDefaultInput();
+        NODISCARD static RendererSharedPtr CreateDefault(const RendererBasis& basis);
+        NODISCARD static RendererInputSharedPtr CreateDefaultInput();
     };
 }
 
-#endif // RENDERING_RENDERERS_RENDERER_FACTORY_H
+#endif  // RENDERING_RENDERERS_RENDERER_FACTORY_H

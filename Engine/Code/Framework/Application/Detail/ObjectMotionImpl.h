@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:16)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_IMPL_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_IMPL_H
@@ -10,58 +13,54 @@
 #include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Spatial.h"
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE ObjectMotionImpl
-	{
-	public:
-		using ClassType = ObjectMotionImpl;
-		using Matrix = Mathematics::MatrixF;
-		using AVector = Mathematics::AVectorF;
-		using Transform = Rendering::FloatTransform;
-		using SpatialSmartPointer = Rendering::SpatialSharedPtr;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;	
+    class FRAMEWORK_HIDDEN_DECLARE ObjectMotionImpl
+    {
+    public:
+        using ClassType = ObjectMotionImpl;
+        using Matrix = Mathematics::MatrixF;
+        using AVector = Mathematics::AVectorF;
+        using Transform = Rendering::TransformF;
+        using SpatialSharedPtr = Rendering::SpatialSharedPtr;
+        using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
-	public:
-                explicit ObjectMotionImpl(const SpatialSmartPointer& motionObject) noexcept;
+    public:
+        explicit ObjectMotionImpl(const SpatialSharedPtr& motionObject) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool MoveObject(float rotationSpeed);
-		void RotateTrackBall(const ConstCameraSmartPointer& camera);
+        NODISCARD bool MoveObject(float rotationSpeed);
+        void RotateTrackBall(const ConstCameraSharedPtr& camera);
 
-		void SetDoRoll(int value) noexcept;
-		void SetDoYaw(int value) noexcept;
-		void SetDoPitch(int value) noexcept;
-		void SetTrackBallDow(bool value) noexcept;
-		void SetBeginTrack(float xTrack, float yTrack) noexcept;
-		void SetEndTrack(float xTrack, float yTrack) noexcept;
-		void SetSaveRotate();
-		bool GetTrackBallDow() const noexcept;
+        void SetDoRoll(int value) noexcept;
+        void SetDoYaw(int value) noexcept;
+        void SetDoPitch(int value) noexcept;
+        void SetTrackBallDow(bool value) noexcept;
+        void SetBeginTrack(float xTrack, float yTrack) noexcept;
+        void SetEndTrack(float xTrack, float yTrack) noexcept;
+        void SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        NODISCARD bool GetTrackBallDow() const noexcept;
 
-		const Transform GetMotionObjectLocalTransform() const;
+        NODISCARD Transform GetMotionObjectLocalTransform() const noexcept;
 
-	private:
-		SpatialSmartPointer m_MotionObject;
-		int m_DoRoll;
-		int m_DoYaw;
-		int m_DoPitch;
-		float m_BeginXTrack;
-		float m_BeginYTrack;
-		float m_EndXTrack;
-		float m_EndYTrack;
-		Matrix m_SaveRotate;
-		bool m_UseTrackBall;
-		bool m_TrackBallDown;
-	};
+    private:
+        SpatialSharedPtr motionObject;
+        int doRoll;
+        int doYaw;
+        int doPitch;
+        float beginXTrack;
+        float beginYTrack;
+        float endXTrack;
+        float endYTrack;
+        Matrix saveRotate;
+        bool useTrackBall;
+        bool trackBallDown;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_CAMERA_MOTION_IMPL_H
-
-
-
+#endif  // FRAMEWORK_APPLICATION_CAMERA_MOTION_IMPL_H

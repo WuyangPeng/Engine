@@ -1,224 +1,175 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 10:45)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateDirectoryImpl.h"
+#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "System/Helper/UnicodeUsing.h" 
 
 using std::string;
+using namespace std::literals;
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
+const System::String AssistTools::GenerateTemplateDirectoryImpl::forwardSlash{ SYSTEM_TEXT("/") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ForwardSlash(SYSTEM_TEXT("/"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::engineDirectory{ SYSTEM_TEXT("Engine") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_EngineDirectory(SYSTEM_TEXT("Engine"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::projectName{ SYSTEM_TEXT("ProjectName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ProjectName(SYSTEM_TEXT("ProjectName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::coreName{ SYSTEM_TEXT("ToolsName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_CoreName(SYSTEM_TEXT("ToolsName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::moduleName{ SYSTEM_TEXT("ModuleName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ModuleName(SYSTEM_TEXT("ModuleName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::exeProjectName{ SYSTEM_TEXT("ExeProjectName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ExeProjectName(SYSTEM_TEXT("ExeProjectName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::includeName{ SYSTEM_TEXT("IncludeName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_IncludeName(SYSTEM_TEXT("IncludeName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::dllProjectName{ SYSTEM_TEXT("DllProjectName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_DllProjectName(SYSTEM_TEXT("DllProjectName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::logFileName{ SYSTEM_TEXT("Log") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_LogFileName(SYSTEM_TEXT("Log"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::configurationDirectory{ SYSTEM_TEXT("Configuration") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ConfigurationDirectory(SYSTEM_TEXT("Configuration"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::managerName{ SYSTEM_TEXT("ManagerName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ManagerName(SYSTEM_TEXT("ManagerName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::resource{ SYSTEM_TEXT("Resource") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_Resource(SYSTEM_TEXT("Resource"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::update{ SYSTEM_TEXT("Update.txt") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_Update(SYSTEM_TEXT("Update.txt"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::codeDirectory{ SYSTEM_TEXT("Code") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_CodeDirectory(SYSTEM_TEXT("Code"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::testing{ SYSTEM_TEXT("Testing") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_Testing(SYSTEM_TEXT("Testing"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::debugLibName{ SYSTEM_TEXT("DebugLibName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_DebugLibName(SYSTEM_TEXT("DebugLibName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::releaseLibName{ SYSTEM_TEXT("ReleaseLibName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_ReleaseLibName(SYSTEM_TEXT("ReleaseLibName"));
+const System::String AssistTools::GenerateTemplateDirectoryImpl::gameIncludeName{ SYSTEM_TEXT("GameIncludeName") };
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_NewProjectName(SYSTEM_TEXT("NewProjectName"));
-
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::sm_GameIncludeName(SYSTEM_TEXT("GameIncludeName"));
- 
-AssistTools::GenerateTemplateDirectoryImpl
-	::GenerateTemplateDirectoryImpl(const System::String& directory, const string& configurationFileName)	 
-	:m_Directory(directory), m_StringReplacing(configurationFileName)
+AssistTools::GenerateTemplateDirectoryImpl::GenerateTemplateDirectoryImpl(const System::String& directory, const string& configurationFileName)
+    : directory{ directory }, stringReplacing{ configurationFileName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-} 
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
+}
 
- 
- 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateDirectoryImpl)
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetDirectory() const
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetDirectory() const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_Directory;
+    return directory;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetForwardSlash()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetForwardSlash()
 {
-	return sm_ForwardSlash;
+    return forwardSlash;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetEngineDirectory()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetEngineDirectory()
 {
-	return sm_EngineDirectory;
+    return engineDirectory;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetProjectName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetProjectName()
 {
-	return sm_ProjectName;
+    return projectName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetCoreName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetCoreName()
 {
-	return sm_CoreName;
+    return coreName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetModuleName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetModuleName()
 {
-	return sm_ModuleName;
+    return moduleName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetExeProjectName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetExeProjectName()
 {
-	return sm_ExeProjectName;
+    return exeProjectName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetDllProjectName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetDllProjectName()
 {
-	return sm_DllProjectName;
+    return dllProjectName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetIncludeName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetIncludeName()
 {
-	return sm_IncludeName;
+    return includeName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetLogFileName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetLogFileName()
 {
-	return sm_LogFileName;
+    return logFileName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetConfigurationDirectory()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetConfigurationDirectory()
 {
-	return sm_ConfigurationDirectory;
+    return configurationDirectory;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetManagerName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetManagerName()
 {
-	return sm_ManagerName;
+    return managerName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetResource()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetResource()
 {
-	return sm_Resource;
+    return resource;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl	
-	::GetUpdate()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetUpdate()
 {
-	return sm_Update;
+    return update;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetCodeDirectory()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetCodeDirectory()
 {
-	return sm_CodeDirectory;
+    return codeDirectory;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetReplacing(const System::String& original) const
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetReplacing(const System::String& original) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	return m_StringReplacing.GetReplacing(original);
+    return stringReplacing.GetReplacing(original);
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetTesting()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetTesting()
 {
-	return sm_Testing;
+    return testing;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetDebugLibName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetDebugLibName()
 {
-	return sm_DebugLibName;
+    return debugLibName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetReleaseLibName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetReleaseLibName()
 {
-	return sm_ReleaseLibName;
+    return releaseLibName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetTestingIncludeName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetTestingIncludeName()
 {
-	return sm_Testing + sm_IncludeName;
+    return testing + includeName;
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetNewProjectName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetNewProjectName()
 {
-	return sm_NewProjectName;
+    return SYSTEM_TEXT("NewProjectName"s);
 }
 
-const System::String AssistTools::GenerateTemplateDirectoryImpl
-	::GetGameIncludeName()
+System::String AssistTools::GenerateTemplateDirectoryImpl::GetGameIncludeName()
 {
-	return sm_GameIncludeName;
+    return gameIncludeName;
 }
-
-
-#include STSTEM_WARNING_POP

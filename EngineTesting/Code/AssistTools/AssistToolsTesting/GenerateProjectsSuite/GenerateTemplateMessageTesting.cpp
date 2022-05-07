@@ -10,14 +10,16 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h" 
 
+using namespace std::literals;
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateMessage)
 
 void AssistTools::GenerateTemplateMessageTesting
-    ::MainTest()
+   ::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateMessageH.txt"), SYSTEM_TEXT(".h"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateMessageCpp.txt"), SYSTEM_TEXT(".cpp"));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateMessageH.txt"s), SYSTEM_TEXT(".h"s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateMessageCpp.txt"s), SYSTEM_TEXT(".cpp"s));
 }
 
 void AssistTools::GenerateTemplateMessageTesting

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 13:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 10:54)
 
 #ifndef FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_H
 #define FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_H
@@ -17,7 +20,8 @@
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 #include "Framework/WindowRegister/WindowName.h"
 #include "Framework/WindowRegister/WindowPictorial.h"
-FRAMEWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(WindowApplicationInformation,WindowApplicationInformationImpl);
+
+FRAMEWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(WindowApplicationInformation, WindowApplicationInformationImpl);
 
 namespace Framework
 {
@@ -37,20 +41,20 @@ namespace Framework
 
         CLASS_INVARIANT_DECLARE;
 
-        const String GetWindowTitle() const;
-        const std::string GetWindowTitleWithMultiByte() const;
-        int GetXPosition() const noexcept;
-        int GetYPosition() const noexcept;
-        int GetWidth() const noexcept;
-        int GetHeight() const noexcept;
-        const WindowSize GetWindowSize() const noexcept;
-        float GetAspectRatio() const noexcept;
-        WindowStyles GetStyle() const noexcept;
+        NODISCARD String GetWindowTitle() const;
+        NODISCARD std::string GetWindowTitleWithMultiByte() const;
+        NODISCARD int GetXPosition() const noexcept;
+        NODISCARD int GetYPosition() const noexcept;
+        NODISCARD int GetWidth() const noexcept;
+        NODISCARD int GetHeight() const noexcept;
+        NODISCARD WindowSize GetWindowSize() const noexcept;
+        NODISCARD float GetAspectRatio() const noexcept;
+        NODISCARD WindowStyles GetStyle() const noexcept;
 
         void SetWindowSize(const WindowSize& size);
 
-        WindowName GetWindowName() const noexcept;
-        WindowPictorial GetWindowPictorial() const noexcept;
+        NODISCARD WindowName GetWindowName() const noexcept;
+        NODISCARD WindowPictorial GetWindowPictorial() const noexcept;
 
     private:
         PackageType impl;

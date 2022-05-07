@@ -4,22 +4,15 @@
 //
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.2 (2020/06/06 22:24)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::TestingHelper
-::TestingHelper(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,
-				const EnvironmentDirectory& environmentDirectory)
-	:ParentType{ instance,commandLine,information,environmentDirectory }
+Framework::TestingHelper::TestingHelper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information,
+                                        const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ instance, commandLine, information, environmentDirectory }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework,TestingHelper)
-
-
-
-
-
-
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, TestingHelper)

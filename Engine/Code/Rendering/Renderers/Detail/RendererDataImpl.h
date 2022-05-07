@@ -1,69 +1,66 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 14:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 14:11)
 
 #ifndef FRAMEWORK_APPLICATION_RENDERER_DATA_IMPL_H
 #define FRAMEWORK_APPLICATION_RENDERER_DATA_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "System/Windows/Flags/WindowsFlags.h"
+#include "Rendering/Renderers/RenderersFwd.h"
 
-#include <string>
 #include <memory>
+#include <string>
 
 namespace Rendering
 {
-	class Renderer;
+    class RendererDataImpl
+    {
+    public:
+        using ClassType = RendererDataImpl;
+        using Renderer = Rendering::Renderer;
+        using TextureFormat = Rendering::TextureFormat;
+        using Colour = Rendering::Colour<float>;
+        using RendererSharedPtr = std::shared_ptr<Renderer>;
+        using RendererTypes = Rendering::RendererTypes;
 
-	class RendererDataImpl 
-	{
-	public:
-		using ClassType = RendererDataImpl;
-		using Renderer = Rendering::Renderer;
-		using TextureFormat = Rendering::TextureFormat;
-		using Colour = Rendering::Colour<float>;
-		using RendererPtr = std::shared_ptr<Renderer>;
-		using RendererTypes = Rendering::RendererTypes;
+    public:
+        explicit RendererDataImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
 
-	public:
-                RendererDataImpl(MAYBE_UNUSED int count);
- 
+        CLASS_INVARIANT_DECLARE;
 
-		CLASS_INVARIANT_DECLARE;
+        void LoadConfiguration(const std::string& fileName);
 
-		void LoadConfiguration(const std::string& fileName);
-		
-		void ClearColor();
-		void Resize(int width,int height);
+        void ClearColor();
+        void Resize(int width, int height);
 
-		void DrawMessage (int x,int y, const Colour& color, const std::string& message);
+        void DrawMessage(int x, int y, const Colour& color, const std::string& message);
 
-		TextureFormat GetColorFormat() const;
-		TextureFormat GetDepthStencilFormat() const;
-		int GetNumMultisamples() const;
-		Colour GetClearColor() const;
+        NODISCARD TextureFormat GetColorFormat() const noexcept;
+        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD int GetNumMultisamples() const noexcept;
+        NODISCARD Colour GetClearColor() const noexcept;
 
-		const std::string GetWindowTitle() const;
-		int GetXPosition () const noexcept;
-		int GetYPosition () const noexcept;
-		int GetWidth () const;
-		int GetHeight () const;
-		bool IsAllowResize() const noexcept;
-		RendererTypes GetRendererType() const;
+        NODISCARD std::string GetWindowTitle() const;
+        NODISCARD int GetXPosition() const noexcept;
+        NODISCARD int GetYPosition() const noexcept;
+        NODISCARD int GetWidth() const noexcept;
+        NODISCARD int GetHeight() const noexcept;
+        NODISCARD bool IsAllowResize() const noexcept;
+        NODISCARD RendererTypes GetRendererType() const;
 
-	private:		
-		RendererPtr m_Renderer;
-	};
+    private:
+        RendererSharedPtr renderer;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_RENDERER_DATA_IMPL_H
-
-
-
-	
+#endif  // FRAMEWORK_APPLICATION_RENDERER_DATA_IMPL_H

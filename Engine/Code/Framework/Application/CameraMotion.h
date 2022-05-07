@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 13:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 10:22)
 
 #ifndef FRAMEWORK_APPLICATION_CAMERA_MOTION_H
 #define FRAMEWORK_APPLICATION_CAMERA_MOTION_H
@@ -11,9 +14,8 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include "Rendering/SceneGraph/Camera.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
+#include "Rendering/SceneGraph/Camera.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(CameraMotionImpl);
 
@@ -23,20 +25,15 @@ namespace Framework
     {
     public:
         NON_COPY_TYPE_DECLARE(CameraMotion);
-        using CameraSmartPointer = Rendering::CameraSharedPtr;
-        using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
+        using CameraSharedPtr = Rendering::CameraSharedPtr;
+        using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
     public:
         CameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor = 2.0f, float rotationSpeedFactor = 2.0f);
-        ~CameraMotion() noexcept = default;
-        CameraMotion(const CameraMotion&) noexcept = delete;
-        CameraMotion& operator=(const CameraMotion&) noexcept = delete;
-        CameraMotion(CameraMotion&&) noexcept = delete;
-        CameraMotion& operator=(CameraMotion&&) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        const CameraSmartPointer GetCameraPtr() noexcept;
+        NODISCARD CameraSharedPtr GetCamera() noexcept;
 
         bool MoveCamera();
 
@@ -56,8 +53,8 @@ namespace Framework
         void SetMoveRight(bool pressed) noexcept;  // 向左
         void SetMoveLeft(bool pressed) noexcept;  // 向右
 
-        float GetRotationSpeed() const noexcept;
-        float GetTranslationSpeed() const noexcept;
+        NODISCARD float GetRotationSpeed() const noexcept;
+        NODISCARD float GetTranslationSpeed() const noexcept;
 
     private:
         PackageType impl;

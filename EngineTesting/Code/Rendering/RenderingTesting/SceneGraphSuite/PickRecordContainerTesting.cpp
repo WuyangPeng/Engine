@@ -13,12 +13,12 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PickRecordContainerTesting)
 
-void Rendering::PickRecordContainerTesting ::MainTest()
+void Rendering::PickRecordContainerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 }
 
-void Rendering::PickRecordContainerTesting ::BaseTest()
+void Rendering::PickRecordContainerTesting::BaseTest()
 {
     PickRecordContainer firstPickRecordContainer = PickRecordContainer::Create();
 

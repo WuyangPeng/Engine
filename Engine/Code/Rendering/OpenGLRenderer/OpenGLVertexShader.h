@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 15:54)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_VERTEX_SHADER_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_VERTEX_SHADER_H
@@ -10,31 +13,29 @@
 #include "Rendering/RenderingDll.h"
 
 #include "OpenGLShader.h"
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Shaders/VertexShader.h"
 
 namespace Rendering
 {
-	class Renderer;
+    class PdrVertexShader : public OpenGLShader
+    {
+    public:
+        using ClassType = PdrVertexShader;
+        using ParentType = OpenGLShader;
 
-	class PdrVertexShader : public OpenGLShader
-	{
-	public:
-		// Construction and destruction
-		PdrVertexShader (Renderer* renderer, const VertexShader* vshader);
-		~PdrVertexShader ();
-		PdrVertexShader(const PdrVertexShader&) = default;
-		PdrVertexShader& operator=(const PdrVertexShader&) = default;
-		PdrVertexShader( PdrVertexShader&&) = default;
-		PdrVertexShader& operator=( PdrVertexShader&&) = default;
+    public:
+        PdrVertexShader(Renderer* renderer, const VertexShader* vshader) noexcept;
 
-		// Vertex shader operations.
-		void Enable (Renderer* renderer, const VertexShader* vshader,const ShaderParameters* parameters);
-		void Disable (Renderer* renderer, const VertexShader* vshader,const ShaderParameters* parameters);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	private:
-		GLuint mShader = 0;
-	};
+        void Enable(Renderer* renderer, const VertexShader* vshader, const ShaderParameters* parameters) noexcept;
+        void Disable(Renderer* renderer, const VertexShader* vshader, const ShaderParameters* parameters) noexcept;
+
+    private:
+        GLuint shader = 0;
+    };
 
 }
 
-#endif // RENDERING_OPENGL_RENDERER_OPENGL_VERTEX_SHADER_H
+#endif  // RENDERING_OPENGL_RENDERER_OPENGL_VERTEX_SHADER_H

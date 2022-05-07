@@ -1,131 +1,90 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 10:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 16:14)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ConvexRegion.h"
 #include "Portal.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26494)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26429)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Portal);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Portal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Portal);
 
-Rendering::Portal::Portal(int numVertices, Mathematics::APointF* modelVertices, const Mathematics::PlaneF& modelPlane, ConvexRegion* adjacentRegion, bool open)
-    : ParentType("Portal"), AdjacentRegion(adjacentRegion), Open(open), mNumVertices(numVertices),
-      mModelVertices(modelVertices), mModelPlane(modelPlane), mWorldPlane(modelPlane)
+Rendering::Portal::Portal(int numVertices, const std::vector<Mathematics::APointF>& modelVertices, const Mathematics::PlaneF& modelPlane, const std::shared_ptr<ConvexRegion>& adjacentRegion, bool open)
+    : ParentType{ "Portal" },
+      adjacentRegion{ adjacentRegion },
+      open{ open },
+      numVertices{ numVertices },
+      modelVertices(modelVertices),
+      worldVertices(numVertices),
+      modelPlane{ modelPlane },
+      worldPlane{ modelPlane }
 {
-    mWorldVertices = nullptr;  //NEW1<Mathematics::APointF>(mNumVertices);
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::Portal::~Portal(){
-    EXCEPTION_TRY{
-        //         DELETE1(mModelVertices);
-        // DELETE1(mWorldVertices);
-    } EXCEPTION_ALL_CATCH(Rendering)
-}
+CLASS_INVARIANT_STUB_DEFINE(Rendering, Portal)
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Portal::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::Portal::UpdateWorldData(const TransformF& worldTransform) noexcept
+void Rendering::Portal::UpdateWorldData(const TransformF& worldTransform)
 {
-    for (int i = 0; i < mNumVertices; ++i)
+    RENDERING_CLASS_IS_VALID_1;
+
+    for (auto i = 0; i < numVertices; ++i)
     {
-        mWorldVertices[i] = worldTransform * mModelVertices[i];
+        worldVertices.at(i) = worldTransform * modelVertices.at(i);
     }
-    // 先通过编译
-    // mWorldPlane = mModelPlane*worldTransform.GetInverseMatrix();
-    // mWorldPlane.Normalize();
+
+    worldPlane = modelPlane.GetHomogeneousPoint() * worldTransform.GetInverseMatrix();
 }
 
-bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustum[6])
+bool Rendering::Portal::ReducedFrustum(const Culler& culler, std::array<float, 6>& reducedFrustum)
 {
-    // The portal polygon is transformed into the camera coordinate system
-    // and projected onto the near plane.  An axis-aligned bounding rectangle
-    // is computed for the projected points and clipped against the left,
-    // right, bottom, and top frustum planes.  The result is itself an
-    // axis-aligned bounding rectangle that is used to define a "reduced
-    // frustum" to be used for drawing what is visible through the portal
-    // polygon.
-    //
-    // The algorithm must handle the situation when portal polygon vertices
-    // are behind the observer.  Imagine standing in a room with a doorway
-    // immediately to your left.  Part of the doorway frame is in front of
-    // you (and visible) and part of it is behind you (and not visible).
-    // A portal point is represented by P = E + d*D + u*U + r*R, where E is
-    // the world location for the eye point, D is the camera's world direction
-    // vector, U is the camera's world up vector, and R is the camera's world
-    // right vector.  The camera coordinates for the portal point are (d,u,r).
-    // If d > 0, P is in front of the eye point and has a projection onto the
-    // near plane d = n.  If d < 0, P is behind the eye point and does not
-    // have a projection onto the near plane.  If d = 0, P projects to
-    // "infinity" on the near plane, a problematic case to deal with.
-    //
-    // To avoid dealing with d = 0, choose a small value e such that
-    // 0 < e < n.  The portal polygon is clipped against the plane d = e,
-    // keeping only that portion whose points satisfy d >= e.  The clipped
-    // polygon always has a projection onto the near plane.  The axis-aligned
-    // bounding box for this projection is computed; clipped against the
-    // left, right, bottom, and top of the frustum; and the result used to
-    // define the reduced frustum.  All this is designed for an inexact
-    // culling of the objects in the adjacent room, so it is useful to avoid
-    // preserving the topology of the portal polygon as it is clipped.
-    // Instead, the portal polygon vertices with d > e are projected and
-    // the intersection points of portal polygon edges with d = e are
-    // computed and projected.  The axis-aligned bounding box is computed for
-    // the projections, a process that does not require knowing the polygon
-    // topology.  The algorithm is essentially the one used for clipping a
-    // convex polygon against the view frustum in the software renderer.  The
-    // polygon vertices are traversed in-order and the signs of the d values
-    // are updated accordingly.  This avoids computing d-signs twice per
-    // vertex.
+    RENDERING_CLASS_IS_VALID_1;
 
-    const ConstCameraSharedPtr camera = culler.GetCamera();
-    const float* frustum = culler.GetFrustum();
-    float rmin = +Mathematics::MathF::maxReal;  // left
-    float rmax = -Mathematics::MathF::maxReal;  // right
-    float umin = +Mathematics::MathF::maxReal;  // bottom
-    float umax = -Mathematics::MathF::maxReal;  // top
+    const auto camera = culler.GetCamera();
+    const auto frustum = culler.GetFrustum();
+    auto rmin = +Mathematics::MathF::maxReal;
+    auto rmax = -Mathematics::MathF::maxReal;
+    auto umin = +Mathematics::MathF::maxReal;
+    auto umax = -Mathematics::MathF::maxReal;
 
     Mathematics::AVectorF diff{};
-    Mathematics::APointF vertexCam;
-    int i = 0;
+    Mathematics::APointF vertexCam{};
 
     if (camera->IsPerspective())
     {
-        constexpr float epsilon = 1e-6f, invEpsilon = 1e+6f;
-        int firstSign = 0, lastSign = 0;  // in {-1,0,1}
-        bool signChange = false;
-        Mathematics::APointF firstVertex = Mathematics::APointF::GetOrigin();
-        Mathematics::APointF lastVertex = Mathematics::APointF::GetOrigin();
-        float NdD = 0.0f, UdD = 0.0f, RdD = 0.0f, t = 0.0f;
+        constexpr auto epsilon = 1e-6f;
+        constexpr auto invEpsilon = 1e+6f;
+        auto firstSign = 0;
+        auto lastSign = 0;
+        auto signChange = false;
+        auto firstVertex = Mathematics::APointF::GetOrigin();
+        auto lastVertex = Mathematics::APointF::GetOrigin();
+        auto ndd = 0.0f;
+        auto udd = 0.0f;
+        auto rdd = 0.0f;
+        auto t = 0.0f;
 
-        for (i = 0; i < mNumVertices; i++)
+        for (auto i = 0; i < numVertices; i++)
         {
-            diff = mWorldVertices[i] - camera->GetPosition();
+            diff = worldVertices.at(i) - camera->GetPosition();
             vertexCam[0] = Dot(diff, camera->GetDirectionVector());
             vertexCam[1] = Dot(diff, camera->GetUpVector());
             vertexCam[2] = Dot(diff, camera->GetRightVector());
@@ -139,26 +98,32 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustu
                     firstVertex = vertexCam;
                 }
 
-                NdD = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] / vertexCam[0];
-                UdD = vertexCam[1] * NdD;
-                RdD = vertexCam[2] * NdD;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
-                if (UdD < umin)
+                ndd = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] / vertexCam[0];
+
+#include STSTEM_WARNING_POP
+
+                udd = vertexCam[1] * ndd;
+                rdd = vertexCam[2] * ndd;
+
+                if (udd < umin)
                 {
-                    umin = UdD;
+                    umin = udd;
                 }
-                if (UdD > umax)
+                if (udd > umax)
                 {
-                    umax = UdD;
+                    umax = udd;
                 }
 
-                if (RdD < rmin)
+                if (rdd < rmin)
                 {
-                    rmin = RdD;
+                    rmin = rdd;
                 }
-                if (RdD > rmax)
+                if (rdd > rmax)
                 {
-                    rmax = RdD;
+                    rmax = rdd;
                 }
 
                 if (lastSign < 0)
@@ -188,26 +153,33 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustu
             {
                 diff = vertexCam - lastVertex;
                 t = (epsilon - lastVertex[0]) / diff[0];
-                NdD = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] * invEpsilon;
-                UdD = (lastVertex[1] + t * diff[1]) * NdD;
-                RdD = (lastVertex[2] + t * diff[2]) * NdD;
 
-                if (UdD < umin)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                ndd = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] * invEpsilon;
+
+#include STSTEM_WARNING_POP
+
+                udd = (lastVertex[1] + t * diff[1]) * ndd;
+                rdd = (lastVertex[2] + t * diff[2]) * ndd;
+
+                if (udd < umin)
                 {
-                    umin = UdD;
+                    umin = udd;
                 }
-                if (UdD > umax)
+                if (udd > umax)
                 {
-                    umax = UdD;
+                    umax = udd;
                 }
 
-                if (RdD < rmin)
+                if (rdd < rmin)
                 {
-                    rmin = RdD;
+                    rmin = rdd;
                 }
-                if (RdD > rmax)
+                if (rdd > rmax)
                 {
-                    rmax = RdD;
+                    rmax = rdd;
                 }
 
                 signChange = false;
@@ -218,36 +190,35 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustu
 
         if (firstSign * lastSign < 0)
         {
-            // Process the last polygon edge.
             diff = firstVertex - lastVertex;
             t = (epsilon - lastVertex[0]) / diff[0];
-            UdD = (lastVertex[1] + t * diff[1]) * invEpsilon;
-            RdD = (lastVertex[2] + t * diff[2]) * invEpsilon;
+            udd = (lastVertex[1] + t * diff[1]) * invEpsilon;
+            rdd = (lastVertex[2] + t * diff[2]) * invEpsilon;
 
-            if (UdD < umin)
+            if (udd < umin)
             {
-                umin = UdD;
+                umin = udd;
             }
-            if (UdD > umax)
+            if (udd > umax)
             {
-                umax = UdD;
+                umax = udd;
             }
 
-            if (RdD < rmin)
+            if (rdd < rmin)
             {
-                rmin = RdD;
+                rmin = rdd;
             }
-            if (RdD > rmax)
+            if (rdd > rmax)
             {
-                rmax = RdD;
+                rmax = rdd;
             }
         }
     }
     else
     {
-        for (i = 0; i < mNumVertices; i++)
+        for (auto i = 0; i < numVertices; i++)
         {
-            diff = mWorldVertices[i] - camera->GetPosition();
+            diff = worldVertices.at(i) - camera->GetPosition();
             vertexCam[1] = Dot(diff, camera->GetUpVector());
             vertexCam[2] = Dot(diff, camera->GetRightVector());
 
@@ -271,8 +242,9 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustu
         }
     }
 
-    // Test whether the axis-aligned bounding rectangle is outside the current
-    // frustum.  If it is, the adjoining room need not be visited.
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     if (frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] >= rmax ||
         frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] <= rmin ||
         frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] >= umax ||
@@ -281,31 +253,31 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustu
         return false;
     }
 
-    // The axis-aligned bounding rectangle intersects the current frustum.
-    // Reduce the frustum for use in drawing the adjoining room.
-    for (int j = 0; j < 6; ++j)
+    for (auto j = 0; j < 6; ++j)
     {
-        reducedFrustum[j] = frustum[j];
+        reducedFrustum.at(j) = frustum[j];
     }
 
-    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] < rmin)
+#include STSTEM_WARNING_POP
+
+    if (reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) < rmin)
     {
-        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] = rmin;
+        reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::RightMin)) = rmin;
     }
 
-    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] > rmax)
+    if (reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) > rmax)
     {
-        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] = rmax;
+        reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::RightMax)) = rmax;
     }
 
-    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] < umin)
+    if (reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) < umin)
     {
-        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] = umin;
+        reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::UpMin)) = umin;
     }
 
-    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] > umax)
+    if (reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) > umax)
     {
-        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] = umax;
+        reducedFrustum.at(System::EnumCastUnderlying(ViewFrustum::UpMax)) = umax;
     }
 
     return true;
@@ -313,76 +285,78 @@ bool Rendering::Portal::ReducedFrustum(const Culler& culler, float reducedFrustu
 
 void Rendering::Portal::GetVisibleSet(Culler& culler, bool noCull)
 {
-    // Visit only the adjacent region if the portal is open.
-    if (!Open)
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (!open)
     {
         return;
     }
 
-    // Traverse only through visible portals.
-    if (!culler.IsVisible(mNumVertices, mWorldVertices, true))
+    if (!culler.IsVisible(numVertices, worldVertices.data(), true))
     {
         return;
     }
 
-    // It is possible that this portal is visited along a path of portals
-    // from the current room containing the camera.  Such portals might
-    // have a back-facing polygon relative to the camera.  It is not possible
-    // to see through these, so cull them.
-    const ConstCameraSharedPtr camera = culler.GetCamera();
-    if (mWorldPlane.WhichSide(camera->GetPosition()) < Mathematics::NumericalValueSymbol::Zero)
+    const auto camera = culler.GetCamera();
+    if (worldPlane.WhichSide(camera->GetPosition()) < Mathematics::NumericalValueSymbol::Zero)
     {
         return;
     }
 
-    // Save the current frustum.
-    float saveFrustum[6]{};
-    const float* frustum = culler.GetFrustum();
-    for (int j = 0; j < 6; ++j)
+    std::array<float, 6> saveFrustum{};
+    const auto frustum = culler.GetFrustum();
+    if (frustum == nullptr)
     {
-        saveFrustum[j] = frustum[j];
+        return;
     }
 
-    // If the observer can see through the portal, the culler's frustum may
-    // be reduced in size based on the portal geometry.
-    float reducedFrustum[6];
+    for (auto j = 0; j < 6; ++j)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        saveFrustum.at(j) = frustum[j];
+
+#include STSTEM_WARNING_POP
+    }
+
+    std::array<float, 6> reducedFrustum{};
     if (ReducedFrustum(culler, reducedFrustum))
     {
-        // Use the reduced frustum for drawing the adjacent region.
-        culler.SetFrustum(reducedFrustum);
+        culler.SetFrustum(reducedFrustum.data());
 
-        // Visit the adjacent region and any nonculled objects in it.
-        AdjacentRegion->GetVisibleSet(culler, noCull);
+        adjacentRegion.object.lock()->GetVisibleSet(culler, noCull);
 
-        // Restore the previous frustum.
-        culler.SetFrustum(saveFrustum);
+        culler.SetFrustum(saveFrustum.data());
     }
 }
 
-// Name support.
-
 CoreTools::ObjectSharedPtr Rendering::Portal::GetObjectByName(const std::string& name)
 {
-    CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto found = ParentType::GetObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    found = AdjacentRegion->GetObjectByName(name);
+    found = adjacentRegion.object.lock()->GetObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
 std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal::GetAllObjectsByName(const std::string& name)
 {
-    std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
+    RENDERING_CLASS_IS_VALID_1;
 
-    std::vector<CoreTools::ObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllObjectsByName(name);
+    auto objects = ParentType::GetAllObjectsByName(name);
+
+    auto pointerObjects = adjacentRegion.object.lock()->GetAllObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
     return objects;
@@ -390,72 +364,89 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal::GetAllObjectsByName(c
 
 CoreTools::ConstObjectSharedPtr Rendering::Portal::GetConstObjectByName(const std::string& name) const
 {
-    CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto found = ParentType::GetConstObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    found = AdjacentRegion->GetConstObjectByName(name);
+    found = adjacentRegion.object.lock()->GetConstObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
 std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal::GetAllConstObjectsByName(const std::string& name) const
 {
-    std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllConstObjectsByName(name);
+    auto objects = ParentType::GetAllConstObjectsByName(name);
+
+    auto pointerObjects = adjacentRegion.object.lock()->GetAllConstObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
     return objects;
 }
 
-// Streaming support.
-
 Rendering::Portal::Portal(LoadConstructor value)
-    : Object(value), AdjacentRegion(0), Open(false), mNumVertices(0),
-      mModelVertices(0), mWorldVertices(0), mModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
+    : ParentType{ value },
+      adjacentRegion{},
+      open{ false },
+      numVertices{},
+      modelVertices{},
+      worldVertices{},
+      modelPlane{ 0.0f, 0.0f, 0.0f, 0.0f },
+      worldPlane{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 void Rendering::Portal::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    Object::Load(source);
+    ParentType::Load(source);
 
-    //source.ReadAggregate(mNumVertices, mModelVertices);
-    source.ReadAggregate(mModelPlane);
-    Open = source.ReadBool();
-    //    source.ReadSharedPtr(AdjacentRegion);
+    source.ReadAggregateContainer(modelVertices);
+    source.ReadAggregate(modelPlane);
+    open = source.ReadBool();
+    source.ReadObjectAssociated(adjacentRegion);
 
-    //    mWorldVertices = NEW1<Mathematics::APointF>(mNumVertices);
+    worldVertices.resize(numVertices);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::Portal::Link(CoreTools::ObjectLink& source)
 {
-    Object::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
 
-    //source.ResolveObjectLink(AdjacentRegion);
+    ParentType::Link(source);
+
+    source.ResolveLink(adjacentRegion);
 }
 
 void Rendering::Portal::PostLink()
 {
-    Object::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
 uint64_t Rendering::Portal::Register(CoreTools::ObjectRegister& target) const
 {
-    if (Object::Register(target))
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    if (ParentType::Register(target))
     {
-        // target.Register(AdjacentRegion);
+        target.RegisterWeakPtr(adjacentRegion);
         return true;
     }
     return false;
@@ -463,31 +454,30 @@ uint64_t Rendering::Portal::Register(CoreTools::ObjectRegister& target) const
 
 void Rendering::Portal::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    Object::Save(target);
+    ParentType::Save(target);
 
-    //	target.WriteAggregateWithNumber(mNumVertices, mModelVertices);
-    target.WriteAggregate(mModelPlane);
-    target.Write(Open);
-    //  target.WritePointer(AdjacentRegion);
-
-    // World vertices are computed form model vertices in the update call,
-    // so no need to save them.  The world plane is also computed in the
-    // update call, so no need to save it.
+    target.WriteAggregateContainerWithNumber(modelVertices);
+    target.WriteAggregate(modelPlane);
+    target.Write(open);
+    target.WriteWeakObjectAssociated(adjacentRegion);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 int Rendering::Portal::GetStreamingSize() const
 {
-    int size = Object::GetStreamingSize();
-    size += sizeof(mNumVertices);
-    size += mNumVertices * sizeof(mModelVertices[0]);
-    size += sizeof(mModelPlane);
-    size += CORE_TOOLS_STREAM_SIZE(Open);
-    size += CORE_TOOLS_STREAM_SIZE(AdjacentRegion);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+    size += sizeof(numVertices);
+    size += numVertices * sizeof(modelVertices[0]);
+    size += sizeof(modelPlane);
+    size += CORE_TOOLS_STREAM_SIZE(open);
+    size += CORE_TOOLS_STREAM_SIZE(adjacentRegion);
+
     return size;
 }
-
-#include STSTEM_WARNING_POP

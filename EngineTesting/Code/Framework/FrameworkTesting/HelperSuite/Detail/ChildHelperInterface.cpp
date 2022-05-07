@@ -1,22 +1,21 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.1 (2020/05/27 14:14)
 
 #include "ChildHelperInterface.h"
-#include "ChildHelperMiddleLayerFlags.h"
 #include "ChildHelperInterfaceImpl.h"
+#include "ChildHelperMiddleLayerFlags.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
 using std::make_shared;
 
-Framework::ChildHelperInterface
-	::ChildHelperInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(ChildHelperMiddleLayer::Count)) }
+Framework::ChildHelperInterface::ChildHelperInterface(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(ChildHelperMiddleLayer::Count) }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ChildHelperInterface)
@@ -31,10 +30,9 @@ ENGINE_MIDDLE_LAYER_CHILD_COMPONENTS_DEFINE(Framework, ChildHelper, ChildHelper,
 ENGINE_MIDDLE_LAYER_CHILD_COMPONENTS_DEFINE(Framework, ChildHelper, ChildHelper, Rendering)
 ENGINE_MIDDLE_LAYER_CHILD_COMPONENTS_DEFINE(Framework, ChildHelper, ChildHelper, Engine)
 
-const Framework::ConstMiddleLayerInterfaceSharedPtr Framework::ChildHelperInterface
-	::GetManager(ChildHelperMiddleLayer childHelperMiddleLayer) const
+const Framework::ConstMiddleLayerInterfaceSharedPtr Framework::ChildHelperInterface::GetManager(ChildHelperMiddleLayer childHelperMiddleLayer) const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetMiddleLayerInterface(System::EnumCastUnderlying(childHelperMiddleLayer));
+    return impl->GetMiddleLayerInterface(System::EnumCastUnderlying(childHelperMiddleLayer));
 }

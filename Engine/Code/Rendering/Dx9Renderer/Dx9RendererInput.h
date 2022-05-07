@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 18:15)
 
 #ifndef RENDERING_DX9_RENDERER_DX9_RENDERER_INPUT_H
 #define RENDERING_DX9_RENDERER_DX9_RENDERER_INPUT_H
@@ -11,12 +14,10 @@
 
 namespace Rendering
 {
-	class RendererInput
-	{
-	public:
-		
-	};
-
+    class RendererInput
+    {
+    public:
+    };
 }
 
-#endif // RENDERING_DX9_RENDERER_DX9_RENDERER_INPUT_H
+#endif  // RENDERING_DX9_RENDERER_DX9_RENDERER_INPUT_H

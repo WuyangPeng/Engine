@@ -1,78 +1,92 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/25 16:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/16 17:47)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CurveSegment.h"
-#include "System/Helper/PragmaWarning.h"
-
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/MathDetail.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26496)
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, CurveSegment)
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveSegment);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveSegment);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, CurveSegment);
 
 Rendering::CurveSegment::CurveSegment(float umin, float umax)
-    : mUMin(umin), mUMax(umax), ParentType("CurveSegment")
+    : ParentType{ "CurveSegment" }, uMin{ umin }, uMax{ umax }
 {
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 float Rendering::CurveSegment::GetUMin() const noexcept
 {
-    return mUMin;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return uMin;
 }
 
 float Rendering::CurveSegment::GetUMax() const noexcept
 {
-    return mUMax;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return uMax;
 }
 
 Mathematics::AVectorF Rendering::CurveSegment::Tangent(float u) const
 {
-    AVector velocity = PU(u);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto velocity = PU(u);
     velocity.Normalize();
     return velocity;
 }
 
 Mathematics::AVectorF Rendering::CurveSegment::Normal(float u) const
 {
-    AVector velocity = PU(u);
-    AVector acceleration = PUU(u);
-    const float VDotV = Dot(velocity, velocity);
-    const float VDotA = Dot(velocity, acceleration);
-    AVector normal = VDotV * acceleration - VDotA * velocity;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto velocity = PU(u);
+    const auto acceleration = PUU(u);
+    const auto vDotV = Dot(velocity, velocity);
+    const auto vDotA = Dot(velocity, acceleration);
+    auto normal = vDotV * acceleration - vDotA * velocity;
     normal.Normalize();
     return normal;
 }
 
 Mathematics::AVectorF Rendering::CurveSegment::Binormal(float u) const
 {
-    AVector velocity = PU(u);
-    AVector acceleration = PUU(u);
-    const float VDotV = Dot(velocity, velocity);
-    const float VDotA = Dot(velocity, acceleration);
-    AVector normal = VDotV * acceleration - VDotA * velocity;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto velocity = PU(u);
+    const auto acceleration = PUU(u);
+    const auto vDotV = Dot(velocity, velocity);
+    const auto vDotA = Dot(velocity, acceleration);
+    auto normal = vDotV * acceleration - vDotA * velocity;
     normal.Normalize();
     velocity.Normalize();
-    AVector binormal = Cross(velocity, normal);
+    auto binormal = Cross(velocity, normal);
     return binormal;
 }
 
 void Rendering::CurveSegment::GetFrame(float u, APoint& position, AVector& tangent, AVector& normal, AVector& binormal) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     position = P(u);
-    AVector velocity = PU(u);
-    AVector acceleration = PUU(u);
-    const float VDotV = Dot(velocity, velocity);
-    const  float VDotA = Dot(velocity, acceleration);
-    normal = VDotV * acceleration - VDotA * velocity;
+    auto velocity = PU(u);
+    const auto acceleration = PUU(u);
+    const auto vDotV = Dot(velocity, velocity);
+    const auto vDotA = Dot(velocity, acceleration);
+    normal = vDotV * acceleration - vDotA * velocity;
     normal.Normalize();
     tangent = velocity;
     tangent.Normalize();
@@ -81,98 +95,107 @@ void Rendering::CurveSegment::GetFrame(float u, APoint& position, AVector& tange
 
 float Rendering::CurveSegment::Curvature(float u) const
 {
-    AVector velocity = PU(u);
-    const float speedSqr = velocity.SquaredLength();
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto velocity = PU(u);
+    const auto speedSqr = velocity.SquaredLength();
 
     if (speedSqr >= Mathematics::MathF::GetZeroTolerance())
     {
-        AVector acceleration = PUU(u);
-        AVector cross = Cross(velocity, acceleration);
-        const float numer = cross.Length();
-        const float denom = Mathematics::MathF::Pow(speedSqr, 1.5f);
+        const auto acceleration = PUU(u);
+        const auto cross = Cross(velocity, acceleration);
+        const auto numer = cross.Length();
+        const auto denom = Mathematics::MathF::Pow(speedSqr, 1.5f);
         return numer / denom;
     }
     else
     {
-        // Curvature is indeterminate, just return 0.
         return 0.0f;
     }
 }
 
 float Rendering::CurveSegment::Torsion(float u) const
 {
-    AVector velocity = PU(u);
-    AVector acceleration = PUU(u);
-    AVector cross = Cross(velocity, acceleration);
-    const float denom = cross.SquaredLength();
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    const auto velocity = PU(u);
+    const auto acceleration = PUU(u);
+    const auto cross = Cross(velocity, acceleration);
+    const auto denom = cross.SquaredLength();
 
     if (denom >= Mathematics::MathF::GetZeroTolerance())
     {
-        AVector jerk = PUUU(u);
-        const float numer = Dot(cross, jerk);
+        const auto jerk = PUUU(u);
+        const auto numer = Dot(cross, jerk);
         return numer / denom;
     }
     else
     {
-        // Torsion is indeterminate, just return 0.
         return 0.0f;
     }
 }
 
-// Name support.
-
-// Streaming support.
-
 Rendering::CurveSegment::CurveSegment(LoadConstructor value)
-    : Object(value), mUMin(0.0f), mUMax(0.0f)
+    : ParentType{ value }, uMin{ 0.0f }, uMax{ 0.0f }
 {
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 void Rendering::CurveSegment::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    Object::Load(source);
+    ParentType::Load(source);
 
-    source.Read(mUMin);
-    source.Read(mUMax);
+    source.Read(uMin);
+    source.Read(uMax);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::CurveSegment::Link(CoreTools::ObjectLink& source)
 {
-    Object::Link(source);
+    RENDERING_CLASS_IS_VALID_9;
+
+    ParentType::Link(source);
 }
 
 void Rendering::CurveSegment::PostLink()
 {
-    Object::PostLink();
+    RENDERING_CLASS_IS_VALID_9;
+
+    ParentType::PostLink();
 }
 
 uint64_t Rendering::CurveSegment::Register(CoreTools::ObjectRegister& target) const
 {
-    return Object::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return ParentType::Register(target);
 }
 
 void Rendering::CurveSegment::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    Object::Save(target);
+    ParentType::Save(target);
 
-    target.Write(mUMin);
-    target.Write(mUMax);
+    target.Write(uMin);
+    target.Write(uMax);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 int Rendering::CurveSegment::GetStreamingSize() const
 {
-    int size = Object::GetStreamingSize();
-    size += sizeof(mUMin);
-    size += sizeof(mUMax);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto size = ParentType::GetStreamingSize();
+    size += CORE_TOOLS_STREAM_SIZE(uMin);
+    size += CORE_TOOLS_STREAM_SIZE(uMax);
     return size;
 }
-
-#include STSTEM_WARNING_POP

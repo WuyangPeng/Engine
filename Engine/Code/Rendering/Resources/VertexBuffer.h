@@ -31,7 +31,7 @@ namespace Rendering
         using ConstVertexBufferSharedPtr = std::shared_ptr<const ClassType>;
         using AVector = Mathematics::AVectorF;
         using APoint = Mathematics::APointF;
-        using Vector2D = Mathematics::Vector2F;
+        using Vector2F = Mathematics::Vector2F;
 
     public:
         NODISCARD static VertexBufferSharedPtr Create();
@@ -60,7 +60,7 @@ namespace Rendering
 
         void SetPosition(const VertexBufferAccessor& vertexBufferAccessor, int index, const APoint& position);
 
-        void SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor, int index, const Vector2D& textureCoord, int unit = 0);
+        void SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor, int index, const Vector2F& textureCoord, int unit = 0);
 
         NODISCARD virtual VertexBufferSharedPtr Clone() const;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;

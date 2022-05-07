@@ -1,192 +1,146 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 15:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 15:56)
 
 #include "Rendering/RenderingExport.h"
 
 #include "IKJoint.h"
 #include "Detail/IKJointImpl.h"
-#include "Rendering/SceneGraph/Spatial.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/SceneGraph/Spatial.h"
 
+using std::make_shared;
 using std::string;
 using std::vector;
-using std::make_shared;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26456)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IKJoint);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKJoint);
 
-Rendering::IKJoint
-	::IKJoint(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals) 
-	:ParentType{ "IKJoint" }, impl{ make_shared<ImplType>(object, goals) }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, IKJoint)
+
+Rendering::IKJoint::IKJoint(const SpatialSharedPtr& object, const IKGoalSharedPtrVector& goals)
+    : ParentType{ "IKJoint" }, impl{ object, goals }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
- 
-
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                       \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }                                                                                        
-    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKJoint)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, IKJoint)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetAxis,MatrixRotationAxis,const Rendering::IKJoint::AVector)
-									   
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKJoint,GetObjectSharedPtr,const Rendering::ConstSpatialSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,GetGoalsNum,int) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, GetAxis, MatrixRotationAxis, Rendering::IKJoint::AVector)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,GetGoalsSharedPtr,int,const Rendering::ConstIKGoalSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKJoint, GetObjectSharedPtr, Rendering::ConstSpatialSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint, GetGoalsNum, int)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint,UpdateWorldTransform,void)
- 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,UpdateLocalTranslate,MatrixRotationAxis,bool)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,UpdateLocalRotate,MatrixRotationAxis,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, GetGoalsSharedPtr, int, Rendering::ConstIKGoalSharedPtr)
 
-										  
-Rendering::IKJoint
-	::IKJoint(LoadConstructor value)
-	:ParentType{ value }, impl{ make_shared<ImplType>() }
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKJoint, UpdateWorldTransform, void)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, UpdateLocalTranslate, MatrixRotationAxis, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, UpdateLocalRotate, MatrixRotationAxis, bool)
+
+Rendering::IKJoint::IKJoint(LoadConstructor value)
+    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-int Rendering::IKJoint
-::GetStreamingSize () const
+int Rendering::IKJoint::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = ParentType::GetStreamingSize();	 
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	size += impl->GetStreamingSize();
-    
-	return size;
+    auto size = ParentType::GetStreamingSize();
+
+    size += impl->GetStreamingSize();
+
+    return size;
 }
 
-uint64_t Rendering::IKJoint
-::Register( CoreTools::ObjectRegister& target ) const
+uint64_t Rendering::IKJoint::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	const auto uniqueID = ParentType::Register(target);
-	if (uniqueID != 0)
-	{
-		impl->Register(target);
-	}
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return uniqueID;
+    const auto uniqueID = ParentType::Register(target);
+    if (uniqueID != 0)
+    {
+        impl->Register(target);
+    }
+
+    return uniqueID;
 }
 
-void Rendering::IKJoint
-::Save (CoreTools::BufferTarget& target) const
+void Rendering::IKJoint::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	impl->Save(target);
-    
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    impl->Save(target);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKJoint
-::Link (CoreTools::ObjectLink& source)
+void Rendering::IKJoint::Link(CoreTools::ObjectLink& source)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	ParentType::Link(source); 	
+    ParentType::Link(source);
 
-	impl->Link(source);
+    impl->Link(source);
 }
 
-void Rendering::IKJoint
-::PostLink ()
+void Rendering::IKJoint::PostLink()
 {
-	;
-    
-	ParentType::PostLink();	 
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-void Rendering::IKJoint
-::Load (CoreTools::BufferSource& source)
+void Rendering::IKJoint::Load(CoreTools::BufferSource& source)
 {
-	;
-    
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
-	
-	impl->Load(source);
-    
+
+    impl->Load(source);
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::IKJoint
-	::SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation) 
+void Rendering::IKJoint::SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	impl->SetAllowTranslation(axisIndex, allowTranslation);
+    impl->SetAllowTranslation(axisIndex, allowTranslation);
 }
 
-void Rendering::IKJoint
-	::SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation)
+void Rendering::IKJoint::SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	impl->SetAllowRotation(axisIndex, allowRotation);
+    impl->SetAllowRotation(axisIndex, allowRotation);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowTranslation,MatrixRotationAxis,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, IsAllowTranslation, MatrixRotationAxis, bool)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint,IsAllowRotation,MatrixRotationAxis,bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, IKJoint, IsAllowRotation, MatrixRotationAxis, bool)
 
 void Rendering::IKJoint::UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
@@ -199,7 +153,5 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::IKJoint::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

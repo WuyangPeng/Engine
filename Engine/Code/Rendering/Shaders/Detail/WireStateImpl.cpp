@@ -1,88 +1,82 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 16:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 18:43)
 
 #include "Rendering/RenderingExport.h"
 
 #include "WireStateImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH 
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::WireStateImpl
-	::WireStateImpl() noexcept
-	:m_Enabled{ false }
+Rendering::WireStateImpl::WireStateImpl() noexcept
+    : enabled{ false }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, WireStateImpl)
 
-void Rendering::WireStateImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::WireStateImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
+    enabled = source.ReadBool();
 }
 
-void Rendering::WireStateImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::WireStateImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Enabled);
+    target.Write(enabled);
 }
 
 int Rendering::WireStateImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	const auto size = CORE_TOOLS_STREAM_SIZE(m_Enabled);	
+    const auto size = CORE_TOOLS_STREAM_SIZE(enabled);
 
-	return size;
+    return size;
 }
 
 bool Rendering::WireStateImpl::IsEnabled() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Enabled;
+    return enabled;
 }
 
-void Rendering::WireStateImpl::SetEnabled(bool enabled) noexcept
+void Rendering::WireStateImpl::SetEnabled(bool aEnabled) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = enabled;
+    enabled = aEnabled;
 }
 
-void Rendering::WireStateImpl
-	::SaveState( WriteFileManager& manager ) const
+void Rendering::WireStateImpl::SaveState(WriteFileManager& manager) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-const	auto enabled = (m_Enabled ? 1 : 0);
+    const auto result = (enabled ? 1 : 0);
 
-	manager.Write(sizeof(int), &enabled);
+    manager.Write(sizeof(int32_t), &result);
 }
 
-void Rendering::WireStateImpl
-	::LoadState(ReadFileManager& manager)
+void Rendering::WireStateImpl::LoadState(ReadFileManager& manager)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	int enabled{ 0 };
-	manager.Read(sizeof(int), &enabled);
+    int32_t result{ 0 };
+    manager.Read(sizeof(int32_t), &result);
 
-	m_Enabled = (enabled == 1) ? true : false;
+    enabled = (result == 1) ? true : false;
 }
-#include STSTEM_WARNING_POP

@@ -1,120 +1,117 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 10:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 14:55)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RenderTargetManagementImpl.h"
-#include "Rendering/Renderers/PlatformRenderTarget.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Rendering/Renderers/PlatformRenderTarget.h"
 
 using std::make_shared;
 
-Rendering::RenderTargetManagementImpl
-	::RenderTargetManagementImpl(RendererPtr ptr)
-	: m_Renderer{ ptr }, m_RenderTargets{}
+Rendering::RenderTargetManagementImpl::RenderTargetManagementImpl(const RendererSharedPtr& renderer)
+    : renderer{ renderer }, renderTargets{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RenderTargetManagementImpl
-	::IsValid() const noexcept
+
+bool Rendering::RenderTargetManagementImpl::IsValid() const noexcept
 {
-	if(m_Renderer.lock())
+    if (renderer.lock())
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::RenderTargetManagementImpl
-	::Bind (RenderTargetConstPtr renderTarget)
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::RenderTargetManagementImpl::Bind(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (m_RenderTargets.find(renderTarget) == m_RenderTargets.end())
+    if (renderTargets.find(renderTarget) == renderTargets.end())
     {
-		PlatformRenderTargetSharedPtr platformRenderTarget{ make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.get()) };
-		m_RenderTargets.insert({ renderTarget, platformRenderTarget });
+        auto platformRenderTarget = make_shared<PlatformRenderTarget>(renderer.lock().get(), renderTarget.get());
+        renderTargets.emplace(renderTarget, platformRenderTarget);
     }
 }
 
-void Rendering::RenderTargetManagementImpl
-	::Unbind (RenderTargetConstPtr renderTarget)
+void Rendering::RenderTargetManagementImpl::Unbind(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_RenderTargets.erase(renderTarget);
+    renderTargets.erase(renderTarget);
 }
- 
-void Rendering::RenderTargetManagementImpl
-	::Enable (RenderTargetConstPtr renderTarget)
-{
-	RENDERING_CLASS_IS_VALID_1;
 
-    const auto iter = m_RenderTargets.find(renderTarget);
-    PlatformRenderTargetSharedPtr platformRenderTarget;
-    if (iter != m_RenderTargets.end())
+void Rendering::RenderTargetManagementImpl::Enable(const ConstRenderTargetSharedPtr& renderTarget)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto iter = renderTargets.find(renderTarget);
+    PlatformRenderTargetSharedPtr platformRenderTarget{};
+    if (iter != renderTargets.end())
     {
         platformRenderTarget = iter->second;
     }
     else
     {
-        platformRenderTarget = make_shared<PlatformRenderTarget>(m_Renderer.lock().get(),renderTarget.get());
-		m_RenderTargets.insert({ renderTarget, platformRenderTarget });
+        platformRenderTarget = make_shared<PlatformRenderTarget>(renderer.lock().get(), renderTarget.get());
+        renderTargets.emplace(renderTarget, platformRenderTarget);
     }
 
-    platformRenderTarget->Enable(m_Renderer.lock().get());
+    platformRenderTarget->Enable(renderer.lock().get());
 }
 
-void Rendering::RenderTargetManagementImpl
-	::Disable (RenderTargetConstPtr renderTarget)
+void Rendering::RenderTargetManagementImpl::Disable(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	const auto iter = m_RenderTargets.find(renderTarget);
- 
-    if (iter != m_RenderTargets.end())
+    const auto iter = renderTargets.find(renderTarget);
+
+    if (iter != renderTargets.end())
     {
         auto platformRenderTarget = iter->second;
 
-        platformRenderTarget->Disable(m_Renderer.lock().get());
+        platformRenderTarget->Disable(renderer.lock().get());
     }
 }
 
-Rendering::ConstTexture2DSharedPtr  Rendering::RenderTargetManagementImpl
-::ReadColor(int index,RenderTargetConstPtr renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagementImpl::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
 {
-  	RENDERING_CLASS_IS_VALID_1;
-    
-	const auto iter = m_RenderTargets.find(renderTarget);
-    if (iter != m_RenderTargets.end())
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto iter = renderTargets.find(renderTarget);
+    if (iter != renderTargets.end())
     {
-		auto platformRenderTarget = iter->second;
-        return platformRenderTarget->ReadColor(index, m_Renderer.lock().get());
+        auto platformRenderTarget = iter->second;
+        return platformRenderTarget->ReadColor(index, renderer.lock().get());
     }
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"s));
-	}
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"s));
+    }
 }
 
-Rendering::RenderTargetManagementImpl::PlatformRenderTargetSharedPtr Rendering::RenderTargetManagementImpl
-	::GetResource (RenderTargetConstPtr renderTarget)
+Rendering::RenderTargetManagementImpl::PlatformRenderTargetSharedPtr Rendering::RenderTargetManagementImpl::GetResource(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	const auto iter = m_RenderTargets.find(renderTarget);
-    if (iter != m_RenderTargets.end())
+    const auto iter = renderTargets.find(renderTarget);
+    if (iter != renderTargets.end())
     {
         return iter->second;
     }
     else
     {
-		THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的渲染目标！"s));
     }
 }

@@ -1,34 +1,27 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 10:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/09 22:09)
 
 #include "Rendering/RenderingExport.h"
 
 #include "CreateClodMeshImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/DataTypes/MinHeapDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
 using std::set;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-Rendering::CreateClodMeshImpl::CreateClodMeshImpl(TrianglesMeshSharedPtr mesh)
-    : m_ClodMeshTriangleMesh{ mesh }, m_Graph{ m_ClodMeshTriangleMesh.GetNumVertices(), m_ClodMeshTriangleMesh.GetNumIndices() }, m_Collapses{}, m_CollapseRecord{}
+
+Rendering::CreateClodMeshImpl::CreateClodMeshImpl(TrianglesMesh& mesh)
+    : clodMeshTriangleMesh{ mesh }, graph{ clodMeshTriangleMesh.GetNumVertices(), clodMeshTriangleMesh.GetNumIndices() }, collapses{}, collapseRecord{}
 {
     Compute();
 
@@ -41,14 +34,14 @@ Rendering::CollapseRecordArraySharedPtr Rendering::CreateClodMeshImpl::GetCollap
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return CollapseRecordArraySharedPtr{ std::make_shared<CollapseRecordArray>(m_CollapseRecord) };
+    return CollapseRecordArraySharedPtr{ std::make_shared<CollapseRecordArray>(collapseRecord) };
 }
 
 // private
 void Rendering::CreateClodMeshImpl::Compute()
 {
     // 确保顶点和索引缓冲区是有效在边缘折叠。
-    if (!m_ClodMeshTriangleMesh.ValidBuffers())
+    if (!clodMeshTriangleMesh.ValidBuffers())
     {
         return;
     }
@@ -58,18 +51,18 @@ void Rendering::CreateClodMeshImpl::Compute()
 
     // 顶点是边边界的端点，或是非流形，
     // 它们是由两个边三角形连接的组件共享，不能允许崩塌。
-    m_Graph.ClassifyCollapsibleVertices();
+    graph.ClassifyCollapsibleVertices();
 
     // 更新边的堆。
-    for (auto iter = m_Graph.GetEdgeMapBegin(), end = m_Graph.GetEdgeMapEnd(); iter != end; ++iter)
+    for (auto iter = graph.GetEdgeMapBegin(); iter != graph.GetEdgeMapEnd(); ++iter)
     {
-        RENDERING_ASSERTION_2(m_Graph.IsUniqueIndexValid(iter->second.GetMinHeapRecordIndex()), "意外情况。\n");
-        m_Graph.UpdateEdgeHeap(iter->second.GetMinHeapRecordIndex(), ComputeMetric(iter->first));
+        RENDERING_ASSERTION_2(graph.IsUniqueIndexValid(iter->second.GetMinHeapRecordIndex()), "意外情况。\n");
+        graph.UpdateEdgeHeap(iter->second.GetMinHeapRecordIndex(), ComputeMetric(iter->first));
     }
 
-    while (0 < m_Graph.GetMinHeapElementsNumber())
+    while (0 < graph.GetMinHeapElementsNumber())
     {
-        auto record = m_Graph.GetMinHeapMinimum();
+        const auto record = graph.GetMinHeapMinimum();
         auto ekey = record.GetGenerator();
         auto metric = record.GetValue();
 
@@ -83,14 +76,14 @@ void Rendering::CreateClodMeshImpl::Compute()
             break;
         }
 
-        auto indexThrow = CanCollapse(ekey);
+        const auto indexThrow = CanCollapse(ekey);
         if (0 <= indexThrow)
         {
             Collapse(ekey, indexThrow);
         }
         else
         {
-            m_Graph.UpdateEdgeHeapToMaxReal(ekey);
+            graph.UpdateEdgeHeapToMaxReal(ekey);
         }
     }
 
@@ -107,16 +100,27 @@ void Rendering::CreateClodMeshImpl::Compute()
 // private
 void Rendering::CreateClodMeshImpl::CreateVertexEdgeTriangleGraph()
 {
-    auto currentIndex = m_ClodMeshTriangleMesh.GetIndexBufferReadOnlyData();
+    auto currentIndex = clodMeshTriangleMesh.GetIndexBufferReadOnlyData();
 
-    for (auto trianglesIndex = 0; trianglesIndex < m_ClodMeshTriangleMesh.GetNumTriangles(); ++trianglesIndex)
+    if (currentIndex == nullptr)
     {
-        auto first = *currentIndex++;
-        auto second = *currentIndex++;
-        auto third = *currentIndex++;
-        TriangleKey triangleKey{ first, second, third };
+        return;
+    }
 
-        m_Graph.InsertTriangle(triangleKey, trianglesIndex);
+    for (auto trianglesIndex = 0; trianglesIndex < clodMeshTriangleMesh.GetNumTriangles(); ++trianglesIndex)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        const auto first = *currentIndex++;
+        const auto second = *currentIndex++;
+        const auto third = *currentIndex++;
+
+#include STSTEM_WARNING_POP
+
+        const TriangleKey triangleKey{ first, second, third };
+
+        graph.InsertTriangle(triangleKey, trianglesIndex);
     }
 }
 
@@ -127,23 +131,23 @@ float Rendering::CreateClodMeshImpl::ComputeMetric(const EdgeKey& edgeKey)
     constexpr auto angleWeight = 1.0f;
 
     // 计算的边缘指标。只有多种的边缘（正好两个三角形共享边）被允许崩塌。
-    const auto& edge = m_Graph.GetClodMeshEdge(edgeKey);
+    const auto& edge = graph.GetClodMeshEdge(edgeKey);
     if (edge.GetTriangleKeySize() == 2)
     {
         // 长度的贡献。
-        auto end0 = m_ClodMeshTriangleMesh.GetPosition(edgeKey.GetKey(0));
-        auto end1 = m_ClodMeshTriangleMesh.GetPosition(edgeKey.GetKey(1));
+        const auto end0 = clodMeshTriangleMesh.GetPosition(edgeKey.GetKey(0));
+        const auto end1 = clodMeshTriangleMesh.GetPosition(edgeKey.GetKey(1));
         auto difference = end1 - end0;
-        float metric = lengthWeight * Mathematics::Vector3ToolsF::GetLength(difference);
+        auto metric = lengthWeight * Mathematics::Vector3ToolsF::GetLength(difference);
 
         // 角度/区域的贡献。
         auto triangleKey = edge.GetBeginTriangleKey();
-        auto beginNormal = GetNormal(triangleKey);
+        const auto beginNormal = GetNormal(triangleKey);
 
         triangleKey = edge.GetEndTriangleKey();
-        auto endNormal = GetNormal(triangleKey);
+        const auto endNormal = GetNormal(triangleKey);
 
-        auto cross = Mathematics::Vector3ToolsF::CrossProduct(beginNormal, endNormal);
+        const auto cross = Mathematics::Vector3ToolsF::CrossProduct(beginNormal, endNormal);
         metric += angleWeight * Mathematics::Vector3ToolsF::GetLength(cross);
 
         return metric;
@@ -153,11 +157,11 @@ float Rendering::CreateClodMeshImpl::ComputeMetric(const EdgeKey& edgeKey)
     return Mathematics::MathF::maxReal;
 }
 
-const Mathematics::Vector3F Rendering::CreateClodMeshImpl::GetNormal(const TriangleKey& triangleKey)
+Mathematics::Vector3F Rendering::CreateClodMeshImpl::GetNormal(const TriangleKey& triangleKey)
 {
-    auto position0 = m_ClodMeshTriangleMesh.GetPosition(triangleKey.GetKey(0));
-    auto position1 = m_ClodMeshTriangleMesh.GetPosition(triangleKey.GetKey(1));
-    auto position2 = m_ClodMeshTriangleMesh.GetPosition(triangleKey.GetKey(2));
+    const auto position0 = clodMeshTriangleMesh.GetPosition(triangleKey.GetKey(0));
+    const auto position1 = clodMeshTriangleMesh.GetPosition(triangleKey.GetKey(1));
+    const auto position2 = clodMeshTriangleMesh.GetPosition(triangleKey.GetKey(2));
     auto edgeDirection0 = position1 - position0;
     auto edgeDirection1 = position2 - position0;
 
@@ -166,8 +170,8 @@ const Mathematics::Vector3F Rendering::CreateClodMeshImpl::GetNormal(const Trian
 
 int Rendering::CreateClodMeshImpl::CanCollapse(const EdgeKey& edgeKey)
 {
-    const auto& vertex0 = m_Graph.GetClodMeshVertex(edgeKey.GetKey(0));
-    const auto& vertex1 = m_Graph.GetClodMeshVertex(edgeKey.GetKey(1));
+    const auto& vertex0 = graph.GetClodMeshVertex(edgeKey.GetKey(0));
+    const auto& vertex1 = graph.GetClodMeshVertex(edgeKey.GetKey(1));
 
     // 测试是否可崩塌
     auto indexKeep = 0;
@@ -188,31 +192,31 @@ int Rendering::CreateClodMeshImpl::CanCollapse(const EdgeKey& edgeKey)
     }
 
     // 如果它导致网状“折叠”崩塌不能被允许的。
-    auto vKeep = edgeKey.GetKey(indexKeep);
-    auto vThrow = edgeKey.GetKey(indexThrow);
-    const auto& vertexThrow = m_Graph.GetClodMeshVertex(vThrow);
-    auto positionKeep = m_ClodMeshTriangleMesh.GetPosition(vKeep);
-    auto positionThrow = m_ClodMeshTriangleMesh.GetPosition(vThrow);
+    const auto vKeep = edgeKey.GetKey(indexKeep);
+    const auto vThrow = edgeKey.GetKey(indexThrow);
+    const auto& vertexThrow = graph.GetClodMeshVertex(vThrow);
+    const auto positionKeep = clodMeshTriangleMesh.GetPosition(vKeep);
+    const auto positionThrow = clodMeshTriangleMesh.GetPosition(vThrow);
 
-    for (auto iter = vertexThrow.GetTriangleKeyBegin(), end = vertexThrow.GetTriangleKeyEnd(); iter != end; ++iter)
+    for (auto iter = vertexThrow.GetTriangleKeyBegin(); iter != vertexThrow.GetTriangleKeyEnd(); ++iter)
     {
         const auto& trianglKey = *iter;
 
         // 计算为（使用CCW逆时针顺序）由三角形的顶点确定的平面的法线向量。
-        auto middleIndex = trianglKey.GetKeyIndex(vThrow);
-        auto minusIndex = (middleIndex + 2) % 3;
-        auto plusIndex = (middleIndex + 1) % 3;
-        auto positionMinus = m_ClodMeshTriangleMesh.GetPosition(trianglKey.GetKey(minusIndex));
-        auto positionPlus = m_ClodMeshTriangleMesh.GetPosition(trianglKey.GetKey(plusIndex));
+        const auto middleIndex = trianglKey.GetKeyIndex(vThrow);
+        const auto minusIndex = (middleIndex + 2) % 3;
+        const auto plusIndex = (middleIndex + 1) % 3;
+        const auto positionMinus = clodMeshTriangleMesh.GetPosition(trianglKey.GetKey(minusIndex));
+        const auto positionPlus = clodMeshTriangleMesh.GetPosition(trianglKey.GetKey(plusIndex));
         auto dirPlus = positionPlus - positionThrow;
         auto dirMinus = positionMinus - positionThrow;
-        auto normalThrow = Mathematics::Vector3ToolsF::CrossProduct(dirPlus, dirMinus);
+        const auto normalThrow = Mathematics::Vector3ToolsF::CrossProduct(dirPlus, dirMinus);
 
         // 现在由keep位置代替throw位置
         // 并计算由三角形的顶点确定的平面的法线向量（使用CCW顺序）。
         dirPlus = positionPlus - positionKeep;
         dirMinus = positionMinus - positionKeep;
-        auto normalKeep = Mathematics::Vector3ToolsF::CrossProduct(dirPlus, dirMinus);
+        const auto normalKeep = Mathematics::Vector3ToolsF::CrossProduct(dirPlus, dirMinus);
 
         // 当两个法线之间的角度是大于90度时崩塌是不允许的。
         if (Mathematics::Vector3ToolsF::DotProduct(normalThrow, normalKeep) < 0.0f)
@@ -227,9 +231,9 @@ int Rendering::CreateClodMeshImpl::CanCollapse(const EdgeKey& edgeKey)
 void Rendering::CreateClodMeshImpl::Collapse(const EdgeKey& edgeKey, int indexThrow)
 {
     // 得到的边的端点被崩塌。
-    auto vKeep = edgeKey.GetKey(1 - indexThrow);
-    auto vThrow = edgeKey.GetKey(indexThrow);
-    auto vertexThrow = m_Graph.GetClodMeshVertex(vThrow);
+    const auto vKeep = edgeKey.GetKey(1 - indexThrow);
+    const auto vThrow = edgeKey.GetKey(indexThrow);
+    auto vertexThrow = graph.GetClodMeshVertex(vThrow);
     ClodMeshCollapseInfo collapse{ vKeep, vThrow };
 
     // 删除所有三角形共享throw顶点。
@@ -237,20 +241,20 @@ void Rendering::CreateClodMeshImpl::Collapse(const EdgeKey& edgeKey, int indexTh
     // 相对的边被保存，保存的顶点顺序。
     // 这个信息可以更容易地确定，当新的三角形被插入图形堆，边必须被更新。
     using Tuple = CoreTools::Tuple<3, int>;
-    set<Tuple> keepInfo;
+    set<Tuple> keepInfo{};
 
-    for (auto iter = vertexThrow.GetTriangleKeyBegin(), end = vertexThrow.GetTriangleKeyEnd(); iter != end; ++iter)
+    for (auto iter = vertexThrow.GetTriangleKeyBegin(); iter != vertexThrow.GetTriangleKeyEnd(); ++iter)
     {
         const auto& triangleKey = *iter;
 
-        auto keyIndex = triangleKey.GetKeyIndex(vThrow);
+        const auto keyIndex = triangleKey.GetKeyIndex(vThrow);
 
         RENDERING_ASSERTION_2(keyIndex < 3, "意外情况。\n");
 
-        CoreTools::Tuple<3, int> tuple;
+        CoreTools::Tuple<3, int> tuple{};
         tuple[0] = triangleKey.GetKey((keyIndex + 1) % 3);
         tuple[1] = triangleKey.GetKey((keyIndex + 2) % 3);
-        tuple[2] = m_Graph.GetTriangle(triangleKey);
+        tuple[2] = graph.GetTriangle(triangleKey);
 
         if (tuple[0] != vKeep && tuple[1] != vKeep)
         {
@@ -266,11 +270,11 @@ void Rendering::CreateClodMeshImpl::Collapse(const EdgeKey& edgeKey, int indexTh
             {
                 RENDERING_ASSERTION_2(collapse.GetTThrow1() == -1, "意外情况。\n");
                 collapse.SetTThrow1(tuple[2]);
-                m_Collapses.push_back(collapse);
+                collapses.emplace_back(collapse);
             }
         }
 
-        m_Graph.RemoveTriangle(triangleKey);
+        graph.RemoveTriangle(triangleKey);
     }
 
     // 将共享keep顶点插入新的三角形。保存需要在堆要更新的边。
@@ -283,132 +287,168 @@ void Rendering::CreateClodMeshImpl::Collapse(const EdgeKey& edgeKey, int indexTh
         auto v1 = tuple[0];
         auto v2 = tuple[1];
         auto triangle = tuple[2];
-        m_Graph.InsertTriangle(TriangleKey(v0, v1, v2), triangle);
-        needUpdate.insert(EdgeKey(v0, v1));
-        needUpdate.insert(EdgeKey(v1, v2));
-        needUpdate.insert(EdgeKey(v2, v0));
+        graph.InsertTriangle(TriangleKey{ v0, v1, v2 }, triangle);
+        needUpdate.emplace(v0, v1);
+        needUpdate.emplace(v1, v2);
+        needUpdate.emplace(v2, v0);
     }
 
     // 更新崩塌边的那些堆。
     for (const auto& updateKey : needUpdate)
     {
-        const auto& clodMeshEdge = m_Graph.GetClodMeshEdge(updateKey);
+        const auto& clodMeshEdge = graph.GetClodMeshEdge(updateKey);
 
-        RENDERING_ASSERTION_2(m_Graph.IsUniqueIndexValid(clodMeshEdge.GetMinHeapRecordIndex()), "意外情况。\n");
+        RENDERING_ASSERTION_2(graph.IsUniqueIndexValid(clodMeshEdge.GetMinHeapRecordIndex()), "意外情况。\n");
 
-        m_Graph.UpdateEdgeHeap(clodMeshEdge.GetMinHeapRecordIndex(), ComputeMetric(updateKey));
+        graph.UpdateEdgeHeap(clodMeshEdge.GetMinHeapRecordIndex(), ComputeMetric(updateKey));
     }
 }
 
 bool Rendering::CreateClodMeshImpl::ValidResults()
 {
-    return m_Graph.ValidResults(m_ClodMeshTriangleMesh.GetNumTriangles(), m_ClodMeshTriangleMesh.GetNumVertices(), static_cast<int>(m_Collapses.size()));
+    return graph.ValidResults(clodMeshTriangleMesh.GetNumTriangles(), clodMeshTriangleMesh.GetNumVertices(), boost::numeric_cast<int>(collapses.size()));
 }
 
 void Rendering::CreateClodMeshImpl::ReorderBuffers()
 {
     // 构建老顶点顺序和新的顶点顺序之间的映射。
-    std::vector<int> vertexNewToOld(m_ClodMeshTriangleMesh.GetNumVertices());
-    std::vector<int> vertexOldToNew(m_ClodMeshTriangleMesh.GetNumVertices());
-    int vertexNew = m_ClodMeshTriangleMesh.GetNumVertices() - 1;
+    std::vector<int> vertexNewToOld(clodMeshTriangleMesh.GetNumVertices());
+    std::vector<int> vertexOldToNew(clodMeshTriangleMesh.GetNumVertices());
+    auto vertexNew = clodMeshTriangleMesh.GetNumVertices() - 1;
 
-    for (const auto& collapse : m_Collapses)
+    for (const auto& collapse : collapses)
     {
         int vertexOld = collapse.GetVThrow();
-        vertexNewToOld[vertexNew] = vertexOld;
-        vertexOldToNew[vertexOld] = vertexNew--;
+        vertexNewToOld.at(vertexNew) = vertexOld;
+        vertexOldToNew.at(vertexOld) = vertexNew--;
     }
 
-    for (auto iter = m_Graph.GetVerticesRemainingBegin(), end = m_Graph.GetVerticesRemainingEnd(); iter != end; ++iter)
+    for (auto iter = graph.GetVerticesRemainingBegin(); iter != graph.GetVerticesRemainingEnd(); ++iter)
     {
-        int vertexOld = *iter;
-        vertexNewToOld[vertexNew] = vertexOld;
-        vertexOldToNew[vertexOld] = vertexNew--;
+        auto vertexOld = *iter;
+        vertexNewToOld.at(vertexNew) = vertexOld;
+        vertexOldToNew.at(vertexOld) = vertexNew--;
     }
 
     // 重新排序顶点缓冲区。
-    auto oldData = m_ClodMeshTriangleMesh.GetVertexBufferReadOnlyData();
-    auto stride = m_ClodMeshTriangleMesh.GetStride();
-    vector<char> newData(m_ClodMeshTriangleMesh.GetNumVertices() * stride);
+    auto oldData = clodMeshTriangleMesh.GetVertexBufferReadOnlyData();
+    const auto stride = clodMeshTriangleMesh.GetStride();
+    const auto newDataSize = clodMeshTriangleMesh.GetNumVertices() * stride;
+    vector<char> newData(newDataSize);
 
-    for (auto vertexIndex = 0; vertexIndex < m_ClodMeshTriangleMesh.GetNumVertices(); ++vertexIndex)
+    for (auto vertexIndex = 0; vertexIndex < clodMeshTriangleMesh.GetNumVertices(); ++vertexIndex)
     {
-        auto srcVertex = oldData + stride * vertexNewToOld[vertexIndex];
-        memcpy(&newData[stride * vertexIndex], srcVertex, stride);
+        const auto index = stride * vertexNewToOld.at(vertexIndex);
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        auto srcVertex = oldData + index;
+
+#include STSTEM_WARNING_POP
+
+        const auto newDataIndex = stride * vertexIndex;
+        System::MemoryCopy(&newData.at(newDataIndex), srcVertex, stride);
     }
-    m_ClodMeshTriangleMesh.SetNewVertexBufferData(newData);
+    clodMeshTriangleMesh.SetNewVertexBufferData(newData);
 
     // 构建三角形旧顺序和新的三角形顺序的对应关系。
-    vector<int> triangleNewToOld(m_ClodMeshTriangleMesh.GetNumTriangles());
-    auto trianglesNew = m_ClodMeshTriangleMesh.GetNumTriangles() - 1;
+    vector<int> triangleNewToOld(clodMeshTriangleMesh.GetNumTriangles());
+    auto trianglesNew = clodMeshTriangleMesh.GetNumTriangles() - 1;
 
-    for (const auto& collapse : m_Collapses)
+    for (const auto& collapse : collapses)
     {
         auto triangleOld = collapse.GetTThrow0();
-        triangleNewToOld[trianglesNew--] = triangleOld;
+        triangleNewToOld.at(trianglesNew--) = triangleOld;
         triangleOld = collapse.GetTThrow1();
-        triangleNewToOld[trianglesNew--] = triangleOld;
+        triangleNewToOld.at(trianglesNew--) = triangleOld;
     }
 
-    for (auto iter = m_Graph.GetTrianglesRemainingBegin(), end = m_Graph.GetTrianglesRemainingEnd(); iter != end; ++iter)
+    for (auto iter = graph.GetTrianglesRemainingBegin(); iter != graph.GetTrianglesRemainingEnd(); ++iter)
     {
         auto triangleOld = *iter;
-        triangleNewToOld[trianglesNew--] = triangleOld;
+        triangleNewToOld.at(trianglesNew--) = triangleOld;
     }
 
     // 重新排序索引缓冲区。
-    vector<char> newIndices(m_ClodMeshTriangleMesh.GetNumIndices() * sizeof(int));
-    auto trgIndices = reinterpret_cast<int*>(&newIndices[0]);
-    for (auto trianglesIndex = 0; trianglesIndex < m_ClodMeshTriangleMesh.GetNumTriangles(); ++trianglesIndex)
+    vector<char> newIndices(clodMeshTriangleMesh.GetNumIndices() * sizeof(int));
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    auto trgIndices = reinterpret_cast<int*>(newIndices.data());
+
+#include STSTEM_WARNING_POP
+
+    for (auto trianglesIndex = 0; trianglesIndex < clodMeshTriangleMesh.GetNumTriangles(); ++trianglesIndex)
     {
-        auto triangleOld = triangleNewToOld[trianglesIndex];
-        auto srcIndices = m_ClodMeshTriangleMesh.GetIndexBufferReadOnlyData() + 3 * triangleOld;
+        auto triangleOld = triangleNewToOld.at(trianglesIndex);
+        const auto next = 3 * triangleOld;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        auto srcIndices = clodMeshTriangleMesh.GetIndexBufferReadOnlyData() + next;
         for (auto j = 0; j < 3; ++j)
         {
             *trgIndices++ = *srcIndices++;
         }
+
+#include STSTEM_WARNING_POP
     }
 
     // 映射旧索引到新索引。
-    auto newIndicesPtr = reinterpret_cast<int*>(&newIndices[0]);
-    for (auto i = 0; i < m_ClodMeshTriangleMesh.GetNumIndices(); ++i)
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    auto newIndicesPtr = reinterpret_cast<int*>(newIndices.data());
+
+#include STSTEM_WARNING_POP
+
+    for (auto i = 0; i < clodMeshTriangleMesh.GetNumIndices(); ++i)
     {
-        newIndicesPtr[i] = vertexOldToNew[newIndicesPtr[i]];
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+        newIndicesPtr[i] = vertexOldToNew.at(newIndicesPtr[i]);
+
+#include STSTEM_WARNING_POP
     }
 
-    m_ClodMeshTriangleMesh.SetNewIndexBufferData(newIndices);
+    clodMeshTriangleMesh.SetNewIndexBufferData(newIndices);
 
     // 映射keep和throw顶点
-    for (auto& collapse : m_Collapses)
+    for (auto& collapse : collapses)
     {
-        collapse.SetVKeep(vertexOldToNew[collapse.GetVKeep()]);
-        collapse.SetVThrow(vertexOldToNew[collapse.GetVThrow()]);
+        collapse.SetVKeep(vertexOldToNew.at(collapse.GetVKeep()));
+        collapse.SetVThrow(vertexOldToNew.at(collapse.GetVThrow()));
     }
 }
 
 void Rendering::CreateClodMeshImpl::ComputeRecords()
 {
-    if (m_Collapses.size() == 0)
+    if (collapses.size() == 0)
         return;
 
-    auto numRecords = boost::numeric_cast<int>(m_Collapses.size() + 1);
-    m_CollapseRecord.resize(numRecords);
+    auto numRecords = boost::numeric_cast<int>(collapses.size() + 1);
+    collapseRecord.resize(numRecords, CollapseRecord{ -1 });
 
     // 最初的记录存储只有顶点和三角形的初步值。
-    m_CollapseRecord[0].SetNumVertices(m_ClodMeshTriangleMesh.GetNumVertices());
-    m_CollapseRecord[0].SetNumTriangles(m_ClodMeshTriangleMesh.GetNumTriangles());
+    collapseRecord.at(0).SetNumVertices(clodMeshTriangleMesh.GetNumVertices());
+    collapseRecord.at(0).SetNumTriangles(clodMeshTriangleMesh.GetNumTriangles());
 
     // 在索引缓冲区，因为我们处理每一个崩塌记录替换throw顶点。
-    vector<int> indices(m_ClodMeshTriangleMesh.GetNumIndices());
-    memcpy(&indices[0], m_ClodMeshTriangleMesh.GetIndexBufferReadOnlyData(), m_ClodMeshTriangleMesh.GetNumIndices() * sizeof(int));
-    vector<int> verticesThrowIndices(m_ClodMeshTriangleMesh.GetNumIndices());
+    vector<int> indices(clodMeshTriangleMesh.GetNumIndices());
+    System::MemoryCopy(indices.data(), clodMeshTriangleMesh.GetIndexBufferReadOnlyData(), clodMeshTriangleMesh.GetNumIndices() * sizeof(int));
+    vector<int> verticesThrowIndices(clodMeshTriangleMesh.GetNumIndices());
 
     // 进行中的崩塌记录。
-    auto record = &m_CollapseRecord[1];
-    auto numVertices = m_ClodMeshTriangleMesh.GetNumVertices();
-    auto numTriangles = m_ClodMeshTriangleMesh.GetNumTriangles();
+    auto record = &collapseRecord.at(1);
+    auto numVertices = clodMeshTriangleMesh.GetNumVertices();
+    auto numTriangles = clodMeshTriangleMesh.GetNumTriangles();
 
-    for (const auto& collapse : m_Collapses)
+    for (const auto& collapse : collapses)
     {
         record->SetVKeep(collapse.GetVKeep());
         record->SetVThrow(collapse.GetVThrow());
@@ -426,10 +466,10 @@ void Rendering::CreateClodMeshImpl::ComputeRecords()
         auto recordNumIndices = 0;
         for (auto i = 0; i < numIndices; ++i)
         {
-            if (indices[i] == record->GetVThrow())
+            if (indices.at(i) == record->GetVThrow())
             {
-                verticesThrowIndices[recordNumIndices++] = i;
-                indices[i] = record->GetVKeep();
+                verticesThrowIndices.at(recordNumIndices++) = i;
+                indices.at(i) = record->GetVKeep();
             }
         }
 
@@ -437,8 +477,8 @@ void Rendering::CreateClodMeshImpl::ComputeRecords()
         {
             vector<int> indices2(recordNumIndices);
 
-            auto numBytes = recordNumIndices * sizeof(int);
-            memcpy(&indices2[0], &verticesThrowIndices[0], numBytes);
+            const auto numBytes = recordNumIndices * sizeof(int);
+            System::MemoryCopy(indices2.data(), verticesThrowIndices.data(), boost::numeric_cast<uint32_t>(numBytes));
 
             record->SetIndices(indices2);
         }
@@ -447,7 +487,11 @@ void Rendering::CreateClodMeshImpl::ComputeRecords()
             record->ClearIndices();
         }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         ++record;
+
+#include STSTEM_WARNING_POP
     }
 }
-#include STSTEM_WARNING_POP

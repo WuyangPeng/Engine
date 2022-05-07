@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/12 14:48)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,14 +17,9 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 Rendering::SingleShaderProfileDataImpl::SingleShaderProfileDataImpl(int numConstants, int numSamplers)
-    : m_BaseRegister(numConstants), m_TextureUnit(numSamplers), m_Program{}
+    : baseRegisters(numConstants), textureUnits(numSamplers), programs{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -31,99 +29,97 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderProfileDataImpl)
 void Rendering::SingleShaderProfileDataImpl::SetBaseRegister(int index, int baseRegister)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_BaseRegister.size()), "Ë÷Òý´íÎó");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(baseRegisters.size()), "Ë÷Òý´íÎó");
 
-    m_BaseRegister[index] = baseRegister;
+    baseRegisters.at(index) = baseRegister;
 }
 
 void Rendering::SingleShaderProfileDataImpl::SetTextureUnit(int index, int textureUnit)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_TextureUnit.size()), "Ë÷Òý´íÎó");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(textureUnits.size()), "Ë÷Òý´íÎó");
 
-    m_TextureUnit[index] = textureUnit;
+    textureUnits.at(index) = textureUnit;
 }
 
 void Rendering::SingleShaderProfileDataImpl::SetProgram(const string& program)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Program = program;
+    programs = program;
 }
 
 int Rendering::SingleShaderProfileDataImpl::GetBaseRegister(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_BaseRegister.size()), "Ë÷Òý´íÎó");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(baseRegisters.size()), "Ë÷Òý´íÎó");
 
-    return m_BaseRegister[index];
+    return baseRegisters.at(index);
 }
 
 int Rendering::SingleShaderProfileDataImpl::GetTextureUnit(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_TextureUnit.size()), "Ë÷Òý´íÎó");
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(textureUnits.size()), "Ë÷Òý´íÎó");
 
-    return m_TextureUnit[index];
+    return textureUnits.at(index);
 }
 
-const std::string Rendering::SingleShaderProfileDataImpl::GetProgram() const
+std::string Rendering::SingleShaderProfileDataImpl::GetProgram() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Program;
+    return programs;
 }
 
 int Rendering::SingleShaderProfileDataImpl::GetBaseRegisterSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_BaseRegister.size());
+    return boost::numeric_cast<int>(baseRegisters.size());
 }
 
 int Rendering::SingleShaderProfileDataImpl::GetTextureUnitSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_TextureUnit.size());
+    return boost::numeric_cast<int>(textureUnits.size());
 }
 
 void Rendering::SingleShaderProfileDataImpl::ResetData(int numConstants, int numSamplers)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_BaseRegister.resize(numConstants);
-    m_TextureUnit.resize(numSamplers);
+    baseRegisters.resize(numConstants);
+    textureUnits.resize(numSamplers);
 }
 
 void Rendering::SingleShaderProfileDataImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    //	source.Read(m_BaseRegister);
-    //	source.Read(m_TextureUnit);
-    m_Program = source.ReadString();
+    source.ReadContainer(baseRegisters);
+    source.ReadContainer(textureUnits);
+    programs = source.ReadString();
 }
 
 void Rendering::SingleShaderProfileDataImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    target.WriteContainerWithNumber(m_BaseRegister);
-    target.WriteContainerWithNumber(m_TextureUnit);
-    target.Write(m_Program);
+    target.WriteContainerWithNumber(baseRegisters);
+    target.WriteContainerWithNumber(textureUnits);
+    target.Write(programs);
 }
 
 int Rendering::SingleShaderProfileDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_BaseRegister);
+    auto size = CORE_TOOLS_STREAM_SIZE(baseRegisters);
 
-    size += CORE_TOOLS_STREAM_SIZE(m_TextureUnit);
-    size += CORE_TOOLS_STREAM_SIZE(m_Program);
+    size += CORE_TOOLS_STREAM_SIZE(textureUnits);
+    size += CORE_TOOLS_STREAM_SIZE(programs);
 
     return size;
 }
-
-#include STSTEM_WARNING_POP

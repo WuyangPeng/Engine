@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 17:45)
 
 #ifndef RENDERING_TERRAIN_TERRAIN_BASE_H
 #define RENDERING_TERRAIN_TERRAIN_BASE_H
@@ -10,87 +13,79 @@
 #include "Rendering/RenderingDll.h"
 
 #include "TerrainPage.h"
-#include "Rendering/SceneGraph/Node.h"
-#include "Rendering/SceneGraph/Camera.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/Node.h"
 
 namespace Rendering
 {
-	class   TerrainBase : public Node
-	{
-	public:
-		using ClassType = TerrainBase;
-		using ParentType = Node;
+    class TerrainBase : public Node
+    {
+    public:
+        using ClassType = TerrainBase;
+        using ParentType = Node;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TerrainBase);
-		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TerrainBase);
+        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-	public:
-		// Construction and destruction.
-		TerrainBase(const System::String& heightName, VertexFormatSharedPtr vformat, CameraSharedPtr camera );
+    public:
+        TerrainBase(const System::String& heightName, const VertexFormatSharedPtr& vformat, const CameraSharedPtr& camera);
 
-		  ~TerrainBase();
-		  
-		  TerrainBase(const TerrainBase&) = default;
-		   TerrainBase& operator=(const TerrainBase&) = default;
-			TerrainBase(TerrainBase&&) = default;
-		   TerrainBase& operator=(TerrainBase&&) = default;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Member access.
-		 int GetRowQuantity() const noexcept;
-		 int GetColQuantity() const noexcept;
-		 int GetSize() const noexcept;
-		 float GetMinElevation() const noexcept;
-		 float GetMaxElevation() const noexcept;
-		 float GetSpacing() const noexcept;
+        NODISCARD int GetRowQuantity() const noexcept;
+        NODISCARD int GetColQuantity() const noexcept;
+        NODISCARD int GetSize() const noexcept;
+        NODISCARD float GetMinElevation() const noexcept;
+        NODISCARD float GetMaxElevation() const noexcept;
+        NODISCARD float GetSpacing() const noexcept;
 
-		// Page management.
-		 TerrainPageSharedPtr GetPage(int row, int col);
-		 TerrainPageSharedPtr GetCurrentPage(float x, float y) const noexcept;
-		float GetHeight(float x, float y) const;
+        NODISCARD TerrainPageSharedPtr GetPage(int row, int col);
+        NODISCARD TerrainPageSharedPtr GetCurrentPage(float x, float y) const;
+        NODISCARD float GetHeight(float x, float y) const;
 
-		// Estimate a normal vector at (x,y) by using the neighbors (x+dx,y+dy),
-		// where (dx,dy) in {(s,0),(-s,0),(0,s),(0,-s)}.  The value s is the
-		// spacing (returned by GetSpacing()).
-		AVector GetNormal(float x, float y) const;
+        NODISCARD AVector GetNormal(float x, float y) const;
 
-		// Allow a page to be replaced.  The code unstitches the old page, loads
-		// the new page and stitches it, then returns the old page in case the
-		// application wants to cache it for quick reuse.
-		TerrainPageSharedPtr ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
+        NODISCARD TerrainPageSharedPtr ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
 
-		TerrainPageSharedPtr ReplacePage(int row, int col, TerrainPageSharedPtr newPage);
+        NODISCARD TerrainPageSharedPtr ReplacePage(int row, int col, TerrainPageSharedPtr newPage);
 
-		// Update of active set of terrain pages.
-		void OnCameraMotion();
-                ObjectInterfaceSharedPtr CloneObject() const override;
-	protected:
-		void LoadHeader(const System::String& heightName);
+        void OnCameraMotion();
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
-		void LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
+    protected:
+        void LoadHeader(const System::String& heightName);
 
-		// Read mode for the height header file and the terrain page data.
-		int mMode;
+        void LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix);
 
-		// Shared by the pages.
-		VertexFormatSharedPtr mVFormat;
+    private:
+        int mode;
 
-		// Page information.
-		int mNumRows, mNumCols;
-		int mSize;
-		float mMinElevation, mMaxElevation, mSpacing;
-		TerrainPageSharedPtr** mPages;
+        CoreTools::ObjectAssociated<VertexFormat> vFormat;
 
-		// Current page containing the camera.
-		int mCameraRow, mCameraCol;
-		CameraSharedPtr mCamera;
-	};
-	#include STSTEM_WARNING_PUSH
+        int numRows;
+        int numCols;
+        int size;
+        float minElevation;
+        float maxElevation;
+        float spacing;
+        std::vector<std::vector<CoreTools::ObjectAssociated<TerrainPage>>> pages;
+
+        int cameraRow;
+        int cameraCol;
+        CoreTools::ObjectAssociated<Camera> camera;
+    };
+
+#include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(TerrainBase);
-	CORE_TOOLS_SHARED_PTR_DECLARE( TerrainBase);
-		#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_STREAM_REGISTER(TerrainBase);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(TerrainBase);
 }
 
-#endif // RENDERING_TERRAIN_TERRAIN_BASE_H
+#endif  // RENDERING_TERRAIN_TERRAIN_BASE_H

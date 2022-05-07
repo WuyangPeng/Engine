@@ -359,7 +359,7 @@ void Rendering::VertexBuffer::SetPosition(const VertexBufferAccessor& vertexBuff
     }
 }
 
-void Rendering::VertexBuffer::SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor, int index, const Vector2D& textureCoord, int unit)
+void Rendering::VertexBuffer::SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor, int index, const Vector2F& textureCoord, int unit)
 {
     RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");

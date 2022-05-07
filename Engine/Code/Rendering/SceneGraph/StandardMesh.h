@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 14:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/03 16:25)
 
 #ifndef RENDERING_SCENE_GRAPH_STANDARD_MESH_H
 #define RENDERING_SCENE_GRAPH_STANDARD_MESH_H
@@ -15,6 +18,7 @@
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
+
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(StandardMesh, StandardMeshImpl);
 
 namespace Rendering
@@ -40,7 +44,7 @@ namespace Rendering
 
         // 访问网格创造者的转换
         void SetTransform(const TransformF& transform);
-        const TransformF& GetTransform() const noexcept;
+        NODISCARD const TransformF& GetTransform() const noexcept;
 
         // 下面各种对象的注释是当输入“transform”是nullptr(单位transform)。
 
@@ -59,13 +63,13 @@ namespace Rendering
         // 样品放置在沿射线的共同原点中心点。
         // 有“radialSamples”条射线。
         // 沿着每条射线的风格具有“shellSamples'个顶点。
-        const TrianglesMeshSharedPtr Disk(int shellSamples, int radialSamples, float radius) const;
+        NODISCARD TrianglesMeshSharedPtr Disk(int shellSamples, int radialSamples, float radius) const;
 
         // 盒子在中心(0,0,0)，单位长度轴(1,0,0), (0,1,0), 和(0,0,1)
         // 和范围（半长）'xExtent', 'yExtent', 和 'zExtent'。
         // 网格具有8个顶点和12个三角形。
         // 例子，盒子角在第一个八分区是(xExtent, yExtent, zExtent)。
-        const TrianglesMeshSharedPtr Box(float xExtent, float yExtent, float zExtent) const;
+        NODISCARD TrianglesMeshSharedPtr Box(float xExtent, float yExtent, float zExtent) const;
 
         // 圆柱有中心(0,0,0)，指定的半径，指定的高度。
         // 圆柱的轴是一条线段(0,0,0)+ t * (0,0,1)，其中|t| <= height/2。
@@ -75,28 +79,28 @@ namespace Rendering
         // 每个底盘是一个规则的正多边形，完全嵌合在包括一个中心为顶点的多边形,
         // 多边形分解为三角形,所有三角形共享中心顶点
         // 和每个三角形包含一个多边形的边。
-        const TrianglesMeshSharedPtr CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
-        const TrianglesMeshSharedPtr CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
+        NODISCARD TrianglesMeshSharedPtr CylinderOmittedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
+        NODISCARD TrianglesMeshSharedPtr CylinderIncludedEndDisks(int axisSamples, int radialSamples, float radius, float height) const;
 
         // 球体在中心点 (0,0,0) 和指定半径。
         // 北极在(0,0,radius)和南极在(0,0,-radius)。
         // 网格的拓扑结构是一个开放的圆柱
         // (也是一个矩形的拓扑与全方位的一对平行边),然后缝合到南北两极。
         // 三角形分布不均。如果你想要一个更均匀分布,创建一个二十面体和细分它。
-        const TrianglesMeshSharedPtr Sphere(int zSamples, int radialSamples, float radius) const;
+        NODISCARD TrianglesMeshSharedPtr Sphere(int zSamples, int radialSamples, float radius) const;
 
         // 圆环面有中心点(0,0,0)。
         // 如果你观察环沿线的方向(0,0,1),您将看到一个环。
         // 圆的中心环半径为“outerRadius”。
         // 这个圆的距离的边界环是内半径。
-        const TrianglesMeshSharedPtr Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const;
+        NODISCARD TrianglesMeshSharedPtr Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const;
 
         // 柏拉图立方体，所有内切在一个单位圆，中心在(0,0,0)。
-        const TrianglesMeshSharedPtr Tetrahedron() const;
-        const TrianglesMeshSharedPtr Hexahedron() const;
-        const TrianglesMeshSharedPtr Octahedron() const;
-        const TrianglesMeshSharedPtr Dodecahedron() const;
-        const TrianglesMeshSharedPtr Icosahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Tetrahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Hexahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Octahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Dodecahedron() const;
+        NODISCARD TrianglesMeshSharedPtr Icosahedron() const;
 
     private:
         PackageType impl;

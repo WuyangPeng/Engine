@@ -1,179 +1,181 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 15:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 13:44)
 
 #include "Rendering/RenderingExport.h"
 
 #include "AlphaStateImpl.h"
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::AlphaStateImpl::AlphaStateImpl()
-    : m_BlendEnabled{ false }, m_SourceBlend{ AlphaStateFlags::SourceBlendMode::SourceAlpha },
-      m_DestinationBlend{ AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha }, m_CompareEnabled{ false },
-      m_Compare{ AlphaStateFlags::CompareMode::Always }, m_Reference{ 0.0f }, m_ConstantColor{ 0.0f, 0.0f, 0.0f, 0.0f }
+
+Rendering::AlphaStateImpl::AlphaStateImpl() noexcept
+    : blendEnabled{ false },
+      sourceBlend{ AlphaStateFlags::SourceBlendMode::SourceAlpha },
+      destinationBlend{ AlphaStateFlags::DestinationBlendMode::OneMinusSourceAlpha },
+      compareEnabled{ false },
+      compare{ AlphaStateFlags::CompareMode::Always },
+      reference{ 0.0f },
+      constantColor{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Rendering::AlphaStateImpl::IsValid() const noexcept
 {
-    if (0.0f <= m_Reference && m_Reference <= 1.0f)
+    if (0.0f <= reference && reference <= 1.0f)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-bool Rendering::AlphaStateImpl::IsBlendEnabled() const
+bool Rendering::AlphaStateImpl::IsBlendEnabled() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_BlendEnabled;
+    return blendEnabled;
 }
 
-void Rendering::AlphaStateImpl::SetBlendEnabled(bool blendEnabled)
+void Rendering::AlphaStateImpl::SetBlendEnabled(bool aBlendEnabled) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_BlendEnabled = blendEnabled;
+    blendEnabled = aBlendEnabled;
 }
 
-Rendering::AlphaStateFlags::SourceBlendMode Rendering::AlphaStateImpl::GetSourceBlend() const
+Rendering::AlphaStateFlags::SourceBlendMode Rendering::AlphaStateImpl::GetSourceBlend() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_SourceBlend;
+    return sourceBlend;
 }
 
-void Rendering::AlphaStateImpl::SetSourceBlend(AlphaStateFlags::SourceBlendMode mode)
+void Rendering::AlphaStateImpl::SetSourceBlend(AlphaStateFlags::SourceBlendMode mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_SourceBlend = mode;
+    sourceBlend = mode;
 }
 
-Rendering::AlphaStateFlags::DestinationBlendMode Rendering::AlphaStateImpl::GetDestinationBlend() const
+Rendering::AlphaStateFlags::DestinationBlendMode Rendering::AlphaStateImpl::GetDestinationBlend() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_DestinationBlend;
+    return destinationBlend;
 }
 
-void Rendering::AlphaStateImpl::SetDestinationBlend(AlphaStateFlags::DestinationBlendMode mode)
+void Rendering::AlphaStateImpl::SetDestinationBlend(AlphaStateFlags::DestinationBlendMode mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_DestinationBlend = mode;
+    destinationBlend = mode;
 }
 
-bool Rendering::AlphaStateImpl::IsCompareEnabled() const
+bool Rendering::AlphaStateImpl::IsCompareEnabled() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_CompareEnabled;
+    return compareEnabled;
 }
 
-void Rendering::AlphaStateImpl::SetCompareEnabled(bool compareEnabled)
+void Rendering::AlphaStateImpl::SetCompareEnabled(bool aCompareEnabled) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_CompareEnabled = compareEnabled;
+    compareEnabled = aCompareEnabled;
 }
 
-Rendering::AlphaStateFlags::CompareMode Rendering::AlphaStateImpl::GetCompare() const
+Rendering::AlphaStateFlags::CompareMode Rendering::AlphaStateImpl::GetCompare() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Compare;
+    return compare;
 }
 
-void Rendering::AlphaStateImpl::SetCompare(AlphaStateFlags::CompareMode mode)
+void Rendering::AlphaStateImpl::SetCompare(AlphaStateFlags::CompareMode mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Compare = mode;
+    compare = mode;
 }
 
-float Rendering::AlphaStateImpl::GetReference() const
+float Rendering::AlphaStateImpl::GetReference() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Reference;
+    return reference;
 }
 
-void Rendering::AlphaStateImpl::SetReference(float reference)
+void Rendering::AlphaStateImpl::SetReference(float aReference) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_Reference = reference;
+    reference = aReference;
 }
 
-const Rendering::AlphaStateImpl::Colour Rendering::AlphaStateImpl::GetConstantColor() const
+Rendering::AlphaStateImpl::Colour Rendering::AlphaStateImpl::GetConstantColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_ConstantColor;
+    return constantColor;
 }
 
-void Rendering::AlphaStateImpl::SetConstantColor(const Colour& color)
+void Rendering::AlphaStateImpl::SetConstantColor(const Colour& color) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_ConstantColor = color;
+    constantColor = color;
 }
 
 void Rendering::AlphaStateImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_BlendEnabled = source.ReadBool();
-    source.ReadEnum(m_SourceBlend);
-    source.ReadEnum(m_DestinationBlend);
-    m_CompareEnabled = source.ReadBool();
-    source.ReadEnum(m_Compare);
-    source.Read(m_Reference);
-    source.ReadAggregate(m_ConstantColor);
+    blendEnabled = source.ReadBool();
+    source.ReadEnum(sourceBlend);
+    source.ReadEnum(destinationBlend);
+    compareEnabled = source.ReadBool();
+    source.ReadEnum(compare);
+    source.Read(reference);
+    source.ReadAggregate(constantColor);
 }
 
 void Rendering::AlphaStateImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.Write(m_BlendEnabled);
-    target.WriteEnum(m_SourceBlend);
-    target.WriteEnum(m_DestinationBlend);
-    target.Write(m_CompareEnabled);
-    target.WriteEnum(m_Compare);
-    target.Write(m_Reference);
-    target.WriteAggregate(m_ConstantColor);
+    target.Write(blendEnabled);
+    target.WriteEnum(sourceBlend);
+    target.WriteEnum(destinationBlend);
+    target.Write(compareEnabled);
+    target.WriteEnum(compare);
+    target.Write(reference);
+    target.WriteAggregate(constantColor);
 }
 
-int Rendering::AlphaStateImpl::GetStreamingSize() const
+int Rendering::AlphaStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_BlendEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(m_SourceBlend);
-    size += CORE_TOOLS_STREAM_SIZE(m_DestinationBlend);
-    size += CORE_TOOLS_STREAM_SIZE(m_CompareEnabled);
-    size += CORE_TOOLS_STREAM_SIZE(m_Compare);
-    size += CORE_TOOLS_STREAM_SIZE(m_Reference);
-    size += RENDERING_STREAM_SIZE(m_ConstantColor);
+    auto size = CORE_TOOLS_STREAM_SIZE(blendEnabled);
+    size += CORE_TOOLS_STREAM_SIZE(sourceBlend);
+    size += CORE_TOOLS_STREAM_SIZE(destinationBlend);
+    size += CORE_TOOLS_STREAM_SIZE(compareEnabled);
+    size += CORE_TOOLS_STREAM_SIZE(compare);
+    size += CORE_TOOLS_STREAM_SIZE(reference);
+    size += RENDERING_STREAM_SIZE(constantColor);
 
     return size;
 }
@@ -182,19 +184,14 @@ void Rendering::AlphaStateImpl::SaveState(WriteFileManager& manager) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto blendEnabled = (m_BlendEnabled ? 1 : 0);
-    const auto srcBlend = System::EnumCastUnderlying(m_SourceBlend);
-    const auto dstBlend = System::EnumCastUnderlying(m_DestinationBlend);
-    const auto compareEnabled = (m_CompareEnabled ? 1 : 0);
-    const auto compare = System::EnumCastUnderlying(m_Compare);
-    const auto reference = m_Reference;
-    const auto constantColor = m_ConstantColor;
+    const auto writeBlendEnabled = (blendEnabled ? 1 : 0);
+    const auto wirteCompareEnabled = (compareEnabled ? 1 : 0);
 
-    manager.Write(sizeof(int), &blendEnabled);
-    manager.Write(sizeof(int), &srcBlend);
-    manager.Write(sizeof(int), &dstBlend);
-    manager.Write(sizeof(int), &compareEnabled);
-    manager.Write(sizeof(int), &compare);
+    manager.Write(sizeof(int32_t), &writeBlendEnabled);
+    manager.Write(sizeof(SourceBlendMode), &sourceBlend);
+    manager.Write(sizeof(DestinationBlendMode), &destinationBlend);
+    manager.Write(sizeof(int32_t), &wirteCompareEnabled);
+    manager.Write(sizeof(CompareMode), &compare);
     manager.Write(sizeof(float), &reference);
     manager.Write(sizeof(float), 4, constantColor.GetPoint().data());
 }
@@ -203,28 +200,19 @@ void Rendering::AlphaStateImpl::LoadState(ReadFileManager& manager)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    int blendEnabled{ 0 };
-    int srcBlend{ 0 };
-    int dstBlend{ 0 };
-    int compareEnabled{ 0 };
-    int compare{ 0 };
-    float reference{ 0.0f };
-    float constantColor[4]{ 0.0f, 0.0f, 0.0f, 0.0f };
-    manager.Read(sizeof(int), &blendEnabled);
-    manager.Read(sizeof(int), &srcBlend);
-    manager.Read(sizeof(int), &dstBlend);
-    manager.Read(sizeof(int), &compareEnabled);
-    manager.Read(sizeof(int), &compare);
+    int32_t readBlendEnabled{ 0 };
+    int32_t readCompareEnabled{ 0 };
+    std::array<float, 4> color{};
+
+    manager.Read(sizeof(int32_t), &readBlendEnabled);
+    manager.Read(sizeof(SourceBlendMode), &sourceBlend);
+    manager.Read(sizeof(DestinationBlendMode), &destinationBlend);
+    manager.Read(sizeof(int32_t), &readCompareEnabled);
+    manager.Read(sizeof(CompareMode), &compare);
     manager.Read(sizeof(float), &reference);
-    manager.Read(sizeof(float), 4, constantColor);
+    manager.Read(sizeof(float), 4, color.data());
 
-    m_BlendEnabled = (blendEnabled == 1) ? true : false;
-    m_SourceBlend = SourceBlendMode(srcBlend);
-    m_DestinationBlend = DestinationBlendMode(dstBlend);
-    m_CompareEnabled = (compareEnabled == 1) ? true : false;
-    m_Compare = CompareMode(compare);
-    m_Reference = reference;
-    m_ConstantColor.SetColour(constantColor[0], constantColor[1], constantColor[2], constantColor[3]);
+    blendEnabled = (readBlendEnabled == 1) ? true : false;
+    compareEnabled = (readCompareEnabled == 1) ? true : false;
+    constantColor.SetColour(color.at(0), color.at(1), color.at(2), color.at(3));
 }
-
-#include STSTEM_WARNING_POP

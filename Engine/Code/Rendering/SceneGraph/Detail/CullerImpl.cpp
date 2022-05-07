@@ -20,7 +20,7 @@ Rendering::CullerImpl::CullerImpl(const ConstCameraSharedPtr& camera)
       planeQuantity{ System::EnumCastUnderlying(ViewFrustum::Quantity) },
       plane{},
       planeState{ 0 },
-      visibleSet{}
+      visibleSet{ VisibleSet::Create() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

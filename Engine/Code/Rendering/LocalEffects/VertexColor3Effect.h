@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 09:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 10:44)
 
 #ifndef RENDERING_LOCAL_EFFECTS_VERTEX_COLOR3_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_VERTEX_COLOR3_EFFECT_H
@@ -23,29 +26,23 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VertexColor3Effect);
 
     public:
-        // Construction and destruction.
-        VertexColor3Effect();
+        explicit VertexColor3Effect(CoreTools::DisableNotThrow disableNotThrow);
 
-        // Create an instance of the effect with unique parameters.
-        VisualEffectInstance* CreateInstance() const noexcept;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // Convenience for creating an instance.  The application does not have to
-        // create the effect explicitly in order to create an instance from it.
-        static VisualEffectInstance* CreateUniqueInstance() noexcept;
+        NODISCARD VisualEffectInstanceSharedPtr CreateInstance();
 
-    private:
-        static int msDx9VRegisters[1];
-        static int msOglVRegisters[1];
-        static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance();
     };
-#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(VertexColor3Effect);
-    CORE_TOOLS_SHARED_PTR_DECLARE(VertexColor3Effect);
+
 #include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(VertexColor3Effect);
 
 }
 

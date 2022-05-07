@@ -1,42 +1,41 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/29 10:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/22 14:40)
 
 #include "Rendering/RenderingExport.h"
 
-#include "RenderTargetManagement.h"
 #include "PlatformRenderTarget.h"
+#include "RenderTargetManagement.h"
 #include "Detail/RenderTargetManagementImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::make_shared;
 
-Rendering::RenderTargetManagement
-	::RenderTargetManagement(RendererPtr ptr)
-    : impl{ ptr }
+Rendering::RenderTargetManagement::RenderTargetManagement(const RendererSharedPtr& renderer)
+    : impl{ renderer }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,RenderTargetManagement)
-	
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,Bind,RenderTargetConstPtr,void)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, RenderTargetManagement)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,Unbind,RenderTargetConstPtr,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Bind, ConstRenderTargetSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,Enable,RenderTargetConstPtr,void) 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,Disable,RenderTargetConstPtr,void) 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,GetResource,RenderTargetConstPtr,
-										  Rendering::RenderTargetManagement::PlatformRenderTargetSharedPtr)
- 
-Rendering::ConstTexture2DSharedPtr  Rendering::RenderTargetManagement
-::ReadColor(int index,RenderTargetConstPtr renderTarget)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Unbind, ConstRenderTargetSharedPtr, void)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Enable, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Disable, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, GetResource, ConstRenderTargetSharedPtr, Rendering::RenderTargetManagement::PlatformRenderTargetSharedPtr)
+
+Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagement::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
 {
-	;
-    
-    return impl->ReadColor(index,renderTarget);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->ReadColor(index, renderTarget);
 }
- 

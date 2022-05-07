@@ -1,29 +1,29 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 13:45)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateDllMain.h"
 #include "Detail/GenerateTemplateDllMainImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistTools::GenerateTemplateDllMain
-	::GenerateTemplateDllMain(const System::String& templateFileName,  const Replace& replace)
-	:impl(templateFileName, replace)
+AssistTools::GenerateTemplateDllMain::GenerateTemplateDllMain(const System::String& templateFileName, const Replace& replace)
+    : impl{ templateFileName, replace }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}  
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateDllMain)
 
-void AssistTools::GenerateTemplateDllMain
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData,  const System::String& solutionName, const System::String& managerName) const
+void AssistTools::GenerateTemplateDllMain::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName);
+    return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName);
 }
- 

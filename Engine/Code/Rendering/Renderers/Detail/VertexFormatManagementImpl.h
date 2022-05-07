@@ -1,58 +1,55 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 14:57)
 
 #ifndef RENDERING_RENDERERS_VERTEX_FORMAT_MANAGEMENT_IMPL_H
 #define RENDERING_RENDERERS_VERTEX_FORMAT_MANAGEMENT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/VertexFormat.h"
+
 #include <map>
 #include <memory>
-#include "../../Resources/VertexFormat.h"
 
 namespace Rendering
 {
-	class VertexFormat;
-	class PlatformVertexFormat;
-	class Renderer;
+    class RENDERING_HIDDEN_DECLARE VertexFormatManagementImpl
+    {
+    public:
+        using ClassType = VertexFormatManagementImpl;
+        using FactoryType = ClassType;
+        using PlatformVertexFormatSharedPtr = std::shared_ptr<PlatformVertexFormat>;
+        using RendererSharedPtr = std::shared_ptr<Renderer>;
 
-	class RENDERING_HIDDEN_DECLARE VertexFormatManagementImpl 
-	{
-	public:
-		using  ClassType = VertexFormatManagementImpl;
-	 using FactoryType = ClassType;
-		using PlatformVertexFormatSharedPtr = std::shared_ptr<PlatformVertexFormat>;
-	    using RendererPtr = std::shared_ptr<Renderer>;
+    public:
+        explicit VertexFormatManagementImpl(const RendererSharedPtr& renderer);
 
-	public:
-		explicit VertexFormatManagementImpl(RendererPtr ptr);
+        CLASS_INVARIANT_DECLARE;
 
-		CLASS_INVARIANT_DECLARE;
-		 
-       // 顶点格式管理。顶点格式对象必须是已经分配，
-       // 它的属性和跨距由应用程序代码进行设置。
-       void Bind (ConstVertexFormatSharedPtr vertexFormat); 
-       void Unbind (ConstVertexFormatSharedPtr vertexFormat);
- 
-       void Enable (ConstVertexFormatSharedPtr vertexFormat);
-       void Disable (ConstVertexFormatSharedPtr vertexFormat);
+        // 顶点格式管理。顶点格式对象必须是已经分配，
+        // 它的属性和跨距由应用程序代码进行设置。
+        void Bind(const ConstVertexFormatSharedPtr& vertexFormat);
+        void Unbind(const ConstVertexFormatSharedPtr& vertexFormat);
 
-       PlatformVertexFormatSharedPtr GetResource (ConstVertexFormatSharedPtr vertexFormat);
+        void Enable(const ConstVertexFormatSharedPtr& vertexFormat);
+        void Disable(const ConstVertexFormatSharedPtr& vertexFormat);
 
-	private:
-       using VertexFormatMap = std::map<ConstVertexFormatSharedPtr, PlatformVertexFormatSharedPtr>;
+        NODISCARD PlatformVertexFormatSharedPtr GetResource(const ConstVertexFormatSharedPtr& vertexFormat);
 
-	private:
-		std::weak_ptr<Renderer> m_Renderer;
-	   VertexFormatMap m_VertexFormats;	 
-	};
+    private:
+        using VertexFormatMap = std::map<ConstVertexFormatSharedPtr, PlatformVertexFormatSharedPtr>;
+
+    private:
+        std::weak_ptr<Renderer> renderer;
+        VertexFormatMap vertexFormats;
+    };
 }
 
-#endif // RENDERING_RENDERERS_VERTEX_FORMAT_MANAGEMENT_IMPL_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_VERTEX_FORMAT_MANAGEMENT_IMPL_H

@@ -1,71 +1,64 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 14:40)
 
 #ifndef RENDERING_SORTING_CONVEX_REGION_H
 #define RENDERING_SORTING_CONVEX_REGION_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "Rendering/SceneGraph/Node.h"
+#include "Rendering/Sorting/SortingFwd.h"
 
 namespace Rendering
 {
-	class Portal;
+    class ConvexRegion : public Node
+    {
+    public:
+        using ClassType = ConvexRegion;
+        using ParentType = Node;
+        using PortalSharedPtr = std::shared_ptr<Portal>;
 
-	class   ConvexRegion : public Node
-	{
-	public:
-		using ClassType = ConvexRegion;
-		using ParentType = Node;
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ConvexRegion);
+        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ConvexRegion);
-		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+    public:
+        ConvexRegion(int numPortals, const std::vector<CoreTools::ObjectAssociated<Portal>>& portals);
 
-	public:
-		// Construction and destruction.  ConvexRegion accepts responsibility
-		// for deleting the input array of Portal*.
-		ConvexRegion(int numPortals, Portal** portals);
-		  ~ConvexRegion();
-		  ConvexRegion(const ConvexRegion&) = default;
-		  ConvexRegion& operator=(const ConvexRegion&) = default;
-		   ConvexRegion( ConvexRegion&&) = default;
-		  ConvexRegion& operator=( ConvexRegion&&) = default;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Portal access.
-		  int GetNumPortals() const noexcept;
-		  Portal* GetPortal(int i) const noexcept;
-                  ObjectInterfaceSharedPtr CloneObject() const override;
-	protected:
-		// Support for the geometric update.
-		  bool UpdateWorldData(double applicationTime) override;
+        NODISCARD int GetNumPortals() const noexcept;
+        NODISCARD PortalSharedPtr GetPortal(int i) const noexcept;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
-		// Portals of the region (these are not set up to be shared).
-		int mNumPortals;
-		Portal** mPortals;
+    protected:
+        NODISCARD bool UpdateWorldData(double applicationTime) override;
 
-		// For region graph traversal.
-		bool mVisited;
+    private:
+        int numPortals;
+        std::vector<CoreTools::ObjectAssociated<Portal>> portals;
 
-	public:
-		// Culling.  ConvexRegionManager starts the region graph traversal
-		// with the region containing the camera position.  Portal continues the
-		// traversal.  Should you decide not to use a convex region manager and
-		// track which region the eyepoint is in using your own system, you will
-		// need to make sure the convex region that contains the camera position
-		// is the first one visited during a depth-first traversal of the scene.
-		  void GetVisibleSet(Culler& culler, bool noCull) override;
-	};
- 
-  #include "System/Helper/PragmaWarning.h" 
+        bool visited;
+
+    public:
+        void GetVisibleSet(Culler& culler, bool noCull) override;
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(ConvexRegion);
-	CORE_TOOLS_SHARED_PTR_DECLARE( ConvexRegion);
+
+    CORE_TOOLS_STREAM_REGISTER(ConvexRegion);
+
 #include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(ConvexRegion);
 }
 
-#endif // RENDERING_SORTING_CONVEX_REGION_H
+#endif  // RENDERING_SORTING_CONVEX_REGION_H

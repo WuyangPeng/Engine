@@ -1,96 +1,84 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/25 16:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 15:26)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Float2ArrayImpl.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::Float2ArrayImpl
-	::Float2ArrayImpl( const Float2Vector& elements )
-	:m_Elements{ elements }
+Rendering::Float2ArrayImpl::Float2ArrayImpl(const Float2Vector& elements)
+    : elements{ elements }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::Float2ArrayImpl
-	::Float2ArrayImpl() noexcept
-	:m_Elements{}
+Rendering::Float2ArrayImpl::Float2ArrayImpl() noexcept
+    : elements{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering, Float2ArrayImpl) 
+CLASS_INVARIANT_STUB_DEFINE(Rendering, Float2ArrayImpl)
 
 void Rendering::Float2ArrayImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	source.ReadAggregateContainer(m_Elements);
+    source.ReadAggregateContainer(elements);
 }
 
-void Rendering::Float2ArrayImpl
-	::Save( CoreTools::BufferTarget& target ) const
+void Rendering::Float2ArrayImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	
-	target.WriteAggregateContainerWithNumber(m_Elements);	
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    target.WriteAggregateContainerWithNumber(elements);
 }
 
-int Rendering::Float2ArrayImpl
-	::GetStreamingSize() const
+int Rendering::Float2ArrayImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	
-	return MATHEMATICS_STREAM_SIZE(m_Elements);
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return MATHEMATICS_STREAM_SIZE(elements);
 }
 
-int Rendering::Float2ArrayImpl
-	::GetNumElements() const
+int Rendering::Float2ArrayImpl::GetNumElements() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_Elements.size());
+    return boost::numeric_cast<int>(elements.size());
 }
 
-const Rendering::Float2ArrayImpl::Float2* Rendering::Float2ArrayImpl
-	::GetData() const noexcept
+const Rendering::Float2ArrayImpl::Float2* Rendering::Float2ArrayImpl::GetData() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return &m_Elements[0];
+    return elements.data();
 }
 
-const Rendering::Float2ArrayImpl::Float2& Rendering::Float2ArrayImpl
-	::operator[]( int index ) const
+const Rendering::Float2ArrayImpl::Float2& Rendering::Float2ArrayImpl::operator[](int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Elements.size()), "无效索引！\n");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(elements.size()), "无效索引！\n");
 
-	return m_Elements[index];
+    return elements.at(index);
 }
 
-Rendering::Float2ArrayImpl::Float2& Rendering::Float2ArrayImpl
-	::operator[]( int index )
+Rendering::Float2ArrayImpl::Float2& Rendering::Float2ArrayImpl::operator[](int index)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	return OPERATOR_SQUARE_BRACKETS(Float2, index);
+    return OPERATOR_SQUARE_BRACKETS(Float2, index);
 }
-
-#include STSTEM_WARNING_POP

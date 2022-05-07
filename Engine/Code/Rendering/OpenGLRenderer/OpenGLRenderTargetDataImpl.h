@@ -1,70 +1,72 @@
-﻿// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:05)
+﻿///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 21:45)
 
 #ifndef RENDERING_RENDERERS_OPENGL_RENDER_TARGET_DATA_IMPL_H
 #define RENDERING_RENDERERS_OPENGL_RENDER_TARGET_DATA_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/Resources/Texture2D.h"
 
-#include <boost/noncopyable.hpp>
+#include <array>
 #include <vector>
 
 namespace Rendering
 {
-	class Renderer;
-	class RenderTarget;
-
-    class RENDERING_HIDDEN_DECLARE OpenGLRenderTargetDataImpl : boost::noncopyable
+    class RENDERING_HIDDEN_DECLARE OpenGLRenderTargetDataImpl
     {
     public:
-		using ClassType = OpenGLRenderTargetDataImpl;
+        using ClassType = OpenGLRenderTargetDataImpl;
         using UInt = System::OpenGLUInt;
         using Enum = System::OpenGLEnum;
 
     public:
-        OpenGLRenderTargetDataImpl (Renderer* renderer,const RenderTarget* renderTarget); 
-		virtual ~OpenGLRenderTargetDataImpl();
-		OpenGLRenderTargetDataImpl(const OpenGLRenderTargetDataImpl&) = default;
-		OpenGLRenderTargetDataImpl& operator=(const OpenGLRenderTargetDataImpl&) = default;
-		OpenGLRenderTargetDataImpl( OpenGLRenderTargetDataImpl&&) = default;
-		OpenGLRenderTargetDataImpl& operator=( OpenGLRenderTargetDataImpl&&) = default;
-        
-		CLASS_INVARIANT_DECLARE;
+        OpenGLRenderTargetDataImpl(Renderer* renderer, const RenderTarget* renderTarget);
+        virtual ~OpenGLRenderTargetDataImpl() noexcept = default;
+        OpenGLRenderTargetDataImpl(const OpenGLRenderTargetDataImpl& rhs) = delete;
+        OpenGLRenderTargetDataImpl& operator=(const OpenGLRenderTargetDataImpl& rhs) = delete;
+        OpenGLRenderTargetDataImpl(OpenGLRenderTargetDataImpl&& rhs) noexcept = delete;
+        OpenGLRenderTargetDataImpl& operator=(OpenGLRenderTargetDataImpl&& rhs) noexcept = delete;
+
+        CLASS_INVARIANT_DECLARE;
 
         // 渲染目标的操作。
-        virtual void Enable (Renderer* renderer) noexcept;
-		virtual void Disable (Renderer* renderer) noexcept;
-        virtual ConstTexture2DSharedPtr ReadColor(int index,Renderer* renderer);
-        
+        virtual void Enable(Renderer* renderer) noexcept;
+        virtual void Disable(Renderer* renderer) noexcept;
+        NODISCARD virtual ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer);
+
     private:
         void CreateFramebufferObject() noexcept;
-        UInt CreateDrawBuffers(Renderer* renderer, const RenderTarget* renderTarget);
-        void CreateDepthStencilTexture(Renderer* renderer,const RenderTarget* renderTarget,UInt previousBind);
-        void CheckFramebufferStatus();
-   
-    private:
-        int m_NumTargets;
-        int m_Width;
-        int m_Height;
-        TextureFormat m_Format;
-        bool m_HasMipmaps;
-        bool m_HasDepthStencil;
+        NODISCARD UInt CreateDrawBuffers(Renderer* renderer, const RenderTarget* aRenderTarget);
+        void CreateDepthStencilTexture(Renderer* renderer, const RenderTarget* aRenderTarget, UInt previousBind);
+        void CheckFramebufferStatus() noexcept;
 
-        std::vector<UInt> m_ColorTextures;
-        UInt m_DepthStencilTexture;
-        UInt m_FrameBuffer;
-        std::vector<Enum> m_DrawBuffers;
-        int m_PrevViewport[4];
-        double m_PrevDepthRange[2];
+    private:
+        int numTargets;
+        int width;
+        int height;
+        TextureFormat format;
+        bool hasMipmaps;
+        bool hasDepthStencil;
+
+        std::vector<UInt> colorTextures;
+        UInt depthStencilTexture;
+        UInt frameBuffer;
+        std::vector<Enum> drawBuffers;
+        std::array<int, 4> prevViewport;
+        std::array<double, 2> prevDepthRange;
     };
 }
 
-#endif // RENDERING_RENDERERS_OPENGL_RENDER_TARGET_DATA_IMPL_H
+#endif  // RENDERING_RENDERERS_OPENGL_RENDER_TARGET_DATA_IMPL_H

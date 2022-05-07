@@ -7,7 +7,7 @@
 #ifndef FRAMEWORK_WINDOW_TESTING_APPLICATION_SUITE_WINDOW_APPLICATION_INFORMATION_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_APPLICATION_SUITE_WINDOW_APPLICATION_INFORMATION_TESTING_H
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 namespace Framework
@@ -17,7 +17,7 @@ namespace Framework
 	public:
 		using ClassType = WindowApplicationInformationTesting;
 		using ParentType = UnitTest;
-		using HInstance = System::WindowHInstance;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowApplicationInformationTesting(const OStreamShared& stream, HInstance instance);

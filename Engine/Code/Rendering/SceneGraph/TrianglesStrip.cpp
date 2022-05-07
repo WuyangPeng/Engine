@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 18:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/03 17:26)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,12 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesStrip);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesStrip);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesStrip);
@@ -55,13 +53,18 @@ int Rendering::TrianglesStrip::GetNumTriangles() const noexcept
     return GetConstIndexBuffer()->GetNumElements() - 2;
 }
 
-const Rendering::TriangleIndex
+Rendering::TriangleIndex
     Rendering::TrianglesStrip::GetTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     if (0 <= index && index < GetNumTriangles())
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
         auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
         const auto firstIndex = indices[index];
         auto secondIndex = -1;
@@ -76,6 +79,8 @@ const Rendering::TriangleIndex
             secondIndex = indices[index + 1];
             thirdIndex = indices[index + 2];
         }
+
+#include STSTEM_WARNING_POP
 
         // 退化三角形被假定为互换和添加在三角地带。
         // 他们被认为是无效的。
@@ -94,19 +99,16 @@ const Rendering::TriangleIndex
     }
 }
 
-Rendering::ControllerInterfaceSharedPtr
-    Rendering::TrianglesStrip::Clone() const
+Rendering::ControllerInterfaceSharedPtr Rendering::TrianglesStrip::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesStrip::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

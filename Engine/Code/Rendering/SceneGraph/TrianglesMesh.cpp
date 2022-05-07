@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/22 18:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/03 17:25)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,14 +17,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26490)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesMesh);
@@ -41,17 +37,25 @@ int Rendering::TrianglesMesh::GetNumTriangles() const noexcept
     return GetConstIndexBuffer()->GetNumElements() / 3;
 }
 
-const Rendering::TriangleIndex
+Rendering::TriangleIndex
     Rendering::TrianglesMesh::GetTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     if (0 <= index && index < GetNumTriangles())
     {
-        auto indices = 3 * index + reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const auto value = 3 * index;
+        auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData()) + value;
         const auto firstIndex = *indices++;
         const auto secondIndex = *indices++;
         const auto thirdIndex = *indices;
+
+#include STSTEM_WARNING_POP
 
         return TriangleIndex{ firstIndex, secondIndex, thirdIndex };
     }
@@ -65,13 +69,11 @@ Rendering::ControllerInterfaceSharedPtr Rendering::TrianglesMesh::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesMesh::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

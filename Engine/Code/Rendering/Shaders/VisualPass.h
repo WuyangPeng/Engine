@@ -1,16 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 21:06)
 
 #ifndef RENDERING_SHADERS_VISUAL_PASS_H
 #define RENDERING_SHADERS_VISUAL_PASS_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Rendering/Shaders/AlphaState.h"
 #include "Rendering/Shaders/CullState.h"
@@ -21,58 +24,43 @@
 #include "Rendering/Shaders/VertexShader.h"
 #include "Rendering/Shaders/WireState.h"
 
- 
-EXPORT_SHARED_PTR(Rendering, VisualPassImpl, RENDERING_DEFAULT_DECLARE);
-namespace CoreTools
-{
-    class WriteFileManager;
-    class ReadFileManager;
-}
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(VisualPass, VisualPassImpl);
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE VisualPass : public CoreTools::Object
     {
     public:
-        void Swap(VisualPass& rhs) noexcept;
-        
-            public:
-                TYPE_DECLARE(VisualPass);
-                using ClassShareType = CoreTools::CopyUnsharedClasses;
-                ~VisualPass() noexcept;
-                VisualPass(const VisualPass& rhs);
-                VisualPass& operator=(const VisualPass& rhs);
-                VisualPass(VisualPass&& rhs) noexcept;
-                VisualPass& operator=(VisualPass&& rhs) noexcept;
+        COPY_UNSHARED_TYPE_DECLARE(VisualPass);
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        VisualPass(); 
+        explicit VisualPass(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(VisualPass);
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-        void SetVertexShader(const VertexShaderSharedPtr& vertexShader);
-        void SetPixelShader(const PixelShaderSharedPtr& pixelShader);
-        void SetAlphaState(const AlphaStateSharedPtr& alphaState);
-        void SetCullState(const CullStateSharedPtr& cullState);
-        void SetDepthState(const DepthStateSharedPtr& depthState);
-        void SetOffsetState(const OffsetStateSharedPtr& offsetState);
-        void SetStencilState(const StencilStateSharedPtr& stencilState);
-        void SetWireState(const WireStateSharedPtr& wireState);
+        void SetVertexShader(const VertexShaderSharedPtr& vertexShader) noexcept;
+        void SetPixelShader(const PixelShaderSharedPtr& pixelShader) noexcept;
+        void SetAlphaState(const AlphaStateSharedPtr& alphaState) noexcept;
+        void SetCullState(const CullStateSharedPtr& cullState) noexcept;
+        void SetDepthState(const DepthStateSharedPtr& depthState) noexcept;
+        void SetOffsetState(const OffsetStateSharedPtr& offsetState) noexcept;
+        void SetStencilState(const StencilStateSharedPtr& stencilState) noexcept;
+        void SetWireState(const WireStateSharedPtr& wireState) noexcept;
 
-        const ConstVertexShaderSharedPtr GetVertexShader() const;
-        const ConstPixelShaderSharedPtr GetPixelShader() const;
-        const ConstAlphaStateSharedPtr GetAlphaState() const;
-        const ConstCullStateSharedPtr GetCullState() const;
-        const ConstDepthStateSharedPtr GetDepthState() const;
-        const ConstOffsetStateSharedPtr GetOffsetState() const;
-        const ConstStencilStateSharedPtr GetStencilState() const;
-        const ConstWireStateSharedPtr GetWireState() const;
+        NODISCARD ConstVertexShaderSharedPtr GetVertexShader() const noexcept;
+        NODISCARD ConstPixelShaderSharedPtr GetPixelShader() const noexcept;
+        NODISCARD ConstAlphaStateSharedPtr GetAlphaState() const noexcept;
+        NODISCARD ConstCullStateSharedPtr GetCullState() const noexcept;
+        NODISCARD ConstDepthStateSharedPtr GetDepthState() const noexcept;
+        NODISCARD ConstOffsetStateSharedPtr GetOffsetState() const noexcept;
+        NODISCARD ConstStencilStateSharedPtr GetStencilState() const noexcept;
+        NODISCARD ConstWireStateSharedPtr GetWireState() const noexcept;
 
         void SaveShader(WriteFileManager& manager) const;
         void SaveState(WriteFileManager& manager) const;
@@ -82,13 +70,17 @@ namespace Rendering
         ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        PackageType impl;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(VisualPass);
+
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SHARED_PTR_DECLARE( VisualPass);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(VisualPass);
 }
 
 #endif  // RENDERING_SHADERS_VISUAL_PASS_H

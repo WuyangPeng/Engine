@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 16:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 15:09)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,23 +17,17 @@
 #include "Rendering/DataTypes/SpecializedIO.h"
 
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26482)
 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#if defined(TCRE_USE_MSVC)
-    #pragma warning(disable : 28020)
-#endif  // TCRE_USE_MSVC
-Rendering::SingleShaderSamplerDataImpl::SingleShaderSamplerDataImpl()
-    : m_SamplerName{}, m_SamplerType{ ShaderFlags::SamplerType::None }, m_Filter{ ShaderFlags::SamplerFilter::Nearest },
-      m_LodBias{ 0.0f }, m_Anisotropy{ 1.0f }, m_BorderColor{ 0.0f, 0.0f, 0.0f, 0.0f }
+Rendering::SingleShaderSamplerDataImpl::SingleShaderSamplerDataImpl() noexcept
+    : samplerName{},
+      samplerType{ ShaderFlags::SamplerType::None },
+      filter{ ShaderFlags::SamplerFilter::Nearest },
+      coordinates{},
+      lodBias{ 0.0f },
+      anisotropy{ 1.0f },
+      borderColor{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
-    m_Coordinate.fill(ShaderFlags::SamplerCoordinate::ClampEdge);
+    coordinates.fill(ShaderFlags::SamplerCoordinate::ClampEdge);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -41,140 +38,138 @@ void Rendering::SingleShaderSamplerDataImpl::SetSampler(const string& name, Shad
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_SamplerName = name;
-    m_SamplerType = type;
+    samplerName = name;
+    samplerType = type;
 }
 
-void Rendering::SingleShaderSamplerDataImpl::SetFilter(ShaderFlags::SamplerFilter filter)
+void Rendering::SingleShaderSamplerDataImpl::SetFilter(ShaderFlags::SamplerFilter aFilter) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Filter = filter;
+    filter = aFilter;
 }
 
 void Rendering::SingleShaderSamplerDataImpl::SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate)
 {
     RENDERING_CLASS_IS_VALID_9;
-    RENDERING_ASSERTION_0(0 <= dimension && dimension < sm_SamplerCoordinateSize, "索引错误");
+    RENDERING_ASSERTION_0(0 <= dimension && dimension < samplerCoordinateSize, "索引错误");
 
-    m_Coordinate[dimension] = coordinate;
+    coordinates.at(dimension) = coordinate;
 }
 
-void Rendering::SingleShaderSamplerDataImpl::SetLodBias(float lodBias)
+void Rendering::SingleShaderSamplerDataImpl::SetLodBias(float aLodBias) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_LodBias = lodBias;
+    lodBias = aLodBias;
 }
 
-void Rendering::SingleShaderSamplerDataImpl::SetAnisotropy(float anisotropy)
+void Rendering::SingleShaderSamplerDataImpl::SetAnisotropy(float aAnisotropy) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Anisotropy = anisotropy;
+    anisotropy = aAnisotropy;
 }
 
-void Rendering::SingleShaderSamplerDataImpl::SetBorderColor(const Colour& borderColor)
+void Rendering::SingleShaderSamplerDataImpl::SetBorderColor(const Colour& aBorderColor) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_BorderColor = borderColor;
+    borderColor = aBorderColor;
 }
 
-const std::string Rendering::SingleShaderSamplerDataImpl::GetSamplerName() const
+std::string Rendering::SingleShaderSamplerDataImpl::GetSamplerName() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_SamplerName;
+    return samplerName;
 }
 
-Rendering::ShaderFlags::SamplerType Rendering::SingleShaderSamplerDataImpl::GetSamplerType() const
+Rendering::ShaderFlags::SamplerType Rendering::SingleShaderSamplerDataImpl::GetSamplerType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_SamplerType;
+    return samplerType;
 }
 
-Rendering::ShaderFlags::SamplerFilter Rendering::SingleShaderSamplerDataImpl::GetFilter() const
+Rendering::ShaderFlags::SamplerFilter Rendering::SingleShaderSamplerDataImpl::GetFilter() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Filter;
+    return filter;
 }
 
 Rendering::ShaderFlags::SamplerCoordinate Rendering::SingleShaderSamplerDataImpl::GetCoordinate(int dimension) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    RENDERING_ASSERTION_0(0 <= dimension && dimension < sm_SamplerCoordinateSize, "索引错误");
+    RENDERING_ASSERTION_0(0 <= dimension && dimension < samplerCoordinateSize, "索引错误");
 
-    return m_Coordinate[dimension];
+    return coordinates.at(dimension);
 }
 
-float Rendering::SingleShaderSamplerDataImpl::GetLodBias() const
+float Rendering::SingleShaderSamplerDataImpl::GetLodBias() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_LodBias;
+    return lodBias;
 }
 
-float Rendering::SingleShaderSamplerDataImpl::GetAnisotropy() const
+float Rendering::SingleShaderSamplerDataImpl::GetAnisotropy() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Anisotropy;
+    return anisotropy;
 }
 
-Rendering::SingleShaderSamplerDataImpl::Colour Rendering::SingleShaderSamplerDataImpl::GetBorderColor() const
+Rendering::SingleShaderSamplerDataImpl::Colour Rendering::SingleShaderSamplerDataImpl::GetBorderColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_BorderColor;
+    return borderColor;
 }
 
 void Rendering::SingleShaderSamplerDataImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_SamplerName = source.ReadString();
-    source.ReadEnum(m_SamplerType);
-    source.ReadEnum(m_Filter);
-    source.ReadEnum(m_Coordinate[0]);
-    source.ReadEnum(m_Coordinate[1]);
-    source.ReadEnum(m_Coordinate[2]);
-    source.Read(m_LodBias);
-    source.Read(m_Anisotropy);
-    source.ReadAggregate(m_BorderColor);
+    samplerName = source.ReadString();
+    source.ReadEnum(samplerType);
+    source.ReadEnum(filter);
+    source.ReadEnum(coordinates.at(0));
+    source.ReadEnum(coordinates.at(1));
+    source.ReadEnum(coordinates.at(2));
+    source.Read(lodBias);
+    source.Read(anisotropy);
+    source.ReadAggregate(borderColor);
 }
 
 void Rendering::SingleShaderSamplerDataImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    target.Write(m_SamplerName);
-    target.WriteEnum(m_SamplerType);
-    target.WriteEnum(m_Filter);
-    target.WriteEnum(m_Coordinate[0]);
-    target.WriteEnum(m_Coordinate[1]);
-    target.WriteEnum(m_Coordinate[2]);
-    target.Write(m_LodBias);
-    target.Write(m_Anisotropy);
-    target.WriteAggregate(m_BorderColor);
+    target.Write(samplerName);
+    target.WriteEnum(samplerType);
+    target.WriteEnum(filter);
+    target.WriteEnum(coordinates.at(0));
+    target.WriteEnum(coordinates.at(1));
+    target.WriteEnum(coordinates.at(2));
+    target.Write(lodBias);
+    target.Write(anisotropy);
+    target.WriteAggregate(borderColor);
 }
 
 int Rendering::SingleShaderSamplerDataImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_SamplerName);
+    auto size = CORE_TOOLS_STREAM_SIZE(samplerName);
 
-    size += CORE_TOOLS_STREAM_SIZE(m_SamplerType);
-    size += CORE_TOOLS_STREAM_SIZE(m_Filter);
-    size += CORE_TOOLS_STREAM_SIZE(m_Coordinate[0]) * sm_SamplerCoordinateSize;
-    size += CORE_TOOLS_STREAM_SIZE(m_LodBias);
-    size += CORE_TOOLS_STREAM_SIZE(m_Anisotropy);
-    size += CORE_TOOLS_STREAM_SIZE(m_BorderColor);
+    size += CORE_TOOLS_STREAM_SIZE(samplerType);
+    size += CORE_TOOLS_STREAM_SIZE(filter);
+    size += CORE_TOOLS_STREAM_SIZE(coordinates.at(0)) * samplerCoordinateSize;
+    size += CORE_TOOLS_STREAM_SIZE(lodBias);
+    size += CORE_TOOLS_STREAM_SIZE(anisotropy);
+    size += CORE_TOOLS_STREAM_SIZE(borderColor);
 
     return size;
 }
-
-#include STSTEM_WARNING_POP

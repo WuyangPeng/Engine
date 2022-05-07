@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 16:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:39)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_MANAGE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_MANAGE_H
@@ -16,9 +19,10 @@
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
- 
+
+FRAMEWORK_EXPORT_UNIQUE_PTR(AndroidProcessManager);
 FRAMEWORK_NON_COPY_EXPORT_IMPL(AndroidProcessManagerImpl);
-EXPORT_SHARED_PTR(Framework, AndroidProcessManager, FRAMEWORK_DEFAULT_DECLARE);
+
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE AndroidProcessManager : public CoreTools::Singleton<AndroidProcessManager>
@@ -44,29 +48,24 @@ namespace Framework
 
     public:
         static void Create();
-        static void Destroy();
+        static void Destroy() noexcept;
 
         explicit AndroidProcessManager(AndroidProcessManagerCreate androidProcessManagerCreate);
-        ~AndroidProcessManager() noexcept;
-        AndroidProcessManager(const AndroidProcessManager&) noexcept = delete;
-        AndroidProcessManager& operator=(const AndroidProcessManager&) noexcept = delete;
-        AndroidProcessManager(AndroidProcessManager&& rhs) noexcept = delete;
-        AndroidProcessManager& operator=(AndroidProcessManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        static AppCmd GetAppCmd() noexcept;
-        static InputEvent GetInputEvent() noexcept;
-        static Display GetDisplay() noexcept;
+        NODISCARD static AppCmd GetAppCmd() noexcept;
+        NODISCARD static InputEvent GetInputEvent() noexcept;
+        NODISCARD static Display GetDisplay() noexcept;
 
-        AndroidCallBackInterfaceSharedPtr GetAndroidCallBackInterface() const;
+        NODISCARD AndroidCallBackInterfaceSharedPtr GetAndroidCallBackInterface() const;
 
         void SetAndroidCallBack(const AndroidCallBackInterfaceSharedPtr& androidCallBack);
         void ClearAndroidCallBack();
 
-        bool PreCreate();
-        bool Initialize();
+        NODISCARD bool PreCreate();
+        NODISCARD bool Initialize();
         void PreIdle();
         void Terminate();
 
@@ -74,8 +73,8 @@ namespace Framework
         void DestroyImpl();
 
     private:
-        static std::shared_ptr<AndroidProcessManager> sm_AndroidProcessManager;
-        std::shared_ptr<AndroidProcessManagerImpl> impl;
+        static std::unique_ptr<AndroidProcessManager> androidProcessManager;
+        PackageType impl;
     };
 }
 

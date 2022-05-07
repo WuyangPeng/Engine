@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>    
+    <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{D86FF4E4-F3C1-4C64-947C-50E401ED3391}</ProjectGuid>
     <RootNamespace>ArtificialIntellegence</RootNamespace>
@@ -141,28 +141,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
-  </PropertyGroup>  
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -237,7 +237,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -269,22 +269,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
-	<Text Include="Resource\Schedule.txt" />
-    <Text Include="Resource\Todo\Level 0.txt" />
-    <Text Include="Resource\Todo\Level 1.txt" />
-    <Text Include="Resource\Todo\Level 2.txt" />
-    <Text Include="Resource\Todo\Level 3.txt" />
-    <Text Include="Resource\Todo\Level 4.txt" />
-    <Text Include="Resource\Todo\Level 5.txt" />
-    <Text Include="Resource\Todo\Level 6.txt" />
-    <Text Include="Resource\Todo\Level 7.txt" />
-    <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" /> 
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\Code\ArtificialIntellegence\DllLib.cpp" />     
-    <ClCompile Include="..\..\..\Code\ArtificialIntellegence\DllMain.cpp" />     
+    <ClCompile Include="..\..\..\Code\ArtificialIntellegence\DllLib.cpp" />
+    <ClCompile Include="..\..\..\Code\ArtificialIntellegence\DllMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ArtificialIntellegence\ArtificialIntellegence.h" />
@@ -311,6 +297,22 @@
     <ClInclude Include="..\..\..\Code\ArtificialIntellegence\PathSearch\PathSearch.h" />
     <ClInclude Include="..\..\..\Code\ArtificialIntellegence\PathSearch\PathSearchFwd.h" />
     <ClInclude Include="..\..\..\Code\ArtificialIntellegence\PathSearch\Search.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

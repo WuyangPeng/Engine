@@ -6,13 +6,12 @@
 
 #include "Example/AssistTools/AssistToolsExample/AssistToolsExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-AssistToolsExample::Placeholder
-	::Placeholder() 
+AssistToolsExample::Placeholder::Placeholder() noexcept
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AssistToolsExample, Placeholder)

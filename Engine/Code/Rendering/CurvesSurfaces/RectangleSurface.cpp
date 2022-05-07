@@ -9,112 +9,104 @@
 #include "RectangleSurface.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26493)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RectangleSurface);
 
-Rendering::RectangleSurface::RectangleSurface(Mathematics::ParametricSurface<float>* surface, int numUSamples, int numVSamples,
-                                              VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax)
-    : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mSurface(surface), mNumUSamples(numUSamples), mNumVSamples(numVSamples)
+Rendering::RectangleSurface::RectangleSurface(const std::shared_ptr<Mathematics::ParametricSurface<float>>& surface,
+                                              int numUSamples,
+                                              int numVSamples,
+                                              const VertexFormatSharedPtr& vformat,
+                                              const Mathematics::Float2& tcoordMin,
+                                              const Mathematics::Float2& tcoordMax)
+    : ParentType{ vformat, nullptr, nullptr },
+      surface{ surface },
+      numUSamples{ numUSamples },
+      numVSamples{ numVSamples }
 {
-    RENDERING_ASSERTION_0(surface && surface->IsRectangular(), "Invalid surface\n");
+    RENDERING_ASSERTION_0(surface && surface->IsRectangular(), "无效的表面\n");
 
     SetVertexFormat(vformat);
 
-    const float uMin = mSurface->GetUMin();
-    const float uRange = mSurface->GetUMax() - uMin;
-    const float uDelta = uRange / (float)(mNumUSamples - 1);
-    const float vMin = mSurface->GetVMin();
-    const float vRange = mSurface->GetVMax() - vMin;
-    const float vDelta = vRange / (float)(mNumVSamples - 1);
+    const auto uMin = surface->GetUMin();
+    const auto uRange = surface->GetUMax() - uMin;
+    const auto uDelta = uRange / boost::numeric_cast<float>(numUSamples - 1);
+    const auto vMin = surface->GetVMin();
+    const auto vRange = surface->GetVMax() - vMin;
+    const auto vDelta = vRange / boost::numeric_cast<float>(numVSamples - 1);
 
-    // Compute the vertices, normals, and texture coordinates.
-    const int numVertices = mNumUSamples * mNumVSamples;
-    const int vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBufferSharedPtr(VertexBuffer::Create(numVertices, vstride)));
-    VertexBufferAccessor vba(vformat, GetVertexBuffer());
+    const auto numVertices = numUSamples * numVSamples;
+    const auto vstride = vformat->GetStride();
+    SetVertexBuffer(VertexBuffer::Create(numVertices, vstride));
+    VertexBufferAccessor vba{ vformat, GetVertexBuffer() };
 
-    float tuDelta = 0.0f, tvDelta = 0.0f;
-    if (tcoordMin && tcoordMax)
+    auto tuDelta = (tcoordMax[0] - tcoordMin[0]) / uRange;
+    auto tvDelta = (tcoordMax[1] - tcoordMin[1]) / vRange;
+
+    for (auto uIndex = 0, i = 0; uIndex < numUSamples; ++uIndex)
     {
-        tuDelta = ((*tcoordMax)[0] - (*tcoordMin)[0]) / uRange;
-        tvDelta = ((*tcoordMax)[1] - (*tcoordMin)[1]) / vRange;
-    }
-
-    int uIndex = 0, vIndex = 0, i = 0;
-    for (uIndex = 0, i = 0; uIndex < mNumUSamples; ++uIndex)
-    {
-        const float uIncr = uDelta * uIndex;
-        const float u = uMin + uIncr;
-        for (vIndex = 0; vIndex < mNumVSamples; ++vIndex, ++i)
+        const auto uIncr = uDelta * uIndex;
+        const auto u = uMin + uIncr;
+        for (auto vIndex = 0; vIndex < numVSamples; ++vIndex, ++i)
         {
-            const float vIncr = vDelta * vIndex;
-            const float v = vMin + vIncr;
+            const auto vIncr = vDelta * vIndex;
+            const auto v = vMin + vIncr;
 
-            //vba.Position<Mathematics::Vector3Df>(i) = mSurface->P(u, v);
+            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ surface->P(u, v) });
 
             if (vba.HasNormal())
             {
-                Mathematics::Vector3F pos, tan0, tan1, normal;
-                mSurface->GetFrame(u, v, pos, tan0, tan1, normal);
+                Mathematics::Vector3F pos{};
+                Mathematics::Vector3F tan0{};
+                Mathematics::Vector3F tan1{};
+                Mathematics::Vector3F normal{};
+                surface->GetFrame(u, v, pos, tan0, tan1, normal);
 
-                //vba.Normal<Mathematics::Vector3Df>(i) = normal;
+                GetVertexBuffer()->SetTriangleNormal(vba, i, Mathematics::AVectorF{ normal });
             }
 
-            if (tcoordMin == nullptr)
-            {
-                continue;
-            }
-
-            constexpr int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
-            const Mathematics::Vector2F tcoord((*tcoordMin)[0] + tuDelta * uIncr, (*tcoordMin)[1] + tvDelta * vIncr);
-            for (int unit = 0; unit < numTCoords; ++unit)
+            constexpr auto numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
+            const Mathematics::Vector2F tcoord{ tcoordMin[0] + tuDelta * uIncr, tcoordMin[1] + tvDelta * vIncr };
+            for (auto unit = 0; unit < numTCoords; ++unit)
             {
                 if (vba.HasTextureCoord(unit))
                 {
-                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "Texture coordinate must be 2D\n");
+                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "纹理坐标必须是 2D\n");
 
-                    // vba.TCoord<Float2>(unit, i) = tcoord;
+                    GetVertexBuffer()->SetTextureCoord(vba, i, tcoord, unit);
                 }
             }
         }
     }
 
-    // Compute the surface triangle indices.
-    const int numTriangles = 2 * (mNumUSamples - 1) * (mNumVSamples - 1);
-    const int numIndices = 3 * numTriangles;
-    SetIndexBuffer(IndexBufferSharedPtr(IndexBuffer::Create(numIndices, (int)sizeof(int))));
+    const auto numTriangles = 2 * (numUSamples - 1) * (numVSamples - 1);
+    const auto numIndices = 3 * numTriangles;
+    SetIndexBuffer(IndexBuffer::Create(numIndices, sizeof(int)));
     // 先通过编译
 
-    int* indices = (int*)GetIndexBuffer()->GetReadOnlyData();
-    for (uIndex = 0, i = 0; uIndex < mNumUSamples - 1; ++uIndex)
+    auto indices = GetIndexBuffer()->GetWriteSpanIterator();
+    for (auto uIndex = 0, i = 0; uIndex < numUSamples - 1; ++uIndex)
     {
-        int i0 = i;
-        int i1 = i0 + 1;
-        i += mNumVSamples;
-        int i2 = i;
-        int i3 = i2 + 1;
-        for (vIndex = 0; vIndex < mNumVSamples - 1; ++vIndex, indices += 6)
+        auto i0 = i;
+        auto i1 = i0 + 1;
+        i += numVSamples;
+        auto i2 = i;
+        auto i3 = i2 + 1;
+        for (auto vIndex = 0; vIndex < numVSamples - 1; ++vIndex)
         {
-            indices[0] = i0;
-            indices[1] = i1;
-            indices[2] = i2;
-            indices[3] = i1;
-            indices[4] = i3;
-            indices[5] = i2;
+            indices.Increase(i0);
+            indices.Increase(i1);
+            indices.Increase(i2);
+            indices.Increase(i1);
+            indices.Increase(i3);
+            indices.Increase(i2);
             i0++;
             i1++;
             i2++;
@@ -123,131 +115,139 @@ Rendering::RectangleSurface::RectangleSurface(Mathematics::ParametricSurface<flo
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RectangleSurface::~RectangleSurface()
-{
-    EXCEPTION_TRY
-    {
-        // DELETE0(mSurface);
-    }
-    EXCEPTION_ALL_CATCH(Rendering)
-}
+CLASS_INVARIANT_STUB_DEFINE(Rendering, RectangleSurface)
 
 void Rendering::RectangleSurface::UpdateSurface()
 {
-    const float uMin = mSurface->GetUMin();
-    const float uDelta = (mSurface->GetUMax() - uMin) / (float)(mNumUSamples - 1);
-    const float vMin = mSurface->GetVMin();
-    const float vDelta = (mSurface->GetVMax() - vMin) / (float)(mNumVSamples - 1);
+    RENDERING_CLASS_IS_VALID_1;
 
-    VertexBufferAccessor vba(GetVertexFormat(), GetVertexBuffer());
-    for (int uIndex = 0, i = 0; uIndex < mNumUSamples; ++uIndex)
+    const auto uMin = surface->GetUMin();
+    const auto uDelta = (surface->GetUMax() - uMin) / boost::numeric_cast<float>(numUSamples - 1);
+    const auto vMin = surface->GetVMin();
+    const auto vDelta = (surface->GetVMax() - vMin) / boost::numeric_cast<float>(numVSamples - 1);
+
+    VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
+    for (auto uIndex = 0, i = 0; uIndex < numUSamples; ++uIndex)
     {
-        const float u = uMin + uDelta * uIndex;
-        for (int vIndex = 0; vIndex < mNumVSamples; ++vIndex, ++i)
+        const auto u = uMin + uDelta * uIndex;
+        for (auto vIndex = 0; vIndex < numVSamples; ++vIndex, ++i)
         {
-            const float v = vMin + vDelta * vIndex;
+            const auto v = vMin + vDelta * vIndex;
 
-            // vba.Position<Mathematics::Vector3Df>(i) = mSurface->P(u, v);
+            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ surface->P(u, v) });
 
             if (vba.HasNormal())
             {
-                Mathematics::Vector3F pos, tan0, tan1, normal;
-                mSurface->GetFrame(u, v, pos, tan0, tan1, normal);
+                Mathematics::Vector3F pos{};
+                Mathematics::Vector3F tan0{};
+                Mathematics::Vector3F tan1{};
+                Mathematics::Vector3F normal{};
+                surface->GetFrame(u, v, pos, tan0, tan1, normal);
 
-                // vba.Normal<Mathematics::Vector3Df>(i) = normal;
+                GetVertexBuffer()->SetTriangleNormal(vba, i, Mathematics::AVectorF{ normal });
             }
         }
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer().get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(GetVertexBuffer());
 }
 
-// Streaming support.
-
 Rendering::RectangleSurface::RectangleSurface(LoadConstructor value)
-    : ParentType(value), mSurface(0), mNumUSamples(0), mNumVSamples(0)
+    : ParentType{ value }, surface{}, numUSamples{}, numVSamples{}
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 void Rendering::RectangleSurface::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(mNumUSamples);
-    source.Read(mNumVSamples);
+    source.Read(numUSamples);
+    source.Read(numVSamples);
 
-    // TODO.  See note in RectangleSurface::Save.
-    mSurface = 0;
+    surface = nullptr;
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::RectangleSurface::Link(CoreTools::ObjectLink& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     ParentType::Link(source);
 }
 
 void Rendering::RectangleSurface::PostLink()
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     ParentType::PostLink();
 }
 
 uint64_t Rendering::RectangleSurface::Register(CoreTools::ObjectRegister& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     return ParentType::Register(target);
 }
 
 void Rendering::RectangleSurface::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target.Write(mNumUSamples);
-    target.Write(mNumVSamples);
-
-    // TODO.  The class ParametricSurface3 is abstract and does not know
-    // about the data representation for the derived-class object that is
-    // passed to the RectangleSurface constructor.  Because of this, any
-    // loaded RectangleSurface object will require the application to
-    // manually set the surface via the SetSurface() member function.
-    //
-    // Streaming support should be added to the surface classes.
+    target.Write(numUSamples);
+    target.Write(numVSamples);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 int Rendering::RectangleSurface::GetStreamingSize() const
 {
-    int size = ParentType::GetStreamingSize();
-    size += sizeof(mNumUSamples);
-    size += sizeof(mNumVSamples);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+    size += sizeof(numUSamples);
+    size += sizeof(numVSamples);
     return size;
 }
 
-void Rendering::RectangleSurface::SetSurface(Mathematics::ParametricSurface<float>* surface) noexcept
+void Rendering::RectangleSurface::SetSurface(const std::shared_ptr<Mathematics::ParametricSurface<float>>& aSurface) noexcept
 {
-    mSurface = surface;
+    RENDERING_CLASS_IS_VALID_1;
+
+    surface = aSurface;
 }
 
-const Mathematics::ParametricSurface<float>* Rendering::RectangleSurface::GetSurface() const noexcept
+std::shared_ptr<Mathematics::ParametricSurface<float>> Rendering::RectangleSurface::GetSurface() noexcept
 {
-    return mSurface;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return surface;
 }
 
 int Rendering::RectangleSurface::GetNumUSamples() const noexcept
 {
-    return mNumUSamples;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return numUSamples;
 }
 
 int Rendering::RectangleSurface::GetNumVSamples() const noexcept
 {
-    return mNumVSamples;
-}
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_POP
+    return numVSamples;
+}

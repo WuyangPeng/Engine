@@ -1,38 +1,123 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 09:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/14 10:39)
 
 #include "Rendering/RenderingExport.h"
 
 #include "DefaultEffect.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26815)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26492)
+namespace
+{
+    constexpr auto dx9VRegisters = 0;
+    constexpr auto oglVRegisters = 1;
+
+    std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> vRegisters{
+        nullptr,
+        &dx9VRegisters,
+        &dx9VRegisters,
+        &dx9VRegisters,
+        &oglVRegisters
+    };
+
+    std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> vPrograms{
+        // VP_NONE
+        "",
+
+        // VP_VS_1_1
+        "vs_1_1\n"
+        "def c4, 1.00000000, 0, 0, 0\n"
+        "dcl_position0 v0\n"
+        "mov r0.w, c4.x\n"
+        "mov r0.xyz, v0\n"
+        "dp4 oPos.w, r0, c3\n"
+        "dp4 oPos.z, r0, c2\n"
+        "dp4 oPos.y, r0, c1\n"
+        "dp4 oPos.x, r0, c0\n",
+
+        // VP_VS_2_0
+        "vs_2_0\n"
+        "def c4, 1.00000000, 0, 0, 0\n"
+        "dcl_position0 v0\n"
+        "mov r0.w, c4.x\n"
+        "mov r0.xyz, v0\n"
+        "dp4 oPos.w, r0, c3\n"
+        "dp4 oPos.z, r0, c2\n"
+        "dp4 oPos.y, r0, c1\n"
+        "dp4 oPos.x, r0, c0\n",
+
+        // VP_VS_3_0
+        "vs_3_0\n"
+        "dcl_position o0\n"
+        "def c4, 1.00000000, 0, 0, 0\n"
+        "dcl_position0 v0\n"
+        "mov r0.w, c4.x\n"
+        "mov r0.xyz, v0\n"
+        "dp4 o0.w, r0, c3\n"
+        "dp4 o0.z, r0, c2\n"
+        "dp4 o0.y, r0, c1\n"
+        "dp4 o0.x, r0, c0\n",
+
+        // VP_ARBVP1
+        "!!ARBvp1.0\n"
+        "PARAM c[5] = { { 1 }, program.local[1..4] };\n"
+        "TEMP R0;\n"
+        "MOV R0.w, c[0].x;\n"
+        "MOV R0.xyz, vertex.position;\n"
+        "DP4 result.position.w, R0, c[4];\n"
+        "DP4 result.position.z, R0, c[3];\n"
+        "DP4 result.position.y, R0, c[2];\n"
+        "DP4 result.position.x, R0, c[1];\n"
+        "END\n"
+    };
+
+    std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> pPrograms{
+        // PP_NONE
+        "",
+
+        // PP_PS_1_1
+        "ps.1.1\n"
+        "def c0, 1.000000, 0.000000, 1.000000, 1.000000\n"
+        "mov r0, c0\n",
+
+        // PP_PS_2_0
+        "ps_2_0\n"
+        "def c0, 1.00000000, 0.00000000, 0, 0\n"
+        "mov r0.y, c0\n"
+        "mov r0.xzw, c0.x\n"
+        "mov oC0, r0\n",
+
+        // PP_PS_3_0
+        "ps_3_0\n"
+        "def c0, 1.00000000, 0.00000000, 0, 0\n"
+        "mov oC0, c0.xyxx\n",
+
+        // PP_ARBFP1
+        "!!ARBfp1.0\n"
+        "PARAM c[1] = { { 1, 0 } };\n"
+        "MOV result.color, c[0].xyxx;\n"
+        "END\n"
+    };
+}
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, DefaultEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, DefaultEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, DefaultEffect);
 
-Rendering::DefaultEffect::DefaultEffect()
+Rendering::DefaultEffect::DefaultEffect(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }
 {
-    VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Default", 1, 1, 1, 0) };
+    auto vshader = std::make_shared<VertexShader>("Default", 1, 1, 1, 0);
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float, ShaderFlags::VariableSemantic::Position);
     vshader->SetConstant(0, "PVWMatrix", 4);
@@ -43,13 +128,13 @@ Rendering::DefaultEffect::DefaultEffect()
     {
         for (auto j = 0; j < 1; ++j)
         {
-            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+            profile->SetBaseRegister(i, j, *vRegisters.at(i));
         }
 
-        profile->SetProgram(i, msVPrograms[i]);
+        profile->SetProgram(i, vPrograms.at(i));
     }
 
-    PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.Default", 1, 1, 0, 0) };
+    auto pshader = std::make_shared<PixelShader>("Default", 1, 1, 0, 0);
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float2, ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
 
@@ -57,40 +142,49 @@ Rendering::DefaultEffect::DefaultEffect()
 
     for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
     {
-        profile->SetProgram(i, msPPrograms[i]);
+        profile->SetProgram(i, pPrograms.at(i));
     }
 
-    VisualPassSharedPtr pass{ std::make_shared<VisualPass>() };
+    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
     pass->SetVertexShader(vshader);
     pass->SetPixelShader(pshader);
-    pass->SetAlphaState(AlphaStateSharedPtr{ std::make_shared<AlphaState>() });
-    pass->SetCullState(CullStateSharedPtr{ std::make_shared<CullState>() });
-    pass->SetDepthState(DepthStateSharedPtr{ std::make_shared<DepthState>() });
-    pass->SetOffsetState(OffsetStateSharedPtr{ std::make_shared<OffsetState>() });
-    pass->SetStencilState(StencilStateSharedPtr{ std::make_shared<StencilState>() });
-    pass->SetWireState(WireStateSharedPtr{ std::make_shared<WireState>() });
+    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
 
-    VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
+    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
     technique->InsertPass(pass);
     InsertTechnique(technique);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::VisualEffectInstance* Rendering::DefaultEffect::CreateInstance() const
+CLASS_INVARIANT_STUB_DEFINE(Rendering, DefaultEffect)
+
+Rendering::VisualEffectInstanceSharedPtr Rendering::DefaultEffect::CreateInstance()
 {
-    VisualEffectInstance* instance = nullptr;  //    CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
+
+    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
+
     return instance;
 }
 
-// Streaming support.
-
 Rendering::DefaultEffect::DefaultEffect(LoadConstructor value)
-    : VisualEffect{ value }
+    : ParentType{ value }
 {
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 void Rendering::DefaultEffect::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
@@ -100,43 +194,53 @@ void Rendering::DefaultEffect::Load(CoreTools::BufferSource& source)
 
 void Rendering::DefaultEffect::Link(CoreTools::ObjectLink& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     ParentType::Link(source);
 }
 
 void Rendering::DefaultEffect::PostLink()
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     ParentType::PostLink();
 
     auto pass = GetTechnique(0)->GetPass(0);
     auto vshader = pass->GetVertexShader();
+    auto cloneVShader = boost::polymorphic_pointer_cast<VertexShader>(vshader->CloneObject());
     auto pshader = pass->GetPixelShader();
-    auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
+    auto clonePShader = boost::polymorphic_pointer_cast<PixelShader>(pshader->CloneObject());
+    auto profile = cloneVShader->GetProfile();
 
     for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
     {
         for (auto j = 0; j < 1; ++j)
         {
-            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+            profile->SetBaseRegister(i, j, *vRegisters.at(i));
         }
 
-        profile->SetProgram(i, msVPrograms[i]);
+        profile->SetProgram(i, vPrograms.at(i));
     }
 
-    profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
+    profile = clonePShader->GetProfile();
 
     for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
     {
-        profile->SetProgram(i, msPPrograms[i]);
+        profile->SetProgram(i, pPrograms.at(i));
     }
 }
 
 uint64_t Rendering::DefaultEffect::Register(CoreTools::ObjectRegister& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return ParentType::Register(target);
 }
 
 void Rendering::DefaultEffect::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
@@ -146,105 +250,14 @@ void Rendering::DefaultEffect::Save(CoreTools::BufferTarget& target) const
 
 int Rendering::DefaultEffect::GetStreamingSize() const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return ParentType::GetStreamingSize();
 }
-
-// Profiles.
-
-int Rendering::DefaultEffect::msDx9VRegisters[1]{ 0 };
-int Rendering::DefaultEffect::msOglVRegisters[1]{ 1 };
-
-int* Rendering::DefaultEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    0,
-    msDx9VRegisters,
-    msDx9VRegisters,
-    msDx9VRegisters,
-    msOglVRegisters
-};
-
-std::string Rendering::DefaultEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    // VP_NONE
-    "",
-
-    // VP_VS_1_1
-    "vs_1_1\n"
-    "def c4, 1.00000000, 0, 0, 0\n"
-    "dcl_position0 v0\n"
-    "mov r0.w, c4.x\n"
-    "mov r0.xyz, v0\n"
-    "dp4 oPos.w, r0, c3\n"
-    "dp4 oPos.z, r0, c2\n"
-    "dp4 oPos.y, r0, c1\n"
-    "dp4 oPos.x, r0, c0\n",
-
-    // VP_VS_2_0
-    "vs_2_0\n"
-    "def c4, 1.00000000, 0, 0, 0\n"
-    "dcl_position0 v0\n"
-    "mov r0.w, c4.x\n"
-    "mov r0.xyz, v0\n"
-    "dp4 oPos.w, r0, c3\n"
-    "dp4 oPos.z, r0, c2\n"
-    "dp4 oPos.y, r0, c1\n"
-    "dp4 oPos.x, r0, c0\n",
-
-    // VP_VS_3_0
-    "vs_3_0\n"
-    "dcl_position o0\n"
-    "def c4, 1.00000000, 0, 0, 0\n"
-    "dcl_position0 v0\n"
-    "mov r0.w, c4.x\n"
-    "mov r0.xyz, v0\n"
-    "dp4 o0.w, r0, c3\n"
-    "dp4 o0.z, r0, c2\n"
-    "dp4 o0.y, r0, c1\n"
-    "dp4 o0.x, r0, c0\n",
-
-    // VP_ARBVP1
-    "!!ARBvp1.0\n"
-    "PARAM c[5] = { { 1 }, program.local[1..4] };\n"
-    "TEMP R0;\n"
-    "MOV R0.w, c[0].x;\n"
-    "MOV R0.xyz, vertex.position;\n"
-    "DP4 result.position.w, R0, c[4];\n"
-    "DP4 result.position.z, R0, c[3];\n"
-    "DP4 result.position.y, R0, c[2];\n"
-    "DP4 result.position.x, R0, c[1];\n"
-    "END\n"
-};
-
-std::string Rendering::DefaultEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    // PP_NONE
-    "",
-
-    // PP_PS_1_1
-    "ps.1.1\n"
-    "def c0, 1.000000, 0.000000, 1.000000, 1.000000\n"
-    "mov r0, c0\n",
-
-    // PP_PS_2_0
-    "ps_2_0\n"
-    "def c0, 1.00000000, 0.00000000, 0, 0\n"
-    "mov r0.y, c0\n"
-    "mov r0.xzw, c0.x\n"
-    "mov oC0, r0\n",
-
-    // PP_PS_3_0
-    "ps_3_0\n"
-    "def c0, 1.00000000, 0.00000000, 0, 0\n"
-    "mov oC0, c0.xyxx\n",
-
-    // PP_ARBFP1
-    "!!ARBfp1.0\n"
-    "PARAM c[1] = { { 1, 0 } };\n"
-    "MOV result.color, c[0].xyxx;\n"
-    "END\n"
-};
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::DefaultEffect::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
 
-#include STSTEM_WARNING_POP
+    return std::make_shared<ClassType>(*this);
+}

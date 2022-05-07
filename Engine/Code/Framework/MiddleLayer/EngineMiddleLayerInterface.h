@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 14:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 17:00)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
@@ -12,6 +15,7 @@
 #include "MiddleLayerInterface.h"
 #include "ModelViewControllerMiddleLayer.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE EngineMiddleLayerInterface : public MiddleLayerInterface
@@ -45,33 +49,33 @@ namespace Framework
         virtual void SetEngineManager(const MiddleLayerInterfaceSharedPtr& engineManager);
 
     protected:
-        virtual const MiddleLayerInterfaceSharedPtr GetNetworkManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetInputManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetObjectLogicManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetPhysicalModellingManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetMessageManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetEventManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetSystemManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetResourceManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetAudioManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetCameraSystemsManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetRenderingManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetGUIManager();
-        virtual const MiddleLayerInterfaceSharedPtr GetEngineManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetNetworkManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetInputManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetObjectLogicManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetPhysicalModellingManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetMessageManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetEventManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetSystemManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetResourceManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetAudioManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetCameraSystemsManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetRenderingManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetGUIManager();
+        NODISCARD virtual MiddleLayerInterfaceSharedPtr GetEngineManager();
 
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetNetworkManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetInputManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetObjectLogicManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetPhysicalModellingManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetMessageManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetEventManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetSystemManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetResourceManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetAudioManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetCameraSystemsManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetRenderingManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetGUIManager() const;
-        virtual const ConstMiddleLayerInterfaceSharedPtr GetEngineManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetNetworkManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetInputManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetObjectLogicManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetPhysicalModellingManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetMessageManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetEventManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetSystemManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetResourceManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetAudioManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetCameraSystemsManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetRenderingManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetGUIManager() const;
+        NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetEngineManager() const;
     };
 
     using EngineMiddleLayerInterfaceSharedPtr = std::shared_ptr<EngineMiddleLayerInterface>;

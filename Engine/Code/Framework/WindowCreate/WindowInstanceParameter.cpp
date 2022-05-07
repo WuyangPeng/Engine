@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 09:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:12)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,7 +16,7 @@
 
 using std::make_shared;
 
-Framework::WindowInstanceParameter ::WindowInstanceParameter(HInstance instance, const String& className)
+Framework::WindowInstanceParameter::WindowInstanceParameter(WindowsHInstance instance, const String& className)
     : impl{ instance, className }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -21,5 +24,5 @@ Framework::WindowInstanceParameter ::WindowInstanceParameter(HInstance instance,
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowInstanceParameter)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowInstanceParameter, GetHInstance, Framework::WindowInstanceParameter::HInstance)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowInstanceParameter, GetWindowClassName, const System::String)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowInstanceParameter, GetHInstance, Framework::WindowInstanceParameter::WindowsHInstance)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowInstanceParameter, GetWindowClassName, System::String)

@@ -1,17 +1,20 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 15:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/24 16:56)
 
 #ifndef PHYSICS_COLLISION_DETECTION_H
 #define PHYSICS_COLLISION_DETECTION_H
 
-#include "BoundTreeProjectionInfo.h"
-#include "BoundTreeSplitTriangles.h"
 #include "BoundTreeChildDetail.h"
 #include "BoundTreeDetail.h"
-#include "CollisionRecordDetail.h"
+#include "BoundTreeProjectionInfo.h"
+#include "BoundTreeSplitTriangles.h"
 #include "CollisionGroupDetail.h"
- 
-#endif // PHYSICS_COLLISION_DETECTION_H
+#include "CollisionRecordDetail.h"
+
+#endif  // PHYSICS_COLLISION_DETECTION_H

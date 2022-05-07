@@ -1,26 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 13:32)
 
 #ifndef RENDERING_CONTROLLERS_IKGOAL_IMPL_H
 #define RENDERING_CONTROLLERS_IKGOAL_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/SceneGraph/Spatial.h"
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
 
 #include <string>
 #include <vector>
-
-namespace CoreTools
-{
-    class BufferTarget;
-    class BufferSource;
-    class ObjectLink;
-    class ObjectRegister;
-}
 
 namespace Rendering
 {
@@ -39,29 +36,29 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
         void Link(CoreTools::ObjectLink& source);
         void Register(CoreTools::ObjectRegister& target) const;
 
-        const ObjectSharedPtr GetObjectByName(const std::string& name);
-        const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
-        const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
-        const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
+        NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name);
+        NODISCARD std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
+        NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+        NODISCARD std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
 
-        const ConstSpatialSharedPtr GetTarget() const noexcept;
-        const ConstSpatialSharedPtr GetEffector() const noexcept;
-        const APoint GetTargetPosition() const noexcept;
-        const APoint GetEffectorPosition() const noexcept;
+        NODISCARD ConstSpatialSharedPtr GetTarget() const noexcept;
+        NODISCARD ConstSpatialSharedPtr GetEffector() const noexcept;
+        NODISCARD APoint GetTargetPosition() const noexcept;
+        NODISCARD APoint GetEffectorPosition() const noexcept;
 
-        void SetWeight(float weight) noexcept;
-        float GetWeight() const noexcept;
+        void SetWeight(float aWeight) noexcept;
+        NODISCARD float GetWeight() const noexcept;
 
     private:
-        float m_Weight;  // 默认 = 1
-        SpatialSharedPtr m_Target;
-        SpatialSharedPtr m_Effector;
+        float weight;  // 默认 = 1
+        CoreTools::ObjectAssociated<Spatial> goalTarget;
+        CoreTools::ObjectAssociated<Spatial> effector;
     };
 }
 

@@ -29,7 +29,7 @@ void Rendering::VisibleSetTesting
 void Rendering::VisibleSetTesting
 	::VisibleSetTest()
 {
-	VisibleSet firstVisibleSet;
+    VisibleSet firstVisibleSet = VisibleSet::Create();
 
 	ASSERT_EQUAL(firstVisibleSet.GetNumVisible(),0);
 

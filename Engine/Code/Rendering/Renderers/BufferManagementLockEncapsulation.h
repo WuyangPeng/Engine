@@ -1,45 +1,42 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:22)
 
 #ifndef RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_H
 #define RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_H
 
 #include "Rendering/RenderingDll.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace Rendering
 {
-	template <typename BufferManagementType>
-	class BufferManagementLockEncapsulation : boost::noncopyable
-	{
-	public:
-		using ClassType = BufferManagementLockEncapsulation<BufferManagementType>;
-		using BufferConstPtr = typename BufferManagementType::BufferConstPtr;
+    template <typename BufferManagementType>
+    class BufferManagementLockEncapsulation
+    {
+    public:
+        using ClassType = BufferManagementLockEncapsulation<BufferManagementType>;
+        using ConstBufferSharedPtr = typename BufferManagementType::ConstBufferSharedPtr;
 
-	public:
-		explicit BufferManagementLockEncapsulation(BufferManagementType& manager) noexcept;
-		~BufferManagementLockEncapsulation();
-		BufferManagementLockEncapsulation(const BufferManagementLockEncapsulation&) = delete;
-		BufferManagementLockEncapsulation& operator=(const BufferManagementLockEncapsulation&) = delete;
-		BufferManagementLockEncapsulation(BufferManagementLockEncapsulation&&) = delete;
-		BufferManagementLockEncapsulation& operator=(BufferManagementLockEncapsulation&&) = delete;
-		
-		CLASS_INVARIANT_DECLARE;
+    public:
+        explicit BufferManagementLockEncapsulation(BufferManagementType& manager) noexcept;
+        ~BufferManagementLockEncapsulation() noexcept;
+        BufferManagementLockEncapsulation(const BufferManagementLockEncapsulation& rhs) = delete;
+        BufferManagementLockEncapsulation& operator=(const BufferManagementLockEncapsulation& rhs) = delete;
+        BufferManagementLockEncapsulation(BufferManagementLockEncapsulation&& rhs) noexcept = delete;
+        BufferManagementLockEncapsulation& operator=(BufferManagementLockEncapsulation&& rhs) noexcept = delete;
 
-		void* Lock(BufferConstPtr buffer,BufferLocking mode);
-	
-	private:
-		BufferManagementType& m_Manager;
-		BufferConstPtr m_Buffer;		
-	};
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD void* Lock(ConstBufferSharedPtr aBuffer, BufferLocking mode);
+
+    private:
+        BufferManagementType& manager;
+        ConstBufferSharedPtr buffer;
+    };
 }
 
-#endif // RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_BUFFER_MANAGEMENT_LOCK_ENCAPSULATION_H

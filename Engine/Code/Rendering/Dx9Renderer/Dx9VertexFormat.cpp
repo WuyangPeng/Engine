@@ -1,47 +1,43 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 21:29)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "Dx9VertexFormat.h"
 
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::Dx9VertexFormat::Dx9VertexFormat([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexFormat* vertexFormat) noexcept
+Rendering::Dx9VertexFormat::Dx9VertexFormat(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexFormat* vertexFormat) noexcept
     : ParentType{}
-{    
- 
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
- 
- 
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::Dx9VertexFormat
-	::IsValid() const noexcept
-{
-	if(ParentType::IsValid())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9VertexFormat::Enable([[maybe_unused]] Renderer* renderer)
-{		
-	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
- 
+bool Rendering::Dx9VertexFormat::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
-void Rendering::Dx9VertexFormat::Disable([[maybe_unused]] Renderer* renderer)
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::Dx9VertexFormat::Enable(MAYBE_UNUSED Renderer* renderer) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
-	 	
+    RENDERING_CLASS_IS_VALID_1; 
+}
+
+void Rendering::Dx9VertexFormat::Disable(MAYBE_UNUSED Renderer* renderer) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1; 
 }

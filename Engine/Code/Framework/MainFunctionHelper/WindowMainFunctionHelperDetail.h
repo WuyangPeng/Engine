@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/20 21:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:21)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_DETAIL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_DETAIL_H
@@ -11,221 +14,206 @@
 
 #include "Flags/MainFunctionSchedule.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
-template <template<typename> class Build, typename Process>
-Framework::WindowMainFunctionHelper<Build, Process>
-	::WindowMainFunctionHelper(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,
-							   const EnvironmentDirectory& environmentDirectory)
-	:ParentType{ environmentDirectory }, m_Build{ }, m_WindowMainFunctionSchedule{ WindowMainFunctionSchedule::Failure }
+template <template <typename> class Build, typename Process>
+Framework::WindowMainFunctionHelper<Build, Process>::WindowMainFunctionHelper(WindowsHInstance instance,
+                                                                              const char* commandLine,
+                                                                              const WindowApplicationInformation& information,
+                                                                              const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ environmentDirectory }, build{}, windowMainFunctionSchedule{ WindowMainFunctionSchedule::Failure }
 {
-	Initializers(instance, commandLine, information);
+    Initializers(instance, commandLine, information);
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template <template<typename> class Build, typename Process>
-Framework::WindowMainFunctionHelper<Build, Process>
-	::WindowMainFunctionHelper(WindowMainFunctionHelper&& rhs) noexcept
-	:ParentType{ std::move(rhs) }, m_Build{ std::move(rhs.m_Build) }, m_WindowMainFunctionSchedule{ rhs.m_WindowMainFunctionSchedule }
+template <template <typename> class Build, typename Process>
+Framework::WindowMainFunctionHelper<Build, Process>::WindowMainFunctionHelper(WindowMainFunctionHelper&& rhs) noexcept
+    : ParentType{ std::move(rhs) }, build{ std::move(rhs.build) }, windowMainFunctionSchedule{ rhs.windowMainFunctionSchedule }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template <template<typename> class Build, typename Process>
-Framework::WindowMainFunctionHelper<Build, Process>& Framework::WindowMainFunctionHelper<Build, Process>
-	::operator=(WindowMainFunctionHelper&& rhs) noexcept
+template <template <typename> class Build, typename Process>
+Framework::WindowMainFunctionHelper<Build, Process>& Framework::WindowMainFunctionHelper<Build, Process>::operator=(WindowMainFunctionHelper&& rhs) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::operator=(std::move(rhs));
+    ParentType::operator=(std::move(rhs));
 
-	m_Build = std::move(rhs.m_Build);
-	m_WindowMainFunctionSchedule = rhs.m_WindowMainFunctionSchedule;
+    build = std::move(rhs.build);
+    windowMainFunctionSchedule = rhs.windowMainFunctionSchedule;
 
-	return *this;
+    return *this;
 }
 
-template <template<typename> class Build, typename Process>
-Framework::WindowMainFunctionHelper<Build, Process>
-	::~WindowMainFunctionHelper() noexcept
+template <template <typename> class Build, typename Process>
+Framework::WindowMainFunctionHelper<Build, Process>::~WindowMainFunctionHelper() noexcept
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
-	CoreTools::NoexceptNoReturn(*this, &ClassType::Destroy);
+    CoreTools::NoexceptNoReturn(*this, &ClassType::Destroy);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <template<typename> class Build, typename Process>
-bool Framework::WindowMainFunctionHelper<Build, Process>
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid() && ((WindowMainFunctionSchedule::Max <= m_WindowMainFunctionSchedule) ^ (m_Build == nullptr)))
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-template <template<typename> class Build, typename Process>
-int Framework::WindowMainFunctionHelper<Build, Process>
-	::DoRun()
+template <template <typename> class Build, typename Process>
+bool Framework::WindowMainFunctionHelper<Build, Process>::IsValid() const noexcept
 {
-	return EnterMessageLoop();
+    if (ParentType::IsValid() && ((WindowMainFunctionSchedule::Max <= windowMainFunctionSchedule) ^ (build == nullptr)))
+        return true;
+    else
+        return false;
 }
 
-template <template<typename> class Build, typename Process>
-int Framework::WindowMainFunctionHelper<Build, Process>
-	::EnterMessageLoop()
+#endif  // OPEN_CLASS_INVARIANT
+
+template <template <typename> class Build, typename Process>
+int Framework::WindowMainFunctionHelper<Build, Process>::DoRun()
 {
-	if (m_Build != nullptr)
-		return boost::numeric_cast<int>(m_Build->EnterMessageLoop());
-	else
-		return -1;
+    return EnterMessageLoop();
 }
 
-template <template<typename> class Build, typename Process>
-System::WindowsHWnd Framework::WindowMainFunctionHelper<Build, Process>
-	::GetHwnd() const noexcept
+template <template <typename> class Build, typename Process>
+int Framework::WindowMainFunctionHelper<Build, Process>::EnterMessageLoop()
 {
-	if (m_Build != nullptr)
-		return m_Build->GetHwnd();
-	else
-		return nullptr;
+    if (build != nullptr)
+        return boost::numeric_cast<int>(build->EnterMessageLoop());
+    else
+        return -1;
 }
 
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::Destroy()
+template <template <typename> class Build, typename Process>
+System::WindowsHWnd Framework::WindowMainFunctionHelper<Build, Process>::GetHwnd() const noexcept
 {
-	;
+    if (build != nullptr)
+        return build->GetHwnd();
+    else
+        return nullptr;
+}
 
-	if (WindowMainFunctionSchedule::Failure < m_WindowMainFunctionSchedule)
-	{
-		Terminators();		
-	}
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::Destroy()
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::Destroy();
+    if (WindowMainFunctionSchedule::Failure < windowMainFunctionSchedule)
+    {
+        Terminators();
+    }
+
+    ParentType::Destroy();
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::Initializers(HInstance instance, const char* commandLine, const WindowApplicationInformation& information)
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::Initializers(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information)
 {
-	EXCEPTION_TRY
-	{		
-		InitWindowProcess();
-		InitCamera();
-		InitRendererManager();
-		InitImpl(instance, commandLine, information);
-	}
-	EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
+    EXCEPTION_TRY
+    {
+        InitWindowProcess();
+        InitCamera();
+        InitRendererManager();
+        InitImpl(instance, commandLine, information);
+    }
+    EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::InitWindowProcess()
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::InitWindowProcess()
 {
-	WindowProcessManager::Create();
-	m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::WindowProcess;
+    WindowProcessManager::Create();
+    windowMainFunctionSchedule = WindowMainFunctionSchedule::WindowProcess;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::InitCamera()
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::InitCamera()
 {
-	Rendering::CameraManager::Create();
-	m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
+    Rendering::CameraManager::Create();
+    windowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::InitRendererManager()
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::InitRendererManager()
 {
-	Rendering::RendererManager::Create();
-	m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::RendererManager;
+    Rendering::RendererManager::Create();
+    windowMainFunctionSchedule = WindowMainFunctionSchedule::RendererManager;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::InitImpl(HInstance instance, const char* commandLine, const WindowApplicationInformation& information)
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::InitImpl(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information)
 {
-	m_Build = std::make_shared<BuildType>(instance, commandLine, information, GetEnvironmentDirectory());
-	m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::Max;
+    build = std::make_shared<BuildType>(instance, commandLine, information, GetEnvironmentDirectory());
+    windowMainFunctionSchedule = WindowMainFunctionSchedule::Max;
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::Terminators()
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::Terminators()
 {
-	EXCEPTION_TRY
-	{
-		DestroyImpl();
-		DestroyRendererManager();
-		DestroyCamera();
-		DestroyWindowProcess();
-	}
-	EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
+    EXCEPTION_TRY
+    {
+        DestroyImpl();
+        DestroyRendererManager();
+        DestroyCamera();
+        DestroyWindowProcess();
+    }
+    EXCEPTION_WINDOWS_ENTRY_POINT_CATCH
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::DestroyImpl() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::DestroyImpl() noexcept
 {
-	if (WindowMainFunctionSchedule::Max <= m_WindowMainFunctionSchedule)
-	{
-		m_Build.reset();
-		m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::RendererManager;
-	}
+    if (WindowMainFunctionSchedule::Max <= windowMainFunctionSchedule)
+    {
+        build.reset();
+        windowMainFunctionSchedule = WindowMainFunctionSchedule::RendererManager;
+    }
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::DestroyRendererManager() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::DestroyRendererManager() noexcept
 {
-	if (WindowMainFunctionSchedule::RendererManager <= m_WindowMainFunctionSchedule)
-	{
-		Rendering::RendererManager::Destroy();
-		m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
-	}
+    if (WindowMainFunctionSchedule::RendererManager <= windowMainFunctionSchedule)
+    {
+        Rendering::RendererManager::Destroy();
+        windowMainFunctionSchedule = WindowMainFunctionSchedule::Camera;
+    }
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::DestroyCamera() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::DestroyCamera() noexcept
 {
-	if (WindowMainFunctionSchedule::Camera <= m_WindowMainFunctionSchedule)
-	{
-		Rendering::CameraManager::Destroy();
-		m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::WindowProcess;
-	}
+    if (WindowMainFunctionSchedule::Camera <= windowMainFunctionSchedule)
+    {
+        Rendering::CameraManager::Destroy();
+        windowMainFunctionSchedule = WindowMainFunctionSchedule::WindowProcess;
+    }
 }
 
 // private
-template <template<typename> class Build, typename Process>
-void Framework::WindowMainFunctionHelper<Build, Process>
-	::DestroyWindowProcess() noexcept
+template <template <typename> class Build, typename Process>
+void Framework::WindowMainFunctionHelper<Build, Process>::DestroyWindowProcess() noexcept
 {
-	if (WindowMainFunctionSchedule::WindowProcess <= m_WindowMainFunctionSchedule)
-	{
-		WindowProcessManager::Destroy();
-		m_WindowMainFunctionSchedule = WindowMainFunctionSchedule::Failure;
-	}
+    if (WindowMainFunctionSchedule::WindowProcess <= windowMainFunctionSchedule)
+    {
+        WindowProcessManager::Destroy();
+        windowMainFunctionSchedule = WindowMainFunctionSchedule::Failure;
+    }
 }
 
-#endif // FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_DETAIL_H
+#endif  // FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_DETAIL_H

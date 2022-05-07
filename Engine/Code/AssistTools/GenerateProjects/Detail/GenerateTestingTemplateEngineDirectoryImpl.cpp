@@ -1,135 +1,139 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 13:31)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateEngineDirectoryImpl.h"
-#include "System/Helper/UnicodeUsing.h" 
 #include "System/FileManager/FileTools.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
+#include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/FileManager/CopyFileTools.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateLogJson.h"
 #include "AssistTools/GenerateProjects/GenerateTestingTemplateSolution.h"
 #include "AssistTools/GenerateProjects/GenerateTestingTemplateVcxproj.h"
 #include "AssistTools/GenerateProjects/GenerateTestingTemplateVcxprojFilters.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateLogJson.h" 
 
 using std::string;
- 
-AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateTestingTemplateEngineDirectoryImpl(const System::String& directory, const string& configurationFileName)	 
-	:ParentType(directory, configurationFileName)
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-} 
+using namespace std::literals;
 
- 
- 
+AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateTestingTemplateEngineDirectoryImpl(const System::String& directory, const string& configurationFileName)
+    : ParentType{ directory, configurationFileName }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateEngineDirectoryImpl)
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, 
-			     const System::String& newIncludeName, const System::String& newTestingIncludeName,
-				 const System::String& newDebugLibName, const System::String& newReleaseLibName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateTo(const System::String& resourceDirectory,
+                                                                         const System::String& newSolutionName,
+                                                                         const System::String& newCoreName,
+                                                                         const System::String& newIncludeName,
+                                                                         const System::String& newTestingIncludeName,
+                                                                         const System::String& newDebugLibName,
+                                                                         const System::String& newReleaseLibName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	GenerateToSolution(resourceDirectory,newSolutionName,newCoreName);
+    GenerateToSolution(resourceDirectory, newSolutionName, newCoreName);
 
-	GenerateToModule(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, SYSTEM_TEXT(""));
-	GenerateToModule(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, SYSTEM_TEXT("MiddleLayer")); 
-	GenerateToModule(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, newCoreName);
+    GenerateToModule(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, SYSTEM_TEXT(""s));
+    GenerateToModule(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, SYSTEM_TEXT("MiddleLayer"s));
+    GenerateToModule(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, newCoreName);
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToSolution(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToSolution(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTestingTemplate.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTestingTemplate.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() };
 
-	GenerateTestingTemplateSolution generateTestingTemplateSolution(fileName, GetProjectName(), GetCoreName());
-	generateTestingTemplateSolution.GenerateTo(fullDirectory, newSolutionName, newCoreName);
+    GenerateTestingTemplateSolution generateTestingTemplateSolution{ fileName, GetProjectName(), GetCoreName() };
+    generateTestingTemplateSolution.GenerateTo(fullDirectory, newSolutionName, newCoreName);
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToModule(const System::String& resourceDirectory, const System::String& newSolutionName,
-	                   const System::String& newIncludeName, const System::String& newTestingIncludeName, const System::String& newDebugLibName, 
-					   const System::String& newReleaseLibName, const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToModule(const System::String& resourceDirectory,
+                                                                               const System::String& newSolutionName,
+                                                                               const System::String& newIncludeName,
+                                                                               const System::String& newTestingIncludeName,
+                                                                               const System::String& newDebugLibName,
+                                                                               const System::String& newReleaseLibName,
+                                                                               const System::String& aModuleName) const
 {
-	GenerateToModuleVcxproj(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, moduleName);
-	GenerateToModuleVcxprojFilters(resourceDirectory, newSolutionName, moduleName);
-	GenerateToUpdate(resourceDirectory, newSolutionName, moduleName);
-	GenerateToLogJson(resourceDirectory, newSolutionName, moduleName);
-	GenerateToTestingJson(resourceDirectory, newSolutionName, moduleName);
-	GenerateToEnvironmentVariable(resourceDirectory, newSolutionName, moduleName);
+    GenerateToModuleVcxproj(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, aModuleName);
+    GenerateToModuleVcxprojFilters(resourceDirectory, newSolutionName, aModuleName);
+    GenerateToUpdate(resourceDirectory, newSolutionName, aModuleName);
+    GenerateToLogJson(resourceDirectory, newSolutionName, aModuleName);
+    GenerateToTestingJson(resourceDirectory, newSolutionName, aModuleName);
+    GenerateToEnvironmentVariable(resourceDirectory, newSolutionName, aModuleName);
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToModuleVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newIncludeName, 
-	                          const System::String& newTestingIncludeName, const System::String& newDebugLibName, const System::String& newReleaseLibName, 
-							  const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToModuleVcxproj(const System::String& resourceDirectory,
+                                                                                      const System::String& newSolutionName,
+                                                                                      const System::String& newIncludeName,
+                                                                                      const System::String& newTestingIncludeName,
+                                                                                      const System::String& newDebugLibName,
+                                                                                      const System::String& newReleaseLibName,
+                                                                                      const System::String& aModuleName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTestingTemplateVcxproj.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTestingTemplateVcxproj.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() };
 
-	GenerateTestingTemplateVcxproj generateTestingTemplateVcxproj(fileName, GetNewProjectName(), GetModuleName(), GetGameIncludeName(), GetTestingIncludeName(), GetDebugLibName(), GetReleaseLibName());
-	generateTestingTemplateVcxproj.GenerateTo(fullDirectory, newSolutionName, moduleName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName);
+    GenerateTestingTemplateVcxproj generateTestingTemplateVcxproj{ fileName, GetNewProjectName(), GetModuleName(), GetGameIncludeName(), GetTestingIncludeName(), GetDebugLibName(), GetReleaseLibName() };
+    generateTestingTemplateVcxproj.GenerateTo(fullDirectory, newSolutionName, aModuleName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName);
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToModuleVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToModuleVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTestingTemplateVcxprojFilters.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTestingTemplateVcxprojFilters.txt") };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() };
 
-	GenerateTestingTemplateVcxprojFilters generateTestingTemplateVcxprojFilters(fileName, GetProjectName(), GetModuleName());
-	generateTestingTemplateVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, moduleName);
+    GenerateTestingTemplateVcxprojFilters generateTestingTemplateVcxprojFilters{ fileName, GetProjectName(), GetModuleName() };
+    generateTestingTemplateVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, aModuleName);
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToUpdate(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToUpdate(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
 {
-	System::String fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting() + GetForwardSlash() + GetResource();
+    auto fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() + GetForwardSlash() + GetResource();
 
-	 [[maybe_unused]] const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
+    MAYBE_UNUSED const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
 
-	CoreTools::WriteFileManager manager(fullDirectory + GetForwardSlash() + GetUpdate());
+    CoreTools::WriteFileManager manager{ fullDirectory + GetForwardSlash() + GetUpdate() };
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToLogJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToLogJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateLog.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateLog.txt") };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting() + GetForwardSlash() + GetConfigurationDirectory());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() + GetForwardSlash() + GetConfigurationDirectory() };
 
-	GenerateTemplateLogJson generateTemplateLogJson(fileName, GetProjectName());
+    GenerateTemplateLogJson generateTemplateLogJson{ fileName, GetProjectName() };
 
-	generateTemplateLogJson.GenerateTo(fullDirectory, newSolutionName, GetLogFileName());
+    generateTemplateLogJson.GenerateTo(fullDirectory, newSolutionName, GetLogFileName());
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToTestingJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToTestingJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateTestingJson.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateTestingJson.txt") };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting() + GetForwardSlash() + GetConfigurationDirectory());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() + GetForwardSlash() + GetConfigurationDirectory() };
 
-	CoreTools::CopyFileTools(fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Testing.json"));
+    CoreTools::CopyFileTools copyFileTools{ fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Testing.json"s) };
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl
-	::GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& moduleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateEnvironmentVariable.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateEnvironmentVariable.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + moduleName + GetTesting() + GetForwardSlash() + GetConfigurationDirectory());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() + GetForwardSlash() + GetConfigurationDirectory() };
 
-	CoreTools::CopyFileTools(fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("EnvironmentVariable.json"));
+    CoreTools::CopyFileTools copyFileTools{ fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("EnvironmentVariable.json") };
 }

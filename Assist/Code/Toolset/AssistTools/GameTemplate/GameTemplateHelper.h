@@ -11,23 +11,22 @@
 
 namespace GameTemplate
 {
-	class GameTemplateHelper : public Framework::ConsoleMainFunctionHelperBase
-	{
-	public:
-		using ClassType = GameTemplateHelper;
-		using ParentType = ConsoleMainFunctionHelperBase;
-		using String = System::String;
-		using EnvironmentDirectory = Framework::EnvironmentDirectory;
+    class GameTemplateHelper : public Framework::ConsoleMainFunctionHelperBase
+    {
+    public:
+        using ClassType = GameTemplateHelper;
+        using ParentType = ConsoleMainFunctionHelperBase;
+        using String = System::String;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
-	public:	
-		GameTemplateHelper(int argc, char* argv[], const String& consoleTitle,
-						   const EnvironmentDirectory& environmentDirectory);
-		virtual ~GameTemplateHelper();
+    public:
+        GameTemplateHelper(int argc, char* argv[], const String& consoleTitle,
+                           const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		virtual int DoRun() override;
-	};
+        int DoRun() override;
+    };
 }
 
-#endif // GAME_TEMPLATE_GAME_TEMPLATE_HELPER_H
+#endif  // GAME_TEMPLATE_GAME_TEMPLATE_HELPER_H

@@ -157,7 +157,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -237,7 +237,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -269,24 +269,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
-    <Text Include="Resource\Schedule.txt" />
-    <Text Include="Resource\Todo\Level 0.txt" />
-    <Text Include="Resource\Todo\Level 1.txt" />
-    <Text Include="Resource\Todo\Level 2.txt" />
-    <Text Include="Resource\Todo\Level 3.txt" />
-    <Text Include="Resource\Todo\Level 4.txt" />
-    <Text Include="Resource\Todo\Level 5.txt" />
-    <Text Include="Resource\Todo\Level 6.txt" />
-    <Text Include="Resource\Todo\Level 7.txt" />
-    <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\..\Code\Animation\Animation.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationDll.h" />
-    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h" />    
+    <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h" />
     <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h" />
     <ClInclude Include="..\..\..\Code\Animation\DllLib.h" />
@@ -439,7 +425,23 @@
     <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationContainer.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationController.cpp" />
     <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationState.cpp" />
-    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.cpp" />   
+    <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

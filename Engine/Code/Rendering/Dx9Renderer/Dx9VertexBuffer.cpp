@@ -1,70 +1,55 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 21:24)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Dx9VertexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-#include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
-#include "CoreTools/Contract/Noexcept.h"
+#include "Rendering/Resources/VertexBuffer.h"
 
-Rendering::Dx9VertexBuffer::Dx9VertexBuffer([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const VertexBuffer* vertexBuffer) noexcept
+Rendering::Dx9VertexBuffer::Dx9VertexBuffer(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexBuffer* vertexBuffer) noexcept
     : ParentType{}
 {
- 
-    
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
- 
-
- 
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::Dx9VertexBuffer
-::IsValid() const noexcept
-{
-	if(ParentType::IsValid())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::Dx9VertexBuffer::Enable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int vertexSize, [[maybe_unused]] unsigned int streamIndex, [[maybe_unused]] unsigned int offset)
+bool Rendering::Dx9VertexBuffer::IsValid() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_1;   
- 
-    CoreTools::DisableNoexcept();
-     
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
-void Rendering::Dx9VertexBuffer::Disable([[maybe_unused]] Renderer* renderer, [[maybe_unused]] unsigned int streamIndex)
-{
-    RENDERING_CLASS_IS_VALID_1; 
-    CoreTools::DisableNoexcept();
-  
-}
+#endif  // OPEN_CLASS_INVARIANT
 
-void* Rendering::Dx9VertexBuffer::Lock([[maybe_unused]] BufferLocking mode)
+void Rendering::Dx9VertexBuffer::Enable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED int vertexSize, MAYBE_UNUSED int streamIndex, MAYBE_UNUSED int offset) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
- 
-
-	return nullptr;
 }
 
-void Rendering::Dx9VertexBuffer
-::Unlock ()
+void Rendering::Dx9VertexBuffer::Disable(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED int streamIndex) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
-    
 }
 
+void* Rendering::Dx9VertexBuffer::Lock(MAYBE_UNUSED BufferLocking mode) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return nullptr;
+}
+
+void Rendering::Dx9VertexBuffer::Unlock() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+}

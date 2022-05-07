@@ -1,39 +1,42 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 17:03)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_H
 
+#include "ArtificialIntellegenceInterface.h"
+#include "AudioManagerInterface.h"
+#include "CameraControllerMiddleLayerDetail.h"
+#include "CameraModelMiddleLayer.h"
+#include "CameraSystemsManagerInterface.h"
+#include "CameraViewMiddleLayer.h"
+#include "ControllerMiddleLayerDetail.h"
+#include "EngineMiddleLayerContainerDetail.h"
+#include "EngineMiddleLayerInterface.h"
+#include "EventManagerInterface.h"
+#include "GUIManagerInterface.h"
+#include "InputManagerDetail.h"
+#include "InputManagerInterface.h"
+#include "MessageManagerInterface.h"
 #include "MiddleLayerInterface.h"
+#include "ModelMiddleLayer.h"
 #include "ModelViewControllerMiddleLayer.h"
 #include "ModelViewControllerMiddleLayerContainerDetail.h"
-#include "ModelMiddleLayer.h"
-#include "ViewMiddleLayer.h"
-#include "ControllerMiddleLayerDetail.h"
-#include "PixelViewMiddleLayer.h"
-#include "CameraModelMiddleLayer.h"
-#include "CameraViewMiddleLayer.h"
-#include "CameraControllerMiddleLayerDetail.h"
-#include "EngineMiddleLayerInterface.h"
 #include "NetworkManagerInterface.h"
-#include "ObjectLogicManagerInterface.h"
-#include "ObjectLogicManager.h"
 #include "ObjectLogicInterface.h"
-#include "ArtificialIntellegenceInterface.h"
-#include "InputManagerInterface.h"
-#include "InputManagerDetail.h"
+#include "ObjectLogicManager.h"
+#include "ObjectLogicManagerInterface.h"
 #include "PhysicalModellingManagerInterface.h"
-#include "MessageManagerInterface.h"
-#include "EventManagerInterface.h"
-#include "SystemManagerInterface.h"
-#include "ResourceManagerInterface.h"
-#include "AudioManagerInterface.h"
-#include "CameraSystemsManagerInterface.h"
+#include "PixelViewMiddleLayer.h"
 #include "RenderingManagerInterface.h"
-#include "GUIManagerInterface.h"
-#include "EngineMiddleLayerContainerDetail.h"
+#include "ResourceManagerInterface.h"
+#include "SystemManagerInterface.h"
+#include "ViewMiddleLayer.h"
 
-#endif // FRAMEWORK_MIDDLE_LAYER_H
+#endif  // FRAMEWORK_MIDDLE_LAYER_H

@@ -1,82 +1,83 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 09:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:06)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowCreateHandleImpl.h"
 #include "System/Windows/WindowsCreate.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
 
 using namespace std::literals;
 
-Framework::WindowCreateHandleImpl
-	::WindowCreateHandleImpl(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size)
-	:m_WindowInstanceParameter{ windowInstanceParameter }, m_WindowCreateParameter{ windowCreateParameter }, m_Size{ size }, m_Hwnd{ nullptr }
+Framework::WindowCreateHandleImpl::WindowCreateHandleImpl(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size)
+    : windowInstanceParameter{ windowInstanceParameter }, windowCreateParameter{ windowCreateParameter }, size{ size }, hwnd{ nullptr }
 {
-	InitInstance();
+    InitInstance();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 // private
-void Framework::WindowCreateHandleImpl
-	::InitInstance()
+void Framework::WindowCreateHandleImpl::InitInstance()
 {
-	// 要求窗口有指定的客户区大小。
-	System::WindowsRect rect{ 0, 0,  m_Size.GetWindowWidth() - 1, m_Size.GetWindowHeight() - 1 };
+    // 要求窗口有指定的客户区大小。
+    System::WindowsRect rect{ 0, 0, size.GetWindowWidth() - 1, size.GetWindowHeight() - 1 };
 
-	if (!System::AdjustSystemWindowRect(&rect, m_WindowCreateParameter.GetStyle()))
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("获取窗口大小失败！"s));
-	}
+    if (!System::AdjustSystemWindowRect(&rect, windowCreateParameter.GetStyle()))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("获取窗口大小失败！"s));
+    }
 
-	auto windowClassName = m_WindowInstanceParameter.GetWindowClassName();
-	auto windowsName = m_WindowCreateParameter.GetWindowsName();
+    auto windowClassName = windowInstanceParameter.GetWindowClassName();
+    auto windowsName = windowCreateParameter.GetWindowsName();
 
-	// 创建应用程序窗口。
-	m_Hwnd = System::CreateSystemWindow(windowClassName.c_str(),
-										windowsName.c_str(),
-										m_WindowCreateParameter.GetStyle(),
-										m_WindowCreateParameter.GetLeftTopCorner().GetWindowX(),
-										m_WindowCreateParameter.GetLeftTopCorner().GetWindowY(),
-										rect, m_WindowCreateParameter.GetParent(),
-										m_WindowCreateParameter.GetMenu(),
-										m_WindowInstanceParameter.GetHInstance());
+    // 创建应用程序窗口。
+    hwnd = System::CreateSystemWindow(windowClassName.c_str(),
+                                      windowsName.c_str(),
+                                      windowCreateParameter.GetStyle(),
+                                      windowCreateParameter.GetLeftTopCorner().GetWindowX(),
+                                      windowCreateParameter.GetLeftTopCorner().GetWindowY(),
+                                      rect,
+                                      windowCreateParameter.GetParent(),
+                                      windowCreateParameter.GetMenu(),
+                                      windowInstanceParameter.GetHInstance());
 
-	if (m_Hwnd == nullptr)
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"s));
-	}
+    if (hwnd == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"s));
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowCreateHandleImpl
-	::IsValid() const noexcept
-{
-	if (m_Hwnd != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-Framework::WindowCreateHandleImpl::HWnd Framework::WindowCreateHandleImpl
-	::GetHwnd() const noexcept
+bool Framework::WindowCreateHandleImpl::IsValid() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return m_Hwnd;
+    if (hwnd != nullptr)
+        return true;
+    else
+        return false;
 }
 
-void Framework::WindowCreateHandleImpl
-	::SetMainWindow()
-{
-	FRAMEWORK_CLASS_IS_VALID_1;
+#endif  // OPEN_CLASS_INVARIANT
 
-	WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHwnd(m_Hwnd);
+Framework::WindowCreateHandleImpl::WindowsHWnd Framework::WindowCreateHandleImpl::GetHwnd() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return hwnd;
+}
+
+void Framework::WindowCreateHandleImpl::SetMainWindow()
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    WINDOW_PROCESS_MANAGER_SINGLETON.SetMainWindowHwnd(hwnd);
 }

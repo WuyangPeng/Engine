@@ -1,50 +1,53 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 14:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 13:59)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_TEXTURE_3D_IMPL_H
 #define RENDERING_RENDERERS_PLATFORM_TEXTURE_3D_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 #include <memory>
 
 namespace Rendering
 {
-	class Renderer;
-	class Texture3D;
-	
-	class RENDERING_HIDDEN_DECLARE PlatformTexture3DImpl
-	{
-	public:
-		using ClassType = PlatformTexture3DImpl;
-		using PlatformTexture3DPtr = std::shared_ptr<ClassType>;
-		  using FactoryType = ClassType;
-	public:
-		PlatformTexture3DImpl() noexcept;
-		virtual ~PlatformTexture3DImpl();
-                PlatformTexture3DImpl(const PlatformTexture3DImpl&) = default;
-                PlatformTexture3DImpl& operator=(const PlatformTexture3DImpl&) = default;
-                PlatformTexture3DImpl(PlatformTexture3DImpl&&) = default;
-                PlatformTexture3DImpl& operator=(PlatformTexture3DImpl&&) = default;
+    class RENDERING_HIDDEN_DECLARE PlatformTexture3DImpl
+    {
+    public:
+        using ClassType = PlatformTexture3DImpl;
+        using PlatformTexture3DSharedPtr = std::shared_ptr<ClassType>;
+        using FactoryType = ClassType;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+    public:
+        PlatformTexture3DImpl() noexcept;
+        virtual ~PlatformTexture3DImpl() noexcept = default;
+        PlatformTexture3DImpl(const PlatformTexture3DImpl& rhs) noexcept = default;
+        PlatformTexture3DImpl& operator=(const PlatformTexture3DImpl& rhs) noexcept = default;
+        PlatformTexture3DImpl(PlatformTexture3DImpl&& rhs) noexcept = default;
+        PlatformTexture3DImpl& operator=(PlatformTexture3DImpl&& rhs) noexcept = default;
 
-		// 纹理操作
-		virtual void Enable (Renderer* renderer, int textureUnit) = 0;
-		virtual void Disable (Renderer* renderer, int textureUnit) = 0;
-		virtual void* Lock (int level, BufferLocking mode) = 0;
-		virtual void Unlock (int level) = 0;		
-	
-		static PlatformTexture3DPtr Create(Renderer* renderer,  const Texture3D* texture3D);
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+        // 纹理操作
+        virtual void Enable(Renderer* renderer, int textureUnit) = 0;
+        virtual void Disable(Renderer* renderer, int textureUnit) = 0;
+        NODISCARD virtual void* Lock(int level, BufferLocking mode) = 0;
+        virtual void Unlock(int level) = 0;
+
+        NODISCARD static PlatformTexture3DSharedPtr Create(Renderer* renderer, const Texture3D* texture3D);
 
     private:
-        static PlatformTexture3DPtr CreateDefault(Renderer* renderer,  const Texture3D* texture3D);
-	};
+        NODISCARD static PlatformTexture3DSharedPtr CreateDefault(Renderer* renderer, const Texture3D* texture3D);
+    };
 }
 
-#endif // RENDERING_RENDERERS_PLATFORM_TEXTURE_3D_IMPL_H
+#endif  // RENDERING_RENDERERS_PLATFORM_TEXTURE_3D_IMPL_H

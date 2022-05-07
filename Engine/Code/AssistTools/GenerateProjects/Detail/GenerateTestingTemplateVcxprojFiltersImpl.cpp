@@ -1,41 +1,38 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 13:41)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateVcxprojFiltersImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTestingTemplateVcxprojFiltersImpl
-	::sm_Extension(SYSTEM_TEXT(".vcxproj.filters"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTestingTemplateVcxprojFiltersImpl
-::GenerateTestingTemplateVcxprojFiltersImpl(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName)
-	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName), m_ModuleName(moduleName)
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
- 
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTestingTemplateVcxprojFiltersImpl::extension{ SYSTEM_TEXT(".vcxproj.filters") };
+
+AssistTools::GenerateTestingTemplateVcxprojFiltersImpl::GenerateTestingTemplateVcxprojFiltersImpl(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName)
+    : ParentType{ templateFileName, extension }, projectName{ projectName }, moduleName{ moduleName }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateVcxprojFiltersImpl)
 
-void AssistTools::GenerateTestingTemplateVcxprojFiltersImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName,const System::String& newModuleName) const
+void AssistTools::GenerateTestingTemplateVcxprojFiltersImpl::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newModuleName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable;
-	newVariable.insert(make_pair(m_ProjectName, solutionName));
-	newVariable.insert(make_pair(m_ModuleName, newModuleName));
+    VariableType newVariable{ { projectName, solutionName }, { moduleName, newModuleName } };
 
-	return ParentType::Generate (resourceDirectory, solutionName + newModuleName + GetTesting(), newVariable);
+    return ParentType::Generate(resourceDirectory, solutionName + newModuleName + GetTesting(), newVariable);
 }
 
 /*

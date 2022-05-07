@@ -1,97 +1,91 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 16:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 14:43)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SingleShaderConstantsDataImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 using std::string;
-#include STSTEM_WARNING_PUSH 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::SingleShaderConstantsDataImpl
-	::SingleShaderConstantsDataImpl( const string& name,int numRegistersUsed )
-	:m_Name{ name }, m_NumRegistersUsed{ numRegistersUsed }
+
+Rendering::SingleShaderConstantsDataImpl::SingleShaderConstantsDataImpl(const string& name, int numRegistersUsed)
+    : name{ name }, numRegistersUsed{ numRegistersUsed }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::SingleShaderConstantsDataImpl::SingleShaderConstantsDataImpl() noexcept
-    : m_Name{}, m_NumRegistersUsed{ 0 }
+    : name{}, numRegistersUsed{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::SingleShaderConstantsDataImpl
-	::IsValid() const noexcept
-{
-	if(0 <= m_NumRegistersUsed)
-	    return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::SingleShaderConstantsDataImpl
-	::SetConstant( const std::string& name, int numRegistersUsed )
+bool Rendering::SingleShaderConstantsDataImpl::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
-
-	m_Name = name;
-	m_NumRegistersUsed = numRegistersUsed;
+    if (0 <= numRegistersUsed)
+        return true;
+    else
+        return false;
 }
 
-const string Rendering::SingleShaderConstantsDataImpl
-	::GetConstantName() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;	
+#endif  // OPEN_CLASS_INVARIANT
 
-	return m_Name;
+void Rendering::SingleShaderConstantsDataImpl::SetConstant(const std::string& aName, int aNumRegistersUsed)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    name = aName;
+    numRegistersUsed = aNumRegistersUsed;
+}
+
+string Rendering::SingleShaderConstantsDataImpl::GetConstantName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return name;
 }
 
 int Rendering::SingleShaderConstantsDataImpl::GetNumRegistersUsed() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumRegistersUsed;
+    return numRegistersUsed;
 }
 
 void Rendering::SingleShaderConstantsDataImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Name = source.ReadString();
-	source.Read(m_NumRegistersUsed);
+    name = source.ReadString();
+    source.Read(numRegistersUsed);
 }
 
-void Rendering::SingleShaderConstantsDataImpl
-	::Save( CoreTools::BufferTarget& target ) const
+void Rendering::SingleShaderConstantsDataImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_Name);
-	target.Write(m_NumRegistersUsed);
+    target.Write(name);
+    target.Write(numRegistersUsed);
 }
 
-int Rendering::SingleShaderConstantsDataImpl
-	::GetStreamingSize() const
+int Rendering::SingleShaderConstantsDataImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Name);
-	size += CORE_TOOLS_STREAM_SIZE(m_NumRegistersUsed);
+    auto size = CORE_TOOLS_STREAM_SIZE(name);
+    size += CORE_TOOLS_STREAM_SIZE(numRegistersUsed);
 
-	return size;
+    return size;
 }
-
-
-#include STSTEM_WARNING_POP

@@ -19,19 +19,18 @@ namespace Rendering
 
     public:
         TestSurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular);
- 
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(TestSurfacePatch);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
         [[nodiscard]] ObjectInterfaceSharedPtr CloneObject() const override;
-        const APoint GetPosition(float u, float v) const override;
-        const AVector GetDerivativesU(float u, float v) const override;
-        const AVector GetDerivativesV(float u, float v) const override;
-        const AVector GetDerivativesUU(float u, float v) const override;
-        const AVector GetDerivativesUV(float u, float v) const override;
-        const AVector GetDerivativesVV(float u, float v) const override;
+        APoint GetPosition(float u, float v) const override;
+        AVector GetDerivativesU(float u, float v) const override;
+        AVector GetDerivativesV(float u, float v) const override;
+        AVector GetDerivativesUU(float u, float v) const override;
+        AVector GetDerivativesUV(float u, float v) const override;
+        AVector GetDerivativesVV(float u, float v) const override;
     };
 
 }

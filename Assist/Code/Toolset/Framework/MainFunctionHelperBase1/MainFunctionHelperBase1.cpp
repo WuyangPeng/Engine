@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-Framework::MainFunctionHelperBase1 ::MainFunctionHelperBase1([[maybe_unused]] int argc, [[maybe_unused]] char** argv, [[maybe_unused]] const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
+Framework::MainFunctionHelperBase1::MainFunctionHelperBase1([[maybe_unused]] int argc, [[maybe_unused]] char** argv, [[maybe_unused]] const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ environmentDirectory }
 {
  

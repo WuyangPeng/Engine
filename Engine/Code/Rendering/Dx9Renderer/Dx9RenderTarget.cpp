@@ -1,54 +1,37 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 18:15)
 
 #include "Rendering/RenderingExport.h"
 
-#include "Dx9RenderTarget.h" 
+#include "Dx9RenderTarget.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-
-#include "CoreTools/Contract/Noexcept.h"
-
-Rendering::Dx9RenderTarget::Dx9RenderTarget([[maybe_unused]] Renderer* renderer, [[maybe_unused]] const RenderTarget* renderTarget)
-    : ParentType{}
+Rendering::Dx9RenderTarget::Dx9RenderTarget(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const RenderTarget* renderTarget) noexcept
 {
- 
-CoreTools::DisableNoexcept();
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
- 
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, Dx9RenderTarget)
 
-void Rendering::Dx9RenderTarget::Enable([[maybe_unused]] Renderer* renderer)
+void Rendering::Dx9RenderTarget::Enable(MAYBE_UNUSED Renderer* renderer) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9; 
-
- 
-
-	CoreTools::DisableNoexcept();
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-void Rendering::Dx9RenderTarget::Disable([[maybe_unused]] Renderer* renderer)
+void Rendering::Dx9RenderTarget::Disable(MAYBE_UNUSED Renderer* renderer) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;  
-
-	  
-
-	 CoreTools::DisableNoexcept();
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-Rendering::ConstTexture2DSharedPtr Rendering::Dx9RenderTarget::ReadColor([[maybe_unused]] int index, [[maybe_unused]] Renderer* renderer)
+Rendering::ConstTexture2DSharedPtr Rendering::Dx9RenderTarget::ReadColor(MAYBE_UNUSED int index, MAYBE_UNUSED Renderer* renderer) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;  
+    RENDERING_CLASS_IS_VALID_1;
 
- 
-	CoreTools::DisableNoexcept();
-
-	return ConstTexture2DSharedPtr();
+    return nullptr;
 }
-

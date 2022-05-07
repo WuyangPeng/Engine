@@ -1,50 +1,53 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 14:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 14:03)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_VERTEX_BUFFER_IMPL_H
 #define RENDERING_RENDERERS_PLATFORM_VERTEX_BUFFER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 #include <memory>
 
 namespace Rendering
 {
-	class Renderer;
-	class VertexBuffer;
-	
-	class RENDERING_HIDDEN_DECLARE PlatformVertexBufferImpl
-	{
-	public:
-		using ClassType = PlatformVertexBufferImpl;
-		using PlatformVertexBufferPtr = std::shared_ptr<ClassType>;
-		 using FactoryType = ClassType;
-	public:
-		PlatformVertexBufferImpl () noexcept;
-		virtual ~PlatformVertexBufferImpl ();
-		PlatformVertexBufferImpl(const PlatformVertexBufferImpl&) = default;
-		PlatformVertexBufferImpl& operator=(const PlatformVertexBufferImpl&) = default;
-		PlatformVertexBufferImpl(PlatformVertexBufferImpl&&) = default;
-		PlatformVertexBufferImpl& operator=(PlatformVertexBufferImpl&&) = default;
+    class RENDERING_HIDDEN_DECLARE PlatformVertexBufferImpl
+    {
+    public:
+        using ClassType = PlatformVertexBufferImpl;
+        using PlatformVertexBufferSharedPtr = std::shared_ptr<ClassType>;
+        using FactoryType = ClassType;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-		
-		// 顶点缓冲区操作。
-		virtual void Enable (Renderer* renderer, unsigned int vertexSize,unsigned int streamIndex, unsigned int offset) = 0;
-		virtual void Disable (Renderer* renderer, unsigned int streamIndex) = 0;
-		virtual void* Lock (BufferLocking mode) = 0;
-		virtual void Unlock () = 0;		
+    public:
+        PlatformVertexBufferImpl() noexcept;
+        virtual ~PlatformVertexBufferImpl() noexcept = default;
+        PlatformVertexBufferImpl(const PlatformVertexBufferImpl& rhs) noexcept = default;
+        PlatformVertexBufferImpl& operator=(const PlatformVertexBufferImpl& rhs) noexcept = default;
+        PlatformVertexBufferImpl(PlatformVertexBufferImpl&& rhs) noexcept = default;
+        PlatformVertexBufferImpl& operator=(PlatformVertexBufferImpl&& rhs) noexcept = default;
 
-		static PlatformVertexBufferPtr Create(Renderer* renderer, const VertexBuffer* vertexBuffer);
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+        // 顶点缓冲区操作。
+        virtual void Enable(Renderer* renderer, int vertexSize, int streamIndex, int offset) = 0;
+        virtual void Disable(Renderer* renderer, int streamIndex) = 0;
+        NODISCARD virtual void* Lock(BufferLocking mode) = 0;
+        virtual void Unlock() = 0;
+
+        NODISCARD static PlatformVertexBufferSharedPtr Create(Renderer* renderer, const VertexBuffer* vertexBuffer);
 
     private:
-        static PlatformVertexBufferPtr CreateDefault(Renderer* renderer,const VertexBuffer* vertexBuffer);
-	};
+        NODISCARD static PlatformVertexBufferSharedPtr CreateDefault(Renderer* renderer, const VertexBuffer* vertexBuffer);
+    };
 }
 
-#endif // RENDERING_RENDERERS_PLATFORM_VERTEX_BUFFER_IMPL_H
+#endif  // RENDERING_RENDERERS_PLATFORM_VERTEX_BUFFER_IMPL_H

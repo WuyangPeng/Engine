@@ -7,24 +7,26 @@
 #ifndef WIN_MAIN_ENTRY_POINT1_H
 #define WIN_MAIN_ENTRY_POINT1_H
 
-#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuild.h" 
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelper.h"
+#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuild.h"
 
 namespace Framework
 {
-	using BaseType = WindowMainFunctionHelper<WindowsAPIFrameBuild, WindowProcessInterface>;
+    using BaseType = WindowMainFunctionHelper<WindowsAPIFrameBuild, WindowProcessInterface>;
 
-	class WinMainEntryPoint1 final : public BaseType
-	{
-	public:
-		using ClassType = WinMainEntryPoint1;
-		using ParentType = BaseType;
+    class WinMainEntryPoint1 final : public BaseType
+    {
+    public:
+        using ClassType = WinMainEntryPoint1;
+        using ParentType = BaseType;
 
-	public:
-		WinMainEntryPoint1(HInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+    public:
+        WinMainEntryPoint1(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
-	};
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+        NODISCARD static std::shared_ptr<WinMainEntryPoint1> Create(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+    };
 }
 
-#endif // WIN_MAIN_ENTRY_POINT1_H
+#endif  // WIN_MAIN_ENTRY_POINT1_H

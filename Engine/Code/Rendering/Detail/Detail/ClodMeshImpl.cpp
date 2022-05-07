@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 10:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 18:44)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ClodMeshImpl.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
@@ -15,23 +19,17 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Renderers/RendererManager.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 using std::string;
 using std::vector;
 
 Rendering::ClodMeshImpl::ClodMeshImpl() noexcept
-    : m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{}
+    : currentRecord{ 0 }, targetRecord{ 0 }, recordArray{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::ClodMeshImpl::ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept
-    : m_CurrentRecord{ 0 }, m_TargetRecord{ 0 }, m_RecordArray{ recordArray }
+    : currentRecord{ 0 }, targetRecord{ 0 }, recordArray{ recordArray }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -42,28 +40,28 @@ void Rendering::ClodMeshImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    source.Read(m_CurrentRecord);
-    source.Read(m_TargetRecord);
-    //source.ReadSharedPtr(m_RecordArray);
+    source.Read(currentRecord);
+    source.Read(targetRecord);
+    source.ReadObjectAssociated(recordArray);
 }
 
 void Rendering::ClodMeshImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    target.Write(m_CurrentRecord);
-    target.Write(m_TargetRecord);
-    //	target.WriteSharedPtr(m_RecordArray);
+    target.Write(currentRecord);
+    target.Write(targetRecord);
+    target.WriteObjectAssociated(recordArray);
 }
 
-int Rendering::ClodMeshImpl::GetStreamingSize() const
+int Rendering::ClodMeshImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_CurrentRecord);
+    auto size = CORE_TOOLS_STREAM_SIZE(currentRecord);
 
-    size += CORE_TOOLS_STREAM_SIZE(m_TargetRecord);
-    size += CORE_TOOLS_STREAM_SIZE(m_RecordArray);
+    size += CORE_TOOLS_STREAM_SIZE(targetRecord);
+    size += CORE_TOOLS_STREAM_SIZE(recordArray);
 
     return size;
 }
@@ -71,51 +69,51 @@ int Rendering::ClodMeshImpl::GetStreamingSize() const
 void Rendering::ClodMeshImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    //source.ResolveObjectSharedPtrLink(m_RecordArray);
+
+    source.ResolveLink(recordArray);
 }
 
 void Rendering::ClodMeshImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    //target.RegisterSharedPtr(m_RecordArray);
+
+    target.Register(recordArray);
 }
 
 int Rendering::ClodMeshImpl::GetNumRecords() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_RecordArray->GetNumRecords();
+    return recordArray.object->GetNumRecords();
 }
 
 int Rendering::ClodMeshImpl::GetTargetRecord() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_TargetRecord;
+    return targetRecord;
 }
 
-void Rendering::ClodMeshImpl::SetTargetRecord(int targetRecord) noexcept
+void Rendering::ClodMeshImpl::SetTargetRecord(int aTargetRecord) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_TargetRecord = targetRecord;
+    targetRecord = aTargetRecord;
 }
 
-void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBufferSharedPtr vertexbuffer, IndexBufferSharedPtr indexbuffer, int targetRecord)
+void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, const IndexBufferSharedPtr& indexbuffer, int aTargetRecord)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     // 如果必要的话，塌陷网格。
-    const auto bufferChanged = (m_CurrentRecord != targetRecord);
+    const auto bufferChanged = (currentRecord != aTargetRecord);
 
-    while (m_CurrentRecord < targetRecord)
+    while (currentRecord < aTargetRecord)
     {
-        ++m_CurrentRecord;
+        ++currentRecord;
 
         // 更换连接数组中的索引
-        auto record = m_RecordArray->GetRecord(m_CurrentRecord);
+        auto record = recordArray.object->GetRecord(currentRecord);
         for (auto i = 0; i < record.GetIndicesSize(); ++i)
         {
             const auto recordIndex = record.GetIndex(i);
@@ -123,28 +121,28 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBufferSharedPtr vertexbu
         }
 
         // 减少顶点数，顶点正确排序。
-        vertexbuffer->SetNumElements(record.GetNumVertices());
+        vertexbuffer.SetNumElements(record.GetNumVertices());
 
         // 减少三角形数量，三角形正确排序。
         indexbuffer->SetNumElements(3 * record.GetNumTriangles());
     }
 
     // 如果需要的话,扩大网格
-    while (targetRecord < m_CurrentRecord)
+    while (targetRecord < currentRecord)
     {
         // 更换连接数组中的索引
-        auto record = m_RecordArray->GetRecord(m_CurrentRecord);
+        auto record = recordArray.object->GetRecord(currentRecord);
         for (auto i = 0; i < record.GetIndicesSize(); ++i)
         {
             const auto recordIndex = record.GetIndex(i);
             indexbuffer->SetIndexBuffer(recordIndex, record.GetVKeep(), record.GetVThrow());
         }
 
-        --m_CurrentRecord;
-        auto prevRecord = m_RecordArray->GetRecord(m_CurrentRecord);
+        --currentRecord;
+        auto prevRecord = recordArray.object->GetRecord(currentRecord);
 
         // 增加顶点数，顶点正确排序。
-        vertexbuffer->SetNumElements(prevRecord.GetNumVertices());
+        vertexbuffer.SetNumElements(prevRecord.GetNumVertices());
 
         // 增加三角形数量，三角形正确排序。
         indexbuffer->SetNumElements(3 * prevRecord.GetNumTriangles());
@@ -160,27 +158,26 @@ CoreTools::ObjectSharedPtr Rendering::ClodMeshImpl::GetObjectByName(const string
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_RecordArray->GetObjectByName(name);
+    return recordArray.object->GetObjectByName(name);
 }
 
 vector<CoreTools::ObjectSharedPtr> Rendering::ClodMeshImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_RecordArray->GetAllObjectsByName(name);
+    return recordArray.object->GetAllObjectsByName(name);
 }
 
 CoreTools::ConstObjectSharedPtr Rendering::ClodMeshImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_RecordArray->GetConstObjectByName(name);
+    return recordArray.object->GetConstObjectByName(name);
 }
 
 vector<CoreTools::ConstObjectSharedPtr> Rendering::ClodMeshImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return m_RecordArray->GetAllConstObjectsByName(name);
+    return recordArray.object->GetAllConstObjectsByName(name);
 }
-#include STSTEM_WARNING_POP

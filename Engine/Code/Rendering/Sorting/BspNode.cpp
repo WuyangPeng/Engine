@@ -1,64 +1,72 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 14:15)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BspNode.h"
-#include "Mathematics/Algebra/PlaneDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
- 
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
- #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486) 
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26496)
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/PlaneDetail.h"
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, BspNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BspNode);
-CORE_TOOLS_FACTORY_DEFINE(Rendering, BspNode); 
+CORE_TOOLS_FACTORY_DEFINE(Rendering, BspNode);
 
-Rendering::BspNode
-	::BspNode ()
-    : ParentType{ NodeCreate::Init }, ModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
+Rendering::BspNode::BspNodeSharedPtr Rendering::BspNode::Create()
 {
-	SpatialSharedPtr spatialSharedPtr;
-	AttachChild(spatialSharedPtr);  // left child
-	AttachChild(spatialSharedPtr);  // middle child
-	AttachChild(spatialSharedPtr);  // right child
+    return std::make_shared<ClassType>(NodeCreate::Init);
 }
 
-Rendering::BspNode
-	::BspNode(const Mathematics::PlaneF& modelPlane)
-    : ParentType{ NodeCreate::Init }, ModelPlane(modelPlane), mWorldPlane(modelPlane)
+Rendering::BspNode::BspNode(NodeCreate nodeCreate)
+    : ParentType{ nodeCreate },
+      modelPlane{ 0.0f, 0.0f, 0.0f, 0.0f },
+      worldPlane{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
-	SpatialSharedPtr spatialSharedPtr;
-	AttachChild(spatialSharedPtr);  // left child
-	AttachChild(spatialSharedPtr);  // middle child
-	AttachChild(spatialSharedPtr);  // right child
+    SpatialSharedPtr spatialSharedPtr{};
+    AttachChild(spatialSharedPtr);
+    AttachChild(spatialSharedPtr);
+    AttachChild(spatialSharedPtr);
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_STUB_DEFINE(Rendering, BspNode)
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::GetContainingNode(const Mathematics::APointF& point)
+Rendering::BspNode::BspNode(const Mathematics::PlaneF& modelPlane)
+    : ParentType{ NodeCreate::Init },
+      modelPlane{ modelPlane },
+      worldPlane{ modelPlane }
 {
-    SpatialSharedPtr posChild = GetPositiveChild();
-	SpatialSharedPtr negChild = GetNegativeChild();
+    SpatialSharedPtr spatialSharedPtr{};
+    AttachChild(spatialSharedPtr);
+    AttachChild(spatialSharedPtr);
+    AttachChild(spatialSharedPtr);
 
-	if (posChild  || negChild )
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+Rendering::SpatialSharedPtr Rendering::BspNode::GetContainingNode(const Mathematics::APointF& point)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto posChild = GetPositiveChild();
+    auto negChild = GetNegativeChild();
+
+    if (posChild || negChild)
     {
-		BspNodeSharedPtr bspChild;
-
-        if (mWorldPlane.WhichSide(point) < Mathematics::NumericalValueSymbol::Zero)
+        if (worldPlane.WhichSide(point) < Mathematics::NumericalValueSymbol::Zero)
         {
-            bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);//.PolymorphicCastObjectSharedPtr<SharedPtr>();
-			if (bspChild )
+            auto bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);
+            if (bspChild)
             {
                 return bspChild->GetContainingNode(point);
             }
@@ -69,9 +77,8 @@ Rendering::SpatialSharedPtr Rendering::BspNode
         }
         else
         {
-            bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);
-           // posChild.PolymorphicCastObjectSharedPtr<BspNodeSharedPtr>();
-			if (bspChild )
+            auto bspChild = boost::polymorphic_pointer_cast<BspNode>(negChild);
+            if (bspChild)
             {
                 return bspChild->GetContainingNode(point);
             }
@@ -82,49 +89,44 @@ Rendering::SpatialSharedPtr Rendering::BspNode
         }
     }
 
-	return SpatialSharedPtr(this);
+    return boost::polymorphic_pointer_cast<Spatial>(shared_from_this());
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::BspNode::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
-bool Rendering::BspNode::UpdateWorldData (double applicationTime)
+bool Rendering::BspNode::UpdateWorldData(double applicationTime)
 {
-const	bool result =  Node::UpdateWorldData(applicationTime);
- 
-     //mWorldPlane = ModelPlane * GetWorldTransform().GetInverseMatrix();
-  // mWorldPlane.Normalize();
+    RENDERING_CLASS_IS_VALID_1;
 
-	return result;
+    const auto result = Node::UpdateWorldData(applicationTime);
+
+    worldPlane = modelPlane.GetHomogeneousPoint() * GetWorldTransform().GetInverseMatrix();
+
+    return result;
 }
 
-void Rendering::BspNode
-	::GetVisibleSet (Culler& culler, bool noCull)
+void Rendering::BspNode::GetVisibleSet(Culler& culler, bool noCull)
 {
-    // Get visible Geometry in back-to-front order.  If a global effect is
-    // active, the Geometry objects in the subtree will be drawn using it.
-    SpatialSharedPtr posChild = GetPositiveChild();
-	SpatialSharedPtr copChild = GetCoplanarChild();
-	SpatialSharedPtr negChild = GetNegativeChild();
+    RENDERING_CLASS_IS_VALID_1;
 
-    const ConstCameraSharedPtr camera = culler.GetCamera();
-	Mathematics::NumericalValueSymbol positionSide = mWorldPlane.WhichSide(camera->GetPosition());
-const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPlane);
+    auto posChild = GetPositiveChild();
+    auto copChild = GetCoplanarChild();
+    auto negChild = GetNegativeChild();
+
+    const auto camera = culler.GetCamera();
+    const auto positionSide = worldPlane.WhichSide(camera->GetPosition());
+    const auto frustumSide = culler.WhichSide(worldPlane);
 
     if (positionSide > Mathematics::NumericalValueSymbol::Zero)
     {
-        // Camera origin on positive side of plane.
-
         if (frustumSide <= Mathematics::NumericalValueSymbol::Zero)
         {
-            // The frustum is on the negative side of the plane or straddles
-            // the plane.  In either case, the negative child is potentially
-            // visible.
-			if (negChild )
+            if (negChild)
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
@@ -132,9 +134,7 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
 
         if (frustumSide == Mathematics::NumericalValueSymbol::Zero)
         {
-            // The frustum straddles the plane.  The coplanar child is
-            // potentially visible.
-			if (copChild )
+            if (copChild)
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
@@ -142,10 +142,7 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
 
         if (frustumSide >= Mathematics::NumericalValueSymbol::Zero)
         {
-            // The frustum is on the positive side of the plane or straddles
-            // the plane.  In either case, the positive child is potentially
-            // visible.
-			if (posChild )
+            if (posChild)
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
@@ -153,14 +150,9 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
     }
     else if (positionSide < Mathematics::NumericalValueSymbol::Zero)
     {
-        // Camera origin on negative side of plane.
-
         if (frustumSide >= Mathematics::NumericalValueSymbol::Zero)
         {
-            // The frustum is on the positive side of the plane or straddles
-            // the plane.  In either case, the positive child is potentially
-            // visible.
-			if (posChild )
+            if (posChild)
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
@@ -168,9 +160,7 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
 
         if (frustumSide == Mathematics::NumericalValueSymbol::Zero)
         {
-            // The frustum straddles the plane.  The coplanar child is
-            // potentially visible.
-			if (copChild )
+            if (copChild)
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
@@ -178,10 +168,7 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
 
         if (frustumSide <= Mathematics::NumericalValueSymbol::Zero)
         {
-            // The frustum is on the negative side of the plane or straddles
-            // the plane.  In either case, the negative child is potentially
-            // visible.
-			if (negChild )
+            if (negChild)
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
@@ -189,41 +176,37 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
     }
     else
     {
-        // Camera origin on plane itself.  Both sides of the plane are
-        // potentially visible as well as the plane itself.  Select the
-        // first-to-be-drawn half space to be the one to which the camera
-        // direction points.
-		float NdD = Dot( mWorldPlane.GetNormal(),camera->GetDirectionVector());
-        if (NdD >= 0.0f)
+        const auto ndd = Dot(worldPlane.GetNormal(), camera->GetDirectionVector());
+        if (ndd >= 0.0f)
         {
-			if (posChild )
+            if (posChild)
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (copChild )
+            if (copChild)
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (negChild )
+            if (negChild)
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
         }
         else
         {
-			if (negChild )
+            if (negChild)
             {
                 negChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (copChild )
+            if (copChild)
             {
                 copChild->OnGetVisibleSet(culler, noCull);
             }
 
-			if (posChild )
+            if (posChild)
             {
                 posChild->OnGetVisibleSet(culler, noCull);
             }
@@ -231,137 +214,143 @@ const	Mathematics::NumericalValueSymbol frustumSide = culler.WhichSide(mWorldPla
     }
 }
 
-
-
-// Streaming support.
-
-Rendering::BspNode
-	::BspNode (LoadConstructor value)
-    : Node(value), ModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
+Rendering::BspNode::BspNode(LoadConstructor value)
+    : ParentType{ value }, modelPlane{ 0.0f, 0.0f, 0.0f, 0.0f }, worldPlane{ 0.0f, 0.0f, 0.0f, 0.0f }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::BspNode
-	::Load(CoreTools::BufferSource& source)
+void Rendering::BspNode::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    Node::Load(source);
+    ParentType::Load(source);
 
-    source.ReadAggregate(ModelPlane);
-    source.ReadAggregate(mWorldPlane);
+    source.ReadAggregate(modelPlane);
+    source.ReadAggregate(worldPlane);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::BspNode
-	::Link(CoreTools::ObjectLink& source)
+void Rendering::BspNode::Link(CoreTools::ObjectLink& source)
 {
-    Node::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::Link(source);
 }
 
-void Rendering::BspNode
-	::PostLink ()
+void Rendering::BspNode::PostLink()
 {
-    Node::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-uint64_t Rendering::BspNode
-	::Register(CoreTools::ObjectRegister& target) const
+uint64_t Rendering::BspNode::Register(CoreTools::ObjectRegister& target) const
 {
-    return Node::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::BspNode
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::BspNode::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    Node::Save(target);
+    ParentType::Save(target);
 
-	target.WriteAggregate(ModelPlane);
-    target.WriteAggregate(mWorldPlane);
+    target.WriteAggregate(modelPlane);
+    target.WriteAggregate(worldPlane);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::BspNode
-	::GetStreamingSize () const
+int Rendering::BspNode::GetStreamingSize() const
 {
-    int size = Node::GetStreamingSize();
-    size += sizeof(ModelPlane);
-    size += sizeof(mWorldPlane);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+    size += CORE_TOOLS_STREAM_SIZE(modelPlane);
+    size += CORE_TOOLS_STREAM_SIZE(worldPlane);
     return size;
 }
 
-
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::AttachPositiveChild (SpatialSharedPtr child)
+Rendering::SpatialSharedPtr Rendering::BspNode::AttachPositiveChild(const SpatialSharedPtr& child)
 {
-	AttachChild(child);
-	return child;
-	 
-	//return SetChild(0, child);
+    RENDERING_CLASS_IS_VALID_1;
+
+    AttachChild(child);
+
+    return child;
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::AttachCoplanarChild(SpatialSharedPtr child)
+Rendering::SpatialSharedPtr Rendering::BspNode::AttachCoplanarChild(const SpatialSharedPtr& child)
 {
-	AttachChild(child);
-	return child;
-	 
-	//return SetChild(1, child);
+    RENDERING_CLASS_IS_VALID_1;
+
+    AttachChild(child);
+
+    return child;
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::AttachNegativeChild(SpatialSharedPtr child)
- {
-	 AttachChild(child);
-	 return child;
-	 
-	//return SetChild(2, child);
-}
-
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::DetachPositiveChild()
+Rendering::SpatialSharedPtr Rendering::BspNode::AttachNegativeChild(const SpatialSharedPtr& child)
 {
-	return DetachChildAt(0);
+    RENDERING_CLASS_IS_VALID_1;
+
+    AttachChild(child);
+
+    return child;
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::DetachCoplanarChild()
+Rendering::SpatialSharedPtr Rendering::BspNode::DetachPositiveChild()
 {
-	return DetachChildAt(1);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return DetachChildAt(0);
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::DetachNegativeChild()
+Rendering::SpatialSharedPtr Rendering::BspNode::DetachCoplanarChild()
 {
-	return DetachChildAt(2);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return DetachChildAt(1);
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::GetPositiveChild()
+Rendering::SpatialSharedPtr Rendering::BspNode::DetachNegativeChild()
 {
-	return GetChild(0);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return DetachChildAt(2);
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::GetCoplanarChild()
+Rendering::SpatialSharedPtr Rendering::BspNode::GetPositiveChild()
 {
-	return GetChild(1);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return GetChild(0);
 }
 
-Rendering::SpatialSharedPtr Rendering::BspNode
-	::GetNegativeChild()
+Rendering::SpatialSharedPtr Rendering::BspNode::GetCoplanarChild()
 {
-	return GetChild(2);
+    RENDERING_CLASS_IS_VALID_1;
+
+    return GetChild(1);
 }
 
- const Mathematics::PlaneF& Rendering::BspNode
-	::GetWorldPlane() const noexcept
+Rendering::SpatialSharedPtr Rendering::BspNode::GetNegativeChild()
 {
-	return mWorldPlane;
+    RENDERING_CLASS_IS_VALID_1;
+
+    return GetChild(2);
 }
 
-	#include STSTEM_WARNING_POP
+const Mathematics::PlaneF& Rendering::BspNode::GetWorldPlane() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return worldPlane;
+}

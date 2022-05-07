@@ -25,6 +25,7 @@ namespace AssistTools
     public:
         explicit GenerateTemplateTesting(const OStreamShared& stream);
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
     protected:
         using Replace = std::map<GenerateTemplateReplace, System::String>;
 
@@ -85,7 +86,7 @@ namespace AssistTools
         static const System::String GetDefaultInterfaceName();
 
     private:
-        static int GetEndYear();
+        static int GetEndYear() noexcept;
         static const System::String GetVersions();
         const System::String GetProjectChineseName() const;
 

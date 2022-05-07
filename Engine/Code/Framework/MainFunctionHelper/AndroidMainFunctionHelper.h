@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/20 11:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:38)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
@@ -12,51 +15,51 @@
 
 namespace Framework
 {
-	template <template<typename> class Build, typename Process>
-	class AndroidMainFunctionHelper : public MainFunctionHelperBase
-	{
-	public:
-		using ClassType = AndroidMainFunctionHelper<Build, Process>;
-		using ParentType = MainFunctionHelperBase;
-		using ClassShareType = CoreTools::NonCopyClasses;
-		using BuildType = Build<Process>;
-		using AndroidApp = System::AndroidApp;
+    template <template <typename> class Build, typename Process>
+    class AndroidMainFunctionHelper : public MainFunctionHelperBase
+    {
+    public:
+        using ClassType = AndroidMainFunctionHelper<Build, Process>;
+        using ParentType = MainFunctionHelperBase;
+        using ClassShareType = CoreTools::NonCopyClasses;
+        using BuildType = Build<Process>;
+        using AndroidApp = System::AndroidApp;
 
-	public:
-		AndroidMainFunctionHelper(AndroidApp* androidApp, const EnvironmentDirectory& environmentDirectory);
-		~AndroidMainFunctionHelper() noexcept;
-		AndroidMainFunctionHelper(const AndroidMainFunctionHelper& rhs) noexcept = delete;
-		AndroidMainFunctionHelper& operator=(const AndroidMainFunctionHelper& rhs) noexcept = delete;
-		AndroidMainFunctionHelper(AndroidMainFunctionHelper&& rhs) noexcept;
-		AndroidMainFunctionHelper& operator=(AndroidMainFunctionHelper&& rhs) noexcept;
+    public:
+        AndroidMainFunctionHelper(AndroidApp* androidApp, const EnvironmentDirectory& environmentDirectory);
+        ~AndroidMainFunctionHelper() noexcept;
+        AndroidMainFunctionHelper(const AndroidMainFunctionHelper& rhs) noexcept = delete;
+        AndroidMainFunctionHelper& operator=(const AndroidMainFunctionHelper& rhs) noexcept = delete;
+        AndroidMainFunctionHelper(AndroidMainFunctionHelper&& rhs) noexcept;
+        AndroidMainFunctionHelper& operator=(AndroidMainFunctionHelper&& rhs) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void Destroy() override;
+        void Destroy() override;
 
-	protected:
-		AndroidApp* GetAndroidApp();
+    protected:
+        NODISCARD AndroidApp* GetAndroidApp();
 
-	private:
-		using BuildSharedPtr = std::shared_ptr<BuildType>;
+    private:
+        using BuildSharedPtr = std::shared_ptr<BuildType>;
 
-	private:
-		int DoRun() override;
-		virtual int RunAndroidMainLoop();
+    private:
+        int DoRun() override;
+        NODISCARD virtual int RunAndroidMainLoop();
 
-		void Initializers(AndroidApp* androidApp);
-		void Terminators();
+        void Initializers(AndroidApp* androidApp);
+        void Terminators();
 
-		void InitAndroidProcess();
-		void InitImpl(AndroidApp* androidApp);
+        void InitAndroidProcess();
+        void InitImpl(AndroidApp* androidApp);
 
-		void DestroyImpl() noexcept;
-		void DestroyAndroidProcess();
+        void DestroyImpl() noexcept;
+        void DestroyAndroidProcess() noexcept;
 
-	private:
-		BuildSharedPtr m_Build;
-		AndroidMainFunctionSchedule m_AndroidMainFunctionSchedule;
-	};
+    private:
+        BuildSharedPtr build;
+        AndroidMainFunctionSchedule androidMainFunctionSchedule;
+    };
 }
 
-#endif // FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H
+#endif  // FRAMEWORK_MAIN_FUNCTION_HELPER_ANDROID_MAIN_FUNCTION_HELPER_H

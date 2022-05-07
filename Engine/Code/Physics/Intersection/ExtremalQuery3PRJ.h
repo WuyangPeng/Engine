@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 17:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 15:22)
 
 #ifndef PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_H
 #define PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_H
@@ -13,26 +16,12 @@
 
 namespace Physics
 {
-	template <typename Real>
-	class ExtremalQuery3PRJ : public ExtremalQuery3<Real>
-	{
-	public:
-		typedef Mathematics::ConvexPolyhedron3<Real> ConvexPolyhedron3;
-		ExtremalQuery3PRJ (const ConvexPolyhedron3* polytope);
-		virtual ~ExtremalQuery3PRJ ();
-
-		// Compute the extreme vertices in the specified direction and return the
-		// indices of the vertices in the polyhedron vertex array.
-		virtual void GetExtremeVertices (const typename  ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection, int& negativeDirection);
-
-	private:
-		using ExtremalQuery3<Real>::mPolytope;
-
-		typename  ExtremalQuery3<Real>::Vector3D mCentroid;
-	};
-
-	using ExtremalQuery3PRJf = ExtremalQuery3PRJ<float>;
-	using ExtremalQuery3PRJd = ExtremalQuery3PRJ<double>;
+    template <typename Real>
+    class ExtremalQuery3PRJ
+    {
+    public:
+        using ClassType = ExtremalQuery3PRJ<Real>;
+    };
 }
 
-#endif // PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_H
+#endif  // PHYSICS_INTERSECTION_EXTREMAL_QUERY3PRJ_H

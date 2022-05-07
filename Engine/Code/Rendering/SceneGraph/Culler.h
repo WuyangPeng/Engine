@@ -43,7 +43,7 @@ namespace Rendering
         Culler(Culler&& rhs) noexcept = default;
         Culler& operator=(Culler&& rhs) noexcept = default;
 
-        CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         // 访问相机，复制的平截头体和潜在可见集。
         void SetCamera(const ConstCameraSharedPtr& camera) noexcept;

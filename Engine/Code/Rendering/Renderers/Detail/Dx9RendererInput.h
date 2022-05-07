@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 14:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:07)
 
 #ifndef RENDERING_RENDERERS_DX9_RENDERER_INPUT_H
 #define RENDERING_RENDERERS_DX9_RENDERER_INPUT_H
@@ -11,8 +14,6 @@
 
 #include "RendererInputImpl.h"
 
-#include <d3d9.h>
-
 namespace Rendering
 {
     class RENDERING_HIDDEN_DECLARE Dx9RendererInput : public RendererInputImpl
@@ -20,26 +21,20 @@ namespace Rendering
     public:
         using ClassType = Dx9RendererInput;
         using ParentType = RendererInputImpl;
-       
+
     public:
         Dx9RendererInput() noexcept;
-          ~Dx9RendererInput();
-		  Dx9RendererInput(const Dx9RendererInput&) =default;
-		  Dx9RendererInput& operator=(const Dx9RendererInput&) =default;
-		  Dx9RendererInput( Dx9RendererInput&&) =default;
-		  Dx9RendererInput& operator=( Dx9RendererInput&&) =default;
-        
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-          RendererTypes GetRendererType() const noexcept override ;
-		
-		 	void SetWindowID(int windowID) noexcept override;
-		 	void SetWindowHandle(HWnd windowID) noexcept override;
+        NODISCARD RendererTypes GetRendererType() const noexcept override;
+
+        void SetWindowID(int windowID) noexcept override;
+        void SetWindowHandle(HWnd windowID) noexcept override;
 
     private:
-    	HWnd m_WindowHandle;
-		IDirect3D9* m_Driver;
+        HWnd windowHandle;
     };
 }
 
-#endif // RENDERING_RENDERERS_DX9_RENDERER_INPUT_H
+#endif  // RENDERING_RENDERERS_DX9_RENDERER_INPUT_H

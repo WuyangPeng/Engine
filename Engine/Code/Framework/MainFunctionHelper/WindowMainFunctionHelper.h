@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/20 11:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:56)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_H
@@ -15,57 +18,59 @@
 
 namespace Framework
 {
-	template <template<typename> class Build, typename Process>
-	class WindowMainFunctionHelper : public MainFunctionHelperBase
-	{
-	public:
-		using ClassType = WindowMainFunctionHelper<Build, Process>;
-		using ParentType = MainFunctionHelperBase;
-		using ClassShareType = CoreTools::NonCopyClasses;
-		using BuildType = Build<Process>;
-		using HWnd = System::WindowsHWnd;
-		using HInstance = System::WindowsHInstance;		
+    template <template <typename> class Build, typename Process>
+    class WindowMainFunctionHelper : public MainFunctionHelperBase
+    {
+    public:
+        using ClassType = WindowMainFunctionHelper<Build, Process>;
+        using ParentType = MainFunctionHelperBase;
+        using ClassShareType = CoreTools::NonCopyClasses;
+        using BuildType = Build<Process>;
+        using WindowsHWnd = System::WindowsHWnd;
+        using WindowsHInstance = System::WindowsHInstance;
 
-	public:
-		WindowMainFunctionHelper(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,
-								 const EnvironmentDirectory& environmentDirectory);
-		~WindowMainFunctionHelper() noexcept;
-		WindowMainFunctionHelper(const WindowMainFunctionHelper& rhs) noexcept = delete;
-		WindowMainFunctionHelper& operator=(const WindowMainFunctionHelper& rhs) noexcept = delete;
-		WindowMainFunctionHelper(WindowMainFunctionHelper&& rhs) noexcept;
-		WindowMainFunctionHelper& operator=(WindowMainFunctionHelper&& rhs) noexcept;
+    public:
+        WindowMainFunctionHelper(WindowsHInstance instance,
+                                 const char* commandLine,
+                                 const WindowApplicationInformation& information,
+                                 const EnvironmentDirectory& environmentDirectory);
+        ~WindowMainFunctionHelper() noexcept;
+        WindowMainFunctionHelper(const WindowMainFunctionHelper& rhs) noexcept = delete;
+        WindowMainFunctionHelper& operator=(const WindowMainFunctionHelper& rhs) noexcept = delete;
+        WindowMainFunctionHelper(WindowMainFunctionHelper&& rhs) noexcept;
+        WindowMainFunctionHelper& operator=(WindowMainFunctionHelper&& rhs) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void Destroy() override;
+        void Destroy() override;
 
-	protected:
-		virtual int EnterMessageLoop();
-		HWnd GetHwnd() const noexcept;
+    protected:
+        NODISCARD virtual int EnterMessageLoop();
+        NODISCARD WindowsHWnd GetHwnd() const noexcept;
 
-	private:
-		using BuildSharedPtr = std::shared_ptr<BuildType>;
+    private:
+        using BuildSharedPtr = std::shared_ptr<BuildType>;
 
-	private:
-		int DoRun() override;
+    private:
+        NODISCARD int DoRun() override;
 
-		void Initializers(HInstance instance, const char* commandLine, const WindowApplicationInformation& information);
-		void Terminators();
+        void Initializers(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
+        void Terminators();
 
-		void InitWindowProcess();
-		void InitCamera();
-		void InitRendererManager();
-		void InitImpl(HInstance instance, const char* commandLine, const WindowApplicationInformation& information);
+        void InitWindowProcess();
+        void InitCamera();
+        void InitRendererManager();
+        void InitImpl(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information);
 
-		void DestroyImpl() noexcept;
-		void DestroyRendererManager() noexcept;
-		void DestroyCamera() noexcept;
-		void DestroyWindowProcess() noexcept;
+        void DestroyImpl() noexcept;
+        void DestroyRendererManager() noexcept;
+        void DestroyCamera() noexcept;
+        void DestroyWindowProcess() noexcept;
 
-	private:
-		BuildSharedPtr m_Build;
-		WindowMainFunctionSchedule m_WindowMainFunctionSchedule;
-	};
+    private:
+        BuildSharedPtr build;
+        WindowMainFunctionSchedule windowMainFunctionSchedule;
+    };
 }
 
-#endif // FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_H
+#endif  // FRAMEWORK_MAIN_FUNCTION_HELPER_WINDOW_MAIN_FUNCTION_HELPER_H

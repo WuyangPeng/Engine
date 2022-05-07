@@ -1,62 +1,58 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 14:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 17:09)
 
 #ifndef RENDERING_SHADERS_DEPTH_STATE_IMPL_H
 #define RENDERING_SHADERS_DEPTH_STATE_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/FileManager/FileManagerFwd.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Shaders/Flags/DepthStateFlags.h"
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;
-	class WriteFileManager;
-	class ReadFileManager;
-}
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE DepthStateImpl
-	{
-	public:
-		using ClassType = DepthStateImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-		using CompareMode = DepthStateFlags::CompareMode;
-		using WriteFileManager = CoreTools::WriteFileManager;
-		using ReadFileManager = CoreTools::ReadFileManager;
+    class RENDERING_HIDDEN_DECLARE DepthStateImpl
+    {
+    public:
+        using ClassType = DepthStateImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using CompareMode = DepthStateFlags::CompareMode;
+        using WriteFileManager = CoreTools::WriteFileManager;
+        using ReadFileManager = CoreTools::ReadFileManager;
 
-	public:
-                DepthStateImpl() noexcept; 
+    public:
+        DepthStateImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void Load(CoreTools::BufferSource& source);
-		void Save(CoreTools::BufferTarget& target) const;
-		int GetStreamingSize() const;
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const noexcept;
 
-		bool IsEnabled() const;
-		bool IsWritable() const;
-		CompareMode GetCompare() const;
+        NODISCARD bool IsEnabled() const noexcept;
+        NODISCARD bool IsWritable() const noexcept;
+        NODISCARD CompareMode GetCompare() const noexcept;
 
-		void SetEnabled(bool enabled);
-		void SetWritable(bool writable);
-		void SetCompare(CompareMode compare);
+        void SetEnabled(bool aEnabled) noexcept;
+        void SetWritable(bool aWritable) noexcept;
+        void SetCompare(CompareMode aCompare) noexcept;
 
-		void SaveState(WriteFileManager& manager) const;
-		void LoadState(ReadFileManager& manager);
+        void SaveState(WriteFileManager& manager) const;
+        void LoadState(ReadFileManager& manager);
 
-	private:
-		bool m_Enabled; // 默认: true
-		bool m_Writable; // 默认: true
-		CompareMode m_Compare; // 默认: CompareMode::LessEqual
-	};
+    private:
+        bool enabled;  // 默认: true
+        bool writable;  // 默认: true
+        CompareMode compare;  // 默认: CompareMode::LessEqual
+    };
 }
 
-#endif // RENDERING_SHADERS_DEPTH_STATE_IMPL_H
+#endif  // RENDERING_SHADERS_DEPTH_STATE_IMPL_H

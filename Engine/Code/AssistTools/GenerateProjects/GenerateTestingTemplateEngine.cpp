@@ -1,31 +1,35 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 13:49)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateEngine.h"
 #include "Detail/GenerateTestingTemplateEngineImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h" 
- 
-AssistTools::GenerateTestingTemplateEngine
-	::GenerateTestingTemplateEngine(const System::String& templateFileName, const System::String& extension, const Replace& replace)
-	:impl(templateFileName, extension, replace)
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+
+AssistTools::GenerateTestingTemplateEngine::GenerateTestingTemplateEngine(const System::String& templateFileName, const System::String& extension, const Replace& replace)
+    : impl{ templateFileName, extension, replace }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-} 
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingTemplateEngine)
 
-void AssistTools::GenerateTestingTemplateEngine
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, 
-	             const System::String& solutionName, const System::String& managerName,
-				 const System::String& projectCapital, const System::String& managerCapital) const
+void AssistTools::GenerateTestingTemplateEngine::GenerateTo(const System::String& resourceDirectory,
+                                                            const System::String& newProjectName,
+                                                            const CopyrightData& copyrightData,
+                                                            const System::String& solutionName,
+                                                            const System::String& managerName,
+                                                            const System::String& projectCapital,
+                                                            const System::String& managerCapital) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
+    return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
 }
- 

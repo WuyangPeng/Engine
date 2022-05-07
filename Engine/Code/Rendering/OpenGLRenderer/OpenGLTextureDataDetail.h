@@ -1,17 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 11:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 13:50)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_DETAIL_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_DETAIL_H
 
-#include "Rendering/RenderingExport.h"
-
 #include "OpenGLBindTexture.h"
 #include "OpenGLMapping.h"
 #include "OpenGLTextureData.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Texture1D.h"
@@ -20,18 +22,20 @@
 #include "Rendering/Resources/TextureCube.h"
 #include "Rendering/Shaders/Flags/ShaderFlags.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26493)
 template <typename Texture>
 Rendering::OpenGLTextureData<Texture>::OpenGLTextureData(const Texture* texture)
-    : m_Texture{ 0 }, m_InternalFormat{ TextureInternalFormat(OpenGLConstant::g_OpenGLTextureInternalFormat[System::EnumCastUnderlying(texture->GetFormat())]) },
-      m_Format{ TextureFormat(OpenGLConstant::g_OpenGLTextureFormat[System::EnumCastUnderlying(texture->GetFormat())]) },
-      m_Type{ DataType(OpenGLConstant::g_OpenGLTextureType[System::EnumCastUnderlying(texture->GetFormat())]) },
-      m_PreviousTexture{ 0 }, m_NumLevels{ boost::numeric_cast<UInt>(texture->GetNumLevels()) }, m_IsCompressed{ texture->IsCompressed() }
+    : texture{ 0 },
+      textureInternalFormat{ System::UnderlyingCastEnum<TextureInternalFormat>(OpenGLConstant::GetOpenGLTextureInternalFormat(System::EnumCastUnderlying(texture->GetFormat()))) },
+      textureFormat{ System::UnderlyingCastEnum<TextureFormat>(OpenGLConstant::GetOpenGLTextureFormat(System::EnumCastUnderlying(texture->GetFormat()))) },
+      dataType{ System::UnderlyingCastEnum<DataType>(OpenGLConstant::GetOpenGLTextureType(System::EnumCastUnderlying(texture->GetFormat()))) },
+      previousTexture{ 0 },
+      numLevels{ boost::numeric_cast<UInt>(texture->GetNumLevels()) },
+      numLevelBytes{},
+      dimension{},
+      buffer{},
+      lockedMemory{},
+      writeLock{},
+      isCompressed{ texture->IsCompressed() }
 {
     CreatePixelBufferObjects(texture);
     InitRemainData();
@@ -43,25 +47,24 @@ Rendering::OpenGLTextureData<Texture>::OpenGLTextureData(const Texture* texture)
 
 // private
 template <typename Texture>
-void Rendering::OpenGLTextureData<Texture>::CreatePixelBufferObjects(const Texture* texture)
+void Rendering::OpenGLTextureData<Texture>::CreatePixelBufferObjects(const Texture* aTtexture)
 {
-    const auto usage = OpenGLConstant::g_OpenGLBufferUsage[System::EnumCastUnderlying(texture->GetUsage())];
+    const auto usage = OpenGLConstant::GetOpenGLBufferUsage(System::EnumCastUnderlying(aTtexture->GetUsage()));
 
     // 创建像素缓冲器的对象来存储纹理数据。
-    for (auto level = 0u; level < m_NumLevels; ++level)
+    for (auto level = 0u; level < numLevels; ++level)
     {
-        m_NumLevelBytes[level] = texture->GetNumLevelBytes(level);
+        numLevelBytes.at(level) = aTtexture->GetNumLevelBytes(level);
 
-        for (auto i = 0; i < sm_Dimension; ++i)
+        for (auto i = 0; i < textureDimension; ++i)
         {
-            m_Dimension[i][level] = texture->GetDimension(i, level);
+            dimension.at(i).at(level) = aTtexture->GetDimension(i, level);
         }
 
-        for (auto face = 0; face < sm_Face; ++face)
+        for (auto face = 0; face < textureFace; ++face)
         {
-            //   m_Buffer[face][level] =  System::GLPixelUnpackBufferData(m_NumLevelBytes[level], usage);
-            m_LockedMemory[face][level] = nullptr;
-            m_WriteLock[face][level] = false;
+            lockedMemory.at(face).at(level) = nullptr;
+            writeLock.at(face).at(level) = false;
         }
     }
 }
@@ -70,133 +73,108 @@ void Rendering::OpenGLTextureData<Texture>::CreatePixelBufferObjects(const Textu
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>::InitRemainData() noexcept
 {
-    for (auto level = m_NumLevels; level < TextureMaximumMipmapLevels; ++level)
+    for (auto level = numLevels; level < TextureMaximumMipmapLevels; ++level)
     {
-        m_NumLevelBytes[level] = 0;
+        numLevelBytes.at(level) = 0;
 
-        for (auto i = 0; i < sm_Dimension; ++i)
+        for (auto i = 0; i < textureDimension; ++i)
         {
-            m_Dimension[i][level] = 0;
+            dimension.at(i).at(level) = 0;
         }
 
-        for (auto face = 0; face < sm_Face; ++face)
+        for (auto face = 0; face < textureFace; ++face)
         {
-            m_Buffer[face][level] = 0;
-            m_LockedMemory[face][level] = nullptr;
-            m_WriteLock[face][level] = false;
+            buffer.at(face).at(level) = 0;
+            lockedMemory.at(face).at(level) = nullptr;
+            writeLock.at(face).at(level) = false;
         }
     }
 }
 
 // private
 template <typename Texture>
-System::OpenGLUInt Rendering::OpenGLTextureData<Texture>::CreateTextureStructure() noexcept
+System::OpenGLUInt Rendering::OpenGLTextureData<Texture>::CreateTextureStructure()
 {
     // 创建纹理结构。
-    //	m_Texture = System::GLGenTextures();
-    const auto previousBind = BindTexture(sm_SamplerType, m_Texture);
+
+    const auto previousBind = BindTexture(textureSamplerType, texture);
 
     return previousBind;
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStructures(const Texture1D* texture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStructures(const Texture1D* aTexture, UInt previousBind);
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStructures(const Texture2D* texture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStructures(const Texture2D* aTexture, UInt previousBind);
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStructures(const Texture3D* texture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStructures(const Texture3D* aTexture, UInt previousBind);
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStructures(const TextureCube* texture, UInt previousBind);
-
-template <typename Texture>
-Rendering::OpenGLTextureData<Texture>::~OpenGLTextureData()
-{
-    for (auto i = 0; i < sm_Face; ++i)
-    {
-        for (auto level = 0u; level < m_NumLevels; ++level)
-        {
-            //	m_Buffer[i][level] = System::GLDeleteBuffers(m_Buffer[i][level]);
-        }
-    }
-
-    //m_Texture = System::GLDeleteTextures(m_Texture);
-
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStructures(const TextureCube* aTexture, UInt previousBind);
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Texture>
 bool Rendering::OpenGLTextureData<Texture>::IsValid() const noexcept
 {
-    if (0 < m_Texture && 0 < m_NumLevels)
+    if (0 < texture && 0 < numLevels)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIAN
 
 template <typename Texture>
-void Rendering::OpenGLTextureData<Texture>::Enable(int textureUnit) noexcept
+void Rendering::OpenGLTextureData<Texture>::Enable(MAYBE_UNUSED int textureUnit)
 {
     RENDERING_CLASS_IS_VALID_1;
-    textureUnit;
-    //System::SetGLActiveTexture(static_cast<GLenum>(System::TextureNumber::Type0) + textureUnit);
-    m_PreviousTexture = BindTexture(sm_SamplerType, m_Texture);
+
+    previousTexture = BindTexture(textureSamplerType, texture);
 }
 
 template <typename Texture>
-void Rendering::OpenGLTextureData<Texture>::Disable(int textureUnit) noexcept
+void Rendering::OpenGLTextureData<Texture>::Disable(MAYBE_UNUSED int textureUnit) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    textureUnit;
-    //System::SetGLActiveTexture(static_cast<GLenum>(System::TextureNumber::Type0) + textureUnit);
-    //System::SetGLBindTexture(sm_TextureTargetType, m_PreviousTexture);
 }
 
 template <typename Texture>
 void* Rendering::OpenGLTextureData<Texture>::Lock(int level, BufferLocking mode) noexcept
 {
-    static_assert(TextureDataTraits<Texture>::sm_TextureType != TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<Texture>::textureType != TextureFlags::TextureCube);
 
     RENDERING_CLASS_IS_VALID_1;
 
-    if (m_LockedMemory[0][level] == nullptr)
+    if (lockedMemory.at(0).at(level) == nullptr)
     {
-        //	m_LockedMemory[0][level] = System::GLMapPixelUnpackBuffer(m_Buffer[0][level], g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
-
-        m_WriteLock[0][level] = (mode != BufferLocking::ReadOnly);
+        writeLock.at(0).at(level) = (mode != BufferLocking::ReadOnly);
     }
 
-    return m_LockedMemory[0][level];
+    return lockedMemory.at(0).at(level);
 }
 
 template <typename Texture>
-void Rendering::OpenGLTextureData<Texture>::Unlock(int level) noexcept
+void Rendering::OpenGLTextureData<Texture>::Unlock(int level)
 {
-    static_assert(TextureDataTraits<Texture>::sm_TextureType != TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<Texture>::textureType != TextureFlags::TextureCube);
 
     RENDERING_CLASS_IS_VALID_1;
 
-    if (m_LockedMemory[0][level] != nullptr)
+    if (lockedMemory.at(0).at(level) != nullptr)
     {
-        //   System::GLBindPixelUnpackBuffer(m_Buffer[0][level]);
-        // System::GLUnmapPixelUnpackBuffer();
-
-        if (m_WriteLock[0][level])
+        if (writeLock.at(0).at(level))
         {
-            const GLuint previousBind = BindTexture(sm_SamplerType, m_Texture);
+            const auto previousBind = BindTexture(textureSamplerType, texture);
 
             TextureImage(level);
 
-            //	System::SetGLBindTexture(sm_TextureTargetType, previousBind);
-            m_WriteLock[0][level] = false;
+            writeLock.at(0).at(level) = false;
         }
 
-        // System::GLBindPixelUnpackBuffer(0);
-        m_LockedMemory[0][level] = nullptr;
+        lockedMemory.at(0).at(level) = nullptr;
     }
 }
 
@@ -212,65 +190,35 @@ RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture3D
 template <typename Texture>
 void* Rendering::OpenGLTextureData<Texture>::Lock(int face, int level, BufferLocking mode) noexcept
 {
-    static_assert(TextureDataTraits<Texture>::sm_TextureType == TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<Texture>::textureType == TextureFlags::TextureCube);
 
     RENDERING_CLASS_IS_VALID_1;
 
-    if (m_LockedMemory[face][level] == nullptr)
+    if (lockedMemory.at(face).at(level) == nullptr)
     {
-        //m_LockedMemory[face][level] = System::GLMapPixelUnpackBuffer(m_Buffer[face][level],g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
-
-        m_WriteLock[face][level] = (mode != BufferLocking::ReadOnly);
+        writeLock.at(face).at(level) = (mode != BufferLocking::ReadOnly);
     }
 
-    return m_LockedMemory[face][level];
+    return lockedMemory.at(face).at(level);
 }
 
 template <typename Texture>
-void Rendering::OpenGLTextureData<Texture>::Unlock(int face, int level) noexcept
+void Rendering::OpenGLTextureData<Texture>::Unlock(int face, int level)
 {
-    static_assert(TextureDataTraits<Texture>::sm_TextureType == TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<Texture>::textureType == TextureFlags::TextureCube);
 
     RENDERING_CLASS_IS_VALID_1;
 
-    if (m_LockedMemory[face][level] != nullptr)
+    if (lockedMemory.at(face).at(level) != nullptr)
     {
-        //	System::GLBindPixelUnpackBuffer(m_Buffer[face][level]);
-        //System::GLUnmapPixelUnpackBuffer();
-
-        if (m_WriteLock[face][level])
+        if (writeLock.at(face).at(level))
         {
-            const UInt previousBind = BindTexture(TextureDataTraits<Texture>::sm_SamplerType, m_Texture);
+            const auto previousBind = BindTexture(TextureDataTraits<Texture>::samplerType, texture);
 
-            if (m_IsCompressed)
-            {
-                //	System::GLCompressedTexSubImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face,level, m_Dimension[0][level],
-                //                                     m_Dimension[1][level],m_InternalFormat, m_NumLevelBytes[level]);
-            }
-            else
-            {
-                //	System::GLTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face, level,m_InternalFormat,
-                //                         m_Dimension[0][level], m_Dimension[1][level], m_Format,m_Type);
-
-                // TODO:  当创建只有0级纹理（不是一套完整的mipmaps贴图），
-                // 将下面的代码生成在AMD Radeon HD 7970
-                // （催化剂13.4和13.6的催化剂测试版）会产生一个GL_INVALID_OPERATION。
-                // 我的分析表明，它是不需要的。所以现在，只需使用GlTexImage2D。
-                // 在我的NVIDIA显卡则不会出现此问题。
-
-                // System::GlTexSubImage2D(System::TextureCubeMapTypePositiveX + face,
-                //                         level, m_Dimension[0][level],
-                //                         m_Dimension[1][level], m_Format,
-                // 						   m_Type);
-            }
-
-            //System::SetGLBindTexture(System::TextureTarget::TextureCubeMap, previousBind);
-
-            m_WriteLock[face][level] = false;
+            writeLock.at(face).at(level) = false;
         }
 
-        //   System::GLBindPixelUnpackBuffer(0);
-        m_LockedMemory[face][level] = 0;
+        lockedMemory.at(face).at(level) = 0;
     }
 }
 
@@ -279,7 +227,7 @@ System::OpenGLUInt Rendering::OpenGLTextureData<Texture>::GetTexture() const noe
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Texture;
+    return texture;
 }
-#include STSTEM_WARNING_POP
+
 #endif  // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_DETAIL_H

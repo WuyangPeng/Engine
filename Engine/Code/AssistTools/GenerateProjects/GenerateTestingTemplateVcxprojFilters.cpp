@@ -1,30 +1,30 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 13:50)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateVcxprojFilters.h"
 #include "Detail/GenerateTestingTemplateVcxprojFiltersImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "System/Helper/UnicodeUsing.h"
- 
-AssistTools::GenerateTestingTemplateVcxprojFilters
-	::GenerateTestingTemplateVcxprojFilters(const System::String& templateFileName, const System::String& projectName,const System::String& moduleName)
-	:impl(templateFileName, projectName, moduleName)
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+
+AssistTools::GenerateTestingTemplateVcxprojFilters::GenerateTestingTemplateVcxprojFilters(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName)
+    : impl{ templateFileName, projectName, moduleName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-} 
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingTemplateVcxprojFilters)
 
-void AssistTools::GenerateTestingTemplateVcxprojFilters
-	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName,const System::String& newModuleName) const
+void AssistTools::GenerateTestingTemplateVcxprojFilters::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newModuleName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return impl->GenerateTo(resourceDirectory, solutionName, newModuleName);
+    return impl->GenerateTo(resourceDirectory, solutionName, newModuleName);
 }
- 

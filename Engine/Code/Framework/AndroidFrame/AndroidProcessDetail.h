@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 16:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:17)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H
@@ -13,102 +16,93 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 template <typename AndroidCallBack>
-Framework::AndroidProcess<AndroidCallBack>
-	::AndroidProcess(int64_t delta)
+Framework::AndroidProcess<AndroidCallBack>::AndroidProcess(int64_t delta)
 {
-	AndroidCallBackInterfaceSharedPtr androidCallBack{ std::make_shared<AndroidCallBack>(delta) };
+    auto androidCallBack = std::make_shared<AndroidCallBack>(delta);
 
-	ANDROID_PROCESS_MANAGE_SINGLETON.SetAndroidCallBack(androidCallBack);
+    ANDROID_PROCESS_MANAGE_SINGLETON.SetAndroidCallBack(androidCallBack);
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename AndroidCallBack>
-Framework::AndroidProcess<AndroidCallBack>
-	::~AndroidProcess()
+Framework::AndroidProcess<AndroidCallBack>::~AndroidProcess() noexcept
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 
-	CoreTools::NoexceptNoReturn(*this, &ClassType::ClearAndroidCallBack);
+    CoreTools::NoexceptNoReturn(*this, &ClassType::ClearAndroidCallBack);
 }
 
 template <typename AndroidCallBack>
-void Framework::AndroidProcess<AndroidCallBack>
-	::ClearAndroidCallBack()
+void Framework::AndroidProcess<AndroidCallBack>::ClearAndroidCallBack()
 {
-	ANDROID_PROCESS_MANAGE_SINGLETON.ClearAndroidCallBack();
+    ANDROID_PROCESS_MANAGE_SINGLETON.ClearAndroidCallBack();
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename AndroidCallBack>
-bool Framework::AndroidProcess<AndroidCallBack>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif // OPEN_CLASS_INVARIANT
 
 template <typename AndroidCallBack>
-bool Framework::AndroidProcess<AndroidCallBack>
-	::PreCreate()
+bool Framework::AndroidProcess<AndroidCallBack>::IsValid() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
-
-	return ANDROID_PROCESS_MANAGE_SINGLETON.PreCreate();
+    return true;
 }
 
-template <typename AndroidCallBack>
-bool Framework::AndroidProcess<AndroidCallBack>
-	::Initialize()
-{
-	FRAMEWORK_CLASS_IS_VALID_9;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return ANDROID_PROCESS_MANAGE_SINGLETON.Initialize();;
+template <typename AndroidCallBack>
+bool Framework::AndroidProcess<AndroidCallBack>::PreCreate()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return ANDROID_PROCESS_MANAGE_SINGLETON.PreCreate();
 }
 
 template <typename AndroidCallBack>
-void Framework::AndroidProcess<AndroidCallBack>
-	::PreIdle()
+bool Framework::AndroidProcess<AndroidCallBack>::Initialize()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	ANDROID_PROCESS_MANAGE_SINGLETON.PreIdle();
+    return ANDROID_PROCESS_MANAGE_SINGLETON.Initialize();
 }
 
 template <typename AndroidCallBack>
-void Framework::AndroidProcess<AndroidCallBack>
-	::Terminate()
+void Framework::AndroidProcess<AndroidCallBack>::PreIdle()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	ANDROID_PROCESS_MANAGE_SINGLETON.Terminate();
+    ANDROID_PROCESS_MANAGE_SINGLETON.PreIdle();
 }
 
 template <typename AndroidCallBack>
-typename Framework::AndroidProcess<AndroidCallBack>::AppCmd Framework::AndroidProcess<AndroidCallBack>
-	::GetAppCmd() const noexcept
+void Framework::AndroidProcess<AndroidCallBack>::Terminate()
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	return ANDROID_PROCESS_MANAGE_SINGLETON.GetAppCmd();
+    ANDROID_PROCESS_MANAGE_SINGLETON.Terminate();
 }
 
 template <typename AndroidCallBack>
-typename Framework::AndroidProcess<AndroidCallBack>::InputEvent Framework::AndroidProcess<AndroidCallBack>
-	::GetInputEvent() const noexcept
+typename Framework::AndroidProcess<AndroidCallBack>::AppCmd Framework::AndroidProcess<AndroidCallBack>::GetAppCmd() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
+    return ANDROID_PROCESS_MANAGE_SINGLETON.GetAppCmd();
 }
 
 template <typename AndroidCallBack>
-typename Framework::AndroidProcess<AndroidCallBack>::Display Framework::AndroidProcess<AndroidCallBack>
-	::GetDisplay() const noexcept
+typename Framework::AndroidProcess<AndroidCallBack>::InputEvent Framework::AndroidProcess<AndroidCallBack>::GetInputEvent() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
+    return ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
 }
 
-#endif // FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H
+template <typename AndroidCallBack>
+typename Framework::AndroidProcess<AndroidCallBack>::Display Framework::AndroidProcess<AndroidCallBack>::GetDisplay() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
+}
+
+#endif  // FRAMEWORK_ANDROID_FRAME_ANDROID_PROCESS_DETAIL_H

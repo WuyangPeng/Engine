@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 15:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 10:13)
 
 #ifndef RENDERING_RENDERERS_RENDERER_PARAMETER_IMPL_H
 #define RENDERING_RENDERERS_RENDERER_PARAMETER_IMPL_H
@@ -29,59 +32,58 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        TextureFormat GetColorFormat() const noexcept;
-        TextureFormat GetDepthStencilFormat() const noexcept;
-        int GetNumMultisamples() const noexcept;
-        ColourType GetClearColor() const noexcept;
+        NODISCARD TextureFormat GetColorFormat() const noexcept;
+        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD int GetNumMultisamples() const noexcept;
+        NODISCARD ColourType GetClearColor() const noexcept;
 
-        const std::string GetWindowTitle() const;
-        int GetXPosition() const noexcept;
-        int GetYPosition() const noexcept;
-        int GetWidth() const noexcept;
-        int GetHeight() const noexcept;
-        bool IsAllowResize() const noexcept;
-        RendererTypes GetRendererType() const noexcept;
+        NODISCARD std::string GetWindowTitle() const;
+        NODISCARD int GetXPosition() const noexcept;
+        NODISCARD int GetYPosition() const noexcept;
+        NODISCARD int GetWidth() const noexcept;
+        NODISCARD int GetHeight() const noexcept;
+        NODISCARD bool IsAllowResize() const noexcept;
+        NODISCARD RendererTypes GetRendererType() const noexcept;
 
         void SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept;
 
         void SetClearColor(float red, float green, float blue, float alpha) noexcept;
 
-        void SetWindowParameter(const std::string& windowTitle, int width, int height, int x, int y, bool allowResize);
+        void SetWindowParameter(const std::string& aWindowTitle, int width, int height, int x, int y, bool allowResize);
 
         void Resize(int width, int height) noexcept;
 
-        const RendererBasis GetRendererBasis() const noexcept;
+        NODISCARD RendererBasis GetRendererBasis() const noexcept;
 
-        System::String GetWindowClassName() const;
-        void SetWindowClassName(const System::String& className);
+        NODISCARD System::String GetWindowClassName() const;
+        void SetWindowClassName(const System::String& aClassName);
 
-        System::String GetWindowMenuName() const;
-        void SetWindowMenuName(const System::String& menuName);
+        NODISCARD System::String GetWindowMenuName() const;
+        void SetWindowMenuName(const System::String& aMenuName);
 
-        int GetIcon() const noexcept;
-        bool IsIconDefault() const noexcept;
-        int GetCursor() const noexcept;
-        bool IsCursorDefault() const noexcept;
-        System::WindowsBrushTypes GetBackground() const noexcept;
+        NODISCARD int GetIcon() const noexcept;
+        NODISCARD bool IsIconDefault() const noexcept;
+        NODISCARD int GetCursor() const noexcept;
+        NODISCARD bool IsCursorDefault() const noexcept;
+        NODISCARD System::WindowsBrushTypes GetBackground() const noexcept;
 
-        void SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowsBrushTypes background) noexcept;
+        void SetWindowPictorialParameter(int aIcon, bool aIsIconDefault, int aCursor, bool aIsCursorDefault, System::WindowsBrushTypes aBackground) noexcept;
 
     private:
-        RendererTypes m_Type;
-        RendererBasis m_RendererBasis;
-        ColourType m_Colour;
-        std::string m_WindowTitle;
-        int m_WindowX;
-        int m_WindowY;
-        bool m_IsAllowResize;
-        System::String m_ClassName;
-        System::String m_MenuName;
-        int m_Icon = 0;
-        bool m_IsIconDefault = false;
-        int m_Cursor = 0;
-        bool m_IsCursorDefault = false;
-        ;
-        System::WindowsBrushTypes m_Background{};
+        RendererTypes rendererTypes;
+        RendererBasis rendererBasis;
+        ColourType colour;
+        std::string windowTitle;
+        int windowX;
+        int windowY;
+        bool isAllowResize;
+        System::String className;
+        System::String menuName;
+        int icon;
+        bool isIconDefault;
+        int cursor;
+        bool isCursorDefault;
+        System::WindowsBrushTypes background;
     };
 }
 

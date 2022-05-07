@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_PHYSICS_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_PHYSICS_STATIC
+#else  // BUILDING_PHYSICS_STATIC
 
-	namespace PhysicsToolset
-	{
-		void StaticDllLib()
-		{
+namespace PhysicsToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_PHYSICS_STATIC
+#endif  // !BUILDING_PHYSICS_STATIC

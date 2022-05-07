@@ -1,39 +1,148 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 14:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/14 16:36)
 
 #include "Rendering/RenderingExport.h"
 
 #include "Texture1DEffect.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 
-#include "System/Helper/PragmaWarning.h"
+namespace
+{
+    constexpr auto dx9VRegisters = 0;
+    constexpr auto oglVRegisters = 1;
+    std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> vRegisters{
+        nullptr,
+        &dx9VRegisters,
+        &dx9VRegisters,
+        &dx9VRegisters,
+        &oglVRegisters
+    };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26492)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26487)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26815)
-#include SYSTEM_WARNING_DISABLE(26434)
+    std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> vPrograms{
+        // VP_NONE
+        "",
+
+        // VP_VS_1_1
+        "vs_1_1\n"
+        "def c4, 1.00000000, 0, 0, 0\n"
+        "dcl_position0 v0\n"
+        "dcl_texcoord0 v1\n"
+        "mov r0.w, c4.x\n"
+        "mov r0.xyz, v0\n"
+        "dp4 oPos.w, r0, c3\n"
+        "dp4 oPos.z, r0, c2\n"
+        "dp4 oPos.y, r0, c1\n"
+        "dp4 oPos.x, r0, c0\n"
+        "mov oT0.x, v1\n",
+
+        // VP_VS_2_0
+        "vs_2_0\n"
+        "def c4, 1.00000000, 0, 0, 0\n"
+        "dcl_position0 v0\n"
+        "dcl_texcoord0 v1\n"
+        "mov r0.w, c4.x\n"
+        "mov r0.xyz, v0\n"
+        "dp4 oPos.w, r0, c3\n"
+        "dp4 oPos.z, r0, c2\n"
+        "dp4 oPos.y, r0, c1\n"
+        "dp4 oPos.x, r0, c0\n"
+        "mov oT0.x, v1\n",
+
+        // VP_VS_3_0
+        "vs_3_0\n"
+        "dcl_position o0\n"
+        "dcl_texcoord0 o1\n"
+        "def c4, 1.00000000, 0, 0, 0\n"
+        "dcl_position0 v0\n"
+        "dcl_texcoord0 v1\n"
+        "mov r0.w, c4.x\n"
+        "mov r0.xyz, v0\n"
+        "dp4 o0.w, r0, c3\n"
+        "dp4 o0.z, r0, c2\n"
+        "dp4 o0.y, r0, c1\n"
+        "dp4 o0.x, r0, c0\n"
+        "mov o1.x, v1\n",
+
+        // VP_ARBVP1
+        "!!ARBvp1.0\n"
+        "PARAM c[5] = { { 1 }, program.local[1..4] };\n"
+        "TEMP R0;\n"
+        "MOV R0.w, c[0].x;\n"
+        "MOV R0.xyz, vertex.position;\n"
+        "DP4 result.position.w, R0, c[4];\n"
+        "DP4 result.position.z, R0, c[3];\n"
+        "DP4 result.position.y, R0, c[2];\n"
+        "DP4 result.position.x, R0, c[1];\n"
+        "MOV result.texcoord[0].x, vertex.texcoord[0];\n"
+        "END\n"
+    };
+
+    constexpr auto allPTextureUnits = 0;
+
+    std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> pTextureUnits{
+        nullptr,
+        &allPTextureUnits,
+        &allPTextureUnits,
+        &allPTextureUnits,
+        &allPTextureUnits
+    };
+
+    std::array<std::string, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> pPrograms{
+        // PP_NONE
+        "",
+
+        // PP_PS_1_1
+        "ps.1.1\n"
+        "tex t0\n"
+        "mov r0, t0\n",
+
+        // PP_PS_2_0
+        "ps_2_0\n"
+        "dcl_2d s0\n"
+        "def c0, 0.50000000, 0, 0, 0\n"
+        "dcl t0.x\n"
+        "mov r0.y, c0.x\n"
+        "mov r0.x, t0\n"
+        "texld r0, r0, s0\n"
+        "mov oC0, r0\n",
+
+        // PP_PS_3_0
+        "ps_3_0\n"
+        "dcl_2d s0\n"
+        "def c0, 0.50000000, 0, 0, 0\n"
+        "dcl_texcoord0 v0.x\n"
+        "mov r0.y, c0.x\n"
+        "mov r0.x, v0\n"
+        "texld r0, r0, s0\n"
+        "mov oC0, r0\n",
+
+        // PP_ARBFP1
+        "!!ARBfp1.0\n"
+        "TEX result.color, fragment.texcoord[0], texture[0], 1D;\n"
+        "END\n"
+    };
+}
+
+CLASS_INVARIANT_STUB_DEFINE(Rendering, Texture1DEffect)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, Texture1DEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Texture1DEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Texture1DEffect);
 
 Rendering::Texture1DEffect::Texture1DEffect(ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }
 {
-    VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.Texture1D", 2, 2, 1, 0) };
+    auto vshader = std::make_shared<VertexShader>("Texture1D", 2, 2, 1, 0);
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelTCoord", ShaderFlags::VariableType::Float1, ShaderFlags::VariableSemantic::TextureCoord0);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
@@ -46,13 +155,13 @@ Rendering::Texture1DEffect::Texture1DEffect(ShaderFlags::SamplerFilter filter, S
     {
         for (auto j = 0; j < 1; ++j)
         {
-            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+            profile->SetBaseRegister(i, j, *vRegisters.at(i));
         }
 
-        profile->SetProgram(i, msVPrograms[i]);
+        profile->SetProgram(i, vPrograms.at(i));
     }
 
-    PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.Texture1D", 1, 1, 0, 1) };
+    auto pshader = std::make_shared<PixelShader>("Texture1D", 1, 1, 0, 1);
     pshader->SetInput(0, "vertexTCoord", ShaderFlags::VariableType::Float1, ShaderFlags::VariableSemantic::TextureCoord0);
     pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     pshader->SetSampler(0, "BaseSampler", ShaderFlags::SamplerType::Sampler2D);
@@ -65,39 +174,48 @@ Rendering::Texture1DEffect::Texture1DEffect(ShaderFlags::SamplerFilter filter, S
     {
         for (auto j = 0; j < 1; ++j)
         {
-            profile->SetTextureUnit(i, j, msPTextureUnits[i][j]);
+            profile->SetTextureUnit(i, j, *pTextureUnits.at(i));
         }
 
-        profile->SetProgram(i, msPPrograms[i]);
+        profile->SetProgram(i, pPrograms.at(i));
     }
 
-    VisualPassSharedPtr pass{};
+    auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
     pass->SetVertexShader(vshader);
     pass->SetPixelShader(pshader);
-    pass->SetAlphaState(AlphaStateSharedPtr{});
-    pass->SetCullState(CullStateSharedPtr{});
-    pass->SetDepthState(DepthStateSharedPtr{});
-    pass->SetOffsetState(OffsetStateSharedPtr{});
-    pass->SetStencilState(StencilStateSharedPtr{});
-    pass->SetWireState(WireStateSharedPtr{ {} });
+    pass->SetAlphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetCullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetDepthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetOffsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetStencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
+    pass->SetWireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
 
-    VisualTechniqueSharedPtr technique{};
+    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
     technique->InsertPass(pass);
     InsertTechnique(technique);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::PixelShader* Rendering::Texture1DEffect::GetPixelShader() const
+Rendering::PixelShaderSharedPtr Rendering::Texture1DEffect::GetPixelShaderSharedPtr() const
 {
-    return const_cast<PixelShader*>(GetTechnique(0)->GetPass(0)->GetPixelShader().get());
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    auto pass = GetTechnique(0)->GetPass(0);
+    auto pshader = pass->GetPixelShader();
+    return boost::polymorphic_pointer_cast<PixelShader>(pshader->CloneObject());
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture1DEffect::CreateInstance(Texture1D* texture) const
+Rendering::VisualEffectInstanceSharedPtr Rendering::Texture1DEffect::CreateInstance(const Texture1DSharedPtr& texture)
 {
-    VisualEffectInstance* instance = nullptr;  //  CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
-    instance->SetPixelTexture(0, 0, TextureSharedPtr(texture));
+    RENDERING_CLASS_IS_VALID_9;
 
-    const ShaderFlags::SamplerFilter filter = GetPixelShader()->GetFilter(0);
+    auto instance = std::make_shared<VisualEffectInstance>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), 0);
+
+    instance->SetVertexConstant(0, 0, std::make_shared<ProjectionViewMatrixConstant>(CoreTools::DisableNotThrow::Disable));
+    instance->SetPixelTexture(0, 0, texture);
+
+    const ShaderFlags::SamplerFilter filter = GetPixelShaderSharedPtr()->GetFilter(0);
     if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear && !texture->HasMipmaps())
     {
         texture->GenerateMipmaps();
@@ -106,26 +224,33 @@ Rendering::VisualEffectInstance* Rendering::Texture1DEffect::CreateInstance(Text
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::Texture1DEffect::CreateUniqueInstance(Texture1D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
+Rendering::VisualEffectInstanceSharedPtr Rendering::Texture1DEffect::CreateUniqueInstance(const Texture1DSharedPtr& texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate)
 {
-    const Texture1DEffect* effect = nullptr;  // New0 < Texture1DEffect>();
-    if (effect == nullptr)
-        return nullptr;
-    PixelShader* pshader = effect->GetPixelShader();
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+    auto effect = std::make_shared<Texture1DEffect>(ShaderFlags::SamplerFilter::Nearest);
+
+#include STSTEM_WARNING_POP
+
+    auto pshader = effect->GetPixelShaderSharedPtr();
+    pshader->SetFilter(0, filter);
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate);
+
     return effect->CreateInstance(texture);
 }
-
-// Streaming support.
 
 Rendering::Texture1DEffect::Texture1DEffect(LoadConstructor value)
     : VisualEffect{ value }
 {
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 void Rendering::Texture1DEffect::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     VisualEffect::Load(source);
@@ -135,48 +260,58 @@ void Rendering::Texture1DEffect::Load(CoreTools::BufferSource& source)
 
 void Rendering::Texture1DEffect::Link(CoreTools::ObjectLink& source)
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     VisualEffect::Link(source);
 }
 
 void Rendering::Texture1DEffect::PostLink()
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     VisualEffect::PostLink();
 
     auto pass = GetTechnique(0)->GetPass(0);
     auto vshader = pass->GetVertexShader();
+    auto cloneVShader = boost::polymorphic_pointer_cast<VertexShader>(vshader->CloneObject());
     auto pshader = pass->GetPixelShader();
-    auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
+    auto clonePShader = boost::polymorphic_pointer_cast<PixelShader>(pshader->CloneObject());
+    auto profile = cloneVShader->GetProfile();
 
     for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
     {
         for (auto j = 0; j < 1; ++j)
         {
-            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+            profile->SetBaseRegister(i, j, *vRegisters.at(i));
         }
 
-        profile->SetProgram(i, msVPrograms[i]);
+        profile->SetProgram(i, vPrograms.at(i));
     }
 
-    profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
+    profile = clonePShader->GetProfile();
 
     for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
     {
         for (auto j = 0; j < 1; ++j)
         {
-            profile->SetTextureUnit(i, j, msPTextureUnits[i][j]);
+            profile->SetTextureUnit(i, j, *pTextureUnits.at(i));
         }
 
-        profile->SetProgram(i, msPPrograms[i]);
+        profile->SetProgram(i, pPrograms.at(i));
     }
 }
 
 uint64_t Rendering::Texture1DEffect::Register(CoreTools::ObjectRegister& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return VisualEffect::Register(target);
 }
 
 void Rendering::Texture1DEffect::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     VisualEffect::Save(target);
@@ -186,122 +321,7 @@ void Rendering::Texture1DEffect::Save(CoreTools::BufferTarget& target) const
 
 int Rendering::Texture1DEffect::GetStreamingSize() const
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return VisualEffect::GetStreamingSize();
 }
-
-// Profiles.
-
-int Rendering::Texture1DEffect::msDx9VRegisters[1]{ 0 };
-int Rendering::Texture1DEffect::msOglVRegisters[1]{ 1 };
-int* Rendering::Texture1DEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    0,
-    msDx9VRegisters,
-    msDx9VRegisters,
-    msDx9VRegisters,
-    msOglVRegisters
-};
-
-std::string Rendering::Texture1DEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    // VP_NONE
-    "",
-
-    // VP_VS_1_1
-    "vs_1_1\n"
-    "def c4, 1.00000000, 0, 0, 0\n"
-    "dcl_position0 v0\n"
-    "dcl_texcoord0 v1\n"
-    "mov r0.w, c4.x\n"
-    "mov r0.xyz, v0\n"
-    "dp4 oPos.w, r0, c3\n"
-    "dp4 oPos.z, r0, c2\n"
-    "dp4 oPos.y, r0, c1\n"
-    "dp4 oPos.x, r0, c0\n"
-    "mov oT0.x, v1\n",
-
-    // VP_VS_2_0
-    "vs_2_0\n"
-    "def c4, 1.00000000, 0, 0, 0\n"
-    "dcl_position0 v0\n"
-    "dcl_texcoord0 v1\n"
-    "mov r0.w, c4.x\n"
-    "mov r0.xyz, v0\n"
-    "dp4 oPos.w, r0, c3\n"
-    "dp4 oPos.z, r0, c2\n"
-    "dp4 oPos.y, r0, c1\n"
-    "dp4 oPos.x, r0, c0\n"
-    "mov oT0.x, v1\n",
-
-    // VP_VS_3_0
-    "vs_3_0\n"
-    "dcl_position o0\n"
-    "dcl_texcoord0 o1\n"
-    "def c4, 1.00000000, 0, 0, 0\n"
-    "dcl_position0 v0\n"
-    "dcl_texcoord0 v1\n"
-    "mov r0.w, c4.x\n"
-    "mov r0.xyz, v0\n"
-    "dp4 o0.w, r0, c3\n"
-    "dp4 o0.z, r0, c2\n"
-    "dp4 o0.y, r0, c1\n"
-    "dp4 o0.x, r0, c0\n"
-    "mov o1.x, v1\n",
-
-    // VP_ARBVP1
-    "!!ARBvp1.0\n"
-    "PARAM c[5] = { { 1 }, program.local[1..4] };\n"
-    "TEMP R0;\n"
-    "MOV R0.w, c[0].x;\n"
-    "MOV R0.xyz, vertex.position;\n"
-    "DP4 result.position.w, R0, c[4];\n"
-    "DP4 result.position.z, R0, c[3];\n"
-    "DP4 result.position.y, R0, c[2];\n"
-    "DP4 result.position.x, R0, c[1];\n"
-    "MOV result.texcoord[0].x, vertex.texcoord[0];\n"
-    "END\n"
-};
-
-int Rendering::Texture1DEffect::msAllPTextureUnits[1]{ 0 };
-int* Rendering::Texture1DEffect::msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    0,
-    msAllPTextureUnits,
-    msAllPTextureUnits,
-    msAllPTextureUnits,
-    msAllPTextureUnits
-};
-
-std::string Rendering::Texture1DEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
-    // PP_NONE
-    "",
-
-    // PP_PS_1_1
-    "ps.1.1\n"
-    "tex t0\n"
-    "mov r0, t0\n",
-
-    // PP_PS_2_0
-    "ps_2_0\n"
-    "dcl_2d s0\n"
-    "def c0, 0.50000000, 0, 0, 0\n"
-    "dcl t0.x\n"
-    "mov r0.y, c0.x\n"
-    "mov r0.x, t0\n"
-    "texld r0, r0, s0\n"
-    "mov oC0, r0\n",
-
-    // PP_PS_3_0
-    "ps_3_0\n"
-    "dcl_2d s0\n"
-    "def c0, 0.50000000, 0, 0, 0\n"
-    "dcl_texcoord0 v0.x\n"
-    "mov r0.y, c0.x\n"
-    "mov r0.x, v0\n"
-    "texld r0, r0, s0\n"
-    "mov oC0, r0\n",
-
-    // PP_ARBFP1
-    "!!ARBfp1.0\n"
-    "TEX result.color, fragment.texcoord[0], texture[0], 1D;\n"
-    "END\n"
-};
-
-#include STSTEM_WARNING_POP

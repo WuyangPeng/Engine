@@ -19,7 +19,7 @@ namespace Framework
 		using ClassType = WindowHCursorTesting;
 		using ParentType = UnitTest;
 		using TChar = System::TChar;
-		using HInstance = System::WindowHInstance;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowHCursorTesting(const OStreamShared& stream, HInstance instance);

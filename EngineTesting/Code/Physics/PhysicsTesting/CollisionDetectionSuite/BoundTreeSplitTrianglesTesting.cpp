@@ -15,7 +15,14 @@
 
 #include <random> 
 #include <vector>
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26435)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26498)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26490)
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Physics, BoundTreeSplitTrianglesTesting) 
@@ -96,7 +103,7 @@ void Physics::BoundTreeSplitTrianglesTesting
 			outSplit[--index1] = info[i].GetTriangle();
 		}
 
-		ASSERT_EQUAL_DO_NOT_USE_MESSAGE(outSplit, firstBoundTreeSplitTriangles.GetOutSplit());
+		ASSERT_EQUAL(outSplit, firstBoundTreeSplitTriangles.GetOutSplit());
 
 		BoundTreeSplitTriangles secondBoundTreeSplitTriangles(centroids,0 , index0,
 															  outSplit, origin, direction);

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 11:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 11:09)
 
 #include "Rendering/RenderingExport.h"
 
@@ -16,16 +19,18 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/DataTypes/BoundDetail.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26455)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, SwitchNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SwitchNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SwitchNode);
 
-Rendering::SwitchNode::SwitchNode()
-    : ParentType{ NodeCreate::Init }, m_ActiveChild{ System::EnumCastUnderlying(SwitchNodeType::InvalidChild) }
+Rendering::SwitchNode::SwitchNodeSharedPtr Rendering::SwitchNode::Create()
+{
+    return std::make_shared<ClassType>(NodeCreate::Init);
+}
+
+Rendering::SwitchNode::SwitchNode(NodeCreate nodeCreate)
+    : ParentType{ nodeCreate }, activeChild{ System::EnumCastUnderlying(SwitchNodeType::InvalidChild) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -34,10 +39,10 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SwitchNode)
 
 void Rendering::SwitchNode::GetVisibleSet(Culler& culler, bool noCull)
 {
-    if (m_ActiveChild != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
+    if (activeChild != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
     {
         // 所有视觉对象在活跃的子树中，添加到可见组。
-        auto child = GetChild(m_ActiveChild);
+        auto child = GetChild(activeChild);
         if (child)
         {
             child->OnGetVisibleSet(culler, noCull);
@@ -49,35 +54,35 @@ Rendering::ControllerInterfaceSharedPtr Rendering::SwitchNode::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 Rendering::SwitchNode::SwitchNode(LoadConstructor value)
-    : ParentType{ value }, m_ActiveChild{ System::EnumCastUnderlying(SwitchNodeType::InvalidChild) }
+    : ParentType{ value }, activeChild{ System::EnumCastUnderlying(SwitchNodeType::InvalidChild) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::SwitchNode::SetActiveChild(int activeChild)
+void Rendering::SwitchNode::SetActiveChild(int aActiveChild)
 {
     RENDERING_CLASS_IS_VALID_1;
-    RENDERING_ASSERTION_0(activeChild == System::EnumCastUnderlying(SwitchNodeType::InvalidChild) || activeChild < GetNumChildren(), "指定的活跃子节点无效\n");
+    RENDERING_ASSERTION_0(aActiveChild == System::EnumCastUnderlying(SwitchNodeType::InvalidChild) || aActiveChild < GetNumChildren(), "指定的活跃子节点无效\n");
 
-    m_ActiveChild = activeChild;
+    activeChild = aActiveChild;
 }
 
 int Rendering::SwitchNode::GetActiveChild() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_ActiveChild;
+    return activeChild;
 }
 
 void Rendering::SwitchNode::DisableAllChildren() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_ActiveChild = System::EnumCastUnderlying(SwitchNodeType::InvalidChild);
+    activeChild = System::EnumCastUnderlying(SwitchNodeType::InvalidChild);
 }
 
 int Rendering::SwitchNode::GetStreamingSize() const
@@ -86,7 +91,7 @@ int Rendering::SwitchNode::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(m_ActiveChild);
+    size += CORE_TOOLS_STREAM_SIZE(activeChild);
 
     return size;
 }
@@ -106,34 +111,34 @@ void Rendering::SwitchNode::Save(CoreTools::BufferTarget& target) const
 
     ParentType::Save(target);
 
-    target.Write(m_ActiveChild);
+    target.Write(activeChild);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::SwitchNode::Link(CoreTools::ObjectLink& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
 }
 
 void Rendering::SwitchNode::PostLink()
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::PostLink();
 }
 
 void Rendering::SwitchNode::Load(CoreTools::BufferSource& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source.Read(m_ActiveChild);
+    source.Read(activeChild);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -144,12 +149,12 @@ Rendering::PickRecordContainer Rendering::SwitchNode::ExecuteRecursive(const APo
 
     auto container = PickRecordContainer::Create();
 
-    const auto activeChild = GetActiveChild();
-    if (activeChild != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
+    const auto active = GetActiveChild();
+    if (active != System::EnumCastUnderlying(SwitchNodeType::InvalidChild))
     {
         if (GetWorldBound().TestIntersection(origin, direction, tMin, tMax))
         {
-            auto child = GetConstChild(activeChild);
+            auto child = GetConstChild(active);
             if (child)
             {
                 auto childContainer = child->ExecuteRecursive(origin, direction, tMin, tMax);
@@ -166,7 +171,5 @@ CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::SwitchNode::Clon
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

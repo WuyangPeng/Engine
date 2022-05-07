@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/20 11:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:54)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_MAIN_FUNCTION_HELPER_BASE_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_MAIN_FUNCTION_HELPER_BASE_H
@@ -37,15 +40,15 @@ namespace Framework
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        String GetEngineInstallationDirectory() const;
+        NODISCARD String GetEngineInstallationDirectory() const;
 
-        int Run();
+        NODISCARD int Run();
 
         virtual void Destroy();
 
     protected:
-        bool IsDestroy() const noexcept;
-        EnvironmentDirectory GetEnvironmentDirectory() const;
+        NODISCARD bool IsDestroy() const noexcept;
+        NODISCARD EnvironmentDirectory GetEnvironmentDirectory() const;
 
     private:
         void MainFunctionHelperInit(const EnvironmentDirectory& environmentDirectory);
@@ -58,14 +61,13 @@ namespace Framework
         void InitEnvironment();
         void InitImpl(const EnvironmentDirectory& environmentDirectory);
 
-        void DestroyImpl() noexcept;
-        void DestroySmartPointer() noexcept;
+        void DestroyImpl() noexcept; 
         void DestroyEnvironment() noexcept;
         void DestroyInitTerm();
         void DestroyLog() noexcept;
         void DestroyUniqueIDManager() noexcept;
 
-        virtual int DoRun() = 0;
+        NODISCARD virtual int DoRun() = 0;
 
     private:
         using MainFunctionHelperBaseImplPtr = std::shared_ptr<ImplType>;
@@ -73,7 +75,7 @@ namespace Framework
     private:
         MainFunctionHelperBaseImplPtr impl;
 
-        MainFunctionSchedule m_MainFunctionSchedule;
+        MainFunctionSchedule mainFunctionSchedule;
     };
 }
 

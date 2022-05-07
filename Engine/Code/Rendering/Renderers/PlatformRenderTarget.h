@@ -1,27 +1,27 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 15:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:55)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_RENDER_TARGET_H
 #define RENDERING_RENDERERS_PLATFORM_RENDER_TARGET_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "RenderersFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
+#include "Rendering/Resources/Flags/BufferFlags.h"
+#include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/Resources/Texture2D.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(PlatformRenderTargetImpl);
 
 namespace Rendering
 {
-    class Renderer;
-    class RenderTarget;
-    class Texture2D;
-
     class RENDERING_DEFAULT_DECLARE PlatformRenderTarget
     {
     public:
@@ -29,17 +29,13 @@ namespace Rendering
 
     public:
         PlatformRenderTarget(Renderer* renderer, const RenderTarget* renderTarget);
-        ~PlatformRenderTarget() noexcept = default;
-        PlatformRenderTarget(const PlatformRenderTarget& rhs) noexcept = delete;
-        PlatformRenderTarget& operator=(const PlatformRenderTarget& rhs) noexcept = delete;
-        PlatformRenderTarget(PlatformRenderTarget&& rhs) noexcept = delete;
-        PlatformRenderTarget& operator=(PlatformRenderTarget&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
         // 渲染目标的操作。
         void Enable(Renderer* renderer);
         void Disable(Renderer* renderer);
-        ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer);
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer);
 
     private:
         PackageType impl;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/09 22:07)
 
 #ifndef RENDERING_DETAIL_CREATE_CLOD_MESH_IMPL_H
 #define RENDERING_DETAIL_CREATE_CLOD_MESH_IMPL_H
@@ -34,41 +37,41 @@
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE CreateClodMeshImpl
-	{
-	public:
-		using ClassType = CreateClodMeshImpl;
-		using EdgeKey = Mathematics::EdgeKey;
-		using TriangleKey = Mathematics::TriangleKey;
+    class RENDERING_HIDDEN_DECLARE CreateClodMeshImpl
+    {
+    public:
+        using ClassType = CreateClodMeshImpl;
+        using EdgeKey = Mathematics::EdgeKey;
+        using TriangleKey = Mathematics::TriangleKey;
 
-	public:
-		explicit CreateClodMeshImpl(TrianglesMeshSharedPtr mesh);
+    public:
+        explicit CreateClodMeshImpl(TrianglesMesh& mesh);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
+        NODISCARD CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
 
-	private:
-		void Compute();	 
-		void CreateVertexEdgeTriangleGraph();
-		float ComputeMetric(const EdgeKey& edgeKey);
-		const Mathematics::Vector3F GetNormal( const TriangleKey& triangleKey );
-		int CanCollapse(const EdgeKey& edgeKey);
-		void Collapse(const EdgeKey& edgeKey, int indexThrow);
-		bool ValidResults ();
-		void ReorderBuffers ();
-		void ComputeRecords ();
+    private:
+        void Compute();
+        void CreateVertexEdgeTriangleGraph();
+        NODISCARD float ComputeMetric(const EdgeKey& edgeKey);
+        NODISCARD Mathematics::Vector3F GetNormal(const TriangleKey& triangleKey);
+        NODISCARD int CanCollapse(const EdgeKey& edgeKey);
+        void Collapse(const EdgeKey& edgeKey, int indexThrow);
+        NODISCARD bool ValidResults();
+        void ReorderBuffers();
+        void ComputeRecords();
 
-	private:
-		ClodMeshTriangleMesh m_ClodMeshTriangleMesh;
-		
-		ClodMeshVertexEdgeTriangleGraph m_Graph;
+    private:
+        ClodMeshTriangleMesh clodMeshTriangleMesh;
 
-		// 边的合拢序列
-		std::vector<ClodMeshCollapseInfo> m_Collapses;
-		
-		std::vector<CollapseRecord> m_CollapseRecord;
-	};
+        ClodMeshVertexEdgeTriangleGraph graph;
+
+        // 边的合拢序列
+        std::vector<ClodMeshCollapseInfo> collapses;
+
+        std::vector<CollapseRecord> collapseRecord;
+    };
 }
 
-#endif // RENDERING_DETAIL_CREATE_CLOD_MESH_IMPL_H
+#endif  // RENDERING_DETAIL_CREATE_CLOD_MESH_IMPL_H

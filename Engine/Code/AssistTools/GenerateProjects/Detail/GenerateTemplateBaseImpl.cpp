@@ -1,131 +1,110 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/28 18:51)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateBaseImpl.h"
-#include "AssistTools/GenerateProjects/CopyrightData.h"
-#include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Time/CustomTime.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "System/Helper/PragmaWarning/PosixTime.h"
 #include "System/Helper/PragmaWarning/Timer.h"
- 
-#include "System/Helper/PragmaWarning/PosixTime.h" 
-
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Time/CustomTime.h"
+#include "AssistTools/GenerateProjects/CopyrightData.h"
 
 using namespace std::literals;
 
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultEndYear(SYSTEM_TEXT("EndYear"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
- 	::sm_DefaultProjectChineseName(SYSTEM_TEXT("ProjectChineseName"));
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultVersions(SYSTEM_TEXT("Versions"));
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultDate(SYSTEM_TEXT("Date"));
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultHour(SYSTEM_TEXT("Hour"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultMinute(SYSTEM_TEXT("Minute"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultProjectCapital(SYSTEM_TEXT("ProjectCapital"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultSolutionName(SYSTEM_TEXT("SolutionName"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultProjectName(SYSTEM_TEXT("ProjectName"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultManagerCapital(SYSTEM_TEXT("ManagerCapital"));	
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultManagerName(SYSTEM_TEXT("ManagerName"));
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultManagerChineseName(SYSTEM_TEXT("ManagerChineseName"));
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::sm_DefaultInterfaceName(SYSTEM_TEXT("InterfaceName"));
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultEndYear{ SYSTEM_TEXT("EndYear"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultProjectChineseName{ SYSTEM_TEXT("ProjectChineseName"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultVersions{ SYSTEM_TEXT("Versions"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultDate{ SYSTEM_TEXT("Date"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultHour{ SYSTEM_TEXT("Hour"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultMinute{ SYSTEM_TEXT("Minute"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultProjectCapital{ SYSTEM_TEXT("ProjectCapital"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultSolutionName{ SYSTEM_TEXT("SolutionName"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultProjectName{ SYSTEM_TEXT("ProjectName"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultManagerCapital{ SYSTEM_TEXT("ManagerCapital"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultManagerName{ SYSTEM_TEXT("ManagerName"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultManagerChineseName{ SYSTEM_TEXT("ManagerChineseName"s) };
+const System::String AssistTools::GenerateTemplateBaseImpl::defaultInterfaceName{ SYSTEM_TEXT("InterfaceName"s) };
 
-AssistTools::GenerateTemplateBaseImpl
-	::GenerateTemplateBaseImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace)
-	:ParentType(templateFileName, extension), m_Replace(replace)
+AssistTools::GenerateTemplateBaseImpl::GenerateTemplateBaseImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace)
+    : ParentType{ templateFileName, extension }, replace{ replace }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateBaseImpl)
 
-const AssistTools::GenerateTemplateBaseImpl::VariableType AssistTools::GenerateTemplateBaseImpl
-	::GetCopyrightVariable(const CopyrightData& copyrightData) const
+AssistTools::GenerateTemplateBaseImpl::VariableType AssistTools::GenerateTemplateBaseImpl::GetCopyrightVariable(const CopyrightData& copyrightData) const
 {
-	VariableType newVariable;
+    VariableType newVariable{};
 
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::EndYear), boost::lexical_cast<System::String>(copyrightData.GetEndYear())));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Versions), copyrightData.GetVersions()));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ProjectChineseName), copyrightData.GetProjectChineseName()));
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::EndYear), boost::lexical_cast<System::String>(copyrightData.GetEndYear()));
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::Versions), copyrightData.GetVersions());
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ProjectChineseName), copyrightData.GetProjectChineseName());
 
-	System::String dateFormat(SYSTEM_TEXT("%1%/%2%/%3%"));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Date), CoreTools::CustomTime::GetSystemTimeDescribe(dateFormat)));
+    System::String dateFormat{ SYSTEM_TEXT("%1%/%2%/%3%"s) };
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::Date), CoreTools::CustomTime::GetSystemTimeDescribe(dateFormat));
 
-	const boost::posix_time::ptime nowTime = boost::posix_time::second_clock::local_time();
-	const boost::posix_time::ptime::time_duration_type timeOfDay = nowTime.time_of_day();
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Hour), boost::lexical_cast<System::String>(timeOfDay.hours())));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::Minute), boost::lexical_cast<System::String>(timeOfDay.minutes())));
+    const auto nowTime = boost::posix_time::second_clock::local_time();
+    const auto timeOfDay = nowTime.time_of_day();
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::Hour), boost::lexical_cast<System::String>(timeOfDay.hours()));
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::Minute), boost::lexical_cast<System::String>(timeOfDay.minutes()));
 
-	return newVariable;
+    return newVariable;
 }
 
-const System::String AssistTools::GenerateTemplateBaseImpl
-	::GetOriginal(GenerateTemplateReplace flag) const
+System::String AssistTools::GenerateTemplateBaseImpl::GetOriginal(GenerateTemplateReplace flag) const
 {
-	const ReplaceConstIter iter = m_Replace.find(flag);
+    const auto iter = replace.find(flag);
 
-	if (iter != m_Replace.end())
-	{
-		return iter->second;
-	}		
-	else
-	{
-		switch (flag)
-		{
-		case AssistTools::GenerateTemplateReplace::EndYear:
-			return sm_DefaultEndYear;
-		case AssistTools::GenerateTemplateReplace::ProjectChineseName:
-			return sm_DefaultProjectChineseName;
-		case AssistTools::GenerateTemplateReplace::Versions:
-			return sm_DefaultVersions;
-		case AssistTools::GenerateTemplateReplace::Date:
-			return sm_DefaultDate;
-		case AssistTools::GenerateTemplateReplace::Hour:
-			return sm_DefaultHour;
-		case AssistTools::GenerateTemplateReplace::Minute:
-			return sm_DefaultMinute;
-		case AssistTools::GenerateTemplateReplace::ProjectCapital:
-			return sm_DefaultProjectCapital;
-		case AssistTools::GenerateTemplateReplace::SolutionName:
-			return sm_DefaultSolutionName;
-		case AssistTools::GenerateTemplateReplace::ProjectName:
-			return sm_DefaultProjectName;
-		case AssistTools::GenerateTemplateReplace::ManagerCapital:
-			return sm_DefaultManagerCapital;
-		case AssistTools::GenerateTemplateReplace::ManagerName:
-			return sm_DefaultManagerName;
-		case AssistTools::GenerateTemplateReplace::ManagerChineseName:
-			return sm_DefaultManagerChineseName;
-		case AssistTools::GenerateTemplateReplace::InterfaceName:
-			return sm_DefaultInterfaceName;
-		default:
-			THROW_EXCEPTION(SYSTEM_TEXT("错误的版权信息标识。"s));
-		}
-	}
+    if (iter != replace.end())
+    {
+        return iter->second;
+    }
+    else
+    {
+        switch (flag)
+        {
+            case AssistTools::GenerateTemplateReplace::EndYear:
+                return defaultEndYear;
+            case AssistTools::GenerateTemplateReplace::ProjectChineseName:
+                return defaultProjectChineseName;
+            case AssistTools::GenerateTemplateReplace::Versions:
+                return defaultVersions;
+            case AssistTools::GenerateTemplateReplace::Date:
+                return defaultDate;
+            case AssistTools::GenerateTemplateReplace::Hour:
+                return defaultHour;
+            case AssistTools::GenerateTemplateReplace::Minute:
+                return defaultMinute;
+            case AssistTools::GenerateTemplateReplace::ProjectCapital:
+                return defaultProjectCapital;
+            case AssistTools::GenerateTemplateReplace::SolutionName:
+                return defaultSolutionName;
+            case AssistTools::GenerateTemplateReplace::ProjectName:
+                return defaultProjectName;
+            case AssistTools::GenerateTemplateReplace::ManagerCapital:
+                return defaultManagerCapital;
+            case AssistTools::GenerateTemplateReplace::ManagerName:
+                return defaultManagerName;
+            case AssistTools::GenerateTemplateReplace::ManagerChineseName:
+                return defaultManagerChineseName;
+            case AssistTools::GenerateTemplateReplace::InterfaceName:
+                return defaultInterfaceName;
+            default:
+                THROW_EXCEPTION(SYSTEM_TEXT("错误的版权信息标识。"s));
+        }
+    }
 }
-#include STSTEM_WARNING_POP
 
 /*
 示例模板：
@@ -135,4 +114,3 @@ const System::String AssistTools::GenerateTemplateBaseImpl
 //
 // %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 */
-

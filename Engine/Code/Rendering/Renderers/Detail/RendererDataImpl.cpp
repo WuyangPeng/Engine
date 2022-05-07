@@ -1,173 +1,158 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 09:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 14:13)
 
 #include "Rendering/RenderingExport.h"
 
-#include "RendererDataImpl.h"
 #include "AnalysisRendererManager.h"
+#include "RendererDataImpl.h"
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererBasis.h"
-#include "CoreTools/CharacterString/StringConversion.h"
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-using std::make_shared;
+
 using boost::property_tree::ptree_error;
+using std::make_shared;
+using namespace std::literals;
 
-Rendering::RendererDataImpl::RendererDataImpl(MAYBE_UNUSED int count)
-    : m_Renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default, RendererBasis()) }
+Rendering::RendererDataImpl::RendererDataImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default, RendererBasis{}) }
 {
-	m_Renderer->Init();
+    renderer->Init();
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
-
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererDataImpl
-	::IsValid() const noexcept
+
+bool Rendering::RendererDataImpl::IsValid() const noexcept
 {
-    if(m_Renderer != nullptr)
+    if (renderer != nullptr)
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::RendererDataImpl
-::LoadConfiguration(const std::string& fileName)
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::RendererDataImpl::LoadConfiguration(const std::string& fileName)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	try
-	{
-		AnalysisRendererManager manager{ fileName };
-	    m_Renderer = manager.GetRendererPtr();
-	}
-	catch (const ptree_error& error)
-	{
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			<< error.what()
-			<< CoreTools::LogAppenderIOManageSign::TriggerAssert;	
-	}
-
+    try
+    {
+        AnalysisRendererManager manager{ fileName };
+        renderer = manager.GetRenderer();
+    }
+    catch (const ptree_error& error)
+    {
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << error.what()
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
 }
 
-void Rendering::RendererDataImpl
-::ClearColor()
+void Rendering::RendererDataImpl::ClearColor()
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Renderer->ClearColorBuffer();
+    renderer->ClearColorBuffer();
 }
 
-void Rendering::RendererDataImpl
-	::Resize( int width,int height )
+void Rendering::RendererDataImpl::Resize(int width, int height)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Renderer->Resize(width,height);
+    renderer->Resize(width, height);
 }
 
-void Rendering::RendererDataImpl
-	::DrawMessage( int x,int y,const Colour& color,const std::string& message)
+void Rendering::RendererDataImpl::DrawMessage(int x, int y, const Colour& color, const std::string& message)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-  	m_Renderer->Draw(x, y,color, message);
+    renderer->Draw(x, y, color, message);
 }
 
-Rendering::TextureFormat Rendering::RendererDataImpl
-	::GetColorFormat() const
+Rendering::TextureFormat Rendering::RendererDataImpl::GetColorFormat() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetColorFormat();
+    return renderer->GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererDataImpl
-	::GetDepthStencilFormat() const
+Rendering::TextureFormat Rendering::RendererDataImpl::GetDepthStencilFormat() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetDepthStencilFormat();
+    return renderer->GetDepthStencilFormat();
 }
 
-int Rendering::RendererDataImpl
-	::GetNumMultisamples() const
+int Rendering::RendererDataImpl::GetNumMultisamples() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetNumMultisamples();
+    return renderer->GetNumMultisamples();
 }
 
-Rendering::Colour<float> Rendering::RendererDataImpl
-	::GetClearColor() const
+Rendering::Colour<float> Rendering::RendererDataImpl::GetClearColor() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetClearColor();
+    return renderer->GetClearColor();
 }
 
-const std::string Rendering::RendererDataImpl
-	::GetWindowTitle() const
+std::string Rendering::RendererDataImpl::GetWindowTitle() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ""; 
+    return ""s;
 }
 
-int Rendering::RendererDataImpl
-	::GetXPosition () const noexcept
+int Rendering::RendererDataImpl::GetXPosition() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return 1024; 
+    return 1024;
 }
 
-int Rendering::RendererDataImpl
-	::GetYPosition () const noexcept
+int Rendering::RendererDataImpl::GetYPosition() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return 768; 
+    return 768;
 }
 
-int Rendering::RendererDataImpl
-	::GetWidth () const
+int Rendering::RendererDataImpl::GetWidth() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetWidth();
+    return renderer->GetWidth();
 }
 
-int Rendering::RendererDataImpl
-	::GetHeight () const
+int Rendering::RendererDataImpl::GetHeight() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetHeight();
+    return renderer->GetHeight();
 }
 
-bool Rendering::RendererDataImpl
-	::IsAllowResize() const noexcept
+bool Rendering::RendererDataImpl::IsAllowResize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return true; 
+    return true;
 }
 
-Rendering::RendererTypes Rendering::RendererDataImpl
-	::GetRendererType() const
+Rendering::RendererTypes Rendering::RendererDataImpl::GetRendererType() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Renderer->GetRendererType();
-}	
-#include STSTEM_WARNING_POP
+    return renderer->GetRendererType();
+}

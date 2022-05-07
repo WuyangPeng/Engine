@@ -11,6 +11,7 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, WireStateTesting) 
@@ -30,7 +31,7 @@ void Rendering::WireStateTesting
 void Rendering::WireStateTesting
 	::InitTest()
 {
-	WireState firstWireState;
+    WireState firstWireState(CoreTools::DisableNotThrow::Disable);
 
 	ASSERT_FALSE(firstWireState.IsEnabled()); 
 
@@ -42,7 +43,7 @@ void Rendering::WireStateTesting
 void Rendering::WireStateTesting
 	::CopyTest()
 { 
-	WireState firstWireState;
+	WireState firstWireState(CoreTools::DisableNotThrow::Disable);
 
 	firstWireState.SetEnabled(true);
 

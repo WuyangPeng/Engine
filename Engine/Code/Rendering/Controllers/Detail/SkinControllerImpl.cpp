@@ -1,249 +1,237 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 14:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/06 16:32)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SkinControllerImpl.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "Mathematics/Algebra/AlgebraAggregate.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::SkinControllerImpl
-	::SkinControllerImpl(int numVertices, int numBones)
-	:m_NumVertices{ numVertices },m_NumBones{ numBones },m_Size{ numVertices * numBones },
-	 m_Bones(numBones),m_Weights(m_Size),m_Offsets(m_Size)
+
+Rendering::SkinControllerImpl::SkinControllerImpl(int numVertices, int numBones)
+    : numVertices{ numVertices },
+      numBones{ numBones },
+      size{ numVertices * numBones },
+      bones(numBones),
+      weights(size),
+      offsets(size)
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::SkinControllerImpl::SkinControllerImpl() noexcept
-    : m_NumVertices{ 0 }, m_NumBones{ 0 }, m_Size{ 0 },
-	 m_Bones{}, m_Weights{}, m_Offsets{}
+    : numVertices{ 0 },
+      numBones{ 0 },
+      size{ 0 },
+      bones{},
+      weights{},
+      offsets{}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::SkinControllerImpl
-	::IsValid() const noexcept
+
+bool Rendering::SkinControllerImpl::IsValid() const noexcept
 {
-	if (0 <= m_Size && m_NumBones * m_NumVertices == m_Size)
-		return true;
-	else		
-		return false;		
+    if (0 <= size && numBones * numVertices == size)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 int Rendering::SkinControllerImpl::GetNumVertices() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumVertices;
+    return numVertices;
 }
 
 int Rendering::SkinControllerImpl::GetNumBones() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumBones;
+    return numBones;
 }
 
-const Rendering::ConstNodeSharedPtr Rendering::SkinControllerImpl
-	::GetBones(int bonesIndex) const 
+Rendering::ConstNodeSharedPtr Rendering::SkinControllerImpl::GetBones(int bonesIndex) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "Ë÷Òý´íÎó£¡");
 
-	return m_Bones[bonesIndex];
+    return bones.at(bonesIndex).object;
 }
 
-float Rendering::SkinControllerImpl
-	::GetWeights(int bonesIndex,int verticesIndex) const
+float Rendering::SkinControllerImpl::GetWeights(int bonesIndex, int verticesIndex) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
-	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < numVertices, "Ë÷Òý´íÎó£¡");
 
-	const auto index = verticesIndex + bonesIndex * m_NumVertices;
+    const auto index = verticesIndex + bonesIndex * numVertices;
 
-	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < size, "Ë÷Òý´íÎó£¡");
 
-	return m_Weights[index];
+    return weights.at(index);
 }
 
-const Rendering::SkinControllerImpl::APoint Rendering::SkinControllerImpl
-	::GetOffsets(int bonesIndex,int verticesIndex) const 
+Rendering::SkinControllerImpl::APoint Rendering::SkinControllerImpl::GetOffsets(int bonesIndex, int verticesIndex) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
-	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < numVertices, "Ë÷Òý´íÎó£¡");
 
-	const auto index = verticesIndex + bonesIndex * m_NumVertices;
+    const auto index = verticesIndex + bonesIndex * numVertices;
 
-	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < size, "Ë÷Òý´íÎó£¡");
 
-	return m_Offsets[index];
+    return offsets.at(index);
 }
 
-void Rendering::SkinControllerImpl
-	::SetBones(int bonesIndex, const ConstNodeSharedPtr& node)
+void Rendering::SkinControllerImpl::SetBones(int bonesIndex, const ConstNodeSharedPtr& node)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "Ë÷Òý´íÎó£¡");
 
-	m_Bones[bonesIndex] = node;
+    bones.at(bonesIndex).object = node;
 }
 
-void Rendering::SkinControllerImpl
-	::SetBones(const std::vector<ConstNodeSharedPtr>& bones)
+void Rendering::SkinControllerImpl::SetBones(const std::vector<CoreTools::ConstObjectAssociated<Node>>& aBones)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(boost::numeric_cast<int>(bones.size()) == m_NumBones, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(boost::numeric_cast<int>(aBones.size()) == numBones, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
 
-	m_Bones = bones;
+    bones = aBones;
 }
 
-void Rendering::SkinControllerImpl
-	::SetWeights(int bonesIndex,int verticesIndex, float weights)
+void Rendering::SkinControllerImpl::SetWeights(int bonesIndex, int verticesIndex, float weight)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
-	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < numVertices, "Ë÷Òý´íÎó£¡");
 
-	const auto index = verticesIndex + bonesIndex * m_NumVertices;
+    const auto index = verticesIndex + bonesIndex * numVertices;
 
-	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < size, "Ë÷Òý´íÎó£¡");
 
-	m_Weights[index] = weights;
+    weights.at(index) = weight;
 }
 
-void Rendering::SkinControllerImpl
-	::SetWeights(int bonesIndex, const vector<float>& weights) 
+void Rendering::SkinControllerImpl::SetWeights(int bonesIndex, const vector<float>& weight)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(boost::numeric_cast<int>(weights.size()) == m_NumVertices, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(boost::numeric_cast<int>(weight.size()) == numVertices, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
 
-	const auto beginIndex = bonesIndex * m_NumVertices;
-	RENDERING_ASSERTION_0(0 <= beginIndex && beginIndex < m_Size, "Ë÷Òý´íÎó£¡");
+    const auto beginIndex = bonesIndex * numVertices;
+    RENDERING_ASSERTION_0(0 <= beginIndex && beginIndex < size, "Ë÷Òý´íÎó£¡");
 
-	RENDERING_ASSERTION_0(0 <= beginIndex + m_NumVertices - 1 &&  beginIndex + m_NumVertices - 1 < m_Size, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= beginIndex + numVertices - 1 && beginIndex + numVertices - 1 < size, "Ë÷Òý´íÎó£¡");
 
-	for (auto i = 0; i < m_NumVertices; ++i)
-	{
-		m_Weights[i + beginIndex] = weights[i];
-	}
+    for (auto i = 0; i < numVertices; ++i)
+    {
+        const auto index = i + beginIndex;
+        weights.at(index) = weight.at(i);
+    }
 }
 
-void Rendering::SkinControllerImpl
-	::SetOffsets(int bonesIndex,int verticesIndex, const APoint& offsets) 
+void Rendering::SkinControllerImpl::SetOffsets(int bonesIndex, int verticesIndex, const APoint& offset)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < m_NumBones, "Ë÷Òý´íÎó£¡");
-	RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < m_NumVertices, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= bonesIndex && bonesIndex < numBones, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= verticesIndex && verticesIndex < numVertices, "Ë÷Òý´íÎó£¡");
 
-	const auto index = verticesIndex + bonesIndex * m_NumVertices;
+    const auto index = verticesIndex + bonesIndex * numVertices;
 
-	RENDERING_ASSERTION_0(0 <= index && index < m_Size, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= index && index < size, "Ë÷Òý´íÎó£¡");
 
-	m_Offsets[index] = offsets;
+    offsets.at(index) = offset;
 }
 
-void Rendering::SkinControllerImpl
-	::SetOffsets(int bonesIndex, const vector<APoint>& offsets)
+void Rendering::SkinControllerImpl::SetOffsets(int bonesIndex, const vector<APoint>& offset)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(boost::numeric_cast<int>(offsets.size()) == m_NumVertices, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(boost::numeric_cast<int>(offset.size()) == numVertices, "´«ÈëµÄ¹Ç÷À´óÐ¡´íÎó");
 
-	const auto beginIndex = bonesIndex * m_NumVertices;
-	RENDERING_ASSERTION_0(0 <= beginIndex && beginIndex < m_Size, "Ë÷Òý´íÎó£¡");
-	RENDERING_ASSERTION_0(0 <= beginIndex + m_NumVertices - 1 && beginIndex + m_NumVertices - 1 < m_Size, "Ë÷Òý´íÎó£¡");
+    const auto beginIndex = bonesIndex * numVertices;
+    RENDERING_ASSERTION_0(0 <= beginIndex && beginIndex < size, "Ë÷Òý´íÎó£¡");
+    RENDERING_ASSERTION_0(0 <= beginIndex + numVertices - 1 && beginIndex + numVertices - 1 < size, "Ë÷Òý´íÎó£¡");
 
-	for (auto i = 0; i < m_NumVertices; ++i)
-	{
-		m_Offsets[i + beginIndex] = offsets[i];
-	}
+    for (auto i = 0; i < numVertices; ++i)
+    {
+        const auto index = i + beginIndex;
+        offsets.at(index) = offset.at(i);
+    }
 }
 
-int Rendering::SkinControllerImpl
-	::GetStreamingSize() const noexcept
+int Rendering::SkinControllerImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_NumVertices);
-	size += CORE_TOOLS_STREAM_SIZE(m_NumBones);
-	 
-	size += m_NumBones * RENDERING_STREAM_SIZE(m_Bones[0]);
-	size += m_Size * MATHEMATICS_STREAM_SIZE(m_Weights[0]);
-	size += m_Size * CORE_TOOLS_STREAM_SIZE(m_Offsets[0]);	
+    auto result = CORE_TOOLS_STREAM_SIZE(numVertices);
+    result += CORE_TOOLS_STREAM_SIZE(numBones);
 
-	return size;
+    result += numBones * RENDERING_STREAM_SIZE(bones.at(0));
+    result += size * MATHEMATICS_STREAM_SIZE(weights.at(0));
+    result += size * CORE_TOOLS_STREAM_SIZE(offsets.at(0));
+
+    return result;
 }
 
-void Rendering::SkinControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+void Rendering::SkinControllerImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumVertices);
-	target.Write(m_NumBones);
+    target.Write(numVertices);
+    target.Write(numBones);
 
-//	target.WriteSharedPtrWithoutNumber(m_NumBones, &m_Bones[0]);
-	//target.WriteWithoutNumber(m_Size, &m_Weights[0]);
-	//target.WriteAggregateWithoutNumber(m_Size, &m_Offsets[0]);
+    target.WriteObjectAssociatedContainerWithNumber(bones);
+    target.WriteContainerWithNumber(weights);
+    target.WriteAggregateContainerWithNumber(offsets);
 }
 
-void Rendering::SkinControllerImpl
-	::Load(CoreTools::BufferSource& source) 
+void Rendering::SkinControllerImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumVertices);
-        source.Read(m_NumBones);
-	m_Size = m_NumVertices * m_NumBones;
-	m_Bones.resize(m_NumBones);
-	m_Weights.resize(m_Size);
-	m_Offsets.resize(m_Size);
-	 
-//	source.ReadSharedPtr(m_NumBones, &m_Bones[0]);
-        m_Weights = source.ReadVectorWithNumber<float>(m_Size);
-        source.ReadAggregateContainer(m_Size, m_Offsets);
+    source.Read(numVertices);
+    source.Read(numBones);
+    size = numVertices * numBones;
+    bones.resize(numBones);
+    weights.resize(size);
+    offsets.resize(size);
+
+    source.ReadObjectAssociatedContainer(numBones, bones);
+    weights = source.ReadVectorWithNumber<float>(size);
+    source.ReadAggregateContainer(size, offsets);
 }
 
-void Rendering::SkinControllerImpl
-	::Link(CoreTools::ObjectLink& source) 
+void Rendering::SkinControllerImpl::Link(CoreTools::ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
-    source;
-    //	source.ResolveObjectConstSharedPtrLink(m_NumBones, &m_Bones[0]);
+    RENDERING_CLASS_IS_VALID_1;
+
+    source.ResolveLinkContainer(bones);
 }
 
-void Rendering::SkinControllerImpl
-	::Register(CoreTools::ObjectRegister& target) const 
+void Rendering::SkinControllerImpl::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    target;
-    CoreTools::DisableNoexcept();
-	//target.RegisterSharedPtr(m_NumBones, &m_Bones[0]);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    target.RegisterContainer(bones);
 }
- 
-#include STSTEM_WARNING_POP

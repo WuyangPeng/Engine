@@ -6,12 +6,11 @@
 
 #include "Example/UserInterface/UserInterfaceExample/UserInterfaceExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/UserInterfaceClassInvariantMacro.h"
-UserInterfaceExample::Placeholder
-	::Placeholder() 
+UserInterfaceExample::Placeholder ::Placeholder() noexcept
 {
-	USER_INTERFACE_SELF_CLASS_IS_VALID_9;
+    USER_INTERFACE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(UserInterfaceExample, Placeholder)

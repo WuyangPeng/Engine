@@ -1,57 +1,56 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 14:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 13:23)
 
 #ifndef RENDERING_SHADERS_SHADER_CONSTANTS_DATA_IMPL_H
 #define RENDERING_SHADERS_SHADER_CONSTANTS_DATA_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/FileManager/FileManagerFwd.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Shaders/SingleShaderConstantsData.h"
 
 #include <string>
 #include <vector>
 
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;		
-}
-
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE ShaderConstantsDataImpl
-	{	
-	public:
-		using ClassType = ShaderConstantsDataImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-	
-	public:		
-		ShaderConstantsDataImpl() noexcept;
-		explicit ShaderConstantsDataImpl(int number);
+    class RENDERING_HIDDEN_DECLARE ShaderConstantsDataImpl
+    {
+    public:
+        using ClassType = ShaderConstantsDataImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
 
-		CLASS_INVARIANT_DECLARE;
+    public:
+        ShaderConstantsDataImpl() noexcept;
+        explicit ShaderConstantsDataImpl(int number);
 
-		void Resize(int number);
-		
-		void SetConstant (int index, const std::string& name,int numRegistersUsed);
+        CLASS_INVARIANT_DECLARE;
 
-		void InsertData(const std::string& name,int numRegistersUsed);	
-	
-		int GetNumConstants() const;
-		const std::string GetConstantName(int index) const;
-		int GetNumRegistersUsed(int index) const;
+        void Resize(int number);
 
-		void Load(CoreTools::BufferSource& source);
-		void Save(CoreTools::BufferTarget& target) const;
-		int GetStreamingSize() const;
-		
-	private:	
-		std::vector<SingleShaderConstantsData> m_SingleShaderConstantsData;
-	};
+        void SetConstant(int index, const std::string& name, int numRegistersUsed);
+
+        void InsertData(const std::string& name, int numRegistersUsed);
+
+        NODISCARD int GetNumConstants() const;
+        NODISCARD std::string GetConstantName(int index) const;
+        NODISCARD int GetNumRegistersUsed(int index) const;
+
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const;
+
+    private:
+        std::vector<SingleShaderConstantsData> singleShaderConstantsData;
+    };
 }
 
-#endif // RENDERING_SHADERS_SHADER_CONSTANTS_DATA_IMPL_H
+#endif  // RENDERING_SHADERS_SHADER_CONSTANTS_DATA_IMPL_H

@@ -1,161 +1,216 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 17:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:22)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLESRenderer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "../Flags/RendererTypes.h"
-#include "System/Helper/PragmaWarning.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
+
+Rendering::OpenGLESRenderer::OpenGLESRenderer(const RendererBasis& basis)
+    : ParentType{ basis }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLESRenderer)
+
+Rendering::RendererTypes Rendering::OpenGLESRenderer::GetRendererType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return RendererTypes::OpenGLES;
+}
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
-#include "System/Helper/PragmaWarning/Disable4100.h"
-Rendering::OpenGLESRenderer
-	::OpenGLESRenderer(const RendererBasis& basis)
-	:ParentType{ basis }
+
+void Rendering::OpenGLESRenderer::SetAlphaState(MAYBE_UNUSED const ConstAlphaStateSharedPtr& alphaState)
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLESRenderer)
-
-Rendering::RendererTypes Rendering::OpenGLESRenderer
-	::GetRendererType() const noexcept
+void Rendering::OpenGLESRenderer::SetCullState(MAYBE_UNUSED const ConstCullStateSharedPtr& cullState)
 {
-	return RendererTypes::OpenGLES;
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState)
+void Rendering::OpenGLESRenderer::SetDepthState(MAYBE_UNUSED const ConstDepthStateSharedPtr& depthState)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetCullState(const ConstCullStateSharedPtr& cullState)
+void Rendering::OpenGLESRenderer::SetOffsetState(MAYBE_UNUSED const ConstOffsetStateSharedPtr& offsetState)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState)
+void Rendering::OpenGLESRenderer::SetStencilState(MAYBE_UNUSED const ConstStencilStateSharedPtr& stencilState)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState)
+void Rendering::OpenGLESRenderer::SetWireState(MAYBE_UNUSED const ConstWireStateSharedPtr& wireState)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState)
+void Rendering::OpenGLESRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetWireState(const ConstWireStateSharedPtr& wireState)
-{
-	throw std::logic_error("The method or operation is not implemented.");
-}
+#include STSTEM_WARNING_POP
 
-void Rendering::OpenGLESRenderer::SetViewport(const Viewport& viewport)
+void Rendering::OpenGLESRenderer::SetViewport(MAYBE_UNUSED const Viewport& viewport)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 Rendering::Viewport Rendering::OpenGLESRenderer::GetViewport() const
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetDepthRange(const DepthRange& depthRange)
+void Rendering::OpenGLESRenderer::SetDepthRange(MAYBE_UNUSED const DepthRange& depthRange)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 Rendering::DepthRange Rendering::OpenGLESRenderer::GetDepthRange() const
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::Resize(int width, int height)
+void Rendering::OpenGLESRenderer::Resize(MAYBE_UNUSED int width, MAYBE_UNUSED int height)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 void Rendering::OpenGLESRenderer::ClearColorBuffer()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::ClearDepthBuffer(int x, int y, int w, int h)
+void Rendering::OpenGLESRenderer::ClearDepthBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::ClearStencilBuffer(int x, int y, int w, int h)
+void Rendering::OpenGLESRenderer::ClearStencilBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::ClearBuffers(int x, int y, int w, int h)
+void Rendering::OpenGLESRenderer::ClearBuffers(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 void Rendering::OpenGLESRenderer::DisplayColorBuffer()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha)
+void Rendering::OpenGLESRenderer::SetColorMask(MAYBE_UNUSED bool allowRed, MAYBE_UNUSED bool allowGreen, MAYBE_UNUSED bool allowBlue, MAYBE_UNUSED bool allowAlpha)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 bool Rendering::OpenGLESRenderer::PreDraw()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 void Rendering::OpenGLESRenderer::PostDraw()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::Draw(const uint8_t* screenBuffer, bool reflectY)
+void Rendering::OpenGLESRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, MAYBE_UNUSED bool reflectY)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual)
+void Rendering::OpenGLESRenderer::Draw(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour& color, MAYBE_UNUSED const std::string& message)
 {
-	throw std::logic_error("The method or operation is not implemented.");
-}
+    RENDERING_CLASS_IS_VALID_9;
 
-void Rendering::OpenGLESRenderer::Draw(int x, int y, const Colour& color, const std::string& message)
-{
-	throw std::logic_error("The method or operation is not implemented.");
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 void Rendering::OpenGLESRenderer::ClearDepthBuffer()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 void Rendering::OpenGLESRenderer::ClearStencilBuffer()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
 void Rendering::OpenGLESRenderer::ClearBuffers()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLESRenderer::ClearColorBuffer(int x, int y, int w, int h)
+void Rendering::OpenGLESRenderer::ClearColorBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h)
 {
-	throw std::logic_error("The method or operation is not implemented.");
-}
+    RENDERING_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_POP
+    throw std::logic_error("The method or operation is not implemented.");
+}

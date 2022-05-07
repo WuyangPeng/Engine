@@ -8,7 +8,7 @@
 #define FRAMEWORK_WINDOW_REGISTER_SUITE_WINDOW_HBRUSH_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h" 
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include <vector>
 
 namespace Framework
@@ -32,7 +32,7 @@ namespace Framework
 		void BrushTest();
 
 	private:
-		using Container = std::vector<System::WindowBrushTypes>;
+		using Container = std::vector<System::WindowsBrushTypes>;
 
 	private:
 		Container m_Container;

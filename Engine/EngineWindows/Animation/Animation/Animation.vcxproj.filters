@@ -15,41 +15,41 @@
     </Filter>
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{e3e24eec-6d59-4842-9c11-e4176871b97c}</UniqueIdentifier>
-    </Filter>    
+    </Filter>
     <Filter Include="Helper 头文件">
       <UniqueIdentifier>{0e3ca689-0a63-4901-ab71-3d999260e35d}</UniqueIdentifier>
     </Filter>
-	<Filter Include="Sprite 头文件">
+    <Filter Include="Sprite 头文件">
       <UniqueIdentifier>{7d340af6-17d8-49ac-a53b-b619d38ba114}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sprite 源文件">
       <UniqueIdentifier>{51305f95-3ef9-4cea-aef6-beb607eeed06}</UniqueIdentifier>
-    </Filter>    
+    </Filter>
     <Filter Include="Texture 头文件">
       <UniqueIdentifier>{be60b017-9803-4a6d-8035-2a5032efba04}</UniqueIdentifier>
     </Filter>
     <Filter Include="Texture 源文件">
       <UniqueIdentifier>{974d3ef8-469f-4bdd-9e54-e9e9c6e938e7}</UniqueIdentifier>
     </Filter>
-	 <Filter Include="RigidBodyHierarchy 头文件">
+    <Filter Include="RigidBodyHierarchy 头文件">
       <UniqueIdentifier>{bb362603-32eb-4a89-a4ba-228f207c4694}</UniqueIdentifier>
-    </Filter>    
+    </Filter>
     <Filter Include="RigidBodyHierarchy 源文件">
       <UniqueIdentifier>{956ff74a-5cab-4b48-83e3-7499ed184dc9}</UniqueIdentifier>
     </Filter>
-	<Filter Include="Skeleton 头文件">
+    <Filter Include="Skeleton 头文件">
       <UniqueIdentifier>{2cee2836-fc54-40b2-89e7-553b4a359711}</UniqueIdentifier>
     </Filter>
     <Filter Include="Skeleton 源文件">
       <UniqueIdentifier>{16aef0dd-1695-450c-8023-0f7b8866c2b6}</UniqueIdentifier>
     </Filter>
-	<Filter Include="PerVertex 头文件">
+    <Filter Include="PerVertex 头文件">
       <UniqueIdentifier>{ad640f33-763c-4b1d-914e-af02ff2efcce}</UniqueIdentifier>
     </Filter>
     <Filter Include="PerVertex 源文件">
       <UniqueIdentifier>{16ba265c-5d0c-46b7-9f7f-8aae4e523021}</UniqueIdentifier>
     </Filter>
-	<Filter Include="MorphTarget 头文件">
+    <Filter Include="MorphTarget 头文件">
       <UniqueIdentifier>{492a5b2b-384a-446b-9153-54934025499b}</UniqueIdentifier>
     </Filter>
     <Filter Include="MorphTarget 源文件">
@@ -60,78 +60,40 @@
     </Filter>
     <Filter Include="Gradient 源文件">
       <UniqueIdentifier>{ce2f35b5-ddd2-4a71-8a07-76820f234aab}</UniqueIdentifier>
-    </Filter>   
-	<Filter Include="AnimationManager 头文件">
+    </Filter>
+    <Filter Include="AnimationManager 头文件">
       <UniqueIdentifier>{d97b24b7-d6fa-4796-9a21-7c793b1800b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="AnimationManager 源文件">
       <UniqueIdentifier>{fc57b596-a1bc-4019-863c-5cb6073d37a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>   	  
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>    
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>	
-	<Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-	<Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-  </ItemGroup>
   <ItemGroup>
-	<ClInclude Include="..\..\..\Code\Animation\Animation.h">
+    <ClInclude Include="..\..\..\Code\Animation\Animation.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
+    <ClInclude Include="..\..\..\Code\Animation\AnimationFwd.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\AnimationDll.h">
+    <ClInclude Include="..\..\..\Code\Animation\AnimationDll.h">
       <Filter>头文件</Filter>
-    </ClInclude>   
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationExport.h">
       <Filter>头文件</Filter>
-    </ClInclude>   
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	 <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h">
+    <ClInclude Include="..\..\..\Code\Animation\AnimationNoImport.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\DllLib.h">
+    <ClInclude Include="..\..\..\Code\Animation\DllLib.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationLib.h">
       <Filter>头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\Helper\Helper.h">
+    <ClInclude Include="..\..\..\Code\Animation\Helper\Helper.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\Helper\HelperFwd.h">
@@ -139,7 +101,7 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\Helper\UserMacro.h">
       <Filter>Helper 头文件</Filter>
-    </ClInclude>    
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\Sprite\SpriteAnimationDef.h">
       <Filter>Sprite 头文件</Filter>
     </ClInclude>
@@ -200,7 +162,7 @@
     <ClInclude Include="..\..\..\Code\Animation\Texture\TextureTrack.h">
       <Filter>Texture 头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.h">
+    <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.h">
       <Filter>RigidBodyHierarchy 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationManager.h">
@@ -230,7 +192,7 @@
     <ClInclude Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.h">
       <Filter>RigidBodyHierarchy 头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.h">
+    <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.h">
       <Filter>Skeleton 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationManager.h">
@@ -260,7 +222,7 @@
     <ClInclude Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.h">
       <Filter>Skeleton 头文件</Filter>
     </ClInclude>
-	 <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.h">
+    <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.h">
       <Filter>PerVertex 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationManager.h">
@@ -290,7 +252,7 @@
     <ClInclude Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.h">
       <Filter>PerVertex 头文件</Filter>
     </ClInclude>
-	<ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.h">
+    <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.h">
       <Filter>MorphTarget 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.h">
@@ -319,7 +281,7 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\MorphTarget\MorphTarget.h">
       <Filter>MorphTarget 头文件</Filter>
-    </ClInclude>	
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\Gradient\GradientAnimation.h">
       <Filter>Gradient 头文件</Filter>
     </ClInclude>
@@ -349,7 +311,7 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\Gradient\Gradient.h">
       <Filter>Gradient 头文件</Filter>
-    </ClInclude>    
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Animation\AnimationManager\AnimationContainer.h">
       <Filter>AnimationManager 头文件</Filter>
     </ClInclude>
@@ -433,7 +395,7 @@
     <ClCompile Include="..\..\..\Code\Animation\Texture\TextureDef.cpp">
       <Filter>Texture 源文件</Filter>
     </ClCompile>
-	<ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.cpp">
+    <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimation.cpp">
       <Filter>RigidBodyHierarchy 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyAnimationDef.cpp">
@@ -457,7 +419,7 @@
     <ClCompile Include="..\..\..\Code\Animation\RigidBodyHierarchy\RigidBodyHierarchyTrack.cpp">
       <Filter>RigidBodyHierarchy 源文件</Filter>
     </ClCompile>
-	<ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.cpp">
+    <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimation.cpp">
       <Filter>Skeleton 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonAnimationDef.cpp">
@@ -481,7 +443,7 @@
     <ClCompile Include="..\..\..\Code\Animation\Skeleton\SkeletonTrack.cpp">
       <Filter>Skeleton 源文件</Filter>
     </ClCompile>
-	 <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.cpp">
+    <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimation.cpp">
       <Filter>PerVertex 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexAnimationDef.cpp">
@@ -505,7 +467,7 @@
     <ClCompile Include="..\..\..\Code\Animation\PerVertex\PerVertexTrack.cpp">
       <Filter>PerVertex 源文件</Filter>
     </ClCompile>
-	<ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.cpp">
+    <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimation.cpp">
       <Filter>MorphTarget 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetAnimationDef.cpp">
@@ -528,7 +490,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\MorphTarget\MorphTargetTrack.cpp">
       <Filter>MorphTarget 源文件</Filter>
-    </ClCompile>	
+    </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientAnimation.cpp">
       <Filter>Gradient 源文件</Filter>
     </ClCompile>
@@ -552,7 +514,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\Gradient\GradientTrack.cpp">
       <Filter>Gradient 源文件</Filter>
-    </ClCompile>    
+    </ClCompile>
     <ClCompile Include="..\..\..\Code\Animation\AnimationManager\Animable.cpp">
       <Filter>AnimationManager 源文件</Filter>
     </ClCompile>
@@ -574,5 +536,45 @@
     <ClCompile Include="..\..\..\Code\Animation\AnimationManager\AnimationTrack.cpp">
       <Filter>AnimationManager 源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

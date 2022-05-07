@@ -46,6 +46,7 @@
 #include SYSTEM_WARNING_DISABLE(26812)
 
 #include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/find.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>

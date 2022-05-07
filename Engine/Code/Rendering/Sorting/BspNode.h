@@ -1,75 +1,74 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 13:44)
 
 #ifndef RENDERING_SORTING_BSP_NODE_H
 #define RENDERING_SORTING_BSP_NODE_H
 
-#include "Rendering/RenderingDll.h"
- #include "Mathematics/Algebra/AVectorDetail.h"
-#include "Rendering/SceneGraph/Node.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/Plane.h"
+#include "Rendering/RenderingDll.h"
+#include "Rendering/SceneGraph/Node.h"
 
 namespace Rendering
 {
-	class  BspNode : public Node
-	{
-	public:
-		using ClassType = BspNode;
-		using ParentType = Node;
+    class BspNode : public Node
+    {
+    public:
+        using ClassType = BspNode;
+        using ParentType = Node;
+        using BspNodeSharedPtr = std::shared_ptr<BspNode>;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BspNode); 
+    public:
+        NODISCARD static BspNodeSharedPtr Create();
 
-	public:
-		// Construction and destruction.  The base class Node has *three* children
-		// and is not allowed to grow.  The first and last children (indices 0 and
-		// 2) are the "positive" and "negative" children of the binary tree.  The
-		// positive child corresponds to the positive side of the separating
-		// plane.  The negative child corresponds to the negative side of the
-		// separating plane.  The middle child slot is where additional geometry
-		// may be attached such as the triangles that are coplanar with the
-		// separating plane.
-		BspNode();
-		BspNode(const Mathematics::PlaneF& modelPlane);
-		 
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BspNode);
 
-		// These methods should be used instead of the attach/detach methods in
-		// the Node base class.
-		SpatialSharedPtr AttachPositiveChild(SpatialSharedPtr child);
-		SpatialSharedPtr AttachCoplanarChild(SpatialSharedPtr child);
-		SpatialSharedPtr AttachNegativeChild(SpatialSharedPtr child);
-		 SpatialSharedPtr DetachPositiveChild();
-		 SpatialSharedPtr DetachCoplanarChild();
-		 SpatialSharedPtr DetachNegativeChild();
-		 SpatialSharedPtr GetPositiveChild();
-		 SpatialSharedPtr GetCoplanarChild();
-		 SpatialSharedPtr GetNegativeChild();
+    public:
+        explicit BspNode(NodeCreate nodeCreate);
+        explicit BspNode(const Mathematics::PlaneF& modelPlane);
 
-		// Member access.
-		 Mathematics::PlaneF ModelPlane;
-                 const Mathematics::PlaneF& GetWorldPlane() const noexcept;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Determine the portion of the scene that contains the point.
-		 SpatialSharedPtr GetContainingNode(const Mathematics::APointF& point);
-                 ObjectInterfaceSharedPtr CloneObject() const override;
-	protected:
-		// Support for the geometric update. 
-		  bool UpdateWorldData(double applicationTime) override;
+        NODISCARD SpatialSharedPtr AttachPositiveChild(const SpatialSharedPtr& child);
+        NODISCARD SpatialSharedPtr AttachCoplanarChild(const SpatialSharedPtr& child);
+        NODISCARD SpatialSharedPtr AttachNegativeChild(const SpatialSharedPtr& child);
+        NODISCARD SpatialSharedPtr DetachPositiveChild();
+        NODISCARD SpatialSharedPtr DetachCoplanarChild();
+        NODISCARD SpatialSharedPtr DetachNegativeChild();
+        NODISCARD SpatialSharedPtr GetPositiveChild();
+        NODISCARD SpatialSharedPtr GetCoplanarChild();
+        NODISCARD SpatialSharedPtr GetNegativeChild();
 
-		// Support for hierarchical culling.
-		  void GetVisibleSet(Culler& culler, bool noCull) override;
+        NODISCARD const Mathematics::PlaneF& GetWorldPlane() const noexcept;
 
-		Mathematics::PlaneF mWorldPlane;
-	};
- #include "System/Helper/PragmaWarning.h" 
+        NODISCARD SpatialSharedPtr GetContainingNode(const Mathematics::APointF& point);
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+    protected:
+        NODISCARD bool UpdateWorldData(double applicationTime) override;
+
+        void GetVisibleSet(Culler& culler, bool noCull) override;
+
+    private:
+        Mathematics::PlaneF modelPlane;
+        Mathematics::PlaneF worldPlane;
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(BspNode);
-	CORE_TOOLS_SHARED_PTR_DECLARE( BspNode);
-	#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_STREAM_REGISTER(BspNode);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(BspNode);
 }
 
-#endif // RENDERING_SORTING_BSP_NODE_H
+#endif  // RENDERING_SORTING_BSP_NODE_H

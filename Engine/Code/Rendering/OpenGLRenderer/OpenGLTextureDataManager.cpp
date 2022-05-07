@@ -1,75 +1,74 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 14:37)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLTextureDataManageDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
-template <>
-Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture1D> >
-	::~OpenGLTextureDataManager()
-{EXCEPTION_TRY
-{
-if (m_Level != -1)
-	{		 
-		m_Manager.Unlock(m_Level);		 
-	}
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-	
-
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <>
-Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture2D> >
-	::~OpenGLTextureDataManager()
+Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture1D>>::~OpenGLTextureDataManager() noexcept
 {
-	EXCEPTION_TRY
-{
-if (m_Level != -1)
-	{		 
-		m_Manager.Unlock(m_Level);		 
-	}
-}
-EXCEPTION_ALL_CATCH(Rendering)  
+    EXCEPTION_TRY
+    {
+        if (managerLevel != -1)
+        {
+            manager.Unlock(managerLevel);
+        }
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 template <>
-Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture3D> >
-	::~OpenGLTextureDataManager()
-{EXCEPTION_TRY
+Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture2D>>::~OpenGLTextureDataManager() noexcept
 {
-if (m_Level != -1)
-	{		 
-		m_Manager.Unlock(m_Level);		 
-	}
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-	
+    EXCEPTION_TRY
+    {
+        if (managerLevel != -1)
+        {
+            manager.Unlock(managerLevel);
+        }
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 template <>
-Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::TextureCube> >
-	::~OpenGLTextureDataManager()
-{EXCEPTION_TRY
+Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture3D>>::~OpenGLTextureDataManager() noexcept
 {
-if (m_Level != -1)
-	{		 
-		m_Manager.Unlock(m_Face, m_Level);		 
-	}
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-	
+    EXCEPTION_TRY
+    {
+        if (managerLevel != -1)
+        {
+            manager.Unlock(managerLevel);
+        }
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
- 
+
+template <>
+Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::TextureCube>>::~OpenGLTextureDataManager() noexcept
+{
+    EXCEPTION_TRY
+    {
+        if (managerLevel != -1)
+        {
+            manager.Unlock(managerFace, managerLevel);
+        }
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}

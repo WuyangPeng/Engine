@@ -1,40 +1,50 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 22:19)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_SHADER_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_SHADER_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "OpenGLRendererData.h" 
+#include "OpenGLRendererData.h"
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Shaders/ShaderBase.h"
 #include "Rendering/Shaders/ShaderParameters.h"
 
 namespace Rendering
 {
+    class OpenGLShader
+    {
+    public:
+        using ClassType = OpenGLShader;
 
-	class Renderer;
+    public:
+        OpenGLShader() noexcept = default;
+        virtual ~OpenGLShader() noexcept = default;
+        OpenGLShader(const OpenGLShader& rhs) noexcept = default;
+        OpenGLShader& operator=(const OpenGLShader& rhs) noexcept = default;
+        OpenGLShader(OpenGLShader&& rhs) noexcept = default;
+        OpenGLShader& operator=(OpenGLShader&& rhs) noexcept = default;
 
-	class OpenGLShader
-	{
-	public:
-		// Construction and destruction.  The derived classes are
-		// PdrVertexShader and PdrPixelShader.  Both classes hide the
-		// base-class destructor.  This is not a problem because the
-		// derived-class destructors are called explicitly when the shaders
-		// are destroyed by Renderer.
-		OpenGLShader() noexcept; 
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-	protected:
-		void SetSamplerState (Renderer* renderer, const ShaderBase* shader,int profile, 
-							  const ShaderParameters* parameters, int maxSamplers,RendererData::SamplerState* currentSS);
+    protected:
+        void SetSamplerState(Renderer* renderer,
+                             const ShaderBase* shader,
+                             int profile,
+                             const ShaderParameters* parameters,
+                             int maxSamplers,
+                             RendererData::SamplerState* currentSS) noexcept;
 
-		void DisableTextures (Renderer* renderer, const ShaderBase* shader,int profile, const ShaderParameters* parameters, int maxSamplers);
-	};
+        void DisableTextures(Renderer* renderer, const ShaderBase* shader, int profile, const ShaderParameters* parameters, int maxSamplers) noexcept;
+    };
 
 }
 
-#endif // RENDERING_OPENGL_RENDERER_OPENGL_SHADER_H
+#endif  // RENDERING_OPENGL_RENDERER_OPENGL_SHADER_H

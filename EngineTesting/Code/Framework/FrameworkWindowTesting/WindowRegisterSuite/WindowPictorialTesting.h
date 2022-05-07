@@ -8,7 +8,7 @@
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_PICTORIAL_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #include <map>
 #include <random> 
@@ -21,7 +21,7 @@ namespace Framework
 		using ClassType = WindowPictorialTesting;
 		using ParentType = UnitTest;
 		using TChar = System::TChar;
-		using HInstance = System::WindowHInstance;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowPictorialTesting(const OStreamShared& stream, HInstance instance);
@@ -31,7 +31,7 @@ namespace Framework
 	private:
 		using IconContainer = std::vector<std::pair<int, const TChar*>>;
 		using CursorContainer = std::vector<std::pair<int, const TChar*>>;
-		using BrushContainer = std::vector<System::WindowBrushTypes>;
+		using BrushContainer = std::vector<System::WindowsBrushTypes>;
 		using IconContainerConstIter = IconContainer::const_iterator;
 		using CursorContainerConstIter = CursorContainer::const_iterator;
 		using BrushContainerConstIter = BrushContainer::const_iterator;

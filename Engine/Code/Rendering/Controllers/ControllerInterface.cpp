@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 14:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 15:06)
 
 #include "Rendering/RenderingExport.h"
 
@@ -10,69 +13,61 @@
 
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26418)
-CORE_TOOLS_RTTI_DEFINE(Rendering,ControllerInterface);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ControllerInterface);
-CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ControllerInterface);
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
+CORE_TOOLS_RTTI_DEFINE(Rendering, ControllerInterface);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ControllerInterface);
+CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ControllerInterface);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ControllerInterface);
 
-Rendering::ControllerInterface
-::ControllerInterface()
-	:ParentType{ "ControllerInterface" }
+Rendering::ControllerInterface::ControllerInterface(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ "ControllerInterface" }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ControllerInterface)
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControllerInterface)
-
-void Rendering::ControllerInterface::AttachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+void Rendering::ControllerInterface::AttachController(MAYBE_UNUSED ControllerInterfaceSharedPtr controller)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_1(false,"Controller禁止调用AttachController");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_1(false, "Controller禁止调用AttachController");
 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
+}
+#include STSTEM_WARNING_POP
 
-	 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+void Rendering::ControllerInterface::DetachController(MAYBE_UNUSED ControllerInterfaceSharedPtr controller)
+{
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_1(false, "Controller禁止调用DetachController");
+
+    CoreTools::DisableNoexcept();
+}
+#include STSTEM_WARNING_POP
+
+int Rendering::ControllerInterface::GetNumControllers() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CoreTools::DisableNoexcept();
+
+    return 0;
 }
 
-void Rendering::ControllerInterface::DetachController([[maybe_unused]] ControllerInterfaceSharedPtr controller)
+void Rendering::ControllerInterface::SetObjectInCopy(ControllerInterface* object)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_1(false,"Controller禁止调用DetachController");
+    RENDERING_CLASS_IS_VALID_1;
 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 
-	 
-}
-
-int Rendering::ControllerInterface
-	::GetNumControllers () const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	CoreTools::DisableNoexcept();
-
-	return 0;
-}
-
-void Rendering::ControllerInterface
-	::SetObjectInCopy(ControllerInterface* object) 
-{
-	RENDERING_CLASS_IS_VALID_1;
-
-	CoreTools::DisableNoexcept();
-
-	SetObject(object);
+    SetObject(object);
 }

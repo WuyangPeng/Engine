@@ -1,25 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/29 10:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/21 18:57)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PlatformTexture2D.h"
 #include "Renderer.h"
 #include "Detail/PlatformTexture2DImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 Rendering::PlatformTexture2D::PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, texture2D }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::PlatformTexture2D::~PlatformTexture2D()
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -30,21 +28,21 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PlatformTexture2D, Unlock, 
 
 void Rendering::PlatformTexture2D::Enable(Renderer* renderer, int textureUnit)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Enable(renderer, textureUnit);
 }
 
 void Rendering::PlatformTexture2D::Disable(Renderer* renderer, int textureUnit)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Disable(renderer, textureUnit);
 }
 
 void* Rendering::PlatformTexture2D::Lock(int level, BufferLocking mode)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->Lock(level, mode);
 }

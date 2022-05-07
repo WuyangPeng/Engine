@@ -141,34 +141,34 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
-  </PropertyGroup>  
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -179,7 +179,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -192,7 +192,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -207,7 +207,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -220,7 +220,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -231,7 +231,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -244,7 +244,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;ASSISTTOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -259,7 +259,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -269,32 +269,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
-    <Text Include="Resource\Schedule.txt" />
-    <Text Include="Resource\Todo\Level 0.txt" />
-    <Text Include="Resource\Todo\Level 1.txt" />
-    <Text Include="Resource\Todo\Level 2.txt" />
-    <Text Include="Resource\Todo\Level 3.txt" />
-    <Text Include="Resource\Todo\Level 4.txt" />
-    <Text Include="Resource\Todo\Level 5.txt" />
-    <Text Include="Resource\Todo\Level 6.txt" />
-    <Text Include="Resource\Todo\Level 7.txt" />
-    <Text Include="Resource\Todo\Level 8.txt" />
-    <Text Include="Resource\Todo\Level 9.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\DllMain.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoaderCodes.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoaderCodes.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\CopyrightDataImpl.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\Detail\GenerateTemplateBaseImpl.cpp" />
@@ -354,9 +331,6 @@
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateSolution.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxproj.cpp" />
     <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.cpp" />
-    <ClCompile Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\AssistTools\AssistTools.h" />
@@ -369,18 +343,11 @@
     <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGray.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\BmpColorToGrayFwd.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\ColorToGray.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\LoadBmp.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpColorToGray\SaveBmp.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtf.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\BmpToWmtfFwd.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\LoadBmpUseAlpha.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\BmpToTf\SaveWmtf.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\DllLib.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporter.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\FeaturesImporterFwd.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\MtlLoader.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FeaturesImporter\ObjLoader.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\FxCompiler.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompiler.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\FxCompiler\WmfxCompilerFwd.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\CopyrightData.h" />
@@ -445,12 +412,25 @@
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateSolution.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxproj.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\GenerateTestingTemplateVcxprojFilters.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC100.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateVC110.h" />
-    <ClInclude Include="..\..\..\Code\AssistTools\GenerateProjects\TemplateXC44.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\Helper.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\HelperFwd.h" />
     <ClInclude Include="..\..\..\Code\AssistTools\Helper\UserMacro.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

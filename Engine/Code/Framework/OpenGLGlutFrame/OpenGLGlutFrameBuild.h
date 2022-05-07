@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 15:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 14:31)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_H
@@ -23,7 +26,7 @@ namespace Framework
 
     public:
         OpenGLGlutFrameBuild(const GLUTApplicationInformation& glutInformation, const EnvironmentDirectory& environmentDirectory);
-        virtual ~OpenGLGlutFrameBuild() = default;
+        virtual ~OpenGLGlutFrameBuild() noexcept = default;
         OpenGLGlutFrameBuild(const OpenGLGlutFrameBuild& rhs) noexcept = default;
         OpenGLGlutFrameBuild& operator=(const OpenGLGlutFrameBuild& rhs) noexcept = default;
         OpenGLGlutFrameBuild(OpenGLGlutFrameBuild&& rhs) noexcept = default;
@@ -43,16 +46,16 @@ namespace Framework
         virtual bool OpenGLInit();
         virtual bool CreateMenu() noexcept;
 
-        static std::string GetRendererParameter(const EnvironmentDirectory& environmentDirectory);
+        NODISCARD static std::string GetRendererParameter(const EnvironmentDirectory& environmentDirectory);
 
     private:
-        static constexpr auto sm_Interval = 60;
+        static constexpr auto interval = 60;
 
-        OpenGLGlutProcess m_OpenGLGlutProcess;
-        GLUTApplicationInformation m_GLUTInformation;
-        int m_WindowID;
-        int m_MenuID;
-        RendererParameter m_RendererParameter;
+        OpenGLGlutProcess openGLGlutProcess;
+        GLUTApplicationInformation glutInformation;
+        int windowID;
+        int menuID;
+        RendererParameter rendererParameter;
     };
 }
 

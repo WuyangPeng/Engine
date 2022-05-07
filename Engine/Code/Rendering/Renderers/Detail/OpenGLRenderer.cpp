@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/26 18:22)
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:27)
 
 #include "Rendering/RenderingExport.h"
 
@@ -23,52 +23,54 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLRenderer)
 
 Rendering::RendererTypes Rendering::OpenGLRenderer::GetRendererType() const noexcept
 {
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
     return RendererTypes::OpenGL;
 }
 
-void Rendering::OpenGLRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState) noexcept
+void Rendering::OpenGLRenderer::SetAlphaState(MAYBE_UNUSED const ConstAlphaStateSharedPtr& alphaState) noexcept
 {
-    alphaState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetCullState(const ConstCullStateSharedPtr& cullState) noexcept
+void Rendering::OpenGLRenderer::SetCullState(MAYBE_UNUSED const ConstCullStateSharedPtr& cullState) noexcept
 {
-    cullState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState) noexcept
+void Rendering::OpenGLRenderer::SetDepthState(MAYBE_UNUSED const ConstDepthStateSharedPtr& depthState) noexcept
 {
-    depthState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState) noexcept
+void Rendering::OpenGLRenderer::SetOffsetState(MAYBE_UNUSED const ConstOffsetStateSharedPtr& offsetState) noexcept
 {
-    offsetState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState) noexcept
+void Rendering::OpenGLRenderer::SetStencilState(MAYBE_UNUSED const ConstStencilStateSharedPtr& stencilState) noexcept
 {
-    stencilState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetWireState(const ConstWireStateSharedPtr& wireState) noexcept
+void Rendering::OpenGLRenderer::SetWireState(MAYBE_UNUSED const ConstWireStateSharedPtr& wireState) noexcept
 {
-    wireState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetViewport(const Viewport& viewport) noexcept
+void Rendering::OpenGLRenderer::SetViewport(MAYBE_UNUSED const Viewport& viewport) noexcept
 {
-    viewport;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-Rendering::Viewport Rendering::OpenGLRenderer::GetViewport() const 
+Rendering::Viewport Rendering::OpenGLRenderer::GetViewport() const
 {
     throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLRenderer::SetDepthRange(const DepthRange& depthRange) noexcept
+void Rendering::OpenGLRenderer::SetDepthRange(MAYBE_UNUSED const DepthRange& depthRange) noexcept
 {
-    depthRange;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 Rendering::DepthRange Rendering::OpenGLRenderer::GetDepthRange() const
@@ -76,97 +78,86 @@ Rendering::DepthRange Rendering::OpenGLRenderer::GetDepthRange() const
     throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::OpenGLRenderer::Resize(int width, int height) noexcept
+void Rendering::OpenGLRenderer::Resize(MAYBE_UNUSED int width, MAYBE_UNUSED int height) noexcept
 {
-    width;
-    height;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLRenderer::ClearColorBuffer() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::ClearDepthBuffer(int x, int y, int w, int h) noexcept
+void Rendering::OpenGLRenderer::ClearDepthBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-    x;
-    y;
-    w;
-    h;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::ClearStencilBuffer(int x, int y, int w, int h) noexcept
+void Rendering::OpenGLRenderer::ClearStencilBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-    x;
-    y;
-    w;
-    h;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::ClearBuffers(int x, int y, int w, int h) noexcept
+void Rendering::OpenGLRenderer::ClearBuffers(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-    x;
-    y;
-    w;
-    h;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLRenderer::DisplayColorBuffer() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha)
+void Rendering::OpenGLRenderer::SetColorMask(MAYBE_UNUSED bool allowRed, MAYBE_UNUSED bool allowGreen, MAYBE_UNUSED bool allowBlue, MAYBE_UNUSED bool allowAlpha)
 {
-    allowRed;
-    allowGreen;
-    allowBlue;
-    allowAlpha;
+    RENDERING_CLASS_IS_VALID_9;
+
     throw std::logic_error("The method or operation is not implemented.");
 }
 
 bool Rendering::OpenGLRenderer::PreDraw() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
+
     return true;
 }
 
 void Rendering::OpenGLRenderer::PostDraw() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::Draw(const uint8_t* screenBuffer, bool reflectY) noexcept
+void Rendering::OpenGLRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, MAYBE_UNUSED bool reflectY) noexcept
 {
-    screenBuffer;
-    reflectY;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual) noexcept
+void Rendering::OpenGLRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual) noexcept
 {
-    visual;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::Draw(int x, int y, const Colour& color, const std::string& message) noexcept
+void Rendering::OpenGLRenderer::Draw(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour& color, MAYBE_UNUSED const std::string& message) noexcept
 {
-    x;
-    y;
-    color;
-    message;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLRenderer::ClearDepthBuffer() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLRenderer::ClearStencilBuffer() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 void Rendering::OpenGLRenderer::ClearBuffers() noexcept
 {
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::ClearColorBuffer(int x, int y, int w, int h) noexcept
+void Rendering::OpenGLRenderer::ClearColorBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-    x;
-    y;
-    w;
-    h;
+    RENDERING_CLASS_IS_VALID_9;
 }

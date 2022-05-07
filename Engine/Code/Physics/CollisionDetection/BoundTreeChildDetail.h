@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 15:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 11:44)
 
 #ifndef PHYSICS_COLLISION_DETECTION_BOUND_TREE_CHILD_DETAIL_H
 #define PHYSICS_COLLISION_DETECTION_BOUND_TREE_CHILD_DETAIL_H
@@ -18,10 +21,15 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Rendering/SceneGraph/TriangleIndex.h"
 
-template <typename MeshSmartPointer, typename Bound>
-Physics::BoundTreeChild<MeshSmartPointer, Bound>::BoundTreeChild(const MeshSmartPointer& mesh, int maxTrianglesPerLeaf, const Centroids& centroids, int beginIndex,
-                                                                 int endIndex, const Split& inSplit, bool storeInteriorTriangles)
-    : m_ModelBound{}, m_WorldBound{}, m_LeftChild{}, m_RightChild{}, m_Triangles{}, m_Mesh{ mesh }
+template <typename MeshSharedPointer, typename Bound>
+Physics::BoundTreeChild<MeshSharedPointer, Bound>::BoundTreeChild(const MeshSharedPointer& mesh,
+                                                                  int maxTrianglesPerLeaf,
+                                                                  const Centroids& centroids,
+                                                                  int beginIndex,
+                                                                  int endIndex,
+                                                                  const Split& inSplit,
+                                                                  bool storeInteriorTriangles)
+    : modelBound{}, worldBound{}, leftChild{}, rightChild{}, triangles{}, mesh{ mesh }
 {
     BuildTree(maxTrianglesPerLeaf, centroids, beginIndex, endIndex, inSplit, storeInteriorTriangles);
 
@@ -29,169 +37,178 @@ Physics::BoundTreeChild<MeshSmartPointer, Bound>::BoundTreeChild(const MeshSmart
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename MeshSmartPointer, typename Bound>
-bool Physics::BoundTreeChild<MeshSmartPointer, Bound>::IsValid() const noexcept
+
+template <typename MeshSharedPointer, typename Bound>
+bool Physics::BoundTreeChild<MeshSharedPointer, Bound>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename MeshSmartPointer, typename Bound>
-const Bound Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetWorldBound() const
+template <typename MeshSharedPointer, typename Bound>
+Bound Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetWorldBound() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return m_WorldBound;
+    return worldBound;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-void Physics::BoundTreeChild<MeshSmartPointer, Bound>::UpdateWorldBound()
+template <typename MeshSharedPointer, typename Bound>
+void Physics::BoundTreeChild<MeshSharedPointer, Bound>::UpdateWorldBound()
 {
     PHYSICS_CLASS_IS_VALID_9;
 
-    m_WorldBound = m_ModelBound.TransformBy(m_Mesh->GetWorldTransform());
+    worldBound = modelBound.TransformBy(mesh->GetWorldTransform());
 }
 
-template <typename MeshSmartPointer, typename Bound>
-typename const Physics::BoundTreeChild<MeshSmartPointer, Bound>::BoundTreeChildPtr Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetLeftChild()
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::BoundTreeChild<MeshSharedPointer, Bound>::BoundTreeChildSharedPtr Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetLeftChild() noexcept
 {
     PHYSICS_CLASS_IS_VALID_9;
 
-    return m_LeftChild;
+    return leftChild;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-typename const Physics::BoundTreeChild<MeshSmartPointer, Bound>::BoundTreeChildPtr Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetRightChild()
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::BoundTreeChild<MeshSharedPointer, Bound>::BoundTreeChildSharedPtr Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetRightChild() noexcept
 {
     PHYSICS_CLASS_IS_VALID_9;
 
-    return m_RightChild;
+    return rightChild;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-bool Physics::BoundTreeChild<MeshSmartPointer, Bound>::IsInteriorNode() const
+template <typename MeshSharedPointer, typename Bound>
+bool Physics::BoundTreeChild<MeshSharedPointer, Bound>::IsInteriorNode() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_LeftChild != nullptr) || (m_RightChild != nullptr);
+    return (leftChild != nullptr) || (rightChild != nullptr);
 }
 
-template <typename MeshSmartPointer, typename Bound>
-bool Physics::BoundTreeChild<MeshSmartPointer, Bound>::IsLeafNode() const
+template <typename MeshSharedPointer, typename Bound>
+bool Physics::BoundTreeChild<MeshSharedPointer, Bound>::IsLeafNode() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_LeftChild == nullptr) && (m_RightChild == nullptr);
+    return (leftChild == nullptr) && (rightChild == nullptr);
 }
 
-template <typename MeshSmartPointer, typename Bound>
-int Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetNumTriangles() const
+template <typename MeshSharedPointer, typename Bound>
+int Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetNumTriangles() const
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Triangles.size());
+    return boost::numeric_cast<int>(triangles.size());
 }
 
-template <typename MeshSmartPointer, typename Bound>
-int Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetTriangle(int index) const
+template <typename MeshSharedPointer, typename Bound>
+int Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetTriangle(int index) const
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
     PHYSICS_ASSERTION_0(0 <= index && index < GetNumTriangles(), "索引越界\n");
 
-    return m_Triangles[index];
+    return triangles.at(index);
 }
 
-template <typename MeshSmartPointer, typename Bound>
-const std::vector<int> Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetTriangles() const
+template <typename MeshSharedPointer, typename Bound>
+std::vector<int> Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetTriangles() const
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Triangles;
+    return triangles;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-void Physics::BoundTreeChild<MeshSmartPointer, Bound>::BuildTree(int maxTrianglesPerLeaf, const Centroids& centroids, int beginIndex, int endIndex, const Split& inSplit, bool storeInteriorTriangles)
+template <typename MeshSharedPointer, typename Bound>
+void Physics::BoundTreeChild<MeshSharedPointer, Bound>::BuildTree(int maxTrianglesPerLeaf, const Centroids& centroids, int beginIndex, int endIndex, const Split& inSplit, bool storeInteriorTriangles)
 {
     PHYSICS_CLASS_IS_VALID_9;
     PHYSICS_ASSERTION_2(beginIndex <= endIndex, "无效索引顺序\n");
 
-    auto line = CreateModelBound(beginIndex, endIndex, inSplit);
-    auto origin = line.GetOrigin();
-    auto direction = line.GetDirection();
+    const auto line = CreateModelBound(beginIndex, endIndex, inSplit);
+    const auto origin = line.GetOrigin();
+    const auto direction = line.GetDirection();
 
     if (endIndex - beginIndex < maxTrianglesPerLeaf)
     {
         // 在叶节点。
-        auto numTriangles = endIndex - beginIndex + 1;
-        m_Triangles.resize(numTriangles);
-        memcpy(&m_Triangles[0], &inSplit[beginIndex], numTriangles * sizeof(int));
+        const auto numTriangles = endIndex - beginIndex + 1;
+
+        for (auto i = 0; i < numTriangles; ++i)
+        {
+            const auto index = i + beginIndex;
+            triangles.emplace_back(inSplit.at(index));
+        }
     }
     else
     {
         // 在内部节点。
         if (storeInteriorTriangles)
         {
-            auto numTriangles = endIndex - beginIndex + 1;
-            m_Triangles.resize(numTriangles);
-            memcpy(&m_Triangles[0], &inSplit[beginIndex], numTriangles * sizeof(int));
+            const auto numTriangles = endIndex - beginIndex + 1;
+
+            for (auto i = 0; i < numTriangles; ++i)
+            {
+                const auto index = i + beginIndex;
+                triangles.emplace_back(inSplit.at(index));
+            }
         }
-        centroids;
-        //	BoundTreeSplitTriangles splitTriangles{ centroids, beginIndex, endIndex,inSplit, origin, direction };
+        BoundTreeSplitTriangles splitTriangles{ centroids, beginIndex, endIndex, inSplit, Mathematics::APointF{ origin }, Mathematics::AVectorF{ direction } };
 
-        //	m_LeftChild = std::make_shared<BoundTreeChild>(m_Mesh,maxTrianglesPerLeaf, centroids, beginIndex, splitTriangles.GetFirstOutSplitIndex(),splitTriangles.GetOutSplit(), storeInteriorTriangles);
+        leftChild = std::make_shared<BoundTreeChild>(mesh, maxTrianglesPerLeaf, centroids, beginIndex, splitTriangles.GetFirstOutSplitIndex(), splitTriangles.GetOutSplit(), storeInteriorTriangles);
 
-        //	m_RightChild = std::make_shared<BoundTreeChild>(m_Mesh, maxTrianglesPerLeaf, centroids, splitTriangles.GetSecondOutSplitIndex(), endIndex,splitTriangles.GetOutSplit(), storeInteriorTriangles);
+        rightChild = std::make_shared<BoundTreeChild>(mesh, maxTrianglesPerLeaf, centroids, splitTriangles.GetSecondOutSplitIndex(), endIndex, splitTriangles.GetOutSplit(), storeInteriorTriangles);
     }
 }
 
-template <typename MeshSmartPointer, typename Bound>
-const typename Physics::BoundTreeChild<MeshSmartPointer, Bound>::Line3 Physics::BoundTreeChild<MeshSmartPointer, Bound>::CreateModelBound(int beginIndex, int endIndex, const std::vector<int>& inSplit)
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::BoundTreeChild<MeshSharedPointer, Bound>::Line3 Physics::BoundTreeChild<MeshSharedPointer, Bound>::CreateModelBound(int beginIndex, int endIndex, const std::vector<int>& inSplit)
 {
     // 标记在子网格中使用的顶点。
-    int numVertices = m_Mesh->GetNumVertices();
+    const auto numVertices = mesh->GetNumVertices();
     std::vector<int> valid(numVertices);
 
-    for (int i = beginIndex; i <= endIndex; ++i)
+    for (auto i = beginIndex; i <= endIndex; ++i)
     {
-        Rendering::TriangleIndex triangleIndex = m_Mesh->GetTriangle(inSplit[i]);
-        valid[triangleIndex.GetFirstIndex()] = 1;
-        valid[triangleIndex.GetSecondIndex()] = 1;
-        valid[triangleIndex.GetThirdIndex()] = 1;
+        const auto triangleIndex = mesh->GetTriangle(inSplit.at(i));
+        valid.at(triangleIndex.GetFirstIndex()) = 1;
+        valid.at(triangleIndex.GetSecondIndex()) = 1;
+        valid.at(triangleIndex.GetThirdIndex()) = 1;
     }
 
     // 在子网格中创建一组连续的顶点
-    std::vector<Mathematics::Vector3F> meshVertices;
-    for (int i = 0; i < numVertices; ++i)
+    std::vector<Mathematics::Vector3F> meshVertices{};
+    for (auto i = 0; i < numVertices; ++i)
     {
-        if (valid[i])
+        if (valid.at(i))
         {
-            meshVertices.push_back(m_Mesh->GetPosition(i));
+            meshVertices.emplace_back(mesh->GetPosition(i));
         }
     }
 
     // 计算子网格的边界。
-    m_ModelBound.ComputeFromData(meshVertices);
+    modelBound.ComputeFromData(meshVertices);
 
     // 计算子网格的分割线。
-    Mathematics::OrthogonalLineFit3F fit(meshVertices);
+    const Mathematics::OrthogonalLineFit3F fit{ meshVertices };
 
     return fit.GetLine3();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-typename const Physics::BoundTreeChild<MeshSmartPointer, Bound>::ConstMeshSmartPointer Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetConstMesh() const
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::BoundTreeChild<MeshSharedPointer, Bound>::ConstMeshSharedPointer Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetConstMesh() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Mesh;
+    return mesh;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-const MeshSmartPointer Physics::BoundTreeChild<MeshSmartPointer, Bound>::GetMesh()
+template <typename MeshSharedPointer, typename Bound>
+MeshSharedPointer Physics::BoundTreeChild<MeshSharedPointer, Bound>::GetMesh() noexcept
 {
     PHYSICS_CLASS_IS_VALID_9;
 
-    return m_Mesh;
+    return mesh;
 }
 
 #endif  // PHYSICS_COLLISION_DETECTION_BOUND_TREE_CHILD_DETAIL_H

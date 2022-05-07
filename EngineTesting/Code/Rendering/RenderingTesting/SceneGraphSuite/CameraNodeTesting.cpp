@@ -243,7 +243,7 @@ void Rendering::CameraNodeTesting
 }
 
 void Rendering::CameraNodeTesting
-  ::ChildTest()
+ ::ChildTest()
 {
 //     CoreTools::OutTopLevel outTopLevel;
 // 	CameraSharedPtr firstCamera(new Camera(true, 1e-5f));

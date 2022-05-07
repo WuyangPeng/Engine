@@ -1,45 +1,48 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 11:10)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateMacroImpl.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTemplateMacroImpl
-	::sm_Extension(SYSTEM_TEXT(".h"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTemplateMacroImpl
-	::GenerateTemplateMacroImpl(const System::String& templateFileName,  const Replace& replace)
-	:ParentType(templateFileName, sm_Extension,replace) 
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+#include "CoreTools/Helper/ExceptionMacro.h"
 
- 
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTemplateMacroImpl::extension{ SYSTEM_TEXT(".h"s) };
+
+AssistTools::GenerateTemplateMacroImpl::GenerateTemplateMacroImpl(const System::String& templateFileName, const Replace& replace)
+    : ParentType{ templateFileName, extension, replace }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateMacroImpl)
 
-void AssistTools::GenerateTemplateMacroImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, 
-	             const System::String& solutionName, const System::String& managerName,
-				 const System::String& projectCapital,const System::String& managerCapital) const
+void AssistTools::GenerateTemplateMacroImpl::GenerateTo(const System::String& resourceDirectory,
+                                                        const System::String& newProjectName,
+                                                        const CopyrightData& copyrightData,
+                                                        const System::String& solutionName,
+                                                        const System::String& managerName,
+                                                        const System::String& projectCapital,
+                                                        const System::String& managerCapital) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable = GetCopyrightVariable(copyrightData);
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerName), managerName));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital)); 
+    auto newVariable = GetCopyrightVariable(copyrightData);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerName), managerName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital);
 
-	return ParentType::Generate (resourceDirectory, newProjectName, newVariable);
+    return ParentType::Generate(resourceDirectory, newProjectName, newVariable);
 }
 
 /*
@@ -354,10 +357,10 @@ MacroFwd.h
 #ifndef %ProjectCapital%_%ManagerCapital%_MACRO_FWD_H
 #define %ProjectCapital%_%ManagerCapital%_MACRO_FWD_H
 
-#include "UserMacro.h"
-#include "ExportMacro.h" 
 #include "%SolutionName%%ManagerName%ClassInvariantMacro.h"
 #include "%SolutionName%%ManagerName%CustomAssertMacro.h"
+#include "ExportMacro.h" 
+#include "UserMacro.h"
 
 #endif // %ProjectCapital%_%ManagerCapital%_MACRO_FWD_H
 
@@ -372,10 +375,10 @@ Macro.h
 #ifndef %ProjectCapital%_%ManagerCapital%_MACRO_H
 #define %ProjectCapital%_%ManagerCapital%_MACRO_H
 
-#include "UserMacro.h"
-#include "ExportMacro.h"
 #include "%SolutionName%%ManagerName%ClassInvariantMacro.h"
 #include "%SolutionName%%ManagerName%CustomAssertMacro.h"
+#include "ExportMacro.h"
+#include "UserMacro.h"
 
 #endif // %ProjectCapital%_%ManagerCapital%_MACRO_H
 
@@ -390,9 +393,9 @@ UserMacro.h
 #ifndef %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
 #define %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
 
-#include "Framework/Macro/UserMacro.h" 
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Contract/Assertion.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Framework/Macro/UserMacro.h" 
 
 #if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL)
 	#define %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL 8

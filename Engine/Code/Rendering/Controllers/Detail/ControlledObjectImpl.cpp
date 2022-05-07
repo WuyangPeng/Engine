@@ -4,8 +4,8 @@
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/04/02 17:02)
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 10:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -25,7 +25,7 @@ using std::string;
 using std::vector;
 
 Rendering::ControlledObjectImpl::ControlledObjectImpl(ControllerInterface* realThis) noexcept
-    : m_Controllers{}, m_RealThis{ realThis }
+    : controllers{}, realThis{ realThis }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -38,13 +38,15 @@ Rendering::ControlledObjectImpl::~ControlledObjectImpl()
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Rendering::ControlledObjectImpl::IsValid() const noexcept
 {
-    if (m_RealThis != nullptr)
+    if (realThis != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 bool Rendering::ControlledObjectImpl::Update(double applicationTime)
@@ -58,7 +60,7 @@ int Rendering::ControlledObjectImpl::GetNumControllers() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Controllers.size());
+    return boost::numeric_cast<int>(controllers.size());
 }
 
 Rendering::ConstControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::GetConstController(int index) const
@@ -66,7 +68,7 @@ Rendering::ConstControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::Ge
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= index && index < GetNumControllers(), "索引错误在GetController\n");
 
-    return m_Controllers.at(index);
+    return controllers.at(index).object;
 }
 
 Rendering::ControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::GetController(int index)
@@ -74,54 +76,78 @@ Rendering::ControllerInterfaceSharedPtr Rendering::ControlledObjectImpl::GetCont
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_0(0 <= index && index < GetNumControllers(), "索引错误在GetController\n");
 
-    return m_Controllers.at(index);
+    return controllers.at(index).object;
 }
 
-void Rendering::ControlledObjectImpl::AttachController(ControllerInterfaceSharedPtr controller)
+void Rendering::ControlledObjectImpl::AttachController(const ControllerInterfaceSharedPtr& controller)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     // 测试控制器是否已经在数组中。
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& value : controllers)
     {
-        if (controller == m_Controllers.at(i))
+        if (controller == value.object)
         {
             return;
         }
     }
 
-    controller->SetObject(m_RealThis);
+    controller->SetObject(realThis);
 
-    m_Controllers.push_back(controller);
+    controllers.emplace_back(controller);
 }
 
-void Rendering::ControlledObjectImpl::AttachControllerInCopy(ControllerInterfaceSharedPtr controller)
+void Rendering::ControlledObjectImpl::AttachControllerInCopy(const ControllerInterfaceSharedPtr& controller)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     // 测试控制器是否已经在数组中。
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& value : controllers)
     {
-        if (controller == m_Controllers.at(i))
+        if (controller == value.object)
         {
             return;
         }
     }
 
-    controller->SetObjectInCopy(m_RealThis);
+    controller->SetObjectInCopy(realThis);
 
-    m_Controllers.push_back(controller);
+    controllers.emplace_back(controller);
 }
 
-void Rendering::ControlledObjectImpl::DetachController(ControllerInterfaceSharedPtr controller)
+const Rendering::ControllerInterface* Rendering::ControlledObjectImpl::GetControllerObject() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return object.object.get();
+}
+
+void Rendering::ControlledObjectImpl::SetObject(ControllerInterface* aObject)  
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (aObject != nullptr)
+    {
+        object.object = boost::polymorphic_pointer_cast<ControllerInterface>(aObject->shared_from_this());
+    }
+}
+
+Rendering::ControllerInterface* Rendering::ControlledObjectImpl::GetControllerObject() noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return object.object.get();
+}
+
+void Rendering::ControlledObjectImpl::DetachController(const ControllerInterfaceSharedPtr& controller)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     auto findIndex = -1;
 
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (auto i = 0u; i < controllers.size(); ++i)
     {
-        if (controller == m_Controllers.at(i))
+        if (controller == controllers.at(i).object)
         {
             // 取消绑定的控制器对象。
             controller->SetObject(nullptr);
@@ -134,12 +160,12 @@ void Rendering::ControlledObjectImpl::DetachController(ControllerInterfaceShared
     if (findIndex != -1)
     {
         // 删除数组中的控制器对象，保持数组连续
-        for (auto i = findIndex + 1; i < boost::numeric_cast<int>(m_Controllers.size()); ++i)
+        for (auto i = findIndex + 1; i < boost::numeric_cast<int>(controllers.size()); ++i)
         {
             const auto i0 = i - 1;
-            m_Controllers.at(i0) = m_Controllers.at(i);
+            controllers.at(i0) = controllers.at(i);
         }
-        m_Controllers.pop_back();
+        controllers.pop_back();
     }
 }
 
@@ -147,13 +173,13 @@ void Rendering::ControlledObjectImpl::DetachAllControllers()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& controller : controllers)
     {
         // 取消绑定的控制器对象。
-        m_Controllers.at(i)->SetObject(nullptr);
+        controller.object->SetObject(nullptr);
     }
 
-    m_Controllers.clear();
+    controllers.clear();
 }
 
 bool Rendering::ControlledObjectImpl::UpdateControllers(double applicationTime)
@@ -161,9 +187,9 @@ bool Rendering::ControlledObjectImpl::UpdateControllers(double applicationTime)
     RENDERING_CLASS_IS_VALID_1;
 
     auto someoneUpdated = false;
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& controller : controllers)
     {
-        if (m_Controllers.at(i)->Update(applicationTime))
+        if (controller.object->Update(applicationTime))
         {
             someoneUpdated = true;
         }
@@ -171,66 +197,64 @@ bool Rendering::ControlledObjectImpl::UpdateControllers(double applicationTime)
     return someoneUpdated;
 }
 
-const CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::ControlledObjectImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& controller : controllers)
     {
-        if (m_Controllers.at(i)->GetName() == name)
+        if (controller.object->GetName() == name)
         {
-            return m_Controllers.at(i);
+            return controller.object;
         }
     }
 
-    CoreTools::DisableNoexcept();
-
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
-const vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    vector<CoreTools::ObjectSharedPtr> objects;
+    vector<CoreTools::ObjectSharedPtr> objects{};
 
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& controller : controllers)
     {
-        if (m_Controllers.at(i)->GetName() == name)
+        if (controller.object->GetName() == name)
         {
-            objects.push_back(m_Controllers.at(i));
+            objects.emplace_back(controller.object);
         }
     }
 
     return objects;
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::ControlledObjectImpl::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    CoreTools::DisableNoexcept();
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+
+    for (const auto& controller : controllers)
     {
-        if (m_Controllers.at(i)->GetName() == name)
+        if (controller.object->GetName() == name)
         {
-            return m_Controllers.at(i);
+            return controller.object;
         }
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::ControlledObjectImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects;
+    vector<CoreTools::ConstObjectSharedPtr> objects{};
 
-    for (auto i = 0u; i < m_Controllers.size(); ++i)
+    for (const auto& controller : controllers)
     {
-        if (m_Controllers.at(i)->GetName() == name)
+        if (controller.object->GetName() == name)
         {
-            objects.push_back(m_Controllers.at(i));
+            objects.emplace_back(controller.object);
         }
     }
 
@@ -241,12 +265,14 @@ int Rendering::ControlledObjectImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(int());
+    auto size = CORE_TOOLS_STREAM_SIZE(int32_t{});
 
-    if (!m_Controllers.empty())
+    if (!controllers.empty())
     {
-        size += boost::numeric_cast<int>(CORE_TOOLS_STREAM_SIZE(m_Controllers.at(0)) * m_Controllers.size());
+        size += boost::numeric_cast<int32_t>(CORE_TOOLS_STREAM_SIZE(controllers.at(0)) * controllers.size());
     }
+
+    size += CORE_TOOLS_STREAM_SIZE(object);
 
     return size;
 }
@@ -254,51 +280,57 @@ int Rendering::ControlledObjectImpl::GetStreamingSize() const
 void Rendering::ControlledObjectImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    CoreTools::DisableNoexcept();
-    if (!m_Controllers.empty())
+
+    if (!controllers.empty())
     {
-        target;
-        //target.RegisterSharedPtr(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+        target.RegisterContainer(controllers);
     }
+
+    target.Register(object);
 }
 
 void Rendering::ControlledObjectImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    if (!m_Controllers.empty())
+    if (!controllers.empty())
     {
-        //target.WriteSharedPtrWithNumber(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+        target.WriteObjectAssociatedContainerWithNumber(controllers);
     }
     else
     {
         constexpr int zero = 0;
         target.Write(zero);
     }
+
+    target.WriteObjectAssociated(object);
 }
 
 void Rendering::ControlledObjectImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_1;
-    CoreTools::DisableNoexcept();
-    if (!m_Controllers.empty())
+
+    if (!controllers.empty())
     {
-        source;
-        //  source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+        source.ResolveLinkContainer(controllers);
     }
+
+    source.ResolveLink(object);
 }
 
 void Rendering::ControlledObjectImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    uint32_t size{ 0 };
+    int32_t size{ 0 };
     source.Read(size);
 
-    m_Controllers.resize(size);
+    controllers.resize(size);
 
-    if (!m_Controllers.empty())
+    if (!controllers.empty())
     {
-        //		source.ReadSharedPtr(boost::numeric_cast<int>(m_Controllers.size()),&m_Controllers[0]);
+        source.ReadObjectAssociatedContainer(controllers);
     }
+
+    source.ReadObjectAssociated(object);
 }

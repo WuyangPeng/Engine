@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_USER_INTERFACE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_USER_INTERFACE_STATIC
+#else  // BUILDING_USER_INTERFACE_STATIC
 
-	namespace UserInterfaceToolset
-	{
-		void StaticDllLib()
-		{
+namespace UserInterfaceToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_USER_INTERFACE_STATIC
+#endif  // !BUILDING_USER_INTERFACE_STATIC

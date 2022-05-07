@@ -7,23 +7,23 @@
 #ifndef PHYSICS_TOOLSET_PLACEHOLDER_H
 #define PHYSICS_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Physics/PhysicsToolset/PhysicsToolsetDll.h" 
+#include "Toolset/Physics/PhysicsToolset/PhysicsToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace PhysicsToolset
 {
-	 class PHYSICS_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class PHYSICS_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // PHYSICS_TOOLSET_PLACEHOLDER_H
+#endif  // PHYSICS_TOOLSET_PLACEHOLDER_H

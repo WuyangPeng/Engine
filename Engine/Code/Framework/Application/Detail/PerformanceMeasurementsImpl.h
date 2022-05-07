@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:24)
 
 #ifndef FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
 #define FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
@@ -15,32 +18,32 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE PerformanceMeasurementsImpl
-	{
-	public:
-		using ClassType = PerformanceMeasurementsImpl;
-		using CustomTime = CoreTools::CustomTime;
+    class FRAMEWORK_HIDDEN_DECLARE PerformanceMeasurementsImpl
+    {
+    public:
+        using ClassType = PerformanceMeasurementsImpl;
+        using CustomTime = CoreTools::CustomTime;
 
-	public:
-		explicit PerformanceMeasurementsImpl(int maxTimer) noexcept;
+    public:
+        explicit PerformanceMeasurementsImpl(int maxTimer) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		double GetFrameRate() const;
-		std::string GetFrameRateMessage() const;
+        NODISCARD double GetFrameRate() const;
+        NODISCARD std::string GetFrameRateMessage() const;
 
-		void ResetTime() noexcept;
-		void MeasureTime() noexcept;
-		void UpdateFrameCount() noexcept;
+        void ResetTime() noexcept;
+        void MeasureTime() noexcept;
+        void UpdateFrameCount() noexcept;
 
-	private:
-		CustomTime m_CustomTime;
-		int64_t m_AccumulatedTime;
-		int m_FrameCount;
-		int m_AccumulatedFrameCount;
-		int m_Timer;
-		int m_MaxTimer;
-	};
+    private:
+        CustomTime customTime;
+        int64_t accumulatedTime;
+        int frameCount;
+        int accumulatedFrameCount;
+        int timer;
+        int maxTimer;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H
+#endif  // FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_IMPL_H

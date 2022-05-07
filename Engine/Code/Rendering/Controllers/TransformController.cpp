@@ -1,205 +1,167 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 16:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 17:08)
 
 #include "Rendering/RenderingExport.h"
 
 #include "TransformController.h"
 #include "Detail/TransformControllerImpl.h"
-#include "Rendering/SceneGraph/Spatial.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/SceneGraph/Spatial.h"
 
 using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26434)
-#include SYSTEM_WARNING_DISABLE(26440)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, TransformController);
-CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TransformController); 
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TransformController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TransformController);
 
-Rendering::TransformController
-	::TransformController(const TransformF& localTransform)
-	:ParentType{}, impl{ make_shared<ImplType>(localTransform) }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TransformController)
+
+Rendering::TransformController::TransformController(const TransformF& localTransform)
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ localTransform }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TransformController)
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                       \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }                                                                                        
-    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, TransformController)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetTransform, TransformF, void)
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TransformController) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController, GetTransform, Rendering::TransformF)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController,SetTransform,TransformF,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetTranslate, APoint, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetRotate, Matrix, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TransformController,GetTransform,const Rendering::TransformF)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, TransformController, SetMatrix, Matrix, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetTranslate, APoint,void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetRotate, Matrix,void)
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, TransformController,SetUniformScale, float,void)			
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetScale, APoint,void)	
-
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, TransformController,SetMatrix, Matrix,void)
-
-void Rendering::TransformController
-	::SetObject(ControllerInterface* object) 
+void Rendering::TransformController::SetUniformScale(float scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetUniformScale(scale);
+}
+
+void Rendering::TransformController::SetScale(const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->SetScale(scale);
+}
+
+void Rendering::TransformController::SetObject(ControllerInterface* object)
+{
+    RENDERING_CLASS_IS_VALID_1;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "无效类\n");
 
-	ParentType::SetObject(object);
+    ParentType::SetObject(object);
 }
 
-void Rendering::TransformController
-	::SetObjectInCopy(ControllerInterface* object)
+void Rendering::TransformController::SetObjectInCopy(ControllerInterface* object)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	ParentType::SetObject(object);
+    ParentType::SetObject(object);
 }
 
-bool Rendering::TransformController
-	::Update (double applicationTime)
+bool Rendering::TransformController::Update(double applicationTime)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
     if (ParentType::Update(applicationTime))
-    {		 
-		auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
-		if (spatial != nullptr)
-		{
-			spatial->SetLocalTransform(impl->GetTransform());
-			return true;
-		}			
+    {
+        auto spatial = dynamic_cast<Spatial*>(GetControllerObject());
+        if (spatial != nullptr)
+        {
+            spatial->SetLocalTransform(impl->GetTransform());
+            return true;
+        }
     }
-	
-	return false;
+
+    return false;
 }
 
-Rendering::ControllerInterfaceSharedPtr Rendering::TransformController
-	::Clone() const
+Rendering::ControllerInterfaceSharedPtr Rendering::TransformController::Clone() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
-}
- 
-Rendering::TransformController
-	::TransformController(LoadConstructor value)
-	:ParentType{ value }, impl{ make_shared<ImplType>(TransformF()) }
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    return std::make_shared<ClassType>(*this);
 }
 
-int Rendering::TransformController
-::GetStreamingSize () const
+Rendering::TransformController::TransformController(LoadConstructor value)
+    : ParentType{ value }, impl{ TransformF{} }
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	auto size = ParentType::GetStreamingSize();	 
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
 
-	size += impl->GetStreamingSize();
-    
-	return size;
+int Rendering::TransformController::GetStreamingSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+
+    size += impl->GetStreamingSize();
+
+    return size;
 }
 
 uint64_t Rendering::TransformController::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	return ParentType::Register(target);	
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return ParentType::Register(target);
 }
 
-void Rendering::TransformController
-::Save (CoreTools::BufferTarget& target) const
+void Rendering::TransformController::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
-	ParentType::Save(target);
-	
-	impl->Save(target);
-    
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    impl->Save(target);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::TransformController
-::Link (CoreTools::ObjectLink& source)
+void Rendering::TransformController::Link(CoreTools::ObjectLink& source)
 {
-	;
+    RENDERING_CLASS_IS_VALID_1;
 
-	ParentType::Link(source); 	
+    ParentType::Link(source);
 }
 
-void Rendering::TransformController
-::PostLink ()
+void Rendering::TransformController::PostLink()
 {
-	;
-    
-	ParentType::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
-void Rendering::TransformController
-::Load (CoreTools::BufferSource& source)
+void Rendering::TransformController::Load(CoreTools::BufferSource& source)
 {
-	;
-    
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
-    
+
     ParentType::Load(source);
-	
-	impl->Load(source);
-    
+
+    impl->Load(source);
+
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
@@ -207,10 +169,5 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::TransformController::CloneObject(
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
- 
-
-
-
-#include STSTEM_WARNING_POP

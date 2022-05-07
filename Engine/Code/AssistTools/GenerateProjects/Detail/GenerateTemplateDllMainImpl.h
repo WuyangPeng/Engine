@@ -1,37 +1,41 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/28 17:19)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_DLL_MAIN_IMPL_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_DLL_MAIN_IMPL_H
 
 #include "AssistTools/AssistToolsDll.h"
 
-#include "GenerateTemplateBaseImpl.h" 
+#include "GenerateTemplateBaseImpl.h"
 
 namespace AssistTools
-{ 
-	class ASSIST_TOOLS_HIDDEN_DECLARE GenerateTemplateDllMainImpl : public GenerateTemplateBaseImpl
-	{
-	public:
-		using ClassType = GenerateTemplateDllMainImpl ;
-		using ParentType = GenerateTemplateBaseImpl ;
+{
+    class ASSIST_TOOLS_HIDDEN_DECLARE GenerateTemplateDllMainImpl : public GenerateTemplateBaseImpl
+    {
+    public:
+        using ClassType = GenerateTemplateDllMainImpl;
+        using ParentType = GenerateTemplateBaseImpl;
 
-	public:
-		GenerateTemplateDllMainImpl(const System::String& templateFileName, const Replace& replace);
- 
+    public:
+        GenerateTemplateDllMainImpl(const System::String& templateFileName, const Replace& replace);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, 
-			            const CopyrightData& copyrightData, const System::String& solutionName,
-						const System::String& managerName) const;
+        void GenerateTo(const System::String& resourceDirectory,
+                        const System::String& newProjectName,
+                        const CopyrightData& copyrightData,
+                        const System::String& solutionName,
+                        const System::String& managerName) const;
 
-	private:
-		static const System::String sm_Extension;
-	};
+    private:
+        static const System::String extension;
+    };
 }
 
-#endif // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_DLL_MAIN_IMPL_H
+#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_DLL_MAIN_IMPL_H

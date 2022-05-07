@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 22:26)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_H
@@ -10,72 +13,72 @@
 #include "Rendering/RenderingDll.h"
 
 #include "TextureDataTraits.h"
-#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Resources/Flags/TextureFlags.h"
 
-#include <boost/noncopyable.hpp>
+#include <array>
 
 namespace Rendering
 {
-	template <typename Texture>
-	class OpenGLTextureData : boost::noncopyable
-	{
-	public:
-		using ClassType = OpenGLTextureData<Texture>;
-		using TextureType = Texture;
-		using UInt = System::OpenGLUInt;
-		using TextureTargetType = System::TextureTarget;
-		using TextureInternalFormat = System::TextureInternalFormat;
-		using TextureFormat = System::TextureFormat;
-		using DataType = System::OpenGLData;
+    template <typename Texture>
+    class OpenGLTextureData
+    {
+    public:
+        using ClassType = OpenGLTextureData<Texture>;
+        using TextureType = Texture;
+        using UInt = System::OpenGLUInt;
+        using TextureTargetType = System::TextureTarget;
+        using TextureInternalFormat = System::TextureInternalFormat;
+        using TextureFormat = System::TextureFormat;
+        using DataType = System::OpenGLData;
 
-	public:
-		explicit OpenGLTextureData (const Texture* texture);
-		~OpenGLTextureData();
-		OpenGLTextureData(const OpenGLTextureData&) =delete;
-		OpenGLTextureData& operator=(const OpenGLTextureData&) =delete;
-		OpenGLTextureData( OpenGLTextureData&&) =delete;
-		OpenGLTextureData& operator=( OpenGLTextureData&&) =delete;
+    public:
+        explicit OpenGLTextureData(const Texture* texture);
+        ~OpenGLTextureData() noexcept = default;
+        OpenGLTextureData(const OpenGLTextureData& rhs) = delete;
+        OpenGLTextureData& operator=(const OpenGLTextureData& rhs) = delete;
+        OpenGLTextureData(OpenGLTextureData&& rhs) noexcept = delete;
+        OpenGLTextureData& operator=(OpenGLTextureData&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void Enable (int textureUnit) noexcept;
-		void Disable (int textureUnit) noexcept;
-		void* Lock (int level, BufferLocking mode) noexcept;
-		void Unlock (int level) noexcept;
-		void* Lock (int face, int level, BufferLocking mode) noexcept;
-		void Unlock (int face, int level) noexcept;
+        void Enable(int textureUnit);
+        void Disable(int textureUnit) noexcept;
+        NODISCARD void* Lock(int level, BufferLocking mode) noexcept;
+        void Unlock(int level);
+        NODISCARD void* Lock(int face, int level, BufferLocking mode) noexcept;
+        void Unlock(int face, int level);
 
-		UInt GetTexture () const noexcept;
+        NODISCARD UInt GetTexture() const noexcept;
 
-	private:
-		void CreatePixelBufferObjects(const Texture* texture) ;
-		void InitRemainData() noexcept;
-		UInt CreateTextureStructure() noexcept;
-		void CreateMipmapLevelStructures(const Texture* texture,UInt previousBind);
-		void TextureImage(int level) noexcept;
+    private:
+        void CreatePixelBufferObjects(const Texture* aTexture);
+        void InitRemainData() noexcept;
+        NODISCARD UInt CreateTextureStructure();
+        void CreateMipmapLevelStructures(const Texture* aTexture, UInt previousBind);
+        void TextureImage(int level) noexcept;
 
-	private:
-		static constexpr int sm_Dimension = TextureDataTraits<Texture>::sm_Dimension;
-		static constexpr int sm_Face = TextureDataTraits<Texture>::sm_Face;
-		static constexpr ShaderFlags::SamplerType sm_SamplerType = TextureDataTraits<Texture>::sm_SamplerType;
-		static constexpr TextureTargetType sm_TextureTargetType = TextureDataTraits<Texture>::sm_TextureTargetType;
+    private:
+        static constexpr auto textureDimension = TextureDataTraits<Texture>::dimension;
+        static constexpr auto textureFace = TextureDataTraits<Texture>::face;
+        static constexpr auto textureSamplerType = TextureDataTraits<Texture>::samplerType;
+        static constexpr auto textureTextureTargetType = TextureDataTraits<Texture>::textureTargetType;
 
-	private:
-		UInt m_Texture;
-		TextureInternalFormat m_InternalFormat;
-		TextureFormat m_Format;
-		DataType m_Type;
-		UInt m_PreviousTexture;
-		UInt m_NumLevels;
-		UInt m_NumLevelBytes[TextureMaximumMipmapLevels];
-		UInt m_Dimension[sm_Dimension][TextureMaximumMipmapLevels];
-		UInt m_Buffer[sm_Face][TextureMaximumMipmapLevels];
-		void* m_LockedMemory[sm_Face][TextureMaximumMipmapLevels];
-		bool m_WriteLock[sm_Face][TextureMaximumMipmapLevels];
-		bool m_IsCompressed;
-	};
+    private:
+        UInt texture;
+        TextureInternalFormat textureInternalFormat;
+        TextureFormat textureFormat;
+        DataType dataType;
+        UInt previousTexture;
+        UInt numLevels;
+        std::array<UInt, TextureMaximumMipmapLevels> numLevelBytes;
+        std::array<std::array<UInt, TextureMaximumMipmapLevels>, textureDimension> dimension;
+        std::array<std::array<UInt, TextureMaximumMipmapLevels>, textureFace> buffer;
+        std::array<std::array<void*, TextureMaximumMipmapLevels>, textureFace> lockedMemory;
+        std::array<std::array<bool, TextureMaximumMipmapLevels>, textureFace> writeLock;
+        bool isCompressed;
+    };
 }
 
-#endif // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_H
+#endif  // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_H

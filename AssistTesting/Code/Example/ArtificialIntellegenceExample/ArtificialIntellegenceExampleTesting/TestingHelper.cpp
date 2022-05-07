@@ -4,17 +4,23 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/27 1:16)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(ArtificialIntellegenceExample, TestingHelper, "人工智能例子")
+ArtificialIntellegenceExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "人工智能例子" }
+{
+    InitSuite();
+
+    ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ArtificialIntellegenceExample, TestingHelper)
 
 // private
-void ArtificialIntellegenceExample::TestingHelper
-	::AddSuites()
+void ArtificialIntellegenceExample::TestingHelper ::InitSuite() noexcept
 {
-	 
 }
- 

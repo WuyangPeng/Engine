@@ -231,7 +231,7 @@ void Rendering::TransformTesting
 }
 
 void Rendering::TransformTesting
-   ::OperatorTest()
+  ::OperatorTest()
 {
 //     std::default_random_engine generator;
 // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
@@ -320,7 +320,7 @@ void Rendering::TransformTesting
 }
 
 void Rendering::TransformTesting
-   ::InverseTest()
+  ::InverseTest()
 {
 // 	std::default_random_engine generator;
 // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);

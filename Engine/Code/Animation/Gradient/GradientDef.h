@@ -1,24 +1,27 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.4.0.0 (2020/07/16 11:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/27 16:55)
 
 #ifndef ANIMATION_GRADIENT_GRADIENT_DEF_H
 #define ANIMATION_GRADIENT_GRADIENT_DEF_H
 
-#include "Animation/AnimationDll.h" 
+#include "Animation/AnimationDll.h"
 
 namespace Animation
 {
-	class ANIMATION_DEFAULT_DECLARE GradientDef
-	{
-	public:
-		using ClassType = GradientDef;
+    class ANIMATION_DEFAULT_DECLARE GradientDef
+    {
+    public:
+        using ClassType = GradientDef;
 
-	public:
-		CLASS_INVARIANT_DECLARE;	 
-	};
+    public:
+        CLASS_INVARIANT_DECLARE;
+    };
 }
 
-#endif // ANIMATION_GRADIENT_GRADIENT_DEF_H
+#endif  // ANIMATION_GRADIENT_GRADIENT_DEF_H

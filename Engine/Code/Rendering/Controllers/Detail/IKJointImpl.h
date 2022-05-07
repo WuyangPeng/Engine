@@ -1,27 +1,24 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 13:43)
 
 #ifndef RENDERING_CONTROLLERS_IKJOINT_IMPL_H
 #define RENDERING_CONTROLLERS_IKJOINT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/Flags/MatrixFlags.h"
 #include "Rendering/Controllers/IKGoal.h"
 #include "Rendering/SceneGraph/Spatial.h"
 
 #include <vector>
-
-namespace CoreTools
-{
-    class BufferTarget;
-    class BufferSource;
-    class ObjectLink;
-    class ObjectRegister;
-}
 
 namespace Rendering
 {
@@ -30,7 +27,7 @@ namespace Rendering
     public:
         using ClassType = IKJointImpl;
         using AVector = Mathematics::AVectorF;
-        using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
+        using IKGoalSharedPtrVector = std::vector<CoreTools::ObjectAssociated<IKGoal>>;
         using Object = CoreTools::Object;
         using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 
@@ -40,7 +37,7 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        int GetStreamingSize() const;
+        NODISCARD int GetStreamingSize() const;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
         void Link(CoreTools::ObjectLink& source);
@@ -49,41 +46,38 @@ namespace Rendering
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 
         // Joint更新。
-        const AVector GetAxis(MatrixRotationAxis axisIndex) const;
+        NODISCARD AVector GetAxis(MatrixRotationAxis axisIndex) const;
         void UpdateWorldTransform();
         void UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
-        bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
+        NODISCARD bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
+        NODISCARD bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
 
-        const ConstSpatialSharedPtr GetObjectSharedPtr() const noexcept;
-        const ConstIKGoalSharedPtr GetGoalsSharedPtr(int index) const;
-        int GetGoalsNum() const;
+        NODISCARD ConstSpatialSharedPtr GetObjectSharedPtr() const noexcept;
+        NODISCARD ConstIKGoalSharedPtr GetGoalsSharedPtr(int index) const;
+        NODISCARD int GetGoalsNum() const;
 
-        void SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation);
-        void SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation);
+        void SetAllowTranslation(MatrixRotationAxis axisIndex, bool aAllowTranslation);
+        void SetAllowRotation(MatrixRotationAxis axisIndex, bool aAllowRotation);
 
-        bool IsAllowTranslation(MatrixRotationAxis axisIndex) const;
-        bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
-
-    private:
-        void Init() noexcept;
+        NODISCARD bool IsAllowTranslation(MatrixRotationAxis axisIndex) const;
+        NODISCARD bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
 
     private:
         // 索引i为joint的父世界axis[i]。
-        static const int sm_NumAxis = 3;
+        static const int numAxis = 3;
 
-        bool m_AllowTranslation[sm_NumAxis];  // 默认 = false
-        float m_MinTranslation[sm_NumAxis];  // 默认 = -无穷大
-        float m_MaxTranslation[sm_NumAxis];  // 默认 = +无穷大
-        bool m_AllowRotation[sm_NumAxis];  // 默认 = false
-        float m_MinRotation[sm_NumAxis];  // 默认 = -无穷大
-        float m_MaxRotation[sm_NumAxis];  // 默认 = +无穷大
+        std::array<bool, numAxis> allowTranslation;  // 默认 = false
+        std::array<float, numAxis> minTranslation;  // 默认 = -无穷大
+        std::array<float, numAxis> maxTranslation;  // 默认 = +无穷大
+        std::array<bool, numAxis> allowRotation;  // 默认 = false
+        std::array<float, numAxis> minRotation;  // 默认 = -无穷大
+        std::array<float, numAxis> maxRotation;  // 默认 = +无穷大
 
         // 管理的对象。
-        SpatialSharedPtr m_Object;
+        CoreTools::ObjectAssociated<Spatial> object;
 
         // 影响本joint的目标。
-        IKGoalSharedPtrVector m_Goals;
+        IKGoalSharedPtrVector goals;
     };
 }
 

@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_IMAGICS_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_IMAGICS_STATIC
+#else  // BUILDING_IMAGICS_STATIC
 
-	namespace ImagicsToolset
-	{
-		void StaticDllLib()
-		{
+namespace ImagicsToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_IMAGICS_STATIC
+#endif  // !BUILDING_IMAGICS_STATIC

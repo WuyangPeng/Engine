@@ -1,64 +1,68 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/25 15:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/16 17:45)
 
 #ifndef RENDERING_CURVES_SURFACES_CURVE_SEGMENT_H
 #define RENDERING_CURVES_SURFACES_CURVE_SEGMENT_H
 
 #include "Rendering/RenderingDll.h"
- 
+
+#include "CoreTools/ObjectSystems/Object.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "CoreTools/ObjectSystems/Object.h"
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE CurveSegment : public CoreTools::Object
-	{
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CurveSegment); 
+    class RENDERING_DEFAULT_DECLARE CurveSegment : public CoreTools::Object
+    {
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CurveSegment);
 
-	public:
-		using ClassType = CurveSegment;
-		using ParentType = Object;
-		using APoint = Mathematics::APointF;
-		using AVector = Mathematics::AVectorF;
+    public:
+        using ClassType = CurveSegment;
+        using ParentType = Object;
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
 
-	protected:
-		// Construction.
-		CurveSegment(float umin, float umax);
-	public:
-		 
+    protected:
+        CurveSegment(float umin, float umax);
 
-		// The parametric domain is umin <= u <= umax.
-		float GetUMin() const noexcept;
-		float GetUMax() const noexcept;
+    public:
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Position and derivatives up to third order.
-		virtual APoint P(float u) const = 0;
-		virtual AVector PU(float u) const = 0;
-		virtual AVector PUU(float u) const = 0;
-		virtual AVector PUUU(float u) const = 0;
+        NODISCARD float GetUMin() const noexcept;
+        NODISCARD float GetUMax() const noexcept;
 
-		// Differential geometric quantities.
-		AVector Tangent(float u) const;
-		AVector Normal(float u) const;
-		AVector Binormal(float u) const;
-		void GetFrame(float u, APoint& position, AVector& tangent, AVector& normal, AVector& binormal) const;
-		float Curvature(float u) const;
-		float Torsion(float u) const;
+        NODISCARD virtual APoint P(float u) const = 0;
+        NODISCARD virtual AVector PU(float u) const = 0;
+        NODISCARD virtual AVector PUU(float u) const = 0;
+        NODISCARD virtual AVector PUUU(float u) const = 0;
 
-	protected:
-		float mUMin, mUMax;
-	};
-	#include "System/Helper/PragmaWarning.h"
+        NODISCARD AVector Tangent(float u) const;
+        NODISCARD AVector Normal(float u) const;
+        NODISCARD AVector Binormal(float u) const;
+        void GetFrame(float u, APoint& position, AVector& tangent, AVector& normal, AVector& binormal) const;
+        NODISCARD float Curvature(float u) const;
+        NODISCARD float Torsion(float u) const;
+
+    private:
+        float uMin;
+        float uMax;
+    };
+
 #include STSTEM_WARNING_PUSH
-	#include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(CurveSegment);
-	CORE_TOOLS_SHARED_PTR_DECLARE( CurveSegment);
-	#include STSTEM_WARNING_POP
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_STREAM_REGISTER(CurveSegment);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(CurveSegment);
 }
 
-#endif // RENDERING_CURVES_SURFACES_CURVE_SEGMENT_H
+#endif  // RENDERING_CURVES_SURFACES_CURVE_SEGMENT_H

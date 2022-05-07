@@ -1,18 +1,21 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 10:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:33)
 
 #ifndef FRAMEWORK_WINDOW_PROCESS_H
 #define FRAMEWORK_WINDOW_PROCESS_H
 
 #include "VirtualKeysTypes.h"
-#include "WindowMessageLoop.h"
+#include "WindowMessageDetail.h"
 #include "WindowMessageInterface.h"
-#include "WindowMessageDetail.h" 
-#include "WindowProcessManager.h"
-#include "WindowProcessHandleDetail.h"
+#include "WindowMessageLoop.h"
 #include "WindowMessageUnitTestSuite.h"
+#include "WindowProcessHandleDetail.h"
+#include "WindowProcessManager.h"
 
-#endif // FRAMEWORK_WINDOW_PROCESS_H
+#endif  // FRAMEWORK_WINDOW_PROCESS_H

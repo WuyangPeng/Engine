@@ -88,7 +88,10 @@ void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ReadBoolContainer(Size, container);
+    for (auto& value : container)
+    {
+        value = ReadBool();
+    }
 }
 
 template <typename T>

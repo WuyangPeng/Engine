@@ -1,206 +1,186 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 15:51)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_DETAIL_H
 
 #include "ObjectLogicManager.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_ObjectLogic{ middleLayerPlatform }, m_ArtificialIntellegence{ middleLayerPlatform }
+template <typename ObjectLogic, typename ArtificialIntellegence>
+Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }, objectLogic{ middleLayerPlatform }, artificialIntellegence{ middleLayerPlatform }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-} 
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
 
 #ifdef OPEN_CLASS_INVARIANT
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::IsValid() const noexcept
 {
-	;
-
-	if (ParentType::PreCreate(environmentDirectory) && 
-		m_ObjectLogic.PreCreate(environmentDirectory) &&
-		m_ArtificialIntellegence.PreCreate(environmentDirectory))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::Initialize()
-{
-	;
+#endif  // OPEN_CLASS_INVARIANT
 
-	if (ParentType::Initialize() &&
-		m_ObjectLogic.Initialize() &&
-		m_ArtificialIntellegence.Initialize())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+template <typename ObjectLogic, typename ArtificialIntellegence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    if (ParentType::PreCreate(environmentDirectory) &&
+        objectLogic.PreCreate(environmentDirectory) &&
+        artificialIntellegence.PreCreate(environmentDirectory))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::PreIdle()
+template <typename ObjectLogic, typename ArtificialIntellegence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Initialize()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::PreIdle();
-	m_ObjectLogic.PreIdle();
-	m_ArtificialIntellegence.PreIdle();
+    if (ParentType::Initialize() &&
+        objectLogic.Initialize() &&
+        artificialIntellegence.Initialize())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::Terminate()
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreIdle()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::Terminate();
-	m_ObjectLogic.Terminate();
-	m_ArtificialIntellegence.Terminate();
+    ParentType::PreIdle();
+    objectLogic.PreIdle();
+    artificialIntellegence.PreIdle();
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::Create()
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Terminate()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Create() && m_ObjectLogic.Create() && m_ArtificialIntellegence.Create())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    ParentType::Terminate();
+    objectLogic.Terminate();
+    artificialIntellegence.Terminate();
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::Destroy()
+template <typename ObjectLogic, typename ArtificialIntellegence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Create()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Destroy() && m_ObjectLogic.Destroy() && m_ArtificialIntellegence.Destroy())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Create() && objectLogic.Create() && artificialIntellegence.Create())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::Idle(int64_t timeDelta)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Destroy()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Idle(timeDelta) && m_ObjectLogic.Idle(timeDelta) && m_ArtificialIntellegence.Idle(timeDelta))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Destroy() && objectLogic.Destroy() && artificialIntellegence.Destroy())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Idle(int64_t timeDelta)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = systemManager;
-	
-	ParentType::SetSystemManager(manager);
-	m_ObjectLogic.SetSystemManager(manager);
-	m_ArtificialIntellegence.SetSystemManager(manager);
+    if (ParentType::Idle(timeDelta) && objectLogic.Idle(timeDelta) && artificialIntellegence.Idle(timeDelta))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = physicalModellingManager;
-
-	ParentType::SetPhysicalModellingManager(manager);
-	m_ObjectLogic.SetPhysicalModellingManager(manager);
-	m_ArtificialIntellegence.SetPhysicalModellingManager(manager);
+    ParentType::SetSystemManager(systemManager);
+    objectLogic.SetSystemManager(systemManager);
+    artificialIntellegence.SetSystemManager(systemManager);
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = messageManager;
-
-	ParentType::SetMessageManager(manager);
-	m_ObjectLogic.SetMessageManager(manager);
-	m_ArtificialIntellegence.SetMessageManager(manager);
+    ParentType::SetPhysicalModellingManager(physicalModellingManager);
+    objectLogic.SetPhysicalModellingManager(physicalModellingManager);
+    artificialIntellegence.SetPhysicalModellingManager(physicalModellingManager);
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = inputManager;
-
-	ParentType::SetInputManager(manager);
-	m_ObjectLogic.SetInputManager(manager);
-	m_ArtificialIntellegence.SetInputManager(manager);
+    ParentType::SetMessageManager(messageManager);
+    objectLogic.SetMessageManager(messageManager);
+    artificialIntellegence.SetMessageManager(messageManager);
 }
 
-template<typename ObjectLogic, typename  ArtificialIntellegence>
-void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
-	::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	auto manager = networkManager;
-
-	ParentType::SetNetworkManager(manager);
-	m_ObjectLogic.SetNetworkManager(manager);
-	m_ArtificialIntellegence.SetNetworkManager(manager);
+    ParentType::SetInputManager(inputManager);
+    objectLogic.SetInputManager(inputManager);
+    artificialIntellegence.SetInputManager(inputManager);
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_DETAIL_H
+template <typename ObjectLogic, typename ArtificialIntellegence>
+void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
 
+    ParentType::SetNetworkManager(networkManager);
+    objectLogic.SetNetworkManager(networkManager);
+    artificialIntellegence.SetNetworkManager(networkManager);
+}
+
+#endif  // FRAMEWORK_MIDDLE_LAYER_OBJECT_LOGIC_MANAGER_DETAIL_H

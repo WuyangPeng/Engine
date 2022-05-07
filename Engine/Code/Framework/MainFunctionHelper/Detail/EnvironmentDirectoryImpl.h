@@ -1,13 +1,16 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/29 11:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:34)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
 
-#include "Framework/FrameworkDll.h" 
+#include "Framework/FrameworkDll.h"
 
 #include "EngineDirectoryPath.h"
 #include "System/Helper/UnicodeUsing.h"
@@ -18,36 +21,36 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE EnvironmentDirectoryImpl
-	{
-	public:
-		using ClassType = EnvironmentDirectoryImpl;
-		using String = System::String;
+    class FRAMEWORK_HIDDEN_DECLARE EnvironmentDirectoryImpl
+    {
+    public:
+        using ClassType = EnvironmentDirectoryImpl;
+        using String = System::String;
 
-	public:
-		EnvironmentDirectoryImpl(const String& engineEnvironment, const String& engineDirectory);
+    public:
+        EnvironmentDirectoryImpl(const String& engineEnvironment, const String& engineDirectory);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const String GetEngineEnvironment() const;
-		const String GetEngineDirectory() const;
+        NODISCARD String GetEngineEnvironment() const;
+        NODISCARD String GetEngineDirectory() const;
 
-		const String GetDirectory(UpperDirectory analysisDirectory) const;
+        NODISCARD String GetDirectory(UpperDirectory analysisDirectory) const;
 
-		const String GetPath(RenderingAnalysisDirectory analysisDirectory) const;
-		const String GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
-		const String GetPath(EndianDirectory endianDirectory, RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
+        NODISCARD String GetPath(RenderingAnalysisDirectory analysisDirectory) const;
+        NODISCARD String GetPath(RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
+        NODISCARD String GetPath(EndianDirectory endianDirectory, RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
 
-	private:
-		static const String GenerateEngineDirectory(const String& engineEnvironment);
-		static const EngineDirectoryPath GetEngineDirectoryPath(const String& engineDirectory);
-		static const std::string GetJsonName(const String& variableName);
+    private:
+        NODISCARD static String GenerateEngineDirectory(const String& engineEnvironment);
+        NODISCARD static EngineDirectoryPath GetEngineDirectoryPath(const String& engineDirectory);
+        NODISCARD static std::string GetJsonName(const String& variableName);
 
-	private:
-		String m_EngineEnvironment;
-		String m_EngineDirectory;
-		EngineDirectoryPath m_EngineDirectoryPath;
-	};
+    private:
+        String engineEnvironment;
+        String engineDirectory;
+        EngineDirectoryPath engineDirectoryPath;
+    };
 }
 
-#endif // FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H
+#endif  // FRAMEWORK_MAIN_FUNCTION_HELPER_ENVIRONMENT_DIRECTORY_IMPL_H

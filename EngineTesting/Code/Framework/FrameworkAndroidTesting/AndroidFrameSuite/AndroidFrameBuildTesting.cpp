@@ -13,7 +13,7 @@
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework,AndroidFrameBuildTesting) 
 
 void Framework::AndroidFrameBuildTesting
-	::MainTest()
+	::MainTest() noexcept
 {
 
 }

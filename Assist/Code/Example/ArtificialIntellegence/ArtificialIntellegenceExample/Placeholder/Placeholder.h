@@ -7,23 +7,23 @@
 #ifndef ARTIFICIAL_INTELLEGENCE_EXAMPLE_PLACEHOLDER_H
 #define ARTIFICIAL_INTELLEGENCE_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/ArtificialIntellegence/ArtificialIntellegenceExample/ArtificialIntellegenceExampleDll.h" 
+#include "Example/ArtificialIntellegence/ArtificialIntellegenceExample/ArtificialIntellegenceExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ArtificialIntellegenceExample
 {
-	 class ARTIFICIAL_INTELLEGENCE_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class ARTIFICIAL_INTELLEGENCE_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // ARTIFICIAL_INTELLEGENCE_EXAMPLE_PLACEHOLDER_H
+#endif  // ARTIFICIAL_INTELLEGENCE_EXAMPLE_PLACEHOLDER_H

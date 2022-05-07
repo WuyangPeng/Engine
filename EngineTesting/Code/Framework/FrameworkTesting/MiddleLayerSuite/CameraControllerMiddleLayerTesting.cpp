@@ -4,175 +4,171 @@
 //
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.1.0 (2020/06/28 22:28)
 
-#include "CameraControllerMiddleLayerTesting.h" 
-#include "System/Window/Flags/WindowDisplayFlags.h"
-#include "CoreTools/Helper/AssertMacro.h" 
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
-#include "Rendering/SceneGraph/CameraManager.h"
+#include "CameraControllerMiddleLayerTesting.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
+#include "Rendering/DataTypes/TransformMatrixDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/SceneGraph/CameraManager.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
+#include "Framework/MiddleLayer/CameraControllerMiddleLayerDetail.h"
+#include "Framework/MiddleLayer/CameraModelMiddleLayer.h"
+#include "Framework/MiddleLayer/CameraViewMiddleLayer.h"
+#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
-#include "Framework/WindowProcess/VirtualKeysTypes.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
-#include "Framework/MiddleLayer/CameraViewMiddleLayer.h"
-#include "Framework/MiddleLayer/CameraModelMiddleLayer.h"
-#include "Framework/MiddleLayer/CameraControllerMiddleLayerDetail.h" 
-#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
-#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
+#include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 #include <random>
 
-using std::string;
-using std::make_shared;
-using std::uniform_int;
 using std::default_random_engine;
+using std::make_shared;
+using std::string;
+using std::uniform_int;
 
 namespace Framework
 {
-	using TestingType = CameraControllerMiddleLayer<WindowApplicationTrait>;
-	using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
+    using TestingType = CameraControllerMiddleLayer<WindowApplicationTrait>;
+    using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
 }
 
-Framework::CameraControllerMiddleLayerTesting
-	::CameraControllerMiddleLayerTesting(const OStreamShared& stream)
-	:ParentType{ stream }
+#include SYSTEM_WARNING_DISABLE(26440)
+Framework::CameraControllerMiddleLayerTesting::CameraControllerMiddleLayerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraControllerMiddleLayerTesting)
 
-void Framework::CameraControllerMiddleLayerTesting
-	::DoRunUnitTest()
+void Framework::CameraControllerMiddleLayerTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::CameraControllerMiddleLayerTesting
-	::MainTest()
+void Framework::CameraControllerMiddleLayerTesting::MainTest()
 {
-	Rendering::RendererManager::Create();
-	Rendering::CameraManager::Create();
+    Rendering::RendererManager::Create();
+    Rendering::CameraManager::Create();
 
-	ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(KeyDownTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(CameraMotionMoveTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(MoveObjectTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(TrackBallDownTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(RotateTrackBallTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(KeyDownTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CameraMotionMoveTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MoveObjectTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TrackBallDownTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RotateTrackBallTest);
 
-	Rendering::CameraManager::Destroy();
-	Rendering::RendererManager::Destroy();
+    Rendering::CameraManager::Destroy();
+    Rendering::RendererManager::Destroy();
 }
 
-void Framework::CameraControllerMiddleLayerTesting
-	::MiddleLayerTest()
+void Framework::CameraControllerMiddleLayerTesting::MiddleLayerTest()
 {
-	constexpr auto platform = MiddleLayerPlatform::Windows;
+    constexpr auto platform = MiddleLayerPlatform::Windows;
 
-	TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform };
 
-	auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
-	middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
-	auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
-	middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
-	ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
+    ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
-	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
-	ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-	ASSERT_TRUE(middleLayer.Create());
-	ASSERT_TRUE(middleLayer.Initialize());
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
+    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.Initialize());
 
-	ASSERT_TRUE(middleLayer.Destroy());
-	middleLayer.Terminate();
+    ASSERT_TRUE(middleLayer.Destroy());
+    middleLayer.Terminate();
 
-	middleLayer.PreIdle();
-	ASSERT_TRUE(middleLayer.Idle(0));
+    middleLayer.PreIdle();
+    ASSERT_TRUE(middleLayer.Idle(0));
 
-	constexpr WindowPoint point{ };
-	const WindowSize size{ };
-	const VirtualKeysTypes virtualKeysTypes{ };
+    constexpr WindowPoint point{};
+    const WindowSize size{};
+    const VirtualKeysTypes virtualKeysTypes{};
 
-	ASSERT_TRUE(middleLayer.Paint());
-	ASSERT_TRUE(middleLayer.Move(point));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide, size));
+    ASSERT_TRUE(middleLayer.Paint());
+    ASSERT_TRUE(middleLayer.Move(point));
+    ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, size));
 
-	ASSERT_TRUE(middleLayer.KeyUp(0, point));
-	ASSERT_TRUE(middleLayer.KeyDown(0, point));
-	ASSERT_TRUE(middleLayer.SpecialKeyUp(0, point));
-	ASSERT_TRUE(middleLayer.SpecialKeyDown(0, point));
+    ASSERT_TRUE(middleLayer.KeyUp(0, point));
+    ASSERT_TRUE(middleLayer.KeyDown(0, point));
+    ASSERT_TRUE(middleLayer.SpecialKeyUp(0, point));
+    ASSERT_TRUE(middleLayer.SpecialKeyDown(0, point));
 
-	ASSERT_TRUE(middleLayer.PassiveMotion(point));
-	ASSERT_TRUE(middleLayer.Motion(point, virtualKeysTypes));
-	ASSERT_TRUE(middleLayer.MouseWheel(0, point, virtualKeysTypes));
-	ASSERT_TRUE(middleLayer.MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes));
+    ASSERT_TRUE(middleLayer.PassiveMotion(point));
+    ASSERT_TRUE(middleLayer.Motion(point, virtualKeysTypes));
+    ASSERT_TRUE(middleLayer.MouseWheel(0, point, virtualKeysTypes));
+    ASSERT_TRUE(middleLayer.MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes));
 }
 
-void Framework::CameraControllerMiddleLayerTesting
-	::KeyDownTest()
+void Framework::CameraControllerMiddleLayerTesting::KeyDownTest()
 {
-	constexpr auto platform = MiddleLayerPlatform::Windows;
+    constexpr auto platform = MiddleLayerPlatform::Windows;
 
-	auto middleLayer = make_shared<TestingType>(platform);
+    auto middleLayer = make_shared<TestingType>(platform);
 
-	auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
-	middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-	auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
-	middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
-	cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
-	cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
-	cameraViewMiddleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-	cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
+    cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
+    cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
+    cameraViewMiddleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
+    cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
 
-	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
-	ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(middleLayer->Create());
-	ASSERT_TRUE(middleLayer->Initialize());
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+    ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(middleLayer->Create());
+    ASSERT_TRUE(middleLayer->Initialize());
 
-	ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
 
-	ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
 
-	const WindowSize defaultWindowSize{ 1024, 768 };
-	ASSERT_TRUE(middleLayer->Resize(System::WindowDisplay::MaxHide, defaultWindowSize));
-	ASSERT_TRUE(cameraModelMiddleLayer->Resize(System::WindowDisplay::MaxHide, defaultWindowSize));
+    const WindowSize defaultWindowSize{ 1024, 768 };
+    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, defaultWindowSize));
+    ASSERT_TRUE(cameraModelMiddleLayer->Resize(System::WindowsDisplay::MaxHide, defaultWindowSize));
 
-	const auto originalRotationSpeed = cameraModelMiddleLayer->GetRotationSpeed();
-	const auto originalTranslationSpeed = cameraModelMiddleLayer->GetTranslationSpeed();
-	const auto speedFactor = 2.0f;
-	constexpr WindowPoint point{ };
+    const auto originalRotationSpeed = cameraModelMiddleLayer->GetRotationSpeed();
+    const auto originalTranslationSpeed = cameraModelMiddleLayer->GetTranslationSpeed();
+    constexpr auto speedFactor = 2.0f;
+    constexpr WindowPoint point{};
 
-	ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::sm_LowerT, point));
-	ASSERT_APPROXIMATE(originalTranslationSpeed / speedFactor, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::FloatMath::sm_Epsilon);
-	ASSERT_APPROXIMATE(originalRotationSpeed, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::lowerT, point));
+    ASSERT_APPROXIMATE(originalTranslationSpeed / speedFactor, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(originalRotationSpeed, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::MathF::epsilon);
 
-	ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::sm_UpperR, point));
-	ASSERT_APPROXIMATE(originalTranslationSpeed / speedFactor, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::FloatMath::sm_Epsilon);
-	ASSERT_APPROXIMATE(originalRotationSpeed * speedFactor, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::upperR, point));
+    ASSERT_APPROXIMATE(originalTranslationSpeed / speedFactor, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(originalRotationSpeed * speedFactor, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::MathF::epsilon);
 
-	ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::sm_LowerR, point));
-	ASSERT_APPROXIMATE(originalTranslationSpeed / speedFactor, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::FloatMath::sm_Epsilon);
-	ASSERT_APPROXIMATE(originalRotationSpeed, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::lowerR, point));
+    ASSERT_APPROXIMATE(originalTranslationSpeed / speedFactor, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(originalRotationSpeed, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::MathF::epsilon);
 
-	ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::sm_UpperT, point));
-	ASSERT_APPROXIMATE(originalTranslationSpeed, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::FloatMath::sm_Epsilon);
-	ASSERT_APPROXIMATE(originalRotationSpeed, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_TRUE(middleLayer->KeyDown(WindowApplicationTrait::KeyIdentifiers::upperT, point));
+    ASSERT_APPROXIMATE(originalTranslationSpeed, cameraModelMiddleLayer->GetTranslationSpeed(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(originalRotationSpeed, cameraModelMiddleLayer->GetRotationSpeed(), Mathematics::MathF::epsilon);
 
-	ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
-	cameraModelMiddleLayer->Terminate();
+    ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
+    cameraModelMiddleLayer->Terminate();
 
-	ASSERT_TRUE(middleLayer->Destroy());
-	middleLayer->Terminate();
-} 
+    ASSERT_TRUE(middleLayer->Destroy());
+    middleLayer->Terminate();
+}
 
-void Framework::CameraControllerMiddleLayerTesting
-	::CameraMotionMoveTest()
+void Framework::CameraControllerMiddleLayerTesting::CameraMotionMoveTest()
 {
-	/*constexpr auto platform = MiddleLayerPlatform::Windows;
+    /*constexpr auto platform = MiddleLayerPlatform::Windows;
 
 	auto middleLayer = make_shared<TestingType>(platform);
 
@@ -216,7 +212,7 @@ void Framework::CameraControllerMiddleLayerTesting
 			
 		if (moveForward)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyUpArrow, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyUpArrow, point);
 
 			auto position = camera->GetPosition();
 			position += translationSpeed * direction;
@@ -224,14 +220,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}  
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyUpArrow, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyUpArrow, point);
 		}
 
 		const auto moveBackward = random(generator) == 0 ? true : false;
 	
 		if (moveBackward)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyDownArrow, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyDownArrow, point);
 
 			auto position = camera->GetPosition();
 			position -= translationSpeed * direction;
@@ -239,14 +235,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyDownArrow, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyDownArrow, point);
 		}
 
 		const auto turnLeft = random(generator) == 0 ? true : false;		
 
 		if (turnLeft)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyInsert, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyInsert, point);
 
 			const Mathematics::Matrixf rotation{ up, rotationSpeed };
 			direction = rotation * direction;
@@ -259,14 +255,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyInsert, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyInsert, point);
 		}
 	 
 		const auto turnRight = random(generator) == 0 ? true : false;		
 
 		if (turnRight)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyDelete, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyDelete, point);
 
 			const Mathematics::Matrixf rotation{ up, -rotationSpeed };
 			direction = rotation * direction;
@@ -279,14 +275,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyDelete, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyDelete, point);
 		}
 
 		const auto lookUp = random(generator) == 0 ? true : false;		
 
 		if (lookUp)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyHome, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyHome, point);
 
 			const Mathematics::Matrixf rotation{ right, rotationSpeed };
 
@@ -297,14 +293,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyHome, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyHome, point);
 		}
 
 		const auto lookDown = random(generator) == 0 ? true : false;		
 
 		if (lookDown)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyEnd, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyEnd, point);
 
 			const Mathematics::Matrixf rotation{ right, -rotationSpeed };
 
@@ -315,14 +311,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyEnd, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyEnd, point);
 		}
 
 		const auto moveUp = random(generator) == 0 ? true : false;	
 
 		if (moveUp)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyPageUp, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyPageUp, point);
 
 			auto position = camera->GetPosition();
 			position += translationSpeed * up;
@@ -330,14 +326,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyPageUp, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyPageUp, point);
 		}
 
 		const auto moveDown = random(generator) == 0 ? true : false;		
 
 		if (moveDown)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyPageDown, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyPageDown, point);
 
 			auto position = camera->GetPosition();
 			position -= translationSpeed * up;
@@ -345,14 +341,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyPageDown, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyPageDown, point);
 		}
 
 		const auto moveRight = random(generator) == 0 ? true : false;
 
 		if (moveRight)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyRightArrow, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyRightArrow, point);
 
 			auto position = camera->GetPosition();
 			position += translationSpeed * right;
@@ -360,14 +356,14 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyRightArrow, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyRightArrow, point);
 		}
 		
 		const auto moveLeft = random(generator) == 0 ? true : false;		
 
 		if (moveLeft)
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyLeftArrow, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyLeftArrow, point);
 
 			auto position = camera->GetPosition();
 			position -= translationSpeed * right;
@@ -375,7 +371,7 @@ void Framework::CameraControllerMiddleLayerTesting
 		}
 		else
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyLeftArrow, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyLeftArrow, point);
 		}		
 
 		cameraModelMiddleLayer->MoveCamera();
@@ -393,10 +389,9 @@ void Framework::CameraControllerMiddleLayerTesting
 	middleLayer->Terminate();*/
 }
 
-void Framework::CameraControllerMiddleLayerTesting
-	::MoveObjectTest()
+void Framework::CameraControllerMiddleLayerTesting::MoveObjectTest()
 {
-	/*constexpr auto platform = MiddleLayerPlatform::Windows;
+    /*constexpr auto platform = MiddleLayerPlatform::Windows;
 
 	auto middleLayer = make_shared<TestingType>(platform);
 
@@ -442,67 +437,67 @@ void Framework::CameraControllerMiddleLayerTesting
 		{
 		case 0:
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyF1, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF3, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF4, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF5, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF6, point);
-			axis = AVectorf::sm_UnitX;
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyF1, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF3, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF4, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF5, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF6, point);
+			axis = AVectorf::unitX;
 		}
 		break;
 		case 1:
 		{
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyF2, point);			
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF3, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF4, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF5, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF6, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyF2, point);			
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF3, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF4, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF5, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF6, point);
 
-			axis = AVectorf::sm_UnitX;
+			axis = AVectorf::unitX;
 		}
 		break;
 		case 2:
 		{			
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF2, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF1, point);
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyF3, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF5, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF6, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF2, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF1, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyF3, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF5, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF6, point);
 
-			axis = AVectorf::sm_UnitY;
+			axis = AVectorf::unitY;
 		}
 		break;
 		case 3:
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF1, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF2, point);
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyF4, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF5, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF6, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF1, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF2, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyF4, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF5, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF6, point);
 
-			axis = AVectorf::sm_UnitY;
+			axis = AVectorf::unitY;
 		}
 		break;
 		case 4:
 		{
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF1, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF2, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF3, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF4, point);
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyF5, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF1, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF2, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF3, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF4, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyF5, point);
 	
-			axis = AVectorf::sm_UnitZ;
+			axis = AVectorf::unitZ;
 		}
 		break;
 		case 5:
 		{			
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF1, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF2, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF3, point);
-			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::sm_KeyF4, point);
-			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::sm_KeyF6, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF1, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF2, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF3, point);
+			middleLayer->SpecialKeyUp(WindowApplicationTrait::KeyIdentifiers::keyF4, point);
+			middleLayer->SpecialKeyDown(WindowApplicationTrait::KeyIdentifiers::keyF6, point);
 
-			axis = AVectorf::sm_UnitZ;
+			axis = AVectorf::unitZ;
 		}
 		break;
 		default:
@@ -528,151 +523,149 @@ void Framework::CameraControllerMiddleLayerTesting
 	} */
 }
 
-void Framework::CameraControllerMiddleLayerTesting
-	::TrackBallDownTest()
+void Framework::CameraControllerMiddleLayerTesting::TrackBallDownTest()
 {
-	constexpr auto platform = MiddleLayerPlatform::Windows;
+    constexpr auto platform = MiddleLayerPlatform::Windows;
 
-	auto middleLayer = make_shared<TestingType>(platform);
+    auto middleLayer = make_shared<TestingType>(platform);
 
-	auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
-	middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-	auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
-	middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
-	cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
-	cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
-	cameraViewMiddleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-	cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
+    cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
+    cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
+    cameraViewMiddleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
+    cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
 
-	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
-	ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(middleLayer->Create());
-	ASSERT_TRUE(middleLayer->Initialize());
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+    ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(middleLayer->Create());
+    ASSERT_TRUE(middleLayer->Initialize());
 
-	ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
 
-	ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
 
-	ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
+    ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
 
-	constexpr WindowPoint point{ };
-	const VirtualKeysTypes virtualKeysTypes{ };
+    constexpr WindowPoint point{};
+    const VirtualKeysTypes virtualKeysTypes{};
 
-	middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes);
-	ASSERT_TRUE(cameraModelMiddleLayer->GetTrackBallDow());
+    middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes);
+    ASSERT_TRUE(cameraModelMiddleLayer->GetTrackBallDow());
 
-	middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, point, virtualKeysTypes);
-	ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
+    middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, point, virtualKeysTypes);
+    ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
 
-	ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
-	cameraModelMiddleLayer->Terminate();
+    ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
+    cameraModelMiddleLayer->Terminate();
 
-	ASSERT_TRUE(middleLayer->Destroy());
-	middleLayer->Terminate();
+    ASSERT_TRUE(middleLayer->Destroy());
+    middleLayer->Terminate();
 }
 
-void Framework::CameraControllerMiddleLayerTesting
-	::RotateTrackBallTest()
+void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
 {
-	constexpr auto platform = MiddleLayerPlatform::Windows;
+    constexpr auto platform = MiddleLayerPlatform::Windows;
 
-	auto middleLayer = make_shared<TestingType>(platform);
+    auto middleLayer = make_shared<TestingType>(platform);
 
-	auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
-	middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-	auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
-	middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
-	cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
-	cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
-	cameraViewMiddleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-	cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
+    cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
+    cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
+    cameraViewMiddleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
+    cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
 
-	const WindowSize windowSize{ 1024,768 };
-	const auto multiplier = 1.0f / windowSize.GetWindowHeight();
+    const WindowSize windowSize{ 1024, 768 };
+    const auto multiplier = 1.0f / windowSize.GetWindowHeight();
 
-	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
-	ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(middleLayer->Create());
-	ASSERT_TRUE(middleLayer->Initialize());
-	ASSERT_TRUE(middleLayer->Resize(System::WindowDisplay::MaxHide, windowSize));
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+    ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(middleLayer->Create());
+    ASSERT_TRUE(middleLayer->Initialize());
+    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
 
-	ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
-	ASSERT_TRUE(cameraModelMiddleLayer->Resize(System::WindowDisplay::MaxHide, windowSize));
+    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraModelMiddleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
 
-	ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
-	ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
-	ASSERT_TRUE(cameraViewMiddleLayer->Resize(System::WindowDisplay::MaxHide, windowSize));
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraViewMiddleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
 
-	default_random_engine generator{ GetEngineRandomSeed() };
-	const uniform_int<> random{ 0, 100 }; 
+    default_random_engine generator{ GetEngineRandomSeed() };
+    const uniform_int<> random{ 0, 100 };
 
-	const auto testLoopCount = GetTestLoopCount();
-	for (auto i = 0; i < testLoopCount; ++i)
-	{
-		auto xBegin = random(generator);
-		auto yBegin = random(generator);
-		auto xEnd = random(generator);
-		auto yEnd = random(generator);
+    const auto testLoopCount = GetTestLoopCount();
+    for (auto i = 0; i < testLoopCount; ++i)
+    {
+        auto xBegin = random(generator);
+        auto yBegin = random(generator);
+        auto xEnd = random(generator);
+        auto yEnd = random(generator);
 
-		const auto xTrackBegin = GetXTrack(xBegin,multiplier, windowSize);
-		const auto yTrackBegin = GetYTrack(yBegin, multiplier, windowSize);
-		const auto xTrackEnd = GetXTrack(xEnd, multiplier, windowSize);
-		const auto yTrackEnd = GetYTrack(yEnd, multiplier, windowSize);
+        const auto xTrackBegin = GetXTrack(xBegin, multiplier, windowSize);
+        const auto yTrackBegin = GetYTrack(yBegin, multiplier, windowSize);
+        const auto xTrackEnd = GetXTrack(xEnd, multiplier, windowSize);
+        const auto yTrackEnd = GetYTrack(yEnd, multiplier, windowSize);
 
-		const WindowPoint point{ xBegin, yBegin };
-		const VirtualKeysTypes virtualKeysTypes{ };
+        const WindowPoint point{ xBegin, yBegin };
+        const VirtualKeysTypes virtualKeysTypes{};
 
-		middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes); 
+        middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, point, virtualKeysTypes);
 
-		const auto rotate = cameraModelMiddleLayer->GetMotionObjectLocalTransform().GetRotate();
+        const auto rotate = cameraModelMiddleLayer->GetMotionObjectLocalTransform().GetRotate();
 
-		auto vecBegin = Calculate3DVector(boost::numeric_cast<float>(xTrackBegin), boost::numeric_cast<float>(yTrackBegin));
-		auto vecEnd = Calculate3DVector(boost::numeric_cast<float>(xTrackEnd), boost::numeric_cast<float>(yTrackEnd));
+        const auto vecBegin = Calculate3DVector(boost::numeric_cast<float>(xTrackBegin), boost::numeric_cast<float>(yTrackBegin));
+        const auto vecEnd = Calculate3DVector(boost::numeric_cast<float>(xTrackEnd), boost::numeric_cast<float>(yTrackEnd));
 
-		auto axis = Cross(vecBegin, vecEnd);
-		const auto dot = Dot(vecBegin, vecEnd);
-		auto angle = 0.0f;
-		if (!axis.IsZero())
-		{
-			axis.Normalize();
-			angle = Mathematics::FloatMath::ACos(dot);
-		}
-		else
-		{
-			if (dot < 0.0f)
-			{
-				auto invLength = Mathematics::FloatMath::InvSqrt(boost::numeric_cast<float>(xBegin * xBegin + yBegin * yBegin));
-				axis[0] = yTrackBegin * invLength;
-				axis[1] = -xTrackBegin * invLength;
-				axis[2] = 0.0f;
-				angle = Mathematics::FloatMath::GetPI();
-			}
-			else
-			{
-				axis = AVectorf::GetUnitX();
-				angle = 0.0f;
-			}
-		}
+        auto axis = Cross(vecBegin, vecEnd);
+        const auto dot = Dot(vecBegin, vecEnd);
+        auto angle = 0.0f;
+        if (!axis.IsZero())
+        {
+            axis.Normalize();
+            angle = Mathematics::MathF::ACos(dot);
+        }
+        else
+        {
+            if (dot < 0.0f)
+            {
+                auto invLength = Mathematics::MathF::InvSqrt(boost::numeric_cast<float>(xBegin * xBegin + yBegin * yBegin));
+                axis[0] = yTrackBegin * invLength;
+                axis[1] = -xTrackBegin * invLength;
+                axis[2] = 0.0f;
+                angle = Mathematics::MathF::GetPI();
+            }
+            else
+            {
+                axis = AVectorf::GetUnitX();
+                angle = 0.0f;
+            }
+        }
 
-		auto worldAxis = axis[0] * cameraModelMiddleLayer->GetCameraDirectionVector() + axis[1] * cameraModelMiddleLayer->GetCameraUpVector() + axis[2] * cameraModelMiddleLayer->GetCameraRightVector();
+        auto worldAxis = axis[0] * cameraModelMiddleLayer->GetCameraDirectionVector() + axis[1] * cameraModelMiddleLayer->GetCameraUpVector() + axis[2] * cameraModelMiddleLayer->GetCameraRightVector();
 
-		const Matrixf trackRotate{ worldAxis, angle };
+        const Matrixf trackRotate{ worldAxis, angle };
 
-		auto localRotate = trackRotate * rotate;
+        auto localRotate = trackRotate * rotate;
 
-		localRotate.Orthonormalize();
+        localRotate.Orthonormalize();
 
-		middleLayer->Motion(WindowPoint{ xEnd, yEnd }, VirtualKeysTypes{ boost::numeric_cast<System::WindowWParam>(WindowApplicationTrait::MouseModifiers::sm_ModifierLeftButton) });
+        middleLayer->Motion(WindowPoint{ xEnd, yEnd }, VirtualKeysTypes{ boost::numeric_cast<System::WindowsWParam>(WindowApplicationTrait::MouseModifiers::modifierLeftButton) });
 
-		MatrixTest(localRotate, cameraModelMiddleLayer->GetMotionObjectLocalTransform().GetRotate(), __func__, i);
-	}
+        MatrixTest(localRotate, cameraModelMiddleLayer->GetMotionObjectLocalTransform().GetRotate(), __func__, i);
+    }
 
-	ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
-	cameraModelMiddleLayer->Terminate();
+    ASSERT_TRUE(cameraModelMiddleLayer->Destroy());
+    cameraModelMiddleLayer->Terminate();
 
-	ASSERT_TRUE(middleLayer->Destroy());
-	middleLayer->Terminate();
+    ASSERT_TRUE(middleLayer->Destroy());
+    middleLayer->Terminate();
 }

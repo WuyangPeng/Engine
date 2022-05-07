@@ -7,12 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Imagics", "Imagics\Imagics.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImagicsTesting", "..\..\..\EngineTesting\EngineWindows\Imagics\ImagicsTesting\ImagicsTesting.vcxproj", "{538459E3-A187-4D73-BFFC-B7F103F4CEB1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DE9307E1-3F2E-40E2-9BD0-736E5332A266} = {DE9307E1-3F2E-40E2-9BD0-736E5332A266}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImagicsToolset", "..\..\..\Assist\AssistWindows\Toolset\Imagics\ImagicsToolset\ImagicsToolset.vcxproj", "{5AA0E793-D86D-44D2-8BBB-CF11DE87A842}"
 	ProjectSection(ProjectDependencies) = postProject

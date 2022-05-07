@@ -62,11 +62,11 @@ void Framework::VirtualKeysTypesTesting
 		const auto isRightMouseDown = (random(generator) == 1 ? true : false);
 		const auto isShiftKeyDown = (random(generator) == 1 ? true : false);
 
-		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::sm_ModifierControl, isCtrlKeyDown);
-		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::sm_ModifierLeftButton, isLeftMouseDown);
-		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::sm_ModifierMiddleButton, isMiddleMouseDown);
-		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::sm_ModifierRightButton, isRightMouseDown);
-		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::sm_ModifierShift, isShiftKeyDown);
+		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierControl, isCtrlKeyDown);
+		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierLeftButton, isLeftMouseDown);
+		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierMiddleButton, isMiddleMouseDown);
+		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierRightButton, isRightMouseDown);
+		wParam = RandomParam(wParam, WindowApplicationTrait::MouseModifiers::modifierShift, isShiftKeyDown);
 
 		const TestingType virtualKeys{ wParam };
 
@@ -78,8 +78,8 @@ void Framework::VirtualKeysTypesTesting
 	}
 }
 
-System::WindowWParam Framework::VirtualKeysTypesTesting
-	::RandomParam(System::WindowWParam wParam, int mouseModifiers, bool isDown) noexcept
+System::WindowsWParam Framework::VirtualKeysTypesTesting
+	::RandomParam(System::WindowsWParam wParam, int mouseModifiers, bool isDown) noexcept
 {
 	if (isDown)
 	{
@@ -121,27 +121,27 @@ void Framework::VirtualKeysTypesTesting
 
 		virtualKeys.SetModifiers(modifiers);
 
-		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierControl));
+		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
 		ASSERT_FALSE(virtualKeys.IsLeftMouseDown());
 		ASSERT_FALSE(virtualKeys.IsMiddleMouseDown());
 		ASSERT_FALSE(virtualKeys.IsRightMouseDown());
-		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierShift));
+		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
 
 		virtualKeys.SetMouseButtonsTypes(button);
 
-		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierControl));
-		ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierLeftButton));
-		ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierMiddleButton));
-		ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierRightButton));
-		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierShift));
+		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
+		ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierLeftButton));
+		ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierMiddleButton));
+		ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierRightButton));
+		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
 
 		virtualKeys.ClearMouseButtonsTypes();
 
-		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierControl));
+		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
 		ASSERT_FALSE(virtualKeys.IsLeftMouseDown());
 		ASSERT_FALSE(virtualKeys.IsMiddleMouseDown());
 		ASSERT_FALSE(virtualKeys.IsRightMouseDown());
-		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierShift));
+		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
 
 		virtualKeys.ClearKeyDownTypes();
 
@@ -154,18 +154,18 @@ void Framework::VirtualKeysTypesTesting
 		virtualKeys.SetMouseButtonsTypes(button);
 
 		ASSERT_FALSE(virtualKeys.IsCtrlKeyDown());
-		ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierLeftButton));
-		ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierMiddleButton));
-		ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierRightButton));
+		ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierLeftButton));
+		ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierMiddleButton));
+		ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierRightButton));
 		ASSERT_FALSE(virtualKeys.IsShiftKeyDown());
 
 		virtualKeys.SetModifiers(modifiers);
 
-		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierControl));
-		ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierLeftButton));
-		ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierMiddleButton));
-		ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::sm_ModifierRightButton));
-		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::sm_ModifierShift));
+		ASSERT_EQUAL(virtualKeys.IsCtrlKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierControl));
+		ASSERT_EQUAL(virtualKeys.IsLeftMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierLeftButton));
+		ASSERT_EQUAL(virtualKeys.IsMiddleMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierMiddleButton));
+		ASSERT_EQUAL(virtualKeys.IsRightMouseDown(), IsButtonDown(button, GlutApplicationTrait::MouseModifiers::modifierRightButton));
+		ASSERT_EQUAL(virtualKeys.IsShiftKeyDown(), IsKeyDown(modifiers, GlutApplicationTrait::MouseModifiers::modifierShift));
 	}
 }
 
@@ -174,11 +174,11 @@ int Framework::VirtualKeysTypesTesting
 {
 	if (keyDown % 2 == 0)
 	{
-		return GlutApplicationTrait::MouseModifiers::sm_ModifierControl;
+		return GlutApplicationTrait::MouseModifiers::modifierControl;
 	}
 	else
 	{
-		return GlutApplicationTrait::MouseModifiers::sm_ModifierShift;
+		return GlutApplicationTrait::MouseModifiers::modifierShift;
 	}
 }
 
@@ -188,11 +188,11 @@ int Framework::VirtualKeysTypesTesting
 	switch (mouseDown % 3)
 	{
 	case 0:
-		return GlutApplicationTrait::MouseModifiers::sm_ModifierLeftButton;
+		return GlutApplicationTrait::MouseModifiers::modifierLeftButton;
 	case 1:
-		return GlutApplicationTrait::MouseModifiers::sm_ModifierMiddleButton;
+		return GlutApplicationTrait::MouseModifiers::modifierMiddleButton;
 	default:
-		return GlutApplicationTrait::MouseModifiers::sm_ModifierRightButton;
+		return GlutApplicationTrait::MouseModifiers::modifierRightButton;
 	} 
 }
 

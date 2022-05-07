@@ -1,34 +1,42 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 15:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 14:27)
 
 #ifndef PHYSICS_COLLISION_DETECTION_COLLISION_GROUP_DETAIL_H
 #define PHYSICS_COLLISION_DETECTION_COLLISION_GROUP_DETAIL_H
 
 #include "CollisionGroup.h"
+#include "CollisionRecordDetail.h"
+#include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 
-template <class MeshSmartPointer, class Bound>
-Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::CollisionGroup ()
+template <typename MeshSharedPointer, class Bound>
+Physics::CollisionGroup<MeshSharedPointer, Bound>::CollisionGroup() noexcept
+    : records{}
 {
+    PHYSICS_SELF_CLASS_IS_VALID_1;
 }
 
-template <class MeshSmartPointer, class Bound>
-Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::~CollisionGroup ()
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename MeshSharedPointer, typename Bound>
+bool Physics::CollisionGroup<MeshSharedPointer, Bound>::IsValid() const noexcept
 {
-    
+    return true;
 }
 
-template <class MeshSmartPointer, class Bound>
-bool Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::Add (std::shared_ptr<CollisionRecord<MeshSmartPointer,Bound> >  record)
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename MeshSharedPointer, class Bound>
+bool Physics::CollisionGroup<MeshSharedPointer, Bound>::Add(const std::shared_ptr<CollisionRecord<MeshSharedPointer, Bound>>& record)
 {
-    auto rec = mRecords.begin();
-	auto end = mRecords.end();
-    for (; rec != end; ++rec)
+    PHYSICS_CLASS_IS_VALID_1;
+
+    for (auto rec = records.begin(); rec != records.end(); ++rec)
     {
         if (record == *rec)
         {
@@ -36,21 +44,20 @@ bool Physics::CollisionGroup<MeshSmartPointer, Bound>
         }
     }
 
-    mRecords.push_back(record);
+    records.emplace_back(record);
     return true;
 }
 
-template <class MeshSmartPointer, class Bound>
-bool Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::Remove (std::shared_ptr<CollisionRecord<MeshSmartPointer,Bound> >  record)
+template <typename MeshSharedPointer, class Bound>
+bool Physics::CollisionGroup<MeshSharedPointer, Bound>::Remove(const std::shared_ptr<CollisionRecord<MeshSharedPointer, Bound>>& record) noexcept
 {
-	auto rec = mRecords.begin();
-	auto end = mRecords.end();
-    for (; rec != end; ++rec)
+    PHYSICS_CLASS_IS_VALID_1;
+
+    for (auto rec = records.begin(); rec != records.end(); ++rec)
     {
         if (record == *rec)
         {
-            mRecords.erase(rec);
+            records.erase(rec);
             return true;
         }
     }
@@ -58,76 +65,72 @@ bool Physics::CollisionGroup<MeshSmartPointer, Bound>
     return false;
 }
 
-template <class MeshSmartPointer, class Bound>
-void Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::TestIntersection ()
+template <typename MeshSharedPointer, class Bound>
+void Physics::CollisionGroup<MeshSharedPointer, Bound>::TestIntersection()
 {
-    // Objects are assumed to be stationary, compare all pairs.
-    const int numRecords = (int)mRecords.size();
-    for (int i0 = 0; i0 < numRecords; ++i0)
+    PHYSICS_CLASS_IS_VALID_1;
+
+    const auto numRecords = boost::numeric_cast<int>(records.size());
+    for (auto i0 = 0; i0 < numRecords; ++i0)
     {
-        CollisionRecordPtr record0 = mRecords[i0];
-        for (int i1 = i0 + 1; i1 < numRecords; ++i1)
+        auto record0 = records.at(i0);
+        for (auto i1 = i0 + 1; i1 < numRecords; ++i1)
         {
-            CollisionRecordPtr record1 = mRecords[i1];
-            TestIntersection(*record0,*record1);
+            auto record1 = records.at(i1);
+            Physics::TestIntersection(*record0, *record1);
         }
     }
 }
 
-template <class MeshSmartPointer, class Bound>
-void Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::FindIntersection ()
+template <typename MeshSharedPointer, class Bound>
+void Physics::CollisionGroup<MeshSharedPointer, Bound>::FindIntersection()
 {
-    // Objects are assumed to be stationary, compare all pairs.
-    const int numRecords = (int)mRecords.size();
-    for (int i0 = 0; i0 < numRecords; ++i0)
+    PHYSICS_CLASS_IS_VALID_1;
+
+    const auto numRecords = boost::numeric_cast<int>(records.size());
+    for (auto i0 = 0; i0 < numRecords; ++i0)
     {
-        CollisionRecordPtr record0 = mRecords[i0];
-        for (int i1 = i0 + 1; i1 < numRecords; ++i1)
+        auto record0 = records.at(i0);
+        for (auto i1 = i0 + 1; i1 < numRecords; ++i1)
         {
-            CollisionRecordPtr record1 = mRecords[i1];
-            FindIntersection(*record0,*record1);
+            auto record1 = records.at(i1);
+            Physics::FindIntersection(*record0, *record1);
         }
     }
 }
 
-template <class MeshSmartPointer, class Bound>
-void Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::TestIntersection (float tmax)
+template <typename MeshSharedPointer, class Bound>
+void Physics::CollisionGroup<MeshSharedPointer, Bound>::TestIntersection(float tmax)
 {
-    // Objects are assumed to be moving, compare all pairs.
-    const int numRecords = (int)mRecords.size();
-    for (int i0 = 0; i0 < numRecords; i0++)
+    PHYSICS_CLASS_IS_VALID_1;
+
+    const auto numRecords = boost::numeric_cast<int>(records.size());
+    for (auto i0 = 0; i0 < numRecords; i0++)
     {
-        CollisionRecordPtr record0 = mRecords[i0];
-        for (int i1 = i0 + 1; i1 < numRecords; ++i1)
+        auto record0 = records.at(i0);
+        for (auto i1 = i0 + 1; i1 < numRecords; ++i1)
         {
-            CollisionRecordPtr record1 = mRecords[i1];
-			TestIntersection(*record0,*record1,tmax);
-            if (record0->GetVelocity() || record1->GetVelocity())
-            {
-                record0->TestIntersection(tmax, *record1);
-            }
+            auto record1 = records.at(i1);
+            Physics::TestIntersection(*record0, *record1, tmax);
         }
     }
 }
 
-template <class MeshSmartPointer, class Bound>
-void Physics::CollisionGroup<MeshSmartPointer, Bound>
-	::FindIntersection (float tmax)
+template <typename MeshSharedPointer, class Bound>
+void Physics::CollisionGroup<MeshSharedPointer, Bound>::FindIntersection(float tmax)
 {
-    // Objects are assumed to be moving, compare all pairs.
-    const int numRecords = (int)mRecords.size();
-    for (int i0 = 0; i0 < numRecords; ++i0)
+    PHYSICS_CLASS_IS_VALID_1;
+
+    const auto numRecords = boost::numeric_cast<int>(records.size());
+    for (auto i0 = 0; i0 < numRecords; ++i0)
     {
-        CollisionRecordPtr record0 = mRecords[i0];
-        for (int i1 = i0 + 1; i1 < numRecords; ++i1)
+        auto record0 = records.at(i0);
+        for (auto i1 = i0 + 1; i1 < numRecords; ++i1)
         {
-            CollisionRecordPtr record1 = mRecords[i1];
-            FindIntersection(*record0,*record1,tmax);
+            auto record1 = records.at(i1);
+            Physics::FindIntersection(*record0, *record1, tmax);
         }
     }
 }
 
-#endif // PHYSICS_COLLISION_DETECTION_COLLISION_GROUP_DETAIL_H
+#endif  // PHYSICS_COLLISION_DETECTION_COLLISION_GROUP_DETAIL_H

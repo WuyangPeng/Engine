@@ -1,32 +1,33 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 17:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/13 16:53)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SingleShaderConstantsData.h"
 #include "Detail/SingleShaderConstantsDataImpl.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+
 using std::make_shared;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
+
 Rendering::SingleShaderConstantsData::SingleShaderConstantsData(const string& name, int numRegistersUsed)
     : impl{ name, numRegistersUsed }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SingleShaderConstantsData::SingleShaderConstantsData()
+Rendering::SingleShaderConstantsData::SingleShaderConstantsData(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -40,11 +41,11 @@ void Rendering::SingleShaderConstantsData::SetConstant(const string& name, int n
 
     return impl->SetConstant(name, numRegistersUsed);
 }
+
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SingleShaderConstantsData)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData, GetConstantName, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData, GetConstantName, string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SingleShaderConstantsData, GetNumRegistersUsed, int)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderConstantsData, Load, CoreTools::BufferSource&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderConstantsData, Save, CoreTools::BufferTarget&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderConstantsData, GetStreamingSize, int)
-#include STSTEM_WARNING_POP

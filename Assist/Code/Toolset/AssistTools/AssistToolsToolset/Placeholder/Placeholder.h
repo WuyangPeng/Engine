@@ -7,23 +7,23 @@
 #ifndef ASSIST_TOOLS_TOOLSET_PLACEHOLDER_H
 #define ASSIST_TOOLS_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/AssistTools/AssistToolsToolset/AssistToolsToolsetDll.h" 
+#include "Toolset/AssistTools/AssistToolsToolset/AssistToolsToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace AssistToolsToolset
 {
-	 class ASSIST_TOOLS_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class ASSIST_TOOLS_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // ASSIST_TOOLS_TOOLSET_PLACEHOLDER_H
+#endif  // ASSIST_TOOLS_TOOLSET_PLACEHOLDER_H

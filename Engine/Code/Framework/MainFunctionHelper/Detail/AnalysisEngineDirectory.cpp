@@ -1,115 +1,109 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/29 11:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 15:18)
 
 #include "Framework/FrameworkExport.h"
 
-#include "AnalysisEngineDirectory.h" 
+#include "AnalysisEngineDirectory.h"
 #include "DirectoryDefaultName.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
-using std::string;
 using std::exception;
+using std::string;
 
-Framework::AnalysisEngineDirectory
-	::AnalysisEngineDirectory(const string& jsonName)
-	: m_BasicTree{ }, m_ResourceTree{ }, m_ConfigurationTree{ }, m_Result{ }
+Framework::AnalysisEngineDirectory::AnalysisEngineDirectory(const string& jsonName)
+    : basicTree{}, resourceTree{}, configurationTree{}, result{}
 {
-	if (!jsonName.empty())
-	{
-		Analysis(jsonName);
-	}
-	
-	m_Result.SetDefaultDirectory();
+    if (!jsonName.empty())
+    {
+        Analysis(jsonName);
+    }
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    result.SetDefaultDirectory();
+
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::Analysis(const string& jsonName)
+void Framework::AnalysisEngineDirectory::Analysis(const string& jsonName)
 {
-	EXCEPTION_TRY
-	{
-		read_json(jsonName, m_BasicTree);
-		AnalysisBase();
-		AnalysisRendering();
-	}
-	EXCEPTION_STD_EXCEPTION_CATCH(Framework)
+    EXCEPTION_TRY
+    {
+        read_json(jsonName, basicTree);
+        AnalysisBase();
+        AnalysisRendering();
+    }
+    EXCEPTION_STD_EXCEPTION_CATCH(Framework)
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::AnalysisBase()
+void Framework::AnalysisEngineDirectory::AnalysisBase()
 {
-	for (auto index = AnalysisDirectory::Resource; index <= AnalysisDirectory::Configuration; ++index)
-	{
-		InsertResult(RenderingDirectory::Null, index);
-	}
+    for (auto index = AnalysisDirectory::Resource; index <= AnalysisDirectory::Configuration; ++index)
+    {
+        InsertResult(RenderingDirectory::Null, index);
+    }
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::AnalysisRendering()
+void Framework::AnalysisEngineDirectory::AnalysisRendering()
 {
-	for (auto index = RenderingDirectory::Default; index <= RenderingDirectory::DirectX; ++index)
-	{
-		AnalysisRendering(index);
-	}
+    for (auto index = RenderingDirectory::Default; index <= RenderingDirectory::DirectX; ++index)
+    {
+        AnalysisRendering(index);
+    }
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::AnalysisRendering(RenderingDirectory renderingDirectory)
+void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory renderingDirectory)
 {
-	EXCEPTION_TRY
-	{
-		const auto analysisDirectory = System::EnumCastUnderlying<AnalysisDirectory>(renderingDirectory);
-		const BasicTree renderingTree{ m_BasicTree.get_child(DirectoryDefaultName::GetDefaultKeyName(analysisDirectory)) };
+    EXCEPTION_TRY
+    {
+        const auto analysisDirectory = System::EnumCastUnderlying<AnalysisDirectory>(renderingDirectory);
+        const auto renderingTree = basicTree.get_child(DirectoryDefaultName::GetDefaultKeyName(analysisDirectory));
 
-		AnalysisRendering(renderingDirectory, renderingTree);
-	}
-	EXCEPTION_STD_EXCEPTION_CATCH(Framework)
+        AnalysisRendering(renderingDirectory, renderingTree);
+    }
+    EXCEPTION_STD_EXCEPTION_CATCH(Framework)
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::AnalysisRendering(RenderingDirectory renderingDirectory, const BasicTree& renderingTree)
+void Framework::AnalysisEngineDirectory::AnalysisRendering(RenderingDirectory renderingDirectory, const BasicTree& renderingTree)
 {
-	for (auto index = AnalysisDirectory::LittleEndian; index <= AnalysisDirectory::Image; ++index)
-	{
-		InsertResult(renderingDirectory, index, renderingTree);
-	}
+    for (auto index = AnalysisDirectory::LittleEndian; index <= AnalysisDirectory::Image; ++index)
+    {
+        InsertResult(renderingDirectory, index, renderingTree);
+    }
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory)
+void Framework::AnalysisEngineDirectory::InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory)
 {
-	InsertResult(renderingDirectory, analysisDirectory, m_BasicTree);
+    InsertResult(renderingDirectory, analysisDirectory, basicTree);
 }
 
 // private
-void Framework::AnalysisEngineDirectory
-	::InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory, const BasicTree& renderingTree)
+void Framework::AnalysisEngineDirectory::InsertResult(RenderingDirectory renderingDirectory, AnalysisDirectory analysisDirectory, const BasicTree& renderingTree)
 {
-	const auto defaultKey = DirectoryDefaultName::GetDefaultKeyName(analysisDirectory);
-	const auto defaultName = DirectoryDefaultName::GetDefaultName(analysisDirectory);
+    const auto defaultKey = DirectoryDefaultName::GetDefaultKeyName(analysisDirectory);
+    const auto defaultName = DirectoryDefaultName::GetDefaultName(analysisDirectory);
 
-	const auto resource = renderingTree.get(defaultKey, defaultName);
-	m_Result.InsertDirectory(renderingDirectory, analysisDirectory, resource);
+    const auto resource = renderingTree.get(defaultKey, defaultName);
+    result.InsertDirectory(renderingDirectory, analysisDirectory, resource);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, AnalysisEngineDirectory)
 
-const Framework::EngineDirectoryResult Framework::AnalysisEngineDirectory
-	::GetEngineDirectoryResult() const
+Framework::EngineDirectoryResult Framework::AnalysisEngineDirectory::GetEngineDirectoryResult() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Result;
+    return result;
 }

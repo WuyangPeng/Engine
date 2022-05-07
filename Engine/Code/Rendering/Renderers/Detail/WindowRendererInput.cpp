@@ -1,48 +1,50 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 10:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 15:35)
 
 #include "Rendering/RenderingExport.h"
 
 #include "WindowRendererInput.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26472)
-Rendering:: WindowRendererInput
-	:: WindowRendererInput() noexcept
-	:ParentType{}, m_WindowHandle{ nullptr }
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering:: WindowRendererInput
-	:: ~ WindowRendererInput()
+#include <gsl/util>
+
+Rendering::WindowRendererInput::WindowRendererInput() noexcept
+    : ParentType{}, windowHandle{ nullptr }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, WindowRendererInput)
 
-
-void Rendering:: WindowRendererInput
-	::SetWindowID(int windowID) noexcept
+void Rendering::WindowRendererInput::SetWindowID(int windowID) noexcept
 {
-	SetWindowHandle(reinterpret_cast<HWnd>(static_cast<size_t>(windowID)));
-}
+    RENDERING_CLASS_IS_VALID_9;
 
-void Rendering:: WindowRendererInput
-	::SetWindowHandle(HWnd windowID) noexcept
-{
-	m_WindowHandle  = windowID;
-}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
 
-Rendering::RendererTypes Rendering:: WindowRendererInput
-	::GetRendererType() const noexcept
-{
-	return RendererTypes::Window;
-}
+    SetWindowHandle(reinterpret_cast<HWnd>(gsl::narrow_cast<size_t>(windowID)));
+
 #include STSTEM_WARNING_POP
+}
+
+void Rendering::WindowRendererInput::SetWindowHandle(HWnd windowID) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    windowHandle = windowID;
+}
+
+Rendering::RendererTypes Rendering::WindowRendererInput::GetRendererType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return RendererTypes::Window;
+}

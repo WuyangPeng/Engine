@@ -1,60 +1,60 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 10:28)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_H
 
 #include "Framework/FrameworkDll.h"
 
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Spatial.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 FRAMEWORK_NON_COPY_EXPORT_IMPL(ObjectMotionImpl);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE ObjectMotion
-	{
-	public:
-		NON_COPY_TYPE_DECLARE(ObjectMotion);
-		using Matrix = Mathematics::MatrixF;
-		using AVector = Mathematics::AVectorF;
-		using Transform = Rendering::FloatTransform;
-		using SpatialSmartPointer = Rendering::SpatialSharedPtr;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
+    class FRAMEWORK_DEFAULT_DECLARE ObjectMotion
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(ObjectMotion);
+        using Matrix = Mathematics::MatrixF;
+        using AVector = Mathematics::AVectorF;
+        using Transform = Rendering::TransformF;
+        using SpatialSharedPtr = Rendering::SpatialSharedPtr;
+        using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
-	public:
-		explicit ObjectMotion(const SpatialSmartPointer& motionObject);
+    public:
+        explicit ObjectMotion(const SpatialSharedPtr& motionObject);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		bool MoveObject(float rotationSpeed);
-		void RotateTrackBall(const ConstCameraSmartPointer& camera);
+        NODISCARD bool MoveObject(float rotationSpeed);
+        void RotateTrackBall(const ConstCameraSharedPtr& camera);
 
-		void SetDoRoll(int value) noexcept;
-		void SetDoYaw(int value) noexcept;
-		void SetDoPitch(int value) noexcept;
-		void SetTrackBallDow(bool value) noexcept;
-		bool GetTrackBallDow() const noexcept;
+        void SetDoRoll(int value) noexcept;
+        void SetDoYaw(int value) noexcept;
+        void SetDoPitch(int value) noexcept;
+        void SetTrackBallDow(bool value) noexcept;
+        NODISCARD bool GetTrackBallDow() const noexcept;
 
-		void SetBeginTrack(float xTrack, float yTrack) noexcept;
-		void SetEndTrack(float xTrack, float yTrack) noexcept;
-		void SetSaveRotate();
+        void SetBeginTrack(float xTrack, float yTrack) noexcept;
+        void SetEndTrack(float xTrack, float yTrack) noexcept;
+        void SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
 
-		const Transform GetMotionObjectLocalTransform() const;
+        NODISCARD Transform GetMotionObjectLocalTransform() const noexcept;
 
-	private:
-                PackageType impl;
-	};
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_OBJECT_MOTION_H
-
-
-
+#endif  // FRAMEWORK_APPLICATION_OBJECT_MOTION_H

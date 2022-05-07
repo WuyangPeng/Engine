@@ -8,20 +8,19 @@
 
 #include "Example/Physics/PhysicsExample/PhysicsExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_PHYSICS_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_PHYSICS_EXAMPLE_STATIC
+#else  // BUILDING_PHYSICS_EXAMPLE_STATIC
 
-	namespace PhysicsExample
-	{
-		void StaticDllLib()
-		{
+namespace PhysicsExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_PHYSICS_EXAMPLE_STATIC
+#endif  // !BUILDING_PHYSICS_EXAMPLE_STATIC

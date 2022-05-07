@@ -7,7 +7,7 @@
 #ifndef FRAMEWORK_WINDOW_TESTING_APPLICATION_SUITE_FONT_INFORMATION_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_APPLICATION_SUITE_FONT_INFORMATION_TESTING_H
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h" 
 
 namespace Framework
@@ -17,7 +17,7 @@ namespace Framework
 	public:
 		using ClassType = FontInformationTesting;
 		using ParentType = UnitTest;
-		using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowsHWnd;
 
 	public:
 		explicit FontInformationTesting(const OStreamShared& stream, HWnd hwnd);

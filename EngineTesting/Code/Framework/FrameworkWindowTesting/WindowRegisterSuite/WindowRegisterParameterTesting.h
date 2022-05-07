@@ -8,7 +8,7 @@
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_REGISTER_SUITE_WINDOW_REGISTER_PARAMETER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h" 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace Framework
 {
@@ -17,7 +17,7 @@ namespace Framework
 	public:
 		using ClassType = WindowRegisterParameterTesting;
 		using ParentType = UnitTest;
-		using HInstance = System::WindowHInstance;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowRegisterParameterTesting(const OStreamShared& stream, HInstance instance);

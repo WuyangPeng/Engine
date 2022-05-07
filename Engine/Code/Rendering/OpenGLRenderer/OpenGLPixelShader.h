@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 20:48)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_PIXEL_SHADER_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_PIXEL_SHADER_H
@@ -10,32 +13,29 @@
 #include "Rendering/RenderingDll.h"
 
 #include "OpenGLShader.h"
-
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Shaders/PixelShader.h"
 
 namespace Rendering
 {
-	class Renderer;
+    class PdrPixelShader : public OpenGLShader
+    {
+    public:
+        using ClassType = PdrPixelShader;
+        using ParentType = OpenGLShader;
 
-	class PdrPixelShader : public OpenGLShader
-	{
-	public:
-		// Construction and destruction.
-		PdrPixelShader (Renderer* renderer, const PixelShader* pshader);
-		~PdrPixelShader ();
-		PdrPixelShader(const PdrPixelShader&) = default;
-		  PdrPixelShader& operator=(const PdrPixelShader&) = default;
-		  PdrPixelShader(PdrPixelShader&&) = default;
-		  PdrPixelShader& operator=(PdrPixelShader&&) = default;
-		  
-		// Pixel shader operations.
-		void Enable (Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters);
-		void Disable (Renderer* renderer, const PixelShader* pshader,const ShaderParameters* parameters);
+    public:
+        PdrPixelShader(Renderer* renderer, const PixelShader* pshader) noexcept;
 
-	private:
-		GLuint mShader = 0;
-	};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        void Enable(Renderer* renderer, const PixelShader* pshader, const ShaderParameters* parameters) noexcept;
+        void Disable(Renderer* renderer, const PixelShader* pshader, const ShaderParameters* parameters) noexcept;
+
+    private:
+        GLuint shader = 0;
+    };
 
 }
 
-#endif // RENDERING_OPENGL_RENDERER_OPENGL_PIXEL_SHADER_H
+#endif  // RENDERING_OPENGL_RENDERER_OPENGL_PIXEL_SHADER_H

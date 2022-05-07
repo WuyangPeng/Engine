@@ -1,214 +1,196 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/16 09:24)
 
 #include "ArtificialIntellegenceInterfaceTesting.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/AssertMacro.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h" 
-#include "Framework/MiddleLayer/NetworkManagerInterface.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
+#include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/InputManagerInterface.h"
-#include "Framework/MiddleLayer/PhysicalModellingManagerInterface.h"
 #include "Framework/MiddleLayer/MessageManagerInterface.h"
+#include "Framework/MiddleLayer/NetworkManagerInterface.h"
+#include "Framework/MiddleLayer/PhysicalModellingManagerInterface.h"
 #include "Framework/MiddleLayer/SystemManagerInterface.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
-#include "Framework/WindowProcess/VirtualKeysTypes.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
-#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
-#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
+#include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 namespace Framework
 {
-	using TestingType = ArtificialIntellegenceInterface;
+    using TestingType = ArtificialIntellegenceInterface;
 }
 
-Framework::ArtificialIntellegenceInterfaceTesting
-::ArtificialIntellegenceInterfaceTesting(const OStreamShared& stream)
-	:ParentType{ stream }
+Framework::ArtificialIntellegenceInterfaceTesting::ArtificialIntellegenceInterfaceTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ArtificialIntellegenceInterfaceTesting)
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-::DoRunUnitTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::MainTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::MiddleLayerTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::MiddleLayerTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	ASSERT_TRUE(middleLayer.PreCreate(EnvironmentDirectory{SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
-	ASSERT_TRUE(middleLayer.Initialize());
-	middleLayer.PreIdle();
-	ASSERT_TRUE(middleLayer.Create());	
-	ASSERT_TRUE(middleLayer.Paint());
-	ASSERT_TRUE(middleLayer.Move(WindowPoint()));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide,WindowSize()));
-	ASSERT_TRUE(middleLayer.KeyDown(0,WindowPoint()));
-	ASSERT_TRUE(middleLayer.KeyUp(0,WindowPoint()));
-	ASSERT_TRUE(middleLayer.SpecialKeyDown (0,WindowPoint()));
-	ASSERT_TRUE(middleLayer.SpecialKeyUp (0,WindowPoint()));
-	ASSERT_TRUE(middleLayer.MouseClick(MouseButtonsTypes::LeftButton,MouseStateTypes::MouseDown,WindowPoint(),VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer.Motion(WindowPoint(),VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer.PassiveMotion(WindowPoint()));
-	ASSERT_TRUE(middleLayer.MouseWheel(0,WindowPoint(),VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer.Idle(0));
+    ASSERT_TRUE(middleLayer.PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
+    ASSERT_TRUE(middleLayer.Initialize());
+    middleLayer.PreIdle();
+    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.Paint());
+    ASSERT_TRUE(middleLayer.Move(WindowPoint()));
+    ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, WindowSize()));
+    ASSERT_TRUE(middleLayer.KeyDown(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer.KeyUp(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer.SpecialKeyDown(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer.SpecialKeyUp(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer.MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer.Motion(WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer.PassiveMotion(WindowPoint()));
+    ASSERT_TRUE(middleLayer.MouseWheel(0, WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer.Idle(0));
 
-	ASSERT_TRUE(middleLayer.Destroy());
-	middleLayer.Terminate();	
+    ASSERT_TRUE(middleLayer.Destroy());
+    middleLayer.Terminate();
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetMiddleLayerTest()
-{	 
-	ASSERT_NOT_THROW_EXCEPTION_0(SetNetworkManagerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetInputManagerTest);
-	ASSERT_THROW_EXCEPTION_0(SetObjectLogicManagerExceptionTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetPhysicalModellingManagerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetMessageManagerTest);
-	ASSERT_THROW_EXCEPTION_0(SetEventManagerExceptionTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetSystemManagerTest);
-	ASSERT_THROW_EXCEPTION_0(SetResourceManagerExceptionTest);
-	ASSERT_THROW_EXCEPTION_0(SetAudioManagerExceptionTest);
-	ASSERT_THROW_EXCEPTION_0(SetCameraSystemsManagerExceptionTest);
-	ASSERT_THROW_EXCEPTION_0(SetRenderingManagerExceptionTest);
-	ASSERT_THROW_EXCEPTION_0(SetGUIManagerExceptionTest);
+void Framework::ArtificialIntellegenceInterfaceTesting::SetMiddleLayerTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(SetNetworkManagerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetInputManagerTest);
+    ASSERT_THROW_EXCEPTION_0(SetObjectLogicManagerExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetPhysicalModellingManagerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetMessageManagerTest);
+    ASSERT_THROW_EXCEPTION_0(SetEventManagerExceptionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetSystemManagerTest);
+    ASSERT_THROW_EXCEPTION_0(SetResourceManagerExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(SetAudioManagerExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(SetCameraSystemsManagerExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(SetRenderingManagerExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(SetGUIManagerExceptionTest);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetNetworkManagerTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetNetworkManagerTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr networkManager(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr networkManager(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetNetworkManager(networkManager);
+    middleLayer.SetNetworkManager(networkManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetInputManagerTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetInputManagerTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr inputManager(std::make_shared < InputManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr inputManager(std::make_shared<InputManagerInterface>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetInputManager(inputManager);
+    middleLayer.SetInputManager(inputManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetObjectLogicManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetObjectLogicManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr objectLogicManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr objectLogicManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetObjectLogicManager(objectLogicManager);
+    middleLayer.SetObjectLogicManager(objectLogicManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetPhysicalModellingManagerTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetPhysicalModellingManagerTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr physicalModellingManager(std::make_shared < PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr physicalModellingManager(std::make_shared<PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetPhysicalModellingManager(physicalModellingManager);
+    middleLayer.SetPhysicalModellingManager(physicalModellingManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetMessageManagerTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetMessageManagerTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr messageManager(std::make_shared < MessageManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr messageManager(std::make_shared<MessageManagerInterface>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetMessageManager(messageManager);
+    middleLayer.SetMessageManager(messageManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetEventManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetEventManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr eventManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr eventManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetEventManager(eventManager);
+    middleLayer.SetEventManager(eventManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetSystemManagerTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetSystemManagerTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr systemManager(std::make_shared < SystemManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr systemManager(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetSystemManager(systemManager);
+    middleLayer.SetSystemManager(systemManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetResourceManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetResourceManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr resourceManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr resourceManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetResourceManager(resourceManager);
+    middleLayer.SetResourceManager(resourceManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetAudioManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetAudioManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr audioManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr audioManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetAudioManager(audioManager);
+    middleLayer.SetAudioManager(audioManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetCameraSystemsManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetCameraSystemsManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr cameraSystemsManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr cameraSystemsManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetCameraSystemsManager(cameraSystemsManager);
+    middleLayer.SetCameraSystemsManager(cameraSystemsManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetRenderingManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetRenderingManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr renderingManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr renderingManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetRenderingManager(renderingManager);
+    middleLayer.SetRenderingManager(renderingManager);
 }
 
-void Framework::ArtificialIntellegenceInterfaceTesting
-	::SetGUIManagerExceptionTest()
+void Framework::ArtificialIntellegenceInterfaceTesting::SetGUIManagerExceptionTest()
 {
-	TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows);
 
-	MiddleLayerInterfaceSharedPtr guiManager(std::make_shared < TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr guiManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
 
-	middleLayer.SetGUIManager(guiManager);
+    middleLayer.SetGUIManager(guiManager);
 }

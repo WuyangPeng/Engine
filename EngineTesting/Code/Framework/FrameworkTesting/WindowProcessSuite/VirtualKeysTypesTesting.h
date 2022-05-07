@@ -31,7 +31,7 @@ namespace Framework
 		void GlutKeysTest();
 		void SetModifiersTest();
 
-		static System::WindowWParam RandomParam(System::WindowWParam wParam,int mouseModifiers, bool isDown) noexcept;
+		static System::WindowsWParam RandomParam(System::WindowsWParam wParam,int mouseModifiers, bool isDown) noexcept;
 
 		constexpr static bool IsKeyDown(int key, int mouseModifiers) noexcept
 		{

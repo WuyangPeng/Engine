@@ -10,15 +10,16 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
+using namespace std::literals;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateHelper)
 
 void AssistTools::GenerateTemplateHelperTesting
-    ::MainTest()
+   ::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateHelperH.txt"), SYSTEM_TEXT(".h"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateHelperCpp.txt"), SYSTEM_TEXT(".cpp"));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateHelperH.txt"s), SYSTEM_TEXT(".h"s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateHelperCpp.txt"s), SYSTEM_TEXT(".cpp"s));
 }
 
 void AssistTools::GenerateTemplateHelperTesting

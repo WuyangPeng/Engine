@@ -1,262 +1,242 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 17:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 18:17)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderFloatImpl.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
-#include "Rendering/DataTypes/ColourDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
+#include "Rendering/DataTypes/ColourDetail.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26446)
-
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::ShaderFloatImpl
-	::ShaderFloatImpl()
-	:m_Data{},m_AllowUpdater{ true }
+Rendering::ShaderFloatImpl::ShaderFloatImpl() noexcept
+    : data{}, allowUpdater{ true }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderFloatImpl
-	::ShaderFloatImpl( int numRegisters )
-	:m_Data{},m_AllowUpdater{ true }
+Rendering::ShaderFloatImpl::ShaderFloatImpl(int numRegisters)
+    : data{}, allowUpdater{ true }
 {
-	SetNumRegisters(numRegisters);
+    SetNumRegisters(numRegisters);
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderFloatImpl
-	::ShaderFloatImpl(const FloatVector& data)
-	:m_Data{ data }, m_AllowUpdater{ true }
+Rendering::ShaderFloatImpl::ShaderFloatImpl(const FloatVector& data)
+    : data{ data }, allowUpdater{ true }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::ShaderFloatImpl
-	::IsValid() const noexcept
+
+bool Rendering::ShaderFloatImpl::IsValid() const noexcept
 {
-	if (m_Data.size() % sm_FloatingPointSize == 0)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-
-int Rendering::ShaderFloatImpl
-	::GetNumRegisters() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return boost::numeric_cast<int>(m_Data.size() / sm_FloatingPointSize);
+    if (data.size() % floatingPointSize == 0)
+        return true;
+    else
+        return false;
 }
 
-void Rendering::ShaderFloatImpl
-	::SetNumRegisters( int numRegisters )
-{
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(0 < numRegisters, "寄存器的数量必须为正数。\n");
+#endif  // OPEN_CLASS_INVARIANT
 
-	m_Data.resize(numRegisters * sm_FloatingPointSize);
+int Rendering::ShaderFloatImpl::GetNumRegisters() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return boost::numeric_cast<int>(data.size() / floatingPointSize);
 }
 
-const float* Rendering::ShaderFloatImpl
-	::GetData() const
+void Rendering::ShaderFloatImpl::SetNumRegisters(int numRegisters)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(!m_Data.empty(),"寄存器的数量为零。\n");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(0 < numRegisters, "寄存器的数量必须为正数。\n");
 
-	return &m_Data[0];
+    const auto size = numRegisters * floatingPointSize;
+    data.resize(size);
 }
 
-float* Rendering::ShaderFloatImpl
-	::GetData()
+const float* Rendering::ShaderFloatImpl::GetData() const
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(!data.empty(), "寄存器的数量为零。\n");
 
-	return NON_CONST_MEMBER_CALL_CONST_MEMBER(float*,GetData);
+    return data.data();
 }
 
-void Rendering::ShaderFloatImpl
-	::SetRegister( int index, const FloatVector& data )
+float* Rendering::ShaderFloatImpl::GetData()
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
-	RENDERING_ASSERTION_0(data.size() == 4, "传入的值大小错误！\n");
+    RENDERING_CLASS_IS_VALID_1;
 
-	for(auto targetIndex = 0;targetIndex < sm_FloatingPointSize;++targetIndex)
-	{
-		m_Data[sm_FloatingPointSize * index + targetIndex] = data[targetIndex];
-	}	 
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(float*, GetData);
 }
 
-void Rendering::ShaderFloatImpl
-	::SetRegister(int index, const AVector& vector)
+void Rendering::ShaderFloatImpl::SetRegister(int index, const FloatVector& aData)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
+    RENDERING_ASSERTION_0(aData.size() == 4, "传入的值大小错误！\n");
 
-	for (auto targetIndex = 0; targetIndex < sm_FloatingPointSize - 1; ++targetIndex)
-	{
-		m_Data[sm_FloatingPointSize * index + targetIndex] = vector[targetIndex];
-	}
-
-	m_Data[sm_FloatingPointSize * index + sm_FloatingPointSize - 1] = 0.0f;
+    for (auto targetIndex = 0; targetIndex < floatingPointSize; ++targetIndex)
+    {
+        const auto dataIndex = floatingPointSize * index + targetIndex;
+        data.at(dataIndex) = aData.at(targetIndex);
+    }
 }
 
-void Rendering::ShaderFloatImpl
-	::SetRegister(int index, const APoint& point)
+void Rendering::ShaderFloatImpl::SetRegister(int index, const AVector& vector)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
 
-	for (auto targetIndex = 0; targetIndex < sm_FloatingPointSize - 1; ++targetIndex)
-	{
-		m_Data[sm_FloatingPointSize * index + targetIndex] = point[targetIndex];
-	}
+    for (auto targetIndex = 0; targetIndex < floatingPointSize - 1; ++targetIndex)
+    {
+        const auto dataIndex = floatingPointSize * index + targetIndex;
+        data.at(dataIndex) = vector[targetIndex];
+    }
 
-	m_Data[sm_FloatingPointSize * index + sm_FloatingPointSize - 1] = 1.0f;
+    const auto dataIndex = floatingPointSize * index + floatingPointSize - 1;
+    data.at(dataIndex) = 0.0f;
 }
 
-void Rendering::ShaderFloatImpl
-	::SetRegister( int index, const Colour& colour )
+void Rendering::ShaderFloatImpl::SetRegister(int index, const APoint& point)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
 
-	m_Data[sm_FloatingPointSize * index] = colour.GetRed();
-	m_Data[sm_FloatingPointSize * index + 1] = colour.GetGreen();
-	m_Data[sm_FloatingPointSize * index + 2] = colour.GetBlue();
-	m_Data[sm_FloatingPointSize * index + 3] = colour.GetAlpha();
+    for (auto targetIndex = 0; targetIndex < floatingPointSize - 1; ++targetIndex)
+    {
+        const auto dataIndex = floatingPointSize * index + targetIndex;
+        data.at(dataIndex) = point[targetIndex];
+    }
+
+    const auto dataIndex = floatingPointSize * index + floatingPointSize - 1;
+    data.at(dataIndex) = 1.0f;
 }
 
-void Rendering::ShaderFloatImpl
-	::SetRegisters( const Matrix& matrix )
+void Rendering::ShaderFloatImpl::SetRegister(int index, const Colour& colour)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
 
-	RENDERING_ASSERTION_0(sm_FloatingPointSize == GetNumRegisters(), "无效寄存器！\n");
-
-	for (auto outer = 0;outer < sm_FloatingPointSize;++outer)
-	{
-		for (auto inner = 0;inner < sm_FloatingPointSize;++inner)
-		{
-			m_Data[sm_FloatingPointSize * outer + inner] =  matrix(outer,inner);
-		}
-	}
+    data.at(floatingPointSize * boost::numeric_cast<size_t>(index)) = colour.GetRed();
+    data.at(floatingPointSize * boost::numeric_cast<size_t>(index) + 1) = colour.GetGreen();
+    data.at(floatingPointSize * boost::numeric_cast<size_t>(index) + 2) = colour.GetBlue();
+    data.at(floatingPointSize * boost::numeric_cast<size_t>(index) + 3) = colour.GetAlpha();
 }
 
-void Rendering::ShaderFloatImpl
-	::SetRegisters( const FloatVector& data )
+void Rendering::ShaderFloatImpl::SetRegisters(const Matrix& matrix)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(data.size() == m_Data.size(), "传入的值大小错误！\n");
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Data = data;
+    RENDERING_ASSERTION_0(floatingPointSize == GetNumRegisters(), "无效寄存器！\n");
+
+    for (auto outer = 0; outer < floatingPointSize; ++outer)
+    {
+        for (auto inner = 0; inner < floatingPointSize; ++inner)
+        {
+            const auto dataIndex = floatingPointSize * outer + inner;
+            data.at(dataIndex) = matrix(outer, inner);
+        }
+    }
 }
 
-const Rendering::ShaderFloatImpl::FloatVector Rendering::ShaderFloatImpl
-	::GetRegister( int index ) const
+void Rendering::ShaderFloatImpl::SetRegisters(const FloatVector& aData)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(data.size() == aData.size(), "传入的值大小错误！\n");
 
-	FloatVector data{ m_Data.begin() + sm_FloatingPointSize * index, m_Data.begin() + sm_FloatingPointSize * index + sm_FloatingPointSize };
-
-	return data; 
+    data = aData;
 }
 
-const Rendering::ShaderFloatImpl::FloatVector Rendering::ShaderFloatImpl
-	::GetRegisters() const
+Rendering::ShaderFloatImpl::FloatVector Rendering::ShaderFloatImpl::GetRegister(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumRegisters(), "无效寄存器！\n");
 
-	return m_Data;
+    const auto beginIndex = floatingPointSize * index;
+    const auto endIndex = floatingPointSize * index + floatingPointSize;
+    FloatVector result{ data.begin() + beginIndex, data.begin() + endIndex };
+
+    return result;
 }
 
-const float& Rendering::ShaderFloatImpl
-	::operator[]( int index ) const
+Rendering::ShaderFloatImpl::FloatVector Rendering::ShaderFloatImpl::GetRegisters() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Data.size()), "无效索引！\n");
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Data[index];
+    return data;
 }
 
-float& Rendering::ShaderFloatImpl
-	::operator[]( int index )
+const float& Rendering::ShaderFloatImpl::operator[](int index) const
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(data.size()), "无效索引！\n");
 
-	return OPERATOR_SQUARE_BRACKETS(float,index);
+    return data.at(index);
 }
 
-void Rendering::ShaderFloatImpl
-	::EnableUpdater()
+float& Rendering::ShaderFloatImpl::operator[](int index)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_AllowUpdater = true;
+    return OPERATOR_SQUARE_BRACKETS(float, index);
 }
 
-void Rendering::ShaderFloatImpl
-	::DisableUpdater()
+void Rendering::ShaderFloatImpl::EnableUpdater() noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_AllowUpdater = false;
+    allowUpdater = true;
 }
 
-bool Rendering::ShaderFloatImpl
-	::AllowUpdater() const
+void Rendering::ShaderFloatImpl::DisableUpdater() noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_AllowUpdater;
+    allowUpdater = false;
+}
+
+bool Rendering::ShaderFloatImpl::AllowUpdater() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return allowUpdater;
 }
 
 void Rendering::ShaderFloatImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	 
-//	source.Read(m_Data);
-	m_AllowUpdater = source.ReadBool();
+    RENDERING_CLASS_IS_VALID_1;
+
+    source.ReadContainer(data);
+    allowUpdater = source.ReadBool();
 }
 
-void Rendering::ShaderFloatImpl
-	::Save (CoreTools::BufferTarget& target) const
+void Rendering::ShaderFloatImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	
-	target.WriteContainerWithNumber(m_Data);
-	target.Write(m_AllowUpdater);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    target.WriteContainerWithNumber(data);
+    target.Write(allowUpdater);
 }
 
-int Rendering::ShaderFloatImpl
-	::GetStreamingSize () const
+int Rendering::ShaderFloatImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Data); 
-	size += CORE_TOOLS_STREAM_SIZE(m_AllowUpdater);
+    auto size = CORE_TOOLS_STREAM_SIZE(data);
+    size += CORE_TOOLS_STREAM_SIZE(allowUpdater);
 
-	return size;
+    return size;
 }
-#include STSTEM_WARNING_POP

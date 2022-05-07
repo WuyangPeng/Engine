@@ -1,240 +1,235 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 15:28)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
 
 #include "CameraControllerMiddleLayer.h"
-#include "MiddleLayerInterface.h"
 #include "ControllerMiddleLayerDetail.h"
+#include "MiddleLayerInterface.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowCreate/WindowPoint.h"
-#include "Framework/WindowProcess/VirtualKeysTypes.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
+#include "Framework/WindowProcess/VirtualKeysTypes.h"
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename ApplicationTrait>
-Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform },
-	 m_ChangeCameraSpeed{ { KeyIdentifiers::sm_LowerT,&CameraModelMiddleLayer::SlowerCameraTranslation },// 摄像机平移变慢。 
-						  { KeyIdentifiers::sm_UpperT,&CameraModelMiddleLayer::FasterCameraTranslation },// 摄像机平移变快。 
-						  { KeyIdentifiers::sm_LowerR,&CameraModelMiddleLayer::SlowerCameraRotation },// 摄像机旋转变慢。 
-						  { KeyIdentifiers::sm_UpperR,&CameraModelMiddleLayer::FasterCameraRotation } },// 摄像机旋转变快。 
-	 m_ChangeCameraMotion{ { KeyIdentifiers::sm_KeyF1,{ &CameraModelMiddleLayer::SetDoRoll,Mathematics::NumericalValueSymbol::Positive } },
-						   { KeyIdentifiers::sm_KeyF2,{ &CameraModelMiddleLayer::SetDoRoll,Mathematics::NumericalValueSymbol::Negative } },
-						   { KeyIdentifiers::sm_KeyF3,{ &CameraModelMiddleLayer::SetDoYaw,Mathematics::NumericalValueSymbol::Positive } },
-						   { KeyIdentifiers::sm_KeyF4,{ &CameraModelMiddleLayer::SetDoYaw,Mathematics::NumericalValueSymbol::Negative } },
-						   { KeyIdentifiers::sm_KeyF5,{ &CameraModelMiddleLayer::SetDoPitch,Mathematics::NumericalValueSymbol::Positive } },
-						   { KeyIdentifiers::sm_KeyF6,{ &CameraModelMiddleLayer::SetDoPitch,Mathematics::NumericalValueSymbol::Negative } } },
-	 m_ChangeObjectMotion{ { KeyIdentifiers::sm_KeyLeftArrow,&CameraModelMiddleLayer::SetMoveLeft },
-						   { KeyIdentifiers::sm_KeyRightArrow,&CameraModelMiddleLayer::SetMoveRight },
-						   { KeyIdentifiers::sm_KeyUpArrow,&CameraModelMiddleLayer::SetMoveForward },
-						   { KeyIdentifiers::sm_KeyDownArrow,&CameraModelMiddleLayer::SetMoveBackward },
-						   { KeyIdentifiers::sm_KeyPageUp,&CameraModelMiddleLayer::SetMoveUp },
-						   { KeyIdentifiers::sm_KeyPageDown,&CameraModelMiddleLayer::SetMoveDown },
-						   { KeyIdentifiers::sm_KeyHome,&CameraModelMiddleLayer::SetLookUp },
-						   { KeyIdentifiers::sm_KeyEnd,&CameraModelMiddleLayer::SetLookDown },
-						   { KeyIdentifiers::sm_KeyInsert,&CameraModelMiddleLayer::SetTurnLeft },
-						   { KeyIdentifiers::sm_KeyDelete,&CameraModelMiddleLayer::SetTurnRight } }
+Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform },
+      changeCameraSpeed{ { KeyIdentifiers::lowerT, &CameraModelMiddleLayer::SlowerCameraTranslation },  // 摄像机平移变慢。
+                           { KeyIdentifiers::upperT, &CameraModelMiddleLayer::FasterCameraTranslation },  // 摄像机平移变快。
+                           { KeyIdentifiers::lowerR, &CameraModelMiddleLayer::SlowerCameraRotation },  // 摄像机旋转变慢。
+                           { KeyIdentifiers::upperR, &CameraModelMiddleLayer::FasterCameraRotation } },  // 摄像机旋转变快。
+      changeCameraMotion{ { KeyIdentifiers::keyF1, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Positive } },
+                            { KeyIdentifiers::keyF2, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Negative } },
+                            { KeyIdentifiers::keyF3, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Positive } },
+                            { KeyIdentifiers::keyF4, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Negative } },
+                            { KeyIdentifiers::keyF5, { &CameraModelMiddleLayer::SetDoPitch, Mathematics::NumericalValueSymbol::Positive } },
+                            { KeyIdentifiers::keyF6, { &CameraModelMiddleLayer::SetDoPitch, Mathematics::NumericalValueSymbol::Negative } } },
+      changeObjectMotion{ { KeyIdentifiers::keyLeftArrow, &CameraModelMiddleLayer::SetMoveLeft },
+                            { KeyIdentifiers::keyRightArrow, &CameraModelMiddleLayer::SetMoveRight },
+                            { KeyIdentifiers::keyUpArrow, &CameraModelMiddleLayer::SetMoveForward },
+                            { KeyIdentifiers::keyDownArrow, &CameraModelMiddleLayer::SetMoveBackward },
+                            { KeyIdentifiers::keyPageUp, &CameraModelMiddleLayer::SetMoveUp },
+                            { KeyIdentifiers::keyPageDown, &CameraModelMiddleLayer::SetMoveDown },
+                            { KeyIdentifiers::keyHome, &CameraModelMiddleLayer::SetLookUp },
+                            { KeyIdentifiers::keyEnd, &CameraModelMiddleLayer::SetLookDown },
+                            { KeyIdentifiers::keyInsert, &CameraModelMiddleLayer::SetTurnLeft },
+                            { KeyIdentifiers::keyDelete, &CameraModelMiddleLayer::SetTurnRight } }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
+
 #include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename ApplicationTrait>
-bool Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
 template <typename ApplicationTrait>
-bool Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::KeyDown(int key, const WindowPoint& point)
+bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::IsValid() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
-
-	if (ParentType::KeyDown(key, point))
-	{
-		const auto iter = m_ChangeCameraSpeed.find(key);
-
-		if (iter != m_ChangeCameraSpeed.cend())
-		{
-			auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
-
-			// 标准键对应用程序。
-			((*cameraModelMiddleLayer).*(iter->second))();
-		}
-
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
+#endif  // OPEN_CLASS_INVARIANT
+
 template <typename ApplicationTrait>
-bool Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::SpecialKeyDown(int key, const WindowPoint& point)
+bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::KeyDown(int key, const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::SpecialKeyDown(key, point))
-	{
-		SpecialKey(key, true);
+    if (ParentType::KeyDown(key, point))
+    {
+        const auto iter = changeCameraSpeed.find(key);
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        if (iter != changeCameraSpeed.cend())
+        {
+            auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+
+            // 标准键对应用程序。
+            ((*cameraModelMiddleLayer).*(iter->second))();
+        }
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-// private
 template <typename ApplicationTrait>
-void Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::SpecialKey(int key, bool pressed)
+bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	if (KeyIdentifiers::sm_KeyF1 <= key && key <= KeyIdentifiers::sm_KeyF12)
-	{
-		CameraSpecialKey(key, pressed);
-	}
-	else
-	{
-		ObjectSpecialKey(key, pressed);
-	}
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    if (ParentType::SpecialKeyDown(key, point))
+    {
+        SpecialKey(key, true);
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // private
 template <typename ApplicationTrait>
-void Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::CameraSpecialKey(int key, bool pressed)
+void Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKey(int key, bool pressed)
 {
-	const auto iter = m_ChangeCameraMotion.find(key);
-
-	if (iter != m_ChangeCameraMotion.cend())
-	{
-		auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
-
-		((*cameraModelMiddleLayer).*(iter->second.first))(pressed ? iter->second.second : Mathematics::NumericalValueSymbol::Zero);
-	}
+    if (KeyIdentifiers::keyF1 <= key && key <= KeyIdentifiers::keyF12)
+    {
+        CameraSpecialKey(key, pressed);
+    }
+    else
+    {
+        ObjectSpecialKey(key, pressed);
+    }
 }
 
 // private
 template <typename ApplicationTrait>
-void Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::ObjectSpecialKey(int key, bool pressed)
+void Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraSpecialKey(int key, bool pressed)
 {
-	const auto iter = m_ChangeObjectMotion.find(key);
+    const auto iter = changeCameraMotion.find(key);
 
-	if (iter != m_ChangeObjectMotion.cend())
-	{
-		auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+    if (iter != changeCameraMotion.cend())
+    {
+        auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
-		((*cameraModelMiddleLayer).*(iter->second))(pressed);
-	}
+        ((*cameraModelMiddleLayer).*(iter->second.first))(pressed ? iter->second.second : Mathematics::NumericalValueSymbol::Zero);
+    }
+}
+
+// private
+template <typename ApplicationTrait>
+void Framework::CameraControllerMiddleLayer<ApplicationTrait>::ObjectSpecialKey(int key, bool pressed)
+{
+    const auto iter = changeObjectMotion.find(key);
+
+    if (iter != changeObjectMotion.cend())
+    {
+        auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+
+        ((*cameraModelMiddleLayer).*(iter->second))(pressed);
+    }
 }
 
 template <typename ApplicationTrait>
-bool Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::SpecialKeyUp(int key, const WindowPoint& point)
+bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::SpecialKeyUp(key, point))
-	{
-		SpecialKey(key, false);
+    if (ParentType::SpecialKeyUp(key, point))
+    {
+        SpecialKey(key, false);
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 template <typename ApplicationTrait>
-bool Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::MouseClick(button, state, point, virtualKeys))
-	{
-		if (button == MouseButtonsTypes::LeftButton)
-		{
-			auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+    if (ParentType::MouseClick(button, state, point, virtualKeys))
+    {
+        if (button == MouseButtonsTypes::LeftButton)
+        {
+            auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
-			if (state == MouseStateTypes::MouseDown)
-			{
-				auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
+            if (state == MouseStateTypes::MouseDown)
+            {
+                auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
 
-				cameraModelMiddleLayer->SetBeginTrack(point, *cameraViewMiddleLayer);
-			}
-			else
-			{
-				cameraModelMiddleLayer->SetTrackBallDow(false);
-			}
-		}
+                cameraModelMiddleLayer->SetBeginTrack(point, *cameraViewMiddleLayer);
+            }
+            else
+            {
+                cameraModelMiddleLayer->SetTrackBallDow(false);
+            }
+        }
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 template <typename ApplicationTrait>
-bool Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::CameraControllerMiddleLayer<ApplicationTrait>::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Motion(point, virtualKeys))
-	{
-		auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
+    if (ParentType::Motion(point, virtualKeys))
+    {
+        auto cameraModelMiddleLayer = GetCameraModelMiddleLayer();
 
-		if (virtualKeys.IsLeftMouseDown() && cameraModelMiddleLayer->GetTrackBallDow())
-		{
-			auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
+        if (virtualKeys.IsLeftMouseDown() && cameraModelMiddleLayer->GetTrackBallDow())
+        {
+            auto cameraViewMiddleLayer = GetCameraViewMiddleLayer();
 
-			cameraModelMiddleLayer->RotateTrackBall(point, *cameraViewMiddleLayer);
-		}
+            cameraModelMiddleLayer->RotateTrackBall(point, *cameraViewMiddleLayer);
+        }
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 template <typename ApplicationTrait>
-const Framework::CameraModelMiddleLayerSharedPtr Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::GetCameraModelMiddleLayer()
+Framework::CameraModelMiddleLayerSharedPtr Framework::CameraControllerMiddleLayer<ApplicationTrait>::GetCameraModelMiddleLayer()
 {
-	return boost::polymorphic_pointer_cast<CameraModelMiddleLayer>(this->GetModelMiddleLayer());
+    return boost::polymorphic_pointer_cast<CameraModelMiddleLayer>(this->GetModelMiddleLayer());
 }
 
 template <typename ApplicationTrait>
-const Framework::CameraViewMiddleLayerSharedPtr Framework::CameraControllerMiddleLayer<ApplicationTrait>
-	::GetCameraViewMiddleLayer()
+Framework::CameraViewMiddleLayerSharedPtr Framework::CameraControllerMiddleLayer<ApplicationTrait>::GetCameraViewMiddleLayer()
 {
-	return boost::polymorphic_pointer_cast<CameraViewMiddleLayer>(this->GetViewMiddleLayer());
+    return boost::polymorphic_pointer_cast<CameraViewMiddleLayer>(this->GetViewMiddleLayer());
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H
+#endif  // FRAMEWORK_MIDDLE_LAYER_CAMERA_CONTROLLER_MIDDLE_LAYER_DETAIL_H

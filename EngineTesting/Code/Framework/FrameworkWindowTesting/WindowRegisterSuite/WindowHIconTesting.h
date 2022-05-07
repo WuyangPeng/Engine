@@ -19,7 +19,7 @@ namespace Framework
 		using ClassType = WindowHIconTesting;
 		using ParentType = UnitTest;
 		using TChar = System::TChar;
-		using HInstance = System::WindowHInstance;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowHIconTesting(const OStreamShared& stream, HInstance instance);

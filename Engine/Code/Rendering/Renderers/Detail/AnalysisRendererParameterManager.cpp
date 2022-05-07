@@ -1,184 +1,184 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 17:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 10:45)
 
 #include "Rendering/RenderingExport.h"
 
 #include "AnalysisRendererParameterManager.h"
 #include "RendererParameterImpl.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-#include "CoreTools/CharacterString/StringConversion.h"
-
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Windows/Flags/WindowsPictorialFlags.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26493)
-using std::string;
+#include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
+
 using boost::property_tree::ptree;
 using boost::property_tree::ptree_error;
+using std::string;
 using namespace std::literals;
 
-Rendering::AnalysisRendererParameterManager
-	::AnalysisRendererParameterManager( const string& fileName )
-	:m_RendererParameterPtr{ nullptr }, m_FileName{ fileName },m_MainTree{}, m_TextureTree{}, m_ClearColorTree{},m_WindowParameterTree{}
+Rendering::AnalysisRendererParameterManager::AnalysisRendererParameterManager(const string& fileName)
+    : rendererParameter{ nullptr }, fileName{ fileName }, mainTree{}, textureTree{}, clearColorTree{}, windowParameterTree{}
 {
-	Analysis();
+    Analysis();
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 // private
-void Rendering::AnalysisRendererParameterManager
-	::Analysis()
+void Rendering::AnalysisRendererParameterManager::Analysis()
 {
-	AnalysisJson();
-	AnalysisRendererType();
-	AnalysisRendererTexture();
-	AnalysisRendererClearColor();
-	AnalysisWindowParameter();
+    AnalysisJson();
+    AnalysisRendererType();
+    AnalysisRendererTexture();
+    AnalysisRendererClearColor();
+    AnalysisWindowParameter();
 }
 
 // private
-void Rendering::AnalysisRendererParameterManager
-	::AnalysisJson()
+void Rendering::AnalysisRendererParameterManager::AnalysisJson()
 {
-	read_json(m_FileName,m_MainTree);
+    read_json(fileName, mainTree);
 }
 
 // private
-void Rendering::AnalysisRendererParameterManager
-	::AnalysisRendererType()
+void Rendering::AnalysisRendererParameterManager::AnalysisRendererType()
 {
-	auto rendererType = Rendering::RendererTypes(m_MainTree.get("RendererType",0));
+    auto rendererType = mainTree.get("RendererType", Rendering::RendererTypes::Default);
 
-	if(Rendering::RendererTypes::First <= rendererType && rendererType < Rendering::RendererTypes::Max)
-	{
-		m_RendererParameterPtr = std::make_shared<RendererParameterImpl>(rendererType);	 
-	}
-	else
-	{
-		m_RendererParameterPtr = std::make_shared<RendererParameterImpl>(RendererTypes::Default);
- 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化渲染器类型失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-	}
-}
-
-// private
-void Rendering::AnalysisRendererParameterManager
-	::AnalysisRendererTexture()
-{
-	m_TextureTree = m_MainTree.get_child("Texture");		
- 
-	auto colorFormat = Rendering::TextureFormat(m_TextureTree.get("ColorFormat",8));
-	auto depthStencilFormat = Rendering::TextureFormat(m_TextureTree.get("DepthStencilFormat",22));
-	auto numMultisamples = m_TextureTree.get("MultisamplesNumber",0);
-
-	if(Rendering::TextureFormat::First <= colorFormat && colorFormat < Rendering::TextureFormat::Max && 
-   	   Rendering::TextureFormat::First <= depthStencilFormat && depthStencilFormat < Rendering::TextureFormat::Max && 0 <= numMultisamples)
-	{
-		m_RendererParameterPtr->SetTextureFormat(colorFormat, depthStencilFormat, numMultisamples);
-	}
-	else
-	{ 
-		m_RendererParameterPtr->SetTextureFormat(TextureFormat::DefaultColour,TextureFormat::DefaultDepth, 0);
-
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化渲染器纹理格式失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-	}	
-} 
-
-// private
-void Rendering::AnalysisRendererParameterManager
-	::AnalysisRendererClearColor()
-{
-	m_ClearColorTree = m_MainTree.get_child("ClearColor");	
-
-	auto red = m_ClearColorTree.get("Red",0.0f);
-	auto green = m_ClearColorTree.get("Green",0.0f);
-	auto blue = m_ClearColorTree.get("Blue",0.0f);
-	auto alpha = m_ClearColorTree.get("Alpha",1.0f);
-
-    if(0.0f <= red && red <= 1.0f && 0.0f <= green && green <= 1.0f && 
-       0.0f <= blue && blue <= 1.0f && 0.0f <= alpha && alpha <= 1.0f)
+    if (Rendering::RendererTypes::First <= rendererType && rendererType < Rendering::RendererTypes::Max)
     {
-        m_RendererParameterPtr->SetClearColor(red, green, blue, alpha);
+        rendererParameter = std::make_shared<RendererParameterImpl>(rendererType);
     }
     else
     {
-        m_RendererParameterPtr->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        rendererParameter = std::make_shared<RendererParameterImpl>(RendererTypes::Default);
 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化渲染器清除颜色失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-    }	
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("初始化渲染器类型失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
 }
 
 // private
-void Rendering::AnalysisRendererParameterManager
-	::AnalysisWindowParameter()
+void Rendering::AnalysisRendererParameterManager::AnalysisRendererTexture()
 {
-	m_WindowParameterTree = m_MainTree.get_child("WindowParameter");
+    textureTree = mainTree.get_child("Texture");
 
-	auto windowTitle = m_WindowParameterTree.get("WindowTitle","WindowTitle");
-	auto width = m_WindowParameterTree.get("Width",800);
-	auto height = m_WindowParameterTree.get("Height",600);
-    int x = m_WindowParameterTree.get("X",0);
-	auto y = m_WindowParameterTree.get("Y",0);
-	auto allowResize = m_WindowParameterTree.get("AllowResize",true);
+    auto colorFormat = (textureTree.get("ColorFormat", Rendering::TextureFormat::A8R8G8B8));
+    auto depthStencilFormat = (textureTree.get("DepthStencilFormat", Rendering::TextureFormat::D24S8));
+    auto numMultisamples = textureTree.get("MultisamplesNumber", 0);
 
-	if(0 < width && 0 < height)
-	{
-		m_RendererParameterPtr->SetWindowParameter(windowTitle,width,height,x,y, allowResize);
-	}
-	else
-	{ 
-		m_RendererParameterPtr->SetWindowParameter(windowTitle,800,600,x,y, allowResize);
+    if (Rendering::TextureFormat::First <= colorFormat &&
+        colorFormat < Rendering::TextureFormat::Max &&
+        Rendering::TextureFormat::First <= depthStencilFormat &&
+        depthStencilFormat < Rendering::TextureFormat::Max &&
+        0 <= numMultisamples)
+    {
+        rendererParameter->SetTextureFormat(colorFormat, depthStencilFormat, numMultisamples);
+    }
+    else
+    {
+        rendererParameter->SetTextureFormat(TextureFormat::DefaultColour, TextureFormat::DefaultDepth, 0);
 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化窗口参数失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-	}
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("初始化渲染器纹理格式失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
+}
 
-	auto className = m_WindowParameterTree.get("ClassName", ""s);
-	auto menuName = m_WindowParameterTree.get("MenuName", ""s);
+// private
+void Rendering::AnalysisRendererParameterManager::AnalysisRendererClearColor()
+{
+    clearColorTree = mainTree.get_child("ClearColor");
 
-	m_RendererParameterPtr->SetWindowClassName(CoreTools::StringConversion::MultiByteConversionStandard(className));
-	m_RendererParameterPtr->SetWindowMenuName(CoreTools::StringConversion::MultiByteConversionStandard(menuName));
+    auto red = clearColorTree.get("Red", 0.0f);
+    auto green = clearColorTree.get("Green", 0.0f);
+    auto blue = clearColorTree.get("Blue", 0.0f);
+    auto alpha = clearColorTree.get("Alpha", 1.0f);
 
+    if (0.0f <= red &&
+        red <= 1.0f &&
+        0.0f <= green &&
+        green <= 1.0f &&
+        0.0f <= blue &&
+        blue <= 1.0f &&
+        0.0f <= alpha &&
+        alpha <= 1.0f)
+    {
+        rendererParameter->SetClearColor(red, green, blue, alpha);
+    }
+    else
+    {
+        rendererParameter->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int icon = m_WindowParameterTree.get("Icon", 0);
-	bool isIconDefault = m_WindowParameterTree.get("IconDefault",true);
-	int cursor = m_WindowParameterTree.get("Cursor", 0);
-	bool isCursorDefault = m_WindowParameterTree.get("CursorDefault", true);
-	System::WindowsBrushTypes background = System::UnderlyingCastEnum<System::WindowsBrushTypes>(m_WindowParameterTree.get("Background", 0));
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("初始化渲染器清除颜色失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
+}
 
-	m_RendererParameterPtr->SetWindowPictorialParameter(icon, isIconDefault, cursor, isCursorDefault, background);
+// private
+void Rendering::AnalysisRendererParameterManager::AnalysisWindowParameter()
+{
+    windowParameterTree = mainTree.get_child("WindowParameter");
+
+    auto windowTitle = windowParameterTree.get("WindowTitle", "WindowTitle");
+    auto width = windowParameterTree.get("Width", 800);
+    auto height = windowParameterTree.get("Height", 600);
+    int x = windowParameterTree.get("X", 0);
+    auto y = windowParameterTree.get("Y", 0);
+    auto allowResize = windowParameterTree.get("AllowResize", true);
+
+    if (0 < width && 0 < height)
+    {
+        rendererParameter->SetWindowParameter(windowTitle, width, height, x, y, allowResize);
+    }
+    else
+    {
+        rendererParameter->SetWindowParameter(windowTitle, 800, 600, x, y, allowResize);
+
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("初始化窗口参数失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
+
+    auto className = windowParameterTree.get("ClassName", ""s);
+    auto menuName = windowParameterTree.get("MenuName", ""s);
+
+    rendererParameter->SetWindowClassName(CoreTools::StringConversion::MultiByteConversionStandard(className));
+    rendererParameter->SetWindowMenuName(CoreTools::StringConversion::MultiByteConversionStandard(menuName));
+
+    auto icon = windowParameterTree.get("Icon", 0);
+    auto isIconDefault = windowParameterTree.get("IconDefault", true);
+    auto cursor = windowParameterTree.get("Cursor", 0);
+    auto isCursorDefault = windowParameterTree.get("CursorDefault", true);
+    auto background = System::UnderlyingCastEnum<System::WindowsBrushTypes>(windowParameterTree.get("Background", 0));
+
+    rendererParameter->SetWindowPictorialParameter(icon, isIconDefault, cursor, isCursorDefault, background);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::AnalysisRendererParameterManager
-	::IsValid() const noexcept
-{
-	if(m_RendererParameterPtr != nullptr)
-	    return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-const Rendering::AnalysisRendererParameterManager::RendererParameterPtr	Rendering::AnalysisRendererParameterManager
-	::GetRendererParameterPtr() const noexcept
+bool Rendering::AnalysisRendererParameterManager::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_RendererParameterPtr;
+    if (rendererParameter != nullptr)
+        return true;
+    else
+        return false;
 }
-#include STSTEM_WARNING_POP
+
+#endif  // OPEN_CLASS_INVARIANT
+
+Rendering::AnalysisRendererParameterManager::RendererParameterSharedPtr Rendering::AnalysisRendererParameterManager::GetRendererParameterPtr() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return rendererParameter;
+}

@@ -5,87 +5,80 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.2 (2020/06/13 1:27)
 
 #include "PerformanceMeasurementsTesting.h"
-#include "System/Threading/SyncTools.h"
-#include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/Helper/PragmaWarning/Format.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Time/CustomTime.h"
+#include "System/Threading/SyncTools.h"
+#include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Time/CustomTime.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Framework/Application/PerformanceMeasurements.h"
 
 namespace Framework
 {
-	using TestingType = PerformanceMeasurements;
+    using TestingType = PerformanceMeasurements;
 }
 
-Framework::PerformanceMeasurementsTesting
-	::PerformanceMeasurementsTesting(const OStreamShared& stream)
-	:ParentType{ stream }
+Framework::PerformanceMeasurementsTesting::PerformanceMeasurementsTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, PerformanceMeasurementsTesting)
 
-void Framework::PerformanceMeasurementsTesting
-	::DoRunUnitTest()
+void Framework::PerformanceMeasurementsTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::PerformanceMeasurementsTesting
-	::MainTest()
+void Framework::PerformanceMeasurementsTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(PerformanceMeasurementsTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerformanceMeasurementsTest);
 }
 
-void Framework::PerformanceMeasurementsTesting
-	::PerformanceMeasurementsTest()
+void Framework::PerformanceMeasurementsTesting::PerformanceMeasurementsTest()
 {
-	constexpr auto maxTimer = 30;
+    constexpr auto maxTimer = 30;
 
-	TestingType performanceMeasurements{ maxTimer };	
-	
-	const auto frame = System::g_Millisecond / maxTimer;
-	const auto testLoopCount = maxTimer * GetTestLoopCount();		
+    TestingType performanceMeasurements{ maxTimer };
 
-	CoreTools::CustomTime customTime{ };
-	auto delta = 0;
-	auto frameSum = 0;
-	for (auto i = 0; i < testLoopCount; ++i)
-	{ 
-		performanceMeasurements.UpdateFrameCount(); 
+    constexpr auto frame = System::g_Millisecond / maxTimer;
+    const auto testLoopCount = maxTimer * GetTestLoopCount();
 
-		delta += boost::numeric_cast<int>(customTime.GetThisElapsedMillisecondTime());
-		frameSum += frame;
-		
-		if (delta < frameSum)
-		{
-			System::SystemSleep(frameSum - delta);
-		}  
+    CoreTools::CustomTime customTime{};
+    auto delta = 0;
+    auto frameSum = 0;
+    for (auto i = 0; i < testLoopCount; ++i)
+    {
+        performanceMeasurements.UpdateFrameCount();
 
-		performanceMeasurements.MeasureTime();	
-	} 
+        delta += boost::numeric_cast<int>(customTime.GetThisElapsedMillisecondTime());
+        frameSum += frame;
 
-	const auto rate = performanceMeasurements.GetFrameRate(); 
+        if (delta < frameSum)
+        {
+            System::SystemSleep(frameSum - delta);
+        }
 
-	constexpr auto epsilon = 0.5;
+        performanceMeasurements.MeasureTime();
+    }
 
-	ASSERT_RANGE(rate, maxTimer - epsilon, maxTimer + epsilon);
+    const auto rate = performanceMeasurements.GetFrameRate();
 
-	boost::format message{ "fps: %.2lf" };
-	message % performanceMeasurements.GetFrameRate();
+    constexpr auto epsilon = 0.5;
 
-	ASSERT_EQUAL(performanceMeasurements.GetFrameRateMessage(), message.str());
+    ASSERT_RANGE(rate, maxTimer - epsilon, maxTimer + epsilon);
 
-	performanceMeasurements.ResetTime();
+    boost::format message{ "fps: %.2lf" };
+    message % performanceMeasurements.GetFrameRate();
 
-	const auto zero = performanceMeasurements.GetFrameRate(); 
+    ASSERT_EQUAL(performanceMeasurements.GetFrameRateMessage(), message.str());
 
-	ASSERT_APPROXIMATE(0.0, zero, Mathematics::DoubleMath::sm_Epsilon);
+    performanceMeasurements.ResetTime();
+
+    const auto zero = performanceMeasurements.GetFrameRate();
+
+    ASSERT_APPROXIMATE(0.0, zero, Mathematics::MathD::epsilon);
 }
-
-
-

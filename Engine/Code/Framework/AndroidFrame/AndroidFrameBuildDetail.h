@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 16:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:16)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H
@@ -15,13 +18,11 @@
 
 template <typename AndroidProcess>
 Framework::AndroidFrameBuild<AndroidProcess>::AndroidFrameBuild(AndroidApp* state)
-    : m_State{ state }, m_AndroidProcess{ System::g_Microseconds / sm_Interval }, m_AndroidMessageLoop{ m_State, m_AndroidProcess.GetDisplay() }
+    : state{ state }, androidProcess{ System::g_Microseconds / interval }, androidMessageLoop{ state, androidProcess.GetDisplay() }
 {
-    using namespace std::literals;
-
     System::AppDummy();
 
-    if (!(m_AndroidProcess.PreCreate() && InitApplication()))
+    if (!(androidProcess.PreCreate() && InitApplication()))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("创建窗口失败！"s));
     }
@@ -33,19 +34,21 @@ Framework::AndroidFrameBuild<AndroidProcess>::AndroidFrameBuild(AndroidApp* stat
 template <typename AndroidProcess>
 bool Framework::AndroidFrameBuild<AndroidProcess>::InitApplication()
 {
-    [[maybe_unused]] auto value0 = System::CreateVirtualWindow(m_State, SYSTEM_TEXT("Android Virtual Window"), m_AndroidProcess.GetAppCmd(), m_AndroidProcess.GetInputEvent());
+    MAYBE_UNUSED const auto result = System::CreateVirtualWindow(state, SYSTEM_TEXT("Android Virtual Window"), androidProcess.GetAppCmd(), androidProcess.GetInputEvent());
 
-    [[maybe_unused]] const auto value1 = System::RemoveConsoleCloseButton();
+    MAYBE_UNUSED const auto closeButton = System::RemoveConsoleCloseButton();
 
     return true;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename AndroidProcess>
 bool Framework::AndroidFrameBuild<AndroidProcess>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename AndroidProcess>
@@ -53,13 +56,13 @@ void Framework::AndroidFrameBuild<AndroidProcess>::EnterMessageLoop()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (m_AndroidProcess.Initialize())
+    if (androidProcess.Initialize())
     {
-        m_AndroidProcess.PreIdle();
+        androidProcess.PreIdle();
 
-        m_AndroidMessageLoop.EnterMessageLoop();
+        androidMessageLoop.EnterMessageLoop();
 
-        m_AndroidProcess.Terminate();
+        androidProcess.Terminate();
     }
 }
 
@@ -68,7 +71,7 @@ System::AndroidApp* Framework::AndroidFrameBuild<AndroidProcess>::GetAndroidApp(
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    return m_State;
+    return state;
 }
 
 #endif  // FRAMEWORK_ANDROID_FRAME_ANDROID_FRAME_BUILD_DETAIL_H

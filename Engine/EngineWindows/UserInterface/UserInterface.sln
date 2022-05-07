@@ -7,12 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterface", "UserInterf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceTesting", "..\..\..\EngineTesting\EngineWindows\UserInterface\UserInterfaceTesting\UserInterfaceTesting.vcxproj", "{6112E69B-DBF7-4FDE-B31B-46ABDCC2B743}"
 	ProjectSection(ProjectDependencies) = postProject
 		{26F824A6-280A-48A6-BEC3-4615B7961D9E} = {26F824A6-280A-48A6-BEC3-4615B7961D9E}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceToolset", "..\..\..\Assist\AssistWindows\Toolset\UserInterface\UserInterfaceToolset\UserInterfaceToolset.vcxproj", "{90CAB4EE-1F8D-4D16-B3D3-4CFF2FCEED69}"
 	ProjectSection(ProjectDependencies) = postProject

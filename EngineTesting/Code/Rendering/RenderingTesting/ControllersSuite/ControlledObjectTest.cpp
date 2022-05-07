@@ -10,6 +10,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include SYSTEM_WARNING_DISABLE(26455)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ControlledObjectTest);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ControlledObjectTest);
@@ -17,7 +18,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, ControlledObjectTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ControlledObjectTest);
 
 Rendering::ControlledObjectTest::ControlledObjectTest()
-    : ParentType{}
+    : ParentType{ CoreTools::DisableNotThrow::Disable }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

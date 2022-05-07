@@ -1,84 +1,77 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 18:40)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ClodMeshCollapseInfo.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::ClodMeshCollapseInfo
-	::ClodMeshCollapseInfo(int vKeep, int vThrow ) noexcept
-	:m_VKeep{ vKeep }, m_VThrow{ vThrow }, m_TThrow0{ -1 }, m_TThrow1{ -1 }
+Rendering::ClodMeshCollapseInfo::ClodMeshCollapseInfo(int vKeep, int vThrow) noexcept
+    : vKeepInfo{ vKeep }, vThrowInfo{ vThrow }, tThrow0Info{ -1 }, tThrow1Info{ -1 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshCollapseInfo)
 
-int Rendering::ClodMeshCollapseInfo
-	::GetVKeep() const noexcept
+int Rendering::ClodMeshCollapseInfo::GetVKeep() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VKeep;
+    return vKeepInfo;
 }
 
-void Rendering::ClodMeshCollapseInfo
-	::SetVKeep(int vKeep) noexcept
+void Rendering::ClodMeshCollapseInfo::SetVKeep(int vKeep) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_VKeep = vKeep;
+    vKeepInfo = vKeep;
 }
 
-int Rendering::ClodMeshCollapseInfo
-	::GetVThrow() const noexcept
+int Rendering::ClodMeshCollapseInfo::GetVThrow() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_VThrow;
+    return vThrowInfo;
 }
 
-void Rendering::ClodMeshCollapseInfo
-	::SetVThrow(int vThrow) noexcept
+void Rendering::ClodMeshCollapseInfo::SetVThrow(int vThrow) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_VThrow = vThrow;
+    vThrowInfo = vThrow;
 }
 
-int Rendering::ClodMeshCollapseInfo
-	::GetTThrow0() const noexcept
+int Rendering::ClodMeshCollapseInfo::GetTThrow0() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_TThrow0;
+    return tThrow0Info;
 }
 
-void Rendering::ClodMeshCollapseInfo
-	::SetTThrow0(int tThrow0) noexcept
+void Rendering::ClodMeshCollapseInfo::SetTThrow0(int tThrow0) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_TThrow0 = tThrow0;
+    tThrow0Info = tThrow0;
 }
 
-int Rendering::ClodMeshCollapseInfo
-	::GetTThrow1() const noexcept
+int Rendering::ClodMeshCollapseInfo::GetTThrow1() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_TThrow1;
+    return tThrow1Info;
 }
 
-void Rendering::ClodMeshCollapseInfo
-	::SetTThrow1(int tThrow1) noexcept
+void Rendering::ClodMeshCollapseInfo::SetTThrow1(int tThrow1) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_TThrow1 = tThrow1;
+    tThrow1Info = tThrow1;
 }
-

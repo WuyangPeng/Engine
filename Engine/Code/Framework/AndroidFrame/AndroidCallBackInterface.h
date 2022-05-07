@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 16:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:24)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_INTERFACE_H
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_INTERFACE_H
@@ -26,10 +29,10 @@ namespace Framework
     public:
         explicit AndroidCallBackInterface(int64_t delta) noexcept;
         virtual ~AndroidCallBackInterface() noexcept = default;
-        AndroidCallBackInterface(const AndroidCallBackInterface&) noexcept = default;
-        virtual AndroidCallBackInterface& operator=(const AndroidCallBackInterface&) noexcept = default;
-        AndroidCallBackInterface(AndroidCallBackInterface&&) noexcept = default;
-        virtual AndroidCallBackInterface& operator=(AndroidCallBackInterface&&) noexcept = default;
+        AndroidCallBackInterface(const AndroidCallBackInterface& rhs) noexcept = default;
+        virtual AndroidCallBackInterface& operator=(const AndroidCallBackInterface& rhs) noexcept = default;
+        AndroidCallBackInterface(AndroidCallBackInterface&& rhs) noexcept = default;
+        virtual AndroidCallBackInterface& operator=(AndroidCallBackInterface&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -40,28 +43,28 @@ namespace Framework
         virtual void RedrawNeededMessage(AndroidApp* androidApp);
         virtual void RectChanged(AndroidApp* androidApp);
 
-        virtual int NotDealInputMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
-        virtual int KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
-        virtual int KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
-        virtual int ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
-        virtual int ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
-        virtual int ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+        NODISCARD virtual int NotDealInputMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+        NODISCARD virtual int KeyDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+        NODISCARD virtual int KeyUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+        NODISCARD virtual int ActionDownMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+        NODISCARD virtual int ActionUpMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
+        NODISCARD virtual int ActionMoveMessage(AndroidApp* androidApp, AndroidInputEvent* androidInputEvent);
 
         virtual void Display(AndroidApp* androidApp, int64_t timeDelta);
-        virtual int GetTerminateKey() const noexcept;
+        NODISCARD virtual int GetTerminateKey() const noexcept;
 
-        virtual bool PreCreate();
-        virtual bool Initialize();
+        NODISCARD virtual bool PreCreate();
+        NODISCARD virtual bool Initialize();
         virtual void PreIdle();
         virtual void Terminate();
 
-        AndroidApp* GetAndroidApp() noexcept;
+        NODISCARD AndroidApp* GetAndroidApp() noexcept;
 
-        int64_t GetDelta() const noexcept;
+        NODISCARD int64_t GetDelta() const noexcept;
 
     private:
-        AndroidApp* m_State;
-        int64_t m_Delta;
+        AndroidApp* state;
+        int64_t delta;
     };
 }
 

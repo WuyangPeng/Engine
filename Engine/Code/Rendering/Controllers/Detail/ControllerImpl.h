@@ -1,79 +1,75 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 10:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 11:19)
 
 #ifndef RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Mathematics/Base/MathDetail.h"
-#include "Rendering/Controllers/Flags/ControllerFlags.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;
-}
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Mathematics/Base/MathDetail.h"
+#include "Rendering/Controllers/ControllersFwd.h"
+#include "Rendering/Controllers/Flags/ControllerFlags.h"
 
 namespace Rendering
 {
-    class ControllerInterface;
-    
-    class RENDERING_HIDDEN_DECLARE ControllerImpl  
+    class RENDERING_HIDDEN_DECLARE ControllerImpl
     {
     public:
         using ClassType = ControllerImpl;
         using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
+        using BufferTarget = CoreTools::BufferTarget;
         using Math = Mathematics::Math<double>;
-        
+
     public:
         ControllerImpl() noexcept;
- 
-    
-        CLASS_INVARIANT_DECLARE;
-        
-        void SetApplicationTime(double applicationTime) noexcept;
-        double GetApplicationTime() const noexcept;
 
-         // 动画更新。以毫秒为单位的应用程序时间。
-        bool Update(double applicationTime) noexcept;
-        
+        CLASS_INVARIANT_DECLARE;
+
+        void SetApplicationTime(double applicationTime) noexcept;
+        NODISCARD double GetApplicationTime() const noexcept;
+
+        // 动画更新。以毫秒为单位的应用程序时间。
+        NODISCARD bool Update(double applicationTime) noexcept;
+
         // 从应用程序单位时间转换控制器单位时间。派生类可以使用此更新程序。
-        double GetControlTime (double applicationTime);
-        
-        ControllerRepeatType GetRepeat() const noexcept;
-        double GetMinTime() const noexcept;
-        double GetMaxTime() const noexcept;
-        double GetPhase() const noexcept;
-        double GetFrequency() const noexcept;
-        bool IsActive() const noexcept;
-        
+        NODISCARD double GetControlTime(double applicationTime);
+
+        NODISCARD ControllerRepeatType GetRepeat() const noexcept;
+        NODISCARD double GetMinTime() const noexcept;
+        NODISCARD double GetMaxTime() const noexcept;
+        NODISCARD double GetPhase() const noexcept;
+        NODISCARD double GetFrequency() const noexcept;
+        NODISCARD bool IsActive() const noexcept;
+
         void SetRepeat(ControllerRepeatType repeat) noexcept;
         void SetTime(double minTime, double maxTime) noexcept;
         void SetPhase(double phase) noexcept;
         void SetFrequency(double frequency) noexcept;
         void SetActive(bool active) noexcept;
-        
+
         void Load(CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const noexcept;
-        
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const noexcept;
+
     private:
-        ControllerRepeatType m_Repeat;  // 默认 = ControllerRepeatType::Clamp
-        double m_MinTime;     // 默认 = 0
-        double m_MaxTime;     // 默认 = 0
-        double m_Phase;       // 默认 = 0
-        double m_Frequency;   // 默认 = 1
-        bool m_Active;        // 默认 = true
-        
+        ControllerRepeatType controllerRepeat;  // 默认 = ControllerRepeatType::Clamp
+        double controllerMinTime;  // 默认 = 0
+        double controllerMaxTime;  // 默认 = 0
+        double controllerPhase;  // 默认 = 0
+        double controllerFrequency;  // 默认 = 1
+        bool controllerActive;  // 默认 = true
+
         // 应用程序的时间,以毫秒为单位。
-        double m_ApplicationTime;
+        double controllerApplicationTime;
     };
 }
 
-#endif // RENDERING_CONTROLLERS_CONTROLLER_IMPL_H
+#endif  // RENDERING_CONTROLLERS_CONTROLLER_IMPL_H

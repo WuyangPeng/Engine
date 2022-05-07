@@ -1,526 +1,515 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/06 15:37)
 
 #include "Rendering/RenderingExport.h"
 
 #include "KeyframeControllerImpl.h"
-
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "Mathematics/Algebra/AQuaternionDetail.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446) 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::KeyframeControllerImpl
-	::KeyframeControllerImpl() noexcept
-	: m_NumCommonTimes{ 0 }, m_CommonTimes{},	  
-	  m_NumTranslations{ 0 },m_TranslationTimes{},m_Translations{},	  
-	  m_NumRotations{ 0 },m_RotationTimes{},m_Rotations{},	  
-	  m_NumScales{ 0 },m_ScaleTimes{},m_Scales{},	  
-	  m_TranslationLastIndex{ 0 },m_RotationLastIndex{ 0 },m_ScaleLastIndex{ 0 },m_CommonLastIndex{ 0 }
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "Mathematics/Algebra/AQuaternionDetail.h"
+#include "Mathematics/Algebra/AlgebraAggregate.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
+
+Rendering::KeyframeControllerImpl::KeyframeControllerImpl() noexcept
+    : numCommonTimes{ 0 },
+      commonTimes{},
+      numTranslations{ 0 },
+      translationTimes{},
+      translations{},
+      numRotations{ 0 },
+      rotationTimes{},
+      rotations{},
+      numScales{ 0 },
+      scaleTimes{},
+      scales{},
+      translationLastIndex{ 0 },
+      rotationLastIndex{ 0 },
+      scaleLastIndex{ 0 },
+      commonLastIndex{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::KeyframeControllerImpl
-	::KeyframeControllerImpl(int numCommonTimes, int numTranslations, int numRotations, int numScales) 
-	:m_NumCommonTimes{ numCommonTimes }, m_CommonTimes{},
-	 m_NumTranslations{ numTranslations }, m_TranslationTimes{}, m_Translations{},
-	 m_NumRotations{ numRotations }, m_RotationTimes{}, m_Rotations{},
-	 m_NumScales{ numScales }, m_ScaleTimes{}, m_Scales{},
-	 m_TranslationLastIndex{ 0 }, m_RotationLastIndex{ 0 }, m_ScaleLastIndex{ 0 }, m_CommonLastIndex{ 0 }
+Rendering::KeyframeControllerImpl::KeyframeControllerImpl(int numCommonTimes, int numTranslations, int numRotations, int numScales)
+    : numCommonTimes{ numCommonTimes },
+      commonTimes{},
+      numTranslations{ numTranslations },
+      translationTimes{},
+      translations{},
+      numRotations{ numRotations },
+      rotationTimes{},
+      rotations{},
+      numScales{ numScales },
+      scaleTimes{},
+      scales{},
+      translationLastIndex{ 0 },
+      rotationLastIndex{ 0 },
+      scaleLastIndex{ 0 },
+      commonLastIndex{ 0 }
 {
-	ResetArraySize();
+    ResetArraySize();
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::KeyframeControllerImpl
-	::ResetArraySize() 
+void Rendering::KeyframeControllerImpl::ResetArraySize()
 {
-	if (0 < m_NumCommonTimes)
-	{
-		m_CommonTimes.resize(m_NumCommonTimes);
-	}	 
+    if (0 < numCommonTimes)
+    {
+        commonTimes.resize(numCommonTimes);
+    }
 
-	if (0 < m_NumTranslations)
-	{
-		m_Translations.resize(m_NumTranslations);
+    if (0 < numTranslations)
+    {
+        translations.resize(numTranslations);
 
-		if (m_NumCommonTimes <= 0)
-		{
-			m_TranslationTimes.resize(m_NumTranslations);
-		}
-	}
+        if (numCommonTimes <= 0)
+        {
+            translationTimes.resize(numTranslations);
+        }
+    }
 
+    if (0 < numRotations)
+    {
+        rotations.resize(numRotations);
 
-	if (0 < m_NumRotations)
-	{
-		m_Rotations.resize(m_NumRotations);
+        if (numCommonTimes <= 0)
+        {
+            rotations.resize(numTranslations);
+        }
+    }
 
-		if (m_NumCommonTimes <= 0)
-		{
-			m_Rotations.resize(m_NumTranslations);
-		}
-	}
+    if (0 < numScales)
+    {
+        scales.resize(numScales);
 
-	if (0 < m_NumScales)
-	{
-		m_Scales.resize(m_NumScales);
-
-		if (m_NumCommonTimes <= 0)
-		{
-			m_Scales.resize(m_NumScales);
-		}
-	}
+        if (numCommonTimes <= 0)
+        {
+            scales.resize(numScales);
+        }
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::KeyframeControllerImpl
-	::IsValid() const noexcept
+
+bool Rendering::KeyframeControllerImpl::IsValid() const noexcept
 {
-	if (0 <= m_NumCommonTimes && m_NumCommonTimes <= m_NumTranslations && m_NumCommonTimes <= m_NumRotations && m_NumCommonTimes <= m_NumScales)
-	{
-		return true;
-	}		
-	else
-	{
-		return false;
-	}		
+    if (0 <= numCommonTimes && numCommonTimes <= numTranslations && numCommonTimes <= numRotations && numCommonTimes <= numScales)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-#endif // OPEN_CLASS_INVARIANT	
+
+#endif  // OPEN_CLASS_INVARIANT
 
 int Rendering::KeyframeControllerImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_NumCommonTimes);
+    auto size = CORE_TOOLS_STREAM_SIZE(numCommonTimes);
 
-	if (0 < m_NumCommonTimes)
-	{
-		size += m_NumCommonTimes * CORE_TOOLS_STREAM_SIZE(m_CommonTimes[0]);
-		size += CORE_TOOLS_STREAM_SIZE(m_NumTranslations);
-		size += m_NumTranslations * MATHEMATICS_STREAM_SIZE(m_Translations[0]);
-		size += CORE_TOOLS_STREAM_SIZE(m_NumRotations);
-		size += m_NumRotations * MATHEMATICS_STREAM_SIZE(m_Rotations[0]);
-		size += CORE_TOOLS_STREAM_SIZE(m_NumScales);
-		size += m_NumScales * CORE_TOOLS_STREAM_SIZE(m_Scales[0]);
-	}
-	else
-	{
-		size += CORE_TOOLS_STREAM_SIZE(m_NumTranslations);
-		size += m_NumTranslations * CORE_TOOLS_STREAM_SIZE(m_TranslationTimes[0]);
-		size += m_NumTranslations * MATHEMATICS_STREAM_SIZE(m_Translations[0]);
-		size += CORE_TOOLS_STREAM_SIZE(m_NumRotations);
-		size += m_NumRotations * CORE_TOOLS_STREAM_SIZE(m_RotationTimes[0]);
-		size += m_NumRotations * MATHEMATICS_STREAM_SIZE(m_Rotations[0]);
-		size += CORE_TOOLS_STREAM_SIZE(m_NumScales);
-		size += m_NumScales * CORE_TOOLS_STREAM_SIZE(m_ScaleTimes[0]);
-		size += m_NumScales * CORE_TOOLS_STREAM_SIZE(m_Scales[0]); 
-	}
+    if (0 < numCommonTimes)
+    {
+        size += numCommonTimes * CORE_TOOLS_STREAM_SIZE(commonTimes.at(0));
+        size += CORE_TOOLS_STREAM_SIZE(numTranslations);
+        size += numTranslations * MATHEMATICS_STREAM_SIZE(translations.at(0));
+        size += CORE_TOOLS_STREAM_SIZE(numRotations);
+        size += numRotations * MATHEMATICS_STREAM_SIZE(rotations.at(0));
+        size += CORE_TOOLS_STREAM_SIZE(numScales);
+        size += numScales * CORE_TOOLS_STREAM_SIZE(scales.at(0));
+    }
+    else
+    {
+        size += CORE_TOOLS_STREAM_SIZE(numTranslations);
+        size += numTranslations * CORE_TOOLS_STREAM_SIZE(translationTimes.at(0));
+        size += numTranslations * MATHEMATICS_STREAM_SIZE(translations.at(0));
+        size += CORE_TOOLS_STREAM_SIZE(numRotations);
+        size += numRotations * CORE_TOOLS_STREAM_SIZE(rotationTimes.at(0));
+        size += numRotations * MATHEMATICS_STREAM_SIZE(rotations.at(0));
+        size += CORE_TOOLS_STREAM_SIZE(numScales);
+        size += numScales * CORE_TOOLS_STREAM_SIZE(scaleTimes.at(0));
+        size += numScales * CORE_TOOLS_STREAM_SIZE(scales.at(0));
+    }
 
-	return size;
+    return size;
 }
 
-void Rendering::KeyframeControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+void Rendering::KeyframeControllerImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.Write(m_NumCommonTimes);
+    target.Write(numCommonTimes);
 
-	if (0 < m_NumCommonTimes)
-	{
-		//target.WriteWithoutNumber(m_NumCommonTimes, &m_CommonTimes[0]);
+    if (0 < numCommonTimes)
+    {
+        target.WriteContainerWithoutNumber(commonTimes);
 
-	//	if (0 < m_NumTranslations)
-	//		target.WriteAggregateWithNumber(m_NumTranslations, &m_Translations[0]);
-	//	else
-	//		target.Write(m_NumTranslations);
+        if (0 < numTranslations)
+            target.WriteAggregateContainerWithNumber(translations);
+        else
+            target.Write(numTranslations);
 
-		//if (0 < m_NumRotations)
-		//	target.WriteAggregateWithNumber(m_NumRotations, &m_Rotations[0]);
-		//else
-		//	target.Write(m_NumRotations);
+        if (0 < numRotations)
+            target.WriteAggregateContainerWithNumber(rotations);
+        else
+            target.Write(numRotations);
 
-		//if (0 < m_NumScales)
-		//	target.WriteWithNumber(m_NumScales, &m_Scales[0]);
-		//else
-			//target.Write(m_NumScales);
-	}
-	else
-	{
-		if (0 < m_NumTranslations)
-		{
-			//target.WriteWithNumber(m_NumTranslations, &m_TranslationTimes[0]);
-			//target.WriteAggregateWithoutNumber(m_NumTranslations, &m_Translations[0]);
-		}
-		else
-		{
-			target.Write(m_NumTranslations);
-		}
+        if (0 < numScales)
+            target.WriteContainerWithNumber(scales);
+        else
+            target.Write(numScales);
+    }
+    else
+    {
+        if (0 < numTranslations)
+        {
+            target.WriteContainerWithNumber(translationTimes);
+            target.WriteAggregateContainerWithoutNumber(translations);
+        }
+        else
+        {
+            target.Write(numTranslations);
+        }
 
-		if (0 < m_NumRotations)
-		{
-			//target.WriteWithNumber(m_NumRotations, &m_RotationTimes[0]);
-			//target.WriteAggregateWithoutNumber(m_NumRotations, &m_Rotations[0]);
-		}
-		else
-		{
-			target.Write(m_NumRotations);
-		}
+        if (0 < numRotations)
+        {
+            target.WriteContainerWithNumber(rotationTimes);
+            target.WriteAggregateContainerWithoutNumber(rotations);
+        }
+        else
+        {
+            target.Write(numRotations);
+        }
 
-		if (0 < m_NumScales)
-		{
-			//target.WriteWithNumber(m_NumScales, &m_ScaleTimes[0]);
-			//target.WriteWithoutNumber(m_NumScales, &m_Scales[0]);
-		}
-		else
-		{
-			target.Write(m_NumScales);
-		}		 
-	}
+        if (0 < numScales)
+        {
+            target.WriteContainerWithNumber(scaleTimes);
+            target.WriteContainerWithoutNumber(scales);
+        }
+        else
+        {
+            target.Write(numScales);
+        }
+    }
 }
 
 void Rendering::KeyframeControllerImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	source.Read(m_NumCommonTimes);
+    source.Read(numCommonTimes);
 
-	if (0 < m_NumCommonTimes)
-	{
-		m_CommonTimes.resize(m_NumCommonTimes);
-        //    source.Read(m_NumCommonTimes, &m_CommonTimes[0]);
+    if (0 < numCommonTimes)
+    {
+        commonTimes.resize(numCommonTimes);
+        commonTimes = source.ReadContainerWithNumber<std::vector<float>>(numCommonTimes);
 
-		source.Read(m_NumTranslations);
-		m_Translations.resize(m_NumTranslations);
-		if (0 < m_NumTranslations)
-		{
-                    source.ReadAggregateContainer(m_NumTranslations, m_Translations);
-		}
+        source.Read(numTranslations);
+        translations.resize(numTranslations);
+        if (0 < numTranslations)
+        {
+            source.ReadAggregateContainer(numTranslations, translations);
+        }
 
-		source.Read(m_NumRotations);
-		m_Rotations.resize(m_NumRotations);
-		if (0 < m_NumRotations)
-		{
-                    source.ReadAggregateContainer(m_NumRotations, m_Rotations);
-		}
+        source.Read(numRotations);
+        rotations.resize(numRotations);
+        if (0 < numRotations)
+        {
+            source.ReadAggregateContainer(numRotations, rotations);
+        }
 
-		source.Read(m_NumScales);
-		m_Scales.resize(m_NumScales);
-		if (0 < m_NumScales)
-		{
-                 //   source.Read(m_NumScales, &m_Scales[0]);
-		}		  
-	}
-	else
-	{
-            source.Read(m_NumTranslations);
-		m_TranslationTimes.resize(m_NumTranslations);
-		m_Translations.resize(m_NumTranslations);
-		if (0 < m_NumTranslations)
-		{
-                 //   source.Read(m_NumTranslations, &m_TranslationTimes[0]);
-                    source.ReadAggregateContainer(m_NumTranslations, m_Translations);
-		}
+        source.Read(numScales);
+        scales.resize(numScales);
+        if (0 < numScales)
+        {
+            source.ReadContainer(numScales, scales);
+        }
+    }
+    else
+    {
+        source.Read(numTranslations);
+        translationTimes.resize(numTranslations);
+        translations.resize(numTranslations);
+        if (0 < numTranslations)
+        {
+            source.ReadContainer(numTranslations, translationTimes);
+            source.ReadAggregateContainer(numTranslations, translations);
+        }
 
-		source.Read(m_NumRotations);
-		m_RotationTimes.resize(m_NumRotations);
-		m_Rotations.resize(m_NumRotations);
-		if (0 < m_NumRotations)
-		{
-                 //   source.Read(m_NumRotations, &m_RotationTimes[0]);
-                    source.ReadAggregateContainer(m_NumRotations, m_Rotations);
-		}
+        source.Read(numRotations);
+        rotationTimes.resize(numRotations);
+        rotations.resize(numRotations);
+        if (0 < numRotations)
+        {
+            source.ReadContainer(numRotations, rotationTimes);
+            source.ReadAggregateContainer(numRotations, rotations);
+        }
 
-		source.Read(m_NumScales);
-		m_ScaleTimes.resize(m_NumRotations);
-		m_Scales.resize(m_NumScales);
-		if (0 < m_NumScales)
-		{
-                  //  source.Read(m_NumScales, &m_Scales[0]);
-                  //  source.Read(m_NumScales, &m_Scales[0]);
-		}
- 	}
+        source.Read(numScales);
+        scaleTimes.resize(numRotations);
+        scales.resize(numScales);
+        if (0 < numScales)
+        {
+            source.ReadContainer(numScales, scaleTimes);
+            source.ReadContainer(numScales, scales);
+        }
+    }
 }
 
-int Rendering::KeyframeControllerImpl
-	::GetNumCommonTimes() const noexcept
+int Rendering::KeyframeControllerImpl::GetNumCommonTimes() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumCommonTimes;
+    return numCommonTimes;
 }
 
-float Rendering::KeyframeControllerImpl
-	::GetCommonTimes(int index) const 
+float Rendering::KeyframeControllerImpl::GetCommonTimes(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumCommonTimes, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numCommonTimes, "Ë÷Òý´íÎó£¡");
 
-	return m_CommonTimes[index];
+    return commonTimes.at(index);
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetCommonTimes(int index, float commonTimes)
+void Rendering::KeyframeControllerImpl::SetCommonTimes(int index, float aCommonTimes)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumCommonTimes, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numCommonTimes, "Ë÷Òý´íÎó£¡");
 
-	m_CommonTimes[index] = commonTimes;
+    commonTimes.at(index) = aCommonTimes;
 }
 
 int Rendering::KeyframeControllerImpl::GetNumTranslations() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumTranslations;
+    return numTranslations;
 }
 
-float Rendering::KeyframeControllerImpl
-	::GetTranslationTimes(int index) const
+float Rendering::KeyframeControllerImpl::GetTranslationTimes(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumTranslations && m_NumCommonTimes == 0, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations && numCommonTimes == 0, "Ë÷Òý´íÎó£¡");
 
-	return m_TranslationTimes[index];
+    return translationTimes.at(index);
 }
 
-const Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl
-	::GetTranslations(int index) const
+Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl::GetTranslations(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumTranslations, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations, "Ë÷Òý´íÎó£¡");
 
-	return m_Translations[index];
+    return translations.at(index);
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetTranslationTimes(int index, float translationTimes)
+void Rendering::KeyframeControllerImpl::SetTranslationTimes(int index, float translationTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumTranslations && m_NumCommonTimes == 0, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations && numCommonTimes == 0, "Ë÷Òý´íÎó£¡");
 
-	m_TranslationTimes[index] = translationTimes;
+    translationTimes.at(index) = translationTime;
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetTranslations(int index, const APoint& translations) 
+void Rendering::KeyframeControllerImpl::SetTranslations(int index, const APoint& translation)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumTranslations, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numTranslations, "Ë÷Òý´íÎó£¡");
 
-	m_Translations[index] = translations;
+    translations.at(index) = translation;
 }
 
 int Rendering::KeyframeControllerImpl::GetNumRotations() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumRotations;
+    return numRotations;
 }
 
-float Rendering::KeyframeControllerImpl
-	::GetRotationTimes(int index) const 
+float Rendering::KeyframeControllerImpl::GetRotationTimes(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumRotations && m_NumCommonTimes == 0, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations && numCommonTimes == 0, "Ë÷Òý´íÎó£¡");
 
-	return m_RotationTimes[index];
+    return rotationTimes.at(index);
 }
 
-const Rendering::KeyframeControllerImpl::AQuaternion Rendering::KeyframeControllerImpl
-	::GetRotations(int index) const 
+Rendering::KeyframeControllerImpl::AQuaternion Rendering::KeyframeControllerImpl::GetRotations(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumRotations, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations, "Ë÷Òý´íÎó£¡");
 
-	return m_Rotations[index];
+    return rotations.at(index);
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetRotationTimes(int index, float rotationTimes)
+void Rendering::KeyframeControllerImpl::SetRotationTimes(int index, float rotationTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumRotations && m_NumCommonTimes == 0, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations && numCommonTimes == 0, "Ë÷Òý´íÎó£¡");
 
-	m_RotationTimes[index] = rotationTimes;
+    rotationTimes.at(index) = rotationTime;
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetRotations(int index, const AQuaternion& rotations)
+void Rendering::KeyframeControllerImpl::SetRotations(int index, const AQuaternion& rotation)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumRotations, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numRotations, "Ë÷Òý´íÎó£¡");
 
-	m_Rotations[index] = rotations;
+    rotations.at(index) = rotation;
 }
 
 int Rendering::KeyframeControllerImpl::GetNumScales() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumScales;
+    return numScales;
 }
 
-float Rendering::KeyframeControllerImpl
-	::GetScaleTimes(int index) const
+float Rendering::KeyframeControllerImpl::GetScaleTimes(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumScales && m_NumCommonTimes == 0, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numScales && numCommonTimes == 0, "Ë÷Òý´íÎó£¡");
 
-	return m_ScaleTimes[index];
+    return scaleTimes.at(index);
 }
 
-float Rendering::KeyframeControllerImpl
-	::GetScales(int index) const 
+float Rendering::KeyframeControllerImpl::GetScales(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumScales, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numScales, "Ë÷Òý´íÎó£¡");
 
-	return m_Scales[index];
+    return scales.at(index);
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetScaleTimes(int index, float scaleTimes)
+void Rendering::KeyframeControllerImpl::SetScaleTimes(int index, float scaleTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumScales && m_NumCommonTimes == 0, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numScales && numCommonTimes == 0, "Ë÷Òý´íÎó£¡");
 
-	m_ScaleTimes[index] = scaleTimes;
+    scaleTimes.at(index) = scaleTime;
 }
 
-void Rendering::KeyframeControllerImpl
-	::SetScales(int index, float scales) 
+void Rendering::KeyframeControllerImpl::SetScales(int index, float scale)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumScales, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numScales, "Ë÷Òý´íÎó£¡");
 
-	m_Scales[index] = scales;
+    scales.at(index) = scale;
 }
 
 // static
-const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
-	::GetKeyInfo(float ctrlTime, const std::vector<float>& times, int& lastIndex) 
+Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl::GetKeyInfo(float ctrlTime, const std::vector<float>& times, int& lastIndex)
 {
-	if (ctrlTime <= times[0])
-	{
-		lastIndex = 0;
-	
-		return ControllerKeyInfo();
-	}
+    if (ctrlTime <= times.at(0))
+    {
+        lastIndex = 0;
 
-	if (times[times.size() - 1] <= ctrlTime)
-	{	
-		lastIndex = boost::numeric_cast<int>(times.size() - 1);
-	
-		return ControllerKeyInfo{ 0.0f, lastIndex, lastIndex };
-	}
+        return ControllerKeyInfo{};
+    }
 
- 
-	if (times[lastIndex] < ctrlTime)
-	{
-		auto nextIndex = lastIndex + 1;
-		while (times[nextIndex] <= ctrlTime)
-		{
-			lastIndex = nextIndex;
-			++nextIndex;
-		}
+    const auto index = times.size() - 1;
+    if (times.at(index) <= ctrlTime)
+    {
+        lastIndex = boost::numeric_cast<int>(times.size() - 1);
 
-		const auto normTime = (ctrlTime - times[lastIndex]) / (times[nextIndex] - times[lastIndex]);
+        return ControllerKeyInfo{ 0.0f, lastIndex, lastIndex };
+    }
 
-		return ControllerKeyInfo{ normTime, lastIndex, nextIndex };
-	}
-	else if (ctrlTime < times[lastIndex])
-	{
-		auto nextIndex = lastIndex - 1;
-		while (ctrlTime <= times[nextIndex])
-		{
-			lastIndex = nextIndex;
-			--nextIndex;
-		}
+    if (times.at(lastIndex) < ctrlTime)
+    {
+        auto nextIndex = lastIndex + 1;
+        while (times.at(nextIndex) <= ctrlTime)
+        {
+            lastIndex = nextIndex;
+            ++nextIndex;
+        }
 
-		const auto normTime = (ctrlTime - times[nextIndex]) / (times[lastIndex] - times[nextIndex]);
+        const auto normTime = (ctrlTime - times.at(lastIndex)) / (times.at(nextIndex) - times.at(lastIndex));
 
-		return ControllerKeyInfo{ normTime, nextIndex, lastIndex };
-	}
-	else
-	{
-		return ControllerKeyInfo{ 0.0f, lastIndex, lastIndex };
-	}
+        return ControllerKeyInfo{ normTime, lastIndex, nextIndex };
+    }
+    else if (ctrlTime < times.at(lastIndex))
+    {
+        auto nextIndex = lastIndex - 1;
+        while (ctrlTime <= times.at(nextIndex))
+        {
+            lastIndex = nextIndex;
+            --nextIndex;
+        }
+
+        const auto normTime = (ctrlTime - times.at(nextIndex)) / (times.at(lastIndex) - times.at(nextIndex));
+
+        return ControllerKeyInfo{ normTime, nextIndex, lastIndex };
+    }
+    else
+    {
+        return ControllerKeyInfo{ 0.0f, lastIndex, lastIndex };
+    }
 }
 
-const Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl
-	::GetTranslate(const ControllerKeyInfo& keyInfo) const 
+Rendering::KeyframeControllerImpl::APoint Rendering::KeyframeControllerImpl::GetTranslate(const ControllerKeyInfo& keyInfo) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto translation = m_Translations[keyInfo.GetFirstIndex()] + keyInfo.GetNormTime() *  (m_Translations[keyInfo.GetSecondIndex()] -  m_Translations[keyInfo.GetFirstIndex()]);
-	return translation;
+    auto translation = translations.at(keyInfo.GetFirstIndex()) + keyInfo.GetNormTime() * (translations.at(keyInfo.GetSecondIndex()) - translations.at(keyInfo.GetFirstIndex()));
+    return translation;
 }
 
-const Rendering::KeyframeControllerImpl::Matrix Rendering::KeyframeControllerImpl
-	::GetRotate(const ControllerKeyInfo& keyInfo) const noexcept
+Rendering::KeyframeControllerImpl::Matrix Rendering::KeyframeControllerImpl::GetRotate(const ControllerKeyInfo& keyInfo) const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	
-	AQuaternion quaternion;
-	quaternion.Slerp(keyInfo.GetNormTime(), m_Rotations[keyInfo.GetFirstIndex()], m_Rotations[keyInfo.GetSecondIndex()]);
-	
-	return quaternion.ToRotationMatrix();
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    AQuaternion quaternion;
+    quaternion.Slerp(keyInfo.GetNormTime(), rotations.at(keyInfo.GetFirstIndex()), rotations.at(keyInfo.GetSecondIndex()));
+
+    return quaternion.ToRotationMatrix();
 }
 
-float Rendering::KeyframeControllerImpl
-	::GetScale(const ControllerKeyInfo& keyInfo) const noexcept
+float Rendering::KeyframeControllerImpl::GetScale(const ControllerKeyInfo& keyInfo) const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Scales[keyInfo.GetFirstIndex()] + keyInfo.GetNormTime() * (m_Scales[keyInfo.GetSecondIndex()] - m_Scales[keyInfo.GetFirstIndex()]);
+    return scales.at(keyInfo.GetFirstIndex()) + keyInfo.GetNormTime() * (scales.at(keyInfo.GetSecondIndex()) - scales.at(keyInfo.GetFirstIndex()));
 }
 
-const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
-	::GetTranslateKeyInfo( float ctrlTime )
+Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl::GetTranslateKeyInfo(float ctrlTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return GetKeyInfo(ctrlTime,m_TranslationTimes,m_TranslationLastIndex);
+    return GetKeyInfo(ctrlTime, translationTimes, translationLastIndex);
 }
 
-const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
-	::GetRotateKeyInfo( float ctrlTime )
+Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl::GetRotateKeyInfo(float ctrlTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return GetKeyInfo(ctrlTime,m_RotationTimes,m_RotationLastIndex);
+    return GetKeyInfo(ctrlTime, rotationTimes, rotationLastIndex);
 }
 
-const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
-	::GetScaleKeyInfo( float ctrlTime )
+Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl::GetScaleKeyInfo(float ctrlTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return GetKeyInfo(ctrlTime,m_ScaleTimes,m_ScaleLastIndex);
+    return GetKeyInfo(ctrlTime, scaleTimes, scaleLastIndex);
 }
 
-const Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl
-	::GetCommonKeyInfo( float ctrlTime )
+Rendering::ControllerKeyInfo Rendering::KeyframeControllerImpl::GetCommonKeyInfo(float ctrlTime)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return GetKeyInfo(ctrlTime,m_CommonTimes,m_CommonLastIndex);
+    return GetKeyInfo(ctrlTime, commonTimes, commonLastIndex);
 }
-#include STSTEM_WARNING_POP

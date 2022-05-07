@@ -1,41 +1,44 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 13:38)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTestingTemplateEngineImpl.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
- 
-AssistTools::GenerateTestingTemplateEngineImpl
-	::GenerateTestingTemplateEngineImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace)
-	:ParentType(templateFileName, extension, replace)
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
+#include "CoreTools/Helper/ExceptionMacro.h"
 
- 
+AssistTools::GenerateTestingTemplateEngineImpl::GenerateTestingTemplateEngineImpl(const System::String& templateFileName, const System::String& extension, const Replace& replace)
+    : ParentType{ templateFileName, extension, replace }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateEngineImpl)
 
-void AssistTools::GenerateTestingTemplateEngineImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, 
-	             const System::String& solutionName, const System::String& managerName,
-				 const System::String& projectCapital, const System::String& managerCapital) const
+void AssistTools::GenerateTestingTemplateEngineImpl::GenerateTo(const System::String& resourceDirectory,
+                                                                const System::String& newProjectName,
+                                                                const CopyrightData& copyrightData,
+                                                                const System::String& solutionName,
+                                                                const System::String& managerName,
+                                                                const System::String& projectCapital,
+                                                                const System::String& managerCapital) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable = GetCopyrightVariable(copyrightData);
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerName), managerName));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital)); 
+    auto newVariable = GetCopyrightVariable(copyrightData);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerName), managerName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital);
 
-	return ParentType::Generate (resourceDirectory, newProjectName, newVariable);
+    return ParentType::Generate(resourceDirectory, newProjectName, newVariable);
 }
 
 /*
@@ -65,8 +68,8 @@ TestingHelper.h
 #ifndef %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 #define %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
 
-#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 
 
@@ -104,8 +107,8 @@ TestingHelper.cpp
 //
 // %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 

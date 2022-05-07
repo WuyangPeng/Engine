@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 10:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:42)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,92 +21,95 @@ using std::make_unique;
 using std::string;
 using namespace std::literals;
 
-Framework::WindowMessageUnitTestSuiteImpl ::WindowMessageUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
-    : m_Alloc{ ConsoleAlloc::Create() }, m_TestingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
-      m_Suite{ make_unique<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) },
-      m_Process{ { System::WindowsKeyCodes::F1, &ClassType::ResetTestDataOnMessage },
-                 { System::WindowsKeyCodes::F5, &ClassType::RunUnitTestOnMessage } }
+Framework::WindowMessageUnitTestSuiteImpl::WindowMessageUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
+    : alloc{ ConsoleAlloc::Create() },
+      testingInformationHelper{ CoreTools::TestingInformationHelper::Create() },
+      windowSuite{ make_unique<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) },
+      process{ { System::WindowsKeyCodes::F1, &ClassType::ResetTestDataOnMessage },
+               { System::WindowsKeyCodes::F5, &ClassType::RunUnitTestOnMessage } }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowMessageUnitTestSuiteImpl ::IsValid() const noexcept
+
+bool Framework::WindowMessageUnitTestSuiteImpl::IsValid() const noexcept
 {
-    if (m_Suite != nullptr)
+    if (windowSuite != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-bool Framework::WindowMessageUnitTestSuiteImpl ::IsPrintRun() const noexcept
+bool Framework::WindowMessageUnitTestSuiteImpl::IsPrintRun() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_TestingInformationHelper.IsPrintRun();
+    return testingInformationHelper.IsPrintRun();
 }
 
-int Framework::WindowMessageUnitTestSuiteImpl ::GetPassedNumber() const noexcept
+int Framework::WindowMessageUnitTestSuiteImpl::GetPassedNumber() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Suite->GetPassedNumber();
+    return windowSuite->GetPassedNumber();
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::RunUnitTest()
+void Framework::WindowMessageUnitTestSuiteImpl::RunUnitTest()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->RunUnitTest();
+    windowSuite->RunUnitTest();
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::PrintReport()
+void Framework::WindowMessageUnitTestSuiteImpl::PrintReport()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->PrintReport();
+    windowSuite->PrintReport();
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::ResetTestData()
+void Framework::WindowMessageUnitTestSuiteImpl::ResetTestData()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->ResetTestData();
+    windowSuite->ResetTestData();
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::RunUnitTestOnMessage()
+void Framework::WindowMessageUnitTestSuiteImpl::RunUnitTestOnMessage()
 {
     RunUnitTest();
     PrintReport();
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::AddSuite(const Suite& suite)
+void Framework::WindowMessageUnitTestSuiteImpl::AddSuite(const Suite& suite)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->AddSuite(suite);
+    windowSuite->AddSuite(suite);
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::KeyDownMessage(System::WindowsKeyCodes windowsKeyCodes)
+void Framework::WindowMessageUnitTestSuiteImpl::KeyDownMessage(System::WindowsKeyCodes windowsKeyCodes)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    const auto iter = m_Process.find(windowsKeyCodes);
-    if (iter != m_Process.cend())
+    const auto iter = process.find(windowsKeyCodes);
+    if (iter != process.cend())
     {
         (this->*(iter->second))();
     }
 }
 
-void Framework::WindowMessageUnitTestSuiteImpl ::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::WindowMessageUnitTestSuiteImpl::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
 {
-    const auto testLoopCount = m_TestingInformationHelper.GetLoopCount(suiteName, testName);
+    const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
 
     if (0 < testLoopCount)
     {
         unitTest->SetTestLoopCount(testLoopCount);
-        unitTest->SetRandomSeed(m_TestingInformationHelper.GetRandomSeed());
+        unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
         suite.AddTest(unitTest);
     }
     else if (testLoopCount < 0)
@@ -119,8 +125,8 @@ void Framework::WindowMessageUnitTestSuiteImpl ::AddTest(const string& suiteName
 }
 
 // private
-void Framework::WindowMessageUnitTestSuiteImpl ::ResetTestDataOnMessage()
+void Framework::WindowMessageUnitTestSuiteImpl::ResetTestDataOnMessage()
 {
     ResetTestData();
-    m_Suite->GetStream() << "测试数据已清零。\n";
+    windowSuite->GetStream() << "测试数据已清零。\n";
 }

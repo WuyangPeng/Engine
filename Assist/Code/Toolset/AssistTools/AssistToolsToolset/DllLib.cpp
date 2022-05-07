@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_ASSIST_TOOLS_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_ASSIST_TOOLS_STATIC
+#else  // BUILDING_ASSIST_TOOLS_STATIC
 
-	namespace AssistToolsToolset
-	{
-		void StaticDllLib()
-		{
+namespace AssistToolsToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_ASSIST_TOOLS_STATIC
+#endif  // !BUILDING_ASSIST_TOOLS_STATIC

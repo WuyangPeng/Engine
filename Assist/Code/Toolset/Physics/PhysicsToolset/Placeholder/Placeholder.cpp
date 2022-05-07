@@ -6,13 +6,12 @@
 
 #include "Toolset/Physics/PhysicsToolset/PhysicsToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 
-PhysicsToolset::Placeholder
-	::Placeholder() 
+PhysicsToolset::Placeholder ::Placeholder() noexcept
 {
-	PHYSICS_SELF_CLASS_IS_VALID_9;
+    PHYSICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(PhysicsToolset, Placeholder)

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 14:34)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_MANAGE_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_MANAGE_H
@@ -11,34 +14,32 @@
 
 #include "Rendering/Resources/Flags/BufferFlags.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace Rendering
 {
-	template <typename ManageType>
-	class OpenGLTextureDataManager : boost::noncopyable
-	{
-	public:
-		using ClassType = OpenGLTextureDataManager<ManageType>;
+    template <typename ManageType>
+    class OpenGLTextureDataManager
+    {
+    public:
+        using ClassType = OpenGLTextureDataManager<ManageType>;
 
-	public:
-                explicit OpenGLTextureDataManager(ManageType& manager) noexcept;
-		~OpenGLTextureDataManager();
-		OpenGLTextureDataManager(const OpenGLTextureDataManager&) =delete;
-		OpenGLTextureDataManager& operator=(const OpenGLTextureDataManager&) =delete;
-		OpenGLTextureDataManager( OpenGLTextureDataManager&&) =delete;
-		OpenGLTextureDataManager& operator=( OpenGLTextureDataManager&&) =delete;
+    public:
+        explicit OpenGLTextureDataManager(ManageType& manager) noexcept;
+        ~OpenGLTextureDataManager() noexcept;
+        OpenGLTextureDataManager(const OpenGLTextureDataManager& rhs) = delete;
+        OpenGLTextureDataManager& operator=(const OpenGLTextureDataManager& rhs) = delete;
+        OpenGLTextureDataManager(OpenGLTextureDataManager&& rhs) noexcept = delete;
+        OpenGLTextureDataManager& operator=(OpenGLTextureDataManager&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
-	 
-		void* Lock (int level, BufferLocking mode) noexcept;	 
-		void* Lock (int face, int level, BufferLocking mode) noexcept;	
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-		ManageType& m_Manager;	
-		int m_Level;
-		int m_Face;
-	};
+        NODISCARD void* Lock(int level, BufferLocking mode) noexcept;
+        NODISCARD void* Lock(int face, int level, BufferLocking mode) noexcept;
+
+    private:
+        ManageType& manager;
+        int managerLevel;
+        int managerFace;
+    };
 }
 
-#endif // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_MANAGE_H
+#endif  // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_MANAGE_H

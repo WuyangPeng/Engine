@@ -1,62 +1,58 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/25 09:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/14 17:05)
 
 #ifndef RENDERING_LOCAL_EFFECTS_TEXTURE2_ADD_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_TEXTURE2_ADD_EFFECT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Shaders/VisualEffectInstance.h" 
 #include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Shaders/VisualEffectInstance.h"
 
 namespace Rendering
 {
-	class  Texture2AddEffect : public VisualEffect
-	{
-	public:
-		using ClassType = Texture2AddEffect;
-		using ParentType = VisualEffect;
+    class Texture2AddEffect : public VisualEffect
+    {
+    public:
+        using ClassType = Texture2AddEffect;
+        using ParentType = VisualEffect;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture2AddEffect);
-		
-	public:
-		// Construction and destruction.
-		Texture2AddEffect (); 
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture2AddEffect);
 
-		// Any change in sampler state is made via the pixel shader.
-		PixelShader* GetPixelShader () const;
+    public:
+        explicit Texture2AddEffect(CoreTools::DisableNotThrow disableNotThrow);
 
-		// Create an instance of the effect with unique parameters.  If a
-		// sampler filter mode is set to a value corresponding to mipmapping,
-		// then the mipmaps will be generated if necessary.
-		VisualEffectInstance* CreateInstance (Texture2D* texture0,Texture2D* texture1) const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Convenience for creating an instance.  The application does not have to
-		// create the effect explicitly in order to create an instance from it.
-		static VisualEffectInstance* CreateUniqueInstance (Texture2D* texture0,ShaderFlags::SamplerFilter filter0,ShaderFlags::SamplerCoordinate coordinate00,
-														   ShaderFlags::SamplerCoordinate coordinate01,Texture2D* texture1,ShaderFlags::SamplerFilter filter1,
-														   ShaderFlags::SamplerCoordinate coordinate10,ShaderFlags::SamplerCoordinate coordinate11);
+        NODISCARD PixelShaderSharedPtr GetPixelShaderSharedPtr() const;
 
-	private:
-		static int msDx9VRegisters[1];
-		static int msOglVRegisters[1];
-		static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-		static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-		static int msAllPTextureUnits[2];
-		static int* msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-		static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-	};
-#include "System/Helper/PragmaWarning.h"
+        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const Texture2DSharedPtr& texture0, const Texture2DSharedPtr& texture1);
+
+        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const Texture2DSharedPtr& texture0,
+                                                                            ShaderFlags::SamplerFilter filter0,
+                                                                            ShaderFlags::SamplerCoordinate coordinate00,
+                                                                            ShaderFlags::SamplerCoordinate coordinate01,
+                                                                            const Texture2DSharedPtr& texture1,
+                                                                            ShaderFlags::SamplerFilter filter1,
+                                                                            ShaderFlags::SamplerCoordinate coordinate10,
+                                                                            ShaderFlags::SamplerCoordinate coordinate11);
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
- 
-	CORE_TOOLS_STREAM_REGISTER(Texture2AddEffect);
-	CORE_TOOLS_SHARED_PTR_DECLARE( Texture2AddEffect);
-	#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_STREAM_REGISTER(Texture2AddEffect);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(Texture2AddEffect);
 }
 
-#endif // RENDERING_LOCAL_EFFECTS_TEXTURE2_ADD_EFFECT_H
+#endif  // RENDERING_LOCAL_EFFECTS_TEXTURE2_ADD_EFFECT_H

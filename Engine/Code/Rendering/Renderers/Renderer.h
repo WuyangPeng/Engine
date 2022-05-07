@@ -1,30 +1,27 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.3.0 (2020/03/27 11:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 19:03)
 
 #ifndef RENDERING_RENDERERS_RENDERER_H
 #define RENDERING_RENDERERS_RENDERER_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
 #include "DepthRange.h"
 #include "PickRay.h"
 #include "RenderersInternalFwd.h"
 #include "Viewport.h"
-
-#include "Rendering/Shaders/AlphaState.h"
-#include "Rendering/Shaders/CullState.h"
-#include "Rendering/Shaders/DepthState.h"
-#include "Rendering/Shaders/OffsetState.h"
-#include "Rendering/Shaders/ShadersFwd.h"
-#include "Rendering/Shaders/StencilState.h"
-#include "Rendering/Shaders/VisualEffectInstance.h"
-#include "Rendering/Shaders/WireState.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/DataTypes/Colour.h"
+#include "Rendering/DataTypes/DataTypesFwd.h"
+#include "Rendering/GlobalEffects/GlobalEffect.h"
+#include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
 #include "Rendering/Resources/IndexBuffer.h"
 #include "Rendering/Resources/RenderTarget.h"
 #include "Rendering/Resources/ResourcesFwd.h"
@@ -34,19 +31,18 @@
 #include "Rendering/Resources/TextureCube.h"
 #include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Resources/VertexFormat.h"
-
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/SceneGraph/Visual.h"
+#include "Rendering/Shaders/AlphaState.h"
+#include "Rendering/Shaders/CullState.h"
+#include "Rendering/Shaders/DepthState.h"
+#include "Rendering/Shaders/OffsetState.h"
+#include "Rendering/Shaders/ShadersFwd.h"
+#include "Rendering/Shaders/StencilState.h"
+#include "Rendering/Shaders/VisualEffectInstance.h"
+#include "Rendering/Shaders/WireState.h"
 
-#include "Rendering/GlobalEffects/GlobalEffect.h"
-#include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
-
-#include "Rendering/DataTypes/Colour.h"
-#include "Rendering/DataTypes/DataTypesFwd.h"
-
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
 #include <string>
 
 RENDERING_NON_COPY_EXPORT_IMPL(RendererImpl);
@@ -66,13 +62,13 @@ namespace Rendering
     public:
         explicit Renderer(const std::string& fileName);
         Renderer(RendererTypes type, const RendererBasis& basis);
-        ~Renderer();
+        ~Renderer() noexcept;
 
         Renderer(Renderer&& rhs) noexcept;
         Renderer& operator=(Renderer&& rhs) noexcept;
         Renderer(const Renderer& rhs) noexcept = delete;
         Renderer& operator=(const Renderer& rhs) noexcept = delete;
-        Renderer() = delete;
+        Renderer() noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -85,11 +81,11 @@ namespace Rendering
         // 平台无关的接口部分。
 
         // 访问构造函数的输入。
-        int GetWidth() const;
-        int GetHeight() const;
-        TextureFormat GetColorFormat() const;
-        TextureFormat GetDepthStencilFormat() const;
-        int GetNumMultisamples() const;
+        NODISCARD int GetWidth() const noexcept;
+        NODISCARD int GetHeight() const noexcept;
+        NODISCARD TextureFormat GetColorFormat() const noexcept;
+        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD int GetNumMultisamples() const noexcept;
 
         // 资源管理。该资源被定义为顶点格式，顶点缓冲区，索引缓冲区，纹理（1D，2D，3D，立方体），
         // 渲染目标，顶点着色器和像素着色器。函数执行以下操作。
@@ -125,7 +121,7 @@ namespace Rendering
         void Unbind(const ConstVertexBufferSharedPtr& vertexBuffer);
         void Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex = 0, int offset = 0);
         void Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex = 0);
-        void* Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode);
+        NODISCARD void* Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode);
         void Unlock(const ConstVertexBufferSharedPtr& vertexBuffer);
         void Update(const ConstVertexBufferSharedPtr& vertexBuffer);
 
@@ -134,7 +130,7 @@ namespace Rendering
         void Unbind(const ConstIndexBufferSharedPtr& indexbuffer);
         void Enable(const ConstIndexBufferSharedPtr& indexbuffer);
         void Disable(const ConstIndexBufferSharedPtr& indexbuffer);
-        void* Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode);
+        NODISCARD void* Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode);
         void Unlock(const ConstIndexBufferSharedPtr& indexbuffer);
         void Update(const ConstIndexBufferSharedPtr& indexbuffer);
 
@@ -143,7 +139,7 @@ namespace Rendering
         void Unbind(const ConstTexture1DSharedPtr& texture);
         void Enable(const ConstTexture1DSharedPtr& texture, int textureUnit);
         void Disable(const ConstTexture1DSharedPtr& texture, int textureUnit);
-        void* Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode);
+        NODISCARD void* Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode);
         void Unlock(const ConstTexture1DSharedPtr& texture, int level);
         void Update(const ConstTexture1DSharedPtr& texture, int level);
 
@@ -152,7 +148,7 @@ namespace Rendering
         void Unbind(const ConstTexture2DSharedPtr& texture);
         void Enable(const ConstTexture2DSharedPtr& texture, int textureUnit);
         void Disable(const ConstTexture2DSharedPtr& texture, int textureUnit);
-        void* Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode);
+        NODISCARD void* Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode);
         void Unlock(const ConstTexture2DSharedPtr& texture, int level);
         void Update(const ConstTexture2DSharedPtr& texture, int level);
 
@@ -161,7 +157,7 @@ namespace Rendering
         void Unbind(const ConstTexture3DSharedPtr& texture);
         void Enable(const ConstTexture3DSharedPtr& texture, int textureUnit);
         void Disable(const ConstTexture3DSharedPtr& texture, int textureUnit);
-        void* Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode);
+        NODISCARD void* Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode);
         void Unlock(const ConstTexture3DSharedPtr& texture, int level);
         void Update(const ConstTexture3DSharedPtr& texture, int level);
 
@@ -170,7 +166,7 @@ namespace Rendering
         void Unbind(const ConstTextureCubeSharedPtr& texture);
         void Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit);
         void Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit);
-        void* Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode);
+        NODISCARD void* Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode);
         void Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level);
         void Update(const ConstTextureCubeSharedPtr& texture, int face, int level);
 
@@ -180,77 +176,77 @@ namespace Rendering
         void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
         void Enable(const ConstRenderTargetSharedPtr& renderTarget);
         void Disable(const ConstRenderTargetSharedPtr& renderTarget);
-        ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
 
         // 顶点着色器管理。顶点着色器对象必须已经由应用程序代码分配。
         void Bind(const ConstVertexShaderSharedPtr& vshader);
         void Unbind(const ConstVertexShaderSharedPtr& vshader);
-        void Enable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters);
-        void Disable(const ConstVertexShaderSharedPtr& vshader, const ConstShaderParametersSharedPtr& parameters);
+        void Enable(const ConstVertexShaderSharedPtr& vshader, const ShaderParameters& parameters);
+        void Disable(const ConstVertexShaderSharedPtr& vshader, const ShaderParameters& parameters);
 
         // 像素着色器管理。像素着色器对象必须已经由应用程序代码分配。
         void Bind(const ConstPixelShaderSharedPtr& pshader);
         void Unbind(const ConstPixelShaderSharedPtr& pshader);
-        void Enable(const ConstPixelShaderSharedPtr& pshader, const ConstShaderParametersSharedPtr& parameters);
-        void Disable(const ConstPixelShaderSharedPtr& pshader, const ConstShaderParametersSharedPtr& parameters);
+        void Enable(const ConstPixelShaderSharedPtr& pshader, const ShaderParameters& parameters);
+        void Disable(const ConstPixelShaderSharedPtr& pshader, const ShaderParameters& parameters);
 
         // 访问当前的全局状态。
-        const ConstAlphaStateSharedPtr GetAlphaState() const;
-        const ConstCullStateSharedPtr GetCullState() const;
-        const ConstDepthStateSharedPtr GetDepthState() const;
-        const ConstOffsetStateSharedPtr GetOffsetState() const;
-        const ConstStencilStateSharedPtr GetStencilState() const;
-        const ConstWireStateSharedPtr GetWireState() const;
+        NODISCARD ConstAlphaStateSharedPtr GetAlphaState() const noexcept;
+        NODISCARD ConstCullStateSharedPtr GetCullState() const noexcept;
+        NODISCARD ConstDepthStateSharedPtr GetDepthState() const noexcept;
+        NODISCARD ConstOffsetStateSharedPtr GetOffsetState() const noexcept;
+        NODISCARD ConstStencilStateSharedPtr GetStencilState() const noexcept;
+        NODISCARD ConstWireStateSharedPtr GetWireState() const noexcept;
 
         // 覆盖全局状态。 如果被覆盖，则在图形调用期间使用此状态代替VisualPass状态。 要撤消覆盖，请传递空指针。
-        const ConstAlphaStateSharedPtr GetOverrideAlphaState() const;
-        const ConstCullStateSharedPtr GetOverrideCullState() const;
-        const ConstDepthStateSharedPtr GetOverrideDepthState() const;
-        const ConstOffsetStateSharedPtr GetOverrideOffsetState() const;
-        const ConstStencilStateSharedPtr GetOverrideStencilState() const;
-        const ConstWireStateSharedPtr GetOverrideWireState() const;
+        NODISCARD ConstAlphaStateSharedPtr GetOverrideAlphaState() const noexcept;
+        NODISCARD ConstCullStateSharedPtr GetOverrideCullState() const noexcept;
+        NODISCARD ConstDepthStateSharedPtr GetOverrideDepthState() const noexcept;
+        NODISCARD ConstOffsetStateSharedPtr GetOverrideOffsetState() const noexcept;
+        NODISCARD ConstStencilStateSharedPtr GetOverrideStencilState() const noexcept;
+        NODISCARD ConstWireStateSharedPtr GetOverrideWireState() const noexcept;
         void SetOverrideAlphaState(const ConstAlphaStateSharedPtr& alphaState);
         void SetOverrideCullState(const ConstCullStateSharedPtr& cullState);
         void SetOverrideDepthState(const ConstDepthStateSharedPtr& depthState);
         void SetOverrideOffsetState(const ConstOffsetStateSharedPtr& offsetState);
         void SetOverrideStencilState(const ConstStencilStateSharedPtr& stencilState);
         void SetOverrideWireState(const ConstWireStateSharedPtr& wireState);
-        void SetReverseCullOrder(bool reverseCullOrder);
-        bool GetReverseCullOrder() const;
+        void SetReverseCullOrder(bool reverseCullOrder) noexcept;
+        bool GetReverseCullOrder() const noexcept;
 
         // 访问当前相机状态。
-        void SetCamera(const CameraSharedPtr& camera);
-        const ConstCameraSharedPtr GetCamera() const;
-        const CameraSharedPtr GetCamera();
-        const Matrix GetViewMatrix() const;
-        const Matrix GetProjectionMatrix() const;
-        const Matrix GetPostProjectionMatrix() const;
+        void SetCamera(const CameraSharedPtr& camera) noexcept;
+        NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
+        NODISCARD CameraSharedPtr GetCamera() noexcept;
+        NODISCARD Matrix GetViewMatrix() const;
+        NODISCARD Matrix GetProjectionMatrix() const;
+        NODISCARD Matrix GetPostProjectionMatrix() const;
 
         // 根据指定的左手屏幕坐标（x，y）并使用当前相机来计算光线。
         // 输出的“原点”是相机位置，而“方向”是单位长度矢量。
         // 两者都在世界坐标中。 如果（x，y）在当前视口中的则返回值为'true'。
-        PickRay GetPickRay(int x, int y) const;
+        NODISCARD PickRay GetPickRay(int x, int y) const;
 
         // 访问颜色，深度和模板缓冲区的当前清除参数。 颜色缓冲区是后缓冲区。
-        void SetClearColor(const Colour& clearColor);
-        const Colour GetClearColor() const;
-        void SetClearDepth(float clearDepth);
-        float GetClearDepth() const;
-        void SetClearStencil(int clearStencil);
-        int GetClearStencil() const;
+        void SetClearColor(const Colour& clearColor) noexcept;
+        NODISCARD Colour GetClearColor() const noexcept;
+        void SetClearDepth(float clearDepth) noexcept;
+        NODISCARD float GetClearDepth() const noexcept;
+        void SetClearStencil(int clearStencil) noexcept;
+        NODISCARD int GetClearStencil() const noexcept;
 
         // 访问当前的颜色通道蒙版
-        bool GetAllowRed() const;
-        bool GetAllowGreen() const;
-        bool GetAllowBlue() const;
-        bool GetAllowAlpha() const;
-        void SetAllowRed(bool allowRed);
-        void SetAllowGreen(bool allowGreen);
-        void SetAllowBlue(bool allowBlue);
-        void SetAllowAlpha(bool allowAlpha);
+        NODISCARD bool GetAllowRed() const noexcept;
+        NODISCARD bool GetAllowGreen() const noexcept;
+        NODISCARD bool GetAllowBlue() const noexcept;
+        NODISCARD bool GetAllowAlpha() const noexcept;
+        void SetAllowRed(bool allowRed) noexcept;
+        void SetAllowGreen(bool allowGreen) noexcept;
+        void SetAllowBlue(bool allowBlue) noexcept;
+        void SetAllowAlpha(bool allowAlpha) noexcept;
 
         // 绘制场景图的可见集合的入口点。
-        void Draw(VisibleSet& visibleSet, const GlobalEffectSharedPtr& globalEffect = GlobalEffectSharedPtr{});
+        void Draw(VisibleSet& visibleSet, GlobalEffect* globalEffect = nullptr);
 
         // 绘制单个对象的入口点。
         void Draw(const VisualSharedPtr& visual);
@@ -269,9 +265,9 @@ namespace Rendering
 
         // 视口管理。 视口以右手屏幕坐标指定。 原点是屏幕的左下角，y轴指向上方，x轴指向右侧。
         void SetViewport(const Viewport& viewport);
-        Viewport GetViewport() const;
+        NODISCARD Viewport GetViewport() const;
         void SetDepthRange(const DepthRange& depthRange);
-        DepthRange GetDepthRange() const;
+        NODISCARD DepthRange GetDepthRange() const;
         void Resize(int width, int height);
 
         // 支持清除颜色，深度和模板缓冲区。
@@ -295,7 +291,7 @@ namespace Rendering
         //		<抽象界面渲染器调用和绘制调用>;
         //		renderer->PostDraw();
         //	}
-        bool PreDraw();
+        NODISCARD bool PreDraw();
         void PostDraw();
 
         // 绘制2D缓冲区的入口点（用于2D应用程序）
@@ -305,14 +301,14 @@ namespace Rendering
         // 绘制2D文本的入口点。
         void Draw(int x, int y, const Colour& color, const std::string& message);
 
-        bool InTexture2DMap(const ConstTexture2DSharedPtr& texture);
+        NODISCARD bool InTexture2DMap(const ConstTexture2DSharedPtr& texture);
         void InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture);
 
-        RendererTypes GetRendererType() const;
+        NODISCARD RendererTypes GetRendererType() const;
 
     private:
         PackageType impl;
-        int64_t m_RendererID;
+        int64_t rendererID;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(Renderer);

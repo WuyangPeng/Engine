@@ -1,29 +1,29 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 15:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:56)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_TEXTURE_2D_H
 #define RENDERING_RENDERERS_PLATFORM_TEXTURE_2D_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-
+#include "RenderersFwd.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include <boost/noncopyable.hpp>
+#include "Rendering/Resources/ResourcesFwd.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(PlatformTexture2DImpl);
 
 namespace Rendering
 {
-    class Renderer;
-    class Texture2D;
-
     class RENDERING_DEFAULT_DECLARE PlatformTexture2D
     {
     public:
@@ -33,21 +33,16 @@ namespace Rendering
 
     public:
         PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D);
-        virtual ~PlatformTexture2D();
-        PlatformTexture2D(const PlatformTexture2D&) = delete;
-        PlatformTexture2D& operator=(const PlatformTexture2D&) = delete;
-        PlatformTexture2D(PlatformTexture2D&&) = delete;
-        PlatformTexture2D& operator=(PlatformTexture2D&&) = delete;
 
-        CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
         // 纹理操作
         void Enable(Renderer* renderer, int textureUnit);
         void Disable(Renderer* renderer, int textureUnit);
-        void* Lock(int level, BufferLocking mode);
+        NODISCARD void* Lock(int level, BufferLocking mode);
         void Unlock(int level);
 
-        UInt GetTexture() const;
+        NODISCARD UInt GetTexture() const;
 
     private:
         PackageType impl;

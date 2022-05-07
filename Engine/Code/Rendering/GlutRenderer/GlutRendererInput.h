@@ -1,37 +1,24 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 13:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/24 11:08)
 
 #ifndef RENDERING_GLUT_RENDERER_INPUT_H
 #define RENDERING_GLUT_RENDERER_INPUT_H
 
-#include "Rendering/RenderingDll.h" 
-
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#ifdef WIN32
-// The glut.h has unreference local functions glutInit_ATEXIT_HACK,
-// glutCreateWindow_ATEXIT_HACK, and glutCreateMenu_ATEXIT_HACK.
-// Disable the warnings about these.
-#pragma warning(disable : 4505)
-#endif
-//#include "WglExtensions.h"
-#include <GL/glut.h>
-#endif
+#include "Rendering/RenderingDll.h"
 
 namespace Rendering
 {
-
-	class GlutRendererInput
-	{
-	public:
-		int mWindowID;
-		bool mDisableVerticalSync;
-	};
+    class GlutRendererInput
+    {
+    public:
+    };
 
 }
 
-#endif // RENDERING_GLUT_RENDERER_INPUT_H
+#endif  // RENDERING_GLUT_RENDERER_INPUT_H

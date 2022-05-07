@@ -1,29 +1,26 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/13 14:46)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SaveVisualEffect.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::SaveVisualEffect
-	::SaveVisualEffect(const VisualEffectSharedPtr& visualEffect, const System::String& fileName)
+#include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+
+Rendering::SaveVisualEffect::SaveVisualEffect(const VisualEffect& visualEffect, const System::String& fileName)
 {
-	CoreTools::WriteFileManager manager{ fileName };
+    CoreTools::WriteFileManager manager{ fileName };
 
-	visualEffect->SaveVisualTechnique(manager);
+    visualEffect.SaveVisualTechnique(manager);
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,SaveVisualEffect)
-
-
-#include STSTEM_WARNING_POP
+CLASS_INVARIANT_STUB_DEFINE(Rendering, SaveVisualEffect)

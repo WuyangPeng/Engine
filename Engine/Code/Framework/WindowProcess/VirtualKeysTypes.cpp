@@ -1,110 +1,100 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 10:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:46)
 
 #include "Framework/FrameworkExport.h"
 
 #include "VirtualKeysTypes.h"
-#include "Framework/Application/Flags/ApplicationTrait.h" 
-#include "System/Helper/PragmaWarning/Freeglut.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
 
-Framework::VirtualKeysTypes
-	::VirtualKeysTypes(WParam wParam) noexcept
-	: m_IsCtrlKeyDown{ (wParam & WindowApplicationTrait::MouseModifiers::sm_ModifierControl) != 0 },
-	  m_IsLeftMouseDown{ (wParam & WindowApplicationTrait::MouseModifiers::sm_ModifierLeftButton) != 0 },
-	  m_IsMiddleMouseDown{ (wParam & WindowApplicationTrait::MouseModifiers::sm_ModifierMiddleButton) != 0 },
-	  m_IsRightMouseDown{ (wParam & WindowApplicationTrait::MouseModifiers::sm_ModifierRightButton) != 0 },
-	  m_IsShiftKeyDown{ (wParam & WindowApplicationTrait::MouseModifiers::sm_ModifierShift) != 0 }
+Framework::VirtualKeysTypes::VirtualKeysTypes(WParam wParam) noexcept
+    : isCtrlKeyDown{ (wParam & WindowApplicationTrait::MouseModifiers::modifierControl) != 0 },
+      isLeftMouseDown{ (wParam & WindowApplicationTrait::MouseModifiers::modifierLeftButton) != 0 },
+      isMiddleMouseDown{ (wParam & WindowApplicationTrait::MouseModifiers::modifierMiddleButton) != 0 },
+      isRightMouseDown{ (wParam & WindowApplicationTrait::MouseModifiers::modifierRightButton) != 0 },
+      isShiftKeyDown{ (wParam & WindowApplicationTrait::MouseModifiers::modifierShift) != 0 }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9; 
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, VirtualKeysTypes)
 
-bool Framework::VirtualKeysTypes
-	::IsCtrlKeyDown() const noexcept
+bool Framework::VirtualKeysTypes::IsCtrlKeyDown() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_IsCtrlKeyDown;
+    return isCtrlKeyDown;
 }
 
-bool Framework::VirtualKeysTypes
-	::IsLeftMouseDown() const noexcept
+bool Framework::VirtualKeysTypes::IsLeftMouseDown() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_IsLeftMouseDown;
+    return isLeftMouseDown;
 }
 
-bool Framework::VirtualKeysTypes
-	::IsMiddleMouseDown() const noexcept
+bool Framework::VirtualKeysTypes::IsMiddleMouseDown() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_IsMiddleMouseDown;
+    return isMiddleMouseDown;
 }
 
-bool Framework::VirtualKeysTypes
-	::IsRightMouseDown() const noexcept
+bool Framework::VirtualKeysTypes::IsRightMouseDown() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_IsRightMouseDown;
+    return isRightMouseDown;
 }
 
-bool Framework::VirtualKeysTypes
-	::IsShiftKeyDown() const noexcept
+bool Framework::VirtualKeysTypes::IsShiftKeyDown() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_IsShiftKeyDown;
+    return isShiftKeyDown;
 }
 
-bool Framework::VirtualKeysTypes
-	::IsMouseDown() const noexcept
+bool Framework::VirtualKeysTypes::IsMouseDown() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_IsLeftMouseDown || m_IsMiddleMouseDown || m_IsRightMouseDown;
+    return isLeftMouseDown || isMiddleMouseDown || isRightMouseDown;
 }
 
-void Framework::VirtualKeysTypes
-	::SetModifiers(int modifiers) noexcept
+void Framework::VirtualKeysTypes::SetModifiers(int modifiers) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	m_IsShiftKeyDown = (GlutApplicationTrait::KeyboardModifiers::sm_KeyShift == modifiers);
-	m_IsCtrlKeyDown = (GlutApplicationTrait::KeyboardModifiers::sm_KeyControl == modifiers);
+    isShiftKeyDown = (GlutApplicationTrait::KeyboardModifiers::keyShift == modifiers);
+    isCtrlKeyDown = (GlutApplicationTrait::KeyboardModifiers::keyControl == modifiers);
 }
 
-void Framework::VirtualKeysTypes
-	::SetMouseButtonsTypes(int button)  noexcept
+void Framework::VirtualKeysTypes::SetMouseButtonsTypes(int button) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	m_IsLeftMouseDown = (GlutApplicationTrait::MouseButtons::sm_MouseLeftButton == button);
-	m_IsMiddleMouseDown = (GlutApplicationTrait::MouseButtons::sm_MouseMiddleButton == button);
-	m_IsRightMouseDown = (GlutApplicationTrait::MouseButtons::sm_MouseRightButton == button);
+    isLeftMouseDown = (GlutApplicationTrait::MouseButtons::mouseLeftButton == button);
+    isMiddleMouseDown = (GlutApplicationTrait::MouseButtons::mouseMiddleButton == button);
+    isRightMouseDown = (GlutApplicationTrait::MouseButtons::mouseRightButton == button);
 }
 
-void Framework::VirtualKeysTypes
-	::ClearMouseButtonsTypes() noexcept
+void Framework::VirtualKeysTypes::ClearMouseButtonsTypes() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_9;	 
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	m_IsLeftMouseDown = false;
-	m_IsMiddleMouseDown = false;
-	m_IsRightMouseDown = false;
+    isLeftMouseDown = false;
+    isMiddleMouseDown = false;
+    isRightMouseDown = false;
 }
 
-void Framework::VirtualKeysTypes
-	::ClearKeyDownTypes() noexcept
+void Framework::VirtualKeysTypes::ClearKeyDownTypes() noexcept
 {
-	m_IsShiftKeyDown = false;
-	m_IsCtrlKeyDown = false;
+    isShiftKeyDown = false;
+    isCtrlKeyDown = false;
 }
-

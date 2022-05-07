@@ -45,23 +45,29 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Testing.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\StringReplacing.json">
-      <Filter>配置</Filter>
-    </None>
     <None Include="Configuration\AssistToolsTesting.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\StringReplacing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
     <None Include="Resource\GenerateProjectsSuite\SetEnvironment.bat">
       <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -276,12 +282,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCppSpecial.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
-    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibMiddleLayerCpp.txt">
-      <Filter>资源文件\GenerateProjectsSuite</Filter>
-    </Text>
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllMainCpp.txt">
       <Filter>资源文件\GenerateProjectsSuite</Filter>
     </Text>
@@ -477,6 +477,18 @@
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCpp.txt">
       <Filter>资源文件\GenerateProjectsSuite</Filter>
     </Text>
+    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibCppSpecial.txt">
+      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </Text>
+    <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibMiddleLayerCpp.txt">
+      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </Text>
+	<Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -489,11 +501,17 @@
     <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
+    <Text Include="Resource\Todo\Level 6.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>    
   </ItemGroup>
 </Project>

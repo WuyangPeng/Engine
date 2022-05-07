@@ -12,7 +12,7 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PickRecordTesting)
 
-void Rendering::PickRecordTesting ::MainTest()
+void Rendering::PickRecordTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializers();
 
@@ -22,7 +22,7 @@ void Rendering::PickRecordTesting ::MainTest()
     CoreTools::InitTerm::ExecuteTerminators();
 }
 
-void Rendering::PickRecordTesting ::BaseTest()
+void Rendering::PickRecordTesting::BaseTest()
 {
     PickRecord firstPickRecord = PickRecord::Create();
 
@@ -53,7 +53,7 @@ void Rendering::PickRecordTesting ::BaseTest()
     // 	ASSERT_APPROXIMATE(firstPickRecord.GetBary(2), 0.3f, 1e-8f);
 }
 
-void Rendering::PickRecordTesting ::OperatorTest()
+void Rendering::PickRecordTesting::OperatorTest()
 {
     PickRecord firstPickRecord = PickRecord::Create();
     firstPickRecord.SetParameter(0.5f);

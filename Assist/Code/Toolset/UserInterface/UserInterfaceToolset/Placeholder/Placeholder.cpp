@@ -6,13 +6,12 @@
 
 #include "Toolset/UserInterface/UserInterfaceToolset/UserInterfaceToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/UserInterfaceClassInvariantMacro.h"
 
-UserInterfaceToolset::Placeholder
-	::Placeholder() 
+UserInterfaceToolset::Placeholder ::Placeholder() noexcept
 {
-	USER_INTERFACE_SELF_CLASS_IS_VALID_9;
+    USER_INTERFACE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(UserInterfaceToolset, Placeholder)

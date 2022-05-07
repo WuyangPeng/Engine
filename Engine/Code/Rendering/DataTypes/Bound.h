@@ -48,6 +48,9 @@ namespace Rendering
         using APointContainer = std::vector<APoint>;
         using Vector3DContainer = std::vector<Vector3D>;
 
+        using Float = Bound<float>;
+        using Double = Bound<double>;
+
     public:
         // 边界指定为一个指定中心和半径的球体。
         Bound(const APoint& center, T radius);

@@ -1,408 +1,404 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/10 10:56)
 
 #include "GenerateTemplateEngineTesting.h"
-#include "AssistTools/GenerateProjects/CopyrightData.h" 
-#include "AssistTools/GenerateProjects/GenerateTemplateEngine.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "AssistTools/GenerateProjects/CopyrightData.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateEngine.h"
+
+using namespace std::literals;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateEngine)
 
-void AssistTools::GenerateTemplateEngineTesting
-    ::MainTest()
+void AssistTools::GenerateTemplateEngineTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
 
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateEngineH.txt"), SYSTEM_TEXT("Engine"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"), SYSTEM_TEXT("EngineFwd"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateOtherManagerH.txt"), SYSTEM_TEXT("EventManager"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerCppGenerateToTest, SYSTEM_TEXT("GameTemplateOtherManagerCpp.txt"), SYSTEM_TEXT("EventManager"));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateEngineH.txt"s), SYSTEM_TEXT("Engine"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateEngineFwdH.txt"s), SYSTEM_TEXT("EngineFwd"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateOtherManagerH.txt"s), SYSTEM_TEXT("EventManager"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultEventManagerCppGenerateToTest, SYSTEM_TEXT("GameTemplateOtherManagerCpp.txt"s), SYSTEM_TEXT("EventManager"s));
 
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerEngineH.txt"), SYSTEM_TEXT("Engine"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerEngineFwdH.txt"), SYSTEM_TEXT("EngineFwd"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerH.txt"), SYSTEM_TEXT("InputManager"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerDetailH.txt"), SYSTEM_TEXT("InputManagerDetail"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplatePlaceholderH.txt"), SYSTEM_TEXT("Placeholder"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerCppGenerateToTest, SYSTEM_TEXT("GameTemplatePlaceholderCpp.txt"), SYSTEM_TEXT("Placeholder"));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerEngineH.txt"s), SYSTEM_TEXT("Engine"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerEngineFwdH.txt"s), SYSTEM_TEXT("EngineFwd"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerH.txt"s), SYSTEM_TEXT("InputManager"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplateInputManagerDetailH.txt"s), SYSTEM_TEXT("InputManagerDetail"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerHeaderGenerateToTest, SYSTEM_TEXT("GameTemplatePlaceholderH.txt"s), SYSTEM_TEXT("Placeholder"s));
+    ASSERT_NOT_THROW_EXCEPTION_2(DefaultInputManagerCppGenerateToTest, SYSTEM_TEXT("GameTemplatePlaceholderCpp.txt"s), SYSTEM_TEXT("Placeholder"s));
 }
 
-void AssistTools::GenerateTemplateEngineTesting
-	::GenerateToTest()
-{	
-	const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("EventManager"));
-	const System::String newFullProjectName(SYSTEM_TEXT("EventManager"));
-	const System::String fileName(GetResourceDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateOtherManagerHSpecial.txt"));
-	const System::String extension(SYSTEM_TEXT(".h"));	  
-	const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetSpecialCodeEngineDirectory());
-	const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
- 
-	TestingType::Replace replace = GetSpecialReplace();
-
-	TestingType generateTemplateSolution(fileName, extension, replace);
-
-	int defaultEndYearCount = GetContentFindCount(fileName, GetSpecialEndYear());
-	ASSERT_EQUAL(defaultEndYearCount, 1);
-
-	int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetSpecialProjectChineseName());
-	ASSERT_LESS(0, defaultProjectChineseNameCount);
-
-	int defaultVersionsCount = GetContentFindCount(fileName, GetSpecialVersions());
-	ASSERT_LESS(0, defaultVersionsCount);
-
-	int defaultDateCount = GetContentFindCount(fileName, GetSpecialDate());
-	ASSERT_EQUAL(defaultDateCount, 1);
-
-	int defaultHourCount = GetContentFindCount(fileName, GetSpecialHour());
-	ASSERT_EQUAL(defaultHourCount, 1);
-
-	int defaultMinuteCount = GetContentFindCount(fileName, GetSpecialMinute());
-	ASSERT_EQUAL(defaultMinuteCount, 1); 
-
-	int defaultNameSpaceCount = GetContentFindCount(fileName, GetSpecialSolutionName());
-	ASSERT_LESS(0, defaultNameSpaceCount);
-
-	int defaultManagerNameCount = GetContentFindCount(fileName, GetSpecialManagerName());
-	ASSERT_LESS(0, defaultManagerNameCount);
-
-	int defaultProjectCapitalCount = GetContentFindCount(fileName, GetSpecialProjectCapital());
-	ASSERT_LESS(0, defaultProjectCapitalCount);
-
-	int defaultManagerCapitalCount = GetContentFindCount(fileName, GetSpecialManagerCapital());
-	ASSERT_LESS(0, defaultManagerCapitalCount);
-
-	int defaultInterfaceNameCount = GetContentFindCount(fileName, GetSpecialInterfaceName());
-	ASSERT_LESS(0, defaultInterfaceNameCount);
-
-	CopyrightData copyrightData(GetCopyrightData());	
-
-	generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetEventManagerName(), GetEventManagerInterface(),GetProjectCapital(), GetEventManagerCapitalName());
-
-	System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
-
-	ContentCountTest(fullName, GetSpecialEndYear(), 0, __FUNCTION__, 0);
-
-	ContentCountTest(fullName, GetSpecialProjectChineseName(), 0, __FUNCTION__, 1);
-	ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
-
-	ContentCountTest(fullName, GetSpecialVersions(), 0, __FUNCTION__, 3);
-	ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
-
-	ContentCountTest(fullName, GetSpecialSolutionName(), 0, __FUNCTION__, 5);
-	ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
-
-	ContentCountTest(fullName, GetSpecialManagerName(), 0, __FUNCTION__, 7);
-	ContentCountTest(fullName, GetEventManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
-
-	ContentCountTest(fullName, GetSpecialProjectCapital(), 0, __FUNCTION__, 9);
-	ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
-
-	ContentCountTest(fullName, GetSpecialManagerCapital(), 0, __FUNCTION__, 11);
-	ContentCountTest(fullName, GetEventManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
-
-	ContentCountTest(fullName, GetSpecialInterfaceName(), 0, __FUNCTION__, 13);
-	ContentCountTest(fullName, GetEventManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
-
-	ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
-}
-
-void AssistTools::GenerateTemplateEngineTesting
-	::DefaultEventManagerHeaderGenerateToTest(const System::String& testFileName, const System::String& resultName)
-{	
-	const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("EventManager"));
-	const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName); 
-	const System::String extension(SYSTEM_TEXT(".h"));	
-	const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
-	const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
-	 
-	TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
-
-	int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
-	ASSERT_EQUAL(defaultEndYearCount, 1);
-
-	int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
-	ASSERT_LESS(0, defaultProjectChineseNameCount);
-
-	int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
-	ASSERT_LESS(0, defaultVersionsCount);
-
-	int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
-	ASSERT_EQUAL(defaultDateCount, 1);
-
-	int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
-	ASSERT_EQUAL(defaultHourCount, 1);
-
-	int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
-	ASSERT_EQUAL(defaultMinuteCount, 1);
-
-	int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
-
-	int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
-
-	int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
-	ASSERT_LESS(0, defaultProjectCapitalCount);
-
-	int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
-	ASSERT_LESS(0, defaultManagerCapitalCount);
-
-	int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
-
-	CopyrightData copyrightData(GetCopyrightData());
-	const System::String newFullProjectName(resultName);
-
-	generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetEventManagerName(), GetEventManagerInterface(),GetProjectCapital(), GetEventManagerCapitalName());
-
-	System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
-
-	ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
-
-	ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
-	ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
-
-	ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
-	ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
-
-	ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
-	ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
-
-	ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
-	ContentCountTest(fullName, GetEventManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
-
-	ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
-	ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
-
-	ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
-	ContentCountTest(fullName, GetEventManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
-
-	ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
-	ContentCountTest(fullName, GetEventManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
-
-	ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
-}
-
-void AssistTools::GenerateTemplateEngineTesting
-	::DefaultEventManagerCppGenerateToTest(const System::String& testFileName, const System::String& resultName)
+void AssistTools::GenerateTemplateEngineTesting::GenerateToTest()
 {
-	const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("EventManager"));
-	const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName);	  
-	const System::String extension(SYSTEM_TEXT(".cpp")); 
-	const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
-	const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
-	  
-	TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("EventManager"));
+    const System::String newFullProjectName(SYSTEM_TEXT("EventManager"));
+    const System::String fileName(GetResourceDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateOtherManagerHSpecial.txt"));
+    const System::String extension(SYSTEM_TEXT(".h"));
+    const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetSpecialCodeEngineDirectory());
+    const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-	int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
-	ASSERT_EQUAL(defaultEndYearCount, 1);
+    TestingType::Replace replace = GetSpecialReplace();
 
-	int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
-	ASSERT_LESS(0, defaultProjectChineseNameCount);
+    TestingType generateTemplateSolution(fileName, extension, replace);
 
-	int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
-	ASSERT_LESS(0, defaultVersionsCount);
+    int defaultEndYearCount = GetContentFindCount(fileName, GetSpecialEndYear());
+    ASSERT_EQUAL(defaultEndYearCount, 1);
 
-	int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
-	ASSERT_EQUAL(defaultDateCount, 1);
+    int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetSpecialProjectChineseName());
+    ASSERT_LESS(0, defaultProjectChineseNameCount);
 
-	int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
-	ASSERT_EQUAL(defaultHourCount, 1);
+    int defaultVersionsCount = GetContentFindCount(fileName, GetSpecialVersions());
+    ASSERT_LESS(0, defaultVersionsCount);
 
-	int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
-	ASSERT_EQUAL(defaultMinuteCount, 1);
+    int defaultDateCount = GetContentFindCount(fileName, GetSpecialDate());
+    ASSERT_EQUAL(defaultDateCount, 1);
 
-	int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
+    int defaultHourCount = GetContentFindCount(fileName, GetSpecialHour());
+    ASSERT_EQUAL(defaultHourCount, 1);
 
-	int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
+    int defaultMinuteCount = GetContentFindCount(fileName, GetSpecialMinute());
+    ASSERT_EQUAL(defaultMinuteCount, 1);
 
-	int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
-	ASSERT_LESS(0, defaultProjectCapitalCount);
+    int defaultNameSpaceCount = GetContentFindCount(fileName, GetSpecialSolutionName());
+    ASSERT_LESS(0, defaultNameSpaceCount);
 
-	int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital()); 
+    int defaultManagerNameCount = GetContentFindCount(fileName, GetSpecialManagerName());
+    ASSERT_LESS(0, defaultManagerNameCount);
 
-	int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
+    int defaultProjectCapitalCount = GetContentFindCount(fileName, GetSpecialProjectCapital());
+    ASSERT_LESS(0, defaultProjectCapitalCount);
 
-	CopyrightData copyrightData(GetCopyrightData());
-	const System::String newFullProjectName(resultName);
+    int defaultManagerCapitalCount = GetContentFindCount(fileName, GetSpecialManagerCapital());
+    ASSERT_LESS(0, defaultManagerCapitalCount);
 
-	generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetEventManagerName(), GetEventManagerInterface(),
-		                                GetProjectCapital(), GetEventManagerCapitalName());
+    int defaultInterfaceNameCount = GetContentFindCount(fileName, GetSpecialInterfaceName());
+    ASSERT_LESS(0, defaultInterfaceNameCount);
 
-	System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
+    CopyrightData copyrightData(GetCopyrightData());
 
-	ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetEventManagerName(), GetEventManagerInterface(), GetProjectCapital(), GetEventManagerCapitalName());
 
-	ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
-	ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
+    System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
 
-	ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
-	ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
+    ContentCountTest(fullName, GetSpecialEndYear(), 0, __FUNCTION__, 0);
 
-	ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
-	ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
+    ContentCountTest(fullName, GetSpecialProjectChineseName(), 0, __FUNCTION__, 1);
+    ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
 
-	ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
-	ContentCountTest(fullName, GetEventManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
+    ContentCountTest(fullName, GetSpecialVersions(), 0, __FUNCTION__, 3);
+    ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
 
-	ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
-	ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
+    ContentCountTest(fullName, GetSpecialSolutionName(), 0, __FUNCTION__, 5);
+    ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
 
-	ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
-	ContentCountTest(fullName, GetEventManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
+    ContentCountTest(fullName, GetSpecialManagerName(), 0, __FUNCTION__, 7);
+    ContentCountTest(fullName, GetEventManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
 
-	ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
-	ContentCountTest(fullName, GetEventManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
+    ContentCountTest(fullName, GetSpecialProjectCapital(), 0, __FUNCTION__, 9);
+    ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
 
-	ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
-}
- 
-void AssistTools::GenerateTemplateEngineTesting
-	::DefaultInputManagerHeaderGenerateToTest(const System::String& testFileName, const System::String& resultName)
-{	
-	const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("InputManager"));
-	const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName); 
-	const System::String extension(SYSTEM_TEXT(".h"));	 
-	const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
-	const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
-  
-	TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    ContentCountTest(fullName, GetSpecialManagerCapital(), 0, __FUNCTION__, 11);
+    ContentCountTest(fullName, GetEventManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
 
-	int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
-	ASSERT_EQUAL(defaultEndYearCount, 1);
+    ContentCountTest(fullName, GetSpecialInterfaceName(), 0, __FUNCTION__, 13);
+    ContentCountTest(fullName, GetEventManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
 
-	int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
-	ASSERT_LESS(0, defaultProjectChineseNameCount);
-
-	int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
-	ASSERT_LESS(0, defaultVersionsCount);
-
-	int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
-	ASSERT_EQUAL(defaultDateCount, 1);
-
-	int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
-	ASSERT_EQUAL(defaultHourCount, 1);
-
-	int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
-	ASSERT_EQUAL(defaultMinuteCount, 1);
-
-	int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
-
-	int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
-
-	int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
-	ASSERT_LESS(0, defaultProjectCapitalCount);
-
-	int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
-	ASSERT_LESS(0, defaultManagerCapitalCount);
-
-	int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
-
-	CopyrightData copyrightData(GetCopyrightData());
-	const System::String newFullProjectName(resultName);
-
-	generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetInputManagerInterface(),
-		                                GetProjectCapital(), GetInputManagerCapitalName());
-
-	System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
-
-	ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
-
-	ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
-	ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
-
-	ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
-	ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
-
-	ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
-	ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
-
-	ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
-	ContentCountTest(fullName, GetInputManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
-
-	ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
-	ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
-
-	ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
-	ContentCountTest(fullName, GetInputManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
-
-	ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
-	ContentCountTest(fullName, GetInputManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
-
-	ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
+    ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
 }
 
-void AssistTools::GenerateTemplateEngineTesting
-	::DefaultInputManagerCppGenerateToTest(const System::String& testFileName, const System::String& resultName)
+void AssistTools::GenerateTemplateEngineTesting::DefaultEventManagerHeaderGenerateToTest(const System::String& testFileName, const System::String& resultName)
 {
-	const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("InputManager"));
-	const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName);
-	const System::String extension(SYSTEM_TEXT(".cpp")); 
-	const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
-	const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
-	 
-	TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+    const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("EventManager"));
+    const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName);
+    const System::String extension(SYSTEM_TEXT(".h"));
+    const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
+    const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
 
-	int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
-	ASSERT_EQUAL(defaultEndYearCount, 1);
+    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
 
-	int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
-	ASSERT_LESS(0, defaultProjectChineseNameCount);
+    int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
+    ASSERT_EQUAL(defaultEndYearCount, 1);
 
-	int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
-	ASSERT_LESS(0, defaultVersionsCount);
+    int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
+    ASSERT_LESS(0, defaultProjectChineseNameCount);
 
-	int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
-	ASSERT_EQUAL(defaultDateCount, 1);
+    int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
+    ASSERT_LESS(0, defaultVersionsCount);
 
-	int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
-	ASSERT_EQUAL(defaultHourCount, 1);
+    int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
+    ASSERT_EQUAL(defaultDateCount, 1);
 
-	int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
-	ASSERT_EQUAL(defaultMinuteCount, 1);
+    int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
+    ASSERT_EQUAL(defaultHourCount, 1);
 
-	int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
+    int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
+    ASSERT_EQUAL(defaultMinuteCount, 1);
 
-	int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
+    int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
 
-	int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
-	ASSERT_LESS(0, defaultProjectCapitalCount);
+    int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
 
-	int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
-	ASSERT_LESS(0, defaultManagerCapitalCount);
+    int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
+    ASSERT_LESS(0, defaultProjectCapitalCount);
 
-	int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
+    int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
+    ASSERT_LESS(0, defaultManagerCapitalCount);
 
-	CopyrightData copyrightData(GetCopyrightData());
-	const System::String newFullProjectName(resultName);
+    int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
 
-	generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetInputManagerInterface(),
-		                                GetProjectCapital(), GetInputManagerCapitalName());
+    CopyrightData copyrightData(GetCopyrightData());
+    const System::String newFullProjectName(resultName);
 
-	System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetEventManagerName(), GetEventManagerInterface(), GetProjectCapital(), GetEventManagerCapitalName());
 
-	ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
+    System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
 
-	ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
-	ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
+    ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
 
-	ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
-	ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
+    ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
+    ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
 
-	ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
-	ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
+    ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
+    ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
 
-	ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
-	ContentCountTest(fullName, GetInputManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
+    ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
+    ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
 
-	ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
-	ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
+    ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
+    ContentCountTest(fullName, GetEventManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
 
-	ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
-	ContentCountTest(fullName, GetInputManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
+    ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
+    ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
 
-	ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
-	ContentCountTest(fullName, GetInputManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
+    ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
+    ContentCountTest(fullName, GetEventManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
 
-	ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
+    ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
+    ContentCountTest(fullName, GetEventManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
+
+    ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
+}
+
+void AssistTools::GenerateTemplateEngineTesting::DefaultEventManagerCppGenerateToTest(const System::String& testFileName, const System::String& resultName)
+{
+    const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("EventManager"));
+    const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName);
+    const System::String extension(SYSTEM_TEXT(".cpp"));
+    const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
+    const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
+
+    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+
+    int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
+    ASSERT_EQUAL(defaultEndYearCount, 1);
+
+    int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
+    ASSERT_LESS(0, defaultProjectChineseNameCount);
+
+    int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
+    ASSERT_LESS(0, defaultVersionsCount);
+
+    int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
+    ASSERT_EQUAL(defaultDateCount, 1);
+
+    int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
+    ASSERT_EQUAL(defaultHourCount, 1);
+
+    int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
+    ASSERT_EQUAL(defaultMinuteCount, 1);
+
+    int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
+
+    int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
+
+    int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
+    ASSERT_LESS(0, defaultProjectCapitalCount);
+
+    int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
+
+    int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
+
+    CopyrightData copyrightData(GetCopyrightData());
+    const System::String newFullProjectName(resultName);
+
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetEventManagerName(), GetEventManagerInterface(),
+                                        GetProjectCapital(), GetEventManagerCapitalName());
+
+    System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
+
+    ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
+
+    ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
+    ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
+
+    ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
+    ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
+
+    ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
+    ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
+
+    ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
+    ContentCountTest(fullName, GetEventManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
+
+    ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
+    ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
+
+    ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
+    ContentCountTest(fullName, GetEventManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
+
+    ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
+    ContentCountTest(fullName, GetEventManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
+
+    ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
+}
+
+void AssistTools::GenerateTemplateEngineTesting::DefaultInputManagerHeaderGenerateToTest(const System::String& testFileName, const System::String& resultName)
+{
+    const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("InputManager"));
+    const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName);
+    const System::String extension(SYSTEM_TEXT(".h"));
+    const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
+    const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
+
+    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+
+    int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
+    ASSERT_EQUAL(defaultEndYearCount, 1);
+
+    int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
+    ASSERT_LESS(0, defaultProjectChineseNameCount);
+
+    int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
+    ASSERT_LESS(0, defaultVersionsCount);
+
+    int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
+    ASSERT_EQUAL(defaultDateCount, 1);
+
+    int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
+    ASSERT_EQUAL(defaultHourCount, 1);
+
+    int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
+    ASSERT_EQUAL(defaultMinuteCount, 1);
+
+    int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
+
+    int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
+
+    int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
+    ASSERT_LESS(0, defaultProjectCapitalCount);
+
+    int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
+    ASSERT_LESS(0, defaultManagerCapitalCount);
+
+    int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
+
+    CopyrightData copyrightData(GetCopyrightData());
+    const System::String newFullProjectName(resultName);
+
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetInputManagerInterface(),
+                                        GetProjectCapital(), GetInputManagerCapitalName());
+
+    System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
+
+    ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
+
+    ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
+    ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
+
+    ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
+    ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
+
+    ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
+    ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
+
+    ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
+    ContentCountTest(fullName, GetInputManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
+
+    ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
+    ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
+
+    ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
+    ContentCountTest(fullName, GetInputManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
+
+    ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
+    ContentCountTest(fullName, GetInputManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
+
+    ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
+}
+
+void AssistTools::GenerateTemplateEngineTesting::DefaultInputManagerCppGenerateToTest(const System::String& testFileName, const System::String& resultName)
+{
+    const System::String newProjectName(GetSolutionName() + SYSTEM_TEXT("InputManager"));
+    const System::String fileName(GetResourceDirectory() + GetForwardSlash() + testFileName);
+    const System::String extension(SYSTEM_TEXT(".cpp"));
+    const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetCodeEngineDirectory());
+    const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + newProjectName + GetForwardSlash() + GetEngineDirectory());
+
+    TestingType generateTemplateSolution(fileName, extension, TestingType::Replace());
+
+    int defaultEndYearCount = GetContentFindCount(fileName, GetDefaultEndYear());
+    ASSERT_EQUAL(defaultEndYearCount, 1);
+
+    int defaultProjectChineseNameCount = GetContentFindCount(fileName, GetDefaultProjectChineseName());
+    ASSERT_LESS(0, defaultProjectChineseNameCount);
+
+    int defaultVersionsCount = GetContentFindCount(fileName, GetDefaultVersions());
+    ASSERT_LESS(0, defaultVersionsCount);
+
+    int defaultDateCount = GetContentFindCount(fileName, GetDefaultDate());
+    ASSERT_EQUAL(defaultDateCount, 1);
+
+    int defaultHourCount = GetContentFindCount(fileName, GetDefaultHour());
+    ASSERT_EQUAL(defaultHourCount, 1);
+
+    int defaultMinuteCount = GetContentFindCount(fileName, GetDefaultMinute());
+    ASSERT_EQUAL(defaultMinuteCount, 1);
+
+    int defaultNameSpaceCount = GetContentFindCount(fileName, GetDefaultSolutionName());
+
+    int defaultManagerNameCount = GetContentFindCount(fileName, GetDefaultManagerName());
+
+    int defaultProjectCapitalCount = GetContentFindCount(fileName, GetDefaultProjectCapital());
+    ASSERT_LESS(0, defaultProjectCapitalCount);
+
+    int defaultManagerCapitalCount = GetContentFindCount(fileName, GetDefaultManagerCapital());
+    ASSERT_LESS(0, defaultManagerCapitalCount);
+
+    int defaultInterfaceNameCount = GetContentFindCount(fileName, GetDefaultInterfaceName());
+
+    CopyrightData copyrightData(GetCopyrightData());
+    const System::String newFullProjectName(resultName);
+
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetInputManagerInterface(),
+                                        GetProjectCapital(), GetInputManagerCapitalName());
+
+    System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
+
+    ContentCountTest(fullName, GetDefaultEndYear(), 0, __FUNCTION__, 0);
+
+    ContentCountTest(fullName, GetDefaultProjectChineseName(), 0, __FUNCTION__, 1);
+    ContentCountTest(fullName, copyrightData.GetProjectChineseName(), defaultProjectChineseNameCount, __FUNCTION__, 2);
+
+    ContentCountTest(fullName, GetDefaultVersions(), 0, __FUNCTION__, 3);
+    ContentCountTest(fullName, copyrightData.GetVersions(), defaultVersionsCount, __FUNCTION__, 4);
+
+    ContentCountTest(fullName, GetDefaultSolutionName(), 0, __FUNCTION__, 5);
+    ContentCountTest(fullName, GetSolutionName(), defaultNameSpaceCount, __FUNCTION__, 6);
+
+    ContentCountTest(fullName, GetDefaultManagerName(), 0, __FUNCTION__, 7);
+    ContentCountTest(fullName, GetInputManagerName(), defaultManagerNameCount + defaultInterfaceNameCount, __FUNCTION__, 8);
+
+    ContentCountTest(fullName, GetDefaultProjectCapital(), 0, __FUNCTION__, 9);
+    ContentCountTest(fullName, GetProjectCapital(), defaultProjectCapitalCount, __FUNCTION__, 10);
+
+    ContentCountTest(fullName, GetDefaultManagerCapital(), 0, __FUNCTION__, 11);
+    ContentCountTest(fullName, GetInputManagerCapitalName(), defaultManagerCapitalCount, __FUNCTION__, 12);
+
+    ContentCountTest(fullName, GetDefaultInterfaceName(), 0, __FUNCTION__, 13);
+    ContentCountTest(fullName, GetInputManagerInterface(), defaultInterfaceNameCount, __FUNCTION__, 14);
+
+    ContentCountTest(fullName, GetPercent(), 0, __FUNCTION__, 15);
 }

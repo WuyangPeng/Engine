@@ -1,179 +1,167 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.4 (2019/07/31 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/04/29 10:55)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateEngineDirectoryImpl.h"
+#include "System/FileManager/FileTools.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/FileManager/FileTools.h" 
 #include "CoreTools/FileManager/CopyFileTools.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateSolution.h" 
-#include "AssistTools/GenerateProjects/GenerateTemplateVcxproj.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateVcxprojFilters.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateModuleVcxproj.h"
-#include "AssistTools/GenerateProjects/GenerateTemplateModuleVcxprojFilters.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateLogJson.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateMiddleLayerVcxproj.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateMiddleLayerVcxprojFilters.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateModuleVcxproj.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateModuleVcxprojFilters.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateSolution.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateVcxproj.h"
+#include "AssistTools/GenerateProjects/GenerateTemplateVcxprojFilters.h"
 
 using std::string;
- 
-AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateTemplateEngineDirectoryImpl(const System::String& directory, const string& configurationFileName)	 
-	:ParentType(directory, configurationFileName)
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
-} 
+using namespace std::literals;
 
- 
- 
+AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateTemplateEngineDirectoryImpl(const System::String& directory, const string& configurationFileName)
+    : ParentType{ directory, configurationFileName }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateEngineDirectoryImpl)
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, const System::String& newIncludeName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, const System::String& newIncludeName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-	GenerateToSolution(resourceDirectory, newSolutionName, newCoreName);
-	GenerateToVcxproj(resourceDirectory, newSolutionName, newIncludeName);
-	GenerateToVcxprojFilters(resourceDirectory, newSolutionName);
-	GenerateToUpdate(resourceDirectory, newSolutionName, newSolutionName); 
+    GenerateToSolution(resourceDirectory, newSolutionName, newCoreName);
+    GenerateToVcxproj(resourceDirectory, newSolutionName, newIncludeName);
+    GenerateToVcxprojFilters(resourceDirectory, newSolutionName);
+    GenerateToUpdate(resourceDirectory, newSolutionName, newSolutionName);
 
-	GenerateToModuleVcxproj(resourceDirectory, newSolutionName, newCoreName, newIncludeName);
-	GenerateToModuleVcxprojFilters(resourceDirectory, newSolutionName, newCoreName);
-	GenerateToUpdate(resourceDirectory, newSolutionName + newCoreName, newSolutionName);
-	GenerateToLogJson(resourceDirectory,newSolutionName); 
+    GenerateToModuleVcxproj(resourceDirectory, newSolutionName, newCoreName, newIncludeName);
+    GenerateToModuleVcxprojFilters(resourceDirectory, newSolutionName, newCoreName);
+    GenerateToUpdate(resourceDirectory, newSolutionName + newCoreName, newSolutionName);
+    GenerateToLogJson(resourceDirectory, newSolutionName);
 
-	GenerateToMiddleLayer(resourceDirectory, newSolutionName, SYSTEM_TEXT("MiddleLayer"), newIncludeName);  
-	
-	GenerateToEnvironmentVariable(resourceDirectory, newSolutionName);
+    GenerateToMiddleLayer(resourceDirectory, newSolutionName, SYSTEM_TEXT("MiddleLayer"s), newIncludeName);
+
+    GenerateToEnvironmentVariable(resourceDirectory, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToSolution(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
-{	 
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplate.txt"));
- 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName);
-
-	GenerateTemplateSolution generateTemplateSolution(fileName, GetProjectName(), GetCoreName());
-	generateTemplateSolution.GenerateTo(fullDirectory, newSolutionName, newCoreName);
-}
-
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newIncludeName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToSolution(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateVcxproj.txt"));
-	 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
- 
-	GenerateTemplateVcxproj generateTemplateVcxproj(fileName, GetExeProjectName(), GetIncludeName());
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplate.txt") };
 
-	generateTemplateVcxproj.GenerateTo(fullDirectory, newSolutionName, newIncludeName);
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName };
+
+    GenerateTemplateSolution generateTemplateSolution{ fileName, GetProjectName(), GetCoreName() };
+    generateTemplateSolution.GenerateTo(fullDirectory, newSolutionName, newCoreName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newIncludeName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateVcxprojFilters.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateVcxproj.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName);
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateVcxprojFilters generateTemplateVcxprojFilters(fileName, GetExeProjectName());
+    GenerateTemplateVcxproj generateTemplateVcxproj{ fileName, GetExeProjectName(), GetIncludeName() };
 
-	generateTemplateVcxprojFilters.GenerateTo(fullDirectory, newSolutionName);
+    generateTemplateVcxproj.GenerateTo(fullDirectory, newSolutionName, newIncludeName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToModuleVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, const System::String& newIncludeName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateModuleVcxproj.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateVcxprojFilters.txt") };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newCoreName);
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName };
 
-	GenerateTemplateModuleVcxproj generateTemplateModuleVcxproj(fileName, GetDllProjectName(), GetModuleName(), GetIncludeName());
+    GenerateTemplateVcxprojFilters generateTemplateVcxprojFilters{ fileName, GetExeProjectName() };
 
-	generateTemplateModuleVcxproj.GenerateTo(fullDirectory, newSolutionName, newCoreName, newIncludeName);
+    generateTemplateVcxprojFilters.GenerateTo(fullDirectory, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToModuleVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToModuleVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, const System::String& newIncludeName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateModuleVcxprojFilters.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateModuleVcxproj.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newCoreName);
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newCoreName };
 
-	GenerateTemplateModuleVcxprojFilters generateTemplateModuleVcxprojFilters(fileName, GetDllProjectName(), GetModuleName());
+    GenerateTemplateModuleVcxproj generateTemplateModuleVcxproj{ fileName, GetDllProjectName(), GetModuleName(), GetIncludeName() };
 
-	generateTemplateModuleVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, newCoreName);
+    generateTemplateModuleVcxproj.GenerateTo(fullDirectory, newSolutionName, newCoreName, newIncludeName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToLogJson(const System::String& resourceDirectory, const System::String& newSolutionName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToModuleVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateLog.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateModuleVcxprojFilters.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + GetForwardSlash() + GetConfigurationDirectory());
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newCoreName };
 
-	GenerateTemplateLogJson generateTemplateLogJson(fileName, GetProjectName());
+    GenerateTemplateModuleVcxprojFilters generateTemplateModuleVcxprojFilters{ fileName, GetDllProjectName(), GetModuleName() };
 
-	generateTemplateLogJson.GenerateTo(fullDirectory, newSolutionName, GetLogFileName());
+    generateTemplateModuleVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, newCoreName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToMiddleLayerVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newManager, const System::String& newIncludeName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToLogJson(const System::String& resourceDirectory, const System::String& newSolutionName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMiddleLayerVcxproj.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateLog.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newManager);
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + GetForwardSlash() + GetConfigurationDirectory() };
 
-	GenerateTemplateMiddleLayerVcxproj generateTemplateManagerVcxproj(fileName, GetDllProjectName(),GetManagerName(), GetIncludeName());
+    GenerateTemplateLogJson generateTemplateLogJson{ fileName, GetProjectName() };
 
-	generateTemplateManagerVcxproj.GenerateTo(fullDirectory, newSolutionName, newManager,newIncludeName);
+    generateTemplateLogJson.GenerateTo(fullDirectory, newSolutionName, GetLogFileName());
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToMiddleLayerVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newManager) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToMiddleLayerVcxproj(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newManager, const System::String& newIncludeName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMiddleLayerVcxprojFilters.txt"));
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMiddleLayerVcxproj.txt"s) };
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newManager);
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newManager };
 
-	GenerateTemplateMiddleLayerVcxprojFilters generateTemplateManagerVcxprojFilters(fileName, GetDllProjectName(),GetManagerName());
+    GenerateTemplateMiddleLayerVcxproj generateTemplateManagerVcxproj{ fileName, GetDllProjectName(), GetManagerName(), GetIncludeName() };
 
-	generateTemplateManagerVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, newManager);
+    generateTemplateManagerVcxproj.GenerateTo(fullDirectory, newSolutionName, newManager, newIncludeName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToMiddleLayer(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newManager, const System::String& newIncludeName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToMiddleLayerVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newManager) const
 {
-	GenerateToMiddleLayerVcxproj(resourceDirectory, newSolutionName, newManager, newIncludeName);
-	GenerateToMiddleLayerVcxprojFilters(resourceDirectory, newSolutionName, newManager);
-	GenerateToUpdate(resourceDirectory, newSolutionName + newManager, newSolutionName);
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateMiddleLayerVcxprojFilters.txt") };
+
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + newManager };
+
+    GenerateTemplateMiddleLayerVcxprojFilters generateTemplateManagerVcxprojFilters{ fileName, GetDllProjectName(), GetManagerName() };
+
+    generateTemplateManagerVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, newManager);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToUpdate(const System::String& resourceDirectory, const System::String& newManager,const System::String& newSolutionName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToMiddleLayer(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newManager, const System::String& newIncludeName) const
 {
-	System::String fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newManager + GetForwardSlash() + GetResource();
-
-	[[maybe_unused]] const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
-
-	CoreTools::WriteFileManager manager(fullDirectory + GetForwardSlash() + GetUpdate());
+    GenerateToMiddleLayerVcxproj(resourceDirectory, newSolutionName, newManager, newIncludeName);
+    GenerateToMiddleLayerVcxprojFilters(resourceDirectory, newSolutionName, newManager);
+    GenerateToUpdate(resourceDirectory, newSolutionName + newManager, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl
-	::GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToUpdate(const System::String& resourceDirectory, const System::String& newManager, const System::String& newSolutionName) const
 {
-	const System::String fileName(GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateEnvironmentVariable.txt"));
+    auto fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newManager + GetForwardSlash() + GetResource();
 
-	const System::String fullDirectory(resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + GetForwardSlash() + GetConfigurationDirectory());
+    MAYBE_UNUSED const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
 
-	CoreTools::CopyFileTools(fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("EnvironmentVariable.json"));
+    CoreTools::WriteFileManager manager{ fullDirectory + GetForwardSlash() + GetUpdate() };
 }
 
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName) const
+{
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateEnvironmentVariable.txt"s) };
+
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + GetForwardSlash() + GetConfigurationDirectory() };
+
+    CoreTools::CopyFileTools copyFileTools{ fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("EnvironmentVariable.json"s) };
+}

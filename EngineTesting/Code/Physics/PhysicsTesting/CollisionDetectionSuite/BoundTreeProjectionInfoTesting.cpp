@@ -8,7 +8,14 @@
 #include "Physics/CollisionDetection/BoundTreeProjectionInfo.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26435)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26498)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26490)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Physics, BoundTreeProjectionInfoTesting) 
 
 void Physics::BoundTreeProjectionInfoTesting

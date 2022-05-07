@@ -12,6 +12,7 @@
 #include "Node.h"
 #include "Detail/NodeImpl.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -37,7 +38,7 @@ Rendering::Node::NodeSharedPtr Rendering::Node::Create()
 }
 
 Rendering::Node::Node(MAYBE_UNUSED NodeCreate nodeCreate)
-    : ParentType{}, impl{ this }
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, impl{ this }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

@@ -58,6 +58,9 @@ namespace CoreTools
         uint64_t Register(const T& object);
 
         template <typename T>
+        uint64_t RegisterWeakPtr(const T& object);
+
+        template <typename T>
         void RegisterContainer(const T& objects);
 
         template <typename T, int Size>

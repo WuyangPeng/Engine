@@ -1,24 +1,22 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 16:23)
 
 #ifndef RENDERING_CONTROLLERS_POINT_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_POINT_CONTROLLER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/BufferTarget.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/AVector.h"
 
 #include <vector>
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-    class BufferTarget;
-    class BufferSource;
-}
 
 namespace Rendering
 {
@@ -38,42 +36,42 @@ namespace Rendering
         // 其中点代表一个刚体在应用程序，
         // 你可以选择该系统的原点为点的质量中心和
         // 坐标轴对应于惯性张量的主方向。
-        int GetNumPoints() const noexcept ;
-        float GetPointLinearSpeed(int index) const;
-        float GetPointAngularSpeed(int index) const;
-        const AVector GetPointLinearAxis(int index) const;
-        const AVector GetPointAngularAxis(int index) const;
+        NODISCARD int GetNumPoints() const noexcept;
+        NODISCARD float GetPointLinearSpeed(int index) const;
+        NODISCARD float GetPointAngularSpeed(int index) const;
+        NODISCARD AVector GetPointLinearAxis(int index) const;
+        NODISCARD AVector GetPointAngularAxis(int index) const;
 
         void SetPointLinearSpeed(int index, float pointLinearSpeed);
         void SetPointAngularSpeed(int index, float pointAngularSpeed);
         void SetPointLinearAxis(int index, const AVector& pointLinearAxis);
         void SetPointAngularAxis(int index, const AVector& pointAngularAxis);
 
-        float GetSystemLinearSpeed() const noexcept;
-        void SetSystemLinearSpeed(float systemLinearSpeed) noexcept;
-        float GetSystemAngularSpeed() const noexcept;
-        void SetSystemAngularSpeed(float systemAngularSpeed) noexcept;
-        const AVector GetSystemLinearAxis() const noexcept;
-        void SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept;
-        const AVector GetSystemAngularAxis() const noexcept;
-        void SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept;
+        NODISCARD float GetSystemLinearSpeed() const noexcept;
+        void SetSystemLinearSpeed(float aSystemLinearSpeed) noexcept;
+        NODISCARD float GetSystemAngularSpeed() const noexcept;
+        void SetSystemAngularSpeed(float aSystemAngularSpeed) noexcept;
+        NODISCARD AVector GetSystemLinearAxis() const noexcept;
+        void SetSystemLinearAxis(const AVector& aSystemLinearAxis) noexcept;
+        NODISCARD AVector GetSystemAngularAxis() const noexcept;
+        void SetSystemAngularAxis(const AVector& aSystemAngularAxis) noexcept;
 
-        int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
 
     private:
         // 系统的运动，在局部坐标。速度矢量应为单位的长度。
-        float m_SystemLinearSpeed;
-        float m_SystemAngularSpeed;
-        AVector m_SystemLinearAxis;
-        AVector m_SystemAngularAxis;
+        float systemLinearSpeed;
+        float systemAngularSpeed;
+        AVector systemLinearAxis;
+        AVector systemAngularAxis;
 
-        int m_NumPoints;
-        std::vector<float> m_PointLinearSpeed;
-        std::vector<float> m_PointAngularSpeed;
-        std::vector<AVector> m_PointLinearAxis;
-        std::vector<AVector> m_PointAngularAxis;
+        int numPoints;
+        std::vector<float> pointLinearSpeeds;
+        std::vector<float> pointAngularSpeeds;
+        std::vector<AVector> pointLinearAxes;
+        std::vector<AVector> pointAngularAxes;
     };
 }
 

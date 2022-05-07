@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.2 (2020/06/03 16:20)
 
 #include "WindowCreateHandleTesting.h"
-#include "System/Window/WindowCreate.h"
+#include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowCreate/WindowCreate.h"
@@ -21,7 +21,7 @@ namespace Framework
     using TestingType = WindowCreateHandle;
 }
 
-Framework::WindowCreateHandleTesting ::WindowCreateHandleTesting(const OStreamShared& stream, HInstance instance, HWnd hwnd)
+Framework::WindowCreateHandleTesting::WindowCreateHandleTesting(const OStreamShared& stream, HInstance instance, HWnd hwnd)
     : ParentType{ stream }, m_Instance{ instance }, m_Hwnd{ hwnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -29,20 +29,20 @@ Framework::WindowCreateHandleTesting ::WindowCreateHandleTesting(const OStreamSh
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowCreateHandleTesting)
 
-void Framework::WindowCreateHandleTesting ::DoRunUnitTest()
+void Framework::WindowCreateHandleTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::WindowCreateHandleTesting ::MainTest()
+void Framework::WindowCreateHandleTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTest);
 }
 
-void Framework::WindowCreateHandleTesting ::CreateTest()
+void Framework::WindowCreateHandleTesting::CreateTest()
 {
     System::String className{};
-    [[maybe_unused]] auto value = System::GetSystemClassName(m_Hwnd, className);
+    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
     auto windowName = SYSTEM_TEXT("New Main Window"s);
 
     const WindowSize size{ 800, 600 };

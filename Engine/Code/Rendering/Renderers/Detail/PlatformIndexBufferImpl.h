@@ -1,50 +1,52 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 14:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:38)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_IMPL_H
 #define RENDERING_RENDERERS_PLATFORM_INDEX_BUFFER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 #include <memory>
 
 namespace Rendering
 {
-    class Renderer;
-    class IndexBuffer;
-
     class RENDERING_HIDDEN_DECLARE PlatformIndexBufferImpl
     {
     public:
         using ClassType = PlatformIndexBufferImpl;
-        using PlatformIndexBufferPtr = std::shared_ptr<ClassType>;
+        using PlatformIndexBufferSharedPtr = std::shared_ptr<ClassType>;
         using FactoryType = PlatformIndexBufferImpl;
 
     public:
         PlatformIndexBufferImpl() noexcept;
-        virtual ~PlatformIndexBufferImpl();
-        PlatformIndexBufferImpl(const PlatformIndexBufferImpl&) = default;
-        PlatformIndexBufferImpl& operator=(const PlatformIndexBufferImpl&) = default;
-        PlatformIndexBufferImpl(PlatformIndexBufferImpl&&) = default;
-        PlatformIndexBufferImpl& operator=(PlatformIndexBufferImpl&&) = default;
+        virtual ~PlatformIndexBufferImpl() noexcept = default;
+        PlatformIndexBufferImpl(const PlatformIndexBufferImpl& rhs) noexcept = default;
+        PlatformIndexBufferImpl& operator=(const PlatformIndexBufferImpl& rhs) noexcept = default;
+        PlatformIndexBufferImpl(PlatformIndexBufferImpl&& rhs) noexcept = default;
+        PlatformIndexBufferImpl& operator=(PlatformIndexBufferImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         // 缓冲区操作
         virtual void Enable(Renderer* renderer) = 0;
         virtual void Disable(Renderer* renderer) = 0;
-        virtual void* Lock(BufferLocking mode) = 0;
+        NODISCARD virtual void* Lock(BufferLocking mode) = 0;
         virtual void Unlock() = 0;
 
-        static PlatformIndexBufferPtr Create(Renderer* renderer, const IndexBuffer* indexBuffer);
+        NODISCARD static PlatformIndexBufferSharedPtr Create(Renderer* renderer, const IndexBuffer* indexBuffer);
 
     private:
-        static PlatformIndexBufferPtr CreateDefault(Renderer* renderer, const IndexBuffer* indexBuffer);
+        NODISCARD static PlatformIndexBufferSharedPtr CreateDefault(Renderer* renderer, const IndexBuffer* indexBuffer);
     };
 }
 

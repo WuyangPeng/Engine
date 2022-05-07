@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 16:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:41)
 
 #include "Framework/FrameworkExport.h"
 
@@ -18,67 +21,69 @@ using std::make_shared;
 using std::string;
 
 Framework::AndroidCallBackUnitTestSuiteImpl::AndroidCallBackUnitTestSuiteImpl(const string& name, const OStreamShared& streamShared)
-    : m_TestingInformationHelper{ CoreTools::TestingInformationHelper::Create() }, m_Suite{ make_shared<Suite>(name, streamShared, m_TestingInformationHelper.IsPrintRun()) }
+    : testingInformationHelper{ CoreTools::TestingInformationHelper::Create() }, suite{ make_shared<Suite>(name, streamShared, testingInformationHelper.IsPrintRun()) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::AndroidCallBackUnitTestSuiteImpl ::IsValid() const noexcept
+
+bool Framework::AndroidCallBackUnitTestSuiteImpl::IsValid() const noexcept
 {
-    if (m_Suite != nullptr)
+    if (suite != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-void Framework::AndroidCallBackUnitTestSuiteImpl ::AddSuite(const Suite& suite)
+void Framework::AndroidCallBackUnitTestSuiteImpl::AddSuite(const Suite& aSuite)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->AddSuite(suite);
+    suite->AddSuite(aSuite);
 }
 
-void Framework::AndroidCallBackUnitTestSuiteImpl ::RunUnitTest()
+void Framework::AndroidCallBackUnitTestSuiteImpl::RunUnitTest()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->RunUnitTest();
+    suite->RunUnitTest();
 }
 
-void Framework::AndroidCallBackUnitTestSuiteImpl ::PrintReport()
+void Framework::AndroidCallBackUnitTestSuiteImpl::PrintReport()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->PrintReport();
+    suite->PrintReport();
 }
 
-void Framework::AndroidCallBackUnitTestSuiteImpl ::ResetTestData()
+void Framework::AndroidCallBackUnitTestSuiteImpl::ResetTestData()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    m_Suite->ResetTestData();
+    suite->ResetTestData();
 }
 
-int Framework::AndroidCallBackUnitTestSuiteImpl ::GetPassedNumber() const noexcept
+int Framework::AndroidCallBackUnitTestSuiteImpl::GetPassedNumber() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return m_Suite->GetPassedNumber();
+    return suite->GetPassedNumber();
 }
 
-void Framework::AndroidCallBackUnitTestSuiteImpl ::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
+void Framework::AndroidCallBackUnitTestSuiteImpl::AddTest(const string& suiteName, Suite& aSuite, const string& testName, const UnitTestSharedPtr& unitTest)
 {
     try
     {
-        const auto testLoopCount = m_TestingInformationHelper.GetLoopCount(suiteName, testName);
+        const auto testLoopCount = testingInformationHelper.GetLoopCount(suiteName, testName);
 
         if (0 < testLoopCount)
         {
             unitTest->SetTestLoopCount(testLoopCount);
-            unitTest->SetRandomSeed(m_TestingInformationHelper.GetRandomSeed());
-            suite.AddTest(unitTest);
+            unitTest->SetRandomSeed(testingInformationHelper.GetRandomSeed());
+            aSuite.AddTest(unitTest);
         }
         else if (testLoopCount < 0)
         {
@@ -86,7 +91,7 @@ void Framework::AndroidCallBackUnitTestSuiteImpl ::AddTest(const string& suiteNa
                 << SYSTEM_TEXT("测试")
                 << testName
                 << SYSTEM_TEXT("未配置！在测试套件：")
-                << suite.GetName()
+                << aSuite.GetName()
                 << SYSTEM_TEXT("。")
                 << LOG_SINGLETON_TRIGGER_ASSERT;
         }
@@ -99,9 +104,9 @@ void Framework::AndroidCallBackUnitTestSuiteImpl ::AddTest(const string& suiteNa
     }
 }
 
-bool Framework::AndroidCallBackUnitTestSuiteImpl ::IsPrintRun() const noexcept
+bool Framework::AndroidCallBackUnitTestSuiteImpl::IsPrintRun() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_TestingInformationHelper.IsPrintRun();
+    return testingInformationHelper.IsPrintRun();
 }

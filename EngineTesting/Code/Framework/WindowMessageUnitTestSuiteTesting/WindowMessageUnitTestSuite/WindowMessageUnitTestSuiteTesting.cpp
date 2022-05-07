@@ -5,7 +5,7 @@
 // 引擎测试版本：0.3.0.2 (2020/06/06 22:38)
 
 #include "WindowMessageUnitTestSuiteTesting.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
+#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 #include "Framework/WindowMessageUnitTestSuiteTesting/SuiteWindowMessage.h"
@@ -40,7 +40,7 @@ void Framework::WindowMessageUnitTestSuiteTesting
 
 	ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(message, "消息指针已无效！");
 
-	ASSERT_EQUAL(message->KeyDownMessage(message->GetHwnd(), System::EnumCastUnderlying<System::WindowWParam>(System::WindowsKeyCodes::F1), 0), 0);
+	ASSERT_EQUAL(message->KeyDownMessage(message->GetHwnd(), System::EnumCastUnderlying<System::WindowsWParam>(System::WindowsKeyCodes::F1), 0), 0);
 	ASSERT_EQUAL(message->GetPassedNumber(), 1);
 }
 

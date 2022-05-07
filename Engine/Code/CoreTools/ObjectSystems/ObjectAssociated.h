@@ -39,6 +39,26 @@ namespace CoreTools
         {
         }
 
+        NODISCARD T& operator*() noexcept
+        {
+            return *object;
+        }
+
+        NODISCARD const T& operator*() const noexcept
+        {
+            return *object;
+        }
+
+        NODISCARD T* operator->() noexcept
+        {
+            return object.get();
+        }
+
+        NODISCARD const T* operator->() const noexcept
+        {
+            return object.get();
+        }
+
         ObjectSharedPtr object;
         uint64_t associated;
     };

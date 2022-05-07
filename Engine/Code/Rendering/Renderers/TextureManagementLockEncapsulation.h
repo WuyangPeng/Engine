@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 16:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:43)
 
 #ifndef RENDERING_RENDERERS_TEXTURE_MANAGEMENT_LOCK_ENCAPSULATION_H
 #define RENDERING_RENDERERS_TEXTURE_MANAGEMENT_LOCK_ENCAPSULATION_H
@@ -11,40 +14,34 @@
 
 #include "Rendering/Resources/Flags/BufferFlags.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace Rendering
 {
-	template <typename TextureManagementType>
-	class TextureManagementLockEncapsulation : boost::noncopyable
-	{
-	public:
-		using ClassType = TextureManagementLockEncapsulation<TextureManagementType>;
-		using TextureConstPtr = typename TextureManagementType::TextureConstPtr;
+    template <typename TextureManagementType>
+    class TextureManagementLockEncapsulation
+    {
+    public:
+        using ClassType = TextureManagementLockEncapsulation<TextureManagementType>;
+        using ConstTextureSharedPtr = typename TextureManagementType::ConstTextureSharedPtr;
 
-	public:
-		explicit TextureManagementLockEncapsulation(TextureManagementType& manager) noexcept;
-		~TextureManagementLockEncapsulation();
-		TextureManagementLockEncapsulation(const TextureManagementLockEncapsulation&) = delete;
-		TextureManagementLockEncapsulation& operator=(const TextureManagementLockEncapsulation&) = delete;
-		TextureManagementLockEncapsulation(TextureManagementLockEncapsulation&&) = delete;
-		TextureManagementLockEncapsulation& operator=(TextureManagementLockEncapsulation&&) = delete;
+    public:
+        explicit TextureManagementLockEncapsulation(TextureManagementType& manager) noexcept;
+        ~TextureManagementLockEncapsulation() noexcept;
+        TextureManagementLockEncapsulation(const TextureManagementLockEncapsulation& rhs) = delete;
+        TextureManagementLockEncapsulation& operator=(const TextureManagementLockEncapsulation& rhs) = delete;
+        TextureManagementLockEncapsulation(TextureManagementLockEncapsulation&& rhs) noexcept = delete;
+        TextureManagementLockEncapsulation& operator=(TextureManagementLockEncapsulation&& rhs) noexcept = delete;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void* Lock(TextureConstPtr texture,int level,BufferLocking mode);
-		void* LockCube(TextureConstPtr texture,int face,int level,BufferLocking mode);
+        NODISCARD void* Lock(ConstTextureSharedPtr aTexture, int aLevel, BufferLocking mode);
+        NODISCARD void* LockCube(ConstTextureSharedPtr aTexture, int aFace, int aLevel, BufferLocking mode);
 
-	private:
-		TextureManagementType& m_Manager;
-		TextureConstPtr m_Texture;
-		int m_Level;
-		int m_Face;
-	};
+    private:
+        TextureManagementType& manager;
+        ConstTextureSharedPtr texture;
+        int level;
+        int face;
+    };
 }
 
-#endif // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_LOCK_ENCAPSULATION_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_TEXTURE_MANAGEMENT_LOCK_ENCAPSULATION_H

@@ -14,7 +14,7 @@
 #include "Rendering/Renderers/RendererInput.h"
 
 Rendering::CameraManagerImpl::CameraManagerImpl() noexcept
-    : depthType{ DepthType::Quantity }
+    : depthType{ DepthType::MinusOneToOne }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

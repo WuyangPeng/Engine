@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 11:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 15:48)
 
 #ifndef RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_DATA_DETAIL_H
 #define RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_DATA_DETAIL_H
@@ -13,24 +16,22 @@
 #include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/VertexFormat.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26429)
+
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 Rendering::OpenGLVertexFormatData<usage>::OpenGLVertexFormatData() noexcept
-    : m_Has{ 0 }, m_Channels{ 0 }, m_Type{ System::OpenGLData::None }, m_Offset{ 0 }
+    : openGLHas{ 0 }, openGLChannels{ 0 }, openGLType{ System::OpenGLData::None }, openGLOffset{ 0 }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
 bool Rendering::OpenGLVertexFormatData<usage>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIAN
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
@@ -38,14 +39,19 @@ void Rendering::OpenGLVertexFormatData<usage>::Init(const VertexFormat* vertexFo
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    const int index = vertexFormat->GetIndex(usage);
+    if (vertexFormat == nullptr)
+    {
+        return;
+    }
+
+    const auto index = vertexFormat->GetIndex(usage);
     if (0 <= index)
     {
-        m_Has = 1;
-        const VertexFormatFlags::AttributeType type = vertexFormat->GetAttributeType(index);
-        m_Channels = OpenGLConstant::g_OpenGLAttributeChannels[System::EnumCastUnderlying(type)];
-        m_Type = System::OpenGLData(OpenGLConstant::g_OpenGLAttributeType[System::EnumCastUnderlying(type)]);
-        m_Offset = vertexFormat->GetOffset(index);
+        openGLHas = 1;
+        const auto type = vertexFormat->GetAttributeType(index);
+        openGLChannels = OpenGLConstant::GetOpenGLAttributeChannels(System::EnumCastUnderlying(type));
+        openGLType = System::UnderlyingCastEnum<System::OpenGLData>(OpenGLConstant::GetOpenGLAttributeType(System::EnumCastUnderlying(type)));
+        openGLOffset = vertexFormat->GetOffset(index);
     }
 }
 
@@ -54,10 +60,10 @@ void Rendering::OpenGLVertexFormatData<usage>::Set(UInt has, UInt channels, Data
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Has = has;
-    m_Channels = channels;
-    m_Type = type;
-    m_Offset = offset;
+    openGLHas = has;
+    openGLChannels = channels;
+    openGLType = type;
+    openGLOffset = offset;
 }
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
@@ -65,7 +71,7 @@ bool Rendering::OpenGLVertexFormatData<usage>::IsHas() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Has != 0;
+    return openGLHas != 0;
 }
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
@@ -73,7 +79,7 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatData<usage>::GetChannels() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Channels;
+    return openGLChannels;
 }
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
@@ -81,7 +87,7 @@ System::OpenGLData Rendering::OpenGLVertexFormatData<usage>::GetType() const noe
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Type;
+    return openGLType;
 }
 
 template <Rendering::VertexFormatFlags::AttributeUsage usage>
@@ -89,7 +95,7 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatData<usage>::GetOffset() const n
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Offset;
+    return openGLOffset;
 }
 
 template <>
@@ -139,5 +145,5 @@ RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::Vert
 
 template <>
 RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>::Disable() noexcept;
-#include STSTEM_WARNING_POP
+
 #endif  // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_DATA_DETAIL_H

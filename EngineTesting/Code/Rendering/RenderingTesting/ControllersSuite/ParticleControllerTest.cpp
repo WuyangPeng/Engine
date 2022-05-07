@@ -5,6 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/06 09:40)
 
 #include "ParticleControllerTest.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -19,7 +20,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, ParticleControllerTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ParticleControllerTest);
 
 Rendering::ParticleControllerTest::ParticleControllerTest()
-    : ParentType{}
+    : ParentType{ CoreTools::DisableNotThrow::Disable }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

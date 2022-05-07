@@ -1,63 +1,57 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒıÇæ°æ±¾£º0.0.0.3 (2019/07/26 17:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒıÇæ°æ±¾£º0.8.0.6 (2022/04/20 14:02)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "PlatformTextureCubeImpl.h"
-#include "Rendering/Renderers/Renderer.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Dx9Renderer/Dx9TextureCube.h"
 #include "Rendering/OpenGLRenderer/OpenGLTextureCube.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-Rendering::PlatformTextureCubeImpl
-	::PlatformTextureCubeImpl()	noexcept
-{
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
+#include "Rendering/Renderers/Renderer.h"
 
-Rendering::PlatformTextureCubeImpl
-	::~PlatformTextureCubeImpl()
+Rendering::PlatformTextureCubeImpl::PlatformTextureCubeImpl() noexcept
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;	
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformTextureCubeImpl)
 
-// static 
-Rendering::PlatformTextureCubeImpl::PlatformTextureCubePtr Rendering::PlatformTextureCubeImpl
-	::Create(Renderer* renderer, const TextureCube* textureCube)
+// static
+Rendering::PlatformTextureCubeImpl::PlatformTextureCubeSharedPtr Rendering::PlatformTextureCubeImpl::Create(Renderer* renderer, const TextureCube* textureCube)
 {
-    switch(renderer->GetRendererType())
+    if (renderer == nullptr)
     {
-    case RendererTypes::Default:
-        return CreateDefault(renderer, textureCube);
-    case RendererTypes::Window:
-        return make_shared<Dx9TextureCube>(renderer, textureCube);
-    case RendererTypes::Glut:
-        return make_shared<OpenGLTextureCube>(renderer, textureCube);
-    case RendererTypes::OpenGL:
-        return make_shared<OpenGLTextureCube>(renderer, textureCube);
-    case RendererTypes::Dx9:
-        return make_shared<Dx9TextureCube>(renderer, textureCube);
-    case RendererTypes::OpenGLES:
-        return make_shared<OpenGLTextureCube>(renderer, textureCube);
-    default:
-        return CreateDefault(renderer, textureCube);
+        THROW_EXCEPTION(SYSTEM_TEXT("renderer Îª¿Õ¡£"s));
+    }
+
+    switch (renderer->GetRendererType())
+    {
+        case RendererTypes::Default:
+            return CreateDefault(renderer, textureCube);
+        case RendererTypes::Window:
+            return make_shared<Dx9TextureCube>(renderer, textureCube);
+        case RendererTypes::Glut:
+            return make_shared<OpenGLTextureCube>(renderer, textureCube);
+        case RendererTypes::OpenGL:
+            return make_shared<OpenGLTextureCube>(renderer, textureCube);
+        case RendererTypes::Dx9:
+            return make_shared<Dx9TextureCube>(renderer, textureCube);
+        case RendererTypes::OpenGLES:
+            return make_shared<OpenGLTextureCube>(renderer, textureCube);
+        default:
+            return CreateDefault(renderer, textureCube);
     }
 }
 
-// static 
-Rendering::PlatformTextureCubeImpl::PlatformTextureCubePtr Rendering::PlatformTextureCubeImpl
-	:: CreateDefault(Renderer* renderer, const TextureCube* textureCube)
+// static
+Rendering::PlatformTextureCubeImpl::PlatformTextureCubeSharedPtr Rendering::PlatformTextureCubeImpl::CreateDefault(Renderer* renderer, const TextureCube* textureCube)
 {
-    return make_shared <OpenGLTextureCube>(renderer, textureCube);
+    return make_shared<OpenGLTextureCube>(renderer, textureCube);
 }
-
-#include STSTEM_WARNING_POP

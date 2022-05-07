@@ -1,205 +1,185 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/12 14:32)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderSamplerDataImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include <algorithm>
 
 using std::string;
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-Rendering::ShaderSamplerDataImpl
-	::ShaderSamplerDataImpl( int numSamplers )
-	:m_SingleShaderSamplerData{ numSamplers }
-{ 
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
 
-Rendering::ShaderSamplerDataImpl
-	::ShaderSamplerDataImpl() noexcept
-	:m_SingleShaderSamplerData{}
-{ 
-	RENDERING_SELF_CLASS_IS_VALID_9;
-}
-
-CLASS_INVARIANT_STUB_DEFINE(Rendering,ShaderSamplerDataImpl)
-
-void Rendering::ShaderSamplerDataImpl
-	::SetSampler( int index, const string& name, ShaderFlags::SamplerType type )
+Rendering::ShaderSamplerDataImpl::ShaderSamplerDataImpl(int numSamplers)
+    : singleShaderSamplerData{ numSamplers, SingleShaderSamplerData{ CoreTools::DisableNotThrow::Disable } }
 {
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
-
-	m_SingleShaderSamplerData[index].SetSampler(name, type);
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-void Rendering::ShaderSamplerDataImpl
-	::SetFilter( int index, ShaderFlags::SamplerFilter filter )
-{	
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
-
-	m_SingleShaderSamplerData[index].SetFilter(filter);
-}
-
-void Rendering::ShaderSamplerDataImpl
-	::SetCoordinate( int index, int dimension,ShaderFlags::SamplerCoordinate coordinate )
+Rendering::ShaderSamplerDataImpl::ShaderSamplerDataImpl() noexcept
+    : singleShaderSamplerData{}
 {
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó"); 
-
-	m_SingleShaderSamplerData[index].SetCoordinate(dimension, coordinate);
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-void Rendering::ShaderSamplerDataImpl
-	::SetLodBias( int index, float lodBias )
-{
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderSamplerDataImpl)
 
-	m_SingleShaderSamplerData[index].SetLodBias(lodBias);
+void Rendering::ShaderSamplerDataImpl::SetSampler(int index, const string& name, ShaderFlags::SamplerType type)
+{
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+
+    singleShaderSamplerData.at(index).SetSampler(name, type);
 }
 
-
-void Rendering::ShaderSamplerDataImpl
-	::SetAnisotropy( int index, float anisotropy )
+void Rendering::ShaderSamplerDataImpl::SetFilter(int index, ShaderFlags::SamplerFilter filter)
 {
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	m_SingleShaderSamplerData[index].SetAnisotropy(anisotropy);
+    singleShaderSamplerData.at(index).SetFilter(filter);
 }
 
-void Rendering::ShaderSamplerDataImpl
-	::SetBorderColor( int index, const Colour& borderColor )
+void Rendering::ShaderSamplerDataImpl::SetCoordinate(int index, int dimension, ShaderFlags::SamplerCoordinate coordinate)
 {
-	RENDERING_CLASS_IS_VALID_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	m_SingleShaderSamplerData[index].SetBorderColor(borderColor);
+    singleShaderSamplerData.at(index).SetCoordinate(dimension, coordinate);
 }
 
-int Rendering::ShaderSamplerDataImpl
-	::GetNumSamplers() const
+void Rendering::ShaderSamplerDataImpl::SetLodBias(int index, float lodBias)
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return boost::numeric_cast<int>(m_SingleShaderSamplerData.size());
+    singleShaderSamplerData.at(index).SetLodBias(lodBias);
 }
 
-const string Rendering::ShaderSamplerDataImpl
-	::GetSamplerName( int index ) const
+void Rendering::ShaderSamplerDataImpl::SetAnisotropy(int index, float anisotropy)
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderSamplerData[index].GetSamplerName();
+    singleShaderSamplerData.at(index).SetAnisotropy(anisotropy);
 }
 
-Rendering::ShaderFlags::SamplerType Rendering::ShaderSamplerDataImpl
-	::GetSamplerType( int index ) const
+void Rendering::ShaderSamplerDataImpl::SetBorderColor(int index, const Colour& borderColor)
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderSamplerData[index].GetSamplerType();
+    singleShaderSamplerData.at(index).SetBorderColor(borderColor);
 }
 
-Rendering::ShaderFlags::SamplerFilter Rendering::ShaderSamplerDataImpl
-	::GetFilter( int index ) const
+int Rendering::ShaderSamplerDataImpl::GetNumSamplers() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_SingleShaderSamplerData[index].GetFilter();
+    return boost::numeric_cast<int>(singleShaderSamplerData.size());
 }
 
-Rendering::ShaderFlags::SamplerCoordinate Rendering::ShaderSamplerDataImpl
-	::GetCoordinate(int index, int dimension) const
+string Rendering::ShaderSamplerDataImpl::GetSamplerName(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderSamplerData[index].GetCoordinate(dimension);
+    return singleShaderSamplerData.at(index).GetSamplerName();
 }
 
-float Rendering::ShaderSamplerDataImpl
-	::GetLodBias( int index ) const
+Rendering::ShaderFlags::SamplerType Rendering::ShaderSamplerDataImpl::GetSamplerType(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderSamplerData[index].GetLodBias();
+    return singleShaderSamplerData.at(index).GetSamplerType();
 }
 
-float Rendering::ShaderSamplerDataImpl
-	::GetAnisotropy( int index ) const
+Rendering::ShaderFlags::SamplerFilter Rendering::ShaderSamplerDataImpl::GetFilter(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderSamplerData[index].GetAnisotropy();
+    return singleShaderSamplerData.at(index).GetFilter();
 }
 
-Rendering::ShaderSamplerDataImpl::Colour Rendering::ShaderSamplerDataImpl
-	::GetBorderColor( int index ) const
+Rendering::ShaderFlags::SamplerCoordinate Rendering::ShaderSamplerDataImpl::GetCoordinate(int index, int dimension) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
 
-	return m_SingleShaderSamplerData[index].GetBorderColor();
+    return singleShaderSamplerData.at(index).GetCoordinate(dimension);
+}
+
+float Rendering::ShaderSamplerDataImpl::GetLodBias(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+
+    return singleShaderSamplerData.at(index).GetLodBias();
+}
+
+float Rendering::ShaderSamplerDataImpl::GetAnisotropy(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+
+    return singleShaderSamplerData.at(index).GetAnisotropy();
+}
+
+Rendering::ShaderSamplerDataImpl::Colour Rendering::ShaderSamplerDataImpl::GetBorderColor(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(0 <= index && index < GetNumSamplers(), "Ë÷Òý´íÎó");
+
+    return singleShaderSamplerData.at(index).GetBorderColor();
 }
 
 void Rendering::ShaderSamplerDataImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	uint32_t number{ 0 };
-	source.Read(number);
-	m_SingleShaderSamplerData.resize(number);
-	 
-	for_each(m_SingleShaderSamplerData.begin(), m_SingleShaderSamplerData.end(), std::bind(&SingleShaderSamplerData::Load,std::placeholders::_1,std::ref(source)));	 
+    int32_t number{ 0 };
+    source.Read(number);
+    singleShaderSamplerData.resize(number, SingleShaderSamplerData{ CoreTools::DisableNotThrow::Disable });
+
+    for_each(singleShaderSamplerData.begin(), singleShaderSamplerData.end(), std::bind(&SingleShaderSamplerData::Load, std::placeholders::_1, std::ref(source)));
 }
 
-void Rendering::ShaderSamplerDataImpl
-	::Save( CoreTools::BufferTarget& target ) const
+void Rendering::ShaderSamplerDataImpl::Save(CoreTools::BufferTarget& target) const
 {
-	target.Write(boost::numeric_cast<uint32_t>(m_SingleShaderSamplerData.size()));
+    target.Write(boost::numeric_cast<int32_t>(singleShaderSamplerData.size()));
 
-	for_each(m_SingleShaderSamplerData.begin(), m_SingleShaderSamplerData.end(), std::bind(&SingleShaderSamplerData::Save, std::placeholders::_1,std::ref(target)));
+    for_each(singleShaderSamplerData.begin(), singleShaderSamplerData.end(), std::bind(&SingleShaderSamplerData::Save, std::placeholders::_1, std::ref(target)));
 }
 
-int Rendering::ShaderSamplerDataImpl
-	::GetStreamingSize() const
+int Rendering::ShaderSamplerDataImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(uint32_t());
-	for(const auto& data: m_SingleShaderSamplerData)
-	{
-		size += data.GetStreamingSize();
-	}
+    auto size = CORE_TOOLS_STREAM_SIZE(int32_t{});
+    for (const auto& data : singleShaderSamplerData)
+    {
+        size += data.GetStreamingSize();
+    }
 
-	return size;
+    return size;
 }
 
-void Rendering::ShaderSamplerDataImpl
-	::Resize(int number)
+void Rendering::ShaderSamplerDataImpl::Resize(int number)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_SingleShaderSamplerData.resize(number);
+    singleShaderSamplerData.resize(number, SingleShaderSamplerData{ CoreTools::DisableNotThrow::Disable });
 }
-
-#include STSTEM_WARNING_POP

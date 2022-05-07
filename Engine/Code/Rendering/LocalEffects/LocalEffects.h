@@ -1,11 +1,33 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/25 09:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 21:25)
 
 #ifndef RENDERING_LOCAL_EFFECTS_H
 #define RENDERING_LOCAL_EFFECTS_H
- 
 
-#endif // RENDERING_LOCAL_EFFECTS_H
+#include "DefaultEffect.h"
+#include "LightAmbEffect.h"
+#include "LightDirPerPixEffect.h"
+#include "LightDirPerVerEffect.h"
+#include "LightPntPerPixEffect.h"
+#include "LightPntPerVerEffect.h"
+#include "LightSptPerPixEffect.h"
+#include "LightSptPerVerEffect.h"
+#include "MaterialEffect.h"
+#include "MaterialTextureEffect.h"
+#include "Texture1DEffect.h"
+#include "Texture2AddEffect.h"
+#include "Texture2ColorBlendEffect.h"
+#include "Texture2DEffect.h"
+#include "Texture2MulEffect.h"
+#include "Texture3DEffect.h"
+#include "VertexColor3Effect.h"
+#include "VertexColor4Effect.h"
+#include "VertexColor4TextureEffect.h"
+
+#endif  // RENDERING_LOCAL_EFFECTS_H

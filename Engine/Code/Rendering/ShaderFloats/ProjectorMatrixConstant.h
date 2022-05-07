@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 17:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 15:20)
 
 #ifndef RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H
 #define RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H
@@ -10,35 +13,24 @@
 #include "Rendering/RenderingDll.h"
 
 #include "ShaderFloat.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/SceneGraph/Projector.h"
-EXPORT_SHARED_PTR(Rendering, ProjectorMatrixConstantImpl, RENDERING_DEFAULT_DECLARE);
- 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(ProjectorMatrixConstant, ProjectorMatrixConstantImpl);
+
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE ProjectorMatrixConstant : public ShaderFloat
     {
     public:
-        void Swap(ProjectorMatrixConstant& rhs) noexcept;
-        
-            public:
-                TYPE_DECLARE(ProjectorMatrixConstant);
-                using ClassShareType = CoreTools::CopyUnsharedClasses;
-                ~ProjectorMatrixConstant() noexcept= default;
-                ProjectorMatrixConstant(const ProjectorMatrixConstant& rhs);
-                ProjectorMatrixConstant& operator=(const ProjectorMatrixConstant& rhs);
-                ProjectorMatrixConstant(ProjectorMatrixConstant&& rhs) noexcept;
-                ProjectorMatrixConstant& operator=(ProjectorMatrixConstant&& rhs) noexcept;
+        COPY_UNSHARED_TYPE_DECLARE(ProjectorMatrixConstant);
         using ParentType = ShaderFloat;
 
     public:
         // 设置biasScaleMatrixIndex为0矩阵映射 y' = (1 - y) / 2。
         // 设置biasScaleMatrixIndex为1矩阵映射 y' = (1 + y) / 2。
         ProjectorMatrixConstant(const ProjectorSharedPtr& projector, bool biased, int biasScaleMatrixIndex);
-        
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -47,23 +39,27 @@ namespace Rendering
 
         void Update(const Visual* visual, const Camera* camera) override;
 
-        void SetNumRegisters(int numRegisters) override;
+        void SetNumRegisters(int aNumRegisters) override;
 
-        const ConstProjectorSharedPtr GetProjector() const;
+        NODISCARD ConstProjectorSharedPtr GetProjector() const noexcept;
 
-        ShaderFloatSharedPtr Clone() const override;
-
-    private:
-        constexpr static auto sm_NumRegisters = 4;
+        NODISCARD ShaderFloatSharedPtr Clone() const override;
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        constexpr static auto numRegisters = 4;
+
+    private:
+        PackageType impl;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(ProjectorMatrixConstant);
+
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SHARED_PTR_DECLARE( ProjectorMatrixConstant);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(ProjectorMatrixConstant);
 }
-#include STSTEM_WARNING_POP
+
 #endif  // RENDERING_SHADER_FLOATS_PROJECTOR_MATRIX_CONSTANT_H

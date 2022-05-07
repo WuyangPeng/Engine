@@ -1,77 +1,70 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/23 14:37)
 
 #ifndef RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_MANAGE_DETAIL_H
 #define RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_MANAGE_DETAIL_H
 
-#include "Rendering/RenderingExport.h" 
-
+#include "OpenGLTextureData.h"
 #include "OpenGLTextureDataManager.h"
 #include "TextureDataTraits.h"
-#include "OpenGLTextureData.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 template <typename ManageType>
-Rendering::OpenGLTextureDataManager<ManageType>
-	::OpenGLTextureDataManager(ManageType& manager) noexcept
-	:m_Manager{ manager }, m_Level{ -1 }, m_Face{ -1 }
+Rendering::OpenGLTextureDataManager<ManageType>::OpenGLTextureDataManager(ManageType& manager) noexcept
+    : manager{ manager }, managerLevel{ -1 }, managerFace{ -1 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture1D> >
-	::~OpenGLTextureDataManager();
+RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture1D>>::~OpenGLTextureDataManager() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture2D> >
-	::~OpenGLTextureDataManager();
+RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture2D>>::~OpenGLTextureDataManager() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture3D> >
-	::~OpenGLTextureDataManager();
+RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::Texture3D>>::~OpenGLTextureDataManager() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::TextureCube> >
-	::~OpenGLTextureDataManager();
+RENDERING_DEFAULT_DECLARE Rendering::OpenGLTextureDataManager<Rendering::OpenGLTextureData<Rendering::TextureCube>>::~OpenGLTextureDataManager() noexcept;
 
-#ifdef OPEN_CLASS_INVARIANT 
+#ifdef OPEN_CLASS_INVARIANT
 template <typename ManageType>
-bool Rendering::OpenGLTextureDataManager<ManageType>
-	::IsValid() const noexcept
+bool Rendering::OpenGLTextureDataManager<ManageType>::IsValid() const noexcept
 {
     return true;
 }
-#endif // OPEN_CLASS_INVARIAN
+#endif  // OPEN_CLASS_INVARIAN
 
 template <typename ManageType>
-void* Rendering::OpenGLTextureDataManager<ManageType>
-	::Lock(int level, BufferLocking mode) noexcept
+void* Rendering::OpenGLTextureDataManager<ManageType>::Lock(int level, BufferLocking mode) noexcept
 {
-	static_assert(TextureDataTraits<ManageType::TextureType>::sm_TextureType != TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<ManageType::TextureType>::textureType != TextureFlags::TextureCube);
 
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Level = level;
+    managerLevel = level;
 
-	return m_Manager.Lock(m_Level, mode);
+    return manager.Lock(managerLevel, mode);
 }
 
 template <typename ManageType>
-void* Rendering::OpenGLTextureDataManager<ManageType>
-	::Lock(int face, int level, BufferLocking mode) noexcept
+void* Rendering::OpenGLTextureDataManager<ManageType>::Lock(int face, int level, BufferLocking mode) noexcept
 {
-	static_assert(TextureDataTraits<ManageType::TextureType>::sm_TextureType == TextureFlags::TextureCube);
+    static_assert(TextureDataTraits<ManageType::TextureType>::textureType == TextureFlags::TextureCube);
 
-	RENDERING_CLASS_IS_VALID_9;
-	
-	m_Level = level;
-	m_Face = face;
+    RENDERING_CLASS_IS_VALID_9;
 
-	return m_Manager.Lock(m_Face, m_Level, mode);
+    managerLevel = level;
+    managerFace = face;
+
+    return manager.Lock(managerFace, managerLevel, mode);
 }
 
-#endif // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_DETAIL_H
+#endif  // RENDERING_OPENGL_RENDERER_OPENGL_TEXTURE_DATA_DETAIL_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 16:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:51)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,15 +16,15 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::AndroidMessageLoop ::AndroidMessageLoop(AndroidApp* androidApp, DisplayFunction function) noexcept
-    : m_State{ androidApp }, m_Function{ function }, m_LastTime{}
+Framework::AndroidMessageLoop::AndroidMessageLoop(AndroidApp* androidApp, DisplayFunction function) noexcept
+    : state{ androidApp }, function{ function }, lastTime{}
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, AndroidMessageLoop)
 
-void Framework::AndroidMessageLoop ::EnterMessageLoop() noexcept
+void Framework::AndroidMessageLoop::EnterMessageLoop() noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
@@ -32,18 +35,20 @@ void Framework::AndroidMessageLoop ::EnterMessageLoop() noexcept
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
         if (System::AndroidLooperPollAll(0, nullptr, &events, reinterpret_cast<void**>(&source)) < System::AndroidLooperEvent::Null)
+
 #include STSTEM_WARNING_POP
         {
-            if (m_Function != nullptr)
+            if (function != nullptr)
             {
-                const auto timeDelta = m_LastTime.GetThisElapsedTime();
+                const auto timeDelta = lastTime.GetThisElapsedTime();
 
-                m_Function(m_State, timeDelta);
+                function(state, timeDelta);
             }
         }
 
-        if (m_State->GetDestroyRequested() != 0)
+        if (state->GetDestroyRequested() != 0)
         {
             break;
         }

@@ -1,265 +1,226 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 16:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 15:30)
 
 #include "Rendering/RenderingExport.h"
 
 #include "StencilStateImpl.h"
-#include "CoreTools/FileManager/WriteFileManager.h"
+#include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/EnumCast.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::StencilStateImpl
-	::StencilStateImpl()
-	:m_Enabled{ false },m_Compare{ StencilStateFlags::CompareMode::Never },m_Reference{ 0 },m_Mask{ 0xFFFFFFFF },
-	 m_WriteMask{ 0xFFFFFFFF },m_OnFail{ StencilStateFlags::OperationType::Keep },m_OnZFail{ StencilStateFlags::OperationType::Keep },m_OnZPass{ StencilStateFlags::OperationType::Keep }
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
+Rendering::StencilStateImpl::StencilStateImpl() noexcept
+    : enabledState{ false },
+      compareState{ StencilStateFlags::CompareMode::Never },
+      referenceState{ 0 },
+      maskState{ 0xFFFFFFFF },
+      writeMaskState{ 0xFFFFFFFF },
+      onFailState{ StencilStateFlags::OperationType::Keep },
+      onZFailState{ StencilStateFlags::OperationType::Keep },
+      onZPassState{ StencilStateFlags::OperationType::Keep }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StencilStateImpl)
 
 void Rendering::StencilStateImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source.ReadBool();
-	source.ReadEnum(m_Compare);
-	source.Read(m_Reference);
-	source.Read(m_Mask);
-	source.Read(m_WriteMask);
-	source.ReadEnum(m_OnFail);
-	source.ReadEnum(m_OnZFail);
-	source.ReadEnum(m_OnZPass);
+    enabledState = source.ReadBool();
+    source.ReadEnum(compareState);
+    source.Read(referenceState);
+    source.Read(maskState);
+    source.Read(writeMaskState);
+    source.ReadEnum(onFailState);
+    source.ReadEnum(onZFailState);
+    source.ReadEnum(onZPassState);
 }
 
-void Rendering::StencilStateImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::StencilStateImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target.Write(m_Enabled);
-        target.WriteEnum(m_Compare);
-	target.Write(m_Reference);
-	target.Write(m_Mask);
-	target.Write(m_WriteMask);
-        target.WriteEnum(m_OnFail);
-        target.WriteEnum(m_OnZFail);
-        target.WriteEnum(m_OnZPass);
+    target.Write(enabledState);
+    target.WriteEnum(compareState);
+    target.Write(referenceState);
+    target.Write(maskState);
+    target.Write(writeMaskState);
+    target.WriteEnum(onFailState);
+    target.WriteEnum(onZFailState);
+    target.WriteEnum(onZPassState);
 }
 
-int Rendering::StencilStateImpl
-	::GetStreamingSize() const
+int Rendering::StencilStateImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_Enabled);
- 
-	size += CORE_TOOLS_STREAM_SIZE(m_Compare);
-	size += CORE_TOOLS_STREAM_SIZE(m_Reference);
-	size += CORE_TOOLS_STREAM_SIZE(m_Mask);
-	size += CORE_TOOLS_STREAM_SIZE(m_WriteMask);
-	size += CORE_TOOLS_STREAM_SIZE(m_OnFail);
-	size += CORE_TOOLS_STREAM_SIZE(m_OnZFail);
-	size += CORE_TOOLS_STREAM_SIZE(m_OnZPass);
+    auto size = CORE_TOOLS_STREAM_SIZE(enabledState);
 
-	return size;
+    size += CORE_TOOLS_STREAM_SIZE(compareState);
+    size += CORE_TOOLS_STREAM_SIZE(referenceState);
+    size += CORE_TOOLS_STREAM_SIZE(maskState);
+    size += CORE_TOOLS_STREAM_SIZE(writeMaskState);
+    size += CORE_TOOLS_STREAM_SIZE(onFailState);
+    size += CORE_TOOLS_STREAM_SIZE(onZFailState);
+    size += CORE_TOOLS_STREAM_SIZE(onZPassState);
+
+    return size;
 }
 
-bool Rendering::StencilStateImpl
-	::IsEnabled() const
+bool Rendering::StencilStateImpl::IsEnabled() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Enabled;
+    return enabledState;
 }
 
-void Rendering::StencilStateImpl
-	::SetEnabled(bool enabled)
+void Rendering::StencilStateImpl::SetEnabled(bool enabled) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = enabled;
+    enabledState = enabled;
 }
 
-Rendering::StencilStateImpl::CompareMode Rendering::StencilStateImpl
-	::GetCompare() const
+Rendering::StencilStateImpl::CompareMode Rendering::StencilStateImpl::GetCompare() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Compare;
+    return compareState;
 }
 
-void Rendering::StencilStateImpl
-	::SetCompare(CompareMode compare)
+void Rendering::StencilStateImpl::SetCompare(CompareMode compare) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Compare = compare;
+    compareState = compare;
 }
 
-unsigned int Rendering::StencilStateImpl
-	::GetReference() const
+uint32_t Rendering::StencilStateImpl::GetReference() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Reference;
+    return referenceState;
 }
 
-void Rendering::StencilStateImpl
-	::SetReference(unsigned int reference)
+void Rendering::StencilStateImpl::SetReference(uint32_t reference) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Reference = reference;
+    referenceState = reference;
 }
 
-unsigned int Rendering::StencilStateImpl
-	::GetMask() const
+uint32_t Rendering::StencilStateImpl::GetMask() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_Mask;
+    return maskState;
 }
 
-void Rendering::StencilStateImpl
-	::SetMask(unsigned int mask)
+void Rendering::StencilStateImpl::SetMask(uint32_t mask) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Mask = mask;
+    maskState = mask;
 }
 
-unsigned int Rendering::StencilStateImpl
-	::GetWriteMask() const
+uint32_t Rendering::StencilStateImpl::GetWriteMask() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_WriteMask;
+    return writeMaskState;
 }
 
-void Rendering::StencilStateImpl
-	::SetWriteMask(unsigned int writeMask)
+void Rendering::StencilStateImpl::SetWriteMask(uint32_t writeMask) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_WriteMask = writeMask;
+    writeMaskState = writeMask;
 }
 
-Rendering::StencilStateImpl::OperationType Rendering::StencilStateImpl
-	::GetOnFail() const
+Rendering::StencilStateImpl::OperationType Rendering::StencilStateImpl::GetOnFail() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_OnFail;
+    return onFailState;
 }
 
-void Rendering::StencilStateImpl
-	::SetOnFail(OperationType onFail)
+void Rendering::StencilStateImpl::SetOnFail(OperationType onFail) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OnFail = onFail;
+    onFailState = onFail;
 }
 
-Rendering::StencilStateImpl::OperationType Rendering::StencilStateImpl
-	::GetOnZFail() const
+Rendering::StencilStateImpl::OperationType Rendering::StencilStateImpl::GetOnZFail() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_OnZFail;
+    return onZFailState;
 }
 
-void Rendering::StencilStateImpl
-	::SetOnZFail(OperationType onZFail)
+void Rendering::StencilStateImpl::SetOnZFail(OperationType onZFail) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OnZFail = onZFail;
+    onZFailState = onZFail;
 }
 
-Rendering::StencilStateImpl::OperationType Rendering::StencilStateImpl
-	::GetOnZPass() const
+Rendering::StencilStateImpl::OperationType Rendering::StencilStateImpl::GetOnZPass() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_OnZPass;
+    return onZPassState;
 }
 
-void Rendering::StencilStateImpl
-	::SetOnZPass(OperationType onZPass)
+void Rendering::StencilStateImpl::SetOnZPass(OperationType onZPass) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OnZPass = onZPass;
+    onZPassState = onZPass;
 }
 
-void Rendering::StencilStateImpl
-	::SaveState( WriteFileManager& manager ) const
+void Rendering::StencilStateImpl::SaveState(WriteFileManager& manager) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	auto enabled = (m_Enabled ? 1 : 0);
-	auto compare = System::EnumCastUnderlying(m_Compare);
-	auto reference = m_Reference;
-	auto mask = m_Mask;
-	auto writeMask = m_WriteMask;
-	auto onFail = System::EnumCastUnderlying(m_OnFail);
-	auto onZFail = System::EnumCastUnderlying(m_OnZFail);
-	auto onZPass = System::EnumCastUnderlying(m_OnZPass);
+    const auto enabled = (enabledState ? 1 : 0);
 
-	manager.Write(sizeof(int), &enabled);
-	manager.Write(sizeof(int), &compare);
-	manager.Write(sizeof(unsigned int), &reference);
-	manager.Write(sizeof(unsigned int), &mask);
-	manager.Write(sizeof(unsigned int), &writeMask);
-	manager.Write(sizeof(int), &onFail);
-	manager.Write(sizeof(int), &onZFail);
-	manager.Write(sizeof(int), &onZPass);
+    manager.Write(sizeof(int32_t), &enabled);
+    manager.Write(sizeof(CompareMode), &compareState);
+    manager.Write(sizeof(uint32_t), &referenceState);
+    manager.Write(sizeof(uint32_t), &maskState);
+    manager.Write(sizeof(uint32_t), &writeMaskState);
+    manager.Write(sizeof(OperationType), &onFailState);
+    manager.Write(sizeof(OperationType), &onZFailState);
+    manager.Write(sizeof(OperationType), &onZPassState);
 }
 
-void Rendering::StencilStateImpl
-	::LoadState(ReadFileManager& manager)
+void Rendering::StencilStateImpl::LoadState(ReadFileManager& manager)
 {
-	RENDERING_CLASS_IS_VALID_9;
-	
-	int enabled{ 0 };
-	int compare{ 0 };
-	int onFail{ 0 };
-	int onZFail{ 0 };
-	int onZPass{ 0 };
-	uint32_t reference{ 0 };
-	uint32_t mask{ 0 };
-	uint32_t writeMask{ 0 };
-	manager.Read(sizeof(int), &enabled);
-	manager.Read(sizeof(int), &compare);
-	manager.Read(sizeof(uint32_t), &reference);
-	manager.Read(sizeof(uint32_t), &mask);
-	manager.Read(sizeof(uint32_t), &writeMask);
-	manager.Read(sizeof(int), &onFail);
-	manager.Read(sizeof(int), &onZFail);
-	manager.Read(sizeof(int), &onZPass);
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = (enabled == 1) ? true : false;
-	m_Compare = CompareMode(compare);
-	m_Reference = reference;
-	m_Mask = mask;
-	m_WriteMask = writeMask;
-	m_OnFail = OperationType(onFail);
-	m_OnZFail = OperationType(onZFail);
-	m_OnZPass = OperationType(onZPass);
+    int32_t enabled{ 0 };
+
+    manager.Read(sizeof(int32_t), &enabled);
+    manager.Read(sizeof(CompareMode), &compareState);
+    manager.Read(sizeof(uint32_t), &referenceState);
+    manager.Read(sizeof(uint32_t), &maskState);
+    manager.Read(sizeof(uint32_t), &writeMaskState);
+    manager.Read(sizeof(OperationType), &onFailState);
+    manager.Read(sizeof(OperationType), &onZFailState);
+    manager.Read(sizeof(OperationType), &onZPassState);
+
+    enabledState = (enabled == 1) ? true : false;
 }
-#include STSTEM_WARNING_POP

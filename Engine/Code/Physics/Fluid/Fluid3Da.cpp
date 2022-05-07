@@ -1,26 +1,22 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 16:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 15:13)
 
 #include "Physics/PhysicsExport.h"
 
-#ifdef PHYSICS_EXPORT_TEMPLATE
+#include "Fluid3DaDetail.h"
 
-#ifndef PHYSICS_INCLUDED_FLUID3DA_DETAIL
-	#define PHYSICS_INCLUDED_FLUID3DA_DETAIL
-#endif // PHYSICS_INCLUDED_FLUID3DA_DETAIL
-
-#include "Fluid3DaDetail.h" 
+#ifdef PHYSICS_TEMPLATE_TEST
 
 namespace Physics
 {
-	template PHYSICS_TEMPLATE_DEFAULT_DECLARE
-	class Fluid3Da<float>;
-
-	template PHYSICS_TEMPLATE_DEFAULT_DECLARE
-	class Fluid3Da<double>;
+    template class Fluid3Da<float>;
+    template class Fluid3Da<double>;
 }
 
-#endif // PHYSICS_EXPORT_TEMPLATE
+#endif  // PHYSICS_TEMPLATE_TEST

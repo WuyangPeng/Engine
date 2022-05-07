@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 19:21)
 
 #ifndef FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
 #define FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
@@ -10,48 +13,49 @@
 #include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include "Mathematics/Algebra/Matrix.h"
+#include "Rendering/DataTypes/Transform.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Spatial.h"
-#include "Rendering/DataTypes/Transform.h"
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE ObjectMotionRotateTrackBall
-	{
-	public:
-		using ClassType = ObjectMotionRotateTrackBall;
-		using Matrix = Mathematics::MatrixF;
-		using AVector = Mathematics::AVectorF;
-		using Transform = Rendering::FloatTransform;
-		using SpatialSmartPointer = Rendering::SpatialSharedPtr;
-		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
+    class FRAMEWORK_HIDDEN_DECLARE ObjectMotionRotateTrackBall
+    {
+    public:
+        using ClassType = ObjectMotionRotateTrackBall;
+        using Matrix = Mathematics::MatrixF;
+        using AVector = Mathematics::AVectorF;
+        using Transform = Rendering::TransformF;
+        using SpatialSharedPtr = Rendering::SpatialSharedPtr;
+        using ConstCameraSharedPtr = Rendering::ConstCameraSharedPtr;
 
-	public:
-		explicit ObjectMotionRotateTrackBall(const SpatialSmartPointer& motionObject, const ConstCameraSmartPointer& camera, float beginXTrack,
-											 float beginYTrack, float endXTrack, float endYTrack, const Matrix& saveRotate);
+    public:
+        explicit ObjectMotionRotateTrackBall(const SpatialSharedPtr& motionObject,
+                                             const ConstCameraSharedPtr& camera,
+                                             float beginXTrack,
+                                             float beginYTrack,
+                                             float endXTrack,
+                                             float endYTrack,
+                                             const Matrix& saveRotate);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const Transform GetTransform() const;
+        NODISCARD Transform GetTransform() const noexcept;
 
-	private:
-		void Calculate();
+    private:
+        void Calculate();
 
-	private:
-		SpatialSmartPointer m_MotionObject;
-		ConstCameraSmartPointer m_Camera;
-		float m_BeginXTrack;
-		float m_BeginYTrack;
-		float m_EndXTrack;
-		float m_EndYTrack;
-		Matrix m_SaveRotate;
-		Matrix m_LocalRotate;
-	};
+    private:
+        SpatialSharedPtr motionObject;
+        ConstCameraSharedPtr camera;
+        float beginXTrack;
+        float beginYTrack;
+        float endXTrack;
+        float endYTrack;
+        Matrix saveRotate;
+        Matrix localRotate;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H
-
-
-
+#endif  // FRAMEWORK_APPLICATION_OBJECT_MOTION_ROTATE_TRACK_BALL_H

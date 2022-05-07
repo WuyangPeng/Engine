@@ -1,35 +1,31 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/12 16:13)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VisualEffectImpl.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26440)
 
-Rendering::VisualEffectImpl::VisualEffectImpl()
-    : m_Techniques{}
+Rendering::VisualEffectImpl::VisualEffectImpl() noexcept
+    : techniques{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -40,68 +36,62 @@ int Rendering::VisualEffectImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return CORE_TOOLS_STREAM_SIZE(m_Techniques);
+    return CORE_TOOLS_STREAM_SIZE(techniques);
 }
 
 void Rendering::VisualEffectImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    //	target.WriteSharedPtr(m_Techniques);
+
+    target.WriteObjectAssociatedContainerWithNumber(techniques);
 }
 
 void Rendering::VisualEffectImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    //	source.ReadSharedPtr(m_Techniques);
+
+    source.ReadObjectAssociatedContainer(techniques);
 }
 
 void Rendering::VisualEffectImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    if (!m_Techniques.empty())
-    {
-        //source.ResolveObjectSharedPtrLink(boost::numeric_cast<int>(m_Techniques.size()), &m_Techniques[0]);
-    }
+
+    source.ResolveLinkContainer(techniques);
 }
 
 void Rendering::VisualEffectImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    if (!m_Techniques.empty())
-    {
-        //target.RegisterSharedPtr(boost::numeric_cast<int>(m_Techniques.size()), &m_Techniques[0]);
-    }
+
+    target.RegisterContainer(techniques);
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualEffectImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (auto& pointer : m_Techniques)
+    for (auto& pointer : techniques)
     {
-        auto found = pointer->GetObjectByName(name);
+        auto found = pointer.object->GetObjectByName(name);
         if (found != nullptr)
         {
             return found;
         }
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
 vector<CoreTools::ObjectSharedPtr> Rendering::VisualEffectImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ObjectSharedPtr> objects;
+    vector<CoreTools::ObjectSharedPtr> objects{};
 
-    for (auto& pointer : m_Techniques)
+    for (auto& pointer : techniques)
     {
-        auto singleObjects = pointer->GetAllObjectsByName(name);
+        auto singleObjects = pointer.object->GetAllObjectsByName(name);
 
         objects.insert(objects.end(), singleObjects.begin(), singleObjects.end());
     }
@@ -113,27 +103,27 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualEffectImpl::GetConstObjectByNam
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (const auto& pointer : m_Techniques)
+    for (const auto& pointer : techniques)
     {
-        auto found = pointer->GetConstObjectByName(name);
+        auto found = pointer.object->GetConstObjectByName(name);
         if (found != nullptr)
         {
             return found;
         }
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
 vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualEffectImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    vector<CoreTools::ConstObjectSharedPtr> objects;
+    vector<CoreTools::ConstObjectSharedPtr> objects{};
 
-    for (const auto& pointer : m_Techniques)
+    for (const auto& pointer : techniques)
     {
-        auto singleObjects = pointer->GetAllConstObjectsByName(name);
+        auto singleObjects = pointer.object->GetAllConstObjectsByName(name);
 
         objects.insert(objects.end(), singleObjects.begin(), singleObjects.end());
     }
@@ -145,22 +135,22 @@ void Rendering::VisualEffectImpl::InsertTechnique(const VisualTechniqueSharedPtr
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Techniques.push_back(technique);
+    techniques.emplace_back(technique);
 }
 
 int Rendering::VisualEffectImpl::GetNumTechniques() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Techniques.size());
+    return boost::numeric_cast<int>(techniques.size());
 }
 
-const Rendering::ConstVisualTechniqueSharedPtr Rendering::VisualEffectImpl::GetTechnique(int techniqueIndex) const
+Rendering::ConstVisualTechniqueSharedPtr Rendering::VisualEffectImpl::GetTechnique(int techniqueIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex];
+    return techniques.at(techniqueIndex).object;
 }
 
 int Rendering::VisualEffectImpl::GetNumPasses(int techniqueIndex) const
@@ -168,79 +158,79 @@ int Rendering::VisualEffectImpl::GetNumPasses(int techniqueIndex) const
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetNumPasses();
+    return techniques.at(techniqueIndex).object->GetNumPasses();
 }
 
-const Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectImpl::GetPass(int techniqueIndex, int passIndex) const
+Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectImpl::GetPass(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetPass(passIndex);
+    return techniques.at(techniqueIndex).object->GetPass(passIndex);
 }
 
-const Rendering::ConstVertexShaderSharedPtr Rendering::VisualEffectImpl::GetVertexShader(int techniqueIndex, int passIndex) const
+Rendering::ConstVertexShaderSharedPtr Rendering::VisualEffectImpl::GetVertexShader(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetVertexShader(passIndex);
+    return techniques.at(techniqueIndex).object->GetVertexShader(passIndex);
 }
 
-const Rendering::ConstPixelShaderSharedPtr Rendering::VisualEffectImpl::GetPixelShader(int techniqueIndex, int passIndex) const
+Rendering::ConstPixelShaderSharedPtr Rendering::VisualEffectImpl::GetPixelShader(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetPixelShader(passIndex);
+    return techniques.at(techniqueIndex).object->GetPixelShader(passIndex);
 }
 
-const Rendering::ConstAlphaStateSharedPtr Rendering::VisualEffectImpl::GetAlphaState(int techniqueIndex, int passIndex) const
+Rendering::ConstAlphaStateSharedPtr Rendering::VisualEffectImpl::GetAlphaState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetAlphaState(passIndex);
+    return techniques.at(techniqueIndex).object->GetAlphaState(passIndex);
 }
 
-const Rendering::ConstCullStateSharedPtr Rendering::VisualEffectImpl::GetCullState(int techniqueIndex, int passIndex) const
+Rendering::ConstCullStateSharedPtr Rendering::VisualEffectImpl::GetCullState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetCullState(passIndex);
+    return techniques.at(techniqueIndex).object->GetCullState(passIndex);
 }
 
-const Rendering::ConstDepthStateSharedPtr Rendering::VisualEffectImpl::GetDepthState(int techniqueIndex, int passIndex) const
+Rendering::ConstDepthStateSharedPtr Rendering::VisualEffectImpl::GetDepthState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetDepthState(passIndex);
+    return techniques.at(techniqueIndex).object->GetDepthState(passIndex);
 }
 
-const Rendering::ConstOffsetStateSharedPtr Rendering::VisualEffectImpl::GetOffsetState(int techniqueIndex, int passIndex) const
+Rendering::ConstOffsetStateSharedPtr Rendering::VisualEffectImpl::GetOffsetState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetOffsetState(passIndex);
+    return techniques.at(techniqueIndex).object->GetOffsetState(passIndex);
 }
 
-const Rendering::ConstStencilStateSharedPtr Rendering::VisualEffectImpl::GetStencilState(int techniqueIndex, int passIndex) const
+Rendering::ConstStencilStateSharedPtr Rendering::VisualEffectImpl::GetStencilState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetStencilState(passIndex);
+    return techniques.at(techniqueIndex).object->GetStencilState(passIndex);
 }
 
-const Rendering::ConstWireStateSharedPtr Rendering::VisualEffectImpl::GetWireState(int techniqueIndex, int passIndex) const
+Rendering::ConstWireStateSharedPtr Rendering::VisualEffectImpl::GetWireState(int techniqueIndex, int passIndex) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= techniqueIndex && techniqueIndex < GetNumTechniques(), "Ë÷Òý´íÎó£¡");
 
-    return m_Techniques[techniqueIndex]->GetWireState(passIndex);
+    return techniques.at(techniqueIndex).object->GetWireState(passIndex);
 }
 
 void Rendering::VisualEffectImpl::SaveVisualTechnique(WriteFileManager& manager) const
@@ -248,11 +238,11 @@ void Rendering::VisualEffectImpl::SaveVisualTechnique(WriteFileManager& manager)
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     const auto numTechniques = GetNumTechniques();
-    manager.Write(sizeof(int), &numTechniques);
+    manager.Write(sizeof(int32_t), &numTechniques);
 
     for (auto i = 0; i < numTechniques; ++i)
     {
-        m_Techniques[i]->SaveVisualPass(manager);
+        techniques.at(i).object->SaveVisualPass(manager);
     }
 }
 
@@ -261,16 +251,14 @@ void Rendering::VisualEffectImpl::LoadVisualTechnique(ReadFileManager& manager)
     RENDERING_CLASS_IS_VALID_9;
 
     auto numTechniques = 0;
-    manager.Read(sizeof(int), &numTechniques);
+    manager.Read(sizeof(int32_t), &numTechniques);
 
     for (auto i = 0; i < numTechniques; ++i)
     {
-        VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
+        auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
 
         technique->LoadVisualPass(manager);
 
-        InsertTechnique(technique);
+        InsertTechnique(std::move(technique));
     }
 }
-
-#include STSTEM_WARNING_POP

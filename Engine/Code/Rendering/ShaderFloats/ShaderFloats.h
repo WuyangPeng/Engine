@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 17:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 17:14)
 
 #ifndef RENDERING_SHADER_FLOATS_H
 #define RENDERING_SHADER_FLOATS_H
@@ -11,9 +14,9 @@
 #include "CameraModelPositionConstant.h"
 #include "CameraWorldDirectionVectorConstant.h"
 #include "CameraWorldPositionConstant.h"
-#include "LightConstant.h"
 #include "LightAmbientConstant.h"
 #include "LightAttenuationConstant.h"
+#include "LightConstant.h"
 #include "LightDiffuseConstant.h"
 #include "LightModelDirectionVectorConstant.h"
 #include "LightModelPositionConstant.h"
@@ -21,18 +24,18 @@
 #include "LightSpotConstant.h"
 #include "LightWorldDirectionVectorConstant.h"
 #include "LightWorldPositionConstant.h"
-#include "MaterialConstant.h"
 #include "MaterialAmbientConstant.h"
+#include "MaterialConstant.h"
 #include "MaterialDiffuseConstant.h"
 #include "MaterialEmissiveConstant.h"
 #include "MaterialSpecularConstant.h"
 #include "ProjectionMatrixConstant.h"
 #include "ProjectionViewMatrixConstant.h"
 #include "ProjectionViewWorldMatrixConstant.h"
+#include "ProjectorMatrixConstant.h"
+#include "ProjectorWorldPositionConstant.h"
 #include "ViewMatrixConstant.h"
 #include "ViewWorldMatrixConstant.h"
 #include "WorldMatrixConstant.h"
-#include "ProjectorWorldPositionConstant.h"
-#include "ProjectorMatrixConstant.h"
- 
-#endif // RENDERING_SHADER_FLOATS_H
+
+#endif  // RENDERING_SHADER_FLOATS_H

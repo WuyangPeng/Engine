@@ -8,20 +8,19 @@
 
 #include "Example/Imagics/ImagicsExample/ImagicsExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_IMAGICS_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_IMAGICS_EXAMPLE_STATIC
+#else  // BUILDING_IMAGICS_EXAMPLE_STATIC
 
-	namespace ImagicsExample
-	{
-		void StaticDllLib()
-		{
+namespace ImagicsExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_IMAGICS_EXAMPLE_STATIC
+#endif  // !BUILDING_IMAGICS_EXAMPLE_STATIC

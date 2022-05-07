@@ -5,6 +5,7 @@
 // ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/07 14:26)
 
 #include "DepthStateTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
@@ -28,7 +29,7 @@ void Rendering::DepthStateTesting::MainTest()
 
 void Rendering::DepthStateTesting::InitTest()
 {
-    DepthState firstDepthState;
+    DepthState firstDepthState{ CoreTools::DisableNotThrow::Disable };
 
     ASSERT_TRUE(firstDepthState.IsEnabled());
     ASSERT_TRUE(firstDepthState.IsWritable());
@@ -46,7 +47,7 @@ void Rendering::DepthStateTesting::InitTest()
 
 void Rendering::DepthStateTesting::CopyTest()
 {
-    DepthState firstDepthState;
+    DepthState firstDepthState{ CoreTools::DisableNotThrow::Disable };
     firstDepthState.SetEnabled(false);
     firstDepthState.SetWritable(false);
     firstDepthState.SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
@@ -66,7 +67,7 @@ void Rendering::DepthStateTesting::StreamTest()
 {
     // 	CoreTools::OutTopLevel outTopLevel;
     //
-    // 	DepthStateSharedPtr firstDepthState(new DepthState);
+    // 	DepthStateSharedPtr firstDepthState(new DepthState(CoreTools::DisableNotThrow::Disable));
     //
     // 	firstDepthState->SetEnabled(false);
     // 	firstDepthState->SetWritable(false);

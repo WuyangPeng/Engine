@@ -1,122 +1,139 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 15:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/25 14:15)
 
 #ifndef PHYSICS_COLLISION_DETECTION_COLLISION_RECORD_DETAIL_H
 #define PHYSICS_COLLISION_DETECTION_COLLISION_RECORD_DETAIL_H
 
 #include "CollisionRecord.h"
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
-#include "Mathematics/Intersection/Intersection3D/DynamicFindIntersectorTriangle3Triangle3.h"
-#include "Mathematics/Intersection/Intersection3D/DynamicTestIntersectorTriangle3Triangle3.h"
-#include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorTriangle3Triangle3.h"
-#include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorTriangle3Triangle3.h"
-#include "Mathematics/Objects3D/Triangle3.h"
+#include "Mathematics/Distance/Distance3D/DistanceLine3Triangle3Detail.h"
+#include "Mathematics/Distance/Distance3D/DistancePoint3Triangle3Detail.h"
+#include "Mathematics/Distance/DistanceResultDetail.h"
+#include "Mathematics/Intersection/DynamicIntersectorDetail.h"
+#include "Mathematics/Intersection/Intersection3D/DynamicFindIntersectorTriangle3Triangle3Detail.h"
+#include "Mathematics/Intersection/Intersection3D/DynamicTestIntersectorTriangle3Triangle3Detail.h"
+#include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorTriangle3Triangle3Detail.h"
+#include "Mathematics/Intersection/Intersection3D/StaticTestIntersectorTriangle3Triangle3Detail.h"
+#include "Mathematics/Objects3D/Triangle3Detail.h"
+#include "Rendering/DataTypes/BoundDetail.h"
 
-template <typename MeshSmartPointer, typename Bound>
-Physics::CollisionRecord<MeshSmartPointer, Bound>::CollisionRecord(const BoundTreeChildSharedPtr& tree, const AVector& velocity, Callback callback)
-    : m_Tree{ tree }, m_Velocity{ velocity }, m_Callback{ callback }
+template <typename MeshSharedPointer, typename Bound>
+Physics::CollisionRecord<MeshSharedPointer, Bound>::CollisionRecord(const BoundTreeChildSharedPtr& tree, const AVector& velocity, Callback callback)
+    : tree{ tree }, velocity{ velocity }, callback{ callback }
 {
-    m_Tree->UpdateWorldBound();
+    tree->UpdateWorldBound();
 
     PHYSICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename MeshSmartPointer, typename Bound>
-bool Physics::CollisionRecord<MeshSmartPointer, Bound>::IsValid() const noexcept
+
+template <typename MeshSharedPointer, typename Bound>
+bool Physics::CollisionRecord<MeshSharedPointer, Bound>::IsValid() const noexcept
 {
-    if (m_Callback != nullptr && m_Tree != nullptr && m_Tree->GetNumTriangles() != 0)
-        return true;
-    else
+    try
+    {
+        if (callback != nullptr && tree != nullptr && tree->GetNumTriangles() != 0)
+            return true;
+        else
+            return false;
+    }
+    catch (...)
+    {
         return false;
+    }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename MeshSmartPointer, typename Bound>
-typename const Physics::CollisionRecord<MeshSmartPointer, Bound>::ConstMeshSmartPointer Physics::CollisionRecord<MeshSmartPointer, Bound>::GetConstMesh() const
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::CollisionRecord<MeshSharedPointer, Bound>::ConstMeshSharedPointer Physics::CollisionRecord<MeshSharedPointer, Bound>::GetConstMesh() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Tree->GetMesh().GetConstSmartPointer();
+    return tree->GetMesh();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-const MeshSmartPointer Physics::CollisionRecord<MeshSmartPointer, Bound>::GetMesh()
+template <typename MeshSharedPointer, typename Bound>
+MeshSharedPointer Physics::CollisionRecord<MeshSharedPointer, Bound>::GetMesh() noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Tree->GetMesh();
+    return tree->GetMesh();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-const typename Physics::CollisionRecord<MeshSmartPointer, Bound>::AVector Physics::CollisionRecord<MeshSmartPointer, Bound>::GetVelocity() const
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::CollisionRecord<MeshSharedPointer, Bound>::AVector Physics::CollisionRecord<MeshSharedPointer, Bound>::GetVelocity() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Velocity;
+    return velocity;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-const Bound Physics::CollisionRecord<MeshSmartPointer, Bound>::GetWorldBound() const
+template <typename MeshSharedPointer, typename Bound>
+Bound Physics::CollisionRecord<MeshSharedPointer, Bound>::GetWorldBound() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Tree->GetWorldBound();
+    return tree->GetWorldBound();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-bool Physics::CollisionRecord<MeshSmartPointer, Bound>::IsInteriorNode() const
+template <typename MeshSharedPointer, typename Bound>
+bool Physics::CollisionRecord<MeshSharedPointer, Bound>::IsInteriorNode() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Tree->IsInteriorNode();
+    return tree->IsInteriorNode();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-typename const Physics::CollisionRecord<MeshSmartPointer, Bound>::BoundTreeChildSharedPtr Physics::CollisionRecord<MeshSmartPointer, Bound>::GetLeftChild()
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::CollisionRecord<MeshSharedPointer, Bound>::BoundTreeChildSharedPtr Physics::CollisionRecord<MeshSharedPointer, Bound>::GetLeftChild() noexcept
 {
     PHYSICS_CLASS_IS_VALID_1;
 
-    return m_Tree->GetLeftChild();
+    return tree->GetLeftChild();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-typename const Physics::CollisionRecord<MeshSmartPointer, Bound>::BoundTreeChildSharedPtr Physics::CollisionRecord<MeshSmartPointer, Bound>::GetRightChild()
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::CollisionRecord<MeshSharedPointer, Bound>::BoundTreeChildSharedPtr Physics::CollisionRecord<MeshSharedPointer, Bound>::GetRightChild() noexcept
 {
     PHYSICS_CLASS_IS_VALID_1;
 
-    return m_Tree->GetRightChild();
+    return tree->GetRightChild();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-typename Physics::CollisionRecord<MeshSmartPointer, Bound>::Callback Physics::CollisionRecord<MeshSmartPointer, Bound>::GetCallback() const
+template <typename MeshSharedPointer, typename Bound>
+typename Physics::CollisionRecord<MeshSharedPointer, Bound>::Callback Physics::CollisionRecord<MeshSharedPointer, Bound>::GetCallback() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Callback;
+    return callback;
 }
 
-template <typename MeshSmartPointer, typename Bound>
-int Physics::CollisionRecord<MeshSmartPointer, Bound>::GetNumTriangles() const
+template <typename MeshSharedPointer, typename Bound>
+int Physics::CollisionRecord<MeshSharedPointer, Bound>::GetNumTriangles() const
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Tree->GetNumTriangles();
+    return tree->GetNumTriangles();
 }
 
-template <typename MeshSmartPointer, typename Bound>
-int Physics::CollisionRecord<MeshSmartPointer, Bound>::GetTriangle(int index) const
+template <typename MeshSharedPointer, typename Bound>
+int Physics::CollisionRecord<MeshSharedPointer, Bound>::GetTriangle(int index) const
 {
     PHYSICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Tree->GetTriangle(index);
+    return tree->GetTriangle(index);
 }
 
-template <typename MeshSmartPointer, typename Bound>
-void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& lhsRecord, const CollisionRecord<MeshSmartPointer, Bound>& rhsRecord)
+template <typename MeshSharedPointer, typename Bound>
+void Physics::TestIntersection(CollisionRecord<MeshSharedPointer, Bound> lhsRecord, CollisionRecord<MeshSharedPointer, Bound> rhsRecord)
 {
     auto lhsWorldBound = lhsRecord.GetWorldBound();
     auto rhsWorldBound = rhsRecord.GetWorldBound();
@@ -126,13 +143,13 @@ void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& l
         if (lhsRecord.IsInteriorNode())
         {
             auto leftChild = lhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
 
             // 计算lhsRecord.left和rhsRecord
             TestIntersection(leftCollisionRecord, rhsRecord);
 
             auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
 
             // 计算lhsRecord.right和rhsRecord
             TestIntersection(rightCollisionRecord, rhsRecord);
@@ -140,13 +157,13 @@ void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& l
         else if (rhsRecord.IsInteriorNode())
         {
             auto leftChild = rhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
 
             // 计算lhsRecord和rhsRecord.left
             TestIntersection(lhsRecord, leftCollisionRecord);
 
             auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
 
             // 计算lhsRecord和rhsRecord.right
             TestIntersection(lhsRecord, rightCollisionRecord);
@@ -157,32 +174,32 @@ void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& l
             auto rhsMesh = rhsRecord.GetConstMesh();
 
             // 每棵树的叶子。
-            int lhsNumTriangles = lhsRecord.GetNumTriangles();
-            for (int lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
+            const auto lhsNumTriangles = lhsRecord.GetNumTriangles();
+            for (auto lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
             {
-                int lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
+                const auto lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
 
                 // 获取世界空间三角形。
                 auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 
-                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetThirdPosition().GetVector3D() };
+                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                              lhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                              lhsTrianglePosition.GetThirdPosition().GetVector3() };
 
-                int rhsNumTriangles = rhsRecord.GetNumTriangles();
-                for (int rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
+                const auto rhsNumTriangles = rhsRecord.GetNumTriangles();
+                for (auto rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
                 {
-                    int rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
+                    const auto rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
 
                     // 获取世界空间三角形。
                     auto rhsTrianglePosition = rhsMesh->GetWorldTriangle(rhsTriangleIndex);
 
-                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetThirdPosition().GetVector3D() };
+                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetThirdPosition().GetVector3() };
 
-                    typename CollisionRecord<MeshSmartPointer, Bound>::IntersectorSharedPtr calc(new Mathematics::StaticTestIntersectorTriangle3Triangle3<float>(tri0, tri1));
-                    if (calc.IsIntersection())
+                    auto calc = std::make_shared<Mathematics::StaticTestIntersectorTriangle3Triangle3<float>>(tri0, tri1);
+                    if (calc->IsIntersection())
                     {
                         auto lhsCallback = lhsRecord.GetCallback();
                         if (lhsCallback)
@@ -203,8 +220,8 @@ void Physics::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& l
     }
 }
 
-template <typename MeshSmartPointer, typename Bound>
-void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& lhsRecord, const CollisionRecord<MeshSmartPointer, Bound>& rhsRecord)
+template <typename MeshSharedPointer, typename Bound>
+void Physics::FindIntersection(CollisionRecord<MeshSharedPointer, Bound> lhsRecord, CollisionRecord<MeshSharedPointer, Bound> rhsRecord)
 {
     auto lhsWorldBound = lhsRecord.GetWorldBound();
     auto rhsWorldBound = rhsRecord.GetWorldBound();
@@ -214,13 +231,13 @@ void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& 
         if (lhsRecord.IsInteriorNode())
         {
             auto leftChild = lhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
 
             // 计算lhsRecord.left和rhsRecord
             TestIntersection(leftCollisionRecord, rhsRecord);
 
             auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
 
             // 计算lhsRecord.right和rhsRecord
             TestIntersection(rightCollisionRecord, rhsRecord);
@@ -228,13 +245,13 @@ void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& 
         else if (rhsRecord.IsInteriorNode())
         {
             auto leftChild = rhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
 
             // 计算lhsRecord和rhsRecord.left
             TestIntersection(lhsRecord, leftCollisionRecord);
 
             auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
 
             // 计算lhsRecord和rhsRecord.right
             TestIntersection(lhsRecord, rightCollisionRecord);
@@ -245,125 +262,32 @@ void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& 
             auto rhsMesh = rhsRecord.GetConstMesh();
 
             // 每棵树的叶子。
-            int lhsNumTriangles = lhsRecord.GetNumTriangles();
-            for (int lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
+            const auto lhsNumTriangles = lhsRecord.GetNumTriangles();
+            for (auto lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
             {
-                int lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
+                const auto lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
 
                 // 获取世界空间三角形。
                 auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 
-                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetThirdPosition().GetVector3D() };
+                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                              lhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                              lhsTrianglePosition.GetThirdPosition().GetVector3() };
 
-                int rhsNumTriangles = rhsRecord.GetNumTriangles();
-                for (int rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
+                const auto rhsNumTriangles = rhsRecord.GetNumTriangles();
+                for (auto rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
                 {
-                    int rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
-
-                    // 获取世界空间三角形。
-                    auto rhsTrianglePosition =
-                        rhsMesh->GetWorldTriangle(rhsTriangleIndex);
-
-                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetThirdPosition().GetVector3D() };
-
-                    typename CollisionRecord<MeshSmartPointer, Bound>::IntersectorSharedPtr calc(new Mathematics::StaticFindIntersectorTriangle3Triangle3<float>(tri0, tri1));
-                    if (calc.IsIntersection())
-                    {
-                        auto lhsCallback = lhsRecord.GetCallback();
-                        if (lhsCallback)
-                        {
-                            lhsCallback(lhsRecord, lhsTriangleIndex, rhsRecord, rhsTriangleIndex, calc);
-                        }
-
-                        auto rhsCallback = rhsRecord.GetCallback();
-
-                        if (rhsCallback)
-                        {
-                            rhsCallback(rhsRecord, rhsTriangleIndex, lhsRecord, lhsTriangleIndex, calc);
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-template <typename MeshSmartPointer, typename Bound>
-void Physics ::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& lhsRecord, const CollisionRecord<MeshSmartPointer, Bound>& rhsRecord, float tmax)
-{
-    auto lhsWorldBound = lhsRecord.GetWorldBound();
-    auto rhsWorldBound = rhsRecord.GetWorldBound();
-
-    // TODO: Add glue until the Mathematics library uses APoint and AVector.
-    Mathematics::Vector3F velocity0{ lhsRecord.GetVelocity().GetVector3D() };
-    Mathematics::Vector3F velocity1{ rhsRecord.GetVelocity().GetVector3D() };
-
-    if (TestIntersection(lhsWorldBound, velocity0, rhsWorldBound, velocity1, tmax))
-    {
-        if (lhsRecord.IsInteriorNode())
-        {
-            auto leftChild = lhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
-
-            // 计算lhsRecord.left和rhsRecord
-            TestIntersection(leftCollisionRecord, rhsRecord, tmax);
-
-            auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
-
-            // 计算lhsRecord.right和rhsRecord
-            TestIntersection(rightCollisionRecord, rhsRecord, tmax);
-        }
-        else if (rhsRecord.IsInteriorNode())
-        {
-            auto leftChild = rhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
-
-            // 计算lhsRecord和rhsRecord.left
-            TestIntersection(lhsRecord, leftCollisionRecord, tmax);
-
-            auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
-
-            // 计算lhsRecord和rhsRecord.right
-            TestIntersection(lhsRecord, rightCollisionRecord, tmax);
-        }
-        else
-        {
-            auto lhsMesh = lhsRecord.GetConstMesh();
-            auto rhsMesh = rhsRecord.GetConstMesh();
-
-            // 每棵树的叶子。
-            int lhsNumTriangles = lhsRecord.GetNumTriangles();
-            for (int lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
-            {
-                int lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
-
-                // 获取世界空间三角形。
-                auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
-
-                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetThirdPosition().GetVector3D() };
-
-                int rhsNumTriangles = rhsRecord.GetNumTriangles();
-                for (int rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
-                {
-                    int rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
+                    const auto rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
 
                     // 获取世界空间三角形。
                     auto rhsTrianglePosition = rhsMesh->GetWorldTriangle(rhsTriangleIndex);
 
-                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetThirdPosition().GetVector3D() };
+                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetThirdPosition().GetVector3() };
 
-                    typename CollisionRecord<MeshSmartPointer, Bound>::IntersectorSharedPtr calc(new Mathematics::DynamicTestIntersectorTriangle3Triangle3<float>(tri0, tri1, tmax, velocity0, velocity1));
-                    if (calc.IsIntersection())
+                    auto calc = std::make_shared<Mathematics::StaticFindIntersectorTriangle3Triangle3<float>>(tri0, tri1);
+                    if (calc->IsIntersection())
                     {
                         auto lhsCallback = lhsRecord.GetCallback();
                         if (lhsCallback)
@@ -384,28 +308,27 @@ void Physics ::TestIntersection(const CollisionRecord<MeshSmartPointer, Bound>& 
     }
 }
 
-template <typename MeshSmartPointer, typename Bound>
-void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& lhsRecord, const CollisionRecord<MeshSmartPointer, Bound>& rhsRecord, float tmax)
+template <typename MeshSharedPointer, typename Bound>
+void Physics::TestIntersection(CollisionRecord<MeshSharedPointer, Bound> lhsRecord, CollisionRecord<MeshSharedPointer, Bound> rhsRecord, float tmax)
 {
     auto lhsWorldBound = lhsRecord.GetWorldBound();
     auto rhsWorldBound = rhsRecord.GetWorldBound();
 
-    // TODO: Add glue until the Mathematics library uses APoint and AVector.
-    Mathematics::Vector3F velocity0{ lhsRecord.GetVelocity().GetVector3D() };
-    Mathematics::Vector3F velocity1{ rhsRecord.GetVelocity().GetVector3D() };
+    const auto velocity0 = lhsRecord.GetVelocity();
+    const auto velocity1 = rhsRecord.GetVelocity();
 
-    if (TestIntersection(lhsWorldBound, velocity0, rhsWorldBound, velocity1, tmax))
+    if (Rendering::TestIntersection(lhsWorldBound, velocity0, rhsWorldBound, velocity1, tmax))
     {
         if (lhsRecord.IsInteriorNode())
         {
             auto leftChild = lhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
 
             // 计算lhsRecord.left和rhsRecord
             TestIntersection(leftCollisionRecord, rhsRecord, tmax);
 
             auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
 
             // 计算lhsRecord.right和rhsRecord
             TestIntersection(rightCollisionRecord, rhsRecord, tmax);
@@ -413,13 +336,13 @@ void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& 
         else if (rhsRecord.IsInteriorNode())
         {
             auto leftChild = rhsRecord.GetLeftChild();
-            CollisionRecord<MeshSmartPointer, Bound> leftCollisionRecord(leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback());
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
 
             // 计算lhsRecord和rhsRecord.left
             TestIntersection(lhsRecord, leftCollisionRecord, tmax);
 
             auto rightChild = rhsRecord.GetRightChild();
-            CollisionRecord<MeshSmartPointer, Bound> rightCollisionRecord(rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback());
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback() };
 
             // 计算lhsRecord和rhsRecord.right
             TestIntersection(lhsRecord, rightCollisionRecord, tmax);
@@ -430,33 +353,123 @@ void Physics ::FindIntersection(const CollisionRecord<MeshSmartPointer, Bound>& 
             auto rhsMesh = rhsRecord.GetConstMesh();
 
             // 每棵树的叶子。
-            int lhsNumTriangles = lhsRecord.GetNumTriangles();
-            for (int lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
+            const auto lhsNumTriangles = lhsRecord.GetNumTriangles();
+            for (auto lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
             {
-                int lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
+                const auto lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
 
                 // 获取世界空间三角形。
                 auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
 
-                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                              lhsTrianglePosition.GetThirdPosition().GetVector3D() };
+                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                              lhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                              lhsTrianglePosition.GetThirdPosition().GetVector3() };
 
-                int rhsNumTriangles = rhsRecord.GetNumTriangles();
-                for (int rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
+                const auto rhsNumTriangles = rhsRecord.GetNumTriangles();
+                for (auto rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
                 {
-                    int rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
+                    const auto rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
 
                     // 获取世界空间三角形。
-                    auto rhsTrianglePosition =
-                        rhsMesh->GetWorldTriangle(rhsTriangleIndex);
+                    auto rhsTrianglePosition = rhsMesh->GetWorldTriangle(rhsTriangleIndex);
 
-                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetSecondPosition().GetVector3D(),
-                                                  rhsTrianglePosition.GetThirdPosition().GetVector3D() };
+                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetThirdPosition().GetVector3() };
 
-                    typename CollisionRecord<MeshSmartPointer, Bound>::IntersectorSharedPtr calc(new Mathematics::DynamicFindIntersectorTriangle3Triangle3<float>(tri0, tri1, tmax, velocity0, velocity1));
-                    if (calc.IsIntersection())
+                    auto calc = std::make_shared<Mathematics::DynamicTestIntersectorTriangle3Triangle3<float>>(tri0, tri1, tmax, velocity0.GetVector3(), velocity1.GetVector3());
+                    if (calc->IsIntersection())
+                    {
+                        auto lhsCallback = lhsRecord.GetCallback();
+                        if (lhsCallback)
+                        {
+                            lhsCallback(lhsRecord, lhsTriangleIndex, rhsRecord, rhsTriangleIndex, calc);
+                        }
+
+                        auto rhsCallback = rhsRecord.GetCallback();
+
+                        if (rhsCallback)
+                        {
+                            rhsCallback(rhsRecord, rhsTriangleIndex, lhsRecord, lhsTriangleIndex, calc);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+template <typename MeshSharedPointer, typename Bound>
+void Physics::FindIntersection(CollisionRecord<MeshSharedPointer, Bound> lhsRecord, CollisionRecord<MeshSharedPointer, Bound> rhsRecord, float tmax)
+{
+    auto lhsWorldBound = lhsRecord.GetWorldBound();
+    auto rhsWorldBound = rhsRecord.GetWorldBound();
+
+    const auto velocity0 = lhsRecord.GetVelocity();
+    const auto velocity1 = rhsRecord.GetVelocity();
+
+    if (Rendering::TestIntersection(lhsWorldBound, velocity0, rhsWorldBound, velocity1, tmax))
+    {
+        if (lhsRecord.IsInteriorNode())
+        {
+            auto leftChild = lhsRecord.GetLeftChild();
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord{ leftChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+
+            // 计算lhsRecord.left和rhsRecord
+            TestIntersection(leftCollisionRecord, rhsRecord, tmax);
+
+            auto rightChild = rhsRecord.GetRightChild();
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord{ rightChild, lhsRecord.GetVelocity(), lhsRecord.GetCallback() };
+
+            // 计算lhsRecord.right和rhsRecord
+            TestIntersection(rightCollisionRecord, rhsRecord, tmax);
+        }
+        else if (rhsRecord.IsInteriorNode())
+        {
+            auto leftChild = rhsRecord.GetLeftChild();
+            CollisionRecord<MeshSharedPointer, Bound> leftCollisionRecord(leftChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback());
+
+            // 计算lhsRecord和rhsRecord.left
+            TestIntersection(lhsRecord, leftCollisionRecord, tmax);
+
+            auto rightChild = rhsRecord.GetRightChild();
+            CollisionRecord<MeshSharedPointer, Bound> rightCollisionRecord(rightChild, rhsRecord.GetVelocity(), rhsRecord.GetCallback());
+
+            // 计算lhsRecord和rhsRecord.right
+            TestIntersection(lhsRecord, rightCollisionRecord, tmax);
+        }
+        else
+        {
+            auto lhsMesh = lhsRecord.GetConstMesh();
+            auto rhsMesh = rhsRecord.GetConstMesh();
+
+            // 每棵树的叶子。
+            const auto lhsNumTriangles = lhsRecord.GetNumTriangles();
+            for (auto lhsIndex = 0; lhsIndex < lhsNumTriangles; ++lhsIndex)
+            {
+                const auto lhsTriangleIndex = lhsRecord.GetTriangle(lhsIndex);
+
+                // 获取世界空间三角形。
+                auto lhsTrianglePosition = lhsMesh->GetWorldTriangle(lhsTriangleIndex);
+
+                Mathematics::Triangle3F tri0{ lhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                              lhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                              lhsTrianglePosition.GetThirdPosition().GetVector3() };
+
+                const auto rhsNumTriangles = rhsRecord.GetNumTriangles();
+                for (int rhsIndex = 0; rhsIndex < rhsNumTriangles; ++rhsIndex)
+                {
+                    const auto rhsTriangleIndex = rhsRecord.GetTriangle(rhsIndex);
+
+                    // 获取世界空间三角形。
+                    auto rhsTrianglePosition = rhsMesh->GetWorldTriangle(rhsTriangleIndex);
+
+                    Mathematics::Triangle3F tri1{ rhsTrianglePosition.GetFirstPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetSecondPosition().GetVector3(),
+                                                  rhsTrianglePosition.GetThirdPosition().GetVector3() };
+
+                    auto calc = std::make_shared<Mathematics::DynamicFindIntersectorTriangle3Triangle3<float>>(tri0, tri1, tmax, velocity0.GetVector3(), velocity1.GetVector3());
+                    if (calc->IsIntersection())
                     {
                         auto lhsCallback = lhsRecord.GetCallback();
                         if (lhsCallback)

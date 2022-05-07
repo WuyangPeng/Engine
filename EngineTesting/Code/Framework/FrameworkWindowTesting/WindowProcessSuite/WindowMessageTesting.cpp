@@ -6,7 +6,7 @@
 
 #include "WindowMessageTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
-#include "System/Window/WindowCreate.h"
+#include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
@@ -25,7 +25,7 @@ namespace Framework
     using TestingType = WindowMessage<MiddleLayerInterface>;
 }
 
-Framework::WindowMessageTesting ::WindowMessageTesting(const OStreamShared& stream, HWnd hwnd)
+Framework::WindowMessageTesting::WindowMessageTesting(const OStreamShared& stream, HWnd hwnd)
     : ParentType{ stream }, m_Hwnd{ hwnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -33,12 +33,12 @@ Framework::WindowMessageTesting ::WindowMessageTesting(const OStreamShared& stre
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowMessageTesting)
 
-void Framework::WindowMessageTesting ::DoRunUnitTest()
+void Framework::WindowMessageTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::WindowMessageTesting ::MainTest()
+void Framework::WindowMessageTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CloseMessageTest);
@@ -46,7 +46,7 @@ void Framework::WindowMessageTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SetMainWindowTest);
 }
 
-void Framework::WindowMessageTesting ::MessageTest()
+void Framework::WindowMessageTesting::MessageTest()
 {
     constexpr auto delta = System::g_Microseconds / 60;
     TestingType message{ delta };
@@ -81,10 +81,10 @@ void Framework::WindowMessageTesting ::MessageTest()
 
     message.Display(m_Hwnd, 0);
 
-    ASSERT_EQUAL(message.GetTerminateKey(), WindowApplicationTrait::KeyIdentifiers::sm_KeyTerminate);
+    ASSERT_EQUAL(message.GetTerminateKey(), WindowApplicationTrait::KeyIdentifiers::keyTerminate);
 }
 
-void Framework::WindowMessageTesting ::CloseMessageTest()
+void Framework::WindowMessageTesting::CloseMessageTest()
 {
     constexpr auto delta = System::g_Microseconds / 60;
     TestingType message{ delta };
@@ -92,7 +92,7 @@ void Framework::WindowMessageTesting ::CloseMessageTest()
     auto instance = System::GetHInstance();
 
     System::String className{};
-    [[maybe_unused]] auto value = System::GetSystemClassName(m_Hwnd, className);
+    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
 
     auto windowName = SYSTEM_TEXT("Test Close Message Window"s);
 
@@ -105,7 +105,7 @@ void Framework::WindowMessageTesting ::CloseMessageTest()
     ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
 }
 
-void Framework::WindowMessageTesting ::DestroyMessageTest()
+void Framework::WindowMessageTesting::DestroyMessageTest()
 {
     constexpr auto delta = System::g_Microseconds / 60;
     TestingType message{ delta };
@@ -113,7 +113,7 @@ void Framework::WindowMessageTesting ::DestroyMessageTest()
     auto instance = System::GetHInstance();
 
     System::String className{};
-    [[maybe_unused]] auto value = System::GetSystemClassName(m_Hwnd, className);
+    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
 
     auto windowName = SYSTEM_TEXT("Test Destroy Message Window"s);
 
@@ -127,7 +127,7 @@ void Framework::WindowMessageTesting ::DestroyMessageTest()
     ASSERT_EQUAL(message.DestroyMessage(create.GetHwnd(), 0, 0), 0);
 }
 
-void Framework::WindowMessageTesting ::SetMainWindowTest()
+void Framework::WindowMessageTesting::SetMainWindowTest()
 {
     constexpr auto delta = System::g_Microseconds / 60;
     TestingType message{ delta };
@@ -135,7 +135,7 @@ void Framework::WindowMessageTesting ::SetMainWindowTest()
     auto instance = System::GetHInstance();
 
     System::String className{};
-    [[maybe_unused]] auto value = System::GetSystemClassName(m_Hwnd, className);
+    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
 
     auto windowName = SYSTEM_TEXT("Test Close Message Window"s);
 

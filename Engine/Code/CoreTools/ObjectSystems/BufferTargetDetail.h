@@ -240,6 +240,23 @@ void CoreTools::BufferTarget::WriteObjectAssociated(const T& object)
 }
 
 template <typename T>
+void CoreTools::BufferTarget::WriteWeakObjectAssociated(const T& object)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
+
+    if (object.object.lock() != nullptr)
+    {
+        WriteUniqueID(object.object.lock());
+    }
+    else
+    {
+        Write(uint64_t{ 0 });
+    }
+}
+
+template <typename T>
 void CoreTools::BufferTarget::WriteObjectAssociatedContainerWithNumber(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

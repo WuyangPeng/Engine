@@ -22,7 +22,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, SpatialTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, SpatialTest);
 
 Rendering::SpatialTest::SpatialTest()
-    : ParentType{}
+    : ParentType{ VisualPrimitiveType::None }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

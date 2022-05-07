@@ -1,200 +1,189 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/10 16:27)
 
 #include "Rendering/RenderingExport.h"
 
 #include "DlodNodeImpl.h"
-#include "Rendering/DataTypes/Transform.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446) 
-#include SYSTEM_WARNING_DISABLE(26455) 
-#include SYSTEM_WARNING_DISABLE(26472) 
- 
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-Rendering::DlodNodeImpl
-	::DlodNodeImpl()
-	: m_ModelLodCenter{}, m_WorldLodCenter{}, m_NumLevelsOfDetail{ 0 }, m_ModelMinDistance{}, m_ModelMaxDistance{}, m_WorldMinDistance{}, m_WorldMaxDistance{}
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/DataTypes/Transform.h"
+
+#include <gsl/util>
+
+Rendering::DlodNodeImpl::DlodNodeImpl() noexcept
+    : modelLodCenter{}, worldLodCenter{}, numLevelsOfDetail{ 0 }, modelMinDistance{}, modelMaxDistance{}, worldMinDistance{}, worldMaxDistance{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::DlodNodeImpl
-	::DlodNodeImpl(int numLevelsOfDetail)
-	: m_ModelLodCenter{}, m_WorldLodCenter{}, m_NumLevelsOfDetail(numLevelsOfDetail), m_ModelMinDistance(numLevelsOfDetail),
-	  m_ModelMaxDistance(numLevelsOfDetail),m_WorldMinDistance(numLevelsOfDetail), m_WorldMaxDistance(numLevelsOfDetail)
+Rendering::DlodNodeImpl::DlodNodeImpl(int numLevelsOfDetail)
+    : modelLodCenter{},
+      worldLodCenter{},
+      numLevelsOfDetail{ numLevelsOfDetail },
+      modelMinDistance(numLevelsOfDetail),
+      modelMaxDistance(numLevelsOfDetail),
+      worldMinDistance(numLevelsOfDetail),
+      worldMaxDistance(numLevelsOfDetail)
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::DlodNodeImpl
-	::IsValid() const noexcept
+
+bool Rendering::DlodNodeImpl::IsValid() const noexcept
 {
-	if (static_cast<size_t>(m_NumLevelsOfDetail) == m_ModelMinDistance.size() &&
-		m_ModelMinDistance.size() == m_ModelMaxDistance.size() &&
-		m_WorldMinDistance.size() == m_WorldMaxDistance.size() &&
-		m_ModelMinDistance.size() == m_WorldMaxDistance.size())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (gsl::narrow_cast<size_t>(numLevelsOfDetail) == modelMinDistance.size() &&
+        modelMinDistance.size() == modelMaxDistance.size() &&
+        worldMinDistance.size() == worldMaxDistance.size() &&
+        modelMinDistance.size() == worldMaxDistance.size())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 void Rendering::DlodNodeImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	source.ReadAggregate(m_ModelLodCenter);
-	source.ReadAggregate(m_WorldLodCenter);
-	source.Read(m_NumLevelsOfDetail);
-//	source.Read(m_ModelMinDistance);
-//	source.Read(m_ModelMaxDistance);
-//	source.Read(m_WorldMinDistance);
-//	source.Read(m_WorldMaxDistance);
+    source.ReadAggregate(modelLodCenter);
+    source.ReadAggregate(worldLodCenter);
+    source.Read(numLevelsOfDetail);
+    source.ReadContainer(modelMinDistance);
+    source.ReadContainer(modelMaxDistance);
+    source.ReadContainer(worldMinDistance);
+    source.ReadContainer(worldMaxDistance);
 }
 
-void Rendering::DlodNodeImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::DlodNodeImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target.WriteAggregate(m_ModelLodCenter);
-        target.WriteAggregate(m_WorldLodCenter);
-	target.Write(m_NumLevelsOfDetail);
-        target.WriteContainerWithNumber(m_ModelMinDistance);
-        target.WriteContainerWithNumber(m_ModelMaxDistance);
-        target.WriteContainerWithNumber(m_WorldMinDistance);
-        target.WriteContainerWithNumber(m_WorldMaxDistance);
+    target.WriteAggregate(modelLodCenter);
+    target.WriteAggregate(worldLodCenter);
+    target.Write(numLevelsOfDetail);
+    target.WriteContainerWithNumber(modelMinDistance);
+    target.WriteContainerWithNumber(modelMaxDistance);
+    target.WriteContainerWithNumber(worldMinDistance);
+    target.WriteContainerWithNumber(worldMaxDistance);
 }
 
-int Rendering::DlodNodeImpl
-	::GetStreamingSize() const
+int Rendering::DlodNodeImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_ModelLodCenter);
+    auto size = CORE_TOOLS_STREAM_SIZE(modelLodCenter);
 
-	size += CORE_TOOLS_STREAM_SIZE(m_WorldLodCenter);
-	size += CORE_TOOLS_STREAM_SIZE(m_NumLevelsOfDetail);
-	size += CORE_TOOLS_STREAM_SIZE(m_ModelMinDistance);
-	size += CORE_TOOLS_STREAM_SIZE(m_ModelMaxDistance);
-	size += CORE_TOOLS_STREAM_SIZE(m_WorldMinDistance);
-	size += CORE_TOOLS_STREAM_SIZE(m_WorldMaxDistance);
+    size += CORE_TOOLS_STREAM_SIZE(worldLodCenter);
+    size += CORE_TOOLS_STREAM_SIZE(numLevelsOfDetail);
+    size += CORE_TOOLS_STREAM_SIZE(modelMinDistance);
+    size += CORE_TOOLS_STREAM_SIZE(modelMaxDistance);
+    size += CORE_TOOLS_STREAM_SIZE(worldMinDistance);
+    size += CORE_TOOLS_STREAM_SIZE(worldMaxDistance);
 
-	return size;
+    return size;
 }
 
-const Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl
-	::GetModelCenter() const noexcept
+Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl::GetModelCenter() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	
-	return m_ModelLodCenter;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return modelLodCenter;
 }
 
-const Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl
-	::GetWorldCenter() const noexcept
+Rendering::DlodNodeImpl::APoint Rendering::DlodNodeImpl::GetWorldCenter() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_WorldLodCenter;
+    return worldLodCenter;
 }
 
-void Rendering::DlodNodeImpl
-	::SetModelCenter(const APoint& modelCenter) noexcept
+void Rendering::DlodNodeImpl::SetModelCenter(const APoint& modelCenter) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ModelLodCenter = modelCenter;
+    modelLodCenter = modelCenter;
 }
 
-int Rendering::DlodNodeImpl
-	::GetNumLevelsOfDetail() const noexcept
+int Rendering::DlodNodeImpl::GetNumLevelsOfDetail() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumLevelsOfDetail;
+    return numLevelsOfDetail;
 }
 
-float Rendering::DlodNodeImpl
-	::GetModelMinDistance( int index ) const
+float Rendering::DlodNodeImpl::GetModelMinDistance(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumLevelsOfDetail,"索引越界");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "索引越界");
 
-	return m_ModelMinDistance[index];
+    return modelMinDistance.at(index);
 }
 
-float Rendering::DlodNodeImpl
-	::GetModelMaxDistance( int index ) const
+float Rendering::DlodNodeImpl::GetModelMaxDistance(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumLevelsOfDetail,"索引越界");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "索引越界");
 
-	return m_ModelMaxDistance[index];
+    return modelMaxDistance.at(index);
 }
 
-float Rendering::DlodNodeImpl
-	::GetWorldMinDistance( int index ) const
+float Rendering::DlodNodeImpl::GetWorldMinDistance(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumLevelsOfDetail,"索引越界");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "索引越界");
 
-	return m_WorldMinDistance[index];
+    return worldMinDistance.at(index);
 }
 
-float Rendering::DlodNodeImpl
-	::GetWorldMaxDistance( int index ) const
+float Rendering::DlodNodeImpl::GetWorldMaxDistance(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumLevelsOfDetail,"索引越界");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "索引越界");
 
-	return m_WorldMaxDistance[index];
+    return worldMaxDistance.at(index);
 }
 
-void Rendering::DlodNodeImpl
-	::SetModelDistance( int index, float minDistance, float maxDistance )
+void Rendering::DlodNodeImpl::SetModelDistance(int index, float minDistance, float maxDistance)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumLevelsOfDetail,"索引越界");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numLevelsOfDetail, "索引越界");
 
-	m_ModelMinDistance[index] = minDistance;
-	m_ModelMaxDistance[index] = maxDistance;
-	m_WorldMinDistance[index] = minDistance;
-	m_WorldMaxDistance[index] = minDistance;
+    modelMinDistance.at(index) = minDistance;
+    modelMaxDistance.at(index) = maxDistance;
+    worldMinDistance.at(index) = minDistance;
+    worldMaxDistance.at(index) = minDistance;
 }
 
-void Rendering::DlodNodeImpl
-	::SetWorldCenter( const TransformF& transform ) noexcept
+void Rendering::DlodNodeImpl::SetWorldCenter(const TransformF& transform) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_WorldLodCenter = transform * m_ModelLodCenter;
+    worldLodCenter = transform * modelLodCenter;
 }
 
-void Rendering::DlodNodeImpl
-	::SetWorldDistance( float uniformScale ) noexcept
+void Rendering::DlodNodeImpl::SetWorldDistance(float uniformScale) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	for (auto i = 0; i < m_NumLevelsOfDetail; ++i)
-	{
-		m_WorldMinDistance[i] = uniformScale * m_ModelMinDistance[i];
-		m_WorldMaxDistance[i] = uniformScale * m_ModelMaxDistance[i];
-	}
+    for (auto i = 0; i < numLevelsOfDetail; ++i)
+    {
+        worldMinDistance.at(i) = uniformScale * modelMinDistance.at(i);
+        worldMaxDistance.at(i) = uniformScale * modelMaxDistance.at(i);
+    }
 }
-#include STSTEM_WARNING_POP

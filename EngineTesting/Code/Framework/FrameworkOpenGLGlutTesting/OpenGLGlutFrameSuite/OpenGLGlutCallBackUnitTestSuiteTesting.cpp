@@ -11,8 +11,7 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework,OpenGLGlutCallBackUnitTestSuiteTesting) 
 
-void Framework::OpenGLGlutCallBackUnitTestSuiteTesting
-	::MainTest()
+void Framework::OpenGLGlutCallBackUnitTestSuiteTesting::MainTest() noexcept
 {
 	 
 }

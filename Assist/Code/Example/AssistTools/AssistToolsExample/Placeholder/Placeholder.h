@@ -7,23 +7,23 @@
 #ifndef ASSIST_TOOLS_EXAMPLE_PLACEHOLDER_H
 #define ASSIST_TOOLS_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/AssistTools/AssistToolsExample/AssistToolsExampleDll.h" 
+#include "Example/AssistTools/AssistToolsExample/AssistToolsExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace AssistToolsExample
 {
-	 class ASSIST_TOOLS_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class ASSIST_TOOLS_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // ASSIST_TOOLS_EXAMPLE_PLACEHOLDER_H
+#endif  // ASSIST_TOOLS_EXAMPLE_PLACEHOLDER_H

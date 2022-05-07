@@ -1,80 +1,75 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 16:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:35)
 
 #ifndef RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_DETAIL_H
 #define RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_DETAIL_H
 
-#include "Rendering/RenderingExport.h"
-
-#include "TextureLockManager.h" 
 #include "PlatformTexture1D.h"
 #include "PlatformTexture2D.h"
 #include "PlatformTexture3D.h"
 #include "PlatformTextureCube.h"
+#include "TextureLockManager.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/OpenGLRenderer/TextureDataTraits.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
 
 template <typename PlatformTextureType>
-Rendering::TextureLockManager<PlatformTextureType>
-	::TextureLockManager(PlatformTextureType& manager)
-	:m_Manager{ manager }, m_Level{ -1 }, m_Face{ -1 }
+Rendering::TextureLockManager<PlatformTextureType>::TextureLockManager(PlatformTextureType& manager)
+    : manager{ manager }, level{ -1 }, face{ -1 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTexture1D>
-	::~TextureLockManager();
+RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTexture1D>::~TextureLockManager() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTexture2D>
-	::~TextureLockManager();
+RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTexture2D>::~TextureLockManager() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTexture3D>
-	::~TextureLockManager();
+RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTexture3D>::~TextureLockManager() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTextureCube>
-	::~TextureLockManager();
- 
+RENDERING_DEFAULT_DECLARE Rendering::TextureLockManager<Rendering::PlatformTextureCube>::~TextureLockManager() noexcept;
+
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename PlatformTextureType>
-bool Rendering::TextureLockManager< PlatformTextureType>
-	::IsValid() const noexcept
+bool Rendering::TextureLockManager<PlatformTextureType>::IsValid() const noexcept
 {
     return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename PlatformTextureType>
-void* Rendering::TextureLockManager<PlatformTextureType>
-	::Lock(int level, BufferLocking mode)
+void* Rendering::TextureLockManager<PlatformTextureType>::Lock(int alevel, BufferLocking mode)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType != TextureFlags::TextureCube,"sm_TextureType != TextureCube");
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType != TextureFlags::TextureCube, "sm_TextureType != TextureCube");
 
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_Level = level;
+    level = alevel;
 
-	return m_Manager.Lock(m_Level, mode);
+    return manager.Lock(level, mode);
 }
 
 template <typename PlatformTextureType>
-void* Rendering::TextureLockManager<PlatformTextureType>
-	::Lock(int face, int level, BufferLocking mode)
+void* Rendering::TextureLockManager<PlatformTextureType>::Lock(int aFace, int alevel, BufferLocking mode)
 {
-	static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType == TextureFlags::TextureCube,"sm_TextureType == TextureCube");
+    static_assert(TextureDataTraits<PlatformTextureType::TextureType>::sm_TextureType == TextureFlags::TextureCube, "sm_TextureType == TextureCube");
 
-	RENDERING_CLASS_IS_VALID_9;
-	
-	m_Level = level;
-	m_Face = face;
+    RENDERING_CLASS_IS_VALID_9;
 
-	return m_Manager.Lock(m_Face, m_Level, mode);
+    level = alevel;
+    face = aFace;
+
+    return manager.Lock(face, level, mode);
 }
- 
-#endif // RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_DETAIL_H
+
+#endif  // RENDERING_RENDERERS_TEXTURE_LOCK_MANAGE_DETAIL_H

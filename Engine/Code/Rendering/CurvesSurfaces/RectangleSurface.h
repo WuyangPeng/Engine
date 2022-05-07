@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 15:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/16 18:45)
 
 #ifndef RENDERING_CURVES_SURFACES_RECTANGLE_SURFACE_H
 #define RENDERING_CURVES_SURFACES_RECTANGLE_SURFACE_H
@@ -25,40 +28,35 @@ namespace Rendering
         using ParentType = TrianglesMesh;
 
     public:
-        // Construction and destruction.  The input surface must be rectangular,
-        // not triangular.  RectangleSurface accepts responsibility for deleting
-        // the input surface.  Any texture coordinates in the vertex format must
-        // be 2D.  The minimum and maximum texture coordinates are specified in
-        // the constructor.  If you have none, set tcoordMin and tcoordMax to
-        // null.
-        RectangleSurface(Mathematics::ParametricSurface<float>* surface, int numUSamples, int numVSamples,
-                         VertexFormatSharedPtr vformat, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax);
+        RectangleSurface(const std::shared_ptr<Mathematics::ParametricSurface<float>>& surface,
+                         int numUSamples,
+                         int numVSamples,
+                         const VertexFormatSharedPtr& vformat,
+                         const Mathematics::Float2& tcoordMin,
+                         const Mathematics::Float2& tcoordMax);
 
-        ~RectangleSurface();
-        RectangleSurface(const RectangleSurface&) = default;
-        RectangleSurface& operator=(const RectangleSurface&) = default;
-        RectangleSurface(RectangleSurface&&) = default;
-        RectangleSurface& operator=(RectangleSurface&&) = default;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // Member access.
-        void SetSurface(Mathematics::ParametricSurface<float>* surface) noexcept;
-        const Mathematics::ParametricSurface<float>* GetSurface() const noexcept;
-        int GetNumUSamples() const noexcept;
-        int GetNumVSamples() const noexcept;
+        void SetSurface(const std::shared_ptr<Mathematics::ParametricSurface<float>>& aSurface) noexcept;
+        NODISCARD std::shared_ptr<Mathematics::ParametricSurface<float>> GetSurface() noexcept;
+        NODISCARD int GetNumUSamples() const noexcept;
+        NODISCARD int GetNumVSamples() const noexcept;
 
-        // If the surface is modified, for example if it is control point
-        // based and the control points are modified, then you should call this
-        // update function to recompute the rectangle surface geometry.
         void UpdateSurface();
 
-    protected:
-        Mathematics::ParametricSurface<float>* mSurface;
-        int mNumUSamples, mNumVSamples;
+    private:
+        std::shared_ptr<Mathematics::ParametricSurface<float>> surface;
+        int numUSamples;
+        int numVSamples;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(RectangleSurface);
+
 #include STSTEM_WARNING_POP
+
     CORE_TOOLS_SHARED_PTR_DECLARE(RectangleSurface);
 }
 

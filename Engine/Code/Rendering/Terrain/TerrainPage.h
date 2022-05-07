@@ -1,72 +1,77 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 19:02)
 
 #ifndef RENDERING_TERRAIN_TERRAIN_PAGE_H
 #define RENDERING_TERRAIN_TERRAIN_PAGE_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/SceneGraph/TrianglesMesh.h"
+#include "System/Helper/PragmaWarning.h"
 #include "Mathematics/Base/Float.h"
- #include "System/Helper/PragmaWarning.h" 
+#include "Rendering/SceneGraph/TrianglesMesh.h"
+
 namespace Rendering
 {
-	class   TerrainPage : public TrianglesMesh
-	{
-	public:
-		using ClassType = TerrainPage;
-		using ParentType = TrianglesMesh;
+    class TerrainPage : public TrianglesMesh
+    {
+    public:
+        using ClassType = TerrainPage;
+        using ParentType = TrianglesMesh;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TerrainPage); 
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TerrainPage);
 
-	public:
-		// Construction and destruction.  The following is required:
-		// size = 2^p + 1, p <= 7 (size = 3, 5, 9, 17, 33, 65, 129)
-		TerrainPage(VertexFormatSharedPtr vformat, int size, unsigned short* heights, const Mathematics::Float2& origin,
-				    float minElevation, float maxElevation,float spacing);
+    public:
+        TerrainPage(const VertexFormatSharedPtr& vformat,
+                    int size,
+                    const std::vector<uint16_t>& heights,
+                    const Mathematics::Float2& origin,
+                    float minElevation,
+                    float maxElevation,
+                    float spacing);
 
-		  ~TerrainPage();
-		  
-		  TerrainPage(const TerrainPage&) = default;
-		   TerrainPage& operator=(const TerrainPage&) = default;
-			TerrainPage(TerrainPage&&) = default;
-		   TerrainPage& operator=(TerrainPage&&) = default;
-		   
-		// Height field access.
-		 int GetSize() const noexcept;
-		 const unsigned short* GetHeights() const noexcept;
-		 const Mathematics::Float2& GetOrigin() const noexcept;
-		 float GetMinElevation() const noexcept;
-		 float GetMaxElevation() const noexcept;
-		 float GetSpacing() const noexcept;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Height field measurements.  If the location is not in the page, the
-		// return value is MAX_REAL.
-		float GetHeight(float x, float y) const;
+        NODISCARD int GetSize() const noexcept;
+        NODISCARD std::vector<uint16_t> GetHeights() const noexcept;
+        NODISCARD const Mathematics::Float2& GetOrigin() const noexcept;
+        NODISCARD float GetMinElevation() const noexcept;
+        NODISCARD float GetMaxElevation() const noexcept;
+        NODISCARD float GetSpacing() const noexcept;
 
-	protected:
-		// Support for tessellation.
-		 float GetX(int x) const;
-		 float GetY(int y) const;
-		 float GetHeight(int index) const noexcept;
+        NODISCARD float GetHeight(float x, float y) const;
 
-		// Height field parameters.
-		int mSize, mSizeM1;
-		unsigned short* mHeights;
-		Mathematics::Float2 mOrigin;
-		float mMinElevation, mMaxElevation, mSpacing;
-		float mInvSpacing, mMultiplier;
-	};
+    protected:
+        NODISCARD float GetX(int x) const;
+        NODISCARD float GetY(int y) const;
+        NODISCARD float GetHeight(int index) const;
+
+    private:
+        int pageSize;
+        int sizeM1;
+        std::vector<uint16_t> heights;
+        Mathematics::Float2 origin;
+        float minElevation;
+        float maxElevation;
+        float spacing;
+        float invSpacing;
+        float multiplier;
+    };
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(TerrainPage);
-	CORE_TOOLS_SHARED_PTR_DECLARE( TerrainPage);
-	#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_STREAM_REGISTER(TerrainPage);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(TerrainPage);
 }
 
-#endif // RENDERING_TERRAIN_TERRAIN_PAGE_H
+#endif  // RENDERING_TERRAIN_TERRAIN_PAGE_H

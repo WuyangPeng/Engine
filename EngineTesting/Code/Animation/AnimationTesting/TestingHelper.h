@@ -1,46 +1,47 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/09 19:22)
 
 #ifndef ANIMATION_TESTING_TESTING_HELPER_H
 #define ANIMATION_TESTING_TESTING_HELPER_H
 
-#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace CoreTools
 {
-	class Suite;
+    class Suite;
 }
 
 namespace Animation
 {
-	class TestingHelper : public CoreTools::CMainFunctionTestingHelper
-	{
-	public:
-		CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(TestingHelper); 
-	
-		int DoRun() override;			
+    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    {
+    public:
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
 
-	private:
-		void AddSuites();	
+    public:
+        TestingHelper(int argc, char** argv);
 
-		void AddMacroSuite(); 
-		void AddConsoleGraphSuite();
-		void AddElfAnimationSuite();
-		void AddTextureAnimationSuite();
-		void AddRigidBodyHierarchyAnimationSuite();
-		void AddSkeletonAnimationSuite();
-		void AddPerVertexAnimationSuite();
-		void AddMorphTargetAnimationSuite();
-		void AddGradientAnimationSuite();
-		void AddAnimationManagerSuite();
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	private:
-		CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
-	};
+    private:
+        void InitSuite();
+
+        void AddMacroSuite();
+        void AddConsoleGraphSuite();
+        void AddElfAnimationSuite();
+        void AddTextureAnimationSuite();
+        void AddRigidBodyHierarchyAnimationSuite();
+        void AddSkeletonAnimationSuite();
+        void AddPerVertexAnimationSuite();
+        void AddMorphTargetAnimationSuite();
+        void AddGradientAnimationSuite();
+        void AddAnimationManagerSuite();
+    };
 }
 
-#endif // ANIMATION_TESTING_TESTING_HELPER_H
+#endif  // ANIMATION_TESTING_TESTING_HELPER_H

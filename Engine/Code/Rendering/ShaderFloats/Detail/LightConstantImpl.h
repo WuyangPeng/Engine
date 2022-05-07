@@ -1,64 +1,60 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 16:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 17:59)
 
 #ifndef RENDERING_SHADER_FLOATS_LIGHT_CONSTANT_IMPL_H
 #define RENDERING_SHADER_FLOATS_LIGHT_CONSTANT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/SceneGraph/Light.h"
 
-#include <vector>
 #include <string>
- 
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;
-	class Object;
-	class ObjectLink;
-	class ObjectRegister;
-}
+#include <vector>
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE LightConstantImpl
-	{
-	public:
-		using ClassType = LightConstantImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-		using ObjectLink = CoreTools::ObjectLink;
-		using ObjectRegister = CoreTools::ObjectRegister;
-		using Object = CoreTools::Object;
-		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
-		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
- 
-	public: 
-		explicit LightConstantImpl(const LightSharedPtr& light);
-		LightConstantImpl();
+    class RENDERING_HIDDEN_DECLARE LightConstantImpl
+    {
+    public:
+        using ClassType = LightConstantImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using ObjectLink = CoreTools::ObjectLink;
+        using ObjectRegister = CoreTools::ObjectRegister;
+        using Object = CoreTools::Object;
+        using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+        using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 
-		CLASS_INVARIANT_DECLARE;
-	
-		void Load(CoreTools::BufferSource& source);
-		void Save(CoreTools::BufferTarget& target) const;
-		int GetStreamingSize() const;
-		void Link(CoreTools:: ObjectLink& source);
-                void Register(CoreTools::ObjectRegister& target) const;
+    public:
+        explicit LightConstantImpl(const LightSharedPtr& light) noexcept;
+        LightConstantImpl() noexcept;
 
-		const ObjectSharedPtr GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
- 
-		const ConstLightSharedPtr GetLight() const;
-   
-	private:
-		LightSharedPtr m_Light;
-	};
+        CLASS_INVARIANT_DECLARE;
+
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const noexcept;
+        void Link(CoreTools::ObjectLink& source);
+        void Register(CoreTools::ObjectRegister& target) const;
+
+        NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name);
+        NODISCARD std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
+        NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+        NODISCARD std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
+
+        NODISCARD ConstLightSharedPtr GetLight() const noexcept;
+
+    private:
+        CoreTools::ObjectAssociated<Light> light;
+    };
 }
 
-#endif // RENDERING_SHADER_FLOATS_LIGHT_CONSTANT_IMPL_H
+#endif  // RENDERING_SHADER_FLOATS_LIGHT_CONSTANT_IMPL_H

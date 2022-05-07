@@ -7,23 +7,23 @@
 #ifndef ANIMATION_TOOLSET_PLACEHOLDER_H
 #define ANIMATION_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Animation/AnimationToolset/AnimationToolsetDll.h" 
+#include "Toolset/Animation/AnimationToolset/AnimationToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace AnimationToolset
 {
-	 class ANIMATION_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class ANIMATION_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // ANIMATION_TOOLSET_PLACEHOLDER_H
+#endif  // ANIMATION_TOOLSET_PLACEHOLDER_H

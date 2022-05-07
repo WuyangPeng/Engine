@@ -51,7 +51,7 @@ void Framework::WindowRegisterTesting
 	auto newWindowClassName = windowClassName + System::ToString(m_Count++);
 
 	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-	WindowPictorial windowPictorial{ System::WindowBrushTypes::WhiteBrush };
+	WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
 	WindowName windowName{ newWindowClassName, windowMenuName };
 	WindowRegisterHandle<WindowProcessInterface> windowRegister{ environmentDirectory, m_Instance, "",windowPictorial,windowName };
 

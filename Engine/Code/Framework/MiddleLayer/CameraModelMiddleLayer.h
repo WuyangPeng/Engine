@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 16:15)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_H
 #define FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_H
@@ -10,7 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "ModelMiddleLayer.h"
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Rendering/DataTypes/Transform.h"
@@ -19,89 +22,88 @@ FRAMEWORK_NON_COPY_EXPORT_IMPL(CameraModelMiddleLayerImpl);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE CameraModelMiddleLayer : public ModelMiddleLayer
-	{
-	public:
-		NON_COPY_TYPE_DECLARE(CameraModelMiddleLayer);
-		using ParentType = ModelMiddleLayer;
-		using APoint = Mathematics::APointF;
-		using AVector = Mathematics::AVectorF;
-		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-		using Transform = Rendering::FloatTransform;
+    class FRAMEWORK_DEFAULT_DECLARE CameraModelMiddleLayer : public ModelMiddleLayer
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(CameraModelMiddleLayer);
+        using ParentType = ModelMiddleLayer;
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
+        using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
+        using Transform = Rendering::TransformF;
 
-	public:
-		explicit CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
-		~CameraModelMiddleLayer() noexcept = default;
-		CameraModelMiddleLayer(const CameraModelMiddleLayer& rhs) noexcept = delete;
-		CameraModelMiddleLayer& operator=(const CameraModelMiddleLayer& rhs) noexcept = delete;
-		CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept;
-		CameraModelMiddleLayer& operator=(CameraModelMiddleLayer&& rhs) noexcept;
+    public:
+        explicit CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        ~CameraModelMiddleLayer() noexcept = default;
+        CameraModelMiddleLayer(const CameraModelMiddleLayer& rhs) noexcept = delete;
+        CameraModelMiddleLayer& operator=(const CameraModelMiddleLayer& rhs) noexcept = delete;
+        CameraModelMiddleLayer(CameraModelMiddleLayer&& rhs) noexcept;
+        CameraModelMiddleLayer& operator=(CameraModelMiddleLayer&& rhs) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		bool Initialize() override;
-		void Terminate() override;
-		bool Idle(int64_t timeDelta) override;
+        NODISCARD bool Initialize() override;
+        void Terminate() override;
+        NODISCARD bool Idle(int64_t aTimeDelta) override;
 
-	public:
-		const Transform GetMotionObjectLocalTransform() const;
+    public:
+        NODISCARD Transform GetMotionObjectLocalTransform() const;
 
-		// CameraMotion
-		bool MoveCamera();
+        // CameraMotion
+        bool MoveCamera();
 
-		void SlowerCameraTranslation() noexcept;
-		void FasterCameraTranslation() noexcept;
-		void SlowerCameraRotation() noexcept;
-		void FasterCameraRotation() noexcept;
+        void SlowerCameraTranslation() noexcept;
+        void FasterCameraTranslation() noexcept;
+        void SlowerCameraRotation() noexcept;
+        void FasterCameraRotation() noexcept;
 
-		float GetRotationSpeed() const;
-		float GetTranslationSpeed() const;
+        NODISCARD float GetRotationSpeed() const;
+        NODISCARD float GetTranslationSpeed() const;
 
-		void SetMoveForward(bool pressed) noexcept; // 向前
-		void SetMoveBackward(bool pressed) noexcept; // 向后
-		void SetTurnLeft(bool pressed) noexcept; // 左转
-		void SetTurnRight(bool pressed) noexcept;// 右转
-		void SetLookUp(bool pressed) noexcept;// 向上看
-		void SetLookDown(bool pressed) noexcept;// 向下看
-		void SetMoveUp(bool pressed) noexcept;// 向上
-		void SetMoveDown(bool pressed) noexcept;// 向下
-		void SetMoveRight(bool pressed) noexcept;// 向右
-		void SetMoveLeft(bool pressed) noexcept; // 向左	
+        void SetMoveForward(bool pressed) noexcept;  // 向前
+        void SetMoveBackward(bool pressed) noexcept;  // 向后
+        void SetTurnLeft(bool pressed) noexcept;  // 左转
+        void SetTurnRight(bool pressed) noexcept;  // 右转
+        void SetLookUp(bool pressed) noexcept;  // 向上看
+        void SetLookDown(bool pressed) noexcept;  // 向下看
+        void SetMoveUp(bool pressed) noexcept;  // 向上
+        void SetMoveDown(bool pressed) noexcept;  // 向下
+        void SetMoveRight(bool pressed) noexcept;  // 向右
+        void SetMoveLeft(bool pressed) noexcept;  // 向左
 
-		const APoint GetCameraPosition() const;
-		const AVector GetCameraDirectionVector() const;
-		const AVector GetCameraUpVector() const;
-		const AVector GetCameraRightVector() const;
+        NODISCARD APoint GetCameraPosition() const;
+        NODISCARD AVector GetCameraDirectionVector() const;
+        NODISCARD AVector GetCameraUpVector() const;
+        NODISCARD AVector GetCameraRightVector() const;
 
-		// ObjectMotion
-		bool MoveObject();
+        // ObjectMotion
+        bool MoveObject();
 
-		void SetBeginTrack(float xTrack, float yTrack) noexcept;
-		void SetEndTrack(float xTrack, float yTrack) noexcept;
-		void RotateTrackBall();
-		void SetTrackBallDow(bool value) noexcept;
-		void SetSaveRotate();
-		void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
-		void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
-		void SetDoPitch(NumericalValueSymbol doPitch) noexcept;
-		bool GetTrackBallDow() const noexcept;
+        void SetBeginTrack(float xTrack, float yTrack) noexcept;
+        void SetEndTrack(float xTrack, float yTrack) noexcept;
+        void RotateTrackBall();
+        void SetTrackBallDow(bool value) noexcept;
+        void SetSaveRotate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetDoRoll(NumericalValueSymbol doRoll) noexcept;
+        void SetDoYaw(NumericalValueSymbol doYaw) noexcept;
+        void SetDoPitch(NumericalValueSymbol doPitch) noexcept;
+        NODISCARD bool GetTrackBallDow() const noexcept;
 
-		void RotateTrackBall(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer);
-		void SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer);
+        void RotateTrackBall(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer);
+        void SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
 
-	protected:
-		void InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor);
+    protected:
+        void InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor);
 
-		void InitializeObjectMotion();
+        void InitializeObjectMotion();
 
-	private:
-                PackageType impl;
-		int64_t m_TimeDelta;
-	};
+    private:
+        PackageType impl;
+        int64_t timeDelta;
+    };
 
-	using CameraModelMiddleLayerSharedPtr = std::shared_ptr<CameraModelMiddleLayer>;
-	using ConstCameraModelMiddleLayerSharedPtr = std::shared_ptr<const CameraModelMiddleLayer>;
+    using CameraModelMiddleLayerSharedPtr = std::shared_ptr<CameraModelMiddleLayer>;
+    using ConstCameraModelMiddleLayerSharedPtr = std::shared_ptr<const CameraModelMiddleLayer>;
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_H
-
+#endif  // FRAMEWORK_MIDDLE_LAYER_CAMERA_MODEL_MIDDLE_LAYER_H

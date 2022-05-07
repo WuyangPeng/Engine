@@ -11,7 +11,7 @@
 #include "AssistTools/GenerateProjects/GenerateTemplateCodeDirectory.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateEngineDirectory.h"
 
-#include <boost/lexical_cast.hpp>
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 
 using std::string;
 

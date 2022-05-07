@@ -1,45 +1,45 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 17:20)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowNameImpl.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::WindowNameImpl
-	::WindowNameImpl(const String& className, const String& menuName)
-	:m_ClassName{ className }, m_MenuName{ menuName }
+Framework::WindowNameImpl::WindowNameImpl(const String& className, const String& menuName)
+    : className{ className }, menuName{ menuName }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowNameImpl
-	::IsValid() const noexcept
-{
-	if (!m_ClassName.empty())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-const System::String Framework::WindowNameImpl
-	::GetWindowClassName() const
+bool Framework::WindowNameImpl::IsValid() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	return m_ClassName;
+    if (!className.empty())
+        return true;
+    else
+        return false;
 }
 
-const System::String Framework::WindowNameImpl
-	::GetWindowMenuName() const
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return m_MenuName;
+System::String Framework::WindowNameImpl::GetWindowClassName() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return className;
 }
 
+System::String Framework::WindowNameImpl::GetWindowMenuName() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return menuName;
+}

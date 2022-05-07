@@ -7,7 +7,7 @@
 #ifndef FRAMEWORK_WINDOW_TESTING_WINDOW_PROCESS_SUITE_WINDOW_PROCESS_MANAGE_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_PROCESS_SUITE_WINDOW_PROCESS_MANAGE_TESTING_H
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h" 
 
 namespace Framework
@@ -17,7 +17,7 @@ namespace Framework
 	public:
 		using ClassType = WindowProcessManagerTesting;
 		using ParentType = UnitTest;
-		using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowsHWnd;
 
 	public:
 		explicit WindowProcessManagerTesting(const OStreamShared& stream, HWnd hwnd);

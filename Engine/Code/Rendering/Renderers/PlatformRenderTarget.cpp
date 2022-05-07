@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/29 10:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/21 18:55)
 
 #include "Rendering/RenderingExport.h"
 
@@ -28,7 +31,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PlatformRenderTarget, Disab
 
 Rendering::ConstTexture2DSharedPtr Rendering::PlatformRenderTarget::ReadColor(int index, Renderer* renderer)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->ReadColor(index, renderer);
 }

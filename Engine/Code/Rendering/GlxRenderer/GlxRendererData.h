@@ -1,33 +1,26 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 13:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/24 11:09)
+
 #ifndef RENDERING_GLX_RENDERER_GLX_RENDERER_DATA_H
 #define RENDERING_GLX_RENDERER_GLX_RENDERER_DATA_H
 
-#include "Rendering/RenderingDll.h" 
+#include "Rendering/RenderingDll.h"
 
 #include "Rendering/OpenGLRenderer/OpenGLRendererData.h"
-//#include "GlxExtensions.h"
 
 namespace Rendering
 {
-
-	class Renderer;
-
-	class GlxRendererData : public RendererData
-	{
-	public:
-		// Platform-dependent data.
-		//Display* mDisplay;
-		//XVisualInfo* mVisual;
-		//Window mWindow;
-		//GLXContext mContext;
-
-		//bool FinishConstruction (Window window, Renderer* renderer);
-	};
+    class GlxRendererData : public RendererData
+    {
+    public:
+    };
 
 }
 
-#endif // RENDERING_GLX_RENDERER_GLX_RENDERER_DATA_H
+#endif  // RENDERING_GLX_RENDERER_GLX_RENDERER_DATA_H

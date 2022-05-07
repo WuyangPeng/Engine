@@ -27,7 +27,7 @@ namespace AssistTools
 		void GenerateToTest();
 		void DefaultGenerateToTest();
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

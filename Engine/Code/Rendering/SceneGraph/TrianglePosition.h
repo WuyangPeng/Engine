@@ -1,39 +1,43 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/22 14:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/03 16:28)
 
 #ifndef RENDERING_SCENE_GRAPH_TRIANGLES_POSITION_H
 #define RENDERING_SCENE_GRAPH_TRIANGLES_POSITION_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Mathematics/Algebra/APoint.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
+#include "Mathematics/Algebra/APoint.h"
+
 RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(TrianglePositionImpl);
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE TrianglePosition
-	{
-	public:
-		PERFORMANCE_UNSHARED_TYPE_DECLARE(TrianglePosition);
-		using APoint = Mathematics::APointF;
-			
-	public:		
-		TrianglePosition(const APoint& firstPosition,const APoint& secondPosition,const APoint& thirdPosition);
+    class RENDERING_DEFAULT_DECLARE TrianglePosition
+    {
+    public:
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(TrianglePosition);
+        using APoint = Mathematics::APointF;
 
-		CLASS_INVARIANT_DECLARE;
+    public:
+        TrianglePosition(const APoint& firstPosition, const APoint& secondPosition, const APoint& thirdPosition);
 
-		const APoint GetFirstPosition() const noexcept;
-                const APoint GetSecondPosition() const noexcept;
-                const APoint GetThirdPosition() const noexcept;
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-                PackageType impl;
-	};	 
+        NODISCARD APoint GetFirstPosition() const noexcept;
+        NODISCARD APoint GetSecondPosition() const noexcept;
+        NODISCARD APoint GetThirdPosition() const noexcept;
+
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // RENDERING_SCENE_GRAPH_TRIANGLES_POSITION_H
+#endif  // RENDERING_SCENE_GRAPH_TRIANGLES_POSITION_H

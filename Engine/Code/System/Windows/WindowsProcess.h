@@ -23,8 +23,8 @@ namespace System
     // Windows进程相关函数调用。
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemMessage(WindowsMsg* msg, WindowsHWnd hwnd = nullptr) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE TranslateSystemMessage(const WindowsMsg* msg) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE DispatchSystemMessage(const WindowsMsg* msg) noexcept;
+    bool SYSTEM_DEFAULT_DECLARE TranslateSystemMessage(const WindowsMsg* msg) noexcept;
+    bool SYSTEM_DEFAULT_DECLARE DispatchSystemMessage(const WindowsMsg* msg) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE PeekSystemMessage(WindowsMsg* msg, WindowsHWnd hWnd = nullptr) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemTranslateAccelerator(WindowsHWnd hwnd, WindowsHAccel accel, WindowsMsg* msg) noexcept;
 

@@ -1,81 +1,82 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.4 (2019/09/09 20:05)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(ArtificialIntellegence, TestingHelper, "人工智能库")
+// private
+ArtificialIntellegence::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "人工智能库" }
+{
+    InitSuite();
+
+    ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ArtificialIntellegence, TestingHelper)
 
 // private
-void ArtificialIntellegence::TestingHelper
-	::AddSuites()
+void ArtificialIntellegence::TestingHelper ::InitSuite()
 {
-	AddMacroSuite();  
-	AddMiscellaneousSuite(); 
-	AddPathSearchSuite(); 
-	AddFiniteStateMachineSuite();
-	AddFuzzyStateMachineSuite(); 
-	AddGeneticAlgorithmSuite(); 
-	AddNeuralNetworkSuite(); 
+    AddMacroSuite();
+    AddMiscellaneousSuite();
+    AddPathSearchSuite();
+    AddFiniteStateMachineSuite();
+    AddFuzzyStateMachineSuite();
+    AddGeneticAlgorithmSuite();
+    AddNeuralNetworkSuite();
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddMacroSuite()
+void ArtificialIntellegence::TestingHelper ::AddMacroSuite()
 {
-	ADD_TEST_BEGIN(macroSuite, "宏"); 
+    auto macroSuite = GenerateSuite("宏");
 
-	ADD_TEST_END(macroSuite);
+    AddSuite(macroSuite);
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddMiscellaneousSuite()
+void ArtificialIntellegence::TestingHelper ::AddMiscellaneousSuite()
 {
-	ADD_TEST_BEGIN(miscellaneousSuite, "杂项"); 
+    auto miscellaneousSuite = GenerateSuite("杂项");
 
-	ADD_TEST_END(miscellaneousSuite);
+    AddSuite(miscellaneousSuite);
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddPathSearchSuite()
+void ArtificialIntellegence::TestingHelper ::AddPathSearchSuite()
 {
-	ADD_TEST_BEGIN(pathSearchSuite, "寻路"); 
+    auto pathSearchSuite = GenerateSuite("寻路");
 
-	ADD_TEST_END(pathSearchSuite);
+    AddSuite(pathSearchSuite);
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddFiniteStateMachineSuite()
+void ArtificialIntellegence::TestingHelper ::AddFiniteStateMachineSuite()
 {
-	ADD_TEST_BEGIN(finiteStateMachineSuite, "有限状态机"); 
+    auto finiteStateMachineSuite = GenerateSuite("有限状态机");
 
-	ADD_TEST_END(finiteStateMachineSuite);
+    AddSuite(finiteStateMachineSuite);
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddFuzzyStateMachineSuite()
+void ArtificialIntellegence::TestingHelper ::AddFuzzyStateMachineSuite()
 {
-	ADD_TEST_BEGIN(fuzzyStateMachineSuite, "模糊状态机"); 
+    auto fuzzyStateMachineSuite = GenerateSuite("模糊状态机");
 
-	ADD_TEST_END(fuzzyStateMachineSuite);
+    AddSuite(fuzzyStateMachineSuite);
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddGeneticAlgorithmSuite()
+void ArtificialIntellegence::TestingHelper ::AddGeneticAlgorithmSuite()
 {
-	ADD_TEST_BEGIN(geneticAlgorithmSuite, "遗传算法"); 
+    auto geneticAlgorithmSuite = GenerateSuite("遗传算法");
 
-	ADD_TEST_END(geneticAlgorithmSuite);
+    AddSuite(geneticAlgorithmSuite);
 }
 
-void ArtificialIntellegence::TestingHelper
-	::AddNeuralNetworkSuite()
+void ArtificialIntellegence::TestingHelper ::AddNeuralNetworkSuite()
 {
-	ADD_TEST_BEGIN(neuralNetworkSuite, "神经网络"); 
+    auto neuralNetworkSuite = GenerateSuite("神经网络");
 
-	ADD_TEST_END(neuralNetworkSuite);
+    AddSuite(neuralNetworkSuite);
 }
-

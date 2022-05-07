@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 17:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 16:35)
 
 #include "Rendering/RenderingExport.h"
 
@@ -10,30 +13,22 @@
 #include "Detail/ShaderSamplerDataImpl.h"
 #include "Detail/SingleShaderBaseDataImpl.h"
 #include "Detail/SingleShaderSamplerDataImpl.h"
-
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+
 using std::make_shared;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
+
 Rendering::ShaderSamplerData::ShaderSamplerData(int numSamplers)
     : impl{ numSamplers }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderSamplerData::ShaderSamplerData()
-    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ShaderSamplerData)
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderSamplerData)
 
@@ -81,7 +76,7 @@ void Rendering::ShaderSamplerData::SetBorderColor(int index, const Colour& borde
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderSamplerData, GetNumSamplers, int)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetSamplerName, int, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetSamplerName, int, string)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetSamplerType, int, Rendering::ShaderFlags::SamplerType)
 
@@ -106,4 +101,3 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, Save, CoreTo
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderSamplerData, GetStreamingSize, int)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, Resize, int, void)
-#include STSTEM_WARNING_POP

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 11:26)
 
 #include "Framework/FrameworkExport.h"
 
@@ -11,137 +14,138 @@
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::PixelScreenDrawLine
-	::PixelScreenDrawLine(int xMin, int yMin, int xMax, int yMax)
-	:m_XMin{ xMin }, m_YMin{ yMin }, m_XMax{ xMax }, m_YMax{ yMax }, m_DistanceX{ m_XMax - m_XMin }, m_DistanceY{ m_YMax - m_YMin },
-	 m_StepX{ 0 < m_DistanceX ? 1 : (m_DistanceX < 0 ? -1 : 0) }, m_StepY{ 0 < m_DistanceY ? 1 : (m_DistanceY < 0 ? -1 : 0) }, m_Line{ }
+Framework::PixelScreenDrawLine::PixelScreenDrawLine(int xMin, int yMin, int xMax, int yMax)
+    : xMin{ xMin },
+      yMin{ yMin },
+      xMax{ xMax },
+      yMax{ yMax },
+      distanceX{ xMax - xMin },
+      distanceY{ yMax - yMin },
+      stepX{ 0 < distanceX ? 1 : (distanceX < 0 ? -1 : 0) },
+      stepY{ 0 < distanceY ? 1 : (distanceY < 0 ? -1 : 0) },
+      line{}
 {
-	Calculate();
+    Calculate();
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-void Framework::PixelScreenDrawLine
-	::Calculate()
+void Framework::PixelScreenDrawLine::Calculate()
 {
-	// 像素决定参数的选择。
-	if (m_DistanceX < 0)
-	{
-		m_DistanceX = -m_DistanceX;
-	}
-	if (m_DistanceY < 0)
-	{
-		m_DistanceY = -m_DistanceY;
-	}
+    // 像素决定参数的选择。
+    if (distanceX < 0)
+    {
+        distanceX = -distanceX;
+    }
+    if (distanceY < 0)
+    {
+        distanceY = -distanceY;
+    }
 
-	// 使用有关的变量确定单步的最大方向分量。 使用Bresenham算法遍历线段。
-	if (m_DistanceY < m_DistanceX)
-	{
-		DrawLineOnX();
-	}
-	else
-	{
-		DrawLineOnY();
-	}
+    // 使用有关的变量确定单步的最大方向分量。 使用Bresenham算法遍历线段。
+    if (distanceY < distanceX)
+    {
+        DrawLineOnX();
+    }
+    else
+    {
+        DrawLineOnY();
+    }
 }
 
-void Framework::PixelScreenDrawLine
-	::DrawLineOnX()
+void Framework::PixelScreenDrawLine::DrawLineOnX()
 {
-	const auto twiceDistanceX = 2 * m_DistanceX;
-	const auto twiceDistanceY = 2 * m_DistanceY;
-	auto x = m_XMin;
-	auto y = m_YMin;
-	m_Line.emplace_back(x, y);
+    const auto twiceDistanceX = 2 * distanceX;
+    const auto twiceDistanceY = 2 * distanceY;
+    auto x = xMin;
+    auto y = yMin;
+    line.emplace_back(x, y);
 
-	auto decy = twiceDistanceY - m_DistanceX;
-	while (x != m_XMax)
-	{
-		if (0 <= decy)
-		{
-			decy -= twiceDistanceX;
-			y += m_StepY;
-		}
+    auto decy = twiceDistanceY - distanceX;
+    while (x != xMax)
+    {
+        if (0 <= decy)
+        {
+            decy -= twiceDistanceX;
+            y += stepY;
+        }
 
-		x += m_StepX;
-		decy += twiceDistanceY;
+        x += stepX;
+        decy += twiceDistanceY;
 
-		// 处理像素。
-		m_Line.emplace_back(x, y);
-	} 
+        // 处理像素。
+        line.emplace_back(x, y);
+    }
 }
 
-void Framework::PixelScreenDrawLine
-	::DrawLineOnY()
+void Framework::PixelScreenDrawLine::DrawLineOnY()
 {
-	const auto twiceDistanceX = 2 * m_DistanceX;
-	const auto twiceDistanceY = 2 * m_DistanceY;
-	auto x = m_XMin;
-	auto y = m_YMin;
-	m_Line.emplace_back(x, y);
+    const auto twiceDistanceX = 2 * distanceX;
+    const auto twiceDistanceY = 2 * distanceY;
+    auto x = xMin;
+    auto y = yMin;
+    line.emplace_back(x, y);
 
-	auto decx = twiceDistanceX - m_DistanceY;
-	while (y != m_YMax)
-	{
-		if (0 <= decx)
-		{
-			decx -= twiceDistanceY;
-			x += m_StepX;
-		}
+    auto decx = twiceDistanceX - distanceY;
+    while (y != yMax)
+    {
+        if (0 <= decx)
+        {
+            decx -= twiceDistanceY;
+            x += stepX;
+        }
 
-		y += m_StepY;
-		decx += twiceDistanceX;
+        y += stepY;
+        decx += twiceDistanceX;
 
-		// 处理像素。
-		m_Line.emplace_back(x, y);
-	}	
+        // 处理像素。
+        line.emplace_back(x, y);
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::PixelScreenDrawLine
-	::IsValid() const noexcept
-{ 
-	return CoreTools::Noexcept<bool, ClassType>(*this, &ClassType::IsEndpointCorrect, false);
+
+bool Framework::PixelScreenDrawLine::IsValid() const noexcept
+{
+    return CoreTools::Noexcept<bool, ClassType>(*this, &ClassType::IsEndpointCorrect, false);
 }
 
-bool Framework::PixelScreenDrawLine
-	::IsEndpointCorrect() const
+bool Framework::PixelScreenDrawLine::IsEndpointCorrect() const
 {
-	if (m_Line.empty())
-	{
-		return false;
-	}
-	else
-	{
-		const auto iter = m_Line.cbegin();
-		if (iter->GetWindowX() != m_XMin || iter->GetWindowY() != m_YMin)
-		{
-			return false;
-		}
+    if (line.empty())
+    {
+        return false;
+    }
+    else
+    {
+        const auto iter = line.cbegin();
+        if (iter->GetWindowX() != xMin || iter->GetWindowY() != yMin)
+        {
+            return false;
+        }
 
-		const auto reverseIter = m_Line.crbegin();
-		if (reverseIter->GetWindowX() != m_XMax || reverseIter->GetWindowY() != m_YMax)
-		{
-			return false;
-		}
-	}
+        const auto reverseIter = line.crbegin();
+        if (reverseIter->GetWindowX() != xMax || reverseIter->GetWindowY() != yMax)
+        {
+            return false;
+        }
+    }
 
-	return true;
+  
+    return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
-int Framework::PixelScreenDrawLine
-	::GetSize() const
+int Framework::PixelScreenDrawLine::GetSize() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return boost::numeric_cast<int>(m_Line.size());
+    return boost::numeric_cast<int>(line.size());
 }
 
-const Framework::WindowPoint& Framework::PixelScreenDrawLine
-	::operator[](int index) const
+const Framework::WindowPoint& Framework::PixelScreenDrawLine::operator[](int index) const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Line.at(index);
+    return line.at(index);
 }

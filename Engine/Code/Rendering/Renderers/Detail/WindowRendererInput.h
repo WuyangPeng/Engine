@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 15:35)
 
 #ifndef RENDERING_RENDERERS_WINDOW_RENDERER_INPUT_H
 #define RENDERING_RENDERERS_WINDOW_RENDERER_INPUT_H
@@ -18,24 +21,19 @@ namespace Rendering
     public:
         using ClassType = WindowRendererInput;
         using ParentType = RendererInputImpl;
-       
+
     public:
         WindowRendererInput() noexcept;
-          ~ WindowRendererInput();
-         WindowRendererInput(const WindowRendererInput&) = default;
-        WindowRendererInput& operator=(const WindowRendererInput&) = default;
-        WindowRendererInput( WindowRendererInput&&) = default;
-        WindowRendererInput& operator=( WindowRendererInput&&) = default;
-		
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-          RendererTypes GetRendererType() const noexcept override;    
-		 	void SetWindowID(int windowID) noexcept override;
-		 	void SetWindowHandle(HWnd windowID) noexcept override;
+        NODISCARD RendererTypes GetRendererType() const noexcept override;
+        void SetWindowID(int windowID) noexcept override;
+        void SetWindowHandle(HWnd windowID) noexcept override;
 
     private:
-    	HWnd m_WindowHandle; 
+        HWnd windowHandle;
     };
 }
 
-#endif // RENDERING_RENDERERS_WINDOW_RENDERER_INPUT_H
+#endif  // RENDERING_RENDERERS_WINDOW_RENDERER_INPUT_H

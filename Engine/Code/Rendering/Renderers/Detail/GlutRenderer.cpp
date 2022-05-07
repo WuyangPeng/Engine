@@ -1,161 +1,168 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 17:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:14)
 
 #include "Rendering/RenderingExport.h"
 
 #include "GlutRenderer.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "../Flags/RendererTypes.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-#include "System/Helper/PragmaWarning/Disable4100.h"
-Rendering:: GlutRenderer
-	:: GlutRenderer(const RendererBasis& basis)
-    :ParentType(basis)
+#include "Rendering/Renderers/Flags/RendererTypes.h"
+
+Rendering::GlutRenderer::GlutRenderer(const RendererBasis& basis)
+    : ParentType{ basis }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
- 
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GlutRenderer)
 
-Rendering::RendererTypes Rendering::GlutRenderer
-	::GetRendererType() const
+Rendering::RendererTypes Rendering::GlutRenderer::GetRendererType() const noexcept
 {
-	return RendererTypes::Glut;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return RendererTypes::Glut;
 }
 
-void Rendering::GlutRenderer::SetAlphaState(const ConstAlphaStateSharedPtr& alphaState)
+void Rendering::GlutRenderer::SetAlphaState(MAYBE_UNUSED const ConstAlphaStateSharedPtr& alphaState) noexcept
 {
-	alphaState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetCullState(const ConstCullStateSharedPtr& cullState)
+void Rendering::GlutRenderer::SetCullState(MAYBE_UNUSED const ConstCullStateSharedPtr& cullState) noexcept
 {
-	cullState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetDepthState(const ConstDepthStateSharedPtr& depthState)
+void Rendering::GlutRenderer::SetDepthState(MAYBE_UNUSED const ConstDepthStateSharedPtr& depthState) noexcept
 {
-	depthState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetOffsetState(const ConstOffsetStateSharedPtr& offsetState)
+void Rendering::GlutRenderer::SetOffsetState(MAYBE_UNUSED const ConstOffsetStateSharedPtr& offsetState) noexcept
 {
-	offsetState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetStencilState(const ConstStencilStateSharedPtr& stencilState)
+void Rendering::GlutRenderer::SetStencilState(MAYBE_UNUSED const ConstStencilStateSharedPtr& stencilState) noexcept
 {
-	stencilState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetWireState(const ConstWireStateSharedPtr& wireState)
+void Rendering::GlutRenderer::SetWireState(MAYBE_UNUSED const ConstWireStateSharedPtr& wireState) noexcept
 {
-	wireState;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetViewport(const Viewport& viewport)
+void Rendering::GlutRenderer::SetViewport(MAYBE_UNUSED const Viewport& viewport) noexcept
 {
-	viewport;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 Rendering::Viewport Rendering::GlutRenderer::GetViewport() const
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::GlutRenderer::SetDepthRange(const DepthRange& depthRange)
+void Rendering::GlutRenderer::SetDepthRange(MAYBE_UNUSED const DepthRange& depthRange) noexcept
 {
-	depthRange;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
 Rendering::DepthRange Rendering::GlutRenderer::GetDepthRange() const
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Rendering::GlutRenderer::Resize(int width, int height)
+void Rendering::GlutRenderer::Resize(MAYBE_UNUSED int width, MAYBE_UNUSED int height) noexcept
 {
-	width; height;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearColorBuffer()
+void Rendering::GlutRenderer::ClearColorBuffer() noexcept
 {
-	 
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearDepthBuffer(int x, int y, int w, int h)
+void Rendering::GlutRenderer::ClearDepthBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-	x; y; w; h;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearStencilBuffer(int x, int y, int w, int h)
+void Rendering::GlutRenderer::ClearStencilBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-	x; y; w; h;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearBuffers(int x, int y, int w, int h)
+void Rendering::GlutRenderer::ClearBuffers(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-	x; y; w; h;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::DisplayColorBuffer()
+void Rendering::GlutRenderer::DisplayColorBuffer() noexcept
 {
-	 
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha)
+void Rendering::GlutRenderer::SetColorMask(MAYBE_UNUSED bool allowRed, MAYBE_UNUSED bool allowGreen, MAYBE_UNUSED bool allowBlue, MAYBE_UNUSED bool allowAlpha)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
 }
 
-bool Rendering::GlutRenderer::PreDraw()
+bool Rendering::GlutRenderer::PreDraw() noexcept
 {
-	return true;
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return true;
 }
 
-void Rendering::GlutRenderer::PostDraw()
+void Rendering::GlutRenderer::PostDraw() noexcept
 {
-	 
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::Draw(const uint8_t* screenBuffer, bool reflectY)
+void Rendering::GlutRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, MAYBE_UNUSED bool reflectY) noexcept
 {
-	screenBuffer; reflectY;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::DrawPrimitive(const ConstVisualSharedPtr& visual)
+void Rendering::GlutRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual) noexcept
 {
-	visual;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::Draw(int x, int y, const Colour& color, const std::string& message)
+void Rendering::GlutRenderer::Draw(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour& color, MAYBE_UNUSED const std::string& message) noexcept
 {
-	x; y; color; message;
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearDepthBuffer()
+void Rendering::GlutRenderer::ClearDepthBuffer() noexcept
 {
-	 
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearStencilBuffer()
+void Rendering::GlutRenderer::ClearStencilBuffer() noexcept
 {
-	 
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearBuffers()
+void Rendering::GlutRenderer::ClearBuffers() noexcept
 {
-	 
+    RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::ClearColorBuffer(int x, int y, int w, int h)
+void Rendering::GlutRenderer::ClearColorBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept
 {
-	x; y; w; h;
+    RENDERING_CLASS_IS_VALID_9;
 }
-
-#include STSTEM_WARNING_POP

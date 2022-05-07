@@ -7,23 +7,23 @@
 #ifndef ANIMATION_EXAMPLE_PLACEHOLDER_H
 #define ANIMATION_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Animation/AnimationExample/AnimationExampleDll.h" 
+#include "Example/Animation/AnimationExample/AnimationExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace AnimationExample
 {
-	 class ANIMATION_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class ANIMATION_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // ANIMATION_EXAMPLE_PLACEHOLDER_H
+#endif  // ANIMATION_EXAMPLE_PLACEHOLDER_H

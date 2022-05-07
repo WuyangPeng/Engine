@@ -11,6 +11,9 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26429)
 using std::ostream;
 
 Framework::AndroidProcessAndroidCallBackInterface
@@ -62,7 +65,7 @@ Framework::AndroidProcessTesting
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework,AndroidProcessTesting)
 
- void Framework::AndroidProcessTesting ::DoRunUnitTest()
+ void Framework::AndroidProcessTesting::DoRunUnitTest()
 {
      ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
  }

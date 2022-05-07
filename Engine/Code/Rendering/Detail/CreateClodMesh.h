@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 11:03)
 
 #ifndef RENDERING_DETAIL_CREATE_CLOD_MESH_H
 #define RENDERING_DETAIL_CREATE_CLOD_MESH_H
@@ -10,9 +13,10 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CollapseRecordArray.h"
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(CreateClodMeshImpl);
 
 // CreateClodMesh计算CollapseRecord的阵列，它表示在一个三角形网格边折叠。
@@ -33,22 +37,22 @@ RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(CreateClodMeshImpl);
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE CreateClodMesh
-	{
-	public:
-            PERFORMANCE_UNSHARED_TYPE_DECLARE(CreateClodMesh);
+    class RENDERING_DEFAULT_DECLARE CreateClodMesh
+    {
+    public:
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(CreateClodMesh);
 
-	public:
-		explicit CreateClodMesh(TrianglesMeshSharedPtr mesh);
+    public:
+        explicit CreateClodMesh(TrianglesMesh& mesh);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
-	
-	private:		
-		PackageType impl;
-	};
+        NODISCARD CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
+
+    private:
+        PackageType impl;
+    };
 
 }
 
-#endif // RENDERING_DETAIL_CREATE_CLOD_MESH_H
+#endif  // RENDERING_DETAIL_CREATE_CLOD_MESH_H

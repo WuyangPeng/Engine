@@ -1,73 +1,70 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 15:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 15:03)
 
 #ifndef RENDERING_SHADERS_SINGLES_SHADER_SAMPLER_DATA_IMPL_H
 #define RENDERING_SHADERS_SINGLES_SHADER_SAMPLER_DATA_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 #include <array>
 #include <string>
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;		
-}
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE SingleShaderSamplerDataImpl
-	{	
-	public:
-		using ClassType = SingleShaderSamplerDataImpl;
-		using Colour = Colour<float>;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-	
-	public:		
-		SingleShaderSamplerDataImpl(); 
+    class RENDERING_HIDDEN_DECLARE SingleShaderSamplerDataImpl
+    {
+    public:
+        using ClassType = SingleShaderSamplerDataImpl;
+        using Colour = Colour<float>;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
 
-		CLASS_INVARIANT_DECLARE;
-		
-		void SetSampler (const std::string& name,ShaderFlags::SamplerType type);
-		void SetFilter (ShaderFlags::SamplerFilter filter);
-		void SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate);
-		void SetLodBias (float lodBias);
-		void SetAnisotropy (float anisotropy);
-		void SetBorderColor (const Colour& borderColor);
+    public:
+        SingleShaderSamplerDataImpl() noexcept;
 
-		const std::string GetSamplerName () const;
-		ShaderFlags::SamplerType GetSamplerType () const;
-		ShaderFlags::SamplerFilter GetFilter () const;
-		ShaderFlags::SamplerCoordinate GetCoordinate(int dimension) const;
-		float GetLodBias () const;
-		float GetAnisotropy () const;
-		Colour GetBorderColor () const;
+        CLASS_INVARIANT_DECLARE;
 
-		void Load(CoreTools::BufferSource& source);
-		void Save (CoreTools::BufferTarget& target) const;
-		int GetStreamingSize () const;
-		
-	private:	
-		constexpr static auto sm_SamplerCoordinateSize = 3;
+        void SetSampler(const std::string& name, ShaderFlags::SamplerType type);
+        void SetFilter(ShaderFlags::SamplerFilter aFilter) noexcept;
+        void SetCoordinate(int dimension, ShaderFlags::SamplerCoordinate coordinate);
+        void SetLodBias(float aLodBias) noexcept;
+        void SetAnisotropy(float aAnisotropy) noexcept;
+        void SetBorderColor(const Colour& aBorderColor) noexcept;
 
-	private:
-		std::string m_SamplerName;
-		ShaderFlags::SamplerType m_SamplerType;
-		ShaderFlags::SamplerFilter m_Filter;   
-		std::array<ShaderFlags::SamplerCoordinate, sm_SamplerCoordinateSize> m_Coordinate;
-		float m_LodBias;
-		float m_Anisotropy;
-		Colour m_BorderColor;
-	};
+        NODISCARD std::string GetSamplerName() const;
+        NODISCARD ShaderFlags::SamplerType GetSamplerType() const noexcept;
+        NODISCARD ShaderFlags::SamplerFilter GetFilter() const noexcept;
+        NODISCARD ShaderFlags::SamplerCoordinate GetCoordinate(int dimension) const;
+        NODISCARD float GetLodBias() const noexcept;
+        NODISCARD float GetAnisotropy() const noexcept;
+        NODISCARD Colour GetBorderColor() const noexcept;
+
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const;
+
+    private:
+        constexpr static auto samplerCoordinateSize = 3;
+
+    private:
+        std::string samplerName;
+        ShaderFlags::SamplerType samplerType;
+        ShaderFlags::SamplerFilter filter;
+        std::array<ShaderFlags::SamplerCoordinate, samplerCoordinateSize> coordinates;
+        float lodBias;
+        float anisotropy;
+        Colour borderColor;
+    };
 }
 
-#endif // RENDERING_SHADERS_SINGLES_SHADER_SAMPLER_DATA_IMPL_H
+#endif  // RENDERING_SHADERS_SINGLES_SHADER_SAMPLER_DATA_IMPL_H

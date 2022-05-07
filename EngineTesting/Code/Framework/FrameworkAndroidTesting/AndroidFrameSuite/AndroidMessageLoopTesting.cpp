@@ -1,23 +1,16 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/10 20:31)
 
 #include "AndroidMessageLoopTesting.h"
-#include "Framework/AndroidFrame/AndroidMessageLoop.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Framework/AndroidFrame/AndroidMessageLoop.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework,AndroidMessageLoopTesting)
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework, AndroidMessageLoopTesting)
 
-void Framework::AndroidMessageLoopTesting
-	::MainTest()
+void Framework::AndroidMessageLoopTesting::MainTest() noexcept
 {
-	
 }
-
-
-
-
-

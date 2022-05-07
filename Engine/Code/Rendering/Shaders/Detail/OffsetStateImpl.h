@@ -1,70 +1,66 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 14:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 20:42)
 
 #ifndef RENDERING_SHADERS_OFFSET_STATE_IMPL_H
 #define RENDERING_SHADERS_OFFSET_STATE_IMPL_H
 
+#include "CoreTools/FileManager/FileManagerFwd.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/RenderingDll.h"
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;
-	class WriteFileManager;
-	class ReadFileManager;
-}
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE OffsetStateImpl
-	{
-	public:
-		using ClassType = OffsetStateImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-		using WriteFileManager = CoreTools::WriteFileManager;
-		using ReadFileManager = CoreTools::ReadFileManager;
+    class RENDERING_HIDDEN_DECLARE OffsetStateImpl
+    {
+    public:
+        using ClassType = OffsetStateImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using WriteFileManager = CoreTools::WriteFileManager;
+        using ReadFileManager = CoreTools::ReadFileManager;
 
-	public:
-                OffsetStateImpl() noexcept;
+    public:
+        OffsetStateImpl() noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void Load(CoreTools::BufferSource& source);
-		void Save(CoreTools::BufferTarget& target) const;
-		int GetStreamingSize() const; 
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const noexcept;
 
-		bool IsFillEnabled() const;
-		bool IsLineEnabled() const;
-		bool IsPointEnabled() const;
-		float GetScale() const;
-		float GetBias() const;
+        NODISCARD bool IsFillEnabled() const noexcept;
+        NODISCARD bool IsLineEnabled() const noexcept;
+        NODISCARD bool IsPointEnabled() const noexcept;
+        NODISCARD float GetScale() const noexcept;
+        NODISCARD float GetBias() const noexcept;
 
-		void SetFillEnabled(bool fillEnabled);
-		void SetLineEnabled(bool lineEnabled);
-		void SetPointEnabled(bool pointEnabled);
-		void SetScale(float scale);
-		void SetBias(float bias);
+        void SetFillEnabled(bool aFillEnabled) noexcept;
+        void SetLineEnabled(bool aLineEnabled) noexcept;
+        void SetPointEnabled(bool pointEnabled) noexcept;
+        void SetScale(float aScale) noexcept;
+        void SetBias(float bias) noexcept;
 
-		void SaveState(WriteFileManager& manager) const;
-		void LoadState(ReadFileManager& manager);
+        void SaveState(WriteFileManager& manager) const;
+        void LoadState(ReadFileManager& manager);
 
-	private:	
-		// 设置是否应该为各种多边形绘图模式（填充，线，点）启用偏移。
-		bool m_FillEnabled; // 默认: false
-		bool m_LineEnabled; // 默认: false
-		bool m_PointEnabled; // 默认: false
-		
-		// 偏移量是Scale * dZ + Bias * r，
-		// 其中DZ是相对于聚屏幕空间区域深度的变化，
-		// r是最小可分辨深度差异。负值表示移动多边形接近眼睛。
-		float m_Scale; // 默认: 0
-		float m_Bias; // 默认: 0
-	}; 
+    private:
+        // 设置是否应该为各种多边形绘图模式（填充，线，点）启用偏移。
+        bool fillEnabled;  // 默认: false
+        bool lineEnabled;  // 默认: false
+        bool pointEnabled;  // 默认: false
+
+        // 偏移量是Scale * dZ + Bias * r，
+        // 其中DZ是相对于聚屏幕空间区域深度的变化，
+        // r是最小可分辨深度差异。负值表示移动多边形接近眼睛。
+        float scale;  // 默认: 0
+        float bias;  // 默认: 0
+    };
 }
 
-#endif // RENDERING_SHADERS_OFFSET_STATE_IMPL_H
+#endif  // RENDERING_SHADERS_OFFSET_STATE_IMPL_H

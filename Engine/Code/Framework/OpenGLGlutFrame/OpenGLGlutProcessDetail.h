@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 15:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 14:00)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
@@ -10,214 +13,193 @@
 #include "OpenGLGlutProcess.h"
 #include "OpenGLGlutProcessManager.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
- 
+
 template <typename OpenGLGlutCallBack>
-Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::OpenGLGlutProcess(int64_t delta) 
+Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::OpenGLGlutProcess(int64_t delta)
 {
-	OpenGLGlutCallBackInterfaceSharedPtr openGLGlutCallBack{ std::make_shared<OpenGLGlutCallBack>(delta) };
+    auto openGLGlutCallBack = std::make_shared<OpenGLGlutCallBack>(delta);
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetOpenGLGlutCallBack(openGLGlutCallBack);
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetOpenGLGlutCallBack(openGLGlutCallBack);
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
- 
+
 #ifdef OPEN_CLASS_INVARIANT
-template <typename OpenGLGlutCallBack>
-bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif // OPEN_CLASS_INVARIANT
 
 template <typename OpenGLGlutCallBack>
-int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetMillisecond() const
+bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::IsValid() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMillisecond();
+    return true;
 }
 
-template <typename OpenGLGlutCallBack>
-void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::SetMillisecond(int millisecond)
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetMillisecond(millisecond);
+template <typename OpenGLGlutCallBack>
+int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetMillisecond() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMillisecond();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::RenderSceneCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetRenderSceneCallback() const noexcept
+void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SetMillisecond(int millisecond)
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetMillisecond(millisecond);
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ChangeSizeCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetChangeSizeCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::RenderSceneCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetRenderSceneCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TimerFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetTimerFunctionCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ChangeSizeCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetChangeSizeCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysDownCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetSpecialKeysDownCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TimerFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetTimerFunctionCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardDownCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetKeyboardDownCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysDownCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetSpecialKeysDownCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysUpCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetSpecialKeysUpCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardDownCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetKeyboardDownCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardUpCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetKeyboardUpCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SpecialKeysUpCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetSpecialKeysUpCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MouseFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetMouseFunctionCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::KeyboardUpCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetKeyboardUpCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MotionFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetMotionFunctionCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MouseFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetMouseFunctionCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PassiveMotionFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetPassiveMotionCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::MotionFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetMotionFunctionCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetPassiveMotionCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::IdleFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetIdleFunctionCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PassiveMotionFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetPassiveMotionCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetPassiveMotionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ProcessMenuCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetProcessMenuCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::IdleFunctionCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetIdleFunctionCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetTerminateCallback() const noexcept
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::ProcessMenuCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetProcessMenuCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTerminateCallback();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::SetWindowID(int window)
+typename Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::TerminateCallback Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetTerminateCallback() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetWindowID(window);
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTerminateCallback();
 }
 
 template <typename OpenGLGlutCallBack>
-int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::GetWindowID() const
+void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::SetWindowID(int window)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetWindowID();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetWindowID(window);
 }
 
 template <typename OpenGLGlutCallBack>
-bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::PreCreate()
+int Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::GetWindowID() const
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreCreate();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetWindowID();
 }
 
 template <typename OpenGLGlutCallBack>
-bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::Initialize()
+bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PreCreate()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Initialize();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreCreate();
 }
 
 template <typename OpenGLGlutCallBack>
-void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::PreIdle()
+bool Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::Initialize()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreIdle();
+    return OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Initialize();
 }
 
 template <typename OpenGLGlutCallBack>
-void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>
-	::Terminate()
+void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::PreIdle()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Terminate();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreIdle();
 }
 
-#endif // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H
+template <typename OpenGLGlutCallBack>
+void Framework::OpenGLGlutProcess<OpenGLGlutCallBack>::Terminate()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Terminate();
+}
+
+#endif  // FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_PROCESS_DETAIL_H

@@ -1,31 +1,31 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 10:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/09 18:54)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ClodMeshTriangleMesh.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Mathematics/Meshes/TriangleKey.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <set>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26489)
-#include SYSTEM_WARNING_DISABLE(26490)
+
 using std::set;
 
-Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh(TrianglesMeshSharedPtr mesh)
-    : m_NumVertices{ mesh->GetVertexBuffer()->GetNumElements() }, m_NumIndices{ mesh->GetIndexBuffer()->GetNumElements() }, m_NumTriangles{ m_NumIndices / 3 },
-      m_IndixBuffer{ mesh->GetIndexBuffer() }, m_VertexBuffer{ mesh->GetVertexBuffer() }, m_VertexBufferAccessor{ *mesh }
+Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh(TrianglesMesh& mesh)
+    : numVertices{ mesh.GetVertexBuffer()->GetNumElements() },
+      numIndices{ mesh.GetIndexBuffer()->GetNumElements() },
+      numTriangles{ numIndices / 3 },
+      indixBuffer{ mesh.GetIndexBuffer() },
+      vertexBuffer{ mesh.GetVertexBuffer() },
+      vertexBufferAccessor{ mesh }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -36,14 +36,14 @@ int Rendering::ClodMeshTriangleMesh::GetNumVertices() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_NumVertices;
+    return numVertices;
 }
 
 int Rendering::ClodMeshTriangleMesh::GetNumIndices() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_NumIndices;
+    return numIndices;
 }
 
 bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
@@ -51,15 +51,25 @@ bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     using TriangleKeySet = set<Mathematics::TriangleKey>;
-    TriangleKeySet triangles;
-    std::set<int> vertexIndices;
+    TriangleKeySet triangles{};
+    std::set<int> vertexIndices{};
     auto currentIndex = GetIndexBufferReadOnlyData();
-
-    for (auto trianglesIndex = 0; trianglesIndex < m_NumTriangles; ++trianglesIndex)
+    if (currentIndex == nullptr)
     {
+        return false;
+    }
+
+    for (auto trianglesIndex = 0; trianglesIndex < numTriangles; ++trianglesIndex)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         const auto firstIndex = *currentIndex++;
         const auto secondIndex = *currentIndex++;
         const auto thirdIndex = *currentIndex++;
+
+#include STSTEM_WARNING_POP
+
         if (firstIndex == secondIndex || firstIndex == thirdIndex || secondIndex == thirdIndex)
         {
             // 现在，输入应该来自三角网格或三角扇。
@@ -68,11 +78,11 @@ bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
             return false;
         }
 
-        vertexIndices.insert(firstIndex);
-        vertexIndices.insert(secondIndex);
-        vertexIndices.insert(thirdIndex);
+        vertexIndices.emplace(firstIndex);
+        vertexIndices.emplace(secondIndex);
+        vertexIndices.emplace(thirdIndex);
 
-        const auto result = triangles.insert(Mathematics::TriangleKey(firstIndex, secondIndex, thirdIndex));
+        const auto result = triangles.insert(Mathematics::TriangleKey{ firstIndex, secondIndex, thirdIndex });
 
         if (result.second == false)
         {
@@ -83,7 +93,7 @@ bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
     }
 
     // 测试一个有效的顶点缓冲区
-    if (boost::numeric_cast<int>(vertexIndices.size()) < m_NumVertices || m_NumVertices != (*vertexIndices.rbegin() + 1))
+    if (boost::numeric_cast<int>(vertexIndices.size()) < numVertices || numVertices != (*vertexIndices.rbegin() + 1))
     {
         // 如果下面的断言被触发时，顶点缓冲器具有不被索引缓冲器引用的顶点。
         // 这是一个问题，因为在顶点缓冲器是基于边折叠的顺序重新排序。
@@ -99,49 +109,52 @@ const int* Rendering::ClodMeshTriangleMesh::GetIndexBufferReadOnlyData() const n
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return reinterpret_cast<const int*>(m_IndixBuffer->GetReadOnlyData());
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    return reinterpret_cast<const int*>(indixBuffer->GetReadOnlyData());
+
+#include STSTEM_WARNING_POP
 }
 
 int Rendering::ClodMeshTriangleMesh::GetNumTriangles() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_NumTriangles;
+    return numTriangles;
 }
 
-const Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(int index) const noexcept
+Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(int index) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VertexBufferAccessor.GetPosition<Mathematics::Vector3F>(index);
+    return vertexBufferAccessor.GetPosition<Mathematics::Vector3F>(index);
 }
 
 const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VertexBufferAccessor.GetData();
+    return vertexBufferAccessor.GetData();
 }
 
 int Rendering::ClodMeshTriangleMesh::GetStride() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VertexBufferAccessor.GetStride();
+    return vertexBufferAccessor.GetStride();
 }
 
 void Rendering::ClodMeshTriangleMesh::SetNewVertexBufferData(const std::vector<char>& newData)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VertexBuffer->SetNewData(newData);
+    vertexBuffer->SetNewData(newData);
 }
 
 void Rendering::ClodMeshTriangleMesh::SetNewIndexBufferData(const std::vector<char>& newData)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_IndixBuffer->SetNewData(newData);
+    indixBuffer->SetNewData(newData);
 }
-
-#include STSTEM_WARNING_POP

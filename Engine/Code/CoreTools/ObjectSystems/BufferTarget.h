@@ -54,6 +54,9 @@ namespace CoreTools
         void WriteObjectAssociated(const T& object);
 
         template <typename T>
+        void WriteWeakObjectAssociated(const T& object);
+
+        template <typename T>
         void WriteObjectAssociatedContainerWithNumber(const T& objects);
 
         template <typename T>

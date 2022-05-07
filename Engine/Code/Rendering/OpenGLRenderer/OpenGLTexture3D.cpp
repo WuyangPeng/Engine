@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 11:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 22:24)
 
 #include "Rendering/RenderingExport.h"
 
@@ -10,50 +13,39 @@
 #include "OpenGLTextureDataDetail.h"
 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
- 
-Rendering::OpenGLTexture3D::OpenGLTexture3D([[maybe_unused]] Renderer* renderer, const Texture3D* texture)
-    : m_OpenGLTextureData{ texture }
-{
-    
 
-	RENDERING_SELF_CLASS_IS_VALID_9;
+Rendering::OpenGLTexture3D::OpenGLTexture3D(MAYBE_UNUSED Renderer* renderer, const Texture3D* texture)
+    : openGLTextureData{ texture }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
- 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLTexture3D)
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,OpenGLTexture3D)
-
-void Rendering::OpenGLTexture3D::Enable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+void Rendering::OpenGLTexture3D::Enable(MAYBE_UNUSED Renderer* renderer, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OpenGLTextureData.Enable(textureUnit);
-
-	 
+    openGLTextureData.Enable(textureUnit);
 }
 
-void Rendering::OpenGLTexture3D::Disable([[maybe_unused]] Renderer* renderer, int textureUnit) noexcept
+void Rendering::OpenGLTexture3D::Disable(MAYBE_UNUSED Renderer* renderer, int textureUnit) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OpenGLTextureData.Disable(textureUnit);
-
- 
+    openGLTextureData.Disable(textureUnit);
 }
 
-void* Rendering::OpenGLTexture3D
-	::Lock( int level, BufferLocking mode ) noexcept
+void* Rendering::OpenGLTexture3D::Lock(int level, BufferLocking mode) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	return m_OpenGLTextureData.Lock(level,mode);
+    return openGLTextureData.Lock(level, mode);
 }
 
-void Rendering::OpenGLTexture3D
-	::Unlock( int level ) noexcept
+void Rendering::OpenGLTexture3D::Unlock(int level)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_OpenGLTextureData.Unlock(level);
+    openGLTextureData.Unlock(level);
 }
- 

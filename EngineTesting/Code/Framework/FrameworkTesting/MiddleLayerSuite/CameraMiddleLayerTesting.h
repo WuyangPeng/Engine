@@ -8,44 +8,44 @@
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
-#include "Mathematics/Algebra/Matrix.h"
 #include "Mathematics/Algebra/AVector.h"
+#include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/DataTypes/Transform.h"
 
 namespace Framework
 {
-	class WindowSize;
+    class WindowSize;
 
-	class CameraMiddleLayerTesting : public CoreTools::UnitTest
-	{
-	public:
-		using ClassType = CameraMiddleLayerTesting;
-		using ParentType = UnitTest;
-		using APointf = Mathematics::FloatAPoint;
-		using AVectorf = Mathematics::FloatAVector;
-		using Matrixf = Mathematics::FloatMatrix;
-		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
-		using Transform = Rendering::FloatTransform;
+    class CameraMiddleLayerTesting : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = CameraMiddleLayerTesting;
+        using ParentType = UnitTest;
+        using APointf = Mathematics::APointF;
+        using AVectorf = Mathematics::AVectorF;
+        using Matrixf = Mathematics::MatrixF;
+        using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
+        using Transform = Rendering::TransformF;
 
-	public:
-		explicit CameraMiddleLayerTesting(const OStreamShared& stream);
+    public:
+        explicit CameraMiddleLayerTesting(const OStreamShared& stream);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	protected:
-		float CalculateMultiplier(const WindowSize& windowSize);
-		float GetXTrack(int x, float multiplier, const WindowSize& windowSize) const noexcept;
-		float GetYTrack(int y, float multiplier, const WindowSize& windowSize) const noexcept;
-		const Transform CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis);
-		const AVectorf Calculate3DVector(float xTrack, float yTrack);
-		float CalculateAngle(const AVectorf& axis, float dot);
-		const AVectorf CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack);
+    protected:
+        float CalculateMultiplier(const WindowSize& windowSize);
+        float GetXTrack(int x, float multiplier, const WindowSize& windowSize) const noexcept;
+        float GetYTrack(int y, float multiplier, const WindowSize& windowSize) const noexcept;
+        const Transform CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis);
+        const AVectorf Calculate3DVector(float xTrack, float yTrack) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        float CalculateAngle(const AVectorf& axis, float dot) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        const AVectorf CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack);
 
-		void APointTest(const APointf& lhs, const APointf& rhs, const std::string& functionName, int index);
-		void AVectorTest(const AVectorf& lhs, const AVectorf& rhs, const std::string& functionName, int index);
-		void TransformTest(const Transform& lhs, const Transform& rhs, const std::string& functionName, int index);
-		void MatrixTest(const Matrixf& lhs, const Matrixf& rhs, const std::string& functionName, int index);
-	};
+        void APointTest(const APointf& lhs, const APointf& rhs, const std::string& functionName, int index);
+        void AVectorTest(const AVectorf& lhs, const AVectorf& rhs, const std::string& functionName, int index);
+        void TransformTest(const Transform& lhs, const Transform& rhs, const std::string& functionName, int index);
+        void MatrixTest(const Matrixf& lhs, const Matrixf& rhs, const std::string& functionName, int index);
+    };
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H
+#endif  // FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H

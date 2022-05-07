@@ -1,132 +1,119 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 17:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/07 17:59)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightConstantImpl.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::vector;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::LightConstantImpl
-	::LightConstantImpl(const LightSharedPtr& light)
-	:m_Light{ light }
+using std::vector;
+
+Rendering::LightConstantImpl::LightConstantImpl(const LightSharedPtr& light) noexcept
+    : light{ light }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-Rendering::LightConstantImpl
-	::LightConstantImpl()
-	:m_Light{}
+Rendering::LightConstantImpl::LightConstantImpl() noexcept
+    : light{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering,LightConstantImpl)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, LightConstantImpl)
 
-const Rendering::ConstLightSharedPtr Rendering::LightConstantImpl
-	::GetLight() const
+Rendering::ConstLightSharedPtr Rendering::LightConstantImpl::GetLight() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;	
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	if (m_Light )
-		return m_Light ;
-	else
-		return ConstLightSharedPtr{};
+    if (light.object)
+        return light.object;
+    else
+        return nullptr;
 }
 
-void Rendering::LightConstantImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::LightConstantImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
-    source;
-    //	source.ReadSharedPtr(m_Light);
+    RENDERING_CLASS_IS_VALID_1;
+
+    source.ReadObjectAssociated(light);
 }
 
-void Rendering::LightConstantImpl
-	::Save(CoreTools::BufferTarget& target) const
+void Rendering::LightConstantImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    target;
-	//target.WriteSharedPtr(m_Light);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    target.WriteObjectAssociated(light);
 }
 
-int Rendering::LightConstantImpl
-	::GetStreamingSize() const
+int Rendering::LightConstantImpl::GetStreamingSize() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return CORE_TOOLS_STREAM_SIZE(m_Light);
+    return CORE_TOOLS_STREAM_SIZE(light);
 }
 
-const CoreTools::ObjectSharedPtr Rendering::LightConstantImpl
-	::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::LightConstantImpl::GetObjectByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Light )
-		return m_Light->GetObjectByName(name);
-	else
-		return CoreTools::ObjectSharedPtr{};
+    if (light.object)
+        return light.object->GetObjectByName(name);
+    else
+        return nullptr;
 }
 
-const vector<CoreTools::ObjectSharedPtr> Rendering::LightConstantImpl
-	::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::LightConstantImpl::GetAllObjectsByName(const string& name)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	if (m_Light )
-		return m_Light->GetAllObjectsByName(name);
-	else
-		return vector<CoreTools::ObjectSharedPtr>{};
+    if (light.object)
+        return light.object->GetAllObjectsByName(name);
+    else
+        return vector<CoreTools::ObjectSharedPtr>{};
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::LightConstantImpl
-	::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::LightConstantImpl::GetConstObjectByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Light )
-		return m_Light->GetConstObjectByName(name);
-	else
-		return CoreTools::ConstObjectSharedPtr{};
+    if (light.object)
+        return light.object->GetConstObjectByName(name);
+    else
+        return nullptr;
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl
-	::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl::GetAllConstObjectsByName(const string& name) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Light )
-		return m_Light->GetAllConstObjectsByName(name);
-	else
-		return vector<CoreTools::ConstObjectSharedPtr>{};
+    if (light.object)
+        return light.object->GetAllConstObjectsByName(name);
+    else
+        return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
 void Rendering::LightConstantImpl::Link(CoreTools::ObjectLink& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
-    source;
-    //	source.ResolveObjectSharedPtrLink(m_Light);
+    RENDERING_CLASS_IS_VALID_1;
+
+    source.ResolveLink(light);
 }
 
 void Rendering::LightConstantImpl::Register(CoreTools::ObjectRegister& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-    target;
-    //	target.RegisterSharedPtr(m_Light);
-}
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_POP
+    target.Register(light);
+}

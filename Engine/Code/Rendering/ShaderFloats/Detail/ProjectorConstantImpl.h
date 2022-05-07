@@ -1,69 +1,66 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 16:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 18:07)
 
 #ifndef RENDERING_SHADER_FLOATS_PROJECTOR_CONSTANT_IMPL_H
 #define RENDERING_SHADER_FLOATS_PROJECTOR_CONSTANT_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/SceneGraph/Projector.h"
 
+#include <string>
 #include <vector>
-#include <string> 
- 
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;
-	class Object;
-	class ObjectLink;
-	class ObjectRegister;
-}
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE ProjectorConstantImpl
-	{
-	public:
-		using ClassType = ProjectorConstantImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-		using ObjectLink = CoreTools::ObjectLink;
-		using ObjectRegister = CoreTools::ObjectRegister;
-		using Object = CoreTools::Object;
-		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
-		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
+    class RENDERING_HIDDEN_DECLARE ProjectorConstantImpl
+    {
+    public:
+        using ClassType = ProjectorConstantImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using ObjectLink = CoreTools::ObjectLink;
+        using ObjectRegister = CoreTools::ObjectRegister;
+        using Object = CoreTools::Object;
+        using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
+        using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 
-	public: 
-		explicit ProjectorConstantImpl(const ProjectorSharedPtr& projector);
-		ProjectorConstantImpl();
-		virtual ~ProjectorConstantImpl();
-                ProjectorConstantImpl(const ProjectorConstantImpl&) = default;
-                ProjectorConstantImpl& operator=(const ProjectorConstantImpl&) = default;
-                ProjectorConstantImpl(ProjectorConstantImpl&&) noexcept = default;
-                ProjectorConstantImpl& operator=(ProjectorConstantImpl&&) noexcept = default;
+    public:
+        explicit ProjectorConstantImpl(const ProjectorSharedPtr& projector) noexcept;
+        ProjectorConstantImpl() noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
-	
-		virtual void Load(CoreTools::BufferSource& source);
-		virtual void Save(CoreTools::BufferTarget& target) const;
-		virtual int GetStreamingSize() const;
-		void Link(CoreTools:: ObjectLink& source);
-                void Register(CoreTools::ObjectRegister& target) const;
+        virtual ~ProjectorConstantImpl() noexcept = default;
+        ProjectorConstantImpl(const ProjectorConstantImpl& rhs) = default;
+        ProjectorConstantImpl& operator=(const ProjectorConstantImpl& rhs) = default;
+        ProjectorConstantImpl(ProjectorConstantImpl&& rhs) noexcept = default;
+        ProjectorConstantImpl& operator=(ProjectorConstantImpl&& rhs) noexcept = default;
 
-		const ObjectSharedPtr GetObjectByName(const std::string& name); 
-		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 
-		const ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
-		const std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		const ConstProjectorSharedPtr GetProjector() const;
-   
-	private:
-		ProjectorSharedPtr m_Projector;
-	};
+        virtual void Load(CoreTools::BufferSource& source);
+        virtual void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD virtual int GetStreamingSize() const noexcept;
+        void Link(CoreTools::ObjectLink& source);
+        void Register(CoreTools::ObjectRegister& target) const;
+
+        NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name);
+        NODISCARD std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name);
+        NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const;
+        NODISCARD std::vector<ConstObjectSharedPtr> GetAllConstObjectsByName(const std::string& name) const;
+
+        NODISCARD ConstProjectorSharedPtr GetProjector() const noexcept;
+
+    private:
+        CoreTools::ObjectAssociated<Projector> projector;
+    };
 }
 
-#endif // RENDERING_SHADER_FLOATS_PROJECTOR_CONSTANT_IMPL_H
+#endif  // RENDERING_SHADER_FLOATS_PROJECTOR_CONSTANT_IMPL_H

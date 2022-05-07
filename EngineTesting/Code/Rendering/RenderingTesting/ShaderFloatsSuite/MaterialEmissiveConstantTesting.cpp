@@ -30,7 +30,7 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, MaterialEmissiveConstantTesting)
 
-void Rendering::MaterialEmissiveConstantTesting ::MainTest()
+void Rendering::MaterialEmissiveConstantTesting::MainTest()
 {
     CameraManager::Create();
     RendererManager::Create();
@@ -48,7 +48,7 @@ void Rendering::MaterialEmissiveConstantTesting ::MainTest()
     CameraManager::Destroy();
 }
 
-void Rendering::MaterialEmissiveConstantTesting ::InitTest()
+void Rendering::MaterialEmissiveConstantTesting::InitTest()
 {
     std::default_random_engine generator;
     std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
@@ -133,7 +133,7 @@ void Rendering::MaterialEmissiveConstantTesting ::InitTest()
     }
 }
 
-void Rendering::MaterialEmissiveConstantTesting ::CopyTest()
+void Rendering::MaterialEmissiveConstantTesting::CopyTest()
 {
     std::default_random_engine generator;
     std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
@@ -192,7 +192,7 @@ void Rendering::MaterialEmissiveConstantTesting ::CopyTest()
     }
 }
 
-void Rendering::MaterialEmissiveConstantTesting ::StreamTest()
+void Rendering::MaterialEmissiveConstantTesting::StreamTest()
 {
     // 	std::default_random_engine generator;
     // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
@@ -264,7 +264,7 @@ void Rendering::MaterialEmissiveConstantTesting ::StreamTest()
     // 	}
 }
 
-void Rendering::MaterialEmissiveConstantTesting ::UpdateTest()
+void Rendering::MaterialEmissiveConstantTesting::UpdateTest()
 {
     // 	std::default_random_engine generator;
     // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);

@@ -1,103 +1,103 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 10:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 19:09)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererBasis.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::RendererBasis
-	::RendererBasis(int width,int height,TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept
-	: m_WindowWidth{ width }, m_WindowHeight{ height }, m_ColorFormat{ colorFormat },
-	  m_DepthStencilFormat{ depthStencilFormat }, m_MultisamplesNumber{ numMultisamples }
+Rendering::RendererBasis::RendererBasis(int width, int height, TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept
+    : windowWidth{ width },
+      windowHeight{ height },
+      colorFormat{ colorFormat },
+      depthStencilFormat{ depthStencilFormat },
+      multisamplesNumber{ numMultisamples }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::RendererBasis
-	::RendererBasis() noexcept
-	: m_WindowWidth{ 0 }, m_WindowHeight{},m_ColorFormat{ TextureFormat::DefaultColour },
-	  m_DepthStencilFormat{ TextureFormat::DefaultDepth }, m_MultisamplesNumber{ 0 }
+Rendering::RendererBasis::RendererBasis() noexcept
+    : windowWidth{ 0 },
+      windowHeight{},
+      colorFormat{ TextureFormat::DefaultColour },
+      depthStencilFormat{ TextureFormat::DefaultDepth },
+      multisamplesNumber{ 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererBasis
-	::IsValid() const noexcept
+
+bool Rendering::RendererBasis::IsValid() const noexcept
 {
-    if(0 <= m_MultisamplesNumber && 0 <= m_WindowWidth && 0 <= m_WindowHeight)
+    if (0 <= multisamplesNumber && 0 <= windowWidth && 0 <= windowHeight)
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-Rendering::TextureFormat Rendering::RendererBasis
-	::GetColorFormat() const noexcept
+#endif  // OPEN_CLASS_INVARIANT
+
+Rendering::TextureFormat Rendering::RendererBasis::GetColorFormat() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_ColorFormat;
+    return colorFormat;
 }
 
-Rendering::TextureFormat Rendering::RendererBasis
-	::GetDepthStencilFormat() const noexcept
+Rendering::TextureFormat Rendering::RendererBasis::GetDepthStencilFormat() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_DepthStencilFormat;
+    return depthStencilFormat;
 }
 
-int Rendering::RendererBasis
-	::GetNumMultisamples() const noexcept
+int Rendering::RendererBasis::GetNumMultisamples() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_MultisamplesNumber;
+    return multisamplesNumber;
 }
 
-int Rendering::RendererBasis
-	::GetWidth () const noexcept
+int Rendering::RendererBasis::GetWidth() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowWidth;
+    return windowWidth;
 }
 
-int Rendering::RendererBasis
-	::GetHeight () const noexcept
+int Rendering::RendererBasis::GetHeight() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowHeight;
+    return windowHeight;
 }
 
-void Rendering::RendererBasis
-	::SetSize(int width,int height) noexcept
+void Rendering::RendererBasis::SetSize(int width, int height) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_WindowWidth = width;
-	m_WindowHeight = height;
+    windowWidth = width;
+    windowHeight = height;
 }
 
-void Rendering::RendererBasis
-	::SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat) noexcept
+void Rendering::RendererBasis::SetTextureFormat(TextureFormat aColorFormat, TextureFormat aDepthStencilFormat) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ColorFormat = colorFormat;
-	m_DepthStencilFormat = depthStencilFormat;
+    colorFormat = aColorFormat;
+    depthStencilFormat = aDepthStencilFormat;
 }
 
-void Rendering::RendererBasis
-	::SetMultisamplesNumber(int numMultisamples)  noexcept
+void Rendering::RendererBasis::SetMultisamplesNumber(int numMultisamples) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_MultisamplesNumber = numMultisamples;
+    multisamplesNumber = numMultisamples;
 }

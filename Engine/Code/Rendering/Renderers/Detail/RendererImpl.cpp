@@ -1,1247 +1,1158 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.3.0 (2020/03/27 16:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 14:34)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererImpl.h"
-
-
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-#include "Rendering/SceneGraph/Visual.h"
-#include "Rendering/SceneGraph/VisibleSet.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/GlobalEffects/GlobalEffect.h"
-#include "Rendering/Renderers/RendererBasis.h"
-#include "Rendering/Renderers/VertexFormatManagement.h"
 #include "Rendering/Renderers/BufferManagementDetail.h"
-#include "Rendering/Renderers/TextureManagementDetail.h"
 #include "Rendering/Renderers/RenderTargetManagement.h"
+#include "Rendering/Renderers/RendererBasis.h"
 #include "Rendering/Renderers/ShaderManagementDetail.h"
+#include "Rendering/Renderers/TextureManagementDetail.h"
+#include "Rendering/Renderers/VertexFormatManagement.h"
+#include "Rendering/SceneGraph/VisibleSet.h"
+#include "Rendering/SceneGraph/Visual.h"
 
-using std::make_shared;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::RendererImpl
-	::RendererImpl(const RendererBasis& basis)
-	: m_RendererBasis{ basis }, 
+#include <memory>
 
-	  m_DefaultAlphaState{ std::make_shared<AlphaState>() }, m_DefaultCullState{ std::make_shared<CullState>() }, m_DefaultDepthState{ std::make_shared<DepthState>() }, 
-	  m_DefaultOffsetState{ std::make_shared<OffsetState>() }, m_DefaultStencilState{ std::make_shared<StencilState>() }, m_DefaultWireState{ std::make_shared<WireState>() },
+Rendering::RendererImpl::RendererImpl(const RendererBasis& basis)
+    : rendererBasis{ basis },
 
-	  m_AlphaState{ m_DefaultAlphaState }, m_CullState{ m_DefaultCullState }, m_DepthState{ m_DefaultDepthState }, 
-	  m_OffsetState{ m_DefaultOffsetState }, m_StencilState{ m_DefaultStencilState }, m_WireState{ m_DefaultWireState }, m_ReverseCullOrder{ false },
-	
-	  m_VertexFormatManagement{ }, m_VertexBufferManagement{ },m_IndexBufferManagement{ }, m_Texture1DManagement{ }, m_Texture2DManagement{ },
-	  m_Texture3DManagement{ }, m_TextureCubeManagement{ }, m_RenderTargetManagement{ }, m_VertexShaderManagement{ }, m_PixelShaderManagement{ },
+      defaultAlphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
+      defaultCullState{ std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable) },
+      defaultDepthState{ std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable) },
+      defaultOffsetState{ std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable) },
+      defaultStencilState{ std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable) },
+      defaultWireState{ std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable) },
 
-	  m_GlobalState{ }, m_CameraState{ }, m_ClearParameter{ }, m_ViewportManagement{ }, m_DrawManagement{ },
+      globalAlphaState{ defaultAlphaState },
+      globalCullState{ defaultCullState },
+      globalDepthState{ defaultDepthState },
+      globalOffsetState{ defaultOffsetState },
+      globalStencilState{ defaultStencilState },
+      globalWireState{ defaultWireState },
+      reverseCullOrder{ false },
 
-	  m_Data{ },
+      vertexFormatManagement{},
+      vertexBufferManagement{},
+      indexBufferManagement{},
+      texture1DManagement{},
+      texture2DManagement{},
+      texture3DManagement{},
+      textureCubeManagement{},
+      renderTargetManagement{},
+      vertexShaderManagement{},
+      pixelShaderManagement{},
 
-	  m_OverrideAlphaState{ }, m_OverrideCullState{ },
-	  m_OverrideDepthState{ }, m_OverrideOffsetState{ },
-	  m_OverrideStencilState{ }, m_OverrideWireState{ },
+      globalState{},
+      cameraState{},
+      clearParameter{},
+      viewportManagement{},
+      drawManagement{},
 
-	  m_Camera{ },
+      rendererData{},
 
-	  m_ClearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, m_ClearDepth{ 0.0f }, m_ClearStencil{ 0 }, 
+      overrideAlphaState{},
+      overrideCullState{},
+      overrideDepthState{},
+      overrideOffsetState{},
+      overrideStencilState{},
+      overrideWireState{},
 
-	  m_AllowRed{ true }, m_AllowGreen{ true },m_AllowBlue{ true },m_AllowAlpha{ true },
+      camera{},
 
-	  m_RealRenderer{ }	
+      clearColor{ 1.0f, 1.0f, 1.0f, 1.0f },
+      clearDepth{ 0.0f },
+      clearStencil{ 0 },
+
+      bufferAllowRed{ true },
+      bufferAllowGreen{ true },
+      bufferAllowBlue{ true },
+      bufferAllowAlpha{ true },
+
+      realRenderer{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::RendererImpl
-	::SetRealRenderer(const RendererSharedPtr& renderer)
+void Rendering::RendererImpl::SetRealRenderer(const RendererSharedPtr& renderer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_RealRenderer = renderer;
+    realRenderer = renderer;
 
-	m_VertexFormatManagement = make_shared<VertexFormatManagement>(renderer);
-	m_VertexBufferManagement = make_shared<VertexBufferManagement>(renderer);
-	m_IndexBufferManagement = make_shared<IndexBufferManagement>(renderer);
-	m_Texture1DManagement = make_shared<Texture1DManagement>(renderer);
-	m_Texture2DManagement = make_shared<Texture2DManagement>(renderer);
-	m_Texture3DManagement = make_shared<Texture3DManagement>(renderer);
-	m_TextureCubeManagement = make_shared<TextureCubeManagement>(renderer);
-	m_RenderTargetManagement = make_shared<RenderTargetManagement>(renderer);
-	m_VertexShaderManagement = make_shared<VertexShaderManagement>(renderer);
-	m_PixelShaderManagement = make_shared<PixelShaderManagement>(renderer);
-} 
-
-
+    vertexFormatManagement = make_shared<VertexFormatManagement>(renderer);
+    vertexBufferManagement = make_shared<VertexBufferManagement>(renderer);
+    indexBufferManagement = make_shared<IndexBufferManagement>(renderer);
+    texture1DManagement = make_shared<Texture1DManagement>(renderer);
+    texture2DManagement = make_shared<Texture2DManagement>(renderer);
+    texture3DManagement = make_shared<Texture3DManagement>(renderer);
+    textureCubeManagement = make_shared<TextureCubeManagement>(renderer);
+    renderTargetManagement = make_shared<RenderTargetManagement>(renderer);
+    vertexShaderManagement = make_shared<VertexShaderManagement>(renderer);
+    pixelShaderManagement = make_shared<PixelShaderManagement>(renderer);
+}
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::RendererImpl
-	::IsValid() const noexcept
+
+bool Rendering::RendererImpl::IsValid() const noexcept
 {
-	if (!m_RealRenderer.lock() ||
-		(m_VertexFormatManagement && m_VertexBufferManagement && m_IndexBufferManagement &&
-		 m_Texture1DManagement && m_Texture2DManagement && m_Texture3DManagement &&
-		 m_TextureCubeManagement && m_RenderTargetManagement && 
-		 m_VertexShaderManagement && m_PixelShaderManagement))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (!realRenderer.lock() ||
+        (vertexFormatManagement &&
+         vertexBufferManagement &&
+         indexBufferManagement &&
+         texture1DManagement &&
+         texture2DManagement &&
+         texture3DManagement &&
+         textureCubeManagement &&
+         renderTargetManagement &&
+         vertexShaderManagement &&
+         pixelShaderManagement))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
-int Rendering::RendererImpl
-	::GetWidth() const
+int Rendering::RendererImpl::GetWidth() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_RendererBasis.GetWidth();
+    return rendererBasis.GetWidth();
 }
 
-int Rendering::RendererImpl
-	::GetHeight() const
+int Rendering::RendererImpl::GetHeight() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_RendererBasis.GetHeight();
+    return rendererBasis.GetHeight();
 }
 
-Rendering::TextureFormat Rendering::RendererImpl
-	::GetColorFormat() const
+Rendering::TextureFormat Rendering::RendererImpl::GetColorFormat() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_RendererBasis.GetColorFormat();
+    return rendererBasis.GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererImpl
-	::GetDepthStencilFormat() const
+Rendering::TextureFormat Rendering::RendererImpl::GetDepthStencilFormat() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_RendererBasis.GetDepthStencilFormat();
+    return rendererBasis.GetDepthStencilFormat();
 }
 
-int Rendering::RendererImpl
-	::GetNumMultisamples() const
+int Rendering::RendererImpl::GetNumMultisamples() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_RendererBasis.GetNumMultisamples();
+    return rendererBasis.GetNumMultisamples();
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstVertexFormatSharedPtr& vertexFormat)
+void Rendering::RendererImpl::Bind(const ConstVertexFormatSharedPtr& vertexFormat)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexFormatManagement->Bind(vertexFormat);
+    return vertexFormatManagement->Bind(vertexFormat);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstVertexFormatSharedPtr& vertexFormat)
+void Rendering::RendererImpl::Unbind(const ConstVertexFormatSharedPtr& vertexFormat)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexFormatManagement->Unbind(vertexFormat);
+    return vertexFormatManagement->Unbind(vertexFormat);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstVertexFormatSharedPtr& vertexFormat)
+void Rendering::RendererImpl::Enable(const ConstVertexFormatSharedPtr& vertexFormat)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexFormatManagement->Enable(vertexFormat);
+    return vertexFormatManagement->Enable(vertexFormat);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstVertexFormatSharedPtr& vertexFormat)
+void Rendering::RendererImpl::Disable(const ConstVertexFormatSharedPtr& vertexFormat)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexFormatManagement->Disable(vertexFormat);
+    return vertexFormatManagement->Disable(vertexFormat);
 }
 
-Rendering::RendererImpl::PlatformVertexFormatSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstVertexFormatSharedPtr& vertexFormat)
+Rendering::RendererImpl::PlatformVertexFormatSharedPtr Rendering::RendererImpl::GetResource(const ConstVertexFormatSharedPtr& vertexFormat)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexFormatManagement->GetResource(vertexFormat);
+    return vertexFormatManagement->GetResource(vertexFormat);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstVertexBufferSharedPtr& vertexBuffer)
+void Rendering::RendererImpl::Bind(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->Bind(vertexBuffer);
+    return vertexBufferManagement->Bind(vertexBuffer);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstVertexBufferSharedPtr& vertexBuffer)
+void Rendering::RendererImpl::Unbind(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->Unbind(vertexBuffer);
+    return vertexBufferManagement->Unbind(vertexBuffer);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex, int offset)
+void Rendering::RendererImpl::Enable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex, int offset)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->EnableVertexBuffer(vertexBuffer, streamIndex, offset);
+    return vertexBufferManagement->EnableVertexBuffer(vertexBuffer, streamIndex, offset);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex)
+void Rendering::RendererImpl::Disable(const ConstVertexBufferSharedPtr& vertexBuffer, int streamIndex)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->DisableVertexBuffer(vertexBuffer, streamIndex);
+    return vertexBufferManagement->DisableVertexBuffer(vertexBuffer, streamIndex);
 }
 
-void* Rendering::RendererImpl
-	::Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode)
+void* Rendering::RendererImpl::Lock(const ConstVertexBufferSharedPtr& vertexBuffer, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->Lock(vertexBuffer, mode);
+    return vertexBufferManagement->Lock(vertexBuffer, mode);
 }
 
-void Rendering::RendererImpl
-	::Unlock(const ConstVertexBufferSharedPtr& vertexBuffer)
+void Rendering::RendererImpl::Unlock(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->Unlock(vertexBuffer);
+    return vertexBufferManagement->Unlock(vertexBuffer);
 }
 
-void Rendering::RendererImpl
-	::Update(const ConstVertexBufferSharedPtr& vertexBuffer)
+void Rendering::RendererImpl::Update(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->Update(vertexBuffer);
+    return vertexBufferManagement->Update(vertexBuffer);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstIndexBufferSharedPtr& indexbuffer)
+void Rendering::RendererImpl::Bind(const ConstIndexBufferSharedPtr& indexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->Bind(indexbuffer);
+    return indexBufferManagement->Bind(indexbuffer);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstIndexBufferSharedPtr& indexbuffer)
+void Rendering::RendererImpl::Unbind(const ConstIndexBufferSharedPtr& indexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->Unbind(indexbuffer);
+    return indexBufferManagement->Unbind(indexbuffer);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstIndexBufferSharedPtr& indexbuffer)
+void Rendering::RendererImpl::Enable(const ConstIndexBufferSharedPtr& indexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->EnableIndexBuffer(indexbuffer);
+    return indexBufferManagement->EnableIndexBuffer(indexbuffer);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstIndexBufferSharedPtr& indexbuffer)
+void Rendering::RendererImpl::Disable(const ConstIndexBufferSharedPtr& indexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->DisableIndexBuffer(indexbuffer);
+    return indexBufferManagement->DisableIndexBuffer(indexbuffer);
 }
 
-void* Rendering::RendererImpl
-	::Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode)
+void* Rendering::RendererImpl::Lock(const ConstIndexBufferSharedPtr& indexbuffer, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->Lock(indexbuffer, mode);
+    return indexBufferManagement->Lock(indexbuffer, mode);
 }
 
-void Rendering::RendererImpl
-	::Unlock(const ConstIndexBufferSharedPtr& indexbuffer)
+void Rendering::RendererImpl::Unlock(const ConstIndexBufferSharedPtr& indexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->Unlock(indexbuffer);
+    return indexBufferManagement->Unlock(indexbuffer);
 }
 
-void Rendering::RendererImpl
-	::Update(const ConstIndexBufferSharedPtr& indexbuffer)
+void Rendering::RendererImpl::Update(const ConstIndexBufferSharedPtr& indexbuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->Update(indexbuffer);
+    return indexBufferManagement->Update(indexbuffer);
 }
 
-Rendering::RendererImpl::PlatformVertexBufferSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstVertexBufferSharedPtr& vertexBuffer)
+Rendering::RendererImpl::PlatformVertexBufferSharedPtr Rendering::RendererImpl::GetResource(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexBufferManagement->GetResource(vertexBuffer);
+    return vertexBufferManagement->GetResource(vertexBuffer);
 }
 
-Rendering::RendererImpl::PlatformIndexBufferSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstIndexBufferSharedPtr& indexBuffer)
+Rendering::RendererImpl::PlatformIndexBufferSharedPtr Rendering::RendererImpl::GetResource(const ConstIndexBufferSharedPtr& indexBuffer)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_IndexBufferManagement->GetResource(indexBuffer);
+    return indexBufferManagement->GetResource(indexBuffer);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstTexture1DSharedPtr& texture)
+void Rendering::RendererImpl::Bind(const ConstTexture1DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Bind(texture);
+    return texture1DManagement->Bind(texture);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstTexture1DSharedPtr& texture)
+void Rendering::RendererImpl::Unbind(const ConstTexture1DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Unbind(texture);
+    return texture1DManagement->Unbind(texture);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstTexture1DSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Enable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Enable(texture, textureUnit);
+    return texture1DManagement->Enable(texture, textureUnit);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstTexture1DSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Disable(const ConstTexture1DSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Disable(texture, textureUnit);
+    return texture1DManagement->Disable(texture, textureUnit);
 }
 
-void* Rendering::RendererImpl
-	::Lock(const ConstTexture1DSharedPtr& texture,int level, BufferLocking mode)
+void* Rendering::RendererImpl::Lock(const ConstTexture1DSharedPtr& texture, int level, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Lock(texture, level, mode);
+    return texture1DManagement->Lock(texture, level, mode);
 }
 
-void Rendering::RendererImpl
-	::Unlock(const ConstTexture1DSharedPtr& texture, int level)
+void Rendering::RendererImpl::Unlock(const ConstTexture1DSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Unlock(texture, level);
+    return texture1DManagement->Unlock(texture, level);
 }
 
-void Rendering::RendererImpl
-	::Update(const ConstTexture1DSharedPtr& texture, int level)
+void Rendering::RendererImpl::Update(const ConstTexture1DSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->Update(texture, level);
+    return texture1DManagement->Update(texture, level);
 }
 
-Rendering::RendererImpl::PlatformTexture1DSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTexture1DSharedPtr& texture1D)
+Rendering::RendererImpl::PlatformTexture1DSharedPtr Rendering::RendererImpl::GetResource(const ConstTexture1DSharedPtr& texture1D)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture1DManagement->GetResource(texture1D);
+    return texture1DManagement->GetResource(texture1D);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstTexture2DSharedPtr& texture)
+void Rendering::RendererImpl::Bind(const ConstTexture2DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Bind(texture);
+    return texture2DManagement->Bind(texture);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstTexture2DSharedPtr& texture)
+void Rendering::RendererImpl::Unbind(const ConstTexture2DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Unbind(texture);
+    return texture2DManagement->Unbind(texture);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstTexture2DSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Enable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Enable(texture, textureUnit);
+    return texture2DManagement->Enable(texture, textureUnit);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstTexture2DSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Disable(const ConstTexture2DSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Disable(texture, textureUnit);
+    return texture2DManagement->Disable(texture, textureUnit);
 }
 
-void* Rendering::RendererImpl
-	::Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode)
+void* Rendering::RendererImpl::Lock(const ConstTexture2DSharedPtr& texture, int level, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Lock(texture, level, mode);
+    return texture2DManagement->Lock(texture, level, mode);
 }
 
-void Rendering::RendererImpl
-	::Unlock(const ConstTexture2DSharedPtr& texture, int level)
+void Rendering::RendererImpl::Unlock(const ConstTexture2DSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Unlock(texture, level);
+    return texture2DManagement->Unlock(texture, level);
 }
 
-void Rendering::RendererImpl
-	::Update(const ConstTexture2DSharedPtr& texture, int level)
+void Rendering::RendererImpl::Update(const ConstTexture2DSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->Update(texture, level);
+    return texture2DManagement->Update(texture, level);
 }
 
-Rendering::RendererImpl::PlatformTexture2DSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTexture2DSharedPtr& texture2D)
+Rendering::RendererImpl::PlatformTexture2DSharedPtr Rendering::RendererImpl::GetResource(const ConstTexture2DSharedPtr& texture2D)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->GetResource(texture2D);
+    return texture2DManagement->GetResource(texture2D);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstTexture3DSharedPtr& texture)
+void Rendering::RendererImpl::Bind(const ConstTexture3DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Bind(texture);
+    return texture3DManagement->Bind(texture);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstTexture3DSharedPtr& texture)
+void Rendering::RendererImpl::Unbind(const ConstTexture3DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Unbind(texture);
+    return texture3DManagement->Unbind(texture);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstTexture3DSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Enable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Enable(texture, textureUnit);
+    return texture3DManagement->Enable(texture, textureUnit);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstTexture3DSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Disable(const ConstTexture3DSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Disable(texture, textureUnit);
+    return texture3DManagement->Disable(texture, textureUnit);
 }
 
-void* Rendering::RendererImpl
-	::Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode)
+void* Rendering::RendererImpl::Lock(const ConstTexture3DSharedPtr& texture, int level, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Lock(texture, level, mode);
+    return texture3DManagement->Lock(texture, level, mode);
 }
 
-void Rendering::RendererImpl
-	::Unlock(const ConstTexture3DSharedPtr& texture, int level)
+void Rendering::RendererImpl::Unlock(const ConstTexture3DSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Unlock(texture, level);
+    return texture3DManagement->Unlock(texture, level);
 }
 
-void Rendering::RendererImpl
-	::Update(const ConstTexture3DSharedPtr& texture, int level)
+void Rendering::RendererImpl::Update(const ConstTexture3DSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->Update(texture, level);
+    return texture3DManagement->Update(texture, level);
 }
 
-Rendering::RendererImpl::PlatformTexture3DSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTexture3DSharedPtr& texture3D)
+Rendering::RendererImpl::PlatformTexture3DSharedPtr Rendering::RendererImpl::GetResource(const ConstTexture3DSharedPtr& texture3D)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture3DManagement->GetResource(texture3D);
+    return texture3DManagement->GetResource(texture3D);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstTextureCubeSharedPtr& texture)
+void Rendering::RendererImpl::Bind(const ConstTextureCubeSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->Bind(texture);
+    return textureCubeManagement->Bind(texture);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstTextureCubeSharedPtr& texture)
+void Rendering::RendererImpl::Unbind(const ConstTextureCubeSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->Unbind(texture);
+    return textureCubeManagement->Unbind(texture);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Enable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->Enable(texture, textureUnit);
+    return textureCubeManagement->Enable(texture, textureUnit);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
+void Rendering::RendererImpl::Disable(const ConstTextureCubeSharedPtr& texture, int textureUnit)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->Disable(texture, textureUnit);
+    return textureCubeManagement->Disable(texture, textureUnit);
 }
 
-void* Rendering::RendererImpl
-	::Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode)
+void* Rendering::RendererImpl::Lock(const ConstTextureCubeSharedPtr& texture, int face, int level, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->LockCube(texture, face, level, mode);
+    return textureCubeManagement->LockCube(texture, face, level, mode);
 }
 
-void Rendering::RendererImpl
-	::Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level)
+void Rendering::RendererImpl::Unlock(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->UnlockCube(texture, face, level);
+    return textureCubeManagement->UnlockCube(texture, face, level);
 }
 
-void Rendering::RendererImpl
-	::Update(const ConstTextureCubeSharedPtr& texture, int face, int level)
+void Rendering::RendererImpl::Update(const ConstTextureCubeSharedPtr& texture, int face, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->UpdateCube(texture, face, level);
+    return textureCubeManagement->UpdateCube(texture, face, level);
 }
 
-Rendering::RendererImpl::PlatformTextureCubeSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstTextureCubeSharedPtr& textureCube)
+Rendering::RendererImpl::PlatformTextureCubeSharedPtr Rendering::RendererImpl::GetResource(const ConstTextureCubeSharedPtr& textureCube)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_TextureCubeManagement->GetResource(textureCube);
+    return textureCubeManagement->GetResource(textureCube);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Bind(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_RenderTargetManagement->Bind(renderTarget);
+    return renderTargetManagement->Bind(renderTarget);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Unbind(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_RenderTargetManagement->Unbind(renderTarget);
+    return renderTargetManagement->Unbind(renderTarget);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Enable(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_RenderTargetManagement->Enable(renderTarget);
+    return renderTargetManagement->Enable(renderTarget);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Disable(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_RenderTargetManagement->Disable(renderTarget);
+    return renderTargetManagement->Disable(renderTarget);
 }
 
-Rendering::ConstTexture2DSharedPtr Rendering::RendererImpl
-	::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::RendererImpl::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_RenderTargetManagement->ReadColor(index, renderTarget);
+    return renderTargetManagement->ReadColor(index, renderTarget);
 }
 
-Rendering::RendererImpl::PlatformRenderTargetSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::RendererImpl::PlatformRenderTargetSharedPtr Rendering::RendererImpl::GetResource(const ConstRenderTargetSharedPtr& renderTarget)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_RenderTargetManagement->GetResource(renderTarget);
+    return renderTargetManagement->GetResource(renderTarget);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstVertexShaderSharedPtr& vertexShader)
+void Rendering::RendererImpl::Bind(const ConstVertexShaderSharedPtr& vertexShader)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexShaderManagement->Bind(vertexShader); 
+    return vertexShaderManagement->Bind(vertexShader);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstVertexShaderSharedPtr& vertexShader)
+void Rendering::RendererImpl::Unbind(const ConstVertexShaderSharedPtr& vertexShader)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexShaderManagement->Unbind(vertexShader);
+    return vertexShaderManagement->Unbind(vertexShader);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstVertexShaderSharedPtr& vertexShader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::RendererImpl::Enable(const ConstVertexShaderSharedPtr& vertexShader, const ShaderParameters& parameters)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexShaderManagement->Enable(vertexShader, parameters);
+    return vertexShaderManagement->Enable(vertexShader, parameters);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstVertexShaderSharedPtr& vertexShader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::RendererImpl::Disable(const ConstVertexShaderSharedPtr& vertexShader, const ShaderParameters& parameters)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexShaderManagement->Disable(vertexShader, parameters);
+    return vertexShaderManagement->Disable(vertexShader, parameters);
 }
 
-Rendering::RendererImpl::PlatformVertexShaderSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstVertexShaderSharedPtr& vertexShader)
+Rendering::RendererImpl::PlatformVertexShaderSharedPtr Rendering::RendererImpl::GetResource(const ConstVertexShaderSharedPtr& vertexShader)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_VertexShaderManagement->GetResource(vertexShader);
+    return vertexShaderManagement->GetResource(vertexShader);
 }
 
-void Rendering::RendererImpl
-	::Bind(const ConstPixelShaderSharedPtr& pixelShader)
+void Rendering::RendererImpl::Bind(const ConstPixelShaderSharedPtr& pixelShader)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_PixelShaderManagement->Bind(pixelShader);
+    return pixelShaderManagement->Bind(pixelShader);
 }
 
-void Rendering::RendererImpl
-	::Unbind(const ConstPixelShaderSharedPtr& pixelShader)
+void Rendering::RendererImpl::Unbind(const ConstPixelShaderSharedPtr& pixelShader)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_PixelShaderManagement->Unbind(pixelShader);
+    return pixelShaderManagement->Unbind(pixelShader);
 }
 
-void Rendering::RendererImpl
-	::Enable(const ConstPixelShaderSharedPtr& pixelShader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::RendererImpl::Enable(const ConstPixelShaderSharedPtr& pixelShader, const ShaderParameters& parameters)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_PixelShaderManagement->Enable(pixelShader, parameters);
+    return pixelShaderManagement->Enable(pixelShader, parameters);
 }
 
-void Rendering::RendererImpl
-	::Disable(const ConstPixelShaderSharedPtr& pixelShader, const ConstShaderParametersSharedPtr& parameters)
+void Rendering::RendererImpl::Disable(const ConstPixelShaderSharedPtr& pixelShader, const ShaderParameters& parameters)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_PixelShaderManagement->Disable(pixelShader, parameters);
+    return pixelShaderManagement->Disable(pixelShader, parameters);
 }
 
-Rendering::RendererImpl::PlatformPixelShaderSharedPtr Rendering::RendererImpl
-	::GetResource(const ConstPixelShaderSharedPtr& pixelShader)
+Rendering::RendererImpl::PlatformPixelShaderSharedPtr Rendering::RendererImpl::GetResource(const ConstPixelShaderSharedPtr& pixelShader)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_PixelShaderManagement->GetResource(pixelShader);
+    return pixelShaderManagement->GetResource(pixelShader);
 }
 
-const Rendering::ConstAlphaStateSharedPtr Rendering::RendererImpl
-	::GetAlphaState() const
+Rendering::ConstAlphaStateSharedPtr Rendering::RendererImpl::GetAlphaState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_AlphaState;
+    return globalAlphaState;
 }
 
-const Rendering::ConstCullStateSharedPtr Rendering::RendererImpl
-	::GetCullState() const
+Rendering::ConstCullStateSharedPtr Rendering::RendererImpl::GetCullState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_CullState;
+    return globalCullState;
 }
 
-const Rendering::ConstDepthStateSharedPtr Rendering::RendererImpl
-	::GetDepthState() const
+Rendering::ConstDepthStateSharedPtr Rendering::RendererImpl::GetDepthState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_DepthState;
+    return globalDepthState;
 }
 
-const Rendering::ConstOffsetStateSharedPtr Rendering::RendererImpl
-	::GetOffsetState() const
+Rendering::ConstOffsetStateSharedPtr Rendering::RendererImpl::GetOffsetState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OffsetState;
+    return globalOffsetState;
 }
 
-const Rendering::ConstStencilStateSharedPtr Rendering::RendererImpl
-	::GetStencilState() const
+Rendering::ConstStencilStateSharedPtr Rendering::RendererImpl::GetStencilState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_StencilState;
+    return globalStencilState;
 }
 
-const Rendering::ConstWireStateSharedPtr Rendering::RendererImpl
-	::GetWireState() const
+Rendering::ConstWireStateSharedPtr Rendering::RendererImpl::GetWireState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_WireState;
+    return globalWireState;
 }
 
-const Rendering::ConstAlphaStateSharedPtr Rendering::RendererImpl
-	::GetOverrideAlphaState() const
+Rendering::ConstAlphaStateSharedPtr Rendering::RendererImpl::GetOverrideAlphaState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OverrideAlphaState;
+    return overrideAlphaState;
 }
 
-const Rendering::ConstCullStateSharedPtr Rendering::RendererImpl
-	::GetOverrideCullState() const
+Rendering::ConstCullStateSharedPtr Rendering::RendererImpl::GetOverrideCullState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OverrideCullState;
+    return overrideCullState;
 }
 
-const Rendering::ConstDepthStateSharedPtr Rendering::RendererImpl
-	::GetOverrideDepthState() const
+Rendering::ConstDepthStateSharedPtr Rendering::RendererImpl::GetOverrideDepthState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OverrideDepthState;
+    return overrideDepthState;
 }
 
-const Rendering::ConstOffsetStateSharedPtr Rendering::RendererImpl
-	::GetOverrideOffsetState() const
+Rendering::ConstOffsetStateSharedPtr Rendering::RendererImpl::GetOverrideOffsetState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OverrideOffsetState;
+    return overrideOffsetState;
 }
 
-const Rendering::ConstStencilStateSharedPtr Rendering::RendererImpl
-	::GetOverrideStencilState() const
+Rendering::ConstStencilStateSharedPtr Rendering::RendererImpl::GetOverrideStencilState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OverrideStencilState;
+    return overrideStencilState;
 }
 
-const Rendering::ConstWireStateSharedPtr Rendering::RendererImpl
-	::GetOverrideWireState() const
+Rendering::ConstWireStateSharedPtr Rendering::RendererImpl::GetOverrideWireState() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_OverrideWireState;
+    return overrideWireState;
 }
 
-void Rendering::RendererImpl
-	::SetOverrideAlphaState(const ConstAlphaStateSharedPtr& alphaState)
+void Rendering::RendererImpl::SetOverrideAlphaState(const ConstAlphaStateSharedPtr& alphaState)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OverrideAlphaState = alphaState;
-	if (alphaState )
-	{
-		SetAlphaState(alphaState);
-	}
-	else
-	{
-		SetAlphaState(m_DefaultAlphaState);
-	}
+    overrideAlphaState = alphaState;
+    if (alphaState)
+    {
+        SetAlphaState(alphaState);
+    }
+    else
+    {
+        SetAlphaState(defaultAlphaState);
+    }
 }
 
-void Rendering::RendererImpl
-	::SetOverrideCullState(const ConstCullStateSharedPtr& cullState)
+void Rendering::RendererImpl::SetOverrideCullState(const ConstCullStateSharedPtr& cullState)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OverrideCullState = cullState;
-	if (cullState )
-	{
-		SetCullState(cullState);
-	}
-	else
-	{
-		SetCullState(m_DefaultCullState);
-	}
+    overrideCullState = cullState;
+    if (cullState)
+    {
+        SetCullState(cullState);
+    }
+    else
+    {
+        SetCullState(defaultCullState);
+    }
 }
 
-void Rendering::RendererImpl
-	::SetOverrideDepthState(const ConstDepthStateSharedPtr& depthState)
+void Rendering::RendererImpl::SetOverrideDepthState(const ConstDepthStateSharedPtr& depthState)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OverrideDepthState = depthState;
-	if (depthState )
-	{
-		SetDepthState(depthState);
-	}
-	else
-	{
-		SetDepthState(m_DefaultDepthState);
-	}
+    overrideDepthState = depthState;
+    if (depthState)
+    {
+        SetDepthState(depthState);
+    }
+    else
+    {
+        SetDepthState(defaultDepthState);
+    }
 }
 
-void Rendering::RendererImpl
-	::SetOverrideOffsetState(const ConstOffsetStateSharedPtr& offsetState)
+void Rendering::RendererImpl::SetOverrideOffsetState(const ConstOffsetStateSharedPtr& offsetState)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OverrideOffsetState = offsetState;
-	if (offsetState )
-	{
-		SetOffsetState(offsetState);
-	}
-	else
-	{
-		SetOffsetState(m_DefaultOffsetState);
-	}
+    overrideOffsetState = offsetState;
+    if (offsetState)
+    {
+        SetOffsetState(offsetState);
+    }
+    else
+    {
+        SetOffsetState(defaultOffsetState);
+    }
 }
 
-void Rendering::RendererImpl
-	::SetOverrideStencilState(const ConstStencilStateSharedPtr& stencilState)
+void Rendering::RendererImpl::SetOverrideStencilState(const ConstStencilStateSharedPtr& stencilState)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OverrideStencilState = stencilState;
-	if (stencilState )
-	{
-		SetStencilState(stencilState);
-	}
-	else
-	{
-		SetStencilState(m_DefaultStencilState);
-	}
+    overrideStencilState = stencilState;
+    if (stencilState)
+    {
+        SetStencilState(stencilState);
+    }
+    else
+    {
+        SetStencilState(defaultStencilState);
+    }
 }
 
-void Rendering::RendererImpl
-	::SetOverrideWireState(const ConstWireStateSharedPtr& wireState)
+void Rendering::RendererImpl::SetOverrideWireState(const ConstWireStateSharedPtr& wireState)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_OverrideWireState = wireState;
-	if (wireState )
-	{
-		SetWireState(wireState);
-	}
-	else
-	{
-		SetWireState(m_DefaultWireState);
-	}
+    overrideWireState = wireState;
+    if (wireState)
+    {
+        SetWireState(wireState);
+    }
+    else
+    {
+        SetWireState(defaultWireState);
+    }
 }
 
-void Rendering::RendererImpl
-	::SetReverseCullOrder(bool reverseCullOrder)
+void Rendering::RendererImpl::SetReverseCullOrder(bool aReverseCullOrder) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ReverseCullOrder = reverseCullOrder;
+    reverseCullOrder = aReverseCullOrder;
 }
 
-bool Rendering::RendererImpl
-	::GetReverseCullOrder() const
+bool Rendering::RendererImpl::GetReverseCullOrder() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_ReverseCullOrder;
+    return reverseCullOrder;
 }
 
-void Rendering::RendererImpl
-	::SetCamera(const CameraSharedPtr& camera)
+void Rendering::RendererImpl::SetCamera(const CameraSharedPtr& aCamera) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Camera = camera;
+    camera = aCamera;
 }
 
-const Rendering::ConstCameraSharedPtr Rendering::RendererImpl
-	::GetCamera() const
+Rendering::ConstCameraSharedPtr Rendering::RendererImpl::GetCamera() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Camera;
+    return camera;
 }
 
-const Rendering::CameraSharedPtr Rendering::RendererImpl
-	::GetCamera()
+Rendering::CameraSharedPtr Rendering::RendererImpl::GetCamera() noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Camera;
+    return camera;
 }
 
-const Rendering::RendererImpl::Matrix Rendering::RendererImpl
-	::GetViewMatrix() const
+Rendering::RendererImpl::Matrix Rendering::RendererImpl::GetViewMatrix() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Camera )
-	{
-		return m_Camera->GetViewMatrix();
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
-	}
+    if (camera)
+    {
+        return camera->GetViewMatrix();
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
+    }
 }
 
-const Rendering::RendererImpl::Matrix Rendering::RendererImpl
-	::GetProjectionMatrix() const
+Rendering::RendererImpl::Matrix Rendering::RendererImpl::GetProjectionMatrix() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Camera )
-	{
-		return m_Camera->GetProjectionMatrix();
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
-	}
+    if (camera)
+    {
+        return camera->GetProjectionMatrix();
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
+    }
 }
 
-const Rendering::RendererImpl::Matrix Rendering::RendererImpl
-	::GetPostProjectionMatrix() const
+Rendering::RendererImpl::Matrix Rendering::RendererImpl::GetPostProjectionMatrix() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if (m_Camera )
-	{
-		return m_Camera->GetPostProjectionMatrix();
-	}
-	else
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
-	}
+    if (camera)
+    {
+        return camera->GetPostProjectionMatrix();
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("摄像机不存在。"s));
+    }
 }
 
-Rendering::PickRay Rendering::RendererImpl
-	::GetPickRay(int x, int y) const
+Rendering::PickRay Rendering::RendererImpl::GetPickRay(int x, int y) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	const PickRay errorPickRay{ };
+    const PickRay errorPickRay{ CoreTools::DisableNotThrow::Disable };
 
-	if (!m_Camera)
-	{
-		return errorPickRay;
-	}
+    if (!camera)
+    {
+        return errorPickRay;
+    }
 
-	// 获取当前视口，并测试其中是否包含（x，y）。
-	const auto viewport = GetViewport();
-	if (!viewport.IsInViewport(x,y))
-	{
-		return errorPickRay;
-	}
- 
-	// 获取(x,y)的[0,1]^2归一化坐标。
-	auto r = (boost::numeric_cast<float>(x - viewport.GetXPosition())) / boost::numeric_cast<float>(viewport.GetWidth());
-	auto u = (boost::numeric_cast<float>(y - viewport.GetYPosition())) / boost::numeric_cast<float>(viewport.GetHeight());
+    // 获取当前视口，并测试其中是否包含（x，y）。
+    const auto viewport = GetViewport();
+    if (!viewport.IsInViewport(x, y))
+    {
+        return errorPickRay;
+    }
 
- 	// 获取相对坐标，单位为[rmin,rmax] x [umin,umax]。
-	const auto rightBlend = (1.0f - r) * m_Camera->GetRightMin() + r * m_Camera->GetRightMax();
-	const auto upBlend = (1.0f - u) * m_Camera->GetUpMin() + u * m_Camera->GetUpMax();
+    // 获取(x,y)的[0,1]^2归一化坐标。
+    auto r = (boost::numeric_cast<float>(x - viewport.GetXPosition())) / boost::numeric_cast<float>(viewport.GetWidth());
+    auto u = (boost::numeric_cast<float>(y - viewport.GetYPosition())) / boost::numeric_cast<float>(viewport.GetHeight());
 
-	Mathematics::APointF origin{ };
-        Mathematics::AVectorF direction{   };
+    // 获取相对坐标，单位为[rmin,rmax] x [umin,umax]。
+    const auto rightBlend = (1.0f - r) * camera->GetRightMin() + r * camera->GetRightMax();
+    const auto upBlend = (1.0f - u) * camera->GetUpMin() + u * camera->GetUpMax();
 
-	if (m_Camera->IsPerspective())
-	{
-		origin = m_Camera->GetPosition();
-		direction = m_Camera->GetDirectionMin() * m_Camera->GetDirectionVector() + rightBlend * m_Camera->GetRightVector() + upBlend * m_Camera->GetUpVector();
-		direction.Normalize();
-	}
-	else
-	{
-		origin = m_Camera->GetPosition() + rightBlend * m_Camera->GetRightVector() + upBlend * m_Camera->GetUpVector();
-		direction = m_Camera->GetDirectionVector();
-	}
- 
-	return PickRay{ true, origin, direction };
+    Mathematics::APointF origin{};
+    Mathematics::AVectorF direction{};
+
+    if (camera->IsPerspective())
+    {
+        origin = camera->GetPosition();
+        direction = camera->GetDirectionMin() * camera->GetDirectionVector() + rightBlend * camera->GetRightVector() + upBlend * camera->GetUpVector();
+        direction.Normalize();
+    }
+    else
+    {
+        origin = camera->GetPosition() + rightBlend * camera->GetRightVector() + upBlend * camera->GetUpVector();
+        direction = camera->GetDirectionVector();
+    }
+
+    return PickRay{ true, origin, direction };
 }
 
-void Rendering::RendererImpl
-	::SetClearColor(const Colour& clearColor)
+void Rendering::RendererImpl::SetClearColor(const Colour& aClearColor) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ClearColor = clearColor;
+    clearColor = aClearColor;
 }
 
-const Rendering::RendererImpl::Colour Rendering::RendererImpl
-	::GetClearColor() const
+Rendering::RendererImpl::Colour Rendering::RendererImpl::GetClearColor() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_ClearColor;
+    return clearColor;
 }
 
-void Rendering::RendererImpl
-	::SetClearDepth(float clearDepth)
+void Rendering::RendererImpl::SetClearDepth(float aClearDepth) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ClearDepth = clearDepth;
+    clearDepth = aClearDepth;
 }
 
-float Rendering::RendererImpl
-	::GetClearDepth() const
+float Rendering::RendererImpl::GetClearDepth() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_ClearDepth;
+    return clearDepth;
 }
 
-void Rendering::RendererImpl
-	::SetClearStencil(int clearStencil)
+void Rendering::RendererImpl::SetClearStencil(int aClearStencil) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ClearStencil = clearStencil;
+    clearStencil = aClearStencil;
 }
 
-int Rendering::RendererImpl
-	::GetClearStencil() const
+int Rendering::RendererImpl::GetClearStencil() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_ClearStencil;
+    return clearStencil;
 }
 
-bool Rendering::RendererImpl
-	::GetAllowRed() const
+bool Rendering::RendererImpl::GetAllowRed() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_AllowRed;
+    return bufferAllowRed;
 }
 
-bool Rendering::RendererImpl
-	::GetAllowGreen() const
+bool Rendering::RendererImpl::GetAllowGreen() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_AllowGreen;
+    return bufferAllowGreen;
 }
 
-bool Rendering::RendererImpl
-	::GetAllowBlue() const
+bool Rendering::RendererImpl::GetAllowBlue() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_AllowBlue;
+    return bufferAllowBlue;
 }
 
-bool Rendering::RendererImpl
-	::GetAllowAlpha() const
+bool Rendering::RendererImpl::GetAllowAlpha() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_AllowAlpha;
+    return bufferAllowAlpha;
 }
 
-void Rendering::RendererImpl
-	::SetAllowRed(bool allowRed)
+void Rendering::RendererImpl::SetAllowRed(bool allowRed) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_AllowRed = allowRed;
+    bufferAllowRed = allowRed;
 }
 
-void Rendering::RendererImpl
-	::SetAllowGreen(bool allowGreen)
+void Rendering::RendererImpl::SetAllowGreen(bool allowGreen) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_AllowGreen = allowGreen;
+    bufferAllowGreen = allowGreen;
 }
 
-void Rendering::RendererImpl
-	::SetAllowBlue(bool allowBlue)
+void Rendering::RendererImpl::SetAllowBlue(bool allowBlue) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_AllowBlue = allowBlue;
+    bufferAllowBlue = allowBlue;
 }
 
-void Rendering::RendererImpl
-	::SetAllowAlpha(bool allowAlpha)
+void Rendering::RendererImpl::SetAllowAlpha(bool allowAlpha) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_AllowAlpha = allowAlpha;
+    bufferAllowAlpha = allowAlpha;
 }
 
-void Rendering::RendererImpl
-	::Draw(VisibleSet& visibleSet, GlobalEffectSharedPtr globalEffect)
+void Rendering::RendererImpl::Draw(VisibleSet& visibleSet, GlobalEffect* globalEffect)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	if (!globalEffect )
-	{ 
-		for (auto& visual : visibleSet)
-		{
-			EXCEPTION_TRY
-			{				 
-				const auto instance = visual->GetEffectInstance();
-				Draw(visual, instance);
-			}
-			EXCEPTION_ENGINE_EXCEPTION_CATCH(Rendering)
-		}
-	}
-	else
-	{		 
-		globalEffect->Draw(RendererSharedPtr{ m_RealRenderer }, visibleSet);
-	}
+    if (!globalEffect)
+    {
+        for (auto& visual : visibleSet)
+        {
+            EXCEPTION_TRY
+            {
+                const auto instance = visual->GetEffectInstance();
+                Draw(visual, instance);
+            }
+            EXCEPTION_ENGINE_EXCEPTION_CATCH(Rendering)
+        }
+    }
+    else
+    {
+        globalEffect->Draw(*realRenderer.lock(), visibleSet);
+    }
 }
 
-void Rendering::RendererImpl
-	::Draw(VisualSharedPtr visual)
+void Rendering::RendererImpl::Draw(VisualSharedPtr visual)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	const auto instance = visual->GetEffectInstance();
+    const auto instance = visual->GetEffectInstance();
 
-	Draw(visual, instance);
+    Draw(visual, instance);
 }
+
+void Rendering::RendererImpl::Draw(const VisualSharedPtr& visual, VisualEffectInstanceSharedPtr instance)
+{
+    RENDERING_ASSERTION_0(visual != nullptr, "visual对象必须存在。\n");
+    RENDERING_ASSERTION_0(instance != nullptr, "visual对象必须具有effect实例。\n");
+
+    const auto vertexFormat = visual->GetConstVertexFormat();
+    const auto vertexBuffer = visual->GetConstVertexBuffer();
+    const auto indexBuffer = visual->GetConstIndexBuffer();
+
+    // OpenGL渲染器要求在启用顶点格式之前先启用顶点缓冲区。 该顺序与DirectX9渲染器无关。
+    Enable(vertexBuffer);
+    Enable(vertexFormat);
+    if (indexBuffer)
+    {
+        Enable(indexBuffer);
+    }
 
-void Rendering::RendererImpl
-	::Draw(const VisualSharedPtr& visual, VisualEffectInstanceSharedPtr instance)
-{	 
-	RENDERING_ASSERTION_0(visual != nullptr , "visual对象必须存在。\n");	
-	RENDERING_ASSERTION_0(instance != nullptr, "visual对象必须具有effect实例。\n");
-		 
-	const auto vertexFormat = visual->GetConstVertexFormat();
-	const auto vertexBuffer = visual->GetConstVertexBuffer();
-	const auto indexBuffer = visual->GetConstIndexBuffer();
- 
-	// OpenGL渲染器要求在启用顶点格式之前先启用顶点缓冲区。 该顺序与DirectX9渲染器无关。
-	Enable(vertexBuffer);
-	Enable(vertexFormat);
-	if (indexBuffer )
-	{
-		Enable(indexBuffer);
-	}
+    const auto numPasses = instance->GetNumPasses();
+    for (auto i = 0; i < numPasses; ++i)
+    {
+        const auto pass = instance->GetConstPass(i);
+        auto vertexParameters = instance->GetVertexParameters(i);
+        auto pixelParameters = instance->GetPixelParameters(i);
+        auto vertexShader = pass->GetVertexShader();
+        auto pixelShader = pass->GetPixelShader();
 
-	const auto numPasses = instance->GetNumPasses();
-	for (int i = 0; i < numPasses; ++i)
-	{		 
-	 	const auto pass = instance->GetConstPass(i);
-		auto vertexParameters = instance->GetVertexParameters(i);
-		auto pixelParameters = instance->GetPixelParameters(i);
-		auto vertexShader = pass->GetVertexShader();
-		auto pixelShader = pass->GetPixelShader();
-		 
-		// 更新在运行时变化的所有着色器常量。
-		vertexParameters->UpdateConstants(visual, m_Camera);
-		pixelParameters->UpdateConstants(visual, m_Camera);
+        // 更新在运行时变化的所有着色器常量。
+        vertexParameters->UpdateConstants(visual.get(), camera.get());
+        pixelParameters->UpdateConstants(visual.get(), camera.get());
 
-		// 设置视觉状态。
-		SetAlphaState(pass->GetAlphaState());
-		SetCullState(pass->GetCullState());
-		SetDepthState(pass->GetDepthState());
-		SetOffsetState(pass->GetOffsetState());
-		SetStencilState(pass->GetStencilState());
-		SetWireState(pass->GetWireState());
+        // 设置视觉状态。
+        SetAlphaState(pass->GetAlphaState());
+        SetCullState(pass->GetCullState());
+        SetDepthState(pass->GetDepthState());
+        SetOffsetState(pass->GetOffsetState());
+        SetStencilState(pass->GetStencilState());
+        SetWireState(pass->GetWireState());
 
-		// 启用着色器。
-		Enable(vertexShader, vertexParameters);
-		Enable(pixelShader, pixelParameters);
+        // 启用着色器。
+        Enable(vertexShader, *vertexParameters);
+        Enable(pixelShader, *pixelParameters);
 
-		// 绘制图元。
-		DrawPrimitive(visual);
+        // 绘制图元。
+        DrawPrimitive(visual);
 
-		// 禁用着色器。
-		Disable(vertexShader, vertexParameters);
-		Disable(pixelShader, pixelParameters); 
+        // 禁用着色器。
+        Disable(vertexShader, *vertexParameters);
+        Disable(pixelShader, *pixelParameters);
 
-	#ifdef RENDERING_RESET_STATE_AFTER_DRAW
-		// 恢复视觉状态。
-		SetAlphaState(m_DefaultAlphaState);
-		SetCullState(m_DefaultCullState);
-		SetDepthState(m_DefaultDepthState);
-		SetOffsetState(m_DefaultOffsetState);
-		SetStencilState(m_DefaultStencilState);
-		SetWireState(m_DefaultWireState);
-	#endif // RENDERING_RESET_STATE_AFTER_DRAW
-	}
+#ifdef RENDERING_RESET_STATE_AFTER_DRAW
 
-	if (indexBuffer )
-	{
-		Disable(indexBuffer);
-	}
+        // 恢复视觉状态。
+        SetAlphaState(defaultAlphaState);
+        SetCullState(defaultCullState);
+        SetDepthState(defaultDepthState);
+        SetOffsetState(defaultOffsetState);
+        SetStencilState(defaultStencilState);
+        SetWireState(defaultWireState);
 
-	Disable(vertexFormat);
-	Disable(vertexBuffer);
-} 
+#endif  // RENDERING_RESET_STATE_AFTER_DRAW
+    }
+
+    if (indexBuffer)
+    {
+        Disable(indexBuffer);
+    }
+
+    Disable(vertexFormat);
+    Disable(vertexBuffer);
+}
 
-bool Rendering::RendererImpl
-	::InTexture2DMap(const ConstTexture2DSharedPtr& texture)
+bool Rendering::RendererImpl::InTexture2DMap(const ConstTexture2DSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->IsInTextureMap(texture);
+    return texture2DManagement->IsInTextureMap(texture);
 }
 
-void Rendering::RendererImpl
-	::InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture)
+void Rendering::RendererImpl::InsertInTexture2DMap(const ConstTexture2DSharedPtr& texture, const PlatformTexture2DSharedPtr& platformTexture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Texture2DManagement->InsertTextureMap(texture, platformTexture);
+    return texture2DManagement->InsertTextureMap(texture, platformTexture);
 }
- #include STSTEM_WARNING_POP

@@ -7,7 +7,7 @@
 #ifndef FRAMEWORK_WINDOW_CREATE_SUITE_WINDOW_CREATE_HANDLE_TESTING_H
 #define FRAMEWORK_WINDOW_CREATE_SUITE_WINDOW_CREATE_HANDLE_TESTING_H
 
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 namespace Framework

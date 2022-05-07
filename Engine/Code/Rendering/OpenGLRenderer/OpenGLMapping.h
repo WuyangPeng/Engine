@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 11:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 15:47)
 
 #ifndef RENDERING_RENDERERS_OPENGL_MAPPING_H
 #define RENDERING_RENDERERS_OPENGL_MAPPING_H
@@ -29,24 +32,24 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE OpenGLConstant
     {
     public:
-        static Enum g_OpenGLAlphaSrcBlend[System::EnumCastUnderlying(AlphaStateFlags::SourceBlendMode::Quantity)];
-        static Enum g_OpenGLAlphaDstBlend[System::EnumCastUnderlying(AlphaStateFlags::DestinationBlendMode::Quantity)];
-        static Enum g_OpenGLAlphaCompare[System::EnumCastUnderlying(AlphaStateFlags::CompareMode::Quantity)];
-        static Enum g_OpenGLDepthCompare[System::EnumCastUnderlying(DepthStateFlags::CompareMode::Quantity)];
-        static Enum g_OpenGLStencilCompare[System::EnumCastUnderlying(StencilStateFlags::CompareMode::Quantity)];
-        static Enum g_OpenGLStencilOperation[System::EnumCastUnderlying(StencilStateFlags::OperationType::Quantity)];
-        static Int g_OpenGLAttributeChannels[System::EnumCastUnderlying(VertexFormatFlags::AttributeType::Quantity)];
-        static UInt g_OpenGLAttributeType[System::EnumCastUnderlying(VertexFormatFlags::AttributeType::Quantity)];
-        static UInt g_OpenGLBufferLocking[System::EnumCastUnderlying(BufferLocking::Quantity)];
-        static UInt g_OpenGLBufferUsage[System::EnumCastUnderlying(BufferUsage::Quantity)];
-        static Int g_OpenGLMinFilter[System::EnumCastUnderlying(ShaderFlags::SamplerFilter::Quantity)];
-        static UInt g_OpenGLTextureFormat[System::EnumCastUnderlying(TextureFormat::Quantity)];
-        static UInt g_OpenGLTextureInternalFormat[System::EnumCastUnderlying(TextureFormat::Quantity)];
-        static UInt g_OpenGLTextureTarget[System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)];
-        static UInt g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)];
-        static UInt g_OpenGLTextureType[System::EnumCastUnderlying(TextureFormat::Quantity)];
-        static Int g_OpenGLWrapMode[System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity)];
-        static Enum g_OpenGLPrimitiveType[System::EnumCastUnderlying(VisualPrimitiveType::MaxQuantity)];
+        NODISCARD static Enum GetOpenGLAlphaSrcBlend(int index);
+        NODISCARD static Enum GetOpenGLAlphaDstBlend(int index);
+        NODISCARD static Enum GetOpenGLAlphaCompare(int index);
+        NODISCARD static Enum GetOpenGLDepthCompare(int index);
+        NODISCARD static Enum GetOpenGLStencilCompare(int index);
+        NODISCARD static Enum GetOpenGLStencilOperation(int index);
+        NODISCARD static Int GetOpenGLAttributeChannels(int index);
+        NODISCARD static UInt GetOpenGLAttributeType(int index);
+        NODISCARD static UInt GetOpenGLBufferLocking(int index);
+        NODISCARD static UInt GetOpenGLBufferUsage(int index);
+        NODISCARD static Int GetOpenGLMinFilter(int index);
+        NODISCARD static UInt GetOpenGLTextureFormat(int index);
+        NODISCARD static UInt GetOpenGLTextureInternalFormat(int index);
+        NODISCARD static UInt GetOpenGLTextureTarget(int index);
+        NODISCARD static UInt GetOpenGLTextureTargetBinding(int index);
+        NODISCARD static UInt GetOpenGLTextureType(int index);
+        NODISCARD static Int GetOpenGLWrapMode(int index);
+        NODISCARD static Enum GetOpenGLPrimitiveType(int index);
     };
 }
 

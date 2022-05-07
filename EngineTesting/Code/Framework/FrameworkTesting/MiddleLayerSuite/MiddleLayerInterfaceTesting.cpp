@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.1.0 (2020/06/26 15:27)
 
 #include "MiddleLayerInterfaceTesting.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/AssertMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
 #include "Framework/WindowCreate/WindowPoint.h"
@@ -68,7 +68,7 @@ void Framework::MiddleLayerInterfaceTesting
 
 	ASSERT_TRUE(middleLayer.Paint());
 	ASSERT_TRUE(middleLayer.Move(point));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide, size));
+	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, size));
 
 	ASSERT_TRUE(middleLayer.KeyUp(0, point));
 	ASSERT_TRUE(middleLayer.KeyDown(0, point));

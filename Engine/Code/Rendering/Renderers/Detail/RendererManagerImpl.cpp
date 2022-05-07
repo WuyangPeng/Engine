@@ -1,44 +1,46 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/29 10:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 16:47)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererManagerImpl.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Renderers/Renderer.h"
-
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
 #include "CoreTools/Base/UniqueIDManagerDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/Renderers/Renderer.h"
 
 using std::string;
 
-Rendering::RendererManagerImpl::RendererManagerImpl(MAYBE_UNUSED int count) noexcept
-    : m_Renderers()
+Rendering::RendererManagerImpl::RendererManagerImpl() noexcept
+    : renderers{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererManagerImpl)
 
-int64_t Rendering::RendererManagerImpl::Insert(RendererPtr ptr)
+int64_t Rendering::RendererManagerImpl::Insert(const RendererSharedPtr& renderer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    for (const auto& value : m_Renderers)
+    for (const auto& value : renderers)
     {
-        const auto& renderer = value.second.lock();
-        if (renderer == ptr)
+        const auto& current = value.second.lock();
+        if (current == renderer)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("重复插入渲染器，是否调用多次Init。"s));
         }
     }
 
     auto id = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(CoreTools::UniqueIDSelect::Renderer);
-    m_Renderers.insert({ id, ptr });
+    renderers.emplace(id, renderer);
 
     return id;
 }
@@ -47,481 +49,369 @@ bool Rendering::RendererManagerImpl::Erase(int64_t rendererID)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return 0 < m_Renderers.erase(rendererID);
+    return 0 < renderers.erase(rendererID);
 }
 
-void Rendering::RendererManagerImpl::BindAll(VertexFormatConstPtr vertexFormat)
+void Rendering::RendererManagerImpl::BindAll(const ConstVertexFormatSharedPtr& vertexFormat)
 {
     RENDERING_CLASS_IS_VALID_9;
 
- //   if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexFormat))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstVertexFormatSharedPtr pointer{ vertexFormat };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(vertexFormat);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManagerImpl::BindAll(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstVertexBufferSharedPtr pointer{ vertexBuffer };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(vertexBuffer);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManagerImpl::BindAll(const ConstIndexBufferSharedPtr& indexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
- //   if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstIndexBufferSharedPtr pointer{ indexBuffer };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(indexBuffer);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(Texture1DConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(const ConstTexture1DSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture1DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(Texture2DConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(const ConstTexture2DSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-//    if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture2DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(Texture3DConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(const ConstTexture3DSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture3DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(TextureCubeConstPtr texture)
+void Rendering::RendererManagerImpl::BindAll(const ConstTextureCubeSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTextureCubeSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(RenderTargetConstPtr renderTarget)
+void Rendering::RendererManagerImpl::BindAll(const ConstRenderTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-//    if (SMART_POINTER_SINGLETON.IsSmartPointer(renderTarget))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstRenderTargetSharedPtr pointer{ renderTarget };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Bind(pointer);
-            }
+            value->Bind(renderTarget);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(VertexShaderConstPtr vertexShader)
-{
-    RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DisableNoexcept();
-
-    // for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
-    {
-        vertexShader;
-        //         auto renderer = *iter;
-        //
-        // 		if (renderer)
-        // 		{
-        // 			renderer->Bind(vertexShader);
-        // 		}
-    }
-}
-
-void Rendering::RendererManagerImpl::BindAll(PixelShaderConstPtr pixelShader)
-{
-    RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DisableNoexcept();
-    //    for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
-    {
-        pixelShader;
-        //         RendererSharedPtr renderer = iter->lock();
-        //
-        //         if(renderer)
-        //             renderer->Bind(pixelShader);
-    }
-}
-
-void Rendering::RendererManagerImpl::UnbindAll(VertexFormatConstPtr vertexFormat)
+void Rendering::RendererManagerImpl::BindAll(const ConstVertexShaderSharedPtr& vertexShader)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    //if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexFormat))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstVertexFormatSharedPtr pointer{ vertexFormat };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Bind(vertexShader);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManagerImpl::BindAll(const ConstPixelShaderSharedPtr& pixelShader)
 {
     RENDERING_CLASS_IS_VALID_9;
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
+
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstVertexBufferSharedPtr pointer{ vertexBuffer };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Bind(pixelShader);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstVertexFormatSharedPtr& vertexFormat)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstIndexBufferSharedPtr pointer{ indexBuffer };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Unbind(vertexFormat);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(Texture1DConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture1DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Unbind(vertexBuffer);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(Texture2DConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstIndexBufferSharedPtr& indexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture2DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Unbind(indexBuffer);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(Texture3DConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstTexture1DSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture3DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Unbind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(TextureCubeConstPtr texture)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstTexture2DSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTextureCubeSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Unbind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(RenderTargetConstPtr renderTarget)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstTexture3DSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(renderTarget))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstRenderTargetSharedPtr pointer{ renderTarget };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Unbind(pointer);
-            }
+            value->Unbind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(VertexShaderConstPtr vertexShader)
-{
-    RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DisableNoexcept();
-    //    for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
-    {
-        vertexShader;
-        //         RendererSharedPtr renderer = iter->lock();
-        //
-        //         if(renderer)
-        //             renderer->Unbind(vertexShader);
-    }
-}
-
-void Rendering::RendererManagerImpl::UnbindAll(PixelShaderConstPtr pixelShader)
-{
-    RENDERING_CLASS_IS_VALID_9;
-    CoreTools::DisableNoexcept();
-    //    for (auto iter = m_Renderers.begin(),end = m_Renderers.end();iter != end; ++iter)
-    {
-        pixelShader;
-        //         RendererSharedPtr renderer = iter->lock();
-        //
-        //         if(renderer)
-        //             renderer->Unbind(pixelShader);
-    }
-}
-
-void Rendering::RendererManagerImpl::UpdateAll(VertexBufferConstPtr vertexBuffer)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstTextureCubeSharedPtr& texture)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(vertexBuffer))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstVertexBufferSharedPtr pointer{ vertexBuffer };
-
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Update(pointer);
-            }
+            value->Unbind(texture);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UpdateAll(IndexBufferConstPtr indexBuffer)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstRenderTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(indexBuffer))
+
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstIndexBufferSharedPtr pointer{ indexBuffer };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Update(pointer);
-            }
+            value->Unbind(renderTarget);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UpdateAll(Texture1DConstPtr texture, int level)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstVertexShaderSharedPtr& vertexShader)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-  //  if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture1DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Update(pointer, level);
-            }
+            value->Unbind(vertexShader);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UpdateAll(Texture2DConstPtr texture, int level)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstPixelShaderSharedPtr& pixelShader)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture2DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Update(pointer, level);
-            }
+            value->Unbind(pixelShader);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UpdateAll(Texture3DConstPtr texture, int level)
+void Rendering::RendererManagerImpl::UpdateAll(const ConstVertexBufferSharedPtr& vertexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTexture3DSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Update(pointer, level);
-            }
+            value->Update(vertexBuffer);
         }
     }
 }
 
-void Rendering::RendererManagerImpl::UpdateAll(TextureCubeConstPtr texture, int face, int level)
+void Rendering::RendererManagerImpl::UpdateAll(const ConstIndexBufferSharedPtr& indexBuffer)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-   // if (SMART_POINTER_SINGLETON.IsSmartPointer(texture))
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
     {
-        ConstTextureCubeSharedPtr pointer{ texture };
-        const auto end = m_Renderers.end();
-        for (auto iter = m_Renderers.begin(); iter != end; ++iter)
+        const auto& value = iter->second.lock();
+        if (value)
         {
-            const auto& value = iter->second.lock();
-            if (value)
-            {
-                value->Update(pointer, face, level);
-            }
+            value->Update(indexBuffer);
+        }
+    }
+}
+
+void Rendering::RendererManagerImpl::UpdateAll(const ConstTexture1DSharedPtr& texture, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
+    {
+        const auto& value = iter->second.lock();
+        if (value)
+        {
+            value->Update(texture, level);
+        }
+    }
+}
+
+void Rendering::RendererManagerImpl::UpdateAll(const ConstTexture2DSharedPtr& texture, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
+    {
+        const auto& value = iter->second.lock();
+        if (value)
+        {
+            value->Update(texture, level);
+        }
+    }
+}
+
+void Rendering::RendererManagerImpl::UpdateAll(const ConstTexture3DSharedPtr& texture, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
+    {
+        const auto& value = iter->second.lock();
+        if (value)
+        {
+            value->Update(texture, level);
+        }
+    }
+}
+
+void Rendering::RendererManagerImpl::UpdateAll(const ConstTextureCubeSharedPtr& texture, int face, int level)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    for (auto iter = renderers.begin(); iter != renderers.end(); ++iter)
+    {
+        const auto& value = iter->second.lock();
+        if (value)
+        {
+            value->Update(texture, face, level);
         }
     }
 }

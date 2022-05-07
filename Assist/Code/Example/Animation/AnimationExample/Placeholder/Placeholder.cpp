@@ -6,13 +6,12 @@
 
 #include "Example/Animation/AnimationExample/AnimationExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/AnimationClassInvariantMacro.h"
 
-AnimationExample::Placeholder
-	::Placeholder() 
+AnimationExample::Placeholder ::Placeholder() noexcept
 {
-	ANIMATION_SELF_CLASS_IS_VALID_9;
+    ANIMATION_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(AnimationExample, Placeholder)

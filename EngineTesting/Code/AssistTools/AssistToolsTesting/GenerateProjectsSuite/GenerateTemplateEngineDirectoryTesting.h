@@ -37,7 +37,7 @@ namespace AssistTools
 		void MiddleLayerVcxprojFiltersExistTest(const System::String& managerName); 
 		void EnvironmentVariableExistTest();
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

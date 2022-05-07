@@ -1,47 +1,45 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 17:20)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowHBrush.h"
 #include "System/Windows/WindowsRegister.h"
-#include "CoreTools/Helper/LogMacro.h"  
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
- 
-Framework::WindowHBrush
-	::WindowHBrush(WindowBrushTypes background) noexcept
-	:m_HBrush{ System::GetSystemStockObject(background) }
-{
-	CheckUpHBrush();
+#include "CoreTools/Helper/LogMacro.h"
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+Framework::WindowHBrush::WindowHBrush(WindowsBrushTypes background) noexcept
+    : hBrush{ System::GetSystemStockObject(background) }
+{
+    CheckUpHBrush();
+
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
- 
-// private
-void Framework::WindowHBrush
-	::CheckUpHBrush() noexcept
-{
-	if (m_HBrush == nullptr)
-	{
-		m_HBrush = System::GetSystemStockObject(WindowBrushTypes::WhiteBrush);
 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
-			<< SYSTEM_TEXT("加载背景画刷失败！")
-			<< LOG_SINGLETON_TRIGGER_ASSERT;
-	}
+// private
+void Framework::WindowHBrush::CheckUpHBrush() noexcept
+{
+    if (hBrush == nullptr)
+    {
+        hBrush = System::GetSystemStockObject(WindowsBrushTypes::WhiteBrush);
+
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
+            << SYSTEM_TEXT("加载背景画刷失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowHBrush)
 
-System::WindowsHBrush Framework::WindowHBrush
-	::GetHBrush() const noexcept
+System::WindowsHBrush Framework::WindowHBrush::GetHBrush() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return static_cast<HBrush>(m_HBrush);
+    return static_cast<HBrush>(hBrush);
 }
-
-

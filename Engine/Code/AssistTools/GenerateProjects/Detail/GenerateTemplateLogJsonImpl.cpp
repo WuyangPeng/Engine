@@ -1,41 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 11:09)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateLogJsonImpl.h"
-#include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h" 
 #include "System/Helper/PragmaWarning.h"
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTemplateLogJsonImpl
-	::sm_Extension(SYSTEM_TEXT(".json"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTemplateLogJsonImpl
-	::GenerateTemplateLogJsonImpl(const System::String& templateFileName, const System::String& projectName)
-	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName)
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTemplateLogJsonImpl::extension{ SYSTEM_TEXT(".json"s) };
+
+AssistTools::GenerateTemplateLogJsonImpl::GenerateTemplateLogJsonImpl(const System::String& templateFileName, const System::String& projectName)
+    : ParentType{ templateFileName, extension }, projectName{ projectName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateLogJsonImpl)
 
-void AssistTools::GenerateTemplateLogJsonImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newFileName) const
+void AssistTools::GenerateTemplateLogJsonImpl::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newFileName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable;
-	newVariable.insert(make_pair(m_ProjectName, solutionName));
+    VariableType newVariable{ { projectName, solutionName } };
 
-	return ParentType::Generate (resourceDirectory, newFileName, newVariable);
+    return ParentType::Generate(resourceDirectory, newFileName, newVariable);
 }
- 
 
 /*
 示例模板： 

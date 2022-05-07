@@ -8,20 +8,17 @@
 
 #include "Example/AssistTools/AssistToolsExample/AssistToolsExample.h"
 
-
-
 #ifndef BUILDING_ASSIST_TOOLS_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_ASSIST_TOOLS_EXAMPLE_STATIC
+#else  // BUILDING_ASSIST_TOOLS_EXAMPLE_STATIC
 
-	namespace AssistToolsExample
-	{
-		void StaticDllLib()
-		{
+namespace AssistToolsExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_ASSIST_TOOLS_EXAMPLE_STATIC
+#endif  // !BUILDING_ASSIST_TOOLS_EXAMPLE_STATIC

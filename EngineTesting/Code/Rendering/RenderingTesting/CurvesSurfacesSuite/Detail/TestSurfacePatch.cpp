@@ -25,7 +25,7 @@ Rendering::TestSurfacePatch::TestSurfacePatch(float uMin, float uMax, float vMin
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TestSurfacePatch)
 
-const Rendering::TestSurfacePatch::APoint Rendering::TestSurfacePatch::GetPosition(float u, float v) const
+Rendering::TestSurfacePatch::APoint Rendering::TestSurfacePatch::GetPosition(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -33,7 +33,7 @@ const Rendering::TestSurfacePatch::APoint Rendering::TestSurfacePatch::GetPositi
     return APoint(u, v, 0.0f);
 }
 
-const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesU(float u, [[maybe_unused]] float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesU(float u, [[maybe_unused]] float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -41,7 +41,7 @@ const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDeriv
     return AVector::GetUnitX() * u;
 }
 
-const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesV([[maybe_unused]] float u, float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesV([[maybe_unused]] float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -49,7 +49,7 @@ const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDeriv
     return AVector::GetUnitY() * v;
 }
 
-const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUU(float u, [[maybe_unused]] float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUU(float u, [[maybe_unused]] float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -57,7 +57,7 @@ const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDeriv
     return AVector::GetUnitX() * u + AVector::GetUnitY() * u;
 }
 
-const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUV(float u, float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUV(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -65,7 +65,7 @@ const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDeriv
     return AVector::GetUnitX() * u + AVector::GetUnitY() * v;
 }
 
-const Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesVV([[maybe_unused]] float u, float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesVV([[maybe_unused]] float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");

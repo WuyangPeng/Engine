@@ -5,6 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/09 16:40)
 
 #include "BoundTreeChildTesting.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -18,16 +19,22 @@
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Physics/CollisionDetection/BoundTreeDetail.h"
-
 #include <random>
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26435)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26498)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26451)
+#include SYSTEM_WARNING_DISABLE(26490)
 using CoreTools::WriteFileManager;
 using std::vector;
 
 namespace Physics
 {
-    template class BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound>;
-    template class BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound>;
+    template class BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
+    template class BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Physics, BoundTreeChildTesting)
@@ -142,19 +149,19 @@ void Physics::BoundTreeChildTesting ::InitTest()
 {
     Rendering::VisualSharedPtr firstTrianglesMesh = Rendering::LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/CollisionDetectionSuite/TrianglesMesh.trv"));
 
-    Rendering::TrianglesMeshSharedPtr secondTrianglesMesh;  //        = firstTrianglesMesh.PolymorphicDowncastObjectSmartPointer<Rendering::TrianglesMeshSmartPointer>();
+    Rendering::TrianglesMeshSharedPtr secondTrianglesMesh = boost::polymorphic_pointer_cast<Rendering::TrianglesMesh>(firstTrianglesMesh);
 
-    typedef BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound> BoundTree;
+    using BoundTree = BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
     BoundTree firstBoundTree(secondTrianglesMesh, 1, true);
 
-    typedef BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::FloatBound> BoundTreeChild;
+    typedef BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF> BoundTreeChild;
 
-    BoundTree::BoundTreeChildPtr firstChild = firstBoundTree.GetBeginChild();
+    BoundTree::BoundTreeChildSharedPtr firstChild = firstBoundTree.GetBeginChild();
 
     int numTriangles = secondTrianglesMesh->GetNumTriangles();
 
-    vector<BoundTree::BoundTreeChildPtr> leftChild;
-    vector<BoundTree::BoundTreeChildPtr> rightChild;
+    vector<BoundTree::BoundTreeChildSharedPtr> leftChild;
+    vector<BoundTree::BoundTreeChildSharedPtr> rightChild;
 
     leftChild.push_back(firstChild);
 
@@ -168,10 +175,10 @@ void Physics::BoundTreeChildTesting ::InitTest()
     {
         int sumTriangles = 0;
         vector<int> triangles;
-        vector<BoundTree::BoundTreeChildPtr> newLeftChild;
-        vector<BoundTree::BoundTreeChildPtr> newRightChild;
+        vector<BoundTree::BoundTreeChildSharedPtr> newLeftChild;
+        vector<BoundTree::BoundTreeChildSharedPtr> newRightChild;
 
-        for (BoundTree::BoundTreeChildPtr child : leftChild)
+        for (BoundTree::BoundTreeChildSharedPtr child : leftChild)
         {
             sumTriangles += child->GetNumTriangles();
             ASSERT_TRUE(child->GetNumTriangles() == i ||
@@ -207,7 +214,7 @@ void Physics::BoundTreeChildTesting ::InitTest()
             }
         }
 
-        for (BoundTree::BoundTreeChildPtr child : rightChild)
+        for (BoundTree::BoundTreeChildSharedPtr child : rightChild)
         {
             vector<int> childTriangles = child->GetTriangles();
             triangles.insert(triangles.end(), childTriangles.begin(),
@@ -249,6 +256,6 @@ void Physics::BoundTreeChildTesting ::InitTest()
 
         sort(triangles.begin(), triangles.end());
 
-        ASSERT_EQUAL_DO_NOT_USE_MESSAGE(resultTriangles, triangles);
+        ASSERT_EQUAL(resultTriangles, triangles);
     }
 }

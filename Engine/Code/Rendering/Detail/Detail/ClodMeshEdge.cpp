@@ -1,97 +1,88 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 18:41)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ClodMeshEdge.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26472)
-Rendering::ClodMeshEdge
-	::ClodMeshEdge() noexcept
-	:m_AdjTriangles{}, m_MinHeapRecordIndex{}
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+
+Rendering::ClodMeshEdge::ClodMeshEdge() noexcept
+    : adjTriangles{}, minHeapRecordIndex{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ClodMeshEdge)
 
-void Rendering::ClodMeshEdge
-	::InsertTriangleKey(const TriangleKey& triangleKey)
+void Rendering::ClodMeshEdge::InsertTriangleKey(const TriangleKey& triangleKey)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_AdjTriangles.insert(triangleKey);
+    adjTriangles.insert(triangleKey);
 }
 
-int Rendering::ClodMeshEdge
-	::GetTriangleKeySize() const noexcept
+int Rendering::ClodMeshEdge::GetTriangleKeySize() const  
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return static_cast<int>(m_AdjTriangles.size());
+    return boost::numeric_cast<int>(adjTriangles.size());
 }
 
-Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge
-	::GetTriangleKeyBegin() const noexcept
+Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge::GetTriangleKeyBegin() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_AdjTriangles.begin();
+    return adjTriangles.begin();
 }
 
-Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge
-	::GetTriangleKeyEnd() const noexcept
+Rendering::ClodMeshEdge::TriangleKeySetConstIter Rendering::ClodMeshEdge::GetTriangleKeyEnd() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_AdjTriangles.end();
+    return adjTriangles.end();
 }
 
-int Rendering::ClodMeshEdge
-	::GetMinHeapRecordIndex() const noexcept
+int Rendering::ClodMeshEdge::GetMinHeapRecordIndex() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-	return m_MinHeapRecordIndex;
+    return minHeapRecordIndex;
 }
 
-void Rendering::ClodMeshEdge
-	::SetMinHeapRecordIndex(int index) noexcept
+void Rendering::ClodMeshEdge::SetMinHeapRecordIndex(int index) noexcept
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_MinHeapRecordIndex = index;
+    minHeapRecordIndex = index;
 }
 
-void Rendering::ClodMeshEdge
-	::EraseTriangleKey(const TriangleKey& triangleKey)
+void Rendering::ClodMeshEdge::EraseTriangleKey(const TriangleKey& triangleKey)
 {
-	RENDERING_CLASS_IS_VALID_9;
+    RENDERING_CLASS_IS_VALID_9;
 
-	m_AdjTriangles.erase(triangleKey);
+    adjTriangles.erase(triangleKey);
 }
 
-const Rendering::ClodMeshEdge::TriangleKey Rendering::ClodMeshEdge
-	::GetBeginTriangleKey() const
+Rendering::ClodMeshEdge::TriangleKey Rendering::ClodMeshEdge::GetBeginTriangleKey() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(!m_AdjTriangles.empty(), "三角形键值集合不能为空！");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(!adjTriangles.empty(), "三角形键值集合不能为空！");
 
-	return *m_AdjTriangles.begin();
+    return *adjTriangles.begin();
 }
 
-const Rendering::ClodMeshEdge::TriangleKey Rendering::ClodMeshEdge
-	::GetEndTriangleKey() const
+Rendering::ClodMeshEdge::TriangleKey Rendering::ClodMeshEdge::GetEndTriangleKey() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_9;
-	RENDERING_ASSERTION_0(!m_AdjTriangles.empty(), "三角形键值集合不能为空！");
+    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_ASSERTION_0(!adjTriangles.empty(), "三角形键值集合不能为空！");
 
-	return *m_AdjTriangles.rbegin();
+    return *adjTriangles.rbegin();
 }
-#include STSTEM_WARNING_POP

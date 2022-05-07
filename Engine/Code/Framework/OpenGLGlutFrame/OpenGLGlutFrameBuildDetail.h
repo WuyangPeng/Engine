@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 15:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 13:59)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_DETAIL_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_FRAME_BUILD_DETAIL_H
@@ -21,8 +24,11 @@
 
 template <typename OpenGLGlutProcess>
 Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLGlutFrameBuild(const GLUTApplicationInformation& glutInformation, const EnvironmentDirectory& environmentDirectory)
-    : m_OpenGLGlutProcess{ System::g_Microseconds / sm_Interval }, m_GLUTInformation{ glutInformation }, m_WindowID{ 0 }, m_MenuID{ 0 },
-      m_RendererParameter{ GetRendererParameter(environmentDirectory) }
+    : openGLGlutProcess{ System::g_Microseconds / interval },
+      glutInformation{ glutInformation },
+      windowID{ 0 },
+      menuID{ 0 },
+      rendererParameter{ GetRendererParameter(environmentDirectory) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -34,14 +40,16 @@ std::string Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::GetRendererParam
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::IsValid() const noexcept
 {
-    if (0 <= m_WindowID && 0 <= m_MenuID)
+    if (0 <= windowID && 0 <= menuID)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename OpenGLGlutProcess>
@@ -67,7 +75,7 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::PreCreate()
 {
     CLASS_IS_VALID;
 
-    return m_OpenGLGlutProcess.PreCreate();
+    return openGLGlutProcess.PreCreate();
 }
 
 // private
@@ -76,15 +84,15 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary
 {
     System::GlutInit(&argc, argv);
 
-    System::GlutInitDisplayMode(0 < m_RendererParameter.GetNumMultisamples());
+    System::GlutInitDisplayMode(0 < rendererParameter.GetNumMultisamples());
 
-    System::GlutInitWindowPosition(m_RendererParameter.GetXPosition(), m_RendererParameter.GetYPosition());
-    System::GlutInitWindowSize(m_RendererParameter.GetWidth(), m_RendererParameter.GetHeight());
-    System::GlutInitContextVersion(m_GLUTInformation.GetOpenGLMajorVersion(), m_GLUTInformation.GetOpenGLMinorVersion());
+    System::GlutInitWindowPosition(rendererParameter.GetXPosition(), rendererParameter.GetYPosition());
+    System::GlutInitWindowSize(rendererParameter.GetWidth(), rendererParameter.GetHeight());
+    System::GlutInitContextVersion(glutInformation.GetOpenGLMajorVersion(), glutInformation.GetOpenGLMinorVersion());
 
     System::GlutSetOption(System::GlutOption::WindowClose, System::EnumCastUnderlying(System::GlutExtension::GlutMainLoopReturns));
 
-    [[maybe_unused]] const auto result = System::RemoveConsoleCloseButton();
+    MAYBE_UNUSED const auto result = System::RemoveConsoleCloseButton();
 
     return true;
 }
@@ -93,16 +101,16 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::InitGlutFunctionLibrary
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::CreateGlutWindow()
 {
-    m_WindowID = System::GlutCreateWindow(m_RendererParameter.GetWindowTitle());
+    windowID = System::GlutCreateWindow(rendererParameter.GetWindowTitle());
 
-    if (m_WindowID == 0)
+    if (windowID == 0)
     {
         return false;
     }
     else
     {
-        m_OpenGLGlutProcess.SetWindowID(m_WindowID);
-        m_OpenGLGlutProcess.SetMillisecond(System::EnumCastUnderlying(m_GLUTInformation.GetFrame()));
+        openGLGlutProcess.SetWindowID(windowID);
+        openGLGlutProcess.SetMillisecond(System::EnumCastUnderlying(glutInformation.GetFrame()));
 
         return true;
     }
@@ -112,20 +120,20 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::CreateGlutWindow()
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::SetCallBackFunction() noexcept
 {
-    System::GlutReshapeFunc(m_OpenGLGlutProcess.GetChangeSizeCallback());
-    System::GlutDisplayFunc(m_OpenGLGlutProcess.GetRenderSceneCallback());
-    System::GlutIdleFunc(m_OpenGLGlutProcess.GetIdleFunctionCallback());
-    System::GlutKeyboardFunc(m_OpenGLGlutProcess.GetKeyboardDownCallback());
-    System::GlutSpecialFunc(m_OpenGLGlutProcess.GetSpecialKeysDownCallback());
-    System::GlutKeyboardUpFunc(m_OpenGLGlutProcess.GetKeyboardUpCallback());
-    System::GlutSpecialUpFunc(m_OpenGLGlutProcess.GetSpecialKeysUpCallback());
-    System::GlutMouseFunc(m_OpenGLGlutProcess.GetMouseFunctionCallback());
-    System::GlutMotionFunc(m_OpenGLGlutProcess.GetMotionFunctionCallback());
-    System::GlutPassiveMotionFunc(m_OpenGLGlutProcess.GetPassiveMotionCallback());
-    System::GlutTimerFunc(System::EnumCastUnderlying(m_GLUTInformation.GetFrame()), m_OpenGLGlutProcess.GetTimerFunctionCallback(), 1);
+    System::GlutReshapeFunc(openGLGlutProcess.GetChangeSizeCallback());
+    System::GlutDisplayFunc(openGLGlutProcess.GetRenderSceneCallback());
+    System::GlutIdleFunc(openGLGlutProcess.GetIdleFunctionCallback());
+    System::GlutKeyboardFunc(openGLGlutProcess.GetKeyboardDownCallback());
+    System::GlutSpecialFunc(openGLGlutProcess.GetSpecialKeysDownCallback());
+    System::GlutKeyboardUpFunc(openGLGlutProcess.GetKeyboardUpCallback());
+    System::GlutSpecialUpFunc(openGLGlutProcess.GetSpecialKeysUpCallback());
+    System::GlutMouseFunc(openGLGlutProcess.GetMouseFunctionCallback());
+    System::GlutMotionFunc(openGLGlutProcess.GetMotionFunctionCallback());
+    System::GlutPassiveMotionFunc(openGLGlutProcess.GetPassiveMotionCallback());
+    System::GlutTimerFunc(System::EnumCastUnderlying(glutInformation.GetFrame()), openGLGlutProcess.GetTimerFunctionCallback(), 1);
 
     // 注册终止函数，这样我们就可以在GLUT调用exit前销毁窗口。
-    if (atexit(m_OpenGLGlutProcess.GetTerminateCallback()) != 0)
+    if (atexit(openGLGlutProcess.GetTerminateCallback()) != 0)
     {
         return false;
     }
@@ -153,9 +161,9 @@ bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLInit()
 template <typename OpenGLGlutProcess>
 bool Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::CreateMenu() noexcept
 {
-    m_MenuID = System::GlutCreateMenu(m_OpenGLGlutProcess.GetProcessMenuCallback());
+    menuID = System::GlutCreateMenu(openGLGlutProcess.GetProcessMenuCallback());
 
-    if (m_MenuID == 0)
+    if (menuID == 0)
         return false;
 
     return true;
@@ -166,9 +174,9 @@ void Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::RunOpenGLGlutMainLoop()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (m_OpenGLGlutProcess.Initialize())
+    if (openGLGlutProcess.Initialize())
     {
-        m_OpenGLGlutProcess.PreIdle();
+        openGLGlutProcess.PreIdle();
 
         System::GlutMainLoop();
     }

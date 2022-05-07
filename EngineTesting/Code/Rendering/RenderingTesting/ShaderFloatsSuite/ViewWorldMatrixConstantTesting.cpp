@@ -22,6 +22,7 @@
 
 #include "Mathematics/Algebra/MatrixDetail.h"
 
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include <random>
 
 using std::vector;
@@ -50,7 +51,7 @@ void Rendering::ViewWorldMatrixConstantTesting::MainTest()
 void Rendering::ViewWorldMatrixConstantTesting::InitTest()
 {
     constexpr int numRegisters = 4;
-    ViewWorldMatrixConstant firstShaderFloat;
+    ViewWorldMatrixConstant firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
     ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), numRegisters);
 
     firstShaderFloat.SetNumRegisters(numRegisters);
@@ -72,12 +73,12 @@ void Rendering::ViewWorldMatrixConstantTesting::InitTest()
         ASSERT_APPROXIMATE(firstData[i], firstShaderFloat.GetRegisters()[i], 1e-8f);
     }
 
-    const ViewWorldMatrixConstant secondShaderFloat;
+    const ViewWorldMatrixConstant secondShaderFloat{ CoreTools::DisableNotThrow::Disable };
     ASSERT_EQUAL(secondShaderFloat.GetNumRegisters(), numRegisters);
     ASSERT_UNEQUAL_NULL_PTR(secondShaderFloat.GetData());
     ASSERT_TRUE(secondShaderFloat.AllowUpdater());
 
-    ViewWorldMatrixConstant thirdShaderFloat;
+    ViewWorldMatrixConstant thirdShaderFloat{ CoreTools::DisableNotThrow::Disable };
     ASSERT_EQUAL(thirdShaderFloat.GetNumRegisters(), numRegisters);
 
     ASSERT_UNEQUAL_NULL_PTR(thirdShaderFloat.GetData());
@@ -120,7 +121,7 @@ void Rendering::ViewWorldMatrixConstantTesting::InitTest()
 
 void Rendering::ViewWorldMatrixConstantTesting::CopyTest()
 {
-    ViewWorldMatrixConstant firstShaderFloat;
+    ViewWorldMatrixConstant firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
     ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), 4);
 
     ViewWorldMatrixConstant secondShaderFloat(firstShaderFloat);
@@ -137,7 +138,7 @@ void Rendering::ViewWorldMatrixConstantTesting::CopyTest()
         ASSERT_APPROXIMATE(firstShaderFloat[registerIndex], static_cast<float>(registerIndex), 1e-8f);
     }
 
-    ViewWorldMatrixConstant thirdShaderFloat;
+    ViewWorldMatrixConstant thirdShaderFloat{ CoreTools::DisableNotThrow::Disable };
     thirdShaderFloat = firstShaderFloat;
     firstShaderFloat = secondShaderFloat;
 

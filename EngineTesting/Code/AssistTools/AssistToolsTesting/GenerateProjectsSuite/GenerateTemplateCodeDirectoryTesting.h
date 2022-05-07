@@ -42,7 +42,7 @@ namespace AssistTools
 		void EngineExistTest(const System::String& managerName, const System::String& resultSuffix);
 		void MiddleLayerEngineExistTest(const System::String& managerName, const System::String& resultSuffix);
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

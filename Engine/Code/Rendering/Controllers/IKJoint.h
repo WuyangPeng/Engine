@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 15:55)
 
 #ifndef RENDERING_CONTROLLERS_IKJOINT_H
 #define RENDERING_CONTROLLERS_IKJOINT_H
@@ -10,28 +13,22 @@
 #include "Rendering/RenderingDll.h"
 
 #include "IKGoal.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "Rendering/SceneGraph/Spatial.h"
 
-EXPORT_SHARED_PTR(Rendering, IKJointImpl, RENDERING_DEFAULT_DECLARE);
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(IKJoint, IKJointImpl);
+
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE IKJoint : public CoreTools::Object
     {
     public:
-        void Swap(IKJoint& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(IKJoint);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~IKJoint() noexcept = default;
-        IKJoint(const IKJoint& rhs);
-        IKJoint& operator=(const IKJoint& rhs);
-        IKJoint(IKJoint&& rhs) noexcept;
-        IKJoint& operator=(IKJoint&& rhs) noexcept;
+        COPY_UNSHARED_TYPE_DECLARE(IKJoint);
         using ParentType = Object;
         using APoint = Mathematics::APointF;
         using AVector = Mathematics::AVectorF;
-        using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
+        using IKGoalSharedPtrVector = std::vector<CoreTools::ObjectAssociated<IKGoal>>;
         using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 
     public:
@@ -43,34 +40,34 @@ namespace Rendering
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
         // Joint更新。
-        const AVector GetAxis(MatrixRotationAxis axisIndex) const;
+        NODISCARD AVector GetAxis(MatrixRotationAxis axisIndex) const;
         void UpdateWorldTransform();
         void UpdateWorldRotateAndTranslate() noexcept(g_Assert < 2 || g_RenderingAssert < 2);
-        bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
-        bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
+        NODISCARD bool UpdateLocalTranslate(MatrixRotationAxis axisIndex);
+        NODISCARD bool UpdateLocalRotate(MatrixRotationAxis axisIndex);
 
-        const ConstSpatialSharedPtr GetObjectSharedPtr() const noexcept;
-        const ConstIKGoalSharedPtr GetGoalsSharedPtr(int index) const;
-        int GetGoalsNum() const;
+        NODISCARD ConstSpatialSharedPtr GetObjectSharedPtr() const noexcept;
+        NODISCARD ConstIKGoalSharedPtr GetGoalsSharedPtr(int index) const;
+        NODISCARD int GetGoalsNum() const;
 
         void SetAllowTranslation(MatrixRotationAxis axisIndex, bool allowTranslation);
         void SetAllowRotation(MatrixRotationAxis axisIndex, bool allowRotation);
 
-        bool IsAllowTranslation(MatrixRotationAxis axisIndex) const;
-        bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
-        ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD bool IsAllowTranslation(MatrixRotationAxis axisIndex) const;
+        NODISCARD bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;
-
-    private:
-        ImplPtr impl;
+        PackageType impl;
     };
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(IKJoint);
+
 #include STSTEM_WARNING_POP
+
     CORE_TOOLS_SHARED_PTR_DECLARE(IKJoint);
 }
 

@@ -10,18 +10,20 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h" 
 
+using namespace std::literals;
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateManager)
 
 void AssistTools::GenerateTemplateManagerTesting
-    ::MainTest()
+   ::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerDllH.txt"), SYSTEM_TEXT("Dll"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerExportH.txt"), SYSTEM_TEXT("Export"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerFwdH.txt"), SYSTEM_TEXT("Fwd"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerH.txt"), SYSTEM_TEXT(""));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerImportH.txt"), SYSTEM_TEXT("Import"));
-	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"), SYSTEM_TEXT("NoImport"));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerDllH.txt"s), SYSTEM_TEXT("Dll"s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerExportH.txt"s), SYSTEM_TEXT("Export"s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerFwdH.txt"s), SYSTEM_TEXT("Fwd"s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerH.txt"s), SYSTEM_TEXT(""s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerImportH.txt"s), SYSTEM_TEXT("Import"s));
+	ASSERT_NOT_THROW_EXCEPTION_2(DefaultGenerateToTest, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"s), SYSTEM_TEXT("NoImport"s));
 }
 
 void AssistTools::GenerateTemplateManagerTesting

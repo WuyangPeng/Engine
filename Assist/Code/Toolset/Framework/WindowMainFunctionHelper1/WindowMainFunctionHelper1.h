@@ -22,7 +22,7 @@ namespace Framework
 		using ParentType = BaseType; 
 
 	public:
-		WindowMainFunctionHelper1(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,
+                WindowMainFunctionHelper1(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information,
 								  const EnvironmentDirectory& environmentDirectory);
 
 		CLASS_INVARIANT_FINAL_DECLARE;

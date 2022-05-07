@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 11:42)
 
 #include "Framework/FrameworkExport.h"
 
@@ -10,16 +13,15 @@
 #include "Flags/InputMiddleLayerFlags.h"
 #include "Flags/MiddleLayerPlatformFlags.h"
 #include "Detail/EngineMiddleLayerInterfaceImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::make_shared;
 
-Framework::InputManagerInterface
-	::InputManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(InputMiddleLayer::Count)  }
+Framework::InputManagerInterface::InputManagerInterface(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(InputMiddleLayer::Count) }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, InputManagerInterface)
@@ -29,26 +31,23 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Input, ObjectLogic)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Input, System)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Input, CameraSystems)
 
-bool Framework::InputManagerInterface
-	::Paint()
+bool Framework::InputManagerInterface::Paint()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::Paint();
+    return ParentType::Paint();
 }
 
-bool Framework::InputManagerInterface
-	::Move(const WindowPoint& point)
+bool Framework::InputManagerInterface::Move(const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::Move(point);
+    return ParentType::Move(point);
 }
 
-bool Framework::InputManagerInterface
-	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
+bool Framework::InputManagerInterface::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return ParentType::Resize(windowDisplay,size);
+    return ParentType::Resize(windowDisplay, size);
 }

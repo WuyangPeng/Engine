@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 11:28)
 
 #include "Framework/FrameworkExport.h"
 
@@ -12,50 +15,45 @@
 
 using std::make_shared;
 
-Framework::WindowMousePosition
-	::WindowMousePosition(HWnd hwnd) noexcept
-	:m_Hwnd{ hwnd }
+Framework::WindowMousePosition::WindowMousePosition(WindowsHWnd hwnd) noexcept
+    : hwnd{ hwnd }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowMousePosition
-	::IsValid() const noexcept
+
+bool Framework::WindowMousePosition::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_Hwnd != nullptr)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-const Framework::WindowPoint Framework::WindowMousePosition
-	::GetMousePosition() const noexcept
-{
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
-
-	System::WindowsPoint point{ };
-
-[[maybe_unused]] const auto result = System::GetCursorClientPos(m_Hwnd, point);
-
-	return WindowPoint{ point };
+    if (ParentType::IsValid() && hwnd != nullptr)
+        return true;
+    else
+        return false;
 }
 
-void Framework::WindowMousePosition
-	::SetMousePosition(const WindowPoint& windowPoint) noexcept
+#endif  // OPEN_CLASS_INVARIANT
+
+Framework::WindowPoint Framework::WindowMousePosition::GetMousePosition() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	System::WindowsPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
+    System::WindowsPoint point{};
 
-	[[maybe_unused]] const auto result = System::SetCursorClientPos(m_Hwnd, point);
+    MAYBE_UNUSED const auto result = System::GetCursorClientPos(hwnd, point);
+
+    return WindowPoint{ point };
 }
 
-Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition ::Clone() const
+void Framework::WindowMousePosition::SetMousePosition(const WindowPoint& windowPoint) noexcept
 {
-	return make_shared<ClassType>(m_Hwnd);
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    System::WindowsPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
+
+    MAYBE_UNUSED const auto result = System::SetCursorClientPos(hwnd, point);
 }
 
-
-
+Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition::Clone() const
+{
+    return make_shared<ClassType>(hwnd);
+}

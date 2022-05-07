@@ -17,19 +17,19 @@ AssistTools::CopyrightDataTesting::CopyrightDataTesting(const OStreamShared& str
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, CopyrightDataTesting)
 
-void AssistTools::CopyrightDataTesting ::DoRunUnitTest()
+void AssistTools::CopyrightDataTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void AssistTools::CopyrightDataTesting ::MainTest()
+void AssistTools::CopyrightDataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
 }
 
-void AssistTools::CopyrightDataTesting ::AccessTest()
+void AssistTools::CopyrightDataTesting::AccessTest()
 {
-    int endYear = 2018;
+    constexpr int endYear = 2018;
     System::String versions(SYSTEM_TEXT("1.0.0.2"));
     System::String projectChineseName(SYSTEM_TEXT("“˝«Ê≤‚ ‘"));
 

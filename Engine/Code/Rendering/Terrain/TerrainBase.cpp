@@ -1,116 +1,106 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 10:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 17:53)
 
 #include "Rendering/RenderingExport.h"
 
 #include "TerrainBase.h"
 #include "System/CharacterString/FormatStringDetail.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-
-#include "System/Helper/PragmaWarning.h"
-#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26485)
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26496)
 CORE_TOOLS_RTTI_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TerrainBase);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TerrainBase);
 
-Rendering::TerrainBase::TerrainBase(const System::String& heightName, VertexFormatSharedPtr vformat, CameraSharedPtr camera)
-    : ParentType{ NodeCreate::Init }, mMode(0), mVFormat(vformat), mCameraRow(-1), mCameraCol(-1), mCamera(camera)
+Rendering::TerrainBase::TerrainBase(const System::String& heightName, const VertexFormatSharedPtr& vformat, const CameraSharedPtr& camera)
+    : ParentType{ NodeCreate::Init },
+      mode{ 0 },
+      vFormat{ vformat },
+      numRows{},
+      numCols{},
+      size{},
+      minElevation{},
+      maxElevation{},
+      spacing{},
+      pages{},
+      cameraRow{ -1 },
+      cameraCol{ -1 },
+      camera{ camera }
 {
-    // Load global terrain information.
     LoadHeader(heightName);
 
-    // Load terrain pages.
-    mPages = nullptr;  //NEW2<TerrainPageSharedPtr>(mNumCols, mNumRows);
-    int row = 0, col = 0;
-    for (row = 0; row < mNumRows; ++row)
+    pages.resize(numRows, std::vector<CoreTools::ObjectAssociated<TerrainPage>>(numCols));
+
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            char temp[64];
-            System::SNPrintf(temp, 64, 64, "%d.%d", row, col);
-            std::string heightSuffix(temp);
+            auto heightSuffix = std::to_string(row) + "." + std::to_string(col);
             LoadPage(row, col, heightName, CoreTools::StringConversion::MultiByteConversionStandard(heightSuffix));
         }
     }
 
-    // Attach the terrain pages to the terrain node.
-
-    //    mChild.resize(mNumRows*mNumCols);
-    for (row = 0; row < mNumRows; ++row)
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            AttachChild(mPages[row][col]);
+            AttachChild(pages.at(row).at(col).object);
         }
     }
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::TerrainBase::~TerrainBase(){
-    EXCEPTION_TRY{
-        for (int row = 0; row < mNumRows; ++row){
-            for (int col = 0; col < mNumCols; ++col){
-                mPages[row][col].reset();
-}
-}
-//DELETE2(mPages);
-}
-EXCEPTION_ALL_CATCH(Rendering)
-}
+CLASS_INVARIANT_STUB_DEFINE(Rendering, TerrainBase)
 
 Rendering::TerrainPageSharedPtr Rendering::TerrainBase::GetPage(int row, int col)
 {
-    if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
-    {
-        return mPages[row][col];
-    }
+    RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_0(false, "Invalid row or column index\n");
-    return TerrainPageSharedPtr();
+    return pages.at(row).at(col).object;
 }
 
-Rendering::TerrainPageSharedPtr Rendering::TerrainBase::GetCurrentPage(float x, float y) const noexcept
+Rendering::TerrainPageSharedPtr Rendering::TerrainBase::GetCurrentPage(float x, float y) const
 {
-    const float invLength = 1.0f / (mSpacing * (float)(mSize - 1));
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    int col = (int)Mathematics::MathF::Floor(x * invLength);
-    col %= mNumCols;
+    const auto invLength = 1.0f / (spacing * boost::numeric_cast<float>(size - 1));
+
+    auto col = boost::numeric_cast<int>(Mathematics::MathF::Floor(x * invLength));
+    col %= numCols;
     if (col < 0)
     {
-        col += mNumCols;
+        col += numCols;
     }
 
-    int row = (int)Mathematics::MathF::Floor(y * invLength);
-    row %= mNumRows;
+    auto row = boost::numeric_cast<int>(Mathematics::MathF::Floor(y * invLength));
+    row %= numRows;
     if (row < 0)
     {
-        row += mNumRows;
+        row += numRows;
     }
 
-    return mPages[row][col];
+    return pages.at(row).at(col).object;
 }
 
 float Rendering::TerrainBase::GetHeight(float x, float y) const
 {
-    TerrainPageSharedPtr page = GetCurrentPage(x, y);
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    // Subtract off the translation due to wrap-around.
+    auto page = GetCurrentPage(x, y);
+
     x -= page->GetLocalTransform().GetTranslate()[0];
     y -= page->GetLocalTransform().GetTranslate()[1];
 
@@ -119,171 +109,158 @@ float Rendering::TerrainBase::GetHeight(float x, float y) const
 
 Mathematics::AVectorF Rendering::TerrainBase::GetNormal(float x, float y) const
 {
-    const float xp = x + mSpacing;
-    const float xm = x - mSpacing;
-    const float yp = y + mSpacing;
-    const float ym = y - mSpacing;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    TerrainPageSharedPtr page = GetCurrentPage(xp, y);
-    float xtmp = xp - page->GetLocalTransform().GetTranslate()[0];
-    float ytmp = y - page->GetLocalTransform().GetTranslate()[1];
-    const float hpz = page->GetHeight(xtmp, ytmp);
+    const auto xp = x + spacing;
+    const auto xm = x - spacing;
+    const auto yp = y + spacing;
+    const auto ym = y - spacing;
+
+    auto page = GetCurrentPage(xp, y);
+    auto xtmp = xp - page->GetLocalTransform().GetTranslate()[0];
+    auto ytmp = y - page->GetLocalTransform().GetTranslate()[1];
+    const auto hpz = page->GetHeight(xtmp, ytmp);
 
     page = GetCurrentPage(xm, y);
     xtmp = xm - page->GetLocalTransform().GetTranslate()[0];
     ytmp = y - page->GetLocalTransform().GetTranslate()[1];
-    const float hmz = page->GetHeight(xtmp, ytmp);
+    const auto hmz = page->GetHeight(xtmp, ytmp);
 
     page = GetCurrentPage(x, yp);
     xtmp = x - page->GetLocalTransform().GetTranslate()[0];
     ytmp = yp - page->GetLocalTransform().GetTranslate()[1];
-    const float hzp = page->GetHeight(xtmp, ytmp);
+    const auto hzp = page->GetHeight(xtmp, ytmp);
 
     page = GetCurrentPage(x, ym);
     xtmp = x - page->GetLocalTransform().GetTranslate()[0];
     ytmp = ym - page->GetLocalTransform().GetTranslate()[1];
-    const float hzm = page->GetHeight(xtmp, ytmp);
+    const auto hzm = page->GetHeight(xtmp, ytmp);
 
-    Mathematics::AVectorF normal(hmz - hpz, hzm - hzp, 1.0f);
+    Mathematics::AVectorF normal{ hmz - hpz, hzm - hzp, 1.0f };
     normal.Normalize();
     return normal;
 }
 
 void Rendering::TerrainBase::LoadHeader(const System::String& heightName)
 {
-    // Load the data into temporary variables.  EndianCopy uses memcpy, so
-    // if you were to load directly into the class members and use memcpy,
-    // the source and destination overlap, in which case memcpy results are
-    // unpredictable.
-    System::String fileName = heightName + SYSTEM_TEXT(".wmhf");
-    CoreTools::ReadFileManager header(fileName);
-    // RENDERING_ASSERTION_0(header, "Cannot open file %s\n", fileName);
+    RENDERING_CLASS_IS_VALID_1;
 
-    header.Read(sizeof(int), &mNumRows);
-    header.Read(sizeof(int), &mNumCols);
+    auto fileName = heightName + SYSTEM_TEXT(".wmhf");
+    CoreTools::ReadFileManager header{ fileName };
 
-    unsigned short size;
-    header.Read(sizeof(unsigned short), &size);
-    mSize = (int)size;
+    header.Read(sizeof(int32_t), &numRows);
+    header.Read(sizeof(int32_t), &numCols);
 
-    header.Read(sizeof(float), &mMinElevation);
-    header.Read(sizeof(float), &mMaxElevation);
-    header.Read(sizeof(float), &mSpacing);
+    uint16_t headerSize;
+    header.Read(sizeof(uint16_t), &headerSize);
+    size = headerSize;
+
+    header.Read(sizeof(float), &minElevation);
+    header.Read(sizeof(float), &maxElevation);
+    header.Read(sizeof(float), &spacing);
 }
 
 void Rendering::TerrainBase::LoadPage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
 {
-    const int numHeights = mSize * mSize;
-    unsigned short* heights = nullptr;  // NEW1<unsigned short>(numHeights);
-    System::String fileName = heightName + SYSTEM_TEXT(".") + heightSuffix + SYSTEM_TEXT(".wmhf");
-    CoreTools::ReadFileManager heightFile(fileName);
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto numHeights = size * size;
+    std::vector<uint16_t> heights(numHeights);
+    auto fileName = heightName + SYSTEM_TEXT(".") + heightSuffix + SYSTEM_TEXT(".wmhf");
+    CoreTools::ReadFileManager heightFile{ fileName };
 
     if (heightFile.GetFileByteSize() > 0)
     {
-        heightFile.Read(sizeof(unsigned short), numHeights, heights);
-    }
-    else
-    {
-      //  memset(heights, 0, numHeights * sizeof(unsigned short));
+        heightFile.Read(sizeof(uint16_t), numHeights, heights.data());
     }
 
-    const float length = mSpacing * (float)(mSize - 1);
-    Mathematics::Float2 origin(col * length, row * length);
-    TerrainPageSharedPtr page(std::make_shared<TerrainPage>(mVFormat, mSize, heights, origin, mMinElevation, mMaxElevation, mSpacing));
+    const auto length = spacing * boost::numeric_cast<float>(size - 1);
+    Mathematics::Float2 origin{ col * length, row * length };
+    auto page = std::make_shared<TerrainPage>(vFormat.object, size, heights, origin, minElevation, maxElevation, spacing);
 
-    mPages[row][col] = page;
+    pages.at(row).at(col).object = page;
 }
 
 Rendering::TerrainPageSharedPtr Rendering::TerrainBase::ReplacePage(int row, int col, const System::String& heightName, const System::String& heightSuffix)
 {
-    if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
-    {
-        TerrainPageSharedPtr save = mPages[row][col];
-        LoadPage(row, col, heightName, heightSuffix);
-        return save;
-    }
+    RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_0(false, "Invalid row or column index\n");
-    return TerrainPageSharedPtr();
+    auto save = pages.at(row).at(col);
+    LoadPage(row, col, heightName, heightSuffix);
+
+    return save.object;
 }
 
 Rendering::TerrainPageSharedPtr Rendering::TerrainBase::ReplacePage(int row, int col, TerrainPageSharedPtr newPage)
 {
-    if (0 <= row && row < mNumRows && 0 <= col && col < mNumCols)
-    {
-        TerrainPageSharedPtr save = mPages[row][col];
-        mPages[row][col] = newPage;
-        return save;
-    }
+    RENDERING_CLASS_IS_VALID_1;
 
-    RENDERING_ASSERTION_0(false, "Invalid row or column index\n");
-    return TerrainPageSharedPtr();
+    auto save = pages.at(row).at(col);
+    pages.at(row).at(col).object = newPage;
+    return save.object;
 }
 
 void Rendering::TerrainBase::OnCameraMotion()
 {
-    RENDERING_ASSERTION_0(mCamera != 0, "Camera must exist\n");
-    if (!mCamera)
+    RENDERING_CLASS_IS_VALID_1;
+
+    if (!camera.object)
     {
         return;
     }
 
-    // Get camera location/direction in model space of terrain.
-    Mathematics::APointF worldEye = mCamera->GetPosition();
-    Mathematics::AVectorF worldDir = mCamera->GetDirectionVector();
-    Mathematics::APointF modelEye = GetWorldTransform().GetInverseMatrix() * worldEye;
-    Mathematics::AVectorF modelDir = GetWorldTransform().GetInverseMatrix() * worldDir;
+    const auto worldEye = camera->GetPosition();
+    const auto worldDir = camera->GetDirectionVector();
+    const auto modelEye = GetWorldTransform().GetInverseMatrix() * worldEye;
+    const auto modelDir = GetWorldTransform().GetInverseMatrix() * worldDir;
 
-    // Update the model-space origins of the terrain pages.  Start the
-    // process by locating the page that contains the camera.
-    const float length = mSpacing * (float)(mSize - 1);
-    const float invLength = 1.0f / length;
-    const int newCameraCol = (int)Mathematics::MathF::Floor(modelEye[0] * invLength);
-    const int newCameraRow = (int)Mathematics::MathF::Floor(modelEye[1] * invLength);
-    if (newCameraCol != mCameraCol || newCameraRow != mCameraRow)
+    const auto length = spacing * boost::numeric_cast<float>(size - 1);
+    const auto invLength = 1.0f / length;
+    const auto newCameraCol = boost::numeric_cast<int>(Mathematics::MathF::Floor(modelEye[0] * invLength));
+    const auto newCameraRow = boost::numeric_cast<int>(Mathematics::MathF::Floor(modelEye[1] * invLength));
+    if (newCameraCol != cameraCol || newCameraRow != cameraRow)
     {
-        mCameraCol = newCameraCol;
-        mCameraRow = newCameraRow;
+        cameraCol = newCameraCol;
+        cameraRow = newCameraRow;
 
-        // Translate page origins for toroidal wraparound.
-        const int cminO = mCameraCol - mNumCols / 2;
-        int cminP = cminO % mNumCols;
+        const auto cminO = cameraCol - numCols / 2;
+        auto cminP = cminO % numCols;
         if (cminP < 0)
         {
-            cminP += mNumCols;
+            cminP += numCols;
         }
 
-        const int rminO = mCameraRow - mNumRows / 2;
-        int rminP = rminO % mNumRows;
+        const auto rminO = cameraRow - numRows / 2;
+        auto rminP = rminO % numRows;
         if (rminP < 0)
         {
-            rminP += mNumRows;
+            rminP += numRows;
         }
 
-        int rO = rminO, rP = rminP;
-        for (int row = 0; row < mNumRows; ++row)
+        auto rO = rminO;
+        auto rP = rminP;
+        for (auto row = 0; row < numRows; ++row)
         {
-            int cO = cminO, cP = cminP;
-            for (int col = 0; col < mNumCols; ++col)
+            auto cO = cminO;
+            auto cP = cminP;
+            for (int col = 0; col < numCols; ++col)
             {
-                TerrainPageSharedPtr page = mPages[rP][cP];
-                Mathematics::Float2 oldOrigin = page->GetOrigin();
-                Mathematics::Float2 newOrigin(cO * length, rO * length);
-                Mathematics::APointF pageTrn(newOrigin[0] - oldOrigin[0],
-                                                 newOrigin[1] - oldOrigin[1],
-                                                 page->GetLocalTransform().GetTranslate()[2]);
+                auto page = pages.at(rP).at(cP);
+                auto oldOrigin = page->GetOrigin();
+                Mathematics::Float2 newOrigin{ cO * length, rO * length };
+                const Mathematics::APointF pageTrn{ newOrigin[0] - oldOrigin[0], newOrigin[1] - oldOrigin[1], page->GetLocalTransform().GetTranslate()[2] };
 
                 page->SetLocalTransformTranslate(pageTrn);
 
                 ++cO;
-                if (++cP == mNumCols)
+                if (++cP == numCols)
                 {
                     cP = 0;
                 }
             }
 
             ++rO;
-            if (++rP == mNumRows)
+            if (++rP == numRows)
             {
                 rP = 0;
             }
@@ -292,31 +269,31 @@ void Rendering::TerrainBase::OnCameraMotion()
     }
 }
 
-// Name support.
-
 CoreTools::ObjectSharedPtr Rendering::TerrainBase::GetObjectByName(const std::string& name)
 {
-    CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto found = ParentType::GetObjectByName(name);
     if (found)
     {
         return found;
     }
-    found = mVFormat->GetObjectByName(name);
+    found = vFormat->GetObjectByName(name);
     if (found)
     {
         return found;
     }
-    found = mCamera->GetObjectByName(name);
+    found = camera->GetObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    for (int row = 0; row < mNumRows; ++row)
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            found = mPages[row][col]->GetObjectByName(name);
+            found = pages.at(row).at(col)->GetObjectByName(name);
             if (found)
             {
                 return found;
@@ -324,23 +301,25 @@ CoreTools::ObjectSharedPtr Rendering::TerrainBase::GetObjectByName(const std::st
         }
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
 std::vector<CoreTools::ObjectSharedPtr> Rendering::TerrainBase::GetAllObjectsByName(const std::string& name)
 {
-    std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
+    RENDERING_CLASS_IS_VALID_1;
 
-    std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mVFormat->GetAllObjectsByName(name);
+    auto objects = ParentType::GetAllObjectsByName(name);
+
+    auto pointerObjects = vFormat->GetAllObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
-    pointerObjects = mCamera->GetAllObjectsByName(name);
+    pointerObjects = camera->GetAllObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
-    for (int row = 0; row < mNumRows; ++row)
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            pointerObjects = mPages[row][col]->GetAllObjectsByName(name);
+            pointerObjects = pages.at(row).at(col)->GetAllObjectsByName(name);
             objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
         }
     }
@@ -350,28 +329,30 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::TerrainBase::GetAllObjectsByN
 
 CoreTools::ConstObjectSharedPtr Rendering::TerrainBase::GetConstObjectByName(const std::string& name) const
 {
-    CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto found = ParentType::GetConstObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    found = mVFormat->GetConstObjectByName(name);
+    found = vFormat->GetConstObjectByName(name);
     if (found)
     {
         return found;
     }
-    found = mCamera->GetConstObjectByName(name);
+    found = camera->GetConstObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    for (int row = 0; row < mNumRows; ++row)
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            found = mPages[row][col]->GetConstObjectByName(name);
+            found = pages.at(row).at(col)->GetConstObjectByName(name);
             if (found)
             {
                 return found;
@@ -379,77 +360,83 @@ CoreTools::ConstObjectSharedPtr Rendering::TerrainBase::GetConstObjectByName(con
         }
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
 std::vector<CoreTools::ConstObjectSharedPtr> Rendering::TerrainBase::GetAllConstObjectsByName(const std::string& name) const
 {
-    std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = mVFormat->GetAllConstObjectsByName(name);
+    auto objects = ParentType::GetAllConstObjectsByName(name);
+
+    auto pointerObjects = vFormat->GetAllConstObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
-    pointerObjects = mCamera->GetAllConstObjectsByName(name);
+    pointerObjects = camera->GetAllConstObjectsByName(name);
     objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
-    for (int row = 0; row < mNumRows; ++row)
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            pointerObjects = mPages[row][col]->GetAllConstObjectsByName(name);
+            pointerObjects = pages.at(row).at(col)->GetAllConstObjectsByName(name);
             objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
         }
     }
 
     return objects;
 }
-// Streaming support.
 
 Rendering::TerrainBase::TerrainBase(LoadConstructor value)
-    : Node(value),
-      mMode(0),
-      mNumRows(0),
-      mNumCols(0),
-      mSize(0),
-      mMinElevation(0.0f),
-      mMaxElevation(0.0f),
-      mSpacing(0.0f),
-      mPages(0),
-      mCameraRow(0),
-      mCameraCol(0)
+    : ParentType{ value },
+      mode{ 0 },
+      vFormat{},
+      numRows{},
+      numCols{},
+      size{},
+      minElevation{},
+      maxElevation{},
+      spacing{},
+      pages{},
+      cameraRow{ 0 },
+      cameraCol{ 0 },
+      camera{}
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TerrainBase::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 void Rendering::TerrainBase::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    Node::Load(source);
+    ParentType::Load(source);
 
-    source.Read(mMode);
-    source.Read(mNumRows);
-    source.Read(mNumCols);
-    source.Read(mSize);
-    source.Read(mMinElevation);
-    source.Read(mMaxElevation);
-    source.Read(mSpacing);
-    source.Read(mCameraRow);
-    source.Read(mCameraCol);
-    //  source.ReadSharedPtr(mVFormat);
-    //source.ReadSharedPtr(mCamera);
+    source.Read(mode);
+    source.Read(numRows);
+    source.Read(numCols);
+    source.Read(size);
+    source.Read(minElevation);
+    source.Read(maxElevation);
+    source.Read(spacing);
+    source.Read(cameraRow);
+    source.Read(cameraCol);
+    source.ReadObjectAssociated(vFormat);
+    source.ReadObjectAssociated(camera);
 
-    mPages = nullptr;  //NEW2<TerrainPageSharedPtr>(mNumCols, mNumRows);
-    for (int row = 0; row < mNumRows; ++row)
+    pages.resize(numRows, std::vector<CoreTools::ObjectAssociated<TerrainPage>>(numCols));
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            //source.ReadSharedPtr(mPages[row][col]);
+            source.ReadObjectAssociated(pages.at(row).at(col));
         }
     }
 
@@ -458,36 +445,42 @@ void Rendering::TerrainBase::Load(CoreTools::BufferSource& source)
 
 void Rendering::TerrainBase::Link(CoreTools::ObjectLink& source)
 {
-    Node::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
 
-    // source.ResolveObjectSharedPtrLink(mVFormat);
-    //source.ResolveObjectSharedPtrLink(mCamera);
-    for (int row = 0; row < mNumRows; ++row)
+    ParentType::Link(source);
+
+    source.ResolveLink(vFormat);
+    source.ResolveLink(camera);
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            //source.ResolveObjectSharedPtrLink(mPages[row][col]);
+            source.ResolveLink(pages.at(row).at(col));
         }
     }
 }
 
 void Rendering::TerrainBase::PostLink()
 {
-    Node::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
 uint64_t Rendering::TerrainBase::Register(CoreTools::ObjectRegister& target) const
 {
-    const uint64_t id = Node::Register(target);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    const auto id = ParentType::Register(target);
     if (0 < id)
     {
-        // target.RegisterSharedPtr(mVFormat);
-        //target.RegisterSharedPtr(mCamera);
-        for (int row = 0; row < mNumRows; ++row)
+        target.Register(vFormat);
+        target.Register(camera);
+        for (auto row = 0; row < numRows; ++row)
         {
-            for (int col = 0; col < mNumCols; ++col)
+            for (auto col = 0; col < numCols; ++col)
             {
-                //target.RegisterSharedPtr(mPages[row][col]);
+                target.Register(pages.at(row).at(col));
             }
         }
         return id;
@@ -497,27 +490,29 @@ uint64_t Rendering::TerrainBase::Register(CoreTools::ObjectRegister& target) con
 
 void Rendering::TerrainBase::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    Node::Save(target);
+    ParentType::Save(target);
 
-    target.Write(mMode);
-    target.Write(mNumRows);
-    target.Write(mNumCols);
-    target.Write(mSize);
-    target.Write(mMinElevation);
-    target.Write(mMaxElevation);
-    target.Write(mSpacing);
-    target.Write(mCameraRow);
-    target.Write(mCameraCol);
-    // target.WriteSharedPtr(mVFormat);
-    //target.WriteSharedPtr(mCamera);
+    target.Write(mode);
+    target.Write(numRows);
+    target.Write(numCols);
+    target.Write(size);
+    target.Write(minElevation);
+    target.Write(maxElevation);
+    target.Write(spacing);
+    target.Write(cameraRow);
+    target.Write(cameraCol);
+    target.WriteObjectAssociated(vFormat);
+    target.WriteObjectAssociated(camera);
 
-    for (int row = 0; row < mNumRows; ++row)
+    for (auto row = 0; row < numRows; ++row)
     {
-        for (int col = 0; col < mNumCols; ++col)
+        for (auto col = 0; col < numCols; ++col)
         {
-            //target.WriteSharedPtr(mPages[row][col]);
+            target.WriteObjectAssociated(pages.at(row).at(col));
         }
     }
 
@@ -526,50 +521,63 @@ void Rendering::TerrainBase::Save(CoreTools::BufferTarget& target) const
 
 int Rendering::TerrainBase::GetStreamingSize() const
 {
-    int size = Node::GetStreamingSize();
-    size += CORE_TOOLS_STREAM_SIZE(mMode);
-    size += sizeof(mNumRows);
-    size += sizeof(mNumCols);
-    size += sizeof(mSize);
-    size += sizeof(mMinElevation);
-    size += sizeof(mMaxElevation);
-    size += sizeof(mSpacing);
-    size += sizeof(mCameraRow);
-    size += sizeof(mCameraCol);
-    size += CORE_TOOLS_STREAM_SIZE(mVFormat);
-    size += CORE_TOOLS_STREAM_SIZE(mCamera);
-    size += mNumRows * mNumCols * CORE_TOOLS_STREAM_SIZE(mPages[0][0]);
-    return size;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto streamingSize = ParentType::GetStreamingSize();
+
+    streamingSize += CORE_TOOLS_STREAM_SIZE(mode);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(numRows);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(numCols);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(streamingSize);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(minElevation);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(maxElevation);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(spacing);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(cameraRow);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(cameraCol);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(vFormat);
+    streamingSize += CORE_TOOLS_STREAM_SIZE(camera);
+    streamingSize += numRows * numCols * CORE_TOOLS_STREAM_SIZE(pages.at(0).at(0));
+    return streamingSize;
 }
 
 int Rendering::TerrainBase::GetRowQuantity() const noexcept
 {
-    return mNumRows;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return numRows;
 }
 
 int Rendering::TerrainBase::GetColQuantity() const noexcept
 {
-    return mNumCols;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return numCols;
 }
 
 int Rendering::TerrainBase::GetSize() const noexcept
 {
-    return mSize;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return size;
 }
 
 float Rendering::TerrainBase::GetMinElevation() const noexcept
 {
-    return mMinElevation;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return minElevation;
 }
 
 float Rendering::TerrainBase::GetMaxElevation() const noexcept
 {
-    return mMaxElevation;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return maxElevation;
 }
 
 float Rendering::TerrainBase::GetSpacing() const noexcept
 {
-    return mSpacing;
-}
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_POP
+    return spacing;
+}

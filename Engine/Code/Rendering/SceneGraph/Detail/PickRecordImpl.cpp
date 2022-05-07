@@ -16,13 +16,13 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 Rendering::PickRecordImpl::PickRecordImpl() noexcept
-    : intersected{}, parameter{ 0.0f }, triangle{ -1 }, bary{}
+    : intersected{}, parameter{ 0.0f }, triangle{ -1 }, bary{ 0.0f, 0.0f, 1.0f }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::PickRecordImpl::PickRecordImpl(const PickRecordImpl& rhs)
-    : intersected{ (rhs.intersected == nullptr) ? ConstSpatialSharedPtr() : boost::polymorphic_pointer_cast<Spatial>(rhs.intersected->Clone()) },
+    : intersected{ (rhs.intersected == nullptr) ? ConstSpatialSharedPtr{} : boost::polymorphic_pointer_cast<Spatial>(rhs.intersected->Clone()) },
       parameter{ rhs.parameter },
       triangle{ rhs.triangle },
       bary{ rhs.bary }

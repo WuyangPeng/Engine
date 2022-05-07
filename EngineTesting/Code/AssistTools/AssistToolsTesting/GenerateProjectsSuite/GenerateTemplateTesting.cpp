@@ -1,390 +1,331 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
+//
 // ÒýÇæ²âÊÔ°æ±¾£º0.0.0.4 (2019/09/10 11:00)
 
 #include "GenerateTemplateTesting.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/FileManager/IFStreamManager.h"
 #include "System/FileManager/FileTools.h"
-
-#include <boost/algorithm/string/find.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/assign/std/map.hpp>
-#include <boost/assign/list_inserter.hpp> 
+#include "System/Helper/PragmaWarning/Algorithm.h"
+#include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "CoreTools/FileManager/IFStreamManager.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
 
 using std::string;
- 
-AssistTools::GenerateTemplateTesting
-	::GenerateTemplateTesting(const CoreTools::OStreamShared& osPtr)
-		:ParentType(osPtr),m_GenerateTemplateTesting("Configuration/StringReplacing.json")
-{ 
-	SELF_CLASS_IS_VALID_0; 
-}            
 
- 
+AssistTools::GenerateTemplateTesting::GenerateTemplateTesting(const CoreTools::OStreamShared& osPtr)
+    : ParentType(osPtr), m_GenerateTemplateTesting("Configuration/StringReplacing.json")
+{
+    SELF_CLASS_IS_VALID_0;
+}
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateTesting)
- 
-int AssistTools::GenerateTemplateTesting
-	::GetContentFindCount(const System::String& templateFileName, const System::String& findContent)
+
+int AssistTools::GenerateTemplateTesting::GetContentFindCount(const System::String& templateFileName, const System::String& findContent)
 {
-	CoreTools::IFStreamManager manager(templateFileName);
+    CoreTools::IFStreamManager manager(templateFileName);
 
-	System::String content = manager.GetFileContent();  
+    System::String content = manager.GetFileContent();
 
-	boost::iterator_range<System::String::const_iterator> iter = boost::find_first(content, findContent);
-	int count = 0;
+    boost::iterator_range<System::String::const_iterator> iter = boost::find_first(content, findContent);
+    int count = 0;
 
-	while (iter.begin() != content.end())
-	{
-		++count;
+    while (iter.begin() != content.end())
+    {
+        ++count;
 
-		content = content.substr(iter.end() - content.begin());
+        content = content.substr(iter.end() - content.begin());
 
-		iter = boost::find_first(content, findContent);
-	}
-	
-	return count;
-} 
+        iter = boost::find_first(content, findContent);
+    }
 
-void AssistTools::GenerateTemplateTesting
-	::ContentCountTest(const System::String& templateFileName, const System::String& findContent,int testCount, const std::string& functionName, int index)
-{
-	CoreTools::IFStreamManager manager(templateFileName);
-
-	System::String content = manager.GetFileContent();
-
-	boost::iterator_range<System::String::const_iterator> iter = boost::find_first(content, findContent);
-	int count = 0;
-
-	while (iter.begin() != content.end())
-	{
-		++count;
-
-		content = content.substr(iter.end() - content.begin());
-
-		iter = boost::find_first(content, findContent);
-	}
-
-	string message = "º¯ÊýÃûÎª£º" + functionName + "£¬ÐòºÅ£º" + boost::lexical_cast<string>(index);
-
-	ASSERT_EQUAL_USE_MESSAGE(count, testCount, message);
+    return count;
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetResourceDirectory()
+void AssistTools::GenerateTemplateTesting::ContentCountTest(const System::String& templateFileName, const System::String& findContent, int testCount, const std::string& functionName, int index)
 {
-	return SYSTEM_TEXT("Resource/GenerateProjectsSuite");
+    CoreTools::IFStreamManager manager(templateFileName);
+
+    System::String content = manager.GetFileContent();
+
+    boost::iterator_range<System::String::const_iterator> iter = boost::find_first(content, findContent);
+    int count = 0;
+
+    while (iter.begin() != content.end())
+    {
+        ++count;
+
+        content = content.substr(iter.end() - content.begin());
+
+        iter = boost::find_first(content, findContent);
+    }
+
+    string message = "º¯ÊýÃûÎª£º" + functionName + "£¬ÐòºÅ£º" + boost::lexical_cast<string>(index);
+
+    ASSERT_EQUAL_USE_MESSAGE(count, testCount, message);
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSolutionName()
+const System::String AssistTools::GenerateTemplateTesting::GetResourceDirectory()
 {
-	return SYSTEM_TEXT("Example");
+    return SYSTEM_TEXT("Resource/GenerateProjectsSuite");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetForwardSlash()
+const System::String AssistTools::GenerateTemplateTesting::GetSolutionName()
 {
-	return SYSTEM_TEXT("/");
+    return SYSTEM_TEXT("Example");
 }
 
-const AssistTools::GenerateTemplateTesting::Replace AssistTools::GenerateTemplateTesting
-	::GetSpecialReplace()
+const System::String AssistTools::GenerateTemplateTesting::GetForwardSlash()
 {
-	Replace replace;
-	boost::assign::insert(replace)
-		(GenerateTemplateReplace::EndYear, GetSpecialEndYear())
-		(GenerateTemplateReplace::ProjectChineseName, GetSpecialProjectChineseName())
-		(GenerateTemplateReplace::Versions, GetSpecialVersions())
-		(GenerateTemplateReplace::Date, GetSpecialDate())
-		(GenerateTemplateReplace::Hour, GetSpecialHour())
-		(GenerateTemplateReplace::Minute, GetSpecialMinute())
-		(GenerateTemplateReplace::ProjectCapital, GetSpecialProjectCapital())
-		(GenerateTemplateReplace::SolutionName, GetSpecialSolutionName())
-		(GenerateTemplateReplace::ProjectName, GetSpecialProjectName())
-		(GenerateTemplateReplace::ManagerCapital, GetSpecialManagerCapital())
-		(GenerateTemplateReplace::ManagerName, GetSpecialManagerName())
-		(GenerateTemplateReplace::ManagerChineseName, GetSpecialManagerChineseName())
-		(GenerateTemplateReplace::InterfaceName, GetSpecialInterfaceName());
-
-	return replace;
+    return SYSTEM_TEXT("/");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialEndYear()
+const AssistTools::GenerateTemplateTesting::Replace AssistTools::GenerateTemplateTesting::GetSpecialReplace()
 {
-	return SYSTEM_TEXT("EndYearSpecial");
+    Replace replace{ { GenerateTemplateReplace::EndYear, GetSpecialEndYear() },
+                     { GenerateTemplateReplace::ProjectChineseName, GetSpecialProjectChineseName() },
+                     { GenerateTemplateReplace::Versions, GetSpecialVersions() },
+                     { GenerateTemplateReplace::Date, GetSpecialDate() },
+                     { GenerateTemplateReplace::Hour, GetSpecialHour() },
+                     { GenerateTemplateReplace::Minute, GetSpecialMinute() },
+                     { GenerateTemplateReplace::ProjectCapital, GetSpecialProjectCapital() },
+                     { GenerateTemplateReplace::SolutionName, GetSpecialSolutionName() },
+                     { GenerateTemplateReplace::ProjectName, GetSpecialProjectName() },
+                     { GenerateTemplateReplace::ManagerCapital, GetSpecialManagerCapital() },
+                     { GenerateTemplateReplace::ManagerName, GetSpecialManagerName() },
+                     { GenerateTemplateReplace::ManagerChineseName, GetSpecialManagerChineseName() },
+                     { GenerateTemplateReplace::InterfaceName, GetSpecialInterfaceName() } };
+
+    return replace;
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialProjectChineseName()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialEndYear()
 {
-	return SYSTEM_TEXT("ProjectChineseNameSpecial");
+    return SYSTEM_TEXT("EndYearSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialVersions()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialProjectChineseName()
 {
-	return SYSTEM_TEXT("VersionsSpecial");
+    return SYSTEM_TEXT("ProjectChineseNameSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialDate()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialVersions()
 {
-	return SYSTEM_TEXT("DateSpecial");
+    return SYSTEM_TEXT("VersionsSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialHour()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialDate()
 {
-	return SYSTEM_TEXT("HourSpecial");
+    return SYSTEM_TEXT("DateSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialMinute()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialHour()
 {
-	return SYSTEM_TEXT("MinuteSpecial");
+    return SYSTEM_TEXT("HourSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialProjectCapital()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialMinute()
 {
-	return SYSTEM_TEXT("ProjectCapitalSpecial");
+    return SYSTEM_TEXT("MinuteSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialSolutionName()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialProjectCapital()
 {
-	return SYSTEM_TEXT("SolutionNameSpecial");
+    return SYSTEM_TEXT("ProjectCapitalSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialProjectName()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialSolutionName()
 {
-	return SYSTEM_TEXT("ProjectNameSpecial");
+    return SYSTEM_TEXT("SolutionNameSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialManagerCapital()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialProjectName()
 {
-	return SYSTEM_TEXT("ManagerCapitalSpecial");
+    return SYSTEM_TEXT("ProjectNameSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialManagerName()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialManagerCapital()
 {
-	return SYSTEM_TEXT("ManagerNameSpecial");
+    return SYSTEM_TEXT("ManagerCapitalSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetPercent()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialManagerName()
 {
-	return SYSTEM_TEXT("%");
+    return SYSTEM_TEXT("ManagerNameSpecial");
 }
 
-const AssistTools::CopyrightData AssistTools::GenerateTemplateTesting
-	::GetCopyrightData() const
+const System::String AssistTools::GenerateTemplateTesting::GetPercent()
 {
-	return CopyrightData(GetEndYear(), GetVersions(), GetProjectChineseName());
+    return SYSTEM_TEXT("%");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetVersions()
+const AssistTools::CopyrightData AssistTools::GenerateTemplateTesting::GetCopyrightData() const
 {
-	return SYSTEM_TEXT("1.0.0.2");
+    return CopyrightData(GetEndYear(), GetVersions(), GetProjectChineseName());
 }
 
-int AssistTools::GenerateTemplateTesting
-	::GetEndYear()
+const System::String AssistTools::GenerateTemplateTesting::GetVersions()
 {
-	return 2018;
+    return SYSTEM_TEXT("1.0.0.2");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetProjectChineseName() const
+int AssistTools::GenerateTemplateTesting::GetEndYear() noexcept
 {
-	return m_GenerateTemplateTesting.GetReplacing(SYSTEM_TEXT("ProjectChineseName"));
+    return 2018;
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetProjectCapital()
+const System::String AssistTools::GenerateTemplateTesting::GetProjectChineseName() const
 {
-	return SYSTEM_TEXT("EXAMPLE");
+    return m_GenerateTemplateTesting.GetReplacing(SYSTEM_TEXT("ProjectChineseName"));
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultEndYear()
+const System::String AssistTools::GenerateTemplateTesting::GetProjectCapital()
 {
-	return SYSTEM_TEXT("EndYear");
+    return SYSTEM_TEXT("EXAMPLE");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultProjectChineseName()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultEndYear()
 {
-	return SYSTEM_TEXT("ProjectChineseName");
+    return SYSTEM_TEXT("EndYear");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultVersions()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultProjectChineseName()
 {
-	return SYSTEM_TEXT("Versions");
+    return SYSTEM_TEXT("ProjectChineseName");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultDate()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultVersions()
 {
-	return SYSTEM_TEXT("Date");
+    return SYSTEM_TEXT("Versions");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultHour()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultDate()
 {
-	return SYSTEM_TEXT("Hour");
+    return SYSTEM_TEXT("Date");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultMinute()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultHour()
 {
-	return SYSTEM_TEXT("Minute");
+    return SYSTEM_TEXT("Hour");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultProjectCapital()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultMinute()
 {
-	return SYSTEM_TEXT("ProjectCapital");
+    return SYSTEM_TEXT("Minute");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultSolutionName()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultProjectCapital()
 {
-	return SYSTEM_TEXT("SolutionName");
+    return SYSTEM_TEXT("ProjectCapital");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultProjectName()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultSolutionName()
 {
-	return SYSTEM_TEXT("ProjectName");
+    return SYSTEM_TEXT("SolutionName");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetManagerChineseName() const
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultProjectName()
 {
-	return m_GenerateTemplateTesting.GetReplacing(SYSTEM_TEXT("ManagerChineseName"));
+    return SYSTEM_TEXT("ProjectName");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialManagerChineseName()
+const System::String AssistTools::GenerateTemplateTesting::GetManagerChineseName() const
 {
-	return SYSTEM_TEXT("ManagerChineseNameSpecial");
+    return m_GenerateTemplateTesting.GetReplacing(SYSTEM_TEXT("ManagerChineseName"));
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultManagerChineseName()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialManagerChineseName()
 {
-	return SYSTEM_TEXT("ManagerChineseName");
+    return SYSTEM_TEXT("ManagerChineseNameSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialInterfaceName()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultManagerChineseName()
 {
-	return SYSTEM_TEXT("InterfaceNameSpecial");
+    return SYSTEM_TEXT("ManagerChineseName");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetSpecialCodeEngineDirectory()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialInterfaceName()
 {
-	return SYSTEM_TEXT("SpecialCode");
+    return SYSTEM_TEXT("InterfaceNameSpecial");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetInputManagerName()
+const System::String AssistTools::GenerateTemplateTesting::GetSpecialCodeEngineDirectory()
 {
-	return SYSTEM_TEXT("InputManager");
+    return SYSTEM_TEXT("SpecialCode");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetCodeEngineDirectory()
+const System::String AssistTools::GenerateTemplateTesting::GetInputManagerName()
 {
-	return SYSTEM_TEXT("Code");
+    return SYSTEM_TEXT("InputManager");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultManagerName()
+const System::String AssistTools::GenerateTemplateTesting::GetCodeEngineDirectory()
 {
-	return SYSTEM_TEXT("ManagerName");
+    return SYSTEM_TEXT("Code");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetEngineDirectory()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultManagerName()
 {
-	return SYSTEM_TEXT("Engine");
+    return SYSTEM_TEXT("ManagerName");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetEventManagerName()
+const System::String AssistTools::GenerateTemplateTesting::GetEngineDirectory()
 {
-	return SYSTEM_TEXT("EventManager");
+    return SYSTEM_TEXT("Engine");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetEventManagerCapitalName()
+const System::String AssistTools::GenerateTemplateTesting::GetEventManagerName()
 {
-	return SYSTEM_TEXT("EVENT_MANAGER");
+    return SYSTEM_TEXT("EventManager");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetEventManagerInterface()
+const System::String AssistTools::GenerateTemplateTesting::GetEventManagerCapitalName()
 {
-	return SYSTEM_TEXT("EventManagerInterface");
+    return SYSTEM_TEXT("EVENT_MANAGER");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultManagerCapital()
+const System::String AssistTools::GenerateTemplateTesting::GetEventManagerInterface()
 {
-	return SYSTEM_TEXT("ManagerCapital");
+    return SYSTEM_TEXT("EventManagerInterface");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetDefaultInterfaceName()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultManagerCapital()
 {
-	return SYSTEM_TEXT("InterfaceName");
+    return SYSTEM_TEXT("ManagerCapital");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetInputManagerCapitalName()
+const System::String AssistTools::GenerateTemplateTesting::GetDefaultInterfaceName()
 {
-	return SYSTEM_TEXT("INPUT_MANAGER");
+    return SYSTEM_TEXT("InterfaceName");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetInputManagerInterface()
+const System::String AssistTools::GenerateTemplateTesting::GetInputManagerCapitalName()
 {
-	return SYSTEM_TEXT("InputManagerInterface");
+    return SYSTEM_TEXT("INPUT_MANAGER");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetUpdateName()
+const System::String AssistTools::GenerateTemplateTesting::GetInputManagerInterface()
 {
-	return SYSTEM_TEXT("Update.txt");
+    return SYSTEM_TEXT("InputManagerInterface");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetExportDirectory()
+const System::String AssistTools::GenerateTemplateTesting::GetUpdateName()
 {
-	return SYSTEM_TEXT("Export");
+    return SYSTEM_TEXT("Update.txt");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetTesting()
+const System::String AssistTools::GenerateTemplateTesting::GetExportDirectory()
 {
-	return SYSTEM_TEXT("Testing");
+    return SYSTEM_TEXT("Export");
 }
 
-const System::String AssistTools::GenerateTemplateTesting
-	::GetMiddleLayerName()
+const System::String AssistTools::GenerateTemplateTesting::GetTesting()
 {
-	return SYSTEM_TEXT("MiddleLayer");
+    return SYSTEM_TEXT("Testing");
+}
+
+const System::String AssistTools::GenerateTemplateTesting::GetMiddleLayerName()
+{
+    return SYSTEM_TEXT("MiddleLayer");
 }

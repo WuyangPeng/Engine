@@ -27,7 +27,7 @@ namespace AssistTools
 		void GenerateToTest();
 		void DefaultGenerateToTest(const System::String& testFileName, const System::String& resultSuffix);
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

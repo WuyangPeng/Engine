@@ -1,62 +1,52 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/25 09:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/14 16:35)
 
 #ifndef RENDERING_LOCAL_EFFECTS_TEXTURE1D_EFFECT_H
 #define RENDERING_LOCAL_EFFECTS_TEXTURE1D_EFFECT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Shaders/VisualEffectInstance.h" 
 #include "Rendering/Resources/Texture1D.h"
+#include "Rendering/Shaders/VisualEffectInstance.h"
 
 namespace Rendering
 {
-	class  Texture1DEffect : public VisualEffect
-	{
-	public:
-		using ClassType = Texture1DEffect;
-		using ParentType = VisualEffect;
+    class Texture1DEffect : public VisualEffect
+    {
+    public:
+        using ClassType = Texture1DEffect;
+        using ParentType = VisualEffect;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture1DEffect);
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Texture1DEffect);
 
-	public:
-		// Construction and destruction.
-		Texture1DEffect(ShaderFlags::SamplerFilter filter = ShaderFlags::SamplerFilter::Nearest,
-						ShaderFlags::SamplerCoordinate coordinate = ShaderFlags::SamplerCoordinate::ClampEdge);
- 
+    public:
+        explicit Texture1DEffect(ShaderFlags::SamplerFilter filter,
+                                 ShaderFlags::SamplerCoordinate coordinate = ShaderFlags::SamplerCoordinate::ClampEdge);
 
-		// Any change in sampler state is made via the pixel shader.
-		PixelShader* GetPixelShader () const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Create an instance of the effect with unique parameters.  If the
-		// sampler filter mode is set to a value corresponding to mipmapping,
-		// then the mipmaps will be generated if necessary.
-		VisualEffectInstance* CreateInstance (Texture1D* texture) const;
+        NODISCARD PixelShaderSharedPtr GetPixelShaderSharedPtr() const;
 
-		// Convenience for creating an instance.  The application does not have to
-		// create the effect explicitly in order to create an instance from it.
-		static VisualEffectInstance* CreateUniqueInstance (Texture1D* texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate);
+        NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const Texture1DSharedPtr& texture);
 
-	private:
-		static int msDx9VRegisters[1];
-		static int msOglVRegisters[1];
-		static int* msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-		static std::string msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-		static int msAllPTextureUnits[1];
-		static int* msPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-		static std::string msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-	};
-#include "System/Helper/PragmaWarning.h"
+        NODISCARD static VisualEffectInstanceSharedPtr CreateUniqueInstance(const Texture1DSharedPtr& texture, ShaderFlags::SamplerFilter filter, ShaderFlags::SamplerCoordinate coordinate);
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
- 
-	CORE_TOOLS_STREAM_REGISTER(Texture1DEffect);
-	CORE_TOOLS_SHARED_PTR_DECLARE( Texture1DEffect);
-	#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_STREAM_REGISTER(Texture1DEffect);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(Texture1DEffect);
 }
 
-#endif // RENDERING_LOCAL_EFFECTS_TEXTURE1D_EFFECT_H
+#endif  // RENDERING_LOCAL_EFFECTS_TEXTURE1D_EFFECT_H

@@ -4,22 +4,15 @@
 //
 // ÒýÇæ¸¨Öú°æ±¾£º0.3.0.1 (2020/05/24 22:36)
 
-#include "WinMainEntryPoint2.h" 
+#include "WinMainEntryPoint2.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h" 
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
+#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
-Framework::WinMainEntryPoint2
-	::WinMainEntryPoint2(HInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
-	:ParentType{ instance,commandLine,information,environmentDirectory }
+Framework::WinMainEntryPoint2::WinMainEntryPoint2(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ instance, commandLine, information, environmentDirectory }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WinMainEntryPoint2) 
-
-
-
-
-
-
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WinMainEntryPoint2)

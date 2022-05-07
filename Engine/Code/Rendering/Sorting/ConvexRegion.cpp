@@ -1,56 +1,42 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 10:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 15:51)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ConvexRegion.h"
 #include "Portal.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26426)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConvexRegion);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegion);
 
-Rendering::ConvexRegion::ConvexRegion(int numPortals, Portal** portals)
-    : ParentType{ NodeCreate::Init }, mNumPortals(numPortals), mPortals(portals), mVisited(false)
+Rendering::ConvexRegion::ConvexRegion(int numPortals, const std::vector<CoreTools::ObjectAssociated<Portal>>& portals)
+    : ParentType{ NodeCreate::Init }, numPortals{ numPortals }, portals{ portals }, visited{ false }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ConvexRegion::~ConvexRegion()
-{
-    EXCEPTION_TRY
-    {
-        for (int i = 0; i < mNumPortals; ++i)
-        {
-          //  DELETE0(mPortals[i]);
-        }
-        //DELETE1(mPortals);
-    }
-    EXCEPTION_ALL_CATCH(Rendering)
-}
+CLASS_INVARIANT_STUB_DEFINE(Rendering, ConvexRegion)
 
 bool Rendering::ConvexRegion::UpdateWorldData(double applicationTime)
 {
-    // Update the region walls and contained objects.
-    const bool result = Node::UpdateWorldData(applicationTime);
+    RENDERING_CLASS_IS_VALID_1;
 
-    // Update the portal geometry.
-    for (int i = 0; i < mNumPortals; ++i)
+    const auto result = ParentType::UpdateWorldData(applicationTime);
+
+    for (auto i = 0; i < numPortals; ++i)
     {
-        mPortals[i]->UpdateWorldData(GetWorldTransform());
+        portals.at(i)->UpdateWorldData(GetWorldTransform());
     }
 
     return result;
@@ -58,49 +44,52 @@ bool Rendering::ConvexRegion::UpdateWorldData(double applicationTime)
 
 void Rendering::ConvexRegion::GetVisibleSet(Culler& culler, bool noCull)
 {
-    if (!mVisited)
-    {
-        mVisited = true;
+    RENDERING_CLASS_IS_VALID_1;
 
-        // Add anything visible through open portals.
-        for (int i = 0; i < mNumPortals; ++i)
+    if (!visited)
+    {
+        visited = true;
+
+        for (auto i = 0; i < numPortals; ++i)
         {
-            mPortals[i]->GetVisibleSet(culler, noCull);
+            portals.at(i)->GetVisibleSet(culler, noCull);
         }
 
-        // Add the region walls and contained objects.
-        Node::GetVisibleSet(culler, noCull);
+        ParentType::GetVisibleSet(culler, noCull);
 
-        mVisited = false;
+        visited = false;
     }
 }
 
-// Name support.
 CoreTools::ObjectSharedPtr Rendering::ConvexRegion::GetObjectByName(const std::string& name)
 {
-    CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
+    RENDERING_CLASS_IS_VALID_1;
+
+    auto found = ParentType::GetObjectByName(name);
     if (found)
     {
         return found;
     }
-    for (int i = 0; i < mNumPortals; ++i)
+    for (auto i = 0; i < numPortals; ++i)
     {
-        found = mPortals[i]->GetObjectByName(name);
+        found = portals.at(i)->GetObjectByName(name);
         if (found)
         {
             return found;
         }
     }
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
 std::vector<CoreTools::ObjectSharedPtr> Rendering::ConvexRegion::GetAllObjectsByName(const std::string& name)
 {
-    std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
+    RENDERING_CLASS_IS_VALID_1;
 
-    for (int i = 0; i < mNumPortals; ++i)
+    auto objects = ParentType::GetAllObjectsByName(name);
+
+    for (auto i = 0; i < numPortals; ++i)
     {
-        std::vector<CoreTools::ObjectSharedPtr> pointerObjects = mPortals[i]->GetAllObjectsByName(name);
+        auto pointerObjects = portals.at(i)->GetAllObjectsByName(name);
 
         objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
     }
@@ -110,31 +99,35 @@ std::vector<CoreTools::ObjectSharedPtr> Rendering::ConvexRegion::GetAllObjectsBy
 
 CoreTools::ConstObjectSharedPtr Rendering::ConvexRegion::GetConstObjectByName(const std::string& name) const
 {
-    CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto found = ParentType::GetConstObjectByName(name);
     if (found)
     {
         return found;
     }
 
-    for (int i = 0; i < mNumPortals; ++i)
+    for (auto i = 0; i < numPortals; ++i)
     {
-        found = mPortals[i]->GetObjectByName(name);
+        found = portals.at(i).object->GetObjectByName(name);
         if (found)
         {
             return found;
         }
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
 std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ConvexRegion::GetAllConstObjectsByName(const std::string& name) const
 {
-    std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    for (int i = 0; i < mNumPortals; ++i)
+    auto objects = ParentType::GetAllConstObjectsByName(name);
+
+    for (int i = 0; i < numPortals; ++i)
     {
-        std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = mPortals[i]->GetAllConstObjectsByName(name);
+        auto pointerObjects = portals.at(i)->GetAllConstObjectsByName(name);
 
         objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
     }
@@ -142,41 +135,48 @@ std::vector<CoreTools::ConstObjectSharedPtr> Rendering::ConvexRegion::GetAllCons
     return objects;
 }
 
-// Streaming support.
-
 Rendering::ConvexRegion::ConvexRegion(LoadConstructor value)
-    : Node(value), mNumPortals(0), mPortals(0), mVisited(false)
+    : ParentType{ value }, numPortals{ 0 }, portals{ 0 }, visited{ false }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 void Rendering::ConvexRegion::Load(CoreTools::BufferSource& source)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-    Node::Load(source);
+    ParentType::Load(source);
 
-    // source.ReadSharedPtr(mNumPortals, mPortals);
+    source.ReadObjectAssociatedContainer(portals);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::ConvexRegion::Link(CoreTools::ObjectLink& source)
 {
-    Node::Link(source);
+    RENDERING_CLASS_IS_VALID_1;
 
-    //  source.ResolveObjectLink(mNumPortals, mPortals);
+    ParentType::Link(source);
+
+    source.ResolveLinkContainer(portals);
 }
 
 void Rendering::ConvexRegion::PostLink()
 {
-    Node::PostLink();
+    RENDERING_CLASS_IS_VALID_1;
+
+    ParentType::PostLink();
 }
 
 uint64_t Rendering::ConvexRegion::Register(CoreTools::ObjectRegister& target) const
 {
-    if (Node::Register(target))
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    if (ParentType::Register(target))
     {
-        //    target.Register(mNumPortals, mPortals);
+        target.RegisterContainer(portals);
         return true;
     }
     return false;
@@ -184,38 +184,44 @@ uint64_t Rendering::ConvexRegion::Register(CoreTools::ObjectRegister& target) co
 
 void Rendering::ConvexRegion::Save(CoreTools::BufferTarget& target) const
 {
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    Node::Save(target);
+    ParentType::Save(target);
 
-    // target.WritePointerWithNumber(mNumPortals, mPortals);
+    target.WriteObjectAssociatedContainerWithNumber(portals);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 int Rendering::ConvexRegion::GetStreamingSize() const
 {
-    int size = Node::GetStreamingSize();
-    size += sizeof(mNumPortals);
-    size += mNumPortals * CORE_TOOLS_STREAM_SIZE(mPortals[0]);
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    auto size = ParentType::GetStreamingSize();
+    size += CORE_TOOLS_STREAM_SIZE(numPortals);
+    size += numPortals * CORE_TOOLS_STREAM_SIZE(portals.at(0));
     return size;
 }
 
 int Rendering::ConvexRegion::GetNumPortals() const noexcept
 {
-    return mNumPortals;
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return numPortals;
 }
 
-Rendering::Portal* Rendering::ConvexRegion::GetPortal(int i) const noexcept
+Rendering::PortalSharedPtr Rendering::ConvexRegion::GetPortal(int i) const noexcept
 {
-    return mPortals[i];
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return portals.at(i).object;
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::ConvexRegion::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 11:00)
 
 #ifndef RENDERING_DETAIL_COLLAPSE_RECORD_ARRAY_H
 #define RENDERING_DETAIL_COLLAPSE_RECORD_ARRAY_H
@@ -10,51 +13,46 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CollapseRecord.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
 
-
 #include <vector>
- 
-EXPORT_SHARED_PTR(Rendering, CollapseRecordArrayImpl, RENDERING_DEFAULT_DECLARE);
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(CollapseRecordArray, CollapseRecordArrayImpl);
+
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE CollapseRecordArray : public CoreTools::Object
-	{
-	public:
-            void Swap(CollapseRecordArray& rhs) noexcept;
+    class RENDERING_DEFAULT_DECLARE CollapseRecordArray : public CoreTools::Object
+    {
+    public:
+        COPY_UNSHARED_TYPE_DECLARE(CollapseRecordArray);
+        using ParentType = Object;
 
-        public:
-            TYPE_DECLARE(CollapseRecordArray);
-            using ClassShareType = CoreTools::CopyUnsharedClasses;
-            ~CollapseRecordArray() noexcept = default;
-            CollapseRecordArray(const CollapseRecordArray& rhs);
-            CollapseRecordArray& operator=(const CollapseRecordArray& rhs);
-            CollapseRecordArray(CollapseRecordArray&& rhs) noexcept;
-            CollapseRecordArray& operator=(CollapseRecordArray&& rhs) noexcept;
-		using ParentType = Object;
+    public:
+        explicit CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord);
 
-	public:		
-		explicit CollapseRecordArray(const std::vector<CollapseRecord>& collapseRecord);
- 
-		 
-		
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
-		
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CollapseRecordArray); 
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		int GetNumRecords() const;
-		const std::vector<CollapseRecord> GetRecords() const;
-		const CollapseRecord GetRecord(int index) const;
-                ObjectInterfaceSharedPtr CloneObject() const override;
-	private:
-		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
-	};
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(CollapseRecordArray);
+
+        NODISCARD int GetNumRecords() const;
+        NODISCARD std::vector<CollapseRecord> GetRecords() const;
+        NODISCARD CollapseRecord GetRecord(int index) const;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+    private:
+        PackageType impl;
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(CollapseRecordArray);
+
+    CORE_TOOLS_STREAM_REGISTER(CollapseRecordArray);
+
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SHARED_PTR_DECLARE( CollapseRecordArray);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(CollapseRecordArray);
 }
 
-#endif // RENDERING_DETAIL_COLLAPSE_RECORD_ARRAY_H
+#endif  // RENDERING_DETAIL_COLLAPSE_RECORD_ARRAY_H

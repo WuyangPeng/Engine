@@ -59,6 +59,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Buffer, GetNumBytes, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetReadOnlyData, const char*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer, GetReadOnlyData, int, const char*)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetSpanIterator, Rendering::Buffer::SpanIterator)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetWriteSpanIterator, Rendering::Buffer::WriteSpanIterator)
 
 Rendering::Buffer::Buffer(LoadConstructor value)
     : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }

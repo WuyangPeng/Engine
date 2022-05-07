@@ -1,15 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 14:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/07 15:28)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ControlledObject.h"
 #include "Controller.h"
 #include "Detail/ControllerImpl.h"
-
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -23,58 +25,17 @@
 using std::make_shared;
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Noexcept.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26456)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, Controller);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Controller);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Controller);
 
-Rendering::Controller::Controller()
-    : ParentType{}, impl{ make_shared<ImplType>() }, m_Object{ nullptr }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, Controller)
+
+Rendering::Controller::Controller(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, controllerInterface{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::Controller::Controller(const Controller& rhs)
-    : ParentType(rhs), impl{ make_shared<ImplType>(*rhs.impl) }, m_Object{ rhs.m_Object }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::Controller& Rendering::Controller::operator=(const Controller& rhs)
-{
-    ;
-
-    ParentType::operator=(rhs);
-
-    impl = make_shared<ImplType>(*rhs.impl);
-
-    m_Object = rhs.m_Object;
-
-    return *this;
-}
-
-Rendering::Controller::Controller(Controller&& rhs) noexcept
-    : ParentType(std::move(rhs)), impl{ std::move(rhs.impl) }, m_Object{ std::move(rhs.m_Object) }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-Rendering::Controller& Rendering::Controller::operator=(Controller&& rhs) noexcept
-{
-    ;
-
-    ParentType::operator=(std::move(rhs));
-
-    impl = std::move(rhs.impl);
-
-    m_Object = std::move(rhs.m_Object);
-
-    return *this;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Controller)
@@ -83,23 +44,23 @@ const Rendering::ControllerInterface* Rendering::Controller::GetControllerObject
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Object;
+    return controllerInterface;
 }
 
 Rendering::ControllerInterface* Rendering::Controller::GetControllerObject() noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
-    return m_Object;
+    return controllerInterface;
 }
 
-void Rendering::Controller::SetObject(ControllerInterface* object)
+void Rendering::Controller::SetObject(ControllerInterface* aObject)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CoreTools::DisableNoexcept();
 
-    m_Object = object;
+    controllerInterface = aObject;
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetApplicationTime, double, void)
@@ -122,7 +83,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetAct
 
 CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const string& name)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     // m_Object不搜索对象图以避免循环。
     return ParentType::GetObjectByName(name);
@@ -130,7 +91,7 @@ CoreTools::ObjectSharedPtr Rendering::Controller::GetObjectByName(const string& 
 
 vector<CoreTools::ObjectSharedPtr> Rendering::Controller::GetAllObjectsByName(const string& name)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     // m_Object不搜索对象图以避免循环。
     return ParentType::GetAllObjectsByName(name);
@@ -155,7 +116,7 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller::GetAllConstObject
 }
 
 Rendering::Controller::Controller(LoadConstructor value)
-    : ParentType{ value }, impl{ make_shared<ImplType>() }, m_Object{ nullptr }
+    : ParentType{ value }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, controllerInterface{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -168,8 +129,6 @@ int Rendering::Controller::GetStreamingSize() const
 
     size += impl->GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(m_Object);
-
     return size;
 }
 
@@ -178,11 +137,6 @@ uint64_t Rendering::Controller::Register(CoreTools::ObjectRegister& target) cons
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     const auto uniqueID = ParentType::Register(target);
-
-    if (uniqueID != 0)
-    {
-        //target.Register(m_Object);
-    }
 
     return uniqueID;
 }
@@ -197,64 +151,46 @@ void Rendering::Controller::Save(CoreTools::BufferTarget& target) const
 
     impl->Save(target);
 
-    // target.WritePointer(m_Object);
-
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::Controller::Link(CoreTools::ObjectLink& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     ParentType::Link(source);
-
-    /*	ControllerInterfaceSharedPtr object{ m_ObjectID,nullptr };
-	
-    source.ResolveObjectSharedPtrLink(object);
-
-	m_Object = object.GetData();*/
 }
 
 void Rendering::Controller::PostLink()
 {
-    ;
-
     ParentType::PostLink();
 }
 
 void Rendering::Controller::Load(CoreTools::BufferSource& source)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    //impl->Load(source);
-
-    ControllerInterfaceSharedPtr object;
-
-    //source.ReadSharedPtr(object);
-
-    //m_ObjectID = object.GetAddress();
+    impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::Controller::SetTime(double minTime, double maxTime) noexcept
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     return impl->SetTime(minTime, maxTime);
 }
 
 bool Rendering::Controller::Update(double applicationTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     CoreTools::DisableNoexcept();
 
     return impl->Update(applicationTime);
 }
-
-#include STSTEM_WARNING_POP

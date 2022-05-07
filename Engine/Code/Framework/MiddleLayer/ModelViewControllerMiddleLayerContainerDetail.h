@@ -1,327 +1,309 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 14:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 15:50)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_DETAIL_H
 #define FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_DETAIL_H
 
 #include "ModelViewControllerMiddleLayerContainer.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform },
-	 m_ModelMiddleLayer{ std::make_shared<ModelMiddleLayerType>(middleLayerPlatform) },
-	 m_ViewMiddleLayer{ std::make_shared<ViewMiddleLayerType>(middleLayerPlatform) },
-	 m_ControllerMiddleLayer{ std::make_shared<ControllerMiddleLayerType>(middleLayerPlatform) }
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform },
+      modelMiddleLayer{ std::make_shared<ModelMiddleLayerType>(middleLayerPlatform) },
+      viewMiddleLayer{ std::make_shared<ViewMiddleLayerType>(middleLayerPlatform) },
+      controllerMiddleLayer{ std::make_shared<ControllerMiddleLayerType>(middleLayerPlatform) }
 {
-	m_ModelMiddleLayer->SetViewMiddleLayer(m_ViewMiddleLayer);
-	m_ModelMiddleLayer->SetControllerMiddleLayer(m_ControllerMiddleLayer);
+    modelMiddleLayer->SetViewMiddleLayer(viewMiddleLayer);
+    modelMiddleLayer->SetControllerMiddleLayer(controllerMiddleLayer);
 
-	m_ViewMiddleLayer->SetModelMiddleLayer(m_ModelMiddleLayer);
-	m_ViewMiddleLayer->SetControllerMiddleLayer(m_ControllerMiddleLayer);
+    viewMiddleLayer->SetModelMiddleLayer(modelMiddleLayer);
+    viewMiddleLayer->SetControllerMiddleLayer(controllerMiddleLayer);
 
-	m_ControllerMiddleLayer->SetModelMiddleLayer(m_ModelMiddleLayer);
-	m_ControllerMiddleLayer->SetViewMiddleLayer(m_ViewMiddleLayer);
+    controllerMiddleLayer->SetModelMiddleLayer(modelMiddleLayer);
+    controllerMiddleLayer->SetViewMiddleLayer(viewMiddleLayer);
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::ModelViewControllerMiddleLayerContainer(ModelViewControllerMiddleLayerContainer&& rhs) noexcept
-	:ParentType{ std::move(rhs) },
-	 m_ModelMiddleLayer{ std::move(rhs.m_ModelMiddleLayer) },
-	 m_ViewMiddleLayer{ std::move(rhs.m_ViewMiddleLayer) },
-	 m_ControllerMiddleLayer{ std::move(rhs.m_ControllerMiddleLayer) }
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::ModelViewControllerMiddleLayerContainer(ModelViewControllerMiddleLayerContainer&& rhs) noexcept
+    : ParentType{ std::move(rhs) },
+      modelMiddleLayer{ std::move(rhs.modelMiddleLayer) },
+      viewMiddleLayer{ std::move(rhs.viewMiddleLayer) },
+      controllerMiddleLayer{ std::move(rhs.controllerMiddleLayer) }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>& Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::operator=(ModelViewControllerMiddleLayerContainer&& rhs) noexcept
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>& Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::operator=(ModelViewControllerMiddleLayerContainer&& rhs) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::operator=(std::move(rhs));
+    ParentType::operator=(std::move(rhs));
 
-	m_ModelMiddleLayer = std::move(rhs.m_ModelMiddleLayer);
-	m_ViewMiddleLayer = std::move(rhs.m_ViewMiddleLayer);
-	m_ControllerMiddleLayer = std::move(rhs.m_ControllerMiddleLayer);
+    modelMiddleLayer = std::move(rhs.modelMiddleLayer);
+    viewMiddleLayer = std::move(rhs.viewMiddleLayer);
+    controllerMiddleLayer = std::move(rhs.controllerMiddleLayer);
 
-	return *this;
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename > class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid() && m_ModelMiddleLayer && m_ViewMiddleLayer && m_ControllerMiddleLayer)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-#endif // OPEN_CLASS_INVARIANT
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::IsValid() const noexcept
 {
-	;
-
-	if (ParentType::PreCreate(environmentDirectory) && m_ModelMiddleLayer->PreCreate(environmentDirectory) && m_ViewMiddleLayer->PreCreate(environmentDirectory) && m_ControllerMiddleLayer->PreCreate(environmentDirectory))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::IsValid() && modelMiddleLayer && viewMiddleLayer && controllerMiddleLayer)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Create()
-{
-	;
+#endif  // OPEN_CLASS_INVARIANT
 
-	if (ParentType::Create() && m_ModelMiddleLayer->Create() && m_ViewMiddleLayer->Create() && m_ControllerMiddleLayer->Create())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
+
+    if (ParentType::PreCreate(environmentDirectory) && modelMiddleLayer->PreCreate(environmentDirectory) && viewMiddleLayer->PreCreate(environmentDirectory) && controllerMiddleLayer->PreCreate(environmentDirectory))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Initialize()
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Create()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Initialize() && m_ModelMiddleLayer->Initialize() && m_ViewMiddleLayer->Initialize() && m_ControllerMiddleLayer->Initialize())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Create() && modelMiddleLayer->Create() && viewMiddleLayer->Create() && controllerMiddleLayer->Create())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Destroy()
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Initialize()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Destroy() && m_ModelMiddleLayer->Destroy() && m_ViewMiddleLayer->Destroy() && m_ControllerMiddleLayer->Destroy())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Initialize() && modelMiddleLayer->Initialize() && viewMiddleLayer->Initialize() && controllerMiddleLayer->Initialize())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-void Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Terminate()
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Destroy()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::Terminate();
-
-	m_ModelMiddleLayer->Terminate();
-	m_ViewMiddleLayer->Terminate();
-	m_ControllerMiddleLayer->Terminate();
+    if (ParentType::Destroy() && modelMiddleLayer->Destroy() && viewMiddleLayer->Destroy() && controllerMiddleLayer->Destroy())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-void Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::PreIdle()
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+void Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Terminate()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::PreIdle();
+    ParentType::Terminate();
 
-	m_ModelMiddleLayer->PreIdle();
-	m_ViewMiddleLayer->PreIdle();
-	m_ControllerMiddleLayer->PreIdle();
+    modelMiddleLayer->Terminate();
+    viewMiddleLayer->Terminate();
+    controllerMiddleLayer->Terminate();
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Idle(int64_t timeDelta)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+void Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::PreIdle()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Idle(timeDelta) && m_ModelMiddleLayer->Idle(timeDelta) && m_ViewMiddleLayer->Idle(timeDelta) && m_ControllerMiddleLayer->Idle(timeDelta))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    ParentType::PreIdle();
+
+    modelMiddleLayer->PreIdle();
+    viewMiddleLayer->PreIdle();
+    controllerMiddleLayer->PreIdle();
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Paint()
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Idle(int64_t timeDelta)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Paint() && m_ViewMiddleLayer->Paint())
-		return true;
-	else
-		return false;
+    if (ParentType::Idle(timeDelta) && modelMiddleLayer->Idle(timeDelta) && viewMiddleLayer->Idle(timeDelta) && controllerMiddleLayer->Idle(timeDelta))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename > class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Move(const WindowPoint& point)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Paint()
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Move(point) && m_ViewMiddleLayer->Move(point))
-		return true;
-	else
-		return false;
+    if (ParentType::Paint() && viewMiddleLayer->Paint())
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Move(const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Resize(windowDisplay, size) && m_ViewMiddleLayer->Resize(windowDisplay, size))
-		return true;
-	else
-		return false;
+    if (ParentType::Move(point) && viewMiddleLayer->Move(point))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::KeyUp(int key, const WindowPoint& point)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::KeyUp(key, point) && m_ControllerMiddleLayer->KeyUp(key, point))
-		return true;
-	else
-		return false;
+    if (ParentType::Resize(windowDisplay, size) && viewMiddleLayer->Resize(windowDisplay, size))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::KeyDown(int key, const WindowPoint& point)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::KeyUp(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::KeyDown(key, point) && m_ControllerMiddleLayer->KeyDown(key, point))
-		return true;
-	else
-		return false;
+    if (ParentType::KeyUp(key, point) && controllerMiddleLayer->KeyUp(key, point))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::SpecialKeyUp(int key, const WindowPoint& point)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::KeyDown(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::SpecialKeyUp(key, point) && m_ControllerMiddleLayer->SpecialKeyUp(key, point))
-		return true;
-	else
-		return false;
+    if (ParentType::KeyDown(key, point) && controllerMiddleLayer->KeyDown(key, point))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::SpecialKeyDown(int key, const WindowPoint& point)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::SpecialKeyDown(key, point) && m_ControllerMiddleLayer->SpecialKeyDown(key, point))
-		return true;
-	else
-		return false;
+    if (ParentType::SpecialKeyUp(key, point) && controllerMiddleLayer->SpecialKeyUp(key, point))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::PassiveMotion(const WindowPoint& point)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::PassiveMotion(point) && m_ControllerMiddleLayer->PassiveMotion(point))
-		return true;
-	else
-		return false;
+    if (ParentType::SpecialKeyDown(key, point) && controllerMiddleLayer->SpecialKeyDown(key, point))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::PassiveMotion(const WindowPoint& point)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::Motion(point, virtualKeys) && m_ControllerMiddleLayer->Motion(point, virtualKeys))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::PassiveMotion(point) && controllerMiddleLayer->PassiveMotion(point))
+        return true;
+    else
+        return false;
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::MouseWheel(delta, point, virtualKeys) && m_ControllerMiddleLayer->MouseWheel(delta, point, virtualKeys))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::Motion(point, virtualKeys) && controllerMiddleLayer->Motion(point, virtualKeys))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template<typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
-	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	if (ParentType::MouseClick(button, state, point, virtualKeys) && m_ControllerMiddleLayer->MouseClick(button, state, point, virtualKeys))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::MouseWheel(delta, point, virtualKeys) && controllerMiddleLayer->MouseWheel(delta, point, virtualKeys))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-#endif // FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_DETAIL_H
+template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+{
+    FRAMEWORK_CLASS_IS_VALID_1;
 
+    if (ParentType::MouseClick(button, state, point, virtualKeys) && controllerMiddleLayer->MouseClick(button, state, point, virtualKeys))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+#endif  // FRAMEWORK_MIDDLE_LAYER_MODEL_VIEW_CONTROLLER_MIDDLE_LAYER_CONTAINER_DETAIL_H

@@ -1,102 +1,73 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/29 11:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/22 18:12)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLIndexBuffer.h"
 #include "OpenGLMapping.h"
-
+#include "System/MemoryTools/MemoryHelper.h"
 #include "System/OpenGL/OpenGLAPI.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Renderers/BufferLockManagerDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
+#include "Rendering/Renderers/BufferLockManagerDetail.h"
+#include "Rendering/Resources/IndexBuffer.h"
+
 Rendering::OpenGLIndexBuffer::OpenGLIndexBuffer([[maybe_unused]] Renderer* renderer, const IndexBuffer* indexBuffer)
-    : ParentType{}, m_Buffer{ 0 }
+    : ParentType{}, buffer{ 0 }
 {
     Init(indexBuffer);
-    
- 
-    
-	RENDERING_SELF_CLASS_IS_VALID_1;
+
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 // private
-void Rendering::OpenGLIndexBuffer
-::Init(const IndexBuffer* indexBuffer)
+void Rendering::OpenGLIndexBuffer::Init(const IndexBuffer* indexBuffer)
 {
- //   m_Buffer = System::GLElementBufferData(indexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(indexBuffer->GetUsage())]);
-    
-	BufferLockManager<ClassType> manager{ *this };
-	void* data = manager.Lock(BufferLocking::WriteOnly);
+    if (indexBuffer != nullptr)
+    {
+        BufferLockManager<ClassType> manager{ *this };
 
-    memcpy(data, indexBuffer->GetReadOnlyData(), indexBuffer->GetNumBytes());   
-}
+        void* data = manager.Lock(BufferLocking::WriteOnly);
 
-Rendering::OpenGLIndexBuffer
-::~OpenGLIndexBuffer ()
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-    
- //   m_Buffer = System::GLDeleteElementBuffers(m_Buffer);
+        System::MemoryCopy(data, indexBuffer->GetReadOnlyData(), indexBuffer->GetNumBytes());
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::OpenGLIndexBuffer
-::IsValid() const noexcept
-{
-	if(ParentType::IsValid() && 0 <= m_Buffer)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-void Rendering::OpenGLIndexBuffer::Enable([[maybe_unused]] Renderer* renderer) noexcept
+bool Rendering::OpenGLIndexBuffer::IsValid() const noexcept
 {
-    RENDERING_CLASS_IS_VALID_1;
-    
- //   System::GLBindElementBuffer(m_Buffer);
-    
- 
+    if (ParentType::IsValid() && 0 <= buffer)
+        return true;
+    else
+        return false;
 }
 
-void Rendering::OpenGLIndexBuffer::Disable([[maybe_unused]] Renderer* renderer) noexcept
+#endif  // OPEN_CLASS_INVARIANT
+
+void Rendering::OpenGLIndexBuffer::Enable(MAYBE_UNUSED Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-    //System::GLBindElementBuffer(0);
-    
-  
 }
 
-void* Rendering::OpenGLIndexBuffer
-::Lock (BufferLocking mode) noexcept
+void Rendering::OpenGLIndexBuffer::Disable(MAYBE_UNUSED Renderer* renderer) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-  //  auto videoMemory = System::GLMapElementBuffer(m_Buffer,g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
-    
-   // return videoMemory;
-    mode;
+}
+
+void* Rendering::OpenGLIndexBuffer::Lock(MAYBE_UNUSED BufferLocking mode) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+
     return nullptr;
 }
 
-void Rendering::OpenGLIndexBuffer
-::Unlock () noexcept
+void Rendering::OpenGLIndexBuffer::Unlock() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-    
-   // System::GLUnmapElementBuffer(m_Buffer);
 }
-
-
-
-#include STSTEM_WARNING_POP

@@ -8,25 +8,25 @@
 #define WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_TESTING_HELPER_H
 
 #include "SuiteWindowMessage.h"
-#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
+#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
 namespace Framework
 {
-	using TestingHelperBase = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, WindowProcessTesting>;
+    using TestingHelperBase = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, WindowProcessTesting>;
 
-	class TestingHelper final : public TestingHelperBase
-	{
-	public:
-		using ClassType = TestingHelper;
-		using ParentType = TestingHelperBase; 
+    class TestingHelper final : public TestingHelperBase
+    {
+    public:
+        using ClassType = TestingHelper;
+        using ParentType = TestingHelperBase;
 
-	public:
-		TestingHelper(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,
-					  const EnvironmentDirectory& environmentDirectory);
+    public:
+        TestingHelper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information,
+                      const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
-	};
+        CLASS_INVARIANT_FINAL_DECLARE;
+    };
 }
 
-#endif // WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_TESTING_HELPER_H
+#endif  // WINDOW_MESSAGE_UNIT_TEST_SUITE_TESTING_TESTING_HELPER_H

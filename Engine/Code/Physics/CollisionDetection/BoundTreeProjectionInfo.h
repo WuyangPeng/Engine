@@ -1,37 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/29 15:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/24 17:02)
 
 #ifndef PHYSICS_COLLISION_DETECTION_BOUND_TREE_PROJECTION_INFO_H
 #define PHYSICS_COLLISION_DETECTION_BOUND_TREE_PROJECTION_INFO_H
 
 #include "Physics/PhysicsDll.h"
-  
+
 namespace Physics
 {
-	// 在轴上进行重心预测的排序
-	class PHYSICS_DEFAULT_DECLARE BoundTreeProjectionInfo
+    // 在轴上进行重心预测的排序
+    class PHYSICS_DEFAULT_DECLARE BoundTreeProjectionInfo
     {
-	public:
-		using  ClassType = BoundTreeProjectionInfo;
+    public:
+        using ClassType = BoundTreeProjectionInfo;
 
     public:
-                BoundTreeProjectionInfo(int triangle, float projection) noexcept;
+        BoundTreeProjectionInfo(int triangle, float projection) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		int GetTriangle() const noexcept;
-                float GetProjection() const noexcept;
+        NODISCARD int GetTriangle() const noexcept;
+        NODISCARD float GetProjection() const noexcept;
 
-	private:
-        int m_Triangle;
-		float m_Projection;
+    private:
+        int triangle;
+        float projection;
     };
 
-	bool PHYSICS_DEFAULT_DECLARE operator<(const BoundTreeProjectionInfo& lhs, const BoundTreeProjectionInfo& rhs) noexcept;
+    NODISCARD bool PHYSICS_DEFAULT_DECLARE operator<(const BoundTreeProjectionInfo& lhs, const BoundTreeProjectionInfo& rhs) noexcept;
 }
 
-
-#endif // PHYSICS_COLLISION_DETECTION_BOUND_TREE_PROJECTION_INFO_H
+#endif  // PHYSICS_COLLISION_DETECTION_BOUND_TREE_PROJECTION_INFO_H

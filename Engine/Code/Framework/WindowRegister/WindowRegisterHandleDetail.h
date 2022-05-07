@@ -1,159 +1,159 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 11:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:50)
 
 // 注册窗口类（基类）的实现
 #ifndef FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H
 
 #include "WindowRegisterHandle.h"
-#include "System/Windows/WindowsRegister.h"
-#include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
+#include "System/Time/Using/DeltaTimeUsing.h"
+#include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Command/CommandHandle.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
 template <typename WindowsProcess>
-Framework::WindowRegisterHandle<WindowsProcess>
-	::WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance, const char* commandLine, const WindowPictorial& pictorial, const WindowName& name, WindowClassStyle styles)
-	:m_EnvironmentDirectory{ environmentDirectory }, m_WindowProcess{ System::g_Microseconds / sm_Interval }, m_Command{ std::make_shared<Command>(commandLine) },
-	 m_WindowRegisterParameter{ instance,styles }, m_WindowPictorial{ pictorial }, m_WindowName{ name }
+Framework::WindowRegisterHandle<WindowsProcess>::WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance, const char* commandLine, const WindowPictorial& pictorial, const WindowName& name, WindowsClassStyle styles)
+    : environmentDirectory{ environmentDirectory },
+      windowProcess{ System::g_Microseconds / interval },
+      command{ std::make_shared<Command>(commandLine) },
+      windowRegisterParameter{ instance, styles },
+      windowPictorial{ pictorial },
+      windowName{ name }
 {
-	using namespace std::literals;
+    using namespace std::literals;
 
-	auto className = m_WindowName.GetWindowClassName();
+    auto className = windowName.GetWindowClassName();
 
-	// 允许在创建窗口之前进行工作。
-	if (!m_WindowProcess.PreCreate(environmentDirectory) ||
-		m_WindowProcess.IsClassNameExist(className) ||
-		InitApplication() == 0 ||
-		!m_WindowProcess.SetNewClassName(className))
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("注册窗口失败！"s));
-	}
+    // 允许在创建窗口之前进行工作。
+    if (!windowProcess.PreCreate(environmentDirectory) ||
+        windowProcess.IsClassNameExist(className) ||
+        InitApplication() == 0 ||
+        !windowProcess.SetNewClassName(className))
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("注册窗口失败！"s));
+    }
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename WindowProcessHandle>
-Framework::WindowRegisterHandle<WindowProcessHandle>
-	::WindowRegisterHandle(WindowRegisterHandle&& rhs) noexcept
-	:m_EnvironmentDirectory{ std::move(rhs.m_EnvironmentDirectory) }, m_WindowProcess{ std::move(rhs.m_WindowProcess) },
-	 m_Command{ std::move(rhs.m_Command) }, m_WindowRegisterParameter{ std::move(rhs.m_WindowRegisterParameter) },
-	 m_WindowPictorial{ std::move(rhs.m_WindowPictorial) }, m_WindowName{ std::move(rhs.m_WindowName) }
+Framework::WindowRegisterHandle<WindowProcessHandle>::WindowRegisterHandle(WindowRegisterHandle&& rhs) noexcept
+    : environmentDirectory{ std::move(rhs.environmentDirectory) },
+      windowProcess{ std::move(rhs.windowProcess) },
+      command{ std::move(rhs.command) },
+      windowRegisterParameter{ std::move(rhs.windowRegisterParameter) },
+      windowPictorial{ std::move(rhs.windowPictorial) },
+      windowName{ std::move(rhs.windowName) }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename WindowProcessHandle>
-Framework::WindowRegisterHandle<WindowProcessHandle>& Framework::WindowRegisterHandle<WindowProcessHandle>
-	::operator=(WindowRegisterHandle&& rhs) noexcept
+Framework::WindowRegisterHandle<WindowProcessHandle>& Framework::WindowRegisterHandle<WindowProcessHandle>::operator=(WindowRegisterHandle&& rhs) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_EnvironmentDirectory = std::move(rhs.m_EnvironmentDirectory);
-	m_WindowProcess = std::move(rhs.m_WindowProcess);
-	m_Command = std::move(rhs.m_Command);
-	m_WindowRegisterParameter = std::move(rhs.m_WindowRegisterParameter);
-	m_WindowPictorial = std::move(rhs.m_WindowPictorial);
-	m_WindowName = std::move(rhs.m_WindowName);
+    environmentDirectory = std::move(rhs.environmentDirectory);
+    windowProcess = std::move(rhs.windowProcess);
+    command = std::move(rhs.command);
+    windowRegisterParameter = std::move(rhs.windowRegisterParameter);
+    windowPictorial = std::move(rhs.windowPictorial);
+    windowName = std::move(rhs.windowName);
 
-	return *this;
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename WindowsProcess>
-bool Framework::WindowRegisterHandle<WindowsProcess>
-	::IsValid() const noexcept
+bool Framework::WindowRegisterHandle<WindowsProcess>::IsValid() const noexcept
 {
-	if (m_Command != nullptr)
-		return true;
-	else
-		return false;
+    if (command != nullptr)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+
+#endif  // OPEN_CLASS_INVARIANT
 
 // private
 template <typename WindowsProcess>
-System::WindowsAtom Framework::WindowRegisterHandle<WindowsProcess>
-	::InitApplication()
+System::WindowsAtom Framework::WindowRegisterHandle<WindowsProcess>::InitApplication()
 {
-	auto wndclass = System::GetWindowsStructDefaultSize<System::WindowsClassEx>();	
+    auto wndclass = System::GetWindowsStructDefaultSize<System::WindowsClassEx>();
 
-	auto windowClassName = m_WindowName.GetWindowClassName();
-	auto windowMenuName = m_WindowName.GetWindowMenuName();
+    auto windowClassName = windowName.GetWindowClassName();
+    auto windowMenuName = windowName.GetWindowMenuName();
 
-	wndclass.style = System::EnumCastUnderlying<System::WindowsUInt>(m_WindowRegisterParameter.GetStyle());
-	wndclass.lpfnWndProc = m_WindowProcess.GetProcess();
-	wndclass.cbClsExtra = m_WindowRegisterParameter.GetWindowClassExtra();
-	wndclass.cbWndExtra = m_WindowRegisterParameter.GetWindowExtra();
-	wndclass.hInstance = m_WindowRegisterParameter.GetHInstance();
-	wndclass.hIcon = m_WindowPictorial.GetHIcon();
-	wndclass.hCursor = m_WindowPictorial.GetHCursor();
-	wndclass.hbrBackground = m_WindowPictorial.GetHBrush();
-	wndclass.lpszMenuName = windowMenuName.c_str();
-	wndclass.lpszClassName = windowClassName.c_str();
-	wndclass.hIconSm = m_WindowPictorial.GetHIcon();
+    wndclass.style = System::EnumCastUnderlying<System::WindowsUInt>(windowRegisterParameter.GetStyle());
+    wndclass.lpfnWndProc = windowProcess.GetProcess();
+    wndclass.cbClsExtra = windowRegisterParameter.GetWindowClassExtra();
+    wndclass.cbWndExtra = windowRegisterParameter.GetWindowExtra();
+    wndclass.hInstance = windowRegisterParameter.GetHInstance();
+    wndclass.hIcon = windowPictorial.GetHIcon();
+    wndclass.hCursor = windowPictorial.GetHCursor();
+    wndclass.hbrBackground = windowPictorial.GetHBrush();
+    wndclass.lpszMenuName = windowMenuName.c_str();
+    wndclass.lpszClassName = windowClassName.c_str();
+    wndclass.hIconSm = windowPictorial.GetHIcon();
 
-	return System::RegisterSystemClass(&wndclass);
+    return System::RegisterSystemClass(&wndclass);
 }
 
 template <typename WindowsProcess>
-System::WindowsHInstance Framework::WindowRegisterHandle<WindowsProcess>
-	::GetHInstance() const noexcept
+System::WindowsHInstance Framework::WindowRegisterHandle<WindowsProcess>::GetHInstance() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowRegisterParameter.GetHInstance();
+    return windowRegisterParameter.GetHInstance();
 }
 
 template <typename WindowsProcess>
-System::String Framework::WindowRegisterHandle<WindowsProcess>
-	::GetWindowClassName() const
+System::String Framework::WindowRegisterHandle<WindowsProcess>::GetWindowClassName() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowName.GetWindowClassName();
+    return windowName.GetWindowClassName();
 }
 
 template <typename WindowsProcess>
-System::String Framework::WindowRegisterHandle<WindowsProcess>
-	::GetWindowMenuName() const
+System::String Framework::WindowRegisterHandle<WindowsProcess>::GetWindowMenuName() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowName.GetWindowMenuName();
+    return windowName.GetWindowMenuName();
 }
 
 template <typename WindowsProcess>
-typename Framework::WindowRegisterHandle<WindowsProcess>::DisplayFunction Framework::WindowRegisterHandle<WindowsProcess>
-	::GetFunction() const noexcept
+typename Framework::WindowRegisterHandle<WindowsProcess>::DisplayFunction Framework::WindowRegisterHandle<WindowsProcess>::GetFunction() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowProcess.GetFunction();
+    return windowProcess.GetFunction();
 }
 
 template <typename WindowsProcess>
-typename Framework::WindowRegisterHandle<WindowsProcess>::CommandSharedPtr Framework::WindowRegisterHandle<WindowsProcess>
-	::GetCommand() const noexcept
+typename Framework::WindowRegisterHandle<WindowsProcess>::CommandSharedPtr Framework::WindowRegisterHandle<WindowsProcess>::GetCommand() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Command;
+    return command;
 }
 
 template <typename WindowsProcess>
-WindowsProcess Framework::WindowRegisterHandle<WindowsProcess>
-	::GetWindowProcess() const noexcept
+WindowsProcess Framework::WindowRegisterHandle<WindowsProcess>::GetWindowProcess() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_WindowProcess;
+    return windowProcess;
 }
 
-#endif // FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H
-
+#endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H

@@ -1,118 +1,120 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 11:24)
 
 #include "Framework/FrameworkExport.h"
 
 #include "ObjectMotionMove.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
-#include "Rendering/DataTypes/Transform.h" 
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
-Framework::ObjectMotionMove
-	::ObjectMotionMove(const SpatialSmartPointer& motionObject, int doRoll, int doYaw, int doPitch, float rotationSpeed)
-	:m_MotionObject{ motionObject }, m_DoRoll{ doRoll }, m_DoYaw{ doYaw }, m_DoPitch{ doPitch },
-	 m_RotationSpeed{ rotationSpeed }, m_Axis{ }, m_Angle{ 0.0f }, m_Rotate{ }
-{
-	Calculate();
+#include "Mathematics/Algebra/MatrixDetail.h"
+#include "Rendering/DataTypes/Transform.h"
+#include "Rendering/DataTypes/TransformMatrixDetail.h"
 
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+Framework::ObjectMotionMove::ObjectMotionMove(const SpatialSharedPtr& motionObject, int doRoll, int doYaw, int doPitch, float rotationSpeed)
+    : motionObject{ motionObject },
+      doRoll{ doRoll },
+      doYaw{ doYaw },
+      doPitch{ doPitch },
+      rotationSpeed{ rotationSpeed },
+      axis{},
+      angle{ 0.0f },
+      rotate{}
+{
+    Calculate();
+
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, ObjectMotionMove)
 
-const Framework::ObjectMotionMove::AVector Framework::ObjectMotionMove ::GetAxis() const noexcept
+Framework::ObjectMotionMove::AVector Framework::ObjectMotionMove::GetAxis() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Axis;
+    return axis;
 }
 
-float Framework::ObjectMotionMove
-	::GetAngle() const noexcept
+float Framework::ObjectMotionMove::GetAngle() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Angle;
+    return angle;
 }
 
-const Framework::ObjectMotionMove::Matrix Framework::ObjectMotionMove ::GetRotate() const noexcept
+Framework::ObjectMotionMove::Matrix Framework::ObjectMotionMove::GetRotate() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Rotate;
+    return rotate;
 }
 
-void Framework::ObjectMotionMove
-	::Calculate()
+void Framework::ObjectMotionMove::Calculate()
 {
-	// 检查对象是否被移动。
-	const auto* parent = m_MotionObject->GetParent();
+    // 检查对象是否被移动。
+    const auto* parent = motionObject->GetParent();
 
-	if (m_DoRoll != 0)
-	{
-		m_Rotate = m_MotionObject->GetLocalTransform().GetRotate();
+    if (doRoll != 0)
+    {
+        rotate = motionObject->GetLocalTransform().GetRotate();
 
-		m_Angle = m_DoRoll * m_RotationSpeed;
-		if (parent != nullptr)
-		{
-                    m_Axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(0) };
-		}
-		else
-		{
-                    m_Axis = Mathematics::AVectorF::GetUnitX();
-		}
-	}
-	else if (m_DoYaw != 0)
-	{
-		m_Rotate = m_MotionObject->GetLocalTransform().GetRotate();
+        angle = doRoll * rotationSpeed;
+        if (parent != nullptr)
+        {
+            axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(0) };
+        }
+        else
+        {
+            axis = Mathematics::AVectorF::GetUnitX();
+        }
+    }
+    else if (doYaw != 0)
+    {
+        rotate = motionObject->GetLocalTransform().GetRotate();
 
-		m_Angle = m_DoYaw * m_RotationSpeed;
-		if (parent != nullptr)
-		{
-                    m_Axis = Mathematics::AVector{
-                        parent->GetWorldTransform().GetRotate().GetColumn(1)
-                    };
-		}
-		else
-		{
-                    Mathematics::AVectorF::GetUnitY();
-		}
-	}
-	else if (m_DoPitch != 0)
-	{
-		m_Rotate = m_MotionObject->GetLocalTransform().GetRotate();
+        angle = doYaw * rotationSpeed;
+        if (parent != nullptr)
+        {
+            axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(1) };
+        }
+        else
+        {
+            Mathematics::AVectorF::GetUnitY();
+        }
+    }
+    else if (doPitch != 0)
+    {
+        rotate = motionObject->GetLocalTransform().GetRotate();
 
-		m_Angle = m_DoPitch * m_RotationSpeed;
-		if (parent != nullptr)
-		{
-                    m_Axis = Mathematics::AVector{
-                        parent->GetWorldTransform().GetRotate().GetColumn(2)
-                    };
-		}
-		else
-		{
-                    m_Axis = Mathematics::AVectorF::GetUnitZ();
-		}
-	}
+        angle = doPitch * rotationSpeed;
+        if (parent != nullptr)
+        {
+            axis = Mathematics::AVector{ parent->GetWorldTransform().GetRotate().GetColumn(2) };
+        }
+        else
+        {
+            axis = Mathematics::AVectorF::GetUnitZ();
+        }
+    }
 }
 
-const Framework::ObjectMotionMove::Transform Framework::ObjectMotionMove
-	::GetIncrement() const
+Framework::ObjectMotionMove::Transform Framework::ObjectMotionMove::GetIncrement() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	const Matrix increment{ m_Axis, m_Angle };
-	auto rotate = increment * m_Rotate;
-	rotate.Orthonormalize();
+    const Matrix increment{ axis, angle };
+    auto aRotate = increment * rotate;
+    aRotate.Orthonormalize();
 
-	auto transform = m_MotionObject->GetLocalTransform();
-	transform.SetRotate(rotate);
+    auto transform = motionObject->GetLocalTransform();
+    transform.SetRotate(aRotate);
 
-	return transform;
+    return transform;
 }
-

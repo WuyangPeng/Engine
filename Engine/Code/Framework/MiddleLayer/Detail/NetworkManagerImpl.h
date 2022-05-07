@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 14:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 16:05)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_NETWORK_MANAGER_INTERFACE_IMPL_H
@@ -40,15 +43,13 @@ namespace Framework
 
         void ResetSendSocketManager(const std::string& fileName);
 
-        SendSocketManagerSharedPtr GetSendSocketManager() noexcept;
-        ConstSendSocketManagerSharedPtr GetSendSocketManager() const noexcept;
+        NODISCARD SendSocketManagerSharedPtr GetSendSocketManager() noexcept;
+        NODISCARD ConstSendSocketManagerSharedPtr GetSendSocketManager() const noexcept;
 
         void Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message);
 
-       
-
     private:
-        SendSocketManagerSharedPtr m_SendSocketManager;
+        SendSocketManagerSharedPtr sendSocketManager;
     };
 }
 

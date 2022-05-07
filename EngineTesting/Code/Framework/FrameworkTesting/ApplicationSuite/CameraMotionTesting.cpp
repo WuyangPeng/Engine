@@ -25,7 +25,9 @@ namespace Framework
     using TestingType = CameraMotion;
 }
 
-Framework::CameraMotionTesting ::CameraMotionTesting(const OStreamShared& stream)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+Framework::CameraMotionTesting::CameraMotionTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -33,12 +35,12 @@ Framework::CameraMotionTesting ::CameraMotionTesting(const OStreamShared& stream
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraMotionTesting)
 
-void Framework::CameraMotionTesting ::DoRunUnitTest()
+void Framework::CameraMotionTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::CameraMotionTesting ::MainTest()
+void Framework::CameraMotionTesting::MainTest()
 {
     Rendering::CameraManager::Create();
 
@@ -49,52 +51,52 @@ void Framework::CameraMotionTesting ::MainTest()
     Rendering::CameraManager::Destroy();
 }
 
-void Framework::CameraMotionTesting ::BaseTest()
+void Framework::CameraMotionTesting::BaseTest()
 {
     TestingType cameraMotion{ 2.0f, 1.0f };
 
-    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), 2.0f, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), 1.0f, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_UNEQUAL_NULL_PTR(cameraMotion.GetCameraPtr());
+    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), 2.0f, Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), 1.0f, Mathematics::MathF::epsilon);
+    ASSERT_UNEQUAL_NULL_PTR(cameraMotion.GetCamera());
 }
 
-void Framework::CameraMotionTesting ::SpeedTest()
+void Framework::CameraMotionTesting::SpeedTest()
 {
     constexpr auto translationSpeedFactor = 4.0f;
     constexpr auto rotationSpeedFactor = 4.0f;
     constexpr auto translationSpeed = 2.0f;
     constexpr auto rotationSpeed = 1.0f;
     TestingType cameraMotion{ translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor };
-    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::MathF::epsilon);
 
     cameraMotion.SlowerCameraTranslation();
-    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed / translationSpeedFactor, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed / translationSpeedFactor, Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::MathF::epsilon);
 
     cameraMotion.FasterCameraTranslation();
-    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed, Mathematics::MathF::epsilon);
 
     cameraMotion.SlowerCameraRotation();
     cameraMotion.SlowerCameraRotation();
-    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed / (rotationSpeedFactor * rotationSpeedFactor), Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed / (rotationSpeedFactor * rotationSpeedFactor), Mathematics::MathF::epsilon);
 
     cameraMotion.FasterCameraRotation();
-    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed / rotationSpeedFactor, Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetTranslationSpeed(), translationSpeed, Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE(cameraMotion.GetRotationSpeed(), rotationSpeed / rotationSpeedFactor, Mathematics::MathF::epsilon);
 }
 
-void Framework::CameraMotionTesting ::MoveTest()
+void Framework::CameraMotionTesting::MoveTest()
 {
     constexpr auto translationSpeed = 1.0f;
     constexpr auto rotationSpeed = 1.0f;
     TestingType cameraMotion{ translationSpeed, rotationSpeed };
 
-    Rendering::CameraSharedPtr camera{};
+    Rendering::CameraSharedPtr camera = std::make_shared<Rendering::Camera>(false);
     auto direction = camera->GetDirectionVector();
-    auto up = camera->GetUpVector();
+    const auto up = camera->GetUpVector();
     auto right = camera->GetRightVector();
 
     default_random_engine generator{ GetEngineRandomSeed() };
@@ -131,13 +133,13 @@ void Framework::CameraMotionTesting ::MoveTest()
 
         if (turnLeft)
         {
-            const Mathematics::FloatMatrix rotation{ up, rotationSpeed };
+            const Mathematics::MatrixF rotation{ up, rotationSpeed };
             direction = rotation * direction;
             right = rotation * right;
 
-            auto directionVector = rotation * camera->GetDirectionVector();
-            auto upVector = rotation * camera->GetUpVector();
-            auto rightVector = rotation * camera->GetRightVector();
+            const auto directionVector = rotation * camera->GetDirectionVector();
+            const auto upVector = rotation * camera->GetUpVector();
+            const auto rightVector = rotation * camera->GetRightVector();
             camera->SetAxes(directionVector, upVector, rightVector);
         }
 
@@ -147,13 +149,13 @@ void Framework::CameraMotionTesting ::MoveTest()
 
         if (turnRight)
         {
-            const Mathematics::FloatMatrix rotation{ up, -rotationSpeed };
+            const Mathematics::MatrixF rotation{ up, -rotationSpeed };
             direction = rotation * direction;
             right = rotation * right;
 
-            auto directionVector = rotation * camera->GetDirectionVector();
-            auto upVector = rotation * camera->GetUpVector();
-            auto rightVector = rotation * camera->GetRightVector();
+            const auto directionVector = rotation * camera->GetDirectionVector();
+            const auto upVector = rotation * camera->GetUpVector();
+            const auto rightVector = rotation * camera->GetRightVector();
             camera->SetAxes(directionVector, upVector, rightVector);
         }
 
@@ -163,11 +165,11 @@ void Framework::CameraMotionTesting ::MoveTest()
 
         if (lookUp)
         {
-            const Mathematics::FloatMatrix rotation{ right, rotationSpeed };
+            const Mathematics::MatrixF rotation{ right, rotationSpeed };
 
-            auto directionVector = rotation * camera->GetDirectionVector();
-            auto upVector = rotation * camera->GetUpVector();
-            auto rightVector = rotation * camera->GetRightVector();
+            const auto directionVector = rotation * camera->GetDirectionVector();
+            const auto upVector = rotation * camera->GetUpVector();
+            const auto rightVector = rotation * camera->GetRightVector();
             camera->SetAxes(directionVector, upVector, rightVector);
         }
 
@@ -177,11 +179,11 @@ void Framework::CameraMotionTesting ::MoveTest()
 
         if (lookDown)
         {
-            const Mathematics::FloatMatrix rotation{ right, -rotationSpeed };
+            const Mathematics::MatrixF rotation{ right, -rotationSpeed };
 
-            auto directionVector = rotation * camera->GetDirectionVector();
-            auto upVector = rotation * camera->GetUpVector();
-            auto rightVector = rotation * camera->GetRightVector();
+            const auto directionVector = rotation * camera->GetDirectionVector();
+            const auto upVector = rotation * camera->GetUpVector();
+            const auto rightVector = rotation * camera->GetRightVector();
             camera->SetAxes(directionVector, upVector, rightVector);
         }
 
@@ -230,20 +232,20 @@ void Framework::CameraMotionTesting ::MoveTest()
         }
 
         cameraMotion.MoveCamera();
-        AssertCamera(camera, cameraMotion.GetCameraPtr());
+        AssertCamera(camera, cameraMotion.GetCamera());
     }
 }
 
-void Framework::CameraMotionTesting ::AssertCamera(const CameraSmartPointer& lhs, const CameraSmartPointer& rhs)
+void Framework::CameraMotionTesting::AssertCamera(const CameraSmartPointer& lhs, const CameraSmartPointer& rhs)
 {
-    using APointApproximate = bool (*)(const Mathematics::FloatAPoint&, const Mathematics::FloatAPoint&, float);
+    using APointApproximate = bool (*)(const Mathematics::APointF&, const Mathematics::APointF&, float);
     APointApproximate aPointApproximate{ Mathematics::Approximate<float> };
 
-    using AVectorApproximate = bool (*)(const Mathematics::FloatAVector&, const Mathematics::FloatAVector&, float);
+    using AVectorApproximate = bool (*)(const Mathematics::AVectorF&, const Mathematics::AVectorF&, float);
     AVectorApproximate aVectorApproximate{ Mathematics::Approximate<float> };
 
-    ASSERT_APPROXIMATE_USE_FUNCTION(aPointApproximate, lhs->GetPosition(), rhs->GetPosition(), Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetDirectionVector(), rhs->GetDirectionVector(), Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetUpVector(), rhs->GetUpVector(), Mathematics::FloatMath::sm_Epsilon);
-    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetRightVector(), rhs->GetRightVector(), Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aPointApproximate, lhs->GetPosition(), rhs->GetPosition(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetDirectionVector(), rhs->GetDirectionVector(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetUpVector(), rhs->GetUpVector(), Mathematics::MathF::epsilon);
+    ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetRightVector(), rhs->GetRightVector(), Mathematics::MathF::epsilon);
 }

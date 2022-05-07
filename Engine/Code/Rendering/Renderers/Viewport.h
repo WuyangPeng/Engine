@@ -1,60 +1,60 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.3.0 (2020/03/27 10:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/22 14:53)
 
 #ifndef RENDERING_RENDERERS_VIEWPORT_H
 #define RENDERING_RENDERERS_VIEWPORT_H
 
 #include "Rendering/RenderingDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace Rendering
 {
-	class Viewport
-	{
-	public:
-		constexpr Viewport(int xPosition, int yPosition, int width, int height)
-			:m_XPosition{ xPosition }, m_YPosition{ yPosition }, m_Width{ width }, m_Height{ height }
-		{
-		}
+    class Viewport
+    {
+    public:
+        constexpr Viewport(int xPosition, int yPosition, int width, int height)
+            : xPosition{ xPosition }, yPosition{ yPosition }, width{ width }, height{ height }
+        {
+        }
 
-		constexpr int GetXPosition() const
-		{
-			return m_XPosition;
-		}
+        NODISCARD constexpr int GetXPosition() const
+        {
+            return xPosition;
+        }
 
-		constexpr int GetYPosition() const
-		{
-			return m_YPosition;
-		}
+        NODISCARD constexpr int GetYPosition() const
+        {
+            return yPosition;
+        }
 
-		constexpr int GetWidth() const
-		{
-			return m_Width;
-		}
+        NODISCARD constexpr int GetWidth() const
+        {
+            return width;
+        }
 
-		constexpr int GetHeight() const
-		{
-			return m_Height;
-		}
+        NODISCARD constexpr int GetHeight() const
+        {
+            return height;
+        }
 
-		constexpr bool IsInViewport(int x, int y) const
-		{
-			return (m_XPosition <= x) && (x <= m_XPosition + m_Width) && (m_YPosition <= y) && (y <= m_YPosition + m_Height); 
-		}
+        NODISCARD constexpr bool IsInViewport(int x, int y) const
+        {
+            return (xPosition <= x) && (x <= xPosition + width) && (yPosition <= y) && (y <= yPosition + height);
+        }
 
-	private:
-		int m_XPosition;
-		int m_YPosition;
-		int m_Width;
-		int m_Height;
-	};
+    private:
+        int xPosition;
+        int yPosition;
+        int width;
+        int height;
+    };
 }
 
-#endif // RENDERING_RENDERERS_VIEWPORT_H
-
-
-
+#endif  // RENDERING_RENDERERS_VIEWPORT_H

@@ -1,161 +1,151 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 16:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:26)
 
 #ifndef RENDERING_RENDERERS_NON_CUBE_TEXTURE_MANAGEMENT_DETAIL_H
 #define RENDERING_RENDERERS_NON_CUBE_TEXTURE_MANAGEMENT_DETAIL_H
 
-#include "Rendering/RenderingExport.h"
-
 #include "ShaderManagement.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26486)
-template <typename TextureFlags,typename PdrTextureType>
-Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::ShaderManagement(RendererWeakPtr ptr)
-	: m_Renderer{ ptr }, m_Textures{}
+#include "CoreTools/Helper/ExceptionMacro.h"
+
+template <typename TextureFlags, typename PdrTextureType>
+Rendering::ShaderManagement<TextureFlags, PdrTextureType>::ShaderManagement(const RendererWeakPtr& renderer)
+    : renderer{ renderer }, textures{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename TextureFlags,typename PdrTextureType>
-bool Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::IsValid() const noexcept
+
+template <typename TextureFlags, typename PdrTextureType>
+bool Rendering::ShaderManagement<TextureFlags, PdrTextureType>::IsValid() const noexcept
 {
-	if(m_Renderer.lock())
+    if (renderer.lock())
         return true;
     else
         return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-template <typename TextureFlags,typename PdrTextureType>
-void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Bind (TextureConstWeakPtr texture)
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename TextureFlags, typename PdrTextureType>
+void Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Bind(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (m_Textures.find(texture) == m_Textures.end())
+    if (textures.find(texture) == textures.end())
     {
-		PdrTextureSharedPtr pdrTexture{ std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.get()) };
-		m_Textures.insert({ texture, pdrTexture });
+        auto pdrTexture = std::make_shared<PdrTextureType>(renderer.lock().get(), texture.get());
+        textures.emplace(texture, pdrTexture);
     }
 }
 
-template <typename TextureFlags,typename PdrTextureType>
-void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Unbind (TextureConstWeakPtr texture)
+template <typename TextureFlags, typename PdrTextureType>
+void Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Unbind(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_Textures.erase(texture);
+    textures.erase(texture);
 }
- 
-template <typename TextureFlags,typename PdrTextureType>
-void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Enable (TextureConstWeakPtr texture, const ConstShaderParametersSharedPtr& parameters)
+
+template <typename TextureFlags, typename PdrTextureType>
+void Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Enable(const ConstTextureSharedPtr& texture, const ShaderParameters& parameters)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	parameters;
-        const auto iter = m_Textures.find(texture);
-    PdrTextureSharedPtr pdrTexture;
-    if (iter != m_Textures.end())
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto iter = textures.find(texture);
+    PdrTextureSharedPtr pdrTexture{};
+    if (iter != textures.end())
     {
         pdrTexture = iter->second;
     }
     else
     {
         // 延迟构造。
-        pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.get());
-		m_Textures.insert({ texture,  pdrTexture });
+        pdrTexture = std::make_shared<PdrTextureType>(renderer.lock().get(), texture.get());
+        textures.insert({ texture, pdrTexture });
     }
 
-     pdrTexture->Enable(m_Renderer.lock().get(),texture.get(),parameters.get());
+    pdrTexture->Enable(renderer.lock().get(), texture.get(), &parameters);
 }
 
-template <typename TextureFlags,typename PdrTextureType>
-void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Disable (TextureConstWeakPtr texture, const ConstShaderParametersSharedPtr& parameters)
+template <typename TextureFlags, typename PdrTextureType>
+void Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Disable(const ConstTextureSharedPtr& texture, const ShaderParameters& parameters)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	parameters;
-        const auto iter = m_Textures.find(texture);
- 
-    if (iter != m_Textures.end())
-    {
-		auto pdrTexture = iter->second;
+    RENDERING_CLASS_IS_VALID_1;
 
-		pdrTexture->Disable(m_Renderer.lock().get(), texture.get(), parameters.get());
+    const auto iter = textures.find(texture);
+
+    if (iter != textures.end())
+    {
+        auto pdrTexture = iter->second;
+
+        pdrTexture->Disable(renderer.lock().get(), texture.get(), &parameters);
     }
 }
 
-template <typename TextureFlags,typename PdrTextureType>
-void* Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Lock (TextureConstWeakPtr texture,int level,BufferLocking mode)
+template <typename TextureFlags, typename PdrTextureType>
+void* Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Lock(const ConstTextureSharedPtr& texture, int level, BufferLocking mode)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	auto iter = m_Textures.find(texture);
-    PdrTextureSharedPtr pdrTexture;
-    if (iter != m_Textures.end())
+    auto iter = textures.find(texture);
+    PdrTextureSharedPtr pdrTexture{};
+    if (iter != textures.end())
     {
-		pdrTexture = iter->second;
+        pdrTexture = iter->second;
     }
     else
     {
         // 延迟构造。
-		pdrTexture = std::make_shared<PdrTextureType>(m_Renderer.lock().get(), texture.get());
-		m_Textures.insert({ texture, pdrTexture });
+        pdrTexture = std::make_shared<PdrTextureType>(renderer.lock().get(), texture.get());
+        textures.emplace(texture, pdrTexture);
     }
 
-	pdrTexture->Lock(level ,mode);
+    pdrTexture->Lock(level, mode);
 }
 
-template <typename TextureFlags,typename PdrTextureType>
-void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Unlock (TextureConstWeakPtr texture,int level)
+template <typename TextureFlags, typename PdrTextureType>
+void Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Unlock(const ConstTextureSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-    auto iter = m_Textures.find(texture);
- 
-    if (iter != m_Textures.end())
+    auto iter = textures.find(texture);
+
+    if (iter != textures.end())
     {
-		auto pdrTexture = iter->second;
+        auto pdrTexture = iter->second;
 
-		pdrTexture->Unlock(level);
+        pdrTexture->Unlock(level);
     }
 }
 
-template <typename TextureFlags,typename PdrTextureType>
-void Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::Update (TextureConstWeakPtr texture,int level)
+template <typename TextureFlags, typename PdrTextureType>
+void Rendering::ShaderManagement<TextureFlags, PdrTextureType>::Update(const ConstTextureSharedPtr& texture, int level)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
     auto numBytes = texture->GetNumBytes(level);
-	auto srcData = texture->GetData(level);
-	auto trgData = Lock(texture, level , BufferLocking::WriteOnly);
-    memcpy(trgData, srcData, numBytes);
+    auto srcData = texture->GetData(level);
+    auto trgData = Lock(texture, level, BufferLocking::WriteOnly);
+    System::MemoryCopy(trgData, srcData, numBytes);
     Unlock(texture, level);
 }
 
-template <typename TextureFlags,typename PdrTextureType>
-typename Rendering::ShaderManagement<TextureFlags, PdrTextureType>::PdrTextureSharedPtr Rendering::ShaderManagement<TextureFlags, PdrTextureType>
-	::GetResource (TextureConstWeakPtr texture)
+template <typename TextureFlags, typename PdrTextureType>
+typename Rendering::ShaderManagement<TextureFlags, PdrTextureType>::PdrTextureSharedPtr Rendering::ShaderManagement<TextureFlags, PdrTextureType>::GetResource(const ConstTextureSharedPtr& texture)
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-const auto iter = m_Textures.find(texture);
-    if (iter != m_Textures.end())
+    const auto iter = textures.find(texture);
+    if (iter != textures.end())
     {
         return iter->second;
     }
@@ -164,5 +154,5 @@ const auto iter = m_Textures.find(texture);
         THROW_EXCEPTION(SYSTEM_TEXT("找不到指定的顶点缓冲区资源！"s));
     }
 }
-#include STSTEM_WARNING_POP
-#endif // RENDERING_RENDERERS_NON_CUBE_TEXTURE_MANAGEMENT_DETAIL_H
+
+#endif  // RENDERING_RENDERERS_NON_CUBE_TEXTURE_MANAGEMENT_DETAIL_H

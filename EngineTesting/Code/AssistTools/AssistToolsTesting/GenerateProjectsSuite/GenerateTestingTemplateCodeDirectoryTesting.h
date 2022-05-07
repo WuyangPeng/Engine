@@ -29,7 +29,7 @@ namespace AssistTools
 		void ManagerHeaderExistTest(const System::String& managerName, const System::String& resultName);
 		void ManagerCppExistTest(const System::String& managerName, const System::String& resultName);
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

@@ -1,172 +1,120 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 17:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 10:18)
 
 #include "Rendering/RenderingExport.h"
 
 #include "AnalysisRendererManager.h"
+#include "System/Helper/PragmaWarning/PropertyTree.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/LogMacro.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererBasis.h"
-#include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26493)
-using std::string;
 using boost::property_tree::ptree;
 using boost::property_tree::ptree_error;
+using std::string;
 
-Rendering::AnalysisRendererManager
-	::AnalysisRendererManager( const string& fileName )
-	:m_RendererPtr{ nullptr }, m_FileName{ fileName }, m_MainTree{}, m_TextureTree{}, 
-	m_ClearColorTree{}, m_WindowParameterTree{}, m_RendererBasis{}, m_RendererType{ RendererTypes::First }
+Rendering::AnalysisRendererManager::AnalysisRendererManager(const string& fileName)
+    : renderer{ nullptr },
+      fileName{ fileName },
+      mainTree{},
+      textureTree{},
+      clearColorTree{},
+      windowParameterTree{},
+      rendererBasis{},
+      rendererType{ RendererTypes::First }
 {
-	Analysis();
+    Analysis();
 
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 // private
-void Rendering::AnalysisRendererManager
-	::Analysis()
+void Rendering::AnalysisRendererManager::Analysis()
 {
-	AnalysisJson();
-	AnalysisRendererType();
-	AnalysisRendererTexture();
-	AnalysisRendererClearColor();
-	AnalysisWindowParameter();
+    AnalysisJson();
+    AnalysisRendererType();
+    AnalysisRendererTexture();
 
-	if (Rendering::RendererTypes::First <= m_RendererType && m_RendererType < Rendering::RendererTypes::Max)
-	{
-		m_RendererPtr = std::make_shared<Rendering::Renderer>(m_RendererType, m_RendererBasis);		
-	}
-	else
-	{
-		m_RendererPtr = std::make_shared<Rendering::Renderer>(Rendering::RendererTypes::Default, m_RendererBasis);
-
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			<< SYSTEM_TEXT("初始化渲染器类型失败！")
-			<< CoreTools::LogAppenderIOManageSign::TriggerAssert;
-	}	
-
-	m_RendererPtr->Init();
-}
-
-// private
-void Rendering::AnalysisRendererManager
-	::AnalysisJson()
-{
-	read_json(m_FileName,m_MainTree);
-}
-
-// private
-void Rendering::AnalysisRendererManager
-	::AnalysisRendererType()
-{
-	m_RendererType = Rendering::RendererTypes(m_MainTree.get("RendererType",0));
-}
-
-// private
-void Rendering::AnalysisRendererManager
-	::AnalysisRendererTexture()
-{
-	m_TextureTree = m_MainTree.get_child("Texture");		
- 
-	auto colorFormat = Rendering::TextureFormat(m_TextureTree.get("ColorFormat",8));
-	auto depthStencilFormat = Rendering::TextureFormat(m_TextureTree.get("DepthStencilFormat",22));
-	int numMultisamples = m_TextureTree.get("MultisamplesNumber",0);
-
-	if(Rendering::TextureFormat::First <= colorFormat && colorFormat < Rendering::TextureFormat::Max && 
-   	   Rendering::TextureFormat::First <= depthStencilFormat && depthStencilFormat < Rendering::TextureFormat::Max && 0 <= numMultisamples)
-	{
-		m_RendererBasis.SetTextureFormat(colorFormat, depthStencilFormat);
-		m_RendererBasis.SetMultisamplesNumber(numMultisamples);
-	}
-	else
-	{ 
-		m_RendererBasis.SetTextureFormat(Rendering::TextureFormat::A8R8G8B8,Rendering::TextureFormat::D24S8);
-		m_RendererBasis.SetMultisamplesNumber(0);
-
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化渲染器纹理格式失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-	}	
-} 
-
-// private
-void Rendering::AnalysisRendererManager
-	::AnalysisRendererClearColor()
-{
-	m_ClearColorTree = m_MainTree.get_child("ClearColor");	
-
-	auto red = m_ClearColorTree.get("Red",0.0f);
-	auto green = m_ClearColorTree.get("Green",0.0f);
-	auto blue = m_ClearColorTree.get("Blue",0.0f);
-	auto alpha = m_ClearColorTree.get("Alpha",1.0f);
-
-    if(0.0f <= red && red <= 1.0f && 0.0f <= green && green <= 1.0f && 
-       0.0f <= blue && blue <= 1.0f && 0.0f <= alpha && alpha <= 1.0f)
+    if (Rendering::RendererTypes::First <= rendererType && rendererType < Rendering::RendererTypes::Max)
     {
-		// m_RendererParameter.SetClearColor(red, green, blue, alpha);
+        renderer = std::make_shared<Rendering::Renderer>(rendererType, rendererBasis);
     }
     else
     {
-	//	m_RendererParameter.SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        renderer = std::make_shared<Rendering::Renderer>(Rendering::RendererTypes::Default, rendererBasis);
 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化渲染器清除颜色失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-    }	
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("初始化渲染器类型失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
+
+    renderer->Init();
 }
 
 // private
-void Rendering::AnalysisRendererManager
-	::AnalysisWindowParameter()
+void Rendering::AnalysisRendererManager::AnalysisJson()
 {
-	m_WindowParameterTree = m_MainTree.get_child("WindowParameter");
+    read_json(fileName, mainTree);
+}
 
-    string windowTitle = m_WindowParameterTree.get("WindowTitle","WindowTitle");
-    int width = m_WindowParameterTree.get("Width",800);
-    int height = m_WindowParameterTree.get("Height",600);
- //   int x = m_WindowParameterTree.get("X",0);
-  //  int y = m_WindowParameterTree.get("Y",0);
-   // bool allowResize = m_WindowParameterTree.get("AllowResize",true);
+// private
+void Rendering::AnalysisRendererManager::AnalysisRendererType()
+{
+    rendererType = mainTree.get("RendererType", Rendering::RendererTypes::Default);
+}
 
-	if(0 < width && 0 < height)
-	{
-		//m_RendererParameter.SetWindowParameter(windowTitle, width, height,    x,y, allowResize);
-	}
-	else
-	{ 
-		//m_RendererParameter.SetWindowParameter(windowTitle, 800, 600,  x,y, allowResize);
+// private
+void Rendering::AnalysisRendererManager::AnalysisRendererTexture()
+{
+    textureTree = mainTree.get_child("Texture");
 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			 << SYSTEM_TEXT("初始化窗口参数失败！")
-			 << CoreTools::LogAppenderIOManageSign::TriggerAssert;
-	}
+    auto colorFormat = textureTree.get("ColorFormat", Rendering::TextureFormat::A8R8G8B8);
+    auto depthStencilFormat = textureTree.get("DepthStencilFormat", Rendering::TextureFormat::D24S8);
+    auto numMultisamples = textureTree.get("MultisamplesNumber", 0);
+
+    if (Rendering::TextureFormat::First <= colorFormat &&
+        colorFormat < Rendering::TextureFormat::Max &&
+        Rendering::TextureFormat::First <= depthStencilFormat &&
+        depthStencilFormat < Rendering::TextureFormat::Max &&
+        0 <= numMultisamples)
+    {
+        rendererBasis.SetTextureFormat(colorFormat, depthStencilFormat);
+        rendererBasis.SetMultisamplesNumber(numMultisamples);
+    }
+    else
+    {
+        rendererBasis.SetTextureFormat(Rendering::TextureFormat::A8R8G8B8, Rendering::TextureFormat::D24S8);
+        rendererBasis.SetMultisamplesNumber(0);
+
+        LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
+            << SYSTEM_TEXT("初始化渲染器纹理格式失败！")
+            << LOG_SINGLETON_TRIGGER_ASSERT;
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::AnalysisRendererManager
-	::IsValid() const noexcept
-{
-	if(m_RendererPtr != nullptr)
-	    return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT
 
-Rendering::AnalysisRendererManager::RendererPtr	Rendering::AnalysisRendererManager
-	::GetRendererPtr() const noexcept
+bool Rendering::AnalysisRendererManager::IsValid() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-
-	return m_RendererPtr;
+    if (renderer != nullptr)
+        return true;
+    else
+        return false;
 }
-#include STSTEM_WARNING_POP
+
+#endif  // OPEN_CLASS_INVARIANT
+
+Rendering::AnalysisRendererManager::RendererSharedPtr Rendering::AnalysisRendererManager::GetRenderer() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return renderer;
+}

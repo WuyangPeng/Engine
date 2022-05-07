@@ -23,6 +23,7 @@
 
 
 #include <random>
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26446)
 using std::vector;
@@ -52,7 +53,7 @@ void Rendering::ProjectionMatrixConstantTesting
 	::InitTest()
 {
 	constexpr int numRegisters = 4;
-	ProjectionMatrixConstant firstShaderFloat;
+    ProjectionMatrixConstant firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), numRegisters);
 
 	firstShaderFloat.SetNumRegisters(numRegisters);
@@ -74,12 +75,12 @@ void Rendering::ProjectionMatrixConstantTesting
 		ASSERT_APPROXIMATE(firstData[i], firstShaderFloat.GetRegisters()[i], 1e-8f);
 	}
 	
-	const ProjectionMatrixConstant secondShaderFloat;
+	const ProjectionMatrixConstant secondShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(secondShaderFloat.GetNumRegisters(), numRegisters);
 	ASSERT_UNEQUAL_NULL_PTR(secondShaderFloat.GetData());
 	ASSERT_TRUE(secondShaderFloat.AllowUpdater());	
  
-	ProjectionMatrixConstant thirdShaderFloat;
+	ProjectionMatrixConstant thirdShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(thirdShaderFloat.GetNumRegisters(), numRegisters);
 
 	ASSERT_UNEQUAL_NULL_PTR(thirdShaderFloat.GetData());
@@ -123,7 +124,7 @@ void Rendering::ProjectionMatrixConstantTesting
 void Rendering::ProjectionMatrixConstantTesting
 	::CopyTest()
 {
-	ProjectionMatrixConstant firstShaderFloat;
+    ProjectionMatrixConstant firstShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	ASSERT_EQUAL(firstShaderFloat.GetNumRegisters(), 4);
 
 	ProjectionMatrixConstant secondShaderFloat(firstShaderFloat);
@@ -140,7 +141,7 @@ void Rendering::ProjectionMatrixConstantTesting
 		ASSERT_APPROXIMATE(firstShaderFloat[registerIndex], static_cast<float>(registerIndex), 1e-8f);
 	}
 	
-	ProjectionMatrixConstant thirdShaderFloat;
+	ProjectionMatrixConstant thirdShaderFloat{ CoreTools::DisableNotThrow::Disable };
 	thirdShaderFloat = firstShaderFloat;	
 	firstShaderFloat = secondShaderFloat;
 

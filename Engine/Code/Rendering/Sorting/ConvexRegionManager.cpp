@@ -1,96 +1,100 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 16:05)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ConvexRegionManager.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
- #include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26455) 
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, ConvexRegionManager);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConvexRegionManager);
-CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegionManager);  
-CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ConvexRegionManager);
+CORE_TOOLS_FACTORY_DEFINE(Rendering, ConvexRegionManager);
 
-Rendering::ConvexRegionManager
-	::ConvexRegionManager ()
+Rendering::ConvexRegionManager::ConvexRegionManager(LoadConstructor value)
+    : ParentType{ value }, crmCuller{ nullptr }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ConvexRegionManager
-	::ConvexRegionManager(const Mathematics::PlaneF& modelPlane)
-    :BspNode(modelPlane)
+Rendering::ConvexRegionManager::ConvexRegionManagerSharedPtr Rendering::ConvexRegionManager::Create()
 {
+    return std::make_shared<ClassType>(NodeCreate::Init);
 }
 
- 
-
-Rendering::SpatialSharedPtr Rendering::ConvexRegionManager
-	::AttachOutside(SpatialSharedPtr outside)
+Rendering::ConvexRegionManager::ConvexRegionManager(NodeCreate nodeCreate)
+    : ParentType{ nodeCreate }, crmCuller{ nullptr }
 {
- 
-	 AttachChild(outside);	
-	 return outside;
-   // return SetChild(1, outside);
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SpatialSharedPtr Rendering::ConvexRegionManager
-	::DetachOutside()
+Rendering::ConvexRegionManager::ConvexRegionManager(const Mathematics::PlaneF& modelPlane)
+    : ParentType{ modelPlane }, crmCuller{ nullptr }
 {
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_STUB_DEFINE(Rendering, ConvexRegionManager)
+
+Rendering::SpatialSharedPtr Rendering::ConvexRegionManager::AttachOutside(SpatialSharedPtr outside)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    AttachChild(outside);
+
+    return outside;
+}
+
+Rendering::SpatialSharedPtr Rendering::ConvexRegionManager::DetachOutside()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
     return DetachChildAt(1);
 }
 
-Rendering::SpatialSharedPtr Rendering::ConvexRegionManager
-	::GetOutside()
+Rendering::SpatialSharedPtr Rendering::ConvexRegionManager::GetOutside()
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     return GetChild(1);
 }
 
-Rendering::ConvexRegionSharedPtr Rendering::ConvexRegionManager
-	::GetContainingRegion(const  Mathematics::APointF& point)
+Rendering::ConvexRegionSharedPtr Rendering::ConvexRegionManager::GetContainingRegion(const Mathematics::APointF& point)
 {
+    RENDERING_CLASS_IS_VALID_1;
+
     return boost::polymorphic_pointer_cast<ConvexRegion>(GetContainingNode(point));
 }
 
-void Rendering::ConvexRegionManager
-	::GetVisibleSet (Culler& culler, bool noCull)
+void Rendering::ConvexRegionManager::GetVisibleSet(Culler& culler, bool noCull)
 {
-	ConvexRegionSharedPtr region = GetContainingRegion(culler.GetCamera()->GetPosition());
+    RENDERING_CLASS_IS_VALID_1;
 
-    if (region )
+    auto region = GetContainingRegion(culler.GetCamera()->GetPosition());
+
+    if (region)
     {
-        // Accumulate visible objects starting in the region containing the
-        // camera.  Use the CRMCuller to maintain a list of unique objects.
-        //pkRegion->GetVisibleSet(m_kCuller,bNoCull);
-        mCuller.SetCamera(culler.GetCamera());
-        mCuller.SetFrustum(culler.GetFrustum());
-        mCuller.ComputeVisibleSet(region);
+        crmCuller.SetCamera(culler.GetCamera());
+        crmCuller.SetFrustum(culler.GetFrustum());
+        crmCuller.ComputeVisibleSet(region);
 
-        // Copy the unique list to the scene culler.
- 
-        for (auto& value : mCuller)
+        for (auto& value : crmCuller)
         {
             culler.Insert(value);
-        } 
+        }
     }
     else
     {
-        // The camera is outside the set of regions.  Accumulate visible
-        // objects for the outside scene (if it exists).
-        if (GetOutside() )
+        if (GetOutside())
         {
             GetOutside()->GetVisibleSet(culler, noCull);
         }
     }
 }
-
-#include STSTEM_WARNING_POP

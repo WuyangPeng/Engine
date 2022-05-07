@@ -28,7 +28,7 @@ namespace AssistTools
 		void DefaultManagerHeaderGenerateToTest(const System::String& testFileName, const System::String& resultName); 
 		void DefaultManagerCppGenerateToTest(const System::String& testFileName, const System::String& resultName); 
 	
-		virtual void DoRunUnitTest() override;			
+		void DoRunUnitTest() override;			
 	};
 }
 

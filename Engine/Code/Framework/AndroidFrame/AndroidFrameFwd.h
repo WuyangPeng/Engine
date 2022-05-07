@@ -1,29 +1,31 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 16:40)
-
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/05 18:37)
 #ifndef FRAMEWORK_ANDROID_FRAME_FWD_H
 #define FRAMEWORK_ANDROID_FRAME_FWD_H
 
 namespace Framework
 {
-	class AndroidProcessManager;
+    class AndroidProcessManager;
 
-	template <typename AndroidCallBack>
-	class AndroidProcess;
+    template <typename AndroidCallBack>
+    class AndroidProcess;
 
-	class AndroidCallBackInterface;
+    class AndroidCallBackInterface;
 
-	template <typename MiddleLayer>
-	class AndroidCallBack;
+    template <typename MiddleLayer>
+    class AndroidCallBack;
 
-	class AndroidCallBackUnitTestSuite;
-	class AndroidMessageLoop;	
+    class AndroidCallBackUnitTestSuite;
+    class AndroidMessageLoop;
 
-	template <typename AndroidProcess>
-	class AndroidFrameBuild;
+    template <typename AndroidProcess>
+    class AndroidFrameBuild;
 }
 
-#endif // FRAMEWORK_ANDROID_FRAME_FWD_H
+#endif  // FRAMEWORK_ANDROID_FRAME_FWD_H

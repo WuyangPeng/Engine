@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 16:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 15:38)
 
 #include "Rendering/RenderingExport.h"
 
@@ -12,62 +15,62 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include STSTEM_WARNING_PUSH 
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
+
 Rendering::SurfacePatchImpl::SurfacePatchImpl() noexcept
-    : m_UMin{ 0.0f }, m_UMax{ 0.0f }, m_VMin{ 0.0f }, m_VMax{ 0.0f }, m_Rectangular{ true }
+    : uMin{ 0.0f }, uMax{ 0.0f }, vMin{ 0.0f }, vMax{ 0.0f }, rectangular{ true }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::SurfacePatchImpl::SurfacePatchImpl(float uMin, float uMax, float vMin, float vMax, bool rectangular) noexcept
-    : m_UMin{ uMin }, m_UMax{ uMax }, m_VMin{ vMin }, m_VMax{ vMax }, m_Rectangular{ rectangular }
+    : uMin{ uMin }, uMax{ uMax }, vMin{ vMin }, vMax{ vMax }, rectangular{ rectangular }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Rendering::SurfacePatchImpl::IsValid() const noexcept
 {
-    if (m_UMin <= m_UMax && m_VMin <= m_VMin)
+    if (uMin <= uMax && vMin <= vMin)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void Rendering::SurfacePatchImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    source.Read(m_UMin);
-    source.Read(m_UMax);
-    source.Read(m_VMin);
-    source.Read(m_VMax);
-    m_Rectangular = source.ReadBool();
+    source.Read(uMin);
+    source.Read(uMax);
+    source.Read(vMin);
+    source.Read(vMax);
+    rectangular = source.ReadBool();
 }
 
 void Rendering::SurfacePatchImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.Write(m_UMin);
-    target.Write(m_UMax);
-    target.Write(m_VMin);
-    target.Write(m_VMax);
-    target.Write(m_Rectangular);
+    target.Write(uMin);
+    target.Write(uMax);
+    target.Write(vMin);
+    target.Write(vMax);
+    target.Write(rectangular);
 }
 
 int Rendering::SurfacePatchImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_UMin);
-    size += CORE_TOOLS_STREAM_SIZE(m_UMax);
-    size += CORE_TOOLS_STREAM_SIZE(m_VMin);
-    size += CORE_TOOLS_STREAM_SIZE(m_VMax);
-    size += CORE_TOOLS_STREAM_SIZE(m_Rectangular);
+    auto size = CORE_TOOLS_STREAM_SIZE(uMin);
+    size += CORE_TOOLS_STREAM_SIZE(uMax);
+    size += CORE_TOOLS_STREAM_SIZE(vMin);
+    size += CORE_TOOLS_STREAM_SIZE(vMax);
+    size += CORE_TOOLS_STREAM_SIZE(rectangular);
 
     return size;
 }
@@ -76,34 +79,33 @@ float Rendering::SurfacePatchImpl::GetUMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_UMin;
+    return uMin;
 }
 
 float Rendering::SurfacePatchImpl::GetUMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_UMax;
+    return uMax;
 }
 
 float Rendering::SurfacePatchImpl::GetVMin() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_VMin;
+    return vMin;
 }
 
 float Rendering::SurfacePatchImpl::GetVMax() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_VMax;
+    return vMax;
 }
 
 bool Rendering::SurfacePatchImpl::IsRectangular() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Rectangular;
+    return rectangular;
 }
-#include STSTEM_WARNING_POP

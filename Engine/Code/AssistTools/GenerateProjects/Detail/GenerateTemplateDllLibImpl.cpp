@@ -1,44 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 10:48)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateDllLibImpl.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTemplateDllLibImpl
-	::sm_Extension(SYSTEM_TEXT(".cpp"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTemplateDllLibImpl
-	::GenerateTemplateDllLibImpl(const System::String& templateFileName,  const Replace& replace)
-	:ParentType(templateFileName, sm_Extension,replace) 
+const System::String AssistTools::GenerateTemplateDllLibImpl::extension{ SYSTEM_TEXT(".cpp") };
+
+AssistTools::GenerateTemplateDllLibImpl::GenerateTemplateDllLibImpl(const System::String& templateFileName, const Replace& replace)
+    : ParentType{ templateFileName, extension, replace }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
- 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateDllLibImpl)
 
-void AssistTools::GenerateTemplateDllLibImpl
-	::GenerateTo(const System::String& exportDirectory, const System::String& newProjectName, const CopyrightData& copyrightData,  const System::String& solutionName, const System::String& managerName,const System::String& managerChineseName) const
+void AssistTools::GenerateTemplateDllLibImpl::GenerateTo(const System::String& exportDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName, const System::String& managerChineseName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable = GetCopyrightVariable(copyrightData);
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerName), managerName));
-	newVariable.insert(make_pair(GetOriginal(GenerateTemplateReplace::ManagerChineseName), managerChineseName));
+    auto newVariable = GetCopyrightVariable(copyrightData);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerName), managerName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerChineseName), managerChineseName);
 
-	return ParentType::Generate(exportDirectory, newProjectName, newVariable);
+    return ParentType::Generate(exportDirectory, newProjectName, newVariable);
 }
 
 /*

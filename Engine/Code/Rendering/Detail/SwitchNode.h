@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 10:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 11:08)
 
 #ifndef RENDERING_DETAIL_SWITCH_NODE_H
 #define RENDERING_DETAIL_SWITCH_NODE_H
@@ -18,32 +21,40 @@ namespace Rendering
         using ClassType = SwitchNode;
         using ParentType = Node;
         using ClassShareType = CoreTools::CopyUnsharedClasses;
+        using SwitchNodeSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-        SwitchNode();
+        NODISCARD static SwitchNodeSharedPtr Create();
+
+    public:
+        explicit SwitchNode(NodeCreate nodeCreate);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SwitchNode);
 
-        void SetActiveChild(int activeChild);
-        int GetActiveChild() const noexcept;
+        void SetActiveChild(int aActiveChild);
+        NODISCARD int GetActiveChild() const noexcept;
         void DisableAllChildren() noexcept;
 
-        ControllerInterfaceSharedPtr Clone() const override;
-        ObjectInterfaceSharedPtr CloneObject() const override;
-        PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
+        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD PickRecordContainer ExecuteRecursive(const APoint& origin, const AVector& direction, float tMin, float tMax) const override;
 
     protected:
         void GetVisibleSet(Culler& culler, bool noCull) override;
 
     private:
-        int m_ActiveChild;
+        int activeChild;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(SwitchNode);
+
 #include STSTEM_WARNING_POP
+
     CORE_TOOLS_SHARED_PTR_DECLARE(SwitchNode);
 }
 

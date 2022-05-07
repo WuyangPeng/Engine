@@ -1,83 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 10:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/19 16:13)
 
 #ifndef RENDERING_SORTING_PORTAL_H
 #define RENDERING_SORTING_PORTAL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/Object.h"
+#include "CoreTools/ObjectSystems/WeakObjectAssociated.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Plane.h"
 #include "Rendering/DataTypes/Transform.h"
-#include "CoreTools/ObjectSystems/Object.h" 
+#include "Rendering/SceneGraph/SceneGraphFwd.h"
+#include "Rendering/Sorting/SortingFwd.h"
 
 namespace Rendering
 {
-	class ConvexRegion;
-	class Culler;
+    class Portal : public CoreTools::Object
+    {
+    public:
+        using ClassType = Portal;
+        using ParentType = Object;
 
-	class  Portal : public CoreTools::Object
-	{
-	public:
-		using ClassType = Portal;
-		using ParentType = Object;
+    private:
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Portal);
+        CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
-	private:
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Portal);
-		CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
+    public:
+        Portal(int numVertices, const std::vector<Mathematics::APointF>& modelVertices, const Mathematics::PlaneF& modelPlane, const std::shared_ptr<ConvexRegion>& adjacentRegion, bool open);
 
-	public:
-		// The portal is a unidirectional connector between two regions.  The
-		// vertices of the portal must satisfy the following constraints:
-		// 1. They must form a planar simple polygon (numVertices >= 3 is
-		//    implied).  The polygon does not have to be convex.
-		// 2. They must be counterclockwise ordered when looking through the
-		//    portal to the adjacent region.
-		// 3. They must be in the model-space coordinates for the region that
-		//    contains the portal.
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Construction and destruction.  Portal accepts responsibility for
-		// deleting the input array.  The model vertices must be counterclockwise
-		// oriented in the model plane when viewed from the side of the plane to
-		// which the plane normal points.
-		Portal(int numVertices, Mathematics::APointF* modelVertices, const Mathematics::PlaneF& modelPlane, ConvexRegion* adjacentRegion, bool open);
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
-		  ~Portal();
-		  Portal(const Portal&) = default;
-		   Portal& operator=(const Portal&) = default;
-		    Portal(Portal&&) = default;
-		   Portal& operator=(Portal&&) = default;
-                    ObjectInterfaceSharedPtr CloneObject() const override;
-		// Member access.  The region to which the portal leads.  Portals can be
-		// open or closed.
-		ConvexRegion* AdjacentRegion;
-		bool Open;
+        void UpdateWorldData(const TransformF& worldTransform);
+        void GetVisibleSet(Culler& culler, bool noCull);
 
-	protected:
-		// Support for the graph update.
-		friend class ConvexRegion;
-            void UpdateWorldData(const TransformF& worldTransform) noexcept;
+    protected:
+        NODISCARD bool ReducedFrustum(const Culler& culler, std::array<float, 6>& reducedFrustum);
 
-		// Support for culling.
-		bool ReducedFrustum(const Culler& culler, float reducedFrustum[6]);
-		void GetVisibleSet(Culler& culler, bool noCull);
+    private:
+        CoreTools::WeakObjectAssociated<ConvexRegion> adjacentRegion;
+        bool open;
 
-		// Portal vertices and their planes.
-		int mNumVertices;
-		Mathematics::APointF* mModelVertices;
-		Mathematics:: APointF* mWorldVertices;
-		Mathematics::PlaneF mModelPlane;
-		Mathematics::PlaneF mWorldPlane;
-	};
- #include "System/Helper/PragmaWarning.h" 
+        int numVertices;
+        std::vector<Mathematics::APointF> modelVertices;
+        std::vector<Mathematics::APointF> worldVertices;
+        Mathematics::PlaneF modelPlane;
+        Mathematics::PlaneF worldPlane;
+    };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(Portal);
-	CORE_TOOLS_SHARED_PTR_DECLARE( Portal);
-	#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_STREAM_REGISTER(Portal);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(Portal);
 }
 
-#endif // RENDERING_SORTING_PORTAL_H
+#endif  // RENDERING_SORTING_PORTAL_H

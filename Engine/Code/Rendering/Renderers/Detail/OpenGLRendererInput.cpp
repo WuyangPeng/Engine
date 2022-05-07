@@ -1,48 +1,50 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 17:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:30)
 
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLRendererInput.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26472)
-    // The pixelFormat variable is used to support creation of a window that
-    // supports multisampling.  This process requires creating a normal window,
-    // and then querying whether the renderer supports multisampling.  The
-    // renderer creates a device context for the window which we then need to
-    // create a second window that supports multisampling.  The device context
-    // rendererDC is set by the renderer during the process.
-Rendering:: OpenGLRendererInput
-	:: OpenGLRendererInput() noexcept
-	:ParentType{}, m_WindowHandle{ nullptr }, m_RendererDC{ nullptr }, m_PixelFormat{ 0 }, m_DisableVerticalSync{ true }
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+
+#include <gsl/util>
+
+Rendering::OpenGLRendererInput::OpenGLRendererInput() noexcept
+    : ParentType{}, windowHandle{ nullptr }, rendererDC{ nullptr }, pixelFormat{ 0 }, disableVerticalSync{ true }
 {
-	RENDERING_SELF_CLASS_IS_VALID_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
- 
-
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, OpenGLRendererInput)
- 
 
 void Rendering::OpenGLRendererInput::SetWindowID(int windowID) noexcept
 {
-	SetWindowHandle(reinterpret_cast<HWnd>(static_cast<size_t>(windowID)));
+    RENDERING_CLASS_IS_VALID_9;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    SetWindowHandle(reinterpret_cast<HWnd>(gsl::narrow_cast<size_t>(windowID)));
+
+#include STSTEM_WARNING_POP
 }
 
 void Rendering::OpenGLRendererInput::SetWindowHandle(HWnd windowID) noexcept
 {
-	m_WindowHandle  = windowID;
+    RENDERING_CLASS_IS_VALID_9;
+
+    windowHandle = windowID;
 }
 
 Rendering::RendererTypes Rendering::OpenGLRendererInput::GetRendererType() const noexcept
 {
-	return RendererTypes::OpenGL;
-}
+    RENDERING_CLASS_IS_VALID_CONST_9;
 
-#include STSTEM_WARNING_POP
+    return RendererTypes::OpenGL;
+}

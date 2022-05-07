@@ -48,10 +48,10 @@ void Framework::OpenGLGlutCallBackInterfaceTesting
 	openGLGlutCallBackInterface.SetMillisecond(10u);
 	ASSERT_EQUAL(openGLGlutCallBackInterface.GetMillisecond(),10);
 
-	ASSERT_EQUAL(openGLGlutCallBackInterface.GetTerminateKey(),GlutApplicationTrait::KeyIdentifiers::sm_KeyTerminate);				 
+	ASSERT_EQUAL(openGLGlutCallBackInterface.GetTerminateKey(),GlutApplicationTrait::KeyIdentifiers::keyTerminate);				 
 }
 
-void Framework::OpenGLGlutCallBackInterfaceTesting ::TimerFunction([[maybe_unused]] int value)
+void Framework::OpenGLGlutCallBackInterfaceTesting::TimerFunction([[maybe_unused]] int value) noexcept
 {
 }
 

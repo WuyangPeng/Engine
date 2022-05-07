@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 17:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 15:31)
 
 #include "Rendering/RenderingExport.h"
 
@@ -10,29 +13,22 @@
 #include "Detail/ShaderConstantsDataImpl.h"
 #include "Detail/SingleShaderBaseDataImpl.h"
 #include "Detail/SingleShaderConstantsDataImpl.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+
 using std::make_shared;
 using std::string;
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
+
 Rendering::ShaderConstantsData::ShaderConstantsData(int numConstants)
     : impl{ numConstants }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderConstantsData::ShaderConstantsData()
-    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
-{
-    RENDERING_SELF_CLASS_IS_VALID_1;
-}
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ShaderConstantsData)
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderConstantsData)
 
@@ -53,12 +49,10 @@ void Rendering::ShaderConstantsData::InsertData(const string& name, int numRegis
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderConstantsData, GetNumConstants, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData, GetConstantName, int, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData, GetConstantName, int, string)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData, GetNumRegistersUsed, int, int)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData, Load, CoreTools::BufferSource&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderConstantsData, Save, CoreTools::BufferTarget&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderConstantsData, GetStreamingSize, int)
-
-#include STSTEM_WARNING_POP

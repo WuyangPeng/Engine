@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 14:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:42)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_PIXEL_SHADER_IMPL_H
 #define RENDERING_RENDERERS_PLATFORM_PIXEL_SHADER_IMPL_H
@@ -10,11 +13,10 @@
 #include "Rendering/RenderingDll.h"
 
 #include "PlatformShaderImpl.h"
+#include "Rendering/Shaders/ShadersFwd.h"
 
 namespace Rendering
 {
-    class PixelShader;
-
     class RENDERING_HIDDEN_DECLARE PlatformPixelShaderImpl
     {
     public:
@@ -23,15 +25,14 @@ namespace Rendering
 
     public:
         PlatformPixelShaderImpl() noexcept;
-        virtual ~PlatformPixelShaderImpl();
-        PlatformPixelShaderImpl(const PlatformPixelShaderImpl&) = default;
-        PlatformPixelShaderImpl& operator=(const PlatformPixelShaderImpl&) = default;
-        PlatformPixelShaderImpl(PlatformPixelShaderImpl&&) = default;
-        PlatformPixelShaderImpl& operator=(PlatformPixelShaderImpl&&) = default;
+        virtual ~PlatformPixelShaderImpl() noexcept = default;
+        PlatformPixelShaderImpl(const PlatformPixelShaderImpl& rhs) noexcept = default;
+        PlatformPixelShaderImpl& operator=(const PlatformPixelShaderImpl& rhs) noexcept = default;
+        PlatformPixelShaderImpl(PlatformPixelShaderImpl&& rhs) noexcept = default;
+        PlatformPixelShaderImpl& operator=(PlatformPixelShaderImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        // Vertex shader operations.
         virtual void Enable(Renderer* renderer, const PixelShader* pixelShader, const ShaderParameters* parameters) = 0;
         virtual void Disable(Renderer* renderer, const PixelShader* pixelShader, const ShaderParameters* parameters) = 0;
     };

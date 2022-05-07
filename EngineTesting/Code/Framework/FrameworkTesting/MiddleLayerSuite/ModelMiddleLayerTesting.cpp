@@ -7,7 +7,7 @@
 #include "ModelMiddleLayerTesting.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "System/Helper/PragmaWarning/Format.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Time/CustomTime.h"
@@ -77,7 +77,7 @@ void Framework::ModelMiddleLayerTesting
 
 	ASSERT_TRUE(middleLayer.Paint());
 	ASSERT_TRUE(middleLayer.Move(point));
-	ASSERT_TRUE(middleLayer.Resize(System::WindowDisplay::MaxHide, size));
+	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, size));
 
 	ASSERT_TRUE(middleLayer.KeyUp(0, point));
 	ASSERT_TRUE(middleLayer.KeyDown(0, point));
@@ -98,7 +98,7 @@ void Framework::ModelMiddleLayerTesting
 
 	TestingType middleLayer{ platform };   
 
-	const auto frame = System::g_Millisecond / maxTimer;
+	constexpr auto frame = System::g_Millisecond / maxTimer;
 	const auto testLoopCount = maxTimer * GetTestLoopCount();
 
 	CoreTools::CustomTime customTime{ };
@@ -134,6 +134,6 @@ void Framework::ModelMiddleLayerTesting
 
 	const auto zero = middleLayer.GetFrameRate();
 
-	ASSERT_APPROXIMATE(0.0, zero, Mathematics::DoubleMath::sm_Epsilon);
+	ASSERT_APPROXIMATE(0.0, zero, Mathematics::MathD::epsilon);
 }
 

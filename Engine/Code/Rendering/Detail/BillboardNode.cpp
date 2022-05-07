@@ -1,28 +1,27 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 10:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/11 10:38)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BillboardNode.h"
 #include "Detail/BillboardNodeImpl.h"
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26434)
 using std::make_shared;
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, BillboardNode)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BillboardNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BillboardNode);
@@ -30,10 +29,11 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, BillboardNode);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, BillboardNode);
 
 Rendering::BillboardNode::BillboardNode(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-    SELF_CLASS_IS_VALID_0;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
+
 CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, BillboardNode)
 CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, BillboardNode)
 CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, BillboardNode)
@@ -41,41 +41,8 @@ CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, BillboardNode)
 CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, BillboardNode)
 CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, BillboardNode)
 
-#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
-    namespaceName::className::className(const className& rhs)                               \
-        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        SELF_CLASS_IS_VALID_0;                                                              \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        className temp{ rhs };                                                              \
-        Swap(temp);                                                                         \
-        return *this;                                                                       \
-    }                                                                                       \
-    void namespaceName::className::Swap(className& rhs) noexcept                            \
-    {                                                                                       \
-        ;                                                                                   \
-        std::swap(impl, rhs.impl);                                                          \
-    }                                                                                       \
-    namespaceName::className::className(className&& rhs) noexcept                           \
-        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-    }                                                                                       \
-    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
-    {                                                                                       \
-        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
-        ParentType::operator=(std::move(rhs));                                              \
-        impl = std::move(rhs.impl);                                                         \
-        return *this;                                                                       \
-    }
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, BillboardNode);
-
 Rendering::BillboardNode::BillboardNode(const CameraSharedPtr& camera)
-    : ParentType{ NodeCreate::Init }, impl{ make_shared<ImplType>(camera) }
+    : ParentType{ NodeCreate::Init }, impl{ camera }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -86,16 +53,16 @@ Rendering::ControllerInterfaceSharedPtr Rendering::BillboardNode::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, BillboardNode, AlignTo, CameraSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Rendering, BillboardNode, AlignTo, CameraSharedPtr, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, BillboardNode, GetCamera, const Rendering::ConstCameraSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BillboardNode, GetCamera, Rendering::ConstCameraSharedPtr)
 
 bool Rendering::BillboardNode::UpdateWorldData(double applicationTime)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     // 计算广告牌的世界变换基于其父世界变换及其局部变换。
     // 请注意，你不应该调用Node::UpdateWorldData，因为该函数更新其子节点。
@@ -124,5 +91,3 @@ bool Rendering::BillboardNode::UpdateWorldData(double applicationTime)
     // 现在的广告牌方向可以告诉子节点进行更新。
     return ParentType::UpdateImplWorldData(applicationTime);
 }
-
-#include STSTEM_WARNING_POP

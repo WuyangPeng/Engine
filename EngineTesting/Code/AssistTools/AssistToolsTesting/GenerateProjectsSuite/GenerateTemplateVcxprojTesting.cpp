@@ -12,7 +12,7 @@
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(AssistTools, GenerateTemplateVcxproj)
 
 void AssistTools::GenerateTemplateVcxprojTesting
-    ::MainTest()
+   ::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(GenerateToTest);
 }
@@ -28,8 +28,8 @@ void AssistTools::GenerateTemplateVcxprojTesting
 	const System::String createDirectory(GetExportDirectory() + GetForwardSlash() + GetEngineDirectory());
 	const System::String fullDirectory(createDirectory + GetForwardSlash() + GetSolutionName() + GetForwardSlash() + GetSolutionName());
 
-	int projectNameCount = GetContentFindCount(fileName, projectName);
-	int coreNameCount = GetContentFindCount(fileName, includeName);
+ const int projectNameCount = GetContentFindCount(fileName, projectName);
+        const int coreNameCount = GetContentFindCount(fileName, includeName);
 
 	TestingType generateTemplateSolution(fileName, projectName, includeName);
 

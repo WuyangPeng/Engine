@@ -32,6 +32,21 @@ uint64_t CoreTools::ObjectRegister::Register(const T& object)
 }
 
 template <typename T>
+uint64_t CoreTools::ObjectRegister::RegisterWeakPtr(const T& object)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
+
+    if (object.object.lock() != nullptr)
+    {
+        return object.object.lock()->Register(*this);
+    }
+
+    return 0;
+}
+
+template <typename T>
 void CoreTools::ObjectRegister::RegisterContainer(const T& objects)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;

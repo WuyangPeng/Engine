@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 10:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/09 22:06)
 
 #include "Rendering/RenderingExport.h"
 
@@ -12,79 +15,79 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
+
 Rendering::CollapseRecordImpl::CollapseRecordImpl(int vKeep, int vThrow, int numVertices, int numTriangles) noexcept
-    : m_VKeep{ vKeep }, m_VThrow{ vThrow }, m_NumVertices{ numVertices }, m_NumTriangles{ numTriangles }, m_Indices{}
+    : recordVKeep{ vKeep }, recordVThrow{ vThrow }, numVertices{ numVertices }, numTriangles{ numTriangles }, indices{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Rendering::CollapseRecordImpl::IsValid() const noexcept
 {
-    if (0 <= m_NumTriangles && 0 <= m_NumVertices)
+    if (0 <= numTriangles && 0 <= numVertices)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int Rendering::CollapseRecordImpl::GetVKeep() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VKeep;
+    return recordVKeep;
 }
 
 void Rendering::CollapseRecordImpl::SetVKeep(int vKeep) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VKeep = vKeep;
+    recordVKeep = vKeep;
 }
 
 int Rendering::CollapseRecordImpl::GetNumVertices() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_NumVertices;
+    return numVertices;
 }
 
-void Rendering::CollapseRecordImpl::SetNumVertices(int numVertices) noexcept
+void Rendering::CollapseRecordImpl::SetNumVertices(int aNumVertices) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_NumVertices = numVertices;
+    numVertices = aNumVertices;
 }
 
 int Rendering::CollapseRecordImpl::GetNumTriangles() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_NumTriangles;
+    return numTriangles;
 }
 
-void Rendering::CollapseRecordImpl::SetNumTriangles(int numTriangles) noexcept
+void Rendering::CollapseRecordImpl::SetNumTriangles(int aNumTriangles) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_NumTriangles = numTriangles;
+    numTriangles = aNumTriangles;
 }
 
-void Rendering::CollapseRecordImpl::SetIndices(const std::vector<int>& indices)
+void Rendering::CollapseRecordImpl::SetIndices(const std::vector<int>& aIndices)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Indices = indices;
+    indices = aIndices;
 }
 
-const std::vector<int> Rendering::CollapseRecordImpl::GetIndices() const
+std::vector<int> Rendering::CollapseRecordImpl::GetIndices() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_Indices;
+    return indices;
 }
 
 int Rendering::CollapseRecordImpl::GetIndex(int index) const
@@ -92,61 +95,61 @@ int Rendering::CollapseRecordImpl::GetIndex(int index) const
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_0(0 <= index && index < GetIndicesSize(), "索引错误！");
 
-    return m_Indices.at(index);
+    return indices.at(index);
 }
 
 int Rendering::CollapseRecordImpl::GetIndicesSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Indices.size());
+    return boost::numeric_cast<int>(indices.size());
 }
 
 int Rendering::CollapseRecordImpl::GetVThrow() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VThrow;
+    return recordVThrow;
 }
 
 void Rendering::CollapseRecordImpl::SetVThrow(int vThrow) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VThrow = vThrow;
+    recordVThrow = vThrow;
 }
 
 void Rendering::CollapseRecordImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    source.Read(m_VKeep);
-    source.Read(m_VThrow);
-    source.Read(m_NumVertices);
-    source.Read(m_NumTriangles);
-    m_Indices = source.ReadVectorWithoutNumber<int>();
+    source.Read(recordVKeep);
+    source.Read(recordVThrow);
+    source.Read(numVertices);
+    source.Read(numTriangles);
+    indices = source.ReadVectorWithoutNumber<int>();
 }
 
 void Rendering::CollapseRecordImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    target.Write(m_VKeep);
-    target.Write(m_VThrow);
-    target.Write(m_NumVertices);
-    target.Write(m_NumTriangles);
-    target.WriteContainerWithNumber(m_Indices);
+    target.Write(recordVKeep);
+    target.Write(recordVThrow);
+    target.Write(numVertices);
+    target.Write(numTriangles);
+    target.WriteContainerWithNumber(indices);
 }
 
 int Rendering::CollapseRecordImpl::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_VKeep);
-    size += CORE_TOOLS_STREAM_SIZE(m_VThrow);
-    size += CORE_TOOLS_STREAM_SIZE(m_NumVertices);
-    size += CORE_TOOLS_STREAM_SIZE(m_NumTriangles);
-    size += CORE_TOOLS_STREAM_SIZE(m_Indices);
+    auto size = CORE_TOOLS_STREAM_SIZE(recordVKeep);
+    size += CORE_TOOLS_STREAM_SIZE(recordVThrow);
+    size += CORE_TOOLS_STREAM_SIZE(numVertices);
+    size += CORE_TOOLS_STREAM_SIZE(numTriangles);
+    size += CORE_TOOLS_STREAM_SIZE(indices);
 
     return size;
 }
@@ -155,6 +158,5 @@ void Rendering::CollapseRecordImpl::ClearIndices() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_Indices.clear();
+    indices.clear();
 }
-#include STSTEM_WARNING_POP

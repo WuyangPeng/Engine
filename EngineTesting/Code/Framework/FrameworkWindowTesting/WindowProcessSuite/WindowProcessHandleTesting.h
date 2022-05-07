@@ -16,7 +16,7 @@ namespace Framework
 	public:
 		using ClassType = WindowProcessHandleTesting;
 		using ParentType = UnitTest;
-		using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowsHWnd;
 
 	public:
 		explicit WindowProcessHandleTesting(const OStreamShared& stream, HWnd hwnd);

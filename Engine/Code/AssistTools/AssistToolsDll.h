@@ -1,37 +1,49 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 10:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/28 16:19)
 
 #ifndef ASSIST_TOOLS_DLL_H
 #define ASSIST_TOOLS_DLL_H
 
-#include "System/Helper/ExportMacro.h"
 #include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) || defined(BUILDING_ASSIST_TOOLS_STATIC)
 
-  #define ASSIST_TOOLS_DEFAULT_DECLARE
-  #define ASSIST_TOOLS_HIDDEN_DECLARE
-  #define ASSIST_TOOLS_VISIBLE
+    #define ASSIST_TOOLS_DEFAULT_DECLARE
+    #define ASSIST_TOOLS_VISIBLE
 
-#else // !defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) && !defined(BUILDING_ASSIST_TOOLS_STATIC)
+    #if defined(BUILDING_ASSIST_TOOLS_EXPORT)
 
-   #if defined(BUILDING_ASSIST_TOOLS_EXPORT)
- 
+        #define ASSIST_TOOLS_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_ASSIST_TOOLS_EXPORT)
+
+        #define ASSIST_TOOLS_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_ASSIST_TOOLS_EXPORT
+
+#else  // !defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) && !defined(BUILDING_ASSIST_TOOLS_STATIC)
+
+    #if defined(BUILDING_ASSIST_TOOLS_EXPORT)
+
         #define ASSIST_TOOLS_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
         #define ASSIST_TOOLS_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
 
-   #else // !defined(BUILDING_ASSIST_TOOLS_EXPORT)
+    #else  // !defined(BUILDING_ASSIST_TOOLS_EXPORT)
 
-		#define ASSIST_TOOLS_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define ASSIST_TOOLS_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
         #define ASSIST_TOOLS_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
 
-   #endif // BUILDING_ASSIST_TOOLS_EXPORT
+    #endif  // BUILDING_ASSIST_TOOLS_EXPORT
 
-   #define ASSIST_TOOLS_VISIBLE TCRE_SYMBOL_VISIBLE
+    #define ASSIST_TOOLS_VISIBLE TCRE_SYMBOL_VISIBLE
 
-#endif // defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) || defined(BUILDING_ASSIST_TOOLS_STATIC)
+#endif  // defined(BUILDING_ASSIST_TOOLS_NO_IMPORT) || defined(BUILDING_ASSIST_TOOLS_STATIC)
 
-#endif // ASSIST_TOOLS_DLL_H
+#endif  // ASSIST_TOOLS_DLL_H

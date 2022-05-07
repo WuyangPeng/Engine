@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 14:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 10:43)
 
 #ifndef RENDERING_RENDERERS_ANALYSIS_RENDERER_PARAMETER_MANAGE_H
 #define RENDERING_RENDERERS_ANALYSIS_RENDERER_PARAMETER_MANAGE_H
@@ -10,43 +13,41 @@
 #include "Rendering/RenderingDll.h"
 
 #include "System/Helper/PragmaWarning/PropertyTree.h"
+#include "Rendering/Renderers/RenderersInternalFwd.h"
+
 #include <string>
 
 namespace Rendering
 {
-	class RendererParameterImpl;
+    class RENDERING_HIDDEN_DECLARE AnalysisRendererParameterManager
+    {
+    public:
+        using ClassType = AnalysisRendererParameterManager;
+        using RendererParameterSharedPtr = std::shared_ptr<RendererParameterImpl>;
 
-	class RENDERING_HIDDEN_DECLARE AnalysisRendererParameterManager 
-	{
-	public:
-		using ClassType = AnalysisRendererParameterManager;
-		using RendererParameterPtr = std::shared_ptr<RendererParameterImpl>;
+    public:
+        explicit AnalysisRendererParameterManager(const std::string& fileName);
 
-	public:
-		explicit AnalysisRendererParameterManager(const std::string& fileName);	
+        CLASS_INVARIANT_DECLARE;
 
-		CLASS_INVARIANT_DECLARE;
+        NODISCARD RendererParameterSharedPtr GetRendererParameterPtr() const noexcept;
 
-		const RendererParameterPtr GetRendererParameterPtr() const noexcept;
+    private:
+        void Analysis();
+        void AnalysisJson();
+        void AnalysisRendererType();
+        void AnalysisRendererTexture();
+        void AnalysisRendererClearColor();
+        void AnalysisWindowParameter();
 
-	private:
-		void Analysis();
-		void AnalysisJson();
-		void AnalysisRendererType();		 
-		void AnalysisRendererTexture();	
-		void AnalysisRendererClearColor();
-		void AnalysisWindowParameter();
-
-	private:
-		RendererParameterPtr m_RendererParameterPtr;
-		std::string m_FileName;
-		boost::property_tree::ptree m_MainTree;
-		boost::property_tree::ptree m_TextureTree;
-		boost::property_tree::ptree m_ClearColorTree;
-		boost::property_tree::ptree m_WindowParameterTree;
-	};
+    private:
+        RendererParameterSharedPtr rendererParameter;
+        std::string fileName;
+        boost::property_tree::ptree mainTree;
+        boost::property_tree::ptree textureTree;
+        boost::property_tree::ptree clearColorTree;
+        boost::property_tree::ptree windowParameterTree;
+    };
 }
 
-#endif // RENDERING_RENDERERS_ANALYSIS_RENDERER_PARAMETER_MANAGE_H
-
-
+#endif  // RENDERING_RENDERERS_ANALYSIS_RENDERER_PARAMETER_MANAGE_H

@@ -1,68 +1,63 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 10:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 18:42)
 
 #ifndef RENDERING_DETAIL_CLOD_MESH_IMPL_H
 #define RENDERING_DETAIL_CLOD_MESH_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectAssociated.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/Detail/CollapseRecordArray.h"
 #include "Rendering/Resources/IndexBuffer.h"
 #include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Detail/CollapseRecordArray.h"
-
-namespace CoreTools
-{
-	class BufferSource;
-	class BufferTarget;
-	class ObjectRegister;
-	class ObjectLink;
-	class Object;
-}
 
 namespace Rendering
 {
-	class RENDERING_HIDDEN_DECLARE ClodMeshImpl
-	{
-	public:
-		using ClassType = ClodMeshImpl;
-		using BufferSource = CoreTools::BufferSource;
-		using BufferTarget = CoreTools::BufferTarget;
-		using ObjectRegister = CoreTools::ObjectRegister;
-		using ObjectLink = CoreTools::ObjectLink;
-		using Object = CoreTools::Object;
+    class RENDERING_HIDDEN_DECLARE ClodMeshImpl
+    {
+    public:
+        using ClassType = ClodMeshImpl;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
+        using ObjectRegister = CoreTools::ObjectRegister;
+        using ObjectLink = CoreTools::ObjectLink;
+        using Object = CoreTools::Object;
 
-	public:
-		ClodMeshImpl() noexcept;		
-		explicit ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept;
+    public:
+        ClodMeshImpl() noexcept;
+        explicit ClodMeshImpl(const CollapseRecordArraySharedPtr& recordArray) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void Load(CoreTools::BufferSource& source);
-		void Save(CoreTools::BufferTarget& target) const;
-		int GetStreamingSize() const;
-		void Link(CoreTools:: ObjectLink& source);
-                void Register(CoreTools::ObjectRegister& target) const;
- 
-		int GetNumRecords () const;
-		int GetTargetRecord() const noexcept;
-		void SetTargetRecord(int targetRecord) noexcept;	
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        NODISCARD int GetStreamingSize() const noexcept;
+        void Link(CoreTools::ObjectLink& source);
+        void Register(CoreTools::ObjectRegister& target) const;
 
-		// 几何更新。Draw函数将调用此更新，并根据目标记录的当前值调整TrianglesMesh数量。
-		// 可以在不需要显示网格的应用程序手动调用。
-		void SelectLevelOfDetail(VertexBufferSharedPtr vertexbuffer,IndexBufferSharedPtr indexbuffer,int targetRecord);
+        NODISCARD int GetNumRecords() const;
+        NODISCARD int GetTargetRecord() const noexcept;
+        void SetTargetRecord(int aTargetRecord) noexcept;
 
-		 CORE_TOOLS_NAMES_IMPL_DECLARE;
+        // 几何更新。Draw函数将调用此更新，并根据目标记录的当前值调整TrianglesMesh数量。
+        // 可以在不需要显示网格的应用程序手动调用。
+        void SelectLevelOfDetail(VertexBuffer& vertexbuffer, const IndexBufferSharedPtr& indexbuffer, int aTargetRecord);
 
+        CORE_TOOLS_NAMES_IMPL_DECLARE;
 
-	private:
-		// 成员LOD选择。
-		int m_CurrentRecord;
-		int m_TargetRecord;
-		CollapseRecordArraySharedPtr m_RecordArray;
-	};
+    private:
+        // 成员LOD选择。
+        int currentRecord;
+        int targetRecord;
+        CoreTools::ObjectAssociated<CollapseRecordArray> recordArray;
+    };
 }
 
-#endif // RENDERING_DETAIL_CLOD_MESH_IMPL_H
+#endif  // RENDERING_DETAIL_CLOD_MESH_IMPL_H

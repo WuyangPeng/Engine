@@ -1,50 +1,56 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/24 16:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/12 17:17)
 
 #include "Rendering/RenderingExport.h"
 
 #include "VisualPassImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
 using std::string;
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26455)
-Rendering::VisualPassImpl::VisualPassImpl()
-    : m_VertexShader{}, m_PixelShader{}, m_AlphaState{}, m_CullState{},
-      m_DepthState{}, m_OffsetState{}, m_StencilState{}, m_WireState{}
+
+Rendering::VisualPassImpl::VisualPassImpl() noexcept
+    : vertexShader{},
+      pixelShader{},
+      alphaState{},
+      cullState{},
+      depthState{},
+      offsetState{},
+      stencilState{},
+      wireState{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, VisualPassImpl)
 
-int Rendering::VisualPassImpl::GetStreamingSize() const
+int Rendering::VisualPassImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(m_VertexShader);
+    auto size = CORE_TOOLS_STREAM_SIZE(vertexShader);
 
-    size += CORE_TOOLS_STREAM_SIZE(m_PixelShader);
-    size += CORE_TOOLS_STREAM_SIZE(m_AlphaState);
-    size += CORE_TOOLS_STREAM_SIZE(m_CullState);
-    size += CORE_TOOLS_STREAM_SIZE(m_DepthState);
-    size += CORE_TOOLS_STREAM_SIZE(m_OffsetState);
-    size += CORE_TOOLS_STREAM_SIZE(m_StencilState);
-    size += CORE_TOOLS_STREAM_SIZE(m_WireState);
+    size += CORE_TOOLS_STREAM_SIZE(pixelShader);
+    size += CORE_TOOLS_STREAM_SIZE(alphaState);
+    size += CORE_TOOLS_STREAM_SIZE(cullState);
+    size += CORE_TOOLS_STREAM_SIZE(depthState);
+    size += CORE_TOOLS_STREAM_SIZE(offsetState);
+    size += CORE_TOOLS_STREAM_SIZE(stencilState);
+    size += CORE_TOOLS_STREAM_SIZE(wireState);
 
     return size;
 }
@@ -52,126 +58,126 @@ int Rendering::VisualPassImpl::GetStreamingSize() const
 void Rendering::VisualPassImpl::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    //target.WriteSharedPtr(m_VertexShader);
-    //target.WriteSharedPtr(m_PixelShader);
-    //target.WriteSharedPtr(m_AlphaState);
-    //target.WriteSharedPtr(m_CullState);
-    //target.WriteSharedPtr(m_DepthState);
-    //target.WriteSharedPtr(m_OffsetState);
-    //target.WriteSharedPtr(m_StencilState);
-    //target.WriteSharedPtr(m_WireState);
+
+    target.WriteObjectAssociated(vertexShader);
+    target.WriteObjectAssociated(pixelShader);
+    target.WriteObjectAssociated(alphaState);
+    target.WriteObjectAssociated(cullState);
+    target.WriteObjectAssociated(depthState);
+    target.WriteObjectAssociated(offsetState);
+    target.WriteObjectAssociated(stencilState);
+    target.WriteObjectAssociated(wireState);
 }
 
 void Rendering::VisualPassImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    //source.ReadSharedPtr(m_VertexShader);
-    //source.ReadSharedPtr(m_PixelShader);
-    //source.ReadSharedPtr(m_AlphaState);
-    //source.ReadSharedPtr(m_CullState);
-    //source.ReadSharedPtr(m_DepthState);
-    //source.ReadSharedPtr(m_OffsetState);
-    //source.ReadSharedPtr(m_StencilState);
-    //source.ReadSharedPtr(m_WireState);
+
+    source.ReadObjectAssociated(vertexShader);
+    source.ReadObjectAssociated(pixelShader);
+    source.ReadObjectAssociated(alphaState);
+    source.ReadObjectAssociated(cullState);
+    source.ReadObjectAssociated(depthState);
+    source.ReadObjectAssociated(offsetState);
+    source.ReadObjectAssociated(stencilState);
+    source.ReadObjectAssociated(wireState);
 }
 
 void Rendering::VisualPassImpl::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
-    source;
-    //source.ResolveObjectSharedPtrLink(m_VertexShader);
-    //source.ResolveObjectSharedPtrLink(m_PixelShader);
-    //source.ResolveObjectSharedPtrLink(m_AlphaState);
-    //source.ResolveObjectSharedPtrLink(m_CullState);
-    //source.ResolveObjectSharedPtrLink(m_DepthState);
-    //source.ResolveObjectSharedPtrLink(m_OffsetState);
-    //source.ResolveObjectSharedPtrLink(m_StencilState);
-    //source.ResolveObjectSharedPtrLink(m_WireState);
+
+    source.ResolveLink(vertexShader);
+    source.ResolveLink(pixelShader);
+    source.ResolveLink(alphaState);
+    source.ResolveLink(cullState);
+    source.ResolveLink(depthState);
+    source.ResolveLink(offsetState);
+    source.ResolveLink(stencilState);
+    source.ResolveLink(wireState);
 }
 
 void Rendering::VisualPassImpl::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
-    target;
-    //target.RegisterSharedPtr(m_VertexShader);
-    //target.RegisterSharedPtr(m_PixelShader);
-    //target.RegisterSharedPtr(m_AlphaState);
-    //target.RegisterSharedPtr(m_CullState);
-    //target.RegisterSharedPtr(m_DepthState);
-    //target.RegisterSharedPtr(m_OffsetState);
-    //target.RegisterSharedPtr(m_StencilState);
-    //target.RegisterSharedPtr(m_WireState);
+
+    target.Register(vertexShader);
+    target.Register(pixelShader);
+    target.Register(alphaState);
+    target.Register(cullState);
+    target.Register(depthState);
+    target.Register(offsetState);
+    target.Register(stencilState);
+    target.Register(wireState);
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualPassImpl::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto found = m_VertexShader->GetObjectByName(name);
+    auto found = vertexShader.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_PixelShader->GetObjectByName(name);
+    found = pixelShader.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_AlphaState->GetObjectByName(name);
+    found = alphaState.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_CullState->GetObjectByName(name);
+    found = cullState.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_DepthState->GetObjectByName(name);
+    found = depthState.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_OffsetState->GetObjectByName(name);
+    found = offsetState.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_StencilState->GetObjectByName(name);
+    found = stencilState.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_WireState->GetObjectByName(name);
+    found = wireState.object->GetObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    return CoreTools::ObjectSharedPtr();
+    return nullptr;
 }
 
 vector<CoreTools::ObjectSharedPtr> Rendering::VisualPassImpl::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto vertexObjects = m_VertexShader->GetAllObjectsByName(name);
-    auto pixelObjects = m_PixelShader->GetAllObjectsByName(name);
-    auto alphaStateObjects = m_AlphaState->GetAllObjectsByName(name);
-    auto cullStateObjects = m_CullState->GetAllObjectsByName(name);
-    auto depthStateObjects = m_DepthState->GetAllObjectsByName(name);
-    auto offsetStateObjects = m_OffsetState->GetAllObjectsByName(name);
-    auto stencilStateObjects = m_StencilState->GetAllObjectsByName(name);
-    auto wireStateObjects = m_WireState->GetAllObjectsByName(name);
+    auto vertexObjects = vertexShader.object->GetAllObjectsByName(name);
+    auto pixelObjects = pixelShader.object->GetAllObjectsByName(name);
+    auto alphaStateObjects = alphaState.object->GetAllObjectsByName(name);
+    auto cullStateObjects = cullState.object->GetAllObjectsByName(name);
+    auto depthStateObjects = depthState.object->GetAllObjectsByName(name);
+    auto offsetStateObjects = offsetState.object->GetAllObjectsByName(name);
+    auto stencilStateObjects = stencilState.object->GetAllObjectsByName(name);
+    auto wireStateObjects = wireState.object->GetAllObjectsByName(name);
 
     vertexObjects.insert(vertexObjects.end(), pixelObjects.begin(), pixelObjects.end());
     vertexObjects.insert(vertexObjects.end(), alphaStateObjects.begin(), alphaStateObjects.end());
@@ -188,69 +194,69 @@ CoreTools::ConstObjectSharedPtr Rendering::VisualPassImpl::GetConstObjectByName(
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto found = m_VertexShader->GetConstObjectByName(name);
+    auto found = vertexShader.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_PixelShader->GetConstObjectByName(name);
+    found = pixelShader.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_AlphaState->GetConstObjectByName(name);
+    found = alphaState.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_CullState->GetConstObjectByName(name);
+    found = cullState.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_DepthState->GetConstObjectByName(name);
+    found = depthState.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_OffsetState->GetConstObjectByName(name);
+    found = offsetState.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_StencilState->GetConstObjectByName(name);
+    found = stencilState.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    found = m_WireState->GetConstObjectByName(name);
+    found = wireState.object->GetConstObjectByName(name);
     if (found != nullptr)
     {
         return found;
     }
 
-    return CoreTools::ConstObjectSharedPtr();
+    return nullptr;
 }
 
 vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualPassImpl::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto vertexObjects = m_VertexShader->GetAllConstObjectsByName(name);
-    auto pixelObjects = m_PixelShader->GetAllConstObjectsByName(name);
-    auto alphaStateObjects = m_AlphaState->GetAllConstObjectsByName(name);
-    auto cullStateObjects = m_CullState->GetAllConstObjectsByName(name);
-    auto depthStateObjects = m_DepthState->GetAllConstObjectsByName(name);
-    auto offsetStateObjects = m_OffsetState->GetAllConstObjectsByName(name);
-    auto stencilStateObjects = m_StencilState->GetAllConstObjectsByName(name);
-    auto wireStateObjects = m_WireState->GetAllConstObjectsByName(name);
+    auto vertexObjects = vertexShader.object->GetAllConstObjectsByName(name);
+    auto pixelObjects = pixelShader.object->GetAllConstObjectsByName(name);
+    auto alphaStateObjects = alphaState.object->GetAllConstObjectsByName(name);
+    auto cullStateObjects = cullState.object->GetAllConstObjectsByName(name);
+    auto depthStateObjects = depthState.object->GetAllConstObjectsByName(name);
+    auto offsetStateObjects = offsetState.object->GetAllConstObjectsByName(name);
+    auto stencilStateObjects = stencilState.object->GetAllConstObjectsByName(name);
+    auto wireStateObjects = wireState.object->GetAllConstObjectsByName(name);
 
     vertexObjects.insert(vertexObjects.end(), pixelObjects.begin(), pixelObjects.end());
     vertexObjects.insert(vertexObjects.end(), alphaStateObjects.begin(), alphaStateObjects.end());
@@ -263,136 +269,136 @@ vector<CoreTools::ConstObjectSharedPtr> Rendering::VisualPassImpl::GetAllConstOb
     return vertexObjects;
 }
 
-void Rendering::VisualPassImpl::SetVertexShader(const VertexShaderSharedPtr& vertexShader)
+void Rendering::VisualPassImpl::SetVertexShader(const VertexShaderSharedPtr& aVertexShader) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_VertexShader = vertexShader;
+    vertexShader.object = aVertexShader;
 }
 
-void Rendering::VisualPassImpl::SetPixelShader(const PixelShaderSharedPtr& pixelShader)
+void Rendering::VisualPassImpl::SetPixelShader(const PixelShaderSharedPtr& aPixelShader) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_PixelShader = pixelShader;
+    pixelShader.object = aPixelShader;
 }
 
-void Rendering::VisualPassImpl::SetAlphaState(const AlphaStateSharedPtr& alphaState)
+void Rendering::VisualPassImpl::SetAlphaState(const AlphaStateSharedPtr& aAlphaState) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_AlphaState = alphaState;
+    alphaState.object = aAlphaState;
 }
 
-void Rendering::VisualPassImpl::SetCullState(const CullStateSharedPtr& cullState)
+void Rendering::VisualPassImpl::SetCullState(const CullStateSharedPtr& aCullState) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_CullState = cullState;
+    cullState.object = aCullState;
 }
 
-void Rendering::VisualPassImpl::SetDepthState(const DepthStateSharedPtr& depthState)
+void Rendering::VisualPassImpl::SetDepthState(const DepthStateSharedPtr& aDepthState) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_DepthState = depthState;
+    depthState.object = aDepthState;
 }
 
-void Rendering::VisualPassImpl::SetOffsetState(const OffsetStateSharedPtr& offsetState)
+void Rendering::VisualPassImpl::SetOffsetState(const OffsetStateSharedPtr& aOffsetState) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_OffsetState = offsetState;
+    offsetState.object = aOffsetState;
 }
 
-void Rendering::VisualPassImpl::SetStencilState(const StencilStateSharedPtr& stencilState)
+void Rendering::VisualPassImpl::SetStencilState(const StencilStateSharedPtr& aStencilState) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_StencilState = stencilState;
+    stencilState.object = aStencilState;
 }
 
-void Rendering::VisualPassImpl::SetWireState(const WireStateSharedPtr& wireState)
+void Rendering::VisualPassImpl::SetWireState(const WireStateSharedPtr& aWireState) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    m_WireState = wireState;
+    wireState.object = aWireState;
 }
 
-const Rendering::ConstVertexShaderSharedPtr Rendering::VisualPassImpl::GetVertexShader() const
+Rendering::ConstVertexShaderSharedPtr Rendering::VisualPassImpl::GetVertexShader() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_VertexShader;
+    return vertexShader.object;
 }
 
-const Rendering::ConstPixelShaderSharedPtr Rendering::VisualPassImpl::GetPixelShader() const
+Rendering::ConstPixelShaderSharedPtr Rendering::VisualPassImpl::GetPixelShader() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_PixelShader;
+    return pixelShader.object;
 }
 
-const Rendering::ConstAlphaStateSharedPtr Rendering::VisualPassImpl::GetAlphaState() const
+Rendering::ConstAlphaStateSharedPtr Rendering::VisualPassImpl::GetAlphaState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_AlphaState;
+    return alphaState.object;
 }
 
-const Rendering::ConstCullStateSharedPtr Rendering::VisualPassImpl::GetCullState() const
+Rendering::ConstCullStateSharedPtr Rendering::VisualPassImpl::GetCullState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_CullState;
+    return cullState.object;
 }
 
-const Rendering::ConstDepthStateSharedPtr Rendering::VisualPassImpl::GetDepthState() const
+Rendering::ConstDepthStateSharedPtr Rendering::VisualPassImpl::GetDepthState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_DepthState;
+    return depthState.object;
 }
 
-const Rendering::ConstOffsetStateSharedPtr Rendering::VisualPassImpl::GetOffsetState() const
+Rendering::ConstOffsetStateSharedPtr Rendering::VisualPassImpl::GetOffsetState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_OffsetState;
+    return offsetState.object;
 }
 
-const Rendering::ConstStencilStateSharedPtr Rendering::VisualPassImpl::GetStencilState() const
+Rendering::ConstStencilStateSharedPtr Rendering::VisualPassImpl::GetStencilState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_StencilState;
+    return stencilState.object;
 }
 
-const Rendering::ConstWireStateSharedPtr Rendering::VisualPassImpl::GetWireState() const
+Rendering::ConstWireStateSharedPtr Rendering::VisualPassImpl::GetWireState() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return m_WireState;
+    return wireState.object;
 }
 
 void Rendering::VisualPassImpl::SaveShader(WriteFileManager& manager) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    m_VertexShader->SaveShader(manager);
-    m_PixelShader->SaveShader(manager);
+    vertexShader.object->SaveShader(manager);
+    pixelShader.object->SaveShader(manager);
 }
 
 void Rendering::VisualPassImpl::SaveState(WriteFileManager& manager) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    m_AlphaState->SaveState(manager);
-    m_CullState->SaveState(manager);
-    m_DepthState->SaveState(manager);
-    m_OffsetState->SaveState(manager);
-    m_StencilState->SaveState(manager);
-    m_WireState->SaveState(manager);
+    alphaState.object->SaveState(manager);
+    cullState.object->SaveState(manager);
+    depthState.object->SaveState(manager);
+    offsetState.object->SaveState(manager);
+    stencilState.object->SaveState(manager);
+    wireState.object->SaveState(manager);
 }
 
 void Rendering::VisualPassImpl::LoadShader(ReadFileManager& manager)
@@ -413,83 +419,82 @@ void Rendering::VisualPassImpl::LoadState(ReadFileManager& manager)
 
 void Rendering::VisualPassImpl::LoadVertexShader(ReadFileManager& manager)
 {
-    string programName = manager.LoadStdString();
+    auto programName = manager.LoadStdString();
 
-    int numInputs{ 0 };
-    int numOutputs{ 0 };
-    int numConstants{ 0 };
-    int numSamplers{ 0 };
-    int numProfiles{ 0 };
-    manager.Read(sizeof(int), &numInputs);
-    manager.Read(sizeof(int), &numOutputs);
-    manager.Read(sizeof(int), &numConstants);
-    manager.Read(sizeof(int), &numSamplers);
-    manager.Read(sizeof(int), &numProfiles);
+    int32_t numInputs{ 0 };
+    int32_t numOutputs{ 0 };
+    int32_t numConstants{ 0 };
+    int32_t numSamplers{ 0 };
+    int32_t numProfiles{ 0 };
+    manager.Read(sizeof(int32_t), &numInputs);
+    manager.Read(sizeof(int32_t), &numOutputs);
+    manager.Read(sizeof(int32_t), &numConstants);
+    manager.Read(sizeof(int32_t), &numSamplers);
+    manager.Read(sizeof(int32_t), &numProfiles);
 
-    VertexShaderSharedPtr vertexShader{ std::make_shared<VertexShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
-    vertexShader->LoadShader(manager, numProfiles);
-    SetVertexShader(vertexShader);
+    auto result = std::make_shared<VertexShader>(programName, numInputs, numOutputs, numConstants, numSamplers);
+    result->LoadShader(manager, numProfiles);
+    SetVertexShader(result);
 }
 
 void Rendering::VisualPassImpl::LoadPixelShader(ReadFileManager& manager)
 {
     auto programName = manager.LoadStdString();
 
-    int numInputs{ 0 };
-    int numOutputs{ 0 };
-    int numConstants{ 0 };
-    int numSamplers{ 0 };
-    int numProfiles{ 0 };
-    manager.Read(sizeof(int), &numInputs);
-    manager.Read(sizeof(int), &numOutputs);
-    manager.Read(sizeof(int), &numConstants);
-    manager.Read(sizeof(int), &numSamplers);
-    manager.Read(sizeof(int), &numProfiles);
+    int32_t numInputs{ 0 };
+    int32_t numOutputs{ 0 };
+    int32_t numConstants{ 0 };
+    int32_t numSamplers{ 0 };
+    int32_t numProfiles{ 0 };
+    manager.Read(sizeof(int32_t), &numInputs);
+    manager.Read(sizeof(int32_t), &numOutputs);
+    manager.Read(sizeof(int32_t), &numConstants);
+    manager.Read(sizeof(int32_t), &numSamplers);
+    manager.Read(sizeof(int32_t), &numProfiles);
 
-    PixelShaderSharedPtr pixelShader{ std::make_shared<PixelShader>(programName, numInputs, numOutputs, numConstants, numSamplers) };
-    pixelShader->LoadShader(manager, numProfiles);
-    SetPixelShader(pixelShader);
+    auto result = std::make_shared<PixelShader>(programName, numInputs, numOutputs, numConstants, numSamplers);
+    result->LoadShader(manager, numProfiles);
+    SetPixelShader(result);
 }
 
 void Rendering::VisualPassImpl::LoadAlphaState(ReadFileManager& manager)
 {
-    AlphaStateSharedPtr alphaState{ std::make_shared<AlphaState>() };
-    alphaState->LoadState(manager);
-    SetAlphaState(alphaState);
+    auto result = std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable);
+    result->LoadState(manager);
+    SetAlphaState(result);
 }
 
 void Rendering::VisualPassImpl::LoadCullState(ReadFileManager& manager)
 {
-    CullStateSharedPtr cullState{ std::make_shared<CullState>() };
-    cullState->LoadState(manager);
-    SetCullState(cullState);
+    auto result = std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable);
+    result->LoadState(manager);
+    SetCullState(result);
 }
 
 void Rendering::VisualPassImpl::LoadDepthState(ReadFileManager& manager)
 {
-    DepthStateSharedPtr depthState{ std::make_shared<DepthState>() };
-    depthState->LoadState(manager);
-    SetDepthState(depthState);
+    auto result = std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable);
+    result->LoadState(manager);
+    SetDepthState(result);
 }
 
 void Rendering::VisualPassImpl::LoadOffsetState(ReadFileManager& manager)
 {
-    OffsetStateSharedPtr offsetState{ std::make_shared<OffsetState>() };
-    offsetState->LoadState(manager);
-    SetOffsetState(offsetState);
+    auto result = std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable);
+    result->LoadState(manager);
+    SetOffsetState(result);
 }
 
 void Rendering::VisualPassImpl::LoadStencilState(ReadFileManager& manager)
 {
-    StencilStateSharedPtr stencilState{ std::make_shared<StencilState>() };
-    stencilState->LoadState(manager);
-    SetStencilState(stencilState);
+    auto result = std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable);
+    result->LoadState(manager);
+    SetStencilState(result);
 }
 
 void Rendering::VisualPassImpl::LoadWireState(ReadFileManager& manager)
 {
-    WireStateSharedPtr wireState{ std::make_shared<WireState>() };
-    wireState->LoadState(manager);
-    SetWireState(wireState);
+    auto result = std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable);
+    result->LoadState(manager);
+    SetWireState(result);
 }
-#include STSTEM_WARNING_POP

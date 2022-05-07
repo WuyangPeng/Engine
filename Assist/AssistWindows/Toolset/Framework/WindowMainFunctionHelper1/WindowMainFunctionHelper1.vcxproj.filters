@@ -27,13 +27,35 @@
     <None Include="Configuration\Log.json">
       <Filter>配置</Filter>
     </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1Lib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
@@ -59,27 +81,5 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1Lib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1Main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\WindowMainFunctionHelper1\WindowMainFunctionHelper1.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

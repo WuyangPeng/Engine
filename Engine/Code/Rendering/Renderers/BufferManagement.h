@@ -1,64 +1,61 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/21 18:14)
 
 #ifndef RENDERING_RENDERERS_BUFFER_MANAGEMENT_H
 #define RENDERING_RENDERERS_BUFFER_MANAGEMENT_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "RenderersFwd.h"
 
 #include <map>
 
 namespace Rendering
 {
-	class Renderer;
-    enum class BufferLocking;
-
     template <typename PlatformBufferType>
-	class BufferManagement 
-	{
-	public:
-		using ClassType = BufferManagement<PlatformBufferType>;
-		using BufferType = typename PlatformBufferType::BufferType;
-		using BufferConstPtr = std::shared_ptr<const BufferType>;
-		using PlatformBufferTypeSharedPtr = std::shared_ptr<PlatformBufferType>;
-	    using RendererPtr = std::shared_ptr<Renderer>;
+    class BufferManagement
+    {
+    public:
+        using ClassType = BufferManagement<PlatformBufferType>;
+        using BufferType = typename PlatformBufferType::BufferType;
+        using ConstBufferSharedPtr = std::shared_ptr<const BufferType>;
+        using PlatformBufferTypeSharedPtr = std::shared_ptr<PlatformBufferType>;
+        using RendererSharedPtr = std::shared_ptr<Renderer>;
 
-	public:
-		explicit BufferManagement(RendererPtr ptr);
+    public:
+        explicit BufferManagement(const RendererSharedPtr& renderer);
 
-		CLASS_INVARIANT_DECLARE;
-	
-       // 顶点、索引缓冲区管理。顶点、索引缓冲区对象必须是已经由应用程序代码分配。
-       void Bind (BufferConstPtr buffer); 
-       void Unbind (BufferConstPtr buffer);
+        CLASS_INVARIANT_DECLARE;
 
-       void EnableVertexBuffer (BufferConstPtr buffer,unsigned int streamIndex, unsigned int offset = 0);
-       void DisableVertexBuffer (BufferConstPtr buffer,unsigned int streamIndex);
- 
-       void EnableIndexBuffer (BufferConstPtr buffer);
-       void DisableIndexBuffer (BufferConstPtr buffer);
+        // 顶点、索引缓冲区管理。顶点、索引缓冲区对象必须是已经由应用程序代码分配。
+        void Bind(const ConstBufferSharedPtr& buffer);
+        void Unbind(const ConstBufferSharedPtr& buffer);
 
-       void* Lock (BufferConstPtr buffer, BufferLocking mode);
-       void Unlock (BufferConstPtr buffer);
-       void Update (BufferConstPtr buffer);
+        void EnableVertexBuffer(const ConstBufferSharedPtr& buffer, int streamIndex, int offset = 0);
+        void DisableVertexBuffer(const ConstBufferSharedPtr& buffer, int streamIndex);
 
-       PlatformBufferTypeSharedPtr GetResource (BufferConstPtr buffer);
+        void EnableIndexBuffer(const ConstBufferSharedPtr& buffer);
+        void DisableIndexBuffer(const ConstBufferSharedPtr& buffer);
 
-	private:
-       using BufferMap = std::map<BufferConstPtr, PlatformBufferTypeSharedPtr>;
+        NODISCARD void* Lock(const ConstBufferSharedPtr& buffer, BufferLocking mode);
+        void Unlock(const ConstBufferSharedPtr& buffer);
+        void Update(const ConstBufferSharedPtr& buffer);
 
-	private:
-		std::weak_ptr<Renderer> m_Renderer;
-	   BufferMap m_Buffers;	 
-	};
+        NODISCARD PlatformBufferTypeSharedPtr GetResource(ConstBufferSharedPtr buffer);
+
+    private:
+        using BufferMap = std::map<ConstBufferSharedPtr, PlatformBufferTypeSharedPtr>;
+
+    private:
+        std::weak_ptr<Renderer> renderer;
+        BufferMap buffers;
+    };
 }
 
-#endif // RENDERING_RENDERERS_BUFFER_MANAGEMENT_H
-
-
-
-	
+#endif  // RENDERING_RENDERERS_BUFFER_MANAGEMENT_H

@@ -1,20 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/25 15:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/15 15:36)
 
 #ifndef RENDERING_CURVES_SURFACES_SURFACE_PATCH_IMPL_H
 #define RENDERING_CURVES_SURFACES_SURFACE_PATCH_IMPL_H
 
 #include "Rendering/RenderingDll.h"
-#include "CoreTools/ObjectSystems/BufferTarget.h"
 
-namespace CoreTools
-{
-    class BufferSource;
-    class BufferTarget;
-}
+#include "CoreTools/ObjectSystems/BufferTarget.h"
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 
 namespace Rendering
 {
@@ -33,24 +32,24 @@ namespace Rendering
 
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
 
         // 参数域可以是矩形或三角形。
         // 对于矩形域有效的(u,v)值满足umin <= u <= umax,  vmin <= v <= vmax
         // 三角域有效的(u,v)值的满足 umin <= u <= umax,  vmin <= v <= vmax，
         //  (vmax - vmin) * (u - umin) + (umax - umin) * (v - vmax) <= 0
-        float GetUMin() const noexcept;
-        float GetUMax() const noexcept;
-        float GetVMin() const noexcept;
-        float GetVMax() const noexcept;
-        bool IsRectangular() const noexcept;
+        NODISCARD float GetUMin() const noexcept;
+        NODISCARD float GetUMax() const noexcept;
+        NODISCARD float GetVMin() const noexcept;
+        NODISCARD float GetVMax() const noexcept;
+        NODISCARD bool IsRectangular() const noexcept;
 
     private:
-        float m_UMin;
-        float m_UMax;
-        float m_VMin;
-        float m_VMax;
-        bool m_Rectangular;
+        float uMin;
+        float uMax;
+        float vMin;
+        float vMax;
+        bool rectangular;
     };
 }
 

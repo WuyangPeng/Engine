@@ -1,31 +1,33 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.3.0.1 (2020/05/21 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.7 (2022/05/06 11:30)
 
 #include "Framework/FrameworkExport.h"
 
 #include "PixelScreen.h"
 #include "Detail/PixelScreenImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 using std::make_shared;
 
-Framework::PixelScreen
-	::PixelScreen(const WindowSize& size)
-	:impl{ size  }
+Framework::PixelScreen::PixelScreen(const WindowSize& size)
+    : impl{ size }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, PixelScreen)
 
- COPY_UNSHARED_CLONE_SELF_DEFINE(Framework, PixelScreen)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Framework, PixelScreen)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen,GetScreenWidth,int);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen, GetScreenWidth, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen, GetScreenHeight, int);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, PixelScreen, Draw, RendererSharedPtr, void);
@@ -34,66 +36,58 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, PixelScreen, DoFlip, bool, 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, PixelScreen, IsDoFlip, bool);
 
-void Framework::PixelScreen
-	::SetPixel(int x, int y, const Colour& color)
+void Framework::PixelScreen::SetPixel(int x, int y, const Colour& color)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->SetPixel(x, y, color);
+    return impl->SetPixel(x, y, color);
 }
 
-void Framework::PixelScreen
-	::SetThickPixel(int x, int y, int thick, const Colour& color)
+void Framework::PixelScreen::SetThickPixel(int x, int y, int thick, const Colour& color)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->SetThickPixel(x, y, thick, color);
+    return impl->SetThickPixel(x, y, thick, color);
 }
 
-const Framework::PixelScreen::Colour Framework::PixelScreen
-	::GetPixel(int x, int y) const
+Framework::PixelScreen::Colour Framework::PixelScreen::GetPixel(int x, int y) const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return impl->GetPixel(x, y);
+    return impl->GetPixel(x, y);
 }
 
-void  Framework::PixelScreen
-	::DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& color)
+void Framework::PixelScreen::DrawLine(int xMin, int yMin, int xMax, int yMax, const Colour& color)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->DrawLine(xMin, yMin, xMax, yMax, color);
+    return impl->DrawLine(xMin, yMin, xMax, yMax, color);
 }
 
-void  Framework::PixelScreen
-	::DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& color, bool solid)
+void Framework::PixelScreen::DrawRectangle(int xMin, int yMin, int xMax, int yMax, const Colour& color, bool solid)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->DrawRectangle(xMin, yMin, xMax, yMax, color, solid);
+    return impl->DrawRectangle(xMin, yMin, xMax, yMax, color, solid);
 }
 
-void  Framework::PixelScreen
-	::DrawCircle(int xCenter, int yCenter, int radius, const Colour& color, bool solid)
+void Framework::PixelScreen::DrawCircle(int xCenter, int yCenter, int radius, const Colour& color, bool solid)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->DrawCircle(xCenter, yCenter, radius, color, solid);
+    return impl->DrawCircle(xCenter, yCenter, radius, color, solid);
 }
 
-void  Framework::PixelScreen
-	::Fill(int x, int y, const Colour& foreColor, const Colour& backColor)
+void Framework::PixelScreen::Fill(int x, int y, const Colour& foreColor, const Colour& backColor)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->Fill(x, y, foreColor, backColor);
+    return impl->Fill(x, y, foreColor, backColor);
 }
 
-void Framework::PixelScreen
-	::Resize(const WindowSize& size, const Colour& color)
+void Framework::PixelScreen::Resize(const WindowSize& size, const Colour& color)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-	return impl->Resize(size, color);
+    return impl->Resize(size, color);
 }

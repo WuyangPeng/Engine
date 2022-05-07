@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/24 15:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/13 14:52)
 
 #ifndef RENDERING_SHADERS_SHADER_H
 #define RENDERING_SHADERS_SHADER_H
@@ -11,115 +14,109 @@
 
 #include "ShaderProfileData.h"
 #include "Flags/ShaderFlags.h"
-#include "Rendering/DataTypes/Colour.h"
+#include "CoreTools/FileManager/FileManagerFwd.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
-
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/DataTypes/Colour.h"
 
 #include <string>
-EXPORT_SHARED_PTR(Rendering, ShaderBaseImpl, RENDERING_DEFAULT_DECLARE);
- 
 
-namespace CoreTools
-{
-	class WriteFileManager;
-	class ReadFileManager;
-}
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(ShaderBase, ShaderBaseImpl);
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE ShaderBase : public CoreTools::Object
     {
     public:
-        
+        COPY_UNSHARED_TYPE_DECLARE(ShaderBase);
+        using ParentType = Object;
+        using Colour = Colour<float>;
+        using WriteFileManager = CoreTools::WriteFileManager;
+        using ReadFileManager = CoreTools::ReadFileManager;
 
     public:
-        void Swap(ShaderBase& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(ShaderBase);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
         ~ShaderBase() noexcept = 0;
-        ShaderBase(const ShaderBase& rhs);
-        ShaderBase& operator=(const ShaderBase& rhs);
-        ShaderBase(ShaderBase&& rhs) noexcept;
-        ShaderBase& operator=(ShaderBase&& rhs) noexcept;
-		using ParentType = Object;
-		using Colour = Colour<float>;
-		using WriteFileManager = CoreTools::WriteFileManager;
-		using ReadFileManager = CoreTools::ReadFileManager;
+        ShaderBase(const ShaderBase& rhs) = default;
+        ShaderBase& operator=(const ShaderBase& rhs) = default;
+        ShaderBase(ShaderBase&& rhs) noexcept = default;
+        ShaderBase& operator=(ShaderBase&& rhs) noexcept = default;
 
-		// 默认 lodBias 是 0.
-		// 默认 anisotropy 是 1.
-		// 默认 borderColor 是 (0,0,0,0).
-        
-    public:   
-		// 类是VertexShader和PixelShader的基类。
-		// 类数据的定义着色器，但不包含着色器常数和着色器纹理的实例。
-		// 因此，着色器的每个实例可能是单例，通过“shaderName”标识。
-		// 几何绘图涉及着色器（抽象类）和ShaderParameters（常量和纹理的实例）。
-    
-		// 构造函数数组必须动态地分配。着色器承担删除它们的责任。
-		// 直到通过SetProgram函数提供的所有程序（用于各种型材）
-		// 着色器的结构是不完整的。
-        ShaderBase (const std::string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers);    
-          
+        // 默认 lodBias 是 0.
+        // 默认 anisotropy 是 1.
+        // 默认 borderColor 是 (0,0,0,0).
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;        
-        
-		CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderBase); 
+    public:
+        // 类是VertexShader和PixelShader的基类。
+        // 类数据的定义着色器，但不包含着色器常数和着色器纹理的实例。
+        // 因此，着色器的每个实例可能是单例，通过“shaderName”标识。
+        // 几何绘图涉及着色器（抽象类）和ShaderParameters（常量和纹理的实例）。
 
-		void SetInput (int index, const std::string& name,ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic);
-		
-		void SetOutput (int index, const std::string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic);
-		
-		void SetConstant (int index, const std::string& name,int numRegistersUsed);
-		
-		void SetSampler (int index, const std::string& name,ShaderFlags::SamplerType type);
-		void SetFilter (int index, ShaderFlags::SamplerFilter filter);
-		void SetCoordinate(int index, int dimension,ShaderFlags::SamplerCoordinate coordinate);
-		void SetLodBias (int index, float lodBias);
-		void SetAnisotropy (int index, float anisotropy);
-		void SetBorderColor (int index, const Colour& borderColor);
-        
-		int GetNumInputs () const;
-		const std::string GetInputName (int index) const;
-		ShaderFlags::VariableType GetInputType (int index) const;
-		ShaderFlags::VariableSemantic GetInputSemantic (int index) const;
-		
-		int GetNumOutputs () const;
-		const std::string GetOutputName (int index) const;
-		ShaderFlags::VariableType GetOutputType (int index) const;
-		ShaderFlags::VariableSemantic GetOutputSemantic (int index) const;
-		
-		int GetNumConstants () const;
-		const std::string GetConstantName (int index) const;
-		int GetNumRegistersUsed (int index) const;
-		
-		int GetNumSamplers () const;
-		const std::string GetSamplerName (int index) const;
-		ShaderFlags::SamplerType GetSamplerType (int index) const;
-		ShaderFlags::SamplerFilter GetFilter (int index) const;
-		ShaderFlags::SamplerCoordinate GetCoordinate(int index, int dimension) const;
-		float GetLodBias (int index) const;
-		float GetAnisotropy (int index) const;
-		Colour GetBorderColor (int index) const;
+        // 构造函数数组必须动态地分配。着色器承担删除它们的责任。
+        // 直到通过SetProgram函数提供的所有程序（用于各种型材）
+        // 着色器的结构是不完整的。
+        ShaderBase(const std::string& programName, int numInputs, int numOutputs, int numConstants, int numSamplers);
 
-		void SaveShader(WriteFileManager& manager) const;
-		void LoadShader(ReadFileManager& manager, int numProfiles);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void SetProfile(const ShaderProfileDataSharedPtr& profile) noexcept;
-                const ConstShaderProfileDataSharedPtr GetProfile() const noexcept;
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(ShaderBase);
 
-		ShaderProfileDataSharedPtr GetProfile() noexcept;
+        void SetInput(int index, const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic);
+
+        void SetOutput(int index, const std::string& name, ShaderFlags::VariableType type, ShaderFlags::VariableSemantic semantic);
+
+        void SetConstant(int index, const std::string& name, int numRegistersUsed);
+
+        void SetSampler(int index, const std::string& name, ShaderFlags::SamplerType type);
+        void SetFilter(int index, ShaderFlags::SamplerFilter filter);
+        void SetCoordinate(int index, int dimension, ShaderFlags::SamplerCoordinate coordinate);
+        void SetLodBias(int index, float lodBias);
+        void SetAnisotropy(int index, float anisotropy);
+        void SetBorderColor(int index, const Colour& borderColor);
+
+        NODISCARD int GetNumInputs() const;
+        NODISCARD std::string GetInputName(int index) const;
+        NODISCARD ShaderFlags::VariableType GetInputType(int index) const;
+        NODISCARD ShaderFlags::VariableSemantic GetInputSemantic(int index) const;
+
+        NODISCARD int GetNumOutputs() const;
+        NODISCARD std::string GetOutputName(int index) const;
+        NODISCARD ShaderFlags::VariableType GetOutputType(int index) const;
+        NODISCARD ShaderFlags::VariableSemantic GetOutputSemantic(int index) const;
+
+        NODISCARD int GetNumConstants() const;
+        NODISCARD std::string GetConstantName(int index) const;
+        NODISCARD int GetNumRegistersUsed(int index) const;
+
+        NODISCARD int GetNumSamplers() const;
+        NODISCARD std::string GetSamplerName(int index) const;
+        NODISCARD ShaderFlags::SamplerType GetSamplerType(int index) const;
+        NODISCARD ShaderFlags::SamplerFilter GetFilter(int index) const;
+        NODISCARD ShaderFlags::SamplerCoordinate GetCoordinate(int index, int dimension) const;
+        NODISCARD float GetLodBias(int index) const;
+        NODISCARD float GetAnisotropy(int index) const;
+        NODISCARD Colour GetBorderColor(int index) const;
+
+        void SaveShader(WriteFileManager& manager) const;
+        void LoadShader(ReadFileManager& manager, int numProfiles);
+
+        void SetProfile(const ShaderProfileDataSharedPtr& profile) noexcept;
+        NODISCARD ConstShaderProfileDataSharedPtr GetProfile() const noexcept;
+
+        NODISCARD ShaderProfileDataSharedPtr GetProfile() noexcept;
 
     private:
-		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        PackageType impl;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
-	CORE_TOOLS_STREAM_REGISTER(ShaderBase);
+
+    CORE_TOOLS_STREAM_REGISTER(ShaderBase);
+
 #include STSTEM_WARNING_POP
-	CORE_TOOLS_SHARED_PTR_DECLARE( ShaderBase);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(ShaderBase);
 }
 
-#endif // RENDERING_SHADERS_SHADER_H
+#endif  // RENDERING_SHADERS_SHADER_H

@@ -1,71 +1,61 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/23 18:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/08 16:31)
 
 #include "Rendering/RenderingExport.h"
 
 #include "WorldMatrixConstant.h"
-
+#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/AVectorDetail.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h" 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26455)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, WorldMatrixConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, WorldMatrixConstant);
-CORE_TOOLS_FACTORY_DEFINE(Rendering, WorldMatrixConstant); 
+CORE_TOOLS_FACTORY_DEFINE(Rendering, WorldMatrixConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, WorldMatrixConstant);
 
-Rendering::WorldMatrixConstant
-	::WorldMatrixConstant()
-	:ParentType{ sm_NumRegisters }
+Rendering::WorldMatrixConstant::WorldMatrixConstant(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ numRegisters }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, WorldMatrixConstant)
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,WorldMatrixConstant)
-
-void Rendering::WorldMatrixConstant::Update(const Visual* visual, [[maybe_unused]] const Camera* camera)
+void Rendering::WorldMatrixConstant::Update(const Visual* visual, MAYBE_UNUSED const Camera* camera)
 {
-	RENDERING_CLASS_IS_VALID_1;
- 
-	const auto worldMatrix = visual->GetWorldTransform().GetMatrix();
+    RENDERING_CLASS_IS_VALID_1;
 
-	SetRegisters(worldMatrix);	
+    if (visual != nullptr)
+    {
+        const auto worldMatrix = visual->GetWorldTransform().GetMatrix();
 
- 
+        SetRegisters(worldMatrix);
+    }
 }
 
-void Rendering::WorldMatrixConstant
-	::SetNumRegisters(int numRegisters)
+void Rendering::WorldMatrixConstant::SetNumRegisters(int aNumRegisters)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_2(numRegisters == sm_NumRegisters, "WorldMatrixConstant寄存器的数量必须为4");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_2(aNumRegisters == numRegisters, "WorldMatrixConstant寄存器的数量必须为4");
 
-	ParentType::SetNumRegisters(numRegisters);
+    ParentType::SetNumRegisters(aNumRegisters);
 }
 
-Rendering::ShaderFloatSharedPtr Rendering::WorldMatrixConstant
-	::Clone() const
+Rendering::ShaderFloatSharedPtr Rendering::WorldMatrixConstant::Clone() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-
- #include STSTEM_WARNING_POP

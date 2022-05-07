@@ -6,13 +6,12 @@
 
 #include "Toolset/Imagics/ImagicsToolset/ImagicsToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ImagicsClassInvariantMacro.h"
 
-ImagicsToolset::Placeholder
-	::Placeholder() 
+ImagicsToolset::Placeholder ::Placeholder() noexcept
 {
-	IMAGICS_SELF_CLASS_IS_VALID_9;
+    IMAGICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ImagicsToolset, Placeholder)

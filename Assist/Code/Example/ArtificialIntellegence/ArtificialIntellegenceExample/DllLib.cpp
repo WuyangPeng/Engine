@@ -8,20 +8,17 @@
 
 #include "Example/ArtificialIntellegence/ArtificialIntellegenceExample/ArtificialIntellegenceExample.h"
 
-
-
 #ifndef BUILDING_ARTIFICIAL_INTELLEGENCE_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_ARTIFICIAL_INTELLEGENCE_EXAMPLE_STATIC
+#else  // BUILDING_ARTIFICIAL_INTELLEGENCE_EXAMPLE_STATIC
 
-	namespace ArtificialIntellegenceExample
-	{
-		void StaticDllLib()
-		{
+namespace ArtificialIntellegenceExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_ARTIFICIAL_INTELLEGENCE_EXAMPLE_STATIC
+#endif  // !BUILDING_ARTIFICIAL_INTELLEGENCE_EXAMPLE_STATIC

@@ -1,244 +1,239 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 14:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/06 16:17)
 
-#include "Rendering/RenderingExport.h" 
+#include "Rendering/RenderingExport.h"
 
 #include "ParticleControllerImpl.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/AlgebraStreamSize.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
-
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-Rendering::ParticleControllerImpl
-	::ParticleControllerImpl(int numParticles)
-    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemSizeChange{ 0.0f },
-	 m_NumParticles{ numParticles }, m_ParticleLinearSpeed(numParticles), m_ParticleLinearAxis(numParticles), m_ParticleSizeChange(numParticles)
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
+#include "Mathematics/Algebra/AlgebraAggregate.h"
+#include "Mathematics/Algebra/AlgebraStreamSize.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
+
+Rendering::ParticleControllerImpl::ParticleControllerImpl(int numParticles)
+    : systemLinearSpeed{ 0.0f },
+      systemAngularSpeed{ 0.0f },
+      systemLinearAxis{ Mathematics::AVectorF::GetUnitZ() },
+      systemAngularAxis{ Mathematics::AVectorF::GetUnitZ() },
+      systemSizeChange{ 0.0f },
+      numParticles{ numParticles },
+      particleLinearSpeeds(numParticles),
+      particleLinearAxes(numParticles),
+      particleSizeChanges(numParticles)
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ParticleControllerImpl
-	::ParticleControllerImpl() noexcept
-    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemSizeChange{ 0.0f },
-	 m_NumParticles{ 0 },m_ParticleLinearSpeed{},m_ParticleLinearAxis{},m_ParticleSizeChange{}
+Rendering::ParticleControllerImpl::ParticleControllerImpl() noexcept
+    : systemLinearSpeed{ 0.0f },
+      systemAngularSpeed{ 0.0f },
+      systemLinearAxis{ Mathematics::AVectorF::GetUnitZ() },
+      systemAngularAxis{ Mathematics::AVectorF::GetUnitZ() },
+      systemSizeChange{ 0.0f },
+      numParticles{ 0 },
+      particleLinearSpeeds{},
+      particleLinearAxes{},
+      particleSizeChanges{}
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Rendering::ParticleControllerImpl
-	::IsValid() const noexcept
-{
-	if (0 <= m_NumParticles)
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT	
 
+bool Rendering::ParticleControllerImpl::IsValid() const noexcept
+{
+    if (0 <= numParticles)
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
 
 int Rendering::ParticleControllerImpl::GetNumParticles() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_NumParticles;
+    return numParticles;
 }
 
 float Rendering::ParticleControllerImpl::GetSystemLinearSpeed() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_SystemLinearSpeed;
+    return systemLinearSpeed;
 }
 
-void Rendering::ParticleControllerImpl::SetSystemLinearSpeed(float systemLinearSpeed) noexcept
+void Rendering::ParticleControllerImpl::SetSystemLinearSpeed(float aSystemLinearSpeed) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_SystemLinearSpeed = systemLinearSpeed;
+    systemLinearSpeed = aSystemLinearSpeed;
 }
 
 float Rendering::ParticleControllerImpl::GetSystemAngularSpeed() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_SystemAngularSpeed;
+    return systemAngularSpeed;
 }
 
-void Rendering::ParticleControllerImpl::SetSystemAngularSpeed(float systemAngularSpeed) noexcept
+void Rendering::ParticleControllerImpl::SetSystemAngularSpeed(float aSystemAngularSpeed) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_SystemAngularSpeed = systemAngularSpeed;
+    systemAngularSpeed = aSystemAngularSpeed;
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetSystemLinearAxis() const noexcept
+Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetSystemLinearAxis() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_SystemLinearAxis;
+    return systemLinearAxis;
 }
 
-void Rendering::ParticleControllerImpl::SetSystemLinearAxis(const AVector& systemLinearAxis) noexcept
+void Rendering::ParticleControllerImpl::SetSystemLinearAxis(const AVector& aSystemLinearAxis) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_SystemLinearAxis = systemLinearAxis;
+    systemLinearAxis = aSystemLinearAxis;
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetSystemAngularAxis() const noexcept
+Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetSystemAngularAxis() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_SystemAngularAxis;
+    return systemAngularAxis;
 }
 
-void Rendering::ParticleControllerImpl::SetSystemAngularAxis(const AVector& systemAngularAxis) noexcept
+void Rendering::ParticleControllerImpl::SetSystemAngularAxis(const AVector& aSystemAngularAxis) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_SystemAngularAxis = systemAngularAxis;
+    systemAngularAxis = aSystemAngularAxis;
 }
 
 float Rendering::ParticleControllerImpl::GetSystemSizeChange() const noexcept
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_SystemSizeChange;
+    return systemSizeChange;
 }
 
-void Rendering::ParticleControllerImpl::SetSystemSizeChange(float systemSizeChange) noexcept
+void Rendering::ParticleControllerImpl::SetSystemSizeChange(float aSystemSizeChange) noexcept
 {
-	RENDERING_CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_SystemSizeChange = systemSizeChange;
+    systemSizeChange = aSystemSizeChange;
 }
 
-float Rendering::ParticleControllerImpl
-	::GetParticleLinearSpeed(int index) const 
+float Rendering::ParticleControllerImpl::GetParticleLinearSpeed(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumParticles, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òý´íÎó£¡");
 
-	return m_ParticleLinearSpeed[index];
+    return particleLinearSpeeds.at(index);
 }
 
-const Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl
-	::GetParticleLinearAxis(int index) const 
+Rendering::ParticleControllerImpl::AVector Rendering::ParticleControllerImpl::GetParticleLinearAxis(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumParticles, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òý´íÎó£¡");
 
-	return m_ParticleLinearAxis[index];
+    return particleLinearAxes.at(index);
 }
 
-float Rendering::ParticleControllerImpl
-	::GetParticleSizeChange(int index) const
+float Rendering::ParticleControllerImpl::GetParticleSizeChange(int index) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumParticles, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òý´íÎó£¡");
 
-	return m_ParticleSizeChange[index];
+    return particleSizeChanges.at(index);
 }
 
-void Rendering::ParticleControllerImpl
-	::SetParticleLinearSpeed(int index, float particleLinearSpeed) 
+void Rendering::ParticleControllerImpl::SetParticleLinearSpeed(int index, float particleLinearSpeed)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumParticles, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òý´íÎó£¡");
 
-	m_ParticleLinearSpeed[index] = particleLinearSpeed;
+    particleLinearSpeeds.at(index) = particleLinearSpeed;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetParticleLinearAxis(int index, const AVector& particleLinearAxis)
+void Rendering::ParticleControllerImpl::SetParticleLinearAxis(int index, const AVector& particleLinearAxis)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumParticles, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òý´íÎó£¡");
 
-	m_ParticleLinearAxis[index] = particleLinearAxis;
+    particleLinearAxes.at(index) = particleLinearAxis;
 }
 
-void Rendering::ParticleControllerImpl
-	::SetParticleSizeChange(int index, float particleSizeChange) 
+void Rendering::ParticleControllerImpl::SetParticleSizeChange(int index, float particleSizeChange)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	RENDERING_ASSERTION_0(0 <= index && index < m_NumParticles, "Ë÷Òý´íÎó£¡");
+    RENDERING_CLASS_IS_VALID_1;
+    RENDERING_ASSERTION_0(0 <= index && index < numParticles, "Ë÷Òý´íÎó£¡");
 
-	m_ParticleSizeChange[index] = particleSizeChange;
+    particleSizeChanges.at(index) = particleSizeChange;
 }
 
-int Rendering::ParticleControllerImpl
-	::GetStreamingSize() const noexcept
+int Rendering::ParticleControllerImpl::GetStreamingSize() const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	auto size = CORE_TOOLS_STREAM_SIZE(m_SystemLinearSpeed);
+    auto size = CORE_TOOLS_STREAM_SIZE(systemLinearSpeed);
 
-	size += CORE_TOOLS_STREAM_SIZE(m_SystemAngularSpeed);
-	size += MATHEMATICS_STREAM_SIZE(m_SystemLinearAxis);
-	size += MATHEMATICS_STREAM_SIZE(m_SystemAngularAxis);
-	size += CORE_TOOLS_STREAM_SIZE(m_SystemSizeChange);
-	size += CORE_TOOLS_STREAM_SIZE(m_NumParticles);
-	size += m_NumParticles * CORE_TOOLS_STREAM_SIZE(m_ParticleLinearSpeed[0]);
-	size += m_NumParticles * MATHEMATICS_STREAM_SIZE(m_ParticleLinearAxis[0]);
-	size += m_NumParticles * CORE_TOOLS_STREAM_SIZE(m_ParticleSizeChange[0]);
- 
+    size += CORE_TOOLS_STREAM_SIZE(systemAngularSpeed);
+    size += MATHEMATICS_STREAM_SIZE(systemLinearAxis);
+    size += MATHEMATICS_STREAM_SIZE(systemAngularAxis);
+    size += CORE_TOOLS_STREAM_SIZE(systemSizeChange);
+    size += CORE_TOOLS_STREAM_SIZE(numParticles);
+    size += numParticles * CORE_TOOLS_STREAM_SIZE(particleLinearSpeeds.at(0));
+    size += numParticles * MATHEMATICS_STREAM_SIZE(particleLinearAxes.at(0));
+    size += numParticles * CORE_TOOLS_STREAM_SIZE(particleSizeChanges.at(0));
+
     return size;
 }
 
-void Rendering::ParticleControllerImpl
-	::Save(CoreTools::BufferTarget& target) const 
+void Rendering::ParticleControllerImpl::Save(CoreTools::BufferTarget& target) const
 {
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target.Write(m_SystemLinearSpeed);
-	target.Write(m_SystemAngularSpeed);
-    target.WriteAggregate(m_SystemLinearAxis);
-        target.WriteAggregate(m_SystemAngularAxis);
-	target.Write(m_SystemSizeChange);
-	target.Write(m_NumParticles);
-        target.WriteContainerWithoutNumber(m_ParticleLinearSpeed); 
-	//target.WriteAggregateWithoutNumber(m_NumParticles, &m_ParticleLinearAxis[0]);
-//	target.WriteWithoutNumber(m_NumParticles, &m_ParticleSizeChange[0]);
+    target.Write(systemLinearSpeed);
+    target.Write(systemAngularSpeed);
+    target.WriteAggregate(systemLinearAxis);
+    target.WriteAggregate(systemAngularAxis);
+    target.Write(systemSizeChange);
+    target.Write(numParticles);
+    target.WriteContainerWithoutNumber(particleLinearSpeeds);
+    target.WriteAggregateContainerWithoutNumber(particleLinearAxes);
+    target.WriteContainerWithoutNumber(particleSizeChanges);
 }
 
-void Rendering::ParticleControllerImpl
-	::Load(CoreTools::BufferSource& source)
+void Rendering::ParticleControllerImpl::Load(CoreTools::BufferSource& source)
 {
-	RENDERING_CLASS_IS_VALID_1;
-	
-	source.Read(m_SystemLinearSpeed);
-        source.Read(m_SystemAngularSpeed);
-        source.ReadAggregate(m_SystemLinearAxis);
-        source.ReadAggregate(m_SystemAngularAxis);
-        source.Read(m_SystemSizeChange);
-        source.Read(m_NumParticles);
+    RENDERING_CLASS_IS_VALID_1;
 
-	m_ParticleLinearSpeed.resize(m_NumParticles);
-	m_ParticleLinearAxis.resize(m_NumParticles);
-	m_ParticleSizeChange.resize(m_NumParticles); 
+    source.Read(systemLinearSpeed);
+    source.Read(systemAngularSpeed);
+    source.ReadAggregate(systemLinearAxis);
+    source.ReadAggregate(systemAngularAxis);
+    source.Read(systemSizeChange);
+    source.Read(numParticles);
 
-//	source.Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
-        source.ReadAggregateContainer(m_NumParticles, m_ParticleLinearAxis);
-   //     source.Read(m_NumParticles, &m_ParticleSizeChange[0]);
+    particleLinearSpeeds.resize(numParticles);
+    particleLinearAxes.resize(numParticles);
+    particleSizeChanges.resize(numParticles);
+
+    source.ReadContainer(particleLinearSpeeds);
+    source.ReadAggregateContainer(numParticles, particleLinearAxes);
+    source.ReadContainer(particleSizeChanges);
 }
-
-
-
-
-
-#include STSTEM_WARNING_POP

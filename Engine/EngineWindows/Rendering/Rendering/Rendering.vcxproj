@@ -347,7 +347,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\DllMain.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9IndexBuffer.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Mapping.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9PixelShader.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RenderTarget.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Shader.cpp" />
@@ -401,7 +400,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureCube.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.cpp" />
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVerdanaS16B0I0.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormat.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormatArrayData.cpp" />
@@ -461,6 +459,7 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererManager.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\RendererParameter.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\RenderTargetManagement.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\SamplerState.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\TextureLockManager.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulation.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\VertexFormatManagement.cpp" />
@@ -745,7 +744,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\DirectAPI\DirectAPIFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\DllLib.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9IndexBuffer.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Mapping.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9PixelShader.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9Renderer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Dx9Renderer\Dx9RendererData.h" />
@@ -817,7 +815,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPI.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLAPI\OpenGLAPIFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.h" />
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBitmapFont.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLIndexBuffer.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.h" />
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLPixelShader.h" />
@@ -914,6 +911,7 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderersFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderersInternalFwd.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderTargetManagement.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\SamplerState.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\ShaderManagement.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\ShaderManagementDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureLockManager.h" />

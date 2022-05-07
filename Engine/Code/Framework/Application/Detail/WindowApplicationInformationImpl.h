@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.1 (2020/05/21 13:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 10:06)
 
 #ifndef FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H
 #define FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H
@@ -17,49 +20,49 @@
 
 namespace Framework
 {
-	class FRAMEWORK_HIDDEN_DECLARE WindowApplicationInformationImpl
-	{
-	public:
-		using ClassType = WindowApplicationInformationImpl;
-		using String = System::String;
-		using WindowStyles = System::WindowsStyles;
-		using HInstance = System::WindowsHInstance;
-		using RendererParameter = Rendering::RendererParameter;
+    class FRAMEWORK_HIDDEN_DECLARE WindowApplicationInformationImpl
+    {
+    public:
+        using ClassType = WindowApplicationInformationImpl;
+        using String = System::String;
+        using WindowsStyles = System::WindowsStyles;
+        using WindowsHInstance = System::WindowsHInstance;
+        using RendererParameter = Rendering::RendererParameter;
 
-	public:
-		WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize);
-		WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size);
-		WindowApplicationInformationImpl(HInstance instance, const RendererParameter& rendererParameter);
+    public:
+        WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize);
+        WindowApplicationInformationImpl(const String& windowTitle, const WindowSize& size);
+        WindowApplicationInformationImpl(WindowsHInstance instance, const RendererParameter& rendererParameter);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const String GetWindowTitle() const;
-		const std::string GetWindowTitleWithMultiByte() const;
-		int GetXPosition() const noexcept;
-		int GetYPosition() const noexcept;
-		int GetWidth() const noexcept;
-		int GetHeight() const noexcept;
-		const WindowSize GetWindowSize() const noexcept;
-		float GetAspectRatio() const noexcept;
-		WindowStyles GetStyle() const noexcept;
+        NODISCARD String GetWindowTitle() const;
+        NODISCARD std::string GetWindowTitleWithMultiByte() const;
+        NODISCARD int GetXPosition() const noexcept;
+        NODISCARD int GetYPosition() const noexcept;
+        NODISCARD int GetWidth() const noexcept;
+        NODISCARD int GetHeight() const noexcept;
+        NODISCARD WindowSize GetWindowSize() const noexcept;
+        NODISCARD float GetAspectRatio() const noexcept;
+        NODISCARD WindowsStyles GetStyle() const noexcept;
 
-		void SetWindowSize(const WindowSize& size) noexcept;
+        void SetWindowSize(const WindowSize& aSize) noexcept;
 
-		WindowName GetWindowName() const noexcept;
-		WindowPictorial GetWindowPictorial() const noexcept;
+        NODISCARD WindowName GetWindowName() const noexcept;
+        NODISCARD WindowPictorial GetWindowPictorial() const noexcept;
 
-	private:
-		static WindowPictorial GetWindowPictorial(HInstance instance, const RendererParameter& rendererParameter);
+    private:
+        NODISCARD static WindowPictorial GetWindowPictorial(WindowsHInstance instance, const RendererParameter& rendererParameter);
 
-	private:
-		// 窗口参数。
-		String m_WindowTitle;
-		WindowSize m_Size;
-		WindowPoint m_Position;
-		WindowStyles m_Style;
-		WindowName m_WindowName;
-		WindowPictorial m_WindowPictorial;
-	};
+    private:
+        // 窗口参数。
+        String windowTitle;
+        WindowSize size;
+        WindowPoint position;
+        WindowsStyles style;
+        WindowName windowName;
+        WindowPictorial windowPictorial;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H
+#endif  // FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H

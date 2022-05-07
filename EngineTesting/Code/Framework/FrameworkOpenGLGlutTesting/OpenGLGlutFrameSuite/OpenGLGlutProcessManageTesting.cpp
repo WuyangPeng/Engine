@@ -1,226 +1,201 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/11 14:16)
 
 #include "OpenGLGlutProcessManageTesting.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutProcessManager.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackInterface.h"
-#include "CoreTools/Helper/AssertMacro.h" 
+#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackInterface.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutProcessManager.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework,OpenGLGlutProcessManagerTesting) 
+#include SYSTEM_WARNING_DISABLE(26429)
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework, OpenGLGlutProcessManagerTesting)
+
+void Framework::OpenGLGlutProcessManagerTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGlutCallBackPtrTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(MainFunctionHelperPtrTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetWindowIDSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetMillisecondSucceedTest);
-	 
-	ASSERT_NOT_THROW_EXCEPTION_0(RenderSceneCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ChangeSizeCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(TimerFunctionCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SpecialKeysDownCallbackSucceedTest); 
-	ASSERT_NOT_THROW_EXCEPTION_0(KeyboardDownCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SpecialKeysUpCallbackSucceedTest); 
-	ASSERT_NOT_THROW_EXCEPTION_0(KeyboardUpCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(MouseFunctionCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(MotionFunctionCallbackSucceedTest);		
-	ASSERT_NOT_THROW_EXCEPTION_0(IdleFunctionCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ProcessMenuCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(TerminateCallbackSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(PreCreateSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(InitializeSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(PreIdleSucceedTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(TerminateSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenGLGlutCallBackPtrTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainFunctionHelperPtrTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetWindowIDSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetMillisecondSucceedTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(RenderSceneCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ChangeSizeCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TimerFunctionCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SpecialKeysDownCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(KeyboardDownCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SpecialKeysUpCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(KeyboardUpCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MouseFunctionCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MotionFunctionCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(IdleFunctionCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ProcessMenuCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TerminateCallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PreCreateSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitializeSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PreIdleSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TerminateSucceedTest);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::OpenGLGlutCallBackPtrTest()
+void Framework::OpenGLGlutProcessManagerTesting::OpenGLGlutCallBackPtrTest()
 {
-	OpenGLGlutProcessManager::OpenGLGlutCallBackInterfaceSharedPtr ptr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetOpenGLGlutCallBackInterface();
+    OpenGLGlutProcessManager::OpenGLGlutCallBackInterfaceSharedPtr ptr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetOpenGLGlutCallBackInterface();
 
-	ASSERT_UNEQUAL_NULL_PTR(ptr);
+    ASSERT_UNEQUAL_NULL_PTR(ptr);
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.ClearOpenGLGlutCallBack();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.ClearOpenGLGlutCallBack();
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetOpenGLGlutCallBack(ptr);
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetOpenGLGlutCallBack(ptr);
 
-	ASSERT_EQUAL(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetOpenGLGlutCallBackInterface(),ptr);
+    ASSERT_EQUAL(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetOpenGLGlutCallBackInterface(), ptr);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::MainFunctionHelperPtrTest()
+void Framework::OpenGLGlutProcessManagerTesting::MainFunctionHelperPtrTest()
 {
-	auto ptr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMainFunctionHelper();
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.ClearMainFunctionHelper();
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetMainFunctionHelper(ptr);
+    auto ptr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMainFunctionHelper();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.ClearMainFunctionHelper();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetMainFunctionHelper(ptr);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::SetWindowIDSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::SetWindowIDSucceedTest()
 {
-	int window(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetWindowID());
+    const int window(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetWindowID());
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetWindowID(window);
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetWindowID(window);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::SetMillisecondSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::SetMillisecondSucceedTest()
 {
-	auto millisecond = 17;
+    constexpr auto millisecond = 17;
 
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetMillisecond(millisecond);
-	ASSERT_EQUAL(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMillisecond(),millisecond);
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.SetMillisecond(millisecond);
+    ASSERT_EQUAL(OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMillisecond(), millisecond);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::RenderSceneCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::RenderSceneCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::RenderSceneCallback renderScenePtr =	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
+    OpenGLGlutProcessManager::RenderSceneCallback renderScenePtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetRenderSceneCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(renderScenePtr);
+    ASSERT_UNEQUAL_NULL_PTR(renderScenePtr);
 
-	renderScenePtr();
+    renderScenePtr();
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::ChangeSizeCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::ChangeSizeCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::ChangeSizeCallback changeSizePtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
+    OpenGLGlutProcessManager::ChangeSizeCallback changeSizePtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetChangeSizeCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(changeSizePtr);
+    ASSERT_UNEQUAL_NULL_PTR(changeSizePtr);
 
-	changeSizePtr(0,0);
+    changeSizePtr(0, 0);
 }
 
-
-void Framework::OpenGLGlutProcessManagerTesting
-	::TimerFunctionCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::TimerFunctionCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::TimerFunctionCallback timerFunctionPtr =	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback();
+    OpenGLGlutProcessManager::TimerFunctionCallback timerFunctionPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTimerFunctionCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(timerFunctionPtr);
+    ASSERT_UNEQUAL_NULL_PTR(timerFunctionPtr);
 
-	timerFunctionPtr(0);
+    timerFunctionPtr(0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::SpecialKeysDownCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysDownCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::SpecialKeysDownCallback specialKeysPtr =	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback();
+    OpenGLGlutProcessManager::SpecialKeysDownCallback specialKeysPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysDownCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
+    ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
 
-	specialKeysPtr(0,0,0);
+    specialKeysPtr(0, 0, 0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::KeyboardDownCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::KeyboardDownCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::KeyboardDownCallback keyboardPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
+    OpenGLGlutProcessManager::KeyboardDownCallback keyboardPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardDownCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
+    ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
 
-	keyboardPtr(0,0,0);
+    keyboardPtr(0, 0, 0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::SpecialKeysUpCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysUpCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::SpecialKeysUpCallback specialKeysPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback();
+    OpenGLGlutProcessManager::SpecialKeysUpCallback specialKeysPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetSpecialKeysUpCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
+    ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
 
-	specialKeysPtr(0,0,0);
+    specialKeysPtr(0, 0, 0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::KeyboardUpCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::KeyboardUpCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::KeyboardUpCallback keyboardPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback();
+    OpenGLGlutProcessManager::KeyboardUpCallback keyboardPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetKeyboardUpCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
+    ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
 
-	keyboardPtr(0,0,0);
+    keyboardPtr(0, 0, 0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::MouseFunctionCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::MouseFunctionCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::MouseFunctionCallback mouseFunctionPtr =	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback();
+    OpenGLGlutProcessManager::MouseFunctionCallback mouseFunctionPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMouseFunctionCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(mouseFunctionPtr);
+    ASSERT_UNEQUAL_NULL_PTR(mouseFunctionPtr);
 
-	mouseFunctionPtr(0,0,0,0);
+    mouseFunctionPtr(0, 0, 0, 0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::MotionFunctionCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::MotionFunctionCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::MotionFunctionCallback motionFunctionPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback();
+    OpenGLGlutProcessManager::MotionFunctionCallback motionFunctionPtr = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetMotionFunctionCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(motionFunctionPtr);
+    ASSERT_UNEQUAL_NULL_PTR(motionFunctionPtr);
 
-	motionFunctionPtr(0,0);
-}
- 
-void Framework::OpenGLGlutProcessManagerTesting
-	::IdleFunctionCallbackSucceedTest()
-{
-	OpenGLGlutProcessManager::IdleFunctionCallback idleFunction = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
-
-	ASSERT_UNEQUAL_NULL_PTR(idleFunction);	
-
-	idleFunction();
+    motionFunctionPtr(0, 0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::ProcessMenuCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::IdleFunctionCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::ProcessMenuCallback processMenuFunction =	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback();
+    OpenGLGlutProcessManager::IdleFunctionCallback idleFunction = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetIdleFunctionCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(processMenuFunction);		
+    ASSERT_UNEQUAL_NULL_PTR(idleFunction);
 
-	processMenuFunction(0);
+    idleFunction();
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::TerminateCallbackSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::ProcessMenuCallbackSucceedTest()
 {
-	OpenGLGlutProcessManager::TerminateCallback terminateFunction =	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTerminateCallback();
+    OpenGLGlutProcessManager::ProcessMenuCallback processMenuFunction = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetProcessMenuCallback();
 
-	ASSERT_UNEQUAL_NULL_PTR(terminateFunction);	
+    ASSERT_UNEQUAL_NULL_PTR(processMenuFunction);
+
+    processMenuFunction(0);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::PreCreateSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::TerminateCallbackSucceedTest()
 {
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreCreate();
+    OpenGLGlutProcessManager::TerminateCallback terminateFunction = OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.GetTerminateCallback();
+
+    ASSERT_UNEQUAL_NULL_PTR(terminateFunction);
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::InitializeSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::PreCreateSucceedTest()
 {
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Initialize();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreCreate();
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::PreIdleSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::InitializeSucceedTest()
 {
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreIdle();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Initialize();
 }
 
-void Framework::OpenGLGlutProcessManagerTesting
-	::TerminateSucceedTest()
+void Framework::OpenGLGlutProcessManagerTesting::PreIdleSucceedTest()
 {
-	OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Terminate();
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.PreIdle();
 }
 
-
-
-
-
+void Framework::OpenGLGlutProcessManagerTesting::TerminateSucceedTest()
+{
+    OPENGL_GLUT_PROCESS_MANAGER_SINGLETON.Terminate();
+}

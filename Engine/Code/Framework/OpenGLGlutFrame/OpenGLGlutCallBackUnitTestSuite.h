@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 15:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 14:22)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_WINDOW_OPENGL_GLUT_CALL_BACK_UNIT_TEST_SUITE_H
@@ -16,7 +19,6 @@
 
 #include <string>
 
- 
 EXPORT_SHARED_PTR(Framework, WindowMessageUnitTestSuiteStream, FRAMEWORK_DEFAULT_DECLARE);
 EXPORT_SHARED_PTR(Framework, OpenGLGlutCallBackUnitTestSuiteImpl, FRAMEWORK_DEFAULT_DECLARE);
 
@@ -37,22 +39,22 @@ namespace Framework
     public:
         OpenGLGlutCallBackUnitTestSuite(int64_t delta, const std::string& suiteName);
         ~OpenGLGlutCallBackUnitTestSuite() noexcept = default;
-        OpenGLGlutCallBackUnitTestSuite(const OpenGLGlutCallBackUnitTestSuite&) noexcept = delete;
-        OpenGLGlutCallBackUnitTestSuite& operator=(const OpenGLGlutCallBackUnitTestSuite&) noexcept = delete;
+        OpenGLGlutCallBackUnitTestSuite(const OpenGLGlutCallBackUnitTestSuite& rhs) noexcept = delete;
+        OpenGLGlutCallBackUnitTestSuite& operator=(const OpenGLGlutCallBackUnitTestSuite& rhs) noexcept = delete;
         OpenGLGlutCallBackUnitTestSuite(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept;
         OpenGLGlutCallBackUnitTestSuite& operator=(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        bool Initialize() override;
-        bool SpecialKeysDown(int key, int xCoordinate, int yCoordinate) override;
-        bool IdleFunction() override;
-        int GetPassedNumber() const noexcept;
+        NODISCARD bool Initialize() override;
+        NODISCARD bool SpecialKeysDown(int key, int xCoordinate, int yCoordinate) override;
+        NODISCARD bool IdleFunction() override;
+        NODISCARD int GetPassedNumber() const noexcept;
 
     protected:
-        OStreamShared GetStreamShared() noexcept;
+        NODISCARD OStreamShared GetStreamShared() noexcept;
         void DoAddSuite(const Suite& suite);
-        bool IsPrintRun() const noexcept;
+        NODISCARD bool IsPrintRun() const noexcept;
         void AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest);
 
         template <typename TestType, typename... Types>
@@ -63,7 +65,7 @@ namespace Framework
             AddTest(suiteName, suite, testName, unitTest);
         }
 
-        [[nodiscard]] Suite GenerateSuite(const std::string& name);
+        NODISCARD Suite GenerateSuite(const std::string& name);
 
     private:
         using OpenGLGlutCallBackUnitTestSuiteImplPtr = std::shared_ptr<ImplType>;
@@ -72,12 +74,12 @@ namespace Framework
     private:
         virtual void AddSuite() = 0;
 
-        bool AddSuiteOnInitialize();
+        NODISCARD bool AddSuiteOnInitialize();
 
     private:
-        StreamTypeSharedPtr m_Stream;
+        StreamTypeSharedPtr stream;
         OpenGLGlutCallBackUnitTestSuiteImplPtr impl;
-        bool m_IsInit;
+        bool isInit;
     };
 
     using OpenGLGlutProcessUnitTestSuite = OpenGLGlutProcess<OpenGLGlutCallBackUnitTestSuite>;

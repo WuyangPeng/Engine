@@ -1,23 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/24 15:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/12 14:43)
 
 #ifndef RENDERING_SHADERS_SINGLE_SHADER_CONSTANTS_DATA_IMPL_H
 #define RENDERING_SHADERS_SINGLE_SHADER_CONSTANTS_DATA_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+
 #include <string>
 #include <vector>
-#include "CoreTools/ObjectSystems/BufferTarget.h"
-
-namespace CoreTools
-{
-    class BufferSource;
-    class BufferTarget;
-}
 
 namespace Rendering
 {
@@ -34,18 +32,18 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetConstant(const std::string& name, int numRegistersUsed);
+        void SetConstant(const std::string& aName, int aNumRegistersUsed);
 
-        const std::string GetConstantName() const;
-        int GetNumRegistersUsed() const noexcept;
+        NODISCARD std::string GetConstantName() const;
+        NODISCARD int GetNumRegistersUsed() const noexcept;
 
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
-        int GetStreamingSize() const;
+        NODISCARD int GetStreamingSize() const;
 
     private:
-        std::string m_Name;
-        int m_NumRegistersUsed;
+        std::string name;
+        int numRegistersUsed;
     };
 }
 

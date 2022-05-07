@@ -7,12 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "Physics\Physics.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsTesting", "..\..\..\EngineTesting\EngineWindows\Physics\PhysicsTesting\PhysicsTesting.vcxproj", "{C278455E-6346-47F0-A330-450C773B7B2F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{93A75F87-579B-45B2-BF88-6CC9B72958F1} = {93A75F87-579B-45B2-BF88-6CC9B72958F1}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsToolset", "..\..\..\Assist\AssistWindows\Toolset\Physics\PhysicsToolset\PhysicsToolset.vcxproj", "{BC8308F9-01C6-4F2E-8B09-D5391E0055A4}"
 	ProjectSection(ProjectDependencies) = postProject

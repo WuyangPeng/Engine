@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 14:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 11:22)
 
 #ifndef RENDERING_RENDERERS_OPENGL_ES_RENDERER_H
 #define RENDERING_RENDERERS_OPENGL_ES_RENDERER_H
@@ -18,92 +21,67 @@ namespace Rendering
     public:
         using ClassType = OpenGLESRenderer;
         using ParentType = RendererImpl;
-       
+
     public:
         explicit OpenGLESRenderer(const RendererBasis& basis);
-        
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		  RendererTypes GetRendererType() const noexcept override;
+        NODISCARD RendererTypes GetRendererType() const noexcept override;
 
-		  void SetAlphaState(const ConstAlphaStateSharedPtr& alphaState) override;
+        void SetAlphaState(const ConstAlphaStateSharedPtr& alphaState) override;
 
+        void SetCullState(const ConstCullStateSharedPtr& cullState) override;
 
-		  void SetCullState(const ConstCullStateSharedPtr& cullState) override;
+        void SetDepthState(const ConstDepthStateSharedPtr& depthState) override;
 
+        void SetOffsetState(const ConstOffsetStateSharedPtr& offsetState) override;
 
-		  void SetDepthState(const ConstDepthStateSharedPtr& depthState) override;
+        void SetStencilState(const ConstStencilStateSharedPtr& stencilState) override;
 
+        void SetWireState(const ConstWireStateSharedPtr& wireState) override;
 
-		  void SetOffsetState(const ConstOffsetStateSharedPtr& offsetState) override;
+        void SetViewport(const Viewport& viewport) override;
 
+        NODISCARD Viewport GetViewport() const override;
 
-		  void SetStencilState(const ConstStencilStateSharedPtr& stencilState) override;
+        void SetDepthRange(const DepthRange& depthRange) override;
 
+        NODISCARD DepthRange GetDepthRange() const override;
 
-		  void SetWireState(const ConstWireStateSharedPtr& wireState) override;
+        void Resize(int width, int height) override;
 
+        void ClearColorBuffer() override;
 
-		  void SetViewport(const Viewport& viewport) override;
+        void ClearDepthBuffer() override;
 
+        void ClearStencilBuffer() override;
 
-		  Viewport GetViewport() const override;
+        void ClearBuffers() override;
 
+        void ClearColorBuffer(int x, int y, int w, int h) override;
 
-		  void SetDepthRange(const DepthRange& depthRange) override;
+        void ClearDepthBuffer(int x, int y, int w, int h) override;
 
+        void ClearStencilBuffer(int x, int y, int w, int h) override;
 
-		  DepthRange GetDepthRange() const override;
+        void ClearBuffers(int x, int y, int w, int h) override;
 
+        void DisplayColorBuffer() override;
 
-		  void Resize(int width, int height) override;
+        void SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha) override;
 
+        NODISCARD bool PreDraw() override;
 
-		  void ClearColorBuffer() override;
+        void PostDraw() override;
 
+        void Draw(const uint8_t* screenBuffer, bool reflectY) override;
 
-		  void ClearDepthBuffer() override;
+        void Draw(int x, int y, const Colour& color, const std::string& message) override;
 
-
-		  void ClearStencilBuffer() override;
-
-
-		  void ClearBuffers() override;
-
-
-		  void ClearColorBuffer(int x, int y, int w, int h) override;
-
-
-		  void ClearDepthBuffer(int x, int y, int w, int h) override;
-
-
-		  void ClearStencilBuffer(int x, int y, int w, int h) override;
-
-
-		  void ClearBuffers(int x, int y, int w, int h) override;
-
-
-		  void DisplayColorBuffer() override;
-
-
-		  void SetColorMask(bool allowRed, bool allowGreen, bool allowBlue, bool allowAlpha) override;
-
-
-		  bool PreDraw() override;
-
-
-		  void PostDraw() override;
-
-
-		  void Draw(const uint8_t* screenBuffer, bool reflectY) override;
-
-
-		  void Draw(int x, int y, const Colour& color, const std::string& message) override;
-
-	private:
-		  void DrawPrimitive(const ConstVisualSharedPtr& visual) override;
-
-	};
+    private:
+        void DrawPrimitive(const ConstVisualSharedPtr& visual) override;
+    };
 }
 
-#endif // RENDERING_RENDERERS_OPENGL_ES_RENDERER_H
+#endif  // RENDERING_RENDERERS_OPENGL_ES_RENDERER_H

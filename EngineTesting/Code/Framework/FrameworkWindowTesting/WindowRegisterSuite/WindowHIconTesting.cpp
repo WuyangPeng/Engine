@@ -7,7 +7,7 @@
 #include "resource.h"
 #include "WindowHIconTesting.h"  
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowRegister.h"
+#include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/AssertMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
 #include "Framework/WindowRegister/WindowHIcon.h"

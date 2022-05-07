@@ -1,23 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 16:52)
 
 #ifndef RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H
 #define RENDERING_CONTROLLERS_TRANSFORM_CONTROLLER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/DataTypes/Transform.h"
-
-namespace CoreTools
-{
-    class BufferTarget;
-    class BufferSource;
-}
 
 namespace Rendering
 {
@@ -33,21 +31,21 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetTransform(const TransformF& localTransform) noexcept;
-        const TransformF GetTransform() const noexcept;
+        void SetTransform(const TransformF& aLocalTransform) noexcept;
+        NODISCARD TransformF GetTransform() const noexcept;
 
         void SetTranslate(const APoint& translate) noexcept;
         void SetRotate(const Matrix& rotate) noexcept;
-        void SetUniformScale(float scale);
-        void SetScale(const APoint& scale);
+        void SetUniformScale(float scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetScale(const APoint& scale) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
         void SetMatrix(const Matrix& matrix) noexcept;
 
-        int GetStreamingSize() const noexcept;
+        NODISCARD int GetStreamingSize() const noexcept;
         void Save(CoreTools::BufferTarget& target) const;
         void Load(CoreTools::BufferSource& source);
 
     private:
-        TransformF m_LocalTransform;
+        TransformF localTransform;
     };
 }
 

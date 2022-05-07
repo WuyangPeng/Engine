@@ -1,54 +1,48 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/23 18:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/08 14:39)
 
 #include "Rendering/RenderingExport.h"
 
 #include "MaterialAmbientConstant.h"
 
+#include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26486)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, MaterialAmbientConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MaterialAmbientConstant);
-CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialAmbientConstant); 
+CORE_TOOLS_FACTORY_DEFINE(Rendering, MaterialAmbientConstant);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, MaterialAmbientConstant);
 
-Rendering::MaterialAmbientConstant
-	::MaterialAmbientConstant(const MaterialSharedPtr& material)
-	:ParentType{ material }
+Rendering::MaterialAmbientConstant::MaterialAmbientConstant(const MaterialSharedPtr& material)
+    : ParentType{ material }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
- 
-
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,MaterialAmbientConstant)
-
-void Rendering::MaterialAmbientConstant::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
-{
-	RENDERING_CLASS_IS_VALID_1;
-
-	const auto colour = GetMaterial()->GetAmbient();
-	SetRegister(0, colour);
-
-	 
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderFloatSharedPtr Rendering::MaterialAmbientConstant
-	::Clone() const
-{
-	RENDERING_CLASS_IS_VALID_CONST_1;
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, MaterialAmbientConstant)
 
-	return ShaderFloatSharedPtr{ std::make_shared<ClassType>(*this) };
+void Rendering::MaterialAmbientConstant::Update(MAYBE_UNUSED const Visual* visual, MAYBE_UNUSED const Camera* camera)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto colour = GetMaterial()->GetAmbient();
+    SetRegister(0, colour);
 }
 
- #include STSTEM_WARNING_POP
+Rendering::ShaderFloatSharedPtr Rendering::MaterialAmbientConstant::Clone() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return std::make_shared<ClassType>(*this);
+}

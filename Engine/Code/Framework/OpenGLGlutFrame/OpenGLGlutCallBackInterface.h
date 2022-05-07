@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/21 15:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 14:18)
 
 #ifndef FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_INTERFACE_H
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_INTERFACE_H
@@ -22,20 +25,20 @@ namespace Framework
     public:
         explicit OpenGLGlutCallBackInterface(int64_t delta) noexcept;
         virtual ~OpenGLGlutCallBackInterface() noexcept = default;
-        OpenGLGlutCallBackInterface(const OpenGLGlutCallBackInterface&) noexcept = default;
-        virtual OpenGLGlutCallBackInterface& operator=(const OpenGLGlutCallBackInterface&) noexcept = default;
-        OpenGLGlutCallBackInterface(OpenGLGlutCallBackInterface&&) noexcept = default;
-        virtual OpenGLGlutCallBackInterface& operator=(OpenGLGlutCallBackInterface&&) noexcept = default;
+        OpenGLGlutCallBackInterface(const OpenGLGlutCallBackInterface& rhs) noexcept = default;
+        virtual OpenGLGlutCallBackInterface& operator=(const OpenGLGlutCallBackInterface& rhs) noexcept = default;
+        OpenGLGlutCallBackInterface(OpenGLGlutCallBackInterface&& rhs) noexcept = default;
+        virtual OpenGLGlutCallBackInterface& operator=(OpenGLGlutCallBackInterface&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         int GetWindowID() const noexcept;
         void SetWindowID(int window);
-        void SetMillisecond(int millisecond) noexcept;
-        int64_t GetDelta() const noexcept;
+        void SetMillisecond(int aMillisecond) noexcept;
+        NODISCARD int64_t GetDelta() const noexcept;
 
-        virtual bool PreCreate();
-        virtual bool Initialize();
+        NODISCARD virtual bool PreCreate();
+        NODISCARD virtual bool Initialize();
         virtual void PreIdle();
         virtual void Terminate();
 
@@ -53,17 +56,17 @@ namespace Framework
         virtual bool ProcessMenu(int menuValue);
         virtual void DestroyWindow();
 
-        virtual int GetMillisecond() const noexcept;
-        virtual int GetTerminateKey() const noexcept;
+        NODISCARD virtual int GetMillisecond() const noexcept;
+        NODISCARD virtual int GetTerminateKey() const noexcept;
 
     protected:
-        static MouseButtonsTypes GetMouseButtonsTypes(int button) noexcept;
-        static MouseStateTypes GetMouseStateTypes(int state) noexcept;
+        NODISCARD static MouseButtonsTypes GetMouseButtonsTypes(int button) noexcept;
+        NODISCARD static MouseStateTypes GetMouseStateTypes(int state) noexcept;
 
     private:
-        int m_WindowID{ 0 };
-        int m_Millisecond{ 0 };
-        int64_t m_Delta{ 0 };
+        int windowID{ 0 };
+        int millisecond{ 0 };
+        int64_t delta{ 0 };
     };
 }
 

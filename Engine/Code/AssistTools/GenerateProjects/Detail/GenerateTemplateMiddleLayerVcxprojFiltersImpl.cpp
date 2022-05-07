@@ -1,42 +1,38 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 11:14)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateMiddleLayerVcxprojFiltersImpl.h"
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
- 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
-	::sm_Extension(SYSTEM_TEXT(".vcxproj.filters"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
-	::GenerateTemplateMiddleLayerVcxprojFiltersImpl(const System::String& templateFileName, const System::String& projectName, const System::String& managerName)
-	:ParentType(templateFileName, sm_Extension), m_ProjectName(projectName), m_ManagerName(managerName)
-{
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
-}
 
- 
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl::extension{ SYSTEM_TEXT(".vcxproj.filters"s) };
+
+AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl::GenerateTemplateMiddleLayerVcxprojFiltersImpl(const System::String& templateFileName, const System::String& projectName, const System::String& managerName)
+    : ParentType{ templateFileName, extension }, projectName{ projectName }, managerName{ managerName }
+{
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateMiddleLayerVcxprojFiltersImpl)
 
-void AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newManagerName) const
+void AssistTools::GenerateTemplateMiddleLayerVcxprojFiltersImpl::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newManagerName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1; 
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable;
-	newVariable.insert(make_pair(m_ProjectName, solutionName));
-	newVariable.insert(make_pair(m_ManagerName, newManagerName));
+    VariableType newVariable{ { projectName, solutionName }, { managerName, newManagerName } };
 
-	return ParentType::Generate (resourceDirectory, solutionName + newManagerName, newVariable);
+    return ParentType::Generate(resourceDirectory, solutionName + newManagerName, newVariable);
 }
 
 /*

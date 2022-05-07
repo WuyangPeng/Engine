@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/23 10:21)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/06 21:15)
 
 #ifndef RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H
 #define RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H
@@ -10,25 +13,16 @@
 #include "Rendering/RenderingDll.h"
 
 #include "TransformController.h"
-EXPORT_SHARED_PTR(Rendering, BlendTransformControllerImpl, RENDERING_DEFAULT_DECLARE); 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(BlendTransformController, BlendTransformControllerImpl);
+
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE BlendTransformController : public TransformController
     {
     public:
-        void Swap(BlendTransformController& rhs) noexcept;
-       
-           public:
-               TYPE_DECLARE(BlendTransformController);
-               using ClassShareType = CoreTools::CopyUnsharedClasses;
-               ~BlendTransformController() noexcept= default;
-               BlendTransformController(const BlendTransformController& rhs);
-               BlendTransformController& operator=(const BlendTransformController& rhs);
-               BlendTransformController(BlendTransformController&& rhs) noexcept;
-               BlendTransformController& operator=(BlendTransformController&& rhs) noexcept;
+        COPY_UNSHARED_TYPE_DECLARE(BlendTransformController);
         using ParentType = TransformController;
         using APoint = Mathematics::APointF;
         using Matrix = Mathematics::MatrixF;
@@ -56,10 +50,11 @@ namespace Rendering
 
         // 设置“rotationScaleMatrices'为'假'时，当mIsRotationMatrix是'假'对每个变换。
         // 在这种情况下，所有的变换使用加权平均值计算。这是不推荐的，因为视觉效果是难以预料的。
-        BlendTransformController(const TransformControllerSharedPtr& firstController, const TransformControllerSharedPtr& secondController,
-                                 bool rotationScaleMatrices, bool geometricRotation = false, bool geometricScale = false);
-
-
+        BlendTransformController(const TransformControllerSharedPtr& firstController,
+                                 const TransformControllerSharedPtr& secondController,
+                                 bool rotationScaleMatrices,
+                                 bool geometricRotation = false,
+                                 bool geometricScale = false);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -67,35 +62,38 @@ namespace Rendering
         CORE_TOOLS_NAMES_OVERRIDE_DECLARE;
 
         // 权重w是一个数字的量0 <= w <= 1。
-        const ConstTransformControllerSharedPtr GetFirstController() const noexcept;
-        const ConstTransformControllerSharedPtr GetSecondController() const noexcept;
-        bool IsRotationScaleMatrices() const noexcept;
+        NODISCARD ConstTransformControllerSharedPtr GetFirstController() const noexcept;
+        NODISCARD ConstTransformControllerSharedPtr GetSecondController() const noexcept;
+        NODISCARD bool IsRotationScaleMatrices() const noexcept;
         void SetWeight(float weight) noexcept;
-        float GetWeight() const noexcept;
+        NODISCARD float GetWeight() const noexcept;
 
-        bool IsGeometricRotation() const noexcept;
-        bool IsGeometricScale() const noexcept;
+        NODISCARD bool IsGeometricRotation() const noexcept;
+        NODISCARD bool IsGeometricScale() const noexcept;
 
         // 动画更新。应用程序时间以毫秒为单位。
-        bool Update(double applicationTime) override;
+        NODISCARD bool Update(double applicationTime) override;
 
-        ControllerInterfaceSharedPtr Clone() const override;
-        
-        ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
         // 对“this”设置对象，管理控制器。
         void SetObject(ControllerInterface* object) override;
         void SetObjectInCopy(ControllerInterface* object) override;
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        PackageType impl;
     };
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(BlendTransformController);
+
 #include STSTEM_WARNING_POP
-    CORE_TOOLS_SHARED_PTR_DECLARE( BlendTransformController);
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(BlendTransformController);
 }
-#include STSTEM_WARNING_POP
+
 #endif  // RENDERING_CONTROLLERS_BLEND_TRANSFORM_CONTROLLER_H

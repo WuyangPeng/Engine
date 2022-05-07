@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.3.0.1 (2020/05/20 11:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/06 14:45)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_BASE_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_CONSOLE_MAIN_FUNCTION_HELPER_BASE_H
@@ -13,6 +16,7 @@
 #include "CoreTools/Command/CommandFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+
 FRAMEWORK_NON_COPY_EXPORT_IMPL(ConsoleMainFunctionHelperBaseImpl);
 
 namespace Framework
@@ -30,22 +34,22 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        int GetArgc() const noexcept;
-        char** GetArgv() const noexcept;
-        String GetApplicationProjectDirectory() const;
-        Command GetCommand() const noexcept;
+        NODISCARD int GetArgc() const noexcept;
+        NODISCARD char** GetArgv() const noexcept;
+        NODISCARD String GetApplicationProjectDirectory() const;
+        NODISCARD Command GetCommand() const noexcept;
 
     private:
         void ConsoleMainFunctionHelperInit(const String& consoleTitle);
 
     private:
-        using ConsoleMainFunctionHelperBaseImplPtr = std::shared_ptr<ImplType>;
+        using ConsoleMainFunctionHelperBaseSharedPtr = std::shared_ptr<ImplType>;
 
     private:
-        ConsoleMainFunctionHelperBaseImplPtr impl;
+        ConsoleMainFunctionHelperBaseSharedPtr impl;
 
-        int m_Argc;
-        char** m_Argv;
+        int argc;
+        char** argv;
     };
 }
 

@@ -1,14 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/22 18:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/03 17:15)
+
 #include "Rendering/RenderingExport.h"
 
 #include "PickRecord.h"
 #include "PickRecordContainer.h"
 #include "Triangles.h"
 #include "Detail/NormalDerivatives.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
@@ -31,21 +36,7 @@
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 
 using std::vector;
-#include "System/Helper/PragmaWarning.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26490)
-#if defined(TCRE_USE_MSVC)
-    #pragma warning(disable : 6305)
-#endif  // TCRE_USE_MSVC
-#include SYSTEM_WARNING_DISABLE(26490)
 CORE_TOOLS_RTTI_DEFINE(Rendering, Triangles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Triangles);
@@ -65,7 +56,7 @@ Rendering::Triangles::Triangles(VisualPrimitiveType type, const VertexFormatShar
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Triangles)
 
-const Rendering::TrianglePosition Rendering::Triangles::GetModelTriangle(int index) const
+Rendering::TrianglePosition Rendering::Triangles::GetModelTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -83,7 +74,7 @@ const Rendering::TrianglePosition Rendering::Triangles::GetModelTriangle(int ind
     return trianglePosition;
 }
 
-const Rendering::TrianglePosition Rendering::Triangles::GetWorldTriangle(int index) const
+Rendering::TrianglePosition Rendering::Triangles::GetWorldTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -110,11 +101,19 @@ Rendering::Triangles::Vector3D Rendering::Triangles::GetPosition(int vertexIndex
     auto index = GetConstVertexFormat()->GetIndex(VertexFormatFlags::AttributeUsage::Position);
     if (0 <= index)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
         auto positions = GetConstVertexBuffer()->GetReadOnlyData() + GetConstVertexFormat()->GetOffset(index);
         auto stride = GetConstVertexFormat()->GetStride();
-        auto firstPosition = reinterpret_cast<const float*>(positions + vertexIndex * stride);
-        auto secondPosition = firstPosition + sizeof(float);
-        auto thirdPosition = secondPosition + sizeof(float);
+        const auto index0 = vertexIndex * stride;
+        auto firstPosition = reinterpret_cast<const float*>(positions + index0);
+        auto secondPosition = firstPosition + 1;
+        auto thirdPosition = secondPosition + 1;
+
+#include STSTEM_WARNING_POP
 
         return Vector3D{ *firstPosition, *secondPosition, *thirdPosition };
     }
@@ -126,7 +125,7 @@ Rendering::Triangles::Vector3D Rendering::Triangles::GetPosition(int vertexIndex
 
 void Rendering::Triangles::UpdateModelSpace(VisualUpdateType type)
 {
-    ;
+    RENDERING_CLASS_IS_VALID_1;
 
     UpdateModelBound();
 
@@ -156,7 +155,7 @@ void Rendering::Triangles::UpdateModelSpace(VisualUpdateType type)
         }
     }
 
-    RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer().get());
+    RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer());
 }
 
 // private
@@ -258,15 +257,15 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBuffe
         for (auto current = 0; current < 3; ++current)
         {
             const auto currentTriangleIndex = triangleIndex[current];
-            localPosition[current] = vertexBufferAccessor.GetPosition<APoint>(currentTriangleIndex);
-            localNormal[current] = vertexBufferAccessor.GetNormal<AVector>(currentTriangleIndex);
-            localTangent[current] = (hasTangent ? vertexBufferAccessor.GetTangent<AVector>(currentTriangleIndex) : vertexBufferAccessor.GetBinormal<AVector>(currentTriangleIndex));
-            localTextureCoord[current] = vertexBufferAccessor.GetTextureCoord<Vector2D>(0, currentTriangleIndex);
+            localPosition.at(current) = vertexBufferAccessor.GetPosition<APoint>(currentTriangleIndex);
+            localNormal.at(current) = vertexBufferAccessor.GetNormal<AVector>(currentTriangleIndex);
+            localTangent.at(current) = (hasTangent ? vertexBufferAccessor.GetTangent<AVector>(currentTriangleIndex) : vertexBufferAccessor.GetBinormal<AVector>(currentTriangleIndex));
+            localTextureCoord.at(current) = vertexBufferAccessor.GetTextureCoord<Vector2D>(0, currentTriangleIndex);
         }
 
         for (auto current = 0; current < 3; ++current)
         {
-            const auto& currLocTangent = localTangent[current];
+            const auto& currLocTangent = localTangent.at(current);
             if (!Approximate(currLocTangent, Mathematics::AVectorF::GetZero()))
             {
                 // 这个顶点已被访问。
@@ -274,13 +273,16 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBuffe
             }
 
             // 计算顶点的切线空间。
-            const auto& normalVector = localNormal[current];
+            const auto& normalVector = localNormal.at(current);
             const auto prev = ((current + 2) % 3);
             const auto next = ((current + 1) % 3);
 
-            auto tangentVector = ComputeTangent(localPosition[current], localTextureCoord[current],
-                                                localPosition[next], localTextureCoord[next],
-                                                localPosition[prev], localTextureCoord[prev]);
+            auto tangentVector = ComputeTangent(localPosition.at(current),
+                                                localTextureCoord.at(current),
+                                                localPosition.at(next),
+                                                localTextureCoord.at(next),
+                                                localPosition.at(prev),
+                                                localTextureCoord.at(prev));
 
             // 投影T到切平面投影表面法线N,然后使其单位长度
             tangentVector -= Dot(normalVector, tangentVector) * normalVector;
@@ -292,7 +294,7 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBuffe
             const auto currentTriangleIndex = triangleIndex[current];
             if (vertexBufferAccessor.HasTangent())
             {
-                localTangent[current] = tangentVector;
+                localTangent.at(current) = tangentVector;
 
                 if (vertexBufferAccessor.HasBinormal())
                 {
@@ -308,7 +310,7 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBuffe
 }
 
 // private
-const Rendering::Triangles::AVector Rendering::Triangles::ComputeTangent(const APoint& position0, const Vector2D& textureCoord0, const APoint& position1, const Vector2D& textureCoord1, const APoint& position2, const Vector2D& textureCoord2)
+Rendering::Triangles::AVector Rendering::Triangles::ComputeTangent(const APoint& position0, const Vector2D& textureCoord0, const APoint& position1, const Vector2D& textureCoord1, const APoint& position2, const Vector2D& textureCoord2)
 {
     // 计算顶点P0位置的变化。
     const auto differenceP1P0 = position1 - position0;
@@ -389,12 +391,13 @@ Rendering::PickRecordContainer Rendering::Triangles::ExecuteRecursive(const APoi
 
                 Mathematics::StaticFindIntersectorLine3Triangle3<float> intersector{ line, triangle };
 
-                if (intersector.IsIntersection() && tMin <= intersector.GetLineParameter() &&
-                    intersector.GetLineParameter() <= tMax)  //&& SMART_POINTER_SINGLETON.IsSmartPointer(this))
+                if (intersector.IsIntersection() &&
+                    tMin <= intersector.GetLineParameter() &&
+                    intersector.GetLineParameter() <= tMax)
                 {
                     auto record = PickRecord::Create();
 
-                    record.SetIntersected(ConstSpatialSharedPtr(this));
+                    record.SetIntersected(boost::polymorphic_pointer_cast<const ClassType>(shared_from_this()));
                     record.SetParameter(intersector.GetLineParameter());
                     record.SetTriangle(i);
                     record.SetBary(intersector.GetTriangleBary0(), intersector.GetTriangleBary1());
@@ -406,13 +409,10 @@ Rendering::PickRecordContainer Rendering::Triangles::ExecuteRecursive(const APoi
             {
                 LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
                     << error
-                    << CoreTools::LogAppenderIOManageSign::TriggerAssert
-                    << CoreTools::LogAppenderIOManageSign::Refresh;
+                    << LOG_SINGLETON_TRIGGER_ASSERT;
             }
         }
     }
 
     return container;
 }
-
-#include STSTEM_WARNING_POP

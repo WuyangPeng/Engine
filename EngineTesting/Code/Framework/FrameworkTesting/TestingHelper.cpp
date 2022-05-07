@@ -11,7 +11,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 
-Framework::TestingHelper ::TestingHelper(int argc, char** argv)
+Framework::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "¿ò¼Ü²âÊÔ" }
 {
     CoreTools::ObjectManager::Create();
@@ -20,7 +20,7 @@ Framework::TestingHelper ::TestingHelper(int argc, char** argv)
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::TestingHelper ::~TestingHelper() noexcept
+Framework::TestingHelper::~TestingHelper() noexcept
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
@@ -29,7 +29,7 @@ Framework::TestingHelper ::~TestingHelper() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, TestingHelper)
 
-void Framework::TestingHelper ::InitSuite()
+void Framework::TestingHelper::InitSuite()
 {
     AddHelperSuite();
     AddMainFunctionHelperSuite();
@@ -46,7 +46,7 @@ void Framework::TestingHelper ::InitSuite()
     AddConsoleFrameSuite();
 }
 
-void Framework::TestingHelper ::AddHelperSuite()
+void Framework::TestingHelper::AddHelperSuite()
 {
     auto helperSuite = GenerateSuite("°ïÖú");
 
@@ -58,7 +58,7 @@ void Framework::TestingHelper ::AddHelperSuite()
     AddSuite(helperSuite);
 }
 
-void Framework::TestingHelper ::AddMainFunctionHelperSuite()
+void Framework::TestingHelper::AddMainFunctionHelperSuite()
 {
     auto mainFunctionHelperSuite = GenerateSuite("Ö÷º¯Êý°ïÖú");
 
@@ -74,7 +74,7 @@ void Framework::TestingHelper ::AddMainFunctionHelperSuite()
     AddSuite(mainFunctionHelperSuite);
 }
 
-void Framework::TestingHelper ::AddWindowCreateSuite()
+void Framework::TestingHelper::AddWindowCreateSuite()
 {
     auto windowCreateSuite = GenerateSuite("Window´´½¨");
 
@@ -87,7 +87,7 @@ void Framework::TestingHelper ::AddWindowCreateSuite()
     AddSuite(windowCreateSuite);
 }
 
-void Framework::TestingHelper ::AddWindowProcessSuite()
+void Framework::TestingHelper::AddWindowProcessSuite()
 {
     auto windowProcessSuite = GenerateSuite("´°¿Ú½ø³Ì");
 
@@ -102,7 +102,7 @@ void Framework::TestingHelper ::AddWindowProcessSuite()
     AddSuite(windowProcessSuite);
 }
 
-void Framework::TestingHelper ::AddWindowRegisterSuite()
+void Framework::TestingHelper::AddWindowRegisterSuite()
 {
     auto windowRegisterSuite = GenerateSuite("Window×¢²á");
 
@@ -117,7 +117,7 @@ void Framework::TestingHelper ::AddWindowRegisterSuite()
     AddSuite(windowRegisterSuite);
 }
 
-void Framework::TestingHelper ::AddApplicationSuite()
+void Framework::TestingHelper::AddApplicationSuite()
 {
     auto applicationSuite = GenerateSuite("Ó¦ÓÃ");
 
@@ -134,7 +134,7 @@ void Framework::TestingHelper ::AddApplicationSuite()
     AddSuite(applicationSuite);
 }
 
-void Framework::TestingHelper ::AddMiddleLayerSuite()
+void Framework::TestingHelper::AddMiddleLayerSuite()
 {
     auto middleLayerSuite = GenerateSuite("ÖÐ¼ä²ã");
 
@@ -170,7 +170,7 @@ void Framework::TestingHelper ::AddMiddleLayerSuite()
     AddSuite(middleLayerSuite);
 }
 
-void Framework::TestingHelper ::AddWindowsAPIFrameSuite()
+void Framework::TestingHelper::AddWindowsAPIFrameSuite()
 {
     auto windowsAPIFrameSuite = GenerateSuite("Windows API ¿ò¼Ü´´½¨");
 
@@ -179,7 +179,7 @@ void Framework::TestingHelper ::AddWindowsAPIFrameSuite()
     AddSuite(windowsAPIFrameSuite);
 }
 
-void Framework::TestingHelper ::AddOpenGLGlutFrameSuite()
+void Framework::TestingHelper::AddOpenGLGlutFrameSuite()
 {
     auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT ¿ò¼Ü´´½¨");
 
@@ -193,7 +193,7 @@ void Framework::TestingHelper ::AddOpenGLGlutFrameSuite()
     AddSuite(openGLGlutFrameSuite);
 }
 
-void Framework::TestingHelper ::AddAndroidFrameSuite()
+void Framework::TestingHelper::AddAndroidFrameSuite()
 {
     auto androidFrameSuite = GenerateSuite("°²×¿¿ò¼Ü");
 
@@ -208,7 +208,7 @@ void Framework::TestingHelper ::AddAndroidFrameSuite()
     AddSuite(androidFrameSuite);
 }
 
-void Framework::TestingHelper ::AddLinuxFrameSuite()
+void Framework::TestingHelper::AddLinuxFrameSuite()
 {
     auto linuxFrameSuite = GenerateSuite("Linux¿ò¼Ü");
 
@@ -219,7 +219,7 @@ void Framework::TestingHelper ::AddLinuxFrameSuite()
     AddSuite(linuxFrameSuite);
 }
 
-void Framework::TestingHelper ::AddMacintoshFrameSuite()
+void Framework::TestingHelper::AddMacintoshFrameSuite()
 {
     auto macintoshFrameSuite = GenerateSuite("Macintosh¿ò¼Ü");
 
@@ -230,7 +230,7 @@ void Framework::TestingHelper ::AddMacintoshFrameSuite()
     AddSuite(macintoshFrameSuite);
 }
 
-void Framework::TestingHelper ::AddConsoleFrameSuite()
+void Framework::TestingHelper::AddConsoleFrameSuite()
 {
     auto consoleFrameSuite = GenerateSuite("Console¿ò¼Ü");
 

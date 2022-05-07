@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.3 (2019/07/26 15:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/20 15:52)
 
 #ifndef FRAMEWORK_APPLICATION_RENDERER_INPUT_DATA_IMPL_H
 #define FRAMEWORK_APPLICATION_RENDERER_INPUT_DATA_IMPL_H
@@ -10,38 +13,29 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <memory>
 
 namespace Rendering
 {
-	class RendererInput;
+    class RendererInputDataImpl
+    {
+    public:
+        using ClassType = RendererInputDataImpl;
+        using RendererInputSharedPtr = std::shared_ptr<RendererInput>;
+
+    public:
+        explicit RendererInputDataImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+
+        CLASS_INVARIANT_DECLARE;
+
+        void Rebuild(RendererTypes type);
+
+    private:
+        RendererInputSharedPtr rendererInput;
+    };
 }
 
-namespace Rendering
-{
-	class RendererInputDataImpl 
-	{
-	public:
-		using ClassType = RendererInputDataImpl;
-		using RendererInput = Rendering::RendererInput;
-		using RendererInputPtr = std::shared_ptr<RendererInput>;
-		using RendererTypes = Rendering::RendererTypes;
-
-	public:
-                RendererInputDataImpl(MAYBE_UNUSED int count); 
-	
-		CLASS_INVARIANT_DECLARE;
-
-		void Rebuild(RendererTypes type);
-
-	private:		
-		RendererInputPtr m_RendererInput;
-	};
-}
-
-#endif // FRAMEWORK_APPLICATION_RENDERER_INPUT_DATA_IMPL_H
-
-
-
-	
+#endif  // FRAMEWORK_APPLICATION_RENDERER_INPUT_DATA_IMPL_H

@@ -6,13 +6,23 @@
 
 #include "Testing.h"
 #include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(Physics, TestingHelper, "物理库")
+
+Physics::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "物理库" }
+{
+    InitSuite();
+
+    PHYSICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Physics, TestingHelper)
 
 // private
-void Physics::TestingHelper ::AddSuites()
+void Physics::TestingHelper ::InitSuite()
 {
     AddMacroSuite();
     AddCollisionDetectionSuite();
@@ -26,61 +36,61 @@ void Physics::TestingHelper ::AddSuites()
 
 void Physics::TestingHelper ::AddMacroSuite()
 {
-    ADD_TEST_BEGIN(macroSuite, "宏");
+    auto macroSuite = GenerateSuite("宏");
 
-    ADD_TEST_END(macroSuite);
+    AddSuite(macroSuite);
 }
 
 void Physics::TestingHelper ::AddCollisionDetectionSuite()
 {
-    ADD_TEST_BEGIN(collisionDetectionSuite, "碰撞检测");
+    auto collisionDetectionSuite = GenerateSuite("碰撞检测");
 
     ADD_TEST(collisionDetectionSuite, BoundTreeProjectionInfoTesting);
     ADD_TEST(collisionDetectionSuite, BoundTreeSplitTrianglesTesting);
     ADD_TEST(collisionDetectionSuite, BoundTreeChildTesting);
     ADD_TEST(collisionDetectionSuite, BoundTreeTesting);
 
-    ADD_TEST_END(collisionDetectionSuite);
+    AddSuite(collisionDetectionSuite);
 }
 
 void Physics::TestingHelper ::AddFluidSuite()
 {
-    ADD_TEST_BEGIN(fluidSuite, "流体");
+    auto fluidSuite = GenerateSuite("流体");
 
-    ADD_TEST_END(fluidSuite);
+    AddSuite(fluidSuite);
 }
 
 void Physics::TestingHelper ::AddIntersectionSuite()
 {
-    ADD_TEST_BEGIN(intersectionSuite, "相交");
+    auto intersectionSuite = GenerateSuite("相交");
 
-    ADD_TEST_END(intersectionSuite);
+    AddSuite(intersectionSuite);
 }
 
 void Physics::TestingHelper ::AddLCPSolverSuite()
 {
-    ADD_TEST_BEGIN(lCPSolverSuite, "LCP求解");
+    auto lCPSolverSuite = GenerateSuite("LCP求解");
 
-    ADD_TEST_END(lCPSolverSuite);
+    AddSuite(lCPSolverSuite);
 }
 
 void Physics::TestingHelper ::AddParticleSystemSuite()
 {
-    ADD_TEST_BEGIN(particleSystemSuite, "粒子系统");
+    auto particleSystemSuite = GenerateSuite("粒子系统"); 
 
-    ADD_TEST_END(particleSystemSuite);
+    AddSuite(particleSystemSuite);
 }
 
 void Physics::TestingHelper ::AddRigidBodySuite()
 {
-    ADD_TEST_BEGIN(rigidBodySuite, "刚体");
+    auto rigidBodySuite = GenerateSuite("刚体");   
 
-    ADD_TEST_END(rigidBodySuite);
+    AddSuite(rigidBodySuite);
 }
 
 void Physics::TestingHelper ::AddMiscellaneousSuite()
 {
-    ADD_TEST_BEGIN(miscellaneousSuite, "杂项");
+    auto miscellaneousSuite = GenerateSuite("杂项");    
 
-    ADD_TEST_END(miscellaneousSuite);
+    AddSuite(miscellaneousSuite);
 }

@@ -18,8 +18,8 @@ namespace Framework
 	public:
 		using ClassType = ObjectMotionTesting;
 		using ParentType = UnitTest;		
-		using Matrixf = Mathematics::FloatMatrix;
-		using AVectorf = Mathematics::FloatAVector;
+		using Matrixf = Mathematics::MatrixF;
+		using AVectorf = Mathematics::AVectorF;
 
 	public:
 		explicit ObjectMotionTesting(const OStreamShared& stream);

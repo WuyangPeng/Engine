@@ -6,13 +6,12 @@
 
 #include "Example/Imagics/ImagicsExample/ImagicsExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ImagicsClassInvariantMacro.h"
 
-ImagicsExample::Placeholder
-	::Placeholder() 
+ImagicsExample::Placeholder ::Placeholder() noexcept
 {
-	IMAGICS_SELF_CLASS_IS_VALID_9;
+    IMAGICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ImagicsExample, Placeholder)

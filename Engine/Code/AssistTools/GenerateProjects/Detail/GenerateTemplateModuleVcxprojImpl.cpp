@@ -1,41 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.4 (2019/07/31 15:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/04/29 11:17)
 
 #include "AssistTools/AssistToolsExport.h"
 
 #include "GenerateTemplateModuleVcxprojImpl.h"
-#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"  
-#include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-const System::String AssistTools::GenerateTemplateModuleVcxprojImpl
-	::sm_Extension(SYSTEM_TEXT(".vcxproj"));
- #include STSTEM_WARNING_POP
-AssistTools::GenerateTemplateModuleVcxprojImpl
-	::GenerateTemplateModuleVcxprojImpl(const System::String& templateFileName, const System::String& solutionName, const System::String& moduleName,  const System::String& includeName)
-	:ParentType(templateFileName, sm_Extension), m_SolutionName(solutionName), m_ModuleName(moduleName), m_IncludeName(includeName)
+#include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
+
+using namespace std::literals;
+
+const System::String AssistTools::GenerateTemplateModuleVcxprojImpl::extension{ SYSTEM_TEXT(".vcxproj") };
+
+AssistTools::GenerateTemplateModuleVcxprojImpl::GenerateTemplateModuleVcxprojImpl(const System::String& templateFileName, const System::String& solutionName, const System::String& moduleName, const System::String& includeName)
+    : ParentType{ templateFileName, extension }, solutionName{ solutionName }, moduleName{ moduleName }, includeName{ includeName }
 {
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateModuleVcxprojImpl)
 
-void AssistTools::GenerateTemplateModuleVcxprojImpl
-	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newModuleName, const System::String& newIncludeName) const
+void AssistTools::GenerateTemplateModuleVcxprojImpl::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newModuleName, const System::String& newIncludeName) const
 {
-	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1; 
+    ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	VariableType newVariable;
-	newVariable.insert(make_pair(m_SolutionName, newSolutionName));
-	newVariable.insert(make_pair(m_ModuleName, newModuleName));
-	newVariable.insert(make_pair(m_IncludeName, newIncludeName));
+    VariableType newVariable{ { solutionName, newSolutionName }, { moduleName, newModuleName }, { includeName, newIncludeName } };
 
-	return ParentType::Generate (resourceDirectory, newSolutionName + newModuleName, newVariable);
-} 
+    return ParentType::Generate(resourceDirectory, newSolutionName + newModuleName, newVariable);
+}
 
 /*
 示例模板：

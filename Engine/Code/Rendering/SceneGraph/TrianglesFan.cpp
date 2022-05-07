@@ -1,8 +1,11 @@
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// Copyright (c) 2011-2017
-//
-// ÒýÇæ°æ±¾£º1.0.0.0 (2017/12/29 23:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ°æ±¾£º0.8.0.6 (2022/04/03 17:24)
 
 #include "Rendering/RenderingExport.h"
 
@@ -15,12 +18,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26490)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, TrianglesFan);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TrianglesFan);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TrianglesFan);
@@ -39,7 +37,7 @@ Rendering::TrianglesFan::TrianglesFan(const VertexFormatSharedPtr& vertexformat,
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create(numVertices, indexSize) };
+    auto indexBuffer = IndexBuffer::Create(numVertices, indexSize);
     indexBuffer->InitIndexBuffer();
     SetIndexBuffer(indexBuffer);
 
@@ -55,17 +53,23 @@ int Rendering::TrianglesFan::GetNumTriangles() const noexcept
     return GetConstIndexBuffer()->GetNumElements() - 2;
 }
 
-const Rendering::TriangleIndex
-    Rendering::TrianglesFan::GetTriangle(int index) const
+Rendering::TriangleIndex Rendering::TrianglesFan::GetTriangle(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     if (0 <= index && index < GetNumTriangles())
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
         auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
         const auto firstIndex = indices[0];
         const auto secondIndex = indices[index + 1];
         const auto thirdIndex = indices[index + 2];
+
+#include STSTEM_WARNING_POP
 
         return TriangleIndex{ firstIndex, secondIndex, thirdIndex };
     }
@@ -75,19 +79,16 @@ const Rendering::TriangleIndex
     }
 }
 
-Rendering::ControllerInterfaceSharedPtr
-    Rendering::TrianglesFan::Clone() const
+Rendering::ControllerInterfaceSharedPtr Rendering::TrianglesFan::Clone() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesFan::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ObjectInterfaceSharedPtr{ std::make_shared<ClassType>(*this) };
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

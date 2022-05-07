@@ -1,344 +1,290 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.3.0.2 (2020/06/06 20:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.7 (2022/05/07 16:43)
 
 #include "Framework/FrameworkExport.h"
 
 #include "WindowProcessManagerImpl.h"
-#include "System/Windows/Flags/WindowsMessagesFlags.h" 
-#include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Helper/MainFunctionMacro.h"
+#include "System/Windows/Flags/WindowsMessagesFlags.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MainFunctionMacro.h"
+#include "CoreTools/Helper/SingletonMacro.h"
 
 using std::make_shared;
 
-CORE_TOOLS_MUTEX_EXTERN(Framework);
+Framework::WindowMessageInterfaceSharedPtr Framework::WindowProcessManagerImpl::windowProcessMessage{};
 
-Framework::WindowMessageInterfaceSharedPtr Framework::WindowProcessManagerImpl
-	::sm_WindowMessage{ };
-
-int Framework::WindowProcessManagerImpl
-	::sm_WindowMessageIndex{ };
+int Framework::WindowProcessManagerImpl::windowMessageIndex{};
 
 // static
 // private
-Framework::WindowProcessManagerImpl::ClassNameContainerSharedPtr Framework::WindowProcessManagerImpl
-	::GetClassNameContainer()
+Framework::WindowProcessManagerImpl::ClassNameContainerSharedPtr Framework::WindowProcessManagerImpl::GetClassNameContainer()
 {
-	static ClassNameContainerSharedPtr classNameContainer{ };
+    static auto classNameContainer = make_shared<ClassNameContainer>();
 
-	if (!classNameContainer)
-	{
-		SINGLETON_MUTEX_ENTER_GLOBAL(Framework);
-
-		if (!classNameContainer)
-		{
-			classNameContainer = make_shared<ClassNameContainer>();
-		}
-	}
-
-	return classNameContainer;
+    return classNameContainer;
 }
 
 // static
 // private
-Framework::WindowProcessManagerImpl::MessageFunctionPointerContainerSharedPtr Framework::WindowProcessManagerImpl
-	::GetMessageFunctionPointer()
+Framework::WindowProcessManagerImpl::MessageFunctionPointerContainerSharedPtr Framework::WindowProcessManagerImpl::GetMessageFunctionPointer()
 {
-	static MessageFunctionPointerContainerSharedPtr functionPointer{ };
+    static MessageFunctionPointerContainer messageFunctionPointerContainer{ { System::WindowsMessages::Paint, &WindowMessageInterface::PaintMessage },
+                                                                            { System::WindowsMessages::EraseBkgnd, &WindowMessageInterface::EraseBackgroundMessage },
+                                                                            { System::WindowsMessages::Move, &WindowMessageInterface::MoveMessage },
+                                                                            { System::WindowsMessages::Size, &WindowMessageInterface::SizeMessage },
+                                                                            { System::WindowsMessages::Char, &WindowMessageInterface::CharMessage },
+                                                                            { System::WindowsMessages::KeyDown, &WindowMessageInterface::KeyDownMessage },
+                                                                            { System::WindowsMessages::KeyUp, &WindowMessageInterface::KeyUpMessage },
+                                                                            { System::WindowsMessages::LButtonDown, &WindowMessageInterface::LeftButtonDownMessage },
+                                                                            { System::WindowsMessages::LButtonUp, &WindowMessageInterface::LeftButtonUpMessage },
+                                                                            { System::WindowsMessages::MButtonDown, &WindowMessageInterface::MiddleButtonDownMessage },
+                                                                            { System::WindowsMessages::MButtonUp, &WindowMessageInterface::MiddleButtonUpMessage },
+                                                                            { System::WindowsMessages::RButtonDown, &WindowMessageInterface::RightButtonDownMessage },
+                                                                            { System::WindowsMessages::RButtonUp, &WindowMessageInterface::RightButtonUpMessage },
+                                                                            { System::WindowsMessages::MouseMove, &WindowMessageInterface::MouseMoveMessage },
+                                                                            { System::WindowsMessages::MouseWheel, &WindowMessageInterface::MouseWheelMessage },
+                                                                            { System::WindowsMessages::Create, &WindowMessageInterface::CreateMessage },
+                                                                            { System::WindowsMessages::Close, &WindowMessageInterface::CloseMessage },
+                                                                            { System::WindowsMessages::Destroy, &WindowMessageInterface::DestroyMessage } };
 
-	if (!functionPointer)
-	{
-		SINGLETON_MUTEX_ENTER_GLOBAL(Framework);
+    static auto functionPointer = make_shared<MessageFunctionPointerContainer>(messageFunctionPointerContainer);
 
-		if (!functionPointer)
-		{
-			MessageFunctionPointerContainer messageFunctionPointerContainer{ { System::WindowsMessages::Paint, &WindowMessageInterface::PaintMessage },
-																			 { System::WindowsMessages::EraseBkgnd,&WindowMessageInterface::EraseBackgroundMessage },
-																			 { System::WindowsMessages::Move, &WindowMessageInterface::MoveMessage },
-																			 { System::WindowsMessages::Size, &WindowMessageInterface::SizeMessage },
-																			 { System::WindowsMessages::Char, &WindowMessageInterface::CharMessage },
-																			 { System::WindowsMessages::KeyDown, &WindowMessageInterface::KeyDownMessage },
-																			 { System::WindowsMessages::KeyUp, &WindowMessageInterface::KeyUpMessage },
-																			 { System::WindowsMessages::LButtonDown, &WindowMessageInterface::LeftButtonDownMessage },
-																			 { System::WindowsMessages::LButtonUp, &WindowMessageInterface::LeftButtonUpMessage },
-																			 { System::WindowsMessages::MButtonDown, &WindowMessageInterface::MiddleButtonDownMessage },
-																			 { System::WindowsMessages::MButtonUp, &WindowMessageInterface::MiddleButtonUpMessage },
-																			 { System::WindowsMessages::RButtonDown, &WindowMessageInterface::RightButtonDownMessage },
-																			 { System::WindowsMessages::RButtonUp, &WindowMessageInterface::RightButtonUpMessage },
-																			 { System::WindowsMessages::MouseMove, &WindowMessageInterface::MouseMoveMessage },
-																			 { System::WindowsMessages::MouseWheel, &WindowMessageInterface::MouseWheelMessage },
-																			 { System::WindowsMessages::Create, &WindowMessageInterface::CreateMessage },
-																			 { System::WindowsMessages::Close, &WindowMessageInterface::CloseMessage } ,
-																			 { System::WindowsMessages::Destroy, &WindowMessageInterface::DestroyMessage } };
-
-			functionPointer = make_shared<MessageFunctionPointerContainer>(messageFunctionPointerContainer);
-		}
-
-	}
-
-	return functionPointer;
+    return functionPointer;
 }
 
 // static
 // private
-Framework::WindowProcessManagerImpl::WindowMessageContainerSharedPtr Framework::WindowProcessManagerImpl
-	::GetWindowMessageContainer()
+Framework::WindowProcessManagerImpl::WindowMessageContainerSharedPtr Framework::WindowProcessManagerImpl::GetWindowMessageContainer()
 {
-	static WindowMessageContainerSharedPtr windowMessageContainer{ };
+    static auto windowMessageContainer = make_shared<WindowMessageContainer>();
 
-	if (!windowMessageContainer)
-	{
-		SINGLETON_MUTEX_ENTER_GLOBAL(Framework);
-
-		if (!windowMessageContainer)
-		{
-			windowMessageContainer = make_shared<WindowMessageContainer>();
-		}
-	}
-
-	return windowMessageContainer;
+    return windowMessageContainer;
 }
-
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowProcessManagerImpl)
 
 // static
-Framework::WindowProcessManagerImpl::WindowProcess Framework::WindowProcessManagerImpl
-	::GetProcess() noexcept
+Framework::WindowProcessManagerImpl::WindowProcess Framework::WindowProcessManagerImpl::GetProcess() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return WindowProc;
+    return WindowProc;
 }
 
 // static
-Framework::WindowProcessManagerImpl::DisplayFunction Framework::WindowProcessManagerImpl
-	::GetFunction() noexcept
+Framework::WindowProcessManagerImpl::DisplayFunction Framework::WindowProcessManagerImpl::GetFunction() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return Display;
+    return Display;
 }
 
 // static
-bool Framework::WindowProcessManagerImpl
-	::IsClassNameExist(const String& className)
+bool Framework::WindowProcessManagerImpl::IsClassNameExist(const String& className)
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	auto classNameContainer = GetClassNameContainer();
+    auto classNameContainer = GetClassNameContainer();
 
-	const auto iter = classNameContainer->find(className);
-	
-	if(iter != classNameContainer->cend())
-		return true;	
-		
-	return false;
+    const auto iter = classNameContainer->find(className);
+
+    if (iter != classNameContainer->cend())
+        return true;
+
+    return false;
 }
 
 // static
-bool Framework::WindowProcessManagerImpl
-	::SetNewClassName(const String& className)
+bool Framework::WindowProcessManagerImpl::SetNewClassName(const String& className)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	auto classNameContainer = GetClassNameContainer();
+    auto classNameContainer = GetClassNameContainer();
 
-	if (classNameContainer->insert(className).second)
-		return true;
-	else
-		return false;
+    if (classNameContainer->insert(className).second)
+        return true;
+    else
+        return false;
 }
 
-Framework::ConstWindowMessageInterfaceSharedPtr Framework::WindowProcessManagerImpl
-	::GetWindowMessageInterface() const noexcept
+Framework::ConstWindowMessageInterfaceSharedPtr Framework::WindowProcessManagerImpl::GetWindowMessageInterface() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return sm_WindowMessage;
+    return windowProcessMessage;
 }
 
-void Framework::WindowProcessManagerImpl
-	::SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage)
+void Framework::WindowProcessManagerImpl::SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage != nullptr)
-	{
-		auto windowMessageContainer = GetWindowMessageContainer();
+    if (windowProcessMessage != nullptr)
+    {
+        auto windowMessageContainer = GetWindowMessageContainer();
 
-		windowMessageContainer->insert({ sm_WindowMessageIndex++,sm_WindowMessage });
-	}
+        windowMessageContainer->insert({ windowMessageIndex++, windowProcessMessage });
+    }
 
-	sm_WindowMessage = windowMessage;	
+    windowProcessMessage = windowMessage;
 }
 
-void Framework::WindowProcessManagerImpl
-	::ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage)
+void Framework::WindowProcessManagerImpl::ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage == windowMessage)
-	{
-		ResetMainWindowMessage();
-	}
-	else 
-	{
-		ClearWindowMessageContainer(windowMessage);
-	}
+    if (windowProcessMessage == windowMessage)
+    {
+        ResetMainWindowMessage();
+    }
+    else
+    {
+        ClearWindowMessageContainer(windowMessage);
+    }
 }
 
-void Framework::WindowProcessManagerImpl
-	::ResetMainWindowMessage()
+void Framework::WindowProcessManagerImpl::ResetMainWindowMessage()
 {
-	sm_WindowMessage.reset();
+    windowProcessMessage.reset();
 
-	auto windowMessageContainer = GetWindowMessageContainer();	
+    auto windowMessageContainer = GetWindowMessageContainer();
 
-	for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end(); ++iter)
-	{
-		auto nextWindowMessage = iter->second.lock();
-		if (nextWindowMessage != nullptr)
-		{
-			sm_WindowMessage = nextWindowMessage;
-			windowMessageContainer->erase(iter);
-			break;
-		}
-	}
+    for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end(); ++iter)
+    {
+        auto nextWindowMessage = iter->second.lock();
+        if (nextWindowMessage != nullptr)
+        {
+            windowProcessMessage = nextWindowMessage;
+            windowMessageContainer->erase(iter);
+            break;
+        }
+    }
 }
 
-void Framework::WindowProcessManagerImpl
-	::ClearWindowMessageContainer(const WindowMessageInterfaceSharedPtr& windowMessage)
+void Framework::WindowProcessManagerImpl::ClearWindowMessageContainer(const WindowMessageInterfaceSharedPtr& windowMessage)
 {
-	auto windowMessageContainer = GetWindowMessageContainer();
+    auto windowMessageContainer = GetWindowMessageContainer();
 
-	for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end();)
-	{
-		auto nextWindowMessage = iter->second.lock();
-		if (nextWindowMessage == nullptr || nextWindowMessage == windowMessage)
-		{
-			windowMessageContainer->erase(iter++);
-		}
-		else
-		{
-			++iter;
-		}
-	}
+    for (auto iter = windowMessageContainer->begin(); iter != windowMessageContainer->end();)
+    {
+        auto nextWindowMessage = iter->second.lock();
+        if (nextWindowMessage == nullptr || nextWindowMessage == windowMessage)
+        {
+            windowMessageContainer->erase(iter++);
+        }
+        else
+        {
+            ++iter;
+        }
+    }
 }
 
-bool Framework::WindowProcessManagerImpl
-	::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowProcessManagerImpl::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage)
-	{
-		return sm_WindowMessage->PreCreate(environmentDirectory);
-	}
-	else
-	{
-		return false;
-	}
+    if (windowProcessMessage)
+    {
+        return windowProcessMessage->PreCreate(environmentDirectory);
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool Framework::WindowProcessManagerImpl
-	::Initialize()
+bool Framework::WindowProcessManagerImpl::Initialize()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage)
-	{
-		return sm_WindowMessage->Initialize();
-	}
-	else
-	{
-		return false;
-	}
+    if (windowProcessMessage)
+    {
+        return windowProcessMessage->Initialize();
+    }
+    else
+    {
+        return false;
+    }
 }
 
-void Framework::WindowProcessManagerImpl
-	::PreIdle()
+void Framework::WindowProcessManagerImpl::PreIdle()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage)
-	{
-		return sm_WindowMessage->PreIdle();
-	}
+    if (windowProcessMessage)
+    {
+        return windowProcessMessage->PreIdle();
+    }
 }
 
-void Framework::WindowProcessManagerImpl
-	::Terminate()
+void Framework::WindowProcessManagerImpl::Terminate()
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage)
-	{
-		sm_WindowMessage->Terminate();
-	}
+    if (windowProcessMessage)
+    {
+        windowProcessMessage->Terminate();
+    }
 }
 
-void Framework::WindowProcessManagerImpl
-	::SetMainWindowHwnd(HWnd hwnd)
+void Framework::WindowProcessManagerImpl::SetMainWindowHwnd(HWnd hwnd)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	if (sm_WindowMessage)
-	{
-		sm_WindowMessage->SetMainWindow(hwnd);
-	}
+    if (windowProcessMessage)
+    {
+        windowProcessMessage->SetMainWindow(hwnd);
+    }
 }
 
-Framework::WindowProcessManagerImpl::HWnd Framework::WindowProcessManagerImpl
-	::GetMainWindowHwnd() const noexcept
+Framework::WindowProcessManagerImpl::HWnd Framework::WindowProcessManagerImpl::GetMainWindowHwnd() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return sm_WindowMessage->GetHwnd();
+    return windowProcessMessage->GetHwnd();
 }
 
 // static
 // private
-Framework::WindowProcessManagerImpl::LResult SYSTEM_CALL_BACK Framework::WindowProcessManagerImpl
-	::WindowProc(HWnd hwnd, UInt message, WParam wParam, LParam lParam)
+Framework::WindowProcessManagerImpl::LResult SYSTEM_CALL_BACK Framework::WindowProcessManagerImpl::WindowProc(HWnd hwnd, UInt message, WParam wParam, LParam lParam)
 {
-	EXCEPTION_TRY
-	{
-		auto messageFunctionPointer = GetMessageFunctionPointer();	
+    EXCEPTION_TRY
+    {
+        auto messageFunctionPointer = GetMessageFunctionPointer();
 
-		const auto flag = System::UnderlyingCastEnum<System::WindowsMessages>(message);
+        const auto flag = System::UnderlyingCastEnum<System::WindowsMessages>(message);
 
-		const auto iter = messageFunctionPointer->find(flag);
+        const auto iter = messageFunctionPointer->find(flag);
 
-		if (sm_WindowMessage && iter != messageFunctionPointer->cend())
-		{
-			return ((*sm_WindowMessage).*(iter->second))(hwnd, wParam, lParam);
-		}	
+        if (windowProcessMessage && iter != messageFunctionPointer->cend())
+        {
+            return ((*windowProcessMessage).*(iter->second))(hwnd, wParam, lParam);
+        }
 
-		return System::DefSystemWindowProc(hwnd, flag, wParam, lParam);
-	}
-	EXCEPTION_ALL_CATCH(Framework)
+        return System::DefSystemWindowProc(hwnd, flag, wParam, lParam);
+    }
+    EXCEPTION_ALL_CATCH(Framework)
 
-	return 0;
+    return 0;
 }
 
 // static
 // private
-void Framework::WindowProcessManagerImpl
-	::Display(HWnd hwnd, int64_t timeDelta)
+void Framework::WindowProcessManagerImpl::Display(HWnd hwnd, int64_t timeDelta)
 {
-	if (sm_WindowMessage)
-	{
-		sm_WindowMessage->Display(hwnd, timeDelta);
-	}
+    if (windowProcessMessage)
+    {
+        windowProcessMessage->Display(hwnd, timeDelta);
+    }
 }
 
-Framework::WindowProcessManagerImpl::WindowProcessManagerImpl(MAYBE_UNUSED int count) noexcept
+Framework::WindowProcessManagerImpl::WindowProcessManagerImpl() noexcept
 {
 }
-

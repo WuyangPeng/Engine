@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.3 (2019/07/26 09:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.0.6 (2022/04/18 18:05)
 
 #ifndef RENDERING_IMAGE_PROCESSING_IMAGE_PROCESSING2_H
 #define RENDERING_IMAGE_PROCESSING_IMAGE_PROCESSING2_H
@@ -17,57 +20,55 @@ namespace Rendering
     class ImageProcessing2 : public ImageProcessingBase
     {
     public:
-        // Construction and destruction.  Objects of this class should not be
-        // instantiated until the shader profile is known.  Thus, do not create
-        // such an object in an application constructor, but do so in
-        // OnInitialize or later.
+        using ClassType = ImageProcessing2;
+        using ParentType = ImageProcessingBase;
 
-        // Use this constructor for the standard image processing pipeline.
-        ImageProcessing2(int bound0, int bound1, Mathematics::Float4* imageData, PixelShaderSharedPtr mainPShader, bool useDirichlet);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        // Use this constructor when you want to set up your own pipeline for
-        // processing the image.
+    public:
+        ImageProcessing2(int bound0,
+                         int bound1,
+                         const std::vector<Mathematics::Float4>& imageData,
+                         const PixelShaderSharedPtr& mainPShader,
+                         bool useDirichlet);
+
         ImageProcessing2(int bound0, int bound1, int numTargets);
 
-        // Member access.
-        int GetBound0() const noexcept;
-        int GetBound1() const noexcept;
-        float GetDx() const noexcept;
-        float GetDy() const noexcept;
+        NODISCARD int GetBound0() const noexcept;
+        NODISCARD int GetBound1() const noexcept;
+        NODISCARD float GetDx() const noexcept;
+        NODISCARD float GetDy() const noexcept;
 
-        // Create a texture corresponding to the 2D image data.
-        Texture2DSharedPtr CreateImage(const Mathematics::Float4* imageData);
+        NODISCARD Texture2DSharedPtr CreateImage(const std::vector<Mathematics::Float4>& imageData);
 
-        // Set boundary pixels to (0,0,0,0).
         void CreateBoundaryDirichletEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
-        // Set boundary pixels so that boundary derivatives are zero.
         void CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
-        // Draw the image.
         void CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance);
 
     private:
         void CreateVertexShader();
 
-        int mBound0, mBound1, mBound0M1, mBound1M1;
-        float mDx, mDy;
+    private:
+        int bound0;
+        int bound1;
+        int bound0M1;
+        int bound1M1;
+        float dx;
+        float dy;
 
-        // Profile information for BoundaryDirichlet.fx.
-        static int msAllDirichletPTextureUnits[2];
-        static int* msDirichletPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msDirichletPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static std::array<int, 2> allDirichletPTextureUnits;
+        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> dirichletPTextureUnits;
+        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> dirichletPPrograms;
 
-        // Profile information for BoundaryNeumann.fx.
-        static int msAllNeumannPTextureUnits[2];
-        static int* msNeumannPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msNeumannPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static std::array<int, 2> msAllNeumannPTextureUnits;
+        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> neumannPTextureUnits;
+        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> neumannPPrograms;
 
-        // Profile information for ScreenShader.fx, function v_ScreenShader and
-        // p_ScreenShader2.
-        static int msAllDrawPTextureUnits[2];
-        static int* msDrawPTextureUnits[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
-        static std::string msDrawPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)];
+        static std::array<int, 2> msAllDrawPTextureUnits;
+        static std::array<std::array<int, 2>*, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPTextureUnits;
+        static std::array<std::string, System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)> drawPPrograms;
     };
 }
 

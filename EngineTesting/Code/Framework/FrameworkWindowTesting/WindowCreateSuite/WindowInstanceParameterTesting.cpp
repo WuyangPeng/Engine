@@ -25,7 +25,7 @@ Framework::WindowInstanceParameterTesting
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowInstanceParameterTesting)
 
-void Framework::WindowInstanceParameterTesting ::DoRunUnitTest()
+void Framework::WindowInstanceParameterTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
