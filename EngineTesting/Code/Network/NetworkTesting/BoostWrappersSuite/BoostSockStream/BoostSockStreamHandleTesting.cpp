@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 13:48)
 
 #include "BoostSockStreamHandleTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -18,18 +21,15 @@
 using std::make_shared;
 using std::thread;
 using std::to_string;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26414)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockStreamHandleTesting)
 
-void Network::BoostSockStreamHandleTesting ::MainTest() noexcept
+void Network::BoostSockStreamHandleTesting::MainTest() noexcept
 {
-    // ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
 }
 
-void Network::BoostSockStreamHandleTesting ::StreamTest()
+void Network::BoostSockStreamHandleTesting::StreamTest()
 {
     thread serverThread{ &ClassType::BoostServerThread, this };
 
@@ -51,13 +51,13 @@ void Network::BoostSockStreamHandleTesting ::StreamTest()
     serverThread.join();
 }
 
-void Network::BoostSockStreamHandleTesting ::StreamInformationTest()
+void Network::BoostSockStreamHandleTesting::StreamInformationTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ClientTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ServerTest);
 }
 
-void Network::BoostSockStreamHandleTesting ::ClientTest()
+void Network::BoostSockStreamHandleTesting::ClientTest()
 {
     thread serverThread{ &ClassType::ServerNoReceiveThread, this };
 
@@ -73,12 +73,12 @@ void Network::BoostSockStreamHandleTesting ::ClientTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockStreamHandleTesting ::ClientConnect1(const TestingTypeSharedPtr& sockStream)
+void Network::BoostSockStreamHandleTesting::ClientConnect1(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
-    constexpr auto connectTime = GetSynchronizeConnectTime();
-    for (auto i = 0; i < connectTime; ++i)
+    constexpr auto aConnectTime = GetSynchronizeConnectTime();
+    for (auto i = 0; i < aConnectTime; ++i)
     {
         SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
 
@@ -86,11 +86,11 @@ void Network::BoostSockStreamHandleTesting ::ClientConnect1(const TestingTypeSha
 
         if (sockConnector.Connect(sockStream, sockAddress))
         {
-            [[maybe_unused]] const auto value = sockStream->EnableNonBlock();
+            MAYBE_UNUSED const auto value = sockStream->EnableNonBlock();
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, connectTime, "连接服务器失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aConnectTime, "连接服务器失败。");
     }
 
     ASSERT_EQUAL(configurationStrategy.GetIP() + ":" + to_string(configurationStrategy.GetPort()), sockStream->GetRemoteAddress());
@@ -100,7 +100,7 @@ void Network::BoostSockStreamHandleTesting ::ClientConnect1(const TestingTypeSha
     ASSERT_TRUE(nativeHandle.is_open());
 }
 
-void Network::BoostSockStreamHandleTesting ::ServerTest()
+void Network::BoostSockStreamHandleTesting::ServerTest()
 {
     thread clientThread{ &ClassType::ClientNoSendThread, this };
 
@@ -116,22 +116,31 @@ void Network::BoostSockStreamHandleTesting ::ServerTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockStreamHandleTesting ::ServerAcceptor(const TestingTypeSharedPtr& sockStream)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Network::BoostSockStreamHandleTesting::ServerAcceptor(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     SockAcceptorSharedPtr sockAcceptor{ make_shared<SockAcceptor>(configurationStrategy) };
 
-    constexpr auto acceptTime = GetSynchronizeAcceptTime();
-    for (auto i = 0; i < acceptTime; ++i)
+#include STSTEM_WARNING_POP
+
+    constexpr auto aAcceptTime = GetSynchronizeAcceptTime();
+    for (auto i = 0; i < aAcceptTime; ++i)
     {
         if (sockAcceptor->Accept(*sockStream))
         {
-            [[maybe_unused]] const auto value = sockStream->EnableNonBlock();
+            MAYBE_UNUSED const auto value = sockStream->EnableNonBlock();
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, acceptTime, "等待客户端连接失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aAcceptTime, "等待客户端连接失败。");
     }
 
     ASSERT_EQUAL(configurationStrategy.GetIP() + ":" + to_string(sockStream->GetRemotePort()), sockStream->GetRemoteAddress());
@@ -141,31 +150,36 @@ void Network::BoostSockStreamHandleTesting ::ServerAcceptor(const TestingTypeSha
     ASSERT_TRUE(nativeHandle.is_open());
 }
 
-void Network::BoostSockStreamHandleTesting ::ACESockStreamExceptionTest()
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+void Network::BoostSockStreamHandleTesting::ACESockStreamExceptionTest()
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
     TestingTypeSharedPtr sockStream{ make_shared<TestingType>(configurationStrategy) };
 
-    [[maybe_unused]] auto value = sockStream->GetACESockStream();
+    MAYBE_UNUSED auto value = sockStream->GetACESockStream();
 }
 
-void Network::BoostSockStreamHandleTesting ::NetworkSockStreamExceptionTest()
+void Network::BoostSockStreamHandleTesting::NetworkSockStreamExceptionTest()
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
     TestingTypeSharedPtr sockStream{ make_shared<TestingType>(configurationStrategy) };
 
-    [[maybe_unused]] const auto value = sockStream->GetNetworkSockStream();
+    MAYBE_UNUSED const auto value = sockStream->GetNetworkSockStream();
 }
 
-void Network::BoostSockStreamHandleTesting ::ACEHandleExceptionTest()
+void Network::BoostSockStreamHandleTesting::ACEHandleExceptionTest()
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
     TestingTypeSharedPtr sockStream{ make_shared<TestingType>(configurationStrategy) };
 
-    [[maybe_unused]] auto value = sockStream->GetACEHandle();
+    MAYBE_UNUSED auto value = sockStream->GetACEHandle();
 }
 
-void Network::BoostSockStreamHandleTesting ::SetACEHandleExceptionTest()
+void Network::BoostSockStreamHandleTesting::SetACEHandleExceptionTest()
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
     TestingTypeSharedPtr sockStream{ make_shared<TestingType>(configurationStrategy) };
@@ -173,10 +187,12 @@ void Network::BoostSockStreamHandleTesting ::SetACEHandleExceptionTest()
     sockStream->SetACEHandle(0);
 }
 
-void Network::BoostSockStreamHandleTesting ::SetNetworkHandleExceptionTest()
+void Network::BoostSockStreamHandleTesting::SetNetworkHandleExceptionTest()
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
     TestingTypeSharedPtr sockStream{ make_shared<TestingType>(configurationStrategy) };
 
     sockStream->SetNetworkHandle(0);
 }
+
+#include STSTEM_WARNING_POP

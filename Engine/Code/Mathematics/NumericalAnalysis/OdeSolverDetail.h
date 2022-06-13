@@ -76,12 +76,17 @@ void Mathematics::OdeSolver<Real, UserDataType>::SetStepSize(Real newStep) noexc
     step = newStep;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
+
 // protected
 template <typename Real, typename UserDataType>
 void Mathematics::OdeSolver<Real, UserDataType>::CalculateFunctionValue(Real tIn, const Container& xIn)
 {
     functionValue = function(tIn, xIn, userData);
 }
+
+#include STSTEM_WARNING_POP
 
 // protected
 template <typename Real, typename UserDataType>

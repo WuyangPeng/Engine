@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/29 10:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 15:55)
 
 #include "GaussPointsFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -24,42 +27,37 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, GaussPointsFit3Testing)
 
-void Mathematics::GaussPointsFit3Testing ::MainTest()
+void Mathematics::GaussPointsFit3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::GaussPointsFit3Testing ::FitTest()
+
+void Mathematics::GaussPointsFit3Testing::FitTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(10, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(10, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        GaussPointsFit3<double> gaussPointsFit2d(vertices);
+        const GaussPointsFit3<double> gaussPointsFit2d(vertices);
 
-        Box3D box = gaussPointsFit2d.GetBox3();
+        const Box3D box = gaussPointsFit2d.GetBox3();
 
         for (int i = 0; i < size; ++i)
         {
-            double distanceSquared = Vector3ToolsD::DistanceSquared(box.GetCenter(), vertices[i]);
-            double maxDistanceSquared = box.GetExtent0() * box.GetExtent0() + box.GetExtent1() * box.GetExtent1() + box.GetExtent2() * box.GetExtent2();
+            const double distanceSquared = Vector3ToolsD::DistanceSquared(box.GetCenter(), vertices.at(i));
+            const double maxDistanceSquared = box.GetExtent0() * box.GetExtent0() + box.GetExtent1() * box.GetExtent1() + box.GetExtent2() * box.GetExtent2();
 
             ASSERT_TRUE(distanceSquared <= maxDistanceSquared);
         }

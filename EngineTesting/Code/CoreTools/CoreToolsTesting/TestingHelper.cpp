@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.1 (2021/07/29 18:58)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 11:55)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -45,10 +45,6 @@ void CoreTools::TestingHelper::InitSuite()
     AddTemplateToolsSuite();
     AddCommandSuite();
     AddMainFunctionHelperSuite();
-    AddHandleManagerSuite();
-    AddResourceManagerSuite();
-    AddFrameMemorySystemSuite();
-    AddBitArraySuite();
     AddModuleInitializerTerminatorSuite();
     AddSyntacticParserSuite();
     AddPerformanceProfilerSuite();
@@ -614,18 +610,6 @@ void CoreTools::TestingHelper::AddMemoryToolsSuite()
     auto memoryToolsSuite = GenerateSuite("内存工具库");
 
     ADD_TEST(memoryToolsSuite, HeapAllocateTesting);
-    ADD_TEST(memoryToolsSuite, DefaultMemoryTesting);
-    ADD_TEST(memoryToolsSuite, MemoryTesting);
-    ADD_TEST(memoryToolsSuite, MemoryManagerTesting);
-    ADD_TEST(memoryToolsSuite, SmartPointerTesting);
-    ADD_TEST(memoryToolsSuite, MD5ContextTesting);
-    ADD_TEST(memoryToolsSuite, MD5Testing);
-    ADD_TEST(memoryToolsSuite, RandomTesting);
-    ADD_TEST(memoryToolsSuite, PoolTesting);
-    ADD_TEST(memoryToolsSuite, BufferPoolTesting);
-    ADD_TEST(memoryToolsSuite, BufferTesting);
-    ADD_TEST(memoryToolsSuite, BufferStreamTesting);
-    ADD_TEST(memoryToolsSuite, SubclassSmartPointerTesting);
 
     AddSuite(memoryToolsSuite);
 }
@@ -741,54 +725,6 @@ void CoreTools::TestingHelper::AddMainFunctionHelperSuite()
     ADD_TEST(mainFunctionHelperSuite, CMainFunctionTestingHelperTesting);
 
     AddSuite(mainFunctionHelperSuite);
-}
-
-// private
-void CoreTools::TestingHelper::AddHandleManagerSuite()
-{
-    auto handleManagerSuite = GenerateSuite("句柄管理");
-
-    ADD_TEST(handleManagerSuite, HandleManagerTesting);
-    ADD_TEST(handleManagerSuite, ResourceHandleTesting);
-
-    AddSuite(handleManagerSuite);
-}
-
-// private
-void CoreTools::TestingHelper::AddResourceManagerSuite()
-{
-    auto resourceManagerSuite = GenerateSuite("资源管理");
-
-    ADD_TEST(resourceManagerSuite, CommonDataResourceTesting);
-    ADD_TEST(resourceManagerSuite, ResourceManagerTesting);
-    ADD_TEST(resourceManagerSuite, ResourceManagerLockTesting);
-    ADD_TEST(resourceManagerSuite, ResourceFactoryTesting);
-
-    AddSuite(resourceManagerSuite);
-}
-
-// private
-void CoreTools::TestingHelper::AddFrameMemorySystemSuite()
-{
-    auto frameMemorySystemSuite = GenerateSuite("帧内存管理");
-
-    ADD_TEST(frameMemorySystemSuite, FrameMemorySystemTesting);
-    ADD_TEST(frameMemorySystemSuite, FrameMemorySystemManagerTesting);
-    ADD_TEST(frameMemorySystemSuite, FrameMemorySystemPointerShareTesting);
-
-    AddSuite(frameMemorySystemSuite);
-}
-
-// private
-void CoreTools::TestingHelper::AddBitArraySuite()
-{
-    auto bitArraySuite = GenerateSuite("位数组管理");
-
-    ADD_TEST(bitArraySuite, BitArrayTesting);
-    ADD_TEST(bitArraySuite, BitArray2DTesting);
-    ADD_TEST(bitArraySuite, TwoBitArrayTesting);
-
-    AddSuite(bitArraySuite);
 }
 
 void CoreTools::TestingHelper::AddModuleInitializerTerminatorSuite()

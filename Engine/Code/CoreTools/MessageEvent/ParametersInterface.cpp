@@ -16,7 +16,7 @@ using std::make_shared;
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ParametersInterface)
 
-const CoreTools::ParametersInterface::BaseSharedPtr CoreTools::ParametersInterface::Clone() const
+CoreTools::ParametersInterface::BaseSharedPtr CoreTools::ParametersInterface::Clone() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

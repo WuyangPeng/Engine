@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 13:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/01 16:03)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_SOLVER_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_SOLVER_TESTING_H
@@ -11,22 +14,22 @@
 
 namespace Mathematics
 {
-	class OdeSolverTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OdeSolverTesting); 
+    class OdeSolverTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OdeSolverTesting);
 
-		int GetDimension() const;
+        NODISCARD int GetDimension() const noexcept;
 
-	private:
-		void MainTest();   
-		void SolverTest();
-		
-		void DoRunUnitTest() override;	
+    private:
+        void MainTest();
+        void SolverTest();
 
-	private:
-		int m_Dimension;
-	};
+        void DoRunUnitTest() override;
+
+    private:
+        int dimension;
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_SOLVER_TESTING_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_SOLVER_TESTING_H

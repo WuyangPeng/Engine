@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.6 (2021/07/09 11:16)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 16:21)
 
 #include "WindowsNamedPipeTesting.h"
 #include "System/Console/Using/ConsoleScreenBufferUsing.h"
@@ -37,7 +37,7 @@ void System::WindowsNamedPipeTesting::CreatePipeTest()
 {
     WindowSecurityAttributes saAttr{};
     saAttr.nLength = sizeof(WindowSecurityAttributes);
-    saAttr.bInheritHandle = g_True;
+    saAttr.bInheritHandle = gTrue;
     saAttr.lpSecurityDescriptor = nullptr;
 
     WindowsHandle hReadPipe{ nullptr };

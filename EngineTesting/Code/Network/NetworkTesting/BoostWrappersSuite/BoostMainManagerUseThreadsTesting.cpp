@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 13:59)
 
 #include "BoostMainManagerUseThreadsTesting.h"
 #include "System/Helper/PragmaWarning/AsioPost.h"
@@ -12,7 +15,6 @@
 #include "Network/Configuration/ConfigurationStrategy.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
 #include "System/Helper/PragmaWarning/Bind.h"
 
 using boost::bind;
@@ -21,40 +23,41 @@ using std::mutex;
 using std::ostream;
 using std::unique_lock;
 
-Network::BoostMainManagerUseThreadsTesting ::BoostMainManagerUseThreadsTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_IntCount{ 0 }, m_Int16Count{ 0 }, m_ConditionVariable{}
+Network::BoostMainManagerUseThreadsTesting::BoostMainManagerUseThreadsTesting(const OStreamShared& stream)
+    : ParentType{ stream }, intCount{ 0 }, int16Count{ 0 }, conditionVariable{}
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostMainManagerUseThreadsTesting)
+
 void Network::BoostMainManagerUseThreadsTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::MainTest()
+void Network::BoostMainManagerUseThreadsTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SingletonTest);
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::SingletonTest()
+void Network::BoostMainManagerUseThreadsTesting::SingletonTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(ThreadsBoostSingletonTest<ClassType>, this, &ClassType::IncrementTest);
     ASSERT_NOT_THROW_EXCEPTION_2(ThreadsBoostSingletonTest<ClassType>, this, &ClassType::SleepIncrementTest);
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::IncrementTest()
+void Network::BoostMainManagerUseThreadsTesting::IncrementTest()
 {
     auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
-    m_IntCount = 0;
+    intCount = 0;
 
     boost::asio::post(ioContext, boost::bind(&ClassType::Increment, this));
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
-    ASSERT_EQUAL(m_IntCount, 1);
+    ASSERT_EQUAL(intCount, 1);
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
 
     const auto incrementCount = GetTestLoopCount();
@@ -67,39 +70,39 @@ void Network::BoostMainManagerUseThreadsTesting ::IncrementTest()
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
-    ASSERT_EQUAL(m_IntCount, 1 + incrementCount);
+    ASSERT_EQUAL(intCount, 1 + incrementCount);
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::SleepIncrementTest()
+void Network::BoostMainManagerUseThreadsTesting::SleepIncrementTest()
 {
     auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
-    m_IntCount = 0;
-    m_Int16Count = 0;
+    intCount = 0;
+    int16Count = 0;
 
-    boost::asio::post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(m_IntCount)));
-    boost::asio::post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(m_Int16Count)));
+    boost::asio::post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(intCount)));
+    boost::asio::post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(int16Count)));
 
     const auto endCount = GetTestLoopCount() + 1;
 
     mutex testMutex;
     unique_lock lock{ testMutex };
-    m_ConditionVariable.wait(lock);
+    conditionVariable.wait(lock);
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
-    ASSERT_EQUAL(m_IntCount, endCount);
-    ASSERT_EQUAL(m_Int16Count, endCount);
+    ASSERT_EQUAL(intCount, endCount);
+    ASSERT_EQUAL(int16Count, endCount);
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::Increment() noexcept
+void Network::BoostMainManagerUseThreadsTesting::Increment() noexcept
 {
-    ++m_IntCount;
+    ++intCount;
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::IntSleepIncrement(IOContextType& ioContext, atomic_int& count)
+void Network::BoostMainManagerUseThreadsTesting::IntSleepIncrement(IOContextType& ioContext, atomic_int& count)
 {
     const auto endCount = GetTestLoopCount() + 1;
 
@@ -108,13 +111,13 @@ void Network::BoostMainManagerUseThreadsTesting ::IntSleepIncrement(IOContextTyp
         boost::asio::post(ioContext, bind(&ClassType::IntSleepIncrement, this, boost::ref(ioContext), boost::ref(count)));
     }
 
-    if (endCount <= m_IntCount && endCount <= m_Int16Count)
+    if (endCount <= intCount && endCount <= int16Count)
     {
-        m_ConditionVariable.notify_one();
+        conditionVariable.notify_one();
     }
 }
 
-void Network::BoostMainManagerUseThreadsTesting ::Int16SleepIncrement(IOContextType& ioContext, std::atomic_int16_t& count)
+void Network::BoostMainManagerUseThreadsTesting::Int16SleepIncrement(IOContextType& ioContext, std::atomic_int16_t& count)
 {
     const auto endCount = GetTestLoopCount() + 1;
 
@@ -123,8 +126,8 @@ void Network::BoostMainManagerUseThreadsTesting ::Int16SleepIncrement(IOContextT
         boost::asio::post(ioContext, bind(&ClassType::Int16SleepIncrement, this, boost::ref(ioContext), boost::ref(count)));
     }
 
-    if (endCount <= m_IntCount && endCount <= m_Int16Count)
+    if (endCount <= intCount && endCount <= int16Count)
     {
-        m_ConditionVariable.notify_one();
+        conditionVariable.notify_one();
     }
 }

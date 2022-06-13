@@ -35,13 +35,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD uint64_t GetNumeratorMantissa() const;
-        NODISCARD uint64_t GetDenominatorMantissa() const;
-        NODISCARD NumericalValueSymbol GetSymbol() const;
-        NODISCARD int GetNumeratorShifting() const;
-        NODISCARD int GetDenominatorShifting() const;
-        NODISCARD int GetMaxShifting() const;
-        NODISCARD int GetReducibilityShifting() const;
+        NODISCARD uint64_t GetNumeratorMantissa() const noexcept;
+        NODISCARD uint64_t GetDenominatorMantissa() const noexcept;
+        NODISCARD NumericalValueSymbol GetSymbol() const noexcept;
+        NODISCARD int GetNumeratorShifting() const noexcept;
+        NODISCARD int GetDenominatorShifting() const noexcept;
+        NODISCARD int GetMaxShifting() const noexcept;
+        NODISCARD int GetReducibilityShifting() const noexcept;
 
         template <int N>
         NODISCARD bool IsCanConversion() const noexcept;

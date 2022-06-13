@@ -1,16 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 14:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 14:58)
 
 #include "NullObject.h"
-
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
 #include "CoreTools/Helper/StreamMacro.h"
-
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -22,34 +22,24 @@
 CORE_TOOLS_RTTI_DEFINE(CoreTools, NullObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, NullObject);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, NullObject);
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-CoreTools::NullObject ::NullObject()
+
+CoreTools::NullObject::NullObject(MAYBE_UNUSED DisableNotThrow disableNotThrow) noexcept
     : ParentType{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::NullObject ::NullObject(LoadConstructor value)
+CoreTools::NullObject::NullObject(LoadConstructor value)
     : ParentType{ value }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
+    DisableNoexcept();
 
-CoreTools::NullObject ::~NullObject()
-{
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, NullObject);
 
-int CoreTools::NullObject ::GetStreamingSize() const
+int CoreTools::NullObject::GetStreamingSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -62,43 +52,39 @@ int CoreTools::NullObject ::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::NullObject ::Register([[maybe_unused]]  ObjectRegister& target) const
+uint64_t CoreTools::NullObject::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    
-    {
-        return 0;
-        // target.RegisterRoot(ConstObjectInterfaceSmartPointer{ this });
-    }
-    
+    return target.RegisterRoot(shared_from_this());
 }
 
-void CoreTools::NullObject ::Save([[maybe_unused]] BufferTarget& target) const
+void CoreTools::NullObject::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-    //target.WriteString(GetRttiType().GetName());
-
-    
-
+    target.Write(GetRttiType().GetName());
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::NullObject ::Link([[maybe_unused]] ObjectLink& source)
+void CoreTools::NullObject::Link(MAYBE_UNUSED ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
+
+    DisableNoexcept();
 }
 
-void CoreTools::NullObject ::PostLink()
+void CoreTools::NullObject::PostLink()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
+
+    DisableNoexcept();
 }
 
-void CoreTools::NullObject ::Load([[maybe_unused]] BufferSource& source)
+void CoreTools::NullObject::Load(MAYBE_UNUSED BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -107,20 +93,13 @@ void CoreTools::NullObject ::Load([[maybe_unused]] BufferSource& source)
     // RTTI名已经在流中读取，以查找正确的对象加载函数。
 
     // 读取的对象的唯一标识符。这提供信息在链接阶段。
-   
-    {
-        //ObjectInterfaceSmartPointer smartPointer(this);
 
-        //source.ReadUniqueID(smartPointer);
-    }
-    
+    source.ReadUniqueID(*this);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::NullObject::CloneObject() const
 {
-    return nullptr;
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

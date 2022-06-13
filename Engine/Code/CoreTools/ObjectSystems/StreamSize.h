@@ -336,6 +336,32 @@ namespace CoreTools
         }
     };
 
+    template <>
+    struct StreamSize<std::vector<std::string>>
+    {
+        NODISCARD static int GetStreamSize(const std::vector<std::string>& value)
+        {
+            if (value.empty())
+            {
+                return g_DefaultSize;
+            }
+            else
+            {
+                auto size = g_DefaultSize;
+                for (const auto& single : value)
+                {
+                    size += StreamSize<std::string>::GetStreamSize(single);
+                }
+                return size;
+            }
+        }
+
+        NODISCARD static int GetStreamSize() noexcept
+        {
+            return g_DefaultSize;
+        }
+    };
+
     template <typename T>
     NODISCARD int GetStreamSize(T value = T{}) noexcept(noexcept(StreamSize<T>::GetStreamSize(value)))
     {

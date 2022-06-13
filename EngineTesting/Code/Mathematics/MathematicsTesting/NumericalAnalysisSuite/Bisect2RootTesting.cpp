@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/27 14:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/02 16:17)
 
 #include "Bisect2RootTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,65 +20,56 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect2RootTesting)
 
-void Mathematics::Bisect2RootTesting ::MainTest()
+void Mathematics::Bisect2RootTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(HaveSolutionTest);
     ASSERT_THROW_EXCEPTION_0(NoSolutionXTest);
     ASSERT_THROW_EXCEPTION_0(NoSolutionYTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnknownTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-void Mathematics::Bisect2RootTesting ::HaveSolutionTest()
-{
-    double rootX = 9.0;
-    double rootY = 19.0;
-    BisectRootType type = BisectRootType::HaveSolution;
 
-    Bisect2RootD bisect2Root(rootX, rootY, type);
+void Mathematics::Bisect2RootTesting::HaveSolutionTest()
+{
+    constexpr double rootX = 9.0;
+    constexpr double rootY = 19.0;
+    const BisectRootType type = BisectRootType::HaveSolution;
+
+    const Bisect2RootD bisect2Root(rootX, rootY, type);
 
     ASSERT_APPROXIMATE(bisect2Root.GetXRoot(), rootX, 1e-10);
     ASSERT_APPROXIMATE(bisect2Root.GetYRoot(), rootY, 1e-10);
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
 }
 
-void Mathematics::Bisect2RootTesting ::NoSolutionXTest()
+void Mathematics::Bisect2RootTesting::NoSolutionXTest()
 {
-    BisectRootType type = BisectRootType::NoSolution;
+    const BisectRootType type = BisectRootType::NoSolution;
 
-    Bisect2RootD bisect2Root;
+    const Bisect2RootD bisect2Root;
 
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
 
-    [[maybe_unused]] auto value = bisect2Root.GetXRoot();
+    MAYBE_UNUSED auto value = bisect2Root.GetXRoot();
 }
 
-void Mathematics::Bisect2RootTesting ::NoSolutionYTest()
+void Mathematics::Bisect2RootTesting::NoSolutionYTest()
 {
-    BisectRootType type = BisectRootType::NoSolution;
+    const BisectRootType type = BisectRootType::NoSolution;
 
-    Bisect2RootD bisect2Root;
+    const Bisect2RootD bisect2Root;
 
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
 
-    [[maybe_unused]] auto value = bisect2Root.GetYRoot();
+    MAYBE_UNUSED auto value = bisect2Root.GetYRoot();
 }
 
-void Mathematics::Bisect2RootTesting ::UnknownTest()
+void Mathematics::Bisect2RootTesting::UnknownTest()
 {
-    float rootX = 19.0f;
-    float rootY = 29.0f;
-    BisectRootType type = BisectRootType::Unknown;
+    constexpr float rootX = 19.0f;
+    constexpr float rootY = 29.0f;
+    const BisectRootType type = BisectRootType::Unknown;
 
-    Bisect2RootF bisect2Root(rootX, rootY, type);
+    const Bisect2RootF bisect2Root(rootX, rootY, type);
 
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
     ASSERT_APPROXIMATE(bisect2Root.GetXRoot(), rootX, 1e-8f);

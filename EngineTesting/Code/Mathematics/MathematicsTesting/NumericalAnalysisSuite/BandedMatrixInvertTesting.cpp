@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 14:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/01 16:28)
 
 #include "BandedMatrixInvertTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,40 +26,39 @@ namespace Mathematics
     template class BandedMatrixInvert<float>;
     template class BandedMatrixInvert<double>;
 }
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26496)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BandedMatrixInvertTesting)
 
-void Mathematics::BandedMatrixInvertTesting ::MainTest()
+void Mathematics::BandedMatrixInvertTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BandedTest);
 }
 
-void Mathematics::BandedMatrixInvertTesting ::BandedTest()
+void Mathematics::BandedMatrixInvertTesting::BandedTest()
 {
     default_random_engine generator;
-    uniform_real<double> floatRandomDistribution(-100.0, 100.0);
-    uniform_int<> integerRandomDistribution(4, 10);
+    const uniform_real<double> floatRandomDistribution(-100.0, 100.0);
+    const uniform_int<> integerRandomDistribution(4, 10);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        int size = integerRandomDistribution(generator);
+        const auto size = integerRandomDistribution(generator);
 
         BandedMatrixD firstMatrix(size, size - 1, size - 2);
 
         auto diagonalBand = firstMatrix.GetDiagonalBand();
-        for (int i = 0; i < firstMatrix.GetSize(); ++i)
+        for (auto i = 0; i < firstMatrix.GetSize(); ++i)
         {
             firstMatrix(i, i) = floatRandomDistribution(generator);
         }
 
-        for (int row = 0; row < firstMatrix.GetSize(); ++row)
+        for (auto row = 0; row < firstMatrix.GetSize(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetSize(); ++column)
+            for (auto column = 0; column < firstMatrix.GetSize(); ++column)
             {
-                int band = column - row;
+                const auto band = column - row;
                 if (band < 0 && -band - 1 < firstMatrix.GetLowerBandsNumber())
                 {
                     firstMatrix(row, column) = floatRandomDistribution(generator);
@@ -64,11 +66,11 @@ void Mathematics::BandedMatrixInvertTesting ::BandedTest()
             }
         }
 
-        for (int row = 0; row < firstMatrix.GetSize(); ++row)
+        for (auto row = 0; row < firstMatrix.GetSize(); ++row)
         {
-            for (int column = 0; column < firstMatrix.GetSize(); ++column)
+            for (auto column = 0; column < firstMatrix.GetSize(); ++column)
             {
-                int band = column - row;
+                const auto band = column - row;
                 if (0 < band && band - 1 < firstMatrix.GetUpperBandsNumber())
                 {
                     firstMatrix(row, column) = floatRandomDistribution(generator);
@@ -82,12 +84,12 @@ void Mathematics::BandedMatrixInvertTesting ::BandedTest()
         VariableMatrixD thirdMatrix = firstMatrix.ToVariableMatrix() * secondMatrix;
         VariableMatrixD fourthMatrix(size, size);
 
-        for (int row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
+        for (auto row = 0; row < fourthMatrix.GetRowsNumber(); ++row)
         {
             fourthMatrix(row, row) = 1.0;
         }
 
-        typedef bool (*VariableMatrixdApproximate)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
+        using VariableMatrixdApproximate = bool (*)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 

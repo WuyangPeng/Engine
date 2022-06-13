@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/22 13:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/31 13:47)
 
 #ifndef MATHEMATICS_OBJECTS2D_SUITE_POLYGON2_TESTING_H
 #define MATHEMATICS_OBJECTS2D_SUITE_POLYGON2_TESTING_H
@@ -11,17 +14,17 @@
 
 namespace Mathematics
 {
-	class Polygon2Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Polygon2Testing);
+    class Polygon2Testing : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Polygon2Testing);
 
-	private:
-		void MainTest();
-		void PolygonTest();
-	
-		void DoRunUnitTest() override;
-	};
+    private:
+        void MainTest();
+        void PolygonTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_OBJECTS2D_SUITE_POLYGON2_TESTING_H
+#endif  // MATHEMATICS_OBJECTS2D_SUITE_POLYGON2_TESTING_H

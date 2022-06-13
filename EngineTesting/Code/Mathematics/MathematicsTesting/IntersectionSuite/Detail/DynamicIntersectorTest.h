@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 15:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/06 10:26)
 
 #ifndef MATHEMATICS_INTERSECTION_SUITE_DYNAMIC_INTERSECTOR_TEST_H
 #define MATHEMATICS_INTERSECTION_SUITE_DYNAMIC_INTERSECTOR_TEST_H
@@ -11,8 +14,7 @@
 
 namespace Mathematics
 {
-    template <typename Real,
-              template <typename> class Vector>
+    template <typename Real, template <typename> class Vector>
     class DynamicIntersectorTest : public DynamicIntersector<Real, Vector>
     {
     public:
@@ -22,8 +24,12 @@ namespace Mathematics
         using Math = Math<Real>;
 
     public:
-        explicit DynamicIntersectorTest(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity,
-                                        IntersectionType intersectionType, Real contactTime, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        explicit DynamicIntersectorTest(Real tMax,
+                                        const VectorType& lhsVelocity,
+                                        const VectorType& rhsVelocity,
+                                        IntersectionType intersectionType,
+                                        Real contactTime,
+                                        const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

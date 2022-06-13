@@ -16,7 +16,7 @@ bool System::SetLibraryDirectory(const DynamicLinkCharType* pathName) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetDllDirectory(pathName) != g_False)
+    if (::SetDllDirectory(pathName) != gFalse)
         return true;
     else
         return false;

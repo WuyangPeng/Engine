@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 11:24)
 
 #include "BoostSockConnectorHandleTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,25 +16,21 @@
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
 using std::make_shared;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26429)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockConnectorHandleTesting)
 
-void Network::BoostSockConnectorHandleTesting ::MainTest()
+void Network::BoostSockConnectorHandleTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::ConnectorTest);
 }
 
-void Network::BoostSockConnectorHandleTesting ::ConnectorTest()
+void Network::BoostSockConnectorHandleTesting::ConnectorTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CopyConstructorTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyOperatorTest);
 }
 
-void Network::BoostSockConnectorHandleTesting ::CopyConstructorTest()
+void Network::BoostSockConnectorHandleTesting::CopyConstructorTest()
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
@@ -39,13 +38,13 @@ void Network::BoostSockConnectorHandleTesting ::CopyConstructorTest()
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
 
     TestingType sockConnector{ configurationStrategy };
-  //  TestingType copySockConnector{ sockConnector };
+    TestingType copySockConnector{ sockConnector };
 
     // 触发复制操作
- //   [[maybe_unused]] auto value = copySockConnector.Connect(sockStream, sockAddress);
+    MAYBE_UNUSED const auto value = copySockConnector.Connect(sockStream, sockAddress);
 }
 
-void Network::BoostSockConnectorHandleTesting ::CopyOperatorTest()
+void Network::BoostSockConnectorHandleTesting::CopyOperatorTest()
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
@@ -55,8 +54,8 @@ void Network::BoostSockConnectorHandleTesting ::CopyOperatorTest()
     TestingType sockConnector{ configurationStrategy };
     TestingType copySockConnector{ GetBoostClientConfigurationStrategy() };
 
-  //  copySockConnector = sockConnector;
+    copySockConnector = sockConnector;
 
     // 触发复制操作
-   // copySockConnector.Connect(sockStream, sockAddress);
+    MAYBE_UNUSED const auto value = copySockConnector.Connect(sockStream, sockAddress);
 }

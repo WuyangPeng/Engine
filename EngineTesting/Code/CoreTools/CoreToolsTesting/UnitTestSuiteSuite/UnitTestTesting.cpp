@@ -1,32 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 15:21)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 14:13)
 
 #include "UnitTestTesting.h"
 #include "Detail/TestEnum.h"
-
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 using std::ostream;
 using std::string;
 
-CoreTools::UnitTestTesting ::UnitTestTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_PassNumber{ 0 }, m_FailNumber{ 0 }, m_ErrorNumber{ 0 }
+CoreTools::UnitTestTesting::UnitTestTesting(const OStreamShared& stream)
+    : ParentType{ stream }, passNumber{ 0 }, failNumber{ 0 }, errorNumber{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::UnitTestTesting ::IsValid() const noexcept
+
+bool CoreTools::UnitTestTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 <= m_PassNumber && 0 <= m_FailNumber && 0 <= m_ErrorNumber)
+    if (ParentType::IsValid() && 0 <= passNumber && 0 <= failNumber && 0 <= errorNumber)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::UnitTestTesting::DoRunUnitTest()
@@ -34,7 +38,7 @@ void CoreTools::UnitTestTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::UnitTestTesting ::MainTest()
+void CoreTools::UnitTestTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NameTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
@@ -47,25 +51,25 @@ void CoreTools::UnitTestTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(TestResultTest);
 }
 
-void CoreTools::UnitTestTesting ::NameTest()
+void CoreTools::UnitTestTesting::NameTest()
 {
     ASSERT_EQUAL(GetName(), typeid(*this).name());
 
     // NameTest包含一个ASSERT_EQUAL成功测试和一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 2;
+    passNumber += 2;
 }
 
-void CoreTools::UnitTestTesting ::StreamTest() noexcept
+void CoreTools::UnitTestTesting::StreamTest() noexcept
 {
     // StreamTest包含0个ASSERT成功测试和一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 1;
+    passNumber += 1;
 }
 
-void CoreTools::UnitTestTesting ::AssertTestTest()
+void CoreTools::UnitTestTesting::AssertTestTest()
 {
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     GetStream() << "以下代码测试单元测试未通过的情况。存在一个测试失败！\n";
 
@@ -75,22 +79,22 @@ void CoreTools::UnitTestTesting ::AssertTestTest()
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
     // 上面有5个测试。其中4个为成功测试，1个为失败测试。
-    m_PassNumber += 4;
-    m_FailNumber += 1;
+    passNumber += 4;
+    failNumber += 1;
 
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 4;
+    passNumber += 4;
 }
 
-void CoreTools::UnitTestTesting ::ErrorTestTest()
+void CoreTools::UnitTestTesting::ErrorTestTest()
 {
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     GetStream() << "以下代码测试单元测试未通过的情况。存在一个测试错误！\n";
 
@@ -100,22 +104,22 @@ void CoreTools::UnitTestTesting ::ErrorTestTest()
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
     // 上面有5个测试。其中4个为成功测试，1个为错误测试。
-    m_PassNumber += 4;
-    m_ErrorNumber += 1;
+    passNumber += 4;
+    errorNumber += 1;
 
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 4;
+    passNumber += 4;
 }
 
-void CoreTools::UnitTestTesting ::AssertEqualTest()
+void CoreTools::UnitTestTesting::AssertEqualTest()
 {
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     GetStream() << "以下代码测试单元测试未通过的情况。存在十五个测试失败！\n";
 
@@ -168,22 +172,22 @@ void CoreTools::UnitTestTesting ::AssertEqualTest()
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
     // 上面有40个测试。其中25个为成功测试，15个为失败测试。
-    m_PassNumber += 25;
-    m_FailNumber += 15;
+    passNumber += 25;
+    failNumber += 15;
 
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 4;
+    passNumber += 4;
 }
 
-void CoreTools::UnitTestTesting ::AssertCompareTest()
+void CoreTools::UnitTestTesting::AssertCompareTest()
 {
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     GetStream() << "以下代码测试单元测试未通过的情况。存在十个测试失败！\n";
 
@@ -217,22 +221,22 @@ void CoreTools::UnitTestTesting ::AssertCompareTest()
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
     // 上面有27个测试。其中17个为成功测试，10个为失败测试。
-    m_PassNumber += 17;
-    m_FailNumber += 10;
+    passNumber += 17;
+    failNumber += 10;
 
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 4;
+    passNumber += 4;
 }
 
-void CoreTools::UnitTestTesting ::AssertNotThrowTest()
+void CoreTools::UnitTestTesting::AssertNotThrowTest()
 {
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     GetStream() << "以下代码测试单元测试未通过的情况。存在三个测试错误！\n";
 
@@ -246,22 +250,22 @@ void CoreTools::UnitTestTesting ::AssertNotThrowTest()
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
     // 上面有9个测试。其中6个为成功测试，3个为错误测试。
-    m_PassNumber += 6;
-    m_ErrorNumber += 3;
+    passNumber += 6;
+    errorNumber += 3;
 
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 4;
+    passNumber += 4;
 }
 
-void CoreTools::UnitTestTesting ::AssertThrowTest()
+void CoreTools::UnitTestTesting::AssertThrowTest()
 {
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     GetStream() << "以下代码测试单元测试未通过的情况。存在三个测试错误！\n";
 
@@ -275,58 +279,58 @@ void CoreTools::UnitTestTesting ::AssertThrowTest()
     GetStream() << "以上代码测试单元测试未通过的情况。\n";
 
     // 上面有9个测试。其中6个为成功测试，3个为错误测试。
-    m_PassNumber += 6;
-    m_ErrorNumber += 3;
+    passNumber += 6;
+    errorNumber += 3;
 
-    ASSERT_EQUAL(GetPassedNumber(), m_PassNumber);
-    ASSERT_EQUAL(GetFailedNumber(), m_FailNumber);
-    ASSERT_EQUAL(GetErrorNumber(), m_ErrorNumber);
+    ASSERT_EQUAL(GetPassedNumber(), passNumber);
+    ASSERT_EQUAL(GetFailedNumber(), failNumber);
+    ASSERT_EQUAL(GetErrorNumber(), errorNumber);
 
     // 上面有3个ASSERT_EQUAL成功测试，加上一个ASSERT_NOT_THROW成功测试。
-    m_PassNumber += 4;
+    passNumber += 4;
 }
 
-void CoreTools::UnitTestTesting ::TestResultTest()
+void CoreTools::UnitTestTesting::TestResultTest()
 {
-    const auto passNumber = GetPassedNumber();
-    const auto failedNumber = GetFailedNumber();
-    const auto errorNumber = GetErrorNumber();
+    const auto aPassNumber = GetPassedNumber();
+    const auto aFailedNumber = GetFailedNumber();
+    const auto aErrorNumber = GetErrorNumber();
 
     ResetTestData();
 
-    ASSERT_EQUAL(passNumber, m_PassNumber);
-    ASSERT_EQUAL(failedNumber, m_FailNumber);
-    ASSERT_EQUAL(errorNumber, m_ErrorNumber);
+    ASSERT_EQUAL(aPassNumber, passNumber);
+    ASSERT_EQUAL(aFailedNumber, failNumber);
+    ASSERT_EQUAL(aErrorNumber, errorNumber);
 }
 
-void CoreTools::UnitTestTesting ::NotThrowException() noexcept
+void CoreTools::UnitTestTesting::NotThrowException() noexcept
 {
 }
 
-void CoreTools::UnitTestTesting ::NotThrowExceptionWithParameter([[maybe_unused]] int parameter) noexcept
+void CoreTools::UnitTestTesting::NotThrowExceptionWithParameter([[maybe_unused]] int parameter) noexcept
 {
 }
 
-void CoreTools::UnitTestTesting ::NotThrowExceptionWithTwoParameter([[maybe_unused]] int parameter1, [[maybe_unused]] float parameter2) noexcept
+void CoreTools::UnitTestTesting::NotThrowExceptionWithTwoParameter([[maybe_unused]] int parameter1, [[maybe_unused]] float parameter2) noexcept
 {
 }
 
-void CoreTools::UnitTestTesting ::ThrowException()
-{
-    THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
-}
-
-void CoreTools::UnitTestTesting ::ThrowExceptionWithParameter([[maybe_unused]] int parameter)
+void CoreTools::UnitTestTesting::ThrowException()
 {
     THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
 }
 
-void CoreTools::UnitTestTesting ::ThrowExceptionWithTwoParameter([[maybe_unused]] int parameter1, [[maybe_unused]] float parameter2)
+void CoreTools::UnitTestTesting::ThrowExceptionWithParameter([[maybe_unused]] int parameter)
 {
     THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
 }
 
-bool CoreTools ::Approximate(double lhs, double rhs, double epsilon) noexcept
+void CoreTools::UnitTestTesting::ThrowExceptionWithTwoParameter([[maybe_unused]] int parameter1, [[maybe_unused]] float parameter2)
+{
+    THROW_EXCEPTION(SYSTEM_TEXT("这里测试抛出异常。如果触发断言，请按“否”取消。"));
+}
+
+bool CoreTools::Approximate(double lhs, double rhs, double epsilon) noexcept
 {
     return abs(lhs - rhs) <= epsilon;
 }

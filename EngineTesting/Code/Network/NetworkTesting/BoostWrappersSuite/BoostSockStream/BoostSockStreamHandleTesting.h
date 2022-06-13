@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 16:23)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_STREAM_HANDLE_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_STREAM_HANDLE_TESTING_H
@@ -11,39 +14,41 @@
 
 namespace Network
 {
-	class BoostSockStreamHandleTesting : public BoostSockStreamTesting
-	{
-	public:
-            using ClassType = BoostSockStreamHandleTesting;
-            using ParentType = BoostSockStreamTesting;
+    class BoostSockStreamHandleTesting : public BoostSockStreamTesting
+    {
+    public:
+        using ClassType = BoostSockStreamHandleTesting;
+        using ParentType = BoostSockStreamTesting;
 
-        public:
-            explicit BoostSockStreamHandleTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit BoostSockStreamHandleTesting(const OStreamShared& stream);
 
-	private:
-		void DoRunUnitTest() override;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void MainTest() noexcept;
+        using TestFunction = void (ClassType::*)();
 
-		void StreamTest();
+    private:
+        void DoRunUnitTest() override;
 
-		void StreamInformationTest();
+        void MainTest() noexcept;
 
-		void ClientTest();
-		void ServerTest();
+        void StreamTest();
 
-		void ClientConnect1(const TestingTypeSharedPtr& sockStream);
-		void ServerAcceptor(const TestingTypeSharedPtr& sockStream);
+        void StreamInformationTest();
 
-		void ACESockStreamExceptionTest();
-		void NetworkSockStreamExceptionTest();
+        void ClientTest();
+        void ServerTest();
 
-		void ACEHandleExceptionTest();
-		void SetACEHandleExceptionTest();
-		void SetNetworkHandleExceptionTest();
-	};
+        void ClientConnect1(const TestingTypeSharedPtr& sockStream);
+        void ServerAcceptor(const TestingTypeSharedPtr& sockStream);
+
+        void ACESockStreamExceptionTest();
+        void NetworkSockStreamExceptionTest();
+
+        void ACEHandleExceptionTest();
+        void SetACEHandleExceptionTest();
+        void SetNetworkHandleExceptionTest();
+    };
 }
 
-#endif // NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_STREAM_HANDLE_TESTING_H
+#endif  // NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_STREAM_HANDLE_TESTING_H

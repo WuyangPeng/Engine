@@ -21,7 +21,7 @@ bool System::AdjustSystemWindowRect(WindowsRect* rect, WindowsStyles styles) noe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AdjustWindowRect(rect, EnumCastUnderlying(styles), g_False) != g_False)
+    if (::AdjustWindowRect(rect, EnumCastUnderlying(styles), gFalse) != gFalse)
         return true;
     else
         return false;
@@ -153,7 +153,7 @@ System::WindowsHMenu System::GetWindowSystemMenu(WindowsHWnd hwnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::GetSystemMenu(hwnd, g_False);
+    return ::GetSystemMenu(hwnd, gFalse);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -168,7 +168,7 @@ bool System::RemoveSystemMenu(WindowsHMenu menu, SystemMenuCommand position, Men
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::RemoveMenu(menu, EnumCastUnderlying(position), EnumCastUnderlying(flags)) != g_False)
+    if (::RemoveMenu(menu, EnumCastUnderlying(position), EnumCastUnderlying(flags)) != gFalse)
         return true;
     else
         return false;

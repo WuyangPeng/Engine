@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 10:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 15:36)
 
 #include "ConfigurationStrategyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,14 +16,14 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, ConfigurationStrategy)
 
-void Network::ConfigurationStrategyTesting ::MainTest()
+void Network::ConfigurationStrategyTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DefaultTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ServerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ClientTest);
 }
 
-void Network::ConfigurationStrategyTesting ::DefaultTest()
+void Network::ConfigurationStrategyTesting::DefaultTest()
 {
     ConfigurationStrategy configurationStrategy = ConfigurationStrategy::Create();
 
@@ -46,7 +49,7 @@ void Network::ConfigurationStrategyTesting ::DefaultTest()
     ASSERT_FALSE(configurationParameter.IsParameterExist(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1")));
 }
 
-void Network::ConfigurationStrategyTesting ::ServerTest()
+void Network::ConfigurationStrategyTesting::ServerTest()
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
     subStrategy.Insert(WrappersSubStrategy::MultiContext, 2);
@@ -56,9 +59,18 @@ void Network::ConfigurationStrategyTesting ::ServerTest()
     configurationParameter.AddParameter(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1"));
     configurationParameter.AddParameter(SYSTEM_TEXT("BufferSize"), SYSTEM_TEXT("1000"));
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::UDP, ServerStrategy::Iterative,
-                                                 MessageStrategy::Iovec, ParserStrategy::BigEndian, OpenSSLStrategy::OpenSSL, EncryptedCompressionStrategy::Default,
-                                                 subStrategy, configurationParameter, SocketSendMessage::Immediately, "172.0.1.1", 8010 };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
+                                                 ConnectStrategy::UDP,
+                                                 ServerStrategy::Iterative,
+                                                 MessageStrategy::Iovec,
+                                                 ParserStrategy::BigEndian,
+                                                 OpenSSLStrategy::OpenSSL,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 subStrategy,
+                                                 configurationParameter,
+                                                 SocketSendMessage::Immediately,
+                                                 "172.0.1.1",
+                                                 8010 };
 
     ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::ACE);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetPatternStrategy(), ServerStrategy::Iterative);
@@ -88,7 +100,7 @@ void Network::ConfigurationStrategyTesting ::ServerTest()
     ASSERT_EQUAL(configurationStrategy.GetBufferSize(), 1000);
 }
 
-void Network::ConfigurationStrategyTesting ::ClientTest()
+void Network::ConfigurationStrategyTesting::ClientTest()
 {
     ConfigurationSubStrategy subStrategy = ConfigurationSubStrategy::Create();
     subStrategy.Insert(WrappersSubStrategy::MultiContext, 2);
@@ -97,9 +109,18 @@ void Network::ConfigurationStrategyTesting ::ClientTest()
     ConfigurationParameter configurationParameter = ConfigurationParameter::Create();
     configurationParameter.AddParameter(SYSTEM_TEXT("ServerID"), SYSTEM_TEXT("1"));
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::UDP, ClientStrategy::Cache,
-                                                 MessageStrategy::Iovec, ParserStrategy::BigEndian, OpenSSLStrategy::OpenSSL, EncryptedCompressionStrategy::Default,
-                                                 subStrategy, configurationParameter, SocketSendMessage::Cache, "172.0.1.1", 8010 };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
+                                                 ConnectStrategy::UDP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Iovec,
+                                                 ParserStrategy::BigEndian,
+                                                 OpenSSLStrategy::OpenSSL,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 subStrategy,
+                                                 configurationParameter,
+                                                 SocketSendMessage::Cache,
+                                                 "172.0.1.1",
+                                                 8010 };
 
     ASSERT_ENUM_EQUAL(configurationStrategy.GetWrappersStrategy(), WrappersStrategy::ACE);
     ASSERT_ENUM_EQUAL(configurationStrategy.GetPatternStrategy(), ServerStrategy::Disable);

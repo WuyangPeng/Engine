@@ -40,7 +40,7 @@ bool System::SetStandardHandle(StandardHandle standardhandle, WindowsHandle hand
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetStdHandle(EnumCastUnderlying(standardhandle), handle) != g_False)
+    if (::SetStdHandle(EnumCastUnderlying(standardhandle), handle) != gFalse)
         return true;
     else
         return false;
@@ -58,7 +58,7 @@ bool System::SetStandardHandle(StandardHandle standardhandle, WindowsHandle hand
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetStdHandleEx(EnumCastUnderlying(standardhandle), handle, previousHandle) != g_False)
+    if (::SetStdHandleEx(EnumCastUnderlying(standardhandle), handle, previousHandle) != gFalse)
         return true;
     else
         return false;

@@ -14,7 +14,7 @@
 
 namespace ResourceManager
 {
-    class RESOURCE_MANAGER_HIDDEN_DECLARE ResourceManagerNonCopyMacroImpl final
+    class ResourceManagerNonCopyMacroImpl final
     {
     public:
         using ClassType = ResourceManagerNonCopyMacroImpl;

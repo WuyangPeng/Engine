@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 14:00)
 
 #include "BoostSockInetAddressTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,17 +18,13 @@ using std::make_shared;
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockInetAddressTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26429)
-void Network::BoostSockInetAddressTesting ::MainTest()
+
+void Network::BoostSockInetAddressTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AddressTest);
 }
 
-void Network::BoostSockInetAddressTesting ::AddressTest()
+void Network::BoostSockInetAddressTesting::AddressTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(Address1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(Address2Test);
@@ -34,7 +33,7 @@ void Network::BoostSockInetAddressTesting ::AddressTest()
     ASSERT_THROW_EXCEPTION_0(WinSocketAddressExceptionTest);
 }
 
-void Network::BoostSockInetAddressTesting ::Address1Test()
+void Network::BoostSockInetAddressTesting::Address1Test()
 {
     auto hostName = GetHostName();
     auto port = GetPort();
@@ -49,7 +48,7 @@ void Network::BoostSockInetAddressTesting ::Address1Test()
     ASSERT_NOT_THROW_EXCEPTION_1(CopyOperatorTest, sockAddress);
 }
 
-void Network::BoostSockInetAddressTesting ::Address2Test()
+void Network::BoostSockInetAddressTesting::Address2Test()
 {
     auto port = GetPort();
 
@@ -64,7 +63,7 @@ void Network::BoostSockInetAddressTesting ::Address2Test()
     ASSERT_NOT_THROW_EXCEPTION_1(CopyOperatorTest, sockAddress);
 }
 
-void Network::BoostSockInetAddressTesting ::Address3Test()
+void Network::BoostSockInetAddressTesting::Address3Test()
 {
     TestingTypeSharedPtr sockAddress{ make_shared<TestingType>(GetBoostServerConfigurationStrategy()) };
 
@@ -77,7 +76,11 @@ void Network::BoostSockInetAddressTesting ::Address3Test()
     ASSERT_NOT_THROW_EXCEPTION_1(CopyOperatorTest, sockAddress);
 }
 
-void Network::BoostSockInetAddressTesting ::CopyConstructorTest(const SockAddressSharedPtr& sockAddress)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Network::BoostSockInetAddressTesting::CopyConstructorTest(const SockAddressSharedPtr& sockAddress)
 {
     const auto& boostInetAddress = sockAddress->GetBoostInetAddress();
 
@@ -89,7 +92,7 @@ void Network::BoostSockInetAddressTesting ::CopyConstructorTest(const SockAddres
     ASSERT_EQUAL(copyBoostInetAddress.address().to_string(), boostInetAddress.address().to_string());
 }
 
-void Network::BoostSockInetAddressTesting ::CopyOperatorTest(const SockAddressSharedPtr& sockAddress)
+void Network::BoostSockInetAddressTesting::CopyOperatorTest(const SockAddressSharedPtr& sockAddress)
 {
     const auto& boostInetAddress = sockAddress->GetBoostInetAddress();
 
@@ -102,16 +105,18 @@ void Network::BoostSockInetAddressTesting ::CopyOperatorTest(const SockAddressSh
     ASSERT_EQUAL(copyBoostInetAddress.address().to_string(), boostInetAddress.address().to_string());
 }
 
-void Network::BoostSockInetAddressTesting ::ACEAddressExceptionTest()
+#include STSTEM_WARNING_POP
+
+void Network::BoostSockInetAddressTesting::ACEAddressExceptionTest()
 {
     TestingType sockAddress{ GetHostName(), GetPort(), GetBoostServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress.GetACEInetAddress();
+    MAYBE_UNUSED auto value = sockAddress.GetACEInetAddress();
 }
 
-void Network::BoostSockInetAddressTesting ::WinSocketAddressExceptionTest()
+void Network::BoostSockInetAddressTesting::WinSocketAddressExceptionTest()
 {
     TestingType sockAddress{ GetHostName(), GetPort(), GetBoostServerConfigurationStrategy() };
 
-    [[maybe_unused]] const auto& value = sockAddress.GetWinSockInetAddress();
+    MAYBE_UNUSED const auto& value = sockAddress.GetWinSockInetAddress();
 }

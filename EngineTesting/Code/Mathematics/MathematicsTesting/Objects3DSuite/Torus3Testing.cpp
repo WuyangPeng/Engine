@@ -1,86 +1,81 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 18:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/31 11:38)
 
 #include "Torus3Testing.h"
-#include "Mathematics/Objects3D/Torus3Detail.h"
-#include "Mathematics/Algebra/Vector3Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
+#include "Mathematics/Objects3D/Torus3Detail.h"
 
-#include <random> 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-using std::uniform_real;
+#include <random>
+
 using std::default_random_engine;
+using std::uniform_real;
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
 namespace Mathematics
 {
-	template class Torus3<float>;
-	template class Torus3<double>;
+    template class Torus3<float>;
+    template class Torus3<double>;
 }
 
-#endif // BUILDING_MATHEMATICS_STATIC
+#endif  // BUILDING_MATHEMATICS_STATIC
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Torus3Testing) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Torus3Testing)
 
-void Mathematics::Torus3Testing
-	::MainTest()
+void Mathematics::Torus3Testing::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(TorusTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TorusTest);
 }
 
-void Mathematics::Torus3Testing
-	::TorusTest()
+void Mathematics::Torus3Testing::TorusTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> firstRandomDistribution(0.1, 100.0);
-	uniform_real<double> secondRandomDistribution(0.0, 1.0);
+    const uniform_real<double> firstRandomDistribution(0.1, 100.0);
+    const uniform_real<double> secondRandomDistribution(0.0, 1.0);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		double innerRadius = firstRandomDistribution(generator);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        auto innerRadius = firstRandomDistribution(generator);
 
-		uniform_real<double> thirdRandomDistribution(innerRadius,105.0);
+        const uniform_real<double> thirdRandomDistribution(innerRadius, 105.0);
 
-		double outerRadius = thirdRandomDistribution(generator);
+        auto outerRadius = thirdRandomDistribution(generator);
 
-		Torus3D torus(outerRadius,innerRadius);
+        const Torus3D torus(outerRadius, innerRadius);
 
-		ASSERT_APPROXIMATE(outerRadius,torus.GetOuterRadius(),1e-10);
-		ASSERT_APPROXIMATE(innerRadius,torus.GetInnerRadius(),1e-10);
+        ASSERT_APPROXIMATE(outerRadius, torus.GetOuterRadius(), 1e-10);
+        ASSERT_APPROXIMATE(innerRadius, torus.GetInnerRadius(), 1e-10);
 
-		double t = secondRandomDistribution(generator);
-		double s = secondRandomDistribution(generator);
-	
-		double radius = torus.GetOuterRadius() + torus.GetInnerRadius() * cos(MathD::GetTwoPI() * t);
+        auto t = secondRandomDistribution(generator);
+        auto s = secondRandomDistribution(generator);
 
-		double x = radius * cos(MathD::GetTwoPI() * s);
-		double y = radius * sin(MathD::GetTwoPI() * s);
-		double z = torus.GetInnerRadius() * sin(MathD::GetTwoPI() * t);
+        auto radius = torus.GetOuterRadius() + torus.GetInnerRadius() * cos(MathD::GetTwoPI() * t);
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3D(x,y,z),torus.GetPosition(s,t)));
+        auto x = radius * cos(MathD::GetTwoPI() * s);
+        auto y = radius * sin(MathD::GetTwoPI() * s);
+        auto z = torus.GetInnerRadius() * sin(MathD::GetTwoPI() * t);
 
-		Vector3D normal(x - torus.GetOuterRadius() * cos(MathD::GetTwoPI() * s),y - torus.GetOuterRadius() * sin(MathD::GetTwoPI() * s),z);
-		normal.Normalize();
+        ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3D(x, y, z), torus.GetPosition(s, t)));
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(normal,torus.GetNormal(s,t)));
+        Vector3D normal(x - torus.GetOuterRadius() * cos(MathD::GetTwoPI() * s), y - torus.GetOuterRadius() * sin(MathD::GetTwoPI() * s), z);
+        normal.Normalize();
 
-		Torus3D::Torus3Parameters parameters = torus.GetParameters(Vector3D(x,y,z));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(normal, torus.GetNormal(s, t)));
 
-		ASSERT_APPROXIMATE(parameters.GetS(),s,1e-10);
-		ASSERT_APPROXIMATE(parameters.GetT(),t,1e-10);
-	}
+        const auto parameters = torus.GetParameters(Vector3D(x, y, z));
+
+        ASSERT_APPROXIMATE(parameters.GetS(), s, 1e-10);
+        ASSERT_APPROXIMATE(parameters.GetT(), t, 1e-10);
+    }
 }
-

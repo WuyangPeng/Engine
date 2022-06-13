@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/05/06 20:14)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 18:46)
 
 #include "InitOnceAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -70,7 +70,7 @@ void System::InitOnceAsynchronousTesting::BeginInitializeTest(InitOncePtr initOn
 
 System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(InitOncePtr initOnce)
 {
-    WindowsBool pending{ g_False };
+    WindowsBool pending{ gFalse };
     WindowsVoidPtr context{ nullptr };
     auto result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::Async, &pending, &context);
 
@@ -79,7 +79,7 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(
         return g_InvalidHandleValue;
     }
 
-    if (pending == g_False)
+    if (pending == gFalse)
     {
         return context;
     }
@@ -102,7 +102,7 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(
 
     result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::CheckOnly, &pending, &context);
 
-    if (result && pending == g_False)
+    if (result && pending == gFalse)
     {
         return context;
     }

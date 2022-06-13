@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 12:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 15:26)
 
 #include "DistanceRay2Ray2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -24,7 +27,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceRay2Ray2Testing)
 
-void Mathematics::DistanceRay2Ray2Testing ::MainTest()
+void Mathematics::DistanceRay2Ray2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StaticTest);
@@ -32,21 +35,21 @@ void Mathematics::DistanceRay2Ray2Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DerivativeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IntervalTest);
 }
-#include SYSTEM_WARNING_DISABLE(26496)
-void Mathematics::DistanceRay2Ray2Testing ::BaseTest()
+
+void Mathematics::DistanceRay2Ray2Testing::BaseTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2F lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2F lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2F lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2F rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
@@ -73,20 +76,20 @@ void Mathematics::DistanceRay2Ray2Testing ::BaseTest()
     }
 }
 
-void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
+void Mathematics::DistanceRay2Ray2Testing::StaticTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
@@ -103,8 +106,7 @@ void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
         Vector2 rhsDifference = lineSquaredResult.GetRhsClosestPoint() - rhsOrigin;
         rhsDifference.Normalize();
 
-        if (Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
-            Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
+        if (Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) && Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
             // 最小值为两个射线内部点。
             Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
@@ -123,13 +125,12 @@ void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
             ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
             ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
         }
-        else if (Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
-                 Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
+        else if (Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) && Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
-            Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            const Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             ASSERT_TRUE(rhsDifference2.IsZero());
 
-            Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            const Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             if (lhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
@@ -163,10 +164,10 @@ void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
         else if (Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-8) &&
                  Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            const Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             ASSERT_TRUE(lhsDifference2.IsZero());
 
-            Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            const Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             if (rhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
@@ -213,13 +214,13 @@ void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
             ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - lhsOrigin) + 1e-8);
             ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - rhsOrigin) + 1e-8);
 
-            Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            const Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             if (!lhsDifference2.IsZero())
             {
                 ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - rhsOrigin));
                 ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - rhsOrigin));
             }
-            Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            const Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             if (!rhsDifference2.IsZero())
             {
                 ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - lhsOrigin));
@@ -304,7 +305,7 @@ void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
         result = secondParallelDistance.Get();
         lhsDistanceSquared = Vector2ToolsD::GetLengthSquared(lhsOrigin - squaredResult.GetRhsClosestPoint());
         rhsDistanceSquared = Vector2ToolsD::GetLengthSquared(rhsOrigin - squaredResult.GetLhsClosestPoint());
-        double originDistanceSquared = Vector2ToolsD::GetLengthSquared(rhsOrigin - lhsOrigin);
+        const double originDistanceSquared = Vector2ToolsD::GetLengthSquared(rhsOrigin - lhsOrigin);
 
         if (originDistanceSquared <= rhsDistanceSquared && originDistanceSquared <= lhsDistanceSquared)
         {
@@ -338,26 +339,26 @@ void Mathematics::DistanceRay2Ray2Testing ::StaticTest()
     }
 }
 
-void Mathematics::DistanceRay2Ray2Testing ::DynamicTest()
+void Mathematics::DistanceRay2Ray2Testing::DynamicTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
         DistanceRay2Ray2D distance(Ray2D(lhsOrigin, lhsDirection), Ray2D(rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -397,10 +398,10 @@ void Mathematics::DistanceRay2Ray2Testing ::DynamicTest()
         else if (Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
                  Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
-            Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            const Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             ASSERT_TRUE(rhsDifference2.IsZero());
 
-            Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            const Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             if (lhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
@@ -434,10 +435,10 @@ void Mathematics::DistanceRay2Ray2Testing ::DynamicTest()
         else if (Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-8) &&
                  Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            const Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             ASSERT_TRUE(lhsDifference2.IsZero());
 
-            Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            const Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             if (rhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
@@ -484,13 +485,13 @@ void Mathematics::DistanceRay2Ray2Testing ::DynamicTest()
             ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)) + 1e-8);
             ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)) + 1e-8);
 
-            Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            const Vector2 lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             if (!lhsDifference2.IsZero())
             {
                 ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
                 ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
             }
-            Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            const Vector2 rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             if (!rhsDifference2.IsZero())
             {
                 ASSERT_TRUE(squaredResult.GetDistance() <= Vector2ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
@@ -503,26 +504,26 @@ void Mathematics::DistanceRay2Ray2Testing ::DynamicTest()
     }
 }
 
-void Mathematics::DistanceRay2Ray2Testing ::DerivativeTest()
+void Mathematics::DistanceRay2Ray2Testing::DerivativeTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
         DistanceRay2Ray2D distance(Ray2D(lhsOrigin, lhsDirection), Ray2D(rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -530,34 +531,33 @@ void Mathematics::DistanceRay2Ray2Testing ::DerivativeTest()
 
         DistanceResult2D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         DistanceResult2D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        double derivativeApproximation =
-            0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
+        const double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
-        double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
+        const double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(derivativeResult, derivativeApproximation, 1e-10);
 
-        double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
+        const double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
         DistanceResult2D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
 
-void Mathematics::DistanceRay2Ray2Testing ::IntervalTest()
+void Mathematics::DistanceRay2Ray2Testing::IntervalTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 

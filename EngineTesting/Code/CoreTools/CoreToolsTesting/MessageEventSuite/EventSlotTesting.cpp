@@ -1,15 +1,17 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 19:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 17:03)
 
 #include "EventSlotTesting.h"
 #include "Flags/EventPriorityFlags.h"
 #include "Detail/EventSubclass.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventSlotDetail.h"
 
@@ -22,14 +24,14 @@ namespace CoreTools
     using TestingType = EventSlot<EventSubclass, EventPriority>;
 }
 
-void CoreTools::EventSlotTesting ::MainTest()
+void CoreTools::EventSlotTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SlotTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OperatorTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UInt64PriorityTest);
 }
 
-void CoreTools::EventSlotTesting ::SlotTest()
+void CoreTools::EventSlotTesting::SlotTest()
 {
     constexpr auto value = 5;
 
@@ -56,7 +58,7 @@ void CoreTools::EventSlotTesting ::SlotTest()
     ASSERT_EQUAL_NULL_PTR(eventSubclass);
 }
 
-void CoreTools::EventSlotTesting ::OperatorTest()
+void CoreTools::EventSlotTesting::OperatorTest()
 {
     constexpr auto value = 5;
 
@@ -74,7 +76,7 @@ void CoreTools::EventSlotTesting ::OperatorTest()
     ASSERT_LESS(secondEventSlot, firstEventSlot);
 }
 
-void CoreTools::EventSlotTesting ::UInt64PriorityTest()
+void CoreTools::EventSlotTesting::UInt64PriorityTest()
 {
     using UInt64TestingType = EventSlot<EventSubclass, uint64_t>;
 

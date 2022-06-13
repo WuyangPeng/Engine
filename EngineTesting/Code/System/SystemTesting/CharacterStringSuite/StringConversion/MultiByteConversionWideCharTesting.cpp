@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/05 11:55)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:33)
 
 #include "MultiByteConversionWideCharTesting.h"
 #include "System/CharacterString/CodePage.h"
@@ -79,7 +79,7 @@ void System::MultiByteConversionWideCharTesting::MultiByteToWideCharUseFlagTest(
     array<wchar_t, bufferSize> wideChar{};
 
     const auto wideCharResultLength = MultiByteConversionWideChar(codePage, multiByte, multiByteInitial.c_str(), boost::numeric_cast<int>(multiByteInitial.size() + 1), wideChar.data(), wideCharLength);
-     
+
     wstring wideCharResult{ wideChar.data() };
     ASSERT_EQUAL(wideCharResultLength, boost::numeric_cast<int>(wideCharResult.size() + 1));
 

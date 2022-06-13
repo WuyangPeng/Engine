@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 14:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/23 18:32)
 
 #include "MessageTypeConditionTesting.h"
 #include "ThreadingCoreRenderEngineTesting/Version.h"
@@ -15,7 +18,7 @@ using std::set;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageTypeCondition)
 
-void Network::MessageTypeConditionTesting ::MainTest()
+void Network::MessageTypeConditionTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RangeTest);
@@ -23,7 +26,7 @@ void Network::MessageTypeConditionTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AllTest);
 }
 
-void Network::MessageTypeConditionTesting ::CompareTest()
+void Network::MessageTypeConditionTesting::CompareTest()
 {
     constexpr auto version = g_TCRETestingVersion - 2;
     TestingType messageTypeCondition1{ VersionsCondition::Greater, version };
@@ -72,7 +75,7 @@ void Network::MessageTypeConditionTesting ::CompareTest()
     ASSERT_TRUE(messageTypeCondition2 < messageTypeCondition1);
 }
 
-void Network::MessageTypeConditionTesting ::RangeTest()
+void Network::MessageTypeConditionTesting::RangeTest()
 {
     constexpr auto version = g_TCRETestingVersion - 2;
     TestingType messageTypeCondition{ version - 1, version + 1 };
@@ -87,7 +90,7 @@ void Network::MessageTypeConditionTesting ::RangeTest()
     ASSERT_EQUAL(messageTypeCondition.GetMaxVersion(), version + 1);
 }
 
-void Network::MessageTypeConditionTesting ::SpecificTest()
+void Network::MessageTypeConditionTesting::SpecificTest()
 {
     constexpr auto version = g_TCRETestingVersion - 5;
     TestingType messageTypeCondition{ set<int>{ version - 2, version + 3 } };
@@ -104,7 +107,7 @@ void Network::MessageTypeConditionTesting ::SpecificTest()
     ASSERT_EQUAL(messageTypeCondition.GetMaxVersion(), version + 3);
 }
 
-void Network::MessageTypeConditionTesting ::AllTest()
+void Network::MessageTypeConditionTesting::AllTest()
 {
     TestingType firstMessageTypeCondition = MessageTypeCondition::CreateNullCondition();
 

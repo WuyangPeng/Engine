@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/21 15:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 21:46)
 
 #include "HomogeneousPointTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,14 +24,14 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, HomogeneousPointTesting)
 
-void Mathematics::HomogeneousPointTesting ::MainTest()
+void Mathematics::HomogeneousPointTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
-void Mathematics::HomogeneousPointTesting ::ConstructionTest()
+void Mathematics::HomogeneousPointTesting::ConstructionTest()
 {
     HomogeneousPointF firstPoint;
 
@@ -73,7 +76,7 @@ void Mathematics::HomogeneousPointTesting ::ConstructionTest()
     ASSERT_TRUE(Approximate(firstPoint, secondPoint, 1e-8f));
 }
 
-void Mathematics::HomogeneousPointTesting ::AccessTest()
+void Mathematics::HomogeneousPointTesting::AccessTest()
 {
     HomogeneousPointF firstPoint(1.0f, 2.0f, 0.0f, 4.0f);
 
@@ -81,11 +84,6 @@ void Mathematics::HomogeneousPointTesting ::AccessTest()
     ASSERT_APPROXIMATE(firstPoint[1], 2.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstPoint[2], 0.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstPoint[3], 4.0f, 1e-8f);
-
-    // 	ASSERT_APPROXIMATE(*firstPoint.GetCoordinate(),1.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(*(firstPoint.GetCoordinate() + 1),2.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(*(firstPoint.GetCoordinate() + 2),0.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(*(firstPoint.GetCoordinate() + 3),4.0f,1e-8f);
 
     ASSERT_APPROXIMATE(firstPoint.GetX(), 1.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstPoint.GetY(), 2.0f, 1e-8f);
@@ -109,18 +107,13 @@ void Mathematics::HomogeneousPointTesting ::AccessTest()
     ASSERT_APPROXIMATE(secondPoint[2], 3.0, 1e-10);
     ASSERT_APPROXIMATE(secondPoint[3], 2.0, 1e-10);
 
-    // 	ASSERT_APPROXIMATE(*secondPoint.GetCoordinate(),5.0,1e-10);
-    // 	ASSERT_APPROXIMATE(*(secondPoint.GetCoordinate() + 1),1.0,1e-10);
-    // 	ASSERT_APPROXIMATE(*(secondPoint.GetCoordinate() + 2),3.0,1e-10);
-    // 	ASSERT_APPROXIMATE(*(secondPoint.GetCoordinate() + 3),2.0,1e-10);
-
     ASSERT_APPROXIMATE(secondPoint.GetX(), 5.0, 1e-10);
     ASSERT_APPROXIMATE(secondPoint.GetY(), 1.0, 1e-10);
     ASSERT_APPROXIMATE(secondPoint.GetZ(), 3.0, 1e-10);
     ASSERT_APPROXIMATE(secondPoint.GetW(), 2.0, 1e-10);
 }
 
-void Mathematics::HomogeneousPointTesting ::CompareTest()
+void Mathematics::HomogeneousPointTesting::CompareTest()
 {
     const HomogeneousPointF firstPoint(1.0f, 2.0f, 0.0f, 4.0f);
     const HomogeneousPointF secondPoint;

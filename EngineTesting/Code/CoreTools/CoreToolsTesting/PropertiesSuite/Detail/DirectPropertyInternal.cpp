@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:40)
 
 #include "DirectPropertyInternal.h"
 #include "System/Helper/PragmaWarning.h"
@@ -11,27 +14,24 @@
 
 using std::string;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::DirectPropertyInternal ::DirectPropertyInternal()
-    : m_GetType{ "Init" }, m_SetType{ "SetType" }
+CoreTools::DirectPropertyInternal::DirectPropertyInternal(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+    : getType{ "Init" }, setType{ "SetType" }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, DirectPropertyInternal)
 
-void CoreTools::DirectPropertyInternal ::SetValue(const std::string& value)
+void CoreTools::DirectPropertyInternal::SetValue(const std::string& value)
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    m_GetType.m_Value = value;
+    getType.value = value;
 }
 
-std::string CoreTools::DirectPropertyInternal ::GetValue() const
+std::string CoreTools::DirectPropertyInternal::GetValue() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_SetType.m_Value;
+    return setType.m_Value;
 }

@@ -20,7 +20,7 @@
 // class PropTester {
 // public: CoreTools::DirectPropertyGetInternal<int, int, PropTester> Prop;
 // 如果需要提供修改值的接口：
-// public: void SetPropValue(int i)	{ Prop.m_Value = i;	}
+// public: void SetPropValue(int i)	{ Prop.value = i;	}
 // };
 
 // 使用方式如下：
@@ -69,7 +69,7 @@ namespace CoreTools
         NODISCARD operator ReferenceType() const noexcept;
 
     private:
-        ValueType m_Value;
+        ValueType value;
     };
 }
 

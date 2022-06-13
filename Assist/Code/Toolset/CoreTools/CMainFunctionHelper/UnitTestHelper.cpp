@@ -11,7 +11,7 @@
 #include STSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(26455)
-CMainFunctionHelper::UnitTestHelper ::UnitTestHelper()
+CMainFunctionHelper::UnitTestHelper::UnitTestHelper()
     : ParentType{ OStreamShared{ true } }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -20,6 +20,6 @@ CMainFunctionHelper::UnitTestHelper ::UnitTestHelper()
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CMainFunctionHelper, UnitTestHelper)
 
-void CMainFunctionHelper::UnitTestHelper ::DoRunUnitTest() noexcept
+void CMainFunctionHelper::UnitTestHelper::DoRunUnitTest() noexcept
 {
 }

@@ -1,36 +1,32 @@
 {
-   "Logger":
-   {
-      "System": 1,
-      "CoreTools": 1,
-      "Network": 1,
-      "Database": 1,
-      "Script": 1,
-	    "Mathematics": 1,	  
-	    "SoundEffect": 1,
-	    "InputOutput": 1,
-	    "ResourceManager": 1,
-	    "Rendering": 1,
-	    "Physics": 1,
-      "Imagics": 1,
-      "Animation": 1,
-	    "ArtificialIntellegence": 1,
-	    "UserInterface": 1,
-	    "AssistTools": 1,
-      "Framework": 1
-   },
+  "Logger": {
+    "System": 1,
+    "CoreTools": 1,
+    "Network": 1,
+    "Database": 1,
+    "Script": 1,
+    "Mathematics": 1,
+    "SoundEffect": 1,
+    "InputOutput": 1,
+    "ResourceManager": 1,
+    "Rendering": 1,
+    "Physics": 1,
+    "Imagics": 1,
+    "Animation": 1,
+    "ArtificialIntellegence": 1,
+    "UserInterface": 1,
+    "AssistTools": 1,
+    "Framework": 1
+  },
 
-  "Appender": 
-  {
+  "Appender": {
 
-    "Console": 
-    {
+    "Console": {
       "Flags": 15,
       "Level": 1
     },
 
-    "File": 
-    {
+    "File": {
       "Directory": "Log",
       "FileName": "MathematicsTesting",
       "Flags": 15,
@@ -40,8 +36,7 @@
       "Extension": "log"
     },
 
-    "Default": 
-    {
+    "Default": {
       "Directory": "Log",
       "Flags": 15,
       "Level": 1,

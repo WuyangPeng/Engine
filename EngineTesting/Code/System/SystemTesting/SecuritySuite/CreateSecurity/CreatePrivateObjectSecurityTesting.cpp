@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/05/29 21:37)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 19:17)
 
 #include "CreatePrivateObjectSecurityTesting.h"
 #include "System/Security/CreateSecurity.h"
@@ -65,7 +65,7 @@ void System::CreatePrivateObjectSecurityTesting::CreatePrivateObjectSecurityTest
     ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, nullptr, &newDescriptor, false, tokenHandle, &genericMapping));
     ASSERT_UNEQUAL_NULL_PTR(newDescriptor);
 
-    if (tokenIsElevated != g_False)
+    if (tokenIsElevated != gFalse)
     {
         for (auto securityRequestedInformation : securityRequestedInformationFlags)
         {

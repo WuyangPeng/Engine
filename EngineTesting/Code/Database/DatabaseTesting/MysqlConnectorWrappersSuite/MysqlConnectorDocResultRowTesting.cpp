@@ -1,46 +1,46 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.2.5 (2020/03/16 18:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/25 16:19)
 
-#include "MysqlConnectorDocResultRowTesting.h" 
+#include "MysqlConnectorDocResultRowTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/SqlInterface/Session.h"
-#include "Database/SqlInterface/Result.h"
-#include "Database/SqlInterface/Collection.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
+#include "Database/SqlInterface/Collection.h"
+#include "Database/SqlInterface/Result.h"
+#include "Database/SqlInterface/Session.h"
 
-using std::vector;
-using std::string;
 using std::cout;
 using std::endl;
+using std::string;
+using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorDocResultRowTesting)
 
-void Database::MysqlConnectorDocResultRowTesting
-	::MainTest()
+void Database::MysqlConnectorDocResultRowTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(ResultRowTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ResultRowTest);
 }
 
-void Database::MysqlConnectorDocResultRowTesting
-	::ResultRowTest()
+void Database::MysqlConnectorDocResultRowTesting::ResultRowTest()
 {
-	ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,"127.0.0.1",33060,"tcretest","root","TCRE" };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "tcretest", "root", "TCRE" };
 
-	Session session{ configurationStrategy };
+    Session session{ configurationStrategy };
 
-	Schema schema{ session };
+    Schema schema{ session };
 
-	Collection collection{ schema ,"my_collection" };
+    Collection collection{ schema, "my_collection" };
 
-	Collection::BindStatementType bindStatementType{ {"param", "S%"} };
-	auto result = collection.ExecuteDoc("name like :param", bindStatementType, 1);
+    Collection::BindStatementType bindStatementType{ { "param", "S%" } };
+    auto result = collection.ExecuteDoc("name like :param", bindStatementType, 1);
 
-	auto one = result->FetchOne();
+    auto one = result->FetchOne();
 
-	cout << *one << endl;
+    cout << *one << endl;
 }
-

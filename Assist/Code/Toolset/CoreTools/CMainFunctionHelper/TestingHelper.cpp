@@ -18,7 +18,7 @@ using std::endl;
 using std::make_shared;
 using std::string;
 
-CMainFunctionHelper::TestingHelper ::TestingHelper(int argc, char** argv)
+CMainFunctionHelper::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -26,7 +26,7 @@ CMainFunctionHelper::TestingHelper ::TestingHelper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CMainFunctionHelper, TestingHelper)
 
-int CMainFunctionHelper::TestingHelper ::DoRun()
+int CMainFunctionHelper::TestingHelper::DoRun()
 {
     cout << "argc = " << GetArgc() << endl;
     for (auto i = 0; i < GetArgc(); ++i)

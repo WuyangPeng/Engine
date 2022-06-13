@@ -39,7 +39,7 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD virtual const BaseSharedPtr Clone() const;
+        NODISCARD virtual BaseSharedPtr Clone() const;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(ParametersInterface);

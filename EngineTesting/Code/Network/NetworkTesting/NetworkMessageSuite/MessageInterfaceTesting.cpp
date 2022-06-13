@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 13:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/23 16:51)
 
 #include "MessageInterfaceTesting.h"
 #include "Detail/TestIntMessage.h"
 #include "Detail/TestNullMessage.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -21,9 +25,8 @@ using std::make_shared;
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MessageInterfaceTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::MessageInterfaceTesting ::MainTest()
+
+void Network::MessageInterfaceTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RttiTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest);
@@ -31,10 +34,10 @@ void Network::MessageInterfaceTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
 }
 
-void Network::MessageInterfaceTesting ::RttiTest()
+void Network::MessageInterfaceTesting::RttiTest()
 {
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(sm_MessageID) };
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(sm_MessageID) };
+    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
 
     ASSERT_TRUE(testMessage->IsExactly(TestNullMessage::GetCurrentRttiType()));
     ASSERT_FALSE(testMessage->IsExactly(MessageInterface::GetCurrentRttiType()));
@@ -56,15 +59,18 @@ void Network::MessageInterfaceTesting ::RttiTest()
     ASSERT_EQUAL(MessageInterface::GetMessageHeadSize(), messsageHeadSize);
 }
 
-void Network::MessageInterfaceTesting ::FactoryTest()
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+void Network::MessageInterfaceTesting::FactoryTest()
 {
     constexpr auto intValue = 5;
 
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(sm_MessageID) };
+    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
 
     testIntMessage->SetIntValue(intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_MessageID, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
     MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
@@ -76,27 +82,27 @@ void Network::MessageInterfaceTesting ::FactoryTest()
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
-    ASSERT_EQUAL(sourceMessageID, sm_MessageID);
+    ASSERT_EQUAL(sourceMessageID, messageID);
 
-    // 	auto factoryCreateMessage = TestIntMessage::Factory(messageSource, sm_MessageID);
-    // 	auto polymorphicMessage = CoreTools::PolymorphicSharedPtrCast<TestIntMessage>(factoryCreateMessage);
-    //
-    // 	ASSERT_EQUAL(polymorphicMessage->GetIntValue(), intValue);
-    //
-    // 	MESSAGE_MANAGER_SINGLETON.Remove(sm_MessageID);
+    auto factoryCreateMessage = TestIntMessage::Factory(*messageSource, messageID);
+    auto polymorphicMessage = boost::dynamic_pointer_cast<TestIntMessage>(factoryCreateMessage);
+
+    ASSERT_EQUAL(polymorphicMessage->GetIntValue(), intValue);
+
+    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
 }
 
-void Network::MessageInterfaceTesting ::StreamingTest()
+void Network::MessageInterfaceTesting::StreamingTest()
 {
     constexpr auto intValue = 5;
 
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(sm_MessageID) };
+    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(messageID) };
 
-    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(sm_MessageID) + CORE_TOOLS_STREAM_SIZE(intValue));
+    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(messageID) + CORE_TOOLS_STREAM_SIZE(intValue));
 
     testIntMessage->SetIntValue(intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_MessageID, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), TestIntMessage::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
     MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
@@ -108,22 +114,26 @@ void Network::MessageInterfaceTesting ::StreamingTest()
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
-    ASSERT_EQUAL(sourceMessageID, sm_MessageID);
+    ASSERT_EQUAL(sourceMessageID, messageID);
 
-    auto sourceTestIntMessage{ make_shared<TestIntMessage>(sm_MessageID) };
+    auto sourceTestIntMessage{ make_shared<TestIntMessage>(messageID) };
 
     sourceTestIntMessage->Load(*messageSource);
 
     ASSERT_EQUAL(sourceTestIntMessage->GetIntValue(), intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(sm_MessageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
 }
 
-void Network::MessageInterfaceTesting ::MessageTest()
-{
-    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(sm_MessageID) };
+#include STSTEM_WARNING_POP
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), sm_MessageID);
+void Network::MessageInterfaceTesting::MessageTest()
+{
+    TestNullMessageSharedPtr testMessage{ make_shared<TestNullMessage>(messageID) };
+
+    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
     ASSERT_EQUAL(testMessage->GetSubMessageID(), 0);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), sm_MessageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageID(), messageID);
+
+    ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 }

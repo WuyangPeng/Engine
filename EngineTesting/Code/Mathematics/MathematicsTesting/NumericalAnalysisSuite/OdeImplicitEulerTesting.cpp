@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/27 16:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/03 13:41)
 
 #include "OdeImplicitEulerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,45 +16,36 @@
 
 using std::ostream;
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
+
 namespace Mathematics
 {
     template class OdeImplicitEuler<float, OdeImplicitEulerTesting>;
     template class OdeImplicitEuler<double, OdeImplicitEulerTesting>;
 }
 
-Mathematics::OdeImplicitEulerTesting ::OdeImplicitEulerTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_Dimension{ 10 }
+Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerTesting(const OStreamShared& stream)
+    : ParentType{ stream }, dimension{ 10 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, OdeImplicitEulerTesting)
 
-void Mathematics::OdeImplicitEulerTesting ::DoRunUnitTest()
+void Mathematics::OdeImplicitEulerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Mathematics::OdeImplicitEulerTesting ::MainTest()
+void Mathematics::OdeImplicitEulerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SolverTest);
 }
 
-void Mathematics::OdeImplicitEulerTesting ::SolverTest()
+void Mathematics::OdeImplicitEulerTesting::SolverTest()
 {
-    OdeImplicitEuler<double, OdeImplicitEulerTesting> odeImplicitEulerTest(m_Dimension, 5, OdeImplicitEulerTesting::OdeImplicitEulerFunction, OdeImplicitEulerTesting::OdeImplicitEulerDerivativeFunction, nullptr);
+    OdeImplicitEuler<double, OdeImplicitEulerTesting> odeImplicitEulerTest(dimension, 5, OdeImplicitEulerTesting::OdeImplicitEulerFunction, OdeImplicitEulerTesting::OdeImplicitEulerDerivativeFunction, nullptr);
 
-    ASSERT_EQUAL(odeImplicitEulerTest.GetDimension(), m_Dimension);
+    ASSERT_EQUAL(odeImplicitEulerTest.GetDimension(), dimension);
 
     ASSERT_EQUAL(odeImplicitEulerTest.GetStepSize(), 5);
     ASSERT_EQUAL_NULL_PTR(odeImplicitEulerTest.GetUserData());
@@ -62,27 +56,27 @@ void Mathematics::OdeImplicitEulerTesting ::SolverTest()
     odeImplicitEulerTest.SetUserData(this);
     ASSERT_EQUAL(odeImplicitEulerTest.GetUserData(), this);
 
-    double tIn = 100;
+    constexpr double tIn = 100;
 
     vector<double> xIn;
 
-    for (int i = 0; i < m_Dimension; ++i)
+    for (int i = 0; i < dimension; ++i)
     {
-        xIn.push_back(i);
+        xIn.emplace_back(i);
     }
 
     auto data = odeImplicitEulerTest.Update(tIn, xIn);
 
-    double tOut = data.t;
+    const double tOut = data.t;
 
     vector<double> xOut = data.x;
 
-    vector<double> testXOut(m_Dimension);
+    vector<double> testXOut(dimension);
 
     vector<double> functionValue = OdeImplicitEulerFunction(tIn, xIn, this);
 
     VariableMatrixD derivativeFunctionMatrix = OdeImplicitEulerDerivativeFunction(tIn, xIn, this);
-    VariableMatrixD identity(m_Dimension, m_Dimension);
+    VariableMatrixD identity(dimension, dimension);
     identity.SetIdentity();
     VariableMatrixD derivative = identity - odeImplicitEulerTest.GetStepSize() * derivativeFunctionMatrix;
 
@@ -91,51 +85,63 @@ void Mathematics::OdeImplicitEulerTesting ::SolverTest()
     VariableLengthVectorD variableLengthVector(functionValue);
     functionValue = (derivativeInverse * variableLengthVector).GetContainer();
 
-    for (int i = 0; i < m_Dimension; ++i)
+    for (int i = 0; i < dimension; ++i)
     {
-        testXOut[i] = xIn[i] + functionValue[i] * odeImplicitEulerTest.GetStepSize();
+        testXOut.at(i) = xIn.at(i) + functionValue.at(i) * odeImplicitEulerTest.GetStepSize();
     }
 
-    double testTOut = tIn + odeImplicitEulerTest.GetStepSize();
+    const double testTOut = tIn + odeImplicitEulerTest.GetStepSize();
 
     ASSERT_APPROXIMATE(testTOut, tOut, 1e-10);
 
-    for (int i = 0; i < m_Dimension; ++i)
+    for (int i = 0; i < dimension; ++i)
     {
-        ASSERT_APPROXIMATE(testXOut[i], xOut[i], 1e-10);
+        ASSERT_APPROXIMATE(testXOut.at(i), xOut.at(i), 1e-10);
     }
 }
 
-int Mathematics::OdeImplicitEulerTesting ::GetDimension() const
+int Mathematics::OdeImplicitEulerTesting::GetDimension() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Dimension;
+    return dimension;
 }
 
-const vector<double> Mathematics::OdeImplicitEulerTesting ::OdeImplicitEulerFunction(double tIn, const vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
+vector<double> Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerFunction(double tIn, const vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
 {
-    int dimension = odeEulerTesting->GetDimension();
-
-    vector<double> out(dimension);
-
-    for (int i = 0; i < dimension; i++)
+    if (odeEulerTesting != nullptr)
     {
-        out[i] = tIn * xIn[i] + dimension;
+        int dimension = odeEulerTesting->GetDimension();
+
+        vector<double> out(dimension);
+
+        for (int i = 0; i < dimension; i++)
+        {
+            out.at(i) = tIn * xIn.at(i) + dimension;
+        }
+
+        return out;
+    }
+    else
+    {
+        return vector<double>{};
+    }
+}
+
+Mathematics::VariableMatrixD Mathematics::OdeImplicitEulerTesting::OdeImplicitEulerDerivativeFunction(double tIn, const vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
+{
+    if (odeEulerTesting == nullptr)
+    {
+        return VariableMatrixD{};
     }
 
-    return out;
-}
-
-const Mathematics::VariableMatrixD Mathematics::OdeImplicitEulerTesting ::OdeImplicitEulerDerivativeFunction(double tIn, const vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting)
-{
     int dimension = odeEulerTesting->GetDimension();
 
     VariableMatrixD dervative(dimension, dimension);
 
     for (int i = 0; i < dimension; i++)
     {
-        dervative(i, i) = tIn * xIn[i] + dimension;
+        dervative(i, i) = tIn * xIn.at(i) + dimension;
     }
 
     return dervative;

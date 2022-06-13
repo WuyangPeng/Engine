@@ -46,7 +46,7 @@ bool System::CloseSystemThread(ThreadHandle thread) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(thread) != g_False)
+    if (::CloseHandle(thread) != gFalse)
         return true;
     else
         return false;
@@ -120,7 +120,7 @@ bool System::SetSystemThreadPriority(ThreadHandle thread, int priority) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetThreadPriority(thread, priority) != g_False)
+    if (::SetThreadPriority(thread, priority) != gFalse)
         return true;
     else
         return false;

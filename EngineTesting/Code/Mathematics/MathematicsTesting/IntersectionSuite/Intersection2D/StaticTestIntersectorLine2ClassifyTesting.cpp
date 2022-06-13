@@ -1,15 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 18:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/06 20:36)
 
 #include "StaticTestIntersectorLine2ClassifyTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2ClassifyDetail.h"
 
-#include "Mathematics/Algebra/Vector2Tools.h"
 #include <random>
 
 namespace Mathematics
@@ -20,27 +23,26 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticTestIntersectorLine2ClassifyTesting)
 
-void Mathematics::StaticTestIntersectorLine2ClassifyTesting ::MainTest()
+void Mathematics::StaticTestIntersectorLine2ClassifyTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LineTest);
 }
-#include SYSTEM_WARNING_DISABLE(26496)
 
-void Mathematics::StaticTestIntersectorLine2ClassifyTesting ::LineTest()
+void Mathematics::StaticTestIntersectorLine2ClassifyTesting::LineTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2F lhsOrigin(randomDistribution(generator),
-                           randomDistribution(generator));
+        const Vector2F lhsOrigin(randomDistribution(generator),
+                                 randomDistribution(generator));
         Vector2F lhsDirection(randomDistribution(generator),
                               randomDistribution(generator));
-        Vector2F rhsOrigin(randomDistribution(generator),
-                           randomDistribution(generator));
+        const Vector2F rhsOrigin(randomDistribution(generator),
+                                 randomDistribution(generator));
         Vector2F rhsDirection(randomDistribution(generator),
                               randomDistribution(generator));
 
@@ -59,7 +61,9 @@ void Mathematics::StaticTestIntersectorLine2ClassifyTesting ::LineTest()
 
         ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + thirdClassify.GetParameter0() * lhsDirection,
-                                        rhsOrigin + thirdClassify.GetParameter1() * rhsDirection, 1e-4f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate,
+                                        lhsOrigin + thirdClassify.GetParameter0() * lhsDirection,
+                                        rhsOrigin + thirdClassify.GetParameter1() * rhsDirection,
+                                        1e-4f);
     }
 }

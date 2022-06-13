@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/26 16:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 15:14)
 
 #include "IntegerDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -10,7 +13,7 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Rational/IntegerDataDetail.h"
 
-#include <boost/utility/binary.hpp>
+#include <gsl/util>
 
 using std::vector;
 
@@ -21,85 +24,77 @@ namespace Mathematics
     template class IntegerData<19>;
     template class IntegerData<22>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataTesting)
 
-void Mathematics::IntegerDataTesting ::MainTest()
+void Mathematics::IntegerDataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BitTest);
-  //  ASSERT_THROW_EXCEPTION_0(ExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ConversionTest);
-  //  ASSERT_THROW_EXCEPTION_0(ConversionExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FloatingPointConversionTest);
 }
 
-void Mathematics::IntegerDataTesting ::CopyTest()
+void Mathematics::IntegerDataTesting::CopyTest()
 {
-    vector<uint16_t> data{ uint16_t(0xF000), uint16_t(0xF458), uint16_t(0xF789), uint16_t(0x2523) };
+    vector<uint16_t> data{ 0xF000, 0xF458, 0xF789, 0x2523 };
 
     IntegerData<2> firstIntegerData(data);
 
-    for (uint32_t i = 0; i < data.size(); ++i)
+    for (auto i = 0u; i < data.size(); ++i)
     {
-        ASSERT_EQUAL(firstIntegerData[i], data[i]);
+        ASSERT_EQUAL(firstIntegerData[i], data.at(i));
     }
 
     IntegerData<2> secondIntegerData(firstIntegerData);
 
-    for (uint32_t i = 0; i < data.size(); ++i)
+    for (auto i = 0u; i < data.size(); ++i)
     {
-        ASSERT_EQUAL(secondIntegerData[i], data[i]);
+        ASSERT_EQUAL(secondIntegerData[i], data.at(i));
     }
 
     IntegerData<2> thirdIntegerData;
 
-    for (uint32_t i = 0; i < data.size(); ++i)
+    for (auto i = 0u; i < data.size(); ++i)
     {
         ASSERT_EQUAL(thirdIntegerData[i], 0x0000);
     }
 
     thirdIntegerData = secondIntegerData;
 
-    for (uint32_t i = 0; i < data.size(); ++i)
+    for (auto i = 0u; i < data.size(); ++i)
     {
-        ASSERT_EQUAL(thirdIntegerData[i], data[i]);
+        ASSERT_EQUAL(thirdIntegerData[i], data.at(i));
     }
 }
 
-void Mathematics::IntegerDataTesting ::BitTest()
+void Mathematics::IntegerDataTesting::BitTest()
 {
-    vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 00000000)),  // 最低位
-                           uint16_t(BOOST_BINARY(10111111 11111111)),
-                           uint16_t(BOOST_BINARY(10000000 11111111)),
-                           uint16_t(BOOST_BINARY(10000000 00000001)),
-                           uint16_t(BOOST_BINARY(10000111 00000001)),
-                           uint16_t(BOOST_BINARY(01111111 11111110)),
-                           uint16_t(BOOST_BINARY(01011111 11111110)),
-                           uint16_t(BOOST_BINARY(01000000 11111110)),
-                           uint16_t(BOOST_BINARY(01000000 00000010)),
-                           uint16_t(BOOST_BINARY(00100001 00011100)),
-                           uint16_t(BOOST_BINARY(00010001 00011000)),
-                           uint16_t(BOOST_BINARY(00001001 00010000)),
-                           uint16_t(BOOST_BINARY(00000101 00100000)),
-                           uint16_t(BOOST_BINARY(00000011 01000000)),
-                           uint16_t(BOOST_BINARY(00000001 10000000)),
-                           uint16_t(BOOST_BINARY(00000001 00000000)),
-                           uint16_t(BOOST_BINARY(01011010 00000000)),
-                           uint16_t(BOOST_BINARY(01011100 00000000)),
-                           uint16_t(BOOST_BINARY(00011000 00000000)),
-                           uint16_t(BOOST_BINARY(00010000 00000000)),
-                           uint16_t(BOOST_BINARY(00110000 00000000)),
-                           uint16_t(BOOST_BINARY(01100000 00000000)),
-                           uint16_t(BOOST_BINARY(01000000 00000000)),
-                           uint16_t(BOOST_BINARY(11111111 00000000)) };  // 最高位
+    vector<uint16_t> data{ 0b11111111'00000000,  // 最低位
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000111'00000001,
+                           0b01111111'11111110,
+                           0b01011111'11111110,
+                           0b01000000'11111110,
+                           0b01000000'00000010,
+                           0b00100001'00011100,
+                           0b00010001'00011000,
+                           0b00001001'00010000,
+                           0b00000101'00100000,
+                           0b00000011'01000000,
+                           0b00000001'10000000,
+                           0b00000001'00000000,
+                           0b01011010'00000000,
+                           0b01011100'00000000,
+                           0b00011000'00000000,
+                           0b00010000'00000000,
+                           0b00110000'00000000,
+                           0b01100000'00000000,
+                           0b01000000'00000000,
+                           0b11111111'00000000 };  // 最高位
 
     IntegerData<12> firstIntegerData(data);
 
@@ -114,16 +109,9 @@ void Mathematics::IntegerDataTesting ::BitTest()
     ASSERT_FALSE(firstIntegerData.GetBit(15));
 }
 
-void Mathematics::IntegerDataTesting ::ExceptionTest()
+void Mathematics::IntegerDataTesting::ConversionTest()
 {
-    vector<uint16_t> data{ uint16_t(0xF000), uint16_t(0xF458), uint16_t(0xF789), uint16_t(0x2523), uint16_t(0x5555) };
-
-    IntegerData<2> integerData(data);
-}
-
-void Mathematics::IntegerDataTesting ::ConversionTest()
-{
-    IntegerData<3> firstIntegerData(uint64_t((0xF000F458F7892523ULL)));
+    IntegerData<3> firstIntegerData(0xF000F458F7892523ULL);
 
     ASSERT_EQUAL(firstIntegerData[0], uint16_t(0x2523));
     ASSERT_EQUAL(firstIntegerData[1], uint16_t(0xF789));
@@ -143,7 +131,7 @@ void Mathematics::IntegerDataTesting ::ConversionTest()
     ASSERT_TRUE(firstIntegerData.IsZero());
     ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
 
-    IntegerData<3> secondIntegerData(uint64_t(0));
+    IntegerData<3> secondIntegerData(uint64_t{ 0 });
 
     ASSERT_TRUE(secondIntegerData.IsZero());
     ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
@@ -155,17 +143,12 @@ void Mathematics::IntegerDataTesting ::ConversionTest()
     ASSERT_TRUE(secondIntegerData.IsZero());
 }
 
-void Mathematics::IntegerDataTesting ::ConversionExceptionTest()
+void Mathematics::IntegerDataTesting::CompareTest()
 {
-    IntegerData<2> firstIntegerData(uint64_t((0xF000F458F7892523LL)));
-}
-
-void Mathematics::IntegerDataTesting ::CompareTest()
-{
-    vector<uint16_t> data{ uint16_t(0xF000), uint16_t(0xF458), uint16_t(0xF789), uint16_t(0x2523) };
+    vector<uint16_t> data{ 0xF000, 0xF458, 0xF789, 0x2523 };
 
     IntegerData<2> firstIntegerData(data);
-    IntegerData<2> secondIntegerData(data);
+    const IntegerData<2> secondIntegerData(data);
 
     ASSERT_ENUM_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Zero);
 
@@ -177,14 +160,14 @@ void Mathematics::IntegerDataTesting ::CompareTest()
     ASSERT_FALSE(firstIntegerData > secondIntegerData);
     ASSERT_TRUE(firstIntegerData >= secondIntegerData);
 
-    firstIntegerData[0] = static_cast<uint16_t>(0x0000);
+    firstIntegerData[0] = gsl::narrow_cast<uint16_t>(0x0000);
 
     ASSERT_ENUM_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Negative);
 
     ASSERT_FALSE(firstIntegerData == secondIntegerData);
     ASSERT_TRUE(firstIntegerData < secondIntegerData);
 
-    firstIntegerData[0] = static_cast<uint16_t>(0xFFFF);
+    firstIntegerData[0] = gsl::narrow_cast<uint16_t>(0xFFFF);
 
     ASSERT_ENUM_EQUAL(IntegerData<2>::UnsignedDataCompare(firstIntegerData, secondIntegerData), NumericalValueSymbol::Positive);
 
@@ -197,7 +180,7 @@ void Mathematics::IntegerDataTesting ::CompareTest()
     ASSERT_TRUE(firstIntegerData >= secondIntegerData);
 }
 
-void Mathematics::IntegerDataTesting ::FloatingPointConversionTest()
+void Mathematics::IntegerDataTesting::FloatingPointConversionTest()
 {
     IntegerData<3> firstIntegerData(3333333.33333f);
 

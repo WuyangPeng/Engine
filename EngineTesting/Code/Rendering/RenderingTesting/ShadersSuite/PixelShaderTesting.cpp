@@ -1,10 +1,14 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/07 14:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/11 18:36)
 
 #include "PixelShaderTesting.h"
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
@@ -15,10 +19,8 @@
 #include "Rendering/Shaders/PixelShader.h"
 #include "Rendering/Shaders/VertexShader.h"
 
-#include "System/Helper/PragmaWarning/LexicalCast.h"
 using std::string;
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26409)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PixelShaderTesting)
 
 void Rendering::PixelShaderTesting::MainTest()
@@ -38,7 +40,7 @@ void Rendering::PixelShaderTesting::MainTest()
 
 void Rendering::PixelShaderTesting::InitTest()
 {
-    ShaderBaseSharedPtr shader(new PixelShader("Shader", 4, 5, 6, 7));
+    ShaderBaseSharedPtr shader(std::make_shared<PixelShader>("Shader", 4, 5, 6, 7));
 
     ASSERT_EQUAL(shader->GetNumInputs(), 4);
 
@@ -83,12 +85,12 @@ void Rendering::PixelShaderTesting::InitTest()
 
     for (int i = 0; i < 4; ++i)
     {
-        shader->SetInput(i, "Input" + boost::lexical_cast<string>(i), ShaderFlags::VariableType(i), ShaderFlags::VariableSemantic(i));
+        shader->SetInput(i, "Input" + boost::lexical_cast<string>(i), ShaderFlags::VariableType{ i }, ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        shader->SetOutput(i, "Output" + boost::lexical_cast<string>(i), ShaderFlags::VariableType(i), ShaderFlags::VariableSemantic(i));
+        shader->SetOutput(i, "Output" + boost::lexical_cast<string>(i), ShaderFlags::VariableType{ i }, ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
@@ -98,11 +100,11 @@ void Rendering::PixelShaderTesting::InitTest()
 
     for (int i = 0; i < 7; ++i)
     {
-        shader->SetSampler(i, "Texture" + boost::lexical_cast<string>(i), ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        shader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        shader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        shader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        shader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+        shader->SetSampler(i, "Texture" + boost::lexical_cast<string>(i), ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        shader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        shader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        shader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        shader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         shader->SetLodBias(i, static_cast<float>(i));
         shader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -113,15 +115,15 @@ void Rendering::PixelShaderTesting::InitTest()
     for (int i = 0; i < 4; ++i)
     {
         ASSERT_EQUAL(shader->GetInputName(i), "Input" + boost::lexical_cast<string>(i));
-        ASSERT_ENUM_EQUAL(shader->GetInputType(i), ShaderFlags::VariableType(i));
-        ASSERT_ENUM_EQUAL(shader->GetInputSemantic(i), ShaderFlags::VariableSemantic(i));
+        ASSERT_ENUM_EQUAL(shader->GetInputType(i), ShaderFlags::VariableType{ i });
+        ASSERT_ENUM_EQUAL(shader->GetInputSemantic(i), ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         ASSERT_EQUAL(shader->GetOutputName(i), "Output" + boost::lexical_cast<string>(i));
-        ASSERT_ENUM_EQUAL(shader->GetOutputType(i), ShaderFlags::VariableType(i));
-        ASSERT_ENUM_EQUAL(shader->GetOutputSemantic(i), ShaderFlags::VariableSemantic(i));
+        ASSERT_ENUM_EQUAL(shader->GetOutputType(i), ShaderFlags::VariableType{ i });
+        ASSERT_ENUM_EQUAL(shader->GetOutputSemantic(i), ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
@@ -134,7 +136,7 @@ void Rendering::PixelShaderTesting::InitTest()
     {
         ASSERT_EQUAL(shader->GetSamplerName(i), "Texture" + boost::lexical_cast<string>(i));
         ASSERT_ENUM_EQUAL(shader->GetSamplerType(i), ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        ASSERT_ENUM_EQUAL(shader->GetFilter(i), ShaderFlags::SamplerFilter(i));
+        ASSERT_ENUM_EQUAL(shader->GetFilter(i), ShaderFlags::SamplerFilter{ i });
         ASSERT_ENUM_EQUAL(shader->GetCoordinate(i, 0), ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
         ASSERT_ENUM_EQUAL(shader->GetCoordinate(i, 1), ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
         ASSERT_ENUM_EQUAL(shader->GetCoordinate(i, 2), ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
@@ -149,16 +151,16 @@ void Rendering::PixelShaderTesting::InitTest()
 
 void Rendering::PixelShaderTesting::CopyTest()
 {
-    PixelShaderSharedPtr shader(new PixelShader("Shader", 4, 5, 6, 7));
+    PixelShaderSharedPtr shader(std::make_shared<PixelShader>("Shader", 4, 5, 6, 7));
 
     for (int i = 0; i < 4; ++i)
     {
-        shader->SetInput(i, "Input" + boost::lexical_cast<string>(i), ShaderFlags::VariableType(i), ShaderFlags::VariableSemantic(i));
+        shader->SetInput(i, "Input" + boost::lexical_cast<string>(i), ShaderFlags::VariableType{ i }, ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
-        shader->SetOutput(i, "Output" + boost::lexical_cast<string>(i), ShaderFlags::VariableType(i), ShaderFlags::VariableSemantic(i));
+        shader->SetOutput(i, "Output" + boost::lexical_cast<string>(i), ShaderFlags::VariableType{ i }, ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
@@ -168,11 +170,11 @@ void Rendering::PixelShaderTesting::CopyTest()
 
     for (int i = 0; i < 7; ++i)
     {
-        shader->SetSampler(i, "Texture" + boost::lexical_cast<string>(i), ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        shader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        shader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        shader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        shader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+        shader->SetSampler(i, "Texture" + boost::lexical_cast<string>(i), ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        shader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        shader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        shader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        shader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         shader->SetLodBias(i, static_cast<float>(i));
         shader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -180,7 +182,7 @@ void Rendering::PixelShaderTesting::CopyTest()
                                                 static_cast<float>(i + 2) / 10.0f, static_cast<float>(i + 3) / 10.0f));
     }
 
-    ShaderBaseSharedPtr secondShader(new PixelShader(*shader));
+    ShaderBaseSharedPtr secondShader(std::make_shared<PixelShader>(*shader));
 
     ASSERT_EQUAL(shader->GetNumInputs(), secondShader->GetNumInputs());
     ASSERT_EQUAL(shader->GetNumOutputs(), secondShader->GetNumOutputs());
@@ -223,91 +225,4 @@ void Rendering::PixelShaderTesting::CopyTest()
 
 void Rendering::PixelShaderTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	PixelShaderSharedPtr shader(new PixelShader("Shader", 4, 5, 6, 7));
-    //
-    // 	for (int i = 0; i < 4; ++i)
-    // 	{
-    // 		shader->SetInput(i, "Input" + boost::lexical_cast<string>(i),ShaderFlags::VariableType(i),
-    // 						 ShaderFlags::VariableSemantic(i));
-    // 	}
-    //
-    // 	for (int i = 0; i < 5; ++i)
-    // 	{
-    // 		shader->SetOutput(i, "Output" + boost::lexical_cast<string>(i),ShaderFlags::VariableType(i),
-    // 						  ShaderFlags::VariableSemantic(i));
-    // 	}
-    //
-    // 	for (int i = 0; i < 6; ++i)
-    // 	{
-    // 		shader->SetConstant(i, "Constant" + boost::lexical_cast<string>(i),i);
-    // 	}
-    //
-    // 	for (int i = 0; i < 7; ++i)
-    // 	{
-    // 		shader->SetSampler(i, "Texture" + boost::lexical_cast<string>(i),ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-    // 		shader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-    // 		shader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-    // 		shader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-    // 		shader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-    //
-    // 		shader->SetLodBias(i,static_cast<float>(i));
-    // 		shader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
-    // 		shader->SetBorderColor(i, Colour<float>(static_cast<float>(i) / 10.0f,static_cast<float>(i + 1) / 10.0f,
-    // 												static_cast<float>(i + 2) / 10.0f,static_cast<float>(i + 3) / 10.0f));
-    // 	}
-    //
-    //
-    // 	outTopLevel.Insert(shader);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	PixelShaderSharedPtr secondShader =	inTopLevel[0].PolymorphicDowncastObjectSharedPtr<PixelShaderSharedPtr>();
-    //
-    // 	ASSERT_UNEQUAL_NULL_PTR(secondShader);
-    //
-    // 	ASSERT_EQUAL(shader->GetNumInputs(), secondShader->GetNumInputs());
-    // 	ASSERT_EQUAL(shader->GetNumOutputs(), secondShader->GetNumOutputs());
-    // 	ASSERT_EQUAL(shader->GetNumConstants(), secondShader->GetNumConstants());
-    // 	ASSERT_EQUAL(shader->GetNumSamplers(), secondShader->GetNumSamplers());
-    //
-    // 	for (int i = 0; i < 4;++i)
-    // 	{
-    // 		ASSERT_EQUAL(shader->GetInputName(i), secondShader->GetInputName(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetInputType(i), secondShader->GetInputType(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetInputSemantic(i), secondShader->GetInputSemantic(i));
-    // 	}
-    //
-    // 	for (int i = 0; i < 5; ++i)
-    // 	{
-    // 		ASSERT_EQUAL(shader->GetOutputName(i), secondShader->GetOutputName(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetOutputType(i), secondShader->GetOutputType(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetOutputSemantic(i), secondShader->GetOutputSemantic(i));
-    // 	}
-    //
-    // 	for (int i = 0; i < 6; ++i)
-    // 	{
-    // 		ASSERT_EQUAL(shader->GetConstantName(i), secondShader->GetConstantName(i));
-    // 		ASSERT_EQUAL(shader->GetNumRegistersUsed(i), secondShader->GetNumRegistersUsed(i));
-    // 	}
-    //
-    // 	for (int i = 0; i < 7; ++i)
-    // 	{
-    // 		ASSERT_EQUAL(shader->GetSamplerName(i), secondShader->GetSamplerName(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetSamplerType(i), secondShader->GetSamplerType(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetFilter(i), secondShader->GetFilter(i));
-    // 		ASSERT_ENUM_EQUAL(shader->GetCoordinate(i, 0), secondShader->GetCoordinate(i, 0));
-    // 		ASSERT_ENUM_EQUAL(shader->GetCoordinate(i, 1), secondShader->GetCoordinate(i, 1));
-    // 		ASSERT_ENUM_EQUAL(shader->GetCoordinate(i, 2), secondShader->GetCoordinate(i, 2));
-    // 		ASSERT_APPROXIMATE(shader->GetLodBias(i), secondShader->GetLodBias(i), 1e-8f);
-    // 		ASSERT_APPROXIMATE(shader->GetAnisotropy(i), secondShader->GetAnisotropy(i), 1e-8f);
-    // 		ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, shader->GetBorderColor(i),secondShader->GetBorderColor(i), 1e-8f);
-    // 	}
 }

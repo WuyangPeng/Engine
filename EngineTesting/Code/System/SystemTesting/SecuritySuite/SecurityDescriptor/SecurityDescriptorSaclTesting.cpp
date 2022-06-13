@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/02 14:45)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 15:47)
 
 #include "SecurityDescriptorSaclTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -50,7 +50,7 @@ void System::SecurityDescriptorSaclTesting::SaclTest()
     ASSERT_TRUE(InitializeSystemSecurityDescriptor(&securityDescriptor));
     ASSERT_TRUE(SetSecurityDescriptorSystemAccessControlList(&securityDescriptor, true, &acl, true));
 
-    WindowsBool daclPresent{ g_False };
+    WindowsBool daclPresent{ gFalse };
     AccessCheckACLPtr sacl{ nullptr };
     auto daclDefaulted = false;
     ASSERT_TRUE(GetSecurityDescriptorSystemAccessControlList(&securityDescriptor, &daclPresent, &sacl, &daclDefaulted));

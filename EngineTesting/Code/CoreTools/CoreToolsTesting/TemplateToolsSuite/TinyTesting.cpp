@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 16:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 19:08)
 
 #include "TinyTesting.h"
 #include "Detail/TinyTest.h"
@@ -12,7 +15,7 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TinyTesting)
 
-void CoreTools::TinyTesting ::MainTest()
+void CoreTools::TinyTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PushBackTest);
@@ -26,371 +29,422 @@ void CoreTools::TinyTesting ::MainTest()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26814)
 
-void CoreTools::TinyTesting ::InitTest() noexcept
+void CoreTools::TinyTesting::InitTest() noexcept
 {
-    using FirstTiny = Tiny<>;
-    using SeconTiny = Tiny<char>;
-    using ThirdTiny = Tiny<char, long>;
-    using FourthTiny = Tiny<char, char, int>;
+    using Tiny0 = Tiny<>;
+    using Tiny1 = Tiny<char>;
+    using Tiny2 = Tiny<char, long>;
+    using Tiny3 = Tiny<char, char, int>;
 
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<FirstTiny>::value, ==, 0);
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<SeconTiny>::value, ==, 1);
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<ThirdTiny>::value, ==, 2);
-    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<FourthTiny>::value, ==, 3);
+    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny0>::value, ==, 0);
+    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny1>::value, ==, 1);
+    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny2>::value, ==, 2);
+    BOOST_MPL_ASSERT_RELATION(boost::mpl::size<Tiny3>::value, ==, 3);
 
-    BOOST_MPL_ASSERT((boost::mpl::empty<FirstTiny>));
-    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<SeconTiny>));
-    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<ThirdTiny>));
-    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<FourthTiny>));
+    BOOST_MPL_ASSERT((boost::mpl::empty<Tiny0>));
+    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny1>));
+    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny2>));
+    BOOST_MPL_ASSERT_NOT((boost::mpl::empty<Tiny3>));
 
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<SeconTiny>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<SeconTiny>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<ThirdTiny>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<ThirdTiny>::type, long>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<FourthTiny>::type, char>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<FourthTiny>::type, int>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny1>::type, char>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, char>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, long>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny3>::type, char>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny3>::type, int>));
 }
 
-void CoreTools::TinyTesting ::PushBackTest() noexcept
+void CoreTools::TinyTesting::PushBackTest() noexcept
 {
-    using FirstTiny = Tiny<>;
+    using Tiny0 = Tiny<>;
 
-    using SecondTiny = boost::mpl::push_back<FirstTiny, int>::type;
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<SecondTiny>::type, int>));
+    using Tiny1 = boost::mpl::push_back<Tiny0, int>::type;
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny1>::type, int>));
 
-    using ThirdTiny = boost::mpl::push_front<SecondTiny, char>::type;
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<ThirdTiny>::type, int>));
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<ThirdTiny>::type, char>));
+    using Tiny2 = boost::mpl::push_front<Tiny1, char>::type;
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny2>::type, int>));
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::front<Tiny2>::type, char>));
 
-    using FourthTiny = boost::mpl::push_back<ThirdTiny, long>::type;
-    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<FourthTiny>::type, long>));
+    using Tiny3 = boost::mpl::push_back<Tiny2, long>::type;
+    BOOST_MPL_ASSERT((boost::is_same<boost::mpl::back<Tiny3>::type, long>));
 
-    [[maybe_unused]] TinyTest<FirstTiny>::type firstTiny;
-    [[maybe_unused]] TinyTest<SecondTiny>::type secondTiny;
-    [[maybe_unused]] TinyTest<ThirdTiny>::type thirdTiny;
-    [[maybe_unused]] TinyTest<FourthTiny>::type fourthTiny;
+    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0{};
+    MAYBE_UNUSED TinyTest<Tiny1>::type tiny1{};
+    MAYBE_UNUSED TinyTest<Tiny2>::type tiny2{};
+    MAYBE_UNUSED TinyTest<Tiny3>::type tiny3{};
 
-    using FifthTiny = boost::mpl::push_back<FirstTiny, char>::type;
-    using SixthTiny = boost::mpl::push_back<FifthTiny, int>::type;
-    using SeventhTiny = boost::mpl::push_back<ThirdTiny, long>::type;
+    using Tiny4 = boost::mpl::push_back<Tiny0, char>::type;
+    using Tiny5 = boost::mpl::push_back<Tiny4, int>::type;
+    using Tiny6 = boost::mpl::push_back<Tiny2, long>::type;
 
 #if 0  // 这里应该产生编译错误。
-	using InvalidTiny = boost::mpl::push_back<FourthTiny, int>::type;
+
+	using InvalidTiny = boost::mpl::push_back<Tiny3, int>::type;
+
 #endif  // 0
 
-    BOOST_STATIC_ASSERT((boost::mpl::equal<SixthTiny, ThirdTiny>::type::value));
-    BOOST_STATIC_ASSERT((boost::mpl::equal<SeventhTiny, FourthTiny>::type::value));
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny2>::type::value));
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny3>::type::value));
 }
 
-void CoreTools::TinyTesting ::ClearTest() noexcept
+#include STSTEM_WARNING_POP
+
+void CoreTools::TinyTesting::ClearTest() noexcept
 {
-    using FirstTiny = Tiny<>;
-    using SecondTiny = Tiny<unsigned short, double&, bool>;
+    using Tiny0 = Tiny<>;
+    using Tiny1 = Tiny<unsigned short, double&, bool>;
 
-    [[maybe_unused]] TinyTest<FirstTiny>::type firstTiny;
-    [[maybe_unused]] TinyTest<SecondTiny>::type secondTiny;
+    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
+    MAYBE_UNUSED TinyTest<Tiny1>::type tiny1;
 
-    using Clean = boost::mpl::clear<SecondTiny>::type;
-    BOOST_STATIC_ASSERT((boost::mpl::equal<FirstTiny, Clean>::type::value));
+    using Clean = boost::mpl::clear<Tiny1>::type;
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny0, Clean>::type::value));
 }
 
-void CoreTools::TinyTesting ::PushFrontTest() noexcept
+void CoreTools::TinyTesting::PushFrontTest() noexcept
 {
-    using FirstTiny = Tiny<>;
-    using SecondTiny = Tiny<char*>;
-    using ThirdTiny = Tiny<const long, char*>;
-    using FourthTiny = Tiny<unsigned short&, const long, char*>;
+    using Tiny0 = Tiny<>;
+    using Tiny1 = Tiny<char*>;
+    using Tiny2 = Tiny<const long, char*>;
+    using Tiny3 = Tiny<unsigned short&, const long, char*>;
 
-    [[maybe_unused]] TinyTest<FirstTiny>::type firstTiny;
-    [[maybe_unused]] TinyTest<SecondTiny>::type secondTiny;
-    [[maybe_unused]] TinyTest<ThirdTiny>::type thirdTiny;
-    [[maybe_unused]] TinyTest<FourthTiny>::type fourthTiny;
+    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
+    MAYBE_UNUSED TinyTest<Tiny1>::type tiny1;
+    MAYBE_UNUSED TinyTest<Tiny2>::type tiny2;
+    MAYBE_UNUSED TinyTest<Tiny3>::type tiny3;
 
-    using FifthTiny = boost::mpl::push_front<FirstTiny, char*>::type;
-    using SixthTiny = boost::mpl::push_front<SecondTiny, const long>::type;
-    using SeventhTiny = boost::mpl::push_front<ThirdTiny, unsigned short&>::type;
+    using Tiny4 = boost::mpl::push_front<Tiny0, char*>::type;
+    using Tiny5 = boost::mpl::push_front<Tiny1, const long>::type;
+    using Tiny6 = boost::mpl::push_front<Tiny2, unsigned short&>::type;
 
 #if 0  // 这里应该产生编译错误。
-	using InvalidTiny = boost::mpl::push_front<FourthTiny, int>::type;
+
+	using InvalidTiny = boost::mpl::push_front<Tiny3, int>::type;
+
 #endif  // 0
 
-    BOOST_STATIC_ASSERT((boost::mpl::equal<FifthTiny, SecondTiny>::type::value));
-    BOOST_STATIC_ASSERT((boost::mpl::equal<SixthTiny, ThirdTiny>::type::value));
-    BOOST_STATIC_ASSERT((boost::mpl::equal<SeventhTiny, FourthTiny>::type::value));
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny1>::type::value));
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny2>::type::value));
+    BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny3>::type::value));
 }
 
-void CoreTools::TinyTesting ::EmptyTest() noexcept
+void CoreTools::TinyTesting::EmptyTest() noexcept
 {
-    using FirstTiny = Tiny<>;
+    using Tiny0 = Tiny<>;
 
-    [[maybe_unused]] TinyTest<FirstTiny>::type firstTiny;
+    MAYBE_UNUSED TinyTest<Tiny0>::type tiny0;
 
 #if 0  // 这里应该产生编译错误。
-	using FirstInvalidType = boost::mpl::at<FirstTiny, TinyZero>::type;
+
+	using invalidType0 = boost::mpl::at<Tiny0, TinyZero>::type;
+
 #endif  // 0
 
-    using Beg = boost::mpl::begin<FirstTiny>::type;
+    using Beg = boost::mpl::begin<Tiny0>::type;
 
 #if 0  // 这里应该产生编译错误。
-	using SecondInvalidType = boost::mpl::next<Beg>::type;
-#endif  // 0
 
-#if 0  // 这里应该产生编译错误。
-	using ThirdInvalidType = boost::mpl::deref<Beg>::type;
-#endif  // 0
+	using invalidType1 = boost::mpl::next<Beg>::type;
 
-    using End = boost::mpl::end<FirstTiny>::type;
-
-#if 0  // 这里应该产生编译错误。
-	using FourthInvalidType = boost::mpl::prior<End>::type;
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
-	using FifthInvalidType = boost::mpl::advance<Beg, TinyOne>::type;
+
+	using invalidType2 = boost::mpl::deref<Beg>::type;
+
+#endif  // 0
+
+    using End = boost::mpl::end<Tiny0>::type;
+
+#if 0  // 这里应该产生编译错误。
+
+	using invalidType3 = boost::mpl::prior<End>::type;
+
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
-	using SixthInvalidType = boost::mpl::advance<End, boost::mpl::int_<-1>>::type;
+
+	using invalidType4 = boost::mpl::advance<Beg, TinyOne>::type;
+
+#endif  // 0
+
+#if 0  // 这里应该产生编译错误。
+
+	using invalidType5 = boost::mpl::advance<End, boost::mpl::int_<-1>>::type;
+
 #endif  // 0
 }
 
-void CoreTools::TinyTesting ::InteratorTest() noexcept
+void CoreTools::TinyTesting::InteratorTest() noexcept
 {
-    using FirstTiny = Tiny<>;
-    using SecondTiny = Tiny<int>;
-    using ThirdTiny = Tiny<char*, const long>;
-    using FourthTiny = Tiny<unsigned short&, const long, char*>;
+    using Tiny0 = Tiny<>;
+    using Tiny1 = Tiny<int>;
+    using Tiny2 = Tiny<char*, const long>;
+    using Tiny3 = Tiny<unsigned short&, const long, char*>;
 
-    [[maybe_unused]] TinyTest<FirstTiny>::type tiny1;
-    [[maybe_unused]] TinyTest<SecondTiny>::type tiny2;
-    [[maybe_unused]] TinyTest<ThirdTiny>::type tiny3;
-    [[maybe_unused]] TinyTest<FourthTiny>::type tiny4;
+    MAYBE_UNUSED TinyTest<Tiny0>::type tiny1;
+    MAYBE_UNUSED TinyTest<Tiny1>::type tiny2;
+    MAYBE_UNUSED TinyTest<Tiny2>::type tiny3;
+    MAYBE_UNUSED TinyTest<Tiny3>::type tiny4;
 
     {
-        using FirstTinyIterator = TinyIterator<FirstTiny, TinyZero>;
-        using SecondTinyIterator = boost::mpl::insert<FirstTiny, FirstTinyIterator, long>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SecondTinyIterator, Tiny<long>>::type::value));
+        using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
+        using TinyIterator1 = boost::mpl::insert<Tiny0, TinyIterator0, long>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<long>>::type::value));
 
-        using ThirdTinyIterator = TinyIterator<SecondTinyIterator, TinyZero>;
-        using FourthTinyIterator = boost::mpl::insert<SecondTinyIterator, ThirdTinyIterator, int>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FourthTinyIterator, Tiny<int, long>>::type::value));
+        using TinyIterator2 = TinyIterator<TinyIterator1, TinyZero>;
+        using TinyIterator3 = boost::mpl::insert<TinyIterator1, TinyIterator2, int>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, long>>::type::value));
 
-        using FifthTinyIterator = TinyIterator<FourthTinyIterator, TinyZero>;
-        using SixthTinyIterator = boost::mpl::insert<FourthTinyIterator, FifthTinyIterator, char>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SixthTinyIterator, Tiny<char, int, long>>::type::value));
+        using TinyIterator4 = TinyIterator<TinyIterator3, TinyZero>;
+        using TinyIterator5 = boost::mpl::insert<TinyIterator3, TinyIterator4, char>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator5, Tiny<char, int, long>>::type::value));
 
-        using SeventhTinyIterator = TinyIterator<SixthTinyIterator, TinyZero>;
+        using TinyIterator6 = TinyIterator<TinyIterator5, TinyZero>;
+
+#if 0  // 这里应该产生编译错误。
+
+		using InvalidTinyIterator = boost::mpl::insert<TinyIterator5, TinyIterator6, bool>::type;
+
+#endif  // 0
+    }
+
+    {
+        using TinyIterator0 = TinyIterator<Tiny1, TinyOne>;
+        using TinyIterator1 = boost::mpl::insert<Tiny1, TinyIterator0, long>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<int, long>>::type::value));
+
+        using TinyIterator2 = TinyIterator<TinyIterator1, TinyOne>;
+        using TinyIterator3 = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator3, Tiny<int, char, long>>::type::value));
+        using TinyIterator4 = TinyIterator<TinyIterator3, TinyOne>;
+
+#if 0  // 这里应该产生编译错误。
+
+        using InvalidTinyIterator = boost::mpl::insert<TinyIterator3, TinyIterator4, bool>::type;
+
+#endif  // 0
+    }
+
+    {
+        using TinyIterator0 = TinyIterator<Tiny2, TinyTwo>;
+        using TinyIterator1 = boost::mpl::insert<Tiny2, TinyIterator0, long>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<TinyIterator1, Tiny<char*, const long, long>>::type::value));
+        using TinyIterator2 = TinyIterator<TinyIterator1, TinyTwo>;
+
+#if 0  // 这里应该产生编译错误。
+
+		using InvalidTinyIterator = boost::mpl::insert<TinyIterator1, TinyIterator2, char>::type;
+
+#endif  // 0
+    }
+
+    {
+        using Tiny4 = boost::mpl::pop_front<Tiny3>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny<const long, char*>>::type::value));
+        using Tiny5 = boost::mpl::pop_front<Tiny2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<const long>>::type::value));
+        using Tiny6 = boost::mpl::pop_front<Tiny1>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
 
 #if 0  // 这里应该产生编译错误。		
-		using InvalidTinyIterator = boost::mpl::insert<SixthTinyIterator, SeventhTinyIterator, bool>::type;
+
+		using InvalidType = boost::mpl::pop_front<Tiny0>::type;
+
 #endif  // 0
     }
 
     {
-        using FirstTinyIterator = TinyIterator<SecondTiny, TinyOne>;
-        using SecondTinyIterator = boost::mpl::insert<SecondTiny, FirstTinyIterator, long>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SecondTinyIterator, Tiny<int, long>>::type::value));
-
-        using ThirdTinyIterator = TinyIterator<SecondTinyIterator, TinyOne>;
-        using FourthTinyIterator = boost::mpl::insert<SecondTinyIterator, ThirdTinyIterator, char>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FourthTinyIterator, Tiny<int, char, long>>::type::value));
-        using FifthTinyIterator = TinyIterator<FourthTinyIterator, TinyOne>;
-
-#if 0  // 这里应该产生编译错误。				
-		using InvalidTinyIterator = boost::mpl::insert<FourthTinyIterator, FifthTinyIterator, bool>::type;
-#endif  // 0
-    }
-
-    {
-        using FirstTinyIterator = TinyIterator<ThirdTiny, TinyTwo>;
-        using SecondTinyIterator = boost::mpl::insert<ThirdTiny, FirstTinyIterator, long>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SecondTinyIterator, Tiny<char*, const long, long>>::type::value));
-        using ThirdTinyIterator = TinyIterator<SecondTinyIterator, TinyTwo>;
-
-#if 0  // 这里应该产生编译错误。			
-		using InvalidTinyIterator = boost::mpl::insert<SecondTinyIterator, ThirdTinyIterator, char>::type;
-#endif  // 0
-    }
-
-    {
-        using FifthTiny = boost::mpl::pop_front<FourthTiny>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FifthTiny, Tiny<const long, char*>>::type::value));
-        using SixthTiny = boost::mpl::pop_front<ThirdTiny>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SixthTiny, Tiny<const long>>::type::value));
-        using SeventhTiny = boost::mpl::pop_front<SecondTiny>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SeventhTiny, Tiny<>>::type::value));
-
-#if 0  // 这里应该产生编译错误。			
-		using InvalidType = boost::mpl::pop_front<FirstTiny>::type;
-#endif  // 0
-    }
-
-    {
-        using FifthTiny = boost::mpl::pop_back<FourthTiny>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FifthTiny, Tiny<unsigned short&, const long>>::type::value));
-        using SixthTiny = boost::mpl::pop_back<ThirdTiny>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SixthTiny, Tiny<char*>>::type::value));
-        using SevnthTiny = boost::mpl::pop_back<SecondTiny>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SevnthTiny, Tiny<>>::type::value));
+        using Tiny4 = boost::mpl::pop_back<Tiny3>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny4, Tiny<unsigned short&, const long>>::type::value));
+        using Tiny5 = boost::mpl::pop_back<Tiny2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny5, Tiny<char*>>::type::value));
+        using Tiny6 = boost::mpl::pop_back<Tiny1>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Tiny6, Tiny<>>::type::value));
 
 #if 0  // 这里应该产生编译错误。	
-		using InvalidType = boost::mpl::pop_back<SevnthTiny>::type;
+
+		using InvalidType = boost::mpl::pop_back<Tiny6>::type;
+
 #endif  // 0
     }
 }
 
-void CoreTools::TinyTesting ::EraseTest() noexcept
+void CoreTools::TinyTesting::EraseTest() noexcept
 {
-    using FirstTiny = Tiny<>;
-    using SecondTiny = Tiny<char*>;
-    using ThirdTiny = Tiny<const long, char*>;
-    using FourthTiny = Tiny<unsigned short&, const long, char*>;
+    using Tiny0 = Tiny<>;
+    using Tiny1 = Tiny<char*>;
+    using Tiny2 = Tiny<const long, char*>;
+    using Tiny3 = Tiny<unsigned short&, const long, char*>;
 
-    [[maybe_unused]] TinyTest<FirstTiny>::type tiny1;
-    [[maybe_unused]] TinyTest<SecondTiny>::type tiny2;
-    [[maybe_unused]] TinyTest<ThirdTiny>::type tiny3;
-    [[maybe_unused]] TinyTest<FourthTiny>::type tiny4;
+    MAYBE_UNUSED TinyTest<Tiny0>::type tiny1;
+    MAYBE_UNUSED TinyTest<Tiny1>::type tiny2;
+    MAYBE_UNUSED TinyTest<Tiny2>::type tiny3;
+    MAYBE_UNUSED TinyTest<Tiny3>::type tiny4;
 
     {
-        using FirstTinyIterator = TinyIterator<FourthTiny, TinyZero>;
-        using FirstErase = boost::mpl::erase<FourthTiny, FirstTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FirstErase, Tiny<const long, char*>>::type::value));
+        using TinyIterator0 = TinyIterator<Tiny3, TinyZero>;
+        using Erase0 = boost::mpl::erase<Tiny3, TinyIterator0>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
 
-        using SecondTinyIterator = TinyIterator<FourthTiny, TinyOne>;
-        using SecondErase = boost::mpl::erase<FourthTiny, SecondTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SecondErase, Tiny<unsigned short&, char*>>::type::value));
+        using TinyIterator1 = TinyIterator<Tiny3, TinyOne>;
+        using Erase1 = boost::mpl::erase<Tiny3, TinyIterator1>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<unsigned short&, char*>>::type::value));
 
-        using ThirdTinyIterator = TinyIterator<FourthTiny, TinyTwo>;
+        using TinyIterator2 = TinyIterator<Tiny3, TinyTwo>;
 
-        using ThirdErase = boost::mpl::erase<FourthTiny, ThirdTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<ThirdErase, Tiny<unsigned short&, const long>>::type::value));
+        using Erase2 = boost::mpl::erase<Tiny3, TinyIterator2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<unsigned short&, const long>>::type::value));
     }
 
     {
-        using FirstTinyIterator = TinyIterator<ThirdTiny, TinyZero>;
-        using FirstErase = boost::mpl::erase<ThirdTiny, FirstTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FirstErase, Tiny<char*>>::type::value));
+        using TinyIterator0 = TinyIterator<Tiny2, TinyZero>;
+        using Erase0 = boost::mpl::erase<Tiny2, TinyIterator0>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<char*>>::type::value));
 
-        using SecondTinyIterator = TinyIterator<ThirdTiny, TinyOne>;
-        using ThirdErase = boost::mpl::erase<ThirdTiny, SecondTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<ThirdErase, Tiny<const long>>::type::value));
+        using TinyIterator1 = TinyIterator<Tiny2, TinyOne>;
+        using Erase1 = boost::mpl::erase<Tiny2, TinyIterator1>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<const long>>::type::value));
 
-        using ThirdTinyIterator = TinyIterator<ThirdTiny, TinyTwo>;
-
-#if 0  // 这里应该产生编译错误。
-		using Invalid = boost::mpl::erase<ThirdTiny, ThirdTinyIterator>::type;
-#endif  // 0
-    }
-
-    {
-        using FirstTinyIterator = TinyIterator<SecondTiny, TinyZero>;
-        using FirstErase = boost::mpl::erase<SecondTiny, FirstTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FirstErase, Tiny<>>::type::value));
-
-        using SecondTinyIterator = TinyIterator<SecondTiny, TinyOne>;
+        using TinyIterator2 = TinyIterator<Tiny2, TinyTwo>;
 
 #if 0  // 这里应该产生编译错误。
-		using Invalid = boost::mpl::erase<SecondTiny, SecondTinyIterator>::type;
+
+		using Invalid = boost::mpl::erase<Tiny2, TinyIterator2>::type;
+
 #endif  // 0
     }
 
     {
-        using FirstTinyIterator = TinyIterator<FirstTiny, TinyZero>;
+        using TinyIterator0 = TinyIterator<Tiny1, TinyZero>;
+        using Erase0 = boost::mpl::erase<Tiny1, TinyIterator0>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<>>::type::value));
+
+        using TinyIterator1 = TinyIterator<Tiny1, TinyOne>;
 
 #if 0  // 这里应该产生编译错误。
-		using Invalid = boost::mpl::erase<FirstTiny, FirstTinyIterator>::type;
+
+		using Invalid = boost::mpl::erase<Tiny1, TinyIterator1>::type;
+
 #endif  // 0
     }
 
     {
-        using FirstTinyIterator = TinyIterator<FourthTiny, TinyZero>;
-        using SecondTinyIterator = TinyIterator<FourthTiny, TinyOne>;
-        using ThirdTinyIterator = TinyIterator<FourthTiny, TinyTwo>;
-        using FourthTinyIterator = TinyIterator<FourthTiny, TinyThree>;
+        using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
 
 #if 0  // 这里应该产生编译错误。
-		using FirstInvalid = boost::mpl::erase<FourthTiny, FirstTinyIterator, FirstTinyIterator>::type;
-#endif  // 0
 
-        using FirstErase = boost::mpl::erase<FourthTiny, FirstTinyIterator, SecondTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FirstErase, Tiny<const long, char*>>::type::value));
+		using Invalid = boost::mpl::erase<Tiny0, TinyIterator0>::type;
 
-        using SecondErase = boost::mpl::erase<FourthTiny, FirstTinyIterator, ThirdTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SecondErase, Tiny<char*>>::type::value));
-
-        using ThirdErase = boost::mpl::erase<FourthTiny, FirstTinyIterator, FourthTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<ThirdErase, Tiny<>>::type::value));
-
-#if 0  // 这里应该产生编译错误。
-		using SecondInvalid = boost::mpl::erase<FourthTiny, SecondTinyIterator, SecondTinyIterator>::type;
-#endif  // 0
-
-        using FourthErase = boost::mpl::erase<FourthTiny, SecondTinyIterator, ThirdTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FourthErase, Tiny<unsigned short&, char*>>::type::value));
-
-        using FifthErase = boost::mpl::erase<FourthTiny, SecondTinyIterator, FourthTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FifthErase, Tiny<unsigned short&>>::type::value));
-
-#if 0  // 这里应该产生编译错误。
-		using ThirdInvalid = boost::mpl::erase<FourthTiny, ThirdTinyIterator, ThirdTinyIterator>::type;
-#endif  // 0
-
-        using SixthErase = boost::mpl::erase<FourthTiny, ThirdTinyIterator, FourthTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SixthErase, Tiny<unsigned short&, const long>>::type::value));
-    }
-
-    {
-        using FirstTinyIterator = TinyIterator<ThirdTiny, TinyZero>;
-        using SecondTinyIterator = TinyIterator<ThirdTiny, TinyOne>;
-        using ThirdTinyIterator = TinyIterator<ThirdTiny, TinyTwo>;
-        using FourthTinyIterator = TinyIterator<ThirdTiny, TinyThree>;
-
-        using FirstErase = boost::mpl::erase<ThirdTiny, FirstTinyIterator, SecondTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<FirstErase, Tiny<char*>>::type::value));
-
-        using SecondErase = boost::mpl::erase<ThirdTiny, FirstTinyIterator, ThirdTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<SecondErase, Tiny<>>::type::value));
-
-#if 0  // 这里应该产生编译错误。
-		using FirstInvalid = boost::mpl::erase<ThirdTiny, FirstTinyIterator, FourthTinyIterator>::type;
-#endif  // 0
-
-        using ThirdErase = boost::mpl::erase<ThirdTiny, SecondTinyIterator, ThirdTinyIterator>::type;
-        BOOST_STATIC_ASSERT((boost::mpl::equal<ThirdErase, Tiny<const long>>::type::value));
-
-#if 0  // 这里应该产生编译错误。
-		using SecondInvalid = boost::mpl::erase<ThirdTiny, SecondTinyIterator, FourthTinyIterator>::type;
-#endif  // 0
-
-#if 0  // 这里应该产生编译错误。		
-		using ThirdInvalid = boost::mpl::erase<ThirdTiny, ThirdTinyIterator, FourthTinyIterator>::type;
 #endif  // 0
     }
 
     {
-        using FirstTinyIterator = TinyIterator<SecondTiny, TinyZero>;
-        using SecondTinyIterator = TinyIterator<SecondTiny, TinyOne>;
-        using ThirdTinyIterator = TinyIterator<SecondTiny, TinyTwo>;
+        using TinyIterator0 = TinyIterator<Tiny3, TinyZero>;
+        using TinyIterator1 = TinyIterator<Tiny3, TinyOne>;
+        using TinyIterator2 = TinyIterator<Tiny3, TinyTwo>;
+        using TinyIterator3 = TinyIterator<Tiny3, TinyThree>;
 
-        using e0 = boost::mpl::erase<SecondTiny, FirstTinyIterator, SecondTinyIterator>::type;
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator0>::type;
+
+#endif  // 0
+
+        using Erase0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator1>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<const long, char*>>::type::value));
+
+        using Erase1 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<char*>>::type::value));
+
+        using Erase2 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<>>::type::value));
+
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid1 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator1>::type;
+
+#endif  // 0
+
+        using Erase3 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase3, Tiny<unsigned short&, char*>>::type::value));
+
+        using Erase4 = boost::mpl::erase<Tiny3, TinyIterator1, TinyIterator3>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase4, Tiny<unsigned short&>>::type::value));
+
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid2 = boost::mpl::erase<Tiny3, TinyIterator2, TinyIterator2>::type;
+
+#endif  // 0
+
+        using Erase5 = boost::mpl::erase<Tiny3, TinyIterator2, TinyIterator3>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase5, Tiny<unsigned short&, const long>>::type::value));
+    }
+
+    {
+        using TinyIterator0 = TinyIterator<Tiny2, TinyZero>;
+        using TinyIterator1 = TinyIterator<Tiny2, TinyOne>;
+        using TinyIterator2 = TinyIterator<Tiny2, TinyTwo>;
+        using TinyIterator3 = TinyIterator<Tiny2, TinyThree>;
+
+        using Erase0 = boost::mpl::erase<Tiny2, TinyIterator0, TinyIterator1>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase0, Tiny<char*>>::type::value));
+
+        using Erase1 = boost::mpl::erase<Tiny2, TinyIterator0, TinyIterator2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase1, Tiny<>>::type::value));
+
+#if 0  // 这里应该产生编译错误。
+
+		using Invalid0 = boost::mpl::erase<Tiny3, TinyIterator0, TinyIterator3>::type;
+
+#endif  // 0
+
+        using Erase2 = boost::mpl::erase<Tiny2, TinyIterator1, TinyIterator2>::type;
+        BOOST_STATIC_ASSERT((boost::mpl::equal<Erase2, Tiny<const long>>::type::value));
+
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid1 = boost::mpl::erase<Tiny2, TinyIterator1, TinyIterator3>::type;
+
+#endif  // 0
+
+#if 0  // 这里应该产生编译错误。	
+
+		using Invalid2 = boost::mpl::erase<Tiny2, TinyIterator2, TinyIterator3>::type;
+
+#endif  // 0
+    }
+
+    {
+        using TinyIterator0 = TinyIterator<Tiny1, TinyZero>;
+        using TinyIterator1 = TinyIterator<Tiny1, TinyOne>;
+        using TinyIterator2 = TinyIterator<Tiny1, TinyTwo>;
+
+        using e0 = boost::mpl::erase<Tiny1, TinyIterator0, TinyIterator1>::type;
         BOOST_STATIC_ASSERT((boost::mpl::equal<e0, Tiny<>>::type::value));
 
-#if 0  // 这里应该产生编译错误。	
-		using FirstInvalid = boost::mpl::erase<SecondTiny, FirstTinyIterator, ThirdTinyIterator>::type;
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid0 = boost::mpl::erase<Tiny1, TinyIterator0, TinyIterator2>::type;
+
 #endif  // 0
 
-#if 0  // 这里应该产生编译错误。	
-		using SecondInvalid = boost::mpl::erase<SecondTiny, SecondTinyIterator, ThirdTinyIterator>::type;
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid1 = boost::mpl::erase<Tiny1, TinyIterator1, TinyIterator2>::type;
+
 #endif  // 0
     }
 
     {
-        using FirstTinyIterator = TinyIterator<FirstTiny, TinyZero>;
-        using SecondTinyIterator = TinyIterator<FirstTiny, TinyOne>;
+        using TinyIterator0 = TinyIterator<Tiny0, TinyZero>;
+        using TinyIterator1 = TinyIterator<Tiny0, TinyOne>;
 
-#if 0  // 这里应该产生编译错误。	
-		using Invalid = boost::mpl::erase<FirstTiny, FirstTinyIterator, SecondTinyIterator>::type;
+#if 0  // 这里应该产生编译错误。
+
+        using Invalid = boost::mpl::erase<Tiny0, TinyIterator0, TinyIterator1>::type;
+
 #endif  // 0
     }
 }
-#include STSTEM_WARNING_POP

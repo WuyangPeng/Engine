@@ -4,8 +4,8 @@
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.1 (2022/01/08 0:54)
+///	标准：std:c++20
+///	引擎版本：0.8.0.8 (2022/05/12 16:04)
 
 // main函数所需要的宏
 #ifndef CORE_TOOLS_HELPER_MAIN_FUNCTION_MACRO_H
@@ -74,7 +74,7 @@
             {                                                                                                                               \
                 System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain 抛出异常。"));                                               \
             }                                                                                                                               \
-            return System::g_True;                                                                                                          \
+            return System::gTrue;                                                                                                           \
         }
 
 #endif  // TCRE_USE_GCC

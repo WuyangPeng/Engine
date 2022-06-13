@@ -149,7 +149,7 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    auto result = g_False;
+    auto result = gFalse;
 
     const auto size = ::WideCharToMultiByte(EnumCastUnderlying(codePage), EnumCastUnderlying(flag), wideChar, wideCharLength, multiByte, multiByteLength, defaultChar, defaultChar != nullptr ? &result : nullptr);
     BoolConversion(result, usedDefaultChar);

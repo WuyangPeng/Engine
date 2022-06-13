@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/17 22:24)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:05)
 
 #include "ConsoleCodePageTesting.h"
 #include "System/CharacterString/Flags/CodePageFlags.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::ConsoleCodePageTesting::ConsoleCodePageTesting(const OStreamShared& stream)
-    : ParentType{ stream }, m_CodePageFlags{ CodePage::UTF7, CodePage::UTF8 }
+    : ParentType{ stream }, codePageFlags{ CodePage::UTF7, CodePage::UTF8 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -37,7 +37,7 @@ void System::ConsoleCodePageTesting::CodePageTest()
 {
     const auto originalCodePage = GetConsoleCodePage();
 
-    for (auto flag : m_CodePageFlags)
+    for (auto flag : codePageFlags)
     {
         ASSERT_TRUE(SetConsoleCodePage(flag));
 
@@ -51,7 +51,7 @@ void System::ConsoleCodePageTesting::OutputCodePageTest()
 {
     const auto originalCodePage = GetConsoleOutputCodePage();
 
-    for (auto flag : m_CodePageFlags)
+    for (auto flag : codePageFlags)
     {
         ASSERT_TRUE(SetConsoleOutputCodePage(flag));
 

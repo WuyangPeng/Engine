@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.2 (2021/08/30 11:43)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 14:41)
 
 #include "CaseInsensitiveStringTesting.h"
 #include "CoreTools/CharacterString/CaseInsensitiveStringDetail.h"
@@ -31,7 +31,7 @@ void CoreTools::CaseInsensitiveStringTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
     ASSERT_NOT_THROW_EXCEPTION_0(WStringTest);
     ASSERT_NOT_THROW_EXCEPTION_0(TStringTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(DynamicLinkStringTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(DynamicLinkStringTest);
 }
 
 void CoreTools::CaseInsensitiveStringTesting::StringTest()

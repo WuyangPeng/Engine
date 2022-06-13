@@ -17,7 +17,7 @@ bool System::PostSystemThreadMessage(WindowsDWord threadID, WindowsMessages msg,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::PostThreadMessage(threadID, EnumCastUnderlying(msg), wParam, lParam) != g_False)
+    if (::PostThreadMessage(threadID, EnumCastUnderlying(msg), wParam, lParam) != gFalse)
         return true;
     else
         return false;
@@ -35,7 +35,7 @@ bool System::SystemInvalidateRect(WindowsHWnd hwnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InvalidateRect(hwnd, nullptr, g_True) != g_False)
+    if (::InvalidateRect(hwnd, nullptr, gTrue) != gFalse)
         return true;
     else
         return false;
@@ -53,7 +53,7 @@ bool System::UpdateSystemWindows(WindowsHWnd hwnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::UpdateWindow(hwnd) != g_False)
+    if (::UpdateWindow(hwnd) != gFalse)
         return true;
     else
         return false;

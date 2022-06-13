@@ -1,16 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/29 11:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 16:28)
 
 #include "OrthogonalLineFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/OrthogonalLineFit3Detail.h"
-
 #include "Mathematics/NumericalAnalysis/EigenDecomposition.h"
+
 #include <random>
 
 using std::default_random_engine;
@@ -24,41 +27,36 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, OrthogonalLineFit3Testing)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::OrthogonalLineFit3Testing ::MainTest()
+
+void Mathematics::OrthogonalLineFit3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
 
-void Mathematics::OrthogonalLineFit3Testing ::FitTest()
+void Mathematics::OrthogonalLineFit3Testing::FitTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(10, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(10, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
             vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        OrthogonalLineFit3D orthogonalLineFit2(vertices);
+        const OrthogonalLineFit3D orthogonalLineFit2(vertices);
 
         Vector3D origin;
         for (int i = 0; i < size; ++i)
         {
-            origin += vertices[i];
+            origin += vertices.at(i);
         }
 
         origin /= static_cast<double>(size);
@@ -73,7 +71,7 @@ void Mathematics::OrthogonalLineFit3Testing ::FitTest()
         double sumZZ = 0.0;
         for (int i = 0; i < size; ++i)
         {
-            Vector3D diff = vertices[i] - origin;
+            Vector3D diff = vertices.at(i) - origin;
             sumXX += diff[0] * diff[0];
             sumXY += diff[0] * diff[1];
             sumXZ += diff[0] * diff[2];

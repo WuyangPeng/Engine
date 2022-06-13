@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/02 13:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/10 16:46)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -36,70 +39,70 @@ void ResourceManager::TestingHelper::InitSuite()
     AddMiscellaneousSuite();
 }
 
-void ResourceManager::TestingHelper ::AddMacroSuite()
+void ResourceManager::TestingHelper::AddMacroSuite()
 {
     auto macroSuite = GenerateSuite("宏");
 
     AddSuite(macroSuite);
 }
 
-void ResourceManager::TestingHelper ::AddThreeDimensionalModelSuite()
+void ResourceManager::TestingHelper::AddThreeDimensionalModelSuite()
 {
     auto threeDimensionalModelSuite = GenerateSuite("三维模型资源");
 
     AddSuite(threeDimensionalModelSuite);
 }
 
-void ResourceManager::TestingHelper ::AddTextureSuite()
+void ResourceManager::TestingHelper::AddTextureSuite()
 {
     auto textureSuite = GenerateSuite("纹理资源");
 
     AddSuite(textureSuite);
 }
 
-void ResourceManager::TestingHelper ::AddMaterialSuite()
+void ResourceManager::TestingHelper::AddMaterialSuite()
 {
     auto materialSuite = GenerateSuite("材质资源");
 
     AddSuite(materialSuite);
 }
 
-void ResourceManager::TestingHelper ::AddFontSuite()
+void ResourceManager::TestingHelper::AddFontSuite()
 {
     auto fontSuite = GenerateSuite("字体资源");
 
     AddSuite(fontSuite);
 }
 
-void ResourceManager::TestingHelper ::AddSkeletonSuite()
+void ResourceManager::TestingHelper::AddSkeletonSuite()
 {
     auto skeletonSuite = GenerateSuite("骨骼资源");
 
     AddSuite(skeletonSuite);
 }
 
-void ResourceManager::TestingHelper ::AddCollisionSuite()
+void ResourceManager::TestingHelper::AddCollisionSuite()
 {
     auto collisionSuite = GenerateSuite("碰撞资源");
 
     AddSuite(collisionSuite);
 }
 
-void ResourceManager::TestingHelper ::AddPhysicalParametersSuite()
+void ResourceManager::TestingHelper::AddPhysicalParametersSuite()
 {
     auto physicalParametersSuite = GenerateSuite("物理参数");
 
     AddSuite(physicalParametersSuite);
 }
 
-void ResourceManager::TestingHelper ::AddGameWorldMapSuite()
+void ResourceManager::TestingHelper::AddGameWorldMapSuite()
 {
     auto gameWorldMapSuite = GenerateSuite("游戏世界和地图");
 
     AddSuite(gameWorldMapSuite);
 }
 
-void ResourceManager::TestingHelper ::AddMiscellaneousSuite()
+void ResourceManager::TestingHelper::AddMiscellaneousSuite()
 {
     auto miscellaneousSuite = GenerateSuite("杂项");
 

@@ -1,42 +1,40 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 19:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 16:26)
 
 #include "Entity.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::Entity ::Entity()
-    : ParentType{ DisableNotThrow::Disable }, m_Value{ 0 }
+std::shared_ptr<CoreTools::Entity> CoreTools::Entity::Create(int value)
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    return std::make_shared<Entity>(value);
 }
-#include STSTEM_WARNING_POP
 
-CoreTools::Entity ::Entity(int value)
-    : ParentType{ DisableNotThrow::Disable }, m_Value{ value }
+CoreTools::Entity::Entity(int value)
+    : ParentType{ DisableNotThrow::Disable }, value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, Entity)
 
-bool CoreTools::Entity ::EventFunction(const Telegram& telegram)
+bool CoreTools::Entity::EventFunction(const Telegram& telegram)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Value += telegram.GetCallbackParameters().GetInt32Value(0);
+    value += telegram.GetCallbackParameters().GetInt32Value(0);
 
     return true;
 }
 
-int CoreTools::Entity ::GetValue() const noexcept
+int CoreTools::Entity::GetValue() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }

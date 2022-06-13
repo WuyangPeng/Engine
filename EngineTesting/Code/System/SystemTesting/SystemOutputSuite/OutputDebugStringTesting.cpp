@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.1 (2021/03/23 11:14)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 19:07)
 
 #include "OutputDebugStringTesting.h"
 #include "System/SystemOutput/OutputDebugString.h"
@@ -43,7 +43,7 @@ void System::OutputDebugStringTesting::OutputWCharToDebugTest() noexcept
     OutputDebugStringWithWChar(L"测试信息输出至调试窗口。\n");
 }
 
-void System::OutputDebugStringTesting ::OutputTCharToDebugTest() noexcept
+void System::OutputDebugStringTesting::OutputTCharToDebugTest() noexcept
 {
     OutputDebugStringWithTChar(SYSTEM_TEXT("测试信息输出至调试窗口。\n"));
 }

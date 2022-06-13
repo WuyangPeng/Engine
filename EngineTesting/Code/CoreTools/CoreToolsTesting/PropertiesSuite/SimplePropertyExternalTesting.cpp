@@ -1,10 +1,13 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 13:47)
 
-#include "SimplePropertyExternalTesting.h" 
+#include "SimplePropertyExternalTesting.h"
 #include "Detail/SimplePropertyExternal.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -13,28 +16,24 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, SimplePropertyExternalTesting)
 
-void CoreTools::SimplePropertyExternalTesting
-	::MainTest()
+void CoreTools::SimplePropertyExternalTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(GetSetTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSetTest);
 }
 
-void CoreTools::SimplePropertyExternalTesting
-	::GetSetTest()
+void CoreTools::SimplePropertyExternalTesting::GetSetTest()
 {
-	SimplePropertyExternal simplePropertyExternal{};
+    SimplePropertyExternal simplePropertyExternal{};
 
-	string value{ simplePropertyExternal.m_GetType };
+    string value{ simplePropertyExternal.getType };
 
-	ASSERT_EQUAL(value, "");
+    ASSERT_EQUAL(value, "");
 
-	string setValue{ "set" };
+    string setValue{ "set" };
 
-	simplePropertyExternal.m_SetType = setValue;
+    simplePropertyExternal.setType = setValue;
 
-	value = simplePropertyExternal.m_GetType;
+    value = simplePropertyExternal.getType;
 
-	ASSERT_EQUAL(value, setValue);
+    ASSERT_EQUAL(value, setValue);
 }
-
-

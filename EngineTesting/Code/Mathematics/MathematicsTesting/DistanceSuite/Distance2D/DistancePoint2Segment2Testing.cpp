@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 12:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 15:23)
 
 #include "DistancePoint2Segment2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,11 +23,10 @@ namespace Mathematics
     template class DistancePoint2Segment2<float>;
     template class DistancePoint2Segment2<double>;
 }
-#include SYSTEM_WARNING_DISABLE(26496)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint2Segment2Testing)
 
-void Mathematics::DistancePoint2Segment2Testing ::MainTest()
+void Mathematics::DistancePoint2Segment2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StaticTest);
@@ -33,22 +35,22 @@ void Mathematics::DistancePoint2Segment2Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IntervalTest);
 }
 
-void Mathematics::DistancePoint2Segment2Testing ::BaseTest()
+void Mathematics::DistancePoint2Segment2Testing::BaseTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2F point(randomDistribution(generator), randomDistribution(generator));
+        const Vector2F point(randomDistribution(generator), randomDistribution(generator));
 
-        Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2F rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        float rhsExtent = MathF::FAbs(randomDistribution(generator));
+        const float rhsExtent = MathF::FAbs(randomDistribution(generator));
 
         DistancePoint2Segment2F distance(point, Segment2F(rhsExtent, rhsOrigin, rhsDirection, 1e-5f));
 
@@ -70,22 +72,22 @@ void Mathematics::DistancePoint2Segment2Testing ::BaseTest()
     }
 }
 
-void Mathematics::DistancePoint2Segment2Testing ::StaticTest()
+void Mathematics::DistancePoint2Segment2Testing::StaticTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 point(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint2Segment2D distance(point, Segment2D(rhsExtent, rhsOrigin, rhsDirection));
 
@@ -99,8 +101,7 @@ void Mathematics::DistancePoint2Segment2Testing ::StaticTest()
         {
             ASSERT_TRUE(Vector2ToolsD::GetLength(rhsDifference) <= rhsExtent + 1e-10);
             rhsDifference.Normalize();
-            ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10) ||
-                        Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-10));
+            ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10) || Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-10));
         }
 
         DistanceResult2D result = distance.Get();
@@ -111,26 +112,26 @@ void Mathematics::DistancePoint2Segment2Testing ::StaticTest()
     }
 }
 
-void Mathematics::DistancePoint2Segment2Testing ::DynamicTest()
+void Mathematics::DistancePoint2Segment2Testing::DynamicTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 point(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint2Segment2D distance(point, Segment2D(rhsExtent, rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -146,8 +147,7 @@ void Mathematics::DistancePoint2Segment2Testing ::DynamicTest()
         {
             ASSERT_TRUE(Vector2ToolsD::GetLength(rhsDifference) <= rhsExtent + 1e-10);
             rhsDifference.Normalize();
-            ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10) ||
-                        Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-10));
+            ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10) || Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-10));
         }
 
         DistanceResult2D result = distance.Get(t, lhsVelocity, rhsVelocity);
@@ -158,26 +158,26 @@ void Mathematics::DistancePoint2Segment2Testing ::DynamicTest()
     }
 }
 
-void Mathematics::DistancePoint2Segment2Testing ::DerivativeTest()
+void Mathematics::DistancePoint2Segment2Testing::DerivativeTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 point(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint2Segment2D distance(point, Segment2D(rhsExtent, rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -185,36 +185,35 @@ void Mathematics::DistancePoint2Segment2Testing ::DerivativeTest()
 
         DistanceResult2D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         DistanceResult2D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        double derivativeApproximation =
-            0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
+        const double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
-        double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
+        const double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(derivativeResult, derivativeApproximation, 1e-10);
 
-        double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
+        const double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
         DistanceResult2D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
 
-void Mathematics::DistancePoint2Segment2Testing ::IntervalTest()
+void Mathematics::DistancePoint2Segment2Testing::IntervalTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 point(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint2Segment2D distance(point, Segment2D(rhsExtent, rhsOrigin, rhsDirection));
 
@@ -238,10 +237,8 @@ void Mathematics::DistancePoint2Segment2Testing ::IntervalTest()
 
         ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-4);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
-                                        result.GetLhsClosestPoint(), 1e-1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(),
-                                        result.GetRhsClosestPoint(), 1e-1);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-1);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-1);
 
         for (double t = tMin; t < tMax; t += 0.1)
         {

@@ -17,7 +17,7 @@
 
 namespace Rendering
 {
-    class Texture2ColorBlendEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE Texture2ColorBlendEffect : public VisualEffect
     {
     public:
         using ClassType = Texture2ColorBlendEffect;

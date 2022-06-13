@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 13:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 13:59)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_ADDRESS_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_ADDRESS_TESTING_H
@@ -12,49 +15,50 @@
 
 namespace Network
 {
-	class SockAddressTesting : public SingletonTesting
-	{
-	public:
-        
-            using ClassType = SockAddressTesting;
-            using ParentType = SingletonTesting;
+    class SockAddressTesting : public SingletonTesting
+    {
+    public:
+        using ClassType = SockAddressTesting;
+        using ParentType = SingletonTesting;
 
-        public:
-            explicit SockAddressTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit SockAddressTesting(const OStreamShared& stream);
 
-	private:
-		void MainTest();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void ACETest();
-		void BoostTest();
-		void NetworkTest();
-		void NullTest();
+        using TestFunction = void (ClassType::*)();
 
-		void ACEConstructionTest();
-		void BoostConstructionTest();
-		void NetworkConstructionTest();
-		void NullConstructionTest();
+    private:
+        void MainTest();
 
-		void ACEGetACEInetAddressTest();
-		void ACEGetBoostInetAddressExceptionTest();
-		void ACEGetNetworkInetAddressExceptionTest();
+        void ACETest();
+        void BoostTest();
+        void NetworkTest();
+        void NullTest();
 
-		void BoostGetACEInetAddressExceptionTest();
-		void BoostGetBoostInetAddressTest();
-		void BoostGetNetworkInetAddressExceptionTest();
+        void ACEConstructionTest();
+        void BoostConstructionTest();
+        void NetworkConstructionTest();
+        void NullConstructionTest();
 
-		void NetworkGetACEInetAddressExceptionTest();
-		void NetworkGetBoostInetAddressExceptionTest();
-		void NetworkGetNetworkInetAddressTest();
+        void ACEGetACEInetAddressTest();
+        void ACEGetBoostInetAddressExceptionTest();
+        void ACEGetNetworkInetAddressExceptionTest();
 
-		void NullGetACEInetAddressExceptionTest();
-		void NullGetBoostInetAddressExceptionTest();
-		void NullGetNetworkInetAddressExceptionTest();
+        void BoostGetACEInetAddressExceptionTest();
+        void BoostGetBoostInetAddressTest();
+        void BoostGetNetworkInetAddressExceptionTest();
 
-		void DoRunUnitTest() override;
-	};
+        void NetworkGetACEInetAddressExceptionTest();
+        void NetworkGetBoostInetAddressExceptionTest();
+        void NetworkGetNetworkInetAddressTest();
+
+        void NullGetACEInetAddressExceptionTest();
+        void NullGetBoostInetAddressExceptionTest();
+        void NullGetNetworkInetAddressExceptionTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_ADDRESS_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_ADDRESS_TESTING_H

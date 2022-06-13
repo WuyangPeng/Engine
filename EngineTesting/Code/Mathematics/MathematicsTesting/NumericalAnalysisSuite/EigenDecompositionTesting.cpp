@@ -1,20 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/27 15:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/02 17:05)
 
 #include "EigenDecompositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Matrix2.h"
+#include "Mathematics/Algebra/Matrix3.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/EigenDecompositionDetail.h"
 
-#include "Mathematics/Algebra/Matrix2.h"
-#include "Mathematics/Algebra/Matrix3.h"
 #include <random>
 
 using std::default_random_engine;
@@ -29,36 +32,27 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EigenDecompositionTesting)
 
-void Mathematics::EigenDecompositionTesting ::MainTest()
+void Mathematics::EigenDecompositionTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(Eigenvalue2Test);
     ASSERT_NOT_THROW_EXCEPTION_0(Eigenvalue3Test);
     ASSERT_NOT_THROW_EXCEPTION_0(EigenvalueNTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-void Mathematics::EigenDecompositionTesting ::Eigenvalue2Test()
+
+void Mathematics::EigenDecompositionTesting::Eigenvalue2Test()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    const uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         Matrix2D firstMatrix(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  0.0,
-                                  randomDistribution(generator));
+                             randomDistribution(generator),
+                             0.0,
+                             randomDistribution(generator));
 
         firstMatrix(1, 0) = firstMatrix(0, 1);
 
@@ -84,24 +78,24 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue2Test()
     }
 }
 
-void Mathematics::EigenDecompositionTesting ::Eigenvalue3Test()
+void Mathematics::EigenDecompositionTesting::Eigenvalue3Test()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    const uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         Matrix3D firstMatrix(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  0.0,
-                                  randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  0.0,
-                                  0.0,
-                                  randomDistribution(generator));
+                             randomDistribution(generator),
+                             randomDistribution(generator),
+                             0.0,
+                             randomDistribution(generator),
+                             randomDistribution(generator),
+                             0.0,
+                             0.0,
+                             randomDistribution(generator));
 
         firstMatrix(1, 0) = firstMatrix(0, 1);
         firstMatrix(2, 0) = firstMatrix(0, 2);
@@ -113,8 +107,8 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue3Test()
 
         Matrix3D rotation = eigenDecomposition.GetEigenvectors3();
         Matrix3D diagonal(eigenDecomposition.GetEigenvalue(0),
-                               eigenDecomposition.GetEigenvalue(1),
-                               eigenDecomposition.GetEigenvalue(2));
+                          eigenDecomposition.GetEigenvalue(1),
+                          eigenDecomposition.GetEigenvalue(2));
 
         Matrix3D secondMatrix = rotation * diagonal * rotation.Transpose();
 
@@ -124,8 +118,8 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue3Test()
 
         rotation = eigenDecomposition.GetEigenvectors3();
         diagonal = Matrix3D(eigenDecomposition.GetEigenvalue(0),
-                                 eigenDecomposition.GetEigenvalue(1),
-                                 eigenDecomposition.GetEigenvalue(2));
+                            eigenDecomposition.GetEigenvalue(1),
+                            eigenDecomposition.GetEigenvalue(2));
 
         secondMatrix = rotation * diagonal * rotation.Transpose();
 
@@ -133,30 +127,30 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue3Test()
     }
 }
 
-void Mathematics::EigenDecompositionTesting ::EigenvalueNTest()
+void Mathematics::EigenDecompositionTesting::EigenvalueNTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e2, 1.0e2);
-    uniform_int<> secondRandomDistribution(4, 10);
+    const uniform_real<double> firstRandomDistribution(-1.0e2, 1.0e2);
+    const uniform_int<> secondRandomDistribution(4, 10);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        int size = secondRandomDistribution(generator);
+        const auto size = secondRandomDistribution(generator);
         VariableMatrixD firstMatrix(size, size);
 
-        for (int row = 0; row < size; ++row)
+        for (auto row = 0; row < size; ++row)
         {
-            for (int column = 0; column < size; ++column)
+            for (auto column = 0; column < size; ++column)
             {
                 firstMatrix(row, column) = firstRandomDistribution(generator);
             }
         }
 
-        for (int row = 0; row < size; ++row)
+        for (auto row = 0; row < size; ++row)
         {
-            for (int column = 0; column < size; ++column)
+            for (auto column = 0; column < size; ++column)
             {
                 if (row <= column)
                 {
@@ -179,7 +173,7 @@ void Mathematics::EigenDecompositionTesting ::EigenvalueNTest()
 
         VariableMatrixD secondMatrix = rotation * diagonal * rotation.Transpose();
 
-        typedef bool (*VariableMatrixdApproximate)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
+        using VariableMatrixdApproximate = bool (*)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
@@ -200,10 +194,10 @@ void Mathematics::EigenDecompositionTesting ::EigenvalueNTest()
     }
 }
 
-void Mathematics::EigenDecompositionTesting ::BaseTest()
+void Mathematics::EigenDecompositionTesting::BaseTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    const uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
     constexpr int size = 4;
 
     const auto testLoopCount = GetTestLoopCount();
@@ -215,9 +209,9 @@ void Mathematics::EigenDecompositionTesting ::BaseTest()
         ASSERT_EQUAL(firstEigenDecomposition.GetSize(), 4);
 
         Matrix2D firstMatrix(randomDistribution(generator),
-                                  randomDistribution(generator),
-                                  0.0,
-                                  randomDistribution(generator));
+                             randomDistribution(generator),
+                             0.0,
+                             randomDistribution(generator));
 
         firstMatrix(1, 0) = firstMatrix(0, 1);
 
@@ -238,14 +232,14 @@ void Mathematics::EigenDecompositionTesting ::BaseTest()
         }
 
         Matrix3D secondMatrix(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   0.0,
-                                   randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   0.0,
-                                   0.0,
-                                   randomDistribution(generator));
+                              randomDistribution(generator),
+                              randomDistribution(generator),
+                              0.0,
+                              randomDistribution(generator),
+                              randomDistribution(generator),
+                              0.0,
+                              0.0,
+                              randomDistribution(generator));
 
         secondMatrix(1, 0) = secondMatrix(0, 1);
         secondMatrix(2, 0) = secondMatrix(0, 2);
@@ -296,7 +290,7 @@ void Mathematics::EigenDecompositionTesting ::BaseTest()
 
         VariableMatrixD eigenvectors = secondEigenDecomposition.GetEigenvectors();
 
-        typedef bool (*VariableLengthVectorApproximate)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
+        using VariableLengthVectorApproximate = bool (*)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
         VariableLengthVectorApproximate function = Approximate<double>;
 

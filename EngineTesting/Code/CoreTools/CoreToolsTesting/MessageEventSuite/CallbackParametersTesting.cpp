@@ -1,14 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/06 19:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/18 16:33)
 
 #include "CallbackParametersTesting.h"
 #include "Detail/Parameters.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
 #include "CoreTools/MessageEvent/CallbackParametersDetail.h"
 
 using std::make_shared;
@@ -17,7 +19,7 @@ using std::wstring;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(CoreTools, CallbackParameters)
 
-void CoreTools::CallbackParametersTesting ::MainTest()
+void CoreTools::CallbackParametersTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BuiltInTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ParametersInterfaceTest);
@@ -25,7 +27,7 @@ void CoreTools::CallbackParametersTesting ::MainTest()
     ASSERT_THROW_EXCEPTION_0(InvalidTypeTest);
 }
 
-void CoreTools::CallbackParametersTesting ::BuiltInTest()
+void CoreTools::CallbackParametersTesting::BuiltInTest()
 {
     TestingType callbackParameters{ 0 };
 
@@ -77,24 +79,22 @@ void CoreTools::CallbackParametersTesting ::BuiltInTest()
     ASSERT_EQUAL(callbackParameters.GetContainerSize(), 14);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-void CoreTools::CallbackParametersTesting ::ParametersInterfaceTest()
+void CoreTools::CallbackParametersTesting::ParametersInterfaceTest()
 {
-    auto testValue = 5;
+    constexpr auto testValue = 5;
 
-    ParametersSharedPtr smartPointer{ make_shared<Parameters>(testValue) };
+    auto smartPointer = Parameters::Create(testValue);
     TestingType callbackParameters{ 0 };
 
     callbackParameters.SetValue(0, *smartPointer);
 
-    //  auto cloneSmartPointer = PolymorphicSharedPtrDowncast<const Parameters>(callbackParameters.GetParametersInterfaceValue(0));
+    auto cloneSmartPointer = boost::polymorphic_pointer_cast<const Parameters>(callbackParameters.GetParametersInterfaceValue(0));
 
-    // ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
+    ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
 
     smartPointer->SetValue(0);
 
-    auto cloneSmartPointer = callbackParameters.GetParametersInterfacePolymorphicDowncast<const Parameters>(0);
+    cloneSmartPointer = callbackParameters.GetParametersInterfacePolymorphicDowncast<const Parameters>(0);
 
     ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
 
@@ -102,8 +102,8 @@ void CoreTools::CallbackParametersTesting ::ParametersInterfaceTest()
 
     ASSERT_EQUAL(cloneSmartPointer->GetValue(), testValue);
 }
-#include STSTEM_WARNING_POP
-void CoreTools::CallbackParametersTesting ::InvalidParametersTest()
+
+void CoreTools::CallbackParametersTesting::InvalidParametersTest()
 {
     TestingType callbackParameters{ 0 };
 
@@ -111,10 +111,10 @@ void CoreTools::CallbackParametersTesting ::InvalidParametersTest()
 
     callbackParameters.SetValue(1, firstValue);
 
-    [[maybe_unused]] const auto value = callbackParameters.GetInt8Value(0);
+    MAYBE_UNUSED const auto value = callbackParameters.GetInt8Value(0);
 }
 
-void CoreTools::CallbackParametersTesting ::InvalidTypeTest()
+void CoreTools::CallbackParametersTesting::InvalidTypeTest()
 {
     TestingType callbackParameters{ 0 };
 
@@ -122,5 +122,5 @@ void CoreTools::CallbackParametersTesting ::InvalidTypeTest()
 
     callbackParameters.SetValue(0, firstValue);
 
-    [[maybe_unused]] const auto value = callbackParameters.GetInt8Value(0);
+    MAYBE_UNUSED const auto value = callbackParameters.GetInt8Value(0);
 }

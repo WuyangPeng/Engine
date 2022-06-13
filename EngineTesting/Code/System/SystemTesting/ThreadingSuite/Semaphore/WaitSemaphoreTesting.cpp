@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/04/27 14:03)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 18:54)
 
 #include "WaitSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -41,7 +41,7 @@ void System::WaitSemaphoreTesting::ThreadTest()
     auto semaphoreHandle = CreateSystemSemaphore(maxSemphoreCount, maxSemphoreCount);
     ASSERT_TRUE(IsSystemSemaphoreValid(semaphoreHandle));
 
-    boost::thread_group threadGroup;
+    boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
         threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest0, this, semaphoreHandle));

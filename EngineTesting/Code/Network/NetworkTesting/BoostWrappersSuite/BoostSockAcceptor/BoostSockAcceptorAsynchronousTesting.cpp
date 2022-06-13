@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 10:40)
 
 #include "BoostSockAcceptorAsynchronousTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,17 +23,13 @@ using std::make_shared;
 using std::thread;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockAcceptorAsynchronousTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26429)
-void Network::BoostSockAcceptorAsynchronousTesting ::MainTest()
+
+void Network::BoostSockAcceptorAsynchronousTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AcceptorTest);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AcceptorTest()
+void Network::BoostSockAcceptorAsynchronousTesting::AcceptorTest()
 {
     thread serverThread{ &ClassType::BoostServerThread, this };
 
@@ -46,7 +45,7 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AcceptorTest()
     serverThread.join();
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAcceptTest()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAcceptTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AsynchronousAccept1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(AsynchronousAccept2Test);
@@ -56,7 +55,7 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAcceptTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AsynchronousAccept6Test);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept1Test()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept1Test()
 {
     const auto port = GetRealPort();
 
@@ -65,7 +64,7 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept1Test()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept2Test()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept2Test()
 {
     const auto hostName = GetHostName();
     const auto port = GetRealPort();
@@ -75,14 +74,14 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept2Test()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept3Test()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept3Test()
 {
     TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy(GetRealOffset())) };
     ASSERT_NOT_THROW_EXCEPTION_2(AsynchronousAccept, sockAcceptor, &ClassType::AsynchronousAcceptNoUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept4Test()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept4Test()
 {
     const auto port = GetRealPort();
 
@@ -91,7 +90,7 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept4Test()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept5Test()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept5Test()
 {
     const auto hostName = GetHostName();
     const auto port = GetRealPort();
@@ -101,20 +100,27 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept5Test()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept6Test()
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept6Test()
 {
     TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy(GetRealOffset())) };
     ASSERT_NOT_THROW_EXCEPTION_2(AsynchronousAccept, sockAcceptor, &ClassType::AsynchronousAcceptUseAddress);
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept(const TestingTypeSharedPtr& sockAcceptor, AcceptFunction acceptFunction)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAccept(const TestingTypeSharedPtr& sockAcceptor, AcceptFunction acceptFunction)
 {
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
+    auto testSocketManager = TestSocketManager::Create(GetMessageID());
 
-    (this->*acceptFunction)(sockAcceptor, testSocketManager);
+    if (acceptFunction != nullptr)
+    {
+        (this->*acceptFunction)(sockAcceptor, testSocketManager);
+    }
 
     thread clientThread{ &ClassType::ClientThread, this };
 
@@ -132,7 +138,7 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAccept(const Te
     clientThread.join();
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAcceptNoUseAddress(const TestingTypeSharedPtr& sockAcceptor, const TestSocketManagerSharedPtr& testSocketManager)
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAcceptNoUseAddress(const TestingTypeSharedPtr& sockAcceptor, const TestSocketManagerSharedPtr& testSocketManager)
 {
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
@@ -141,7 +147,7 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAcceptNoUseAddr
     sockAcceptor->AsyncAccept(testSocketManager, sockStream);
 }
 
-void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAcceptUseAddress(const TestingTypeSharedPtr& sockAcceptor, const TestSocketManagerSharedPtr& testSocketManager)
+void Network::BoostSockAcceptorAsynchronousTesting::AsynchronousAcceptUseAddress(const TestingTypeSharedPtr& sockAcceptor, const TestSocketManagerSharedPtr& testSocketManager)
 {
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
@@ -150,3 +156,5 @@ void Network::BoostSockAcceptorAsynchronousTesting ::AsynchronousAcceptUseAddres
 
     sockAcceptor->AsyncAccept(testSocketManager, sockStream, sockAddress);
 }
+
+#include STSTEM_WARNING_POP

@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 14:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/23 18:32)
 
 #include "MultipleDoubleMessageTesting.h"
 #include "Flags/MultipleMessageType.h"
 #include "Detail/TestIntMessage.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -22,18 +26,23 @@ using std::make_shared;
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleDoubleMessageTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
+
 namespace Network
 {
-    using TestingType = MultipleDoubleMessage<MultipleMessageField, MultipleMessageByteType::Int8, MultipleMessageByteType::Uint8,
-                                              MultipleMessageByteType::Int16, MultipleMessageByteType::Uint16, MultipleMessageByteType::Int32,
-                                              MultipleMessageByteType::Uint32, MultipleMessageByteType::Int64, MultipleMessageByteType::Uint64,
+    using TestingType = MultipleDoubleMessage<MultipleMessageField,
+                                              MultipleMessageByteType::Int8,
+                                              MultipleMessageByteType::Uint8,
+                                              MultipleMessageByteType::Int16,
+                                              MultipleMessageByteType::Uint16,
+                                              MultipleMessageByteType::Int32,
+                                              MultipleMessageByteType::Uint32,
+                                              MultipleMessageByteType::Int64,
+                                              MultipleMessageByteType::Uint64,
                                               MultipleMessageByteType::String>;
     using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
 }
 
-void Network::MultipleDoubleMessageTesting ::MainTest()
+void Network::MultipleDoubleMessageTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RttiTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest);
@@ -41,7 +50,7 @@ void Network::MultipleDoubleMessageTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
 }
 
-void Network::MultipleDoubleMessageTesting ::RttiTest()
+void Network::MultipleDoubleMessageTesting::RttiTest()
 {
     constexpr int8_t int8Value{ -8 };
     constexpr int16_t int16Value{ 24 };
@@ -57,8 +66,8 @@ void Network::MultipleDoubleMessageTesting ::RttiTest()
 
     TestingType::MessageType messageType{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(sm_FullMessageID, messageType) };
-    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(sm_FullMessageID) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, messageType) };
+    TestIntMessageSharedPtr testIntMessage{ make_shared<TestIntMessage>(fullMessageID) };
 
     ASSERT_TRUE(testMessage->IsExactly(TestingType::GetCurrentRttiType()));
     ASSERT_FALSE(testMessage->IsExactly(MessageInterface::GetCurrentRttiType()));
@@ -76,7 +85,7 @@ void Network::MultipleDoubleMessageTesting ::RttiTest()
     ASSERT_EQUAL(string{ attiType.GetName() }, string{ typeid(TestingType).name() });
 }
 
-void Network::MultipleDoubleMessageTesting ::FactoryTest()
+void Network::MultipleDoubleMessageTesting::FactoryTest()
 {
     constexpr int8_t int8Value{ -8 };
     constexpr int16_t int16Value{ 24 };
@@ -92,9 +101,9 @@ void Network::MultipleDoubleMessageTesting ::FactoryTest()
 
     TestingType::MessageType messageType{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(sm_FullMessageID, messageType) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, messageType) };
 
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_FullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
     MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
@@ -106,32 +115,30 @@ void Network::MultipleDoubleMessageTesting ::FactoryTest()
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
-    ASSERT_EQUAL(sourceMessageID, sm_FullMessageID);
+    ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto factoryCreateMessage = TestingType::Factory(*messageSource, sm_FullMessageID);
-    // 	auto polymorphicMessage = CoreTools::PolymorphicSharedPtrCast<TestingType>(factoryCreateMessage);
-    //
-    // 	ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "消息类型错误！");
-    //
-    // 	ASSERT_EQUAL(polymorphicMessage->GetSize(), System::EnumCastUnderlying(MultipleMessageField::Count));
-    // 	ASSERT_EQUAL_FAILURE_THROW(polymorphicMessage->GetSize(), messageType.GetSize(), "消息大小错误！");
-    //
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int8>(), int8Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt8>(), uint8Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int16>(), int16Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt16>(), uint16Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int32>(), int32Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt32>(), uint32Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int64>(), int64Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt64>(), uint64Value);
-    // 	ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::String>(), stringValue);
-    //
-    // 	MESSAGE_MANAGER_SINGLETON.Remove(sm_FullMessageID);
+    auto factoryCreateMessage = TestingType::Factory(*messageSource, fullMessageID);
+    auto polymorphicMessage = boost::dynamic_pointer_cast<TestingType>(factoryCreateMessage);
+
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(polymorphicMessage, "消息类型错误！");
+
+    ASSERT_EQUAL(polymorphicMessage->GetSize(), System::EnumCastUnderlying(MultipleMessageField::Count));
+    ASSERT_EQUAL_FAILURE_THROW(polymorphicMessage->GetSize(), messageType.GetSize(), "消息大小错误！");
+
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int8>(), int8Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt8>(), uint8Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int16>(), int16Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt16>(), uint16Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int32>(), int32Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt32>(), uint32Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::Int64>(), int64Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::UInt64>(), uint64Value);
+    ASSERT_EQUAL(polymorphicMessage->GetValue<MultipleMessageField::String>(), stringValue);
+
+    MESSAGE_MANAGER_SINGLETON.Remove(fullMessageID);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::MultipleDoubleMessageTesting ::StreamingTest()
+void Network::MultipleDoubleMessageTesting::StreamingTest()
 {
     constexpr int8_t int8Value{ -8 };
     constexpr int16_t int16Value{ 24 };
@@ -145,31 +152,40 @@ void Network::MultipleDoubleMessageTesting ::StreamingTest()
 
     const string stringValue{ "string" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(sm_FullMessageID, int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue) };
+    ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 
-    const auto streamSize = CORE_TOOLS_STREAM_SIZE(int8Value) + CORE_TOOLS_STREAM_SIZE(int16Value) + CORE_TOOLS_STREAM_SIZE(int32Value) + CORE_TOOLS_STREAM_SIZE(int64Value) +
-                            CORE_TOOLS_STREAM_SIZE(uint8Value) + CORE_TOOLS_STREAM_SIZE(uint16Value) + CORE_TOOLS_STREAM_SIZE(uint32Value) + CORE_TOOLS_STREAM_SIZE(uint64Value) +
-                            CORE_TOOLS_STREAM_SIZE(stringValue) + CORE_TOOLS_STREAM_SIZE(sm_FullMessageID);
+    const auto streamSize = CORE_TOOLS_STREAM_SIZE(int8Value) +
+                            CORE_TOOLS_STREAM_SIZE(int16Value) +
+                            CORE_TOOLS_STREAM_SIZE(int32Value) +
+                            CORE_TOOLS_STREAM_SIZE(int64Value) +
+                            CORE_TOOLS_STREAM_SIZE(uint8Value) +
+                            CORE_TOOLS_STREAM_SIZE(uint16Value) +
+                            CORE_TOOLS_STREAM_SIZE(uint32Value) +
+                            CORE_TOOLS_STREAM_SIZE(uint64Value) +
+                            CORE_TOOLS_STREAM_SIZE(stringValue) +
+                            CORE_TOOLS_STREAM_SIZE(fullMessageID);
 
     ASSERT_EQUAL(testMessage->GetStreamingSize(), streamSize);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_FullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestingType::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+    MessageTarget messageTarget{ buffer };
 
-    testMessage->Save(*messageTarget);
+    testMessage->Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    MessageSource messageSource{ buffer };
 
     int64_t sourceMessageID{ 0 };
-    messageSource->Read(sourceMessageID);
+    messageSource.Read(sourceMessageID);
 
-    ASSERT_EQUAL(sourceMessageID, sm_FullMessageID);
+    ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto sourceTestMessage{ make_shared<TestingType>(sm_FullMessageID, TestingType::MessageType{}) };
+    auto sourceTestMessage = make_shared<TestingType>(fullMessageID, TestingType::MessageType{});
+    ASSERT_TRUE(sourceTestMessage->IsExactlyTypeOf(sourceTestMessage));
 
-    sourceTestMessage->Load(*messageSource);
+    sourceTestMessage->Load(messageSource);
 
     ASSERT_EQUAL(sourceTestMessage->GetValue<MultipleMessageField::Int8>(), int8Value);
     ASSERT_EQUAL(sourceTestMessage->GetValue<MultipleMessageField::UInt8>(), uint8Value);
@@ -181,12 +197,10 @@ void Network::MultipleDoubleMessageTesting ::StreamingTest()
     ASSERT_EQUAL(sourceTestMessage->GetValue<MultipleMessageField::UInt64>(), uint64Value);
     ASSERT_EQUAL(sourceTestMessage->GetValue<MultipleMessageField::String>(), stringValue);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(sm_FullMessageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(fullMessageID);
 }
-#include STSTEM_WARNING_PUSH
 
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::MultipleDoubleMessageTesting ::MessageTest()
+void Network::MultipleDoubleMessageTesting::MessageTest()
 {
     constexpr int8_t int8Value{ -8 };
     constexpr int16_t int16Value{ 24 };
@@ -200,9 +214,11 @@ void Network::MultipleDoubleMessageTesting ::MessageTest()
 
     const string stringValue{ "string" };
 
-    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(sm_FullMessageID, int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue) };
+    TestingTypeSharedPtr testMessage{ make_shared<TestingType>(fullMessageID, int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue) };
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), sm_MessageID);
-    ASSERT_EQUAL(testMessage->GetSubMessageID(), sm_SubMessageID);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), sm_FullMessageID);
+    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
+    ASSERT_EQUAL(testMessage->GetSubMessageID(), subMessageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageID(), fullMessageID);
+
+    ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 }

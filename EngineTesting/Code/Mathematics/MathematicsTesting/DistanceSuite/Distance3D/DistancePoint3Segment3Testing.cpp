@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 13:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 19:06)
 
 #include "DistancePoint3Segment3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,7 +16,7 @@
 #include <random>
 
 using std::swap;
-#include SYSTEM_WARNING_DISABLE(26496)
+
 namespace Mathematics
 {
     template class DistancePoint3Segment3<float>;
@@ -22,7 +25,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint3Segment3Testing)
 
-void Mathematics::DistancePoint3Segment3Testing ::MainTest()
+void Mathematics::DistancePoint3Segment3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StaticTest);
@@ -31,22 +34,22 @@ void Mathematics::DistancePoint3Segment3Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IntervalTest);
 }
 
-void Mathematics::DistancePoint3Segment3Testing ::BaseTest()
+void Mathematics::DistancePoint3Segment3Testing::BaseTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3F point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3F point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3F rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3F rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3F rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        float rhsExtent = MathF::FAbs(randomDistribution(generator));
+        const float rhsExtent = MathF::FAbs(randomDistribution(generator));
 
         DistancePoint3Segment3F distance(point, Segment3F(rhsExtent, rhsOrigin, rhsDirection, 1e-5f));
 
@@ -68,22 +71,22 @@ void Mathematics::DistancePoint3Segment3Testing ::BaseTest()
     }
 }
 
-void Mathematics::DistancePoint3Segment3Testing ::StaticTest()
+void Mathematics::DistancePoint3Segment3Testing::StaticTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint3Segment3D distance(point, Segment3D(rhsExtent, rhsOrigin, rhsDirection));
 
@@ -109,26 +112,26 @@ void Mathematics::DistancePoint3Segment3Testing ::StaticTest()
     }
 }
 
-void Mathematics::DistancePoint3Segment3Testing ::DynamicTest()
+void Mathematics::DistancePoint3Segment3Testing::DynamicTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint3Segment3D distance(point, Segment3D(rhsExtent, rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -156,26 +159,26 @@ void Mathematics::DistancePoint3Segment3Testing ::DynamicTest()
     }
 }
 
-void Mathematics::DistancePoint3Segment3Testing ::DerivativeTest()
+void Mathematics::DistancePoint3Segment3Testing::DerivativeTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint3Segment3D distance(point, Segment3D(rhsExtent, rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -183,36 +186,35 @@ void Mathematics::DistancePoint3Segment3Testing ::DerivativeTest()
 
         DistanceResult3D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         DistanceResult3D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        double derivativeApproximation =
-            0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
+        const double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
-        double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
+        const double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(derivativeResult, derivativeApproximation, 1e-10);
 
-        double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
+        const double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
         DistanceResult3D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
 
-void Mathematics::DistancePoint3Segment3Testing ::IntervalTest()
+void Mathematics::DistancePoint3Segment3Testing::IntervalTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double rhsExtent = MathD::FAbs(randomDistribution(generator));
+        const double rhsExtent = MathD::FAbs(randomDistribution(generator));
 
         DistancePoint3Segment3D distance(point, Segment3D(rhsExtent, rhsOrigin, rhsDirection));
 

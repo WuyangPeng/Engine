@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/23 13:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 11:41)
 
 #include "ConversionRationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,16 +16,14 @@
 #include "Mathematics/Rational/IntegerDataDetail.h"
 
 #include <random>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
+
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConversionRationalTesting)
 
-void Mathematics::ConversionRationalTesting ::MainTest()
+void Mathematics::ConversionRationalTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NumericalValueSymbolTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExponentTest);
@@ -31,20 +32,20 @@ void Mathematics::ConversionRationalTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(UnsignedIntegerTest);
 }
 
-void Mathematics::ConversionRationalTesting ::NumericalValueSymbolTest()
+void Mathematics::ConversionRationalTesting::NumericalValueSymbolTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
-        ConversionRational<float> firstConversionRational(firstValue);
+        auto firstValue = firstRandomDistribution(generator);
+        const ConversionRational<float> firstConversionRational(firstValue);
 
         if (0.0 <= firstValue)
         {
@@ -55,8 +56,8 @@ void Mathematics::ConversionRationalTesting ::NumericalValueSymbolTest()
             ASSERT_ENUM_EQUAL(firstConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
-        double secondValue = secondRandomDistribution(generator);
-        ConversionRational<double> secondConversionRational(secondValue);
+        auto secondValue = secondRandomDistribution(generator);
+        const ConversionRational<double> secondConversionRational(secondValue);
 
         if (0.0 <= secondValue)
         {
@@ -67,8 +68,8 @@ void Mathematics::ConversionRationalTesting ::NumericalValueSymbolTest()
             ASSERT_ENUM_EQUAL(secondConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
-        float thirdValue = thirdRandomDistribution(generator);
-        ConversionRational<float> thirdConversionRational(thirdValue);
+        auto thirdValue = thirdRandomDistribution(generator);
+        const ConversionRational<float> thirdConversionRational(thirdValue);
 
         if (0.0 <= thirdValue)
         {
@@ -79,8 +80,8 @@ void Mathematics::ConversionRationalTesting ::NumericalValueSymbolTest()
             ASSERT_ENUM_EQUAL(thirdConversionRational.GetSymbol(), NumericalValueSymbol::Negative);
         }
 
-        double fourthValue = fourthRandomDistribution(generator);
-        ConversionRational<double> fourthConversionRational(fourthValue);
+        auto fourthValue = fourthRandomDistribution(generator);
+        const ConversionRational<double> fourthConversionRational(fourthValue);
 
         if (0.0 <= fourthValue)
         {
@@ -93,24 +94,24 @@ void Mathematics::ConversionRationalTesting ::NumericalValueSymbolTest()
     }
 }
 
-void Mathematics::ConversionRationalTesting ::ExponentTest()
+void Mathematics::ConversionRationalTesting::ExponentTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
-        ConversionRational<float> firstConversionRational(firstValue);
+        auto firstValue = firstRandomDistribution(generator);
+        const ConversionRational<float> firstConversionRational(firstValue);
 
-        int firstRealExponent = firstConversionRational.GetNumeratorShifting();
-        float secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
-        ConversionRational<float> secondIntegerConversion(secondValue);
+        const auto firstRealExponent = firstConversionRational.GetNumeratorShifting();
+        auto secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
+        const ConversionRational<float> secondIntegerConversion(secondValue);
 
         ASSERT_EQUAL(firstConversionRational.GetNumeratorShifting(), secondIntegerConversion.GetNumeratorShifting());
 
@@ -118,7 +119,7 @@ void Mathematics::ConversionRationalTesting ::ExponentTest()
 
         ASSERT_THREE_EQUAL(firstConversionRational.GetMaxShifting(), secondIntegerConversion.GetMaxShifting(), firstConversionRational.GetNumeratorShifting() + 23);
 
-        int shifting = 23 - firstConversionRational.GetNumeratorShifting();
+        auto shifting = 23 - firstConversionRational.GetNumeratorShifting();
 
         if (shifting < 0)
         {
@@ -127,12 +128,12 @@ void Mathematics::ConversionRationalTesting ::ExponentTest()
 
         ASSERT_THREE_EQUAL(firstConversionRational.GetReducibilityShifting(), secondIntegerConversion.GetReducibilityShifting(), shifting);
 
-        double thirdValue = secondRandomDistribution(generator);
-        ConversionRational<double> thirdConversionRational(thirdValue);
+        auto thirdValue = secondRandomDistribution(generator);
+        const ConversionRational<double> thirdConversionRational(thirdValue);
 
-        int secondRealExponent = thirdConversionRational.GetNumeratorShifting();
-        double fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
-        ConversionRational<double> fourthIntegerConversion(fourthValue);
+        const auto secondRealExponent = thirdConversionRational.GetNumeratorShifting();
+        auto fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
+        const ConversionRational<double> fourthIntegerConversion(fourthValue);
 
         ASSERT_EQUAL(thirdConversionRational.GetNumeratorShifting(), fourthIntegerConversion.GetNumeratorShifting());
 
@@ -149,12 +150,12 @@ void Mathematics::ConversionRationalTesting ::ExponentTest()
 
         ASSERT_THREE_EQUAL(thirdConversionRational.GetReducibilityShifting(), fourthIntegerConversion.GetReducibilityShifting(), shifting);
 
-        float fifthValue = thirdRandomDistribution(generator);
-        ConversionRational<float> fifthConversionRational(fifthValue);
+        auto fifthValue = thirdRandomDistribution(generator);
+        const ConversionRational<float> fifthConversionRational(fifthValue);
 
-        int thirdRealExponent = fifthConversionRational.GetDenominatorShifting();
-        float sixthValue = MathF::Pow(2, static_cast<float>(-thirdRealExponent));
-        ConversionRational<float> sixthIntegerConversion(sixthValue);
+        const auto thirdRealExponent = fifthConversionRational.GetDenominatorShifting();
+        auto sixthValue = MathF::Pow(2, static_cast<float>(-thirdRealExponent));
+        const ConversionRational<float> sixthIntegerConversion(sixthValue);
 
         ASSERT_EQUAL(fifthConversionRational.GetDenominatorShifting(),
                      sixthIntegerConversion.GetDenominatorShifting());
@@ -165,52 +166,53 @@ void Mathematics::ConversionRationalTesting ::ExponentTest()
 
         ASSERT_THREE_EQUAL(fifthConversionRational.GetReducibilityShifting(), sixthIntegerConversion.GetReducibilityShifting(), -23);
 
-        double seventhValue = fourthRandomDistribution(generator);
-        ConversionRational<double> seventhConversionRational(seventhValue);
+        auto seventhValue = fourthRandomDistribution(generator);
+        const ConversionRational<double> seventhConversionRational(seventhValue);
 
-        int fourthRealExponent = seventhConversionRational.GetDenominatorShifting();
-        double eighthValue = MathD::Pow(2, static_cast<double>(-fourthRealExponent));
-        ConversionRational<double> eighthIntegerConversion(eighthValue);
+        const auto fourthRealExponent = seventhConversionRational.GetDenominatorShifting();
+        auto eighthValue = MathD::Pow(2, static_cast<double>(-fourthRealExponent));
+        const ConversionRational<double> eighthIntegerConversion(eighthValue);
 
         ASSERT_EQUAL(seventhConversionRational.GetDenominatorShifting(), eighthIntegerConversion.GetDenominatorShifting());
 
         ASSERT_THREE_EQUAL(seventhConversionRational.GetNumeratorShifting(), eighthIntegerConversion.GetNumeratorShifting(), 0);
 
-        ASSERT_THREE_EQUAL(seventhConversionRational.GetMaxShifting(), eighthIntegerConversion.GetMaxShifting(),
+        ASSERT_THREE_EQUAL(seventhConversionRational.GetMaxShifting(),
+                           eighthIntegerConversion.GetMaxShifting(),
                            seventhConversionRational.GetDenominatorShifting() + 52);
 
         ASSERT_THREE_EQUAL(seventhConversionRational.GetReducibilityShifting(), eighthIntegerConversion.GetReducibilityShifting(), -52);
     }
 }
 
-void Mathematics::ConversionRationalTesting ::MantissaTest()
+void Mathematics::ConversionRationalTesting::MantissaTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
-    uniform_int<> fifthRandomDistribution(0, 38);
-    uniform_int<> sixthRandomDistribution(0, 308);
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_int<> fifthRandomDistribution(0, 38);
+    const uniform_int<> sixthRandomDistribution(0, 308);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
-        ConversionRational<float> firstConversionRational(firstValue);
+        auto firstValue = firstRandomDistribution(generator);
+        const ConversionRational<float> firstConversionRational(firstValue);
 
-        int firstExponent = firstConversionRational.GetNumeratorShifting();
-        uint64_t firstMantissa = firstConversionRational.GetNumeratorMantissa();
-        NumericalValueSymbol firstSign = firstConversionRational.GetSymbol();
-        uint64_t firstDenominatorMantissa = firstConversionRational.GetDenominatorMantissa();
+        auto firstExponent = firstConversionRational.GetNumeratorShifting();
+        auto firstMantissa = firstConversionRational.GetNumeratorMantissa();
+        auto firstSign = firstConversionRational.GetSymbol();
+        const auto firstDenominatorMantissa = firstConversionRational.GetDenominatorMantissa();
 
-        float secondValue = static_cast<float>(firstMantissa) / firstDenominatorMantissa * MathF::Pow(2.0f, static_cast<float>(firstExponent));
+        auto secondValue = static_cast<float>(firstMantissa) / firstDenominatorMantissa * MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
         if (firstSign == NumericalValueSymbol::Negative)
             secondValue = -secondValue;
 
-        ConversionRational<float> secondConversionRational(secondValue);
+        const ConversionRational<float> secondConversionRational(secondValue);
 
         ASSERT_ENUM_EQUAL(firstConversionRational.GetSymbol(), secondConversionRational.GetSymbol());
 
@@ -222,20 +224,20 @@ void Mathematics::ConversionRationalTesting ::MantissaTest()
 
         ASSERT_THREE_EQUAL(firstConversionRational.GetDenominatorShifting(), secondConversionRational.GetDenominatorShifting(), 0);
 
-        double thirdValue = secondRandomDistribution(generator);
-        ConversionRational<double> thirdConversionRational(thirdValue);
+        auto thirdValue = secondRandomDistribution(generator);
+        const ConversionRational<double> thirdConversionRational(thirdValue);
 
-        int secondExponent = thirdConversionRational.GetNumeratorShifting();
-        uint64_t secondMantissa = thirdConversionRational.GetNumeratorMantissa();
-        NumericalValueSymbol secondSign = thirdConversionRational.GetSymbol();
-        uint64_t secondDenominatorMantissa = thirdConversionRational.GetDenominatorMantissa();
+        auto secondExponent = thirdConversionRational.GetNumeratorShifting();
+        auto secondMantissa = thirdConversionRational.GetNumeratorMantissa();
+        auto secondSign = thirdConversionRational.GetSymbol();
+        const auto secondDenominatorMantissa = thirdConversionRational.GetDenominatorMantissa();
 
-        double fourthValue = static_cast<double>(secondMantissa) / secondDenominatorMantissa * MathD::Pow(2.0, static_cast<double>(secondExponent));
+        auto fourthValue = static_cast<double>(secondMantissa) / secondDenominatorMantissa * MathD::Pow(2.0, static_cast<double>(secondExponent));
 
         if (secondSign == NumericalValueSymbol::Negative)
             fourthValue = -fourthValue;
 
-        ConversionRational<double> fourthConversionRational(fourthValue);
+        const ConversionRational<double> fourthConversionRational(fourthValue);
 
         ASSERT_ENUM_EQUAL(thirdConversionRational.GetSymbol(), fourthConversionRational.GetSymbol());
 
@@ -247,20 +249,20 @@ void Mathematics::ConversionRationalTesting ::MantissaTest()
 
         ASSERT_THREE_EQUAL(thirdConversionRational.GetDenominatorShifting(), fourthConversionRational.GetDenominatorShifting(), 0);
 
-        float fifthValue = thirdRandomDistribution(generator);
-        ConversionRational<float> fifthConversionRational(fifthValue);
+        auto fifthValue = thirdRandomDistribution(generator);
+        const ConversionRational<float> fifthConversionRational(fifthValue);
 
         firstExponent = fifthConversionRational.GetDenominatorShifting();
         firstMantissa = fifthConversionRational.GetDenominatorMantissa();
         firstSign = fifthConversionRational.GetSymbol();
-        uint64_t firstNumeratorMantissa = fifthConversionRational.GetNumeratorMantissa();
+        const auto firstNumeratorMantissa = fifthConversionRational.GetNumeratorMantissa();
 
-        float sixthValue = firstNumeratorMantissa / static_cast<float>(firstMantissa) / MathF::Pow(2.0, static_cast<float>(firstExponent));
+        auto sixthValue = firstNumeratorMantissa / static_cast<float>(firstMantissa) / MathF::Pow(2.0, static_cast<float>(firstExponent));
 
         if (firstSign == NumericalValueSymbol::Negative)
             sixthValue = -sixthValue;
 
-        ConversionRational<float> sixthConversionRational(sixthValue);
+        const ConversionRational<float> sixthConversionRational(sixthValue);
 
         ASSERT_ENUM_EQUAL(fifthConversionRational.GetSymbol(), sixthConversionRational.GetSymbol());
 
@@ -272,20 +274,20 @@ void Mathematics::ConversionRationalTesting ::MantissaTest()
 
         ASSERT_THREE_EQUAL(fifthConversionRational.GetNumeratorShifting(), sixthConversionRational.GetNumeratorShifting(), 0);
 
-        double seventhValue = fourthRandomDistribution(generator);
-        ConversionRational<double> seventhIntegerConversion(seventhValue);
+        auto seventhValue = fourthRandomDistribution(generator);
+        const ConversionRational<double> seventhIntegerConversion(seventhValue);
 
         secondExponent = seventhIntegerConversion.GetDenominatorShifting();
         secondMantissa = seventhIntegerConversion.GetDenominatorMantissa();
         secondSign = seventhIntegerConversion.GetSymbol();
-        uint64_t secondNumeratorMantissa = seventhIntegerConversion.GetNumeratorMantissa();
+        const auto secondNumeratorMantissa = seventhIntegerConversion.GetNumeratorMantissa();
 
-        double eighthValue = secondNumeratorMantissa / static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(secondExponent));
+        auto eighthValue = secondNumeratorMantissa / static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(secondExponent));
 
         if (secondSign == NumericalValueSymbol::Negative)
             eighthValue = -eighthValue;
 
-        ConversionRational<double> eighthConversionRational(eighthValue);
+        const ConversionRational<double> eighthConversionRational(eighthValue);
 
         ASSERT_ENUM_EQUAL(seventhIntegerConversion.GetSymbol(), eighthConversionRational.GetSymbol());
 
@@ -299,9 +301,9 @@ void Mathematics::ConversionRationalTesting ::MantissaTest()
     }
 }
 
-void Mathematics::ConversionRationalTesting ::IntegerTest()
+void Mathematics::ConversionRationalTesting::IntegerTest()
 {
-    ConversionRational<int> firstIntegerConversion(20);
+    const ConversionRational<int> firstIntegerConversion(20);
 
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorMantissa(), 20);
@@ -311,7 +313,7 @@ void Mathematics::ConversionRationalTesting ::IntegerTest()
     ASSERT_EQUAL(static_cast<uint32_t>(firstIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
     ASSERT_EQUAL(firstIntegerConversion.GetReducibilityShifting(), 0);
 
-    ConversionRational<int16_t> secondIntegerConversion(-120);
+    const ConversionRational<int16_t> secondIntegerConversion(-120);
 
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorMantissa(), 120);
@@ -321,7 +323,7 @@ void Mathematics::ConversionRationalTesting ::IntegerTest()
     ASSERT_EQUAL(static_cast<uint32_t>(secondIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint32_t>(120).GetLog2());
     ASSERT_EQUAL(secondIntegerConversion.GetReducibilityShifting(), 0);
 
-    ConversionRational<int64_t> thirdIntegerConversion(0);
+    const ConversionRational<int64_t> thirdIntegerConversion(0);
 
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorMantissa(), 0);
@@ -332,9 +334,9 @@ void Mathematics::ConversionRationalTesting ::IntegerTest()
     ASSERT_EQUAL(thirdIntegerConversion.GetReducibilityShifting(), 0);
 }
 
-void Mathematics::ConversionRationalTesting ::UnsignedIntegerTest()
+void Mathematics::ConversionRationalTesting::UnsignedIntegerTest()
 {
-    ConversionRational<uint32_t> firstIntegerConversion(20);
+    const ConversionRational<uint32_t> firstIntegerConversion(20);
 
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(firstIntegerConversion.GetNumeratorMantissa(), 20);
@@ -344,7 +346,7 @@ void Mathematics::ConversionRationalTesting ::UnsignedIntegerTest()
     ASSERT_EQUAL(static_cast<uint32_t>(firstIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
     ASSERT_EQUAL(firstIntegerConversion.GetReducibilityShifting(), 0);
 
-    ConversionRational<uint8_t> secondIntegerConversion(120);
+    const ConversionRational<uint8_t> secondIntegerConversion(120);
 
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(secondIntegerConversion.GetNumeratorMantissa(), 120);
@@ -354,7 +356,7 @@ void Mathematics::ConversionRationalTesting ::UnsignedIntegerTest()
     ASSERT_EQUAL(static_cast<uint8_t>(secondIntegerConversion.GetMaxShifting()), Log2OfPowerOfTwo<uint8_t>(120).GetLog2());
     ASSERT_EQUAL(secondIntegerConversion.GetReducibilityShifting(), 0);
 
-    ConversionRational<uint64_t> thirdIntegerConversion(0);
+    const ConversionRational<uint64_t> thirdIntegerConversion(0);
 
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorShifting(), 0);
     ASSERT_EQUAL(thirdIntegerConversion.GetNumeratorMantissa(), 0);

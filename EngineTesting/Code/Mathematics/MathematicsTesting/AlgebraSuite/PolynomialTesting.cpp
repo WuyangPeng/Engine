@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 09:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 22:16)
 
 #include "PolynomialTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -12,9 +15,7 @@
 #include <boost/numeric/conversion/cast.hpp>
 #include <random>
 #include <vector>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 using std::default_random_engine;
 using std::uniform_real;
 using std::vector;
@@ -31,7 +32,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialTesting)
 
-void Mathematics::PolynomialTesting ::MainTest()
+void Mathematics::PolynomialTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
@@ -40,7 +41,7 @@ void Mathematics::PolynomialTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
 }
 
-void Mathematics::PolynomialTesting ::ConstructionTest()
+void Mathematics::PolynomialTesting::ConstructionTest()
 {
     PolynomialF firstPolynomial{ 0 };
 
@@ -51,14 +52,14 @@ void Mathematics::PolynomialTesting ::ConstructionTest()
     ASSERT_EQUAL(secondPolynomial.GetDegree(), 2);
 
     vector<double> doubleVector{ 3.0, 5.0, 2.0, 1.0, 0.0, 2.0 };
-    int degree = boost::numeric_cast<int>(doubleVector.size() - 1);
+    const int degree = boost::numeric_cast<int>(doubleVector.size() - 1);
 
     PolynomialD thirdPolynomial(doubleVector);
 
     ASSERT_EQUAL(thirdPolynomial.GetDegree(), degree);
     for (int i = 0; i <= degree; ++i)
     {
-        ASSERT_APPROXIMATE(thirdPolynomial[i], doubleVector[i], 1e-10);
+        ASSERT_APPROXIMATE(thirdPolynomial[i], doubleVector.at(i), 1e-10);
     }
 
     PolynomialD fourthPolynomial(thirdPolynomial);
@@ -82,48 +83,29 @@ void Mathematics::PolynomialTesting ::ConstructionTest()
         ASSERT_APPROXIMATE(thirdPolynomial[i], 2.0, 1e-10);
         ASSERT_APPROXIMATE(fourthPolynomial[i], 2.0, 1e-10);
     }
-
-    // 	DoublePolynomial fifthPolynomial(boost::numeric_cast<int>(doubleVector.size()),&doubleVector[0]);
-    //
-    // 	ASSERT_EQUAL(fifthPolynomial.GetDegree(),degree);
-    // 	for(int i = 0;i <= degree;++i)
-    // 	{
-    // 		ASSERT_APPROXIMATE(fifthPolynomial[i],doubleVector[i],1e-10);
-    // 	}
 }
 
-void Mathematics::PolynomialTesting ::AccessTest()
+void Mathematics::PolynomialTesting::AccessTest()
 {
     default_random_engine generator{};
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     vector<double> doubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                  randomDistribution(generator), randomDistribution(generator) };
 
-    int degree = boost::numeric_cast<int>(doubleVector.size() - 1);
+    const int degree = boost::numeric_cast<int>(doubleVector.size() - 1);
 
     const PolynomialD firstPolynomial(doubleVector);
     PolynomialD secondPolynomial(doubleVector);
 
     ASSERT_EQUAL(firstPolynomial.GetDegree(), degree);
     ASSERT_EQUAL(secondPolynomial.GetDegree(), degree);
-
-    // 	const double* firstPtr = firstPolynomial.GetElements();
-    // 	double* secondPtr = secondPolynomial.GetElements();
-    //
-    // 	for(int i = 0;i <= degree;++i)
-    // 	{
-    // 		ASSERT_APPROXIMATE(firstPolynomial[i],doubleVector[i],1e-10);
-    // 		ASSERT_APPROXIMATE(secondPolynomial[i],doubleVector[i],1e-10);
-    // 		ASSERT_APPROXIMATE(firstPtr[i],doubleVector[i],1e-10);
-    // 		ASSERT_APPROXIMATE(secondPtr[i],doubleVector[i],1e-10);
-    // 	}
 }
 
-void Mathematics::PolynomialTesting ::UpdateOperatorTest()
+void Mathematics::PolynomialTesting::UpdateOperatorTest()
 {
     default_random_engine generator{};
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                       randomDistribution(generator), randomDistribution(generator) };
@@ -131,18 +113,18 @@ void Mathematics::PolynomialTesting ::UpdateOperatorTest()
     PolynomialD firstPolynomial(firstDoubleVector);
 
     PolynomialD secondPolynomial = -firstPolynomial;
-    int firstDegree = boost::numeric_cast<int>(firstDoubleVector.size() - 1);
+    const int firstDegree = boost::numeric_cast<int>(firstDoubleVector.size() - 1);
 
     ASSERT_EQUAL(secondPolynomial.GetDegree(), firstDegree);
     for (int i = 0; i <= firstDegree; ++i)
     {
-        ASSERT_APPROXIMATE(secondPolynomial[i], -firstDoubleVector[i], 1e-10);
+        ASSERT_APPROXIMATE(secondPolynomial[i], -firstDoubleVector.at(i), 1e-10);
     }
 
     vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD thirdPolynomial(secondDoubleVector);
-    int secondDegree = boost::numeric_cast<int>(secondDoubleVector.size() - 1);
+    const int secondDegree = boost::numeric_cast<int>(secondDoubleVector.size() - 1);
     ASSERT_EQUAL(thirdPolynomial.GetDegree(), secondDegree);
 
     thirdPolynomial += secondPolynomial;
@@ -150,10 +132,10 @@ void Mathematics::PolynomialTesting ::UpdateOperatorTest()
     ASSERT_EQUAL(thirdPolynomial.GetDegree(), firstDegree);
     for (int i = 0; i <= secondDegree; ++i)
     {
-        ASSERT_APPROXIMATE(thirdPolynomial[i], -firstDoubleVector[i] + secondDoubleVector[i], 1e-10);
+        ASSERT_APPROXIMATE(thirdPolynomial[i], -firstDoubleVector.at(i) + secondDoubleVector.at(i), 1e-10);
     }
 
-    ASSERT_APPROXIMATE(thirdPolynomial[firstDegree], -firstDoubleVector[firstDegree], 1e-10);
+    ASSERT_APPROXIMATE(thirdPolynomial[firstDegree], -firstDoubleVector.at(firstDegree), 1e-10);
 
     PolynomialD fourthPolynomial(secondDoubleVector);
     ASSERT_EQUAL(fourthPolynomial.GetDegree(), secondDegree);
@@ -163,10 +145,10 @@ void Mathematics::PolynomialTesting ::UpdateOperatorTest()
     ASSERT_EQUAL(fourthPolynomial.GetDegree(), firstDegree);
     for (int i = 0; i <= secondDegree; ++i)
     {
-        ASSERT_APPROXIMATE(fourthPolynomial[i], -firstDoubleVector[i] + secondDoubleVector[i], 1e-10);
+        ASSERT_APPROXIMATE(fourthPolynomial[i], -firstDoubleVector.at(i) + secondDoubleVector.at(i), 1e-10);
     }
 
-    ASSERT_APPROXIMATE(fourthPolynomial[firstDegree], -firstDoubleVector[firstDegree], 1e-10);
+    ASSERT_APPROXIMATE(fourthPolynomial[firstDegree], -firstDoubleVector.at(firstDegree), 1e-10);
 
     PolynomialD fifthPolynomial(secondDoubleVector);
     PolynomialD sixthPolynomial(firstDoubleVector);
@@ -177,14 +159,13 @@ void Mathematics::PolynomialTesting ::UpdateOperatorTest()
 
     PolynomialD seventhPolynomial(firstDegree + secondDegree);
 
-    [[maybe_unused]] auto degree = seventhPolynomial.GetDegree() + 1;
-    //	memset(seventhPolynomial.GetElements(), 0, degree * sizeof(double));
+    MAYBE_UNUSED const auto degree = seventhPolynomial.GetDegree() + 1;
 
     for (int lhsIndex = 0; lhsIndex <= firstDegree; ++lhsIndex)
     {
         for (int rhsIndex = 0; rhsIndex <= secondDegree; ++rhsIndex)
         {
-            int index = lhsIndex + rhsIndex;
+            const int index = lhsIndex + rhsIndex;
             seventhPolynomial[index] += sixthPolynomial[lhsIndex] * fifthPolynomial[rhsIndex];
         }
     }
@@ -225,42 +206,42 @@ void Mathematics::PolynomialTesting ::UpdateOperatorTest()
     }
 }
 
-void Mathematics::PolynomialTesting ::OperationTest()
+void Mathematics::PolynomialTesting::OperationTest()
 {
     default_random_engine generator{};
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                       randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD firstPolynomial(firstDoubleVector);
 
-    int firstDegree = boost::numeric_cast<int>(firstDoubleVector.size() - 1);
+    const int firstDegree = boost::numeric_cast<int>(firstDoubleVector.size() - 1);
 
     vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD secondPolynomial(secondDoubleVector);
-    int secondDegree = boost::numeric_cast<int>(secondDoubleVector.size() - 1);
+    const int secondDegree = boost::numeric_cast<int>(secondDoubleVector.size() - 1);
 
     PolynomialD thirdPolynomial = firstPolynomial + secondPolynomial;
 
     ASSERT_EQUAL(thirdPolynomial.GetDegree(), firstDegree);
     for (int i = 0; i < secondDegree; ++i)
     {
-        ASSERT_APPROXIMATE(thirdPolynomial[i], firstDoubleVector[i] + secondDoubleVector[i], 1e-10);
+        ASSERT_APPROXIMATE(thirdPolynomial[i], firstDoubleVector.at(i) + secondDoubleVector.at(i), 1e-10);
     }
 
-    ASSERT_APPROXIMATE(thirdPolynomial[firstDegree], firstDoubleVector[firstDegree], 1e-10);
+    ASSERT_APPROXIMATE(thirdPolynomial[firstDegree], firstDoubleVector.at(firstDegree), 1e-10);
 
     thirdPolynomial = firstPolynomial - secondPolynomial;
 
     ASSERT_EQUAL(thirdPolynomial.GetDegree(), firstDegree);
     for (int i = 0; i < secondDegree; ++i)
     {
-        ASSERT_APPROXIMATE(thirdPolynomial[i], firstDoubleVector[i] - secondDoubleVector[i], 1e-10);
+        ASSERT_APPROXIMATE(thirdPolynomial[i], firstDoubleVector.at(i) - secondDoubleVector.at(i), 1e-10);
     }
 
-    ASSERT_APPROXIMATE(thirdPolynomial[firstDegree], firstDoubleVector[firstDegree], 1e-10);
+    ASSERT_APPROXIMATE(thirdPolynomial[firstDegree], firstDoubleVector.at(firstDegree), 1e-10);
 
     thirdPolynomial = firstPolynomial * secondPolynomial;
 
@@ -268,14 +249,13 @@ void Mathematics::PolynomialTesting ::OperationTest()
 
     PolynomialD fourthPolynomial(firstDegree + secondDegree);
 
-    [[maybe_unused]] auto degree = fourthPolynomial.GetDegree() + 1;
-    //	memset(fourthPolynomial.GetElements(), 0, degree * sizeof(double));
+    MAYBE_UNUSED const auto degree = fourthPolynomial.GetDegree() + 1;
 
     for (int lhsIndex = 0; lhsIndex <= firstDegree; ++lhsIndex)
     {
         for (int rhsIndex = 0; rhsIndex <= secondDegree; ++rhsIndex)
         {
-            int index = lhsIndex + rhsIndex;
+            const int index = lhsIndex + rhsIndex;
             fourthPolynomial[index] += firstPolynomial[lhsIndex] * secondPolynomial[rhsIndex];
         }
     }
@@ -331,22 +311,22 @@ void Mathematics::PolynomialTesting ::OperationTest()
     }
 }
 
-void Mathematics::PolynomialTesting ::CalculateTest()
+void Mathematics::PolynomialTesting::CalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
                                       randomDistribution(generator), randomDistribution(generator) };
 
     PolynomialD firstPolynomial(firstDoubleVector);
 
-    double value = randomDistribution(generator);
+    const double value = randomDistribution(generator);
 
-    double result = firstDoubleVector[0] + firstDoubleVector[1] * value +
-                    firstDoubleVector[2] * value * value +
-                    firstDoubleVector[3] * value * value * value +
-                    firstDoubleVector[4] * value * value * value * value;
+    const double result = firstDoubleVector.at(0) + firstDoubleVector.at(1) * value +
+                          firstDoubleVector.at(2) * value * value +
+                          firstDoubleVector.at(3) * value * value * value +
+                          firstDoubleVector.at(4) * value * value * value * value;
 
     ASSERT_APPROXIMATE(result, firstPolynomial(value), 1e-10);
 

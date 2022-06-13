@@ -14,11 +14,12 @@
 #include "Flags/HeapToolsFlags.h"
 
 #include <new>
+#include <type_traits>
 
 template <typename T>
 T* System::AllocateProcessHeap(size_t length) noexcept
 {
-    static_assert(std::is_pod_v<T>);
+    static_assert(std::is_trivial_v<T> && std::is_standard_layout_v<T>);
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -34,7 +35,7 @@ T* System::AllocateProcessHeap(size_t length) noexcept
 template <typename T>
 bool System::FreeProcessHeap(T* memory) noexcept
 {
-    static_assert(std::is_pod_v<T>);
+    static_assert(std::is_trivial_v<T> && std::is_standard_layout_v<T>);
 
 #ifdef SYSTEM_PLATFORM_WIN32
 

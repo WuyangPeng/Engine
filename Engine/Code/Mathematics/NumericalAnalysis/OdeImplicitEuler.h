@@ -38,9 +38,9 @@ namespace Mathematics
         // 一次导数矩阵相对于x是DF(t,x)，n乘n矩阵。
         // 进入DF[r][c]是F[r]相对于x[c]的派生物。
         // 返回值DF(t,x)
-        using DerivativeFunction = const VariableMatrix (*)(Real,  // t
-                                                            const Container&,  // x
-                                                            const UserDataType*);  // 用户定义数据
+        using DerivativeFunction = VariableMatrix (*)(Real,  // t
+                                                      const Container&,  // x
+                                                      const UserDataType*);  // 用户定义数据
     public:
         OdeImplicitEuler(int dimension,
                          Real step,

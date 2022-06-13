@@ -1,51 +1,41 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "threeDimensionalModelSuite": 
-  {
+  "threeDimensionalModelSuite": {
 
   },
 
-  "textureSuite": 
-  {
+  "textureSuite": {
 
   },
 
-  "materialSuite": 
-  {
+  "materialSuite": {
 
   },
 
-  "fontSuite": 
-  {
+  "fontSuite": {
 
   },
 
-  "skeletonSuite": 
-  {
+  "skeletonSuite": {
 
   },
 
-  "collisionSuite": 
-  {
+  "collisionSuite": {
 
   },
 
-  "physicalParametersSuite": 
-  {
+  "physicalParametersSuite": {
 
   },
 
-  "gameWorldMapSuite": 
-  {
+  "gameWorldMapSuite": {
 
   },
 
-  "miscellaneousSuite": 
-  {
+  "miscellaneousSuite": {
 
   }
 }

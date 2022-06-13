@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 17:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 11:09)
 
 #include "LogAppenderIOManagerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -25,13 +28,12 @@ using std::ostream;
 using std::string;
 using std::wstring;
 using namespace std::literals;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
+
 namespace
 {
-    const auto g_AppenderTestingPathName = SYSTEM_TEXT("Log/"s);
-    const auto g_LogAppenderIOManageTestingFileName = SYSTEM_TEXT("LogAppenderIOManagerTestingFileName"s);
-    const auto g_ExtensionName = SYSTEM_TEXT("log"s);
+    const auto gAppenderTestingPathName = SYSTEM_TEXT("Log/"s);
+    const auto gLogAppenderIOManageTestingFileName = SYSTEM_TEXT("LogAppenderIOManagerTestingFileName"s);
+    const auto gExtensionName = SYSTEM_TEXT("log"s);
 
     constexpr auto integerTest = 3;
     const auto stringTest = "stringTest"s;
@@ -43,22 +45,23 @@ namespace
     const auto formatMessage = SYSTEM_TEXT("格式化数字%1%%2%"s);
     const auto formatResultMessage = SYSTEM_TEXT("格式化数字1022"s);
 }
-#include STSTEM_WARNING_POP
-CoreTools::LogAppenderIOManagerTesting ::LogAppenderIOManagerTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr },
-      m_LogAppenderIOManagerTestingName{ g_AppenderTestingPathName + g_LogAppenderIOManageTestingFileName + SYSTEM_TEXT("("s) + CustomTime::GetSystemTimeDescribe() + SYSTEM_TEXT(")"s) },
-      m_LogAppenderIOManagerTestingFullName{ m_LogAppenderIOManagerTestingName + SYSTEM_TEXT("."s) + g_ExtensionName }
+
+CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream },
+      logAppenderIOManagerTestingName{ gAppenderTestingPathName + gLogAppenderIOManageTestingFileName + SYSTEM_TEXT("("s) + CustomTime::GetSystemTimeDescribe() + SYSTEM_TEXT(")"s) },
+      logAppenderIOManagerTestingFullName{ logAppenderIOManagerTestingName + SYSTEM_TEXT("."s) + gExtensionName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_0;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, LogAppenderIOManagerTesting)
+
 void CoreTools::LogAppenderIOManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::MainTest()
+void CoreTools::LogAppenderIOManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
@@ -69,22 +72,22 @@ void CoreTools::LogAppenderIOManagerTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::IntegerTest()
+void CoreTools::LogAppenderIOManagerTesting::IntegerTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
             << integerTest;
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::StringTest()
+void CoreTools::LogAppenderIOManagerTesting::StringTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
@@ -95,32 +98,32 @@ void CoreTools::LogAppenderIOManagerTesting ::StringTest()
             << wstringTest;
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::Error1Test()
+void CoreTools::LogAppenderIOManagerTesting::Error1Test()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << errorTest;
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::FormatTest()
+void CoreTools::LogAppenderIOManagerTesting::FormatTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
             << (LogAppenderIOManager::Format(formatMessage) % 10 % 22).str();
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::LogAppenderIOManageSignTest()
+void CoreTools::LogAppenderIOManagerTesting::LogAppenderIOManageSignTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
+    auto manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
@@ -134,9 +137,9 @@ void CoreTools::LogAppenderIOManagerTesting ::LogAppenderIOManageSignTest()
             << LogAppenderIOManageSign::Refresh;
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::FileContentTest()
+void CoreTools::LogAppenderIOManagerTesting::FileContentTest()
 {
-    IFStreamManager fileManager(m_LogAppenderIOManagerTestingFullName);
+    IFStreamManager fileManager{ logAppenderIOManagerTestingFullName };
     fileManager.SetSimplifiedChinese();
 
     auto fileContent = fileManager.GetFileContent();
@@ -149,21 +152,21 @@ void CoreTools::LogAppenderIOManagerTesting ::FileContentTest()
     ASSERT_UNEQUAL(fileContent.find(promptMessage + SYSTEM_TEXT(' ') + cancelMessage + SYSTEM_TEXT('\n') + attentionMessage), System::String::npos);
 }
 
-void CoreTools::LogAppenderIOManagerTesting ::DeleteFileTest()
+void CoreTools::LogAppenderIOManagerTesting::DeleteFileTest()
 {
-    DeleteFileTools file{ m_LogAppenderIOManagerTestingFullName };
+    DeleteFileTools file{ logAppenderIOManagerTestingFullName };
 }
 
-CoreTools::LogAppenderIOManagerTesting::AppenderManagerPtr CoreTools::LogAppenderIOManagerTesting ::GetAppenderManager()
+CoreTools::LogAppenderIOManagerTesting::AppenderManagerSharedPtr CoreTools::LogAppenderIOManagerTesting::GetAppenderManager()
 {
-    Appender appender{ SYSTEM_TEXT("Log"s), g_LogAppenderIOManageTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
+    Appender appender{ SYSTEM_TEXT("Log"s), gLogAppenderIOManageTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
 
     Logger logger{ LogFilter::CoreTools, LogLevel::Trace };
 
-    AppenderManagerPtr manager = AppenderManager::Create();
+    auto manager = AppenderManager::Create();
 
-    [[maybe_unused]] const auto value = manager->InsertLogger(logger);
-    [[maybe_unused]] auto value1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
+    MAYBE_UNUSED const auto value = manager->InsertLogger(logger);
+    MAYBE_UNUSED auto value1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);
 
     return manager;
 }

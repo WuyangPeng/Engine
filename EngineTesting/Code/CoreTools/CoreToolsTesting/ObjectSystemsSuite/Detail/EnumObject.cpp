@@ -1,12 +1,14 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 14:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 14:13)
 
 #include "EnumObject.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -15,22 +17,15 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
-using std::swap;
-
 CORE_TOOLS_RTTI_DEFINE(CoreTools, EnumObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, EnumObject);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, EnumObject);
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::EnumObject ::EnumObject()
-    : ParentType{}, m_EnumValue{ EnumObjectEnum::Five }, m_EnumArray1{}, m_EnumArray2{}
+
+CoreTools::EnumObject::EnumObject(DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }, enumValue{ EnumObjectEnum::Five }, enumArray0{}, enumArray1{}
 {
-    AllocationFirstArray(EnumObjectEnum::Ten);
-    AllocationSecondArray(EnumObjectEnum::Five);
+    AllocationArray0(EnumObjectEnum::Ten);
+    AllocationArray1(EnumObjectEnum::Five);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
@@ -38,120 +33,85 @@ CoreTools::EnumObject ::EnumObject()
 }
 
 // private
-bool CoreTools::EnumObject ::IsLoadValidity() const
+bool CoreTools::EnumObject::IsLoadValidity() const
 {
-    if (m_EnumValue == EnumObjectEnum::Ten || m_EnumArray1 == nullptr || m_EnumArray2 == nullptr)
+    if (enumValue == EnumObjectEnum::Ten || enumArray0.empty() || enumArray1.empty())
         return false;
 
-    for (auto i = 0; i < sm_BufferSize; ++i)
+    for (auto i = 0; i < bufferSize; ++i)
     {
-        if (m_EnumArray1[i] == EnumObjectEnum::Five || m_EnumArray2[i] == EnumObjectEnum::Ten)
+        if (enumArray0.at(i) == EnumObjectEnum::Five || enumArray1.at(i) == EnumObjectEnum::Ten)
             return false;
     }
 
     return true;
 }
 
-CoreTools::EnumObject ::EnumObject(LoadConstructor value)
-    : ParentType{ value }, m_EnumValue{ EnumObjectEnum::Ten }, m_EnumArray1{ nullptr }, m_EnumArray2{}
+CoreTools::EnumObject::EnumObject(LoadConstructor value)
+    : ParentType{ value }, enumValue{ EnumObjectEnum::Ten }, enumArray0{}, enumArray1{}
 {
-    AllocationSecondArray(EnumObjectEnum::Ten);
+    AllocationArray1(EnumObjectEnum::Ten);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 // private
-void CoreTools::EnumObject ::AllocationFirstArray(EnumObjectEnum value)
+void CoreTools::EnumObject::AllocationArray0(EnumObjectEnum value)
 {
-    for (auto i = 0; i < sm_BufferSize; ++i)
+    for (auto i = 0; i < bufferSize; ++i)
     {
-        m_EnumArray1[i] = value;
+        enumArray0.emplace_back(value);
     }
 }
 
 // private
-void CoreTools::EnumObject ::AllocationSecondArray(EnumObjectEnum value)
+void CoreTools::EnumObject::AllocationArray1(EnumObjectEnum value)
 {
-    for (auto i = 0; i < sm_BufferSize; ++i)
+    for (auto i = 0; i < bufferSize; ++i)
     {
-        m_EnumArray2[i] = value;
+        enumArray1.emplace_back(value);
     }
-}
-
-CoreTools::EnumObject ::EnumObject(const EnumObject& rhs)
-    : ParentType{}, m_EnumValue{ rhs.m_EnumValue }, m_EnumArray1{}, m_EnumArray2{}
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-
-    CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "载入的数据出现错误！");
-}
-
-CoreTools::EnumObject& CoreTools::EnumObject ::operator=(const EnumObject& rhs)
-{
-    CORE_TOOLS_CLASS_IS_VALID_1;
-
-    EnumObject temp{ rhs };
-    Swap(temp);
-
-    return *this;
-}
-
-// private
-void CoreTools::EnumObject ::Swap(EnumObject& rhs)
-{
-    swap(m_EnumValue, rhs.m_EnumValue);
-    swap(m_EnumArray1, rhs.m_EnumArray1);
-    swap(m_EnumArray2, rhs.m_EnumArray2);
-}
-
-CoreTools::EnumObject ::~EnumObject()
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-
-    //	Release();
-}
-
-void CoreTools::EnumObject ::Release()
-{
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool CoreTools::EnumObject ::IsValid() const noexcept
+
+bool CoreTools::EnumObject::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_EnumArray2 != nullptr)
+    if (ParentType::IsValid() && !enumArray1.empty())
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-int CoreTools::EnumObject ::GetStreamingSize() const
+int CoreTools::EnumObject::GetStreamingSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     auto size = ParentType::GetStreamingSize();
 
     // WriteEnum
-    size += CORE_TOOLS_STREAM_SIZE(m_EnumValue);
+    size += CORE_TOOLS_STREAM_SIZE(enumValue);
 
     // WriteEnumWithNumber
-    size += sizeof(int);
-    size += sm_BufferSize * CORE_TOOLS_STREAM_SIZE(m_EnumValue);
+    size += sizeof(int32_t);
+    size += bufferSize * CORE_TOOLS_STREAM_SIZE(enumValue);
 
     // WriteEnumWithoutNumber
-    size += sm_BufferSize * CORE_TOOLS_STREAM_SIZE(m_EnumValue);
+    size += bufferSize * CORE_TOOLS_STREAM_SIZE(enumValue);
 
     return size;
 }
 
-uint64_t CoreTools::EnumObject ::Register(ObjectRegister& target) const
+uint64_t CoreTools::EnumObject::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return ParentType::Register(target);
 }
 
-void CoreTools::EnumObject ::Save(BufferTarget& target) const
+void CoreTools::EnumObject::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -159,28 +119,28 @@ void CoreTools::EnumObject ::Save(BufferTarget& target) const
 
     ParentType::Save(target);
 
-    target.WriteEnum(m_EnumValue);
-    //     target->WriteEnumWithNumber(sm_BufferSize, m_EnumArray1);
-    //    target->WriteEnumWithoutNumber(sm_BufferSize, m_EnumArray2);
+    target.WriteEnum(enumValue);
+    target.WriteEnumContainerWithNumber(enumArray0);
+    target.WriteEnumContainerWithoutNumber(enumArray1);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::EnumObject ::Link(ObjectLink& source)
+void CoreTools::EnumObject::Link(ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return ParentType::Link(source);
 }
 
-void CoreTools::EnumObject ::PostLink()
+void CoreTools::EnumObject::PostLink()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     return ParentType::PostLink();
 }
 
-void CoreTools::EnumObject ::Load(BufferSource& source)
+void CoreTools::EnumObject::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -188,13 +148,12 @@ void CoreTools::EnumObject ::Load(BufferSource& source)
 
     ParentType::Load(source);
 
-    source.ReadEnum(m_EnumValue);
-    auto size = 0;
-    source.Read(size);
+    source.ReadEnum(enumValue);
+    auto size = source.Read<int32_t>();
     if (0 < size)
     {
-        //source->ReadEnum(sm_BufferSize, m_EnumArray1);
-        //      source->ReadEnum(sm_BufferSize, m_EnumArray2);
+        source.ReadEnumContainer(size, enumArray0);
+        source.ReadEnumContainer(size, enumArray1);
     }
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
@@ -204,7 +163,5 @@ void CoreTools::EnumObject ::Load(BufferSource& source)
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::EnumObject::CloneObject() const
 {
-    return nullptr;
+    return std::make_shared<ClassType>(*this);
 }
-
-#include STSTEM_WARNING_POP

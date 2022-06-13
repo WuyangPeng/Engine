@@ -1,33 +1,33 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/23 16:33)
 
 #include "MessageEventManagerTesting.h"
 #include "Detail/TestNetworkMessageEvent.h"
 #include "Detail/TestNullMessage.h"
-
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/NetworkMessage/MessageEventManager.h"
 
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include <boost/numeric/conversion/cast.hpp>
-
 using std::make_shared;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageEventManager)
 
-void Network::MessageEventManagerTesting ::MainTest() noexcept
+void Network::MessageEventManagerTesting::MainTest() noexcept
 {
-    //ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
-    //ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
-    //ASSERT_NOT_THROW_EXCEPTION_0(MultiContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiContainerTest);
 }
 
-void Network::MessageEventManagerTesting ::SingleContainerTest()
+void Network::MessageEventManagerTesting::SingleContainerTest()
 {
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent{ make_shared<TestNetworkMessageEvent>() };
 
@@ -50,7 +50,7 @@ void Network::MessageEventManagerTesting ::SingleContainerTest()
     ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), boost::numeric_cast<int>(messageID));
 }
 
-void Network::MessageEventManagerTesting ::PriorityContainerTest()
+void Network::MessageEventManagerTesting::PriorityContainerTest()
 {
     constexpr int64_t messageID{ 6 };
 
@@ -80,7 +80,7 @@ void Network::MessageEventManagerTesting ::PriorityContainerTest()
     ASSERT_GREATER(testNetworkMessageEvent1->GetNowTime(), testNetworkMessageEvent2->GetNowTime());
 }
 
-void Network::MessageEventManagerTesting ::MultiContainerTest()
+void Network::MessageEventManagerTesting::MultiContainerTest()
 {
     constexpr uint32_t messageID{ 6 };
 

@@ -14,12 +14,12 @@
 
 namespace CoreTools
 {
-    template <unsigned N>
+    template <uint32_t N>
     struct Fibonacci
     {
         enum
         {
-            Value = Fibonacci<N - 1>::Value + Fibonacci<N - 2>::Value
+            Value = static_cast<uint32_t>(Fibonacci<N - 1>::Value) + static_cast<uint32_t>(Fibonacci<N - 2>::Value)
         };
     };
 

@@ -1,76 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 15:34)
 
 #include "PolarDecompositionValueTesting.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/NumericalAnalysis/PolarDecompositionValueDetail.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 
-#include <random> 
+#include <random>
 
+using std::default_random_engine;
 using std::swap;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
 
 namespace Mathematics
 {
-	template class PolarDecompositionValue<float>;
-	template class PolarDecompositionValue<double>;
+    template class PolarDecompositionValue<float>;
+    template class PolarDecompositionValue<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolarDecompositionValueTesting) 
 
-void Mathematics::PolarDecompositionValueTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolarDecompositionValueTesting)
+
+void Mathematics::PolarDecompositionValueTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(PolarDecompositionValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PolarDecompositionValueTest);
 }
 
-void Mathematics::PolarDecompositionValueTesting
-	::PolarDecompositionValueTest()
+void Mathematics::PolarDecompositionValueTesting::PolarDecompositionValueTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);  
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Matrix3D matrix;
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Matrix3D matrix;
 
-		for (int m = 0; m < 3;++m)
-		{
-			for (int j = 0; j < 3;++j)
-			{
-				matrix(m, j) = firstRandomDistribution(generator);
-			}
-		}
+        for (int m = 0; m < 3; ++m)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                matrix(m, j) = firstRandomDistribution(generator);
+            }
+        }
 
-		PolarDecompositionValueD polarDecompositionValue(matrix);
+        const PolarDecompositionValueD polarDecompositionValue(matrix);
 
-		Matrix3D orthogonalMatrix = polarDecompositionValue.GeOrthogonalMatrix();
-		Matrix3D symmetryMatrix = polarDecompositionValue.GetSymmetryMatrix();
-	 
-		Matrix3D result = orthogonalMatrix * symmetryMatrix;	 
+        const Matrix3D orthogonalMatrix = polarDecompositionValue.GeOrthogonalMatrix();
+        const Matrix3D symmetryMatrix = polarDecompositionValue.GetSymmetryMatrix();
 
-		typedef bool(*VariableMatrixdApproximate)(const Matrix3D& lhs,const Matrix3D& rhs,const double epsilon);
+        const Matrix3D result = orthogonalMatrix * symmetryMatrix;
 
-		VariableMatrixdApproximate function = Approximate<double>;
+        typedef bool (*VariableMatrixdApproximate)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(function,matrix, result, 1e-6);
-	}
+        VariableMatrixdApproximate function = Approximate<double>;
+
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix, result, 1e-6);
+    }
 }
-

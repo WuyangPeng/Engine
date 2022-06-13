@@ -17,7 +17,7 @@ bool System::IsCodePageValid(CodePage codePage) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidCodePage(EnumCastUnderlying(codePage)) != g_False)
+    if (::IsValidCodePage(EnumCastUnderlying(codePage)) != gFalse)
         return true;
     else
         return false;

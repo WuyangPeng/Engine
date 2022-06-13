@@ -1,11 +1,15 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/07 14:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/11 19:17)
 
 #include "VisualEffectInstanceTesting.h"
 #include "System/Helper/PragmaWarning/LexicalCast.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
@@ -14,9 +18,7 @@
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Texture1D.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include SYSTEM_WARNING_DISABLE(26493)
-#include SYSTEM_WARNING_DISABLE(26409)
+
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, VisualEffectInstanceTesting)
@@ -38,20 +40,20 @@ void Rendering::VisualEffectInstanceTesting::MainTest()
 
 void Rendering::VisualEffectInstanceTesting::InitTest()
 {
-    VertexShaderSharedPtr vertexShader(new VertexShader("VertexShader", 3, 5, 4, 6));
+    VertexShaderSharedPtr vertexShader(std::make_shared<VertexShader>("VertexShader", 3, 5, 4, 6));
 
     for (int i = 0; i < 3; ++i)
     {
         vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<string>(i),
-                               ShaderFlags::VariableType(i),
-                               ShaderFlags::VariableSemantic(i));
+                               ShaderFlags::VariableType{ i },
+                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<string>(i),
-                                ShaderFlags::VariableType(i),
-                                ShaderFlags::VariableSemantic(i));
+                                ShaderFlags::VariableType{ i },
+                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 4; ++i)
@@ -63,11 +65,11 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
     for (int i = 0; i < 6; ++i)
     {
         vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<string>(i),
-                                 ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+                                 ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         vertexShader->SetLodBias(i, static_cast<float>(i));
         vertexShader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -77,20 +79,20 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
                                                       static_cast<float>(i + 3) / 10.0f));
     }
 
-    PixelShaderSharedPtr pixelShader(new PixelShader("PixelShader", 4, 5, 6, 7));
+    PixelShaderSharedPtr pixelShader(std::make_shared<PixelShader>("PixelShader", 4, 5, 6, 7));
 
     for (int i = 0; i < 4; ++i)
     {
         pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<string>(i),
-                              ShaderFlags::VariableType(i),
-                              ShaderFlags::VariableSemantic(i));
+                              ShaderFlags::VariableType{ i },
+                              ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<string>(i),
-                               ShaderFlags::VariableType(i),
-                               ShaderFlags::VariableSemantic(i));
+                               ShaderFlags::VariableType{ i },
+                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
@@ -102,11 +104,11 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
     for (int i = 0; i < 7; ++i)
     {
         pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<string>(i),
-                                ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+                                ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         pixelShader->SetLodBias(i, static_cast<float>(i));
         pixelShader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -116,7 +118,7 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
                                                      static_cast<float>(i + 3) / 10.0f));
     }
 
-    AlphaStateSharedPtr alphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
+    AlphaStateSharedPtr alphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
     alphaState->SetBlendEnabled(true);
     alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
     alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
@@ -125,17 +127,17 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
     alphaState->SetReference(0.5f);
     alphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
 
-    CullStateSharedPtr cullState(new CullState(CoreTools::DisableNotThrow::Disable));
+    CullStateSharedPtr cullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
 
     cullState->SetEnabled(false);
     cullState->SetCCWOrder(false);
 
-    DepthStateSharedPtr depthState(new DepthState(CoreTools::DisableNotThrow::Disable));
+    DepthStateSharedPtr depthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
     depthState->SetEnabled(false);
     depthState->SetWritable(false);
     depthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
 
-    OffsetStateSharedPtr offsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
+    OffsetStateSharedPtr offsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
 
     offsetState->SetFillEnabled(true);
     offsetState->SetLineEnabled(true);
@@ -143,7 +145,7 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
     offsetState->SetScale(1.5f);
     offsetState->SetBias(1.6f);
 
-    StencilStateSharedPtr stencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
+    StencilStateSharedPtr stencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
 
     stencilState->SetEnabled(true);
     stencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
@@ -154,11 +156,11 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
     stencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
     stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-    WireStateSharedPtr wireState(new WireState(CoreTools::DisableNotThrow::Disable));
+    WireStateSharedPtr wireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
 
     wireState->SetEnabled(true);
 
-    VisualPassSharedPtr firstVisualPass(new VisualPass(CoreTools::DisableNotThrow::Disable));
+    VisualPassSharedPtr firstVisualPass(std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable));
 
     firstVisualPass->SetVertexShader(vertexShader);
     firstVisualPass->SetPixelShader(pixelShader);
@@ -169,15 +171,15 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
     firstVisualPass->SetStencilState(stencilState);
     firstVisualPass->SetWireState(wireState);
 
-    VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique(CoreTools::DisableNotThrow::Disable));
+    VisualTechniqueSharedPtr firstVisualTechnique(std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable));
 
     firstVisualTechnique->InsertPass(firstVisualPass);
 
-    VisualEffectSharedPtr visualEffect(new VisualEffect{ CoreTools::DisableNotThrow::Disable });
+    VisualEffectSharedPtr visualEffect(std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable));
 
     visualEffect->InsertTechnique(firstVisualTechnique);
 
-    VisualEffectInstanceSharedPtr visualEffectInstance(new VisualEffectInstance(visualEffect, 0));
+    VisualEffectInstanceSharedPtr visualEffectInstance(std::make_shared<VisualEffectInstance>(visualEffect, 0));
 
     ASSERT_EQUAL(visualEffectInstance->GetEffect(), visualEffect);
     ASSERT_EQUAL(visualEffectInstance->GetTechniqueIndex(), 0);
@@ -196,13 +198,13 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     for (int i = 0; i < 4; i++)
     {
-        ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat((i + 1) * 4));
+        ShaderFloatSharedPtr firstShaderFloat(std::make_shared<ShaderFloat>((i + 1) * 4));
 
         visualEffectInstance->SetVertexConstant(0, "VertexConstant" + boost::lexical_cast<string>(i), firstShaderFloat);
 
         ASSERT_EQUAL(visualEffectInstance->GetVertexConstant(0, i), firstShaderFloat);
 
-        ShaderFloatSharedPtr secondShaderFloat(new ShaderFloat((i + 1) * 4));
+        ShaderFloatSharedPtr secondShaderFloat(std::make_shared<ShaderFloat>((i + 1) * 4));
 
         visualEffectInstance->SetVertexConstant(0, i, secondShaderFloat);
 
@@ -211,13 +213,13 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     for (int i = 0; i < 6; i++)
     {
-        ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat((i + 1) * 4));
+        ShaderFloatSharedPtr firstShaderFloat(std::make_shared<ShaderFloat>((i + 1) * 4));
 
         visualEffectInstance->SetPixelConstant(0, "PixelConstant" + boost::lexical_cast<string>(i), firstShaderFloat);
 
         ASSERT_EQUAL(visualEffectInstance->GetPixelConstant(0, i), firstShaderFloat);
 
-        ShaderFloatSharedPtr secondShaderFloat(new ShaderFloat((i + 1) * 4));
+        ShaderFloatSharedPtr secondShaderFloat(std::make_shared<ShaderFloat>((i + 1) * 4));
 
         visualEffectInstance->SetPixelConstant(0, i, secondShaderFloat);
 
@@ -226,13 +228,13 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     for (int i = 0; i < 6; i++)
     {
-        TextureSharedPtr firstTexture(new Texture1D(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
 
         visualEffectInstance->SetVertexTexture(0, "VertexTexture" + boost::lexical_cast<string>(i), firstTexture);
 
         ASSERT_EQUAL(visualEffectInstance->GetVertexTexture(0, i), firstTexture);
 
-        TextureSharedPtr secondTexture(new Texture1D(TextureFormat::A4R4G4B4, 6, 0));
+        TextureSharedPtr secondTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 6, 0));
 
         visualEffectInstance->SetVertexTexture(0, i, secondTexture);
 
@@ -241,13 +243,13 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     for (int i = 0; i < 7; i++)
     {
-        TextureSharedPtr firstTexture(new Texture1D(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
 
         visualEffectInstance->SetPixelTexture(0, "PixelTexture" + boost::lexical_cast<string>(i), firstTexture);
 
         ASSERT_EQUAL(visualEffectInstance->GetPixelTexture(0, i), firstTexture);
 
-        TextureSharedPtr secondTexture(new Texture1D(TextureFormat::A4R4G4B4, 6, 0));
+        TextureSharedPtr secondTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 6, 0));
 
         visualEffectInstance->SetPixelTexture(0, i, secondTexture);
 
@@ -257,20 +259,20 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
 void Rendering::VisualEffectInstanceTesting::CopyTest()
 {
-    VertexShaderSharedPtr vertexShader(new VertexShader("VertexShader", 3, 5, 4, 6));
+    VertexShaderSharedPtr vertexShader(std::make_shared<VertexShader>("VertexShader", 3, 5, 4, 6));
 
     for (int i = 0; i < 3; ++i)
     {
         vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<string>(i),
-                               ShaderFlags::VariableType(i),
-                               ShaderFlags::VariableSemantic(i));
+                               ShaderFlags::VariableType{ i },
+                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<string>(i),
-                                ShaderFlags::VariableType(i),
-                                ShaderFlags::VariableSemantic(i));
+                                ShaderFlags::VariableType{ i },
+                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 4; ++i)
@@ -282,11 +284,11 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     for (int i = 0; i < 6; ++i)
     {
         vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<string>(i),
-                                 ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+                                 ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         vertexShader->SetLodBias(i, static_cast<float>(i));
         vertexShader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -296,20 +298,20 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
                                                       static_cast<float>(i + 3) / 10.0f));
     }
 
-    PixelShaderSharedPtr pixelShader(new PixelShader("PixelShader", 4, 5, 6, 7));
+    PixelShaderSharedPtr pixelShader(std::make_shared<PixelShader>("PixelShader", 4, 5, 6, 7));
 
     for (int i = 0; i < 4; ++i)
     {
         pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<string>(i),
-                              ShaderFlags::VariableType(i),
-                              ShaderFlags::VariableSemantic(i));
+                              ShaderFlags::VariableType{ i },
+                              ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<string>(i),
-                               ShaderFlags::VariableType(i),
-                               ShaderFlags::VariableSemantic(i));
+                               ShaderFlags::VariableType{ i },
+                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
@@ -321,11 +323,11 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     for (int i = 0; i < 7; ++i)
     {
         pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<string>(i),
-                                ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+                                ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         pixelShader->SetLodBias(i, static_cast<float>(i));
         pixelShader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -335,7 +337,7 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
                                                      static_cast<float>(i + 3) / 10.0f));
     }
 
-    AlphaStateSharedPtr alphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
+    AlphaStateSharedPtr alphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
     alphaState->SetBlendEnabled(true);
     alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
     alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
@@ -344,17 +346,17 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     alphaState->SetReference(0.5f);
     alphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
 
-    CullStateSharedPtr cullState(new CullState(CoreTools::DisableNotThrow::Disable));
+    CullStateSharedPtr cullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
 
     cullState->SetEnabled(false);
     cullState->SetCCWOrder(false);
 
-    DepthStateSharedPtr depthState(new DepthState(CoreTools::DisableNotThrow::Disable));
+    DepthStateSharedPtr depthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
     depthState->SetEnabled(false);
     depthState->SetWritable(false);
     depthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
 
-    OffsetStateSharedPtr offsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
+    OffsetStateSharedPtr offsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
 
     offsetState->SetFillEnabled(true);
     offsetState->SetLineEnabled(true);
@@ -362,7 +364,7 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     offsetState->SetScale(1.5f);
     offsetState->SetBias(1.6f);
 
-    StencilStateSharedPtr stencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
+    StencilStateSharedPtr stencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
 
     stencilState->SetEnabled(true);
     stencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
@@ -373,11 +375,11 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     stencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
     stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-    WireStateSharedPtr wireState(new WireState(CoreTools::DisableNotThrow::Disable));
+    WireStateSharedPtr wireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
 
     wireState->SetEnabled(true);
 
-    VisualPassSharedPtr firstVisualPass(new VisualPass(CoreTools::DisableNotThrow::Disable));
+    VisualPassSharedPtr firstVisualPass(std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable));
 
     firstVisualPass->SetVertexShader(vertexShader);
     firstVisualPass->SetPixelShader(pixelShader);
@@ -388,44 +390,44 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     firstVisualPass->SetStencilState(stencilState);
     firstVisualPass->SetWireState(wireState);
 
-    VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique(CoreTools::DisableNotThrow::Disable));
+    VisualTechniqueSharedPtr firstVisualTechnique(std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable));
 
     firstVisualTechnique->InsertPass(firstVisualPass);
 
-    VisualEffectSharedPtr firstVisualEffect(new VisualEffect{ CoreTools::DisableNotThrow::Disable });
+    VisualEffectSharedPtr firstVisualEffect(std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable));
     firstVisualEffect->InsertTechnique(firstVisualTechnique);
 
-    VisualEffectInstanceSharedPtr firstVisualEffectInstance(new VisualEffectInstance(firstVisualEffect, 0));
+    VisualEffectInstanceSharedPtr firstVisualEffectInstance(std::make_shared<VisualEffectInstance>(firstVisualEffect, 0));
 
     for (int i = 0; i < 4; i++)
     {
-        ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat((i + 1) * 4));
+        ShaderFloatSharedPtr firstShaderFloat(std::make_shared<ShaderFloat>((i + 1) * 4));
 
         firstVisualEffectInstance->SetVertexConstant(0, "VertexConstant" + boost::lexical_cast<string>(i), firstShaderFloat);
     }
 
     for (int i = 0; i < 6; i++)
     {
-        ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat((i + 1) * 4));
+        ShaderFloatSharedPtr firstShaderFloat(std::make_shared<ShaderFloat>((i + 1) * 4));
 
         firstVisualEffectInstance->SetPixelConstant(0, "PixelConstant" + boost::lexical_cast<string>(i), firstShaderFloat);
     }
 
     for (int i = 0; i < 6; i++)
     {
-        TextureSharedPtr firstTexture(new Texture1D(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
 
         firstVisualEffectInstance->SetVertexTexture(0, "VertexTexture" + boost::lexical_cast<string>(i), firstTexture);
     }
 
     for (int i = 0; i < 7; i++)
     {
-        TextureSharedPtr firstTexture(new Texture1D(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
 
         firstVisualEffectInstance->SetPixelTexture(0, "PixelTexture" + boost::lexical_cast<string>(i), firstTexture);
     }
 
-    VisualEffectInstanceSharedPtr secondVisualEffectInstance(new VisualEffectInstance(*firstVisualEffectInstance));
+    VisualEffectInstanceSharedPtr secondVisualEffectInstance(std::make_shared<VisualEffectInstance>(*firstVisualEffectInstance));
 
     ASSERT_EQUAL(firstVisualEffectInstance->GetEffect(), secondVisualEffectInstance->GetEffect());
     ASSERT_EQUAL(firstVisualEffectInstance->GetTechniqueIndex(), secondVisualEffectInstance->GetTechniqueIndex());
@@ -444,20 +446,20 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
 
 void Rendering::VisualEffectInstanceTesting::StreamTest()
 {
-    VertexShaderSharedPtr vertexShader(new VertexShader("VertexShader", 3, 5, 4, 6));
+    VertexShaderSharedPtr vertexShader(std::make_shared<VertexShader>("VertexShader", 3, 5, 4, 6));
 
     for (int i = 0; i < 3; ++i)
     {
         vertexShader->SetInput(i, "VertexInput" + boost::lexical_cast<string>(i),
-                               ShaderFlags::VariableType(i),
-                               ShaderFlags::VariableSemantic(i));
+                               ShaderFlags::VariableType{ i },
+                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         vertexShader->SetOutput(i, "VertexOutput" + boost::lexical_cast<string>(i),
-                                ShaderFlags::VariableType(i),
-                                ShaderFlags::VariableSemantic(i));
+                                ShaderFlags::VariableType{ i },
+                                ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 4; ++i)
@@ -469,11 +471,11 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
     for (int i = 0; i < 6; ++i)
     {
         vertexShader->SetSampler(i, "VertexTexture" + boost::lexical_cast<string>(i),
-                                 ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        vertexShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+                                 ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        vertexShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        vertexShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         vertexShader->SetLodBias(i, static_cast<float>(i));
         vertexShader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -483,20 +485,20 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
                                                       static_cast<float>(i + 3) / 10.0f));
     }
 
-    PixelShaderSharedPtr pixelShader(new PixelShader("PixelShader", 4, 5, 6, 7));
+    PixelShaderSharedPtr pixelShader(std::make_shared<PixelShader>("PixelShader", 4, 5, 6, 7));
 
     for (int i = 0; i < 4; ++i)
     {
         pixelShader->SetInput(i, "PixelInput" + boost::lexical_cast<string>(i),
-                              ShaderFlags::VariableType(i),
-                              ShaderFlags::VariableSemantic(i));
+                              ShaderFlags::VariableType{ i },
+                              ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 5; ++i)
     {
         pixelShader->SetOutput(i, "PixelOutput" + boost::lexical_cast<string>(i),
-                               ShaderFlags::VariableType(i),
-                               ShaderFlags::VariableSemantic(i));
+                               ShaderFlags::VariableType{ i },
+                               ShaderFlags::VariableSemantic{ i });
     }
 
     for (int i = 0; i < 6; ++i)
@@ -508,11 +510,11 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
     for (int i = 0; i < 7; ++i)
     {
         pixelShader->SetSampler(i, "PixelTexture" + boost::lexical_cast<string>(i),
-                                ShaderFlags::SamplerType(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetFilter(i, ShaderFlags::SamplerFilter(i));
-        pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate(i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate((i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
-        pixelShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate((i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity)));
+                                ShaderFlags::SamplerType{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetFilter(i, ShaderFlags::SamplerFilter{ i });
+        pixelShader->SetCoordinate(i, 0, ShaderFlags::SamplerCoordinate{ i % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetCoordinate(i, 1, ShaderFlags::SamplerCoordinate{ (i + 1) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
+        pixelShader->SetCoordinate(i, 2, ShaderFlags::SamplerCoordinate{ (i + 2) % System::EnumCastUnderlying(ShaderFlags::SamplerType::Quantity) });
 
         pixelShader->SetLodBias(i, static_cast<float>(i));
         pixelShader->SetAnisotropy(i, static_cast<float>(i * 2.0f));
@@ -522,7 +524,7 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
                                                      static_cast<float>(i + 3) / 10.0f));
     }
 
-    AlphaStateSharedPtr alphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
+    AlphaStateSharedPtr alphaState(std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable));
     alphaState->SetBlendEnabled(true);
     alphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
     alphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
@@ -531,17 +533,17 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
     alphaState->SetReference(0.5f);
     alphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
 
-    CullStateSharedPtr cullState(new CullState(CoreTools::DisableNotThrow::Disable));
+    CullStateSharedPtr cullState(std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable));
 
     cullState->SetEnabled(false);
     cullState->SetCCWOrder(false);
 
-    DepthStateSharedPtr depthState(new DepthState(CoreTools::DisableNotThrow::Disable));
+    DepthStateSharedPtr depthState(std::make_shared<DepthState>(CoreTools::DisableNotThrow::Disable));
     depthState->SetEnabled(false);
     depthState->SetWritable(false);
     depthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
 
-    OffsetStateSharedPtr offsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
+    OffsetStateSharedPtr offsetState(std::make_shared<OffsetState>(CoreTools::DisableNotThrow::Disable));
 
     offsetState->SetFillEnabled(true);
     offsetState->SetLineEnabled(true);
@@ -549,7 +551,7 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
     offsetState->SetScale(1.5f);
     offsetState->SetBias(1.6f);
 
-    StencilStateSharedPtr stencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
+    StencilStateSharedPtr stencilState(std::make_shared<StencilState>(CoreTools::DisableNotThrow::Disable));
 
     stencilState->SetEnabled(true);
     stencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
@@ -560,86 +562,7 @@ void Rendering::VisualEffectInstanceTesting::StreamTest()
     stencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
     stencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
 
-    WireStateSharedPtr wireState(new WireState(CoreTools::DisableNotThrow::Disable));
+    WireStateSharedPtr wireState(std::make_shared<WireState>(CoreTools::DisableNotThrow::Disable));
 
     wireState->SetEnabled(true);
-
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	VisualPassSharedPtr firstVisualPass(new VisualPass);
-    //
-    // 	firstVisualPass->SetVertexShader(vertexShader);
-    // 	firstVisualPass->SetPixelShader(pixelShader);
-    // 	firstVisualPass->SetAlphaState(alphaState);
-    // 	firstVisualPass->SetCullState(cullState);
-    // 	firstVisualPass->SetDepthState(depthState);
-    // 	firstVisualPass->SetOffsetState(offsetState);
-    // 	firstVisualPass->SetStencilState(stencilState);
-    // 	firstVisualPass->SetWireState(wireState);
-    //
-    // 	VisualPassSharedPtr secondVisualPass(new VisualPass);
-    //
-    // 	VisualTechniqueSharedPtr firstVisualTechnique(new VisualTechnique);
-    //
-    // 	firstVisualTechnique->InsertPass(firstVisualPass);
-    //
-    // 	VisualEffectSharedPtr firstVisualEffect(new VisualEffect);
-    // 	firstVisualEffect->InsertTechnique(firstVisualTechnique);
-    //
-    // 	VisualEffectInstanceSharedPtr firstVisualEffectInstance(new VisualEffectInstance(firstVisualEffect, 0));
-    //
-    // 	for (int i = 0; i < 4; i++)
-    // 	{
-    // 		ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat((i + 1) * 4));
-    //
-    // 		firstVisualEffectInstance->SetVertexConstant(0, "VertexConstant" + boost::lexical_cast<string>(i), firstShaderFloat);
-    // 	}
-    //
-    // 	for (int i = 0; i < 6; i++)
-    // 	{
-    // 		ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat((i + 1) * 4));
-    //
-    // 		firstVisualEffectInstance->SetPixelConstant(0, "PixelConstant" + boost::lexical_cast<string>(i), firstShaderFloat);
-    //
-    // 	}
-    //
-    // 	for (int i = 0; i < 6; i++)
-    // 	{
-    // 		TextureSharedPtr firstTexture(new Texture1D(TextureFormat::A4R4G4B4, 5, 0));
-    //
-    // 		firstVisualEffectInstance->SetVertexTexture(0, "VertexTexture" + boost::lexical_cast<string>(i), firstTexture);
-    //
-    // 	}
-    //
-    // 	for (int i = 0; i < 7; i++)
-    // 	{
-    // 		TextureSharedPtr firstTexture(new Texture1D(TextureFormat::A4R4G4B4, 5, 0));
-    //
-    // 		firstVisualEffectInstance->SetPixelTexture(0, "PixelTexture" + boost::lexical_cast<string>(i), firstTexture);
-    //
-    // 	}
-    //
-    // 	outTopLevel.Insert(firstVisualEffectInstance);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	VisualEffectInstanceSharedPtr secondVisualEffectInstance = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<VisualEffectInstanceSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstVisualEffectInstance->GetTechniqueIndex(), secondVisualEffectInstance->GetTechniqueIndex());
-    // 	ASSERT_EQUAL(firstVisualEffectInstance->GetNumPasses(), secondVisualEffectInstance->GetNumPasses());
-    //
-    // 	ASSERT_UNEQUAL(firstVisualEffectInstance->GetVertexParameters(0), secondVisualEffectInstance->GetVertexParameters(0));
-    // 	ASSERT_UNEQUAL(firstVisualEffectInstance->GetPixelParameters(0), secondVisualEffectInstance->GetPixelParameters(0));
-    //
-    // 	ASSERT_EQUAL(firstVisualEffectInstance->GetVertexParameters(0)->GetNumConstants(), secondVisualEffectInstance->GetVertexParameters(0)->GetNumConstants());
-    // 	ASSERT_EQUAL(firstVisualEffectInstance->GetVertexParameters(0)->GetNumTextures(), secondVisualEffectInstance->GetVertexParameters(0)->GetNumTextures());
-    //
-    // 	ASSERT_EQUAL(firstVisualEffectInstance->GetPixelParameters(0)->GetNumConstants(), secondVisualEffectInstance->GetPixelParameters(0)->GetNumConstants());
-    // 	ASSERT_EQUAL(firstVisualEffectInstance->GetPixelParameters(0)->GetNumTextures(), secondVisualEffectInstance->GetPixelParameters(0)->GetNumTextures());
 }

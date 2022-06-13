@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/05/11 16:57)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 18:52)
 
 #include "CreateDefaultProcessTesting.h"
 #include "System/Threading/Process.h"
@@ -16,7 +16,7 @@
 
 using namespace std::literals;
 
-System::CreateDefaultProcessTesting ::CreateDefaultProcessTesting(const OStreamShared& stream)
+System::CreateDefaultProcessTesting::CreateDefaultProcessTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;

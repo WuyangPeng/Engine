@@ -47,7 +47,7 @@ bool System::GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCh
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetModuleHandleEx(EnumCastUnderlying(flags), moduleName, module) != g_False)
+    if (::GetModuleHandleEx(EnumCastUnderlying(flags), moduleName, module) != gFalse)
         return true;
     else
         return false;

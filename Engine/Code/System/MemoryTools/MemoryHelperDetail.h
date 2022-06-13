@@ -15,7 +15,7 @@
 template <typename T>
 void System::FillMemoryToZero(T& value) noexcept
 {
-    static_assert(std::is_pod_v<T>);
+    static_assert(std::is_trivial_v<T> && std::is_standard_layout_v<T>);
 
     ::ZeroMemory(&value, sizeof(T));
 }

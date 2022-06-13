@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 15:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 18:56)
 
 #include "ConstraintTesting.h"
 
@@ -18,7 +21,7 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ConstraintTesting)
 
-void CoreTools::ConstraintTesting ::MainTest()
+void CoreTools::ConstraintTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MustBePodTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MustBeSameSizeTest);
@@ -26,69 +29,77 @@ void CoreTools::ConstraintTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MustHaveBaseTest);
 }
 
-void CoreTools::ConstraintTesting ::MustBePodTest() noexcept
+void CoreTools::ConstraintTesting::MustBePodTest() noexcept
 {
-    [[maybe_unused]] const MustBePod<int> integerMustBePod;
+    MAYBE_UNUSED const MustBePod<int> integerMustBePod{};
 
 #if 0  // 这里应该产生编译错误。
-	MustBePod<void> voidMustBePod;
-	SYSTEM_UNUSED_ARG(voidMustBePod);
+
+    MAYBE_UNUSED MustBePod<void> voidMustBePod{};
+
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
-	MustBePod<ConstraintTesting> constraintTestingMustBePod;
-	SYSTEM_UNUSED_ARG(constraintTestingMustBePod);
+
+    MAYBE_UNUSED MustBePod<ConstraintTesting> constraintTestingMustBePod{];
+
 #endif  // 0
 
-    [[maybe_unused]] const MustBePodOrVoid<float> floatMustBePodOrVoid;
-    [[maybe_unused]] const MustBePodOrVoid<void> voidMustBePodOrVoid;
+    MAYBE_UNUSED const MustBePodOrVoid<float> floatMustBePodOrVoid{};
+    MAYBE_UNUSED const MustBePodOrVoid<void> voidMustBePodOrVoid{};
 
 #if 0  // 这里应该产生编译错误。
-	MustBePodOrVoid<ConstraintTesting> constraintTestingMustBePodOrVoid;
-	SYSTEM_UNUSED_ARG(constraintTestingMustBePodOrVoid);
+
+    MAYBE_UNUSED MustBePodOrVoid<ConstraintTesting> constraintTestingMustBePodOrVoid{};
+
 #endif  // 0
 }
 
-void CoreTools::ConstraintTesting ::MustBeSameSizeTest() noexcept
+void CoreTools::ConstraintTesting::MustBeSameSizeTest() noexcept
 {
-    [[maybe_unused]] const MustBeSameSize<int, unsigned int> integerMustBeSameSize;
-    [[maybe_unused]] const MustBeSameSize<long, unsigned long> longMustBeSameSize;
+    MAYBE_UNUSED const MustBeSameSize<int, unsigned int> integerMustBeSameSize{};
+    MAYBE_UNUSED const MustBeSameSize<long, unsigned long> longMustBeSameSize{};
 
 #if 0  // 这里应该产生编译错误。
-	MustBeSameSize<char, long> charAndLongMustBeSameSize;
-	SYSTEM_UNUSED_ARG(charAndLongMustBeSameSize);
+
+    MAYBE_UNUSED MustBeSameSize<char, long> charAndLongMustBeSameSize{};
+
 #endif  // 0
 }
 
-void CoreTools::ConstraintTesting ::MustBeSubscriptableTest() noexcept
+void CoreTools::ConstraintTesting::MustBeSubscriptableTest() noexcept
 {
-    [[maybe_unused]] const MustBeSubscriptable<Tuple<3, int>> tupleMustBeSubscriptable;
-    [[maybe_unused]] const MustBeSubscriptable<string> stringMustBeSubscriptable;
+    MAYBE_UNUSED const MustBeSubscriptable<Tuple<3, int>> tupleMustBeSubscriptable{};
+    MAYBE_UNUSED const MustBeSubscriptable<string> stringMustBeSubscriptable{};
 
 #if 0  // 这里应该产生编译错误。
-	MustBeSubscriptable<int> integerMustBeSubscriptable;
-	SYSTEM_UNUSED_ARG(integerMustBeSubscriptable);
+
+    MAYBE_UNUSED MustBeSubscriptable<int> integerMustBeSubscriptable{};
+
 #endif  // 0
 
-    [[maybe_unused]] const MustBeSubscriptableAsDecayablePointer<string*> stringPtrMustBeSubscriptableAsDecayablePointer;
+    MAYBE_UNUSED const MustBeSubscriptableAsDecayablePointer<string*> stringPtrMustBeSubscriptableAsDecayablePointer{};
 
 #if 0  // 这里应该产生编译错误。
-	MustBeSubscriptableAsDecayablePointer<Tuple<3, int> > tupleMustBeSubscriptableAsDecayablePointer;
-	SYSTEM_UNUSED_ARG(tupleMustBeSubscriptableAsDecayablePointer);
+
+    MAYBE_UNUSED MustBeSubscriptableAsDecayablePointer<Tuple<3, int>> tupleMustBeSubscriptableAsDecayablePointer{};
+
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
-	MustBeSubscriptableAsDecayablePointer<string> stringMustBeSubscriptableAsDecayablePointer;
-	SYSTEM_UNUSED_ARG(stringMustBeSubscriptableAsDecayablePointer);
+
+    MAYBE_UNUSED MustBeSubscriptableAsDecayablePointer<string> stringMustBeSubscriptableAsDecayablePointer{};
+
 #endif  // 0
 }
 
-void CoreTools::ConstraintTesting ::MustHaveBaseTest() noexcept
+void CoreTools::ConstraintTesting::MustHaveBaseTest() noexcept
 {
-    [[maybe_unused]] const MustHaveBase<ClassType, ParentType> mustHaveBase;
+    MAYBE_UNUSED const MustHaveBase<ClassType, ParentType> mustHaveBase{};
 
 #if 0  // 这里应该产生编译错误。
-	MustHaveBase<ParentType, ClassType> errorMustHaveBase;
-	SYSTEM_UNUSED_ARG(errorMustHaveBase);
+
+    MAYBE_UNUSED MustHaveBase<ParentType, ClassType> errorMustHaveBase{};
+
 #endif  // 0
 }

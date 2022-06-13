@@ -18,7 +18,7 @@
 
 namespace Rendering
 {
-    class LightSptPerPixEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE LightSptPerPixEffect : public VisualEffect
     {
     public:
         using ClassType = LightSptPerPixEffect;

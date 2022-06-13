@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/21 13:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 18:42)
 
 #include "AVectorOrthonormalBasisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -22,12 +25,12 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AVectorOrthonormalBasisTesting)
 
-void Mathematics::AVectorOrthonormalBasisTesting ::MainTest()
+void Mathematics::AVectorOrthonormalBasisTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(OrthonormalBasisTest);
 }
 
-void Mathematics::AVectorOrthonormalBasisTesting ::OrthonormalBasisTest()
+void Mathematics::AVectorOrthonormalBasisTesting::OrthonormalBasisTest()
 {
     default_random_engine randomEngine{};
     const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };

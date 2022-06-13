@@ -1,68 +1,65 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/22 13:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 22:59)
 
 #include "Vector3DOrthonormalBasisTesting.h"
-#include "Mathematics/Algebra/Vector3OrthonormalBasisDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3OrthonormalBasisDetail.h"
 
-#include <random>  
 #include "Mathematics/Algebra/Vector3Tools.h"
+#include <random>
 
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class Vector3OrthonormalBasis<float>;
-	template class Vector3OrthonormalBasis<double>;
+    template class Vector3OrthonormalBasis<float>;
+    template class Vector3OrthonormalBasis<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Vector3OrthonormalBasisTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector3OrthonormalBasisTesting)
 
-void Mathematics::Vector3OrthonormalBasisTesting
-	::MainTest()
+void Mathematics::Vector3OrthonormalBasisTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(OrthonormalBasisTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(OrthonormalBasisTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::Vector3OrthonormalBasisTesting
-	::OrthonormalBasisTest()
+
+void Mathematics::Vector3OrthonormalBasisTesting::OrthonormalBasisTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> firstRandomDistribution{ -10.0,10.0 };
-	uniform_real<float> secondRandomDistribution{ -10.0f,10.0f }; 
+    const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
+    const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D firstVector(firstRandomDistribution(generator),
-			                  firstRandomDistribution(generator),
-			                  firstRandomDistribution(generator)); 
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector3D firstVector(firstRandomDistribution(generator),
+                             firstRandomDistribution(generator),
+                             firstRandomDistribution(generator));
 
-		Vector3F secondVector(secondRandomDistribution(generator),
-			                   secondRandomDistribution(generator),
-			                   secondRandomDistribution(generator));
+        Vector3F secondVector(secondRandomDistribution(generator),
+                              secondRandomDistribution(generator),
+                              secondRandomDistribution(generator));
 
-		Vector3OrthonormalBasisD firstOrthonormalBasis(firstVector,false);
+        const Vector3OrthonormalBasisD firstOrthonormalBasis(firstVector, false);
 
-		firstVector.Normalize();
+        firstVector.Normalize();
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector,firstOrthonormalBasis.GetWVector(),1e-10)); 
+        ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector, firstOrthonormalBasis.GetWVector(), 1e-10));
 
-		Vector3OrthonormalBasisF secondOrthonormalBasis(secondVector,false);
+        const Vector3OrthonormalBasisF secondOrthonormalBasis(secondVector, false);
 
-		secondVector.Normalize(); 
+        secondVector.Normalize();
 
-		ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector,secondOrthonormalBasis.GetWVector(),1e-8f)); 
-	}	
+        ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector, secondOrthonormalBasis.GetWVector(), 1e-8f));
+    }
 }
-

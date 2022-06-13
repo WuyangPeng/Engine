@@ -1,65 +1,61 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/28 10:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 16:25)
 
 #include "TrapezoidRuleTesting.h"
-#include "Mathematics/NumericalAnalysis/TrapezoidRuleDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/NumericalAnalysis/TrapezoidRuleDetail.h"
 
 namespace Mathematics
 {
-	template class TrapezoidRule<float,TrapezoidRuleTesting>;
-	template class TrapezoidRule<double,TrapezoidRuleTesting>;	
+    template class TrapezoidRule<float, TrapezoidRuleTesting>;
+    template class TrapezoidRule<double, TrapezoidRuleTesting>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,TrapezoidRuleTesting) 
 
-void Mathematics::TrapezoidRuleTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, TrapezoidRuleTesting)
+
+void Mathematics::TrapezoidRuleTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(ValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ValueTest);
 }
 
-double Mathematics::TrapezoidRuleTesting ::Solution(double input, const TrapezoidRuleTesting* userData) noexcept
+double Mathematics::TrapezoidRuleTesting::Solution(double input, const TrapezoidRuleTesting* userData) noexcept
 {
-	return input * userData->GetUserData() - 3;
+    if (userData != nullptr)
+        return input * userData->GetUserData() - 3;
+    else
+        return 0.0;
 }
 
-double Mathematics::TrapezoidRuleTesting ::GetUserData() const noexcept
+double Mathematics::TrapezoidRuleTesting::GetUserData() const noexcept
 {
-	return 5;
+    return 5;
 }
 
-void Mathematics::TrapezoidRuleTesting
-	::ValueTest() 
+void Mathematics::TrapezoidRuleTesting::ValueTest()
 {
-	double end = 3.5;
-	double begin = 1.5;
-	int numSamples = 10;
-	auto temp1 = (end - begin);
-	auto temp2 = (numSamples - 1);
-	double difference = temp1 / static_cast<double>(temp2);
-	double value = 0.5 * (Solution(begin, this) + Solution(end, this));
+    constexpr double end = 3.5;
+    constexpr double begin = 1.5;
+    constexpr int numSamples = 10;
+    constexpr auto temp1 = (end - begin);
+    constexpr auto temp2 = (numSamples - 1);
+    constexpr double difference = temp1 / static_cast<double>(temp2);
+    double value = 0.5 * (Solution(begin, this) + Solution(end, this));
 
-	for (int i = 1; i <= numSamples - 2; ++i)
-	{
-		value += Solution(begin + i * difference, this);
-	}
+    for (int i = 1; i <= numSamples - 2; ++i)
+    {
+        value += Solution(begin + i * difference, this);
+    }
 
-	value *= difference;
+    value *= difference;
 
-	TrapezoidRule<double, TrapezoidRuleTesting> trapezoidRule(numSamples, begin, end, Solution, this);
+    const TrapezoidRule<double, TrapezoidRuleTesting> trapezoidRule(numSamples, begin, end, Solution, this);
 
-	ASSERT_APPROXIMATE(value, trapezoidRule.GetValue(), 1e-10);
+    ASSERT_APPROXIMATE(value, trapezoidRule.GetValue(), 1e-10);
 }
-

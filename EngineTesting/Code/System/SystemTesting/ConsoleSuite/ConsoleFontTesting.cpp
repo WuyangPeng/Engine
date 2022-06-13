@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/16 11:43)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:05)
 
 #include "ConsoleFontTesting.h"
 #include "System/Console/ConsoleFont.h"
@@ -89,12 +89,14 @@ void System::ConsoleFontTesting::SetCurrentConsoleFontTest()
     ASSERT_EQUAL(originalConsoleFontInfo.FontFamily, currentConsoleFontInfo.FontFamily);
     ASSERT_EQUAL(originalConsoleFontInfo.FontWeight, currentConsoleFontInfo.FontWeight);
 
-    for (int i = 0; i < g_LogicalFontFaceSize; ++i)
+    for (int i = 0; i < gLogicalFontFaceSize; ++i)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         ASSERT_EQUAL(originalConsoleFontInfo.FaceName[i], currentConsoleFontInfo.FaceName[i]);
+
 #include STSTEM_WARNING_POP
     }
 

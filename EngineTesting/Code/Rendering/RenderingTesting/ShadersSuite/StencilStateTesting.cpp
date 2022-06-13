@@ -1,20 +1,22 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/07 14:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/06/11 18:52)
 
 #include "StencilStateTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Shaders/StencilState.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, StencilStateTesting)
-#include SYSTEM_WARNING_DISABLE(26440)
 
 void Rendering::StencilStateTesting::MainTest()
 {
@@ -95,39 +97,6 @@ void Rendering::StencilStateTesting::CopyTest()
     ASSERT_ENUM_EQUAL(secondStencilState.GetOnZFail(), StencilStateFlags::OperationType::Increment);
 }
 
-void Rendering::StencilStateTesting::StreamTest()
+void Rendering::StencilStateTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	StencilStateSharedPtr firstStencilState(new StencilState(CoreTools::DisableNotThrow::Disable));
-    //
-    // 	firstStencilState->SetEnabled(true);
-    // 	firstStencilState->SetCompare(StencilStateFlags::CompareMode::Greater);
-    // 	firstStencilState->SetReference(5);
-    // 	firstStencilState->SetMask(0xFFFEEFFE);
-    // 	firstStencilState->SetWriteMask(0xFDFEEFFE);
-    // 	firstStencilState->SetOnFail(StencilStateFlags::OperationType::Invert);
-    // 	firstStencilState->SetOnZFail(StencilStateFlags::OperationType::Increment);
-    // 	firstStencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);
-    //
-    // 	outTopLevel.Insert(firstStencilState);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	StencilStateSharedPtr secondStencilState = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<StencilStateSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstStencilState->IsEnabled(), secondStencilState->IsEnabled());
-    // 	ASSERT_ENUM_EQUAL(firstStencilState->GetCompare(), secondStencilState->GetCompare());
-    // 	ASSERT_EQUAL(firstStencilState->GetReference(), secondStencilState->GetReference());
-    // 	ASSERT_EQUAL(firstStencilState->GetMask(), secondStencilState->GetMask());
-    // 	ASSERT_EQUAL(firstStencilState->GetWriteMask(), secondStencilState->GetWriteMask());
-    // 	ASSERT_ENUM_EQUAL(firstStencilState->GetOnFail(), secondStencilState->GetOnFail());
-    // 	ASSERT_ENUM_EQUAL(firstStencilState->GetOnZFail(), secondStencilState->GetOnZFail());
-    // 	ASSERT_ENUM_EQUAL(firstStencilState->GetOnZPass(), secondStencilState->GetOnZPass());
 }

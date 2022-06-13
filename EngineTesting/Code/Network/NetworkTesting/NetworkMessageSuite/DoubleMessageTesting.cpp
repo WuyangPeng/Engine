@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 13:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/23 15:57)
 
 #include "DoubleMessageTesting.h"
 #include "Detail/TestDoubleIntMessage.h"
 #include "Detail/TestDoubleNullMessage.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -21,9 +25,8 @@ using std::make_shared;
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, DoubleMessageTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::DoubleMessageTesting ::MainTest()
+
+void Network::DoubleMessageTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RttiTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FactoryTest);
@@ -31,10 +34,10 @@ void Network::DoubleMessageTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MessageTest);
 }
 
-void Network::DoubleMessageTesting ::RttiTest()
+void Network::DoubleMessageTesting::RttiTest()
 {
-    TestDoubleNullMessageSharedPtr testMessage{ make_shared<TestDoubleNullMessage>(sm_FullMessageID) };
-    TestDoubleIntMessageSharedPtr testIntMessage{ make_shared<TestDoubleIntMessage>(sm_FullMessageID) };
+    auto testMessage = make_shared<TestDoubleNullMessage>(fullMessageID);
+    auto testIntMessage = make_shared<TestDoubleIntMessage>(fullMessageID);
 
     ASSERT_TRUE(testMessage->IsExactly(TestDoubleNullMessage::GetCurrentRttiType()));
     ASSERT_FALSE(testMessage->IsExactly(DoubleMessage::GetCurrentRttiType()));
@@ -52,74 +55,81 @@ void Network::DoubleMessageTesting ::RttiTest()
     ASSERT_EQUAL(string{ attiType.GetName() }, string{ "Network.TestDoubleNullMessage" });
 }
 
-void Network::DoubleMessageTesting ::FactoryTest()
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+void Network::DoubleMessageTesting::FactoryTest()
 {
     constexpr auto intValue = 5;
 
-    TestDoubleIntMessageSharedPtr testIntMessage{ make_shared<TestDoubleIntMessage>(sm_FullMessageID) };
+    auto testIntMessage = make_shared<TestDoubleIntMessage>(fullMessageID);
 
     testIntMessage->SetIntValue(intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_FullMessageID, MessageTypeCondition::CreateNullCondition(), TestDoubleIntMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestDoubleIntMessage::Factory);
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+    auto buffer = make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian);
+    auto messageTarget = make_shared<MessageTarget>(buffer);
 
     testIntMessage->Save(*messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    auto messageSource = make_shared<MessageSource>(buffer);
 
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
-    ASSERT_EQUAL(sourceMessageID, sm_FullMessageID);
+    ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto factoryCreateMessage = TestDoubleIntMessage::Factory(*messageSource, sm_FullMessageID);
-    //	auto polymorphicMessage = CoreTools::PolymorphicSharedPtrCast<TestDoubleIntMessage>(factoryCreateMessage);
+    auto factoryCreateMessage = TestDoubleIntMessage::Factory(*messageSource, fullMessageID);
+    auto polymorphicMessage = boost::dynamic_pointer_cast<TestDoubleIntMessage>(factoryCreateMessage);
 
-    //	ASSERT_EQUAL(polymorphicMessage->GetIntValue(), intValue);
+    ASSERT_EQUAL(polymorphicMessage->GetIntValue(), intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(sm_FullMessageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(fullMessageID);
 }
 
-void Network::DoubleMessageTesting ::StreamingTest()
+void Network::DoubleMessageTesting::StreamingTest()
 {
     constexpr auto intValue = 5;
 
-    TestDoubleIntMessageSharedPtr testIntMessage{ make_shared<TestDoubleIntMessage>(sm_FullMessageID) };
+    auto testIntMessage = make_shared<TestDoubleIntMessage>(fullMessageID);
 
-    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(sm_FullMessageID) + CORE_TOOLS_STREAM_SIZE(intValue));
+    ASSERT_EQUAL(testIntMessage->GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(fullMessageID) + CORE_TOOLS_STREAM_SIZE(intValue));
 
     testIntMessage->SetIntValue(intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_FullMessageID, MessageTypeCondition::CreateNullCondition(), TestDoubleIntMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(fullMessageID, MessageTypeCondition::CreateNullCondition(), TestDoubleIntMessage::Factory);
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+    auto messageTarget = make_shared<MessageTarget>(buffer);
 
     testIntMessage->Save(*messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    auto messageSource = make_shared<MessageSource>(buffer);
 
     int64_t sourceMessageID{ 0 };
     messageSource->Read(sourceMessageID);
 
-    ASSERT_EQUAL(sourceMessageID, sm_FullMessageID);
+    ASSERT_EQUAL(sourceMessageID, fullMessageID);
 
-    auto sourceTestIntMessage{ make_shared<TestDoubleIntMessage>(sm_FullMessageID) };
+    auto sourceTestIntMessage = make_shared<TestDoubleIntMessage>(fullMessageID);
 
     sourceTestIntMessage->Load(*messageSource);
 
     ASSERT_EQUAL(sourceTestIntMessage->GetIntValue(), intValue);
 
-    MESSAGE_MANAGER_SINGLETON.Remove(sm_FullMessageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(fullMessageID);
 }
 
-void Network::DoubleMessageTesting ::MessageTest()
-{
-    TestDoubleNullMessageSharedPtr testMessage{ make_shared<TestDoubleNullMessage>(sm_FullMessageID) };
+#include STSTEM_WARNING_POP
 
-    ASSERT_EQUAL(testMessage->GetMessageID(), sm_MessageID);
-    ASSERT_EQUAL(testMessage->GetSubMessageID(), sm_SubMessageID);
-    ASSERT_EQUAL(testMessage->GetFullMessageID(), sm_FullMessageID);
+void Network::DoubleMessageTesting::MessageTest()
+{
+    auto testMessage = make_shared<TestDoubleNullMessage>(fullMessageID);
+
+    ASSERT_EQUAL(testMessage->GetMessageID(), messageID);
+    ASSERT_EQUAL(testMessage->GetSubMessageID(), subMessageID);
+    ASSERT_EQUAL(testMessage->GetFullMessageID(), fullMessageID);
+
+    ASSERT_TRUE(testMessage->IsExactlyTypeOf(testMessage));
 }

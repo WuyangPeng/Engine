@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/07 14:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/06/11 18:04)
 
 #include "DepthStateTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -13,7 +16,6 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Shaders/DepthState.h"
 
-#include SYSTEM_WARNING_DISABLE(26440)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, DepthStateTesting)
 
 void Rendering::DepthStateTesting::MainTest()
@@ -63,29 +65,6 @@ void Rendering::DepthStateTesting::CopyTest()
     ASSERT_ENUM_EQUAL(firstDepthState.GetCompare(), DepthStateFlags::CompareMode::GreaterEqual);
 }
 
-void Rendering::DepthStateTesting::StreamTest()
+void Rendering::DepthStateTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	DepthStateSharedPtr firstDepthState(new DepthState(CoreTools::DisableNotThrow::Disable));
-    //
-    // 	firstDepthState->SetEnabled(false);
-    // 	firstDepthState->SetWritable(false);
-    // 	firstDepthState->SetCompare(DepthStateFlags::CompareMode::GreaterEqual);
-    //
-    // 	outTopLevel.Insert(firstDepthState);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	DepthStateSharedPtr secondDepthState = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<DepthStateSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstDepthState->IsEnabled(), secondDepthState->IsEnabled());
-    // 	ASSERT_EQUAL(firstDepthState->IsWritable(), secondDepthState->IsWritable());
-    // 	ASSERT_ENUM_EQUAL(firstDepthState->GetCompare(), secondDepthState->GetCompare());
 }

@@ -30,7 +30,7 @@ bool System::SystemInitOnceExecuteOnce(InitOncePtr initOnce, InitOnceFunction in
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitOnceExecuteOnce(initOnce, initFunction, parameter, context) != g_False)
+    if (::InitOnceExecuteOnce(initOnce, initFunction, parameter, context) != gFalse)
         return true;
     else
         return false;
@@ -48,7 +48,7 @@ bool System::SystemInitOnceBeginInitialize(InitOncePtr initOnce, InitOnceBeginIn
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitOnceBeginInitialize(initOnce, EnumCastUnderlying(flags), pending, context) != g_False)
+    if (::InitOnceBeginInitialize(initOnce, EnumCastUnderlying(flags), pending, context) != gFalse)
         return true;
     else
         return false;
@@ -66,7 +66,7 @@ bool System::SystemInitOnceComplete(InitOncePtr initOnce, InitOnceBeginInitializ
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitOnceComplete(initOnce, EnumCastUnderlying(flags), context) != g_False)
+    if (::InitOnceComplete(initOnce, EnumCastUnderlying(flags), context) != gFalse)
         return true;
     else
         return false;

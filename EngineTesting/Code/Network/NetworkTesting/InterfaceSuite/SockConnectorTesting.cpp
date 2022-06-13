@@ -1,11 +1,14 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 13:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 15:26)
 
-#include "SockConnectorTesting.h" 
 #include "SingletonTestingDetail.h"
+#include "SockConnectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Network/Helper/UserMacro.h"
@@ -13,60 +16,50 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, SockConnector)
 
-void Network::SockConnectorTesting
-	::MainTest()
+void Network::SockConnectorTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ACETest);
-	ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::BoostTest);
-	ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::NetworkTest);
-	ASSERT_NOT_THROW_EXCEPTION_2(NullSingletonTest<ClassType>, this, &ClassType::NullTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ACETest);
+    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::BoostTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::NetworkTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(NullSingletonTest<ClassType>, this, &ClassType::NullTest);
 }
 
-void Network::SockConnectorTesting
-	::ACETest()
+void Network::SockConnectorTesting::ACETest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(ACEConstructionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ACEConstructionTest);
 }
 
-void Network::SockConnectorTesting
-	::BoostTest()
+void Network::SockConnectorTesting::BoostTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(BoostConstructionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BoostConstructionTest);
 }
 
-void Network::SockConnectorTesting
-	::NetworkTest()
+void Network::SockConnectorTesting::NetworkTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(NetworkConstructionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NetworkConstructionTest);
 }
 
-void Network::SockConnectorTesting
-	::ACEConstructionTest()
+void Network::SockConnectorTesting::ACEConstructionTest()
 {
-	TestingType connector{ GetACEServerConfigurationStrategy() };
+    TestingType connector{ GetACEServerConfigurationStrategy() };
 }
 
-void Network::SockConnectorTesting
-	::BoostConstructionTest()
+void Network::SockConnectorTesting::BoostConstructionTest()
 {
-	TestingType connector{ GetBoostServerConfigurationStrategy() };
+    TestingType connector{ GetBoostServerConfigurationStrategy() };
 }
 
-void Network::SockConnectorTesting
-	::NetworkConstructionTest()
+void Network::SockConnectorTesting::NetworkConstructionTest()
 {
-	TestingType connector{ GetNetworkServerConfigurationStrategy() };
+    TestingType connector{ GetNetworkServerConfigurationStrategy() };
 }
 
-void Network::SockConnectorTesting
-	::NullTest()
+void Network::SockConnectorTesting::NullTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(NullConstructionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NullConstructionTest);
 }
 
-void Network::SockConnectorTesting
-	::NullConstructionTest()
+void Network::SockConnectorTesting::NullConstructionTest()
 {
-	TestingType connector{ GetNullServerConfigurationStrategy() };
+    TestingType connector{ GetNullServerConfigurationStrategy() };
 }
-

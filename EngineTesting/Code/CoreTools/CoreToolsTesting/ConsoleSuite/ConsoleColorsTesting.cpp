@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.2 (2021/08/31 14:50)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 14:33)
 
 #include "ConsoleColorsTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -17,8 +17,10 @@ CoreTools::ConsoleColorsTesting::ConsoleColorsTesting(const OStreamShared& strea
     : ParentType{ stream }, console{ OutputConsoleColors::Create() }
 {
 #if !defined(TCRE_USE_GCC)
+
     COUT.imbue(std::locale("chs"));
     CERR.imbue(std::locale("chs"));
+
 #endif  // TCRE_USE_GCC
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

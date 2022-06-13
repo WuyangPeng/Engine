@@ -1,19 +1,20 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 16:33)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_STREAM_TESTING_H
 
 #include "BoostSockTesting.h"
+#include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 
 namespace Network
 {
-    class TestSocketManager;
-    using TestSocketManagerSharedPtr = std::shared_ptr<TestSocketManager>;
-
     class BoostSockStreamTesting : public BoostSockTesting
     {
     public:
@@ -22,7 +23,9 @@ namespace Network
 
     public:
         explicit BoostSockStreamTesting(const OStreamShared& stream);
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
         using TestFunction = void (ClassType::*)();
 
     protected:
@@ -40,88 +43,88 @@ namespace Network
         void DoClientNoSendThread();
         void CreateMessage();
         void DestroyMessage();
-        MessageBufferSharedPtr CreateMessageBuffer() const;
+        NODISCARD MessageBufferSharedPtr CreateMessageBuffer() const;
         void VerificationMessageBuffer(const MessageBufferSharedPtr& messageBuffer);
 
-        uint64_t ClientConnect(const ClientSharedPtr& client);
+        NODISCARD uint64_t ClientConnect(const ClientSharedPtr& client);
         void ClientSend(const ClientSharedPtr& client, uint64_t socketID, const TestSocketManagerSharedPtr& testSocketManager);
         void ClientReceive(const ClientSharedPtr& client, const TestSocketManagerSharedPtr& testSocketManager);
 
-        static constexpr int GetAcceptTime() noexcept
+        NODISCARD static constexpr int GetAcceptTime() noexcept
         {
-            return sm_AcceptTime;
+            return acceptTime;
         }
 
-        static constexpr int GetAsynchronousAcceptTime() noexcept
+        NODISCARD static constexpr int GetAsynchronousAcceptTime() noexcept
         {
-            return sm_AsynchronousAcceptTime;
+            return asynchronousAcceptTime;
         }
 
-        static constexpr int GetSynchronizeAcceptTime() noexcept
+        NODISCARD static constexpr int GetSynchronizeAcceptTime() noexcept
         {
-            return sm_SynchronizeAcceptTime;
+            return synchronizeAcceptTime;
         }
 
-        static constexpr int GetConnectTime() noexcept
+        NODISCARD static constexpr int GetConnectTime() noexcept
         {
-            return sm_ConnectTime;
+            return connectTime;
         }
 
-        static constexpr int GetAsynchronousConnectTime() noexcept
+        NODISCARD static constexpr int GetAsynchronousConnectTime() noexcept
         {
-            return sm_AsynchronousConnectTime;
+            return asynchronousConnectTime;
         }
 
-        static constexpr int GetSynchronizeConnectTime() noexcept
+        NODISCARD static constexpr int GetSynchronizeConnectTime() noexcept
         {
-            return sm_SynchronizeConnectTime;
+            return synchronizeConnectTime;
         }
 
-        static constexpr int GetSendTime() noexcept
+        NODISCARD static constexpr int GetSendTime() noexcept
         {
-            return sm_SendTime;
+            return sendTime;
         }
 
-        static constexpr int GetSynchronizeSendTime() noexcept
+        NODISCARD static constexpr int GetSynchronizeSendTime() noexcept
         {
-            return sm_SynchronizeSendTime;
+            return synchronizeSendTime;
         }
 
-        static constexpr int GetAsynchronousSendTime() noexcept
+        NODISCARD static constexpr int GetAsynchronousSendTime() noexcept
         {
-            return sm_AsynchronousSendTime;
+            return asynchronousSendTime;
         }
 
-        static constexpr int GetReceiveTime() noexcept
+        NODISCARD static constexpr int GetReceiveTime() noexcept
         {
-            return sm_ReceiveTime;
+            return receiveTime;
         }
 
-        static constexpr int GetSynchronizeReceiveTime() noexcept
+        NODISCARD static constexpr int GetSynchronizeReceiveTime() noexcept
         {
-            return sm_SynchronizeReceiveTime;
+            return synchronizeReceiveTime;
         }
 
-        static constexpr int GetAsynchronousReceiveTime() noexcept
+        NODISCARD static constexpr int GetAsynchronousReceiveTime() noexcept
         {
-            return sm_AsynchronousReceiveTime;
+            return asynchronousReceiveTime;
         }
 
     private:
         // Release版本异步回调的数值要足够大，否则测试时异步回调还未执行。
-        static constexpr auto sm_AcceptTime = 100000000;
-        static constexpr auto sm_SynchronizeAcceptTime = 1000;
-        static constexpr auto sm_AsynchronousAcceptTime = 100000000;
-        static constexpr auto sm_ConnectTime = 100;
-        static constexpr auto sm_SynchronizeConnectTime = 100;
-        static constexpr auto sm_AsynchronousConnectTime = 100000000;
+        static constexpr auto acceptTime = 100000000;
+        static constexpr auto synchronizeAcceptTime = 1000;
+        static constexpr auto asynchronousAcceptTime = 100000000;
+        static constexpr auto connectTime = 100;
+        static constexpr auto synchronizeConnectTime = 100;
+        static constexpr auto asynchronousConnectTime = 100000000;
 
-        static constexpr auto sm_SendTime = 100000000;
-        static constexpr auto sm_SynchronizeSendTime = 1000;
-        static constexpr auto sm_AsynchronousSendTime = 100000000;
-        static constexpr auto sm_ReceiveTime = 100;
-        static constexpr auto sm_SynchronizeReceiveTime = 1000;
-        static constexpr auto sm_AsynchronousReceiveTime = 100000000;
+        static constexpr auto sendTime = 100000000;
+        static constexpr auto synchronizeSendTime = 1000;
+        static constexpr auto asynchronousSendTime = 100000000;
+        static constexpr auto receiveTime = 100;
+        static constexpr auto synchronizeReceiveTime = 1000;
+        static constexpr auto asynchronousReceiveTime = 100000000;
     };
 }
 

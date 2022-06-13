@@ -10,6 +10,8 @@
 #ifndef MATHEMATICS_INTERSECTION_FWD_H
 #define MATHEMATICS_INTERSECTION_FWD_H
 
+#include "Mathematics/MathematicsDll.h"
+
 namespace Mathematics
 {
     enum class IntersectionType;

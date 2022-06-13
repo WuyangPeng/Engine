@@ -40,7 +40,7 @@ bool System::IsSystemTokenElevated() noexcept
         OutputDebugStringWithTChar(SYSTEM_TEXT("IsSystemTokenElevatedæ‰±˙ Õ∑≈ ß∞‹°£\n"));
     }
 
-    return tokenInformation.TokenIsElevated != g_False;
+    return tokenInformation.TokenIsElevated != gFalse;
 }
 
 bool System::GetAdjustTokenGroups(WindowsHandle tokenHandle,
@@ -52,7 +52,7 @@ bool System::GetAdjustTokenGroups(WindowsHandle tokenHandle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AdjustTokenGroups(tokenHandle, BoolConversion(resetToDefault), newState, bufferLength, previousState, returnLength) != g_False)
+    if (::AdjustTokenGroups(tokenHandle, BoolConversion(resetToDefault), newState, bufferLength, previousState, returnLength) != gFalse)
         return true;
     else
         return false;
@@ -80,7 +80,7 @@ bool System::GetAdjustTokenPrivileges(WindowsHandle tokenHandle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AdjustTokenPrivileges(tokenHandle, BoolConversion(disableAllPrivileges), newState, bufferLength, previousState, returnLength) != g_False)
+    if (::AdjustTokenPrivileges(tokenHandle, BoolConversion(disableAllPrivileges), newState, bufferLength, previousState, returnLength) != gFalse)
         return true;
     else
         return false;
@@ -103,7 +103,7 @@ bool System::IsAreAllAccessesGranted(AccessGenericMask grantedAccess, AccessGene
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AreAllAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != g_False)
+    if (::AreAllAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != gFalse)
         return true;
     else
         return false;
@@ -121,7 +121,7 @@ bool System::IsAreAnyAccessesGranted(AccessGenericMask grantedAccess, AccessGene
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AreAnyAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != g_False)
+    if (::AreAnyAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != gFalse)
         return true;
     else
         return false;
@@ -155,7 +155,7 @@ bool System::CreateSystemRestrictedToken(WindowsHandle existingTokenHandle,
                                 privilegesToDelete,
                                 restrictedSidCount,
                                 sidsToRestrict,
-                                newTokenHandle) != g_False)
+                                newTokenHandle) != gFalse)
     {
         return true;
     }
@@ -185,7 +185,7 @@ bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle, SecurityImp
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DuplicateToken(existingTokenHandle, impersonationLevel, duplicateTokenHandle) != g_False)
+    if (::DuplicateToken(existingTokenHandle, impersonationLevel, duplicateTokenHandle) != gFalse)
         return true;
     else
         return false;
@@ -209,7 +209,7 @@ bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DuplicateTokenEx(existingTokenHandle, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenAttributes, impersonationLevel, tokenType, newToken) != g_False)
+    if (::DuplicateTokenEx(existingTokenHandle, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenAttributes, impersonationLevel, tokenType, newToken) != gFalse)
         return true;
     else
         return false;
@@ -237,7 +237,7 @@ bool System::GetSystemTokenInformation(WindowsHandle handle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTokenInformation(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength) != g_False)
+    if (::GetTokenInformation(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength) != gFalse)
         return true;
     else
         return false;
@@ -255,7 +255,7 @@ bool System::IsSystemTokenRestricted(WindowsHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsTokenRestricted(tokenHandle) != g_False)
+    if (::IsTokenRestricted(tokenHandle) != gFalse)
         return true;
     else
         return false;

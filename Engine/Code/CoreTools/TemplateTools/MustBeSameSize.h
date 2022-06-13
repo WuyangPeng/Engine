@@ -50,7 +50,7 @@ namespace CoreTools
     private:
         constexpr static void Constranints() noexcept
         {
-            constexpr auto T1NotSameSizeAsT2 = static_cast<uint32_t>(SizeOf<T1>::Value == SizeOf<T2>::Value);
+            constexpr auto T1NotSameSizeAsT2 = static_cast<uint32_t>(static_cast<int>(SizeOf<T1>::Value) == static_cast<int>(SizeOf<T2>::Value));
 
             MAYBE_UNUSED const int i[T1NotSameSizeAsT2]{};
         }

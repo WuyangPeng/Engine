@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/23 13:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 13:29)
 
 #include "Int64Vector3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,13 +19,8 @@ using std::default_random_engine;
 using std::uniform_int;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Int64Vector3Testing)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::Int64Vector3Testing ::MainTest()
+
+void Mathematics::Int64Vector3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
@@ -30,12 +28,12 @@ void Mathematics::Int64Vector3Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
-void Mathematics::Int64Vector3Testing ::ConstructionTest()
+void Mathematics::Int64Vector3Testing::ConstructionTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
-    Int64Vector3 firstVector = Int64Vector3::CreateDefault();
+    auto firstVector = Int64Vector3::CreateDefault();
 
     ASSERT_EQUAL(firstVector.GetX(), 0);
     ASSERT_EQUAL(firstVector.GetY(), 0);
@@ -96,10 +94,10 @@ void Mathematics::Int64Vector3Testing ::ConstructionTest()
     ASSERT_EQUAL(sixthVector.GetZ(), fourthVector[0]);
 }
 
-void Mathematics::Int64Vector3Testing ::CalculateTest()
+void Mathematics::Int64Vector3Testing::CalculateTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector3 firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
@@ -108,38 +106,35 @@ void Mathematics::Int64Vector3Testing ::CalculateTest()
                               firstRandomDistribution(generator),
                               firstRandomDistribution(generator));
 
-    int64_t squaredLength = firstVector.GetX() * firstVector.GetX() +
-                            firstVector.GetY() * firstVector.GetY() +
-                            firstVector.GetZ() * firstVector.GetZ();
+    const auto squaredLength = firstVector.GetX() * firstVector.GetX() +
+                               firstVector.GetY() * firstVector.GetY() +
+                               firstVector.GetZ() * firstVector.GetZ();
 
     ASSERT_EQUAL(squaredLength, firstVector.SquaredLength());
 
-    int64_t dot = firstVector.GetX() * secondVector.GetX() +
-                  firstVector.GetY() * secondVector.GetY() +
-                  firstVector.GetZ() * secondVector.GetZ();
+    const auto dot = firstVector.GetX() * secondVector.GetX() +
+                     firstVector.GetY() * secondVector.GetY() +
+                     firstVector.GetZ() * secondVector.GetZ();
 
     ASSERT_EQUAL(dot, firstVector.Dot(secondVector));
 
-    Int64Vector3 thirdVector = firstVector.Cross(secondVector);
+    auto thirdVector = firstVector.Cross(secondVector);
 
-    Int64Vector3 fourthVector(firstVector.GetY() * secondVector.GetZ() -
-                                  firstVector.GetZ() * secondVector.GetY(),
-                              firstVector.GetZ() * secondVector.GetX() -
-                                  firstVector.GetX() * secondVector.GetZ(),
-                              firstVector.GetX() * secondVector.GetY() -
-                                  firstVector.GetY() * secondVector.GetX());
+    Int64Vector3 fourthVector(firstVector.GetY() * secondVector.GetZ() - firstVector.GetZ() * secondVector.GetY(),
+                              firstVector.GetZ() * secondVector.GetX() - firstVector.GetX() * secondVector.GetZ(),
+                              firstVector.GetX() * secondVector.GetY() - firstVector.GetY() * secondVector.GetX());
 
     ASSERT_EQUAL(thirdVector, fourthVector);
 
-    int64_t tripleScalar = firstVector.Dot(secondVector.Cross(thirdVector));
+    auto tripleScalar = firstVector.Dot(secondVector.Cross(thirdVector));
 
     ASSERT_EQUAL(tripleScalar, firstVector.TripleScalar(secondVector, thirdVector));
 }
 
-void Mathematics::Int64Vector3Testing ::OperatorTest()
+void Mathematics::Int64Vector3Testing::OperatorTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector3 firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
@@ -148,7 +143,7 @@ void Mathematics::Int64Vector3Testing ::OperatorTest()
                               firstRandomDistribution(generator),
                               firstRandomDistribution(generator));
 
-    Int64Vector3 thirdVector = firstVector + secondVector;
+    auto thirdVector = firstVector + secondVector;
     Int64Vector3 fourthVector(firstVector.GetX() + secondVector.GetX(),
                               firstVector.GetY() + secondVector.GetY(),
                               firstVector.GetZ() + secondVector.GetZ());
@@ -200,10 +195,10 @@ void Mathematics::Int64Vector3Testing ::OperatorTest()
     ASSERT_EQUAL(-fourthVector.GetZ(), firstVector.GetZ());
 }
 
-void Mathematics::Int64Vector3Testing ::CompareTest()
+void Mathematics::Int64Vector3Testing::CompareTest()
 {
-    default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const default_random_engine generator{};
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector3 firstVector(0, 2, 5);
     Int64Vector3 secondVector(0, 3, 1);

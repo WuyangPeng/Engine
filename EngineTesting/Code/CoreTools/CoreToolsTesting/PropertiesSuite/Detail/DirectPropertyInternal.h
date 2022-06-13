@@ -1,41 +1,43 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:41)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_DIRECT_PROPERTY_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_DIRECT_PROPERTY_INTERNAL_H
 
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/Properties/DirectPropertyGetInternalDetail.h"
-#include "CoreTools/Properties/DirectPropertySetInternalDetail.h" 
+#include "CoreTools/Properties/DirectPropertySetInternalDetail.h"
 
 #include <string>
 
 namespace CoreTools
 {
-	class DirectPropertyInternal
-	{
-	public:
-		using ClassType = DirectPropertyInternal;
+    class DirectPropertyInternal
+    {
+    public:
+        using ClassType = DirectPropertyInternal;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		DirectPropertyInternal();
+        explicit DirectPropertyInternal(DisableNotThrow disableNotThrow);
 
-		void SetValue(const std::string& value);
-		std::string GetValue() const;
+        void SetValue(const std::string& value);
+        NODISCARD std::string GetValue() const;
 
-	public:
-		using GetType = DirectPropertyGetInternal<std::string, const std::string&, ClassType>;
-		using SetType = DirectPropertySetInternal<std::string, const std::string&, ClassType>;
+    public:
+        using GetType = DirectPropertyGetInternal<std::string, const std::string&, ClassType>;
+        using SetType = DirectPropertySetInternal<std::string, const std::string&, ClassType>;
 
-		GetType m_GetType;
-		SetType m_SetType;
-	};
+        GetType getType;
+        SetType setType;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_SUITE_DIRECT_PROPERTY_INTERNAL_H
-
-
+#endif  // CORE_TOOLS_PROPERTIES_SUITE_DIRECT_PROPERTY_INTERNAL_H

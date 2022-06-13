@@ -1,54 +1,44 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 22:13)
 
 #include "MinimizeNDataTesting.h"
-#include "Mathematics/NumericalAnalysis/MinimizeNDataDetail.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/NumericalAnalysis/MinimizeNDataDetail.h"
 
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
+
 namespace Mathematics
 {
-	template class MinimizeNData<float>;
-	template class MinimizeNData<double>;
+    template class MinimizeNData<float>;
+    template class MinimizeNData<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MinimizeNDataTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MinimizeNDataTesting)
 
-void Mathematics::MinimizeNDataTesting
-	::MainTest()
+void Mathematics::MinimizeNDataTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(DataTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DataTest);
 }
 
-void Mathematics::MinimizeNDataTesting
-	::DataTest() 
+void Mathematics::MinimizeNDataTesting::DataTest()
 {
-	vector<double> minLocation{ 6.0,5.0,4.0,3.0,2.0 };
+    vector<double> minLocation{ 6.0, 5.0, 4.0, 3.0, 2.0 };
 
-	MinimizeNDataD firstMinimize1Data(minLocation,50.0);
+    MinimizeNDataD firstMinimize1Data(minLocation, 50.0);
 
-	ASSERT_APPROXIMATE(firstMinimize1Data.GetMinValue(), 50.0, 1e-10);
+    ASSERT_APPROXIMATE(firstMinimize1Data.GetMinValue(), 50.0, 1e-10);
 
-	int index = 0;
-	for (MinimizeNDataD::ConstIter iter = firstMinimize1Data.GetMinLocationBegin(),
-		 end = firstMinimize1Data.GetMinLocationEnd();iter != end;++iter)
-	{
-		ASSERT_APPROXIMATE(minLocation[index], *iter, 1e-10);
-		++index;
-	}
+    auto index = 0;
+    for (auto iter = firstMinimize1Data.GetMinLocationBegin(); iter != firstMinimize1Data.GetMinLocationEnd(); ++iter)
+    {
+        ASSERT_APPROXIMATE(minLocation.at(index), *iter, 1e-10);
+        ++index;
+    }
 }
-

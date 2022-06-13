@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/30 15:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/06 11:08)
 
 #ifndef MATHEMATICS_INTERSECTION_SUITE_TRIANGLE_PROJECT_ONTO_AXIS_TESTING_H
 #define MATHEMATICS_INTERSECTION_SUITE_TRIANGLE_PROJECT_ONTO_AXIS_TESTING_H
@@ -11,17 +14,17 @@
 
 namespace Mathematics
 {
-	class TriangleProjectOntoAxisTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TriangleProjectOntoAxisTesting); 
+    class TriangleProjectOntoAxisTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(TriangleProjectOntoAxisTesting);
 
-	private:
-		void MainTest();	
-		void ProjectTest(); 
+    private:
+        void MainTest();
+        void ProjectTest() noexcept;
 
-		void DoRunUnitTest() override; 
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_INTERSECTION_SUITE_TRIANGLE_PROJECT_ONTO_AXIS_TESTING_H
+#endif  // MATHEMATICS_INTERSECTION_SUITE_TRIANGLE_PROJECT_ONTO_AXIS_TESTING_H

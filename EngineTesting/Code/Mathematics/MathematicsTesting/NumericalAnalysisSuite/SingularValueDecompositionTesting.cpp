@@ -1,85 +1,80 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/28 09:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 16:08)
 
 #include "SingularValueDecompositionTesting.h"
-#include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "Mathematics/Algebra/VariableLengthVectorDetail.h"
-#include "Mathematics/NumericalAnalysis/SingularValueDecompositionDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/VariableLengthVectorDetail.h"
+#include "Mathematics/Algebra/VariableMatrixDetail.h"
+#include "Mathematics/NumericalAnalysis/SingularValueDecompositionDetail.h"
 
-#include <random> 
+#include <random>
 
+using std::default_random_engine;
 using std::swap;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
 
 namespace Mathematics
 {
-	template class SingularValueDecomposition<float>;
-	template class SingularValueDecomposition<double>;	
+    template class SingularValueDecomposition<float>;
+    template class SingularValueDecomposition<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SingularValueDecompositionTesting) 
 
-void Mathematics::SingularValueDecompositionTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SingularValueDecompositionTesting)
+
+void Mathematics::SingularValueDecompositionTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(SingularValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SingularValueTest);
 }
 
-void Mathematics::SingularValueDecompositionTesting
-	::SingularValueTest()
+void Mathematics::SingularValueDecompositionTesting::SingularValueTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5); 
-	uniform_int<> secondRandomDistribution(2,10);
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    const uniform_int<> secondRandomDistribution(2, 10);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		int row = secondRandomDistribution(generator);
-		int colomn = secondRandomDistribution(generator);
+    const auto testLoopCount = GetTestLoopCount();
 
-		if (row < colomn) 
-		{
-			swap(row, colomn);
-		}
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        int row = secondRandomDistribution(generator);
+        int colomn = secondRandomDistribution(generator);
 
-		VariableMatrixD matrix(row, colomn);
+        if (row < colomn)
+        {
+            swap(row, colomn);
+        }
 
-		for (int m = 0; m < row;++m)
-		{
-			for (int j = 0; j < colomn;++j)
-			{
-				matrix(m, j) = firstRandomDistribution(generator);
-			}
-		}
+        VariableMatrixD matrix(row, colomn);
 
-		SingularValueDecompositionD singularValueDecomposition(matrix);
+        for (int m = 0; m < row; ++m)
+        {
+            for (int j = 0; j < colomn; ++j)
+            {
+                matrix(m, j) = firstRandomDistribution(generator);
+            }
+        }
 
-		VariableMatrixD leftMatrix = singularValueDecomposition.GetLeftMatrix();
-		VariableMatrixD diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
-		VariableMatrixD rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
+        SingularValueDecompositionD singularValueDecomposition(matrix);
 
-		VariableMatrixD result = leftMatrix * diagonalMatrix;
-		result *= rightTransposeMatrix;
+        VariableMatrixD leftMatrix = singularValueDecomposition.GetLeftMatrix();
+        VariableMatrixD diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
+        VariableMatrixD rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
 
-		typedef bool(*VariableMatrixdApproximate)(const VariableMatrixD& lhs,const VariableMatrixD& rhs, const double epsilon);
+        VariableMatrixD result = leftMatrix * diagonalMatrix;
+        result *= rightTransposeMatrix;
 
-		VariableMatrixdApproximate function = Approximate<double>;
+        using VariableMatrixdApproximate = bool (*)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(function,matrix, result, 1e-6);
-	}
+        VariableMatrixdApproximate function = Approximate<double>;
+
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix, result, 1e-6);
+    }
 }
-

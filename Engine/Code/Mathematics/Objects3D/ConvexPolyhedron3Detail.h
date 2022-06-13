@@ -169,7 +169,7 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3&
     // 平面具有内指向的法线。
     auto& plane = planes.at(index);
 
-    plane.SetPlane(vertex0, normal);
+    plane.SetPlane(normal, vertex0);
 }
 
 template <typename Real>

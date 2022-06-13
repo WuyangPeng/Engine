@@ -17,7 +17,7 @@ bool System::OpenSysemProcessToken(WindowsHandle process, TokenStandardAccess st
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::OpenProcessToken(process, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenHandle) != g_False)
+    if (::OpenProcessToken(process, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenHandle) != gFalse)
         return true;
     else
         return false;

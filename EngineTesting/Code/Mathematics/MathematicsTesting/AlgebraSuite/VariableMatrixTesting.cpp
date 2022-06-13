@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 10:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 22:45)
 
 #include "VariableMatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,13 +20,9 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, VariableMatrixTesting)
 
-void Mathematics::VariableMatrixTesting ::MainTest()
+void Mathematics::VariableMatrixTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
@@ -32,7 +31,7 @@ void Mathematics::VariableMatrixTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
-void Mathematics::VariableMatrixTesting ::ConstructionTest()
+void Mathematics::VariableMatrixTesting::ConstructionTest()
 {
     VariableMatrixF firstVariableMatrix;
 
@@ -66,10 +65,10 @@ void Mathematics::VariableMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < thirdVariableMatrix.GetColumnsNumber(); ++column)
         {
-            auto temp = row * thirdVariableMatrix.GetColumnsNumber();
-            auto temp2 = temp + column;
+            const auto temp = row * thirdVariableMatrix.GetColumnsNumber();
+            const auto temp2 = temp + column;
             ASSERT_APPROXIMATE(thirdVariableMatrix(row, column),
-                               firstEntry[temp2],
+                               firstEntry.at(temp2),
                                1e-10);
         }
     }
@@ -77,132 +76,9 @@ void Mathematics::VariableMatrixTesting ::ConstructionTest()
     vector<double> secondEntry{ -3.0, -4.0, -5.0, -6.0, -7.0, -8.0, -9.0, -10.0 };
 
     vector<vector<double>> entryVector{ firstEntry, secondEntry };
-
-    // 	DoubleVariableMatrix fourthVariableMatrix(2,8,entryVector);
-    //
-    // 	ASSERT_EQUAL(fourthVariableMatrix.GetRowsNumber(),2);
-    // 	ASSERT_EQUAL(fourthVariableMatrix.GetColumnsNumber(),8);
-    // 	ASSERT_EQUAL(fourthVariableMatrix.GetElementsNumber(),16);
-    //
-    // 	for(int row = 0;row < fourthVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < fourthVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			ASSERT_APPROXIMATE(fourthVariableMatrix(row,column),entryVector[row][column],1e-10);
-    // 		}
-    // 	}
-    //
-    // 	DoubleVariableMatrix fifthVariableMatrix(fourthVariableMatrix);
-    //
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetRowsNumber(),2);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetColumnsNumber(),8);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetElementsNumber(),16);
-    //
-    // 	ASSERT_TRUE(Approximate(fifthVariableMatrix,fourthVariableMatrix,1e-10));
-    //
-    // 	thirdVariableMatrix = fifthVariableMatrix;
-    //
-    // 	ASSERT_EQUAL(thirdVariableMatrix.GetRowsNumber(),2);
-    // 	ASSERT_EQUAL(thirdVariableMatrix.GetColumnsNumber(),8);
-    // 	ASSERT_EQUAL(thirdVariableMatrix.GetElementsNumber(),16);
-    //
-    // 	ASSERT_TRUE(Approximate(fifthVariableMatrix, thirdVariableMatrix,1e-10));
-    //
-    // 	fifthVariableMatrix.ResetSize(10,10);
-    //
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetRowsNumber(),10);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetColumnsNumber(),10);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetElementsNumber(),100);
-    //
-    // 	for(int row = 0;row < fifthVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < fifthVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			ASSERT_APPROXIMATE(fifthVariableMatrix(row,column),0.0,1e-10);
-    // 		}
-    // 	}
-    //
-    // 	fifthVariableMatrix.ResetMatrix(4,2,firstEntry);
-    //
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetRowsNumber(),4);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetColumnsNumber(),2);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetElementsNumber(),8);
-    //
-    // 	for(int row = 0;row < fifthVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < fifthVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			auto temp = row * fifthVariableMatrix.GetColumnsNumber();
-    // 			auto temp2 = temp + column;
-    // 			ASSERT_APPROXIMATE(fifthVariableMatrix(row,column),firstEntry[temp2],1e-10);
-    // 		}
-    // 	}
-    //
-    // 	fifthVariableMatrix.ResetMatrix(2,8,entryVector);
-    //
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetRowsNumber(),2);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetColumnsNumber(),8);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetElementsNumber(),16);
-    //
-    // 	for(int row = 0;row < fifthVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < fifthVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			ASSERT_APPROXIMATE(fifthVariableMatrix(row,column),entryVector[row][column],1e-10);
-    // 		}
-    // 	}
-    //
-    // 	fifthVariableMatrix.SwapRows(0,1);
-    //
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetRowsNumber(),2);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetColumnsNumber(),8);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetElementsNumber(),16);
-    //
-    // 	for(int row = 0;row < fifthVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < fifthVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			int newRow = row;
-    //
-    // 			if(row == 1)
-    // 				newRow = 0;
-    // 			else if(row == 0)
-    // 				newRow = 1;
-    //
-    // 			ASSERT_APPROXIMATE(fifthVariableMatrix(row,column),entryVector[newRow][column],1e-10);
-    // 		}
-    // 	}
-    //
-    // 	fifthVariableMatrix.SwapColumns(0,2);
-    //
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetRowsNumber(),2);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetColumnsNumber(),8);
-    // 	ASSERT_EQUAL(fifthVariableMatrix.GetElementsNumber(),16);
-    //
-    // 	for(int row = 0;row < fifthVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < fifthVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			int newRow = row;
-    //
-    // 			if(row == 1)
-    // 				newRow = 0;
-    // 			else if(row == 0)
-    // 				newRow = 1;
-    //
-    // 			int newColumn = column;
-    //
-    // 			if(column == 2)
-    // 				newColumn = 0;
-    // 			else if(column == 0)
-    // 				newColumn = 2;
-    //
-    // 			ASSERT_APPROXIMATE(fifthVariableMatrix(row,column),entryVector[newRow][newColumn],1e-10);
-    // 		}
-    // 	}
 }
 
-void Mathematics::VariableMatrixTesting ::AccessTest()
+void Mathematics::VariableMatrixTesting::AccessTest()
 {
     vector<double> firstEntry{ 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
 
@@ -211,92 +87,14 @@ void Mathematics::VariableMatrixTesting ::AccessTest()
     ASSERT_EQUAL(firstVariableMatrix.GetRowsNumber(), 2);
     ASSERT_EQUAL(firstVariableMatrix.GetColumnsNumber(), 4);
     ASSERT_EQUAL(firstVariableMatrix.GetElementsNumber(), 8);
-
-    // 	const double* firstPtr = firstVariableMatrix.GetElements();
-    //
-    // 	for(int row = 0;row < firstVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < firstVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			auto temp = row * firstVariableMatrix.GetColumnsNumber() ;
-    // 			auto temp2 =  temp + column;
-    // 			ASSERT_APPROXIMATE(firstVariableMatrix(row,column),firstEntry[temp2],1e-10);
-    //
-    // 			ASSERT_APPROXIMATE(firstVariableMatrix[row][column],firstEntry[temp2],1e-10);
-    //
-    // 			ASSERT_APPROXIMATE(firstPtr[temp2],
-    // 				               firstEntry[temp2],
-    // 							   1e-10);
-    // 		}
-    // 	}
-    //
-    // 	DoubleVariableMatrix secondVariableMatrix(5,4);
-    //
-    // 	const double* secondPtr = secondVariableMatrix.GetElements();
-    //
-    // 	for(int row = 0;row < secondVariableMatrix.GetRowsNumber();++row)
-    // 	{
-    // 		for(int column = 0;column < secondVariableMatrix.GetColumnsNumber();++column)
-    // 		{
-    // 			ASSERT_APPROXIMATE(secondVariableMatrix(row,column),0.0,1e-10);
-    //
-    // 			ASSERT_APPROXIMATE(secondVariableMatrix[row][column],0.0,1e-10);
-    //
-    // 			ASSERT_APPROXIMATE(secondPtr[row * secondVariableMatrix.GetColumnsNumber() + column],0.0,1e-10);
-    // 		}
-    // 	}
-    //
-    // 	for(int i = 0;i < secondVariableMatrix.GetColumnsNumber();++i)
-    // 	{
-    // 		secondVariableMatrix[0][i] = i * 3.0;
-    // 	}
-    //
-    // 	DoubleVariableLengthVector firstVector = secondVariableMatrix.GetRow(0);
-    //
-    // 	ASSERT_EQUAL(firstVector.GetSize(),4);
-    //
-    // 	for(int i = 0;i < firstVector.GetSize();++i)
-    // 	{
-    // 		ASSERT_APPROXIMATE(firstVector[i],i * 3.0,1e-10);
-    // 		firstVector[i] = i * 2.0;
-    // 	}
-    //
-    // 	secondVariableMatrix.SetRow(1,firstVector);
-    //
-    // 	for(int i = 0;i < firstVector.GetSize();++i)
-    // 	{
-    // 		ASSERT_APPROXIMATE(secondVariableMatrix[1][i],i * 2.0,1e-10);
-    // 	}
-    //
-    // 	for(int i = 0;i < secondVariableMatrix.GetRowsNumber();++i)
-    // 	{
-    // 		secondVariableMatrix[i][2] = i * 3.0;
-    // 	}
-    //
-    // 	firstVector = secondVariableMatrix.GetColumn(2);
-    //
-    // 	ASSERT_EQUAL(firstVector.GetSize(),5);
-    //
-    // 	for(int i = 0;i < firstVector.GetSize();++i)
-    // 	{
-    // 		ASSERT_APPROXIMATE(firstVector[i],i * 3.0,1e-10);
-    // 		firstVector[i] = i * 2.0;
-    // 	}
-    //
-    // 	secondVariableMatrix.SetColumn(0,firstVector);
-    //
-    // 	for(int i = 0;i < firstVector.GetSize();++i)
-    // 	{
-    // 		ASSERT_APPROXIMATE(secondVariableMatrix[i][0],i * 2.0,1e-10);
-    // 	}
 }
 
-void Mathematics::VariableMatrixTesting ::ArithmeticCalculateTest()
+void Mathematics::VariableMatrixTesting::ArithmeticCalculateTest()
 {
     default_random_engine generator{};
 
-    uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
-    uniform_int<> integerRandomDistribution(1, 20);
+    const uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
+    const uniform_int<> integerRandomDistribution(1, 20);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -517,12 +315,12 @@ void Mathematics::VariableMatrixTesting ::ArithmeticCalculateTest()
     }
 }
 
-void Mathematics::VariableMatrixTesting ::MatrixCalculateTest()
+void Mathematics::VariableMatrixTesting::MatrixCalculateTest()
 {
     default_random_engine generator{};
 
-    uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
-    uniform_int<> integerRandomDistribution(1, 20);
+    const uniform_real<float> floatRandomDistribution{ -100.0f, 100.0f };
+    const uniform_int<> integerRandomDistribution(1, 20);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -678,11 +476,11 @@ void Mathematics::VariableMatrixTesting ::MatrixCalculateTest()
     }
 }
 
-void Mathematics::VariableMatrixTesting ::CompareTest()
+void Mathematics::VariableMatrixTesting::CompareTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     vector<double> firstDoubleVector;
     for (int i = 0; i < 15; ++i)

@@ -28,7 +28,7 @@ namespace Network
         using GroupConstIter = typename GroupType::const_iterator;
 
     public:
-        MultipleMessageContainerGroup();
+        MultipleMessageContainerGroup() noexcept;
 
         explicit MultipleMessageContainerGroup(const GroupType& group);
 
@@ -42,8 +42,8 @@ namespace Network
 
         NODISCARD const MessageType GetValue(int index) const;
 
-        NODISCARD GroupConstIter begin() const;
-        NODISCARD GroupConstIter end() const;
+        NODISCARD GroupConstIter begin() const noexcept;
+        NODISCARD GroupConstIter end() const noexcept;
 
     private:
         GroupType group;

@@ -114,7 +114,7 @@ bool Mathematics::Approximate(const Ellipse2Coefficients<Real>& lhs, const Ellip
 
     for (auto i = 0; i < coefficientsSize; ++i)
     {
-        if (!Math<Real>::Approximate(lhsCoefficients[i], rhsCoefficients[i], epsilon))
+        if (!Math<Real>::Approximate(lhsCoefficients.at(i), rhsCoefficients.at(i), epsilon))
         {
             return false;
         }

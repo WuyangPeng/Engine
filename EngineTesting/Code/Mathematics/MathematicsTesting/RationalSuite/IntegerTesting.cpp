@@ -1,8 +1,11 @@
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// Copyright (c) 2011-2018
-//
-// 引擎测试版本：1.0.0.0 (2018/01/23 20:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 16:28)
 
 #include "IntegerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,11 +26,8 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::IntegerTesting ::MainTest()
+
+void Mathematics::IntegerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
@@ -36,24 +36,24 @@ void Mathematics::IntegerTesting ::MainTest()
 }
 
 // Construction测试
-void Mathematics::IntegerTesting ::ConstructionTest()
+void Mathematics::IntegerTesting::ConstructionTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(PositiveTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NegativeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ZeroTest);
 }
 
-void Mathematics::IntegerTesting ::PositiveTest()
+void Mathematics::IntegerTesting::PositiveTest()
 {
     default_random_engine generator{};
-    uniform_int<uint32_t> firstRandomDistribution(0, INT32_MAX);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<uint32_t> firstRandomDistribution(0, INT32_MAX);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        uint32_t firstValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
 
         Integer<4> firstInteger(firstValue);
         uint32_t lower = firstInteger[0];
@@ -76,7 +76,7 @@ void Mathematics::IntegerTesting ::PositiveTest()
         thirdInteger *= thirdInteger;
         thirdInteger *= thirdInteger;
 
-        Integer<21> fourthInteger(thirdInteger);
+        const Integer<21> fourthInteger(thirdInteger);
 
         ASSERT_EQUAL(fourthInteger, thirdInteger);
 
@@ -92,32 +92,32 @@ void Mathematics::IntegerTesting ::PositiveTest()
 
         for (int i = 0; i < 30; ++i)
         {
-            shortVector[i] = secondRandomDistribution(generator);
+            shortVector.at(i) = secondRandomDistribution(generator);
         }
 
         Integer<15> sixthInteger(shortVector);
 
         for (int i = 0; i < 30; ++i)
         {
-            ASSERT_EQUAL(sixthInteger[i], 0x0000FFFF & static_cast<uint16_t>(shortVector[i]));
+            ASSERT_EQUAL(sixthInteger[i], 0x0000FFFF & static_cast<uint16_t>(shortVector.at(i)));
         }
     }
 }
 
-void Mathematics::IntegerTesting ::NegativeTest()
+void Mathematics::IntegerTesting::NegativeTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(-INT32_MAX, 0);
+    const uniform_int<> firstRandomDistribution(-INT32_MAX, 0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        int firstValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
 
         Integer<6> firstInteger(firstValue);
-        uint32_t lower = firstInteger[0];
-        uint32_t high = firstInteger[1];
+        auto lower = firstInteger[0];
+        auto high = firstInteger[1];
 
         ASSERT_EQUAL(static_cast<int>(lower | (high << 16)), firstValue);
 
@@ -137,7 +137,7 @@ void Mathematics::IntegerTesting ::NegativeTest()
         thirdInteger *= thirdInteger;
         thirdInteger *= thirdInteger;
 
-        Integer<90> fourthInteger(thirdInteger);
+        const Integer<90> fourthInteger(thirdInteger);
 
         ASSERT_EQUAL(fourthInteger, thirdInteger);
 
@@ -151,7 +151,7 @@ void Mathematics::IntegerTesting ::NegativeTest()
     }
 }
 
-void Mathematics::IntegerTesting ::ZeroTest()
+void Mathematics::IntegerTesting::ZeroTest()
 {
     Integer<26> firstInteger(0);
 
@@ -170,7 +170,7 @@ void Mathematics::IntegerTesting ::ZeroTest()
 }
 
 // Calculate测试
-void Mathematics::IntegerTesting ::CalculateTest()
+void Mathematics::IntegerTesting::CalculateTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ReverseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AbsoluteValueTest);
@@ -183,11 +183,11 @@ void Mathematics::IntegerTesting ::CalculateTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SignTest);
 }
 
-void Mathematics::IntegerTesting ::ReverseTest()
+void Mathematics::IntegerTesting::ReverseTest()
 {
     default_random_engine generator{};
-    uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
-    uniform_int<uint32_t> secondRandomDistribution(0, INT32_MAX);
+    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    const uniform_int<uint32_t> secondRandomDistribution(0, INT32_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -196,12 +196,12 @@ void Mathematics::IntegerTesting ::ReverseTest()
         vector<uint16_t> shortVector(26);
 
         // 最高位为零
-        for (int i = 0; i < 24; ++i)
+        for (auto i = 0; i < 24; ++i)
         {
-            shortVector[i] = firstRandomDistribution(generator);
+            shortVector.at(i) = firstRandomDistribution(generator);
         }
 
-        Integer<13> firstInteger(shortVector);
+        const Integer<13> firstInteger(shortVector);
         Integer<13> secondInteger = -firstInteger;
 
         ASSERT_EQUAL(firstInteger, -secondInteger);
@@ -210,7 +210,7 @@ void Mathematics::IntegerTesting ::ReverseTest()
 
         ASSERT_EQUAL(firstInteger, secondInteger);
 
-        int firstValue = secondRandomDistribution(generator);
+        const int firstValue = secondRandomDistribution(generator);
 
         Integer<4> thirdInteger(firstValue);
         thirdInteger = -thirdInteger;
@@ -218,11 +218,11 @@ void Mathematics::IntegerTesting ::ReverseTest()
     }
 }
 
-void Mathematics::IntegerTesting ::AbsoluteValueTest()
+void Mathematics::IntegerTesting::AbsoluteValueTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(-INT32_MAX, INT32_MAX);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(-INT32_MAX, INT32_MAX);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -231,34 +231,34 @@ void Mathematics::IntegerTesting ::AbsoluteValueTest()
         vector<uint16_t> shortVector(22);
 
         // 最高位为零
-        for (int i = 0; i < 20; ++i)
+        for (auto i = 0; i < 20; ++i)
         {
-            shortVector[i] = secondRandomDistribution(generator);
+            shortVector.at(i) = secondRandomDistribution(generator);
         }
 
-        Integer<11> firstInteger(shortVector);
+        const Integer<11> firstInteger(shortVector);
         Integer<11> secondInteger = firstInteger.GetAbsoluteValue();
 
         ASSERT_EQUAL(firstInteger, secondInteger);
 
-        Integer<11> thirdInteger = -firstInteger;
+        const Integer<11> thirdInteger = -firstInteger;
         secondInteger = thirdInteger.GetAbsoluteValue();
 
         ASSERT_EQUAL(thirdInteger, -secondInteger);
 
-        int firstValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
 
-        Integer<4> fourthInteger(firstValue);
-        Integer<4> fifthInteger = fourthInteger.GetAbsoluteValue();
+        const Integer<4> fourthInteger(firstValue);
+        const Integer<4> fifthInteger = fourthInteger.GetAbsoluteValue();
         ASSERT_EQUAL(fifthInteger, Integer<4>(abs(firstValue)));
     }
 }
 
-void Mathematics::IntegerTesting ::AddTest()
+void Mathematics::IntegerTesting::AddTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -268,14 +268,14 @@ void Mathematics::IntegerTesting ::AddTest()
         vector<uint16_t> secondShortVector(88);
 
         // 最高位为零
-        for (int i = 0; i < 86; ++i)
+        for (auto i = 0; i < 86; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
-            secondShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
+            secondShortVector.at(i) = secondRandomDistribution(generator);
         }
 
-        Integer<44> firstInteger(firstShortVector);
-        Integer<44> secondInteger(secondShortVector);
+        const Integer<44> firstInteger(firstShortVector);
+        const Integer<44> secondInteger(secondShortVector);
 
         Integer<44> thirdInteger = firstInteger + secondInteger;
         Integer<44> fourthInteger = secondInteger + firstInteger;
@@ -295,11 +295,11 @@ void Mathematics::IntegerTesting ::AddTest()
 
         ASSERT_EQUAL(thirdInteger, firstInteger - secondInteger);
 
-        uint32_t firstValue = firstRandomDistribution(generator);
-        uint32_t secondValue = firstRandomDistribution(generator);
+        const uint32_t firstValue = firstRandomDistribution(generator);
+        const uint32_t secondValue = firstRandomDistribution(generator);
 
         Integer<4> fifthInteger(firstValue);
-        Integer<4> sixthInteger(secondValue);
+        const Integer<4> sixthInteger(secondValue);
 
         fifthInteger += sixthInteger;
 
@@ -310,10 +310,10 @@ void Mathematics::IntegerTesting ::AddTest()
         vector<uint16_t> fourthShortVector(20);
 
         // 最高位为零
-        for (int i = 0; i < 18; ++i)
+        for (auto i = 0; i < 18; ++i)
         {
-            thirdShortVector[i] = secondRandomDistribution(generator);
-            fourthShortVector[i] = secondRandomDistribution(generator);
+            thirdShortVector.at(i) = secondRandomDistribution(generator);
+            fourthShortVector.at(i) = secondRandomDistribution(generator);
         }
 
         Integer<10> seventhInteger(thirdShortVector);
@@ -328,22 +328,22 @@ void Mathematics::IntegerTesting ::AddTest()
         seventhInteger += eighthInteger;
 
         uint32_t carry = 0;
-        for (int i = 0; i < 20; ++i)
+        for (auto i = 0; i < 20; ++i)
         {
-            uint32_t lhsBit = ninthInteger[i];
-            uint32_t rhsBit = eighthInteger[i];
-            uint32_t sum = lhsBit + rhsBit + carry;
+            const uint32_t lhsBit = ninthInteger[i];
+            const uint32_t rhsBit = eighthInteger[i];
+            const uint32_t sum = lhsBit + rhsBit + carry;
             ASSERT_EQUAL(sum & 0x0000FFFF, seventhInteger[i]);
             carry = (sum & 0x00010000) ? 1 : 0;
         }
     }
 }
 
-void Mathematics::IntegerTesting ::MinusTest()
+void Mathematics::IntegerTesting::MinusTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, INT32_MAX / 2);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -353,14 +353,14 @@ void Mathematics::IntegerTesting ::MinusTest()
         vector<uint16_t> secondShortVector(66);
 
         // 最高位为零
-        for (int i = 0; i < 64; ++i)
+        for (auto i = 0; i < 64; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
-            secondShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
+            secondShortVector.at(i) = secondRandomDistribution(generator);
         }
 
-        Integer<33> firstInteger(firstShortVector);
-        Integer<33> secondInteger(secondShortVector);
+        const Integer<33> firstInteger(firstShortVector);
+        const Integer<33> secondInteger(secondShortVector);
 
         Integer<33> thirdInteger = firstInteger - secondInteger;
         Integer<33> fourthInteger = secondInteger - firstInteger;
@@ -380,11 +380,11 @@ void Mathematics::IntegerTesting ::MinusTest()
 
         ASSERT_EQUAL(thirdInteger, firstInteger + secondInteger);
 
-        int firstValue = firstRandomDistribution(generator);
-        int secondValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
+        auto secondValue = firstRandomDistribution(generator);
 
         Integer<4> fifthInteger(firstValue);
-        Integer<4> sixthInteger(secondValue);
+        const Integer<4> sixthInteger(secondValue);
 
         fifthInteger -= sixthInteger;
 
@@ -397,8 +397,8 @@ void Mathematics::IntegerTesting ::MinusTest()
         // 最高位为零
         for (int i = 0; i < 18; ++i)
         {
-            thirdShortVector[i] = secondRandomDistribution(generator);
-            fourthShortVector[i] = secondRandomDistribution(generator);
+            thirdShortVector.at(i) = secondRandomDistribution(generator);
+            fourthShortVector.at(i) = secondRandomDistribution(generator);
         }
 
         Integer<10> seventhInteger(thirdShortVector);
@@ -416,20 +416,20 @@ void Mathematics::IntegerTesting ::MinusTest()
         uint32_t carry = 0;
         for (uint32_t i = 0; i < 20; ++i)
         {
-            uint32_t lhsBit = ninthInteger[i];
-            uint32_t rhsBit = eleventhInteger[i];
-            uint32_t sum = lhsBit + rhsBit + carry;
+            const uint32_t lhsBit = ninthInteger[i];
+            const uint32_t rhsBit = eleventhInteger[i];
+            const uint32_t sum = lhsBit + rhsBit + carry;
             ASSERT_EQUAL(sum & 0x0000FFFF, seventhInteger[i]);
             carry = (sum & 0x00010000) ? 1 : 0;
         }
     }
 }
 
-void Mathematics::IntegerTesting ::MultiplyTest()
+void Mathematics::IntegerTesting::MultiplyTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, INT16_MAX);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, INT16_MAX);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -441,12 +441,12 @@ void Mathematics::IntegerTesting ::MultiplyTest()
         // 避免计算溢出
         for (uint32_t i = 0; i < 19; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
-            secondShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
+            secondShortVector.at(i) = secondRandomDistribution(generator);
         }
 
-        Integer<20> firstInteger(firstShortVector);
-        Integer<20> secondInteger(secondShortVector);
+        const Integer<20> firstInteger(firstShortVector);
+        const Integer<20> secondInteger(secondShortVector);
 
         Integer<20> thirdInteger = firstInteger * secondInteger;
         Integer<20> fourthInteger = secondInteger * firstInteger;
@@ -471,11 +471,11 @@ void Mathematics::IntegerTesting ::MultiplyTest()
 
         ASSERT_EQUAL(thirdInteger, -firstInteger * secondInteger);
 
-        uint32_t firstValue = firstRandomDistribution(generator);
-        uint32_t secondValue = firstRandomDistribution(generator);
+        const uint32_t firstValue = firstRandomDistribution(generator);
+        const uint32_t secondValue = firstRandomDistribution(generator);
 
         Integer<4> fifthInteger(firstValue);
-        Integer<4> sixthInteger(secondValue);
+        const Integer<4> sixthInteger(secondValue);
 
         fifthInteger *= sixthInteger;
 
@@ -483,11 +483,11 @@ void Mathematics::IntegerTesting ::MultiplyTest()
     }
 }
 
-void Mathematics::IntegerTesting ::DivideTest()
+void Mathematics::IntegerTesting::DivideTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, INT16_MAX);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, INT16_MAX);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -496,17 +496,17 @@ void Mathematics::IntegerTesting ::DivideTest()
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);
 
-        for (int i = 0; i < 39; ++i)
+        for (auto i = 0; i < 39; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
-            secondShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
+            secondShortVector.at(i) = secondRandomDistribution(generator);
         }
 
-        Integer<20> firstInteger(firstShortVector);
-        Integer<20> secondInteger(secondShortVector);
+        const Integer<20> firstInteger(firstShortVector);
+        const Integer<20> secondInteger(secondShortVector);
 
-        Integer<20> thirdInteger = firstInteger / secondInteger;
-        Integer<20> fourthInteger = secondInteger / firstInteger;
+        const Integer<20> thirdInteger = firstInteger / secondInteger;
+        const Integer<20> fourthInteger = secondInteger / firstInteger;
         Integer<20> fifthInteger = firstInteger % secondInteger;
         Integer<20> sixthInteger = secondInteger % firstInteger;
 
@@ -523,27 +523,33 @@ void Mathematics::IntegerTesting ::DivideTest()
 
         ASSERT_EQUAL(fifthInteger * secondInteger + sixthInteger, -firstInteger);
 
-        uint32_t firstValue = firstRandomDistribution(generator);
-        uint32_t secondValue = firstRandomDistribution(generator);
+        const uint32_t firstValue = firstRandomDistribution(generator);
+        const uint32_t secondValue = firstRandomDistribution(generator);
 
-        Integer<4> seventhInteger(firstValue);
-        Integer<4> eighthInteger(secondValue);
+        const Integer<4> seventhInteger(firstValue);
+        const Integer<4> eighthInteger(secondValue);
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+
         Integer<4> ninthInteger(seventhInteger);
         Integer<4> tenthInteger(seventhInteger);
 
         ninthInteger /= eighthInteger;
         tenthInteger %= eighthInteger;
 
+#include STSTEM_WARNING_POP
+
         ASSERT_EQUAL(ninthInteger, Integer<4>(firstValue / secondValue));
         ASSERT_EQUAL(tenthInteger, Integer<4>(firstValue % secondValue));
     }
 }
 
-void Mathematics::IntegerTesting ::LeftShiftTest()
+void Mathematics::IntegerTesting::LeftShiftTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, 16 * 20);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, 16 * 20);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -551,9 +557,9 @@ void Mathematics::IntegerTesting ::LeftShiftTest()
     {
         vector<uint16_t> firstShortVector(40);
 
-        for (int i = 0; i < 39; ++i)
+        for (auto i = 0; i < 39; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
         }
 
         Integer<20> firstInteger(firstShortVector);
@@ -563,36 +569,36 @@ void Mathematics::IntegerTesting ::LeftShiftTest()
 
         Integer<20> secondInteger(firstInteger);
 
-        int firstValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
 
         secondInteger <<= firstValue;
 
         Integer<40> thirdInteger(1);
-        for (int i = 0; i < firstValue; ++i)
+        for (auto i = 0; i < firstValue; ++i)
         {
             thirdInteger *= Integer<40>(2);
         }
 
         Integer<40> fourthInteger;
-        for (int i = 0; i < 20; ++i)
+        for (auto i = 0; i < 20; ++i)
         {
             fourthInteger[i] = firstInteger[i];
         }
 
         fourthInteger *= thirdInteger;
 
-        for (int i = 0; i < 20; ++i)
+        for (auto i = 0; i < 20; ++i)
         {
             ASSERT_EQUAL(fourthInteger[i], secondInteger[i]);
         }
     }
 }
 
-void Mathematics::IntegerTesting ::RightShiftTest()
+void Mathematics::IntegerTesting::RightShiftTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, 16 * 20);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, 16 * 20);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -600,9 +606,9 @@ void Mathematics::IntegerTesting ::RightShiftTest()
     {
         vector<uint16_t> firstShortVector(40);
 
-        for (int i = 0; i < 38; ++i)
+        for (auto i = 0; i < 38; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
         }
 
         Integer<20> firstInteger(firstShortVector);
@@ -612,7 +618,7 @@ void Mathematics::IntegerTesting ::RightShiftTest()
 
         Integer<20> secondInteger(firstInteger);
 
-        int firstValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
 
         secondInteger >>= firstValue;
 
@@ -637,10 +643,10 @@ void Mathematics::IntegerTesting ::RightShiftTest()
     }
 }
 
-void Mathematics::IntegerTesting ::SignTest()
+void Mathematics::IntegerTesting::SignTest()
 {
     default_random_engine generator{};
-    uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -648,7 +654,7 @@ void Mathematics::IntegerTesting ::SignTest()
     {
         vector<uint16_t> firstShortVector(40);
 
-        firstShortVector[39] = firstRandomDistribution(generator);
+        firstShortVector.at(39) = firstRandomDistribution(generator);
 
         Integer<20> firstInteger(firstShortVector);
 
@@ -664,10 +670,10 @@ void Mathematics::IntegerTesting ::SignTest()
 }
 
 // Compare测试
-void Mathematics::IntegerTesting ::CompareTest()
+void Mathematics::IntegerTesting::CompareTest()
 {
     default_random_engine generator{};
-    uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
+    const uniform_int<uint16_t> firstRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -676,10 +682,10 @@ void Mathematics::IntegerTesting ::CompareTest()
         vector<uint16_t> firstShortVector(40);
         vector<uint16_t> secondShortVector(40);
 
-        for (int i = 0; i < 40; ++i)
+        for (auto i = 0; i < 40; ++i)
         {
-            firstShortVector[i] = firstRandomDistribution(generator);
-            secondShortVector[i] = firstRandomDistribution(generator);
+            firstShortVector.at(i) = firstRandomDistribution(generator);
+            secondShortVector.at(i) = firstRandomDistribution(generator);
         }
 
         Integer<20> firstInteger(firstShortVector);
@@ -690,8 +696,8 @@ void Mathematics::IntegerTesting ::CompareTest()
         ASSERT_FALSE(secondInteger != secondInteger);
         ASSERT_TRUE(firstInteger != secondInteger);
 
-        NumericalValueSymbol firstSymbol = firstInteger.GetSign();
-        NumericalValueSymbol secondSymbol = secondInteger.GetSign();
+        const NumericalValueSymbol firstSymbol = firstInteger.GetSign();
+        const NumericalValueSymbol secondSymbol = secondInteger.GetSign();
 
         if (firstSymbol == NumericalValueSymbol::Positive)
         {
@@ -713,7 +719,7 @@ void Mathematics::IntegerTesting ::CompareTest()
                 }
                 else
                 {
-                    int leadingBlock = firstInteger.GetLeadingBlock();
+                    const auto leadingBlock = firstInteger.GetLeadingBlock();
 
                     for (int i = leadingBlock; 0 <= i; --i)
                     {
@@ -771,7 +777,7 @@ void Mathematics::IntegerTesting ::CompareTest()
                 }
                 else
                 {
-                    int leadingBlock = firstInteger.GetLeadingBlock();
+                    const auto leadingBlock = firstInteger.GetLeadingBlock();
 
                     for (int i = leadingBlock; 0 <= i; --i)
                     {
@@ -799,18 +805,18 @@ void Mathematics::IntegerTesting ::CompareTest()
 }
 
 // Utilities测试
-void Mathematics::IntegerTesting ::UtilitiesTest()
+void Mathematics::IntegerTesting::UtilitiesTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BlockTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ConversionTest);
 }
 
-void Mathematics::IntegerTesting ::BlockTest()
+void Mathematics::IntegerTesting::BlockTest()
 {
     default_random_engine generator{};
-    uniform_int<uint16_t> firstRandomDistribution(0, 39);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<uint16_t> firstRandomDistribution(0, 39);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -818,12 +824,12 @@ void Mathematics::IntegerTesting ::BlockTest()
     {
         vector<uint16_t> firstShortVector(40);
 
-        int firstValue = firstRandomDistribution(generator);
-        int secondValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
+        auto secondValue = firstRandomDistribution(generator);
 
         if (firstValue < secondValue)
         {
-            int thirdValue = firstValue;
+            auto thirdValue = firstValue;
             firstValue = secondValue;
             secondValue = thirdValue;
         }
@@ -833,9 +839,9 @@ void Mathematics::IntegerTesting ::BlockTest()
             firstValue = secondValue + 1;
         }
 
-        for (int i = secondValue; i < firstValue; ++i)
+        for (auto i = secondValue; i < firstValue; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
         }
 
         Integer<20> firstInteger(firstShortVector);
@@ -843,7 +849,7 @@ void Mathematics::IntegerTesting ::BlockTest()
         ASSERT_EQUAL(firstValue - 1, firstInteger.GetLeadingBlock());
         ASSERT_EQUAL(secondValue, firstInteger.GetTrailingBlock());
 
-        for (int i = secondValue; i < firstValue; ++i)
+        for (auto i = secondValue; i < firstValue; ++i)
         {
             firstInteger.SetBit(i * 16, false);
             firstInteger.SetBit(i * 16 + 15, false);
@@ -860,7 +866,7 @@ void Mathematics::IntegerTesting ::BlockTest()
     }
 }
 
-void Mathematics::IntegerTesting ::BitTest()
+void Mathematics::IntegerTesting::BitTest()
 {
     const auto testLoopCount = GetTestLoopCount();
 
@@ -868,7 +874,7 @@ void Mathematics::IntegerTesting ::BitTest()
     {
         Integer<20> firstInteger;
 
-        for (int i = 0; i < 20 * 16; ++i)
+        for (auto i = 0; i < 20 * 16; ++i)
         {
             ASSERT_FALSE(firstInteger.GetBit(i));
 
@@ -879,35 +885,40 @@ void Mathematics::IntegerTesting ::BitTest()
     }
 }
 
-void Mathematics::IntegerTesting ::ConversionTest()
+void Mathematics::IntegerTesting::ConversionTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution(-1.0e38f, 1.0e38f);
-    uniform_real<double> secondRandomDistribution(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
+    const uniform_real<float> firstRandomDistribution(-1.0e38f, 1.0e38f);
+    const uniform_real<double> secondRandomDistribution(static_cast<double>(std::numeric_limits<uint64_t>::min()), static_cast<double>(std::numeric_limits<uint64_t>::max()));
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
+        auto firstValue = firstRandomDistribution(generator);
 
-        Integer<20> firstIntegerData(firstValue);
+        const Integer<20> firstIntegerData(firstValue);
 
-        float secondValue = firstIntegerData.GetValue<float>();
+        auto secondValue = firstIntegerData.GetValue<float>();
 
-        uint32_t thirdValue = *(reinterpret_cast<const uint32_t*>(&firstValue));
-        uint32_t fourthValue = *(reinterpret_cast<const uint32_t*>(&secondValue));
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const auto thirdValue = *(reinterpret_cast<const uint32_t*>(&firstValue));
+        const auto fourthValue = *(reinterpret_cast<const uint32_t*>(&secondValue));
 
         ASSERT_EQUAL(thirdValue, fourthValue);
 
-        double fifthValue = secondRandomDistribution(generator);
+        auto fifthValue = secondRandomDistribution(generator);
 
-        Integer<40> secondIntegerData(fifthValue);
+        const Integer<40> secondIntegerData(fifthValue);
 
-        double sixthValue = secondIntegerData.GetValue<double>();
+        auto sixthValue = secondIntegerData.GetValue<double>();
 
-        uint64_t seventhValue = *(reinterpret_cast<const uint64_t*>(&fifthValue));
-        uint64_t eighthValue = *(reinterpret_cast<const uint64_t*>(&sixthValue));
+        const auto seventhValue = *(reinterpret_cast<const uint64_t*>(&fifthValue));
+        const auto eighthValue = *(reinterpret_cast<const uint64_t*>(&sixthValue));
+
+#include STSTEM_WARNING_POP
 
         ASSERT_EQUAL(seventhValue, eighthValue);
     }

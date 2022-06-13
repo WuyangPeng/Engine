@@ -39,7 +39,7 @@ bool System::FileTimeConvertLocalFileTime(const FileTime* fileTime, FileTimePtr 
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::FileTimeToLocalFileTime(fileTime, localFileTime) != g_False)
+    if (::FileTimeToLocalFileTime(fileTime, localFileTime) != gFalse)
         return true;
     else
         return false;
@@ -57,7 +57,7 @@ bool System::GetSystemFileTime(WindowsHandle file, FileTimePtr creationTime, Fil
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::GetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != g_False)
+    if (::GetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != gFalse)
         return true;
     else
         return false;
@@ -75,7 +75,7 @@ bool System::LocalFileTimeConvertFileTime(const FileTime* localFileTime, FileTim
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::LocalFileTimeToFileTime(localFileTime, fileTime) != g_False)
+    if (::LocalFileTimeToFileTime(localFileTime, fileTime) != gFalse)
         return true;
     else
         return false;
@@ -93,7 +93,7 @@ bool System::SetSystemFileTime(WindowsHandle file, const FileTime* creationTime,
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::SetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != g_False)
+    if (::SetFileTime(file, creationTime, lastAccessTime, lastWriteTime) != gFalse)
         return true;
     else
         return false;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 13:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 15:34)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_SUITE_BUFFER_SOURCE_TESTING_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_SUITE_BUFFER_SOURCE_TESTING_H
@@ -18,27 +21,7 @@ namespace CoreTools
         UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BufferSourceTesting);
 
     private:
-        using FileBufferPtr = std::shared_ptr<FileBuffer>;
-
-    private:
-        // 		FileBufferPtr CreateBoolTarget();
-        // 		FileBufferPtr CreateStringTarget();
-        // 		FileBufferPtr CreateFloatTarget();
-        // 		FileBufferPtr CreateEnumTarget();
-        // 		FileBufferPtr CreateObjectPointerTarget();
-        //
-        // 		void VerificationBoolSource(const FileBufferPtr& ptr);
-        // 		void VerificationStringSource(const FileBufferPtr& ptr);
-        // 		void VerificationFloatSource(const FileBufferPtr& ptr);
-        // 		void VerificationEnumSource(const FileBufferPtr& ptr);
-        // 		void VerificationObjectPointerSource(const FileBufferPtr& ptr);
-        //
         void MainTest() noexcept;
-        // 		void ReadBoolTest();
-        // 		void ReadStringTest();
-        // 		void ReadFloatTest();
-        // 		void ReadEnumTest();
-        // 		void ReadObjectPointerTest();
 
         void DoRunUnitTest() override;
     };

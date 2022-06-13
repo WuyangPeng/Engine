@@ -155,7 +155,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
         THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s));
     }
 
-    auto sum = 0;
+    int64_t sum{};
     auto position = 0;  // 数据中的数字是什么
 
     for (auto i = length; 0 < i; --i)
@@ -176,7 +176,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
 
         // 查找幂，乘以digit，加到和
 
-        sum += function(position) * digit;
+        sum += function(position) * static_cast<int64_t>(digit);
 
         ++position;
     }
@@ -194,5 +194,5 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
         sum = 0;
     }
 
-    return sum;
+    return boost::numeric_cast<int>(sum);
 }

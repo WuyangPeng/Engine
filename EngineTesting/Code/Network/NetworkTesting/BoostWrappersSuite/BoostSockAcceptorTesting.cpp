@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 13:59)
 
 #include "BoostSockAcceptorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,25 +18,30 @@ using std::make_shared;
 Network::BoostSockAcceptorTesting::BoostSockAcceptorTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
-    SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
+
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockAcceptorTesting)
-void Network::BoostSockAcceptorTesting ::ClientThread()
+
+void Network::BoostSockAcceptorTesting::ClientThread()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoClientThread);
 }
 
-void Network::BoostSockAcceptorTesting ::DoClientThread()
+void Network::BoostSockAcceptorTesting::DoClientThread()
 {
     TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(GetMessageID()) };
 
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     ClientSharedPtr client{ make_shared<Client>(configurationStrategy, testSocketManager) };
 
-    for (auto i = 0; i < sm_ConnectTime; ++i)
+#include STSTEM_WARNING_POP
+
+    for (auto i = 0; i < connectTime; ++i)
     {
         const auto socketID = client->Connect();
         if (socketID != 0u)
@@ -41,6 +49,6 @@ void Network::BoostSockAcceptorTesting ::DoClientThread()
             break;
         }
 
-        ASSERT_UNEQUAL(i + 1, sm_ConnectTime);
+        ASSERT_UNEQUAL(i + 1, connectTime);
     }
 }

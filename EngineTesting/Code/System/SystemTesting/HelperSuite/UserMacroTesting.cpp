@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.1 (2021/03/08 17:55)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 1:13)
 
 #include "UserMacroTesting.h"
 #include "System/Helper/UserMacro.h"
@@ -40,11 +40,15 @@ void System::UserMacroTesting::CloseSystemMaxTest()
 void System::UserMacroTesting::MacroExistTest()
 {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
+
     SYSTEM_PLATFORM_WIN32;
+
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
 #ifdef SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION
+
     TCRE_USE_GCC;
+
 #endif  // SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION
 
 #if !defined(COMPILE_SYSTEM_CLOSE)
@@ -54,28 +58,40 @@ void System::UserMacroTesting::MacroExistTest()
 #else  // defined(COMPILE_SYSTEM_CLOSE)
 
     #ifdef SYSTEM_USE_GLUT
+
     ASSERT_UNEQUAL((COMPILE_SYSTEM_CLOSE & CLOSE_GLUT), CLOSE_GLUT);
+
     #endif  // SYSTEM_USE_GLUT
 
 #endif  // !defined(COMPILE_SYSTEM_CLOSE)
 
 #ifdef SYSTEM_ENABLE_GL_ERROR_CHECKING
+
     ASSERT_EQUAL(_DEBUG, 1);
+
 #endif  // SYSTEM_ENABLE_GL_ERROR_CHECKING
 
 #ifdef SYSTEM_USE_DIRECT_X_9
+
     SYSTEM_PLATFORM_WIN32;
+
 #endif  // SYSTEM_USE_DIRECT_X_9
 
 #ifdef SYSTEM_USE_DIRECT_X_10
+
     SYSTEM_PLATFORM_WIN32;
+
 #endif  // SYSTEM_USE_DIRECT_X_10
 
 #ifdef SYSTEM_USE_DIRECT_X_11
+
     SYSTEM_PLATFORM_WIN32;
+
 #endif  // SYSTEM_USE_DIRECT_X_11
 
 #ifdef BUILDING_SYSTEM_STATIC
+
     BUILDING_STATIC;
+
 #endif  // BUILDING_SYSTEM_STATIC
 }

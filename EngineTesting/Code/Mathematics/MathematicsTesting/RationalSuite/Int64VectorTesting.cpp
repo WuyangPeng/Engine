@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/23 13:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 13:54)
 
 #include "Int64VectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,16 +17,9 @@
 using std::default_random_engine;
 using std::uniform_int;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Int64VectorTesting)
 
-void Mathematics::Int64VectorTesting ::MainTest()
+void Mathematics::Int64VectorTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
@@ -31,10 +27,10 @@ void Mathematics::Int64VectorTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
-void Mathematics::Int64VectorTesting ::ConstructionTest()
+void Mathematics::Int64VectorTesting::ConstructionTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector<4> firstVector;
 
@@ -70,10 +66,10 @@ void Mathematics::Int64VectorTesting ::ConstructionTest()
     }
 }
 
-void Mathematics::Int64VectorTesting ::CalculateTest()
+void Mathematics::Int64VectorTesting::CalculateTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector<4> firstVector;
     Int64Vector<4> secondVector;
@@ -101,10 +97,10 @@ void Mathematics::Int64VectorTesting ::CalculateTest()
     ASSERT_EQUAL(dot, Dot(firstVector, secondVector));
 }
 
-void Mathematics::Int64VectorTesting ::OperatorTest()
+void Mathematics::Int64VectorTesting::OperatorTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector<4> firstVector;
     Int64Vector<4> secondVector;
@@ -175,10 +171,10 @@ void Mathematics::Int64VectorTesting ::OperatorTest()
     }
 }
 
-void Mathematics::Int64VectorTesting ::CompareTest()
+void Mathematics::Int64VectorTesting::CompareTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector<4> firstVector;
     Int64Vector<4> secondVector;

@@ -1,39 +1,51 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 13:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 14:11)
 
 #include "TestSocketManager.h"
-
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 
 using std::make_shared;
 
-Network::TestSocketManager ::TestSocketManager(uint32_t messageID)
-    : ParentType{ CoreTools::DisableNotThrow::Disable }, m_MessageID{ messageID }, m_TestMessageEvent(make_shared<TestMessageEvent>()),
-      m_AsyncConnectCount{ 0 }, m_AsyncAcceptorCount{ 0 }, m_AsyncReceiveCount{ 0 }, m_AsyncSendCount{ 0 }
+Network::TestSocketManagerSharedPtr Network::TestSocketManager::Create(uint32_t messageID)
+{
+    return make_shared<ClassType>(messageID);
+}
+
+Network::TestSocketManager::TestSocketManager(uint32_t messageID)
+    : ParentType{ CoreTools::DisableNotThrow::Disable },
+      messageID{ messageID },
+      testMessageEvent(make_shared<TestMessageEvent>(CoreTools::DisableNotThrow::Disable)),
+      asyncConnectCount{ 0 },
+      asyncAcceptorCount{ 0 },
+      asyncReceiveCount{ 0 },
+      asyncSendCount{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestSocketManager);
 
-void Network::TestSocketManager ::InitEvent(uint64_t socketID)
+void Network::TestSocketManager::InitEvent(uint64_t socketID)
 {
-    InsertEvent(socketID, m_MessageID, m_TestMessageEvent);
+    InsertEvent(socketID, messageID, testMessageEvent);
 }
 
-uint64_t Network::TestSocketManager ::GetCallBackTime() const noexcept
+uint64_t Network::TestSocketManager::GetCallBackTime() const noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_TestMessageEvent->GetCallBackTime();
+    return testMessageEvent->GetCallBackTime();
 }
 
-bool Network::TestSocketManager ::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
+bool Network::TestSocketManager::EventFunction(const CoreTools::CallbackParameters& callbackParameters)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -43,24 +55,24 @@ bool Network::TestSocketManager ::EventFunction(const CoreTools::CallbackParamet
     {
         case Network::SocketManagerEvent::AsyncConnect:
         {
-            ++m_AsyncConnectCount;
+            ++asyncConnectCount;
             return true;
         }
         case Network::SocketManagerEvent::AsyncAcceptor:
         {
-            ++m_AsyncAcceptorCount;
+            ++asyncAcceptorCount;
             return true;
         }
         break;
         case Network::SocketManagerEvent::AsyncReceive:
         {
-            ++m_AsyncReceiveCount;
+            ++asyncReceiveCount;
             return true;
         }
         break;
         case Network::SocketManagerEvent::AsyncSend:
         {
-            ++m_AsyncSendCount;
+            ++asyncSendCount;
             return true;
         }
         default:
@@ -70,37 +82,37 @@ bool Network::TestSocketManager ::EventFunction(const CoreTools::CallbackParamet
     return false;
 }
 
-int Network::TestSocketManager ::GetAsyncConnectCount() const noexcept
+int Network::TestSocketManager::GetAsyncConnectCount() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_AsyncConnectCount;
+    return asyncConnectCount;
 }
 
-void Network::TestSocketManager ::SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept
+void Network::TestSocketManager::SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_TestMessageEvent->SetServerWeakPtr(ptr);
+    testMessageEvent->SetServerWeakPtr(ptr);
 }
 
-int Network::TestSocketManager ::GetAsyncReceiveCount() const noexcept
+int Network::TestSocketManager::GetAsyncReceiveCount() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_AsyncReceiveCount;
+    return asyncReceiveCount;
 }
 
-int Network::TestSocketManager ::GetAsyncAcceptorCount() const noexcept
+int Network::TestSocketManager::GetAsyncAcceptorCount() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_AsyncAcceptorCount;
+    return asyncAcceptorCount;
 }
 
-int Network::TestSocketManager ::GetAsyncSendCount() const noexcept
+int Network::TestSocketManager::GetAsyncSendCount() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_AsyncSendCount;
+    return asyncSendCount;
 }

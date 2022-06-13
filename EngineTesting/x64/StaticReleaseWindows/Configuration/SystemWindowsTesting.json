@@ -27,7 +27,7 @@
   },
 
   "windowsSuite": {
-    "WindowsCreateTesting": 1, 
+    "WindowsCreateTesting": 1,
     "WindowsFontInformationTesting": 1,
     "WindowsUserTesting": 1
   },

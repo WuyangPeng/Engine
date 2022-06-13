@@ -28,7 +28,7 @@ CoreTools::WriteBufferIOImpl::WriteBufferIOImpl(int bufferSize)
 
 #ifdef OPEN_CLASS_INVARIANT
 
-bool CoreTools::WriteBufferIOImpl ::IsValid() const noexcept
+bool CoreTools::WriteBufferIOImpl::IsValid() const noexcept
 {
     if (ParentType::IsValid() && buffer != nullptr)
         return true;

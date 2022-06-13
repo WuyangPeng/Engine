@@ -1,20 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/07 14:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/06/11 18:03)
 
 #include "CullStateTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Shaders/CullState.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, CullStateTesting)
-#include SYSTEM_WARNING_DISABLE(26440)
+
 void Rendering::CullStateTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializers();
@@ -57,27 +60,6 @@ void Rendering::CullStateTesting::CopyTest()
     ASSERT_UNEQUAL(firstCullState.IsCCWOrder(), secondCullState.IsCCWOrder());
 }
 
-void Rendering::CullStateTesting::StreamTest()
+void Rendering::CullStateTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	CullStateSharedPtr firstCullState(new CullState(CoreTools::DisableNotThrow::Disable));
-    //
-    // 	firstCullState->SetEnabled(false);
-    // 	firstCullState->SetCCWOrder(false);
-    //
-    // 	outTopLevel.Insert(firstCullState);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	CullStateSharedPtr secondCullState =	inTopLevel[0].PolymorphicDowncastObjectSharedPtr<CullStateSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstCullState->IsEnabled(), secondCullState->IsEnabled());
-    // 	ASSERT_EQUAL(firstCullState->IsCCWOrder(), secondCullState->IsCCWOrder());
 }

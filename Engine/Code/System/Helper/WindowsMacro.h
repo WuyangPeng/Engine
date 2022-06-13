@@ -194,13 +194,13 @@ namespace System
 
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
-    constexpr WindowsBool g_True{ TRUE };
-    constexpr WindowsBool g_False{ FALSE };
+    constexpr WindowsBool gTrue{ TRUE };
+    constexpr WindowsBool gFalse{ FALSE };
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-    constexpr WindowsBool g_True{ 1 };
-    constexpr WindowsBool g_False{ 0 };
+    constexpr WindowsBool gTrue{ 1 };
+    constexpr WindowsBool gFalse{ 0 };
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 11:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 18:18)
 
 #ifndef NETWORK_NETWORK_MESSAGE_TEST_NETWORK_MESSAGE_EVENT_H
 #define NETWORK_NETWORK_MESSAGE_TEST_NETWORK_MESSAGE_EVENT_H
@@ -24,12 +27,12 @@ namespace Network
 
         void CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) override;
 
-        int GetValue() const noexcept;
-        int64_t GetNowTime() const noexcept;
+        NODISCARD int GetValue() const noexcept;
+        NODISCARD int64_t GetNowTime() const noexcept;
 
     private:
-        int m_Value;
-        int64_t m_NowTime;
+        int value;
+        int64_t nowTime;
     };
 
     using TestNetworkMessageEventSharedPtr = std::shared_ptr<TestNetworkMessageEvent>;

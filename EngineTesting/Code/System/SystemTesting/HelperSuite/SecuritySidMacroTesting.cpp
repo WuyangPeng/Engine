@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.1 (2021/03/09 16:43)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 1:12)
 
 #include "SecuritySidMacroTesting.h"
 #include "System/Helper/SecuritySidMacro.h"
@@ -91,9 +91,9 @@ void System::SecuritySidMacroTesting::SecurityTest(const SecuritySIDIndentifierA
     auto index = 0;
     for (const auto value : identifierAuthority.Value)
     {
-        if (index == sm_EndSecuritySidIndex)
+        if (index == endSecuritySidIndex)
         {
-            ASSERT_EQUAL(identifierAuthority.Value[sm_EndSecuritySidIndex], endValue);
+            ASSERT_EQUAL(identifierAuthority.Value[endSecuritySidIndex], endValue);
         }
         else
         {

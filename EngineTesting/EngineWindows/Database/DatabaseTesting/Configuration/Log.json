@@ -1,6 +1,5 @@
 {
-  "Logger":
-  {
+  "Logger": {
     "System": 1,
     "CoreTools": 1,
     "Network": 1,
@@ -20,16 +19,13 @@
     "Framework": 1
   },
 
-  "Appender":
-  {
-    "Console": 
-    {
+  "Appender": {
+    "Console": {
       "Flags": 15,
       "Level": 1
     },
 
-    "File": 
-    {
+    "File": {
       "Directory": "Log",
       "FileName": "DatabaseTesting",
       "Flags": 15,
@@ -38,9 +34,8 @@
       "Backup": true,
       "Extension": "log"
     },
-    
-    "File": 
-    {
+
+    "File": {
       "Directory": "Log",
       "FileName": "DBWarning",
       "Flags": 1,
@@ -50,8 +45,7 @@
       "Extension": "log"
     },
 
-    "Default": 
-    {
+    "Default": {
       "Directory": "Log",
       "Flags": 15,
       "Level": 1,

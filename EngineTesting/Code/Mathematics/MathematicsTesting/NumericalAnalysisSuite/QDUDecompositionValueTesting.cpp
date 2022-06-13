@@ -1,76 +1,71 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/28 09:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 16:07)
 
 #include "QDUDecompositionValueTesting.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/NumericalAnalysis/QDUDecompositionValueDetail.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 
-#include <random> 
+#include <random>
 
+using std::default_random_engine;
 using std::swap;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
 
 namespace Mathematics
 {
-	template class QDUDecompositionValue<float>;
-	template class QDUDecompositionValue<double>;
+    template class QDUDecompositionValue<float>;
+    template class QDUDecompositionValue<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QDUDecompositionValueTesting) 
 
-void Mathematics::QDUDecompositionValueTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QDUDecompositionValueTesting)
+
+void Mathematics::QDUDecompositionValueTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(QDUDecompositionValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QDUDecompositionValueTest);
 }
 
-void Mathematics::QDUDecompositionValueTesting
-	::QDUDecompositionValueTest()
+void Mathematics::QDUDecompositionValueTesting::QDUDecompositionValueTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);  
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Matrix3D matrix;
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Matrix3D matrix;
 
-		for (int m = 0; m < 3;++m)
-		{
-			for (int j = 0; j < 3;++j)
-			{
-				matrix(m, j) = firstRandomDistribution(generator);
-			}
-		}
+        for (int m = 0; m < 3; ++m)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                matrix(m, j) = firstRandomDistribution(generator);
+            }
+        }
 
-		QDUDecompositionValueD qDUDecompositionValue(matrix);
+        const QDUDecompositionValueD qDUDecompositionValue(matrix);
 
-		Matrix3D orthogonalMatrix = qDUDecompositionValue.GeOrthogonalMatrix();
-		Matrix3D diagonalMatrix = qDUDecompositionValue.GetDiagonalMatrix();
-		Matrix3D upperTriangularMatrix = qDUDecompositionValue.GetUpperTriangularMatrix();
+        const Matrix3D orthogonalMatrix = qDUDecompositionValue.GeOrthogonalMatrix();
+        const Matrix3D diagonalMatrix = qDUDecompositionValue.GetDiagonalMatrix();
+        const Matrix3D upperTriangularMatrix = qDUDecompositionValue.GetUpperTriangularMatrix();
 
-		Matrix3D result = orthogonalMatrix * diagonalMatrix;
-		result *= upperTriangularMatrix;
+        Matrix3D result = orthogonalMatrix * diagonalMatrix;
+        result *= upperTriangularMatrix;
 
-		typedef bool(*VariableMatrixdApproximate)(const Matrix3D& lhs,const Matrix3D& rhs,const double epsilon);
+        using VariableMatrixdApproximate = bool (*)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
 
-		VariableMatrixdApproximate function = Approximate<double>;
+        VariableMatrixdApproximate function = Approximate<double>;
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(function,matrix, result, 1e-5);
-	}
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix, result, 1e-5);
+    }
 }
-

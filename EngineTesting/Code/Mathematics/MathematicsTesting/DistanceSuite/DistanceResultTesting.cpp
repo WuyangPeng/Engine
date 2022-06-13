@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/29 17:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 11:00)
 
 #include "DistanceResultTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -24,7 +27,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceResultTesting)
 
-void Mathematics::DistanceResultTesting ::MainTest()
+void Mathematics::DistanceResultTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ContactTimeTest);
@@ -32,7 +35,7 @@ void Mathematics::DistanceResultTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MultipleClosestPointsTest);
 }
 
-void Mathematics::DistanceResultTesting ::BaseTest()
+void Mathematics::DistanceResultTesting::BaseTest()
 {
     DistanceResult2D distanceResult(3.0);
 
@@ -65,7 +68,7 @@ void Mathematics::DistanceResultTesting ::BaseTest()
     ASSERT_APPROXIMATE(distanceResult.GetContactTime(), 5.1, 1e-10);
 }
 
-void Mathematics::DistanceResultTesting ::ContactTimeTest()
+void Mathematics::DistanceResultTesting::ContactTimeTest()
 {
     DistanceResult2F distanceResult(2.0f, 5.1f);
 
@@ -98,7 +101,7 @@ void Mathematics::DistanceResultTesting ::ContactTimeTest()
     ASSERT_APPROXIMATE(distanceResult.GetContactTime(), 5.1f, 1e-8f);
 }
 
-void Mathematics::DistanceResultTesting ::ClosestPointsTest()
+void Mathematics::DistanceResultTesting::ClosestPointsTest()
 {
     DistanceResult3F distanceResult(1.0f, 3.1f, Vector3F::GetUnitX(), Vector3F::GetUnitY());
 
@@ -139,7 +142,7 @@ void Mathematics::DistanceResultTesting ::ClosestPointsTest()
     ASSERT_APPROXIMATE(distanceResult.GetContactTime(), 5.1f, 1e-8f);
 }
 
-void Mathematics::DistanceResultTesting ::MultipleClosestPointsTest()
+void Mathematics::DistanceResultTesting::MultipleClosestPointsTest()
 {
     vector<Vector3D> lhsPoint;
     lhsPoint.push_back(Vector3F::GetUnitX());

@@ -1,397 +1,390 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 11:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 22:59)
 
 #include "Vector3DInformationTesting.h"
-#include "Mathematics/Algebra/Vector3InformationDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
-#include <random>  
+#include "Mathematics/Algebra/Vector3InformationDetail.h"
 #include "Mathematics/Algebra/Vector3Tools.h"
 
-using std::vector;
-using std::uniform_real;
+#include <random>
+
 using std::default_random_engine;
+using std::uniform_real;
+using std::vector;
 
 namespace Mathematics
 {
-	template class Vector3Information<float>;
-	template class Vector3Information<double>;	
+    template class Vector3Information<float>;
+    template class Vector3Information<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Vector3InformationTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector3InformationTesting)
 
-void Mathematics::Vector3InformationTesting
-	::MainTest()
+void Mathematics::Vector3InformationTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(DimensionTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(AxesAlignBoundingBoxTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(DirectionTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ExtremeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DimensionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AxesAlignBoundingBoxTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DirectionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ExtremeTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::Vector3InformationTesting
-	::DimensionTest()
+
+void Mathematics::Vector3InformationTesting::DimensionTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> firstRandomDistribution{ 0.0001,0.0002 };
-	uniform_real<double> secondRandomDistribution{ -10.0,10.0 }; 
+    const uniform_real<double> firstRandomDistribution{ 0.0001, 0.0002 };
+    const uniform_real<double> secondRandomDistribution{ -10.0, 10.0 };
 
-	vector<Vector3D> firstVector;
-	vector<Vector3D> secondVector;
-	vector<Vector3D> thirdVector;
-	vector<Vector3D> fourthVector;
-	double slope = secondRandomDistribution(generator);
-	double yCoordinate = secondRandomDistribution(generator);
-	
-	const auto testLoopCount = GetTestLoopCount();
+    vector<Vector3D> firstVector;
+    vector<Vector3D> secondVector;
+    vector<Vector3D> thirdVector;
+    vector<Vector3D> fourthVector;
+    const double slope = secondRandomDistribution(generator);
+    const double yCoordinate = secondRandomDistribution(generator);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D firstEachVector(firstRandomDistribution(generator),
-			                      firstRandomDistribution(generator),
-								  firstRandomDistribution(generator));
-		
-		firstVector.push_back(firstEachVector);
+    const auto testLoopCount = GetTestLoopCount();
 
-		double randomValue = firstRandomDistribution(generator) * secondRandomDistribution(generator);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D firstEachVector(firstRandomDistribution(generator),
+                                       firstRandomDistribution(generator),
+                                       firstRandomDistribution(generator));
 
-		Vector3D secondEachVector(randomValue, yCoordinate, randomValue * slope);
+        firstVector.push_back(firstEachVector);
 
-		secondVector.push_back(secondEachVector);
+        const double randomValue = firstRandomDistribution(generator) * secondRandomDistribution(generator);
 
-		Vector3D thirdEachVector(secondRandomDistribution(generator),
-			                      secondRandomDistribution(generator),	
-								  firstRandomDistribution(generator));
+        const Vector3D secondEachVector(randomValue, yCoordinate, randomValue * slope);
 
-		thirdVector.push_back(thirdEachVector);
+        secondVector.push_back(secondEachVector);
 
-		Vector3D fourthEachVector(secondRandomDistribution(generator),
-			                       secondRandomDistribution(generator),	
-								   secondRandomDistribution(generator));
+        const Vector3D thirdEachVector(secondRandomDistribution(generator),
+                                       secondRandomDistribution(generator),
+                                       firstRandomDistribution(generator));
 
-		fourthVector.push_back(fourthEachVector);
-	}
+        thirdVector.push_back(thirdEachVector);
 
-	thirdVector.push_back(Vector3D(20.0,80.7,firstRandomDistribution(generator)));
-	thirdVector.push_back(Vector3D(120.0,180.7,firstRandomDistribution(generator)));
-	fourthVector.push_back(Vector3D(20.0,80.7,20.0));
-	fourthVector.push_back(Vector3D(120.0,180.7,-80.0));
+        const Vector3D fourthEachVector(secondRandomDistribution(generator),
+                                        secondRandomDistribution(generator),
+                                        secondRandomDistribution(generator));
 
-	DoubleVector3Information firstInformation(firstVector,0.0001);
+        fourthVector.push_back(fourthEachVector);
+    }
 
-	ASSERT_EQUAL(firstInformation.GetDimension(),0);
+    thirdVector.push_back(Vector3D(20.0, 80.7, firstRandomDistribution(generator)));
+    thirdVector.push_back(Vector3D(120.0, 180.7, firstRandomDistribution(generator)));
+    fourthVector.push_back(Vector3D(20.0, 80.7, 20.0));
+    fourthVector.push_back(Vector3D(120.0, 180.7, -80.0));
 
-	DoubleVector3Information secondInformation(secondVector,0.0001);
+    DoubleVector3Information firstInformation(firstVector, 0.0001);
 
-	ASSERT_EQUAL(secondInformation.GetDimension(),1);
+    ASSERT_EQUAL(firstInformation.GetDimension(), 0);
 
-	DoubleVector3Information thirdInformation(thirdVector,0.0001);
+    DoubleVector3Information secondInformation(secondVector, 0.0001);
 
-	ASSERT_EQUAL(thirdInformation.GetDimension(),2);
+    ASSERT_EQUAL(secondInformation.GetDimension(), 1);
 
-	DoubleVector3Information fourthInformation(fourthVector,0.0001);
+    DoubleVector3Information thirdInformation(thirdVector, 0.0001);
 
-	ASSERT_EQUAL(fourthInformation.GetDimension(),3);
+    ASSERT_EQUAL(thirdInformation.GetDimension(), 2);
+
+    DoubleVector3Information fourthInformation(fourthVector, 0.0001);
+
+    ASSERT_EQUAL(fourthInformation.GetDimension(), 3);
 }
 
-void Mathematics::Vector3InformationTesting
-	::AxesAlignBoundingBoxTest()
+void Mathematics::Vector3InformationTesting::AxesAlignBoundingBoxTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> randomDistribution{ -100.0f,100.0f }; 
+    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-	vector<Vector3D> vectors;
+    vector<Vector3D> vectors;
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D eachVector(randomDistribution(generator),
-			                 randomDistribution(generator),
-			                 randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D eachVector(randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator));
 
-		vectors.push_back(eachVector);
-	}
-	
-	auto aabb = Vector3ToolsD::ComputeExtremes(vectors);
-	DoubleVector3Information secondInformation(vectors);
+        vectors.push_back(eachVector);
+    }
 
-	ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAABB().GetMinPoint()));
+    const auto aabb = Vector3ToolsD::ComputeExtremes(vectors);
+    DoubleVector3Information secondInformation(vectors);
 
-	ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMaxPoint(),secondInformation.GetAABB().GetMaxPoint()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAABB().GetMinPoint()));
 
-	double xRange = aabb.GetMaxPoint().GetX() - aabb.GetMinPoint().GetX();
+    ASSERT_TRUE(Vector3ToolsD::Approximate(aabb.GetMaxPoint(), secondInformation.GetAABB().GetMaxPoint()));
 
-	double yRange = aabb.GetMaxPoint().GetY() - aabb.GetMinPoint().GetY();
+    const double xRange = aabb.GetMaxPoint().GetX() - aabb.GetMinPoint().GetX();
 
-	double zRange = aabb.GetMaxPoint().GetZ() - aabb.GetMinPoint().GetZ();
+    const double yRange = aabb.GetMaxPoint().GetY() - aabb.GetMinPoint().GetY();
 
-	if(xRange < yRange && zRange < yRange)
-	{
-		ASSERT_APPROXIMATE(yRange,secondInformation.GetMaxRange(),1e-10);
-	}
-	else if(zRange < xRange)
-	{
-		ASSERT_APPROXIMATE(xRange,secondInformation.GetMaxRange(),1e-10);
-	}
-	else
-	{
-		ASSERT_APPROXIMATE(zRange,secondInformation.GetMaxRange(),1e-10);
-	}
+    const double zRange = aabb.GetMaxPoint().GetZ() - aabb.GetMinPoint().GetZ();
+
+    if (xRange < yRange && zRange < yRange)
+    {
+        ASSERT_APPROXIMATE(yRange, secondInformation.GetMaxRange(), 1e-10);
+    }
+    else if (zRange < xRange)
+    {
+        ASSERT_APPROXIMATE(xRange, secondInformation.GetMaxRange(), 1e-10);
+    }
+    else
+    {
+        ASSERT_APPROXIMATE(zRange, secondInformation.GetMaxRange(), 1e-10);
+    }
 }
 
-void Mathematics::Vector3InformationTesting
-	::DirectionTest()
+void Mathematics::Vector3InformationTesting::DirectionTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> randomDistribution{ -100.0f,100.0f };
+    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-	vector<Vector3D> vectors;
+    vector<Vector3D> vectors;
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D eachVector(randomDistribution(generator),
-			                 randomDistribution(generator),
-							 randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D eachVector(randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator));
 
-		vectors.push_back(eachVector);
-	}	
-	
-	DoubleVector3Information information(vectors);
+        vectors.push_back(eachVector);
+    }
 
-	auto ptr = information.GetAABB();
+    DoubleVector3Information information(vectors);
 
-	Vector3D minVector = ptr.GetMinPoint();
-	Vector3D maxVector = ptr.GetMaxPoint();
+    const auto ptr = information.GetAABB();
 
-	double xRange = maxVector.GetX() - minVector.GetX();
+    Vector3D minVector = ptr.GetMinPoint();
+    Vector3D maxVector = ptr.GetMaxPoint();
 
-	double yRange = maxVector.GetY() -  minVector.GetY();	
+    const double xRange = maxVector.GetX() - minVector.GetX();
 
-	double zRange = maxVector.GetZ() - minVector.GetZ();	
+    const double yRange = maxVector.GetY() - minVector.GetY();
 
-	if(xRange < yRange && zRange < yRange)
-	{
-		for(const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetY() -  minVector.GetY()) <= 1e-10)
-			{
-				minVector = eachVector;
-				break;
-			}
-		}
+    const double zRange = maxVector.GetZ() - minVector.GetZ();
 
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetY() - maxVector.GetY()) <= 1e-10)
-			{
-				maxVector = eachVector;
-				break;
-			}
-		}
-	}
-	else if(zRange < xRange)
-	{
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetX() -   minVector.GetX()) <= 1e-10)
-			{
-				minVector = eachVector;
-				break;
-			}
-		}
+    if (xRange < yRange && zRange < yRange)
+    {
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetY() - minVector.GetY()) <= 1e-10)
+            {
+                minVector = eachVector;
+                break;
+            }
+        }
 
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetX() -  maxVector.GetX()) <= 1e-10)
-			{
-				maxVector = eachVector;
-				break;
-			}
-		}
-	}
-	else 
-	{
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetZ() -  minVector.GetZ()) <= 1e-10)
-			{
-				minVector = eachVector;
-				break;
-			}
-		}
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetY() - maxVector.GetY()) <= 1e-10)
+            {
+                maxVector = eachVector;
+                break;
+            }
+        }
+    }
+    else if (zRange < xRange)
+    {
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetX() - minVector.GetX()) <= 1e-10)
+            {
+                minVector = eachVector;
+                break;
+            }
+        }
 
-		for (const auto& eachVector:vectors)
-		{
-			if (MathD::FAbs(eachVector.GetZ() - maxVector.GetZ()) <= 1e-10)
-			{
-				maxVector = eachVector;
-				break;
-			}
-		}
-	}
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetX() - maxVector.GetX()) <= 1e-10)
+            {
+                maxVector = eachVector;
+                break;
+            }
+        }
+    }
+    else
+    {
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetZ() - minVector.GetZ()) <= 1e-10)
+            {
+                minVector = eachVector;
+                break;
+            }
+        }
 
-	Vector3D directionX = maxVector - minVector;
-	directionX.Normalize();
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetZ() - maxVector.GetZ()) <= 1e-10)
+            {
+                maxVector = eachVector;
+                break;
+            }
+        }
+    }
 
-	Vector3D directionY = information.GetPerpendicularExtreme() -  information.GetOrigin();
-	double dot = Vector3ToolsD::DotProduct(directionX,directionY);
-	directionY -= dot * directionX;
-	directionY.Normalize();
+    Vector3D directionX = maxVector - minVector;
+    directionX.Normalize();
 
-	Vector3D directionZ = Vector3ToolsD::CrossProduct(directionX,directionY);
+    Vector3D directionY = information.GetPerpendicularExtreme() - information.GetOrigin();
+    const double dot = Vector3ToolsD::DotProduct(directionX, directionY);
+    directionY -= dot * directionX;
+    directionY.Normalize();
 
-	ASSERT_TRUE(Vector3ToolsD::Approximate(minVector,  information.GetOrigin()));
-	ASSERT_TRUE(Vector3ToolsD::Approximate(directionX,  information.GetDirectionX()));
-	ASSERT_TRUE(Vector3ToolsD::Approximate(directionY,  information.GetDirectionY()));
-	ASSERT_TRUE(Vector3ToolsD::Approximate(directionZ, information.GetDirectionZ()));
+    const Vector3D directionZ = Vector3ToolsD::CrossProduct(directionX, directionY);
+
+    ASSERT_TRUE(Vector3ToolsD::Approximate(minVector, information.GetOrigin()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(directionX, information.GetDirectionX()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(directionY, information.GetDirectionY()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(directionZ, information.GetDirectionZ()));
 }
 
-void Mathematics::Vector3InformationTesting
-	::ExtremeTest()
+void Mathematics::Vector3InformationTesting::ExtremeTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> randomDistribution{ -100.0f,100.0f };
+    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
-	vector<Vector3D> vectors;
+    vector<Vector3D> vectors;
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D eachVector(randomDistribution(generator),
-			                 randomDistribution(generator),
-			                 randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D eachVector(randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator));
 
-		vectors.push_back(eachVector);
-	}	
-	
-	DoubleVector3Information information(vectors);
+        vectors.push_back(eachVector);
+    }
 
-	auto ptr = information.GetAABB();
+    DoubleVector3Information information(vectors);
 
-	Vector3D minVector = ptr.GetMinPoint();
-	Vector3D maxVector = ptr.GetMaxPoint();
+    const auto ptr = information.GetAABB();
 
-	double xRange = maxVector.GetX() -  minVector.GetX();
+    Vector3D minVector = ptr.GetMinPoint();
+    Vector3D maxVector = ptr.GetMaxPoint();
 
-	double yRange = maxVector.GetY() - minVector.GetY();	
+    const double xRange = maxVector.GetX() - minVector.GetX();
 
-	double zRange = maxVector.GetZ() - minVector.GetZ();	
+    const double yRange = maxVector.GetY() - minVector.GetY();
 
-	if(xRange < yRange && zRange < yRange)
-	{
-		for(const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetY() -  minVector.GetY()) <= 1e-10)
-			{
-				minVector = eachVector;
-				break;
-			}
-		}
+    const double zRange = maxVector.GetZ() - minVector.GetZ();
 
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetY() -  maxVector.GetY()) <= 1e-10)
-			{
-				maxVector = eachVector;
-				break;
-			}
-		}
-	}
-	else if(zRange < xRange)
-	{
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetX() -  minVector.GetX()) <= 1e-10)
-			{
-				minVector = eachVector;
-				break;
-			}
-		}
+    if (xRange < yRange && zRange < yRange)
+    {
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetY() - minVector.GetY()) <= 1e-10)
+            {
+                minVector = eachVector;
+                break;
+            }
+        }
 
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetX() -  maxVector.GetX()) <= 1e-10)
-			{
-				maxVector = eachVector;
-				break;
-			}
-		}
-	}
-	else 
-	{
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetZ() -   minVector.GetZ()) <= 1e-10)
-			{
-				minVector = eachVector;
-				break;
-			}
-		}
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetY() - maxVector.GetY()) <= 1e-10)
+            {
+                maxVector = eachVector;
+                break;
+            }
+        }
+    }
+    else if (zRange < xRange)
+    {
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetX() - minVector.GetX()) <= 1e-10)
+            {
+                minVector = eachVector;
+                break;
+            }
+        }
 
-		for (const auto& eachVector:vectors)
-		{
-			if(MathD::FAbs(eachVector.GetZ() -  maxVector.GetZ()) <= 1e-10)
-			{
-				maxVector = eachVector;
-				break;
-			}
-		}
-	}
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetX() - maxVector.GetX()) <= 1e-10)
+            {
+                maxVector = eachVector;
+                break;
+            }
+        }
+    }
+    else
+    {
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetZ() - minVector.GetZ()) <= 1e-10)
+            {
+                minVector = eachVector;
+                break;
+            }
+        }
 
-	ASSERT_TRUE(Vector3ToolsD::Approximate(minVector,  information.GetMinExtreme()));
-	ASSERT_TRUE(Vector3ToolsD::Approximate(maxVector,  information.GetMaxExtreme()));
+        for (const auto& eachVector : vectors)
+        {
+            if (MathD::FAbs(eachVector.GetZ() - maxVector.GetZ()) <= 1e-10)
+            {
+                maxVector = eachVector;
+                break;
+            }
+        }
+    }
 
-	double maxDistance = 0.0;
-	Vector3D perpendicularExtreme;
-	for (const auto& eachVector:vectors)
-	{
-		Vector3D diff = eachVector - information.GetOrigin();
-		double dot = Vector3ToolsD::DotProduct(information.GetDirectionX(),diff);
-		Vector3D proj = diff - dot * information.GetDirectionX();
-		double distance = Vector3ToolsD::GetLength(proj);
+    ASSERT_TRUE(Vector3ToolsD::Approximate(minVector, information.GetMinExtreme()));
+    ASSERT_TRUE(Vector3ToolsD::Approximate(maxVector, information.GetMaxExtreme()));
 
-		if (maxDistance < distance)
-		{
-			maxDistance = distance;
-			perpendicularExtreme = eachVector;
-		}
-	}
+    double maxDistance = 0.0;
+    Vector3D perpendicularExtreme;
+    for (const auto& eachVector : vectors)
+    {
+        const Vector3D diff = eachVector - information.GetOrigin();
+        const double dot = Vector3ToolsD::DotProduct(information.GetDirectionX(), diff);
+        const Vector3D proj = diff - dot * information.GetDirectionX();
+        const double distance = Vector3ToolsD::GetLength(proj);
 
-	ASSERT_TRUE(Vector3ToolsD::Approximate(perpendicularExtreme,  information.GetPerpendicularExtreme()));
-	
-	maxDistance = 0.0;
-	NumericalValueSymbol maxSign = NumericalValueSymbol::Zero;
-	Vector3D tetrahedronExtreme;
-	for (const auto& eachVector : vectors)
-	{
-		Vector3D diff = eachVector -  information.GetOrigin();
-		double distance = Vector3ToolsD::DotProduct(information.GetDirectionZ(),diff);
-		NumericalValueSymbol sign = MathD::Sign(distance);
-		distance = MathD::FAbs(distance);
-		if (maxDistance < distance)
-		{
-			maxDistance = distance;
-			maxSign = sign;
-			tetrahedronExtreme = eachVector;
-		}
-	}
+        if (maxDistance < distance)
+        {
+            maxDistance = distance;
+            perpendicularExtreme = eachVector;
+        }
+    }
 
-	ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedronExtreme, information.GetTetrahedronExtreme()));
-											
+    ASSERT_TRUE(Vector3ToolsD::Approximate(perpendicularExtreme, information.GetPerpendicularExtreme()));
+
+    maxDistance = 0.0;
+    NumericalValueSymbol maxSign = NumericalValueSymbol::Zero;
+    Vector3D tetrahedronExtreme;
+    for (const auto& eachVector : vectors)
+    {
+        const Vector3D diff = eachVector - information.GetOrigin();
+        double distance = Vector3ToolsD::DotProduct(information.GetDirectionZ(), diff);
+        const NumericalValueSymbol sign = MathD::Sign(distance);
+        distance = MathD::FAbs(distance);
+        if (maxDistance < distance)
+        {
+            maxDistance = distance;
+            maxSign = sign;
+            tetrahedronExtreme = eachVector;
+        }
+    }
+
+    ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedronExtreme, information.GetTetrahedronExtreme()));
 }
-

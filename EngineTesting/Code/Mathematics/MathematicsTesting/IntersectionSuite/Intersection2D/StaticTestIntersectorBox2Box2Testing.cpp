@@ -1,15 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 18:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/06 20:36)
 
 #include "StaticTestIntersectorBox2Box2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorBox2Box2Detail.h"
 
-#include "Mathematics/Algebra/Vector2Tools.h"
 #include <random>
 
 namespace Mathematics
@@ -20,25 +23,25 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticTestIntersectorBox2Box2Testing)
 
-void Mathematics::StaticTestIntersectorBox2Box2Testing ::MainTest()
+void Mathematics::StaticTestIntersectorBox2Box2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BoxTest);
 }
-#include SYSTEM_WARNING_DISABLE(26496)
-void Mathematics::StaticTestIntersectorBox2Box2Testing ::BoxTest()
+
+void Mathematics::StaticTestIntersectorBox2Box2Testing::BoxTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2F lhsCenter(randomDistribution(generator),
-                           randomDistribution(generator));
+        const Vector2F lhsCenter(randomDistribution(generator),
+                                 randomDistribution(generator));
 
-        Vector2F rhsCenter(randomDistribution(generator),
-                           randomDistribution(generator));
+        const Vector2F rhsCenter(randomDistribution(generator),
+                                 randomDistribution(generator));
 
         Vector2F lhsFirstAxis(randomDistribution(generator),
                               randomDistribution(generator));
@@ -49,8 +52,8 @@ void Mathematics::StaticTestIntersectorBox2Box2Testing ::BoxTest()
         lhsFirstAxis.Normalize();
         rhsFirstAxis.Normalize();
 
-        float lhsFirstExtent = MathF::FAbs(randomDistribution(generator));
-        float rhsFirstExtent = MathF::FAbs(randomDistribution(generator));
+        const float lhsFirstExtent = MathF::FAbs(randomDistribution(generator));
+        const float rhsFirstExtent = MathF::FAbs(randomDistribution(generator));
 
         Vector2F lhsSecondAxis(randomDistribution(generator),
                                randomDistribution(generator));
@@ -61,18 +64,18 @@ void Mathematics::StaticTestIntersectorBox2Box2Testing ::BoxTest()
         lhsSecondAxis.Normalize();
         rhsSecondAxis.Normalize();
 
-        float lhsSecondExtent = MathF::FAbs(randomDistribution(generator));
-        float rhsSecondExtent = MathF::FAbs(randomDistribution(generator));
+        const float lhsSecondExtent = MathF::FAbs(randomDistribution(generator));
+        const float rhsSecondExtent = MathF::FAbs(randomDistribution(generator));
 
-        Box2F lhsBox(lhsCenter, lhsFirstAxis, lhsSecondAxis, lhsFirstExtent, lhsSecondExtent);
-        Box2F rhsBox(rhsCenter, rhsFirstAxis, rhsSecondAxis, rhsFirstExtent, rhsSecondExtent);
+        const Box2F lhsBox(lhsCenter, lhsFirstAxis, lhsSecondAxis, lhsFirstExtent, lhsSecondExtent);
+        const Box2F rhsBox(rhsCenter, rhsFirstAxis, rhsSecondAxis, rhsFirstExtent, rhsSecondExtent);
 
         StaticTestIntersectorBox2Box2<float> intersector(lhsBox, rhsBox);
 
-        Vector2F boxCentersDifference = rhsCenter - lhsCenter;
+        const Vector2F boxCentersDifference = rhsCenter - lhsCenter;
 
-        float absA0DotB0 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, rhsFirstAxis));
-        float absA0DotB1 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, rhsSecondAxis));
+        const float absA0DotB0 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, rhsFirstAxis));
+        const float absA0DotB1 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, rhsSecondAxis));
         float absADotD = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, boxCentersDifference));
 
         if (lhsFirstExtent + rhsFirstExtent * absA0DotB0 + rhsSecondExtent * absA0DotB1 < absADotD)
@@ -81,8 +84,8 @@ void Mathematics::StaticTestIntersectorBox2Box2Testing ::BoxTest()
             continue;
         }
 
-        float absA1DotB0 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, rhsFirstAxis));
-        float absA1DotB1 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, rhsSecondAxis));
+        const float absA1DotB0 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, rhsFirstAxis));
+        const float absA1DotB1 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, rhsSecondAxis));
         absADotD = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, boxCentersDifference));
 
         if (lhsSecondExtent + rhsFirstExtent * absA1DotB0 + rhsSecondExtent * absA1DotB1 < absADotD)

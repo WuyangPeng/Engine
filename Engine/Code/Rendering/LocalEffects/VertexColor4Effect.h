@@ -16,7 +16,7 @@
 
 namespace Rendering
 {
-    class VertexColor4Effect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE VertexColor4Effect : public VisualEffect
     {
     public:
         using ClassType = VertexColor4Effect;

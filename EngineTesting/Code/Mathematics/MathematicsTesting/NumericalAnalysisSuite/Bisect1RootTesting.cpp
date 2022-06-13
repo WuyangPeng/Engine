@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 14:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 15:54)
 
 #include "Bisect1RootTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,44 +17,44 @@ namespace Mathematics
     template class Bisect1Root<float>;
     template class Bisect1Root<double>;
 }
-#include SYSTEM_WARNING_DISABLE(26496)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect1RootTesting)
 
-void Mathematics::Bisect1RootTesting ::MainTest()
+void Mathematics::Bisect1RootTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(HaveSolutionTest);
     ASSERT_THROW_EXCEPTION_0(NoSolutionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnknownTest);
 }
 
-void Mathematics::Bisect1RootTesting ::HaveSolutionTest()
+void Mathematics::Bisect1RootTesting::HaveSolutionTest()
 {
-    double root = 9.0;
-    BisectRootType type = BisectRootType::HaveSolution;
+    constexpr auto root = 9.0;
+    const auto type = BisectRootType::HaveSolution;
 
-    Bisect1RootD bisect1Root(root, type);
+    const Bisect1RootD bisect1Root(root, type);
 
     ASSERT_APPROXIMATE(bisect1Root.GetRoot(), root, 1e-10);
     ASSERT_ENUM_EQUAL(bisect1Root.GetBisect1RootType(), type);
 }
 
-void Mathematics::Bisect1RootTesting ::NoSolutionTest()
+void Mathematics::Bisect1RootTesting::NoSolutionTest()
 {
-    BisectRootType type = BisectRootType::NoSolution;
+    const auto type = BisectRootType::NoSolution;
 
-    Bisect1RootD bisect1Root;
+    const Bisect1RootD bisect1Root;
 
     ASSERT_ENUM_EQUAL(bisect1Root.GetBisect1RootType(), type);
 
-    [[maybe_unused]] auto value = bisect1Root.GetRoot();
+    MAYBE_UNUSED auto value = bisect1Root.GetRoot();
 }
 
-void Mathematics::Bisect1RootTesting ::UnknownTest()
+void Mathematics::Bisect1RootTesting::UnknownTest()
 {
-    float root = 19.0f;
-    BisectRootType type = BisectRootType::Unknown;
+    constexpr auto root = 19.0f;
+    const auto type = BisectRootType::Unknown;
 
-    Bisect1RootF bisect1Root(root, type);
+    const Bisect1RootF bisect1Root(root, type);
 
     ASSERT_ENUM_EQUAL(bisect1Root.GetBisect1RootType(), type);
     ASSERT_APPROXIMATE(bisect1Root.GetRoot(), root, 1e-8f);

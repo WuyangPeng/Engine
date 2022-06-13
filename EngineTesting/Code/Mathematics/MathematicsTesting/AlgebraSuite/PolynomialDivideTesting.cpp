@@ -1,59 +1,54 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 09:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 22:16)
 
 #include "PolynomialDivideTesting.h"
-#include "Mathematics/Algebra/PolynomialDetail.h"
-#include "Mathematics/Algebra/PolynomialDivideDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/PolynomialDetail.h"
+#include "Mathematics/Algebra/PolynomialDivideDetail.h"
 
-#include <vector> 
-#include <random> 
+#include <random>
+#include <vector>
 
-using std::vector;
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
+using std::vector;
 
 namespace Mathematics
 {
-	template class PolynomialDivide<float>;
-	template class PolynomialDivide<double>;
-}
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,PolynomialDivideTesting) 
-
-void Mathematics::PolynomialDivideTesting
-	::MainTest()
-{
-	ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
+    template class PolynomialDivide<float>;
+    template class PolynomialDivide<double>;
 }
 
-void Mathematics::PolynomialDivideTesting
-	::ConstructionTest()
-{
-	default_random_engine generator{};
-	uniform_real<double> randomDistribution{ -100.0,100.0 };
-    
-	vector<double> firstDoubleVector{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),
-									  randomDistribution(generator),randomDistribution(generator) };
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialDivideTesting)
 
-    
+void Mathematics::PolynomialDivideTesting::MainTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
+}
+
+void Mathematics::PolynomialDivideTesting::ConstructionTest()
+{
+    default_random_engine generator{};
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
+
+    vector<double> firstDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
+                                      randomDistribution(generator), randomDistribution(generator) };
+
     PolynomialD firstPolynomial(firstDoubleVector);
-    
-	vector<double> secondDoubleVector{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
-    
-    PolynomialD secondPolynomial(secondDoubleVector);
-    
-    PolynomialDivideD polynomialDivide(firstPolynomial,secondPolynomial);
-    
-    ASSERT_TRUE(Approximate(polynomialDivide.GetQuotient(),firstPolynomial));
-    ASSERT_TRUE(Approximate(polynomialDivide.GetRemainder(),secondPolynomial));
-}
 
+    vector<double> secondDoubleVector{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator), randomDistribution(generator) };
+
+    PolynomialD secondPolynomial(secondDoubleVector);
+
+    PolynomialDivideD polynomialDivide(firstPolynomial, secondPolynomial);
+
+    ASSERT_TRUE(Approximate(polynomialDivide.GetQuotient(), firstPolynomial));
+    ASSERT_TRUE(Approximate(polynomialDivide.GetRemainder(), secondPolynomial));
+}

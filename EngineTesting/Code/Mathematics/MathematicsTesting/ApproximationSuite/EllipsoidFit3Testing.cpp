@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/28 16:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 15:51)
 
 #include "EllipsoidFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -19,27 +22,24 @@ using std::uniform_int;
 using std::uniform_real;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EllipsoidFit3Testing)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::EllipsoidFit3Testing ::MainTest()
+
+void Mathematics::EllipsoidFit3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
 
-void Mathematics::EllipsoidFit3Testing ::FitTest()
+void Mathematics::EllipsoidFit3Testing::FitTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(0.0, 100.0);
-    uniform_int<> secondRandomDistribution(15, 20);
+    const uniform_real<double> firstRandomDistribution(0.0, 100.0);
+    const uniform_int<> secondRandomDistribution(15, 20);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
@@ -48,17 +48,17 @@ void Mathematics::EllipsoidFit3Testing ::FitTest()
 
         EllipsoidFit3D ellipseFit(vertices);
 
-        Vector3D center = ellipseFit.GetCenter();
-        Matrix3D matrix = ellipseFit.GetRotate();
-        double firstExtent = ellipseFit.GetExtent0();
-        double secondExtent = ellipseFit.GetExtent1();
-        double thirdExtent = ellipseFit.GetExtent2();
+        const Vector3D center = ellipseFit.GetCenter();
+        const Matrix3D matrix = ellipseFit.GetRotate();
+        const double firstExtent = ellipseFit.GetExtent0();
+        const double secondExtent = ellipseFit.GetExtent1();
+        const double thirdExtent = ellipseFit.GetExtent2();
 
-        Ellipsoid3D ellipsoid(center, matrix * Vector3D::GetUnitX(), matrix * Vector3D::GetUnitY(), matrix * Vector3D::GetUnitZ(), firstExtent, secondExtent, thirdExtent);
+        const Ellipsoid3D ellipsoid(center, matrix * Vector3D::GetUnitX(), matrix * Vector3D::GetUnitY(), matrix * Vector3D::GetUnitZ(), firstExtent, secondExtent, thirdExtent);
 
         for (int i = 0; i < size; ++i)
         {
-            ASSERT_LESS(ellipsoid.Evaluate(vertices[i]), 22.0);
+            ASSERT_LESS(ellipsoid.Evaluate(vertices.at(i)), 22.0);
         }
     }
 }

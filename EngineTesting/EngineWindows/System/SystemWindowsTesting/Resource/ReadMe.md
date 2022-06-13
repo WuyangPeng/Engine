@@ -24,8 +24,16 @@
 4.	WindowsSuite 
 对Windows模块进行测试：
 （1） Windows创建：WindowsCreateTesting。
-（2） Windows进程：GetMessageTesting、PeekMessageTesting、PostQuitMessageTesting、ValidateRectTesting、DefWindowProcTesting、
-                   MessageBoxTesting、DestroyWindowTesting、SendMessageTesting、GetCommandLineTesting、WindowPaintTesting。
+（2） Windows进程：GetMessageTesting、
+                   PeekMessageTesting、
+                   PostQuitMessageTesting、
+                   ValidateRectTesting、
+                   DefWindowProcTesting、
+                   MessageBoxTesting、
+                   DestroyWindowTesting、
+                   SendMessageTesting、
+                   GetCommandLineTesting、
+                   WindowPaintTesting。
 （3） Windows注册：GetStockObjectTesting、LoadCursorTesting、LoadIconTesting、RegisterClassTesting、RegisterWindowMessageTesting。
 （4） Windows字体信息：WindowsFontInformationTesting。
 （5） Windows用户：WindowsUserTesting。

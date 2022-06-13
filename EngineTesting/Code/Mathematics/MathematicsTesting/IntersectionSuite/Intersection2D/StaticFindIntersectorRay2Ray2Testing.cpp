@@ -1,16 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 18:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/06 20:35)
 
 #include "StaticFindIntersectorRay2Ray2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorRay2Ray2Detail.h"
-
 #include "Mathematics/Algebra/Vector2Tools.h"
+#include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorRay2Ray2Detail.h"
 #include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorLine2Classify.h"
+
 #include <random>
 
 namespace Mathematics
@@ -18,29 +21,29 @@ namespace Mathematics
     template class StaticFindIntersectorRay2Ray2<float>;
     template class StaticFindIntersectorRay2Ray2<double>;
 }
-#include SYSTEM_WARNING_DISABLE(26496)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticFindIntersectorRay2Ray2Testing)
 
-void Mathematics::StaticFindIntersectorRay2Ray2Testing ::MainTest()
+void Mathematics::StaticFindIntersectorRay2Ray2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RayTest);
 }
 
-void Mathematics::StaticFindIntersectorRay2Ray2Testing ::RayTest()
+void Mathematics::StaticFindIntersectorRay2Ray2Testing::RayTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    const std::uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2F lhsOrigin(randomDistribution(generator),
-                           randomDistribution(generator));
+        const Vector2F lhsOrigin(randomDistribution(generator),
+                                 randomDistribution(generator));
         Vector2F lhsDirection(randomDistribution(generator),
                               randomDistribution(generator));
-        Vector2F rhsOrigin(randomDistribution(generator),
-                           randomDistribution(generator));
+        const Vector2F rhsOrigin(randomDistribution(generator),
+                                 randomDistribution(generator));
         Vector2F rhsDirection(randomDistribution(generator),
                               randomDistribution(generator));
 
@@ -78,15 +81,13 @@ void Mathematics::StaticFindIntersectorRay2Ray2Testing ::RayTest()
 
         StaticFindIntersectorRay2Ray2<float> sixthClassify(Ray2F(lhsOrigin, lhsDirection), Ray2F(rhsOrigin, rhsDirection));
 
-        StaticTestIntersectorLine2Classify<float> seventhClassify(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection,
-                                                                  true);
+        StaticTestIntersectorLine2Classify<float> seventhClassify(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection, true);
 
         if (0.0f <= seventhClassify.GetParameter0() && 0.0f <= seventhClassify.GetParameter1())
         {
             ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 1);
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + lhsDirection * seventhClassify.GetParameter0(),
-                                            sixthClassify.GetPoint(0), 1e-8f);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + lhsDirection * seventhClassify.GetParameter0(), sixthClassify.GetPoint(0), 1e-8f);
         }
         else
         {

@@ -56,7 +56,7 @@ bool System::CloseSystemMutex(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(handle) != g_False)
+    if (::CloseHandle(handle) != gFalse)
         return true;
     else
         return false;
@@ -74,7 +74,7 @@ bool System::ReleaseSystemMutex(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReleaseMutex(handle) != g_False)
+    if (::ReleaseMutex(handle) != gFalse)
         return true;
     else
         return false;

@@ -104,7 +104,7 @@ bool System::ReleaseSystemSemaphore(WindowsHandle handle, WindowsLong releaseCou
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReleaseSemaphore(handle, releaseCount, previousCount) != g_False)
+    if (::ReleaseSemaphore(handle, releaseCount, previousCount) != gFalse)
         return true;
     else
         return false;
@@ -122,7 +122,7 @@ bool System::CloseSystemSemaphore(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(handle) != g_False)
+    if (::CloseHandle(handle) != gFalse)
         return true;
     else
         return false;

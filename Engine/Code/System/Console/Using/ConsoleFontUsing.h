@@ -20,7 +20,7 @@ namespace System
     using ConsoleFontInfoPtr = PCONSOLE_FONT_INFO;
     using ConsoleFontInfoEx = CONSOLE_FONT_INFOEX;
     using ConsoleFontInfoExPtr = PCONSOLE_FONT_INFOEX;
-    constexpr auto g_LogicalFontFaceSize = LF_FACESIZE;
+    constexpr auto gLogicalFontFaceSize = LF_FACESIZE;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -31,7 +31,7 @@ namespace System
     };
     using ConsoleFontInfoPtr = ConsoleFontInfo*;
 
-    static constexpr auto g_LogicalFontFaceSize = 32;
+    static constexpr auto gLogicalFontFaceSize = 32;
 
     struct ConsoleFontInfoEx
     {
@@ -40,7 +40,7 @@ namespace System
         ConsoleCoord dwFontSize;
         uint32_t FontFamily;
         uint32_t FontWeight;
-        wchar_t FaceName[g_LogicalFontFaceSize];
+        wchar_t FaceName[gLogicalFontFaceSize];
     };
     using ConsoleFontInfoExPtr = ConsoleFontInfoEx*;
 

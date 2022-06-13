@@ -1,75 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/22 17:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/31 11:23)
 
 #include "Segment3Testing.h"
-#include "Mathematics/Objects3D/Segment3Detail.h"
-#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Objects3D/Segment3Detail.h"
 
-#include <random> 
- 
-using std::uniform_real;
+#include <random>
+
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class Segment3<float>;
-	template class Segment3<double>;
+    template class Segment3<float>;
+    template class Segment3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Segment3Testing) 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::Segment3Testing
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Segment3Testing)
+
+void Mathematics::Segment3Testing::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(SegmentTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SegmentTest);
 }
 
-void Mathematics::Segment3Testing
-	::SegmentTest()
+void Mathematics::Segment3Testing::SegmentTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D firstPoint(firstRandomDistribution(generator),
-			                 firstRandomDistribution(generator),
-							 firstRandomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D firstPoint(firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator));
 
-		Vector3D secondPoint(firstRandomDistribution(generator),
-			                  firstRandomDistribution(generator),
-							  firstRandomDistribution(generator));
+        const Vector3D secondPoint(firstRandomDistribution(generator),
+                                   firstRandomDistribution(generator),
+                                   firstRandomDistribution(generator));
 
-		Segment3D firstSegment(firstPoint,secondPoint);
+        const Segment3D firstSegment(firstPoint, secondPoint);
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(firstPoint,  firstSegment.GetBeginPoint()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(secondPoint, firstSegment.GetEndPoint()));
-		
-		Vector3D center = firstSegment.GetCenterPoint();
-		Vector3D direction = firstSegment.GetDirection();
-		double extent = firstSegment.GetExtent();
+        ASSERT_TRUE(Vector3ToolsD::Approximate(firstPoint, firstSegment.GetBeginPoint()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(secondPoint, firstSegment.GetEndPoint()));
 
-		Segment3D secondSegment(extent,center,direction);
+        const auto center = firstSegment.GetCenterPoint();
+        const auto direction = firstSegment.GetDirection();
+        auto extent = firstSegment.GetExtent();
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(firstPoint,secondSegment.GetBeginPoint()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(secondPoint,secondSegment.GetEndPoint()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(center,secondSegment.GetCenterPoint()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(direction,secondSegment.GetDirection()));
-		ASSERT_APPROXIMATE(extent,secondSegment.GetExtent(),1e-10);
+        const Segment3D secondSegment(extent, center, direction);
 
-	}
+        ASSERT_TRUE(Vector3ToolsD::Approximate(firstPoint, secondSegment.GetBeginPoint()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(secondPoint, secondSegment.GetEndPoint()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(center, secondSegment.GetCenterPoint()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(direction, secondSegment.GetDirection()));
+        ASSERT_APPROXIMATE(extent, secondSegment.GetExtent(), 1e-10);
+    }
 }
-

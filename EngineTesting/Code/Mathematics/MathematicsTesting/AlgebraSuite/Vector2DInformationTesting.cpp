@@ -1,15 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 10:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 22:56)
 
 #include "Vector2DInformationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2InformationDetail.h"
 #include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
+#include "Mathematics/Algebra/Vector2InformationDetail.h"
 #include "Mathematics/Algebra/Vector2Tools.h"
+
 #include <random>
 
 using std::default_random_engine;
@@ -23,11 +27,8 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector2InformationTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::Vector2InformationTesting ::MainTest()
+
+void Mathematics::Vector2InformationTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DimensionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AxesAlignBoundingBoxTest);
@@ -35,33 +36,33 @@ void Mathematics::Vector2InformationTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ExtremeTest);
 }
 
-void Mathematics::Vector2InformationTesting ::DimensionTest()
+void Mathematics::Vector2InformationTesting::DimensionTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> firstRandomDistribution{ 0.0001, 0.0002 };
-    uniform_real<double> secondRandomDistribution(-10.0, 10.0);
+    const uniform_real<double> firstRandomDistribution{ 0.0001, 0.0002 };
+    const uniform_real<double> secondRandomDistribution(-10.0, 10.0);
 
     vector<Vector2D> firstVector;
     vector<Vector2D> secondVector;
     vector<Vector2D> thirdVector;
-    double slope = secondRandomDistribution(generator);
+    const double slope = secondRandomDistribution(generator);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 firstEachVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        const Vector2 firstEachVector(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
         firstVector.push_back(firstEachVector);
 
-        double randomValue = firstRandomDistribution(generator) * secondRandomDistribution(generator);
+        const double randomValue = firstRandomDistribution(generator) * secondRandomDistribution(generator);
 
-        Vector2 secondEachVector(randomValue, randomValue * slope);
+        const Vector2 secondEachVector(randomValue, randomValue * slope);
 
         secondVector.push_back(secondEachVector);
 
-        Vector2 thirdEachVector(secondRandomDistribution(generator), secondRandomDistribution(generator));
+        const Vector2 thirdEachVector(secondRandomDistribution(generator), secondRandomDistribution(generator));
 
         thirdVector.push_back(thirdEachVector);
     }
@@ -82,11 +83,11 @@ void Mathematics::Vector2InformationTesting ::DimensionTest()
     ASSERT_EQUAL(thirdInformation.GetDimension(), 2);
 }
 
-void Mathematics::Vector2InformationTesting ::AxesAlignBoundingBoxTest()
+void Mathematics::Vector2InformationTesting::AxesAlignBoundingBoxTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
     vector<Vector2D> vectors;
 
@@ -97,16 +98,16 @@ void Mathematics::Vector2InformationTesting ::AxesAlignBoundingBoxTest()
         vectors.emplace_back(randomDistribution(generator), randomDistribution(generator));
     }
 
-    auto aabb = Vector2ToolsD::ComputeExtremes(vectors);
+    const auto aabb = Vector2ToolsD::ComputeExtremes(vectors);
     Vector2InformationD secondInformation(vectors);
 
     ASSERT_TRUE(Vector2ToolsD::Approximate(aabb.GetMinPoint(), secondInformation.GetAABB().GetMinPoint()));
 
     ASSERT_TRUE(Vector2ToolsD::Approximate(aabb.GetMaxPoint(), secondInformation.GetAABB().GetMaxPoint()));
 
-    double xRange = aabb.GetMaxPoint().GetX() - aabb.GetMinPoint().GetX();
+    const double xRange = aabb.GetMaxPoint().GetX() - aabb.GetMinPoint().GetX();
 
-    double yRange = aabb.GetMaxPoint().GetY() - aabb.GetMinPoint().GetY();
+    const double yRange = aabb.GetMaxPoint().GetY() - aabb.GetMinPoint().GetY();
 
     if (xRange < yRange)
     {
@@ -118,11 +119,11 @@ void Mathematics::Vector2InformationTesting ::AxesAlignBoundingBoxTest()
     }
 }
 
-void Mathematics::Vector2InformationTesting ::DirectionTest()
+void Mathematics::Vector2InformationTesting::DirectionTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
     vector<Vector2D> vectors;
 
@@ -135,14 +136,14 @@ void Mathematics::Vector2InformationTesting ::DirectionTest()
 
     Vector2InformationD information(vectors);
 
-    auto ptr = information.GetAABB();
+    const auto ptr = information.GetAABB();
 
     Vector2 minVector = ptr.GetMinPoint();
     Vector2 maxVector = ptr.GetMaxPoint();
 
-    double xRange = maxVector.GetX() - minVector.GetX();
+    const double xRange = maxVector.GetX() - minVector.GetX();
 
-    double yRange = maxVector.GetY() - minVector.GetY();
+    const double yRange = maxVector.GetY() - minVector.GetY();
 
     if (xRange < yRange)
     {
@@ -187,18 +188,18 @@ void Mathematics::Vector2InformationTesting ::DirectionTest()
 
     Vector2 directionX = maxVector - minVector;
     directionX.Normalize();
-    Vector2 directionY = -Vector2ToolsD::GetPerp(directionX);
+    const Vector2 directionY = -Vector2ToolsD::GetPerp(directionX);
 
     ASSERT_TRUE(Vector2ToolsD::Approximate(minVector, information.GetOrigin()));
     ASSERT_TRUE(Vector2ToolsD::Approximate(directionX, information.GetDirectionX()));
     ASSERT_TRUE(Vector2ToolsD::Approximate(directionY, information.GetDirectionY()));
 }
 
-void Mathematics::Vector2InformationTesting ::ExtremeTest()
+void Mathematics::Vector2InformationTesting::ExtremeTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<double> randomDistribution{ -100.0f, 100.0f };
 
     vector<Vector2D> vectors;
 
@@ -206,21 +207,21 @@ void Mathematics::Vector2InformationTesting ::ExtremeTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 eachVector(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 eachVector(randomDistribution(generator), randomDistribution(generator));
 
         vectors.push_back(eachVector);
     }
 
     Vector2InformationD information(vectors);
 
-    auto ptr = information.GetAABB();
+    const auto ptr = information.GetAABB();
 
     Vector2 minVector = ptr.GetMinPoint();
     Vector2 maxVector = ptr.GetMaxPoint();
 
-    double xRange = maxVector.GetX() - minVector.GetX();
+    const double xRange = maxVector.GetX() - minVector.GetX();
 
-    double yRange = maxVector.GetY() - minVector.GetY();
+    const double yRange = maxVector.GetY() - minVector.GetY();
 
     if (xRange < yRange)
     {
@@ -272,9 +273,9 @@ void Mathematics::Vector2InformationTesting ::ExtremeTest()
     Vector2D perpendicularExtreme;
     for (const auto& eachVector : vectors)
     {
-        Vector2 diff = eachVector - information.GetOrigin();
+        const Vector2 diff = eachVector - information.GetOrigin();
         double distance = Vector2ToolsD::DotProduct(information.GetDirectionY(), diff);
-        NumericalValueSymbol sign = MathD::Sign(distance);
+        const NumericalValueSymbol sign = MathD::Sign(distance);
         distance = MathD::FAbs(distance);
         if (maxDistance < distance)
         {

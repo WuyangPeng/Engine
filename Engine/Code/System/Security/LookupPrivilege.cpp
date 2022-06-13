@@ -21,7 +21,7 @@ bool System::GetLookupPrivilegeValue(const TChar* systemName, const TChar* name,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeValue(systemName, name, luid)) != g_False)
+    if ((::LookupPrivilegeValue(systemName, name, luid)) != gFalse)
         return true;
     else
         return false;
@@ -39,7 +39,7 @@ bool System::GetLookupPrivilegeName(const TChar* systemName, LookupPrivilegeLUID
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeName(systemName, luid, name, nameSize)) != g_False)
+    if ((::LookupPrivilegeName(systemName, luid, name, nameSize)) != gFalse)
         return true;
     else
         return false;
@@ -57,7 +57,7 @@ bool System::GetLookupPrivilegeDisplayName(const TChar* systemName, const TChar*
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::LookupPrivilegeDisplayName(systemName, name, displayName, displayNameSize, languageID)) != g_False)
+    if ((::LookupPrivilegeDisplayName(systemName, name, displayName, displayNameSize, languageID)) != gFalse)
         return true;
     else
         return false;

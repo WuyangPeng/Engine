@@ -45,7 +45,7 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const SignedIntegerType&)
 
     if (shifting <= sizeof(T) * 8 - 1)
     {
-        auto copySize = shifting / 8 + 1;
+        const auto copySize = shifting / 8 + 1;
         memcpy(&mantissa, &absData[0], copySize);
         value = boost::numeric_cast<T>(mantissa);
 
@@ -65,7 +65,7 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const UnsignedIntegerType&)
 
     if (shifting <= sizeof(T) * 8 && symbol == NumericalValueSymbol::Positive)
     {
-        auto copySize = shifting / 8 + 1;
+        const auto copySize = shifting / 8 + 1;
         memcpy(&mantissa, &absData[0], copySize);
         value = boost::numeric_cast<T>(mantissa);
     }
@@ -130,7 +130,12 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateConversionValue()
 
     auto conversion = exponent | mantissaValue;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
     value = *(reinterpret_cast<const T*>(&conversion));
+
+#include STSTEM_WARNING_POP
 }
 
 // private
@@ -139,11 +144,11 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateMantissa()
 {
     using IntegerType = typename TraitsType::IntegerType;
 
-    auto maxMantissaBit = TraitsType::exponentShifting;
+    constexpr auto maxMantissaBit = TraitsType::exponentShifting;
 
     // 将m_AbsData移位到同maxMantissaBit对齐
-    auto maxMantissaBitRemainder = maxMantissaBit % 16;
-    auto shiftingRemainder = shifting % 16;
+    constexpr auto maxMantissaBitRemainder = maxMantissaBit % 16;
+    const auto shiftingRemainder = shifting % 16;
     int difference = maxMantissaBitRemainder - shiftingRemainder;
 
     if (difference < 0)

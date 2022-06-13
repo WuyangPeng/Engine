@@ -16,7 +16,7 @@
 
 namespace Rendering
 {
-    class DefaultEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE DefaultEffect : public VisualEffect
     {
     public:
         using ClassType = DefaultEffect;

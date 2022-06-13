@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 13:46)
 
 #include "BoostSegmentationSockStreamSynchronizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,18 +26,15 @@ using std::make_shared;
 using std::thread;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSegmentationSockStreamSynchronizeTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::MainTest() 
+
+void Network::BoostSegmentationSockStreamSynchronizeTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
-  //  ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::StreamTest()
+void Network::BoostSegmentationSockStreamSynchronizeTesting::StreamTest()
 {
     thread serverThread{ &ClassType::BoostServerThread, this };
 
@@ -50,13 +50,13 @@ void Network::BoostSegmentationSockStreamSynchronizeTesting ::StreamTest()
     serverThread.join();
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::SynchronizeStreamTest()
+void Network::BoostSegmentationSockStreamSynchronizeTesting::SynchronizeStreamTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ClientTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ServerTest);
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ClientTest()
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ClientTest()
 {
     thread serverThread{ &ClassType::ServerThread, this };
 
@@ -72,12 +72,12 @@ void Network::BoostSegmentationSockStreamSynchronizeTesting ::ClientTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ClientSynchronizeConnect(const TestingTypeSharedPtr& sockStream)
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ClientSynchronizeConnect(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
-    constexpr auto connectTime = GetSynchronizeConnectTime();
-    for (auto i = 0; i < connectTime; ++i)
+    constexpr auto aConnectTime = GetSynchronizeConnectTime();
+    for (auto i = 0; i < aConnectTime; ++i)
     {
         SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
 
@@ -88,44 +88,48 @@ void Network::BoostSegmentationSockStreamSynchronizeTesting ::ClientSynchronizeC
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, connectTime, "连接服务器失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aConnectTime, "连接服务器失败。");
     }
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ClientSynchronizeSend(const TestingTypeSharedPtr& sockStream)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ClientSynchronizeSend(const TestingTypeSharedPtr& sockStream)
 {
-    constexpr auto sendTime = GetSynchronizeSendTime();
-    for (auto i = 0; i < sendTime; ++i)
+    constexpr auto aSendTime = GetSynchronizeSendTime();
+    for (auto i = 0; i < aSendTime; ++i)
     {
         if (0 < sockStream->Send(CreateMessageBuffer()))
         {
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, sendTime, "发送消息失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aSendTime, "发送消息失败。");
     }
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ClientSynchronizeReceive(const TestingTypeSharedPtr& sockStream)
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ClientSynchronizeReceive(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostClientConfigurationStrategy(GetRealOffset());
 
     MessageBufferSharedPtr messageBuffer{ make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, configurationStrategy.GetParserStrategy()) };
-    constexpr auto receiveTime = GetSynchronizeReceiveTime();
-    for (auto i = 0; i < receiveTime; ++i)
+    constexpr auto aReceiveTime = GetSynchronizeReceiveTime();
+    for (auto i = 0; i < aReceiveTime; ++i)
     {
         if (0 < sockStream->Receive(messageBuffer))
         {
             break;
         }
 
-        ASSERT_UNEQUAL(i + 1, receiveTime);
+        ASSERT_UNEQUAL(i + 1, aReceiveTime);
     }
 
     VerificationMessageBuffer(messageBuffer);
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ServerTest()
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ServerTest()
 {
     thread clientThread{ &ClassType::ClientThread, this };
 
@@ -141,53 +145,60 @@ void Network::BoostSegmentationSockStreamSynchronizeTesting ::ServerTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ServerSynchronizeAcceptor(const TestingTypeSharedPtr& sockStream)
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ServerSynchronizeAcceptor(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     SockAcceptorSharedPtr sockAcceptor{ make_shared<SockAcceptor>(configurationStrategy) };
 
-    constexpr auto acceptTime = GetSynchronizeAcceptTime();
-    for (auto i = 0; i < acceptTime; ++i)
+#include STSTEM_WARNING_POP
+
+    constexpr auto aAcceptTime = GetSynchronizeAcceptTime();
+    for (auto i = 0; i < aAcceptTime; ++i)
     {
         if (sockAcceptor->Accept(*sockStream))
         {
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, acceptTime, "等待客户端连接失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aAcceptTime, "等待客户端连接失败。");
     }
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ServerSynchronizeReceive(const TestingTypeSharedPtr& sockStream)
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ServerSynchronizeReceive(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostServerConfigurationStrategy(GetRealOffset());
 
     MessageBufferSharedPtr messageBuffer{ make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, configurationStrategy.GetParserStrategy()) };
-    constexpr auto receiveTime = GetSynchronizeReceiveTime();
-    for (auto i = 0; i < receiveTime; ++i)
+    constexpr auto aReceiveTime = GetSynchronizeReceiveTime();
+    for (auto i = 0; i < aReceiveTime; ++i)
     {
         if (0 < sockStream->Receive(messageBuffer))
         {
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, receiveTime, "接收消息失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aReceiveTime, "接收消息失败。");
     }
 
     VerificationMessageBuffer(messageBuffer);
 }
 
-void Network::BoostSegmentationSockStreamSynchronizeTesting ::ServerSynchronizeSend(const TestingTypeSharedPtr& sockStream)
+void Network::BoostSegmentationSockStreamSynchronizeTesting::ServerSynchronizeSend(const TestingTypeSharedPtr& sockStream)
 {
-    constexpr auto sendTime = GetSynchronizeSendTime();
-    for (auto i = 0; i < sendTime; ++i)
+    constexpr auto aSendTime = GetSynchronizeSendTime();
+    for (auto i = 0; i < aSendTime; ++i)
     {
         if (0 < sockStream->Send(CreateMessageBuffer()))
         {
             break;
         }
 
-        ASSERT_UNEQUAL(i + 1, sendTime);
+        ASSERT_UNEQUAL(i + 1, aSendTime);
     }
 }
+
+#include STSTEM_WARNING_POP

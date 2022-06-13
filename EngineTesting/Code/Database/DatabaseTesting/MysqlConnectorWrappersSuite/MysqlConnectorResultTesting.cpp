@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.5 (2020/03/16 18:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 16:20)
 
 #include "MysqlConnectorResultTesting.h"
 #include "System/Windows/Engineering.h"
@@ -19,12 +22,12 @@ using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorResultTesting)
 
-void Database::MysqlConnectorResultTesting ::MainTest()
+void Database::MysqlConnectorResultTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ResultTest);
 }
 
-void Database::MysqlConnectorResultTesting ::ResultTest()
+void Database::MysqlConnectorResultTesting::ResultTest()
 {
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "", "root", "TCRE" };
 
@@ -35,7 +38,8 @@ void Database::MysqlConnectorResultTesting ::ResultTest()
     constexpr auto engineeringOffsetValue = System::GetEngineeringOffsetValue();
     auto procedure = "my_add_one_procedure" + to_string(engineeringOffsetValue);
 
-    session.Execute("CREATE PROCEDURE " + procedure +
+    session.Execute("CREATE PROCEDURE " +
+                    procedure +
                     " "
                     " (INOUT incr_param INT) "
                     "BEGIN "

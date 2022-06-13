@@ -30,7 +30,7 @@ bool System::SetConsoleCodePage(CodePage codePage) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleCP(EnumCastUnderlying(codePage)) != g_False)
+    if (::SetConsoleCP(EnumCastUnderlying(codePage)) != gFalse)
         return true;
     else
         return false;
@@ -61,7 +61,7 @@ bool System::SetConsoleOutputCodePage(CodePage codePage) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleOutputCP(EnumCastUnderlying(codePage)) != g_False)
+    if (::SetConsoleOutputCP(EnumCastUnderlying(codePage)) != gFalse)
         return true;
     else
         return false;

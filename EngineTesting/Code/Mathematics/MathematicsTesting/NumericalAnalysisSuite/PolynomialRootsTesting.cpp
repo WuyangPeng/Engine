@@ -1,16 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 15:57)
 
 #include "PolynomialRootsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/PolynomialDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/NumericalAnalysis/PolynomialRootsDetail.h"
 
-#include "Mathematics/Algebra/PolynomialDetail.h"
 #include <random>
 
 using std::default_random_engine;
@@ -20,7 +23,7 @@ using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialRootsTesting)
 
-void Mathematics::PolynomialRootsTesting ::MainTest()
+void Mathematics::PolynomialRootsTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OnceTest);
@@ -33,23 +36,18 @@ void Mathematics::PolynomialRootsTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AllRealPartsPositiveTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetRootCountTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::PolynomialRootsTesting ::BaseTest()
+
+void Mathematics::PolynomialRootsTesting::BaseTest()
 {
     PolynomialRootsD firstPolynomialRoots(1e-10);
 
     ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 }
 
-void Mathematics::PolynomialRootsTesting ::OnceTest()
+void Mathematics::PolynomialRootsTesting::OnceTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
+    const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -59,8 +57,8 @@ void Mathematics::PolynomialRootsTesting ::OnceTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        double constant = firstRandomDistribution(generator);
-        double once = firstRandomDistribution(generator);
+        auto constant = firstRandomDistribution(generator);
+        auto once = firstRandomDistribution(generator);
 
         if (MathD::FAbs(once) < 1e-10)
         {
@@ -71,23 +69,21 @@ void Mathematics::PolynomialRootsTesting ::OnceTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 1);
 
-        for (int m = 0; m < firstPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < firstPolynomialRoots.GetCount(); ++m)
         {
-            double root = firstPolynomialRoots.GetRoot(m);
+            auto root = firstPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-6);
         }
 
-        for (auto iter = firstPolynomialRoots.GetBegin(),
-                  end = firstPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-6);
         }
 
-        double bound = firstPolynomialRoots.GetBound(constant, once);
+        auto bound = firstPolynomialRoots.GetBound(constant, once);
 
         ASSERT_APPROXIMATE(MathD::FAbs(constant) / once + 1, bound, 1e-10);
 
@@ -97,10 +93,10 @@ void Mathematics::PolynomialRootsTesting ::OnceTest()
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::SecondaryTest()
+void Mathematics::PolynomialRootsTesting::SecondaryTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
+    const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -110,28 +106,26 @@ void Mathematics::PolynomialRootsTesting ::SecondaryTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        double constant = firstRandomDistribution(generator);
-        double once = firstRandomDistribution(generator);
-        double secondary = firstRandomDistribution(generator);
+        auto constant = firstRandomDistribution(generator);
+        auto once = firstRandomDistribution(generator);
+        auto secondary = firstRandomDistribution(generator);
 
-        bool result = firstPolynomialRoots.FindAlgebraic(constant, once, secondary);
+        const auto result = firstPolynomialRoots.FindAlgebraic(constant, once, secondary);
 
         if (result)
         {
             ASSERT_TRUE(firstPolynomialRoots.GetCount() == 1 || firstPolynomialRoots.GetCount() == 2);
 
-            for (int m = 0; m < firstPolynomialRoots.GetCount(); ++m)
+            for (auto m = 0; m < firstPolynomialRoots.GetCount(); ++m)
             {
-                double root = firstPolynomialRoots.GetRoot(m);
+                auto root = firstPolynomialRoots.GetRoot(m);
 
                 ASSERT_APPROXIMATE(root * root * secondary + root * once + constant, 0.0, 1e-6);
             }
 
-            for (auto iter = firstPolynomialRoots.GetBegin(),
-                      end = firstPolynomialRoots.GetEnd();
-                 iter != end; ++iter)
+            for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
             {
-                double root = *iter;
+                auto root = *iter;
 
                 ASSERT_APPROXIMATE(root * root * secondary + root * once + constant, 0.0, 1e-6);
             }
@@ -141,22 +135,22 @@ void Mathematics::PolynomialRootsTesting ::SecondaryTest()
             ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
         }
 
-        double bound = firstPolynomialRoots.GetBound(constant, once, secondary);
+        auto bound = firstPolynomialRoots.GetBound(constant, once, secondary);
 
-        double constantValue = MathD::FAbs(constant) / secondary + 1;
-        double onceValue = MathD::FAbs(once) / secondary + 1;
+        auto constantValue = MathD::FAbs(constant) / secondary + 1;
+        auto onceValue = MathD::FAbs(once) / secondary + 1;
 
-        double maxValue = constantValue < onceValue ? onceValue : constantValue;
+        auto maxValue = constantValue < onceValue ? onceValue : constantValue;
 
         ASSERT_APPROXIMATE(maxValue, bound, 1e-10);
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::ThriceTest()
+void Mathematics::PolynomialRootsTesting::ThriceTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
-    uniform_real<double> secondRandomDistribution(-1.0e1, 1.0e1);
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    const uniform_real<double> secondRandomDistribution(-1.0e1, 1.0e1);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -166,38 +160,36 @@ void Mathematics::PolynomialRootsTesting ::ThriceTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        double constant = firstRandomDistribution(generator);
-        double once = firstRandomDistribution(generator);
-        double secondary = firstRandomDistribution(generator);
-        double thrice = firstRandomDistribution(generator);
+        auto constant = firstRandomDistribution(generator);
+        auto once = firstRandomDistribution(generator);
+        auto secondary = firstRandomDistribution(generator);
+        auto thrice = firstRandomDistribution(generator);
 
         ASSERT_TRUE(firstPolynomialRoots.FindAlgebraic(constant, once, secondary, thrice));
 
         ASSERT_TRUE(firstPolynomialRoots.GetCount() == 1 || firstPolynomialRoots.GetCount() == 2 || firstPolynomialRoots.GetCount() == 3);
 
-        for (int m = 0; m < firstPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < firstPolynomialRoots.GetCount(); ++m)
         {
-            double root = firstPolynomialRoots.GetRoot(m);
+            auto root = firstPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
 
-        for (auto iter = firstPolynomialRoots.GetBegin(),
-                  end = firstPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
 
-        double bound = firstPolynomialRoots.GetBound(constant, once, secondary, thrice);
+        auto bound = firstPolynomialRoots.GetBound(constant, once, secondary, thrice);
 
-        double constantValue = MathD::FAbs(constant) / thrice + 1;
-        double onceValue = MathD::FAbs(once) / thrice + 1;
-        double secondaryValue = MathD::FAbs(secondary) / thrice + 1;
+        auto constantValue = MathD::FAbs(constant) / thrice + 1;
+        auto onceValue = MathD::FAbs(once) / thrice + 1;
+        auto secondaryValue = MathD::FAbs(secondary) / thrice + 1;
 
-        double maxValue = constantValue < onceValue ? onceValue : constantValue;
+        auto maxValue = constantValue < onceValue ? onceValue : constantValue;
         maxValue = maxValue < secondaryValue ? secondaryValue : maxValue;
 
         ASSERT_APPROXIMATE(maxValue, bound, 1e-10);
@@ -214,18 +206,16 @@ void Mathematics::PolynomialRootsTesting ::ThriceTest()
 
         ASSERT_TRUE(secondPolynomialRoots.GetCount() == 1 || secondPolynomialRoots.GetCount() == 2 || secondPolynomialRoots.GetCount() == 3);
 
-        for (int m = 0; m < secondPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < secondPolynomialRoots.GetCount(); ++m)
         {
-            double root = secondPolynomialRoots.GetRoot(m);
+            auto root = secondPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
 
-        for (auto iter = secondPolynomialRoots.GetBegin(),
-                  end = secondPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = secondPolynomialRoots.GetBegin(); iter != secondPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
@@ -234,18 +224,16 @@ void Mathematics::PolynomialRootsTesting ::ThriceTest()
 
         ASSERT_TRUE(secondPolynomialRoots.GetCount() == 1 || secondPolynomialRoots.GetCount() == 2 || secondPolynomialRoots.GetCount() == 3);
 
-        for (int m = 0; m < secondPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < secondPolynomialRoots.GetCount(); ++m)
         {
-            double root = secondPolynomialRoots.GetRoot(m);
+            auto root = secondPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
 
-        for (auto iter = secondPolynomialRoots.GetBegin(),
-                  end = secondPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = secondPolynomialRoots.GetBegin(); iter != secondPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
@@ -256,28 +244,26 @@ void Mathematics::PolynomialRootsTesting ::ThriceTest()
                     secondPolynomialRoots.GetCount() == 2 ||
                     secondPolynomialRoots.GetCount() == 3);
 
-        for (int m = 0; m < secondPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < secondPolynomialRoots.GetCount(); ++m)
         {
-            double root = secondPolynomialRoots.GetRoot(m);
+            auto root = secondPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
 
-        for (auto iter = secondPolynomialRoots.GetBegin(),
-                  end = secondPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = secondPolynomialRoots.GetBegin(); iter != secondPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
         }
     }
 
     // 构造判别式为零
-    double constant = 1.0;
-    double once = 3.0;
-    double secondary = 3.0001;
-    double thrice = 1.0;
+    constexpr auto constant = 1.0;
+    constexpr auto once = 3.0;
+    constexpr auto secondary = 3.0001;
+    constexpr auto thrice = 1.0;
 
     PolynomialRootsD firstPolynomialRoots(1e-6);
 
@@ -285,27 +271,25 @@ void Mathematics::PolynomialRootsTesting ::ThriceTest()
 
     ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 2);
 
-    for (int i = 0; i < firstPolynomialRoots.GetCount(); ++i)
+    for (auto i = 0; i < firstPolynomialRoots.GetCount(); ++i)
     {
-        double root = firstPolynomialRoots.GetRoot(i);
+        auto root = firstPolynomialRoots.GetRoot(i);
 
         ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
     }
 
-    for (auto iter = firstPolynomialRoots.GetBegin(),
-              end = firstPolynomialRoots.GetEnd();
-         iter != end; ++iter)
+    for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
     {
-        double root = *iter;
+        auto root = *iter;
 
         ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::SpecialCubicTest()
+void Mathematics::PolynomialRootsTesting::SpecialCubicTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
+    const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -315,11 +299,11 @@ void Mathematics::PolynomialRootsTesting ::SpecialCubicTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        double constant = firstRandomDistribution(generator);
-        double once = MathD::FAbs(firstRandomDistribution(generator));
-        double thrice = MathD::FAbs(firstRandomDistribution(generator));
+        auto constant = firstRandomDistribution(generator);
+        auto once = MathD::FAbs(firstRandomDistribution(generator));
+        auto thrice = MathD::FAbs(firstRandomDistribution(generator));
 
-        double root = firstPolynomialRoots.SpecialCubic(thrice, once, constant);
+        auto root = firstPolynomialRoots.SpecialCubic(thrice, once, constant);
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
@@ -327,11 +311,11 @@ void Mathematics::PolynomialRootsTesting ::SpecialCubicTest()
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::QuarticTest()
+void Mathematics::PolynomialRootsTesting::QuarticTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e3, 1.0e3);
-    uniform_real<double> secondRandomDistribution(-2.0, 2.0);
+    const uniform_real<double> firstRandomDistribution(-1.0e3, 1.0e3);
+    const uniform_real<double> secondRandomDistribution(-2.0, 2.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -341,41 +325,39 @@ void Mathematics::PolynomialRootsTesting ::QuarticTest()
 
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
-        double constant = firstRandomDistribution(generator);
-        double once = firstRandomDistribution(generator);
-        double secondary = firstRandomDistribution(generator);
-        double thrice = firstRandomDistribution(generator);
-        double quartic = firstRandomDistribution(generator);
+        auto constant = firstRandomDistribution(generator);
+        auto once = firstRandomDistribution(generator);
+        auto secondary = firstRandomDistribution(generator);
+        auto thrice = firstRandomDistribution(generator);
+        auto quartic = firstRandomDistribution(generator);
 
         if (firstPolynomialRoots.FindAlgebraic(constant, once, secondary, thrice, quartic))
         {
             ASSERT_TRUE(firstPolynomialRoots.GetCount() == 2 || firstPolynomialRoots.GetCount() == 4);
         }
 
-        for (int m = 0; m < firstPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < firstPolynomialRoots.GetCount(); ++m)
         {
-            double root = firstPolynomialRoots.GetRoot(m);
+            auto root = firstPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-1);
         }
 
-        for (auto iter = firstPolynomialRoots.GetBegin(),
-                  end = firstPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-1);
         }
 
-        double bound = firstPolynomialRoots.GetBound(constant, once, secondary, thrice, quartic);
+        auto bound = firstPolynomialRoots.GetBound(constant, once, secondary, thrice, quartic);
 
-        double constantValue = MathD::FAbs(constant) / quartic + 1;
-        double onceValue = MathD::FAbs(once) / quartic + 1;
-        double secondaryValue = MathD::FAbs(secondary) / quartic + 1;
-        double thriceValue = MathD::FAbs(thrice) / quartic + 1;
+        auto constantValue = MathD::FAbs(constant) / quartic + 1;
+        auto onceValue = MathD::FAbs(once) / quartic + 1;
+        auto secondaryValue = MathD::FAbs(secondary) / quartic + 1;
+        auto thriceValue = MathD::FAbs(thrice) / quartic + 1;
 
-        double maxValue = constantValue < onceValue ? onceValue : constantValue;
+        auto maxValue = constantValue < onceValue ? onceValue : constantValue;
         maxValue = maxValue < secondaryValue ? secondaryValue : maxValue;
         maxValue = maxValue < thriceValue ? thriceValue : maxValue;
 
@@ -395,18 +377,16 @@ void Mathematics::PolynomialRootsTesting ::QuarticTest()
             ASSERT_TRUE(secondPolynomialRoots.GetCount() == 2 || secondPolynomialRoots.GetCount() == 4);
         }
 
-        for (int m = 0; m < secondPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < secondPolynomialRoots.GetCount(); ++m)
         {
-            double root = secondPolynomialRoots.GetRoot(m);
+            auto root = secondPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-1);
         }
 
-        for (auto iter = secondPolynomialRoots.GetBegin(),
-                  end = secondPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = secondPolynomialRoots.GetBegin(); iter != secondPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-1);
         }
@@ -416,29 +396,27 @@ void Mathematics::PolynomialRootsTesting ::QuarticTest()
             ASSERT_TRUE(secondPolynomialRoots.GetCount() == 2 || secondPolynomialRoots.GetCount() == 4);
         }
 
-        for (int m = 0; m < secondPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < secondPolynomialRoots.GetCount(); ++m)
         {
-            double root = secondPolynomialRoots.GetRoot(m);
+            auto root = secondPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-1);
         }
 
-        for (auto iter = secondPolynomialRoots.GetBegin(),
-                  end = secondPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = secondPolynomialRoots.GetBegin(); iter != secondPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-1);
         }
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::PolynomialTest()
+void Mathematics::PolynomialRootsTesting::PolynomialTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    uniform_int<> secondRandomDistribution(2, 8);
+    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
+    const uniform_int<> secondRandomDistribution(2, 8);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -449,40 +427,38 @@ void Mathematics::PolynomialRootsTesting ::PolynomialTest()
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
         vector<double> tuple;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
             tuple.push_back(firstRandomDistribution(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
 
-        [[maybe_unused]] auto result = firstPolynomialRoots.FindBisection(firstPolynomial, 20);
+        MAYBE_UNUSED const auto result = firstPolynomialRoots.FindBisection(firstPolynomial, 20);
 
-        for (int m = 0; m < firstPolynomialRoots.GetCount(); ++m)
+        for (auto m = 0; m < firstPolynomialRoots.GetCount(); ++m)
         {
-            double root = firstPolynomialRoots.GetRoot(m);
+            auto root = firstPolynomialRoots.GetRoot(m);
 
             ASSERT_APPROXIMATE(firstPolynomial(root), 0.0, 1e-1);
         }
 
-        for (auto iter = firstPolynomialRoots.GetBegin(),
-                  end = firstPolynomialRoots.GetEnd();
-             iter != end; ++iter)
+        for (auto iter = firstPolynomialRoots.GetBegin(); iter != firstPolynomialRoots.GetEnd(); ++iter)
         {
-            double root = *iter;
+            auto root = *iter;
 
             ASSERT_APPROXIMATE(firstPolynomial(root), 0.0, 1e-1);
         }
 
-        double bound = firstPolynomialRoots.GetBound(firstPolynomial);
+        auto bound = firstPolynomialRoots.GetBound(firstPolynomial);
 
         firstPolynomial.Compress(1e-6);
-        double maxValue = 0.0;
-        for (int m = 0; m < firstPolynomial.GetDegree(); ++m)
+        auto maxValue = 0.0;
+        for (auto m = 0; m < firstPolynomial.GetDegree(); ++m)
         {
-            double value = MathD::FAbs(firstPolynomial[m]) / firstPolynomial.GetEnd();
+            auto value = MathD::FAbs(firstPolynomial[m]) / firstPolynomial.GetEnd();
             if (maxValue < value)
             {
                 maxValue = value;
@@ -493,11 +469,11 @@ void Mathematics::PolynomialRootsTesting ::PolynomialTest()
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::AllRealPartsNegativeTest()
+void Mathematics::PolynomialRootsTesting::AllRealPartsNegativeTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    uniform_int<> secondRandomDistribution(2, 8);
+    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
+    const uniform_int<> secondRandomDistribution(2, 8);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -508,22 +484,22 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsNegativeTest()
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
         vector<double> tuple;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
-        for (int i = 0; i < size; ++i)
+        for (auto i = 0; i < size; ++i)
         {
             tuple.push_back(firstRandomDistribution(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
 
-        bool result = firstPolynomialRoots.AllRealPartsNegative(firstPolynomial);
+        const auto result = firstPolynomialRoots.AllRealPartsNegative(firstPolynomial);
 
         // 使多项式首一。
-        int degree = firstPolynomial.GetDegree();
+        auto degree = firstPolynomial.GetDegree();
         if (1e-6 < MathD::FAbs(firstPolynomial.GetEnd() - 1.0))
         {
-            for (int i = 0; i < degree; ++i)
+            for (auto i = 0; i < degree; ++i)
             {
                 firstPolynomial[i] /= firstPolynomial.GetEnd();
             }
@@ -531,7 +507,7 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsNegativeTest()
             firstPolynomial[degree] = 1.0;
         }
 
-        bool testResult = true;
+        auto testResult = true;
         while (1 <= degree)
         {
             if (firstPolynomial[degree - 1] <= 0.0)
@@ -547,31 +523,31 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsNegativeTest()
             }
 
             vector<double> tmpCoeff(degree);
-            tmpCoeff[0] = 2.0 * firstPolynomial[0] * firstPolynomial[degree - 1];
+            tmpCoeff.at(0) = 2.0 * firstPolynomial[0] * firstPolynomial[degree - 1];
 
-            for (int i = 1; i <= degree - 2; ++i)
+            for (auto i = 1; i <= degree - 2; ++i)
             {
-                tmpCoeff[i] = firstPolynomial[degree - 1] * firstPolynomial[i];
+                tmpCoeff.at(i) = firstPolynomial[degree - 1] * firstPolynomial[i];
                 if (((degree - i) % 2) == 0)
                 {
-                    tmpCoeff[i] -= firstPolynomial[i - 1];
+                    tmpCoeff.at(i) -= firstPolynomial[i - 1];
                 }
-                tmpCoeff[i] *= 2.0;
+                tmpCoeff.at(i) *= 2.0;
             }
-            auto temp = degree - 1;
-            tmpCoeff[temp] = 2.0 * firstPolynomial[temp] * firstPolynomial[temp];
+            const auto temp = degree - 1;
+            tmpCoeff.at(temp) = 2.0 * firstPolynomial[temp] * firstPolynomial[temp];
 
-            int nextDegree = 0;
+            auto nextDegree = 0;
             for (nextDegree = degree - 1; 0 <= nextDegree; --nextDegree)
             {
-                if (1e-6 < MathD::FAbs(tmpCoeff[nextDegree]))
+                if (1e-6 < MathD::FAbs(tmpCoeff.at(nextDegree)))
                 {
                     break;
                 }
             }
-            for (int i = 0; i <= nextDegree - 1; ++i)
+            for (auto i = 0; i <= nextDegree - 1; ++i)
             {
-                firstPolynomial[i] = tmpCoeff[i] / tmpCoeff[nextDegree];
+                firstPolynomial[i] = tmpCoeff.at(i) / tmpCoeff.at(nextDegree);
             }
 
             if (0 <= nextDegree)
@@ -590,11 +566,11 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsNegativeTest()
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::AllRealPartsPositiveTest()
+void Mathematics::PolynomialRootsTesting::AllRealPartsPositiveTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    uniform_int<> secondRandomDistribution(2, 8);
+    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
+    const uniform_int<> secondRandomDistribution(2, 8);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -605,22 +581,22 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsPositiveTest()
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
         vector<double> tuple;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
-        for (int i = 0; i < size; ++i)
+        for (auto i = 0; i < size; ++i)
         {
             tuple.push_back(firstRandomDistribution(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
 
-        bool result = firstPolynomialRoots.AllRealPartsPositive(firstPolynomial);
+        const auto result = firstPolynomialRoots.AllRealPartsPositive(firstPolynomial);
 
         // 使多项式首一。
-        int degree = firstPolynomial.GetDegree();
+        auto degree = firstPolynomial.GetDegree();
         if (1e-6 < MathD::FAbs(firstPolynomial.GetEnd() - 1.0))
         {
-            for (int i = 0; i < degree; ++i)
+            for (auto i = 0; i < degree; ++i)
             {
                 firstPolynomial[i] /= firstPolynomial.GetEnd();
             }
@@ -628,14 +604,14 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsPositiveTest()
             firstPolynomial[degree] = 1.0;
         }
 
-        int sign = -1;
-        for (int i = degree - 1; 0 <= i; --i)
+        auto sign = -1;
+        for (auto i = degree - 1; 0 <= i; --i)
         {
             firstPolynomial[i] *= sign;
             sign = -sign;
         }
 
-        bool testResult = true;
+        auto testResult = true;
         while (1 <= degree)
         {
             if (firstPolynomial[degree - 1] <= 0.0)
@@ -651,31 +627,31 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsPositiveTest()
             }
 
             vector<double> tmpCoeff(degree);
-            tmpCoeff[0] = 2.0 * firstPolynomial[0] * firstPolynomial[degree - 1];
+            tmpCoeff.at(0) = 2.0 * firstPolynomial[0] * firstPolynomial[degree - 1];
 
-            for (int i = 1; i <= degree - 2; ++i)
+            for (auto i = 1; i <= degree - 2; ++i)
             {
-                tmpCoeff[i] = firstPolynomial[degree - 1] * firstPolynomial[i];
+                tmpCoeff.at(i) = firstPolynomial[degree - 1] * firstPolynomial[i];
                 if (((degree - i) % 2) == 0)
                 {
-                    tmpCoeff[i] -= firstPolynomial[i - 1];
+                    tmpCoeff.at(i) -= firstPolynomial[i - 1];
                 }
-                tmpCoeff[i] *= 2.0;
+                tmpCoeff.at(i) *= 2.0;
             }
-            auto temp = degree - 1;
-            tmpCoeff[temp] = 2.0 * firstPolynomial[temp] * firstPolynomial[temp];
+            const auto temp = degree - 1;
+            tmpCoeff.at(temp) = 2.0 * firstPolynomial[temp] * firstPolynomial[temp];
 
-            int nextDegree = 0;
+            auto nextDegree = 0;
             for (nextDegree = degree - 1; 0 <= nextDegree; --nextDegree)
             {
-                if (1e-6 < MathD::FAbs(tmpCoeff[nextDegree]))
+                if (1e-6 < MathD::FAbs(tmpCoeff.at(nextDegree)))
                 {
                     break;
                 }
             }
-            for (int i = 0; i <= nextDegree - 1; ++i)
+            for (auto i = 0; i <= nextDegree - 1; ++i)
             {
-                firstPolynomial[i] = tmpCoeff[i] / tmpCoeff[nextDegree];
+                firstPolynomial[i] = tmpCoeff.at(i) / tmpCoeff.at(nextDegree);
             }
 
             if (0 <= nextDegree)
@@ -694,11 +670,11 @@ void Mathematics::PolynomialRootsTesting ::AllRealPartsPositiveTest()
     }
 }
 
-void Mathematics::PolynomialRootsTesting ::GetRootCountTest()
+void Mathematics::PolynomialRootsTesting::GetRootCountTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
-    uniform_int<> secondRandomDistribution(2, 8);
+    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
+    const uniform_int<> secondRandomDistribution(2, 8);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -709,18 +685,16 @@ void Mathematics::PolynomialRootsTesting ::GetRootCountTest()
         ASSERT_EQUAL(firstPolynomialRoots.GetCount(), 0);
 
         vector<double> tuple;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
             tuple.push_back(firstRandomDistribution(generator));
         }
 
         PolynomialD firstPolynomial(tuple);
 
-        [[maybe_unused]] auto value = firstPolynomialRoots.FindBisection(firstPolynomial, 20);
-        [[maybe_unused]] double bound = firstPolynomialRoots.GetBound(firstPolynomial);
-
-        //    ASSERT_EQUAL(firstPolynomialRoots.GetCount(), firstPolynomialRoots.GetRootCount(firstPolynomial, -bound, bound));
+        MAYBE_UNUSED const auto value = firstPolynomialRoots.FindBisection(firstPolynomial, 20);
+        MAYBE_UNUSED auto bound = firstPolynomialRoots.GetBound(firstPolynomial);
     }
 }

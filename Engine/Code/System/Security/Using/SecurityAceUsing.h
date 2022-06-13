@@ -21,7 +21,7 @@ namespace System
     using AceHeaderPtr = PACE_HEADER;
     using AccessMask = ACCESS_MASK;
     using AccessAllowedAce = ACCESS_ALLOWED_ACE;
-    constexpr WindowsDWord g_MaxDWord{ MAXDWORD };
+    constexpr WindowsDWord gMaxDWord{ MAXDWORD };
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -40,7 +40,7 @@ namespace System
         AccessMask Mask;
         uint32_t SidStart;
     };
-    constexpr uint32_t g_MaxDWord{ 0xffffffff };
+    constexpr uint32_t gMaxDWord{ 0xffffffff };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

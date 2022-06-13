@@ -1,34 +1,26 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 14:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 15:29)
 
 #include "TestObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLink.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26455)
+
 using std::string;
 
-CoreTools::TestObject ::TestObject()
+CoreTools::TestObject::TestObject(MAYBE_UNUSED DisableNotThrow disableNotThrow)
     : ParentType{ "TestObject" }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
-
-CoreTools::TestObject ::~TestObject()
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -42,6 +34,5 @@ CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(CoreTools, TestObject);
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::TestObject::CloneObject() const
 {
-    return nullptr;
+    return std::make_shared<ClassType>(*this);
 }
-#include STSTEM_WARNING_POP

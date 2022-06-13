@@ -69,7 +69,7 @@ bool System::CreateSystemProcess(const TChar* applicationName,
                         environment,
                         currentDirectory,
                         startupInfo,
-                        processInformation) != g_False)
+                        processInformation) != gFalse)
     {
         return true;
     }
@@ -156,7 +156,7 @@ bool System::SetProcessPriorityClass(WindowsHandle process, ProcessCreation prio
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetPriorityClass(process, EnumCastUnderlying(priorityClass)) != g_False)
+    if (::SetPriorityClass(process, EnumCastUnderlying(priorityClass)) != gFalse)
         return true;
     else
         return false;
@@ -204,7 +204,7 @@ bool System::CloseSystemProcess(WindowsHandle process) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(process) != g_False)
+    if (::CloseHandle(process) != gFalse)
         return true;
     else
         return false;

@@ -16,7 +16,7 @@ bool System::CreateSystemPipe(WindowsHandlePtr readPipe, WindowsHandlePtr writeP
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreatePipe(readPipe, writePipe, pipeAttributes, size) != g_False)
+    if (::CreatePipe(readPipe, writePipe, pipeAttributes, size) != gFalse)
         return true;
     else
         return false;
@@ -34,7 +34,7 @@ bool System::CloseSystemPipe(WindowsHandle pipeHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(pipeHandle) != g_False)
+    if (::CloseHandle(pipeHandle) != gFalse)
         return true;
     else
         return false;

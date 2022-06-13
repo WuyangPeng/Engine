@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 17:07)
 
 #include "NetworkSockStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -32,18 +35,32 @@ namespace Network
     using TestingType = SockStream;
 }
 
-void Network::NetworkSockStreamTesting ::MainTest()
+void Network::NetworkSockStreamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::StreamTest);
 }
 
-void Network::NetworkSockStreamTesting ::StreamTest()
+void Network::NetworkSockStreamTesting::StreamTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Network, ConnectStrategy::TCP, ClientStrategy::OnlySending,
-                                                       MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                       configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default, "127.0.0.1", 7543 };
+    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::Network,
+                                                       ConnectStrategy::TCP,
+                                                       ClientStrategy::OnlySending,
+                                                       MessageStrategy::Default,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       7543 };
 
-    //	SockStreamSharedPtr sockStream{ make_shared<TestingType>(clientConfigurationStrategy) };
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+    SockStreamSharedPtr sockStream{ make_shared<TestingType>(clientConfigurationStrategy) };
+
+#include STSTEM_WARNING_POP
 }

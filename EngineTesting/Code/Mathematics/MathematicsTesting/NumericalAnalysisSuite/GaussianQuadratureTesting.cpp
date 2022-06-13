@@ -1,74 +1,65 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒıÇæ²âÊÔ°æ±¾£º0.0.0.2 (2019/08/27 15:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒıÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/06/02 17:20)
 
 #include "GaussianQuadratureTesting.h"
-#include "Mathematics/NumericalAnalysis/GaussianQuadratureDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/NumericalAnalysis/GaussianQuadratureDetail.h"
 
 namespace Mathematics
 {
-	template class GaussianQuadrature<float,GaussianQuadratureTesting>;
-	template class GaussianQuadrature<double,GaussianQuadratureTesting>;	
+    template class GaussianQuadrature<float, GaussianQuadratureTesting>;
+    template class GaussianQuadrature<double, GaussianQuadratureTesting>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,GaussianQuadratureTesting) 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26482)
-#include SYSTEM_WARNING_DISABLE(26814)
-void Mathematics::GaussianQuadratureTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, GaussianQuadratureTesting)
+
+void Mathematics::GaussianQuadratureTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(ResultTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ResultTest);
 }
 
-double Mathematics::GaussianQuadratureTesting ::Solution(double input, const GaussianQuadratureTesting* userData) noexcept
+double Mathematics::GaussianQuadratureTesting::Solution(double input, const GaussianQuadratureTesting* userData) noexcept
 {
-	return input * userData->GetUserData() + 3;
+    if (userData != nullptr)
+        return input * userData->GetUserData() + 3;
+    else
+        return 0.0;
 }
 
-double Mathematics::GaussianQuadratureTesting
-	::GetUserData() const noexcept
+double Mathematics::GaussianQuadratureTesting::GetUserData() const noexcept
 {
-	return -5;
+    return -5;
 }
 
-void Mathematics::GaussianQuadratureTesting
-	::ResultTest() 
+void Mathematics::GaussianQuadratureTesting::ResultTest()
 {
-	const int degree = 5;
-	const double root[degree]{ -0.9061798459,-0.5384693101,0.0,+0.5384693101,+0.9061798459	};
-	const double coeff[degree] { 0.2369268850,0.4786286705,0.5688888889,0.4786286705, 0.2369268850 };
+    constexpr int degree = 5;
+    const std::array<double, degree> root{ -0.9061798459, -0.5384693101, 0.0, +0.5384693101, +0.9061798459 };
+    const std::array<double, degree> coeff{ 0.2369268850, 0.4786286705, 0.5688888889, 0.4786286705, 0.2369268850 };
 
-	double firstValue = 3.5;
-	double secondValue = 1.5;
-	
-	double radius = (0.5) * (secondValue - firstValue);
-	double center = (0.5) * (secondValue + firstValue);
+    constexpr double firstValue = 3.5;
+    constexpr double secondValue = 1.5;
 
-	double result = 0.0;
-	
-	for (int i = 0; i < degree; ++i)
-	{
-		result += coeff[i] * Solution(radius * root[i] + center, this);
-	}
-	
-	result *= radius;
+    constexpr double radius = (0.5) * (secondValue - firstValue);
+    constexpr double center = (0.5) * (secondValue + firstValue);
 
-	GaussianQuadrature<double, GaussianQuadratureTesting> gaussianQuadrature(firstValue, secondValue, Solution,this);
+    double result = 0.0;
 
-	ASSERT_APPROXIMATE(result, gaussianQuadrature.GetResult(), 1e-10);
+    for (auto i = 0; i < degree; ++i)
+    {
+        result += coeff.at(i) * Solution(radius * root.at(i) + center, this);
+    }
+
+    result *= radius;
+
+    const GaussianQuadrature<double, GaussianQuadratureTesting> gaussianQuadrature(firstValue, secondValue, Solution, this);
+
+    ASSERT_APPROXIMATE(result, gaussianQuadrature.GetResult(), 1e-10);
 }
-

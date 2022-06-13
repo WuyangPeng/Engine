@@ -46,7 +46,7 @@ bool System::SetThreadLocalStorageValue(WindowsDWord threadLocalStorageIndex, Wi
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TlsSetValue(threadLocalStorageIndex, threadLocalStorageValue) != g_False)
+    if (::TlsSetValue(threadLocalStorageIndex, threadLocalStorageValue) != gFalse)
         return true;
     else
         return false;
@@ -64,7 +64,7 @@ bool System::ThreadLocalStorageFree(WindowsDWord threadLocalStorageIndex) noexce
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TlsFree(threadLocalStorageIndex) != g_False)
+    if (::TlsFree(threadLocalStorageIndex) != gFalse)
         return true;
     else
         return false;

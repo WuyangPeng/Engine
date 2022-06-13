@@ -66,7 +66,7 @@ bool System::WinSocketConnectByName(WinSocket winSocket,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAConnectByName(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != g_False)
+    if (::WSAConnectByName(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout, nullptr) != gFalse)
         return true;
     else
         return false;

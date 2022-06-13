@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/04/27 15:53)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 18:44)
 
 #include "CreateEventTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -19,20 +19,20 @@
 
 System::CreateEventTesting::CreateEventTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      m_EventStandardAccessFlags{ MutexStandardAccess::Delete,
+      eventStandardAccessFlags{ MutexStandardAccess::Delete,
                                   MutexStandardAccess::ReadControl,
                                   MutexStandardAccess::WriteDac,
                                   MutexStandardAccess::WriteOwner,
                                   MutexStandardAccess::Synchronize },
-      m_EventSpecificAccessFlags{ EventSpecificAccess::Default,
+      eventSpecificAccessFlags{ EventSpecificAccess::Default,
                                   EventSpecificAccess::ModifyState,
                                   EventSpecificAccess::AllAccess },
-      m_CreateEventFlags{ CreateEventType::Default,
+      createEventFlags{ CreateEventType::Default,
                           CreateEventType::InitalSet,
                           CreateEventType::ManualReset,
                           CreateEventType::All },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ m_EventStandardAccessFlags.size(), m_EventSpecificAccessFlags.size(), m_CreateEventFlags.size() }) }
+      maxSize{ CoreTools::MaxElement<size_t>({ eventStandardAccessFlags.size(), eventSpecificAccessFlags.size(), createEventFlags.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -51,9 +51,9 @@ void System::CreateEventTesting::MainTest()
 
 bool System::CreateEventTesting::RandomShuffleFlags()
 {
-    shuffle(m_EventStandardAccessFlags.begin(), m_EventStandardAccessFlags.end(), randomEngine);
-    shuffle(m_EventSpecificAccessFlags.begin(), m_EventSpecificAccessFlags.end(), randomEngine);
-    shuffle(m_CreateEventFlags.begin(), m_CreateEventFlags.end(), randomEngine);
+    shuffle(eventStandardAccessFlags.begin(), eventStandardAccessFlags.end(), randomEngine);
+    shuffle(eventSpecificAccessFlags.begin(), eventSpecificAccessFlags.end(), randomEngine);
+    shuffle(createEventFlags.begin(), createEventFlags.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateEventTest);
 
@@ -64,9 +64,9 @@ void System::CreateEventTesting::CreateEventTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto eventStandardAccess = m_EventStandardAccessFlags.at(index % m_EventStandardAccessFlags.size());
-        auto eventSpecificAccess = m_EventSpecificAccessFlags.at(index % m_EventSpecificAccessFlags.size());
-        auto createEvent = m_CreateEventFlags.at(index % m_CreateEventFlags.size());
+        auto eventStandardAccess = eventStandardAccessFlags.at(index % eventStandardAccessFlags.size());
+        auto eventSpecificAccess = eventSpecificAccessFlags.at(index % eventSpecificAccessFlags.size());
+        auto createEvent = createEventFlags.at(index % createEventFlags.size());
 
         auto eventHandle = CreateSystemEvent(nullptr, nullptr, createEvent, eventStandardAccess, eventSpecificAccess);
         ASSERT_TRUE(IsSystemEventValid(eventHandle));

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.1 (2021/03/16 19:46)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 1:07)
 
 #include "HResultTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -42,6 +42,6 @@ void System::HResultTesting::HResultTest()
     ASSERT_TRUE(IsFailed(-1));
     ASSERT_FALSE(IsSucceeded(-1));
 
-    ASSERT_EQUAL(g_False, 0);
-    ASSERT_EQUAL(g_True, 1);
+    ASSERT_EQUAL(gFalse, 0);
+    ASSERT_EQUAL(gTrue, 1);
 }

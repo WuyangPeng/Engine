@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/21 14:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 21:26)
 
 #include "BandedMatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,9 +19,7 @@
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 #ifndef BUILDING_MATHEMATICS_STATIC
 
 namespace Mathematics
@@ -31,22 +32,22 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BandedMatrixTesting)
 
-void Mathematics::BandedMatrixTesting ::MainTest()
+void Mathematics::BandedMatrixTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
 }
 
-void Mathematics::BandedMatrixTesting ::ConstructionTest()
+void Mathematics::BandedMatrixTesting::ConstructionTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstIntegerRandomDistribution{ 2, 20 };
+    const uniform_int<> firstIntegerRandomDistribution{ 2, 20 };
 
-    int size = firstIntegerRandomDistribution(generator);
+    const int size = firstIntegerRandomDistribution(generator);
 
-    uniform_int<> secondIntegerRandomDistribution(1, size);
+    const uniform_int<> secondIntegerRandomDistribution(1, size);
 
-    int lowerBoundNumber = secondIntegerRandomDistribution(generator);
-    int upperBoundNumber = secondIntegerRandomDistribution(generator);
+    const int lowerBoundNumber = secondIntegerRandomDistribution(generator);
+    const int upperBoundNumber = secondIntegerRandomDistribution(generator);
 
     BandedMatrixF firstBandedMatrix(size, lowerBoundNumber, upperBoundNumber);
 
@@ -64,7 +65,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
 
     for (int i = 0; i < firstBandedMatrix.GetSize(); ++i)
     {
-        ASSERT_APPROXIMATE(firstBandedMatrix(i, i), firstPtr[i], 1e-8f);
+        ASSERT_APPROXIMATE(firstBandedMatrix(i, i), firstPtr.at(i), 1e-8f);
     }
 
     // 下三角
@@ -72,7 +73,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
         {
-            int band = column - row;
+            const int band = column - row;
             if (band < 0 && -band - 1 < firstBandedMatrix.GetLowerBandsNumber())
             {
                 firstBandedMatrix(row, column) = row * 1.0f - column * 0.1f;
@@ -88,7 +89,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
 
         for (int j = 0; j < firstBandedMatrix.GetLowerBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(firstBandedMatrix(i + 1 + j, j), secondPtr[j], 1e-8f);
+            ASSERT_APPROXIMATE(firstBandedMatrix(i + 1 + j, j), secondPtr.at(j), 1e-8f);
         }
     }
 
@@ -97,7 +98,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
         {
-            int band = column - row;
+            const int band = column - row;
             if (0 < band && band - 1 < firstBandedMatrix.GetUpperBandsNumber())
             {
                 firstBandedMatrix(row, column) = row * 2.0f - column * 0.3f;
@@ -113,7 +114,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
 
         for (int j = 0; j < firstBandedMatrix.GetUpperBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(firstBandedMatrix(j, i + 1 + j), secondPtr[j], 1e-8f);
+            ASSERT_APPROXIMATE(firstBandedMatrix(j, i + 1 + j), secondPtr.at(j), 1e-8f);
         }
     }
 
@@ -122,7 +123,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < firstBandedMatrix.GetSize(); ++column)
         {
-            int band = column - row;
+            const int band = column - row;
 
             if (0 < band && firstBandedMatrix.GetUpperBandsNumber() <= band - 1)
             {
@@ -154,7 +155,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
 
     for (int i = 0; i < secondBandedMatrix.GetSize(); ++i)
     {
-        ASSERT_APPROXIMATE(secondBandedMatrix(i, i), thirdPtr[i], 1e-8f);
+        ASSERT_APPROXIMATE(secondBandedMatrix(i, i), thirdPtr.at(i), 1e-8f);
     }
 
     // 下三角
@@ -167,7 +168,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
 
         for (int j = 0; j < secondBandedMatrix.GetLowerBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(secondBandedMatrix(i + 1 + j, j), fourthPtr[j], 1e-8f);
+            ASSERT_APPROXIMATE(secondBandedMatrix(i + 1 + j, j), fourthPtr.at(j), 1e-8f);
         }
     }
 
@@ -181,7 +182,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
 
         for (int j = 0; j < secondBandedMatrix.GetUpperBandMax(i); ++j)
         {
-            ASSERT_APPROXIMATE(secondBandedMatrix(j, i + 1 + j), fifthPtr[j], 1e-8f);
+            ASSERT_APPROXIMATE(secondBandedMatrix(j, i + 1 + j), fifthPtr.at(j), 1e-8f);
         }
     }
 
@@ -190,7 +191,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < secondBandedMatrix.GetSize(); ++column)
         {
-            int band = column - row;
+            const int band = column - row;
 
             if (0 < band && secondBandedMatrix.GetUpperBandsNumber() <= band - 1)
             {
@@ -224,7 +225,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < thirdBandedMatrix.GetSize(); ++column)
         {
-            int band = column - row;
+            const int band = column - row;
             if (band < 0 && -band - 1 < thirdBandedMatrix.GetLowerBandsNumber())
             {
                 thirdBandedMatrix(row, column) = row * 1.0f - column * 0.1f;
@@ -236,7 +237,7 @@ void Mathematics::BandedMatrixTesting ::ConstructionTest()
     {
         for (int column = 0; column < thirdBandedMatrix.GetSize(); ++column)
         {
-            int band = column - row;
+            const int band = column - row;
             if (0 < band && band - 1 < thirdBandedMatrix.GetUpperBandsNumber())
             {
                 thirdBandedMatrix(row, column) = row * 2.0f - column * 0.2f;

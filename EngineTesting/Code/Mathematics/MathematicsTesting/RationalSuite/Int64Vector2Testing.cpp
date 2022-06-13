@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/23 13:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 13:18)
 
 #include "Int64Vector2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,15 +17,10 @@
 
 using std::default_random_engine;
 using std::uniform_int;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Int64Vector2Testing)
 
-void Mathematics::Int64Vector2Testing ::MainTest()
+void Mathematics::Int64Vector2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
@@ -30,10 +28,10 @@ void Mathematics::Int64Vector2Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
-void Mathematics::Int64Vector2Testing ::ConstructionTest()
+void Mathematics::Int64Vector2Testing::ConstructionTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 firstVector = Int64Vector2::CreateDefault();
 
@@ -85,21 +83,21 @@ void Mathematics::Int64Vector2Testing ::ConstructionTest()
     ASSERT_EQUAL(sixthVector.GetY(), fourthVector[0]);
 }
 
-void Mathematics::Int64Vector2Testing ::CalculateTest()
+void Mathematics::Int64Vector2Testing::CalculateTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator));
     Int64Vector2 secondVector(firstRandomDistribution(generator),
                               firstRandomDistribution(generator));
 
-    int64_t squaredLength = firstVector.GetX() * firstVector.GetX() + firstVector.GetY() * firstVector.GetY();
+    const auto squaredLength = firstVector.GetX() * firstVector.GetX() + firstVector.GetY() * firstVector.GetY();
 
     ASSERT_EQUAL(squaredLength, firstVector.SquaredLength());
 
-    int64_t dot = firstVector.GetX() * secondVector.GetX() + firstVector.GetY() * secondVector.GetY();
+    const auto dot = firstVector.GetX() * secondVector.GetX() + firstVector.GetY() * secondVector.GetY();
 
     ASSERT_EQUAL(dot, firstVector.Dot(secondVector));
 
@@ -108,16 +106,15 @@ void Mathematics::Int64Vector2Testing ::CalculateTest()
     ASSERT_EQUAL(thirdVector.GetX(), firstVector.GetY());
     ASSERT_EQUAL(thirdVector.GetY(), -firstVector.GetX());
 
-    int64_t dotPerp = firstVector.GetX() * secondVector.GetY() -
-                      firstVector.GetY() * secondVector.GetX();
+    const auto dotPerp = firstVector.GetX() * secondVector.GetY() - firstVector.GetY() * secondVector.GetX();
 
     ASSERT_EQUAL(dotPerp, firstVector.DotPerp(secondVector));
 }
 
-void Mathematics::Int64Vector2Testing ::OperatorTest()
+void Mathematics::Int64Vector2Testing::OperatorTest()
 {
     default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 firstVector(firstRandomDistribution(generator),
                              firstRandomDistribution(generator));
@@ -169,10 +166,10 @@ void Mathematics::Int64Vector2Testing ::OperatorTest()
     ASSERT_EQUAL(-fourthVector.GetY(), firstVector.GetY());
 }
 
-void Mathematics::Int64Vector2Testing ::CompareTest()
+void Mathematics::Int64Vector2Testing::CompareTest()
 {
-    default_random_engine generator{};
-    uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
+    const default_random_engine generator{};
+    const uniform_int<int64_t> firstRandomDistribution{ INT64_MIN, INT64_MAX };
 
     Int64Vector2 firstVector(0, 5);
     Int64Vector2 secondVector(1, 3);

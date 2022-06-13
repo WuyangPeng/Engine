@@ -22,7 +22,7 @@ using System::WindowsVoidPtr;
 
 int SYSTEM_WINAPI DllMain(MAYBE_UNUSED WindowsHInstance instance, MAYBE_UNUSED WindowsDWord reason, MAYBE_UNUSED WindowsVoidPtr reserved) noexcept
 {
-    return System::g_True;
+    return System::gTrue;
 }
 
 #else  // defined(BUILDING_SYSTEM_STATIC) || !defined(SYSTEM_PLATFORM_WIN32)

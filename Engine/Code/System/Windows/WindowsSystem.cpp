@@ -44,7 +44,7 @@ bool System::GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetNumaProcessorNode(processor, nodeNumber) != g_False)
+    if (::GetNumaProcessorNode(processor, nodeNumber) != gFalse)
         return true;
     else
         return false;
@@ -67,7 +67,7 @@ bool System::SetSystemCurrentDirectory(const TChar* pathName) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetCurrentDirectory(pathName) != g_False)
+    if (::SetCurrentDirectory(pathName) != gFalse)
         return true;
     else
         return false;
@@ -85,7 +85,7 @@ bool System::GetSystemUserName(TChar* buffer, WindowsDWord* bufferCount) noexcep
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetUserName(buffer, bufferCount) != g_False)
+    if (::GetUserName(buffer, bufferCount) != gFalse)
         return true;
     else
         return false;
@@ -117,15 +117,15 @@ System::WindowsDWord System::GetSystemCurrentDirectory(WindowsDWord bufferLength
 System::WindowsBool System::BoolConversion(bool value) noexcept
 {
     if (value)
-        return g_True;
+        return gTrue;
     else
-        return g_False;
+        return gFalse;
 }
 
 void System::BoolConversion(WindowsBool value, bool* result) noexcept
 {
     if (result != nullptr)
     {
-        *result = ((value != g_False) ? true : false);
+        *result = ((value != gFalse) ? true : false);
     }
 }

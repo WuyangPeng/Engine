@@ -1,14 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/22 13:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 23:08)
 
 #include "Vector4DToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Algebra/Vector4Detail.h"
+#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 
 #include <random>
 
@@ -27,11 +30,8 @@ namespace Mathematics
 #endif  // BUILDING_MATHEMATICS_STATIC
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector4ToolsTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::Vector4ToolsTesting ::MainTest()
+
+void Mathematics::Vector4ToolsTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DistanceTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ProductTest);
@@ -40,87 +40,87 @@ void Mathematics::Vector4ToolsTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(OtherCalculateTest);
 }
 
-void Mathematics::Vector4ToolsTesting ::DistanceTest()
+void Mathematics::Vector4ToolsTesting::DistanceTest()
 {
-    Vector4F firstVector(3.0f, 4.0f, 5.0f, 3.0f);
+    const Vector4F firstVector(3.0f, 4.0f, 5.0f, 3.0f);
 
     ASSERT_APPROXIMATE(Vector4ToolsF::GetLength(firstVector), MathF::Sqrt(59.0f), 1e-8f);
     ASSERT_APPROXIMATE(Vector4ToolsF::GetLengthSquared(firstVector), 59.0f, 1e-8f);
 
-    Vector4F secondVector(6.0f, 8.0f, 5.0f, 3.0f);
+    const Vector4F secondVector(6.0f, 8.0f, 5.0f, 3.0f);
 
     ASSERT_APPROXIMATE(Vector4ToolsF::Distance(firstVector, secondVector), 5.0f, 1e-8f);
     ASSERT_APPROXIMATE(Vector4ToolsF::DistanceSquared(firstVector, secondVector), 25.0f, 1e-8f);
 }
 
-void Mathematics::Vector4ToolsTesting ::ProductTest()
+void Mathematics::Vector4ToolsTesting::ProductTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         Vector4D firstVector(randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator),
-                                   randomDistribution(generator));
+                             randomDistribution(generator),
+                             randomDistribution(generator),
+                             randomDistribution(generator));
 
         Vector4D secondVector(randomDistribution(generator),
-                                    randomDistribution(generator),
-                                    randomDistribution(generator),
-                                    randomDistribution(generator));
+                              randomDistribution(generator),
+                              randomDistribution(generator),
+                              randomDistribution(generator));
 
-        double dotProduct = firstVector[0] * secondVector[0] +
-                            firstVector[1] * secondVector[1] +
-                            firstVector[2] * secondVector[2] +
-                            firstVector[3] * secondVector[3];
+        const double dotProduct = firstVector[0] * secondVector[0] +
+                                  firstVector[1] * secondVector[1] +
+                                  firstVector[2] * secondVector[2] +
+                                  firstVector[3] * secondVector[3];
 
         ASSERT_APPROXIMATE(Vector4ToolsD::DotProduct(firstVector, secondVector), dotProduct, 1e-10);
     }
 }
 
-void Mathematics::Vector4ToolsTesting ::ProjectionTest()
+void Mathematics::Vector4ToolsTesting::ProjectionTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector4D firstVector(randomDistribution(generator),
+        const Vector4D firstVector(randomDistribution(generator),
                                    randomDistribution(generator),
                                    randomDistribution(generator),
                                    randomDistribution(generator));
 
-        Vector4D secondVector(randomDistribution(generator),
+        const Vector4D secondVector(randomDistribution(generator),
                                     randomDistribution(generator),
                                     randomDistribution(generator),
                                     randomDistribution(generator));
 
-        double moduleSquare = Vector4ToolsD::GetLengthSquared(secondVector);
-        Vector4D parallelVector = secondVector * (Vector4ToolsD::DotProduct(firstVector, secondVector) / moduleSquare);
+        const double moduleSquare = Vector4ToolsD::GetLengthSquared(secondVector);
+        const Vector4D parallelVector = secondVector * (Vector4ToolsD::DotProduct(firstVector, secondVector) / moduleSquare);
 
         ASSERT_TRUE(Vector4ToolsD::Approximate(parallelVector, Vector4ToolsD::ParallelVectorLhsToRhs(firstVector, secondVector)));
 
-        Vector4D apeakVector = firstVector - parallelVector;
+        const Vector4D apeakVector = firstVector - parallelVector;
 
         ASSERT_TRUE(Vector4ToolsD::Approximate(apeakVector, Vector4ToolsD::ApeakVectorLhsToRhs(firstVector, secondVector)));
 
-        double angle = MathD::ACos(Vector4ToolsD::DotProduct(firstVector, secondVector) / (Vector4ToolsD::GetLength(firstVector) * Vector4ToolsD::GetLength(secondVector)));
+        const double angle = MathD::ACos(Vector4ToolsD::DotProduct(firstVector, secondVector) / (Vector4ToolsD::GetLength(firstVector) * Vector4ToolsD::GetLength(secondVector)));
 
         ASSERT_APPROXIMATE(angle, Vector4ToolsD::GetVectorIncludedAngle(firstVector, secondVector), 1e-10);
     }
 }
 
-void Mathematics::Vector4ToolsTesting ::CompareTest()
+void Mathematics::Vector4ToolsTesting::CompareTest()
 {
-    Vector4F firstVector(6.0f, 8.0f, 9.0f, 3.0f);
-    Vector4F secondVector(7.0f, 5.0f, 19.0f, 32.0f);
+    const Vector4F firstVector(6.0f, 8.0f, 9.0f, 3.0f);
+    const Vector4F secondVector(7.0f, 5.0f, 19.0f, 32.0f);
 
     ASSERT_TRUE(Vector4ToolsF::Approximate(firstVector, firstVector));
     ASSERT_TRUE(Vector4ToolsF::Approximate(secondVector, secondVector));
@@ -139,11 +139,11 @@ void Mathematics::Vector4ToolsTesting ::CompareTest()
     GetStream() << secondVector << '\n';
 }
 
-void Mathematics::Vector4ToolsTesting ::OtherCalculateTest()
+void Mathematics::Vector4ToolsTesting::OtherCalculateTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     vector<Vector4D> vectors;
 
@@ -151,7 +151,7 @@ void Mathematics::Vector4ToolsTesting ::OtherCalculateTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector4D eachVector(randomDistribution(generator),
+        const Vector4D eachVector(randomDistribution(generator),
                                   randomDistribution(generator),
                                   randomDistribution(generator),
                                   randomDistribution(generator));
@@ -159,9 +159,9 @@ void Mathematics::Vector4ToolsTesting ::OtherCalculateTest()
         vectors.push_back(eachVector);
     }
 
-    auto aabb = Vector4ToolsD::ComputeExtremes(vectors);
-    Vector4D minVector = aabb.GetMinPoint();
-    Vector4D maxVector = aabb.GetMaxPoint();
+    const auto aabb = Vector4ToolsD::ComputeExtremes(vectors);
+    const Vector4D minVector = aabb.GetMinPoint();
+    const Vector4D maxVector = aabb.GetMaxPoint();
 
     for (const auto& eachVector : vectors)
     {

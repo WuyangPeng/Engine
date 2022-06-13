@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.6 (2021/07/08 22:42)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 16:19)
 
 #include "ExitTesting.h"
 #include "System/Windows/WindowsSystem.h"
@@ -37,6 +37,8 @@ void System::ExitTesting::MainTest()
 void System::ExitTesting::ExitTest() noexcept
 {
 #ifdef SYSTEM_TEST_EXIT
+
     Exit();
+
 #endif  // SYSTEM_TEST_EXIT
 }

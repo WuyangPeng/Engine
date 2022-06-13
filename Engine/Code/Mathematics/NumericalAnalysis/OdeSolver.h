@@ -37,9 +37,9 @@ namespace Mathematics
         // 该系统是dx/dt = F(t,x)。
         // x的维度传递给OdeSolver的构造函数，要和x和F(t,x) 大小一致。
         // 返回值F(t,x)
-        using Function = const Container (*)(Real,  // t
-                                             const Container&,  // x
-                                             const UserDataType*);  // 用户定义数据
+        using Function = Container (*)(Real,  // t
+                                       const Container&,  // x
+                                       const UserDataType*);  // 用户定义数据
 
     public:
         OdeSolver(int dimension, Real step, Function function, const UserDataType* userData);

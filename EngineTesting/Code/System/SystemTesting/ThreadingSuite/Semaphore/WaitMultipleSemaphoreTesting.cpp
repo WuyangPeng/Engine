@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/04/27 14:53)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 18:54)
 
 #include "WaitMultipleSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -42,7 +42,7 @@ void System::WaitMultipleSemaphoreTesting::ThreadTest()
     constexpr WindowsLong maxSemphoreCount{ 5 };
     constexpr auto threadCount = 12;
     constexpr auto semaphoreSize = 5;
-    vector<WindowsHandle> semaphoreHandle;
+    vector<WindowsHandle> semaphoreHandle{};
 
     for (auto i = 0; i < semaphoreSize; ++i)
     {
@@ -52,7 +52,7 @@ void System::WaitMultipleSemaphoreTesting::ThreadTest()
         semaphoreHandle.emplace_back(handle);
     }
 
-    boost::thread_group threadGroup;
+    boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
         threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest0, this, semaphoreHandle));

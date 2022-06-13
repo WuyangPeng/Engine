@@ -1,50 +1,36 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 15:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 18:17)
 
 #include "LinearSystemInverseTesting.h"
-#include "Mathematics/Algebra/VariableLengthVectorDetail.h" 
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 
-#include <random> 
+#include <random>
 
-using std::vector;
+using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
+using std::vector;
 
- #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, LinearSystemInverseTesting)
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, LinearSystemInverseTesting) 
-
-void Mathematics::LinearSystemInverseTesting
-	::MainTest()
+void Mathematics::LinearSystemInverseTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(InverseTest);	
-	ASSERT_NOT_THROW_EXCEPTION_0(SolveTest);
-}
-  
-void Mathematics::LinearSystemInverseTesting
-	::InverseTest()
-{
-	 
+    ASSERT_NOT_THROW_EXCEPTION_0(InverseTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SolveTest);
 }
 
-void Mathematics::LinearSystemInverseTesting
-	::SolveTest()
+void Mathematics::LinearSystemInverseTesting::InverseTest() noexcept
 {
-	 
 }
 
+void Mathematics::LinearSystemInverseTesting::SolveTest() noexcept
+{
+}

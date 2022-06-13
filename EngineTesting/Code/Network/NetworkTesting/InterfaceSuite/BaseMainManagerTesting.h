@@ -1,58 +1,63 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 11:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 13:45)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BASE_MAIN_MANAGER_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BASE_MAIN_MANAGER_TESTING_H
 
 #include "Network/Interface/NetworkInternalFwd.h"
-#include "Network/NetworkTesting/InterfaceSuite/SingletonTesting.h" 
+#include "Network/NetworkTesting/InterfaceSuite/SingletonTesting.h"
 
 namespace Network
 {
-	class BaseMainManagerTesting : public SingletonTesting
-	{
-	public:
-            using ClassType = BaseMainManagerTesting;
-            using ParentType = SingletonTesting;
+    class BaseMainManagerTesting : public SingletonTesting
+    {
+    public:
+        using ClassType = BaseMainManagerTesting;
+        using ParentType = SingletonTesting;
 
-        public:
-            explicit BaseMainManagerTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit BaseMainManagerTesting(const OStreamShared& stream);
 
-	private:
-		void MainTest();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void ACETest();
-		void BoostTest();
-		void ThreadsBoostTest();
-		void MultiContextBoostTest();
-		void NetworkTest();
-		void NullTest();
+        using TestFunction = void (ClassType::*)();
 
-		void ACERunTest();
-		void ACEGetIOContextExceptionTest();
-		void ACEStopContextExceptionTest();
-		void ACEIsContextStopExceptionTest();
-		void ACERestartContextExceptionTest();
+    private:
+        void MainTest();
 
-		void NetworkRunTest();
-		void NetworkGetIOContextExceptionTest();
-		void NetworkStopContextExceptionTest();
-		void NetworkIsContextStopExceptionTest();
-		void NetworkRestartContextExceptionTest();
+        void ACETest();
+        void BoostTest();
+        void ThreadsBoostTest();
+        void MultiContextBoostTest();
+        void NetworkTest();
+        void NullTest();
 
-		void NullRunTest();
-		void NullGetIOContextExceptionTest();
-		void NullStopContextExceptionTest();
-		void NullIsContextStopExceptionTest();
-		void NullRestartContextExceptionTest();
+        void ACERunTest();
+        void ACEGetIOContextExceptionTest();
+        void ACEStopContextExceptionTest();
+        void ACEIsContextStopExceptionTest();
+        void ACERestartContextExceptionTest();
 
-		void DoRunUnitTest() override;
-	};
+        void NetworkRunTest();
+        void NetworkGetIOContextExceptionTest();
+        void NetworkStopContextExceptionTest();
+        void NetworkIsContextStopExceptionTest();
+        void NetworkRestartContextExceptionTest();
+
+        void NullRunTest();
+        void NullGetIOContextExceptionTest();
+        void NullStopContextExceptionTest();
+        void NullIsContextStopExceptionTest();
+        void NullRestartContextExceptionTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BASE_MAIN_MANAGER_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BASE_MAIN_MANAGER_TESTING_H

@@ -1,11 +1,15 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 13:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/23 16:20)
 
 #include "MessageContainerGroupTesting.h"
 #include "Flags/IntegerMessageType.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -15,13 +19,9 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
-
 using std::make_shared;
 using std::string;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MessageContainerGroupTesting)
 
 namespace Network
@@ -30,13 +30,13 @@ namespace Network
     using TestingTypeSharedPtr = std::shared_ptr<TestingType>;
 }
 
-void Network::MessageContainerGroupTesting ::MainTest()
+void Network::MessageContainerGroupTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamingTest);
 }
 
-void Network::MessageContainerGroupTesting ::BaseTest()
+void Network::MessageContainerGroupTesting::BaseTest()
 {
     TestingType::StructureType group{ { 100, 10, 10000, 5, 100 }, { 101, 11, 10001, 6, 101 }, { 102, 12, 10002, 7, 102 }, { 103, 13, 10003, 8, 103 } };
     TestingType messageContainer{ group };
@@ -48,26 +48,31 @@ void Network::MessageContainerGroupTesting ::BaseTest()
     {
         for (auto i = 0; i < value.GetSize(); ++i)
         {
-            ASSERT_EQUAL(group[index][i], value.GetValue(System::UnderlyingCastEnum<IntegerMessageField>(i)));
+            ASSERT_EQUAL(group.at(index).at(i), value.GetValue(System::UnderlyingCastEnum<IntegerMessageField>(i)));
         }
 
         ++index;
     }
 }
 
-void Network::MessageContainerGroupTesting ::StreamingTest()
+void Network::MessageContainerGroupTesting::StreamingTest()
 {
     TestingType::StructureType group{ { 100, 10, 10000, 5, 100 }, { 101, 11, 10001, 6, 101 }, { 102, 12, 10002, 7, 102 }, { 103, 13, 10003, 8, 103 } };
     TestingType messageContainer{ group };
 
-    ASSERT_EQUAL(messageContainer.GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(group[0]) * boost::numeric_cast<int>(group.size()) + CORE_TOOLS_STREAM_SIZE(int32_t{}));
+    ASSERT_EQUAL(messageContainer.GetStreamingSize(), CORE_TOOLS_STREAM_SIZE(group.at(0)) * boost::numeric_cast<int>(group.size()) + CORE_TOOLS_STREAM_SIZE(int32_t{}));
 
-    MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+    auto buffer = make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian);
+    auto messageTarget = make_shared<MessageTarget>(buffer);
 
     messageContainer.Save(*messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    auto messageSource = make_shared<MessageSource>(buffer);
+
+#include STSTEM_WARNING_POP
 
     TestingType resultMessageContainer{};
 

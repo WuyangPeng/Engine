@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 13:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/01 14:37)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_BISECT3_STORAGE_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_BISECT3_STORAGE_TESTING_H
@@ -11,22 +14,33 @@
 
 namespace Mathematics
 {
-	class Bisect3StorageTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Bisect3StorageTesting); 
+    class Bisect3StorageTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Bisect3StorageTesting);
 
-	private:
-		void MainTest();
-		void TestValuesTest();
-        void SetStorageValueTest();
-	
-		void DoRunUnitTest() override;
-        
-        static double FirstEquation(double x,double y,double z);
-        static double SecondEquation(double x,double y,double z);
-		static double ThirdEquation(double x,double y,double z);
-	};
+    private:
+        void MainTest();
+        void TestValuesTest() noexcept;
+        void SetStorageValueTest() noexcept;
+
+        void DoRunUnitTest() override;
+
+        NODISCARD constexpr static double FirstEquation(double x, double y, double z)
+        {
+            return 1.0 * x + 1.0 * y - 2.0 * z + 1.0;
+        }
+
+        NODISCARD constexpr static double SecondEquation(double x, double y, double z)
+        {
+            return 2.0 * x + 3.0 * y - 1.0 * z - 1.0;
+        }
+
+        NODISCARD constexpr static double ThirdEquation(double x, double y, double z)
+        {
+            return 3.0 * x + 1.0 * y - 2.0 * z - 1.0;
+        }
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_BISECT3_STORAGE_TESTING_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_BISECT3_STORAGE_TESTING_H

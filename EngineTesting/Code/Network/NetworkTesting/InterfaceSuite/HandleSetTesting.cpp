@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 13:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 14:23)
 
 #include "HandleSetTesting.h"
 #include "SingletonTestingDetail.h"
@@ -12,21 +15,21 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, HandleSet)
 
-void Network::HandleSetTesting ::MainTest()
+void Network::HandleSetTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ACETest);
-    //	ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::BoostTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::BoostTest);
     ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::NetworkTest);
     ASSERT_NOT_THROW_EXCEPTION_2(NullSingletonTest<ClassType>, this, &ClassType::NullTest);
 }
 
-void Network::HandleSetTesting ::ACETest()
+void Network::HandleSetTesting::ACETest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ACEConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ACEHandleTest);
 }
 
-void Network::HandleSetTesting ::BoostTest()
+void Network::HandleSetTesting::BoostTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BoostConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BoostHandleTest);
@@ -34,136 +37,136 @@ void Network::HandleSetTesting ::BoostTest()
     ASSERT_THROW_EXCEPTION_0(BoostGetACEHandleSetExceptionTest);
 }
 
-void Network::HandleSetTesting ::NetworkTest()
+void Network::HandleSetTesting::NetworkTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NetworkConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NetworkHandleTest);
-    //ASSERT_THROW_EXCEPTION_0(NetworkGetFdSetExceptionTest);
-   // ASSERT_THROW_EXCEPTION_0(NetworkGetACEHandleSetExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(NetworkGetFdSetExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(NetworkGetACEHandleSetExceptionTest);
 }
 
-void Network::HandleSetTesting ::NullTest()
+void Network::HandleSetTesting::NullTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NullConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NullHandleTest);
-   // ASSERT_THROW_EXCEPTION_0(NullGetFdSetExceptionTest);
- //   ASSERT_THROW_EXCEPTION_0(NullGetACEHandleSetExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(NullGetFdSetExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(NullGetACEHandleSetExceptionTest);
 }
 
-void Network::HandleSetTesting ::ACEConstructionTest()
+void Network::HandleSetTesting::ACEConstructionTest()
 {
     TestingType handleSet{ GetACEServerConfigurationStrategy() };
 }
 
-void Network::HandleSetTesting ::BoostConstructionTest()
+void Network::HandleSetTesting::BoostConstructionTest()
 {
     TestingType handleSet{ GetBoostServerConfigurationStrategy() };
 }
 
-void Network::HandleSetTesting ::NetworkConstructionTest()
+void Network::HandleSetTesting::NetworkConstructionTest()
 {
     TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
 }
 
-void Network::HandleSetTesting ::NullConstructionTest()
+void Network::HandleSetTesting::NullConstructionTest()
 {
     TestingType handleSet{ GetNullServerConfigurationStrategy() };
 }
 
-void Network::HandleSetTesting ::ACEHandleTest() noexcept
+void Network::HandleSetTesting::ACEHandleTest()
 {
-    // 	TestingType handleSet{ GetACEServerConfigurationStrategy() };
-    //
-    // 	handleSet.SetBit(nullptr);
-    // 	handleSet.GetMaxSet();
-    // 	handleSet.GetFdSet();
-    // 	handleSet.Sync(nullptr);
-    // 	handleSet.IsSet(nullptr);
-    // 	handleSet.ClearBit(nullptr);
-    // 	handleSet.GetACEHandleSet();
-    // 	handleSet.IsFdSetFull();
-    // 	handleSet.IsFdSetCount();
-    // 	handleSet.IsFdSetCountIsOne();
-    // 	handleSet.Select(0);
+    TestingType handleSet{ GetACEServerConfigurationStrategy() };
+
+    handleSet.SetBit(nullptr);
+    MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
+    MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
+    handleSet.Sync(nullptr);
+    MAYBE_UNUSED const auto isSet = handleSet.IsSet(nullptr);
+    handleSet.ClearBit(nullptr);
+    MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
+    MAYBE_UNUSED const auto isFdSetFull = handleSet.IsFdSetFull();
+    MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
+    MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
+    MAYBE_UNUSED const auto select = handleSet.Select(0);
 }
 
-void Network::HandleSetTesting ::BoostHandleTest() noexcept
+void Network::HandleSetTesting::BoostHandleTest()
 {
-    // 	TestingType handleSet{ GetBoostServerConfigurationStrategy() };
-    //
-    // 	handleSet.SetBit(nullptr);
-    // 	handleSet.GetMaxSet();
-    // 	handleSet.Sync(nullptr);
-    // 	handleSet.IsSet(nullptr);
-    // 	handleSet.ClearBit(nullptr);
-    // 	handleSet.IsFdSetFull();
-    // 	handleSet.IsFdSetCount();
-    // 	handleSet.IsFdSetCountIsOne();
-    // 	handleSet.Select(0);
+    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+
+    handleSet.SetBit(nullptr);
+    MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
+    handleSet.Sync(nullptr);
+    MAYBE_UNUSED const auto isSet = handleSet.IsSet(nullptr);
+    handleSet.ClearBit(nullptr);
+    MAYBE_UNUSED const auto isFdSetFull = handleSet.IsFdSetFull();
+    MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
+    MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
+    MAYBE_UNUSED const auto select = handleSet.Select(0);
 }
 
-void Network::HandleSetTesting ::NetworkHandleTest() noexcept
+void Network::HandleSetTesting::NetworkHandleTest()
 {
-    // 	TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
-    //
-    // 	handleSet.SetBit(nullptr);
-    // 	handleSet.GetMaxSet();
-    // 	handleSet.Sync(nullptr);
-    // 	handleSet.IsSet(nullptr);
-    // 	handleSet.ClearBit(nullptr);
-    // 	handleSet.IsFdSetFull();
-    // 	handleSet.IsFdSetCount();
-    // 	handleSet.IsFdSetCountIsOne();
-    // 	handleSet.Select(0);
+    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+
+    handleSet.SetBit(nullptr);
+    MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
+    handleSet.Sync(nullptr);
+    MAYBE_UNUSED const auto isSet = handleSet.IsSet(nullptr);
+    handleSet.ClearBit(nullptr);
+    MAYBE_UNUSED const auto isFdSetFull = handleSet.IsFdSetFull();
+    MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
+    MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
+    MAYBE_UNUSED const auto select = handleSet.Select(0);
 }
 
-void Network::HandleSetTesting ::NullHandleTest() noexcept
+void Network::HandleSetTesting::NullHandleTest()
 {
-    // 	TestingType handleSet{ GetNullServerConfigurationStrategy() };
-    //
-    // 	handleSet.SetBit(nullptr);
-    // 	handleSet.GetMaxSet();
-    // 	handleSet.Sync(nullptr);
-    // 	handleSet.IsSet(nullptr);
-    // 	handleSet.ClearBit(nullptr);
-    // 	handleSet.IsFdSetFull();
-    // 	handleSet.IsFdSetCount();
-    // 	handleSet.IsFdSetCountIsOne();
-    // 	handleSet.Select(0);
+    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+
+    handleSet.SetBit(nullptr);
+    MAYBE_UNUSED const auto maxSet = handleSet.GetMaxSet();
+    handleSet.Sync(nullptr);
+    MAYBE_UNUSED const auto isSet = handleSet.IsSet(nullptr);
+    handleSet.ClearBit(nullptr);
+    MAYBE_UNUSED const auto isFdSetFull = handleSet.IsFdSetFull();
+    MAYBE_UNUSED const auto isFdSetCount = handleSet.IsFdSetCount();
+    MAYBE_UNUSED const auto isFdSetCountIsOne = handleSet.IsFdSetCountIsOne();
+    MAYBE_UNUSED const auto select = handleSet.Select(0);
 }
 
-void Network::HandleSetTesting ::BoostGetFdSetExceptionTest() noexcept
+void Network::HandleSetTesting::BoostGetFdSetExceptionTest()
 {
-    // 	TestingType handleSet{ GetBoostServerConfigurationStrategy() };
-    // 	handleSet.GetFdSet();
+    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
 }
 
-void Network::HandleSetTesting ::NetworkGetFdSetExceptionTest() noexcept
+void Network::HandleSetTesting::NetworkGetFdSetExceptionTest()
 {
-    // 	TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
-    // 	handleSet.GetFdSet();
+    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
 }
 
-void Network::HandleSetTesting ::NullGetFdSetExceptionTest() noexcept
+void Network::HandleSetTesting::NullGetFdSetExceptionTest()
 {
-    // 	TestingType handleSet{ GetNullServerConfigurationStrategy() };
-    // 	handleSet.GetFdSet();
+    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto* fdSet = handleSet.GetFdSet();
 }
 
-void Network::HandleSetTesting ::BoostGetACEHandleSetExceptionTest() noexcept
+void Network::HandleSetTesting::BoostGetACEHandleSetExceptionTest()
 {
-    // 	TestingType handleSet{ GetBoostServerConfigurationStrategy() };
-    // 	handleSet.GetACEHandleSet();
+    TestingType handleSet{ GetBoostServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }
 
-void Network::HandleSetTesting ::NetworkGetACEHandleSetExceptionTest() noexcept
+void Network::HandleSetTesting::NetworkGetACEHandleSetExceptionTest()
 {
-    // 	TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
-    // 	handleSet.GetACEHandleSet();
+    TestingType handleSet{ GetNetworkServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }
 
-void Network::HandleSetTesting ::NullGetACEHandleSetExceptionTest() noexcept
+void Network::HandleSetTesting::NullGetACEHandleSetExceptionTest()
 {
-    // 	TestingType handleSet{ GetNullServerConfigurationStrategy() };
-    // 	handleSet.GetACEHandleSet();
+    TestingType handleSet{ GetNullServerConfigurationStrategy() };
+    MAYBE_UNUSED const auto& aceHandleSet = handleSet.GetACEHandleSet();
 }

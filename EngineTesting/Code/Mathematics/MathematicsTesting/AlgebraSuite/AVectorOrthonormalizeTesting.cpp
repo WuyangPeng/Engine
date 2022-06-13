@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/21 13:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 18:45)
 
 #include "AVectorOrthonormalizeTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -22,12 +25,12 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AVectorOrthonormalizeTesting)
 
-void Mathematics::AVectorOrthonormalizeTesting ::MainTest()
+void Mathematics::AVectorOrthonormalizeTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(OrthonormalizeTest);
 }
 
-void Mathematics::AVectorOrthonormalizeTesting ::OrthonormalizeTest()
+void Mathematics::AVectorOrthonormalizeTesting::OrthonormalizeTest()
 {
     default_random_engine randomEngine{};
     const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
@@ -78,7 +81,7 @@ void Mathematics::AVectorOrthonormalizeTesting ::OrthonormalizeTest()
 
         ASSERT_TRUE(Approximate(fourthVector, secondOrthonormalize.GetUVector(), 1e-8f));
 
-        ASSERT_TRUE(Approximate(fifthVector, secondOrthonormalize.GetVVector(), 1e-8f));
+        ASSERT_TRUE(Approximate(fifthVector, secondOrthonormalize.GetVVector(), 1e-6f));
 
         ASSERT_TRUE(Approximate(sixthVector, secondOrthonormalize.GetWVector(), 1e-4f));
     }

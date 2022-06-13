@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 13:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/23 16:09)
 
 #include "MessageBufferTesting.h"
 #include "CoreTools/FileManager/Endian.h"
@@ -16,19 +19,15 @@
 
 using std::make_shared;
 using std::ostream;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-Network::MessageBufferTesting ::MessageBufferTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_TestMessage{ make_shared<TestNullMessage>(sm_MessageID) }
+
+Network::MessageBufferTesting::MessageBufferTesting(const OStreamShared& stream)
+    : ParentType{ stream }, testMessage{ make_shared<TestNullMessage>(messageID) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageBufferTesting)
+
 void Network::MessageBufferTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
@@ -40,7 +39,7 @@ namespace Network
     using TestingTypeSharedPtr = MessageBufferSharedPtr;
 }
 
-void Network::MessageBufferTesting ::MainTest()
+void Network::MessageBufferTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
 
@@ -66,7 +65,7 @@ void Network::MessageBufferTesting ::MainTest()
     ASSERT_THROW_EXCEPTION_1(CheckingMessageContentSizeExceptionTest, ParserStrategy::BigEndian);
 }
 
-void Network::MessageBufferTesting ::LoopTest(int testLoopCount)
+void Network::MessageBufferTesting::LoopTest(int testLoopCount)
 {
     ASSERT_NOT_THROW_EXCEPTION_2(PushBackTest, testLoopCount, ParserStrategy::LittleEndian);
     ASSERT_NOT_THROW_EXCEPTION_2(PushBackTest, testLoopCount, ParserStrategy::BigEndian);
@@ -82,7 +81,7 @@ void Network::MessageBufferTesting ::LoopTest(int testLoopCount)
     ASSERT_NOT_THROW_EXCEPTION_2(LengthTest, testLoopCount, ParserStrategy::BigEndian);
 }
 
-void Network::MessageBufferTesting ::InitTest()
+void Network::MessageBufferTesting::InitTest()
 {
     TestingType messageBuffer1{ BuffBlockSize::Size256, ParserStrategy::LittleEndian };
     ASSERT_ENUM_EQUAL(messageBuffer1.GetParserStrategy(), ParserStrategy::LittleEndian);
@@ -132,21 +131,21 @@ void Network::MessageBufferTesting ::InitTest()
     ASSERT_ENUM_EQUAL(messageBuffer12.GetParserStrategy(), ParserStrategy::BigEndian);
     ASSERT_EQUAL(messageBuffer12.GetSize(), System::EnumCastUnderlying(BuffBlockSize::Size512K));
 
-    constexpr auto bufferSize = 256;
-    TestingType messageBuffer13{ BuffBlockSize::Automatic, bufferSize, ParserStrategy::LittleEndian };
+    constexpr auto size = 256;
+    TestingType messageBuffer13{ BuffBlockSize::Automatic, size, ParserStrategy::LittleEndian };
     ASSERT_ENUM_EQUAL(messageBuffer13.GetParserStrategy(), ParserStrategy::LittleEndian);
-    ASSERT_EQUAL(messageBuffer13.GetSize(), bufferSize);
+    ASSERT_EQUAL(messageBuffer13.GetSize(), size);
 
-    TestingType messageBuffer14{ bufferSize * 2, ParserStrategy::BigEndian };
+    TestingType messageBuffer14{ size * 2, ParserStrategy::BigEndian };
     ASSERT_ENUM_EQUAL(messageBuffer14.GetParserStrategy(), ParserStrategy::BigEndian);
-    ASSERT_EQUAL(messageBuffer14.GetSize(), bufferSize * 2);
+    ASSERT_EQUAL(messageBuffer14.GetSize(), size * 2);
 
-    TestingType messageBuffer15{ messageBuffer14 };
+    const TestingType messageBuffer15{ messageBuffer14 };
     ASSERT_ENUM_EQUAL(messageBuffer15.GetParserStrategy(), messageBuffer14.GetParserStrategy());
     ASSERT_EQUAL(messageBuffer15.GetSize(), messageBuffer14.GetSize());
 }
 
-void Network::MessageBufferTesting ::PushBackTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::PushBackTest(int testLoopCount, ParserStrategy parserStrategy)
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
 
@@ -161,7 +160,7 @@ void Network::MessageBufferTesting ::PushBackTest(int testLoopCount, ParserStrat
     ASSERT_EQUAL(buffer->GetCurrentWriteIndex(), currentWriteIndex + addBufferCurrentWriteIndex);
 }
 
-void Network::MessageBufferTesting ::ExpansionTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::ExpansionTest(int testLoopCount, ParserStrategy parserStrategy)
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
     constexpr auto expansionSize = 4096;
@@ -184,7 +183,7 @@ void Network::MessageBufferTesting ::ExpansionTest(int testLoopCount, ParserStra
     ASSERT_UNEQUAL(buffer->GetCurrentWriteIndex(), expansionBuffer->GetCurrentWriteIndex());
 }
 
-void Network::MessageBufferTesting ::ExpansionExceptionTest(ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::ExpansionExceptionTest(ParserStrategy parserStrategy)
 {
     constexpr auto testLoopCount = 100;
 
@@ -194,7 +193,7 @@ void Network::MessageBufferTesting ::ExpansionExceptionTest(ParserStrategy parse
     auto expansionBuffer = buffer->Expansion(expansionSize);
 }
 
-void Network::MessageBufferTesting ::CloneTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::CloneTest(int testLoopCount, ParserStrategy parserStrategy)
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
     constexpr auto stepping = 20;
@@ -216,7 +215,7 @@ void Network::MessageBufferTesting ::CloneTest(int testLoopCount, ParserStrategy
     ASSERT_UNEQUAL(buffer->GetCurrentWriteIndex(), cloneBuffer->GetCurrentWriteIndex());
 }
 
-void Network::MessageBufferTesting ::ReadTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::ReadTest(int testLoopCount, ParserStrategy parserStrategy)
 {
     constexpr auto stepping = 20;
 
@@ -245,14 +244,19 @@ void Network::MessageBufferTesting ::ReadTest(int testLoopCount, ParserStrategy 
     ASSERT_EQUAL(messageLength, buffer->GetCurrentWriteIndex());
 }
 
-void Network::MessageBufferTesting ::WriteTest(ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::WriteTest(ParserStrategy parserStrategy)
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     TestingTypeSharedPtr buffer{ make_shared<TestingType>(BuffBlockSize::Size1024, parserStrategy) };
+
+#include STSTEM_WARNING_POP
 
     ASSERT_EQUAL(buffer->GetCurrentWriteIndex(), 0);
     ASSERT_EQUAL(buffer->GetRemainingWriteCount(), buffer->GetSize());
 
-    const int32_t messageLength = boost::numeric_cast<int32_t>(m_TestMessage->GetStreamingSize());
+    const auto messageLength = boost::numeric_cast<int32_t>(testMessage->GetStreamingSize());
     const auto streamLength = CORE_TOOLS_STREAM_SIZE(messageLength);
 
     buffer->Write(streamLength, &messageLength);
@@ -268,12 +272,15 @@ void Network::MessageBufferTesting ::WriteTest(ParserStrategy parserStrategy)
     ASSERT_EQUAL(buffer->GetRemainingWriteCount(), buffer->GetSize() - streamLength);
 }
 
-void Network::MessageBufferTesting ::BufferedTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::BufferedTest(int testLoopCount, ParserStrategy parserStrategy)
 {
     constexpr auto stepping = 20;
     constexpr auto receiveCount = 10;
 
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
     ASSERT_EQUAL(buffer->GetCurrentReadBufferedPtr(), buffer->GetInitialBufferedPtr());
     ASSERT_EQUAL(buffer->GetCurrentWriteBufferedPtr(), buffer->GetInitialBufferedPtr() + buffer->GetCurrentWriteIndex());
@@ -286,6 +293,8 @@ void Network::MessageBufferTesting ::BufferedTest(int testLoopCount, ParserStrat
     ASSERT_EQUAL(buffer->GetCurrentReadBufferedPtr(), buffer->GetInitialBufferedPtr());
     ASSERT_EQUAL(buffer->GetCurrentWriteBufferedPtr(), buffer->GetInitialBufferedPtr() + buffer->GetCurrentWriteIndex());
 
+#include STSTEM_WARNING_POP
+
     buffer->AddCurrentReadIndex(stepping);
     buffer->SetReceiveCount(receiveCount);
     buffer->ClearCurrentWriteIndex();
@@ -294,11 +303,11 @@ void Network::MessageBufferTesting ::BufferedTest(int testLoopCount, ParserStrat
     ASSERT_EQUAL(buffer->GetReceiveCount(), receiveCount);
 }
 
-void Network::MessageBufferTesting ::LengthTest(int testLoopCount, ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::LengthTest(int testLoopCount, ParserStrategy parserStrategy)
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
 
-    ASSERT_EQUAL(buffer->GetMessageLength(), MessageInterface::GetMessageHeadSize() + m_TestMessage->GetStreamingSize() * testLoopCount);
+    ASSERT_EQUAL(buffer->GetMessageLength(), MessageInterface::GetMessageHeadSize() + testMessage->GetStreamingSize() * testLoopCount);
 
     ASSERT_TRUE(buffer->IsMessageReceiveEnd());
 
@@ -310,23 +319,35 @@ void Network::MessageBufferTesting ::LengthTest(int testLoopCount, ParserStrateg
     buffer->CheckingMessageContentSize();
 }
 
-void Network::MessageBufferTesting ::CheckingMessageHeadSizeExceptionTest(ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::CheckingMessageHeadSizeExceptionTest(ParserStrategy parserStrategy)
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     TestingTypeSharedPtr buffer{ make_shared<TestingType>(BuffBlockSize::Automatic, MessageInterface::GetMessageHeadSize() - 1, parserStrategy) };
+
+#include STSTEM_WARNING_POP
 
     buffer->CheckingMessageHeadSize();
 }
 
-void Network::MessageBufferTesting ::CheckingMessageContentSizeExceptionTest(ParserStrategy parserStrategy)
+void Network::MessageBufferTesting::CheckingMessageContentSizeExceptionTest(ParserStrategy parserStrategy)
 {
     constexpr auto testLoopCount = 100;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     TestingTypeSharedPtr buffer{ make_shared<TestingType>(BuffBlockSize::Automatic, MessageInterface::GetMessageHeadSize(), parserStrategy) };
+
+#include STSTEM_WARNING_POP
+
     AddBufferLength(testLoopCount, *buffer);
 
     buffer->CheckingMessageContentSize();
 }
 
-Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateAddMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
+Network::MessageBufferSharedPtr Network::MessageBufferTesting::CreateAddMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
 {
     TestingTypeSharedPtr messageBuffer{ make_shared<TestingType>(BuffBlockSize::Size1024, parserStrategy) };
 
@@ -334,15 +355,24 @@ Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateAddMessage
 
     for (auto i = 0; i < testLoopCount; ++i)
     {
-        const auto streamSize = CORE_TOOLS_STREAM_SIZE(sm_MessageID);
+        const auto streamSize = CORE_TOOLS_STREAM_SIZE(messageID);
         messageBuffer->AddCurrentWriteIndex(streamSize);
 
-        auto messageNumber = reinterpret_cast<int64_t*>(initialBuffered);
-        *messageNumber = sm_MessageID;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
 
-        if (parserStrategy == ParserStrategy::BigEndian)
+        auto messageNumber = reinterpret_cast<int64_t*>(initialBuffered);
+
+#include STSTEM_WARNING_POP
+
+        if (messageNumber != nullptr)
         {
-            CoreTools::Endian::SwapByteOrder(streamSize, messageNumber);
+            *messageNumber = messageID;
+
+            if (parserStrategy == ParserStrategy::BigEndian)
+            {
+                CoreTools::Endian::SwapByteOrder(streamSize, messageNumber);
+            }
         }
 
         initialBuffered = messageBuffer->GetCurrentWriteBufferedPtr();
@@ -351,9 +381,14 @@ Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateAddMessage
     return messageBuffer;
 }
 
-void Network::MessageBufferTesting ::AddBufferLength(int testLoopCount, MessageBuffer& messageBuffer)
+void Network::MessageBufferTesting::AddBufferLength(int testLoopCount, MessageBuffer& messageBuffer)
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
     auto& length = *reinterpret_cast<int32_t*>(messageBuffer.GetInitialBufferedPtr());
+
+#include STSTEM_WARNING_POP
 
     const auto streamSize = CORE_TOOLS_STREAM_SIZE(length);
 
@@ -362,7 +397,7 @@ void Network::MessageBufferTesting ::AddBufferLength(int testLoopCount, MessageB
         CoreTools::Endian::SwapByteOrder(streamSize, &length);
     }
 
-    length += m_TestMessage->GetStreamingSize() * testLoopCount;
+    length += testMessage->GetStreamingSize() * testLoopCount;
 
     if (messageBuffer.GetParserStrategy() == ParserStrategy::BigEndian)
     {
@@ -370,13 +405,13 @@ void Network::MessageBufferTesting ::AddBufferLength(int testLoopCount, MessageB
     }
 }
 
-Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
+Network::MessageBufferSharedPtr Network::MessageBufferTesting::CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
 {
-    BufferSendStream bufferSendStream{ sm_BufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
+    BufferSendStream bufferSendStream{ bufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
 
     for (auto i = 0; i < testLoopCount; ++i)
     {
-        [[maybe_unused]] auto value = bufferSendStream.Insert(m_TestMessage);
+        MAYBE_UNUSED auto value = bufferSendStream.Insert(testMessage);
     }
 
     TestingTypeSharedPtr buffer{ make_shared<TestingType>(BuffBlockSize::Size2048, parserStrategy) };

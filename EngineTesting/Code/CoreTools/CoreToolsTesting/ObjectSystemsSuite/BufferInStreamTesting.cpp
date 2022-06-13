@@ -1,32 +1,29 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 14:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 15:32)
 
 #include "BufferInStreamTesting.h"
 #include "Detail/BoolObject.h"
-#include "Detail/IntObject.h"
 #include "Detail/EnumObject.h"
-#include "Detail/StringObject.h"
-#include "Detail/PointerObject.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
-#include "CoreTools/ObjectSystems/OutTopLevel.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Detail/IntObject.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
-
-#include "CoreTools/Helper/AssertMacro.h"
-
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/OutTopLevel.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BufferInStreamTesting)
 
-void CoreTools::BufferInStreamTesting
-	::MainTest()
+void CoreTools::BufferInStreamTesting::MainTest()
 {
-	InitTerm::ExecuteInitializers();
+    InitTerm::ExecuteInitializers();
 
-
-	InitTerm::ExecuteTerminators();
+    InitTerm::ExecuteTerminators();
 }

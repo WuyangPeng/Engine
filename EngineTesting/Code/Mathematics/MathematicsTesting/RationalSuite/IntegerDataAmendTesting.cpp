@@ -1,106 +1,102 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/23 13:42)
-
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 13:56)
 #include "IntegerDataAmendTesting.h"
-#include "Mathematics/Base/MathDetail.h"
-#include "Mathematics/Rational/IntegerDataDetail.h"
-#include "Mathematics/Rational/IntegerDataAmendDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
-#include <boost/utility/binary.hpp>
+#include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Rational/IntegerDataAmendDetail.h"
+#include "Mathematics/Rational/IntegerDataDetail.h"
 
 using std::vector;
 
 namespace Mathematics
 {
-	template class IntegerData<1>;
-	template class IntegerData<2>;
-	template class IntegerData<19>;
-	template class IntegerData<22>;
+    template class IntegerData<1>;
+    template class IntegerData<2>;
+    template class IntegerData<19>;
+    template class IntegerData<22>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataAmendTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataAmendTesting)
+
+void Mathematics::IntegerDataAmendTesting::MainTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(FromUnsignedIntTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NegativeTest);
+}
+
+void Mathematics::IntegerDataAmendTesting::FromUnsignedIntTest()
+{
+    vector<uint16_t> data{ 0b11111111'11111111,
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000000'00000000,
+                           0b01111111'11111111,
+                           0b01011111'11111111,
+                           0b01000000'11111111,
+                           0b01000000'00000001,
+                           0b00100001'00011001,
+                           0b00010001'00011001,
+                           0b00001001'00011001,
+                           0b00000101'00011001,
+                           0b00000011'00011001,
+                           0b00000001'00011001,
+                           0b00000000'10011001,
+                           0b00000000'01011001,
+                           0b00000000'00111001,
+                           0b00000000'00011001,
+                           0b00000000'00001001,
+                           0b00000000'00000101,
+                           0b00000000'00000011,
+                           0b00000000'00000010,
+                           0b00000000'00000001 };
+
+    IntegerData<12> firstIntegerData(data);
+    IntegerDataAmend<12> firstIntegerDataAmend(firstIntegerData);
+
+    firstIntegerDataAmend.FromUnsignedInt(0, 0b00011110'00000001);
+
+    ASSERT_EQUAL(BOOST_BINARY_U(00011110 00000001), firstIntegerData[0]);
+}
+
+void Mathematics::IntegerDataAmendTesting::NegativeTest()
+{
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
 #include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::IntegerDataAmendTesting
-	::MainTest()
-{
-	ASSERT_NOT_THROW_EXCEPTION_0(FromUnsignedIntTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(NegativeTest);
+
+    IntegerData<4> firstIntegerData{ int64_t(0xF000F458F7892523LL) };
+
+#include STSTEM_WARNING_POP
+
+    ASSERT_EQUAL(firstIntegerData[0], uint16_t(0x2523));
+    ASSERT_EQUAL(firstIntegerData[1], uint16_t(0xF789));
+    ASSERT_EQUAL(firstIntegerData[2], uint16_t(0xF458));
+    ASSERT_EQUAL(firstIntegerData[3], uint16_t(0xF000));
+
+    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Negative);
+    ASSERT_FALSE(firstIntegerData.IsZero());
+
+    IntegerDataAmend<4> firstIntegerDataAmend(firstIntegerData);
+    firstIntegerDataAmend.Negative();
+
+    ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_FALSE(firstIntegerData.IsZero());
+
+    IntegerData<5> secondIntegerData{ uint64_t{} };
+
+    ASSERT_TRUE(secondIntegerData.IsZero());
+    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
+
+    IntegerDataAmend<5> secondIntegerDataAmend(secondIntegerData);
+    secondIntegerDataAmend.Negative();
+
+    ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(), NumericalValueSymbol::Positive);
+    ASSERT_TRUE(secondIntegerData.IsZero());
 }
-
-void Mathematics::IntegerDataAmendTesting
-	::FromUnsignedIntTest()
-{
-	vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 11111111)),
-						   uint16_t(BOOST_BINARY(10111111 11111111)),
-						   uint16_t(BOOST_BINARY(10000000 11111111)),
-						   uint16_t(BOOST_BINARY(10000000 00000001)),
-						   uint16_t(BOOST_BINARY(10000000 00000000)),
-						   uint16_t(BOOST_BINARY(01111111 11111111)),
-						   uint16_t(BOOST_BINARY(01011111 11111111)),
-						   uint16_t(BOOST_BINARY(01000000 11111111)),
-						   uint16_t(BOOST_BINARY(01000000 00000001)),
-						   uint16_t(BOOST_BINARY(00100001 00011001)),
-						   uint16_t(BOOST_BINARY(00010001 00011001)),
-						   uint16_t(BOOST_BINARY(00001001 00011001)),
-						   uint16_t(BOOST_BINARY(00000101 00011001)),
-						   uint16_t(BOOST_BINARY(00000011 00011001)),
-						   uint16_t(BOOST_BINARY(00000001 00011001)),
-						   uint16_t(BOOST_BINARY(00000000 10011001)),
-						   uint16_t(BOOST_BINARY(00000000 01011001)),
-						   uint16_t(BOOST_BINARY(00000000 00111001)),
-						   uint16_t(BOOST_BINARY(00000000 00011001)),
-						   uint16_t(BOOST_BINARY(00000000 00001001)),
-						   uint16_t(BOOST_BINARY(00000000 00000101)),
-						   uint16_t(BOOST_BINARY(00000000 00000011)),
-						   uint16_t(BOOST_BINARY(00000000 00000010)),
-						   uint16_t(BOOST_BINARY(00000000 00000001)) };
-			
-	IntegerData<12> firstIntegerData(data);
-	IntegerDataAmend<12> firstIntegerDataAmend(firstIntegerData);
-
-	firstIntegerDataAmend.FromUnsignedInt(0, uint16_t(BOOST_BINARY_U(00011110 00000001)));
-
-	ASSERT_EQUAL(BOOST_BINARY_U(00011110 00000001),firstIntegerData[0]);
-}
-
-void Mathematics::IntegerDataAmendTesting
-	::NegativeTest()
-{
-	IntegerData<4> firstIntegerData(int64_t((0xF000F458F7892523LL)));
-
-	ASSERT_EQUAL(firstIntegerData[0],uint16_t(0x2523));
-	ASSERT_EQUAL(firstIntegerData[1],uint16_t(0xF789));
-	ASSERT_EQUAL(firstIntegerData[2],uint16_t(0xF458));
-	ASSERT_EQUAL(firstIntegerData[3],uint16_t(0xF000));
-
-	ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(),NumericalValueSymbol::Negative);
-	ASSERT_FALSE(firstIntegerData.IsZero());
-
-	IntegerDataAmend<4> firstIntegerDataAmend(firstIntegerData);
-	firstIntegerDataAmend.Negative();
-
-	ASSERT_ENUM_EQUAL(firstIntegerData.GetSign(),NumericalValueSymbol::Positive);
-	ASSERT_FALSE(firstIntegerData.IsZero());
-
-	IntegerData<5> secondIntegerData(uint64_t(0));
-
-	ASSERT_TRUE(secondIntegerData.IsZero());
-	ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(),NumericalValueSymbol::Positive);
-
-	IntegerDataAmend<5> secondIntegerDataAmend(secondIntegerData);
-	secondIntegerDataAmend.Negative();
-
-	ASSERT_ENUM_EQUAL(secondIntegerData.GetSign(),NumericalValueSymbol::Positive);
-	ASSERT_TRUE(secondIntegerData.IsZero());
-}
-

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/27 15:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/02 16:53)
 
 #include "BrentsMethodRootTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -12,17 +15,8 @@
 #include "Mathematics/NumericalAnalysis/BrentsMethodRootDetail.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BrentsMethodRootTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-void Mathematics::BrentsMethodRootTesting ::MainTest()
+
+void Mathematics::BrentsMethodRootTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(HaveSolutionTest);
     ASSERT_THROW_EXCEPTION_0(NoSolutionRootTest);
@@ -30,50 +24,50 @@ void Mathematics::BrentsMethodRootTesting ::MainTest()
     ASSERT_THROW_EXCEPTION_0(NoSolutionFunctionTest);
 }
 
-void Mathematics::BrentsMethodRootTesting ::HaveSolutionTest()
+void Mathematics::BrentsMethodRootTesting::HaveSolutionTest()
 {
-    double root = 9.0;
-    double function = 19.0;
-    BrentsMethodRootType type = BrentsMethodRootType::HaveSolution;
+    constexpr double root = 9.0;
+    constexpr double function = 19.0;
+    const BrentsMethodRootType type = BrentsMethodRootType::HaveSolution;
 
-    BrentsMethodRootD brentsMethodRoot(root, function, type);
+    const BrentsMethodRootD brentsMethodRoot(root, function, type);
 
     ASSERT_APPROXIMATE(brentsMethodRoot.GetRoot(), root, 1e-10);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetFunction(), function, 1e-10);
     ASSERT_EQUAL(System::EnumCastUnderlying(brentsMethodRoot.GetBrentsMethodRootType()), System::EnumCastUnderlying(type));
 }
 
-void Mathematics::BrentsMethodRootTesting ::NoSolutionRootTest()
+void Mathematics::BrentsMethodRootTesting::NoSolutionRootTest()
 {
-    BrentsMethodRootType type = BrentsMethodRootType::NoSolution;
+    const BrentsMethodRootType type = BrentsMethodRootType::NoSolution;
 
-    BrentsMethodRootD brentsMethodRoot;
+    const BrentsMethodRootD brentsMethodRoot;
 
     ASSERT_EQUAL(System::EnumCastUnderlying(brentsMethodRoot.GetBrentsMethodRootType()), System::EnumCastUnderlying(type));
 
-    [[maybe_unused]] auto value = brentsMethodRoot.GetRoot();
+    MAYBE_UNUSED auto value = brentsMethodRoot.GetRoot();
 }
 
-void Mathematics::BrentsMethodRootTesting ::UnknownTest()
+void Mathematics::BrentsMethodRootTesting::UnknownTest()
 {
-    float root = 19.0f;
-    float function = 29.0f;
-    BrentsMethodRootType type = BrentsMethodRootType::Unknown;
+    constexpr float root = 19.0f;
+    constexpr float function = 29.0f;
+    const BrentsMethodRootType type = BrentsMethodRootType::Unknown;
 
-    BrentsMethodRootD brentsMethodRoot(root, function, type);
+    const BrentsMethodRootD brentsMethodRoot(root, function, type);
 
     ASSERT_ENUM_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetRoot(), root, 1e-8f);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetFunction(), function, 1e-8f);
 }
 
-void Mathematics::BrentsMethodRootTesting ::NoSolutionFunctionTest()
+void Mathematics::BrentsMethodRootTesting::NoSolutionFunctionTest()
 {
-    BrentsMethodRootType type = BrentsMethodRootType::NoSolution;
+    const BrentsMethodRootType type = BrentsMethodRootType::NoSolution;
 
-    BrentsMethodRootD brentsMethodRoot;
+    const BrentsMethodRootD brentsMethodRoot;
 
     ASSERT_ENUM_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
 
-   [[maybe_unused]] auto value = brentsMethodRoot.GetFunction();
+    MAYBE_UNUSED auto value = brentsMethodRoot.GetFunction();
 }

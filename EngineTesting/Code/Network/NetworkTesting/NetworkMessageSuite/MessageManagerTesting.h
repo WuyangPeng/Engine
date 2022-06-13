@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/12 11:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 18:58)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_MANAGER_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_MANAGER_TESTING_H
@@ -11,20 +14,20 @@
 
 namespace Network
 {
-	class MessageManagerTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageManagerTesting);
+    class MessageManagerTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageManagerTesting);
 
-	private:
-		void MainTest();
+    private:
+        void MainTest();
 
-		void FullVersionTest();
-		void ManagerTest();
-		void ExceptionTest();
+        void FullVersionTest();
+        void ManagerTest();
+        void ExceptionTest();
 
-		void DoRunUnitTest() override;
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_MANAGER_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_MANAGER_TESTING_H

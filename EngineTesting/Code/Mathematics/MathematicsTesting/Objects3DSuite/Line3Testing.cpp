@@ -1,64 +1,59 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/22 17:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/30 11:29)
 
 #include "Line3Testing.h"
-#include "Mathematics/Objects3D/Line3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
-#include <random> 
 #include "Mathematics/Algebra/Vector3Tools.h"
+#include "Mathematics/Objects3D/Line3Detail.h"
 
-using std::uniform_real;
+#include <random>
+
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class Line3<float>;
-	template class Line3<double>;
+    template class Line3<float>;
+    template class Line3<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Line3Testing) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Line3Testing)
 
-void Mathematics::Line3Testing
-	::MainTest()
+void Mathematics::Line3Testing::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(LineTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(LineTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::Line3Testing
-	::LineTest()
+
+void Mathematics::Line3Testing::LineTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D origin(firstRandomDistribution(generator),
-			             firstRandomDistribution(generator),
-						 firstRandomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D origin(firstRandomDistribution(generator),
+                              firstRandomDistribution(generator),
+                              firstRandomDistribution(generator));
 
-		Vector3D direction(firstRandomDistribution(generator),
-			                firstRandomDistribution(generator),
-							firstRandomDistribution(generator));
+        Vector3D direction(firstRandomDistribution(generator),
+                           firstRandomDistribution(generator),
+                           firstRandomDistribution(generator));
 
-		direction.Normalize();
+        direction.Normalize();
 
-		Line3D line(origin,direction);
+        const Line3D line(origin, direction);
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(origin,line.GetOrigin()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(direction,line.GetDirection()));	
-	}
+        ASSERT_TRUE(Vector3ToolsD::Approximate(origin, line.GetOrigin()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(direction, line.GetDirection()));
+    }
 }
-

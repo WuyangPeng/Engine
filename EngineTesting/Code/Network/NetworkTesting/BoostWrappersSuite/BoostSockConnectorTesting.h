@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 16:32)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_CONNECTOR_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_BOOST_SOCK_CONNECTOR_TESTING_H
@@ -19,7 +22,9 @@ namespace Network
 
     public:
         explicit BoostSockConnectorTesting(const OStreamShared& stream);
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+
         using TestFunction = void (ClassType::*)();
 
     protected:
@@ -30,26 +35,26 @@ namespace Network
         void ServerThread();
         void DoServerThread();
 
-        static constexpr int GetAcceptTime() noexcept
+        NODISCARD static constexpr int GetAcceptTime() noexcept
         {
-            return sm_AcceptTime;
+            return acceptTime;
         }
 
-        static constexpr int GetAsynchronousConnectTime() noexcept
+        NODISCARD static constexpr int GetAsynchronousConnectTime() noexcept
         {
-            return sm_AsynchronousConnectTime;
+            return asynchronousConnectTime;
         }
 
-        static constexpr int GetSynchronizeConnectTime() noexcept
+        NODISCARD static constexpr int GetSynchronizeConnectTime() noexcept
         {
-            return sm_SynchronizeConnectTime;
+            return synchronizeConnectTime;
         }
 
     private:
-        // Release版本sm_AcceptTime和sm_AsynchronousConnectTime值要足够大，否则测试时异步回调还未执行。
-        static constexpr auto sm_AcceptTime = 100000000;
-        static constexpr auto sm_SynchronizeConnectTime = 100;
-        static constexpr auto sm_AsynchronousConnectTime = 100000000;
+        // Release版本acceptTime和asynchronousConnectTime值要足够大，否则测试时异步回调还未执行。
+        static constexpr auto acceptTime = 100000000;
+        static constexpr auto synchronizeConnectTime = 100;
+        static constexpr auto asynchronousConnectTime = 100000000;
     };
 }
 

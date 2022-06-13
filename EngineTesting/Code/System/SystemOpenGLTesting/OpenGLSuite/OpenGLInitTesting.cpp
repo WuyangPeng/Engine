@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.6 (2021/06/29 20:20)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 14:58)
 
 #include "OpenGLInitTesting.h"
 #include "System/OpenGL/OpenGLInit.h"
@@ -26,12 +26,12 @@ void System::OpenGLInitTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::OpenGLInitTesting ::MainTest()
+void System::OpenGLInitTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(OpenGLInitTest);
 }
 
-void System::OpenGLInitTesting ::OpenGLInitTest()
+void System::OpenGLInitTesting::OpenGLInitTest()
 {
     ASSERT_TRUE(OpenGLInit());
 

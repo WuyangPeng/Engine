@@ -31,6 +31,7 @@ namespace CoreTools
         using ContainerType = Container;
         using ClassType = MethodPropertyGetExternal<ConstReferenceType, ContainerType, FO, FG>;
 
+        MethodPropertyGetExternal() noexcept = default;
         ~MethodPropertyGetExternal() noexcept = default;
         MethodPropertyGetExternal(const MethodPropertyGetExternal& rhs) noexcept = delete;
         MethodPropertyGetExternal& operator=(const MethodPropertyGetExternal& rhs) noexcept = delete;

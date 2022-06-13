@@ -14,7 +14,7 @@
 
 namespace ResourceManager
 {
-    class RESOURCE_MANAGER_HIDDEN_DECLARE ResourceManagerMacroSharedImpl final
+    class ResourceManagerMacroSharedImpl final
     {
     public:
         using ClassType = ResourceManagerMacroSharedImpl;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/15 13:50)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:05)
 
 #include "SetConsoleHandleScreenBufferInfoTesting.h"
 #include "System/Console/ConsoleScreenBuffer.h"
@@ -59,7 +59,7 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
     setConsoleScreenBufferInfo.srWindow.Right = size - 1;
     setConsoleScreenBufferInfo.dwMaximumWindowSize.X = size;
     setConsoleScreenBufferInfo.dwMaximumWindowSize.Y = size;
-    setConsoleScreenBufferInfo.bFullscreenSupported = g_True;
+    setConsoleScreenBufferInfo.bFullscreenSupported = gTrue;
 
     ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &setConsoleScreenBufferInfo));
 
@@ -82,6 +82,7 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
     constexpr auto colorTableSize = 16;
     for (auto i = 0; i < colorTableSize; ++i)
     {
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -89,9 +90,10 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
         ASSERT_EQUAL(currentConsoleScreenBufferInfo.ColorTable[i], setConsoleScreenBufferInfo.ColorTable[i]);
 
 #include STSTEM_WARNING_POP
+
     }
 
-    ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo)); 
+    ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
 
     ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
 }

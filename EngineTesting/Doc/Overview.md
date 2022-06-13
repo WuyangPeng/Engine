@@ -1,15 +1,15 @@
 /// @mainpage Threading Core Render Engine Testing API 文档
 
-@copyright Copyright (c) 2011-2021
+@copyright Copyright (c) 2011-2022
 Threading Core Render Engine Testing
 
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.7.1.0
-标准：std:c++17
+@version 0.8.0.8
+标准：std:c++20
 
-@date 2021/02/19 10:37
+@date 2022/05/08 23:49
 
 @section sec_Contents 内容
 

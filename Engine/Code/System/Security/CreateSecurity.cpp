@@ -30,7 +30,7 @@ bool System::SystemConvertToAutoInheritPrivateObjectSecurity(SecurityDescriptorP
                                                     newSecurityDescriptor,
                                                     objectType,
                                                     gsl::narrow_cast<WindowsBoolean>(BoolConversion(isDirectoryObject)),
-                                                    genericMapping) != g_False)
+                                                    genericMapping) != gFalse)
     {
         return true;
     }
@@ -62,7 +62,7 @@ bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescr
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreatePrivateObjectSecurity(parentDescriptor, creatorDescriptor, newDescriptor, BoolConversion(isDirectoryObject), token, genericMapping) != g_False)
+    if (::CreatePrivateObjectSecurity(parentDescriptor, creatorDescriptor, newDescriptor, BoolConversion(isDirectoryObject), token, genericMapping) != gFalse)
         return true;
     else
         return false;
@@ -92,7 +92,7 @@ bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescr
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreatePrivateObjectSecurityEx(parentDescriptor, creatorDescriptor, newDescriptor, objectType, isContainerObject, EnumCastUnderlying(autoInheritFlags), token, genericMapping) != g_False)
+    if (::CreatePrivateObjectSecurityEx(parentDescriptor, creatorDescriptor, newDescriptor, objectType, isContainerObject, EnumCastUnderlying(autoInheritFlags), token, genericMapping) != gFalse)
         return true;
     else
         return false;
@@ -133,7 +133,7 @@ bool System::CreateSystemPrivateObjectSecurityWithMultipleInheritance(SecurityDe
                                                              BoolConversion(isContainerObject),
                                                              EnumCastUnderlying(autoInheritFlags),
                                                              token,
-                                                             genericMapping) != g_False)
+                                                             genericMapping) != gFalse)
     {
         return true;
     }
@@ -163,7 +163,7 @@ bool System::DestroySystemPrivateObjectSecurity(SecurityDescriptorPtr* objectDes
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DestroyPrivateObjectSecurity(objectDescriptor) != g_False)
+    if (::DestroyPrivateObjectSecurity(objectDescriptor) != gFalse)
         return true;
     else
         return false;
@@ -185,7 +185,7 @@ bool System::GetSystemFileSecurity(const String& fileName,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetFileSecurity(fileName.c_str(), EnumCastUnderlying(requestedInformation), securityDescriptor, length, lengthNeeded) != g_False)
+    if (::GetFileSecurity(fileName.c_str(), EnumCastUnderlying(requestedInformation), securityDescriptor, length, lengthNeeded) != gFalse)
         return true;
     else
         return false;
@@ -211,7 +211,7 @@ bool System::GetSystemKernelObjectSecurity(ThreadHandle handle,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetKernelObjectSecurity(handle, EnumCastUnderlying(requestedInformation), securityDescriptor, length, lengthNeeded) != g_False)
+    if (::GetKernelObjectSecurity(handle, EnumCastUnderlying(requestedInformation), securityDescriptor, length, lengthNeeded) != gFalse)
         return true;
     else
         return false;
@@ -237,7 +237,7 @@ bool System::GetSystemPrivateObjectSecurity(SecurityDescriptorPtr objectDescript
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetPrivateObjectSecurity(objectDescriptor, EnumCastUnderlying(securityInformation), resultantDescriptor, descriptorLength, returnLength) != g_False)
+    if (::GetPrivateObjectSecurity(objectDescriptor, EnumCastUnderlying(securityInformation), resultantDescriptor, descriptorLength, returnLength) != gFalse)
         return true;
     else
         return false;
@@ -259,7 +259,7 @@ bool System::SetSystemFileSecurity(const TChar* fileName, SecurityRequestedInfor
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetFileSecurity(fileName, EnumCastUnderlying(securityInformation), securityDescriptor) != g_False)
+    if (::SetFileSecurity(fileName, EnumCastUnderlying(securityInformation), securityDescriptor) != gFalse)
         return true;
     else
         return false;
@@ -277,7 +277,7 @@ bool System::SetSystemKernelObjectSecurity(ThreadHandle handle, SecurityRequeste
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetKernelObjectSecurity(handle, EnumCastUnderlying(securityInformation), securityDescriptor) != g_False)
+    if (::SetKernelObjectSecurity(handle, EnumCastUnderlying(securityInformation), securityDescriptor) != gFalse)
         return true;
     else
         return false;
@@ -299,7 +299,7 @@ bool System::SetSystemPrivateObjectSecurity(SecurityRequestedInformation securit
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetPrivateObjectSecurity(EnumCastUnderlying(securityInformation), modificationDescriptor, objectsSecurityDescriptor, genericMapping, token) != g_False)
+    if (::SetPrivateObjectSecurity(EnumCastUnderlying(securityInformation), modificationDescriptor, objectsSecurityDescriptor, genericMapping, token) != gFalse)
         return true;
     else
         return false;
@@ -335,7 +335,7 @@ bool System::SetSystemPrivateObjectSecurity(SecurityRequestedInformation securit
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetPrivateObjectSecurityEx(EnumCastUnderlying(securityInformation), modificationDescriptor, objectsSecurityDescriptor, EnumCastUnderlying(autoInheritFlags), genericMapping, token) != g_False)
+    if (::SetPrivateObjectSecurityEx(EnumCastUnderlying(securityInformation), modificationDescriptor, objectsSecurityDescriptor, EnumCastUnderlying(autoInheritFlags), genericMapping, token) != gFalse)
         return true;
     else
         return false;

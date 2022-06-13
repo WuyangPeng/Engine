@@ -50,7 +50,7 @@ bool System::FreeVirtual(WindowsVoidPtr address) noexcept
 
     constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
 
-    if (::VirtualFree(address, 0, freeType) != g_False)
+    if (::VirtualFree(address, 0, freeType) != gFalse)
         return true;
     else
         return false;
@@ -70,7 +70,7 @@ bool System::FreeVirtual(WindowsHandle process, WindowsVoidPtr address) noexcept
 
     constexpr auto freeType = EnumCastUnderlying(MemoryAllocation::Release);
 
-    if (::VirtualFreeEx(process, address, 0, freeType) != g_False)
+    if (::VirtualFreeEx(process, address, 0, freeType) != gFalse)
         return true;
     else
         return false;
@@ -91,7 +91,7 @@ bool System::SetVirtualProtect(WindowsVoidPtr address, WindowsSize size, MemoryP
     WindowsDWord oldMemory{ 0 };
     const auto result = ::VirtualProtect(address, size, EnumCastUnderlying(newProtect), &oldMemory);
 
-    if (result != g_False)
+    if (result != gFalse)
     {
         UnderlyingCastEnumPtr(oldMemory, oldProtect);
 
@@ -118,7 +118,7 @@ bool System::SetVirtualProtect(WindowsHandle process, WindowsVoidPtr address, Wi
     WindowsDWord oldMemory{ 0 };
     const auto result = ::VirtualProtectEx(process, address, size, EnumCastUnderlying(newProtect), &oldMemory);
 
-    if (result != g_False)
+    if (result != gFalse)
     {
         UnderlyingCastEnumPtr(oldMemory, oldProtect);
 

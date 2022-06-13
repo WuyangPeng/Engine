@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.5 (2020/03/16 18:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 16:21)
 
 #include "MysqlConnectorTableTesting.h"
 #include "System/Windows/Engineering.h"
@@ -18,13 +21,13 @@ using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorTableTesting)
 
-void Database::MysqlConnectorTableTesting ::MainTest()
+void Database::MysqlConnectorTableTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TableTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SelectTest);
 }
 
-void Database::MysqlConnectorTableTesting ::TableTest()
+void Database::MysqlConnectorTableTesting::TableTest()
 {
     ConfigurationStrategy::FlagsOption flagsOption;
     ConfigurationStrategy::StringOption stringOption;
@@ -35,8 +38,22 @@ void Database::MysqlConnectorTableTesting ::TableTest()
 
     dbMapping.insert({ 1, "dbtest" });
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "tcretest", "root", "TCRE", false, 10, 100, 1000,
-                                                 flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,
+                                                 "127.0.0.1",
+                                                 33060,
+                                                 "tcretest",
+                                                 "root",
+                                                 "TCRE",
+                                                 false,
+                                                 10,
+                                                 100,
+                                                 1000,
+                                                 flagsOption,
+                                                 stringOption,
+                                                 booleanOption,
+                                                 intOption,
+                                                 sslOption,
+                                                 dbMapping };
 
     Session session{ configurationStrategy };
 
@@ -59,7 +76,7 @@ void Database::MysqlConnectorTableTesting ::TableTest()
     Table table{ schema, "test" };
 }
 
-void Database::MysqlConnectorTableTesting ::SelectTest()
+void Database::MysqlConnectorTableTesting::SelectTest()
 {
     ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector, "127.0.0.1", 33060, "tcretest", "root", "TCRE" };
 

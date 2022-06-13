@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 13:15)
 
 #include "NoniterativeEigen3x3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,25 +26,16 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, NoniterativeEigen3x3Testing)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-void Mathematics::NoniterativeEigen3x3Testing ::MainTest()
+
+void Mathematics::NoniterativeEigen3x3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(EigenTest);
 }
 
-void Mathematics::NoniterativeEigen3x3Testing ::EigenTest()
+void Mathematics::NoniterativeEigen3x3Testing::EigenTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
+    const uniform_real<double> randomDistribution(-1.0e2, 1.0e2);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -61,17 +55,17 @@ void Mathematics::NoniterativeEigen3x3Testing ::EigenTest()
         firstMatrix(2, 0) = firstMatrix(0, 2);
         firstMatrix(2, 1) = firstMatrix(1, 2);
 
-        NoniterativeEigen3x3D eigenDecomposition(firstMatrix);
+        const NoniterativeEigen3x3D eigenDecomposition(firstMatrix);
 
-        Matrix3D rotation(eigenDecomposition.GetEigenvector(0),
-                          eigenDecomposition.GetEigenvector(1),
-                          eigenDecomposition.GetEigenvector(2),
-                          MatrixMajorFlags::Column);
-        Matrix3D diagonal(eigenDecomposition.GetEigenvalue(0),
-                          eigenDecomposition.GetEigenvalue(1),
-                          eigenDecomposition.GetEigenvalue(2));
+        const Matrix3D rotation(eigenDecomposition.GetEigenvector(0),
+                                eigenDecomposition.GetEigenvector(1),
+                                eigenDecomposition.GetEigenvector(2),
+                                MatrixMajorFlags::Column);
+        const Matrix3D diagonal(eigenDecomposition.GetEigenvalue(0),
+                                eigenDecomposition.GetEigenvalue(1),
+                                eigenDecomposition.GetEigenvalue(2));
 
-        Matrix3D secondMatrix = rotation * diagonal * rotation.Transpose();
+        const auto secondMatrix = rotation * diagonal * rotation.Transpose();
 
         ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-8));
     }

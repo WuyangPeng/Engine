@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/06 17:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 14:36)
 
 #include "CommandTesting.h"
 #include "CoreTools/Command/Command.h"
@@ -14,7 +17,7 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CommandTesting)
 
-void CoreTools::CommandTesting ::MainTest()
+void CoreTools::CommandTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SucceedTest);
     ASSERT_THROW_EXCEPTION_0(SetMinValueExceptionTest);
@@ -22,16 +25,15 @@ void CoreTools::CommandTesting ::MainTest()
     ASSERT_THROW_EXCEPTION_0(SetInfValueExceptionTest);
     ASSERT_THROW_EXCEPTION_0(SetSupValueExceptionTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-void CoreTools::CommandTesting ::SucceedTest()
+
+void CoreTools::CommandTesting::SucceedTest()
 {
     const char* commandLine{
         "MyProgram -debug   -integer    51 -float 16.4 "
         "-double 5.21     -string value -fileName filename"
     };
 
-    CommandHandle command{ const_cast<char*>(commandLine) };
+    CommandHandle command{ commandLine };
 
     auto count = command.GetExcessArgumentsCount();
 
@@ -103,60 +105,58 @@ void CoreTools::CommandTesting ::SucceedTest()
     ASSERT_EQUAL(count, 0);
 }
 
-void CoreTools::CommandTesting ::SetMinValueExceptionTest()
+void CoreTools::CommandTesting::SetMinValueExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug  -integer 51 -float 16.4 "
         "-double 5.21 -string value   -fileName filename"
     };
 
-    CommandHandle command{ const_cast<char*>(commandLine) };
+    CommandHandle command{ commandLine };
 
     command.SetMinValue(17.0);
 
-    [[maybe_unused]] auto value = command.GetFloat("float");
+    MAYBE_UNUSED auto value = command.GetFloat("float");
 }
 
-void CoreTools::CommandTesting ::SetMaxValueExceptionTest()
+void CoreTools::CommandTesting::SetMaxValueExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug  -integer 51 -float 16.4 "
         "-double 5.21 -string value -fileName filename"
     };
 
-    CommandHandle command{ const_cast<char*>(commandLine) };
+    CommandHandle command{ commandLine };
 
     command.SetMaxValue(4.0);
 
-    [[maybe_unused]] auto value = command.GetDouble("double");
+    MAYBE_UNUSED auto value = command.GetDouble("double");
 }
 
-void CoreTools::CommandTesting ::SetInfValueExceptionTest()
+void CoreTools::CommandTesting::SetInfValueExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug -integer 51 -float 16.4 "
         "-double 5.21 -string value -fileName filename"
     };
 
-    CommandHandle command{ const_cast<char*>(commandLine) };
+    CommandHandle command{ commandLine };
 
     command.SetInfValue(52);
 
-    [[maybe_unused]] auto value = command.GetInteger("integer");
+    MAYBE_UNUSED auto value = command.GetInteger("integer");
 }
 
-void CoreTools::CommandTesting ::SetSupValueExceptionTest()
+void CoreTools::CommandTesting::SetSupValueExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug -integer 51 -float 16.4 "
         "-double 5.21 -string value -fileName filename"
     };
 
-    CommandHandle command{ const_cast<char*>(commandLine) };
+    CommandHandle command{ commandLine };
 
     command.SetSupValue(50);
 
-    [[maybe_unused]] auto value = command.GetInteger("integer");
+    MAYBE_UNUSED auto value = command.GetInteger("integer");
 }
-
-#include STSTEM_WARNING_POP

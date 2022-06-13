@@ -104,7 +104,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
@@ -114,7 +114,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
@@ -124,7 +124,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingX64DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
@@ -134,7 +134,7 @@
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\EngineTesting.props" />
     <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />

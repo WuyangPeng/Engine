@@ -39,8 +39,8 @@ bool System::GetAccessCheck(SecurityDescriptorPtr securityDescriptor,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    WindowsBool resultAccessStatue{ g_False };
-    if (::AccessCheck(securityDescriptor, clientToken, EnumCastUnderlying(desiredAccess), genericMapping, privilegeSet, privilegeSetLength, grantedAccess, &resultAccessStatue) != g_False)
+    WindowsBool resultAccessStatue{ gFalse };
+    if (::AccessCheck(securityDescriptor, clientToken, EnumCastUnderlying(desiredAccess), genericMapping, privilegeSet, privilegeSetLength, grantedAccess, &resultAccessStatue) != gFalse)
     {
         BoolConversion(resultAccessStatue, accessStatus);
 
@@ -81,7 +81,7 @@ bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    WindowsBool resultAccessStatue{ g_False };
+    WindowsBool resultAccessStatue{ gFalse };
     if (::AccessCheckByType(securityDescriptor,
                             principalSelfSid,
                             clientToken,
@@ -92,7 +92,7 @@ bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
                             privilegeSet,
                             privilegeSetLength,
                             grantedAccess,
-                            &resultAccessStatue) != g_False)
+                            &resultAccessStatue) != gFalse)
     {
         BoolConversion(resultAccessStatue, accessStatus);
 
@@ -146,7 +146,7 @@ bool System::GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescri
                                       privilegeSet,
                                       privilegeSetLength,
                                       grantedAccessList,
-                                      accessStatusList) != g_False)
+                                      accessStatusList) != gFalse)
     {
         return true;
     }

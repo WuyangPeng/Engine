@@ -1,68 +1,95 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.5 (2020/03/16 18:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 16:20)
 
 #include "MysqlConnectorSchemaTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/SqlInterface/Session.h"
-#include "Database/SqlInterface/Schema.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
+#include "Database/SqlInterface/Schema.h"
+#include "Database/SqlInterface/Session.h"
 
-using std::vector;
 using std::string;
+using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, MysqlConnectorSchemaTesting)
 
-void Database::MysqlConnectorSchemaTesting
-	::MainTest()
+void Database::MysqlConnectorSchemaTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(SchemaTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SchemaContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SchemaTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SchemaContainerTest);
 }
 
-void Database::MysqlConnectorSchemaTesting
-	::SchemaTest()
+void Database::MysqlConnectorSchemaTesting::SchemaTest()
 {
-	ConfigurationStrategy::FlagsOption flagsOption;
-	ConfigurationStrategy::StringOption stringOption;
-	ConfigurationStrategy::BooleanOption booleanOption;
-	ConfigurationStrategy::IntOption intOption;
-	ConfigurationStrategy::SSLOption sslOption;
-	ConfigurationStrategy::DBMapping dbMapping;
+    ConfigurationStrategy::FlagsOption flagsOption;
+    ConfigurationStrategy::StringOption stringOption;
+    ConfigurationStrategy::BooleanOption booleanOption;
+    ConfigurationStrategy::IntOption intOption;
+    ConfigurationStrategy::SSLOption sslOption;
+    ConfigurationStrategy::DBMapping dbMapping;
 
-	dbMapping.insert({ 1,"dbtest" });
+    dbMapping.insert({ 1, "dbtest" });
 
-	ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,"127.0.0.1",33060,"tcretest","root","TCRE",false,10,100,1000,
-												 flagsOption ,stringOption,booleanOption,intOption,sslOption,dbMapping };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,
+                                                 "127.0.0.1",
+                                                 33060,
+                                                 "tcretest",
+                                                 "root",
+                                                 "TCRE",
+                                                 false,
+                                                 10,
+                                                 100,
+                                                 1000,
+                                                 flagsOption,
+                                                 stringOption,
+                                                 booleanOption,
+                                                 intOption,
+                                                 sslOption,
+                                                 dbMapping };
 
-	Session session{ configurationStrategy };
+    Session session{ configurationStrategy };
 
-	Schema firstSchema{ session };
-	Schema secondSchema{ session,1 };
+    Schema firstSchema{ session };
+    Schema secondSchema{ session, 1 };
 }
 
-void Database::MysqlConnectorSchemaTesting
-	::SchemaContainerTest()
+void Database::MysqlConnectorSchemaTesting::SchemaContainerTest()
 {
-	ConfigurationStrategy::FlagsOption flagsOption;
-	ConfigurationStrategy::StringOption stringOption;
-	ConfigurationStrategy::BooleanOption booleanOption;
-	ConfigurationStrategy::IntOption intOption;
-	ConfigurationStrategy::SSLOption sslOption;
-	ConfigurationStrategy::DBMapping dbMapping;
+    ConfigurationStrategy::FlagsOption flagsOption;
+    ConfigurationStrategy::StringOption stringOption;
+    ConfigurationStrategy::BooleanOption booleanOption;
+    ConfigurationStrategy::IntOption intOption;
+    ConfigurationStrategy::SSLOption sslOption;
+    ConfigurationStrategy::DBMapping dbMapping;
 
-	dbMapping.insert({ 1,"dbtest" });
+    dbMapping.insert({ 1, "dbtest" });
 
-	ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,"127.0.0.1",33060,"tcretest","root","TCRE",false,10,100,1000,
-												 flagsOption ,stringOption,booleanOption,intOption,sslOption,dbMapping };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::MysqlConnector,
+                                                 "127.0.0.1",
+                                                 33060,
+                                                 "tcretest",
+                                                 "root",
+                                                 "TCRE",
+                                                 false,
+                                                 10,
+                                                 100,
+                                                 1000,
+                                                 flagsOption,
+                                                 stringOption,
+                                                 booleanOption,
+                                                 intOption,
+                                                 sslOption,
+                                                 dbMapping };
 
-	Session session{ configurationStrategy };
+    Session session{ configurationStrategy };
 
-	auto schemaContainer = session.GetSchemaContainer();
+    auto schemaContainer = session.GetSchemaContainer();
 
-	ASSERT_LESS(0u, schemaContainer.size());
+    ASSERT_LESS(0u, schemaContainer.size());
 }
-

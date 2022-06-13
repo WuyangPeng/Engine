@@ -14,7 +14,7 @@
 
 namespace ResourceManager
 {
-    class RESOURCE_MANAGER_HIDDEN_DECLARE ResourceManagerCopyUnsharedMacroImpl final
+    class ResourceManagerCopyUnsharedMacroImpl final
     {
     public:
         using ClassType = ResourceManagerCopyUnsharedMacroImpl;

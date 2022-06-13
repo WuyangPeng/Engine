@@ -115,7 +115,7 @@ System::WindowsBool System::SetPixelFormat(WindowsHDC hdc, int ipfd, const Pixel
 
     UnusedFunction(hdc, ipfd, ppfd);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -130,7 +130,7 @@ System::WindowsBool System::SwapBuffers(WindowsHDC hdc) noexcept
 
     UnusedFunction(hdc);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -145,7 +145,7 @@ System::WindowsBool System::WglCopyContext(OpenGLHglrc hglrcSrc, OpenGLHglrc hgl
 
     UnusedFunction(hglrcSrc, hglrcDst, mask);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -190,7 +190,7 @@ System::WindowsBool System::WglDeleteContext(OpenGLHglrc oldContext) noexcept
 
     UnusedFunction(oldContext);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -205,7 +205,7 @@ System::WindowsBool System::WglDescribeLayerPlane(WindowsHDC hDc, int pixelForma
 
     UnusedFunction(hDc, pixelFormat, layerPlane, nBytes, plpd);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -276,7 +276,7 @@ System::WindowsBool System::WglMakeCurrent(WindowsHDC hDc, OpenGLHglrc newContex
 
     UnusedFunction(hDc, newContext);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -291,7 +291,7 @@ System::WindowsBool System::WglRealizeLayerPalette(WindowsHDC hdc, int iLayerPla
 
     UnusedFunction(hdc, iLayerPlane, bRealize);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -321,7 +321,7 @@ System::WindowsBool System::WglShareLists(OpenGLHglrc hrcSrvShare, OpenGLHglrc h
 
     UnusedFunction(hrcSrvShare, hrcSrvSource);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -336,7 +336,7 @@ System::WindowsBool System::WglSwapLayerBuffers(WindowsHDC hdc, WindowsUInt fuFl
 
     UnusedFunction(hdc, fuFlags);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -351,7 +351,7 @@ System::WindowsBool System::WglUseFontBitmaps(WindowsHDC hDC, WindowsDWord first
 
     UnusedFunction(hDC, first, count, listBase);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -366,7 +366,7 @@ System::WindowsBool System::WglUseFontBitmapsA(WindowsHDC hDC, WindowsDWord firs
 
     UnusedFunction(hDC, first, count, listBase);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -381,7 +381,7 @@ System::WindowsBool System::WglUseFontBitmapsW(WindowsHDC hDC, WindowsDWord firs
 
     UnusedFunction(hDC, first, count, listBase);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -396,7 +396,7 @@ System::WindowsBool System::WglUseFontOutlines(WindowsHDC hDC, WindowsDWord firs
 
     UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -411,7 +411,7 @@ System::WindowsBool System::WglUseFontOutlinesA(WindowsHDC hDC, WindowsDWord fir
 
     UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -426,7 +426,7 @@ System::WindowsBool System::WglUseFontOutlinesW(WindowsHDC hDC, WindowsDWord fir
 
     UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
 
-    return g_False;
+    return gFalse;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -487,12 +487,12 @@ void System::WglDeleteBufferRegionARB(WindowsHandle hRegion) noexcept
 
 System::WindowsBool System::WglSaveBufferRegionARB(WindowsHandle hRegion, int x, int y, int width, int height) noexcept
 {
-    SYSTEM_BODY_5_RESULT(wglSaveBufferRegionARB, hRegion, x, y, width, height, g_False);
+    SYSTEM_BODY_5_RESULT(wglSaveBufferRegionARB, hRegion, x, y, width, height, gFalse);
 }
 
 System::WindowsBool System::WglRestoreBufferRegionARB(WindowsHandle hRegion, int x, int y, int width, int height, int xSrc, int ySrc) noexcept
 {
-    SYSTEM_BODY_7_RESULT(wglRestoreBufferRegionARB, hRegion, x, y, width, height, xSrc, ySrc, g_False);
+    SYSTEM_BODY_7_RESULT(wglRestoreBufferRegionARB, hRegion, x, y, width, height, xSrc, ySrc, gFalse);
 }
 
 // WGL_ARB_context_flush_control
@@ -777,7 +777,7 @@ void System::InitWglArbMakeCurrentRead()
 
 System::WindowsBool System::WglMakeContextCurrentARB(WindowsHDC hDrawDC, WindowsHDC hReadDC, OpenGLHglrc hglrc) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentARB, hDrawDC, hReadDC, hglrc, g_False);
+    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentARB, hDrawDC, hReadDC, hglrc, gFalse);
 }
 
 System::WindowsHDC System::WglGetCurrentReadDCARB() noexcept
@@ -878,12 +878,12 @@ int System::WglReleasePbufferDCARB(WglHPBufferARB hPbuffer, WindowsHDC hDC) noex
 
 System::WindowsBool System::WglDestroyPbufferARB(WglHPBufferARB hPbuffer) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglDestroyPbufferARB, hPbuffer, g_False);
+    SYSTEM_BODY_1_RESULT(wglDestroyPbufferARB, hPbuffer, gFalse);
 }
 
 System::WindowsBool System::WglQueryPbufferARB(WglHPBufferARB hPbuffer, int iAttribute, int* piValue) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglQueryPbufferARB, hPbuffer, iAttribute, piValue, g_False);
+    SYSTEM_BODY_3_RESULT(wglQueryPbufferARB, hPbuffer, iAttribute, piValue, gFalse);
 }
 
 // WGL_ARB_pixel_format
@@ -928,17 +928,17 @@ void System::InitWglArbPixelFormat()
 
 System::WindowsBool System::WglGetPixelFormatAttribivARB(WindowsHDC hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, const int* piAttributes, int* piValues) noexcept
 {
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivARB, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, g_False);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivARB, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, gFalse);
 }
 
 System::WindowsBool System::WglGetPixelFormatAttribfvARB(WindowsHDC hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, const int* piAttributes, float* pfValues) noexcept
 {
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvARB, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, g_False);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvARB, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, gFalse);
 }
 
 System::WindowsBool System::WglChoosePixelFormatARB(WindowsHDC hdc, const int* piAttribIList, const float* pfAttribFList, WindowsUInt nMaxFormats, int* piFormats, WindowsUInt* nNumFormats) noexcept
 {
-    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatARB, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, g_False);
+    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatARB, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, gFalse);
 }
 
 // WGL_ARB_pixel_format_float
@@ -1015,17 +1015,17 @@ void System::InitWglArbRenderTexture()
 
 System::WindowsBool System::WglBindTexImageARB(WglHPBufferARB hPbuffer, int iBuffer) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglBindTexImageARB, hPbuffer, iBuffer, g_False);
+    SYSTEM_BODY_2_RESULT(wglBindTexImageARB, hPbuffer, iBuffer, gFalse);
 }
 
 System::WindowsBool System::WglReleaseTexImageARB(WglHPBufferARB hPbuffer, int iBuffer) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglReleaseTexImageARB, hPbuffer, iBuffer, g_False);
+    SYSTEM_BODY_2_RESULT(wglReleaseTexImageARB, hPbuffer, iBuffer, gFalse);
 }
 
 System::WindowsBool System::WglSetPbufferAttribARB(WglHPBufferARB hPbuffer, const int* piAttribList) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglSetPbufferAttribARB, hPbuffer, piAttribList, g_False);
+    SYSTEM_BODY_2_RESULT(wglSetPbufferAttribARB, hPbuffer, piAttribList, gFalse);
 }
 
 // WGL_ARB_robustness_application_isolation
@@ -1166,7 +1166,7 @@ void System::InitWgl3DLStereoControl()
 
 System::WindowsBool System::WglSetStereoEmitterState3DL(WindowsHDC hDC, WindowsUInt uState) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglSetStereoEmitterState3DL, hDC, uState, g_False);
+    SYSTEM_BODY_2_RESULT(wglSetStereoEmitterState3DL, hDC, uState, gFalse);
 }
 
 // AMD À©Õ¹
@@ -1250,12 +1250,12 @@ System::OpenGLHglrc System::WglCreateAssociatedContextAttribsAMD(WindowsUInt id,
 
 System::WindowsBool System::WglDeleteAssociatedContextAMD(OpenGLHglrc hglrc) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglDeleteAssociatedContextAMD, hglrc, g_False);
+    SYSTEM_BODY_1_RESULT(wglDeleteAssociatedContextAMD, hglrc, gFalse);
 }
 
 System::WindowsBool System::WglMakeAssociatedContextCurrentAMD(OpenGLHglrc hglrc) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglMakeAssociatedContextCurrentAMD, hglrc, g_False);
+    SYSTEM_BODY_1_RESULT(wglMakeAssociatedContextCurrentAMD, hglrc, gFalse);
 }
 
 System::OpenGLHglrc System::WglGetCurrentAssociatedContextAMD() noexcept
@@ -1508,17 +1508,17 @@ void System::InitWglExtDisplayColorTable()
 
 GLboolean System::WglCreateDisplayColorTableEXT(GLushort id) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglCreateDisplayColorTableEXT, id, g_False);
+    SYSTEM_BODY_1_RESULT(wglCreateDisplayColorTableEXT, id, gFalse);
 }
 
 GLboolean System::WglLoadDisplayColorTableEXT(const GLushort* table, GLuint length) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglLoadDisplayColorTableEXT, table, length, g_False);
+    SYSTEM_BODY_2_RESULT(wglLoadDisplayColorTableEXT, table, length, gFalse);
 }
 
 GLboolean System::WglBindDisplayColorTableEXT(GLushort id) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglBindDisplayColorTableEXT, id, g_False);
+    SYSTEM_BODY_1_RESULT(wglBindDisplayColorTableEXT, id, gFalse);
 }
 
 void System::WglDestroyDisplayColorTableEXT(GLushort id) noexcept
@@ -1639,7 +1639,7 @@ void System::InitWglExtMakeCurrentRead()
 
 System::WindowsBool System::WglMakeContextCurrentEXT(WindowsHDC hDrawDC, WindowsHDC hReadDC, OpenGLHglrc hglrc) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentEXT, hDrawDC, hReadDC, hglrc, g_False);
+    SYSTEM_BODY_3_RESULT(wglMakeContextCurrentEXT, hDrawDC, hReadDC, hglrc, gFalse);
 }
 
 System::WindowsHDC System::WglGetCurrentReadDCEXT() noexcept
@@ -1740,12 +1740,12 @@ int System::WglReleasePbufferDCEXT(WglHPBufferEXT hPbuffer, WindowsHDC hDC) noex
 
 System::WindowsBool System::WglDestroyPbufferEXT(WglHPBufferEXT hPbuffer) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglDestroyPbufferEXT, hPbuffer, g_False);
+    SYSTEM_BODY_1_RESULT(wglDestroyPbufferEXT, hPbuffer, gFalse);
 }
 
 System::WindowsBool System::WglQueryPbufferEXT(WglHPBufferEXT hPbuffer, int iAttribute, int* piValue) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglQueryPbufferEXT, hPbuffer, iAttribute, piValue, g_False);
+    SYSTEM_BODY_3_RESULT(wglQueryPbufferEXT, hPbuffer, iAttribute, piValue, gFalse);
 }
 
 // WGL_EXT_pixel_format
@@ -1790,17 +1790,17 @@ void System::InitWglExtPixelFormat()
 
 System::WindowsBool System::WglGetPixelFormatAttribivEXT(WindowsHDC hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, int* piAttributes, int* piValues) noexcept
 {
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivEXT, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, g_False);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribivEXT, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, gFalse);
 }
 
 System::WindowsBool System::WglGetPixelFormatAttribfvEXT(WindowsHDC hdc, int iPixelFormat, int iLayerPlane, WindowsUInt nAttributes, int* piAttributes, float* pfValues) noexcept
 {
-    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvEXT, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, g_False);
+    SYSTEM_BODY_6_RESULT(wglGetPixelFormatAttribfvEXT, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, gFalse);
 }
 
 System::WindowsBool System::WglChoosePixelFormatEXT(WindowsHDC hdc, const int* piAttribIList, const float* pfAttribFList, WindowsUInt nMaxFormats, int* piFormats, WindowsUInt* nNumFormats) noexcept
 {
-    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatEXT, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, g_False);
+    SYSTEM_BODY_6_RESULT(wglChoosePixelFormatEXT, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, gFalse);
 }
 
 // WGL_EXT_pixel_format_packed_float
@@ -1875,7 +1875,7 @@ void System::InitWglExtSwapControl()
 
 System::WindowsBool System::WglSwapIntervalEXT(int interval) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglSwapIntervalEXT, interval, g_False);
+    SYSTEM_BODY_1_RESULT(wglSwapIntervalEXT, interval, gFalse);
 }
 
 int System::WglGetSwapIntervalEXT() noexcept
@@ -1957,12 +1957,12 @@ void System::InitWglI3DDigitalVideoControl()
 
 System::WindowsBool System::WglGetDigitalVideoParametersI3D(WindowsHDC hDC, int iAttribute, int* piValue) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglGetDigitalVideoParametersI3D, hDC, iAttribute, piValue, g_False);
+    SYSTEM_BODY_3_RESULT(wglGetDigitalVideoParametersI3D, hDC, iAttribute, piValue, gFalse);
 }
 
 System::WindowsBool System::WglSetDigitalVideoParametersI3D(WindowsHDC hDC, int iAttribute, const int* piValue) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglSetDigitalVideoParametersI3D, hDC, iAttribute, piValue, g_False);
+    SYSTEM_BODY_3_RESULT(wglSetDigitalVideoParametersI3D, hDC, iAttribute, piValue, gFalse);
 }
 
 // WGL_I3D_gamma
@@ -2009,22 +2009,22 @@ void System::InitWglI3DGamma()
 
 System::WindowsBool System::WglGetGammaTableParametersI3D(WindowsHDC hDC, int iAttribute, int* piValue) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglGetGammaTableParametersI3D, hDC, iAttribute, piValue, g_False);
+    SYSTEM_BODY_3_RESULT(wglGetGammaTableParametersI3D, hDC, iAttribute, piValue, gFalse);
 }
 
 System::WindowsBool System::WglSetGammaTableParametersI3D(WindowsHDC hDC, int iAttribute, const int* piValue) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglSetGammaTableParametersI3D, hDC, iAttribute, piValue, g_False);
+    SYSTEM_BODY_3_RESULT(wglSetGammaTableParametersI3D, hDC, iAttribute, piValue, gFalse);
 }
 
 System::WindowsBool System::WglGetGammaTableI3D(WindowsHDC hDC, int iEntries, WindowsUShort* puRed, WindowsUShort* puGreen, WindowsUShort* puBlue) noexcept
 {
-    SYSTEM_BODY_5_RESULT(wglGetGammaTableI3D, hDC, iEntries, puRed, puGreen, puBlue, g_False);
+    SYSTEM_BODY_5_RESULT(wglGetGammaTableI3D, hDC, iEntries, puRed, puGreen, puBlue, gFalse);
 }
 
 System::WindowsBool System::WglSetGammaTableI3D(WindowsHDC hDC, int iEntries, const WindowsUShort* puRed, const WindowsUShort* puGreen, const WindowsUShort* puBlue) noexcept
 {
-    SYSTEM_BODY_5_RESULT(wglSetGammaTableI3D, hDC, iEntries, puRed, puGreen, puBlue, g_False);
+    SYSTEM_BODY_5_RESULT(wglSetGammaTableI3D, hDC, iEntries, puRed, puGreen, puBlue, gFalse);
 }
 
 // WGL_I3D_genlock
@@ -2087,62 +2087,62 @@ void System::InitWglI3DGenlock()
 
 System::WindowsBool System::WglEnableGenlockI3D(WindowsHDC hDC) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglEnableGenlockI3D, hDC, g_False);
+    SYSTEM_BODY_1_RESULT(wglEnableGenlockI3D, hDC, gFalse);
 }
 
 System::WindowsBool System::WglDisableGenlockI3D(WindowsHDC hDC) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglDisableGenlockI3D, hDC, g_False);
+    SYSTEM_BODY_1_RESULT(wglDisableGenlockI3D, hDC, gFalse);
 }
 
 System::WindowsBool System::WglIsEnabledGenlockI3D(WindowsHDC hDC, WindowsBool* pFlag) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglIsEnabledGenlockI3D, hDC, pFlag, g_False);
+    SYSTEM_BODY_2_RESULT(wglIsEnabledGenlockI3D, hDC, pFlag, gFalse);
 }
 
 System::WindowsBool System::WglGenlockSourceI3D(WindowsHDC hDC, WindowsUInt uSource) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGenlockSourceI3D, hDC, uSource, g_False);
+    SYSTEM_BODY_2_RESULT(wglGenlockSourceI3D, hDC, uSource, gFalse);
 }
 
 System::WindowsBool System::WglGetGenlockSourceI3D(WindowsHDC hDC, WindowsUInt* uSource) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceI3D, hDC, uSource, g_False);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceI3D, hDC, uSource, gFalse);
 }
 
 System::WindowsBool System::WglGenlockSourceEdgeI3D(WindowsHDC hDC, WindowsUInt uEdge) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGenlockSourceEdgeI3D, hDC, uEdge, g_False);
+    SYSTEM_BODY_2_RESULT(wglGenlockSourceEdgeI3D, hDC, uEdge, gFalse);
 }
 
 System::WindowsBool System::WglGetGenlockSourceEdgeI3D(WindowsHDC hDC, WindowsUInt* uEdge) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceEdgeI3D, hDC, uEdge, g_False);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceEdgeI3D, hDC, uEdge, gFalse);
 }
 
 System::WindowsBool System::WglGenlockSampleRateI3D(WindowsHDC hDC, WindowsUInt uRate) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGenlockSampleRateI3D, hDC, uRate, g_False);
+    SYSTEM_BODY_2_RESULT(wglGenlockSampleRateI3D, hDC, uRate, gFalse);
 }
 
 System::WindowsBool System::WglGetGenlockSampleRateI3D(WindowsHDC hDC, WindowsUInt* uRate) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSampleRateI3D, hDC, uRate, g_False);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSampleRateI3D, hDC, uRate, gFalse);
 }
 
 System::WindowsBool System::WglGenlockSourceDelayI3D(WindowsHDC hDC, WindowsUInt uDelay) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGenlockSourceDelayI3D, hDC, uDelay, g_False);
+    SYSTEM_BODY_2_RESULT(wglGenlockSourceDelayI3D, hDC, uDelay, gFalse);
 }
 
 System::WindowsBool System::WglGetGenlockSourceDelayI3D(WindowsHDC hDC, WindowsUInt* uDelay) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceDelayI3D, hDC, uDelay, g_False);
+    SYSTEM_BODY_2_RESULT(wglGetGenlockSourceDelayI3D, hDC, uDelay, gFalse);
 }
 
 System::WindowsBool System::WglQueryGenlockMaxSourceDelayI3D(WindowsHDC hDC, WindowsUInt* uMaxLineDelay, WindowsUInt* uMaxPixelDelay) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglQueryGenlockMaxSourceDelayI3D, hDC, uMaxLineDelay, uMaxPixelDelay, g_False);
+    SYSTEM_BODY_3_RESULT(wglQueryGenlockMaxSourceDelayI3D, hDC, uMaxLineDelay, uMaxPixelDelay, gFalse);
 }
 
 // WGL_I3D_image_buffer
@@ -2194,17 +2194,17 @@ System::WindowsVoidPtr System::WglCreateImageBufferI3D(WindowsHDC hDC, WindowsDW
 
 System::WindowsBool System::WglDestroyImageBufferI3D(WindowsHDC hDC, WindowsVoidPtr pAddress) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglDestroyImageBufferI3D, hDC, pAddress, g_False);
+    SYSTEM_BODY_2_RESULT(wglDestroyImageBufferI3D, hDC, pAddress, gFalse);
 }
 
 System::WindowsBool System::WglAssociateImageBufferEventsI3D(WindowsHDC hDC, const WindowsHandle* pEvent, const WindowsVoidPtr* pAddress, const WindowsDWord* pSize, WindowsUInt count) noexcept
 {
-    SYSTEM_BODY_5_RESULT(wglAssociateImageBufferEventsI3D, hDC, pEvent, pAddress, pSize, count, g_False);
+    SYSTEM_BODY_5_RESULT(wglAssociateImageBufferEventsI3D, hDC, pEvent, pAddress, pSize, count, gFalse);
 }
 
 System::WindowsBool System::WglReleaseImageBufferEventsI3D(WindowsHDC hDC, const WindowsVoidPtr* pAddress, WindowsUInt count) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglReleaseImageBufferEventsI3D, hDC, pAddress, count, g_False);
+    SYSTEM_BODY_3_RESULT(wglReleaseImageBufferEventsI3D, hDC, pAddress, count, gFalse);
 }
 
 // WGL_I3D_swap_frame_lock
@@ -2251,22 +2251,22 @@ void System::InitWglI3DSwapFrameLock()
 
 System::WindowsBool System::WglEnableFrameLockI3D() noexcept
 {
-    SYSTEM_BODY_0_RESULT(wglEnableFrameLockI3D, g_False);
+    SYSTEM_BODY_0_RESULT(wglEnableFrameLockI3D, gFalse);
 }
 
 System::WindowsBool System::WglDisableFrameLockI3D() noexcept
 {
-    SYSTEM_BODY_0_RESULT(wglDisableFrameLockI3D, g_False);
+    SYSTEM_BODY_0_RESULT(wglDisableFrameLockI3D, gFalse);
 }
 
 System::WindowsBool System::WglIsEnabledFrameLockI3D(WindowsBool* pFlag) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglIsEnabledFrameLockI3D, pFlag, g_False);
+    SYSTEM_BODY_1_RESULT(wglIsEnabledFrameLockI3D, pFlag, gFalse);
 }
 
 System::WindowsBool System::WglQueryFrameLockMasterI3D(WindowsBool* pFlag) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglQueryFrameLockMasterI3D, pFlag, g_False);
+    SYSTEM_BODY_1_RESULT(wglQueryFrameLockMasterI3D, pFlag, gFalse);
 }
 
 // WGL_I3D_swap_frame_usage
@@ -2313,22 +2313,22 @@ void System::InitWglI3DSwapFrameUsage()
 
 System::WindowsBool System::WglGetFrameUsageI3D(float* pUsage) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglGetFrameUsageI3D, pUsage, g_False);
+    SYSTEM_BODY_1_RESULT(wglGetFrameUsageI3D, pUsage, gFalse);
 }
 
 System::WindowsBool System::WglBeginFrameTrackingI3D() noexcept
 {
-    SYSTEM_BODY_0_RESULT(wglBeginFrameTrackingI3D, g_False);
+    SYSTEM_BODY_0_RESULT(wglBeginFrameTrackingI3D, gFalse);
 }
 
 System::WindowsBool System::WglEndFrameTrackingI3D() noexcept
 {
-    SYSTEM_BODY_0_RESULT(wglEndFrameTrackingI3D, g_False);
+    SYSTEM_BODY_0_RESULT(wglEndFrameTrackingI3D, gFalse);
 }
 
 System::WindowsBool System::WglQueryFrameTrackingI3D(WindowsDWord* pFrameCount, WindowsDWord* pMissedFrames, float* pLastMissedUsage) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglQueryFrameTrackingI3D, pFrameCount, pMissedFrames, pLastMissedUsage, g_False);
+    SYSTEM_BODY_3_RESULT(wglQueryFrameTrackingI3D, pFrameCount, pMissedFrames, pLastMissedUsage, gFalse);
 }
 
 // NV À©Õ¹
@@ -2385,7 +2385,7 @@ void System::InitWglNVDXIntero()
 
 System::WindowsBool System::WglDXSetResourceShareHandleNV(void* dxObject, WindowsHandle shareHandle) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglDXSetResourceShareHandleNV, dxObject, shareHandle, g_False);
+    SYSTEM_BODY_2_RESULT(wglDXSetResourceShareHandleNV, dxObject, shareHandle, gFalse);
 }
 
 System::WindowsHandle System::WglDXOpenDeviceNV(void* dxDevice) noexcept
@@ -2395,7 +2395,7 @@ System::WindowsHandle System::WglDXOpenDeviceNV(void* dxDevice) noexcept
 
 System::WindowsBool System::WglDXCloseDeviceNV(WindowsHandle hDevice) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglDXCloseDeviceNV, hDevice, g_False);
+    SYSTEM_BODY_1_RESULT(wglDXCloseDeviceNV, hDevice, gFalse);
 }
 
 System::WindowsHandle System::WglDXRegisterObjectNV(WindowsHandle hDevice, void* dxObject, GLuint name, GLenum type, GLenum access) noexcept
@@ -2405,22 +2405,22 @@ System::WindowsHandle System::WglDXRegisterObjectNV(WindowsHandle hDevice, void*
 
 System::WindowsBool System::WglDXUnregisterObjectNV(WindowsHandle hDevice, WindowsHandle hObject) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglDXUnregisterObjectNV, hDevice, hObject, g_False);
+    SYSTEM_BODY_2_RESULT(wglDXUnregisterObjectNV, hDevice, hObject, gFalse);
 }
 
 System::WindowsBool System::WglDXObjectAccessNV(WindowsHandle hObject, GLenum access) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglDXObjectAccessNV, hObject, access, g_False);
+    SYSTEM_BODY_2_RESULT(wglDXObjectAccessNV, hObject, access, gFalse);
 }
 
 System::WindowsBool System::WglDXLockObjectsNV(WindowsHandle hDevice, GLint count, WindowsHandle* hObjects) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglDXLockObjectsNV, hDevice, count, hObjects, g_False);
+    SYSTEM_BODY_3_RESULT(wglDXLockObjectsNV, hDevice, count, hObjects, gFalse);
 }
 
 System::WindowsBool System::WglDXUnlockObjectsNV(WindowsHandle hDevice, GLint count, WindowsHandle* hObjects) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglDXUnlockObjectsNV, hDevice, count, hObjects, g_False);
+    SYSTEM_BODY_3_RESULT(wglDXUnlockObjectsNV, hDevice, count, hObjects, gFalse);
 }
 
 // WGL_NV_DX_interop2
@@ -2493,7 +2493,7 @@ void System::InitWglNVCopyImage()
 
 System::WindowsBool System::WglCopyImageSubDataNV(OpenGLHglrc hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, OpenGLHglrc hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) noexcept
 {
-    SYSTEM_BODY_17_RESULT(wglCopyImageSubDataNV, hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, g_False);
+    SYSTEM_BODY_17_RESULT(wglCopyImageSubDataNV, hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, gFalse);
 }
 
 // WGL_NV_delay_before_swap
@@ -2534,7 +2534,7 @@ void System::InitWglNVDelayBeforeSwap()
 
 System::WindowsBool System::WglDelayBeforeSwapNV(WindowsHDC hDC, GLfloat seconds) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglDelayBeforeSwapNV, hDC, seconds, g_False);
+    SYSTEM_BODY_2_RESULT(wglDelayBeforeSwapNV, hDC, seconds, gFalse);
 }
 
 // WGL_NV_float_buffer
@@ -2615,12 +2615,12 @@ void System::InitWglNVGpuAffinity()
 
 System::WindowsBool System::WglEnumGpusNV(WindowsUInt iGpuIndex, WglHGpuNV* phGpu) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglEnumGpusNV, iGpuIndex, phGpu, g_False);
+    SYSTEM_BODY_2_RESULT(wglEnumGpusNV, iGpuIndex, phGpu, gFalse);
 }
 
 System::WindowsBool System::WglEnumGpuDevicesNV(WglHGpuNV hGpu, WindowsUInt iDeviceIndex, WglGpuDevicePtr lpGpuDevice) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglEnumGpuDevicesNV, hGpu, iDeviceIndex, lpGpuDevice, g_False);
+    SYSTEM_BODY_3_RESULT(wglEnumGpuDevicesNV, hGpu, iDeviceIndex, lpGpuDevice, gFalse);
 }
 
 System::WindowsHDC System::WglCreateAffinityDCNV(const WglHGpuNV* phGpuList) noexcept
@@ -2630,12 +2630,12 @@ System::WindowsHDC System::WglCreateAffinityDCNV(const WglHGpuNV* phGpuList) noe
 
 System::WindowsBool System::WglEnumGpusFromAffinityDCNV(WindowsHDC hAffinityDC, WindowsUInt iGpuIndex, WglHGpuNV* hGpu) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglEnumGpusFromAffinityDCNV, hAffinityDC, iGpuIndex, hGpu, g_False);
+    SYSTEM_BODY_3_RESULT(wglEnumGpusFromAffinityDCNV, hAffinityDC, iGpuIndex, hGpu, gFalse);
 }
 
 System::WindowsBool System::WglDeleteDCNV(WindowsHDC hdc) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglDeleteDCNV, hdc, g_False);
+    SYSTEM_BODY_1_RESULT(wglDeleteDCNV, hdc, gFalse);
 }
 
 // WGL_NV_multigpu_context
@@ -2749,12 +2749,12 @@ int System::WglEnumerateVideoDevicesNV(WindowsHDC hDc, WglHVideoOutputDeviceNV* 
 
 System::WindowsBool System::WglBindVideoDeviceNV(WindowsHDC hDc, unsigned int uVideoSlot, WglHVideoOutputDeviceNV hVideoDevice, const int* piAttribList) noexcept
 {
-    SYSTEM_BODY_4_RESULT(wglBindVideoDeviceNV, hDc, uVideoSlot, hVideoDevice, piAttribList, g_False);
+    SYSTEM_BODY_4_RESULT(wglBindVideoDeviceNV, hDc, uVideoSlot, hVideoDevice, piAttribList, gFalse);
 }
 
 System::WindowsBool System::WglQueryCurrentContextNV(int iAttribute, int* piValue) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglQueryCurrentContextNV, iAttribute, piValue, g_False);
+    SYSTEM_BODY_2_RESULT(wglQueryCurrentContextNV, iAttribute, piValue, gFalse);
 }
 
 // WGL_NV_render_depth_texture
@@ -2869,32 +2869,32 @@ void System::InitWglNVSwapGroup()
 
 System::WindowsBool System::WglJoinSwapGroupNV(WindowsHDC hDC, GLuint group) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglJoinSwapGroupNV, hDC, group, g_False);
+    SYSTEM_BODY_2_RESULT(wglJoinSwapGroupNV, hDC, group, gFalse);
 }
 
 System::WindowsBool System::WglBindSwapBarrierNV(GLuint group, GLuint barrier) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglBindSwapBarrierNV, group, barrier, g_False);
+    SYSTEM_BODY_2_RESULT(wglBindSwapBarrierNV, group, barrier, gFalse);
 }
 
 System::WindowsBool System::WglQuerySwapGroupNV(WindowsHDC hDC, GLuint* group, GLuint* barrier) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglQuerySwapGroupNV, hDC, group, barrier, g_False);
+    SYSTEM_BODY_3_RESULT(wglQuerySwapGroupNV, hDC, group, barrier, gFalse);
 }
 
 System::WindowsBool System::WglQueryMaxSwapGroupsNV(WindowsHDC hDC, GLuint* maxGroups, GLuint* maxBarriers) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglQueryMaxSwapGroupsNV, hDC, maxGroups, maxBarriers, g_False);
+    SYSTEM_BODY_3_RESULT(wglQueryMaxSwapGroupsNV, hDC, maxGroups, maxBarriers, gFalse);
 }
 
 System::WindowsBool System::WglQueryFrameCountNV(WindowsHDC hDC, GLuint* count) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglQueryFrameCountNV, hDC, count, g_False);
+    SYSTEM_BODY_2_RESULT(wglQueryFrameCountNV, hDC, count, gFalse);
 }
 
 System::WindowsBool System::WglResetFrameCountNV(WindowsHDC hDC) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglResetFrameCountNV, hDC, g_False);
+    SYSTEM_BODY_1_RESULT(wglResetFrameCountNV, hDC, gFalse);
 }
 
 // WGL_NV_vertex_array_range
@@ -2991,7 +2991,7 @@ void System::InitWglNVVideoCapture()
 
 System::WindowsBool System::WglBindVideoCaptureDeviceNV(WindowsUInt uVideoSlot, WglHVideoInputDeviceNV hDevice) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglBindVideoCaptureDeviceNV, uVideoSlot, hDevice, g_False);
+    SYSTEM_BODY_2_RESULT(wglBindVideoCaptureDeviceNV, uVideoSlot, hDevice, gFalse);
 }
 
 System::WindowsUInt System::WglEnumerateVideoCaptureDevicesNV(WindowsHDC hDc, WglHVideoInputDeviceNV* phDeviceList) noexcept
@@ -3001,17 +3001,17 @@ System::WindowsUInt System::WglEnumerateVideoCaptureDevicesNV(WindowsHDC hDc, Wg
 
 System::WindowsBool System::WglLockVideoCaptureDeviceNV(WindowsHDC hDc, WglHVideoInputDeviceNV hDevice) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglLockVideoCaptureDeviceNV, hDc, hDevice, g_False);
+    SYSTEM_BODY_2_RESULT(wglLockVideoCaptureDeviceNV, hDc, hDevice, gFalse);
 }
 
 System::WindowsBool System::WglQueryVideoCaptureDeviceNV(WindowsHDC hDc, WglHVideoInputDeviceNV hDevice, int iAttribute, int* piValue) noexcept
 {
-    SYSTEM_BODY_4_RESULT(wglQueryVideoCaptureDeviceNV, hDc, hDevice, iAttribute, piValue, g_False);
+    SYSTEM_BODY_4_RESULT(wglQueryVideoCaptureDeviceNV, hDc, hDevice, iAttribute, piValue, gFalse);
 }
 
 System::WindowsBool System::WglReleaseVideoCaptureDeviceNV(WindowsHDC hDc, WglHVideoInputDeviceNV hDevice) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglReleaseVideoCaptureDeviceNV, hDc, hDevice, g_False);
+    SYSTEM_BODY_2_RESULT(wglReleaseVideoCaptureDeviceNV, hDc, hDevice, gFalse);
 }
 
 // WGL_NV_video_output
@@ -3062,32 +3062,32 @@ void System::InitWglNVVideoOutput()
 
 System::WindowsBool System::WglGetVideoDeviceNV(WindowsHDC hDC, int numDevices, WglHPVideoDEV* hVideoDevice) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglGetVideoDeviceNV, hDC, numDevices, hVideoDevice, g_False);
+    SYSTEM_BODY_3_RESULT(wglGetVideoDeviceNV, hDC, numDevices, hVideoDevice, gFalse);
 }
 
 System::WindowsBool System::WglReleaseVideoDeviceNV(WglHPVideoDEV hVideoDevice) noexcept
 {
-    SYSTEM_BODY_1_RESULT(wglReleaseVideoDeviceNV, hVideoDevice, g_False);
+    SYSTEM_BODY_1_RESULT(wglReleaseVideoDeviceNV, hVideoDevice, gFalse);
 }
 
 System::WindowsBool System::WglBindVideoImageNV(WglHPVideoDEV hVideoDevice, WglHPBufferARB hPbuffer, int iVideoBuffer) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglBindVideoImageNV, hVideoDevice, hPbuffer, iVideoBuffer, g_False);
+    SYSTEM_BODY_3_RESULT(wglBindVideoImageNV, hVideoDevice, hPbuffer, iVideoBuffer, gFalse);
 }
 
 System::WindowsBool System::WglReleaseVideoImageNV(WglHPBufferARB hPbuffer, int iVideoBuffer) noexcept
 {
-    SYSTEM_BODY_2_RESULT(wglReleaseVideoImageNV, hPbuffer, iVideoBuffer, g_False);
+    SYSTEM_BODY_2_RESULT(wglReleaseVideoImageNV, hPbuffer, iVideoBuffer, gFalse);
 }
 
 System::WindowsBool System::WglSendPbufferToVideoNV(WglHPBufferARB hPbuffer, int iBufferType, unsigned long* pulCounterPbuffer, WindowsBool bBlock) noexcept
 {
-    SYSTEM_BODY_4_RESULT(wglSendPbufferToVideoNV, hPbuffer, iBufferType, pulCounterPbuffer, bBlock, g_False);
+    SYSTEM_BODY_4_RESULT(wglSendPbufferToVideoNV, hPbuffer, iBufferType, pulCounterPbuffer, bBlock, gFalse);
 }
 
 System::WindowsBool System::WglGetVideoInfoNV(WglHPVideoDEV hpVideoDevice, unsigned long* pulCounterOutputPbuffer, unsigned long* pulCounterOutputVideo) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglGetVideoInfoNV, hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, g_False);
+    SYSTEM_BODY_3_RESULT(wglGetVideoInfoNV, hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, gFalse);
 }
 
 // OML À©Õ¹
@@ -3140,12 +3140,12 @@ void System::InitWglOMLSyncControl()
 
 System::WindowsBool System::WglGetSyncValuesOML(WindowsHDC hdc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
 {
-    SYSTEM_BODY_4_RESULT(wglGetSyncValuesOML, hdc, ust, msc, sbc, g_False);
+    SYSTEM_BODY_4_RESULT(wglGetSyncValuesOML, hdc, ust, msc, sbc, gFalse);
 }
 
 System::WindowsBool System::WglGetMscRateOML(WindowsHDC hdc, WindowsInt32* numerator, WindowsInt32* denominator) noexcept
 {
-    SYSTEM_BODY_3_RESULT(wglGetMscRateOML, hdc, numerator, denominator, g_False);
+    SYSTEM_BODY_3_RESULT(wglGetMscRateOML, hdc, numerator, denominator, gFalse);
 }
 
 System::WindowsInt64 System::WglSwapBuffersMscOML(WindowsHDC hdc, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder) noexcept
@@ -3160,12 +3160,12 @@ System::WindowsInt64 System::WglSwapLayerBuffersMscOML(WindowsHDC hdc, INT fuPla
 
 System::WindowsBool System::WglWaitForMscOML(WindowsHDC hdc, WindowsInt64 target_msc, WindowsInt64 divisor, WindowsInt64 remainder, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
 {
-    SYSTEM_BODY_7_RESULT(wglWaitForMscOML, hdc, target_msc, divisor, remainder, ust, msc, sbc, g_False);
+    SYSTEM_BODY_7_RESULT(wglWaitForMscOML, hdc, target_msc, divisor, remainder, ust, msc, sbc, gFalse);
 }
 
 System::WindowsBool System::WglWaitForSbcOML(WindowsHDC hdc, WindowsInt64 target_sbc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept
 {
-    SYSTEM_BODY_5_RESULT(wglWaitForSbcOML, hdc, target_sbc, ust, msc, sbc, g_False);
+    SYSTEM_BODY_5_RESULT(wglWaitForSbcOML, hdc, target_sbc, ust, msc, sbc, gFalse);
 }
 
 bool System::InitWGL()

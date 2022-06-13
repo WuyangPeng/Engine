@@ -1,20 +1,17 @@
 {
-  "helperSuite": 
-  {
+  "helperSuite": {
     "StreamMacroTesting": 1,
     "UserMacroTesting": 1
   },
 
-  "configurationSuite": 
-  {
+  "configurationSuite": {
     "ConfigurationStrategyTesting": 1,
     "ConfigurationSubStrategyTesting": 1,
     "ConfigurationParameterTesting": 1,
     "AnalysisNetworkConfigurationTesting": 1
   },
 
-  "networkMessageSuite":
-  {
+  "networkMessageSuite": {
     "MessageInterfaceTesting": 1,
     "DoubleMessageTesting": 1,
     "NullMessageTesting": 1,
@@ -42,7 +39,7 @@
     "MessageTypeConditionOperatingTesting": 1,
     "MessageManagerTesting": 1,
     "MessageEventContainerTesting": 1,
-    "MessageEventManagerTesting": 1, 
+    "MessageEventManagerTesting": 1,
     "SendMessageLevelTesting": 100,
     "ReceiveMessageLevelTesting": 100,
     "MessageBufferTesting": 158,
@@ -53,8 +50,7 @@
     "SocketManagerTesting": 1
   },
 
-  "interfaceSuite": 
-  {
+  "interfaceSuite": {
     "BaseMainManagerTesting": 1,
     "SockAddressTesting": 1,
     "NetworkUniqueIDManagerTesting": 1,
@@ -71,8 +67,7 @@
     "ReactiveServerTesting": 1
   },
 
-  "aCEWrappersSuite": 
-  {
+  "aCEWrappersSuite": {
     "ACEMainManagerTesting": 1,
     "ACESockInetAddressTesting": 1,
     "ACESockAcceptorTesting": 1,
@@ -83,57 +78,50 @@
     "SockACEHandleSetIteratorTesting": 1
   },
 
-  "boostWrappersSuite":
-  {
+  "boostWrappersSuite": {
     "BoostMainManagerTesting": 100,
     "BoostMainManagerUseThreadsTesting": 100,
     "BoostMainManagerUseMultiContextTesting": 100,
     "BoostSockInetAddressTesting": 1,
-    "BoostSockConnectorTesting": 1 
+    "BoostSockConnectorTesting": 1
   },
 
-  "boostSockAcceptorSuite":
-  {
+  "boostSockAcceptorSuite": {
     "BoostSockAcceptorSynchronizeTesting": 5,
     "BoostSockAcceptorNonBlockingTesting": 5,
     "BoostSockAcceptorAsynchronousTesting": 5,
     "BoostSockAcceptorHandleTesting": 1
   },
 
-  "boostSockConnectorSuite": 
-  {
-    "BoostSockConnectorSynchronizeTesting": 5,
-    "BoostSockConnectorAsynchronousTesting": 5,
+  "boostSockConnectorSuite": {
+    "BoostSockConnectorSynchronizeTesting": 0,
+    "BoostSockConnectorAsynchronousTesting": 0,
     "BoostSockConnectorHandleTesting": 1
   },
 
-  "boostSockStreamSuite": 
-  {
-    "BoostFixedSockStreamSynchronizeTesting": 5,
-    "BoostFixedSockStreamNonBlockingTesting": 5,
-    "BoostFixedSockStreamAsynchronousTesting": 5,
-    "BoostSegmentationSockStreamSynchronizeTesting": 5,
-    "BoostSegmentationSockStreamNonBlockingTesting": 5,
-    "BoostSegmentationSockStreamAsynchronousTesting": 5,
-    "BoostSockStreamHandleTesting":1
+  "boostSockStreamSuite": {
+    "BoostFixedSockStreamSynchronizeTesting": 0,
+    "BoostFixedSockStreamNonBlockingTesting": 0,
+    "BoostFixedSockStreamAsynchronousTesting": 0,
+    "BoostSegmentationSockStreamSynchronizeTesting": 0,
+    "BoostSegmentationSockStreamNonBlockingTesting": 0,
+    "BoostSegmentationSockStreamAsynchronousTesting": 0,
+    "BoostSockStreamHandleTesting": 0
   },
 
-  "networkWrappersSuite":
-  {
+  "networkWrappersSuite": {
     "NetworkMainManagerTesting": 1,
     "NetworkSockInetAddressTesting": 1,
     "NetworkSockAcceptorTesting": 1,
-    "NetworkSockConnectorTesting": 1, 
-    "NetworkSockStreamTesting":1
+    "NetworkSockConnectorTesting": 1,
+    "NetworkSockStreamTesting": 1
   },
 
-  "socketWrappersSuite":
-  {
+  "socketWrappersSuite": {
 
   },
 
-  "opensslSuite":
-  {
+  "opensslSuite": {
 
   }
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/30 17:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/06 11:20)
 
 #include "DynamicFindIntersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,28 +17,26 @@
 
 using std::swap;
 
- #include SYSTEM_WARNING_DISABLE(26496)
-
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DynamicFindIntersector1Testing)
 
-void Mathematics::DynamicFindIntersector1Testing ::MainTest()
+void Mathematics::DynamicFindIntersector1Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntersectorTest);
 }
 
-void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
+void Mathematics::DynamicFindIntersector1Testing::IntersectorTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        double u0 = randomDistribution(generator);
-        double u1 = randomDistribution(generator);
-        double v0 = randomDistribution(generator);
-        double v1 = randomDistribution(generator);
+        auto u0 = randomDistribution(generator);
+        auto u1 = randomDistribution(generator);
+        auto v0 = randomDistribution(generator);
+        auto v1 = randomDistribution(generator);
 
         if (u1 < u0)
         {
@@ -47,9 +48,9 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
             swap(v0, v1);
         }
 
-        double tMax = MathD::FAbs(randomDistribution(generator));
-        double speedU = randomDistribution(generator);
-        double speedV = randomDistribution(generator);
+        const auto tMax = MathD::FAbs(randomDistribution(generator));
+        const auto speedU = randomDistribution(generator);
+        const auto speedV = randomDistribution(generator);
 
         DynamicFindIntersector1<double> intersector1(u0, u1, v0, v1, tMax, speedU, speedV);
 
@@ -94,10 +95,10 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
         }
         else if (intersector1.IsIntersection())
         {
-            double lastU0 = u0 + intersector1.GetLastTime() * speedU;
-            double lastU1 = u1 + intersector1.GetLastTime() * speedU;
-            double lastV0 = v0 + intersector1.GetLastTime() * speedV;
-            double lastV1 = v1 + intersector1.GetLastTime() * speedV;
+            auto lastU0 = u0 + intersector1.GetLastTime() * speedU;
+            auto lastU1 = u1 + intersector1.GetLastTime() * speedU;
+            auto lastV0 = v0 + intersector1.GetLastTime() * speedV;
+            auto lastV1 = v1 + intersector1.GetLastTime() * speedV;
 
             StaticTestIntersector1<double> lastStaticIntersector1(lastU0, lastU1, lastV0, lastV1);
 
@@ -111,16 +112,16 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
             StaticTestIntersector1<double> leaveLastStaticIntersector1(lastU0, lastU1, lastV0, lastV1);
             ASSERT_FALSE(leaveLastStaticIntersector1.IsIntersection());
 
-            double firstU0 = u0 + intersector1.GetFirstTime() * speedU;
-            double firstU1 = u1 + intersector1.GetFirstTime() * speedU;
-            double firstV0 = v0 + intersector1.GetFirstTime() * speedV;
-            double firstV1 = v1 + intersector1.GetFirstTime() * speedV;
+            auto firstU0 = u0 + intersector1.GetFirstTime() * speedU;
+            auto firstU1 = u1 + intersector1.GetFirstTime() * speedU;
+            auto firstV0 = v0 + intersector1.GetFirstTime() * speedV;
+            auto firstV1 = v1 + intersector1.GetFirstTime() * speedV;
 
             StaticTestIntersector1<double> firstStaticIntersector1(firstU0, firstU1, firstV0, firstV1);
 
             ASSERT_TRUE(firstStaticIntersector1.IsIntersection());
 
-            for (int i = 0; i < intersector1.GetNumIntersections(); ++i)
+            for (auto i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
                 ASSERT_TRUE(MathD::Approximate(firstU0, intersector1.GetIntersection(i), 1e-10) ||
                             MathD::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
@@ -149,12 +150,12 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
     }
 }
 
-void Mathematics::DynamicFindIntersector1Testing ::GetFirstTimeException(const DynamicFindIntersector1<double>& intersector1)
+void Mathematics::DynamicFindIntersector1Testing::GetFirstTimeException(const DynamicFindIntersector1<double>& intersector1)
 {
-    [[maybe_unused]] auto value = intersector1.GetFirstTime();
+    MAYBE_UNUSED auto value = intersector1.GetFirstTime();
 }
 
-void Mathematics::DynamicFindIntersector1Testing ::GetLastTimeException(const DynamicFindIntersector1<double>& intersector1)
+void Mathematics::DynamicFindIntersector1Testing::GetLastTimeException(const DynamicFindIntersector1<double>& intersector1)
 {
-    [[maybe_unused]] auto value = intersector1.GetLastTime();
+    MAYBE_UNUSED auto value = intersector1.GetLastTime();
 }

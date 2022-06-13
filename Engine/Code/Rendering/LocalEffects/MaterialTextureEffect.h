@@ -18,7 +18,7 @@
 
 namespace Rendering
 {
-    class MaterialTextureEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE MaterialTextureEffect : public VisualEffect
     {
     public:
         using ClassType = MaterialTextureEffect;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 10:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 22:33)
 
 #include "QuaternionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,13 +23,9 @@ using std::uniform_int;
 using std::uniform_real;
 using std::vector;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuaternionTesting)
 
-void Mathematics::QuaternionTesting ::MainTest()
+void Mathematics::QuaternionTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
@@ -38,7 +37,7 @@ void Mathematics::QuaternionTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
 
-void Mathematics::QuaternionTesting ::ConstructionTest()
+void Mathematics::QuaternionTesting::ConstructionTest()
 {
     QuaternionF firstQuaternion;
 
@@ -79,8 +78,8 @@ void Mathematics::QuaternionTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(secondQuaternion[3], 35.0, 1e-10);
 
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
-    uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
+    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -92,7 +91,7 @@ void Mathematics::QuaternionTesting ::ConstructionTest()
 
         firstVector.Normalize();
 
-        float firstFloat(secondRandomDistribution(generator));
+        const float firstFloat(secondRandomDistribution(generator));
 
         Matrix3F firstMatrix(firstVector, firstFloat);
 
@@ -102,7 +101,7 @@ void Mathematics::QuaternionTesting ::ConstructionTest()
 
         ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-6f));
 
-        QuaternionF fifthQuaternion(firstVector, firstFloat);
+        const QuaternionF fifthQuaternion(firstVector, firstFloat);
 
         Vector3F secondVector = fifthQuaternion.ToAxis();
         float secondFloat = fifthQuaternion.ToAngle();
@@ -116,13 +115,13 @@ void Mathematics::QuaternionTesting ::ConstructionTest()
         firstVector3fVector.push_back(Vector3F(firstMatrix(0, 1), firstMatrix(1, 1), firstMatrix(2, 1)));
         firstVector3fVector.push_back(Vector3F(firstMatrix(0, 2), firstMatrix(1, 2), firstMatrix(2, 2)));
 
-        QuaternionF sixQuaternion(firstVector3fVector);
+        const QuaternionF sixQuaternion(firstVector3fVector);
 
         vector<Vector3F> secondVector3fVector = sixQuaternion.ToRotationColumnVector3();
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector[0], secondVector3fVector[0]));
-        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector[1], secondVector3fVector[1]));
-        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector[2], secondVector3fVector[2]));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector.at(0), secondVector3fVector.at(0)));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector.at(1), secondVector3fVector.at(1)));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector.at(2), secondVector3fVector.at(2)));
 
         fourthQuaternion.FromRotationMatrix(firstMatrix);
 
@@ -134,13 +133,13 @@ void Mathematics::QuaternionTesting ::ConstructionTest()
 
         secondVector3fVector = sixQuaternion.ToRotationColumnVector3();
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector[0], secondVector3fVector[0]));
-        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector[1], secondVector3fVector[1]));
-        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector[2], secondVector3fVector[2]));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector.at(0), secondVector3fVector.at(0)));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector.at(1), secondVector3fVector.at(1)));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(firstVector3fVector.at(2), secondVector3fVector.at(2)));
 
         fourthQuaternion.FromAxisAngle(firstVector, firstFloat);
 
-        Matrix3ExtractF extract = fifthQuaternion.ToAngleAxis();
+        const Matrix3ExtractF extract = fifthQuaternion.ToAngleAxis();
 
         secondVector = extract.GetAxis();
         secondFloat = extract.GetAngle();
@@ -150,7 +149,7 @@ void Mathematics::QuaternionTesting ::ConstructionTest()
     }
 }
 
-void Mathematics::QuaternionTesting ::AccessTest()
+void Mathematics::QuaternionTesting::AccessTest()
 {
     const QuaternionF firstQuaternion(3.0f, 5.0f, 6.0f, 7.0f);
 
@@ -200,11 +199,11 @@ void Mathematics::QuaternionTesting ::AccessTest()
     ASSERT_APPROXIMATE(secondQuaternion.GetZ(), 7.77, 1e-10);
 }
 
-void Mathematics::QuaternionTesting ::OperatorCalculateTest()
+void Mathematics::QuaternionTesting::OperatorCalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<double> firstRandomDistribution{ -100.0f, 100.0f };
-    uniform_real<double> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
+    const uniform_real<double> firstRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<double> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -216,9 +215,9 @@ void Mathematics::QuaternionTesting ::OperatorCalculateTest()
 
         firstVector.Normalize();
 
-        double firstDouble(secondRandomDistribution(generator));
+        const double firstDouble(secondRandomDistribution(generator));
 
-        QuaternionD firstQuaternion(firstVector, firstDouble);
+        const QuaternionD firstQuaternion(firstVector, firstDouble);
 
         Vector3D secondVector(firstRandomDistribution(generator),
                               firstRandomDistribution(generator),
@@ -226,18 +225,18 @@ void Mathematics::QuaternionTesting ::OperatorCalculateTest()
 
         secondVector.Normalize();
 
-        double secondDouble(secondRandomDistribution(generator));
+        const double secondDouble(secondRandomDistribution(generator));
 
-        QuaternionD secondQuaternion(secondVector, secondDouble);
+        const QuaternionD secondQuaternion(secondVector, secondDouble);
 
-        QuaternionD thirdQuaternion = firstQuaternion * secondQuaternion;
+        const QuaternionD thirdQuaternion = firstQuaternion * secondQuaternion;
 
-        QuaternionD fourthQuaternion(Matrix3D(firstVector, firstDouble) * Matrix3D(secondVector, secondDouble));
+        const QuaternionD fourthQuaternion(Matrix3D(firstVector, firstDouble) * Matrix3D(secondVector, secondDouble));
 
         ASSERT_TRUE(Approximate(thirdQuaternion, fourthQuaternion, 1e-10) || Approximate(thirdQuaternion, -fourthQuaternion, 1e-10));
 
-        Matrix3D firstMatrix = thirdQuaternion.ToRotationMatrix();
-        Matrix3D secondMatrix = fourthQuaternion.ToRotationMatrix();
+        const Matrix3D firstMatrix = thirdQuaternion.ToRotationMatrix();
+        const Matrix3D secondMatrix = fourthQuaternion.ToRotationMatrix();
 
         ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
 
@@ -245,8 +244,8 @@ void Mathematics::QuaternionTesting ::OperatorCalculateTest()
 
         fifthQuaternion *= secondQuaternion;
 
-        Matrix3D thirdMatrix = fifthQuaternion.ToRotationMatrix();
-        Matrix3D fourthMatrix = fourthQuaternion.ToRotationMatrix();
+        const Matrix3D thirdMatrix = fifthQuaternion.ToRotationMatrix();
+        const Matrix3D fourthMatrix = fourthQuaternion.ToRotationMatrix();
 
         ASSERT_TRUE(Approximate(thirdMatrix, fourthMatrix, 1e-10));
 
@@ -261,10 +260,12 @@ void Mathematics::QuaternionTesting ::OperatorCalculateTest()
         ASSERT_APPROXIMATE(sixthQuaternion[1], -seventhQuaternion[1], 1e-10);
         ASSERT_APPROXIMATE(sixthQuaternion[2], -seventhQuaternion[2], 1e-10);
         ASSERT_APPROXIMATE(sixthQuaternion[3], -seventhQuaternion[3], 1e-10);
+
+        fifthQuaternion *= secondQuaternion;
     }
 
-    QuaternionD eighthQuaternion(3.0, 5.1, 6.7, 8.71);
-    QuaternionD ninthQuaternion(13.1, 15.0, 16.71, 18.7);
+    const QuaternionD eighthQuaternion(3.0, 5.1, 6.7, 8.71);
+    const QuaternionD ninthQuaternion(13.1, 15.0, 16.71, 18.7);
 
     QuaternionD tenthQuaternion = eighthQuaternion + ninthQuaternion;
 
@@ -338,13 +339,13 @@ void Mathematics::QuaternionTesting ::OperatorCalculateTest()
     ASSERT_APPROXIMATE(tenthQuaternion[3], 4.355, 1e-10);
 }
 
-void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
+void Mathematics::QuaternionTesting::ArithmeticCalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
-    uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
-    uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
-    uniform_int<> fourthRandomDistribution(0, 20);
+    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
+    const uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
+    const uniform_int<> fourthRandomDistribution(0, 20);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -415,10 +416,10 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
 
         Vector3F firstVector(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-        Vector3F secondVector = firstQuaternion.Rotate(firstVector);
-        Vector3F thirdVector = firstQuaternion.ToRotationMatrix() * firstVector;
+        const Vector3F secondVector = firstQuaternion.Rotate(firstVector);
+        const Vector3F thirdVector = firstQuaternion.ToRotationMatrix() * firstVector;
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector, thirdVector));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector, thirdVector, 1e-03f));
 
         Vector3D fourthVector(firstRandomDistribution(generator),
                               firstRandomDistribution(generator),
@@ -426,7 +427,7 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
 
         fourthVector.Normalize();
 
-        double firstDouble(secondRandomDistribution(generator));
+        const double firstDouble(secondRandomDistribution(generator));
 
         QuaternionD fourthQuaternion(fourthVector, firstDouble);
 
@@ -436,7 +437,7 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
 
         fifthVector.Normalize();
 
-        double secondDouble(secondRandomDistribution(generator));
+        const double secondDouble(secondRandomDistribution(generator));
 
         QuaternionD fifthQuaternion(fifthVector, secondDouble);
 
@@ -450,21 +451,21 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
 
         ASSERT_TRUE(Approximate(fifthQuaternion, sixthQuaternion, 1e-10));
 
-        double firstT = thirdRandomDistribution(generator);
+        const double firstT = thirdRandomDistribution(generator);
 
         sixthQuaternion.Slerp(firstT, fourthQuaternion, fifthQuaternion);
 
         double cosValue = Dot(fourthQuaternion, fifthQuaternion);
         double angle = MathD::ACos(cosValue);
 
-        double passAngle = MathD::ACos(Dot(fourthQuaternion, sixthQuaternion));
-        double remainAngle = MathD::ACos(Dot(sixthQuaternion, fifthQuaternion));
+        const double passAngle = MathD::ACos(Dot(fourthQuaternion, sixthQuaternion));
+        const double remainAngle = MathD::ACos(Dot(sixthQuaternion, fifthQuaternion));
 
         ASSERT_APPROXIMATE(passAngle + remainAngle, angle, 1e-10);
         ASSERT_APPROXIMATE(passAngle / angle, firstT, 1e-10);
         ASSERT_APPROXIMATE(remainAngle / angle, 1.0 - firstT, 1e-10);
 
-        int extraSpins = fourthRandomDistribution(generator);
+        const int extraSpins = fourthRandomDistribution(generator);
 
         sixthQuaternion.SlerpExtraSpins(0.0, fourthQuaternion, fifthQuaternion, extraSpins);
 
@@ -479,10 +480,10 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
         cosValue = Dot(fourthQuaternion, fifthQuaternion);
         angle = MathD::ACos(cosValue);
 
-        double phase = MathD::GetPI() * extraSpins * firstT;
+        const double phase = MathD::GetPI() * extraSpins * firstT;
 
-        double coeff0 = MathD::Sin((1 - firstT) * angle - phase) / MathD::Sin(angle);
-        double coeff1 = MathD::Sin(firstT * angle + phase) / MathD::Sin(angle);
+        const double coeff0 = MathD::Sin((1 - firstT) * angle - phase) / MathD::Sin(angle);
+        const double coeff1 = MathD::Sin(firstT * angle + phase) / MathD::Sin(angle);
 
         QuaternionD seventhQuaternion = coeff0 * fourthQuaternion + coeff1 * fifthQuaternion;
 
@@ -535,7 +536,7 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
 
         eleventhQuaternion.Normalize();
 
-        double slerpT = 2.0 * firstT * (1.0 - firstT);
+        const double slerpT = 2.0 * firstT * (1.0 - firstT);
 
         seventhQuaternion.Slerp(firstT, eighthQuaternion, eleventhQuaternion);
         sixthQuaternion.Slerp(firstT, ninthQuaternion, tenthQuaternion);
@@ -588,20 +589,20 @@ void Mathematics::QuaternionTesting ::ArithmeticCalculateTest()
 
         ASSERT_TRUE(Approximate(seventhQuaternion, quaternionSwingTwist.GetTwist(), 1e-10));
 
-        double dot = eighthQuaternion[0] * ninthQuaternion[0] +
-                     eighthQuaternion[1] * ninthQuaternion[1] +
-                     eighthQuaternion[2] * ninthQuaternion[2] +
-                     eighthQuaternion[3] * ninthQuaternion[3];
+        const double dot = eighthQuaternion[0] * ninthQuaternion[0] +
+                           eighthQuaternion[1] * ninthQuaternion[1] +
+                           eighthQuaternion[2] * ninthQuaternion[2] +
+                           eighthQuaternion[3] * ninthQuaternion[3];
 
         ASSERT_APPROXIMATE(dot, Dot(eighthQuaternion, ninthQuaternion), 1e-10);
     }
 }
 
-void Mathematics::QuaternionTesting ::ClosestCalculateTest()
+void Mathematics::QuaternionTesting::ClosestCalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
-    uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
+    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> secondRandomDistribution{ 0.0f, MathF::GetTwoPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -645,14 +646,14 @@ void Mathematics::QuaternionTesting ::ClosestCalculateTest()
 
         firstQuaternion.Normalize();
 
-        double det = static_cast<double>(firstQuaternion[0]) * firstQuaternion[3] - static_cast<double>(firstQuaternion[1]) * firstQuaternion[2];
+        const double det = static_cast<double>(firstQuaternion[0]) * firstQuaternion[3] - static_cast<double>(firstQuaternion[1]) * firstQuaternion[2];
 
         if (MathD::FAbs(det) < 0.5 - MathD::GetZeroTolerance())
         {
             double discr = 1.0 - 4.0 * det * det;
             discr = MathD::Sqrt(MathD::FAbs(discr));
-            double a = static_cast<double>(firstQuaternion[0]) * firstQuaternion[1] + static_cast<double>(firstQuaternion[2]) * firstQuaternion[3];
-            double b = static_cast<double>(firstQuaternion[0]) * firstQuaternion[0] - static_cast<double>(firstQuaternion[1]) * firstQuaternion[1] + static_cast<double>(firstQuaternion[2]) * firstQuaternion[2] - static_cast<double>(firstQuaternion[3]) * firstQuaternion[3];
+            const double a = static_cast<double>(firstQuaternion[0]) * firstQuaternion[1] + static_cast<double>(firstQuaternion[2]) * firstQuaternion[3];
+            const double b = static_cast<double>(firstQuaternion[0]) * firstQuaternion[0] - static_cast<double>(firstQuaternion[1]) * firstQuaternion[1] + static_cast<double>(firstQuaternion[2]) * firstQuaternion[2] - static_cast<double>(firstQuaternion[3]) * firstQuaternion[3];
 
             double c0 = 0.0;
             double s0 = 0.0;
@@ -686,7 +687,7 @@ void Mathematics::QuaternionTesting ::ClosestCalculateTest()
         }
         else
         {
-            double invLength = MathD::InvSqrt(MathD::FAbs(det));
+            const double invLength = MathD::InvSqrt(MathD::FAbs(det));
 
             thirdQuaternion = firstQuaternion.GetClosestXY();
 
@@ -769,10 +770,10 @@ void Mathematics::QuaternionTesting ::ClosestCalculateTest()
     }
 }
 
-void Mathematics::QuaternionTesting ::FactorCalculateTest()
+void Mathematics::QuaternionTesting::FactorCalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -882,24 +883,23 @@ void Mathematics::QuaternionTesting ::FactorCalculateTest()
     }
 }
 
-void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
+void Mathematics::QuaternionTesting::ConstraintsClosestCalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
-    uniform_real<float> thirdRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> firstRandomDistribution{ -MathF::GetHalfPI(), MathF::GetHalfPI() };
+    const uniform_real<float> thirdRandomDistribution{ -100.0f, 100.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstAngle = firstRandomDistribution(generator);
+        const float firstAngle = firstRandomDistribution(generator);
 
-        uniform_real<float> secondRandomDistribution(firstAngle, MathF::GetHalfPI());
+        const uniform_real<float> secondRandomDistribution(firstAngle, MathF::GetHalfPI());
 
-        float secondAngle = secondRandomDistribution(generator);
+        const float secondAngle = secondRandomDistribution(generator);
 
-        QuaternionConstraintsF
-            firstQuaternionConstraints(firstAngle, secondAngle);
+        const QuaternionConstraintsF firstQuaternionConstraints(firstAngle, secondAngle);
 
         QuaternionF firstQuaternion(thirdRandomDistribution(generator),
                                     thirdRandomDistribution(generator),
@@ -1058,13 +1058,13 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
         firstQuaternion.Normalize();
 
-        float thirdAngle = firstRandomDistribution(generator);
+        const float thirdAngle = firstRandomDistribution(generator);
 
-        uniform_real<float> fourthRandomDistribution(thirdAngle, MathF::GetHalfPI());
+        const uniform_real<float> fourthRandomDistribution(thirdAngle, MathF::GetHalfPI());
 
-        float fourthAngle = fourthRandomDistribution(generator);
+        const float fourthAngle = fourthRandomDistribution(generator);
 
-        QuaternionConstraintsF secondQuaternionConstraints(thirdAngle, fourthAngle);
+        const QuaternionConstraintsF secondQuaternionConstraints(thirdAngle, fourthAngle);
 
         secondQuaternion = firstQuaternion.GetClosestXY();
         thirdQuaternion = firstQuaternion.GetClosestXY(firstQuaternionConstraints, secondQuaternionConstraints);
@@ -1073,11 +1073,11 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
         if (MathF::FAbs(det) < 0.5f - MathF::GetZeroTolerance())
         {
-            float discr = MathF::Sqrt(MathF::FAbs(1.0f - 4.0f * det * det));
+            const float discr = MathF::Sqrt(MathF::FAbs(1.0f - 4.0f * det * det));
 
-            float a = firstQuaternion[0] * firstQuaternion[1] + firstQuaternion[2] * firstQuaternion[3];
-            float b = firstQuaternion[0] * firstQuaternion[0] - firstQuaternion[1] * firstQuaternion[1] +
-                      firstQuaternion[2] * firstQuaternion[2] - firstQuaternion[3] * firstQuaternion[3];
+            const float a = firstQuaternion[0] * firstQuaternion[1] + firstQuaternion[2] * firstQuaternion[3];
+            const float b = firstQuaternion[0] * firstQuaternion[0] - firstQuaternion[1] * firstQuaternion[1] +
+                            firstQuaternion[2] * firstQuaternion[2] - firstQuaternion[3] * firstQuaternion[3];
 
             float c0 = 0.0f;
             float s0 = 0.0f;
@@ -1151,7 +1151,7 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
                     dotOptAngle = dotAngle;
                 }
 
-                ASSERT_TRUE(Approximate(q, thirdQuaternion, 1e-8f));
+                ASSERT_TRUE(Approximate(q, thirdQuaternion, 1e-4f));
             }
         }
         else
@@ -1163,9 +1163,9 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
             if (0.0f < det)
             {
-                float minAngle = firstQuaternionConstraints.GetMinAngle() - secondQuaternionConstraints.GetMaxAngle();
-                float maxAngle = firstQuaternionConstraints.GetMaxAngle() - secondQuaternionConstraints.GetMinAngle();
-                QuaternionConstraintsF con(minAngle, maxAngle);
+                const float minAngle = firstQuaternionConstraints.GetMinAngle() - secondQuaternionConstraints.GetMaxAngle();
+                const float maxAngle = firstQuaternionConstraints.GetMaxAngle() - secondQuaternionConstraints.GetMinAngle();
+                const QuaternionConstraintsF con(minAngle, maxAngle);
 
                 QuaternionF tmp = firstQuaternion.GetClosestX(con);
 
@@ -1194,9 +1194,9 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
             }
             else
             {
-                float minAngle = firstQuaternionConstraints.GetMinAngle() + secondQuaternionConstraints.GetMinAngle();
-                float maxAngle = firstQuaternionConstraints.GetMaxAngle() + secondQuaternionConstraints.GetMaxAngle();
-                QuaternionConstraintsF con(minAngle, maxAngle);
+                const float minAngle = firstQuaternionConstraints.GetMinAngle() + secondQuaternionConstraints.GetMinAngle();
+                const float maxAngle = firstQuaternionConstraints.GetMaxAngle() + secondQuaternionConstraints.GetMaxAngle();
+                const QuaternionConstraintsF con(minAngle, maxAngle);
 
                 QuaternionF tmp = firstQuaternion.GetClosestX(con);
 
@@ -1252,14 +1252,14 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
         if (MathF::FAbs(det) < 0.5f - MathF::GetZeroTolerance())
         {
-            float discr = MathF::Sqrt(MathF::FAbs(1.0f - 4.0f * det * det));
+            const float discr = MathF::Sqrt(MathF::FAbs(1.0f - 4.0f * det * det));
 
-            float a = firstQuaternion[0] * firstQuaternion[3] +
-                      firstQuaternion[1] * firstQuaternion[2];
-            float b = firstQuaternion[0] * firstQuaternion[0] +
-                      firstQuaternion[1] * firstQuaternion[1] -
-                      firstQuaternion[2] * firstQuaternion[2] -
-                      firstQuaternion[3] * firstQuaternion[3];
+            const float a = firstQuaternion[0] * firstQuaternion[3] +
+                            firstQuaternion[1] * firstQuaternion[2];
+            const float b = firstQuaternion[0] * firstQuaternion[0] +
+                            firstQuaternion[1] * firstQuaternion[1] -
+                            firstQuaternion[2] * firstQuaternion[2] -
+                            firstQuaternion[3] * firstQuaternion[3];
 
             float c2 = 0.0f;
             float s2 = 0.0f;
@@ -1333,7 +1333,7 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
                     dotOptAngle = dotAngle;
                 }
 
-                ASSERT_TRUE(Approximate(q, thirdQuaternion, 1e-8f));
+                ASSERT_TRUE(Approximate(q, thirdQuaternion, 1e-4f));
             }
         }
         else
@@ -1345,9 +1345,9 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
             if (0.0f < det)
             {
-                float minAngle = secondQuaternionConstraints.GetMinAngle() - firstQuaternionConstraints.GetMaxAngle();
-                float maxAngle = secondQuaternionConstraints.GetMaxAngle() - firstQuaternionConstraints.GetMinAngle();
-                QuaternionConstraintsF con(minAngle, maxAngle);
+                const float minAngle = secondQuaternionConstraints.GetMinAngle() - firstQuaternionConstraints.GetMaxAngle();
+                const float maxAngle = secondQuaternionConstraints.GetMaxAngle() - firstQuaternionConstraints.GetMinAngle();
+                const QuaternionConstraintsF con(minAngle, maxAngle);
 
                 QuaternionF tmp = firstQuaternion.GetClosestX(con);
 
@@ -1376,9 +1376,9 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
             }
             else
             {
-                float minAngle = firstQuaternionConstraints.GetMinAngle() + secondQuaternionConstraints.GetMinAngle();
-                float maxAngle = firstQuaternionConstraints.GetMaxAngle() + secondQuaternionConstraints.GetMaxAngle();
-                QuaternionConstraintsF con(minAngle, maxAngle);
+                const float minAngle = firstQuaternionConstraints.GetMinAngle() + secondQuaternionConstraints.GetMinAngle();
+                const float maxAngle = firstQuaternionConstraints.GetMaxAngle() + secondQuaternionConstraints.GetMaxAngle();
+                const QuaternionConstraintsF con(minAngle, maxAngle);
 
                 QuaternionF tmp = firstQuaternion.GetClosestX(con);
 
@@ -1434,14 +1434,14 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
         if (MathF::FAbs(det) < 0.5f - MathF::GetZeroTolerance())
         {
-            float discr = MathF::Sqrt(MathF::FAbs(1.0f - 4.0f * det * det));
+            const float discr = MathF::Sqrt(MathF::FAbs(1.0f - 4.0f * det * det));
 
-            float a = firstQuaternion[0] * firstQuaternion[3] -
-                      firstQuaternion[1] * firstQuaternion[2];
-            float b = firstQuaternion[0] * firstQuaternion[0] -
-                      firstQuaternion[1] * firstQuaternion[1] +
-                      firstQuaternion[2] * firstQuaternion[2] -
-                      firstQuaternion[3] * firstQuaternion[3];
+            const float a = firstQuaternion[0] * firstQuaternion[3] -
+                            firstQuaternion[1] * firstQuaternion[2];
+            const float b = firstQuaternion[0] * firstQuaternion[0] -
+                            firstQuaternion[1] * firstQuaternion[1] +
+                            firstQuaternion[2] * firstQuaternion[2] -
+                            firstQuaternion[3] * firstQuaternion[3];
 
             float c2 = 0.0f;
             float s2 = 0.0f;
@@ -1515,7 +1515,7 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
                     dotOptAngle = dotAngle;
                 }
 
-                ASSERT_TRUE(Approximate(q, thirdQuaternion, 1e-8f));
+                ASSERT_TRUE(Approximate(q, thirdQuaternion, 1e-4f));
             }
         }
         else
@@ -1527,9 +1527,9 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
 
             if (0.0f < det)
             {
-                float minAngle = secondQuaternionConstraints.GetMinAngle() - firstQuaternionConstraints.GetMaxAngle();
-                float maxAngle = secondQuaternionConstraints.GetMaxAngle() - firstQuaternionConstraints.GetMinAngle();
-                QuaternionConstraintsF con(minAngle, maxAngle);
+                const float minAngle = secondQuaternionConstraints.GetMinAngle() - firstQuaternionConstraints.GetMaxAngle();
+                const float maxAngle = secondQuaternionConstraints.GetMaxAngle() - firstQuaternionConstraints.GetMinAngle();
+                const QuaternionConstraintsF con(minAngle, maxAngle);
 
                 QuaternionF tmp = firstQuaternion.GetClosestY(con);
 
@@ -1558,9 +1558,9 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
             }
             else
             {
-                float minAngle = firstQuaternionConstraints.GetMinAngle() + secondQuaternionConstraints.GetMinAngle();
-                float maxAngle = firstQuaternionConstraints.GetMaxAngle() + secondQuaternionConstraints.GetMaxAngle();
-                QuaternionConstraintsF con(minAngle, maxAngle);
+                const float minAngle = firstQuaternionConstraints.GetMinAngle() + secondQuaternionConstraints.GetMinAngle();
+                const float maxAngle = firstQuaternionConstraints.GetMaxAngle() + secondQuaternionConstraints.GetMaxAngle();
+                const QuaternionConstraintsF con(minAngle, maxAngle);
 
                 QuaternionF tmp = firstQuaternion.GetClosestY(con);
 
@@ -1611,11 +1611,11 @@ void Mathematics::QuaternionTesting ::ConstraintsClosestCalculateTest()
     }
 }
 
-void Mathematics::QuaternionTesting ::CompareTest()
+void Mathematics::QuaternionTesting::CompareTest()
 {
     default_random_engine generator{};
 
-    uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> firstRandomDistribution{ -100.0f, 100.0f };
 
     QuaternionF firstQuaternion(firstRandomDistribution(generator),
                                 firstRandomDistribution(generator),

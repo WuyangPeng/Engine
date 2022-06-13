@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 13:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 14:00)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_STREAM_TESTING_H
@@ -12,64 +15,66 @@
 
 namespace Network
 {
-	class SockStreamTesting : public SingletonTesting
-	{
-	public:
-            using ClassType = SockStreamTesting;
-            using ParentType = SingletonTesting;
+    class SockStreamTesting : public SingletonTesting
+    {
+    public:
+        using ClassType = SockStreamTesting;
+        using ParentType = SingletonTesting;
 
-        public:
-            explicit SockStreamTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit SockStreamTesting(const OStreamShared& stream);
 
-	private:
-		void MainTest();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void ACETest();
-		void BoostTest();
-		void NetworkTest();
-		void NullTest();
+        using TestFunction = void (ClassType::*)();
 
-		void ACEConstructionTest();
-		void BoostConstructionTest();
-		void NetworkConstructionTest();
-		void NullConstructionTest();
+    private:
+        void MainTest();
 
-		void ACEGetACESockStreamTest();
-		void ACEGetBoostSockStreamExceptionTest();
-		void ACEGetNetworkSockStreamExceptionTest();
+        void ACETest();
+        void BoostTest();
+        void NetworkTest();
+        void NullTest();
 
-		void BoostGetACESockStreamExceptionTest();
-		void BoostGetBoostSockStreamTest();
-		void BoostGetNetworkSockStreamExceptionTest();
+        void ACEConstructionTest();
+        void BoostConstructionTest();
+        void NetworkConstructionTest();
+        void NullConstructionTest();
 
-		void NetworkGetACESockStreamExceptionTest();
-		void NetworkGetBoostSockStreamExceptionTest();
-		void NetworkGetNetworkSockStreamTest();
+        void ACEGetACESockStreamTest();
+        void ACEGetBoostSockStreamExceptionTest();
+        void ACEGetNetworkSockStreamExceptionTest();
 
-		void NullGetACESockStreamExceptionTest();
-		void NullGetBoostSockStreamExceptionTest();
-		void NullGetNetworkSockStreamExceptionTest();
+        void BoostGetACESockStreamExceptionTest();
+        void BoostGetBoostSockStreamTest();
+        void BoostGetNetworkSockStreamExceptionTest();
 
-		void ACEGetACEHandleTest();
-		void ACESetACEHandleTest();
-		void ACESetNetworkHandleExceptionTest();
+        void NetworkGetACESockStreamExceptionTest();
+        void NetworkGetBoostSockStreamExceptionTest();
+        void NetworkGetNetworkSockStreamTest();
 
-		void BoostGetACEHandleExceptionTest();
-		void BoostSetACEHandleExceptionTest();
-		void BoostSetNetworkHandleExceptionTest();
+        void NullGetACESockStreamExceptionTest();
+        void NullGetBoostSockStreamExceptionTest();
+        void NullGetNetworkSockStreamExceptionTest();
 
-		void NetworkGetACEHandleExceptionTest();
-		void NetworkSetACEHandleExceptionTest();
-		void NetworkSetNetworkHandleTest();
+        void ACEGetACEHandleTest();
+        void ACESetACEHandleTest();
+        void ACESetNetworkHandleExceptionTest();
 
-		void NullGetACEHandleExceptionTest();
-		void NullSetACEHandleExceptionTest();
-		void NullSetNetworkHandleExceptionTest();
+        void BoostGetACEHandleExceptionTest();
+        void BoostSetACEHandleExceptionTest();
+        void BoostSetNetworkHandleExceptionTest();
 
-		void DoRunUnitTest() override;
-	};
+        void NetworkGetACEHandleExceptionTest();
+        void NetworkSetACEHandleExceptionTest();
+        void NetworkSetNetworkHandleTest();
+
+        void NullGetACEHandleExceptionTest();
+        void NullSetACEHandleExceptionTest();
+        void NullSetNetworkHandleExceptionTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_STREAM_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SOCK_STREAM_TESTING_H

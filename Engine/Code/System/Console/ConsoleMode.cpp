@@ -17,7 +17,7 @@ bool System::GetSystemConsoleMode(WindowsHandle consoleHandle, WindowsDWordPtr m
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetConsoleMode(consoleHandle, mode) != g_False)
+    if (::GetConsoleMode(consoleHandle, mode) != gFalse)
         return true;
     else
         return false;
@@ -35,7 +35,7 @@ bool System::SetSystemConsoleMode(WindowsHandle consoleHandle, ConsoleInputMode 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != g_False)
+    if (::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != gFalse)
         return true;
     else
         return false;
@@ -53,7 +53,7 @@ bool System::SetSystemConsoleMode(WindowsHandle consoleHandle, ConsoleOutputMode
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != g_False)
+    if (::SetConsoleMode(consoleHandle, EnumCastUnderlying(mode)) != gFalse)
         return true;
     else
         return false;

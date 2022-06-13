@@ -1,71 +1,71 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 16:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 19:09)
 
 #include "ValueScopeTesting.h"
-#include "CoreTools/TemplateTools/ValueScopeDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/TemplateTools/ValueScopeDetail.h"
 
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ValueScopeTesting)
 
-void CoreTools::ValueScopeTesting
-	::MainTest()
+void CoreTools::ValueScopeTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(CastTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CastTest);
 }
 
-void CoreTools::ValueScopeTesting
-	::CastTest()
+void CoreTools::ValueScopeTesting::CastTest()
 {
-	auto value1 = 33;
+    auto value1 = 33;
 
-	ASSERT_EQUAL(value1, 33);
-	{
-		ValueScope<int> valueScope{ value1, 20 };
+    ASSERT_EQUAL(value1, 33);
+    {
+        ValueScope<int> valueScope{ value1, 20 };
 
-		ASSERT_EQUAL(value1, 20);
-	}
-	ASSERT_EQUAL(value1, 33);
+        ASSERT_EQUAL(value1, 20);
+    }
+    ASSERT_EQUAL(value1, 33);
 
-	int value2{ 33 };
+    int value2{ 33 };
 
-	ASSERT_EQUAL(value2, 33);
-	{
-		ValueScope<int> valueScope{ value2, 20, 10 };
+    ASSERT_EQUAL(value2, 33);
+    {
+        ValueScope<int> valueScope{ value2, 20, 10 };
 
-		ASSERT_EQUAL(value2, 20);
-	}
-	ASSERT_EQUAL(value2, 10);
+        ASSERT_EQUAL(value2, 20);
+    }
+    ASSERT_EQUAL(value2, 10);
 
-	string value3{ "Original 1" };
+    string value3{ "Original 1" };
 
-	ASSERT_EQUAL(value3, "Original 1");
-	{
-		ValueScope<string>  valueScope{ value3, "Rebel" };
+    ASSERT_EQUAL(value3, "Original 1");
+    {
+        ValueScope<string> valueScope{ value3, "Rebel" };
 
-		ASSERT_EQUAL(value3, "Rebel");
-	}
-	ASSERT_EQUAL(value3, "Original 1");
+        ASSERT_EQUAL(value3, "Rebel");
+    }
+    ASSERT_EQUAL(value3, "Original 1");
 
-	string value4{ "Original 2" };
+    string value4{ "Original 2" };
 
-	ASSERT_EQUAL(value4, "Original 2");
-	{
-		ValueScope<string>  firstValueScope{ value4, "Matthew", "woz 'ere" };
+    ASSERT_EQUAL(value4, "Original 2");
+    {
+        ValueScope<string> firstValueScope{ value4, "Matthew", "woz 'ere" };
 
-		ASSERT_EQUAL(value4, "Matthew");
+        ASSERT_EQUAL(value4, "Matthew");
 
-		string  sarah{ "Sarah" };
-		string  isOut{ "is out" };
-		ValueScope<string>  secondValueScope{ value4, sarah, isOut };
+        string sarah{ "Sarah" };
+        string isOut{ "is out" };
+        ValueScope<string> secondValueScope{ value4, sarah, isOut };
 
-		ASSERT_EQUAL(value4, "Sarah");
-	}
-	ASSERT_EQUAL(value4, "woz 'ere");
-
+        ASSERT_EQUAL(value4, "Sarah");
+    }
+    ASSERT_EQUAL(value4, "woz 'ere");
 }

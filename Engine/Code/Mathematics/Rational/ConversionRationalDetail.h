@@ -80,7 +80,7 @@ void Mathematics::ConversionRational<T>::Init(T value, const UnsignedIntegerType
     numeratorShifting = 0;
     denominatorShifting = 0;
 
-    FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(numeratorMantissa) };
+    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(numeratorMantissa) };
     maxShifting = floatingPointAnalysis.GetRealExponent();
     if (maxShifting < 0)
     {
@@ -169,7 +169,7 @@ bool Mathematics::ConversionRational<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-uint64_t Mathematics::ConversionRational<T>::GetNumeratorMantissa() const
+uint64_t Mathematics::ConversionRational<T>::GetNumeratorMantissa() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -177,7 +177,7 @@ uint64_t Mathematics::ConversionRational<T>::GetNumeratorMantissa() const
 }
 
 template <typename T>
-uint64_t Mathematics::ConversionRational<T>::GetDenominatorMantissa() const
+uint64_t Mathematics::ConversionRational<T>::GetDenominatorMantissa() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -185,7 +185,7 @@ uint64_t Mathematics::ConversionRational<T>::GetDenominatorMantissa() const
 }
 
 template <typename T>
-Mathematics::NumericalValueSymbol Mathematics::ConversionRational<T>::GetSymbol() const
+Mathematics::NumericalValueSymbol Mathematics::ConversionRational<T>::GetSymbol() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -193,7 +193,7 @@ Mathematics::NumericalValueSymbol Mathematics::ConversionRational<T>::GetSymbol(
 }
 
 template <typename T>
-int Mathematics::ConversionRational<T>::GetNumeratorShifting() const
+int Mathematics::ConversionRational<T>::GetNumeratorShifting() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -201,7 +201,7 @@ int Mathematics::ConversionRational<T>::GetNumeratorShifting() const
 }
 
 template <typename T>
-int Mathematics::ConversionRational<T>::GetDenominatorShifting() const
+int Mathematics::ConversionRational<T>::GetDenominatorShifting() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -209,7 +209,7 @@ int Mathematics::ConversionRational<T>::GetDenominatorShifting() const
 }
 
 template <typename T>
-int Mathematics::ConversionRational<T>::GetMaxShifting() const
+int Mathematics::ConversionRational<T>::GetMaxShifting() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -217,7 +217,7 @@ int Mathematics::ConversionRational<T>::GetMaxShifting() const
 }
 
 template <typename T>
-int Mathematics::ConversionRational<T>::GetReducibilityShifting() const
+int Mathematics::ConversionRational<T>::GetReducibilityShifting() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

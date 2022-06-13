@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/09/02 10:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/10 15:35)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -23,7 +26,7 @@ SoundEffect::TestingHelper::TestingHelper(int argc, char** argv)
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(SoundEffect, TestingHelper)
 
 // private
-void SoundEffect::TestingHelper ::InitSuite()
+void SoundEffect::TestingHelper::InitSuite()
 {
     AddMacroSuite();
     AddConfigurationSuite();
@@ -36,63 +39,63 @@ void SoundEffect::TestingHelper ::InitSuite()
     AddFreeAlutSuite();
 }
 
-void SoundEffect::TestingHelper ::AddMacroSuite()
+void SoundEffect::TestingHelper::AddMacroSuite()
 {
     auto macroSuite = GenerateSuite("宏");
 
     AddSuite(macroSuite);
 }
 
-void SoundEffect::TestingHelper ::AddConfigurationSuite()
+void SoundEffect::TestingHelper::AddConfigurationSuite()
 {
     auto configurationSuite = GenerateSuite("配置");
 
     AddSuite(configurationSuite);
 }
 
-void SoundEffect::TestingHelper ::AddInterfaceSuite()
+void SoundEffect::TestingHelper::AddInterfaceSuite()
 {
     auto interfaceSuite = GenerateSuite("接口");
 
     AddSuite(interfaceSuite);
 }
 
-void SoundEffect::TestingHelper ::AddCsynUtilSuite()
+void SoundEffect::TestingHelper::AddCsynUtilSuite()
 {
     auto csynUtilSuite = GenerateSuite("CsynUtil");
 
     AddSuite(csynUtilSuite);
 }
 
-void SoundEffect::TestingHelper ::AddDirectSoundSuite()
+void SoundEffect::TestingHelper::AddDirectSoundSuite()
 {
     auto directSoundSuite = GenerateSuite("DirectSound");
 
     AddSuite(directSoundSuite);
 }
 
-void SoundEffect::TestingHelper ::AddOggSuite()
+void SoundEffect::TestingHelper::AddOggSuite()
 {
     auto oggSuite = GenerateSuite("Ogg");
 
     AddSuite(oggSuite);
 }
 
-void SoundEffect::TestingHelper ::AddOpenALSuite()
+void SoundEffect::TestingHelper::AddOpenALSuite()
 {
     auto openALSuite = GenerateSuite("OpenAL");
 
     AddSuite(openALSuite);
 }
 
-void SoundEffect::TestingHelper ::AddVorbisSuite()
+void SoundEffect::TestingHelper::AddVorbisSuite()
 {
     auto vorbisSuite = GenerateSuite("Vorbis");
 
     AddSuite(vorbisSuite);
 }
 
-void SoundEffect::TestingHelper ::AddFreeAlutSuite()
+void SoundEffect::TestingHelper::AddFreeAlutSuite()
 {
     auto freeAlutSuite = GenerateSuite("FreeAlut");
 

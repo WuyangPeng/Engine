@@ -18,7 +18,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessC
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessAllowedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid)) != g_False)
+    if ((::AddAccessAllowedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid)) != gFalse)
         return true;
     else
         return false;
@@ -36,7 +36,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessC
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessAllowedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != g_False)
+    if ((::AddAccessAllowedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse)
         return true;
     else
         return false;
@@ -60,7 +60,7 @@ bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckACLPtr acl,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessAllowedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != g_False)
+    if ((::AddAccessAllowedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != gFalse)
     {
         return true;
     }
@@ -88,7 +88,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AddAccessDeniedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid) != g_False)
+    if (::AddAccessDeniedAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid) != gFalse)
         return true;
     else
         return false;
@@ -105,7 +105,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
 bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, ControlACEInheritance aceFlags, SpecificAccess accessMask, SecuritySIDPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if ((::AddAccessDeniedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != g_False)
+    if ((::AddAccessDeniedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse)
         return true;
     else
         return false;
@@ -128,7 +128,7 @@ bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckACLPtr acl,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAccessDeniedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != g_False)
+    if ((::AddAccessDeniedObjectAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), objectTypeGuid, inheritedObjectTypeGuid, sid)) != gFalse)
     {
         return true;
     }
@@ -156,7 +156,7 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl, AccessCon
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::AddAuditAccessAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid, BoolConversion(auditSuccess), BoolConversion(auditFailure))) != g_False)
+    if ((::AddAuditAccessAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(accessMask), sid, BoolConversion(auditSuccess), BoolConversion(auditFailure))) != gFalse)
         return true;
     else
         return false;
@@ -186,7 +186,7 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl,
                                EnumCastUnderlying(accessMask),
                                sid,
                                BoolConversion(auditSuccess),
-                               BoolConversion(auditFailure))) != g_False)
+                               BoolConversion(auditFailure))) != gFalse)
     {
         return true;
     }
@@ -230,7 +230,7 @@ bool System::AddAuditAccessObjectAccessControlEntries(AccessCheckACLPtr acl,
                                    inheritedObjectTypeGuid,
                                    sid,
                                    BoolConversion(auditSuccess),
-                                   BoolConversion(auditFailure))) != g_False)
+                                   BoolConversion(auditFailure))) != gFalse)
     {
         return true;
     }

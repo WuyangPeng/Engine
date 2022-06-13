@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 15:59)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_SUITE_ENTITY_H
 #define CORE_TOOLS_MESSAGE_EVENT_SUITE_ENTITY_H
@@ -18,17 +21,18 @@ namespace CoreTools
         using ParentType = EventEntity<>;
 
     public:
-        Entity();
-        Entity(int value);
+        NODISCARD static std::shared_ptr<ClassType> Create(int value);
+
+        explicit Entity(int value);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         bool EventFunction(const Telegram& telegram) override;
 
-        int GetValue() const noexcept;
+        NODISCARD int GetValue() const noexcept;
 
     private:
-        int m_Value;
+        int value;
     };
 }
 

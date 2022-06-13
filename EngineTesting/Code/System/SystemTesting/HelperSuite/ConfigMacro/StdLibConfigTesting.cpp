@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.1 (2021/03/19 15:07)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 0:57)
 
 #include "StdLibConfigTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -42,6 +42,8 @@ void System::StdLibConfigTesting::StdLibTest()
 void System::StdLibConfigTesting::DinkumwareTest() noexcept
 {
 #ifdef TCRE_USE_DINKUMWARE
+
     static_assert(TCRE_DINKUMWARE_STDLIB == _CPPLIB_VER);
+
 #endif  // TCRE_USE_DINKUMWARE
 }

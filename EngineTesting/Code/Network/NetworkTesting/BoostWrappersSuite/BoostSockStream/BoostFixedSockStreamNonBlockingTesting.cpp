@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 11:39)
 
 #include "BoostFixedSockStreamNonBlockingTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,18 +26,15 @@ using std::make_shared;
 using std::thread;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostFixedSockStreamNonBlockingTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::BoostFixedSockStreamNonBlockingTesting ::MainTest()
+
+void Network::BoostFixedSockStreamNonBlockingTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
-  //  ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::StreamTest()
+void Network::BoostFixedSockStreamNonBlockingTesting::StreamTest()
 {
     thread serverThread{ &ClassType::BoostServerThread, this };
 
@@ -50,13 +50,13 @@ void Network::BoostFixedSockStreamNonBlockingTesting ::StreamTest()
     serverThread.join();
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::NonBlockingStreamTest()
+void Network::BoostFixedSockStreamNonBlockingTesting::NonBlockingStreamTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ClientTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ServerTest);
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ClientTest()
+void Network::BoostFixedSockStreamNonBlockingTesting::ClientTest()
 {
     thread serverThread{ &ClassType::ServerThread, this };
 
@@ -72,12 +72,12 @@ void Network::BoostFixedSockStreamNonBlockingTesting ::ClientTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ClientNonBlockingConnect(const TestingTypeSharedPtr& sockStream)
+void Network::BoostFixedSockStreamNonBlockingTesting::ClientNonBlockingConnect(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
 
-    constexpr auto connectTime = GetAsynchronousConnectTime();
-    for (auto i = 0; i < connectTime; ++i)
+    constexpr auto aConnectTime = GetAsynchronousConnectTime();
+    for (auto i = 0; i < aConnectTime; ++i)
     {
         SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy.GetIP(), configurationStrategy.GetPort(), configurationStrategy) };
 
@@ -85,49 +85,53 @@ void Network::BoostFixedSockStreamNonBlockingTesting ::ClientNonBlockingConnect(
 
         if (sockConnector.Connect(sockStream, sockAddress))
         {
-            [[maybe_unused]] const auto value = sockStream->EnableNonBlock();
+            MAYBE_UNUSED const auto value = sockStream->EnableNonBlock();
 
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, connectTime, "连接服务器失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aConnectTime, "连接服务器失败。");
     }
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ClientNonBlockingSend(const TestingTypeSharedPtr& sockStream)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Network::BoostFixedSockStreamNonBlockingTesting::ClientNonBlockingSend(const TestingTypeSharedPtr& sockStream)
 {
-    constexpr auto sendTime = GetAsynchronousSendTime();
-    for (auto i = 0; i < sendTime; ++i)
+    constexpr auto aSendTime = GetAsynchronousSendTime();
+    for (auto i = 0; i < aSendTime; ++i)
     {
         if (0 < sockStream->Send(CreateMessageBuffer()))
         {
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, sendTime, "发送消息失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aSendTime, "发送消息失败。");
     }
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ClientNonBlockingReceive(const TestingTypeSharedPtr& sockStream)
+void Network::BoostFixedSockStreamNonBlockingTesting::ClientNonBlockingReceive(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostFixedClientConfigurationStrategy(GetRealOffset());
 
     MessageBufferSharedPtr messageBuffer{ make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, configurationStrategy.GetParserStrategy()) };
-    constexpr auto receiveTime = GetAsynchronousReceiveTime();
-    for (auto i = 0; i < receiveTime; ++i)
+    constexpr auto aReceiveTime = GetAsynchronousReceiveTime();
+    for (auto i = 0; i < aReceiveTime; ++i)
     {
         if (0 < sockStream->Receive(messageBuffer))
         {
             break;
         }
 
-        ASSERT_UNEQUAL(i + 1, receiveTime);
+        ASSERT_UNEQUAL(i + 1, aReceiveTime);
     }
 
     VerificationMessageBuffer(messageBuffer);
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ServerTest()
+void Network::BoostFixedSockStreamNonBlockingTesting::ServerTest()
 {
     thread clientThread{ &ClassType::ClientThread, this };
 
@@ -143,55 +147,63 @@ void Network::BoostFixedSockStreamNonBlockingTesting ::ServerTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AddOffset);
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ServerNonBlockingAcceptor(const TestingTypeSharedPtr& sockStream)
+void Network::BoostFixedSockStreamNonBlockingTesting::ServerNonBlockingAcceptor(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostFixedServerConfigurationStrategy(GetRealOffset());
 
-    SockAcceptorSharedPtr sockAcceptor{ make_shared<SockAcceptor>(configurationStrategy) };
-    [[maybe_unused]] const auto value = sockAcceptor->EnableNonBlock();
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
 
-    constexpr auto acceptTime = GetAsynchronousAcceptTime();
-    for (auto i = 0; i < acceptTime; ++i)
+    SockAcceptorSharedPtr sockAcceptor{ make_shared<SockAcceptor>(configurationStrategy) };
+
+#include STSTEM_WARNING_POP
+
+    MAYBE_UNUSED const auto value = sockAcceptor->EnableNonBlock();
+
+    constexpr auto aAcceptTime = GetAsynchronousAcceptTime();
+    for (auto i = 0; i < aAcceptTime; ++i)
     {
         if (sockAcceptor->Accept(*sockStream))
         {
-            [[maybe_unused]] const auto value1 = sockStream->EnableNonBlock();
+            MAYBE_UNUSED const auto value1 = sockStream->EnableNonBlock();
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, acceptTime, "等待客户端连接失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aAcceptTime, "等待客户端连接失败。");
     }
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ServerNonBlockingReceive(const TestingTypeSharedPtr& sockStream)
+void Network::BoostFixedSockStreamNonBlockingTesting::ServerNonBlockingReceive(const TestingTypeSharedPtr& sockStream)
 {
     auto configurationStrategy = GetBoostFixedServerConfigurationStrategy(GetRealOffset());
 
     MessageBufferSharedPtr messageBuffer{ make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, configurationStrategy.GetParserStrategy()) };
-    constexpr auto receiveTime = GetAsynchronousReceiveTime();
-    for (auto i = 0; i < receiveTime; ++i)
+    constexpr auto aReceiveTime = GetAsynchronousReceiveTime();
+    for (auto i = 0; i < aReceiveTime; ++i)
     {
         if (0 < sockStream->Receive(messageBuffer))
         {
             break;
         }
 
-        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, receiveTime, "接收消息失败。");
+        ASSERT_UNEQUAL_FAILURE_THROW(i + 1, aReceiveTime, "接收消息失败。");
     }
 
     VerificationMessageBuffer(messageBuffer);
 }
 
-void Network::BoostFixedSockStreamNonBlockingTesting ::ServerNonBlockingSend(const TestingTypeSharedPtr& sockStream)
+void Network::BoostFixedSockStreamNonBlockingTesting::ServerNonBlockingSend(const TestingTypeSharedPtr& sockStream)
 {
-    constexpr auto sendTime = GetAsynchronousSendTime();
-    for (auto i = 0; i < sendTime; ++i)
+    constexpr auto aSendTime = GetAsynchronousSendTime();
+    for (auto i = 0; i < aSendTime; ++i)
     {
         if (0 < sockStream->Send(CreateMessageBuffer()))
         {
             break;
         }
 
-        ASSERT_UNEQUAL(i + 1, sendTime);
+        ASSERT_UNEQUAL(i + 1, aSendTime);
     }
 }
+
+#include STSTEM_WARNING_POP

@@ -1,16 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/21 11:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 18:31)
 
 #include "APointTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-
 #include "Mathematics/Base/Float.h"
+
 #include <random>
 
 using std::default_random_engine;
@@ -21,22 +24,20 @@ namespace Mathematics
     template class APoint<float>;
     template class APoint<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, APointTesting)
 
-void Mathematics::APointTesting ::MainTest()
+void Mathematics::APointTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
 }
 
-void Mathematics::APointTesting ::ConstructionTest()
+void Mathematics::APointTesting::ConstructionTest()
 {
-    Float3 tuple{ 3.0f, 5.0f, 9.0f };
-    Vector3F vector{ 9.0f, 6.0f, 1.0f };
+    const Float3 tuple{ 3.0f, 5.0f, 9.0f };
+    const Vector3F vector{ 9.0f, 6.0f, 1.0f };
 
     APointF firstPoint;
 
@@ -62,7 +63,7 @@ void Mathematics::APointTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(fourthPoint[1], 6.0f, 1e-8f);
     ASSERT_APPROXIMATE(fourthPoint[2], 1.0f, 1e-8f);
 
-    APointF fifthPoint{ fourthPoint };
+    const APointF fifthPoint{ fourthPoint };
 
     ASSERT_APPROXIMATE(fourthPoint[0], 9.0f, 1e-8f);
     ASSERT_APPROXIMATE(fourthPoint[1], 6.0f, 1e-8f);
@@ -75,41 +76,14 @@ void Mathematics::APointTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(thirdPoint[2], 1.0f, 1e-8f);
 }
 
-void Mathematics::APointTesting ::AccessTest()
+void Mathematics::APointTesting::AccessTest() noexcept
 {
-    // 	DoubleAPoint firstPoint{ 6.0,9.0,1.0 };
-    //
-    // 	auto tuple = firstPoint.GetFloat3();
-    // 	auto vector = firstPoint.GetVector3();
-    // 	auto point = firstPoint.GetHomogeneousPoint();
-    //
-    // 	ASSERT_APPROXIMATE(tuple.GetFirstValue(),6.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(tuple.GetSecondValue(),9.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(tuple.GetThirdValue(),1.0f,1e-8f);
-    //
-    // 	ASSERT_APPROXIMATE(vector.GetX(),6.0,1e-10);
-    // 	ASSERT_APPROXIMATE(vector.GetY(),9.0,1e-10);
-    // 	ASSERT_APPROXIMATE(vector.GetZ(),1.0,1e-10);
-    //
-    // 	ASSERT_APPROXIMATE(point.GetX(),6.0,1e-10);
-    // 	ASSERT_APPROXIMATE(point.GetY(),9.0,1e-10);
-    // 	ASSERT_APPROXIMATE(point.GetZ(),1.0,1e-10);
-    //
-    // 	ASSERT_APPROXIMATE(firstPoint[0],6.0,1e-10);
-    // 	ASSERT_APPROXIMATE(firstPoint[1],9.0,1e-10);
-    // 	ASSERT_APPROXIMATE(firstPoint[2],1.0,1e-10);
-    //
-    // 	const DoubleAPoint secondPoint{ 16.0,92.0,11.0 };
-    //
-    // 	ASSERT_APPROXIMATE(secondPoint[0],16.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondPoint[1],92.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondPoint[2],11.0,1e-10);
 }
 
-void Mathematics::APointTesting ::CalculateTest()
+void Mathematics::APointTesting::CalculateTest()
 {
     APointF firstPoint{ 6.1f, 3.0f, 8.2f };
-    AVectorF firstVector{ 16.1f, 23.0f, 18.2f };
+    const AVectorF firstVector{ 16.1f, 23.0f, 18.2f };
 
     firstPoint += firstVector;
 
@@ -117,7 +91,7 @@ void Mathematics::APointTesting ::CalculateTest()
     ASSERT_APPROXIMATE(firstPoint[1], 26.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstPoint[2], 26.4f, 1e-5f);
 
-    AVectorF secondVector{ 22.1f, 123.0f, 118.2f };
+    const AVectorF secondVector{ 22.1f, 123.0f, 118.2f };
 
     firstPoint -= secondVector;
 
@@ -133,7 +107,7 @@ void Mathematics::APointTesting ::CalculateTest()
     ASSERT_APPROXIMATE(firstPoint[1], -66.0f, 1e-8f);
     ASSERT_APPROXIMATE(firstPoint[2], -83.58f, 1e-5f);
 
-    APointF thirdPoint{ 26.3f, -66.1f, -83.57f };
+    const APointF thirdPoint{ 26.3f, -66.1f, -83.57f };
 
     firstPoint -= thirdPoint;
 
@@ -202,7 +176,7 @@ void Mathematics::APointTesting ::CalculateTest()
     ASSERT_APPROXIMATE(fourthPoint[2], 0.14f, 1e-4f);
 
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -216,7 +190,7 @@ void Mathematics::APointTesting ::CalculateTest()
 
         ASSERT_APPROXIMATE(Dot(fifthPoint, fourthVector), dotProduct, 1e-10);
 
-        auto sixthPoint = fifthPoint + APointD{ 0.001, 0.001, 0.001 };
+        const auto sixthPoint = fifthPoint + APointD{ 0.001, 0.001, 0.001 };
 
         ASSERT_TRUE(Approximate(fifthPoint, fifthPoint, 1e-10));
         ASSERT_TRUE(Approximate(fifthPoint, sixthPoint, 1e-2));

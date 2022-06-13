@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/30 10:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/07 11:16)
 
 #include "DistanceLine2Line2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -11,6 +14,7 @@
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistanceLine2Line2Detail.h"
 #include "Mathematics/Objects2D/Line2Detail.h"
+
 #include <random>
 
 using std::default_random_engine;
@@ -25,7 +29,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceLine2Line2Testing)
 
-void Mathematics::DistanceLine2Line2Testing ::MainTest()
+void Mathematics::DistanceLine2Line2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StaticTest);
@@ -33,21 +37,21 @@ void Mathematics::DistanceLine2Line2Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DerivativeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IntervalTest);
 }
-#include SYSTEM_WARNING_DISABLE(26496)
-void Mathematics::DistanceLine2Line2Testing ::BaseTest()
+
+void Mathematics::DistanceLine2Line2Testing::BaseTest()
 {
     default_random_engine generator;
-    uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2F lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2F lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2F lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2F rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
@@ -71,20 +75,20 @@ void Mathematics::DistanceLine2Line2Testing ::BaseTest()
     }
 }
 
-void Mathematics::DistanceLine2Line2Testing ::StaticTest()
+void Mathematics::DistanceLine2Line2Testing::StaticTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-100.0, 100.0);
+    const uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
@@ -138,8 +142,7 @@ void Mathematics::DistanceLine2Line2Testing ::StaticTest()
 
         lhsDifference = lhsOrigin - squaredResult.GetLhsClosestPoint();
         lhsDifference.Normalize();
-        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) ||
-                    Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) || Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
 
         rhsDifference = rhsOrigin - squaredResult.GetRhsClosestPoint();
         ASSERT_TRUE(rhsDifference.IsZero());
@@ -152,26 +155,26 @@ void Mathematics::DistanceLine2Line2Testing ::StaticTest()
     }
 }
 
-void Mathematics::DistanceLine2Line2Testing ::DynamicTest()
+void Mathematics::DistanceLine2Line2Testing::DynamicTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-100.0, 100.0);
+    const uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
         DistanceLine2Line2<double> distance(Line2D(lhsOrigin, lhsDirection), Line2D(rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -184,13 +187,11 @@ void Mathematics::DistanceLine2Line2Testing ::DynamicTest()
 
         Vector2 lhsDifference = lhsOrigin + t * lhsVelocity - squaredResult.GetLhsClosestPoint();
         lhsDifference.Normalize();
-        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) ||
-                    Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) || Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
 
         Vector2 rhsDifference = rhsOrigin + t * rhsVelocity - squaredResult.GetRhsClosestPoint();
         rhsDifference.Normalize();
-        ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-10) ||
-                    Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, rhsDirection, 1e-10) || Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10));
 
         DistanceResult2D result = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(result.GetDistance(), 0.0, 1e-10);
@@ -206,8 +207,7 @@ void Mathematics::DistanceLine2Line2Testing ::DynamicTest()
 
         lhsDifference = lhsOrigin + t * lhsVelocity - squaredResult.GetLhsClosestPoint();
         lhsDifference.Normalize();
-        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) ||
-                    Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) || Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
 
         rhsDifference = lhsOrigin + lhsDirection + t * rhsVelocity - squaredResult.GetRhsClosestPoint();
         ASSERT_TRUE(rhsDifference.IsZero());
@@ -226,8 +226,7 @@ void Mathematics::DistanceLine2Line2Testing ::DynamicTest()
 
         lhsDifference = lhsOrigin + t * lhsVelocity - squaredResult.GetLhsClosestPoint();
         lhsDifference.Normalize();
-        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) ||
-                    Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) || Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
 
         rhsDifference = rhsOrigin + t * rhsVelocity - squaredResult.GetRhsClosestPoint();
         ASSERT_TRUE(rhsDifference.IsZero());
@@ -240,26 +239,26 @@ void Mathematics::DistanceLine2Line2Testing ::DynamicTest()
     }
 }
 
-void Mathematics::DistanceLine2Line2Testing ::DerivativeTest()
+void Mathematics::DistanceLine2Line2Testing::DerivativeTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-100.0, 100.0);
+    const uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
         DistanceLine2Line2<double> distance(Line2D(lhsOrigin, lhsDirection), Line2D(rhsOrigin, rhsDirection));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
@@ -267,33 +266,33 @@ void Mathematics::DistanceLine2Line2Testing ::DerivativeTest()
 
         DistanceResult2D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         DistanceResult2D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
+        const double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
-        double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
+        const double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(derivativeResult, derivativeApproximation, 1e-10);
 
-        double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
+        const double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
         DistanceResult2D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
 
-void Mathematics::DistanceLine2Line2Testing ::IntervalTest()
+void Mathematics::DistanceLine2Line2Testing::IntervalTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-10.0, 10.0);
+    const uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 lhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 lhsDirection(randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+        const Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
         Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
@@ -316,10 +315,8 @@ void Mathematics::DistanceLine2Line2Testing ::IntervalTest()
 
         ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-10);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
-                                        result.GetLhsClosestPoint(), 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(),
-                                        result.GetRhsClosestPoint(), 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-10);
 
         for (double t = tMin; t < tMax; t += 0.1)
         {
@@ -338,10 +335,9 @@ void Mathematics::DistanceLine2Line2Testing ::IntervalTest()
 
         Vector2 lhsDifference = lhsOrigin + tMin * lhsVelocity - squaredResult.GetLhsClosestPoint();
         lhsDifference.Normalize();
-        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) ||
-                    Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(lhsDifference, lhsDirection, 1e-10) || Vector2ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-10));
 
-        Vector2 rhsDifference = lhsOrigin + lhsDirection + tMin * rhsVelocity - squaredResult.GetRhsClosestPoint();
+        const Vector2 rhsDifference = lhsOrigin + lhsDirection + tMin * rhsVelocity - squaredResult.GetRhsClosestPoint();
         ASSERT_TRUE(rhsDifference.IsZero());
 
         result = equalDistance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);

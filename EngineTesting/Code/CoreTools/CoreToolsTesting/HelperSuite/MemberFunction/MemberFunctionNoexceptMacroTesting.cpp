@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.1 (2021/08/17 13:18)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 11:35)
 
 #include "MemberFunctionNoexceptMacroTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -30,7 +30,7 @@ void CoreTools::MemberFunctionNoexceptMacroTesting::DoRunUnitTest()
 void CoreTools::MemberFunctionNoexceptMacroTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstMemberFunctionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(NonConstMemberFunctionTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(NonConstMemberFunctionTest);
 }
 
 void CoreTools::MemberFunctionNoexceptMacroTesting::ConstMemberFunctionTest()

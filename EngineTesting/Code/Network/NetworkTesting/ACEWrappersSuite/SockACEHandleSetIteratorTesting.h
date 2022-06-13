@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/13 15:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 14:17)
 
 #ifndef NETWORK_TESTING_ACE_WRAPPERS_SUITE_SOCK_ACE_HANDLE_SET_ITERATOR_TESTING_H
 #define NETWORK_TESTING_ACE_WRAPPERS_SUITE_SOCK_ACE_HANDLE_SET_ITERATOR_TESTING_H
@@ -12,24 +15,26 @@
 
 namespace Network
 {
-	class SockACEHandleSetIteratorTesting : public SingletonTesting
-	{
-	public:
-            using ClassType = SockACEHandleSetIteratorTesting;
-            using ParentType = SingletonTesting;
+    class SockACEHandleSetIteratorTesting : public SingletonTesting
+    {
+    public:
+        using ClassType = SockACEHandleSetIteratorTesting;
+        using ParentType = SingletonTesting;
 
-        public:
-            explicit SockACEHandleSetIteratorTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit SockACEHandleSetIteratorTesting(const OStreamShared& stream);
 
-	private:
-		void MainTest();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void HandleSetTest();
+        using TestFunction = void (ClassType::*)();
 
-		void DoRunUnitTest() override;
-	};
+    private:
+        void MainTest();
+
+        void HandleSetTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_ACE_WRAPPERS_SUITE_SOCK_ACE_HANDLE_SET_ITERATOR_TESTING_H
+#endif  // NETWORK_TESTING_ACE_WRAPPERS_SUITE_SOCK_ACE_HANDLE_SET_ITERATOR_TESTING_H

@@ -1,76 +1,71 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/28 09:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 16:09)
 
 #include "SingularValueTesting.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/NumericalAnalysis/SingularValueDetail.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 
-#include <random> 
+#include <random>
 
+using std::default_random_engine;
 using std::swap;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
+
 namespace Mathematics
 {
-	template class SingularValue<float>;
-	template class SingularValue<double>;
+    template class SingularValue<float>;
+    template class SingularValue<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SingularValueTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SingularValueTesting)
 
-void Mathematics::SingularValueTesting
-	::MainTest()
+void Mathematics::SingularValueTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(SingularValueTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SingularValueTest);
 }
 
-void Mathematics::SingularValueTesting
-	::SingularValueTest()
+void Mathematics::SingularValueTesting::SingularValueTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5); 
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Matrix3D matrix;
+    const auto testLoopCount = GetTestLoopCount();
 
-		for (int m = 0; m < 3;++m)
-		{
-			for (int j = 0; j < 3;++j)
-			{
-				matrix(m, j) = firstRandomDistribution(generator);
-			}
-		}
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Matrix3D matrix;
 
-		SingularValueD singularValueDecomposition(matrix);
+        for (int m = 0; m < 3; ++m)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                matrix(m, j) = firstRandomDistribution(generator);
+            }
+        }
 
-		Matrix3D leftMatrix = singularValueDecomposition.GetLeftMatrix();
-		Matrix3D diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
-		Matrix3D rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
+        const SingularValueD singularValueDecomposition(matrix);
 
-		Matrix3D result = leftMatrix * diagonalMatrix;
-		result *= rightTransposeMatrix;
+        const Matrix3D leftMatrix = singularValueDecomposition.GetLeftMatrix();
+        const Matrix3D diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
+        const Matrix3D rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
 
-		typedef bool(*VariableMatrixdApproximate)(const Matrix3D& lhs,const Matrix3D& rhs, const double epsilon);
+        Matrix3D result = leftMatrix * diagonalMatrix;
+        result *= rightTransposeMatrix;
 
-		VariableMatrixdApproximate function = Approximate<double>;
+        using VariableMatrixdApproximate = bool (*)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(function,matrix, result, 1e-6);
-	}
+        VariableMatrixdApproximate function = Approximate<double>;
+
+        ASSERT_APPROXIMATE_USE_FUNCTION(function, matrix, result, 1e-6);
+    }
 }
-

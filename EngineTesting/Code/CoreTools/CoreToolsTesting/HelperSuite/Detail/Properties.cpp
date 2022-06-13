@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.1 (2021/08/20 14:27)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 11:23)
 
 #include "Properties.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 using std::string;
 
-CoreTools::Properties ::Properties() noexcept
+CoreTools::Properties::Properties() noexcept
     : value0{ 1 }, value2{}, value3{ 0 }, value4{ 0 }, value5{}, value6{}, value7{}, value8{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

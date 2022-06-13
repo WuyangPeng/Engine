@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 15:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:20)
 
 #include "UnitTestFailReportOutputTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -13,20 +16,17 @@ using namespace std::literals;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, UnitTestFailReportOutputTesting)
 
-void CoreTools::UnitTestFailReportOutputTesting
-	::MainTest()
+void CoreTools::UnitTestFailReportOutputTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(ReportOutputTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ReportOutputTest);
 }
 
-void CoreTools::UnitTestFailReportOutputTesting
-	::ReportOutputTest()
+void CoreTools::UnitTestFailReportOutputTesting::ReportOutputTest()
 {
-	UnitTestFailReportOutput output{ "ClassName"s,"FileName"s,0,""s,GetStream() };
+    UnitTestFailReportOutput output{ "ClassName"s, "FileName"s, 0, ""s, GetStream() };
 
-	output.PrintFailClassInformation();
-	output.PrintFailFileName();
-	output.PrintFailLineNumber();
-	output.PrintNewLine();
+    output.PrintFailClassInformation();
+    output.PrintFailFileName();
+    output.PrintFailLineNumber();
+    output.PrintNewLine();
 }
-

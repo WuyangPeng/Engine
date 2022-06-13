@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/06 16:36)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:24)
 
 #include "VsnPrintfTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
@@ -55,8 +55,10 @@ void System::VsnPrintfTesting::DoVsnprintfTest(int testStringSize, char* buffer,
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
+
     va_list arguments{};
     va_start(arguments, format);
+
 #include STSTEM_WARNING_POP
 
     const auto count = VsnPrintf(buffer, size, format, arguments);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/02 15:33)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/13 10:22)
 
 #include "AddMandatoryAceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -73,9 +73,12 @@ void System::AddMandatoryAceTesting::GetAccessControlEntriesTest()
     constexpr WindowsDWord newAclSize{ 512 };
 
     array<char, newAclSize> aclbuffer{};
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
-    AccessCheckACLPtr acl = reinterpret_cast<AccessCheckACLPtr>(aclbuffer.data());
+
+    auto acl = reinterpret_cast<AccessCheckACLPtr>(aclbuffer.data());
+
 #include STSTEM_WARNING_POP
 
     ASSERT_TRUE(InitializeAccessControlList(acl, newAclSize, AccessControlListRevision::Revision));

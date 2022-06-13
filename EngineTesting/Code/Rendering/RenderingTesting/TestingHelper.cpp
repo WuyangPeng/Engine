@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/02 19:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/11 17:48)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -486,21 +489,21 @@ void Rendering::TestingHelper::AddNethackSuite()
 
 void Rendering::TestingHelper::AddWingSuite()
 {
-    auto wingSuite = GenerateSuite("Wing"); 
+    auto wingSuite = GenerateSuite("Wing");
 
     AddSuite(wingSuite);
 }
 
 void Rendering::TestingHelper::AddWargamerSuite()
 {
-    auto wargamerSuite = GenerateSuite("Wargamer");  
+    auto wargamerSuite = GenerateSuite("Wargamer");
 
     AddSuite(wargamerSuite);
 }
 
 void Rendering::TestingHelper::AddNvtoolkitSuite()
 {
-    auto nvtoolkitSuite = GenerateSuite("Nvtoolkit");   
+    auto nvtoolkitSuite = GenerateSuite("Nvtoolkit");
 
     AddSuite(nvtoolkitSuite);
 }

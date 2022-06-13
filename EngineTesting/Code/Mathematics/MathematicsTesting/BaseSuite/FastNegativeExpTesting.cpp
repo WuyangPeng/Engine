@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/19 12:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 11:16)
 
 #include "FastNegativeExpTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -25,11 +28,8 @@ namespace Mathematics
 #endif  // BUILDING_MATHEMATICS_STATIC
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, FastNegativeExpTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::FastNegativeExpTesting ::MainTest()
+
+void Mathematics::FastNegativeExpTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FloatFastExpTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DoubleFastExpTest);
@@ -37,17 +37,17 @@ void Mathematics::FastNegativeExpTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DoubleFastExpBoundaryTest);
 }
 
-void Mathematics::FastNegativeExpTesting ::FloatFastExpTest()
+void Mathematics::FastNegativeExpTesting::FloatFastExpTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetExponent() };
+    const uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetExponent() };
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float value = randomDistribution(randomEngine);
+        const float value = randomDistribution(randomEngine);
 
         ASSERT_APPROXIMATE(FastNegativeExpF::FastNegativeExpMoreRoughCalculation(value), exp(-value), 1.0e-3f);
         ASSERT_APPROXIMATE(FastNegativeExpF::FastNegativeExpRoughCalculation(value), exp(-value), 1.0e-4f);
@@ -56,11 +56,11 @@ void Mathematics::FastNegativeExpTesting ::FloatFastExpTest()
     }
 }
 
-void Mathematics::FastNegativeExpTesting ::DoubleFastExpTest()
+void Mathematics::FastNegativeExpTesting::DoubleFastExpTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetExponent() };
+    const uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetExponent() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -75,11 +75,11 @@ void Mathematics::FastNegativeExpTesting ::DoubleFastExpTest()
     }
 }
 
-void Mathematics::FastNegativeExpTesting ::FloatFastExpBoundaryTest()
+void Mathematics::FastNegativeExpTesting::FloatFastExpBoundaryTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ MathF::GetExponent(), MathF::maxReal };
+    const uniform_real<float> randomDistribution{ MathF::GetExponent(), MathF::maxReal };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -94,11 +94,11 @@ void Mathematics::FastNegativeExpTesting ::FloatFastExpBoundaryTest()
     }
 }
 
-void Mathematics::FastNegativeExpTesting ::DoubleFastExpBoundaryTest()
+void Mathematics::FastNegativeExpTesting::DoubleFastExpBoundaryTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ MathD::GetExponent(), MathD::maxReal };
+    const uniform_real<double> randomDistribution{ MathD::GetExponent(), MathD::maxReal };
 
     const auto testLoopCount = GetTestLoopCount();
 

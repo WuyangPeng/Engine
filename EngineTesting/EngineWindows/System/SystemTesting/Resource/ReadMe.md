@@ -14,18 +14,41 @@
 （5） 打印编译器信息宏：PragmaMessageMacroTesting。
 （6） 版本号：VersionTesting。
 （7） 导出标志宏：ExportMacroTesting。
-（8） Windows平台相关宏：GetArraySizeTesting、NullFunctionTesting、MakeLanguageIDTesting、MakeIntreSourceTesting、MakeLanguageCIDTesting、  
-						 HResultTesting、MakeWordTesting、PtrToIntTesting、MarkTesting、DebugTesting。
+（8） Windows平台相关宏：GetArraySizeTesting、
+						 NullFunctionTesting、
+						 MakeLanguageIDTesting、
+						 MakeIntreSourceTesting、
+						 MakeLanguageCIDTesting、  
+						 HResultTesting、
+						 MakeWordTesting、
+						 PtrToIntTesting、
+						 MarkTesting、DebugTesting。
 （9） 安全标识符宏：SecuritySidMacroTesting。
 （10）网络宏：NetworkMacroTesting。
 （11）平台头文件：PlatformTesting。
 （12）枚举的转换运算符：EnumCastTesting。
-（13）枚举宏：EnumAddableTesting、EnumSubtractableTesting、EnumMultiplicationTesting、EnumNegateTesting、EnumIncrementableTesting、
-			  EnumDecrementableTesting、EnumAndableTesting、EnumOrableTesting、EnumXorableTesting、EnumShiftableTesting。
+（13）枚举宏：EnumAddableTesting、
+			  EnumSubtractableTesting、
+			  EnumMultiplicationTesting、
+			  EnumNegateTesting、
+			  EnumIncrementableTesting、
+			  EnumDecrementableTesting、
+			  EnumAndableTesting、
+			  EnumOrableTesting、
+			  EnumXorableTesting、
+			  EnumShiftableTesting。
 （14）Noexcept：NoexceptTesting。
 （15）PragmaWarning：PragmaWarningTesting。
-（16）gl扩展宏：GlExtensionsMacroTesting、WglExtensionsMacroTesting、GlxExtensionsMacroTesting、GlPluginMacroTesting、GlUtilityMarkTesting、
-				GlUtilityGetFunctionTesting、GlUtilityPreviouslyBodyTesting、GlUtilityPreviouslyBodyResultTesting、GlUtilityBodyTesting、GlUtilityBodyResultTesting。
+（16）gl扩展宏：GlExtensionsMacroTesting、
+				WglExtensionsMacroTesting、
+				GlxExtensionsMacroTesting、
+				GlPluginMacroTesting、
+				GlUtilityMarkTesting、
+				GlUtilityGetFunctionTesting、
+				GlUtilityPreviouslyBodyTesting、
+				GlUtilityPreviouslyBodyResultTesting、
+				GlUtilityBodyTesting、
+				GlUtilityBodyResultTesting。
 （17）可变参数模板类型：VariableTemplateTypeTesting。
 
 ----------------------------
@@ -52,13 +75,25 @@
 4.	CharacterStringSuite 
 
 对字符串模块的单元测试，包括：  
-（1） 格式化错误消息：FormatErrorMessageUseLocalAllocTesting、FormatErrorMessageUseBufferTesting、FormatErrorMessageUseDllMoudleAndLocalAllocTesting、FormatErrorMessageUseDllMoudleAndUseBufferTesting、
-					  FormatErrorMessageTesting、FormatStringMessageUseArgumentArrayAndLocalAllocTesting、FormatStringMessageUseArgumentArrayAndBufferTesting、
-					  FormatStringMessageUseVaListAndLocalAllocTesting、FormatStringMessageUseVaListAndUseBufferTesting、SoftwareExceptionTesting。
+（1） 格式化错误消息：FormatErrorMessageUseLocalAllocTesting、
+					  FormatErrorMessageUseBufferTesting、
+					  FormatErrorMessageUseDllMoudleAndLocalAllocTesting、
+					  FormatErrorMessageUseDllMoudleAndUseBufferTesting、
+					  FormatErrorMessageTesting、
+					  FormatStringMessageUseArgumentArrayAndLocalAllocTesting、
+					  FormatStringMessageUseArgumentArrayAndBufferTesting、
+					  FormatStringMessageUseVaListAndLocalAllocTesting、
+					  FormatStringMessageUseVaListAndUseBufferTesting、
+					  SoftwareExceptionTesting。
 （2） 代码页：CodePageValidTesting、CodePageTesting。
-（3） 字符转换：MultiByteConversionWideCharTesting、WideCharConversionMultiByteTesting、UTF8ConversionWideCharTesting、
-			    WideCharConversionUTF8Testing、 CompareStringUseLocaleFlagsTesting、CompareStringUseLocaleStringTesting、
-				CompareStringOrdinalUseBinaryTesting、CaseInsensitiveComparisonTesting。
+（3） 字符转换：MultiByteConversionWideCharTesting、
+				WideCharConversionMultiByteTesting、
+				UTF8ConversionWideCharTesting、
+			    WideCharConversionUTF8Testing、
+				CompareStringUseLocaleFlagsTesting、
+				CompareStringUseLocaleStringTesting、
+				CompareStringOrdinalUseBinaryTesting、
+				CaseInsensitiveComparisonTesting。
 （4） 格式化字符串：VsnPrintfTesting、StrcatTesting、StrlenTesting、StrcpyTesting、StrtokTesting、StrstrTesting、SNPrintfTesting。 
 
 ----------------------------
@@ -66,8 +101,13 @@
 
 对控制台模块的单元测试，包括：
 （1） 控制台句柄：ConsoleHandleTesting。 
-（2） 控制台颜色：TextColourTesting、BackgroundColourTesting、ConsoleCommonTesting、DefaultTextAttributeTesting、 
-			      ReadAttributeTesting 、WriteAttributeTesting、FillAttributeTesting。
+（2） 控制台颜色：TextColourTesting、
+				  BackgroundColourTesting、
+				  ConsoleCommonTesting、
+				  DefaultTextAttributeTesting、 
+			      ReadAttributeTesting 、
+				  WriteAttributeTesting、
+				  FillAttributeTesting。
 （3） 控制台屏幕缓冲区：CreateSystemConsoleScreenBufferTesting、ConsoleScreenBufferInfoTesting、SetConsoleHandleScreenBufferInfoTesting、SetSystemConsoleScreenBufferSizeTesting。
 （4） 控制台字体：ConsoleFontTesting。 
 （5） 控制台模式：ConsoleModeTesting。 
@@ -78,8 +118,13 @@
 6.	MemoryToolsSuite 
 
 对内存工具模块的单元测试，包括： 
-（1） 堆工具：CreateHeapTesting、AllocateHeapTesting、AllocateGenerateExceptionsTesting、ReAllocateHeapTesting、
-			  ValidateHeapTesting、CompactHeapTesting、CurrentProcessHeapTesting 。
+（1） 堆工具：CreateHeapTesting、
+			  AllocateHeapTesting、
+			  AllocateGenerateExceptionsTesting、
+			  ReAllocateHeapTesting、
+			  ValidateHeapTesting、
+			  CompactHeapTesting、
+			  CurrentProcessHeapTesting 。
 （2） 虚拟内存工具：AllocateVirtualOneStepTesting、AllocateVirtualSeparationTesting、VirtualProtectTesting、VirtualQueryTesting。
 （3） 文件映射：CreateFileMappingTesting、OpenFileMappingTesting、ViewOfFileTesting。
 （4） 内存帮助：MemorySetTesting、MemoryCopyTesting、MallocMemoryTesting、FillMemoryTesting、GetWindowsStructDefaultSizeTesting。
@@ -90,22 +135,50 @@
  
 对线程模块的单元测试，包括： 
 （1） 临界区：CriticalSectionTesting、CriticalSectionThreadTesting、SpecifyCriticalSectionTesting、SpecifyCriticalSectionAndSpinCountTesting。
-（2） 信号量：CreateSemaphoreThreadTesting、CreateSemaphoreThreadUseNameTesting、ReleaseSemaphoreTesting、
-			  WaitSemaphoreTesting、WaitMultipleSemaphoreTesting、OpenSemaphoreTesting。
-（3） 事件对象：CreateEventTesting、CreateEventUseNameTesting、ManualEventThreadTesting、AutoEventThreadTesting、
-				ResetEventTesting、WaitForEventTesting、WaitForMultipleEventTesting、OpenEventTesting。
-（4） 互斥锁：CreateDefaultMutexTesting、CreateMutexTesting、CreateMutexUseFlagsTesting、ThreadMutexTesting、
-			  WaitForMutexTesting、WaitForMultipleMutexTesting、OpenMutexTesting、PThreadMutexTesting。
+（2） 信号量：CreateSemaphoreThreadTesting、
+			  CreateSemaphoreThreadUseNameTesting、
+			  ReleaseSemaphoreTesting、
+			  WaitSemaphoreTesting、
+			  WaitMultipleSemaphoreTesting、
+			  OpenSemaphoreTesting。
+（3） 事件对象：CreateEventTesting、
+				CreateEventUseNameTesting、
+				ManualEventThreadTesting、
+				AutoEventThreadTesting、
+				ResetEventTesting、
+				WaitForEventTesting、
+				WaitForMultipleEventTesting、
+				OpenEventTesting。
+（4） 互斥锁：CreateDefaultMutexTesting、
+			  CreateMutexTesting、
+			  CreateMutexUseFlagsTesting、
+			  ThreadMutexTesting、
+			  WaitForMutexTesting、
+			  WaitForMultipleMutexTesting、
+			  OpenMutexTesting、
+			  PThreadMutexTesting。
 （5） 读写锁：SlimReaderWriterInitializeTesting、SlimReaderWriterReaderTesting、SlimReaderWriterWriterTesting。
 （6） 条件变量：ConditionVariableCriticalSectionTesting、ConditionVariableSlimReaderWriterLockTesting。
 （7） 一次对象：InitOnceSynchronousTesting、InitOnceAsynchronousTesting。
-（8） 等待计时器：CreateWaitableTimerManualTesting、CreateWaitableTimerSynchronizationTesting、CreateWaitableTimerUseNameTesting、CreateWaitableTimerManualUseFlagsTesting、
-				  CreateWaitableTimerSynchronizationUseFlagsTesting、OpenWaitableTimerTesting、WaitForWaitableTimerTesting、
-				  WaitForMultipleWaitableTimerTesting、CancelWaitableTimerTesting、SetWaitableTimerTesting。
+（8） 等待计时器：CreateWaitableTimerManualTesting、
+				  CreateWaitableTimerSynchronizationTesting、
+				  CreateWaitableTimerUseNameTesting、
+				  CreateWaitableTimerManualUseFlagsTesting、
+				  CreateWaitableTimerSynchronizationUseFlagsTesting、
+				  OpenWaitableTimerTesting、
+				  WaitForWaitableTimerTesting、
+				  WaitForMultipleWaitableTimerTesting、
+				  CancelWaitableTimerTesting、
+				  SetWaitableTimerTesting。
 （9） 同步工具：SleepTesting、SignalObjectAndWaitTesting。
 （10）原子操作：InterlockedTesting、InterlockedSubtractTesting、InterlockedBinaryTesting。
-（11）线程：CreateDefaultThreadTesting、CreateSuspendedThreadTesting、CreateCThreadTesting、GetCurrentThreadTesting、
-		    ThreadPriorityTesting、WaitForThreadTesting、WaitForMultipleThreadTesting。
+（11）线程：CreateDefaultThreadTesting、
+			CreateSuspendedThreadTesting、
+			CreateCThreadTesting、
+			GetCurrentThreadTesting、
+		    ThreadPriorityTesting、
+			WaitForThreadTesting、
+			WaitForMultipleThreadTesting。
 （12）线程辅助工具：OpenThreadTesting、PriorityBoostTesting、ThreadTimesTesting、ThreadTokenTesting。
 （13）线程局部存储：ThreadLocalStorageTesting。
 （14）进程：CreateDefaultProcessTesting、CreateProcessTesting、GetProcessHandleTesting、ProcessPriorityClassTesting、OpenProcessTesting。
@@ -125,9 +198,19 @@
  
 对文件管理模块的单元测试，包括：
 （1） C函数文件系统：CFileOpenTesting、CFileReadTesting、CFileWriteTesting、CFileSetvBufTesting、CFileCharacterTesting、CFileOperatorTesting。
-（2） 基础文件系统：CreateExistingFileTesting、CreateFileWithDefaultAttributesTesting、CreateFileWithOtherFlagsTesting、CreateFileWithSecurityFlagsTesting、DirectoryTesting、
-					CreateFileWithAttributesTesting、MoveFileTesting、FileLengthTesting、CopyFileTesting、
-					FileHandlePointerTesting、OpenFileTesting、ReadFileTesting、WriteFileTesting。
+（2） 基础文件系统：CreateExistingFileTesting、
+					CreateFileWithDefaultAttributesTesting、
+					CreateFileWithOtherFlagsTesting、
+					CreateFileWithSecurityFlagsTesting、
+					DirectoryTesting、
+					CreateFileWithAttributesTesting、
+					MoveFileTesting、
+					FileLengthTesting、
+					CopyFileTesting、
+					FileHandlePointerTesting、
+					OpenFileTesting、
+					ReadFileTesting、
+					WriteFileTesting。
 （3） 文件工具：CreateDirectoryTesting、DiskFreeTesting。
 （4） 文件时间：FileTimeCompareTesting、FileTimeConvertTesting、FileTimeTesting。
 （5） 查找文件：ChangeNotificationTesting、FindFileTesting、FindVolumeTesting。
@@ -138,15 +221,33 @@
  
 对安全性模块的单元测试，包括：
 （1） 查找权限：LookupPrivilegeTesting。 
-（2） 创建安全性：FileSecurityTesting、KernelObjectSecurityTesting、CreatePrivateObjectSecurityTesting、CreateFilePrivateObjectSecurityTesting、CreatePrivateObjectSecurityUseAutoInheritTesting、
-				  CreatePrivateObjectSecurityWithMultipleInheritanceTesting、SetPrivateObjectSecurityTesting、ConvertToAutoInheritPrivateObjectSecurityTesting、SecurityAccessMaskTesting。
+（2） 创建安全性：FileSecurityTesting、
+				  KernelObjectSecurityTesting、
+				  CreatePrivateObjectSecurityTesting、
+				  CreateFilePrivateObjectSecurityTesting、
+				  CreatePrivateObjectSecurityUseAutoInheritTesting、
+				  CreatePrivateObjectSecurityWithMultipleInheritanceTesting、
+				  SetPrivateObjectSecurityTesting、
+				  ConvertToAutoInheritPrivateObjectSecurityTesting、
+				  SecurityAccessMaskTesting。
 （3） 安全性标识符：InitializeSecurityIdentifierTesting、GetSubAuthorityTesting、WellKnownSidTesting、CopySecurityIdentifierTesting。 
 （4） 访问控制列表：InitializeAclTesting、AclInformationTesting。 
-（5） 安全描述符：UserObjectSecurityTesting、InitializeSecurityDescriptorTesting、SecurityDescriptorDaclTesting、SecurityDescriptorControlTesting、
-				  SecurityDescriptorGroupTesting、SecurityDescriptorOwnerTesting、SecurityDescriptorRMControlTesting、SecurityDescriptorSaclTesting。 
+（5） 安全描述符：UserObjectSecurityTesting、
+				  InitializeSecurityDescriptorTesting、
+				  SecurityDescriptorDaclTesting、
+				  SecurityDescriptorControlTesting、
+				  SecurityDescriptorGroupTesting、
+				  SecurityDescriptorOwnerTesting、
+				  SecurityDescriptorRMControlTesting、
+				  SecurityDescriptorSaclTesting。 
 （6） 访问控制项：AddAccessControlEntriesTesting、FindFirstFreeAccessControlEntriesTesting、AddMandatoryAceTesting。
-（7） 添加访问权限：AddAccessAllowedAceTesting、AddAccessAllowedAceUseAceFlagsTesting、AddAccessAllowedObjectAceTesting、AddAccessDeniedAceTesting、
-					AddAccessDeniedObjectAceTesting、AddAuditAccessAceTesting、AddAuditAccessObjectAceTesting。
+（7） 添加访问权限：AddAccessAllowedAceTesting、
+				    AddAccessAllowedAceUseAceFlagsTesting、
+					AddAccessAllowedObjectAceTesting、
+					AddAccessDeniedAceTesting、
+					AddAccessDeniedObjectAceTesting、
+					AddAuditAccessAceTesting、
+					AddAuditAccessObjectAceTesting。
 （8） 安全基础：TokenInformationTesting、AdjustTokenTesting、AccessesGrantedTesting、DuplicateTokenTesting、RestrictedTokenTesting、QuerySecurityAccessMaskTesting。
 （9） 访问检查：MapGenericMaskTesting、AccessCheckTesting。
 
@@ -154,12 +255,26 @@
 11.	NetworkSuite 
 
 对网络模块的单元测试，包括：
-（1） 套接字原型：GetSocketTesting、HostNetConversionTesting、AcceptTesting、ConnectTesting、SocketNameTesting、SockOptTesting、
-				  IoctlSocketTesting、ShutDownTesting、 RecvFromTesting、SendToTesting、SelectTesting。 
+（1） 套接字原型：GetSocketTesting、
+				  HostNetConversionTesting、
+				  AcceptTesting、
+				  ConnectTesting、
+				  SocketNameTesting、
+				  SockOptTesting、
+				  IoctlSocketTesting、
+				  ShutDownTesting、 
+				  RecvFromTesting、
+				  SendToTesting、
+				  SelectTesting。 
 （2） 数据原型：WinSockHostTesting、WinSockServentTesting、WinSockProtoentTesting。
 （3） Windows扩展原型：WindowsExtensionPrototypesTesting。
-（4） Windows套接字： GetWinSocketTesting、WinSocketAcceptTesting、WinSocketConnectTesting、WinSocketConnectByNameTesting、
-					  WinSocketHostNetConversionTesting、WinSocketRecvFromTesting、WinSocketSendToTesting。   
+（4） Windows套接字： GetWinSocketTesting、
+					  WinSocketAcceptTesting、
+					  WinSocketConnectTesting、
+					  WinSocketConnectByNameTesting、
+					  WinSocketHostNetConversionTesting、
+					  WinSocketRecvFromTesting、
+					  WinSocketSendToTesting。   
 
 ----------------------------
 12.	OpenGLSuite 
@@ -188,8 +303,14 @@
 （3） Window进程：WindowsProcessTesting。
 （4） Window注册：WindowsRegisterTesting。
 （5） Window字体信息：WindowsFontInformationTesting。
-（6） Window系统：GetSystemInfoTesting、DebugBreakTesting、ExitTesting、SystemCommandTesting、
-				  SystemDirectoryTesting、GetSystemUserNameTesting、BoolConversionTesting、GetSystemInputTesting。
+（6） Window系统：GetSystemInfoTesting、
+				  DebugBreakTesting、
+				  ExitTesting、
+				  SystemCommandTesting、
+				  SystemDirectoryTesting、
+				  GetSystemUserNameTesting、
+				  BoolConversionTesting、
+				  GetSystemInputTesting。
 （7） Window名字管道：WindowsNamedPipeTesting。
 （8） Window用户：WindowsUserTesting。
 （9） Engineering：EngineeringTesting。  

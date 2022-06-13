@@ -1,21 +1,17 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "configurationSuite": 
-  {
+  "configurationSuite": {
 
   },
 
-  "inputInterfaceSuite":
-  {
+  "inputInterfaceSuite": {
 
   },
 
-  "outputInterfaceSuite":
-  {
+  "outputInterfaceSuite": {
 
   }
 }

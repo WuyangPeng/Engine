@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 21:47)
 
 #include "Matrix3ToolsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,16 +17,7 @@
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
+
 namespace Mathematics
 {
     template class Matrix3Tools<float>;
@@ -32,17 +26,17 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix3ToolsTesting)
 
-void Mathematics::Matrix3ToolsTesting ::MainTest()
+void Mathematics::Matrix3ToolsTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SingularValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PolarDecompositionValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(QDUDecompositionValueTest);
 }
 
-void Mathematics::Matrix3ToolsTesting ::SingularValueTest()
+void Mathematics::Matrix3ToolsTesting::SingularValueTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -50,26 +44,26 @@ void Mathematics::Matrix3ToolsTesting ::SingularValueTest()
     {
         Matrix3D matrix;
 
-        for (int m = 0; m < 3; ++m)
+        for (auto m = 0; m < 3; ++m)
         {
-            for (int j = 0; j < 3; ++j)
+            for (auto j = 0; j < 3; ++j)
             {
                 matrix(m, j) = firstRandomDistribution(generator);
             }
         }
 
-        Matrix3ToolsD matrix3Tools(matrix);
+        const Matrix3ToolsD matrix3Tools(matrix);
 
-        SingularValueD singularValueDecomposition = matrix3Tools.SingularValueDecomposition();
+        const SingularValueD singularValueDecomposition = matrix3Tools.SingularValueDecomposition();
 
-        Matrix3D leftMatrix = singularValueDecomposition.GetLeftMatrix();
-        Matrix3D diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
-        Matrix3D rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
+        const auto leftMatrix = singularValueDecomposition.GetLeftMatrix();
+        const auto diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
+        const auto rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
 
-        Matrix3D result = leftMatrix * diagonalMatrix;
+        auto result = leftMatrix * diagonalMatrix;
         result *= rightTransposeMatrix;
 
-        typedef bool (*VariableMatrixdApproximate)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
+        using VariableMatrixdApproximate = bool (*)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
@@ -77,10 +71,10 @@ void Mathematics::Matrix3ToolsTesting ::SingularValueTest()
     }
 }
 
-void Mathematics::Matrix3ToolsTesting ::PolarDecompositionValueTest()
+void Mathematics::Matrix3ToolsTesting::PolarDecompositionValueTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -88,24 +82,24 @@ void Mathematics::Matrix3ToolsTesting ::PolarDecompositionValueTest()
     {
         Matrix3D matrix;
 
-        for (int m = 0; m < 3; ++m)
+        for (auto m = 0; m < 3; ++m)
         {
-            for (int j = 0; j < 3; ++j)
+            for (auto j = 0; j < 3; ++j)
             {
                 matrix(m, j) = firstRandomDistribution(generator);
             }
         }
 
-        Matrix3ToolsD matrix3Tools(matrix);
+        const Matrix3ToolsD matrix3Tools(matrix);
 
-        PolarDecompositionValueD polarDecompositionValue = matrix3Tools.PolarDecomposition();
+        const auto polarDecompositionValue = matrix3Tools.PolarDecomposition();
 
-        Matrix3D orthogonalMatrix = polarDecompositionValue.GeOrthogonalMatrix();
-        Matrix3D symmetryMatrix = polarDecompositionValue.GetSymmetryMatrix();
+        const auto orthogonalMatrix = polarDecompositionValue.GeOrthogonalMatrix();
+        const auto symmetryMatrix = polarDecompositionValue.GetSymmetryMatrix();
 
-        Matrix3D result = orthogonalMatrix * symmetryMatrix;
+        const auto result = orthogonalMatrix * symmetryMatrix;
 
-        typedef bool (*VariableMatrixdApproximate)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
+        using VariableMatrixdApproximate = bool (*)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
@@ -113,10 +107,10 @@ void Mathematics::Matrix3ToolsTesting ::PolarDecompositionValueTest()
     }
 }
 
-void Mathematics::Matrix3ToolsTesting ::QDUDecompositionValueTest()
+void Mathematics::Matrix3ToolsTesting::QDUDecompositionValueTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
+    const uniform_real<double> firstRandomDistribution(-1.0e5, 1.0e5);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -124,25 +118,25 @@ void Mathematics::Matrix3ToolsTesting ::QDUDecompositionValueTest()
     {
         Matrix3D matrix;
 
-        for (int m = 0; m < 3; ++m)
+        for (auto m = 0; m < 3; ++m)
         {
-            for (int j = 0; j < 3; ++j)
+            for (auto j = 0; j < 3; ++j)
             {
                 matrix(m, j) = firstRandomDistribution(generator);
             }
         }
-        Matrix3ToolsD matrix3Tools(matrix);
+        const Matrix3ToolsD matrix3Tools(matrix);
 
-        QDUDecompositionValueD qDUDecompositionValue(matrix3Tools.QDUDecomposition());
+        const QDUDecompositionValueD qDUDecompositionValue(matrix3Tools.QDUDecomposition());
 
-        Matrix3D orthogonalMatrix = qDUDecompositionValue.GeOrthogonalMatrix();
-        Matrix3D diagonalMatrix = qDUDecompositionValue.GetDiagonalMatrix();
-        Matrix3D upperTriangularMatrix = qDUDecompositionValue.GetUpperTriangularMatrix();
+        const auto orthogonalMatrix = qDUDecompositionValue.GeOrthogonalMatrix();
+        const auto diagonalMatrix = qDUDecompositionValue.GetDiagonalMatrix();
+        const auto upperTriangularMatrix = qDUDecompositionValue.GetUpperTriangularMatrix();
 
-        Matrix3D result = orthogonalMatrix * diagonalMatrix;
+        auto result = orthogonalMatrix * diagonalMatrix;
         result *= upperTriangularMatrix;
 
-        typedef bool (*VariableMatrixdApproximate)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
+        using VariableMatrixdApproximate = bool (*)(const Matrix3D& lhs, const Matrix3D& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 

@@ -33,7 +33,7 @@ bool System::GetThreadExitCode(ThreadHandle thread, WindowsDWordPtr exitCode) no
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetExitCodeThread(thread, exitCode) != g_False)
+    if (::GetExitCodeThread(thread, exitCode) != gFalse)
         return true;
     else
         return false;
@@ -66,7 +66,7 @@ bool System::SetSystemThreadPriorityBoost(ThreadHandle thread, bool disablePrior
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetThreadPriorityBoost(thread, disablePriorityBoost) != g_False)
+    if (::SetThreadPriorityBoost(thread, disablePriorityBoost) != gFalse)
         return true;
     else
         return false;
@@ -84,8 +84,8 @@ bool System::GetSystemThreadPriorityBoost(ThreadHandle thread, bool* disablePrio
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    WindowsBool result{ g_False };
-    if (::GetThreadPriorityBoost(thread, &result) != g_False)
+    WindowsBool result{ gFalse };
+    if (::GetThreadPriorityBoost(thread, &result) != gFalse)
     {
         BoolConversion(result, disablePriorityBoost);
 
@@ -109,7 +109,7 @@ bool System::OpenSystemThreadToken(ThreadHandle thread, TokenStandardAccess stan
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::OpenThreadToken(thread, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), BoolConversion(openAsSelf), tokenHandle) != g_False)
+    if (::OpenThreadToken(thread, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), BoolConversion(openAsSelf), tokenHandle) != gFalse)
         return true;
     else
         return false;
@@ -127,7 +127,7 @@ bool System::SetSystemThreadToken(ThreadHandlePtr thread, WindowsHandle tokenHan
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetThreadToken(thread, tokenHandle) != g_False)
+    if (::SetThreadToken(thread, tokenHandle) != gFalse)
         return true;
     else
         return false;
@@ -145,7 +145,7 @@ bool System::GetSystemThreadTimes(ThreadHandle thread, FileTimePtr creationTime,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetThreadTimes(thread, creationTime, exitTime, kernelTime, userTime) != g_False)
+    if (::GetThreadTimes(thread, creationTime, exitTime, kernelTime, userTime) != gFalse)
         return true;
     else
         return false;
@@ -163,7 +163,7 @@ bool System::CloseTokenHandle(WindowsHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(tokenHandle) != g_False)
+    if (::CloseHandle(tokenHandle) != gFalse)
         return true;
     else
         return false;
@@ -180,7 +180,7 @@ bool System::ImpersonateThreadSelf(SecurityImpersonationLevel securityImpersonat
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ImpersonateSelf(securityImpersonationLevel) != g_False)
+    if (::ImpersonateSelf(securityImpersonationLevel) != gFalse)
         return true;
     else
         return false;

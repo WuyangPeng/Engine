@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/29 17:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 11:00)
 
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_TESTING_H
@@ -11,24 +14,24 @@
 
 namespace Mathematics
 {
-	class DistanceTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceTesting); 
+    class DistanceTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceTesting);
 
-	private:
-		void MainTest();		
-		void BaseTest();
-		void StaticTest();
-		void DynamicTest();
-		void DerivativeTest();
-		void IntervalTest();
-		void BeginIntervalTest();
-		void EndIntervalTest();
-		void IterationIntervalTest();
+    private:
+        void MainTest();
+        void BaseTest();
+        void StaticTest();
+        void DynamicTest();
+        void DerivativeTest();
+        void IntervalTest();
+        void BeginIntervalTest();
+        void EndIntervalTest();
+        void IterationIntervalTest();
 
-		void DoRunUnitTest() override; 
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_DISTANCE_SUITE_DISTANCE_TESTING_H
+#endif  // MATHEMATICS_DISTANCE_SUITE_DISTANCE_TESTING_H

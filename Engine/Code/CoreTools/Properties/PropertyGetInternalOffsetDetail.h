@@ -16,7 +16,7 @@
 
 template <typename T, typename V, typename Reference, Reference (T::*PF)() const, ptrdiff_t (*FO)()>
 CoreTools::PropertyGetInternalOffset<T, V, Reference, PF, FO>::PropertyGetInternalOffset(ReferenceType value)
-    : m_Value{ value }
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -36,7 +36,7 @@ CoreTools::PropertyGetInternalOffset<T, V, Reference, PF, FO>& CoreTools::Proper
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Value = value;
+    value = value;
 
     return *this;
 }
@@ -46,7 +46,7 @@ void CoreTools::PropertyGetInternalOffset<T, V, Reference, PF, FO>::SetValue(Ref
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Value = value;
+    value = value;
 }
 
 template <typename T, typename V, typename Reference, Reference (T::*PF)() const, ptrdiff_t (*FO)()>
@@ -54,7 +54,7 @@ typename CoreTools::PropertyGetInternalOffset<T, V, Reference, PF, FO>::Referenc
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 template <typename T, typename V, typename Reference, Reference (T::*PF)() const, ptrdiff_t (*FO)()>

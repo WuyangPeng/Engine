@@ -1,35 +1,38 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.3 (2019/09/07 14:23)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/11 17:59)
 
 #ifndef RENDERING_SHADERS_SUITE_H
 #define RENDERING_SHADERS_SUITE_H
 
-#include "SingleShaderBaseDataTesting.h"
-#include "ShaderBaseDataTesting.h"
-#include "SingleShaderConstantsDataTesting.h"
-#include "ShaderConstantsDataTesting.h"
-#include "SingleShaderSamplerDataTesting.h"
-#include "ShaderSamplerDataTesting.h"
-#include "ShaderManageTesting.h"
-#include "ShaderParametersTesting.h"
-#include "VertexShaderTesting.h"
-#include "PixelShaderTesting.h"
-#include "SingleShaderProfileDataTesting.h"
-#include "ShaderProfileDataTesting.h"
 #include "AlphaStateTesting.h"
 #include "CullStateTesting.h"
 #include "DepthStateTesting.h"
+#include "LoadVisualEffectTesting.h"
 #include "OffsetStateTesting.h"
+#include "PixelShaderTesting.h"
+#include "SaveVisualEffectTesting.h"
+#include "ShaderBaseDataTesting.h"
+#include "ShaderConstantsDataTesting.h"
+#include "ShaderManageTesting.h"
+#include "ShaderParametersTesting.h"
+#include "ShaderProfileDataTesting.h"
+#include "ShaderSamplerDataTesting.h"
+#include "SingleShaderBaseDataTesting.h"
+#include "SingleShaderConstantsDataTesting.h"
+#include "SingleShaderProfileDataTesting.h"
+#include "SingleShaderSamplerDataTesting.h"
 #include "StencilStateTesting.h"
-#include "WireStateTesting.h"
+#include "VertexShaderTesting.h"
+#include "VisualEffectInstanceTesting.h"
+#include "VisualEffectTesting.h"
 #include "VisualPassTesting.h"
 #include "VisualTechniqueTesting.h"
-#include "VisualEffectTesting.h"
-#include "SaveVisualEffectTesting.h"
-#include "LoadVisualEffectTesting.h"
-#include "VisualEffectInstanceTesting.h"
+#include "WireStateTesting.h"
 
-#endif // RENDERING_SHADERS_SUITE_H
+#endif  // RENDERING_SHADERS_SUITE_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 13:58)
 
 #include "BoostMainManagerTesting.h"
 #include "System/Helper/Platform.h"
@@ -11,51 +14,51 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
-
 #include "System/Helper/PragmaWarning/Bind.h"
 
 using boost::bind;
 using boost::ref;
 using std::ostream;
 
-Network::BoostMainManagerTesting ::BoostMainManagerTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_Count{ 0 }
+Network::BoostMainManagerTesting::BoostMainManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }, count{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostMainManagerTesting)
+
 void Network::BoostMainManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::BoostMainManagerTesting ::MainTest()
+void Network::BoostMainManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SingletonTest);
 }
 
-void Network::BoostMainManagerTesting ::SingletonTest()
+void Network::BoostMainManagerTesting::SingletonTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::IncrementTest);
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::DecrementToZeroTest);
 }
 
-void Network::BoostMainManagerTesting ::IncrementTest()
+void Network::BoostMainManagerTesting::IncrementTest()
 {
     auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
-    m_Count = 0;
+    count = 0;
 
     boost::asio::post(ioContext, bind(&ClassType::Increment, this));
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
-    ASSERT_EQUAL(m_Count, 0);
+    ASSERT_EQUAL(count, 0);
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
-    ASSERT_EQUAL(m_Count, 1);
+    ASSERT_EQUAL(count, 1);
 
     const auto incrementCount = GetTestLoopCount();
 
@@ -68,45 +71,45 @@ void Network::BoostMainManagerTesting ::IncrementTest()
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
-    ASSERT_EQUAL(m_Count, 1);
+    ASSERT_EQUAL(count, 1);
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
-    ASSERT_EQUAL(m_Count, 1 + incrementCount);
+    ASSERT_EQUAL(count, 1 + incrementCount);
 }
 
-void Network::BoostMainManagerTesting ::DecrementToZeroTest()
+void Network::BoostMainManagerTesting::DecrementToZeroTest()
 {
     auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
     const auto initCount = GetTestLoopCount() + 1;
-    m_Count = initCount;
+    count = initCount;
 
     boost::asio::post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
 
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
-    ASSERT_EQUAL(m_Count, initCount);
+    ASSERT_EQUAL(count, initCount);
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     ASSERT_TRUE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
-    ASSERT_EQUAL(m_Count, 0);
+    ASSERT_EQUAL(count, 0);
 }
 
-void Network::BoostMainManagerTesting ::Increment() noexcept
+void Network::BoostMainManagerTesting::Increment() noexcept
 {
-    ++m_Count;
+    ++count;
 }
 
-void Network::BoostMainManagerTesting ::DecrementToZero(IOContextType& ioContext)
+void Network::BoostMainManagerTesting::DecrementToZero(IOContextType& ioContext)
 {
-    if (0 < m_Count)
+    if (0 < count)
     {
-        --m_Count;
+        --count;
 
-        const auto beforeValue = m_Count;
+        const auto beforeValue = count;
         boost::asio::post(ioContext, bind(&ClassType::DecrementToZero, this, boost::ref(ioContext)));
 
-        ASSERT_EQUAL(m_Count, beforeValue);
+        ASSERT_EQUAL(count, beforeValue);
     }
     else
     {

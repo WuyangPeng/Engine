@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/05/24 15:54)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 12:20)
 
 #include "EnvironmentVariableTesting.h"
 #include "System/FileManager/EnvironmentVariable.h"
@@ -28,12 +28,12 @@ void System::EnvironmentVariableTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::EnvironmentVariableTesting ::MainTest()
+void System::EnvironmentVariableTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(EnvironmentTest);
 }
 
-void System::EnvironmentVariableTesting ::EnvironmentTest()
+void System::EnvironmentVariableTesting::EnvironmentTest()
 {
     const auto variableName = SYSTEM_TEXT("EngineTestingInclude"s);
 

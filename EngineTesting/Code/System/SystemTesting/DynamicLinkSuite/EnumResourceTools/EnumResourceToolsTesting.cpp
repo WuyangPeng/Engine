@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/03/30 15:56)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 12:47)
 
 #include "EnumResourceToolsTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
@@ -67,12 +67,14 @@ System::WindowsBool System::EnumResourceToolsTesting::LanguageProcess(MAYBE_UNUS
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     auto testing = reinterpret_cast<ClassType*>(lParam);
+
 #include STSTEM_WARNING_POP
 
     testing->AddEnumResourceData(EnumResourceData{ type, name, language });
 
-    return g_True;
+    return gTrue;
 }
 
 void System::EnumResourceToolsTesting::AddEnumResourceData(const EnumResourceData& data)

@@ -14,7 +14,7 @@ using std::cerr;
 using std::cout;
 using std::endl;
 
-CMainFunctionHelper::Helper ::Helper(int argc, char** argv)
+CMainFunctionHelper::Helper::Helper(int argc, char** argv)
     : ParentType{ argc, argv }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -22,7 +22,7 @@ CMainFunctionHelper::Helper ::Helper(int argc, char** argv)
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CMainFunctionHelper, Helper)
 
-int CMainFunctionHelper::Helper ::DoRun()
+int CMainFunctionHelper::Helper::DoRun()
 {
     cout << "argc = " << GetArgc() << endl;
     for (auto i = 0; i < GetArgc(); ++i)

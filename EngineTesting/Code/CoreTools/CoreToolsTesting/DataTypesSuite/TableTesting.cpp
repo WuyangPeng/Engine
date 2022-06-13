@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 19:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 13:55)
 
 #include "TableTesting.h"
 #include "CoreTools/DataTypes/TableDetail.h"
@@ -15,7 +18,7 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TableTesting)
 
-void CoreTools::TableTesting ::MainTest()
+void CoreTools::TableTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
@@ -24,9 +27,7 @@ void CoreTools::TableTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompileErrorTest);
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-void CoreTools::TableTesting ::IntegerTest()
+void CoreTools::TableTesting::IntegerTest()
 {
     Table<3, 2, int> integerTable1{};
 
@@ -86,15 +87,20 @@ void CoreTools::TableTesting ::IntegerTest()
     ASSERT_EQUAL(integerTable2.GetColumn(0), columnTuple1);
     ASSERT_EQUAL(integerTable2.GetColumn(1), columnTuple2);
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     ASSERT_EQUAL(*(integerTable2[0]), 1221);
     ASSERT_EQUAL(*(integerTable2[0] + 1), 123);
     ASSERT_EQUAL(*(integerTable2[1]), 2212);
     ASSERT_EQUAL(*(integerTable2[1] + 1), 22131);
     ASSERT_EQUAL(*(integerTable2[2]), 221232);
     ASSERT_EQUAL(*(integerTable2[2] + 1), 221312);
+
+#include STSTEM_WARNING_POP
 }
 
-void CoreTools::TableTesting ::StringTest()
+void CoreTools::TableTesting::StringTest()
 {
     Table<2, 2, string> stringTable1{};
 
@@ -142,13 +148,18 @@ void CoreTools::TableTesting ::StringTest()
     ASSERT_EQUAL(stringTable2.GetColumn(0), columnTuple1);
     ASSERT_EQUAL(stringTable2.GetColumn(1), columnTuple2);
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     ASSERT_EQUAL(*(stringTable2[0]), "second1");
     ASSERT_EQUAL(*(stringTable2[0] + 1), "first1");
     ASSERT_EQUAL(*(stringTable2[1]), "second0");
     ASSERT_EQUAL(*(stringTable2[1] + 1), "first0");
+
+#include STSTEM_WARNING_POP
 }
 
-void CoreTools::TableTesting ::OperatorTest()
+void CoreTools::TableTesting::OperatorTest()
 {
     Table<2, 2, int> integerTable1{};
     Table<2, 2, int> integerTable2{};
@@ -173,8 +184,11 @@ void CoreTools::TableTesting ::OperatorTest()
     ASSERT_TRUE(integerTable1 >= integerTable2);
 }
 
-void CoreTools::TableTesting ::ConstructorTest()
+void CoreTools::TableTesting::ConstructorTest()
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
     Table<2, 2, int> integerTable1{ 1, 2, 3, 4 };
 
     ASSERT_EQUAL(integerTable1[0][0], 1);
@@ -212,15 +226,18 @@ void CoreTools::TableTesting ::ConstructorTest()
     ASSERT_EQUAL(integerTable3[3][1], 14);
     ASSERT_EQUAL(integerTable3[3][2], 15);
     ASSERT_EQUAL(integerTable3[3][3], 16);
+
+#include STSTEM_WARNING_POP
 }
 
-void CoreTools::TableTesting ::CompileErrorTest() noexcept
+void CoreTools::TableTesting::CompileErrorTest() noexcept
 {
 #ifdef COMPILE_ERROR_TEST
+
     // 以下代码无法通过编译
     Table<2, 2, int> table1{ 5, 6, 7, 8, 9, 10, 11, 12, 13 };
     Table<3, 3, int> table2{ 5, 6, 7, 8 };
     Table<4, 4, int> table3{ 5, 6, 7, 8 };
+
 #endif  // COMPILE_ERROR_TEST
 }
-#include STSTEM_WARNING_POP

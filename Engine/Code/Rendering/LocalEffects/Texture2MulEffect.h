@@ -17,7 +17,7 @@
 
 namespace Rendering
 {
-    class Texture2MulEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE Texture2MulEffect : public VisualEffect
     {
     public:
         using ClassType = Texture2MulEffect;

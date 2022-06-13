@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.5 (2020/03/16 15:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 16:13)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -37,7 +40,7 @@ void Database::TestingHelper::InitSuite()
     AddFlatFileWrappersSuite();
 }
 
-void Database::TestingHelper ::AddHelperSuite()
+void Database::TestingHelper::AddHelperSuite()
 {
     auto helperSuite = GenerateSuite("帮助");
 
@@ -46,7 +49,7 @@ void Database::TestingHelper ::AddHelperSuite()
     AddSuite(helperSuite);
 }
 
-void Database::TestingHelper ::AddConfigurationSuite()
+void Database::TestingHelper::AddConfigurationSuite()
 {
     auto configurationSuite = GenerateSuite("配置");
 
@@ -56,7 +59,7 @@ void Database::TestingHelper ::AddConfigurationSuite()
     AddSuite(configurationSuite);
 }
 
-void Database::TestingHelper ::AddSqlInterfaceSuite()
+void Database::TestingHelper::AddSqlInterfaceSuite()
 {
     auto sqlInterfaceSuite = GenerateSuite("Sql接口");
 
@@ -71,21 +74,21 @@ void Database::TestingHelper ::AddSqlInterfaceSuite()
     AddSuite(sqlInterfaceSuite);
 }
 
-void Database::TestingHelper ::AddStatementSuite()
+void Database::TestingHelper::AddStatementSuite()
 {
     auto statementSuite = GenerateSuite("语句");
 
     AddSuite(statementSuite);
 }
 
-void Database::TestingHelper ::AddMysqlWrappersSuite()
+void Database::TestingHelper::AddMysqlWrappersSuite()
 {
     auto mysqlWrappersSuite = GenerateSuite("Mysql 包装器");
 
     AddSuite(mysqlWrappersSuite);
 }
 
-void Database::TestingHelper ::AddMysqlConnectorWrappersSuite()
+void Database::TestingHelper::AddMysqlConnectorWrappersSuite()
 {
     auto mysqlConnectorWrappersSuite = GenerateSuite("Mysql Connector 包装器");
 
@@ -102,35 +105,35 @@ void Database::TestingHelper ::AddMysqlConnectorWrappersSuite()
     AddSuite(mysqlConnectorWrappersSuite);
 }
 
-void Database::TestingHelper ::AddSqlServerWrappersSuite()
+void Database::TestingHelper::AddSqlServerWrappersSuite()
 {
     auto sqlServerWrappersSuite = GenerateSuite("Sql Server 包装器");
 
     AddSuite(sqlServerWrappersSuite);
 }
 
-void Database::TestingHelper ::AddSQLiteWrappersSuite()
+void Database::TestingHelper::AddSQLiteWrappersSuite()
 {
     auto sQLiteWrappersSuite = GenerateSuite("SQLite 包装器");
 
     AddSuite(sQLiteWrappersSuite);
 }
 
-void Database::TestingHelper ::AddPostgreSQLSuite()
+void Database::TestingHelper::AddPostgreSQLSuite()
 {
     auto postgreSQLSuite = GenerateSuite("PostgreSQL 包装器");
 
     AddSuite(postgreSQLSuite);
 }
 
-void Database::TestingHelper ::AddOracleSuite()
+void Database::TestingHelper::AddOracleSuite()
 {
     auto oracleSuite = GenerateSuite("Oracle 包装器");
 
     AddSuite(oracleSuite);
 }
 
-void Database::TestingHelper ::AddFlatFileWrappersSuite()
+void Database::TestingHelper::AddFlatFileWrappersSuite()
 {
     auto flatFileWrappersSuite = GenerateSuite("平面文件包装器");
 

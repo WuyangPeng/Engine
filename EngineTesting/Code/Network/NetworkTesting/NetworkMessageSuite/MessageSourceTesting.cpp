@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 14:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/23 17:04)
 
 #include "MessageSourceTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,37 +17,59 @@
 #include "Network/NetworkMessage/MessageSourceDetail.h"
 #include "Network/NetworkMessage/MessageTargetDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
-
 using std::array;
 using std::make_shared;
 using std::ostream;
 using std::string;
 using std::vector;
 
-const std::string Network::MessageSourceTesting ::sm_StringValue{ "StringValue" };
+const std::string Network::MessageSourceTesting::stringValue{ "StringValue" };
 
-Network::MessageSourceTesting ::MessageSourceTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_BoolBuffer1{ true, false, true, false, true, false, false, false, true, true },
-      m_BoolBuffer2{ false, true, false, true, false, true, false, false, true, true },
-      m_ParserStrategyBuffer1{ ParserStrategy::LittleEndian, ParserStrategy::BigEndian, ParserStrategy::LittleEndian, ParserStrategy::BigEndian, ParserStrategy::LittleEndian, ParserStrategy::BigEndian,
-                               ParserStrategy::BigEndian, ParserStrategy::LittleEndian, ParserStrategy::LittleEndian, ParserStrategy::BigEndian, ParserStrategy::LittleEndian },
-      m_ParserStrategyBuffer2{ ParserStrategy::BigEndian, ParserStrategy::LittleEndian, ParserStrategy::BigEndian, ParserStrategy::LittleEndian, ParserStrategy::BigEndian, ParserStrategy::LittleEndian,
-                               ParserStrategy::BigEndian, ParserStrategy::BigEndian, ParserStrategy::LittleEndian, ParserStrategy::LittleEndian, ParserStrategy::BigEndian },
-      m_Int16Buffer1{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }, m_Int16Buffer2{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-      m_StringBuffer1{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" }, m_StringBuffer2{ "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x12", "x13" },
-      m_Int32Vector{ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, m_StringVector{ "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" }, m_BytesRead{ 0 }
+Network::MessageSourceTesting::MessageSourceTesting(const OStreamShared& stream)
+    : ParentType{ stream },
+      boolBuffer1{ true, false, true, false, true, false, false, false, true, true },
+      boolBuffer2{ false, true, false, true, false, true, false, false, true, true },
+      parserStrategyBuffer1{ ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian },
+      parserStrategyBuffer2{ ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::BigEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::LittleEndian,
+                             ParserStrategy::BigEndian },
+      int16Buffer1{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 },
+      int16Buffer2{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+      stringBuffer1{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" },
+      stringBuffer2{ "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10", "x11", "x12", "x13" },
+      int32Vector{ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
+      stringVector{ "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" },
+      bytesRead{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MessageSourceTesting)
-void Network::MessageSourceTesting::DoRunUnitTest() noexcept
+
+void Network::MessageSourceTesting::DoRunUnitTest()  
 {
-    // ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::MessageSourceTesting ::MainTest()
+void Network::MessageSourceTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_1(SourceTest, ParserStrategy::LittleEndian);
     ASSERT_NOT_THROW_EXCEPTION_1(SourceTest, ParserStrategy::BigEndian);
@@ -52,16 +77,16 @@ void Network::MessageSourceTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_1(IncrementBytesProcessedTest, ParserStrategy::BigEndian);
 }
 
-void Network::MessageSourceTesting ::SourceTest(ParserStrategy parserStrategy)
+void Network::MessageSourceTesting::SourceTest(ParserStrategy parserStrategy)
 {
-    m_BytesRead = 0;
+    bytesRead = 0;
 
     auto buffer = CreateTargetMessageBuffer(parserStrategy);
 
     TestingType messageSource{ buffer };
 
     ASSERT_EQUAL(messageSource.GetBytesTotal(), buffer->GetCurrentWriteIndex());
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
     ReadBoolTest(messageSource);
     ReadEnumTest(parserStrategy, messageSource);
@@ -70,7 +95,7 @@ void Network::MessageSourceTesting ::SourceTest(ParserStrategy parserStrategy)
     ReadVectorTest(messageSource);
 }
 
-Network::MessageBufferSharedPtr Network::MessageSourceTesting ::CreateTargetMessageBuffer(ParserStrategy parserStrategy) const
+Network::MessageBufferSharedPtr Network::MessageSourceTesting::CreateTargetMessageBuffer(ParserStrategy parserStrategy) const
 {
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size1024, parserStrategy) };
     MessageTarget messageTarget{ buffer };
@@ -84,216 +109,216 @@ Network::MessageBufferSharedPtr Network::MessageSourceTesting ::CreateTargetMess
     return buffer;
 }
 
-void Network::MessageSourceTesting ::IncrementBytesProcessedTest(ParserStrategy parserStrategy)
+void Network::MessageSourceTesting::IncrementBytesProcessedTest(ParserStrategy parserStrategy)
 {
     auto buffer = CreateTargetMessageBuffer(parserStrategy);
 
     TestingType messageSource{ buffer };
 
-    constexpr int bytesRead{ 0 };
+    constexpr int aBytesRead{ 0 };
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), aBytesRead);
 
     messageSource.IncrementBytesProcessed(10);
     ASSERT_EQUAL(messageSource.GetBytesRead(), 10);
 }
 
-void Network::MessageSourceTesting ::MessageTargetWriteBool(MessageTarget& messageTarget) const
+void Network::MessageSourceTesting::MessageTargetWriteBool(MessageTarget& messageTarget) const
 {
-    messageTarget.WriteBool(sm_BoolValue);
+    messageTarget.WriteBool(boolValue);
 
-    messageTarget.WriteBoolWithNumber(sm_BoolArraySize, m_BoolBuffer1.data());
-    messageTarget.WriteBoolWithoutNumber(sm_BoolArraySize, m_BoolBuffer2.data());
+    messageTarget.WriteBoolWithNumber(boolArraySize, boolBuffer1.data());
+    messageTarget.WriteBoolWithoutNumber(boolArraySize, boolBuffer2.data());
 }
 
-void Network::MessageSourceTesting ::MessageTargetWriteEnum(MessageTarget& messageTarget, ParserStrategy parserStrategy) const
+void Network::MessageSourceTesting::MessageTargetWriteEnum(MessageTarget& messageTarget, ParserStrategy parserStrategy) const
 {
     messageTarget.WriteEnum(parserStrategy);
 
-    messageTarget.WriteEnumWithNumber(sm_EnumArraySize, m_ParserStrategyBuffer1.data());
-    messageTarget.WriteEnumWithoutNumber(sm_EnumArraySize, m_ParserStrategyBuffer2.data());
+    messageTarget.WriteEnumWithNumber(enumArraySize, parserStrategyBuffer1.data());
+    messageTarget.WriteEnumWithoutNumber(enumArraySize, parserStrategyBuffer2.data());
 }
 
-void Network::MessageSourceTesting ::MessageTargetWriteInt16(MessageTarget& messageTarget) const
+void Network::MessageSourceTesting::MessageTargetWriteInt16(MessageTarget& messageTarget) const
 {
-    messageTarget.Write(sm_Int16Value);
+    messageTarget.Write(int16Value);
 
-    messageTarget.WriteWithNumber(sm_Int16ArraySize, m_Int16Buffer1.data());
-    messageTarget.WriteWithoutNumber(sm_Int16ArraySize, m_Int16Buffer2.data());
+    messageTarget.WriteWithNumber(int16ArraySize, int16Buffer1.data());
+    messageTarget.WriteWithoutNumber(int16ArraySize, int16Buffer2.data());
 }
 
-void Network::MessageSourceTesting ::MessageTargetWriteString(MessageTarget& messageTarget) const
+void Network::MessageSourceTesting::MessageTargetWriteString(MessageTarget& messageTarget) const
 {
-    messageTarget.WriteString(sm_StringValue);
+    messageTarget.WriteString(stringValue);
 
-    messageTarget.WriteStringWithNumber(sm_StringArraySize, m_StringBuffer1.data());
-    messageTarget.WriteStringWithoutNumber(sm_StringArraySize, m_StringBuffer2.data());
+    messageTarget.WriteStringWithNumber(stringArraySize, stringBuffer1.data());
+    messageTarget.WriteStringWithoutNumber(stringArraySize, stringBuffer2.data());
 }
 
-void Network::MessageSourceTesting ::MessageTargetWriteVector(MessageTarget& messageTarget) const
+void Network::MessageSourceTesting::MessageTargetWriteVector(MessageTarget& messageTarget) const
 {
-    messageTarget.Write(m_Int32Vector);
-    messageTarget.Write(sm_StringValue);
-    messageTarget.Write(m_StringVector);
+    messageTarget.Write(int32Vector);
+    messageTarget.Write(stringValue);
+    messageTarget.Write(stringVector);
 }
 
-void Network::MessageSourceTesting ::ReadBoolTest(TestingType& messageSource)
+void Network::MessageSourceTesting::ReadBoolTest(TestingType& messageSource)
 {
     const auto readValue = messageSource.ReadBool();
 
-    ASSERT_EQUAL(readValue, sm_BoolValue);
+    ASSERT_EQUAL(readValue, boolValue);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(sm_BoolValue);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(boolValue);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
     int32_t boolBufferSize{ 0 };
     messageSource.Read(boolBufferSize);
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(boolBufferSize);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(boolBufferSize);
 
-    ASSERT_EQUAL(sm_BoolArraySize, boolBufferSize);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(boolArraySize, boolBufferSize);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
-    array<bool, sm_BoolArraySize> resultBoolBuffer{};
-    messageSource.ReadBool(sm_BoolArraySize, resultBoolBuffer.data());
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(sm_BoolValue) * sm_BoolArraySize;
+    array<bool, boolArraySize> resultBoolBuffer{};
+    messageSource.ReadBool(boolArraySize, resultBoolBuffer.data());
+    bytesRead += CORE_TOOLS_STREAM_SIZE(boolValue) * boolArraySize;
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultBoolBuffer, m_BoolBuffer1);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultBoolBuffer, boolBuffer1);
 
-    messageSource.ReadBool(sm_BoolArraySize, resultBoolBuffer.data());
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(sm_BoolValue) * sm_BoolArraySize;
+    messageSource.ReadBool(boolArraySize, resultBoolBuffer.data());
+    bytesRead += CORE_TOOLS_STREAM_SIZE(boolValue) * boolArraySize;
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultBoolBuffer, m_BoolBuffer2);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultBoolBuffer, boolBuffer2);
 }
 
-void Network::MessageSourceTesting ::ReadEnumTest(ParserStrategy parserStrategy, TestingType& messageSource)
+void Network::MessageSourceTesting::ReadEnumTest(ParserStrategy parserStrategy, TestingType& messageSource)
 {
     ParserStrategy resultParserStrategy{ ParserStrategy::End };
     messageSource.ReadEnum(resultParserStrategy);
 
     ASSERT_ENUM_EQUAL(parserStrategy, resultParserStrategy);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultParserStrategy);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultParserStrategy);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
     int32_t parserStrategyBufferSize{ 0 };
     messageSource.Read(parserStrategyBufferSize);
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(parserStrategyBufferSize);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(parserStrategyBufferSize);
 
-    ASSERT_EQUAL(sm_EnumArraySize, parserStrategyBufferSize);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(enumArraySize, parserStrategyBufferSize);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
-    array<ParserStrategy, sm_EnumArraySize> resultParserStrategyBuffer{};
-    messageSource.ReadEnum(sm_EnumArraySize, resultParserStrategyBuffer.data());
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultParserStrategy) * sm_EnumArraySize;
+    array<ParserStrategy, enumArraySize> resultParserStrategyBuffer{};
+    messageSource.ReadEnum(enumArraySize, resultParserStrategyBuffer.data());
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultParserStrategy) * enumArraySize;
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultParserStrategyBuffer, m_ParserStrategyBuffer1);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer1);
 
-    messageSource.ReadEnum(sm_EnumArraySize, resultParserStrategyBuffer.data());
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultParserStrategy) * sm_EnumArraySize;
+    messageSource.ReadEnum(enumArraySize, resultParserStrategyBuffer.data());
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultParserStrategy) * enumArraySize;
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultParserStrategyBuffer, m_ParserStrategyBuffer2);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultParserStrategyBuffer, parserStrategyBuffer2);
 }
 
-void Network::MessageSourceTesting ::ReadInt16Test(TestingType& messageSource)
+void Network::MessageSourceTesting::ReadInt16Test(TestingType& messageSource)
 {
     int16_t resultInt16Value{ 0 };
     messageSource.Read(resultInt16Value);
 
-    ASSERT_EQUAL(resultInt16Value, sm_Int16Value);
+    ASSERT_EQUAL(resultInt16Value, int16Value);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultInt16Value);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultInt16Value);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
     int32_t int16BufferSize{ 0 };
     messageSource.Read(int16BufferSize);
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(int16BufferSize);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(int16BufferSize);
 
-    ASSERT_EQUAL(sm_Int16ArraySize, int16BufferSize);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(int16ArraySize, int16BufferSize);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
-    array<int16_t, sm_Int16ArraySize> resultInt16Buffer{};
-    messageSource.Read(sm_Int16ArraySize, resultInt16Buffer.data());
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultInt16Value) * sm_Int16ArraySize;
+    array<int16_t, int16ArraySize> resultInt16Buffer{};
+    messageSource.Read(int16ArraySize, resultInt16Buffer.data());
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultInt16Value) * int16ArraySize;
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultInt16Buffer, m_Int16Buffer1);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultInt16Buffer, int16Buffer1);
 
-    messageSource.Read(sm_Int16ArraySize, resultInt16Buffer.data());
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultInt16Value) * sm_Int16ArraySize;
+    messageSource.Read(int16ArraySize, resultInt16Buffer.data());
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultInt16Value) * int16ArraySize;
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultInt16Buffer, m_Int16Buffer2);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultInt16Buffer, int16Buffer2);
 }
 
-void Network::MessageSourceTesting ::ReadStringTest(TestingType& messageSource)
+void Network::MessageSourceTesting::ReadStringTest(TestingType& messageSource)
 {
     auto resultStringValue = messageSource.ReadString();
 
-    ASSERT_EQUAL(resultStringValue, sm_StringValue);
+    ASSERT_EQUAL(resultStringValue, stringValue);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultStringValue);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultStringValue);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
     int32_t stringBufferSize{ 0 };
     messageSource.Read(stringBufferSize);
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(stringBufferSize);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(stringBufferSize);
 
-    ASSERT_EQUAL(sm_StringArraySize, stringBufferSize);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(stringArraySize, stringBufferSize);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
-    array<string, sm_StringArraySize> resultStringBuffer{};
-    messageSource.ReadString(sm_StringArraySize, resultStringBuffer.data());
+    array<string, stringArraySize> resultStringBuffer{};
+    messageSource.ReadString(stringArraySize, resultStringBuffer.data());
     for (const auto& value : resultStringBuffer)
     {
-        m_BytesRead += CORE_TOOLS_STREAM_SIZE(value);
+        bytesRead += CORE_TOOLS_STREAM_SIZE(value);
     }
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
-    ASSERT_EQUAL(resultStringBuffer, m_StringBuffer1);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
+    ASSERT_EQUAL(resultStringBuffer, stringBuffer1);
 
-    messageSource.ReadString(sm_StringArraySize, resultStringBuffer.data());
+    messageSource.ReadString(stringArraySize, resultStringBuffer.data());
     for (const auto& value : resultStringBuffer)
     {
-        m_BytesRead += CORE_TOOLS_STREAM_SIZE(value);
+        bytesRead += CORE_TOOLS_STREAM_SIZE(value);
     }
 
-    ASSERT_EQUAL(resultStringBuffer, m_StringBuffer2);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(resultStringBuffer, stringBuffer2);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 }
 
-void Network::MessageSourceTesting ::ReadVectorTest(TestingType& messageSource)
+void Network::MessageSourceTesting::ReadVectorTest(TestingType& messageSource)
 {
     vector<int32_t> int32Buffer{};
     messageSource.Read(int32Buffer);
 
     auto int32BufferSize = boost::numeric_cast<int32_t>(int32Buffer.size());
-    ASSERT_EQUAL(int32BufferSize, sm_Int32VectorSize);
+    ASSERT_EQUAL(int32BufferSize, int32VectorSize);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(int32Buffer);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(int32Buffer);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
-    ASSERT_EQUAL(int32Buffer, m_Int32Vector);
+    ASSERT_EQUAL(int32Buffer, int32Vector);
 
     string resultStringValue;
     messageSource.Read(resultStringValue);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(resultStringValue);
-    ASSERT_EQUAL(resultStringValue, sm_StringValue);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(resultStringValue);
+    ASSERT_EQUAL(resultStringValue, stringValue);
 
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
     vector<string> stringBuffer{};
     messageSource.Read(stringBuffer);
 
     auto stringBufferSize = boost::numeric_cast<int32_t>(stringBuffer.size());
-    ASSERT_EQUAL(stringBufferSize, sm_StringVectorSize);
+    ASSERT_EQUAL(stringBufferSize, stringVectorSize);
 
-    m_BytesRead += CORE_TOOLS_STREAM_SIZE(stringBuffer);
-    ASSERT_EQUAL(messageSource.GetBytesRead(), m_BytesRead);
+    bytesRead += CORE_TOOLS_STREAM_SIZE(stringBuffer);
+    ASSERT_EQUAL(messageSource.GetBytesRead(), bytesRead);
 
-    ASSERT_EQUAL(stringBuffer, m_StringVector);
+    ASSERT_EQUAL(stringBuffer, stringVector);
 }

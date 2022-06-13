@@ -14,7 +14,7 @@
 #include "MultipleMessageContainerGroup.h"
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageContainerGroup()
+Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageContainerGroup() noexcept
     : group{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -22,7 +22,7 @@ Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageCo
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 Network::MultipleMessageContainerGroup<E, ByteType, Types...>::MultipleMessageContainerGroup(const GroupType& group)
-    : group{ group }
+    : group(group)
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -98,7 +98,7 @@ const typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::Me
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupConstIter Network::MultipleMessageContainerGroup<E, ByteType, Types...>::begin() const
+typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupConstIter Network::MultipleMessageContainerGroup<E, ByteType, Types...>::begin() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -106,7 +106,7 @@ typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupCon
 }
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
-typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupConstIter Network::MultipleMessageContainerGroup<E, ByteType, Types...>::end() const
+typename Network::MultipleMessageContainerGroup<E, ByteType, Types...>::GroupConstIter Network::MultipleMessageContainerGroup<E, ByteType, Types...>::end() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

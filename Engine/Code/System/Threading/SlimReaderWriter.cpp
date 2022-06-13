@@ -87,7 +87,7 @@ bool System::TryAcquireSlimReaderWriterLockExclusive(SlimReaderWriterLockPtr sli
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TryAcquireSRWLockExclusive(slimReaderWriterLock) != g_False)
+    if (::TryAcquireSRWLockExclusive(slimReaderWriterLock) != gFalse)
         return true;
     else
         return false;
@@ -105,7 +105,7 @@ bool System::TryAcquireSlimReaderWriterLockShared(SlimReaderWriterLockPtr slimRe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TryAcquireSRWLockShared(slimReaderWriterLock) != g_False)
+    if (::TryAcquireSRWLockShared(slimReaderWriterLock) != gFalse)
         return true;
     else
         return false;

@@ -1,43 +1,46 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/13 13:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 13:57)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SERVER_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SERVER_TESTING_H
 
 #include "Network/Interface/NetworkInternalFwd.h"
-#include "Network/NetworkTesting/InterfaceSuite/SingletonTesting.h" 
+#include "Network/NetworkTesting/InterfaceSuite/SingletonTesting.h"
 
 namespace Network
 {
-	class ServerTesting : public SingletonTesting
-	{
-	public:
-            using ClassType = ServerTesting;
-            using ParentType = SingletonTesting;
+    class ServerTesting : public SingletonTesting
+    {
+    public:
+        using ClassType = ServerTesting;
+        using ParentType = SingletonTesting;
 
-        public:
-            explicit ServerTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit ServerTesting(const OStreamShared& stream);
 
-	private:
-		void MainTest();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void ACETest();
-		void BoostTest();
-		void NetworkTest();
-		void NullTest();
+        using TestFunction = void (ClassType::*)();
 
-		void ACEConstructionTest();
-		void BoostConstructionTest();
-		void NetworkConstructionTest();
-		void NullConstructionTest();
+    private:
+        void MainTest();
 
-		void DoRunUnitTest() override;
-	};
+        void ACETest();
+        void BoostTest();
+        void NetworkTest();
+
+        void ACEConstructionTest();
+        void BoostConstructionTest();
+        void NetworkConstructionTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SERVER_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SERVER_TESTING_H

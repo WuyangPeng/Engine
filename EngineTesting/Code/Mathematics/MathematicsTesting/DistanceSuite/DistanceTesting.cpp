@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/29 18:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 11:00)
 
 #include "DistanceTesting.h"
 #include "Detail/DistanceTestDetail.h"
@@ -17,7 +20,7 @@ using std::default_random_engine;
 using std::swap;
 using std::uniform_int;
 using std::uniform_real;
-#include SYSTEM_WARNING_DISABLE(26496)
+
 namespace Mathematics
 {
     template class DistanceTest<float, Vector2F>;
@@ -28,7 +31,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceTesting)
 
-void Mathematics::DistanceTesting ::MainTest()
+void Mathematics::DistanceTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StaticTest);
@@ -40,10 +43,10 @@ void Mathematics::DistanceTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IterationIntervalTest);
 }
 
-void Mathematics::DistanceTesting ::BaseTest()
+void Mathematics::DistanceTesting::BaseTest()
 {
     default_random_engine generator;
-    uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -66,10 +69,10 @@ void Mathematics::DistanceTesting ::BaseTest()
     }
 }
 
-void Mathematics::DistanceTesting ::StaticTest()
+void Mathematics::DistanceTesting::StaticTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-100.0, 100.0);
+    const uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -78,7 +81,7 @@ void Mathematics::DistanceTesting ::StaticTest()
         DistanceTest<double, Vector2D> distance(Vector2(randomDistribution(generator), randomDistribution(generator)),
                                                 Vector2(randomDistribution(generator), randomDistribution(generator)));
 
-        double distanceSquared = Vector2ToolsD::DistanceSquared(distance.GetLhs(), distance.GetRhs());
+        const double distanceSquared = Vector2ToolsD::DistanceSquared(distance.GetLhs(), distance.GetRhs());
 
         DistanceResult2D squaredResult = distance.GetSquared();
         ASSERT_APPROXIMATE(squaredResult.GetDistance(), distanceSquared, 1e-10);
@@ -94,10 +97,10 @@ void Mathematics::DistanceTesting ::StaticTest()
     }
 }
 
-void Mathematics::DistanceTesting ::DynamicTest()
+void Mathematics::DistanceTesting::DynamicTest()
 {
     default_random_engine generator;
-    uniform_real<float> randomDistribution(-10.0f, 10.0f);
+    const uniform_real<float> randomDistribution(-10.0f, 10.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -106,13 +109,13 @@ void Mathematics::DistanceTesting ::DynamicTest()
         DistanceTest<float, Vector3F> distance(Vector3F(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator)),
                                                Vector3F(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator)));
 
-        float t = MathF::FAbs(randomDistribution(generator));
+        const float t = MathF::FAbs(randomDistribution(generator));
         Vector3F lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3F rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        double distanceSquared = Vector3ToolsD::DistanceSquared(distance.GetLhs() + lhsVelocity * t, distance.GetRhs() + rhsVelocity * t);
+        const double distanceSquared = Vector3ToolsD::DistanceSquared(distance.GetLhs() + lhsVelocity * t, distance.GetRhs() + rhsVelocity * t);
 
         DistanceResult3F squaredResult = distance.GetSquared(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredResult.GetDistance(), distanceSquared, 1e-4f);
@@ -128,16 +131,16 @@ void Mathematics::DistanceTesting ::DynamicTest()
     }
 }
 
-void Mathematics::DistanceTesting ::DerivativeTest()
+void Mathematics::DistanceTesting::DerivativeTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-100.0, 100.0);
+    const uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -148,23 +151,23 @@ void Mathematics::DistanceTesting ::DerivativeTest()
 
         DistanceResult3D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         DistanceResult3D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
+        const double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
-        double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
+        const double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(derivativeResult, derivativeApproximation, 1e-10);
 
-        double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
+        const double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
         DistanceResult3D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
 
-void Mathematics::DistanceTesting ::IntervalTest()
+void Mathematics::DistanceTesting::IntervalTest()
 {
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-10.0, 10.0);
+    const uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -205,22 +208,22 @@ void Mathematics::DistanceTesting ::IntervalTest()
     }
 }
 
-void Mathematics::DistanceTesting ::BeginIntervalTest()
+void Mathematics::DistanceTesting::BeginIntervalTest()
 {
     // 测试距离为有效值零。对象是在最初位置接触。
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-10.0, 10.0);
+    const uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
         DistanceTest<double, Vector3D> distance(point, point);
 
-        double tMin = 0.0;
-        double tMax = MathD::FAbs(randomDistribution(generator));
+        constexpr double tMin = 0.0;
+        const double tMax = MathD::FAbs(randomDistribution(generator));
 
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
@@ -254,11 +257,11 @@ void Mathematics::DistanceTesting ::BeginIntervalTest()
     }
 }
 
-void Mathematics::DistanceTesting ::EndIntervalTest()
+void Mathematics::DistanceTesting::EndIntervalTest()
 {
     // 测试距离为有效值零。对象是在最终位置接触。
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-10.0, 10.0);
+    const uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -276,7 +279,7 @@ void Mathematics::DistanceTesting ::EndIntervalTest()
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
         DistanceTest<double, Vector3D> distance(point - tMax * lhsVelocity, point - tMax * rhsVelocity);
 
@@ -307,25 +310,25 @@ void Mathematics::DistanceTesting ::EndIntervalTest()
     }
 }
 
-void Mathematics::DistanceTesting ::IterationIntervalTest()
+void Mathematics::DistanceTesting::IterationIntervalTest()
 {
     // 测试牛顿法过程中返回的情况
     default_random_engine generator;
-    uniform_real<double> randomDistribution(-10.0, 10.0);
+    const uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        double tMin = 0.0;
-        double tMax = MathD::FAbs(randomDistribution(generator));
+        constexpr double tMin = 0.0;
+        const double tMax = MathD::FAbs(randomDistribution(generator));
 
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
         DistanceTest<double, Vector3D> distance(point - tMax / 2.0 * lhsVelocity, point - tMax / 2.0 * rhsVelocity);
         distance.SetMaximumIterations(20);

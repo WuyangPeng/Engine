@@ -1,52 +1,52 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.2.3 (2020/03/06 14:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/18 15:40)
 
 #include "FileOutStreamTesting.h"
 #include "Detail/NullObject.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/FileManager/CFileManagerHelper.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
-
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/ObjectSystems/Stream.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
 
 using std::string;
 using std::vector;
 using namespace std::literals;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
+
 namespace CoreTools
 {
-    const auto g_TopLevel = "Top Level"s;
-    const string g_ThreeZeroSuffix(3, '\0');
-    const string g_TwoZeroSuffix(2, '\0');
-    const string g_OneZeroSuffix(1, '\0');
+    const auto gTopLevel = "Top Level"s;
+    const string gThreeZeroSuffix(3, '\0');
+    const string gTwoZeroSuffix(2, '\0');
+    const string gOneZeroSuffix(1, '\0');
 
-    const auto g_FileName = SYSTEM_TEXT("FileOutStream.txt"s);
+    const auto gFileName = SYSTEM_TEXT("FileOutStream.txt"s);
 }
-#include STSTEM_WARNING_POP
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, FileOutStreamTesting)
 
-void CoreTools::FileOutStreamTesting ::MainTest()
+void CoreTools::FileOutStreamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WriteNullObjectTest);
 }
 
-void CoreTools::FileOutStreamTesting ::WriteNullObjectTest() noexcept
+void CoreTools::FileOutStreamTesting::WriteNullObjectTest() noexcept
 {
 }
 
-string CoreTools::FileOutStreamTesting ::GetNullObjectContent(int uniqueID, const string& rttiTypeName) const
+string CoreTools::FileOutStreamTesting::GetNullObjectContent(int uniqueID, const string& rttiTypeName) const
 {
     string integerDescribe(8, '\0');
 
@@ -62,7 +62,7 @@ string CoreTools::FileOutStreamTesting ::GetNullObjectContent(int uniqueID, cons
     return nullObjectContent;
 }
 
-string CoreTools::FileOutStreamTesting ::GetAligningString(const string& original) const
+string CoreTools::FileOutStreamTesting::GetAligningString(const string& original) const
 {
     string integerDescribe(4, '\0');
     string aligning;
@@ -73,13 +73,13 @@ string CoreTools::FileOutStreamTesting ::GetAligningString(const string& origina
     switch (padding)
     {
         case 1:
-            aligning += g_ThreeZeroSuffix;
+            aligning += gThreeZeroSuffix;
             break;
         case 2:
-            aligning += g_TwoZeroSuffix;
+            aligning += gTwoZeroSuffix;
             break;
         case 3:
-            aligning += g_OneZeroSuffix;
+            aligning += gOneZeroSuffix;
             break;
         default:
             break;
@@ -88,11 +88,11 @@ string CoreTools::FileOutStreamTesting ::GetAligningString(const string& origina
     return aligning;
 }
 
-string CoreTools::FileOutStreamTesting ::GetTopLevelContent() const
+string CoreTools::FileOutStreamTesting::GetTopLevelContent() const
 {
     string integerDescribe(4, '\0');
 
     // ¡°Top Level¡±×Ö·û´®
-    integerDescribe.at(0) = boost::numeric_cast<char>(g_TopLevel.size());
-    return integerDescribe + g_TopLevel + g_ThreeZeroSuffix;
+    integerDescribe.at(0) = boost::numeric_cast<char>(gTopLevel.size());
+    return integerDescribe + gTopLevel + gThreeZeroSuffix;
 }

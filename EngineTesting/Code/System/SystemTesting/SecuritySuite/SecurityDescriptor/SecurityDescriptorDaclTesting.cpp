@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/02 14:28)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 15:47)
 
 #include "SecurityDescriptorDaclTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -33,12 +33,12 @@ void System::SecurityDescriptorDaclTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::SecurityDescriptorDaclTesting ::MainTest()
+void System::SecurityDescriptorDaclTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DaclTest);
 }
 
-void System::SecurityDescriptorDaclTesting ::DaclTest()
+void System::SecurityDescriptorDaclTesting::DaclTest()
 {
     WindowsDWord lengthNeeded{ 0 };
     ASSERT_FALSE(GetUserObjectSystemSecurity(GetCurrentSystemThread(), SecurityRequestedInformation::Dacl, nullptr, 0, &lengthNeeded));
@@ -54,7 +54,7 @@ void System::SecurityDescriptorDaclTesting ::DaclTest()
     SecurityDescriptor securityDescriptor{};
     ASSERT_TRUE(InitializeSystemSecurityDescriptor(&securityDescriptor));
 
-    WindowsBool daclPresent{ g_False };
+    WindowsBool daclPresent{ gFalse };
     AccessCheckACLPtr dacl{ nullptr };
     auto daclDefaulted = false;
     ASSERT_TRUE(GetSecurityDescriptorDiscretionaryAccessControlList(buffer.data(), &daclPresent, &dacl, &daclDefaulted));

@@ -17,7 +17,7 @@
 
 namespace Rendering
 {
-    class Texture3DEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE Texture3DEffect : public VisualEffect
     {
     public:
         using ClassType = Texture3DEffect;

@@ -1,76 +1,70 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/22 16:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/28 15:56)
 
 #include "Circle3Testing.h"
-#include "Mathematics/Objects3D/Circle3Detail.h"
-#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Objects3D/Circle3Detail.h"
 
-#include <random> 
+#include <random>
 
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class Circle3<float>;
-	template class Circle3<double>;
+    template class Circle3<float>;
+    template class Circle3<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Circle3Testing) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Circle3Testing)
 
-void Mathematics::Circle3Testing
-	::MainTest()
+void Mathematics::Circle3Testing::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(CircleTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CircleTest);
 }
 
-void Mathematics::Circle3Testing
-	::CircleTest()
+void Mathematics::Circle3Testing::CircleTest()
 {
-	default_random_engine generator{};
-	uniform_real<double> firstRandomDistribution{ -100.0,100.0 };
+    default_random_engine generator{};
+    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D center(firstRandomDistribution(generator),
-			             firstRandomDistribution(generator),
-						 firstRandomDistribution(generator));
-		
-		double radius(firstRandomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        const Vector3D center(firstRandomDistribution(generator),
+                              firstRandomDistribution(generator),
+                              firstRandomDistribution(generator));
 
-		Vector3D direction0(firstRandomDistribution(generator),
-			                 firstRandomDistribution(generator),
-							 firstRandomDistribution(generator));
+        const double radius(firstRandomDistribution(generator));
 
-		Vector3D direction1(firstRandomDistribution(generator),
-			                 firstRandomDistribution(generator),
-							 firstRandomDistribution(generator));
+        const Vector3D direction0(firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator));
 
-		Vector3D normal = Vector3ToolsD::CrossProduct(direction0,direction1);
+        const Vector3D direction1(firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator));
 
-		Vector3ToolsD::Vector3Orthonormalize orthonormalize =	Vector3ToolsD::Orthonormalize(direction0,direction1,normal);
+        const auto normal = Vector3ToolsD::CrossProduct(direction0, direction1);
 
-		Circle3D circle(center, orthonormalize.GetUVector(),orthonormalize.GetVVector(),orthonormalize.GetWVector(),radius);
+        const auto orthonormalize = Vector3ToolsD::Orthonormalize(direction0, direction1, normal);
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(center,circle.GetCenter()));
-		ASSERT_APPROXIMATE(radius,circle.GetRadius(),1e-10);
+        const Circle3D circle(center, orthonormalize.GetUVector(), orthonormalize.GetVVector(), orthonormalize.GetWVector(), radius);
 
-		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetUVector(),circle.GetDirection0()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetVVector(),circle.GetDirection1()));
-		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetWVector(),circle.GetNormal()));
-	}
+        ASSERT_TRUE(Vector3ToolsD::Approximate(center, circle.GetCenter()));
+        ASSERT_APPROXIMATE(radius, circle.GetRadius(), 1e-10);
+
+        ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetUVector(), circle.GetDirection0()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetVVector(), circle.GetDirection1()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetWVector(), circle.GetNormal()));
+    }
 }
-

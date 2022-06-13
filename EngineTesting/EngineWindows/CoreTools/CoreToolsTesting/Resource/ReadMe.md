@@ -8,25 +8,48 @@
 
 对Helper模块的单元测试，包括：
 （1） 函数描述宏：FunctionDescribedMacroTesting。
-（2） 断言测试宏：AssertTestExceptionThrowTesting、AssertTestConditionTesting、AssertTestOperatorTesting、
-				  AssertTestApproximateTesting、AssertTestNullptrTesting、AssertTestRangeTesting。
+（2） 断言测试宏：AssertTestExceptionThrowTesting、
+				  AssertTestConditionTesting、
+				  AssertTestOperatorTesting、
+				  AssertTestApproximateTesting、
+				  AssertTestNullptrTesting、
+				  AssertTestRangeTesting。
 （3） 断言异常宏：AssertExceptionMacroTesting。
 （4） 类不变式宏：ClassInvariantMacroTesting、ModuleClassInvariantMacroTesting。
 （5） 断言宏：CustomAssertMacroTesting、ModuleCustomAssertMacroTesting。
-（6） 导出宏：ExportMacroTesting、ModuleExportMacroTesting、CopyModuleExportMacroTesting、CopyUnsharedExportMacroTesting、
-			  DelayCopyUnsharedExportMacroTesting、NonCopyExportMacroTesting、PerformanceUnsharedExportMacroTesting、SharedExportMacroTesting。
-（7） 日志宏：LogDefaultMacroTesting、LogFileMacroTesting、LogConsoleMacroTesting、
-			  LogFileAndConsoleMacroTesting、LogEngineMacroTesting、LogTriggerAssertMacroTesting。
+（6） 导出宏：ExportMacroTesting、
+			  ModuleExportMacroTesting、
+			  CopyModuleExportMacroTesting、
+			  CopyUnsharedExportMacroTesting、
+			  DelayCopyUnsharedExportMacroTesting、
+			  NonCopyExportMacroTesting、
+			  PerformanceUnsharedExportMacroTesting、
+			  SharedExportMacroTesting。
+（7） 日志宏：LogDefaultMacroTesting、
+			  LogFileMacroTesting、
+			  LogConsoleMacroTesting、
+			  LogFileAndConsoleMacroTesting、
+			  LogEngineMacroTesting、
+			  LogTriggerAssertMacroTesting。
 （8） 初始化销毁宏：InitializeTerminatorMacroTesting。
 （9） 主函数宏：MainFunctionMacroTesting。
-（10）成员函数宏：MemberFunctionNoexceptMacroTesting、MemberFunctionMacroTesting、CallConstMemberFunctionMacroTesting、
-				  MemberFunctionStaticAssertMacroTesting、CopyMemberFunctionStaticAssertMacroTesting。
+（10）成员函数宏：MemberFunctionNoexceptMacroTesting、
+				  MemberFunctionMacroTesting、
+				  CallConstMemberFunctionMacroTesting、
+				  MemberFunctionStaticAssertMacroTesting、
+				  CopyMemberFunctionStaticAssertMacroTesting。
 （11）内存宏：MemoryMacroTesting。
 （12）运行时类型识别宏：RttiMacroBaseTesting、RttiMacroTesting、RttiMacroFinalTesting。
 （13）单例宏：SingletonMacroTesting。
 （14）名字宏：NameMacroTesting。
-（15）字节流宏：StreamSizeMacroTesting、DebugStreamMacroTesting、DefaultTestingNoObjectPtrTesting、DefaultTestingObjectPtrTesting、
-				TestingNoObjectPtrTesting、TestingObjectPtrTesting、TestingObjectSizeTesting、TestingObjectTesting。
+（15）字节流宏：StreamSizeMacroTesting、
+				DebugStreamMacroTesting、
+				DefaultTestingNoObjectPtrTesting、
+				DefaultTestingObjectPtrTesting、
+				TestingNoObjectPtrTesting、
+				TestingObjectPtrTesting、
+				TestingObjectSizeTesting、
+				TestingObjectTesting。
 （16）单元测试宏：UnitTestSuiteMacroCompleteTesting、UnitTestSuiteMacroCompleteUseTestingTypeTesting、UnitTestSuiteMacroTesting。
 （17）智能指针宏：SharedPtrMacroTesting。
 （18）异常宏：ExceptionMacroTesting。 
@@ -45,8 +68,12 @@
 （4） 类不变式：CheckInvariantTesting。
 （5） Noexcept：NoexceptTesting。
 （6） 断言：AssertionTesting。
-（7） Impl特征类：ImplStaticAssertHelperTesting、CopyUnsharedImplTesting、DelayCopyUnsharedImplTesting、
-				  NonCopyImplTesting、PerformanceUnsharedImplTesting、SharedImplTesting。
+（7） Impl特征类：ImplStaticAssertHelperTesting、
+				  CopyUnsharedImplTesting、
+				  DelayCopyUnsharedImplTesting、
+				  NonCopyImplTesting、
+				  PerformanceUnsharedImplTesting、
+				  SharedImplTesting。
  
 ----------------------------
 3.   BaseSuite 
@@ -124,24 +151,67 @@
 
 对文本解析模块的单元测试，包括：
 （1）简易zip管理：ZipEntryTesting、ZipArchiveTesting。
-（2）简易csv管理：SimpleCSVExceptionTesting、XmlDataTesting、XmlFileTesting、SharedStringsTesting、
-				  ColorTesting、CellValueProxyTesting、CellValueTesting、CellReferenceTesting、
-				  CellTesting、CellRangeTesting、CellIteratorTesting、ColumnTesting、
-				  RowDataIteratorTesting、RowDataRangeTesting、RowRangeTesting、RowTesting、
-				  RowDataProxyTesting、SheetBaseTesting、WorksheetTesting、AppPropertiesTesting、
-				  PropertiesTesting、ContentItemTesting、ContentTypesTesting、RelationshipItemTesting、
-				  RelationshipsTesting、WorkbookTesting、DocumentTesting。
-（3）简易csv控制：CommandSetSheetNameTesting、CommandSetSheetVisibilityTesting、CommandSetSheetColorTesting、CommandSetSheetIndexTesting、
-						CommandResetCalcChainTesting、CommandAddSharedStringsTesting、CommandAddWorksheetTesting、
-						CommandAddChartsheetTesting、CommandDeleteSheetTesting、CommandCloneSheetTesting。
-（4）简易csv查询：QuerySheetNameTesting、QuerySheetIndexTesting、QuerySheetVisibilityTesting、
-				  QuerySheetTypeTesting、QuerySheetIDTesting、QuerySheetRelsIDTesting、
-				  QuerySheetRelsTargetTesting、QuerySharedStringsTesting、QueryXmlDataTesting。
+（2）简易csv管理：SimpleCSVExceptionTesting、
+				  XmlDataTesting、
+				  XmlFileTesting、
+				  SharedStringsTesting、
+				  ColorTesting、
+				  CellValueProxyTesting、
+				  CellValueTesting、
+				  CellReferenceTesting、
+				  CellTesting、
+				  CellRangeTesting、
+				  CellIteratorTesting、
+				  ColumnTesting、
+				  RowDataIteratorTesting、
+				  RowDataRangeTesting、
+				  RowRangeTesting、
+				  RowTesting、
+				  RowDataProxyTesting、
+				  SheetBaseTesting、
+				  WorksheetTesting、
+				  AppPropertiesTesting、
+				  PropertiesTesting、
+				  ContentItemTesting、
+				  ContentTypesTesting、
+				  RelationshipItemTesting、
+				  RelationshipsTesting、
+				  WorkbookTesting、
+				  DocumentTesting。
+（3）简易csv控制：CommandSetSheetNameTesting、
+				  CommandSetSheetVisibilityTesting、
+				  CommandSetSheetColorTesting、
+				  CommandSetSheetIndexTesting、
+				  CommandResetCalcChainTesting、
+				  CommandAddSharedStringsTesting、
+				  CommandAddWorksheetTesting、
+				  CommandAddChartsheetTesting、
+				  CommandDeleteSheetTesting、
+				  CommandCloneSheetTesting。
+（4）简易csv查询：QuerySheetNameTesting、
+				  QuerySheetIndexTesting、
+				  QuerySheetVisibilityTesting、
+				  QuerySheetTypeTesting、
+				  QuerySheetIDTesting、
+				  QuerySheetRelsIDTesting、
+				  QuerySheetRelsTargetTesting、
+				  QuerySharedStringsTesting、
+				  QueryXmlDataTesting。
 （5）Excel转csv功能： ExcelConversionCSVTesting、BatchConversionCSVTesting。
-（6）csv解析：CSVTypeConversionTesting、CSVHeadTesting、CSVRowTesting、CSVContentTesting、
-			  CSVGenerateTesting、CSVTotalGenerateTesting、CSVConfigureTesting、DataTypeDescribeTesting。
-（7）json解析： JsonHeadTesting、JsonNodeContainerTesting、JsonNodeTesting、
-				JsonGenerateTesting、JsonRowTesting、JsonConfigureTesting。 
+（6）csv解析：CSVTypeConversionTesting、
+			  CSVHeadTesting、
+			  CSVRowTesting、
+			  CSVContentTesting、
+			  CSVGenerateTesting、
+			  CSVTotalGenerateTesting、
+			  CSVConfigureTesting、
+			  DataTypeDescribeTesting。
+（7）json解析： JsonHeadTesting、
+				JsonNodeContainerTesting、
+				JsonNodeTesting、
+				JsonGenerateTesting、
+				JsonRowTesting、
+				JsonConfigureTesting。 
 
 ----------------------------
 10.	 LogManagerSuite 
@@ -184,8 +254,15 @@
 （1） 初始终止器：InitTermTesting。
 （2） Rtti：RttiTesting、RttiTestingBase。
 （3） 对象名字：ObjectNameTesting。
-（4） 对象系统文件流：BufferInStreamTesting、BufferOutStreamTesting、BufferSourceTesting、BufferTargetTesting、
-					  FileInStreamTesting、FileOutStreamTesting、InTopLevelTesting、StreamSizeTesting、StreamTesting。
+（4） 对象系统文件流：BufferInStreamTesting、
+					  BufferOutStreamTesting、
+					  BufferSourceTesting、
+					  BufferTargetTesting、
+					  FileInStreamTesting、
+					  FileOutStreamTesting、
+					  InTopLevelTesting、
+					  StreamSizeTesting、
+					  StreamTesting。
 （5） 对象系统管理器：ObjectLinkTesting、ObjectManagerTesting、ObjectRegisterTesting、ObjectTesting、OutTopLevelTesting。
 （6） 对象系统类型转换：TypeCastingTesting。
 
@@ -247,39 +324,7 @@
 （4）主函数测试帮助：CMainFunctionTestingHelperTesting。
 
 ----------------------------
-20.	 HandleManagerSuite 
-
-对句柄管理模块的单元测试，包括：
-（1）句柄类型管理：HandleManagerTesting。
-（2）资源句柄：ResourceHandleTesting。
-
-----------------------------
-21.	 ResourceManagerSuite 
-
-对资源管理模块的单元测试，包括：
-（1）资源：CommonDataResourceTesting。
-（2）资源管理：ResourceManagerTesting。
-（3）资源工厂：ResourceFactoryTesting。
-（4）资源锁：ResourceManagerLockTesting。
-
-----------------------------
-22.	 FrameMemorySystemSuite 
-
-对帧内存系统模块的单元测试，包括：
-（1） 帧内存共享指针：FrameMemorySystemPointerShareTesting。
-（2） 基础帧内存系统：FrameMemorySystemTesting。
-（3） 帧内存系统管理：FrameMemorySystemTesting。
-
-----------------------------
-23.	 BitArraySuite 
-
-对位数组模块的单元测试，包括：
-（1）一维的位数组：BitArrayTesting。
-（2）二维的位数组：BitArray2DTesting。
-（3）一维的两位位数组：TwoBitArrayTesting。
-
-----------------------------
-24.	 ModuleInitializerTerminatorSuite 
+20.	 ModuleInitializerTerminatorSuite 
 
 对模块自动及终止模块的单元测试，包括：
 （1）模块配置。 
@@ -287,26 +332,26 @@
 （3）模块重载。
 
 ----------------------------
-25.	 SyntacticParserSuite 
+21.	 SyntacticParserSuite 
 
 对语法分析器模块的单元测试，包括：
 （1） 语法分析器。
 
 ----------------------------
-26.	 PerformanceProfilerSuite 
+22.	 PerformanceProfilerSuite 
 
 对性能剖析和统计采集模块的单元测试，包括：
 （1）性能剖析器。
 （2）统计采集。
 
 ----------------------------
-27.	 EngineConfigurationSuite 
+23.	 EngineConfigurationSuite 
 
 对引擎配置模块的单元测试，包括：
 （1） 字符替换：StringReplacingTesting。
 
 ----------------------------
-28.	 PropertiesSuite（属性）
+24.	 PropertiesSuite（属性）
 
 对属性模块的单元测试，包括：
 （1）只读属性。
@@ -317,47 +362,51 @@
 （6）静态变量读写属性。
 
 ----------------------------
-29.	 CyclicRedundancyCheckSuite 
+25.	 CyclicRedundancyCheckSuite 
 
 对CRC模块的单元测试，包括：
-（1）CheckSum校验码算法：CyclicRedundancyCheckCCITTTesting、CyclicRedundancyCheckCCITTUsingTableTesting、CyclicRedundancyCheckHandleTesting、
-						 IntelCheckSumTesting、SevenModElevenCheckSumTesting、SpecifyCheckSumTesting。
+（1）CheckSum校验码算法：CyclicRedundancyCheckCCITTTesting、
+						 CyclicRedundancyCheckCCITTUsingTableTesting、
+						 CyclicRedundancyCheckHandleTesting、
+						 IntelCheckSumTesting、
+						 SevenModElevenCheckSumTesting、
+						 SpecifyCheckSumTesting。
 （2）CRC16算法：CyclicRedundancyCheck16Testing。
 （3）CRC32算法：CyclicRedundancyCheck32Testing。
 
 ----------------------------
-30.	 RegularExpressionSuite 
+26.	 RegularExpressionSuite 
 
 对正则表达式模块的单元测试，包括：
 （1）正则表达式。
 
 ----------------------------
-31.	 MessageEventSuite 
+27.	 MessageEventSuite 
 
 对消息事件模块的单元测试，包括：
 （1）实体消息。
 （2）类监听事件。
 
 ----------------------------
-32.	 StateMachineManagerSuite 
+28.	 StateMachineManagerSuite 
 
 对状态机模块的单元测试，包括：
 （1） 状态机管理器：StateEntityTesting、StateMachineTesting。
 
 ----------------------------
-33.  NetworkSuite 
+29.  NetworkSuite 
 
 对网络模块的单元测试，包括：
 （1） 下载文件：DownloadingFilesTesting、DownloadingFilesEventTesting。
 
 ----------------------------
-34.  ZlibSuite 
+30.  ZlibSuite 
 
 对zlib模块的单元测试，包括：
 （1） zlib。
 
 ----------------------------
-35.  FreetypeSuite 
+31.  FreetypeSuite 
 
 对freetype模块的单元测试，包括：
 （1）freetype。

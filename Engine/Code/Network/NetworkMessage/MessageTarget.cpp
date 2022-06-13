@@ -51,7 +51,7 @@ void Network::MessageTarget::WriteBool(const bool datum)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    const uint8_t value{ datum ? 1u : 0u };
+    const uint32_t value{ datum ? 1u : 0u };
     Write(value);
 }
 

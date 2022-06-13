@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 15:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 14:01)
 
 #ifndef CONCURRENT_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_TESTING_H
 #define CONCURRENT_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_TESTING_H
@@ -38,12 +41,12 @@ namespace CoreTools
         void DoRunUnitTest() override;
 
     private:
-        int m_PassNumber;
-        int m_FailNumber;
-        int m_ErrorNumber;
+        int passNumber;
+        int failNumber;
+        int errorNumber;
     };
 
-    bool Approximate(double lhs, double rhs, double epsilon) noexcept;
+    NODISCARD bool Approximate(double lhs, double rhs, double epsilon) noexcept;
 }
 
 #endif  // CONCURRENT_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_TESTING_H

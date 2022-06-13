@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 19:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 10:51)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_H
 #define CORE_TOOLS_STATE_MACHINE_SUITE_PLAYER_H
@@ -51,10 +54,10 @@ namespace CoreTools
         };
 
         template <typename EventType>
-        StateType NoTransition(StateType state, const EventType& eventType) noexcept;
+        NODISCARD StateType NoTransition(StateType state, const EventType& eventType) noexcept;
 
     private:
-        static constexpr States sm_InitialState = States::Empty;
+        static constexpr States initialState = States::Empty;
     };
 }
 

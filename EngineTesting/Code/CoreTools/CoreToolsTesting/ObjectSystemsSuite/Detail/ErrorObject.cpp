@@ -1,32 +1,22 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 14:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 14:33)
 
-#include "ErrorObject.h" 
+#include "ErrorObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
-
-#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26456)
-#include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::ErrorObject
-	::ErrorObject()
-	:ParentType{ "ErrorObject" }
-{
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
-}
 
-CoreTools::ErrorObject
-	::~ErrorObject()
+CoreTools::ErrorObject::ErrorObject(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+    : ParentType{ "ErrorObject" }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ErrorObject)
@@ -38,6 +28,5 @@ CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(CoreTools, ErrorObject);
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::ErrorObject::CloneObject() const
 {
-    return nullptr;
+    return std::make_shared<ClassType>(*this);
 }
-#include STSTEM_WARNING_POP

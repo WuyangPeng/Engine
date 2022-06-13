@@ -220,7 +220,7 @@ void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionD
     {
         std::stringstream stream{};
 
-        stream << ptr << "不是空指针";
+        stream << "ptr不是空指针";
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -245,7 +245,7 @@ void CoreTools::UnitTest::AssertUnequalNullPtr(const PtrType& ptr, const Functio
     {
         std::stringstream stream{};
 
-        stream << ptr << "是空指针";
+        stream << "ptr是空指针";
 
         const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
@@ -500,7 +500,7 @@ void CoreTools::UnitTest::ExecuteLoopTesting(TestClass* test, Function function)
     {
         if (!(test->*function)())
         {
-            AssertExceptionErrorLog(CORE_TOOLS_FUNCTION_DESCRIBED, "ExecuteLoopTesting error");
+            GetStream() << "Function Execute Loop End.\n";
 
             break;
         }

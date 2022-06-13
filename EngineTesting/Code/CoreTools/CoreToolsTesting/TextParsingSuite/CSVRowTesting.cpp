@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.5 (2021/10/18 17:06)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 16:48)
 
 #include "CSVRowTesting.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
@@ -144,7 +144,7 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
 
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("id"s)), 10001);
     ASSERT_TRUE(csvRow.GetBool(SYSTEM_TEXT("test0"s)));
-    ASSERT_EQUAL(csvRow.GetChar(SYSTEM_TEXT("test1"s)), SYSTEM_TEXT('a'));
+    ASSERT_EQUAL(System::String{ csvRow.GetChar(SYSTEM_TEXT("test1"s)) }, System::String{ SYSTEM_TEXT('a') });
     ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.1, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(csvRow.GetInt64(SYSTEM_TEXT("test3"s)), 10001);
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 7);
@@ -232,7 +232,7 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
 
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("id"s)), 10002);
     ASSERT_TRUE(csvRow.GetBool(SYSTEM_TEXT("test0"s)));
-    ASSERT_EQUAL(csvRow.GetChar(SYSTEM_TEXT("test1"s)), SYSTEM_TEXT('b'));
+    ASSERT_EQUAL(System::String{ csvRow.GetChar(SYSTEM_TEXT("test1"s)) }, System::String{ SYSTEM_TEXT('b') });
     ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.2, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(csvRow.GetInt64(SYSTEM_TEXT("test3"s)), 10002);
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 3);

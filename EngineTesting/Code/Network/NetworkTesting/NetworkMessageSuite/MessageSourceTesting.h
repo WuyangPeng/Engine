@@ -1,13 +1,17 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 11:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 18:58)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_SOURCE_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_SOURCE_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "Network/Configuration/ConfigurationFwd.h"
 #include "Network/NetworkMessage/MessageSource.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
 
@@ -16,8 +20,6 @@
 
 namespace Network
 {
-    enum class ParserStrategy;
-
     class MessageSourceTesting : public CoreTools::UnitTest
     {
     public:
@@ -31,7 +33,7 @@ namespace Network
 
         void IncrementBytesProcessedTest(ParserStrategy parserStrategy);
 
-        MessageBufferSharedPtr CreateTargetMessageBuffer(ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateTargetMessageBuffer(ParserStrategy parserStrategy) const;
 
         void MessageTargetWriteBool(MessageTarget& messageTarget) const;
         void MessageTargetWriteEnum(MessageTarget& messageTarget, ParserStrategy parserStrategy) const;
@@ -45,32 +47,32 @@ namespace Network
         void ReadStringTest(TestingType& messageSource);
         void ReadVectorTest(TestingType& messageSource);
 
-        void DoRunUnitTest() noexcept override;
+        void DoRunUnitTest() override;
 
     private:
-        static constexpr auto sm_BoolArraySize = 10;
-        static constexpr auto sm_EnumArraySize = 11;
-        static constexpr auto sm_Int16ArraySize = 12;
-        static constexpr auto sm_StringArraySize = 13;
-        static constexpr auto sm_Int32VectorSize = 14;
-        static constexpr auto sm_StringVectorSize = 15;
+        static constexpr auto boolArraySize = 10;
+        static constexpr auto enumArraySize = 11;
+        static constexpr auto int16ArraySize = 12;
+        static constexpr auto stringArraySize = 13;
+        static constexpr auto int32VectorSize = 14;
+        static constexpr auto stringVectorSize = 15;
 
-        static constexpr bool sm_BoolValue{ true };
-        static constexpr int16_t sm_Int16Value{ 10 };
-        static constexpr int16_t sm_Int32Value{ 15 };
-        static const std::string sm_StringValue;
+        static constexpr bool boolValue{ true };
+        static constexpr int16_t int16Value{ 10 };
+        static constexpr int16_t int32Value{ 15 };
+        static const std::string stringValue;
 
-        const std::array<bool, sm_BoolArraySize> m_BoolBuffer1;
-        const std::array<bool, sm_BoolArraySize> m_BoolBuffer2;
-        const std::array<ParserStrategy, sm_EnumArraySize> m_ParserStrategyBuffer1;
-        const std::array<ParserStrategy, sm_EnumArraySize> m_ParserStrategyBuffer2;
-        const std::array<int16_t, sm_Int16ArraySize> m_Int16Buffer1;
-        const std::array<int16_t, sm_Int16ArraySize> m_Int16Buffer2;
-        const std::array<std::string, sm_StringArraySize> m_StringBuffer1;
-        const std::array<std::string, sm_StringArraySize> m_StringBuffer2;
-        const std::vector<int32_t> m_Int32Vector;
-        const std::vector<std::string> m_StringVector;
-        int m_BytesRead;
+        const std::array<bool, boolArraySize> boolBuffer1;
+        const std::array<bool, boolArraySize> boolBuffer2;
+        const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer1;
+        const std::array<ParserStrategy, enumArraySize> parserStrategyBuffer2;
+        const std::array<int16_t, int16ArraySize> int16Buffer1;
+        const std::array<int16_t, int16ArraySize> int16Buffer2;
+        const std::array<std::string, stringArraySize> stringBuffer1;
+        const std::array<std::string, stringArraySize> stringBuffer2;
+        const std::vector<int32_t> int32Vector;
+        const std::vector<std::string> stringVector;
+        int bytesRead;
     };
 }
 

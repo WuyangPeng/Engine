@@ -1,55 +1,58 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.2.4 (2020/03/13 13:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/24 14:04)
 
 #include "TestMessageEvent.h"
-#include "CoreTools/Threading/ScopedMutex.h"
-
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Threading/Flags/MutexFlags.h"
+#include "CoreTools/Threading/ScopedMutex.h"
 #include "Network/Interface/SendSocket.h"
 #include "Network/NetworkMessage/NullMessage.h"
 
 using std::make_shared;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Network::TestMessageEvent ::TestMessageEvent()
-    : ParentType{}, m_CallBackTime{ 0 }, m_TestMessageEventCriticalSection{ CoreTools::MutexCreate::UseCriticalSection }, m_ServerWeakPtr{}
+
+Network::TestMessageEvent::TestMessageEvent(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{}, callBackTime{ 0 }, testMessageEventCriticalSection{ CoreTools::MutexCreate::UseCriticalSection }, serverWeakPtr{}
 {
-    m_TestMessageEventCriticalSection.Initialize();
+    testMessageEventCriticalSection.Initialize();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::TestMessageEvent ::~TestMessageEvent() noexcept
+Network::TestMessageEvent::~TestMessageEvent() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 
-    m_TestMessageEventCriticalSection.Delete();
+    testMessageEventCriticalSection.Delete();
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestMessageEvent);
 
-uint64_t Network::TestMessageEvent ::GetCallBackTime() const noexcept
+uint64_t Network::TestMessageEvent::GetCallBackTime() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_CallBackTime;
+    return callBackTime;
 }
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-void Network::TestMessageEvent ::CallBackEvent([[maybe_unused]] uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
+
+void Network::TestMessageEvent::CallBackEvent(MAYBE_UNUSED uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::ScopedMutex scopedMutex{ m_TestMessageEventCriticalSection };
+    CoreTools::ScopedMutex scopedMutex{ testMessageEventCriticalSection };
 
-    m_CallBackTime += message->GetMessageID();
+    callBackTime += message->GetMessageID();
 
-    auto serverSharedPtr = m_ServerWeakPtr.lock();
+    auto serverSharedPtr = serverWeakPtr.lock();
 
     if (serverSharedPtr)
     {
@@ -58,9 +61,11 @@ void Network::TestMessageEvent ::CallBackEvent([[maybe_unused]] uint64_t socketI
     }
 }
 
-void Network::TestMessageEvent ::SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept
+#include STSTEM_WARNING_POP
+
+void Network::TestMessageEvent::SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ServerWeakPtr = ptr;
+    serverWeakPtr = ptr;
 }

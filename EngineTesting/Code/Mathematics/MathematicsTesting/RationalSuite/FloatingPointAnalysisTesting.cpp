@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/23 13:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 11:49)
 
 #include "FloatingPointAnalysisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,15 +24,10 @@ namespace Mathematics
     template class FloatingPointAnalysis<float>;
     template class FloatingPointAnalysis<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, FloatingPointAnalysisTesting)
 
-void Mathematics::FloatingPointAnalysisTesting ::MainTest()
+void Mathematics::FloatingPointAnalysisTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NumericalValueSymbolTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ExponentTest);
@@ -38,20 +36,20 @@ void Mathematics::FloatingPointAnalysisTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(DoubleTypeTest);
 }
 
-void Mathematics::FloatingPointAnalysisTesting ::NumericalValueSymbolTest()
+void Mathematics::FloatingPointAnalysisTesting::NumericalValueSymbolTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
-        FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
+        auto firstValue = firstRandomDistribution(generator);
+        const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
         if (0.0 <= firstValue)
         {
@@ -64,8 +62,8 @@ void Mathematics::FloatingPointAnalysisTesting ::NumericalValueSymbolTest()
             ASSERT_EQUAL(firstFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
-        double secondValue = secondRandomDistribution(generator);
-        FloatingPointAnalysis<double> secondFloatingPointAnalysis(secondValue);
+        auto secondValue = secondRandomDistribution(generator);
+        const FloatingPointAnalysis<double> secondFloatingPointAnalysis(secondValue);
 
         if (0.0 <= secondValue)
         {
@@ -78,8 +76,8 @@ void Mathematics::FloatingPointAnalysisTesting ::NumericalValueSymbolTest()
             ASSERT_EQUAL(secondFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
-        float thirdValue = thirdRandomDistribution(generator);
-        FloatingPointAnalysis<float> thirdFloatingPointAnalysis(thirdValue);
+        auto thirdValue = thirdRandomDistribution(generator);
+        const FloatingPointAnalysis<float> thirdFloatingPointAnalysis(thirdValue);
 
         if (0.0 <= thirdValue)
         {
@@ -92,8 +90,8 @@ void Mathematics::FloatingPointAnalysisTesting ::NumericalValueSymbolTest()
             ASSERT_EQUAL(thirdFloatingPointAnalysis.GetSymbolValue(), 1u);
         }
 
-        double fourthValue = fourthRandomDistribution(generator);
-        FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
+        auto fourthValue = fourthRandomDistribution(generator);
+        const FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
 
         if (0.0 <= fourthValue)
         {
@@ -108,26 +106,26 @@ void Mathematics::FloatingPointAnalysisTesting ::NumericalValueSymbolTest()
     }
 }
 
-void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
+void Mathematics::FloatingPointAnalysisTesting::ExponentTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
-        FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
+        auto firstValue = firstRandomDistribution(generator);
+        const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
-        int firstRealExponent = firstFloatingPointAnalysis.GetRealExponent();
-        float secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
-        FloatingPointAnalysis<float> secondFloatingPointAnalysis(secondValue);
+        const auto firstRealExponent = firstFloatingPointAnalysis.GetRealExponent();
+        auto secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
+        const FloatingPointAnalysis<float> secondFloatingPointAnalysis(secondValue);
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetExponent(), secondFloatingPointAnalysis.GetExponent());
 
@@ -135,14 +133,14 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetRealExponent(), secondFloatingPointAnalysis.GetRealExponent());
 
-        double thirdValue = secondRandomDistribution(generator);
-        FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
+        auto thirdValue = secondRandomDistribution(generator);
+        const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
 
         ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
-        int secondRealExponent = thirdFloatingPointAnalysis.GetRealExponent();
-        double fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
-        FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
+        const auto secondRealExponent = thirdFloatingPointAnalysis.GetRealExponent();
+        auto fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
+        const FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetExponent(), fourthFloatingPointAnalysis.GetExponent());
 
@@ -150,14 +148,14 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetRealExponent(), fourthFloatingPointAnalysis.GetRealExponent());
 
-        float fifthValue = thirdRandomDistribution(generator);
-        FloatingPointAnalysis<float> fifthFloatingPointAnalysis(fifthValue);
+        auto fifthValue = thirdRandomDistribution(generator);
+        const FloatingPointAnalysis<float> fifthFloatingPointAnalysis(fifthValue);
 
         ASSERT_ENUM_EQUAL(fifthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
-        int thirdRealExponent = fifthFloatingPointAnalysis.GetRealExponent();
-        float sixthValue = MathF::Pow(2, static_cast<float>(thirdRealExponent));
-        FloatingPointAnalysis<float> sixthFloatingPointAnalysis(sixthValue);
+        const auto thirdRealExponent = fifthFloatingPointAnalysis.GetRealExponent();
+        auto sixthValue = MathF::Pow(2, static_cast<float>(thirdRealExponent));
+        const FloatingPointAnalysis<float> sixthFloatingPointAnalysis(sixthValue);
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetExponent(), sixthFloatingPointAnalysis.GetExponent());
 
@@ -165,14 +163,14 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetRealExponent(), sixthFloatingPointAnalysis.GetRealExponent());
 
-        double seventhValue = fourthRandomDistribution(generator);
-        FloatingPointAnalysis<double> seventhFloatingPointAnalysis(seventhValue);
+        auto seventhValue = fourthRandomDistribution(generator);
+        const FloatingPointAnalysis<double> seventhFloatingPointAnalysis(seventhValue);
 
         ASSERT_ENUM_EQUAL(seventhFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
-        int eighthRealExponent = seventhFloatingPointAnalysis.GetRealExponent();
-        double eighthValue = MathD::Pow(2, static_cast<double>(eighthRealExponent));
-        FloatingPointAnalysis<double> eighthFloatingPointAnalysis(eighthValue);
+        const auto eighthRealExponent = seventhFloatingPointAnalysis.GetRealExponent();
+        auto eighthValue = MathD::Pow(2, static_cast<double>(eighthRealExponent));
+        const FloatingPointAnalysis<double> eighthFloatingPointAnalysis(eighthValue);
 
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetExponent(), eighthFloatingPointAnalysis.GetExponent());
 
@@ -182,34 +180,35 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
     }
 }
 
-void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
+void Mathematics::FloatingPointAnalysisTesting::MantissaTest()
 {
     default_random_engine generator{};
-    uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-    uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-    uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-    uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
-    uniform_int<> fifthRandomDistribution(0, 38);
-    uniform_int<> sixthRandomDistribution(0, 308);
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_int<> fifthRandomDistribution(0, 38);
+    const uniform_int<> sixthRandomDistribution(0, 308);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float firstValue = firstRandomDistribution(generator);
-        FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
+        auto firstValue = firstRandomDistribution(generator);
+        const FloatingPointAnalysis<float> firstFloatingPointAnalysis(firstValue);
 
-        int firstExponent = firstFloatingPointAnalysis.GetRealExponent();
-        uint32_t firstMantissa = firstFloatingPointAnalysis.GetRealMantissa();
-        NumericalValueSymbol firstSign = firstFloatingPointAnalysis.GetSymbol();
+        auto firstExponent = firstFloatingPointAnalysis.GetRealExponent();
+        auto firstMantissa = firstFloatingPointAnalysis.GetRealMantissa();
+        auto firstSign = firstFloatingPointAnalysis.GetSymbol();
 
-        float secondValue = static_cast<float>(firstMantissa) / MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) *
-                            MathF::Pow(2.0f, static_cast<float>(firstExponent));
+        auto secondValue = static_cast<float>(firstMantissa) /
+                           MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) *
+                           MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
         if (firstSign == NumericalValueSymbol::Negative)
             secondValue = -secondValue;
 
-        FloatingPointAnalysis<float> secondFloatingPointAnalysis(secondValue);
+        const FloatingPointAnalysis<float> secondFloatingPointAnalysis(secondValue);
 
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetSymbol(), secondFloatingPointAnalysis.GetSymbol());
 
@@ -219,20 +218,21 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetMantissa(), secondFloatingPointAnalysis.GetMantissa());
 
-        double thirdValue = secondRandomDistribution(generator);
-        FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
+        auto thirdValue = secondRandomDistribution(generator);
+        const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(thirdValue);
 
-        int secondExponent = thirdFloatingPointAnalysis.GetRealExponent();
-        uint64_t secondMantissa = thirdFloatingPointAnalysis.GetRealMantissa();
-        NumericalValueSymbol secondSign = thirdFloatingPointAnalysis.GetSymbol();
+        auto secondExponent = thirdFloatingPointAnalysis.GetRealExponent();
+        auto secondMantissa = thirdFloatingPointAnalysis.GetRealMantissa();
+        auto secondSign = thirdFloatingPointAnalysis.GetSymbol();
 
-        double fourthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) *
-                             MathD::Pow(2.0, static_cast<double>(secondExponent));
+        auto fourthValue = static_cast<double>(secondMantissa) /
+                           MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) *
+                           MathD::Pow(2.0, static_cast<double>(secondExponent));
 
         if (secondSign == NumericalValueSymbol::Negative)
             fourthValue = -fourthValue;
 
-        FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
+        const FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
 
         ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetSymbol(), fourthFloatingPointAnalysis.GetSymbol());
 
@@ -242,20 +242,21 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetMantissa(), fourthFloatingPointAnalysis.GetMantissa());
 
-        float fifthValue = thirdRandomDistribution(generator);
-        FloatingPointAnalysis<float> fifthFloatingPointAnalysis(fifthValue);
+        auto fifthValue = thirdRandomDistribution(generator);
+        const FloatingPointAnalysis<float> fifthFloatingPointAnalysis(fifthValue);
 
         firstExponent = -fifthFloatingPointAnalysis.GetRealExponent();
         firstMantissa = fifthFloatingPointAnalysis.GetRealMantissa();
         firstSign = fifthFloatingPointAnalysis.GetSymbol();
 
-        float sixthValue = static_cast<float>(firstMantissa) / MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) /
-                           MathF::Pow(2.0f, static_cast<float>(firstExponent));
+        auto sixthValue = static_cast<float>(firstMantissa) /
+                          MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) /
+                          MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
         if (firstSign == NumericalValueSymbol::Negative)
             sixthValue = -sixthValue;
 
-        FloatingPointAnalysis<float> sixthFloatingPointAnalysis(sixthValue);
+        const FloatingPointAnalysis<float> sixthFloatingPointAnalysis(sixthValue);
 
         ASSERT_ENUM_EQUAL(fifthFloatingPointAnalysis.GetSymbol(), sixthFloatingPointAnalysis.GetSymbol());
 
@@ -265,20 +266,21 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetMantissa(), sixthFloatingPointAnalysis.GetMantissa());
 
-        double seventhValue = fourthRandomDistribution(generator);
-        FloatingPointAnalysis<double> seventhFloatingPointAnalysis(seventhValue);
+        auto seventhValue = fourthRandomDistribution(generator);
+        const FloatingPointAnalysis<double> seventhFloatingPointAnalysis(seventhValue);
 
         secondExponent = -seventhFloatingPointAnalysis.GetRealExponent();
         secondMantissa = seventhFloatingPointAnalysis.GetRealMantissa();
         secondSign = seventhFloatingPointAnalysis.GetSymbol();
 
-        double eighthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) /
-                             MathD::Pow(2.0, static_cast<double>(secondExponent));
+        auto eighthValue = static_cast<double>(secondMantissa) /
+                           MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) /
+                           MathD::Pow(2.0, static_cast<double>(secondExponent));
 
         if (secondSign == NumericalValueSymbol::Negative)
             eighthValue = -eighthValue;
 
-        FloatingPointAnalysis<double> eighthFloatingPointAnalysis(eighthValue);
+        const FloatingPointAnalysis<double> eighthFloatingPointAnalysis(eighthValue);
 
         ASSERT_ENUM_EQUAL(seventhFloatingPointAnalysis.GetSymbol(), eighthFloatingPointAnalysis.GetSymbol());
 
@@ -289,20 +291,23 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetMantissa(), eighthFloatingPointAnalysis.GetMantissa());
     }
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
 
-void Mathematics::FloatingPointAnalysisTesting ::FloatTypeTest()
+void Mathematics::FloatingPointAnalysisTesting::FloatTypeTest()
 {
-    uint32_t firstValue = 0x7F800500;
-    uint32_t secondValue = 0x7FC10500;
-    uint32_t thirdValue = 0x7F800000;
-    uint32_t fourthValue = 0x000E0809;
+    constexpr uint32_t firstValue = 0x7F800500;
+    constexpr uint32_t secondValue = 0x7FC10500;
+    constexpr uint32_t thirdValue = 0x7F800000;
+    constexpr uint32_t fourthValue = 0x000E0809;
 
-    float fifthValue = *reinterpret_cast<float*>(&firstValue);
-    uint32_t signalValue = *reinterpret_cast<uint32_t*>(&fifthValue);
+    auto fifthValue = *reinterpret_cast<const float*>(&firstValue);
+    MAYBE_UNUSED const auto signalValue = *reinterpret_cast<const uint32_t*>(&fifthValue);
 
-    FloatingPointAnalysis<float> firstFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<float> firstFloatingPointAnalysis(fifthValue);
 
 #ifdef _DEBUG
+
     if (firstValue == signalValue)
     {
         // 有些编译器不支持SignalingNaN
@@ -312,43 +317,46 @@ void Mathematics::FloatingPointAnalysisTesting ::FloatTypeTest()
     {
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
     }
+
 #else  // !_DEBUG
-    signalValue;
+
     ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
+
 #endif  // _DEBUG
 
-    fifthValue = *reinterpret_cast<float*>(&secondValue);
+    fifthValue = *reinterpret_cast<const float*>(&secondValue);
 
-    FloatingPointAnalysis<float> secondFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<float> secondFloatingPointAnalysis(fifthValue);
 
     ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
 
-    fifthValue = *reinterpret_cast<float*>(&thirdValue);
+    fifthValue = *reinterpret_cast<const float*>(&thirdValue);
 
-    FloatingPointAnalysis<float> thirdFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<float> thirdFloatingPointAnalysis(fifthValue);
 
     ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Infinity);
 
-    fifthValue = *reinterpret_cast<float*>(&fourthValue);
+    fifthValue = *reinterpret_cast<const float*>(&fourthValue);
 
-    FloatingPointAnalysis<float> fourthFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<float> fourthFloatingPointAnalysis(fifthValue);
 
     ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
 }
 
-void Mathematics::FloatingPointAnalysisTesting ::DoubleTypeTest()
+void Mathematics::FloatingPointAnalysisTesting::DoubleTypeTest()
 {
-    uint64_t firstValue = (0x7FF0000000100000ULL);
-    uint64_t secondValue = (0x7FF8000000000001ULL);
-    uint64_t thirdValue = (0x7FF0000000000000ULL);
-    uint64_t fourthValue = (0x000000000EE00000ULL);
+    constexpr uint64_t firstValue = (0x7FF0000000100000ULL);
+    constexpr uint64_t secondValue = (0x7FF8000000000001ULL);
+    constexpr uint64_t thirdValue = (0x7FF0000000000000ULL);
+    constexpr uint64_t fourthValue = (0x000000000EE00000ULL);
 
-    double fifthValue = *reinterpret_cast<double*>(&firstValue);
-    uint64_t signalValue = *reinterpret_cast<uint64_t*>(&fifthValue);
+    auto fifthValue = *reinterpret_cast<const double*>(&firstValue);
+    MAYBE_UNUSED const auto signalValue = *reinterpret_cast<const uint64_t*>(&fifthValue);
 
-    FloatingPointAnalysis<double> firstFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<double> firstFloatingPointAnalysis(fifthValue);
 
 #ifdef _DEBUG
+
     if (firstValue == signalValue)
     {
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
@@ -357,26 +365,30 @@ void Mathematics::FloatingPointAnalysisTesting ::DoubleTypeTest()
     {
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
     }
+
 #else  // !_DEBUG
-    signalValue;
+
     ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::SignalingNaN);
+
 #endif  // _DEBUG
 
-    fifthValue = *reinterpret_cast<double*>(&secondValue);
+    fifthValue = *reinterpret_cast<const double*>(&secondValue);
 
-    FloatingPointAnalysis<double> secondFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<double> secondFloatingPointAnalysis(fifthValue);
 
     ASSERT_ENUM_EQUAL(secondFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::QuietNaN);
 
-    fifthValue = *reinterpret_cast<double*>(&thirdValue);
+    fifthValue = *reinterpret_cast<const double*>(&thirdValue);
 
-    FloatingPointAnalysis<double> thirdFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<double> thirdFloatingPointAnalysis(fifthValue);
 
     ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Infinity);
 
-    fifthValue = *reinterpret_cast<double*>(&fourthValue);
+    fifthValue = *reinterpret_cast<const double*>(&fourthValue);
 
-    FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fifthValue);
+    const FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fifthValue);
 
     ASSERT_ENUM_EQUAL(fourthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Zero);
 }
+
+#include STSTEM_WARNING_POP

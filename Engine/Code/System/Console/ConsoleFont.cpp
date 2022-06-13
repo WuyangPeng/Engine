@@ -18,7 +18,7 @@ bool System::GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetCurrentConsoleFont(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFont) != g_False)
+    if (::GetCurrentConsoleFont(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFont) != gFalse)
         return true;
     else
         return false;
@@ -36,7 +36,7 @@ bool System::GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != g_False)
+    if (::GetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != gFalse)
         return true;
     else
         return false;
@@ -54,7 +54,7 @@ bool System::SetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != g_False)
+    if (::SetCurrentConsoleFontEx(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFontEx) != gFalse)
         return true;
     else
         return false;

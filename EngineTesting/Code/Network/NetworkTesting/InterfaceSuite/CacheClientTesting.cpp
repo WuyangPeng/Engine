@@ -1,14 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 13:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 14:16)
 
 #include "CacheClientTesting.h"
 #include "SingletonTestingDetail.h"
 #include "Detail/TestSocketManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/ConfigurationParameter.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -26,87 +28,102 @@ using std::ostream;
 using std::thread;
 using std::vector;
 
-Network::CacheClientTesting ::CacheClientTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_Port{ 8141 }, m_MessageID{ 5 }, m_Increase{ 160 }
+Network::CacheClientTesting::CacheClientTesting(const OStreamShared& stream)
+    : ParentType{ stream }, mPort{ 8141 }, messageID{ 5 }, increase{ 160 }
 {
 #ifdef _DEBUG
-    m_Port += 4;
+
+    mPort += 4;
+
 #endif  // _DEBUG
 
 #ifdef BUILDING_NETWORK_STATIC
-    m_Port += 2;
+
+    mPort += 2;
+
 #endif  // BUILDING_NETWORK_STATIC
 
 #ifdef _WIN64
-    m_Port += 1;
+
+    mPort += 1;
+
 #endif  // _WIN64
 
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, CacheClientTesting)
-void Network::CacheClientTesting ::DoRunUnitTest()
+
+void Network::CacheClientTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Network::CacheClientTesting ::MainTest()
+void Network::CacheClientTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ACETest);
-    m_Increase += 10;
+    increase += 10;
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::BoostTest);
-    m_Increase += 10;
+    increase += 10;
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AsyncBoostTest);
-    m_Increase += 10;
+    increase += 10;
     ASSERT_NOT_THROW_EXCEPTION_2(NullSingletonTest<ClassType>, this, &ClassType::NullTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
-void Network::CacheClientTesting ::ACETest()
+void Network::CacheClientTesting::ACETest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ACESendingClientTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ACEAsyncSendingClientTest);
 }
 
-void Network::CacheClientTesting ::BoostTest()
+void Network::CacheClientTesting::BoostTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BoostSendingClientTest);
 }
 
-void Network::CacheClientTesting ::AsyncBoostTest()
+void Network::CacheClientTesting::AsyncBoostTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BoostAsyncSendingClientTest);
 }
 
-void Network::CacheClientTesting ::NullTest()
+void Network::CacheClientTesting::NullTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(NullSendingClientTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NullAsyncSendingClientTest);
 }
 
-void Network::CacheClientTesting ::CreateMessage()
+void Network::CacheClientTesting::CreateMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Insert(m_MessageID, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(messageID, MessageTypeCondition::CreateNullCondition(), NullMessage::Factory);
 }
 
-void Network::CacheClientTesting ::DestroyMessage()
+void Network::CacheClientTesting::DestroyMessage()
 {
-    MESSAGE_MANAGER_SINGLETON.Remove(m_MessageID);
+    MESSAGE_MANAGER_SINGLETON.Remove(messageID);
 }
 
-void Network::CacheClientTesting ::ACESendingClientTest()
+void Network::CacheClientTesting::ACESendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::TCP, ClientStrategy::Cache,
-                                                 MessageStrategy::Iovec, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default,
-                                                 "127.0.0.1", m_Port + m_Increase };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
+                                                 ConnectStrategy::TCP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Iovec,
+                                                 ParserStrategy::LittleEndian,
+                                                 OpenSSLStrategy::Default,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 configurationSubStrategy,
+                                                 ConfigurationParameter::Create(),
+                                                 SocketSendMessage::Default,
+                                                 "127.0.0.1",
+                                                 mPort + increase };
 
     thread firstTread{ &ClassType::ACEServerThread, this };
 
     vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
@@ -128,7 +145,7 @@ void Network::CacheClientTesting ::ACESendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(m_MessageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
         client->Send(client->GetSocketID(), message);
 
         client->ImmediatelySend(client->GetSocketID());
@@ -138,24 +155,32 @@ void Network::CacheClientTesting ::ACESendingClientTest()
         client.reset();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * m_MessageID);
+    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
 
     firstTread.join();
 }
 
-void Network::CacheClientTesting ::ACEAsyncSendingClientTest()
+void Network::CacheClientTesting::ACEAsyncSendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::TCP, ClientStrategy::Cache,
-                                                 MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default,
-                                                 "127.0.0.1", m_Port + m_Increase };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::ACE,
+                                                 ConnectStrategy::TCP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Default,
+                                                 ParserStrategy::LittleEndian,
+                                                 OpenSSLStrategy::Default,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 configurationSubStrategy,
+                                                 ConfigurationParameter::Create(),
+                                                 SocketSendMessage::Default,
+                                                 "127.0.0.1",
+                                                 mPort + increase };
 
     thread firstTread{ &ClassType::ACEServerThread, this };
 
     vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
@@ -179,7 +204,7 @@ void Network::CacheClientTesting ::ACEAsyncSendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(m_MessageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
         client->AsyncSend(client->GetSocketID(), message);
 
         ++connectNum;
@@ -191,20 +216,20 @@ void Network::CacheClientTesting ::ACEAsyncSendingClientTest()
         client.reset();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * m_MessageID);
+    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
 
     firstTread.join();
 }
 
-void Network::CacheClientTesting ::ACEServerThread()
+void Network::CacheClientTesting::ACEServerThread()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoACEServerThread);
 }
 
-void Network::CacheClientTesting ::DoACEServerThread()
+void Network::CacheClientTesting::DoACEServerThread()
 {
-    ConfigurationStrategy configurationStrategy{ GetACEServerConfigurationStrategy(m_Increase) };
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    ConfigurationStrategy configurationStrategy{ GetACEServerConfigurationStrategy(increase) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
 
     ServerSharedPtr server{ make_shared<Server>(testSocketManager, configurationStrategy) };
 
@@ -223,20 +248,28 @@ void Network::CacheClientTesting ::DoACEServerThread()
         }
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * m_MessageID);
+    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
 }
 
-void Network::CacheClientTesting ::BoostSendingClientTest()
+void Network::CacheClientTesting::BoostSendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost, ConnectStrategy::TCP, ClientStrategy::Cache,
-                                                 MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default,
-                                                 "127.0.0.1", m_Port + m_Increase };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
+                                                 ConnectStrategy::TCP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Default,
+                                                 ParserStrategy::LittleEndian,
+                                                 OpenSSLStrategy::Default,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 configurationSubStrategy,
+                                                 ConfigurationParameter::Create(),
+                                                 SocketSendMessage::Default,
+                                                 "127.0.0.1",
+                                                 mPort + increase };
 
     vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
@@ -261,7 +294,7 @@ void Network::CacheClientTesting ::BoostSendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(m_MessageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
         client->Send(client->GetSocketID(), message);
 
         client->ImmediatelySend(client->GetSocketID());
@@ -269,26 +302,34 @@ void Network::CacheClientTesting ::BoostSendingClientTest()
         client->Receive();
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * m_MessageID);
+    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
 
     secondTread.join();
     firstTread.join();
 }
 
-void Network::CacheClientTesting ::BoostAsyncSendingClientTest()
+void Network::CacheClientTesting::BoostAsyncSendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost, ConnectStrategy::TCP, ClientStrategy::Cache,
-                                                 MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default,
-                                                 "127.0.0.1", m_Port + m_Increase };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Boost,
+                                                 ConnectStrategy::TCP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Default,
+                                                 ParserStrategy::LittleEndian,
+                                                 OpenSSLStrategy::Default,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 configurationSubStrategy,
+                                                 ConfigurationParameter::Create(),
+                                                 SocketSendMessage::Default,
+                                                 "127.0.0.1",
+                                                 mPort + increase };
 
     thread firstTread{ &ClassType::BoostServerThread, this };
     thread secondTread{ &ClassType::BoostRunServerThread, this };
 
     vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
@@ -310,7 +351,7 @@ void Network::CacheClientTesting ::BoostAsyncSendingClientTest()
             }
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(m_MessageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
         client->AsyncSend(client->GetSocketID(), message);
 
         ++connectNum;
@@ -332,27 +373,27 @@ void Network::CacheClientTesting ::BoostAsyncSendingClientTest()
         }
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * m_MessageID);
+    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
 
     secondTread.join();
     firstTread.join();
 }
 
-void Network::CacheClientTesting ::BoostServerThread()
+void Network::CacheClientTesting::BoostServerThread()
 {
     BASE_MAIN_MANAGER_SINGLETON.Run();
 }
 
-void Network::CacheClientTesting ::BoostRunServerThread()
+void Network::CacheClientTesting::BoostRunServerThread()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoBoostServerThread);
 }
 
-void Network::CacheClientTesting ::DoBoostServerThread()
+void Network::CacheClientTesting::DoBoostServerThread()
 {
-    ConfigurationStrategy configurationStrategy{ GetBoostServerConfigurationStrategy(m_Increase) };
+    ConfigurationStrategy configurationStrategy{ GetBoostServerConfigurationStrategy(increase) };
 
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
 
     ASSERT_EQUAL(testSocketManager->GetCallBackTime(), 0);
 
@@ -372,7 +413,7 @@ void Network::CacheClientTesting ::DoBoostServerThread()
         }
     }
 
-    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * m_MessageID);
+    ASSERT_EQUAL(testSocketManager->GetCallBackTime(), loopCount * messageID);
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
 
     for (;;)
@@ -384,17 +425,25 @@ void Network::CacheClientTesting ::DoBoostServerThread()
     }
 }
 
-void Network::CacheClientTesting ::NullSendingClientTest()
+void Network::CacheClientTesting::NullSendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null, ConnectStrategy::TCP, ClientStrategy::Cache,
-                                                 MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default,
-                                                 "127.0.0.1", m_Port + m_Increase };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
+                                                 ConnectStrategy::TCP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Default,
+                                                 ParserStrategy::LittleEndian,
+                                                 OpenSSLStrategy::Default,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 configurationSubStrategy,
+                                                 ConfigurationParameter::Create(),
+                                                 SocketSendMessage::Default,
+                                                 "127.0.0.1",
+                                                 mPort + increase };
 
     vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
@@ -418,7 +467,7 @@ void Network::CacheClientTesting ::NullSendingClientTest()
             ASSERT_UNEQUAL(i + 1, connectTime);
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(m_MessageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
         client->Send(client->GetSocketID(), message);
 
         client->ImmediatelySend(client->GetSocketID());
@@ -434,19 +483,27 @@ void Network::CacheClientTesting ::NullSendingClientTest()
     firstTread.join();
 }
 
-void Network::CacheClientTesting ::NullAsyncSendingClientTest()
+void Network::CacheClientTesting::NullAsyncSendingClientTest()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null, ConnectStrategy::TCP, ClientStrategy::Cache,
-                                                 MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                 configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default,
-                                                 "127.0.0.1", m_Port + m_Increase };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
+                                                 ConnectStrategy::TCP,
+                                                 ClientStrategy::Cache,
+                                                 MessageStrategy::Default,
+                                                 ParserStrategy::LittleEndian,
+                                                 OpenSSLStrategy::Default,
+                                                 EncryptedCompressionStrategy::Default,
+                                                 configurationSubStrategy,
+                                                 ConfigurationParameter::Create(),
+                                                 SocketSendMessage::Default,
+                                                 "127.0.0.1",
+                                                 mPort + increase };
 
     thread firstTread{ &ClassType::NullServerThread, this };
 
     vector<ClientSharedPtr> clientContainer;
-    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(m_MessageID) };
+    TestSocketManagerSharedPtr testSocketManager{ make_shared<TestSocketManager>(messageID) };
     const auto loopCount = GetTestLoopCount();
     for (auto i = 0; i < loopCount; ++i)
     {
@@ -468,7 +525,7 @@ void Network::CacheClientTesting ::NullAsyncSendingClientTest()
             }
         }
 
-        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(m_MessageID) };
+        MessageInterfaceSharedPtr message{ make_shared<NullMessage>(messageID) };
         client->AsyncSend(client->GetSocketID(), message);
 
         ++connectNum;
@@ -483,11 +540,11 @@ void Network::CacheClientTesting ::NullAsyncSendingClientTest()
     firstTread.join();
 }
 
-void Network::CacheClientTesting ::NullServerThread()
+void Network::CacheClientTesting::NullServerThread()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoNullServerThread);
 }
 
-void Network::CacheClientTesting ::DoNullServerThread() noexcept
+void Network::CacheClientTesting::DoNullServerThread() noexcept
 {
 }

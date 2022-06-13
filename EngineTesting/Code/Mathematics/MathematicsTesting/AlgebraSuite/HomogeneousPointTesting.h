@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/19 17:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 18:05)
 
 #ifndef MATHEMATICS_ALGEBRA_SUITE_HOMOGENEOUS_POINT_TESTING_H
 #define MATHEMATICS_ALGEBRA_SUITE_HOMOGENEOUS_POINT_TESTING_H
@@ -11,19 +14,19 @@
 
 namespace Mathematics
 {
-	class HomogeneousPointTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(HomogeneousPointTesting); 
+    class HomogeneousPointTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(HomogeneousPointTesting);
 
-	private:
-		void MainTest();
-		void ConstructionTest();
-		void AccessTest();
-		void CompareTest();
+    private:
+        void MainTest();
+        void ConstructionTest();
+        void AccessTest();
+        void CompareTest();
 
-		void DoRunUnitTest() override;		
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_ALGEBRA_SUITE_HOMOGENEOUS_POINT_TESTING_H
+#endif  // MATHEMATICS_ALGEBRA_SUITE_HOMOGENEOUS_POINT_TESTING_H

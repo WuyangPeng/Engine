@@ -22,7 +22,7 @@ bool System::SetSystemConsoleTextAttribute(WindowsHandle handle, TextColour text
 
     const auto attribute = gsl::narrow_cast<WindowsWord>(EnumCastUnderlying(textColour) | EnumCastUnderlying(backgroundColour) | EnumCastUnderlying(consoleCommon));
 
-    if (::SetConsoleTextAttribute(handle, attribute) != g_False)
+    if (::SetConsoleTextAttribute(handle, attribute) != gFalse)
         return true;
     else
         return false;
@@ -45,7 +45,7 @@ bool System::ReadSystemConsoleOutputAttribute(WindowsHandle consolehandle, Windo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ReadConsoleOutputAttribute(consolehandle, attribute, length, readCoord, numberOfAttributesRead) != g_False)
+    if (::ReadConsoleOutputAttribute(consolehandle, attribute, length, readCoord, numberOfAttributesRead) != gFalse)
         return true;
     else
         return false;
@@ -63,7 +63,7 @@ bool System::WriteSystemConsoleOutputAttribute(WindowsHandle consolehandle, cons
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WriteConsoleOutputAttribute(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten) != g_False)
+    if (::WriteConsoleOutputAttribute(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten) != gFalse)
         return true;
     else
         return false;
@@ -81,7 +81,7 @@ bool System::FillSystemConsoleOutputAttribute(WindowsHandle consolehandle, Windo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FillConsoleOutputAttribute(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten) != g_False)
+    if (::FillConsoleOutputAttribute(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten) != gFalse)
         return true;
     else
         return false;

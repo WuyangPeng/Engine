@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 10:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 15:36)
 
 #include "AnalysisNetworkConfigurationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,12 +17,12 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, AnalysisNetworkConfiguration)
 
-void Network::AnalysisNetworkConfigurationTesting ::MainTest()
+void Network::AnalysisNetworkConfigurationTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AnalysisNetworkConfigurationTest);
 }
 
-void Network::AnalysisNetworkConfigurationTesting ::AnalysisNetworkConfigurationTest()
+void Network::AnalysisNetworkConfigurationTesting::AnalysisNetworkConfigurationTest()
 {
     TestingType analysisNetworkConfiguration{ "Configuration/NetworkTest.json" };
 
@@ -30,7 +33,7 @@ void Network::AnalysisNetworkConfigurationTesting ::AnalysisNetworkConfiguration
     GameClientTest(analysisNetworkConfiguration);
 }
 
-void Network::AnalysisNetworkConfigurationTesting ::GameServerTest(const TestingType& analysisNetworkConfiguration)
+void Network::AnalysisNetworkConfigurationTesting::GameServerTest(const TestingType& analysisNetworkConfiguration)
 {
     auto gameServer = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameServer"));
 
@@ -63,7 +66,7 @@ void Network::AnalysisNetworkConfigurationTesting ::GameServerTest(const Testing
     ASSERT_TRUE(configurationParameter.IsParameterExist(SYSTEM_TEXT("BufferSize"), SYSTEM_TEXT("100000")));
 }
 
-void Network::AnalysisNetworkConfigurationTesting ::GameClientTest(const TestingType& analysisNetworkConfiguration)
+void Network::AnalysisNetworkConfigurationTesting::GameClientTest(const TestingType& analysisNetworkConfiguration)
 {
     auto gameClient = analysisNetworkConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClient"));
 

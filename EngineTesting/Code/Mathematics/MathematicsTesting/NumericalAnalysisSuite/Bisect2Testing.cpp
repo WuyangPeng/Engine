@@ -1,64 +1,35 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 14:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 16:25)
 
 #include "Bisect2Testing.h"
-#include "Mathematics/Base/MathDetail.h"
-#include "Mathematics/NumericalAnalysis/Bisect2Detail.h" 
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/NumericalAnalysis/Bisect2Detail.h"
 
- #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26497)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Bisect2Testing) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect2Testing)
 
-void Mathematics::Bisect2Testing
-	::MainTest()
+void Mathematics::Bisect2Testing::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(HaveSolutionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(HaveSolutionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(NoSolutionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnknownTest);
 }
 
-void Mathematics::Bisect2Testing
-	::HaveSolutionTest()
+void Mathematics::Bisect2Testing::HaveSolutionTest() noexcept
 {
-     
 }
 
-void Mathematics::Bisect2Testing
-	::NoSolutionTest()
+void Mathematics::Bisect2Testing::NoSolutionTest() noexcept
 {
-     
 }
 
-void Mathematics::Bisect2Testing
-	::UnknownTest()
+void Mathematics::Bisect2Testing::UnknownTest() noexcept
 {
-    
-}
-
-// static
-double Mathematics::Bisect2Testing
-	::FirstEquation(double x,double y)
-{
-    return 2.0 * x - 1.0 + 1.0 * y;
-}
-
-// static
-double Mathematics::Bisect2Testing
-	::SecondEquation(double x,double y)
-{
-    return 3.0 * x - 2.0 + 3.0 * y;
 }

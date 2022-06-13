@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 16:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 19:05)
 
 #include "SqrtTesting.h"
 
@@ -12,17 +15,18 @@
 
 using std::string;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26812)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, SqrtTesting)
 
-void CoreTools::SqrtTesting ::MainTest()
+void CoreTools::SqrtTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SqrtTest);
     ASSERT_NOT_THROW_EXCEPTION_0(IfThenElseTest);
 }
 
-void CoreTools::SqrtTesting ::SqrtTest()
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26812)
+
+void CoreTools::SqrtTesting::SqrtTest()
 {
     ASSERT_EQUAL(SqrtFirstAlgorithm<16>::Result, 4);
     ASSERT_EQUAL(SqrtFirstAlgorithm<25>::Result, 5);
@@ -47,10 +51,10 @@ void CoreTools::SqrtTesting ::SqrtTest()
     ASSERT_EQUAL(SqrtFourthAlgorithm<1>::Result, 1);
 }
 
-void CoreTools::SqrtTesting ::IfThenElseTest()
-{
-    [[maybe_unused]] IfThenElse<true, int, string>::ResultType first{ 1 };
-    [[maybe_unused]] IfThenElse<false, int, string>::ResultType second{ "second" };
-}
-
 #include STSTEM_WARNING_POP
+
+void CoreTools::SqrtTesting::IfThenElseTest()
+{
+    MAYBE_UNUSED IfThenElse<true, int, string>::ResultType first{ 1 };
+    MAYBE_UNUSED IfThenElse<false, int, string>::ResultType second{ "second" };
+}

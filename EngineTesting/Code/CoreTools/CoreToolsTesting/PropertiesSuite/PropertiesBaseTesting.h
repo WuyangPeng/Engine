@@ -1,31 +1,32 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:39)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTIES_BASE_TESTING_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTIES_BASE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h" 
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 #include <string>
 
 namespace CoreTools
 {
-	class PropertiesBaseTesting : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PropertiesBaseTesting);
+    class PropertiesBaseTesting : public UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(PropertiesBaseTesting);
 
-	private:
-		void MainTest();
-		void GetSetTest();
+    private:
+        void MainTest();
+        void GetSetTest();
 
-		void DoRunUnitTest() override;
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_SUITE_PROPERTIES_BASE_TESTING_H
-
-
+#endif  // CORE_TOOLS_PROPERTIES_SUITE_PROPERTIES_BASE_TESTING_H

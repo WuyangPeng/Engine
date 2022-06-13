@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/16 19:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 11:07)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -10,7 +13,7 @@
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-using namespace std::literals; 
+using namespace std::literals;
 
 Mathematics::TestingHelper::TestingHelper(int argc, char** argv)
     : ParentType{ argc, argv, "数学库"s }
@@ -43,7 +46,7 @@ void Mathematics::TestingHelper::InitSuite()
     AddMiscellaneousSuite();
 }
 
-void Mathematics::TestingHelper ::AddMacroSuite()
+void Mathematics::TestingHelper::AddMacroSuite()
 {
     auto macroSuite = GenerateSuite("宏");
 
@@ -51,7 +54,7 @@ void Mathematics::TestingHelper ::AddMacroSuite()
 }
 
 // private
-void Mathematics::TestingHelper ::AddBaseSuite()
+void Mathematics::TestingHelper::AddBaseSuite()
 {
     auto baseSuite = GenerateSuite("基本");
 
@@ -69,7 +72,7 @@ void Mathematics::TestingHelper ::AddBaseSuite()
 }
 
 // private
-void Mathematics::TestingHelper ::AddAlgebraSuite()
+void Mathematics::TestingHelper::AddAlgebraSuite()
 {
     auto algebraSuite = GenerateSuite("代数");
 
@@ -121,7 +124,7 @@ void Mathematics::TestingHelper ::AddAlgebraSuite()
 }
 
 // private
-void Mathematics::TestingHelper ::AddObjects2DSuite()
+void Mathematics::TestingHelper::AddObjects2DSuite()
 {
     auto objects2DSuite = GenerateSuite("对象2D");
 
@@ -141,7 +144,7 @@ void Mathematics::TestingHelper ::AddObjects2DSuite()
 }
 
 // private
-void Mathematics::TestingHelper ::AddObjects3DSuite()
+void Mathematics::TestingHelper::AddObjects3DSuite()
 {
     auto objects3DSuite = GenerateSuite("对象3D");
 
@@ -172,7 +175,7 @@ void Mathematics::TestingHelper ::AddObjects3DSuite()
 }
 
 // private
-void Mathematics::TestingHelper ::AddRationalSuite()
+void Mathematics::TestingHelper::AddRationalSuite()
 {
     auto rationalSuite = GenerateSuite("有理数");
 
@@ -200,7 +203,7 @@ void Mathematics::TestingHelper ::AddRationalSuite()
 }
 
 // private
-void Mathematics::TestingHelper ::AddNumericalAnalysisSuite()
+void Mathematics::TestingHelper::AddNumericalAnalysisSuite()
 {
     auto numericalAnalysisSuite = GenerateSuite("数值分析");
 
@@ -253,7 +256,7 @@ void Mathematics::TestingHelper ::AddNumericalAnalysisSuite()
     AddSuite(numericalAnalysisSuite);
 }
 
-void Mathematics::TestingHelper ::AddQuerySuite()
+void Mathematics::TestingHelper::AddQuerySuite()
 {
     auto querySuite = GenerateSuite("查询");
 
@@ -273,7 +276,7 @@ void Mathematics::TestingHelper ::AddQuerySuite()
     AddSuite(querySuite);
 }
 
-void Mathematics::TestingHelper ::AddApproximationSuite()
+void Mathematics::TestingHelper::AddApproximationSuite()
 {
     auto approximationSuite = GenerateSuite("近似");
 
@@ -307,7 +310,7 @@ void Mathematics::TestingHelper ::AddApproximationSuite()
     AddSuite(approximationSuite);
 }
 
-void Mathematics::TestingHelper ::AddDistanceSuite()
+void Mathematics::TestingHelper::AddDistanceSuite()
 {
     auto distanceSuite = GenerateSuite("距离测试");
 
@@ -359,7 +362,7 @@ CoreTools::Suite Mathematics::TestingHelper::GetDistance3DSuite()
     return distance3DSuite;
 }
 
-void Mathematics::TestingHelper ::AddIntersectionSuite()
+void Mathematics::TestingHelper::AddIntersectionSuite()
 {
     auto intersectionSuite = GenerateSuite("相交测试");
 
@@ -370,7 +373,7 @@ void Mathematics::TestingHelper ::AddIntersectionSuite()
     AddSuite(intersectionSuite);
 }
 
-CoreTools::Suite Mathematics::TestingHelper ::GetIntersection1DSuite()
+CoreTools::Suite Mathematics::TestingHelper::GetIntersection1DSuite()
 {
     auto intersection1DSuite = GenerateSuite("1D相交测试");
 
@@ -386,7 +389,7 @@ CoreTools::Suite Mathematics::TestingHelper ::GetIntersection1DSuite()
     return intersection1DSuite;
 }
 
-CoreTools::Suite Mathematics::TestingHelper ::GetIntersection2DSuite()
+CoreTools::Suite Mathematics::TestingHelper::GetIntersection2DSuite()
 {
     auto intersection2DSuite = GenerateSuite("2D相交测试");
 
@@ -411,7 +414,7 @@ CoreTools::Suite Mathematics::TestingHelper ::GetIntersection2DSuite()
     return intersection2DSuite;
 }
 
-CoreTools::Suite Mathematics::TestingHelper ::GetIntersection3DSuite()
+CoreTools::Suite Mathematics::TestingHelper::GetIntersection3DSuite()
 {
     auto intersection3DSuite = GenerateSuite("3D相交测试");
 
@@ -422,14 +425,14 @@ CoreTools::Suite Mathematics::TestingHelper ::GetIntersection3DSuite()
     return intersection3DSuite;
 }
 
-void Mathematics::TestingHelper ::AddComputationalGeometrySuite()
+void Mathematics::TestingHelper::AddComputationalGeometrySuite()
 {
     auto computationalGeometrySuite = GenerateSuite("计算几何");
 
     AddSuite(computationalGeometrySuite);
 }
 
-void Mathematics::TestingHelper ::AddContainmentSuite()
+void Mathematics::TestingHelper::AddContainmentSuite()
 {
     auto containmentSuite = GenerateSuite("包含");
 
@@ -441,21 +444,21 @@ void Mathematics::TestingHelper ::AddContainmentSuite()
     AddSuite(containmentSuite);
 }
 
-void Mathematics::TestingHelper ::AddCurvesSurfacesVolumesSuite()
+void Mathematics::TestingHelper::AddCurvesSurfacesVolumesSuite()
 {
     auto curvesSurfacesVolumesSuite = GenerateSuite("曲线曲面体积");
 
     AddSuite(curvesSurfacesVolumesSuite);
 }
 
-void Mathematics::TestingHelper ::AddInterpolationSuite()
+void Mathematics::TestingHelper::AddInterpolationSuite()
 {
     auto interpolationSuite = GenerateSuite("插值");
 
     AddSuite(interpolationSuite);
 }
 
-void Mathematics::TestingHelper ::AddMeshesSuite()
+void Mathematics::TestingHelper::AddMeshesSuite()
 {
     auto meshesSuite = GenerateSuite("网格测试");
 
@@ -465,7 +468,7 @@ void Mathematics::TestingHelper ::AddMeshesSuite()
     AddSuite(meshesSuite);
 }
 
-void Mathematics::TestingHelper ::AddMiscellaneousSuite()
+void Mathematics::TestingHelper::AddMiscellaneousSuite()
 {
     auto miscellaneousSuite = GenerateSuite("杂项");
 

@@ -44,7 +44,7 @@ bool System::TranslateSystemMessage(const WindowsMsg* msg) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TranslateMessage(msg) != g_False)
+    if (::TranslateMessage(msg) != gFalse)
         return true;
     else
         return false;
@@ -62,7 +62,7 @@ bool System::DispatchSystemMessage(const WindowsMsg* msg) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DispatchMessage(msg) != g_False)
+    if (::DispatchMessage(msg) != gFalse)
         return true;
     else
         return false;
@@ -80,7 +80,7 @@ bool System::PeekSystemMessage(WindowsMsg* msg, WindowsHWnd hWnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::PeekMessage(msg, hWnd, 0, 0, EnumCastUnderlying(PeekMessageOptions::Remove)) != g_False)
+    if (::PeekMessage(msg, hWnd, 0, 0, EnumCastUnderlying(PeekMessageOptions::Remove)) != gFalse)
         return true;
     else
         return false;
@@ -98,7 +98,7 @@ bool System::SystemTranslateAccelerator(WindowsHWnd hwnd, WindowsHAccel accel, W
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TranslateAccelerator(hwnd, accel, msg) != g_False)
+    if (::TranslateAccelerator(hwnd, accel, msg) != gFalse)
         return true;
     else
         return false;
@@ -116,7 +116,7 @@ bool System::SystemValidateRect(WindowsHWnd hwnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ValidateRect(hwnd, nullptr) != g_False)
+    if (::ValidateRect(hwnd, nullptr) != gFalse)
         return true;
     else
         return false;
@@ -178,7 +178,7 @@ bool System::DestroySystemWindow(WindowsHWnd hwnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DestroyWindow(hwnd) != g_False)
+    if (::DestroyWindow(hwnd) != gFalse)
         return true;
     else
         return false;
@@ -196,7 +196,7 @@ bool System::SendSystemMessage(WindowsHWnd hwnd, WindowsMessages msg, WindowsWPa
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SendMessage(hwnd, EnumCastUnderlying(msg), wParam, lParam) != g_False)
+    if (::SendMessage(hwnd, EnumCastUnderlying(msg), wParam, lParam) != gFalse)
         return true;
     else
         return false;
@@ -244,7 +244,7 @@ bool System::SystemEndPaint(WindowsHWnd hwnd, const WindowsPaintStruct* paintStr
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EndPaint(hwnd, paintStruct) != g_False)
+    if (::EndPaint(hwnd, paintStruct) != gFalse)
         return true;
     else
         return false;
@@ -279,7 +279,7 @@ bool System::PostSystemMessage(WindowsHWnd hwnd, WindowsMessages msg, WindowsWPa
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::PostMessage(hwnd, EnumCastUnderlying(msg), wParam, lParam)) != g_False)
+    if ((::PostMessage(hwnd, EnumCastUnderlying(msg), wParam, lParam)) != gFalse)
         return true;
     else
         return false;
@@ -297,7 +297,7 @@ bool System::GetSystemCursorPos(WindowsPoint& point) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::GetCursorPos(&point)) != g_False)
+    if ((::GetCursorPos(&point)) != gFalse)
         return true;
     else
         return false;
@@ -315,7 +315,7 @@ bool System::SetSystemCursorPos(const WindowsPoint& point) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::SetCursorPos(point.x, point.y)) != g_False)
+    if ((::SetCursorPos(point.x, point.y)) != gFalse)
         return true;
     else
         return false;
@@ -333,7 +333,7 @@ bool System::SystemClientToScreen(WindowsHWnd hwnd, WindowsPoint& point) noexcep
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::ClientToScreen(hwnd, &point)) != g_False)
+    if ((::ClientToScreen(hwnd, &point)) != gFalse)
         return true;
     else
         return false;
@@ -351,7 +351,7 @@ bool System::SystemScreenToClient(WindowsHWnd hwnd, WindowsPoint& point) noexcep
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::ScreenToClient(hwnd, &point)) != g_False)
+    if ((::ScreenToClient(hwnd, &point)) != gFalse)
         return true;
     else
         return false;

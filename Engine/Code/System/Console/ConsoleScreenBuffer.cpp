@@ -37,7 +37,7 @@ bool System::CloseSystemConsole(WindowsHandle consoleHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(consoleHandle) != g_False)
+    if (::CloseHandle(consoleHandle) != gFalse)
         return true;
     else
         return false;
@@ -62,7 +62,7 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetConsoleScreenBufferInfo(consoleOutput, consoleScreenBufferInfo) != g_False)
+    if (::GetConsoleScreenBufferInfo(consoleOutput, consoleScreenBufferInfo) != gFalse)
         return true;
     else
         return false;
@@ -80,7 +80,7 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != g_False)
+    if (::GetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != gFalse)
         return true;
     else
         return false;
@@ -98,7 +98,7 @@ bool System::SetConsoleHandleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != g_False)
+    if (::SetConsoleScreenBufferInfoEx(consoleOutput, consoleScreenBufferInfoEx) != gFalse)
         return true;
     else
         return false;
@@ -116,7 +116,7 @@ bool System::SetSystemConsoleScreenBufferSize(WindowsHandle consoleOutput, Conso
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetConsoleScreenBufferSize(consoleOutput, size) != g_False)
+    if (::SetConsoleScreenBufferSize(consoleOutput, size) != gFalse)
         return true;
     else
         return false;

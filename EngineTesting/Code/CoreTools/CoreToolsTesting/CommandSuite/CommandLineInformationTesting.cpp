@@ -1,15 +1,18 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/06 16:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 14:35)
 
 #include "CommandLineInformationTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Command/CommandLineInformation.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>
 
 using std::make_pair;
@@ -18,7 +21,7 @@ using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CommandLineInformationTesting)
 
-void CoreTools::CommandLineInformationTesting ::MainTest()
+void CoreTools::CommandLineInformationTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainCommandLineInformationSucceedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(WinMainCommandLineInformationSucceedTest);
@@ -30,16 +33,18 @@ void CoreTools::CommandLineInformationTesting ::MainTest()
     ASSERT_THROW_EXCEPTION_0(GetFileNameExceptionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(WinMainNullCommandLineInformationSucceedTest);
 }
+
+void CoreTools::CommandLineInformationTesting::MainCommandLineInformationSucceedTest()
+{
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26465)
-#include SYSTEM_WARNING_DISABLE(26492)
-#include SYSTEM_WARNING_DISABLE(26446)
-void CoreTools::CommandLineInformationTesting ::MainCommandLineInformationSucceedTest()
-{
+
     vector<char*> charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug"), const_cast<char*>("-integer"),
                               const_cast<char*>("5"), const_cast<char*>("-float"), const_cast<char*>("6.4"),
                               const_cast<char*>("-double"), const_cast<char*>("5.2"), const_cast<char*>("-string"),
                               const_cast<char*>("value"), const_cast<char*>("-fileName"), const_cast<char*>("filename") };
+
+#include STSTEM_WARNING_POP
 
     CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
@@ -105,14 +110,14 @@ void CoreTools::CommandLineInformationTesting ::MainCommandLineInformationSuccee
     ASSERT_EQUAL(count, 0);
 }
 
-void CoreTools::CommandLineInformationTesting ::WinMainCommandLineInformationSucceedTest()
+void CoreTools::CommandLineInformationTesting::WinMainCommandLineInformationSucceedTest()
 {
     const char* commandLine{
         "MyProgram -debug -integer  51 -float  16.4 "
         "-double 5.21  -string  value  -fileName filename"
     };
 
-    CommandLineInformation commandLineInformation{ const_cast<char*>(commandLine) };
+    CommandLineInformation commandLineInformation{ commandLine };
 
     auto count = commandLineInformation.GetExcessArgumentsCount();
 
@@ -176,76 +181,90 @@ void CoreTools::CommandLineInformationTesting ::WinMainCommandLineInformationSuc
     ASSERT_EQUAL(count, 0);
 }
 
-void CoreTools::CommandLineInformationTesting ::GetBooleanFalseTest()
+void CoreTools::CommandLineInformationTesting::GetBooleanFalseTest()
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26465)
+
     vector<char*> charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
 
-    CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), &charVector[0] };
+#include STSTEM_WARNING_POP
+
+    CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
     ASSERT_FALSE(commandLineInformation.GetBoolean("release"));
 }
 
-void CoreTools::CommandLineInformationTesting ::GetIntegerExceptionTest()
+void CoreTools::CommandLineInformationTesting::GetIntegerExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug -integer 51 -float 16.4 "
         "-double 5.21 -string value -fileName value"
     };
 
-    CommandLineInformation commandLineInformation{ const_cast<char*>(commandLine) };
+    CommandLineInformation commandLineInformation{ commandLine };
 
-    [[maybe_unused]] auto value = commandLineInformation.GetInteger("fileName");
+    MAYBE_UNUSED auto value = commandLineInformation.GetInteger("fileName");
 }
 
-void CoreTools::CommandLineInformationTesting ::GetFloatExceptionTest()
+void CoreTools::CommandLineInformationTesting::GetFloatExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug -integer 51 -float 16.4 "
         "-double 5.21 -string value fileName"
     };
 
-    CommandLineInformation commandLineInformation{ const_cast<char*>(commandLine) };
+    CommandLineInformation commandLineInformation{ commandLine };
 
-    [[maybe_unused]] auto value = commandLineInformation.GetFloat("Float");
+    MAYBE_UNUSED auto value = commandLineInformation.GetFloat("Float");
 }
 
-void CoreTools::CommandLineInformationTesting ::GetDoubleExceptionTest()
+void CoreTools::CommandLineInformationTesting::GetDoubleExceptionTest()
 {
     const char* commandLine{
         "MyProgram -debug -integer   51 -float 16.4 "
         "-double 5.21 -string value -fileName value"
     };
 
-    CommandLineInformation commandLineInformation{ const_cast<char*>(commandLine) };
+    CommandLineInformation commandLineInformation{ commandLine };
 
-    [[maybe_unused]] auto value = commandLineInformation.GetDouble("debug");
+    MAYBE_UNUSED auto value = commandLineInformation.GetDouble("debug");
 }
 
-void CoreTools::CommandLineInformationTesting ::GetStringExceptionTest()
+void CoreTools::CommandLineInformationTesting::GetStringExceptionTest()
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26465)
+
     vector<char*> charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug"),
                               const_cast<char*>("-string"), const_cast<char*>("value") };
 
+#include STSTEM_WARNING_POP
+
     CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
-    [[maybe_unused]] auto value = commandLineInformation.GetString("value");
+    MAYBE_UNUSED auto value = commandLineInformation.GetString("value");
 }
 
-void CoreTools::CommandLineInformationTesting ::GetFileNameExceptionTest()
+void CoreTools::CommandLineInformationTesting::GetFileNameExceptionTest()
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26465)
+
     vector<char*> charVector{ const_cast<char*>("MyProgram"), const_cast<char*>("-debug") };
 
+#include STSTEM_WARNING_POP
+
     CommandLineInformation commandLineInformation{ boost::numeric_cast<int>(charVector.size()), charVector.data() };
 
-    [[maybe_unused]] auto value = commandLineInformation.GetFileName();
+    MAYBE_UNUSED auto value = commandLineInformation.GetFileName();
 }
 
-void CoreTools::CommandLineInformationTesting ::WinMainNullCommandLineInformationSucceedTest()
+void CoreTools::CommandLineInformationTesting::WinMainNullCommandLineInformationSucceedTest()
 {
     const char* commandLine{ "\"E:\\TCRE\\Engine\\EngineWindows\\Framework\\..\\..\\Debug_Windows\\FrameworkTestingD.exe\" " };
 
-    CommandLineInformation commandLineInformation{ const_cast<char*>(commandLine) };
+    CommandLineInformation commandLineInformation{ commandLine };
 
     ASSERT_EQUAL(commandLineInformation.GetExcessArgumentsCount(), 0);
 }
-#include STSTEM_WARNING_POP

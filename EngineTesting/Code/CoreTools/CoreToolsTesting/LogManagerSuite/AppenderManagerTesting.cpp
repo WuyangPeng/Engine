@@ -1,11 +1,13 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 17:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 11:03)
 
 #include "AppenderManagerTesting.h"
-
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
@@ -20,40 +22,39 @@
 using std::ostream;
 using namespace std::literals;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
 namespace
 {
-    const auto g_AppenderManagerTestingPathName = SYSTEM_TEXT("Log/"s);
+    const auto gAppenderManagerTestingPathName = SYSTEM_TEXT("Log/"s);
 
-    const auto g_AppenderManagerTestingFileName = SYSTEM_TEXT("AppenderManagerTestingFileName"s);
-    const auto g_ExtensionName = SYSTEM_TEXT("log"s);
+    const auto gAppenderManagerTestingFileName = SYSTEM_TEXT("AppenderManagerTestingFileName"s);
+    const auto gExtensionName = SYSTEM_TEXT("log"s);
 
-    const auto g_AppenderManagerTestingFullName = g_AppenderManagerTestingPathName + g_AppenderManagerTestingFileName;
+    const auto gAppenderManagerTestingFullName = gAppenderManagerTestingPathName + gAppenderManagerTestingFileName;
 
-    const auto g_TraceMessage = SYSTEM_TEXT("traceMessage\n"s);
-    const auto g_DebugMessage = SYSTEM_TEXT("debugMessage\n"s);
-    const auto g_InfoMessage = SYSTEM_TEXT("infoMessage\n"s);
-    const auto g_WarnMessage = SYSTEM_TEXT("warnMessage\n"s);
-    const auto g_ErrorMessage = SYSTEM_TEXT("errorMessage\n"s);
-    const auto g_FatalMessage = SYSTEM_TEXT("fatalMessage\n"s);
+    const auto gTraceMessage = SYSTEM_TEXT("traceMessage\n"s);
+    const auto gDebugMessage = SYSTEM_TEXT("debugMessage\n"s);
+    const auto gInfoMessage = SYSTEM_TEXT("infoMessage\n"s);
+    const auto gWarnMessage = SYSTEM_TEXT("warnMessage\n"s);
+    const auto gErrorMessage = SYSTEM_TEXT("errorMessage\n"s);
+    const auto gFatalMessage = SYSTEM_TEXT("fatalMessage\n"s);
 }
-#include STSTEM_WARNING_POP
-CoreTools::AppenderManagerTesting ::AppenderManagerTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr },
-      m_AppenderManagerTestingName{ g_AppenderManagerTestingPathName + g_AppenderManagerTestingFileName + SYSTEM_TEXT("("s) + CustomTime::GetSystemTimeDescribe() + SYSTEM_TEXT(")"s) },
-      m_AppenderManagerTestingFullName{ m_AppenderManagerTestingName + SYSTEM_TEXT("."s) + g_ExtensionName }
+
+CoreTools::AppenderManagerTesting::AppenderManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream },
+      appenderManagerTestingName{ gAppenderManagerTestingPathName + gAppenderManagerTestingFileName + SYSTEM_TEXT("("s) + CustomTime::GetSystemTimeDescribe() + SYSTEM_TEXT(")"s) },
+      appenderManagerTestingFullName{ appenderManagerTestingName + SYSTEM_TEXT("."s) + gExtensionName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_0;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, AppenderManagerTesting)
+
 void CoreTools::AppenderManagerTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::AppenderManagerTesting ::MainTest()
+void CoreTools::AppenderManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoggerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AppenderTest);
@@ -61,14 +62,14 @@ void CoreTools::AppenderManagerTesting ::MainTest()
 }
 
 // Logger测试
-void CoreTools::AppenderManagerTesting ::LoggerTest()
+void CoreTools::AppenderManagerTesting::LoggerTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoggerSucceedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(InsertLoggerFailTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RemoveLoggerFailTest);
 }
 
-void CoreTools::AppenderManagerTesting ::LoggerSucceedTest()
+void CoreTools::AppenderManagerTesting::LoggerSucceedTest()
 {
     auto manager = AppenderManager::Create();
 
@@ -81,7 +82,7 @@ void CoreTools::AppenderManagerTesting ::LoggerSucceedTest()
     ASSERT_TRUE(manager->RemoveLogger(LogFilter::Framework));
 }
 
-void CoreTools::AppenderManagerTesting ::InsertLoggerFailTest()
+void CoreTools::AppenderManagerTesting::InsertLoggerFailTest()
 {
     auto manager = AppenderManager::Create();
 
@@ -89,7 +90,7 @@ void CoreTools::AppenderManagerTesting ::InsertLoggerFailTest()
     ASSERT_FALSE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Info)));
 }
 
-void CoreTools::AppenderManagerTesting ::RemoveLoggerFailTest()
+void CoreTools::AppenderManagerTesting::RemoveLoggerFailTest()
 {
     auto manager = AppenderManager::Create();
 
@@ -100,14 +101,14 @@ void CoreTools::AppenderManagerTesting ::RemoveLoggerFailTest()
 }
 
 // Appender测试
-void CoreTools::AppenderManagerTesting ::AppenderTest()
+void CoreTools::AppenderManagerTesting::AppenderTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AppenderSucceedTest);
     ASSERT_NOT_THROW_EXCEPTION_0(InsertAppenderFailTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RemoveAppenderFailTest);
 }
 
-void CoreTools::AppenderManagerTesting ::AppenderSucceedTest()
+void CoreTools::AppenderManagerTesting::AppenderSucceedTest()
 {
     auto manager = AppenderManager::Create();
 
@@ -115,7 +116,7 @@ void CoreTools::AppenderManagerTesting ::AppenderSucceedTest()
     ASSERT_TRUE(manager->RemoveAppender(SYSTEM_TEXT("Console"s)));
 }
 
-void CoreTools::AppenderManagerTesting ::InsertAppenderFailTest()
+void CoreTools::AppenderManagerTesting::InsertAppenderFailTest()
 {
     auto manager = AppenderManager::Create();
 
@@ -123,7 +124,7 @@ void CoreTools::AppenderManagerTesting ::InsertAppenderFailTest()
     ASSERT_FALSE(manager->InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
 }
 
-void CoreTools::AppenderManagerTesting ::RemoveAppenderFailTest()
+void CoreTools::AppenderManagerTesting::RemoveAppenderFailTest()
 {
     auto manager = AppenderManager::Create();
 
@@ -133,16 +134,16 @@ void CoreTools::AppenderManagerTesting ::RemoveAppenderFailTest()
 }
 
 // WriteMessage测试
-void CoreTools::AppenderManagerTesting ::WriteMessageTest()
+void CoreTools::AppenderManagerTesting::WriteMessageTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WriteMessageToFileTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileContentTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
 }
 
-void CoreTools::AppenderManagerTesting ::WriteMessageToFileTest()
+void CoreTools::AppenderManagerTesting::WriteMessageToFileTest()
 {
-    Appender appender{ g_AppenderManagerTestingPathName, g_AppenderManagerTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
+    Appender appender{ gAppenderManagerTestingPathName, gAppenderManagerTestingFileName, AppenderPrint::All, LogLevel::Trace, 100000, true, SYSTEM_TEXT("log"s) };
 
     Logger firstLogger{ LogFilter::CoreTools, LogLevel::Trace };
 
@@ -151,7 +152,7 @@ void CoreTools::AppenderManagerTesting ::WriteMessageToFileTest()
     ASSERT_TRUE(manager->InsertLogger(firstLogger));
     ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
-    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, g_TraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED);
+    LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, gTraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED);
 
     // 这条消息被写入g_AppenderManagerTestingFileName
     manager->Write(traceMessage);
@@ -159,12 +160,12 @@ void CoreTools::AppenderManagerTesting ::WriteMessageToFileTest()
     Logger secondLogger(LogFilter::System, LogLevel::Info);
     ASSERT_TRUE(manager->InsertLogger(secondLogger));
 
-    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, g_DebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, gDebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息没有被写入g_AppenderManagerTestingFileName
     manager->Write(debugMessage);
 
-    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, g_InfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, gInfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息被写入g_AppenderManagerTestingFileName
     manager->Write(infoMessage);
@@ -173,31 +174,31 @@ void CoreTools::AppenderManagerTesting ::WriteMessageToFileTest()
     ASSERT_TRUE(manager->RemoveAppender(SYSTEM_TEXT("FileAppender"s)));
     ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
-    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, g_WarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, gWarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息没有被写入g_AppenderManagerTestingFileName
     manager->Write(warnMessage);
 
-    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, g_ErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
+    LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, gErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息被写入g_AppenderManagerTestingFileName
     manager->Write(errorMessage);
 }
 
-void CoreTools::AppenderManagerTesting ::FileContentTest()
+void CoreTools::AppenderManagerTesting::FileContentTest()
 {
-    IFStreamManager fileManager{ m_AppenderManagerTestingFullName };
+    IFStreamManager fileManager{ appenderManagerTestingFullName };
 
     auto fileContent = fileManager.GetFileContent();
 
-    ASSERT_UNEQUAL(fileContent.find(g_TraceMessage), System::String::npos);
-    ASSERT_EQUAL(fileContent.find(g_DebugMessage), System::String::npos);
-    ASSERT_UNEQUAL(fileContent.find(g_InfoMessage), System::String::npos);
-    ASSERT_EQUAL(fileContent.find(g_WarnMessage), System::String::npos);
-    ASSERT_UNEQUAL(fileContent.find(g_ErrorMessage), System::String::npos);
+    ASSERT_UNEQUAL(fileContent.find(gTraceMessage), System::String::npos);
+    ASSERT_EQUAL(fileContent.find(gDebugMessage), System::String::npos);
+    ASSERT_UNEQUAL(fileContent.find(gInfoMessage), System::String::npos);
+    ASSERT_EQUAL(fileContent.find(gWarnMessage), System::String::npos);
+    ASSERT_UNEQUAL(fileContent.find(gErrorMessage), System::String::npos);
 }
 
-void CoreTools::AppenderManagerTesting ::DeleteFileTest()
+void CoreTools::AppenderManagerTesting::DeleteFileTest()
 {
-    DeleteFileTools file{ m_AppenderManagerTestingFullName };
+    DeleteFileTools file{ appenderManagerTestingFullName };
 }

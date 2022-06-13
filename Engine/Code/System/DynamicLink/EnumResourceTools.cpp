@@ -22,7 +22,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceLanguages(module, type, name, enumFunction, param) != g_False)
+    if (::EnumResourceLanguages(module, type, name, enumFunction, param) != gFalse)
         return true;
     else
         return false;
@@ -46,7 +46,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceLanguagesEx(module, type, name, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != g_False)
+    if (::EnumResourceLanguagesEx(module, type, name, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != gFalse)
         return true;
     else
         return false;
@@ -67,7 +67,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceNames(module, type, enumFunction, param) != g_False)
+    if (::EnumResourceNames(module, type, enumFunction, param) != gFalse)
         return true;
     else
         return false;
@@ -90,7 +90,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceNamesEx(module, type, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != g_False)
+    if (::EnumResourceNamesEx(module, type, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != gFalse)
         return true;
     else
         return false;
@@ -108,7 +108,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module, EnumResourceTy
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceTypes(module, enumFunction, param) != g_False)
+    if (::EnumResourceTypes(module, enumFunction, param) != gFalse)
         return true;
     else
         return false;
@@ -130,7 +130,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::EnumResourceTypesEx(module, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != g_False)
+    if (::EnumResourceTypesEx(module, enumFunction, param, EnumCastUnderlying(flags), language.GetLanguageID()) != gFalse)
         return true;
     else
         return false;

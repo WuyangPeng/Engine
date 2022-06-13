@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 11:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 18:54)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_BUFFER_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_BUFFER_TESTING_H
@@ -35,17 +38,17 @@ namespace Network
 
         void LoopTest(int testLoopCount);
 
-        MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
-        MessageBufferSharedPtr CreateAddMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
         void AddBufferLength(int testLoopCount, MessageBuffer& messageBuffer);
 
         void DoRunUnitTest() override;
 
     private:
-        static constexpr int64_t sm_MessageID{ 6 };
-        static constexpr auto sm_BufferSize = 1024;
+        static constexpr int64_t messageID{ 6 };
+        static constexpr auto bufferSize = 1024;
 
-        TestNullMessageSharedPtr m_TestMessage;
+        TestNullMessageSharedPtr testMessage;
     };
 }
 

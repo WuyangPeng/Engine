@@ -34,7 +34,7 @@ bool System::DestroyProcessHeap(WindowsHandle heap) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::HeapDestroy(heap) != g_False)
+    if (::HeapDestroy(heap) != gFalse)
         return true;
     else
         return false;
@@ -96,7 +96,7 @@ bool System::FreeProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVoidPt
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::HeapFree(heap, EnumCastUnderlying(flags), memory) != g_False)
+    if (::HeapFree(heap, EnumCastUnderlying(flags), memory) != gFalse)
         return true;
     else
         return false;
@@ -129,7 +129,7 @@ bool System::ValidateProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVo
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::HeapValidate(heap, EnumCastUnderlying(flags), memory) != g_False)
+    if (::HeapValidate(heap, EnumCastUnderlying(flags), memory) != gFalse)
         return true;
     else
         return false;

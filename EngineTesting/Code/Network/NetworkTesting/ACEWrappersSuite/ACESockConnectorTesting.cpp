@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 14:21)
 
 #include "ACESockConnectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -27,12 +30,12 @@ namespace Network
     using TestingType = SockConnector;
 }
 
-void Network::ACESockConnectorTesting ::MainTest()
+void Network::ACESockConnectorTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::ConnectorTest);
 }
 
-void Network::ACESockConnectorTesting ::ConnectorTest()
+void Network::ACESockConnectorTesting::ConnectorTest()
 {
     ConfigurationStrategy clientConfigurationStrategy{ GetACEServerConfigurationStrategy() };
     TestingType sockConnector{ clientConfigurationStrategy };
@@ -41,6 +44,6 @@ void Network::ACESockConnectorTesting ::ConnectorTest()
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(clientConfigurationStrategy) };
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetIP(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
 
-    [[maybe_unused]] const auto value = sockConnector.Connect(sockStream, sockAddress);
+    MAYBE_UNUSED const auto value = sockConnector.Connect(sockStream, sockAddress);
     sockConnector.AsyncConnect(socketManager, sockStream, sockAddress);
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 18:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/06 11:25)
 
 #include "StaticTestIntersector1Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -21,12 +24,12 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticTestIntersector1Testing)
 
-void Mathematics::StaticTestIntersector1Testing ::MainTest()
+void Mathematics::StaticTestIntersector1Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntersectorTest);
 }
 
-void Mathematics::StaticTestIntersector1Testing ::IntersectorTest()
+void Mathematics::StaticTestIntersector1Testing::IntersectorTest()
 {
     std::default_random_engine generator;
     const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
@@ -35,10 +38,10 @@ void Mathematics::StaticTestIntersector1Testing ::IntersectorTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        float u0 = randomDistribution(generator);
-        float u1 = randomDistribution(generator);
-        float v0 = randomDistribution(generator);
-        float v1 = randomDistribution(generator);
+        auto u0 = randomDistribution(generator);
+        auto u1 = randomDistribution(generator);
+        auto v0 = randomDistribution(generator);
+        auto v1 = randomDistribution(generator);
 
         if (u1 < u0)
         {

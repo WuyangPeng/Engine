@@ -1,19 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/16 19:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 11:05)
 
 #ifndef MATHEMATICS_TESTING_TESTING_HELPER_H
 #define MATHEMATICS_TESTING_TESTING_HELPER_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-
-namespace CoreTools
-{
-    class Suite;
-}
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace Mathematics
 {
@@ -50,12 +49,12 @@ namespace Mathematics
         void AddInterpolationSuite();
         void AddMiscellaneousSuite();
 
-        Suite GetDistance2DSuite();
-        Suite GetDistance3DSuite();
+        NODISCARD Suite GetDistance2DSuite();
+        NODISCARD Suite GetDistance3DSuite();
 
-        Suite GetIntersection1DSuite();
-        Suite GetIntersection2DSuite();
-        Suite GetIntersection3DSuite();
+        NODISCARD Suite GetIntersection1DSuite();
+        NODISCARD Suite GetIntersection2DSuite();
+        NODISCARD Suite GetIntersection3DSuite();
     };
 }
 

@@ -18,7 +18,7 @@
 
 namespace Rendering
 {
-    class LightDirPerVerEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE LightDirPerVerEffect : public VisualEffect
     {
     public:
         using ClassType = LightDirPerVerEffect;

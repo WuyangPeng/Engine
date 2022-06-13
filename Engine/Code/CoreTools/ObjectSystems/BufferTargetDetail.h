@@ -42,7 +42,7 @@ void CoreTools::BufferTarget::WriteBoolContainerWithoutNumber(const T& objects)
     using ValueType = typename T::value_type;
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    for (auto object : objects)
+    for (const auto object : objects)
     {
         Write(object);
     }
@@ -177,7 +177,7 @@ void CoreTools::BufferTarget::WriteEnumContainerWithoutNumber(const T& objects)
 
     for (auto object : objects)
     {
-        Write(object);
+        WriteEnum(object);
     }
 }
 

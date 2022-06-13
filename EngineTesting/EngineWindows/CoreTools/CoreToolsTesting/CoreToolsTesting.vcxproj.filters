@@ -106,12 +106,6 @@
     <Filter Include="ConsoleSuite 源文件">
       <UniqueIdentifier>{cd03f354-e696-4dc4-96f2-cd93d2f7213b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BitArraySuite 头文件">
-      <UniqueIdentifier>{c678e84b-b9a7-4e6b-85ff-fec42495cb38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BitArraySuite 源文件">
-      <UniqueIdentifier>{db6d290f-fb04-48ce-b927-b6e6859baa59}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CommandSuite 头文件">
       <UniqueIdentifier>{26d7cde0-b4c6-4895-b25e-b78505eb6be8}</UniqueIdentifier>
     </Filter>
@@ -142,24 +136,6 @@
     <Filter Include="FileManagerSuite 源文件">
       <UniqueIdentifier>{7d6c8bbc-f90b-485a-8612-d0407b7c3281}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameMemorySystemSuite 头文件">
-      <UniqueIdentifier>{7250fb50-bf77-4e41-ad4a-b38dd7ef99b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameMemorySystemSuite 源文件">
-      <UniqueIdentifier>{97a16152-f702-41ac-8b6f-68d6219636db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HandleManagerSuite 头文件">
-      <UniqueIdentifier>{a83bfc77-dfb3-4078-9caf-7ee65bbad44b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HandleManagerSuite 源文件">
-      <UniqueIdentifier>{720128cb-8011-43c0-90e7-f592f8645b9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HandleManagerSuite 源文件\Detail">
-      <UniqueIdentifier>{8802c5ba-9703-496b-af1b-1badb722dfc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HandleManagerSuite 头文件\Detail">
-      <UniqueIdentifier>{97b30018-abaa-4cee-b188-ae5abf6bac82}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LogManagerSuite 头文件">
       <UniqueIdentifier>{b67c9a55-8502-4ebd-9444-6af9503c891a}</UniqueIdentifier>
     </Filter>
@@ -177,12 +153,6 @@
     </Filter>
     <Filter Include="MemoryToolsSuite 源文件">
       <UniqueIdentifier>{0abe8c94-ea26-4999-bad0-9ac13cced7e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MemoryToolsSuite 头文件\Detail">
-      <UniqueIdentifier>{c74746e3-ab12-4aab-8dde-0b0bcc4a9f9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MemoryToolsSuite 源文件\Detail">
-      <UniqueIdentifier>{929ec8b7-8388-4340-b048-b5677a9092a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="MessageEventSuite 头文件">
       <UniqueIdentifier>{319d08a9-a999-417b-8547-356646a7788b}</UniqueIdentifier>
@@ -252,12 +222,6 @@
     </Filter>
     <Filter Include="ReportOutputSuite 源文件">
       <UniqueIdentifier>{bd6badfb-1b91-4939-8e5c-c58985482c9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ResourceManagerSuite 头文件">
-      <UniqueIdentifier>{47acbce1-bd33-4043-9f87-891310dd9de3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ResourceManagerSuite 源文件">
-      <UniqueIdentifier>{c57b726e-b110-48dd-8839-073175633c61}</UniqueIdentifier>
     </Filter>
     <Filter Include="StateMachineSuite 头文件">
       <UniqueIdentifier>{f845bb19-25ab-4b5f-ac7e-17d2ee061bd6}</UniqueIdentifier>
@@ -531,18 +495,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.h">
       <Filter>BaseSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArray2DTesting.h">
-      <Filter>BitArraySuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArraySuite.h">
-      <Filter>BitArraySuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArrayTesting.h">
-      <Filter>BitArraySuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\TwoBitArrayTesting.h">
-      <Filter>BitArraySuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CharacterStringSuite.h">
       <Filter>CharacterStringSuite 头文件</Filter>
     </ClInclude>
@@ -651,27 +603,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerSuite.h">
       <Filter>FileManagerSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.h">
-      <Filter>FrameMemorySystemSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.h">
-      <Filter>FrameMemorySystemSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemSuite.h">
-      <Filter>FrameMemorySystemSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.h">
-      <Filter>FrameMemorySystemSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerSuite.h">
-      <Filter>HandleManagerSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerTesting.h">
-      <Filter>HandleManagerSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\ResourceHandleTesting.h">
-      <Filter>HandleManagerSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.h">
       <Filter>LogManagerSuite 头文件</Filter>
     </ClInclude>
@@ -749,21 +680,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.h">
       <Filter>ReportOutputSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\CommonDataResourceTesting.h">
-      <Filter>ResourceManagerSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceFactoryTesting.h">
-      <Filter>ResourceManagerSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerLockTesting.h">
-      <Filter>ResourceManagerSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerSuite.h">
-      <Filter>ResourceManagerSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerTesting.h">
-      <Filter>ResourceManagerSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\SyntacticParserSuite\SyntacticParserSuite.h">
       <Filter>SyntacticParserSuite 头文件</Filter>
@@ -950,81 +866,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.h">
       <Filter>BaseSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\HandleManagerTestData.h">
-      <Filter>HandleManagerSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\ResourceHandleTestTag.h">
-      <Filter>HandleManagerSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FifthSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FirstSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FourthSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\NinthSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SecondSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SeventhSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SixthSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\TenthSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\ThirdSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\EighthSubclassSmartPointerTest.h">
-      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferPoolTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferStreamTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\DefaultMemoryTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5ContextTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5Testing.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryManagerTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\PoolTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\RandomTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SmartPointerTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SubclassSmartPointerTesting.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\EventSubclass.h">
       <Filter>MessageEventSuite 头文件\Detail</Filter>
@@ -1311,13 +1152,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.h">
       <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\PointerObject.h">
-      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StreamSizeTestingEnum.h">
-      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StringObject.h">
       <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.h">
@@ -1331,9 +1166,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerDetail.h">
       <Filter>StateMachineSuite 模板文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryToolsSuite.h">
-      <Filter>MemoryToolsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.h">
       <Filter>HelperSuite 头文件\AssertTest</Filter>
@@ -1935,6 +1767,12 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.h">
       <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryToolsSuite.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -2072,15 +1910,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.cpp">
       <Filter>ConsoleSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArray2DTesting.cpp">
-      <Filter>BitArraySuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArrayTesting.cpp">
-      <Filter>BitArraySuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\TwoBitArrayTesting.cpp">
-      <Filter>BitArraySuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.cpp">
       <Filter>CommandSuite 源文件</Filter>
     </ClCompile>
@@ -2147,27 +1976,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.cpp">
       <Filter>FileManagerSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.cpp">
-      <Filter>FrameMemorySystemSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.cpp">
-      <Filter>FrameMemorySystemSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.cpp">
-      <Filter>FrameMemorySystemSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerTesting.cpp">
-      <Filter>HandleManagerSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\ResourceHandleTesting.cpp">
-      <Filter>HandleManagerSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\HandleManagerTestData.cpp">
-      <Filter>HandleManagerSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\ResourceHandleTestTag.cpp">
-      <Filter>HandleManagerSuite 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.cpp">
       <Filter>LogManagerSuite 源文件</Filter>
     </ClCompile>
@@ -2215,75 +2023,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\TestingInformationHelperTesting.cpp">
       <Filter>MainFunctionHelperSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\EighthSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FifthSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FirstSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FourthSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\NinthSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SecondSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SeventhSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SixthSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\TenthSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\ThirdSubclassSmartPointerTest.cpp">
-      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SubclassSmartPointerTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferPoolTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferStreamTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\DefaultMemoryTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5ContextTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5Testing.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryManagerTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\PoolTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\RandomTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SmartPointerTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Entity.cpp">
       <Filter>MessageEventSuite 源文件\Detail</Filter>
@@ -2438,18 +2177,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.cpp">
       <Filter>ReportOutputSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\CommonDataResourceTesting.cpp">
-      <Filter>ResourceManagerSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceFactoryTesting.cpp">
-      <Filter>ResourceManagerSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerLockTesting.cpp">
-      <Filter>ResourceManagerSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerTesting.cpp">
-      <Filter>ResourceManagerSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\EmptyStates.cpp">
       <Filter>StateMachineSuite 源文件\Detail</Filter>
     </ClCompile>
@@ -2601,12 +2328,6 @@
       <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.cpp">
-      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\PointerObject.cpp">
-      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StringObject.cpp">
       <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.cpp">
@@ -3175,6 +2896,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.cpp">
       <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

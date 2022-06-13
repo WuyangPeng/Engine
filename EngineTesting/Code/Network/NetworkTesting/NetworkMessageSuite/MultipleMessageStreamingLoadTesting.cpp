@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒıÇæ²âÊÔ°æ±¾£º0.0.2.4 (2020/03/12 14:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒıÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/05/24 10:59)
 
 #include "MultipleMessageStreamingLoadTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -22,9 +25,15 @@ using std::string;
 
 namespace Network
 {
-    using MultipleMessageType = MultipleMessageContainer<MultipleMessageField, MultipleMessageByteType::Int8, MultipleMessageByteType::Uint8,
-                                                         MultipleMessageByteType::Int16, MultipleMessageByteType::Uint16, MultipleMessageByteType::Int32,
-                                                         MultipleMessageByteType::Uint32, MultipleMessageByteType::Int64, MultipleMessageByteType::Uint64,
+    using MultipleMessageType = MultipleMessageContainer<MultipleMessageField,
+                                                         MultipleMessageByteType::Int8,
+                                                         MultipleMessageByteType::Uint8,
+                                                         MultipleMessageByteType::Int16,
+                                                         MultipleMessageByteType::Uint16,
+                                                         MultipleMessageByteType::Int32,
+                                                         MultipleMessageByteType::Uint32,
+                                                         MultipleMessageByteType::Int64,
+                                                         MultipleMessageByteType::Uint64,
                                                          MultipleMessageByteType::String>;
 
     using TestingType = MultipleMessageStreamingLoad<MultipleMessageSize<MultipleMessageType>::value, MultipleMessageType>;
@@ -32,12 +41,12 @@ namespace Network
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageStreamingLoadTesting)
 
-void Network::MultipleMessageStreamingLoadTesting ::MainTest()
+void Network::MultipleMessageStreamingLoadTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 }
-#include SYSTEM_WARNING_DISABLE(26414)
-void Network::MultipleMessageStreamingLoadTesting ::BaseTest()
+
+void Network::MultipleMessageStreamingLoadTesting::BaseTest()
 {
     constexpr int8_t int8Value{ -8 };
     constexpr int16_t int16Value{ 24 };
@@ -54,17 +63,17 @@ void Network::MultipleMessageStreamingLoadTesting ::BaseTest()
     MultipleMessageType multipleMessageContainer{ int8Value, uint8Value, int16Value, uint16Value, int32Value, uint32Value, int64Value, uint64Value, stringValue };
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+    MessageTarget messageTarget{ buffer };
 
-    multipleMessageContainer.Save(*messageTarget);
+    multipleMessageContainer.Save(messageTarget);
 
-    MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
+    MessageSource messageSource{ buffer };
 
     TestingType multipleMessageStreamingLoad{};
 
     MultipleMessageType resultMultipleMessageContainer{};
 
-    multipleMessageStreamingLoad.Load(resultMultipleMessageContainer, *messageSource);
+    multipleMessageStreamingLoad.Load(resultMultipleMessageContainer, messageSource);
 
     ASSERT_EQUAL(multipleMessageContainer.GetValue<MultipleMessageField::Int8>(), resultMultipleMessageContainer.GetValue<MultipleMessageField::Int8>());
     ASSERT_EQUAL(multipleMessageContainer.GetValue<MultipleMessageField::UInt8>(), resultMultipleMessageContainer.GetValue<MultipleMessageField::UInt8>());

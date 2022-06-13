@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.5 (2020/03/17 11:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 16:50)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -33,58 +36,58 @@ void Script::TestingHelper::InitSuite()
     AddTCREScriptSuite();
 }
 
-void Script::TestingHelper ::AddHelperSuite()
+void Script::TestingHelper::AddHelperSuite()
 {
     auto helperSuite = GenerateSuite("帮助");
 
     AddSuite(helperSuite);
 }
 
-void Script::TestingHelper ::AddConfigurationSuite()
+void Script::TestingHelper::AddConfigurationSuite()
 {
     auto configurationSuite = GenerateSuite("配置");
 
     AddSuite(configurationSuite);
 }
 
-void Script::TestingHelper ::AddInterfaceSuite()
+void Script::TestingHelper::AddInterfaceSuite()
 {
     auto interfaceSuite = GenerateSuite("接口");
 
     AddSuite(interfaceSuite);
 }
 
-void Script::TestingHelper ::AddJavaSuite()
+void Script::TestingHelper::AddJavaSuite()
 {
     auto javaSuite = GenerateSuite("Java");
 
     AddSuite(javaSuite);
 }
 
-void Script::TestingHelper ::AddLuaSuite()
+void Script::TestingHelper::AddLuaSuite()
 {
     auto luaSuite = GenerateSuite("lua");
 
     AddSuite(luaSuite);
 }
 
-void Script::TestingHelper ::AddPerlSuite()
+void Script::TestingHelper::AddPerlSuite()
 {
     auto perlSuite = GenerateSuite("perl");
 
     AddSuite(perlSuite);
 }
 
-void Script::TestingHelper ::AddPythonSuite()
+void Script::TestingHelper::AddPythonSuite()
 {
-    auto pythonSuite = GenerateSuite("python"); 
+    auto pythonSuite = GenerateSuite("python");
 
     AddSuite(pythonSuite);
 }
 
-void Script::TestingHelper ::AddTCREScriptSuite()
+void Script::TestingHelper::AddTCREScriptSuite()
 {
-    auto tcreScriptSuite = GenerateSuite("tcreScript");  
+    auto tcreScriptSuite = GenerateSuite("tcreScript");
 
     AddSuite(tcreScriptSuite);
 }

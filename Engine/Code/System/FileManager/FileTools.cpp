@@ -20,7 +20,7 @@ bool System::CreateFileDirectory(const String& pathName, WindowSecurityAttribute
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::CreateDirectory(pathName.c_str(), securityAttributes) != g_False)
+    if (::CreateDirectory(pathName.c_str(), securityAttributes) != gFalse)
         return true;
     else
         return false;
@@ -42,7 +42,7 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* rootPathName,
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::GetDiskFreeSpace(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters) != g_False)
+    if (::GetDiskFreeSpace(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters) != gFalse)
         return true;
     else
         return false;
@@ -63,7 +63,7 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* directoryName,
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::GetDiskFreeSpaceEx(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes) != g_False)
+    if (::GetDiskFreeSpaceEx(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes) != gFalse)
         return true;
     else
         return false;
@@ -81,7 +81,7 @@ bool System::RemoveSystemDirectory(const TChar* pathName) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::RemoveDirectory(pathName) != g_False)
+    if (::RemoveDirectory(pathName) != gFalse)
         return true;
     else
         return false;

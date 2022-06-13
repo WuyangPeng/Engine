@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 13:46)
 
 #include "MethodPropertyTesting.h"
 #include "Detail/MethodProperty.h"
@@ -13,34 +16,30 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, MethodPropertyTesting)
 
-void CoreTools::MethodPropertyTesting
-	::MainTest()
+void CoreTools::MethodPropertyTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(GetTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTest);
 }
 
-void CoreTools::MethodPropertyTesting
-	::GetTest()
+void CoreTools::MethodPropertyTesting::GetTest()
 {
-	MethodProperty methodProperty;
+    MethodProperty methodProperty;
 
-	ASSERT_EQUAL(methodProperty.m_GetType, 0);
+    ASSERT_EQUAL(methodProperty.getType, 0);
 
-	methodProperty.m_SetType = 1;
+    methodProperty.setType = 1;
 
-	ASSERT_EQUAL(methodProperty.m_GetSetType, 1);
+    ASSERT_EQUAL(methodProperty.getSetType, 1);
 
-	methodProperty.m_GetSetType = 2;
+    methodProperty.getSetType = 2;
 
-	ASSERT_EQUAL(methodProperty.m_GetType, 2);
+    ASSERT_EQUAL(methodProperty.getType, 2);
 
-	methodProperty.m_SetExternalType = 3;
+    methodProperty.setExternalType = 3;
 
-	ASSERT_EQUAL(methodProperty.m_GetSetExternalType, 3);
+    ASSERT_EQUAL(methodProperty.getSetExternalType, 3);
 
-	methodProperty.m_GetSetExternalType = 4;
+    methodProperty.getSetExternalType = 4;
 
-	ASSERT_EQUAL(methodProperty.m_GetExternalType, 4);
+    ASSERT_EQUAL(methodProperty.getExternalType, 4);
 }
-
-

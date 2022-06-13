@@ -1,23 +1,24 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/21 13:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/06/08 18:47)
 
 #include "AVectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-
 #include "Mathematics/Base/Float.h"
+
 #include <random>
 
 using std::default_random_engine;
 using std::uniform_real;
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
+
 namespace Mathematics
 {
     template class AVector<float>;
@@ -26,7 +27,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, AVectorTesting)
 
-void Mathematics::AVectorTesting ::MainTest()
+void Mathematics::AVectorTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
@@ -35,10 +36,10 @@ void Mathematics::AVectorTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(OtherCalculateTest);
 }
 
-void Mathematics::AVectorTesting ::ConstructionTest()
+void Mathematics::AVectorTesting::ConstructionTest()
 {
-    Float3 tuple{ 3.0f, 5.0f, 9.0f };
-    Vector3F vector{ 9.0f, 6.0f, 1.0f };
+    const Float3 tuple{ 3.0f, 5.0f, 9.0f };
+    const Vector3F vector{ 9.0f, 6.0f, 1.0f };
 
     AVectorF firstVector;
 
@@ -77,35 +78,13 @@ void Mathematics::AVectorTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(thirdVector[2], 1.0f, 1e-8f);
 }
 
-void Mathematics::AVectorTesting ::AccessTest()
+void Mathematics::AVectorTesting::AccessTest() noexcept
 {
-    // 	DoubleAVector firstVector{ 6.0,9.0,1.0 };
-    //
-    // 	auto tuple = firstVector.GetFloat3();
-    // 	auto vector = firstVector.GetVector3();
-    //
-    // 	ASSERT_APPROXIMATE(tuple.GetFirstValue(),6.0f,1e-10f);
-    // 	ASSERT_APPROXIMATE(tuple.GetSecondValue(),9.0f,1e-10f);
-    // 	ASSERT_APPROXIMATE(tuple.GetThirdValue(),1.0f,1e-10f);
-    //
-    // 	ASSERT_APPROXIMATE(vector.GetX(),6.0,1e-10f);
-    // 	ASSERT_APPROXIMATE(vector.GetY(),9.0,1e-10f);
-    // 	ASSERT_APPROXIMATE(vector.GetZ(),1.0,1e-10f);
-    //
-    // 	ASSERT_APPROXIMATE(firstVector[0],6.0,1e-10f);
-    // 	ASSERT_APPROXIMATE(firstVector[1],9.0,1e-10f);
-    // 	ASSERT_APPROXIMATE(firstVector[2],1.0,1e-10f);
-    //
-    // 	const DoubleAVector secondVector{ 16.0,92.0,11.0 };
-    //
-    // 	ASSERT_APPROXIMATE(secondVector[0],16.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondVector[1],92.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondVector[2],11.0,1e-10);
 }
 
-void Mathematics::AVectorTesting ::ArithmeticCalculateTest()
+void Mathematics::AVectorTesting::ArithmeticCalculateTest()
 {
-    AVectorF firstVector{ 26.0f, 91.0f, 8.0f };
+    const AVectorF firstVector{ 26.0f, 91.0f, 8.0f };
 
     auto secondVector = -firstVector;
     ASSERT_APPROXIMATE(secondVector[0], -26.0f, 1e-8f);
@@ -181,10 +160,10 @@ void Mathematics::AVectorTesting ::ArithmeticCalculateTest()
     ASSERT_APPROXIMATE(fifthVector[2], 30.0, 1e-10);
 }
 
-void Mathematics::AVectorTesting ::VectorCalculateTest()
+void Mathematics::AVectorTesting::VectorCalculateTest()
 {
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -224,10 +203,10 @@ void Mathematics::AVectorTesting ::VectorCalculateTest()
     ASSERT_APPROXIMATE(thirdVector[2], 5.0f / sqrt(50.0f), 1e-7f);
 }
 
-void Mathematics::AVectorTesting ::OtherCalculateTest()
+void Mathematics::AVectorTesting::OtherCalculateTest()
 {
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ -100.0, 100.0 };
+    const uniform_real<double> randomDistribution{ -100.0, 100.0 };
 
     AVectorD firstVector{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
     AVectorD secondVector{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
@@ -239,9 +218,9 @@ void Mathematics::AVectorTesting ::OtherCalculateTest()
     vectors.push_back(secondVector);
     vectors.push_back(thirdVector);
 
-    auto firstOrthonormalize = Orthonormalize(firstVector, secondVector, thirdVector);
+    const auto firstOrthonormalize = Orthonormalize(firstVector, secondVector, thirdVector);
 
-    auto secondOrthonormalize = Orthonormalize(vectors);
+    const auto secondOrthonormalize = Orthonormalize(vectors);
 
     firstVector.Normalize();
     auto dot0 = Dot(firstVector, secondVector);
@@ -262,24 +241,24 @@ void Mathematics::AVectorTesting ::OtherCalculateTest()
 
     AVectorD fourthVector{ randomDistribution(randomEngine), randomDistribution(randomEngine), randomDistribution(randomEngine) };
 
-    auto firstOrthonormalBasis = GenerateOrthonormalBasis(fourthVector);
+    const auto firstOrthonormalBasis = GenerateOrthonormalBasis(fourthVector);
 
     fourthVector.Normalize();
 
-    auto secondOrthonormalBasis = GenerateComplementBasis(fourthVector);
+    const auto secondOrthonormalBasis = GenerateComplementBasis(fourthVector);
 
     ASSERT_TRUE(Approximate(fourthVector, firstOrthonormalBasis.GetWVector(), 1e-10));
     ASSERT_TRUE(Approximate(fourthVector, secondOrthonormalBasis.GetWVector(), 1e-10));
 
-    auto fifthVector = Cross(firstOrthonormalBasis.GetUVector(), firstOrthonormalBasis.GetVVector());
+    const auto fifthVector = Cross(firstOrthonormalBasis.GetUVector(), firstOrthonormalBasis.GetVVector());
 
     ASSERT_TRUE(Approximate(firstOrthonormalBasis.GetWVector(), fifthVector, 1e-10));
 
-    auto sixthVector = Cross(firstOrthonormalBasis.GetVVector(), firstOrthonormalBasis.GetWVector());
+    const auto sixthVector = Cross(firstOrthonormalBasis.GetVVector(), firstOrthonormalBasis.GetWVector());
 
     ASSERT_TRUE(Approximate(firstOrthonormalBasis.GetUVector(), sixthVector, 1e-10));
 
-    auto seventhVector = Cross(firstOrthonormalBasis.GetWVector(), firstOrthonormalBasis.GetUVector());
+    const auto seventhVector = Cross(firstOrthonormalBasis.GetWVector(), firstOrthonormalBasis.GetUVector());
 
     ASSERT_TRUE(Approximate(firstOrthonormalBasis.GetVVector(), seventhVector));
 }

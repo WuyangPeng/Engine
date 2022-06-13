@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/28 14:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/27 11:13)
 
 #include "Query3RationalTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -22,12 +25,7 @@
 #include "Mathematics/Rational/RationalVectorDetail.h"
 
 #include <random>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
+
 using std::default_random_engine;
 using std::swap;
 using std::uniform_int;
@@ -42,7 +40,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Query3RationalTesting)
 
-void Mathematics::Query3RationalTesting ::MainTest()
+void Mathematics::Query3RationalTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(VerticesTest);
     ASSERT_NOT_THROW_EXCEPTION_0(PlaneTest);
@@ -50,22 +48,22 @@ void Mathematics::Query3RationalTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CircumspherTest);
 }
 
-void Mathematics::Query3RationalTesting ::VerticesTest()
+void Mathematics::Query3RationalTesting::VerticesTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
         for (int m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
         Query3RationalD query(vertices);
@@ -73,37 +71,37 @@ void Mathematics::Query3RationalTesting ::VerticesTest()
         ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Rational);
         ASSERT_EQUAL(query.GetNumVertices(), size);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertice(m), vertices[m], 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertice(m), vertices.at(m), 1e-10);
         }
     }
 }
 
-void Mathematics::Query3RationalTesting ::PlaneTest()
+void Mathematics::Query3RationalTesting::PlaneTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
         for (int m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        uniform_int<> thirdRandomDistribution(0, size - 1);
+        const uniform_int<> thirdRandomDistribution(0, size - 1);
 
-        int firstIndex = thirdRandomDistribution(generator);
-        int secondIndex = thirdRandomDistribution(generator);
-        int thirdIndex = thirdRandomDistribution(generator);
-        int fourthIndex = thirdRandomDistribution(generator);
+        auto firstIndex = thirdRandomDistribution(generator);
+        auto secondIndex = thirdRandomDistribution(generator);
+        auto thirdIndex = thirdRandomDistribution(generator);
+        auto fourthIndex = thirdRandomDistribution(generator);
 
         Query3RationalD query(vertices);
 
@@ -113,14 +111,14 @@ void Mathematics::Query3RationalTesting ::PlaneTest()
 
         if (firstIndex != secondIndex && secondIndex != thirdIndex && firstIndex != thirdIndex && thirdIndex != fourthIndex && secondIndex != fourthIndex && firstIndex != fourthIndex)
         {
-            Vector3D firstVector = vertices[firstIndex];
-            Vector3D secondVector = vertices[secondIndex];
-            Vector3D thirdVector = vertices[thirdIndex];
-            Vector3D fourthVector = vertices[fourthIndex];
+            const auto& firstVector = vertices.at(firstIndex);
+            const auto& secondVector = vertices.at(secondIndex);
+            const auto& thirdVector = vertices.at(thirdIndex);
+            const auto& fourthVector = vertices.at(fourthIndex);
 
-            Matrix3D matrix(firstVector - secondVector, thirdVector - secondVector, fourthVector - secondVector, MatrixMajorFlags::Column);
+            const Matrix3D matrix(firstVector - secondVector, thirdVector - secondVector, fourthVector - secondVector, MatrixMajorFlags::Column);
 
-            double det = matrix.Determinant();
+            auto det = matrix.Determinant();
 
             if (0.0 < det)
             {
@@ -138,31 +136,31 @@ void Mathematics::Query3RationalTesting ::PlaneTest()
     }
 }
 
-void Mathematics::Query3RationalTesting ::TetrahedronTest()
+void Mathematics::Query3RationalTesting::TetrahedronTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        uniform_int<> thirdRandomDistribution(0, size - 1);
+        const uniform_int<> thirdRandomDistribution(0, size - 1);
 
-        int firstIndex = thirdRandomDistribution(generator);
-        int secondIndex = thirdRandomDistribution(generator);
-        int thirdIndex = thirdRandomDistribution(generator);
-        int fourthIndex = thirdRandomDistribution(generator);
-        int fifthIndex = thirdRandomDistribution(generator);
+        auto firstIndex = thirdRandomDistribution(generator);
+        auto secondIndex = thirdRandomDistribution(generator);
+        auto thirdIndex = thirdRandomDistribution(generator);
+        auto fourthIndex = thirdRandomDistribution(generator);
+        auto fifthIndex = thirdRandomDistribution(generator);
 
         Query3RationalD query(vertices);
 
@@ -176,18 +174,22 @@ void Mathematics::Query3RationalTesting ::TetrahedronTest()
         ASSERT_ENUM_EQUAL(query.ToTetrahedron(fourthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
         ASSERT_ENUM_EQUAL(query.ToTetrahedron(fifthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
 
-        PlaneQueryType sign0 = query.ToPlane(firstIndex, thirdIndex, fourthIndex, fifthIndex);
-        PlaneQueryType sign1 = query.ToPlane(firstIndex, secondIndex, fourthIndex, fifthIndex);
-        PlaneQueryType sign2 = query.ToPlane(firstIndex, secondIndex, thirdIndex, fifthIndex);
-        PlaneQueryType sign3 = query.ToPlane(firstIndex, secondIndex, thirdIndex, fourthIndex);
+        const auto sign0 = query.ToPlane(firstIndex, thirdIndex, fourthIndex, fifthIndex);
+        const auto sign1 = query.ToPlane(firstIndex, secondIndex, fourthIndex, fifthIndex);
+        const auto sign2 = query.ToPlane(firstIndex, secondIndex, thirdIndex, fifthIndex);
+        const auto sign3 = query.ToPlane(firstIndex, secondIndex, thirdIndex, fourthIndex);
 
-        if (sign0 == PlaneQueryType::PositiveSide || sign1 == PlaneQueryType::NegativeSide ||
-            sign2 == PlaneQueryType::PositiveSide || sign3 == PlaneQueryType::NegativeSide)
+        if (sign0 == PlaneQueryType::PositiveSide ||
+            sign1 == PlaneQueryType::NegativeSide ||
+            sign2 == PlaneQueryType::PositiveSide ||
+            sign3 == PlaneQueryType::NegativeSide)
         {
             ASSERT_ENUM_EQUAL(query.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::Outside);
         }
-        else if (sign0 == PlaneQueryType::OnPlane || sign1 == PlaneQueryType::OnPlane ||
-                 sign2 == PlaneQueryType::OnPlane || sign3 == PlaneQueryType::OnPlane)
+        else if (sign0 == PlaneQueryType::OnPlane ||
+                 sign1 == PlaneQueryType::OnPlane ||
+                 sign2 == PlaneQueryType::OnPlane ||
+                 sign3 == PlaneQueryType::OnPlane)
         {
             ASSERT_ENUM_EQUAL(query.ToTetrahedron(firstIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), TetrahedronQueryType::OnTetrahedron);
         }
@@ -198,31 +200,31 @@ void Mathematics::Query3RationalTesting ::TetrahedronTest()
     }
 }
 
-void Mathematics::Query3RationalTesting ::CircumspherTest()
+void Mathematics::Query3RationalTesting::CircumspherTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector3D> vertices;
-        int size = secondRandomDistribution(generator);
+        auto size = secondRandomDistribution(generator);
 
         for (int k = 0; k < size; ++k)
         {
-            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        uniform_int<> thirdRandomDistribution(0, size - 1);
+        const uniform_int<> thirdRandomDistribution(0, size - 1);
 
-        int firstIndex = thirdRandomDistribution(generator);
-        int secondIndex = thirdRandomDistribution(generator);
-        int thirdIndex = thirdRandomDistribution(generator);
-        int fourthIndex = thirdRandomDistribution(generator);
-        int fifthIndex = thirdRandomDistribution(generator);
+        auto firstIndex = thirdRandomDistribution(generator);
+        auto secondIndex = thirdRandomDistribution(generator);
+        auto thirdIndex = thirdRandomDistribution(generator);
+        auto fourthIndex = thirdRandomDistribution(generator);
+        auto fifthIndex = thirdRandomDistribution(generator);
 
         Query3RationalD query(vertices);
 
@@ -231,36 +233,40 @@ void Mathematics::Query3RationalTesting ::CircumspherTest()
         ASSERT_ENUM_EQUAL(query.ToCircumsphere(fourthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
         ASSERT_ENUM_EQUAL(query.ToCircumsphere(fifthIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
 
-        if (firstIndex != secondIndex && secondIndex != thirdIndex &&
-            thirdIndex != fourthIndex && fourthIndex != firstIndex &&
-            secondIndex != fourthIndex && firstIndex != thirdIndex &&
-            fifthIndex != secondIndex && fifthIndex != thirdIndex &&
+        if (firstIndex != secondIndex &&
+            secondIndex != thirdIndex &&
+            thirdIndex != fourthIndex &&
+            fourthIndex != firstIndex &&
+            secondIndex != fourthIndex &&
+            firstIndex != thirdIndex &&
+            fifthIndex != secondIndex &&
+            fifthIndex != thirdIndex &&
             fifthIndex != fourthIndex)
         {
-            Vector3D firstVector = vertices[firstIndex];
-            Vector3D secondVector = vertices[secondIndex];
-            Vector3D thirdVector = vertices[thirdIndex];
-            Vector3D fourthVector = vertices[fourthIndex];
-            Vector3D fifthVector = vertices[fifthIndex];
+            const auto& firstVector = vertices.at(firstIndex);
+            const auto& secondVector = vertices.at(secondIndex);
+            const auto& thirdVector = vertices.at(thirdIndex);
+            const auto& fourthVector = vertices.at(fourthIndex);
+            const auto& fifthVector = vertices.at(fifthIndex);
 
             Vector4D s0(firstVector - secondVector);
             Vector4D s1(thirdVector - secondVector);
             Vector4D s2(fourthVector - secondVector);
             Vector4D s3(fifthVector - secondVector);
 
-            Vector4D s4(firstVector + secondVector);
-            Vector4D s5(thirdVector + secondVector);
-            Vector4D s6(fourthVector + secondVector);
-            Vector4D s7(fifthVector + secondVector);
+            const Vector4D s4(firstVector + secondVector);
+            const Vector4D s5(thirdVector + secondVector);
+            const Vector4D s6(fourthVector + secondVector);
+            const Vector4D s7(fifthVector + secondVector);
 
             s0[3] = Vector4ToolsD::DotProduct(s0, s4);
             s1[3] = Vector4ToolsD::DotProduct(s1, s5);
             s2[3] = Vector4ToolsD::DotProduct(s2, s6);
             s3[3] = Vector4ToolsD::DotProduct(s3, s7);
 
-            Matrix4D matrix(s0[0], s0[1], s0[2], s0[3], s1[0], s1[1], s1[2], s1[3], s2[0], s2[1], s2[2], s2[3], s3[0], s3[1], s3[2], s3[3]);
+            const Matrix4D matrix(s0[0], s0[1], s0[2], s0[3], s1[0], s1[1], s1[2], s1[3], s2[0], s2[1], s2[2], s2[3], s3[0], s3[1], s3[2], s3[3]);
 
-            double det = matrix.Determinant();
+            auto det = matrix.Determinant();
 
             if (1.0 <= det)
             {

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/05/30 1:33)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 1:13)
 
 #include "VariableTemplateTypeTesting.h"
 #include "System/Helper/VariableTemplateType.h"
@@ -58,7 +58,9 @@ void System::VariableTemplateTypeTesting::VariableTemplateTypeTest() noexcept
     static_assert(std::is_same_v<VariableTemplateType<int, uint16_t, bool, long>::Element<3>::Type, long>);
 
 #ifdef OPEN_VARIABLE_TEMPLATE_COUNT_ERROR
+
     VariableTemplateType<int, uint16_t, bool, long>::Element<4>::Type;
+
 #endif  // OPEN_VARIABLE_TEMPLATE_COUNT_ERROR
 }
 
@@ -68,6 +70,8 @@ void System::VariableTemplateTypeTesting::IsScalarTest() noexcept
     static_assert(std::is_same_v<IsScalar<int, uint16_t, bool, long>::Type, std::true_type>);
 
 #ifdef OPEN_VARIABLE_TEMPLATE_IS_SCALAR_ERROR
+
     IsScalar<int, uint16_t, bool, long, std::string>::Type;
+
 #endif  // OPEN_VARIABLE_TEMPLATE_IS_SCALAR_ERROR
 }

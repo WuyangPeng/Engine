@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.5 (2021/06/12 19:22)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 0:34)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_MACRO_HELPER_H
 #define SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_MACRO_HELPER_H
@@ -15,9 +15,13 @@
 namespace ExportTest
 {
 #ifdef BUILDING_SYSTEM_STATIC
+
     void ExportFunction() noexcept;
+
 #else  // !BUILDING_SYSTEM_STATIC
+
     void OPENGL_EXTERN ExportFunction() noexcept;
+
 #endif  // BUILDING_SYSTEM_STATIC
 }
 

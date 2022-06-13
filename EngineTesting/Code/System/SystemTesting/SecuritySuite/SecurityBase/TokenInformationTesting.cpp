@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/03 16:04)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 15:46)
 
 #include "TokenInformationTestingDetail.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
@@ -40,7 +40,7 @@ void System::TokenInformationTesting::TokenInformationTest()
     DoTokenInformationTest<TokenDefaultDacl, SecurityTokenDefaultDacl>();
     DoTokenInformationTest<TokenSource, SecurityTokenSource>();
     DoTokenInformationTest<TokenType, SecurityTokenType>();
-    ASSERT_NOT_THROW_EXCEPTION_0(TokenImpersonationLevelTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(TokenImpersonationLevelTest);
     DoTokenInformationTest<TokenStatistics, SecurityTokenStatistics>();
     DoTokenInformationTest<TokenRestrictedSids, SecurityTokenGroups>();
     DoTokenInformationTest<TokenSessionId, WindowsDWord>();
@@ -57,7 +57,7 @@ void System::TokenInformationTesting::TokenInformationTest()
     DoTokenInformationTest<TokenIntegrityLevel, SecurityTokenMandatoryLabel>();
     DoTokenInformationTest<TokenUIAccess, WindowsDWord>();
     DoTokenInformationTest<TokenMandatoryPolicy, SecurityTokenMandatoryPolicy>();
-    DoTokenInformationTest<TokenLogonSid, SecurityTokenGroups>(); 
+    DoTokenInformationTest<TokenLogonSid, SecurityTokenGroups>();
 }
 
 void System::TokenInformationTesting::TokenImpersonationLevelTest()
@@ -77,7 +77,9 @@ void System::TokenInformationTesting::TokenImpersonationLevelTest()
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     auto tokenInformation = reinterpret_cast<SecurityImpersonationLevel*>(buffer.data());
+
 #include STSTEM_WARNING_POP
 
     WindowsDWord newReturnLength{ 0 };

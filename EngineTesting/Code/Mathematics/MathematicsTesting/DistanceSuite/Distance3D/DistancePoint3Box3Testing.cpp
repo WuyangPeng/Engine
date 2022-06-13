@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 13:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 17:16)
 
 #include "DistancePoint3Box3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -11,6 +14,7 @@
 #include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Box3Detail.h"
 #include "Mathematics/Objects3D/Box3Detail.h"
+
 #include <random>
 
 using std::swap;
@@ -20,10 +24,10 @@ namespace Mathematics
     template class DistancePoint3Box3<float>;
     template class DistancePoint3Box3<double>;
 }
-#include SYSTEM_WARNING_DISABLE(26496)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint3Box3Testing)
 
-void Mathematics::DistancePoint3Box3Testing ::MainTest()
+void Mathematics::DistancePoint3Box3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StaticTest);
@@ -32,26 +36,26 @@ void Mathematics::DistancePoint3Box3Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(IntervalTest);
 }
 
-void Mathematics::DistancePoint3Box3Testing ::BaseTest()
+void Mathematics::DistancePoint3Box3Testing::BaseTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3F point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3F point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3F center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3F center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3F axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        float extent0(MathF::FAbs(randomDistribution(generator)));
-        float extent1(MathF::FAbs(randomDistribution(generator)));
-        float extent2(MathF::FAbs(randomDistribution(generator)));
+        const float extent0(MathF::FAbs(randomDistribution(generator)));
+        const float extent1(MathF::FAbs(randomDistribution(generator)));
+        const float extent2(MathF::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        Vector3OrthonormalBasisF basis = Vector3ToolsF::GenerateOrthonormalBasis(axis0);
+        const Vector3OrthonormalBasisF basis = Vector3ToolsF::GenerateOrthonormalBasis(axis0);
 
         DistancePoint3Box3F distance(point, Box3F(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
@@ -73,26 +77,26 @@ void Mathematics::DistancePoint3Box3Testing ::BaseTest()
     }
 }
 
-void Mathematics::DistancePoint3Box3Testing ::StaticTest()
+void Mathematics::DistancePoint3Box3Testing::StaticTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(MathD::FAbs(randomDistribution(generator)));
-        double extent1(MathD::FAbs(randomDistribution(generator)));
-        double extent2(MathD::FAbs(randomDistribution(generator)));
+        const double extent0(MathD::FAbs(randomDistribution(generator)));
+        const double extent1(MathD::FAbs(randomDistribution(generator)));
+        const double extent2(MathD::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
+        const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
         DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
@@ -109,29 +113,29 @@ void Mathematics::DistancePoint3Box3Testing ::StaticTest()
     }
 }
 
-void Mathematics::DistancePoint3Box3Testing ::DynamicTest()
+void Mathematics::DistancePoint3Box3Testing::DynamicTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(MathD::FAbs(randomDistribution(generator)));
-        double extent1(MathD::FAbs(randomDistribution(generator)));
-        double extent2(MathD::FAbs(randomDistribution(generator)));
+        const double extent0(MathD::FAbs(randomDistribution(generator)));
+        const double extent1(MathD::FAbs(randomDistribution(generator)));
+        const double extent2(MathD::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
+        const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
         DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -150,29 +154,29 @@ void Mathematics::DistancePoint3Box3Testing ::DynamicTest()
     }
 }
 
-void Mathematics::DistancePoint3Box3Testing ::DerivativeTest()
+void Mathematics::DistancePoint3Box3Testing::DerivativeTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-100.0, 100.0);
+    const std::uniform_real<double> randomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(MathD::FAbs(randomDistribution(generator)));
-        double extent1(MathD::FAbs(randomDistribution(generator)));
-        double extent2(MathD::FAbs(randomDistribution(generator)));
+        const double extent0(MathD::FAbs(randomDistribution(generator)));
+        const double extent1(MathD::FAbs(randomDistribution(generator)));
+        const double extent2(MathD::FAbs(randomDistribution(generator)));
         axis0.Normalize();
 
-        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
+        const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
         DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
-        double t = MathD::FAbs(randomDistribution(generator));
+        const double t = MathD::FAbs(randomDistribution(generator));
         Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
         Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
@@ -180,40 +184,39 @@ void Mathematics::DistancePoint3Box3Testing ::DerivativeTest()
 
         DistanceResult3D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         DistanceResult3D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        double derivativeApproximation =
-            0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
+        const double derivativeApproximation = 0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
-        double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
+        const double derivativeResult = distance.GetDerivative(t, lhsVelocity, rhsVelocity);
 
         ASSERT_APPROXIMATE(derivativeResult, derivativeApproximation, 1e-10);
 
-        double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
+        const double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
         DistanceResult3D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
 
-void Mathematics::DistancePoint3Box3Testing ::IntervalTest()
+void Mathematics::DistancePoint3Box3Testing::IntervalTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> randomDistribution(-10.0, 10.0);
+    const std::uniform_real<double> randomDistribution(-10.0, 10.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(MathD::FAbs(randomDistribution(generator)));
-        double extent1(MathD::FAbs(randomDistribution(generator)));
-        double extent2(MathD::FAbs(randomDistribution(generator)));
+        const double extent0(MathD::FAbs(randomDistribution(generator)));
+        const double extent1(MathD::FAbs(randomDistribution(generator)));
+        const double extent2(MathD::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
+        const Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
         DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 

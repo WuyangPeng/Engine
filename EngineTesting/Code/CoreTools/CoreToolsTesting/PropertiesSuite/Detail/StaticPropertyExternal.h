@@ -1,50 +1,51 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:37)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_STATIC_PROPERTY_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_STATIC_PROPERTY_EXTERNAL_H
 
 #include "CoreTools/Helper/UserMacro.h"
-#include "CoreTools/Properties/StaticPropertyGetSetDetail.h"
 #include "CoreTools/Properties/StaticPropertyGetExternalDetail.h"
-#include "CoreTools/Properties/StaticPropertySetExternalDetail.h"
+#include "CoreTools/Properties/StaticPropertyGetSetDetail.h"
 #include "CoreTools/Properties/StaticPropertyGetSetExternalDetail.h"
+#include "CoreTools/Properties/StaticPropertySetExternalDetail.h"
 
 #include <string>
 
 namespace CoreTools
 {
-	class StaticPropertyExternal
-	{
-	public:
-		using ClassType = StaticPropertyExternal;
+    class StaticPropertyExternal
+    {
+    public:
+        using ClassType = StaticPropertyExternal;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		StaticPropertyExternal() noexcept;
+        StaticPropertyExternal() noexcept;
 
-	private:
-		static std::string sm_Value;
+    private:
+        static std::string value;
 
-		static const std::string& GetValue() noexcept;
-		static void SetValue(const std::string& value);
+        NODISCARD static const std::string& GetValue() noexcept;
+        static void SetValue(const std::string& aValue);
 
-	public:
-		using GetExternalType = StaticPropertyGetExternal<const std::string&, &GetValue>;
-		using SetExternalType = StaticPropertySetExternal<const std::string&, &SetValue>;
-		using GetSetExternalType = StaticPropertyGetSetExternal<const std::string&, const std::string&, &GetValue, &SetValue>;
-		using GetSetType = StaticPropertyGetSet<std::string, const std::string&, const std::string&, ClassType, &GetValue, &SetValue>;
+    public:
+        using GetExternalType = StaticPropertyGetExternal<const std::string&, &GetValue>;
+        using SetExternalType = StaticPropertySetExternal<const std::string&, &SetValue>;
+        using GetSetExternalType = StaticPropertyGetSetExternal<const std::string&, const std::string&, &GetValue, &SetValue>;
+        using GetSetType = StaticPropertyGetSet<std::string, const std::string&, const std::string&, ClassType, &GetValue, &SetValue>;
 
-		GetExternalType sm_GetExternalType;
-		SetExternalType sm_SetExternalType;
-		GetSetExternalType sm_GetSetExternalType;
-		GetSetType m_GetSetType;
-	};
+        GetExternalType getExternalType;
+        SetExternalType setExternalType;
+        GetSetExternalType getSetExternalType;
+        GetSetType getSetType;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_SUITE_STATIC_PROPERTY_EXTERNAL_H
-
-
+#endif  // CORE_TOOLS_PROPERTIES_SUITE_STATIC_PROPERTY_EXTERNAL_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 15:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 18:47)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_SUITE_POW3_TESTING_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_SUITE_POW3_TESTING_H
@@ -11,19 +14,17 @@
 
 namespace CoreTools
 {
-	class Pow3Testing : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Pow3Testing);
+    class Pow3Testing : public UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Pow3Testing);
 
-	private:
-		void MainTest();
-		void Pow3Test();
+    private:
+        void MainTest();
+        void Pow3Test();
 
-		void DoRunUnitTest() override;
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // CORE_TOOLS_TEMPLATE_TOOLS_SUITE_POW3_TESTING_H
-
-
+#endif  // CORE_TOOLS_TEMPLATE_TOOLS_SUITE_POW3_TESTING_H

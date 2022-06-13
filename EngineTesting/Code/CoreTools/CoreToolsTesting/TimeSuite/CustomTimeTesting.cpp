@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 14:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 14:20)
 
 #include "CustomTimeTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -13,13 +16,13 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CustomTimeTesting)
 
-void CoreTools::CustomTimeTesting ::MainTest()
+void CoreTools::CustomTimeTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TimeTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DescribeTest);
 }
 
-void CoreTools::CustomTimeTesting ::TimeTest()
+void CoreTools::CustomTimeTesting::TimeTest()
 {
     CustomTime time{};
 
@@ -58,10 +61,10 @@ void CoreTools::CustomTimeTesting ::TimeTest()
     time.ResetCustomTime();
 
     ASSERT_RANGE(time.GetThisElapsedMillisecondTime(), 0.0, 1.0);
-    ASSERT_RANGE(time.GetNowMillisecondTime(), 0.0, 1.0); 
+    ASSERT_RANGE(time.GetNowMillisecondTime(), 0.0, 1.0);
 }
 
-void CoreTools::CustomTimeTesting ::DescribeTest()
+void CoreTools::CustomTimeTesting::DescribeTest()
 {
     auto describe = CustomTime::GetSystemTimeDescribe();
 

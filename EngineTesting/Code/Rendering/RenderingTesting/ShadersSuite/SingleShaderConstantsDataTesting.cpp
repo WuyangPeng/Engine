@@ -1,14 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/07 14:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/11 18:51)
 
 #include "SingleShaderConstantsDataTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Rendering/Shaders/SingleShaderConstantsData.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, SingleShaderConstantsDataTesting)
 

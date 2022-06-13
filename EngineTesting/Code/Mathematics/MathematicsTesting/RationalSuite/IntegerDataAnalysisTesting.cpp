@@ -1,315 +1,303 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/23 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 14:09)
 
 #include "IntegerDataAnalysisTesting.h"
-#include "Mathematics/Base/MathDetail.h" 
-#include "Mathematics/Rational/IntegerDataDetail.h"
-#include "Mathematics/Rational/IntegerDataAnalysisDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
- 
-#include <boost/utility/binary.hpp> 
+#include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Rational/IntegerDataAnalysisDetail.h"
+#include "Mathematics/Rational/IntegerDataDetail.h"
 
 using std::vector;
 
 namespace Mathematics
 {
-	template class IntegerData<2>;
-	template class IntegerData<3>;
-	template class IntegerData<29>;
-	template class IntegerData<12>;
+    template class IntegerData<2>;
+    template class IntegerData<3>;
+    template class IntegerData<29>;
+    template class IntegerData<12>;
 
-	template class IntegerDataAnalysis<2>;
-	template class IntegerDataAnalysis<3>;
-	template class IntegerDataAnalysis<29>;
-	template class IntegerDataAnalysis<12>;	
+    template class IntegerDataAnalysis<2>;
+    template class IntegerDataAnalysis<3>;
+    template class IntegerDataAnalysis<29>;
+    template class IntegerDataAnalysis<12>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataAnalysisTesting) 
 
-void Mathematics::IntegerDataAnalysisTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDataAnalysisTesting)
+
+void Mathematics::IntegerDataAnalysisTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(ToUnsignedIntTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(GetLeadingBitTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(GetTrailingBitTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(OperatorTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(DivisionModuloTest);	
+    ASSERT_NOT_THROW_EXCEPTION_0(ToUnsignedIntTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetLeadingBitTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetTrailingBitTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OperatorTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DivisionModuloTest);
 }
 
-void Mathematics::IntegerDataAnalysisTesting
-	::ToUnsignedIntTest()
+void Mathematics::IntegerDataAnalysisTesting::ToUnsignedIntTest()
 {
-	vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 11111111)),
-			               uint16_t(BOOST_BINARY(10111111 11111111)),
-						   uint16_t(BOOST_BINARY(10000000 11111111)),
-						   uint16_t(BOOST_BINARY(10000000 00000001)),
-						   uint16_t(BOOST_BINARY(10000000 00000000)),
-						   uint16_t(BOOST_BINARY(01111111 11111111)),
-						   uint16_t(BOOST_BINARY(01011111 11111111)),
-						   uint16_t(BOOST_BINARY(01000000 11111111)),
-						   uint16_t(BOOST_BINARY(01000000 00000001)),
-						   uint16_t(BOOST_BINARY(00100001 00011001)),
-						   uint16_t(BOOST_BINARY(00010001 00011001)),
-						   uint16_t(BOOST_BINARY(00001001 00011001)),
-						   uint16_t(BOOST_BINARY(00000101 00011001)),
-						   uint16_t(BOOST_BINARY(00000011 00011001)),
-						   uint16_t(BOOST_BINARY(00000001 00011001)),
-						   uint16_t(BOOST_BINARY(00000000 10011001)),
-						   uint16_t(BOOST_BINARY(00000000 01011001)),
-						   uint16_t(BOOST_BINARY(00000000 00111001)),
-						   uint16_t(BOOST_BINARY(00000000 00011001)),
-						   uint16_t(BOOST_BINARY(00000000 00001001)),
-						   uint16_t(BOOST_BINARY(00000000 00000101)),
-						   uint16_t(BOOST_BINARY(00000000 00000011)),
-						   uint16_t(BOOST_BINARY(00000000 00000010)),
-						   uint16_t(BOOST_BINARY(00000000 00000001)) };
-			
-	IntegerData<12> firstIntegerData(data);
-	IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
+    vector<uint16_t> data{ 0b11111111'11111111,
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000000'00000000,
+                           0b01111111'11111111,
+                           0b01011111'11111111,
+                           0b01000000'11111111,
+                           0b01000000'00000001,
+                           0b00100001'00011001,
+                           0b00010001'00011001,
+                           0b00001001'00011001,
+                           0b00000101'00011001,
+                           0b00000011'00011001,
+                           0b00000001'00011001,
+                           0b00000000'10011001,
+                           0b00000000'01011001,
+                           0b00000000'00111001,
+                           0b00000000'00011001,
+                           0b00000000'00001001,
+                           0b00000000'00000101,
+                           0b00000000'00000011,
+                           0b00000000'00000010,
+                           0b00000000'00000001 };
 
-	for (uint32_t i = 0; i < data.size(); ++i)
-	{
-		 ASSERT_EQUAL(data[i],firstIntegerDataAnalysis.ToUnsignedInt(i));
-		 ASSERT_EQUAL(static_cast<int>(data[i]),firstIntegerDataAnalysis.ToInt(i));
+    const IntegerData<12> firstIntegerData(data);
+    const IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
 
-		 uint32_t lower = firstIntegerDataAnalysis.ToUnsignedInt(i);
-		 uint32_t high = firstIntegerDataAnalysis.ToUnsignedInt(i);
+    for (auto i = 0u; i < data.size(); ++i)
+    {
+        ASSERT_EQUAL(data.at(i), firstIntegerDataAnalysis.ToUnsignedInt(i));
+        ASSERT_EQUAL(static_cast<int>(data.at(i)), firstIntegerDataAnalysis.ToInt(i));
 
-		 uint32_t value = (lower | (high << 16));
-		 uint32_t resultValue = (data[i] | (data[i] << 16));
+        const auto lower = firstIntegerDataAnalysis.ToUnsignedInt(i);
+        const auto high = firstIntegerDataAnalysis.ToUnsignedInt(i);
 
-		 ASSERT_EQUAL(resultValue,value);
-	}
+        const auto value = (lower | (high << 16));
+        const uint32_t resultValue = data.at(i) | (data.at(i) << 16);
+
+        ASSERT_EQUAL(resultValue, value);
+    }
 }
 
-void Mathematics::IntegerDataAnalysisTesting
-	::GetLeadingBitTest() 
-{	
-	vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 11111111)),
-			uint16_t(BOOST_BINARY(10111111 11111111)),
-			uint16_t(BOOST_BINARY(10000000 11111111)),
-			uint16_t(BOOST_BINARY(10000000 00000001)),
-			uint16_t(BOOST_BINARY(10000000 00000000)),
-			uint16_t(BOOST_BINARY(01111111 11111111)),
-			uint16_t(BOOST_BINARY(01011111 11111111)),
-			uint16_t(BOOST_BINARY(01000000 11111111)),
-			uint16_t(BOOST_BINARY(01000000 00000001)),
-			uint16_t(BOOST_BINARY(00100001 00011001)),
-			uint16_t(BOOST_BINARY(00010001 00011001)),
-			uint16_t(BOOST_BINARY(00001001 00011001)),
-			uint16_t(BOOST_BINARY(00000101 00011001)),
-			uint16_t(BOOST_BINARY(00000011 00011001)),
-			uint16_t(BOOST_BINARY(00000001 00011001)),
-			uint16_t(BOOST_BINARY(00000000 10011001)),
-			uint16_t(BOOST_BINARY(00000000 01011001)),
-			uint16_t(BOOST_BINARY(00000000 00111001)),
-			uint16_t(BOOST_BINARY(00000000 00011001)),
-			uint16_t(BOOST_BINARY(00000000 00001001)),
-			uint16_t(BOOST_BINARY(00000000 00000101)),
-			uint16_t(BOOST_BINARY(00000000 00000011)),
-			uint16_t(BOOST_BINARY(00000000 00000010)),
-			uint16_t(BOOST_BINARY(00000000 00000001)) };
-
-	vector<uint16_t> result{ uint16_t(15),
-			  uint16_t(15),
-			  uint16_t(15),
-			  uint16_t(15),
-			  uint16_t(15),
-			  uint16_t(14),
-			  uint16_t(14),
-			  uint16_t(14),
-			  uint16_t(14),
-			  uint16_t(13),
-			  uint16_t(12),
-			  uint16_t(11),
-			  uint16_t(10),
-			  uint16_t(9),
-			  uint16_t(8),
-			  uint16_t(7),
-			  uint16_t(6),
-			  uint16_t(5),
-			  uint16_t(4),
-			  uint16_t(3),
-			  uint16_t(2),
-			  uint16_t(1),
-			  uint16_t(1),
-			  uint16_t(0) };
-
-	IntegerData<12> firstIntegerData(data);
-	IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
-
-	int dataBufferSize = boost::numeric_cast<int>(data.size());
-
-	for (int i = 0; i < dataBufferSize; ++i)
-	{
-		ASSERT_EQUAL(firstIntegerDataAnalysis.GetLeadingBit(i),  result[i]);
-	}
-
-	ASSERT_EQUAL(firstIntegerDataAnalysis.GetLeadingBlock(),dataBufferSize - 1);
-	ASSERT_EQUAL(firstIntegerDataAnalysis.GetLeadingBit(),dataBufferSize * 16 - 1 - 15);
-}
-
-
-void Mathematics::IntegerDataAnalysisTesting
-	::GetTrailingBitTest()
+void Mathematics::IntegerDataAnalysisTesting::GetLeadingBitTest()
 {
-	vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 11111111)),
-			uint16_t(BOOST_BINARY(10111111 11111111)),
-			uint16_t(BOOST_BINARY(10000000 11111111)),
-			uint16_t(BOOST_BINARY(10000000 00000001)),
-			uint16_t(BOOST_BINARY(10000111 00000001)),
-			uint16_t(BOOST_BINARY(01111111 11111110)),
-			uint16_t(BOOST_BINARY(01011111 11111110)),
-			uint16_t(BOOST_BINARY(01000000 11111110)),
-			uint16_t(BOOST_BINARY(01000000 00000010)),
-			uint16_t(BOOST_BINARY(00100001 00011100)),
-			uint16_t(BOOST_BINARY(00010001 00011000)),
-			uint16_t(BOOST_BINARY(00001001 00010000)),
-			uint16_t(BOOST_BINARY(00000101 00100000)),
-			uint16_t(BOOST_BINARY(00000011 01000000)),
-			uint16_t(BOOST_BINARY(00000001 10000000)),
-			uint16_t(BOOST_BINARY(00000001 00000000)),
-			uint16_t(BOOST_BINARY(01011010 00000000)),
-			uint16_t(BOOST_BINARY(01011100 00000000)),
-			uint16_t(BOOST_BINARY(00011000 00000000)),
-			uint16_t(BOOST_BINARY(00010000 00000000)),
-			uint16_t(BOOST_BINARY(00110000 00000000)),
-			uint16_t(BOOST_BINARY(01100000 00000000)),
-			uint16_t(BOOST_BINARY(01000000 00000000)),
-			uint16_t(BOOST_BINARY(10000000 00000000)) };
+    vector<uint16_t> data{ 0b11111111'11111111,
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000000'00000000,
+                           0b01111111'11111111,
+                           0b01011111'11111111,
+                           0b01000000'11111111,
+                           0b01000000'00000001,
+                           0b00100001'00011001,
+                           0b00010001'00011001,
+                           0b00001001'00011001,
+                           0b00000101'00011001,
+                           0b00000011'00011001,
+                           0b00000001'00011001,
+                           0b00000000'10011001,
+                           0b00000000'01011001,
+                           0b00000000'00111001,
+                           0b00000000'00011001,
+                           0b00000000'00001001,
+                           0b00000000'00000101,
+                           0b00000000'00000011,
+                           0b00000000'00000010,
+                           0b00000000'00000001 };
 
-	vector<uint16_t> result{ uint16_t(0),
-			  uint16_t(0),
-			  uint16_t(0),
-			  uint16_t(0),
-			  uint16_t(0),
-			  uint16_t(1),
-			  uint16_t(1),
-			  uint16_t(1),
-			  uint16_t(1),
-			  uint16_t(2),
-			  uint16_t(3),
-			  uint16_t(4),
-			  uint16_t(5),
-			  uint16_t(6),
-			  uint16_t(7),
-			  uint16_t(8),
-			  uint16_t(9),
-			  uint16_t(10),
-			  uint16_t(11),
-			  uint16_t(12),
-			  uint16_t(12),
-			  uint16_t(13),
-			  uint16_t(14),
-			  uint16_t(15) };
+    vector<uint16_t> result{ 15,
+                             15,
+                             15,
+                             15,
+                             15,
+                             14,
+                             14,
+                             14,
+                             14,
+                             13,
+                             12,
+                             11,
+                             10,
+                             9,
+                             8,
+                             7,
+                             6,
+                             5,
+                             4,
+                             3,
+                             2,
+                             1,
+                             1,
+                             0 };
 
-	IntegerData<12> firstIntegerData(data);
-	IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
+    const IntegerData<12> firstIntegerData(data);
+    const IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
 
-	int dataBufferSize = boost::numeric_cast<int>(data.size());
+    auto dataBufferSize = boost::numeric_cast<int>(data.size());
 
-	for (int i = 0; i < dataBufferSize; ++i)
-	{
-		ASSERT_EQUAL(firstIntegerDataAnalysis.GetTrailingBit(i), result[i]);
-	}
+    for (auto i = 0; i < dataBufferSize; ++i)
+    {
+        ASSERT_EQUAL(firstIntegerDataAnalysis.GetLeadingBit(i), result.at(i));
+    }
 
-	ASSERT_EQUAL(firstIntegerDataAnalysis.GetTrailingBlock(),0);
-	ASSERT_EQUAL(firstIntegerDataAnalysis.GetTrailingBit(),0);
+    ASSERT_EQUAL(firstIntegerDataAnalysis.GetLeadingBlock(), dataBufferSize - 1);
+    ASSERT_EQUAL(firstIntegerDataAnalysis.GetLeadingBit(), dataBufferSize * 16 - 1 - 15);
 }
 
-void Mathematics::IntegerDataAnalysisTesting
-	::OperatorTest()
+void Mathematics::IntegerDataAnalysisTesting::GetTrailingBitTest()
 {
-	vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 11111111)),
-			uint16_t(BOOST_BINARY(10111111 11111111)),
-			uint16_t(BOOST_BINARY(10000000 11111111)),
-			uint16_t(BOOST_BINARY(10000000 00000001)),
-			uint16_t(BOOST_BINARY(10000000 00000000)),
-			uint16_t(BOOST_BINARY(01111111 11111111)),
-			uint16_t(BOOST_BINARY(01011111 11111111)),
-			uint16_t(BOOST_BINARY(01000000 11111111)),
-			uint16_t(BOOST_BINARY(01000000 00000001)),
-			uint16_t(BOOST_BINARY(00100001 00011001)),
-			uint16_t(BOOST_BINARY(00010001 00011001)),
-			uint16_t(BOOST_BINARY(00001001 00011001)),
-			uint16_t(BOOST_BINARY(00000101 00011001)),
-			uint16_t(BOOST_BINARY(00000011 00011001)),
-			uint16_t(BOOST_BINARY(00000001 00011001)),
-			uint16_t(BOOST_BINARY(00000000 10011001)),
-			uint16_t(BOOST_BINARY(00000000 01011001)),
-			uint16_t(BOOST_BINARY(00000000 00111001)),
-			uint16_t(BOOST_BINARY(00000000 00011001)),
-			uint16_t(BOOST_BINARY(00000000 00001001)),
-			uint16_t(BOOST_BINARY(00000000 00000101)),
-			uint16_t(BOOST_BINARY(00000000 00000011)),
-			uint16_t(BOOST_BINARY(00000000 00000010)),
-			uint16_t(BOOST_BINARY(00000000 00000001)) };
-			
-	IntegerData<12> firstIntegerData(data);
-	IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
+    vector<uint16_t> data{ 0b11111111'11111111,
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000111'00000001,
+                           0b01111111'11111110,
+                           0b01011111'11111110,
+                           0b01000000'11111110,
+                           0b01000000'00000010,
+                           0b00100001'00011100,
+                           0b00010001'00011000,
+                           0b00001001'00010000,
+                           0b00000101'00100000,
+                           0b00000011'01000000,
+                           0b00000001'10000000,
+                           0b00000001'00000000,
+                           0b01011010'00000000,
+                           0b01011100'00000000,
+                           0b00011000'00000000,
+                           0b00010000'00000000,
+                           0b00110000'00000000,
+                           0b01100000'00000000,
+                           0b01000000'00000000,
+                           0b10000000'00000000 };
 
-	IntegerData<12> secondIntegerData = firstIntegerDataAnalysis.GetAbsoluteValue();
-	ASSERT_EQUAL(firstIntegerData,secondIntegerData);
+    vector<uint16_t> result{ 0,
+                             0,
+                             0,
+                             0,
+                             0,
+                             1,
+                             1,
+                             1,
+                             1,
+                             2,
+                             3,
+                             4,
+                             5,
+                             6,
+                             7,
+                             8,
+                             9,
+                             10,
+                             11,
+                             12,
+                             12,
+                             13,
+                             14,
+                             15 };
 
-	IntegerData<12> thirdIntegerData = -firstIntegerDataAnalysis;
-	ASSERT_FALSE(firstIntegerData == thirdIntegerData);
+    const IntegerData<12> firstIntegerData(data);
+    const IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
 
-	IntegerDataAnalysis<12> secondIntegerDataAnalysis(thirdIntegerData);
-	IntegerData<12> fourthIntegerData = -secondIntegerDataAnalysis;
-	ASSERT_EQUAL(fourthIntegerData,firstIntegerData);
+    auto dataBufferSize = boost::numeric_cast<int>(data.size());
+
+    for (auto i = 0; i < dataBufferSize; ++i)
+    {
+        ASSERT_EQUAL(firstIntegerDataAnalysis.GetTrailingBit(i), result.at(i));
+    }
+
+    ASSERT_EQUAL(firstIntegerDataAnalysis.GetTrailingBlock(), 0);
+    ASSERT_EQUAL(firstIntegerDataAnalysis.GetTrailingBit(), 0);
 }
 
-void Mathematics::IntegerDataAnalysisTesting
-	::DivisionModuloTest() 
+void Mathematics::IntegerDataAnalysisTesting::OperatorTest()
 {
-	vector<uint16_t> data{ uint16_t(BOOST_BINARY(11111111 11111111)),
-			uint16_t(BOOST_BINARY(10111111 11111111)),
-			uint16_t(BOOST_BINARY(10000000 11111111)),
-			uint16_t(BOOST_BINARY(10000000 00000001)),
-			uint16_t(BOOST_BINARY(10000000 00000000)),
-			uint16_t(BOOST_BINARY(01111111 11111111)),
-			uint16_t(BOOST_BINARY(01011111 11111111)),
-			uint16_t(BOOST_BINARY(01000000 11111111)),
-			uint16_t(BOOST_BINARY(01000000 00000001)),
-			uint16_t(BOOST_BINARY(00100001 00011001)),
-			uint16_t(BOOST_BINARY(00010001 00011001)),
-			uint16_t(BOOST_BINARY(00001001 00011001)),
-			uint16_t(BOOST_BINARY(00000101 00011001)),
-			uint16_t(BOOST_BINARY(00000011 00011001)),
-			uint16_t(BOOST_BINARY(00000001 00011001)),
-			uint16_t(BOOST_BINARY(00000000 10011001)),
-			uint16_t(BOOST_BINARY(00000000 01011001)),
-			uint16_t(BOOST_BINARY(00000000 00111001)),
-			uint16_t(BOOST_BINARY(00000000 00011001)),
-			uint16_t(BOOST_BINARY(00000000 00001001)),
-			uint16_t(BOOST_BINARY(00000000 00000101)),
-			uint16_t(BOOST_BINARY(00000000 00000011)),
-			uint16_t(BOOST_BINARY(00000000 00000010)),
-			uint16_t(BOOST_BINARY(00000000 00000001)) };
-			
-	IntegerData<12> firstIntegerData(data); 
-	IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
+    vector<uint16_t> data{ 0b11111111'11111111,
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000000'00000000,
+                           0b01111111'11111111,
+                           0b01011111'11111111,
+                           0b01000000'11111111,
+                           0b01000000'00000001,
+                           0b00100001'00011001,
+                           0b00010001'00011001,
+                           0b00001001'00011001,
+                           0b00000101'00011001,
+                           0b00000011'00011001,
+                           0b00000001'00011001,
+                           0b00000000'10011001,
+                           0b00000000'01011001,
+                           0b00000000'00111001,
+                           0b00000000'00011001,
+                           0b00000000'00001001,
+                           0b00000000'00000101,
+                           0b00000000'00000011,
+                           0b00000000'00000010,
+                           0b00000000'00000001 };
 
-	IntegerData<12> secondIntegerData(uint64_t((0x1FFF2FFF2FFFFFFFULL)));
+    const IntegerData<12> firstIntegerData(data);
+    const IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
 
-	IntegerDivisionModulo<12> divisionModule =	firstIntegerDataAnalysis.GetDivisionModulo(secondIntegerData);
+    const IntegerData<12> secondIntegerData = firstIntegerDataAnalysis.GetAbsoluteValue();
+    ASSERT_EQUAL(firstIntegerData, secondIntegerData);
 
-	IntegerData<12> thirdIntegerData = divisionModule.GetQuotient();
-	IntegerData<12> fourthIntegerData = divisionModule.GetRemainder();
+    const IntegerData<12> thirdIntegerData = -firstIntegerDataAnalysis;
+    ASSERT_FALSE(firstIntegerData == thirdIntegerData);
 
-	IntegerMultiplication<12> multiplication(thirdIntegerData,secondIntegerData);
-
-	IntegerData<12> fifthIntegerData = multiplication.GetMultiplication() + fourthIntegerData;
-
-	ASSERT_EQUAL(fifthIntegerData,firstIntegerData);
+    const IntegerDataAnalysis<12> secondIntegerDataAnalysis(thirdIntegerData);
+    const IntegerData<12> fourthIntegerData = -secondIntegerDataAnalysis;
+    ASSERT_EQUAL(fourthIntegerData, firstIntegerData);
 }
 
+void Mathematics::IntegerDataAnalysisTesting::DivisionModuloTest()
+{
+    vector<uint16_t> data{ 0b11111111'11111111,
+                           0b10111111'11111111,
+                           0b10000000'11111111,
+                           0b10000000'00000001,
+                           0b10000000'00000000,
+                           0b01111111'11111111,
+                           0b01011111'11111111,
+                           0b01000000'11111111,
+                           0b01000000'00000001,
+                           0b00100001'00011001,
+                           0b00010001'00011001,
+                           0b00001001'00011001,
+                           0b00000101'00011001,
+                           0b00000011'00011001,
+                           0b00000001'00011001,
+                           0b00000000'10011001,
+                           0b00000000'01011001,
+                           0b00000000'00111001,
+                           0b00000000'00011001,
+                           0b00000000'00001001,
+                           0b00000000'00000101,
+                           0b00000000'00000011,
+                           0b00000000'00000010,
+                           0b00000000'00000001 };
+
+    const IntegerData<12> firstIntegerData(data);
+    const IntegerDataAnalysis<12> firstIntegerDataAnalysis(firstIntegerData);
+
+    const IntegerData<12> secondIntegerData(0x1FFF2FFF2FFFFFFFULL);
+
+    const IntegerDivisionModulo<12> divisionModule = firstIntegerDataAnalysis.GetDivisionModulo(secondIntegerData);
+
+    const IntegerData<12> thirdIntegerData = divisionModule.GetQuotient();
+    const IntegerData<12> fourthIntegerData = divisionModule.GetRemainder();
+
+    const IntegerMultiplication<12> multiplication(thirdIntegerData, secondIntegerData);
+
+    const IntegerData<12> fifthIntegerData = multiplication.GetMultiplication() + fourthIntegerData;
+
+    ASSERT_EQUAL(fifthIntegerData, firstIntegerData);
+}

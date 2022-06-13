@@ -104,7 +104,7 @@ const Mathematics::VariableLengthVector<Real> Mathematics::operator*(const Spars
 {
     VariableLengthVector<Real> result{ vector.GetSize() };
 
-    for (auto iter = matrix.GetBegin(), end = matrix.GetEnd(); iter != end; ++iter)
+    for (auto iter = matrix.GetBegin(); iter != matrix.GetEnd(); ++iter)
     {
         const auto row = iter.GetKey().GetRow();
         const auto column = iter.GetKey().GetColumn();

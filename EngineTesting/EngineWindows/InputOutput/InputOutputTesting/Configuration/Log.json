@@ -1,6 +1,5 @@
 {
-  "Logger": 
-  {
+  "Logger": {
     "System": 1,
     "CoreTools": 1,
     "Network": 1,
@@ -20,17 +19,14 @@
     "Framework": 1
   },
 
-  "Appender": 
-  {
+  "Appender": {
 
-    "Console": 
-    {
+    "Console": {
       "Flags": 15,
       "Level": 1
     },
 
-    "File": 
-    {
+    "File": {
       "Directory": "Log",
       "FileName": "InputOutputTesting",
       "Flags": 15,
@@ -40,8 +36,7 @@
       "Extension": "log"
     },
 
-    "Default":
-    {
+    "Default": {
       "Directory": "Log",
       "Flags": 15,
       "Level": 1,

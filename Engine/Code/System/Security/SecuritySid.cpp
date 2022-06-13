@@ -27,7 +27,7 @@ bool System::AllocateAndInitializeSecurityIdentifier(SecuritySIDIndentifierAutho
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AllocateAndInitializeSid(identifierAuthority, subAuthorityCount, subAuthority0, subAuthority1, subAuthority2, subAuthority3, subAuthority4, subAuthority5, subAuthority6, subAuthority7, sid) != g_False)
+    if (::AllocateAndInitializeSid(identifierAuthority, subAuthorityCount, subAuthority0, subAuthority1, subAuthority2, subAuthority3, subAuthority4, subAuthority5, subAuthority6, subAuthority7, sid) != gFalse)
         return true;
     else
         return false;
@@ -55,7 +55,7 @@ bool System::CopySecurityIdentifier(WindowsDWord destinationSidLength, SecurityS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CopySid(destinationSidLength, destinationSid, sourceSid) != g_False)
+    if (::CopySid(destinationSidLength, destinationSid, sourceSid) != gFalse)
         return true;
     else
         return false;
@@ -73,7 +73,7 @@ bool System::CreateWellKnownSecurityIdentifier(SecurityWellKnownSidType wellKnow
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CreateWellKnownSid(wellKnownSidType, domainSid, sid, sidCount) != g_False)
+    if (::CreateWellKnownSid(wellKnownSidType, domainSid, sid, sidCount) != gFalse)
         return true;
     else
         return false;
@@ -151,7 +151,7 @@ bool System::InitializeSecurityIdentifier(SecuritySIDPtr sid, SecuritySIDIndenti
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeSid(sid, identifierAuthority, subAuthorityCount) != g_False)
+    if (::InitializeSid(sid, identifierAuthority, subAuthorityCount) != gFalse)
         return true;
     else
         return false;
@@ -169,7 +169,7 @@ bool System::IsSecurityIdentifierValid(SecuritySIDPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidSid(sid) != g_False)
+    if (::IsValidSid(sid) != gFalse)
         return true;
     else
         return false;
@@ -187,7 +187,7 @@ bool System::IsWellKnownSecurityIdentifier(SecuritySIDPtr sid, SecurityWellKnown
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsWellKnownSid(sid, wellKnownSidType) != g_False)
+    if (::IsWellKnownSid(sid, wellKnownSidType) != gFalse)
         return true;
     else
         return false;

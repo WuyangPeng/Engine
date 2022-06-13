@@ -1,20 +1,20 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/06 13:55)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:24)
 
 #include "CaseInsensitiveComparisonTesting.h"
+#include "System/CharacterString/Flags/StringConversionFlags.h"
 #include "System/CharacterString/StringConversion.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/WindowsMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "System/Helper/WindowsMacro.h"
-#include "System/CharacterString/Flags/StringConversionFlags.h"
 
 System::CaseInsensitiveComparisonTesting::CaseInsensitiveComparisonTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -42,10 +42,10 @@ void System::CaseInsensitiveComparisonTesting::CaseInsensitiveComparisonTest()
 
     for (auto index = 0; index < letterNum; ++index)
     {
-        auto returnFlag = CompareStringOrdinalUseBinary(&lower, 1, &capital, 1, g_True);
+        auto returnFlag = CompareStringOrdinalUseBinary(&lower, 1, &capital, 1, gTrue);
         ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
 
-        returnFlag = CompareStringOrdinalUseBinary(&lower, 1, &capital, 1, g_False);
+        returnFlag = CompareStringOrdinalUseBinary(&lower, 1, &capital, 1, gFalse);
         ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::GreaterThan);
 
         lower += 1;

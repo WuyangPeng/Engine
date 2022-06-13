@@ -1,240 +1,237 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 15:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 17:14)
 
 #include "EquationTesting.h"
-#include "Mathematics/NumericalAnalysis/Equation.h"
-#include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/NumericalAnalysis/Equation.h"
+#include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 
-#include <random> 
+#include <random>
 
+using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EquationTesting) 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-void Mathematics::EquationTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EquationTesting)
+
+void Mathematics::EquationTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(OnceTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SecondaryTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OnceTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SecondaryTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ThriceTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(QuarticTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuarticTest);
 }
 
-void Mathematics::EquationTesting
-	::OnceTest()
+void Mathematics::EquationTesting::OnceTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10); 
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Equation firstEquation(firstRandomDistribution(generator), firstRandomDistribution(generator));
+    const auto testLoopCount = GetTestLoopCount();
 
-		ASSERT_TRUE(firstEquation.IsRealResult());
-		ASSERT_EQUAL(firstEquation.GetRealResultCount(),1);
-		ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(),0);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Equation firstEquation(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		ASSERT_EQUAL(firstEquation.GetImaginaryBegin(), firstEquation.GetImaginaryEnd());
+        ASSERT_TRUE(firstEquation.IsRealResult());
+        ASSERT_EQUAL(firstEquation.GetRealResultCount(), 1);
+        ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
 
-		Equation::RealConstIterator iter = firstEquation.GetRealBegin();
+        ASSERT_EQUAL(firstEquation.GetImaginaryBegin(), firstEquation.GetImaginaryEnd());
 
-		double result = *iter;
+        auto iter = firstEquation.GetRealBegin();
 
-		ASSERT_EQUAL(++iter,firstEquation.GetRealEnd());
+        auto result = *iter;
 
-		ASSERT_APPROXIMATE(firstEquation.Substitution(result),0.0,1e-6);
-	}
+        ASSERT_EQUAL(++iter, firstEquation.GetRealEnd());
+
+        ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-6);
+    }
 }
 
-void Mathematics::EquationTesting
-	::SecondaryTest()
+void Mathematics::EquationTesting::SecondaryTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8); 
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Equation firstEquation(firstRandomDistribution(generator),
-			                   firstRandomDistribution(generator),
-							   firstRandomDistribution(generator));
+    const auto testLoopCount = GetTestLoopCount();
 
-		if(firstEquation.IsRealResult())
-		{
-			ASSERT_TRUE(firstEquation.GetRealResultCount() == 1 || firstEquation.GetRealResultCount() == 2);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Equation firstEquation(firstRandomDistribution(generator),
+                               firstRandomDistribution(generator),
+                               firstRandomDistribution(generator));
 
-			ASSERT_EQUAL(firstEquation.GetImaginaryBegin(), firstEquation.GetImaginaryEnd());
+        if (firstEquation.IsRealResult())
+        {
+            ASSERT_TRUE(firstEquation.GetRealResultCount() == 1 || firstEquation.GetRealResultCount() == 2);
 
-			for (Equation::RealConstIterator iter = firstEquation.GetRealBegin(),end = firstEquation.GetRealEnd();iter != end;++iter)
-			{
-				double result = *iter;				
+            ASSERT_EQUAL(firstEquation.GetImaginaryBegin(), firstEquation.GetImaginaryEnd());
 
-				ASSERT_APPROXIMATE(firstEquation.Substitution(result),0.0,1e-5);
-			}
-		}
-		else
-		{
-			ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(),2);
-			ASSERT_EQUAL(firstEquation.GetRealBegin(),firstEquation.GetRealEnd());
+            for (auto iter = firstEquation.GetRealBegin(); iter != firstEquation.GetRealEnd(); ++iter)
+            {
+                auto result = *iter;
 
-			for (Equation::ImaginaryConstIterator iter = firstEquation.GetImaginaryBegin(),
-				 end = firstEquation.GetImaginaryEnd();iter != end;++iter)
-			{
-				Equation::Imaginary result = *iter;	
-				Equation::Imaginary substitution = firstEquation.Substitution(result);
+                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
+            }
+        }
+        else
+        {
+            ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 2);
+            ASSERT_EQUAL(firstEquation.GetRealBegin(), firstEquation.GetRealEnd());
 
-				ASSERT_APPROXIMATE(substitution.real(),0.0,1e-6);
-				ASSERT_APPROXIMATE(substitution.imag(),0.0,1e-6);
-			}
-		}		
-	}
+            for (auto iter = firstEquation.GetImaginaryBegin();
+                 iter != firstEquation.GetImaginaryEnd();
+                 ++iter)
+            {
+                auto result = *iter;
+                const auto substitution = firstEquation.Substitution(result);
+
+                ASSERT_APPROXIMATE(substitution.real(), 0.0, 1e-6);
+                ASSERT_APPROXIMATE(substitution.imag(), 0.0, 1e-6);
+            }
+        }
+    }
 }
 
-void Mathematics::EquationTesting
-	::ThriceTest()
+void Mathematics::EquationTesting::ThriceTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7); 
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Equation firstEquation(firstRandomDistribution(generator),
-			                   firstRandomDistribution(generator),
-							   firstRandomDistribution(generator),
-							   firstRandomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Equation firstEquation(firstRandomDistribution(generator),
+                               firstRandomDistribution(generator),
+                               firstRandomDistribution(generator),
+                               firstRandomDistribution(generator));
 
-		ASSERT_TRUE(firstEquation.IsRealResult());
+        ASSERT_TRUE(firstEquation.IsRealResult());
 
-		ASSERT_TRUE(firstEquation.GetRealResultCount() == 1 ||
-			        firstEquation.GetRealResultCount() == 2 ||
-			        firstEquation.GetRealResultCount() == 3);
+        ASSERT_TRUE(firstEquation.GetRealResultCount() == 1 ||
+                    firstEquation.GetRealResultCount() == 2 ||
+                    firstEquation.GetRealResultCount() == 3);
 
-		if (firstEquation.GetRealResultCount() == 3)
-		{
-			ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
-			ASSERT_EQUAL(firstEquation.GetImaginaryBegin(),
-				         firstEquation.GetImaginaryEnd());
+        if (firstEquation.GetRealResultCount() == 3)
+        {
+            ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
+            ASSERT_EQUAL(firstEquation.GetImaginaryBegin(),
+                         firstEquation.GetImaginaryEnd());
 
-			for (Equation::RealConstIterator iter = firstEquation.GetRealBegin(),
-				 end = firstEquation.GetRealEnd(); iter != end; ++iter)
-			{
-				double result = *iter;
+            for (auto iter = firstEquation.GetRealBegin();
+                 iter != firstEquation.GetRealEnd();
+                 ++iter)
+            {
+                auto result = *iter;
 
-				ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
-			}
-		}
-		else if (firstEquation.GetRealResultCount() == 2)
-		{
-			ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
-			ASSERT_EQUAL(firstEquation.GetImaginaryBegin(),firstEquation.GetImaginaryEnd());
+                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
+            }
+        }
+        else if (firstEquation.GetRealResultCount() == 2)
+        {
+            ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
+            ASSERT_EQUAL(firstEquation.GetImaginaryBegin(), firstEquation.GetImaginaryEnd());
 
-			for (Equation::RealConstIterator iter = firstEquation.GetRealBegin(),
-				 end = firstEquation.GetRealEnd(); iter != end; ++iter)
-			{
-				double result = *iter;
+            for (auto iter = firstEquation.GetRealBegin();
+                 iter != firstEquation.GetRealEnd();
+                 ++iter)
+            {
+                auto result = *iter;
 
-				ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-6);
-			}
-		}
-		else
-		{
-			for (Equation::RealConstIterator iter = firstEquation.GetRealBegin(),
-				 end = firstEquation.GetRealEnd(); iter != end; ++iter)
-			{
-				double result = *iter;
+                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-6);
+            }
+        }
+        else
+        {
+            for (auto iter = firstEquation.GetRealBegin();
+                 iter != firstEquation.GetRealEnd();
+                 ++iter)
+            {
+                auto result = *iter;
 
-				ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
-			}
+                ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
+            }
 
-			ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 2);
+            ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 2);
 
-			for (Equation::ImaginaryConstIterator iter = firstEquation.GetImaginaryBegin(),
-				 end = firstEquation.GetImaginaryEnd(); iter != end; ++iter)
-			{
-				Equation::Imaginary result = *iter;
-				Equation::Imaginary substitution = firstEquation.Substitution(result);
+            for (auto iter = firstEquation.GetImaginaryBegin();
+                 iter != firstEquation.GetImaginaryEnd();
+                 ++iter)
+            {
+                auto result = *iter;
+                const auto substitution = firstEquation.Substitution(result);
 
-				ASSERT_APPROXIMATE(substitution.real(), 0.0, 1e-6);
-				ASSERT_APPROXIMATE(substitution.imag(), 0.0, 1e-6);
-			}
-		}
-	}
+                ASSERT_APPROXIMATE(substitution.real(), 0.0, 1e-6);
+                ASSERT_APPROXIMATE(substitution.imag(), 0.0, 1e-6);
+            }
+        }
+    }
 
-	// 构造判别式为零
-	double constant = 1.0;
-	double once = 3.0;
-	double secondary = 3.0001;
-	double thrice = 1.0;
+    // 构造判别式为零
+    constexpr auto constant = 1.0;
+    constexpr auto once = 3.0;
+    constexpr auto secondary = 3.0001;
+    constexpr auto thrice = 1.0;
 
-	Equation firstEquation(constant, once, secondary, thrice);
+    Equation firstEquation(constant, once, secondary, thrice);
 
-	ASSERT_TRUE(firstEquation.IsRealResult());
+    ASSERT_TRUE(firstEquation.IsRealResult());
 
-	ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
-	ASSERT_EQUAL(firstEquation.GetImaginaryBegin(),firstEquation.GetImaginaryEnd());
-	
-	for (Equation::RealConstIterator iter = firstEquation.GetRealBegin(),
-		 end = firstEquation.GetRealEnd(); iter != end; ++iter)
-	{
-		double result = *iter;
-		
-		ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
-	}
+    ASSERT_EQUAL(firstEquation.GetImaginaryResultCount(), 0);
+    ASSERT_EQUAL(firstEquation.GetImaginaryBegin(), firstEquation.GetImaginaryEnd());
+
+    for (auto iter = firstEquation.GetRealBegin();
+         iter != firstEquation.GetRealEnd();
+         ++iter)
+    {
+        auto result = *iter;
+
+        ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-5);
+    }
 }
 
-void Mathematics::EquationTesting
-	::QuarticTest() 
+void Mathematics::EquationTesting::QuarticTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6); 
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator;
+    const uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Equation firstEquation(firstRandomDistribution(generator),
-			                   firstRandomDistribution(generator),
-							   firstRandomDistribution(generator),
-							   firstRandomDistribution(generator),
-							   firstRandomDistribution(generator));
+    const auto testLoopCount = GetTestLoopCount();
 
-		for (Equation::RealConstIterator iter = firstEquation.GetRealBegin(),
-			 end = firstEquation.GetRealEnd();iter != end;++iter)
-		{
-			double result = *iter;				
-			
-			ASSERT_APPROXIMATE(firstEquation.Substitution(result),0.0,1e-2);
-		}
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Equation firstEquation(firstRandomDistribution(generator),
+                               firstRandomDistribution(generator),
+                               firstRandomDistribution(generator),
+                               firstRandomDistribution(generator),
+                               firstRandomDistribution(generator));
 
-		for (Equation::ImaginaryConstIterator iter = firstEquation.GetImaginaryBegin(),
-			 end = firstEquation.GetImaginaryEnd(); iter != end; ++iter)
-		{
-			Equation::Imaginary result = *iter;
-			Equation::Imaginary substitution = firstEquation.Substitution(result);
+        for (auto iter = firstEquation.GetRealBegin();
+             iter != firstEquation.GetRealEnd();
+             ++iter)
+        {
+            auto result = *iter;
 
-			ASSERT_APPROXIMATE(substitution.real(), 0.0, 1e-6);
-			ASSERT_APPROXIMATE(substitution.imag(), 0.0, 1e-6);
-		}
-	}
+            ASSERT_APPROXIMATE(firstEquation.Substitution(result), 0.0, 1e-2);
+        }
+
+        for (auto iter = firstEquation.GetImaginaryBegin();
+             iter != firstEquation.GetImaginaryEnd();
+             ++iter)
+        {
+            auto result = *iter;
+            const auto substitution = firstEquation.Substitution(result);
+
+            ASSERT_APPROXIMATE(substitution.real(), 0.0, 1e-6);
+            ASSERT_APPROXIMATE(substitution.imag(), 0.0, 1e-6);
+        }
+    }
 }

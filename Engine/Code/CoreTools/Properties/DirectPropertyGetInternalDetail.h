@@ -15,14 +15,14 @@
 
 template <typename Value, typename Reference, typename Container>
 CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::DirectPropertyGetInternal()
-    : m_Value{}
+    : value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Value, typename Reference, typename Container>
 CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::DirectPropertyGetInternal(ReferenceType value)
-    : m_Value{ value }
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -42,7 +42,7 @@ CoreTools::DirectPropertyGetInternal<Value, Reference, Container>& CoreTools::Di
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Value = value;
+    value = value;
 
     return *this;
 }
@@ -52,7 +52,7 @@ CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::operator Refe
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 #endif  // CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_DETAIL_H

@@ -1,11 +1,15 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 16:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/17 19:01)
 
 #include "ExplicitCastTesting.h"
 #include "Detail/ExplicitCastTest.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/ExplicitCastDetail.h"
@@ -14,43 +18,49 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ExplicitCastTesting)
 
-void CoreTools::ExplicitCastTesting ::MainTest()
+void CoreTools::ExplicitCastTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CastTest);
 }
 
-void CoreTools::ExplicitCastTesting ::CastTest()
+void CoreTools::ExplicitCastTesting::CastTest()
 {
-    ExplicitCastTest explicitCastTest;
+    ExplicitCastTest explicitCastTest{ DisableNotThrow::Disable };
 
     IntegerTest(ExplicitCast<int>(explicitCastTest));
     StringTest(ExplicitCast<const string&>(explicitCastTest));
     PtrTest(ExplicitCast<const string*>(explicitCastTest));
 
 #if 0  // 这里应该产生编译错误。
+
 	IntegerTest(explicitCastTest);
+
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
+
 	StringTest(explicitCastTest);
+
 #endif  // 0
 
 #if 0  // 这里应该产生编译错误。
+
 	PtrTest(explicitCastTest);
+
 #endif  // 0
 }
 
-void CoreTools::ExplicitCastTesting ::IntegerTest(int value)
+void CoreTools::ExplicitCastTesting::IntegerTest(int value)
 {
     ASSERT_EQUAL(value, 1);
 }
 
-void CoreTools::ExplicitCastTesting ::StringTest(const string& value)
+void CoreTools::ExplicitCastTesting::StringTest(const string& value)
 {
     ASSERT_EQUAL(value, "ss");
 }
 
-void CoreTools::ExplicitCastTesting ::PtrTest(const string* value)
+void CoreTools::ExplicitCastTesting::PtrTest(const string* value)
 {
     if (value != nullptr)
     {

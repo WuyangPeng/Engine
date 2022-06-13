@@ -36,7 +36,7 @@ bool System::FreeDynamicLibrary(DynamicLinkModule module) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FreeLibrary(module) != g_False)
+    if (::FreeLibrary(module) != gFalse)
         return true;
     else
         return false;
@@ -68,7 +68,7 @@ bool System::DisableThreadDynamicLibraryCalls(DynamicLinkModule module) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DisableThreadLibraryCalls(module) != g_False)
+    if (::DisableThreadLibraryCalls(module) != gFalse)
         return true;
     else
         return false;

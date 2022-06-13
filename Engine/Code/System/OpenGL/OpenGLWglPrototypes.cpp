@@ -15,7 +15,7 @@
 
 bool System::IsWglSwapInterval(int interval) noexcept
 {
-    if (WglSwapIntervalEXT(interval) != g_False)
+    if (WglSwapIntervalEXT(interval) != gFalse)
         return true;
     else
         return false;
@@ -33,7 +33,7 @@ System::OpenGLHglrc System::CreateWglContext(WindowsHDC hDc) noexcept
 
 bool SYSTEM_DEFAULT_DECLARE System::DeleteWglContext(OpenGLHglrc oldContext) noexcept
 {
-    if (WglDeleteContext(oldContext) != g_False)
+    if (WglDeleteContext(oldContext) != gFalse)
         return true;
     else
         return false;
@@ -46,7 +46,7 @@ System::OpenGLHglrc System::GetCurrentWglContext() noexcept
 
 bool System::MakeWglCurrent(WindowsHDC hDc, OpenGLHglrc newContext) noexcept
 {
-    if (WglMakeCurrent(hDc, newContext) != g_False)
+    if (WglMakeCurrent(hDc, newContext) != gFalse)
         return true;
     else
         return false;
@@ -59,7 +59,7 @@ int System::ChooseWindowPixelFormat(WindowsHDC hdc, const PixelFormatDescriptor*
 
 bool System::SetWindowPixelFormat(WindowsHDC hdc, int format, const PixelFormatDescriptor* pixelFormatDescriptor) noexcept
 {
-    if (System::SetPixelFormat(hdc, format, pixelFormatDescriptor) != g_False)
+    if (System::SetPixelFormat(hdc, format, pixelFormatDescriptor) != gFalse)
         return true;
     else
         return false;
@@ -74,7 +74,7 @@ bool System::SwapDeviceBuffers(WindowsHDC hdc) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (System::SwapBuffers(hdc) != g_False)
+    if (System::SwapBuffers(hdc) != gFalse)
         return true;
     else
         return false;

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/28 09:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 16:08)
 
 #include "RombergIntegralTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -12,14 +15,7 @@
 #include <vector>
 
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
+
 namespace Mathematics
 {
     template class RombergIntegral<float, RombergIntegralTesting>;
@@ -28,22 +24,22 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, RombergIntegralTesting)
 
-void Mathematics::RombergIntegralTesting ::MainTest()
+void Mathematics::RombergIntegralTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ValueTest);
 }
 
-void Mathematics::RombergIntegralTesting ::ValueTest()
+void Mathematics::RombergIntegralTesting::ValueTest()
 {
-    double end = 3.5;
-    double begin = 1.5;
+    constexpr double end = 3.5;
+    constexpr double begin = 1.5;
 
     double difference = end - begin;
-    int order = 5;
+    constexpr int order = 5;
     vector<double> rom0(order);
     vector<double> rom1(order);
 
-    rom0[0] = (0.5 * difference * (Solution(begin, this) + Solution(end, this)));
+    rom0.at(0) = (0.5 * difference * (Solution(begin, this) + Solution(end, this)));
 
     int p0 = 1;
     for (int orderIndex = 2; orderIndex <= order; ++orderIndex)
@@ -55,40 +51,43 @@ void Mathematics::RombergIntegralTesting ::ValueTest()
             sum += Solution(begin + difference * (i - 0.5), this);
         }
 
-        rom1[0] = (0.5 * (rom0[0] + difference * sum));
+        rom1.at(0) = (0.5 * (rom0.at(0) + difference * sum));
 
         int p2 = 4;
         for (int i = 1; i < orderIndex; ++i)
         {
-            auto temp = i - 1;
+            const auto temp = i - 1;
             auto temp1 = p2 - 1;
-            rom1[i] = (p2 * rom1[temp] - rom0[temp]) / (temp1);
+            rom1.at(i) = (p2 * rom1.at(temp) - rom0.at(temp)) / (temp1);
 
             p2 *= 4;
         }
 
         for (int i = 0; i < orderIndex; ++i)
         {
-            rom0[i] = rom1[i];
+            rom0.at(i) = rom1.at(i);
         }
 
         p0 *= 2;
         difference *= 0.5;
     }
-    auto temp = order - 1;
-    double result = rom0[temp];
+    constexpr auto temp = order - 1;
+    const double result = rom0.at(temp);
 
     RombergIntegral<double, RombergIntegralTesting> rombergIntegral(order, begin, end, Solution, this);
 
     ASSERT_APPROXIMATE(result, rombergIntegral.GetValue(), 1e-10);
 }
 
-double Mathematics::RombergIntegralTesting ::Solution(double input, const RombergIntegralTesting* userData) noexcept
+double Mathematics::RombergIntegralTesting::Solution(double input, const RombergIntegralTesting* userData) noexcept
 {
-    return input * userData->GetUserData() + 13;
+    if (userData != nullptr)
+        return input * userData->GetUserData() + 13;
+    else
+        return 0.0;
 }
 
-double Mathematics::RombergIntegralTesting ::GetUserData() const noexcept
+double Mathematics::RombergIntegralTesting::GetUserData() const noexcept
 {
     return 6;
 }

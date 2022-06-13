@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 16:09)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_FIXED_SOCK_STREAM_SYNCHRONIZE_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_FIXED_SOCK_STREAM_SYNCHRONIZE_TESTING_H
@@ -11,37 +14,39 @@
 
 namespace Network
 {
-	class BoostFixedSockStreamSynchronizeTesting : public BoostSockStreamTesting
-	{
-	public:
-            using ClassType = BoostFixedSockStreamSynchronizeTesting;
-            using ParentType = BoostSockStreamTesting;
+    class BoostFixedSockStreamSynchronizeTesting : public BoostSockStreamTesting
+    {
+    public:
+        using ClassType = BoostFixedSockStreamSynchronizeTesting;
+        using ParentType = BoostSockStreamTesting;
 
-        public:
-            explicit BoostFixedSockStreamSynchronizeTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit BoostFixedSockStreamSynchronizeTesting(const OStreamShared& stream);
 
-	private:
-		void DoRunUnitTest() override;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		void MainTest();
+        using TestFunction = void (ClassType::*)();
 
-		void StreamTest();
+    private:
+        void DoRunUnitTest() override;
 
-		void SynchronizeStreamTest();
+        void MainTest();
 
-		void ClientTest();
-		void ServerTest();
+        void StreamTest();
 
-		void ClientSynchronizeConnect(const TestingTypeSharedPtr& sockStream);
-		void ClientSynchronizeSend(const TestingTypeSharedPtr& sockStream);
-		void ClientSynchronizeReceive(const TestingTypeSharedPtr& sockStream);
+        void SynchronizeStreamTest();
 
-		void ServerSynchronizeAcceptor(const TestingTypeSharedPtr& sockStream);
-		void ServerSynchronizeReceive(const TestingTypeSharedPtr& sockStream);
-		void ServerSynchronizeSend(const TestingTypeSharedPtr& sockStream);
-	};
+        void ClientTest();
+        void ServerTest();
+
+        void ClientSynchronizeConnect(const TestingTypeSharedPtr& sockStream);
+        void ClientSynchronizeSend(const TestingTypeSharedPtr& sockStream);
+        void ClientSynchronizeReceive(const TestingTypeSharedPtr& sockStream);
+
+        void ServerSynchronizeAcceptor(const TestingTypeSharedPtr& sockStream);
+        void ServerSynchronizeReceive(const TestingTypeSharedPtr& sockStream);
+        void ServerSynchronizeSend(const TestingTypeSharedPtr& sockStream);
+    };
 }
 
-#endif // NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_FIXED_SOCK_STREAM_SYNCHRONIZE_TESTING_H
+#endif  // NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_FIXED_SOCK_STREAM_SYNCHRONIZE_TESTING_H

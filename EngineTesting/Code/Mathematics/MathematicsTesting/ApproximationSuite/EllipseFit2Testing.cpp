@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/28 16:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 15:45)
 
 #include "EllipseFit2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,31 +20,26 @@
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EllipseFit2Testing)
 
-void Mathematics::EllipseFit2Testing ::MainTest()
+void Mathematics::EllipseFit2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
 
-void Mathematics::EllipseFit2Testing ::FitTest()
+void Mathematics::EllipseFit2Testing::FitTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(0.0, 100.0);
-    uniform_int<> secondRandomDistribution(5, 15);
+    const uniform_real<double> firstRandomDistribution(0.0, 100.0);
+    const uniform_int<> secondRandomDistribution(5, 15);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
@@ -50,16 +48,16 @@ void Mathematics::EllipseFit2Testing ::FitTest()
 
         EllipseFit2D ellipseFit(vertices);
 
-        Vector2 center = ellipseFit.GetCenter();
-        Matrix2D matrix = ellipseFit.GetRotate();
-        double firstExtent = ellipseFit.GetExtent0();
-        double secondExtent = ellipseFit.GetExtent1();
+        const Vector2 center = ellipseFit.GetCenter();
+        const Matrix2D matrix = ellipseFit.GetRotate();
+        const double firstExtent = ellipseFit.GetExtent0();
+        const double secondExtent = ellipseFit.GetExtent1();
 
-        Ellipse2D ellipse(center, matrix * Vector2D::GetUnitX(), matrix * Vector2D::GetUnitY(), firstExtent, secondExtent);
+        const Ellipse2D ellipse(center, matrix * Vector2D::GetUnitX(), matrix * Vector2D::GetUnitY(), firstExtent, secondExtent);
 
         for (int i = 0; i < size; ++i)
         {
-            ASSERT_LESS(ellipse.Evaluate(vertices[i]), 22.0);
+            ASSERT_LESS(ellipse.Evaluate(vertices.at(i)), 22.0);
         }
     }
 }

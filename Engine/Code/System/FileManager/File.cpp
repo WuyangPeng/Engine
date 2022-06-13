@@ -22,7 +22,7 @@ bool System::RemoveSystemFile(const CFileString& fileName) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::DeleteFile(fileName.c_str()) != g_False)
+    if (::DeleteFile(fileName.c_str()) != gFalse)
         return true;
     else
         return false;
@@ -94,7 +94,7 @@ bool System::CloseSystemFile(WindowsHandle file) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::CloseHandle(file) != g_False)
+    if (::CloseHandle(file) != gFalse)
         return true;
     else
         return false;
@@ -164,7 +164,7 @@ bool System::GetFileLength(WindowsHandle file, WindowsLargeIntegerPtr fileSize) 
 
     #else  // !TCRE_USE_GCC
 
-    if (::GetFileSizeEx(file, fileSize) != g_False)
+    if (::GetFileSizeEx(file, fileSize) != gFalse)
         return true;
     else
         return false;
@@ -184,7 +184,7 @@ bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDW
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::ReadFile(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped) != g_False)
+    if (::ReadFile(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped) != gFalse)
         return true;
     else
         return false;
@@ -207,7 +207,7 @@ bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDW
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::ReadFileEx(file, buffer, numberOfBytesToRead, overlapped, completionRoutine) != g_False)
+    if (::ReadFileEx(file, buffer, numberOfBytesToRead, overlapped, completionRoutine) != gFalse)
         return true;
     else
         return false;
@@ -225,7 +225,7 @@ bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Win
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::WriteFile(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped) != g_False)
+    if (::WriteFile(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped) != gFalse)
         return true;
     else
         return false;
@@ -248,7 +248,7 @@ bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Win
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::WriteFileEx(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine) != g_False)
+    if (::WriteFileEx(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine) != gFalse)
         return true;
     else
         return false;
@@ -291,7 +291,7 @@ bool System::CopySystemFile(const String& existingFileName, const String& newFil
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
-    if (::CopyFile(existingFileName.c_str(), newFileName.c_str(), BoolConversion(failIfExists)) != g_False)
+    if (::CopyFile(existingFileName.c_str(), newFileName.c_str(), BoolConversion(failIfExists)) != gFalse)
         return true;
     else
         return false;
@@ -337,7 +337,7 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLargeInteger distan
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetFilePointerEx(file, distanceToMove, newFilePointer, EnumCastUnderlying(moveMethod)) != g_False)
+    if (::SetFilePointerEx(file, distanceToMove, newFilePointer, EnumCastUnderlying(moveMethod)) != gFalse)
         return true;
     else
         return false;
@@ -355,7 +355,7 @@ bool System::SetEndOfSystemFile(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::SetEndOfFile(file)) != g_False)
+    if ((::SetEndOfFile(file)) != gFalse)
         return true;
     else
         return false;
@@ -373,7 +373,7 @@ bool System::FlushSystemFileBuffers(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::FlushFileBuffers(file)) != g_False)
+    if ((::FlushFileBuffers(file)) != gFalse)
         return true;
     else
         return false;
@@ -391,7 +391,7 @@ bool System::MoveSystemFile(const String& oldFileName, const String& newFileName
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::MoveFile(oldFileName.c_str(), newFileName.c_str())) != g_False)
+    if ((::MoveFile(oldFileName.c_str(), newFileName.c_str())) != gFalse)
         return true;
     else
         return false;

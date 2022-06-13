@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/07 14:22)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 16:41)
 
 #include "WinSockProtoentTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -37,7 +37,7 @@ void System::WinSockProtoentTesting::MainTest()
 
 void System::WinSockProtoentTesting::GetProtoentTest()
 {
-     auto winSockProtoent0 = GetProtoentByNumber(0);
+    auto winSockProtoent0 = GetProtoentByNumber(0);
     ASSERT_UNEQUAL_NULL_PTR(winSockProtoent0);
     ASSERT_UNEQUAL_NULL_PTR(winSockProtoent0->p_name);
     ASSERT_UNEQUAL_NULL_PTR(winSockProtoent0->p_aliases);

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/12 11:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 18:21)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
 #define NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
@@ -13,33 +16,33 @@
 
 namespace Network
 {
-	class BufferReceiveStreamTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BufferReceiveStreamTesting);
+    class BufferReceiveStreamTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BufferReceiveStreamTesting);
 
-	private:
-		void MainTest();
+    private:
+        void MainTest();
 
-		void ReceiveTest(int testLoopCount);
-		void FinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
-		void UnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
-		void CopyFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
-		void CopyUnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
+        void ReceiveTest(int testLoopCount);
+        void FinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
+        void UnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
+        void CopyFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
+        void CopyUnFinishReceiveTest(int testLoopCount, ParserStrategy parserStrategy);
 
-		MessageBufferSharedPtr CreateAddMessageBuffer(ParserStrategy parserStrategy) const;
-		MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
-		void AddBufferLength(MessageBuffer& messageBuffer);
+        NODISCARD MessageBufferSharedPtr CreateAddMessageBuffer(ParserStrategy parserStrategy) const;
+        NODISCARD MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
+        void AddBufferLength(MessageBuffer& messageBuffer);
 
-		void DoRunUnitTest() override;
+        void DoRunUnitTest() override;
 
-	private:
-		static constexpr int64_t sm_MessageID{ 6 };
-		static constexpr auto sm_BufferSize = 1024;
+    private:
+        static constexpr int64_t messageID{ 6 };
+        static constexpr auto bufferSize = 1024;
 
-		TestNullMessageSharedPtr m_TestMessage;
-		uint64_t m_SocketID;
-	};
+        TestNullMessageSharedPtr testMessage;
+        uint64_t socketID;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_BUFFER_RECEIVE_STREAM_TESTING_H

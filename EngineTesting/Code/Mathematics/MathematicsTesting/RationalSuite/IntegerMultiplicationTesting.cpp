@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/26 16:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/26 16:22)
 
 #include "IntegerMultiplicationTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,10 +20,7 @@
 using std::default_random_engine;
 using std::uniform_int;
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 namespace Mathematics
 {
     template class IntegerData<21>;
@@ -36,16 +36,16 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerMultiplicationTesting)
 
-void Mathematics::IntegerMultiplicationTesting ::MainTest()
+void Mathematics::IntegerMultiplicationTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MultiplicationTest);
 }
 
-void Mathematics::IntegerMultiplicationTesting ::MultiplicationTest()
+void Mathematics::IntegerMultiplicationTesting::MultiplicationTest()
 {
     default_random_engine generator{};
-    uniform_int<> firstRandomDistribution(0, UINT16_MAX);
-    uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
+    const uniform_int<> firstRandomDistribution(0, UINT16_MAX);
+    const uniform_int<uint16_t> secondRandomDistribution(0, UINT16_MAX);
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -55,28 +55,28 @@ void Mathematics::IntegerMultiplicationTesting ::MultiplicationTest()
         vector<uint16_t> secondShortVector(40);
 
         // 避免计算溢出
-        for (int i = 0; i < 19; ++i)
+        for (auto i = 0; i < 19; ++i)
         {
-            firstShortVector[i] = secondRandomDistribution(generator);
-            secondShortVector[i] = secondRandomDistribution(generator);
+            firstShortVector.at(i) = secondRandomDistribution(generator);
+            secondShortVector.at(i) = secondRandomDistribution(generator);
         }
 
-        IntegerData<20> firstInteger(firstShortVector);
-        IntegerData<20> secondInteger(secondShortVector);
+        const IntegerData<20> firstInteger(firstShortVector);
+        const IntegerData<20> secondInteger(secondShortVector);
 
         IntegerMultiplication<20> thirdIntegerDataOperator(firstInteger, secondInteger);
-        IntegerData<20> thirdInteger = thirdIntegerDataOperator.GetMultiplication();
+        const IntegerData<20> thirdInteger = thirdIntegerDataOperator.GetMultiplication();
 
         IntegerMultiplication<20> fourthIntegerDataOperator(secondInteger, firstInteger);
-        IntegerData<20> fourthInteger = fourthIntegerDataOperator.GetMultiplication();
+        const IntegerData<20> fourthInteger = fourthIntegerDataOperator.GetMultiplication();
 
         ASSERT_EQUAL(thirdInteger, fourthInteger);
 
-        uint64_t firstValue = firstRandomDistribution(generator);
-        uint64_t secondValue = firstRandomDistribution(generator);
+        const uint64_t firstValue = firstRandomDistribution(generator);
+        const uint64_t secondValue = firstRandomDistribution(generator);
 
-        IntegerData<4> fifthInteger(firstValue);
-        IntegerData<4> sixthInteger(secondValue);
+        const IntegerData<4> fifthInteger(firstValue);
+        const IntegerData<4> sixthInteger(secondValue);
 
         IntegerMultiplication<4> fifthIntegerDataOperator(fifthInteger, sixthInteger);
 

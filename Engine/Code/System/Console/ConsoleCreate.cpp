@@ -30,7 +30,7 @@ bool System::AllocConsole() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AllocConsole() != g_False)
+    if (::AllocConsole() != gFalse)
         return true;
     else
         return false;
@@ -46,7 +46,7 @@ bool System::FreeConsole() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FreeConsole() != g_False)
+    if (::FreeConsole() != gFalse)
         return true;
     else
         return false;

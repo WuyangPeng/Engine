@@ -17,7 +17,7 @@ bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclR
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != g_False)
+    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != gFalse)
         return true;
     else
         return false;
@@ -35,7 +35,7 @@ bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclSizeInformation), AclSizeInformation) != g_False)
+    if (::GetAclInformation(acl, aclInformation, sizeof(SecurityAclSizeInformation), AclSizeInformation) != gFalse)
         return true;
     else
         return false;
@@ -53,7 +53,7 @@ bool System::InitializeAccessControlList(AccessCheckACLPtr acl, WindowsDWord acl
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeAcl(acl, aclLength, EnumCastUnderlying(aclRevision)) != g_False)
+    if (::InitializeAcl(acl, aclLength, EnumCastUnderlying(aclRevision)) != gFalse)
         return true;
     else
         return false;
@@ -71,7 +71,7 @@ bool System::IsAccessControlListValid(AccessCheckACLPtr acl) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::IsValidAcl(acl) != g_False)
+    if (::IsValidAcl(acl) != gFalse)
         return true;
     else
         return false;
@@ -89,7 +89,7 @@ bool System::SetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclR
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != g_False)
+    if (::SetAclInformation(acl, aclInformation, sizeof(SecurityAclRevisionInformation), AclRevisionInformation) != gFalse)
         return true;
     else
         return false;

@@ -17,7 +17,7 @@ bool System::AddAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRev
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AddAce(acl, EnumCastUnderlying(aceRevision), startingAceIndex, aceList, aceListLength) != g_False)
+    if (::AddAce(acl, EnumCastUnderlying(aceRevision), startingAceIndex, aceList, aceListLength) != gFalse)
         return true;
     else
         return false;
@@ -35,7 +35,7 @@ bool System::AddMandatoryAccessControlEntries(AccessCheckACLPtr acl, AccessContr
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AddMandatoryAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(mandatoryPolicy), labelSid) != g_False)
+    if (::AddMandatoryAce(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(mandatoryPolicy), labelSid) != gFalse)
         return true;
     else
         return false;
@@ -53,7 +53,7 @@ bool System::DeleteAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceI
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::DeleteAce(acl, aceIndex) != g_False)
+    if (::DeleteAce(acl, aceIndex) != gFalse)
         return true;
     else
         return false;
@@ -71,7 +71,7 @@ bool System::FindFirstFreeAccessControlEntries(AccessCheckACLPtr acl, WindowsVoi
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FindFirstFreeAce(acl, ace) != g_False)
+    if (::FindFirstFreeAce(acl, ace) != gFalse)
         return true;
     else
         return false;
@@ -89,7 +89,7 @@ bool System::GetAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceInde
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetAce(acl, aceIndex, ace) != g_False)
+    if (::GetAce(acl, aceIndex, ace) != gFalse)
         return true;
     else
         return false;

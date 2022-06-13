@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/20 13:33)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 16:54)
 
 #include "CreateHeapTesting.h"
 #include "System/MemoryTools/Flags/HeapToolsFlags.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::numeric_limits; 
+using std::numeric_limits;
 
 System::CreateHeapTesting::CreateHeapTesting(const OStreamShared& stream)
     : ParentType{ stream }, heapCreateFlags{ HeapCreate::Default, HeapCreate::NoSerialize, HeapCreate::GenerateExceptions, HeapCreate::CreateEnableExecute }
@@ -78,5 +78,8 @@ void System::CreateHeapTesting::DoCreateHeapFailureTest(HeapCreate flag)
 
     ASSERT_EQUAL_NULL_PTR(handle);
 
-    ASSERT_TRUE(DestroyProcessHeap(handle));
+    if (handle != nullptr)
+    {
+        ASSERT_TRUE(DestroyProcessHeap(handle));
+    }
 }

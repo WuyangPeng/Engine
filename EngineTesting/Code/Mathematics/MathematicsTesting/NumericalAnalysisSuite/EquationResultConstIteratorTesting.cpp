@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 15:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 17:13)
 
 #include "EquationResultConstIteratorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,21 +18,21 @@ using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EquationResultConstIteratorTesting)
 
-void Mathematics::EquationResultConstIteratorTesting ::MainTest()
+void Mathematics::EquationResultConstIteratorTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DereferenceTest);
 }
 
-void Mathematics::EquationResultConstIteratorTesting ::DereferenceTest()
+void Mathematics::EquationResultConstIteratorTesting::DereferenceTest()
 {
-    typedef vector<size_t> IntVector;
-    typedef IntVector::const_iterator IntVectorConstIter;
+    using IntVector = vector<size_t>;
+    using IntVectorConstIter = IntVector::const_iterator;
 
     IntVector firstIntVector;
 
     for (size_t i = 0; i < 10; ++i)
     {
-        firstIntVector.push_back(i);
+        firstIntVector.emplace_back(i);
     }
 
     EquationResultConstIterator<IntVectorConstIter> iter(firstIntVector.begin());

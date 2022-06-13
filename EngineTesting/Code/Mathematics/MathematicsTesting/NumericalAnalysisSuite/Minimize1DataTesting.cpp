@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/02 21:57)
 
 #include "Minimize1DataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -17,12 +20,12 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Minimize1DataTesting)
 
-void Mathematics::Minimize1DataTesting ::MainTest()
+void Mathematics::Minimize1DataTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DataTest);
 }
 
-void Mathematics::Minimize1DataTesting ::DataTest()
+void Mathematics::Minimize1DataTesting::DataTest()
 {
     const Minimize1DataD firstMinimize1Data(3.0, 50.0);
 

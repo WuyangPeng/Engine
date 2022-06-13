@@ -14,7 +14,7 @@
 
 namespace ResourceManager
 {
-    class RESOURCE_MANAGER_HIDDEN_DECLARE ResourceManagerDelayCopyUnsharedMacroImpl final
+    class ResourceManagerDelayCopyUnsharedMacroImpl final
     {
     public:
         using ClassType = ResourceManagerDelayCopyUnsharedMacroImpl;

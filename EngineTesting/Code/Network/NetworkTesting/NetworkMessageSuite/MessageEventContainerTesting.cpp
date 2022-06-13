@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/12 13:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/23 16:31)
 
 #include "MessageEventContainerTesting.h"
 #include "Detail/TestNetworkMessageEvent.h"
@@ -12,20 +15,18 @@
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 #include "Network/NetworkMessage/MessageEventContainer.h"
 
-#include <boost/numeric/conversion/cast.hpp>
-
 using std::make_shared;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE_USE_TESTING_TYPE(Network, MessageEventContainer)
 
-void Network::MessageEventContainerTesting ::MainTest() noexcept
+void Network::MessageEventContainerTesting::MainTest() noexcept
 {
-    // ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
-    // ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
-    // ASSERT_NOT_THROW_EXCEPTION_0(MultiContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SingleContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PriorityContainerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MultiContainerTest);
 }
 
-void Network::MessageEventContainerTesting ::SingleContainerTest()
+void Network::MessageEventContainerTesting::SingleContainerTest()
 {
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent{ make_shared<TestNetworkMessageEvent>() };
 
@@ -47,7 +48,7 @@ void Network::MessageEventContainerTesting ::SingleContainerTest()
     ASSERT_EQUAL(testNetworkMessageEvent->GetValue(), boost::numeric_cast<int>(messageID));
 }
 
-void Network::MessageEventContainerTesting ::PriorityContainerTest()
+void Network::MessageEventContainerTesting::PriorityContainerTest()
 {
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };
@@ -76,7 +77,7 @@ void Network::MessageEventContainerTesting ::PriorityContainerTest()
     ASSERT_GREATER(testNetworkMessageEvent1->GetNowTime(), testNetworkMessageEvent2->GetNowTime());
 }
 
-void Network::MessageEventContainerTesting ::MultiContainerTest()
+void Network::MessageEventContainerTesting::MultiContainerTest()
 {
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent1{ make_shared<TestNetworkMessageEvent>() };
     TestNetworkMessageEventSharedPtr testNetworkMessageEvent2{ make_shared<TestNetworkMessageEvent>() };

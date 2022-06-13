@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/01 22:31)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 15:44)
 
 #include "InitializeAclTesting.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
@@ -27,7 +27,7 @@ void System::InitializeAclTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::InitializeAclTesting ::MainTest()
+void System::InitializeAclTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RevisionInitializeAclTest);
     ASSERT_NOT_THROW_EXCEPTION_0(RevisionDsInitializeAclTest);

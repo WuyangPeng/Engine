@@ -1,79 +1,71 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.4 (2020/03/13 16:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/25 14:01)
 
-#include "BoostSockTesting.h" 
-#include "CoreTools/Helper/AssertMacro.h" 
+#include "BoostSockTesting.h"
+#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Interface/BaseMainManager.h"
 
-using std::ostream;
 using std::make_shared;
+using std::ostream;
 
-Network::BoostSockTesting
-	::BoostSockTesting(const OStreamShared& osPtr)
-	:ParentType{ osPtr }, m_Increase{ -1000 }, m_MessageID{ 5 }, m_Offset{ 0 }
+Network::BoostSockTesting::BoostSockTesting(const OStreamShared& stream)
+    : ParentType{ stream }, increase{ -1000 }, messageID{ 5 }, offset{ 0 }
 {
-	NETWORK_SELF_CLASS_IS_VALID_1;
+    NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
- 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, BoostSockTesting)
 
-void Network::BoostSockTesting
-	::BoostServerThread()
+void Network::BoostSockTesting::BoostServerThread()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(DoBoostServerThread);
+    ASSERT_NOT_THROW_EXCEPTION_0(DoBoostServerThread);
 }
 
-void Network::BoostSockTesting
-	::DoBoostServerThread()
+void Network::BoostSockTesting::DoBoostServerThread()
 {
-	BASE_MAIN_MANAGER_SINGLETON.Run();
+    BASE_MAIN_MANAGER_SINGLETON.Run();
 }
 
-void Network::BoostSockTesting
-	::AddOffset() noexcept
+void Network::BoostSockTesting::AddOffset() noexcept
 {
-	constexpr auto engineeringCount = 8;
+    constexpr auto engineeringCount = 8;
 
-	m_Offset += engineeringCount;
+    offset += engineeringCount;
 }
 
-void Network::BoostSockTesting
-	::ClearOffset() noexcept
+void Network::BoostSockTesting::ClearOffset() noexcept
 {
-	m_Offset = 0;
+    offset = 0;
 }
 
-int Network::BoostSockTesting
-	::GetOffset() const noexcept
+int Network::BoostSockTesting::GetOffset() const noexcept
 {
-	return m_Offset;
+    return offset;
 }
 
-int Network::BoostSockTesting
-	::GetIncrease() const noexcept
+int Network::BoostSockTesting::GetIncrease() const noexcept
 {
-	return m_Increase;
+    return increase;
 }
 
-int Network::BoostSockTesting
-	::GetMessageID() const noexcept
+int Network::BoostSockTesting::GetMessageID() const noexcept
 {
-	return m_MessageID;
+    return messageID;
 }
 
-int Network::BoostSockTesting
-	::GetRealOffset() const noexcept
+int Network::BoostSockTesting::GetRealOffset() const noexcept
 {
-	return m_Increase + m_Offset;
+    return increase + offset;
 }
 
-int Network::BoostSockTesting
-	::GetRealPort() const noexcept
+int Network::BoostSockTesting::GetRealPort() const noexcept
 {
-	return GetPort() + GetRealOffset();
-} 
+    return GetPort() + GetRealOffset();
+}

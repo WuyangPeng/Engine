@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/05/27 11:52)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 15:48)
 
 #include "LookupPrivilegeTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -86,7 +86,7 @@ void System::LookupPrivilegeTesting::GetLookupPrivilegeTest()
 
         ASSERT_LESS(0u, uid.LowPart);
 
-        WindowsDWord size{ boost::numeric_cast<WindowsDWord>(buffer.size()) };
+        auto size = boost::numeric_cast<WindowsDWord>(buffer.size());
         ASSERT_TRUE(GetLookupPrivilegeName(nullptr, &uid, buffer.data(), &size));
 
         String resultLookupPrivilegeName{ buffer.data() };

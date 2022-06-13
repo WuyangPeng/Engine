@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/30 19:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 21:16)
 
 #include "ContBox2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,112 +23,107 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ContBox2Testing)
 
-void Mathematics::ContBox2Testing ::MainTest()
+void Mathematics::ContBox2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ContAlignedBoxTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ContOrientedBoxTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MergeBoxesTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::ContBox2Testing ::ContAlignedBoxTest()
+
+void Mathematics::ContBox2Testing::ContAlignedBoxTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    std::uniform_int<> secondRandomDistribution(10, 50);
+    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> secondRandomDistribution(10, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
             vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D box = ContBox2D::ContAlignedBox(vertices);
+        const Box2D box = ContBox2D::ContAlignedBox(vertices);
 
         for (int i = 0; i < size; ++i)
         {
-            ASSERT_TRUE(ContBox2D::InBox(vertices[i], box));
+            ASSERT_TRUE(ContBox2D::InBox(vertices.at(i), box));
         }
     }
 }
 
-void Mathematics::ContBox2Testing ::ContOrientedBoxTest()
+void Mathematics::ContBox2Testing::ContOrientedBoxTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    std::uniform_int<> secondRandomDistribution(10, 50);
+    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> secondRandomDistribution(10, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        Box2D box = ContBox2D::ContOrientedBox(vertices);
+        const Box2D box = ContBox2D::ContOrientedBox(vertices);
 
         for (int i = 0; i < size; ++i)
         {
-            ASSERT_TRUE(ContBox2D::InBox(vertices[i], box));
+            ASSERT_TRUE(ContBox2D::InBox(vertices.at(i), box));
         }
     }
 }
 
-void Mathematics::ContBox2Testing ::MergeBoxesTest()
+void Mathematics::ContBox2Testing::MergeBoxesTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    std::uniform_int<> secondRandomDistribution(10, 50);
+    const std::uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const std::uniform_int<> secondRandomDistribution(10, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> firstVertices;
-        int firstSize = secondRandomDistribution(generator);
+        const int firstSize = secondRandomDistribution(generator);
 
         for (int i = 0; i < firstSize; ++i)
         {
             firstVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D firstBox = ContBox2D::ContAlignedBox(firstVertices);
+        const Box2D firstBox = ContBox2D::ContAlignedBox(firstVertices);
 
         std::vector<Vector2D> secondVertices;
-        int secondSize = secondRandomDistribution(generator);
+        const int secondSize = secondRandomDistribution(generator);
 
         for (int i = 0; i < secondSize; ++i)
         {
             secondVertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        Box2D secondBox = ContBox2D::ContOrientedBox(secondVertices);
+        const Box2D secondBox = ContBox2D::ContOrientedBox(secondVertices);
 
-        Box2D thirdBox = ContBox2D::MergeBoxes(firstBox, secondBox);
+        const Box2D thirdBox = ContBox2D::MergeBoxes(firstBox, secondBox);
 
         for (int i = 0; i < firstSize; ++i)
         {
-            ASSERT_TRUE(ContBox2D::InBox(firstVertices[i], thirdBox));
+            ASSERT_TRUE(ContBox2D::InBox(firstVertices.at(i), thirdBox));
         }
 
         for (int i = 0; i < secondSize; ++i)
         {
-            ASSERT_TRUE(ContBox2D::InBox(secondVertices[i], thirdBox));
+            ASSERT_TRUE(ContBox2D::InBox(secondVertices.at(i), thirdBox));
         }
     }
 }

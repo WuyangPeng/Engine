@@ -29,7 +29,7 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 
     #if (_WIN32_WINNT < 0x0600)
 
-    auto succeed = g_True;
+    auto succeed = gTrue;
 
     __try
     {
@@ -39,14 +39,14 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
     }
     __except (EnumCastUnderlying(Exception::ExecuteHandler))
     {
-        succeed = g_False;
+        succeed = gFalse;
     }
 
-    return succeed == g_True;
+    return succeed == gTrue;
 
     #else  // (0x0600 <= _WIN32_WINNT)
 
-    if (::InitializeCriticalSectionEx(criticalSection, spinCount, EnumCastUnderlying(flags)) != g_False)
+    if (::InitializeCriticalSectionEx(criticalSection, spinCount, EnumCastUnderlying(flags)) != gFalse)
         return true;
     else
         return false;
@@ -66,7 +66,7 @@ bool System::InitializeSystemCriticalSectionAndSpinCount(ThreadingCriticalSectio
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::InitializeCriticalSectionAndSpinCount(criticalSection, spinCount) != g_False)
+    if (::InitializeCriticalSectionAndSpinCount(criticalSection, spinCount) != gFalse)
         return true;
     else
         return false;
@@ -137,7 +137,7 @@ bool System::TryEnterSystemCriticalSection(ThreadingCriticalSectionPtr criticalS
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::TryEnterCriticalSection(criticalSection) != g_False)
+    if (::TryEnterCriticalSection(criticalSection) != gFalse)
         return true;
     else
         return false;

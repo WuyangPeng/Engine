@@ -451,7 +451,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::ExtractEntry(const std::string& name,
     }
 }
 
-CoreTools::SimpleZip ::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const string& name, const ZipEntryData& data)
+CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::AddEntry(const string& name, const ZipEntryData& data)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

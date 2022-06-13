@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 13:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 13:57)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SINGLETON_TESTING_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_SINGLETON_TESTING_H
@@ -41,26 +44,26 @@ namespace Network
         void SocketSingletonTest(Test* test, typename Test::TestFunction function);
 
         // Server
-        const ConfigurationStrategy GetACEServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetBoostServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetBoostFixedServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetThreadsBoostServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetMultiContextBoostServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetNetworkServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetSocketServerConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetNullServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetACEServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetBoostServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetBoostFixedServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetThreadsBoostServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetMultiContextBoostServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetNetworkServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetSocketServerConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetNullServerConfigurationStrategy(int increase = 0) const;
 
         // Client
-        const ConfigurationStrategy GetBoostClientConfigurationStrategy(int increase = 0) const;
-        const ConfigurationStrategy GetBoostFixedClientConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetBoostClientConfigurationStrategy(int increase = 0) const;
+        NODISCARD ConfigurationStrategy GetBoostFixedClientConfigurationStrategy(int increase = 0) const;
 
     protected:
-        int GetPort() const noexcept;
-        const std::string GetHostName() const;
+        NODISCARD int GetPort() const noexcept;
+        NODISCARD std::string GetHostName() const;
 
     private:
-        int m_Port;
-        std::string m_HostName;
+        int mPort;
+        std::string mHostName;
     };
 }
 

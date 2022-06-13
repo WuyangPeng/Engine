@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 19:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 17:03)
 
 #include "MessageManagerTesting.h"
 #include "Flags/EventPriorityFlags.h"
@@ -23,13 +26,13 @@ namespace CoreTools
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, MessageManagerTesting)
 
-void CoreTools::MessageManagerTesting ::MainTest()
+void CoreTools::MessageManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(SuccessTest);
     ASSERT_THROW_EXCEPTION_0(UnregisteredExceptionTest);
 }
 
-void CoreTools::MessageManagerTesting ::SuccessTest()
+void CoreTools::MessageManagerTesting::SuccessTest()
 {
     constexpr auto value = 5;
 
@@ -85,7 +88,7 @@ void CoreTools::MessageManagerTesting ::SuccessTest()
     messageManager.Unregistered(1, index);
 }
 
-void CoreTools::MessageManagerTesting ::UnregisteredExceptionTest()
+void CoreTools::MessageManagerTesting::UnregisteredExceptionTest()
 {
     constexpr auto value = 5;
 

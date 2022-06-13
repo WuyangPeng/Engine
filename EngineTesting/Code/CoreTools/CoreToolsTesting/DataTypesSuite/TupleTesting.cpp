@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 19:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 14:10)
 
 #include "TupleTesting.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
@@ -15,7 +18,7 @@ using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, TupleTesting)
 
-void CoreTools::TupleTesting ::MainTest()
+void CoreTools::TupleTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StringTest);
@@ -24,7 +27,7 @@ void CoreTools::TupleTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CompileErrorTest);
 }
 
-void CoreTools::TupleTesting ::IntegerTest()
+void CoreTools::TupleTesting::IntegerTest()
 {
     // 固定值测试
     Tuple<4, int> integerTuple1{};
@@ -77,7 +80,7 @@ void CoreTools::TupleTesting ::IntegerTest()
     ASSERT_EQUAL(integerTuple1[3], 442);
 }
 
-void CoreTools::TupleTesting ::StringTest()
+void CoreTools::TupleTesting::StringTest()
 {
     // 固定值测试
     Tuple<2, string> stringTuple1{};
@@ -118,7 +121,7 @@ void CoreTools::TupleTesting ::StringTest()
     ASSERT_EQUAL(stringTuple1[1], "first");
 }
 
-void CoreTools::TupleTesting ::OperatorTest()
+void CoreTools::TupleTesting::OperatorTest()
 {
     Tuple<4, long> longTuple1{};
     Tuple<4, long> longTuple2{};
@@ -143,7 +146,7 @@ void CoreTools::TupleTesting ::OperatorTest()
     ASSERT_TRUE(longTuple1 >= longTuple2);
 }
 
-void CoreTools::TupleTesting ::ConstructorTest()
+void CoreTools::TupleTesting::ConstructorTest()
 {
     Tuple<1, int> tuple1{ 5 };
 
@@ -166,13 +169,15 @@ void CoreTools::TupleTesting ::ConstructorTest()
     ASSERT_EQUAL(tuple4[3], 'p');
 }
 
-void CoreTools::TupleTesting ::CompileErrorTest() noexcept
+void CoreTools::TupleTesting::CompileErrorTest() noexcept
 {
 #ifdef COMPILE_ERROR_TEST
+
     // 以下代码无法通过编译
     Tuple<1, int> tuple1{ 5, 6 };
     Tuple<2, int> tuple2{ 5, 6, 7 };
     Tuple<3, int> tuple3{ 5, 6, 7, 8 };
     Tuple<4, int> tuple4{ 5 };
+
 #endif  // COMPILE_ERROR_TEST
 }

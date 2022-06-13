@@ -18,7 +18,7 @@
 
 namespace Rendering
 {
-    class LightAmbEffect : public VisualEffect
+    class RENDERING_DEFAULT_DECLARE LightAmbEffect : public VisualEffect
     {
     public:
         using ClassType = LightAmbEffect;

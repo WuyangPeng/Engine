@@ -1,66 +1,60 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 16:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/03 14:54)
 
 #include "OdeSolverTest.h"
 #include "OdeSolverTesting.h"
-#include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26481)
-Mathematics::OdeSolverTest
-	::OdeSolverTest(int dimension, double step,Function function, const OdeSolverTesting* userData)
-	:ParentType{ dimension, step, function, userData }
+#include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
+
+Mathematics::OdeSolverTest::OdeSolverTest(int dimension, double step, Function function, const OdeSolverTesting* userData)
+    : ParentType{ dimension, step, function, userData }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-Mathematics::OdeSolverTest
-	::~OdeSolverTest() 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, OdeSolverTest)
+
+Mathematics::OdeSolverTest::Data Mathematics::OdeSolverTest::Update(double tIn, const RealVector& xIn)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
- 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, OdeSolverTest) 
+    CalculateFunctionValue(tIn, xIn);
 
-void Mathematics::OdeSolverTest
-	::Update(double tIn, const RealVector& xIn, double& tOut, double* xOut)
-{
-	CalculateFunctionValue(tIn, xIn);
+    const auto tOut = tIn;
 
-	tOut = tIn;
+    const int dimension0 = GetDimension();
+    RealVector xOut(dimension0);
 
-	int dimension0 = GetDimension();
+    for (int i = 0; i < dimension0; i++)
+    {
+        xOut.at(i) = xIn.at(i);
+    }
 
-	for (int i = 0; i < dimension0; i++)
-	{
-		xOut[i] = xIn[i];	
-	}
+    return { tOut, xOut };
 }
 
-const Mathematics::OdeSolverTest::RealVector Mathematics::OdeSolverTest
-	::OdeSolverTestFunction(double tIn, const RealVector& xIn,const OdeSolverTesting* odeSolverTest) 
+Mathematics::OdeSolverTest::RealVector Mathematics::OdeSolverTest::OdeSolverTestFunction(double tIn, const RealVector& xIn, const OdeSolverTesting* odeSolverTest)
 {
-	int dimension =  odeSolverTest->GetDimension();
+    if (odeSolverTest != nullptr)
+    {
+        int dimension = odeSolverTest->GetDimension();
 
-	RealVector out(dimension);
+        RealVector out(dimension);
 
-	for (int i = 0; i < dimension; i++)
-	{
-		out[i] = tIn * xIn[i] + dimension;
-	}
+        for (int i = 0; i < dimension; i++)
+        {
+            out.at(i) = tIn * xIn.at(i) + dimension;
+        }
 
-	return out;
+        return out;
+    }
+    else
+    {
+        return RealVector{};
+    }
 }
-

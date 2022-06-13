@@ -15,12 +15,17 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename Real, typename UserDataType>
 Mathematics::OdeMidpoint<Real, UserDataType>::OdeMidpoint(int dimension, Real step, Function function, const UserDataType* userData)
     : ParentType{ dimension, step, function, userData }, halfStep{ Math::GetRational(1, 2) * step }, xIn1(dimension)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
+
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.4 (2020/03/13 11:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/24 13:39)
 
 #ifndef NETWORK_TESTING_NETWORK_INTERFACE_SUITE_TEST_MESSAGE_EVENT_H
 #define NETWORK_TESTING_NETWORK_INTERFACE_SUITE_TEST_MESSAGE_EVENT_H
@@ -21,25 +24,25 @@ namespace Network
         using ParentType = NetworkMessageEvent;
 
     public:
-        TestMessageEvent();
+        explicit TestMessageEvent(CoreTools::DisableNotThrow disableNotThrow);
         virtual ~TestMessageEvent() noexcept;
-        TestMessageEvent(const TestMessageEvent&) = delete;
-        TestMessageEvent& operator=(const TestMessageEvent&) = delete;
-        TestMessageEvent(TestMessageEvent&&) = delete;
-        TestMessageEvent& operator=(TestMessageEvent&&) = delete;
+        TestMessageEvent(const TestMessageEvent& rhs) = delete;
+        TestMessageEvent& operator=(const TestMessageEvent& rhs) = delete;
+        TestMessageEvent(TestMessageEvent&& rhs) noexcept = delete;
+        TestMessageEvent& operator=(TestMessageEvent&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) override;
 
-        uint64_t GetCallBackTime() const noexcept;
+        NODISCARD uint64_t GetCallBackTime() const noexcept;
 
         void SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept;
 
     private:
-        uint64_t m_CallBackTime;
-        CoreTools::Mutex m_TestMessageEventCriticalSection;
-        ServerWeakPtr m_ServerWeakPtr;
+        uint64_t callBackTime;
+        CoreTools::Mutex testMessageEventCriticalSection;
+        ServerWeakPtr serverWeakPtr;
     };
 
     using TestMessageEventSharedPtr = std::shared_ptr<TestMessageEvent>;

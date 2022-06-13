@@ -89,7 +89,7 @@ bool System::GetSystemTextExtentPoint32(WindowsHDC hdc, const TChar* text, int c
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTextExtentPoint32(hdc, text, character, pointSize) != g_False)
+    if (::GetTextExtentPoint32(hdc, text, character, pointSize) != gFalse)
         return true;
     else
         return false;
@@ -107,7 +107,7 @@ bool System::GetSystemTextMetrics(WindowsHDC hdc, WindowsTextMetric* metric) noe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTextMetrics(hdc, metric) != g_False)
+    if (::GetTextMetrics(hdc, metric) != gFalse)
         return true;
     else
         return false;

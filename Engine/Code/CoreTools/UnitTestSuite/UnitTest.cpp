@@ -385,6 +385,26 @@ void CoreTools::UnitTest::AssertEqual(const wstring& lhs, const wstring& rhs, co
     }
 }
 
+void CoreTools::UnitTest::AssertEqual(wchar_t lhs, wchar_t rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
+{
+    const auto condition = (lhs == rhs);
+
+    if (condition)
+    {
+        AssertTrue();
+    }
+    else
+    {
+        stringstream stream{};
+
+        stream << StringConversion::WideCharConversionMultiByte(wstring{ lhs }) << "²»µÈÓÚ" << StringConversion::WideCharConversionMultiByte(wstring{ rhs });
+
+        const auto described = GetAssertDescribed(stream.str(), errorMessage);
+
+        AssertTest(condition, functionDescribed, described, failureThrow);
+    }
+}
+
 void CoreTools::UnitTest::AssertEqual(const char* lhs, const char* rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
     AssertEqual(string{ lhs }, string{ rhs }, functionDescribed, errorMessage, failureThrow);

@@ -46,7 +46,7 @@ namespace CoreTools
         operator ReferenceType() const;
 
     private:
-        V m_Value;
+        V value;
     };
 }
 

@@ -53,7 +53,7 @@ bool System::CancelSystemWaitableTimer(WindowsHandle timer) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CancelWaitableTimer(timer) != g_False)
+    if (::CancelWaitableTimer(timer) != gFalse)
         return true;
     else
         return false;
@@ -71,7 +71,7 @@ bool System::CloseSystemWaitableTimer(WindowsHandle timer) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(timer) != g_False)
+    if (::CloseHandle(timer) != gFalse)
         return true;
     else
         return false;
@@ -160,7 +160,7 @@ bool System::SetSystemWaitableTimer(WindowsHandle timer,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetWaitableTimerEx(timer, dueTime, period, completionRoutine, argToCompletionRoutine, wakeContext, tolerableDelay) != g_False)
+    if (::SetWaitableTimerEx(timer, dueTime, period, completionRoutine, argToCompletionRoutine, wakeContext, tolerableDelay) != gFalse)
         return true;
     else
         return false;
@@ -183,7 +183,7 @@ bool System::SetSystemWaitableTimer(WindowsHandle timer,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetWaitableTimer(timer, dueTime, period, completionRoutine, argToCompletionRoutine, BoolConversion(resume)) != g_False)
+    if (::SetWaitableTimer(timer, dueTime, period, completionRoutine, argToCompletionRoutine, BoolConversion(resume)) != gFalse)
         return true;
     else
         return false;

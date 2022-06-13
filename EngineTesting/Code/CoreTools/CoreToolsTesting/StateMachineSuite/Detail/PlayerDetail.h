@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename EventType>
-CoreTools::Player::StateType CoreTools::Player ::NoTransition(StateType state, const EventType& eventType) noexcept
+CoreTools::Player::StateType CoreTools::Player::NoTransition(StateType state, const EventType& eventType) noexcept
 {
 	if (state == States::Empty)
 	{

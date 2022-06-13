@@ -1,12 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:36)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/Properties/PropertyGetExternalOffsetDetail.h"
 #include "CoreTools/Properties/PropertyGetInternalOffsetDetail.h"
@@ -23,24 +27,24 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        PropertyOffset();
+        explicit PropertyOffset(MAYBE_UNUSED DisableNotThrow disableNotThrow);
 
-        const std::string& GetInternalValue() const noexcept;
+        NODISCARD const std::string& GetInternalValue() const noexcept;
 
     private:
-        static ptrdiff_t GetOffset() noexcept;
+        NODISCARD static ptrdiff_t GetOffset() noexcept;
 
-        const std::string& GetValue() const noexcept;
+        NODISCARD const std::string& GetValue() const noexcept;
 
         using PropertyGetExternalOffset = PropertyGetExternalOffset<ClassType, const std::string&, &GetValue, GetOffset>;
         using PropertyGetInternalOffset = PropertyGetInternalOffset<ClassType, std::string, const std::string&, &GetValue, GetOffset>;
 
-        PropertyGetInternalOffset m_InternalOffset;
+        PropertyGetInternalOffset internalOffset;
 
-        std::string m_Value;
+        std::string value;
 
     public:
-        PropertyGetExternalOffset m_Offset;
+        PropertyGetExternalOffset offset;
     };
 #pragma pack(pop)
 }

@@ -240,6 +240,11 @@ namespace CoreTools
                          const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{},
                          bool failureThrow = false);
+        void AssertEqual(wchar_t lhs,
+                         wchar_t rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
 
         template <typename TestClass, typename Function>
         void ExecuteLoopTesting(TestClass* test, Function function);

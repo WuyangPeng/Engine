@@ -1,47 +1,48 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 11:32)
 
 #ifndef CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
 
 #include "CoreTools/Helper/UserMacro.h"
 #include "CoreTools/Properties/PropertyGetExternalDetail.h"
-#include "CoreTools/Properties/PropertySetExternalDetail.h"
 #include "CoreTools/Properties/PropertyGetSetExternalDetail.h"
+#include "CoreTools/Properties/PropertySetExternalDetail.h"
 
 #include <string>
 
 namespace CoreTools
 {
-	class PropertyExternal
-	{
-	public:
-		using ClassType = PropertyExternal;
+    class PropertyExternal
+    {
+    public:
+        using ClassType = PropertyExternal;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		PropertyExternal() noexcept;
+        PropertyExternal() noexcept;
 
-	private:
-		std::string m_Value;
+    private:
+        std::string value;
 
-		const std::string& GetValue() const noexcept;
-		void SetValue(const std::string& value);
+        NODISCARD const std::string& GetValue() const noexcept;
+        void SetValue(const std::string& aValue);
 
-	public:
-		using GetType = PropertyGetExternal<ClassType, const std::string&, &GetValue>;
-		using SetType = PropertySetExternal<ClassType, const std::string&, &SetValue>;
-		using GetSetType = PropertyGetSetExternal<ClassType, const std::string&, &GetValue, const std::string&, &SetValue>;
+    public:
+        using GetType = PropertyGetExternal<ClassType, const std::string&, &GetValue>;
+        using SetType = PropertySetExternal<ClassType, const std::string&, &SetValue>;
+        using GetSetType = PropertyGetSetExternal<ClassType, const std::string&, &GetValue, const std::string&, &SetValue>;
 
-		GetType m_GetType;
-		SetType m_SetType;
-		GetSetType m_GetSetType;
-	};
+        GetType getType;
+        SetType setType;
+        GetSetType getSetType;
+    };
 }
 
-#endif // CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H
-
-
+#endif  // CORE_TOOLS_PROPERTIES_SUITE_PROPERTY_EXTERNAL_H

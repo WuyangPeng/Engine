@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 14:21)
 
 #include "ACESockStreamTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -20,7 +23,6 @@
 #include "Network/NetworkTesting/InterfaceSuite/Detail/TestSocketManager.h"
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
-#include <boost/numeric/conversion/cast.hpp>
 #include <array>
 #include <thread>
 
@@ -29,25 +31,32 @@ using std::make_shared;
 using std::ostream;
 using std::thread;
 
-Network::ACESockStreamTesting ::ACESockStreamTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_Port{ 7540 }
+Network::ACESockStreamTesting::ACESockStreamTesting(const OStreamShared& stream)
+    : ParentType{ stream }, mPort{ 7540 }
 {
 #ifdef _DEBUG
-    m_Port += 4;
+
+    mPort += 4;
+
 #endif  // _DEBUG
 
 #ifdef BUILDING_NETWORK_STATIC
-    m_Port += 2;
+
+    mPort += 2;
+
 #endif  // BUILDING_NETWORK_STATIC
 
 #ifdef _WIN64
-    m_Port += 1;
+
+    mPort += 1;
+
 #endif  // _WIN64
 
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, ACESockStreamTesting)
+
 void Network::ACESockStreamTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
@@ -58,19 +67,28 @@ namespace Network
     using TestingType = SockStream;
 }
 
-void Network::ACESockStreamTesting ::MainTest()
+void Network::ACESockStreamTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(ACESingletonTest<ClassType>, this, &ClassType::StreamTest);
 }
 
-void Network::ACESockStreamTesting ::StreamTest()
+void Network::ACESockStreamTesting::StreamTest()
 {
     thread firstTread{ &ClassType::ACEServerThread, this };
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::TCP, ClientStrategy::OnlySending,
-                                                       MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                       configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default, "127.0.0.1", m_Port };
+    ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::ACE,
+                                                       ConnectStrategy::TCP,
+                                                       ClientStrategy::OnlySending,
+                                                       MessageStrategy::Default,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       mPort };
 
     SockStreamSharedPtr sockStream{ make_shared<TestingType>(clientConfigurationStrategy) };
 
@@ -79,15 +97,15 @@ void Network::ACESockStreamTesting ::StreamTest()
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        [[maybe_unused]] const auto value0 = sockStream->EnableNonBlock();
+        MAYBE_UNUSED const auto value0 = sockStream->EnableNonBlock();
 
         MessageBufferSharedPtr buffer{ std::make_shared<MessageBuffer>(BuffBlockSize::Size256, 0, clientConfigurationStrategy.GetParserStrategy()) };
         buffer->AddCurrentWriteIndex(50);
 
-        [[maybe_unused]] const auto value1 = sockStream->Send(buffer);
+        MAYBE_UNUSED const auto value1 = sockStream->Send(buffer);
         buffer->ClearCurrentWriteIndex();
 
-        [[maybe_unused]] const auto value2 = sockStream->Receive(buffer);
+        MAYBE_UNUSED const auto value2 = sockStream->Receive(buffer);
     }
 
     firstTread.join();
@@ -98,7 +116,7 @@ void Network::ACESockStreamTesting ::StreamTest()
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        [[maybe_unused]] const auto value = sockStream->EnableNonBlock();
+        MAYBE_UNUSED const auto value = sockStream->EnableNonBlock();
 
         TestSocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
 
@@ -112,17 +130,26 @@ void Network::ACESockStreamTesting ::StreamTest()
     seconTread.join();
 }
 
-void Network::ACESockStreamTesting ::ACEServerThread()
+void Network::ACESockStreamTesting::ACEServerThread()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DoACEServerThread);
 }
 
-void Network::ACESockStreamTesting ::DoACEServerThread()
+void Network::ACESockStreamTesting::DoACEServerThread()
 {
     ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
-    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::TCP, ServerStrategy::Iterative,
-                                                       MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
-                                                       configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default, "127.0.0.1", m_Port };
+    ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::ACE,
+                                                       ConnectStrategy::TCP,
+                                                       ServerStrategy::Iterative,
+                                                       MessageStrategy::Default,
+                                                       ParserStrategy::LittleEndian,
+                                                       OpenSSLStrategy::Default,
+                                                       EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy,
+                                                       ConfigurationParameter::Create(),
+                                                       SocketSendMessage::Default,
+                                                       "127.0.0.1",
+                                                       mPort };
 
     constexpr auto messageID = 5;
     ConfigurationStrategy configurationStrategy{ serverConfigurationStrategy };

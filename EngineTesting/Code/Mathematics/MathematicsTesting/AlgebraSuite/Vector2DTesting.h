@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/19 17:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 18:09)
 
 #ifndef MATHEMATICS_BASE_SUITE_VECTOR_2D_TESTING_H
 #define MATHEMATICS_BASE_SUITE_VECTOR_2D_TESTING_H
@@ -11,20 +14,20 @@
 
 namespace Mathematics
 {
-	class Vector2Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2Testing); 
+    class Vector2Testing : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2Testing);
 
-	private:
-		void MainTest();
-		void ConstructionTest();
-		void AccessTest();
-		void CalculateTest();
-		void BarycentricsTest();
+    private:
+        void MainTest();
+        void ConstructionTest() noexcept;
+        void AccessTest();
+        void CalculateTest();
+        void BarycentricsTest();
 
-		void DoRunUnitTest() override; 
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_BASE_SUITE_VECTOR_2D_TESTING_H
+#endif  // MATHEMATICS_BASE_SUITE_VECTOR_2D_TESTING_H

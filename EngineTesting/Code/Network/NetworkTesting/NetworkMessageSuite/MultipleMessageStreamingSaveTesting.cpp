@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 14:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/24 11:02)
 
 #include "MultipleMessageStreamingSaveTesting.h"
 #include "Flags/MultipleMessageType.h"
@@ -16,21 +19,21 @@
 #include "Network/NetworkMessage/MultipleMessageStreamingSaveDetail.h"
 
 #include <string>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26473)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26496)
+
 using std::make_shared;
 using std::string;
 
 namespace Network
 {
-    using MultipleMessageType = MultipleMessageContainer<MultipleMessageField, MultipleMessageByteType::Int8, MultipleMessageByteType::Uint8,
-                                                         MultipleMessageByteType::Int16, MultipleMessageByteType::Uint16, MultipleMessageByteType::Int32,
-                                                         MultipleMessageByteType::Uint32, MultipleMessageByteType::Int64, MultipleMessageByteType::Uint64,
+    using MultipleMessageType = MultipleMessageContainer<MultipleMessageField,
+                                                         MultipleMessageByteType::Int8,
+                                                         MultipleMessageByteType::Uint8,
+                                                         MultipleMessageByteType::Int16,
+                                                         MultipleMessageByteType::Uint16,
+                                                         MultipleMessageByteType::Int32,
+                                                         MultipleMessageByteType::Uint32,
+                                                         MultipleMessageByteType::Int64,
+                                                         MultipleMessageByteType::Uint64,
                                                          MultipleMessageByteType::String>;
 
     using TestingType = MultipleMessageStreamingSave<MultipleMessageSize<MultipleMessageType>::value, MultipleMessageType>;
@@ -38,12 +41,12 @@ namespace Network
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, MultipleMessageStreamingSaveTesting)
 
-void Network::MultipleMessageStreamingSaveTesting ::MainTest()
+void Network::MultipleMessageStreamingSaveTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 }
 
-void Network::MultipleMessageStreamingSaveTesting ::BaseTest()
+void Network::MultipleMessageStreamingSaveTesting::BaseTest()
 {
     constexpr int8_t int8Value{ -8 };
     constexpr int16_t int16Value{ 24 };
@@ -62,49 +65,59 @@ void Network::MultipleMessageStreamingSaveTesting ::BaseTest()
     TestingType multipleMessageStreamingSave{};
 
     MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, ParserStrategy::LittleEndian) };
-    MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
+    MessageTarget messageTarget{ buffer };
 
-    multipleMessageStreamingSave.Save(multipleMessageContainer, *messageTarget);
+    multipleMessageStreamingSave.Save(multipleMessageContainer, messageTarget);
 
     auto initialBuffered = buffer->GetInitialBufferedPtr();
+    if (initialBuffered == nullptr)
+    {
+        return;
+    }
 
-    auto resultInt8Value = *reinterpret_cast<int8_t*>(initialBuffered);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    const auto resultInt8Value = *initialBuffered;
     ASSERT_EQUAL(resultInt8Value, int8Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultInt8Value);
 
-    auto resultUInt8Value = *reinterpret_cast<uint8_t*>(initialBuffered);
+    const auto resultUInt8Value = *reinterpret_cast<uint8_t*>(initialBuffered);
     ASSERT_EQUAL(resultUInt8Value, uint8Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultUInt8Value);
 
-    auto resultInt16Value = *reinterpret_cast<int16_t*>(initialBuffered);
+    const auto resultInt16Value = *reinterpret_cast<int16_t*>(initialBuffered);
     ASSERT_EQUAL(resultInt16Value, int16Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultInt16Value);
 
-    auto resultUInt16Value = *reinterpret_cast<uint16_t*>(initialBuffered);
+    const auto resultUInt16Value = *reinterpret_cast<uint16_t*>(initialBuffered);
     ASSERT_EQUAL(resultUInt16Value, uint16Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultUInt16Value);
 
-    auto resultInt32Value = *reinterpret_cast<int32_t*>(initialBuffered);
+    const auto resultInt32Value = *reinterpret_cast<int32_t*>(initialBuffered);
     ASSERT_EQUAL(resultInt32Value, int32Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultInt32Value);
 
-    auto resultUInt32Value = *reinterpret_cast<uint32_t*>(initialBuffered);
+    const auto resultUInt32Value = *reinterpret_cast<uint32_t*>(initialBuffered);
     ASSERT_EQUAL(resultUInt32Value, uint32Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultUInt32Value);
 
-    auto resultInt64Value = *reinterpret_cast<int64_t*>(initialBuffered);
+    const auto resultInt64Value = *reinterpret_cast<int64_t*>(initialBuffered);
     ASSERT_EQUAL(resultInt64Value, int64Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultInt64Value);
 
-    auto resultUInt64Value = *reinterpret_cast<uint64_t*>(initialBuffered);
+    const auto resultUInt64Value = *reinterpret_cast<uint64_t*>(initialBuffered);
     ASSERT_EQUAL(resultUInt64Value, uint64Value);
     initialBuffered += CORE_TOOLS_STREAM_SIZE(resultUInt64Value);
 
-    auto lenght = *reinterpret_cast<int32_t*>(initialBuffered);
+    const auto lenght = *reinterpret_cast<int32_t*>(initialBuffered);
     ASSERT_EQUAL(lenght, boost::numeric_cast<int32_t>(stringValue.size()));
     initialBuffered += CORE_TOOLS_STREAM_SIZE(lenght);
 
     string resultStringValue{ initialBuffered, initialBuffered + lenght };
+
+#include STSTEM_WARNING_POP
 
     ASSERT_EQUAL(resultStringValue, stringValue);
 }

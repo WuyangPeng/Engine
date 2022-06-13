@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 18:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/19 14:20)
 
 #include "CyclicRedundancyCheckHandleTesting.h"
 #include "CoreTools/CyclicRedundancyCheck/CyclicRedundancyCheckHandle.h"
@@ -15,7 +18,7 @@ using std::array;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CyclicRedundancyCheckHandleTesting)
 
-void CoreTools::CyclicRedundancyCheckHandleTesting ::MainTest()
+void CoreTools::CyclicRedundancyCheckHandleTesting::MainTest()
 {
     CyclicRedundancyCheckHandle::Create();
 
@@ -24,7 +27,7 @@ void CoreTools::CyclicRedundancyCheckHandleTesting ::MainTest()
     CyclicRedundancyCheckHandle::Destroy();
 }
 
-void CoreTools::CyclicRedundancyCheckHandleTesting ::HandleTest()
+void CoreTools::CyclicRedundancyCheckHandleTesting::HandleTest()
 {
     for (auto i = 0; i < 16; ++i)
     {

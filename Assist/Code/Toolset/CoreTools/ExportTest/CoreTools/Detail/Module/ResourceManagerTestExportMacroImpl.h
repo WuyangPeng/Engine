@@ -14,7 +14,7 @@
 
 namespace ResourceManager
 {
-    class RESOURCE_MANAGER_HIDDEN_DECLARE ResourceManagerTestExportMacroImpl final
+    class ResourceManagerTestExportMacroImpl final
     {
     public:
         using ClassType = ResourceManagerTestExportMacroImpl;

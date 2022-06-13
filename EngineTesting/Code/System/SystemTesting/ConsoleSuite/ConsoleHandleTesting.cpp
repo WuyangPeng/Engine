@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/08 13:11)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:06)
 
 #include "ConsoleHandleTesting.h"
 #include "System/Console/ConsoleHandle.h"
@@ -19,7 +19,7 @@
 using namespace std::literals;
 
 System::ConsoleHandleTesting::ConsoleHandleTesting(const OStreamShared& stream)
-    : ParentType{ stream }, m_StandardHandleFlags{ StandardHandle::Input, StandardHandle::Output, StandardHandle::Error }
+    : ParentType{ stream }, standardHandleFlags{ StandardHandle::Input, StandardHandle::Output, StandardHandle::Error }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -47,7 +47,7 @@ void System::ConsoleHandleTesting::HandleTest()
     auto outputHandle = CreateSystemFile(outputFileName.c_str(), FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::OpenAlways);
     ASSERT_TRUE(IsFileHandleValid(outputHandle));
 
-    for (auto flag : m_StandardHandleFlags)
+    for (auto flag : standardHandleFlags)
     {
         auto defaultHandle = GetStandardHandle(flag);
         ASSERT_TRUE(IsHandleValid(defaultHandle));

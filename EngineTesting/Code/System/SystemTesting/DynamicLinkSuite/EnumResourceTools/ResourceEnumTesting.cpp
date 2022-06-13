@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/03/30 18:40)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 12:47)
 
 #include "ResourceEnumTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
@@ -72,7 +72,9 @@ System::WindowsBool System::ResourceEnumTesting::TypeProcess(DynamicLinkModule m
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     auto testing = reinterpret_cast<const ClassType*>(lParam);
+
 #include STSTEM_WARNING_POP
 
     return EnumResourceNamesInLibrary(module, type, NameProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
@@ -84,7 +86,9 @@ System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule m
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     auto testing = reinterpret_cast<const ClassType*>(lParam);
+
 #include STSTEM_WARNING_POP
 
     return EnumResourceLanguagesInLibrary(module, type, name, LanguageProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
@@ -96,12 +100,14 @@ System::WindowsBool System::ResourceEnumTesting::LanguageProcess(MAYBE_UNUSED Dy
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     auto testing = reinterpret_cast<ClassType*>(lParam);
+
 #include STSTEM_WARNING_POP
 
     testing->AddEnumResourceData(EnumResourceData{ type, name, language });
 
-    return g_True;
+    return gTrue;
 }
 
 void System::ResourceEnumTesting::AddEnumResourceData(const EnumResourceData& data)

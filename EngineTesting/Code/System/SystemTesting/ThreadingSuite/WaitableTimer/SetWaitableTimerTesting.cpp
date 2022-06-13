@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/05/08 17:25)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/12 18:59)
 
 #include "SetWaitableTimerTesting.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
@@ -91,10 +91,10 @@ void System::SetWaitableTimerTesting::TimerAPCProcedure(WindowsVoidPtr argToComp
 
     auto classType = reinterpret_cast<ClassType*>(argToCompletionRoutine);
 
+#include STSTEM_WARNING_POP
+
     if (classType != nullptr)
     {
         classType->GetStream() << "这里进行了回调函数的调用。\n";
     }
-
-#include STSTEM_WARNING_POP
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/02 17:18)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 13:10)
 
 #include "CodePageValidTesting.h"
 #include "System/CharacterString/CodePage.h"
@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::CodePageValidTesting::CodePageValidTesting(const OStreamShared& stream)
-    : ParentType{ stream }, m_CodePageFlags{ CodePage::UTF7, CodePage::UTF8 }
+    : ParentType{ stream }, codePageFlags{ CodePage::UTF7, CodePage::UTF8 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -33,7 +33,7 @@ void System::CodePageValidTesting::MainTest()
 
 void System::CodePageValidTesting::ValidTest()
 {
-    for (auto codeFlag : m_CodePageFlags)
+    for (auto codeFlag : codePageFlags)
     {
         ASSERT_TRUE(IsCodePageValid(codeFlag));
     }

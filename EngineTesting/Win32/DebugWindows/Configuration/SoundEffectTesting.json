@@ -1,46 +1,37 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "configurationSuite":
-  {
+  "configurationSuite": {
 
   },
 
-  "interfaceSuite":
-  {
+  "interfaceSuite": {
 
   },
 
-  "csynUtilSuite": 
-  {
+  "csynUtilSuite": {
 
   },
 
-  "directSoundSuite": 
-  {
+  "directSoundSuite": {
 
   },
 
-  "oggSuite": 
-  {
+  "oggSuite": {
 
   },
 
-  "openALSuite":
-  {
+  "openALSuite": {
 
   },
 
-  "vorbisSuite":
-  {
+  "vorbisSuite": {
 
   },
 
-  "freeAlutSuite": 
-  {
+  "freeAlutSuite": {
 
   }
 }

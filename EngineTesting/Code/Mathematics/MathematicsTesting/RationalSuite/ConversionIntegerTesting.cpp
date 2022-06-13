@@ -1,256 +1,245 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/23 09:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 11:30)
 
 #include "ConversionIntegerTesting.h"
-#include "Mathematics/Base/MathDetail.h"
-#include "Mathematics/Base/Log2OfPowerOfTwoDetail.h"
-#include "Mathematics/Rational/ConversionIntegerDetail.h"
-#include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Base/Log2OfPowerOfTwoDetail.h"
+#include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Rational/ConversionIntegerDetail.h"
+#include "Mathematics/Rational/FloatingPointAnalysisDetail.h"
 
-#include <random>  
+#include <random>
 
+using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConversionIntegerTesting) 
 
-void Mathematics::ConversionIntegerTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConversionIntegerTesting)
+
+void Mathematics::ConversionIntegerTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(NumericalValueSymbolTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ExponentTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(MantissaTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(UnsignedIntegerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NumericalValueSymbolTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ExponentTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MantissaTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(IntegerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(UnsignedIntegerTest);
 }
 
-void Mathematics::ConversionIntegerTesting
-	::NumericalValueSymbolTest()
+void Mathematics::ConversionIntegerTesting::NumericalValueSymbolTest()
 {
-	default_random_engine generator{};
-	uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-	uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-	uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-	uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator{};
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution{ -1.0e-1f, 1.0e-1f };
+    const uniform_real<double> fourthRandomDistribution{ -1.0e-1, 1.0e-1 };
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		float firstValue = firstRandomDistribution(generator);
-		ConversionInteger<float> firstIntegerConversion(firstValue);
+    const auto testLoopCount = GetTestLoopCount();
 
-		if (0.0 <= firstValue)
-		{
-			ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
-		}
-		else
-		{
-			ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(),NumericalValueSymbol::Negative);
-		}
-		
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        auto firstValue = firstRandomDistribution(generator);
+        const ConversionInteger<float> firstIntegerConversion(firstValue);
 
-		double secondValue = secondRandomDistribution(generator);
-		ConversionInteger<double> secondIntegerConversion(secondValue);
+        if (0.0 <= firstValue)
+        {
+            ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+        }
+        else
+        {
+            ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
+        }
 
-		if (0.0 <= secondValue)
-		{
-			ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(),NumericalValueSymbol::Positive);
-		}
-		else
-		{
-			ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(),NumericalValueSymbol::Negative);
-		}
+        auto secondValue = secondRandomDistribution(generator);
+        const ConversionInteger<double> secondIntegerConversion(secondValue);
 
-		float thirdValue = thirdRandomDistribution(generator);
-		ConversionInteger<float> thirdIntegerConversion(thirdValue);
-				
-		ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(),NumericalValueSymbol::Positive);		
+        if (0.0 <= secondValue)
+        {
+            ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+        }
+        else
+        {
+            ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
+        }
 
-		double fourthValue = fourthRandomDistribution(generator);
-		ConversionInteger<double> fourthIntegerConversion(fourthValue);
-		
-		ASSERT_ENUM_EQUAL(fourthIntegerConversion.GetSymbol(),NumericalValueSymbol::Positive);
-	}
+        auto thirdValue = thirdRandomDistribution(generator);
+        const ConversionInteger<float> thirdIntegerConversion(thirdValue);
+
+        ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+
+        auto fourthValue = fourthRandomDistribution(generator);
+        const ConversionInteger<double> fourthIntegerConversion(fourthValue);
+
+        ASSERT_ENUM_EQUAL(fourthIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    }
 }
 
-void Mathematics::ConversionIntegerTesting
-	::ExponentTest() 
+void Mathematics::ConversionIntegerTesting::ExponentTest()
 {
-	default_random_engine generator{};
-	uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-	uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-	uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-	uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    default_random_engine generator{};
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution{ -1.0e-1f, 1.0e-1f };
+    const uniform_real<double> fourthRandomDistribution{ -1.0e-1, 1.0e-1 };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop) 
-	{
-		float firstValue = firstRandomDistribution(generator);
-		ConversionInteger<float> firstIntegerConversion(firstValue);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        auto firstValue = firstRandomDistribution(generator);
+        const ConversionInteger<float> firstIntegerConversion(firstValue);
 
-		int firstRealExponent = firstIntegerConversion.GetShifting();
-		float secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
-		ConversionInteger<float> secondIntegerConversion(secondValue);
+        const auto firstRealExponent = firstIntegerConversion.GetShifting();
+        auto secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
+        const ConversionInteger<float> secondIntegerConversion(secondValue);
 
-		ASSERT_EQUAL(firstIntegerConversion.GetShifting(),secondIntegerConversion.GetShifting());
+        ASSERT_EQUAL(firstIntegerConversion.GetShifting(), secondIntegerConversion.GetShifting());
 
-		double thirdValue = secondRandomDistribution(generator);
-		ConversionInteger<double> thirdIntegerConversion(thirdValue);
+        auto thirdValue = secondRandomDistribution(generator);
+        const ConversionInteger<double> thirdIntegerConversion(thirdValue);
 
-		int secondRealExponent = thirdIntegerConversion.GetShifting();
-		double fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
-		ConversionInteger<double> fourthIntegerConversion(fourthValue);
+        const auto secondRealExponent = thirdIntegerConversion.GetShifting();
+        auto fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
+        const ConversionInteger<double> fourthIntegerConversion(fourthValue);
 
-		ASSERT_EQUAL(thirdIntegerConversion.GetShifting(),fourthIntegerConversion.GetShifting());
+        ASSERT_EQUAL(thirdIntegerConversion.GetShifting(), fourthIntegerConversion.GetShifting());
 
-		float fifthValue = thirdRandomDistribution(generator);
-		ConversionInteger<float> fifthIntegerConversion(fifthValue);
-				 
-		ASSERT_EQUAL(fifthIntegerConversion.GetShifting(),0);
+        auto fifthValue = thirdRandomDistribution(generator);
+        const ConversionInteger<float> fifthIntegerConversion(fifthValue);
 
-		double seventhValue = fourthRandomDistribution(generator);
-		ConversionInteger<double> seventhIntegerConversion(seventhValue);
+        ASSERT_EQUAL(fifthIntegerConversion.GetShifting(), 0);
 
-		ASSERT_EQUAL(seventhIntegerConversion.GetShifting(), 0);	
-	}
+        auto seventhValue = fourthRandomDistribution(generator);
+        const ConversionInteger<double> seventhIntegerConversion(seventhValue);
+
+        ASSERT_EQUAL(seventhIntegerConversion.GetShifting(), 0);
+    }
 }
 
-void Mathematics::ConversionIntegerTesting
-	::MantissaTest() 
+void Mathematics::ConversionIntegerTesting::MantissaTest()
 {
-	default_random_engine generator{};
-	uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
-	uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
-	uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
-	uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
-	uniform_int<> fifthRandomDistribution(0,38);
-	uniform_int<> sixthRandomDistribution(0,308);
+    default_random_engine generator{};
+    const uniform_real<float> firstRandomDistribution{ -1.0e38f, 1.0e38f };
+    const uniform_real<double> secondRandomDistribution{ -1.0e300, 1.0e300 };
+    const uniform_real<float> thirdRandomDistribution(-1.0e-1f, 1.0e-1f);
+    const uniform_real<double> fourthRandomDistribution(-1.0e-1, 1.0e-1);
+    const uniform_int<> fifthRandomDistribution(0, 38);
+    const uniform_int<> sixthRandomDistribution(0, 308);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		float firstValue = firstRandomDistribution(generator);
-		ConversionInteger<float> firstIntegerConversion(firstValue);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        auto firstValue = firstRandomDistribution(generator);
+        const ConversionInteger<float> firstIntegerConversion(firstValue);
 
-		int firstExponent = firstIntegerConversion.GetShifting();
-		uint64_t firstMantissa = firstIntegerConversion.GetMantissa();
-		NumericalValueSymbol firstSign = firstIntegerConversion.GetSymbol();
+        auto firstExponent = firstIntegerConversion.GetShifting();
+        auto firstMantissa = firstIntegerConversion.GetMantissa();
+        auto firstSign = firstIntegerConversion.GetSymbol();
 
-		float secondValue = static_cast<float>(firstMantissa) /	MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) * MathF::Pow(2.0f, static_cast<float>(firstExponent));
+        auto secondValue = static_cast<float>(firstMantissa) / MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) * MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
-		if (firstSign == NumericalValueSymbol::Negative)
-			secondValue = -secondValue;
+        if (firstSign == NumericalValueSymbol::Negative)
+            secondValue = -secondValue;
 
-		ConversionInteger<float> secondIntegerConversion(secondValue);
+        const ConversionInteger<float> secondIntegerConversion(secondValue);
 
-		ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(),secondIntegerConversion.GetSymbol());
+        ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), secondIntegerConversion.GetSymbol());
 
-		ASSERT_EQUAL(firstIntegerConversion.GetShifting(),secondIntegerConversion.GetShifting());
+        ASSERT_EQUAL(firstIntegerConversion.GetShifting(), secondIntegerConversion.GetShifting());
 
-		ASSERT_EQUAL(firstIntegerConversion.GetMantissa(),secondIntegerConversion.GetMantissa());
+        ASSERT_EQUAL(firstIntegerConversion.GetMantissa(), secondIntegerConversion.GetMantissa());
 
-		ASSERT_EQUAL(firstIntegerConversion.GetMantissaSize(),secondIntegerConversion.GetMantissaSize());		
+        ASSERT_EQUAL(firstIntegerConversion.GetMantissaSize(), secondIntegerConversion.GetMantissaSize());
 
-		double thirdValue = secondRandomDistribution(generator);
-		ConversionInteger<double> thirdIntegerConversion(thirdValue);
+        auto thirdValue = secondRandomDistribution(generator);
+        const ConversionInteger<double> thirdIntegerConversion(thirdValue);
 
-		int secondExponent = thirdIntegerConversion.GetShifting();
-		uint64_t secondMantissa = thirdIntegerConversion.GetMantissa();
-		NumericalValueSymbol secondSign = thirdIntegerConversion.GetSymbol();
+        auto secondExponent = thirdIntegerConversion.GetShifting();
+        auto secondMantissa = thirdIntegerConversion.GetMantissa();
+        auto secondSign = thirdIntegerConversion.GetSymbol();
 
-		double fourthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) * MathD::Pow(2.0, static_cast<double>(secondExponent));
+        auto fourthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) * MathD::Pow(2.0, static_cast<double>(secondExponent));
 
-		if (secondSign == NumericalValueSymbol::Negative)
-			fourthValue = -fourthValue;
+        if (secondSign == NumericalValueSymbol::Negative)
+            fourthValue = -fourthValue;
 
-		ConversionInteger<double> fourthIntegerConversion(fourthValue);
+        const ConversionInteger<double> fourthIntegerConversion(fourthValue);
 
-		ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(),fourthIntegerConversion.GetSymbol());
+        ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), fourthIntegerConversion.GetSymbol());
 
-		ASSERT_EQUAL(thirdIntegerConversion.GetShifting(),fourthIntegerConversion.GetShifting());
+        ASSERT_EQUAL(thirdIntegerConversion.GetShifting(), fourthIntegerConversion.GetShifting());
 
-		ASSERT_EQUAL(thirdIntegerConversion.GetMantissa(),fourthIntegerConversion.GetMantissa());
+        ASSERT_EQUAL(thirdIntegerConversion.GetMantissa(), fourthIntegerConversion.GetMantissa());
 
-		float fifthValue = thirdRandomDistribution(generator);
-		ConversionInteger<float> fifthIntegerConversion(fifthValue);
+        auto fifthValue = thirdRandomDistribution(generator);
+        const ConversionInteger<float> fifthIntegerConversion(fifthValue);
 
-		firstExponent = fifthIntegerConversion.GetShifting();
-		firstMantissa = fifthIntegerConversion.GetMantissa();
-		firstSign = fifthIntegerConversion.GetSymbol();
+        firstExponent = fifthIntegerConversion.GetShifting();
+        firstMantissa = fifthIntegerConversion.GetMantissa();
+        firstSign = fifthIntegerConversion.GetSymbol();
 
-		ASSERT_EQUAL(firstExponent, 0);
-		ASSERT_EQUAL(firstMantissa, 0);
-		ASSERT_ENUM_EQUAL(firstSign, NumericalValueSymbol::Positive);
+        ASSERT_EQUAL(firstExponent, 0);
+        ASSERT_EQUAL(firstMantissa, 0);
+        ASSERT_ENUM_EQUAL(firstSign, NumericalValueSymbol::Positive);
 
-		double seventhValue = fourthRandomDistribution(generator);
-		ConversionInteger<double> seventhIntegerConversion(seventhValue);
+        auto seventhValue = fourthRandomDistribution(generator);
+        const ConversionInteger<double> seventhIntegerConversion(seventhValue);
 
-		secondExponent = seventhIntegerConversion.GetShifting();
-		secondMantissa = seventhIntegerConversion.GetMantissa();
-		secondSign = seventhIntegerConversion.GetSymbol();
+        secondExponent = seventhIntegerConversion.GetShifting();
+        secondMantissa = seventhIntegerConversion.GetMantissa();
+        secondSign = seventhIntegerConversion.GetSymbol();
 
-		ASSERT_EQUAL(secondExponent, 0);
-		ASSERT_EQUAL(secondMantissa, 0);
-		ASSERT_ENUM_EQUAL(secondSign, NumericalValueSymbol::Positive);
-	}
+        ASSERT_EQUAL(secondExponent, 0);
+        ASSERT_EQUAL(secondMantissa, 0);
+        ASSERT_ENUM_EQUAL(secondSign, NumericalValueSymbol::Positive);
+    }
 }
 
-void Mathematics::ConversionIntegerTesting
-	::IntegerTest() 
+void Mathematics::ConversionIntegerTesting::IntegerTest()
 {
-	ConversionInteger<int> firstIntegerConversion(20);
+    const ConversionInteger<int> firstIntegerConversion(20);
 
-	ASSERT_EQUAL(firstIntegerConversion.GetShifting(),Log2OfPowerOfTwo<int>(22).GetLog2());
-	ASSERT_EQUAL(firstIntegerConversion.GetMantissa(), 20);
-	ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(firstIntegerConversion.GetShifting(), Log2OfPowerOfTwo<int>(22).GetLog2());
+    ASSERT_EQUAL(firstIntegerConversion.GetMantissa(), 20);
+    ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
 
-	ConversionInteger<int16_t> secondIntegerConversion(-120);
+    const ConversionInteger<int16_t> secondIntegerConversion(-120);
 
-	ASSERT_EQUAL(secondIntegerConversion.GetShifting(),Log2OfPowerOfTwo<int16_t>(120).GetLog2());
-	ASSERT_EQUAL(secondIntegerConversion.GetMantissa(), 120);
-	ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
+    ASSERT_EQUAL(secondIntegerConversion.GetShifting(), Log2OfPowerOfTwo<int16_t>(120).GetLog2());
+    ASSERT_EQUAL(secondIntegerConversion.GetMantissa(), 120);
+    ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Negative);
 
-	ConversionInteger<int64_t> thirdIntegerConversion(0);
+    const ConversionInteger<int64_t> thirdIntegerConversion(0);
 
-	ASSERT_EQUAL(thirdIntegerConversion.GetShifting(), 0);
-	ASSERT_EQUAL(thirdIntegerConversion.GetMantissa(), 0);
-	ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(thirdIntegerConversion.GetShifting(), 0);
+    ASSERT_EQUAL(thirdIntegerConversion.GetMantissa(), 0);
+    ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
 }
 
-void Mathematics::ConversionIntegerTesting
-	::UnsignedIntegerTest() 
+void Mathematics::ConversionIntegerTesting::UnsignedIntegerTest()
 {
-	ConversionInteger<uint32_t> firstIntegerConversion(20);
+    const ConversionInteger<uint32_t> firstIntegerConversion(20);
 
-	ASSERT_EQUAL(static_cast<uint32_t>(firstIntegerConversion.GetShifting()),Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
-	ASSERT_EQUAL(firstIntegerConversion.GetMantissa(), 20);
-	ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(static_cast<uint32_t>(firstIntegerConversion.GetShifting()), Log2OfPowerOfTwo<uint32_t>(22).GetLog2());
+    ASSERT_EQUAL(firstIntegerConversion.GetMantissa(), 20);
+    ASSERT_ENUM_EQUAL(firstIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
 
-	ConversionInteger<uint8_t> secondIntegerConversion(120);
+    const ConversionInteger<uint8_t> secondIntegerConversion(120);
 
-	ASSERT_EQUAL(static_cast<uint8_t>(secondIntegerConversion.GetShifting()),Log2OfPowerOfTwo<uint8_t>(120).GetLog2());
-	ASSERT_EQUAL(secondIntegerConversion.GetMantissa(), 120);
-	ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(static_cast<uint8_t>(secondIntegerConversion.GetShifting()), Log2OfPowerOfTwo<uint8_t>(120).GetLog2());
+    ASSERT_EQUAL(secondIntegerConversion.GetMantissa(), 120);
+    ASSERT_ENUM_EQUAL(secondIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
 
-	ConversionInteger<uint64_t> thirdIntegerConversion(0);
+    const ConversionInteger<uint64_t> thirdIntegerConversion(0);
 
-	ASSERT_EQUAL(thirdIntegerConversion.GetShifting(), 0);
-	ASSERT_EQUAL(thirdIntegerConversion.GetMantissa(), 0);
-	ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
+    ASSERT_EQUAL(thirdIntegerConversion.GetShifting(), 0);
+    ASSERT_EQUAL(thirdIntegerConversion.GetMantissa(), 0);
+    ASSERT_ENUM_EQUAL(thirdIntegerConversion.GetSymbol(), NumericalValueSymbol::Positive);
 }
-
-

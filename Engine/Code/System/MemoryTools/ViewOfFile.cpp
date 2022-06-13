@@ -103,7 +103,7 @@ bool System::FlushSystemViewOfFile(WindowsVoidPtr baseAddress, WindowsSize numbe
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::FlushViewOfFile(baseAddress, numberOfBytesToFlush) != g_False)
+    if (::FlushViewOfFile(baseAddress, numberOfBytesToFlush) != gFalse)
         return true;
     else
         return false;
@@ -121,7 +121,7 @@ bool System::UnmapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::UnmapViewOfFile(baseAddress) != g_False)
+    if (::UnmapViewOfFile(baseAddress) != gFalse)
         return true;
     else
         return false;
@@ -139,7 +139,7 @@ bool System::CloseFileMapping(WindowsHandle fileMappingHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(fileMappingHandle) != g_False)
+    if (::CloseHandle(fileMappingHandle) != gFalse)
         return true;
     else
         return false;

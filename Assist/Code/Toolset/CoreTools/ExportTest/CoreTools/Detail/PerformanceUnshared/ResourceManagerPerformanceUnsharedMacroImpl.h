@@ -14,7 +14,7 @@
 
 namespace ResourceManager
 {
-    class RESOURCE_MANAGER_HIDDEN_DECLARE ResourceManagerPerformanceUnsharedMacroImpl final
+    class ResourceManagerPerformanceUnsharedMacroImpl final
     {
     public:
         using ClassType = ResourceManagerPerformanceUnsharedMacroImpl;

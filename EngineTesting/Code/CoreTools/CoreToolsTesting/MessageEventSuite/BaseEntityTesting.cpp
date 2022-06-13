@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/06 19:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/18 16:23)
 
 #include "BaseEntityTesting.h"
 #include "Detail/Entity.h"
@@ -15,7 +18,7 @@ using std::shared_ptr;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BaseEntityTesting)
 
-void CoreTools::BaseEntityTesting ::MainTest()
+void CoreTools::BaseEntityTesting::MainTest()
 {
     EntityManager::Create();
 
@@ -23,14 +26,12 @@ void CoreTools::BaseEntityTesting ::MainTest()
 
     EntityManager::Destroy();
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-void CoreTools::BaseEntityTesting ::BaseTest()
+
+void CoreTools::BaseEntityTesting::BaseTest()
 {
-    shared_ptr<Entity> entity{ make_shared<Entity>() };
+    auto entity = Entity::Create(0);
 
     entity->Register();
 
     ASSERT_LESS(0, entity->GetEntityID());
 }
-#include STSTEM_WARNING_POP

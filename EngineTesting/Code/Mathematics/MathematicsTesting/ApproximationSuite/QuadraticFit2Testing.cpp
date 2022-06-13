@@ -1,14 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/29 14:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 16:57)
 
 #include "QuadraticFit2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Approximation/QuadraticFit2Detail.h"
+
 #include <random>
 
 using std::default_random_engine;
@@ -23,26 +27,23 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuadraticFit2Testing)
 
-void Mathematics::QuadraticFit2Testing ::MainTest()
+void Mathematics::QuadraticFit2Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::QuadraticFit2Testing ::FitTest()
+
+void Mathematics::QuadraticFit2Testing::FitTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(3, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(3, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const int size = secondRandomDistribution(generator);
 
         for (int k = 0; k < size; ++k)
         {
@@ -52,7 +53,7 @@ void Mathematics::QuadraticFit2Testing ::FitTest()
         QuadraticFit2D quadraticFit2(vertices);
 
         VariableLengthVectorD coeff = quadraticFit2.GetCoeff();
-        double eigenValue = quadraticFit2.GetEigenValue();
+        const double eigenValue = quadraticFit2.GetEigenValue();
 
         ASSERT_TRUE(0.0 <= eigenValue && eigenValue <= 1.0);
 
@@ -60,11 +61,11 @@ void Mathematics::QuadraticFit2Testing ::FitTest()
 
         for (int k = 0; k < size; ++k)
         {
-            double value = coeff[0] + coeff[1] * vertices[k].GetX() +
-                           coeff[2] * vertices[k].GetY() +
-                           coeff[3] * vertices[k].GetX() * vertices[k].GetX() +
-                           coeff[4] * vertices[k].GetY() * vertices[k].GetY() +
-                           coeff[5] * vertices[k].GetX() * vertices[k].GetY();
+            const double value = coeff[0] + coeff[1] * vertices.at(k).GetX() +
+                                 coeff[2] * vertices.at(k).GetY() +
+                                 coeff[3] * vertices.at(k).GetX() * vertices.at(k).GetX() +
+                                 coeff[4] * vertices.at(k).GetY() * vertices.at(k).GetY() +
+                                 coeff[5] * vertices.at(k).GetX() * vertices.at(k).GetY();
 
             if (eigenValue <= MathD::GetZeroTolerance())
             {

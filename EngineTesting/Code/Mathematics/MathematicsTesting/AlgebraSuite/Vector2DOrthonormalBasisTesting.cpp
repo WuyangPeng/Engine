@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/22 11:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 22:58)
 
 #include "Vector2DOrthonormalBasisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,11 +19,8 @@ using std::default_random_engine;
 using std::uniform_real;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector2OrthonormalBasisTesting)
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-void Mathematics::Vector2OrthonormalBasisTesting ::MainTest()
+
+void Mathematics::Vector2OrthonormalBasisTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(OrthonormalBasisTest);
 }
@@ -29,8 +29,8 @@ void Mathematics::Vector2OrthonormalBasisTesting::OrthonormalBasisTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
-    uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
+    const uniform_real<double> firstRandomDistribution{ -10.0, 10.0 };
+    const uniform_real<float> secondRandomDistribution{ -10.0f, 10.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -40,7 +40,7 @@ void Mathematics::Vector2OrthonormalBasisTesting::OrthonormalBasisTest()
 
         Vector2F secondVector(secondRandomDistribution(generator), secondRandomDistribution(generator));
 
-        Vector2OrthonormalBasisD firstOrthonormalBasis(firstVector);
+        const Vector2OrthonormalBasisD firstOrthonormalBasis(firstVector);
 
         firstVector.Normalize();
 
@@ -48,7 +48,7 @@ void Mathematics::Vector2OrthonormalBasisTesting::OrthonormalBasisTest()
 
         ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2(firstVector[1], -firstVector[0]), firstOrthonormalBasis.GetVVector(), 1e-10));
 
-        Vector2OrthonormalBasisF secondOrthonormalBasis(secondVector);
+        const Vector2OrthonormalBasisF secondOrthonormalBasis(secondVector);
 
         secondVector.Normalize();
 

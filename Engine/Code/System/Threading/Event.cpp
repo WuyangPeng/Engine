@@ -54,7 +54,7 @@ bool System::CloseSystemEvent(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::CloseHandle(handle) != g_False)
+    if (::CloseHandle(handle) != gFalse)
         return true;
     else
         return false;
@@ -72,7 +72,7 @@ bool System::SetSystemEvent(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetEvent(handle) != g_False)
+    if (::SetEvent(handle) != gFalse)
         return true;
     else
         return false;
@@ -90,7 +90,7 @@ bool System::ResetSystemEvent(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ResetEvent(handle) != g_False)
+    if (::ResetEvent(handle) != gFalse)
         return true;
     else
         return false;

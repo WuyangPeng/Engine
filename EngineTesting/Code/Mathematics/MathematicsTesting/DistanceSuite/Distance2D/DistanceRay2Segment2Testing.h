@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/29 17:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 11:12)
 
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_RAY2_SEGMENT2_TESTING_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_RAY2_SEGMENT2_TESTING_H
@@ -11,21 +14,21 @@
 
 namespace Mathematics
 {
-	class DistanceRay2Segment2Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceRay2Segment2Testing); 
+    class DistanceRay2Segment2Testing : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DistanceRay2Segment2Testing);
 
-	private:
-		void MainTest();		
-		void BaseTest();
-		void StaticTest();
-		void DynamicTest();
-		void DerivativeTest();
-		void IntervalTest();
+    private:
+        void MainTest();
+        void BaseTest();
+        void StaticTest();
+        void DynamicTest();
+        void DerivativeTest();
+        void IntervalTest();
 
-		void DoRunUnitTest() override; 
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_DISTANCE_SUITE_DISTANCE_RAY2_SEGMENT2_TESTING_H
+#endif  // MATHEMATICS_DISTANCE_SUITE_DISTANCE_RAY2_SEGMENT2_TESTING_H

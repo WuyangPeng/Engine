@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/07 14:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/06/11 18:02)
 
 #include "AlphaStateTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -86,37 +89,7 @@ void Rendering::AlphaStateTesting::CopyTest()
     ASSERT_APPROXIMATE(secondAlphaState.GetReference(), 0.51f, 1e-8f);
     ASSERT_APPROXIMATE(firstAlphaState.GetReference(), 0.5f, 1e-8f);
 }
-#include SYSTEM_WARNING_DISABLE(26440)
-void Rendering::AlphaStateTesting::StreamTest()
+
+void Rendering::AlphaStateTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	AlphaStateSharedPtr firstAlphaState(new AlphaState(CoreTools::DisableNotThrow::Disable));
-    // 	firstAlphaState->SetBlendEnabled(true);
-    // 	firstAlphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::DestinationColor);
-    // 	firstAlphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::One);
-    // 	firstAlphaState->SetCompareEnabled(true);
-    // 	firstAlphaState->SetCompare(AlphaStateFlags::CompareMode::Less);
-    // 	firstAlphaState->SetReference(0.5f);
-    // 	firstAlphaState->SetConstantColor(Colour<float>(0.5f, 0.1f, 0.4f, 0.2f));
-    //
-    // 	outTopLevel.Insert(firstAlphaState);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	AlphaStateSharedPtr secondAlphaState = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<AlphaStateSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstAlphaState->IsBlendEnabled(), secondAlphaState->IsBlendEnabled());
-    // 	ASSERT_ENUM_EQUAL(secondAlphaState->GetSourceBlend(), firstAlphaState->GetSourceBlend());
-    // 	ASSERT_ENUM_EQUAL(secondAlphaState->GetDestinationBlend(), firstAlphaState->GetDestinationBlend());
-    // 	ASSERT_EQUAL(firstAlphaState->IsCompareEnabled(), secondAlphaState->IsCompareEnabled());
-    // 	ASSERT_ENUM_EQUAL(secondAlphaState->GetCompare(), firstAlphaState->GetCompare());
-    // 	ASSERT_APPROXIMATE(secondAlphaState->GetReference(), firstAlphaState->GetReference(), 1e-8f);
-    // 	ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, firstAlphaState->GetConstantColor(),secondAlphaState->GetConstantColor(),1e-8f);
 }

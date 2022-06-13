@@ -1,72 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/22 09:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 22:33)
 
 #include "QuaternionSwingTwistTesting.h"
-#include "Mathematics/Algebra/Vector3.h"
-#include "Mathematics/Algebra/QuaternionDetail.h"
-#include "Mathematics/Algebra/QuaternionSwingTwistDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/QuaternionDetail.h"
+#include "Mathematics/Algebra/QuaternionSwingTwistDetail.h"
+#include "Mathematics/Algebra/Vector3.h"
 
-#include <random> 
+#include <random>
 
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class QuaternionSwingTwist<float>;
-	template class QuaternionSwingTwist<double>;
+    template class QuaternionSwingTwist<float>;
+    template class QuaternionSwingTwist<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,QuaternionSwingTwistTesting) 
 
-void Mathematics::QuaternionSwingTwistTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QuaternionSwingTwistTesting)
+
+void Mathematics::QuaternionSwingTwistTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(QuaternionSwingTwistTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(QuaternionSwingTwistTest);
 }
 
-void Mathematics::QuaternionSwingTwistTesting
-	::QuaternionSwingTwistTest()
+void Mathematics::QuaternionSwingTwistTesting::QuaternionSwingTwistTest()
 {
-	default_random_engine generator{};
-	uniform_real<double> randomDistribution{ -10.0,10.0 };
+    default_random_engine generator{};
+    const uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		Vector3D firstVector(randomDistribution(generator),
-			                  randomDistribution(generator),
-							  randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector3D firstVector(randomDistribution(generator),
+                             randomDistribution(generator),
+                             randomDistribution(generator));
 
-		firstVector.Normalize();
+        firstVector.Normalize();
 
-		QuaternionD firstQuaternion(randomDistribution(generator),
-			                        randomDistribution(generator),
-									randomDistribution(generator),
-									randomDistribution(generator));
+        QuaternionD firstQuaternion(randomDistribution(generator),
+                                    randomDistribution(generator),
+                                    randomDistribution(generator),
+                                    randomDistribution(generator));
 
-		firstQuaternion.Normalize();
+        firstQuaternion.Normalize();
 
-		QuaternionD::QuaternionSwingTwist quaternionSwingTwist = firstQuaternion.DecomposeTwistTimesSwing(firstVector,1e-10);
+        QuaternionD::QuaternionSwingTwist quaternionSwingTwist = firstQuaternion.DecomposeTwistTimesSwing(firstVector, 1e-10);
 
-		QuaternionD  secondQuaternion = quaternionSwingTwist.GetTwist() * quaternionSwingTwist.GetSwing();
+        QuaternionD secondQuaternion = quaternionSwingTwist.GetTwist() * quaternionSwingTwist.GetSwing();
 
-		ASSERT_TRUE(Approximate(firstQuaternion, secondQuaternion,1e-10)); 
+        ASSERT_TRUE(Approximate(firstQuaternion, secondQuaternion, 1e-10));
 
-		quaternionSwingTwist =	firstQuaternion.DecomposeSwingTimesTwist(firstVector,1e-10);
+        quaternionSwingTwist = firstQuaternion.DecomposeSwingTimesTwist(firstVector, 1e-10);
 
-		secondQuaternion = quaternionSwingTwist.GetSwing() * quaternionSwingTwist.GetTwist();
+        secondQuaternion = quaternionSwingTwist.GetSwing() * quaternionSwingTwist.GetTwist();
 
-		ASSERT_TRUE(Approximate(firstQuaternion, secondQuaternion,1e-10)); 		 	
-	}	
+        ASSERT_TRUE(Approximate(firstQuaternion, secondQuaternion, 1e-10));
+    }
 }
-

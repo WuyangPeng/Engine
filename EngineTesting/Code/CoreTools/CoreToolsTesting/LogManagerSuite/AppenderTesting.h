@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/05 17:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 10:50)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_SUITE_APPENDER_TESTING_H
 #define CORE_TOOLS_LOG_MANAGER_SUITE_APPENDER_TESTING_H
@@ -11,34 +14,34 @@
 
 namespace CoreTools
 {
-	class AppenderTesting : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AppenderTesting);
+    class AppenderTesting : public UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AppenderTesting);
 
-	private:
-		void MainTest();
+    private:
+        void MainTest();
 
-		void ConsoleTest();
-		void FileTest();
-		void FileConfigurationTest();
-		void SetLogLevelTest();
+        void ConsoleTest();
+        void FileTest();
+        void FileConfigurationTest();
+        void SetLogLevelTest();
 
-		// File≤‚ ‘
-		void FileLogTest();
-		void FileContentTest();
-		void BackupFileTest();
-		void BackupFileContentTest();
-		void DeleteFileTest();
-		System::String GetBackupFileName();
+        // File≤‚ ‘
+        void FileLogTest();
+        void FileContentTest();
+        void BackupFileTest();
+        void BackupFileContentTest();
+        void DeleteFileTest();
+        NODISCARD System::String GetBackupFileName();
 
-		void DoRunUnitTest() override;
+        void DoRunUnitTest() override;
 
-	private:
-		System::String m_AppenderTestingName;
-		System::String m_AppenderTestingFullName;
-		System::String m_BackupFileName;
-	};
+    private:
+        System::String appenderTestingName;
+        System::String appenderTestingFullName;
+        System::String backupFileName;
+    };
 }
 
-#endif // CORE_TOOLS_LOG_MANAGER_SUITE_APPENDER_TESTING_H
+#endif  // CORE_TOOLS_LOG_MANAGER_SUITE_APPENDER_TESTING_H

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/27 13:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/01 15:31)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_IMPLICIT_EULER_TESTING_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_IMPLICIT_EULER_TESTING_H
@@ -14,26 +17,26 @@
 
 namespace Mathematics
 {
-	class OdeImplicitEulerTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OdeImplicitEulerTesting); 
+    class OdeImplicitEulerTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OdeImplicitEulerTesting);
 
-		int GetDimension() const;
+        NODISCARD int GetDimension() const noexcept;
 
-	private:
-		void MainTest();  
-		void SolverTest();
-		
-		void DoRunUnitTest() override;	
+    private:
+        void MainTest();
+        void SolverTest();
 
-		static const std::vector<double> OdeImplicitEulerFunction(double tIn, const std::vector<double>& xIn,const OdeImplicitEulerTesting* odeEulerTesting);
+        void DoRunUnitTest() override;
 
-		static const VariableMatrixD OdeImplicitEulerDerivativeFunction(double tIn, const std::vector<double>& xIn,const OdeImplicitEulerTesting* odeEulerTesting);
+        NODISCARD static std::vector<double> OdeImplicitEulerFunction(double tIn, const std::vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting);
 
-	private:
-		int m_Dimension; 	
-	};
+        NODISCARD static VariableMatrixD OdeImplicitEulerDerivativeFunction(double tIn, const std::vector<double>& xIn, const OdeImplicitEulerTesting* odeEulerTesting);
+
+    private:
+        int dimension;
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_IMPLICIT_EULER_TESTING_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ODE_IMPLICIT_EULER_TESTING_H

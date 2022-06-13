@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/07 14:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.8 (2022/06/11 18:36)
 
 #include "OffsetStateTesting.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
@@ -77,31 +80,4 @@ void Rendering::OffsetStateTesting::CopyTest()
 
 void Rendering::OffsetStateTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    //
-    // 	OffsetStateSharedPtr firstOffsetState(new OffsetState(CoreTools::DisableNotThrow::Disable));
-    //
-    // 	firstOffsetState->SetFillEnabled(true);
-    // 	firstOffsetState->SetLineEnabled(true);
-    // 	firstOffsetState->SetPointEnabled(true);
-    // 	firstOffsetState->SetScale(1.5f);
-    // 	firstOffsetState->SetBias(1.6f);
-    //
-    // 	outTopLevel.Insert(firstOffsetState);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	OffsetStateSharedPtr secondOffsetState =	inTopLevel[0].PolymorphicDowncastObjectSharedPtr<OffsetStateSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstOffsetState->IsFillEnabled(), secondOffsetState->IsFillEnabled());
-    // 	ASSERT_EQUAL(firstOffsetState->IsLineEnabled(), secondOffsetState->IsLineEnabled());
-    // 	ASSERT_EQUAL(firstOffsetState->IsPointEnabled(), secondOffsetState->IsPointEnabled());
-    // 	ASSERT_APPROXIMATE(firstOffsetState->GetScale(), secondOffsetState->GetScale(), 1e-8f);
-    // 	ASSERT_APPROXIMATE(firstOffsetState->GetBias(), secondOffsetState->GetBias(), 1e-8f);
 }

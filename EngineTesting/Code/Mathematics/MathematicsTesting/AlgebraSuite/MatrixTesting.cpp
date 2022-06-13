@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/21 18:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 22:07)
 
 #include "MatrixTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,16 +19,14 @@
 #include "Mathematics/Algebra/Vector4.h"
 
 #include <random>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 using std::default_random_engine;
 using std::uniform_real;
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, MatrixTesting)
 
-void Mathematics::MatrixTesting ::MainTest()
+void Mathematics::MatrixTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
@@ -37,7 +38,7 @@ void Mathematics::MatrixTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(Invert3x3Test);
 }
 
-void Mathematics::MatrixTesting ::ConstructionTest()
+void Mathematics::MatrixTesting::ConstructionTest()
 {
     MatrixF firstMatrix(MatrixInitType::Zero);
 
@@ -177,9 +178,9 @@ void Mathematics::MatrixTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(fifthMatrix(3, 2), 0.0, 1e-10);
     ASSERT_APPROXIMATE(fifthMatrix(3, 3), 1.0, 1e-10);
 
-    Matrix3D sixthMatrix(3.0, 6.0, 1.0,
-                         6.2, 5.2, 1.01,
-                         3.1, 2.0, 6.06);
+    const Matrix3D sixthMatrix(3.0, 6.0, 1.0,
+                               6.2, 5.2, 1.01,
+                               3.1, 2.0, 6.06);
 
     MatrixD seventhMatrix(sixthMatrix);
 
@@ -219,10 +220,10 @@ void Mathematics::MatrixTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(eighthMatrix(3, 2), 13.0, 1e-10);
     ASSERT_APPROXIMATE(eighthMatrix(3, 3), 23.0, 1e-10);
 
-    Vector4F firstVector(6.0f, 3.0f, 5.0f, 3.0f);
-    Vector4F secondVector(8.0f, 3.1f, 9.0f, 13.0f);
-    Vector4F thirdVector(18.0f, 13.1f, 19.0f, 32.0f);
-    Vector4F fourthVector(-18.0f, -13.1f, -19.0f, -32.0f);
+    const Vector4F firstVector(6.0f, 3.0f, 5.0f, 3.0f);
+    const Vector4F secondVector(8.0f, 3.1f, 9.0f, 13.0f);
+    const Vector4F thirdVector(18.0f, 13.1f, 19.0f, 32.0f);
+    const Vector4F fourthVector(-18.0f, -13.1f, -19.0f, -32.0f);
 
     MatrixF ninthMatrix(firstVector, secondVector,
                         thirdVector, fourthVector,
@@ -290,9 +291,9 @@ void Mathematics::MatrixTesting ::ConstructionTest()
     fifthVector.Normalize();
     MatrixF twelfthMatrix(fifthVector, MathF::GetHalfPI() / 3.0f);
 
-    double cosValue = MathD::Cos(MathD::GetHalfPI() / 3.0);
-    double sinValue = MathD::Sin(MathD::GetHalfPI() / 3.0);
-    double oneMinusCos = 1.0 - cosValue;
+    const double cosValue = MathD::Cos(MathD::GetHalfPI() / 3.0);
+    const double sinValue = MathD::Sin(MathD::GetHalfPI() / 3.0);
+    const double oneMinusCos = 1.0 - cosValue;
 
     ASSERT_APPROXIMATE(twelfthMatrix(0, 0), static_cast<double>(fifthVector[0]) * fifthVector[0] * oneMinusCos + cosValue, 1e-7);
     ASSERT_APPROXIMATE(twelfthMatrix(0, 1), static_cast<double>(fifthVector[0]) * fifthVector[1] * oneMinusCos - fifthVector[2] * sinValue, 1e-8f);
@@ -373,7 +374,7 @@ void Mathematics::MatrixTesting ::ConstructionTest()
     ASSERT_APPROXIMATE(eleventhMatrix(3, 3), 1.0f, 1e-8f);
 }
 
-void Mathematics::MatrixTesting ::AccessTest()
+void Mathematics::MatrixTesting::AccessTest()
 {
     const MatrixF firstMatrix(3.0f, 4.0f, 8.1f, 3.2f,
                               6.0f, 3.3f, 4.4f, 5.5f,
@@ -397,25 +398,7 @@ void Mathematics::MatrixTesting ::AccessTest()
     ASSERT_APPROXIMATE(firstMatrix(3, 2), 6.3f, 1e-8f);
     ASSERT_APPROXIMATE(firstMatrix(3, 3), 3.21f, 1e-8f);
 
-    // 	ASSERT_APPROXIMATE(firstMatrix[0][0],3.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[0][1],4.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[0][2],8.1f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[0][3],3.2f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[1][0],6.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[1][1],3.3f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[1][2],4.4f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[1][3],5.5f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[2][0],6.6f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[2][1],7.7f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[2][2],8.8f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[2][3],9.9f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[3][0],10.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[3][1],55.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[3][2],6.3f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstMatrix[3][3],3.21f,1e-8f);
-
-    MatrixD secondMatrix(9.2, 1.0, 4.2, 5.2, 8.0, 5.5, 3.3, 4.4,
-                         100.0, 5.6, 9.8, 7.3, 3.33, 4.44, 5.55, 6.66);
+    MatrixD secondMatrix(9.2, 1.0, 4.2, 5.2, 8.0, 5.5, 3.3, 4.4, 100.0, 5.6, 9.8, 7.3, 3.33, 4.44, 5.55, 6.66);
 
     ASSERT_APPROXIMATE(secondMatrix(0, 0), 9.2, 1e-10);
     ASSERT_APPROXIMATE(secondMatrix(0, 1), 1.0, 1e-10);
@@ -433,23 +416,6 @@ void Mathematics::MatrixTesting ::AccessTest()
     ASSERT_APPROXIMATE(secondMatrix(3, 1), 4.44, 1e-10);
     ASSERT_APPROXIMATE(secondMatrix(3, 2), 5.55, 1e-10);
     ASSERT_APPROXIMATE(secondMatrix(3, 3), 6.66, 1e-10);
-
-    // 	ASSERT_APPROXIMATE(secondMatrix[0][0],9.2,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[0][1],1.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[0][2],4.2,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[0][3],5.2,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[1][0],8.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[1][1],5.5,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[1][2],3.3,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[1][3],4.4,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[2][0],100.0,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[2][1],5.6,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[2][2],9.8,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[2][3],7.3,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[3][0],3.33,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[3][1],4.44,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[3][2],5.55,1e-10);
-    // 	ASSERT_APPROXIMATE(secondMatrix[3][3],6.66,1e-10);
 
     Matrix3D thirdMatrix = secondMatrix.GetMatrix3();
 
@@ -585,6 +551,9 @@ void Mathematics::MatrixTesting ::AccessTest()
 
     std::vector<float> floatVector = firstMatrix.GetColumnMajor();
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
     ASSERT_APPROXIMATE(floatVector[0], 3.0f, 1e-8f);
     ASSERT_APPROXIMATE(floatVector[4], 4.0f, 1e-8f);
     ASSERT_APPROXIMATE(floatVector[8], 8.1f, 1e-8f);
@@ -601,11 +570,13 @@ void Mathematics::MatrixTesting ::AccessTest()
     ASSERT_APPROXIMATE(floatVector[7], 55.0f, 1e-8f);
     ASSERT_APPROXIMATE(floatVector[11], 6.3f, 1e-8f);
     ASSERT_APPROXIMATE(floatVector[15], 3.21f, 1e-8f);
+
+#include STSTEM_WARNING_POP
 }
 
-void Mathematics::MatrixTesting ::OperatorCalculateTest()
+void Mathematics::MatrixTesting::OperatorCalculateTest()
 {
-    MatrixF firstMatrix(3.0f, 4.0f, 8.1f, 3.2f, 13.0f, 14.0f, 18.1f, 13.2f, 23.0f, 24.0f, 28.1f, 23.2f, 33.0f, 34.0f, 38.1f, 33.2f);
+    const MatrixF firstMatrix(3.0f, 4.0f, 8.1f, 3.2f, 13.0f, 14.0f, 18.1f, 13.2f, 23.0f, 24.0f, 28.1f, 23.2f, 33.0f, 34.0f, 38.1f, 33.2f);
 
     MatrixF secondMatrix = -firstMatrix;
 
@@ -800,7 +771,7 @@ void Mathematics::MatrixTesting ::OperatorCalculateTest()
     ASSERT_APPROXIMATE(fourthMatrix(3, 3), -16.6f, 1e-8f);
 
     default_random_engine generator{};
-    uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -844,85 +815,85 @@ void Mathematics::MatrixTesting ::OperatorCalculateTest()
 
         seventhMatrix *= fifthMatrix;
 
-        MatrixF fourthMatrix1(sixthMatrix(0, 0) * fifthMatrix(0, 0) +
-                                  sixthMatrix(0, 1) * fifthMatrix(1, 0) +
-                                  sixthMatrix(0, 2) * fifthMatrix(2, 0) +
-                                  sixthMatrix(0, 3) * fifthMatrix(3, 0),
+        const MatrixF fourthMatrix1(sixthMatrix(0, 0) * fifthMatrix(0, 0) +
+                                        sixthMatrix(0, 1) * fifthMatrix(1, 0) +
+                                        sixthMatrix(0, 2) * fifthMatrix(2, 0) +
+                                        sixthMatrix(0, 3) * fifthMatrix(3, 0),
 
-                              sixthMatrix(0, 0) * fifthMatrix(0, 1) +
-                                  sixthMatrix(0, 1) * fifthMatrix(1, 1) +
-                                  sixthMatrix(0, 2) * fifthMatrix(2, 1) +
-                                  sixthMatrix(0, 3) * fifthMatrix(3, 1),
+                                    sixthMatrix(0, 0) * fifthMatrix(0, 1) +
+                                        sixthMatrix(0, 1) * fifthMatrix(1, 1) +
+                                        sixthMatrix(0, 2) * fifthMatrix(2, 1) +
+                                        sixthMatrix(0, 3) * fifthMatrix(3, 1),
 
-                              sixthMatrix(0, 0) * fifthMatrix(0, 2) +
-                                  sixthMatrix(0, 1) * fifthMatrix(1, 2) +
-                                  sixthMatrix(0, 2) * fifthMatrix(2, 2) +
-                                  sixthMatrix(0, 3) * fifthMatrix(3, 2),
+                                    sixthMatrix(0, 0) * fifthMatrix(0, 2) +
+                                        sixthMatrix(0, 1) * fifthMatrix(1, 2) +
+                                        sixthMatrix(0, 2) * fifthMatrix(2, 2) +
+                                        sixthMatrix(0, 3) * fifthMatrix(3, 2),
 
-                              sixthMatrix(0, 0) * fifthMatrix(0, 3) +
-                                  sixthMatrix(0, 1) * fifthMatrix(1, 3) +
-                                  sixthMatrix(0, 2) * fifthMatrix(2, 3) +
-                                  sixthMatrix(0, 3) * fifthMatrix(3, 3),
+                                    sixthMatrix(0, 0) * fifthMatrix(0, 3) +
+                                        sixthMatrix(0, 1) * fifthMatrix(1, 3) +
+                                        sixthMatrix(0, 2) * fifthMatrix(2, 3) +
+                                        sixthMatrix(0, 3) * fifthMatrix(3, 3),
 
-                              sixthMatrix(1, 0) * fifthMatrix(0, 0) +
-                                  sixthMatrix(1, 1) * fifthMatrix(1, 0) +
-                                  sixthMatrix(1, 2) * fifthMatrix(2, 0) +
-                                  sixthMatrix(1, 3) * fifthMatrix(3, 0),
+                                    sixthMatrix(1, 0) * fifthMatrix(0, 0) +
+                                        sixthMatrix(1, 1) * fifthMatrix(1, 0) +
+                                        sixthMatrix(1, 2) * fifthMatrix(2, 0) +
+                                        sixthMatrix(1, 3) * fifthMatrix(3, 0),
 
-                              sixthMatrix(1, 0) * fifthMatrix(0, 1) +
-                                  sixthMatrix(1, 1) * fifthMatrix(1, 1) +
-                                  sixthMatrix(1, 2) * fifthMatrix(2, 1) +
-                                  sixthMatrix(1, 3) * fifthMatrix(3, 1),
+                                    sixthMatrix(1, 0) * fifthMatrix(0, 1) +
+                                        sixthMatrix(1, 1) * fifthMatrix(1, 1) +
+                                        sixthMatrix(1, 2) * fifthMatrix(2, 1) +
+                                        sixthMatrix(1, 3) * fifthMatrix(3, 1),
 
-                              sixthMatrix(1, 0) * fifthMatrix(0, 2) +
-                                  sixthMatrix(1, 1) * fifthMatrix(1, 2) +
-                                  sixthMatrix(1, 2) * fifthMatrix(2, 2) +
-                                  sixthMatrix(1, 3) * fifthMatrix(3, 2),
+                                    sixthMatrix(1, 0) * fifthMatrix(0, 2) +
+                                        sixthMatrix(1, 1) * fifthMatrix(1, 2) +
+                                        sixthMatrix(1, 2) * fifthMatrix(2, 2) +
+                                        sixthMatrix(1, 3) * fifthMatrix(3, 2),
 
-                              sixthMatrix(1, 0) * fifthMatrix(0, 3) +
-                                  sixthMatrix(1, 1) * fifthMatrix(1, 3) +
-                                  sixthMatrix(1, 2) * fifthMatrix(2, 3) +
-                                  sixthMatrix(1, 3) * fifthMatrix(3, 3),
+                                    sixthMatrix(1, 0) * fifthMatrix(0, 3) +
+                                        sixthMatrix(1, 1) * fifthMatrix(1, 3) +
+                                        sixthMatrix(1, 2) * fifthMatrix(2, 3) +
+                                        sixthMatrix(1, 3) * fifthMatrix(3, 3),
 
-                              sixthMatrix(2, 0) * fifthMatrix(0, 0) +
-                                  sixthMatrix(2, 1) * fifthMatrix(1, 0) +
-                                  sixthMatrix(2, 2) * fifthMatrix(2, 0) +
-                                  sixthMatrix(2, 3) * fifthMatrix(3, 0),
+                                    sixthMatrix(2, 0) * fifthMatrix(0, 0) +
+                                        sixthMatrix(2, 1) * fifthMatrix(1, 0) +
+                                        sixthMatrix(2, 2) * fifthMatrix(2, 0) +
+                                        sixthMatrix(2, 3) * fifthMatrix(3, 0),
 
-                              sixthMatrix(2, 0) * fifthMatrix(0, 1) +
-                                  sixthMatrix(2, 1) * fifthMatrix(1, 1) +
-                                  sixthMatrix(2, 2) * fifthMatrix(2, 1) +
-                                  sixthMatrix(2, 3) * fifthMatrix(3, 1),
+                                    sixthMatrix(2, 0) * fifthMatrix(0, 1) +
+                                        sixthMatrix(2, 1) * fifthMatrix(1, 1) +
+                                        sixthMatrix(2, 2) * fifthMatrix(2, 1) +
+                                        sixthMatrix(2, 3) * fifthMatrix(3, 1),
 
-                              sixthMatrix(2, 0) * fifthMatrix(0, 2) +
-                                  sixthMatrix(2, 1) * fifthMatrix(1, 2) +
-                                  sixthMatrix(2, 2) * fifthMatrix(2, 2) +
-                                  sixthMatrix(2, 3) * fifthMatrix(3, 2),
+                                    sixthMatrix(2, 0) * fifthMatrix(0, 2) +
+                                        sixthMatrix(2, 1) * fifthMatrix(1, 2) +
+                                        sixthMatrix(2, 2) * fifthMatrix(2, 2) +
+                                        sixthMatrix(2, 3) * fifthMatrix(3, 2),
 
-                              sixthMatrix(2, 0) * fifthMatrix(0, 3) +
-                                  sixthMatrix(2, 1) * fifthMatrix(1, 3) +
-                                  sixthMatrix(2, 2) * fifthMatrix(2, 3) +
-                                  sixthMatrix(2, 3) * fifthMatrix(3, 3),
+                                    sixthMatrix(2, 0) * fifthMatrix(0, 3) +
+                                        sixthMatrix(2, 1) * fifthMatrix(1, 3) +
+                                        sixthMatrix(2, 2) * fifthMatrix(2, 3) +
+                                        sixthMatrix(2, 3) * fifthMatrix(3, 3),
 
-                              sixthMatrix(3, 0) * fifthMatrix(0, 0) +
-                                  sixthMatrix(3, 1) * fifthMatrix(1, 0) +
-                                  sixthMatrix(3, 2) * fifthMatrix(2, 0) +
-                                  sixthMatrix(3, 3) * fifthMatrix(3, 0),
+                                    sixthMatrix(3, 0) * fifthMatrix(0, 0) +
+                                        sixthMatrix(3, 1) * fifthMatrix(1, 0) +
+                                        sixthMatrix(3, 2) * fifthMatrix(2, 0) +
+                                        sixthMatrix(3, 3) * fifthMatrix(3, 0),
 
-                              sixthMatrix(3, 0) * fifthMatrix(0, 1) +
-                                  sixthMatrix(3, 1) * fifthMatrix(1, 1) +
-                                  sixthMatrix(3, 2) * fifthMatrix(2, 1) +
-                                  sixthMatrix(3, 3) * fifthMatrix(3, 1),
+                                    sixthMatrix(3, 0) * fifthMatrix(0, 1) +
+                                        sixthMatrix(3, 1) * fifthMatrix(1, 1) +
+                                        sixthMatrix(3, 2) * fifthMatrix(2, 1) +
+                                        sixthMatrix(3, 3) * fifthMatrix(3, 1),
 
-                              sixthMatrix(3, 0) * fifthMatrix(0, 2) +
-                                  sixthMatrix(3, 1) * fifthMatrix(1, 2) +
-                                  sixthMatrix(3, 2) * fifthMatrix(2, 2) +
-                                  sixthMatrix(3, 3) * fifthMatrix(3, 2),
+                                    sixthMatrix(3, 0) * fifthMatrix(0, 2) +
+                                        sixthMatrix(3, 1) * fifthMatrix(1, 2) +
+                                        sixthMatrix(3, 2) * fifthMatrix(2, 2) +
+                                        sixthMatrix(3, 3) * fifthMatrix(3, 2),
 
-                              sixthMatrix(3, 0) * fifthMatrix(0, 3) +
-                                  sixthMatrix(3, 1) * fifthMatrix(1, 3) +
-                                  sixthMatrix(3, 2) * fifthMatrix(2, 3) +
-                                  sixthMatrix(3, 3) * fifthMatrix(3, 3));
+                                    sixthMatrix(3, 0) * fifthMatrix(0, 3) +
+                                        sixthMatrix(3, 1) * fifthMatrix(1, 3) +
+                                        sixthMatrix(3, 2) * fifthMatrix(2, 3) +
+                                        sixthMatrix(3, 3) * fifthMatrix(3, 3));
 
         ASSERT_TRUE(Approximate(fourthMatrix1, seventhMatrix, 1e-8f));
 
@@ -935,8 +906,8 @@ void Mathematics::MatrixTesting ::OperatorCalculateTest()
                                      randomDistribution(generator),
                                      randomDistribution(generator));
 
-        HomogeneousPointF secondPoint = seventhMatrix * firstPoint;
-        HomogeneousPointF thirdPoint = firstPoint * seventhMatrix;
+        const HomogeneousPointF secondPoint = seventhMatrix * firstPoint;
+        const HomogeneousPointF thirdPoint = firstPoint * seventhMatrix;
 
         HomogeneousPointF fourthPoint(seventhMatrix(0, 0) * firstPoint[0] +
                                           seventhMatrix(0, 1) * firstPoint[1] +
@@ -955,7 +926,7 @@ void Mathematics::MatrixTesting ::OperatorCalculateTest()
                                           seventhMatrix(3, 2) * firstPoint[2] +
                                           seventhMatrix(3, 3) * firstPoint[3]);
 
-        ASSERT_TRUE(Approximate(secondPoint, fourthPoint, 1e-8f));
+        ASSERT_TRUE(Approximate(secondPoint, fourthPoint, 1e-2f));
 
         fourthPoint[0] = seventhMatrix(0, 0) * firstPoint[0] +
                          seventhMatrix(1, 0) * firstPoint[1] +
@@ -977,7 +948,7 @@ void Mathematics::MatrixTesting ::OperatorCalculateTest()
                          seventhMatrix(2, 3) * firstPoint[2] +
                          seventhMatrix(3, 3) * firstPoint[3];
 
-        ASSERT_TRUE(Approximate(thirdPoint, fourthPoint, 1e-8f));
+        ASSERT_TRUE(Approximate(thirdPoint, fourthPoint, 1e-3f));
 
         MatrixF eighthMatrix = TransposeTimes(fifthMatrix, sixthMatrix);
         MatrixF ninthMatrix = fifthMatrix.Transpose() * sixthMatrix;
@@ -996,10 +967,10 @@ void Mathematics::MatrixTesting ::OperatorCalculateTest()
     }
 }
 
-void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
+void Mathematics::MatrixTesting::ArithmeticCalculateTest()
 {
     default_random_engine generator{};
-    uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -1010,10 +981,10 @@ void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
                                      randomDistribution(generator),
                                      randomDistribution(generator));
 
-        HomogeneousPointF secondPoint(randomDistribution(generator),
-                                      randomDistribution(generator),
-                                      randomDistribution(generator),
-                                      randomDistribution(generator));
+        const HomogeneousPointF secondPoint(randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator),
+                                            randomDistribution(generator));
 
         MatrixF firstMatrix(randomDistribution(generator),
                             randomDistribution(generator),
@@ -1032,13 +1003,13 @@ void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
                             randomDistribution(generator),
                             randomDistribution(generator));
 
-        float qForm = firstMatrix.QuadraticForm(firstPoint, secondPoint);
+        const float qForm = firstMatrix.QuadraticForm(firstPoint, secondPoint);
 
         HomogeneousPointF thirdPoint = firstMatrix * secondPoint;
 
-        float testQFormValue = firstPoint[0] * thirdPoint[0] + firstPoint[1] * thirdPoint[1] + firstPoint[2] * thirdPoint[2] + firstPoint[3] * thirdPoint[3];
+        const float testQFormValue = firstPoint[0] * thirdPoint[0] + firstPoint[1] * thirdPoint[1] + firstPoint[2] * thirdPoint[2] + firstPoint[3] * thirdPoint[3];
 
-        ASSERT_APPROXIMATE(qForm, testQFormValue, 1e-8f);
+        ASSERT_APPROXIMATE(qForm, testQFormValue, 1e-2f);
 
         MatrixF secondMatrix = firstMatrix.Transpose();
 
@@ -1050,50 +1021,46 @@ void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
             }
         }
 
-        Matrix3F firstMatrix3(secondMatrix(1, 1), secondMatrix(1, 2), secondMatrix(1, 3),
-                              secondMatrix(2, 1), secondMatrix(2, 2), secondMatrix(2, 3),
-                              secondMatrix(3, 1), secondMatrix(3, 2), secondMatrix(3, 3));
+        const Matrix3F firstMatrix3(secondMatrix(1, 1), secondMatrix(1, 2), secondMatrix(1, 3),
+                                    secondMatrix(2, 1), secondMatrix(2, 2), secondMatrix(2, 3),
+                                    secondMatrix(3, 1), secondMatrix(3, 2), secondMatrix(3, 3));
 
-        Matrix3F secondMatrix3(secondMatrix(1, 0), secondMatrix(1, 2), secondMatrix(1, 3),
-                               secondMatrix(2, 0), secondMatrix(2, 2), secondMatrix(2, 3),
-                               secondMatrix(3, 0), secondMatrix(3, 2), secondMatrix(3, 3));
+        const Matrix3F secondMatrix3(secondMatrix(1, 0), secondMatrix(1, 2), secondMatrix(1, 3),
+                                     secondMatrix(2, 0), secondMatrix(2, 2), secondMatrix(2, 3),
+                                     secondMatrix(3, 0), secondMatrix(3, 2), secondMatrix(3, 3));
 
-        Matrix3F thirdMatrix3(secondMatrix(1, 0), secondMatrix(1, 1), secondMatrix(1, 3),
-                              secondMatrix(2, 0), secondMatrix(2, 1), secondMatrix(2, 3),
-                              secondMatrix(3, 0), secondMatrix(3, 1), secondMatrix(3, 3));
+        const Matrix3F thirdMatrix3(secondMatrix(1, 0), secondMatrix(1, 1), secondMatrix(1, 3),
+                                    secondMatrix(2, 0), secondMatrix(2, 1), secondMatrix(2, 3),
+                                    secondMatrix(3, 0), secondMatrix(3, 1), secondMatrix(3, 3));
 
-        Matrix3F fourthMatrix3(secondMatrix(1, 0), secondMatrix(1, 1), secondMatrix(1, 2),
-                               secondMatrix(2, 0), secondMatrix(2, 1), secondMatrix(2, 2),
-                               secondMatrix(3, 0), secondMatrix(3, 1), secondMatrix(3, 2));
+        const Matrix3F fourthMatrix3(secondMatrix(1, 0), secondMatrix(1, 1), secondMatrix(1, 2),
+                                     secondMatrix(2, 0), secondMatrix(2, 1), secondMatrix(2, 2),
+                                     secondMatrix(3, 0), secondMatrix(3, 1), secondMatrix(3, 2));
 
-        float determinant = secondMatrix(0, 0) * firstMatrix3.Determinant() -
-                            secondMatrix(0, 1) * secondMatrix3.Determinant() +
-                            secondMatrix(0, 2) * thirdMatrix3.Determinant() -
-                            secondMatrix(0, 3) * fourthMatrix3.Determinant();
+        const float determinant = secondMatrix(0, 0) * firstMatrix3.Determinant() -
+                                  secondMatrix(0, 1) * secondMatrix3.Determinant() +
+                                  secondMatrix(0, 2) * thirdMatrix3.Determinant() -
+                                  secondMatrix(0, 3) * fourthMatrix3.Determinant();
 
         ASSERT_APPROXIMATE(determinant, secondMatrix.Determinant(), 1e-2f);
 
         if (MathF::GetZeroTolerance() < MathF::FAbs(determinant))
         {
-            MatrixF thirdMatrix = secondMatrix.Inverse();
+            const MatrixF thirdMatrix = secondMatrix.Inverse();
 
             MatrixF fourthMatrix = secondMatrix * thirdMatrix;
-
-            //	ASSERT_TRUE(Approximate(fourthMatrix, FloatMatrix::GetIdentity(),1e-4f));
 
             MatrixF fifthMatrix = secondMatrix.Adjoint();
             fifthMatrix /= determinant;
 
             fourthMatrix = fifthMatrix * secondMatrix;
-
-            //	ASSERT_TRUE(Approximate(fourthMatrix, FloatMatrix::GetIdentity(),1e-4f));
         }
 
         APointF fourthPoint(6.0f, 5.4f, 3.3f);
 
         secondMatrix = firstMatrix.TimesDiagonal(fourthPoint);
 
-        MatrixF fifthMatrix = firstMatrix * MatrixF(fourthPoint[0], fourthPoint[1], fourthPoint[2]);
+        const MatrixF fifthMatrix = firstMatrix * MatrixF(fourthPoint[0], fourthPoint[1], fourthPoint[2]);
 
         ASSERT_TRUE(Approximate(fifthMatrix, secondMatrix, 1e-8f));
 
@@ -1111,9 +1078,9 @@ void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
         ASSERT_APPROXIMATE(sixthMatrix(2, 1), secondMatrix(2, 1), 0.00001f);
         ASSERT_APPROXIMATE(sixthMatrix(2, 2), secondMatrix(2, 2), 0.00001f);
 
-        uniform_real<float> angleRandomDistribution(0.0f, MathF::GetPI() - 0.01f);
+        const uniform_real<float> angleRandomDistribution(0.0f, MathF::GetPI() - 0.01f);
 
-        float angle = angleRandomDistribution(generator);
+        const float angle = angleRandomDistribution(generator);
         AVectorF firstVector(randomDistribution(generator),
                              randomDistribution(generator),
                              randomDistribution(generator));
@@ -1127,23 +1094,23 @@ void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
         seventhMatrix.Orthonormalize();
 
         Vector3F thirdVector(eighthMatrix(0, 0), eighthMatrix(1, 0), eighthMatrix(2, 0));
-        Vector3F fourthVector(seventhMatrix(0, 0), seventhMatrix(1, 0), seventhMatrix(2, 0));
+        const Vector3F fourthVector(seventhMatrix(0, 0), seventhMatrix(1, 0), seventhMatrix(2, 0));
 
         thirdVector.Normalize();
 
         ASSERT_TRUE(Vector3ToolsF::Approximate(thirdVector, fourthVector, 1e-7f));
 
         Vector3F fifthVector(eighthMatrix(0, 1), eighthMatrix(1, 1), eighthMatrix(2, 1));
-        Vector3F sixthVector(seventhMatrix(0, 1), seventhMatrix(1, 1), seventhMatrix(2, 1));
+        const Vector3F sixthVector(seventhMatrix(0, 1), seventhMatrix(1, 1), seventhMatrix(2, 1));
 
         fifthVector -= (Vector3ToolsF::DotProduct(fourthVector, fifthVector)) * fourthVector;
 
         fifthVector.Normalize();
 
-        ASSERT_TRUE(Vector3ToolsF::Approximate(fifthVector, sixthVector, 1e-7f));
+        ASSERT_TRUE(Vector3ToolsF::Approximate(fifthVector, sixthVector, 1e-3f));
 
         Vector3F seventhVector(eighthMatrix(0, 2), eighthMatrix(1, 2), eighthMatrix(2, 2));
-        Vector3F eighthVector(seventhMatrix(0, 2), seventhMatrix(1, 2), seventhMatrix(2, 2));
+        const Vector3F eighthVector(seventhMatrix(0, 2), seventhMatrix(1, 2), seventhMatrix(2, 2));
 
         seventhVector -= (Vector3ToolsF::DotProduct(fourthVector, seventhVector)) * fourthVector;
 
@@ -1155,10 +1122,10 @@ void Mathematics::MatrixTesting ::ArithmeticCalculateTest()
     }
 }
 
-void Mathematics::MatrixTesting ::ProjectionTest()
+void Mathematics::MatrixTesting::ProjectionTest()
 {
     default_random_engine generator{};
-    uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -1168,17 +1135,17 @@ void Mathematics::MatrixTesting ::ProjectionTest()
                              randomDistribution(generator),
                              randomDistribution(generator));
 
-        APointF firstPoint(randomDistribution(generator),
-                           randomDistribution(generator),
-                           randomDistribution(generator));
+        const APointF firstPoint(randomDistribution(generator),
+                                 randomDistribution(generator),
+                                 randomDistribution(generator));
 
         AVectorF secondVector(randomDistribution(generator),
                               randomDistribution(generator),
                               randomDistribution(generator));
 
-        APointF secondPoint(randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator));
+        const APointF secondPoint(randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator));
 
         firstVector.Normalize();
         secondVector.Normalize();
@@ -1192,26 +1159,26 @@ void Mathematics::MatrixTesting ::ProjectionTest()
 
             thirdPoint /= -Dot(firstVector, secondVector);
 
-            PlaneF firstPlane = PlaneF(firstVector, firstPoint);
+            const PlaneF firstPlane = PlaneF(firstVector, firstPoint);
 
             // 转换后的点的平面上。
-            float distance = firstPlane.DistanceTo(thirdPoint);
+            const float distance = firstPlane.DistanceTo(thirdPoint);
 
-            ASSERT_APPROXIMATE(distance, 0.0f, 1e-4f);
+            ASSERT_APPROXIMATE(distance, 0.0f, 1e-2f);
 
             // 原来的点与转换后的点的差是direction或-direction
             AVectorF sixthVector = secondPoint - thirdPoint;
 
             sixthVector.Normalize();
 
-            Vector3F seventhVector(sixthVector[0], sixthVector[1], sixthVector[2]);
-            Vector3F eighthVector(-seventhVector);
-            Vector3F ninthVector(secondVector[0], secondVector[1], secondVector[2]);
+            const Vector3F seventhVector(sixthVector[0], sixthVector[1], sixthVector[2]);
+            const Vector3F eighthVector(-seventhVector);
+            const Vector3F ninthVector(secondVector[0], secondVector[1], secondVector[2]);
 
             ASSERT_TRUE(Vector3ToolsF::Approximate(seventhVector, ninthVector, 1e-4f) || Vector3ToolsF::Approximate(eighthVector, ninthVector, 1e-4f));
         }
 
-        APointF fourthPoint(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        const APointF fourthPoint(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
         MatrixF secondMatrix;
         secondMatrix.MakePerspectiveProjection(firstPoint, firstVector, fourthPoint);
@@ -1220,12 +1187,7 @@ void Mathematics::MatrixTesting ::ProjectionTest()
 
         fifthPoint /= (-Dot(secondPoint, firstVector) + Dot(fourthPoint, firstVector));
 
-        PlaneF secondPlane = PlaneF(firstVector, firstPoint);
-
-        // 转换后的点的平面上。
-        // float distance = secondPlane.DistanceTo(fifthPoint);
-
-        //  ASSERT_APPROXIMATE(distance, 0.0f, 1e-3f);
+        const PlaneF secondPlane = PlaneF(firstVector, firstPoint);
 
         // 原来的点与转换后的点和点eye在同一直线上
         AVectorF eleventhVector = secondPoint - fifthPoint;
@@ -1236,29 +1198,26 @@ void Mathematics::MatrixTesting ::ProjectionTest()
 
         twelfthVector.Normalize();
 
-        Vector3F thirteenthVector(twelfthVector[0], twelfthVector[1], twelfthVector[2]);
+        const Vector3F thirteenthVector(twelfthVector[0], twelfthVector[1], twelfthVector[2]);
 
-        Vector3F FourteenthVector(eleventhVector[0], eleventhVector[1], eleventhVector[2]);
-
-        // 		ASSERT_TRUE(Vector3ToolsF::Approximate(FourteenthVector,thirteenthVector,1e-5f) ||
-        // 				    Vector3ToolsF::Approximate(FourteenthVector,-thirteenthVector,1e-5f));
+        const Vector3F FourteenthVector(eleventhVector[0], eleventhVector[1], eleventhVector[2]);
 
         secondMatrix.MakeReflection(firstPoint, firstVector);
 
-        APointF sixthPoint = secondMatrix * secondPoint;
+        const APointF sixthPoint = secondMatrix * secondPoint;
 
-        float firstDistance = secondPlane.DistanceTo(secondPoint);
+        const float firstDistance = secondPlane.DistanceTo(secondPoint);
 
-        float secondDistance = secondPlane.DistanceTo(sixthPoint);
+        const float secondDistance = secondPlane.DistanceTo(sixthPoint);
 
         ASSERT_APPROXIMATE(firstDistance, -secondDistance, 1e-4f);
     }
 }
 
-void Mathematics::MatrixTesting ::CompareTest()
+void Mathematics::MatrixTesting::CompareTest()
 {
-    MatrixF firstMatrix(MatrixInitType::Zero);
-    MatrixF secondMatrix(MatrixInitType::Identity);
+    const MatrixF firstMatrix(MatrixInitType::Zero);
+    const MatrixF secondMatrix(MatrixInitType::Identity);
 
     ASSERT_TRUE(firstMatrix == firstMatrix);
     ASSERT_FALSE(firstMatrix == secondMatrix);
@@ -1274,10 +1233,10 @@ void Mathematics::MatrixTesting ::CompareTest()
     ASSERT_FALSE(Approximate(firstMatrix, secondMatrix));
 }
 
-void Mathematics::MatrixTesting ::HomogeneousPointTest()
+void Mathematics::MatrixTesting::HomogeneousPointTest()
 {
     default_random_engine generator{};
-    uniform_real<float> randomDistribution{ -100.0f, 100.0f };
+    const uniform_real<float> randomDistribution{ -100.0f, 100.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -1305,8 +1264,8 @@ void Mathematics::MatrixTesting ::HomogeneousPointTest()
                             randomDistribution(generator),
                             randomDistribution(generator));
 
-        HomogeneousPointF secondPoint = firstMatrix * firstPoint;
-        HomogeneousPointF thirdPoint = firstPoint * firstMatrix;
+        const HomogeneousPointF secondPoint = firstMatrix * firstPoint;
+        const HomogeneousPointF thirdPoint = firstPoint * firstMatrix;
 
         HomogeneousPointF fourthPoint(firstMatrix(0, 0) * firstPoint[0] +
                                           firstMatrix(0, 1) * firstPoint[1] +
@@ -1328,7 +1287,7 @@ void Mathematics::MatrixTesting ::HomogeneousPointTest()
                                           firstMatrix(3, 2) * firstPoint[2] +
                                           firstMatrix(3, 3) * firstPoint[3]);
 
-        ASSERT_TRUE(Approximate(secondPoint, fourthPoint));
+        ASSERT_TRUE(Approximate(secondPoint, fourthPoint, 1e-02f));
 
         fourthPoint[0] = firstMatrix(0, 0) * firstPoint[0] +
                          firstMatrix(1, 0) * firstPoint[1] +
@@ -1350,50 +1309,50 @@ void Mathematics::MatrixTesting ::HomogeneousPointTest()
                          firstMatrix(2, 3) * firstPoint[2] +
                          firstMatrix(3, 3) * firstPoint[3];
 
-        ASSERT_TRUE(Approximate(thirdPoint, fourthPoint));
+        ASSERT_TRUE(Approximate(thirdPoint, fourthPoint, 1e-02f));
 
         APointF seventhPoint(randomDistribution(generator),
                              randomDistribution(generator),
                              randomDistribution(generator));
 
-        APointF eighthPoint = firstMatrix * seventhPoint;
+        const APointF eighthPoint = firstMatrix * seventhPoint;
 
-        APointF ninthPoint(firstMatrix(0, 0) * seventhPoint[0] +
-                               firstMatrix(0, 1) * seventhPoint[1] +
-                               firstMatrix(0, 2) * seventhPoint[2] +
-                               firstMatrix(0, 3),
+        const APointF ninthPoint(firstMatrix(0, 0) * seventhPoint[0] +
+                                     firstMatrix(0, 1) * seventhPoint[1] +
+                                     firstMatrix(0, 2) * seventhPoint[2] +
+                                     firstMatrix(0, 3),
 
-                           firstMatrix(1, 0) * seventhPoint[0] +
-                               firstMatrix(1, 1) * seventhPoint[1] +
-                               firstMatrix(1, 2) * seventhPoint[2] +
-                               firstMatrix(1, 3),
+                                 firstMatrix(1, 0) * seventhPoint[0] +
+                                     firstMatrix(1, 1) * seventhPoint[1] +
+                                     firstMatrix(1, 2) * seventhPoint[2] +
+                                     firstMatrix(1, 3),
 
-                           firstMatrix(2, 0) * seventhPoint[0] +
-                               firstMatrix(2, 1) * seventhPoint[1] +
-                               firstMatrix(2, 2) * seventhPoint[2] +
-                               firstMatrix(2, 3));
+                                 firstMatrix(2, 0) * seventhPoint[0] +
+                                     firstMatrix(2, 1) * seventhPoint[1] +
+                                     firstMatrix(2, 2) * seventhPoint[2] +
+                                     firstMatrix(2, 3));
 
-        ASSERT_TRUE(Approximate(eighthPoint, ninthPoint));
+        ASSERT_TRUE(Approximate(eighthPoint, ninthPoint, 1e-02f));
 
         AVectorF firstVector(randomDistribution(generator),
                              randomDistribution(generator),
                              randomDistribution(generator));
 
-        AVectorF secondVector = firstMatrix * firstVector;
+        const AVectorF secondVector = firstMatrix * firstVector;
 
-        AVectorF thirdVector(firstMatrix(0, 0) * firstVector[0] +
-                                 firstMatrix(0, 1) * firstVector[1] +
-                                 firstMatrix(0, 2) * firstVector[2],
+        const AVectorF thirdVector(firstMatrix(0, 0) * firstVector[0] +
+                                       firstMatrix(0, 1) * firstVector[1] +
+                                       firstMatrix(0, 2) * firstVector[2],
 
-                             firstMatrix(1, 0) * firstVector[0] +
-                                 firstMatrix(1, 1) * firstVector[1] +
-                                 firstMatrix(1, 2) * firstVector[2],
+                                   firstMatrix(1, 0) * firstVector[0] +
+                                       firstMatrix(1, 1) * firstVector[1] +
+                                       firstMatrix(1, 2) * firstVector[2],
 
-                             firstMatrix(2, 0) * firstVector[0] +
-                                 firstMatrix(2, 1) * firstVector[1] +
-                                 firstMatrix(2, 2) * firstVector[2]);
+                                   firstMatrix(2, 0) * firstVector[0] +
+                                       firstMatrix(2, 1) * firstVector[1] +
+                                       firstMatrix(2, 2) * firstVector[2]);
 
-        ASSERT_TRUE(Approximate(secondVector, thirdVector));
+        ASSERT_TRUE(Approximate(secondVector, thirdVector, 1e-02f));
     }
 
     vector<HomogeneousPointF> firstPointVector;
@@ -1402,22 +1361,22 @@ void Mathematics::MatrixTesting ::HomogeneousPointTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        HomogeneousPointF fifthPoint(randomDistribution(generator),
-                                     randomDistribution(generator),
-                                     randomDistribution(generator),
-                                     randomDistribution(generator));
+        const HomogeneousPointF fifthPoint(randomDistribution(generator),
+                                           randomDistribution(generator),
+                                           randomDistribution(generator),
+                                           randomDistribution(generator));
 
         firstPointVector.push_back(fifthPoint);
 
-        APointF tenthPoint(randomDistribution(generator),
-                           randomDistribution(generator),
-                           randomDistribution(generator));
+        const APointF tenthPoint(randomDistribution(generator),
+                                 randomDistribution(generator),
+                                 randomDistribution(generator));
 
         firstAPointVector.push_back(tenthPoint);
 
-        AVectorF fourthVector(randomDistribution(generator),
-                              randomDistribution(generator),
-                              randomDistribution(generator));
+        const AVectorF fourthVector(randomDistribution(generator),
+                                    randomDistribution(generator),
+                                    randomDistribution(generator));
 
         firstVectorVector.push_back(fourthVector);
     }
@@ -1447,98 +1406,98 @@ void Mathematics::MatrixTesting ::HomogeneousPointTest()
 
     for (size_t i = 0; i < secondPointVector.size(); ++i)
     {
-        HomogeneousPointF sixthPoint(secondMatrix(0, 0) * firstPointVector[i][0] +
-                                         secondMatrix(0, 1) * firstPointVector[i][1] +
-                                         secondMatrix(0, 2) * firstPointVector[i][2] +
-                                         secondMatrix(0, 3) * firstPointVector[i][3],
+        const HomogeneousPointF sixthPoint(secondMatrix(0, 0) * firstPointVector.at(i)[0] +
+                                               secondMatrix(0, 1) * firstPointVector.at(i)[1] +
+                                               secondMatrix(0, 2) * firstPointVector.at(i)[2] +
+                                               secondMatrix(0, 3) * firstPointVector.at(i)[3],
 
-                                     secondMatrix(1, 0) * firstPointVector[i][0] +
-                                         secondMatrix(1, 1) * firstPointVector[i][1] +
-                                         secondMatrix(1, 2) * firstPointVector[i][2] +
-                                         secondMatrix(1, 3) * firstPointVector[i][3],
+                                           secondMatrix(1, 0) * firstPointVector.at(i)[0] +
+                                               secondMatrix(1, 1) * firstPointVector.at(i)[1] +
+                                               secondMatrix(1, 2) * firstPointVector.at(i)[2] +
+                                               secondMatrix(1, 3) * firstPointVector.at(i)[3],
 
-                                     secondMatrix(2, 0) * firstPointVector[i][0] +
-                                         secondMatrix(2, 1) * firstPointVector[i][1] +
-                                         secondMatrix(2, 2) * firstPointVector[i][2] +
-                                         secondMatrix(2, 3) * firstPointVector[i][3],
+                                           secondMatrix(2, 0) * firstPointVector.at(i)[0] +
+                                               secondMatrix(2, 1) * firstPointVector.at(i)[1] +
+                                               secondMatrix(2, 2) * firstPointVector.at(i)[2] +
+                                               secondMatrix(2, 3) * firstPointVector.at(i)[3],
 
-                                     secondMatrix(3, 0) * firstPointVector[i][0] +
-                                         secondMatrix(3, 1) * firstPointVector[i][1] +
-                                         secondMatrix(3, 2) * firstPointVector[i][2] +
-                                         secondMatrix(3, 3) * firstPointVector[i][3]);
+                                           secondMatrix(3, 0) * firstPointVector.at(i)[0] +
+                                               secondMatrix(3, 1) * firstPointVector.at(i)[1] +
+                                               secondMatrix(3, 2) * firstPointVector.at(i)[2] +
+                                               secondMatrix(3, 3) * firstPointVector.at(i)[3]);
 
-        ASSERT_TRUE(Approximate(sixthPoint, secondPointVector[i]));
+        ASSERT_TRUE(Approximate(sixthPoint, secondPointVector.at(i), 1e-02f));
 
-        APointF eleventhPoint(secondMatrix(0, 0) * firstAPointVector[i][0] +
-                                  secondMatrix(0, 1) * firstAPointVector[i][1] +
-                                  secondMatrix(0, 2) * firstAPointVector[i][2] +
-                                  secondMatrix(0, 3),
+        const APointF eleventhPoint(secondMatrix(0, 0) * firstAPointVector.at(i)[0] +
+                                        secondMatrix(0, 1) * firstAPointVector.at(i)[1] +
+                                        secondMatrix(0, 2) * firstAPointVector.at(i)[2] +
+                                        secondMatrix(0, 3),
 
-                              secondMatrix(1, 0) * firstAPointVector[i][0] +
-                                  secondMatrix(1, 1) * firstAPointVector[i][1] +
-                                  secondMatrix(1, 2) * firstAPointVector[i][2] +
-                                  secondMatrix(1, 3),
+                                    secondMatrix(1, 0) * firstAPointVector.at(i)[0] +
+                                        secondMatrix(1, 1) * firstAPointVector.at(i)[1] +
+                                        secondMatrix(1, 2) * firstAPointVector.at(i)[2] +
+                                        secondMatrix(1, 3),
 
-                              secondMatrix(2, 0) * firstAPointVector[i][0] +
-                                  secondMatrix(2, 1) * firstAPointVector[i][1] +
-                                  secondMatrix(2, 2) * firstAPointVector[i][2] +
-                                  secondMatrix(2, 3));
+                                    secondMatrix(2, 0) * firstAPointVector.at(i)[0] +
+                                        secondMatrix(2, 1) * firstAPointVector.at(i)[1] +
+                                        secondMatrix(2, 2) * firstAPointVector.at(i)[2] +
+                                        secondMatrix(2, 3));
 
-        ASSERT_TRUE(Approximate(eleventhPoint, secondAPointVector[i]));
+        ASSERT_TRUE(Approximate(eleventhPoint, secondAPointVector.at(i), 1e-03f));
 
-        AVectorF fifthVector(secondMatrix(0, 0) * firstVectorVector[i][0] +
-                                 secondMatrix(0, 1) * firstVectorVector[i][1] +
-                                 secondMatrix(0, 2) * firstVectorVector[i][2],
+        const AVectorF fifthVector(secondMatrix(0, 0) * firstVectorVector.at(i)[0] +
+                                       secondMatrix(0, 1) * firstVectorVector.at(i)[1] +
+                                       secondMatrix(0, 2) * firstVectorVector.at(i)[2],
 
-                             secondMatrix(1, 0) * firstVectorVector[i][0] +
-                                 secondMatrix(1, 1) * firstVectorVector[i][1] +
-                                 secondMatrix(1, 2) * firstVectorVector[i][2],
+                                   secondMatrix(1, 0) * firstVectorVector.at(i)[0] +
+                                       secondMatrix(1, 1) * firstVectorVector.at(i)[1] +
+                                       secondMatrix(1, 2) * firstVectorVector.at(i)[2],
 
-                             secondMatrix(2, 0) * firstVectorVector[i][0] +
-                                 secondMatrix(2, 1) * firstVectorVector[i][1] +
-                                 secondMatrix(2, 2) * firstVectorVector[i][2]);
+                                   secondMatrix(2, 0) * firstVectorVector.at(i)[0] +
+                                       secondMatrix(2, 1) * firstVectorVector.at(i)[1] +
+                                       secondMatrix(2, 2) * firstVectorVector.at(i)[2]);
 
-        ASSERT_TRUE(Approximate(fifthVector, secondVectorVector[i]));
+        ASSERT_TRUE(Approximate(fifthVector, secondVectorVector.at(i), 1e-03f));
     }
 }
 
-void Mathematics::MatrixTesting ::Invert3x3Test()
+void Mathematics::MatrixTesting::Invert3x3Test()
 {
     default_random_engine generator{};
-    uniform_real<float> randomDistribution{ -10.0f, 10.0f };
+    const uniform_real<float> randomDistribution{ -10.0f, 10.0f };
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        MatrixF firstMatrix(randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator),
-                            randomDistribution(generator));
+        const MatrixF firstMatrix(randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator),
+                                  randomDistribution(generator));
 
-        Matrix3F secondMatrix = firstMatrix.GetMatrix3();
+        const Matrix3F secondMatrix = firstMatrix.GetMatrix3();
 
         if (MathF::GetZeroTolerance() < secondMatrix.Determinant())
         {
-            MatrixF thirdMatrix = firstMatrix.Invert3x3();
+            const MatrixF thirdMatrix = firstMatrix.Invert3x3();
 
-            Matrix3F fourthMatrix = thirdMatrix.GetMatrix3();
+            const Matrix3F fourthMatrix = thirdMatrix.GetMatrix3();
 
-            Matrix3F fifthMatrix = secondMatrix.Inverse();
+            const Matrix3F fifthMatrix = secondMatrix.Inverse();
 
-            ASSERT_TRUE(Approximate(fourthMatrix, fifthMatrix, 1e-6f));
+            ASSERT_TRUE(Approximate(fourthMatrix, fifthMatrix, 1e-5f));
         }
     }
 }

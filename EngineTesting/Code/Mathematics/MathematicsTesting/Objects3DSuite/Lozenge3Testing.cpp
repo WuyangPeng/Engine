@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/22 17:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/30 11:30)
 
 #include "Lozenge3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,49 +26,44 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Lozenge3Testing)
 
-void Mathematics::Lozenge3Testing ::MainTest()
+void Mathematics::Lozenge3Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LozengeTest);
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
-void Mathematics::Lozenge3Testing ::LozengeTest()
+
+void Mathematics::Lozenge3Testing::LozengeTest()
 {
     default_random_engine generator{};
 
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        Vector3D center(firstRandomDistribution(generator),
+        const Vector3D center(firstRandomDistribution(generator),
                               firstRandomDistribution(generator),
                               firstRandomDistribution(generator));
 
         Vector3D axis0(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+                       firstRandomDistribution(generator),
+                       firstRandomDistribution(generator));
 
         Vector3D axis1(firstRandomDistribution(generator),
-                             firstRandomDistribution(generator),
-                             firstRandomDistribution(generator));
+                       firstRandomDistribution(generator),
+                       firstRandomDistribution(generator));
 
-        double extent0 = Vector3ToolsD::GetLength(axis0);
-        double extent1 = Vector3ToolsD::GetLength(axis1);
+        auto extent0 = Vector3ToolsD::GetLength(axis0);
+        auto extent1 = Vector3ToolsD::GetLength(axis1);
 
         axis0.Normalize();
         axis1.Normalize();
 
-        Rectangle3D rectangle(center, axis0, axis1, extent0, extent1);
+        const Rectangle3D rectangle(center, axis0, axis1, extent0, extent1);
 
-        double radius(MathD::FAbs(firstRandomDistribution(generator)));
+        const double radius(MathD::FAbs(firstRandomDistribution(generator)));
 
-        Lozenge3D lozenge(rectangle, radius);
+        const Lozenge3D lozenge(rectangle, radius);
 
         ASSERT_APPROXIMATE(radius, lozenge.GetRadius(), 1e-10);
 

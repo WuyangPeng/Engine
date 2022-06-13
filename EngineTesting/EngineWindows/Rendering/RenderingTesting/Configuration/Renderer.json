@@ -1,23 +1,20 @@
 {
-   "RendererType":2,
+  "RendererType": 2,
 
-  "Texture":
-  {
+  "Texture": {
     "ColorFormat": 8,
     "DepthStencilFormat": 22,
     "MultisamplesNumber": 1
   },
 
-  "ClearColor":
-  {
+  "ClearColor": {
     "Red": 0.0,
     "Green": 0.0,
     "Blue": 0.0,
     "Alpha": 1.0
   },
 
-  "WindowParameter": 
-  {
+  "WindowParameter": {
     "WindowTitle": "RenderingTesting",
     "Width": 1024,
     "Height": 768,

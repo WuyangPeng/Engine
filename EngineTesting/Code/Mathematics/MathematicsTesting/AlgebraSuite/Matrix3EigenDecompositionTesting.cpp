@@ -1,62 +1,60 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.2 (2019/08/21 15:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/08 21:52)
 
 #include "Matrix3EigenDecompositionTesting.h"
-#include "Mathematics/Algebra/Matrix3Detail.h"
-#include "Mathematics/Algebra/Matrix3EigenDecompositionDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Matrix3Detail.h"
+#include "Mathematics/Algebra/Matrix3EigenDecompositionDetail.h"
 
-#include <random> 
+#include <random>
 
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class Matrix3EigenDecomposition<float>;
-	template class Matrix3EigenDecomposition<double>;
+    template class Matrix3EigenDecomposition<float>;
+    template class Matrix3EigenDecomposition<double>;
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Matrix3EigenDecompositionTesting) 
 
-void Mathematics::Matrix3EigenDecompositionTesting
-	::MainTest()
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Matrix3EigenDecompositionTesting)
+
+void Mathematics::Matrix3EigenDecompositionTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(EigenDecompositionTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(EigenDecompositionTest);
 }
 
-void Mathematics::Matrix3EigenDecompositionTesting
-	::EigenDecompositionTest()
+void Mathematics::Matrix3EigenDecompositionTesting::EigenDecompositionTest()
 {
-	default_random_engine generator{};
-	uniform_real<double> randomDistribution{ -10.0,10.0 };
+    default_random_engine generator{};
+    const uniform_real<double> randomDistribution{ -10.0, 10.0 };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)	
-	{
-		Matrix3D firstMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),
-							  0.0,randomDistribution(generator),randomDistribution(generator),
-							  0.0,0.0,randomDistribution(generator) };
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Matrix3D firstMatrix{ randomDistribution(generator), randomDistribution(generator), randomDistribution(generator),
+                              0.0, randomDistribution(generator), randomDistribution(generator),
+                              0.0, 0.0, randomDistribution(generator) };
 
-		firstMatrix(1,0) = firstMatrix(0,1);
-		firstMatrix(2,0) = firstMatrix(0,2);
-		firstMatrix(2,1) = firstMatrix(1,2);
+        firstMatrix(1, 0) = firstMatrix(0, 1);
+        firstMatrix(2, 0) = firstMatrix(0, 2);
+        firstMatrix(2, 1) = firstMatrix(1, 2);
 
-		auto eigenDecomposition = firstMatrix.EigenDecomposition(1e-10);
+        const auto eigenDecomposition = firstMatrix.EigenDecomposition(1e-10);
 
-		Matrix3D rotation = eigenDecomposition.GetRotation();
-		Matrix3D diagonal = eigenDecomposition.GetDiagonal();
+        const Matrix3D rotation = eigenDecomposition.GetRotation();
+        const Matrix3D diagonal = eigenDecomposition.GetDiagonal();
 
-		Matrix3D secondMatrix = rotation * diagonal * rotation.Transpose();
+        const Matrix3D secondMatrix = rotation * diagonal * rotation.Transpose();
 
-		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-10));	
-	}	
+        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
+    }
 }
-

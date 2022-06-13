@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/05 17:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/19 10:47)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H
 #define CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H
@@ -11,38 +14,38 @@
 
 namespace CoreTools
 {
-	class AppenderManagerTesting : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AppenderManagerTesting);
+    class AppenderManagerTesting : public UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(AppenderManagerTesting);
 
-	private:
-		void MainTest();
-		void LoggerTest();
-		void AppenderTest();
-		void WriteMessageTest();
+    private:
+        void MainTest();
+        void LoggerTest();
+        void AppenderTest();
+        void WriteMessageTest();
 
-		// Logger≤‚ ‘
-		void LoggerSucceedTest();
-		void InsertLoggerFailTest();
-		void RemoveLoggerFailTest();
+        // Logger≤‚ ‘
+        void LoggerSucceedTest();
+        void InsertLoggerFailTest();
+        void RemoveLoggerFailTest();
 
-		// Appender≤‚ ‘
-		void AppenderSucceedTest();
-		void InsertAppenderFailTest();
-		void RemoveAppenderFailTest();
+        // Appender≤‚ ‘
+        void AppenderSucceedTest();
+        void InsertAppenderFailTest();
+        void RemoveAppenderFailTest();
 
-		// WriteMessage≤‚ ‘
-		void WriteMessageToFileTest();
-		void FileContentTest();
-		void DeleteFileTest();
+        // WriteMessage≤‚ ‘
+        void WriteMessageToFileTest();
+        void FileContentTest();
+        void DeleteFileTest();
 
-		void DoRunUnitTest() override;
+        void DoRunUnitTest() override;
 
-	private:
-		System::String m_AppenderManagerTestingName;
-		System::String m_AppenderManagerTestingFullName;
-	};
+    private:
+        System::String appenderManagerTestingName;
+        System::String appenderManagerTestingFullName;
+    };
 }
 
-#endif // CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H
+#endif  // CORE_TOOLS_LOG_MANAGER_SUITE_LOGGER_MANAGER_TESTING_H

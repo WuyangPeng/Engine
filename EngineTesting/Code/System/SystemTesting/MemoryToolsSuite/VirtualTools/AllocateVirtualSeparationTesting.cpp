@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.2 (2021/04/20 18:23)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 16:56)
 
 #include "AllocateVirtualSeparationTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -127,10 +127,14 @@ void System::AllocateVirtualSeparationTesting::ReadWriteTest(const WindowsSystem
     {
         for (auto index = 0u; index < systemInfo.dwPageSize; ++index)
         {
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
             DoReadWriteTest(memoryProtect, basePage[index]);
+
 #include STSTEM_WARNING_POP
+
         }
     }
 }

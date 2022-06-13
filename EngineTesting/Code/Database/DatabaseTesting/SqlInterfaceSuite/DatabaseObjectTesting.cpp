@@ -1,42 +1,56 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.5 (2020/03/16 18:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/25 16:16)
 
-#include "DatabaseObjectTesting.h" 
+#include "DatabaseObjectTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Database/SqlInterface/Session.h"
-#include "Database/SqlInterface/DatabaseObject.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
+#include "Database/SqlInterface/DatabaseObject.h"
+#include "Database/SqlInterface/Session.h"
 
-using std::vector;
 using std::string;
+using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Database, DatabaseObjectTesting)
 
-void Database::DatabaseObjectTesting
-	::MainTest()
+void Database::DatabaseObjectTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(NullDatabaseObjectTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NullDatabaseObjectTest);
 }
 
-void Database::DatabaseObjectTesting
-	::NullDatabaseObjectTest()
+void Database::DatabaseObjectTesting::NullDatabaseObjectTest()
 {
-	ConfigurationStrategy::FlagsOption flagsOption;
-	ConfigurationStrategy::StringOption stringOption;
-	ConfigurationStrategy::BooleanOption booleanOption;
-	ConfigurationStrategy::IntOption intOption;
-	ConfigurationStrategy::SSLOption sslOption;
-	ConfigurationStrategy::DBMapping dbMapping;
+    ConfigurationStrategy::FlagsOption flagsOption;
+    ConfigurationStrategy::StringOption stringOption;
+    ConfigurationStrategy::BooleanOption booleanOption;
+    ConfigurationStrategy::IntOption intOption;
+    ConfigurationStrategy::SSLOption sslOption;
+    ConfigurationStrategy::DBMapping dbMapping;
 
-	ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,"127.0.0.1",3306,"tcretest","root","123456",true,10,100,1000,
-												 flagsOption ,stringOption,booleanOption,intOption,sslOption,dbMapping };
+    ConfigurationStrategy configurationStrategy{ WrappersStrategy::Null,
+                                                 "127.0.0.1",
+                                                 3306,
+                                                 "tcretest",
+                                                 "root",
+                                                 "123456",
+                                                 true,
+                                                 10,
+                                                 100,
+                                                 1000,
+                                                 flagsOption,
+                                                 stringOption,
+                                                 booleanOption,
+                                                 intOption,
+                                                 sslOption,
+                                                 dbMapping };
 
-	DatabaseObject databaseObject{ configurationStrategy };
+    DatabaseObject databaseObject{ configurationStrategy };
 
-	Session session{ databaseObject };
+    Session session{ databaseObject };
 }
-

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.2 (2019/08/29 17:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/06/07 10:42)
 
 #ifndef MATHEMATICS_DISTANCE_SUITE_DISTANCE_TEST_DETAIL_H
 #define MATHEMATICS_DISTANCE_SUITE_DISTANCE_TEST_DETAIL_H
@@ -13,15 +16,18 @@
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename Real, typename Vector>
 Mathematics::DistanceTest<Real, Vector>::DistanceTest(const Vector& lhs, const Vector& rhs) noexcept
-    : ParentType{}, m_Lhs{ lhs }, m_Rhs{ rhs }
+    : ParentType{}, lhs{ lhs }, rhs{ rhs }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
+
 #include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename Vector>
 bool Mathematics::DistanceTest<Real, Vector>::IsValid() const noexcept
 {
@@ -30,6 +36,7 @@ bool Mathematics::DistanceTest<Real, Vector>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
@@ -37,9 +44,9 @@ typename Mathematics::DistanceTest<Real, Vector>::DistanceResult Mathematics::Di
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto distanceSquared = Vector::ToolsType::DistanceSquared(m_Lhs, m_Rhs);
+    auto distanceSquared = Vector::ToolsType::DistanceSquared(lhs, rhs);
 
-    return DistanceResult{ distanceSquared, Real{}, m_Lhs, m_Rhs };
+    return DistanceResult{ distanceSquared, Real{}, lhs, rhs };
 }
 
 template <typename Real, typename Vector>
@@ -47,8 +54,8 @@ typename Mathematics::DistanceTest<Real, Vector>::DistanceResult Mathematics::Di
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto lhsClosestPoint = m_Lhs.GetMove(t, lhsVelocity);
-    auto rhsClosestPoint = m_Rhs.GetMove(t, rhsVelocity);
+    const auto lhsClosestPoint = lhs.GetMove(t, lhsVelocity);
+    const auto rhsClosestPoint = rhs.GetMove(t, rhsVelocity);
 
     auto distanceSquared = Vector::ToolsType::DistanceSquared(lhsClosestPoint, rhsClosestPoint);
 
@@ -56,19 +63,19 @@ typename Mathematics::DistanceTest<Real, Vector>::DistanceResult Mathematics::Di
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceTest<Real, Vector>::GetLhs() const noexcept
+Vector Mathematics::DistanceTest<Real, Vector>::GetLhs() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Lhs;
+    return lhs;
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceTest<Real, Vector>::GetRhs() const noexcept
+Vector Mathematics::DistanceTest<Real, Vector>::GetRhs() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Rhs;
+    return rhs;
 }
 
 #endif  // MATHEMATICS_DISTANCE_SUITE_DISTANCE_TEST_DETAIL_H

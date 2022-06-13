@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/28 10:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/26 18:48)
 
 #include "Query2Int64Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,12 +26,7 @@ using std::swap;
 using std::uniform_int;
 using std::uniform_real;
 using std::vector;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26472)
-#include SYSTEM_WARNING_DISABLE(26475)
+
 namespace Mathematics
 {
     template class Query2Int64<double>;
@@ -37,7 +35,7 @@ namespace Mathematics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Query2Int64Testing)
 
-void Mathematics::Query2Int64Testing ::MainTest()
+void Mathematics::Query2Int64Testing::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(VerticesTest);
     ASSERT_NOT_THROW_EXCEPTION_0(LineTest);
@@ -45,22 +43,22 @@ void Mathematics::Query2Int64Testing ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(CircumcircleTest);
 }
 
-void Mathematics::Query2Int64Testing ::VerticesTest()
+void Mathematics::Query2Int64Testing::VerticesTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const auto size = secondRandomDistribution(generator);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
         Query2Int64D query(vertices);
@@ -68,90 +66,68 @@ void Mathematics::Query2Int64Testing ::VerticesTest()
         ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Int64);
         ASSERT_EQUAL(query.GetNumVertices(), size);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, query.GetVertice(m), vertices[m], 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, query.GetVertice(m), vertices.at(m), 1e-10);
         }
     }
 }
 
-void Mathematics::Query2Int64Testing ::LineTest()
+void Mathematics::Query2Int64Testing::LineTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const auto size = secondRandomDistribution(generator);
 
-        for (int i = 0; i < size; ++i)
+        for (auto i = 0; i < size; ++i)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        uniform_int<> thirdRandomDistribution(0, size - 1);
+        const uniform_int<> thirdRandomDistribution(0, size - 1);
 
-        int firstIndex = thirdRandomDistribution(generator);
-        int secondIndex = thirdRandomDistribution(generator);
-        int thirdIndex = thirdRandomDistribution(generator);
+        const auto firstIndex = thirdRandomDistribution(generator);
+        const auto secondIndex = thirdRandomDistribution(generator);
+        const auto thirdIndex = thirdRandomDistribution(generator);
 
         Query2Int64D query(vertices);
 
         ASSERT_ENUM_EQUAL(query.ToLine(secondIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
         ASSERT_ENUM_EQUAL(query.ToLine(thirdIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
-
-        if (firstIndex != secondIndex && secondIndex != thirdIndex && firstIndex != thirdIndex)
-        {
-            // 			Vector2<int64_t> firstVector = vertices[firstIndex];
-            // 			Vector2<int64_t> secondVector = vertices[secondIndex];
-            // 			Vector2<int64_t> thirdVector = vertices[thirdIndex];
-            //
-            // 			double dotPerp = Vector2Tools<double>::DotPerp(firstVector - secondVector, thirdVector - secondVector);
-            //
-            // 			if(0 < dotPerp)
-            // 			{
-            // 				ASSERT_ENUM_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::Right);
-            // 			}
-            // 			else if(dotPerp < 0)
-            // 			{
-            // 				ASSERT_ENUM_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::Left);
-            // 			}
-            // 			else
-            // 			{
-            // 				ASSERT_ENUM_EQUAL(query.ToLine(firstIndex, secondIndex, thirdIndex), LineQueryType::OnLine);
-            // 			}
-        }
     }
 }
 
-void Mathematics::Query2Int64Testing ::TriangleTest()
+void Mathematics::Query2Int64Testing::TriangleTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const auto size = secondRandomDistribution(generator);
 
-        for (int m = 0; m < size; ++m)
+        for (auto m = 0; m < size; ++m)
         {
-            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.emplace_back(firstRandomDistribution(generator), firstRandomDistribution(generator));
         }
 
-        uniform_int<> thirdRandomDistribution(0, size - 1);
+        const uniform_int<> thirdRandomDistribution(0, size - 1);
 
-        int firstIndex = thirdRandomDistribution(generator);
-        int secondIndex = thirdRandomDistribution(generator);
-        int thirdIndex = thirdRandomDistribution(generator);
-        int fourthIndex = thirdRandomDistribution(generator);
+        const auto firstIndex = thirdRandomDistribution(generator);
+        auto secondIndex = thirdRandomDistribution(generator);
+        auto thirdIndex = thirdRandomDistribution(generator);
+        const auto fourthIndex = thirdRandomDistribution(generator);
 
         Query2Int64D query(vertices);
         if (query.ToLine(secondIndex, thirdIndex, fourthIndex) == LineQueryType::Right)
@@ -159,18 +135,18 @@ void Mathematics::Query2Int64Testing ::TriangleTest()
             swap(secondIndex, thirdIndex);
         }
 
-        Vector2 firstVector = vertices[firstIndex];
-        Vector2 secondVector = vertices[secondIndex];
-        Vector2 thirdVector = vertices[thirdIndex];
-        Vector2 fourthVector = vertices[fourthIndex];
+        const Vector2 firstVector = vertices.at(firstIndex);
+        const Vector2 secondVector = vertices.at(secondIndex);
+        const Vector2 thirdVector = vertices.at(thirdIndex);
+        const Vector2 fourthVector = vertices.at(fourthIndex);
 
         ASSERT_ENUM_EQUAL(query.ToTriangle(secondIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
         ASSERT_ENUM_EQUAL(query.ToTriangle(thirdIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
         ASSERT_ENUM_EQUAL(query.ToTriangle(fourthIndex, secondIndex, thirdIndex, fourthIndex), TriangleQueryType::OnTriangle);
 
-        LineQueryType sign0 = query.ToLine(firstIndex, thirdIndex, fourthIndex);
-        LineQueryType sign1 = query.ToLine(firstIndex, secondIndex, fourthIndex);
-        LineQueryType sign2 = query.ToLine(firstIndex, secondIndex, thirdIndex);
+        const LineQueryType sign0 = query.ToLine(firstIndex, thirdIndex, fourthIndex);
+        const LineQueryType sign1 = query.ToLine(firstIndex, secondIndex, fourthIndex);
+        const LineQueryType sign2 = query.ToLine(firstIndex, secondIndex, thirdIndex);
 
         if (sign0 == LineQueryType::Right || sign1 == LineQueryType::Left ||
             sign2 == LineQueryType::Right)
@@ -190,73 +166,35 @@ void Mathematics::Query2Int64Testing ::TriangleTest()
     }
 }
 
-void Mathematics::Query2Int64Testing ::CircumcircleTest()
+void Mathematics::Query2Int64Testing::CircumcircleTest()
 {
     default_random_engine generator;
-    uniform_real<double> firstRandomDistribution(-100.0, 100.0);
-    uniform_int<> secondRandomDistribution(1, 50);
+    const uniform_real<double> firstRandomDistribution(-100.0, 100.0);
+    const uniform_int<> secondRandomDistribution(1, 50);
 
     const auto testLoopCount = GetTestLoopCount();
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         std::vector<Vector2D> vertices;
-        int size = secondRandomDistribution(generator);
+        const auto size = secondRandomDistribution(generator);
 
-        for (int i = 0; i < size; ++i)
+        for (auto i = 0; i < size; ++i)
         {
             vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        uniform_int<> thirdRandomDistribution(0, size - 1);
+        const uniform_int<> thirdRandomDistribution(0, size - 1);
 
-        int firstIndex = thirdRandomDistribution(generator);
-        int secondIndex = thirdRandomDistribution(generator);
-        int thirdIndex = thirdRandomDistribution(generator);
-        int fourthIndex = thirdRandomDistribution(generator);
+        const auto firstIndex = thirdRandomDistribution(generator);
+        const auto secondIndex = thirdRandomDistribution(generator);
+        const auto thirdIndex = thirdRandomDistribution(generator);
+        const auto fourthIndex = thirdRandomDistribution(generator);
 
         Query2Int64D query(vertices);
 
         ASSERT_ENUM_EQUAL(query.ToCircumcircle(secondIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
         ASSERT_ENUM_EQUAL(query.ToCircumcircle(thirdIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
         ASSERT_ENUM_EQUAL(query.ToCircumcircle(fourthIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::OnCircumcircle);
-
-        if (firstIndex != secondIndex && secondIndex != thirdIndex &&
-            thirdIndex != fourthIndex && fourthIndex != firstIndex &&
-            secondIndex != fourthIndex && firstIndex != thirdIndex)
-        {
-            // 			Vector2<int64_t> firstVector = vertices[firstIndex];
-            // 			Vector2<int64_t> secondVector = vertices[secondIndex];
-            // 			Vector2<int64_t> thirdVector = vertices[thirdIndex];
-            // 			Vector2<int64_t> fourthVector = vertices[fourthIndex];
-            //
-            // 			Vector2<int64_t> lhsPlusTest = secondVector + firstVector;
-            // 			Vector2<int64_t> lhsMinusTest = secondVector - firstVector;
-            // 			Vector2<int64_t> mhsPlusTest = thirdVector + firstVector;
-            // 			Vector2<int64_t> mhsMinusTest = thirdVector - firstVector;
-            // 			Vector2<int64_t> rhsPlusTest = fourthVector + firstVector;
-            // 			Vector2<int64_t> rhsMinusTest = fourthVector - firstVector;
-            // 			int64_t z0 = boost::numeric_cast<int64_t>(Vector2Tools<double>::DotProduct(lhsPlusTest, lhsMinusTest));
-            // 			int64_t z1 = boost::numeric_cast<int64_t>(Vector2Tools<double>::DotProduct(mhsPlusTest, mhsMinusTest));
-            // 			int64_t z2 = boost::numeric_cast<int64_t>(Vector2Tools<double>::DotProduct(rhsPlusTest, rhsMinusTest));
-            //
-            // 			Vector3<int64_t> fifthVector(lhsMinusTest[0], lhsMinusTest[1], z0);
-            // 			Vector3<int64_t> sixthVector(mhsMinusTest[0], mhsMinusTest[1], z1);
-            // 			Vector3<int64_t> seventhVector(rhsMinusTest[0], rhsMinusTest[1], z2);
-            //
-            // 			double dot = Vector3Tools<double>::ScalarTripleProduct(fifthVector, sixthVector, seventhVector);
-            // 			if(0 < dot)
-            // 			{
-            // 				ASSERT_ENUM_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex,fourthIndex), CircumcircleQueryType::Inside);
-            // 			}
-            // 			else if(dot < 0)
-            // 			{
-            // 				ASSERT_ENUM_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex, fourthIndex), CircumcircleQueryType::Outside);
-            // 			}
-            // 			else
-            // 			{
-            // 				ASSERT_ENUM_EQUAL(query.ToCircumcircle(firstIndex, secondIndex, thirdIndex,fourthIndex), CircumcircleQueryType::OnCircumcircle);
-            //}
-        }
     }
 }

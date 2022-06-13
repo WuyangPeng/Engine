@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.1.4 (2021/06/07 13:48)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/14 16:43)
 
 #include "SelectTesting.h"
 #include "System/DynamicLink/LibraryTools.h"
@@ -22,11 +22,11 @@
 #include "System/Threading/Process.h"
 #include "System/Threading/ProcessTools.h"
 #include "System/Threading/Thread.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/FileManager/EnvironmentVariable.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "System/Windows/Engineering.h"
 
 #include <array>
 #include <thread>
@@ -114,10 +114,6 @@ void System::SelectTesting::SelectTest()
 
 void System::SelectTesting::SelectThreadTest()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
     for (;;)
     {
         auto readWinSockFdSet = winSockFdSet;
@@ -126,7 +122,13 @@ void System::SelectTesting::SelectThreadTest()
         {
             for (auto i = 0u; i < winSockFdSet.fd_count; i++)
             {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+
                 if (WinSockFdIsSet(winSockFdSet.fd_array[i], &readWinSockFdSet))
+
+#include STSTEM_WARNING_POP
                 {
                     constexpr auto bufferSize = 256;
                     array<char, bufferSize> buffer{};
@@ -135,7 +137,13 @@ void System::SelectTesting::SelectThreadTest()
 
                     while (0 < remain)
                     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+
                         const auto ret = Recv(winSockFdSet.fd_array[i], &buffer.at(index), remain, SocketRecv::Default);
+
+#include STSTEM_WARNING_POP
 
                         ASSERT_UNEQUAL(ret, g_SocketError);
 
@@ -152,13 +160,17 @@ void System::SelectTesting::SelectThreadTest()
 
                     ASSERT_EQUAL(recvResult, "Hello");
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+
                     WinSockFdClear(winSockFdSet.fd_array[i], &winSockFdSet);
+
+#include STSTEM_WARNING_POP
                 }
             }
 
             break;
         }
     }
-
-#include STSTEM_WARNING_POP
 }

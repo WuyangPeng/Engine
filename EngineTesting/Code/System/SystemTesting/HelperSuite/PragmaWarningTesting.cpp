@@ -1,18 +1,14 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎测试版本：0.7.2.3 (2021/09/05 22:01)
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.8 (2022/05/15 1:12)
 
 #include "PragmaWarningTesting.h"
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
 #include "System/Helper/PragmaWarning/ACE.h"
 #include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/Helper/PragmaWarning/Any.h"
@@ -53,6 +49,9 @@
 #include "System/Helper/PragmaWarning/Timer.h"
 #include "System/Helper/PragmaWarning/TypeIndex.h"
 #include "System/Helper/PragmaWarning/TypeTraits.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include STSTEM_WARNING_PUSH
 

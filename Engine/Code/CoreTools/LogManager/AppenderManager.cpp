@@ -57,7 +57,7 @@ System::String CoreTools::AppenderManager::GetConsoleAppenderName()
     return ImplType::GetConsoleAppenderName();
 }
 
-System::String CoreTools::AppenderManager ::GetDefaultAppenderName()
+System::String CoreTools::AppenderManager::GetDefaultAppenderName()
 {
     return ImplType::GetDefaultAppenderName();
 }
