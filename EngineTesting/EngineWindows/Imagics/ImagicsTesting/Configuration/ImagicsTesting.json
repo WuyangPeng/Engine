@@ -1,41 +1,33 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "binaryOperationsSuite": 
-  {
+  "binaryOperationsSuite": {
 
   },
 
-  "extractionSuite": 
-  {
+  "extractionSuite": {
 
   },
 
-  "filtersSuite": 
-  {
+  "filtersSuite": {
 
   },
 
-  "imagesSuite": 
-  {
+  "imagesSuite": {
 
   },
 
-  "rasterDrawingSuite": 
-  {
+  "rasterDrawingSuite": {
 
   },
 
-  "segmentersSuite": 
-  {
+  "segmentersSuite": {
 
   },
 
-  "openCVSuite": 
-  {
+  "openCVSuite": {
 
   }
 }

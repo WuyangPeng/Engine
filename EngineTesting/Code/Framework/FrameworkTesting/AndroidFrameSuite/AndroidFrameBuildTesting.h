@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.4 (2019/09/12 19:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:20)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_FRAME_BUILD_TESTING_H
 #define FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_FRAME_BUILD_TESTING_H
@@ -11,21 +14,21 @@
 
 namespace Framework
 {
-	class AndroidFrameBuildTesting : public CoreTools::UnitTest
-	{
-	public:
-		using ClassType = AndroidFrameBuildTesting;
-		using ParentType = UnitTest;
+    class AndroidFrameBuildTesting : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = AndroidFrameBuildTesting;
+        using ParentType = UnitTest;
 
-	public:
-		explicit AndroidFrameBuildTesting(const OStreamShared& stream);
+    public:
+        explicit AndroidFrameBuildTesting(const OStreamShared& stream);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	private:
-		void DoRunUnitTest() final;
-		void MainTest();		
-	};
+    private:
+        void DoRunUnitTest() final;
+        void MainTest() noexcept;
+    };
 }
 
-#endif // FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_FRAME_BUILD_TESTING_H
+#endif  // FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_FRAME_BUILD_TESTING_H

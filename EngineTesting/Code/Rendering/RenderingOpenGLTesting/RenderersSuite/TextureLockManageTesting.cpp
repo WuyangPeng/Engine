@@ -1,115 +1,50 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/09 15:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/18 16:15)
 
 #include "TextureLockManageTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
 #include "Rendering/Renderers/PlatformTexture1D.h"
 #include "Rendering/Renderers/PlatformTexture2D.h"
 #include "Rendering/Renderers/PlatformTexture3D.h"
 #include "Rendering/Renderers/PlatformTextureCube.h"
+#include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Renderers/Renderer.h" 
-#include "Rendering/Resources/LoadTexture.h"
 #include "Rendering/Renderers/TextureLockManagerDetail.h"
+#include "Rendering/Resources/LoadTexture.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, TextureLockManageTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, TextureLockManageTesting)
 
-void Rendering::TextureLockManageTesting
-	::MainTest()
-{ 
-	RendererManager::Create();
-
-	ASSERT_NOT_THROW_EXCEPTION_0(Texture1DTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(Texture2DTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(Texture3DTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(TextureCubeTest);
-
-	RendererManager::Destroy();
-}
-#include SYSTEM_WARNING_DISABLE(26440)
-void Rendering::TextureLockManageTesting
-	::Texture1DTest()
+void Rendering::TextureLockManageTesting::MainTest()
 {
-// 	Texture1DSmartPointer firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/OpenGLRendererSuite/Texture1D.trt"));
-// 
-// 	RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
-// 	renderer->Init();
-// 
-// 	PlatformTexture1D texture(renderer.get(), firstTexture1D.GetData());
-// 
-// 	texture.Enable(renderer.get(), 0);
-// 
-// 	{
-// 		TextureLockManager<PlatformTexture1D> manage(texture);
-// 		ASSERT_UNEQUAL_NULL_PTR(manage.Lock(0, BufferLocking::WriteOnly));
-// 	}
-// 
-// 	texture.Disable(renderer.get(),0);
+    RendererManager::Create();
+
+    ASSERT_NOT_THROW_EXCEPTION_0(Texture1DTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Texture2DTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(Texture3DTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(TextureCubeTest);
+
+    RendererManager::Destroy();
 }
 
-void Rendering::TextureLockManageTesting
-	::Texture2DTest()
+void Rendering::TextureLockManageTesting::Texture1DTest() noexcept
 {
-// 	Texture2DSmartPointer firstTexture2D = LoadTexture::Load2DFromFile(SYSTEM_TEXT("Resource/OpenGLRendererSuite/Texture2D.trt"));
-// 
-// 	RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
-// 	renderer->Init();
-// 
-// 	PlatformTexture2D texture(renderer.get(), firstTexture2D.GetData());
-// 
-// 	texture.Enable(renderer.get(), 0);
-// 
-// 	{
-// 		TextureLockManager<PlatformTexture2D> manage(texture);
-// 		ASSERT_UNEQUAL_NULL_PTR(manage.Lock(0, BufferLocking::WriteOnly));
-// 	}
-// 
-// 	texture.Disable(renderer.get(),0);
 }
 
-void Rendering::TextureLockManageTesting
-	::Texture3DTest()
+void Rendering::TextureLockManageTesting::Texture2DTest() noexcept
 {
-// 	Texture3DSmartPointer firstTexture3D = LoadTexture::Load3DFromFile(SYSTEM_TEXT("Resource/OpenGLRendererSuite/Texture3D.trt"));
-// 
-// 	RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
-// 	renderer->Init();
-// 
-// 	PlatformTexture3D texture(renderer.get(), firstTexture3D.GetData());
-// 
-// 	texture.Enable(renderer.get(), 0);
-// 
-// 	{
-// 		TextureLockManager<PlatformTexture3D> manage(texture);
-// 		ASSERT_UNEQUAL_NULL_PTR(manage.Lock(0, BufferLocking::WriteOnly));
-// 	}
-// 
-// 	texture.Disable(renderer.get(),0);
 }
 
-void Rendering::TextureLockManageTesting
-	::TextureCubeTest()
+void Rendering::TextureLockManageTesting::Texture3DTest() noexcept
 {
-// 	TextureCubeSmartPointer firstTextureCube = LoadTexture::LoadCubeFromFile(SYSTEM_TEXT("Resource/OpenGLRendererSuite/TextureCube.trt"));
-// 	
-// 	RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
-// 	renderer->Init();
-// 
-// 	PlatformTextureCube texture(renderer.get(), firstTextureCube.GetData());
-// 
-// 	texture.Enable(renderer.get(), 0);
-// 
-// 	{
-// 		TextureLockManager<PlatformTextureCube> manage(texture);
-// 		ASSERT_UNEQUAL_NULL_PTR(manage.Lock(2,0, BufferLocking::WriteOnly));
-// 	}
-// 
-// 	texture.Disable(renderer.get(),0);
 }
 
- 
+void Rendering::TextureLockManageTesting::TextureCubeTest() noexcept
+{
+}

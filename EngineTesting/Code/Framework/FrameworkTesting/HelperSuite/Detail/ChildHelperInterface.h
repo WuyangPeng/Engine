@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.1 (2020/05/27 14:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:06)
 
 #ifndef FRAMEWORK_HELPER_SUITE_CHILD_HELPER_INTERFACE_H
 #define FRAMEWORK_HELPER_SUITE_CHILD_HELPER_INTERFACE_H
 
+#include "ChildHelperInterfaceImpl.h"
+#include "ChildHelperMiddleLayerFlags.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerInterface.h"
 
 namespace Framework
 {
-    class ChildHelperInterfaceImpl;
-    enum class ChildHelperMiddleLayer;
-
     class ChildHelperInterface : public EngineMiddleLayerInterface
     {
     public:
@@ -39,7 +41,7 @@ namespace Framework
 
     public:
         // 开启protected接口为public，以供测试。
-        const ConstMiddleLayerInterfaceSharedPtr GetManager(ChildHelperMiddleLayer childHelperMiddleLayer) const;
+        NODISCARD ConstMiddleLayerInterfaceSharedPtr GetManager(ChildHelperMiddleLayer childHelperMiddleLayer) const;
 
     private:
         PackageType impl;

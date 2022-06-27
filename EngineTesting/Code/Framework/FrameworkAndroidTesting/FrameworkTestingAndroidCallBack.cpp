@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/10 20:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 10:19)
 
 #include "FrameworkTestingAndroidCallBack.h"
 #include "Testing.h"
@@ -11,17 +14,12 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
 using std::string;
-#include SYSTEM_WARNING_DISABLE(26432)
+
 Framework::FrameworkTestingAndroidCallBack::FrameworkTestingAndroidCallBack(int64_t delta)
     : ParentType{ delta, "【框架库】单元测试套件" }
 {
     InitSuite();
 
-    FRAMEWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Framework::FrameworkTestingAndroidCallBack::~FrameworkTestingAndroidCallBack()
-{
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
@@ -36,15 +34,15 @@ void Framework::FrameworkTestingAndroidCallBack::AddAndroidFrameSuite()
 {
     auto androidFrameSuite = GenerateSuite("安卓框架");
 
-    //System::AndroidApp* app = GetAndroidApp();
+    System::AndroidApp* app = GetAndroidApp();
 
-    // 	ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidProcessManagerTesting,app);
-    // 	ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidProcessTesting,app);
-    // 	ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackInterfaceTesting,app);
-    // 	ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackTesting,app);
-    // 	ADD_TEST(androidFrameSuite, AndroidMessageLoopTesting);
-    // 	ADD_TEST(androidFrameSuite, AndroidFrameBuildTesting);
-    // 	ADD_TEST(androidFrameSuite, AndroidCallBackUnitTestSuiteTesting);
+    ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidProcessManagerTesting, app);
+    ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidProcessTesting, app);
+    ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackInterfaceTesting, app);
+    ADD_TEST_USE_PARAMETER_1(androidFrameSuite, AndroidCallBackTesting, app);
+    ADD_TEST(androidFrameSuite, AndroidMessageLoopTesting);
+    ADD_TEST(androidFrameSuite, AndroidFrameBuildTesting);
+    ADD_TEST(androidFrameSuite, AndroidCallBackUnitTestSuiteTesting);
 
     AddSuite(androidFrameSuite);
 }

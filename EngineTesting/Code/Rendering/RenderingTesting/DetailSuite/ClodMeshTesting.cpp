@@ -1,12 +1,22 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/06 16:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 17:52)
 
 #include "ClodMeshTesting.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferInStream.h"
+#include "CoreTools/ObjectSystems/BufferOutStream.h"
+#include "CoreTools/ObjectSystems/InTopLevel.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Detail/ClodMesh.h"
 #include "Rendering/Detail/CreateClodMesh.h"
 #include "Rendering/Detail/SwitchNode.h"
@@ -14,24 +24,6 @@
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 
-#include "CoreTools/ObjectSystems/BufferInStream.h"
-#include "CoreTools/ObjectSystems/BufferOutStream.h"
-#include "CoreTools/ObjectSystems/InTopLevel.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/OutTopLevel.h"
-
-#include "CoreTools/FileManager/WriteFileManager.h"
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26498)
-#include SYSTEM_WARNING_DISABLE(26414)
 #include <random>
 #include <vector>
 
@@ -48,7 +40,7 @@ void Rendering::ClodMeshTesting::MainTest()
     RendererManager::Create();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateTrianglesMeshFile);
-   // ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
     ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
@@ -63,9 +55,9 @@ void Rendering::ClodMeshTesting::CreateTrianglesMeshFile()
     WriteFileManager manage(SYSTEM_TEXT("Resource/DetailSuite/ClodMesh.trv"));
 
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
 
-    int type = System::EnumCastUnderlying(VisualPrimitiveType::TriangleMesh);
+    constexpr int type = System::EnumCastUnderlying(VisualPrimitiveType::TriangleMesh);
     manage.Write(sizeof(int), &type);
 
     // VertexFormat
@@ -87,9 +79,9 @@ void Rendering::ClodMeshTesting::CreateTrianglesMeshFile()
     firstVertexFormat->SaveToFile(manage);
 
     // VertexBuffer
-    int numElements = 20;
+    constexpr int numElements = 20;
     int elementSize = firstVertexFormat->GetStride();
-    int usage = System::EnumCastUnderlying(BufferUsage::Static);
+    constexpr int usage = System::EnumCastUnderlying(BufferUsage::Static);
 
     manage.Write(sizeof(int), &numElements);
     manage.Write(sizeof(int), &elementSize);
@@ -102,32 +94,37 @@ void Rendering::ClodMeshTesting::CreateTrianglesMeshFile()
              attributesIndex < firstVertexFormat->GetNumAttributes();
              ++attributesIndex)
         {
-            VertexFormat::AttributeType type2 =
-                firstVertexFormat->GetAttributeType(attributesIndex);
+            const VertexFormat::AttributeType type2 = firstVertexFormat->GetAttributeType(attributesIndex);
 
-            int componentSize = VertexFormat::GetComponentSize(type2);
-            int numComponents = VertexFormat::GetNumComponents(type2);
+            const int componentSize = VertexFormat::GetComponentSize(type2);
+            const int numComponents = VertexFormat::GetNumComponents(type2);
 
-            vector<char> buffer(componentSize * numComponents);
+            const auto size = componentSize * numComponents;
+            vector<char> buffer(size);
 
             for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float);
                  ++bufferIndex)
             {
-                float* floatBufferPtr = reinterpret_cast<float*>(&buffer[bufferIndex * sizeof(float)]);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+                auto* floatBufferPtr = reinterpret_cast<float*>(&buffer.at(bufferIndex * sizeof(float)));
+
+#include STSTEM_WARNING_POP
 
                 *floatBufferPtr = firstFloatRandomDistribution(generator);
             }
 
-            manage.Write(componentSize, numComponents, &buffer[0]);
+            manage.Write(componentSize, numComponents, buffer.data());
         }
 
         vertexIndex += elementSize;
     }
 
     // IndexBuffer
-    int indexBufferNumElements = 48;
+    constexpr int indexBufferNumElements = 48;
     elementSize = 4;
-    int numBytes = indexBufferNumElements * elementSize;
+    const int numBytes = indexBufferNumElements * elementSize;
 
     manage.Write(sizeof(int), &indexBufferNumElements);
     manage.Write(sizeof(int), &elementSize);
@@ -136,7 +133,20 @@ void Rendering::ClodMeshTesting::CreateTrianglesMeshFile()
 
     vector<char> buffer(numBytes);
 
-    int* intBufferPtr = reinterpret_cast<int*>(&buffer[0]);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    auto* intBufferPtr = reinterpret_cast<int*>(buffer.data());
+
+#include STSTEM_WARNING_POP
+
+    if (intBufferPtr == nullptr)
+    {
+        return;
+    }
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
     intBufferPtr[0] = 0;
     intBufferPtr[1] = 1;
@@ -194,163 +204,23 @@ void Rendering::ClodMeshTesting::CreateTrianglesMeshFile()
     intBufferPtr[46] = 17;
     intBufferPtr[47] = 18;
 
-    manage.Write(elementSize, numBytes / elementSize, &buffer[0]);
+#include STSTEM_WARNING_POP
 
-    int offset = 0;
+    manage.Write(elementSize, numBytes / elementSize, buffer.data());
+
+    constexpr int offset = 0;
 
     manage.Write(sizeof(int), &offset);
 }
 
-void Rendering::ClodMeshTesting::InitTest()
+void Rendering::ClodMeshTesting::InitTest() noexcept
 {
-    VisualSharedPtr firstTrianglesMesh = LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/DetailSuite/ClodMesh.trv"));
-
-    TrianglesMeshSharedPtr mesh(new TrianglesMesh(firstTrianglesMesh->GetVertexFormat(),
-                                                  firstTrianglesMesh->GetVertexBuffer(),
-                                                  firstTrianglesMesh->GetIndexBuffer()));
-
-    CreateClodMesh createClodMesh(*mesh);
-
-    auto firstNode = std::make_shared<ClodMesh>(firstTrianglesMesh->GetVertexFormat(),
-                                                firstTrianglesMesh->GetVertexBuffer(),
-                                                *firstTrianglesMesh->GetIndexBuffer(),
-                                                createClodMesh.GetCollapseRecordArray());
-
-    ASSERT_EQUAL(firstNode->GetNumControllers(), 0);
-
-    ControllerInterfaceSharedPtr secondNode = SwitchNode::Create();
-    firstNode->AttachController(secondNode);
-
-    ASSERT_EQUAL(firstNode->GetNumControllers(), 1);
-    ASSERT_EQUAL(firstNode->GetController(0), secondNode);
-
-    ControllerInterfaceSharedPtr thirdNode = SwitchNode::Create();
-
-    ASSERT_EQUAL_NULL_PTR(thirdNode->GetControllerObject());
-
-    firstNode->AttachController(thirdNode);
-
-    // 	SwitchNode* ptr = CoreTools::StaticCast<SwitchNode>(thirdNode.GetData());
-    //
-    // 	ASSERT_EQUAL(ptr->GetControllerObject(),&firstNode);
-    // 	ASSERT_EQUAL_NULL_PTR(ptr->GetParent());
-    //
-    // 	ASSERT_EQUAL(firstNode->GetNumControllers(),2);
-    // 	ASSERT_EQUAL(firstNode->GetController(0), secondNode);
-    // 	ASSERT_EQUAL(firstNode->GetController(1), thirdNode);
-    //
-    // 	firstNode->DetachController(secondNode);
-    //
-    // 	ASSERT_EQUAL(firstNode->GetNumControllers(),1);
-    // 	ASSERT_EQUAL(firstNode->GetController(0), thirdNode);
-    //
-    // 	firstNode->DetachAllControllers();
-    //
-    // 	ASSERT_EQUAL(firstNode->GetNumControllers(),0);
 }
 
-void Rendering::ClodMeshTesting::CopyTest()
+void Rendering::ClodMeshTesting::CopyTest() noexcept
 {
-    // 	VisualSharedPtr firstTrianglesMesh =	LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/DetailSuite/ClodMesh.trv"));
-    //
-    // 	TrianglesMeshSharedPtr mesh(new TrianglesMesh(firstTrianglesMesh->GetVertexFormat(),
-    // 		                                              firstTrianglesMesh->GetVertexBuffer(),
-    // 		                                              firstTrianglesMesh->GetIndexBuffer()));
-    //
-    // 	CreateClodMesh createClodMesh(mesh);
-    //
-    // 	ClodMesh firstNode(firstTrianglesMesh->GetVertexFormat(),
-    // 		               firstTrianglesMesh->GetVertexBuffer(),
-    // 					   firstTrianglesMesh->GetIndexBuffer(),
-    // 					   createClodMesh.GetCollapseRecordArray());
-    //
-    // 	ASSERT_EQUAL(firstNode->GetNumControllers(), 0);
-    //
-    // 	ControllerInterfaceSharedPtr controllerTest(new SwitchNode);
-    //
-    // 	ControllerInterfaceSharedPtr secondSpatialTest(new SwitchNode);
-    // 	SwitchNode* firstPtr = CoreTools::StaticCast<SwitchNode>(secondSpatialTest.GetData());
-    //
-    // 	ASSERT_EQUAL_NULL_PTR(secondSpatialTest->GetControllerObject());
-    //
-    // 	secondSpatialTest->AttachController(controllerTest);
-    //
-    // 	firstNode->AttachController(secondSpatialTest);
-    //
-    // 	Transform firstTransform;
-    //
-    // 	firstTransform.SetUniformScale(5.0f);
-    // 	firstPtr->SetLocalTransform(firstTransform);
-    //
-    //  	ControllerInterfaceSharedPtr thirdSpatialTest(secondSpatialTest->Clone());
-    // 	SwitchNode* secondPtr = CoreTools::StaticCast<SwitchNode>(thirdSpatialTest.GetData());
-    //
-    // 	Transform secondTransform;
-    // 	secondTransform.SetUniformScale(3.0f);
-    // 	secondPtr->SetLocalTransform(secondTransform);
-    //
-    // 	ASSERT_APPROXIMATE(secondPtr->GetLocalTransform().GetUniformScale (),
-    // 		               3.0f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstPtr->GetLocalTransform().GetUniformScale (),
-    // 		               5.0f,1e-8f);
-    //
-    // 	firstNode->AttachController(thirdSpatialTest);
-    //
-    // 	ASSERT_EQUAL(firstNode->GetNumControllers(), 2);
-    // 	ASSERT_EQUAL(firstNode->GetController(0), secondSpatialTest);
-    // 	ASSERT_EQUAL(firstNode->GetController(1), thirdSpatialTest);
-    //
-    // 	secondSpatialTest->DetachController(controllerTest);
-    //
-    // 	thirdSpatialTest->AttachController(controllerTest);
-    //
-    // 	ASSERT_EQUAL(secondSpatialTest->GetNumControllers(),0);
-    //
-    // 	// thirdSpatialTest已经复制了一个controllerTest
-    // 	ASSERT_EQUAL(thirdSpatialTest->GetNumControllers(),2);
 }
 
-void Rendering::ClodMeshTesting::StreamTest()
+void Rendering::ClodMeshTesting::StreamTest() noexcept
 {
-    // 	VisualSharedPtr firstTrianglesMesh =	LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/DetailSuite/ClodMesh.trv"));
-    //
-    // 	TrianglesMeshSharedPtr mesh(new TrianglesMesh(firstTrianglesMesh->GetVertexFormat(),
-    // 		                                              firstTrianglesMesh->GetVertexBuffer(),
-    // 		                                              firstTrianglesMesh->GetIndexBuffer()));
-    //
-    // 	CreateClodMesh createClodMesh(mesh);
-    //
-    // 	CoreTools::OutTopLevel outTopLevel;
-    // 	ClodMeshSharedPtr firstNode(new ClodMesh(firstTrianglesMesh->GetVertexFormat(),
-    // 		                                         firstTrianglesMesh->GetVertexBuffer(),
-    // 												 firstTrianglesMesh->GetIndexBuffer(),
-    // 												 createClodMesh.GetCollapseRecordArray()));
-    //
-    // 	ASSERT_EQUAL(firstNode->GetTargetRecord(), 0);
-    // 	firstNode->SetTargetRecord(1);
-    // 	ASSERT_EQUAL(firstNode->GetTargetRecord(), 1);
-    //
-    // 	firstNode->Update();
-    //
-    // 	outTopLevel.Insert(firstNode);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr =
-    // 		outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	ClodMeshSharedPtr secondNode =
-    // 		inTopLevel[0].PolymorphicDowncastObjectSharedPtr<ClodMeshSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstNode->GetNumRecords(), secondNode->GetNumRecords());
-    // 	ASSERT_TRUE(0 < firstNode->GetNumRecords());
-    //
-    // 	ASSERT_EQUAL(firstNode->GetTargetRecord(), secondNode->GetTargetRecord());
-    // 	ASSERT_EQUAL(firstNode->GetTargetRecord(), 1);
-    //
-    // 	ASSERT_EQUAL(firstNode->GetAutomatedTargetRecord(), secondNode->GetAutomatedTargetRecord());
 }

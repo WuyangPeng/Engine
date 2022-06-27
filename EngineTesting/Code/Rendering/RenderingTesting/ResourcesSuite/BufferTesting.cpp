@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/03 17:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.9 (2022/06/15 15:54)
 
 #include "BufferTesting.h"
 #include "CoreTools/FileManager/FileBuffer.h"
@@ -11,19 +14,16 @@
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Resources/VertexFormatElement.h"
-
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-
-#include SYSTEM_WARNING_DISABLE(26440)
+#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/Resources/IndexBuffer.h"
+#include "Rendering/Resources/VertexBuffer.h"
+#include "Rendering/Resources/VertexFormatElement.h"
 
 using std::vector;
 
@@ -108,87 +108,10 @@ void Rendering::BufferTesting::IndexBufferTest()
     ASSERT_UNEQUAL_NULL_PTR(secondIndexBuffer->GetReadOnlyData());
 }
 
-void Rendering::BufferTesting::StreamTest()
+void Rendering::BufferTesting::StreamTest() noexcept
 {
-    // 	vector<VertexFormatElement> firstVertexFormatElement { VertexFormatElement(0,0,VertexFormatType(VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0)) };
-    //
-    // 	VertexFormatSharedPtr firstVertexFormat = VertexFormat::Create(firstVertexFormatElement);
-    //
-    // 	CoreTools::ReadFileManager vertexManage(SYSTEM_TEXT("Resource/ResourcesSuite/Buffer.vb"));
-    // 	CoreTools::ReadFileManager indexManage(SYSTEM_TEXT("Resource/ResourcesSuite/Buffer.ib"));
-    //
-    // 	CoreTools::OutTopLevel outTopLevel;
-    // 	CoreTools::ObjectInterfaceSharedPtr firstBuffer(new VertexBuffer);
-    //
-    // 	outTopLevel.Insert(firstBuffer);
-    //
-    // 	VertexBuffer* secondBuffer = CoreTools::PolymorphicCast<VertexBuffer>(firstBuffer.GetData());
-    // 	secondBuffer->ReadFromFile(vertexManage, firstVertexFormat.PolymorphicDowncastConstObjectSharedPtr<ConstVertexFormatSharedPtr>());
-    //
-    // 	CoreTools::ObjectInterfaceSharedPtr thirdBuffer(new IndexBuffer);
-    //
-    // 	outTopLevel.Insert(thirdBuffer);
-    //
-    // 	IndexBuffer* fourthBuffer = CoreTools::PolymorphicCast<IndexBuffer>(thirdBuffer.GetData());
-    // 	fourthBuffer->ReadFromFile(indexManage);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	VertexBufferSharedPtr fifthBuffer = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<VertexBufferSharedPtr>();
-    //
-    // 	IndexBufferSharedPtr sixthBuffer = inTopLevel[1].PolymorphicDowncastObjectSharedPtr<IndexBufferSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(fifthBuffer->GetNumElements(), secondBuffer->GetNumElements());
-    // 	ASSERT_EQUAL(fifthBuffer->GetElementSize(), secondBuffer->GetElementSize());
-    // 	ASSERT_ENUM_EQUAL(fifthBuffer->GetUsage(), secondBuffer->GetUsage());
-    // 	ASSERT_EQUAL(fifthBuffer->GetNumBytes(), secondBuffer->GetNumBytes());
-    //
-    // 	ASSERT_EQUAL(sixthBuffer->GetNumElements(), fourthBuffer->GetNumElements());
-    // 	ASSERT_EQUAL(sixthBuffer->GetElementSize(), fourthBuffer->GetElementSize());
-    // 	ASSERT_ENUM_EQUAL(sixthBuffer->GetUsage(), fourthBuffer->GetUsage());
-    // 	ASSERT_EQUAL(sixthBuffer->GetNumBytes(), fourthBuffer->GetNumBytes());
-    // 	ASSERT_EQUAL(sixthBuffer->GetOffset(), fourthBuffer->GetOffset());
-    //
-    // 	for (int i = 0; i < fifthBuffer->GetNumElements() * fifthBuffer->GetElementSize(); ++i)
-    // 	{
-    // 		ASSERT_EQUAL(fifthBuffer->GetReadOnlyData()[i], secondBuffer->GetReadOnlyData()[i]);
-    // 	}
-    //
-    // 	for (int i = 0; i < sixthBuffer->GetNumElements() * sixthBuffer->GetElementSize(); ++i)
-    // 	{
-    // 		ASSERT_EQUAL(sixthBuffer->GetReadOnlyData()[i], fourthBuffer->GetReadOnlyData()[i]);
-    // 	}
-    //
-    // 	CoreTools::WriteFileManager writeVertexManage(SYSTEM_TEXT("Resource/ResourcesSuite/WriteBuffer.vb"));
-    // 	CoreTools::WriteFileManager writeIndexManage(SYSTEM_TEXT("Resource/ResourcesSuite/WriteBuffer.ib"));
-    //
-    // 	fifthBuffer->SaveToFile(writeVertexManage, firstVertexFormat.PolymorphicDowncastConstObjectSharedPtr<ConstVertexFormatSharedPtr>());
-    //sixthBuffer->SaveToFile(writeIndexManage);
 }
 
-void Rendering::BufferTesting::FileTest()
+void Rendering::BufferTesting::FileTest() noexcept
 {
-    // 	CoreTools::FileBuffer firstFileBuffer = CoreTools::FileManagerHelper::LoadFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Buffer.vb"), true);
-    // 	CoreTools::FileBuffer secondFileBuffer = CoreTools::FileManagerHelper::LoadFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Buffer.ib"), true);
-    // 	CoreTools::FileBuffer thirdFileBuffer = CoreTools::FileManagerHelper::LoadFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/WriteBuffer.vb"), true);
-    // 	CoreTools::FileBuffer fourthFileBuffer = CoreTools::FileManagerHelper::LoadFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/WriteBuffer.ib"), true);
-    //
-    // 	ASSERT_EQUAL(firstFileBuffer.GetSize(), thirdFileBuffer.GetSize());
-    // 	ASSERT_EQUAL(secondFileBuffer.GetSize(), fourthFileBuffer.GetSize());
-    //
-    // 	for (size_t i = 0; i < firstFileBuffer.GetSize(); ++i)
-    // 	{
-    // 		ASSERT_EQUAL(firstFileBuffer.GetBufferBegin()[i], thirdFileBuffer.GetBufferBegin()[i]);
-    // 	}
-    //
-    // 	for (size_t i = 0; i < secondFileBuffer.GetSize(); ++i)
-    // 	{
-    // 		ASSERT_EQUAL(secondFileBuffer.GetBufferBegin()[i], fourthFileBuffer.GetBufferBegin()[i]);
-    // 	}
 }

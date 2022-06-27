@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.3.0.2 (2020/06/03 16:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:24)
 
 #ifndef FRAMEWORK_WINDOW_TESTING_WINDOW_CREATE_SUITE_WINDOW_CREATE_PARAMETER_TESTING_H
 #define FRAMEWORK_WINDOW_TESTING_WINDOW_CREATE_SUITE_WINDOW_CREATE_PARAMETER_TESTING_H
@@ -12,28 +15,28 @@
 
 namespace Framework
 {
-	class WindowCreateParameterTesting final : public CoreTools::UnitTest
-	{
-	public:
-		using ClassType = WindowCreateParameterTesting;
-		using ParentType = UnitTest;
-		using HWnd = System::WindowsHWnd; 
+    class WindowCreateParameterTesting final : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = WindowCreateParameterTesting;
+        using ParentType = UnitTest;
+        using HWnd = System::WindowsHWnd;
 
-	public:
-		WindowCreateParameterTesting(const OStreamShared& stream, HWnd hwnd);
+    public:
+        WindowCreateParameterTesting(const OStreamShared& stream, HWnd hwnd);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	private:
-		void MainTest();
+    private:
+        void MainTest();
 
-		void DoRunUnitTest() final;
+        void DoRunUnitTest() final;
 
-		void ValueTest();
+        void ValueTest();
 
-	private:
-		HWnd m_Hwnd;
-	};
+    private:
+        HWnd hwnd;
+    };
 }
 
-#endif // FRAMEWORK_WINDOW_CREATE_SUITE_WINDOW_CREATE_PARAMETER_TESTING_H
+#endif  // FRAMEWORK_WINDOW_CREATE_SUITE_WINDOW_CREATE_PARAMETER_TESTING_H

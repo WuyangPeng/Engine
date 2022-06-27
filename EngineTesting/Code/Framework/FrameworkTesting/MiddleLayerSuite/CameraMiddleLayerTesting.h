@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.1.0 (2020/06/27 10:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 10:25)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_CAMERA_MIDDLE_LAYER_TESTING_H
@@ -33,13 +36,13 @@ namespace Framework
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     protected:
-        float CalculateMultiplier(const WindowSize& windowSize);
-        float GetXTrack(int x, float multiplier, const WindowSize& windowSize) const noexcept;
-        float GetYTrack(int y, float multiplier, const WindowSize& windowSize) const noexcept;
-        const Transform CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis);
-        const AVectorf Calculate3DVector(float xTrack, float yTrack) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        float CalculateAngle(const AVectorf& axis, float dot) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
-        const AVectorf CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack);
+        NODISCARD float CalculateMultiplier(const WindowSize& windowSize);
+        NODISCARD float GetXTrack(int x, float multiplier, const WindowSize& windowSize) const noexcept;
+        NODISCARD float GetYTrack(int y, float multiplier, const WindowSize& windowSize) const noexcept;
+        NODISCARD Transform CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis);
+        NODISCARD AVectorf Calculate3DVector(float xTrack, float yTrack) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD float CalculateAngle(const AVectorf& axis, float dot) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD AVectorf CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack);
 
         void APointTest(const APointf& lhs, const APointf& rhs, const std::string& functionName, int index);
         void AVectorTest(const AVectorf& lhs, const AVectorf& rhs, const std::string& functionName, int index);

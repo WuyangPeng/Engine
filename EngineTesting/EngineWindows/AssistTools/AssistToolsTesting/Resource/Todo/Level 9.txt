@@ -1,12 +1,5 @@
 TODO Level 9
 
-0.0.2.5   
+0.8.0.9
 
-1.  （HelperSuite）完成帮助模块的单元测试。
-2.  （ConfigurationSuite）完成配置模块的单元测试。
-3.	（InterfaceSuite）完成接口模块的单元测试。
-4.	（JavaSuite）完成Java模块的单元测试。
-5.	（LuaSuite）完成Lua模块的单元测试。
-6.	（PerlSuite）完成Perl模块的单元测试。
-7.	（PythonSuite）完成Python模块的单元测试。
-8.	（TCREScriptSuite）完成TCREScript模块的单元测试。
+ 

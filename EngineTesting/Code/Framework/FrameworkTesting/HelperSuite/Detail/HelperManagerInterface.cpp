@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.1 (2020/05/27 0:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:04)
 
 #include "HelperManagerInterface.h"
 #include "HelperManagerInterfaceImpl.h"
@@ -30,7 +33,7 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Helper, CameraSystems)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Helper, Rendering)
 ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Helper, Engine)
 
-const Framework::ConstMiddleLayerInterfaceSharedPtr Framework::HelperManagerInterface::GetManager(HelperMiddleLayer helperMiddleLayer) const
+Framework::ConstMiddleLayerInterfaceSharedPtr Framework::HelperManagerInterface::GetManager(HelperMiddleLayer helperMiddleLayer) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

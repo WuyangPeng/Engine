@@ -1,97 +1,53 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/03 17:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/15 15:56)
 
 #include "RenderTargetTesting.h"
-#include "Rendering/Resources/RenderTarget.h"
-#include "Rendering/Renderers/RendererManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
-#include "CoreTools/ObjectSystems/InTopLevel.h"
-#include "CoreTools/ObjectSystems/OutTopLevel.h"
- 
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
+#include "CoreTools/ObjectSystems/BufferOutStream.h"
+#include "CoreTools/ObjectSystems/InTopLevel.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/Resources/RenderTarget.h"
 
-#include SYSTEM_WARNING_DISABLE(26440)
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RenderTargetTesting)
 
-
-
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RenderTargetTesting) 
-
-void Rendering::RenderTargetTesting
-	::MainTest()
-{ 
-	CoreTools::InitTerm::ExecuteInitializers();
-
-	RendererManager::Create();
-
-	ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
-
-	RendererManager::Destroy();
-
-	CoreTools::InitTerm::ExecuteTerminators();
-}
- 
-void Rendering::RenderTargetTesting
-	::BaseTest()
+void Rendering::RenderTargetTesting::MainTest()
 {
-	 RenderTarget firstRenderTarget(5,TextureFormat::A8B8G8R8,20,22,false,true);
+    CoreTools::InitTerm::ExecuteInitializers();
 
-	 ASSERT_EQUAL(firstRenderTarget.GetNumTargets(),5);
-	 ASSERT_ENUM_EQUAL(firstRenderTarget.GetFormat(),TextureFormat::A8B8G8R8);
-	 ASSERT_EQUAL(firstRenderTarget.GetWidth(),20);
-	 ASSERT_EQUAL(firstRenderTarget.GetHeight(),22);
+    RendererManager::Create();
 
-	 ASSERT_FALSE(firstRenderTarget.HasMipmaps());
-	 ASSERT_TRUE(firstRenderTarget.HasDepthStencil());
+    ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
-// 	 ASSERT_FALSE(firstRenderTarget.GetDepthStencilTexture().IsNullPtr());
-// 
-// 	 for (int i = 0;i < 5;++i)
-// 	 {
-// 		 ASSERT_FALSE(firstRenderTarget.GetColorTexture(i).IsNullPtr());
-// 	 }
+    RendererManager::Destroy();
+
+    CoreTools::InitTerm::ExecuteTerminators();
 }
 
-void Rendering::RenderTargetTesting
-	::StreamTest()
+void Rendering::RenderTargetTesting::BaseTest()
 {
-// 	RenderTargetSharedPtr firstRenderTarget(new RenderTarget(5,TextureFormat::A8B8G8R8,20,22,false,true));
-// 
-// 	CoreTools::OutTopLevel outTopLevel;
-// 	CoreTools::ObjectInterfaceSharedPtr firstBuffer(firstRenderTarget.PolymorphicDowncastObjectSharedPtr<CoreTools::ObjectInterfaceSharedPtr>());
-// 
-// 	outTopLevel.Insert(firstBuffer);
-// 
-// 	CoreTools::BufferOutStream outStream(outTopLevel);
-// 
-// 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-// 
-// 	CoreTools::BufferInStream inStream(fileBufferPtr);
-// 
-// 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-// 
-// 	RenderTargetSharedPtr secondRenderTarget = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<RenderTargetSharedPtr>();
-// 
-// 	ASSERT_EQUAL(firstRenderTarget->GetNumTargets(),secondRenderTarget->GetNumTargets());
-// 	ASSERT_ENUM_EQUAL(firstRenderTarget->GetFormat(),secondRenderTarget->GetFormat());
-// 	ASSERT_EQUAL(firstRenderTarget->GetWidth(),secondRenderTarget->GetWidth());
-// 	ASSERT_EQUAL(firstRenderTarget->GetHeight(),secondRenderTarget->GetHeight());
-// 
-// 	ASSERT_EQUAL(firstRenderTarget->HasMipmaps(),secondRenderTarget->HasMipmaps());
-// 	ASSERT_EQUAL(firstRenderTarget->HasDepthStencil(),secondRenderTarget->HasDepthStencil());
-// 
-// 	ASSERT_FALSE(secondRenderTarget->GetDepthStencilTexture().IsNullPtr());
-// 
-// 	for (int i = 0;i < 5;++i)
-// 	{
-// 		ASSERT_FALSE(secondRenderTarget->GetColorTexture(i).IsNullPtr());
-// 	}
+    RenderTarget firstRenderTarget(5, TextureFormat::A8B8G8R8, 20, 22, false, true);
+
+    ASSERT_EQUAL(firstRenderTarget.GetNumTargets(), 5);
+    ASSERT_ENUM_EQUAL(firstRenderTarget.GetFormat(), TextureFormat::A8B8G8R8);
+    ASSERT_EQUAL(firstRenderTarget.GetWidth(), 20);
+    ASSERT_EQUAL(firstRenderTarget.GetHeight(), 22);
+
+    ASSERT_FALSE(firstRenderTarget.HasMipmaps());
+    ASSERT_TRUE(firstRenderTarget.HasDepthStencil());
 }
- 
+
+void Rendering::RenderTargetTesting::StreamTest() noexcept
+{
+}

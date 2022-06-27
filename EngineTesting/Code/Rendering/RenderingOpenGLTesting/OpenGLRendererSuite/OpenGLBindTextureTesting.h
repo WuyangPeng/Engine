@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/09 15:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/18 16:34)
 
 #ifndef RENDERING_RENDERING_OPENGL_RENDERER_SUITE_OPENGL_BIND_TEXTURE_TESTING_H
 #define RENDERING_RENDERING_OPENGL_RENDERER_SUITE_OPENGL_BIND_TEXTURE_TESTING_H
@@ -17,7 +20,7 @@ namespace Rendering
         UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OpenGLBindTextureTesting);
 
     private:
-        void MainTest();
+        void MainTest() noexcept;
         void TextureTest();
 
         void DoRunUnitTest() override;

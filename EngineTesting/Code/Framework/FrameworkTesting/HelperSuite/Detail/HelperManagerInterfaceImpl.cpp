@@ -1,56 +1,55 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.1 (2020/05/27 0:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:04)
 
 #include "HelperManagerInterfaceImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 using std::const_pointer_cast;
 
-Framework::HelperManagerInterfaceImpl
-	::HelperManagerInterfaceImpl(int containerSize)
-	:m_Container(containerSize)
+Framework::HelperManagerInterfaceImpl::HelperManagerInterfaceImpl(int containerSize)
+    : container(containerSize)
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, HelperManagerInterfaceImpl)
 
-Framework::MiddleLayerInterfaceSharedPtr Framework::HelperManagerInterfaceImpl
-	::GetMiddleLayerInterface(int index)
+Framework::MiddleLayerInterfaceSharedPtr Framework::HelperManagerInterfaceImpl::GetMiddleLayerInterface(int index)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
 #include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26473)   
-	return const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType*>(this)->GetMiddleLayerInterface(index));
-#include STSTEM_WARNING_POP	 
+#include SYSTEM_WARNING_DISABLE(26473)
+
+    return const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType*>(this)->GetMiddleLayerInterface(index));
+
+#include STSTEM_WARNING_POP
 }
 
-Framework::ConstMiddleLayerInterfaceSharedPtr Framework::HelperManagerInterfaceImpl
-	::GetMiddleLayerInterface(int index) const
+Framework::ConstMiddleLayerInterfaceSharedPtr Framework::HelperManagerInterfaceImpl::GetMiddleLayerInterface(int index) const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return m_Container.at(index).lock();
+    return container.at(index).lock();
 }
 
-void Framework::HelperManagerInterfaceImpl
-	::SetMiddleLayerInterface(int index, const MiddleLayerInterfaceSharedPtr& middleLayer)
+void Framework::HelperManagerInterfaceImpl::SetMiddleLayerInterface(int index, const MiddleLayerInterfaceSharedPtr& middleLayer)
 {
-	FRAMEWORK_CLASS_IS_VALID_9;
+    FRAMEWORK_CLASS_IS_VALID_9;
 
-	m_Container.at(index) = middleLayer;
+    container.at(index) = middleLayer;
 }
 
-int Framework::HelperManagerInterfaceImpl
-	::GetSize() const
+int Framework::HelperManagerInterfaceImpl::GetSize() const
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_9;
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-	return boost::numeric_cast<int>(m_Container.size());
+    return boost::numeric_cast<int>(container.size());
 }
-

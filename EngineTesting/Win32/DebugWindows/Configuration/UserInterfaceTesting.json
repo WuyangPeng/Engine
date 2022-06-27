@@ -1,36 +1,29 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "configurationSuite": 
-  {
+  "configurationSuite": {
 
   },
 
-  "interfaceSuite": 
-  {
+  "interfaceSuite": {
 
   },
 
-  "wxWidgetsSuite": 
-  {
+  "wxWidgetsSuite": {
 
   },
 
-  "fLTKSuite": 
-  {
+  "fLTKSuite": {
 
   },
 
-  "trixulSuite": 
-  {
+  "trixulSuite": {
 
-  } ,
+  },
 
-  "xFree86Suite": 
-  {
+  "xFree86Suite": {
 
-  } 
+  }
 }

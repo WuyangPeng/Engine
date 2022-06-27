@@ -2,7 +2,7 @@
   "DefaultEnvironment": "",
   "EngineDirectory": "Configuration/EngineDirectory.json",
   "FrameworkEngineDirectory": "Configuration/FrameworkEngineDirectory.json",
-  "Version": "0.3.1.0",
+  "Version": "0.8.0.9",
   "PrintRun": 1,
-  "RandomSeed": 310
+  "RandomSeed": 80009
 }

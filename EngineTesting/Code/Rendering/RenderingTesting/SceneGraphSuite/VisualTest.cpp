@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/05 11:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 15:42)
 
 #include "VisualTest.h"
 #include "System/Helper/Helper.h"
@@ -16,20 +19,17 @@ CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, VisualTest);
 CORE_TOOLS_RTTI_DEFINE(Rendering, VisualTest);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, VisualTest);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, VisualTest);
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26455)
+
 Rendering::VisualTest::VisualTest(VisualPrimitiveType type)
     : ParentType{ type }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::VisualTest::VisualTest(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat,
-                                   const VertexBufferSharedPtr& vertexbuffer,
-                                   const IndexBufferSharedPtr& indexbuffer)
+Rendering::VisualTest::VisualTest(VisualPrimitiveType type,
+                                  const VertexFormatSharedPtr& vertexformat,
+                                  const VertexBufferSharedPtr& vertexbuffer,
+                                  const IndexBufferSharedPtr& indexbuffer)
     : ParentType{ type, vertexformat, vertexbuffer, indexbuffer }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -41,12 +41,12 @@ Rendering::VisualTest::ControllerInterfaceSharedPtr Rendering::VisualTest::Clone
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr(new ClassType(*this));
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::VisualTest::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr(new ClassType(*this));
+    return std::make_shared<ClassType>(*this);
 }

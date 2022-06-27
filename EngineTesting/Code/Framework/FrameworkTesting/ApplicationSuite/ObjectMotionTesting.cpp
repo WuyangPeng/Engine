@@ -1,13 +1,15 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.2 (2020/06/25 0:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/27 11:10)
 
 #include "ObjectMotionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/SceneGraph/CameraManager.h"
@@ -19,7 +21,7 @@
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-#include SYSTEM_WARNING_DISABLE(26440)
+
 namespace Framework
 {
     using TestingType = ObjectMotion;
@@ -51,314 +53,24 @@ void Framework::ObjectMotionTesting::MainTest()
     Rendering::CameraManager::Destroy();
 }
 
-void Framework::ObjectMotionTesting::NoParentMoveObjectTest()
+void Framework::ObjectMotionTesting::NoParentMoveObjectTest() noexcept
 {
-    // 	Rendering::SpatialSmartPointer motionObject{ CoreTools::New0<Rendering::Node>() };
-    //
-    // 	TestingType objectMotion{ motionObject };
-    // 	objectMotion.SetTrackBallDow(false);
-    //
-    // 	default_random_engine generator{ GetEngineRandomSeed() };
-    // 	const uniform_int<> random{ -2, 3 };
-    // 	const uniform_int<> selectRandom{ 0, 2 };
-    // 	const uniform_int<> speedRandom{ 0, 3 };
-    //
-    // 	ASSERT_FALSE(objectMotion.MoveObject(2.0f));
-    //
-    // 	const auto testLoopCount = GetTestLoopCount();
-    // 	for (auto i = 0; i < testLoopCount; ++i)
-    // 	{
-    // 		const auto rotationSpeed = speedRandom(generator);
-    //
-    // 		const auto select = selectRandom(generator);
-    //
-    // 		auto value = random(generator);
-    //
-    // 		if (value <= 0)
-    // 		{
-    // 			value -= 1;
-    // 		}
-    //
-    // 		AVectorf axis{ };
-    // 		switch (select)
-    // 		{
-    // 		case 0:
-    // 		{
-    // 			objectMotion.SetDoRoll(value);
-    // 			objectMotion.SetDoYaw(0);
-    // 			objectMotion.SetDoPitch(0);
-    // 			axis = AVectorf::unitX;
-    // 		}
-    // 		break;
-    // 		case 1:
-    // 		{
-    // 			objectMotion.SetDoRoll(0);
-    // 			objectMotion.SetDoYaw(value);
-    // 			objectMotion.SetDoPitch(0);
-    // 			axis = AVectorf::unitY;
-    // 		}
-    // 		break;
-    // 		case 2:
-    // 		{
-    // 			objectMotion.SetDoRoll(0);
-    // 			objectMotion.SetDoYaw(0);
-    // 			objectMotion.SetDoPitch(value);
-    // 			axis = AVectorf::unitZ;
-    // 		}
-    // 		break;
-    // 		default:
-    // 			break;
-    // 		}
-    //
-    // 		auto rotate = motionObject->GetLocalTransform().GetRotate();
-    // 		auto angle = value * rotationSpeed;
-    //
-    // 		const Matrixf incr{ axis, boost::numeric_cast<float>(angle) };
-    // 		rotate = incr * rotate;
-    // 		rotate.Orthonormalize();
-    //
-    // 		ASSERT_TRUE(objectMotion.MoveObject(boost::numeric_cast<float>(rotationSpeed)));
-    //
-    // 		AssertRotate(rotate, motionObject->GetLocalTransform().GetRotate());
-    // 	}
 }
 
-void Framework::ObjectMotionTesting::ParentMoveObjectTest()
+void Framework::ObjectMotionTesting::ParentMoveObjectTest() noexcept
 {
-    // 	Rendering::SpatialSmartPointer motionObject{ CoreTools::New0<Rendering::Node>() };
-    // 	Rendering::NodeSmartPointer parentMotionObject{ CoreTools::New0<Rendering::Node>() };
-    // 	parentMotionObject->AttachChild(motionObject);
-    //
-    // 	Rendering::Transform Transform{ };
-    // 	const Matrixf matrix{ AVectorf::unitZ,Mathematics::MathF::sm_QuarterPI };
-    // 	Transform.SetRotate(matrix);
-    //
-    // 	parentMotionObject->SetWorldTransform(Transform);
-    //
-    // 	TestingType objectMotion{ motionObject };
-    // 	objectMotion.SetTrackBallDow(false);
-    //
-    // 	default_random_engine generator{ GetEngineRandomSeed() };
-    // 	const uniform_int<> random{ -2, 3 };
-    // 	const uniform_int<> selectRandom{ 0, 2 };
-    // 	const uniform_int<> speedRandom{ 0, 3 };
-    //
-    // 	ASSERT_FALSE(objectMotion.MoveObject(2.0f));
-    //
-    // 	const auto testLoopCount = GetTestLoopCount();
-    // 	for (auto i = 0; i < testLoopCount; ++i)
-    // 	{
-    // 		const auto rotationSpeed = speedRandom(generator);
-    //
-    // 		const auto select = selectRandom(generator);
-    //
-    // 		auto value = random(generator);
-    //
-    // 		if (value <= 0)
-    // 		{
-    // 			value -= 1;
-    // 		}
-    //
-    // 		AVectorf axis{ };
-    // 		switch (select)
-    // 		{
-    // 		case 0:
-    // 		{
-    // 			objectMotion.SetDoRoll(value);
-    // 			objectMotion.SetDoYaw(0);
-    // 			objectMotion.SetDoPitch(0);
-    // 			axis = parentMotionObject->GetWorldTransform().GetRotate().GetColumn(0);
-    // 		}
-    // 		break;
-    // 		case 1:
-    // 		{
-    // 			objectMotion.SetDoRoll(0);
-    // 			objectMotion.SetDoYaw(value);
-    // 			objectMotion.SetDoPitch(0);
-    // 			axis = parentMotionObject->GetWorldTransform().GetRotate().GetColumn(1);
-    // 		}
-    // 		break;
-    // 		case 2:
-    // 		{
-    // 			objectMotion.SetDoRoll(0);
-    // 			objectMotion.SetDoYaw(0);
-    // 			objectMotion.SetDoPitch(value);
-    // 			axis = parentMotionObject->GetWorldTransform().GetRotate().GetColumn(2);
-    // 		}
-    // 		break;
-    // 		default:
-    // 			break;
-    // 		}
-    //
-    // 		auto rotate = motionObject->GetLocalTransform().GetRotate();
-    // 		auto angle = value * rotationSpeed;
-    //
-    // 		const Matrixf incr{ axis, boost::numeric_cast<float>(angle) };
-    // 		rotate = incr * rotate;
-    // 		rotate.Orthonormalize();
-    //
-    // 		ASSERT_TRUE(objectMotion.MoveObject(boost::numeric_cast<float>(rotationSpeed)));
-    //
-    // 		AssertRotate(rotate, motionObject->GetLocalTransform().GetRotate());
-    // 	}
 }
 
-void Framework::ObjectMotionTesting::TrackBallDownTest()
+void Framework::ObjectMotionTesting::TrackBallDownTest() noexcept
 {
-    // 	Rendering::SpatialSmartPointer motionObject{ CoreTools::New0<Rendering::Node>() };
-    //
-    // 	TestingType objectMotion{ motionObject };
-    // 	ASSERT_FALSE(objectMotion.GetTrackBallDow());
-    //
-    // 	objectMotion.SetTrackBallDow(true);
-    // 	ASSERT_TRUE(objectMotion.GetTrackBallDow());
-    //
-    // 	objectMotion.SetTrackBallDow(false);
-    // 	ASSERT_FALSE(objectMotion.GetTrackBallDow());
 }
 
-void Framework::ObjectMotionTesting::NoParentRotateTrackBallTest()
+void Framework::ObjectMotionTesting::NoParentRotateTrackBallTest() noexcept
 {
-    // 	Rendering::SpatialSmartPointer motionObject{ CoreTools::New0<Rendering::Node>() };
-    // 	Rendering::CameraSmartPointer camera{ CoreTools::New0<Rendering::Camera>() };
-    //
-    // 	camera->SetAxes(AVectorf::unitY, AVectorf::unitZ, AVectorf::unitX);
-    //
-    // 	TestingType objectMotion{ motionObject };
-    //
-    // 	default_random_engine generator{ GetEngineRandomSeed() };
-    // 	const uniform_real<float> random{ 0.0f, 100.0f };
-    //
-    // 	const auto testLoopCount = GetTestLoopCount();
-    // 	for (auto i = 0; i < testLoopCount; ++i)
-    // 	{
-    // 		auto xTrackBegin = random(generator);
-    // 		auto yTrackBegin = random(generator);
-    // 		auto xTrackEnd = random(generator);
-    // 		auto yTrackEnd = random(generator);
-    //
-    // 		objectMotion.SetBeginTrack(xTrackBegin, yTrackBegin);
-    // 		objectMotion.SetEndTrack(xTrackEnd, yTrackEnd);
-    // 		objectMotion.SetSaveRotate();
-    //
-    // 		const auto rotate = motionObject->GetLocalTransform().GetRotate();
-    //
-    // 		auto vecBegin = GetSphereVector(xTrackBegin, yTrackBegin);
-    // 		auto vecEnd = GetSphereVector(xTrackEnd, yTrackEnd);
-    //
-    // 		auto axis = Cross(vecBegin, vecEnd);
-    // 		const auto dot = Dot(vecBegin, vecEnd);
-    // 		auto angle = 0.0f;
-    // 		if (!axis.IsZero())
-    // 		{
-    // 			axis.Normalize();
-    // 			angle = Mathematics::MathF::ACos(dot);
-    // 		}
-    // 		else
-    // 		{
-    // 			if (dot < 0.0f)
-    // 			{
-    // 				auto invLength = Mathematics::MathF::InvSqrt(xTrackBegin * xTrackBegin + yTrackBegin * yTrackBegin);
-    // 				axis[0] = yTrackBegin * invLength;
-    // 				axis[1] = -xTrackBegin * invLength;
-    // 				axis[2] = 0.0f;
-    // 				angle = Mathematics::MathF::sm_PI;
-    // 			}
-    // 			else
-    // 			{
-    // 				axis = AVectorf::unitX;
-    // 				angle = 0.0f;
-    // 			}
-    // 		}
-    //
-    // 		auto worldAxis = axis[0] * camera->GetDirectionVector() + axis[1] * camera->GetUpVector() +	axis[2] * camera->GetRightVector();
-    //
-    // 		const Matrixf trackRotate{ worldAxis, angle };
-    //
-    // 		auto localRotate = trackRotate * rotate;
-    //
-    // 		localRotate.Orthonormalize();
-    //
-    // 		objectMotion.RotateTrackBall(camera.GetConstSmartPointer());
-    //
-    // 		AssertRotate(localRotate, objectMotion.GetMotionObjectLocalTransform().GetRotate());
-    // 	}
 }
 
-void Framework::ObjectMotionTesting::ParentRotateTrackBallTest()
+void Framework::ObjectMotionTesting::ParentRotateTrackBallTest() noexcept
 {
-    // 	Rendering::SpatialSmartPointer motionObject{ CoreTools::New0<Rendering::Node>() };
-    // 	Rendering::CameraSmartPointer camera{ CoreTools::New0<Rendering::Camera>() };
-    //
-    // 	TestingType objectMotion{ motionObject };
-    //
-    // 	default_random_engine generator{ GetEngineRandomSeed() };
-    // 	const uniform_real<float> random{ 0.0f, 100.0f };
-    //
-    // 	Rendering::NodeSmartPointer parentMotionObject{ CoreTools::New0<Rendering::Node>() };
-    // 	parentMotionObject->AttachChild(motionObject);
-    //
-    // 	Rendering::Transform Transform{ };
-    // 	const Matrixf matrix{ AVectorf::unitZ,Mathematics::MathF::sm_QuarterPI };
-    // 	Transform.SetRotate(matrix);
-    //
-    // 	parentMotionObject->SetWorldTransform(Transform);
-    //
-    // 	const auto testLoopCount = GetTestLoopCount();
-    // 	for (auto i = 0; i < testLoopCount; ++i)
-    // 	{
-    // 		auto xTrackBegin = random(generator);
-    // 		auto yTrackBegin = random(generator);
-    // 		auto xTrackEnd = random(generator);
-    // 		auto yTrackEnd = random(generator);
-    //
-    // 		objectMotion.SetBeginTrack(xTrackBegin, yTrackBegin);
-    // 		objectMotion.SetEndTrack(xTrackEnd, yTrackEnd);
-    // 		objectMotion.SetSaveRotate();
-    //
-    // 		const auto rotate = motionObject->GetLocalTransform().GetRotate();
-    //
-    // 		auto vecBegin = GetSphereVector(xTrackBegin, yTrackBegin);
-    // 		auto vecEnd = GetSphereVector(xTrackEnd, yTrackEnd);
-    //
-    // 		auto axis = Cross(vecBegin, vecEnd);
-    // 		const auto dot = Dot(vecBegin, vecEnd);
-    // 		auto angle = 0.0f;
-    // 		if (!axis.IsZero())
-    // 		{
-    // 			axis.Normalize();
-    // 			angle = Mathematics::MathF::ACos(dot);
-    // 		}
-    // 		else
-    // 		{
-    // 			if (dot < 0.0f)
-    // 			{
-    // 				auto invLength = Mathematics::MathF::InvSqrt(xTrackBegin * xTrackBegin + yTrackBegin * yTrackBegin);
-    // 				axis[0] = yTrackBegin * invLength;
-    // 				axis[1] = -xTrackBegin * invLength;
-    // 				axis[2] = 0.0f;
-    // 				angle = Mathematics::MathF::sm_PI;
-    // 			}
-    // 			else
-    // 			{
-    // 				axis = AVectorf::unitX;
-    // 				angle = 0.0f;
-    // 			}
-    // 		}
-    //
-    // 		auto worldAxis = axis[0] * camera->GetDirectionVector() + axis[1] * camera->GetUpVector() + axis[2] * camera->GetRightVector();
-    //
-    // 		const Matrixf trackRotate{ worldAxis, angle };
-    //
-    // 		const auto parWorRotate = parentMotionObject->GetWorldTransform().GetRotate();
-    // 		auto localRotate = TransposeTimes(parWorRotate, trackRotate) * parWorRotate * rotate;
-    //
-    // 		localRotate.Orthonormalize();
-    //
-    // 		objectMotion.RotateTrackBall(camera.GetConstSmartPointer());
-    //
-    // 		AssertRotate(localRotate, objectMotion.GetMotionObjectLocalTransform().GetRotate());
-    // 	}
 }
 
 void Framework::ObjectMotionTesting::AssertRotate(const Matrixf& lhs, const Matrixf& rhs)
@@ -369,7 +81,7 @@ void Framework::ObjectMotionTesting::AssertRotate(const Matrixf& lhs, const Matr
     ASSERT_APPROXIMATE_USE_FUNCTION(approximate, lhs, rhs, Mathematics::MathF::epsilon);
 }
 
-Mathematics::AVectorF Framework::ObjectMotionTesting::GetSphereVector(float x, float y) const
+Mathematics::AVectorF Framework::ObjectMotionTesting::GetSphereVector(float x, float y) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     auto length = Mathematics::MathF::Sqrt(x * x + y * y);
     auto z = 0.0f;

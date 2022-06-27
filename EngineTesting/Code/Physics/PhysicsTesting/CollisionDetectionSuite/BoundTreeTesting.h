@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.3 (2019/09/09 16:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/20 20:16)
 
 #ifndef PHYSICS_COLLISION_DETECTION_SUITE_BOUND_TREE_TESTING_H
 #define PHYSICS_COLLISION_DETECTION_SUITE_BOUND_TREE_TESTING_H
@@ -11,18 +14,18 @@
 
 namespace Physics
 {
-	class BoundTreeTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BoundTreeTesting); 
+    class BoundTreeTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(BoundTreeTesting);
 
-	private:
-		void MainTest();
-		void CreateTrianglesMeshFile();
-	    void InitTest();
-	
-		virtual void DoRunUnitTest() override; 
-	};
+    private:
+        void MainTest();
+        void CreateTrianglesMeshFile();
+        void InitTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // PHYSICS_COLLISION_DETECTION_SUITE_BOUND_TREE_TESTING_H
+#endif  // PHYSICS_COLLISION_DETECTION_SUITE_BOUND_TREE_TESTING_H

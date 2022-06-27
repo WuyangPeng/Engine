@@ -1,51 +1,49 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/13 0:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:29)
 
 #include "MousePositionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/Application/MousePosition.h"
+#include "Framework/WindowCreate/WindowPoint.h"
 
 namespace Framework
 {
-	using TestingType = MousePosition;
+    using TestingType = MousePosition;
 }
 
-Framework::MousePositionTesting
-	::MousePositionTesting(const OStreamShared& stream, HWnd hwnd)
-	:ParentType{ stream }, m_Hwnd{ hwnd }
+Framework::MousePositionTesting::MousePositionTesting(const OStreamShared& stream, HWnd hwnd)
+    : ParentType{ stream }, hwnd{ hwnd }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, MousePositionTesting)
 
-void Framework::MousePositionTesting
-	::DoRunUnitTest()
+void Framework::MousePositionTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::MousePositionTesting
-	::MainTest()
+void Framework::MousePositionTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(WindowMousePositionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WindowMousePositionTest);
 }
 
-void Framework::MousePositionTesting
-	::WindowMousePositionTest()
+void Framework::MousePositionTesting::WindowMousePositionTest()
 {
-	TestingType windowMousePosition{ m_Hwnd };
+    TestingType windowMousePosition{ hwnd };
 
-	const auto point1 = windowMousePosition.GetMousePosition();
-	windowMousePosition.SetMousePosition(point1);
+    const auto point1 = windowMousePosition.GetMousePosition();
+    windowMousePosition.SetMousePosition(point1);
 
-	const auto point2 = windowMousePosition.GetMousePosition();
+    const auto point2 = windowMousePosition.GetMousePosition();
 
-	ASSERT_EQUAL(point1, point2);
+    ASSERT_EQUAL(point1, point2);
 }
-

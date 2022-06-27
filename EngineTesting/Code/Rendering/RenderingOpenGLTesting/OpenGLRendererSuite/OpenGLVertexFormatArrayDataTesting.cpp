@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/09 15:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/18 16:36)
 
 #include "OpenGLVertexFormatArrayDataTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -16,12 +19,9 @@ using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLVertexFormatArrayDataTesting)
 
-void Rendering::OpenGLVertexFormatArrayDataTesting::MainTest() 
-{ 
+void Rendering::OpenGLVertexFormatArrayDataTesting::MainTest()
+{
     RendererManager::Create();
-
-    ASSERT_NOT_THROW_EXCEPTION_0(AttributeUsageTextureCoordTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(AttributeUsageColorTest);
 
     RendererManager::Destroy();
 }

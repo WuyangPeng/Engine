@@ -76,6 +76,9 @@
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">

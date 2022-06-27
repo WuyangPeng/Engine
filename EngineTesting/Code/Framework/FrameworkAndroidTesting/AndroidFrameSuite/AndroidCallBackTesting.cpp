@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/10 20:29)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 14:00)
 
 #include "AndroidCallBackTesting.h"
 #include "System/Android/AndroidInputKeyEvent.h"
@@ -14,10 +17,8 @@
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/MiddleLayerInterface.h"
 
-using std::ostream;
-
-Framework::AndroidCallBackTesting::AndroidCallBackTesting(AndroidApp* androidApp, const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_AndroidApp{ androidApp }
+Framework::AndroidCallBackTesting::AndroidCallBackTesting(const OStreamShared& stream, AndroidApp* androidApp)
+    : ParentType{ stream }, androidApp{ androidApp }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -38,25 +39,23 @@ void Framework::AndroidCallBackTesting::MessageTest()
 {
     AndroidCallBack<MiddleLayerInterface> androidCallBackInterface(System::g_Microseconds / 60);
 
-    androidCallBackInterface.NotDealCmdMessage(m_AndroidApp);
-    androidCallBackInterface.InitMessage(m_AndroidApp);
+    androidCallBackInterface.NotDealCmdMessage(androidApp);
+    androidCallBackInterface.InitMessage(androidApp);
     androidCallBackInterface.TermMessage(nullptr);
-    androidCallBackInterface.ResizedMessage(m_AndroidApp);
-    androidCallBackInterface.RedrawNeededMessage(m_AndroidApp);
-    androidCallBackInterface.RectChanged(m_AndroidApp);
+    androidCallBackInterface.ResizedMessage(androidApp);
+    androidCallBackInterface.RedrawNeededMessage(androidApp);
+    androidCallBackInterface.RectChanged(androidApp);
 
     System::AndroidInputEvent* event = nullptr;
 
-    //System::AndroidInputQueueGetEvent(m_AndroidApp->inputQueue, &event);
+    ASSERT_EQUAL(androidCallBackInterface.NotDealInputMessage(androidApp, event), 0);
+    ASSERT_EQUAL(androidCallBackInterface.KeyDownMessage(androidApp, event), 0);
+    ASSERT_EQUAL(androidCallBackInterface.KeyUpMessage(androidApp, event), 0);
+    ASSERT_EQUAL(androidCallBackInterface.ActionDownMessage(androidApp, event), 0);
+    ASSERT_EQUAL(androidCallBackInterface.ActionUpMessage(androidApp, event), 0);
+    ASSERT_EQUAL(androidCallBackInterface.ActionMoveMessage(androidApp, event), 0);
 
-    ASSERT_EQUAL(androidCallBackInterface.NotDealInputMessage(m_AndroidApp, event), 0);
-    ASSERT_EQUAL(androidCallBackInterface.KeyDownMessage(m_AndroidApp, event), 0);
-    ASSERT_EQUAL(androidCallBackInterface.KeyUpMessage(m_AndroidApp, event), 0);
-    ASSERT_EQUAL(androidCallBackInterface.ActionDownMessage(m_AndroidApp, event), 0);
-    ASSERT_EQUAL(androidCallBackInterface.ActionUpMessage(m_AndroidApp, event), 0);
-    ASSERT_EQUAL(androidCallBackInterface.ActionMoveMessage(m_AndroidApp, event), 0);
-
-    androidCallBackInterface.Display(m_AndroidApp, 0);
+    androidCallBackInterface.Display(androidApp, 0);
     ASSERT_EQUAL(androidCallBackInterface.GetTerminateKey(), AndroidApplicationTrait::KeyIdentifiers::keyTerminate);
 
     ASSERT_TRUE(androidCallBackInterface.PreCreate());

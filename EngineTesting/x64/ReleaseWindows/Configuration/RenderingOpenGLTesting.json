@@ -1,6 +1,5 @@
 {
-  "renderersSuite": 
-  {
+  "renderersSuite": {
     "PlatformVertexFormatTesting": 1,
     "VertexFormatManagementTesting": 1,
     "PlatformIndexBufferTesting": 1,
@@ -19,13 +18,12 @@
     "RenderTargetManagementTesting": 1
   },
 
-  "openGLRendererSuite": 
-  {
+  "openGLRendererSuite": {
     "OpenGLBindTextureTesting": 1,
     "OpenGLVertexFormatDataTesting": 1,
     "OpenGLVertexFormatArrayDataTesting": 1,
     "OpenGLTextureDataTesting": 1,
     "OpenGLTextureDataManageTesting": 1,
-    "OpenGLRenderTargetDataTesting":1
+    "OpenGLRenderTargetDataTesting": 1
   }
 }

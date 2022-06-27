@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/17 10:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 17:08)
 
 #ifndef PIXEL_MODEL_VIEW_CONTROLLER_TESTING_FRAME_VIEW_MIDDLE_LAYER_H
 #define PIXEL_MODEL_VIEW_CONTROLLER_TESTING_FRAME_VIEW_MIDDLE_LAYER_H
@@ -29,9 +32,9 @@ namespace PixelModelViewController
         void PrintFrameRateMessage(int64_t timeDelta);
 
     private:
-        static constexpr int sm_TimerInterval = System::g_Microseconds;
+        static constexpr int timerInterval = System::g_Microseconds;
 
-        int64_t m_TimeDelta;
+        int64_t timeDelta;
     };
 }
 

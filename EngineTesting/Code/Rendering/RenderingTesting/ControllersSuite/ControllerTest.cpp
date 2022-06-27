@@ -1,24 +1,27 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/05 16:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 20:41)
 
 #include "ControllerTest.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ControllerTest);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ControllerTest);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ControllerTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, ControllerTest);
-#include SYSTEM_WARNING_DISABLE(26455)
-Rendering::ControllerTest::ControllerTest()
-    : ParentType{ CoreTools::DisableNotThrow::Disable }
+
+Rendering::ControllerTest::ControllerTest(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

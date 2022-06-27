@@ -2,8 +2,7 @@
   "Resource": "FrameworkResource",
   "Configuration": "FrameworkConfiguration",
 
-  "OpenGL":
-  {
+  "OpenGL": {
     "Directory": "FrameworkOpenGL",
     "BigEndian": "OpenGLBigEndian",
     "LittleEndian": "OpenGLLittleEndian",
@@ -14,8 +13,7 @@
     "Image": "OpenGLImage"
   },
 
-  "DirectX":
-  {
+  "DirectX": {
     "Directory": "FrameworkDirectX",
     "BigEndian": "DirectXBigEndian",
     "LittleEndian": "DirectXLittleEndian",
@@ -26,8 +24,7 @@
     "Image": "DirectXImage"
   },
 
-  "Default": 
-  {
+  "Default": {
     "Directory": "FrameworkDefault",
     "BigEndian": "DefaultBigEndian",
     "LittleEndian": "DefaultLittleEndian",
@@ -36,5 +33,5 @@
     "Texture": "DefaultTexture",
     "Vertex": "DefaultVertex",
     "Image": "DefaultImage"
-  } 
+  }
 }

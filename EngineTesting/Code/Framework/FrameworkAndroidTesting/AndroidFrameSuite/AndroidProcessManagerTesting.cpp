@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/10 20:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 13:57)
 
 #include "AndroidProcessManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -10,12 +13,8 @@
 #include "Framework/AndroidFrame/AndroidCallBackInterface.h"
 #include "Framework/AndroidFrame/AndroidProcessManager.h"
 
-using std::ostream;
-
-#include SYSTEM_WARNING_DISABLE(26429)
-
-Framework::AndroidProcessManagerTesting::AndroidProcessManagerTesting(AndroidApp* androidApp, const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_AndroidApp{ androidApp }
+Framework::AndroidProcessManagerTesting::AndroidProcessManagerTesting(const OStreamShared& stream, AndroidApp* androidApp)
+    : ParentType{ stream }, androidApp{ androidApp }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -51,19 +50,22 @@ void Framework::AndroidProcessManagerTesting::CallbackSucceedTest()
 
     ASSERT_UNEQUAL_NULL_PTR(appCmd);
 
-    appCmd(m_AndroidApp, 0);
+    if (appCmd != nullptr)
+        appCmd(androidApp, 0);
 
     AndroidProcessManager::InputEvent inputEvent = ANDROID_PROCESS_MANAGE_SINGLETON.GetInputEvent();
 
     ASSERT_UNEQUAL_NULL_PTR(inputEvent);
 
-    inputEvent(m_AndroidApp, nullptr);
+    if (inputEvent != nullptr)
+        inputEvent(androidApp, nullptr);
 
     AndroidProcessManager::Display display = ANDROID_PROCESS_MANAGE_SINGLETON.GetDisplay();
 
     ASSERT_UNEQUAL_NULL_PTR(display);
 
-    display(m_AndroidApp, 0);
+    if (display != nullptr)
+        display(androidApp, 0);
 
     ASSERT_TRUE(ANDROID_PROCESS_MANAGE_SINGLETON.PreCreate());
     ASSERT_TRUE(ANDROID_PROCESS_MANAGE_SINGLETON.Initialize());

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/14 0:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:29)
 
 #include "WindowApplicationInformationTesting.h"
 #include "resource.h"
@@ -27,7 +30,7 @@ namespace Framework
 }
 
 Framework::WindowApplicationInformationTesting::WindowApplicationInformationTesting(const OStreamShared& stream, HInstance instance)
-    : ParentType{ stream }, m_Instance{ instance }
+    : ParentType{ stream }, instance{ instance }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -169,7 +172,7 @@ void Framework::WindowApplicationInformationTesting::RendererParameterTest()
 
     auto windowTitle = SYSTEM_TEXT("FrameworkWindowTesting"s);
 
-    TestingType information{ m_Instance, rendererParameter };
+    TestingType information{ instance, rendererParameter };
 
     ASSERT_EQUAL(information.GetWindowTitle(), windowTitle);
     ASSERT_EQUAL(information.GetWindowTitleWithMultiByte(), "FrameworkWindowTesting"s);
@@ -185,6 +188,6 @@ void Framework::WindowApplicationInformationTesting::RendererParameterTest()
     ASSERT_EQUAL(information.GetWindowName().GetWindowMenuName(), rendererParameter.GetWindowMenuName());
 
     ASSERT_EQUAL(information.GetWindowPictorial().GetHBrush(), System::GetSystemStockObject(System::WindowsBrushTypes::BlackBrush));
-    ASSERT_EQUAL(information.GetWindowPictorial().GetHCursor(), System::LoadSystemCursor(m_Instance, System::MakeIntreSource(IDC_CURSOR1)));
+    ASSERT_EQUAL(information.GetWindowPictorial().GetHCursor(), System::LoadSystemCursor(instance, System::MakeIntreSource(IDC_CURSOR1)));
     ASSERT_EQUAL(information.GetWindowPictorial().GetHIcon(), System::LoadSystemIcon(nullptr, System::g_Question));
 }

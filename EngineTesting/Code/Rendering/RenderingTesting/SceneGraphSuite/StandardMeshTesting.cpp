@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.0.5 (2019/09/05 11:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 14:27)
 
 #include "StandardMeshTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -14,10 +17,7 @@
 #include <vector>
 
 using std::vector;
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, StandardMeshTesting)
 
 void Rendering::StandardMeshTesting::MainTest()
@@ -74,14 +74,6 @@ void Rendering::StandardMeshTesting::BaseTest()
     ConstVertexBufferSharedPtr secondVertexBuffer = secondTrianglesMesh->GetConstVertexBuffer();
 
     ASSERT_ENUM_EQUAL(secondVertexBuffer->GetUsage(), BufferUsage::Dynamic);
-
-    // 	Transform firstTransform;
-    //
-    // 	firstTransform.SetUniformScale(2.0f);
-    //
-    // 	secondStandardMesh.SetTransform(firstTransform);
-    //
-    // 	ASSERT_TRUE(Approximate(firstTransform, secondStandardMesh.GetTransform(), 1e-8f));
 }
 
 void Rendering::StandardMeshTesting::RectangleTest()
@@ -98,10 +90,10 @@ void Rendering::StandardMeshTesting::RectangleTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    int xSamples = 10;
-    int ySamples = 10;
-    float xExtent = 100.0f;
-    float yExtent = 80.0f;
+    constexpr int xSamples = 10;
+    constexpr int ySamples = 10;
+    constexpr float xExtent = 100.0f;
+    constexpr float yExtent = 80.0f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.Rectangle(xSamples, ySamples, xExtent, yExtent);
 
@@ -125,9 +117,9 @@ void Rendering::StandardMeshTesting::DiskTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    int shellSamples = 10;
-    int radialSamples = 10;
-    float radius = 50.0f;
+    constexpr int shellSamples = 10;
+    constexpr int radialSamples = 10;
+    constexpr float radius = 50.0f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.Disk(shellSamples, radialSamples, radius);
 
@@ -152,9 +144,9 @@ void Rendering::StandardMeshTesting::BoxTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    float xExtent = 10.0f;
-    float yExtent = 20.0f;
-    float zExtent = 15.0f;
+    constexpr float xExtent = 10.0f;
+    constexpr float yExtent = 20.0f;
+    constexpr float zExtent = 15.0f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.Box(xExtent, yExtent, zExtent);
 
@@ -180,10 +172,10 @@ void Rendering::StandardMeshTesting::CylinderOmittedEndDisksTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    int axisSamples = 10;
-    int radialSamples = 12;
-    float radius = 10.0f;
-    float height = 14.0f;
+    constexpr int axisSamples = 10;
+    constexpr int radialSamples = 12;
+    constexpr float radius = 10.0f;
+    constexpr float height = 14.0f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.CylinderOmittedEndDisks(axisSamples, radialSamples, radius, height);
 
@@ -223,10 +215,10 @@ void Rendering::StandardMeshTesting::CylinderIncludedEndDisksTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    int axisSamples = 12;
-    int radialSamples = 15;
-    float radius = 11.0f;
-    float height = 14.2f;
+    constexpr int axisSamples = 12;
+    constexpr int radialSamples = 15;
+    constexpr float radius = 11.0f;
+    constexpr float height = 14.2f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.CylinderIncludedEndDisks(axisSamples, radialSamples, radius, height);
 
@@ -256,9 +248,9 @@ void Rendering::StandardMeshTesting::SphereTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    int zSamples = 10;
-    int radialSamples = 20;
-    float radius = 1.5f;
+    constexpr int zSamples = 10;
+    constexpr int radialSamples = 20;
+    constexpr float radius = 1.5f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.Sphere(zSamples, radialSamples, radius);
 
@@ -290,19 +282,19 @@ void Rendering::StandardMeshTesting::TorusTest()
 
     StandardMesh firstStandardMesh(firstVertexFormat);
 
-    int circleSamples = 10;
-    int radialSamples = 10;
-    float outerRadius = 1.5f;
-    float innerRadius = 0.8f;
+    constexpr int circleSamples = 10;
+    constexpr int radialSamples = 10;
+    constexpr float outerRadius = 1.5f;
+    constexpr float innerRadius = 0.8f;
 
     TrianglesMeshSharedPtr firstTrianglesMesh = firstStandardMesh.Torus(circleSamples, radialSamples, outerRadius, innerRadius);
 
     ConstVertexBufferSharedPtr firstVertexBuffer = firstTrianglesMesh->GetConstVertexBuffer();
     ConstIndexBufferSharedPtr firstIndexBuffer = firstTrianglesMesh->GetConstIndexBuffer();
 
-    int numVertices = (circleSamples + 1) * (radialSamples + 1);
-    int numTriangles = 2 * circleSamples * radialSamples;
-    int numIndices = 3 * numTriangles;
+    constexpr int numVertices = (circleSamples + 1) * (radialSamples + 1);
+    constexpr int numTriangles = 2 * circleSamples * radialSamples;
+    constexpr int numIndices = 3 * numTriangles;
 
     ASSERT_EQUAL(firstVertexBuffer->GetNumElements(), numVertices);
     ASSERT_EQUAL(firstTrianglesMesh->GetNumTriangles(), numTriangles);

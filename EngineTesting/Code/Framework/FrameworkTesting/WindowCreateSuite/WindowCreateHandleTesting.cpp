@@ -1,35 +1,32 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.3.0.2 (2020/06/03 16:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 16:59)
 
 #include "WindowCreateHandleTesting.h"
-#include "Framework/WindowCreate/WindowCreate.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
 #include "CoreTools/Contract/Noexcept.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Framework/WindowCreate/WindowCreate.h"
 
-Framework::WindowCreateHandleTesting
-	::WindowCreateHandleTesting(const OStreamShared& stream)
-	:ParentType{ stream }
+Framework::WindowCreateHandleTesting::WindowCreateHandleTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, WindowCreateHandleTesting)
 
-void Framework::WindowCreateHandleTesting
-	::DoRunUnitTest()
+void Framework::WindowCreateHandleTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::WindowCreateHandleTesting
-	::MainTest()
+void Framework::WindowCreateHandleTesting::MainTest() noexcept
 {
-	// 测试在FrameworkWindowTesting中，需要窗口环境。
-
-	CoreTools::DisableNoexcept();
+    // 测试在FrameworkWindowTesting中，需要窗口环境。
 }
-

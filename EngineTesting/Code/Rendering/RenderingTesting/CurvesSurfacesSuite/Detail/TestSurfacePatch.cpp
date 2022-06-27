@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/07 16:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 19:12)
 
 #include "TestSurfacePatch.h"
 #include "System/Helper/Helper.h"
@@ -11,7 +14,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
-#include SYSTEM_WARNING_DISABLE(26440)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, TestSurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TestSurfacePatch);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TestSurfacePatch);
@@ -28,12 +31,12 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TestSurfacePatch)
 Rendering::TestSurfacePatch::APoint Rendering::TestSurfacePatch::GetPosition(float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
-    RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
+    RENDERING_ASSERTION_0(IsParameterValid(u, v), "参数域无效\n");
 
     return APoint(u, v, 0.0f);
 }
 
-Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesU(float u, [[maybe_unused]] float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesU(float u, MAYBE_UNUSED float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -41,7 +44,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
     return AVector::GetUnitX() * u;
 }
 
-Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesV([[maybe_unused]] float u, float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesV(MAYBE_UNUSED float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -49,7 +52,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
     return AVector::GetUnitY() * v;
 }
 
-Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUU(float u, [[maybe_unused]] float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesUU(float u, MAYBE_UNUSED float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -65,7 +68,7 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
     return AVector::GetUnitX() * u + AVector::GetUnitY() * v;
 }
 
-Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesVV([[maybe_unused]] float u, float v) const
+Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivativesVV(MAYBE_UNUSED float u, float v) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     RENDERING_ASSERTION_2(IsParameterValid(u, v), "参数域无效\n");
@@ -75,5 +78,5 @@ Rendering::TestSurfacePatch::AVector Rendering::TestSurfacePatch::GetDerivatives
 
 CoreTools::ObjectInterface::ObjectInterfaceSharedPtr Rendering::TestSurfacePatch::CloneObject() const
 {
-    return nullptr;
+    return std::make_shared<ClassType>(*this);
 }

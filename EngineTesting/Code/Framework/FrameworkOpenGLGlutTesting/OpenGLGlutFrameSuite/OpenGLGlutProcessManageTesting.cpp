@@ -1,16 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/11 14:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/24 15:38)
 
 #include "OpenGLGlutProcessManageTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutCallBackInterface.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessManager.h"
-
-#include SYSTEM_WARNING_DISABLE(26429)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Framework, OpenGLGlutProcessManagerTesting)
 
@@ -80,7 +81,8 @@ void Framework::OpenGLGlutProcessManagerTesting::RenderSceneCallbackSucceedTest(
 
     ASSERT_UNEQUAL_NULL_PTR(renderScenePtr);
 
-    renderScenePtr();
+    if (renderScenePtr != nullptr)
+        renderScenePtr();
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::ChangeSizeCallbackSucceedTest()
@@ -89,7 +91,8 @@ void Framework::OpenGLGlutProcessManagerTesting::ChangeSizeCallbackSucceedTest()
 
     ASSERT_UNEQUAL_NULL_PTR(changeSizePtr);
 
-    changeSizePtr(0, 0);
+    if (changeSizePtr != nullptr)
+        changeSizePtr(0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::TimerFunctionCallbackSucceedTest()
@@ -98,7 +101,8 @@ void Framework::OpenGLGlutProcessManagerTesting::TimerFunctionCallbackSucceedTes
 
     ASSERT_UNEQUAL_NULL_PTR(timerFunctionPtr);
 
-    timerFunctionPtr(0);
+    if (timerFunctionPtr != nullptr)
+        timerFunctionPtr(0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysDownCallbackSucceedTest()
@@ -107,7 +111,8 @@ void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysDownCallbackSucceedT
 
     ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
 
-    specialKeysPtr(0, 0, 0);
+    if (specialKeysPtr != nullptr)
+        specialKeysPtr(0, 0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::KeyboardDownCallbackSucceedTest()
@@ -116,7 +121,8 @@ void Framework::OpenGLGlutProcessManagerTesting::KeyboardDownCallbackSucceedTest
 
     ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
 
-    keyboardPtr(0, 0, 0);
+    if (keyboardPtr != nullptr)
+        keyboardPtr(0, 0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysUpCallbackSucceedTest()
@@ -125,7 +131,8 @@ void Framework::OpenGLGlutProcessManagerTesting::SpecialKeysUpCallbackSucceedTes
 
     ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
 
-    specialKeysPtr(0, 0, 0);
+    if (specialKeysPtr != nullptr)
+        specialKeysPtr(0, 0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::KeyboardUpCallbackSucceedTest()
@@ -134,7 +141,8 @@ void Framework::OpenGLGlutProcessManagerTesting::KeyboardUpCallbackSucceedTest()
 
     ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
 
-    keyboardPtr(0, 0, 0);
+    if (keyboardPtr != nullptr)
+        keyboardPtr(0, 0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::MouseFunctionCallbackSucceedTest()
@@ -143,7 +151,8 @@ void Framework::OpenGLGlutProcessManagerTesting::MouseFunctionCallbackSucceedTes
 
     ASSERT_UNEQUAL_NULL_PTR(mouseFunctionPtr);
 
-    mouseFunctionPtr(0, 0, 0, 0);
+    if (mouseFunctionPtr != nullptr)
+        mouseFunctionPtr(0, 0, 0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::MotionFunctionCallbackSucceedTest()
@@ -152,7 +161,8 @@ void Framework::OpenGLGlutProcessManagerTesting::MotionFunctionCallbackSucceedTe
 
     ASSERT_UNEQUAL_NULL_PTR(motionFunctionPtr);
 
-    motionFunctionPtr(0, 0);
+    if (motionFunctionPtr != nullptr)
+        motionFunctionPtr(0, 0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::IdleFunctionCallbackSucceedTest()
@@ -161,7 +171,8 @@ void Framework::OpenGLGlutProcessManagerTesting::IdleFunctionCallbackSucceedTest
 
     ASSERT_UNEQUAL_NULL_PTR(idleFunction);
 
-    idleFunction();
+    if (idleFunction != nullptr)
+        idleFunction();
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::ProcessMenuCallbackSucceedTest()
@@ -170,7 +181,8 @@ void Framework::OpenGLGlutProcessManagerTesting::ProcessMenuCallbackSucceedTest(
 
     ASSERT_UNEQUAL_NULL_PTR(processMenuFunction);
 
-    processMenuFunction(0);
+    if (processMenuFunction != nullptr)
+        processMenuFunction(0);
 }
 
 void Framework::OpenGLGlutProcessManagerTesting::TerminateCallbackSucceedTest()

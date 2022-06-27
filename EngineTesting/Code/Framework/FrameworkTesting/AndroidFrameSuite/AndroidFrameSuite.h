@@ -1,18 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.4 (2019/09/12 19:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:20)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_SUITE_H
 #define FRAMEWORK_ANDROID_FRAME_SUITE_H
 
-#include "AndroidProcessManagerTesting.h"
-#include "AndroidProcessTesting.h"
 #include "AndroidCallBackInterfaceTesting.h"
 #include "AndroidCallBackTesting.h"
 #include "AndroidCallBackUnitTestSuiteTesting.h"
-#include "AndroidMessageLoopTesting.h"
 #include "AndroidFrameBuildTesting.h"
+#include "AndroidMessageLoopTesting.h"
+#include "AndroidProcessManagerTesting.h"
+#include "AndroidProcessTesting.h"
 
-#endif // FRAMEWORK_ANDROID_FRAME_SUITE_H
+#endif  // FRAMEWORK_ANDROID_FRAME_SUITE_H

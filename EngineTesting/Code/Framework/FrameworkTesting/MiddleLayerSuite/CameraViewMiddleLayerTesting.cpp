@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.1.0 (2020/06/28 21:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/26 22:43)
 
 #include "CameraViewMiddleLayerTesting.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
@@ -30,7 +33,7 @@ namespace Framework
 {
     using TestingType = CameraViewMiddleLayer;
 }
-#include SYSTEM_WARNING_DISABLE(26440)
+
 Framework::CameraViewMiddleLayerTesting::CameraViewMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -115,58 +118,11 @@ void Framework::CameraViewMiddleLayerTesting::DrawFrameRateTest()
 
     const auto clearColor = middleLayer.GetClearColor();
     const decltype(clearColor) blackColour{ 0.0f, 0.0f, 0.0f, 1.0f };
-    //      ASSERT_APPROXIMATE_USE_FUNCTION(Rendering::Approximate<float>, clearColor, blackColour, Mathematics::MathF::epsilon);
 
     middleLayer.DrawFrameRate(WindowPoint{}, clearColor);
     ASSERT_TRUE(middleLayer.Paint());
 }
 
-void Framework::CameraViewMiddleLayerTesting::TrackTest()
+void Framework::CameraViewMiddleLayerTesting::TrackTest() noexcept
 {
-    // 	constexpr auto platform = MiddleLayerPlatform::Windows;
-    //
-    // 	TestingType middleLayer{ platform };
-    //
-    // 	auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
-    //
-    // 	middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
-    //
-    // 	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
-    //
-    // 	ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-    // 	ASSERT_TRUE(middleLayer.Initialize());
-    // 	middleLayer.PreIdle();
-    // 	ASSERT_TRUE(middleLayer.Create());
-    //
-    // 	const WindowSize defaultWindowSize{ 1024, 768 };
-    // 	ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, defaultWindowSize));
-    //
-    // 	const auto currentWindowSize = middleLayer.GetWindowSize();
-    //
-    // 	ASSERT_EQUAL(currentWindowSize, defaultWindowSize);
-    //
-    // 	Rendering::CameraSmartPointer camera{ CoreTools::New0<Rendering::Camera>() };
-    // 	middleLayer.SetCamera(camera);
-    //
-    // 	default_random_engine generator{ GetEngineRandomSeed() };
-    // 	const uniform_int<> widthRandom{ 0, defaultWindowSize.GetWindowWidth() };
-    // 	const uniform_int<> heightRandom{ 0, defaultWindowSize.GetWindowHeight() };
-    //
-    // 	const auto testLoopCount = GetTestLoopCount();
-    // 	for (int loop = 0; loop < testLoopCount; ++loop)
-    // 	{
-    // 		const WindowPoint point{ widthRandom(generator), heightRandom(generator) };
-    // 		const auto x = middleLayer.GetXTrack(point.GetWindowX());
-    // 		const auto y = middleLayer.GetYTrack(point.GetWindowY());
-    //
-    // 		const auto multiplier = CalculateMultiplier(defaultWindowSize);
-    // 		const auto xResult = GetXTrack(point.GetWindowX(), multiplier, defaultWindowSize);
-    // 		const auto yResult = GetYTrack(point.GetWindowY(), multiplier, defaultWindowSize);
-    //
-    // 		ASSERT_APPROXIMATE(x, xResult, Mathematics::MathF::epsilon);
-    // 		ASSERT_APPROXIMATE(y, yResult, Mathematics::MathF::epsilon);
-    // 	}
-    //
-    // 	ASSERT_TRUE(middleLayer.Destroy());
-    // 	middleLayer.Terminate();
 }

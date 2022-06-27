@@ -1,19 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/09 20:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/21 17:13)
 
 #ifndef ARTIFICIAL_INTELLEGENCE_TESTING_TESTING_HELPER_H
 #define ARTIFICIAL_INTELLEGENCE_TESTING_TESTING_HELPER_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-
-namespace CoreTools
-{
-    class Suite;
-}
 
 namespace ArtificialIntellegence
 {
@@ -37,7 +35,7 @@ namespace ArtificialIntellegence
         void AddFiniteStateMachineSuite();
         void AddFuzzyStateMachineSuite();
         void AddGeneticAlgorithmSuite();
-        void AddNeuralNetworkSuite(); 
+        void AddNeuralNetworkSuite();
     };
 }
 

@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 #include <map>
 

@@ -23,7 +23,7 @@ namespace OpenGLGlutCallBackUnitTestSuiteTesting
         using HWnd = System::WindowsHWnd;
 
     public:
-        explicit OpenGLGlutCallBackUnitTestSuiteTesting(OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack* message, const OStreamShared& osPtr);
+        explicit OpenGLGlutCallBackUnitTestSuiteTesting(const OStreamShared& ostream, OpenGLGlutCallBackUnitTestSuiteTestingOpenGLGlutCallBack* message);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

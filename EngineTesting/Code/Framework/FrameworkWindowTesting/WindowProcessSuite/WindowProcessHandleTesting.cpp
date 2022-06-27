@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/05 21:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:00)
 
 #include "WindowProcessHandleTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -22,7 +25,7 @@ namespace Framework
 }
 
 Framework::WindowProcessHandleTesting::WindowProcessHandleTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, m_Hwnd{ hwnd }
+    : ParentType{ stream }, hwnd{ hwnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -59,13 +62,13 @@ void Framework::WindowProcessHandleTesting::BaseTest()
 void Framework::WindowProcessHandleTesting::ClassNameTest()
 {
     System::String className{};
-    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
     TestingType process{ System::g_Microseconds / 60 };
 
     ASSERT_TRUE(process.IsClassNameExist(className));
 
-    auto newClassName = SYSTEM_TEXT("New Class"s);
+    auto newClassName = SYSTEM_TEXT("New Class 2"s);
 
     ASSERT_TRUE(process.SetNewClassName(newClassName));
 

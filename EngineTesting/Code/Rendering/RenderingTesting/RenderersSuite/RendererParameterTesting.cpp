@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/09 10:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 16:52)
 
 #include "RendererParameterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -11,7 +14,7 @@
 #include "Rendering/Renderers/RendererParameter.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RendererParameterTesting)
-#include SYSTEM_WARNING_DISABLE(26496)
+
 void Rendering::RendererParameterTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
@@ -41,7 +44,7 @@ void Rendering::RendererParameterTesting::AccessTest()
     ASSERT_EQUAL(firstRendererParameter.GetWidth(), 100);
     ASSERT_EQUAL(firstRendererParameter.GetHeight(), 10);
 
-    RendererBasis rendererBasis = firstRendererParameter.GetRendererBasis();
+    const RendererBasis rendererBasis = firstRendererParameter.GetRendererBasis();
 
     ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::A8R8G8B8);
     ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::D24S8);
@@ -71,7 +74,7 @@ void Rendering::RendererParameterTesting::ConstructionTest()
     ASSERT_EQUAL(firstRendererParameter.GetHeight(), 76);
     ASSERT_FALSE(firstRendererParameter.IsAllowResize());
 
-    RendererBasis rendererBasis = firstRendererParameter.GetRendererBasis();
+    const RendererBasis rendererBasis = firstRendererParameter.GetRendererBasis();
 
     ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::R8G8B8);
     ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::D24S8);

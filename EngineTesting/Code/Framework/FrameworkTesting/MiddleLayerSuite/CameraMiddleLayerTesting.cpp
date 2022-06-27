@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.1.0 (2020/06/27 10:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/26 22:44)
 
 #include "CameraMiddleLayerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -12,6 +15,7 @@
 #include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/DataTypes/TransformMatrixDetail.h"
 #include "Framework/WindowCreate/WindowSize.h"
+
 using std::min;
 using std::string;
 using std::to_string;
@@ -49,7 +53,7 @@ float Framework::CameraMiddleLayerTesting::GetYTrack(int y, float multiplier, co
     return (2 * (height - 1 - y) - height) * multiplier;
 }
 
-const Rendering::TransformF Framework::CameraMiddleLayerTesting::CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis)
+Rendering::TransformF Framework::CameraMiddleLayerTesting::CalculateTransform(const Transform& original, NumericalValueSymbol doValue, float speed, const AVectorf& axis)
 {
     auto result = original;
     auto rotate = result.GetRotate();
@@ -63,7 +67,7 @@ const Rendering::TransformF Framework::CameraMiddleLayerTesting::CalculateTransf
     return result;
 }
 
-const Mathematics::AVectorF Framework::CameraMiddleLayerTesting::Calculate3DVector(float xTrack, float yTrack) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::AVectorF Framework::CameraMiddleLayerTesting::Calculate3DVector(float xTrack, float yTrack) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     const auto length = Mathematics::MathF::Sqrt(xTrack * xTrack + yTrack * yTrack);
     auto zTrack = 0.0f;
@@ -103,7 +107,7 @@ float Framework::CameraMiddleLayerTesting::CalculateAngle(const AVectorf& axis, 
     }
 }
 
-const Mathematics::AVectorF Framework::CameraMiddleLayerTesting::CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack)
+Mathematics::AVectorF Framework::CameraMiddleLayerTesting::CalculateAxis(const AVectorf& axis, float dot, float xBeginTrack, float yBeginTrack)
 {
     if (!axis.IsZero())
     {

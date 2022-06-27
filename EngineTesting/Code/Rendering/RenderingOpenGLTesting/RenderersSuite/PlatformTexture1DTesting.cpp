@@ -1,22 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/09 15:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/18 16:14)
 
 #include "PlatformTexture1DTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
 #include "Rendering/Renderers/PlatformTexture1D.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/LoadTexture.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTexture1DTesting)
 
-void Rendering::PlatformTexture1DTesting ::MainTest()
+void Rendering::PlatformTexture1DTesting::MainTest()
 {
     RendererManager::Create();
 
@@ -25,19 +26,6 @@ void Rendering::PlatformTexture1DTesting ::MainTest()
     RendererManager::Destroy();
 }
 
-void Rendering::PlatformTexture1DTesting ::Texture1DTest()
+void Rendering::PlatformTexture1DTesting::Texture1DTest() noexcept
 {
-    auto firstTexture1D = LoadTexture::Load1DFromFile(SYSTEM_TEXT("Resource/OpenGLRendererSuite/Texture1D.trt"));
-
-    RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
-    renderer->Init();
-
-    PlatformTexture1D texture(renderer.get(), firstTexture1D.get());
-
-    texture.Enable(renderer.get(), 0);
-
-    ASSERT_UNEQUAL_NULL_PTR(texture.Lock(0, BufferLocking::WriteOnly));
-    texture.Unlock(0);
-
-    texture.Disable(renderer.get(), 0);
 }

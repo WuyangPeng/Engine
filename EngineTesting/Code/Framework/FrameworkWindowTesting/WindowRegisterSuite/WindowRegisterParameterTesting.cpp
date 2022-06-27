@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/07 11:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 13:50)
 
 #include "WindowRegisterParameterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -15,19 +18,21 @@ namespace Framework
 }
 
 Framework::WindowRegisterParameterTesting::WindowRegisterParameterTesting(const OStreamShared& stream, HInstance instance)
-    : ParentType{ stream }, m_Instance{ instance }
+    : ParentType{ stream }, instance{ instance }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Framework::WindowRegisterParameterTesting::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Instance != nullptr)
+    if (ParentType::IsValid() && instance != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void Framework::WindowRegisterParameterTesting::DoRunUnitTest()
@@ -43,9 +48,9 @@ void Framework::WindowRegisterParameterTesting::MainTest()
 
 void Framework::WindowRegisterParameterTesting::DefaultTest()
 {
-    const TestingType parameter{ m_Instance };
+    const TestingType parameter{ instance };
 
-    ASSERT_EQUAL(parameter.GetHInstance(), m_Instance);
+    ASSERT_EQUAL(parameter.GetHInstance(), instance);
     ASSERT_ENUM_EQUAL(parameter.GetStyle(), System::WindowsClassStyle::CommonUse);
     ASSERT_EQUAL(parameter.GetWindowClassExtra(), 0);
     ASSERT_EQUAL(parameter.GetWindowExtra(), 0);
@@ -57,9 +62,9 @@ void Framework::WindowRegisterParameterTesting::FullyTest()
     constexpr auto windowClassExtra = 5;
     constexpr auto windowExtra = 6;
 
-    const TestingType parameter{ m_Instance, styles, windowClassExtra, windowExtra };
+    const TestingType parameter{ instance, styles, windowClassExtra, windowExtra };
 
-    ASSERT_EQUAL(parameter.GetHInstance(), m_Instance);
+    ASSERT_EQUAL(parameter.GetHInstance(), instance);
     ASSERT_ENUM_EQUAL(parameter.GetStyle(), styles);
     ASSERT_EQUAL(parameter.GetWindowClassExtra(), windowClassExtra);
     ASSERT_EQUAL(parameter.GetWindowExtra(), windowExtra);

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/19 22:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:15)
 
 #ifndef FRAMEWORK_APPLICATION_SUITE_PIXEL_SCREEN_TESTING_H
 #define FRAMEWORK_APPLICATION_SUITE_PIXEL_SCREEN_TESTING_H
@@ -55,20 +58,20 @@ namespace Framework
 
         void AssertColour(const TestingType& pixelScreen, const Colour& colour);
         void AssertColour(const TestingType& lhs, const TestingType& rhs);
-        TestingType CreateTestPixelScreen();
-        TestingType CreateTestPixelScreen(int width, int height);
+        NODISCARD TestingType CreateTestPixelScreen();
+        NODISCARD TestingType CreateTestPixelScreen(int width, int height);
         void AssertColourOnX(const TestingType& pixelScreen, const Colour& colour, int xBegin, int xEnd);
         void AssertColourOnY(const TestingType& pixelScreen, const Colour& colour, int yBegin, int yEnd);
-        Colour GetRandomColour(std::default_random_engine& generator);
+        NODISCARD Colour GetRandomColour(std::default_random_engine& generator);
 
-        int GetSeparateRadius(int radius) const noexcept;
+        NODISCARD int GetSeparateRadius(int radius) const noexcept;
 
     private:
         static constexpr auto minColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::minValue);
         static constexpr auto maxColour = gsl::narrow_cast<uint8_t>(Rendering::ColourDefaultTraits<uint8_t>::maxValue);
-        static constexpr Colour sm_Black{};
+        static constexpr Colour black{};
 
-        std::uniform_int<uint8_t> m_Random;
+        std::uniform_int<uint8_t> random;
     };
 }
 

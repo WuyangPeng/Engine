@@ -1,107 +1,98 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/10 20:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/24 13:52)
 
 #include "AndroidProcessTesting.h"
-#include "Framework/AndroidFrame/AndroidProcessDetail.h"
-#include "Framework/AndroidFrame/AndroidCallBackInterface.h"
+#include "System/Time/Using/DeltaTimeUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "System/Time/Using/DeltaTimeUsing.h"
+#include "Framework/AndroidFrame/AndroidCallBackInterface.h"
+#include "Framework/AndroidFrame/AndroidProcessDetail.h"
 
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26432)
-#include SYSTEM_WARNING_DISABLE(26429)
-using std::ostream;
-
-Framework::AndroidProcessAndroidCallBackInterface
-	::AndroidProcessAndroidCallBackInterface(int64_t delta)
-	:ParentType{ delta }
+Framework::AndroidProcessAndroidCallBackInterface::AndroidProcessAndroidCallBackInterface(int64_t delta) noexcept
+    : ParentType{ delta }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Framework::AndroidProcessAndroidCallBackInterface
-	::~AndroidProcessAndroidCallBackInterface()
-{
-	FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, AndroidProcessAndroidCallBackInterface);
 
 namespace Framework
 {
-	template<>
-	AndroidProcess<Framework::AndroidProcessAndroidCallBackInterface>
-		::AndroidProcess(int64_t delta)
-	 
-	{
-		delta;
-		FRAMEWORK_SELF_CLASS_IS_VALID_9;
-	}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 
-	template<>
-	AndroidProcess<Framework::AndroidProcessAndroidCallBackInterface>
-		::~AndroidProcess()
-	{
-		FRAMEWORK_SELF_CLASS_IS_VALID_9;
-	}
+    template <>
+    AndroidProcess<Framework::AndroidProcessAndroidCallBackInterface>::AndroidProcess(MAYBE_UNUSED int64_t delta)
+    {
+        FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    }
+
+#include STSTEM_WARNING_POP
+
+    template <>
+    AndroidProcess<Framework::AndroidProcessAndroidCallBackInterface>::~AndroidProcess()
+    {
+        FRAMEWORK_SELF_CLASS_IS_VALID_9;
+    }
 }
 
-Framework::AndroidProcessTesting
-	::AndroidProcessTesting(AndroidApp* androidApp, const OStreamShared& osPtr)
-	:ParentType{ osPtr }, m_AndroidApp{ androidApp }
+Framework::AndroidProcessTesting::AndroidProcessTesting(const OStreamShared& stream, AndroidApp* androidApp)
+    : ParentType{ stream }, androidApp{ androidApp }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::AndroidProcessTesting
-	::~AndroidProcessTesting()
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, AndroidProcessTesting)
+
+void Framework::AndroidProcessTesting::DoRunUnitTest()
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework,AndroidProcessTesting)
-
- void Framework::AndroidProcessTesting::DoRunUnitTest()
+void Framework::AndroidProcessTesting::MainTest()
 {
-     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
- }
-
-void Framework::AndroidProcessTesting
-	::MainTest()
-{
-	ASSERT_NOT_THROW_EXCEPTION_0(CallbackSucceedTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CallbackSucceedTest);
 }
 
-void Framework::AndroidProcessTesting
-	::CallbackSucceedTest()
+void Framework::AndroidProcessTesting::CallbackSucceedTest()
 {
-	AndroidProcess<AndroidProcessAndroidCallBackInterface> process(System::g_Microseconds / 60);
+    AndroidProcess<AndroidProcessAndroidCallBackInterface> process(System::g_Microseconds / 60);
 
-	AndroidProcessManager::AppCmd appCmd =	process.GetAppCmd();
+    AndroidProcessManager::AppCmd appCmd = process.GetAppCmd();
 
-	ASSERT_UNEQUAL_NULL_PTR(appCmd);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(appCmd, "appCmd == nullptr");
 
-	appCmd(m_AndroidApp,0);
+    if (appCmd != nullptr)
+    {
+        appCmd(androidApp, 0);
+    }
 
-	AndroidProcessManager::InputEvent inputEvent =	process.GetInputEvent();
+    AndroidProcessManager::InputEvent inputEvent = process.GetInputEvent();
 
-	ASSERT_UNEQUAL_NULL_PTR(inputEvent);
+    ASSERT_UNEQUAL_NULL_PTR(inputEvent);
 
-	inputEvent(m_AndroidApp,nullptr);
+    if (inputEvent != nullptr)
+    {
+        inputEvent(androidApp, nullptr);
+    }
 
-	AndroidProcessManager::Display display = process.GetDisplay();
+    AndroidProcessManager::Display display = process.GetDisplay();
 
-	ASSERT_UNEQUAL_NULL_PTR(display);
+    ASSERT_UNEQUAL_NULL_PTR(display);
 
-	display(m_AndroidApp,0);
+    if (display != nullptr)
+    {
+        display(androidApp, 0);
+    }
 
-	ASSERT_TRUE(process.PreCreate());
-	ASSERT_TRUE(process.Initialize());
-	process.PreIdle();
-	process.Terminate();
+    ASSERT_TRUE(process.PreCreate());
+    ASSERT_TRUE(process.Initialize());
+    process.PreIdle();
+    process.Terminate();
 }
-

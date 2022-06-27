@@ -1,21 +1,18 @@
 {
-  "windowCreateSuite":
-  {
+  "windowCreateSuite": {
     "WindowInstanceParameterTesting": 1,
     "WindowCreateParameterTesting": 1,
     "WindowCreateHandleTesting": 1
   },
 
-  "windowProcessSuite": 
-  {
+  "windowProcessSuite": {
     "WindowMessageInterfaceTesting": 1,
     "WindowMessageTesting": 1,
     "WindowProcessManagerTesting": 1,
     "WindowProcessHandleTesting": 1
   },
 
-  "windowRegisterSuite":
-  {
+  "windowRegisterSuite": {
     "WindowRegisterParameterTesting": 1,
     "WindowHIconTesting": 1,
     "WindowHCursorTesting": 1,
@@ -23,9 +20,8 @@
     "WindowRegisterTesting": 1
   },
 
-  "applicationSuite": 
-  {
-    "FontInformationTesting":1,
+  "applicationSuite": {
+    "FontInformationTesting": 1,
     "MousePositionTesting": 1,
     "WindowApplicationInformationTesting": 1
   }

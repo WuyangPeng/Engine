@@ -12,6 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/Resources/ResourcesFwd.h"
+
 namespace Rendering
 {
     template <typename PlatformBufferType>

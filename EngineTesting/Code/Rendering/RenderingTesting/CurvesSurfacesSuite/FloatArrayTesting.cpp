@@ -1,26 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/07 17:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 19:43)
 
 #include "FloatArrayTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Rendering/CurvesSurfaces/FloatArray.h"
-
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26481)
+#include "Rendering/CurvesSurfaces/FloatArray.h"
+
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, FloatArrayTesting)
@@ -57,7 +54,13 @@ void Rendering::FloatArrayTesting::InitTest()
 
     for (int i = 0; i < size; ++i)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         ASSERT_APPROXIMATE(data[i], static_cast<float>(i), 1e-8f);
+
+#include STSTEM_WARNING_POP
+
         ASSERT_APPROXIMATE(firstFloatArray[i], static_cast<float>(i), 1e-8f);
     }
 
@@ -124,28 +127,4 @@ void Rendering::FloatArrayTesting::StreamTest()
     {
         value.push_back(static_cast<float>(i));
     }
-
-    // 	CoreTools::OutTopLevel outTopLevel;
-    // 	CoreTools::ObjectInterfaceSharedPtr firstFloatArray(new FloatArray(value));
-    //
-    // 	firstFloatArray->SetUniqueID(5);
-    //
-    // 	outTopLevel.Insert(firstFloatArray);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	FloatArraySharedPtr secondFloatArray = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<FloatArraySharedPtr>();
-    //
-    // 	ASSERT_EQUAL(secondFloatArray->GetNumElements(), size);
-    //
-    // 	 for (int i = 0; i < size;++i)
-    // 	 {
-    // 		 ASSERT_APPROXIMATE((*secondFloatArray)[i], static_cast<float>(i), 1e-8f);
-    // 	 }
 }

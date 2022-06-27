@@ -1,33 +1,38 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.4 (2019/09/10 10:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/22 15:51)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_SUITE_GENERATE_TEMPLATE_MANAGER_VCXPROJ_FILTERS_TESTING_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_SUITE_GENERATE_TEMPLATE_MANAGER_VCXPROJ_FILTERS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "GenerateTemplateTesting.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 namespace AssistTools
 {
-	class GenerateTemplateMiddleLayerVcxprojFiltersTesting : public GenerateTemplateTesting
-	{
-        public:
-            using ClassType = GenerateTemplateMiddleLayerVcxprojFiltersTesting;
-            using ParentType = GenerateTemplateTesting;
+    class GenerateTemplateMiddleLayerVcxprojFiltersTesting : public GenerateTemplateTesting
+    {
+    public:
+        using ClassType = GenerateTemplateMiddleLayerVcxprojFiltersTesting;
+        using ParentType = GenerateTemplateTesting;
 
-        public:
-            explicit GenerateTemplateMiddleLayerVcxprojFiltersTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-	private:
-		void MainTest(); 
-		
-		void GenerateToTest(); 
-	
-		void DoRunUnitTest() override;			
-	};
+    public:
+        explicit GenerateTemplateMiddleLayerVcxprojFiltersTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+    private:
+        void MainTest();
+
+        void GenerateToTest();
+
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // ASSIST_TOOLS_GENERATE_PROJECTS_SUITE_GENERATE_TEMPLATE_INPUT_MANAGER_VCXPROJ_FILTERS_TESTING_H
+#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_SUITE_GENERATE_TEMPLATE_INPUT_MANAGER_VCXPROJ_FILTERS_TESTING_H

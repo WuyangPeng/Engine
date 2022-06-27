@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/05 10:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/14 20:13)
 
 #include "LightTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -10,20 +13,11 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/SceneGraph/Light.h"
-
-#include "CoreTools/ObjectSystems/InitTerm.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
 
 #include <random>
 #include <vector>
@@ -47,9 +41,9 @@ void Rendering::LightTesting::MainTest()
 void Rendering::LightTesting::BaseTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     Light firstLight(LightType::Ambient);
 
@@ -61,24 +55,24 @@ void Rendering::LightTesting::BaseTest()
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        float exponent = secondFloatRandomDistribution(generator);
+        const float exponent = secondFloatRandomDistribution(generator);
 
         firstLight.SetExponent(exponent);
 
         ASSERT_APPROXIMATE(exponent, firstLight.GetExponent(), 1e-8f);
 
-        Colour<float> ambient(firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator));
-        Colour<float> diffuse(firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator));
-        Colour<float> specular(firstFloatRandomDistribution(generator),
-                               firstFloatRandomDistribution(generator),
-                               firstFloatRandomDistribution(generator),
-                               firstFloatRandomDistribution(generator));
+        const Colour<float> ambient(firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator));
+        const Colour<float> diffuse(firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator));
+        const Colour<float> specular(firstFloatRandomDistribution(generator),
+                                     firstFloatRandomDistribution(generator),
+                                     firstFloatRandomDistribution(generator),
+                                     firstFloatRandomDistribution(generator));
 
         firstLight.SetAmbient(ambient);
         firstLight.SetDiffuse(diffuse);
@@ -88,18 +82,18 @@ void Rendering::LightTesting::BaseTest()
         ASSERT_TRUE(Approximate(firstLight.GetDiffuse(), diffuse, 1e-8f));
         ASSERT_TRUE(Approximate(firstLight.GetSpecular(), specular, 1e-8f));
 
-        Light::APoint firstPosition(firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator));
+        const Light::APoint firstPosition(firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator));
 
         firstLight.SetPosition(firstPosition);
 
         ASSERT_TRUE(Approximate(firstPosition, firstLight.GetPosition(), 1e-8f));
 
-        float constant = secondFloatRandomDistribution(generator);
-        float linear = secondFloatRandomDistribution(generator);
-        float quadratic = secondFloatRandomDistribution(generator);
-        float intensity = secondFloatRandomDistribution(generator);
+        const float constant = secondFloatRandomDistribution(generator);
+        const float linear = secondFloatRandomDistribution(generator);
+        const float quadratic = secondFloatRandomDistribution(generator);
+        const float intensity = secondFloatRandomDistribution(generator);
 
         firstLight.SetAttenuation(constant, linear, quadratic, intensity);
 
@@ -113,14 +107,14 @@ void Rendering::LightTesting::BaseTest()
 void Rendering::LightTesting::CalculateTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Light firstLight(LightType::Ambient, 1e-5f);
 
-        float angle(Mathematics::MathF::FAbs(secondFloatRandomDistribution(generator)));
+        const float angle(Mathematics::MathF::FAbs(secondFloatRandomDistribution(generator)));
 
         firstLight.SetAngle(angle);
 
@@ -145,69 +139,55 @@ void Rendering::LightTesting::CalculateTest()
                                    firstFloatRandomDistribution(generator));
 
         thirdVector.Normalize();
-
-        // 		Mathematics::AVectorOrthonormalBasisf orthonormalize = GenerateOrthonormalBasis(thirdVector, 1e-5f);
-        //
-        // 		firstLight.SetVector(orthonormalize.GetUVector(), orthonormalize.GetVVector(), orthonormalize.GetWVector());
-        //
-        // 		ASSERT_TRUE(Approximate(firstLight.GetUpVector(), orthonormalize.GetUVector(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight.GetRightVector(), orthonormalize.GetVVector(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight.GetDirectionVector(), orthonormalize.GetWVector(), 1e-8f));
-        //
-        // 		firstLight.SetDirection(thirdVector);
-        //
-        // 		ASSERT_TRUE(Approximate(firstLight.GetUpVector(), orthonormalize.GetUVector(), 1e-5f));
-        // 		ASSERT_TRUE(Approximate(firstLight.GetRightVector(), orthonormalize.GetVVector(), 1e-5f));
-        // 		ASSERT_TRUE(Approximate(firstLight.GetDirectionVector(), orthonormalize.GetWVector(), 1e-5f));
     }
 }
 
 void Rendering::LightTesting::CopyTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
-    std::uniform_real<float> thirdFloatRandomDistribution(0.0f, 1.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
+    const std::uniform_real<float> thirdFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
         Light firstLight(LightType::Ambient);
 
-        float exponent = secondFloatRandomDistribution(generator);
+        const float exponent = secondFloatRandomDistribution(generator);
 
         firstLight.SetExponent(exponent);
 
-        Colour<float> ambient(firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator));
-        Colour<float> diffuse(firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator),
-                              firstFloatRandomDistribution(generator));
-        Colour<float> specular(firstFloatRandomDistribution(generator),
-                               firstFloatRandomDistribution(generator),
-                               firstFloatRandomDistribution(generator),
-                               firstFloatRandomDistribution(generator));
+        const Colour<float> ambient(firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator));
+        const Colour<float> diffuse(firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator),
+                                    firstFloatRandomDistribution(generator));
+        const Colour<float> specular(firstFloatRandomDistribution(generator),
+                                     firstFloatRandomDistribution(generator),
+                                     firstFloatRandomDistribution(generator),
+                                     firstFloatRandomDistribution(generator));
 
         firstLight.SetAmbient(ambient);
         firstLight.SetDiffuse(diffuse);
         firstLight.SetSpecular(specular);
 
-        Light::APoint firstPosition(firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator));
+        const Light::APoint firstPosition(firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator));
 
         firstLight.SetPosition(firstPosition);
 
-        float constant = thirdFloatRandomDistribution(generator);
-        float linear = thirdFloatRandomDistribution(generator);
-        float quadratic = thirdFloatRandomDistribution(generator);
-        float intensity = thirdFloatRandomDistribution(generator);
+        const float constant = thirdFloatRandomDistribution(generator);
+        const float linear = thirdFloatRandomDistribution(generator);
+        const float quadratic = thirdFloatRandomDistribution(generator);
+        const float intensity = thirdFloatRandomDistribution(generator);
 
         firstLight.SetAttenuation(constant, linear, quadratic, intensity);
 
-        float angle(Mathematics::MathF::FAbs(secondFloatRandomDistribution(generator)));
+        const float angle(Mathematics::MathF::FAbs(secondFloatRandomDistribution(generator)));
 
         firstLight.SetAngle(angle);
 
@@ -267,94 +247,6 @@ void Rendering::LightTesting::CopyTest()
     }
 }
 
-void Rendering::LightTesting::StreamTest()
+void Rendering::LightTesting::StreamTest() noexcept
 {
-    std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, Mathematics::MathF::GetPI());
-    std::uniform_real<float> thirdFloatRandomDistribution(0.0f, 1.0f);
-
-    for (int loop = 0; loop < GetTestLoopCount(); ++loop)
-    {
-        // 		CoreTools::OutTopLevel outTopLevel;
-        // 		CoreTools::ObjectInterfaceSharedPtr objectPtr(new Light(LightType::Ambient));
-        //
-        // 		LightSharedPtr firstLight = objectPtr.PolymorphicDowncastObjectSharedPtr<LightSharedPtr>();
-        //
-        // 		float exponent = secondFloatRandomDistribution(generator);
-        //
-        // 		firstLight->SetExponent(exponent);
-        //
-        // 		Colour<float> ambient(firstFloatRandomDistribution(generator),
-        //                               firstFloatRandomDistribution(generator),
-        // 							  firstFloatRandomDistribution(generator),
-        // 							  firstFloatRandomDistribution(generator));
-        // 		Colour<float> diffuse(firstFloatRandomDistribution(generator),
-        //                               firstFloatRandomDistribution(generator),
-        // 							  firstFloatRandomDistribution(generator),
-        // 							  firstFloatRandomDistribution(generator));
-        // 		Colour<float> specular(firstFloatRandomDistribution(generator),
-        //                                firstFloatRandomDistribution(generator),
-        // 							   firstFloatRandomDistribution(generator),
-        // 							   firstFloatRandomDistribution(generator));
-        //
-        // 		firstLight->SetAmbient(ambient);
-        // 		firstLight->SetDiffuse(diffuse);
-        // 		firstLight->SetSpecular(specular);
-        //
-        // 		Light::APoint firstPosition(firstFloatRandomDistribution(generator),
-        //                                     firstFloatRandomDistribution(generator),
-        //                                     firstFloatRandomDistribution(generator));
-        //
-        // 		firstLight->SetPosition(firstPosition);
-        //
-        // 		float constant = thirdFloatRandomDistribution(generator);
-        // 		float linear = thirdFloatRandomDistribution(generator);
-        // 		float quadratic = thirdFloatRandomDistribution(generator);
-        // 		float intensity = thirdFloatRandomDistribution(generator);
-        //
-        // 		firstLight->SetAttenuation(constant, linear, quadratic, intensity);
-        //
-        // 		float angle(Mathematics::MathF::FAbs(secondFloatRandomDistribution(generator)));
-        //
-        // 		firstLight->SetAngle(angle);
-        //
-        // 		Light::AVector firstVector(firstFloatRandomDistribution(generator),
-        //                                    firstFloatRandomDistribution(generator),
-        //                                    firstFloatRandomDistribution(generator));
-        //
-        //         firstVector.Normalize();
-        //
-        // 		firstLight->SetDirection(firstVector);
-        //
-        //         outTopLevel.Insert(objectPtr);
-        //
-        //         CoreTools::BufferOutStream outStream(outTopLevel);
-        //
-        //         CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr =
-        // 		    outStream.GetBufferOutStreamInformation();
-        //
-        //         CoreTools::BufferInStream inStream(fileBufferPtr);
-        //
-        //         CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-        //
-        // 		LightSharedPtr secondLight = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<LightSharedPtr>();
-        //
-        // 		ASSERT_ENUM_EQUAL(firstLight->GetType(), secondLight->GetType());
-        // 		ASSERT_APPROXIMATE(firstLight->GetAngle(), secondLight->GetAngle(), 1e-8f);
-        // 		ASSERT_APPROXIMATE(firstLight->GetCosAngle(), secondLight->GetCosAngle(), 1e-8f);
-        // 		ASSERT_APPROXIMATE(firstLight->GetSinAngle(), secondLight->GetSinAngle(), 1e-8f);
-        // 		ASSERT_APPROXIMATE(firstLight->GetExponent(), secondLight->GetExponent(), 1e-8f);
-        // 		ASSERT_TRUE(Approximate(firstLight->GetAmbient(), secondLight->GetAmbient(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight->GetDiffuse(), secondLight->GetDiffuse(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight->GetSpecular(), secondLight->GetSpecular(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight->GetPosition(), secondLight->GetPosition(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight->GetDirectionVector(), secondLight->GetDirectionVector(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight->GetUpVector(), secondLight->GetUpVector(), 1e-8f));
-        // 		ASSERT_TRUE(Approximate(firstLight->GetRightVector(), secondLight->GetRightVector(), 1e-8f));
-        // 		ASSERT_APPROXIMATE(firstLight->GetConstant(), secondLight->GetConstant(), 1e-8f);
-        // 		ASSERT_APPROXIMATE(firstLight->GetLinear(), secondLight->GetLinear(), 1e-8f);
-        // 		ASSERT_APPROXIMATE(firstLight->GetQuadratic(), secondLight->GetQuadratic(), 1e-8f);
-        // 		ASSERT_APPROXIMATE(firstLight->GetIntensity(), secondLight->GetIntensity(), 1e-8f);
-    }
 }

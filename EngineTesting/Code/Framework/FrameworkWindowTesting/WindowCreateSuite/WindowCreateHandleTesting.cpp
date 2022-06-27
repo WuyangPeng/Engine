@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/03 16:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:16)
 
 #include "WindowCreateHandleTesting.h"
 #include "System/Windows/WindowsCreate.h"
@@ -22,7 +25,7 @@ namespace Framework
 }
 
 Framework::WindowCreateHandleTesting::WindowCreateHandleTesting(const OStreamShared& stream, HInstance instance, HWnd hwnd)
-    : ParentType{ stream }, m_Instance{ instance }, m_Hwnd{ hwnd }
+    : ParentType{ stream }, instance{ instance }, hwnd{ hwnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -42,12 +45,12 @@ void Framework::WindowCreateHandleTesting::MainTest()
 void Framework::WindowCreateHandleTesting::CreateTest()
 {
     System::String className{};
-    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
     auto windowName = SYSTEM_TEXT("New Main Window"s);
 
     const WindowSize size{ 800, 600 };
     WindowCreateParameter createParameter{ windowName };
-    WindowInstanceParameter instanceParameter{ m_Instance, className };
+    WindowInstanceParameter instanceParameter{ instance, className };
 
     auto oldHwnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
 

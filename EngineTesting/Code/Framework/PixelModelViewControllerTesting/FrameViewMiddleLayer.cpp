@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/17 10:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 17:07)
 
 #include "FrameViewMiddleLayer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -15,20 +18,20 @@
 using std::cout;
 
 PixelModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, m_TimeDelta{ sm_TimerInterval }
+    : ParentType{ middleLayerPlatform }, timeDelta{ timerInterval }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(PixelModelViewController, FrameViewMiddleLayer)
 
-bool PixelModelViewController::FrameViewMiddleLayer::Idle(int64_t timeDelta)
+bool PixelModelViewController::FrameViewMiddleLayer::Idle(int64_t aTimeDelta)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::Idle(timeDelta))
+    if (ParentType::Idle(aTimeDelta))
     {
-        PrintFrameRateMessage(timeDelta);
+        PrintFrameRateMessage(aTimeDelta);
 
         return true;
     }
@@ -39,10 +42,10 @@ bool PixelModelViewController::FrameViewMiddleLayer::Idle(int64_t timeDelta)
 }
 
 // private
-void PixelModelViewController::FrameViewMiddleLayer::PrintFrameRateMessage(int64_t timeDelta)
+void PixelModelViewController::FrameViewMiddleLayer::PrintFrameRateMessage(int64_t aTimeDelta)
 {
-    m_TimeDelta -= timeDelta;
-    if (m_TimeDelta <= 0)
+    timeDelta -= aTimeDelta;
+    if (timeDelta <= 0)
     {
         auto modelMiddleLayer = boost::polymorphic_pointer_downcast<Framework::ModelMiddleLayer>(this->GetModelMiddleLayer());
 
@@ -51,6 +54,6 @@ void PixelModelViewController::FrameViewMiddleLayer::PrintFrameRateMessage(int64
             cout << modelMiddleLayer->GetFrameRateMessage() << '\n';
         }
 
-        m_TimeDelta = sm_TimerInterval;
+        timeDelta = timerInterval;
     }
 }

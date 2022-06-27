@@ -1,51 +1,41 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "consoleGraphSuite": 
-  {
+  "consoleGraphSuite": {
 
   },
 
-  "elfAnimationSuite":
-  {
+  "elfAnimationSuite": {
 
   },
 
-  "textureAnimationSuite": 
-  {
+  "textureAnimationSuite": {
 
   },
 
-  "rigidBodyHierarchyAnimationSuite": 
-  {
+  "rigidBodyHierarchyAnimationSuite": {
 
   },
 
-  "skeletonAnimationSuite":
-  {
+  "skeletonAnimationSuite": {
 
   },
 
-  "perVertexAnimationSuite": 
-  {
+  "perVertexAnimationSuite": {
 
   },
 
-  "morphTargetAnimationSuite": 
-  {
+  "morphTargetAnimationSuite": {
 
   },
 
-  "gradientAnimationSuite": 
-  {
+  "gradientAnimationSuite": {
 
   },
 
-  "animationManagerSuite": 
-  {
+  "animationManagerSuite": {
 
   }
 }

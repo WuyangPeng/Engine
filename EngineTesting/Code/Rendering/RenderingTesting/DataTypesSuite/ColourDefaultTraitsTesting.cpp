@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/03 15:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 16:38)
 
 #include "ColourDefaultTraitsTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -48,13 +51,17 @@ void Rendering::ColourDefaultTraitsTesting::TraitsTest()
     ASSERT_EQUAL(ColourDefaultTraits<long double>::maxValue, 1);
     ASSERT_EQUAL(ColourDefaultTraits<long double>::minValue, 0);
 
+#if 0
+
     // 以下代码不应该通过编译
-    // ASSERT_EQUAL(ColourDefaultTraits<int8_t>::maxValue,255);
-    // ASSERT_EQUAL(ColourDefaultTraits<int8_t>::minValue,0);
+    ASSERT_EQUAL(ColourDefaultTraits<int8_t>::maxValue, 255);
+    ASSERT_EQUAL(ColourDefaultTraits<int8_t>::minValue, 0);
 
-    // ASSERT_EQUAL(ColourDefaultTraits<char>::maxValue,255);
-    // ASSERT_EQUAL(ColourDefaultTraits<char>::minValue,0);
+    ASSERT_EQUAL(ColourDefaultTraits<char>::maxValue, 255);
+    ASSERT_EQUAL(ColourDefaultTraits<char>::minValue, 0);
 
-    // ASSERT_EQUAL(ColourDefaultTraits<signed char>::maxValue,255);
-    // ASSERT_EQUAL(ColourDefaultTraits<signed char>::minValue,0);
+    ASSERT_EQUAL(ColourDefaultTraits<signed char>::maxValue, 255);
+    ASSERT_EQUAL(ColourDefaultTraits<signed char>::minValue, 0);
+
+#endif  // 0
 }

@@ -1,26 +1,27 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/06 09:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 20:55)
 
 #include "PointControllerTest.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-
-#include SYSTEM_WARNING_DISABLE(26455)
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, PointControllerTest);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PointControllerTest);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PointControllerTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, PointControllerTest);
 
-Rendering::PointControllerTest::PointControllerTest()
-    : ParentType{ CoreTools::DisableNotThrow::Disable }
+Rendering::PointControllerTest::PointControllerTest(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -31,12 +32,12 @@ Rendering::PointControllerTest::ControllerInterfaceSharedPtr Rendering::PointCon
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr(std::make_shared<ClassType>(*this));
+    return (std::make_shared<ClassType>(*this));
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::PointControllerTest::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return ControllerInterfaceSharedPtr(std::make_shared<ClassType>(*this));
+    return (std::make_shared<ClassType>(*this));
 }

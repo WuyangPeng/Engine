@@ -1,11 +1,9 @@
 {
-  "macroSuite":
-  {
+  "macroSuite": {
 
   },
 
-  "dataTypeSuite":
-  {
+  "dataTypeSuite": {
     "HalfFloatTesting": 100,
     "ColourDefaultTraitsTesting": 1,
     "ColourTesting": 1,
@@ -19,8 +17,7 @@
     "SpecializedIOTesting": 100
   },
 
-  "resourcesSuite":
-  {
+  "resourcesSuite": {
     "BufferTesting": 1,
     "Texture1DTesting": 1,
     "Texture2DTesting": 1,
@@ -33,8 +30,7 @@
     "VertexBufferAccessorTesting": 1
   },
 
-  "sceneGraphSuite": 
-  {
+  "sceneGraphSuite": {
     "CameraFrustumDataTesting": 1,
     "CameraManageTesting": 1,
     "CameraTesting": 100,
@@ -62,8 +58,7 @@
     "StandardMeshTesting": 1
   },
 
-  "controllersSuite": 
-  {
+  "controllersSuite": {
     "ControllerTesting": 1,
     "ControlledObjectTesting": 1,
     "TransformControllerTesting": 1,
@@ -79,8 +74,7 @@
     "BlendTransformControllerTesting": 1
   },
 
-  "shaderFloatsSuite": 
-  {
+  "shaderFloatsSuite": {
     "ShaderFloatTesting": 1,
     "CameraModelDirectionVectorConstantTesting": 100,
     "CameraModelPositionConstantTesting": 100,
@@ -109,8 +103,7 @@
     "ProjectorMatrixConstantTesting": 100
   },
 
-  "detailSuite": 
-  {    
+  "detailSuite": {
     "SwitchNodeTesting": 1,
     "BillboardNodeTesting": 1,
     "CollapseRecordTesting": 1,
@@ -120,8 +113,7 @@
     "DlodNodeTesting": 1
   },
 
-  "shadersSuite": 
-  {
+  "shadersSuite": {
     "SingleShaderBaseDataTesting": 1,
     "ShaderBaseDataTesting": 1,
     "SingleShaderConstantsDataTesting": 1,
@@ -148,18 +140,15 @@
     "VisualEffectInstanceTesting": 1
   },
 
-  "localEffectsSuite":
-  {
+  "localEffectsSuite": {
 
   },
 
-  "globalEffectsSuite": 
-  {
+  "globalEffectsSuite": {
 
   },
 
-  "curvesSurfacesSuite": 
-  {
+  "curvesSurfacesSuite": {
     "FloatArrayTesting": 1,
     "Float2ArrayTesting": 1,
     "SurfacePatchFrameTesting": 1,
@@ -167,58 +156,47 @@
     "SurfacePatchTesting": 1
   },
 
-  "illuminationSuite":
-  {
+  "illuminationSuite": {
 
   },
 
-  "imageProcessingSuite": 
-  {
+  "imageProcessingSuite": {
 
   },
 
-  "pictureSuite":
-  {
+  "pictureSuite": {
 
   },
 
-  "sortingSuite": 
-  {
+  "sortingSuite": {
 
   },
 
-  "terrainSuite":
-  {
+  "terrainSuite": {
 
   },
 
-  "vertexSuite": 
-  {
+  "vertexSuite": {
 
   },
 
-  "textFontsSuite":
-  {
+  "textFontsSuite": {
 
   },
 
-  "consoleGraphSuite": 
-  {
+  "consoleGraphSuite": {
 
   },
 
-  "openGLAPISuite":
-  {
+  "openGLAPISuite": {
 
   },
 
-  "directAPISuite": 
-  {
+  "directAPISuite": {
 
   },
 
-  "renderersSuite": 
-  {
+  "renderersSuite": {
     "RendererBasisTesting": 1,
     "RendererParameterTesting": 1,
     "PlatformVertexFormatTesting": 1,
@@ -239,98 +217,80 @@
     "RenderTargetManagementTesting": 1
   },
 
-  "openGLRendererSuite": 
-  {
+  "openGLRendererSuite": {
     "OpenGLBindTextureTesting": 1,
     "OpenGLVertexFormatDataTesting": 1,
     "OpenGLVertexFormatArrayDataTesting": 1,
     "OpenGLTextureDataTesting": 1,
     "OpenGLTextureDataManageTesting": 1,
-    "OpenGLRenderTargetDataTesting":1
+    "OpenGLRenderTargetDataTesting": 1
   },
 
-  "dx9RendererSuite":
-  {
-
-  },
-
-  "aglRendererSuite": 
-  {
+  "dx9RendererSuite": {
 
   },
 
-  "glutRendererSuite": 
-  {
+  "aglRendererSuite": {
 
   },
 
-  "glxRendererSuite":
-  {
+  "glutRendererSuite": {
 
   },
 
-  "wglRendererSuite": 
-  {
+  "glxRendererSuite": {
 
   },
 
-  "lib3dsSuite": 
-  {
+  "wglRendererSuite": {
 
   },
 
-  "abuseSuite":
-  {
+  "lib3dsSuite": {
 
   },
 
-  "demoglSuite": 
-  {
+  "abuseSuite": {
 
   },
 
-  "devILSuite": 
-  {
+  "demoglSuite": {
 
   },
 
-  "fBXSuite":
-  {
+  "devILSuite": {
 
   },
 
-  "jPEGSuite": 
-  {
+  "fBXSuite": {
 
   },
 
-  "tIFFSuite": 
-  {
+  "jPEGSuite": {
 
   },
 
-  "openvidiaSuite":
-  {
+  "tIFFSuite": {
 
   },
 
-  "nethackSuite": 
-  {
+  "openvidiaSuite": {
 
   },
 
-  "wingSuite": 
-  {
+  "nethackSuite": {
 
   },
 
-  "wargamerSuite":
-  {
+  "wingSuite": {
 
   },
 
-  "nvtoolkitSuite": 
-  {
+  "wargamerSuite": {
+
+  },
+
+  "nvtoolkitSuite": {
 
   }
 }

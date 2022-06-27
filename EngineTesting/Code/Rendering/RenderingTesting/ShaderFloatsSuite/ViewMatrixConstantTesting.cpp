@@ -1,31 +1,31 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/06 15:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/14 18:32)
 
 #include "ViewMatrixConstantTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/SceneGraph/Camera.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
-#include "Rendering/ShaderFloats/ViewMatrixConstant.h"
-
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-
 #include "Mathematics/Algebra/MatrixDetail.h"
+#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/SceneGraph/Camera.h"
+#include "Rendering/SceneGraph/CameraManager.h"
+#include "Rendering/SceneGraph/LoadVisual.h"
+#include "Rendering/ShaderFloats/ViewMatrixConstant.h"
 
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include <random>
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ViewMatrixConstantTesting)
@@ -70,7 +70,7 @@ void Rendering::ViewMatrixConstantTesting::InitTest()
 
     for (int i = 0; i < 16; ++i)
     {
-        ASSERT_APPROXIMATE(firstData[i], firstShaderFloat.GetRegisters()[i], 1e-8f);
+        ASSERT_APPROXIMATE(firstData.at(i), firstShaderFloat.GetRegisters().at(i), 1e-8f);
     }
 
     const ViewMatrixConstant secondShaderFloat{ CoreTools::DisableNotThrow::Disable };
@@ -106,12 +106,12 @@ void Rendering::ViewMatrixConstantTesting::InitTest()
 
     for (unsigned dataIndex = 0; dataIndex < secondData.size(); ++dataIndex)
     {
-        thirdShaderFloat.SetRegister(dataIndex, secondData[dataIndex]);
+        thirdShaderFloat.SetRegister(dataIndex, secondData.at(dataIndex));
     }
 
     for (unsigned dataIndex = 0; dataIndex < secondData.size(); ++dataIndex)
     {
-        ASSERT_EQUAL(secondData[dataIndex], thirdShaderFloat.GetRegister(dataIndex));
+        ASSERT_EQUAL(secondData.at(dataIndex), thirdShaderFloat.GetRegister(dataIndex));
     }
 
     for (int registerIndex = 0; registerIndex < 16; ++registerIndex)
@@ -151,97 +151,10 @@ void Rendering::ViewMatrixConstantTesting::CopyTest()
     }
 }
 
-void Rendering::ViewMatrixConstantTesting::StreamTest()
+void Rendering::ViewMatrixConstantTesting::StreamTest() noexcept
 {
-    // 	CoreTools::OutTopLevel outTopLevel;
-    // 	ViewMatrixConstantSharedPtr firstShaderFloat(new ViewMatrixConstant);
-    //
-    // 	for (int i = 0; i < 16;++i)
-    // 	{
-    // 		(*firstShaderFloat)[i] = static_cast<float>(i);
-    // 	}
-    //
-    // 	outTopLevel.Insert(firstShaderFloat);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr =
-    // 		    outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	ASSERT_EQUAL(inTopLevel.GetTopLevelSize(),1);
-    //
-    // 	ViewMatrixConstantSharedPtr secondShaderFloat =
-    // 		inTopLevel[0].PolymorphicDowncastObjectSharedPtr<ViewMatrixConstantSharedPtr>();
-    //
-    // 	ASSERT_UNEQUAL_NULL_PTR(secondShaderFloat);
-    //
-    // 	ASSERT_EQUAL(firstShaderFloat->GetRegisters().size(),
-    // 		         secondShaderFloat->GetRegisters().size());
-    //
-    // 	for (unsigned registerIndex = 0; registerIndex < firstShaderFloat->GetRegisters().size(); ++registerIndex)
-    // 	{
-    // 		ASSERT_APPROXIMATE(firstShaderFloat->GetRegisters()[registerIndex],
-    // 			               secondShaderFloat->GetRegisters()[registerIndex], 1e-8f);
-    // 	}
 }
 
-void Rendering::ViewMatrixConstantTesting::UpdateTest()
+void Rendering::ViewMatrixConstantTesting::UpdateTest() noexcept
 {
-    // 	std::default_random_engine generator;
-    // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
-    //
-    // 	for(int loop = 0;loop < GetTestLoopCount();++loop)
-    // 	{
-    //         Camera::APoint firstPosition(firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator));
-    //
-    //         Camera::AVector firstVector(firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator));
-    //
-    //         firstVector.Normalize();
-    //
-    //         Camera::AVector secondVector(firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator));
-    //
-    //         secondVector.Normalize();
-    //
-    //         Camera::AVector thirdVector(firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator));
-    //
-    //         thirdVector.Normalize();
-    //
-    //         Mathematics::AVectorOrthonormalizef orthonormalize =
-    //               Orthonormalize(firstVector, secondVector, thirdVector,1e-5f);
-    //
-    //         firstVector = orthonormalize.GetUVector();
-    //         secondVector = orthonormalize.GetVVector();
-    //         thirdVector = orthonormalize.GetWVector();
-    //
-    //         Camera firstCamera(true,1e-5f);
-    //
-    //         firstCamera.SetFrame(firstPosition, firstVector,
-    //                              secondVector, thirdVector);
-    //
-    // 		ViewMatrixConstant firstShaderFloat;
-    //
-    // 		VisualSharedPtr firstTrianglesMesh =
-    // 			LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/SceneGraphSuite/TrianglesMesh.trv"));
-    //
-    // 		firstShaderFloat.Update(firstTrianglesMesh.GetData(), &firstCamera);
-    //
-    // 		const Mathematics::Matrixf viewMatrix = firstCamera.GetViewMatrix();
-    //
-    // 		for(int i = 0;i < 16;++i)
-    // 		{
-    // 			ASSERT_APPROXIMATE(viewMatrix[i / 16][i % 16], firstShaderFloat[i], 1e-8f);
-    // 		}
-    // 	}
 }

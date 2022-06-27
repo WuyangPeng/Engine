@@ -1,31 +1,30 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.1 (2020/05/22 23:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 10:54)
 
-#include "MacintoshProcessTesting.h"  
-#include "CoreTools/Helper/AssertMacro.h" 
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
+#include "MacintoshProcessTesting.h"
 #include "CoreTools/Contract/Noexcept.h"
-Framework::MacintoshProcessTesting
-	::MacintoshProcessTesting(const OStreamShared& stream)
-	:ParentType{ stream } 
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+
+Framework::MacintoshProcessTesting::MacintoshProcessTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, MacintoshProcessTesting)
 
-void Framework::MacintoshProcessTesting
-	::DoRunUnitTest()
+void Framework::MacintoshProcessTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::MacintoshProcessTesting
-	::MainTest()
+void Framework::MacintoshProcessTesting::MainTest() noexcept
 {
-	CoreTools::DisableNoexcept();
 }
- 

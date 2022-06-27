@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/09 16:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/20 22:47)
 
 #include "BoundTreeTesting.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -21,14 +24,7 @@
 #include "Physics/CollisionDetection/BoundTreeDetail.h"
 
 #include <random>
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26435)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26498)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26490)
+
 using CoreTools::WriteFileManager;
 using std::vector;
 
@@ -40,7 +36,7 @@ namespace Physics
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Physics, BoundTreeTesting)
 
-void Physics::BoundTreeTesting ::MainTest()
+void Physics::BoundTreeTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializers();
 
@@ -54,14 +50,14 @@ void Physics::BoundTreeTesting ::MainTest()
     CoreTools::InitTerm::ExecuteTerminators();
 }
 
-void Physics::BoundTreeTesting ::CreateTrianglesMeshFile()
+void Physics::BoundTreeTesting::CreateTrianglesMeshFile()
 {
     WriteFileManager manage(SYSTEM_TEXT("Resource/CollisionDetectionSuite/TrianglesMesh.trv"));
 
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
 
-    int type = System::EnumCastUnderlying(Rendering::VisualPrimitiveType::TriangleMesh);
+    constexpr int type = System::EnumCastUnderlying(Rendering::VisualPrimitiveType::TriangleMesh);
     manage.Write(sizeof(int), &type);
 
     // VertexFormat
@@ -85,7 +81,7 @@ void Physics::BoundTreeTesting ::CreateTrianglesMeshFile()
     // VertexBuffer
     int numElements = 20;
     int elementSize = firstVertexFormat->GetStride();
-    int usage = System::EnumCastUnderlying(Rendering::BufferUsage::Static);
+    constexpr int usage = System::EnumCastUnderlying(Rendering::BufferUsage::Static);
 
     manage.Write(sizeof(int), &numElements);
     manage.Write(sizeof(int), &elementSize);
@@ -98,32 +94,41 @@ void Physics::BoundTreeTesting ::CreateTrianglesMeshFile()
              attributesIndex < firstVertexFormat->GetNumAttributes();
              ++attributesIndex)
         {
-            Rendering::VertexFormat::AttributeType type2 =
-                firstVertexFormat->GetAttributeType(attributesIndex);
+            const Rendering::VertexFormat::AttributeType type2 = firstVertexFormat->GetAttributeType(attributesIndex);
 
-            int componentSize = Rendering::VertexFormat::GetComponentSize(type2);
-            int numComponents = Rendering::VertexFormat::GetNumComponents(type2);
+            const int componentSize = Rendering::VertexFormat::GetComponentSize(type2);
+            const int numComponents = Rendering::VertexFormat::GetNumComponents(type2);
 
-            vector<char> buffer(componentSize * numComponents);
+            const auto size = componentSize * numComponents;
+            vector<char> buffer(size);
 
-            for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float);
-                 ++bufferIndex)
+            for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float); ++bufferIndex)
             {
-                float* floatBufferPtr = reinterpret_cast<float*>(&buffer[bufferIndex * sizeof(float)]);
+                const auto index = bufferIndex * sizeof(float);
 
-                *floatBufferPtr = firstFloatRandomDistribution(generator);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+                float* floatBufferPtr = reinterpret_cast<float*>(&buffer.at(index));
+
+#include STSTEM_WARNING_POP
+
+                if (floatBufferPtr != nullptr)
+                {
+                    *floatBufferPtr = firstFloatRandomDistribution(generator);
+                }
             }
 
-            manage.Write(componentSize, numComponents, &buffer[0]);
+            manage.Write(componentSize, numComponents, buffer.data());
         }
 
         vertexIndex += elementSize;
     }
 
     // IndexBuffer
-    int indexBufferNumElements = 105;
+    constexpr int indexBufferNumElements = 105;
     elementSize = 4;
-    int numBytes = indexBufferNumElements * elementSize;
+    const int numBytes = indexBufferNumElements * elementSize;
 
     manage.Write(sizeof(int), &indexBufferNumElements);
     manage.Write(sizeof(int), &elementSize);
@@ -132,28 +137,37 @@ void Physics::BoundTreeTesting ::CreateTrianglesMeshFile()
 
     vector<char> buffer(numBytes);
 
-    for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float);
-         ++bufferIndex)
+    for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float); ++bufferIndex)
     {
-        int* intBufferPtr = reinterpret_cast<int*>(&buffer[bufferIndex * sizeof(int)]);
+        const auto index = bufferIndex * sizeof(int);
 
-        *intBufferPtr = bufferIndex % numElements;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        int* intBufferPtr = reinterpret_cast<int*>(&buffer.at(index));
+
+#include STSTEM_WARNING_POP
+
+        if (intBufferPtr != nullptr)
+        {
+            *intBufferPtr = bufferIndex % numElements;
+        }
     }
 
-    manage.Write(elementSize, numBytes / elementSize, &buffer[0]);
+    manage.Write(elementSize, numBytes / elementSize, buffer.data());
 
-    int offset = 0;
+    constexpr int offset = 0;
 
     manage.Write(sizeof(int), &offset);
 }
 
-void Physics::BoundTreeTesting ::InitTest()
+void Physics::BoundTreeTesting::InitTest()
 {
     Rendering::VisualSharedPtr firstTrianglesMesh = Rendering::LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/CollisionDetectionSuite/TrianglesMesh.trv"));
 
     Rendering::TrianglesMeshSharedPtr secondTrianglesMesh = boost::polymorphic_pointer_cast<Rendering::TrianglesMesh>(firstTrianglesMesh);
 
-    typedef BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF> BoundTree;
+    using BoundTree = BoundTree<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
     BoundTree firstBoundTree(secondTrianglesMesh);
 
     Rendering::TrianglesMeshSharedPtr thirdTrianglesMesh = firstBoundTree.GetMesh();
@@ -166,12 +180,11 @@ void Physics::BoundTreeTesting ::InitTest()
 
     BoundTree::BoundTreeChildSharedPtr firstChild = firstBoundTree.GetBeginChild();
 
-    int numTriangles = secondTrianglesMesh->GetNumTriangles();
+    const int numTriangles = secondTrianglesMesh->GetNumTriangles();
     std::vector<Mathematics::APointF> centroids;
     constexpr float oneThird = 1.0f / 3.0f;
     for (int index = 0; index < numTriangles; ++index)
     {
-        Mathematics::APointF vertex[3];
         Rendering::TrianglePosition trianglePosition = secondTrianglesMesh->GetModelTriangle(index);
 
         centroids.push_back(oneThird * (trianglePosition.GetFirstPosition() + trianglePosition.GetSecondPosition() + trianglePosition.GetThirdPosition()));
@@ -183,7 +196,7 @@ void Physics::BoundTreeTesting ::InitTest()
         inSplit.push_back(index);
     }
 
-    typedef BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF> BoundTreeChild;
+    using BoundTreeChild = BoundTreeChild<Rendering::TrianglesMeshSharedPtr, Rendering::BoundF>;
 
     BoundTree::BoundTreeChildSharedPtr secondChild(std::make_shared<BoundTreeChild>(secondTrianglesMesh, 1,
                                                                                     centroids, 0, numTriangles - 1,

@@ -1,14 +1,12 @@
 {
-  "helperSuite": 
-  {
+  "helperSuite": {
     "UserMacroTesting": 1,
     "MainFunctionEntryPointTesting": 0,
     "MainFunctionTesting": 0,
     "MiddleLayerMacroTesting": 1
   },
 
-  "mainFunctionHelperSuite": 
-  {
+  "mainFunctionHelperSuite": {
     "EnvironmentDirectoryTesting": 1,
     "MainFunctionHelperBaseTesting": 0,
     "ConsoleMainFunctionHelperBaseTesting": 0,
@@ -19,8 +17,7 @@
     "MacintoshMainFunctionHelperTesting": 0
   },
 
-  "windowCreateSuite": 
-  {
+  "windowCreateSuite": {
     "WindowSizeTesting": 100,
     "WindowPointTesting": 1000,
     "WindowInstanceParameterTesting": 1,
@@ -28,8 +25,7 @@
     "WindowCreateHandleTesting": 1
   },
 
-  "windowProcessSuite":
-  {
+  "windowProcessSuite": {
     "VirtualKeysTypesTesting": 1000,
     "WindowMessageLoopTesting": 0,
     "WindowMessageInterfaceTesting": 1,
@@ -39,8 +35,7 @@
     "WindowMessageUnitTestSuiteTesting": 1
   },
 
-  "windowRegisterSuite": 
-  {
+  "windowRegisterSuite": {
     "WindowRegisterParameterTesting": 1,
     "WindowHIconTesting": 1,
     "WindowHCursorTesting": 1,
@@ -50,8 +45,7 @@
     "WindowRegisterTesting": 1
   },
 
-  "applicationSuite": 
-  {
+  "applicationSuite": {
     "ApplicationTraitTesting": 1,
     "FontInformationTesting": 1,
     "MousePositionTesting": 1,
@@ -63,15 +57,14 @@
     "ObjectMotionTesting": 100
   },
 
-  "middleLayerSuite": 
-  {
+  "middleLayerSuite": {
     "MiddleLayerInterfaceTesting": 1,
     "ModelViewControllerMiddleLayerTesting": 1,
     "ModelViewControllerMiddleLayerContainerTesting": 1,
     "ModelMiddleLayerTesting": 5,
     "ViewMiddleLayerTesting": 1,
     "ControllerMiddleLayerTesting": 1,
-    "PixelViewMiddleLayerTesting": 1,   
+    "PixelViewMiddleLayerTesting": 1,
     "CameraModelMiddleLayerTesting": 5,
     "CameraViewMiddleLayerTesting": 100,
     "CameraControllerMiddleLayerTesting": 40,
@@ -95,23 +88,20 @@
     "EngineMiddleLayerContainerTesting": 1
   },
 
-  "windowsAPIFrameSuite":
-  {
+  "windowsAPIFrameSuite": {
     "WindowsAPIFrameBuildTesting": 1
   },
 
-  "openGLGlutFrameSuite": 
-  {
+  "openGLGlutFrameSuite": {
     "OpenGLGlutProcessManagerTesting": 1,
     "OpenGLGlutProcessTesting": 1,
     "OpenGLGlutCallBackInterfaceTesting": 1,
     "OpenGLGlutCallBackTesting": 1,
     "OpenGLGlutCallBackUnitTestSuiteTesting": 1,
-    "OpenGLGlutFrameBuildTesting": 1    
+    "OpenGLGlutFrameBuildTesting": 1
   },
 
-  "androidFrameSuite": 
-  {
+  "androidFrameSuite": {
     "AndroidProcessManagerTesting": 1,
     "AndroidProcessTesting": 1,
     "AndroidCallBackInterfaceTesting": 1,
@@ -121,22 +111,19 @@
     "AndroidCallBackUnitTestSuiteTesting": 1
   },
 
-  "linuxFrameSuite": 
-  {
+  "linuxFrameSuite": {
     "LinuxProcessTesting": 1,
     "LinuxCallBackInterfaceTesting": 1,
     "LinuxFrameBuildTesting": 1
   },
 
-  "macintoshFrameSuite": 
-  {
+  "macintoshFrameSuite": {
     "MacintoshProcessTesting": 1,
     "MacintoshCallBackInterfaceTesting": 1,
     "MacintoshFrameBuildTesting": 1
   },
 
-  "consoleFrameSuite": 
-  {
+  "consoleFrameSuite": {
     "ConsoleProcessTesting": 1,
     "ConsoleCallBackInterfaceTesting": 1,
     "ConsoleFrameBuildTesting": 1

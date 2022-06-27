@@ -1,21 +1,19 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/10 20:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 10:18)
 
 #include "Testing.h"
 #include "TestingHelper.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/AndroidFrame/AndroidProcessDetail.h"
-#include SYSTEM_WARNING_DISABLE(26432)
+
 Framework::TestingHelper::TestingHelper(AndroidApp* state, const Framework::EnvironmentDirectory& environmentDirectory)
     : ParentType(state, environmentDirectory)
-{
-    FRAMEWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Framework::TestingHelper::~TestingHelper()
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

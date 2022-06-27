@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/10 10:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/22 15:52)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_SUITE_GENERATE_TEMPLATE_TESTING_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_SUITE_GENERATE_TEMPLATE_TESTING_H
@@ -24,74 +27,75 @@ namespace AssistTools
 
     public:
         explicit GenerateTemplateTesting(const OStreamShared& stream);
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     protected:
         using Replace = std::map<GenerateTemplateReplace, System::String>;
 
     protected:
-        int GetContentFindCount(const System::String& templateFileName, const System::String& findContent);
+        NODISCARD int GetContentFindCount(const System::String& templateFileName, const System::String& findContent);
         void ContentCountTest(const System::String& templateFileName, const System::String& findContent, int testCount, const std::string& functionName, int index);
 
-        const System::String GetManagerChineseName() const;
-        const CopyrightData GetCopyrightData() const;
+        NODISCARD System::String GetManagerChineseName() const;
+        NODISCARD CopyrightData GetCopyrightData() const;
 
-        static const System::String GetResourceDirectory();
-        static const System::String GetSolutionName();
-        static const System::String GetForwardSlash();
-        static const System::String GetProjectCapital();
-        static const System::String GetPercent();
+        NODISCARD static System::String GetResourceDirectory();
+        NODISCARD static System::String GetSolutionName();
+        NODISCARD static System::String GetForwardSlash();
+        NODISCARD static System::String GetProjectCapital();
+        NODISCARD static System::String GetPercent();
 
-        static const System::String GetSpecialCodeEngineDirectory();
-        static const System::String GetCodeEngineDirectory();
-        static const System::String GetInputManagerName();
-        static const System::String GetEventManagerName();
-        static const System::String GetMiddleLayerName();
-        static const System::String GetEngineDirectory();
-        static const System::String GetEventManagerCapitalName();
-        static const System::String GetEventManagerInterface();
-        static const System::String GetInputManagerCapitalName();
-        static const System::String GetInputManagerInterface();
-        static const System::String GetUpdateName();
-        static const System::String GetExportDirectory();
-        static const System::String GetTesting();
-        static const Replace GetSpecialReplace();
+        NODISCARD static System::String GetSpecialCodeEngineDirectory();
+        NODISCARD static System::String GetCodeEngineDirectory();
+        NODISCARD static System::String GetInputManagerName();
+        NODISCARD static System::String GetEventManagerName();
+        NODISCARD static System::String GetMiddleLayerName();
+        NODISCARD static System::String GetEngineDirectory();
+        NODISCARD static System::String GetEventManagerCapitalName();
+        NODISCARD static System::String GetEventManagerInterface();
+        NODISCARD static System::String GetInputManagerCapitalName();
+        NODISCARD static System::String GetInputManagerInterface();
+        NODISCARD static System::String GetUpdateName();
+        NODISCARD static System::String GetExportDirectory();
+        NODISCARD static System::String GetTesting();
+        NODISCARD static Replace GetSpecialReplace();
 
-        static const System::String GetSpecialEndYear();
-        static const System::String GetSpecialProjectChineseName();
-        static const System::String GetSpecialVersions();
-        static const System::String GetSpecialDate();
-        static const System::String GetSpecialHour();
-        static const System::String GetSpecialMinute();
-        static const System::String GetSpecialProjectCapital();
-        static const System::String GetSpecialSolutionName();
-        static const System::String GetSpecialProjectName();
-        static const System::String GetSpecialManagerCapital();
-        static const System::String GetSpecialManagerName();
-        static const System::String GetSpecialManagerChineseName();
-        static const System::String GetSpecialInterfaceName();
+        NODISCARD static System::String GetSpecialEndYear();
+        NODISCARD static System::String GetSpecialProjectChineseName();
+        NODISCARD static System::String GetSpecialVersions();
+        NODISCARD static System::String GetSpecialDate();
+        NODISCARD static System::String GetSpecialHour();
+        NODISCARD static System::String GetSpecialMinute();
+        NODISCARD static System::String GetSpecialProjectCapital();
+        NODISCARD static System::String GetSpecialSolutionName();
+        NODISCARD static System::String GetSpecialProjectName();
+        NODISCARD static System::String GetSpecialManagerCapital();
+        NODISCARD static System::String GetSpecialManagerName();
+        NODISCARD static System::String GetSpecialManagerChineseName();
+        NODISCARD static System::String GetSpecialInterfaceName();
 
-        static const System::String GetDefaultEndYear();
-        static const System::String GetDefaultProjectChineseName();
-        static const System::String GetDefaultVersions();
-        static const System::String GetDefaultDate();
-        static const System::String GetDefaultHour();
-        static const System::String GetDefaultMinute();
-        static const System::String GetDefaultProjectCapital();
-        static const System::String GetDefaultSolutionName();
-        static const System::String GetDefaultProjectName();
-        static const System::String GetDefaultManagerChineseName();
-        static const System::String GetDefaultManagerName();
-        static const System::String GetDefaultManagerCapital();
-        static const System::String GetDefaultInterfaceName();
-
-    private:
-        static int GetEndYear() noexcept;
-        static const System::String GetVersions();
-        const System::String GetProjectChineseName() const;
+        NODISCARD static System::String GetDefaultEndYear();
+        NODISCARD static System::String GetDefaultProjectChineseName();
+        NODISCARD static System::String GetDefaultVersions();
+        NODISCARD static System::String GetDefaultDate();
+        NODISCARD static System::String GetDefaultHour();
+        NODISCARD static System::String GetDefaultMinute();
+        NODISCARD static System::String GetDefaultProjectCapital();
+        NODISCARD static System::String GetDefaultSolutionName();
+        NODISCARD static System::String GetDefaultProjectName();
+        NODISCARD static System::String GetDefaultManagerChineseName();
+        NODISCARD static System::String GetDefaultManagerName();
+        NODISCARD static System::String GetDefaultManagerCapital();
+        NODISCARD static System::String GetDefaultInterfaceName();
 
     private:
-        CoreTools::StringReplacing m_GenerateTemplateTesting;
+        NODISCARD static int GetEndYear() noexcept;
+        NODISCARD static System::String GetVersions();
+        NODISCARD System::String GetProjectChineseName() const;
+
+    private:
+        CoreTools::StringReplacing generateTemplateTesting;
     };
 }
 

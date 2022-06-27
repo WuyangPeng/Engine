@@ -1,12 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/06 15:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/14 17:18)
 
 #include "MaterialAmbientConstantTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/ObjectSystems/BufferInStream.h"
+#include "CoreTools/ObjectSystems/BufferOutStream.h"
+#include "CoreTools/ObjectSystems/InTopLevel.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/Camera.h"
@@ -14,20 +23,10 @@
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
 
-#include "CoreTools/ObjectSystems/BufferInStream.h"
-#include "CoreTools/ObjectSystems/BufferOutStream.h"
-#include "CoreTools/ObjectSystems/InTopLevel.h"
-#include "CoreTools/ObjectSystems/InitTerm.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-#include "CoreTools/ObjectSystems/OutTopLevel.h"
-
 #include <random>
 
 using std::vector;
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
+
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, MaterialAmbientConstantTesting)
 
 void Rendering::MaterialAmbientConstantTesting::MainTest()
@@ -51,8 +50,8 @@ void Rendering::MaterialAmbientConstantTesting::MainTest()
 void Rendering::MaterialAmbientConstantTesting::InitTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -93,7 +92,7 @@ void Rendering::MaterialAmbientConstantTesting::InitTest()
 
         for (int i = 0; i < 4; ++i)
         {
-            ASSERT_APPROXIMATE(firstData[i], firstShaderFloat.GetRegisters()[i], 1e-8f);
+            ASSERT_APPROXIMATE(firstData.at(i), firstShaderFloat.GetRegisters().at(i), 1e-8f);
         }
 
         const MaterialAmbientConstant secondShaderFloat(firstMaterial);
@@ -136,8 +135,8 @@ void Rendering::MaterialAmbientConstantTesting::InitTest()
 void Rendering::MaterialAmbientConstantTesting::CopyTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -192,149 +191,10 @@ void Rendering::MaterialAmbientConstantTesting::CopyTest()
     }
 }
 
-void Rendering::MaterialAmbientConstantTesting::StreamTest()
+void Rendering::MaterialAmbientConstantTesting::StreamTest() noexcept
 {
-    // 	std::default_random_engine generator;
-    // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    // 	std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
-    //
-    // 	for (int loop = 0; loop < GetTestLoopCount(); ++loop)
-    // 	{
-    // 		MaterialSharedPtr firstMaterial
-    // 			(new Material(Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator)),
-    // 					       Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator)),
-    // 						   Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator)),
-    // 						   Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator))));
-    //
-    //
-    // 		CoreTools::OutTopLevel outTopLevel;
-    // 		MaterialAmbientConstantSharedPtr firstShaderFloat(new MaterialAmbientConstant(firstMaterial));
-    //
-    // 		for (int i = 0; i < 4;++i)
-    // 		{
-    // 			(*firstShaderFloat)[i] = static_cast<float>(i);
-    // 		}
-    //
-    // 		outTopLevel.Insert(firstShaderFloat);
-    //
-    // 		CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 		CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr =
-    // 			outStream.GetBufferOutStreamInformation();
-    //
-    // 		CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 		CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 		ASSERT_EQUAL(inTopLevel.GetTopLevelSize(),1);
-    //
-    // 		MaterialAmbientConstantSharedPtr secondShaderFloat =
-    // 			inTopLevel[0].PolymorphicDowncastObjectSharedPtr<MaterialAmbientConstantSharedPtr>();
-    //
-    // 		ASSERT_UNEQUAL_NULL_PTR(secondShaderFloat);
-    //
-    // 		ASSERT_EQUAL(firstShaderFloat->GetRegisters().size(),
-    // 		             secondShaderFloat->GetRegisters().size());
-    //
-    // 		for (unsigned registerIndex = 0; registerIndex < firstShaderFloat->GetRegisters().size(); ++registerIndex)
-    // 		{
-    // 			ASSERT_APPROXIMATE(firstShaderFloat->GetRegisters()[registerIndex],
-    // 			                   secondShaderFloat->GetRegisters()[registerIndex], 1e-8f);
-    // 		}
-    //
-    // 		ConstMaterialSharedPtr secondMaterial = secondShaderFloat->GetMaterial();
-    //
-    // 		ASSERT_TRUE(Approximate(firstMaterial->GetAmbient(), secondMaterial->GetAmbient(), 1e-8f));
-    // 		ASSERT_TRUE(Approximate(firstMaterial->GetDiffuse(), secondMaterial->GetDiffuse(), 1e-8f));
-    // 		ASSERT_TRUE(Approximate(firstMaterial->GetSpecular(), secondMaterial->GetSpecular(), 1e-8f));
-    // 		ASSERT_TRUE(Approximate(firstMaterial->GetEmissive(), secondMaterial->GetEmissive(), 1e-8f));
-    //
-    // 	}
 }
 
-void Rendering::MaterialAmbientConstantTesting::UpdateTest()
+void Rendering::MaterialAmbientConstantTesting::UpdateTest() noexcept
 {
-    // 	std::default_random_engine generator;
-    // 	std::uniform_real<float> firstFloatRandomDistribution(-100.0f,100.0f);
-    // 	std::uniform_real<float> secondFloatRandomDistribution(0.0f, 1.0f);
-    //
-    // 	for(int loop = 0;loop < GetTestLoopCount();++loop)
-    // 	{
-    //         Camera::APoint firstPosition(firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator));
-    //
-    //         Camera::AVector firstVector(firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator));
-    //
-    //         firstVector.Normalize();
-    //
-    //         Camera::AVector secondVector(firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator),
-    //                                      firstFloatRandomDistribution(generator));
-    //
-    //         secondVector.Normalize();
-    //
-    //         Camera::AVector thirdVector(firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator),
-    //                                     firstFloatRandomDistribution(generator));
-    //
-    //         thirdVector.Normalize();
-    //
-    //         Mathematics::AVectorOrthonormalizef orthonormalize =
-    //               Orthonormalize(firstVector, secondVector, thirdVector,1e-4f);
-    //
-    //         firstVector = orthonormalize.GetUVector();
-    //         secondVector = orthonormalize.GetVVector();
-    //         thirdVector = orthonormalize.GetWVector();
-    //
-    //         Camera firstCamera(true,1e-5f);
-    //
-    //         firstCamera.SetFrame(firstPosition, firstVector,
-    //                              secondVector, thirdVector);
-    //
-    // 		MaterialSharedPtr firstMaterial
-    // 			(new Material(Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator)),
-    // 					       Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator)),
-    // 						   Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator)),
-    // 						   Material::Colour(secondFloatRandomDistribution(generator),
-    // 			                                secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator),
-    // 											secondFloatRandomDistribution(generator))));
-    //
-    // 		MaterialAmbientConstant firstShaderFloat(firstMaterial);
-    //
-    // 		VisualSharedPtr firstTrianglesMesh =
-    // 			LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/SceneGraphSuite/TrianglesMesh.trv"));
-    //
-    // 		firstShaderFloat.Update(firstTrianglesMesh.GetData(), &firstCamera);
-    //
-    //
-    // 		ASSERT_APPROXIMATE(firstMaterial->GetAmbient().GetRed(), firstShaderFloat[0], 1e-8f);
-    // 		ASSERT_APPROXIMATE(firstMaterial->GetAmbient().GetGreen(), firstShaderFloat[1], 1e-8f);
-    // 		ASSERT_APPROXIMATE(firstMaterial->GetAmbient().GetBlue(), firstShaderFloat[2], 1e-8f);
-    // 		ASSERT_APPROXIMATE(firstMaterial->GetAmbient().GetAlpha(), firstShaderFloat[3], 1e-8f);
-    // 	}
 }

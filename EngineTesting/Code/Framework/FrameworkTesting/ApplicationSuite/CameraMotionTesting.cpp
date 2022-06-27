@@ -1,13 +1,15 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.3.0.2 (2020/06/24 21:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.9 (2022/06/27 11:14)
 
 #include "CameraMotionTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
@@ -25,8 +27,6 @@ namespace Framework
     using TestingType = CameraMotion;
 }
 
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
 Framework::CameraMotionTesting::CameraMotionTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -236,6 +236,10 @@ void Framework::CameraMotionTesting::MoveTest()
     }
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 void Framework::CameraMotionTesting::AssertCamera(const CameraSmartPointer& lhs, const CameraSmartPointer& rhs)
 {
     using APointApproximate = bool (*)(const Mathematics::APointF&, const Mathematics::APointF&, float);
@@ -249,3 +253,5 @@ void Framework::CameraMotionTesting::AssertCamera(const CameraSmartPointer& lhs,
     ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetUpVector(), rhs->GetUpVector(), Mathematics::MathF::epsilon);
     ASSERT_APPROXIMATE_USE_FUNCTION(aVectorApproximate, lhs->GetRightVector(), rhs->GetRightVector(), Mathematics::MathF::epsilon);
 }
+
+#include STSTEM_WARNING_POP

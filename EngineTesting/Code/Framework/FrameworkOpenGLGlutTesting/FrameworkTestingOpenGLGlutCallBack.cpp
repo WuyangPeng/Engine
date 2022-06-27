@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/11 10:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 15:19)
 
 #include "FrameworkTestingOpenGLGlutCallBack.h"
 #include "Testing.h"
@@ -36,12 +39,12 @@ void Framework::FrameworkTestingOpenGLGlutCallBack::AddOpenGLGlutFrameSuite()
 {
     auto openGLGlutFrameSuite = GenerateSuite("OpenGL GLUT 框架创建");
 
-    // 	ADD_TEST(openGLGlutFrameSuite, OpenGLGlutProcessManagerTesting);
-    // 	ADD_TEST(openGLGlutFrameSuite, OpenGLGlutProcessTesting);
-    // 	ADD_TEST(openGLGlutFrameSuite, OpenGLGlutCallBackInterfaceTesting);
-    // 	ADD_TEST(openGLGlutFrameSuite, OpenGLGlutCallBackTesting);
-    // 	ADD_TEST(openGLGlutFrameSuite, OpenGLGlutFrameBuildTesting);
-    // 	ADD_TEST(openGLGlutFrameSuite, OpenGLGlutCallBackUnitTestSuiteTesting);
+    ADD_TEST(openGLGlutFrameSuite, OpenGLGlutProcessManagerTesting);
+    ADD_TEST(openGLGlutFrameSuite, OpenGLGlutProcessTesting);
+    ADD_TEST(openGLGlutFrameSuite, OpenGLGlutCallBackInterfaceTesting);
+    ADD_TEST(openGLGlutFrameSuite, OpenGLGlutCallBackTesting);
+    ADD_TEST(openGLGlutFrameSuite, OpenGLGlutFrameBuildTesting);
+    ADD_TEST(openGLGlutFrameSuite, OpenGLGlutCallBackUnitTestSuiteTesting);
 
     DoAddSuite(openGLGlutFrameSuite);
 }

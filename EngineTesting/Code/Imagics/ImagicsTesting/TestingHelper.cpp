@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/09 17:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/21 15:45)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -21,7 +24,7 @@ Imagics::TestingHelper::TestingHelper(int argc, char** argv)
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Imagics, TestingHelper)
 
 // private
-void Imagics::TestingHelper ::InitSuite()
+void Imagics::TestingHelper::InitSuite()
 {
     AddMacroSuite();
     AddBinaryOperationsSuite();
@@ -33,56 +36,56 @@ void Imagics::TestingHelper ::InitSuite()
     AddOpenCVSuite();
 }
 
-void Imagics::TestingHelper ::AddMacroSuite()
+void Imagics::TestingHelper::AddMacroSuite()
 {
     auto macroSuite = GenerateSuite("宏");
 
     AddSuite(macroSuite);
 }
 
-void Imagics::TestingHelper ::AddBinaryOperationsSuite()
+void Imagics::TestingHelper::AddBinaryOperationsSuite()
 {
     auto binaryOperationsSuite = GenerateSuite("运算符");
 
     AddSuite(binaryOperationsSuite);
 }
 
-void Imagics::TestingHelper ::AddExtractionSuite()
+void Imagics::TestingHelper::AddExtractionSuite()
 {
     auto extractionSuite = GenerateSuite("提取");
 
     AddSuite(extractionSuite);
 }
 
-void Imagics::TestingHelper ::AddFiltersSuite()
+void Imagics::TestingHelper::AddFiltersSuite()
 {
     auto filtersSuite = GenerateSuite("过滤器");
 
     AddSuite(filtersSuite);
 }
 
-void Imagics::TestingHelper ::AddImagesSuite()
+void Imagics::TestingHelper::AddImagesSuite()
 {
     auto imagesSuite = GenerateSuite("图片");
 
     AddSuite(imagesSuite);
 }
 
-void Imagics::TestingHelper ::AddRasterDrawingSuite()
+void Imagics::TestingHelper::AddRasterDrawingSuite()
 {
     auto rasterDrawingSuite = GenerateSuite("光栅图");
 
     AddSuite(rasterDrawingSuite);
 }
 
-void Imagics::TestingHelper ::AddSegmentersSuite()
+void Imagics::TestingHelper::AddSegmentersSuite()
 {
     auto segmentersSuite = GenerateSuite("线段");
 
     AddSuite(segmentersSuite);
 }
 
-void Imagics::TestingHelper ::AddOpenCVSuite()
+void Imagics::TestingHelper::AddOpenCVSuite()
 {
     auto openCVSuite = GenerateSuite("OpenCV");
 

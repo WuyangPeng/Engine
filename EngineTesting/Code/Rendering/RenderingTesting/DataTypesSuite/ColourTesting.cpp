@@ -1,18 +1,16 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/03 15:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/16 16:38)
 
 #include "ColourTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ColourTesting)
 
@@ -52,10 +50,10 @@ void Rendering::ColourTesting::UInt32Test()
     ASSERT_EQUAL(secondColour.GetBlue(), 22u);
     ASSERT_EQUAL(secondColour.GetAlpha(), 255u);
 
-    ASSERT_EQUAL(ptr[0], 30u);
-    ASSERT_EQUAL(ptr[1], 255u);
-    ASSERT_EQUAL(ptr[2], 51u);
-    ASSERT_EQUAL(ptr[3], 55u);
+    ASSERT_EQUAL(ptr.at(0), 30u);
+    ASSERT_EQUAL(ptr.at(1), 255u);
+    ASSERT_EQUAL(ptr.at(2), 51u);
+    ASSERT_EQUAL(ptr.at(3), 55u);
 
     firstColour.SetColour(6, 99, 66, 333);
 
@@ -76,7 +74,7 @@ void Rendering::ColourTesting::UInt32Test()
     ASSERT_EQUAL(secondColour.GetRed(), 66u);
     ASSERT_EQUAL(firstColour.GetRed(), 6u);
 
-    Colour<unsigned> thirdColour(firstColour);
+    const Colour<unsigned> thirdColour(firstColour);
 
     ASSERT_EQUAL(thirdColour.GetRed(), 6u);
     ASSERT_EQUAL(thirdColour.GetGreen(), 99u);
@@ -117,10 +115,10 @@ void Rendering::ColourTesting::FloatTest()
     ASSERT_APPROXIMATE(secondColour.GetBlue(), 0.58f, 1e-8f);
     ASSERT_APPROXIMATE(secondColour.GetAlpha(), 1.0f, 1e-8f);
 
-    ASSERT_APPROXIMATE(ptr[0], 0.2f, 1e-8f);
-    ASSERT_APPROXIMATE(ptr[1], 0.5f, 1e-8f);
-    ASSERT_APPROXIMATE(ptr[2], 1.0f, 1e-8f);
-    ASSERT_APPROXIMATE(ptr[3], 0.0f, 1e-8f);
+    ASSERT_APPROXIMATE(ptr.at(0), 0.2f, 1e-8f);
+    ASSERT_APPROXIMATE(ptr.at(1), 0.5f, 1e-8f);
+    ASSERT_APPROXIMATE(ptr.at(2), 1.0f, 1e-8f);
+    ASSERT_APPROXIMATE(ptr.at(3), 0.0f, 1e-8f);
 
     firstColour.SetColour(0.12f, 0.25f, 0.1f, -0.12f);
 
@@ -141,7 +139,7 @@ void Rendering::ColourTesting::FloatTest()
     ASSERT_APPROXIMATE(secondColour.GetBlue(), 0.2f, 1e-8f);
     ASSERT_APPROXIMATE(firstColour.GetBlue(), 0.1f, 1e-8f);
 
-    Colour<float> thirdColour(firstColour);
+    const Colour<float> thirdColour(firstColour);
 
     ASSERT_APPROXIMATE(thirdColour.GetRed(), 0.12f, 1e-8f);
     ASSERT_APPROXIMATE(thirdColour.GetGreen(), 0.25f, 1e-8f);
@@ -154,48 +152,14 @@ void Rendering::ColourTesting::FloatTest()
     ASSERT_APPROXIMATE(firstColour.GetAlpha(), 1.0f, 1e-8f);
 }
 
-void Rendering::ColourTesting::ConvertingTest()
+void Rendering::ColourTesting::ConvertingTest() noexcept
 {
-    //     Colour<unsigned> firstColour(30, 257, 51, 55);
-    //
-    //     ASSERT_EQUAL(firstColour.GetRed(), 30u);
-    //     ASSERT_EQUAL(firstColour.GetGreen(), 255u);
-    //     ASSERT_EQUAL(firstColour.GetBlue(), 51u);
-    //     ASSERT_EQUAL(firstColour.GetAlpha(), 55u);
-    //
-    //     Colour<unsigned short> secondColour(firstColour);
-    //
-    //     ASSERT_EQUAL(secondColour.GetRed(), 30u);
-    //     ASSERT_EQUAL(secondColour.GetGreen(), 255u);
-    //     ASSERT_EQUAL(secondColour.GetBlue(), 51u);
-    //     ASSERT_EQUAL(secondColour.GetAlpha(), 55u);
-    //
-    //     Colour<double> thirdColour(secondColour);
-    //
-    //     ASSERT_APPROXIMATE(thirdColour.GetRed(), 30.0 / 255.0, 1e-10);
-    //     ASSERT_APPROXIMATE(thirdColour.GetGreen(), 255.0 / 255.0, 1e-10);
-    //     ASSERT_APPROXIMATE(thirdColour.GetBlue(), 51.0 / 255.0, 1e-10);
-    //     ASSERT_APPROXIMATE(thirdColour.GetAlpha(), 55.0 / 255.0, 1e-10);
-    //
-    //     Colour<unsigned> fourthColour(thirdColour);
-    //
-    //     ASSERT_EQUAL(fourthColour.GetRed(), 30u);
-    //     ASSERT_EQUAL(fourthColour.GetGreen(), 255u);
-    //     ASSERT_EQUAL(fourthColour.GetBlue(), 51u);
-    //     ASSERT_EQUAL(fourthColour.GetAlpha(), 55u);
-    //
-    //     Colour<float> fifthColour(thirdColour);
-    //
-    //     ASSERT_APPROXIMATE(fifthColour.GetRed(), 30.0 / 255.0, 1e-8f);
-    //     ASSERT_APPROXIMATE(fifthColour.GetGreen(), 255.0 / 255.0, 1e-8f);
-    //     ASSERT_APPROXIMATE(fifthColour.GetBlue(), 51.0 / 255.0, 1e-8f);
-    //     ASSERT_APPROXIMATE(fifthColour.GetAlpha(), 55.0 / 255.0, 1e-8f);
 }
 
 void Rendering::ColourTesting::OperatorTest()
 {
-    Colour<unsigned> firstColour(30, 57, 51, 55);
-    Colour<unsigned> secondColour(32, 151, 61, 85);
+    const Colour<unsigned> firstColour(30, 57, 51, 55);
+    const Colour<unsigned> secondColour(32, 151, 61, 85);
 
     Colour<unsigned> thirdColour = firstColour + secondColour;
 
@@ -240,7 +204,7 @@ void Rendering::ColourTesting::OperatorTest()
     ASSERT_EQUAL(thirdColour.GetAlpha(), 55u * 85u / 255u);
 
     Colour<float> fourthColour(0.2f, 0.15f, 1.0f, 0.1f);
-    Colour<float> fifthColour(0.12f, 0.25f, 0.01f, 0.2f);
+    const Colour<float> fifthColour(0.12f, 0.25f, 0.01f, 0.2f);
 
     fourthColour += fifthColour;
 

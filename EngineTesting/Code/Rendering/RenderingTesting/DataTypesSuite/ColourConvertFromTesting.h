@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.3 (2019/09/03 13:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 14:21)
 
 #ifndef RENDERING_DATA_TYPES_SUITE_COLOUR_CONVERT_FROM_TESTING_H
 #define RENDERING_DATA_TYPES_SUITE_COLOUR_CONVERT_FROM_TESTING_H
@@ -11,34 +14,34 @@
 
 namespace Rendering
 {
-	class ColourConvertFromTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ColourConvertFromTesting); 
+    class ColourConvertFromTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ColourConvertFromTesting);
 
-	private:
-		void MainTest();
-	    void R5G6B5ConvertTest();
-		void A1R5G5B5ConvertTest();
-		void A4R4G4B4ConvertTest();
-		void A8ConvertTest();
-		void L8ConvertTest();
-		void A8L8ConvertTest();
-		void R8G8B8ConvertTest();
-		void A8R8G8B8ConvertTest();
-		void A8B8G8R8ConvertTest();
-		void L16ConvertTest();
-		void G16R16ConvertTest();
-		void A16B16G16R16ConvertTest();
-		void R16FConvertTest();
-		void G16R16FConvertTest();
-		void A16B16G16R16FConvertTest();
-		void R32FConvertTest();
-		void G32R32FConvertTest();
-		void A32B32G32R32FConvertTest();
+    private:
+        void MainTest();
+        void R5G6B5ConvertTest() noexcept;
+        void A1R5G5B5ConvertTest() noexcept;
+        void A4R4G4B4ConvertTest() noexcept;
+        void A8ConvertTest() noexcept;
+        void L8ConvertTest() noexcept;
+        void A8L8ConvertTest() noexcept;
+        void R8G8B8ConvertTest() noexcept;
+        void A8R8G8B8ConvertTest() noexcept;
+        void A8B8G8R8ConvertTest() noexcept;
+        void L16ConvertTest() noexcept;
+        void G16R16ConvertTest() noexcept;
+        void A16B16G16R16ConvertTest() noexcept;
+        void R16FConvertTest() noexcept;
+        void G16R16FConvertTest() noexcept;
+        void A16B16G16R16FConvertTest() noexcept;
+        void R32FConvertTest() noexcept;
+        void G32R32FConvertTest() noexcept;
+        void A32B32G32R32FConvertTest() noexcept;
 
-		void DoRunUnitTest() override; 
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // RENDERING_DATA_TYPES_SUITE_COLOUR_CONVERT_FROM_TESTING_H
+#endif  // RENDERING_DATA_TYPES_SUITE_COLOUR_CONVERT_FROM_TESTING_H

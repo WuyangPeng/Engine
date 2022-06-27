@@ -1,29 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/04 10:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.9 (2022/06/15 16:22)
 
 #include "VertexFormatTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexFormat.h"
-
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
+#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/Resources/VertexFormat.h"
 
 using std::vector;
 
@@ -66,18 +60,18 @@ void Rendering::VertexFormatTesting::BaseTest()
     {
         ASSERT_EQUAL(firstVertexFormat->GetStreamIndex(i), 0);
         ASSERT_EQUAL(firstVertexFormat->GetOffset(i), offset);
-        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeType(i), firstVertexFormatType[i].GetType());
-        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeUsage(i), firstVertexFormatType[i].GetUsage());
-        ASSERT_EQUAL(firstVertexFormat->GetUsageIndex(i), firstVertexFormatType[i].GetUsageIndex());
+        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeType(i), firstVertexFormatType.at(i).GetType());
+        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeUsage(i), firstVertexFormatType.at(i).GetUsage());
+        ASSERT_EQUAL(firstVertexFormat->GetUsageIndex(i), firstVertexFormatType.at(i).GetUsageIndex());
 
-        offset += VertexFormat::GetTypeSize(firstVertexFormatType[i].GetType());
+        offset += VertexFormat::GetTypeSize(firstVertexFormatType.at(i).GetType());
     }
 
     ASSERT_EQUAL(firstVertexFormat->GetStride(), static_cast<int>(offset));
 
     for (int i = 0; i < firstVertexFormat->GetNumAttributes(); ++i)
     {
-        ASSERT_EQUAL(i, firstVertexFormat->GetIndex(firstVertexFormatType[i].GetUsage(), firstVertexFormatType[i].GetUsageIndex()));
+        ASSERT_EQUAL(i, firstVertexFormat->GetIndex(firstVertexFormatType.at(i).GetUsage(), firstVertexFormatType.at(i).GetUsageIndex()));
     }
 
     firstVertexFormat->SetAttribute(0, 0, 0, VertexFormatFlags::AttributeType::Half2, VertexFormatFlags::AttributeUsage::Position, 2);
@@ -112,51 +106,17 @@ void Rendering::VertexFormatTesting::StreamTest()
     {
         ASSERT_EQUAL(firstVertexFormat->GetStreamIndex(i), i);
         ASSERT_EQUAL(firstVertexFormat->GetOffset(i), offset);
-        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeType(i), firstVertexFormatElement[i].GetType());
-        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeUsage(i), firstVertexFormatElement[i].GetUsage());
-        ASSERT_EQUAL(firstVertexFormat->GetUsageIndex(i), firstVertexFormatElement[i].GetUsageIndex());
+        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeType(i), firstVertexFormatElement.at(i).GetType());
+        ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeUsage(i), firstVertexFormatElement.at(i).GetUsage());
+        ASSERT_EQUAL(firstVertexFormat->GetUsageIndex(i), firstVertexFormatElement.at(i).GetUsageIndex());
 
-        offset += VertexFormat::GetTypeSize(firstVertexFormatElement[i].GetType());
+        offset += VertexFormat::GetTypeSize(firstVertexFormatElement.at(i).GetType());
     }
 
     ASSERT_EQUAL(firstVertexFormat->GetStride(), static_cast<int>(offset));
 
     for (int i = 0; i < firstVertexFormat->GetNumAttributes(); ++i)
     {
-        ASSERT_EQUAL(i, firstVertexFormat->GetIndex(firstVertexFormatElement[i].GetUsage(), firstVertexFormatElement[i].GetUsageIndex()));
+        ASSERT_EQUAL(i, firstVertexFormat->GetIndex(firstVertexFormatElement.at(i).GetUsage(), firstVertexFormatElement.at(i).GetUsageIndex()));
     }
-
-    // 	CoreTools::OutTopLevel outTopLevel;
-    // 	CoreTools::ObjectInterfaceSharedPtr firstBuffer(firstVertexFormat.PolymorphicDowncastObjectSharedPtr<CoreTools::ObjectInterfaceSharedPtr>());
-    //
-    // 	outTopLevel.Insert(firstBuffer);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	VertexFormatSharedPtr secondVertexFormat = inTopLevel[0].PolymorphicDowncastObjectSharedPtr<VertexFormatSharedPtr>();
-    //
-    // 	ASSERT_EQUAL(firstVertexFormat->GetNumAttributes(), secondVertexFormat->GetNumAttributes());
-    //
-    // 	for (int i = 0; i < firstVertexFormat->GetNumAttributes(); ++i)
-    // 	{
-    // 		ASSERT_EQUAL(firstVertexFormat->GetStreamIndex(i), secondVertexFormat->GetStreamIndex(i));
-    // 		ASSERT_EQUAL(firstVertexFormat->GetOffset(i), secondVertexFormat->GetOffset(i));
-    // 		ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeType(i), secondVertexFormat->GetAttributeType(i));
-    // 		ASSERT_ENUM_EQUAL(firstVertexFormat->GetAttributeUsage(i), secondVertexFormat->GetAttributeUsage(i));
-    // 		ASSERT_EQUAL(firstVertexFormat->GetUsageIndex(i), secondVertexFormat->GetUsageIndex(i));
-    // 	}
-    //
-    // 	ASSERT_EQUAL(firstVertexFormat->GetStride(), secondVertexFormat->GetStride());
-    //
-    // 	for (int i = 0; i < firstVertexFormat->GetNumAttributes(); ++i)
-    // 	{
-    // 		ASSERT_EQUAL(firstVertexFormat->GetIndex(firstVertexFormatElement[i].GetUsage(), firstVertexFormatElement[i].GetUsageIndex()),
-    // 					 secondVertexFormat->GetIndex(firstVertexFormatElement[i].GetUsage(),  firstVertexFormatElement[i].GetUsageIndex()));
-    // 	}
 }

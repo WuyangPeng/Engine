@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/05 11:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 11:05)
 
 #include "PickRecordTesting.h"
 #include "SpatialTest.h"
@@ -27,30 +30,13 @@ void Rendering::PickRecordTesting::BaseTest()
     PickRecord firstPickRecord = PickRecord::Create();
 
     ConstSpatialSharedPtr firstSpatialSharedPtr = firstPickRecord.GetIntersected();
-    //ASSERT_TRUE(firstSpatialSharedPtr.IsNullPtr());
+
     ASSERT_APPROXIMATE(firstPickRecord.GetParameter(), 0.0f, 1e-8f);
     ASSERT_EQUAL(firstPickRecord.GetTriangle(), -1);
     ASSERT_TRUE(0.0f <= firstPickRecord.GetBary(0) && firstPickRecord.GetBary(0) <= 1.0f);
     ASSERT_TRUE(0.0f <= firstPickRecord.GetBary(1) && firstPickRecord.GetBary(1) <= 1.0f);
     ASSERT_TRUE(0.0f <= firstPickRecord.GetBary(2) && firstPickRecord.GetBary(2) <= 1.0f);
     ASSERT_APPROXIMATE(firstPickRecord.GetBary(0) + firstPickRecord.GetBary(1) + firstPickRecord.GetBary(2), 1.0f, 1e-8f);
-
-    // 	ConstSpatialSharedPtr secondSpatialSharedPtr(new SpatialTest);
-    // 	firstPickRecord.SetIntersected(secondSpatialSharedPtr);
-    //
-    // 	ASSERT_EQUAL(firstPickRecord.GetIntersected(), secondSpatialSharedPtr);
-    //
-    // 	firstPickRecord.SetParameter(0.5f);
-    // 	ASSERT_APPROXIMATE(firstPickRecord.GetParameter(), 0.5f,1e-8f);
-    //
-    // 	firstPickRecord.SetTriangle(4);
-    // 	ASSERT_EQUAL(firstPickRecord.GetTriangle(), 4);
-    //
-    // 	firstPickRecord.SetBary(0.2f,0.5f);
-    //
-    // 	ASSERT_APPROXIMATE(firstPickRecord.GetBary(0),0.2f,1e-8f);
-    // 	ASSERT_APPROXIMATE(firstPickRecord.GetBary(1), 0.5f, 1e-8f);
-    // 	ASSERT_APPROXIMATE(firstPickRecord.GetBary(2), 0.3f, 1e-8f);
 }
 
 void Rendering::PickRecordTesting::OperatorTest()

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/08 21:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 16:29)
 
 #include "WindowHBrushTesting.h"
 #include "System/Windows/Flags/WindowsPictorialFlags.h"
@@ -20,7 +23,7 @@ namespace Framework
 
 Framework::WindowHBrushTesting::WindowHBrushTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      m_Container{ System::WindowsBrushTypes::WhiteBrush,
+      container{ System::WindowsBrushTypes::WhiteBrush,
                    System::WindowsBrushTypes::LtgrayBrush,
                    System::WindowsBrushTypes::GrayBrush,
                    System::WindowsBrushTypes::DkgrayBrush,
@@ -44,7 +47,7 @@ void Framework::WindowHBrushTesting::MainTest()
 
 void Framework::WindowHBrushTesting::BrushTest()
 {
-    for_each(m_Container.begin(), m_Container.end(), [this](const auto& value) {
+    for_each(container.begin(), container.end(), [this](const auto& value) {
         const TestingType windowHBrush{ value };
         ASSERT_EQUAL(windowHBrush.GetHBrush(), System::GetSystemStockObject(value));
     });

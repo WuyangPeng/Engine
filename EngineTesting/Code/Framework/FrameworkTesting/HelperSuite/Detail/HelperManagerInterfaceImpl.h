@@ -1,43 +1,45 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.1 (2020/05/27 0:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:05)
 
 #ifndef FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H
-#define FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H 
+#define FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H
 
-#include "Framework/MiddleLayer/MiddleLayerInterface.h" 
+#include "Framework/MiddleLayer/MiddleLayerInterface.h"
 
 #include <vector>
 
 namespace Framework
 {
-	class HelperManagerInterfaceImpl
-	{
-	public:
-		using ClassType = HelperManagerInterfaceImpl;
+    class HelperManagerInterfaceImpl
+    {
+    public:
+        using ClassType = HelperManagerInterfaceImpl;
 
-	public:
-		explicit HelperManagerInterfaceImpl(int containerSize);
+    public:
+        explicit HelperManagerInterfaceImpl(int containerSize);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		MiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index);
-		ConstMiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index) const;
+        MiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index);
+        ConstMiddleLayerInterfaceSharedPtr GetMiddleLayerInterface(int index) const;
 
-		void SetMiddleLayerInterface(int index, const MiddleLayerInterfaceSharedPtr& middleLayer);
-		int GetSize() const;
+        void SetMiddleLayerInterface(int index, const MiddleLayerInterfaceSharedPtr& middleLayer);
+        int GetSize() const;
 
-	private:
-		using WeakPointer = std::weak_ptr<MiddleLayerInterface>;
-		using Container = std::vector<WeakPointer>;
+    private:
+        using WeakPointer = std::weak_ptr<MiddleLayerInterface>;
+        using Container = std::vector<WeakPointer>;
 
-	private:
-		Container m_Container;
-	};
+    private:
+        Container container;
+    };
 
 }
 
-#endif // FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H
-
+#endif  // FRAMEWORK_HELPER_SUITE_HELPER_MANAGER_INTERFACE_IMPL_H

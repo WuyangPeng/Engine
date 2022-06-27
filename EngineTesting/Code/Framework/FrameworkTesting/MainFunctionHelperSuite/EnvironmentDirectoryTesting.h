@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.1 (2020/05/29 11:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/27 10:48)
 
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
@@ -14,57 +17,57 @@
 
 namespace Framework
 {
-	enum class Description;
+    enum class Description;
 
-	class EnvironmentDirectoryTesting final : public CoreTools::UnitTest
-	{
-	public:
-		using ClassType = EnvironmentDirectoryTesting;
-		using ParentType = UnitTest;
-		using TestingType = EnvironmentDirectory;
-		using String = System::String;
+    class EnvironmentDirectoryTesting final : public CoreTools::UnitTest
+    {
+    public:
+        using ClassType = EnvironmentDirectoryTesting;
+        using ParentType = UnitTest;
+        using TestingType = EnvironmentDirectory;
+        using String = System::String;
 
-	public:
-		explicit EnvironmentDirectoryTesting(const OStreamShared& stream);
+    public:
+        explicit EnvironmentDirectoryTesting(const OStreamShared& stream);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	private:
-		void DoRunUnitTest() final;
+    private:
+        void DoRunUnitTest() final;
 
-		void MainTest();
+        void MainTest();
 
-		void DefaultValueTest();
-		void FileValueTest();
+        void DefaultValueTest();
+        void FileValueTest();
 
-		void EngineEnvironmentTest(const TestingType& environmentDirectory);
-		void EngineDirectoryTest(const TestingType& environmentDirectory);
-		void DirectoryTest(bool isFile, UpperDirectory upperDirectory);
-		void DefaultPathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
-		void LittleEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
-		void LittleEndianOpenGLTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
-		void LittleEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
-		void BigEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
-		void BigEndianOpenGLTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
-		void BigEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void EngineEnvironmentTest(const TestingType& environmentDirectory);
+        void EngineDirectoryTest(const TestingType& environmentDirectory);
+        void DirectoryTest(bool isFile, UpperDirectory upperDirectory);
+        void DefaultPathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void LittleEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void LittleEndianOpenGLTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void LittleEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void BigEndianDefaultTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void BigEndianOpenGLTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
+        void BigEndianDirectXTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory);
 
-		void PathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory);
-			 
-	private:
-		using DescriptionType = std::map<Description, String>;
+        void PathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory);
 
-	private:
-		System::String GetDescription(Description description, bool isFile = false) const;
-		System::String GetPrefix(Description description) const;
-		static bool IsDirectory(Description description) noexcept;
-		static bool IsRendering(Description description) noexcept;
-		static bool IsLittleEndian(Description description) noexcept;
+    private:
+        using DescriptionType = std::map<Description, String>;
 
-	private:
-		DescriptionType m_Description;
-		TestingType m_DefaultEnvironmentDirectory;
-		TestingType m_FileEnvironmentDirectory;
-	};
+    private:
+        NODISCARD System::String GetDescription(Description description, bool isFile = false) const;
+        NODISCARD System::String GetPrefix(Description description) const;
+        NODISCARD static bool IsDirectory(Description description) noexcept;
+        NODISCARD static bool IsRendering(Description description) noexcept;
+        NODISCARD static bool IsLittleEndian(Description description) noexcept;
+
+    private:
+        DescriptionType mDescription;
+        TestingType defaultEnvironmentDirectory;
+        TestingType fileEnvironmentDirectory;
+    };
 }
 
-#endif // FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H
+#endif  // FRAMEWORK_MAIN_FUNCTION_HELPER_SUITE_ENVIRONMENT_DIRECTORY_TESTING_H

@@ -38,9 +38,10 @@ namespace Rendering
 #ifdef OPEN_CLASS_INVARIANT
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
-        bool IsParameterValid(float u, float v) const noexcept;
 
 #endif  // OPEN_CLASS_INVARIANT
+
+        NODISCARD bool IsParameterValid(float u, float v) const noexcept;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SurfacePatch);
 

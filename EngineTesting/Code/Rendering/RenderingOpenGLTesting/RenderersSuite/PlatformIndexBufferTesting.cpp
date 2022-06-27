@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.3 (2019/09/09 15:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.9 (2022/06/18 16:12)
 
 #include "PlatformIndexBufferTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -26,17 +29,4 @@ void Rendering::PlatformIndexBufferTesting::MainTest()
 
 void Rendering::PlatformIndexBufferTesting::IndexBufferTest() noexcept
 {
-    // 	VisualSmartPointer firstTrianglesStrip = LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/RenderersSuite/TrianglesStrip.trv"));
-    //
-    // 	IndexBufferSmartPointer indexbuffer = firstTrianglesStrip->GetIndexBuffer();
-    //
-    // 	RendererSharedPtr renderer(new Renderer("Configuration/Renderer.json"));
-    // 	renderer->Init();
-    //
-    // 	PlatformIndexBuffer platformIndexBuffer(renderer.get(),indexbuffer.GetData());
-    //
-    // 	platformIndexBuffer.Enable(renderer.get());
-    // 	platformIndexBuffer.Lock(BufferLocking::WriteOnly);
-    // 	platformIndexBuffer.Unlock();
-    // 	platformIndexBuffer.Disable(renderer.get());
 }

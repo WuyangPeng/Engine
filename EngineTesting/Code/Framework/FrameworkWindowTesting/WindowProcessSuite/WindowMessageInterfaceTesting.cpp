@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.2 (2020/06/04 13:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/27 14:00)
 
 #include "WindowMessageInterfaceTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -25,7 +28,7 @@ namespace Framework
 }
 
 Framework::WindowMessageInterfaceTesting::WindowMessageInterfaceTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, m_Hwnd{ hwnd }
+    : ParentType{ stream }, hwnd{ hwnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -58,27 +61,27 @@ void Framework::WindowMessageInterfaceTesting::MessageTest()
     message.PreIdle();
     message.Terminate();
 
-    ASSERT_EQUAL(message.CreateMessage(m_Hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(hwnd, 0, 0), 0);
 
-    ASSERT_EQUAL(m_Hwnd, message.GetHwnd());
+    ASSERT_EQUAL(hwnd, message.GetHwnd());
 
-    ASSERT_EQUAL(message.SizeMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MoveMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.CharMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.KeyDownMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.KeyUpMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.LeftButtonDownMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.LeftButtonUpMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MiddleButtonDownMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MiddleButtonUpMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.RightButtonDownMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.RightButtonUpMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MouseMoveMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.MouseWheelMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.PaintMessage(m_Hwnd, 0, 0), 0);
-    ASSERT_EQUAL(message.EraseBackgroundMessage(m_Hwnd, 0, 0), 1);
+    ASSERT_EQUAL(message.SizeMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MoveMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.CharMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.KeyDownMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.KeyUpMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.LeftButtonDownMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.LeftButtonUpMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MiddleButtonDownMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MiddleButtonUpMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.RightButtonDownMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.RightButtonUpMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MouseMoveMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.MouseWheelMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.PaintMessage(hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.EraseBackgroundMessage(hwnd, 0, 0), 1);
 
-    message.Display(m_Hwnd, 0);
+    message.Display(hwnd, 0);
 
     ASSERT_EQUAL(message.GetTerminateKey(), WindowApplicationTrait::KeyIdentifiers::keyTerminate);
 }
@@ -91,7 +94,7 @@ void Framework::WindowMessageInterfaceTesting::CloseMessageTest()
     auto instance = System::GetHInstance();
 
     System::String className{};
-    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
     auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
 
@@ -112,7 +115,7 @@ void Framework::WindowMessageInterfaceTesting::DestroyMessageTest()
     auto instance = System::GetHInstance();
 
     System::String className{};
-    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
     auto windowName = SYSTEM_TEXT("Test Destroy Message Window"s);
 
@@ -121,7 +124,7 @@ void Framework::WindowMessageInterfaceTesting::DestroyMessageTest()
     WindowInstanceParameter instanceParameter{ instance, className };
     WindowCreateHandle create{ instanceParameter, createParameter, size };
 
-    ASSERT_EQUAL(message.CreateMessage(m_Hwnd, 0, 0), 0);
+    ASSERT_EQUAL(message.CreateMessage(hwnd, 0, 0), 0);
     ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
     ASSERT_EQUAL(message.DestroyMessage(create.GetHwnd(), 0, 0), 0);
 }
@@ -134,7 +137,7 @@ void Framework::WindowMessageInterfaceTesting::SetMainWindowTest()
     auto instance = System::GetHInstance();
 
     System::String className{};
-    [[maybe_unused]] const auto value = System::GetSystemClassName(m_Hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
     auto windowName = SYSTEM_TEXT("Not Displayed Window"s);
 
@@ -149,9 +152,9 @@ void Framework::WindowMessageInterfaceTesting::SetMainWindowTest()
 
     ASSERT_EQUAL(create.GetHwnd(), message.GetHwnd());
 
-    message.SetMainWindow(m_Hwnd);
+    message.SetMainWindow(hwnd);
 
-    ASSERT_EQUAL(m_Hwnd, message.GetHwnd());
+    ASSERT_EQUAL(hwnd, message.GetHwnd());
 
     ASSERT_EQUAL(message.CloseMessage(create.GetHwnd(), 0, 0), 0);
 }

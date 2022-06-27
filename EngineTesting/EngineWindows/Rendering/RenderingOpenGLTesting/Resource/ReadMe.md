@@ -1,3 +1,6 @@
+@ingroup group_RenderingTesting_Documentation
+
+----------------------------
 渲染库OpenGL单元测试
 
 1.	RenderersSuite
@@ -11,7 +14,8 @@
 （6） 纹理对象。
 （7） 缓冲管理。
 （8） 渲染目标。
- 
+
+----------------------------
 2.	OpenGLRendererSuite
 
 对OpenGL渲染器模块的单元测试，包括： 
@@ -21,5 +25,7 @@
 （4）OpenGL渲染对象。
 （5）OpenGL位图。
 （6）OpenGL缓冲区。
+
+----------------------------
 
   

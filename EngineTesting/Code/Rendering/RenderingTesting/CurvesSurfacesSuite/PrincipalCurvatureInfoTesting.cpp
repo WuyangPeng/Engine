@@ -1,34 +1,24 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.3 (2019/09/07 17:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/16 19:45)
 
 #include "PrincipalCurvatureInfoTesting.h"
-#include "Rendering/CurvesSurfaces/PrincipalCurvatureInfo.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
- 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PrincipalCurvatureInfoTesting) 
-#include SYSTEM_WARNING_DISABLE(26440)
-void Rendering::PrincipalCurvatureInfoTesting
-	::MainTest()
-{ 
-	ASSERT_NOT_THROW_EXCEPTION_0(InitTest);	
-}
- 
-void Rendering::PrincipalCurvatureInfoTesting
-	::InitTest()
+#include "Rendering/CurvesSurfaces/PrincipalCurvatureInfo.h"
+
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PrincipalCurvatureInfoTesting)
+
+void Rendering::PrincipalCurvatureInfoTesting::MainTest()
 {
-// 	PrincipalCurvatureInfo firstPrincipalCurvatureInfo(0.2f,0.7f,Mathematics::AVectorf::sm_UnitZ,Mathematics::AVectorf::sm_UnitY);
-// 
-// 	typedef bool(*VectorFunction)(const Mathematics::AVectorf& lhs, const Mathematics::AVectorf& rhs,const float epsilon); 
-// 
-// 	VectorFunction vectorFunction = Mathematics::Approximate<float>;
-// 
-// 	ASSERT_APPROXIMATE(0.2f, firstPrincipalCurvatureInfo.GetPrincipalCurvature0(),  1e-8f);
-// 	ASSERT_APPROXIMATE(0.7f, firstPrincipalCurvatureInfo.GetPrincipalCurvature1(),  1e-8f);
-// 	ASSERT_APPROXIMATE_USE_FUNCTION(vectorFunction, firstPrincipalCurvatureInfo.GetPrincipalDirection0(), Mathematics::AVectorf::sm_UnitZ, 1e-8f);
-// 	ASSERT_APPROXIMATE_USE_FUNCTION(vectorFunction, firstPrincipalCurvatureInfo.GetPrincipalDirection1(), Mathematics::AVectorf::sm_UnitY, 1e-8f);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
 }
- 
+
+void Rendering::PrincipalCurvatureInfoTesting::InitTest() noexcept
+{
+}

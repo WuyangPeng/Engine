@@ -1,13 +1,19 @@
+@ingroup group_FrameworkTesting_Documentation
+
+----------------------------
 框架库模块单元测试
 
 1. 帮助（Helper）
+
 帮助单元测试模块，目前包含：
 （1）UserMacro
 （2）MainFunctionEntryPoint
 （3）MainFunction
 （4）MiddleLayerMacro
 
+----------------------------
 2. 主函数帮助（MainFunctionHelper）
+
 主函数帮助单元测试模块，目前包含：
 （1）EnvironmentDirectory
 （2）MainFunctionHelperBase
@@ -18,7 +24,9 @@
 （7）AndroidMainFunctionHelper
 （8）MacintoshMainFunctionHelper
 
+----------------------------
 3. 窗口创建（WindowCreate）
+
 窗口创建单元测试模块，目前包含：
 （1）WindowSize
 （2）WindowPoint
@@ -26,7 +34,9 @@
 （4）WindowCreateParameter
 （5）WindowCreateHandle
 
+----------------------------
 4. 窗口进程（WindowProcess）
+
 窗口进程单元测试模块，目前包含：
 （1）VirtualKeysTypes
 （2）WindowMessageLoop
@@ -36,7 +46,9 @@
 （6）WindowProcessHandle
 （7）WindowMessageUnitTestSuite
 
+----------------------------
 5. 窗口注册（WindowRegister）
+
 窗口注册单元测试模块，目前包含：
 （1）WindowRegisterParameter
 （2）WindowHIcon
@@ -46,7 +58,9 @@
 （6）WindowName
 （7）WindowRegisterHandle
 
+----------------------------
 6. 应用（Application）
+
 应用单元测试模块，目前包含：
 （1）ApplicationTrait
 （2）FontInformation
@@ -58,7 +72,9 @@
 （8）CameraMotion
 （9）ObjectMotion
 
+----------------------------
 7. 中间层（MiddleLayer）
+
 中间层单元测试模块，目前包含：
 （1）MiddleLayerInterface
 （2）ModelViewControllerMiddleLayer
@@ -89,11 +105,15 @@
 （27）GUIManagerInterface
 （28）EngineMiddleLayerContainer
 
+----------------------------
 8. WindowsAPI框架（WindowsAPIFrame）
+
 WindowsAPI框架单元测试模块，目前包含：
 （1）WindowsAPIFrameBuild
 
+----------------------------
 9. GLUT框架（OpenGLGlutFrame）
+
 GLUT框架单元测试模块，目前包含：
 （1）OpenGLGlutProcessManager
 （2）OpenGLGlutProcess
@@ -102,7 +122,9 @@ GLUT框架单元测试模块，目前包含：
 （5）OpenGLGlutCallBackUnitTestSuite
 （6）OpenGLGlutFrameBuild
 
+----------------------------
 10. Android框架（AndroidFrame）
+
 Android框架单元测试模块，目前包含：
 （1）AndroidProcessManager
 （2）AndroidProcess
@@ -112,20 +134,28 @@ Android框架单元测试模块，目前包含：
 （6）AndroidMessageLoop
 （7）AndroidFrameBuild
 
+----------------------------
 11. Linux框架（LinuxFrame）
+
 Linux框架单元测试模块，目前包含：
 （1）LinuxProcess
 （2）LinuxCallBackInterface
 （3）LinuxFrameBuild
 
+----------------------------
 12. Macintosh框架（MacintoshFrame）
+
 Macintosh框架单元测试模块，目前包含：
 （1）MacintoshProcess
 （2）MacintoshCallBackInterface
 （3）MacintoshFrameBuild
 
+----------------------------
 13. 控制台框架（ConsoleFrame）
+
 ConsoleFrame框架单元测试模块，目前包含：
 （1）ConsoleProcess
 （2）ConsoleCallBackInterface
 （3）ConsoleFrameBuild
+
+----------------------------

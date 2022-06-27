@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.0.2 (2020/06/11 0:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/27 13:41)
 
 #include "WindowRegisterTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -12,55 +15,50 @@
 
 using namespace std::literals;
 
-Framework::WindowRegisterTesting
-	::WindowRegisterTesting(const OStreamShared& stream, HInstance instance)
-	:ParentType{ stream }, m_Instance{ instance }, m_Count{ 0 }
+Framework::WindowRegisterTesting::WindowRegisterTesting(const OStreamShared& stream, HInstance instance)
+    : ParentType{ stream }, instance{ instance }, count{ 0 }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-bool Framework::WindowRegisterTesting
-	::IsValid() const noexcept
+bool Framework::WindowRegisterTesting::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_Instance != nullptr)
-		return true;
-	else
-		return false;
+    if (ParentType::IsValid() && instance != nullptr)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
-void Framework::WindowRegisterTesting
-	::DoRunUnitTest()
+void Framework::WindowRegisterTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::WindowRegisterTesting
-	::MainTest()
+void Framework::WindowRegisterTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(RegisterTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RegisterTest);
 }
 
-void Framework::WindowRegisterTesting
-	::RegisterTest()
+void Framework::WindowRegisterTesting::RegisterTest()
 {
-	const auto windowClassName = SYSTEM_TEXT("RegisterTestingClassName"s);
-	const auto windowMenuName = SYSTEM_TEXT("RegisterTestingMenuName"s);
+    const auto windowClassName = SYSTEM_TEXT("RegisterTestingClassName"s);
+    const auto windowMenuName = SYSTEM_TEXT("RegisterTestingMenuName"s);
 
-	auto newWindowClassName = windowClassName + System::ToString(m_Count++);
+    auto newWindowClassName = windowClassName + System::ToString(count++);
 
-	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-	WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
-	WindowName windowName{ newWindowClassName, windowMenuName };
-	WindowRegisterHandle<WindowProcessInterface> windowRegister{ environmentDirectory, m_Instance, "",windowPictorial,windowName };
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
+    WindowPictorial windowPictorial{ System::WindowsBrushTypes::WhiteBrush };
+    WindowName windowName{ newWindowClassName, windowMenuName };
+    WindowRegisterHandle<WindowProcessInterface> windowRegister{ environmentDirectory, instance, "", windowPictorial, windowName };
 
-	ASSERT_EQUAL(windowRegister.GetHInstance(), m_Instance);
-	ASSERT_EQUAL(windowRegister.GetWindowClassName(), newWindowClassName);
-	ASSERT_EQUAL(windowRegister.GetWindowMenuName(), windowMenuName);
-	ASSERT_UNEQUAL_NULL_PTR(windowRegister.GetCommand());
+    ASSERT_EQUAL(windowRegister.GetHInstance(), instance);
+    ASSERT_EQUAL(windowRegister.GetWindowClassName(), newWindowClassName);
+    ASSERT_EQUAL(windowRegister.GetWindowMenuName(), windowMenuName);
+    ASSERT_UNEQUAL_NULL_PTR(windowRegister.GetCommand());
 
-	auto windowProcess = windowRegister.GetWindowProcess();
-	ASSERT_UNEQUAL_NULL_PTR(windowRegister.GetFunction());
-	ASSERT_EQUAL(windowProcess.GetFunction(), windowRegister.GetFunction());	
+    auto windowProcess = windowRegister.GetWindowProcess();
+    ASSERT_UNEQUAL_NULL_PTR(windowRegister.GetFunction());
+    ASSERT_EQUAL(windowProcess.GetFunction(), windowRegister.GetFunction());
 }

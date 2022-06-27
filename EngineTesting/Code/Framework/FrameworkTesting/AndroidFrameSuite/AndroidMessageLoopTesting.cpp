@@ -1,37 +1,32 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.4 (2019/09/12 19:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:19)
 
 #include "AndroidMessageLoopTesting.h"
-#include "Framework/AndroidFrame/AndroidMessageLoop.h"
-#include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
 #include "CoreTools/Contract/Noexcept.h"
-Framework::AndroidMessageLoopTesting
-::AndroidMessageLoopTesting(const OStreamShared& stream)
-	:ParentType{ stream }
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Framework/AndroidFrame/AndroidMessageLoop.h"
+
+Framework::AndroidMessageLoopTesting::AndroidMessageLoopTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, AndroidMessageLoopTesting)
 
-void Framework::AndroidMessageLoopTesting
-::DoRunUnitTest()
+void Framework::AndroidMessageLoopTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::AndroidMessageLoopTesting
-	::MainTest()
+void Framework::AndroidMessageLoopTesting::MainTest() noexcept
 {
-	CoreTools::DisableNoexcept();
 }
-
-
-
-
-

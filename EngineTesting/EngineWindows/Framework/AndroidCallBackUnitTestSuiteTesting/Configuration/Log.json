@@ -1,6 +1,5 @@
 {
-  "Logger":
-  {
+  "Logger": {
     "System": 1,
     "CoreTools": 1,
     "Network": 1,
@@ -20,10 +19,8 @@
     "Framework": 1
   },
 
-  "Appender": 
-  {
-    "Console":
-    {
+  "Appender": {
+    "Console": {
       "Flags": 15,
       "Level": 1
     },

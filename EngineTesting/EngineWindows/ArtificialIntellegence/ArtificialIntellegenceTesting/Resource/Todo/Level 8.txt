@@ -1,13 +1,5 @@
 TODO Level 8
 
-0.0.2.5 
+0.8.0.9 
 
- 1.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorDatabaseObjectTesting的单元测试。  
- 2.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorSessionTesting的单元测试。
- 3.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorSchemaTesting的单元测试。
- 4.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorCollectionTesting的单元测试。
- 5.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorDocResultRowTesting的单元测试。
- 6.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorDocResultTesting的单元测试。
- 7.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorResultRowTesting的单元测试。
- 8.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorResultTesting的单元测试。
- 9.   （MysqlConnectorWrappersSuite）完成MysqlConnectorWrappers的MysqlConnectorTableTesting的单元测试。
+ 

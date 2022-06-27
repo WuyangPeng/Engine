@@ -1,11 +1,9 @@
 {
-  "macroSuite":
-  {
+  "macroSuite": {
 
   },
 
-  "generateProjectsSuite":
-  {
+  "generateProjectsSuite": {
     "GenerateTemplateSolutionTesting": 1,
     "GenerateTemplateVcxprojTesting": 1,
     "GenerateTemplateVcxprojFiltersTesting": 1,
@@ -36,23 +34,19 @@
     "GenerateTestingTemplateCodeDirectoryTesting": 1
   },
 
-  "featuresImporterSuite": 
-  {
+  "featuresImporterSuite": {
 
   },
 
-  "bmpColorToGraySuite": 
-  {
+  "bmpColorToGraySuite": {
 
   },
 
-  "bmpToWmtfSuite":
-  {
+  "bmpToWmtfSuite": {
 
   },
 
-  "wmfxCompilerSuite": 
-  {
+  "wmfxCompilerSuite": {
 
   }
 }

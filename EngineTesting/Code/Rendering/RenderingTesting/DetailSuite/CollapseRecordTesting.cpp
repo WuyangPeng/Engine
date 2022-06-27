@@ -1,57 +1,58 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.3 (2019/09/06 16:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 18:33)
 
 #include "CollapseRecordTesting.h"
-#include "Rendering/Detail/CollapseRecord.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
- 
+#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Rendering/Detail/CollapseRecord.h"
+
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, CollapseRecordTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, CollapseRecordTesting)
 
-void Rendering::CollapseRecordTesting
-	::MainTest()
-{ 
-	ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
-}
- #include SYSTEM_WARNING_DISABLE(26446)
-void Rendering::CollapseRecordTesting
-	::InitTest()
+void Rendering::CollapseRecordTesting::MainTest()
 {
-	CollapseRecord firstCollapseRecord(2, 7, 10, 12);
+    ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
+}
 
-	ASSERT_EQUAL(firstCollapseRecord.GetIndicesSize(), 0);
-	ASSERT_EQUAL(firstCollapseRecord.GetVKeep(), 2);
-	ASSERT_EQUAL(firstCollapseRecord.GetVThrow(), 7);
-	ASSERT_EQUAL(firstCollapseRecord.GetNumVertices(), 10);
-	ASSERT_EQUAL(firstCollapseRecord.GetNumTriangles(), 12);
+void Rendering::CollapseRecordTesting::InitTest()
+{
+    CollapseRecord firstCollapseRecord(2, 7, 10, 12);
 
-	vector<int> indices{ 2, 10, 3, 61, 1, 5, 6, 3 };
+    ASSERT_EQUAL(firstCollapseRecord.GetIndicesSize(), 0);
+    ASSERT_EQUAL(firstCollapseRecord.GetVKeep(), 2);
+    ASSERT_EQUAL(firstCollapseRecord.GetVThrow(), 7);
+    ASSERT_EQUAL(firstCollapseRecord.GetNumVertices(), 10);
+    ASSERT_EQUAL(firstCollapseRecord.GetNumTriangles(), 12);
 
-	firstCollapseRecord.SetIndices(indices);
+    vector<int> indices{ 2, 10, 3, 61, 1, 5, 6, 3 };
 
-	ASSERT_EQUAL(firstCollapseRecord.GetIndicesSize(),static_cast<int>(indices.size()));
+    firstCollapseRecord.SetIndices(indices);
 
-	for (int i = 0; i < firstCollapseRecord.GetIndicesSize();++i)
-	{
-		ASSERT_EQUAL(firstCollapseRecord.GetIndex(i), indices[i]);
-	}
+    ASSERT_EQUAL(firstCollapseRecord.GetIndicesSize(), static_cast<int>(indices.size()));
 
-	ASSERT_EQUAL(firstCollapseRecord.GetIndices(), indices);
+    for (int i = 0; i < firstCollapseRecord.GetIndicesSize(); ++i)
+    {
+        ASSERT_EQUAL(firstCollapseRecord.GetIndex(i), indices.at(i));
+    }
 
-	firstCollapseRecord.SetVKeep(5);
-	ASSERT_EQUAL(firstCollapseRecord.GetVKeep(), 5);
+    ASSERT_EQUAL(firstCollapseRecord.GetIndices(), indices);
 
-	firstCollapseRecord.SetVThrow(114);
-	ASSERT_EQUAL(firstCollapseRecord.GetVThrow(), 114);
+    firstCollapseRecord.SetVKeep(5);
+    ASSERT_EQUAL(firstCollapseRecord.GetVKeep(), 5);
 
-	firstCollapseRecord.SetNumVertices(12);
-	ASSERT_EQUAL(firstCollapseRecord.GetNumVertices(), 12);
+    firstCollapseRecord.SetVThrow(114);
+    ASSERT_EQUAL(firstCollapseRecord.GetVThrow(), 114);
 
-	firstCollapseRecord.SetNumTriangles(111);
-	ASSERT_EQUAL(firstCollapseRecord.GetNumTriangles(), 111);
+    firstCollapseRecord.SetNumVertices(12);
+    ASSERT_EQUAL(firstCollapseRecord.GetNumVertices(), 12);
+
+    firstCollapseRecord.SetNumTriangles(111);
+    ASSERT_EQUAL(firstCollapseRecord.GetNumTriangles(), 111);
 }

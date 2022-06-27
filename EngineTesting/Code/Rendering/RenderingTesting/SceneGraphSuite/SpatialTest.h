@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/04 18:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/14 18:51)
 
 #ifndef RENDERING_SCENE_GRAPH_SUITE_SPATIAL_TEST_H
 #define RENDERING_SCENE_GRAPH_SUITE_SPATIAL_TEST_H
@@ -18,21 +21,22 @@ namespace Rendering
         using ParentType = Visual;
 
     public:
-        SpatialTest();
+        explicit SpatialTest(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(SpatialTest);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-        ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
 
-        void GetVisibleSet(Culler& culler, bool noCull) override;
-        ObjectInterfaceSharedPtr CloneObject() const override;
+        void GetVisibleSet(Culler& culler, bool noCull) noexcept override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
-        void UpdateWorldBound() override;
+        void UpdateWorldBound() noexcept override;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
     CORE_TOOLS_STREAM_REGISTER(SpatialTest);

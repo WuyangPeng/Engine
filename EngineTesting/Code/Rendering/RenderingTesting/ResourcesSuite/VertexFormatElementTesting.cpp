@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/04 09:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 16:21)
 
 #include "VertexFormatElementTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -10,13 +13,7 @@
 #include "Rendering/Resources/VertexFormatElement.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, VertexFormatElementTesting)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
+
 void Rendering::VertexFormatElementTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
@@ -24,9 +21,9 @@ void Rendering::VertexFormatElementTesting::MainTest()
 
 void Rendering::VertexFormatElementTesting::BaseTest()
 {
-    VertexFormatType firstVertexFormatType(VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 1);
+    const VertexFormatType firstVertexFormatType(VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 1);
 
-    VertexFormatElement firstVertexFormatElement(5, 6, firstVertexFormatType);
+    const VertexFormatElement firstVertexFormatElement(5, 6, firstVertexFormatType);
 
     ASSERT_EQUAL(firstVertexFormatElement.GetStreamIndex(), 5);
     ASSERT_EQUAL(firstVertexFormatElement.GetOffset(), 6);
@@ -62,7 +59,7 @@ void Rendering::VertexFormatElementTesting::BaseTest()
     ASSERT_ENUM_EQUAL(secondVertexFormatElement.GetUsage(), VertexFormatFlags::AttributeUsage::Position);
     ASSERT_EQUAL(secondVertexFormatElement.GetUsageIndex(), 1);
 
-    VertexFormatType secondVertexFormatType(VertexFormatFlags::AttributeType::Float1, VertexFormatFlags::AttributeUsage::Color, 11);
+    const VertexFormatType secondVertexFormatType(VertexFormatFlags::AttributeType::Float1, VertexFormatFlags::AttributeUsage::Color, 11);
 
     secondVertexFormatElement.Set(7, 8, secondVertexFormatType);
 

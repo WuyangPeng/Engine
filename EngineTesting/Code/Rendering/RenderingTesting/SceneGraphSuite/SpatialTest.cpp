@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/05 11:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 13:45)
 
 #include "SpatialTest.h"
 #include "System/Helper/Helper.h"
@@ -11,17 +14,13 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26455)
+
 CORE_TOOLS_RTTI_DEFINE(Rendering, SpatialTest);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SpatialTest);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SpatialTest);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, SpatialTest);
 
-Rendering::SpatialTest::SpatialTest()
+Rendering::SpatialTest::SpatialTest(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{ VisualPrimitiveType::None }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -31,23 +30,24 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SpatialTest)
 
 Rendering::SpatialTest::ControllerInterfaceSharedPtr Rendering::SpatialTest::Clone() const
 {
-    CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return nullptr;
-    //ControllerInterfaceSharedPtr(new ClassType(*this));
+    return std::make_shared<ClassType>(*this);
 }
 
-void Rendering::SpatialTest::GetVisibleSet([[maybe_unused]] Culler& culler, [[maybe_unused]] bool noCull)
+void Rendering::SpatialTest::GetVisibleSet(MAYBE_UNUSED Culler& culler, MAYBE_UNUSED bool noCull) noexcept
 {
-    CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 }
 
-void Rendering::SpatialTest::UpdateWorldBound()
+void Rendering::SpatialTest::UpdateWorldBound() noexcept
 {
-    CLASS_IS_VALID_1;
+    RENDERING_CLASS_IS_VALID_1;
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::SpatialTest::CloneObject() const
 {
-    return nullptr;
+    RENDERING_CLASS_IS_VALID_1;
+
+    return std::make_shared<ClassType>(*this);
 }

@@ -45,8 +45,6 @@ Rendering::SurfacePatch::SurfacePatch(float uMin, float uMax, float vMin, float 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SurfacePatch)
 
 bool Rendering::SurfacePatch::IsParameterValid(float u, float v) const noexcept
@@ -76,8 +74,6 @@ bool Rendering::SurfacePatch::IsParameterValid(float u, float v) const noexcept
         return false;
     }
 }
-
-#endif  // OPEN_CLASS_INVARIANT
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch, GetUMin, float)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, SurfacePatch, GetUMax, float)

@@ -1,65 +1,61 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.3.1.0 (2020/06/26 18:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/26 22:46)
 
-#include "ModelViewControllerMiddleLayerTest.h"  
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
- 
-Framework::ModelViewControllerMiddleLayerTest
-	::ModelViewControllerMiddleLayerTest(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }
+#include "ModelViewControllerMiddleLayerTest.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+
+Framework::ModelViewControllerMiddleLayerTest::ModelViewControllerMiddleLayerTest(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ModelViewControllerMiddleLayerTest)
 
-const Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest
-	::GetPublicModelMiddleLayer() noexcept
+Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest::GetPublicModelMiddleLayer() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return GetModelMiddleLayer();
+    return GetModelMiddleLayer();
 }
 
-const Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest
-	::GetPublicViewMiddleLayer() noexcept
+Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest::GetPublicViewMiddleLayer() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return GetViewMiddleLayer();
+    return GetViewMiddleLayer();
 }
 
-const Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest
-	::GetPublicControllerMiddleLayer() noexcept
+Framework::ModelViewControllerMiddleLayer::MiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest::GetPublicControllerMiddleLayer() noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	return GetControllerMiddleLayer();
+    return GetControllerMiddleLayer();
 }
 
-const Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest
-	::GetConstPublicModelMiddleLayer() const noexcept
+Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest::GetConstPublicModelMiddleLayer() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetConstModelMiddleLayer();
+    return GetConstModelMiddleLayer();
 }
 
-const Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest
-	::GetConstPublicViewMiddleLayer() const noexcept
+Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest::GetConstPublicViewMiddleLayer() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetConstViewMiddleLayer();
+    return GetConstViewMiddleLayer();
 }
 
-const Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest
-	::GetConstPublicControllerMiddleLayer() const noexcept
+Framework::ModelViewControllerMiddleLayer::ConstMiddleLayerSharedPtr Framework::ModelViewControllerMiddleLayerTest::GetConstPublicControllerMiddleLayer() const noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_CONST_1;
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return GetConstControllerMiddleLayer();
+    return GetConstControllerMiddleLayer();
 }

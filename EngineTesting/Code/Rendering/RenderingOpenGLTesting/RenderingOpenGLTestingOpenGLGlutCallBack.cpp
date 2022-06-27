@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/09 12:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/17 22:17)
 
 #include "RenderingOpenGLTestingOpenGLGlutCallBack.h"
 #include "Testing.h"
@@ -34,22 +37,22 @@ void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddRenderersSuite()
 {
     auto renderersSuite = GenerateSuite("‰÷»æ∆˜");
 
-    // 	ADD_TEST(renderersSuite, PlatformVertexFormatTesting);
-    // 	ADD_TEST(renderersSuite, VertexFormatManagementTesting);
-    // 	ADD_TEST(renderersSuite, PlatformIndexBufferTesting);
-    // 	ADD_TEST(renderersSuite, PlatformVertexBufferTesting);
-    // 	ADD_TEST(renderersSuite, BufferLockManageTesting);
-    // 	ADD_TEST(renderersSuite, BufferManagementTesting);
-    // 	ADD_TEST(renderersSuite, BufferManagementLockEncapsulationTesting);
-    // 	ADD_TEST(renderersSuite, PlatformTexture1DTesting);
-    // 	ADD_TEST(renderersSuite, PlatformTexture2DTesting);
-    // 	ADD_TEST(renderersSuite, PlatformTexture3DTesting);
-    // 	ADD_TEST(renderersSuite, PlatformTextureCubeTesting);
-    // 	ADD_TEST(renderersSuite, TextureLockManageTesting);
-    // 	ADD_TEST(renderersSuite, TextureManagementTesting);
-    // 	ADD_TEST(renderersSuite, TextureManagementLockEncapsulationTesting);
-    // 	ADD_TEST(renderersSuite, PlatformRenderTargetTesting);
-    // 	ADD_TEST(renderersSuite, RenderTargetManagementTesting);
+    ADD_TEST(renderersSuite, PlatformVertexFormatTesting);
+    ADD_TEST(renderersSuite, VertexFormatManagementTesting);
+    ADD_TEST(renderersSuite, PlatformIndexBufferTesting);
+    ADD_TEST(renderersSuite, PlatformVertexBufferTesting);
+    ADD_TEST(renderersSuite, BufferLockManageTesting);
+    ADD_TEST(renderersSuite, BufferManagementTesting);
+    ADD_TEST(renderersSuite, BufferManagementLockEncapsulationTesting);
+    ADD_TEST(renderersSuite, PlatformTexture1DTesting);
+    ADD_TEST(renderersSuite, PlatformTexture2DTesting);
+    ADD_TEST(renderersSuite, PlatformTexture3DTesting);
+    ADD_TEST(renderersSuite, PlatformTextureCubeTesting);
+    ADD_TEST(renderersSuite, TextureLockManageTesting);
+    ADD_TEST(renderersSuite, TextureManagementTesting);
+    ADD_TEST(renderersSuite, TextureManagementLockEncapsulationTesting);
+    ADD_TEST(renderersSuite, PlatformRenderTargetTesting);
+    ADD_TEST(renderersSuite, RenderTargetManagementTesting);
 
     DoAddSuite(renderersSuite);
 }
@@ -58,12 +61,12 @@ void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddOpenGLRendererSuite
 {
     auto openGLRendererSuite = GenerateSuite("OpenGL‰÷»æ∆˜");
 
-    // 	ADD_TEST(openGLRendererSuite, OpenGLBindTextureTesting);
-    // 	ADD_TEST(openGLRendererSuite, OpenGLVertexFormatDataTesting);
-    // 	ADD_TEST(openGLRendererSuite, OpenGLVertexFormatArrayDataTesting);
-    // 	ADD_TEST(openGLRendererSuite, OpenGLTextureDataTesting);
-    // 	ADD_TEST(openGLRendererSuite, OpenGLTextureDataManageTesting);
-    // 	ADD_TEST(openGLRendererSuite, OpenGLRenderTargetDataTesting);
+    ADD_TEST(openGLRendererSuite, OpenGLBindTextureTesting);
+    ADD_TEST(openGLRendererSuite, OpenGLVertexFormatDataTesting);
+    ADD_TEST(openGLRendererSuite, OpenGLVertexFormatArrayDataTesting);
+    ADD_TEST(openGLRendererSuite, OpenGLTextureDataTesting);
+    ADD_TEST(openGLRendererSuite, OpenGLTextureDataManageTesting);
+    ADD_TEST(openGLRendererSuite, OpenGLRenderTargetDataTesting);
 
     DoAddSuite(openGLRendererSuite);
 }

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.3.0.1 (2020/05/29 11:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.9 (2022/06/27 10:45)
 
 #include "EnvironmentDirectoryTesting.h"
 #include "Flags/DescriptionFlags.h"
@@ -14,7 +17,7 @@ using namespace std::literals;
 
 Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStreamShared& osPtr)
     : ParentType{ osPtr },
-      m_Description{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
+      mDescription{ { Description::Resource, SYSTEM_TEXT("Resource"s) },
                      { Description::Configuration, SYSTEM_TEXT("Configuration"s) },
                      { Description::Directory, SYSTEM_TEXT(""s) },
                      { Description::LittleEndian, SYSTEM_TEXT("LittleEndian"s) },
@@ -30,8 +33,8 @@ Framework::EnvironmentDirectoryTesting::EnvironmentDirectoryTesting(const OStrea
                      { Description::Null, SYSTEM_TEXT(""s) },
                      { Description::Framework, SYSTEM_TEXT("Framework"s) },
                      { Description::EngineEnvironment, SYSTEM_TEXT("EngineTestingInclude"s) } },
-      m_DefaultEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("Default"s) },
-      m_FileEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("FrameworkEngineDirectory"s) }
+      defaultEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("Default"s) },
+      fileEnvironmentDirectory{ GetDescription(Description::EngineEnvironment), SYSTEM_TEXT("FrameworkEngineDirectory"s) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -50,8 +53,8 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
         return GetDescription(Description::Null, false);
     }
 
-    const auto iter = m_Description.find(description);
-    if (iter != m_Description.cend())
+    const auto iter = mDescription.find(description);
+    if (iter != mDescription.cend())
     {
         auto value = iter->second;
         if (isFile && IsDirectory(description))
@@ -69,8 +72,8 @@ System::String Framework::EnvironmentDirectoryTesting::GetDescription(Descriptio
 
 System::String Framework::EnvironmentDirectoryTesting::GetPrefix(Description description) const
 {
-    const auto iter = m_Description.find(description);
-    if (iter != m_Description.cend())
+    const auto iter = mDescription.find(description);
+    if (iter != mDescription.cend())
     {
         return iter->second;
     }
@@ -112,8 +115,8 @@ void Framework::EnvironmentDirectoryTesting::MainTest()
 
 void Framework::EnvironmentDirectoryTesting::DefaultValueTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, m_DefaultEnvironmentDirectory);
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, m_DefaultEnvironmentDirectory);
+    ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, defaultEnvironmentDirectory);
+    ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, defaultEnvironmentDirectory);
     for (auto i = UpperDirectory::Resource; i <= UpperDirectory::Configuration; ++i)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(DirectoryTest, false, i);
@@ -133,8 +136,8 @@ void Framework::EnvironmentDirectoryTesting::DefaultValueTest()
 
 void Framework::EnvironmentDirectoryTesting::FileValueTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, m_FileEnvironmentDirectory);
-    ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, m_FileEnvironmentDirectory);
+    ASSERT_NOT_THROW_EXCEPTION_1(EngineEnvironmentTest, fileEnvironmentDirectory);
+    ASSERT_NOT_THROW_EXCEPTION_1(EngineDirectoryTest, fileEnvironmentDirectory);
     for (auto i = UpperDirectory::Resource; i <= UpperDirectory::Configuration; ++i)
     {
         ASSERT_NOT_THROW_EXCEPTION_2(DirectoryTest, true, i);
@@ -166,7 +169,7 @@ void Framework::EnvironmentDirectoryTesting::EngineDirectoryTest(const TestingTy
 
 void Framework::EnvironmentDirectoryTesting::DirectoryTest(bool isFile, UpperDirectory upperDirectory)
 {
-    const auto& environmentDirectory = isFile ? m_FileEnvironmentDirectory : m_DefaultEnvironmentDirectory;
+    const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
 
     auto directory = environmentDirectory.GetDirectory(upperDirectory);
     auto description = GetDescription(System::EnumCastUnderlying<Description>(upperDirectory), isFile);
@@ -178,7 +181,7 @@ void Framework::EnvironmentDirectoryTesting::DirectoryTest(bool isFile, UpperDir
 
 void Framework::EnvironmentDirectoryTesting::DefaultPathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory)
 {
-    const auto& environmentDirectory = isFile ? m_FileEnvironmentDirectory : m_DefaultEnvironmentDirectory;
+    const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
 
     auto path1 = environmentDirectory.GetPath(renderingAnalysisDirectory);
     auto path2 = environmentDirectory.GetPath(RenderingDirectory::Default, renderingAnalysisDirectory);
@@ -220,7 +223,7 @@ void Framework::EnvironmentDirectoryTesting::BigEndianDirectXTest(bool isFile, R
 
 void Framework::EnvironmentDirectoryTesting::PathTest(bool isFile, RenderingAnalysisDirectory renderingAnalysisDirectory, EndianDirectory endianDirectory, RenderingDirectory renderingDirectory)
 {
-    const auto& environmentDirectory = isFile ? m_FileEnvironmentDirectory : m_DefaultEnvironmentDirectory;
+    const auto& environmentDirectory = isFile ? fileEnvironmentDirectory : defaultEnvironmentDirectory;
 
     auto path = environmentDirectory.GetPath(endianDirectory, renderingDirectory, renderingAnalysisDirectory);
 

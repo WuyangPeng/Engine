@@ -1,37 +1,30 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/06 16:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/15 18:33)
 
 #include "CreateClodMeshTesting.h"
+#include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Rendering/Detail/CreateClodMesh.h"
-#include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "Rendering/SceneGraph/LoadVisual.h"
-
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
-
-#include "CoreTools/FileManager/WriteFileManager.h"
+#include "Rendering/Detail/CreateClodMesh.h"
+#include "Rendering/Renderers/RendererManager.h"
+#include "Rendering/SceneGraph/CameraManager.h"
+#include "Rendering/SceneGraph/LoadVisual.h"
 
 #include <random>
 #include <vector>
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26414)
+
 using CoreTools::WriteFileManager;
 using std::vector;
 
@@ -58,7 +51,7 @@ void Rendering::CreateClodMeshTesting::CreateTrianglesMeshFile()
     WriteFileManager manage(SYSTEM_TEXT("Resource/DetailSuite/CreateClodMesh.trv"));
 
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-1.0f, 1.0f);
 
     constexpr int type = System::EnumCastUnderlying(VisualPrimitiveType::TriangleMesh);
     manage.Write(sizeof(int), &type);
@@ -83,7 +76,7 @@ void Rendering::CreateClodMeshTesting::CreateTrianglesMeshFile()
     firstVertexFormat->SaveToFile(manage);
 
     // VertexBuffer
-    int numElements = 20;
+    constexpr int numElements = 20;
     int elementSize = firstVertexFormat->GetStride();
     constexpr int usage = System::EnumCastUnderlying(BufferUsage::Static);
 
@@ -98,32 +91,36 @@ void Rendering::CreateClodMeshTesting::CreateTrianglesMeshFile()
              attributesIndex < firstVertexFormat->GetNumAttributes();
              ++attributesIndex)
         {
-            VertexFormat::AttributeType type2 =
-                firstVertexFormat->GetAttributeType(attributesIndex);
+            const VertexFormat::AttributeType type2 = firstVertexFormat->GetAttributeType(attributesIndex);
 
-            int componentSize = VertexFormat::GetComponentSize(type2);
-            int numComponents = VertexFormat::GetNumComponents(type2);
+            const int componentSize = VertexFormat::GetComponentSize(type2);
+            const int numComponents = VertexFormat::GetNumComponents(type2);
 
-            vector<char> buffer(componentSize * numComponents);
+            const auto size = componentSize * numComponents;
+            vector<char> buffer(size);
 
-            for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float);
-                 ++bufferIndex)
+            for (unsigned bufferIndex = 0; bufferIndex < buffer.size() / sizeof(float); ++bufferIndex)
             {
-                float* floatBufferPtr = reinterpret_cast<float*>(&buffer[bufferIndex * sizeof(float)]);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+                auto* floatBufferPtr = reinterpret_cast<float*>(&buffer.at(bufferIndex * sizeof(float)));
+
+#include STSTEM_WARNING_POP
 
                 *floatBufferPtr = firstFloatRandomDistribution(generator);
             }
 
-            manage.Write(componentSize, numComponents, &buffer[0]);
+            manage.Write(componentSize, numComponents, buffer.data());
         }
 
         vertexIndex += elementSize;
     }
 
     // IndexBuffer
-    int indexBufferNumElements = 48;
+    constexpr int indexBufferNumElements = 48;
     elementSize = 4;
-    int numBytes = indexBufferNumElements * elementSize;
+    const int numBytes = indexBufferNumElements * elementSize;
 
     manage.Write(sizeof(int), &indexBufferNumElements);
     manage.Write(sizeof(int), &elementSize);
@@ -132,7 +129,20 @@ void Rendering::CreateClodMeshTesting::CreateTrianglesMeshFile()
 
     vector<char> buffer(numBytes);
 
-    int* intBufferPtr = reinterpret_cast<int*>(&buffer[0]);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+    auto* intBufferPtr = reinterpret_cast<int*>(buffer.data());
+
+#include STSTEM_WARNING_POP
+
+    if (intBufferPtr == nullptr)
+    {
+        return;
+    }
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
     intBufferPtr[0] = 0;
     intBufferPtr[1] = 1;
@@ -190,9 +200,11 @@ void Rendering::CreateClodMeshTesting::CreateTrianglesMeshFile()
     intBufferPtr[46] = 17;
     intBufferPtr[47] = 18;
 
-    manage.Write(elementSize, numBytes / elementSize, &buffer[0]);
+#include STSTEM_WARNING_POP
 
-    int offset = 0;
+    manage.Write(elementSize, numBytes / elementSize, buffer.data());
+
+    constexpr int offset = 0;
 
     manage.Write(sizeof(int), &offset);
 }
@@ -201,9 +213,14 @@ void Rendering::CreateClodMeshTesting::InitTest()
 {
     VisualSharedPtr firstTrianglesMesh = LoadVisual::CreateFromFile(SYSTEM_TEXT("Resource/DetailSuite/CreateClodMesh.trv"));
 
-    TrianglesMeshSharedPtr mesh(new TrianglesMesh(firstTrianglesMesh->GetVertexFormat(),
-                                                  firstTrianglesMesh->GetVertexBuffer(),
-                                                  firstTrianglesMesh->GetIndexBuffer()));
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
+    TrianglesMeshSharedPtr mesh(std::make_shared<TrianglesMesh>(firstTrianglesMesh->GetVertexFormat(),
+                                                                firstTrianglesMesh->GetVertexBuffer(),
+                                                                firstTrianglesMesh->GetIndexBuffer()));
+
+#include STSTEM_WARNING_POP
 
     CreateClodMesh createClodMesh(*mesh);
 
@@ -215,6 +232,6 @@ void Rendering::CreateClodMeshTesting::InitTest()
 
     for (int i = 0; i < collapse->GetNumRecords(); ++i)
     {
-        ASSERT_EQUAL(records[i], collapse->GetRecord(i));
+        ASSERT_EQUAL(records.at(i), collapse->GetRecord(i));
     }
 }

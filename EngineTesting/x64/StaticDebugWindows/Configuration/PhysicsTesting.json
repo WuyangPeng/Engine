@@ -1,44 +1,36 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "collisionDetectionSuite": 
-  {
-    "BoundTreeProjectionInfoTesting":1,
-    "BoundTreeSplitTrianglesTesting":100,
-    "BoundTreeChildTesting":1,
-    "BoundTreeTesting":1
+  "collisionDetectionSuite": {
+    "BoundTreeProjectionInfoTesting": 1,
+    "BoundTreeSplitTrianglesTesting": 100,
+    "BoundTreeChildTesting": 1,
+    "BoundTreeTesting": 1
   },
 
-  "fluidSuite": 
-  {
-
-  },
-
-  "intersectionSuite": 
-  {
+  "fluidSuite": {
 
   },
 
-  "lCPSolverSuite": 
-  {
+  "intersectionSuite": {
 
   },
 
-  "particleSystemSuite": 
-  {
+  "lCPSolverSuite": {
 
   },
 
-  "rigidBodySuite": 
-  {
+  "particleSystemSuite": {
 
   },
 
-  "miscellaneousSuite": 
-  {
+  "rigidBodySuite": {
 
-  } 
+  },
+
+  "miscellaneousSuite": {
+
+  }
 }

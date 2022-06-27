@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/12 21:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:29)
 
 #include "FontInformationTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,68 +17,61 @@ using namespace std::literals;
 
 namespace Framework
 {
-	using TestingType = FontInformation;
+    using TestingType = FontInformation;
 }
 
-Framework::FontInformationTesting
-	::FontInformationTesting(const OStreamShared& stream, HWnd hwnd)
-	:ParentType{ stream }, m_Hwnd{ hwnd }
+Framework::FontInformationTesting::FontInformationTesting(const OStreamShared& stream, HWnd hwnd)
+    : ParentType{ stream }, hwnd{ hwnd }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
-} 
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, FontInformationTesting)
 
-void Framework::FontInformationTesting
-	::DoRunUnitTest()
+void Framework::FontInformationTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::FontInformationTesting
-	::MainTest()
+void Framework::FontInformationTesting::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(WindowFontInformationTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(GlutFontInformationTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WindowFontInformationTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GlutFontInformationTest);
 }
 
-void Framework::FontInformationTesting
-	::WindowFontInformationTest()
+void Framework::FontInformationTesting::WindowFontInformationTest()
 {
-	TestingType fontInformation1{ m_Hwnd };
+    TestingType fontInformation1{ hwnd };
 
-	auto testText = SYSTEM_TEXT("TestText"s);
-	const auto size = boost::numeric_cast<int>(testText.size());
+    auto testText = SYSTEM_TEXT("TestText"s);
+    const auto size = boost::numeric_cast<int>(testText.size());
 
-	ASSERT_TRUE(size < fontInformation1.GetStringWidth(testText));
-	ASSERT_TRUE(0 < fontInformation1.GetCharacterWidth(SYSTEM_TEXT('A')));
-	ASSERT_TRUE(fontInformation1.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation1.GetStringWidth(testText));
-	ASSERT_TRUE(0 < fontInformation1.GetFontHeight());
+    ASSERT_TRUE(size < fontInformation1.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation1.GetCharacterWidth(SYSTEM_TEXT('A')));
+    ASSERT_TRUE(fontInformation1.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation1.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation1.GetFontHeight());
 
-	TestingType fontInformation2{ PlatformTypes::Window };
+    TestingType fontInformation2{ PlatformTypes::Window };
 
-	ASSERT_TRUE(size < fontInformation2.GetStringWidth(testText));
-	ASSERT_TRUE(0 < fontInformation2.GetCharacterWidth(SYSTEM_TEXT('B')));
-	ASSERT_TRUE(fontInformation2.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation2.GetStringWidth(testText));
-	ASSERT_TRUE(0 < fontInformation2.GetFontHeight());
+    ASSERT_TRUE(size < fontInformation2.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation2.GetCharacterWidth(SYSTEM_TEXT('B')));
+    ASSERT_TRUE(fontInformation2.GetCharacterWidth(SYSTEM_TEXT('T')) < fontInformation2.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation2.GetFontHeight());
 
-	ASSERT_EQUAL(fontInformation1.GetStringWidth(testText), fontInformation2.GetStringWidth(testText));
-	ASSERT_EQUAL(fontInformation1.GetCharacterWidth('C'), fontInformation2.GetCharacterWidth('C'));
-	ASSERT_EQUAL(fontInformation1.GetFontHeight(), fontInformation2.GetFontHeight());
+    ASSERT_EQUAL(fontInformation1.GetStringWidth(testText), fontInformation2.GetStringWidth(testText));
+    ASSERT_EQUAL(fontInformation1.GetCharacterWidth('C'), fontInformation2.GetCharacterWidth('C'));
+    ASSERT_EQUAL(fontInformation1.GetFontHeight(), fontInformation2.GetFontHeight());
 }
 
-void Framework::FontInformationTesting
-	::GlutFontInformationTest()
+void Framework::FontInformationTesting::GlutFontInformationTest()
 {
-	TestingType fontInformation{ PlatformTypes::Glut };
+    TestingType fontInformation{ PlatformTypes::Glut };
 
-	auto testText = SYSTEM_TEXT("TestText"s);
-	const auto size = boost::numeric_cast<int>(testText.size());
+    auto testText = SYSTEM_TEXT("TestText"s);
+    const auto size = boost::numeric_cast<int>(testText.size());
 
-	ASSERT_TRUE(size < fontInformation.GetStringWidth(testText));
-	ASSERT_TRUE(0 < fontInformation.GetCharacterWidth(SYSTEM_TEXT('A')));
-	ASSERT_TRUE(0 < fontInformation.GetFontHeight());	
-	ASSERT_EQUAL(fontInformation.GetCharacterWidth(SYSTEM_TEXT('T')) * size, fontInformation.GetStringWidth(testText));
+    ASSERT_TRUE(size < fontInformation.GetStringWidth(testText));
+    ASSERT_TRUE(0 < fontInformation.GetCharacterWidth(SYSTEM_TEXT('A')));
+    ASSERT_TRUE(0 < fontInformation.GetFontHeight());
+    ASSERT_EQUAL(fontInformation.GetCharacterWidth(SYSTEM_TEXT('T')) * size, fontInformation.GetStringWidth(testText));
 }
-
-

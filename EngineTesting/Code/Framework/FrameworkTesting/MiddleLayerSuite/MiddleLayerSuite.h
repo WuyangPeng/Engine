@@ -1,40 +1,43 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.1.0 (2020/06/26 15:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 10:24)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_H
 
-#include "MiddleLayerInterfaceTesting.h"
-#include "ModelViewControllerMiddleLayerTesting.h"
-#include "ModelViewControllerMiddleLayerContainerTesting.h"
-#include "ModelMiddleLayerTesting.h"
-#include "ViewMiddleLayerTesting.h"
-#include "ControllerMiddleLayerTesting.h"
-#include "PixelViewMiddleLayerTesting.h"
+#include "ArtificialIntellegenceInterfaceTesting.h"
+#include "AudioManagerInterfaceTesting.h"
+#include "CameraControllerMiddleLayerTesting.h"
 #include "CameraMiddleLayerTesting.h"
 #include "CameraModelMiddleLayerTesting.h"
+#include "CameraSystemsManagerInterfaceTesting.h"
 #include "CameraViewMiddleLayerTesting.h"
-#include "CameraControllerMiddleLayerTesting.h"
+#include "ControllerMiddleLayerTesting.h"
+#include "EngineMiddleLayerContainerTesting.h"
 #include "EngineMiddleLayerInterfaceTesting.h"
-#include "NetworkManagerInterfaceTesting.h"
-#include "ObjectLogicManagerInterfaceTesting.h"
-#include "ObjectLogicManagerTesting.h"
-#include "ArtificialIntellegenceInterfaceTesting.h"
-#include "ObjectLogicInterfaceTesting.h"
+#include "EventManagerInterfaceTesting.h"
+#include "GUIManagerInterfaceTesting.h"
 #include "InputManagerInterfaceTesting.h"
 #include "InputManagerTesting.h"
-#include "PhysicalModellingManagerInterfaceTesting.h"
 #include "MessageManagerInterfaceTesting.h"
-#include "EventManagerInterfaceTesting.h"
-#include "SystemManagerInterfaceTesting.h"
-#include "ResourceManagerInterfaceTesting.h"
-#include "AudioManagerInterfaceTesting.h"
-#include "CameraSystemsManagerInterfaceTesting.h"
+#include "MiddleLayerInterfaceTesting.h"
+#include "ModelMiddleLayerTesting.h"
+#include "ModelViewControllerMiddleLayerContainerTesting.h"
+#include "ModelViewControllerMiddleLayerTesting.h"
+#include "NetworkManagerInterfaceTesting.h"
+#include "ObjectLogicInterfaceTesting.h"
+#include "ObjectLogicManagerInterfaceTesting.h"
+#include "ObjectLogicManagerTesting.h"
+#include "PhysicalModellingManagerInterfaceTesting.h"
+#include "PixelViewMiddleLayerTesting.h"
 #include "RenderingManagerInterfaceTesting.h"
-#include "GUIManagerInterfaceTesting.h"
-#include "EngineMiddleLayerContainerTesting.h"
+#include "ResourceManagerInterfaceTesting.h"
+#include "SystemManagerInterfaceTesting.h"
+#include "ViewMiddleLayerTesting.h"
 
-#endif // FRAMEWORK_MIDDLE_LAYER_SUITE_H
+#endif  // FRAMEWORK_MIDDLE_LAYER_SUITE_H

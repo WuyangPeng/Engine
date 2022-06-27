@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/09 20:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/21 18:02)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -31,49 +34,49 @@ void UserInterface::TestingHelper::InitSuite()
     AddXFree86Suite();
 }
 
-void UserInterface::TestingHelper ::AddMacroSuite()
+void UserInterface::TestingHelper::AddMacroSuite()
 {
     auto macroSuite = GenerateSuite("宏");
 
     AddSuite(macroSuite);
 }
 
-void UserInterface::TestingHelper ::AddConfigurationSuite()
+void UserInterface::TestingHelper::AddConfigurationSuite()
 {
     auto configurationSuite = GenerateSuite("配置");
 
     AddSuite(configurationSuite);
 }
 
-void UserInterface::TestingHelper ::AddInterfaceSuite()
+void UserInterface::TestingHelper::AddInterfaceSuite()
 {
     auto interfaceSuite = GenerateSuite("接口");
 
     AddSuite(interfaceSuite);
 }
 
-void UserInterface::TestingHelper ::AddWxWidgetsSuite()
+void UserInterface::TestingHelper::AddWxWidgetsSuite()
 {
     auto wxWidgetsSuite = GenerateSuite("wxWidgets");
 
     AddSuite(wxWidgetsSuite);
 }
 
-void UserInterface::TestingHelper ::AddFLTKSuite()
+void UserInterface::TestingHelper::AddFLTKSuite()
 {
     auto fLTKSuite = GenerateSuite("FLTK");
 
     AddSuite(fLTKSuite);
 }
 
-void UserInterface::TestingHelper ::AddTrixulSuite()
+void UserInterface::TestingHelper::AddTrixulSuite()
 {
     auto trixulSuite = GenerateSuite("Trixul");
 
     AddSuite(trixulSuite);
 }
 
-void UserInterface::TestingHelper ::AddXFree86Suite()
+void UserInterface::TestingHelper::AddXFree86Suite()
 {
     auto xFree86Suite = GenerateSuite("XFree86");
 

@@ -1,18 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/10 20:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 14:02)
 
 #ifndef FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_PROCESS_MANAGE_TESTING_H
 #define FRAMEWORK_ANDROID_FRAME_SUITE_ANDROID_PROCESS_MANAGE_TESTING_H
 
+#include "System/Android/Using/AndroidNativeAppGlueUsing.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-namespace System
-{
-    class AndroidApp;
-}
 
 namespace Framework
 {
@@ -24,7 +23,7 @@ namespace Framework
         using AndroidApp = System::AndroidApp;
 
     public:
-        explicit AndroidProcessManagerTesting(AndroidApp* androidApp, const OStreamShared& osPtr);
+        explicit AndroidProcessManagerTesting(const OStreamShared& stream, AndroidApp* androidApp);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -36,7 +35,7 @@ namespace Framework
         void DoRunUnitTest() final;
 
     private:
-        AndroidApp* m_AndroidApp;
+        AndroidApp* androidApp;
     };
 }
 

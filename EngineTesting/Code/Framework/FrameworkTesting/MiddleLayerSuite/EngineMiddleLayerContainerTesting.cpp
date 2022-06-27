@@ -1,162 +1,159 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/16 09:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/26 22:42)
 
 #include "EngineMiddleLayerContainerTesting.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/AssertMacro.h" 
-
-#include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h" 
+#include "Rendering/Renderers/RendererManager.h"
+#include "Framework/Application/Flags/ApplicationTrait.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/ArtificialIntellegenceInterface.h"
+#include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h"
+#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
-#include "Framework/WindowProcess/VirtualKeysTypes.h"
-#include "Framework/Application/Flags/ApplicationTrait.h"
-#include "System/Windows/Flags/WindowsDisplayFlags.h"
-#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
-#include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
-#include "Rendering/Renderers/RendererManager.h"
+#include "Framework/WindowProcess/VirtualKeysTypes.h"
 
-#include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"  
- 
-
-Framework::EngineMiddleLayerContainerTesting
-::EngineMiddleLayerContainerTesting(const OStreamShared& stream)
-	:ParentType{ stream }
+Framework::EngineMiddleLayerContainerTesting::EngineMiddleLayerContainerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, EngineMiddleLayerContainerTesting)
 
-void Framework::EngineMiddleLayerContainerTesting
-::DoRunUnitTest()
+void Framework::EngineMiddleLayerContainerTesting::DoRunUnitTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
- 
-void Framework::EngineMiddleLayerContainerTesting
-	::MainTest()
-{
-	Rendering::RendererManager::Create();
-	ASSERT_NOT_THROW_EXCEPTION_0(DefaultEngineMiddleLayerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(EngineMiddleLayerTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);	
-	Rendering::RendererManager::Destroy();
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Framework::EngineMiddleLayerContainerTesting
-	::DefaultEngineMiddleLayerTest()
+void Framework::EngineMiddleLayerContainerTesting::MainTest()
 {
-	#include "System/Helper/PragmaWarning.h"
+    Rendering::RendererManager::Create();
+    ASSERT_NOT_THROW_EXCEPTION_0(DefaultEngineMiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EngineMiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);
+    Rendering::RendererManager::Destroy();
+}
+
+void Framework::EngineMiddleLayerContainerTesting::DefaultEngineMiddleLayerTest()
+{
 #include STSTEM_WARNING_PUSH
-	#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26414)
 
-	EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared < EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows));
+    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows));
+
 #include STSTEM_WARNING_POP
 
-	ASSERT_TRUE(middleLayer->PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"),SYSTEM_TEXT("") }));
-	ASSERT_TRUE(middleLayer->Initialize());
-	middleLayer->PreIdle();
-	ASSERT_TRUE(middleLayer->Create());
-	ASSERT_TRUE(middleLayer->Paint());
-	ASSERT_TRUE(middleLayer->Move(WindowPoint()));
-	ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, WindowSize()));
-	ASSERT_TRUE(middleLayer->KeyDown(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->KeyUp(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->SpecialKeyDown(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->SpecialKeyUp(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown,WindowPoint(),VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer->Motion(WindowPoint(), VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer->PassiveMotion(WindowPoint()));
-	ASSERT_TRUE(middleLayer->MouseWheel(0, WindowPoint(), VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer->Idle(0));
+    ASSERT_TRUE(middleLayer->PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
+    ASSERT_TRUE(middleLayer->Initialize());
+    middleLayer->PreIdle();
+    ASSERT_TRUE(middleLayer->Create());
+    ASSERT_TRUE(middleLayer->Paint());
+    ASSERT_TRUE(middleLayer->Move(WindowPoint()));
+    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, WindowSize()));
+    ASSERT_TRUE(middleLayer->KeyDown(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->KeyUp(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->SpecialKeyDown(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->SpecialKeyUp(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer->Motion(WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer->PassiveMotion(WindowPoint()));
+    ASSERT_TRUE(middleLayer->MouseWheel(0, WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer->Idle(0));
 
-	ASSERT_TRUE(middleLayer->Destroy());
-	middleLayer->Terminate();
+    ASSERT_TRUE(middleLayer->Destroy());
+    middleLayer->Terminate();
 }
 
-void Framework::EngineMiddleLayerContainerTesting
-	::EngineMiddleLayerTest()
+void Framework::EngineMiddleLayerContainerTesting::EngineMiddleLayerTest()
 {
-	using ObjectLogicManager = ObjectLogicManager<ObjectLogicManagerInterface, ArtificialIntellegenceInterface>;
-#include "System/Helper/PragmaWarning.h"
+    using ObjectLogicManager = ObjectLogicManager<ObjectLogicManagerInterface, ArtificialIntellegenceInterface>;
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
-	EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared < EngineMiddleLayerContainer<WindowApplicationTrait, InputManager, NetworkManagerInterface,
-		                                                                               ObjectLogicManager,PhysicalModellingManagerInterface,
-																					   MessageManagerInterface,EventManagerInterface,SystemManagerInterface,
-																					   ResourceManagerInterface,AudioManagerInterface,
-																					   CameraSystemsManagerInterface,RenderingManagerInterface,GUIManagerInterface>>(MiddleLayerPlatform::Windows));
-	#include STSTEM_WARNING_POP
-	ASSERT_TRUE(middleLayer->PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"),SYSTEM_TEXT("") }));
-	ASSERT_TRUE(middleLayer->Initialize());
-	middleLayer->PreIdle();
-	ASSERT_TRUE(middleLayer->Create());
-	ASSERT_TRUE(middleLayer->Paint());
-	ASSERT_TRUE(middleLayer->Move(WindowPoint()));
-	ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, WindowSize()));
-	ASSERT_TRUE(middleLayer->KeyDown(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->KeyUp(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->SpecialKeyDown(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->SpecialKeyUp(0, WindowPoint()));
-	ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown,WindowPoint(),VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer->Motion(WindowPoint(), VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer->PassiveMotion(WindowPoint()));
-	ASSERT_TRUE(middleLayer->MouseWheel(0, WindowPoint(), VirtualKeysTypes()));
-	ASSERT_TRUE(middleLayer->Idle(0));
 
-	ASSERT_TRUE(middleLayer->Destroy());
-	middleLayer->Terminate();
+    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait, InputManager, NetworkManagerInterface,
+                                                                                                ObjectLogicManager, PhysicalModellingManagerInterface,
+                                                                                                MessageManagerInterface, EventManagerInterface, SystemManagerInterface,
+                                                                                                ResourceManagerInterface, AudioManagerInterface,
+                                                                                                CameraSystemsManagerInterface, RenderingManagerInterface, GUIManagerInterface>>(MiddleLayerPlatform::Windows));
+
+#include STSTEM_WARNING_POP
+
+    ASSERT_TRUE(middleLayer->PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
+    ASSERT_TRUE(middleLayer->Initialize());
+    middleLayer->PreIdle();
+    ASSERT_TRUE(middleLayer->Create());
+    ASSERT_TRUE(middleLayer->Paint());
+    ASSERT_TRUE(middleLayer->Move(WindowPoint()));
+    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, WindowSize()));
+    ASSERT_TRUE(middleLayer->KeyDown(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->KeyUp(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->SpecialKeyDown(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->SpecialKeyUp(0, WindowPoint()));
+    ASSERT_TRUE(middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer->Motion(WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer->PassiveMotion(WindowPoint()));
+    ASSERT_TRUE(middleLayer->MouseWheel(0, WindowPoint(), VirtualKeysTypes()));
+    ASSERT_TRUE(middleLayer->Idle(0));
+
+    ASSERT_TRUE(middleLayer->Destroy());
+    middleLayer->Terminate();
 }
 
-void Framework::EngineMiddleLayerContainerTesting
-	::SetMiddleLayerTest()
+void Framework::EngineMiddleLayerContainerTesting::SetMiddleLayerTest()
 {
-#include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
-	EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared < EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows));
-	#include STSTEM_WARNING_POP
-	NetworkManagerInterfaceSharedPtr networkManagerInterface(std::make_shared < NetworkManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetNetworkManager(networkManagerInterface);
 
-	InputManagerInterfaceSharedPtr inputManagerInterface(std::make_shared < InputManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetInputManager(inputManagerInterface);
+    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows));
 
-	ObjectLogicManagerInterfaceSharedPtr objectLogicManagerInterface(std::make_shared < ObjectLogicManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetObjectLogicManager(objectLogicManagerInterface);
+#include STSTEM_WARNING_POP
 
-	PhysicalModellingManagerInterfaceSharedPtr physicalModellingManagerInterface(std::make_shared < PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetPhysicalModellingManager(physicalModellingManagerInterface);
+    NetworkManagerInterfaceSharedPtr networkManagerInterface(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetNetworkManager(networkManagerInterface);
 
-	MessageManagerInterfaceSharedPtr messageManagerInterface(std::make_shared < MessageManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetMessageManager(messageManagerInterface);
+    InputManagerInterfaceSharedPtr inputManagerInterface(std::make_shared<InputManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetInputManager(inputManagerInterface);
 
-	EventManagerInterfaceSharedPtr eventManagerInterface(std::make_shared < EventManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetEventManager(eventManagerInterface);
+    ObjectLogicManagerInterfaceSharedPtr objectLogicManagerInterface(std::make_shared<ObjectLogicManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetObjectLogicManager(objectLogicManagerInterface);
 
-	SystemManagerInterfaceSharedPtr systemManagerInterface(std::make_shared < SystemManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetSystemManager(systemManagerInterface);
+    PhysicalModellingManagerInterfaceSharedPtr physicalModellingManagerInterface(std::make_shared<PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetPhysicalModellingManager(physicalModellingManagerInterface);
 
-	ResourceManagerInterfaceSharedPtr resourceManagerInterface(std::make_shared < ResourceManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetResourceManager(resourceManagerInterface);
+    MessageManagerInterfaceSharedPtr messageManagerInterface(std::make_shared<MessageManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetMessageManager(messageManagerInterface);
 
-	AudioManagerInterfaceSharedPtr audioManagerInterface(std::make_shared < AudioManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetAudioManager(audioManagerInterface);
+    EventManagerInterfaceSharedPtr eventManagerInterface(std::make_shared<EventManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetEventManager(eventManagerInterface);
 
-	CameraSystemsManagerInterfaceSharedPtr cameraSystemsManagerInterface(std::make_shared < CameraSystemsManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetCameraSystemsManager(cameraSystemsManagerInterface);
+    SystemManagerInterfaceSharedPtr systemManagerInterface(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetSystemManager(systemManagerInterface);
 
-	RenderingManagerInterfaceSharedPtr renderingManagerInterface(std::make_shared < RenderingManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetRenderingManager(renderingManagerInterface);
+    ResourceManagerInterfaceSharedPtr resourceManagerInterface(std::make_shared<ResourceManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetResourceManager(resourceManagerInterface);
 
-	GUIManagerInterfaceSharedPtr guiManagerInterface(std::make_shared < GUIManagerInterface>(MiddleLayerPlatform::Windows));
-	middleLayer->SetGUIManager(guiManagerInterface);
+    AudioManagerInterfaceSharedPtr audioManagerInterface(std::make_shared<AudioManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetAudioManager(audioManagerInterface);
+
+    CameraSystemsManagerInterfaceSharedPtr cameraSystemsManagerInterface(std::make_shared<CameraSystemsManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetCameraSystemsManager(cameraSystemsManagerInterface);
+
+    RenderingManagerInterfaceSharedPtr renderingManagerInterface(std::make_shared<RenderingManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetRenderingManager(renderingManagerInterface);
+
+    GUIManagerInterfaceSharedPtr guiManagerInterface(std::make_shared<GUIManagerInterface>(MiddleLayerPlatform::Windows));
+    middleLayer->SetGUIManager(guiManagerInterface);
 }
-
-

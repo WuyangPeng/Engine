@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.4 (2019/09/16 14:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 14:16)
 
 #include "WindowCreateParameterTesting.h"
 #include "CoreTools/Contract/Noexcept.h"
@@ -19,7 +22,7 @@ namespace Framework
 }
 
 Framework::WindowCreateParameterTesting::WindowCreateParameterTesting(const OStreamShared& stream, HWnd hwnd)
-    : ParentType{ stream }, m_Hwnd{ hwnd }
+    : ParentType{ stream }, hwnd{ hwnd }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -43,11 +46,11 @@ void Framework::WindowCreateParameterTesting::ValueTest()
     const WindowPoint leftTopCorner{};
     constexpr auto menu = nullptr;
 
-    TestingType parameter{ windowsName, style, m_Hwnd, menu, leftTopCorner };
+    TestingType parameter{ windowsName, style, hwnd, menu, leftTopCorner };
 
     ASSERT_EQUAL(parameter.GetWindowsName(), windowsName);
     ASSERT_ENUM_EQUAL(parameter.GetStyle(), style);
-    ASSERT_EQUAL(parameter.GetParent(), m_Hwnd);
+    ASSERT_EQUAL(parameter.GetParent(), hwnd);
     ASSERT_EQUAL(parameter.GetMenu(), menu);
     ASSERT_EQUAL(parameter.GetLeftTopCorner(), leftTopCorner);
 }

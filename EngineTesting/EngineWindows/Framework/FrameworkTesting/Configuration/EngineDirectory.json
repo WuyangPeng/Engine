@@ -2,8 +2,7 @@
   "Resource": "Resource",
   "Configuration": "Configuration",
 
-  "OpenGL":
-  {
+  "OpenGL": {
     "Directory": "",
     "BigEndian": "BigEndian",
     "LittleEndian": "",
@@ -14,8 +13,7 @@
     "Image": "Image"
   },
 
-  "DirectX":
-  {
+  "DirectX": {
     "Directory": "",
     "BigEndian": "BigEndian",
     "LittleEndian": "",
@@ -26,8 +24,7 @@
     "Image": "Image"
   },
 
-  "Default": 
-  {
+  "Default": {
     "Directory": "",
     "BigEndian": "BigEndian",
     "LittleEndian": "",
@@ -36,5 +33,5 @@
     "Texture": "Texture",
     "Vertex": "Vertex",
     "Image": "Image"
-  } 
+  }
 }

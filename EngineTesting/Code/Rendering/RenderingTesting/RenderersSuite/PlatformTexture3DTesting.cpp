@@ -1,22 +1,18 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.0.3 (2019/09/09 10:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/15 16:48)
 
 #include "PlatformTexture3DTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"  
+#include "CoreTools/Helper/ClassInvariantMacro.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTexture3DTesting) 
-#include SYSTEM_WARNING_DISABLE(26440)
-void Rendering::PlatformTexture3DTesting
-	::MainTest()
-{ 
-	
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTexture3DTesting)
+
+void Rendering::PlatformTexture3DTesting::MainTest() noexcept
+{
 }
-
-
-
-
- 

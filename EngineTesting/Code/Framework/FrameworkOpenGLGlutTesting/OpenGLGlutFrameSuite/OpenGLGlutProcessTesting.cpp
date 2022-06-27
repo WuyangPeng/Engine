@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.4 (2019/09/11 14:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/24 15:21)
 
 #include "OpenGLGlutProcessTesting.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
@@ -10,11 +13,9 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/OpenGLGlutFrame/Flags/FrameParameter.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutProcessDetail.h"
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26455)
-#include SYSTEM_WARNING_DISABLE(26440)
-Framework::OpenGLGlutProcessOpenGLGlutCallBack::OpenGLGlutProcessOpenGLGlutCallBack()
-    : ParentType(0)
+
+Framework::OpenGLGlutProcessOpenGLGlutCallBack::OpenGLGlutProcessOpenGLGlutCallBack() noexcept
+    : ParentType{ System::g_Microseconds / 60 }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,10 +25,10 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, OpenGLGlutProcessOpenGLGlutCal
 namespace Framework
 {
     template <>
-    OpenGLGlutProcess<Framework::OpenGLGlutProcessOpenGLGlutCallBack>::OpenGLGlutProcess(int64_t delta)
-
+    OpenGLGlutProcess<Framework::OpenGLGlutProcessOpenGLGlutCallBack>::OpenGLGlutProcess(MAYBE_UNUSED int64_t delta)
     {
-        delta;
+        CoreTools::DisableNoexcept();
+
         FRAMEWORK_SELF_CLASS_IS_VALID_9;
     }
 }
@@ -63,73 +64,85 @@ void Framework::OpenGLGlutProcessTesting::CallbackSucceedTest()
 
     ASSERT_UNEQUAL_NULL_PTR(renderScenePtr);
 
-    renderScenePtr();
+    if (renderScenePtr != nullptr)
+        renderScenePtr();
 
     OpenGLGlutProcessManager::ChangeSizeCallback changeSizePtr = process.GetChangeSizeCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(changeSizePtr);
 
-    changeSizePtr(0, 0);
+    if (changeSizePtr != nullptr)
+        changeSizePtr(0, 0);
 
     OpenGLGlutProcessManager::TimerFunctionCallback timerFunctionPtr = process.GetTimerFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(timerFunctionPtr);
 
-    timerFunctionPtr(0);
+    if (timerFunctionPtr != nullptr)
+        timerFunctionPtr(0);
 
     OpenGLGlutProcessManager::SpecialKeysDownCallback specialKeysPtr = process.GetSpecialKeysDownCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(specialKeysPtr);
 
-    specialKeysPtr(0, 0, 0);
+    if (specialKeysPtr != nullptr)
+        specialKeysPtr(0, 0, 0);
 
     OpenGLGlutProcessManager::KeyboardDownCallback keyboardPtr = process.GetKeyboardDownCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(keyboardPtr);
 
-    keyboardPtr(0, 0, 0);
+    if (keyboardPtr != nullptr)
+        keyboardPtr(0, 0, 0);
 
     OpenGLGlutProcessManager::SpecialKeysUpCallback specialKeysUpPtr = process.GetSpecialKeysUpCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(specialKeysUpPtr);
 
-    specialKeysUpPtr(0, 0, 0);
+    if (specialKeysUpPtr != nullptr)
+        specialKeysUpPtr(0, 0, 0);
 
     OpenGLGlutProcessManager::KeyboardUpCallback keyboardUpPtr = process.GetKeyboardUpCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(keyboardUpPtr);
 
-    keyboardUpPtr(0, 0, 0);
+    if (keyboardUpPtr != nullptr)
+        keyboardUpPtr(0, 0, 0);
 
     OpenGLGlutProcessManager::MouseFunctionCallback mouseFunctionPtr = process.GetMouseFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(mouseFunctionPtr);
 
-    mouseFunctionPtr(0, 0, 0, 0);
+    if (mouseFunctionPtr != nullptr)
+        mouseFunctionPtr(0, 0, 0, 0);
 
     OpenGLGlutProcessManager::MotionFunctionCallback motionFunctionPtr = process.GetMotionFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(motionFunctionPtr);
 
-    motionFunctionPtr(0, 0);
+    if (motionFunctionPtr != nullptr)
+        motionFunctionPtr(0, 0);
 
     OpenGLGlutProcessManager::PassiveMotionFunctionCallback passiveFunctionPtr = process.GetPassiveMotionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(passiveFunctionPtr);
 
-    passiveFunctionPtr(0, 0);
+    if (passiveFunctionPtr != nullptr)
+        passiveFunctionPtr(0, 0);
 
     OpenGLGlutProcessManager::IdleFunctionCallback idleFunction = process.GetIdleFunctionCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(idleFunction);
 
-    idleFunction();
+    if (idleFunction != nullptr)
+        idleFunction();
 
     OpenGLGlutProcessManager::ProcessMenuCallback processMenuFunction = process.GetProcessMenuCallback();
 
     ASSERT_UNEQUAL_NULL_PTR(processMenuFunction);
 
-    processMenuFunction(0);
+    if (processMenuFunction != nullptr)
+        processMenuFunction(0);
 
     OpenGLGlutProcessManager::TerminateCallback terminateFunction = process.GetTerminateCallback();
 
@@ -139,7 +152,6 @@ void Framework::OpenGLGlutProcessTesting::CallbackSucceedTest()
 void Framework::OpenGLGlutProcessTesting::SetMillisecondSucceedTest()
 {
     OpenGLGlutProcess<OpenGLGlutProcessOpenGLGlutCallBack> process{ System::g_Microseconds / 60 };
-    ;
 
     constexpr auto millisecond = 17;
 

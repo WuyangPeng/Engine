@@ -1,27 +1,28 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/06 15:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/14 18:29)
 
 #include "ShaderFloatTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Rendering/ShaderFloats/ShaderFloat.h"
-
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "Rendering/ShaderFloats/ShaderFloat.h"
 
 using std::vector;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, ShaderFloatTesting)
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
+
 void Rendering::ShaderFloatTesting::MainTest()
 {
     CoreTools::InitTerm::ExecuteInitializers();
@@ -83,7 +84,7 @@ void Rendering::ShaderFloatTesting::InitTest()
         for (int registerIndex = 0; registerIndex < 4; ++registerIndex)
         {
             ASSERT_APPROXIMATE(thirdShaderFloat[i * 4 + registerIndex], static_cast<float>(i), 1e-8f);
-            ASSERT_APPROXIMATE(fifthData[registerIndex], fourthData[registerIndex], 1e-8f);
+            ASSERT_APPROXIMATE(fifthData.at(registerIndex), fourthData.at(registerIndex), 1e-8f);
         }
     }
 }
@@ -114,43 +115,6 @@ void Rendering::ShaderFloatTesting::CopyTest()
     ASSERT_EQUAL(secondShaderFloat.GetNumRegisters(), firstNumRegisters);
 }
 
-void Rendering::ShaderFloatTesting::StreamTest()
+void Rendering::ShaderFloatTesting::StreamTest() noexcept
 {
-    // 	const int thirdNumRegisters = 10;
-    //
-    // 	CoreTools::OutTopLevel outTopLevel;
-    // 	ShaderFloatSharedPtr firstShaderFloat(new ShaderFloat(thirdNumRegisters));
-    //
-    // 	for (int i = 0; i < thirdNumRegisters;++i)
-    // 	{
-    // 		vector<float> data(4, static_cast<float>(i));
-    // 		firstShaderFloat->SetRegister(i,data);
-    // 	}
-    //
-    // 	outTopLevel.Insert(firstShaderFloat);
-    //
-    // 	CoreTools::BufferOutStream outStream(outTopLevel);
-    //
-    // 	CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr =
-    // 		    outStream.GetBufferOutStreamInformation();
-    //
-    // 	CoreTools::BufferInStream inStream(fileBufferPtr);
-    //
-    // 	CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-    //
-    // 	ASSERT_EQUAL(inTopLevel.GetTopLevelSize(),1);
-    //
-    // 	ShaderFloatSharedPtr secondShaderFloat =
-    // 		inTopLevel[0].PolymorphicDowncastObjectSharedPtr<ShaderFloatSharedPtr>();
-    //
-    // 	ASSERT_UNEQUAL_NULL_PTR(secondShaderFloat);
-    //
-    // 	ASSERT_EQUAL(firstShaderFloat->GetRegisters().size(),
-    // 		         secondShaderFloat->GetRegisters().size());
-    //
-    // 	for (unsigned registerIndex = 0; registerIndex < firstShaderFloat->GetRegisters().size(); ++registerIndex)
-    // 	{
-    // 		ASSERT_APPROXIMATE(firstShaderFloat->GetRegisters()[registerIndex],
-    // 			               secondShaderFloat->GetRegisters()[registerIndex], 1e-8f);
-    // 	}
 }

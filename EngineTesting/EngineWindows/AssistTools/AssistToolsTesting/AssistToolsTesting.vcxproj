@@ -177,6 +177,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -191,6 +195,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -209,6 +217,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -227,6 +239,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -241,6 +257,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -255,7 +275,11 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
-  </ItemDefinitionGroup>  
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -273,6 +297,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -291,6 +319,10 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Resource/GenerateProjectsSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/GenerateProjectsSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\AssistToolsTesting.json" />

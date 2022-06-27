@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.0.2 (2020/06/24 21:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/27 11:10)
 
 #include "PixelScreenTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -19,7 +22,7 @@ using std::swap;
 using std::uniform_int;
 
 Framework::PixelScreenTesting::PixelScreenTesting(const OStreamShared& stream)
-    : ParentType{ stream }, m_Random{ minColour, maxColour }
+    : ParentType{ stream }, random{ minColour, maxColour }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -59,7 +62,7 @@ void Framework::PixelScreenTesting::DefaultColourTest()
 {
     auto pixelScreen = CreateTestPixelScreen();
 
-    AssertColour(pixelScreen, sm_Black);
+    AssertColour(pixelScreen, black);
 }
 
 void Framework::PixelScreenTesting::ClearScreenTest()
@@ -81,9 +84,9 @@ void Framework::PixelScreenTesting::ClearScreenTest()
 
 Framework::PixelScreenTesting::Colour Framework::PixelScreenTesting::GetRandomColour(default_random_engine& generator)
 {
-    const auto red = m_Random(generator);
-    const auto green = m_Random(generator);
-    const auto blue = m_Random(generator);
+    const auto red = random(generator);
+    const auto green = random(generator);
+    const auto blue = random(generator);
 
     return Colour{ red, green, blue };
 }
@@ -204,7 +207,7 @@ void Framework::PixelScreenTesting::SetThickPixelTest()
                 }
                 else
                 {
-                    ASSERT_EQUAL(colour, sm_Black);
+                    ASSERT_EQUAL(colour, black);
                 }
             }
         }
@@ -250,8 +253,8 @@ void Framework::PixelScreenTesting::DrawLineTest()
             auto min = xMin < xMax ? xMin : xMax;
             auto max = xMin < xMax ? xMax : xMin;
 
-            AssertColourOnX(pixelScreen, sm_Black, 0, min);
-            AssertColourOnX(pixelScreen, sm_Black, max + 1, pixelScreen.GetScreenWidth());
+            AssertColourOnX(pixelScreen, black, 0, min);
+            AssertColourOnX(pixelScreen, black, max + 1, pixelScreen.GetScreenWidth());
 
             for (int widthIndex = min; widthIndex <= max && widthIndex < pixelScreen.GetScreenWidth(); ++widthIndex)
             {
@@ -275,7 +278,7 @@ void Framework::PixelScreenTesting::DrawLineTest()
                     }
                     else
                     {
-                        ASSERT_EQUAL(colour, sm_Black);
+                        ASSERT_EQUAL(colour, black);
                     }
                 }
             }
@@ -287,8 +290,8 @@ void Framework::PixelScreenTesting::DrawLineTest()
             auto min = yMin < yMax ? yMin : yMax;
             auto max = yMin < yMax ? yMax : yMin;
 
-            AssertColourOnY(pixelScreen, sm_Black, 0, min);
-            AssertColourOnY(pixelScreen, sm_Black, max + 1, pixelScreen.GetScreenHeight());
+            AssertColourOnY(pixelScreen, black, 0, min);
+            AssertColourOnY(pixelScreen, black, max + 1, pixelScreen.GetScreenHeight());
 
             for (int heightIndex = min; heightIndex <= max && heightIndex < pixelScreen.GetScreenHeight(); ++heightIndex)
             {
@@ -312,7 +315,7 @@ void Framework::PixelScreenTesting::DrawLineTest()
                     }
                     else
                     {
-                        ASSERT_EQUAL(colour, sm_Black);
+                        ASSERT_EQUAL(colour, black);
                     }
                 }
             }
@@ -369,7 +372,7 @@ void Framework::PixelScreenTesting::DrawRectangleSolidTest()
                 }
                 else
                 {
-                    ASSERT_EQUAL(colour, sm_Black);
+                    ASSERT_EQUAL(colour, black);
                 }
             }
         }
@@ -426,7 +429,7 @@ void Framework::PixelScreenTesting::DrawRectangleHollowTest()
                 }
                 else
                 {
-                    ASSERT_EQUAL(colour, sm_Black);
+                    ASSERT_EQUAL(colour, black);
                 }
             }
         }
@@ -475,7 +478,7 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
 
                 if (radius + 0.5 < distance)
                 {
-                    ASSERT_EQUAL(colour, sm_Black);
+                    ASSERT_EQUAL(colour, black);
                 }
                 else if (distance < radius)
                 {
@@ -515,7 +518,7 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
                         }
                         else
                         {
-                            ASSERT_EQUAL(colour, sm_Black);
+                            ASSERT_EQUAL(colour, black);
                         }
                     }
                     else
@@ -542,7 +545,7 @@ void Framework::PixelScreenTesting::DrawCircleSolidTest()
                         }
                         else
                         {
-                            ASSERT_EQUAL(colour, sm_Black);
+                            ASSERT_EQUAL(colour, black);
                         }
                     }
                 }
@@ -631,12 +634,12 @@ void Framework::PixelScreenTesting::DrawCircleHollowTest()
 
                     if (!isClearColour)
                     {
-                        ASSERT_EQUAL(colour, sm_Black);
+                        ASSERT_EQUAL(colour, black);
                     }
                 }
                 else
                 {
-                    ASSERT_EQUAL(colour, sm_Black);
+                    ASSERT_EQUAL(colour, black);
                 }
             }
         }

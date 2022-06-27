@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.3.1.0 (2020/06/28 22:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/26 22:44)
 
 #include "CameraModelMiddleLayerTesting.h"
 #include "System/Helper/PragmaWarning/Format.h"
@@ -38,7 +41,6 @@ namespace Framework
 {
     using TestingType = CameraModelMiddleLayer;
 }
-#include SYSTEM_WARNING_DISABLE(26440)
 
 Framework::CameraModelMiddleLayerTesting::CameraModelMiddleLayerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -208,169 +210,8 @@ void Framework::CameraModelMiddleLayerTesting::CameraMotionSpeedTest()
     middleLayer.Terminate();
 }
 
-void Framework::CameraModelMiddleLayerTesting::CameraMotionMoveTest()
+void Framework::CameraModelMiddleLayerTesting::CameraMotionMoveTest() noexcept
 {
-    /*constexpr auto platform = MiddleLayerPlatform::Windows;
-
-	TestingType middleLayer{ platform };
-
-	auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
-
-	middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
-
-	EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment") ,SYSTEM_TEXT("") };
-	ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-	ASSERT_TRUE(middleLayer.Initialize());
-
-	constexpr auto translationSpeed = 0.01f;
-	constexpr auto rotationSpeed = 0.01f;
-	 
-	Rendering::CameraSmartPointer camera{ CoreTools::New0<Rendering::Camera>() };
-	auto direction = camera->GetDirectionVector();
-	auto up = camera->GetUpVector();
-	auto right = camera->GetRightVector();
-
-	default_random_engine generator{ GetEngineRandomSeed() };
-	const uniform_int<> random{ 0, 1 };
-
-	const auto testLoopCount = GetTestLoopCount();
-	for (auto i = 0; i < testLoopCount; ++i)
-	{
-		const auto moveForward = random(generator) == 0 ? true : false;
-
-		middleLayer.SetMoveForward(moveForward);
-
-		if (moveForward)
-		{
-			auto position = camera->GetPosition();
-			position += translationSpeed * direction;
-			camera->SetPosition(position);
-		}
-
-		const auto moveBackward = random(generator) == 0 ? true : false;
-
-		middleLayer.SetMoveBackward(moveBackward);
-
-		if (moveBackward)
-		{
-			auto position = camera->GetPosition();
-			position -= translationSpeed * direction;
-			camera->SetPosition(position);
-		}
-
-		const auto turnLeft = random(generator) == 0 ? true : false;
-
-		middleLayer.SetTurnLeft(turnLeft);
-
-		if (turnLeft)
-		{
-			const Mathematics::Matrixf rotation{ up, rotationSpeed };
-			direction = rotation * direction;
-			right = rotation * right;
-
-			auto directionVector = rotation * camera->GetDirectionVector();
-			auto upVector = rotation * camera->GetUpVector();
-			auto rightVector = rotation * camera->GetRightVector();
-			camera->SetAxes(directionVector, upVector, rightVector);
-		}
-
-		const auto turnRight = random(generator) == 0 ? true : false;
-
-		middleLayer.SetTurnRight(turnRight);
-
-		if (turnRight)
-		{
-			const Mathematics::Matrixf rotation{ up, -rotationSpeed };
-			direction = rotation * direction;
-			right = rotation * right;
-
-			auto directionVector = rotation * camera->GetDirectionVector();
-			auto upVector = rotation * camera->GetUpVector();
-			auto rightVector = rotation * camera->GetRightVector();
-			camera->SetAxes(directionVector, upVector, rightVector);
-		}
-
-		const auto lookUp = random(generator) == 0 ? true : false;
-
-		middleLayer.SetLookUp(lookUp);
-
-		if (lookUp)
-		{
-			const Mathematics::Matrixf rotation{ right, rotationSpeed };
-
-			auto directionVector = rotation * camera->GetDirectionVector();
-			auto upVector = rotation * camera->GetUpVector();
-			auto rightVector = rotation * camera->GetRightVector();
-			camera->SetAxes(directionVector, upVector, rightVector);
-		}
-
-		const auto lookDown = random(generator) == 0 ? true : false;
-
-		middleLayer.SetLookDown(lookDown);
-
-		if (lookDown)
-		{
-			const Mathematics::Matrixf rotation{ right, -rotationSpeed };
-
-			auto directionVector = rotation * camera->GetDirectionVector();
-			auto upVector = rotation * camera->GetUpVector();
-			auto rightVector = rotation * camera->GetRightVector();
-			camera->SetAxes(directionVector, upVector, rightVector);
-		}
-
-		const auto moveUp = random(generator) == 0 ? true : false;
-
-		middleLayer.SetMoveUp(moveUp);
-
-		if (moveUp)
-		{
-			auto position = camera->GetPosition();
-			position += translationSpeed * up;
-			camera->SetPosition(position);
-		}
-
-		const auto moveDown = random(generator) == 0 ? true : false;
-
-		middleLayer.SetMoveDown(moveDown);
-
-		if (moveDown)
-		{
-			auto position = camera->GetPosition();
-			position -= translationSpeed * up;
-			camera->SetPosition(position);
-		}
-
-		const auto moveRight = random(generator) == 0 ? true : false;
-
-		middleLayer.SetMoveRight(moveRight);
-
-		if (moveRight)
-		{
-			auto position = camera->GetPosition();
-			position += translationSpeed * right;
-			camera->SetPosition(position);
-		}
-
-		const auto moveLeft = random(generator) == 0 ? true : false;
-
-		middleLayer.SetMoveLeft(moveLeft);
-
-		if (moveLeft)
-		{
-			auto position = camera->GetPosition();
-			position -= translationSpeed * right;
-			camera->SetPosition(position);
-		}
-
-		middleLayer.MoveCamera();
-
-		APointTest(camera->GetPosition(), middleLayer.GetCameraPosition(),__func__, i);
-		AVectorTest(camera->GetDirectionVector(), middleLayer.GetCameraDirectionVector(), __func__, i);
-		AVectorTest(camera->GetUpVector(), middleLayer.GetCameraUpVector(), __func__, i);
-		AVectorTest(camera->GetRightVector(), middleLayer.GetCameraRightVector(), __func__, i); 
-	}
-
-	middleLayer.Terminate();*/
 }
 
 void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
@@ -388,7 +229,6 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
     ASSERT_TRUE(middleLayer.Initialize());
 
     middleLayer.SetTrackBallDow(false);
-
     default_random_engine generator{ GetEngineRandomSeed() };
     const uniform_int<> random{ 0, 1 };
     const uniform_int<> selectRandom{ 0, 2 };
@@ -448,8 +288,6 @@ void Framework::CameraModelMiddleLayerTesting::MoveObjectTest()
         rotate.Orthonormalize();
 
         ASSERT_TRUE(middleLayer.MoveObject());
-
-        //MatrixTest(rotate, middleLayer.GetMotionObjectLocalTransform().GetRotate(), __func__, i);
 
         middleLayer.Terminate();
     }

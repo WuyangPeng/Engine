@@ -1,36 +1,29 @@
 {
-  "macroSuite": 
-  {
+  "macroSuite": {
 
   },
 
-  "miscellaneousSuite": 
-  {
+  "miscellaneousSuite": {
 
   },
 
-  "pathSearchSuite": 
-  {
+  "pathSearchSuite": {
 
   },
 
-  "finiteStateMachineSuite": 
-  {
+  "finiteStateMachineSuite": {
 
   },
 
-  "fuzzyStateMachineSuite": 
-  {
+  "fuzzyStateMachineSuite": {
 
   },
 
-  "geneticAlgorithmSuite": 
-  {
+  "geneticAlgorithmSuite": {
 
   },
 
-  "neuralNetworkSuite": 
-  {
+  "neuralNetworkSuite": {
 
   }
 }

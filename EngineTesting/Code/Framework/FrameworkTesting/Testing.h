@@ -1,24 +1,27 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.3.0.1 (2020/05/22 17:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/24 16:19)
 
 #ifndef FRAMEWORK_TESTING_H
 #define FRAMEWORK_TESTING_H
 
+#include "AndroidFrameSuite/AndroidFrameSuite.h"
+#include "ApplicationSuite/ApplicationSuite.h"
+#include "ConsoleFrameSuite/ConsoleFrameSuite.h"
 #include "HelperSuite/HelperSuite.h"
+#include "LinuxFrameSuite/LinuxFrameSuite.h"
+#include "MacintoshFrameSuite/MacintoshFrameSuite.h"
 #include "MainFunctionHelperSuite/MainFunctionHelperSuite.h"
+#include "MiddleLayerSuite/MiddleLayerSuite.h"
+#include "OpenGLGlutFrameSuite/OpenGLGlutFrameSuite.h"
 #include "WindowCreateSuite/WindowCreateSuite.h"
 #include "WindowProcessSuite/WindowProcessSuite.h"
 #include "WindowRegisterSuite/WindowRegisterSuite.h"
-#include "ApplicationSuite/ApplicationSuite.h"
-#include "MiddleLayerSuite/MiddleLayerSuite.h"
 #include "WindowsAPIFrameSuite/WindowsAPIFrameSuite.h"
-#include "OpenGLGlutFrameSuite/OpenGLGlutFrameSuite.h"
-#include "AndroidFrameSuite/AndroidFrameSuite.h"
-#include "LinuxFrameSuite/LinuxFrameSuite.h"
-#include "MacintoshFrameSuite/MacintoshFrameSuite.h"
-#include "ConsoleFrameSuite/ConsoleFrameSuite.h"
 
-#endif // FRAMEWORK_TESTING_H
+#endif  // FRAMEWORK_TESTING_H

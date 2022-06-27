@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.0.3 (2019/09/04 18:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.8.0.9 (2022/06/14 18:57)
 
 #ifndef RENDERING_SCENE_GRAPH_SUITE_VISUAL_TEST_H
 #define RENDERING_SCENE_GRAPH_SUITE_VISUAL_TEST_H
@@ -18,21 +21,25 @@ namespace Rendering
         using ParentType = Visual;
 
     public:
-        explicit VisualTest(VisualPrimitiveType type = VisualPrimitiveType::None);
-        VisualTest(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat,
-                   const VertexBufferSharedPtr& vertexbuffer, const IndexBufferSharedPtr& indexbuffer);
+        explicit VisualTest(VisualPrimitiveType type);
+        VisualTest(VisualPrimitiveType type,
+                   const VertexFormatSharedPtr& vertexformat,
+                   const VertexBufferSharedPtr& vertexbuffer,
+                   const IndexBufferSharedPtr& indexbuffer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_OBJECT_FACTORY_DECLARE(VisualTest);
         CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
-        ControllerInterfaceSharedPtr Clone() const override;
+        NODISCARD ControllerInterfaceSharedPtr Clone() const override;
 
-        ObjectInterfaceSharedPtr CloneObject() const override;
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
     };
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
+
     CORE_TOOLS_STREAM_REGISTER(VisualTest);
 
 #include STSTEM_WARNING_POP

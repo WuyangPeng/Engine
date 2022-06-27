@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.3 (2019/09/05 09:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++20
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.9 (2022/06/14 19:40)
 
 #include "CameraTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -10,6 +13,8 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
+#include "CoreTools/ObjectSystems/InitTerm.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
@@ -21,17 +26,6 @@
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 
-#include "CoreTools/ObjectSystems/InitTerm.h"
-#include "CoreTools/ObjectSystems/ObjectManager.h"
-
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
 #include <random>
 #include <vector>
 
@@ -57,24 +51,17 @@ void Rendering::CameraTesting::MainTest()
 
     CoreTools::InitTerm::ExecuteTerminators();
 }
-#include SYSTEM_WARNING_DISABLE(26440)
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26409)
-#include SYSTEM_WARNING_DISABLE(26496)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26451)
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26485)
+
 void Rendering::CameraTesting::FrameTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Camera::APoint firstPosition(firstFloatRandomDistribution(generator),
-                                     firstFloatRandomDistribution(generator),
-                                     firstFloatRandomDistribution(generator));
+        const Camera::APoint firstPosition(firstFloatRandomDistribution(generator),
+                                           firstFloatRandomDistribution(generator),
+                                           firstFloatRandomDistribution(generator));
 
         Camera::AVector firstVector(firstFloatRandomDistribution(generator),
                                     firstFloatRandomDistribution(generator),
@@ -93,56 +80,13 @@ void Rendering::CameraTesting::FrameTest()
                                     firstFloatRandomDistribution(generator));
 
         thirdVector.Normalize();
-
-        //         Mathematics::AVectorOrthonormalizef orthonormalize = Orthonormalize(firstVector, secondVector, thirdVector,1e-5f);
-        //
-        //         firstVector = orthonormalize.GetUVector();
-        //         secondVector = orthonormalize.GetVVector();
-        //         thirdVector = orthonormalize.GetWVector();
-        //
-        //         Camera::Matrix firstMatrix(thirdVector[0], thirdVector[1],
-        //                                    thirdVector[2],-Dot(firstPosition, thirdVector),
-        // 								   secondVector[0], secondVector[1],
-        // 								   secondVector[2],-Dot(firstPosition, secondVector),
-        // 								   firstVector[0], firstVector[1],
-        // 								   firstVector[2],-Dot(firstPosition, firstVector),
-        // 								   0.0f,0.0f,0.0f,1.0f);
-        //
-        //         Camera::Matrix secondMatrix(secondVector[0], secondVector[1],
-        //                                     secondVector[2],-Dot(firstPosition, secondVector),
-        // 									firstVector[0], firstVector[1],
-        // 									firstVector[2],-Dot(firstPosition, firstVector),
-        // 									thirdVector[0], thirdVector[1],
-        // 									thirdVector[2],-Dot(firstPosition, thirdVector),
-        // 									0.0f,0.0f,0.0f,1.0f);
-        //
-        //         Camera firstCamera(true,1e-5f);
-        //
-        //         firstCamera.SetFrame(firstPosition, firstVector,  secondVector, thirdVector);
-        //
-        //         ASSERT_TRUE(Approximate(firstCamera.GetPosition(), firstPosition,1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera.GetDirectionVector(), firstVector,1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera.GetUpVector(), secondVector,1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera.GetRightVector(), thirdVector,1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera.GetViewMatrix(), firstMatrix,1e-3f));
-        //
-        //         Camera secondCamera(false,1e-5f);
-        //
-        //         secondCamera.SetPosition(firstPosition);
-        //         secondCamera.SetAxes(thirdVector, firstVector, secondVector);
-        //
-        //         ASSERT_TRUE(Approximate(secondCamera.GetPosition(), firstPosition,1e-5f));
-        //         ASSERT_TRUE(Approximate(secondCamera.GetDirectionVector(), thirdVector,1e-5f));
-        //         ASSERT_TRUE(Approximate(secondCamera.GetUpVector(), firstVector,1e-5f));
-        //         ASSERT_TRUE(Approximate(secondCamera.GetRightVector(), secondVector,1e-5f));
-        //         ASSERT_TRUE(Approximate(secondCamera.GetViewMatrix(), secondMatrix,1e-3f));
     }
 }
 
 void Rendering::CameraTesting::FrustumTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
@@ -158,11 +102,11 @@ void Rendering::CameraTesting::FrustumTest()
 
         float rightMax = -rightMin;
 
-        float frustum[6] = { directionMin * 2.0f, directionMax, upMin / 2.0f, upMax, rightMin, rightMax * 1.5f };
+        const std::array<float, 6> frustum{ directionMin * 2.0f, directionMax, upMin / 2.0f, upMax, rightMin, rightMax * 1.5f };
 
-        float ratio = upMax / directionMin;
-        float upFieldOfViewDegrees = 2.0f * Mathematics::MathF::ATan(ratio) * Mathematics::MathF::GetRadianToDegree();
-        float aspectRatio = rightMin / upMin;
+        const float ratio = upMax / directionMin;
+        const float upFieldOfViewDegrees = 2.0f * Mathematics::MathF::ATan(ratio) * Mathematics::MathF::GetRadianToDegree();
+        const float aspectRatio = rightMin / upMin;
 
         Camera firstCamera(true);
 
@@ -172,12 +116,17 @@ void Rendering::CameraTesting::FrustumTest()
 
         const float* firstFrustum = firstCamera.GetFrustum();
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
         ASSERT_APPROXIMATE(firstFrustum[0], directionMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[1], directionMax, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[2], upMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[3], upMax, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[4], rightMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[5], rightMax, 1e-5f);
+
+#include STSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(firstCamera.GetDirectionMin(), directionMin, 1e-5f);
         ASSERT_APPROXIMATE(firstCamera.GetDirectionMax(), directionMax, 1e-5f);
@@ -196,11 +145,14 @@ void Rendering::CameraTesting::FrustumTest()
 
         Camera secondCamera(false);
 
-        secondCamera.SetFrustum(frustum);
+        secondCamera.SetFrustum(frustum.data());
 
         ASSERT_FALSE(secondCamera.IsPerspective());
 
         firstFrustum = secondCamera.GetFrustum();
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(firstFrustum[0], directionMin * 2.0f, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[1], directionMax, 1e-5f);
@@ -208,6 +160,8 @@ void Rendering::CameraTesting::FrustumTest()
         ASSERT_APPROXIMATE(firstFrustum[3], upMax, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[4], rightMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[5], rightMax * 1.5f, 1e-5f);
+
+#include STSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(secondCamera.GetDirectionMin(), directionMin * 2.0f, 1e-5f);
         ASSERT_APPROXIMATE(secondCamera.GetDirectionMax(), directionMax, 1e-5f);
@@ -228,9 +182,12 @@ void Rendering::CameraTesting::FrustumTest()
 
         firstFrustum = thirdCamera.GetFrustum();
 
-        float halfAngleRadians = 0.5f * upFieldOfViewDegrees * Mathematics::MathF::GetDegreeToRadian();
+        const float halfAngleRadians = 0.5f * upFieldOfViewDegrees * Mathematics::MathF::GetDegreeToRadian();
 
-        float tanHalfAngleRadians = Mathematics::MathF::Tan(halfAngleRadians);
+        const float tanHalfAngleRadians = Mathematics::MathF::Tan(halfAngleRadians);
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
 
         ASSERT_APPROXIMATE(firstFrustum[0], directionMin, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[1], directionMax, 1e-5f);
@@ -238,6 +195,8 @@ void Rendering::CameraTesting::FrustumTest()
         ASSERT_APPROXIMATE(firstFrustum[3], directionMin * tanHalfAngleRadians, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[4], -aspectRatio * directionMin * tanHalfAngleRadians, 1e-5f);
         ASSERT_APPROXIMATE(firstFrustum[5], aspectRatio * directionMin * tanHalfAngleRadians, 1e-5f);
+
+#include STSTEM_WARNING_POP
 
         ASSERT_APPROXIMATE(thirdCamera.GetDirectionMin(), directionMin, 1e-5f);
         ASSERT_APPROXIMATE(thirdCamera.GetDirectionMax(), directionMax, 1e-5f);
@@ -259,22 +218,22 @@ void Rendering::CameraTesting::FrustumTest()
 void Rendering::CameraTesting::ProjectionMatrixTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
-    std::uniform_real<float> secondFloatRandomDistribution(0.0f, 180.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> secondFloatRandomDistribution(0.0f, 180.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        float directionMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
+        const float directionMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
 
-        float directionMax = -directionMin;
+        const float directionMax = -directionMin;
 
-        float upMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
+        const float upMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
 
-        float upMax = -upMin;
+        const float upMax = -upMin;
 
-        float rightMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
+        const float rightMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
 
-        float rightMax = -rightMin;
+        const float rightMax = -rightMin;
 
         Camera firstCamera(true);
 
@@ -282,35 +241,35 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
 
         DepthType depthType = firstCamera.GetDepthType();
 
-        float invDirectionDifference = 1.0f / (directionMax - directionMin);
-        float invUpDifference = 1.0f / (upMax - upMin);
-        float invRightDifference = 1.0f / (rightMax - rightMin);
-        float rightSumDivideDifference = (rightMin + rightMax) * invRightDifference;
-        float upSumDivideDifference = (upMin + upMax) * invUpDifference;
-        float directionSumDivideDifference = (directionMin + directionMax) * invDirectionDifference;
+        const float invDirectionDifference = 1.0f / (directionMax - directionMin);
+        const float invUpDifference = 1.0f / (upMax - upMin);
+        const float invRightDifference = 1.0f / (rightMax - rightMin);
+        const float rightSumDivideDifference = (rightMin + rightMax) * invRightDifference;
+        const float upSumDivideDifference = (upMin + upMax) * invUpDifference;
+        const float directionSumDivideDifference = (directionMin + directionMax) * invDirectionDifference;
 
-        float twoDirectionMinMultiplyInvRightDifference = 2.0f * directionMin * invRightDifference;
-        float twoDirectionMinMultiplyInvUpDifference = 2.0f * directionMin * invUpDifference;
-        float directionMaxMultiplyInvDirectionDifference = directionMax * invDirectionDifference;
-        float directionProductDivideDifference = directionMin * directionMaxMultiplyInvDirectionDifference;
-        float twoDirectionProductDivideDifference = 2.0f * directionProductDivideDifference;
+        const float twoDirectionMinMultiplyInvRightDifference = 2.0f * directionMin * invRightDifference;
+        const float twoDirectionMinMultiplyInvUpDifference = 2.0f * directionMin * invUpDifference;
+        const float directionMaxMultiplyInvDirectionDifference = directionMax * invDirectionDifference;
+        const float directionProductDivideDifference = directionMin * directionMaxMultiplyInvDirectionDifference;
+        const float twoDirectionProductDivideDifference = 2.0f * directionProductDivideDifference;
 
         if (depthType == DepthType::ZeroToOne)
         {
-            Camera::Matrix projection(twoDirectionMinMultiplyInvRightDifference, 0.0f, -rightSumDivideDifference, 0.0f,
-                                      0.0f, twoDirectionMinMultiplyInvUpDifference, -upSumDivideDifference, 0.0f,
-                                      0.0f, 0.0f, directionMaxMultiplyInvDirectionDifference, -directionProductDivideDifference,
-                                      0.0f, 0.0f, 1.0f, 0.0f);
+            const Camera::Matrix projection(twoDirectionMinMultiplyInvRightDifference, 0.0f, -rightSumDivideDifference, 0.0f,
+                                            0.0f, twoDirectionMinMultiplyInvUpDifference, -upSumDivideDifference, 0.0f,
+                                            0.0f, 0.0f, directionMaxMultiplyInvDirectionDifference, -directionProductDivideDifference,
+                                            0.0f, 0.0f, 1.0f, 0.0f);
 
             ASSERT_TRUE(Approximate(firstCamera.GetProjectionMatrix(), projection, 1e-5f));
             ASSERT_TRUE(Approximate(firstCamera.GetProjectionViewMatrix(), projection * firstCamera.GetViewMatrix(), 1e-5f));
         }
         else
         {
-            Camera::Matrix projection(twoDirectionMinMultiplyInvRightDifference, 0.0f, -rightSumDivideDifference, 0.0f,
-                                      0.0f, twoDirectionMinMultiplyInvUpDifference, -upSumDivideDifference, 0.0f,
-                                      0.0f, 0.0f, directionSumDivideDifference, -twoDirectionProductDivideDifference,
-                                      0.0f, 0.0f, 1.0f, 0.0f);
+            const Camera::Matrix projection(twoDirectionMinMultiplyInvRightDifference, 0.0f, -rightSumDivideDifference, 0.0f,
+                                            0.0f, twoDirectionMinMultiplyInvUpDifference, -upSumDivideDifference, 0.0f,
+                                            0.0f, 0.0f, directionSumDivideDifference, -twoDirectionProductDivideDifference,
+                                            0.0f, 0.0f, 1.0f, 0.0f);
 
             ASSERT_TRUE(Approximate(firstCamera.GetProjectionMatrix(), projection, 1e-5f));
             ASSERT_TRUE(Approximate(firstCamera.GetProjectionViewMatrix(), projection * firstCamera.GetViewMatrix(), 1e-5f));
@@ -321,52 +280,75 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
         secondCamera.SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 
         depthType = secondCamera.GetDepthType();
-        float twoInvRightDifference = 2.0f * invRightDifference;
+        const float twoInvRightDifference = 2.0f * invRightDifference;
 
-        float twoInvUpDifference = 2.0f * invUpDifference;
+        const float twoInvUpDifference = 2.0f * invUpDifference;
 
-        float twoInvDirectionDifference = 2.0f * invDirectionDifference;
+        const float twoInvDirectionDifference = 2.0f * invDirectionDifference;
 
-        float directionMinMultiplyInvDirectionDifference =
-            directionMin * invDirectionDifference;
+        const float directionMinMultiplyInvDirectionDifference = directionMin * invDirectionDifference;
 
         if (depthType == DepthType::ZeroToOne)
         {
-            Camera::Matrix projection(twoInvRightDifference, 0.0f, 0.0f, -rightSumDivideDifference,
-                                      0.0f, twoInvUpDifference, 0.0f, -upSumDivideDifference,
-                                      0.0f, 0.0f, invDirectionDifference, -directionMinMultiplyInvDirectionDifference,
-                                      0.0f, 0.0f, 0.0f, 1.0f);
+            const Camera::Matrix projection(twoInvRightDifference,
+                                            0.0f,
+                                            0.0f,
+                                            -rightSumDivideDifference,
+                                            0.0f,
+                                            twoInvUpDifference,
+                                            0.0f,
+                                            -upSumDivideDifference,
+                                            0.0f,
+                                            0.0f,
+                                            invDirectionDifference,
+                                            -directionMinMultiplyInvDirectionDifference,
+                                            0.0f,
+                                            0.0f,
+                                            0.0f,
+                                            1.0f);
 
             ASSERT_TRUE(Approximate(secondCamera.GetProjectionMatrix(), projection, 1e-5f));
             ASSERT_TRUE(Approximate(secondCamera.GetProjectionViewMatrix(), projection * secondCamera.GetViewMatrix(), 1e-5f));
         }
         else
         {
-            Camera::Matrix projection(twoInvRightDifference, 0.0f, 0.0f, -rightSumDivideDifference,
-                                      0.0f, twoInvUpDifference, 0.0f, -upSumDivideDifference,
-                                      0.0f, 0.0f, twoInvDirectionDifference, -directionSumDivideDifference,
-                                      0.0f, 0.0f, 0.0f, 1.0f);
+            const Camera::Matrix projection(twoInvRightDifference,
+                                            0.0f,
+                                            0.0f,
+                                            -rightSumDivideDifference,
+                                            0.0f,
+                                            twoInvUpDifference,
+                                            0.0f,
+                                            -upSumDivideDifference,
+                                            0.0f,
+                                            0.0f,
+                                            twoInvDirectionDifference,
+                                            -directionSumDivideDifference,
+                                            0.0f,
+                                            0.0f,
+                                            0.0f,
+                                            1.0f);
 
             ASSERT_TRUE(Approximate(secondCamera.GetProjectionMatrix(), projection, 1e-5f));
             ASSERT_TRUE(Approximate(secondCamera.GetProjectionViewMatrix(), projection * secondCamera.GetViewMatrix(), 1e-5f));
         }
 
-        Camera::Matrix firstMatrix(firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator));
+        const Camera::Matrix firstMatrix(firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator));
 
         firstCamera.SetProjectionMatrix(firstMatrix);
         secondCamera.SetProjectionMatrix(firstMatrix);
@@ -388,39 +370,39 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
         ASSERT_TRUE(Approximate(secondCamera.GetPreViewMatrix(), Camera::Matrix::GetIdentityMatrix(), 1e-5f));
         ASSERT_TRUE(Approximate(secondCamera.GetPostProjectionMatrix(), Camera::Matrix::GetIdentityMatrix(), 1e-5f));
 
-        Camera::Matrix secondMatrix(firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator),
-                                    firstFloatRandomDistribution(generator));
+        const Camera::Matrix secondMatrix(firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator),
+                                          firstFloatRandomDistribution(generator));
 
-        Camera::Matrix thirdMatrix(firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator));
+        const Camera::Matrix thirdMatrix(firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator));
 
         firstCamera.SetPreViewMatrix(secondMatrix);
 
@@ -440,38 +422,38 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
         ASSERT_TRUE(Approximate(firstCamera.GetPostProjectionMatrix(), thirdMatrix, 1e-5f));
         ASSERT_TRUE(Approximate(firstCamera.GetProjectionViewMatrix(), (thirdMatrix * (firstMatrix * firstCamera.GetViewMatrix())) * secondMatrix, 1e-5f));
 
-        Camera::APoint p00(-12.0f, -1.0f, 1.0);
-        Camera::APoint p10(1.0f, -11.0f, 2.0);
-        Camera::APoint p11(1.0f, 2.0f, 3.0);
-        Camera::APoint p01(-1.0f, 3.0f, -1.0);
+        const Camera::APoint p00(-12.0f, -1.0f, 1.0);
+        const Camera::APoint p10(1.0f, -11.0f, 2.0);
+        const Camera::APoint p11(1.0f, 2.0f, 3.0);
+        const Camera::APoint p01(-1.0f, 3.0f, -1.0);
 
-        float nearExtrude = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
-        float farExtrude = nearExtrude + 100.0f;
+        const float nearExtrude = Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator));
+        const float farExtrude = nearExtrude + 100.0f;
 
         Camera thirdCamera(false);
         thirdCamera.SetProjectionMatrix(p00, p10, p11, p01, nearExtrude, farExtrude);
 
-        Camera::APoint q000 = nearExtrude * p00;
-        Camera::APoint q100 = nearExtrude * p10;
-        Camera::APoint q110 = nearExtrude * p11;
-        Camera::APoint q010 = nearExtrude * p01;
+        const Camera::APoint q000 = nearExtrude * p00;
+        const Camera::APoint q100 = nearExtrude * p10;
+        const Camera::APoint q110 = nearExtrude * p11;
+        const Camera::APoint q010 = nearExtrude * p01;
 
-        Camera::APoint q001 = farExtrude * p00;
-        Camera::APoint q101 = farExtrude * p10;
-        Camera::APoint q111 = farExtrude * p11;
-        Camera::APoint q011 = farExtrude * p01;
+        const Camera::APoint q001 = farExtrude * p00;
+        const Camera::APoint q101 = farExtrude * p10;
+        const Camera::APoint q111 = farExtrude * p11;
+        const Camera::APoint q011 = farExtrude * p01;
 
-        Camera::AVector u0 = q100 - q000;
-        Camera::AVector u1 = q010 - q000;
-        Camera::AVector u2 = q001 - q000;
+        const Camera::AVector u0 = q100 - q000;
+        const Camera::AVector u1 = q010 - q000;
+        const Camera::AVector u2 = q001 - q000;
 
-        Camera::Matrix fourthMatrix(u0, u1, u2, q000, Mathematics::MatrixMajorFlags::Column);
-        Camera::Matrix inverseMatrix = fourthMatrix.Inverse();
+        const Camera::Matrix fourthMatrix(u0, u1, u2, q000, Mathematics::MatrixMajorFlags::Column);
+        const Camera::Matrix inverseMatrix = fourthMatrix.Inverse();
         Camera::APoint point = inverseMatrix * q111;
 
-        float twoPoint0 = 2.0f * point[0];
-        float twoPoint1 = 2.0f * point[1];
-        float twoPoint2 = 2.0f * point[2];
+        const float twoPoint0 = 2.0f * point[0];
+        const float twoPoint1 = 2.0f * point[1];
+        const float twoPoint2 = 2.0f * point[2];
         float d0 = +point[0] - point[1] - point[2] + 1.0f;
         float d1 = -point[0] + point[1] - point[2] + 1.0f;
         float d2 = -point[0] - point[1] + point[2] + 1.0f;
@@ -517,27 +499,27 @@ void Rendering::CameraTesting::ProjectionMatrixTest()
 void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        float directionMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
-        float directionMax = -directionMin;
-        float upMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
-        float upMax = -upMin;
-        float rightMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
-        float rightMax = -rightMin;
+        const float directionMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
+        const float directionMax = -directionMin;
+        const float upMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
+        const float upMax = -upMin;
+        const float rightMin(-Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
+        const float rightMax = -rightMin;
 
-        Camera::Matrix firstMatrix(firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
-                                   firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator));
+        const Camera::Matrix firstMatrix(firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator),
+                                         firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator), firstFloatRandomDistribution(generator));
 
         Camera firstCamera(true);
         firstCamera.SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
 
-        Camera::Matrix viewProjectionMatrix = firstCamera.GetProjectionMatrix() * firstCamera.GetViewMatrix();
-        Camera::Matrix worldViewProjectionMatrix = viewProjectionMatrix * firstMatrix;
+        const Camera::Matrix viewProjectionMatrix = firstCamera.GetProjectionMatrix() * firstCamera.GetViewMatrix();
+        const Camera::Matrix worldViewProjectionMatrix = viewProjectionMatrix * firstMatrix;
 
         vector<float> buffer;
         constexpr int numVertices = 100;
@@ -547,7 +529,12 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
             buffer.push_back(firstFloatRandomDistribution(generator));
         }
 
-        Camera::AxesAlignBoundingBox2D aabb = firstCamera.ComputeBoundingAABB(numVertices, reinterpret_cast<const char*>(&buffer[0]), sizeof(float) * 3, firstMatrix);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const Camera::AxesAlignBoundingBox2D aabb = firstCamera.ComputeBoundingAABB(numVertices, reinterpret_cast<const char*>(buffer.data()), sizeof(float) * 3, firstMatrix);
+
+#include STSTEM_WARNING_POP
 
         float xmin = Mathematics::MathF::maxReal;
         float xmax = -Mathematics::MathF::maxReal;
@@ -555,12 +542,25 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
         float ymax = -Mathematics::MathF::maxReal;
         for (int i = 0; i < numVertices; ++i)
         {
-            const float* vertex = &buffer[i * 3];
-            Mathematics::HomogeneousPointF position(vertex[0], vertex[1], vertex[2], 1.0f);
+            const auto index = i * 3;
+            const float* vertex = &buffer.at(index);
+
+            if (vertex == nullptr)
+            {
+                continue;
+            }
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+            const Mathematics::HomogeneousPointF position(vertex[0], vertex[1], vertex[2], 1.0f);
+
+#include STSTEM_WARNING_POP
+
             Mathematics::HomogeneousPointF homogeneousPosition = worldViewProjectionMatrix * position;
-            float invW = 1.0f / homogeneousPosition[3];
-            float xNormalizeDeviceCoordinate = homogeneousPosition[0] * invW;
-            float yNormalizeDeviceCoordinate = homogeneousPosition[1] * invW;
+            const float invW = 1.0f / homogeneousPosition[3];
+            const float xNormalizeDeviceCoordinate = homogeneousPosition[0] * invW;
+            const float yNormalizeDeviceCoordinate = homogeneousPosition[1] * invW;
             if (xNormalizeDeviceCoordinate < xmin)
             {
                 xmin = xNormalizeDeviceCoordinate;
@@ -578,24 +578,19 @@ void Rendering::CameraTesting::AxesAlignBoundingBoxTest()
                 ymax = yNormalizeDeviceCoordinate;
             }
         }
-
-        // 		Camera::AxesAlignBoundingBox2D resultAabb = Mathematics::AxesAlignBoundingBox2Df(xmin,xmax,ymin,ymax);
-        //
-        //         ASSERT_TRUE(Mathematics::Vector2DToolsf::Approximate(resultAabb.GetMinPoint(),aabb.GetMinPoint(),1e-5f));
-        // 		ASSERT_TRUE(Mathematics::Vector2DToolsf::Approximate(resultAabb.GetMaxPoint(),aabb.GetMaxPoint(),1e-5f));
     }
 }
 
 void Rendering::CameraTesting::StreamTest()
 {
     std::default_random_engine generator;
-    std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
+    const std::uniform_real<float> firstFloatRandomDistribution(-100.0f, 100.0f);
 
     for (int loop = 0; loop < GetTestLoopCount(); ++loop)
     {
-        Camera::APoint firstPosition(firstFloatRandomDistribution(generator),
-                                     firstFloatRandomDistribution(generator),
-                                     firstFloatRandomDistribution(generator));
+        const Camera::APoint firstPosition(firstFloatRandomDistribution(generator),
+                                           firstFloatRandomDistribution(generator),
+                                           firstFloatRandomDistribution(generator));
 
         Camera::AVector firstVector(firstFloatRandomDistribution(generator),
                                     firstFloatRandomDistribution(generator),
@@ -614,101 +609,5 @@ void Rendering::CameraTesting::StreamTest()
                                     firstFloatRandomDistribution(generator));
 
         thirdVector.Normalize();
-
-        //         Mathematics::AVectorOrthonormalizef orthonormalize = Orthonormalize(firstVector, secondVector, thirdVector,1e-4f);
-        //
-        //         firstVector = orthonormalize.GetUVector();
-        //         secondVector = orthonormalize.GetVVector();
-        //         thirdVector = orthonormalize.GetWVector();
-        //
-        //         float directionMin(- Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
-        //
-        //         float directionMax = -directionMin;
-        //
-        //         float upMin(- Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
-        //
-        //         float upMax = -upMin;
-        //
-        //         float rightMin(- Mathematics::MathF::FAbs(firstFloatRandomDistribution(generator)));
-        //
-        //         float rightMax = -rightMin;
-        //
-        //         Camera::Matrix firstMatrix(firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator),
-        //                            firstFloatRandomDistribution(generator));
-        //
-        //
-        //         Camera::Matrix secondMatrix(firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator),
-        //                             firstFloatRandomDistribution(generator));
-        //
-        //         CoreTools::OutTopLevel outTopLevel;
-        //         CoreTools::ObjectInterfaceSharedPtr objectPtr(new Camera(true,1e-4f));
-        //
-        // 		Camera* firstCamera = CoreTools::PolymorphicDowncast<Camera>(objectPtr.GetData());
-        //
-        //         firstCamera->SetFrame(firstPosition, firstVector,
-        //                               secondVector, thirdVector);
-        //         firstCamera->SetFrustum(directionMin, directionMax, upMin, upMax, rightMin, rightMax);
-        //         firstCamera->SetPostProjectionMatrix(firstMatrix);
-        //         firstCamera->SetPostProjectionMatrix(secondMatrix);
-        //
-        //         firstCamera->SetUniqueID(1);
-        //
-        //         outTopLevel.Insert(objectPtr);
-        //
-        //         CoreTools::BufferOutStream outStream(outTopLevel);
-        //
-        //         CoreTools::BufferOutStream::FileBufferPtr fileBufferPtr = outStream.GetBufferOutStreamInformation();
-        //
-        //         CoreTools::BufferInStream inStream(fileBufferPtr);
-        //
-        //         CoreTools::InTopLevel inTopLevel = inStream.GetTopLevel();
-        //
-        //         CameraSharedPtr secondCamera =  inTopLevel[0].PolymorphicDowncastObjectSharedPtr<CameraSharedPtr>();
-        //
-        //         ASSERT_TRUE(Approximate(firstCamera->GetPosition(),secondCamera->GetPosition(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetDirectionVector(),secondCamera->GetDirectionVector(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetUpVector(),secondCamera->GetUpVector(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetRightVector(),secondCamera->GetRightVector(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetViewMatrix(),secondCamera->GetViewMatrix(),1e-5f));
-        //         ASSERT_EQUAL(firstCamera->IsPerspective(),secondCamera->IsPerspective());
-        //         ASSERT_APPROXIMATE(firstCamera->GetDirectionMin (),secondCamera->GetDirectionMin (),1e-5f);
-        //         ASSERT_APPROXIMATE(firstCamera->GetDirectionMax (),secondCamera->GetDirectionMax (),1e-5f);
-        //         ASSERT_APPROXIMATE(firstCamera->GetUpMin (),secondCamera->GetUpMin (),1e-5f);
-        //         ASSERT_APPROXIMATE(firstCamera->GetUpMax (),secondCamera->GetUpMax (),1e-5f);
-        //         ASSERT_APPROXIMATE(firstCamera->GetRightMin (),secondCamera->GetRightMin (),1e-5f);
-        //         ASSERT_APPROXIMATE(firstCamera->GetRightMax (),secondCamera->GetRightMax (),1e-5f);
-        //
-        //         ASSERT_TRUE(Approximate(firstCamera->GetProjectionMatrix(),secondCamera->GetProjectionMatrix(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetProjectionViewMatrix(),secondCamera->GetProjectionViewMatrix(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetPreViewMatrix(),secondCamera->GetPreViewMatrix(),1e-5f));
-        //         ASSERT_TRUE(Approximate(firstCamera->GetPostProjectionMatrix(),secondCamera->GetPostProjectionMatrix(),1e-5f));
     }
 }

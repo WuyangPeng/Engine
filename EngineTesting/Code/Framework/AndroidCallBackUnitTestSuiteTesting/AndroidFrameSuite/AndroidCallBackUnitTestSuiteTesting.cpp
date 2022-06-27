@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ²âÊÔ°æ±¾£º0.0.0.4 (2019/09/10 14:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ²âÊÔ°æ±¾£º0.8.0.9 (2022/06/23 14:27)
 
 #include "AndroidCallBackUnitTestSuiteTesting.h"
 #include "System/Android/Flags/AndroidInputFlags.h"
@@ -15,8 +18,8 @@
 
 using std::ostream;
 
-AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting(const CoreTools::OStreamShared& osPtr, AndroidCallBackUnitTestSuiteTestingAndroidCallBack* message)
-    : ParentType{ osPtr }, m_Message{ message }
+AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting(const CoreTools::OStreamShared& stream, AndroidCallBackUnitTestSuiteTestingAndroidCallBack* message)
+    : ParentType{ stream }, message{ message }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -39,17 +42,17 @@ void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::K
 {
     System::AndroidInputEvent event;
     event.SetAndroidKeyCodes(System::AndroidKeyCodes::F1);
-    ASSERT_EQUAL(m_Message->KeyDownMessage(m_Message->GetAndroidApp(), &event), 0);
+    ASSERT_EQUAL(message->KeyDownMessage(message->GetAndroidApp(), &event), 0);
 
-    ASSERT_EQUAL(m_Message->GetPassedNumber(), 1);
+    ASSERT_EQUAL(message->GetPassedNumber(), 1);
 }
 
 void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::CreateMessageTest()
 {
-    ASSERT_TRUE(m_Message->Initialize());
+    ASSERT_TRUE(message->Initialize());
 }
 
 void AndroidCallBackUnitTestSuiteTesting::AndroidCallBackUnitTestSuiteTesting::DisplayTest()
 {
-    m_Message->Display(m_Message->GetAndroidApp(), 0);
+    message->Display(message->GetAndroidApp(), 0);
 }

@@ -54,9 +54,6 @@
     <None Include="Configuration\Log.json">
       <Filter>配置</Filter>
     </None>
-    <None Include="Configuration\StringReplacing.json">
-      <Filter>配置</Filter>
-    </None>
     <None Include="Configuration\Testing.json">
       <Filter>配置</Filter>
     </None>
@@ -68,6 +65,9 @@
     </None>
     <None Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\StringReplacing.json">
+      <Filter>配置</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -483,7 +483,7 @@
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateDllLibMiddleLayerCpp.txt">
       <Filter>资源文件\GenerateProjectsSuite</Filter>
     </Text>
-	<Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 1.txt">
@@ -512,6 +512,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>    
+    </Text>
   </ItemGroup>
 </Project>
