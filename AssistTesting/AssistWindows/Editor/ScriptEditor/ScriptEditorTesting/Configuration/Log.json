@@ -1,6 +1,5 @@
 {
-  "Logger": 
-  {
+  "Logger": {
     "System": 1,
     "CoreTools": 1,
     "Network": 1,
@@ -12,24 +11,20 @@
     "ResourceManager": 1,
     "Rendering": 1,
     "Physics": 1,
-    "Imagics": 1,
-    "Script": 1,
+    "Imagics": 1, 
     "ArtificialIntellegence": 1,
     "UserInterface": 1,
     "AssistTools": 1,
     "Framework": 1
   },
 
-  "Appender":
-  {
-    "Console": 
-    {
+  "Appender": {
+    "Console": {
       "Flags": 15,
       "Level": 1
     },
 
-    "File": 
-    {
+    "File": {
       "Directory": "Log",
       "FileName": "ScriptEditorTesting",
       "Flags": 15,
@@ -39,8 +34,7 @@
       "Extension": "log"
     },
 
-    "Default": 
-    {
+    "Default": {
       "Directory": "Log",
       "Flags": 15,
       "Level": 1,

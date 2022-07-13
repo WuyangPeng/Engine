@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditor", "TerrainEdi
 		{589AC7BE-725D-4534-B100-67DAA89237B9} = {589AC7BE-725D-4534-B100-67DAA89237B9}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{B290E847-ABAA-4AE2-842B-0A1A39AA3821}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssist", "TerrainEditorAssist\TerrainEditorAssist.vcxproj", "{589AC7BE-725D-4534-B100-67DAA89237B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\TerrainEditor\TerrainEditorTesting\TerrainEditorTesting.vcxproj", "{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2001BD36-42CD-45D7-BBD3-E76C1F7BF755} = {2001BD36-42CD-45D7-BBD3-E76C1F7BF755}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{B290E847-ABAA-4AE2-842B-0A1A39AA3821}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssist", "TerrainEditorAssist\TerrainEditorAssist.vcxproj", "{589AC7BE-725D-4534-B100-67DAA89237B9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\TerrainEditor\TerrainEditorAssistTesting\TerrainEditorAssistTesting.vcxproj", "{CCC1F5F7-EF05-4976-96D2-D7C37812C4B8}"
 	ProjectSection(ProjectDependencies) = postProject

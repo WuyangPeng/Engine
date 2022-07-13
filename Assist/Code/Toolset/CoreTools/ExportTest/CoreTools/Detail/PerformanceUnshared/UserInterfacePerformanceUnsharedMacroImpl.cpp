@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.2.1 (2021/08/13 21:40)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 19:04)
 
 #include "UserInterface/UserInterfaceExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/UserInterfaceClassInvariantMacro.h"
 
 UserInterface::UserInterfacePerformanceUnsharedMacroImpl::UserInterfacePerformanceUnsharedMacroImpl(int count) noexcept
-    : m_Count{ count }
+    : mCount{ count }
 {
     USER_INTERFACE_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int UserInterface::UserInterfacePerformanceUnsharedMacroImpl::GetCount() const n
 {
     USER_INTERFACE_CLASS_IS_VALID_CONST_9;
 
-    return m_Count;
+    return mCount;
 }
 
 void UserInterface::UserInterfacePerformanceUnsharedMacroImpl::SetCount(int count) noexcept
 {
     USER_INTERFACE_CLASS_IS_VALID_9;
 
-    m_Count = count;
+    mCount = count;
 }

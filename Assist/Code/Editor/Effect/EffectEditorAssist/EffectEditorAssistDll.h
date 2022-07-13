@@ -1,37 +1,40 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.1 (2020/01/16 0:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/06 17:21)
 
 #ifndef EFFECT_EDITOR_DLL_DLL_H
 #define EFFECT_EDITOR_DLL_DLL_H
 
-#include "System/Helper/ExportMacro.h"
 #include "Macro/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_EFFECT_EDITOR_NO_IMPORT) || defined(BUILDING_EFFECT_EDITOR_STATIC)
 
-  #define EFFECT_EDITOR_DEFAULT_DECLARE
-  #define EFFECT_EDITOR_HIDDEN_DECLARE
-  #define EFFECT_EDITOR_VISIBLE
+    #define EFFECT_EDITOR_DEFAULT_DECLARE
+    #define EFFECT_EDITOR_HIDDEN_DECLARE
+    #define EFFECT_EDITOR_VISIBLE
 
-#else // !defined(BUILDING_EFFECT_EDITOR_NO_IMPORT) && !defined(BUILDING_EFFECT_EDITOR_STATIC)
+#else  // !defined(BUILDING_EFFECT_EDITOR_NO_IMPORT) && !defined(BUILDING_EFFECT_EDITOR_STATIC)
 
-   #if defined(BUILDING_EFFECT_EDITOR_EXPORT)
- 
+    #if defined(BUILDING_EFFECT_EDITOR_EXPORT)
+
         #define EFFECT_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
         #define EFFECT_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
 
-   #else // !defined(BUILDING_EFFECT_EDITOR_EXPORT)
+    #else  // !defined(BUILDING_EFFECT_EDITOR_EXPORT)
 
-		#define EFFECT_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define EFFECT_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
         #define EFFECT_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
 
-   #endif // BUILDING_EFFECT_EDITOR_EXPORT
+    #endif  // BUILDING_EFFECT_EDITOR_EXPORT
 
-   #define EFFECT_EDITOR_VISIBLE TCRE_SYMBOL_VISIBLE
+    #define EFFECT_EDITOR_VISIBLE TCRE_SYMBOL_VISIBLE
 
-#endif // defined(BUILDING_EFFECT_EDITORNO_IMPORT) || defined(BUILDING_EFFECT_EDITOR_STATIC)
+#endif  // defined(BUILDING_EFFECT_EDITORNO_IMPORT) || defined(BUILDING_EFFECT_EDITOR_STATIC)
 
-#endif // EFFECT_EDITOR_DLL_DLL_H
+#endif  // EFFECT_EDITOR_DLL_DLL_H

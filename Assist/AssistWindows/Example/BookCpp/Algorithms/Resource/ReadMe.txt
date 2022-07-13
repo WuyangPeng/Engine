@@ -1,4 +1,0 @@
-算法概论（Algorithms）
-
-★
-作者：Sanjoy Dasgupta、Christos Papadimitriou、Umesh Vazirani

@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InputOutputExample", "InputOutputExample\InputOutputExample.vcxproj", "{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InputOutputExampleTesting", "..\..\..\..\AssistTesting\AssistWindows\Example\InputOutputExample\InputOutputExampleTesting\InputOutputExampleTesting.vcxproj", "{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}"
 	ProjectSection(ProjectDependencies) = postProject

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎辅助版本：0.3.0.1 (2020/05/25 11:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/05 10:40)
 
 #ifndef MAIN_ENTRY_POINT1_H
 #define MAIN_ENTRY_POINT1_H
@@ -11,19 +14,19 @@
 
 namespace Framework
 {
-	class MainEntryPoint1 final : public ConsoleMainFunctionHelperBase
-	{
-	public:
-		using ClassType = MainEntryPoint1;
-		using ParentType = ConsoleMainFunctionHelperBase;
+    class MainEntryPoint1 final : public ConsoleMainFunctionHelperBase
+    {
+    public:
+        using ClassType = MainEntryPoint1;
+        using ParentType = ConsoleMainFunctionHelperBase;
 
-	public:
-		MainEntryPoint1(int argc, char** argv, const String& consoleTitle,const EnvironmentDirectory& environmentDirectory);
+    public:
+        MainEntryPoint1(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		int DoRun() override;
-	};
+        NODISCARD int DoRun() override;
+    };
 }
 
-#endif // MAIN_ENTRY_POINT1_H
+#endif  // MAIN_ENTRY_POINT1_H

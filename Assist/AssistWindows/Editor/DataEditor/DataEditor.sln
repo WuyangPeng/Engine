@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditor", "DataEditor\Da
 		{0C4EE3C0-B5C0-4DF9-B729-407763F39A37} = {0C4EE3C0-B5C0-4DF9-B729-407763F39A37}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{647697E8-678A-46AD-8F46-D9CFD5C32D56}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssist", "DataEditorAssist\DataEditorAssist.vcxproj", "{0C4EE3C0-B5C0-4DF9-B729-407763F39A37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\DataEditor\DataEditorTesting\DataEditorTesting.vcxproj", "{2DE6005F-FB59-4F66-9317-75C32ACAC5BB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{88B93646-9DAD-4B81-9899-21CE9FBC9E41} = {88B93646-9DAD-4B81-9899-21CE9FBC9E41}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{647697E8-678A-46AD-8F46-D9CFD5C32D56}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssist", "DataEditorAssist\DataEditorAssist.vcxproj", "{0C4EE3C0-B5C0-4DF9-B729-407763F39A37}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\DataEditor\DataEditorAssistTesting\DataEditorAssistTesting.vcxproj", "{758D089F-175F-4997-A9E6-71711AFB09D0}"
 	ProjectSection(ProjectDependencies) = postProject

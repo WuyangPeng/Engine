@@ -1,5 +1,0 @@
-应用密码学：协议、算法与C源程序（Applied Cryptography）
-（第2版）
-
-☆
-作者：Bruce Schneier

@@ -1,20 +1,27 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒıÇæ¸¨Öú²âÊÔ°æ±¾£º0.0.2.1 (2020/01/20 22:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒıÇæ¸¨Öú²âÊÔ°æ±¾£º0.8.0.10 (2022/07/10 21:49)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(SkeletonEditorAssistTesting, TestingHelper, "¹Ç÷À±à¼­Æ÷¸¨Öú")
-
-// private
-void SkeletonEditorAssistTesting::TestingHelper
-	::AddSuites()
+SkeletonEditorAssistTesting::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "¹Ç÷À±à¼­Æ÷¸¨Öú" }
 {
-	 
+    InitSuite();
+
+    USER_SELF_CLASS_IS_VALID_1;
 }
- 
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(SkeletonEditorAssistTesting, TestingHelper)
+
+void SkeletonEditorAssistTesting::TestingHelper::InitSuite() noexcept
+{
+}

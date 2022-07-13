@@ -1,7 +1,0 @@
-C++ 精粹（C++ Distilled）
-
-官方网站 
-http://www.cse.ucsc.edu/~pohl/drp.html、 https://www.aw.com/。
-
-△
-作者：Ira Pohl

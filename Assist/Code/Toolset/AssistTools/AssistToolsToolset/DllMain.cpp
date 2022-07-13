@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.0 (2020/01/10 23:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 15:47)
 
 #include "Toolset/AssistTools/AssistToolsToolset/AssistToolsToolsetExport.h"
 
-#include "Toolset/AssistTools/AssistToolsToolset/AssistToolsToolsetFwd.h" 
-
 #include "CoreTools/Helper/MainFunctionMacro.h"
+#include "Toolset/AssistTools/AssistToolsToolset/AssistToolsToolsetFwd.h"
 
 #ifndef BUILDING_ASSIST_TOOLS_STATIC
 
-	DLL_MAIN_FUNCTION(AssistTools);
+DLL_MAIN_FUNCTION(AssistTools);
 
-#else // !BUILDING_ASSIST_TOOLS_STATIC
+#else  // !BUILDING_ASSIST_TOOLS_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(AssistTools);
+CORE_TOOLS_MUTEX_INIT(AssistTools);
 
-#endif // !BUILDING_ASSIST_TOOLS_STATIC
+#endif  // !BUILDING_ASSIST_TOOLS_STATIC

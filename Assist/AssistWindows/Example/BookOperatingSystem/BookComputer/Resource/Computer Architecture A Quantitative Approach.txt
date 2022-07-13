@@ -1,5 +1,0 @@
-计算机体系结构：量化研究方法（Computer Architecture: A Quantitative Approach）
-（第5版）
-
-★
-作者： John L.Hennessy、David A.Patterson

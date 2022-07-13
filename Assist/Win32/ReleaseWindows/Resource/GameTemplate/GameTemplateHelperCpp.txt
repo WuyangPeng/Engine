@@ -12,7 +12,7 @@
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelperDetail.h"
 
 %SolutionName%::%SolutionName%Helper
-	::%SolutionName%Helper(HInstance instance,char* commandLine,const WindowApplicationInformation& information,const EnvironmentDirectory& environmentDirectory)
+	::%SolutionName%Helper(WindowsHInstance instance,char* commandLine,const WindowApplicationInformation& information,const EnvironmentDirectory& environmentDirectory)
 	:ParentType{ instance,commandLine,information,environmentDirectory }
 {
 	SELF_CLASS_IS_VALID_9;

@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\
 		{4FA92DB2-7C28-4C15-B63C-866A2F80B347} = {4FA92DB2-7C28-4C15-B63C-866A2F80B347}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{45B05323-6CE6-4703-BD6A-0A38DAD297A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssist", "ModelEditorAssist\ModelEditorAssist.vcxproj", "{4FA92DB2-7C28-4C15-B63C-866A2F80B347}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\ModelEditor\ModelEditorTesting\ModelEditorTesting.vcxproj", "{178F9D2B-130E-49F6-878D-30B8D47D2486}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1DB4299C-FDB8-4151-9A52-BD5C952B95BF} = {1DB4299C-FDB8-4151-9A52-BD5C952B95BF}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{45B05323-6CE6-4703-BD6A-0A38DAD297A8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssist", "ModelEditorAssist\ModelEditorAssist.vcxproj", "{4FA92DB2-7C28-4C15-B63C-866A2F80B347}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\ModelEditor\ModelEditorAssistTesting\ModelEditorAssistTesting.vcxproj", "{DD244FD8-2190-432B-9E68-80A62E10A133}"
 	ProjectSection(ProjectDependencies) = postProject

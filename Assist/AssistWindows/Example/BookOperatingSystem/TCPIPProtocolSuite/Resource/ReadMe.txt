@@ -1,8 +1,0 @@
-TCP/IP协议族（TCP/IP Protocol Suite）
-（第4版） 
-
-官方网站：
-https://www.mhhe.com/engcs/compsci/forouzan/
-
-☆
-作者：Behrouz A. Forouzan

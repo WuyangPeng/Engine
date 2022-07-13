@@ -1,55 +1,55 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ¸¨Öú°æ±¾£º0.0.2.1 (2020/01/11 1:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++20
+///	ÒýÇæ¸¨Öú°æ±¾£º0.8.0.10 (2022/06/30 16:02)
 
-#include "GenerateEngine.h" 
+#include "GenerateEngine.h"
+#include "System/Helper/PragmaWarning/LexicalCast.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 #include "AssistTools/GenerateProjects/CopyrightData.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateCodeDirectory.h"
 #include "AssistTools/GenerateProjects/GenerateTemplateEngineDirectory.h"
 
-#include "System/Helper/PragmaWarning/LexicalCast.h"
-
 using std::string;
 
-GameTemplate::GenerateEngine
-	::GenerateEngine(const string& configurationFileName, const string& parameterFileName)
-	:m_ConfigurationFileName{ configurationFileName }, m_Parameter{ parameterFileName }
+GameTemplate::GenerateEngine ::GenerateEngine(const string& configurationFileName, const string& parameterFileName)
+    : configurationFileName{ configurationFileName }, parameter{ parameterFileName }
 {
-	Generate();
+    Generate();
 
-	System::SystemPause();
+    System::SystemPause();
 
-	ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
+    ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(GameTemplate, GenerateEngine)
 
-void GameTemplate::GenerateEngine
-	::Generate()
+void GameTemplate::GenerateEngine ::Generate()
 {
-	const auto newCoreName = m_Parameter.GetReplacing(SYSTEM_TEXT("CoreName"));
-	const auto newIncludeName = m_Parameter.GetReplacing(SYSTEM_TEXT("GameTemplateInclude"));
-	const auto projectName = m_Parameter.GetReplacing(SYSTEM_TEXT("ProjectName"));
-	auto endYear = boost::lexical_cast<int>(m_Parameter.GetReplacing(SYSTEM_TEXT("EndYear")));
-	const auto versions = m_Parameter.GetReplacing(SYSTEM_TEXT("Versions"));
-	const auto projectChineseName = m_Parameter.GetReplacing(SYSTEM_TEXT("ProjectChineseName"));
-	const auto resourceDirectory = m_Parameter.GetReplacing(SYSTEM_TEXT("ResourceDirectory"));
-	const auto exportDirectory = m_Parameter.GetReplacing(SYSTEM_TEXT("ExportDirectory"));
-	const auto solutionName = m_Parameter.GetReplacing(SYSTEM_TEXT("SolutionName"));
-	const auto projectCapitalName = m_Parameter.GetReplacing(SYSTEM_TEXT("ProjectCapital"));
-	const auto coreCapital = m_Parameter.GetReplacing(SYSTEM_TEXT("CoreCapital"));
+    const auto newCoreName = parameter.GetReplacing(SYSTEM_TEXT("CoreName"));
+    const auto newIncludeName = parameter.GetReplacing(SYSTEM_TEXT("GameTemplateInclude"));
+    const auto projectName = parameter.GetReplacing(SYSTEM_TEXT("ProjectName"));
+    auto endYear = boost::lexical_cast<int>(parameter.GetReplacing(SYSTEM_TEXT("EndYear")));
+    const auto versions = parameter.GetReplacing(SYSTEM_TEXT("Versions"));
+    const auto projectChineseName = parameter.GetReplacing(SYSTEM_TEXT("ProjectChineseName"));
+    const auto resourceDirectory = parameter.GetReplacing(SYSTEM_TEXT("ResourceDirectory"));
+    const auto exportDirectory = parameter.GetReplacing(SYSTEM_TEXT("ExportDirectory"));
+    const auto solutionName = parameter.GetReplacing(SYSTEM_TEXT("SolutionName"));
+    const auto projectCapitalName = parameter.GetReplacing(SYSTEM_TEXT("ProjectCapital"));
+    const auto coreCapital = parameter.GetReplacing(SYSTEM_TEXT("CoreCapital"));
 
-	AssistTools::CopyrightData copyrightData{ endYear, versions, projectChineseName };
+    AssistTools::CopyrightData copyrightData{ endYear, versions, projectChineseName };
 
-	AssistTools::GenerateTemplateEngineDirectory generateTemplateEngineDirectory{ resourceDirectory, m_ConfigurationFileName };
+    AssistTools::GenerateTemplateEngineDirectory generateTemplateEngineDirectory{ resourceDirectory, configurationFileName };
 
-	generateTemplateEngineDirectory.GenerateTo(exportDirectory, solutionName, newCoreName, newIncludeName);
+    generateTemplateEngineDirectory.GenerateTo(exportDirectory, solutionName, newCoreName, newIncludeName);
 
-	AssistTools::GenerateTemplateCodeDirectory generateTemplateCodeDirectory{ resourceDirectory, m_ConfigurationFileName };
+    AssistTools::GenerateTemplateCodeDirectory generateTemplateCodeDirectory{ resourceDirectory, configurationFileName };
 
-	generateTemplateCodeDirectory.GenerateTo(exportDirectory, solutionName, copyrightData, projectCapitalName, projectName,newCoreName,coreCapital);
+    generateTemplateCodeDirectory.GenerateTo(exportDirectory, solutionName, copyrightData, projectCapitalName, projectName, newCoreName, coreCapital);
 }

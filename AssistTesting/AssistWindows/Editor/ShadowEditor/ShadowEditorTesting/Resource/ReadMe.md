@@ -1,0 +1,11 @@
+@ingroup group_ShadowEditorTesting_Documentation
+
+----------------------------
+阴影编辑器单元测试
+
+1.   ShadowEditor 
+
+阴影编辑器的单元测试，包括： 
+（1）阴影。
+
+----------------------------

@@ -1,7 +1,0 @@
-Windows 高级调试 （Advanced Windows Debugging）
-
-官方网站：    
-http://www.advancedwindowsdebugging.com/ （已失效）
-
-★
-作者：Mario Hewardt、Daniel Pravat

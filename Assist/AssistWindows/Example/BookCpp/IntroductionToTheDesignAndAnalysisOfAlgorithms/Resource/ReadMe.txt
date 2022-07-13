@@ -1,8 +1,0 @@
-算法设计与分析基础（Introduction to The Design and Analysis of Algorithms）
-（第3版）
-
-官方网站：
-http://www.pearsonhighered.com/irc 、http://cssupport.pearsoncmg.com/ 。
-
-○
-作者：Anany Levitin

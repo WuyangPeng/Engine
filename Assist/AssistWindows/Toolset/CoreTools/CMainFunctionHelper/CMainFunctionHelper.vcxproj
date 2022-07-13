@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{8752C0E8-5025-4252-99A0-EBA175D94009}</ProjectGuid>
@@ -102,7 +102,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistWin32DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -112,7 +112,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" /> 
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -122,7 +122,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64DebugLibs.props" /> 
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -132,7 +132,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
-    <Import Project="..\..\..\AssistX64ReleaseLibs.props" /> 
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -281,8 +281,6 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CMainFunctionHelper\UnitTestHelper.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.md" />
-    <Text Include="Resource\Schedule.md" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -299,6 +297,8 @@
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Testing.json" />
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

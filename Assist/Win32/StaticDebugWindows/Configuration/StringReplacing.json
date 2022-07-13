@@ -1,16 +1,16 @@
-{   
-    "InputManagerChineseName": "输入",
-    "NetworkManagerChineseName": "网络",
-    "ObjectLogicManagerChineseName": "对象逻辑",
-    "ArtificialIntellegenceManagerChineseName": "人工智能",
-    "PhysicalModellingManagerChineseName": "物理模拟",
-    "MessageManagerChineseName": "消息",
-    "EventManagerChineseName": "事件",
-    "SystemManagerChineseName": "系统",
-    "ResourceManagerChineseName": "资源",
-    "AudioManagerChineseName": "音效",
-    "CameraSystemsManagerChineseName": "相机",
-    "RenderingManagerChineseName": "渲染",
-    "GUIManagerChineseName": "GUI",
-    "CoreChineseName": "核心"
+{
+  "InputManagerChineseName": "输入",
+  "NetworkManagerChineseName": "网络",
+  "ObjectLogicManagerChineseName": "对象逻辑",
+  "ArtificialIntellegenceManagerChineseName": "人工智能",
+  "PhysicalModellingManagerChineseName": "物理模拟",
+  "MessageManagerChineseName": "消息",
+  "EventManagerChineseName": "事件",
+  "SystemManagerChineseName": "系统",
+  "ResourceManagerChineseName": "资源",
+  "AudioManagerChineseName": "音效",
+  "CameraSystemsManagerChineseName": "相机",
+  "RenderingManagerChineseName": "渲染",
+  "GUIManagerChineseName": "GUI",
+  "CoreChineseName": "核心"
 }

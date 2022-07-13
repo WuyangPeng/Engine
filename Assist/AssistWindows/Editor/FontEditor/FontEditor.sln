@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditor", "FontEditor\Fo
 		{6A67C4B7-FEB8-4584-BDC3-3D02D1061057} = {6A67C4B7-FEB8-4584-BDC3-3D02D1061057}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{6A70E706-55A1-4A52-A38F-4CD146A6A1B5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssist", "FontEditorAssist\FontEditorAssist.vcxproj", "{6A67C4B7-FEB8-4584-BDC3-3D02D1061057}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\FontEditor\FontEditorTesting\FontEditorTesting.vcxproj", "{2A2E6188-0115-422B-8DF7-400ECF51911A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{68DE71D8-2E06-4187-86D9-AA799ADB2637} = {68DE71D8-2E06-4187-86D9-AA799ADB2637}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{6A70E706-55A1-4A52-A38F-4CD146A6A1B5}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssist", "FontEditorAssist\FontEditorAssist.vcxproj", "{6A67C4B7-FEB8-4584-BDC3-3D02D1061057}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\FontEditor\FontEditorAssistTesting\FontEditorAssistTesting.vcxproj", "{C34804AC-EF4A-4B0E-8C1D-87E359094585}"
 	ProjectSection(ProjectDependencies) = postProject

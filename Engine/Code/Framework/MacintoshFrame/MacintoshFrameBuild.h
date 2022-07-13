@@ -10,6 +10,8 @@
 #ifndef FRAMEWORK_MACINTOSH_MACINTOSH_FRAME_BUILD_H
 #define FRAMEWORK_MACINTOSH_MACINTOSH_FRAME_BUILD_H
 
+#include "Rendering/RenderingDll.h"
+
 namespace Framework
 {
     template <typename MacintoshProcess>

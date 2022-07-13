@@ -1,4 +1,0 @@
-ACE 程序员指南（The ACE Programmer's Guide）
-
-★★
-作者：  Stephen D.Huston、James CE Johnson、Umar Svvid

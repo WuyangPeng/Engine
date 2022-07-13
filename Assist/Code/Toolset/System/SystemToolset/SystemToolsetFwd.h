@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎辅助版本：0.7.1.4 (2021/06/05 15:02)
+///	引擎辅助版本：0.8.0.10 (2021/06/05 15:02)
 
 #ifndef SYSTEM_TOOLSET_FWD_H
 #define SYSTEM_TOOLSET_FWD_H

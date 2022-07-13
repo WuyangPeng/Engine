@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.1 (2020/01/11 1:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 16:03)
 
 #ifndef GAME_TEMPLATE_GENERATE_ENGINE_H
 #define GAME_TEMPLATE_GENERATE_ENGINE_H
@@ -13,23 +16,23 @@
 
 namespace GameTemplate
 {
-	class GenerateEngine
-	{
-	public:
-		using ClassType = GenerateEngine;
+    class GenerateEngine
+    {
+    public:
+        using ClassType = GenerateEngine;
 
-	public:
-		GenerateEngine(const std::string& configurationFileName, const std::string& parameterFileName);
+    public:
+        GenerateEngine(const std::string& configurationFileName, const std::string& parameterFileName);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-	private:
-		void Generate();
+    private:
+        void Generate();
 
-	private:
-		std::string m_ConfigurationFileName;
-		CoreTools::StringReplacing m_Parameter;
-	};
+    private:
+        std::string configurationFileName;
+        CoreTools::StringReplacing parameter;
+    };
 }
 
-#endif // GAME_TEMPLATE_GENERATE_ENGINE_H
+#endif  // GAME_TEMPLATE_GENERATE_ENGINE_H

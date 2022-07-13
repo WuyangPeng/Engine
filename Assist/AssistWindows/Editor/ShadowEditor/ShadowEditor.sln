@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditor", "ShadowEdito
 		{05268887-B61F-4F7B-8112-3353BB20418D} = {05268887-B61F-4F7B-8112-3353BB20418D}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{C946E738-364B-4D3C-96A4-14CA3AF4F611}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssist", "ShadowEditorAssist\ShadowEditorAssist.vcxproj", "{05268887-B61F-4F7B-8112-3353BB20418D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\ShadowEditor\ShadowEditorTesting\ShadowEditorTesting.vcxproj", "{C30508A6-2FE2-474B-A483-5A1B58614F79}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F831A5DF-6447-4DBB-B80A-80351E17A9C6} = {F831A5DF-6447-4DBB-B80A-80351E17A9C6}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{C946E738-364B-4D3C-96A4-14CA3AF4F611}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssist", "ShadowEditorAssist\ShadowEditorAssist.vcxproj", "{05268887-B61F-4F7B-8112-3353BB20418D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\ShadowEditor\ShadowEditorAssistTesting\ShadowEditorAssistTesting.vcxproj", "{9BF160C5-4C73-44C2-9265-1AEA5F65A6D1}"
 	ProjectSection(ProjectDependencies) = postProject

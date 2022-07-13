@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditor", "TextureEdi
 		{EAC44509-B507-47C2-AAA9-1AF73C222674} = {EAC44509-B507-47C2-AAA9-1AF73C222674}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{41518A8A-39E7-4B43-87A2-51A4F7B57372}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssist", "TextureEditorAssist\TextureEditorAssist.vcxproj", "{EAC44509-B507-47C2-AAA9-1AF73C222674}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\TextureEditor\TextureEditorTesting\TextureEditorTesting.vcxproj", "{ABF90D43-2868-4A3F-B616-5EE17F316137}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21A8A118-16FB-4B6A-8BB8-68F26D8C56AB} = {21A8A118-16FB-4B6A-8BB8-68F26D8C56AB}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{41518A8A-39E7-4B43-87A2-51A4F7B57372}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssist", "TextureEditorAssist\TextureEditorAssist.vcxproj", "{EAC44509-B507-47C2-AAA9-1AF73C222674}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\TextureEditor\TextureEditorAssistTesting\TextureEditorAssistTesting.vcxproj", "{91E792EB-640E-48D2-87A2-662D2991F4E6}"
 	ProjectSection(ProjectDependencies) = postProject

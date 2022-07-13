@@ -1,7 +1,0 @@
-Windows 编程启示录 （The Old New Thing） 
-
-官方网站：
-https://devblogs.microsoft.com/oldnewthing/
-
-○ 
-作者：Raymond Chen 

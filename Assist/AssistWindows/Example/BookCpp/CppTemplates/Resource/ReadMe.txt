@@ -1,6 +1,0 @@
-C++ Templates
-（第1版）
-
-★★★
-作者： David Vandevoorde、Nicolai M. Josuttis
-其他书籍：Nicolai M. Josuttis《C++ Templates》。

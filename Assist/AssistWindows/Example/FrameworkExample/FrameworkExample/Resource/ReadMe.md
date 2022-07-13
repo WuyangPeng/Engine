@@ -1,3 +1,6 @@
+@ingroup group_FrameworkExample_Documentation
+
+----------------------------
 框架库例子
 
 FrameworkExample 
@@ -5,3 +8,5 @@ FrameworkExample
 框架库例子。实现以下功能： 
 
 （1）框架模块例子模板范例工程。 
+
+----------------------------

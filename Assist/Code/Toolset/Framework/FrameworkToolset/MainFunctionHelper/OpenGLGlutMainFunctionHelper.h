@@ -1,26 +1,30 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎辅助版本：0.3.0.1 (2020/05/22 13:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/04 19:25)
 
 #ifndef FRAMEWORK_TOOLSET_OPENGL_GLUT_MAIN_FUNCTION_HELPER_H
 #define FRAMEWORK_TOOLSET_OPENGL_GLUT_MAIN_FUNCTION_HELPER_H
 
-#include "Toolset/Framework/FrameworkToolset/FrameworkToolsetDll.h" 
+#include "Toolset/Framework/FrameworkToolset/FrameworkToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace FrameworkToolset
 {
-	 class FRAMEWORK_TOOLSET_DEFAULT_DECLARE OpenGLGlutMainFunctionHelper
-	 {
-	 public:
-		 using ClassType = OpenGLGlutMainFunctionHelper;
+    class FRAMEWORK_TOOLSET_DEFAULT_DECLARE OpenGLGlutMainFunctionHelper
+    {
+    public:
+        using ClassType = OpenGLGlutMainFunctionHelper;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE; 
-	 };	
+    public:
+        CLASS_INVARIANT_DECLARE;
+    };
 }
 
-#endif // FRAMEWORK_TOOLSET_OPENGL_GLUT_MAIN_FUNCTION_HELPER_H
+#endif  // FRAMEWORK_TOOLSET_OPENGL_GLUT_MAIN_FUNCTION_HELPER_H

@@ -1,5 +1,0 @@
-计算机网络：自顶向下方法（Computer Networks:A Top-Down Approach）
-（第6版） 
-
-☆
-作者：James F.Kurose、Keith W.Ross 

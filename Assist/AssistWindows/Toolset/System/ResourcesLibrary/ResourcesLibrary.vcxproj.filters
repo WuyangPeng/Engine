@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="配置">
-      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{b75a895e-b7dd-4581-83c4-e3b23402a1e0}</UniqueIdentifier>
     </Filter>

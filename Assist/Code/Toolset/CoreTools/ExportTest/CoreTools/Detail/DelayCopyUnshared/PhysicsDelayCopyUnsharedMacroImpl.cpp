@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.2.1 (2021/08/13 17:14)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/01 14:13)
 
 #include "Physics/PhysicsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 
 Physics::PhysicsDelayCopyUnsharedMacroImpl::PhysicsDelayCopyUnsharedMacroImpl(int count) noexcept
-    : m_Count{ count }
+    : mCount{ count }
 {
     PHYSICS_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Physics::PhysicsDelayCopyUnsharedMacroImpl::GetCount() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Count;
+    return mCount;
 }
 
 void Physics::PhysicsDelayCopyUnsharedMacroImpl::SetCount(int count) noexcept
 {
     PHYSICS_CLASS_IS_VALID_9;
 
-    m_Count = count;
+    mCount = count;
 }

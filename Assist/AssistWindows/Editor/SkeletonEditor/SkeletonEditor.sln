@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditor", "SkeletonE
 		{7E2652B1-35DD-47B5-BBE3-5AD63F74053E} = {7E2652B1-35DD-47B5-BBE3-5AD63F74053E}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{90A3A230-5D65-4DAD-8B80-08FAF5070178}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssist", "SkeletonEditorAssist\SkeletonEditorAssist.vcxproj", "{7E2652B1-35DD-47B5-BBE3-5AD63F74053E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\SkeletonEditor\SkeletonEditorTesting\SkeletonEditorTesting.vcxproj", "{BDE4A17D-0549-4C09-A60A-D457619E5B82}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FCC96FFB-C30C-48E5-8F6B-8F9A84FA0DAC} = {FCC96FFB-C30C-48E5-8F6B-8F9A84FA0DAC}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{90A3A230-5D65-4DAD-8B80-08FAF5070178}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssist", "SkeletonEditorAssist\SkeletonEditorAssist.vcxproj", "{7E2652B1-35DD-47B5-BBE3-5AD63F74053E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\SkeletonEditor\SkeletonEditorAssistTesting\SkeletonEditorAssistTesting.vcxproj", "{6880DBF4-C401-4571-8C87-5859C5F5277C}"
 	ProjectSection(ProjectDependencies) = postProject

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.3.0.2 (2020/06/04 13:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/05 11:12)
 
 #include "WindowMessageLoop1.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -24,7 +27,7 @@ int Framework::WindowMessageLoop1::EnterMessageLoop()
     auto hwnd = GetHwnd();
 
     System::String className{};
-    [[maybe_unused]] const auto value = System::GetSystemClassName(hwnd, className);
+    MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
     EnterOldMessageLoop(className);
     EnterNewMessageLoop(className);
@@ -33,9 +36,9 @@ int Framework::WindowMessageLoop1::EnterMessageLoop()
 }
 
 #include STSTEM_WARNING_PUSH
-
 #include SYSTEM_WARNING_DISABLE(26461)
-void Framework::WindowMessageLoop1::DisplayFunction([[maybe_unused]] WindowsHWnd hwnd, [[maybe_unused]] int64_t timeDelta) noexcept
+
+void Framework::WindowMessageLoop1::DisplayFunction(MAYBE_UNUSED WindowsHWnd hwnd, MAYBE_UNUSED int64_t timeDelta) noexcept
 {
 }
 

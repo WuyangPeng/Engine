@@ -1,4 +1,0 @@
-算法谜题（Algorithmic Puzzles）
-
-☆
-作者：Anany Levitin、Maria Levitin

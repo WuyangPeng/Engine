@@ -1,5 +1,0 @@
-具体数学（Concrete Mathematic）
-（第1版）
-
-☆
-作者：Ronald L. Graham、Donald E. Knuth、Oren Patashnik

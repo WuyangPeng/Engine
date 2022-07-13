@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助测试版本：0.7.0.1 (2021/02/15 16:12)
+///	标准：std:c++20
+///	引擎辅助测试版本：0.8.0.10 (2022/07/13 13:56)
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
@@ -20,7 +20,7 @@ using std::string;
 using namespace std::literals;
 
 ThreadingCoreRenderEngineAssist::EngineTesting::EngineTesting(const OStreamShared& stream)
-    : ParentType{ stream }, m_EngineTestingName{ SYSTEM_TEXT("End"s) }
+    : ParentType{ stream }, engineTestingName{ SYSTEM_TEXT("End"s) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -46,7 +46,7 @@ void ThreadingCoreRenderEngineAssist::EngineTesting::MainTest()
 
 bool ThreadingCoreRenderEngineAssist::EngineTesting::EngineTest()
 {
-    m_EngineTestingName.PrintSelect(GetStream());
+    engineTestingName.PrintSelect(GetStream());
 
     const auto select = System::GetSystemInput<int>();
 
@@ -55,9 +55,9 @@ bool ThreadingCoreRenderEngineAssist::EngineTesting::EngineTest()
 
 bool ThreadingCoreRenderEngineAssist::EngineTesting::ExecuteEngineTesting(int select)
 {
-    if (m_EngineTestingName.IsSelectValid(select))
+    if (engineTestingName.IsSelectValid(select))
     {
-        ASSERT_NOT_THROW_EXCEPTION_1(ExecuteSelectEngineTesting, m_EngineTestingName.GetEngineTestingName(select));
+        ASSERT_NOT_THROW_EXCEPTION_1(ExecuteSelectEngineTesting, engineTestingName.GetEngineTestingName(select));
 
         return true;
     }

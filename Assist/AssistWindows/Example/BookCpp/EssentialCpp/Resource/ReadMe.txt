@@ -1,7 +1,0 @@
-Essential C++
-
-官方网站 
-http://www.aw1.com/cseng/titles/0-201-48518-4 （已失效）、 http://www.objectwrite.com （已失效）。
-
-☆
-作者：Stanley B.Lippman

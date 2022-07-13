@@ -1,12 +1,13 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助测试版本：0.0.2.1 (2020/01/18 20:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助测试版本：0.8.0.10 (2022/07/08 17:25)
 
 #ifndef MODEL_EDITOR_ASSIST_TESTING_TESTING_H
 #define MODEL_EDITOR_ASSIST_TESTING_TESTING_H
 
- 
-
-#endif // MODEL_EDITOR_ASSIST_TESTING_TESTING_H
+#endif  // MODEL_EDITOR_ASSIST_TESTING_TESTING_H

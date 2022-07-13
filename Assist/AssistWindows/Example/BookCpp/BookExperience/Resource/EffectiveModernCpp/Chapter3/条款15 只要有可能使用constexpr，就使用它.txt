@@ -1,5 +1,0 @@
-条款15 只要有可能使用constexpr，就使用它
-	★	所有constexpr对象都是const对象，而并非所有const对象都是constexpr对象。
-	★	constexpr对象都具备const属性，并由编译期已知的值完成初始化。
-	★	constexpr函数在调用时若传入的实参值是编译期已知的，则会产生编译期结果。
-	★	比起非constexpr对象或constexpr函数而言，constexpr对象或是constexpr函数可以用在一个作用域更广的语境中。

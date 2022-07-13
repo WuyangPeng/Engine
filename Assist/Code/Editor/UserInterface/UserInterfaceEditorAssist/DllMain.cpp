@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.1 (2020/01/12 21:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/11 14:38)
 
 #include "Editor/UserInterface/UserInterfaceEditorAssist/UserInterfaceEditorAssistExport.h"
 
-#include "Editor/UserInterface/UserInterfaceEditorAssist/UserInterfaceEditorAssistFwd.h" 
-
 #include "CoreTools/Helper/MainFunctionMacro.h"
+#include "Editor/UserInterface/UserInterfaceEditorAssist/UserInterfaceEditorAssistFwd.h"
 
 #ifndef BUILDING_USER_INTERFACE_EDITOR_STATIC
 
-	DLL_MAIN_FUNCTION(UserInterfaceEditor);
+DLL_MAIN_FUNCTION(UserInterfaceEditor);
 
-#else // !BUILDING_USER_INTERFACE_EDITOR_STATIC
+#else  // !BUILDING_USER_INTERFACE_EDITOR_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(UserInterfaceEditor);
+CORE_TOOLS_MUTEX_INIT(UserInterfaceEditor);
 
-#endif // !BUILDING_USER_INTERFACE_EDITOR_STATIC
+#endif  // !BUILDING_USER_INTERFACE_EDITOR_STATIC

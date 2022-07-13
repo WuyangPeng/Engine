@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.1.0 (2021/02/20 11:01)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 14:10)
 
 #include "ProjectName.h"
 #include "ThreadingCoreRenderEngineAssist/Helper/AssistClassInvariantMacro.h"
@@ -80,14 +80,14 @@ bool ThreadingCoreRenderEngineAssist::ProjectName::IsSelectValid(int select) con
     return 0 <= select && select < boost::numeric_cast<int>(container.size());
 }
 
-const System::String ThreadingCoreRenderEngineAssist::ProjectName::GetEngineeringName(int select) const
+System::String ThreadingCoreRenderEngineAssist::ProjectName::GetEngineeringName(int select) const
 {
     ASSIST_CLASS_IS_VALID_CONST_9;
 
     return container.at(select);
 }
 
-const System::String ThreadingCoreRenderEngineAssist::ProjectName::GetEngineeringNameOrEmpty(int select) const
+System::String ThreadingCoreRenderEngineAssist::ProjectName::GetEngineeringNameOrEmpty(int select) const
 {
     ASSIST_CLASS_IS_VALID_CONST_9;
 

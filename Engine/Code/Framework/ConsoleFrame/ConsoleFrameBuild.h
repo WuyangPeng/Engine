@@ -10,6 +10,8 @@
 #ifndef FRAMEWORK_CONSOLE_CONSOLE_FRAME_BUILD_H
 #define FRAMEWORK_CONSOLE_CONSOLE_FRAME_BUILD_H
 
+#include "Framework/FrameworkDll.h"
+
 namespace Framework
 {
     template <typename ConsoleProcess>

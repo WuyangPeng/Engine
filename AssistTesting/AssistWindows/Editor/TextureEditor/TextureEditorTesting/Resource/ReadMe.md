@@ -1,0 +1,11 @@
+@ingroup group_TextureEditorTesting_Documentation
+
+----------------------------
+纹理编辑器单元测试
+
+1.   TextureEditor 
+
+纹理编辑器的单元测试，包括： 
+（1）纹理。
+
+----------------------------

@@ -1,29 +1,32 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.1 (2020/01/12 1:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/04 11:44)
 
 #ifndef EXAMPLE_TOOLSET_PLACEHOLDER_H
 #define EXAMPLE_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Example/ExampleToolset/ExampleToolsetDll.h" 
+#include "Toolset/Example/ExampleToolset/ExampleToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ExampleToolset
 {
-	 class EXAMPLE_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class EXAMPLE_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // EXAMPLE_TOOLSET_PLACEHOLDER_H
+#endif  // EXAMPLE_TOOLSET_PLACEHOLDER_H

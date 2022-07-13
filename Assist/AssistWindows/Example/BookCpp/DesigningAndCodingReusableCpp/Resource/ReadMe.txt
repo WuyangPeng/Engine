@@ -1,4 +1,0 @@
-C++ 代码设计与重用 （Designing and Coding Reusable C++）
-
-★
-作者：Martin D.Carroll、Margaret A.Ellis

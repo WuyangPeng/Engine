@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.2.6 (2021/11/15 14:51)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/04 10:42)
 
 #ifndef JSON_CONFIGURE_LIB_H
 #define JSON_CONFIGURE_LIB_H

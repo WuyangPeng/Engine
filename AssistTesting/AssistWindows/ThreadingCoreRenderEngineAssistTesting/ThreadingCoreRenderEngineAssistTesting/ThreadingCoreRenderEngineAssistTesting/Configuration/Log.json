@@ -1,6 +1,5 @@
 {
-  "Logger": 
-  {
+  "Logger": {
     "System": 1,
     "CoreTools": 1,
     "Network": 1,
@@ -20,27 +19,23 @@
     "Framework": 1
   },
 
-   "Appender":
-   {
-    "Console": 
-    {
+  "Appender": {
+    "Console": {
       "Flags": 15,
       "Level": 1
-    },       
-      
-	  "File":
-	  {
-		  "Directory": "Log", 
-		  "FileName": "ThreadingCoreRenderEngineAssistTesting",
-		  "Flags": 15, 
-		  "Level": 1,
-		  "MaxFileSize":1000000,
-		  "Backup": true,
-		  "Extension":"log"
-	  },
+    },
 
-    "Default": 
-    {
+    "File": {
+      "Directory": "Log",
+      "FileName": "ThreadingCoreRenderEngineAssistTesting",
+      "Flags": 15,
+      "Level": 1,
+      "MaxFileSize": 1000000,
+      "Backup": true,
+      "Extension": "log"
+    },
+
+    "Default": {
       "Directory": "Log",
       "Flags": 15,
       "Level": 1,
@@ -48,5 +43,5 @@
       "Backup": true,
       "Extension": "log"
     }
-   }
+  }
 }

@@ -1,5 +1,0 @@
-计算机组成与体系结构：性能设计（Computer Organization and Architecture）
-（第8版）
-
-★
-作者： William Stallings

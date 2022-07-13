@@ -1,7 +1,0 @@
-网络虚拟环境图形架构设计 （Networked graphics building networked games and virtual environments）
-
-类鸟群：
-http://www.red3d.com/cwr/boids/
-
-★★★
-作者： Anthony Steed、Manuel Fradinho Oliveira 

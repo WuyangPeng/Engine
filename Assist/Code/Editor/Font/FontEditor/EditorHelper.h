@@ -1,34 +1,35 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.1 (2020/01/19 23:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/07 10:47)
 
 #ifndef FONT_EDITOR_EDITOR_HELPER_H
 #define FONT_EDITOR_EDITOR_HELPER_H
 
+#include "Framework/MainFunctionHelper/WindowMainFunctionHelper.h"
 #include "Framework/WindowProcess/WindowProcessHandle.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuild.h"
-#include "Framework/MainFunctionHelper/WindowMainFunctionHelper.h"
 
 namespace FontEditor
 {
-	using WindowMainFunctionHelper = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, Framework::WindowProcessInterface>;
-	class EditorHelper : public WindowMainFunctionHelper
-	{
-	public:
-		using ClassType = EditorHelper;
-		using ParentType = WindowMainFunctionHelper;
-		using EnvironmentDirectory = Framework::EnvironmentDirectory;
-		using WindowApplicationInformation = Framework::WindowApplicationInformation;
+    using WindowMainFunctionHelper = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild, Framework::WindowProcessInterface>;
+    class EditorHelper : public WindowMainFunctionHelper
+    {
+    public:
+        using ClassType = EditorHelper;
+        using ParentType = WindowMainFunctionHelper;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
+        using WindowApplicationInformation = Framework::WindowApplicationInformation;
 
-	public:
-		EditorHelper(HInstance hInstance, char* cmdLine, const WindowApplicationInformation& information,
-					 const EnvironmentDirectory& environmentDirectory);
-		virtual ~EditorHelper();
+    public:
+        EditorHelper(WindowsHInstance hInstance, char* cmdLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
-	};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
 }
 
-#endif // FONT_EDITOR_EDITOR_HELPER_H
+#endif  // FONT_EDITOR_EDITOR_HELPER_H

@@ -1,7 +1,0 @@
-算法图解（Grokking Algorithms）
-
-官方网站：
-https://www.manning.com/books/grokking-algorithms 、https://github.com/egonschiele/grokking_algorithms
-
-○
-作者：Aditya Bhargava

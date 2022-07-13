@@ -1,4 +1,0 @@
-大规模C++程序设计（Large-Scale C++ Software Design）
-
-★
-作者：John Lakos

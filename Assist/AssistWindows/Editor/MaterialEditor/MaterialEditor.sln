@@ -8,23 +8,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditor", "MaterialE
 		{9B4610EA-87CB-4162-A560-587766158DBB} = {9B4610EA-87CB-4162-A560-587766158DBB}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{9F6B9D83-F7CF-490D-A651-52FC0086387F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssist", "MaterialEditorAssist\MaterialEditorAssist.vcxproj", "{9B4610EA-87CB-4162-A560-587766158DBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\MaterialEditor\MaterialEditorTesting\MaterialEditorTesting.vcxproj", "{9E96B542-FECF-40A8-80D2-0FF372027B4F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3D0C321C-5F32-4C67-891F-B28867392D28} = {3D0C321C-5F32-4C67-891F-B28867392D28}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{9F6B9D83-F7CF-490D-A651-52FC0086387F}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\MaterialEditor\MaterialEditorAssistTesting\MaterialEditorAssistTesting.vcxproj", "{72A2B542-DB9E-45F0-85C0-D00EFB8E04FD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9B4610EA-87CB-4162-A560-587766158DBB} = {9B4610EA-87CB-4162-A560-587766158DBB}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssist", "MaterialEditorAssist\MaterialEditorAssist.vcxproj", "{9B4610EA-87CB-4162-A560-587766158DBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

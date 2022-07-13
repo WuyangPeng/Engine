@@ -33,7 +33,7 @@
       <Configuration>StaticRelease</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>  
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{8516CC8A-0588-4F7D-AE50-023342957D4D}</ProjectGuid>
@@ -289,8 +289,6 @@
     <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CoreToolsToolset\Placeholder\Placeholder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.md" />
-    <Text Include="Resource\Schedule.md" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -301,6 +299,10 @@
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
     <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,13 +6,12 @@
 
 #include "Editor/Shader/ShaderEditorAssist/ShaderEditorAssistExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-ShaderEditorAssist::Placeholder
-	::Placeholder() 
+ShaderEditorAssist::Placeholder::Placeholder() noexcept
 {
-	SELF_CLASS_IS_VALID_9;
+    SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ShaderEditorAssist, Placeholder)

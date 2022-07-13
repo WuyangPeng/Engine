@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.1.0 (2021/02/20 10:59)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 14:02)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_INPUT_MIDDLE_LAYER_DEATIL_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_INPUT_MIDDLE_LAYER_DEATIL_H
@@ -29,6 +29,7 @@ ThreadingCoreRenderEngineAssist::InputMiddleLayer<ApplicationTrait>::InputMiddle
 #include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename ApplicationTrait>
 bool ThreadingCoreRenderEngineAssist::InputMiddleLayer<ApplicationTrait>::IsValid() const noexcept
 {
@@ -37,6 +38,7 @@ bool ThreadingCoreRenderEngineAssist::InputMiddleLayer<ApplicationTrait>::IsVali
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename ApplicationTrait>
@@ -44,8 +46,8 @@ bool ThreadingCoreRenderEngineAssist::InputMiddleLayer<ApplicationTrait>::KeyDow
 {
     ASSIST_CLASS_IS_VALID_1;
 
-    constexpr auto keyCode0 = ApplicationTrait::KeyIdentifiers::sm_KeyCode0;
-    constexpr auto keyCode9 = ApplicationTrait::KeyIdentifiers::sm_KeyCode9;
+    constexpr auto keyCode0 = ApplicationTrait::KeyIdentifiers::keyCode0;
+    constexpr auto keyCode9 = ApplicationTrait::KeyIdentifiers::keyCode9;
 
     if (keyCode0 <= key && key <= keyCode9)
     {

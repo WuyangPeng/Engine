@@ -1,137 +1,89 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{6317AD7C-0BDF-4D74-90D6-90904B1C909D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor\Editor.vcxproj", "{6317AD7C-0BDF-4D74-90D6-90904B1C909D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Animation", "Animation", "{EAAF93DB-5B3E-4A1A-B3B9-34CADE021DE3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{09FE2F16-0352-437B-9934-E4452AF5D1C6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Font", "Font", "{07D8EFC7-D352-4170-9A3A-536B4903BEC5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level", "Level", "{C4A990A1-4B9A-4C53-8EFE-27DE7447D0D1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Material", "Material", "{E5212A62-E020-465A-80A2-37279D9F8EBE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{ACC715AB-9F65-4EBF-A873-FAC0886ABE33}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scene", "Scene", "{1196F575-D8E4-4295-A65C-E57DE51ACC38}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script", "Script", "{3453D92C-2C7C-4809-8FA5-2BFDC3E9152F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{B551FE06-2929-4976-BDCD-4DDF0C8E8C04}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shadow", "Shadow", "{7C93FE59-BE11-4DCD-B4BF-843CB09E71D7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Skeleton", "Skeleton", "{F919DD46-9C60-405B-8AE2-C6A169230D01}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Terrain", "Terrain", "{FF7F0EB3-ABD5-4E84-BF36-50ABABBBEABD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Texture", "Texture", "{774851CB-9977-457F-9620-147E668A6662}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{0B98839A-1B94-42BF-9052-6AF7F016BBE8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceEditor", "UserInterfaceEditor\UserInterfaceEditor\UserInterfaceEditor.vcxproj", "{0C47A938-1616-40C0-8C36-77E880E92BC4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9A85C195-898A-4CA0-8B0A-5C37CD42F76A} = {9A85C195-898A-4CA0-8B0A-5C37CD42F76A}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditor", "TerrainEditor\TerrainEditor\TerrainEditor.vcxproj", "{2001BD36-42CD-45D7-BBD3-E76C1F7BF755}"
-	ProjectSection(ProjectDependencies) = postProject
-		{589AC7BE-725D-4534-B100-67DAA89237B9} = {589AC7BE-725D-4534-B100-67DAA89237B9}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditor", "TextureEditor\TextureEditor\TextureEditor.vcxproj", "{7A1A07BA-FABA-4442-AA77-C6944F75B517}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EAC44509-B507-47C2-AAA9-1AF73C222674} = {EAC44509-B507-47C2-AAA9-1AF73C222674}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditor", "AnimationEditor\AnimationEditor\AnimationEditor.vcxproj", "{21A8A118-16FB-4B6A-8BB8-68F26D8C56AB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E} = {E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditor", "DataEditor\DataEditor\DataEditor.vcxproj", "{88B93646-9DAD-4B81-9899-21CE9FBC9E41}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0C4EE3C0-B5C0-4DF9-B729-407763F39A37} = {0C4EE3C0-B5C0-4DF9-B729-407763F39A37}
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{5D78D3C2-2094-4EFD-B46D-B60BA4005D64}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditor", "EffectEditor\EffectEditor\EffectEditor.vcxproj", "{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9AA6A15D-1E74-4973-A760-FF42B134D7F8} = {9AA6A15D-1E74-4973-A760-FF42B134D7F8}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditor", "FontEditor\FontEditor\FontEditor.vcxproj", "{68DE71D8-2E06-4187-86D9-AA799ADB2637}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6A67C4B7-FEB8-4584-BDC3-3D02D1061057} = {6A67C4B7-FEB8-4584-BDC3-3D02D1061057}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditor", "LevelEditor\LevelEditor\LevelEditor.vcxproj", "{9B18C10D-ABA4-4B60-B714-88DBCDB976A9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2FC83BB4-8350-42BA-AB04-275FE11DD0AD} = {2FC83BB4-8350-42BA-AB04-275FE11DD0AD}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditor", "MaterialEditor\MaterialEditor\MaterialEditor.vcxproj", "{3D0C321C-5F32-4C67-891F-B28867392D28}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9B4610EA-87CB-4162-A560-587766158DBB} = {9B4610EA-87CB-4162-A560-587766158DBB}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor\ModelEditor.vcxproj", "{1DB4299C-FDB8-4151-9A52-BD5C952B95BF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4FA92DB2-7C28-4C15-B63C-866A2F80B347} = {4FA92DB2-7C28-4C15-B63C-866A2F80B347}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditor", "SceneEditor\SceneEditor\SceneEditor.vcxproj", "{0190E5F8-9CF6-4114-87E9-64CC66B60880}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D2B4D451-0753-4836-8DEB-2D72240C11BA} = {D2B4D451-0753-4836-8DEB-2D72240C11BA}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditor", "ScriptEditor\ScriptEditor\ScriptEditor.vcxproj", "{A6DAFFB8-5B40-4B23-903E-C8F6E4AF3FC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{16E2BEB0-FF66-49E2-85D6-705645418A12} = {16E2BEB0-FF66-49E2-85D6-705645418A12}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditor", "ShaderEditor\ShaderEditor\ShaderEditor.vcxproj", "{E3BD06C5-539A-485A-A179-6538E20DDE05}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FB106D8D-890C-4C15-BCC2-66CC9B156813} = {FB106D8D-890C-4C15-BCC2-66CC9B156813}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditor", "ShadowEditor\ShadowEditor\ShadowEditor.vcxproj", "{F831A5DF-6447-4DBB-B80A-80351E17A9C6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{05268887-B61F-4F7B-8112-3353BB20418D} = {05268887-B61F-4F7B-8112-3353BB20418D}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditor", "SkeletonEditor\SkeletonEditor\SkeletonEditor.vcxproj", "{FCC96FFB-C30C-48E5-8F6B-8F9A84FA0DAC}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7E2652B1-35DD-47B5-BBE3-5AD63F74053E} = {7E2652B1-35DD-47B5-BBE3-5AD63F74053E}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssist", "AnimationEditor\AnimationEditorAssist\AnimationEditorAssist.vcxproj", "{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{88845DA8-D756-4658-8272-02DEE7516495}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{5D78D3C2-2094-4EFD-B46D-B60BA4005D64}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorTesting", "..\..\..\AssistTesting\AssistWindows\Editor\AnimationEditor\AnimationEditorTesting\AnimationEditorTesting.vcxproj", "{975E1486-91FB-400F-818B-A636ABD813E2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21A8A118-16FB-4B6A-8BB8-68F26D8C56AB} = {21A8A118-16FB-4B6A-8BB8-68F26D8C56AB}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D39A3DF4-3EEA-415A-A56F-9369AC9DC2E7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\AnimationEditor\AnimationEditorAssistTesting\AnimationEditorAssistTesting.vcxproj", "{503B871E-3EAB-43F9-849B-E8C7DA4B9945}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E} = {E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{09FE2F16-0352-437B-9934-E4452AF5D1C6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditor", "DataEditor\DataEditor\DataEditor.vcxproj", "{88B93646-9DAD-4B81-9899-21CE9FBC9E41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C4EE3C0-B5C0-4DF9-B729-407763F39A37} = {0C4EE3C0-B5C0-4DF9-B729-407763F39A37}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{8C9DF120-6020-45EE-AF81-22EEC32EB2EC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssist", "DataEditor\DataEditorAssist\DataEditorAssist.vcxproj", "{0C4EE3C0-B5C0-4DF9-B729-407763F39A37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D39A3DF4-3EEA-415A-A56F-9369AC9DC2E7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorTesting", "..\..\..\AssistTesting\AssistWindows\Editor\DataEditor\DataEditorTesting\DataEditorTesting.vcxproj", "{2DE6005F-FB59-4F66-9317-75C32ACAC5BB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{88B93646-9DAD-4B81-9899-21CE9FBC9E41} = {88B93646-9DAD-4B81-9899-21CE9FBC9E41}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\DataEditor\DataEditorAssistTesting\DataEditorAssistTesting.vcxproj", "{758D089F-175F-4997-A9E6-71711AFB09D0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C4EE3C0-B5C0-4DF9-B729-407763F39A37} = {0C4EE3C0-B5C0-4DF9-B729-407763F39A37}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effect", "Effect", "{A916B904-5FB5-4733-BFCC-D0B6DC6A9231}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditor", "EffectEditor\EffectEditor\EffectEditor.vcxproj", "{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9AA6A15D-1E74-4973-A760-FF42B134D7F8} = {9AA6A15D-1E74-4973-A760-FF42B134D7F8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{112DAC7D-7D23-44AE-A56D-CD8C14639B99}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssist", "EffectEditor\EffectEditorAssist\EffectEditorAssist.vcxproj", "{9AA6A15D-1E74-4973-A760-FF42B134D7F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{091B5F05-E9CB-4B59-9ECB-D15DAE959300}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorTesting", "..\..\..\AssistTesting\AssistWindows\Editor\EffectEditor\EffectEditorTesting\EffectEditorTesting.vcxproj", "{A339272F-FC89-4FEB-AB46-1D2B0517FCB5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51} = {C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\EffectEditor\EffectEditorAssistTesting\EffectEditorAssistTesting.vcxproj", "{4A27CF0B-546C-4D3A-9355-19AB40CB156C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9AA6A15D-1E74-4973-A760-FF42B134D7F8} = {9AA6A15D-1E74-4973-A760-FF42B134D7F8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Font", "Font", "{07D8EFC7-D352-4170-9A3A-536B4903BEC5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditor", "FontEditor\FontEditor\FontEditor.vcxproj", "{68DE71D8-2E06-4187-86D9-AA799ADB2637}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6A67C4B7-FEB8-4584-BDC3-3D02D1061057} = {6A67C4B7-FEB8-4584-BDC3-3D02D1061057}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{A7DE9627-9B8D-4497-BFB0-5C0EA4664D5F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssist", "FontEditor\FontEditorAssist\FontEditorAssist.vcxproj", "{6A67C4B7-FEB8-4584-BDC3-3D02D1061057}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{6FF3F994-6A1C-4479-8E04-C07152196EE4}"
 EndProject
@@ -140,7 +92,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorTesting", "..\..\
 		{68DE71D8-2E06-4187-86D9-AA799ADB2637} = {68DE71D8-2E06-4187-86D9-AA799ADB2637}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\FontEditor\FontEditorAssistTesting\FontEditorAssistTesting.vcxproj", "{C34804AC-EF4A-4B0E-8C1D-87E359094585}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6A67C4B7-FEB8-4584-BDC3-3D02D1061057} = {6A67C4B7-FEB8-4584-BDC3-3D02D1061057}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level", "Level", "{C4A990A1-4B9A-4C53-8EFE-27DE7447D0D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditor", "LevelEditor\LevelEditor\LevelEditor.vcxproj", "{9B18C10D-ABA4-4B60-B714-88DBCDB976A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2FC83BB4-8350-42BA-AB04-275FE11DD0AD} = {2FC83BB4-8350-42BA-AB04-275FE11DD0AD}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{AD60C7C1-CB40-4E28-8016-326B7F36DC40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssist", "LevelEditor\LevelEditorAssist\LevelEditorAssist.vcxproj", "{2FC83BB4-8350-42BA-AB04-275FE11DD0AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{6E8B8A73-0D1F-4CB4-9E82-6A75493EDAD3}"
 EndProject
@@ -149,7 +115,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorTesting", "..\..
 		{9B18C10D-ABA4-4B60-B714-88DBCDB976A9} = {9B18C10D-ABA4-4B60-B714-88DBCDB976A9}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\LevelEditor\LevelEditorAssistTesting\LevelEditorAssistTesting.vcxproj", "{5334EF16-4D16-4777-A00C-CEFFE88F98B7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2FC83BB4-8350-42BA-AB04-275FE11DD0AD} = {2FC83BB4-8350-42BA-AB04-275FE11DD0AD}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Material", "Material", "{E5212A62-E020-465A-80A2-37279D9F8EBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditor", "MaterialEditor\MaterialEditor\MaterialEditor.vcxproj", "{3D0C321C-5F32-4C67-891F-B28867392D28}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9B4610EA-87CB-4162-A560-587766158DBB} = {9B4610EA-87CB-4162-A560-587766158DBB}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{F67C6423-F054-4487-BFF2-2C69D3C1C95E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssist", "MaterialEditor\MaterialEditorAssist\MaterialEditorAssist.vcxproj", "{9B4610EA-87CB-4162-A560-587766158DBB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{F012545C-E451-4007-ACC5-FE08AAEA68F2}"
 EndProject
@@ -158,7 +138,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorTesting", "..
 		{3D0C321C-5F32-4C67-891F-B28867392D28} = {3D0C321C-5F32-4C67-891F-B28867392D28}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\MaterialEditor\MaterialEditorAssistTesting\MaterialEditorAssistTesting.vcxproj", "{72A2B542-DB9E-45F0-85C0-D00EFB8E04FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9B4610EA-87CB-4162-A560-587766158DBB} = {9B4610EA-87CB-4162-A560-587766158DBB}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{ACC715AB-9F65-4EBF-A873-FAC0886ABE33}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor\ModelEditor.vcxproj", "{1DB4299C-FDB8-4151-9A52-BD5C952B95BF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA92DB2-7C28-4C15-B63C-866A2F80B347} = {4FA92DB2-7C28-4C15-B63C-866A2F80B347}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{16D48E99-FAD7-47E0-85A9-197046617116}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssist", "ModelEditor\ModelEditorAssist\ModelEditorAssist.vcxproj", "{4FA92DB2-7C28-4C15-B63C-866A2F80B347}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D584DE63-E7BA-4B61-8ED4-4E67DA623D38}"
 EndProject
@@ -167,7 +161,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorTesting", "..\..
 		{1DB4299C-FDB8-4151-9A52-BD5C952B95BF} = {1DB4299C-FDB8-4151-9A52-BD5C952B95BF}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ModelEditor\ModelEditorAssistTesting\ModelEditorAssistTesting.vcxproj", "{DD244FD8-2190-432B-9E68-80A62E10A133}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA92DB2-7C28-4C15-B63C-866A2F80B347} = {4FA92DB2-7C28-4C15-B63C-866A2F80B347}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scene", "Scene", "{1196F575-D8E4-4295-A65C-E57DE51ACC38}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditor", "SceneEditor\SceneEditor\SceneEditor.vcxproj", "{0190E5F8-9CF6-4114-87E9-64CC66B60880}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2B4D451-0753-4836-8DEB-2D72240C11BA} = {D2B4D451-0753-4836-8DEB-2D72240C11BA}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{6A073853-3A97-403A-B872-D6B36BC8580B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditorAssist", "SceneEditor\SceneEditorAssist\SceneEditorAssist.vcxproj", "{D2B4D451-0753-4836-8DEB-2D72240C11BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{7957F822-A304-4A89-AD3B-E9B7D62D16B9}"
 EndProject
@@ -176,7 +184,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditorTesting", "..\..
 		{0190E5F8-9CF6-4114-87E9-64CC66B60880} = {0190E5F8-9CF6-4114-87E9-64CC66B60880}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\SceneEditor\SceneEditorAssistTesting\SceneEditorAssistTesting.vcxproj", "{4E8D84B0-DBE2-43CC-8CD5-48719E38A70B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2B4D451-0753-4836-8DEB-2D72240C11BA} = {D2B4D451-0753-4836-8DEB-2D72240C11BA}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script", "Script", "{3453D92C-2C7C-4809-8FA5-2BFDC3E9152F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditor", "ScriptEditor\ScriptEditor\ScriptEditor.vcxproj", "{A6DAFFB8-5B40-4B23-903E-C8F6E4AF3FC8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16E2BEB0-FF66-49E2-85D6-705645418A12} = {16E2BEB0-FF66-49E2-85D6-705645418A12}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{C9348953-FD0D-4126-8BB5-F1D808AF2D12}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssist", "ScriptEditor\ScriptEditorAssist\ScriptEditorAssist.vcxproj", "{16E2BEB0-FF66-49E2-85D6-705645418A12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{38276FA0-6F33-49C7-BEAE-77A82CFEF4E6}"
 EndProject
@@ -185,7 +207,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorTesting", "..\.
 		{A6DAFFB8-5B40-4B23-903E-C8F6E4AF3FC8} = {A6DAFFB8-5B40-4B23-903E-C8F6E4AF3FC8}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ScriptEditor\ScriptEditorAssistTesting\ScriptEditorAssistTesting.vcxproj", "{CA339DA1-E2F2-4A3C-A070-FD16235426EC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16E2BEB0-FF66-49E2-85D6-705645418A12} = {16E2BEB0-FF66-49E2-85D6-705645418A12}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{B551FE06-2929-4976-BDCD-4DDF0C8E8C04}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditor", "ShaderEditor\ShaderEditor\ShaderEditor.vcxproj", "{E3BD06C5-539A-485A-A179-6538E20DDE05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB106D8D-890C-4C15-BCC2-66CC9B156813} = {FB106D8D-890C-4C15-BCC2-66CC9B156813}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{16AEA581-82FD-4330-8F47-577DBF2C6F29}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditorAssist", "ShaderEditor\ShaderEditorAssist\ShaderEditorAssist.vcxproj", "{FB106D8D-890C-4C15-BCC2-66CC9B156813}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{9541F91D-BC99-4EE5-BDF3-74DA78B055F6}"
 EndProject
@@ -194,7 +230,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditorTesting", "..\.
 		{E3BD06C5-539A-485A-A179-6538E20DDE05} = {E3BD06C5-539A-485A-A179-6538E20DDE05}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ShaderEditor\ShaderEditorAssistTesting\ShaderEditorAssistTesting.vcxproj", "{0E7C1583-CCD6-4C5A-B634-4C7EE877C490}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB106D8D-890C-4C15-BCC2-66CC9B156813} = {FB106D8D-890C-4C15-BCC2-66CC9B156813}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shadow", "Shadow", "{7C93FE59-BE11-4DCD-B4BF-843CB09E71D7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditor", "ShadowEditor\ShadowEditor\ShadowEditor.vcxproj", "{F831A5DF-6447-4DBB-B80A-80351E17A9C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{05268887-B61F-4F7B-8112-3353BB20418D} = {05268887-B61F-4F7B-8112-3353BB20418D}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{798E7A86-9F27-46AF-8698-7B65AC89F8C3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssist", "ShadowEditor\ShadowEditorAssist\ShadowEditorAssist.vcxproj", "{05268887-B61F-4F7B-8112-3353BB20418D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{8E9FE02A-35EE-4708-8AA8-40490FF83BA4}"
 EndProject
@@ -203,7 +253,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorTesting", "..\.
 		{F831A5DF-6447-4DBB-B80A-80351E17A9C6} = {F831A5DF-6447-4DBB-B80A-80351E17A9C6}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ShadowEditor\ShadowEditorAssistTesting\ShadowEditorAssistTesting.vcxproj", "{9BF160C5-4C73-44C2-9265-1AEA5F65A6D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{05268887-B61F-4F7B-8112-3353BB20418D} = {05268887-B61F-4F7B-8112-3353BB20418D}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Skeleton", "Skeleton", "{F919DD46-9C60-405B-8AE2-C6A169230D01}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditor", "SkeletonEditor\SkeletonEditor\SkeletonEditor.vcxproj", "{FCC96FFB-C30C-48E5-8F6B-8F9A84FA0DAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7E2652B1-35DD-47B5-BBE3-5AD63F74053E} = {7E2652B1-35DD-47B5-BBE3-5AD63F74053E}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{D7223977-C45B-44B5-ACC0-393F428BE0DC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssist", "SkeletonEditor\SkeletonEditorAssist\SkeletonEditorAssist.vcxproj", "{7E2652B1-35DD-47B5-BBE3-5AD63F74053E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{AC28A1B3-E33A-471E-A13C-8DD86FEDA929}"
 EndProject
@@ -212,7 +276,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorTesting", "..
 		{FCC96FFB-C30C-48E5-8F6B-8F9A84FA0DAC} = {FCC96FFB-C30C-48E5-8F6B-8F9A84FA0DAC}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\SkeletonEditor\SkeletonEditorAssistTesting\SkeletonEditorAssistTesting.vcxproj", "{6880DBF4-C401-4571-8C87-5859C5F5277C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7E2652B1-35DD-47B5-BBE3-5AD63F74053E} = {7E2652B1-35DD-47B5-BBE3-5AD63F74053E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Terrain", "Terrain", "{FF7F0EB3-ABD5-4E84-BF36-50ABABBBEABD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditor", "TerrainEditor\TerrainEditor\TerrainEditor.vcxproj", "{2001BD36-42CD-45D7-BBD3-E76C1F7BF755}"
+	ProjectSection(ProjectDependencies) = postProject
+		{589AC7BE-725D-4534-B100-67DAA89237B9} = {589AC7BE-725D-4534-B100-67DAA89237B9}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{051ECCFB-5CFA-41DC-82C6-39E61F90851B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssist", "TerrainEditor\TerrainEditorAssist\TerrainEditorAssist.vcxproj", "{589AC7BE-725D-4534-B100-67DAA89237B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{CE04A38D-5791-4417-A0ED-3E3375446403}"
 EndProject
@@ -221,7 +299,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorTesting", "..\
 		{2001BD36-42CD-45D7-BBD3-E76C1F7BF755} = {2001BD36-42CD-45D7-BBD3-E76C1F7BF755}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\TerrainEditor\TerrainEditorAssistTesting\TerrainEditorAssistTesting.vcxproj", "{CCC1F5F7-EF05-4976-96D2-D7C37812C4B8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{589AC7BE-725D-4534-B100-67DAA89237B9} = {589AC7BE-725D-4534-B100-67DAA89237B9}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Texture", "Texture", "{774851CB-9977-457F-9620-147E668A6662}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditor", "TextureEditor\TextureEditor\TextureEditor.vcxproj", "{7A1A07BA-FABA-4442-AA77-C6944F75B517}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAC44509-B507-47C2-AAA9-1AF73C222674} = {EAC44509-B507-47C2-AAA9-1AF73C222674}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{60B99517-50BA-4687-BC74-F92C8CC46AB5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssist", "TextureEditor\TextureEditorAssist\TextureEditorAssist.vcxproj", "{EAC44509-B507-47C2-AAA9-1AF73C222674}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D6B62D09-8315-4A64-8E4F-3CC939EB03A4}"
 EndProject
@@ -230,7 +322,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorTesting", "..\
 		{7A1A07BA-FABA-4442-AA77-C6944F75B517} = {7A1A07BA-FABA-4442-AA77-C6944F75B517}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\TextureEditor\TextureEditorAssistTesting\TextureEditorAssistTesting.vcxproj", "{91E792EB-640E-48D2-87A2-662D2991F4E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EAC44509-B507-47C2-AAA9-1AF73C222674} = {EAC44509-B507-47C2-AAA9-1AF73C222674}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{0B98839A-1B94-42BF-9052-6AF7F016BBE8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceEditor", "UserInterfaceEditor\UserInterfaceEditor\UserInterfaceEditor.vcxproj", "{0C47A938-1616-40C0-8C36-77E880E92BC4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A85C195-898A-4CA0-8B0A-5C37CD42F76A} = {9A85C195-898A-4CA0-8B0A-5C37CD42F76A}
+	EndProjectSection
+EndProject 
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{A5587983-D86E-4BA6-A4CB-FBDCA41FCF21}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceEditorAssist", "UserInterfaceEditor\UserInterfaceEditorAssist\UserInterfaceEditorAssist.vcxproj", "{9A85C195-898A-4CA0-8B0A-5C37CD42F76A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{46E40385-C8E4-4754-A687-E13C08455739}"
 EndProject
@@ -239,117 +345,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceEditorTesting"
 		{0C47A938-1616-40C0-8C36-77E880E92BC4} = {0C47A938-1616-40C0-8C36-77E880E92BC4}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceEditorAssist", "UserInterfaceEditor\UserInterfaceEditorAssist\UserInterfaceEditorAssist.vcxproj", "{9A85C195-898A-4CA0-8B0A-5C37CD42F76A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInterfaceEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\UserInterfaceEditor\UserInterfaceEditorAssistTesting\UserInterfaceEditorAssistTesting.vcxproj", "{830DBE30-0C4D-4EEA-B47D-7FBDB41C09B8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9A85C195-898A-4CA0-8B0A-5C37CD42F76A} = {9A85C195-898A-4CA0-8B0A-5C37CD42F76A}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssist", "TerrainEditor\TerrainEditorAssist\TerrainEditorAssist.vcxproj", "{589AC7BE-725D-4534-B100-67DAA89237B9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerrainEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\TerrainEditor\TerrainEditorAssistTesting\TerrainEditorAssistTesting.vcxproj", "{CCC1F5F7-EF05-4976-96D2-D7C37812C4B8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{589AC7BE-725D-4534-B100-67DAA89237B9} = {589AC7BE-725D-4534-B100-67DAA89237B9}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditorAssist", "ShaderEditor\ShaderEditorAssist\ShaderEditorAssist.vcxproj", "{FB106D8D-890C-4C15-BCC2-66CC9B156813}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ShaderEditor\ShaderEditorAssistTesting\ShaderEditorAssistTesting.vcxproj", "{0E7C1583-CCD6-4C5A-B634-4C7EE877C490}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FB106D8D-890C-4C15-BCC2-66CC9B156813} = {FB106D8D-890C-4C15-BCC2-66CC9B156813}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssist", "ShadowEditor\ShadowEditorAssist\ShadowEditorAssist.vcxproj", "{05268887-B61F-4F7B-8112-3353BB20418D}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShadowEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ShadowEditor\ShadowEditorAssistTesting\ShadowEditorAssistTesting.vcxproj", "{9BF160C5-4C73-44C2-9265-1AEA5F65A6D1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{05268887-B61F-4F7B-8112-3353BB20418D} = {05268887-B61F-4F7B-8112-3353BB20418D}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditorAssist", "SceneEditor\SceneEditorAssist\SceneEditorAssist.vcxproj", "{D2B4D451-0753-4836-8DEB-2D72240C11BA}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\SceneEditor\SceneEditorAssistTesting\SceneEditorAssistTesting.vcxproj", "{4E8D84B0-DBE2-43CC-8CD5-48719E38A70B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D2B4D451-0753-4836-8DEB-2D72240C11BA} = {D2B4D451-0753-4836-8DEB-2D72240C11BA}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Effect", "Effect", "{A916B904-5FB5-4733-BFCC-D0B6DC6A9231}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{112DAC7D-7D23-44AE-A56D-CD8C14639B99}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{091B5F05-E9CB-4B59-9ECB-D15DAE959300}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssist", "EffectEditor\EffectEditorAssist\EffectEditorAssist.vcxproj", "{9AA6A15D-1E74-4973-A760-FF42B134D7F8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\EffectEditor\EffectEditorAssistTesting\EffectEditorAssistTesting.vcxproj", "{4A27CF0B-546C-4D3A-9355-19AB40CB156C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9AA6A15D-1E74-4973-A760-FF42B134D7F8} = {9AA6A15D-1E74-4973-A760-FF42B134D7F8}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssist", "DataEditor\DataEditorAssist\DataEditorAssist.vcxproj", "{0C4EE3C0-B5C0-4DF9-B729-407763F39A37}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\DataEditor\DataEditorAssistTesting\DataEditorAssistTesting.vcxproj", "{758D089F-175F-4997-A9E6-71711AFB09D0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0C4EE3C0-B5C0-4DF9-B729-407763F39A37} = {0C4EE3C0-B5C0-4DF9-B729-407763F39A37}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssist", "AnimationEditor\AnimationEditorAssist\AnimationEditorAssist.vcxproj", "{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\AnimationEditor\AnimationEditorAssistTesting\AnimationEditorAssistTesting.vcxproj", "{503B871E-3EAB-43F9-849B-E8C7DA4B9945}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E} = {E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssist", "ModelEditor\ModelEditorAssist\ModelEditorAssist.vcxproj", "{4FA92DB2-7C28-4C15-B63C-866A2F80B347}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ModelEditor\ModelEditorAssistTesting\ModelEditorAssistTesting.vcxproj", "{DD244FD8-2190-432B-9E68-80A62E10A133}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4FA92DB2-7C28-4C15-B63C-866A2F80B347} = {4FA92DB2-7C28-4C15-B63C-866A2F80B347}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssist", "TextureEditor\TextureEditorAssist\TextureEditorAssist.vcxproj", "{EAC44509-B507-47C2-AAA9-1AF73C222674}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\TextureEditor\TextureEditorAssistTesting\TextureEditorAssistTesting.vcxproj", "{91E792EB-640E-48D2-87A2-662D2991F4E6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EAC44509-B507-47C2-AAA9-1AF73C222674} = {EAC44509-B507-47C2-AAA9-1AF73C222674}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssist", "MaterialEditor\MaterialEditorAssist\MaterialEditorAssist.vcxproj", "{9B4610EA-87CB-4162-A560-587766158DBB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\MaterialEditor\MaterialEditorAssistTesting\MaterialEditorAssistTesting.vcxproj", "{72A2B542-DB9E-45F0-85C0-D00EFB8E04FD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9B4610EA-87CB-4162-A560-587766158DBB} = {9B4610EA-87CB-4162-A560-587766158DBB}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssist", "FontEditor\FontEditorAssist\FontEditorAssist.vcxproj", "{6A67C4B7-FEB8-4584-BDC3-3D02D1061057}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FontEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\FontEditor\FontEditorAssistTesting\FontEditorAssistTesting.vcxproj", "{C34804AC-EF4A-4B0E-8C1D-87E359094585}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6A67C4B7-FEB8-4584-BDC3-3D02D1061057} = {6A67C4B7-FEB8-4584-BDC3-3D02D1061057}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssist", "SkeletonEditor\SkeletonEditorAssist\SkeletonEditorAssist.vcxproj", "{7E2652B1-35DD-47B5-BBE3-5AD63F74053E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkeletonEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\SkeletonEditor\SkeletonEditorAssistTesting\SkeletonEditorAssistTesting.vcxproj", "{6880DBF4-C401-4571-8C87-5859C5F5277C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7E2652B1-35DD-47B5-BBE3-5AD63F74053E} = {7E2652B1-35DD-47B5-BBE3-5AD63F74053E}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssist", "LevelEditor\LevelEditorAssist\LevelEditorAssist.vcxproj", "{2FC83BB4-8350-42BA-AB04-275FE11DD0AD}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\LevelEditor\LevelEditorAssistTesting\LevelEditorAssistTesting.vcxproj", "{5334EF16-4D16-4777-A00C-CEFFE88F98B7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2FC83BB4-8350-42BA-AB04-275FE11DD0AD} = {2FC83BB4-8350-42BA-AB04-275FE11DD0AD}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssist", "ScriptEditor\ScriptEditorAssist\ScriptEditorAssist.vcxproj", "{16E2BEB0-FF66-49E2-85D6-705645418A12}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssistTesting", "..\..\..\AssistTesting\AssistWindows\Editor\ScriptEditor\ScriptEditorAssistTesting\ScriptEditorAssistTesting.vcxproj", "{CA339DA1-E2F2-4A3C-A070-FD16235426EC}"
-	ProjectSection(ProjectDependencies) = postProject
-		{16E2BEB0-FF66-49E2-85D6-705645418A12} = {16E2BEB0-FF66-49E2-85D6-705645418A12}
-	EndProjectSection
-EndProject
+EndProject 
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -362,22 +362,6 @@ Global
 		StaticRelease|x86 = StaticRelease|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x64.ActiveCfg = Debug|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x64.Build.0 = Debug|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x86.ActiveCfg = Debug|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x86.Build.0 = Debug|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x64.ActiveCfg = Release|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x64.Build.0 = Release|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x86.ActiveCfg = Release|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x86.Build.0 = Release|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x64.Build.0 = StaticDebug|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x86.Build.0 = StaticDebug|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x64.Build.0 = StaticRelease|x64
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
-		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 		{0C47A938-1616-40C0-8C36-77E880E92BC4}.Debug|x64.ActiveCfg = Debug|x64
 		{0C47A938-1616-40C0-8C36-77E880E92BC4}.Debug|x64.Build.0 = Debug|x64
 		{0C47A938-1616-40C0-8C36-77E880E92BC4}.Debug|x86.ActiveCfg = Debug|Win32
@@ -1338,6 +1322,22 @@ Global
 		{CA339DA1-E2F2-4A3C-A070-FD16235426EC}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{CA339DA1-E2F2-4A3C-A070-FD16235426EC}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{CA339DA1-E2F2-4A3C-A070-FD16235426EC}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x64.ActiveCfg = Debug|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x64.Build.0 = Debug|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x86.ActiveCfg = Debug|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Debug|x86.Build.0 = Debug|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x64.ActiveCfg = Release|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x64.Build.0 = Release|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x86.ActiveCfg = Release|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.Release|x86.Build.0 = Release|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{6317AD7C-0BDF-4D74-90D6-90904B1C909D}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

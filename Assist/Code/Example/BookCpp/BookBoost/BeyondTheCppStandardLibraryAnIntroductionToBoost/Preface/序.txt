@@ -1,8 +1,0 @@
-序
-C++社区正在发生着好事。C++依旧是最广泛使用的编程语言，它正在变得更强大和更易用。你不信？听我细说。
-标准C++的当前版本发布于1998，它为传统的面向过程编程、面向对象编程和泛型编程提供了坚实的支持。正如旧C++ (1998之前的) 独力承担了把面向对象普及到日常的软件开发中一样，C++98在为泛型编程做着同样的事情。九十年代中期标准模板库(STL)与标准C++的集成已经引起了另一次编程范式的转变，就象八十年代的时候Bjarne Stroustrup把类引入到C一样。现在大多数的C++开发者都熟悉STL的概念，这再次提升了整体的水平。
-C++能力的应用仍旧被不断发现。今天许多的C++库，包括特殊的数学库，都大量利用了模板元编译的技术，它是设计C++模板的时候没有预测到的幸运结果。随着C++社区里的高级工具和技术不断涌现，开发复杂应用软件正变得更简单、更令人愉快。
-很难描述Boost对于C++世界的重要性。自从C++98发布后，除了ISO的标准C++委员会，没有一个团体对于C++的发展方向有比Boost更大的影响(许多Boost的成员本身就是WG21的重要成员，包括它的创始人，我的朋友Beman Dawes)。成千上万个杰出的Boost志愿者无私地，以对等审查方式开发了许多C++98没有提供的很有用的库。这些库中的十个已被接受将加入到即将到来的C++0x的库中，更多的库正被考虑接受。Where a library approach has been shown to be wanting, the wisdom gained from the cross-pollination of Boost and WG21 has suggested a few modest language enhancements, which are now being entertained.
-你不太可能没有听说过Boost，我来问一下你… 你需要在文本和数字之间进行转换，或在任意的可流处理的类之间进行转换？没有问题，用Boost.lexical_cast。噢，你有更多复杂的文本处理要求？那么你可以用 Boost.Tokenizer 或 Boost.Regex, 或Boost.Spirit, 如果你需要完整的语法分析。Boost.Bind 的函数反射和组合能力会让你吃惊。要用函数对象来编程，有Boost.Lambda。静态断言？用MPL。如果你是用数学库，记住：你有Boost.Math, Graph, Quaternion, Octonion, MultiArray, Random, 和 Rational。如果你刚好喜欢Python，有了Boost.Python的帮助，你可以和C++一起用它了。并且你可以从以上所有东西中挑选出你要的。
-Bj?rn Karlsson是一名Boost 狂热者以及C++社区的热心的支持者。你曾经在C/C++ Users Journal上出版了很多有用的好文章，最近还为C++ Source, 一个新的C++社区的在线杂志(见 www.artima.com/cppsource) 写文章。他在本书中讲述了关键的Boost组件并给出示例，展示了如何使用它们扩充C++标准库。本书不仅是Boost的深入教程，也是标准C++的未来版本的预示。希望你喜欢！
-Chuck Allison, Editor, The C++ Source

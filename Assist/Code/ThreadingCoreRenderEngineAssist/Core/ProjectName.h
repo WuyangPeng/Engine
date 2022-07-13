@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.1.0 (2021/02/20 11:01)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 14:10)
 
 #ifndef THREADING_CORE_RENDER_ENGINE_ASSIST_PROJECT_NAME_H
 #define THREADING_CORE_RENDER_ENGINE_ASSIST_PROJECT_NAME_H
@@ -31,16 +31,16 @@ namespace ThreadingCoreRenderEngineAssist
         CLASS_INVARIANT_DECLARE;
 
         void PrintSelect() const;
-        [[nodiscard]] bool IsSelectValid(int select) const;
-        [[nodiscard]] const String GetEngineeringName(int select) const;
-        [[nodiscard]] const String GetEngineeringNameOrEmpty(int select) const;
+        NODISCARD bool IsSelectValid(int select) const;
+        NODISCARD String GetEngineeringName(int select) const;
+        NODISCARD String GetEngineeringNameOrEmpty(int select) const;
 
     private:
         using ProjectNameContainer = std::vector<String>;
 
     private:
-        [[nodiscard]] static std::string GetProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory);
-        [[nodiscard]] static ProjectNameContainer GenerateEngineName(const String& fileName, const EnvironmentDirectory& environmentDirectory);
+        NODISCARD static std::string GetProjectName(const String& fileName, const EnvironmentDirectory& environmentDirectory);
+        NODISCARD static ProjectNameContainer GenerateEngineName(const String& fileName, const EnvironmentDirectory& environmentDirectory);
 
     private:
         ProjectNameContainer container;

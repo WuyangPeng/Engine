@@ -1,5 +1,0 @@
-C++ 数据结构与算法（Data Structures and Algorithms in C++）
-（第4版）
-
-☆
-作者：Adam Drozdek

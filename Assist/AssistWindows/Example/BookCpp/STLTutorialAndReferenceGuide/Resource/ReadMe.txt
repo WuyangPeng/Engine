@@ -1,5 +1,0 @@
-标准模板库自修教程与参考手册（STL Tutorial and Reference Guide）
-（第2版）
-
-☆
-作者：David R.Musser、Gillmer J.Derge、Atul Sain

@@ -1,5 +1,0 @@
-Windows 网络编程 （Network Programming For Microsoft windows）
-（第2版）
-
-★
-作者： Anthony Jones、Jim Ohlund

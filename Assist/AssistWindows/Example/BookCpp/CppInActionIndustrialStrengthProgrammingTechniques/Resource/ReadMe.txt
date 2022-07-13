@@ -1,4 +1,0 @@
-C++ 实践之路（C++ In Action:Industrial-Strength Programming Techniques）
-
-★
-作者：Bartosz Milewski

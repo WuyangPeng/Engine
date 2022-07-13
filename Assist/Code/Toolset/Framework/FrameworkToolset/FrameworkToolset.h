@@ -1,21 +1,24 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.3.0.1 (2020/05/20 21:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/04 19:00)
 
 #ifndef FRAMEWORK_TOOLSET_H
 #define FRAMEWORK_TOOLSET_H
- 
-#include "MainFunctionHelper/MainFunctionHelper.h"
-#include "WindowProcess/WindowProcess.h"
-#include "WindowRegister/WindowRegister.h"
-#include "MiddleLayer/MiddleLayer.h"
-#include "WindowsAPIFrame/WindowsAPIFrame.h"
-#include "OpenGLGlutFrame/OpenGLGlutFrame.h"
+
 #include "AndroidFrame/AndroidFrame.h"
+#include "ConsoleFrame/ConsoleFrame.h"
 #include "LinuxFrame/LinuxFrame.h"
 #include "MacintoshFrame/MacintoshFrame.h"
-#include "ConsoleFrame/ConsoleFrame.h"
+#include "MainFunctionHelper/MainFunctionHelper.h"
+#include "MiddleLayer/MiddleLayer.h"
+#include "OpenGLGlutFrame/OpenGLGlutFrame.h"
+#include "WindowProcess/WindowProcess.h"
+#include "WindowRegister/WindowRegister.h"
+#include "WindowsAPIFrame/WindowsAPIFrame.h"
 
-#endif // FRAMEWORK_TOOLSET_H
+#endif  // FRAMEWORK_TOOLSET_H

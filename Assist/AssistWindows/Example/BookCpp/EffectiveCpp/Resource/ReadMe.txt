@@ -1,8 +1,0 @@
-Effective C++
-（第3版）
-
-★★★★
-作者：Scott Meyers
-
-官方网站：
-http://aristeia.com/BookErrata/ec++3e-errata.html、 http://aristeia.com/MailingList。

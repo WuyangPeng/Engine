@@ -1,5 +1,0 @@
-初等数论及其应用（Elementary Number Theory and Its Applications）
-（第5版） 
-
-☆
-作者：Kenneth H.Rosen

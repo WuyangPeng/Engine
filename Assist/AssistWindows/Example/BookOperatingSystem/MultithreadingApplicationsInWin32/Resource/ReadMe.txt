@@ -1,4 +1,0 @@
-Win32 多线程程序设计 （Multithreading Applications in Win32）
-
-☆
-作者：Jim Beveridge、Robert Wiener

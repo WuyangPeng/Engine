@@ -1,5 +1,5 @@
 TODO Level 6
 
-0.0.2.2  
+0.8.0.10
  
 1. （ArtificialIntellegenceExample） 完成人工智能例子的单元测试。

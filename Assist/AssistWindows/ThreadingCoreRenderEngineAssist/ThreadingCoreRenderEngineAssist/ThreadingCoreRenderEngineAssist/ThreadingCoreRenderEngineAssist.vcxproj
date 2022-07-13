@@ -104,7 +104,7 @@
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistWin32DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
@@ -114,7 +114,7 @@
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
@@ -124,7 +124,7 @@
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistX64DebugLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
@@ -134,7 +134,7 @@
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\Assist.props" />
     <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
@@ -181,7 +181,8 @@ xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../../$(Platform)/$(Con
 xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
@@ -191,6 +192,7 @@ xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -211,13 +213,15 @@ xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../../$(Platform)/$(Con
 xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -240,6 +244,7 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
     <PreLinkEvent>
@@ -249,7 +254,8 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)
       <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -271,13 +277,15 @@ xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -298,6 +306,7 @@ xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -307,7 +316,8 @@ xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../../$(Platform)/$(Confi
 xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -325,6 +335,7 @@ xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)W
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -334,7 +345,8 @@ xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../../$(Platform)/$(Confi
 xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -356,6 +368,7 @@ xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)W
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
     <PreLinkEvent>
@@ -365,7 +378,8 @@ xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)
       <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -387,13 +401,15 @@ xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)W
 xcopy "$(ProjectDir)/Configuration/EngineDirectory.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Renderer.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/Project.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/Testing.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
 xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenXLSXX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -402,6 +418,7 @@ xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)W
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Project.json" />
     <None Include="Configuration\Renderer.json" />
+    <None Include="Configuration\Testing.json" />
     <None Include="Configuration\ThreadingCoreRenderEngineAssist.json" />
     <None Include="Resource\LearningLibrary.md" />
     <None Include="Resource\ReadMe.md" />

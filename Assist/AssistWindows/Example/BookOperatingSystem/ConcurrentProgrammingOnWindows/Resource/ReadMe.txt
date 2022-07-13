@@ -1,7 +1,0 @@
-Windows 并发编程指南 （Concurrent Programming On Windows）
-
-官方网站：    
-http://www.bluebytesoftware.com/books （已失效）
- 
-★★
-作者：Joe Duffy

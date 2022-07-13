@@ -5,18 +5,18 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditor", "AnimationEditor\AnimationEditor.vcxproj", "{21A8A118-16FB-4B6A-8BB8-68F26D8C56AB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{69E3C4CC-5449-4778-9590-58B756229530}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssist", "AnimationEditorAssist\AnimationEditorAssist.vcxproj", "{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\AnimationEditor\AnimationEditorTesting\AnimationEditorTesting.vcxproj", "{975E1486-91FB-400F-818B-A636ABD813E2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21A8A118-16FB-4B6A-8BB8-68F26D8C56AB} = {21A8A118-16FB-4B6A-8BB8-68F26D8C56AB}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{69E3C4CC-5449-4778-9590-58B756229530}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssist", "AnimationEditorAssist\AnimationEditorAssist.vcxproj", "{E14C09E0-9B6C-4384-9741-3CAC50EC2F8E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\AnimationEditor\AnimationEditorAssistTesting\AnimationEditorAssistTesting.vcxproj", "{503B871E-3EAB-43F9-849B-E8C7DA4B9945}"
 EndProject

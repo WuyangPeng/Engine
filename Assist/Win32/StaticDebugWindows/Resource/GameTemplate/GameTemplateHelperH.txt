@@ -25,7 +25,7 @@ namespace %SolutionName%
 		using WindowApplicationInformation = Framework::WindowApplicationInformation;	 
 
 	public:
-		%SolutionName%Helper(HInstance instance,char* commandLine,const WindowApplicationInformation& information,const EnvironmentDirectory& environmentDirectory);
+		%SolutionName%Helper(WindowsHInstance instance,char* commandLine,const WindowApplicationInformation& information,const EnvironmentDirectory& environmentDirectory);
 		virtual ~%SolutionName%Helper();
 		
 		CLASS_INVARIANT_OVERRIDE_DECLARE;	

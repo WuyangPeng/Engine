@@ -1,5 +1,0 @@
-C++ 必知必会（C++ Common Knowledge）
-
-★★
-作者：Stephen C. Dewhurst
-其他书籍：《C++ 程序设计陷阱》

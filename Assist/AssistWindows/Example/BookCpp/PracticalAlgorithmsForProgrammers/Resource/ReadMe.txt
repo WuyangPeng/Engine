@@ -1,4 +1,0 @@
-程序员实用算法（Practical Algorithms for Programmers）
-
-★
-作者：Andrew Binstock、John Rex

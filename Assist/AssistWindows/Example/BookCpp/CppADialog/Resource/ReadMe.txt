@@ -1,7 +1,0 @@
-C++ 编程基础（C++ A Dialog）
-
-官方网站 
-http://steveheller.com/ （已失效）、http://www.steveheller.org/
-
-○
-作者：Steve Heller

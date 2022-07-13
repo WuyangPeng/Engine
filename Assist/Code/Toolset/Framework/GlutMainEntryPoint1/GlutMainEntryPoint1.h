@@ -1,31 +1,34 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎辅助版本：0.3.0.1 (2020/05/25 13:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/05 10:07)
 
 #ifndef GLUT_MAIN_ENTRY_POINT1_H
 #define GLUT_MAIN_ENTRY_POINT1_H
 
-#include "Framework/OpenGLGlutFrame/OpenGLGlutProcess.h"
-#include "Framework/OpenGLGlutFrame/OpenGLGlutFrameBuild.h"
 #include "Framework/MainFunctionHelper/OpenGLGlutMainFunctionHelperDetail.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutFrameBuild.h"
+#include "Framework/OpenGLGlutFrame/OpenGLGlutProcess.h"
 
 namespace Framework
 {
-	using BaseType = OpenGLGlutMainFunctionHelper<OpenGLGlutFrameBuild, OpenGLGlutProcessInterface>;
+    using BaseType = OpenGLGlutMainFunctionHelper<OpenGLGlutFrameBuild, OpenGLGlutProcessInterface>;
 
-	class GlutMainEntryPoint1 final : public BaseType
-	{
-	public:
-		using ClassType = GlutMainEntryPoint1;
-		using ParentType = BaseType;
+    class GlutMainEntryPoint1 final : public BaseType
+    {
+    public:
+        using ClassType = GlutMainEntryPoint1;
+        using ParentType = BaseType;
 
-	public:
-		GlutMainEntryPoint1(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
+    public:
+        GlutMainEntryPoint1(int argc, char** argv, const GLUTApplicationInformation& information, const EnvironmentDirectory& environmentDirectory);
 
-		CLASS_INVARIANT_FINAL_DECLARE;
-	};
+        CLASS_INVARIANT_FINAL_DECLARE;
+    };
 }
 
-#endif // GLUT_MAIN_ENTRY_POINT1_H
+#endif  // GLUT_MAIN_ENTRY_POINT1_H

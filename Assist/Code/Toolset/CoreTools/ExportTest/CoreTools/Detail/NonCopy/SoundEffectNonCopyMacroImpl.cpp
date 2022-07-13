@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.2.1 (2021/08/13 21:12)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/01 14:08)
 
 #include "SoundEffect/SoundEffectExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/SoundEffectClassInvariantMacro.h"
 
 SoundEffect::SoundEffectNonCopyMacroImpl::SoundEffectNonCopyMacroImpl(int count) noexcept
-    : m_Count{ count }
+    : mCount{ count }
 {
     SOUND_EFFECT_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int SoundEffect::SoundEffectNonCopyMacroImpl::GetCount() const noexcept
 {
     SOUND_EFFECT_CLASS_IS_VALID_CONST_9;
 
-    return m_Count;
+    return mCount;
 }
 
 void SoundEffect::SoundEffectNonCopyMacroImpl::SetCount(int count) noexcept
 {
     SOUND_EFFECT_CLASS_IS_VALID_9;
 
-    m_Count = count;
+    mCount = count;
 }

@@ -64,12 +64,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.md">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.md">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -100,5 +94,13 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,8 +1,0 @@
-21天学通C++（Sams Teach Yourself C++ in One Hour a Day）
-（第8版）
-
-官方网站 
-http://www.ptpress.com.cn/。
-
-●
-作者：Siddhartha Rao

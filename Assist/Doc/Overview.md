@@ -1,15 +1,15 @@
 /// @mainpage Threading Core Render Engine Assist API 文档
 
-@copyright Copyright (c) 2011-2021
+@copyright Copyright (c) 2011-2022
 Threading Core Render Engine Assist
 
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.7.1.0
+@version 0.8.0.10
 标准：std:c++17
 
-@date 2021/02/19 17:13
+@date 2022/06/29 19:17
 
 @section sec_Contents 内容
 
@@ -19,15 +19,13 @@ Threading Core Render Engine Assist
 
 @section sec_Overview 概述
 
-引擎辅助包含四个模块：
+引擎辅助包含三个模块：
 
 工具箱（Toolset）。
  
 编辑器（Editor）。
  
 例子（Example）。
- 
-库例子（LibExample）。
 
 @section sec_Detail 详细说明
 

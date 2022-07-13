@@ -1,4 +1,0 @@
-基于C++ CORBA高级编程 （Advanced CORBA Programming with C++）
-
-○
-作者： Michi Henning、Steve Vinoski

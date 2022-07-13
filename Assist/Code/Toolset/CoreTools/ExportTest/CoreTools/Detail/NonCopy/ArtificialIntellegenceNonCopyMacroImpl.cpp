@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.2.1 (2021/08/13 21:11)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/01 14:05)
 
 #include "ArtificialIntellegence/ArtificialIntellegenceExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
 
 ArtificialIntellegence::ArtificialIntellegenceNonCopyMacroImpl::ArtificialIntellegenceNonCopyMacroImpl(int count) noexcept
-    : m_Count{ count }
+    : mCount{ count }
 {
     ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int ArtificialIntellegence::ArtificialIntellegenceNonCopyMacroImpl::GetCount() c
 {
     ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_CONST_9;
 
-    return m_Count;
+    return mCount;
 }
 
 void ArtificialIntellegence::ArtificialIntellegenceNonCopyMacroImpl::SetCount(int count) noexcept
 {
     ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_9;
 
-    m_Count = count;
+    mCount = count;
 }

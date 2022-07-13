@@ -1,0 +1,11 @@
+@ingroup group_ScriptEditorTesting_Documentation
+
+----------------------------
+脚本编辑器单元测试
+
+1.   ScriptEditor 
+
+脚本编辑器的单元测试，包括： 
+（1）脚本。
+
+----------------------------

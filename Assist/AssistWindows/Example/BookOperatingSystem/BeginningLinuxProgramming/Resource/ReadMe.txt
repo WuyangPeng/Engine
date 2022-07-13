@@ -1,5 +1,0 @@
-Linux程序设计（Beginning Linux Programming）
-（第四版）
-
-★
-作者：  Neil Matthew、Richard Stones

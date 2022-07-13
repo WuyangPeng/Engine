@@ -9,11 +9,9 @@
 
 #include "Macro/UserMacro.h"
 #include "System/SystemLib.h"
+#include "CoreTools/CoreToolsLib.h"
+#if defined(TCRE_USE_MSVC)
 
-#if defined(TCRE_USE_MSVC) 
+#endif  // TCRE_USE_MSVC
 
-
-	
-#endif // TCRE_USE_MSVC
-
-#endif // RESOURCE_MANAGER_EXAMPLE_DLL_LIB_H
+#endif  // RESOURCE_MANAGER_EXAMPLE_DLL_LIB_H

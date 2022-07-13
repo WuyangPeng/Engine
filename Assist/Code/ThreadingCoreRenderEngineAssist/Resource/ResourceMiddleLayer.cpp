@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎辅助版本：0.7.1.0 (2021/02/20 10:52)
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 14:00)
 
 #include "ResourceMiddleLayer.h"
 #include "ThreadingCoreRenderEngineAssist/GUI/GUIMiddleLayer.h"
 #include "ThreadingCoreRenderEngineAssist/Helper/AssistClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "System/Window/Engineering.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::make_unique;
@@ -99,5 +99,5 @@ void ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::PrintEngineering(cons
 
 ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::GUIMiddleLayerSharedPtr ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::GetGUIMiddleLayer()
 {
-    return boost::polymorphic_pointer_downcast<GUIMiddleLayer>(GetGUIManager());    
+    return boost::polymorphic_pointer_downcast<GUIMiddleLayer>(GetGUIManager());
 }

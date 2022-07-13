@@ -1,4 +1,0 @@
-标准C++ 输入输出流与本地化（Standard C++ IOStreams and Locales）
-
-☆
-作者：Angelika Langer、Klaus Kreft

@@ -1,7 +1,0 @@
-算法心得：高效算法的奥秘（Hacker's Delight）
-
-官方网站：
-https://www.hackersdelight.org/
-
-★
-作者：Henry S.Warren.Jr.

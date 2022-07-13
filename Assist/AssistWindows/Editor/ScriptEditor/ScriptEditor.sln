@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditor", "ScriptEdito
 		{16E2BEB0-FF66-49E2-85D6-705645418A12} = {16E2BEB0-FF66-49E2-85D6-705645418A12}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{38BBE960-79C7-4B43-8148-B803D958F616}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssist", "ScriptEditorAssist\ScriptEditorAssist.vcxproj", "{16E2BEB0-FF66-49E2-85D6-705645418A12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\ScriptEditor\ScriptEditorTesting\ScriptEditorTesting.vcxproj", "{85DBD4BA-37CF-4080-B8BC-8C951DB5461D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A6DAFFB8-5B40-4B23-903E-C8F6E4AF3FC8} = {A6DAFFB8-5B40-4B23-903E-C8F6E4AF3FC8}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{38BBE960-79C7-4B43-8148-B803D958F616}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssist", "ScriptEditorAssist\ScriptEditorAssist.vcxproj", "{16E2BEB0-FF66-49E2-85D6-705645418A12}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\ScriptEditor\ScriptEditorAssistTesting\ScriptEditorAssistTesting.vcxproj", "{CA339DA1-E2F2-4A3C-A070-FD16235426EC}"
 	ProjectSection(ProjectDependencies) = postProject

@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditor", "EffectEdito
 		{9AA6A15D-1E74-4973-A760-FF42B134D7F8} = {9AA6A15D-1E74-4973-A760-FF42B134D7F8}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{37C04379-DFEC-4854-9840-F38FEC651FA8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssist", "EffectEditorAssist\EffectEditorAssist.vcxproj", "{9AA6A15D-1E74-4973-A760-FF42B134D7F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\EffectEditor\EffectEditorTesting\EffectEditorTesting.vcxproj", "{A339272F-FC89-4FEB-AB46-1D2B0517FCB5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51} = {C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{37C04379-DFEC-4854-9840-F38FEC651FA8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssist", "EffectEditorAssist\EffectEditorAssist.vcxproj", "{9AA6A15D-1E74-4973-A760-FF42B134D7F8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\EffectEditor\EffectEditorAssistTesting\EffectEditorAssistTesting.vcxproj", "{4A27CF0B-546C-4D3A-9355-19AB40CB156C}"
 	ProjectSection(ProjectDependencies) = postProject

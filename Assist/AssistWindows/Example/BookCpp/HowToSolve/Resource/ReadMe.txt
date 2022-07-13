@@ -1,5 +1,0 @@
-怎样解题（How to Solve）
-（第2版）
-
-☆
-作者：George Polya

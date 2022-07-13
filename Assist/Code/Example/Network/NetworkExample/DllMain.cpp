@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.2 (2020/01/23 23:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/12 15:42)
 
 #include "Example/Network/NetworkExample/NetworkExampleExport.h"
 
-#include "Example/Network/NetworkExample/NetworkExampleFwd.h" 
-
 #include "CoreTools/Helper/MainFunctionMacro.h"
+#include "Example/Network/NetworkExample/NetworkExampleFwd.h"
 
 #ifndef BUILDING_NETWORK_EXAMPLE_STATIC
 
-	DLL_MAIN_FUNCTION(NetworkExample);
+DLL_MAIN_FUNCTION(NetworkExample);
 
-#else // !BUILDING_NETWORK_EXAMPLE_STATIC
+#else  // !BUILDING_NETWORK_EXAMPLE_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(NetworkExample);
+CORE_TOOLS_MUTEX_INIT(NetworkExample);
 
-#endif // !BUILDING_NETWORK_EXAMPLE_STATIC
+#endif  // !BUILDING_NETWORK_EXAMPLE_STATIC

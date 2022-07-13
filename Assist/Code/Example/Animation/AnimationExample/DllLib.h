@@ -1,18 +1,22 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.2 (2020/01/26 20:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/07/11 16:00)
 
 #ifndef ANIMATION_EXAMPLE_DLL_LIB_H
 #define ANIMATION_EXAMPLE_DLL_LIB_H
 
 #include "Macro/UserMacro.h"
 
-#if defined(TCRE_USE_MSVC) 
+#include "System/SystemLib.h"
+#include "CoreTools/CoreToolsLib.h"
 
+#if defined(TCRE_USE_MSVC)
 
-	
-#endif // TCRE_USE_MSVC
+#endif  // TCRE_USE_MSVC
 
-#endif // ANIMATION_EXAMPLE_DLL_LIB_H
+#endif  // ANIMATION_EXAMPLE_DLL_LIB_H

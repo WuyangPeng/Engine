@@ -8,18 +8,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditor", "LevelEditor\
 		{2FC83BB4-8350-42BA-AB04-275FE11DD0AD} = {2FC83BB4-8350-42BA-AB04-275FE11DD0AD}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{B79CB36C-DA4F-498A-BABF-F907A8B72162}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssist", "LevelEditorAssist\LevelEditorAssist.vcxproj", "{2FC83BB4-8350-42BA-AB04-275FE11DD0AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\LevelEditor\LevelEditorTesting\LevelEditorTesting.vcxproj", "{C739E35C-AB83-4005-B489-F1D52CFF8E82}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9B18C10D-ABA4-4B60-B714-88DBCDB976A9} = {9B18C10D-ABA4-4B60-B714-88DBCDB976A9}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assist", "Assist", "{B79CB36C-DA4F-498A-BABF-F907A8B72162}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssist", "LevelEditorAssist\LevelEditorAssist.vcxproj", "{2FC83BB4-8350-42BA-AB04-275FE11DD0AD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditorAssistTesting", "..\..\..\..\AssistTesting\AssistWindows\Editor\LevelEditor\LevelEditorAssistTesting\LevelEditorAssistTesting.vcxproj", "{5334EF16-4D16-4777-A00C-CEFFE88F98B7}"
 	ProjectSection(ProjectDependencies) = postProject

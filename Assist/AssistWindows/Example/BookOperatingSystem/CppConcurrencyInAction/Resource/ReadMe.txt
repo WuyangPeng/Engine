@@ -1,7 +1,0 @@
-C++ 并发编程实战（C++ Concurrency In Action）
-
-官方网站：    
-http://www.manning.com/CPlusPlusConcurrencyinAction
- 
-★★★
-作者：Anthony Williams

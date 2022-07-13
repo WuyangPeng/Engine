@@ -1,4 +1,4 @@
-@ingroup group_CoreToolsToolset_Documentation
+@ingroup group_ExportTest_Documentation
 
 ----------------------------
 导出测试 
@@ -12,7 +12,7 @@ ExportTest
 
 ----------------------------
 状态
-	目前版本：0.7.2.1。
+	目前版本：0.8.0.10。
 
 ----------------------------
 实现内容

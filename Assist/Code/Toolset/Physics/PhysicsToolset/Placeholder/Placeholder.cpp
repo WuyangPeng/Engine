@@ -9,7 +9,7 @@
 #include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 
-PhysicsToolset::Placeholder ::Placeholder() noexcept
+PhysicsToolset::Placeholder::Placeholder() noexcept
 {
     PHYSICS_SELF_CLASS_IS_VALID_9;
 }

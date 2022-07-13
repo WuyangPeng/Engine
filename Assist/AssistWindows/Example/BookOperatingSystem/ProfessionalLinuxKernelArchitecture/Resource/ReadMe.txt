@@ -1,4 +1,0 @@
-深入Linux内核架构（Professional Linux Kernel Architecture）
-
-☆
-作者：Wolfgang Mauerer

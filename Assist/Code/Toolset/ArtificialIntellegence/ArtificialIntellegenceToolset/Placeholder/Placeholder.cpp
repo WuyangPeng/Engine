@@ -1,15 +1,18 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.2.0 (2020/01/08 21:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎辅助版本：0.8.0.10 (2022/06/30 15:37)
 
 #include "Toolset/ArtificialIntellegence/ArtificialIntellegenceToolset/ArtificialIntellegenceToolsetExport.h"
 
 #include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
 
-ArtificialIntellegenceToolset::Placeholder ::Placeholder() noexcept
+ArtificialIntellegenceToolset::Placeholder::Placeholder() noexcept
 {
     ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
 }
