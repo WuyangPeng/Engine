@@ -6,13 +6,12 @@
 
 #include "SceneObject/SceneObjectExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "SceneObject/Helper/SceneObjectClassInvariantMacro.h"
 
-SceneObject::Placeholder
-	::Placeholder() 
+SceneObject::Placeholder::Placeholder() noexcept
 {
-	SCENE_OBJECT_SELF_CLASS_IS_VALID_9;
+    SCENE_OBJECT_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(SceneObject, Placeholder)

@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/04 23:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/15 11:04)
 
 #include "ItemManager/ItemManagerExport.h"
 
 #include "ItemManagerFwd.h"
-
-#include "CoreTools/Helper/MainFunctionMacro.h" 
+#include "CoreTools/Helper/MainFunctionMacro.h"
 
 #ifndef BUILDING_ITEM_MANAGER_STATIC
 
-	DLL_MAIN_FUNCTION(ItemManager);
+DLL_MAIN_FUNCTION(ItemManager);
 
-#else // !BUILDING_ITEM_MANAGER_STATIC
+#else  // !BUILDING_ITEM_MANAGER_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(ItemManager);
+CORE_TOOLS_MUTEX_INIT(ItemManager);
 
-#endif // BUILDING_ITEM_MANAGER_STATIC
+#endif  // BUILDING_ITEM_MANAGER_STATIC

@@ -1,18 +1,26 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏测试版本：0.0.0.1 (2019/10/05 22:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏测试版本：0.8.0.11 (2022/07/18 18:03)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(Team, TestingHelper, "组队")
-
-void Team::TestingHelper
-	::AddSuites()
+Team::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "组队" }
 {
+    InitSuite();
 
+    USER_SELF_CLASS_IS_VALID_1;
 }
 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Team, TestingHelper)
+
+void Team::TestingHelper::InitSuite() noexcept
+{
+}

@@ -27,34 +27,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Team\Placeholder\Placeholder.cpp">
+      <Filter>Placeholder 源文件</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Code\Team\DllLib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Team\DllMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Team\Placeholder\Placeholder.cpp">
-      <Filter>Placeholder 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,7 +65,7 @@
     <ClInclude Include="..\..\..\Code\Team\Placeholder\Placeholder.h">
       <Filter>Placeholder 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Team\Helper\MacroFwd.h">
+    <ClInclude Include="..\..\..\Code\Team\Helper\HelperFwd.h">
       <Filter>Macro 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Team\Helper\TeamClassInvariantMacro.h">
@@ -97,8 +77,48 @@
     <ClInclude Include="..\..\..\Code\Team\Helper\UserMacro.h">
       <Filter>Macro 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Team\Helper\Macro.h">
+    <ClInclude Include="..\..\..\Code\Team\Helper\Helper.h">
       <Filter>Macro 头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

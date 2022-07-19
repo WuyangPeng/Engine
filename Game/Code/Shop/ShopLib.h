@@ -1,38 +1,39 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/05 21:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/15 13:49)
 
 #ifndef SHOP_LIB_H
 #define SHOP_LIB_H
 
 #include "Helper/UserMacro.h"
 
-#if defined(TCRE_USE_MSVC) 
+#if defined(TCRE_USE_MSVC)
 
-	#ifndef BUILDING_SHOP_STATIC
+    #ifndef BUILDING_SHOP_STATIC
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"ShopD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"Shop.lib")
-		#endif // _DEBUG
+        #ifdef _DEBUG
+            #pragma comment(lib, "ShopD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "Shop.lib")
+        #endif  // _DEBUG
 
-	#else // !BUILDING_SHOP_STATIC
+    #else  // !BUILDING_SHOP_STATIC
 
-		#include "DllLib.h"
-		#include "System/SystemLib.h"
-		#include "CoreTools/CoreToolsLib.h" 
+        #include "DllLib.h"
 
-		#ifdef _DEBUG 
-			#pragma comment(lib,"ShopStaticD.lib")
-		#else // !_DEBUG
-			#pragma comment(lib,"ShopStatic.lib")
-		#endif // _DEBUG
+        #ifdef _DEBUG
+            #pragma comment(lib, "ShopStaticD.lib")
+        #else  // !_DEBUG
+            #pragma comment(lib, "ShopStatic.lib")
+        #endif  // _DEBUG
 
-	#endif // BUILDING_SHOP_STATIC
+    #endif  // BUILDING_SHOP_STATIC
 
-#endif // TCRE_USE_MSVC 
+#endif  // TCRE_USE_MSVC
 
-#endif // SHOP_LIB_H
+#endif  // SHOP_LIB_H

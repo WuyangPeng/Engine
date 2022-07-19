@@ -1,29 +1,32 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/06 21:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/19 14:05)
 
 #ifndef INSTANCE_PLACEHOLDER_PLACEHOLDER_H
 #define INSTANCE_PLACEHOLDER_PLACEHOLDER_H
 
-#include "Instance/InstanceDll.h" 
+#include "Instance/InstanceDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace Instance
 {
-	 class INSTANCE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class INSTANCE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // INSTANCE_PLACEHOLDER_PLACEHOLDER_H
+#endif  // INSTANCE_PLACEHOLDER_PLACEHOLDER_H

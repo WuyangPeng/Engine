@@ -1,5 +1,7 @@
 @echo on
  
+call RunInterfaceTesting.bat
+ 
 call RunUserInfoTesting.bat
 
 call RunCharacterInformationTesting.bat
@@ -7,6 +9,8 @@ call RunCharacterInformationTesting.bat
 call RunItemManagerTesting.bat 
 
 call RunShopTesting.bat 
+
+call RunTimeRefreshTesting.bat 
 
 call RunSceneTesting.bat 
 

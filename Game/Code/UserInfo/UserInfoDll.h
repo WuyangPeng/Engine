@@ -1,37 +1,40 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/03 21:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/14 14:08)
 
 #ifndef USER_INFO_DLL_H
 #define USER_INFO_DLL_H
 
-#include "System/Helper/ExportMacro.h"
 #include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
 
 #if defined(BUILDING_USER_INFO_NO_IMPORT) || defined(BUILDING_USER_INFO_STATIC)
 
-  #define USER_INFO_DEFAULT_DECLARE
-  #define USER_INFO_HIDDEN_DECLARE 
-  #define USER_INFO_VISIBLE
+    #define USER_INFO_DEFAULT_DECLARE
+    #define USER_INFO_HIDDEN_DECLARE
+    #define USER_INFO_VISIBLE
 
-#else // !defined(BUILDING_USER_INFO_NO_IMPORT) && !defined(BUILDING_USER_INFO_STATIC)
- 
-   #if defined(BUILDING_USER_INFO_EXPORT)
- 
+#else  // !defined(BUILDING_USER_INFO_NO_IMPORT) && !defined(BUILDING_USER_INFO_STATIC)
+
+    #if defined(BUILDING_USER_INFO_EXPORT)
+
         #define USER_INFO_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
         #define USER_INFO_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
 
-   #else // !defined(BUILDING_USER_INFO_EXPORT)
+    #else  // !defined(BUILDING_USER_INFO_EXPORT)
 
-		#define USER_INFO_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define USER_INFO_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
         #define USER_INFO_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
 
-   #endif // BUILDING_USER_INFO_EXPORT
+    #endif  // BUILDING_USER_INFO_EXPORT
 
-   #define USER_INFO_VISIBLE TCRE_SYMBOL_VISIBLE
+    #define USER_INFO_VISIBLE TCRE_SYMBOL_VISIBLE
 
-#endif // defined(BUILDING_USER_INFO_NO_IMPORT) || defined(BUILDING_USER_INFO_STATIC)
- 
-#endif // USER_INFO_DLL_H
+#endif  // defined(BUILDING_USER_INFO_NO_IMPORT) || defined(BUILDING_USER_INFO_STATIC)
+
+#endif  // USER_INFO_DLL_H

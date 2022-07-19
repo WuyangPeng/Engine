@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/06 21:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/19 14:04)
 
 #include "Instance/InstanceExport.h"
 
 #include "InstanceFwd.h"
-
-#include "CoreTools/Helper/MainFunctionMacro.h" 
+#include "CoreTools/Helper/MainFunctionMacro.h"
 
 #ifndef BUILDING_INSTANCE_STATIC
 
-	DLL_MAIN_FUNCTION(Instance);
+DLL_MAIN_FUNCTION(Instance);
 
-#else // !BUILDING_INSTANCE_STATIC
+#else  // !BUILDING_INSTANCE_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(Instance);
+CORE_TOOLS_MUTEX_INIT(Instance);
 
-#endif // BUILDING_INSTANCE_STATIC
+#endif  // BUILDING_INSTANCE_STATIC

@@ -1,12 +1,15 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/06 21:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/19 14:33)
 
 #ifndef ACTIVITY_H
 #define ACTIVITY_H
 
-#include "Helper/Macro.h"
+#include "Helper/Helper.h"
 
-#endif // ACTIVITY_H
+#endif  // ACTIVITY_H

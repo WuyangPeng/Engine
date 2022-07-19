@@ -1,18 +1,20 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏版本：0.0.0.1 (2019/10/04 23:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏版本：0.8.0.11 (2022/07/15 11:07)
 
 #include "ItemManager/ItemManagerExport.h"
 
-#include "Placeholder.h" 
 #include "ItemManager/Helper/ItemManagerClassInvariantMacro.h"
+#include "Placeholder.h"
 
-ItemManager::Placeholder
-	::Placeholder() 
+ItemManager::Placeholder::Placeholder() noexcept
 {
-	ITEM_MANAGER_SELF_CLASS_IS_VALID_9;
+    ITEM_MANAGER_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ItemManager, Placeholder)

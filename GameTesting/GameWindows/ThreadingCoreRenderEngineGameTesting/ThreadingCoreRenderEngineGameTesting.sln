@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreadingCoreRenderEngineGameTesting", "ThreadingCoreRenderEngineGameTesting\ThreadingCoreRenderEngineGameTesting.vcxproj", "{1E1F911C-0930-48D2-ACEE-EE5CDC748281}"
 EndProject
@@ -28,6 +28,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Instance", "Instance", "{4B3AFF6E-1262-4BE8-ACC9-B9E860D0621C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InstanceTesting", "..\Instance\InstanceTesting\InstanceTesting.vcxproj", "{6D77DEA5-2236-4CEE-B2FD-EF76CABEF996}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{0C5CDDF3-ADEE-4771-A602-0324656B58B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InterfaceTesting", "..\Interface\InterfaceTesting\InterfaceTesting.vcxproj", "{0F98BE99-835F-44CA-B9AC-CD2379502F61}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemManager", "ItemManager", "{FBE0E63A-EFE6-4423-901D-012D5F841C73}"
 EndProject
@@ -69,6 +73,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Team", "Team", "{3C680962-D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TeamTesting", "..\Team\TeamTesting\TeamTesting.vcxproj", "{E5402EDC-514C-4E60-846C-233B77FBD8C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TimeRefresh", "TimeRefresh", "{DFDF9599-2145-4FA7-B753-61EB0476971D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TimeRefreshTesting", "..\TimeRefresh\TimeRefreshTesting\TimeRefreshTesting.vcxproj", "{1C56B949-C37E-46A5-A964-2EA012340761}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInfo", "UserInfo", "{0AF9CAE1-0B88-43DE-903F-070722D9F29C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UserInfoTesting", "..\UserInfo\UserInfoTesting\UserInfoTesting.vcxproj", "{7AC10F70-E576-4856-AD8E-14D5090D7BAA}"
@@ -93,6 +101,38 @@ Global
 		StaticRelease|x86 = StaticRelease|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x64.ActiveCfg = Debug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x64.Build.0 = Debug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x86.ActiveCfg = Debug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x86.Build.0 = Debug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x64.ActiveCfg = Release|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x64.Build.0 = Release|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x86.ActiveCfg = Release|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x86.Build.0 = Release|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 		{6DCC4C17-A7C8-4649-AAA2-A984D9E42E92}.Debug|x64.ActiveCfg = Debug|x64
 		{6DCC4C17-A7C8-4649-AAA2-A984D9E42E92}.Debug|x64.Build.0 = Debug|x64
 		{6DCC4C17-A7C8-4649-AAA2-A984D9E42E92}.Debug|x86.ActiveCfg = Debug|Win32
@@ -637,38 +677,70 @@ Global
 		{7AC10F70-E576-4856-AD8E-14D5090D7BAA}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{7AC10F70-E576-4856-AD8E-14D5090D7BAA}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{7AC10F70-E576-4856-AD8E-14D5090D7BAA}.StaticRelease|x86.Build.0 = StaticRelease|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x64.ActiveCfg = Debug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x64.Build.0 = Debug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x86.ActiveCfg = Debug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Debug|x86.Build.0 = Debug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x64.ActiveCfg = Release|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x64.Build.0 = Release|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x86.ActiveCfg = Release|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.Release|x86.Build.0 = Release|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x64.Build.0 = StaticDebug|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticDebug|x86.Build.0 = StaticDebug|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x64.Build.0 = StaticRelease|x64
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
-		{1E1F911C-0930-48D2-ACEE-EE5CDC748281}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Debug|x64.ActiveCfg = Debug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Debug|x64.Build.0 = Debug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Debug|x86.ActiveCfg = Debug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Debug|x86.Build.0 = Debug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Release|x64.ActiveCfg = Release|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Release|x64.Build.0 = Release|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Release|x86.ActiveCfg = Release|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.Release|x86.Build.0 = Release|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Debug|x64.ActiveCfg = Debug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Debug|x64.Build.0 = Debug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Debug|x86.ActiveCfg = Debug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Debug|x86.Build.0 = Debug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Release|x64.ActiveCfg = Release|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Release|x64.Build.0 = Release|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Release|x86.ActiveCfg = Release|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.Release|x86.Build.0 = Release|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{1C56B949-C37E-46A5-A964-2EA012340761}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -691,6 +763,8 @@ Global
 		{98AFC156-06CD-4ACB-9C86-767BE50A9C19} = {7F979BA8-A80F-4C85-B85E-1854BD930840}
 		{E5402EDC-514C-4E60-846C-233B77FBD8C5} = {3C680962-D75D-45BB-8172-7ABAF479BD2E}
 		{7AC10F70-E576-4856-AD8E-14D5090D7BAA} = {0AF9CAE1-0B88-43DE-903F-070722D9F29C}
+		{0F98BE99-835F-44CA-B9AC-CD2379502F61} = {0C5CDDF3-ADEE-4771-A602-0324656B58B3}
+		{1C56B949-C37E-46A5-A964-2EA012340761} = {DFDF9599-2145-4FA7-B753-61EB0476971D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F3C2F2F-28BE-4C32-8856-8F4A2F5204AE}

@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Interface", "..\Interface\Interface\Interface.vcxproj", "{646F8C44-FC14-42EC-A9CF-52F54331930D}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Activity", "..\Activity\Activity\Activity.vcxproj", "{969A4DD2-E0AE-4543-8C2C-C959FA5CEA2C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arena", "..\Arena\Arena\Arena.vcxproj", "{E14B75E0-65C0-4C30-9C4F-5AC397836CD7}"
@@ -45,6 +47,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreadingCoreRenderEngineGa
 		{C151FA16-2AE9-4AB8-ABBC-8E7DC6B80C4B} = {C151FA16-2AE9-4AB8-ABBC-8E7DC6B80C4B}
 		{E78F2D27-D510-42CB-8625-018BCEEF29D0} = {E78F2D27-D510-42CB-8625-018BCEEF29D0}
 		{331B3344-148B-4767-AFCD-5994C535855E} = {331B3344-148B-4767-AFCD-5994C535855E}
+		{646F8C44-FC14-42EC-A9CF-52F54331930D} = {646F8C44-FC14-42EC-A9CF-52F54331930D}
 		{0A7B8F57-84D6-4718-9A6A-EDE56A674C3B} = {0A7B8F57-84D6-4718-9A6A-EDE56A674C3B}
 		{76248667-A33F-4659-BAB0-9489A3CDF6BD} = {76248667-A33F-4659-BAB0-9489A3CDF6BD}
 		{928FB390-D212-4483-9B97-A9AAF820BB94} = {928FB390-D212-4483-9B97-A9AAF820BB94}
@@ -57,6 +60,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThreadingCoreRenderEngineGa
 		{E14B75E0-65C0-4C30-9C4F-5AC397836CD7} = {E14B75E0-65C0-4C30-9C4F-5AC397836CD7}
 		{A1B42EF8-F9F0-488A-B28A-B33DDD28ACE0} = {A1B42EF8-F9F0-488A-B28A-B33DDD28ACE0}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TimeRefresh", "..\TimeRefresh\TimeRefresh\TimeRefresh.vcxproj", "{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +83,38 @@ Global
 		StaticRelease|x86 = StaticRelease|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Debug|x64.ActiveCfg = Debug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Debug|x64.Build.0 = Debug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Debug|x86.ActiveCfg = Debug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Debug|x86.Build.0 = Debug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Release|x64.ActiveCfg = Release|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Release|x64.Build.0 = Release|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Release|x86.ActiveCfg = Release|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.Release|x86.Build.0 = Release|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{646F8C44-FC14-42EC-A9CF-52F54331930D}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 		{969A4DD2-E0AE-4543-8C2C-C959FA5CEA2C}.Debug|x64.ActiveCfg = Debug|x64
 		{969A4DD2-E0AE-4543-8C2C-C959FA5CEA2C}.Debug|x64.Build.0 = Debug|x64
 		{969A4DD2-E0AE-4543-8C2C-C959FA5CEA2C}.Debug|x86.ActiveCfg = Debug|Win32
@@ -654,6 +691,38 @@ Global
 		{2FFF54AE-DF5B-4FC4-B261-2464A6AC531B}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{2FFF54AE-DF5B-4FC4-B261-2464A6AC531B}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{2FFF54AE-DF5B-4FC4-B261-2464A6AC531B}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Debug|x64.ActiveCfg = Debug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Debug|x64.Build.0 = Debug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Debug|x86.ActiveCfg = Debug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Debug|x86.Build.0 = Debug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticDebug|x64.ActiveCfg = EngineStaticDebug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticDebug|x64.Build.0 = EngineStaticDebug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticDebug|x86.ActiveCfg = EngineStaticDebug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticDebug|x86.Build.0 = EngineStaticDebug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticRelease|x64.ActiveCfg = EngineStaticRelease|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticRelease|x64.Build.0 = EngineStaticRelease|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticRelease|x86.ActiveCfg = EngineStaticRelease|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.EngineStaticRelease|x86.Build.0 = EngineStaticRelease|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticDebug|x64.ActiveCfg = GameStaticDebug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticDebug|x64.Build.0 = GameStaticDebug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticDebug|x86.ActiveCfg = GameStaticDebug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticDebug|x86.Build.0 = GameStaticDebug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticRelease|x64.ActiveCfg = GameStaticRelease|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticRelease|x64.Build.0 = GameStaticRelease|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticRelease|x86.ActiveCfg = GameStaticRelease|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.GameStaticRelease|x86.Build.0 = GameStaticRelease|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Release|x64.ActiveCfg = Release|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Release|x64.Build.0 = Release|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Release|x86.ActiveCfg = Release|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.Release|x86.Build.0 = Release|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{7503FE48-1D1A-4581-AD4F-4227A4B58E3D}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

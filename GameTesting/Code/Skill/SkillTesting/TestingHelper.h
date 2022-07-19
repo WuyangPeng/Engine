@@ -1,35 +1,34 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎游戏测试版本：0.0.0.1 (2019/10/05 21:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎游戏测试版本：0.8.0.11 (2022/07/18 13:51)
 
 #ifndef SKILL_TESTING_HELPER_H
 #define SKILL_TESTING_HELPER_H
 
-#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-namespace CoreTools
-{
-	class Suite;
-}
+#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
 
 namespace Skill
 {
-	class TestingHelper : public CoreTools::CMainFunctionTestingHelper
-	{
-	public:
-		CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(TestingHelper); 
+    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    {
+    public:
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
 
-	private:
-        virtual int DoRun() override;
+    public:
+        TestingHelper(int argc, char** argv);
 
-		void AddSuites();
-	
-	private:
-		CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
-	};
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        void InitSuite() noexcept;
+    };
 }
 
-#endif // SKILL_TESTING_HELPER_H
+#endif  // SKILL_TESTING_HELPER_H
