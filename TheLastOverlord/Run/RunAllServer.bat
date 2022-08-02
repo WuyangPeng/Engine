@@ -14,6 +14,10 @@ call RunOfflineServer.bat
 
 call RunLeaderboardServer.bat
 
+call RunMailServer.bat
+
+call RunChatServer.bat
+
 call RunRechargeServer.bat
 
 call RunLogServer.bat
@@ -25,5 +29,7 @@ call RunServerManager.bat
 call RunBackgroundServer.bat
 
 call RunUpdateServer.bat
+
+call RunDatabaseServer.bat
 
 pause

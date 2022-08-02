@@ -179,7 +179,8 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistToolsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -219,7 +220,8 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -255,11 +257,13 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(
       <SubSystem>Console</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Resource/GameTemplate/*.*" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Resource/GameTemplate/" /F /Y
+xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistToolsD.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -299,7 +303,8 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/GameParameter.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(EngineEngineering)/$(Platform)/$(Configuration)Windows/AssistTools.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -347,6 +352,7 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(
   <ItemGroup>
     <Text Include="Resource\GameTemplate\GameTemplate.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateDllLibCpp.txt" />
+    <Text Include="Resource\GameTemplate\GameTemplateDllLibH.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateDllLibMiddleLayerCpp.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateDllMainCpp.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateEngineFwdH.txt" />
@@ -386,6 +392,7 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "$(AssistInclude)/../$(
     <Text Include="Resource\GameTemplate\GameTemplateOtherManagerH.txt" />
     <Text Include="Resource\GameTemplate\GameTemplatePlaceholderCpp.txt" />
     <Text Include="Resource\GameTemplate\GameTemplatePlaceholderH.txt" />
+    <Text Include="Resource\GameTemplate\GameTemplateRenderer.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateUserMacroH.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateVcxproj.txt" />
     <Text Include="Resource\GameTemplate\GameTemplateVcxprojFilters.txt" />

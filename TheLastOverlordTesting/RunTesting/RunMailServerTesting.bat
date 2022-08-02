@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% MailServerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% MailServerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% MailServerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% MailServerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% MailServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% MailServerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% MailServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% MailServerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% MailServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% MailServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% MailServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% MailServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% MailServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% MailServerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% MailServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% MailServerTesting.exe
+
+pause

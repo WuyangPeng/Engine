@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	最后的霸王版本：0.7.0.1 (2021/02/18 15:16)
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/19 16:58)
 
 #include "ProjectName.h"
 #include "TheLastOverlord/Helper/TheLastOverlordClassInvariantMacro.h"
@@ -80,7 +80,7 @@ bool TheLastOverlord::ProjectName::IsSelectValid(int select) const
     return 0 <= select && select < boost::numeric_cast<int>(container.size());
 }
 
-const System::String TheLastOverlord::ProjectName::GetEngineeringName(int select) const
+System::String TheLastOverlord::ProjectName::GetEngineeringName(int select) const
 {
     THE_LAST_OVERLORD_CLASS_IS_VALID_CONST_9;
 

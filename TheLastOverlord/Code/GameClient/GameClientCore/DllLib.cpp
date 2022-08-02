@@ -1,28 +1,24 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王版本：0.0.2.0 (2020/01/08 23:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/20 10:22)
 
 #include "GameClientCoreExport.h"
 
+#include "DllLib.h"
 #include "GameClientCore.h"
 
-#include "CoreTools/CoreToolsLib.h"
-#include "Framework/FrameworkLib.h"
+#ifdef BUILDING_GAME_CLIENT_CORE_STATIC
 
-#ifndef BUILDING_GAME_CLIENT_CORE_STATIC
+namespace GameClientCore
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-	#include "DllLib.h"
-
-#else // !BUILDING_GAME_CLIENT_CORE_STATIC
-
-	namespace GameClientCore
-	{
-		void StaticDllLib()
-		{
-
-		}
-	}
-
-#endif // !BUILDING_GAME_CLIENT_CORE_STATIC
+#endif  // BUILDING_GAME_CLIENT_CORE_STATIC

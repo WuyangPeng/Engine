@@ -25,13 +25,15 @@ AssistTools::GenerateTemplateDllMainImpl::GenerateTemplateDllMainImpl(const Syst
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateDllMainImpl)
 
-void AssistTools::GenerateTemplateDllMainImpl::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName) const
+void AssistTools::GenerateTemplateDllMainImpl::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName, const System::String& projectCapital, const System::String& managerCapital) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
     auto newVariable = GetCopyrightVariable(copyrightData);
     newVariable.emplace(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName);
     newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerName), managerName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital);
 
     return ParentType::Generate(resourceDirectory, newProjectName, newVariable);
 }

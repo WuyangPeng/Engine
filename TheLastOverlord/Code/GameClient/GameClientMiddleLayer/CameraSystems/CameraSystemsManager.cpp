@@ -1,29 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王版本：0.0.2.0 (2020/01/09 22:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/20 11:18)
 
 #include "GameClient/GameClientMiddleLayer/GameClientMiddleLayerExport.h"
 
-#include "CameraSystemsManager.h" 
+#include "CameraSystemsManager.h"
 #include "GameClient/GameClientMiddleLayer/Macro/GameClientMiddleLayerClassInvariantMacro.h"
 
-GameClientMiddleLayer::CameraSystemsManager
-	::CameraSystemsManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }
+GameClientMiddleLayer::CameraSystemsManager::CameraSystemsManager(Framework::MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }
 {
-	GAME_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
-}
-
-GameClientMiddleLayer::CameraSystemsManager
-	::~CameraSystemsManager()
-{
-	GAME_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+    GAME_CLIENT_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(GameClientMiddleLayer, CameraSystemsManager)
-
- 
-
-

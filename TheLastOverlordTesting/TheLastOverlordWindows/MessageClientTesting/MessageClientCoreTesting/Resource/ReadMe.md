@@ -1,0 +1,12 @@
+@ingroup group_MessageClientCoreTesting_Documentation
+
+----------------------------
+消息客户端核心单元测试
+
+目前包含：
+
+1.   Macro（宏） 
+
+2.   Engine（引擎） 
+
+----------------------------

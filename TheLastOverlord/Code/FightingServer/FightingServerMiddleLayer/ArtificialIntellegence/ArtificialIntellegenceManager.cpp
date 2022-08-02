@@ -1,29 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 最后的霸王版本：0.0.0.1 (2019/10/12 09:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/25 16:09)
 
 #include "FightingServer/FightingServerMiddleLayer/FightingServerMiddleLayerExport.h"
 
-#include "ArtificialIntellegenceManager.h" 
+#include "ArtificialIntellegenceManager.h"
 #include "FightingServer/FightingServerMiddleLayer/Macro/FightingServerMiddleLayerClassInvariantMacro.h"
 
-FightingServerMiddleLayer::ArtificialIntellegenceManager
-	::ArtificialIntellegenceManager(Framework::MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }
+FightingServerMiddleLayer::ArtificialIntellegenceManager::ArtificialIntellegenceManager(Framework::MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }
 {
-	FIGHTING_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
-}
-
-FightingServerMiddleLayer::ArtificialIntellegenceManager
-	::~ArtificialIntellegenceManager()
-{
-	FIGHTING_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+    FIGHTING_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(FightingServerMiddleLayer, ArtificialIntellegenceManager)
-
- 
-
-

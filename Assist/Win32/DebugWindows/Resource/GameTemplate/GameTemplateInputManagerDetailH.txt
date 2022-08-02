@@ -1,8 +1,11 @@
-// Copyright (c) 2011-%EndYear%
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽 
-//
-// %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
+///	Copyright (c) 2010-%EndYear%
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	%ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 
 #ifndef %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
 #define %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
@@ -11,32 +14,30 @@
 #include "%SolutionName%/%SolutionName%MiddleLayer/Macro/%SolutionName%MiddleLayerClassInvariantMacro.h"
 #include "Framework/MiddleLayer/%ManagerName%Detail.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename ApplicationTrait>
-%SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>
-	::%ManagerName%()
-	:ParentType{}
+%SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>::%ManagerName%(Framework::MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }
 {
 	%ProjectCapital%_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
 }
 
-template <typename ApplicationTrait>
-%SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>
-	::~%ManagerName%()
-{
-	%ProjectCapital%_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
-}
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename ApplicationTrait>
-bool %SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>
-	::IsValid() const
+bool %SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>::IsValid() const noexcept
 {
 	if (ParentType::IsValid())
 		return true;
 	else
 		return false;
 }
-#endif // OPEN_CLASS_INVARIANT
 
-#endif / /%ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
+#endif  // OPEN_CLASS_INVARIANT
+
+#endif  // %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
  

@@ -11,11 +11,13 @@
   "WorldServer": 1,
   "OfflineServer": 1,
   "LeaderboardServer": 1,
-  "MailServer": 0,
+  "MailServer": 1,
+  "ChatServer": 1,
   "RechargeServer": 1,
   "LogServer": 1,
   "GameMasterServer": 1,
   "ServerManager": 1,
   "BackgroundServer": 1,
-  "UpdateServer": 1 
+  "UpdateServer": 1,
+  "DatabaseServer": 1
 }

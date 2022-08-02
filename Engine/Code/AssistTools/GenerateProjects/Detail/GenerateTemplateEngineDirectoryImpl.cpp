@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/29 10:55)
+///	引擎版本：0.8.0.12 (2022/07/21 11:05)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -42,16 +42,17 @@ void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateTo(const System::
     GenerateToSolution(resourceDirectory, newSolutionName, newCoreName);
     GenerateToVcxproj(resourceDirectory, newSolutionName, newIncludeName);
     GenerateToVcxprojFilters(resourceDirectory, newSolutionName);
-    GenerateToUpdate(resourceDirectory, newSolutionName, newSolutionName);
+    GenerateToIllustrate(resourceDirectory, newSolutionName, newSolutionName);
 
     GenerateToModuleVcxproj(resourceDirectory, newSolutionName, newCoreName, newIncludeName);
     GenerateToModuleVcxprojFilters(resourceDirectory, newSolutionName, newCoreName);
-    GenerateToUpdate(resourceDirectory, newSolutionName + newCoreName, newSolutionName);
+    GenerateToIllustrate(resourceDirectory, newSolutionName + newCoreName, newSolutionName);
     GenerateToLogJson(resourceDirectory, newSolutionName);
 
     GenerateToMiddleLayer(resourceDirectory, newSolutionName, SYSTEM_TEXT("MiddleLayer"s), newIncludeName);
 
     GenerateToEnvironmentVariable(resourceDirectory, newSolutionName);
+    GenerateToRenderer(resourceDirectory, newSolutionName);
 }
 
 void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToSolution(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName) const
@@ -145,16 +146,26 @@ void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToMiddleLayer(con
 {
     GenerateToMiddleLayerVcxproj(resourceDirectory, newSolutionName, newManager, newIncludeName);
     GenerateToMiddleLayerVcxprojFilters(resourceDirectory, newSolutionName, newManager);
-    GenerateToUpdate(resourceDirectory, newSolutionName + newManager, newSolutionName);
+    GenerateToIllustrate(resourceDirectory, newSolutionName + newManager, newSolutionName);
 }
 
-void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToUpdate(const System::String& resourceDirectory, const System::String& newManager, const System::String& newSolutionName) const
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToIllustrate(const System::String& resourceDirectory, const System::String& newManager, const System::String& newSolutionName) const
 {
     auto fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newManager + GetForwardSlash() + GetResource();
 
-    MAYBE_UNUSED const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
+    auto result = System::CreateFileDirectory(fullDirectory, nullptr);
 
-    CoreTools::WriteFileManager manager{ fullDirectory + GetForwardSlash() + GetUpdate() };
+    CoreTools::WriteFileManager scheduleManager{ fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Schedule.md"s) };
+    CoreTools::WriteFileManager readMeManager{ fullDirectory + GetForwardSlash() + SYSTEM_TEXT("ReadMe.md"s) };
+
+    const auto todoDirectory = fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Todo"s);
+
+    result = System::CreateFileDirectory(todoDirectory, nullptr);
+
+    for (auto i = 0; i < 10; ++i)
+    {
+        CoreTools::WriteFileManager manager{ todoDirectory + GetForwardSlash() + SYSTEM_TEXT("Level "s) + System::ToString(i) + SYSTEM_TEXT(".txt"s) };
+    }
 }
 
 void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName) const
@@ -164,4 +175,13 @@ void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToEnvironmentVari
     const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + GetForwardSlash() + GetConfigurationDirectory() };
 
     CoreTools::CopyFileTools copyFileTools{ fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("EnvironmentVariable.json"s) };
+}
+
+void AssistTools::GenerateTemplateEngineDirectoryImpl::GenerateToRenderer(const System::String& resourceDirectory, const System::String& newSolutionName) const
+{
+    const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateRenderer.txt"s) };
+
+    const System::String fullDirectory{ resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + GetForwardSlash() + GetConfigurationDirectory() };
+
+    CoreTools::CopyFileTools copyFileTools{ fileName, fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Renderer.json"s) };
 }

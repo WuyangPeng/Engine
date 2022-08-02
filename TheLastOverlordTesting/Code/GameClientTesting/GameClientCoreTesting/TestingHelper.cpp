@@ -1,19 +1,26 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王测试版本：0.0.2.0 (2020/01/10 20:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王测试版本：0.8.0.12 (2022/07/20 18:08)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuite.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(GameClientTesting, TestingHelper, "游戏客户端核心测试") 
-
-void GameClientTesting::TestingHelper
-	::AddSuites()
+GameClientTesting::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "游戏客户端核心测试" }
 {
+    InitSuite();
 
+    USER_SELF_CLASS_IS_VALID_1;
 }
 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(GameClientTesting, TestingHelper)
+
+void GameClientTesting::TestingHelper::InitSuite() noexcept
+{
+}

@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% DatabaseServerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% DatabaseServerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% DatabaseServerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% DatabaseServerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% DatabaseServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% DatabaseServerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% DatabaseServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% DatabaseServerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% DatabaseServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% DatabaseServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% DatabaseServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% DatabaseServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% DatabaseServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% DatabaseServerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% DatabaseServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% DatabaseServerTesting.exe
+
+pause

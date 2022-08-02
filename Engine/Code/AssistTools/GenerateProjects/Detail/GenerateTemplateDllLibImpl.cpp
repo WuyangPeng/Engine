@@ -24,7 +24,7 @@ AssistTools::GenerateTemplateDllLibImpl::GenerateTemplateDllLibImpl(const System
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(AssistTools, GenerateTemplateDllLibImpl)
 
-void AssistTools::GenerateTemplateDllLibImpl::GenerateTo(const System::String& exportDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName, const System::String& managerChineseName) const
+void AssistTools::GenerateTemplateDllLibImpl::GenerateTo(const System::String& exportDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName, const System::String& managerChineseName, const System::String& projectCapital, const System::String& managerCapital) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -32,6 +32,8 @@ void AssistTools::GenerateTemplateDllLibImpl::GenerateTo(const System::String& e
     newVariable.emplace(GetOriginal(GenerateTemplateReplace::SolutionName), solutionName);
     newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerName), managerName);
     newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerChineseName), managerChineseName);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ProjectCapital), projectCapital);
+    newVariable.emplace(GetOriginal(GenerateTemplateReplace::ManagerCapital), managerCapital);
 
     return ParentType::Generate(exportDirectory, newProjectName, newVariable);
 }

@@ -63,7 +63,7 @@ void AssistTools::GenerateTemplateDllLibTesting::GenerateToTest()
     CopyrightData copyrightData(GetCopyrightData());
     const System::String newFullProjectName((SYSTEM_TEXT("DllLib")));
 
-    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetManagerChineseName());
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetManagerChineseName(), GetProjectCapital(), GetEventManagerCapitalName());
 
     System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
 
@@ -127,7 +127,7 @@ void AssistTools::GenerateTemplateDllLibTesting::DefaultGenerateToTest()
     CopyrightData copyrightData(GetCopyrightData());
     const System::String newFullProjectName((SYSTEM_TEXT("DllLib")));
 
-    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetManagerChineseName());
+    generateTemplateSolution.GenerateTo(fullDirectory, newFullProjectName, copyrightData, GetSolutionName(), GetInputManagerName(), GetManagerChineseName(), GetProjectCapital(), GetEventManagerCapitalName());
 
     System::String fullName = fullDirectory + GetForwardSlash() + newFullProjectName + extension;
 

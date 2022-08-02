@@ -10,13 +10,15 @@
   "WorldServerTesting": 1,
   "OfflineServerTesting": 1,
   "LeaderboardServerTesting": 1,
-  "MailServerTesting": 0,
+  "MailServerTesting": 1,
+  "ChatServerTesting": 1,
   "RechargeServerTesting": 1,
   "LogServerTesting": 1,
   "GameMasterServerTesting": 1,
   "ServerManagerTesting": 1,
   "BackgroundServerTesting": 1,
   "UpdateServerTesting": 1,
+  "DatabaseServerTesting": 1,
 
   "TheLastOverlordTesting": 1
 }

@@ -4,10 +4,10 @@
   "GameTemplateInclude": "ToolsetGameTemplateInclude",
   "ProjectName": "The Last Overlord",
   "EndYear": "2022",
-  "Versions": "0.8.0.10",
+  "Versions": "0.8.0.12",
   "ProjectChineseName": "最后的霸王",
   "ResourceDirectory": "Resource/GameTemplate",
   "ExportDirectory": "Export",
-  "SolutionName": "GameServer",
-  "ProjectCapital": "GAME_SERVER"
+  "SolutionName": "GameClient",
+  "ProjectCapital": "GAME_CLIENT"
 }

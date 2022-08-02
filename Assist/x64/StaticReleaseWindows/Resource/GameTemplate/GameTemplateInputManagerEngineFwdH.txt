@@ -1,8 +1,11 @@
-// Copyright (c) 2011-%EndYear%
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽 
-//
-// %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
+///	Copyright (c) 2010-%EndYear%
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	%ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 
 #ifndef %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H
 #define %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H
@@ -13,4 +16,4 @@ namespace %SolutionName%MiddleLayer
 	class %ManagerName%;
 }
 
-#endif // %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H
+#endif  // %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H

@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% ChatServerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% ChatServerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% ChatServerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% ChatServerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% ChatServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% ChatServerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% ChatServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% ChatServerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% ChatServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% ChatServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% ChatServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% ChatServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% ChatServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% ChatServerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% ChatServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% ChatServerTesting.exe
+
+pause

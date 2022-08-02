@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	最后的霸王版本：0.7.0.1 (2021/02/18 15:08)
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/19 16:56)
 
 #include "ResourceMiddleLayer.h"
 #include "TheLastOverlord/GUI/GUIMiddleLayer.h"
 #include "TheLastOverlord/Helper/TheLastOverlordClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
-#include "System/Window/Engineering.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::make_unique;
@@ -66,7 +66,7 @@ bool TheLastOverlord::ResourceMiddleLayer::IsSelectValid(int select) const
     }
 }
 
-const System::String TheLastOverlord::ResourceMiddleLayer::GetEngineeringName(int select) const
+System::String TheLastOverlord::ResourceMiddleLayer::GetEngineeringName(int select) const
 {
     THE_LAST_OVERLORD_CLASS_IS_VALID_CONST_1;
 

@@ -1,31 +1,33 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 最后的霸王版本：0.0.0.1 (2019/10/13 18:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/29 18:38)
 
 #ifndef BACKGROUND_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
 #define BACKGROUND_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
 
 #include "BackgroundServer/BackgroundServerMiddleLayer/BackgroundServerMiddleLayerDll.h"
 
-#include "BackgroundServer/BackgroundServerMiddleLayer/Macro/ExportMacro.h" 
-#include "Framework/MiddleLayer/ResourceManagerInterface.h" 
+#include "BackgroundServer/BackgroundServerMiddleLayer/Macro/ExportMacro.h"
+#include "Framework/MiddleLayer/ResourceManagerInterface.h"
 
 namespace BackgroundServerMiddleLayer
 {
-	class BACKGROUND_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE ResourceManager : public Framework::ResourceManagerInterface
-	{
-	public:
-		using ClassType = ResourceManager;
-		using ParentType = Framework::ResourceManagerInterface;
-		
-	public:
-		ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform);
-		virtual ~ResourceManager();
+    class BACKGROUND_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE ResourceManager : public Framework::ResourceManagerInterface
+    {
+    public:
+        using ClassType = ResourceManager;
+        using ParentType = Framework::ResourceManagerInterface;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE; 
-	};
+    public:
+        explicit ResourceManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
 }
 
-#endif // BACKGROUND_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H
+#endif  // BACKGROUND_SERVER_MIDDLE_LAYER_RESOURCE_MIDDLE_LAYER_RESOURCE_H

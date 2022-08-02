@@ -32,7 +32,9 @@ namespace AssistTools
                         const CopyrightData& copyrightData,
                         const System::String& solutionName,
                         const System::String& managerName,
-                        const System::String& managerChineseName) const;
+                        const System::String& managerChineseName,
+                        const System::String& projectCapital,
+                        const System::String& managerCapital) const;
 
     private:
         static const System::String extension;

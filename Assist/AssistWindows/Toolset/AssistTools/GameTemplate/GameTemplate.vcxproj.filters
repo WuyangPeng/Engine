@@ -234,5 +234,11 @@
     <Text Include="Resource\GameTemplate\GameTemplateDllLibMiddleLayerCpp.txt">
       <Filter>资源文件\GameTemplate</Filter>
     </Text>
+    <Text Include="Resource\GameTemplate\GameTemplateRenderer.txt">
+      <Filter>资源文件\GameTemplate</Filter>
+    </Text>
+    <Text Include="Resource\GameTemplate\GameTemplateDllLibH.txt">
+      <Filter>资源文件\GameTemplate</Filter>
+    </Text>
   </ItemGroup>
 </Project>

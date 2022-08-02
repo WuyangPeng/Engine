@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 最后的霸王版本：0.0.0.1 (2019/10/11 11:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/23 13:43)
 
 #include "GatewayServerMiddleLayerExport.h"
 
 #include "GatewayServerMiddleLayerFwd.h"
-
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
 #ifndef BUILDING_GATEWAY_SERVER_MIDDLE_LAYER_STATIC
 
-	DLL_MAIN_FUNCTION(GatewayServerMiddleLayer);
+DLL_MAIN_FUNCTION(GatewayServerMiddleLayer);
 
-#else // !BUILDING_GATEWAY_SERVER_MIDDLE_LAYER_STATIC
+#else  // !BUILDING_GATEWAY_SERVER_MIDDLE_LAYER_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(GatewayServerMiddleLayer);
+CORE_TOOLS_MUTEX_INIT(GatewayServerMiddleLayer);
 
-#endif // BUILDING_GATEWAY_SERVER_MIDDLE_LAYER_STATIC
+#endif  // BUILDING_GATEWAY_SERVER_MIDDLE_LAYER_STATIC

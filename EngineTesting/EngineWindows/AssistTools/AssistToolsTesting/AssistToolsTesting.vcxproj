@@ -460,6 +460,7 @@ xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateOtherManagerHSpecial.txt" />
     <Text Include="Resource\GenerateProjectsSuite\GameTemplatePlaceholderCpp.txt" />
     <Text Include="Resource\GenerateProjectsSuite\GameTemplatePlaceholderH.txt" />
+    <Text Include="Resource\GenerateProjectsSuite\GameTemplateRenderer.txt" />
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateTesting.txt" />
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingExeLibCpp.txt" />
     <Text Include="Resource\GenerateProjectsSuite\GameTemplateTestingH.txt" />

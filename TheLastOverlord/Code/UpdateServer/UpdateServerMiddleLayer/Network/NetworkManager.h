@@ -9,23 +9,22 @@
 
 #include "UpdateServer/UpdateServerMiddleLayer/UpdateServerMiddleLayerDll.h"
 
-#include "UpdateServer/UpdateServerMiddleLayer/Macro/ExportMacro.h" 
-#include "Framework/MiddleLayer/NetworkManagerInterface.h" 
+#include "UpdateServer/UpdateServerMiddleLayer/Macro/ExportMacro.h"
+#include "Framework/MiddleLayer/NetworkManagerInterface.h"
 
 namespace UpdateServerMiddleLayer
 {
-	class UPDATE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE NetworkManager : public Framework::NetworkManagerInterface
-	{
-	public:
-		using ClassType = NetworkManager;
-		using ParentType = Framework::NetworkManagerInterface;
-		
-	public:
-		NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform);
-		virtual ~NetworkManager();
+    class UPDATE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE NetworkManager : public Framework::NetworkManagerInterface
+    {
+    public:
+        using ClassType = NetworkManager;
+        using ParentType = Framework::NetworkManagerInterface;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE; 
-	};
+    public:
+        explicit NetworkManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
 }
 
-#endif // UPDATE_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H
+#endif  // UPDATE_SERVER_MIDDLE_LAYER_NETWORK_MIDDLE_LAYER_NETWORK_H

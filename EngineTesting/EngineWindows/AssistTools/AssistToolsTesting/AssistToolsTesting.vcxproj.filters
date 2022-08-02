@@ -513,5 +513,8 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
+    <Text Include="Resource\GenerateProjectsSuite\GameTemplateRenderer.txt">
+      <Filter>资源文件\GenerateProjectsSuite</Filter>
+    </Text>
   </ItemGroup>
 </Project>

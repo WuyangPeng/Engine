@@ -68,7 +68,7 @@ void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToModule(c
 {
     GenerateToModuleVcxproj(resourceDirectory, newSolutionName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName, aModuleName);
     GenerateToModuleVcxprojFilters(resourceDirectory, newSolutionName, aModuleName);
-    GenerateToUpdate(resourceDirectory, newSolutionName, aModuleName);
+    GenerateToIllustrate(resourceDirectory, newSolutionName, aModuleName);
     GenerateToLogJson(resourceDirectory, newSolutionName, aModuleName);
     GenerateToTestingJson(resourceDirectory, newSolutionName, aModuleName);
     GenerateToEnvironmentVariable(resourceDirectory, newSolutionName, aModuleName);
@@ -100,13 +100,23 @@ void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToModuleVc
     generateTestingTemplateVcxprojFilters.GenerateTo(fullDirectory, newSolutionName, aModuleName);
 }
 
-void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToUpdate(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
+void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToIllustrate(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const
 {
     auto fullDirectory = resourceDirectory + GetForwardSlash() + GetEngineDirectory() + GetForwardSlash() + newSolutionName + GetTesting() + GetForwardSlash() + newSolutionName + aModuleName + GetTesting() + GetForwardSlash() + GetResource();
 
-    MAYBE_UNUSED const auto result = System::CreateFileDirectory(fullDirectory, nullptr);
+    auto result = System::CreateFileDirectory(fullDirectory, nullptr);
 
-    CoreTools::WriteFileManager manager{ fullDirectory + GetForwardSlash() + GetUpdate() };
+    CoreTools::WriteFileManager scheduleManager{ fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Schedule.md"s) };
+    CoreTools::WriteFileManager readMeManager{ fullDirectory + GetForwardSlash() + SYSTEM_TEXT("ReadMe.md"s) };
+
+    const auto todoDirectory = fullDirectory + GetForwardSlash() + SYSTEM_TEXT("Todo"s);
+
+    result = System::CreateFileDirectory(todoDirectory, nullptr);
+
+    for (auto i = 0; i < 10; ++i)
+    {
+        CoreTools::WriteFileManager manager{ todoDirectory + GetForwardSlash() + SYSTEM_TEXT("Level "s) + System::ToString(i) + SYSTEM_TEXT(".txt"s) };
+    }
 }
 
 void AssistTools::GenerateTestingTemplateEngineDirectoryImpl::GenerateToLogJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const

@@ -4,7 +4,7 @@
 最后的霸王单元测试（The Last Overlord Testing）
 
 ----------------------------
-最后的霸王单元测试包含十八个模块：
+最后的霸王单元测试包含二十个模块：
 
 ---------------------------
 
@@ -20,11 +20,13 @@
 10. OfflineServer（离线服务器）
 11. LeaderboardServer（排行榜服务器）
 12. MailServer（邮件服务器）
-13. RechargeServer（充值服务器）
-14. LogServer（日志服务器）
-15. GameMasterServer（游戏管理员服务器）
-16. ServerManager（服务器管理者）
-17. BackgroundServer（后台服务器）
+13. ChatServer（聊天服务器）
+14. RechargeServer（充值服务器）
+15. LogServer（日志服务器）
+16. GameMasterServer（游戏管理员服务器）
+17. ServerManager（服务器管理者）
 18. UpdateServer（更新服务器）
+19. BackgroundServer（后台服务器）
+20. DatabaseServer（数据库服务器）
 
 ---------------------------

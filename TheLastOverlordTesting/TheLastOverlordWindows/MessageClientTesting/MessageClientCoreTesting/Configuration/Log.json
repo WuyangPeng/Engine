@@ -1,6 +1,5 @@
 {
-  "Logger": 
-  {
+  "Logger": {
     "System": 1,
     "CoreTools": 1,
     "Network": 1,
@@ -20,16 +19,13 @@
     "Framework": 1
   },
 
-  "Appender":
-  {
-    "Console": 
-    {
+  "Appender": {
+    "Console": {
       "Flags": 15,
       "Level": 1
     },
 
-    "File":
-    {
+    "File": {
       "Directory": "Log",
       "FileName": "MessageClientCoreTesting",
       "Flags": 15,
@@ -39,8 +35,7 @@
       "Extension": "log"
     },
 
-    "Default":
-    {
+    "Default": {
       "Directory": "Log",
       "Flags": 15,
       "Level": 1,

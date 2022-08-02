@@ -1,0 +1,12 @@
+@ingroup group_ServerManagerCoreTesting_Documentation
+
+----------------------------
+服务器管理者核心单元测试
+
+目前包含：
+
+1.   Macro（宏） 
+
+2.   Engine（引擎） 
+
+----------------------------

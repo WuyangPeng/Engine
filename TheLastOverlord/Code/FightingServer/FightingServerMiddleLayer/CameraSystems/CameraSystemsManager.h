@@ -1,31 +1,33 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 最后的霸王版本：0.0.0.1 (2019/10/12 09:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	最后的霸王版本：0.8.0.12 (2022/07/25 16:08)
 
 #ifndef FIGHTING_SERVER_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H
 #define FIGHTING_SERVER_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H
 
 #include "FightingServer/FightingServerMiddleLayer/FightingServerMiddleLayerDll.h"
 
-#include "FightingServer/FightingServerMiddleLayer/Macro/ExportMacro.h" 
-#include "Framework/MiddleLayer/CameraSystemsManagerInterface.h" 
+#include "FightingServer/FightingServerMiddleLayer/Macro/ExportMacro.h"
+#include "Framework/MiddleLayer/CameraSystemsManagerInterface.h"
 
 namespace FightingServerMiddleLayer
 {
-	class FIGHTING_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE CameraSystemsManager : public Framework::CameraSystemsManagerInterface
-	{
-	public:
-		using ClassType = CameraSystemsManager;
-		using ParentType = Framework::CameraSystemsManagerInterface;
-		
-	public:
-		CameraSystemsManager(Framework::MiddleLayerPlatform middleLayerPlatform);
-		virtual ~CameraSystemsManager();
+    class FIGHTING_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE CameraSystemsManager : public Framework::CameraSystemsManagerInterface
+    {
+    public:
+        using ClassType = CameraSystemsManager;
+        using ParentType = Framework::CameraSystemsManagerInterface;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE; 
-	};
+    public:
+        explicit CameraSystemsManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
 }
 
-#endif // FIGHTING_SERVER_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H
+#endif  // FIGHTING_SERVER_MIDDLE_LAYER_CAMERA_SYSTEMS_MIDDLE_LAYER_CAMERA_SYSTEMS_H

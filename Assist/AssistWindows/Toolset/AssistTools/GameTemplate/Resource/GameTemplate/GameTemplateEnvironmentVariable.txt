@@ -1,4 +1,3 @@
 {
-   "DefaultEnvironment":"",
-   "Version": "%Versions%"
+  "DefaultEnvironment": ""
 }

@@ -21,9 +21,15 @@ AssistTools::GenerateTemplateDllMain::GenerateTemplateDllMain(const System::Stri
 
 CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateDllMain)
 
-void AssistTools::GenerateTemplateDllMain::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName, const System::String& managerName) const
+void AssistTools::GenerateTemplateDllMain::GenerateTo(const System::String& resourceDirectory,
+                                                      const System::String& newProjectName,
+                                                      const CopyrightData& copyrightData,
+                                                      const System::String& solutionName,
+                                                      const System::String& managerName,
+                                                      const System::String& projectCapital,
+                                                      const System::String& managerCapital) const
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName);
+    return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
 }

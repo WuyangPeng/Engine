@@ -52,7 +52,7 @@ namespace AssistTools
                                      const System::String& newReleaseLibName,
                                      const System::String& aModuleName) const;
         void GenerateToModuleVcxprojFilters(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const;
-        void GenerateToUpdate(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const;
+        void GenerateToIllustrate(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const;
         void GenerateToLogJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const;
         void GenerateToTestingJson(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const;
         void GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& aModuleName) const;

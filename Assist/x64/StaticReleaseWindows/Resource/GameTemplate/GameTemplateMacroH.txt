@@ -1,8 +1,11 @@
-// Copyright (c) 2011-%EndYear%
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽 
-//
-// %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
+///	Copyright (c) 2010-%EndYear%
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	%ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 
 #ifndef %ProjectCapital%_%ManagerCapital%_MACRO_H
 #define %ProjectCapital%_%ManagerCapital%_MACRO_H
@@ -12,4 +15,4 @@
 #include "%SolutionName%%ManagerName%ClassInvariantMacro.h"
 #include "%SolutionName%%ManagerName%CustomAssertMacro.h"
 
-#endif // %ProjectCapital%_%ManagerCapital%_MACRO_H
+#endif  // %ProjectCapital%_%ManagerCapital%_MACRO_H

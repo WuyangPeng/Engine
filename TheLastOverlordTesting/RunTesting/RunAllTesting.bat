@@ -12,12 +12,15 @@ call RunAllFightingServerTesting.bat
 call RunAllWorldServerTesting.bat
 call RunAllOfflineServerTesting.bat
 call RunAllLeaderboardServerTesting.bat
+call RunAllMailServerTesting.bat
+call RunAllChatServerTesting.bat
 call RunAllRechargeServerTesting.bat
 call RunAllLogServerTesting.bat
 call RunAllGameMasterServerTesting.bat
 call RunAllServerManagerTesting.bat
 call RunAllBackgroundServerTesting.bat
 call RunAllUpdateServerTesting.bat
+call RunAllDatabaseServerTesting.bat
 
 call RunTheLastOverlordTestingTesting.bat
 

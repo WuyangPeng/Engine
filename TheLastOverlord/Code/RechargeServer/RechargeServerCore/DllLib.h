@@ -9,6 +9,8 @@
 
 #include "Macro/UserMacro.h"
 #include "System/SystemLib.h"
+#include "CoreTools/CoreToolsLib.h"
+#include "Framework/FrameworkLib.h"
 #if defined(TCRE_USE_MSVC) 
 
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/04/28 17:57)
+///	引擎版本：0.8.0.12 (2022/07/21 11:05)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_ENGINE_DIRECTORY_IMPL_H
 #define ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_ENGINE_DIRECTORY_IMPL_H
@@ -60,10 +60,11 @@ namespace AssistTools
         void GenerateToMiddleLayerVcxprojFilters(const System::String& resourceDirectory,
                                                  const System::String& newSolutionName,
                                                  const System::String& newManager) const;
-        void GenerateToUpdate(const System::String& resourceDirectory,
-                              const System::String& newManager,
-                              const System::String& newSolutionName) const;
+        void GenerateToIllustrate(const System::String& resourceDirectory,
+                                  const System::String& newManager,
+                                  const System::String& newSolutionName) const;
         void GenerateToEnvironmentVariable(const System::String& resourceDirectory, const System::String& newSolutionName) const;
+        void GenerateToRenderer(const System::String& resourceDirectory, const System::String& newSolutionName) const;
     };
 }
 

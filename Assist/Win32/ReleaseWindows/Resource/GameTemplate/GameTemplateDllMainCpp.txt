@@ -1,21 +1,23 @@
-// Copyright (c) 2011-%EndYear%
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽 
-//
-// %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
+///	Copyright (c) 2010-%EndYear%
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	%ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 
 #include "%SolutionName%%ManagerName%Export.h"
 
 #include "%SolutionName%%ManagerName%Fwd.h"
-
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
-#ifndef BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+#ifndef BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC
 
-	DLL_MAIN_FUNCTION(%SolutionName%%ManagerName%);
+DLL_MAIN_FUNCTION(%SolutionName%%ManagerName%);
 
-#else // !BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+#else  // !BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC
 
-	CORE_TOOLS_MUTEX_INIT(%SolutionName%%ManagerName%);
+CORE_TOOLS_MUTEX_INIT(%SolutionName%%ManagerName%);
 
-#endif // BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+#endif  // BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC

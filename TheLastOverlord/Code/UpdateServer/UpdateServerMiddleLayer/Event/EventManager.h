@@ -9,23 +9,22 @@
 
 #include "UpdateServer/UpdateServerMiddleLayer/UpdateServerMiddleLayerDll.h"
 
-#include "UpdateServer/UpdateServerMiddleLayer/Macro/ExportMacro.h" 
-#include "Framework/MiddleLayer/EventManagerInterface.h" 
+#include "UpdateServer/UpdateServerMiddleLayer/Macro/ExportMacro.h"
+#include "Framework/MiddleLayer/EventManagerInterface.h"
 
 namespace UpdateServerMiddleLayer
 {
-	class UPDATE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE EventManager : public Framework::EventManagerInterface
-	{
-	public:
-		using ClassType = EventManager;
-		using ParentType = Framework::EventManagerInterface;
-		
-	public:
-		EventManager(Framework::MiddleLayerPlatform middleLayerPlatform);
-		virtual ~EventManager();
+    class UPDATE_SERVER_MIDDLE_LAYER_DEFAULT_DECLARE EventManager : public Framework::EventManagerInterface
+    {
+    public:
+        using ClassType = EventManager;
+        using ParentType = Framework::EventManagerInterface;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE; 
-	};
+    public:
+        explicit EventManager(Framework::MiddleLayerPlatform middleLayerPlatform);
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    };
 }
 
-#endif // UPDATE_SERVER_MIDDLE_LAYER_EVENT_MIDDLE_LAYER_EVENT_H
+#endif  // UPDATE_SERVER_MIDDLE_LAYER_EVENT_MIDDLE_LAYER_EVENT_H

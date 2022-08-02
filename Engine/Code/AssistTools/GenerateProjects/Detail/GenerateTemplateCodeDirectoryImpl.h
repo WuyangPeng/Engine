@@ -100,15 +100,21 @@ namespace AssistTools
         void GenerateToManagerDllMain(const System::String& exportDirectory,
                                       const System::String& newSolutionName,
                                       const CopyrightData& copyrightData,
-                                      const System::String& aManagerName) const;
+                                      const System::String& aManagerName,
+                                      const System::String& projectCapital,
+                                      const System::String& managerCapital) const;
         void GenerateToManagerDllLib(const System::String& exportDirectory,
                                      const System::String& newSolutionName,
                                      const CopyrightData& copyrightData,
-                                     const System::String& aManagerName) const;
+                                     const System::String& aManagerName,
+                                     const System::String& projectCapital,
+                                     const System::String& managerCapital) const;
         void GenerateToManagerDllLibMiddleLayer(const System::String& exportDirectory,
                                                 const System::String& newSolutionName,
                                                 const CopyrightData& copyrightData,
-                                                const System::String& aManagerName) const;
+                                                const System::String& aManagerName,
+                                                const System::String& projectCapital,
+                                                const System::String& managerCapitalName) const;
         void GenerateToManagerMacro(const System::String& exportDirectory,
                                     const System::String& newSolutionName,
                                     const CopyrightData& copyrightData,

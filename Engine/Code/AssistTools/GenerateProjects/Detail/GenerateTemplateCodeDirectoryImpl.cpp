@@ -155,8 +155,8 @@ void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManager(const Sys
     GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerImportH.txt"s), SYSTEM_TEXT("Import"s), projectCapital, managerCapitalName);
     GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"s), SYSTEM_TEXT("NoImport"s), projectCapital, managerCapitalName);
     GenerateToManagerLib(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
-    GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, aManagerName);
-    GenerateToManagerDllLib(exportDirectory, newSolutionName, copyrightData, aManagerName);
+    GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
+    GenerateToManagerDllLib(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
     GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateExportMacroH.txt"s), SYSTEM_TEXT("ExportMacro"s), projectCapital, managerCapitalName);
     GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerClassInvariantMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("ClassInvariantMacro"s), projectCapital, managerCapitalName);
     GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerCustomAssertMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("CustomAssertMacro"s), projectCapital, managerCapitalName);
@@ -174,8 +174,8 @@ void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerMiddleLaye
     GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerImportH.txt"s), SYSTEM_TEXT("Import"s), projectCapital, managerCapitalName);
     GenerateToManager(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerNoImportH.txt"s), SYSTEM_TEXT("NoImport"s), projectCapital, managerCapitalName);
     GenerateToManagerLib(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
-    GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, aManagerName);
-    GenerateToManagerDllLibMiddleLayer(exportDirectory, newSolutionName, copyrightData, aManagerName);
+    GenerateToManagerDllMain(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
+    GenerateToManagerDllLibMiddleLayer(exportDirectory, newSolutionName, copyrightData, aManagerName, projectCapital, managerCapitalName);
     GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateExportMacroH.txt"s), SYSTEM_TEXT("ExportMacro"s), projectCapital, managerCapitalName);
     GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerClassInvariantMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("ClassInvariantMacro"s), projectCapital, managerCapitalName);
     GenerateToManagerMacro(exportDirectory, newSolutionName, copyrightData, aManagerName, SYSTEM_TEXT("GameTemplateManagerCustomAssertMacroH.txt"s), newSolutionName + aManagerName + SYSTEM_TEXT("CustomAssertMacro"s), projectCapital, managerCapitalName);
@@ -206,7 +206,12 @@ void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerLib(const 
     generateTemplateManagerLib.GenerateTo(fullDirectory, newProjectName, copyrightData, projectCapital, managerCapitalName, newSolutionName, aManagerName);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllMain(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllMain(const System::String& exportDirectory,
+                                                                              const System::String& newSolutionName,
+                                                                              const CopyrightData& copyrightData,
+                                                                              const System::String& aManagerName,
+                                                                              const System::String& projectCapital,
+                                                                              const System::String& managerCapital) const
 {
     GenerateTemplateHeader::Replace replace{};
     const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllMainCpp.txt"s) };
@@ -214,10 +219,15 @@ void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllMain(co
     const System::String fullDirectory{ exportDirectory + GetForwardSlash() + GetCodeDirectory() + GetForwardSlash() + newSolutionName + GetForwardSlash() + newSolutionName + aManagerName };
 
     GenerateTemplateDllMain generateTemplateDllMain{ fileName, replace };
-    generateTemplateDllMain.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName);
+    generateTemplateDllMain.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, projectCapital, managerCapital);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLib(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLib(const System::String& exportDirectory,
+                                                                             const System::String& newSolutionName,
+                                                                             const CopyrightData& copyrightData,
+                                                                             const System::String& aManagerName,
+                                                                             const System::String& projectCapital,
+                                                                             const System::String& managerCapital) const
 {
     GenerateTemplateHeader::Replace replace{};
     const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllLibCpp.txt"s) };
@@ -227,10 +237,15 @@ void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLib(con
     auto managerChineseName = GetReplacing(aManagerName + SYSTEM_TEXT("ChineseName"s));
 
     GenerateTemplateDllLib generateTemplateDllLib{ fileName, replace };
-    generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerChineseName);
+    generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerChineseName, projectCapital, managerCapital);
 }
 
-void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLibMiddleLayer(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName) const
+void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLibMiddleLayer(const System::String& exportDirectory,
+                                                                                        const System::String& newSolutionName,
+                                                                                        const CopyrightData& copyrightData,
+                                                                                        const System::String& aManagerName,
+                                                                                        const System::String& projectCapital,
+                                                                                        const System::String& managerCapitalName) const
 {
     GenerateTemplateHeader::Replace replace{};
     const System::String fileName{ GetDirectory() + GetForwardSlash() + SYSTEM_TEXT("GameTemplateDllLibMiddleLayerCpp.txt"s) };
@@ -240,7 +255,7 @@ void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerDllLibMidd
     auto managerChineseName = GetReplacing(aManagerName + SYSTEM_TEXT("ChineseName"s));
 
     GenerateTemplateDllLib generateTemplateDllLib{ fileName, replace };
-    generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerChineseName);
+    generateTemplateDllLib.GenerateTo(fullDirectory, newProjectName, copyrightData, newSolutionName, aManagerName, managerChineseName, projectCapital, managerCapitalName);
 }
 
 void AssistTools::GenerateTemplateCodeDirectoryImpl::GenerateToManagerMacro(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& aManagerName, const System::String& testFileName, const System::String& resultSuffix, const System::String& projectCapital, const System::String& managerCapitalName) const

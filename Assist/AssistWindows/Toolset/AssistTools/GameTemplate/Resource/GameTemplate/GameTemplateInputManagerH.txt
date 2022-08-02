@@ -1,8 +1,11 @@
-// Copyright (c) 2011-%EndYear%
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽 
-//
-// %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
+///	Copyright (c) 2010-%EndYear%
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	%ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
 
 #ifndef %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_H
 #define %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_H
@@ -10,8 +13,8 @@
 #include "%SolutionName%/%SolutionName%MiddleLayer/%SolutionName%MiddleLayerDll.h"
 
 #include "%SolutionName%/%SolutionName%MiddleLayer/Macro/ExportMacro.h" 
+#include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MiddleLayer/%ManagerName%.h"
-#include "Framework/Application/ApplicationTrait.h"
 
 namespace %SolutionName%MiddleLayer
 {
@@ -23,11 +26,10 @@ namespace %SolutionName%MiddleLayer
 		using ParentType = Framework::%ManagerName%<ApplicationTrait>;
 		
 	public:
-		%ManagerName%();
-		virtual ~%ManagerName%();
+		explicit %ManagerName%(Framework::MiddleLayerPlatform middleLayerPlatform);
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE; 
 	};
 }
 
-#endif // %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_H
+#endif  // %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_H
