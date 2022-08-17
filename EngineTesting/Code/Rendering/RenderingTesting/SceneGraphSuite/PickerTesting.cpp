@@ -20,7 +20,6 @@
 #include "Mathematics/Objects3D/Triangle3Detail.h"
 #include "Rendering/Detail/SwitchNode.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Node.h"

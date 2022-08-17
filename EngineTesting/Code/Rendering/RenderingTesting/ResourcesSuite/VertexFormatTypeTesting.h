@@ -21,7 +21,7 @@ namespace Rendering
 
     private:
         void MainTest();
-        void BaseTest();
+        void BaseTest() noexcept;
 
         void DoRunUnitTest() override;
     };

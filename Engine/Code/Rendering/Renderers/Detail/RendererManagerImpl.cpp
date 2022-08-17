@@ -150,7 +150,7 @@ void Rendering::RendererManagerImpl::BindAll(const ConstTextureCubeSharedPtr& te
     }
 }
 
-void Rendering::RendererManagerImpl::BindAll(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererManagerImpl::BindAll(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -290,7 +290,7 @@ void Rendering::RendererManagerImpl::UnbindAll(const ConstTextureCubeSharedPtr& 
     }
 }
 
-void Rendering::RendererManagerImpl::UnbindAll(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererManagerImpl::UnbindAll(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
 

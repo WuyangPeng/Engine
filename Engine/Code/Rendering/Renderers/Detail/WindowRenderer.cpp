@@ -79,6 +79,41 @@ void Rendering::WindowRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualShar
     throw std::logic_error("The method or operation is not implemented.");
 }
 
+void Rendering::WindowRenderer::SetBlendState(MAYBE_UNUSED const BlendStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::WindowRenderer::SetDepthStencilState(MAYBE_UNUSED const DepthStencilStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::WindowRenderer::SetRasterizerState(MAYBE_UNUSED const RasterizerStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::WindowRenderer::Update(MAYBE_UNUSED const BufferSharedPtr& buffer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::WindowRenderer::Update(MAYBE_UNUSED const TextureSharedPtr& texture)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
 #include STSTEM_WARNING_POP
 
 void Rendering::WindowRenderer::SetViewport(MAYBE_UNUSED const Viewport& viewport)
@@ -177,6 +212,24 @@ void Rendering::WindowRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, M
     RENDERING_CLASS_IS_VALID_9;
 
     throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::WindowRenderer::HasDepthRange01() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return false;
+}
+
+std::string Rendering::WindowRenderer::GetShaderName(MAYBE_UNUSED const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return "";
+}
+
+void Rendering::WindowRenderer::DisplayColorBuffer(MAYBE_UNUSED int syncInterval) noexcept
+{
 }
 
 void Rendering::WindowRenderer::Draw(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour& color, MAYBE_UNUSED const std::string& message)

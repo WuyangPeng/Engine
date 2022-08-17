@@ -467,7 +467,7 @@ void Rendering::TerrainBase::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::TerrainBase::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::TerrainBase::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

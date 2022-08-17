@@ -13,7 +13,7 @@
 #include "Rendering/Renderers/PlatformTextureCube.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/LoadTexture.h"
+#include "Rendering/Resources/Textures/LoadTexture.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTextureCubeTesting)
 

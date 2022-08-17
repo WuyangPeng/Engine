@@ -14,7 +14,7 @@
 #include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RectangleSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RectangleSurface);
@@ -44,54 +44,16 @@ Rendering::RectangleSurface::RectangleSurface(const std::shared_ptr<Mathematics:
 
     const auto numVertices = numUSamples * numVSamples;
     const auto vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(numVertices, vstride));
-    VertexBufferAccessor vba{ vformat, GetVertexBuffer() };
+    SetVertexBuffer(VertexBuffer::Create(*vformat, vstride));
 
-    auto tuDelta = (tcoordMax[0] - tcoordMin[0]) / uRange;
-    auto tvDelta = (tcoordMax[1] - tcoordMin[1]) / vRange;
-
-    for (auto uIndex = 0, i = 0; uIndex < numUSamples; ++uIndex)
-    {
-        const auto uIncr = uDelta * uIndex;
-        const auto u = uMin + uIncr;
-        for (auto vIndex = 0; vIndex < numVSamples; ++vIndex, ++i)
-        {
-            const auto vIncr = vDelta * vIndex;
-            const auto v = vMin + vIncr;
-
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ surface->P(u, v) });
-
-            if (vba.HasNormal())
-            {
-                Mathematics::Vector3F pos{};
-                Mathematics::Vector3F tan0{};
-                Mathematics::Vector3F tan1{};
-                Mathematics::Vector3F normal{};
-                surface->GetFrame(u, v, pos, tan0, tan1, normal);
-
-                GetVertexBuffer()->SetTriangleNormal(vba, i, Mathematics::AVectorF{ normal });
-            }
-
-            constexpr auto numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
-            const Mathematics::Vector2F tcoord{ tcoordMin[0] + tuDelta * uIncr, tcoordMin[1] + tvDelta * vIncr };
-            for (auto unit = 0; unit < numTCoords; ++unit)
-            {
-                if (vba.HasTextureCoord(unit))
-                {
-                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "纹理坐标必须是 2D\n");
-
-                    GetVertexBuffer()->SetTextureCoord(vba, i, tcoord, unit);
-                }
-            }
-        }
-    }
+    MAYBE_UNUSED auto tuDelta = (tcoordMax[0] - tcoordMin[0]) / uRange;
+    MAYBE_UNUSED auto tvDelta = (tcoordMax[1] - tcoordMin[1]) / vRange;
 
     const auto numTriangles = 2 * (numUSamples - 1) * (numVSamples - 1);
     const auto numIndices = 3 * numTriangles;
-    SetIndexBuffer(IndexBuffer::Create(numIndices, sizeof(int)));
-    // 先通过编译
+    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, sizeof(int)));
 
-    auto indices = GetIndexBuffer()->GetWriteSpanIterator();
+    auto indices = GetIndexBuffer()->GetData();
     for (auto uIndex = 0, i = 0; uIndex < numUSamples - 1; ++uIndex)
     {
         auto i0 = i;
@@ -130,26 +92,12 @@ void Rendering::RectangleSurface::UpdateSurface()
     const auto vMin = surface->GetVMin();
     const auto vDelta = (surface->GetVMax() - vMin) / boost::numeric_cast<float>(numVSamples - 1);
 
-    VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
     for (auto uIndex = 0, i = 0; uIndex < numUSamples; ++uIndex)
     {
         const auto u = uMin + uDelta * uIndex;
         for (auto vIndex = 0; vIndex < numVSamples; ++vIndex, ++i)
         {
             const auto v = vMin + vDelta * vIndex;
-
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ surface->P(u, v) });
-
-            if (vba.HasNormal())
-            {
-                Mathematics::Vector3F pos{};
-                Mathematics::Vector3F tan0{};
-                Mathematics::Vector3F tan1{};
-                Mathematics::Vector3F normal{};
-                surface->GetFrame(u, v, pos, tan0, tan1, normal);
-
-                GetVertexBuffer()->SetTriangleNormal(vba, i, Mathematics::AVectorF{ normal });
-            }
         }
     }
 
@@ -193,7 +141,7 @@ void Rendering::RectangleSurface::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RectangleSurface::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::RectangleSurface::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

@@ -14,9 +14,9 @@
 
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 
 #include <string>

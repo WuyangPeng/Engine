@@ -12,6 +12,7 @@
 
 #include "Abuse/Abuse.h"
 #include "AglRenderer/AglRenderer.h"
+#include "Base/Base.h"
 #include "ConsoleGraph/ConsoleGraph.h"
 #include "Controllers/Controllers.h"
 #include "CurvesSurfaces/CurvesSurfaces.h"
@@ -42,6 +43,7 @@
 #include "ShaderFloats/ShaderFloats.h"
 #include "Shaders/Shaders.h"
 #include "Sorting/Sorting.h"
+#include "State/State.h"
 #include "TIFF/TIFF.h"
 #include "Terrain/Terrain.h"
 #include "TextFonts/TextFonts.h"

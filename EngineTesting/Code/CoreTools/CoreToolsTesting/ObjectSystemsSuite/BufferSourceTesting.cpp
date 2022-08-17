@@ -9,7 +9,7 @@
 
 #include "BufferSourceTesting.h"
 #include "Detail/BufferSourceTestingEnum.h"
-#include "Detail/NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"

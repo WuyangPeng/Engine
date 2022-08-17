@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Matrix.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 
 #include <vector>
@@ -31,7 +31,7 @@ namespace Rendering
         using APoint = Mathematics::APointF;
 
     public:
-        NormalDerivatives(const VertexBufferAccessor& vertexBufferAccessor);
+        NormalDerivatives(const VertexBuffer& vertexBufferAccessor);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -46,7 +46,7 @@ namespace Rendering
         void ComputeEdge(int firstIndex, int secondIndex, int thirdIndex);
 
     private:
-        VertexBufferAccessor vertexBufferAccessor;
+        VertexBuffer vertexBufferAccessor;
         std::vector<Matrix> derivativestNormal;
         std::vector<Matrix> projectMatrix;
         std::vector<Matrix> differentMatrix;

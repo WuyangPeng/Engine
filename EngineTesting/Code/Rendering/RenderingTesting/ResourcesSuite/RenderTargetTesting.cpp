@@ -17,7 +17,8 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/RenderTarget.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RenderTargetTesting)
 
@@ -27,9 +28,6 @@ void Rendering::RenderTargetTesting::MainTest()
 
     RendererManager::Create();
 
-    ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
-
     RendererManager::Destroy();
 
     CoreTools::InitTerm::ExecuteTerminators();
@@ -37,14 +35,14 @@ void Rendering::RenderTargetTesting::MainTest()
 
 void Rendering::RenderTargetTesting::BaseTest()
 {
-    RenderTarget firstRenderTarget(5, TextureFormat::A8B8G8R8, 20, 22, false, true);
+    DrawTarget firstRenderTarget(5, DataFormatType::A8P8, 20, 22, false, DataFormatType::D24UNormS8UInt);
 
     ASSERT_EQUAL(firstRenderTarget.GetNumTargets(), 5);
-    ASSERT_ENUM_EQUAL(firstRenderTarget.GetFormat(), TextureFormat::A8B8G8R8);
+    ASSERT_ENUM_EQUAL(firstRenderTarget.GetRenderTargetFormat(), DataFormatType::A8P8);
     ASSERT_EQUAL(firstRenderTarget.GetWidth(), 20);
     ASSERT_EQUAL(firstRenderTarget.GetHeight(), 22);
 
-    ASSERT_FALSE(firstRenderTarget.HasMipmaps());
+    ASSERT_FALSE(firstRenderTarget.HasRenderTargetMipmaps());
     ASSERT_TRUE(firstRenderTarget.HasDepthStencil());
 }
 

@@ -4,8 +4,8 @@
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/03/30 10:25)
+///	标准：std:c++20
+///	引擎版本：0.8.1.0 (2022/08/13 17:54)
 
 #ifndef RENDERING_RESOURCES_TEXTURE_FLAGS_H
 #define RENDERING_RESOURCES_TEXTURE_FLAGS_H
@@ -25,10 +25,7 @@ namespace Rendering
 
     // 产生纹理最大数量的mipmap级别。这在当代显卡足够多。
     // 一个4096 x 40096图像有一个最大的13等级。
-    enum
-    {
-        TextureMaximumMipmapLevels = 16
-    };
+    constexpr auto textureMaximumMipmapLevels = 16;
 
     // 用户字段。这些可能是用于存储特定于应用程序的未知信息结构类。
     enum

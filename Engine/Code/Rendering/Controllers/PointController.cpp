@@ -24,8 +24,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/Buffer.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/Buffer.h"
 #include "Rendering/SceneGraph/Polypoint.h"
 #include "Rendering/SceneGraph/Visual.h"
 
@@ -171,27 +170,14 @@ void Rendering::PointController::UpdatePointMotion(float ctrlTime)
 
     if (points != nullptr)
     {
-        VertexBufferAccessor vba{ *points };
+        VertexBuffer vba = *points->GetVertexBuffer();
 
         const auto numPoints = points->GetNumPoints();
         for (auto i = 0; i < numPoints; ++i)
         {
             const auto distance = ctrlTime * GetPointLinearSpeed(i);
-            auto position = vba.GetPosition<Mathematics::APointF>(i);
-            auto deltaTrn = distance * GetPointLinearAxis(i);
-            points->GetVertexBuffer()->SetPosition(vba, i, position + deltaTrn);
-        }
 
-        if (vba.HasNormal())
-        {
-            for (auto i = 0; i < numPoints; ++i)
-            {
-                const auto angle = ctrlTime * GetPointAngularSpeed(i);
-                auto normal = vba.GetNormal<AVector>(i);
-                normal.Normalize();
-                const Mathematics::MatrixF deltaRot{ GetPointAngularAxis(i), angle };
-                points->GetVertexBuffer()->SetTriangleNormal(vba, i, deltaRot * normal);
-            }
+            auto deltaTrn = distance * GetPointLinearAxis(i);
         }
 
         RENDERER_MANAGE_SINGLETON.UpdateAll(points->GetConstVertexBuffer());
@@ -215,7 +201,7 @@ int Rendering::PointController::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::PointController::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::PointController::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

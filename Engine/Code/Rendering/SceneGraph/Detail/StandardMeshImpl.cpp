@@ -13,7 +13,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
 #include <vector>
 
@@ -48,19 +48,19 @@ Rendering::StandardMeshImpl::StandardMeshImpl(const StandardMeshImpl& rhs)
 
 void Rendering::StandardMeshImpl::Init()
 {
-    const auto positionIndex = vertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::Position);
+    const auto positionIndex = vertexFormat->GetIndex(VertexFormatFlags::Semantic::Position);
 
     RENDERING_ASSERTION_1(0 <= positionIndex, "顶点格式必须包含位置。\n");
 
     MAYBE_UNUSED const auto positionType = vertexFormat->GetAttributeType(positionIndex);
-    RENDERING_ASSERTION_1(positionType == VertexFormatFlags::AttributeType::Float3, "位置必须是3元组的浮点数。\n");
+    RENDERING_ASSERTION_1(positionType == DataFormatType::R32G32B32Float, "位置必须是3元组的浮点数。\n");
 
-    const auto normalIndex = vertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::Normal);
+    const auto normalIndex = vertexFormat->GetIndex(VertexFormatFlags::Semantic::Normal);
     if (0 <= normalIndex)
     {
         const auto normalType = vertexFormat->GetAttributeType(normalIndex);
 
-        if (normalType == VertexFormatFlags::AttributeType::Float3)
+        if (normalType == DataFormatType::R32G32B32Float)
         {
             hasNormals = true;
         }
@@ -72,12 +72,12 @@ void Rendering::StandardMeshImpl::Init()
 
     for (auto unit = 0; unit < maxUnits; ++unit)
     {
-        const auto textureCoordIndex = vertexFormat->GetIndex(VertexFormatFlags::AttributeUsage::TextureCoord, unit);
+        const auto textureCoordIndex = vertexFormat->GetIndex(VertexFormatFlags::Semantic::TextureCoord, unit);
         if (0 <= textureCoordIndex)
         {
             const auto textureCoordType = vertexFormat->GetAttributeType(textureCoordIndex);
 
-            if (textureCoordType == VertexFormatFlags::AttributeType::Float2)
+            if (textureCoordType == DataFormatType::R32G32Float)
             {
                 hasTextureCoords.at(unit) = true;
             }
@@ -162,8 +162,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
     const auto xSamplesInvertor = 1.0f / (xSamples - 1.0f);
@@ -179,18 +178,10 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
             const auto uTextureCoord = xIndex * xSamplesInvertor;
             const auto xCoordinate = (2.0f * uTextureCoord - 1.0f) * xExtent;
 
-            vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, APoint{ xCoordinate, yCoordinate, 0.0f });
-
-            if (hasNormals)
-            {
-                vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, AVector{ 0.0f, 0.0f, 1.0f });
-            }
-
             for (auto unit = 0; unit < maxUnits; ++unit)
             {
                 if (hasTextureCoords.at(unit))
                 {
-                    vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D{ uTextureCoord, vTextureCoord }, unit);
                 }
             }
 
@@ -198,10 +189,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
         }
     }
 
-    TransformData(vertexBufferAccessor, *vertexBuffer);
-
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
 
     totalIndex = 0;
     for (auto yIndex = 0; yIndex < ySamples - 1; ++yIndex)
@@ -213,7 +202,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
             const auto thirdIndex = secondIndex + xSamples;
             const auto fourthIndex = firstIndex + xSamples;
 
-            indexBuffer->InitIndexBufferInRectangle(totalIndex, firstIndex, secondIndex, thirdIndex, fourthIndex);
+            InitIndexBufferInRectangle(*indexBuffer, totalIndex, firstIndex, secondIndex, thirdIndex, fourthIndex);
 
             ++totalIndex;
         }
@@ -223,25 +212,14 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Rectangle(int xSa
 }
 
 // private
-void Rendering::StandardMeshImpl::TransformData(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const
+void Rendering::StandardMeshImpl::TransformData(MAYBE_UNUSED const VertexBuffer& vertexBufferAccessor, MAYBE_UNUSED VertexBuffer& vertexBuffer) const noexcept
 {
     if (!transform.IsIdentity())
     {
-        const auto numVertices = vertexBufferAccessor.GetNumVertices();
-        for (auto i = 0; i < numVertices; ++i)
-        {
-            const auto position = vertexBufferAccessor.GetPosition<APoint>(i);
-            vertexBuffer.SetPosition(vertexBufferAccessor, i, transform * position);
-        }
-
-        if (hasNormals)
-        {
-            vertexBuffer.NormalizeModelNormals(vertexBufferAccessor);
-        }
     }
 }
 
-Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSamples, int radialSamples, float radius) const
+Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSamples, int radialSamples, MAYBE_UNUSED float radius) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -253,24 +231,14 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
-
-    // 圆盘的中心
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ 0.0f, 0.0f, 0.0f });
-
-    if (hasNormals)
-    {
-        vertexBuffer->SetTriangleNormal(vertexBufferAccessor, 0, AVector{ 0.0f, 0.0f, 1.0f });
-    }
 
     for (auto unit = 0; unit < maxUnits; ++unit)
     {
         if (hasTextureCoords.at(unit))
         {
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 0, Vector2D{ 0.5f, 0.5f }, unit);
         }
     }
 
@@ -282,40 +250,16 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Disk(int shellSam
         auto angleCos = Math::Cos(angle);
         auto angleSin = Math::Sin(angle);
         const APoint radial{ angleCos, angleSin, 0.0f };
-
-        for (auto shellIndex = 1; shellIndex < shellSamples; ++shellIndex)
-        {
-            const auto fraction = shellSamplesMinus1Invertor * shellIndex;  // 在 (0,R]
-            auto fracRadial = fraction * radial;
-            const auto i = shellIndex + shellSamplesMinus1 * radialIndex;
-
-            vertexBuffer->SetPosition(vertexBufferAccessor, i, radius * fracRadial);
-
-            if (hasNormals)
-            {
-                vertexBuffer->SetTriangleNormal(vertexBufferAccessor, i, AVector{ 0.0f, 0.0f, 1.0f });
-            }
-
-            for (auto unit = 0; unit < maxUnits; ++unit)
-            {
-                if (hasTextureCoords.at(unit))
-                {
-                    vertexBuffer->SetTextureCoord(vertexBufferAccessor, i, Vector2D{ 0.5f + 0.5f * fracRadial[0], 0.5f + 0.5f * fracRadial[1] }, unit);
-                }
-            }
-        }
     }
 
-    TransformData(vertexBufferAccessor, *vertexBuffer);
-
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
-    indexBuffer->InitIndexBufferInDisk(radialSamplesMinus1, shellSamplesMinus1);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
+    InitIndexBufferInDisk(*indexBuffer, radialSamplesMinus1, shellSamplesMinus1);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 }
 
-Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(float xExtent, float yExtent, float zExtent) const
+Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(MAYBE_UNUSED float xExtent, MAYBE_UNUSED float yExtent, MAYBE_UNUSED float zExtent) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -325,38 +269,17 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(float xExtent
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
-
-    // 生成几何数据。
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ -xExtent, -yExtent, -zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 1, APoint{ +xExtent, -yExtent, -zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 2, APoint{ +xExtent, +yExtent, -zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint{ -xExtent, +yExtent, -zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 4, APoint{ -xExtent, -yExtent, +zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 5, APoint{ +xExtent, -yExtent, +zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 6, APoint{ +xExtent, +yExtent, +zExtent });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 7, APoint{ -xExtent, +yExtent, +zExtent });
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     for (auto unit = 0; unit < maxUnits; ++unit)
     {
         if (hasTextureCoords.at(unit))
         {
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 0, Vector2D{ 0.25f, 0.75f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 1, Vector2D{ 0.75f, 0.75f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 2, Vector2D{ 0.75f, 0.25f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 3, Vector2D{ 0.25f, 0.25f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 4, Vector2D{ 0.0f, 1.0f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 5, Vector2D{ 1.0f, 1.0f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 6, Vector2D{ 1.0f, 0.0f }, unit);
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 7, Vector2D{ 0.0f, 0.0f }, unit);
         }
     }
 
-    TransformData(vertexBufferAccessor, *vertexBuffer);
-
     // 生成索引（外视图）
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
 
     vector<int> indices(36);
 
@@ -407,7 +330,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Box(float xExtent
         ReverseTriangleOrder(numTriangles, indices.data());
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     auto mesh = std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
     if (hasNormals)
@@ -448,8 +371,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
     const auto radialSamplesInvertor = 1.0f / boost::numeric_cast<float>(radialSamples);
@@ -488,55 +410,28 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
             const auto radialFraction = radialIndex * radialSamplesInvertor;  // in [0,1)
             const AVector normal{ angleCos.at(radialIndex), angleSin.at(radialIndex), 0.0f };
 
-            vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, sliceCenter + radius * normal);
-
-            if (hasNormals)
-            {
-                if (inside)
-                {
-                    vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, -normal);
-                }
-                else
-                {
-                    vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-                }
-            }
-
             for (auto unit = 0; unit < maxUnits; ++unit)
             {
                 if (hasTextureCoords.at(unit))
                 {
-                    vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D(radialFraction, axisFraction), unit);
                 }
             }
 
             ++totalIndex;
         }
 
-        const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
-        vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, position);
-
-        if (hasNormals)
-        {
-            const auto normal = vertexBufferAccessor.GetNormal<AVector>(save);
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-        }
-
         for (auto unit = 0; unit < maxUnits; ++unit)
         {
             if (hasTextureCoords.at(unit))
             {
-                vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D(1.0f, axisFraction), unit);
             }
         }
 
         ++totalIndex;
     }
 
-    TransformData(vertexBufferAccessor, *vertexBuffer);
-
     // 产生索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
     size_t indicesIndex{};
 
@@ -571,7 +466,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderOmittedEn
         }
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     auto mesh = std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 
@@ -592,33 +487,13 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::CylinderIncludedE
     auto vertexBuffer = mesh->GetVertexBuffer();
     const auto numVertices = vertexBuffer->GetNumElements();
 
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
-
     // 平铺球到两极
-    auto heightDivide2 = 0.5f * height;
-    auto southPosition = vertexBufferAccessor.GetPosition<APoint>(numVertices - 2);
-    auto northPosition = vertexBufferAccessor.GetPosition<APoint>(numVertices - 1);
-
-    southPosition[2] = -heightDivide2;  // 南极
-    northPosition[2] = +heightDivide2;  // 北极
-
-    vertexBuffer->SetPosition(vertexBufferAccessor, numVertices - 2, southPosition);
-    vertexBuffer->SetPosition(vertexBufferAccessor, numVertices - 1, northPosition);
+    MAYBE_UNUSED const auto heightDivide2 = 0.5f * height;
 
     // 重映射 z值到 [-h / 2,h / 2].
     const auto zFactor = 2.0f / (axisSamples - 1);
-    auto tmp0 = radius * (-1.0f + zFactor);
-    auto tmp1 = 1.0f / (radius * (+1.0f - zFactor));
-    for (auto i = 0; i < numVertices - 2; ++i)
-    {
-        auto position = vertexBufferAccessor.GetPosition<APoint>(i);
-        position[2] = heightDivide2 * (-1.0f + tmp1 * (position[2] - tmp0));
-        auto adjust = radius * Math::InvSqrt(position[0] * position[0] + position[1] * position[1]);
-        position[0] *= adjust;
-        position[1] *= adjust;
-    }
-
-    TransformData(vertexBufferAccessor, *vertexBuffer);
+    MAYBE_UNUSED const auto tmp0 = radius * (-1.0f + zFactor);
+    MAYBE_UNUSED const auto tmp1 = 1.0f / (radius * (+1.0f - zFactor));
 
     if (hasNormals)
     {
@@ -648,8 +523,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
     const auto radialSamplesInvertor = 1.0f / boost::numeric_cast<float>(radialSamples);
@@ -680,7 +554,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
         const APoint sliceCenter{ 0.0f, 0.0f, zValue };
 
         // 计算切片的半径
-        auto sliceRadius = Math::Sqrt(Math::FAbs(radius * radius - zValue * zValue));
+        MAYBE_UNUSED auto sliceRadius = Math::Sqrt(Math::FAbs(radius * radius - zValue * zValue));
 
         // 计算切片顶点和复制终点。
         const auto save = totalIndex;
@@ -689,107 +563,18 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
             const auto radialFraction = radialSamplesIndex * radialSamplesInvertor;  // in [0,1)
             const AVector radial{ angleCos.at(radialSamplesIndex), angleSin.at(radialSamplesIndex), 0.0f };
 
-            vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, sliceCenter + sliceRadius * radial);
-
-            if (hasNormals)
-            {
-                auto normal = vertexBufferAccessor.GetPosition<AVector>(totalIndex);
-                normal.Normalize();
-                if (inside)
-                {
-                    vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, -normal);
-                }
-                else
-                {
-                    vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-                }
-            }
-
-            for (auto unit = 0; unit < maxUnits; ++unit)
-            {
-                if (hasTextureCoords.at(unit))
-                {
-                    vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D{ radialFraction, 0.5f * (zFraction + 1.0f) }, unit);
-                }
-            }
-
             ++totalIndex;
-        }
-
-        const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
-        vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, position);
-
-        if (hasNormals)
-        {
-            const auto normal = vertexBufferAccessor.GetNormal<AVector>(save);
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-        }
-
-        for (auto unit = 0; unit < maxUnits; ++unit)
-        {
-            if (hasTextureCoords.at(unit))
-            {
-                vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D{ 1.0f, 0.5f * (zFraction + 1.0f) }, unit);
-            }
         }
 
         ++totalIndex;
     }
 
-    // 南极
-    vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, APoint{ 0.0f, 0.0f, -radius });
-
-    if (hasNormals)
-    {
-        if (inside)
-        {
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, AVector{ 0.0f, 0.0f, 1.0f });
-        }
-        else
-        {
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, AVector{ 0.0f, 0.0f, -1.0f });
-        }
-    }
-
-    for (auto unit = 0; unit < maxUnits; ++unit)
-    {
-        if (hasTextureCoords.at(unit))
-        {
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D{ 0.5f, 0.5f }, unit);
-        }
-    }
-
     ++totalIndex;
 
-    // 北极
-    vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, APoint(0.0f, 0.0f, radius));
-
-    if (hasNormals)
-    {
-        if (inside)
-        {
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, AVector{ 0.0f, 0.0f, -1.0f });
-        }
-        else
-        {
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, AVector{ 0.0f, 0.0f, 1.0f });
-        }
-    }
-
-    for (auto unit = 0; unit < maxUnits; ++unit)
-    {
-        if (hasTextureCoords.at(unit))
-        {
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D{ 0.5f, 1.0f }, unit);
-        }
-    }
-
     ++totalIndex;
-
-    TransformData(vertexBufferAccessor, *vertexBuffer);
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
     size_t indicesIndex{};
 
@@ -867,7 +652,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
         indicesIndex += 3;
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
@@ -879,7 +664,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Sphere(int zSampl
     return mesh;
 }
 
-Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleSamples, int radialSamples, float outerRadius, float innerRadius) const
+Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleSamples, int radialSamples, float outerRadius, MAYBE_UNUSED float innerRadius) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -889,8 +674,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
     const auto circleSamplesInvertor = 1.0f / static_cast<float>(circleSamples);
@@ -916,46 +700,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
             auto cosPhi = Math::Cos(phi);
             auto sinPhi = Math::Sin(phi);
             const auto normal = cosPhi * radial - sinPhi * APoint(0.0f, 0.0f, -1.0f);
-            vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, torusMiddle + innerRadius * normal);
-
-            if (hasNormals)
-            {
-                if (inside)
-                {
-                    vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, -normal);
-                }
-                else
-                {
-                    vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-                }
-            }
-
-            for (auto unit = 0; unit < maxUnits; ++unit)
-            {
-                if (hasTextureCoords.at(unit))
-                {
-                    vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D(radialFraction, circleFraction), unit);
-                }
-            }
 
             ++totalIndex;
-        }
-
-        const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
-        vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, position);
-
-        if (hasNormals)
-        {
-            const auto normal = vertexBufferAccessor.GetNormal<AVector>(save);
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-        }
-
-        for (auto unit = 0; unit < maxUnits; ++unit)
-        {
-            if (hasTextureCoords.at(unit))
-            {
-                vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D(1.0f, circleFraction), unit);
-            }
         }
 
         ++totalIndex;
@@ -964,31 +710,11 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
     // 重复圆柱体两端以形成一个环面。
     for (auto radialIndex = 0; radialIndex <= radialSamples; ++radialIndex)
     {
-        const auto position = vertexBufferAccessor.GetPosition<APoint>(radialIndex);
-        vertexBuffer->SetPosition(vertexBufferAccessor, totalIndex, position);
-
-        if (hasNormals)
-        {
-            const auto normal = vertexBufferAccessor.GetNormal<AVector>(radialIndex);
-            vertexBuffer->SetTriangleNormal(vertexBufferAccessor, totalIndex, normal);
-        }
-
-        for (auto unit = 0; unit < maxUnits; ++unit)
-        {
-            if (hasTextureCoords.at(unit))
-            {
-                auto textureCoords = vertexBufferAccessor.GetTextureCoord<Vector2D>(unit, radialIndex);
-                vertexBuffer->SetTextureCoord(vertexBufferAccessor, totalIndex, Vector2D(textureCoords[0], 1.0f), unit);
-            }
-        }
-
         ++totalIndex;
     }
 
-    TransformData(vertexBufferAccessor, *vertexBuffer);
-
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
 
     size_t indicesIndex{};
@@ -1025,7 +751,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Torus(int circleS
         }
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
@@ -1041,8 +767,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto fSqrt2Div3 = Math::Sqrt(2.0f) / 3.0f;
-    auto fSqrt6Div3 = Math::Sqrt(6.0f) / 3.0f;
+    MAYBE_UNUSED auto fSqrt2Div3 = Math::Sqrt(2.0f) / 3.0f;
+    MAYBE_UNUSED auto fSqrt6Div3 = Math::Sqrt(6.0f) / 3.0f;
     constexpr auto fOneThird = 1.0f / 3.0f;
 
     constexpr auto numVertices = 4;
@@ -1051,21 +777,12 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint(0.0f, 0.0f, 1.0f));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 1, APoint(2.0f * fSqrt2Div3, 0.0f, -fOneThird));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 2, APoint(-fSqrt2Div3, fSqrt6Div3, -fOneThird));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint(-fSqrt2Div3, -fSqrt6Div3, -fOneThird));
-
-    CreatePlatonicNormals(vertexBufferAccessor, *vertexBuffer);
-    CreatePlatonicTextures(vertexBufferAccessor, *vertexBuffer);
-    TransformData(vertexBufferAccessor, *vertexBuffer);
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(12);
 
     indices.at(0) = 0;
@@ -1086,7 +803,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Tetrahedron() con
         ReverseTriangleOrder(numTriangles, &indices.at(0));
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 }
@@ -1095,7 +812,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto fSqrtThird = Math::Sqrt(1.0f / 3.0f);
+    MAYBE_UNUSED auto fSqrtThird = Math::Sqrt(1.0f / 3.0f);
 
     constexpr auto numVertices = 8;
     constexpr auto numTriangles = 12;
@@ -1103,25 +820,12 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ -fSqrtThird, -fSqrtThird, -fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 1, APoint{ fSqrtThird, -fSqrtThird, -fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 2, APoint{ fSqrtThird, fSqrtThird, -fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint{ -fSqrtThird, fSqrtThird, -fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 4, APoint{ -fSqrtThird, -fSqrtThird, fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 5, APoint{ fSqrtThird, -fSqrtThird, fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 6, APoint{ fSqrtThird, fSqrtThird, fSqrtThird });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 7, APoint{ -fSqrtThird, fSqrtThird, fSqrtThird });
-
-    CreatePlatonicNormals(vertexBufferAccessor, *vertexBuffer);
-    CreatePlatonicTextures(vertexBufferAccessor, *vertexBuffer);
-    TransformData(vertexBufferAccessor, *vertexBuffer);
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -1171,7 +875,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Hexahedron() cons
         ReverseTriangleOrder(numTriangles, &indices.at(0));
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 }
@@ -1186,23 +890,12 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint(1.0f, 0.0f, 0.0f));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 1, APoint(-1.0f, 0.0f, 0.0f));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 2, APoint(0.0f, 1.0f, 0.0f));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint(0.0f, -1.0f, 0.0f));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 4, APoint(0.0f, 0.0f, 1.0f));
-    vertexBuffer->SetPosition(vertexBufferAccessor, 5, APoint(0.0f, 0.0f, -1.0f));
-
-    CreatePlatonicNormals(vertexBufferAccessor, *vertexBuffer);
-    CreatePlatonicTextures(vertexBufferAccessor, *vertexBuffer);
-    TransformData(vertexBufferAccessor, *vertexBuffer);
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -1240,7 +933,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Octahedron() cons
         ReverseTriangleOrder(numTriangles, &indices.at(0));
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 }
@@ -1250,8 +943,8 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     const auto a = 1.0f / Math::Sqrt(3.0f);
-    auto b = Math::Sqrt((3.0f - Math::Sqrt(5.0f)) / 6.0f);
-    auto c = Math::Sqrt((3.0f + Math::Sqrt(5.0f)) / 6.0f);
+    MAYBE_UNUSED auto b = Math::Sqrt((3.0f - Math::Sqrt(5.0f)) / 6.0f);
+    MAYBE_UNUSED auto c = Math::Sqrt((3.0f + Math::Sqrt(5.0f)) / 6.0f);
 
     constexpr auto numVertices = 20;
     constexpr auto numTriangles = 36;
@@ -1259,37 +952,12 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ a, a, a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 1, APoint{ a, a, -a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 2, APoint{ a, -a, a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint{ a, -a, -a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 4, APoint{ -a, a, a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 5, APoint{ -a, a, -a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 6, APoint{ -a, -a, a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 7, APoint{ -a, -a, -a });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 8, APoint{ b, c, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 9, APoint{ -b, c, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 10, APoint{ b, -c, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 11, APoint{ -b, -c, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 12, APoint{ c, 0.0f, b });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 13, APoint{ c, 0.0f, -b });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 14, APoint{ -c, 0.0f, b });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 15, APoint{ -c, 0.0f, -b });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 16, APoint{ 0.0f, b, c });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 17, APoint{ 0.0f, -b, c });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 18, APoint{ 0.0f, b, -c });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 19, APoint{ 0.0f, -b, -c });
-
-    CreatePlatonicNormals(vertexBufferAccessor, *vertexBuffer);
-    CreatePlatonicTextures(vertexBufferAccessor, *vertexBuffer);
-    TransformData(vertexBufferAccessor, *vertexBuffer);
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -1411,7 +1079,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Dodecahedron() co
         ReverseTriangleOrder(numTriangles, indices.data());
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 }
@@ -1431,29 +1099,12 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
     const auto stride = vertexFormat->GetStride();
 
     // 创建一个顶点缓冲区
-    auto vertexBuffer = VertexBuffer::Create(numVertices, stride, usage);
-    VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+    auto vertexBuffer = VertexBuffer::Create(*vertexFormat, stride);
 
     // 生成几何数据。
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ u, v, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ -u, v, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ u, -v, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ -u, -v, 0.0f });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ v, 0.0f, u });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ v, 0.0f, -u });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ -v, 0.0f, u });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ -v, 0.0f, -u });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ 0.0f, u, v });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ 0.0f, -u, v });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ 0.0f, u, -v });
-    vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint{ 0.0f, -u, -v });
-
-    CreatePlatonicNormals(vertexBufferAccessor, *vertexBuffer);
-    CreatePlatonicTextures(vertexBufferAccessor, *vertexBuffer);
-    TransformData(vertexBufferAccessor, *vertexBuffer);
 
     // 生成索引
-    auto indexBuffer = IndexBuffer::Create(numIndices, 4, usage);
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numIndices, 4);
     vector<int> indices(numIndices);
 
 #include STSTEM_WARNING_PUSH
@@ -1527,50 +1178,238 @@ Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl::Icosahedron() con
         ReverseTriangleOrder(numTriangles, indices.data());
     }
 
-    indexBuffer->InitIndexBuffer(indices);
+    InitIndexBuffer(*indexBuffer, indices);
 
     return std::make_shared<TrianglesMesh>(vertexFormat->Clone(), vertexBuffer, indexBuffer);
 }
 
-// private
-void Rendering::StandardMeshImpl::CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const
+void Rendering::StandardMeshImpl::InitIndexBufferInRectangle(IndexBuffer& indexBuffer, int index, int rectangleIndex0, int rectangleIndex1, int rectangleIndex2, int rectangleIndex3)
 {
-    if (hasNormals)
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = indexBuffer.GetNumElements();
+    const auto numRectangles = numVertices / 6;
+
+    if (0 <= index && index < numRectangles)
     {
-        const auto numVertices = vertexBufferAccessor.GetNumVertices();
-        for (auto i = 0; i < numVertices; ++i)
+        if (indexSize == 2)
         {
-            auto position = vertexBufferAccessor.GetPosition<APoint>(i);
-            vertexBuffer.SetTriangleNormal(vertexBufferAccessor, i, AVector{ position[0], position[1], position[2] });
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+            auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+            if (indices != nullptr)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[index * 6] = boost::numeric_cast<int16_t>(rectangleIndex0);
+                indices[index * 6 + 1] = boost::numeric_cast<int16_t>(rectangleIndex1);
+                indices[index * 6 + 2] = boost::numeric_cast<int16_t>(rectangleIndex2);
+                indices[index * 6 + 3] = boost::numeric_cast<int16_t>(rectangleIndex0);
+                indices[index * 6 + 4] = boost::numeric_cast<int16_t>(rectangleIndex2);
+                indices[index * 6 + 5] = boost::numeric_cast<int16_t>(rectangleIndex3);
+
+#include STSTEM_WARNING_POP
+            }
+        }
+        else  // indexSize == 4
+        {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+            auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+            if (indices != nullptr)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[index * 6] = rectangleIndex0;
+                indices[index * 6 + 1] = rectangleIndex1;
+                indices[index * 6 + 2] = rectangleIndex2;
+                indices[index * 6 + 3] = rectangleIndex0;
+                indices[index * 6 + 4] = rectangleIndex2;
+                indices[index * 6 + 5] = rectangleIndex3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+}
+
+void Rendering::StandardMeshImpl::InitIndexBufferInDisk(IndexBuffer& indexBuffer, int radialSamplesMinus1, int shellSamplesMinus1)
+{
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            auto firstIndex = radialSamplesMinus1;
+
+            for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[0] = 0;
+                indices[1] = boost::numeric_cast<int16_t>(1 + shellSamplesMinus1 * firstIndex);
+                indices[2] = boost::numeric_cast<int16_t>(1 + shellSamplesMinus1 * secondIndex);
+                indices += 3;
+
+                for (auto shellIndex = 1; shellIndex < shellSamplesMinus1; ++shellIndex)
+                {
+                    const auto index00 = boost::numeric_cast<int16_t>(shellIndex + shellSamplesMinus1 * firstIndex);
+                    const auto index01 = boost::numeric_cast<int16_t>(shellIndex + shellSamplesMinus1 * secondIndex);
+                    const auto index10 = boost::numeric_cast<int16_t>(index00 + 1);
+                    const auto index11 = boost::numeric_cast<int16_t>(index01 + 1);
+
+                    indices[0] = index00;
+                    indices[1] = index10;
+                    indices[2] = index11;
+                    indices[3] = index00;
+                    indices[4] = index11;
+                    indices[5] = index01;
+
+                    indices += 6;
+                }
+
+#include STSTEM_WARNING_POP
+
+                firstIndex = secondIndex;
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            auto firstIndex = radialSamplesMinus1;
+
+            for (auto secondIndex = 0; secondIndex <= radialSamplesMinus1; ++secondIndex)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[0] = 0;
+                indices[1] = 1 + shellSamplesMinus1 * firstIndex;
+                indices[2] = 1 + shellSamplesMinus1 * secondIndex;
+                indices += 3;
+
+                for (auto shellIndex = 1; shellIndex < shellSamplesMinus1; ++shellIndex)
+                {
+                    const auto index00 = shellIndex + shellSamplesMinus1 * firstIndex;
+                    const auto index01 = shellIndex + shellSamplesMinus1 * secondIndex;
+                    const auto index10 = index00 + 1;
+                    const auto index11 = index01 + 1;
+
+                    indices[0] = index00;
+                    indices[1] = index10;
+                    indices[2] = index11;
+                    indices[3] = index00;
+                    indices[4] = index11;
+                    indices[5] = index01;
+
+                    indices += 6;
+                }
+
+#include STSTEM_WARNING_POP
+
+                firstIndex = secondIndex;
+            }
+        }
+    }
+}
+
+void Rendering::StandardMeshImpl::InitIndexBuffer(IndexBuffer& indexBuffer, const std::vector<int>& indices)
+{
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = boost::numeric_cast<size_t>(indexBuffer.GetNumElements());
+
+    RENDERING_ASSERTION_1(numVertices == indices.size(), "索引数不对应。");
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto accessWriteData = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (accessWriteData != nullptr)
+        {
+            for (auto i = 0u; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                accessWriteData[i] = boost::numeric_cast<int16_t>(indices.at(i));
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto accessWriteData = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (accessWriteData != nullptr)
+        {
+            for (auto i = 0u; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                accessWriteData[i] = indices.at(i);
+
+#include STSTEM_WARNING_POP
+            }
         }
     }
 }
 
 // private
-void Rendering::StandardMeshImpl::CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const
+void Rendering::StandardMeshImpl::CreatePlatonicNormals(MAYBE_UNUSED const VertexBuffer& vertexBufferAccessor, MAYBE_UNUSED VertexBuffer& vertexBuffer) const noexcept
 {
-    for (auto unit = 0; unit < maxUnits; ++unit)
+    if (hasNormals)
     {
-        if (hasTextureCoords.at(unit))
-        {
-            const auto numVertices = vertexBufferAccessor.GetNumVertices();
-            for (auto i = 0; i < numVertices; ++i)
-            {
-                auto position = vertexBufferAccessor.GetPosition<APoint>(i);
-                Vector2D textures{};
-                if (Math::FAbs(position[2]) < 1.0f)
-                {
-                    textures[0] = 0.5f * (1.0f + Math::ATan2(position[1], position[0]) * Math::GetInversePI());
-                }
-                else
-                {
-                    textures[0] = 0.5f;
-                }
-
-                textures[1] = Math::ACos(position[2]) * Math::GetInversePI();
-
-                vertexBuffer.SetTextureCoord(vertexBufferAccessor, i, textures, unit);
-            }
-        }
     }
+}
+
+// private
+void Rendering::StandardMeshImpl::CreatePlatonicTextures(MAYBE_UNUSED const VertexBuffer& vertexBufferAccessor, MAYBE_UNUSED VertexBuffer& vertexBuffer) const noexcept
+{
 }

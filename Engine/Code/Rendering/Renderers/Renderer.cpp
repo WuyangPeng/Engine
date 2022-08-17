@@ -294,12 +294,12 @@ void Rendering::Renderer::Update(const ConstTextureCubeSharedPtr& texture, int f
     return impl->Update(texture, face, level);
 }
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstRenderTargetSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstRenderTargetSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstRenderTargetSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstDrawTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Unbind, ConstDrawTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Enable, ConstDrawTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Disable, ConstDrawTargetSharedPtr, void)
 
-Rendering::ConstTexture2DSharedPtr Rendering::Renderer::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::Renderer::ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 

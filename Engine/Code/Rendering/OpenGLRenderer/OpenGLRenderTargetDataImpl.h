@@ -17,7 +17,7 @@
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
 
 #include <array>
 #include <vector>
@@ -32,7 +32,7 @@ namespace Rendering
         using Enum = System::OpenGLEnum;
 
     public:
-        OpenGLRenderTargetDataImpl(Renderer* renderer, const RenderTarget* renderTarget);
+        OpenGLRenderTargetDataImpl(Renderer* renderer, const DrawTarget* renderTarget);
         virtual ~OpenGLRenderTargetDataImpl() noexcept = default;
         OpenGLRenderTargetDataImpl(const OpenGLRenderTargetDataImpl& rhs) = delete;
         OpenGLRenderTargetDataImpl& operator=(const OpenGLRenderTargetDataImpl& rhs) = delete;
@@ -48,15 +48,15 @@ namespace Rendering
 
     private:
         void CreateFramebufferObject() noexcept;
-        NODISCARD UInt CreateDrawBuffers(Renderer* renderer, const RenderTarget* aRenderTarget);
-        void CreateDepthStencilTexture(Renderer* renderer, const RenderTarget* aRenderTarget, UInt previousBind);
+        NODISCARD UInt CreateDrawBuffers(Renderer* renderer, const DrawTarget* aRenderTarget);
+        void CreateDepthStencilTexture(Renderer* renderer, const DrawTarget* aRenderTarget, UInt previousBind);
         void CheckFramebufferStatus() noexcept;
 
     private:
         int numTargets;
         int width;
         int height;
-        TextureFormat format;
+        DataFormatType format;
         bool hasMipmaps;
         bool hasDepthStencil;
 

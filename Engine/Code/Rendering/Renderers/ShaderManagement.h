@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Renderers/RenderersFwd.h"
-#include "Rendering/Resources/Buffer.h"
+#include "Rendering/Resources/Buffers/Buffer.h"
 #include "Rendering/Shaders/ShaderParameters.h"
 
 #include <map>

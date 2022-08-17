@@ -22,15 +22,15 @@
 #include "Rendering/DataTypes/DataTypesFwd.h"
 #include "Rendering/GlobalEffects/GlobalEffect.h"
 #include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/RenderTarget.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Resources/Texture1D.h"
-#include "Rendering/Resources/Texture2D.h"
-#include "Rendering/Resources/Texture3D.h"
-#include "Rendering/Resources/TextureCube.h"
-#include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
+#include "Rendering/Resources/Textures/TextureCube.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/SceneGraph/Visual.h"
@@ -172,11 +172,11 @@ namespace Rendering
 
         // 渲染目标管理。渲染目标对象必须是已经由应用程序代码分配。
         // 在ReadColor的索引index是在多个渲染目标对象的目标索引。
-        void Bind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Enable(const ConstRenderTargetSharedPtr& renderTarget);
-        void Disable(const ConstRenderTargetSharedPtr& renderTarget);
-        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
+        void Bind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Unbind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Enable(const ConstDrawTargetSharedPtr& renderTarget);
+        void Disable(const ConstDrawTargetSharedPtr& renderTarget);
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget);
 
         // 顶点着色器管理。顶点着色器对象必须已经由应用程序代码分配。
         void Bind(const ConstVertexShaderSharedPtr& vshader);

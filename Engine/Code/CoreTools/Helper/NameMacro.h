@@ -14,33 +14,33 @@
 
 #include <vector>
 
-#define CORE_TOOLS_NAMES_DECLARE                                                                    \
-public:                                                                                             \
-    using ObjectSharedPtrContainer = std::vector<ObjectSharedPtr>;                                  \
-    using ConstObjectSharedPtrContainer = std::vector<ConstObjectSharedPtr>;                        \
-    MAYBE_NULLPTR virtual ObjectSharedPtr GetObjectByName(const std::string& name);                 \
-    NODISCARD virtual ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);        \
-    MAYBE_NULLPTR virtual ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const; \
+#define CORE_TOOLS_NAMES_DECLARE                                                                \
+public:                                                                                         \
+    using ObjectSharedPtrContainer = std::vector<ObjectSharedPtr>;                              \
+    using ConstObjectSharedPtrContainer = std::vector<ConstObjectSharedPtr>;                    \
+    NODISCARD virtual ObjectSharedPtr GetObjectByName(const std::string& name);                 \
+    NODISCARD virtual ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);    \
+    NODISCARD virtual ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const; \
     NODISCARD virtual ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const
 
-#define CORE_TOOLS_NAMES_OVERRIDE_DECLARE                                                            \
-    MAYBE_NULLPTR ObjectSharedPtr GetObjectByName(const std::string& name) override;                 \
-    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name) override;        \
-    MAYBE_NULLPTR ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const override; \
+#define CORE_TOOLS_NAMES_OVERRIDE_DECLARE                                                        \
+    NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name) override;                 \
+    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name) override;    \
+    NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const override; \
     NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const override
 
-#define CORE_TOOLS_NAMES_FINAL_DECLARE                                                            \
-    MAYBE_NULLPTR ObjectSharedPtr GetObjectByName(const std::string& name) final;                 \
-    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name) final;        \
-    MAYBE_NULLPTR ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const final; \
+#define CORE_TOOLS_NAMES_FINAL_DECLARE                                                        \
+    NODISCARD ObjectSharedPtr GetObjectByName(const std::string& name) final;                 \
+    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name) final;    \
+    NODISCARD ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const final; \
     NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const final
 
-#define CORE_TOOLS_NAMES_IMPL_DECLARE                                                                  \
-    using ObjectSharedPtrContainer = std::vector<CoreTools::ObjectSharedPtr>;                          \
-    using ConstObjectSharedPtrContainer = std::vector<CoreTools::ConstObjectSharedPtr>;                \
-    MAYBE_NULLPTR CoreTools::ObjectSharedPtr GetObjectByName(const std::string& name);                 \
-    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);                   \
-    MAYBE_NULLPTR CoreTools::ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const; \
+#define CORE_TOOLS_NAMES_IMPL_DECLARE                                                              \
+    using ObjectSharedPtrContainer = std::vector<CoreTools::ObjectSharedPtr>;                      \
+    using ConstObjectSharedPtrContainer = std::vector<CoreTools::ConstObjectSharedPtr>;            \
+    NODISCARD CoreTools::ObjectSharedPtr GetObjectByName(const std::string& name);                 \
+    NODISCARD ObjectSharedPtrContainer GetAllObjectsByName(const std::string& name);               \
+    NODISCARD CoreTools::ConstObjectSharedPtr GetConstObjectByName(const std::string& name) const; \
     NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const
 
 #define CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(namespaceName, className)                                                                    \

@@ -21,7 +21,6 @@
 #include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
 #include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RevolutionSurface);
@@ -192,13 +191,6 @@ void Rendering::RevolutionSurface::UpdateDisk()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    VertexBufferAccessor vba{ *this };
-
-    for (auto c = 0; c < numCurveSamples; c++)
-    {
-        GetVertexBuffer()->SetPosition(vba, c, Mathematics::APoint{ samples.at(c) });
-    }
-
     const auto numCurveSamplesM1 = numCurveSamples - 1;
     for (auto r = 1; r < numRadialSamples; ++r)
     {
@@ -212,7 +204,6 @@ void Rendering::RevolutionSurface::UpdateDisk()
             const auto i = c + numCurveSamplesM1 * r;
 
             const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(i)[2] };
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 }
@@ -221,24 +212,13 @@ void Rendering::RevolutionSurface::UpdateSphere()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    VertexBufferAccessor vba{ *this };
-
-    auto numVertices = GetVertexBuffer()->GetNumElements();
-
-    GetVertexBuffer()->SetPosition(vba, numVertices - 2, Mathematics::APoint{ samples.at(0) });
-
     const auto index = numCurveSamples - 1;
-    GetVertexBuffer()->SetPosition(vba, numVertices - 1, Mathematics::APoint{ samples.at(index) });
 
     for (auto c = 1; c <= numCurveSamples - 2; ++c)
     {
         auto i = (c - 1) * (numRadialSamples + 1);
 
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ samples.at(c) });
-
         i += numRadialSamples;
-
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ samples.at(c) });
     }
 
     for (auto r = 1; r < numRadialSamples; ++r)
@@ -253,8 +233,6 @@ void Rendering::RevolutionSurface::UpdateSphere()
             const auto i = (c - 1) * (numRadialSamples + 1) + r;
 
             const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(c)[2] };
-
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 }
@@ -263,17 +241,11 @@ void Rendering::RevolutionSurface::UpdateCylinder()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    VertexBufferAccessor vba{ *this };
-
     for (auto c = 0; c < numCurveSamples; ++c)
     {
         auto i = c * (numRadialSamples + 1);
 
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ samples.at(c) });
-
         i += numRadialSamples;
-
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ samples.at(c) });
     }
 
     for (auto r = 1; r < numRadialSamples; ++r)
@@ -288,8 +260,6 @@ void Rendering::RevolutionSurface::UpdateCylinder()
             const auto i = c * (numRadialSamples + 1) + r;
 
             const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(c)[2] };
-
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 }
@@ -298,19 +268,13 @@ void Rendering::RevolutionSurface::UpdateTorus()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    VertexBufferAccessor vba{ *this };
-
     auto numVertices = GetVertexBuffer()->GetNumElements();
 
     for (auto c = 0; c < numCurveSamples; ++c)
     {
         auto i = c * (numRadialSamples + 1);
 
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ samples.at(c) });
-
         i += numRadialSamples;
-
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ samples.at(c) });
     }
 
     for (auto r = 1; r < numRadialSamples; ++r)
@@ -325,15 +289,12 @@ void Rendering::RevolutionSurface::UpdateTorus()
             const auto i = c * (numRadialSamples + 1) + r;
 
             const Mathematics::Vector3F position{ xCenter + radius * cos.at(r), radius * sin.at(r), samples.at(c)[2] };
-
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 
     auto i = numVertices - (numRadialSamples + 1);
     for (auto r = 0; r <= numRadialSamples; ++r, ++i)
     {
-        GetVertexBuffer()->SetPosition(vba, i, vba.GetPosition<Mathematics::APointF>(r));
     }
 }
 
@@ -387,7 +348,7 @@ void Rendering::RevolutionSurface::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RevolutionSurface::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::RevolutionSurface::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

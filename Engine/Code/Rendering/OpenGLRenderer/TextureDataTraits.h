@@ -12,10 +12,10 @@
 
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "Rendering/Resources/Flags/TextureFlags.h"
-#include "Rendering/Resources/Texture1D.h"
-#include "Rendering/Resources/Texture2D.h"
-#include "Rendering/Resources/Texture3D.h"
-#include "Rendering/Resources/TextureCube.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
+#include "Rendering/Resources/Textures/TextureCube.h"
 #include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 namespace Rendering

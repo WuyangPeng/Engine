@@ -21,8 +21,8 @@ namespace Rendering
 
     private:
         void MainTest();
-        void AttributeUsageTextureCoordTest();
-        void AttributeUsageColorTest();
+        void AttributeUsageTextureCoordTest() noexcept;
+        void AttributeUsageColorTest() noexcept;
 
         void DoRunUnitTest() override;
     };

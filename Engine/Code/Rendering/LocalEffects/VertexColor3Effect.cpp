@@ -251,7 +251,7 @@ void Rendering::VertexColor3Effect::PostLink()
     }
 }
 
-uint64_t Rendering::VertexColor3Effect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::VertexColor3Effect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

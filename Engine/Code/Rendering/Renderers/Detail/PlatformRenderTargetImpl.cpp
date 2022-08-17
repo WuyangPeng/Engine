@@ -26,7 +26,7 @@ Rendering::PlatformRenderTargetImpl::PlatformRenderTargetImpl() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Rendering, PlatformRenderTargetImpl)
 
 // static
-Rendering::PlatformRenderTargetImpl::PlatformRenderTargetSharedPtr Rendering::PlatformRenderTargetImpl::Create(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::PlatformRenderTargetImpl::PlatformRenderTargetSharedPtr Rendering::PlatformRenderTargetImpl::Create(Renderer* renderer, const DrawTarget* renderTarget)
 {
     if (renderer == nullptr)
     {
@@ -53,7 +53,7 @@ Rendering::PlatformRenderTargetImpl::PlatformRenderTargetSharedPtr Rendering::Pl
 }
 
 // static
-Rendering::PlatformRenderTargetImpl::PlatformRenderTargetSharedPtr Rendering::PlatformRenderTargetImpl::CreateDefault(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::PlatformRenderTargetImpl::PlatformRenderTargetSharedPtr Rendering::PlatformRenderTargetImpl::CreateDefault(Renderer* renderer, const DrawTarget* renderTarget)
 {
     return make_shared<OpenGLRenderTarget>(renderer, renderTarget);
 }

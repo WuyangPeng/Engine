@@ -236,13 +236,11 @@ Rendering::VisualEffectInstanceSharedPtr Rendering::Texture2AddEffect::CreateIns
     const auto filter0 = pshader->GetFilter(0);
     if (filter0 != ShaderFlags::SamplerFilter::Nearest && filter0 != ShaderFlags::SamplerFilter::Linear && !texture0->HasMipmaps())
     {
-        texture0->GenerateMipmaps();
     }
 
     const auto filter1 = pshader->GetFilter(1);
     if (filter1 != ShaderFlags::SamplerFilter::Nearest && filter1 != ShaderFlags::SamplerFilter::Linear && !texture1->HasMipmaps())
     {
-        texture1->GenerateMipmaps();
     }
 
     return instance;
@@ -328,7 +326,7 @@ void Rendering::Texture2AddEffect::PostLink()
     }
 }
 
-uint64_t Rendering::Texture2AddEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Texture2AddEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -13,7 +13,7 @@
 #include "ScreenTarget.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Shaders/ShaderManager.h"
 
 using std::vector;
@@ -36,20 +36,15 @@ Rendering::TrianglesMeshSharedPtr Rendering::ScreenTarget::CreateRectangle(const
                                                                            float xMax,
                                                                            float yMin,
                                                                            float yMax,
-                                                                           float zValue)
+                                                                           MAYBE_UNUSED float zValue)
 {
     if (ValidFormat(*vertexFormat) && ValidSizes(renderTargetWidth, renderTargetHeight))
     {
         const auto vstride = vertexFormat->GetStride();
-        auto vertexBuffer = VertexBuffer::Create(4, vstride);
-        VertexBufferAccessor vertexBufferAccessor{ vertexFormat, vertexBuffer };
+        auto vertexBuffer = VertexBuffer::Create(*vertexFormat, vstride);
 
         if (SHADER_MANAGE_SINGLETON.GetVertexProfile() == ShaderFlags::VertexShaderProfile::ARBVP1)
         {
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 0, Vector2D{ 0.0f, 0.0f });
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 1, Vector2D{ 1.0f, 0.0f });
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 2, Vector2D{ 1.0f, 1.0f });
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 3, Vector2D{ 0.0f, 1.0f });
         }
         else
         {
@@ -59,26 +54,81 @@ Rendering::TrianglesMeshSharedPtr Rendering::ScreenTarget::CreateRectangle(const
             xMax -= dx;
             yMin += dy;
             yMax += dy;
-
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 0, Vector2D(0.0f, 1.0f));
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 1, Vector2D(1.0f, 1.0f));
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 2, Vector2D(1.0f, 0.0f));
-            vertexBuffer->SetTextureCoord(vertexBufferAccessor, 3, Vector2D(0.0f, 0.0f));
         }
 
-        vertexBuffer->SetPosition(vertexBufferAccessor, 0, APoint(xMin, yMin, zValue));
-        vertexBuffer->SetPosition(vertexBufferAccessor, 1, APoint(xMax, yMin, zValue));
-        vertexBuffer->SetPosition(vertexBufferAccessor, 2, APoint(xMax, yMax, zValue));
-        vertexBuffer->SetPosition(vertexBufferAccessor, 3, APoint(xMin, yMax, zValue));
-
         // 创建正方形的索引缓冲区
-        auto indexBuffer = IndexBuffer::Create(6, boost::numeric_cast<int>(sizeof(int)));
-        indexBuffer->InitIndexBufferInParticles();
+        auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 6, boost::numeric_cast<int>(sizeof(int)));
+        InitIndexBufferInParticles(*indexBuffer);
 
         return std::make_shared<TrianglesMesh>(vertexFormat, vertexBuffer, indexBuffer);
     }
 
     return nullptr;
+}
+
+void Rendering::ScreenTarget::InitIndexBufferInParticles(IndexBuffer& indexBuffer)
+{
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = indexBuffer.GetNumElements();
+    const auto numParticles = numVertices / 6;
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (int16_t i{}; i < numParticles; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i * 6] = 4 * i;
+                indices[i * 6 + 1] = 4 * i + 1;
+                indices[i * 6 + 2] = 4 * i + 2;
+                indices[i * 6 + 3] = 4 * i;
+                indices[i * 6 + 4] = 4 * i + 2;
+                indices[i * 6 + 5] = 4 * i + 3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (auto i = 0; i < numParticles; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i * 6] = 4 * i;
+                indices[i * 6 + 1] = 4 * i + 1;
+                indices[i * 6 + 2] = 4 * i + 2;
+                indices[i * 6 + 3] = 4 * i;
+                indices[i * 6 + 4] = 4 * i + 2;
+                indices[i * 6 + 5] = 4 * i + 3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
 }
 
 // private
@@ -97,27 +147,27 @@ bool Rendering::ScreenTarget::ValidSizes(int renderTargetWidth, int renderTarget
 // private
 bool Rendering::ScreenTarget::ValidFormat(const VertexFormat& vertexFormat)
 {
-    auto index = vertexFormat.GetIndex(VertexFormatFlags::AttributeUsage::Position, 0);
+    auto index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::Position, 0);
     if (index < 0)
     {
         RENDERING_ASSERTION_1(false, "格式必须拥有位置信息。\n");
         return false;
     }
 
-    if (vertexFormat.GetAttributeType(index) != VertexFormatFlags::AttributeType::Float3)
+    if (vertexFormat.GetAttributeType(index) != DataFormatType::R32G32B32Float)
     {
         RENDERING_ASSERTION_1(false, "位置必须是3元组。\n");
         return false;
     }
 
-    index = vertexFormat.GetIndex(VertexFormatFlags::AttributeUsage::TextureCoord, 0);
+    index = vertexFormat.GetIndex(VertexFormatFlags::Semantic::TextureCoord, 0);
     if (index < 0)
     {
         RENDERING_ASSERTION_1(false, "格式必须拥有纹理坐标在单元0。\n");
         return false;
     }
 
-    if (vertexFormat.GetAttributeType(index) != VertexFormatFlags::AttributeType::Float2)
+    if (vertexFormat.GetAttributeType(index) != DataFormatType::R32G32Float)
     {
         RENDERING_ASSERTION_1(false, "纹理坐标在单元0必须是2元组。\n");
         return false;

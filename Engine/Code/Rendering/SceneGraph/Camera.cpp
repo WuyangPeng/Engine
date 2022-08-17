@@ -134,7 +134,7 @@ int Rendering::Camera::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Camera::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Camera::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

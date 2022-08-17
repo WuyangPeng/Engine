@@ -113,6 +113,51 @@ void Rendering::GlutRenderer::DisplayColorBuffer() noexcept
     RENDERING_CLASS_IS_VALID_9;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Rendering::GlutRenderer::SetBlendState(MAYBE_UNUSED const BlendStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::GlutRenderer::SetDepthStencilState(MAYBE_UNUSED const DepthStencilStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::GlutRenderer::SetRasterizerState(MAYBE_UNUSED const RasterizerStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::GlutRenderer::Update(MAYBE_UNUSED const BufferSharedPtr& buffer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::GlutRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+}
+
+bool Rendering::GlutRenderer::Update(MAYBE_UNUSED const TextureSharedPtr& texture)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+#include STSTEM_WARNING_POP
+
 void Rendering::GlutRenderer::SetColorMask(MAYBE_UNUSED bool allowRed, MAYBE_UNUSED bool allowGreen, MAYBE_UNUSED bool allowBlue, MAYBE_UNUSED bool allowAlpha)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -137,7 +182,21 @@ void Rendering::GlutRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, MAY
     RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::GlutRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual) noexcept
+bool Rendering::GlutRenderer::HasDepthRange01() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return false;
+}
+
+std::string Rendering::GlutRenderer::GetShaderName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return name;
+}
+
+void Rendering::GlutRenderer::DisplayColorBuffer(MAYBE_UNUSED int syncInterval) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 }

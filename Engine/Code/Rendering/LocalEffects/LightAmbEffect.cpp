@@ -271,7 +271,7 @@ void Rendering::LightAmbEffect::PostLink()
     }
 }
 
-uint64_t Rendering::LightAmbEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::LightAmbEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

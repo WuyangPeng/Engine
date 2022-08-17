@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
-#include "Rendering/Resources/Texture.h"
+#include "Rendering/Resources/Textures/Texture.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"
 

@@ -248,14 +248,12 @@ int Rendering::Spatial::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Spatial::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Spatial::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto uniqueID = ParentType::Register(target);
-
     // m_Parent不需要注册，由于parent本身必须发起注册调用其孩子,“this”就是其中之一。
-    return uniqueID;
+    return ParentType::Register(target);
 }
 
 void Rendering::Spatial::Save(CoreTools::BufferTarget& target) const

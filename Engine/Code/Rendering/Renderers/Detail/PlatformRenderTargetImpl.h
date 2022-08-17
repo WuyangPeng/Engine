@@ -15,7 +15,7 @@
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
 
 namespace Rendering
 {
@@ -41,10 +41,10 @@ namespace Rendering
         virtual void Disable(Renderer* renderer) = 0;
         NODISCARD virtual ConstTexture2DSharedPtr ReadColor(int index, Renderer* renderer) = 0;
 
-        NODISCARD static PlatformRenderTargetSharedPtr Create(Renderer* renderer, const RenderTarget* renderTarget);
+        NODISCARD static PlatformRenderTargetSharedPtr Create(Renderer* renderer, const DrawTarget* renderTarget);
 
     private:
-        NODISCARD static PlatformRenderTargetSharedPtr CreateDefault(Renderer* renderer, const RenderTarget* renderTarget);
+        NODISCARD static PlatformRenderTargetSharedPtr CreateDefault(Renderer* renderer, const DrawTarget* renderTarget);
     };
 }
 

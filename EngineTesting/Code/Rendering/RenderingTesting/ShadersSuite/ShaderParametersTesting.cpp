@@ -15,7 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/Texture1D.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
 #include "Rendering/Shaders/ShaderParameters.h"
 #include "Rendering/Shaders/VertexShader.h"
 

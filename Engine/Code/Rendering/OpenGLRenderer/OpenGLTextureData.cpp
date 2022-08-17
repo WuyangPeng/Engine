@@ -17,7 +17,7 @@
 
 // private
 template <>
-void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStructures(const Texture1D* aTexture, MAYBE_UNUSED UInt previousBind)
+void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStructures(const Texture1D* aTexture, MAYBE_UNUSED UInt previousBind) noexcept
 {
     if (aTexture == nullptr)
     {
@@ -27,15 +27,12 @@ void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStruct
     for (auto level = 0u; level < numLevels; ++level)
     {
         OpenGLTextureDataManager<ClassType> manager(*this);
-
-        auto data = manager.Lock(level, BufferLocking::WriteOnly);
-        System::MemoryCopy(data, aTexture->GetTextureData(level), aTexture->GetNumLevelBytes(level));
     }
 }
 
 // private
 template <>
-void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStructures(const Texture2D* aTexture, MAYBE_UNUSED UInt previousBind)
+void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStructures(const Texture2D* aTexture, MAYBE_UNUSED UInt previousBind) noexcept
 {
     if (aTexture == nullptr)
     {
@@ -45,15 +42,12 @@ void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStruct
     for (auto level = 0u; level < numLevels; ++level)
     {
         OpenGLTextureDataManager<ClassType> manage(*this);
-
-        auto data = manage.Lock(level, BufferLocking::WriteOnly);
-        System::MemoryCopy(data, aTexture->GetTextureData(level), aTexture->GetNumLevelBytes(level));
     }
 }
 
 // private
 template <>
-void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStructures(const Texture3D* aTexture, MAYBE_UNUSED UInt previousBind)
+void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStructures(const Texture3D* aTexture, MAYBE_UNUSED UInt previousBind) noexcept
 {
     if (aTexture == nullptr)
     {
@@ -65,15 +59,12 @@ void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStruct
     for (auto level = 0u; level < numLevels; ++level)
     {
         OpenGLTextureDataManager<ClassType> manager(*this);
-
-        auto data = manager.Lock(level, BufferLocking::WriteOnly);
-        System::MemoryCopy(data, aTexture->GetTextureData(level), aTexture->GetNumLevelBytes(level));
     }
 }
 
 // private
 template <>
-void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStructures(const TextureCube* aTexture, MAYBE_UNUSED UInt previousBind)
+void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStructures(const TextureCube* aTexture, MAYBE_UNUSED UInt previousBind) noexcept
 {
     if (aTexture == nullptr)
     {
@@ -87,9 +78,6 @@ void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStru
         for (auto level = 0u; level < numLevels; ++level)
         {
             OpenGLTextureDataManager<ClassType> manager(*this);
-
-            auto data = manager.Lock(face, level, BufferLocking::WriteOnly);
-            System::MemoryCopy(data, aTexture->GetTextureData(face, level), aTexture->GetNumLevelBytes(level));
         }
     }
 }

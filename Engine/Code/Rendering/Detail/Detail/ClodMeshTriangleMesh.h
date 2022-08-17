@@ -12,8 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 
 namespace Rendering
@@ -33,11 +33,11 @@ namespace Rendering
         NODISCARD int GetNumTriangles() const noexcept;
 
         NODISCARD bool ValidBuffers() const;
-        NODISCARD const int* GetIndexBufferReadOnlyData() const noexcept;
+        NODISCARD const int* GetIndexBufferReadOnlyData() const;
 
         NODISCARD Mathematics::Vector3F GetPosition(int index) const noexcept;
 
-        NODISCARD const char* GetVertexBufferReadOnlyData() const noexcept;
+        NODISCARD const char* GetVertexBufferReadOnlyData() const;
         NODISCARD int GetStride() const noexcept;
 
         void SetNewVertexBufferData(const std::vector<char>& newData);
@@ -50,7 +50,7 @@ namespace Rendering
         int numTriangles;
         IndexBufferSharedPtr indixBuffer;
         VertexBufferSharedPtr vertexBuffer;
-        VertexBufferAccessor vertexBufferAccessor;
+        VertexBuffer vertexBufferAccessor;
     };
 }
 

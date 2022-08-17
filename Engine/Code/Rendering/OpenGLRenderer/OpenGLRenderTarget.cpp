@@ -14,7 +14,7 @@
 #include "OpenGLTexture2D.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::OpenGLRenderTarget::OpenGLRenderTarget(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::OpenGLRenderTarget::OpenGLRenderTarget(Renderer* renderer, const DrawTarget* renderTarget)
     : ParentType{}, openGLRenderTargetData{ renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;

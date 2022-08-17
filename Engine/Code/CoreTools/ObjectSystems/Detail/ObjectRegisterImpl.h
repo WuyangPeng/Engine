@@ -24,13 +24,13 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD uint64_t GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const;
+        NODISCARD int64_t GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const;
         NODISCARD int GetOrderedSize() const;
 
         NODISCARD ConstRegisterContainerConstIter begin() const noexcept;
         NODISCARD ConstRegisterContainerConstIter end() const noexcept;
 
-        NODISCARD uint64_t RegisterRoot(const ConstObjectInterfaceSharedPtr& object);
+        NODISCARD int64_t RegisterRoot(const ConstObjectInterfaceSharedPtr& object);
 
     private:
         // 存储objects，对顶层对象使用图的深度优先遍历。

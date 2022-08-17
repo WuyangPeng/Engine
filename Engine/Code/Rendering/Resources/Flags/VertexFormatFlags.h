@@ -28,6 +28,27 @@ namespace Rendering
             ColorUnits = 2
         };
 
+        // 顶点格式属性的用法(语义)。
+        enum class Semantic
+        {
+            None,
+            Position,
+            BlendWeight,
+            BlendIndices,
+            Normal,
+            Psize,
+            TextureCoord,
+            Tangent,
+            Binormal,
+            TessFactor,
+            Positiont,
+            Color,
+            FogCoord,
+            Depth,
+            Sample,
+            Quantity
+        };
+
         // 顶点格式属性的通道类型。
         enum class AttributeType
         {
@@ -44,23 +65,6 @@ namespace Rendering
             Short1,
             Short2,
             Short4,
-            Quantity
-        };
-
-        // 顶点格式属性的用法(语义)。
-        enum class AttributeUsage
-        {
-            None,
-            Position,  // 属性 0
-            Normal,  // 属性 2
-            Tangent,  // 属性 14
-            Binormal,  // 属性 15
-            TextureCoord,  // 属性 8-15
-            Color,  // 属性 3-4
-            BlendIndices,  // 属性 7
-            BlendWeight,  // 属性 1
-            FogCoord,  // 属性 5
-            Psize,  // 属性 6
             Quantity
         };
     }

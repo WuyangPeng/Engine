@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Renderers/RenderersFwd.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 
 #include <map>
 #include <memory>

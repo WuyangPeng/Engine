@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Meshes/EdgeKey.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 #include <set>
 
@@ -97,9 +97,9 @@ void Rendering::SurfaceMesh::SetLevel(int aLevel)
     numFullVertices = numTotalVertices;
 
     const auto numTotalIndices = 3 * numTotalTriangles;
-    SetIndexBuffer(IndexBuffer::Create(numTotalIndices, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::Polypoint, numTotalIndices, sizeof(int)));
 
-    auto indices = GetIndexBuffer()->GetWriteSpanIterator();
+    auto indices = GetIndexBuffer()->GetData();
     for (auto i = 0; i < numTotalTriangles; ++i)
     {
         auto& tri = triangles.at(i);
@@ -130,7 +130,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
     const auto numOrigIndices = origIBuffer->GetNumElements();
     auto numOrigTriangles = numOrigIndices / 3;
 
-    auto indices = origIBuffer->GetSpanIterator();
+    auto indices = origIBuffer->GetData();
     std::set<Mathematics::EdgeKey> eKeys{};
 
     for (auto i = 0; i < numOrigTriangles; ++i)
@@ -157,7 +157,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
     }
 
     auto vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(numTotalVertices, vstride));
+    SetVertexBuffer(VertexBuffer::Create(*GetVertexFormat(), vstride));
     std::vector<Triangle> triangles(numTotalTriangles);
     if (allowDynamicChange)
     {
@@ -165,8 +165,8 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
         InitializeSurfaceInfo();
     }
 
-    auto origData = origVBuffer->GetSpanIterator();
-    auto fullData = GetVertexBuffer()->GetWriteSpanIterator();
+    auto origData = origVBuffer->GetData();
+    auto fullData = GetVertexBuffer()->GetData();
     const auto numOrigBytes = origVBuffer->GetNumBytes();
 
     for (int i = 0; i < numOrigBytes; ++i)
@@ -175,7 +175,7 @@ std::vector<Rendering::SurfaceMesh::Triangle> Rendering::SurfaceMesh::Allocate(i
     }
 
     auto origParam = origParams->GetData();
-    indices = origIBuffer->GetSpanIterator();
+    indices = origIBuffer->GetData();
     for (auto i = 0; i < numOrigTriangles; ++i)
     {
         auto& tri = triangles.at(i);
@@ -212,7 +212,7 @@ void Rendering::SurfaceMesh::Subdivide(int& numVertices, int& numEdges, EdgeMap&
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
+    VertexBuffer vba = *GetVertexBuffer();
 
     for (auto& value : edgeMap)
     {
@@ -220,69 +220,8 @@ void Rendering::SurfaceMesh::Subdivide(int& numVertices, int& numEdges, EdgeMap&
         edge.paramMid[0] = (0.5f * (edge.param.at(0)[0] + edge.param.at(1)[0]));
         edge.paramMid[1] = (0.5f * (edge.param.at(0)[1] + edge.param.at(1)[1]));
 
-        GetVertexBuffer()->SetPosition(vba, numVertices, edge.patch->GetPosition(edge.paramMid[0], edge.paramMid[1]));
-
-        if (vba.HasNormal())
-        {
-            GetVertexBuffer()->SetTriangleNormal(vba, numVertices, edge.patch->GetNormal(edge.paramMid[0], edge.paramMid[1]));
-        }
-
         const auto v0 = edge.v.at(0);
         const auto v1 = edge.v.at(1);
-
-        constexpr auto numColorUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::ColorUnits);
-        for (auto unit = 0; unit < numColorUnits; ++unit)
-        {
-            if (vba.HasColor(unit))
-            {
-                auto data0 = vba.GetColorTuple(unit, v0);
-                auto data1 = vba.GetColorTuple(unit, v1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-
-                auto data = const_cast<float*>(vba.GetColorTuple(unit, numVertices));
-
-#include STSTEM_WARNING_POP
-
-                for (auto i = 0; i < vba.GetColorChannels(unit); ++i)
-                {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-                    data[i] = 0.5f * (data0[i] + data1[i]);
-
-#include STSTEM_WARNING_POP
-                }
-            }
-        }
-
-        constexpr auto numTCoordUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
-        for (auto unit = 0; unit < numTCoordUnits; ++unit)
-        {
-            if (vba.HasTextureCoord(unit))
-            {
-                auto data0 = vba.GetTextureCoordTuple(unit, v0);
-                auto data1 = vba.GetTextureCoordTuple(unit, v1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-
-                auto data = const_cast<float*>(vba.GetTextureCoordTuple(unit, numVertices));
-
-#include STSTEM_WARNING_POP
-
-                for (auto i = 0; i < vba.GetTextureCoordChannels(unit); ++i)
-                {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-                    data[i] = 0.5f * (data0[i] + data1[i]);
-
-#include STSTEM_WARNING_POP
-                }
-            }
-        }
 
         if (allowDynamicChange)
         {
@@ -403,12 +342,8 @@ void Rendering::SurfaceMesh::OnDynamicChange()
 
     if (allowDynamicChange)
     {
-        VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
-
         for (auto i = 0; i < numFullVertices; ++i)
         {
-            const auto& si = sInfo.at(i);
-            GetVertexBuffer()->SetPosition(vba, i, si.patch->GetPosition(si.param[0], si.param[1]));
         }
 
         UpdateModelSpace(VisualUpdateType::Normals);
@@ -440,7 +375,7 @@ void Rendering::SurfaceMesh::InitializeSurfaceInfo()
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto indices = origIBuffer->GetSpanIterator();
+    auto indices = origIBuffer->GetData();
     const auto* params = origParams->GetData();
     for (auto i = 0; i < numPatches; ++i)
     {
@@ -692,7 +627,7 @@ void Rendering::SurfaceMesh::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::SurfaceMesh::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::SurfaceMesh::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

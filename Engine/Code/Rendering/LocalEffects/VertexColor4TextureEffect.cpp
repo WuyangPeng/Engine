@@ -227,7 +227,6 @@ Rendering::VisualEffectInstanceSharedPtr Rendering::VertexColor4TextureEffect::C
     const auto filter = GetPixelShaderSharedPtr()->GetFilter(0);
     if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear && !texture->HasMipmaps())
     {
-        texture->GenerateMipmaps();
     }
 
     return instance;
@@ -309,7 +308,7 @@ void Rendering::VertexColor4TextureEffect::PostLink()
     }
 }
 
-uint64_t Rendering::VertexColor4TextureEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::VertexColor4TextureEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

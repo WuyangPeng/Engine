@@ -44,18 +44,13 @@ Rendering::TriangleIndex
 
     if (0 <= index && index < GetNumTriangles())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-
         const auto value = 3 * index;
-        auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData()) + value;
-        const auto firstIndex = *indices++;
-        const auto secondIndex = *indices++;
+        auto indices = (GetConstIndexBuffer()->GetData(value));
+        const auto firstIndex = *indices;
+        ++indices;
+        const auto secondIndex = *indices;
+        ++indices;
         const auto thirdIndex = *indices;
-
-#include STSTEM_WARNING_POP
 
         return TriangleIndex{ firstIndex, secondIndex, thirdIndex };
     }

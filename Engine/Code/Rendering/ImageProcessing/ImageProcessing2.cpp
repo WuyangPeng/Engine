@@ -74,13 +74,11 @@ Rendering::ImageProcessing2::ImageProcessing2(int bound0, int bound1, int numTar
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ImageProcessing2)
 
-Rendering::Texture2DSharedPtr Rendering::ImageProcessing2::CreateImage(const std::vector<Mathematics::Float4>& imageData)
+Rendering::Texture2DSharedPtr Rendering::ImageProcessing2::CreateImage(MAYBE_UNUSED const std::vector<Mathematics::Float4>& imageData)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto reflected = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), bound0, bound1, 1);
-
-    System::MemoryCopy(reflected->GetTextureData(0), imageData.data(), bound0 * bound1 * sizeof(Mathematics::Float4));
+    auto reflected = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::A32B32G32R32F), bound0, bound1, 1);
 
     return reflected;
 }
@@ -109,54 +107,6 @@ void Rendering::ImageProcessing2::CreateBoundaryDirichletEffect(VisualEffectShar
     }
 
     CreateEffect(pshader, effect, instance);
-
-    auto maskTexture = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), bound0, bound1, 1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto mask = reinterpret_cast<Mathematics::Float4*>(maskTexture->GetTextureData(0));
-
-#include STSTEM_WARNING_POP
-
-    if (mask == nullptr)
-    {
-        return;
-    }
-
-    const Mathematics::Float4 one{ 1.0f, 1.0f, 1.0f, 1.0f };
-    const Mathematics::Float4 zero{ 0.0f, 0.0f, 0.0f, 0.0f };
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        for (auto x = 1; x < bound0M1; ++x)
-        {
-            mask[Index(x, y)] = one;
-        }
-    }
-
-    for (auto x = 1; x < bound0M1; ++x)
-    {
-        mask[Index(x, 0)] = zero;
-        mask[Index(x, bound1M1)] = zero;
-    }
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        mask[Index(0, y)] = zero;
-        mask[Index(bound0M1, y)] = zero;
-    }
-
-    mask[Index(0, 0)] = zero;
-    mask[Index(bound0M1, 0)] = zero;
-    mask[Index(0, bound1M1)] = zero;
-    mask[Index(bound0M1, bound1M1)] = zero;
-
-#include STSTEM_WARNING_POP
-
-    instance->SetPixelTexture(0, "MaskSampler", maskTexture);
 }
 
 void Rendering::ImageProcessing2::CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
@@ -183,57 +133,6 @@ void Rendering::ImageProcessing2::CreateBoundaryNeumannEffect(VisualEffectShared
     }
 
     CreateEffect(pshader, effect, instance);
-
-    auto offsetTexture = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), bound0, bound1, 1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto offset = reinterpret_cast<Mathematics::Float4*>(offsetTexture->GetTextureData(0));
-
-#include STSTEM_WARNING_POP
-
-    if (offset == nullptr)
-    {
-        return;
-    }
-
-    const Mathematics::Float4 zero{ 0.0f, 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 x0EdgeOffset{ +dx, 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 x1EdgeOffset{ -dx, 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 y0EdgeOffset{ 0.0f, +dy, 0.0f, 0.0f };
-    const Mathematics::Float4 y1EdgeOffset{ 0.0f, -dy, 0.0f, 0.0f };
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        for (auto x = 1; x < bound0M1; ++x)
-        {
-            offset[Index(x, y)] = zero;
-        }
-    }
-
-    for (auto x = 1; x < bound0M1; ++x)
-    {
-        offset[Index(x, 0)] = y0EdgeOffset;
-        offset[Index(x, bound1M1)] = y1EdgeOffset;
-    }
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        offset[Index(0, y)] = x0EdgeOffset;
-        offset[Index(bound0M1, y)] = x1EdgeOffset;
-    }
-
-    offset[Index(0, 0)] = Mathematics::Float4{ +dx, +dy, 0.0f, 0.0f };
-    offset[Index(bound0M1, 0)] = Mathematics::Float4{ -dx, +dy, 0.0f, 0.0f };
-    offset[Index(0, bound1M1)] = Mathematics::Float4{ +dx, -dy, 0.0f, 0.0f };
-    offset[Index(bound0M1, bound1M1)] = Mathematics::Float4{ -dx, -dy, 0.0f, 0.0f };
-
-#include STSTEM_WARNING_POP
-
-    instance->SetPixelTexture(0, "OffsetSampler", offsetTexture);
 }
 
 void Rendering::ImageProcessing2::CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)

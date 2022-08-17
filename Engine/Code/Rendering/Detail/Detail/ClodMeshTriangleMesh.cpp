@@ -25,7 +25,7 @@ Rendering::ClodMeshTriangleMesh::ClodMeshTriangleMesh(TrianglesMesh& mesh)
       numTriangles{ numIndices / 3 },
       indixBuffer{ mesh.GetIndexBuffer() },
       vertexBuffer{ mesh.GetVertexBuffer() },
-      vertexBufferAccessor{ mesh }
+      vertexBufferAccessor{ *mesh.GetVertexBuffer() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -105,14 +105,14 @@ bool Rendering::ClodMeshTriangleMesh::ValidBuffers() const
     return true;
 }
 
-const int* Rendering::ClodMeshTriangleMesh::GetIndexBufferReadOnlyData() const noexcept
+const int* Rendering::ClodMeshTriangleMesh::GetIndexBufferReadOnlyData() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    return reinterpret_cast<const int*>(indixBuffer->GetReadOnlyData());
+    return reinterpret_cast<const int*>(*indixBuffer->GetData());
 
 #include STSTEM_WARNING_POP
 }
@@ -124,25 +124,25 @@ int Rendering::ClodMeshTriangleMesh::GetNumTriangles() const noexcept
     return numTriangles;
 }
 
-Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(int index) const noexcept
+Mathematics::Vector3F Rendering::ClodMeshTriangleMesh::GetPosition(MAYBE_UNUSED int index) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return vertexBufferAccessor.GetPosition<Mathematics::Vector3F>(index);
+    return Mathematics::Vector3F{};
 }
 
-const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const noexcept
+const char* Rendering::ClodMeshTriangleMesh::GetVertexBufferReadOnlyData() const  
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return vertexBufferAccessor.GetData();
+    return &*vertexBufferAccessor.GetData();
 }
 
 int Rendering::ClodMeshTriangleMesh::GetStride() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return vertexBufferAccessor.GetStride();
+    return 0;
 }
 
 void Rendering::ClodMeshTriangleMesh::SetNewVertexBufferData(const std::vector<char>& newData)

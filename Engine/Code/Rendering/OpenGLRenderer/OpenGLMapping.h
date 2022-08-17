@@ -16,7 +16,7 @@
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 #include "Rendering/Shaders/Flags/AlphaStateFlags.h"
 #include "Rendering/Shaders/Flags/DepthStateFlags.h"

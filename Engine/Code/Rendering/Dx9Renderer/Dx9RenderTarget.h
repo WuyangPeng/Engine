@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = PlatformRenderTargetImpl;
 
     public:
-        Dx9RenderTarget(Renderer* renderer, const RenderTarget* renderTarget) noexcept;
+        Dx9RenderTarget(Renderer* renderer, const DrawTarget* renderTarget) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -79,6 +79,16 @@ namespace Rendering
 
         void Draw(int x, int y, const Colour& color, const std::string& message) noexcept override;
 
+        NODISCARD bool HasDepthRange01() const noexcept override;
+        NODISCARD std::string GetShaderName(const std::string& name) const override;
+        void DisplayColorBuffer(int syncInterval) noexcept override;
+
+        void SetBlendState(const BlendStateSharedPtr& state) override;
+        void SetDepthStencilState(const DepthStencilStateSharedPtr& state) override;
+        void SetRasterizerState(const RasterizerStateSharedPtr& state) override;
+        NODISCARD bool Update(const BufferSharedPtr& buffer) override;
+        NODISCARD bool Update(const TextureSharedPtr& texture) override;
+
     private:
         void DrawPrimitive(const ConstVisualSharedPtr& visual) noexcept override;
     };

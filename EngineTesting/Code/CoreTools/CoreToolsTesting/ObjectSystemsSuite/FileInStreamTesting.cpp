@@ -11,7 +11,6 @@
 #include "Detail/BoolObject.h"
 #include "Detail/EnumObject.h"
 #include "Detail/IntObject.h"
-#include "Detail/NullObject.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"

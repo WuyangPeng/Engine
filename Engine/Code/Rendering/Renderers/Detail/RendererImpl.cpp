@@ -15,19 +15,22 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/GlobalEffects/GlobalEffect.h"
+#include "Rendering/LocalEffects/TextEffect.h"
 #include "Rendering/Renderers/BufferManagementDetail.h"
 #include "Rendering/Renderers/RenderTargetManagement.h"
 #include "Rendering/Renderers/RendererBasis.h"
 #include "Rendering/Renderers/ShaderManagementDetail.h"
 #include "Rendering/Renderers/TextureManagementDetail.h"
 #include "Rendering/Renderers/VertexFormatManagement.h"
+#include "Rendering/Resources/Buffers/ConstantBuffer.h"
+#include "Rendering/LocalEffects/Font.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 #include <memory>
 
 Rendering::RendererImpl::RendererImpl(const RendererBasis& basis)
-    : rendererBasis{ basis },
+    : ParentType{ basis },
 
       defaultAlphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
       defaultCullState{ std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable) },
@@ -71,10 +74,6 @@ Rendering::RendererImpl::RendererImpl(const RendererBasis& basis)
       overrideWireState{},
 
       camera{},
-
-      clearColor{ 1.0f, 1.0f, 1.0f, 1.0f },
-      clearDepth{ 0.0f },
-      clearStencil{ 0 },
 
       bufferAllowRed{ true },
       bufferAllowGreen{ true },
@@ -130,47 +129,27 @@ bool Rendering::RendererImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-int Rendering::RendererImpl::GetWidth() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return rendererBasis.GetWidth();
-}
-
-int Rendering::RendererImpl::GetHeight() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return rendererBasis.GetHeight();
-}
-
-Rendering::TextureFormat Rendering::RendererImpl::GetColorFormat() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return rendererBasis.GetColorFormat();
-}
-
-Rendering::TextureFormat Rendering::RendererImpl::GetDepthStencilFormat() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return rendererBasis.GetDepthStencilFormat();
-}
-
-int Rendering::RendererImpl::GetNumMultisamples() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return rendererBasis.GetNumMultisamples();
-}
-
 void Rendering::RendererImpl::Bind(const ConstVertexFormatSharedPtr& vertexFormat)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return vertexFormatManagement->Bind(vertexFormat);
 }
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Rendering::RendererImpl::Bind(MAYBE_UNUSED const std::shared_ptr<const GraphicsObject>& object) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+}
+
+void Rendering::RendererImpl::Unbind(MAYBE_UNUSED const std::shared_ptr<const GraphicsObject>& texture) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+}
+
+#include STSTEM_WARNING_POP
 
 void Rendering::RendererImpl::Unbind(const ConstVertexFormatSharedPtr& vertexFormat)
 {
@@ -536,42 +515,42 @@ Rendering::RendererImpl::PlatformTextureCubeSharedPtr Rendering::RendererImpl::G
     return textureCubeManagement->GetResource(textureCube);
 }
 
-void Rendering::RendererImpl::Bind(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Bind(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return renderTargetManagement->Bind(renderTarget);
 }
 
-void Rendering::RendererImpl::Unbind(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Unbind(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return renderTargetManagement->Unbind(renderTarget);
 }
 
-void Rendering::RendererImpl::Enable(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Enable(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return renderTargetManagement->Enable(renderTarget);
 }
 
-void Rendering::RendererImpl::Disable(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererImpl::Disable(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return renderTargetManagement->Disable(renderTarget);
 }
 
-Rendering::ConstTexture2DSharedPtr Rendering::RendererImpl::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::RendererImpl::ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     return renderTargetManagement->ReadColor(index, renderTarget);
 }
 
-Rendering::RendererImpl::PlatformRenderTargetSharedPtr Rendering::RendererImpl::GetResource(const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::RendererImpl::PlatformRenderTargetSharedPtr Rendering::RendererImpl::GetResource(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -943,48 +922,6 @@ Rendering::PickRay Rendering::RendererImpl::GetPickRay(int x, int y) const
     return PickRay{ true, origin, direction };
 }
 
-void Rendering::RendererImpl::SetClearColor(const Colour& aClearColor) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    clearColor = aClearColor;
-}
-
-Rendering::RendererImpl::Colour Rendering::RendererImpl::GetClearColor() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return clearColor;
-}
-
-void Rendering::RendererImpl::SetClearDepth(float aClearDepth) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    clearDepth = aClearDepth;
-}
-
-float Rendering::RendererImpl::GetClearDepth() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return clearDepth;
-}
-
-void Rendering::RendererImpl::SetClearStencil(int aClearStencil) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    clearStencil = aClearStencil;
-}
-
-int Rendering::RendererImpl::GetClearStencil() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return clearStencil;
-}
-
 bool Rendering::RendererImpl::GetAllowRed() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
@@ -1060,6 +997,34 @@ void Rendering::RendererImpl::Draw(VisibleSet& visibleSet, GlobalEffect* globalE
     else
     {
         globalEffect->Draw(*realRenderer.lock(), visibleSet);
+    }
+}
+
+void Rendering::RendererImpl::SetFont(const FontSharedPtr& font)
+{
+    if (font == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("输入的字体为空。"));
+    }
+
+    const auto mctiveFont = GetFont();
+    if (font != mctiveFont)
+    {
+        Unbind(mctiveFont->GetVertexBuffer());
+        Unbind(mctiveFont->GetIndexBuffer());
+        Unbind(mctiveFont->GetTextEffect()->GetTranslate());
+        Unbind(mctiveFont->GetTextEffect()->GetColor());
+        Unbind(mctiveFont->GetTextEffect()->GetVertexShader());
+        Unbind(mctiveFont->GetTextEffect()->GetPixelShader());
+
+        ParentType::SetFont(font);
+
+        Bind(font->GetVertexBuffer());
+        Bind(font->GetIndexBuffer());
+        Bind(font->GetTextEffect()->GetTranslate());
+        Bind(font->GetTextEffect()->GetColor());
+        Bind(font->GetTextEffect()->GetVertexShader());
+        Bind(font->GetTextEffect()->GetPixelShader());
     }
 }
 

@@ -21,7 +21,7 @@ namespace Rendering
 
     private:
         void MainTest();
-        void VertexFormatTest();
+        void VertexFormatTest() noexcept;
 
         void DoRunUnitTest() override;
     };

@@ -117,14 +117,14 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
         for (auto i = 0; i < record.GetIndicesSize(); ++i)
         {
             const auto recordIndex = record.GetIndex(i);
-            indexbuffer->SetIndexBuffer(recordIndex, record.GetVThrow(), record.GetVKeep());
+            indexbuffer->SetPoint(recordIndex, record.GetVKeep());
         }
 
         // 减少顶点数，顶点正确排序。
-        vertexbuffer.SetNumElements(record.GetNumVertices());
+        vertexbuffer.SetNumActiveElements(record.GetNumVertices());
 
         // 减少三角形数量，三角形正确排序。
-        indexbuffer->SetNumElements(3 * record.GetNumTriangles());
+        indexbuffer->SetNumActiveElements(3 * record.GetNumTriangles());
     }
 
     // 如果需要的话,扩大网格
@@ -135,17 +135,17 @@ void Rendering::ClodMeshImpl::SelectLevelOfDetail(VertexBuffer& vertexbuffer, co
         for (auto i = 0; i < record.GetIndicesSize(); ++i)
         {
             const auto recordIndex = record.GetIndex(i);
-            indexbuffer->SetIndexBuffer(recordIndex, record.GetVKeep(), record.GetVThrow());
+            indexbuffer->SetPoint(recordIndex, record.GetVThrow());
         }
 
         --currentRecord;
         auto prevRecord = recordArray.object->GetRecord(currentRecord);
 
         // 增加顶点数，顶点正确排序。
-        vertexbuffer.SetNumElements(prevRecord.GetNumVertices());
+        vertexbuffer.SetNumActiveElements(prevRecord.GetNumVertices());
 
         // 增加三角形数量，三角形正确排序。
-        indexbuffer->SetNumElements(3 * prevRecord.GetNumTriangles());
+        indexbuffer->SetNumActiveElements(3 * prevRecord.GetNumTriangles());
     }
 
     if (bufferChanged)

@@ -17,7 +17,7 @@
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(OpenGLRenderTargetDataImpl);
 
@@ -29,7 +29,7 @@ namespace Rendering
         NON_COPY_TYPE_DECLARE(OpenGLRenderTargetData);
 
     public:
-        OpenGLRenderTargetData(Renderer* renderer, const RenderTarget* renderTarget);
+        OpenGLRenderTargetData(Renderer* renderer, const DrawTarget* renderTarget);
 
         CLASS_INVARIANT_DECLARE;
 

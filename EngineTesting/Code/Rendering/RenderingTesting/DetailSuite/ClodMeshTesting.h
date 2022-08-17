@@ -21,7 +21,7 @@ namespace Rendering
 
     private:
         void MainTest();
-        void CreateTrianglesMeshFile();
+        void CreateTrianglesMeshFile() noexcept;
         void InitTest() noexcept;
         void CopyTest() noexcept;
         void StreamTest() noexcept;

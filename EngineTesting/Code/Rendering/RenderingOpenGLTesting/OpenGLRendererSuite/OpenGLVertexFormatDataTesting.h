@@ -21,14 +21,6 @@ namespace Rendering
 
     private:
         void MainTest();
-        void AttributeUsagePositionTest();
-        void AttributeUsageNormalTest();
-        void AttributeUsageTangentTest();
-        void AttributeUsageBinormalTest();
-        void AttributeUsageBlendIndicesTest();
-        void AttributeUsageBlendWeightTest();
-        void AttributeUsageFogCoordTest();
-        void AttributeUsagePsizeTest();
 
         void DoRunUnitTest() override;
     };

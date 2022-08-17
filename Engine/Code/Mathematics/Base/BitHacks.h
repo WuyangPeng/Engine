@@ -14,6 +14,8 @@
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
+#include <array>
+
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE BitHacks final
@@ -40,6 +42,19 @@ namespace Mathematics
         // 快速转换为区间在[0,2^P-1]的一个32位整数I，
         // 输入“scaledFloat”是F，输入“power”是P和函数的返回值是I。
         NODISCARD static int32_t ScaledFloatToInt(float scaledFloat, int power) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+
+        NODISCARD static int GetLeadingBit(uint32_t value);
+        NODISCARD static int GetLeadingBit(int32_t value);
+        NODISCARD static int GetLeadingBit(uint64_t value);
+        NODISCARD static int GetLeadingBit(int64_t value);
+
+        NODISCARD static int GetTrailingBit(int32_t value);
+        NODISCARD static int GetTrailingBit(uint32_t value);
+        NODISCARD static int GetTrailingBit(uint64_t value);
+        NODISCARD static int GetTrailingBit(int64_t value);
+
+        NODISCARD static uint64_t RoundUpToPowerOfTwo(uint32_t value);
+        NODISCARD static uint32_t RoundDownToPowerOfTwo(uint32_t value);
     };
 }
 

@@ -21,7 +21,7 @@ namespace Rendering
 
     private:
         void MainTest();
-        void CreateTrianglesStripFile();
+        void CreateTrianglesStripFile() noexcept;
         void InitTest() noexcept;
         void CopyTest() noexcept;
         void TransformTest() noexcept;

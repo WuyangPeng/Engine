@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "Rendering/Resources/Texture3D.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
 
 namespace Rendering

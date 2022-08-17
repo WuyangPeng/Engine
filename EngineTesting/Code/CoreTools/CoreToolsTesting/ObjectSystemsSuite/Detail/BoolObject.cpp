@@ -107,7 +107,7 @@ int CoreTools::BoolObject::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::BoolObject::Register(ObjectRegister& target) const
+int64_t CoreTools::BoolObject::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

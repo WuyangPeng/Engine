@@ -218,7 +218,6 @@ Rendering::VisualEffectInstanceSharedPtr Rendering::Texture1DEffect::CreateInsta
     const ShaderFlags::SamplerFilter filter = GetPixelShaderSharedPtr()->GetFilter(0);
     if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::Linear && !texture->HasMipmaps())
     {
-        texture->GenerateMipmaps();
     }
 
     return instance;
@@ -301,7 +300,7 @@ void Rendering::Texture1DEffect::PostLink()
     }
 }
 
-uint64_t Rendering::Texture1DEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Texture1DEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

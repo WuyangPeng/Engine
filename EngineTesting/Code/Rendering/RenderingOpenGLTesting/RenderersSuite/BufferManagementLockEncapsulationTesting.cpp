@@ -15,7 +15,7 @@
 #include "Rendering/Renderers/PlatformIndexBuffer.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Visual.h"
 

@@ -15,18 +15,17 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/TriangleIndex.h"
 
 #include <gsl/util>
 
-Rendering::NormalDerivatives::NormalDerivatives(const VertexBufferAccessor& vertexBufferAccessor)
+Rendering::NormalDerivatives::NormalDerivatives(const VertexBuffer& vertexBufferAccessor)
     : vertexBufferAccessor{ vertexBufferAccessor },
-      derivativestNormal{ vertexBufferAccessor.GetNumVertices() },
-      projectMatrix{ vertexBufferAccessor.GetNumVertices() },
-      differentMatrix{ vertexBufferAccessor.GetNumVertices() },
-      tangent{ vertexBufferAccessor.GetNumVertices() },
-      binormal{ vertexBufferAccessor.GetNumVertices() }
+      derivativestNormal{ vertexBufferAccessor.GetElementSize() },
+      projectMatrix{ vertexBufferAccessor.GetElementSize() },
+      differentMatrix{ vertexBufferAccessor.GetElementSize() },
+      tangent{ vertexBufferAccessor.GetElementSize() },
+      binormal{ vertexBufferAccessor.GetElementSize() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -35,7 +34,7 @@ Rendering::NormalDerivatives::NormalDerivatives(const VertexBufferAccessor& vert
 
 bool Rendering::NormalDerivatives::IsValid() const noexcept
 {
-    const auto numVertices = gsl::narrow_cast<size_t>(vertexBufferAccessor.GetNumVertices());
+    const auto numVertices = gsl::narrow_cast<size_t>(vertexBufferAccessor.GetElementSize());
 
     if (numVertices == derivativestNormal.size() &&
         projectMatrix.size() == derivativestNormal.size() &&
@@ -63,16 +62,16 @@ void Rendering::NormalDerivatives::ComputeEdge(const TriangleIndex& triangleInde
 }
 
 // private
-void Rendering::NormalDerivatives::ComputeEdge(int firstIndex, int secondIndex, int thirdIndex)
+void Rendering::NormalDerivatives::ComputeEdge(int firstIndex, MAYBE_UNUSED int secondIndex, MAYBE_UNUSED int thirdIndex)
 {
     // 获取顶点位置和法线
-    const auto position0 = vertexBufferAccessor.GetPosition<APoint>(firstIndex);
-    const auto position1 = vertexBufferAccessor.GetPosition<APoint>(secondIndex);
-    const auto position2 = vertexBufferAccessor.GetPosition<APoint>(thirdIndex);
+    const auto position0 = APoint{};
+    const auto position1 = APoint{};
+    const auto position2 = APoint{};
 
-    const auto normal0 = vertexBufferAccessor.GetNormal<AVector>(firstIndex);
-    const auto normal1 = vertexBufferAccessor.GetNormal<AVector>(secondIndex);
-    const auto normal2 = vertexBufferAccessor.GetNormal<AVector>(thirdIndex);
+    const auto normal0 = AVector{};
+    const auto normal1 = AVector{};
+    const auto normal2 = AVector{};
 
     // 计算pos0到pos1的边，投射顶点的切平面,并计算相邻法线的差。
     auto edge = position1 - position0;
@@ -108,10 +107,10 @@ void Rendering::NormalDerivatives::ComputeNormalDerivativesMatrix()
     // 添加N * N^T 到W * W^T为了数值稳定性。
     // 理论上是0 * 0^T 添加到D * W^T,当然不需要更新的实现。
     // 计算矩阵法线的导数。
-    const auto numVertices = vertexBufferAccessor.GetNumVertices();
+    constexpr auto numVertices = 10;
     for (auto index = 0; index < numVertices; ++index)
     {
-        auto normal = vertexBufferAccessor.GetNormal<AVector>(index);
+        auto normal = AVector{};
         for (auto row = 0; row < 3; ++row)
         {
             for (auto col = 0; col < 3; ++col)
@@ -144,11 +143,11 @@ void Rendering::NormalDerivatives::ComputeTangentAndBinormal()
     // 相应的3×1切向量的顶点称为k的主方向,是J * W。
     // 最小主曲率的主方向存储网格切线。最大主曲率的主方向存储网格双切线。
 
-    const auto numVertices = vertexBufferAccessor.GetNumVertices();
+    constexpr auto numVertices = 10;
     for (auto index = 0; index < numVertices; ++index)
     {
         // 通过N计算 U 和 V。
-        const auto normal = vertexBufferAccessor.GetNormal<AVector>(index);
+        const auto normal = AVector{};
         const auto aVectorOrthonormalBasis = GenerateComplementBasis(normal);
 
         const auto uNormal = aVectorOrthonormalBasis.GetUVector();

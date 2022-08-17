@@ -12,7 +12,7 @@
 #include "Dx9RenderTarget.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::Dx9RenderTarget::Dx9RenderTarget(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const RenderTarget* renderTarget) noexcept
+Rendering::Dx9RenderTarget::Dx9RenderTarget(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const DrawTarget* renderTarget) noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }

@@ -37,8 +37,8 @@ Rendering::TrianglesFan::TrianglesFan(const VertexFormatSharedPtr& vertexformat,
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    auto indexBuffer = IndexBuffer::Create(numVertices, indexSize);
-    indexBuffer->InitIndexBuffer();
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, numVertices, indexSize);
+    InitIndexBuffer(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -59,17 +59,12 @@ Rendering::TriangleIndex Rendering::TrianglesFan::GetTriangle(int index) const
 
     if (0 <= index && index < GetNumTriangles())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-
-        auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
-        const auto firstIndex = indices[0];
-        const auto secondIndex = indices[index + 1];
-        const auto thirdIndex = indices[index + 2];
-
-#include STSTEM_WARNING_POP
+        auto indices = (GetConstIndexBuffer()->GetData());
+        const auto firstIndex = *indices;
+        indices += (index + 1);
+        const auto secondIndex = *indices;
+        ++indices;
+        const auto thirdIndex = *indices;
 
         return TriangleIndex{ firstIndex, secondIndex, thirdIndex };
     }
@@ -84,6 +79,61 @@ Rendering::ControllerInterfaceSharedPtr Rendering::TrianglesFan::Clone() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return std::make_shared<ClassType>(*this);
+}
+
+void Rendering::TrianglesFan::InitIndexBuffer(IndexBuffer& indexBuffer)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = indexBuffer.GetNumElements();
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (int16_t i{}; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i] = i;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+        if (indices != nullptr)
+        {
+            for (auto i = 0; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i] = i;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesFan::CloneObject() const

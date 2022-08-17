@@ -50,7 +50,7 @@ int Rendering::Projector::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Projector::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Projector::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

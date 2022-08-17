@@ -12,7 +12,7 @@
 #include "Dx9VertexBuffer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
-#include "Rendering/Resources/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 Rendering::Dx9VertexBuffer::Dx9VertexBuffer(MAYBE_UNUSED Renderer* renderer, MAYBE_UNUSED const VertexBuffer* vertexBuffer) noexcept
     : ParentType{}

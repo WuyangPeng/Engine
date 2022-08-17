@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:09)
+///	标准：std:c++20
+///	引擎版本：0.8.1.0 (2022/08/07 0:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,12 +13,14 @@
 #include "BufferSource.h"
 #include "BufferTargetDetail.h"
 #include "InitTerm.h"
+#include "NullObject.h"
 #include "Object.h"
 #include "ObjectManager.h"
 #include "ObjectRegister.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"
 #include "CoreTools/Base/UniqueIDManager.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
@@ -31,20 +33,13 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, Object);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, Object);
 
 CoreTools::Object::Object(const string& name)
-    : ParentType{}, m_Name{ name }
+    : ParentType{ UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Object) }, objectName{ name }
 {
-    SetUniqueID(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Object));
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::Object::Object(LoadConstructor value)
-    : ParentType{ value }, m_Name{ string{} }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::Object::~Object()
+    : ParentType{ value }, objectName{ string{} }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -56,14 +51,14 @@ string CoreTools::Object::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Name.GetName();
+    return objectName.GetName();
 }
 
 void CoreTools::Object::SetName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Name.SetName(name);
+    objectName.SetName(name);
 }
 
 int CoreTools::Object::GetStreamingSize() const
@@ -77,12 +72,12 @@ int CoreTools::Object::GetStreamingSize() const
     size += CORE_TOOLS_STREAM_SIZE(this);
 
     // 对象名
-    size += CORE_TOOLS_STREAM_SIZE(m_Name.GetName());
+    size += CORE_TOOLS_STREAM_SIZE(objectName.GetName());
 
     return size;
 }
 
-uint64_t CoreTools::Object::Register(ObjectRegister& target) const
+int64_t CoreTools::Object::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -102,7 +97,7 @@ void CoreTools::Object::Save(BufferTarget& target) const
     target.WriteUniqueID(shared_from_this());
 
     // 写入对象的名字。
-    target.Write(m_Name.GetName());
+    target.Write(objectName.GetName());
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -148,55 +143,80 @@ CoreTools::ObjectSharedPtr CoreTools::Object::GetObjectByName(const string& name
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (name == m_Name.GetName())
+    if (name == objectName.GetName())
+    {
         return ObjectSharedFromThis();
+    }
     else
-        return ObjectSharedPtr{};
+    {
+        return GetNullObject();
+    }
 }
 
 CoreTools::Object::ObjectSharedPtrContainer CoreTools::Object::GetAllObjectsByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ObjectSharedPtrContainer objects{};
-
-    if (name == m_Name.GetName())
+    if (name == objectName.GetName())
     {
-        objects.emplace_back(ObjectSharedFromThis());
+        return ObjectSharedPtrContainer{ ObjectSharedFromThis() };
     }
-
-    return objects;
+    else
+    {
+        return ObjectSharedPtrContainer{};
+    }
 }
 
 CoreTools::ConstObjectSharedPtr CoreTools::Object::GetConstObjectByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (name == m_Name.GetName())
+    if (name == objectName.GetName())
+    {
         return ObjectSharedFromThis();
+    }
     else
-        return ConstObjectSharedPtr{};
+    {
+        return GetNullObject();
+    }
 }
 
 CoreTools::Object::ConstObjectSharedPtrContainer CoreTools::Object::GetAllConstObjectsByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    ConstObjectSharedPtrContainer objects{};
-
-    if (name == m_Name.GetName())
+    if (name == objectName.GetName())
     {
-        objects.emplace_back(ObjectSharedFromThis());
+        return ConstObjectSharedPtrContainer{ ObjectSharedFromThis() };
     }
-
-    return objects;
+    else
+    {
+        return ConstObjectSharedPtrContainer{};
+    }
 }
 
+bool CoreTools::Object::IsNullObject() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return false;
+}
+
+// static
+const CoreTools::Object::ObjectSharedPtr& CoreTools::Object::GetNullObject()
+{
+    static ObjectSharedPtr result{ std::make_shared<NullObject>(DisableNotThrow::Disable) };
+
+    return result;
+}
+
+// private
 CoreTools::Object::ObjectSharedPtr CoreTools::Object::ObjectSharedFromThis()
 {
     return std::const_pointer_cast<Object>(static_cast<const ClassType&>(*this).ObjectSharedFromThis());
 }
 
+// private
 CoreTools::Object::ConstObjectSharedPtr CoreTools::Object::ObjectSharedFromThis() const
 {
     return boost::polymorphic_pointer_cast<const Object>(shared_from_this());

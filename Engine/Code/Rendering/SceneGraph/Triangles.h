@@ -66,11 +66,11 @@ namespace Rendering
 
     private:
         // 支持几何更新
-        void UpdateModelNormals(const VertexBufferAccessor& vertexBufferAccessor);
+        void UpdateModelNormals(const VertexBuffer& vertexBufferAccessor) noexcept;
 
         // 专门更新的切线空间。
-        void UpdateModelTangentsUseGeometry(const VertexBufferAccessor& vertexBufferAccessor);
-        void UpdateModelTangentsUseTextureCoords(const VertexBufferAccessor& vertexBufferAccessor);
+        void UpdateModelTangentsUseGeometry(const VertexBuffer& vertexBufferAccessor);
+        void UpdateModelTangentsUseTextureCoords(const VertexBuffer& vertexBufferAccessor);
 
         // 此函数用于UpdateModelTangentsUseTextureCoords计算一个切矢量在position0。
         // 该三角形的位置position0，position1和position2，以逆时针顺序列出。

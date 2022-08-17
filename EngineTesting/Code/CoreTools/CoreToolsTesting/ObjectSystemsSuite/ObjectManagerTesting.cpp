@@ -12,7 +12,7 @@
 #include "Detail/EnumObject.h"
 #include "Detail/ErrorObject.h"
 #include "Detail/IntObject.h"
-#include "Detail/NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"

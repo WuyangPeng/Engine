@@ -81,12 +81,9 @@ void Rendering::LoadVisual::LoadFromFile(const System::String& name)
     {
         auto vertexFormat = VertexFormat::LoadFromFile(manager);
 
-        auto vertexBuffer = VertexBuffer::Create();
+        auto vertexBuffer = VertexBuffer::Create(*VertexFormat::Create(), 0);
 
-        vertexBuffer->ReadFromFile(manager, *vertexFormat);
-
-        auto indexBuffer = IndexBuffer::Create();
-        indexBuffer->ReadFromFile(manager);
+        auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 0);
 
         impl->SetPrimitiveType(type);
         impl->SetVertexFormat(vertexFormat);

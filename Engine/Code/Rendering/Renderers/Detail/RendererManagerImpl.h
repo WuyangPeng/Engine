@@ -33,7 +33,7 @@ namespace Rendering
         using ConstTexture2DSharedPtr = std::shared_ptr<const Texture2D>;
         using ConstTexture3DSharedPtr = std::shared_ptr<const Texture3D>;
         using ConstTextureCubeSharedPtr = std::shared_ptr<const TextureCube>;
-        using ConstRenderTargetSharedPtr = std::shared_ptr<const RenderTarget>;
+        using ConstDrawTargetSharedPtr = std::shared_ptr<const DrawTarget>;
         using ConstVertexShaderSharedPtr = std::shared_ptr<const VertexShader>;
         using ConstPixelShaderSharedPtr = std::shared_ptr<const PixelShader>;
 
@@ -72,8 +72,8 @@ namespace Rendering
         void UnbindAll(const ConstTextureCubeSharedPtr& texture);
         void UpdateAll(const ConstTextureCubeSharedPtr& texture, int face, int level);
 
-        void BindAll(const ConstRenderTargetSharedPtr& renderTarget);
-        void UnbindAll(const ConstRenderTargetSharedPtr& renderTarget);
+        void BindAll(const ConstDrawTargetSharedPtr& renderTarget);
+        void UnbindAll(const ConstDrawTargetSharedPtr& renderTarget);
 
         void BindAll(const ConstVertexShaderSharedPtr& vertexShader);
         void UnbindAll(const ConstVertexShaderSharedPtr& vertexShader);

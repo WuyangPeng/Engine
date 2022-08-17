@@ -25,17 +25,4 @@ void Rendering::SaveVisual::SaveToFile(const Visual& visual, const System::Strin
 
     const auto type = visual.GetPrimitiveType();
     manager.Write(sizeof(VisualPrimitiveType), &type);
-
-    visual.GetConstVertexFormat()->SaveToFile(manager);
-    visual.GetConstVertexBuffer()->SaveToFile(manager, *visual.GetConstVertexFormat());
-
-    if (visual.GetConstIndexBuffer())
-    {
-        visual.GetConstIndexBuffer()->SaveToFile(manager);
-    }
-    else
-    {
-        constexpr int numElements{ 0 };
-        manager.Write(sizeof(int), &numElements);
-    }
 }

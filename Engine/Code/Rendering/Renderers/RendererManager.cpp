@@ -126,7 +126,7 @@ void Rendering::RendererManager::BindAll(const ConstTextureCubeSharedPtr& textur
     return impl->BindAll(texture);
 }
 
-void Rendering::RendererManager::BindAll(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererManager::BindAll(const ConstDrawTargetSharedPtr& renderTarget)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -216,7 +216,7 @@ void Rendering::RendererManager::UnbindAll(const ConstTextureCubeSharedPtr& text
     return impl->UnbindAll(texture);
 }
 
-void Rendering::RendererManager::UnbindAll(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RendererManager::UnbindAll(const ConstDrawTargetSharedPtr& renderTarget)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

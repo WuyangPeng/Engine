@@ -15,8 +15,8 @@
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Detail/CollapseRecordArray.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 namespace Rendering
 {

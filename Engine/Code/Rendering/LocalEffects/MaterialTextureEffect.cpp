@@ -232,7 +232,6 @@ Rendering::VisualEffectInstanceSharedPtr Rendering::MaterialTextureEffect::Creat
     const auto filter = GetPixelShaderSharedPtr()->GetFilter(0);
     if (filter != ShaderFlags::SamplerFilter::Nearest && filter != ShaderFlags::SamplerFilter::NearesLinear && !texture->HasMipmaps())
     {
-        texture->GenerateMipmaps();
     }
 
     return instance;
@@ -315,7 +314,7 @@ void Rendering::MaterialTextureEffect::PostLink()
     }
 }
 
-uint64_t Rendering::MaterialTextureEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::MaterialTextureEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

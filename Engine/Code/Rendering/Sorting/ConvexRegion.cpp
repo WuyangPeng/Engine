@@ -170,7 +170,7 @@ void Rendering::ConvexRegion::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::ConvexRegion::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::ConvexRegion::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

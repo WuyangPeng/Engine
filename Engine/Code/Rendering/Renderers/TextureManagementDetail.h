@@ -21,10 +21,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/OpenGLRenderer/TextureDataTraits.h"
-#include "Rendering/Resources/Texture1D.h"
-#include "Rendering/Resources/Texture2D.h"
-#include "Rendering/Resources/Texture3D.h"
-#include "Rendering/Resources/TextureCube.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
+#include "Rendering/Resources/Textures/TextureCube.h"
 
 template <typename PlatformTextureType>
 Rendering::TextureManagement<PlatformTextureType>::TextureManagement(const RendererSharedPtr& renderer)
@@ -142,6 +142,10 @@ void Rendering::TextureManagement<PlatformTextureType>::Unlock(const ConstTextur
     }
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 template <typename PlatformTextureType>
 void Rendering::TextureManagement<PlatformTextureType>::Update(const ConstTextureSharedPtr& texture, int level)
 {
@@ -150,13 +154,11 @@ void Rendering::TextureManagement<PlatformTextureType>::Update(const ConstTextur
     RENDERING_CLASS_IS_VALID_1;
 
     const auto numBytes = texture->GetNumLevelBytes(level);
-    auto srcData = texture->GetTextureData(level);
 
     TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
-
-    auto trgData = encapsulation.Lock(texture, level, BufferLocking::WriteOnly);
-    System::MemoryCopy(trgData, srcData, numBytes);
 }
+
+#include STSTEM_WARNING_POP
 
 template <typename PlatformTextureType>
 typename Rendering::TextureManagement<PlatformTextureType>::PlatformTextureSharedPtr Rendering::TextureManagement<PlatformTextureType>::GetResource(const ConstTextureSharedPtr& texture)
@@ -214,21 +216,23 @@ void Rendering::TextureManagement<PlatformTextureType>::UnlockCube(const ConstTe
     }
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+
 template <typename PlatformTextureType>
-void Rendering::TextureManagement<PlatformTextureType>::UpdateCube(const ConstTextureSharedPtr& texture, int face, int level)
+void Rendering::TextureManagement<PlatformTextureType>::UpdateCube(const ConstTextureSharedPtr& texture, MAYBE_UNUSED int face, int level)
 {
     static_assert(TextureDataTraits<PlatformTextureType::TextureType>::textureType == TextureFlags::TextureCube);
 
     RENDERING_CLASS_IS_VALID_1;
 
     const auto numBytes = texture->GetNumLevelBytes(level);
-    auto srcData = texture->GetTextureData(face, level);
 
     TextureManagementLockEncapsulation<ClassType> encapsulation{ *this };
-
-    auto trgData = encapsulation.LockCube(texture, face, level, BufferLocking::WriteOnly);
-    System::MemoryCopy(trgData, srcData, numBytes);
 }
+
+#include STSTEM_WARNING_POP
 
 template <typename PlatformTextureType>
 bool Rendering::TextureManagement<PlatformTextureType>::IsInTextureMap(const ConstTextureSharedPtr& texture)

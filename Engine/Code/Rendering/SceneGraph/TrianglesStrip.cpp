@@ -37,8 +37,8 @@ Rendering::TrianglesStrip::TrianglesStrip(const VertexFormatSharedPtr& vertexfor
 {
     const auto numVertices = vertexbuffer->GetNumElements();
 
-    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create(numVertices, indexSize) };
-    indexBuffer->InitIndexBuffer();
+    IndexBufferSharedPtr indexBuffer{ IndexBuffer::Create(IndexFormatType::Polypoint, numVertices, indexSize) };
+    InitIndexBuffer(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -60,27 +60,24 @@ Rendering::TriangleIndex
 
     if (0 <= index && index < GetNumTriangles())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-
-        auto indices = reinterpret_cast<const int*>(GetConstIndexBuffer()->GetReadOnlyData());
-        const auto firstIndex = indices[index];
+        auto indices = (GetConstIndexBuffer()->GetData(index));
+        const auto firstIndex = indices.Increase<int>();
         auto secondIndex = -1;
         auto thirdIndex = -1;
         if (index & 1)
         {
-            secondIndex = indices[index + 2];
-            thirdIndex = indices[index + 1];
+            ++indices;
+            thirdIndex = indices.Increase<int>();
+            ++indices;
+            secondIndex = indices.Increase<int>();
         }
         else
         {
-            secondIndex = indices[index + 1];
-            thirdIndex = indices[index + 2];
+            ++indices;
+            secondIndex = indices.Increase<int>();
+            ++indices;
+            thirdIndex = indices.Increase<int>();
         }
-
-#include STSTEM_WARNING_POP
 
         // 退化三角形被假定为互换和添加在三角地带。
         // 他们被认为是无效的。
@@ -104,6 +101,61 @@ Rendering::ControllerInterfaceSharedPtr Rendering::TrianglesStrip::Clone() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return std::make_shared<ClassType>(*this);
+}
+
+void Rendering::TrianglesStrip::InitIndexBuffer(IndexBuffer& indexBuffer)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = indexBuffer.GetNumElements();
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        const auto indices = reinterpret_cast<int16_t*>(*indexBuffer.GetData(0));
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (int16_t i{}; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i] = i;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(*indexBuffer.GetData(0));
+
+#include STSTEM_WARNING_POP
+        if (indices != nullptr)
+        {
+            for (auto i = 0; i < numVertices; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i] = i;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::TrianglesStrip::CloneObject() const

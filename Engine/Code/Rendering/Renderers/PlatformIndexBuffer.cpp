@@ -15,7 +15,7 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Rendering/Resources/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
 
 Rendering::PlatformIndexBuffer::PlatformIndexBuffer(Renderer* renderer, const IndexBuffer* indexBuffer)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, indexBuffer }

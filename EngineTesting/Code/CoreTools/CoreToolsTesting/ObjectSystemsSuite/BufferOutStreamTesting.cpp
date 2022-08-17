@@ -11,7 +11,7 @@
 #include "Detail/BoolObject.h"
 #include "Detail/EnumObject.h"
 #include "Detail/IntObject.h"
-#include "Detail/NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"

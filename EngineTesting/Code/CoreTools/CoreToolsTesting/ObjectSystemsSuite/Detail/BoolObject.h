@@ -13,7 +13,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 
 namespace CoreTools
 {

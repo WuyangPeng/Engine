@@ -17,9 +17,9 @@
 #include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 Rendering::OpenGLVertexFormatArrayData<usage, number>::OpenGLVertexFormatArrayData() noexcept
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -27,7 +27,7 @@ Rendering::OpenGLVertexFormatArrayData<usage, number>::OpenGLVertexFormatArrayDa
 
 #ifdef OPEN_CLASS_INVARIANT
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 bool Rendering::OpenGLVertexFormatArrayData<usage, number>::IsValid() const noexcept
 {
     return true;
@@ -35,7 +35,7 @@ bool Rendering::OpenGLVertexFormatArrayData<usage, number>::IsValid() const noex
 
 #endif  // OPEN_CLASS_INVARIAN
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 void Rendering::OpenGLVertexFormatArrayData<usage, number>::Init(const VertexFormat* vertexFormat)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -61,7 +61,7 @@ void Rendering::OpenGLVertexFormatArrayData<usage, number>::Init(const VertexFor
     }
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 bool Rendering::OpenGLVertexFormatArrayData<usage, number>::IsHas(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -70,7 +70,7 @@ bool Rendering::OpenGLVertexFormatArrayData<usage, number>::IsHas(int index) con
     return data.at(index).IsHas();
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 System::OpenGLUInt Rendering::OpenGLVertexFormatArrayData<usage, number>::GetChannels(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -79,7 +79,7 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatArrayData<usage, number>::GetCha
     return data.at(index).GetChannels();
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 System::OpenGLUInt Rendering::OpenGLVertexFormatArrayData<usage, number>::GetType(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -88,7 +88,7 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatArrayData<usage, number>::GetTyp
     return System::EnumCastUnderlying<System::OpenGLUInt>(data.at(index).GetType());
 }
 
-template <Rendering::VertexFormatFlags::AttributeUsage usage, Rendering::VertexFormatFlags::MaximumNumber number>
+template <Rendering::VertexFormatFlags::Semantic usage, Rendering::VertexFormatFlags::MaximumNumber number>
 System::OpenGLUInt Rendering::OpenGLVertexFormatArrayData<usage, number>::GetOffset(int index) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -98,15 +98,15 @@ System::OpenGLUInt Rendering::OpenGLVertexFormatArrayData<usage, number>::GetOff
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Enable(int stride) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Enable(int stride) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Enable(int stride) noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Enable(int stride) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Disable() noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Disable() noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Disable() noexcept;
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Disable() noexcept;
 
 #endif  // RENDERING_RENDERERS_OPENGL_VERTEX_FORMAT_ARRAY_DATA_DETAIL_H

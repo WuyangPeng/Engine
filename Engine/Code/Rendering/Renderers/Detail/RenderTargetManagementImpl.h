@@ -13,8 +13,8 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Renderers/RenderersFwd.h"
-#include "Rendering/Resources/RenderTarget.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
 
 #include <map>
 
@@ -24,7 +24,7 @@ namespace Rendering
     {
     public:
         using ClassType = RenderTargetManagementImpl;
-        using ConstRenderTargetSharedPtr = ConstRenderTargetSharedPtr;
+        using ConstDrawTargetSharedPtr = ConstDrawTargetSharedPtr;
         using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
         using RendererSharedPtr = std::shared_ptr<Renderer>;
 
@@ -33,16 +33,16 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void Bind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Enable(const ConstRenderTargetSharedPtr& renderTarget);
-        void Disable(const ConstRenderTargetSharedPtr& renderTarget);
-        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
+        void Bind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Unbind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Enable(const ConstDrawTargetSharedPtr& renderTarget);
+        void Disable(const ConstDrawTargetSharedPtr& renderTarget);
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget);
 
-        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstRenderTargetSharedPtr& renderTarget);
+        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstDrawTargetSharedPtr& renderTarget);
 
     private:
-        using RenderTargetMap = std::map<ConstRenderTargetSharedPtr, PlatformRenderTargetSharedPtr>;
+        using RenderTargetMap = std::map<ConstDrawTargetSharedPtr, PlatformRenderTargetSharedPtr>;
 
     private:
         std::weak_ptr<Renderer> renderer;

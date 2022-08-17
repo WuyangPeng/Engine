@@ -19,7 +19,7 @@
 #include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve3Detail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
@@ -61,12 +61,12 @@ Rendering::TubeSurface::TubeSurface(const std::shared_ptr<Mathematics::Curve3<fl
 
     SetVertexFormat(vformat);
     const auto vstride = vformat->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(numVertices, vstride));
+    SetVertexBuffer(VertexBuffer::Create(*vformat, vstride));
 
     ComputeSinCos();
     ComputeVertices();
 
-    if (GetVertexFormat()->GetIndex(VertexFormatFlags::AttributeUsage::Normal) >= 0)
+    if (GetVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Normal) >= 0)
     {
         ComputeNormals();
     }
@@ -126,8 +126,6 @@ void Rendering::TubeSurface::ComputeVertices()
         denom = 1.0f / boost::numeric_cast<float>(numMedialSamples - 1);
     }
 
-    VertexBufferAccessor vba{ *this };
-
     for (auto m = 0, v = 0; m < numMedialSamples; ++m, ++v)
     {
         auto t = 0.0f;
@@ -157,100 +155,26 @@ void Rendering::TubeSurface::ComputeVertices()
         {
             medial->GetFrame(t, position, tangent, normal, binormal);
         }
-
-        auto save = vba.GetPosition<Mathematics::APointF>(v);
-        for (auto i = 0; i < numSliceSamples; ++i, ++v)
-        {
-            GetVertexBuffer()->SetPosition(vba, v, Mathematics::APointF{ position + radius * (cos.at(i) * normal + sin.at(i) * binormal) });
-        }
-        GetVertexBuffer()->SetPosition(vba, v, save);
     }
 
     if (closed)
     {
         for (auto i = 0; i <= numSliceSamples; ++i)
         {
-            const auto i1 = Index(i, numMedialSamples);
-            const auto i0 = Index(i, 0);
-
-            GetVertexBuffer()->SetPosition(vba, i1, vba.GetPosition<Mathematics::APointF>(i0));
+            MAYBE_UNUSED const auto i1 = Index(i, numMedialSamples);
+            MAYBE_UNUSED const auto i0 = Index(i, 0);
         }
     }
 }
 
-void Rendering::TubeSurface::ComputeNormals()
+void Rendering::TubeSurface::ComputeNormals() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    VertexBufferAccessor vba{ *this };
-
-    for (auto m = 1; m <= numMedialSamples - 2; ++m)
-    {
-        for (auto s = 0; s < numSliceSamples; ++s)
-        {
-            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
-            const auto sP1 = s + 1;
-            const auto mM1 = m - 1;
-            const auto mP1 = m + 1;
-
-            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, m)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, m));
-            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, mM1)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, mP1));
-
-            GetVertexBuffer()->SetTriangleNormal(vba, Index(s, m), UnitCross(dir0, dir1));
-        }
-        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, m), vba.GetNormal<Mathematics::AVectorF>(Index(0, m)));
-    }
-
-    if (closed)
-    {
-        for (auto s = 0; s < numSliceSamples; ++s)
-        {
-            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
-            const auto sP1 = s + 1;
-
-            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, 0)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, 0));
-            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, numMedialSamples - 1)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, 1));
-            GetVertexBuffer()->SetTriangleNormal(vba, s, UnitCross(dir0, dir1));
-
-            GetVertexBuffer()->SetTriangleNormal(vba, Index(s, numMedialSamples), vba.GetNormal<Mathematics::AVectorF>(Index(s, 0)));
-        }
-
-        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, 0), vba.GetNormal<Mathematics::AVectorF>(Index(0, 0)));
-        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, numMedialSamples), vba.GetNormal<Mathematics::AVectorF>(Index(0, numMedialSamples)));
-    }
-    else
-    {
-        for (auto s = 0; s < numSliceSamples; ++s)
-        {
-            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
-            const auto sP1 = s + 1;
-
-            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, 0)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, 0));
-            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, 0)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, 1));
-            GetVertexBuffer()->SetTriangleNormal(vba, Index(s, 0), UnitCross(dir0, dir1));
-        }
-
-        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, 0), vba.GetNormal<Mathematics::AVectorF>(Index(0, 0)));
-
-        for (auto s = 0; s < numSliceSamples; ++s)
-        {
-            const auto sM1 = (s > 0 ? s - 1 : numSliceSamples - 1);
-            const auto sP1 = s + 1;
-
-            auto dir0 = vba.GetPosition<Mathematics::AVectorF>(Index(sM1, numMedialSamples - 1)) - vba.GetPosition<Mathematics::AVectorF>(Index(sP1, numMedialSamples - 1));
-            auto dir1 = vba.GetPosition<Mathematics::AVectorF>(Index(s, numMedialSamples - 2)) - vba.GetPosition<Mathematics::AVectorF>(Index(s, numMedialSamples - 1));
-            GetVertexBuffer()->SetTriangleNormal(vba, s, UnitCross(dir0, dir1));
-        }
-
-        GetVertexBuffer()->SetTriangleNormal(vba, Index(numSliceSamples, numMedialSamples - 1), vba.GetNormal<Mathematics::AVectorF>(Index(0, numMedialSamples - 1)));
-    }
 }
 
 void Rendering::TubeSurface::ComputeUVs(const Mathematics::Float2& tcoordMin, const Mathematics::Float2& tcoordMax)
 {
     RENDERING_CLASS_IS_VALID_1;
-
-    VertexBufferAccessor vba{ *this };
 
     Mathematics::Float2 tcoordRange{ tcoordMax[0] - tcoordMin[0], tcoordMax[1] - tcoordMin[1] };
     const auto mMax = (closed ? numMedialSamples : numMedialSamples - 1);
@@ -266,12 +190,6 @@ void Rendering::TubeSurface::ComputeUVs(const Mathematics::Float2& tcoordMin, co
             constexpr auto numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
             for (auto unit = 0; unit < numTCoords; ++unit)
             {
-                if (vba.HasTextureCoord(unit))
-                {
-                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "纹理坐标必须是2D\n");
-
-                    GetVertexBuffer()->SetTextureCoord(vba, v, Mathematics::Vector2F{ tcoord[0], tcoord[1] }, unit);
-                }
             }
         }
     }
@@ -291,9 +209,9 @@ void Rendering::TubeSurface::ComputeIndices(bool insideView)
         numTriangles = 2 * numSliceSamples * (numMedialSamples - 1);
     }
 
-    SetIndexBuffer(IndexBuffer::Create(3 * numTriangles, sizeof(int)));
+    SetIndexBuffer(IndexBuffer::Create(IndexFormatType::Polypoint, 3 * numTriangles, sizeof(int)));
 
-    auto indices = GetIndexBuffer()->GetWriteSpanIterator();
+    auto indices = GetIndexBuffer()->GetData();
     auto start = 0;
     for (auto m = 0; m < numMedialSamples - 1; ++m)
     {
@@ -355,29 +273,27 @@ void Rendering::TubeSurface::ComputeIndices(bool insideView)
     }
 }
 
-std::vector<Mathematics::Vector3F> Rendering::TubeSurface::GetTMinSlice()
+std::vector<Mathematics::Vector3F> Rendering::TubeSurface::GetTMinSlice() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     std::vector<Mathematics::Vector3F> slice{};
-    VertexBufferAccessor vba{ *this };
+
     for (auto i = 0; i <= numSliceSamples; ++i)
     {
-        slice.emplace_back(vba.GetPosition<Mathematics::Vector3F>(i));
     }
     return slice;
 }
 
-std::vector<Mathematics::Vector3F> Rendering::TubeSurface::GetTMaxSlice()
+std::vector<Mathematics::Vector3F> Rendering::TubeSurface::GetTMaxSlice() noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
     std::vector<Mathematics::Vector3F> slice{};
-    VertexBufferAccessor vba{ *this };
+
     auto j = GetVertexBuffer()->GetNumElements() - numSliceSamples - 1;
     for (auto i = 0; i <= numSliceSamples; ++i, ++j)
     {
-        slice.emplace_back(vba.GetPosition<Mathematics::Vector3F>(j));
     }
     return slice;
 }
@@ -389,7 +305,7 @@ void Rendering::TubeSurface::UpdateSurface()
     ComputeVertices();
     UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
 
-    if (GetVertexFormat()->GetIndex(VertexFormatFlags::AttributeUsage::Normal) >= 0)
+    if (GetVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Normal) >= 0)
     {
         ComputeNormals();
     }
@@ -448,7 +364,7 @@ void Rendering::TubeSurface::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::TubeSurface::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::TubeSurface::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

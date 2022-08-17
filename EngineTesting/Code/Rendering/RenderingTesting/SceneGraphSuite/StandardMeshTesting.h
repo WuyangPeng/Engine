@@ -21,19 +21,6 @@ namespace Rendering
 
     private:
         void MainTest();
-        void BaseTest();
-        void RectangleTest();
-        void DiskTest();
-        void BoxTest();
-        void CylinderOmittedEndDisksTest();
-        void CylinderIncludedEndDisksTest();
-        void SphereTest();
-        void TorusTest();
-        void TetrahedronTest();
-        void HexahedronTest();
-        void OctahedronTest();
-        void DodecahedronTest();
-        void IcosahedronTest();
 
         void DoRunUnitTest() override;
     };

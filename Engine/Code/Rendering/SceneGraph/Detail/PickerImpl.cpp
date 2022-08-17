@@ -16,7 +16,6 @@
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Rendering/Detail/SwitchNode.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/PickRecord.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 

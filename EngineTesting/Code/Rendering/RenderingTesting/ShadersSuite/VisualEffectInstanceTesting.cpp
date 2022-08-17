@@ -16,7 +16,8 @@
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/Texture1D.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
 
 using std::string;
@@ -28,10 +29,6 @@ void Rendering::VisualEffectInstanceTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializers();
 
     RendererManager::Create();
-
-    ASSERT_NOT_THROW_EXCEPTION_0(InitTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(CopyTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
 
     RendererManager::Destroy();
 
@@ -228,13 +225,13 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     for (int i = 0; i < 6; i++)
     {
-        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(DataFormatType::R32G32B32A32Typeless, 5, 0));
 
         visualEffectInstance->SetVertexTexture(0, "VertexTexture" + boost::lexical_cast<string>(i), firstTexture);
 
         ASSERT_EQUAL(visualEffectInstance->GetVertexTexture(0, i), firstTexture);
 
-        TextureSharedPtr secondTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 6, 0));
+        TextureSharedPtr secondTexture(std::make_shared<Texture1D>(DataFormatType::R32G32B32A32Typeless, 6, 0));
 
         visualEffectInstance->SetVertexTexture(0, i, secondTexture);
 
@@ -243,13 +240,13 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     for (int i = 0; i < 7; i++)
     {
-        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(DataFormatType::R32G32B32A32Typeless, 5, 0));
 
         visualEffectInstance->SetPixelTexture(0, "PixelTexture" + boost::lexical_cast<string>(i), firstTexture);
 
         ASSERT_EQUAL(visualEffectInstance->GetPixelTexture(0, i), firstTexture);
 
-        TextureSharedPtr secondTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 6, 0));
+        TextureSharedPtr secondTexture(std::make_shared<Texture1D>(DataFormatType::R32G32B32A32Typeless, 6, 0));
 
         visualEffectInstance->SetPixelTexture(0, i, secondTexture);
 
@@ -415,14 +412,14 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
 
     for (int i = 0; i < 6; i++)
     {
-        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(DataFormatType::R32G32B32A32Typeless, 5, 0));
 
         firstVisualEffectInstance->SetVertexTexture(0, "VertexTexture" + boost::lexical_cast<string>(i), firstTexture);
     }
 
     for (int i = 0; i < 7; i++)
     {
-        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(TextureFormat::A4R4G4B4, 5, 0));
+        TextureSharedPtr firstTexture(std::make_shared<Texture1D>(DataFormatType::R32G32B32A32Typeless, 5, 0));
 
         firstVisualEffectInstance->SetPixelTexture(0, "PixelTexture" + boost::lexical_cast<string>(i), firstTexture);
     }

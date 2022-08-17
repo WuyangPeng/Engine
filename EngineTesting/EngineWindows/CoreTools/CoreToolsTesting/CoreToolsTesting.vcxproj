@@ -669,7 +669,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObjectEnum.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\ErrorObject.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StreamSizeTestingEnum.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileInStreamTesting.h" />
@@ -1334,7 +1333,6 @@ xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Pl
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObject.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\ErrorObject.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileInStreamTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileOutStreamTesting.cpp" />

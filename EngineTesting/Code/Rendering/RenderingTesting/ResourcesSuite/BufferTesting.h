@@ -21,7 +21,7 @@ namespace Rendering
 
     private:
         void MainTest();
-        void VertexBufferTest();
+        void VertexBufferTest() noexcept;
         void IndexBufferTest();
         void StreamTest() noexcept;
         void FileTest() noexcept;

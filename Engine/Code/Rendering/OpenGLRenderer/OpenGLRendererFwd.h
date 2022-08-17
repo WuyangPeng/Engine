@@ -21,10 +21,10 @@ namespace Rendering
     System::OpenGLUInt BindTexture(ShaderFlags::SamplerType target, System::OpenGLUInt texture);
     System::OpenGLUInt GetBoundTexture(ShaderFlags::SamplerType target);
 
-    template <VertexFormatFlags::AttributeUsage usage>
+    template <VertexFormatFlags::Semantic usage>
     class OpenGLVertexFormatData;
 
-    template <VertexFormatFlags::AttributeUsage usage, VertexFormatFlags::MaximumNumber number>
+    template <VertexFormatFlags::Semantic usage, VertexFormatFlags::MaximumNumber number>
     class OpenGLVertexFormatArrayData;
 
     template <typename Texture>

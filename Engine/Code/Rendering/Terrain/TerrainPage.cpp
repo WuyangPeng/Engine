@@ -40,14 +40,11 @@ Rendering::TerrainPage::TerrainPage(const VertexFormatSharedPtr& vformat, int si
     SetVertexBuffer(mesh->GetVertexBuffer());
     SetIndexBuffer(mesh->GetIndexBuffer());
 
-    VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
     auto numVertices = GetVertexBuffer()->GetNumElements();
     for (auto i = 0; i < numVertices; ++i)
     {
         const auto x = i % pageSize;
         const auto y = i / pageSize;
-
-        GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ GetX(x), GetY(y), GetHeight(i) });
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
@@ -177,7 +174,7 @@ void Rendering::TerrainPage::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::TerrainPage::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::TerrainPage::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

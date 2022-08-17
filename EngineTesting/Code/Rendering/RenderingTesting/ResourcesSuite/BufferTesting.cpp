@@ -21,9 +21,8 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Resources/VertexFormatElement.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 using std::vector;
 
@@ -45,67 +44,38 @@ void Rendering::BufferTesting::MainTest()
     CoreTools::InitTerm::ExecuteTerminators();
 }
 
-void Rendering::BufferTesting::VertexBufferTest()
+void Rendering::BufferTesting::VertexBufferTest() noexcept
 {
-    auto firstVertexBuffer = VertexBuffer::Create();
-
-    ASSERT_EQUAL(firstVertexBuffer->GetNumElements(), 0);
-    ASSERT_EQUAL(firstVertexBuffer->GetElementSize(), 0);
-    ASSERT_ENUM_EQUAL(firstVertexBuffer->GetUsage(), BufferUsage::Quantity);
-    ASSERT_EQUAL(firstVertexBuffer->GetNumBytes(), 0);
-
-    auto secondVertexBuffer = VertexBuffer::Create(7, 8, BufferUsage::Dynamic);
-
-    ASSERT_EQUAL(secondVertexBuffer->GetNumElements(), 7);
-    ASSERT_EQUAL(secondVertexBuffer->GetElementSize(), 8);
-    ASSERT_ENUM_EQUAL(secondVertexBuffer->GetUsage(), BufferUsage::Dynamic);
-    ASSERT_EQUAL(secondVertexBuffer->GetNumBytes(), 56);
-
-    secondVertexBuffer->SetNumElements(4);
-
-    ASSERT_EQUAL(secondVertexBuffer->GetNumElements(), 4);
-    ASSERT_EQUAL(secondVertexBuffer->GetElementSize(), 8);
-    ASSERT_ENUM_EQUAL(secondVertexBuffer->GetUsage(), BufferUsage::Dynamic);
-    ASSERT_EQUAL(secondVertexBuffer->GetNumBytes(), 56);
-
-    ASSERT_UNEQUAL_NULL_PTR(secondVertexBuffer->GetReadOnlyData());
 }
 
 void Rendering::BufferTesting::IndexBufferTest()
 {
-    auto firstIndexBuffer = IndexBuffer::Create();
+    auto firstIndexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 5);
 
-    ASSERT_EQUAL(firstIndexBuffer->GetNumElements(), 0);
     ASSERT_EQUAL(firstIndexBuffer->GetElementSize(), 0);
-    ASSERT_ENUM_EQUAL(firstIndexBuffer->GetUsage(), BufferUsage::Quantity);
+
     ASSERT_EQUAL(firstIndexBuffer->GetNumBytes(), 0);
     ASSERT_EQUAL(firstIndexBuffer->GetOffset(), 0);
 
-    auto secondIndexBuffer = IndexBuffer::Create(7, 8, BufferUsage::Dynamic);
+    auto secondIndexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 7, 8);
 
-    ASSERT_EQUAL(secondIndexBuffer->GetNumElements(), 7);
     ASSERT_EQUAL(secondIndexBuffer->GetElementSize(), 8);
-    ASSERT_ENUM_EQUAL(secondIndexBuffer->GetUsage(), BufferUsage::Dynamic);
+
     ASSERT_EQUAL(secondIndexBuffer->GetNumBytes(), 56);
     ASSERT_EQUAL(secondIndexBuffer->GetOffset(), 0);
 
-    secondIndexBuffer->SetNumElements(4);
-
-    ASSERT_EQUAL(secondIndexBuffer->GetNumElements(), 4);
     ASSERT_EQUAL(secondIndexBuffer->GetElementSize(), 8);
-    ASSERT_ENUM_EQUAL(secondIndexBuffer->GetUsage(), BufferUsage::Dynamic);
+
     ASSERT_EQUAL(secondIndexBuffer->GetNumBytes(), 56);
     ASSERT_EQUAL(secondIndexBuffer->GetOffset(), 0);
 
     secondIndexBuffer->SetOffset(4);
 
-    ASSERT_EQUAL(secondIndexBuffer->GetNumElements(), 4);
+    ASSERT_EQUAL(secondIndexBuffer->GetNumElements(), 7);
     ASSERT_EQUAL(secondIndexBuffer->GetElementSize(), 8);
-    ASSERT_ENUM_EQUAL(secondIndexBuffer->GetUsage(), BufferUsage::Dynamic);
+
     ASSERT_EQUAL(secondIndexBuffer->GetNumBytes(), 56);
     ASSERT_EQUAL(secondIndexBuffer->GetOffset(), 4);
-
-    ASSERT_UNEQUAL_NULL_PTR(secondIndexBuffer->GetReadOnlyData());
 }
 
 void Rendering::BufferTesting::StreamTest() noexcept

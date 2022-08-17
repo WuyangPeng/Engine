@@ -19,7 +19,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/Culler.h"
 
 using std::make_shared;
@@ -59,23 +59,83 @@ void Rendering::Particles::InitIndexBuffer(int indexSize)
     RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");
     RENDERING_ASSERTION_1(numParticles == impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
 
-    auto indexBuffer = IndexBuffer::Create(6 * numParticles, indexSize);
-    indexBuffer->InitIndexBufferInParticles();
+    auto indexBuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 6 * numParticles, indexSize);
+    InitIndexBufferInParticles(*indexBuffer);
     SetIndexBuffer(indexBuffer);
 }
 
-void Rendering::Particles::InitTextureCoord()
+void Rendering::Particles::InitTextureCoord() noexcept
 {
-    // 得到的纹理坐标。
-    VertexBufferAccessor vertexBufferAccessor{ GetConstVertexFormat(), GetConstVertexBuffer() };
-
-    RENDERING_ASSERTION_1(vertexBufferAccessor.HasTextureCoord(0), "纹理坐标必须存在且使用通道0\n");
-
-    // 设置纹理坐标为标准的。
-    GetVertexBuffer()->SetTextureCoordStandard(vertexBufferAccessor);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Particles)
+
+void Rendering::Particles::InitIndexBufferInParticles(IndexBuffer& indexBuffer)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    const auto indexSize = indexBuffer.GetElementSize();
+
+    RENDERING_ASSERTION_1(indexSize == 2 || indexSize == 4, "索引大小只能为2或4。");
+
+    const auto numVertices = indexBuffer.GetNumElements();
+    const auto numParticles = numVertices / 6;
+
+    if (indexSize == 2)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int16_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (int16_t i{}; i < numParticles; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i * 6] = 4 * i;
+                indices[i * 6 + 1] = 4 * i + 1;
+                indices[i * 6 + 2] = 4 * i + 2;
+                indices[i * 6 + 3] = 4 * i;
+                indices[i * 6 + 4] = 4 * i + 2;
+                indices[i * 6 + 5] = 4 * i + 3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+    else  // indexSize == 4
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        auto indices = reinterpret_cast<int32_t*>(&*indexBuffer.GetData(0).GetCurrent());
+
+#include STSTEM_WARNING_POP
+
+        if (indices != nullptr)
+        {
+            for (auto i = 0; i < numParticles; ++i)
+            {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+
+                indices[i * 6] = 4 * i;
+                indices[i * 6 + 1] = 4 * i + 1;
+                indices[i * 6 + 2] = 4 * i + 2;
+                indices[i * 6 + 3] = 4 * i;
+                indices[i * 6 + 4] = 4 * i + 2;
+                indices[i * 6 + 5] = 4 * i + 3;
+
+#include STSTEM_WARNING_POP
+            }
+        }
+    }
+}
 
 Rendering::ControllerInterfaceSharedPtr Rendering::Particles::Clone() const
 {
@@ -111,8 +171,8 @@ void Rendering::Particles::SetNumActive(int numActive)
 
     impl->SetNumActive(numActive);
     numActive = impl->GetNumActive();
-    GetIndexBuffer()->SetNumElements(6 * numActive);
-    GetVertexBuffer()->SetNumElements(4 * numActive);
+    GetIndexBuffer()->SetNumActiveElements(6 * numActive);
+    GetVertexBuffer()->SetNumActiveElements(4 * numActive);
 }
 
 void Rendering::Particles::GenerateParticles(const Camera& camera)
@@ -120,8 +180,6 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
     RENDERING_CLASS_IS_VALID_1;
 
     // 获取位置。
-    VertexBufferAccessor vertexBufferAccessor{ GetConstVertexFormat(), GetConstVertexBuffer() };
-    RENDERING_ASSERTION_1(vertexBufferAccessor.HasPosition(), "Positions must exist\n");
 
     // 获取在粒子模型空间中相机的轴方向。
     const auto transform = GetWorldTransform().GetInverseTransform();
@@ -136,11 +194,6 @@ void Rendering::Particles::GenerateParticles(const Camera& camera)
         const auto trueSize = impl->GetTrueSize(index);
         auto scaledUpPlusRight = trueSize * upPlusRight;
         auto scaledUpMinusRight = trueSize * upMinusRight;
-
-        GetVertexBuffer()->SetPosition(vertexBufferAccessor, index, position - scaledUpPlusRight);
-        GetVertexBuffer()->SetPosition(vertexBufferAccessor, index + 1, position - scaledUpMinusRight);
-        GetVertexBuffer()->SetPosition(vertexBufferAccessor, index + 2, position + scaledUpPlusRight);
-        GetVertexBuffer()->SetPosition(vertexBufferAccessor, index + 3, position + scaledUpMinusRight);
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
@@ -171,7 +224,7 @@ int Rendering::Particles::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Particles::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Particles::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

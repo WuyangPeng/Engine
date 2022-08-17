@@ -13,7 +13,7 @@
 #include "Rendering/Renderers/PlatformVertexBuffer.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformVertexBufferTesting)

@@ -38,6 +38,9 @@ namespace Rendering
         NODISCARD TriangleIndex GetTriangle(int index) const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
         NODISCARD ControllerInterfaceSharedPtr Clone() const override;
+
+    private:
+        void InitIndexBuffer(IndexBuffer& indexBuffer);
     };
 
 #include STSTEM_WARNING_PUSH

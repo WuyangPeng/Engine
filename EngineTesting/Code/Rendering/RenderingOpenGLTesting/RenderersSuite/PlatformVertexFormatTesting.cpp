@@ -13,7 +13,7 @@
 #include "Rendering/Renderers/PlatformVertexFormat.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 
 using std::vector;
 
@@ -28,50 +28,6 @@ void Rendering::PlatformVertexFormatTesting::MainTest()
     RendererManager::Destroy();
 }
 
-void Rendering::PlatformVertexFormatTesting::VertexFormatTest()
+void Rendering::PlatformVertexFormatTesting::VertexFormatTest() noexcept
 {
-    vector<VertexFormatType> firstVertexFormatType{
-        VertexFormatType(VertexFormatFlags::AttributeType::Float3,
-                         VertexFormatFlags::AttributeUsage::Position, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Float2,
-                         VertexFormatFlags::AttributeUsage::Normal, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Float3,
-                         VertexFormatFlags::AttributeUsage::Tangent, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Float4,
-                         VertexFormatFlags::AttributeUsage::Binormal, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Half1,
-                         VertexFormatFlags::AttributeUsage::TextureCoord, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Float3,
-                         VertexFormatFlags::AttributeUsage::TextureCoord, 1),
-        VertexFormatType(VertexFormatFlags::AttributeType::Float4,
-                         VertexFormatFlags::AttributeUsage::TextureCoord, 2),
-        VertexFormatType(VertexFormatFlags::AttributeType::Half3,
-                         VertexFormatFlags::AttributeUsage::Color, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Float3,
-                         VertexFormatFlags::AttributeUsage::Color, 1),
-        VertexFormatType(VertexFormatFlags::AttributeType::Half3,
-                         VertexFormatFlags::AttributeUsage::BlendIndices, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Half4,
-                         VertexFormatFlags::AttributeUsage::BlendWeight, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::UByte4,
-                         VertexFormatFlags::AttributeUsage::FogCoord, 0),
-        VertexFormatType(VertexFormatFlags::AttributeType::Short1,
-                         VertexFormatFlags::AttributeUsage::Psize, 0)
-    };
-
-    auto firstVertexFormat = VertexFormat::Create(firstVertexFormatType);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26414)
-
-    RendererSharedPtr renderer(std::make_shared<Renderer>("Configuration/Renderer.json"));
-
-#include STSTEM_WARNING_POP
-
-    renderer->Init();
-
-    PlatformVertexFormat platformVertexFormat(renderer.get(), firstVertexFormat.get());
-
-    platformVertexFormat.Enable(renderer.get());
-    platformVertexFormat.Disable(renderer.get());
 }

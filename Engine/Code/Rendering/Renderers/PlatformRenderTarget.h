@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/ResourcesFwd.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(PlatformRenderTargetImpl);
 
@@ -28,7 +28,7 @@ namespace Rendering
         NON_COPY_TYPE_DECLARE(PlatformRenderTarget);
 
     public:
-        PlatformRenderTarget(Renderer* renderer, const RenderTarget* renderTarget);
+        PlatformRenderTarget(Renderer* renderer, const DrawTarget* renderTarget);
 
         CLASS_INVARIANT_DECLARE;
 

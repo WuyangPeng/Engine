@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/20 14:28)
+///	引擎版本：0.8.1.0 (2022/08/05 10:13)
 
 #ifndef RENDERING_RENDERERS_RENDERER_IMPL_H
 #define RENDERING_RENDERERS_RENDERER_IMPL_H
 
 #include "Rendering/RenderingDll.h"
 
+#include "BaseRenderer.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/GlobalEffects/GlobalEffect.h"
 #include "Rendering/OpenGLRenderer/OpenGLPixelShader.h"
@@ -30,14 +31,15 @@
 #include "Rendering/Renderers/ShaderManagement.h"
 #include "Rendering/Renderers/Viewport.h"
 #include "Rendering/Renderers/ViewportManagement.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/RenderTarget.h"
-#include "Rendering/Resources/Texture1D.h"
-#include "Rendering/Resources/Texture2D.h"
-#include "Rendering/Resources/Texture3D.h"
-#include "Rendering/Resources/TextureCube.h"
-#include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Base/GraphicsObject.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
+#include "Rendering/Resources/Textures/TextureCube.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/Shaders/AlphaState.h"
@@ -53,11 +55,11 @@
 
 namespace Rendering
 {
-    class RENDERING_HIDDEN_DECLARE RendererImpl
+    class RENDERING_HIDDEN_DECLARE RendererImpl : public BaseRenderer
     {
     public:
         using ClassType = RendererImpl;
-        using Colour = Colour<float>;
+        using ParentType = BaseRenderer;
         using Matrix = Mathematics::MatrixF;
         using RendererSharedPtr = std::shared_ptr<Renderer>;
         using PlatformVertexFormatSharedPtr = std::shared_ptr<PlatformVertexFormat>;
@@ -74,25 +76,13 @@ namespace Rendering
 
     public:
         explicit RendererImpl(const RendererBasis& basis);
-        virtual ~RendererImpl() = default;
-        RendererImpl(const RendererImpl& rhs) = delete;
-        RendererImpl& operator=(const RendererImpl& rhs) = delete;
-        RendererImpl(RendererImpl&& rhs) noexcept = delete;
-        RendererImpl& operator=(RendererImpl&& rhs) noexcept = delete;
 
-        CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void SetRealRenderer(const RendererSharedPtr& renderer);
 
     public:
         // 平台无关的接口部分。
-
-        // 访问构造函数的输入。
-        NODISCARD int GetWidth() const noexcept;
-        NODISCARD int GetHeight() const noexcept;
-        NODISCARD TextureFormat GetColorFormat() const noexcept;
-        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
-        NODISCARD int GetNumMultisamples() const noexcept;
 
         // 顶点格式管理。顶点格式对象必须是已经分配，它的属性和跨距由应用程序代码进行设置。
         void Bind(const ConstVertexFormatSharedPtr& vertexFormat);
@@ -156,11 +146,11 @@ namespace Rendering
 
         // 渲染目标管理。渲染目标对象必须是已经由应用程序代码分配。
         // 在ReadColor的索引index是在多个渲染目标对象的目标索引。
-        void Bind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Enable(const ConstRenderTargetSharedPtr& renderTarget);
-        void Disable(const ConstRenderTargetSharedPtr& renderTarget);
-        ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
+        void Bind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Unbind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Enable(const ConstDrawTargetSharedPtr& renderTarget);
+        void Disable(const ConstDrawTargetSharedPtr& renderTarget);
+        ConstTexture2DSharedPtr ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget);
 
         // 顶点着色器管理。顶点着色器对象必须已经由应用程序代码分配。
         void Bind(const ConstVertexShaderSharedPtr& vertexShader);
@@ -173,6 +163,9 @@ namespace Rendering
         void Unbind(const ConstPixelShaderSharedPtr& pixelShader);
         void Enable(const ConstPixelShaderSharedPtr& pixelShader, const ShaderParameters& parameters);
         void Disable(const ConstPixelShaderSharedPtr& pixelShader, const ShaderParameters& parameters);
+
+        void Bind(const std::shared_ptr<const GraphicsObject>& object) noexcept;
+        void Unbind(const std::shared_ptr<const GraphicsObject>& object) noexcept;
 
         // ShaderParameters应该是另一个资源，映射到“常量缓冲区”。 将它们添加到渲染器。
         // 准备好后，移除ShaderParameters输入以启用/禁用着色器，并设置一个Bind/Unbind/Enable/Disable函数块。
@@ -216,14 +209,6 @@ namespace Rendering
         // 两者都在世界坐标中。 如果（x，y）在当前视口中的则返回值为'true'。
         NODISCARD PickRay GetPickRay(int x, int y) const;
 
-        // 访问颜色，深度和模板缓冲区的当前清除参数。 颜色缓冲区是后缓冲区。
-        void SetClearColor(const Colour& aClearColor) noexcept;
-        NODISCARD Colour GetClearColor() const noexcept;
-        void SetClearDepth(float aClearDepth) noexcept;
-        NODISCARD float GetClearDepth() const noexcept;
-        void SetClearStencil(int aClearStencil) noexcept;
-        NODISCARD int GetClearStencil() const noexcept;
-
         // 访问当前的颜色通道蒙版
         NODISCARD bool GetAllowRed() const noexcept;
         NODISCARD bool GetAllowGreen() const noexcept;
@@ -248,7 +233,7 @@ namespace Rendering
         NODISCARD PlatformTexture2DSharedPtr GetResource(const ConstTexture2DSharedPtr& texture2D);
         NODISCARD PlatformTexture3DSharedPtr GetResource(const ConstTexture3DSharedPtr& texture3D);
         NODISCARD PlatformTextureCubeSharedPtr GetResource(const ConstTextureCubeSharedPtr& textureCube);
-        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstRenderTargetSharedPtr& renderTarget);
+        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstDrawTargetSharedPtr& renderTarget);
         NODISCARD PlatformVertexShaderSharedPtr GetResource(const ConstVertexShaderSharedPtr& vertexShader);
         NODISCARD PlatformPixelShaderSharedPtr GetResource(const ConstPixelShaderSharedPtr& pixelShader);
 
@@ -265,13 +250,6 @@ namespace Rendering
         virtual void SetOffsetState(const ConstOffsetStateSharedPtr& offsetState) = 0;
         virtual void SetStencilState(const ConstStencilStateSharedPtr& stencilState) = 0;
         virtual void SetWireState(const ConstWireStateSharedPtr& wireState) = 0;
-
-        // 视口管理。 视口以右手屏幕坐标指定。 原点是屏幕的左下角，y轴指向上方，x轴指向右侧。
-        virtual void SetViewport(const Viewport& viewport) = 0;
-        NODISCARD virtual Viewport GetViewport() const = 0;
-        virtual void SetDepthRange(const DepthRange& depthRange) = 0;
-        NODISCARD virtual DepthRange GetDepthRange() const = 0;
-        virtual void Resize(int width, int height) = 0;
 
         // 支持清除颜色，深度和模板缓冲区。
         virtual void ClearColorBuffer() = 0;
@@ -305,6 +283,8 @@ namespace Rendering
 
         NODISCARD virtual RendererTypes GetRendererType() const = 0;
 
+        void SetFont(const FontSharedPtr& font) override;
+
     private:
         using VertexFormatManagementPtr = std::shared_ptr<VertexFormatManagement>;
         using VertexBufferManagement = BufferManagement<PlatformVertexBuffer>;
@@ -330,8 +310,6 @@ namespace Rendering
         virtual void DrawPrimitive(const ConstVisualSharedPtr& visual) = 0;
 
     private:
-        RendererBasis rendererBasis;
-
         // 全局状态
         AlphaStateSharedPtr defaultAlphaState;
         CullStateSharedPtr defaultCullState;
@@ -377,11 +355,6 @@ namespace Rendering
 
         // 几何变换管道。相机存储视图，投影和投影后矩阵。
         CameraSharedPtr camera;
-
-        // 清除帧缓冲区。
-        Colour clearColor;
-        float clearDepth;
-        int clearStencil;
 
         // 后台缓冲区的通道屏蔽。
         bool bufferAllowRed;

@@ -22,9 +22,9 @@
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "Mathematics/Base/BitHacksDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/LoadTexture.h"
-#include "Rendering/Resources/SaveTexture.h"
-#include "Rendering/Resources/Texture3D.h"
+#include "Rendering/Resources/Textures/LoadTexture.h"
+#include "Rendering/Resources/Textures/SaveTexture.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, Texture3DTesting)
 
@@ -33,11 +33,6 @@ void Rendering::Texture3DTesting::MainTest()
     CoreTools::InitTerm::ExecuteInitializers();
 
     RendererManager::Create();
-
-    ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(MipmapsTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(StreamTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(FileTest);
 
     RendererManager::Destroy();
 
@@ -48,40 +43,16 @@ void Rendering::Texture3DTesting::BaseTest()
 {
     Texture3DSharedPtr firstTexture3D = LoadTexture::Load3DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture3D.trt"));
 
-    ASSERT_ENUM_EQUAL(TextureFormat::R8G8B8, firstTexture3D->GetFormat());
-    ASSERT_ENUM_EQUAL(TextureFlags::Texture3D, firstTexture3D->GetTextureType());
-    ASSERT_ENUM_EQUAL(BufferUsage::Texture, firstTexture3D->GetUsage());
     ASSERT_EQUAL(1, firstTexture3D->GetNumLevels());
 
     ASSERT_EQUAL(3, firstTexture3D->GetNumDimensions());
     ASSERT_EQUAL(16, firstTexture3D->GetDimension(0, 0));
     ASSERT_EQUAL(12, firstTexture3D->GetDimension(1, 0));
     ASSERT_EQUAL(8, firstTexture3D->GetDimension(2, 0));
-    ASSERT_EQUAL(16 * 12 * 8 * firstTexture3D->GetPixelSize(), firstTexture3D->GetNumLevelBytes(0));
-    ASSERT_EQUAL(16 * 12 * 8 * firstTexture3D->GetPixelSize(), firstTexture3D->GetNumTotalBytes());
-    ASSERT_EQUAL(0, firstTexture3D->GetLevelOffset(0));
-
-    ASSERT_EQUAL(3, firstTexture3D->GetPixelSize());
-
-    ASSERT_FALSE(firstTexture3D->IsCompressed());
-    ASSERT_TRUE(firstTexture3D->IsMipmapable());
-
-    for (int i = 0; i < TextureMaxUserFields; ++i)
-    {
-        ASSERT_EQUAL(0, firstTexture3D->GetUserField(i));
-        firstTexture3D->SetUserField(i, i);
-    }
-
-    for (int i = 0; i < TextureMaxUserFields; ++i)
-    {
-        ASSERT_EQUAL(i, firstTexture3D->GetUserField(i));
-    }
 
     ASSERT_EQUAL(16, firstTexture3D->GetWidth());
     ASSERT_EQUAL(12, firstTexture3D->GetHeight());
     ASSERT_EQUAL(8, firstTexture3D->GetThickness());
-
-    ASSERT_UNEQUAL_NULL_PTR(firstTexture3D->GetTextureData(0));
 }
 
 void Rendering::Texture3DTesting::MipmapsTest()
@@ -94,11 +65,6 @@ void Rendering::Texture3DTesting::MipmapsTest()
 void Rendering::Texture3DTesting::StreamTest()
 {
     Texture3DSharedPtr firstTexture3D = LoadTexture::Load3DFromFile(SYSTEM_TEXT("Resource/ResourcesSuite/Texture3D.trt"));
-
-    for (int i = 0; i < TextureMaxUserFields; ++i)
-    {
-        firstTexture3D->SetUserField(i, i);
-    }
 }
 
 void Rendering::Texture3DTesting::FileTest()

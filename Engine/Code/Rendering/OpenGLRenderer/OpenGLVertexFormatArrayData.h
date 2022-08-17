@@ -21,7 +21,7 @@
 
 namespace Rendering
 {
-    template <VertexFormatFlags::AttributeUsage usage, VertexFormatFlags::MaximumNumber number>
+    template <VertexFormatFlags::Semantic usage, VertexFormatFlags::MaximumNumber number>
     class OpenGLVertexFormatArrayData
     {
     public:

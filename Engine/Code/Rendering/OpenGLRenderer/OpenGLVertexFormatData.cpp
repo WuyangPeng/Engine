@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Position>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Position>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -24,7 +24,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Normal>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Normal>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -34,7 +34,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Tangent>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Tangent>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -44,7 +44,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Binormal>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Binormal>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -54,7 +54,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::BlendIndices>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -64,7 +64,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::BlendWeight>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -74,7 +74,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::FogCoord>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::FogCoord>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -84,7 +84,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Psize>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -94,7 +94,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Position>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Position>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -104,7 +104,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Normal>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Normal>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -114,7 +114,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Tangent>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Tangent>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -124,7 +124,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Binormal>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Binormal>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -134,7 +134,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendIndices>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::BlendIndices>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -144,7 +144,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::BlendWeight>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::BlendWeight>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -154,7 +154,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::FogCoord>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::FogCoord>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -164,7 +164,7 @@ void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUs
 }
 
 template <>
-void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::AttributeUsage::Psize>::Disable() noexcept
+void Rendering::OpenGLVertexFormatData<Rendering::VertexFormatFlags::Semantic::Psize>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

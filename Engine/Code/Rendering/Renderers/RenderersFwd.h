@@ -55,6 +55,11 @@ namespace Rendering
 
     class SamplerState;
     class RendererInput;
+
+    class Font;
+    class BlendState;
+    class DepthStencilState;
+    class RasterizerState;
 }
 
 #endif  // RENDERING_RENDERERS_FWD_H

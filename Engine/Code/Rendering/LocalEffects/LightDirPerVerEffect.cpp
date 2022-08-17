@@ -358,7 +358,7 @@ void Rendering::LightDirPerVerEffect::PostLink()
     }
 }
 
-uint64_t Rendering::LightDirPerVerEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::LightDirPerVerEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

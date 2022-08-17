@@ -18,6 +18,7 @@
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
 
 using std::string;
@@ -62,21 +63,21 @@ Rendering::VisualData::SpanIterator Rendering::VisualData::GetVertexBufferReadOn
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return vertexBuffer.object->GetSpanIterator();
+    return static_pointer_cast<const VertexBuffer>(vertexBuffer.object)->GetData();
 }
 
 int Rendering::VisualData::GetPositionOffset() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    const auto positionIndex = vertexFormat.object->GetIndex(VertexFormatFlags::AttributeUsage::Position);
+    const auto positionIndex = vertexFormat.object->GetIndex(VertexFormatFlags::Semantic::Position);
     if (positionIndex == -1)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("更新需要顶点位置\n"s));
     }
 
     const auto positionType = vertexFormat.object->GetAttributeType(positionIndex);
-    if (positionType != VertexFormatFlags::AttributeType::Float3 && positionType != VertexFormatFlags::AttributeType::Float4)
+    if (positionType != DataFormatType::R32G32B32Float && positionType != DataFormatType::R32G32B32A32Float)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("顶点必须是3元组或4元组\n"s));
     }

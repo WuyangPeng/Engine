@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "Rendering/Resources/Detail/VertexBufferAccessorImpl.h"
+#include "Rendering/Resources/Detail/Buffers/VertexBufferImpl.h"
 #include "Rendering/SceneGraph/Detail/PickRecordContainerImpl.h"
 #include "Rendering/SceneGraph/Detail/PickRecordImpl.h"
 

@@ -221,7 +221,7 @@ void Rendering::BSplineSurfacePatch::PostLink()
     SurfacePatch::PostLink();
 }
 
-uint64_t Rendering::BSplineSurfacePatch::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::BSplineSurfacePatch::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

@@ -19,7 +19,7 @@
 
 namespace Rendering
 {
-    template <VertexFormatFlags::AttributeUsage usage>
+    template <VertexFormatFlags::Semantic usage>
     class OpenGLVertexFormatData
     {
     public:

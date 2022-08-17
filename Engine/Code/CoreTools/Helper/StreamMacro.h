@@ -59,12 +59,12 @@ public:                                              \
     CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);  \
     NODISCARD static CoreTools::ObjectInterfaceSharedPtr Factory(CoreTools::BufferSource& source)
 
-#define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                  \
-    void Load(CoreTools::BufferSource& source) override;                           \
-    void Link(CoreTools::ObjectLink& source) override;                             \
-    void PostLink() override;                                                      \
-    NODISCARD uint64_t Register(CoreTools::ObjectRegister& target) const override; \
-    void Save(CoreTools::BufferTarget& target) const override;                     \
+#define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                 \
+    void Load(CoreTools::BufferSource& source) override;                          \
+    void Link(CoreTools::ObjectLink& source) override;                            \
+    void PostLink() override;                                                     \
+    NODISCARD int64_t Register(CoreTools::ObjectRegister& target) const override; \
+    void Save(CoreTools::BufferTarget& target) const override;                    \
     NODISCARD int GetStreamingSize() const override;
 
 #define CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(className) \
@@ -123,23 +123,23 @@ public:                                              \
         return size;                                                                    \
     }
 
-#define CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(namespaceName, className)              \
-    uint64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
-    {                                                                                    \
-        CLASS_IS_VALID_CONST_0;                                                          \
-        return ParentType::Register(target);                                             \
+#define CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(namespaceName, className)             \
+    int64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
+    {                                                                                   \
+        CLASS_IS_VALID_CONST_0;                                                         \
+        return ParentType::Register(target);                                            \
     }
 
-#define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName, className)            \
-    uint64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
-    {                                                                                    \
-        CLASS_IS_VALID_CONST_0;                                                          \
-        const auto uniqueID = ParentType::Register(target);                              \
-        if (uniqueID != 0)                                                               \
-        {                                                                                \
-            impl->Register(target);                                                      \
-        }                                                                                \
-        return uniqueID;                                                                 \
+#define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName, className)           \
+    int64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
+    {                                                                                   \
+        CLASS_IS_VALID_CONST_0;                                                         \
+        const auto registerID = ParentType::Register(target);                           \
+        if (registerID != 0)                                                            \
+        {                                                                               \
+            impl->Register(target);                                                     \
+        }                                                                               \
+        return registerID;                                                              \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName, className)      \

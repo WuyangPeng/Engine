@@ -13,7 +13,7 @@
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Renderers/VertexFormatManagement.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 
 using std::vector;
 

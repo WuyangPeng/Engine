@@ -14,7 +14,7 @@
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
-#include "Rendering/Resources/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 Rendering::OpenGLVertexBuffer::OpenGLVertexBuffer(MAYBE_UNUSED Renderer* renderer, const VertexBuffer* vertexBuffer)
     : ParentType{}, buffer{ 0 }
@@ -31,7 +31,7 @@ void Rendering::OpenGLVertexBuffer::Init(const VertexBuffer* vertexBuffer)
         BufferLockManager<ClassType> manager(*this);
         auto data = manager.Lock(BufferLocking::WriteOnly);
 
-        System::MemoryCopy(data, vertexBuffer->GetReadOnlyData(), vertexBuffer->GetNumBytes());
+        System::MemoryCopy(data, &*vertexBuffer->GetData(), vertexBuffer->GetNumBytes());
     }
 }
 

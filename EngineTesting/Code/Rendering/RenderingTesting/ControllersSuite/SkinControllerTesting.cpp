@@ -21,8 +21,7 @@
 #include "Rendering/Controllers/SkinController.h"
 #include "Rendering/DataTypes/Transform.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/RenderingTesting/SceneGraphSuite/VisualTest.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
+#include "Rendering/RenderingTesting/SceneGraphSuite/VisualTest.h" 
 #include "Rendering/SceneGraph/LoadVisual.h"
 
 using std::vector;

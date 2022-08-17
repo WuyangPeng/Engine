@@ -280,6 +280,54 @@
     <Filter Include="DataTypes 模板文件\Detail">
       <UniqueIdentifier>{8160eca1-9dd8-45bd-b32d-8331f92345a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State 头文件">
+      <UniqueIdentifier>{9aaab753-eacf-46bf-9a76-fec00473f201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 头文件">
+      <UniqueIdentifier>{628c77ca-e34f-4b5a-ab07-13f5c89763b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 源文件">
+      <UniqueIdentifier>{d8d2570e-1886-41b8-aa75-8989f33a84e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 头文件\Flags">
+      <UniqueIdentifier>{2e368a8b-7c35-4640-80d8-312b24cbe4e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 头文件\Detail">
+      <UniqueIdentifier>{c0a2631a-31a8-4fcf-b313-154bd96c90e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base 源文件\Detail">
+      <UniqueIdentifier>{b0e7e7ff-83b8-4931-ba16-3f72134ea7db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 源文件\Detail\Buffers">
+      <UniqueIdentifier>{1b1805e0-4878-4864-9624-8e04ffc88497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 源文件\Detail\Textures">
+      <UniqueIdentifier>{167a5636-11e3-4f3e-b338-e8289b3a8718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 头文件\Detail\Textures">
+      <UniqueIdentifier>{39075247-3169-4bd6-a8bc-048e5def5860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 头文件\Detail\Buffers">
+      <UniqueIdentifier>{ab2be43a-75c0-48b2-aaa9-98ac46b96c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 头文件\Buffers">
+      <UniqueIdentifier>{2acbfea3-3e32-42bf-a110-cd3e64e24bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 源文件\Buffers">
+      <UniqueIdentifier>{6c1130a7-5c51-4739-a535-ba008f05e35d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 头文件\Textures">
+      <UniqueIdentifier>{069579bf-36f4-45f5-9856-87b7da8cf230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 源文件\Textures">
+      <UniqueIdentifier>{6d8ef7fb-ab62-4cf1-8891-45d4f5f442f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 模板文件\Buffers">
+      <UniqueIdentifier>{554ca20d-be13-4f12-a6b4-a69dd8d0191a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources 模板文件\Textures">
+      <UniqueIdentifier>{af868abe-0a77-4d10-92f7-e9d59a9eff18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp">
@@ -819,90 +867,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\ViewportManagement.cpp">
       <Filter>Renderers 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\RenderTargetImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Texture1DImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Texture2DImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Texture3DImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureBuffer.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureCubeImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureData.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\TextureUserField.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\VertexBufferAccessorImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\VertexFormatImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\BufferImpl.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\BufferParameter.cpp">
-      <Filter>Resources 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexFormatType.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffer.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\IndexBuffer.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\LoadTexture.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\RenderTarget.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\SaveTexture.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture1D.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture2D.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\Texture3D.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\TextureCube.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexBuffer.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessor.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexFormat.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Resources\VertexFormatElement.cpp">
-      <Filter>Resources 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\SceneGraph\Detail\CameraMatrix.cpp">
       <Filter>SceneGraph 源文件\Detail</Filter>
     </ClCompile>
@@ -1355,6 +1319,171 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\SamplerState.cpp">
       <Filter>Renderers 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\BaseRenderer.cpp">
+      <Filter>Renderers 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\BlendState.cpp">
+      <Filter>Renderers 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\DepthStencilState.cpp">
+      <Filter>Renderers 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\RasterizerState.cpp">
+      <Filter>Renderers 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\TextEffect.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Renderers\Detail\GraphicsRenderer.cpp">
+      <Filter>Renderers 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\GraphicsObject.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\Detail\RendererObjectImpl.cpp">
+      <Filter>Base 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\RendererObject.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\ResourceImpl.cpp">
+      <Filter>Resources 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\VertexFormatImpl.cpp">
+      <Filter>Resources 源文件\Detail\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\Texture1DImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\Texture2DImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\Texture3DImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\TextureCubeImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\TextureData.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\TextureImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\DataFormat.cpp">
+      <Filter>Resources 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Resource.cpp">
+      <Filter>Resources 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\Buffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\ConstantBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\IndexBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\VertexBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\VertexFormat.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\VertexFormatAttribute.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\DrawTarget.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\LoadTexture.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\SaveTexture.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture1D.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture2D.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture3D.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\TextureCube.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\InputLayoutManager.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Font.cpp">
+      <Filter>LocalEffects 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\MemberLayoutImpl.cpp">
+      <Filter>Resources 源文件\Detail\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\MemberLayout.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\BufferLayout.cpp">
+      <Filter>Resources 源文件\Detail\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\IndirectArgumentsBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\RawBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\StructuredBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\TextureBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Buffers\TypedBuffer.cpp">
+      <Filter>Resources 源文件\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\VertexBufferImpl.cpp">
+      <Filter>Resources 源文件\Detail\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\SubResource.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\SubResourceImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\TextureSingle.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\TextureRenderTarget.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\TextureDepthStencil.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\TextureArray.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture1DArray.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\Texture2DArray.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Textures\TextureCubeArray.cpp">
+      <Filter>Resources 源文件\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\RendererDrawTarget.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Resources\Detail\Textures\DrawTargetImpl.cpp">
+      <Filter>Resources 源文件\Detail\Textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2147,120 +2276,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\TextureManagementLockEncapsulationDetail.h">
       <Filter>Renderers 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\BufferImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\BufferParameter.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\RenderTargetImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Texture1DImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Texture2DImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Texture3DImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureBuffer.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureCubeImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureData.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\TextureUserField.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\VertexBufferAccessorImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\VertexFormatImpl.h">
-      <Filter>Resources 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\LoadTextureDetail.h">
-      <Filter>Resources 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\TextureLevelDataDetail.h">
-      <Filter>Resources 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorArrayDataDetail.h">
-      <Filter>Resources 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorDataDetail.h">
-      <Filter>Resources 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorDetail.h">
-      <Filter>Resources 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffer.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\IndexBuffer.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\LoadTexture.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\RenderTarget.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Resources.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesFwd.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\SaveTexture.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture1D.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture2D.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\Texture3D.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\TextureCube.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\TextureLevelData.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBuffer.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessor.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorArrayData.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexBufferAccessorData.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexFormat.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexFormatElement.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\VertexFormatType.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\LightImpl.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
@@ -2870,9 +2885,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\DataTypes\TransformMatrix.h">
       <Filter>DataTypes 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesInternalFwd.h">
-      <Filter>Resources 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\SceneGraph\Detail\VisualData.h">
       <Filter>SceneGraph 头文件\Detail</Filter>
     </ClInclude>
@@ -2881,6 +2893,231 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\SamplerState.h">
       <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\BaseRenderer.h">
+      <Filter>Renderers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\BlendState.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\DepthStencilState.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\RasterizerState.h">
+      <Filter>Renderers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\TextEffect.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\State\State.h">
+      <Filter>State 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\State\StateFwd.h">
+      <Filter>State 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\GraphicsRenderer.h">
+      <Filter>Renderers 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\Base.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\BaseFwd.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\GraphicsObject.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\Flags\GraphicsObjectType.h">
+      <Filter>Base 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\Detail\RendererObjectImpl.h">
+      <Filter>Base 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\RendererObject.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\DataFormatType.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\ChannelType.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\UsageType.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\CopyType.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\ResourceImpl.h">
+      <Filter>Resources 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\VertexFormatImpl.h">
+      <Filter>Resources 头文件\Detail\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\Texture2DImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\Texture3DImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\TextureCubeImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\TextureData.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\TextureImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\Texture1DImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Resource.h">
+      <Filter>Resources 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Resources.h">
+      <Filter>Resources 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesFwd.h">
+      <Filter>Resources 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\ResourcesInternalFwd.h">
+      <Filter>Resources 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\DataFormat.h">
+      <Filter>Resources 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\Buffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\ConstantBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\IndexBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\VertexBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\VertexFormat.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\VertexFormatAttribute.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\LoadTextureDetail.h">
+      <Filter>Resources 模板文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureLevelDataDetail.h">
+      <Filter>Resources 模板文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\DrawTarget.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\LoadTexture.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\SaveTexture.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture1D.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture2D.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture3D.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureCube.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureLevelData.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\InputLayoutManager.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Font.h">
+      <Filter>LocalEffects 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\MemberLayoutImpl.h">
+      <Filter>Resources 头文件\Detail\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\MemberLayout.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\BufferLayout.h">
+      <Filter>Resources 头文件\Detail\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\ConstantBufferDetail.h">
+      <Filter>Resources 模板文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\IndexFormat.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\IndirectArgumentsBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\RawBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\StructuredBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\CounterType.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\TypedBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Buffers\VertexBufferImpl.h">
+      <Filter>Resources 头文件\Detail\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\TextureBufferDetail.h">
+      <Filter>Resources 模板文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Buffers\TextureBuffer.h">
+      <Filter>Resources 头文件\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\SubResource.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\SubResourceImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureSingle.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureDepthStencil.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureRenderTarget.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureArray.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Flags\CubeFaceType.h">
+      <Filter>Resources 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture1DArray.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\Texture2DArray.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Textures\TextureCubeArray.h">
+      <Filter>Resources 头文件\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\RendererDrawTarget.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Resources\Detail\Textures\DrawTargetImpl.h">
+      <Filter>Resources 头文件\Detail\Textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/ConstObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
-#include "Rendering/Resources/Texture.h"
+#include "Rendering/Resources/Textures/Texture.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"

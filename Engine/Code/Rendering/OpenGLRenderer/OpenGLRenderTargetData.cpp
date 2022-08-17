@@ -16,7 +16,7 @@
 
 using std::make_shared;
 
-Rendering::OpenGLRenderTargetData::OpenGLRenderTargetData(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::OpenGLRenderTargetData::OpenGLRenderTargetData(Renderer* renderer, const DrawTarget* renderTarget)
     : impl{ renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

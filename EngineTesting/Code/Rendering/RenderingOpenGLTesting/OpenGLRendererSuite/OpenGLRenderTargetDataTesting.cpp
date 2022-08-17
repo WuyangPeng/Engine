@@ -13,7 +13,7 @@
 #include "Rendering/OpenGLRenderer/OpenGLRenderTargetData.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/RenderTarget.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLRenderTargetDataTesting)
 

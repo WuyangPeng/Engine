@@ -108,6 +108,51 @@ void Rendering::OpenGLRenderer::DisplayColorBuffer() noexcept
     RENDERING_CLASS_IS_VALID_9;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Rendering::OpenGLRenderer::SetBlendState(MAYBE_UNUSED const BlendStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::OpenGLRenderer::SetDepthStencilState(MAYBE_UNUSED const DepthStencilStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::OpenGLRenderer::SetRasterizerState(MAYBE_UNUSED const RasterizerStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::OpenGLRenderer::Update(MAYBE_UNUSED const BufferSharedPtr& buffer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::OpenGLRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+}
+
+bool Rendering::OpenGLRenderer::Update(MAYBE_UNUSED const TextureSharedPtr& texture)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+#include STSTEM_WARNING_POP
+
 void Rendering::OpenGLRenderer::SetColorMask(MAYBE_UNUSED bool allowRed, MAYBE_UNUSED bool allowGreen, MAYBE_UNUSED bool allowBlue, MAYBE_UNUSED bool allowAlpha)
 {
     RENDERING_CLASS_IS_VALID_9;
@@ -132,9 +177,22 @@ void Rendering::OpenGLRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, M
     RENDERING_CLASS_IS_VALID_9;
 }
 
-void Rendering::OpenGLRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedPtr& visual) noexcept
+bool Rendering::OpenGLRenderer::HasDepthRange01() const noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
+
+    return false;
+}
+
+std::string Rendering::OpenGLRenderer::GetShaderName(const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return name;
+}
+
+void Rendering::OpenGLRenderer::DisplayColorBuffer(MAYBE_UNUSED int syncInterval) noexcept
+{
 }
 
 void Rendering::OpenGLRenderer::Draw(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour& color, MAYBE_UNUSED const std::string& message) noexcept

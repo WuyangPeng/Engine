@@ -15,7 +15,7 @@
 #include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/BufferLockManagerDetail.h"
-#include "Rendering/Resources/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
 
 Rendering::OpenGLIndexBuffer::OpenGLIndexBuffer([[maybe_unused]] Renderer* renderer, const IndexBuffer* indexBuffer)
     : ParentType{}, buffer{ 0 }
@@ -34,7 +34,7 @@ void Rendering::OpenGLIndexBuffer::Init(const IndexBuffer* indexBuffer)
 
         void* data = manager.Lock(BufferLocking::WriteOnly);
 
-        System::MemoryCopy(data, indexBuffer->GetReadOnlyData(), indexBuffer->GetNumBytes());
+        System::MemoryCopy(data, &*indexBuffer->GetData(), indexBuffer->GetNumBytes());
     }
 }
 

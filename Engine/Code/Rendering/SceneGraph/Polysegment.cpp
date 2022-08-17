@@ -133,7 +133,7 @@ int Rendering::Polysegment::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Polysegment::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Polysegment::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

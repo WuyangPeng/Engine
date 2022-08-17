@@ -80,6 +80,41 @@ void Rendering::OpenGLESRenderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSh
     throw std::logic_error("The method or operation is not implemented.");
 }
 
+void Rendering::OpenGLESRenderer::SetBlendState(MAYBE_UNUSED const BlendStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::OpenGLESRenderer::SetDepthStencilState(MAYBE_UNUSED const DepthStencilStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::OpenGLESRenderer::SetRasterizerState(MAYBE_UNUSED const RasterizerStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::OpenGLESRenderer::Update(MAYBE_UNUSED const BufferSharedPtr& buffer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::OpenGLESRenderer::Update(MAYBE_UNUSED const TextureSharedPtr& texture)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
 #include STSTEM_WARNING_POP
 
 void Rendering::OpenGLESRenderer::SetViewport(MAYBE_UNUSED const Viewport& viewport)
@@ -174,6 +209,27 @@ void Rendering::OpenGLESRenderer::PostDraw()
 }
 
 void Rendering::OpenGLESRenderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, MAYBE_UNUSED bool reflectY)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::OpenGLESRenderer::HasDepthRange01() const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+std::string Rendering::OpenGLESRenderer::GetShaderName(MAYBE_UNUSED const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::OpenGLESRenderer::DisplayColorBuffer(MAYBE_UNUSED int syncInterval)
 {
     RENDERING_CLASS_IS_VALID_9;
 

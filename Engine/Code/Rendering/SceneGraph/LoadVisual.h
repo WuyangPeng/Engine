@@ -17,9 +17,9 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBuffer.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 
 #include <string>
 

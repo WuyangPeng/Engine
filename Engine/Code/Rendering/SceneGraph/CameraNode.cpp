@@ -147,17 +147,17 @@ int Rendering::CameraNode::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::CameraNode::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::CameraNode::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto uniqueID = ParentType::Register(target);
-    if (uniqueID != 0)
+    const auto registerID = ParentType::Register(target);
+    if (registerID != 0)
     {
         impl->Register(target);
     }
 
-    return uniqueID;
+    return registerID;
 }
 
 void Rendering::CameraNode::Save(CoreTools::BufferTarget& target) const

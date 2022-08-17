@@ -22,7 +22,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 using std::make_shared;
@@ -99,13 +98,7 @@ bool Rendering::MorphController::Update(double applicationTime)
         {
             RENDERING_ASSERTION_2(impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "顶点数不匹配\n");
 
-            VertexBufferAccessor vba{ *visual };
-
-            // 设置顶点为 target[0].
-            for (auto i = 0; i < impl->GetNumVertices(); ++i)
-            {
-                visual->GetVertexBuffer()->SetPosition(vba, i, impl->GetVertices(0, i));
-            }
+            auto vba = *visual->GetVertexBuffer();
 
             // 查找边界键。
             auto ctrlTime = boost::numeric_cast<float>(GetControlTime(applicationTime));
@@ -117,13 +110,6 @@ bool Rendering::MorphController::Update(double applicationTime)
             {
                 // 添加target[i]在三角形顶点。
                 const auto coeff = (1.0f - info.GetNormTime()) * impl->GetWeights(info.GetFirstIndex(), i - 1) + info.GetNormTime() * impl->GetWeights(info.GetSecondIndex(), i - 1);
-
-                for (auto j = 0; j < impl->GetNumVertices(); ++j)
-                {
-                    auto position = vba.GetPosition<APoint>(j);
-                    position += coeff * GetVertices(i, j);
-                    visual->GetVertexBuffer()->SetPosition(vba, j, position);
-                }
             }
 
             visual->UpdateModelSpace(VisualUpdateType::Normals);
@@ -177,7 +163,7 @@ int Rendering::MorphController::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::MorphController::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::MorphController::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

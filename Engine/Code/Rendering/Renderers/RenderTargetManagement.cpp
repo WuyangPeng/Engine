@@ -25,15 +25,15 @@ Rendering::RenderTargetManagement::RenderTargetManagement(const RendererSharedPt
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RenderTargetManagement)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Bind, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Bind, ConstDrawTargetSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Unbind, ConstRenderTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Unbind, ConstDrawTargetSharedPtr, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Enable, ConstRenderTargetSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Disable, ConstRenderTargetSharedPtr, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, GetResource, ConstRenderTargetSharedPtr, Rendering::RenderTargetManagement::PlatformRenderTargetSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Enable, ConstDrawTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, Disable, ConstDrawTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, RenderTargetManagement, GetResource, ConstDrawTargetSharedPtr, Rendering::RenderTargetManagement::PlatformRenderTargetSharedPtr)
 
-Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagement::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagement::ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 

@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/OpenGLRenderTarget.h"
 
-Rendering::PlatformRenderTarget::PlatformRenderTarget(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::PlatformRenderTarget::PlatformRenderTarget(Renderer* renderer, const DrawTarget* renderTarget)
     : impl{ CoreTools::ImplCreateUseFactory::Default, renderer, renderTarget }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;

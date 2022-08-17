@@ -56,7 +56,7 @@ namespace Rendering
         void CreatePixelBufferObjects(const Texture* aTexture);
         void InitRemainData() noexcept;
         NODISCARD UInt CreateTextureStructure();
-        void CreateMipmapLevelStructures(const Texture* aTexture, UInt previousBind);
+        void CreateMipmapLevelStructures(const Texture* aTexture, UInt previousBind) noexcept;
         void TextureImage(int level) noexcept;
 
     private:
@@ -72,11 +72,11 @@ namespace Rendering
         DataType dataType;
         UInt previousTexture;
         UInt numLevels;
-        std::array<UInt, TextureMaximumMipmapLevels> numLevelBytes;
-        std::array<std::array<UInt, TextureMaximumMipmapLevels>, textureDimension> dimension;
-        std::array<std::array<UInt, TextureMaximumMipmapLevels>, textureFace> buffer;
-        std::array<std::array<void*, TextureMaximumMipmapLevels>, textureFace> lockedMemory;
-        std::array<std::array<bool, TextureMaximumMipmapLevels>, textureFace> writeLock;
+        std::array<UInt, textureMaximumMipmapLevels> numLevelBytes;
+        std::array<std::array<UInt, textureMaximumMipmapLevels>, textureDimension> dimension;
+        std::array<std::array<UInt, textureMaximumMipmapLevels>, textureFace> buffer;
+        std::array<std::array<void*, textureMaximumMipmapLevels>, textureFace> lockedMemory;
+        std::array<std::array<bool, textureMaximumMipmapLevels>, textureFace> writeLock;
         bool isCompressed;
     };
 }

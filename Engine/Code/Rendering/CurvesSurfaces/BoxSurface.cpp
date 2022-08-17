@@ -23,7 +23,7 @@
 #include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineVolumeDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, BoxSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BoxSurface);
@@ -82,8 +82,7 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
 
     const auto numVertices = numRows * numCols;
     const auto vstride = vformat->GetStride();
-    auto vbuffer = VertexBuffer::Create(numVertices, vstride);
-    VertexBufferAccessor vba{ vformat, vbuffer };
+    auto vbuffer = VertexBuffer::Create(*vformat, vstride);
 
     std::array<float, 3> param{};
     param.at(permute.at(2)) = faceValue;
@@ -97,31 +96,18 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
         for (auto col = 0; col < numCols; ++col, ++i)
         {
             param.at(permute.at(0)) = col * colFactor;
-            vbuffer->SetPosition(vba, i, APoint{ volume->GetPosition(param) });
-
-            if (vba.HasNormal())
-            {
-                const auto cDer = volume->GetDerivative(permute.at(0), param);
-                const auto rDer = volume->GetDerivative(permute.at(1), param);
-                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
-            }
 
             constexpr auto numUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
             for (auto unit = 0; unit < numUnits; ++unit)
             {
                 const Mathematics::Vector2F tcoord{ param.at(permute.at(0)), param.at(permute.at(1)) };
-                if (vba.HasTextureCoord(unit))
-                {
-                    RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "纹理坐标必须是 2D\n");
-                    vbuffer->SetTextureCoord(vba, i, tcoord, unit);
-                }
             }
         }
     }
 
     const auto numTriangles = 2 * (numRows - 1) * (numCols - 1);
-    auto ibuffer = IndexBuffer::Create(3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
-    auto spanIterator = ibuffer->GetWriteSpanIterator();
+    auto ibuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 3 * numTriangles, boost::numeric_cast<int>(sizeof(int32_t)));
+    auto spanIterator = ibuffer->GetData();
 
     for (auto row = 0, i = 0; row < numRows - 1; ++row)
     {
@@ -156,11 +142,12 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface::CreateFace(int numRows,
     return std::make_shared<TrianglesMesh>(vformat, vbuffer, ibuffer);
 }
 
-void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, const VertexFormatSharedPtr& vformat, const VertexBufferSharedPtr& vbuffer, bool ccw, float faceValue, const std::array<int, 3>& permute)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26418)
+
+void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, MAYBE_UNUSED const VertexFormatSharedPtr& vformat, MAYBE_UNUSED const VertexBufferSharedPtr& vbuffer, bool ccw, float faceValue, const std::array<int, 3>& permute)
 {
     RENDERING_CLASS_IS_VALID_9;
-
-    VertexBufferAccessor vba{ vformat, vbuffer };
 
     std::array<float, 3> param{};
     param.at(permute.at(2)) = faceValue;
@@ -173,19 +160,11 @@ void Rendering::BoxSurface::UpdateFace(int numRows, int numCols, const VertexFor
         for (auto col = 0; col < numCols; ++col, ++i)
         {
             param.at(permute.at(0)) = col * colFactor;
-
-            vbuffer->SetPosition(vba, i, APoint{ volume->GetPosition(param) });
-
-            if (vba.HasNormal())
-            {
-                const auto cDer = volume->GetDerivative(permute.at(0), param);
-                const auto rDer = volume->GetDerivative(permute.at(1), param);
-
-                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
-            }
         }
     }
 }
+
+#include STSTEM_WARNING_POP
 
 void Rendering::BoxSurface::UpdateSurface()
 {
@@ -312,7 +291,7 @@ void Rendering::BoxSurface::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::BoxSurface::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::BoxSurface::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

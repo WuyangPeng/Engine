@@ -81,6 +81,41 @@ void Rendering::Dx9Renderer::DrawPrimitive(MAYBE_UNUSED const ConstVisualSharedP
     throw std::logic_error("The method or operation is not implemented.");
 }
 
+void Rendering::Dx9Renderer::SetBlendState(MAYBE_UNUSED const BlendStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::Dx9Renderer::SetDepthStencilState(MAYBE_UNUSED const DepthStencilStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::Dx9Renderer::SetRasterizerState(MAYBE_UNUSED const RasterizerStateSharedPtr& state)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::Dx9Renderer::Update(MAYBE_UNUSED const BufferSharedPtr& buffer)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::Dx9Renderer::Update(MAYBE_UNUSED const TextureSharedPtr& texture)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
 #include STSTEM_WARNING_POP
 
 void Rendering::Dx9Renderer::SetViewport(MAYBE_UNUSED const Viewport& viewport)
@@ -179,6 +214,24 @@ void Rendering::Dx9Renderer::Draw(MAYBE_UNUSED const uint8_t* screenBuffer, MAYB
     RENDERING_CLASS_IS_VALID_9;
 
     throw std::logic_error("The method or operation is not implemented.");
+}
+
+bool Rendering::Dx9Renderer::HasDepthRange01() const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+std::string Rendering::Dx9Renderer::GetShaderName(MAYBE_UNUSED const std::string& name) const
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Rendering::Dx9Renderer::DisplayColorBuffer(MAYBE_UNUSED int syncInterval) noexcept
+{
 }
 
 void Rendering::Dx9Renderer::Draw(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED const Colour& color, MAYBE_UNUSED const std::string& message)

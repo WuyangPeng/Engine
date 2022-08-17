@@ -18,14 +18,15 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/PlatformTexture2D.h"
 #include "Rendering/Renderers/Renderer.h"
-#include "Rendering/Resources/RenderTarget.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
 
-Rendering::OpenGLRenderTargetDataImpl::OpenGLRenderTargetDataImpl(Renderer* renderer, const RenderTarget* renderTarget)
+Rendering::OpenGLRenderTargetDataImpl::OpenGLRenderTargetDataImpl(Renderer* renderer, const DrawTarget* renderTarget)
     : numTargets{ renderTarget != nullptr ? renderTarget->GetNumTargets() : 0 },
       width{ renderTarget != nullptr ? renderTarget->GetWidth() : 0 },
       height{ renderTarget != nullptr ? renderTarget->GetHeight() : 0 },
-      format{ renderTarget != nullptr ? renderTarget->GetFormat() : TextureFormat::None },
-      hasMipmaps{ renderTarget != nullptr ? renderTarget->HasMipmaps() : false },
+      format{ renderTarget != nullptr ? renderTarget->GetRenderTargetFormat() : DataFormatType::Unknown },
+      hasMipmaps{ renderTarget != nullptr ? renderTarget->HasRenderTargetMipmaps() : false },
       hasDepthStencil{ renderTarget != nullptr ? renderTarget->HasDepthStencil() : false },
       colorTextures(numTargets),
       depthStencilTexture{ 0 },
@@ -47,7 +48,7 @@ void Rendering::OpenGLRenderTargetDataImpl::CreateFramebufferObject() noexcept
     // 创建帧缓冲区对象。
 }
 
-System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Renderer* renderer, const RenderTarget* aRenderTarget)
+System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Renderer* renderer,const DrawTarget* aRenderTarget)
 {
     const auto previousBind = GetBoundTexture(ShaderFlags::SamplerType::Sampler2D);
 
@@ -58,7 +59,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Rend
 
     for (auto index = 0; index < numTargets; ++index)
     {
-        auto colorTexture = aRenderTarget->GetColorTexture(index);
+        auto colorTexture = aRenderTarget->GetRenderTargetTexture(index);
         RENDERING_ASSERTION_1(!renderer->InTexture2DMap(colorTexture), "纹理不应该存在。\n");
 
         auto platformColorTexture = std::make_shared<PlatformTexture2D>(renderer, colorTexture.get());
@@ -74,7 +75,7 @@ System::OpenGLUInt Rendering::OpenGLRenderTargetDataImpl::CreateDrawBuffers(Rend
     return previousBind;
 }
 
-void Rendering::OpenGLRenderTargetDataImpl::CreateDepthStencilTexture(Renderer* renderer, const RenderTarget* aRenderTarget, MAYBE_UNUSED UInt previousBind)
+void Rendering::OpenGLRenderTargetDataImpl::CreateDepthStencilTexture(Renderer* renderer, const DrawTarget* aRenderTarget, MAYBE_UNUSED UInt previousBind)
 {
     if (renderer == nullptr || aRenderTarget == nullptr)
     {

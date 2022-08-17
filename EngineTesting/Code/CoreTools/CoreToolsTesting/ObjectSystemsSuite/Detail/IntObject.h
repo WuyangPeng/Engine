@@ -12,7 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 
 // int值对象，这个类用于演示Object使用int值和int值的数组。
 namespace CoreTools

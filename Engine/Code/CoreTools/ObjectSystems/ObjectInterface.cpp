@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 23:10)
+///	标准：std:c++20
+///	引擎版本：0.8.1.0 (2022/08/07 0:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,13 +19,19 @@
 #include "CoreTools/Helper/MainFunctionMacro.h"
 
 CoreTools::ObjectInterface::ObjectInterface() noexcept
-    : m_UniqueID{ 0 }
+    : uniqueID{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::ObjectInterface::ObjectInterface(MAYBE_UNUSED LoadConstructor value) noexcept
-    : m_UniqueID{ 0 }
+    : uniqueID{ 0 }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+CoreTools::ObjectInterface::ObjectInterface(int64_t uniqueID) noexcept
+    : uniqueID{ uniqueID }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -34,8 +40,6 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectInterface);
 
 CORE_TOOLS_RTTI_BASE_DEFINE(CoreTools, ObjectInterface);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(CoreTools, ObjectInterface);
-
-CORE_TOOLS_MUTEX_EXTERN(CoreTools);
 
 // static
 bool CoreTools::ObjectInterface::RegisterFactory()
@@ -57,44 +61,44 @@ void CoreTools::ObjectInterface::TerminateFactory()
     OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());
 }
 
-uint64_t CoreTools::ObjectInterface::GetUniqueID() const noexcept
+int64_t CoreTools::ObjectInterface::GetUniqueID() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_UniqueID;
+    return uniqueID;
 }
 
-void CoreTools::ObjectInterface::SetUniqueID(uint64_t uniqueID) noexcept
+void CoreTools::ObjectInterface::SetUniqueID(int64_t aUniqueID) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_UniqueID = uniqueID;
+    uniqueID = aUniqueID;
 }
 
 bool CoreTools::ObjectInterface::IsExactly(const Rtti& type) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetCurrentRttiType().IsExactly(type);
+    return GetRttiType().IsExactly(type);
 }
 
 bool CoreTools::ObjectInterface::IsDerived(const Rtti& type) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return GetCurrentRttiType().IsDerived(type);
+    return GetRttiType().IsDerived(type);
 }
 
 bool CoreTools::ObjectInterface::IsExactlyTypeOf(const ObjectInterface* object) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return object != nullptr && GetRttiType().IsExactly(object->GetRttiType());
+    return object != nullptr && IsExactly(object->GetRttiType());
 }
 
 bool CoreTools::ObjectInterface::IsDerivedTypeOf(const ObjectInterface* object) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return object != nullptr && GetRttiType().IsDerived(object->GetRttiType());
+    return object != nullptr && IsDerived(object->GetRttiType());
 }

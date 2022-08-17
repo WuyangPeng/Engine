@@ -132,13 +132,11 @@ int Rendering::Controller::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Controller::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::Controller::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto uniqueID = ParentType::Register(target);
-
-    return uniqueID;
+    return ParentType::Register(target);
 }
 
 void Rendering::Controller::Save(CoreTools::BufferTarget& target) const

@@ -12,6 +12,7 @@
 
 #include "Abuse/AbuseFwd.h"
 #include "AglRenderer/AglRendererFwd.h"
+#include "Base/BaseFwd.h"
 #include "ConsoleGraph/ConsoleGraphFwd.h"
 #include "Controllers/ControllersFwd.h"
 #include "CurvesSurfaces/CurvesSurfacesFwd.h"
@@ -42,6 +43,7 @@
 #include "ShaderFloats/ShaderFloatsFwd.h"
 #include "Shaders/ShadersFwd.h"
 #include "Sorting/SortingFwd.h"
+#include "State/StateFwd.h"
 #include "TIFF/TIFFFwd.h"
 #include "Terrain/TerrainFwd.h"
 #include "TextFonts/TextFontsFwd.h"

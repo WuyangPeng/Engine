@@ -31,6 +31,8 @@ namespace Rendering
     class VertexColor3Effect;
     class VertexColor4Effect;
     class VertexColor4TextureEffect;
+
+    class TextEffect;
 }
 
 #endif  // RENDERING_LOCAL_EFFECTS_FWD_H

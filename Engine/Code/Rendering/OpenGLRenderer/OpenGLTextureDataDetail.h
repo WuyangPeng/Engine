@@ -16,10 +16,10 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Resources/Texture1D.h"
-#include "Rendering/Resources/Texture2D.h"
-#include "Rendering/Resources/Texture3D.h"
-#include "Rendering/Resources/TextureCube.h"
+#include "Rendering/Resources/Textures/Texture1D.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
+#include "Rendering/Resources/Textures/Texture3D.h"
+#include "Rendering/Resources/Textures/TextureCube.h"
 #include "Rendering/Shaders/Flags/ShaderFlags.h"
 
 template <typename Texture>
@@ -35,7 +35,7 @@ Rendering::OpenGLTextureData<Texture>::OpenGLTextureData(const Texture* texture)
       buffer{},
       lockedMemory{},
       writeLock{},
-      isCompressed{ texture->IsCompressed() }
+      isCompressed{ false }
 {
     CreatePixelBufferObjects(texture);
     InitRemainData();
@@ -49,8 +49,6 @@ Rendering::OpenGLTextureData<Texture>::OpenGLTextureData(const Texture* texture)
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>::CreatePixelBufferObjects(const Texture* aTtexture)
 {
-    const auto usage = OpenGLConstant::GetOpenGLBufferUsage(System::EnumCastUnderlying(aTtexture->GetUsage()));
-
     // 创建像素缓冲器的对象来存储纹理数据。
     for (auto level = 0u; level < numLevels; ++level)
     {
@@ -73,7 +71,7 @@ void Rendering::OpenGLTextureData<Texture>::CreatePixelBufferObjects(const Textu
 template <typename Texture>
 void Rendering::OpenGLTextureData<Texture>::InitRemainData() noexcept
 {
-    for (auto level = numLevels; level < TextureMaximumMipmapLevels; ++level)
+    for (auto level = numLevels; level < textureMaximumMipmapLevels; ++level)
     {
         numLevelBytes.at(level) = 0;
 
@@ -103,16 +101,16 @@ System::OpenGLUInt Rendering::OpenGLTextureData<Texture>::CreateTextureStructure
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStructures(const Texture1D* aTexture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture1D>::CreateMipmapLevelStructures(const Texture1D* aTexture, UInt previousBind) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStructures(const Texture2D* aTexture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture2D>::CreateMipmapLevelStructures(const Texture2D* aTexture, UInt previousBind) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStructures(const Texture3D* aTexture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::Texture3D>::CreateMipmapLevelStructures(const Texture3D* aTexture, UInt previousBind) noexcept;
 
 template <>
-RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStructures(const TextureCube* aTexture, UInt previousBind);
+RENDERING_DEFAULT_DECLARE void Rendering::OpenGLTextureData<Rendering::TextureCube>::CreateMipmapLevelStructures(const TextureCube* aTexture, UInt previousBind) noexcept;
 
 #ifdef OPEN_CLASS_INVARIANT
 

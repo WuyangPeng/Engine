@@ -1149,9 +1149,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.h">
       <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.h">
-      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StreamSizeTestingEnum.h">
       <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
     </ClInclude>
@@ -2325,9 +2322,6 @@
       <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.cpp">
-      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.cpp">
       <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.cpp">

@@ -169,7 +169,7 @@ void Rendering::CurveSegment::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::CurveSegment::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::CurveSegment::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

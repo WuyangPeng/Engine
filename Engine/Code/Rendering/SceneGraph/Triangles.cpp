@@ -33,7 +33,6 @@
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessorDetail.h"
 
 using std::vector;
 
@@ -65,11 +64,7 @@ Rendering::TrianglePosition Rendering::Triangles::GetModelTriangle(int index) co
     const auto secondIndex = triangleIndex.GetSecondIndex();
     const auto thirdIndex = triangleIndex.GetThirdIndex();
 
-    VertexBufferAccessor vertexBufferAccessor{ GetConstVertexFormat(), GetConstVertexBuffer() };
-
-    TrianglePosition trianglePosition{ vertexBufferAccessor.GetPosition<APoint>(firstIndex),
-                                       vertexBufferAccessor.GetPosition<APoint>(secondIndex),
-                                       vertexBufferAccessor.GetPosition<APoint>(thirdIndex) };
+    TrianglePosition trianglePosition{ APoint{}, APoint{}, APoint{} };
 
     return trianglePosition;
 }
@@ -98,24 +93,16 @@ Rendering::Triangles::Vector3D Rendering::Triangles::GetPosition(int vertexIndex
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    auto index = GetConstVertexFormat()->GetIndex(VertexFormatFlags::AttributeUsage::Position);
+    auto index = GetConstVertexFormat()->GetIndex(VertexFormatFlags::Semantic::Position);
     if (0 <= index)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-
-        auto positions = GetConstVertexBuffer()->GetReadOnlyData() + GetConstVertexFormat()->GetOffset(index);
+        auto positions = GetConstVertexBuffer()->GetData(GetConstVertexFormat()->GetOffset(index));
         auto stride = GetConstVertexFormat()->GetStride();
         const auto index0 = vertexIndex * stride;
-        auto firstPosition = reinterpret_cast<const float*>(positions + index0);
-        auto secondPosition = firstPosition + 1;
-        auto thirdPosition = secondPosition + 1;
 
-#include STSTEM_WARNING_POP
+        positions += index0;
 
-        return Vector3D{ *firstPosition, *secondPosition, *thirdPosition };
+        return Vector3D{ positions.Increase<float>(), positions.Increase<float>(), positions.Increase<float>() };
     }
     else
     {
@@ -134,64 +121,16 @@ void Rendering::Triangles::UpdateModelSpace(VisualUpdateType type)
         return;
     }
 
-    VertexBufferAccessor vertexBufferAccessor{ *this };
-    if (vertexBufferAccessor.HasNormal())
-    {
-        UpdateModelNormals(vertexBufferAccessor);
-    }
-
-    if (type != VisualUpdateType::Normals)
-    {
-        if (vertexBufferAccessor.HasTangent() || vertexBufferAccessor.HasBinormal())
-        {
-            if (type == VisualUpdateType::UseGeometry)
-            {
-                UpdateModelTangentsUseGeometry(vertexBufferAccessor);
-            }
-            else
-            {
-                UpdateModelTangentsUseTextureCoords(vertexBufferAccessor);
-            }
-        }
-    }
-
     RENDERER_MANAGE_SINGLETON.UpdateAll(GetConstVertexBuffer());
 }
 
 // private
-void Rendering::Triangles::UpdateModelNormals(const VertexBufferAccessor& vertexBufferAccessor)
+void Rendering::Triangles::UpdateModelNormals(MAYBE_UNUSED const VertexBuffer& vertexBufferAccessor) noexcept
 {
-    // 从包含顶点的平面加权平均计算法线。
-    GetVertexBuffer()->ClearModelNormals(vertexBufferAccessor);
-
-    const auto numTriangles = GetNumTriangles();
-    for (auto index = 0; index < numTriangles; ++index)
-    {
-        // 获取三角形的顶点索引。
-        const auto triangleIndex = GetTriangle(index);
-
-        // 获取顶点位置
-        const auto position0 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetFirstIndex());
-        const auto position1 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetSecondIndex());
-        const auto position2 = vertexBufferAccessor.GetPosition<APoint>(triangleIndex.GetThirdIndex());
-
-        // 计算三角形法线。这个法线的长度为法线的加权和。
-        const auto triangleEdge1 = position1 - position0;
-        const auto triangleEdge2 = position2 - position0;
-        const auto triangleNormal = Cross(triangleEdge1, triangleEdge2);
-
-        // 添加三角形法线到顶点法线和。
-        GetVertexBuffer()->AddTriangleNormal(vertexBufferAccessor, triangleIndex.GetFirstIndex(), triangleNormal);
-        GetVertexBuffer()->AddTriangleNormal(vertexBufferAccessor, triangleIndex.GetSecondIndex(), triangleNormal);
-        GetVertexBuffer()->AddTriangleNormal(vertexBufferAccessor, triangleIndex.GetThirdIndex(), triangleNormal);
-    }
-
-    // 顶点法线必须是单位长度的向量。
-    GetVertexBuffer()->NormalizeModelNormals(vertexBufferAccessor);
 }
 
 // private
-void Rendering::Triangles::UpdateModelTangentsUseGeometry(const VertexBufferAccessor& vertexBufferAccessor)
+void Rendering::Triangles::UpdateModelTangentsUseGeometry(const VertexBuffer& vertexBufferAccessor)
 {
     // 计算矩阵的法线的导数。
     NormalDerivatives normalDerivatives{ vertexBufferAccessor };
@@ -209,40 +148,11 @@ void Rendering::Triangles::UpdateModelTangentsUseGeometry(const VertexBufferAcce
     normalDerivatives.ComputeNormalDerivativesMatrix();
 
     normalDerivatives.ComputeTangentAndBinormal();
-
-    const auto numVertices = vertexBufferAccessor.GetNumVertices();
-    for (auto index = 0; index < numVertices; ++index)
-    {
-        if (vertexBufferAccessor.HasTangent())
-        {
-            const auto tangent = normalDerivatives.GetTangent(index);
-            GetVertexBuffer()->SetTriangleTangent(vertexBufferAccessor, index, tangent);
-        }
-
-        if (vertexBufferAccessor.HasBinormal())
-        {
-            const auto binormal = normalDerivatives.GetBinormal(index);
-            GetVertexBuffer()->SetTriangleBinormal(vertexBufferAccessor, index, binormal);
-        }
-    }
 }
 
 // private
-void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBufferAccessor& vertexBufferAccessor)
+void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(MAYBE_UNUSED const VertexBuffer& vertexBufferAccessor)
 {
-    // 每个顶点可以多次访问,所以只在第一次访问时计算切线空间。
-    // 使用零向量作为标志不计算切向量。
-    const auto hasTangent = vertexBufferAccessor.HasTangent();
-
-    if (hasTangent)
-    {
-        GetVertexBuffer()->ClearTangent(vertexBufferAccessor);
-    }
-    else
-    {
-        GetVertexBuffer()->ClearBinormal(vertexBufferAccessor);
-    }
-
     const auto numTriangles = GetNumTriangles();
     for (auto index = 0; index < numTriangles; ++index)
     {
@@ -253,15 +163,6 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBuffe
         vector<AVector> localNormal(3, Mathematics::AVectorF::GetZero());
         vector<AVector> localTangent(3, Mathematics::AVectorF::GetZero());
         vector<Vector2D> localTextureCoord(3);
-
-        for (auto current = 0; current < 3; ++current)
-        {
-            const auto currentTriangleIndex = triangleIndex[current];
-            localPosition.at(current) = vertexBufferAccessor.GetPosition<APoint>(currentTriangleIndex);
-            localNormal.at(current) = vertexBufferAccessor.GetNormal<AVector>(currentTriangleIndex);
-            localTangent.at(current) = (hasTangent ? vertexBufferAccessor.GetTangent<AVector>(currentTriangleIndex) : vertexBufferAccessor.GetBinormal<AVector>(currentTriangleIndex));
-            localTextureCoord.at(current) = vertexBufferAccessor.GetTextureCoord<Vector2D>(0, currentTriangleIndex);
-        }
 
         for (auto current = 0; current < 3; ++current)
         {
@@ -292,19 +193,6 @@ void Rendering::Triangles::UpdateModelTangentsUseTextureCoords(const VertexBuffe
             const auto bitangentVector = UnitCross(normalVector, tangentVector);
 
             const auto currentTriangleIndex = triangleIndex[current];
-            if (vertexBufferAccessor.HasTangent())
-            {
-                localTangent.at(current) = tangentVector;
-
-                if (vertexBufferAccessor.HasBinormal())
-                {
-                    GetVertexBuffer()->SetTriangleTangent(vertexBufferAccessor, currentTriangleIndex, bitangentVector);
-                }
-            }
-            else
-            {
-                GetVertexBuffer()->SetTriangleBinormal(vertexBufferAccessor, currentTriangleIndex, tangentVector);
-            }
         }
     }
 }
@@ -373,9 +261,6 @@ Rendering::PickRecordContainer Rendering::Triangles::ExecuteRecursive(const APoi
 
         const Line3 line{ modelOrigin, modelDirection };
 
-        // 获取位置数据。
-        VertexBufferAccessor vertexBufferAccessor{ GetConstVertexFormat(), GetConstVertexBuffer() };
-
         // 计算模型空间三角形的相交。
         const auto numTriangles = GetNumTriangles();
         for (auto i = 0; i < numTriangles; ++i)
@@ -384,10 +269,7 @@ Rendering::PickRecordContainer Rendering::Triangles::ExecuteRecursive(const APoi
             {
                 const auto triangleIndex = GetTriangle(i);
 
-                auto vertex0 = vertexBufferAccessor.GetPosition<Vector3D>(triangleIndex.GetFirstIndex());
-                auto vertex1 = vertexBufferAccessor.GetPosition<Vector3D>(triangleIndex.GetSecondIndex());
-                auto vertex2 = vertexBufferAccessor.GetPosition<Vector3D>(triangleIndex.GetThirdIndex());
-                const Triangle3 triangle{ vertex0, vertex1, vertex2 };
+                const Triangle3 triangle{ Vector3D{}, Vector3D{}, Vector3D{} };
 
                 Mathematics::StaticFindIntersectorLine3Triangle3<float> intersector{ line, triangle };
 

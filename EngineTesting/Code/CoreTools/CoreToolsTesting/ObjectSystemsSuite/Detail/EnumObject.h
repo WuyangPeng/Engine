@@ -13,7 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "EnumObjectEnum.h"
-#include "NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 
 // enum值对象，这个类用于演示Object使用enum值和enum值的数组。
 namespace CoreTools

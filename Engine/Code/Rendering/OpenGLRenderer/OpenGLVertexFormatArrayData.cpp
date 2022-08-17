@@ -14,23 +14,23 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
 template <>
-void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 }
 
-void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Enable(MAYBE_UNUSED int stride) noexcept
+void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Enable(MAYBE_UNUSED int stride) noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 }
 
 template <>
-void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Disable() noexcept
+void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::TextureCoord, Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 }
 
-void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::AttributeUsage::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Disable() noexcept
+void Rendering::OpenGLVertexFormatArrayData<Rendering::VertexFormatFlags::Semantic::Color, Rendering::VertexFormatFlags::MaximumNumber::ColorUnits>::Disable() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     static_assert(System::EnumCastUnderlying(Rendering::VertexFormatFlags::MaximumNumber::ColorUnits) <= 2);

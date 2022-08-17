@@ -13,7 +13,7 @@
 #include "Rendering/OpenGLRenderer/OpenGLTextureDataDetail.h"
 #include "Rendering/OpenGLRenderer/OpenGLTextureDataManageDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/LoadTexture.h"
+#include "Rendering/Resources/Textures/LoadTexture.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLTextureDataManageTesting)
 

@@ -15,7 +15,7 @@
 #include "RenderersFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/Resources/VertexFormat.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(VertexFormatManagementImpl);
 

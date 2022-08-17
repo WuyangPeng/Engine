@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/RenderingDll.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 
 namespace Rendering
@@ -59,10 +59,14 @@ namespace Rendering
 
     private:
         void Init();
-        void TransformData(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const;
+        void TransformData(const VertexBuffer& vertexBufferAccessor, VertexBuffer& vertexBuffer) const noexcept;
         void ReverseTriangleOrder(int numTriangles, int* indices) const noexcept;
-        void CreatePlatonicNormals(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const;
-        void CreatePlatonicTextures(const VertexBufferAccessor& vertexBufferAccessor, VertexBuffer& vertexBuffer) const;
+        void CreatePlatonicNormals(const VertexBuffer& vertexBufferAccessor, VertexBuffer& vertexBuffer) const noexcept;
+        void CreatePlatonicTextures(const VertexBuffer& vertexBufferAccessor, VertexBuffer& vertexBuffer) const noexcept;
+
+        static void InitIndexBuffer(IndexBuffer& indexBuffer, const std::vector<int>& indices);
+        static void InitIndexBufferInRectangle(IndexBuffer& indexBuffer, int index, int rectangleIndex0, int rectangleIndex1, int rectangleIndex2, int rectangleIndex3);
+        static void InitIndexBufferInDisk(IndexBuffer& indexBuffer, int radialSamplesMinus1, int shellSamplesMinus1);
 
     private:
         static constexpr auto maxUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);

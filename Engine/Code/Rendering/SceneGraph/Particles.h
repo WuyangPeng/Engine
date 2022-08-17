@@ -69,7 +69,9 @@ namespace Rendering
 
     private:
         void InitIndexBuffer(int indexSize);
-        void InitTextureCoord();
+        void InitTextureCoord() noexcept;
+
+        void InitIndexBufferInParticles(IndexBuffer& indexBuffer);
 
     private:
         PackageType impl;

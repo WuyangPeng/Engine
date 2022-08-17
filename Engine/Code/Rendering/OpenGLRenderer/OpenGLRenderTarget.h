@@ -26,7 +26,7 @@ namespace Rendering
         using ParentType = PlatformRenderTargetImpl;
 
     public:
-        OpenGLRenderTarget(Renderer* renderer, const RenderTarget* renderTarget);
+        OpenGLRenderTarget(Renderer* renderer, const DrawTarget* renderTarget);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

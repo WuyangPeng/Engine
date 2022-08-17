@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 17:20)
+///	标准：std:c++20
+///	引擎版本：0.8.1.0 (2022/08/07 0:56)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
@@ -14,9 +14,7 @@
 
 #include "ObjectInterface.h"
 #include "ObjectName.h"
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/NameMacro.h"
-#include "CoreTools/Helper/SharedPtrMacro.h"
 
 #include <string>
 #include <vector>
@@ -35,12 +33,6 @@ namespace CoreTools
     public:
         explicit Object(const std::string& name);
 
-        ~Object() noexcept = 0;
-        Object(const Object& rhs) = default;
-        Object& operator=(const Object& rhs) = default;
-        Object(Object&& rhs) noexcept = default;
-        Object& operator=(Object&& rhs) noexcept = default;
-
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(Object);
@@ -51,12 +43,16 @@ namespace CoreTools
         NODISCARD std::string GetName() const;
         void SetName(const std::string& name);
 
+        NODISCARD virtual bool IsNullObject() const noexcept;
+
+        NODISCARD static const ObjectSharedPtr& GetNullObject();
+
     private:
         NODISCARD ObjectSharedPtr ObjectSharedFromThis();
         NODISCARD ConstObjectSharedPtr ObjectSharedFromThis() const;
 
     private:
-        ObjectName m_Name;
+        ObjectName objectName;
     };
 
 #include STSTEM_WARNING_PUSH

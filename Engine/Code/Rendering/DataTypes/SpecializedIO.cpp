@@ -179,3 +179,33 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::IntColour& datum)
     const auto value = datum.GetPoint();
     WriteContainer(value);
 }
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::MemberLayout& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum = ReadAggregate<Rendering::MemberLayout>();
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::MemberLayout& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    Write(datum.GetName());
+    Write<int32_t>(datum.GetOffset());
+    Write<int32_t>(datum.GetNumElements());
+}
+
+template <>
+Rendering::MemberLayout CoreTools::BufferSource::ReadAggregate()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    std::string name = ReadString();
+    auto offset = Read<int32_t>();
+    auto numElements = Read<int32_t>();
+
+    return Rendering::MemberLayout{ name, offset, numElements };
+}

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/24 17:22)
+///	标准：std:c++20
+///	引擎版本：0.8.1.0 (2022/08/07 0:00)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
@@ -34,6 +34,7 @@ namespace CoreTools
 
     public:
         ObjectInterface() noexcept;
+        explicit ObjectInterface(int64_t uniqueID) noexcept;
         virtual ~ObjectInterface() noexcept = default;
         ObjectInterface(const ObjectInterface& rhs) noexcept = default;
         ObjectInterface& operator=(const ObjectInterface& rhs) noexcept = default;
@@ -58,10 +59,10 @@ namespace CoreTools
         static void TerminateFactory();
         NODISCARD static ObjectInterfaceSharedPtr Factory(CoreTools::BufferSource& source);
 
-        NODISCARD uint64_t GetUniqueID() const noexcept;
-        void SetUniqueID(uint64_t uniqueID) noexcept;
+        NODISCARD int64_t GetUniqueID() const noexcept;
+        void SetUniqueID(int64_t aUniqueID) noexcept;
 
-        NODISCARD virtual uint64_t Register(CoreTools::ObjectRegister& target) const = 0;
+        NODISCARD virtual int64_t Register(CoreTools::ObjectRegister& target) const = 0;
         NODISCARD virtual int GetStreamingSize() const = 0;
         virtual void Save(CoreTools::BufferTarget& target) const = 0;
 
@@ -81,7 +82,7 @@ namespace CoreTools
         explicit ObjectInterface(MAYBE_UNUSED LoadConstructor value) noexcept;
 
     private:
-        uint64_t m_UniqueID;
+        int64_t uniqueID;
     };
 
     using ObjectInterfaceSharedPtr = ObjectInterface::ObjectInterfaceSharedPtr;

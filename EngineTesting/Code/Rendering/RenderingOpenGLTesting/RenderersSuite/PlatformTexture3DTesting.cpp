@@ -13,7 +13,7 @@
 #include "Rendering/Renderers/PlatformTexture3D.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/LoadTexture.h"
+#include "Rendering/Resources/Textures/LoadTexture.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, PlatformTexture3DTesting)
 

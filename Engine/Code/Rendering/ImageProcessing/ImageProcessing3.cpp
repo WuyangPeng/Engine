@@ -105,43 +105,11 @@ int Rendering::ImageProcessing3::Map3Dto1D(int x, int y, int z) noexcept
     return u + GetNumCols() * v;
 }
 
-Rendering::Texture2DSharedPtr Rendering::ImageProcessing3::CreateTiledImage(const std::vector<Mathematics::Float4>& imageData)
+Rendering::Texture2DSharedPtr Rendering::ImageProcessing3::CreateTiledImage(MAYBE_UNUSED const std::vector<Mathematics::Float4>& imageData)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto tiled = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), GetNumCols(), GetNumRows(), 1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto textureData = reinterpret_cast<Mathematics::Float4*>(tiled->GetTextureData(0));
-
-#include STSTEM_WARNING_POP
-
-    if (textureData == nullptr)
-    {
-        return tiled;
-    }
-
-    for (auto v = 0; v < GetNumRows(); ++v)
-    {
-        for (auto u = 0; u < GetNumCols(); ++u)
-        {
-            auto x = 0;
-            auto y = 0;
-            auto z = 0;
-            Map2Dto3D(u, v, x, y, z);
-
-            const auto index = x + bound0 * (y + bound1 * z);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-            textureData[u + GetNumCols() * v] = imageData.at(index);
-
-#include STSTEM_WARNING_POP
-        }
-    }
+    auto tiled = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::A32B32G32R32F), GetNumCols(), GetNumRows(), 1);
 
     return tiled;
 }
@@ -170,96 +138,6 @@ void Rendering::ImageProcessing3::CreateBoundaryDirichletEffect(VisualEffectShar
     }
 
     CreateEffect(pshader, effect, instance);
-
-    auto maskTexture = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), GetNumCols(), GetNumRows(), 1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto mask = reinterpret_cast<Mathematics::Float4*>(maskTexture->GetTextureData(0));
-
-#include STSTEM_WARNING_POP
-
-    const Mathematics::Float4 one{ 1.0f, 1.0f, 1.0f, 1.0f };
-    const Mathematics::Float4 zero{ 0.0f, 0.0f, 0.0f, 0.0f };
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto y = 1; y < bound1M1; ++y)
-        {
-            for (auto x = 1; x < bound0M1; ++x)
-            {
-                mask[Map3Dto1D(x, y, z)] = one;
-            }
-        }
-    }
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto y = 1; y < bound1M1; ++y)
-        {
-            mask[Map3Dto1D(0, y, z)] = zero;
-            mask[Map3Dto1D(bound0M1, y, z)] = zero;
-        }
-    }
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto x = 1; x < bound0M1; ++x)
-        {
-            mask[Map3Dto1D(x, 0, z)] = zero;
-            mask[Map3Dto1D(x, bound1M1, z)] = zero;
-        }
-    }
-
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        for (auto x = 1; x < bound0M1; ++x)
-        {
-            mask[Map3Dto1D(x, y, 0)] = zero;
-            mask[Map3Dto1D(x, y, bound2M1)] = zero;
-        }
-    }
-
-    for (auto x = 1; x < bound0M1; ++x)
-    {
-        mask[Map3Dto1D(x, 0, 0)] = zero;
-        mask[Map3Dto1D(x, 0, bound2M1)] = zero;
-        mask[Map3Dto1D(x, bound1M1, 0)] = zero;
-        mask[Map3Dto1D(x, bound1M1, bound2M1)] = zero;
-    }
-
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        mask[Map3Dto1D(0, y, 0)] = zero;
-        mask[Map3Dto1D(0, y, bound2M1)] = zero;
-        mask[Map3Dto1D(bound0M1, y, 0)] = zero;
-        mask[Map3Dto1D(bound0M1, y, bound2M1)] = zero;
-    }
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        mask[Map3Dto1D(0, 0, z)] = zero;
-        mask[Map3Dto1D(0, bound1M1, z)] = zero;
-        mask[Map3Dto1D(bound0M1, 0, z)] = zero;
-        mask[Map3Dto1D(bound0M1, bound1M1, z)] = zero;
-    }
-
-    mask[Map3Dto1D(0, 0, 0)] = zero;
-    mask[Map3Dto1D(bound0M1, 0, 0)] = zero;
-    mask[Map3Dto1D(0, bound1M1, 0)] = zero;
-    mask[Map3Dto1D(bound0M1, bound1M1, 0)] = zero;
-    mask[Map3Dto1D(0, 0, bound2M1)] = zero;
-    mask[Map3Dto1D(bound0M1, 0, bound2M1)] = zero;
-    mask[Map3Dto1D(0, bound1M1, bound2M1)] = zero;
-    mask[Map3Dto1D(bound0M1, bound1M1, bound2M1)] = zero;
-
-#include STSTEM_WARNING_POP
-
-    instance->SetPixelTexture(0, "MaskSampler", maskTexture);
 }
 
 void Rendering::ImageProcessing3::CreateBoundaryNeumannEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance)
@@ -286,121 +164,6 @@ void Rendering::ImageProcessing3::CreateBoundaryNeumannEffect(VisualEffectShared
     }
 
     CreateEffect(pshader, effect, instance);
-
-    auto offsetTexture = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), GetNumCols(), GetNumRows(), 1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto offset = reinterpret_cast<Mathematics::Float4*>(offsetTexture->GetTextureData(0));
-
-#include STSTEM_WARNING_POP
-
-    const Mathematics::Float4 zero(0.0f, 0.0f, 0.0f, 0.0f);
-    const Mathematics::Float4 x0FaceOffset{ +GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 x1FaceOffset{ -GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 y0FaceOffset{ 0.0f, +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 y1FaceOffset{ 0.0f, -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 z0FaceOffset{ +bound0 * GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 z1FaceOffset{ -bound0 * GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 x00EdgeOffset{ +bound0 * GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 x01EdgeOffset{ -bound0 * GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 x10EdgeOffset{ +bound0 * GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 x11EdgeOffset{ -bound0 * GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 y00EdgeOffset{ (+bound0 + 1) * GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 y01EdgeOffset{ (-bound0 + 1) * GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 y10EdgeOffset{ (+bound0 - 1) * GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 y11EdgeOffset{ (-bound0 - 1) * GetColSpacing(), 0.0f, 0.0f, 0.0f };
-    const Mathematics::Float4 z00EdgeOffset{ +GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 z01EdgeOffset{ +GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 z10EdgeOffset{ -GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 z11EdgeOffset{ -GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c000Offset{ (+bound0 + 1) * GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c100Offset{ (+bound0 - 1) * GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c010Offset{ (+bound0 + 1) * GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c110Offset{ (+bound0 - 1) * GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c001Offset{ (-bound0 + 1) * GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c101Offset{ (-bound0 - 1) * GetColSpacing(), +GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c011Offset{ (-bound0 + 1) * GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-    const Mathematics::Float4 c111Offset{ (-bound0 - 1) * GetColSpacing(), -GetRowSpacing(), 0.0f, 0.0f };
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto y = 1; y < bound1M1; ++y)
-        {
-            for (auto x = 1; x < bound0M1; ++x)
-            {
-                offset[Map3Dto1D(x, y, z)] = zero;
-            }
-        }
-    }
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto y = 1; y < bound1M1; ++y)
-        {
-            offset[Map3Dto1D(0, y, z)] = x0FaceOffset;
-            offset[Map3Dto1D(bound0M1, y, z)] = x1FaceOffset;
-        }
-    }
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto x = 1; x < bound0M1; ++x)
-        {
-            offset[Map3Dto1D(x, 0, z)] = y0FaceOffset;
-            offset[Map3Dto1D(x, bound1M1, z)] = y1FaceOffset;
-        }
-    }
-
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        for (auto x = 1; x < bound0M1; ++x)
-        {
-            offset[Map3Dto1D(x, y, 0)] = z0FaceOffset;
-            offset[Map3Dto1D(x, y, bound2M1)] = z1FaceOffset;
-        }
-    }
-
-    for (auto x = 1; x < bound0M1; ++x)
-    {
-        offset[Map3Dto1D(x, 0, 0)] = x00EdgeOffset;
-        offset[Map3Dto1D(x, 0, bound2M1)] = x01EdgeOffset;
-        offset[Map3Dto1D(x, bound1M1, 0)] = x10EdgeOffset;
-        offset[Map3Dto1D(x, bound1M1, bound2M1)] = x11EdgeOffset;
-    }
-
-    for (auto y = 1; y < bound1M1; ++y)
-    {
-        offset[Map3Dto1D(0, y, 0)] = y00EdgeOffset;
-        offset[Map3Dto1D(0, y, bound2M1)] = y01EdgeOffset;
-        offset[Map3Dto1D(bound0M1, y, 0)] = y10EdgeOffset;
-        offset[Map3Dto1D(bound0M1, y, bound2M1)] = y11EdgeOffset;
-    }
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        offset[Map3Dto1D(0, 0, z)] = z00EdgeOffset;
-        offset[Map3Dto1D(0, bound1M1, z)] = z01EdgeOffset;
-        offset[Map3Dto1D(bound0M1, 0, z)] = z10EdgeOffset;
-        offset[Map3Dto1D(bound0M1, bound1M1, z)] = z11EdgeOffset;
-    }
-
-    offset[Map3Dto1D(0, 0, 0)] = c000Offset;
-    offset[Map3Dto1D(bound0M1, 0, 0)] = c100Offset;
-    offset[Map3Dto1D(0, bound1M1, 0)] = c010Offset;
-    offset[Map3Dto1D(bound0M1, bound1M1, 0)] = c110Offset;
-    offset[Map3Dto1D(0, 0, bound2M1)] = c001Offset;
-    offset[Map3Dto1D(bound0M1, 0, bound2M1)] = c101Offset;
-    offset[Map3Dto1D(0, bound1M1, bound2M1)] = c011Offset;
-    offset[Map3Dto1D(bound0M1, bound1M1, bound2M1)] = c111Offset;
-
-#include STSTEM_WARNING_POP
-
-    instance->SetPixelTexture(0, "OffsetSampler", offsetTexture);
 }
 
 void Rendering::ImageProcessing3::CreateDrawEffect(VisualEffectSharedPtr& effect, VisualEffectInstanceSharedPtr& instance, const Mathematics::Float4& boundaryColor)
@@ -441,35 +204,6 @@ void Rendering::ImageProcessing3::CreateDrawEffect(VisualEffectSharedPtr& effect
     (*boundaryColorConstant)[2] = boundaryColor[2];
     (*boundaryColorConstant)[3] = boundaryColor[3];
     instance->SetPixelConstant(0, "BoundaryColor", boundaryColorConstant);
-
-    auto maskTexture = std::make_shared<Texture2D>(System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), GetNumCols(), GetNumRows(), 1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto mask = reinterpret_cast<Mathematics::Float4*>(maskTexture->GetTextureData(0));
-
-#include STSTEM_WARNING_POP
-
-    const Mathematics::Float4 one{ 1.0f, 1.0f, 1.0f, 1.0f };
-
-    for (auto z = 1; z < bound2M1; ++z)
-    {
-        for (auto y = 1; y < bound1M1; ++y)
-        {
-            for (auto x = 1; x < bound0M1; ++x)
-            {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-                mask[Map3Dto1D(x, y, z)] = one;
-
-#include STSTEM_WARNING_POP
-            }
-        }
-    }
-
-    instance->SetPixelTexture(0, "MaskSampler", maskTexture);
 }
 
 std::array<int, 2> Rendering::ImageProcessing3::allDirichletPTextureUnits{ 0, 1 };

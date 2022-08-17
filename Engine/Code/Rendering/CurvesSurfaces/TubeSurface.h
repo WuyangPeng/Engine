@@ -53,8 +53,8 @@ namespace Rendering
         NODISCARD int GetNumMedialSamples() const noexcept;
         NODISCARD int GetNumSliceSamples() const noexcept;
 
-        NODISCARD std::vector<Mathematics::Vector3F> GetTMinSlice();
-        NODISCARD std::vector<Mathematics::Vector3F> GetTMaxSlice();
+        NODISCARD std::vector<Mathematics::Vector3F> GetTMinSlice() noexcept;
+        NODISCARD std::vector<Mathematics::Vector3F> GetTMaxSlice() noexcept;
 
         void UpdateSurface();
 
@@ -62,7 +62,7 @@ namespace Rendering
         NODISCARD int Index(int s, int m) noexcept;
         void ComputeSinCos();
         void ComputeVertices();
-        void ComputeNormals();
+        void ComputeNormals() noexcept;
         void ComputeUVs(const Mathematics::Float2& tcoordMin, const Mathematics::Float2& tcoordMax);
         void ComputeIndices(bool insideView);
 

@@ -34,7 +34,7 @@ bool Rendering::RenderTargetManagementImpl::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::RenderTargetManagementImpl::Bind(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RenderTargetManagementImpl::Bind(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -45,14 +45,14 @@ void Rendering::RenderTargetManagementImpl::Bind(const ConstRenderTargetSharedPt
     }
 }
 
-void Rendering::RenderTargetManagementImpl::Unbind(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RenderTargetManagementImpl::Unbind(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
     renderTargets.erase(renderTarget);
 }
 
-void Rendering::RenderTargetManagementImpl::Enable(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RenderTargetManagementImpl::Enable(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -71,7 +71,7 @@ void Rendering::RenderTargetManagementImpl::Enable(const ConstRenderTargetShared
     platformRenderTarget->Enable(renderer.lock().get());
 }
 
-void Rendering::RenderTargetManagementImpl::Disable(const ConstRenderTargetSharedPtr& renderTarget)
+void Rendering::RenderTargetManagementImpl::Disable(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -85,7 +85,7 @@ void Rendering::RenderTargetManagementImpl::Disable(const ConstRenderTargetShare
     }
 }
 
-Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagementImpl::ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagementImpl::ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -101,7 +101,7 @@ Rendering::ConstTexture2DSharedPtr Rendering::RenderTargetManagementImpl::ReadCo
     }
 }
 
-Rendering::RenderTargetManagementImpl::PlatformRenderTargetSharedPtr Rendering::RenderTargetManagementImpl::GetResource(const ConstRenderTargetSharedPtr& renderTarget)
+Rendering::RenderTargetManagementImpl::PlatformRenderTargetSharedPtr Rendering::RenderTargetManagementImpl::GetResource(const ConstDrawTargetSharedPtr& renderTarget)
 {
     RENDERING_CLASS_IS_VALID_1;
 

@@ -8,8 +8,7 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/18 15:39)
 
 #include "BufferTargetTesting.h"
-#include "Detail/BufferTargetTestingEnum.h"
-#include "Detail/NullObject.h"
+#include "Detail/BufferTargetTestingEnum.h" 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"

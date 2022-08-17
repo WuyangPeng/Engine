@@ -10,23 +10,56 @@
 #ifndef RENDERING_RENDERING_RESOURCES_FWD_H
 #define RENDERING_RENDERING_RESOURCES_FWD_H
 
+#include "Rendering/RenderingDll.h"
+
 namespace Rendering
 {
+    class DataFormat;
+    class Resource;
     class Buffer;
+    class MemberLayout;
+    class ConstantBuffer;
+    class IndirectArgumentsBuffer;
+    class RawBuffer;
+    class StructuredBuffer;
+    class TextureBuffer;
+    class TypedBuffer;
     class IndexBuffer;
+    class VertexFormatAttribute;
+    class VertexFormat;
     class VertexBuffer;
+
+    enum class DataFormatType;
+    enum class ChannelType;
+    enum class UsageType;
+    enum class CopyType;
+    enum class IndexFormatType : uint32_t;
+    enum class CounterType;
+    enum class CubeFaceType;
+
+    namespace VertexFormatFlags
+    {
+        enum class MaximumNumber;
+        enum class Semantic;
+    }
+
+    class SubResource;
     class Texture;
+    class TextureSingle;
     class Texture1D;
     class Texture2D;
+    class TextureDepthStencil;
+    class TextureRenderTarget;
     class Texture3D;
+    class TextureArray;
+    class Texture1DArray;
+    class Texture2DArray;
     class TextureCube;
+    class TextureCubeArray;
+    class DrawTarget;
+
     class LoadTexture;
     class SaveTexture;
-    class RenderTarget;
-    class VertexFormatType;
-    class VertexFormatElement;
-    class VertexFormat;
-    class VertexBufferAccessor;
 
     enum class BufferUsage;
     enum class BufferLocking;

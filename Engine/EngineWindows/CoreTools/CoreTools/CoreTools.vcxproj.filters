@@ -2949,6 +2949,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\HashCombine.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\NullObject.h">
+      <Filter>ObjectSystems 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -4330,6 +4333,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringUtility.cpp">
       <Filter>CharacterString 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\NullObject.cpp">
+      <Filter>ObjectSystems 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

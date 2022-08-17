@@ -12,7 +12,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Rendering/OpenGLRenderer/OpenGLTextureDataDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/LoadTexture.h"
+#include "Rendering/Resources/Textures/LoadTexture.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, OpenGLTextureDataTesting)
 

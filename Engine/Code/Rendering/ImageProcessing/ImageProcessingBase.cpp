@@ -9,6 +9,7 @@
 
 #include "Rendering/RenderingExport.h"
 
+#include "../Resources/Flags/DataFormatType.h"
 #include "ImageProcessingBase.h"
 #include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
@@ -18,7 +19,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/Float.h"
 #include "Rendering/Renderers/Renderer.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 #include "Rendering/Shaders/ShaderManager.h"
 
 Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, int numTargets)
@@ -50,20 +51,20 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
     camera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
     camera->SetFrame(Mathematics::APointF{}, Mathematics::AVectorF::GetUnitZ(), Mathematics::AVectorF::GetUnitY(), Mathematics::AVectorF::GetUnitX());
 
-    std::vector<VertexFormatType> triple{};
+    std::vector<VertexFormatAttribute> triple{};
 
-    triple.emplace_back(VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0);
-    triple.emplace_back(VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 1);
+    triple.emplace_back(DataFormatType::R32G32B32Float, VertexFormatFlags::Semantic::Position, 0, 0);
+    triple.emplace_back(DataFormatType::R32G32Float, VertexFormatFlags::Semantic::TextureCoord, 1, boost::numeric_cast<int>(3 * sizeof(float)));
 
     auto vformat = VertexFormat::Create(triple);
 
-    vformat->SetAttribute(0, 0, 0, VertexFormatFlags::AttributeType::Float3, VertexFormatFlags::AttributeUsage::Position, 0);
-    vformat->SetAttribute(1, 0, 3 * sizeof(float), VertexFormatFlags::AttributeType::Float2, VertexFormatFlags::AttributeUsage::TextureCoord, 0);
+    vformat->SetAttribute(0, DataFormatType::R32G32B32Float, VertexFormatFlags::Semantic::Position, 0, 0);
+    vformat->SetAttribute(1, DataFormatType::R32G32Float, VertexFormatFlags::Semantic::TextureCoord, 0, 3 * sizeof(float));
     vformat->SetStride(5 * sizeof(float));
 
     const auto vstride = vformat->GetStride();
-    auto vbuffer = VertexBuffer::Create(4, vstride);
-    VertexBufferAccessor vba{ vformat, vbuffer };
+    auto vbuffer = VertexBuffer::Create(*vformat, vstride);
+    VertexBuffer vba = *vbuffer;
 
     auto xmin = 0.0f;
     auto xmax = 0.0f;
@@ -96,19 +97,9 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
         tc3 = Mathematics::Float2(0.0f, 0.0f);
     }
 
-    vbuffer->SetPosition(vba, 0, Mathematics::APoint(xmin, ymin, 0.0f));
-    vbuffer->SetPosition(vba, 1, Mathematics::APoint(xmax, ymin, 0.0f));
-    vbuffer->SetPosition(vba, 2, Mathematics::APoint(xmax, ymax, 0.0f));
-    vbuffer->SetPosition(vba, 3, Mathematics::APoint(xmin, ymax, 0.0f));
+    auto ibuffer = IndexBuffer::Create(IndexFormatType::Polypoint, 6, boost::numeric_cast<int>(sizeof(int)));
 
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc0[0], tc0[1]), 0);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc1[0], tc1[1]), 1);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc2[0], tc2[1]), 2);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc3[0], tc3[1]), 3);
-
-    auto ibuffer = IndexBuffer::Create(6, boost::numeric_cast<int>(sizeof(int)));
-
-    auto indices = ibuffer->GetWriteSpanIterator();
+    auto indices = ibuffer->GetData();
     indices.Increase<int32_t>(0);
     indices.Increase<int32_t>(1);
     indices.Increase<int32_t>(2);
@@ -122,7 +113,7 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
 
     for (auto i = 0; i < numTargets; ++i)
     {
-        renderTargets.emplace_back(std::make_shared<RenderTarget>(1, System::EnumCastUnderlying<TextureFormat>(System::TextureInternalFormat::A32B32G32R32F), numCols, numRows, false, false));
+        renderTargets.emplace_back(std::make_shared<DrawTarget>(1, System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::A32B32G32R32F), numCols, numRows));
     }
 
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -211,11 +202,11 @@ void Rendering::ImageProcessingBase::Initialize(Renderer& renderer, bool openglH
         renderer.Disable(renderTargets.at(0));
         if (openglHack)
         {
-            mainEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetColorTexture(0)->CloneObject()));
+            mainEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetRenderTargetTexture(0)->CloneObject()));
         }
         else
         {
-            drawEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetColorTexture(0)->CloneObject()));
+            drawEffectInstance->SetPixelTexture(0, "StateSampler", boost::dynamic_pointer_cast<Texture>(renderTargets.at(1)->GetRenderTargetTexture(0)->CloneObject()));
         }
 
         rectangle->SetEffectInstance(boundaryEffectInstance);
@@ -328,7 +319,7 @@ Rendering::TextureSharedPtr Rendering::ImageProcessingBase::GetColorTexture(int 
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    return boost::dynamic_pointer_cast<Texture>(renderTargets.at(index)->GetColorTexture(0)->CloneObject());
+    return boost::dynamic_pointer_cast<Texture>(renderTargets.at(index)->GetRenderTargetTexture(0)->CloneObject());
 }
 
 std::array<const int*, System::EnumCastUnderlying(Rendering::ShaderFlags::Profiles::MaxProfiles)> Rendering::ImageProcessingBase::vRegisters{
@@ -438,7 +429,7 @@ Rendering::ConstTrianglesMeshSharedPtr Rendering::ImageProcessingBase::GetRectan
     return rectangle;
 }
 
-Rendering::ConstRenderTargetSharedPtr Rendering::ImageProcessingBase::GetTarget(int i) const
+Rendering::ConstDrawTargetSharedPtr Rendering::ImageProcessingBase::GetTarget(int i) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

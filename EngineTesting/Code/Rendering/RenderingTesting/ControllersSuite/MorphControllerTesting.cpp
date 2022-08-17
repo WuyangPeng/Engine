@@ -20,7 +20,6 @@
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/Controllers/MorphController.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/SceneGraph/LoadVisual.h"
 #include "Rendering/SceneGraph/Visual.h"
 

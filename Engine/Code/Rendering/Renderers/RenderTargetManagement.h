@@ -15,8 +15,8 @@
 #include "RenderersFwd.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "Rendering/Resources/RenderTarget.h"
-#include "Rendering/Resources/Texture2D.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
+#include "Rendering/Resources/Textures/Texture2D.h"
 
 RENDERING_NON_COPY_EXPORT_IMPL(RenderTargetManagementImpl);
 
@@ -26,7 +26,7 @@ namespace Rendering
     {
     public:
         NON_COPY_TYPE_DECLARE(RenderTargetManagement);
-        using ConstRenderTargetSharedPtr = std::shared_ptr<const RenderTarget>;
+        using ConstDrawTargetSharedPtr = std::shared_ptr<const DrawTarget>;
         using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
         using RendererSharedPtr = std::shared_ptr<Renderer>;
 
@@ -35,13 +35,13 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
-        void Bind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Unbind(const ConstRenderTargetSharedPtr& renderTarget);
-        void Enable(const ConstRenderTargetSharedPtr& renderTarget);
-        void Disable(const ConstRenderTargetSharedPtr& renderTarget);
-        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstRenderTargetSharedPtr& renderTarget);
+        void Bind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Unbind(const ConstDrawTargetSharedPtr& renderTarget);
+        void Enable(const ConstDrawTargetSharedPtr& renderTarget);
+        void Disable(const ConstDrawTargetSharedPtr& renderTarget);
+        NODISCARD ConstTexture2DSharedPtr ReadColor(int index, const ConstDrawTargetSharedPtr& renderTarget);
 
-        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstRenderTargetSharedPtr& renderTarget);
+        NODISCARD PlatformRenderTargetSharedPtr GetResource(const ConstDrawTargetSharedPtr& renderTarget);
 
     private:
         PackageType impl;

@@ -51,6 +51,8 @@ namespace Rendering
     private:
         NODISCARD static bool ValidSizes(int renderTargetWidth, int renderTargetHeight);
         NODISCARD static bool ValidFormat(const VertexFormat& vertexFormat);
+
+        static void InitIndexBufferInParticles(IndexBuffer& indexBuffer);
     };
 }
 

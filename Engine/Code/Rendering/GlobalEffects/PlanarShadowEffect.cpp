@@ -317,7 +317,7 @@ void Rendering::PlanarShadowEffect::PostLink()
     materialEffectInstance = materialEffect->CreateInstance(material);
 }
 
-uint64_t Rendering::PlanarShadowEffect::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::PlanarShadowEffect::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

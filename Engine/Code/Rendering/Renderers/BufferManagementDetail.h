@@ -17,8 +17,8 @@
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Rendering/Resources/IndexBuffer.h"
-#include "Rendering/Resources/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 #include <type_traits>
 
@@ -220,12 +220,12 @@ void Rendering::BufferManagement<PlatformBufferType>::Update(const ConstBufferSh
     RENDERING_CLASS_IS_VALID_1;
 
     const auto numBytes = buffer->GetNumBytes();
-    auto srcData = buffer->GetReadOnlyData();
+    const auto srcData = buffer->GetData();
 
     BufferManagementLockEncapsulation<ClassType> manager{ *this };
     void* trgData = manager.Lock(buffer, BufferLocking::WriteOnly);
 
-    System::MemoryCopy(trgData, srcData, numBytes);
+    System::MemoryCopy(trgData, &*srcData, numBytes);
 }
 
 template <typename PlatformBufferType>

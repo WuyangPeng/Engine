@@ -4,8 +4,8 @@
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.5 (2022/03/29 17:11)
+///	标准：std:c++20
+///	引擎版本：0.8.1.0 (2022/08/09 15:35)
 
 #ifndef RENDERING_DATA_TYPES_SPECIALIZED_IO_H
 #define RENDERING_DATA_TYPES_SPECIALIZED_IO_H
@@ -18,11 +18,12 @@
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/Resources/Buffers/MemberLayout.h"
 
 template <>
 struct CoreTools::StreamSize<Rendering::TransformF>
 {
-    static int GetStreamSize(const Rendering::TransformF& value) noexcept
+    NODISCARD static int GetStreamSize(const Rendering::TransformF& value) noexcept
     {
         return value.GetStreamingSize();
     }
@@ -31,7 +32,7 @@ struct CoreTools::StreamSize<Rendering::TransformF>
 template <>
 struct CoreTools::StreamSize<Rendering::BoundF>
 {
-    static int GetStreamSize(const Rendering::BoundF& value) noexcept
+    NODISCARD static int GetStreamSize(const Rendering::BoundF& value) noexcept
     {
         return value.GetStreamingSize();
     }
@@ -40,9 +41,18 @@ struct CoreTools::StreamSize<Rendering::BoundF>
 template <typename T>
 struct CoreTools::StreamSize<Rendering::Colour<T>>
 {
-    constexpr static int GetStreamSize([[maybe_unused]] const Rendering::Colour<T>& value) noexcept
+    NODISCARD constexpr static int GetStreamSize(MAYBE_UNUSED const Rendering::Colour<T>& value) noexcept
     {
         return Rendering::Colour<T>::arraySize * CoreTools::GetStreamSize<T>();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Rendering::MemberLayout>
+{
+    NODISCARD static int GetStreamSize(const Rendering::MemberLayout& value)
+    {
+        return value.GetStreamingSize();
     }
 };
 
@@ -93,6 +103,15 @@ RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering:
 
 template <>
 RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::IntColour& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::MemberLayout& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE Rendering::MemberLayout CoreTools::BufferSource::ReadAggregate();
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::MemberLayout& datum);
 
 namespace Rendering
 {

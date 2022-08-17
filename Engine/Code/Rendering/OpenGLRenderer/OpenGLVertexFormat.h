@@ -41,16 +41,16 @@ namespace Rendering
         void Init(const VertexFormat* vertexFormat);
 
     private:
-        using OpenGLVertexFormatPosition = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Position>;
-        using OpenGLVertexFormatNormal = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Normal>;
-        using OpenGLVertexFormatTangent = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Tangent>;
-        using OpenGLVertexFormatBinormal = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Binormal>;
-        using OpenGLVertexFormatTexCoord = OpenGLVertexFormatArrayData<VertexFormatFlags::AttributeUsage::TextureCoord, VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>;
-        using OpenGLVertexFormatColor = OpenGLVertexFormatArrayData<VertexFormatFlags::AttributeUsage::Color, VertexFormatFlags::MaximumNumber::ColorUnits>;
-        using OpenGLVertexFormatBlendIndices = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::BlendIndices>;
-        using OpenGLVertexFormatBlendWeight = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::BlendWeight>;
-        using OpenGLVertexFormatFogCoord = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::FogCoord>;
-        using OpenGLVertexFormatPsize = OpenGLVertexFormatData<VertexFormatFlags::AttributeUsage::Psize>;
+        using OpenGLVertexFormatPosition = OpenGLVertexFormatData<VertexFormatFlags::Semantic::Position>;
+        using OpenGLVertexFormatNormal = OpenGLVertexFormatData<VertexFormatFlags::Semantic::Normal>;
+        using OpenGLVertexFormatTangent = OpenGLVertexFormatData<VertexFormatFlags::Semantic::Tangent>;
+        using OpenGLVertexFormatBinormal = OpenGLVertexFormatData<VertexFormatFlags::Semantic::Binormal>;
+        using OpenGLVertexFormatTexCoord = OpenGLVertexFormatArrayData<VertexFormatFlags::Semantic::TextureCoord, VertexFormatFlags::MaximumNumber::TextureCoordinateUnits>;
+        using OpenGLVertexFormatColor = OpenGLVertexFormatArrayData<VertexFormatFlags::Semantic::Color, VertexFormatFlags::MaximumNumber::ColorUnits>;
+        using OpenGLVertexFormatBlendIndices = OpenGLVertexFormatData<VertexFormatFlags::Semantic::BlendIndices>;
+        using OpenGLVertexFormatBlendWeight = OpenGLVertexFormatData<VertexFormatFlags::Semantic::BlendWeight>;
+        using OpenGLVertexFormatFogCoord = OpenGLVertexFormatData<VertexFormatFlags::Semantic::FogCoord>;
+        using OpenGLVertexFormatPsize = OpenGLVertexFormatData<VertexFormatFlags::Semantic::Psize>;
 
     private:
         int stride;

@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(StandardMesh, StandardMeshImpl);
 

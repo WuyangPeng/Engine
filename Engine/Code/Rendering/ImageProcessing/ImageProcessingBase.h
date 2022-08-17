@@ -13,7 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Renderers/RenderersFwd.h"
-#include "Rendering/Resources/RenderTarget.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
 #include "Rendering/ShaderFloats/ProjectionViewWorldMatrixConstant.h"
@@ -42,7 +42,7 @@ namespace Rendering
         NODISCARD float GetRowSpacing() const noexcept;
         NODISCARD ConstCameraSharedPtr GetCamera() const noexcept;
         NODISCARD ConstTrianglesMeshSharedPtr GetRectangle() const noexcept;
-        NODISCARD ConstRenderTargetSharedPtr GetTarget(int i) const;
+        NODISCARD ConstDrawTargetSharedPtr GetTarget(int i) const;
 
         NODISCARD int Index(int col, int row) const noexcept;
 
@@ -80,7 +80,7 @@ namespace Rendering
         TrianglesMeshSharedPtr rectangle;
         VertexShaderSharedPtr vertexShader;
         ProjectionViewWorldMatrixConstantSharedPtr pvwMatrixConstant;
-        std::vector<RenderTargetSharedPtr> renderTargets;
+        std::vector<DrawTargetSharedPtr> renderTargets;
 
         Texture2DSharedPtr mainTexture;
         VisualEffectSharedPtr mainEffect;

@@ -22,7 +22,6 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 using std::make_shared;
@@ -118,7 +117,6 @@ bool Rendering::SkinController::Update(double applicationTime)
             if (vertexBuffer)
             {
                 RENDERING_ASSERTION_2(impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "控制器必须和缓冲器具有相同数量的顶点\n");
-                VertexBufferAccessor vba{ *visual };
 
                 // 皮肤顶点在骨骼世界坐标系统计算，所以视觉世界变换必须为单位。
                 visual->SetWorldTransform(TransformF{});
@@ -137,7 +135,6 @@ bool Rendering::SkinController::Update(double applicationTime)
                             position += weight * worldOffset;
                         }
                     }
-                    visual->GetVertexBuffer()->SetPosition(vba, vertex, position);
                 }
 
                 visual->UpdateModelSpace(VisualUpdateType::Normals);
@@ -183,17 +180,17 @@ int Rendering::SkinController::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::SkinController::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::SkinController::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    const auto uniqueID = ParentType::Register(target);
-    if (uniqueID != 0)
+    const auto registerID = ParentType::Register(target);
+    if (registerID != 0)
     {
         impl->Register(target);
     }
 
-    return uniqueID;
+    return registerID;
 }
 
 void Rendering::SkinController::Save(CoreTools::BufferTarget& target) const

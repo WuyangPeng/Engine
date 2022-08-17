@@ -18,7 +18,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Base/Float.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Resources/VertexBufferAccessor.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, CurveMesh);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, CurveMesh);
@@ -112,7 +112,7 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
     }
 
     auto vstride = GetVertexFormat()->GetStride();
-    SetVertexBuffer(VertexBuffer::Create(numTotalVertices, vstride));
+    SetVertexBuffer(VertexBuffer::Create(*GetVertexFormat(), vstride));
     std::vector<Edge> edges(numTotalEdges);
 
     if (allowDynamicChange)
@@ -123,8 +123,8 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
     }
 
     auto origParam = 0;
-    auto origData = origVBuffer.object->GetSpanIterator();
-    auto fullData = GetVertexBuffer()->GetWriteSpanIterator();
+    auto origData = origVBuffer.object->GetData();
+    auto fullData = GetVertexBuffer()->GetData();
     auto index = 0;
     const auto indexDelta = (1 << level);
 
@@ -153,8 +153,6 @@ std::vector<Rendering::CurveMesh::Edge> Rendering::CurveMesh::Allocate(int& numT
 
 void Rendering::CurveMesh::Subdivide(int& numVertices, int& numEdges, std::vector<Edge>& edges)
 {
-    VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
-
     for (auto old = numEdges - 1, curr = 2 * numEdges - 1; old >= 0; --old)
     {
         const auto& edge = edges.at(old);
@@ -164,65 +162,14 @@ void Rendering::CurveMesh::Subdivide(int& numVertices, int& numEdges, std::vecto
         auto vMid = (v0 + v1) / 2;
         const auto paramMid = 0.5f * (edge.param.at(0) + edge.param.at(1));
 
-        GetVertexBuffer()->SetPosition(vba, vMid, edge.segment->P(paramMid));
-
-        if (vba.HasNormal())
-        {
-            GetVertexBuffer()->SetTriangleNormal(vba, vMid, edge.segment->Normal(paramMid));
-        }
-
         constexpr auto numColorUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::ColorUnits);
         for (auto unit = 0; unit < numColorUnits; ++unit)
         {
-            if (vba.HasColor(unit))
-            {
-                auto data0 = vba.GetColorTuple(unit, v0);
-                auto data1 = vba.GetColorTuple(unit, v1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-
-                auto data = const_cast<float*>(vba.GetColorTuple(unit, vMid));
-
-#include STSTEM_WARNING_POP
-
-                for (auto i = 0; i < vba.GetColorChannels(unit); ++i)
-                {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-                    data[i] = 0.5f * (data0[i] + data1[i]);
-
-#include STSTEM_WARNING_POP
-                }
-            }
         }
 
         constexpr auto numTCoordUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
         for (auto unit = 0; unit < numTCoordUnits; ++unit)
         {
-            if (vba.HasTextureCoord(unit))
-            {
-                auto data0 = vba.GetTextureCoordTuple(unit, v0);
-                auto data1 = vba.GetTextureCoordTuple(unit, v1);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
-
-                auto data = const_cast<float*>(vba.GetTextureCoordTuple(unit, vMid));
-
-#include STSTEM_WARNING_POP
-
-                for (auto i = 0; i < vba.GetTextureCoordChannels(unit); ++i)
-                {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26481)
-
-                    data[i] = 0.5f * (data0[i] + data1[i]);
-
-#include STSTEM_WARNING_POP
-                }
-            }
         }
 
         if (allowDynamicChange)
@@ -257,15 +204,6 @@ void Rendering::CurveMesh::OnDynamicChange()
 
     if (allowDynamicChange)
     {
-        VertexBufferAccessor vba{ GetVertexFormat(), GetVertexBuffer() };
-
-        for (auto i = 0; i < numFullVertices; ++i)
-        {
-            auto& ci = cInfo.at(i);
-
-            GetVertexBuffer()->SetPosition(vba, i, ci.segment.object->P(ci.param));
-        }
-
         UpdateModelSpace(VisualUpdateType::Normals);
     }
 }
@@ -495,7 +433,7 @@ void Rendering::CurveMesh::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::CurveMesh::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::CurveMesh::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

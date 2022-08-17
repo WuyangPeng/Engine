@@ -23,7 +23,7 @@ CoreTools::ObjectRegisterImpl::ObjectRegisterImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectRegisterImpl)
 
-uint64_t CoreTools::ObjectRegisterImpl::GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const
+int64_t CoreTools::ObjectRegisterImpl::GetUniqueID(const ConstObjectInterfaceSharedPtr& object) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -62,7 +62,7 @@ CoreTools::ConstRegisterContainerConstIter CoreTools::ObjectRegisterImpl::end() 
     return registered.end();
 }
 
-uint64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceSharedPtr& object)
+int64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

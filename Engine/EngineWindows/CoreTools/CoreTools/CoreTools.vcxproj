@@ -667,6 +667,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTerm.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\NullObject.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Object.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectAssociated.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.h" />
@@ -1290,6 +1291,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermContainer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InitTermRegisterFactory.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\InTopLevel.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\NullObject.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Object.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectInterface.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\ObjectLink.cpp" />

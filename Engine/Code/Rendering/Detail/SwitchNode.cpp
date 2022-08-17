@@ -96,7 +96,7 @@ int Rendering::SwitchNode::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::SwitchNode::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::SwitchNode::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

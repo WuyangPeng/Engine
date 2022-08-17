@@ -21,8 +21,8 @@ namespace Rendering
 
     private:
         void MainTest();
-        void CreateTrianglesMeshFile();
-        void InitTest();
+        void CreateTrianglesMeshFile() noexcept;
+        void InitTest() noexcept;
 
         void DoRunUnitTest() override;
     };
