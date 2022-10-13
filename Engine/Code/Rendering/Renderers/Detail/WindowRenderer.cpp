@@ -13,9 +13,10 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RendererBasis.h"
+#include "Rendering/Renderers/RendererParameter.h"
 
-Rendering::WindowRenderer::WindowRenderer(const RendererBasis& basis)
-    : ParentType{ basis }
+Rendering::WindowRenderer::WindowRenderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
+    : ParentType{ RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -24,7 +25,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, WindowRenderer)
 
 Rendering::RendererTypes Rendering::WindowRenderer::GetRendererType() const noexcept
 {
-    return RendererTypes::Window;
+    return RendererTypes::Windows;
 }
 
 #include STSTEM_WARNING_PUSH

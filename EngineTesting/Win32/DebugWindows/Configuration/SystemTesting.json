@@ -1,6 +1,5 @@
 {
   "helperSuite": {
-    "ConfigMacroTesting": 1,
     "UserMacroTesting": 1,
     "StringizeMacroTesting": 1,
     "UnicodeUsingTesting": 0,
@@ -27,16 +26,13 @@
   },
 
   "windowsMacroSuite": {
-    "GetArraySizeTesting": 1,
-    "UnusedFunctionTesting": 1,
     "MakeLanguageIDTesting": 1000,
     "MakeIntreSourceTesting": 1,
     "MakeLanguageCIDTesting": 1000,
     "HResultTesting": 1,
     "MakeWordTesting": 1000,
     "PtrToIntTesting": 1,
-    "MarkTesting": 1,
-    "DebugTesting": 1
+    "MarkTesting": 1
   },
 
   "enumMacroSuite": {
@@ -66,6 +62,12 @@
     "GlUtilityPreviouslyBodyResultTesting": 1,
     "GlUtilityBodyTesting": 1,
     "GlUtilityBodyResultTesting": 1
+  },
+
+  "toolsSuite": {
+    "GetArraySizeTesting": 1,
+    "UnusedFunctionTesting": 1,
+    "DebugTesting": 1
   },
 
   "systemOutputSuite": {

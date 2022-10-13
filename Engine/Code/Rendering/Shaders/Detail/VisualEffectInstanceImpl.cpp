@@ -33,34 +33,20 @@ Rendering::VisualEffectInstanceImpl::VisualEffectInstanceImpl() noexcept
 Rendering::VisualEffectInstanceImpl::VisualEffectInstanceImpl(const VisualEffectSharedPtr& effect, int techniqueIndex)
     : visualEffect{ effect },
       techniqueIndex{ techniqueIndex },
-      numPasses{ effect->GetNumPasses(techniqueIndex) },
+      numPasses{ 0 },
       vertexParameters{ numPasses },
       pixelParameters{ numPasses }
 {
-    for (auto passIndex = 0; passIndex < numPasses; ++passIndex)
-    {
-        auto pass = visualEffect.object->GetPass(techniqueIndex, passIndex);
-        vertexParameters.at(passIndex).object = std::make_shared<ShaderParameters>(pass->GetVertexShader());
-        pixelParameters.at(passIndex).object = std::make_shared<ShaderParameters>(pass->GetPixelShader());
-    }
-
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::VisualEffectInstanceImpl::VisualEffectInstanceImpl(const VisualEffectInstanceImpl& rhs)
     : visualEffect{ rhs.visualEffect },
       techniqueIndex{ rhs.techniqueIndex },
-      numPasses{ visualEffect.object->GetNumPasses(techniqueIndex) },
+      numPasses{ 0 },
       vertexParameters{ numPasses },
       pixelParameters{ numPasses }
 {
-    for (auto passIndex = 0; passIndex < numPasses; ++passIndex)
-    {
-        auto pass = visualEffect.object->GetPass(techniqueIndex, passIndex);
-        vertexParameters.at(passIndex).object = std::make_shared<ShaderParameters>(*rhs.vertexParameters.at(passIndex).object);
-        pixelParameters.at(passIndex).object = std::make_shared<ShaderParameters>(*rhs.pixelParameters.at(passIndex).object);
-    }
-
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
@@ -300,11 +286,11 @@ int Rendering::VisualEffectInstanceImpl::GetNumPasses() const noexcept
     return numPasses;
 }
 
-Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectInstanceImpl::GetConstPass(int pass) const
+Rendering::ConstVisualPassSharedPtr Rendering::VisualEffectInstanceImpl::GetConstPass(MAYBE_UNUSED int pass) const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return visualEffect.object->GetPass(techniqueIndex, pass);
+    return nullptr;
 }
 
 Rendering::ConstShaderParametersSharedPtr Rendering::VisualEffectInstanceImpl::GetConstVertexParameters(int pass) const

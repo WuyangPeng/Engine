@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Rendering/GlobalEffects/GlobalEffect.h"
+#include "Rendering/LocalEffects/Font.h"
 #include "Rendering/LocalEffects/TextEffect.h"
 #include "Rendering/Renderers/BufferManagementDetail.h"
 #include "Rendering/Renderers/RenderTargetManagement.h"
@@ -23,14 +24,13 @@
 #include "Rendering/Renderers/TextureManagementDetail.h"
 #include "Rendering/Renderers/VertexFormatManagement.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/LocalEffects/Font.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
 #include "Rendering/SceneGraph/Visual.h"
 
 #include <memory>
 
-Rendering::RendererImpl::RendererImpl(const RendererBasis& basis)
-    : ParentType{ basis },
+Rendering::RendererImpl::RendererImpl(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+    : ParentType{ renderingEnvironment, basis },
 
       defaultAlphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
       defaultCullState{ std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable) },

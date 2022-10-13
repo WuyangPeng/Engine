@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:53)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/25 19:57)
 
 #ifndef SYSTEM_HELPER_ENUM_MACRO_H
 #define SYSTEM_HELPER_ENUM_MACRO_H
@@ -16,30 +16,30 @@
 #include <iosfwd>
 #include <type_traits>
 
-#define ENUM_ADDABLE_OPERATOR_DEFINE(className)                                                                         \
-    NODISCARD constexpr className operator+(className lhs, typename std::underlying_type<className>::type rhs) noexcept \
-    {                                                                                                                   \
-        return System::UnderlyingCastEnum<className>(System::EnumCastUnderlying(lhs) + rhs);                            \
-    }                                                                                                                   \
-    NODISCARD constexpr className operator+(typename std::underlying_type<className>::type lhs, className rhs) noexcept \
-    {                                                                                                                   \
-        return rhs + lhs;                                                                                               \
-    }                                                                                                                   \
-    inline className& operator+=(className& lhs, std::underlying_type<className>::type rhs) noexcept                    \
-    {                                                                                                                   \
-        lhs = lhs + rhs;                                                                                                \
-        return lhs;                                                                                                     \
+#define ENUM_ADDABLE_OPERATOR_DEFINE(className)                                                                \
+    NODISCARD constexpr className operator+(className lhs, std::underlying_type<className>::type rhs) noexcept \
+    {                                                                                                          \
+        return System::UnderlyingCastEnum<className>(System::EnumCastUnderlying(lhs) + rhs);                   \
+    }                                                                                                          \
+    NODISCARD constexpr className operator+(std::underlying_type<className>::type lhs, className rhs) noexcept \
+    {                                                                                                          \
+        return rhs + lhs;                                                                                      \
+    }                                                                                                          \
+    inline className& operator+=(className& lhs, std::underlying_type<className>::type rhs) noexcept           \
+    {                                                                                                          \
+        lhs = lhs + rhs;                                                                                       \
+        return lhs;                                                                                            \
     }
 
-#define ENUM_SUBTRACTABLE_OPERATOR_DEFINE(className)                                                                    \
-    NODISCARD constexpr className operator-(className lhs, typename std::underlying_type<className>::type rhs) noexcept \
-    {                                                                                                                   \
-        return System::UnderlyingCastEnum<className>(System::EnumCastUnderlying(lhs) - rhs);                            \
-    }                                                                                                                   \
-    inline className& operator-=(className& lhs, std::underlying_type<className>::type rhs) noexcept                    \
-    {                                                                                                                   \
-        lhs = lhs - rhs;                                                                                                \
-        return lhs;                                                                                                     \
+#define ENUM_SUBTRACTABLE_OPERATOR_DEFINE(className)                                                           \
+    NODISCARD constexpr className operator-(className lhs, std::underlying_type<className>::type rhs) noexcept \
+    {                                                                                                          \
+        return System::UnderlyingCastEnum<className>(System::EnumCastUnderlying(lhs) - rhs);                   \
+    }                                                                                                          \
+    inline className& operator-=(className& lhs, std::underlying_type<className>::type rhs) noexcept           \
+    {                                                                                                          \
+        lhs = lhs - rhs;                                                                                       \
+        return lhs;                                                                                            \
     }
 
 #define ENUM_MULTIPLICATION_OPERATOR_DEFINE(className)             \

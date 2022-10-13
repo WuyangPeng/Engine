@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:35)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/11 23:20)
 
 #ifndef SYSTEM_HELPER_VXWORKS_H
 #define SYSTEM_HELPER_VXWORKS_H
@@ -15,7 +15,9 @@
     #include <version.h>
 
     #if !defined(_WRS_VXWORKS_MAJOR) || (_WRS_VXWORKS_MAJOR < 6)
+
         #error "您使用的vxWorks版本是非常过时的。"
+
     #endif  // !defined(_WRS_VXWORKS_MAJOR) || (_WRS_VXWORKS_MAJOR < 6)
 
     // vxWorks 具体配置选项：
@@ -26,8 +28,10 @@
     #if (_WRS_VXWORKS_MAJOR < 7)
 
         #ifdef __RTP__
+
             #include <sysLib.h>
             #include <time.h>
+
         #endif  // __RTP__
 
         #include <cstdint>

@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = RendererImpl;
 
     public:
-        explicit GlutRenderer(const RendererBasis& basis);
+        explicit GlutRenderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

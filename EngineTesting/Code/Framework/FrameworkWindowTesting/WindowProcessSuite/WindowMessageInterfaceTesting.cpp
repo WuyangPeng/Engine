@@ -50,13 +50,13 @@ void Framework::WindowMessageInterfaceTesting::MainTest()
 
 void Framework::WindowMessageInterfaceTesting::MessageTest()
 {
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
     constexpr auto delta = System::g_Microseconds / 60;
-    TestingType message{ delta };
+
+    TestingType message{ delta, environmentDirectory };
     ASSERT_EQUAL(message.GetDelta(), delta);
 
-    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-
-    ASSERT_TRUE(message.PreCreate(environmentDirectory));
+    ASSERT_TRUE(message.PreCreate());
     ASSERT_TRUE(message.Initialize());
     message.PreIdle();
     message.Terminate();

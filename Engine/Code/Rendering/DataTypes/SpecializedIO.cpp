@@ -15,6 +15,7 @@
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
+#include "Rendering/Base/Flags/GraphicsObjectType.h"
 
 #include <array>
 
@@ -208,4 +209,69 @@ Rendering::MemberLayout CoreTools::BufferSource::ReadAggregate()
     auto numElements = Read<int32_t>();
 
     return Rendering::MemberLayout{ name, offset, numElements };
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::BlendStateTarget& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum.Load(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::BlendStateTarget& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum.Save(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::DepthStencilStateFace& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum.Load(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::DepthStencilStateFace& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum.Save(*this);
+}
+
+template <>
+void CoreTools::BufferSource::ReadAggregate(Rendering::ShaderData& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum.Load(*this);
+}
+
+template <>
+void CoreTools::BufferTarget::WriteAggregate(const Rendering::ShaderData& datum)
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    datum.Save(*this);
+}
+
+template <>
+Rendering::ShaderData CoreTools::BufferSource::ReadAggregate()
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    auto inType = Rendering::GraphicsObjectType::None;
+    ReadEnum(inType);
+
+    const auto inName = ReadString();
+    const auto inBindPoint = Read<int>();
+    const auto inNumBytes = Read<int>();
+    const auto inExtra = Read<int>();
+    const auto inIsGpuWritable = ReadBool();
+
+    return Rendering::ShaderData{ inType, inName, inBindPoint, inNumBytes, inExtra, inIsGpuWritable };
 }

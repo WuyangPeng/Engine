@@ -33,7 +33,7 @@ namespace Framework
         using Transform = Rendering::TransformF;
 
     public:
-        explicit CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~CameraModelMiddleLayer() noexcept = default;
         CameraModelMiddleLayer(const CameraModelMiddleLayer& rhs) noexcept = delete;
         CameraModelMiddleLayer& operator=(const CameraModelMiddleLayer& rhs) noexcept = delete;
@@ -90,7 +90,7 @@ namespace Framework
         NODISCARD bool GetTrackBallDow() const noexcept;
 
         void RotateTrackBall(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer);
-        void SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer) noexcept(g_Assert < 2 || g_RenderingAssert < 2);
+        void SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer);
 
     protected:
         void InitializeCameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor);

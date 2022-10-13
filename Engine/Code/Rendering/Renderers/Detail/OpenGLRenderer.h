@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = RendererImpl;
 
     public:
-        explicit OpenGLRenderer(const RendererBasis& basis);
+        explicit OpenGLRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

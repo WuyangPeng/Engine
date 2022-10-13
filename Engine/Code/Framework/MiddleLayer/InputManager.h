@@ -22,7 +22,7 @@ namespace Framework
         using ParentType = InputManagerInterface;
 
     public:
-        explicit InputManager(MiddleLayerPlatform middleLayerPlatform);
+        explicit InputManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };

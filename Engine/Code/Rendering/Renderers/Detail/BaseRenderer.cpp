@@ -12,13 +12,16 @@
 #include "BaseRenderer.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Renderers/BlendState.h"
-#include "Rendering/Renderers/DepthStencilState.h"
-#include "Rendering/Renderers/RasterizerState.h"
 #include "Rendering/LocalEffects/Font.h"
+#include "Rendering/State/BlendState.h"
+#include "Rendering/State/DepthStencilState.h"
+#include "Rendering/State/RasterizerState.h"
 
-Rendering::BaseRenderer::BaseRenderer(const RendererBasis& basis)
-    : rendererBasis{ basis },
+Rendering::BaseRenderer::BaseRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+    : renderingEnvironment{ renderingEnvironment },
+      renderingDevice{ renderingEnvironment.GetRenderingDevice() },
+
+      rendererBasis{ basis },
 
       clearColor{ 1.0f, 1.0f, 1.0f, 1.0f },
       clearDepth{ 0.0f },
@@ -27,11 +30,11 @@ Rendering::BaseRenderer::BaseRenderer(const RendererBasis& basis)
       defaultFont{ std::make_shared<Font>() },
       activeFont{ defaultFont },
 
-      defaultBlendState{ std::make_shared<BlendState>() },
+      defaultBlendState{ std::make_shared<BlendState>("BlendState") },
       activeBlendState{ defaultBlendState },
-      defaultDepthStencilState{ std::make_shared<DepthStencilState>() },
+      defaultDepthStencilState{ std::make_shared<DepthStencilState>("DepthStencilState") },
       activeDepthStencilState{ defaultDepthStencilState },
-      defaultRasterizerState{ std::make_shared<RasterizerState>() },
+      defaultRasterizerState{ std::make_shared<RasterizerState>("RasterizerState") },
       activeRasterizerState{ defaultRasterizerState }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
@@ -89,14 +92,14 @@ int Rendering::BaseRenderer::GetHeight() const noexcept
     return rendererBasis.GetHeight();
 }
 
-Rendering::TextureFormat Rendering::BaseRenderer::GetColorFormat() const noexcept
+Rendering::DataFormatType Rendering::BaseRenderer::GetColorFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return rendererBasis.GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::BaseRenderer::GetDepthStencilFormat() const noexcept
+Rendering::DataFormatType Rendering::BaseRenderer::GetDepthStencilFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -264,4 +267,32 @@ Rendering::BaseRenderer::RasterizerStateSharedPtr Rendering::BaseRenderer::GetDe
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return defaultRasterizerState;
+}
+
+void Rendering::BaseRenderer::Release()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    renderingEnvironment.Release();
+}
+
+void Rendering::BaseRenderer::SwapBuffers()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    renderingDevice.SwapBuffers();
+}
+
+void Rendering::BaseRenderer::ResetSize()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    renderingDevice.ResetSize();
+}
+
+void Rendering::BaseRenderer::InitDevice()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    renderingDevice.InitDevice();
 }

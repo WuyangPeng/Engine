@@ -22,8 +22,8 @@ namespace Rendering
     private:
         void MainTest();
         void CreateVisualEffectFile() noexcept;
-        void SaveFile();
-        void SaveTest();
+        void SaveFile() noexcept;
+        void SaveTest() noexcept;
 
         void DoRunUnitTest() override;
     };

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 15:33)
+///	引擎测试版本：0.8.1.2 (2022/09/04 15:34)
 
 #ifndef SYSTEM_TESTING_TESTING_HELPER_H
 #define SYSTEM_TESTING_TESTING_HELPER_H
@@ -20,6 +20,7 @@ namespace System
     public:
         using ClassType = TestingHelper;
         using ParentType = CMainFunctionTestingHelper;
+
         using Suite = CoreTools::Suite;
 
     public:
@@ -37,6 +38,7 @@ namespace System
         NODISCARD Suite GetEnumMacroSuite();
         NODISCARD Suite GetOpenGLMacroSuite();
         NODISCARD Suite GetGlUtilityMacroSuite();
+        NODISCARD Suite GetToolsSuite();
 
         void AddSystemOutputSuite();
 

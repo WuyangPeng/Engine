@@ -17,8 +17,8 @@
 
 using std::make_shared;
 
-Framework::PhysicalModellingManagerInterface::PhysicalModellingManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(PhysicalModellingMiddleLayer::Count) }
+Framework::PhysicalModellingManagerInterface::PhysicalModellingManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(PhysicalModellingMiddleLayer::Count) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

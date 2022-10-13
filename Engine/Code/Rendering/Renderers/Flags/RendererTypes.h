@@ -21,11 +21,14 @@ namespace Rendering
         First = 0,
 
         Default = First,
-        Window = 1,
+        Windows = 1,
         Glut = 2,
-        OpenGL = 3,
-        OpenGLES = 4,
-        Dx9 = 5,
+        Glfw = 3,
+        OpenGL = 4,
+        OpenGLES = 5,
+        Vulkan = 6,
+        Dx11 = 7,
+        Dx12 = 8,
         Non,
 
         Max,

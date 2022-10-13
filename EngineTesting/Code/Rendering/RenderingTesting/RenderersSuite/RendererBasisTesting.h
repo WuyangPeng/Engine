@@ -5,26 +5,55 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/15 16:40)
+///	引擎测试版本：0.8.1.2 (2022/09/05 14:28)
 
 #ifndef RENDERING_RENDERERS_SUITE_RENDERER_BASIS_TESTING_H
 #define RENDERING_RENDERERS_SUITE_RENDERER_BASIS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 namespace Rendering
 {
-    class RendererBasisTesting : public CoreTools::UnitTest
+    class RendererBasisTesting final : public CoreTools::UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(RendererBasisTesting);
+        using ClassType = RendererBasisTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit RendererBasisTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        void DoRunUnitTest() final;
+
         void MainTest();
+
         void AccessTest();
         void ConstructionTest();
+        void ExceptionTest();
 
-        void DoRunUnitTest() override;
+        void ExecuteTest(const RendererBasis& rendererBasis);
+        void SetSizeTest(RendererBasis& rendererBasis);
+        void SetMultisamplesNumberTest(RendererBasis& rendererBasis);
+        void SetDataFormat(RendererBasis& rendererBasis);
+
+        void WidthConstructionExceptionTest();
+        void HeightConstructionExceptionTest();
+        void MultisamplesNumberConstructionExceptionTest();
+        void SetWidthConstructionExceptionTest();
+        void SetHeightConstructionExceptionTest();
+        void SetMultisamplesNumberConstructionExceptionTest();
+
+    private:
+        int windowWidth;
+        int windowHeight;
+        DataFormatType colorFormat;
+        DataFormatType depthStencilFormat;
+        int multisamplesNumber;
     };
 }
 

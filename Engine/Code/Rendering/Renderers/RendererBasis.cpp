@@ -5,34 +5,39 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/21 19:09)
+///	引擎版本：0.8.1.2 (2022/09/05 14:04)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererBasis.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
-Rendering::RendererBasis::RendererBasis(int width, int height, TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept
+Rendering::RendererBasis::RendererBasis(int width, int height, DataFormatType colorFormat, DataFormatType depthStencilFormat, int numMultisamples)
     : windowWidth{ width },
       windowHeight{ height },
       colorFormat{ colorFormat },
       depthStencilFormat{ depthStencilFormat },
       multisamplesNumber{ numMultisamples }
 {
+    if (!IsValid())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("渲染参数必须大于或等于零。"s));
+    }
+
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::RendererBasis::RendererBasis() noexcept
     : windowWidth{ 0 },
-      windowHeight{},
-      colorFormat{ TextureFormat::DefaultColour },
-      depthStencilFormat{ TextureFormat::DefaultDepth },
+      windowHeight{ 0 },
+      colorFormat{ DataFormatType::R32G32B32A32Float },
+      depthStencilFormat{ DataFormatType::D24UNormS8UInt },
       multisamplesNumber{ 0 }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-#ifdef OPEN_CLASS_INVARIANT
 
 bool Rendering::RendererBasis::IsValid() const noexcept
 {
@@ -42,16 +47,14 @@ bool Rendering::RendererBasis::IsValid() const noexcept
         return false;
 }
 
-#endif  // OPEN_CLASS_INVARIANT
-
-Rendering::TextureFormat Rendering::RendererBasis::GetColorFormat() const noexcept
+Rendering::DataFormatType Rendering::RendererBasis::GetColorFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return colorFormat;
 }
 
-Rendering::TextureFormat Rendering::RendererBasis::GetDepthStencilFormat() const noexcept
+Rendering::DataFormatType Rendering::RendererBasis::GetDepthStencilFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -79,15 +82,20 @@ int Rendering::RendererBasis::GetHeight() const noexcept
     return windowHeight;
 }
 
-void Rendering::RendererBasis::SetSize(int width, int height) noexcept
+void Rendering::RendererBasis::SetSize(int width, int height)
 {
     RENDERING_CLASS_IS_VALID_1;
+
+    if (width < 0 || height < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("输入的宽度或高度小于零。"s));
+    }
 
     windowWidth = width;
     windowHeight = height;
 }
 
-void Rendering::RendererBasis::SetTextureFormat(TextureFormat aColorFormat, TextureFormat aDepthStencilFormat) noexcept
+void Rendering::RendererBasis::SetDataFormat(DataFormatType aColorFormat, DataFormatType aDepthStencilFormat) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
 
@@ -95,9 +103,14 @@ void Rendering::RendererBasis::SetTextureFormat(TextureFormat aColorFormat, Text
     depthStencilFormat = aDepthStencilFormat;
 }
 
-void Rendering::RendererBasis::SetMultisamplesNumber(int numMultisamples) noexcept
+void Rendering::RendererBasis::SetMultisamplesNumber(int numMultisamples)
 {
     RENDERING_CLASS_IS_VALID_1;
+
+    if (numMultisamples < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("输入的多重采样参数小于零。"s));
+    }
 
     multisamplesNumber = numMultisamples;
 }

@@ -19,6 +19,9 @@
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Resources/Buffers/MemberLayout.h"
+#include "Rendering/Shaders/ShaderData.h"
+#include "Rendering/State/BlendStateTarget.h"
+#include "Rendering/State/DepthStencilStateFace.h"
 
 template <>
 struct CoreTools::StreamSize<Rendering::TransformF>
@@ -51,6 +54,33 @@ template <>
 struct CoreTools::StreamSize<Rendering::MemberLayout>
 {
     NODISCARD static int GetStreamSize(const Rendering::MemberLayout& value)
+    {
+        return value.GetStreamingSize();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Rendering::BlendStateTarget>
+{
+    NODISCARD static int GetStreamSize(const Rendering::BlendStateTarget& value) noexcept
+    {
+        return value.GetStreamingSize();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Rendering::DepthStencilStateFace>
+{
+    NODISCARD static int GetStreamSize(const Rendering::DepthStencilStateFace& value) noexcept
+    {
+        return value.GetStreamingSize();
+    }
+};
+
+template <>
+struct CoreTools::StreamSize<Rendering::ShaderData>
+{
+    NODISCARD static int GetStreamSize(const Rendering::ShaderData& value)
     {
         return value.GetStreamingSize();
     }
@@ -112,6 +142,27 @@ RENDERING_DEFAULT_DECLARE Rendering::MemberLayout CoreTools::BufferSource::ReadA
 
 template <>
 RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::MemberLayout& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::BlendStateTarget& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::BlendStateTarget& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::DepthStencilStateFace& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::DepthStencilStateFace& datum);
+
+template <>
+Rendering::ShaderData CoreTools::BufferSource::ReadAggregate();
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Rendering::ShaderData& datum);
+
+template <>
+RENDERING_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Rendering::ShaderData& datum);
 
 namespace Rendering
 {

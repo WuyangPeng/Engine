@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rendering", "Rendering\Rendering.vcxproj", "{A7968056-15E9-4C40-9319-4DB908EE9EF9}"
 EndProject
@@ -36,6 +36,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderingExampleTesting", "..\..\..\AssistTesting\AssistWindows\Example\RenderingExample\RenderingExampleTesting\RenderingExampleTesting.vcxproj", "{A8480941-96A2-46D4-B809-50E25B66E7B1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{24A15630-1FF0-4B5D-96A1-718C43DA47FF} = {24A15630-1FF0-4B5D-96A1-718C43DA47FF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderingWindowTesting", "..\..\..\EngineTesting\EngineWindows\Rendering\RenderingWindowTesting\RenderingWindowTesting.vcxproj", "{BCBF754B-63B8-4573-A1EC-8BEA860E8997}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7968056-15E9-4C40-9319-4DB908EE9EF9} = {A7968056-15E9-4C40-9319-4DB908EE9EF9}
 	EndProjectSection
 EndProject
 Global
@@ -146,6 +151,22 @@ Global
 		{A8480941-96A2-46D4-B809-50E25B66E7B1}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{A8480941-96A2-46D4-B809-50E25B66E7B1}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{A8480941-96A2-46D4-B809-50E25B66E7B1}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Debug|x64.ActiveCfg = Debug|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Debug|x64.Build.0 = Debug|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Debug|x86.ActiveCfg = Debug|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Debug|x86.Build.0 = Debug|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Release|x64.ActiveCfg = Release|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Release|x64.Build.0 = Release|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Release|x86.ActiveCfg = Release|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.Release|x86.Build.0 = Release|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +178,7 @@ Global
 		{24A15630-1FF0-4B5D-96A1-718C43DA47FF} = {DAA49EB3-2547-46C9-B294-5396E4B440AA}
 		{BE26215C-6244-486D-B087-517ED6906614} = {DAA49EB3-2547-46C9-B294-5396E4B440AA}
 		{A8480941-96A2-46D4-B809-50E25B66E7B1} = {BE26215C-6244-486D-B087-517ED6906614}
+		{BCBF754B-63B8-4573-A1EC-8BEA860E8997} = {71DC1C2A-38BA-4795-99A5-0BB41EC88555}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {946B4585-5322-4D1B-AAF0-ACFC1758DCA4}

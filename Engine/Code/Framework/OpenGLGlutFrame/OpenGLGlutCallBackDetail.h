@@ -22,9 +22,9 @@
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 
 template <typename MiddleLayer>
-Framework::OpenGLGlutCallBack<MiddleLayer>::OpenGLGlutCallBack(int64_t delta)
+Framework::OpenGLGlutCallBack<MiddleLayer>::OpenGLGlutCallBack(int64_t delta, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ delta },
-      middleLayer{ std::make_shared<MiddleLayerType>(MiddleLayerPlatform::Windows) },
+      middleLayer{ MiddleLayerType::CreateMiddleLayer(MiddleLayerPlatform::Windows, environmentDirectory) },
       lastTime{},
       glutModifiers{},
       button{ MouseButtonsTypes::NullButton },

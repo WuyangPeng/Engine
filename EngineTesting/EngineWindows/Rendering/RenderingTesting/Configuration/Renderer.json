@@ -2,8 +2,8 @@
   "RendererType": 2,
 
   "Texture": {
-    "ColorFormat": 8,
-    "DepthStencilFormat": 22,
+    "ColorFormat": 2,
+    "DepthStencilFormat": 45,
     "MultisamplesNumber": 1
   },
 

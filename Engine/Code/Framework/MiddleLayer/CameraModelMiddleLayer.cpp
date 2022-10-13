@@ -23,8 +23,8 @@
 using std::make_shared;
 using std::move;
 
-Framework::CameraModelMiddleLayer::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, timeDelta{ System::g_Microseconds }
+Framework::CameraModelMiddleLayer::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, timeDelta{ System::g_Microseconds }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -194,7 +194,7 @@ void Framework::CameraModelMiddleLayer::RotateTrackBall(const WindowPoint& point
     RotateTrackBall();
 }
 
-void Framework::CameraModelMiddleLayer::SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer) noexcept(g_Assert < 2 || g_RenderingAssert < 2)
+void Framework::CameraModelMiddleLayer::SetBeginTrack(const WindowPoint& point, const CameraViewMiddleLayer& cameraViewMiddleLayer)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 

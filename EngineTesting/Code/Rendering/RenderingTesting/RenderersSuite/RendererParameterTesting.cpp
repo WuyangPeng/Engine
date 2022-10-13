@@ -5,81 +5,106 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/15 16:52)
+///	引擎测试版本：0.8.1.2 (2022/09/06 9:45)
 
 #include "RendererParameterTesting.h"
+#include "System/Windows/Flags/WindowsPictorialFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/DataTypes/ColourDetail.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RendererParameter.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RendererParameterTesting)
+using namespace std::literals;
+
+Rendering::RendererParameterTesting::RendererParameterTesting(const OStreamShared& stream)
+    : ParentType{ stream },
+      rendererType{ RendererTypes::OpenGL },
+      windowWidth{ 800 },
+      windowHeight{ 600 },
+      colorFormat{ DataFormatType::R32G32B32Float },
+      depthStencilFormat{ DataFormatType::D32FloatS8X24UInt },
+      multisamplesNumber{ 2 },
+      colour{ 1.0f, 0.7f, 0.5f, 0.0f },
+      windowTitle{ "RenderingTesting"s },
+      windowX{ 10 },
+      windowY{ 15 },
+      isAllowResize{ false },
+      className{ SYSTEM_TEXT("RenderingTestingClassName"s) },
+      menuName{ SYSTEM_TEXT("RenderingTestingMenuName"s) },
+      icon{ 1001 },
+      isIconDefault{ false },
+      cursor{ 1002 },
+      isCursorDefault{ false },
+      background{ WindowsBrushTypes::GrayBrush }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, RendererParameterTesting)
+
+void Rendering::RendererParameterTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::RendererParameterTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
 }
 
 void Rendering::RendererParameterTesting::AccessTest()
 {
-    RendererParameter firstRendererParameter("Configuration/Renderer.json");
+    RendererParameter rendererParameter("Configuration/RendererCopy.json");
 
-    ASSERT_ENUM_EQUAL(firstRendererParameter.GetRendererType(), RendererTypes::Glut);
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererParameter);
 
-    ASSERT_ENUM_EQUAL(firstRendererParameter.GetColorFormat(), TextureFormat::A8R8G8B8);
-    ASSERT_ENUM_EQUAL(firstRendererParameter.GetDepthStencilFormat(), TextureFormat::D24S8);
-    ASSERT_EQUAL(firstRendererParameter.GetNumMultisamples(), 1);
-
-    ASSERT_TRUE(Approximate(firstRendererParameter.GetClearColor(), Colour<float>(0.0f, 0.0f, 0.0f, 1.0f), 1e-8f));
-
-    ASSERT_EQUAL(firstRendererParameter.GetXPosition(), 0);
-    ASSERT_EQUAL(firstRendererParameter.GetYPosition(), 0);
-    ASSERT_EQUAL(firstRendererParameter.GetWidth(), 1024);
-    ASSERT_EQUAL(firstRendererParameter.GetHeight(), 768);
-    ASSERT_TRUE(firstRendererParameter.IsAllowResize());
-
-    firstRendererParameter.Resize(100, 10);
-
-    ASSERT_EQUAL(firstRendererParameter.GetWidth(), 100);
-    ASSERT_EQUAL(firstRendererParameter.GetHeight(), 10);
-
-    const RendererBasis rendererBasis = firstRendererParameter.GetRendererBasis();
-
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::A8R8G8B8);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::D24S8);
-    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), 1);
-
-    ASSERT_EQUAL(rendererBasis.GetWidth(), 100);
-    ASSERT_EQUAL(rendererBasis.GetHeight(), 10);
+    ASSERT_NOT_THROW_EXCEPTION_1(ResizeTest, rendererParameter);
 }
 
-void Rendering::RendererParameterTesting::ConstructionTest()
+void Rendering::RendererParameterTesting::ExecuteTest(const RendererParameter& rendererParameter)
 {
-    RendererParameter firstRendererParameter("Configuration/Renderer.json");
-    firstRendererParameter.LoadConfiguration("Configuration/RendererCopy.json");
+    ASSERT_ENUM_EQUAL(rendererParameter.GetRendererType(), rendererType);
 
-    ASSERT_ENUM_EQUAL(firstRendererParameter.GetRendererType(), RendererTypes::OpenGL);
+    ASSERT_ENUM_EQUAL(rendererParameter.GetColorFormat(), colorFormat);
+    ASSERT_ENUM_EQUAL(rendererParameter.GetDepthStencilFormat(), depthStencilFormat);
+    ASSERT_EQUAL(rendererParameter.GetNumMultisamples(), multisamplesNumber);
 
-    ASSERT_ENUM_EQUAL(firstRendererParameter.GetColorFormat(), TextureFormat::R8G8B8);
-    ASSERT_ENUM_EQUAL(firstRendererParameter.GetDepthStencilFormat(), TextureFormat::D24S8);
-    ASSERT_EQUAL(firstRendererParameter.GetNumMultisamples(), 2);
+    ASSERT_TRUE(Approximate(rendererParameter.GetClearColor(), colour, 1e-8f));
 
-    ASSERT_TRUE(Approximate(firstRendererParameter.GetClearColor(), Colour<float>(1.0f, 1.0f, 1.0f, 0.0f), 1e-8f));
+    ASSERT_EQUAL(rendererParameter.GetWindowTitle(), windowTitle);
 
-    ASSERT_EQUAL(firstRendererParameter.GetWindowTitle(), "RenderingTesting");
-    ASSERT_EQUAL(firstRendererParameter.GetXPosition(), 10);
-    ASSERT_EQUAL(firstRendererParameter.GetYPosition(), 10);
-    ASSERT_EQUAL(firstRendererParameter.GetWidth(), 102);
-    ASSERT_EQUAL(firstRendererParameter.GetHeight(), 76);
-    ASSERT_FALSE(firstRendererParameter.IsAllowResize());
+    ASSERT_EQUAL(rendererParameter.GetXPosition(), windowX);
+    ASSERT_EQUAL(rendererParameter.GetYPosition(), windowY);
+    ASSERT_EQUAL(rendererParameter.GetWidth(), windowWidth);
+    ASSERT_EQUAL(rendererParameter.GetHeight(), windowHeight);
+    ASSERT_EQUAL(rendererParameter.IsAllowResize(), isAllowResize);
 
-    const RendererBasis rendererBasis = firstRendererParameter.GetRendererBasis();
+    ASSERT_EQUAL(rendererParameter.GetWindowClassName(), className);
+    ASSERT_EQUAL(rendererParameter.GetWindowMenuName(), menuName);
 
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::R8G8B8);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::D24S8);
-    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), 2);
+    ASSERT_EQUAL(rendererParameter.GetIcon(), icon);
+    ASSERT_EQUAL(rendererParameter.IsIconDefault(), isIconDefault);
+    ASSERT_EQUAL(rendererParameter.GetCursor(), cursor);
+    ASSERT_EQUAL(rendererParameter.IsCursorDefault(), isCursorDefault);
+    ASSERT_EQUAL(rendererParameter.GetBackground(), background);
 
-    ASSERT_EQUAL(rendererBasis.GetWidth(), 102);
-    ASSERT_EQUAL(rendererBasis.GetHeight(), 76);
+    const auto rendererBasis = rendererParameter.GetRendererBasis();
+
+    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), rendererParameter.GetColorFormat());
+    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), rendererParameter.GetDepthStencilFormat());
+    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), rendererParameter.GetNumMultisamples());
+    ASSERT_EQUAL(rendererBasis.GetWidth(), rendererParameter.GetWidth());
+    ASSERT_EQUAL(rendererBasis.GetHeight(), rendererParameter.GetHeight());
+}
+
+void Rendering::RendererParameterTesting::ResizeTest(RendererParameter& rendererParameter)
+{
+    windowWidth = 100;
+    windowHeight = 10;
+    rendererParameter.Resize(windowWidth, windowHeight);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererParameter);
 }

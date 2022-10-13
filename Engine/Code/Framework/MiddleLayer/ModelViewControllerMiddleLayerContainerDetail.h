@@ -14,12 +14,21 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+template <typename ApplicationTrait,
+          typename ModelMiddleLayer,
+          typename ViewMiddleLayer,
+          template <typename> class ControllerMiddleLayer>
+Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::MiddleLayerInterfaceSharedPtr Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Create(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+{
+    return std::make_unique<ClassType>(middleLayerPlatform, environmentDirectory);
+}
+
 template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
-Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform },
-      modelMiddleLayer{ std::make_shared<ModelMiddleLayerType>(middleLayerPlatform) },
-      viewMiddleLayer{ std::make_shared<ViewMiddleLayerType>(middleLayerPlatform) },
-      controllerMiddleLayer{ std::make_shared<ControllerMiddleLayerType>(middleLayerPlatform) }
+Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory },
+      modelMiddleLayer{ std::make_shared<ModelMiddleLayerType>(middleLayerPlatform, environmentDirectory) },
+      viewMiddleLayer{ std::make_shared<ViewMiddleLayerType>(middleLayerPlatform, environmentDirectory) },
+      controllerMiddleLayer{ std::make_shared<ControllerMiddleLayerType>(middleLayerPlatform, environmentDirectory) }
 {
     modelMiddleLayer->SetViewMiddleLayer(viewMiddleLayer);
     modelMiddleLayer->SetControllerMiddleLayer(controllerMiddleLayer);
@@ -75,11 +84,11 @@ bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelM
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::PreCreate(environmentDirectory) && modelMiddleLayer->PreCreate(environmentDirectory) && viewMiddleLayer->PreCreate(environmentDirectory) && controllerMiddleLayer->PreCreate(environmentDirectory))
+    if (ParentType::PreCreate() && modelMiddleLayer->PreCreate() && viewMiddleLayer->PreCreate() && controllerMiddleLayer->PreCreate())
     {
         return true;
     }
@@ -90,11 +99,11 @@ bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelM
 }
 
 template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMiddleLayer, template <typename> class ControllerMiddleLayer>
-bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Create()
+bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::Create() && modelMiddleLayer->Create() && viewMiddleLayer->Create() && controllerMiddleLayer->Create())
+    if (ParentType::Create(environmentParameter) && modelMiddleLayer->Create(environmentParameter) && viewMiddleLayer->Create(environmentParameter) && controllerMiddleLayer->Create(environmentParameter))
     {
         return true;
     }
@@ -109,7 +118,7 @@ bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelM
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::Initialize() && modelMiddleLayer->Initialize() && viewMiddleLayer->Initialize() && controllerMiddleLayer->Initialize())
+    if (ParentType::Initialize() && viewMiddleLayer->Initialize() && modelMiddleLayer->Initialize() && controllerMiddleLayer->Initialize())
     {
         return true;
     }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 17:25)
+///	引擎辅助版本：0.8.1.2 (2022/09/18 14:44)
 
 #ifndef EXPORT_TEST_VISIBLE_SYMBOL_H
 #define EXPORT_TEST_VISIBLE_SYMBOL_H

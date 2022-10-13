@@ -13,6 +13,7 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "ObjectSystemsFwd.h"
+#include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/FileManager/WriteBufferIO.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 
@@ -119,6 +120,8 @@ namespace CoreTools
         // °ïÖúº¯Êý
         NODISCARD int GetBytesWritten() const noexcept;
         void WriteUniqueID(const ConstObjectInterfaceSharedPtr& object);
+
+        NODISCARD ConstFileBufferSharedPtr GetFileBuffer() const noexcept;
 
     private:
         void Write(size_t itemSize, const void* data);

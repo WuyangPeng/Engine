@@ -22,12 +22,13 @@
 #include "System/Windows/WindowsUser.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowCreate/WindowSize.h"
 
 template <typename MiddleLayer>
-Framework::WindowMessage<MiddleLayer>::WindowMessage(int64_t delta)
-    : ParentType{ delta }, middleLayer{ std::make_shared<MiddleLayerType>(MiddleLayerPlatform::Windows) }, accumulative{ delta }
+Framework::WindowMessage<MiddleLayer>::WindowMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, middleLayer{ MiddleLayerType::CreateMiddleLayer(MiddleLayerPlatform::Windows, environmentDirectory) }, accumulative{ delta }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -46,11 +47,11 @@ bool Framework::WindowMessage<MiddleLayer>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename MiddleLayer>
-bool Framework::WindowMessage<MiddleLayer>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowMessage<MiddleLayer>::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return middleLayer->PreCreate(environmentDirectory);
+    return middleLayer->PreCreate();
 }
 
 template <typename MiddleLayer>
@@ -86,7 +87,7 @@ System::WindowsLResult Framework::WindowMessage<MiddleLayer>::CreateMessage(HWnd
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    middleLayer->Create();
+    middleLayer->Create(Rendering::EnvironmentParameter::Create(hwnd));
 
     return ParentType::CreateMessage(hwnd, wParam, lParam);
 }

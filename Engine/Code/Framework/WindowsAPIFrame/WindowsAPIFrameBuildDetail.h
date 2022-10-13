@@ -19,8 +19,8 @@ template <typename Process>
 Framework::WindowsAPIFrameBuild<Process>::WindowsAPIFrameBuild(HInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
     : windowRegister{ environmentDirectory, instance, commandLine, information.GetWindowPictorial(), information.GetWindowName() },
       windowCreate{ WindowInstanceParameter{ instance, windowRegister.GetWindowClassName() },
-                      WindowCreateParameter{ information.GetWindowTitle(), information.GetStyle() },
-                      information.GetWindowSize() },
+                    WindowCreateParameter{ information.GetWindowTitle(), information.GetStyle() },
+                    information.GetWindowSize() },
       windowMessageLoop{ windowRegister.GetFunction() }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;

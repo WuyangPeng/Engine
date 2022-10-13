@@ -73,6 +73,7 @@ namespace Framework
         using CameraSystemsManagerType = CameraSystemsManager;
         using RenderingManagerType = RenderingManager;
         using GUIManagerType = GUIManager;
+        using MiddleLayerSharedPtr = std::unique_ptr<ClassType>;
 
     public:
         static_assert(std::is_base_of_v<InputManagerInterface, InputManagerType>);
@@ -89,12 +90,14 @@ namespace Framework
         static_assert(std::is_base_of_v<GUIManagerInterface, GUIManagerType>);
 
     public:
-        explicit EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController);
+        EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory);
         ~EngineMiddleLayerContainer() noexcept;
         EngineMiddleLayerContainer(const EngineMiddleLayerContainer& rhs) noexcept = delete;
         EngineMiddleLayerContainer& operator=(const EngineMiddleLayerContainer& rhs) noexcept = delete;
         EngineMiddleLayerContainer(EngineMiddleLayerContainer&& rhs) noexcept;
         EngineMiddleLayerContainer& operator=(EngineMiddleLayerContainer&& rhs) noexcept;
+
+        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -111,7 +114,7 @@ namespace Framework
         void SetRenderingManager(const MiddleLayerInterfaceSharedPtr& renderingManager) override;
         void SetGUIManager(const MiddleLayerInterfaceSharedPtr& guiManager) override;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+        NODISCARD bool PreCreate() override;
         NODISCARD bool Initialize() override;
         void PreIdle() override;
         void Terminate() override;
@@ -126,7 +129,7 @@ namespace Framework
         NODISCARD bool Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
         NODISCARD bool PassiveMotion(const WindowPoint& point) override;
         NODISCARD bool MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) override;
-        NODISCARD bool Create() override;
+        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) override;
         NODISCARD bool Destroy() override;
         NODISCARD bool Idle(int64_t timeDelta) override;
 

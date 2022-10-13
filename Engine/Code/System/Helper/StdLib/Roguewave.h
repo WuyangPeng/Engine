@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:55)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/11 23:24)
 
 #ifndef SYSTEM_HELPER_ROGUEWAVE_H
 #define SYSTEM_HELPER_ROGUEWAVE_H
@@ -17,27 +17,45 @@
     #define TCRE_RW_STDLIB 1
 
     #ifndef _RWSTD_VER
+
         #define TCRE_RWSTD_VERSION 0x010000
+
     #elif _RWSTD_VER < 0x010000
+
         #define TCRE_RWSTD_VERSION (_RWSTD_VER << 8)
+
     #else  // 0x010000 <= _RWSTD_VER
+
         #define TCRE_RWSTD_VERSION _RWSTD_VER
+
     #endif  // _RWSTD_VER
 
     #ifndef TCRE_CPPLIB_VERSION
+
         #define TCRE_CPPLIB_VERSION TCRE_RWSTD_VERSION
+
     #endif  // TCRE_CPPLIB_VERSION
 
     #ifndef _RWSTD_VER
+
         #define TCRE_SYSTEM_STDLIB "Rogue Wave 标准库版本 (未知版本)"
+
     #elif _RWSTD_VER < 0x04010200
+
         #define TCRE_SYSTEM_STDLIB "Rogue Wave 标准库版本 " SYSTEM_STRINGIZE(TCRE_CPPLIB_VERSION)
+
     #else  // 0x04010200 <= _RWSTD_VER
+
         #ifdef _RWSTD_VER_STR
+
             #define TCRE_SYSTEM_STDLIB "Apache STDCXX 标准库版本 " _RWSTD_VER_STR
+
         #else  // !_RWSTD_VER_STR
+
             #define TCRE_SYSTEM_STDLIB "Apache STDCXX 标准库版本 " SYSTEM_STRINGIZE(TCRE_CPPLIB_VERSION)
+
         #endif  // _RWSTD_VER_STR
+
     #endif  // _RWSTD_VER
 
     #define TCRE_USE_ROGUEWAVE static_cast<void>(0)

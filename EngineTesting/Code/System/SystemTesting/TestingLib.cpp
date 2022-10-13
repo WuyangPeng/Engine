@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 15:33)
+///	引擎测试版本：0.8.1.2 (2022/09/04 15:37)
 
 #include "System/SystemLib.h"
 #include "CoreTools/CoreToolsLib.h"
@@ -14,5 +14,7 @@
 
 // NetworkMacroTesting需要
 #if defined(TCRE_USE_MSVC)
+
     #pragma comment(lib, "Ws2_32.lib")
+
 #endif  // TCRE_USE_MSVC

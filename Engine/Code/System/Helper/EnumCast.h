@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:54)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/22 22:41)
 
 #ifndef SYSTEM_HELPER_ENUM_CAST_H
 #define SYSTEM_HELPER_ENUM_CAST_H
@@ -45,7 +45,7 @@ namespace System
     }
 
     template <typename E>
-    void UnderlyingCastEnumPtr(typename std::underlying_type_t<E> value, E* ptr) noexcept
+    void UnderlyingCastEnumPtr(std::underlying_type_t<E> value, E* ptr) noexcept
     {
         static_assert(std::is_enum_v<E>, "E must be an enum.");
 

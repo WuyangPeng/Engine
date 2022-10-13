@@ -35,13 +35,13 @@ Rendering::PlatformVertexBufferImpl::PlatformVertexBufferSharedPtr Rendering::Pl
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, vertexBuffer);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::Glut:
             return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);

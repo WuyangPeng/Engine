@@ -10,6 +10,8 @@
 #ifndef RENDERING_BASE_GRAPHICS_OBJECT_TYPE_H
 #define RENDERING_BASE_GRAPHICS_OBJECT_TYPE_H
 
+#include "System/Helper/UserMacro.h"
+
 namespace Rendering
 {
     enum class GraphicsObjectType
@@ -17,6 +19,7 @@ namespace Rendering
         None,  // 抽象的
 
         Resource,  // 抽象的
+
         Buffer,  // 抽象的
         ConstantBuffer,
         TextureBuffer,
@@ -26,6 +29,7 @@ namespace Rendering
         TypedBuffer,
         RawBuffer,
         IndirectArgumentsBuffer,
+
         Texture,  // 抽象的
         TextureSingle,  // 抽象的
         Texture1,

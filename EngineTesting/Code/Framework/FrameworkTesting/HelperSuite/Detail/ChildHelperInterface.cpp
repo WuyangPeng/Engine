@@ -15,8 +15,8 @@
 
 using std::make_shared;
 
-Framework::ChildHelperInterface::ChildHelperInterface(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(ChildHelperMiddleLayer::Count) }
+Framework::ChildHelperInterface::ChildHelperInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(ChildHelperMiddleLayer::Count) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

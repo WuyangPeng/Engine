@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:56)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/27 23:04)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_TYPE_INDEX_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_TYPE_INDEX_H
@@ -27,6 +27,7 @@
 #include SYSTEM_WARNING_DISABLE(26462)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26485)
+#include SYSTEM_WARNING_DISABLE(26496)
 
 #include <boost/type_index.hpp>
 

@@ -334,7 +334,6 @@ Rendering::LightSptPerPixEffect::LightSptPerPixEffect(CoreTools::DisableNotThrow
 
     auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
     technique->InsertPass(pass);
-    InsertTechnique(technique);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -404,35 +403,6 @@ void Rendering::LightSptPerPixEffect::PostLink()
     RENDERING_CLASS_IS_VALID_9;
 
     VisualEffect::PostLink();
-
-    auto pass = GetTechnique(0)->GetPass(0);
-    auto vshader = pass->GetVertexShader();
-    auto cloneVShader = boost::polymorphic_pointer_cast<VertexShader>(vshader->CloneObject());
-    auto pshader = pass->GetPixelShader();
-    auto clonePShader = boost::polymorphic_pointer_cast<PixelShader>(pshader->CloneObject());
-    auto profile = cloneVShader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 1; ++j)
-        {
-            profile->SetBaseRegister(i, j, *vRegisters.at(i));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    profile = clonePShader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 13; ++j)
-        {
-            profile->SetBaseRegister(i, j, pRegisters.at(i)->at(j));
-        }
-
-        profile->SetProgram(i, pPrograms.at(i));
-    }
 }
 
 int64_t Rendering::LightSptPerPixEffect::Register(CoreTools::ObjectRegister& target) const

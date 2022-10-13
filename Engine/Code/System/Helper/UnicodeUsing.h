@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:49)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/17 22:33)
 
 #ifndef SYSTEM_HELPER_UNICODE_MACRO_H
 #define SYSTEM_HELPER_UNICODE_MACRO_H
@@ -60,9 +60,13 @@ namespace System
         static_assert(std::is_arithmetic_v<T>);
 
 #ifdef UNICODE
+
         return std::to_wstring(value);
+
 #else  // !UNICODE
+
         return std::to_string(value);
+
 #endif  // UNICODE
     }
 }

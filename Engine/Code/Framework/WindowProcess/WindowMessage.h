@@ -26,11 +26,11 @@ namespace Framework
         using String = System::String;
 
     public:
-        explicit WindowMessage(int64_t delta);
+        WindowMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+        NODISCARD bool PreCreate() override;
         NODISCARD bool Initialize() override;
         void PreIdle() override;
         void Terminate() override;

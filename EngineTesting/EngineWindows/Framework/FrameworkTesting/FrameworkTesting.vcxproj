@@ -67,6 +67,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -267,7 +268,7 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup>  
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -388,6 +389,8 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MessageManagerInterfaceTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTestingBaseDetail.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerSuite.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelMiddleLayerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerContainerTesting.h" />
@@ -401,6 +404,9 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\RenderingManagerInterfaceTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ResourceManagerInterfaceTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\SystemManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceNullTest.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceTest.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\RenderingManagerInterfaceTest.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ViewMiddleLayerTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackInterfaceTesting.h" />
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.h" />
@@ -495,6 +501,7 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MessageManagerInterfaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTestingBase.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelMiddleLayerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerContainerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerTesting.cpp" />
@@ -507,6 +514,9 @@ xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTesti
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\RenderingManagerInterfaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ResourceManagerInterfaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\SystemManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceNullTest.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceTest.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\RenderingManagerInterfaceTest.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ViewMiddleLayerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackInterfaceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.cpp" />

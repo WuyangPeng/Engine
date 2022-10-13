@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 17:24)
+///	引擎辅助版本：0.8.1.2 (2022/09/18 14:43)
 
 #ifndef EXPORT_TEST_LIB_H
 #define EXPORT_TEST_LIB_H
@@ -15,9 +15,13 @@
     #ifndef BUILDING_STATIC
 
         #ifdef _DEBUG
+
             #pragma comment(lib, "ExportTestD.lib")
+
         #else  // !_DEBUG
+
             #pragma comment(lib, "ExportTest.lib")
+
         #endif  // _DEBUG
 
     #else  // !BUILDING_STATIC
@@ -25,9 +29,13 @@
         #include "DllLib.h"
 
         #ifdef _DEBUG
+
             #pragma comment(lib, "ExportTestStaticD.lib")
+
         #else  // !_DEBUG
+
             #pragma comment(lib, "ExportTestStatic.lib")
+
         #endif  // _DEBUG
 
     #endif  // BUILDING_STATIC

@@ -35,13 +35,13 @@ Rendering::PlatformTexture3DImpl::PlatformTexture3DSharedPtr Rendering::Platform
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, texture3D);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9Texture3D>(renderer, texture3D);
         case RendererTypes::Glut:
             return make_shared<OpenGLTexture3D>(renderer, texture3D);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLTexture3D>(renderer, texture3D);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9Texture3D>(renderer, texture3D);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLTexture3D>(renderer, texture3D);

@@ -26,8 +26,8 @@ using std::make_shared;
 using std::move;
 using std::string;
 
-Framework::ViewMiddleLayer::ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Framework::ViewMiddleLayer::ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -51,20 +51,20 @@ Framework::ViewMiddleLayer& Framework::ViewMiddleLayer::operator=(ViewMiddleLaye
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ViewMiddleLayer)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ViewMiddleLayer, GetRenderer, Rendering::RendererSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, ViewMiddleLayer, GetRenderer, Rendering::ConstRendererSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::RendererSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetRenderer, Rendering::ConstRendererSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ViewMiddleLayer, GetClearColor, Framework::ViewMiddleLayer::Colour);
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, ViewMiddleLayer, SetClearColor, Colour, void)
 
-bool Framework::ViewMiddleLayer::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::ViewMiddleLayer::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::PreCreate(environmentDirectory))
+    if (ParentType::Create(environmentParameter))
     {
-        auto rendererFileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
+        auto rendererFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Renderer.json");
 
-        impl->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName));
+        impl->ResetRenderer(CoreTools::StringConversion::StandardConversionMultiByte(rendererFileName), environmentParameter);
 
         return true;
     }

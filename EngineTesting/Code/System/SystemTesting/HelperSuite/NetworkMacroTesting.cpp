@@ -5,9 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 1:11)
+///	引擎测试版本：0.8.1.2 (2022/09/20 23:07)
 
 #include "NetworkMacroTesting.h"
+#include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
@@ -19,7 +20,6 @@
 #define BUILDING_SYSTEM_EXPORT
 
 #include "System/Helper/NetworkMacro.h"
-#include "System/Helper/WindowsMacro.h"
 
 System::NetworkMacroTesting::NetworkMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -55,9 +55,9 @@ void System::NetworkMacroTesting::FdTest()
 void System::NetworkMacroTesting::StartUp()
 {
     WinSockData wsaData{};
-
     constexpr auto versionRequested = MakeWord(2, 2);
     const auto startUp = WinSockStartUp(versionRequested, &wsaData);
+
     ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
 }
 
@@ -70,11 +70,11 @@ void System::NetworkMacroTesting::Cleanup()
 System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 {
     constexpr uint16_t port{ 5300 };
-    WinSockAddrIn addr{};
 
+    WinSockAddrIn addr{}; 
     addr.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
     addr.sin_port = GetHostToNetShort(port);
-    addr.sin_addr.s_addr = GetHostToNetLong(g_InAddrAny);
+    addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
     const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "socketHandle 是无效的。");

@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = RendererImpl;
 
     public:
-        explicit Dx9Renderer(const RendererBasis& basis);
+        explicit Dx9Renderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

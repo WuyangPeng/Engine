@@ -12,12 +12,12 @@
 #include "GraphicsRenderer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "Rendering/LocalEffects/Font.h"
 #include "Rendering/LocalEffects/TextEffect.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
-#include "Rendering/LocalEffects/Font.h"
 
-Rendering::GraphicsRenderer::GraphicsRenderer(const RendererBasis& basis)
-    : ParentType{ basis },
+Rendering::GraphicsRenderer::GraphicsRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+    : ParentType{ renderingEnvironment, basis },
       rendererObject{},
       rendererObjectMutex{},
       rendererDrawTarget{},

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/19 19:24)
+///	引擎版本：0.8.1.2 (2022/09/07 15:03)
 
 #ifndef RENDERING_RENDERERS_H
 #define RENDERING_RENDERERS_H
@@ -13,6 +13,7 @@
 #include "BufferLockManagerDetail.h"
 #include "BufferManagementDetail.h"
 #include "BufferManagementLockEncapsulationDetail.h"
+#include "EnvironmentParameter.h"
 #include "PlatformIndexBuffer.h"
 #include "PlatformRenderTarget.h"
 #include "PlatformTexture1D.h"
@@ -24,10 +25,11 @@
 #include "RenderTargetManagement.h"
 #include "RendererBasis.h"
 #include "RendererParameter.h"
-#include "SamplerState.h"
+#include "RenderingDevice.h"
 #include "TextureLockManagerDetail.h"
 #include "TextureManagementDetail.h"
 #include "TextureManagementLockEncapsulationDetail.h"
 #include "VertexFormatManagement.h"
+#include "WindowsParameter.h"
 
 #endif  // RENDERING_RENDERERS_H

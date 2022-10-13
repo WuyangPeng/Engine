@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/22 14:33)
+///	引擎版本：0.8.1.2 (2022/09/05 20:44)
 
 #ifndef RENDERING_RENDERERS_RENDERER_PARAMETER_H
 #define RENDERING_RENDERERS_RENDERER_PARAMETER_H
@@ -13,11 +13,10 @@
 #include "Rendering/RenderingDll.h"
 
 #include "RendererBasis.h"
-#include "Flags/RendererTypes.h"
+#include "RenderersFwd.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
-#include "Rendering/DataTypes/Flags/TextureFormat.h"
 
 RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(RendererParameter, RendererParameterImpl);
 
@@ -27,21 +26,22 @@ namespace Rendering
     {
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(RendererParameter);
-        using Colour = Colour<float>;
+
+        using String = System::String;
+        using ColourType = Colour<float>;
+        using WindowsBrushTypes = System::WindowsBrushTypes;
 
     public:
         explicit RendererParameter(const std::string& fileName);
 
         CLASS_INVARIANT_DECLARE;
 
-        void LoadConfiguration(const std::string& fileName);
-
         NODISCARD RendererTypes GetRendererType() const noexcept;
 
-        NODISCARD TextureFormat GetColorFormat() const noexcept;
-        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD DataFormatType GetColorFormat() const noexcept;
+        NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD int GetNumMultisamples() const noexcept;
-        NODISCARD Colour GetClearColor() const noexcept;
+        NODISCARD ColourType GetClearColor() const noexcept;
 
         NODISCARD std::string GetWindowTitle() const;
         NODISCARD int GetXPosition() const noexcept;
@@ -54,17 +54,17 @@ namespace Rendering
 
         NODISCARD RendererBasis GetRendererBasis() const noexcept;
 
-        NODISCARD System::String GetWindowMenuName() const;
-        NODISCARD System::String GetWindowClassName() const;
+        NODISCARD String GetWindowMenuName() const;
+        NODISCARD String GetWindowClassName() const;
 
         NODISCARD int GetIcon() const noexcept;
         NODISCARD bool IsIconDefault() const noexcept;
         NODISCARD int GetCursor() const noexcept;
         NODISCARD bool IsCursorDefault() const noexcept;
-        NODISCARD System::WindowsBrushTypes GetBackground() const noexcept;
+        NODISCARD WindowsBrushTypes GetBackground() const noexcept;
 
     private:
-        void DoLoadConfiguration(const std::string& fileName);
+        NODISCARD static PackageType CreateRendererParameter(const std::string& fileName);
 
     private:
         PackageType impl;

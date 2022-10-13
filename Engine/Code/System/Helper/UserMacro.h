@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:49)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/15 18:48)
 
 #ifndef SYSTEM_HELPER_USER_MACRO_H
 #define SYSTEM_HELPER_USER_MACRO_H
@@ -15,14 +15,15 @@
 #define SYSTEM_ClOSE_BEGIN (0x01)
 
 #define CLOSE_GLUT (SYSTEM_ClOSE_BEGIN)
-#define CLOSE_ENABLE_GL_ERROR_CHECKING (SYSTEM_ClOSE_BEGIN << 1)
-#define CLOSE_DIRECTX (SYSTEM_ClOSE_BEGIN << 2)
+#define CLOSE_GLFW (SYSTEM_ClOSE_BEGIN << 1)
+#define CLOSE_ENABLE_GL_ERROR_CHECKING (SYSTEM_ClOSE_BEGIN << 2)
+#define CLOSE_DIRECTX (SYSTEM_ClOSE_BEGIN << 3)
 
 #define SYSTEM_ClOSE_END CLOSE_DIRECTX
 
 #define CLOSE_SYSTEM_MAX ((SYSTEM_ClOSE_END << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x07）
+// 编译测试（默认为0，最大值为0x0F）
 #define COMPILE_SYSTEM_CLOSE 0x00
 
 static_assert(0 <= COMPILE_SYSTEM_CLOSE, "COMPILE_SYSTEM_CLOSE Must be greater than or equal 0.");
@@ -43,6 +44,11 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
     #define SYSTEM_USE_GLUT static_cast<void>(0)
 #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLUT) != CLOSE_GLUT
 
+// 是否使用glfw
+#if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLFW) != CLOSE_GLFW
+    #define SYSTEM_USE_GLFW static_cast<void>(0)
+#endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_GLFW) != CLOSE_GLFW
+
 #ifdef _DEBUG
 
     #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_ENABLE_GL_ERROR_CHECKING) != CLOSE_ENABLE_GL_ERROR_CHECKING
@@ -56,7 +62,7 @@ static_assert(COMPILE_SYSTEM_CLOSE <= CLOSE_SYSTEM_MAX, "COMPILE_SYSTEM_CLOSE Mu
 
     #if !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
         // 是否使用DirectX
-        #define SYSTEM_USE_DIRECTX_11 static_cast<void>(0)
+        #define SYSTEM_USE_DIRECTX_12 static_cast<void>(0)
     #endif  //  !defined(COMPILE_SYSTEM_CLOSE) || (COMPILE_SYSTEM_CLOSE & CLOSE_DIRECTX) != CLOSE_DIRECTX
 
 #endif  // SYSTEM_PLATFORM_WIN32

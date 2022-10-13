@@ -32,12 +32,12 @@ EGL（引擎直接关联）
 ----------------------------
 boost（引擎直接关联）
 
-1. 版本：1.78.0。
+1. 版本：1.80.0。
 2. 官方网站：http://www.boost.org/。
 3. 编译指令：
   （1）运行bootstrap。
-  （2）运行b2 --toolset=msvc-10.0（特定版本）
-           b2（最新版本）	
+  （2）运行b2（最新版本）
+		   b2 --toolset=msvc-14.2（特定版本）           	
   （3）由于链接context库需要，使用选项asmflags=\safeseh。
 
 ----------------------------
@@ -52,7 +52,7 @@ stlsoft（引擎直接关联）
 ----------------------------
 ACE（引擎通过宏NETWORK_USE_ACE关联）
 
-1. 版本：7.0.0。
+1. 版本：7.0.8。
 2. 官方网站：http://download.dre.vanderbilt.edu/、 http://www.dre.vanderbilt.edu/~schmidt/ACE.html。
 3. 在ace目录下增加文件config.h包含正确的config文件。
    #ifndef ACE_CONFIG_H
@@ -65,12 +65,11 @@ ACE（引擎通过宏NETWORK_USE_ACE关联）
 4. 编译好x64版本后，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\X64，
    然后再编译Win32版本，手动将ACE\ACE_wrappers\lib下文件复制到ACE\ACE_wrappers\lib\Win32。
    可使用ACE下的批处理文件CopyACEWin32和CopyACEX64执行。
-5. 编译release的Win32版本和x64版本时，需要先执行另一个版本的工程清理。
 
 ----------------------------
 openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 
-1. 版本：1.1.1j。
+1. 版本：3.0.5。
 2. 官方网站：https://www.openssl.org/。
 3. 下载并安装 ActivePerl。下载地址：http://www.activestate.com/activeperl/downloads 
 4. 打开命令提示符，定位到 ($Perl64)\eg 目录，执行 perl example.pl，
@@ -90,16 +89,18 @@ openssl（引擎通过宏NETWORK_USE_OPENSSL关联）
 ----------------------------
 
 mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
-1.  版本：8.0.23。
+1.  版本：8.0.30。
 2.  官方网站：https://www.mysql.com/。
 3.  编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4.  Win32版本定义WITHOUT_SERVER。
+4.  定义WITHOUT_SERVER。
 5.  定义正确的BOOST_INCLUDE_DIR到($boost)。
-6.  boost.cmake 41行、303行、305行、313行改成当前使用的boost库版本。
-7.  定义正确的OPENSSL_ROOT_DIR到($openssl)，需要链接对应版本的openssl。 
-8.  Win32版本的mysqld.vcxproj工程文件x64改成x86。
-9.  sql_locale.cc、test_string_service_charset.cc、sql_commands_help_data.h另存为ANSI编码。
-10. 文件crc32.cc（在storage\innobase\ut下）
+6.  boost.cmake 41行、304行、306行、314行改成当前使用的boost库版本。
+7.  定义正确的OPENSSL_ROOT_DIR到($openssl)，需要链接对应版本的openssl。
+
+如果需要编译服务器，还可能需要下面的修改（没有定义WITHOUT_SERVER，Win32版本不再被支持）： 
+1.  my_alloc.h、strings_strnxfrm-t.cc、strings_valid_check-t.cc、strings_utf8-t.cc、
+	sql_locale.cc、test_string_service_charset.cc、sql_commands_help_data.h、mem_root_deque.h另存为ANSI编码。
+2.  文件crc32.cc（在storage\innobase\ut下）
     第227行开始改成
 	#if defined(_M_X64)  
 		crc_64bit = _mm_crc32_u64(crc_64bit, data);   
@@ -110,27 +111,32 @@ mysql （引擎通过宏DATABASE_USE_MYSQL_C_API关联）
 			ut_crc32_8_hw(&crc_64bit, &buf, &len); 
 		}
 	#endif /* defined (_M_X64) */
-11. 文件tables_contained_in.h（在include下）
+3.  文件tables_contained_in.h（在include下）
     第67行开始改成
     #if defined(_M_X64)  
 		_BitScanForward64(&idx, m_bits_left);  
 	#else // !_M_X64 
 		_BitScanForward(&idx, m_bits_left);
 	#endif /* defined (_M_X64) */
-11. 将目录include\boost_1_V_0中的V改成目前的boost库版本。
-12. 由于boost库版本不一致，导致编译不过时，使用mysql指定的boost版本，
+4.  将目录include\boost_1_V_0中的V改成目前的boost库版本。
+5.  由于boost库版本不一致，导致编译不过时，使用mysql指定的boost版本，
 	需要旧版本的boost头文件复制到include\boost_1_V_0下，然后用include\boost_1_V_0原来的文件进行覆盖。
 
 ----------------------------
 mysql connector c++（引擎通过宏DATABASE_USE_MYSQL_CPP_CONNECTOR关联）
-1. 版本：8.0.23。
+1. 版本：8.0.30。
 2. 官方网站：https://www.mysql.com/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. 设置正确的WITH_SSL（原为system）指向对应版本的($openssl)，如编译的是x64版本，需要指向x64的openssl。
-
+5. WIN32版本如果无法编译，使用CMake重新生成以下工程：
+   $(MysqlConnectorCpp)\cdk\extra\zlib，生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\zlib
+   $(MysqlConnectorCpp)\cdk\extra\zstd 生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\zstd
+   $(MysqlConnectorCpp)\cdk\extra\lz4 生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\lz4
+   $(MysqlConnectorCpp)\cdk\extra\protobuf 生成目录：$(MysqlConnectorCpp)\BuildWin32\cdk\protocol\mysqlx\protobuf
+   
 ----------------------------  
 protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
-1. 版本：3.15.5。
+1. 版本：3.21.5。
 2. 官方网站：https://github.com/protocolbuffers/protobuf。
 3. git地址：https://github.com/protocolbuffers/protobuf.git。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
@@ -138,7 +144,7 @@ protobuf（引擎通过宏NETWORK_USE_PROTOBUF关联）
 ----------------------------
 freeglut（引擎通过宏SYSTEM_USE_GLUT关联）
 
-1. 版本：3.2.1。
+1. 版本：3.2.2。
 2. 官方网站：http://freeglut.sourceforge.net/。
 3. git地址：https://github.com/dcnieho/FreeGLUT。
 4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
@@ -146,13 +152,13 @@ freeglut（引擎通过宏SYSTEM_USE_GLUT关联）
 ----------------------------
 wxWidgets（引擎通过宏USER_INTERFACE_USE_WX_WIDGETS关联）
 
-1. 版本：3.1.3。
+1. 版本：3.2.0。
 2. 官方网站：http://www.wxwidgets.org/。
 
 ----------------------------
 opencv（引擎通过宏IMAGICS_USE_OPENCV关联）
 
-1. 版本：4.3.0。
+1. 版本：4.6.0。
 2. 官方网站：https://opencv.org/
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
@@ -172,28 +178,28 @@ Visual Leak Detector（引擎Debug版本直接关联）
 ----------------------------
 OpenAL Soft（引擎通过宏SOUND_EFFECT_USE_OPENAL关联）
 
-1. 版本：1.20.1。
+1. 版本：1.22.2。
 2. 官方网站：https://www.openal-soft.org/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 zlib（引擎直接关联）
 
-1. 版本：1.2.11。
+1. 版本：1.2.12。
 2. 官方网站：http://www.zlib.net/
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 freetype（引擎直接关联）
 
-1. 版本：2.10.2。
+1. 版本：2.12.1。
 2. 官方网站：https://www.freetype.org/
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 lua（引擎通过宏SCRIPT_USE_LUA关联）
 
-1. 版本：5.4.0。
+1. 版本：5.4.4。
 2. 官方网站：http://www.lua.org/
 3. 在build下建立VS工程，lua，静态库。包含以下文件：lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
    lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c 
@@ -207,19 +213,19 @@ lua（引擎通过宏SCRIPT_USE_LUA关联）
 ----------------------------  
 OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPENXLSX关联）
 
-1. 官方网站：https://github.com/troldal/OpenXLSX。
-2. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-3. 执行OpenXLSX下的批处理文件。
+1. 版本：0.4.1。
+2. 官方网站：https://github.com/troldal/OpenXLSX。
+3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+4. OPENXLSX_LIBRARY_TYPE值修改成SHARED。
 
 ----------------------------
 pugixml（引擎直接关联）
 
-1. 版本：1.11.4。
+1. 版本：1.12.1。
 2. 官方网站：https://github.com/zeux/pugixml。
 3. pugiconfig.hpp第47行，定义宏PUGIXML_HEADER_ONLY。
 
 ----------------------------
-
 miniz（引擎直接关联）
 
 1. 版本：2.2.0。
@@ -227,59 +233,9 @@ miniz（引擎直接关联）
 3. 使用releases page页的版本编译静态库，名为miniz。
 
 ----------------------------
-perl（引擎通过宏SCRIPT_USE_PERL关联）
-
-1. 版本：5.32.0。
-2. 官方网站：https://www.perl.org/
-3. 修改win32下的Makefile文件，134行去除注释。
-4. 修改win32下的Makefile文件，23行的INST_DRV设置成($perl)。
-5. 运行VS，并打开命令提示符，定位至 ($perl)/Win32目录
-6. 编译Win32的debug版，修改win32下的Makefile文件，30行、163行去除注释，24行设置成$(INST_DRV)\BuildWin32\Debug。
-7. 编译Win32的release版，修改win32下的Makefile文件，30行去除注释，163行注释，24行设置成$(INST_DRV)\BuildWin32\Release。
-8. 编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat。
-9. 编译X64的debug版，修改win32下的Makefile文件，163行去除注释，30行注释，24行设置成$(INST_DRV)\BuildX64\Debug。
-10.编译X64的release版，修改win32下的Makefile文件，30行、163行注释，24行设置成$(INST_DRV)\BuildX64\Release。
-11.在Win32目录层级下执行命令nmake。
-12.编译四个版本中需要执行nmake clean，然后再执行nmake、nmake install。
-13.编译Win32和X64版本中需要重新使用原版的perl编译。
-
-----------------------------
-Pantheios（引擎通过宏CORE_TOOLS_USE_PANTHEIOS关联）
-
-1. 版本：1.0.1。
-2. 官方网站：http://www.pantheios.org/
-3. 修改build\vc16.x64和build\vc16下makefile文件，
-   第77行改成PROJ_LIB_DIR =	$(PROJ_BASE_DIR)\X64\lib和PROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\lib。
-   注释掉第687行和700行（-WX警告视为错误）。
-   23行下增加
-   STLSOFT = ($stlsoft)
-   ACE = ($ACE)
-4. 注释pantheios.h第196行，因为无法下载到1.10.1 beta 20版本的stlsoft。
-5. test\component\test.component.bec.fprintf下的文件test.component.bec.fprintf.cpp注释掉第182行。
-6. 运行VS，并打开命令提示符，定位至build\vc16.x64和build\vc16目录，执行nmake。
-7. 编译X64，转到目录Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build下运行vcvars64.bat。
-8. 不要执行nmake clean。
-
-----------------------------
-Openrj（引擎通过宏CORE_TOOLS_USE_OPENRJ关联）
-
-1. 版本：1.6.4。
-2. 官方网站：http://www.openrj.org/
-3. 修改build\vc8下makefile文件，
-   第26行改成COMP_TAG = vc16。
-   第44行改成PROJ_LIB_DIR = $(PROJ_BASE_DIR)\Win32\lib和PROJ_LIB_DIR = $(PROJ_BASE_DIR)\X64\lib。
-   注释掉第110行和115行（-WX警告视为错误）。
-   25行增加STLSOFT = ($stlsoft)。
-   编译X64，27行下增加
-   LD_ARGS = -machine:x64
-   ARCH_TAG = .x64。
-4. 运行VS，并打开命令提示符，定位至build\vc8目录，执行nmake。
-5. 不要执行nmake clean。
-
-----------------------------
 ogg（引擎通过宏SOUND_EFFECT_USE_OGG关联）
 
-1. 版本：1.3.4。
+1. 版本：1.3.5。
 2. 官方网站：https://www.xiph.org/downloads/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
@@ -295,7 +251,7 @@ vorbis（引擎通过宏SOUND_EFFECT_USE_VORBIS关联）
 ----------------------------
 FLTK（引擎通过宏USER_INTERFACE_USE_FLTK关联）
 
-1. 版本：1.3.5
+1. 版本：1.3.8
 2. 官方网站：https://www.fltk.org/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 4. 文件Fl_Device.cxx：
@@ -313,37 +269,4 @@ FLTK（引擎通过宏USER_INTERFACE_USE_FLTK关联）
    return &display;
    以消除內存泄露。 
  
-----------------------------
-chipmunk2D physics（引擎通过宏PHYSICS_USE_CHIPMUNK2D关联）
-
-1. 版本：7.0.3。
-2. 官方网站：http://chipmunk-physics.net/。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
-4. chipmunk_demos的C++语言标准改成：std:c++latest。
-5. ChipmunkDebugDraw.c
-   第44行的(RGBA8)改成RGBA8。
-   注释第63行到150行。 
-   第170行到175行，第183行到186行，206行到213行，267行到270行的(Vertex)改成Vertex。
-   第171行和182行改成
-   Index index[] = { 0, 1, 2, 0, 2, 3 };
-   Vertex *vertexes = push_vertexes(4, index, 6);
-6. ChipmunkDemo.c   
-   第353行到第355行改成
-   sg_pass_action action{};
-   action.colors[0] = {.action = SG_ACTION_CLEAR, .val = {0x07/255.0f, 0x36/255.0f, 0x42/255.0f}};
-   第629行到第638行改成
-   return sapp_desc{
-			.init_cb = Init,
-			.frame_cb = Display,
-			.cleanup_cb = Cleanup,
-			.event_cb = Event,			
-			.width = 1024,
-			.height = 768,
-			.high_dpi = true,
-			.window_title = "Chipmunk2D",
-		};
-7. ChipmunkDemoTextSupport.c
-   注释第69行到165行。
-   第206行到209行的(Vertex)改成Vertex。
-
 ----------------------------

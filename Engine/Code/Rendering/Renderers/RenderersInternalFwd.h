@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/19 19:24)
+///	引擎版本：0.8.1.2 (2022/09/06 14:17)
 
 #ifndef RENDERING_RENDERERS_INTERNAL_FWD_H
 #define RENDERING_RENDERERS_INTERNAL_FWD_H
@@ -14,6 +14,13 @@
 
 namespace Rendering
 {
+    class RenderingEnvironmentImpl;
+    class RenderingEnvironmentFactory;
+    class EnvironmentParameterImpl;
+    class EnvironmentParameterFactory;
+    class RenderingDeviceImpl;
+    class RenderingDeviceFactory;
+
     using PlatformTexture2DSharedPtr = std::shared_ptr<PlatformTexture2D>;
 
     class RendererParameterImpl;

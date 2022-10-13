@@ -24,7 +24,8 @@ namespace Framework
     public:
         using ClassType = PixelViewMiddleLayerImpl;
         using Colour = Rendering::Colour<uint8_t>;
-        using RendererSharedPtr = Rendering::RendererSharedPtr;
+        using RendererSharedPtr = std::shared_ptr<Rendering::Renderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::Renderer>;
 
     public:
         PixelViewMiddleLayerImpl(int width, int height);

@@ -14,6 +14,7 @@
 
 #include "BaseRenderer.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/Base/GraphicsObject.h"
 #include "Rendering/GlobalEffects/GlobalEffect.h"
 #include "Rendering/OpenGLRenderer/OpenGLPixelShader.h"
 #include "Rendering/OpenGLRenderer/OpenGLRendererData.h"
@@ -31,15 +32,14 @@
 #include "Rendering/Renderers/ShaderManagement.h"
 #include "Rendering/Renderers/Viewport.h"
 #include "Rendering/Renderers/ViewportManagement.h"
-#include "Rendering/Base/GraphicsObject.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 #include "Rendering/Resources/Textures/Texture3D.h"
 #include "Rendering/Resources/Textures/TextureCube.h"
-#include "Rendering/Resources/Buffers/VertexBuffer.h"
-#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Visual.h"
 #include "Rendering/Shaders/AlphaState.h"
@@ -75,7 +75,7 @@ namespace Rendering
         using FactoryType = RendererFactory;
 
     public:
-        explicit RendererImpl(const RendererBasis& basis);
+        RendererImpl(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -17,6 +17,7 @@
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 #include <memory>
 #include <string>
@@ -45,8 +46,8 @@ namespace Rendering
 
         void DrawMessage(int x, int y, const Colour& color, const std::string& message);
 
-        NODISCARD TextureFormat GetColorFormat() const noexcept;
-        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD DataFormatType GetColorFormat() const noexcept;
+        NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD int GetNumMultisamples() const noexcept;
         NODISCARD Colour GetClearColor() const noexcept;
 

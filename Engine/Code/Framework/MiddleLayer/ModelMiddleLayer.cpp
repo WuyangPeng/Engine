@@ -24,8 +24,8 @@ namespace Framework
     constexpr auto defaultMaxTimer = 30;
 }
 
-Framework::ModelMiddleLayer::ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ defaultMaxTimer }
+Framework::ModelMiddleLayer::ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ defaultMaxTimer }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

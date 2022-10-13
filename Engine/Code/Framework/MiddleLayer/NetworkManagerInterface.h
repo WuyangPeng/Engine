@@ -13,6 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "EngineMiddleLayerInterface.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/Interface/InterfaceFwd.h"
 #include "Network/NetworkMessage/NetworkMessageFwd.h"
@@ -39,7 +40,7 @@ namespace Framework
         using ConstSendSocketManagerSharedPtr = Network::ConstSendSocketManagerSharedPtr;
 
     public:
-        explicit NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform);
+        NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~NetworkManagerInterface() noexcept = default;
         NetworkManagerInterface(const NetworkManagerInterface& rhs) noexcept = delete;
         NetworkManagerInterface& operator=(const NetworkManagerInterface& rhs) noexcept = delete;
@@ -48,7 +49,7 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) override;
         NODISCARD bool Initialize() override;
         NODISCARD bool Destroy() override;
         NODISCARD bool Idle(int64_t timeDelta) override;

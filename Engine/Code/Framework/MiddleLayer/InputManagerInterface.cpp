@@ -18,8 +18,8 @@
 
 using std::make_shared;
 
-Framework::InputManagerInterface::InputManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(InputMiddleLayer::Count) }
+Framework::InputManagerInterface::InputManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(InputMiddleLayer::Count) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

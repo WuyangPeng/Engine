@@ -10,8 +10,8 @@
 #include "ModelViewControllerMiddleLayerTest.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::ModelViewControllerMiddleLayerTest::ModelViewControllerMiddleLayerTest(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+Framework::ModelViewControllerMiddleLayerTest::ModelViewControllerMiddleLayerTest(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

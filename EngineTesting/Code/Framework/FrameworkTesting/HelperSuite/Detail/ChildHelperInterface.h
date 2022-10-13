@@ -25,7 +25,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit ChildHelperInterface(MiddleLayerPlatform middleLayerPlatform);
+        ChildHelperInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -13,6 +13,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "EngineMiddleLayerInterface.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
@@ -28,7 +29,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit ArtificialIntellegenceInterface(MiddleLayerPlatform middleLayerPlatform);
+        explicit ArtificialIntellegenceInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

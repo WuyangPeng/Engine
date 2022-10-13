@@ -12,6 +12,7 @@
 #include "AndroidLooper.h"
 #include "Flags/AndroidLooperFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsProcess.h"
 

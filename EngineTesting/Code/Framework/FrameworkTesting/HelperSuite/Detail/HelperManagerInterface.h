@@ -12,6 +12,7 @@
 
 #include "HelperManagerInterfaceImpl.h"
 #include "HelperMiddleLayerFlags.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 #include "Framework/MiddleLayer/EngineMiddleLayerInterface.h"
 
@@ -24,7 +25,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit HelperManagerInterface(MiddleLayerPlatform middleLayerPlatform);
+        HelperManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

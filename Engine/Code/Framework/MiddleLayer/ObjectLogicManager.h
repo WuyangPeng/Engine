@@ -23,16 +23,16 @@ namespace Framework
         using ClassShareType = CoreTools::NonCopyClasses;
 
     public:
-        explicit ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform);
+        ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+        NODISCARD bool PreCreate() override;
         NODISCARD bool Initialize() override;
         void PreIdle() override;
         void Terminate() override;
 
-        NODISCARD bool Create() override;
+        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) override;
         NODISCARD bool Destroy() override;
         NODISCARD bool Idle(int64_t timeDelta) override;
 

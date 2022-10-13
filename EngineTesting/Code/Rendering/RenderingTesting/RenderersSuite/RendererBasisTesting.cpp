@@ -5,56 +5,150 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/15 16:52)
+///	引擎测试版本：0.8.1.2 (2022/09/05 14:28)
 
 #include "RendererBasisTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Rendering/Renderers/RendererBasis.h"
+#include "Rendering/Resources/Flags/DataFormatType.h"
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Rendering, RendererBasisTesting)
+Rendering::RendererBasisTesting::RendererBasisTesting(const OStreamShared& stream)
+    : ParentType{ stream },
+      windowWidth{ 0 },
+      windowHeight{ 0 },
+      colorFormat{ DataFormatType::R32G32B32A32Float },
+      depthStencilFormat{ DataFormatType::D24UNormS8UInt },
+      multisamplesNumber{ 0 }
+{
+    RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, RendererBasisTesting)
+
+void Rendering::RendererBasisTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void Rendering::RendererBasisTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(AccessTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ExceptionTest);
 }
 
 void Rendering::RendererBasisTesting::AccessTest()
 {
-    RendererBasis rendererBasis;
+    windowWidth = 0;
+    windowHeight = 0;
+    colorFormat = DataFormatType::R32G32B32A32Float;
+    depthStencilFormat = DataFormatType::D24UNormS8UInt;
+    multisamplesNumber = 0;
 
-    ASSERT_EQUAL(rendererBasis.GetWidth(), 0);
-    ASSERT_EQUAL(rendererBasis.GetHeight(), 0);
-    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), 0);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::DefaultColour);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::DefaultDepth);
+    RendererBasis rendererBasis{};
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererBasis);
 
-    rendererBasis.SetSize(50, 70);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetSizeTest, rendererBasis);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetMultisamplesNumberTest, rendererBasis);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetDataFormat, rendererBasis);
+}
 
-    ASSERT_EQUAL(rendererBasis.GetWidth(), 50);
-    ASSERT_EQUAL(rendererBasis.GetHeight(), 70);
-    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), 0);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::DefaultColour);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::DefaultDepth);
+void Rendering::RendererBasisTesting::SetSizeTest(RendererBasis& rendererBasis)
+{
+    windowWidth = 50;
+    windowHeight = 70;
+    rendererBasis.SetSize(windowWidth, windowHeight);
 
-    rendererBasis.SetMultisamplesNumber(7);
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererBasis);
+}
 
-    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), 7);
+void Rendering::RendererBasisTesting::SetMultisamplesNumberTest(RendererBasis& rendererBasis)
+{
+    multisamplesNumber = 7;
+    rendererBasis.SetMultisamplesNumber(multisamplesNumber);
 
-    rendererBasis.SetTextureFormat(TextureFormat::A8, TextureFormat::D24S8);
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererBasis);
+}
 
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::A8);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::D24S8);
+void Rendering::RendererBasisTesting::SetDataFormat(RendererBasis& rendererBasis)
+{
+    colorFormat = DataFormatType::R32G32B32Float;
+    depthStencilFormat = DataFormatType::D32Float;
+    rendererBasis.SetDataFormat(colorFormat, depthStencilFormat);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererBasis);
+}
+
+void Rendering::RendererBasisTesting::ExecuteTest(const RendererBasis& rendererBasis)
+{
+    ASSERT_EQUAL(rendererBasis.GetWidth(), windowWidth);
+    ASSERT_EQUAL(rendererBasis.GetHeight(), windowHeight);
+    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), multisamplesNumber);
+    ASSERT_EQUAL(rendererBasis.GetColorFormat(), colorFormat);
+    ASSERT_EQUAL(rendererBasis.GetDepthStencilFormat(), depthStencilFormat);
 }
 
 void Rendering::RendererBasisTesting::ConstructionTest()
 {
-    const RendererBasis rendererBasis(1024, 768, TextureFormat::A8, TextureFormat::D24S8, 1);
+    windowWidth = 1024;
+    windowHeight = 768;
+    colorFormat = DataFormatType::R32G32B32Float;
+    depthStencilFormat = DataFormatType::D32FloatS8X24UInt;
+    multisamplesNumber = 1;
 
-    ASSERT_EQUAL(rendererBasis.GetWidth(), 1024);
-    ASSERT_EQUAL(rendererBasis.GetHeight(), 768);
-    ASSERT_EQUAL(rendererBasis.GetNumMultisamples(), 1);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetColorFormat(), TextureFormat::A8);
-    ASSERT_ENUM_EQUAL(rendererBasis.GetDepthStencilFormat(), TextureFormat::D24S8);
+    RendererBasis rendererBasis{ windowWidth, windowHeight, colorFormat, depthStencilFormat, multisamplesNumber };
+    ASSERT_NOT_THROW_EXCEPTION_1(ExecuteTest, rendererBasis);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SetSizeTest, rendererBasis);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetMultisamplesNumberTest, rendererBasis);
+    ASSERT_NOT_THROW_EXCEPTION_1(SetDataFormat, rendererBasis);
+}
+
+void Rendering::RendererBasisTesting::ExceptionTest()
+{
+    ASSERT_THROW_EXCEPTION_0(WidthConstructionExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(HeightConstructionExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(MultisamplesNumberConstructionExceptionTest);
+
+    ASSERT_THROW_EXCEPTION_0(SetWidthConstructionExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(SetHeightConstructionExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(SetMultisamplesNumberConstructionExceptionTest);
+}
+
+void Rendering::RendererBasisTesting::WidthConstructionExceptionTest()
+{
+    const RendererBasis rendererBasis{ -1, windowHeight, colorFormat, depthStencilFormat, multisamplesNumber };
+}
+
+void Rendering::RendererBasisTesting::HeightConstructionExceptionTest()
+{
+    const RendererBasis rendererBasis{ windowWidth, -1, colorFormat, depthStencilFormat, multisamplesNumber };
+}
+
+void Rendering::RendererBasisTesting::MultisamplesNumberConstructionExceptionTest()
+{
+    const RendererBasis rendererBasis{ windowWidth, windowHeight, colorFormat, depthStencilFormat, -1 };
+}
+
+void Rendering::RendererBasisTesting::SetWidthConstructionExceptionTest()
+{
+    RendererBasis rendererBasis{ windowWidth, windowHeight, colorFormat, depthStencilFormat, multisamplesNumber };
+
+    rendererBasis.SetSize(-1, windowHeight);
+}
+
+void Rendering::RendererBasisTesting::SetHeightConstructionExceptionTest()
+{
+    RendererBasis rendererBasis{ windowWidth, windowHeight, colorFormat, depthStencilFormat, multisamplesNumber };
+
+    rendererBasis.SetSize(windowWidth, -1);
+}
+
+void Rendering::RendererBasisTesting::SetMultisamplesNumberConstructionExceptionTest()
+{
+    RendererBasis rendererBasis{ windowWidth, windowHeight, colorFormat, depthStencilFormat, multisamplesNumber };
+
+    rendererBasis.SetMultisamplesNumber(-1);
 }

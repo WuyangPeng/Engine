@@ -12,6 +12,7 @@
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ModelViewControllerMiddleLayer.h"
@@ -50,13 +51,13 @@ void Framework::ModelViewControllerMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
     ASSERT_TRUE(middleLayer.Destroy());
@@ -88,11 +89,11 @@ void Framework::ModelViewControllerMiddleLayerTesting::SetMiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    ModelViewControllerMiddleLayerTest middleLayer{ platform };
+    ModelViewControllerMiddleLayerTest middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = std::make_shared<TestingType>(platform);
-    auto viewMiddleLayer = std::make_shared<TestingType>(platform);
-    auto controllerMiddleLayer = std::make_shared<TestingType>(platform);
+    auto modelMiddleLayer = std::make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto viewMiddleLayer = std::make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
+    auto controllerMiddleLayer = std::make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
     middleLayer.SetViewMiddleLayer(viewMiddleLayer);

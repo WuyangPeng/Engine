@@ -39,7 +39,7 @@ void CoreTools::VersionTesting::MainTest()
 
 void CoreTools::VersionTesting::GetTCREFullVersionTest() noexcept
 {
-    static_assert(Version::GetTCREFullVersion() == g_TCREVersion);
+    static_assert(Version::GetTCREFullVersion() == gTCREVersion);
     static_assert(Version::GetTCREFullVersion() >= g_TCRETestingVersion);
 }
 

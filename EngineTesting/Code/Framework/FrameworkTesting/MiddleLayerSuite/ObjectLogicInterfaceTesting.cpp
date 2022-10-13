@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/InputManagerInterface.h"
@@ -51,12 +52,12 @@ void Framework::ObjectLogicInterfaceTesting::MainTest()
 
 void Framework::ObjectLogicInterfaceTesting::MiddleLayerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    ASSERT_TRUE(middleLayer.PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
+    ASSERT_TRUE(middleLayer.PreCreate());
     ASSERT_TRUE(middleLayer.Initialize());
     middleLayer.PreIdle();
-    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Paint());
     ASSERT_TRUE(middleLayer.Move(WindowPoint()));
     ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, WindowSize()));
@@ -92,108 +93,108 @@ void Framework::ObjectLogicInterfaceTesting::SetMiddleLayerTest()
 
 void Framework::ObjectLogicInterfaceTesting::SetNetworkManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr networkManager(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr networkManager(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetNetworkManager(networkManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetInputManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr inputManager(std::make_shared<InputManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr inputManager(std::make_shared<InputManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetInputManager(inputManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetObjectLogicManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr objectLogicManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr objectLogicManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetObjectLogicManager(objectLogicManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetPhysicalModellingManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr physicalModellingManager(std::make_shared<PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr physicalModellingManager(std::make_shared<PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetPhysicalModellingManager(physicalModellingManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetMessageManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr messageManager(std::make_shared<MessageManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr messageManager(std::make_shared<MessageManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetMessageManager(messageManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetEventManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr eventManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr eventManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetEventManager(eventManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetSystemManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr systemManager(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr systemManager(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetSystemManager(systemManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetResourceManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr resourceManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr resourceManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetResourceManager(resourceManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetAudioManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr audioManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr audioManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetAudioManager(audioManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetCameraSystemsManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr cameraSystemsManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr cameraSystemsManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetCameraSystemsManager(cameraSystemsManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetRenderingManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr renderingManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr renderingManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetRenderingManager(renderingManager);
 }
 
 void Framework::ObjectLogicInterfaceTesting::SetGUIManagerExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    TestingType middleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    MiddleLayerInterfaceSharedPtr guiManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    MiddleLayerInterfaceSharedPtr guiManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
     middleLayer.SetGUIManager(guiManager);
 }

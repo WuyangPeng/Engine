@@ -37,6 +37,10 @@ namespace System
     NODISCARD WindowsBool SYSTEM_DEFAULT_DECLARE BoolConversion(bool value) noexcept;
     void SYSTEM_DEFAULT_DECLARE BoolConversion(WindowsBool value, bool* result) noexcept;
 
+    NODISCARD WindowsHWnd SYSTEM_DEFAULT_DECLARE GetActiveWindow() noexcept;
+
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noexcept;
+
     template <typename T>
     NODISCARD T GetSystemInput()
     {

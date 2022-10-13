@@ -31,6 +31,7 @@ namespace Framework
 
     public:
         explicit WindowMessageInterface(int64_t delta) noexcept;
+        WindowMessageInterface(int64_t delta, const EnvironmentDirectory& environmentDirectory) noexcept;
         virtual ~WindowMessageInterface() noexcept = default;
         WindowMessageInterface(const WindowMessageInterface& rhs) noexcept = default;
         WindowMessageInterface& operator=(const WindowMessageInterface& rhs) noexcept = default;
@@ -39,7 +40,7 @@ namespace Framework
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual bool PreCreate(const EnvironmentDirectory& environmentDirectory);
+        virtual bool PreCreate();
         virtual bool Initialize();
         virtual void PreIdle();
         virtual void Terminate();

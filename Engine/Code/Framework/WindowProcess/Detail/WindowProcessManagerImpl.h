@@ -54,7 +54,7 @@ namespace Framework
         void SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
         void ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory);
+        NODISCARD bool PreCreate();
         NODISCARD bool Initialize();
         void PreIdle();
         void Terminate();

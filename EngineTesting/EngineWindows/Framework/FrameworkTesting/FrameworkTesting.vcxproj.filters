@@ -112,6 +112,15 @@
     <Filter Include="MiddleLayerSuite 源文件\Detail">
       <UniqueIdentifier>{06c01f6d-ea06-4481-9bc5-1102456d7d4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MiddleLayerSuite 模板文件">
+      <UniqueIdentifier>{63d80914-9d0b-4db4-981c-21d94b6dcc13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayerSuite 头文件\Test">
+      <UniqueIdentifier>{530edd62-cf86-4f4d-9f1b-ac738d18c2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayerSuite 源文件\Test">
+      <UniqueIdentifier>{58fe9a6d-9d64-4180-af21-05162e3e98ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -488,6 +497,21 @@
     <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Detail\ModelViewControllerMiddleLayerTest.h">
       <Filter>MiddleLayerSuite 头文件\Detail</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTestingBase.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTestingBaseDetail.h">
+      <Filter>MiddleLayerSuite 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceTest.h">
+      <Filter>MiddleLayerSuite 头文件\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceNullTest.h">
+      <Filter>MiddleLayerSuite 头文件\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\RenderingManagerInterfaceTest.h">
+      <Filter>MiddleLayerSuite 头文件\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp">
@@ -789,6 +813,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Detail\ModelViewControllerMiddleLayerTest.cpp">
       <Filter>MiddleLayerSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTestingBase.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceTest.cpp">
+      <Filter>MiddleLayerSuite 源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\EngineMiddleLayerInterfaceNullTest.cpp">
+      <Filter>MiddleLayerSuite 源文件\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Test\RenderingManagerInterfaceTest.cpp">
+      <Filter>MiddleLayerSuite 源文件\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

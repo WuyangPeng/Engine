@@ -46,5 +46,5 @@ Rendering::RendererTypes Rendering::WindowRendererInput::GetRendererType() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return RendererTypes::Window;
+    return RendererTypes::Windows;
 }

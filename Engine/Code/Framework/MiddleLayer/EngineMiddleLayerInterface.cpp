@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:29)
+///	引擎版本：0.8.1.2 (2022/09/10 14:10)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,28 +13,21 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::move;
-using namespace std::literals;
-
-Framework::EngineMiddleLayerInterface::EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController) noexcept
-    : ParentType{ modelViewController }
+Framework::EngineMiddleLayerInterface::EngineMiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept
+    : ParentType{ middleLayerInterfaceCreate, middleLayerPlatform, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::EngineMiddleLayerInterface::EngineMiddleLayerInterface(EngineMiddleLayerInterface&& rhs) noexcept
-    : ParentType{ move(rhs) }
+Framework::EngineMiddleLayerInterface::EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory) noexcept
+    : ParentType{ modelViewController, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Framework::EngineMiddleLayerInterface& Framework::EngineMiddleLayerInterface::operator=(EngineMiddleLayerInterface&& rhs) noexcept
+Framework::EngineMiddleLayerInterface::MiddleLayerSharedPtr Framework::EngineMiddleLayerInterface::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
 {
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-    ParentType::operator=(move(rhs));
-
-    return *this;
+    return std::make_shared<ClassType>(MiddleLayerInterfaceCreate::Init, middleLayerPlatform, environmentDirectory);
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, EngineMiddleLayerInterface)
@@ -45,7 +38,7 @@ void Framework::EngineMiddleLayerInterface::SetNetworkManager(const MiddleLayerI
 
     if (networkManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -55,7 +48,7 @@ void Framework::EngineMiddleLayerInterface::SetInputManager(const MiddleLayerInt
 
     if (inputManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -65,7 +58,7 @@ void Framework::EngineMiddleLayerInterface::SetObjectLogicManager(const MiddleLa
 
     if (objectLogicManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -75,7 +68,7 @@ void Framework::EngineMiddleLayerInterface::SetPhysicalModellingManager(const Mi
 
     if (physicalModellingManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -85,7 +78,7 @@ void Framework::EngineMiddleLayerInterface::SetMessageManager(const MiddleLayerI
 
     if (messageManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -95,7 +88,7 @@ void Framework::EngineMiddleLayerInterface::SetEventManager(const MiddleLayerInt
 
     if (eventManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -105,7 +98,7 @@ void Framework::EngineMiddleLayerInterface::SetSystemManager(const MiddleLayerIn
 
     if (systemManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -115,7 +108,7 @@ void Framework::EngineMiddleLayerInterface::SetResourceManager(const MiddleLayer
 
     if (resourceManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -125,7 +118,7 @@ void Framework::EngineMiddleLayerInterface::SetAudioManager(const MiddleLayerInt
 
     if (audioManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -135,7 +128,7 @@ void Framework::EngineMiddleLayerInterface::SetCameraSystemsManager(const Middle
 
     if (cameraSystemsManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -145,7 +138,7 @@ void Framework::EngineMiddleLayerInterface::SetRenderingManager(const MiddleLaye
 
     if (renderingManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -155,7 +148,7 @@ void Framework::EngineMiddleLayerInterface::SetGUIManager(const MiddleLayerInter
 
     if (guiManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -165,7 +158,7 @@ void Framework::EngineMiddleLayerInterface::SetEngineManager(const MiddleLayerIn
 
     if (engineManager != nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+        ThrowException();
     }
 }
 
@@ -173,180 +166,185 @@ Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetNetworkManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetNetworkManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetInputManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetInputManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetInputManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetObjectLogicManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetObjectLogicManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetObjectLogicManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetPhysicalModellingManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetPhysicalModellingManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetPhysicalModellingManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetMessageManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetMessageManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetMessageManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetEventManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetEventManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetEventManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetSystemManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetSystemManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetSystemManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetResourceManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetResourceManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetResourceManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetAudioManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetAudioManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetAudioManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetCameraSystemsManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetCameraSystemsManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetCameraSystemsManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetRenderingManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetRenderingManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetRenderingManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetGUIManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetGUIManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetGUIManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
 }
 
 Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetEngineManager()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetEngineManager());
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterface::GetEngineManager() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    THROW_EXCEPTION(SYSTEM_TEXT("函数被禁止调用。"s));
+    ThrowException();
+}
+
+void Framework::EngineMiddleLayerInterface::ThrowException()
+{
+    THROW_EXCEPTION(SYSTEM_TEXT("EngineMiddleLayerInterface 函数被禁止调用。"s));
 }

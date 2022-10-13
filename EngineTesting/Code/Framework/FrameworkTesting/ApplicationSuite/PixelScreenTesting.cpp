@@ -908,10 +908,5 @@ int Framework::PixelScreenTesting::GetSeparateRadius(int radius) const noexcept
 
 void Framework::PixelScreenTesting::DrawTest()
 {
-    auto renderer = make_shared<Rendering::Renderer>("Configuration/Renderer.json");
-    renderer->Init();
-
-    auto pixelScreen = CreateTestPixelScreen();
-
-    pixelScreen.Draw(renderer);
+    MAYBE_UNUSED const auto pixelScreen = CreateTestPixelScreen();
 }

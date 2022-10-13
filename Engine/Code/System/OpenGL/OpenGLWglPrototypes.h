@@ -31,6 +31,9 @@ namespace System
     NODISCARD OpenGLProc SYSTEM_DEFAULT_DECLARE GetWglProcAddress(const char* glFunction) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SwapDeviceBuffers(WindowsHDC hdc) noexcept;
+
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE DisplayColorBuffer(WindowsHDC hdc, int syncInterval) noexcept;
+
 }
 
 #endif  // SYSTEM_WINDOWS_OPENGL_WGL_PROTOTYPES_H

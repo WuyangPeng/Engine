@@ -32,7 +32,7 @@ namespace Rendering
         using ConstDrawTargetSharedPtr = std::shared_ptr<const DrawTarget>;
 
     public:
-        explicit GraphicsRenderer(const RendererBasis& basis);
+        explicit GraphicsRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

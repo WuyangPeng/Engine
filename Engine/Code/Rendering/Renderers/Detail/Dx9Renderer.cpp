@@ -13,9 +13,10 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/Renderers/RendererParameter.h"
 
-Rendering::Dx9Renderer::Dx9Renderer(const RendererBasis& basis)
-    : ParentType{ basis }
+Rendering::Dx9Renderer::Dx9Renderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
+    : ParentType{ RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -26,7 +27,7 @@ Rendering::RendererTypes Rendering::Dx9Renderer::GetRendererType() const noexcep
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return RendererTypes::Dx9;
+    return RendererTypes::Dx11;
 }
 
 #include STSTEM_WARNING_PUSH

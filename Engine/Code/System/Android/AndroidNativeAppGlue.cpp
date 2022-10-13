@@ -37,6 +37,7 @@ System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp,
     #include "AndroidNativeAppGlue.h"
     #include "Flags/AndroidInputFlags.h"
     #include "Flags/AndroidNativeAppGlueFlags.h"
+    #include "System/Helper/Tools.h"
     #include "System/Helper/WindowsMacro.h"
     #include "System/Windows/Flags/WindowsClassStyleFlags.h"
     #include "System/Windows/WindowsCreate.h"

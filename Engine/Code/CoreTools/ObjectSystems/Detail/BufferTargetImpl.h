@@ -12,6 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/FileManager/WriteBufferIO.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 
@@ -39,6 +40,8 @@ namespace CoreTools
         // °ïÖúº¯Êý
         NODISCARD int GetBytesWritten() const noexcept;
         void WriteUniqueID(const ConstObjectInterfaceSharedPtr& object);
+
+        NODISCARD ConstFileBufferSharedPtr GetFileBuffer() const noexcept;
 
     private:
         WriteBufferIO target;

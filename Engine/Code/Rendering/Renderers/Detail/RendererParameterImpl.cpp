@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/21 10:16)
+///	引擎版本：0.8.1.2 (2022/09/05 20:10)
 
 #include "Rendering/RenderingExport.h"
 
@@ -14,35 +14,31 @@
 
 using std::string;
 
-Rendering::RendererParameterImpl::RendererParameterImpl(RendererTypes type) noexcept
-    : rendererTypes{ type },
+Rendering::RendererParameterImpl::RendererParameterImpl(RendererTypes rendererType)
+    : rendererType{ rendererType },
       rendererBasis{},
-      colour{ 0.0f, 0.0f, 0.0f, 1.0f },
-      windowTitle{},
-      windowX{ 0 },
-      windowY{ 0 },
-      isAllowResize{ true },
-      className{},
-      menuName{},
-      icon{ 0 },
-      isIconDefault{ false },
-      cursor{ 0 },
-      isCursorDefault{ false },
-      background{}
+      windowsParameter{ WindowsParameter::Create() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererParameterImpl)
 
-Rendering::TextureFormat Rendering::RendererParameterImpl::GetColorFormat() const noexcept
+void Rendering::RendererParameterImpl::SetRendererType(RendererTypes aRendererType) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    rendererType = aRendererType;
+}
+
+Rendering::DataFormatType Rendering::RendererParameterImpl::GetColorFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return rendererBasis.GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererParameterImpl::GetDepthStencilFormat() const noexcept
+Rendering::DataFormatType Rendering::RendererParameterImpl::GetDepthStencilFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -56,32 +52,32 @@ int Rendering::RendererParameterImpl::GetNumMultisamples() const noexcept
     return rendererBasis.GetNumMultisamples();
 }
 
-Rendering::Colour<float> Rendering::RendererParameterImpl::GetClearColor() const noexcept
+Rendering::RendererParameterImpl::ColourType Rendering::RendererParameterImpl::GetClearColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return colour;
+    return windowsParameter.GetClearColor();
 }
 
 std::string Rendering::RendererParameterImpl::GetWindowTitle() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return windowTitle;
+    return windowsParameter.GetWindowTitle();
 }
 
 int Rendering::RendererParameterImpl::GetXPosition() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return windowX;
+    return windowsParameter.GetXPosition();
 }
 
 int Rendering::RendererParameterImpl::GetYPosition() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return windowY;
+    return windowsParameter.GetYPosition();
 }
 
 int Rendering::RendererParameterImpl::GetWidth() const noexcept
@@ -102,43 +98,40 @@ bool Rendering::RendererParameterImpl::IsAllowResize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return isAllowResize;
+    return windowsParameter.IsAllowResize();
 }
 
 Rendering::RendererTypes Rendering::RendererParameterImpl::GetRendererType() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return rendererTypes;
+    return rendererType;
 }
 
-void Rendering::RendererParameterImpl::SetTextureFormat(TextureFormat colorFormat, TextureFormat depthStencilFormat, int numMultisamples) noexcept
+void Rendering::RendererParameterImpl::SetTextureFormat(DataFormatType colorFormat, DataFormatType depthStencilFormat, int numMultisamples)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    rendererBasis.SetTextureFormat(colorFormat, depthStencilFormat);
+    rendererBasis.SetDataFormat(colorFormat, depthStencilFormat);
     rendererBasis.SetMultisamplesNumber(0 < numMultisamples ? numMultisamples : 0);
 }
 
-void Rendering::RendererParameterImpl::SetClearColor(float red, float green, float blue, float alpha) noexcept
+void Rendering::RendererParameterImpl::SetClearColor(float red, float green, float blue, float alpha)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    colour.SetColour(red, green, blue, alpha);
+    windowsParameter.SetClearColor(red, green, blue, alpha);
 }
 
-void Rendering::RendererParameterImpl::SetWindowParameter(const string& aWindowTitle, int width, int height, int x, int y, bool allowResize)
+void Rendering::RendererParameterImpl::SetWindowParameter(const string& windowTitle, int width, int height, int x, int y, bool allowResize)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    windowTitle = aWindowTitle;
+    windowsParameter.SetWindowParameter(windowTitle, x, y, allowResize);
     rendererBasis.SetSize(width, height);
-    windowX = x;
-    windowY = y;
-    isAllowResize = allowResize;
 }
 
-void Rendering::RendererParameterImpl::Resize(int width, int height) noexcept
+void Rendering::RendererParameterImpl::Resize(int width, int height)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -156,72 +149,68 @@ System::String Rendering::RendererParameterImpl::GetWindowClassName() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return className;
+    return windowsParameter.GetWindowClassName();
 }
 
-void Rendering::RendererParameterImpl::SetWindowClassName(const System::String& aClassName)
+void Rendering::RendererParameterImpl::SetWindowClassName(const System::String& className)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    className = aClassName;
+    windowsParameter.SetWindowClassName(className);
 }
 
 System::String Rendering::RendererParameterImpl::GetWindowMenuName() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return menuName;
+    return windowsParameter.GetWindowMenuName();
 }
 
-void Rendering::RendererParameterImpl::SetWindowMenuName(const System::String& aMenuName)
+void Rendering::RendererParameterImpl::SetWindowMenuName(const System::String& menuName)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    menuName = aMenuName;
+    windowsParameter.SetWindowMenuName(menuName);
 }
 
 int Rendering::RendererParameterImpl::GetIcon() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return icon;
+    return windowsParameter.GetIcon();
 }
 
 bool Rendering::RendererParameterImpl::IsIconDefault() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return isIconDefault;
+    return windowsParameter.IsIconDefault();
 }
 
 int Rendering::RendererParameterImpl::GetCursor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return cursor;
+    return windowsParameter.GetCursor();
 }
 
 bool Rendering::RendererParameterImpl::IsCursorDefault() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return isCursorDefault;
+    return windowsParameter.IsCursorDefault();
 }
 
 System::WindowsBrushTypes Rendering::RendererParameterImpl::GetBackground() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return background;
+    return windowsParameter.GetBackground();
 }
 
-void Rendering::RendererParameterImpl::SetWindowPictorialParameter(int aIcon, bool aIsIconDefault, int aCursor, bool aIsCursorDefault, System::WindowsBrushTypes aBackground) noexcept
+void Rendering::RendererParameterImpl::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, WindowsBrushTypes background)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    icon = aIcon;
-    isIconDefault = aIsIconDefault;
-    cursor = aCursor;
-    isCursorDefault = aIsCursorDefault;
-    background = aBackground;
+    windowsParameter.SetWindowPictorialParameter(icon, isIconDefault, cursor, isCursorDefault, background);
 }

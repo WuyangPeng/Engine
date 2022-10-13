@@ -472,6 +472,12 @@
     <Filter Include="WindowsSuite 源文件\WindowsSystem">
       <UniqueIdentifier>{d6fddc18-68d3-4297-832b-556f1df62432}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HelperSuite 头文件\Tools">
+      <UniqueIdentifier>{8f433280-355b-49b0-98b2-4be5fc0609cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Tools">
+      <UniqueIdentifier>{8667a6d3-8fc1-4196-ae60-128f90bd1b3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -1063,9 +1069,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\NoexceptTesting.h">
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\GetArraySizeTesting.h">
-      <Filter>HelperSuite 头文件\WindowsMacro</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.h">
       <Filter>HelperSuite 头文件\WindowsMacro</Filter>
     </ClInclude>
@@ -1149,9 +1152,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\StdLibConfigTesting.h">
       <Filter>HelperSuite 头文件\ConfigMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.h">
-      <Filter>HelperSuite 头文件\WindowsMacro</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\FreeLibraryTesting.h">
       <Filter>DynamicLinkSuite 头文件\LoadLibrary</Filter>
@@ -1573,9 +1573,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketRecvFromTesting.h">
       <Filter>NetworkSuite 头文件\WindowsSockEx</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\DebugTesting.h">
-      <Filter>HelperSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLWglPrototypesTesting.h">
       <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
@@ -1635,6 +1632,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\EngineeringTesting.h">
       <Filter>WindowsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\DebugTesting.h">
+      <Filter>HelperSuite 头文件\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\GetArraySizeTesting.h">
+      <Filter>HelperSuite 头文件\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\UnusedFunctionTesting.h">
+      <Filter>HelperSuite 头文件\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2085,9 +2091,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.cpp">
       <Filter>HelperSuite 源文件\WindowsMacro</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\GetArraySizeTesting.cpp">
-      <Filter>HelperSuite 源文件\WindowsMacro</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.cpp">
       <Filter>HelperSuite 源文件\WindowsMacro</Filter>
     </ClCompile>
@@ -2153,9 +2156,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\StdLibConfigTesting.cpp">
       <Filter>HelperSuite 源文件\ConfigMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.cpp">
-      <Filter>HelperSuite 源文件\WindowsMacro</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\LoadLibraryTesting.cpp">
       <Filter>DynamicLinkSuite 源文件\LoadLibrary</Filter>
@@ -2571,9 +2571,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketSendToTesting.cpp">
       <Filter>NetworkSuite 源文件\WindowsSockEx</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\DebugTesting.cpp">
-      <Filter>HelperSuite 源文件\WindowsMacro</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLWglPrototypesTesting.cpp">
       <Filter>OpenGLSuite 源文件</Filter>
     </ClCompile>
@@ -2630,6 +2627,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\EngineeringTesting.cpp">
       <Filter>WindowsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\DebugTesting.cpp">
+      <Filter>HelperSuite 源文件\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\GetArraySizeTesting.cpp">
+      <Filter>HelperSuite 源文件\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\UnusedFunctionTesting.cpp">
+      <Filter>HelperSuite 源文件\Tools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

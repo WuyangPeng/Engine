@@ -31,7 +31,7 @@ namespace ModelViewController
         using ParentType = MessageType;
 
     public:
-        explicit ModelViewControllerMessage(int64_t delta);
+        ModelViewControllerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

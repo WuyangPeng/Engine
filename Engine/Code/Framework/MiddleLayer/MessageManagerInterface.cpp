@@ -17,8 +17,8 @@
 
 using std::make_shared;
 
-Framework::MessageManagerInterface::MessageManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(MessageMiddleLayer::Count) }
+Framework::MessageManagerInterface::MessageManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(MessageMiddleLayer::Count) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

@@ -186,13 +186,13 @@ void Framework::WindowProcessManagerImpl::ClearWindowMessageContainer(const Wind
     }
 }
 
-bool Framework::WindowProcessManagerImpl::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowProcessManagerImpl::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     if (windowProcessMessage)
     {
-        return windowProcessMessage->PreCreate(environmentDirectory);
+        return windowProcessMessage->PreCreate();
     }
     else
     {

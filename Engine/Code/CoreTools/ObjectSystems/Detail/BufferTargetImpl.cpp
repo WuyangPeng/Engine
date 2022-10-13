@@ -52,3 +52,10 @@ void CoreTools::BufferTargetImpl::WriteUniqueID(const ConstObjectInterfaceShared
 
     Write(CORE_TOOLS_STREAM_SIZE(uniqueID), &uniqueID);
 }
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTargetImpl::GetFileBuffer() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return target.GetFileBuffer();
+}

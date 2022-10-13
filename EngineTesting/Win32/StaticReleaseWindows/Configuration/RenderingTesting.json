@@ -3,6 +3,10 @@
 
   },
 
+  "baseSuite": {
+    "GraphicsObjectTesting": 1
+  },
+
   "dataTypeSuite": {
     "HalfFloatTesting": 100,
     "ColourDefaultTraitsTesting": 1,
@@ -198,7 +202,11 @@
 
   "renderersSuite": {
     "RendererBasisTesting": 1,
+    "WindowsParameterTesting": 1,
     "RendererParameterTesting": 1,
+    "EnvironmentParameterTesting": 1,
+    "RenderingEnvironmentTesting": 1,
+    "RenderingDeviceTesting": 1,
     "PlatformVertexFormatTesting": 1,
     "VertexFormatManagementTesting": 1,
     "PlatformIndexBufferTesting": 1,

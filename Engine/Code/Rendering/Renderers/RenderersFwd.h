@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/19 19:24)
+///	引擎版本：0.8.1.2 (2022/09/05 14:44)
 
 #ifndef RENDERING_RENDERERS_FWD_H
 #define RENDERING_RENDERERS_FWD_H
@@ -15,7 +15,12 @@
 namespace Rendering
 {
     class RendererBasis;
+    class WindowsParameter;
     class RendererParameter;
+    class EnvironmentParameter;
+    class RenderingEnvironment;
+    class RenderingDevice;
+
     class PlatformVertexFormat;
     class VertexFormatManagement;
     class PlatformIndexBuffer;
@@ -50,8 +55,6 @@ namespace Rendering
     enum class RendererTypes;
 
     class Renderer;
-    using RendererSharedPtr = std::shared_ptr<Renderer>;
-    using ConstRendererSharedPtr = std::shared_ptr<const Renderer>;
 
     class SamplerState;
     class RendererInput;

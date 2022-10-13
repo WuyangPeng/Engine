@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/TransformMatrixDetail.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/SceneGraph/CameraManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
@@ -71,18 +72,20 @@ void Framework::CameraControllerMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer.SetViewMiddleLayer(cameraViewMiddleLayer);
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraViewMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
     ASSERT_TRUE(middleLayer.Destroy());
@@ -114,11 +117,11 @@ void Framework::CameraControllerMiddleLayerTesting::KeyDownTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    auto middleLayer = make_shared<TestingType>(platform);
+    auto middleLayer = make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
@@ -126,15 +129,18 @@ void Framework::CameraControllerMiddleLayerTesting::KeyDownTest()
     cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer->Create());
-    ASSERT_TRUE(middleLayer->Initialize());
+    ASSERT_TRUE(middleLayer->PreCreate());
 
-    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate());
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate());
+
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraModelMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraViewMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
+
     ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
-
-    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
     ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
+    ASSERT_TRUE(middleLayer->Initialize());
 
     const WindowSize defaultWindowSize{ 1024, 768 };
     ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, defaultWindowSize));
@@ -180,11 +186,11 @@ void Framework::CameraControllerMiddleLayerTesting::TrackBallDownTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    auto middleLayer = make_shared<TestingType>(platform);
+    auto middleLayer = make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
@@ -192,15 +198,18 @@ void Framework::CameraControllerMiddleLayerTesting::TrackBallDownTest()
     cameraViewMiddleLayer->SetControllerMiddleLayer(middleLayer);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer->Create());
-    ASSERT_TRUE(middleLayer->Initialize());
+    ASSERT_TRUE(middleLayer->PreCreate());
 
-    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate());
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate());
+
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraModelMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraViewMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
+
     ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
-
-    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
     ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
+    ASSERT_TRUE(middleLayer->Initialize());
 
     ASSERT_FALSE(cameraModelMiddleLayer->GetTrackBallDow());
 
@@ -224,11 +233,11 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    auto middleLayer = make_shared<TestingType>(platform);
+    auto middleLayer = make_shared<TestingType>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
-    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetModelMiddleLayer(cameraModelMiddleLayer);
-    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform);
+    auto cameraViewMiddleLayer = make_shared<CameraViewMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
     middleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetViewMiddleLayer(cameraViewMiddleLayer);
     cameraModelMiddleLayer->SetControllerMiddleLayer(middleLayer);
@@ -239,18 +248,22 @@ void Framework::CameraControllerMiddleLayerTesting::RotateTrackBallTest()
     const auto multiplier = 1.0f / windowSize.GetWindowHeight();
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer->PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer->Create());
-    ASSERT_TRUE(middleLayer->Initialize());
-    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
+    ASSERT_TRUE(middleLayer->PreCreate());
 
-    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate(environmentDirectory));
+    ASSERT_TRUE(cameraModelMiddleLayer->PreCreate());
+    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate());
+
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraModelMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraViewMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
+
+    ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
+    ASSERT_TRUE(cameraViewMiddleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
     ASSERT_TRUE(cameraModelMiddleLayer->Initialize());
     ASSERT_TRUE(cameraModelMiddleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
 
-    ASSERT_TRUE(cameraViewMiddleLayer->PreCreate(environmentDirectory));
-    ASSERT_TRUE(cameraViewMiddleLayer->Initialize());
-    ASSERT_TRUE(cameraViewMiddleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
+    ASSERT_TRUE(middleLayer->Initialize());
+    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, windowSize));
 
     default_random_engine generator{ GetEngineRandomSeed() };
     const uniform_int<> random{ 0, 100 };

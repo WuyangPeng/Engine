@@ -46,14 +46,13 @@ void Framework::WindowProcessHandleTesting::MainTest()
 
 void Framework::WindowProcessHandleTesting::BaseTest()
 {
-    TestingType process{ System::g_Microseconds / 60 };
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    TestingType process{ System::g_Microseconds / 60, environmentDirectory };
 
     ASSERT_UNEQUAL_NULL_PTR(process.GetFunction());
     ASSERT_UNEQUAL_NULL_PTR(process.GetProcess());
 
-    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-
-    ASSERT_TRUE(process.PreCreate(environmentDirectory));
+    ASSERT_TRUE(process.PreCreate());
     ASSERT_TRUE(process.Initialize());
     process.PreIdle();
     process.Terminate();
@@ -64,7 +63,8 @@ void Framework::WindowProcessHandleTesting::ClassNameTest()
     System::String className{};
     MAYBE_UNUSED const auto value = System::GetSystemClassName(hwnd, className);
 
-    TestingType process{ System::g_Microseconds / 60 };
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    TestingType process{ System::g_Microseconds / 60, environmentDirectory };
 
     ASSERT_TRUE(process.IsClassNameExist(className));
 
@@ -77,7 +77,8 @@ void Framework::WindowProcessHandleTesting::ClassNameTest()
 
 void Framework::WindowProcessHandleTesting::HWndTest()
 {
-    TestingType process{ System::g_Microseconds / 60 };
+    EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
+    TestingType process{ System::g_Microseconds / 60, environmentDirectory };
 
     ASSERT_EQUAL_NULL_PTR(process.GetMainWindowHwnd());
 }

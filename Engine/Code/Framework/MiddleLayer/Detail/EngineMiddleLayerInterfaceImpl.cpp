@@ -5,15 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:13)
+///	引擎版本：0.8.1.2 (2022/08/31 17:21)
 
 #include "Framework/FrameworkExport.h"
 
 #include "EngineMiddleLayerInterfaceImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-
-using std::const_pointer_cast;
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 Framework::EngineMiddleLayerInterfaceImpl::EngineMiddleLayerInterfaceImpl(int containerSize)
     : container(containerSize)
@@ -27,24 +26,31 @@ Framework::MiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterfaceIm
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26473)
-
-    return const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType*>(this)->GetMiddleLayerInterface(index));
-
-#include STSTEM_WARNING_POP
+    return std::const_pointer_cast<MiddleLayerInterface>(static_cast<const ClassType&>(*this).GetMiddleLayerInterface(index));
 }
 
 Framework::ConstMiddleLayerInterfaceSharedPtr Framework::EngineMiddleLayerInterfaceImpl::GetMiddleLayerInterface(int index) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return container.at(index).lock();
+    auto result = container.at(index).lock();
+
+    if (result == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("返回的middleLayer为空指针。"s));
+    }
+
+    return result;
 }
 
 void Framework::EngineMiddleLayerInterfaceImpl::SetMiddleLayerInterface(int index, const MiddleLayerInterfaceSharedPtr& middleLayer)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
+
+    if (middleLayer == nullptr)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("middleLayer为空指针。"s));
+    }
 
     container.at(index) = middleLayer;
 }

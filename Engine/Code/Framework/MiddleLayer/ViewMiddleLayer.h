@@ -30,11 +30,11 @@ namespace Framework
         using ParentType = ModelViewControllerMiddleLayer;
         using Colour = Rendering::Colour<float>;
         using Renderer = Rendering::Renderer;
-        using RendererSharedPtr = Rendering::RendererSharedPtr;
-        using ConstRendererSharedPtr = Rendering::ConstRendererSharedPtr;
+        using RendererSharedPtr = std::shared_ptr<Rendering::Renderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::Renderer>;
 
     public:
-        explicit ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        ViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~ViewMiddleLayer() noexcept = default;
         ViewMiddleLayer(const ViewMiddleLayer& rhs) noexcept = delete;
         ViewMiddleLayer& operator=(const ViewMiddleLayer& rhs) noexcept = delete;
@@ -43,7 +43,7 @@ namespace Framework
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) override;
+        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) override;
         NODISCARD bool Initialize() override;
         NODISCARD bool Paint() override;
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
@@ -66,8 +66,8 @@ namespace Framework
         NODISCARD bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
     protected:
-        NODISCARD RendererSharedPtr GetRenderer() noexcept;
-        NODISCARD ConstRendererSharedPtr GetRenderer() const noexcept;
+        NODISCARD RendererSharedPtr GetRenderer();
+        NODISCARD ConstRendererSharedPtr GetRenderer() const;
 
     private:
         PackageType impl;

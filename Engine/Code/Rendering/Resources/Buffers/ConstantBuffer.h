@@ -29,6 +29,7 @@ namespace Rendering
         using MemberLayoutContainer = std::vector<MemberLayout>;
 
     public:
+        ConstantBuffer(int numBytes, bool allowDynamicUpdate);
         ConstantBuffer(int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
@@ -55,6 +56,11 @@ namespace Rendering
         NODISCARD T GetMember(const std::string& name, int index) const;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD static constexpr auto GetShaderDataLookup() noexcept
+        {
+            return 0;
+        }
 
     protected:
         NODISCARD static int GetRoundedNumBytes(int numBytes) noexcept;

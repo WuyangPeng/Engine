@@ -23,7 +23,7 @@ namespace Rendering
         using ParentType = RendererImpl;
 
     public:
-        explicit WindowRenderer(const RendererBasis& basis);
+        explicit WindowRenderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

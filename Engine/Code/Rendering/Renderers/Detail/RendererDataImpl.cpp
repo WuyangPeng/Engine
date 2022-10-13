@@ -15,6 +15,7 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererBasis.h"
 
@@ -23,7 +24,7 @@ using std::make_shared;
 using namespace std::literals;
 
 Rendering::RendererDataImpl::RendererDataImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default, RendererBasis{}) }
+    : renderer{ make_shared<Renderer>(EnvironmentParameter::Create(), RendererParameter{ "" }) }
 {
     renderer->Init();
 
@@ -80,14 +81,14 @@ void Rendering::RendererDataImpl::DrawMessage(int x, int y, const Colour& color,
     renderer->Draw(x, y, color, message);
 }
 
-Rendering::TextureFormat Rendering::RendererDataImpl::GetColorFormat() const noexcept
+Rendering::DataFormatType Rendering::RendererDataImpl::GetColorFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return renderer->GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererDataImpl::GetDepthStencilFormat() const noexcept
+Rendering::DataFormatType Rendering::RendererDataImpl::GetDepthStencilFormat() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 

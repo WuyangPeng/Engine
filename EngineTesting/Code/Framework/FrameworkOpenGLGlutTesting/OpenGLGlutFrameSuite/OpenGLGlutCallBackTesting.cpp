@@ -23,7 +23,7 @@ void Framework::OpenGLGlutCallBackTesting::MainTest()
 
 void Framework::OpenGLGlutCallBackTesting::InterfaceTest()
 {
-    OpenGLGlutCallBack<MiddleLayerInterface> openGLGlutCallBack(9);
+    OpenGLGlutCallBack<MiddleLayerInterface> openGLGlutCallBack(9, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     openGLGlutCallBack.SetWindowID(10);
     ASSERT_EQUAL(openGLGlutCallBack.GetWindowID(), 10);

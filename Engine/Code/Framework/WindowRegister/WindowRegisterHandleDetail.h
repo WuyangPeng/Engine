@@ -22,7 +22,7 @@
 template <typename WindowsProcess>
 Framework::WindowRegisterHandle<WindowsProcess>::WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance, const char* commandLine, const WindowPictorial& pictorial, const WindowName& name, WindowsClassStyle styles)
     : environmentDirectory{ environmentDirectory },
-      windowProcess{ System::g_Microseconds / interval },
+      windowProcess{ System::g_Microseconds / interval, environmentDirectory },
       command{ std::make_shared<Command>(commandLine) },
       windowRegisterParameter{ instance, styles },
       windowPictorial{ pictorial },
@@ -33,7 +33,7 @@ Framework::WindowRegisterHandle<WindowsProcess>::WindowRegisterHandle(const Envi
     auto className = windowName.GetWindowClassName();
 
     // 允许在创建窗口之前进行工作。
-    if (!windowProcess.PreCreate(environmentDirectory) ||
+    if (!windowProcess.PreCreate() ||
         windowProcess.IsClassNameExist(className) ||
         InitApplication() == 0 ||
         !windowProcess.SetNewClassName(className))
@@ -154,6 +154,14 @@ WindowsProcess Framework::WindowRegisterHandle<WindowsProcess>::GetWindowProcess
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     return windowProcess;
+}
+
+template <typename WindowsProcess>
+Framework::EnvironmentDirectory Framework::WindowRegisterHandle<WindowsProcess>::GetEnvironmentDirectory() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return environmentDirectory;
 }
 
 #endif  // FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H

@@ -29,7 +29,7 @@ namespace Rendering
     class CullState;
     class DepthState;
     class StencilState;
-    class WireState; 
+    class WireState;
     class OffsetState;
     class VisualPass;
     class VisualTechnique;
@@ -37,6 +37,16 @@ namespace Rendering
     class SaveVisualEffect;
     class LoadVisualEffect;
     class VisualEffectInstance;
+
+    enum class ShaderDataLookup;
+    enum class ShaderAPIType;
+
+    class ShaderData;
+    class Shader;
+    class VisualProgram;
+    class ComputeProgram;
+    class ProgramFactory;
+    class ProgramDefines;
 }
 
 #endif  // RENDERING_SHADERS_FWD_H

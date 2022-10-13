@@ -41,6 +41,11 @@ namespace Rendering
         void SetKeepInternalCount(bool aKeepInternalCount) noexcept;
         NODISCARD bool GetKeepInternalCount() const noexcept;
 
+        NODISCARD static constexpr auto GetShaderDataLookup() noexcept
+        {
+            return 2;
+        }
+
     private:
         CounterType counterType;
         bool keepInternalCount;

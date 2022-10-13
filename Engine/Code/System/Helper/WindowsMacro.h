@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:41)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/04 13:50)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
@@ -14,24 +14,14 @@
 
 #include "Platform.h"
 #include "UnicodeUsing.h"
-#include "System/Helper/PragmaWarning/CallTraits.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
-    template <typename T, size_t N>
-    NODISCARD constexpr size_t GetArraySize(T (&)[N]) noexcept
-    {
-        return N;
-    }
-
-    template <typename... T>
-    void UnusedFunction(MAYBE_UNUSED T&&... value) noexcept
-    {
-    }
-
 #ifndef SYSTEM_USE_WINDOWS_MACRO
-    constexpr WindowsWord g_MakeLanguageIDShift{ 10 };
+
+    constexpr WindowsWord gMakeLanguageIDShift{ 10 };
+
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
     NODISCARD constexpr WindowsWord MakeLanguageID(WindowsWord primary, WindowsWord sub) noexcept
@@ -42,7 +32,7 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        return (sub << g_MakeLanguageIDShift) | primary;
+        return (sub << gMakeLanguageIDShift) | primary;
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -55,9 +45,9 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        constexpr WindowsWord g_PrimaryLanguageIDMask{ (1 << g_MakeLanguageIDShift) - 1 };
+        constexpr WindowsWord primaryLanguageIDMask{ (1 << gMakeLanguageIDShift) - 1 };
 
-        return languageID & g_PrimaryLanguageIDMask;
+        return languageID & primaryLanguageIDMask;
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -70,7 +60,7 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        return languageID >> g_MakeLanguageIDShift;
+        return languageID >> gMakeLanguageIDShift;
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -96,9 +86,9 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        constexpr WindowsWord g_MakeLanguageCIDShift{ 16 };
+        constexpr WindowsWord makeLanguageCIDShift{ 16 };
 
-        return (static_cast<WindowsDWord>(sortID) << g_MakeLanguageCIDShift) | (static_cast<WindowsDWord>(languageID));
+        return (static_cast<WindowsDWord>(sortID) << makeLanguageCIDShift) | (static_cast<WindowsDWord>(languageID));
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -131,8 +121,8 @@ namespace System
 
 #ifndef SYSTEM_USE_WINDOWS_MACRO
 
-    constexpr WindowsWord g_WordShift{ 16 };
-    constexpr WindowsWord g_WordMask{ (1 << g_WordShift) - 1 };
+    constexpr WindowsWord gWordShift{ 16 };
+    constexpr WindowsWord gWordMask{ (1 << gWordShift) - 1 };
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
@@ -144,10 +134,10 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        constexpr WindowsWord g_MakeWordShift{ 8 };
-        constexpr WindowsWord g_MakeWordMask{ (1 << g_MakeWordShift) - 1 };
+        constexpr WindowsWord makeWordShift{ 8 };
+        constexpr WindowsWord makeWordMask{ (1 << makeWordShift) - 1 };
 
-        return static_cast<WindowsWord>(static_cast<WindowsByte>(low & g_MakeWordMask) | static_cast<WindowWord>(static_cast<WindowsByte>(high & g_MakeWordMask)) << g_MakeWordShift);
+        return static_cast<WindowsWord>(static_cast<WindowsByte>(low & makeWordMask) | static_cast<WindowWord>(static_cast<WindowsByte>(high & makeWordMask)) << makeWordShift);
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -160,7 +150,7 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        return static_cast<WindowsWord>(param & g_WordMask);
+        return static_cast<WindowsWord>(param & gWordMask);
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -173,7 +163,7 @@ namespace System
 
 #else  // !SYSTEM_USE_WINDOWS_MACRO
 
-        return static_cast<WindowsWord>(param >> g_WordShift) & g_WordMask;
+        return static_cast<WindowsWord>(param >> gWordShift) & gWordMask;
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
@@ -228,17 +218,5 @@ namespace System
     #define SYSTEM_IN_OUT_OPT
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
-
-#if defined(_DEBUG) && !defined(NDEBUG)
-
-constexpr auto isDebug = true;
-
-#else  // !_DEBUG
-
-constexpr auto isDebug = false;
-
-#endif  // _DEBUG
-
-constexpr auto isRelease = !isDebug;
 
 #endif  // SYSTEM_HELPER_WINDOWS_MACRO_H

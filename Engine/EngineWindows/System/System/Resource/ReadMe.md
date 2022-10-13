@@ -19,13 +19,13 @@
 	  选择的平台名称：TCRE_SYSTEM_PLATFORM。使用的平台：SYSTEM_PLATFORM_XXX。
 	  选择的编译器版本：TCRE_COMPILER_VERSION，编译器名称：TCRE_SYSTEM_COMPILER，使用的编译器：TCRE_USE_XXX。 
 	  选择的标准库版本：TCRE_CPPLIB_VERSION、标准库名称：TCRE_SYSTEM_STDLIB，使用的标准库：TCRE_USE_XXX。
-（2） 用户宏：用于是否使用静态库、检查GL错误、是否使用Windows宏、DirectX、自旋锁、OpenGL2和glut等用户设定。
+（2） 用户宏：用于是否使用静态库、检查GL错误、是否使用Windows宏、DirectX、自旋锁、OpenGL2、glut和glfw等用户设定。
 （3） 字符串拼接宏：用于在宏中拼接字符串。 
 （4） Unicode字符using声明：根据是否定义宏UNICODE来决定字符类型是char还是wchar_t。
 （5） 打印编译器信息宏：打印正在使用的编译器信息。
 （6） 版本号：引擎的版本号。
 （7） 导出标志宏：根据不同平台的标准，定义类或函数的导入或导出符号。
-（8） Windows平台相关宏：将Windows宏封装成constexpr函数或平台通用宏，以实现非Windows平台的调用。 
+（8） Windows平台宏：将Windows宏封装成constexpr函数或平台通用宏，以实现非Windows平台的调用。 
 （9） 安全标识符宏：Windows平台安全标识符所需要的宏，主要用于安全标识符的初始化。
 （10）网络宏：用于描述符fd的相关操作。
 （11）平台头文件：用于包含平台相关的头文件。
@@ -39,6 +39,7 @@
 	  opengl插件宏。
 	  opengl工具宏。
 （17）可变参数模板类型：获取可变参数模板的类型。
+（18）工具：一些有用的工具函数。
 
 ----------------------------
 2.	SystemOutput（系统输出）
@@ -166,8 +167,9 @@
 ----------------------------
 13.	DirectX（DirectX）
 
-封装了DirectX11调用的实现。 
+封装了DirectX11和DirectX12调用的实现。 
 （1）DirectX11：对DirectX11 API的封装。
+（2）DirectX12：对DirectX12 API的封装。
 
 ----------------------------
 14.	Windows（Windows）

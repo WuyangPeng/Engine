@@ -512,19 +512,19 @@ xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\PragmaWarningTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\SecuritySidMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\StringizeMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\DebugTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\GetArraySizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\UnusedFunctionTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsingTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UserMacroTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\VariableTemplateTypeTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\VersionTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\DebugTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\GetArraySizeTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntreSourceTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageIDTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageCIDTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeWordTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MarkTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateHeapTesting.h" />
@@ -862,19 +862,19 @@ xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\PragmaWarningTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\SecuritySidMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\StringizeMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\DebugTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\GetArraySizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\UnusedFunctionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsingTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UserMacroTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\VariableTemplateTypeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\VersionTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\DebugTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\GetArraySizeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntreSourceTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageIDTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageCIDTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeWordTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MarkTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateHeapTesting.cpp" />
@@ -1083,5 +1083,5 @@ xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-  </ImportGroup> 
+  </ImportGroup>
 </Project>

@@ -23,7 +23,7 @@ namespace Framework
         using ParentType = ModelViewControllerMiddleLayer;
 
     public:
-        explicit ControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit ControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

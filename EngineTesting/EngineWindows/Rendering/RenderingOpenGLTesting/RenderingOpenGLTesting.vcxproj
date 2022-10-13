@@ -67,6 +67,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -93,6 +94,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -178,6 +180,10 @@
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -197,6 +203,10 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -216,6 +226,10 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -231,6 +245,10 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -246,6 +264,10 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -261,7 +283,11 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
-  </ItemDefinitionGroup>  
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -280,6 +306,10 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -299,11 +329,16 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
       <Command>xcopy "$(ProjectDir)/Resource/RenderersSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/RenderersSuite/" /F /Y
 xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OpenGLRendererSuite/" /F /Y</Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/NullRenderer.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Renderer.json" />
+    <None Include="Configuration\NullRenderer.json" />
     <None Include="Configuration\RenderingOpenGLTesting.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\OpenGLRendererSuite\Texture1D.trt" />
@@ -325,6 +360,7 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferLockManageTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\EnvironmentParameterTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformIndexBufferTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformRenderTargetTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture1DTesting.h" />
@@ -334,6 +370,7 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexBufferTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexFormatTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderingEnvironmentTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderTargetManagementTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureLockManageTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureManagementLockEncapsulationTesting.h" />
@@ -353,6 +390,7 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferLockManageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\EnvironmentParameterTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformIndexBufferTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformRenderTargetTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture1DTesting.cpp" />
@@ -361,6 +399,7 @@ xcopy "$(ProjectDir)/Resource/OpenGLRendererSuite/*.*" "$(EngineTestingInclude)/
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTextureCubeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexBufferTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexFormatTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderingEnvironmentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderTargetManagementTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureLockManageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureManagementLockEncapsulationTesting.cpp" />

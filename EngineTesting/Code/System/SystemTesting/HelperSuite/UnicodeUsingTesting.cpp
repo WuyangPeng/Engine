@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 1:12)
+///	引擎测试版本：0.8.1.2 (2022/09/17 22:34)
 
 #include "UnicodeUsingTesting.h"
 #include "System/Helper/UnicodeUsing.h"
@@ -38,6 +38,7 @@ void System::UnicodeUsingTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(StringStreamMacroTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileStreamMacroTest);
     ASSERT_NOT_THROW_EXCEPTION_0(ToStringTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(NullCharTest);
 }
 
 void System::UnicodeUsingTesting::StringStreamMacroTest()
@@ -82,4 +83,9 @@ void System::UnicodeUsingTesting::ToStringTest()
     const auto value = ToString(2);
 
     ASSERT_EQUAL(value, SYSTEM_TEXT("2"s));
+}
+
+void System::UnicodeUsingTesting::NullCharTest()
+{
+    ASSERT_EQUAL(nullChar, SYSTEM_TEXT('\0'));
 }

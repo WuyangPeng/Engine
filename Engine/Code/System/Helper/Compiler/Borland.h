@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:41)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/10 13:12)
 
 #ifndef SYSTEM_HELPER_BORLAND_H
 #define SYSTEM_HELPER_BORLAND_H
@@ -32,28 +32,42 @@
     #endif  // __BORLANDC__
 
     #ifndef SYSTEM_CPP_STANDARD
+
         #define SYSTEM_CPP_STANDARD 3
+
     #endif  // SYSTEM_CPP_STANDARD
 
     #ifndef TCRE_USE_BORLANDC
+
         #define TCRE_USE_BORLANDC 1
+
     #endif  // TCRE_USE_BORLANDC
 
     #ifndef TCRE_COMPILER_VERSION
+
         #define TCRE_COMPILER_VERSION __BORLANDC__
+
     #endif  // TCRE_COMPILER_VERSION
 
     #ifndef TCRE_SYSTEM_COMPILER
+
         #define TCRE_SYSTEM_COMPILER "Borland C++ 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+
     #endif  // TCRE_SYSTEM_COMPILER
 
     // 支持宏以帮助标准库检测
     #if (__BORLANDC__ < 0x560) || defined(_USE_OLD_RW_STL)
+
         #define TCRE_BCB_WITH_ROGUE_WAVE static_cast<void>(0)
+
     #elif __BORLANDC__ < 0x570
+
         #define TCRE_BCB_WITH_STLPORT static_cast<void>(0)
+
     #else  // 0x570 <= __BORLANDC__
+
         #define TCRE_BCB_WITH_DINKUMWARE static_cast<void>(0)
+
     #endif  // __BORLANDC__
 
     // 版本5.51及以下：
@@ -64,11 +78,15 @@
         #include <cwchar>
 
         #ifndef WCHAR_MAX
+
             #define WCHAR_MAX 0xFFFF
+
         #endif  // WCHAR_MAX
 
         #ifndef WCHAR_MIN
+
             #define WCHAR_MIN 0
+
         #endif  // WCHAR_MIN
 
     #endif  // (__BORLANDC__ <= 0x551)
@@ -77,16 +95,20 @@
     #if (__BORLANDC__ <= 0x564)
 
         #if defined(NDEBUG)
+
             // 修复不合标准的<cstring>
             #include <cstring>
             #undef strcmp
+
         #endif  // defined(NDEBUG)
 
         // 修复不合标准的errno声明。
         #include <errno.h>
 
         #ifndef errno
+
             #define errno errno
+
         #endif  // errno
 
     #endif  // (__BORLANDC__ <= 0x564)

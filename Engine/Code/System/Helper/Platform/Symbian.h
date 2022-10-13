@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:36)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/11 23:20)
 
 #ifndef SYSTEM_HELPER_SYMBIAN_H
 #define SYSTEM_HELPER_SYMBIAN_H
@@ -21,13 +21,19 @@
     #include <cstdlib>
 
     #if defined(__LITTLE_ENDIAN)
+
         #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
+
     #else  // !defined(__LITTLE_ENDIAN)
+
         #define SYSTEM_BIG_ENDIAN static_cast<void>(0)
+
     #endif  // defined(__LITTLE_ENDIAN)
 
     #if !defined(__S60_3X__)
+
         #error "不支持 Symbian SDK"
+
     #endif  // !defined(__S60_3X__)
 
 #endif  // defined(__SYMBIAN32__)

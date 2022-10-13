@@ -1,0 +1,68 @@
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎版本：0.8.1.1 (2022/08/18 18:04)
+
+#ifndef RENDERING_STATE_BLEND_STATE_IMPL_H
+#define RENDERING_STATE_BLEND_STATE_IMPL_H
+
+#include "Rendering/RenderingDll.h"
+
+#include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/DataTypes/Colour.h"
+#include "Rendering/State/BlendStateTarget.h"
+
+#include <array>
+#include <vector>
+
+namespace Rendering
+{
+    class RENDERING_HIDDEN_DECLARE BlendStateImpl
+    {
+    public:
+        using ClassType = BlendStateImpl;
+        using Colour = Colour<float>;
+
+    public:
+        BlendStateImpl() noexcept;
+
+        CLASS_INVARIANT_DECLARE;
+
+        NODISCARD bool GetEnableAlphaToCoverage() const noexcept;
+        void SetEnableAlphaToCoverage(bool aEnableAlphaToCoverage) noexcept;
+
+        NODISCARD bool GetEnableIndependentBlend() const noexcept;
+        void SetEnableIndependentBlend(bool aEnableIndependentBlend) noexcept;
+
+        NODISCARD Colour GetBlendColor() const noexcept;
+        void SetBlendColor(Colour aBlendColor) noexcept;
+
+        NODISCARD uint32_t GetSampleMask() const noexcept;
+        void SetSampleMask(uint32_t aSampleMask) noexcept;
+
+        NODISCARD BlendStateTarget GetBlendStateTarget(int index) const;
+        void SetBlendStateTarget(int index, const BlendStateTarget& blendStateTarget);
+
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& aTarget) const;
+        NODISCARD int GetStreamingSize() const noexcept;
+
+    private:
+        static constexpr auto numTargets = 8;
+
+    private:
+        using BlendStateTargetContainer = std::array<BlendStateTarget, numTargets>;
+
+        bool enableAlphaToCoverage;
+        bool enableIndependentBlend;
+        BlendStateTargetContainer target;
+        Colour blendColor;
+        uint32_t sampleMask;
+    };
+}
+
+#endif  // RENDERING_STATE_BLEND_STATE_IMPL_H

@@ -10,7 +10,10 @@
 #ifndef SYSTEM_WINDOWS_WINDOWS_PICTORIAL_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_PICTORIAL_FLAGS_H
 
+#include "System/Helper/EnumMacro.h"
 #include "System/Helper/Platform.h"
+
+#include <iostream>
 
 namespace System
 {
@@ -41,6 +44,9 @@ namespace System
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
+
+    ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE(WindowsBrushTypes)
+    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(WindowsBrushTypes)
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_PICTORIAL_FLAGS_H

@@ -37,7 +37,7 @@ Network::NetworkSockInetAddress::NetworkSockInetAddress(MAYBE_UNUSED CoreTools::
 {
     inetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
     inetAddress.sin_port = System::GetHostToNetShort(0);
-    inetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
+    inetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::gInAddrAny);
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -47,7 +47,7 @@ Network::NetworkSockInetAddress::NetworkSockInetAddress(int port)
 {
     inetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
     inetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
-    inetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::g_InAddrAny);
+    inetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::gInAddrAny);
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:39)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/29 22:29)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
@@ -29,27 +29,27 @@
 
 namespace System
 {
-    constexpr auto g_SystemOpenGLVersionNone = 0;
-    constexpr auto g_SystemOpenGLVersion10 = 10;
-    constexpr auto g_SystemOpenGLVersion11 = 11;
-    constexpr auto g_SystemOpenGLVersion12 = 12;
-    constexpr auto g_SystemOpenGLVersion13 = 13;
-    constexpr auto g_SystemOpenGLVersion14 = 14;
-    constexpr auto g_SystemOpenGLVersion15 = 15;
-    constexpr auto g_SystemOpenGLVersion20 = 20;
-    constexpr auto g_SystemOpenGLVersion21 = 21;
-    constexpr auto g_SystemOpenGLVersion30 = 30;
-    constexpr auto g_SystemOpenGLVersion31 = 31;
-    constexpr auto g_SystemOpenGLVersion32 = 32;
-    constexpr auto g_SystemOpenGLVersion33 = 33;
-    constexpr auto g_SystemOpenGLVersion40 = 40;
-    constexpr auto g_SystemOpenGLVersion41 = 41;
-    constexpr auto g_SystemOpenGLVersion42 = 42;
-    constexpr auto g_SystemOpenGLVersion43 = 43;
-    constexpr auto g_SystemOpenGLVersion44 = 44;
-    constexpr auto g_SystemOpenGLVersion45 = 45;
-    constexpr auto g_SystemOpenGLVersion46 = 46;
-    constexpr auto g_SystemOpenGLVersionMax = 100;
+    constexpr auto gSystemOpenGLVersionNone = 0;
+    constexpr auto gSystemOpenGLVersion10 = 10;
+    constexpr auto gSystemOpenGLVersion11 = 11;
+    constexpr auto gSystemOpenGLVersion12 = 12;
+    constexpr auto gSystemOpenGLVersion13 = 13;
+    constexpr auto gSystemOpenGLVersion14 = 14;
+    constexpr auto gSystemOpenGLVersion15 = 15;
+    constexpr auto gSystemOpenGLVersion20 = 20;
+    constexpr auto gSystemOpenGLVersion21 = 21;
+    constexpr auto gSystemOpenGLVersion30 = 30;
+    constexpr auto gSystemOpenGLVersion31 = 31;
+    constexpr auto gSystemOpenGLVersion32 = 32;
+    constexpr auto gSystemOpenGLVersion33 = 33;
+    constexpr auto gSystemOpenGLVersion40 = 40;
+    constexpr auto gSystemOpenGLVersion41 = 41;
+    constexpr auto gSystemOpenGLVersion42 = 42;
+    constexpr auto gSystemOpenGLVersion43 = 43;
+    constexpr auto gSystemOpenGLVersion44 = 44;
+    constexpr auto gSystemOpenGLVersion45 = 45;
+    constexpr auto gSystemOpenGLVersion46 = 46;
+    constexpr auto gSystemOpenGLVersionMax = 100;
 }
 
 #define SYSTEM_GET_FUNCTION(glFunction) \

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{289e83fe-82ae-4928-8baf-4cd15f37ea4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderersSuite 头文件">
+      <UniqueIdentifier>{e3f13dfe-622b-43de-ab8b-c8cba1d188c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderersSuite 源文件">
+      <UniqueIdentifier>{11adc7c9-b543-4c0d-bc3b-8546c0123006}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderingEnvironmentMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderersSuite.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingDeviceTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingEnvironmentTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderingEnvironmentMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingDeviceTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingWindowTesting\RenderersSuite\RenderingEnvironmentTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\RenderingWindowTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\RendererEnvironment.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -12,6 +12,7 @@
 #include "OpenGLWglPrototypes.h"
 #include "Detail/WglExtensions.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/OpenGL/Detail/WglExtensions.h"
 
 bool System::IsWglSwapInterval(int interval) noexcept
 {
@@ -86,4 +87,12 @@ bool System::SwapDeviceBuffers(WindowsHDC hdc) noexcept
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+bool SYSTEM_DEFAULT_DECLARE System::DisplayColorBuffer(WindowsHDC hdc, int syncInterval) noexcept
+{
+    if (WglSwapIntervalEXT(syncInterval > 0 ? 1 : 0) != gFalse && SwapDeviceBuffers(hdc))
+        return true;
+    else
+        return false;
 }

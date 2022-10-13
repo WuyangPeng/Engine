@@ -23,28 +23,28 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
-Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform },
+Framework::CameraControllerMiddleLayer<ApplicationTrait>::CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory },
       changeCameraSpeed{ { KeyIdentifiers::lowerT, &CameraModelMiddleLayer::SlowerCameraTranslation },  // 摄像机平移变慢。
-                           { KeyIdentifiers::upperT, &CameraModelMiddleLayer::FasterCameraTranslation },  // 摄像机平移变快。
-                           { KeyIdentifiers::lowerR, &CameraModelMiddleLayer::SlowerCameraRotation },  // 摄像机旋转变慢。
-                           { KeyIdentifiers::upperR, &CameraModelMiddleLayer::FasterCameraRotation } },  // 摄像机旋转变快。
+                         { KeyIdentifiers::upperT, &CameraModelMiddleLayer::FasterCameraTranslation },  // 摄像机平移变快。
+                         { KeyIdentifiers::lowerR, &CameraModelMiddleLayer::SlowerCameraRotation },  // 摄像机旋转变慢。
+                         { KeyIdentifiers::upperR, &CameraModelMiddleLayer::FasterCameraRotation } },  // 摄像机旋转变快。
       changeCameraMotion{ { KeyIdentifiers::keyF1, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Positive } },
-                            { KeyIdentifiers::keyF2, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Negative } },
-                            { KeyIdentifiers::keyF3, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Positive } },
-                            { KeyIdentifiers::keyF4, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Negative } },
-                            { KeyIdentifiers::keyF5, { &CameraModelMiddleLayer::SetDoPitch, Mathematics::NumericalValueSymbol::Positive } },
-                            { KeyIdentifiers::keyF6, { &CameraModelMiddleLayer::SetDoPitch, Mathematics::NumericalValueSymbol::Negative } } },
+                          { KeyIdentifiers::keyF2, { &CameraModelMiddleLayer::SetDoRoll, Mathematics::NumericalValueSymbol::Negative } },
+                          { KeyIdentifiers::keyF3, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Positive } },
+                          { KeyIdentifiers::keyF4, { &CameraModelMiddleLayer::SetDoYaw, Mathematics::NumericalValueSymbol::Negative } },
+                          { KeyIdentifiers::keyF5, { &CameraModelMiddleLayer::SetDoPitch, Mathematics::NumericalValueSymbol::Positive } },
+                          { KeyIdentifiers::keyF6, { &CameraModelMiddleLayer::SetDoPitch, Mathematics::NumericalValueSymbol::Negative } } },
       changeObjectMotion{ { KeyIdentifiers::keyLeftArrow, &CameraModelMiddleLayer::SetMoveLeft },
-                            { KeyIdentifiers::keyRightArrow, &CameraModelMiddleLayer::SetMoveRight },
-                            { KeyIdentifiers::keyUpArrow, &CameraModelMiddleLayer::SetMoveForward },
-                            { KeyIdentifiers::keyDownArrow, &CameraModelMiddleLayer::SetMoveBackward },
-                            { KeyIdentifiers::keyPageUp, &CameraModelMiddleLayer::SetMoveUp },
-                            { KeyIdentifiers::keyPageDown, &CameraModelMiddleLayer::SetMoveDown },
-                            { KeyIdentifiers::keyHome, &CameraModelMiddleLayer::SetLookUp },
-                            { KeyIdentifiers::keyEnd, &CameraModelMiddleLayer::SetLookDown },
-                            { KeyIdentifiers::keyInsert, &CameraModelMiddleLayer::SetTurnLeft },
-                            { KeyIdentifiers::keyDelete, &CameraModelMiddleLayer::SetTurnRight } }
+                          { KeyIdentifiers::keyRightArrow, &CameraModelMiddleLayer::SetMoveRight },
+                          { KeyIdentifiers::keyUpArrow, &CameraModelMiddleLayer::SetMoveForward },
+                          { KeyIdentifiers::keyDownArrow, &CameraModelMiddleLayer::SetMoveBackward },
+                          { KeyIdentifiers::keyPageUp, &CameraModelMiddleLayer::SetMoveUp },
+                          { KeyIdentifiers::keyPageDown, &CameraModelMiddleLayer::SetMoveDown },
+                          { KeyIdentifiers::keyHome, &CameraModelMiddleLayer::SetLookUp },
+                          { KeyIdentifiers::keyEnd, &CameraModelMiddleLayer::SetLookDown },
+                          { KeyIdentifiers::keyInsert, &CameraModelMiddleLayer::SetTurnLeft },
+                          { KeyIdentifiers::keyDelete, &CameraModelMiddleLayer::SetTurnRight } }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

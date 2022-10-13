@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 17:56)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/11 23:21)
 
 #ifndef SYSTEM_HELPER_DINKUMWARE_H
 #define SYSTEM_HELPER_DINKUMWARE_H
@@ -15,19 +15,29 @@
     //  Dinkumware 标准库配置：
 
     #ifdef _CPPLIB_VER
+
         #define TCRE_DINKUMWARE_STDLIB _CPPLIB_VER
+
     #else  // !_CPPLIB_VER
+
         #define TCRE_DINKUMWARE_STDLIB 1
+
     #endif  // _CPPLIB_VER
 
     #ifndef TCRE_CPPLIB_VERSION
+
         #define TCRE_CPPLIB_VERSION TCRE_DINKUMWARE_STDLIB
+
     #endif  // TCRE_CPPLIB_VERSION
 
     #ifdef _CPPLIB_VER
+
         #define TCRE_SYSTEM_STDLIB "Dinkumware 标准库版本 " SYSTEM_STRINGIZE(TCRE_CPPLIB_VERSION)
+
     #else  // !_CPPLIB_VER
+
         #define TCRE_SYSTEM_STDLIB "Dinkumware 标准库版本 1.x"
+
     #endif  // _CPPLIB_VER
 
     #define TCRE_USE_DINKUMWARE static_cast<void>(0)

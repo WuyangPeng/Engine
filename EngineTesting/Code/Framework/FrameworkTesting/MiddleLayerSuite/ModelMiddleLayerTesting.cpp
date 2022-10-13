@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Time/CustomTime.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/MiddleLayer/ModelMiddleLayer.h"
@@ -55,13 +56,13 @@ void Framework::ModelMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
     ASSERT_TRUE(middleLayer.Destroy());
@@ -94,7 +95,7 @@ void Framework::ModelMiddleLayerTesting::FrameRateTest()
     constexpr auto maxTimer = 30;
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
     constexpr auto frame = System::g_Millisecond / maxTimer;
     const auto testLoopCount = maxTimer * GetTestLoopCount();

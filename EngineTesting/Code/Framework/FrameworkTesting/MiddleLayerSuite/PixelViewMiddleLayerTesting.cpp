@@ -13,6 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
@@ -67,17 +68,17 @@ void Framework::PixelViewMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = make_shared<ModelMiddleLayer>(platform);
+    auto modelMiddleLayer = make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
     ASSERT_TRUE(middleLayer.Destroy());
@@ -878,17 +879,19 @@ Framework::PixelViewMiddleLayer Framework::PixelViewMiddleLayerTesting::CreateTe
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto modelMiddleLayer = make_shared<ModelMiddleLayer>(platform);
+    auto modelMiddleLayer = make_shared<ModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(modelMiddleLayer);
 
     const WindowSize windowSize{ width, height };
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
+
     ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, windowSize));
 
     ASSERT_EQUAL(middleLayer.GetScreenWidth(), width);

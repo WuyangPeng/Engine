@@ -37,6 +37,8 @@ void Rendering::RenderingOpenGLTestingOpenGLGlutCallBack::AddRenderersSuite()
 {
     auto renderersSuite = GenerateSuite("äÖÈ¾Æ÷");
 
+    ADD_TEST(renderersSuite, EnvironmentParameterTesting);
+    ADD_TEST(renderersSuite, RenderingEnvironmentTesting);
     ADD_TEST(renderersSuite, PlatformVertexFormatTesting);
     ADD_TEST(renderersSuite, VertexFormatManagementTesting);
     ADD_TEST(renderersSuite, PlatformIndexBufferTesting);

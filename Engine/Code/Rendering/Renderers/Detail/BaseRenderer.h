@@ -16,6 +16,7 @@
 #include "Rendering/Renderers/DepthRange.h"
 #include "Rendering/Renderers/RendererBasis.h"
 #include "Rendering/Renderers/RenderersFwd.h"
+#include "Rendering/Renderers/RenderingEnvironment.h"
 #include "Rendering/Renderers/Viewport.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 
@@ -36,7 +37,7 @@ namespace Rendering
         using TextureSharedPtr = std::shared_ptr<Texture>;
 
     public:
-        explicit BaseRenderer(const RendererBasis& basis);
+        BaseRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
         virtual ~BaseRenderer() noexcept = default;
         BaseRenderer(const BaseRenderer& rhs) = delete;
         BaseRenderer& operator=(const BaseRenderer& rhs) = delete;
@@ -48,8 +49,8 @@ namespace Rendering
         // 访问构造函数的输入。
         NODISCARD int GetWidth() const noexcept;
         NODISCARD int GetHeight() const noexcept;
-        NODISCARD TextureFormat GetColorFormat() const noexcept;
-        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD DataFormatType GetColorFormat() const noexcept;
+        NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD int GetNumMultisamples() const noexcept;
 
         // 视口管理。 视口以右手屏幕坐标指定。 原点是屏幕的左下角，y轴指向上方，x轴指向右侧。
@@ -97,6 +98,12 @@ namespace Rendering
         NODISCARD virtual bool Update(const BufferSharedPtr& buffer) = 0;
         NODISCARD virtual bool Update(const TextureSharedPtr& texture) = 0;
 
+        void Release();
+
+        void SwapBuffers();
+        void ResetSize();
+        void InitDevice();
+
     protected:
         void CreateDefaultGlobalState();
         void SetActiveBlendState(const BlendStateSharedPtr& state) noexcept;
@@ -104,6 +111,9 @@ namespace Rendering
         void SetActiveRasterizerState(const RasterizerStateSharedPtr& state) noexcept;
 
     private:
+        RenderingEnvironment renderingEnvironment;
+        RenderingDevice renderingDevice;
+
         RendererBasis rendererBasis;
 
         // 清除帧缓冲区。

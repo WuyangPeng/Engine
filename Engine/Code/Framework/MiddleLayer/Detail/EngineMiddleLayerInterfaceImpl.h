@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 16:00)
+///	引擎版本：0.8.1.2 (2022/08/31 17:21)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_IMPL_H
@@ -35,8 +35,8 @@ namespace Framework
         NODISCARD int GetSize() const;
 
     private:
-        using WeakPointer = std::weak_ptr<MiddleLayerInterface>;
-        using Container = std::vector<WeakPointer>;
+        using MiddleLayerInterfaceWeakPtr = std::weak_ptr<MiddleLayerInterface>;
+        using Container = std::vector<MiddleLayerInterfaceWeakPtr>;
 
     private:
         Container container;

@@ -34,29 +34,30 @@
     OfflineServer（离线服务器）、LeaderboardServer（排行榜服务器）、MailServer（邮件服务器）、ServerManager（服务器管理者）。
     每个服开启一到多网关服务器或每个游戏根据需要开启一到多个网关服务器。
 2.  LoginServer（登陆服务器）：
-    主动连接服务器：ServerManager（服务器管理者）、BackgroundServer（后台服务器）。
+    主动连接服务器：ServerManager（服务器管理者）、BackgroundServer（后台服务器）、DatabaseServer（数据库服务器）。
     监听服务器：GatewayServer（网关服务器）。
     每个游戏根据需要开启一到多个登陆服务器。
 3.  GameServer（游戏服务器）：
-    主动连接服务器：ServerManager（服务器管理者）、WorldServer（世界服务器）、OfflineServer（离线服务器）、LeaderboardServer（排行榜服务器）、
-    FightingServer（战斗服务器）、RechargeServer（充值服务器）、LogServer（日志服务器）、GameMasterServer（游戏管理员服务器）。	
+    主动连接服务器：ServerManager（服务器管理者）、WorldServer（世界服务器）、OfflineServer（离线服务器）、
+    LeaderboardServer（排行榜服务器）、FightingServer（战斗服务器）、RechargeServer（充值服务器）、
+    LogServer（日志服务器）、GameMasterServer（游戏管理员服务器）、DatabaseServer（数据库服务器）。	
     监听服务器：GatewayServer（网关服务器）。
     每个服开启一个游戏服务器。
 4.  FightingServer（战斗服务器）：
-    主动连接服务器：ServerManager（服务器管理者）、WorldServer（世界服务器）。
+    主动连接服务器：ServerManager（服务器管理者）、WorldServer（世界服务器）、DatabaseServer（数据库服务器）。
     监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）。
     每个服开启一个战斗服务器或每个游戏根据需要开启一到多个战斗服务器。
 5.  WorldServer（世界服务器）：
     主动连接服务器：ServerManager（服务器管理者）。
-    监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）、FightingServer（战斗服务器）。
+    监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）、FightingServer（战斗服务器）、DatabaseServer（数据库服务器）。
     每个游戏根据需要开启一到多个世界服务器。
 6.  OfflineServer（离线服务器）：
     主动连接服务器：ServerManager（服务器管理者）。
-    监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）。
+    监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）、DatabaseServer（数据库服务器）。
     每个游戏根据需要开启一到多个离线服务器。
 7.  LeaderboardServer（排行榜服务器）：
     主动连接服务器：ServerManager（服务器管理者）。
-    监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）。
+    监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）、DatabaseServer（数据库服务器）。
     每个游戏根据需要开启一到多个排行榜服务器。
 8.  MailServer（邮件服务器）：
     主动连接服务器：ServerManager（服务器管理者）。
@@ -67,11 +68,11 @@
     监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）。
     每个游戏根据需要开启一到多个聊天服务器。
 10. RechargeServer（充值服务器）：
-    主动连接服务器：ServerManager（服务器管理者）、BackgroundServer（后台服务器）。
+    主动连接服务器：ServerManager（服务器管理者）、BackgroundServer（后台服务器）、DatabaseServer（数据库服务器）。
     监听服务器：GameServer（游戏服务器）。
     每个游戏根据需要开启一到多个充值服务器。
 11. LogServer（日志服务器）：
-    主动连接服务器：ServerManager（服务器管理者）。
+    主动连接服务器：ServerManager（服务器管理者）、DatabaseServer（数据库服务器）。
     监听服务器：GameServer（游戏服务器）。 
     每个服开启一个日志服务器或每个游戏根据需要开启一到多个日志服务器。
 12. GameMasterServer（游戏管理员服务器）：
@@ -89,7 +90,7 @@
     每个游戏根据需要开启一到多个更新服务器。
 15. BackgroundServer（后台服务器）：
     监听客户端：BackgroundClient（后台客户端）。
-    监听服务器：LoginServer（登陆服务器）、RechargeServer（充值服务器）、GameMasterServer（游戏管理员服务器）。
+    监听服务器：LoginServer（登陆服务器）、RechargeServer（充值服务器）、GameMasterServer（游戏管理员服务器）、DatabaseServer（数据库服务器）。
     主动连接服务器：ServerManager（服务器管理者）。
     每个游戏根据需要开启一个后台服务器。
 16. DatabaseServer（数据库服务器）：

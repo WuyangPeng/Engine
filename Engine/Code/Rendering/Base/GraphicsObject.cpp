@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.0 (2022/08/07 13:30)
+///	引擎版本：0.8.1.2 (2022/09/21 14:02)
 
 #include "Rendering/RenderingExport.h"
 
@@ -21,7 +21,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, GraphicsObject);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, GraphicsObject);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, GraphicsObject);
 
-Rendering::GraphicsObject::GraphicsObject(GraphicsObjectType type, const std::string& name)
+Rendering::GraphicsObject::GraphicsObject(const std::string& name, GraphicsObjectType type)
     : ParentType{ name }, graphicsObjectType{ type }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -88,14 +88,14 @@ int Rendering::GraphicsObject::GetStreamingSize() const
     return size;
 }
 
-int64_t Rendering::GraphicsObject::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::GraphicsObject::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return ParentType::Register(target);
 }
 
-void Rendering::GraphicsObject::Save(CoreTools::BufferTarget& target) const
+void Rendering::GraphicsObject::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -108,7 +108,7 @@ void Rendering::GraphicsObject::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::GraphicsObject::Link(CoreTools::ObjectLink& source)
+void Rendering::GraphicsObject::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -122,7 +122,7 @@ void Rendering::GraphicsObject::PostLink()
     ParentType::PostLink();
 }
 
-void Rendering::GraphicsObject::Load(CoreTools::BufferSource& source)
+void Rendering::GraphicsObject::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 

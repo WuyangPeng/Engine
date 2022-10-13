@@ -36,7 +36,7 @@ namespace System
 
     constexpr WinSocket g_InvalidSocket{ INVALID_SOCKET };
     constexpr auto g_SocketError = SOCKET_ERROR;
-    constexpr auto g_InAddrAny = INADDR_ANY;
+    constexpr auto gInAddrAny = INADDR_ANY;
     constexpr auto g_FdSetSize = FD_SETSIZE;
     constexpr auto g_InAddrLoopback = INADDR_LOOPBACK;
     constexpr auto g_SoMaxConn = SOMAXCONN;
@@ -132,7 +132,7 @@ namespace System
 
     constexpr auto g_InvalidSocket = static_cast<WinSocket>(~0);
     constexpr auto g_SocketError = -1;
-    constexpr auto g_InAddrAny = 0x00000000;
+    constexpr auto gInAddrAny = 0x00000000;
     constexpr auto g_InAddrLoopback = 0x7f000001;
     constexpr auto g_SoMaxConn = 0x7fffffff;
 

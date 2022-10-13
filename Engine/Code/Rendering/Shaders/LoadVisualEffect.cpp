@@ -29,7 +29,5 @@ Rendering::VisualEffectSharedPtr Rendering::LoadVisualEffect::Load(const System:
 
     auto effect = std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable);
 
-    effect->LoadVisualTechnique(manager);
-
     return effect;
 }

@@ -5,61 +5,54 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.6 (2022/04/22 14:36)
+///	引擎版本：0.8.1.2 (2022/09/05 20:48)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RendererParameter.h"
-#include "Detail/AnalysisRendererParameterManager.h"
+#include "Flags/RendererTypes.h"
+#include "Detail/AnalysisRendererParameter.h"
 #include "Detail/RendererParameterImpl.h"
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using boost::property_tree::ptree_error;
 using std::string;
 
-Rendering::RendererParameter::RendererParameter(const string& fileName)
-    : impl{ RendererTypes::Default }
-{
-    DoLoadConfiguration(fileName);
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RendererParameter)
 
+Rendering::RendererParameter::RendererParameter(const string& fileName)
+    : impl{ CreateRendererParameter(fileName) }
+{
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-void Rendering::RendererParameter::DoLoadConfiguration(const string& fileName)
+Rendering::RendererParameter::PackageType Rendering::RendererParameter::CreateRendererParameter(const string& fileName)
 {
     try
     {
-        AnalysisRendererParameterManager manager{ fileName };
-        impl = manager.GetRendererParameterPtr();
+        AnalysisRendererParameter manager{ fileName };
+
+        return manager.GetRendererParameter();
     }
-    catch (const ptree_error& error)
+    catch (const boost::property_tree::ptree_error& error)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-            << error.what()
+            << error
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
+
+    return PackageType{ RendererTypes::Default };
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererParameter)
 
-void Rendering::RendererParameter::LoadConfiguration(const string& fileName)
-{
-    RENDERING_CLASS_IS_VALID_1;
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetColorFormat, Rendering::DataFormatType)
 
-    DoLoadConfiguration(fileName);
-}
-
-COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RendererParameter)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetColorFormat, Rendering::TextureFormat)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetDepthStencilFormat, Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetDepthStencilFormat, Rendering::DataFormatType)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetNumMultisamples, int);
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetClearColor, Rendering::RendererParameter::Colour);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetClearColor, Rendering::RendererParameter::ColourType);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererParameter, GetWindowTitle, string);
 

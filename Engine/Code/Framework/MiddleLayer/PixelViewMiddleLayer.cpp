@@ -26,8 +26,8 @@ namespace Framework
     static constexpr auto defaultHeight = 768;
 }
 
-Framework::PixelViewMiddleLayer::PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ defaultWidth, defaultHeight }
+Framework::PixelViewMiddleLayer::PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ defaultWidth, defaultHeight }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -60,10 +60,10 @@ bool Framework::PixelViewMiddleLayer::Initialize()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    auto renderer = GetRenderer();
-
-    if (ParentType::Initialize() && renderer)
+    if (ParentType::Initialize())
     {
+        auto renderer = GetRenderer();
+
         const WindowSize windowSize{ renderer->GetWidth(), renderer->GetHeight() };
 
         impl->Resize(windowSize, GetClearColor());

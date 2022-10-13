@@ -17,8 +17,8 @@
 
 using std::make_shared;
 
-Framework::CameraSystemsManagerInterface::CameraSystemsManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ System::EnumCastUnderlying(CameraSystemsMiddleLayer::Count) }
+Framework::CameraSystemsManagerInterface::CameraSystemsManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ System::EnumCastUnderlying(CameraSystemsMiddleLayer::Count) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

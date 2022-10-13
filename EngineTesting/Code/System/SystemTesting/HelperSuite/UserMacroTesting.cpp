@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 1:13)
+///	引擎测试版本：0.8.1.2 (2022/09/15 18:55)
 
 #include "UserMacroTesting.h"
 #include "System/Helper/UserMacro.h"
@@ -34,7 +34,7 @@ void System::UserMacroTesting::MainTest()
 
 void System::UserMacroTesting::CloseSystemMaxTest()
 {
-    ASSERT_EQUAL(CLOSE_GLUT | CLOSE_ENABLE_GL_ERROR_CHECKING | CLOSE_DIRECTX, CLOSE_SYSTEM_MAX);
+    ASSERT_EQUAL(CLOSE_GLUT | CLOSE_GLFW | CLOSE_ENABLE_GL_ERROR_CHECKING | CLOSE_DIRECTX, CLOSE_SYSTEM_MAX);
 }
 
 void System::UserMacroTesting::MacroExistTest()
@@ -71,23 +71,11 @@ void System::UserMacroTesting::MacroExistTest()
 
 #endif  // SYSTEM_ENABLE_GL_ERROR_CHECKING
 
-#ifdef SYSTEM_USE_DIRECT_X_9
+#ifdef SYSTEM_USE_DIRECTX_12
 
     SYSTEM_PLATFORM_WIN32;
 
-#endif  // SYSTEM_USE_DIRECT_X_9
-
-#ifdef SYSTEM_USE_DIRECT_X_10
-
-    SYSTEM_PLATFORM_WIN32;
-
-#endif  // SYSTEM_USE_DIRECT_X_10
-
-#ifdef SYSTEM_USE_DIRECT_X_11
-
-    SYSTEM_PLATFORM_WIN32;
-
-#endif  // SYSTEM_USE_DIRECT_X_11
+#endif  // SYSTEM_USE_DIRECTX_12
 
 #ifdef BUILDING_SYSTEM_STATIC
 

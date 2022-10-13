@@ -42,7 +42,7 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
 
-    protected:
+    private:
         MemberLayoutContainer layout;
     };
 }

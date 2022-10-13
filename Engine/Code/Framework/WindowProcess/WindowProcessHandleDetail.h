@@ -16,8 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 template <typename WindowMessage>
-Framework::WindowProcessHandle<WindowMessage>::WindowProcessHandle(int64_t delta)
-    : windowMessage{ std::make_shared<MessageType>(delta) }
+Framework::WindowProcessHandle<WindowMessage>::WindowProcessHandle(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+    : windowMessage{ std::make_shared<MessageType>(delta, environmentDirectory) }
 {
     WINDOW_PROCESS_MANAGER_SINGLETON.SetWindowMessage(windowMessage);
 
@@ -90,11 +90,11 @@ System::WindowsHWnd Framework::WindowProcessHandle<WindowMessage>::GetMainWindow
 }
 
 template <typename WindowMessage>
-bool Framework::WindowProcessHandle<WindowMessage>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowProcessHandle<WindowMessage>::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate(environmentDirectory);
+    return WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate();
 }
 
 template <typename WindowMessage>

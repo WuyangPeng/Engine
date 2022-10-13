@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 1:13)
+///	引擎测试版本：0.8.1.2 (2022/09/18 14:39)
 
 #include "VersionTesting.h"
 #include "System/Helper/Version.h"
@@ -35,10 +35,10 @@ void System::VersionTesting::VersionTest()
 {
     constexpr auto maxSubversion = 100;
 
-    constexpr auto revision = g_TCREVersion % maxSubversion;
-    constexpr auto build = g_TCREVersion / maxSubversion % maxSubversion;
-    constexpr auto minor = g_TCREVersion / (maxSubversion * maxSubversion) % maxSubversion;
-    constexpr auto major = g_TCREVersion / (maxSubversion * maxSubversion * maxSubversion) % maxSubversion;
+    constexpr auto revision = gTCREVersion % maxSubversion;
+    constexpr auto build = gTCREVersion / maxSubversion % maxSubversion;
+    constexpr auto minor = gTCREVersion / (maxSubversion * maxSubversion) % maxSubversion;
+    constexpr auto major = gTCREVersion / (maxSubversion * maxSubversion * maxSubversion) % maxSubversion;
 
     ASSERT_GREATER_EQUAL(revision, 0);
     ASSERT_GREATER_EQUAL(build, 0);

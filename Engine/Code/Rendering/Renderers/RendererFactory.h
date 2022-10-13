@@ -27,12 +27,12 @@ namespace Rendering
         using RendererInputSharedPtr = std::shared_ptr<RendererInputImpl>;
 
     public:
-        NODISCARD static RendererSharedPtr Create(RendererTypes type, const RendererBasis& basis);
-        NODISCARD static RendererSharedPtr Create(const std::string& fileName);
+        NODISCARD static RendererSharedPtr Create(const EnvironmentParameter& environmentParameter, RendererTypes type, const RendererParameter& basis, const RenderingEnvironment& renderingEnvironment);
+        NODISCARD static RendererSharedPtr Create(const EnvironmentParameter& environmentParameter, const std::string& fileName);
         NODISCARD static RendererInputSharedPtr CreateInput(RendererTypes type);
 
     private:
-        NODISCARD static RendererSharedPtr CreateDefault(const RendererBasis& basis);
+        NODISCARD static RendererSharedPtr CreateDefault(const RendererParameter& basis, const RenderingEnvironment& renderingEnvironment);
         NODISCARD static RendererInputSharedPtr CreateDefaultInput();
     };
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 0:48)
+///	引擎测试版本：0.8.1.2 (2022/09/04 21:41)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_H
 #define SYSTEM_TESTING_HELPER_SUITE_H
@@ -45,12 +45,13 @@
 #include "PragmaWarningTesting.h"
 #include "SecuritySidMacroTesting.h"
 #include "StringizeMacroTesting.h"
+#include "Tools/DebugTesting.h"
+#include "Tools/GetArraySizeTesting.h"
+#include "Tools/UnusedFunctionTesting.h"
 #include "UnicodeUsingTesting.h"
 #include "UserMacroTesting.h"
 #include "VariableTemplateTypeTesting.h"
 #include "VersionTesting.h"
-#include "WindowsMacro/DebugTesting.h"
-#include "WindowsMacro/GetArraySizeTesting.h"
 #include "WindowsMacro/HResultTesting.h"
 #include "WindowsMacro/MakeIntreSourceTesting.h"
 #include "WindowsMacro/MakeLanguageCIDTesting.h"
@@ -58,6 +59,5 @@
 #include "WindowsMacro/MakeWordTesting.h"
 #include "WindowsMacro/MarkTesting.h"
 #include "WindowsMacro/PtrToIntTesting.h"
-#include "WindowsMacro/UnusedFunctionTesting.h"
 
 #endif  // SYSTEM_TESTING_HELPER_SUITE_H

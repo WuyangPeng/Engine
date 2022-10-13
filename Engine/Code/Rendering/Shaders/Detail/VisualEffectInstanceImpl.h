@@ -15,8 +15,9 @@
 #include "CoreTools/FileManager/FileManagerFwd.h"
 #include "CoreTools/ObjectSystems/ObjectAssociated.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
+#include "Rendering/Shaders/VisualPass.h"
 #include "Rendering/Shaders/ShaderParameters.h"
-#include "Rendering/Shaders/VisualEffect.h"
 
 namespace Rendering
 {
@@ -54,7 +55,7 @@ namespace Rendering
         NODISCARD ConstVisualEffectSharedPtr GetEffect() const noexcept;
         NODISCARD int GetTechniqueIndex() const noexcept;
         NODISCARD int GetNumPasses() const noexcept;
-        NODISCARD ConstVisualPassSharedPtr GetConstPass(int pass) const;
+        NODISCARD ConstVisualPassSharedPtr GetConstPass(int pass) const noexcept;
         NODISCARD ConstShaderParametersSharedPtr GetConstVertexParameters(int pass) const;
         NODISCARD ConstShaderParametersSharedPtr GetConstPixelParameters(int pass) const;
 

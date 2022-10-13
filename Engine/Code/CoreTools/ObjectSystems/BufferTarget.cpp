@@ -82,3 +82,10 @@ void CoreTools::BufferTarget::Write(size_t itemSize, size_t itemsNumber, const v
 
     return impl->Write(itemSize, itemsNumber, data);
 }
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::BufferTarget::GetFileBuffer() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFileBuffer();
+}

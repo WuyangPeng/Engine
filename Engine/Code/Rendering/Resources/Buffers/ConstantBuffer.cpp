@@ -25,6 +25,14 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, ConstantBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ConstantBuffer);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ConstantBuffer);
 
+Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate)
+    : ParentType{ 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ MemberLayoutContainer{} }
+{
+    SetUsage(allowDynamicUpdate ? UsageType::DynamicUpdate : UsageType::Immutable);
+
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 Rendering::ConstantBuffer::ConstantBuffer(int numBytes, bool allowDynamicUpdate, const MemberLayoutContainer& memberLayoutContainer)
     : ParentType{ 1, GetRoundedNumBytes(numBytes), GraphicsObjectType::ConstantBuffer }, impl{ memberLayoutContainer }
 {

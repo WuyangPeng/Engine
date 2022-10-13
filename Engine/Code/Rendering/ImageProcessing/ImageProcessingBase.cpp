@@ -125,7 +125,13 @@ void Rendering::ImageProcessingBase::CreateEffect(const PixelShaderSharedPtr& ps
 {
     RENDERING_CLASS_IS_VALID_9;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+
     auto pass = std::make_shared<VisualPass>(CoreTools::DisableNotThrow::Disable);
+
+#include STSTEM_WARNING_POP
+
     pass->SetPixelShader(pshader);
 
     pass->SetVertexShader(vertexShader);
@@ -144,10 +150,7 @@ void Rendering::ImageProcessingBase::CreateEffect(const PixelShaderSharedPtr& ps
     dstate->SetWritable(false);
     pass->SetDepthState(dstate);
 
-    auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
-    technique->InsertPass(pass);
     effect = std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable);
-    effect->InsertTechnique(technique);
 
     instance = std::make_shared<VisualEffectInstance>(effect, 0);
 

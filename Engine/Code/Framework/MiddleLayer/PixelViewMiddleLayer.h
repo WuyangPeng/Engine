@@ -27,7 +27,7 @@ namespace Framework
         using Colour = Rendering::Colour<uint8_t>;
 
     public:
-        explicit PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        PixelViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~PixelViewMiddleLayer() noexcept = default;
         PixelViewMiddleLayer(const PixelViewMiddleLayer& rhs) noexcept = delete;
         PixelViewMiddleLayer& operator=(const PixelViewMiddleLayer& rhs) noexcept = delete;

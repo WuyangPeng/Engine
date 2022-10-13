@@ -29,20 +29,20 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Resource);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Resource);
 
 Rendering::Resource::Resource(int numElements, int elementSize, GraphicsObjectType type)
-    : ParentType{ type },
+    : ParentType{ "Resource", type },
       impl{ numElements, elementSize }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 Rendering::Resource::Resource(int numElements, int elementSize, const StorageType& storage, GraphicsObjectType type)
-    : ParentType{ type },
+    : ParentType{ "Resource", type },
       impl{ numElements, elementSize, storage }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Rendering, Resource)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Resource)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Resource, GetNumElements, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Resource, GetElementSize, int)

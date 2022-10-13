@@ -35,13 +35,13 @@ Rendering::PlatformTexture2DImpl::PlatformTexture2DSharedPtr Rendering::Platform
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, texture2D);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9Texture2D>(renderer, texture2D);
         case RendererTypes::Glut:
             return make_shared<OpenGLTexture2D>(renderer, texture2D);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLTexture2D>(renderer, texture2D);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9Texture2D>(renderer, texture2D);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLTexture2D>(renderer, texture2D);

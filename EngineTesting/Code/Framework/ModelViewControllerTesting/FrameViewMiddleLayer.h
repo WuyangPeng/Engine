@@ -22,7 +22,7 @@ namespace ModelViewController
         using ParentType = ViewMiddleLayer;
 
     public:
-        explicit FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform);
+        FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

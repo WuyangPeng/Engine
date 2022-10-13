@@ -7,22 +7,25 @@
 1.	HelperSuite
 
 对Helper模块的单元测试，包括：
-（1） 配置常量和宏：FixedSizeTesting、CompilerConfigTesting、PlatformConfigTesting、StdLibConfigTesting、EndianTesting、ConfigMarkTesting。
+（1） 配置常量和宏：FixedSizeTesting、
+					CompilerConfigTesting、
+					PlatformConfigTesting、
+					StdLibConfigTesting、
+					EndianTesting、
+					ConfigMarkTesting。
 （2） 用户宏：UserMacroTesting。
 （3） 字符串拼接宏：StringizeMacroTesting。 
 （4） Unicode字符 using 声明：UnicodeUsingTesting。 
 （5） 打印编译器信息宏：PragmaMessageMacroTesting。
 （6） 版本号：VersionTesting。
 （7） 导出标志宏：ExportMacroTesting。
-（8） Windows平台相关宏：GetArraySizeTesting、
-						 NullFunctionTesting、
-						 MakeLanguageIDTesting、
+（8） Windows平台相关宏：MakeLanguageIDTesting、
 						 MakeIntreSourceTesting、
 						 MakeLanguageCIDTesting、  
 						 HResultTesting、
 						 MakeWordTesting、
 						 PtrToIntTesting、
-						 MarkTesting、DebugTesting。
+						 MarkTesting。
 （9） 安全标识符宏：SecuritySidMacroTesting。
 （10）网络宏：NetworkMacroTesting。
 （11）平台头文件：PlatformTesting。
@@ -50,6 +53,9 @@
 				GlUtilityBodyTesting、
 				GlUtilityBodyResultTesting。
 （17）可变参数模板类型：VariableTemplateTypeTesting。
+（18）工具：GetArraySizeTesting、
+			UnusedFunctionTesting、
+			DebugTesting。
 
 ----------------------------
 2.	SystemOutputSuite

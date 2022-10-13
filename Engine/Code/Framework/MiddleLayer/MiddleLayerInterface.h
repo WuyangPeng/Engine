@@ -5,16 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 17:04)
+///	引擎版本：0.8.1.2 (2022/09/10 14:05) 
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_MIDDLE_LAYER_INTERFACE_H
 
 #include "Framework/FrameworkDll.h"
 
-#include "MiddleLayerInternalFwd.h"
+#include "MiddleLayerFwd.h"
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/Renderers/RenderersFwd.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 #include "Framework/WindowProcess/WindowProcessFwd.h"
@@ -29,22 +31,35 @@ namespace Framework
     {
     public:
         using ClassType = MiddleLayerInterface;
+        using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
+
         using WindowDisplay = System::WindowsDisplay;
+        using EnvironmentParameter = Rendering::EnvironmentParameter;
+
+    protected:
+        enum class MiddleLayerInterfaceCreate
+        {
+            Init,
+        };
+
+        MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
 
     public:
-        explicit MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform) noexcept;
+        MiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
         virtual ~MiddleLayerInterface() noexcept = default;
 
         MiddleLayerInterface(const MiddleLayerInterface& rhs) noexcept = delete;
-        virtual MiddleLayerInterface& operator=(const MiddleLayerInterface& rhs) noexcept = delete;
+        MiddleLayerInterface& operator=(const MiddleLayerInterface& rhs) noexcept = delete;
         MiddleLayerInterface(MiddleLayerInterface&& rhs) noexcept;
-        virtual MiddleLayerInterface& operator=(MiddleLayerInterface&& rhs) noexcept;
+        MiddleLayerInterface& operator=(MiddleLayerInterface&& rhs) noexcept;
+
+        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         // 创建窗口中间层处理
-        virtual bool PreCreate(const EnvironmentDirectory& environmentDirectory);
-        virtual bool Create();
+        virtual bool PreCreate();
+        virtual bool Create(const EnvironmentParameter& environmentParameter);
         virtual bool Initialize();
 
         // 销毁窗口中间层处理
@@ -73,9 +88,11 @@ namespace Framework
         virtual bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys);
 
         NODISCARD MiddleLayerPlatform GetMiddleLayerPlatform() const noexcept;
+        NODISCARD EnvironmentDirectory GetEnvironmentDirectory() const noexcept;
 
     private:
         MiddleLayerPlatform middleLayerPlatform;
+        EnvironmentDirectory environmentDirectory;
     };
 
     using MiddleLayerInterfaceSharedPtr = std::shared_ptr<MiddleLayerInterface>;

@@ -26,8 +26,8 @@ namespace Framework
     public:
         using ClassType = PixelScreenImpl;
         using Colour = Rendering::Colour<uint8_t>;
-        using Renderer = Rendering::Renderer;
-        using RendererSharedPtr = Rendering::RendererSharedPtr;
+        using RendererSharedPtr = std::shared_ptr<Rendering::Renderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::Renderer>;
 
     public:
         explicit PixelScreenImpl(const WindowSize& size);

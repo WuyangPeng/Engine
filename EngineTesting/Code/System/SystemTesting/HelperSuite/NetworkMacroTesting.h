@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 0:48)
+///	引擎测试版本：0.8.1.2 (2022/09/20 23:07)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_NETWORK_MACRO_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_NETWORK_MACRO_TESTING_H

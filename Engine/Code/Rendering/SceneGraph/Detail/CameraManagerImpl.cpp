@@ -31,7 +31,7 @@ void Rendering::CameraManagerImpl::SetDefaultDepthType(RendererTypes type) noexc
             depthType = DepthType::MinusOneToOne;
             break;
 
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
         case RendererTypes::Glut:
         case RendererTypes::OpenGL:
         case RendererTypes::OpenGLES:
@@ -39,7 +39,7 @@ void Rendering::CameraManagerImpl::SetDefaultDepthType(RendererTypes type) noexc
             depthType = DepthType::MinusOneToOne;
             break;
 
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             // DirectX使用投影矩阵在深度[0,1]。
             depthType = DepthType::ZeroToOne;
             break;

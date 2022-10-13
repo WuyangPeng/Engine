@@ -14,11 +14,9 @@
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::SaveVisualEffect::SaveVisualEffect(const VisualEffect& visualEffect, const System::String& fileName)
+Rendering::SaveVisualEffect::SaveVisualEffect(MAYBE_UNUSED const VisualEffect& visualEffect, const System::String& fileName)
 {
     CoreTools::WriteFileManager manager{ fileName };
-
-    visualEffect.SaveVisualTechnique(manager);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

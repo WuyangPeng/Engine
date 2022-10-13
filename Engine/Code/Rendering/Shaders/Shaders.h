@@ -11,6 +11,7 @@
 #define RENDERING_SHADERS_H
 
 #include "AlphaState.h"
+#include "ComputeProgram.h"
 #include "CullState.h"
 #include "DepthState.h"
 #include "LoadVisualEffect.h"
@@ -28,7 +29,7 @@
 #include "SingleShaderSamplerData.h"
 #include "StencilState.h"
 #include "VertexShader.h"
-#include "VisualEffect.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
 #include "VisualEffectInstance.h"
 #include "VisualPass.h"
 #include "VisualTechnique.h"

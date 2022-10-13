@@ -61,7 +61,7 @@ namespace Framework
         void SetWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
         void ClearWindowMessage(const WindowMessageInterfaceSharedPtr& windowMessage);
 
-        bool PreCreate(const EnvironmentDirectory& environmentDirectory);
+        bool PreCreate();
         bool Initialize();
         void PreIdle();
         void Terminate();

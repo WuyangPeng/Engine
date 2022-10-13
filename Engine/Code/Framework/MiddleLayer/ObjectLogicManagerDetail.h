@@ -15,8 +15,8 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename ObjectLogic, typename ArtificialIntellegence>
-Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, objectLogic{ middleLayerPlatform }, artificialIntellegence{ middleLayerPlatform }
+Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::ObjectLogicManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, objectLogic{ middleLayerPlatform, environmentDirectory }, artificialIntellegence{ middleLayerPlatform, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -35,13 +35,13 @@ bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::IsValid
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::PreCreate(environmentDirectory) &&
-        objectLogic.PreCreate(environmentDirectory) &&
-        artificialIntellegence.PreCreate(environmentDirectory))
+    if (ParentType::PreCreate() &&
+        objectLogic.PreCreate() &&
+        artificialIntellegence.PreCreate())
     {
         return true;
     }
@@ -89,11 +89,11 @@ void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Termina
 }
 
 template <typename ObjectLogic, typename ArtificialIntellegence>
-bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Create()
+bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::Create() && objectLogic.Create() && artificialIntellegence.Create())
+    if (ParentType::Create(environmentParameter) && objectLogic.Create(environmentParameter) && artificialIntellegence.Create(environmentParameter))
     {
         return true;
     }

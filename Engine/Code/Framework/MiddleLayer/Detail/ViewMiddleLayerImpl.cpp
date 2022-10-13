@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:17)
+///	引擎版本：0.8.1.2 (2022/09/01 21:31)
 
 #include "Framework/FrameworkExport.h"
 
@@ -14,11 +14,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Renderers/Renderer.h"
 
-using std::const_pointer_cast;
-using std::make_shared;
-using std::move;
 using std::string;
-using namespace std::literals;
 
 Framework::ViewMiddleLayerImpl::ViewMiddleLayerImpl() noexcept
     : renderer{}
@@ -27,7 +23,7 @@ Framework::ViewMiddleLayerImpl::ViewMiddleLayerImpl() noexcept
 }
 
 Framework::ViewMiddleLayerImpl::ViewMiddleLayerImpl(ViewMiddleLayerImpl&& rhs) noexcept
-    : renderer{ move(rhs.renderer) }
+    : renderer{ std::move(rhs.renderer) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -36,32 +32,33 @@ Framework::ViewMiddleLayerImpl& Framework::ViewMiddleLayerImpl::operator=(ViewMi
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    renderer = move(rhs.renderer);
+    renderer = std::move(rhs.renderer);
 
     return *this;
 }
 
-void Framework::ViewMiddleLayerImpl::ResetRenderer(const string& fileName)
+CLASS_INVARIANT_STUB_DEFINE(Framework, ViewMiddleLayerImpl)
+
+void Framework::ViewMiddleLayerImpl::ResetRenderer(const string& fileName, const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 
-    renderer = make_shared<Renderer>(fileName);
-    renderer->Init();
+    renderer = Renderer::Create(fileName, environmentParameter);
+    renderer->InitDevice();
 }
-
-CLASS_INVARIANT_STUB_DEFINE(Framework, ViewMiddleLayerImpl)
 
 void Framework::ViewMiddleLayerImpl::Resize(int width, int height)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (renderer)
+    if (renderer != nullptr)
     {
         renderer->Resize(width, height);
+        renderer->ResetSize();
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！"s));
+        ThrowException();
     }
 }
 
@@ -69,7 +66,7 @@ void Framework::ViewMiddleLayerImpl::DrawFrameRate(int x, int y, const Colour& c
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (renderer)
+    if (renderer != nullptr)
     {
         if (renderer->PreDraw())
         {
@@ -79,7 +76,7 @@ void Framework::ViewMiddleLayerImpl::DrawFrameRate(int x, int y, const Colour& c
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！"s));
+        ThrowException();
     }
 }
 
@@ -87,46 +84,27 @@ void Framework::ViewMiddleLayerImpl::ClearColorBuffer()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (renderer)
+    if (renderer != nullptr)
     {
         renderer->ClearColorBuffer();
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！"s));
+        ThrowException();
     }
-}
-
-Framework::ViewMiddleLayerImpl::RendererSharedPtr Framework::ViewMiddleLayerImpl::GetRenderer() noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_9;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26473)
-
-    return const_pointer_cast<Renderer>(static_cast<const ClassType*>(this)->GetRenderer());
-
-#include STSTEM_WARNING_POP
-}
-
-Framework::ViewMiddleLayerImpl::ConstRendererSharedPtr Framework::ViewMiddleLayerImpl::GetRenderer() const noexcept
-{
-    FRAMEWORK_CLASS_IS_VALID_CONST_9;
-
-    return renderer;
 }
 
 Framework::ViewMiddleLayerImpl::Colour Framework::ViewMiddleLayerImpl::GetClearColor() const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    if (renderer)
+    if (renderer != nullptr)
     {
         return renderer->GetClearColor();
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！"s));
+        ThrowException();
     }
 }
 
@@ -134,12 +112,62 @@ void Framework::ViewMiddleLayerImpl::SetClearColor(const Colour& colour)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    if (renderer)
+    if (renderer != nullptr)
     {
         return renderer->SetClearColor(colour);
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！"s));
+        ThrowException();
     }
+}
+
+Framework::ViewMiddleLayerImpl::RendererSharedPtr Framework::ViewMiddleLayerImpl::GetRenderer()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    return std::const_pointer_cast<Renderer>(static_cast<const ClassType&>(*this).GetRenderer());
+}
+
+void Framework::ViewMiddleLayerImpl::Release()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    if (renderer != nullptr)
+    {
+        renderer->Release();
+    }
+    else
+    {
+        ThrowException();
+    }
+}
+
+void Framework::ViewMiddleLayerImpl::SwapBuffers()
+{
+    FRAMEWORK_CLASS_IS_VALID_9;
+
+    if (renderer == nullptr)
+    {
+        ThrowException();
+    }
+
+    renderer->SwapBuffers();
+}
+
+Framework::ViewMiddleLayerImpl::ConstRendererSharedPtr Framework::ViewMiddleLayerImpl::GetRenderer() const
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    if (renderer == nullptr)
+    {
+        ThrowException();
+    }
+
+    return renderer;
+}
+
+void Framework::ViewMiddleLayerImpl::ThrowException()
+{
+    THROW_EXCEPTION(SYSTEM_TEXT("渲染器未初始化！请在Create中对渲染器进行初始化。"s));
 }

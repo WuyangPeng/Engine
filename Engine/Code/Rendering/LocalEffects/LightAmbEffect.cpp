@@ -182,7 +182,6 @@ Rendering::LightAmbEffect::LightAmbEffect(CoreTools::DisableNotThrow disableNotT
 
     auto technique = std::make_shared<VisualTechnique>(CoreTools::DisableNotThrow::Disable);
     technique->InsertPass(pass);
-    InsertTechnique(technique);
 
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -245,30 +244,6 @@ void Rendering::LightAmbEffect::PostLink()
     RENDERING_CLASS_IS_VALID_9;
 
     VisualEffect::PostLink();
-
-    auto pass = GetTechnique(0)->GetPass(0);
-    auto vshader = pass->GetVertexShader();
-    auto cloneVShader = boost::polymorphic_pointer_cast<VertexShader>(vshader->CloneObject());
-    auto pshader = pass->GetPixelShader();
-    auto clonePShader = boost::polymorphic_pointer_cast<PixelShader>(pshader->CloneObject());
-    auto profile = cloneVShader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        for (auto j = 0; j < 5; ++j)
-        {
-            profile->SetBaseRegister(i, j, (*vRegisters.at(i)).at(j));
-        }
-
-        profile->SetProgram(i, vPrograms.at(i));
-    }
-
-    profile = clonePShader->GetProfile();
-
-    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-    {
-        profile->SetProgram(i, pPrograms.at(i));
-    }
 }
 
 int64_t Rendering::LightAmbEffect::Register(CoreTools::ObjectRegister& target) const

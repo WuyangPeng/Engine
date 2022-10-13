@@ -27,8 +27,8 @@ namespace Framework
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(PixelScreen);
         using Colour = Rendering::Colour<uint8_t>;
-        using Renderer = Rendering::Renderer;
-        using RendererSharedPtr = Rendering::RendererSharedPtr;
+        using RendererSharedPtr = std::shared_ptr<Rendering::Renderer>;
+        using ConstRendererSharedPtr = std::shared_ptr<const Rendering::Renderer>;
 
     public:
         explicit PixelScreen(const WindowSize& size);
@@ -54,7 +54,7 @@ namespace Framework
         void DrawCircle(int xCenter, int yCenter, int radius, const Colour& color, bool solid = false);
         void Fill(int x, int y, const Colour& foreColor, const Colour& backColor);
 
-        void Draw(const Rendering::RendererSharedPtr& renderer);
+        void Draw(const RendererSharedPtr& renderer);
 
     private:
         PackageType impl;

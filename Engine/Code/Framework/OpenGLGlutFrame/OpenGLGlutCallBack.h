@@ -26,7 +26,7 @@ namespace Framework
         using CustomTime = CoreTools::CustomTime;
 
     public:
-        explicit OpenGLGlutCallBack(int64_t delta);
+        OpenGLGlutCallBack(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -22,7 +22,7 @@ namespace CameraModelViewController
         using ParentType = CameraViewMiddleLayer;
 
     public:
-        explicit FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform);
+        explicit FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

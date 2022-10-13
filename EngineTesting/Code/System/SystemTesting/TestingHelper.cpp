@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 15:33)
+///	引擎测试版本：0.8.1.2 (2022/09/04 15:36)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -67,6 +67,7 @@ void System::TestingHelper::AddHelperSuite()
     ADD_TEST(helperSuite, GlExtensionsMacroTesting);
     helperSuite.AddSuite(GetOpenGLMacroSuite());
     ADD_TEST(helperSuite, VariableTemplateTypeTesting);
+    helperSuite.AddSuite(GetToolsSuite());
 
     AddSuite(helperSuite);
 }
@@ -89,8 +90,6 @@ CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 {
     auto windowsMacroSuite = GenerateSuite("Windows宏"s);
 
-    ADD_TEST(windowsMacroSuite, GetArraySizeTesting);
-    ADD_TEST(windowsMacroSuite, UnusedFunctionTesting);
     ADD_TEST(windowsMacroSuite, MakeLanguageIDTesting);
     ADD_TEST(windowsMacroSuite, MakeIntreSourceTesting);
     ADD_TEST(windowsMacroSuite, MakeLanguageCIDTesting);
@@ -144,6 +143,17 @@ CoreTools::Suite System::TestingHelper::GetGlUtilityMacroSuite()
     ADD_TEST(glUtilityMacroSuite, GlUtilityBodyResultTesting);
 
     return glUtilityMacroSuite;
+}
+
+CoreTools::Suite System::TestingHelper::GetToolsSuite()
+{
+    auto toolsSuite = GenerateSuite("工具宏"s);
+
+    ADD_TEST(toolsSuite, GetArraySizeTesting);
+    ADD_TEST(toolsSuite, UnusedFunctionTesting);
+    ADD_TEST(toolsSuite, DebugTesting);
+
+    return toolsSuite;
 }
 
 void System::TestingHelper::AddSystemOutputSuite()

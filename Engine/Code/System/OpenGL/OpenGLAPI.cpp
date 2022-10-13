@@ -49,6 +49,11 @@ void System::SetGLDepthRange(OpenGLDouble nearDepthRange, OpenGLDouble farDepthR
     GLDepthRange(nearDepthRange, farDepthRange);
 }
 
+void System::SetGLClearColor(OpenGLFloat red, OpenGLFloat green, OpenGLFloat blue, OpenGLFloat alpha) noexcept
+{
+    GLClearColor(red, green, blue, alpha);
+}
+
 System::OpenGLInt System::GetGLInteger(OpenGLQuery name) noexcept
 {
     OpenGLInt params{};

@@ -29,7 +29,7 @@ namespace Framework
         using ParentType = ModelViewControllerMiddleLayer;
 
     public:
-        explicit ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~ModelMiddleLayer() noexcept = default;
         ModelMiddleLayer(const ModelMiddleLayer& rhs) noexcept = delete;
         virtual ModelMiddleLayer& operator=(const ModelMiddleLayer& rhs) noexcept = delete;

@@ -35,19 +35,22 @@ namespace Framework
         using ViewMiddleLayerType = ViewMiddleLayer;
         using ControllerMiddleLayerType = ControllerMiddleLayer<ApplicationTrait>;
         using MiddleLayerSharedPtr = ModelViewControllerMiddleLayerSharedPtr;
+        using MiddleLayerInterfaceSharedPtr = std::unique_ptr<ClassType>;
 
     public:
-        explicit ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform);
+        ModelViewControllerMiddleLayerContainer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~ModelViewControllerMiddleLayerContainer() noexcept = default;
         ModelViewControllerMiddleLayerContainer(const ModelViewControllerMiddleLayerContainer& rhs) noexcept = delete;
         ModelViewControllerMiddleLayerContainer& operator=(const ModelViewControllerMiddleLayerContainer& rhs) noexcept = delete;
         ModelViewControllerMiddleLayerContainer(ModelViewControllerMiddleLayerContainer&& rhs) noexcept;
         ModelViewControllerMiddleLayerContainer& operator=(ModelViewControllerMiddleLayerContainer&& rhs) noexcept;
 
+        NODISCARD static MiddleLayerInterfaceSharedPtr Create(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
+
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) final;
-        NODISCARD bool Create() final;
+        NODISCARD bool PreCreate() final;
+        NODISCARD bool Create(const EnvironmentParameter& environmentParameter) final;
         NODISCARD bool Initialize() final;
 
         NODISCARD bool Destroy() final;

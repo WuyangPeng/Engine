@@ -10,6 +10,7 @@
 #include "ZipEntryTesting.h"
 #include "System/CharacterString/FormatString.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Base/Flags/UniqueIDSelectFlags.h"

@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/27 10:20)
+///	引擎版本：0.8.1.2 (2022/09/02 13:22)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_SUITE_RESOURCE_MANAGER_INTERFACE_TESTING_H
 #define FRAMEWORK_MIDDLE_LAYER_SUITE_RESOURCE_MANAGER_INTERFACE_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "MiddleLayerInterfaceTestingBase.h"
 
 namespace Framework
 {
-    class ResourceManagerInterfaceTesting : public CoreTools::UnitTest
+    class ResourceManagerInterfaceTesting : public MiddleLayerInterfaceTestingBase
     {
     public:
         using ClassType = ResourceManagerInterfaceTesting;
-        using ParentType = UnitTest;
+        using ParentType = MiddleLayerInterfaceTestingBase;
 
     public:
         explicit ResourceManagerInterfaceTesting(const OStreamShared& stream);

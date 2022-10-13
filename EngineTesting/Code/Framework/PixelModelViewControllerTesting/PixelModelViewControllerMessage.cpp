@@ -16,8 +16,8 @@
 #include "Framework/MiddleLayer/ModelViewControllerMiddleLayerContainerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-PixelModelViewController::PixelModelViewControllerMessage::PixelModelViewControllerMessage(int64_t delta)
-    : ParentType(delta), alloc(CoreTools::ConsoleAlloc::Create())
+PixelModelViewController::PixelModelViewControllerMessage::PixelModelViewControllerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType(delta, environmentDirectory), alloc(CoreTools::ConsoleAlloc::Create())
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

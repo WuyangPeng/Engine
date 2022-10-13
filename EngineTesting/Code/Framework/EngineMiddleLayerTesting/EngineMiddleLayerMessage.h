@@ -44,7 +44,7 @@ namespace EngineMiddleLayer
         using ParentType = MessageType;
 
     public:
-        explicit EngineMiddleLayerMessage(int64_t delta);
+        EngineMiddleLayerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

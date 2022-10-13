@@ -11,7 +11,7 @@
 
 #include "AndroidInputQueue.h"
 #include "Using/AndroidInputUsing.h"
-#include "System/Helper/WindowsMacro.h"
+#include "System/Helper/Tools.h"
 
 void System::AndroidInputQueueAttachLooper(AndroidInputQueue* queue, AndroidLooper* looper, LooperID ident, AndroidLooperCallbackFunc callback, void* data) noexcept
 {

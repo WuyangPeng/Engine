@@ -23,7 +23,7 @@ namespace Framework
         using ParentType = WindowMessageUnitTestSuite;
 
     public:
-        explicit SuiteWindowMessage(int64_t delta);
+        SuiteWindowMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

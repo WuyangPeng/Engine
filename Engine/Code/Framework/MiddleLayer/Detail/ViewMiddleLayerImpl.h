@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 16:06)
+///	引擎版本：0.8.1.2 (2022/09/01 21:31)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_IMPL_H
 #define FRAMEWORK_MIDDLE_LAYER_VIEW_MIDDLE_LAYER_IMPL_H
@@ -22,10 +22,12 @@ namespace Framework
     {
     public:
         using ClassType = ViewMiddleLayerImpl;
-        using Renderer = Rendering::Renderer;
+
         using Colour = Rendering::Colour<float>;
+        using Renderer = Rendering::Renderer;
         using RendererSharedPtr = Rendering::RendererSharedPtr;
         using ConstRendererSharedPtr = Rendering::ConstRendererSharedPtr;
+        using EnvironmentParameter = Rendering::EnvironmentParameter;
 
     public:
         ViewMiddleLayerImpl() noexcept;
@@ -39,14 +41,21 @@ namespace Framework
 
         void Resize(int width, int height);
         void DrawFrameRate(int x, int y, const Colour& color, const std::string& message);
-        void ResetRenderer(const std::string& fileName);
+        void ResetRenderer(const std::string& fileName, const EnvironmentParameter& environmentParameter);
         void ClearColorBuffer();
 
         NODISCARD Colour GetClearColor() const;
         void SetClearColor(const Colour& colour);
 
-        NODISCARD RendererSharedPtr GetRenderer() noexcept;
-        NODISCARD ConstRendererSharedPtr GetRenderer() const noexcept;
+        NODISCARD RendererSharedPtr GetRenderer();
+        NODISCARD ConstRendererSharedPtr GetRenderer() const;
+
+        void Release();
+
+        void SwapBuffers();
+
+    protected:
+        SYSTEM_NORETURN static void ThrowException();
 
     private:
         RendererSharedPtr renderer;

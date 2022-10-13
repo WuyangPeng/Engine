@@ -17,6 +17,8 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
+#include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
@@ -25,7 +27,7 @@
 
 template <typename MiddleLayer>
 Framework::AndroidCallBack<MiddleLayer>::AndroidCallBack(int64_t delta)
-    : ParentType{ delta }, middleLayer{ std::make_shared<MiddleLayer>(MiddleLayerPlatform::Android) }
+    : ParentType{ delta }, middleLayer{ MiddleLayer::CreateMiddleLayer(MiddleLayerPlatform::Android, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -112,7 +114,7 @@ void Framework::AndroidCallBack<MiddleLayer>::InitMessage(AndroidApp* androidApp
     {
         ParentType::InitMessage(androidApp);
 
-        if (!middleLayer->Create())
+        if (!middleLayer->Create(Rendering::EnvironmentParameter::Create()))
         {
             androidApp->SetDestroyRequested(1);
         }

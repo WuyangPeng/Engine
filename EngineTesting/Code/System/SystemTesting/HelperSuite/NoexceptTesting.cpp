@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 1:12)
+///	引擎测试版本：0.8.1.2 (2022/09/25 21:13)
 
 #include "NoexceptTesting.h"
 #include "System/Helper/Noexcept.h"
@@ -41,9 +41,9 @@ void System::NoexceptTesting::NoexceptTest()
 
     ASSERT_EQUAL((Noexcept<int>(ClassType::Function5, 0)), 0);
     ASSERT_EQUAL((Noexcept<int>(ClassType::Function6, 1, 0)), 1);
-    ASSERT_EQUAL((Noexcept<int>(ClassType::Function7, 1, 1, 0)), 1);
-    ASSERT_EQUAL((Noexcept<int>(ClassType::Function8, 1, 1, 1, 0)), 1);
-    ASSERT_EQUAL((Noexcept<int>(ClassType::Function9, 1, 1, 1, 1, 0)), 1);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function7, 2, 1, 0)), 2);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function8, 3, 1, 1, 0)), 3);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function9, 4, 1, 1, 1, 0)), 4);
 }
 
 void System::NoexceptTesting::Function0()

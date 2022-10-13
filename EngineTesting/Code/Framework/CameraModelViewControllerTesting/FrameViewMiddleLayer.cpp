@@ -17,8 +17,8 @@
 
 using std::cout;
 
-CameraModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, timeDelta{ timerInterval }
+CameraModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, timeDelta{ timerInterval }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

@@ -59,7 +59,7 @@ void Framework::WindowProcessManagerTesting::ManagerTest()
     ASSERT_EQUAL(windowMessage1, windowMessage2);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-    ASSERT_TRUE(WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate(environmentDirectory));
+    ASSERT_TRUE(WINDOW_PROCESS_MANAGER_SINGLETON.PreCreate());
     ASSERT_TRUE(WINDOW_PROCESS_MANAGER_SINGLETON.Initialize());
 
     WINDOW_PROCESS_MANAGER_SINGLETON.PreIdle();

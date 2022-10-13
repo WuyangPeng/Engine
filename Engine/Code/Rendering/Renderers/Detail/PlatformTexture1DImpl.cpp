@@ -37,13 +37,13 @@ Rendering::PlatformTexture1DImpl::PlatformTexture1DSharedPtr Rendering::Platform
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, texture1D);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9Texture1D>(renderer, texture1D);
         case RendererTypes::Glut:
             return make_shared<OpenGLTexture1D>(renderer, texture1D);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLTexture1D>(renderer, texture1D);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9Texture1D>(renderer, texture1D);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLTexture1D>(renderer, texture1D);

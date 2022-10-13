@@ -75,6 +75,9 @@
     <None Include="Resource\OpenGLRendererSuite\TextureCube.trt">
       <Filter>资源文件\OpenGLRendererSuite</Filter>
     </None>
+    <None Include="Configuration\NullRenderer.json">
+      <Filter>配置</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderingOpenGLTestingOpenGLGlutCallBack.h">
@@ -158,6 +161,12 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferLockManageTesting.h">
       <Filter>RenderersSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\EnvironmentParameterTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderingEnvironmentTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderingOpenGLTestingOpenGLGlutCallBack.cpp">
@@ -236,6 +245,12 @@
       <Filter>RenderersSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\VertexFormatManagementTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\EnvironmentParameterTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderingEnvironmentTesting.cpp">
       <Filter>RenderersSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>

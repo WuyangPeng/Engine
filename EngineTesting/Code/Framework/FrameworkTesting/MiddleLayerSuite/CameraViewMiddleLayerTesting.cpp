@@ -21,6 +21,7 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 
 #include <random>
 
@@ -64,17 +65,18 @@ void Framework::CameraViewMiddleLayerTesting::MiddleLayerTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
 
     ASSERT_ENUM_EQUAL(middleLayer.GetMiddleLayerPlatform(), platform);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
-    ASSERT_TRUE(middleLayer.Create());
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraModelMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer.Initialize());
 
     ASSERT_TRUE(middleLayer.Destroy());
@@ -106,15 +108,17 @@ void Framework::CameraViewMiddleLayerTesting::DrawFrameRateTest()
 {
     constexpr auto platform = MiddleLayerPlatform::Windows;
 
-    TestingType middleLayer{ platform };
+    TestingType middleLayer{ platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") } };
 
-    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform);
+    auto cameraModelMiddleLayer = make_shared<CameraModelMiddleLayer>(platform, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") });
 
     middleLayer.SetModelMiddleLayer(cameraModelMiddleLayer);
 
     EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") };
 
-    ASSERT_TRUE(middleLayer.PreCreate(environmentDirectory));
+    ASSERT_TRUE(middleLayer.PreCreate());
+    ASSERT_TRUE(middleLayer.Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(cameraModelMiddleLayer->Create(Rendering::EnvironmentParameter::Create()));
 
     const auto clearColor = middleLayer.GetClearColor();
     const decltype(clearColor) blackColour{ 0.0f, 0.0f, 0.0f, 1.0f };

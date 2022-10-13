@@ -62,7 +62,7 @@ void System::AcceptTesting::AcceptTest()
 
     addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
     addr.sin_port = GetHostToNetShort(port);
-    addr.sin_addr.s_addr = GetHostToNetLong(g_InAddrAny);
+    addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
     int addrLen{ sizeof(addr) };
 

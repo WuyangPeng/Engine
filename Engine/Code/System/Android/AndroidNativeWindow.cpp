@@ -11,6 +11,7 @@
 
 #include "AndroidNativeWindow.h"
 #include "Flags/AndroidNativeWindowFlags.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 void System::AndroidNativeWindowAcquire(AndroidNativeWindow* window) noexcept
@@ -121,7 +122,7 @@ int32_t System::AndroidNativeWindowUnlockAndPost(AndroidNativeWindow* window) no
     return ANativeWindow_unlockAndPost(window);
 
 #else  // !SYSTEM_PLATFORM_ANDROID
-     
+
     UnusedFunction(window);
 
     return 0;

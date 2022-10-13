@@ -37,13 +37,13 @@ Rendering::PlatformRenderTargetImpl::PlatformRenderTargetSharedPtr Rendering::Pl
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, renderTarget);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9RenderTarget>(renderer, renderTarget);
         case RendererTypes::Glut:
             return make_shared<OpenGLRenderTarget>(renderer, renderTarget);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLRenderTarget>(renderer, renderTarget);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9RenderTarget>(renderer, renderTarget);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLRenderTarget>(renderer, renderTarget);

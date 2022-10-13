@@ -19,9 +19,9 @@
     #ifdef CORE_TOOLS_USE_OPENXLSX
 
         #ifdef _DEBUG
-            #pragma comment(lib, "OpenXLSX-sharedd.lib")
+            #pragma comment(lib, "OpenXLSXd.lib")
         #else  // !_DEBUG
-            #pragma comment(lib, "OpenXLSX-shared.lib")
+            #pragma comment(lib, "OpenXLSX.lib")
         #endif  // _DEBUG
 
     #endif  // CORE_TOOLS_USE_OPENXLSX

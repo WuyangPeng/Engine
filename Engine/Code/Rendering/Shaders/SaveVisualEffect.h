@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "VisualEffect.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
 #include "System/Helper/UnicodeUsing.h"
 
 namespace Rendering

@@ -11,6 +11,7 @@
 
 #include "Renderer.h"
 #include "RendererFactory.h"
+#include "RendererParameter.h"
 #include "Detail/RendererImpl.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
@@ -24,14 +25,14 @@
 using std::move;
 using std::string;
 
-Rendering::Renderer::Renderer(RendererTypes type, const RendererBasis& basis)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, type, basis }, rendererID{ 0 }
+Rendering::Renderer::Renderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, environmentParameter, rendererParameter.GetRendererType(), rendererParameter, RenderingEnvironment{ environmentParameter, rendererParameter } }, rendererID{ 0 }
 {
     // 初始化未完成
 }
 
-Rendering::Renderer::Renderer(const std::string& fileName)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, fileName }, rendererID{ 0 }
+Rendering::Renderer::Renderer(const EnvironmentParameter& environmentParameter, const std::string& fileName)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, environmentParameter, fileName }, rendererID{ 0 }
 {
     // 初始化未完成
 }
@@ -43,6 +44,14 @@ void Rendering::Renderer::Init()
     impl->SetRealRenderer(shared_from_this());
 
     RENDERING_SELF_CLASS_IS_VALID_1;
+}
+
+Rendering::RendererSharedPtr Rendering::Renderer::Create(const std::string& fileName, const EnvironmentParameter& environmentParameter)
+{
+    auto renderer = std::make_shared<Renderer>(environmentParameter, fileName);
+    renderer->Init();
+
+    return renderer;
 }
 
 Rendering::Renderer::Renderer(Renderer&& rhs) noexcept
@@ -77,6 +86,13 @@ Rendering::Renderer::~Renderer() noexcept
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
+void Rendering::Renderer::Release()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    impl->Release();
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 bool Rendering::Renderer::IsValid() const noexcept
@@ -89,10 +105,17 @@ bool Rendering::Renderer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
+void Rendering::Renderer::SwapBuffers()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    impl->SwapBuffers();
+}
+
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetWidth, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetHeight, int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetColorFormat, Rendering::TextureFormat)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetDepthStencilFormat, Rendering::TextureFormat)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetColorFormat, Rendering::DataFormatType)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetDepthStencilFormat, Rendering::DataFormatType)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Renderer, GetNumMultisamples, int)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Renderer, Bind, ConstVertexFormatSharedPtr, void)
@@ -438,6 +461,20 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, ClearDepthBuffer, v
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, ClearStencilBuffer, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, ClearBuffers, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Renderer, DisplayColorBuffer, void)
+
+void Rendering::Renderer::ResetSize()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->ResetSize();
+}
+
+void Rendering::Renderer::InitDevice()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    return impl->InitDevice();
+}
 
 void Rendering::Renderer::ClearColorBuffer(int x, int y, int w, int h)
 {

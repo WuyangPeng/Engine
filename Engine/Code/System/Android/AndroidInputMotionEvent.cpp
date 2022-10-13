@@ -11,6 +11,7 @@
 
 #include "AndroidInputMotionEvent.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 
 System::AndroidMotionEventAction System::AndroidMotionEventGetAction(const AndroidInputEvent* motionEvent) noexcept

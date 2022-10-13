@@ -26,17 +26,17 @@ namespace Framework
         using CameraSmartPointer = Rendering::CameraSharedPtr;
 
     public:
-        explicit CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         NODISCARD bool Resize(WindowDisplay windowDisplay, const WindowSize& size) override;
 
-        void SetCamera(const CameraSmartPointer& camera) noexcept;
+        void SetCamera(const CameraSmartPointer& camera);
         NODISCARD WindowSize GetWindowSize() const;
 
-        NODISCARD float GetXTrack(int x) const noexcept;
-        NODISCARD float GetYTrack(int y) const noexcept;
+        NODISCARD float GetXTrack(int x) const;
+        NODISCARD float GetYTrack(int y) const;
 
     private:
         float multiplier;

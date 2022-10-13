@@ -37,13 +37,13 @@ Rendering::PlatformIndexBufferImpl::PlatformIndexBufferSharedPtr Rendering::Plat
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, indexBuffer);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         case RendererTypes::Glut:
             return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);

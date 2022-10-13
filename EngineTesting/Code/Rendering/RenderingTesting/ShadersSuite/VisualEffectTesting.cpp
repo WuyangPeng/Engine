@@ -15,8 +15,20 @@
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
 #include "Rendering/Renderers/RendererManager.h"
-#include "Rendering/Shaders/VisualEffect.h"
+#include "Rendering/Shaders/AlphaState.h"
+#include "Rendering/Shaders/CullState.h"
+#include "Rendering/Shaders/DepthState.h"
+#include "Rendering/Shaders/LoadVisualEffect.h"
+#include "Rendering/Shaders/OffsetState.h"
+#include "Rendering/Shaders/PixelShader.h"
+#include "Rendering/Shaders/SaveVisualEffect.h"
+#include "Rendering/Shaders/StencilState.h"
+#include "Rendering/Shaders/VertexShader.h"
+#include "Rendering/Shaders/VisualPass.h"
+#include "Rendering/Shaders/VisualTechnique.h"
+#include "Rendering/Shaders/WireState.h"
 
 using std::string;
 
@@ -184,50 +196,6 @@ void Rendering::VisualEffectTesting::InitTest()
     secondVisualTechnique->InsertPass(firstVisualPass);
 
     VisualEffectSharedPtr visualEffect(std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable));
-
-    ASSERT_EQUAL(visualEffect->GetNumTechniques(), 0);
-
-    visualEffect->InsertTechnique(firstVisualTechnique);
-    ASSERT_EQUAL(visualEffect->GetNumTechniques(), 1);
-
-    visualEffect->InsertTechnique(secondVisualTechnique);
-    ASSERT_EQUAL(visualEffect->GetNumTechniques(), 2);
-
-    ASSERT_EQUAL(visualEffect->GetPass(0, 0), firstVisualPass);
-    ASSERT_EQUAL(visualEffect->GetPass(0, 1), secondVisualPass);
-    ASSERT_EQUAL(visualEffect->GetPass(1, 0), secondVisualPass);
-    ASSERT_EQUAL(visualEffect->GetPass(1, 1), firstVisualPass);
-    ASSERT_EQUAL(visualEffect->GetPass(1, 2), firstVisualPass);
-
-    ASSERT_EQUAL(visualEffect->GetNumPasses(0), 2);
-    ASSERT_EQUAL(visualEffect->GetNumPasses(1), 3);
-
-    ASSERT_EQUAL(visualEffect->GetVertexShader(0, 0), vertexShader);
-    ASSERT_EQUAL(visualEffect->GetPixelShader(0, 0), pixelShader);
-    ASSERT_EQUAL(visualEffect->GetAlphaState(0, 0), alphaState);
-    ASSERT_EQUAL(visualEffect->GetCullState(0, 0), cullState);
-    ASSERT_EQUAL(visualEffect->GetDepthState(0, 0), depthState);
-    ASSERT_EQUAL(visualEffect->GetOffsetState(0, 0), offsetState);
-    ASSERT_EQUAL(visualEffect->GetStencilState(0, 0), stencilState);
-    ASSERT_EQUAL(visualEffect->GetWireState(0, 0), wireState);
-
-    ASSERT_EQUAL(visualEffect->GetVertexShader(1, 1), vertexShader);
-    ASSERT_EQUAL(visualEffect->GetPixelShader(1, 1), pixelShader);
-    ASSERT_EQUAL(visualEffect->GetAlphaState(1, 1), alphaState);
-    ASSERT_EQUAL(visualEffect->GetCullState(1, 1), cullState);
-    ASSERT_EQUAL(visualEffect->GetDepthState(1, 1), depthState);
-    ASSERT_EQUAL(visualEffect->GetOffsetState(1, 1), offsetState);
-    ASSERT_EQUAL(visualEffect->GetStencilState(1, 1), stencilState);
-    ASSERT_EQUAL(visualEffect->GetWireState(1, 1), wireState);
-
-    ASSERT_EQUAL(visualEffect->GetVertexShader(1, 2), vertexShader);
-    ASSERT_EQUAL(visualEffect->GetPixelShader(1, 2), pixelShader);
-    ASSERT_EQUAL(visualEffect->GetAlphaState(1, 2), alphaState);
-    ASSERT_EQUAL(visualEffect->GetCullState(1, 2), cullState);
-    ASSERT_EQUAL(visualEffect->GetDepthState(1, 2), depthState);
-    ASSERT_EQUAL(visualEffect->GetOffsetState(1, 2), offsetState);
-    ASSERT_EQUAL(visualEffect->GetStencilState(1, 2), stencilState);
-    ASSERT_EQUAL(visualEffect->GetWireState(1, 2), wireState);
 }
 
 void Rendering::VisualEffectTesting::CopyTest()
@@ -377,43 +345,6 @@ void Rendering::VisualEffectTesting::CopyTest()
     secondVisualTechnique->InsertPass(firstVisualPass);
 
     VisualEffectSharedPtr firstVisualEffect(std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable));
-    firstVisualEffect->InsertTechnique(firstVisualTechnique);
-    firstVisualEffect->InsertTechnique(secondVisualTechnique);
-
-    VisualEffectSharedPtr secondVisualEffect(std::make_shared<VisualEffect>(*firstVisualEffect));
-
-    ASSERT_EQUAL(firstVisualEffect->GetNumTechniques(), secondVisualEffect->GetNumTechniques());
-
-    for (int i = 0; i < 2; ++i)
-    {
-        ASSERT_EQUAL(firstVisualEffect->GetTechnique(i),
-                     secondVisualEffect->GetTechnique(i));
-        ASSERT_EQUAL(firstVisualEffect->GetNumPasses(i),
-                     secondVisualEffect->GetNumPasses(i));
-    }
-
-    for (int i = 0; i < 2; ++i)
-    {
-        int max = 2;
-        if (i == 1)
-            max = 3;
-        for (int k = 0; k < max; ++k)
-        {
-            ASSERT_EQUAL(firstVisualEffect->GetPass(i, k),
-                         secondVisualEffect->GetPass(i, k));
-
-            ASSERT_EQUAL(firstVisualEffect->GetVertexShader(i, k),
-                         secondVisualEffect->GetVertexShader(i, k));
-
-            ASSERT_EQUAL(firstVisualEffect->GetPixelShader(i, k), secondVisualEffect->GetPixelShader(i, k));
-            ASSERT_EQUAL(firstVisualEffect->GetAlphaState(i, k), secondVisualEffect->GetAlphaState(i, k));
-            ASSERT_EQUAL(firstVisualEffect->GetCullState(i, k), secondVisualEffect->GetCullState(i, k));
-            ASSERT_EQUAL(firstVisualEffect->GetDepthState(i, k), secondVisualEffect->GetDepthState(i, k));
-            ASSERT_EQUAL(firstVisualEffect->GetOffsetState(i, k), secondVisualEffect->GetOffsetState(i, k));
-            ASSERT_EQUAL(firstVisualEffect->GetStencilState(i, k), secondVisualEffect->GetStencilState(i, k));
-            ASSERT_EQUAL(firstVisualEffect->GetWireState(i, k), secondVisualEffect->GetWireState(i, k));
-        }
-    }
 }
 
 void Rendering::VisualEffectTesting::StreamTest()

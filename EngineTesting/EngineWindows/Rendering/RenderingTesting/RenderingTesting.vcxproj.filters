@@ -193,6 +193,21 @@
     <Filter Include="资源文件\DetailSuite">
       <UniqueIdentifier>{026e99cd-d56b-454a-9cf6-d9d90d522060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseSuite 头文件">
+      <UniqueIdentifier>{285f1c90-cc20-4252-b074-51c1831e04d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 源文件">
+      <UniqueIdentifier>{6a01b1ca-c8e5-431c-9f0c-cf9492ddd8be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 头文件\Detail">
+      <UniqueIdentifier>{d84d5e89-f9e0-4b55-9c96-93649eb49650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 源文件\Detail">
+      <UniqueIdentifier>{d5eed087-9389-4494-9f78-f630a9865222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 模板文件">
+      <UniqueIdentifier>{3b49dc5b-e400-484a-b010-f21d28f8af52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -323,6 +338,9 @@
     </None>
     <None Include="Resource\DetailSuite\CreateClodMesh.trv">
       <Filter>资源文件\DetailSuite</Filter>
+    </None>
+    <None Include="Configuration\RendererNull.json">
+      <Filter>配置</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -908,6 +926,33 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\DevILSuite\DevILSuite.h">
       <Filter>DevILSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\WindowsParameterTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\EnvironmentParameterTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingEnvironmentTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingDeviceTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\BaseSuite.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\Detail\GraphicsObjectTest.h">
+      <Filter>BaseSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBase.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBaseDetail.h">
+      <Filter>BaseSuite 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\TestingHelper.cpp">
@@ -1375,9 +1420,30 @@
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\DataTypesSuite\ColourManagerTesting.cpp">
       <Filter>DataTypesSuite 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\WindowsParameterTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\EnvironmentParameterTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingEnvironmentTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingDeviceTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\Detail\GraphicsObjectTest.cpp">
+      <Filter>BaseSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBase.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-	<Text Include="Resource\Todo\Level 0.txt">
+    <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 1.txt">
@@ -1406,6 +1472,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>    
+    </Text>
   </ItemGroup>
 </Project>

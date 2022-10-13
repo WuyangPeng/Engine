@@ -30,6 +30,7 @@ namespace Rendering
     private:
         void InitSuite();
         void AddMacroSuite();
+        void AddBaseSuite();
         void AddDataTypesSuite();
         void AddResourcesSuite();
         void AddSceneGraphSuite();

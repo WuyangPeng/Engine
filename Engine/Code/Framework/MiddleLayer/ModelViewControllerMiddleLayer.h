@@ -29,7 +29,7 @@ namespace Framework
         using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
 
     public:
-        explicit ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
         ~ModelViewControllerMiddleLayer() noexcept = default;
         ModelViewControllerMiddleLayer(const ModelViewControllerMiddleLayer& rhs) noexcept = delete;
         virtual ModelViewControllerMiddleLayer& operator=(const ModelViewControllerMiddleLayer& rhs) noexcept = delete;

@@ -13,6 +13,7 @@
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererBasis.h"
@@ -45,11 +46,13 @@ void Rendering::AnalysisRendererManager::Analysis()
 
     if (Rendering::RendererTypes::First <= rendererType && rendererType < Rendering::RendererTypes::Max)
     {
-        renderer = std::make_shared<Rendering::Renderer>(rendererType, rendererBasis);
+        RendererParameter rendererParameter{ fileName };
+        renderer = std::make_shared<Rendering::Renderer>(EnvironmentParameter::Create(), rendererParameter);
     }
     else
     {
-        renderer = std::make_shared<Rendering::Renderer>(Rendering::RendererTypes::Default, rendererBasis);
+        RendererParameter rendererParameter{ fileName };
+        renderer = std::make_shared<Rendering::Renderer>(EnvironmentParameter::Create(), rendererParameter);
 
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
             << SYSTEM_TEXT("初始化渲染器类型失败！")
@@ -76,22 +79,22 @@ void Rendering::AnalysisRendererManager::AnalysisRendererTexture()
 {
     textureTree = mainTree.get_child("Texture");
 
-    auto colorFormat = textureTree.get("ColorFormat", Rendering::TextureFormat::A8R8G8B8);
-    auto depthStencilFormat = textureTree.get("DepthStencilFormat", Rendering::TextureFormat::D24S8);
+    auto colorFormat = textureTree.get("ColorFormat", Rendering::DataFormatType::R8G8B8A8Typeless);
+    auto depthStencilFormat = textureTree.get("DepthStencilFormat", Rendering::DataFormatType::D32Float);
     auto numMultisamples = textureTree.get("MultisamplesNumber", 0);
 
-    if (Rendering::TextureFormat::First <= colorFormat &&
-        colorFormat < Rendering::TextureFormat::Max &&
-        Rendering::TextureFormat::First <= depthStencilFormat &&
-        depthStencilFormat < Rendering::TextureFormat::Max &&
+    if (Rendering::DataFormatType::Unknown <= colorFormat &&
+        colorFormat < Rendering::DataFormatType::NumFormats &&
+        Rendering::DataFormatType::Unknown <= depthStencilFormat &&
+        depthStencilFormat < Rendering::DataFormatType::NumFormats &&
         0 <= numMultisamples)
     {
-        rendererBasis.SetTextureFormat(colorFormat, depthStencilFormat);
+        rendererBasis.SetDataFormat(colorFormat, depthStencilFormat);
         rendererBasis.SetMultisamplesNumber(numMultisamples);
     }
     else
     {
-        rendererBasis.SetTextureFormat(Rendering::TextureFormat::A8R8G8B8, Rendering::TextureFormat::D24S8);
+        rendererBasis.SetDataFormat(Rendering::DataFormatType::R8G8B8A8Typeless, Rendering::DataFormatType::D32Float);
         rendererBasis.SetMultisamplesNumber(0);
 
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)

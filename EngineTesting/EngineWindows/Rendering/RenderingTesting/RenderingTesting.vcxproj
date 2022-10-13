@@ -182,7 +182,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -203,7 +204,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -228,7 +230,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -253,7 +256,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -274,7 +278,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -295,7 +300,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -320,7 +326,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -345,7 +352,8 @@ xcopy "$(ProjectDir)/Resource/ShadersSuite/*.*" "$(EngineTestingInclude)/../$(Pl
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
-xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/RendererNull.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -353,6 +361,7 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\Renderer.json" />
     <None Include="Configuration\RendererCopy.json" />
+    <None Include="Configuration\RendererNull.json" />
     <None Include="Configuration\RenderingTesting.json" />
     <None Include="Configuration\Testing.json" />
     <None Include="Resource\DetailSuite\ClodMesh.trv" />
@@ -396,6 +405,11 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\AbuseSuite\AbuseSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\AglRendererSuite\AglRendererSuite.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\BaseSuite.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\Detail\GraphicsObjectTest.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBaseDetail.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ConsoleGraphSuite\ConsoleGraphSuite.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\BlendTransformControllerTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTest.h" />
@@ -471,6 +485,7 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferLockManageTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferManagementTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\EnvironmentParameterTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformIndexBufferTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformRenderTargetTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformTexture1DTesting.h" />
@@ -482,11 +497,14 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RendererBasisTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RendererParameterTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingDeviceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingEnvironmentTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderTargetManagementTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\TextureLockManageTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\TextureManagementLockEncapsulationTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\TextureManagementTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\VertexFormatManagementTesting.h" />
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\WindowsParameterTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\BufferTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\RenderTargetTesting.h" />
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\ResourcesSuite.h" />
@@ -590,6 +608,9 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\WingSuite\WingSuite.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\Detail\GraphicsObjectTest.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBase.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\BlendTransformControllerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTest.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ControllersSuite\ControlledObjectTesting.cpp" />
@@ -640,6 +661,7 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferLockManageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\BufferManagementTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\EnvironmentParameterTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformIndexBufferTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformRenderTargetTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformTexture1DTesting.cpp" />
@@ -650,11 +672,14 @@ xcopy "$(ProjectDir)/Configuration/RendererCopy.json" "../../../$(Platform)/$(Co
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\PlatformVertexFormatTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RendererBasisTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RendererParameterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingDeviceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderingEnvironmentTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\RenderTargetManagementTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\TextureLockManageTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\TextureManagementLockEncapsulationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\TextureManagementTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\VertexFormatManagementTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\RenderersSuite\WindowsParameterTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\BufferTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\RenderTargetTesting.cpp" />
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\ResourcesSuite\Texture1DTesting.cpp" />

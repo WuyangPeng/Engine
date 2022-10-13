@@ -51,13 +51,12 @@ void Framework::WindowMessageTesting::MainTest()
 
 void Framework::WindowMessageTesting::MessageTest()
 {
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
     constexpr auto delta = System::g_Microseconds / 60;
-    TestingType message{ delta };
+    TestingType message{ delta, environmentDirectory };
     ASSERT_EQUAL(message.GetDelta(), delta);
 
-    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
-
-    ASSERT_TRUE(message.PreCreate(environmentDirectory));
+    ASSERT_TRUE(message.PreCreate());
     ASSERT_TRUE(message.Initialize());
     message.PreIdle();
     message.Terminate();
@@ -89,8 +88,9 @@ void Framework::WindowMessageTesting::MessageTest()
 
 void Framework::WindowMessageTesting::CloseMessageTest()
 {
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
     constexpr auto delta = System::g_Microseconds / 60;
-    TestingType message{ delta };
+    TestingType message{ delta, environmentDirectory };
 
     auto instance = System::GetHInstance();
 
@@ -110,8 +110,9 @@ void Framework::WindowMessageTesting::CloseMessageTest()
 
 void Framework::WindowMessageTesting::DestroyMessageTest()
 {
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
     constexpr auto delta = System::g_Microseconds / 60;
-    TestingType message{ delta };
+    TestingType message{ delta, environmentDirectory };
 
     auto instance = System::GetHInstance();
 
@@ -132,8 +133,9 @@ void Framework::WindowMessageTesting::DestroyMessageTest()
 
 void Framework::WindowMessageTesting::SetMainWindowTest()
 {
+    const EnvironmentDirectory environmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"s), SYSTEM_TEXT(""s) };
     constexpr auto delta = System::g_Microseconds / 60;
-    TestingType message{ delta };
+    TestingType message{ delta, environmentDirectory };
 
     auto instance = System::GetHInstance();
 

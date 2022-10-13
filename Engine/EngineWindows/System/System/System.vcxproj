@@ -331,6 +331,7 @@
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectX.h" />
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectXD3D11.h" />
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectXFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\DirectX\Using\D12Using.h" />
     <ClInclude Include="..\..\..\Code\System\DllLib.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\Data\EnumResourceData.h" />
     <ClInclude Include="..\..\..\Code\System\DynamicLink\DynamicLink.h" />
@@ -574,6 +575,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\Vacpp.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\StdLib\XlcppZos.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\StringizeMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\Tools.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\UnicodeUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\UserMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\VariableTemplateType.h" />

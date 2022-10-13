@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 0:53)
+///	引擎测试版本：0.8.1.2 (2022/09/17 22:34)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_UNICODE_MACRO_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_UNICODE_MACRO_TESTING_H
@@ -32,6 +32,7 @@ namespace System
         void StringStreamMacroTest();
         void FileStreamMacroTest();
         void ToStringTest();
+        void NullCharTest();
     };
 }
 

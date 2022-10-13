@@ -35,13 +35,13 @@ Rendering::PlatformTextureCubeImpl::PlatformTextureCubeSharedPtr Rendering::Plat
     {
         case RendererTypes::Default:
             return CreateDefault(renderer, textureCube);
-        case RendererTypes::Window:
+        case RendererTypes::Windows:
             return make_shared<Dx9TextureCube>(renderer, textureCube);
         case RendererTypes::Glut:
             return make_shared<OpenGLTextureCube>(renderer, textureCube);
         case RendererTypes::OpenGL:
             return make_shared<OpenGLTextureCube>(renderer, textureCube);
-        case RendererTypes::Dx9:
+        case RendererTypes::Dx11:
             return make_shared<Dx9TextureCube>(renderer, textureCube);
         case RendererTypes::OpenGLES:
             return make_shared<OpenGLTextureCube>(renderer, textureCube);

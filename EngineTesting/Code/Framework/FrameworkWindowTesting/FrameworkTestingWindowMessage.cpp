@@ -15,7 +15,7 @@
 
 using namespace std::literals;
 
-Framework::FrameworkTestingWindowMessage::FrameworkTestingWindowMessage(int64_t delta)
+Framework::FrameworkTestingWindowMessage::FrameworkTestingWindowMessage(int64_t delta, MAYBE_UNUSED const Framework::EnvironmentDirectory& environmentDirectory)
     : ParentType{ delta, "¡¾¿ò¼Ü¿â¡¿µ¥Ôª²âÊÔÌ×¼þ"s }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;

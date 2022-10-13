@@ -5,13 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.9 (2022/06/24 18:11)
+///	引擎版本：0.8.1.2 (2022/09/02 13:22)
 
+#include "MiddleLayerInterfaceTestingBaseDetail.h"
 #include "RenderingManagerInterfaceTesting.h"
+#include "Test/RenderingManagerInterfaceTest.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
@@ -21,11 +24,6 @@
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowProcess/Flags/MouseTypes.h"
 #include "Framework/WindowProcess/VirtualKeysTypes.h"
-
-namespace Framework
-{
-    using TestingType = RenderingManagerInterface;
-}
 
 Framework::RenderingManagerInterfaceTesting::RenderingManagerInterfaceTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,156 +41,183 @@ void Framework::RenderingManagerInterfaceTesting::DoRunUnitTest()
 void Framework::RenderingManagerInterfaceTesting::MainTest()
 {
     Rendering::RendererManager::Create();
+
+    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerMemberTest<RenderingManagerInterface>);
     ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(MiddleLayerExceptionTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetSystemManagerTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(GetMiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetConstMiddleLayerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetSystemManagerTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(RendererTest);
+    ASSERT_THROW_EXCEPTION_0(RendererExceptionTest);
+    ASSERT_THROW_EXCEPTION_0(ConstRendererExceptionTest);
+
     Rendering::RendererManager::Destroy();
 }
 
 void Framework::RenderingManagerInterfaceTesting::MiddleLayerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    auto middleLayer = RenderingManagerInterface::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    ASSERT_TRUE(middleLayer.PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
-    ASSERT_TRUE(middleLayer.Initialize());
-    middleLayer.PreIdle();
-    ASSERT_TRUE(middleLayer.Create());
-    ASSERT_TRUE(middleLayer.Paint());
-    ASSERT_TRUE(middleLayer.Move(WindowPoint()));
-    ASSERT_TRUE(middleLayer.Resize(System::WindowsDisplay::MaxHide, WindowSize()));
-    ASSERT_TRUE(middleLayer.KeyDown(0, WindowPoint()));
-    ASSERT_TRUE(middleLayer.KeyUp(0, WindowPoint()));
-    ASSERT_TRUE(middleLayer.SpecialKeyDown(0, WindowPoint()));
-    ASSERT_TRUE(middleLayer.SpecialKeyUp(0, WindowPoint()));
-    ASSERT_TRUE(middleLayer.MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseDown, WindowPoint(), VirtualKeysTypes()));
-    ASSERT_TRUE(middleLayer.Motion(WindowPoint(), VirtualKeysTypes()));
-    ASSERT_TRUE(middleLayer.PassiveMotion(WindowPoint()));
-    ASSERT_TRUE(middleLayer.MouseWheel(0, WindowPoint(), VirtualKeysTypes()));
-    ASSERT_TRUE(middleLayer.Idle(0));
+    ASSERT_TRUE(middleLayer->PreCreate());
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
+    ASSERT_TRUE(middleLayer->Initialize());
 
-    ASSERT_TRUE(middleLayer.Destroy());
-    middleLayer.Terminate();
+    middleLayer->PreIdle();
+    ASSERT_TRUE(middleLayer->Idle(0));
+
+    ASSERT_TRUE(middleLayer->Paint());
+    ASSERT_TRUE(middleLayer->Move(GetWindowPoint()));
+    ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, GetWindowSize()));
+
+    ASSERT_TRUE(middleLayer->Destroy());
+    middleLayer->Terminate();
+}
+
+void Framework::RenderingManagerInterfaceTesting::MiddleLayerExceptionTest()
+{
+    ASSERT_THROW_EXCEPTION_0(KeyUpExceptionTest<RenderingManagerInterface>);
+    ASSERT_THROW_EXCEPTION_0(KeyDownExceptionTest<RenderingManagerInterface>);
+    ASSERT_THROW_EXCEPTION_0(SpecialKeyUpExceptionTest<RenderingManagerInterface>);
+    ASSERT_THROW_EXCEPTION_0(SpecialKeyDownExceptionTest<RenderingManagerInterface>);
+
+    ASSERT_THROW_EXCEPTION_0(PassiveMotionExceptionTest<RenderingManagerInterface>);
+    ASSERT_THROW_EXCEPTION_0(MotionExceptionTest<RenderingManagerInterface>);
+    ASSERT_THROW_EXCEPTION_0(MouseWheelExceptionTest<RenderingManagerInterface>);
+    ASSERT_THROW_EXCEPTION_0(MouseClickExceptionTest<RenderingManagerInterface>);
 }
 
 void Framework::RenderingManagerInterfaceTesting::SetMiddleLayerTest()
 {
-    ASSERT_THROW_EXCEPTION_0(SetNetworkManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetInputManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetObjectLogicManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetPhysicalModellingManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetMessageManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetEventManagerExceptionTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(SetSystemManagerTest);
-    ASSERT_THROW_EXCEPTION_0(SetResourceManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetAudioManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetCameraSystemsManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetRenderingManagerExceptionTest);
-    ASSERT_THROW_EXCEPTION_0(SetGUIManagerExceptionTest);
-}
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetNetworkManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetInputManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetObjectLogicManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetPhysicalModellingManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetMessageManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetEventManager);
 
-void Framework::RenderingManagerInterfaceTesting::SetNetworkManagerExceptionTest()
-{
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
-
-    MiddleLayerInterfaceSharedPtr networkManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
-
-    middleLayer.SetNetworkManager(networkManager);
-}
-
-void Framework::RenderingManagerInterfaceTesting::SetInputManagerExceptionTest()
-{
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
-
-    MiddleLayerInterfaceSharedPtr inputManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
-
-    middleLayer.SetInputManager(inputManager);
-}
-
-void Framework::RenderingManagerInterfaceTesting::SetObjectLogicManagerExceptionTest()
-{
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
-
-    MiddleLayerInterfaceSharedPtr objectLogicManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
-
-    middleLayer.SetObjectLogicManager(objectLogicManager);
-}
-
-void Framework::RenderingManagerInterfaceTesting::SetPhysicalModellingManagerExceptionTest()
-{
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
-
-    MiddleLayerInterfaceSharedPtr physicalModellingManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
-
-    middleLayer.SetPhysicalModellingManager(physicalModellingManager);
-}
-
-void Framework::RenderingManagerInterfaceTesting::SetMessageManagerExceptionTest()
-{
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
-
-    MiddleLayerInterfaceSharedPtr messageManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
-
-    middleLayer.SetMessageManager(messageManager);
-}
-
-void Framework::RenderingManagerInterfaceTesting::SetEventManagerExceptionTest()
-{
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
-
-    MiddleLayerInterfaceSharedPtr eventManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
-
-    middleLayer.SetEventManager(eventManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetResourceManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetAudioManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetCameraSystemsManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetRenderingManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetGUIManager);
+    ASSERT_THROW_EXCEPTION_1(SetManagerExceptionTest<EngineMiddleLayerInterface>, &EngineMiddleLayerInterface::SetEngineManager);
 }
 
 void Framework::RenderingManagerInterfaceTesting::SetSystemManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    auto middleLayer = RenderingManagerInterface::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    MiddleLayerInterfaceSharedPtr systemManager(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows));
+    auto systemManager = std::make_shared<SystemManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    middleLayer.SetSystemManager(systemManager);
+    middleLayer->SetSystemManager(systemManager);
 }
 
-void Framework::RenderingManagerInterfaceTesting::SetResourceManagerExceptionTest()
+void Framework::RenderingManagerInterfaceTesting::GetMiddleLayerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    using Funtion = MiddleLayerInterfaceSharedPtr (RenderingManagerInterfaceTest::*)();
 
-    MiddleLayerInterfaceSharedPtr resourceManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetNetworkManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetInputManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetObjectLogicManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetPhysicalModellingManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetMessageManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEventManager));
 
-    middleLayer.SetResourceManager(resourceManager);
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetResourceManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetAudioManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetCameraSystemsManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetRenderingManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetGUIManager));
+    ASSERT_THROW_EXCEPTION_1(GetManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEngineManager));
 }
 
-void Framework::RenderingManagerInterfaceTesting::SetAudioManagerExceptionTest()
+void Framework::RenderingManagerInterfaceTesting::GetConstMiddleLayerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    using Funtion = ConstMiddleLayerInterfaceSharedPtr (RenderingManagerInterfaceTest::*)() const;
 
-    MiddleLayerInterfaceSharedPtr audioManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetNetworkManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetInputManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetObjectLogicManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetPhysicalModellingManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetMessageManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEventManager));
 
-    middleLayer.SetAudioManager(audioManager);
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetResourceManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetAudioManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetCameraSystemsManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetRenderingManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetGUIManager));
+    ASSERT_THROW_EXCEPTION_1(GetConstManagerExceptionTest<RenderingManagerInterfaceTest>,
+                             static_cast<Funtion>(&RenderingManagerInterfaceTest::GetEngineManager));
 }
 
-void Framework::RenderingManagerInterfaceTesting::SetCameraSystemsManagerExceptionTest()
+void Framework::RenderingManagerInterfaceTesting::GetSystemManagerTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    MiddleLayerInterfaceSharedPtr cameraSystemsManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    auto systemManager = std::make_shared<SystemManagerInterface>(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    middleLayer.SetCameraSystemsManager(cameraSystemsManager);
+    middleLayer->SetSystemManager(systemManager);
+
+    ASSERT_EQUAL(middleLayer->GetSystemManager(), systemManager);
+
+    ConstRenderingManagerInterfaceTestSharedPtr constMiddleLayer = middleLayer;
+
+    ASSERT_EQUAL(constMiddleLayer->GetSystemManager(), systemManager);
 }
 
-void Framework::RenderingManagerInterfaceTesting::SetRenderingManagerExceptionTest()
+void Framework::RenderingManagerInterfaceTesting::RendererTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    MiddleLayerInterfaceSharedPtr renderingManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
 
-    middleLayer.SetRenderingManager(renderingManager);
+    ASSERT_UNEQUAL_NULL_PTR(middleLayer->GetRendererSharedPtr());
+
+    ConstRenderingManagerInterfaceTestSharedPtr constMiddleLayer = middleLayer;
+
+    ASSERT_UNEQUAL_NULL_PTR(constMiddleLayer->GetRendererSharedPtr());
 }
 
-void Framework::RenderingManagerInterfaceTesting::SetGUIManagerExceptionTest()
+void Framework::RenderingManagerInterfaceTesting::RendererExceptionTest()
 {
-    TestingType middleLayer(MiddleLayerPlatform::Windows);
+    auto middleLayer = RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory());
 
-    MiddleLayerInterfaceSharedPtr guiManager(std::make_shared<TestingType>(MiddleLayerPlatform::Windows));
+    auto renderer = middleLayer->GetRendererSharedPtr();
+}
 
-    middleLayer.SetGUIManager(guiManager);
+void Framework::RenderingManagerInterfaceTesting::ConstRendererExceptionTest()
+{
+    ConstRenderingManagerInterfaceTestSharedPtr middleLayer{ RenderingManagerInterfaceTest::CreateMiddleLayer(GetMiddleLayerPlatform(), GetEnvironmentDirectory()) };
+
+    auto renderer = middleLayer->GetRendererSharedPtr();
 }

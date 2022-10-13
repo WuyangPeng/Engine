@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 0:53)
+///	引擎测试版本：0.8.1.2 (2022/09/14 14:29)
 
 #include "CompilerConfigTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -49,8 +49,8 @@ void System::CompilerConfigTesting::VisualcTest() noexcept
 
     static_assert(MSVC_VERSION == TCRE_USE_MSVC);
 
-    MSVC_FULL_VERSION;
-    MSVC_COMPILER_VERSION;
+    static_assert(0 < MSVC_FULL_VERSION);
+    static_assert(0 < MSVC_COMPILER_VERSION);
 
 #endif  // TCRE_USE_MSVC
 }

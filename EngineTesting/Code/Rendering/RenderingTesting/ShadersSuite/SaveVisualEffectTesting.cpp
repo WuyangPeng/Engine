@@ -42,17 +42,10 @@ void Rendering::SaveVisualEffectTesting::CreateVisualEffectFile() noexcept
 {
 }
 
-void Rendering::SaveVisualEffectTesting::SaveFile()
+void Rendering::SaveVisualEffectTesting::SaveFile() noexcept
 {
-    VisualEffectSharedPtr visualEffect = LoadVisualEffect::Load(SYSTEM_TEXT("Resource/ShadersSuite/FirstSaveVisualEffect.trve"));
-
-    const SaveVisualEffect saveVisualEffect(*visualEffect, SYSTEM_TEXT("Resource/ShadersSuite/SecondSaveVisualEffect.trve"));
 }
 
-void Rendering::SaveVisualEffectTesting::SaveTest()
+void Rendering::SaveVisualEffectTesting::SaveTest() noexcept
 {
-    CoreTools::IFStreamManager firstFile(SYSTEM_TEXT("Resource/ShadersSuite/FirstSaveVisualEffect.trve"));
-    CoreTools::IFStreamManager secondFile(SYSTEM_TEXT("Resource/ShadersSuite/SecondSaveVisualEffect.trve"));
-
-    ASSERT_EQUAL(firstFile.GetFileContent(), secondFile.GetFileContent());
 }

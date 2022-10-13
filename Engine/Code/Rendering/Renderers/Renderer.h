@@ -23,14 +23,14 @@
 #include "Rendering/GlobalEffects/GlobalEffect.h"
 #include "Rendering/GlobalEffects/GlobalEffectsFwd.h"
 #include "Rendering/Resources/Buffers/IndexBuffer.h"
-#include "Rendering/Resources/Textures/DrawTarget.h"
+#include "Rendering/Resources/Buffers/VertexBuffer.h"
+#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/Resources/Textures/DrawTarget.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
 #include "Rendering/Resources/Textures/Texture2D.h"
 #include "Rendering/Resources/Textures/Texture3D.h"
 #include "Rendering/Resources/Textures/TextureCube.h"
-#include "Rendering/Resources/Buffers/VertexBuffer.h"
-#include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/SceneGraphFwd.h"
 #include "Rendering/SceneGraph/Visual.h"
@@ -58,10 +58,12 @@ namespace Rendering
         using ColourUByte = Colour<uint8_t>;
         using Colour = Colour<float>;
         using Matrix = Mathematics::MatrixF;
+        using RendererSharedPtr = std::shared_ptr<ClassType>;
+        using ConstRendererSharedPtr = std::shared_ptr<const ClassType>;
 
     public:
-        explicit Renderer(const std::string& fileName);
-        Renderer(RendererTypes type, const RendererBasis& basis);
+        Renderer(const EnvironmentParameter& environmentParameter, const std::string& fileName);
+        Renderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter);
         ~Renderer() noexcept;
 
         Renderer(Renderer&& rhs) noexcept;
@@ -72,10 +74,16 @@ namespace Rendering
 
         CLASS_INVARIANT_DECLARE;
 
+        void Release();
+
+        void SwapBuffers();
+
     public:
         // 初始化相关接口（必须手动调用）
         // 创建一个create函数，将构造函数设成私有
         void Init();
+
+        NODISCARD static RendererSharedPtr Create(const std::string& fileName, const EnvironmentParameter& environmentParameter);
 
     public:
         // 平台无关的接口部分。
@@ -83,8 +91,8 @@ namespace Rendering
         // 访问构造函数的输入。
         NODISCARD int GetWidth() const noexcept;
         NODISCARD int GetHeight() const noexcept;
-        NODISCARD TextureFormat GetColorFormat() const noexcept;
-        NODISCARD TextureFormat GetDepthStencilFormat() const noexcept;
+        NODISCARD DataFormatType GetColorFormat() const noexcept;
+        NODISCARD DataFormatType GetDepthStencilFormat() const noexcept;
         NODISCARD int GetNumMultisamples() const noexcept;
 
         // 资源管理。该资源被定义为顶点格式，顶点缓冲区，索引缓冲区，纹理（1D，2D，3D，立方体），
@@ -269,6 +277,9 @@ namespace Rendering
         void SetDepthRange(const DepthRange& depthRange);
         NODISCARD DepthRange GetDepthRange() const;
         void Resize(int width, int height);
+
+        void ResetSize();
+        void InitDevice();
 
         // 支持清除颜色，深度和模板缓冲区。
         void ClearColorBuffer();

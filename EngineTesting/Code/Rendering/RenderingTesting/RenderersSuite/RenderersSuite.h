@@ -13,6 +13,7 @@
 #include "BufferLockManageTesting.h"
 #include "BufferManagementLockEncapsulationTesting.h"
 #include "BufferManagementTesting.h"
+#include "EnvironmentParameterTesting.h"
 #include "PlatformIndexBufferTesting.h"
 #include "PlatformRenderTargetTesting.h"
 #include "PlatformTexture1DTesting.h"
@@ -24,9 +25,12 @@
 #include "RenderTargetManagementTesting.h"
 #include "RendererBasisTesting.h"
 #include "RendererParameterTesting.h"
+#include "RenderingDeviceTesting.h"
+#include "RenderingEnvironmentTesting.h"
 #include "TextureLockManageTesting.h"
 #include "TextureManagementLockEncapsulationTesting.h"
 #include "TextureManagementTesting.h"
 #include "VertexFormatManagementTesting.h"
+#include "WindowsParameterTesting.h"
 
 #endif  // RENDERING_RENDERERS_SUITE_H

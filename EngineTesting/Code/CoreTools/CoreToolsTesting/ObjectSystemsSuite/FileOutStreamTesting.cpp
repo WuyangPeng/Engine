@@ -8,7 +8,6 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/18 15:40)
 
 #include "FileOutStreamTesting.h"
-#include "Detail/NullObject.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Base/Version.h"
 #include "CoreTools/FileManager/CFileManagerHelper.h"
@@ -16,6 +15,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/FileOutStream.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/ObjectSystems/Stream.h"
 

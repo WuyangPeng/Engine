@@ -31,7 +31,7 @@ namespace Rendering
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        NODISCARD PixelShaderSharedPtr GetPixelShaderSharedPtr() const;
+        NODISCARD PixelShaderSharedPtr GetPixelShaderSharedPtr() const noexcept;
 
         NODISCARD VisualEffectInstanceSharedPtr CreateInstance(const Texture2DSharedPtr& texture0, const Texture2DSharedPtr& texture1);
 

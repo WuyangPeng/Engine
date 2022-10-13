@@ -129,3 +129,26 @@ void System::BoolConversion(WindowsBool value, bool* result) noexcept
         *result = ((value != gFalse) ? true : false);
     }
 }
+
+System::WindowsHWnd System::GetActiveWindow() noexcept
+{
+    return ::GetActiveWindow();
+}
+
+bool System::GetSystemClientRect(WindowsHWnd hWnd, WindowsRect& windowsRect) noexcept
+{
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    if (::GetClientRect(hWnd, &windowsRect) != gFalse)
+        return true;
+    else
+        return false;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    UnusedFunction(hWnd, windowsRect);
+
+    return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
+}

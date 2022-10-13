@@ -21,7 +21,7 @@ namespace Framework
         using ParentType = ModelViewControllerMiddleLayer;
 
     public:
-        explicit ModelViewControllerMiddleLayerTest(MiddleLayerPlatform middleLayerPlatform);
+        ModelViewControllerMiddleLayerTest(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

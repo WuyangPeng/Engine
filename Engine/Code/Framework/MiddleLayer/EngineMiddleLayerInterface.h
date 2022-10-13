@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/06 17:00)
+///	引擎版本：0.8.1.2 (2022/08/30 20:00)
 
 #ifndef FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
 #define FRAMEWORK_MIDDLE_LAYER_ENGINE_MIDDLE_LAYER_INTERFACE_H
@@ -13,24 +13,24 @@
 #include "Framework/FrameworkDll.h"
 
 #include "MiddleLayerInterface.h"
-#include "ModelViewControllerMiddleLayer.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
 namespace Framework
 {
+    // 引擎中间层接口类，基类提供虚函数抛出异常的实现。
     class FRAMEWORK_DEFAULT_DECLARE EngineMiddleLayerInterface : public MiddleLayerInterface
     {
     public:
         using ClassType = EngineMiddleLayerInterface;
         using ParentType = MiddleLayerInterface;
+        using MiddleLayerSharedPtr = std::shared_ptr<ClassType>;
+
+    protected:
+        EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory) noexcept;
 
     public:
-        explicit EngineMiddleLayerInterface(MiddleLayerPlatform modelViewController) noexcept;
-        ~EngineMiddleLayerInterface() noexcept = default;
-        EngineMiddleLayerInterface(const EngineMiddleLayerInterface& rhs) noexcept = delete;
-        virtual EngineMiddleLayerInterface& operator=(const EngineMiddleLayerInterface& rhs) noexcept = delete;
-        EngineMiddleLayerInterface(EngineMiddleLayerInterface&& rhs) noexcept;
-        virtual EngineMiddleLayerInterface& operator=(EngineMiddleLayerInterface&& rhs) noexcept;
+        EngineMiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept;
+
+        NODISCARD static MiddleLayerSharedPtr CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -76,6 +76,9 @@ namespace Framework
         NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetRenderingManager() const;
         NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetGUIManager() const;
         NODISCARD virtual ConstMiddleLayerInterfaceSharedPtr GetEngineManager() const;
+
+    protected:
+        SYSTEM_NORETURN static void ThrowException();
     };
 
     using EngineMiddleLayerInterfaceSharedPtr = std::shared_ptr<EngineMiddleLayerInterface>;

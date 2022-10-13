@@ -18,8 +18,8 @@
 using std::make_shared;
 using std::move;
 
-Framework::ModelViewControllerMiddleLayer::ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Framework::ModelViewControllerMiddleLayer::ModelViewControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

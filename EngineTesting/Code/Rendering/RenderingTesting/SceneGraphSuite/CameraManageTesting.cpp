@@ -29,7 +29,7 @@ void Rendering::CameraManageTesting::DepthTypeTest()
 
     ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
 
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Window);
+    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Windows);
 
     ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
 
@@ -45,7 +45,7 @@ void Rendering::CameraManageTesting::DepthTypeTest()
 
     ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::MinusOneToOne);
 
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Dx9);
+    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(RendererTypes::Dx11);
 
     ASSERT_ENUM_EQUAL(CAMERA_MANAGE_SINGLETON.GetDepthType(), DepthType::ZeroToOne);
 }

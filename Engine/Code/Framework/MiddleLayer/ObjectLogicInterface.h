@@ -15,6 +15,7 @@
 #include "EngineMiddleLayerInterface.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
 FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
@@ -28,7 +29,7 @@ namespace Framework
         using ParentType = EngineMiddleLayerInterface;
 
     public:
-        explicit ObjectLogicInterface(MiddleLayerPlatform middleLayerPlatform);
+        ObjectLogicInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

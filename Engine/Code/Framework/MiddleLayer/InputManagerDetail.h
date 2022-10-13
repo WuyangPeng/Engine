@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 template <typename ApplicationTrait>
-Framework::InputManager<ApplicationTrait>::InputManager(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+Framework::InputManager<ApplicationTrait>::InputManager(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

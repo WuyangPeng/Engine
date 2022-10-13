@@ -174,14 +174,10 @@ void Rendering::VisualEffectInstanceTesting::InitTest()
 
     VisualEffectSharedPtr visualEffect(std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable));
 
-    visualEffect->InsertTechnique(firstVisualTechnique);
-
     VisualEffectInstanceSharedPtr visualEffectInstance(std::make_shared<VisualEffectInstance>(visualEffect, 0));
 
     ASSERT_EQUAL(visualEffectInstance->GetEffect(), visualEffect);
     ASSERT_EQUAL(visualEffectInstance->GetTechniqueIndex(), 0);
-    ASSERT_EQUAL(visualEffectInstance->GetNumPasses(), visualEffect->GetNumPasses(0));
-    ASSERT_EQUAL(visualEffectInstance->GetConstPass(0), visualEffect->GetPass(0, 0));
 
     ConstShaderParametersSharedPtr firstConstShaderParameters = visualEffectInstance->GetVertexParameters(0);
 
@@ -392,7 +388,6 @@ void Rendering::VisualEffectInstanceTesting::CopyTest()
     firstVisualTechnique->InsertPass(firstVisualPass);
 
     VisualEffectSharedPtr firstVisualEffect(std::make_shared<VisualEffect>(CoreTools::DisableNotThrow::Disable));
-    firstVisualEffect->InsertTechnique(firstVisualTechnique);
 
     VisualEffectInstanceSharedPtr firstVisualEffectInstance(std::make_shared<VisualEffectInstance>(firstVisualEffect, 0));
 

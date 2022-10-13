@@ -18,15 +18,15 @@ using std::min;
 using std::move;
 using namespace std::literals;
 
-Framework::CameraViewMiddleLayer::CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, multiplier{ 0.0f }
+Framework::CameraViewMiddleLayer::CameraViewMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, multiplier{ 0.0f }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, CameraViewMiddleLayer)
 
-void Framework::CameraViewMiddleLayer::SetCamera(const CameraSmartPointer& camera) noexcept
+void Framework::CameraViewMiddleLayer::SetCamera(const CameraSmartPointer& camera)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -81,7 +81,7 @@ bool Framework::CameraViewMiddleLayer::Resize(WindowDisplay windowDisplay, const
     }
 }
 
-float Framework::CameraViewMiddleLayer::GetXTrack(int x) const noexcept
+float Framework::CameraViewMiddleLayer::GetXTrack(int x) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
@@ -99,7 +99,7 @@ float Framework::CameraViewMiddleLayer::GetXTrack(int x) const noexcept
     }
 }
 
-float Framework::CameraViewMiddleLayer::GetYTrack(int y) const noexcept
+float Framework::CameraViewMiddleLayer::GetYTrack(int y) const
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 

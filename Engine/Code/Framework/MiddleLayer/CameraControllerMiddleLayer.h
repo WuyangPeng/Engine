@@ -26,7 +26,7 @@ namespace Framework
         using ParentType = ControllerMiddleLayer<ApplicationTrait>;
 
     public:
-        explicit CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit CameraControllerMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

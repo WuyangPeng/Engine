@@ -84,7 +84,7 @@ void Rendering::RendererData::DrawMessage(int x, int y, const Colour& color, con
     return impl->DrawMessage(x, y, color, message);
 }
 
-Rendering::TextureFormat Rendering::RendererData::GetColorFormat() const
+Rendering::DataFormatType Rendering::RendererData::GetColorFormat() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
@@ -93,7 +93,7 @@ Rendering::TextureFormat Rendering::RendererData::GetColorFormat() const
     return impl->GetColorFormat();
 }
 
-Rendering::TextureFormat Rendering::RendererData::GetDepthStencilFormat() const
+Rendering::DataFormatType Rendering::RendererData::GetDepthStencilFormat() const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 

@@ -19,6 +19,7 @@
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
+#include "Rendering/Resources/ResourcesFwd.h"
 
 RENDERING_EXPORT_UNIQUE_PTR(RendererData);
 RENDERING_NON_COPY_EXPORT_IMPL(RendererDataImpl);
@@ -57,8 +58,8 @@ namespace Rendering
 
         void DrawMessage(int x, int y, const Colour& color, const std::string& message);
 
-        NODISCARD TextureFormat GetColorFormat() const;
-        NODISCARD TextureFormat GetDepthStencilFormat() const;
+        NODISCARD DataFormatType GetColorFormat() const;
+        NODISCARD DataFormatType GetDepthStencilFormat() const;
         NODISCARD int GetNumMultisamples() const;
         NODISCARD Colour GetClearColor() const;
 

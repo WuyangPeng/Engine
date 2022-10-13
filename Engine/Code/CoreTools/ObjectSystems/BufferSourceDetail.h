@@ -505,7 +505,10 @@ void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    ReadEnumContainer(Size, container);
+    for (auto& value : container)
+    {
+        ReadEnum(value);
+    }
 }
 
 template <typename T>
@@ -596,7 +599,10 @@ void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& contai
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ReadAggregateContainer(Size, container);
+    for (auto& value : container)
+    {
+        ReadAggregate(value);
+    }
 }
 
 template <typename T>

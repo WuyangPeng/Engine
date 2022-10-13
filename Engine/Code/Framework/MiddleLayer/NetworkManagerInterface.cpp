@@ -27,8 +27,8 @@ using std::make_shared;
 using std::move;
 using namespace std::literals;
 
-Framework::NetworkManagerInterface::NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform },
+Framework::NetworkManagerInterface::NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory },
       impl{ System::EnumCastUnderlying(NetworkMiddleLayer::Count) },
       networkManager{ make_shared<NetworkManagerImpl>() }
 {
@@ -66,15 +66,14 @@ bool Framework::NetworkManagerInterface::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-bool Framework::NetworkManagerInterface::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::NetworkManagerInterface::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::PreCreate(environmentDirectory))
+    if (ParentType::Create(environmentParameter))
     {
         // 连接服务器和监听客户端。
-
-        auto networkFileName = environmentDirectory.GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Network.json");
+        auto networkFileName = GetEnvironmentDirectory().GetDirectory(UpperDirectory::Configuration) + SYSTEM_TEXT("Network.json");
 
         networkManager->ResetSendSocketManager(CoreTools::StringConversion::StandardConversionMultiByte(networkFileName));
 

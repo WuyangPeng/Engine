@@ -280,6 +280,9 @@
     <Filter Include="Windows 源文件">
       <UniqueIdentifier>{a4853d46-fab5-430b-96b5-ea903812571c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DirectX 头文件\Using">
+      <UniqueIdentifier>{589f6993-8c78-4f72-922a-10e5054d669b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\System\SystemFwd.h">
@@ -1814,6 +1817,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Miniz.h">
       <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\DirectX\Using\D12Using.h">
+      <Filter>DirectX 头文件\Using</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\Tools.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

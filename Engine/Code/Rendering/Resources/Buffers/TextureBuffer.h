@@ -58,6 +58,11 @@ namespace Rendering
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
+        NODISCARD static constexpr auto GetShaderDataLookup() noexcept
+        {
+            return 1;
+        }
+
     private:
         PackageType impl;
         DataFormatType format;

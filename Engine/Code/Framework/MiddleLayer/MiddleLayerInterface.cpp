@@ -5,23 +5,36 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.0.7 (2022/05/07 11:46)
+///	引擎版本：0.8.1.2 (2022/09/09 23:32)
 
 #include "Framework/FrameworkExport.h"
 
 #include "MiddleLayerInterface.h"
-#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
-Framework::MiddleLayerInterface::MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform) noexcept
-    : middleLayerPlatform{ middleLayerPlatform }
+Framework::MiddleLayerInterface::MiddleLayerSharedPtr Framework::MiddleLayerInterface::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+{
+    return std::make_shared<ClassType>(MiddleLayerInterfaceCreate::Init, middleLayerPlatform, environmentDirectory);
+}
+
+Framework::MiddleLayerInterface::MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept
+    : middleLayerPlatform{ middleLayerPlatform }, environmentDirectory{ environmentDirectory }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
+Framework::MiddleLayerInterface::MiddleLayerInterface(MiddleLayerInterfaceCreate middleLayerInterfaceCreate, MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory) noexcept
+    : MiddleLayerInterface{ middleLayerPlatform, environmentDirectory }
+{
+    System::UnusedFunction(middleLayerInterfaceCreate);
+
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
+}
+
 Framework::MiddleLayerInterface::MiddleLayerInterface(MiddleLayerInterface&& rhs) noexcept
-    : middleLayerPlatform{ rhs.middleLayerPlatform }
+    : middleLayerPlatform{ rhs.middleLayerPlatform }, environmentDirectory{ std::move(rhs.environmentDirectory) }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -31,13 +44,14 @@ Framework::MiddleLayerInterface& Framework::MiddleLayerInterface::operator=(Midd
     FRAMEWORK_CLASS_IS_VALID_9;
 
     middleLayerPlatform = rhs.middleLayerPlatform;
+    environmentDirectory = std::move(rhs.environmentDirectory);
 
     return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, MiddleLayerInterface)
 
-bool Framework::MiddleLayerInterface::PreCreate(MAYBE_UNUSED const EnvironmentDirectory& environmentDirectory)
+bool Framework::MiddleLayerInterface::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
@@ -46,11 +60,13 @@ bool Framework::MiddleLayerInterface::PreCreate(MAYBE_UNUSED const EnvironmentDi
     return true;
 }
 
-bool Framework::MiddleLayerInterface::Create()
+bool Framework::MiddleLayerInterface::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(environmentParameter);
 
     return true;
 }
@@ -87,11 +103,13 @@ void Framework::MiddleLayerInterface::PreIdle()
     CoreTools::DisableNoexcept();
 }
 
-bool Framework::MiddleLayerInterface::Idle(MAYBE_UNUSED int64_t timeDelta)
+bool Framework::MiddleLayerInterface::Idle(int64_t timeDelta)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(timeDelta);
 
     return true;
 }
@@ -105,92 +123,112 @@ bool Framework::MiddleLayerInterface::Paint()
     return true;
 }
 
-bool Framework::MiddleLayerInterface::Move(MAYBE_UNUSED const WindowPoint& point)
+bool Framework::MiddleLayerInterface::Move(const WindowPoint& point)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(point);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::Resize(MAYBE_UNUSED WindowDisplay windowDisplay, MAYBE_UNUSED const WindowSize& size)
+bool Framework::MiddleLayerInterface::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(windowDisplay, size);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::KeyUp(MAYBE_UNUSED int key, MAYBE_UNUSED const WindowPoint& point)
+bool Framework::MiddleLayerInterface::KeyUp(int key, const WindowPoint& point)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(key, point);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::KeyDown(MAYBE_UNUSED int key, MAYBE_UNUSED const WindowPoint& point)
+bool Framework::MiddleLayerInterface::KeyDown(int key, const WindowPoint& point)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(key, point);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::SpecialKeyUp(MAYBE_UNUSED int key, MAYBE_UNUSED const WindowPoint& point)
+bool Framework::MiddleLayerInterface::SpecialKeyUp(int key, const WindowPoint& point)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(key, point);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::SpecialKeyDown(MAYBE_UNUSED int key, MAYBE_UNUSED const WindowPoint& point)
+bool Framework::MiddleLayerInterface::SpecialKeyDown(int key, const WindowPoint& point)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(key, point);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::PassiveMotion(MAYBE_UNUSED const WindowPoint& point)
+bool Framework::MiddleLayerInterface::PassiveMotion(const WindowPoint& point)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(point);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::Motion(MAYBE_UNUSED const WindowPoint& point, MAYBE_UNUSED const VirtualKeysTypes& virtualKeys)
+bool Framework::MiddleLayerInterface::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(point, virtualKeys);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::MouseWheel(MAYBE_UNUSED int delta, MAYBE_UNUSED const WindowPoint& point, MAYBE_UNUSED const VirtualKeysTypes& virtualKeys)
+bool Framework::MiddleLayerInterface::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(delta, point, virtualKeys);
 
     return true;
 }
 
-bool Framework::MiddleLayerInterface::MouseClick(MAYBE_UNUSED MouseButtonsTypes button, MAYBE_UNUSED MouseStateTypes state, MAYBE_UNUSED const WindowPoint& point, MAYBE_UNUSED const VirtualKeysTypes& virtualKeys)
+bool Framework::MiddleLayerInterface::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
     CoreTools::DisableNoexcept();
+
+    System::UnusedFunction(button, state, point, virtualKeys);
 
     return true;
 }
@@ -200,4 +238,11 @@ Framework::MiddleLayerPlatform Framework::MiddleLayerInterface::GetMiddleLayerPl
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
     return middleLayerPlatform;
+}
+
+Framework::EnvironmentDirectory Framework::MiddleLayerInterface::GetEnvironmentDirectory() const noexcept
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_9;
+
+    return environmentDirectory;
 }

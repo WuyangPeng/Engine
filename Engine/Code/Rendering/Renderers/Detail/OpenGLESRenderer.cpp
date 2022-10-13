@@ -12,9 +12,10 @@
 #include "OpenGLESRenderer.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "Rendering/Renderers/RendererParameter.h"
 
-Rendering::OpenGLESRenderer::OpenGLESRenderer(const RendererBasis& basis)
-    : ParentType{ basis }
+Rendering::OpenGLESRenderer::OpenGLESRenderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
+    : ParentType{ RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

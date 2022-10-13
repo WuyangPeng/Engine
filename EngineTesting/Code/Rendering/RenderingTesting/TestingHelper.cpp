@@ -29,6 +29,7 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TestingHelper)
 void Rendering::TestingHelper::InitSuite()
 {
     AddMacroSuite();
+    AddBaseSuite();
     AddDataTypesSuite();
     AddResourcesSuite();
     AddSceneGraphSuite();
@@ -75,6 +76,15 @@ void Rendering::TestingHelper::AddMacroSuite()
     auto macroSuite = GenerateSuite("ºê");
 
     AddSuite(macroSuite);
+}
+
+void Rendering::TestingHelper::AddBaseSuite()
+{
+    auto baseSuite = GenerateSuite("»ù´¡");
+
+    ADD_TEST(baseSuite, GraphicsObjectTesting);
+
+    AddSuite(baseSuite);
 }
 
 // private
@@ -354,7 +364,11 @@ void Rendering::TestingHelper::AddRenderersSuite()
     auto renderersSuite = GenerateSuite("äÖÈ¾Æ÷");
 
     ADD_TEST(renderersSuite, RendererBasisTesting);
+    ADD_TEST(renderersSuite, WindowsParameterTesting);
     ADD_TEST(renderersSuite, RendererParameterTesting);
+    ADD_TEST(renderersSuite, EnvironmentParameterTesting);
+    ADD_TEST(renderersSuite, RenderingEnvironmentTesting);
+    ADD_TEST(renderersSuite, RenderingDeviceTesting);
     ADD_TEST(renderersSuite, PlatformVertexFormatTesting);
     ADD_TEST(renderersSuite, VertexFormatManagementTesting);
     ADD_TEST(renderersSuite, PlatformIndexBufferTesting);

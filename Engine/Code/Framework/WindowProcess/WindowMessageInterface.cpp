@@ -22,9 +22,15 @@ Framework::WindowMessageInterface::WindowMessageInterface(int64_t delta) noexcep
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
 
+Framework::WindowMessageInterface::WindowMessageInterface(int64_t delta, MAYBE_UNUSED const EnvironmentDirectory& environmentDirectory) noexcept
+    : WindowMessageInterface{ delta }
+{
+    FRAMEWORK_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageInterface)
 
-bool Framework::WindowMessageInterface::PreCreate([[maybe_unused]] const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowMessageInterface::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 

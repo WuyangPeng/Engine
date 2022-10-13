@@ -17,8 +17,8 @@
 
 using std::cout;
 
-PixelModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, timeDelta{ timerInterval }
+PixelModelViewController::FrameViewMiddleLayer::FrameViewMiddleLayer(Framework::MiddleLayerPlatform middleLayerPlatform, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, timeDelta{ timerInterval }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }

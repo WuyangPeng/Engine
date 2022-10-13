@@ -46,5 +46,5 @@ Rendering::RendererTypes Rendering::Dx9RendererInput::GetRendererType() const no
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return RendererTypes::Dx9;
+    return RendererTypes::Dx11;
 }

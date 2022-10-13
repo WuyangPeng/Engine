@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Rendering/Renderers/EnvironmentParameter.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
@@ -40,9 +41,11 @@ void Framework::EngineMiddleLayerContainerTesting::DoRunUnitTest()
 void Framework::EngineMiddleLayerContainerTesting::MainTest()
 {
     Rendering::RendererManager::Create();
+
     ASSERT_NOT_THROW_EXCEPTION_0(DefaultEngineMiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(EngineMiddleLayerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(SetMiddleLayerTest);
+
     Rendering::RendererManager::Destroy();
 }
 
@@ -51,14 +54,15 @@ void Framework::EngineMiddleLayerContainerTesting::DefaultEngineMiddleLayerTest(
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
-    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows));
+    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
 #include STSTEM_WARNING_POP
 
-    ASSERT_TRUE(middleLayer->PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
+    ASSERT_TRUE(middleLayer->PreCreate());
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer->Initialize());
     middleLayer->PreIdle();
-    ASSERT_TRUE(middleLayer->Create());
+
     ASSERT_TRUE(middleLayer->Paint());
     ASSERT_TRUE(middleLayer->Move(WindowPoint()));
     ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, WindowSize()));
@@ -87,14 +91,15 @@ void Framework::EngineMiddleLayerContainerTesting::EngineMiddleLayerTest()
                                                                                                 ObjectLogicManager, PhysicalModellingManagerInterface,
                                                                                                 MessageManagerInterface, EventManagerInterface, SystemManagerInterface,
                                                                                                 ResourceManagerInterface, AudioManagerInterface,
-                                                                                                CameraSystemsManagerInterface, RenderingManagerInterface, GUIManagerInterface>>(MiddleLayerPlatform::Windows));
+                                                                                                CameraSystemsManagerInterface, RenderingManagerInterface, GUIManagerInterface>>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
 #include STSTEM_WARNING_POP
 
-    ASSERT_TRUE(middleLayer->PreCreate(EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
+    ASSERT_TRUE(middleLayer->PreCreate());
+    ASSERT_TRUE(middleLayer->Create(Rendering::EnvironmentParameter::Create()));
     ASSERT_TRUE(middleLayer->Initialize());
     middleLayer->PreIdle();
-    ASSERT_TRUE(middleLayer->Create());
+
     ASSERT_TRUE(middleLayer->Paint());
     ASSERT_TRUE(middleLayer->Move(WindowPoint()));
     ASSERT_TRUE(middleLayer->Resize(System::WindowsDisplay::MaxHide, WindowSize()));
@@ -117,43 +122,43 @@ void Framework::EngineMiddleLayerContainerTesting::SetMiddleLayerTest()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26414)
 
-    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows));
+    EngineMiddleLayerInterfaceSharedPtr middleLayer(std::make_shared<EngineMiddleLayerContainer<WindowApplicationTrait>>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
 
 #include STSTEM_WARNING_POP
 
-    NetworkManagerInterfaceSharedPtr networkManagerInterface(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows));
+    NetworkManagerInterfaceSharedPtr networkManagerInterface(std::make_shared<NetworkManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetNetworkManager(networkManagerInterface);
 
-    InputManagerInterfaceSharedPtr inputManagerInterface(std::make_shared<InputManagerInterface>(MiddleLayerPlatform::Windows));
+    InputManagerInterfaceSharedPtr inputManagerInterface(std::make_shared<InputManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetInputManager(inputManagerInterface);
 
-    ObjectLogicManagerInterfaceSharedPtr objectLogicManagerInterface(std::make_shared<ObjectLogicManagerInterface>(MiddleLayerPlatform::Windows));
+    ObjectLogicManagerInterfaceSharedPtr objectLogicManagerInterface(std::make_shared<ObjectLogicManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetObjectLogicManager(objectLogicManagerInterface);
 
-    PhysicalModellingManagerInterfaceSharedPtr physicalModellingManagerInterface(std::make_shared<PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows));
+    PhysicalModellingManagerInterfaceSharedPtr physicalModellingManagerInterface(std::make_shared<PhysicalModellingManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetPhysicalModellingManager(physicalModellingManagerInterface);
 
-    MessageManagerInterfaceSharedPtr messageManagerInterface(std::make_shared<MessageManagerInterface>(MiddleLayerPlatform::Windows));
+    MessageManagerInterfaceSharedPtr messageManagerInterface(std::make_shared<MessageManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetMessageManager(messageManagerInterface);
 
-    EventManagerInterfaceSharedPtr eventManagerInterface(std::make_shared<EventManagerInterface>(MiddleLayerPlatform::Windows));
+    EventManagerInterfaceSharedPtr eventManagerInterface(std::make_shared<EventManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetEventManager(eventManagerInterface);
 
-    SystemManagerInterfaceSharedPtr systemManagerInterface(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows));
+    SystemManagerInterfaceSharedPtr systemManagerInterface(std::make_shared<SystemManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetSystemManager(systemManagerInterface);
 
-    ResourceManagerInterfaceSharedPtr resourceManagerInterface(std::make_shared<ResourceManagerInterface>(MiddleLayerPlatform::Windows));
+    ResourceManagerInterfaceSharedPtr resourceManagerInterface(std::make_shared<ResourceManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetResourceManager(resourceManagerInterface);
 
-    AudioManagerInterfaceSharedPtr audioManagerInterface(std::make_shared<AudioManagerInterface>(MiddleLayerPlatform::Windows));
+    AudioManagerInterfaceSharedPtr audioManagerInterface(std::make_shared<AudioManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetAudioManager(audioManagerInterface);
 
-    CameraSystemsManagerInterfaceSharedPtr cameraSystemsManagerInterface(std::make_shared<CameraSystemsManagerInterface>(MiddleLayerPlatform::Windows));
+    CameraSystemsManagerInterfaceSharedPtr cameraSystemsManagerInterface(std::make_shared<CameraSystemsManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetCameraSystemsManager(cameraSystemsManagerInterface);
 
-    RenderingManagerInterfaceSharedPtr renderingManagerInterface(std::make_shared<RenderingManagerInterface>(MiddleLayerPlatform::Windows));
+    RenderingManagerInterfaceSharedPtr renderingManagerInterface(RenderingManagerInterface::CreateMiddleLayer(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetRenderingManager(renderingManagerInterface);
 
-    GUIManagerInterfaceSharedPtr guiManagerInterface(std::make_shared<GUIManagerInterface>(MiddleLayerPlatform::Windows));
+    GUIManagerInterfaceSharedPtr guiManagerInterface(std::make_shared<GUIManagerInterface>(MiddleLayerPlatform::Windows, EnvironmentDirectory{ SYSTEM_TEXT("DefaultEnvironment"), SYSTEM_TEXT("") }));
     middleLayer->SetGUIManager(guiManagerInterface);
 }

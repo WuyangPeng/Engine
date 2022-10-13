@@ -98,13 +98,13 @@ void Framework::WindowProcessManager::ClearWindowMessage(const WindowMessageInte
     return impl->ClearWindowMessage(windowMessage);
 }
 
-bool Framework::WindowProcessManager::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool Framework::WindowProcessManager::PreCreate()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    return impl->PreCreate(environmentDirectory);
+    return impl->PreCreate();
 }
 
 bool Framework::WindowProcessManager::Initialize()

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/11 16:06)
+///	引擎测试版本：0.8.1.2 (2022/09/04 20:44)
 
 #ifndef CONSOLE_SYSTEM_TESTING_H
 #define CONSOLE_SYSTEM_TESTING_H

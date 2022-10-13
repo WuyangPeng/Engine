@@ -58,6 +58,7 @@ namespace Framework
         NODISCARD DisplayFunction GetFunction() const noexcept;
         NODISCARD CommandSharedPtr GetCommand() const noexcept;
         NODISCARD WindowProcessHandle GetWindowProcess() const noexcept;
+        NODISCARD EnvironmentDirectory GetEnvironmentDirectory() const noexcept;
 
     private:
         NODISCARD Atom InitApplication();

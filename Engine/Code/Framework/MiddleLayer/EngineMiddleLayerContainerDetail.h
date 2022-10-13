@@ -42,24 +42,67 @@ Framework::EngineMiddleLayerContainer<ApplicationTrait,
                                       AudioManager,
                                       CameraSystemsManager,
                                       RenderingManager,
-                                      GUIManager>::EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController)
-    : ParentType{ modelViewController },
-      network{ std::make_shared<NetworkManagerType>(modelViewController) },
-      input{ std::make_shared<InputManagerType>(modelViewController) },
-      objectLogic{ std::make_shared<ObjectLogicManagerType>(modelViewController) },
-      physicalModelling{ std::make_shared<PhysicalModellingManagerType>(modelViewController) },
-      message{ std::make_shared<MessageManagerType>(modelViewController) },
-      event{ std::make_shared<EventManagerType>(modelViewController) },
-      system{ std::make_shared<SystemManagerType>(modelViewController) },
-      resource{ std::make_shared<ResourceManagerType>(modelViewController) },
-      audio{ std::make_shared<AudioManagerType>(modelViewController) },
-      cameraSystems{ std::make_shared<CameraSystemsManagerType>(modelViewController) },
-      rendering{ std::make_shared<RenderingManagerType>(modelViewController) },
-      gui{ std::make_shared<GUIManagerType>(modelViewController) }
+                                      GUIManager>::EngineMiddleLayerContainer(MiddleLayerPlatform modelViewController, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ modelViewController, environmentDirectory },
+      network{ std::make_shared<NetworkManagerType>(modelViewController, environmentDirectory) },
+      input{ std::make_shared<InputManagerType>(modelViewController, environmentDirectory) },
+      objectLogic{ std::make_shared<ObjectLogicManagerType>(modelViewController, environmentDirectory) },
+      physicalModelling{ std::make_shared<PhysicalModellingManagerType>(modelViewController, environmentDirectory) },
+      message{ std::make_shared<MessageManagerType>(modelViewController, environmentDirectory) },
+      event{ std::make_shared<EventManagerType>(modelViewController, environmentDirectory) },
+      system{ std::make_shared<SystemManagerType>(modelViewController, environmentDirectory) },
+      resource{ std::make_shared<ResourceManagerType>(modelViewController, environmentDirectory) },
+      audio{ std::make_shared<AudioManagerType>(modelViewController, environmentDirectory) },
+      cameraSystems{ std::make_shared<CameraSystemsManagerType>(modelViewController, environmentDirectory) },
+      rendering{ RenderingManagerType::CreateMiddleLayer(modelViewController, environmentDirectory) },
+      gui{ std::make_shared<GUIManagerType>(modelViewController, environmentDirectory) }
 {
     Init();
 
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename ApplicationTrait,
+          template <typename> class InputManager,
+          typename NetworkManager,
+          typename ObjectLogicManager,
+          typename PhysicalModellingManager,
+          typename MessageManager,
+          typename EventManager,
+          typename SystemManager,
+          typename ResourceManager,
+          typename AudioManager,
+          typename CameraSystemsManager,
+          typename RenderingManager,
+          typename GUIManager>
+Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                      InputManager,
+                                      NetworkManager,
+                                      ObjectLogicManager,
+                                      PhysicalModellingManager,
+                                      MessageManager,
+                                      EventManager,
+                                      SystemManager,
+                                      ResourceManager,
+                                      AudioManager,
+                                      CameraSystemsManager,
+                                      RenderingManager,
+                                      GUIManager>::MiddleLayerSharedPtr
+    Framework::EngineMiddleLayerContainer<ApplicationTrait,
+                                          InputManager,
+                                          NetworkManager,
+                                          ObjectLogicManager,
+                                          PhysicalModellingManager,
+                                          MessageManager,
+                                          EventManager,
+                                          SystemManager,
+                                          ResourceManager,
+                                          AudioManager,
+                                          CameraSystemsManager,
+                                          RenderingManager,
+                                          GUIManager>::CreateMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+{
+    return std::make_unique<ClassType>(middleLayerPlatform, environmentDirectory);
 }
 
 // private
@@ -1570,24 +1613,24 @@ bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
                                            AudioManager,
                                            CameraSystemsManager,
                                            RenderingManager,
-                                           GUIManager>::PreCreate(const EnvironmentDirectory& environmentDirectory)
+                                           GUIManager>::PreCreate()
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::PreCreate(environmentDirectory) &&
+    if (ParentType::PreCreate() &&
         InitSystemEngineInterface() &&
-        system->PreCreate(environmentDirectory) &&
-        network->PreCreate(environmentDirectory) &&
-        input->PreCreate(environmentDirectory) &&
-        objectLogic->PreCreate(environmentDirectory) &&
-        physicalModelling->PreCreate(environmentDirectory) &&
-        message->PreCreate(environmentDirectory) &&
-        event->PreCreate(environmentDirectory) &&
-        audio->PreCreate(environmentDirectory) &&
-        resource->PreCreate(environmentDirectory) &&
-        cameraSystems->PreCreate(environmentDirectory) &&
-        gui->PreCreate(environmentDirectory) &&
-        rendering->PreCreate(environmentDirectory))
+        system->PreCreate() &&
+        network->PreCreate() &&
+        input->PreCreate() &&
+        objectLogic->PreCreate() &&
+        physicalModelling->PreCreate() &&
+        message->PreCreate() &&
+        event->PreCreate() &&
+        audio->PreCreate() &&
+        resource->PreCreate() &&
+        cameraSystems->PreCreate() &&
+        gui->PreCreate() &&
+        rendering->PreCreate())
     {
         return true;
     }
@@ -2201,23 +2244,23 @@ bool Framework::EngineMiddleLayerContainer<ApplicationTrait,
                                            AudioManager,
                                            CameraSystemsManager,
                                            RenderingManager,
-                                           GUIManager>::Create()
+                                           GUIManager>::Create(const EnvironmentParameter& environmentParameter)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    if (ParentType::Create() &&
-        system->Create() &&
-        network->Create() &&
-        input->Create() &&
-        objectLogic->Create() &&
-        physicalModelling->Create() &&
-        message->Create() &&
-        event->Create() &&
-        audio->Create() &&
-        resource->Create() &&
-        cameraSystems->Create() &&
-        gui->Create() &&
-        rendering->Create())
+    if (ParentType::Create(environmentParameter) &&
+        system->Create(environmentParameter) &&
+        network->Create(environmentParameter) &&
+        input->Create(environmentParameter) &&
+        objectLogic->Create(environmentParameter) &&
+        physicalModelling->Create(environmentParameter) &&
+        message->Create(environmentParameter) &&
+        event->Create(environmentParameter) &&
+        audio->Create(environmentParameter) &&
+        resource->Create(environmentParameter) &&
+        cameraSystems->Create(environmentParameter) &&
+        gui->Create(environmentParameter) &&
+        rendering->Create(environmentParameter))
     {
         return true;
     }

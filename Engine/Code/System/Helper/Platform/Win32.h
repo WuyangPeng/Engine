@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:35)
+///	标准：std:c++20
+///	引擎版本：0.8.1.2 (2022/09/11 23:21)
 
 #ifndef SYSTEM_HELPER_WIN32_H
 #define SYSTEM_HELPER_WIN32_H
@@ -20,31 +20,43 @@
 
     // 获取有关MinGW运行时的信息，即__MINGW32_ * VERSION。
     #if defined(__MINGW32__)
+
         #include <_mingw.h>
+
     #endif  // defined(__MINGW32__)
 
     #ifndef _WIN32
-        #define _WIN32
+
+        #define _WIN32 static_cast<void>(0)
+
     #endif  // _WIN32
 
     #ifndef WIN32
+
         #define WIN32 static_cast<void>(0)
+
     #endif  // WIN32
 
     #ifndef __WIN32__
+
         #define __WIN32__ static_cast<void>(0)
+
     #endif  // __WIN32__
 
     #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
 
     // 禁用各种子系统在 windows.h.
     #ifndef WIN32_LEAN_AND_MEAN
+
         #define WIN32_LEAN_AND_MEAN 1
+
     #endif  // WIN32_LEAN_AND_MEAN
 
     // 禁用windows.h中的“min”和“max”宏，它与std::numeric_limits<type>::max()冲突。
     #ifndef NOMINMAX
+
         #define NOMINMAX static_cast<void>(0)
+
     #endif  // NOMINMAX
 
 #endif  // defined(_WIN32) || defined(__WIN32__) || defined(WIN32)

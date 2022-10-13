@@ -31,7 +31,7 @@ namespace CameraModelViewController
         using ParentType = MessageType;
 
     public:
-        explicit CameraModelViewControllerMessage(int64_t delta);
+        CameraModelViewControllerMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

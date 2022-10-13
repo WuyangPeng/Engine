@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 1:11)
+///	引擎测试版本：0.8.1.2 (2022/09/22 22:42)
 
 #include "EnumCastTesting.h"
 #include "Detail/NumberEnum.h"
@@ -65,11 +65,15 @@ void System::EnumCastTesting::ConstexprCastTest()
 {
     constexpr auto windowError0 = WindowError::Success;
 
-    constexpr auto underlyingTypeValue = EnumCastUnderlying(windowError0);
+    constexpr auto underlyingTypeValue0 = EnumCastUnderlying(windowError0);
 
-    ASSERT_EQUAL(0, underlyingTypeValue);
+    ASSERT_EQUAL(0, underlyingTypeValue0);
 
-    constexpr auto windowError1 = UnderlyingCastEnum<WindowError>(underlyingTypeValue);
+    constexpr auto windowError1 = UnderlyingCastEnum<WindowError>(underlyingTypeValue0);
 
     ASSERT_ENUM_EQUAL(windowError1, WindowError::Success);
+
+    constexpr auto underlyingTypeValue1 = EnumCastUnderlying<int>(windowError1);
+
+    ASSERT_EQUAL(0, underlyingTypeValue1);
 }

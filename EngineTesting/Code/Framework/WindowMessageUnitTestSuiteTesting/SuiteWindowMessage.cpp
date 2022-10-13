@@ -13,7 +13,7 @@
 
 using namespace std::literals;
 
-Framework::SuiteWindowMessage::SuiteWindowMessage(int64_t delta)
+Framework::SuiteWindowMessage::SuiteWindowMessage(int64_t delta, MAYBE_UNUSED const Framework::EnvironmentDirectory& environmentDirectory)
     : ParentType{ delta, "¡¾Window Message Unit Test Suite Testing¡¿µ¥Ôª²âÊÔÌ×¼þ"s }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;

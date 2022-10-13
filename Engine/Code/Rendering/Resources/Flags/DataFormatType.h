@@ -12,6 +12,10 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/Helper/EnumMacro.h"
+
+#include <iostream>
+
 namespace Rendering
 {
     enum class DataFormatType
@@ -135,6 +139,9 @@ namespace Rendering
         B4G4R4A4UNorm = 115,
         NumFormats = 116,
     };
+
+    ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE(DataFormatType)
+    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(DataFormatType)
 }
 
 #endif  // RENDERING_RESOURCES_DATA_FORMAT_TYPE_H

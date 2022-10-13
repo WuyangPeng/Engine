@@ -34,7 +34,7 @@ namespace Framework
         using DisplayFunction = System::DisplayFunction;
 
     public:
-        explicit WindowProcessHandle(int64_t delta);
+        WindowProcessHandle(int64_t delta, const EnvironmentDirectory& environmentDirectory);
         virtual ~WindowProcessHandle() noexcept;
         WindowProcessHandle(const WindowProcessHandle& rhs) noexcept = default;
         WindowProcessHandle& operator=(const WindowProcessHandle& rhs) noexcept = default;
@@ -52,7 +52,7 @@ namespace Framework
 
         NODISCARD static HWnd GetMainWindowHwnd();
 
-        virtual bool PreCreate(const EnvironmentDirectory& environmentDirectory);
+        virtual bool PreCreate();
         virtual bool Initialize();
         virtual void PreIdle();
         virtual void Terminate();

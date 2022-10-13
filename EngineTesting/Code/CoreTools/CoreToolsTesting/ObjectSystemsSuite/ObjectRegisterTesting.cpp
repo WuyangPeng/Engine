@@ -8,7 +8,7 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.0.8 (2022/05/18 15:42)
 
 #include "ObjectRegisterTesting.h"
-#include "Detail/NullObject.h"
+#include "CoreTools/ObjectSystems/NullObject.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"

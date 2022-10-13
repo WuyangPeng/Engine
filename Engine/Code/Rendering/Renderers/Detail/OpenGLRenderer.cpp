@@ -10,11 +10,12 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLRenderer.h"
+#include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
-Rendering::OpenGLRenderer::OpenGLRenderer(const RendererBasis& basis)
-    : ParentType{ basis }
+Rendering::OpenGLRenderer::OpenGLRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+    : ParentType{ renderingEnvironment, basis }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -86,6 +87,10 @@ void Rendering::OpenGLRenderer::Resize(MAYBE_UNUSED int width, MAYBE_UNUSED int 
 void Rendering::OpenGLRenderer::ClearColorBuffer() noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
+
+    const auto colour = GetClearColor();
+
+    System::SetGLClearColor(colour.GetRed(), colour.GetGreen(), colour.GetBlue(), colour.GetAlpha());
 }
 
 void Rendering::OpenGLRenderer::ClearDepthBuffer(MAYBE_UNUSED int x, MAYBE_UNUSED int y, MAYBE_UNUSED int w, MAYBE_UNUSED int h) noexcept

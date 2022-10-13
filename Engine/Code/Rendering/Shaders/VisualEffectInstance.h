@@ -10,13 +10,12 @@
 #ifndef RENDERING_SHADERS_VISUAL_EFFECT_INSTANCE_H
 #define RENDERING_SHADERS_VISUAL_EFFECT_INSTANCE_H
 
-#include "Rendering/RenderingDll.h"
-
-#include "VisualEffect.h"
 #include "VisualTechnique.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
+#include "Rendering/LocalEffects/VisualEffect.h"
+#include "Rendering/RenderingDll.h"
 #include "Rendering/Shaders/ShaderParameters.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(VisualEffectInstance, VisualEffectInstanceImpl);
@@ -41,7 +40,7 @@ namespace Rendering
         NODISCARD ConstVisualEffectSharedPtr GetEffect() const noexcept;
         NODISCARD int GetTechniqueIndex() const noexcept;
         NODISCARD int GetNumPasses() const noexcept;
-        NODISCARD ConstVisualPassSharedPtr GetConstPass(int pass) const;
+        NODISCARD ConstVisualPassSharedPtr GetConstPass(int pass) const noexcept;
         NODISCARD ConstShaderParametersSharedPtr GetConstVertexParameters(int pass) const;
         NODISCARD ConstShaderParametersSharedPtr GetConstPixelParameters(int pass) const;
 
