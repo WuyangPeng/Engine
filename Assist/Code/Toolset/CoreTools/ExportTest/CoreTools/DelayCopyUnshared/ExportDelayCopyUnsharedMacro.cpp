@@ -5,15 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:41)
-
-#define FUNCTION_DESCRIBED_NO_EXPORT
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ExportDelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/DelayCopyUnshared/ExportDelayCopyUnsharedMacroImpl.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, ExportDelayCopyUnsharedMacro)
 
 CoreTools::ExportDelayCopyUnsharedMacro::ExportDelayCopyUnsharedMacro(int count)
     : impl{ count }
@@ -36,5 +36,3 @@ void CoreTools::ExportDelayCopyUnsharedMacro::SetCount(int count)
 
     impl->SetCount(count);
 }
-
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, ExportDelayCopyUnsharedMacro)

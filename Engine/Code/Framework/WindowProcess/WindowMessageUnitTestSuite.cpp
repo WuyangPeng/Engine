@@ -28,6 +28,12 @@ Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta,
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
+ Framework::WindowMessageUnitTestSuite::WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName, const Framework::EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, stream{ make_shared<StreamType>(true) }, impl{ suiteName, stream->GetStreamShared() }
+{
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
+}
+
 #ifdef OPEN_CLASS_INVARIANT
 
 bool Framework::WindowMessageUnitTestSuite::IsValid() const noexcept

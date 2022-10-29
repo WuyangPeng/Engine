@@ -56,6 +56,8 @@ namespace Rendering
         void SetTriangle(int i, int32_t v0, int32_t v1, int32_t v2);
         NODISCARD TriangleType GetTriangle(int i) const;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     protected:
         void ValidPrimitiveType(IndexFormatType type) const;
 

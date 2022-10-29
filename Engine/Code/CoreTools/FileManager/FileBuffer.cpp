@@ -50,3 +50,10 @@ const char* CoreTools::FileBuffer::GetConstBufferBegin() const noexcept
 
     return GetBufferBegin();
 }
+
+void CoreTools::FileBuffer::CopyBuffer(BufferTypeConstIter begin, BufferTypeConstIter end)
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    impl->CopyBuffer(begin, end);
+}

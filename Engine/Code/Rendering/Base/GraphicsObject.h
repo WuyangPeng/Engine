@@ -15,6 +15,7 @@
 #include "BaseFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
+#include "Rendering/Renderers/RenderersFwd.h"
 
 namespace Rendering
 {
@@ -28,6 +29,7 @@ namespace Rendering
         using BufferSource = CoreTools::BufferSource;
         using BufferTarget = CoreTools::BufferTarget;
         using ObjectRegister = CoreTools::ObjectRegister;
+        using RendererObjectSharedPtr = std::shared_ptr<RendererObject>;
 
     public:
         GraphicsObject(const std::string& name, GraphicsObjectType type);
@@ -47,6 +49,8 @@ namespace Rendering
         NODISCARD bool IsShader() const noexcept;
 
         NODISCARD bool IsDrawingState() const noexcept;
+
+        NODISCARD virtual RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) = 0;
 
     private:
         GraphicsObjectType graphicsObjectType;

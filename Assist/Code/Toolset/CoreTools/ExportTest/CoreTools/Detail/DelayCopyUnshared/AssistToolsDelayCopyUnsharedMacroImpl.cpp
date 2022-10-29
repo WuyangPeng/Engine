@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:12)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:20)
 
 #include "AssistTools/AssistToolsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/AssistToolsClassInvariantMacro.h"
 
 AssistTools::AssistToolsDelayCopyUnsharedMacroImpl::AssistToolsDelayCopyUnsharedMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     ASSIST_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int AssistTools::AssistToolsDelayCopyUnsharedMacroImpl::GetCount() const noexcep
 {
     ASSIST_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void AssistTools::AssistToolsDelayCopyUnsharedMacroImpl::SetCount(int count) noexcept
+void AssistTools::AssistToolsDelayCopyUnsharedMacroImpl::SetCount(int aCount) noexcept
 {
     ASSIST_TOOLS_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

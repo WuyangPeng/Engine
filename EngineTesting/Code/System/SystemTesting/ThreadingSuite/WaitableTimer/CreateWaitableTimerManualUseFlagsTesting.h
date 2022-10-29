@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:39)
+///	引擎测试版本：0.8.1.3 (2022/10/23 0:02)
 
 #ifndef SYSTEM_THREADING_SUITE_CREATE_WAITABLE_TIMER_MANUAL_USE_FLAGS_TESTING_H
 #define SYSTEM_THREADING_SUITE_CREATE_WAITABLE_TIMER_MANUAL_USE_FLAGS_TESTING_H
@@ -35,10 +35,10 @@ namespace System
         void CreateManualTest();
 
     private:
-        using WaitableTimerStandardAccessFlagsCollection = std::vector<MutexStandardAccess>;
+        using WaitableTimerStandardAccessFlagsContainer = std::vector<MutexStandardAccess>;
 
     private:
-        WaitableTimerStandardAccessFlagsCollection waitableTimerStandardAccessFlags;
+        WaitableTimerStandardAccessFlagsContainer waitableTimerStandardAccessFlags;
         WaitableTimerSpecificAccess waitableTimerSpecificAccess;
     };
 }

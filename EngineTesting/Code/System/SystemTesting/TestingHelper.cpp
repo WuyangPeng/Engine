@@ -188,7 +188,7 @@ void System::TestingHelper::AddDynamicLinkSuite()
     ADD_TEST(dynamicLinkSuite, LibraryDirectoryTesting);
     dynamicLinkSuite.AddSuite(GetLoadResourceToolsSuite());
     ADD_TEST(dynamicLinkSuite, EnumResourceDataTesting);
-    dynamicLinkSuite.AddSuite(GetEnumResourceToolsSuite());
+    dynamicLinkSuite.AddSuite(GetEnumResourceToolsSuite()); 
 
     AddSuite(dynamicLinkSuite);
 }

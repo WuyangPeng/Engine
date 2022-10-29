@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:46)
+///	引擎测试版本：0.8.1.3 (2022/10/10 19:53)
 
 #ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_H
 #define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_H
@@ -22,5 +22,6 @@
 #include "LoadResourceTools/FindResourceTesting.h"
 #include "LoadResourceTools/LoadResourceTesting.h"
 #include "LoadResourceTools/LoadStringTesting.h"
+#include "LoadResourceToolsTesting.h"
 
 #endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_H

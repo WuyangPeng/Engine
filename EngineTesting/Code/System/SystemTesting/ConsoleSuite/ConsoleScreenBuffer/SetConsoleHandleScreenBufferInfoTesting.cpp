@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:05)
+///	引擎测试版本：0.8.1.3 (2022/10/15 22:02)
 
 #include "SetConsoleHandleScreenBufferInfoTesting.h"
 #include "System/Console/ConsoleScreenBuffer.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "System/Console/Flags/ConsoleScreenBufferFlags.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -79,10 +80,9 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
     ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.dwMaximumWindowSize.Y, setConsoleScreenBufferInfo.dwMaximumWindowSize.Y);
     ASSERT_EQUAL(currentConsoleScreenBufferInfo.wPopupAttributes, setConsoleScreenBufferInfo.wPopupAttributes);
 
-    constexpr auto colorTableSize = 16;
+    constexpr auto colorTableSize = GetArraySize(currentConsoleScreenBufferInfo.ColorTable);
     for (auto i = 0; i < colorTableSize; ++i)
     {
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -90,7 +90,6 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
         ASSERT_EQUAL(currentConsoleScreenBufferInfo.ColorTable[i], setConsoleScreenBufferInfo.ColorTable[i]);
 
 #include STSTEM_WARNING_POP
-
     }
 
     ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));

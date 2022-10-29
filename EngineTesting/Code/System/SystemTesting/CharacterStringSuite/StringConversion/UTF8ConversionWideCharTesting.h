@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:09)
+///	引擎测试版本：0.8.1.3 (2022/10/14 1:17)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_UTF8_CONVERSION_WIDE_CHAR_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_UTF8_CONVERSION_WIDE_CHAR_TESTING_H
@@ -31,7 +31,7 @@ namespace System
         void MainTest();
 
         void UTF8ConversionWideCharTest();
-        std::string GetUTF8();
+        NODISCARD std::string GetUTF8();
     };
 }
 

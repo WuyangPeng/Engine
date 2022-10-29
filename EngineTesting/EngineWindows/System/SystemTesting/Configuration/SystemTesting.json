@@ -300,13 +300,13 @@
   },
 
   "threadSuite": {
-    "CreateDefaultThreadTesting": 0,
-    "CreateSuspendedThreadTesting": 0,
-    "CreateCThreadTesting": 0,
+    "CreateDefaultThreadTesting": 1,
+    "CreateSuspendedThreadTesting": 1,
+    "CreateCThreadTesting": 1,
     "GetCurrentThreadTesting": 1,
     "ThreadPriorityTesting": 1,
-    "WaitForThreadTesting": 0,
-    "WaitForMultipleThreadTesting": 0
+    "WaitForThreadTesting": 1,
+    "WaitForMultipleThreadTesting": 1
   },
 
   "threadToolsSuite": {

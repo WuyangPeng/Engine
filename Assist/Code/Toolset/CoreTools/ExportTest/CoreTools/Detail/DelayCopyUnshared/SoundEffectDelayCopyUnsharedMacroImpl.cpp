@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:13)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:21)
 
 #include "SoundEffect/SoundEffectExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/SoundEffectClassInvariantMacro.h"
 
 SoundEffect::SoundEffectDelayCopyUnsharedMacroImpl::SoundEffectDelayCopyUnsharedMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     SOUND_EFFECT_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int SoundEffect::SoundEffectDelayCopyUnsharedMacroImpl::GetCount() const noexcep
 {
     SOUND_EFFECT_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void SoundEffect::SoundEffectDelayCopyUnsharedMacroImpl::SetCount(int count) noexcept
+void SoundEffect::SoundEffectDelayCopyUnsharedMacroImpl::SetCount(int aCount) noexcept
 {
     SOUND_EFFECT_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

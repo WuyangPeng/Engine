@@ -5,18 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 18:59)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:40)
 
 #include "Toolset/CoreTools/ExportTest/ExportTestExport.h"
 
 #include "ExportNonCopyImplMacro.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/Export/ExportNonCopyImplMacroImpl.h"
 
-ExportTest::ExportNonCopyImplMacro::ExportNonCopyImplMacro(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+ExportTest::ExportNonCopyImplMacro::ExportNonCopyImplMacro(DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 

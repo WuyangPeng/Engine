@@ -20,6 +20,8 @@ namespace Rendering
     class RasterizerState;
     class SamplerState;
 
+    class GlobalState;
+
     enum class BlendStateColorWrite;
     enum class BlendStateMode;
     enum class BlendStateOperation;

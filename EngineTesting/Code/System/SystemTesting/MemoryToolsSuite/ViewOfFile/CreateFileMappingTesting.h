@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:51)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:33)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_CREATE_FILE_MAPPING_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_CREATE_FILE_MAPPING_TESTING_H
@@ -41,13 +41,13 @@ namespace System
         void DoCreateFileMappingTest(size_t index);
 
     private:
-        using MemoryProtectFlagsCollection = std::vector<MemoryProtect>;
-        using FileMapProtectionFlagsCollection = std::vector<FileMapProtection>;
+        using MemoryProtectFlagsContainer = std::vector<MemoryProtect>;
+        using FileMapProtectionFlagsContainer = std::vector<FileMapProtection>;
         using MappingType = std::map<MemoryProtect, FileHandleDesiredAccess>;
 
     private:
-        MemoryProtectFlagsCollection memoryProtectFlags;
-        FileMapProtectionFlagsCollection fileMapProtectionFlags;
+        MemoryProtectFlagsContainer memoryProtectFlags;
+        FileMapProtectionFlagsContainer fileMapProtectionFlags;
         MappingType mapping;
         std::default_random_engine randomEngine;
     };

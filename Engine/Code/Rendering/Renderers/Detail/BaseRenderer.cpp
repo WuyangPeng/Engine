@@ -12,16 +12,18 @@
 #include "BaseRenderer.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "Rendering/Base/RendererObjectBridge.h"
 #include "Rendering/LocalEffects/Font.h"
 #include "Rendering/State/BlendState.h"
 #include "Rendering/State/DepthStencilState.h"
 #include "Rendering/State/RasterizerState.h"
 
-Rendering::BaseRenderer::BaseRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+Rendering::BaseRenderer::BaseRenderer(RendererTypes rendererTypes, const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
     : renderingEnvironment{ renderingEnvironment },
       renderingDevice{ renderingEnvironment.GetRenderingDevice() },
 
       rendererBasis{ basis },
+      rendererObjectBridge{ RendererObjectBridge::Create() },
 
       clearColor{ 1.0f, 1.0f, 1.0f, 1.0f },
       clearDepth{ 0.0f },
@@ -30,29 +32,9 @@ Rendering::BaseRenderer::BaseRenderer(const RenderingEnvironment& renderingEnvir
       defaultFont{ std::make_shared<Font>() },
       activeFont{ defaultFont },
 
-      defaultBlendState{ std::make_shared<BlendState>("BlendState") },
-      activeBlendState{ defaultBlendState },
-      defaultDepthStencilState{ std::make_shared<DepthStencilState>("DepthStencilState") },
-      activeDepthStencilState{ defaultDepthStencilState },
-      defaultRasterizerState{ std::make_shared<RasterizerState>("RasterizerState") },
-      activeRasterizerState{ defaultRasterizerState }
+      globalState{ rendererTypes, "BlendState", "DepthStencilState", "RasterizerState", rendererObjectBridge }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
-}
-
-void Rendering::BaseRenderer::CreateDefaultGlobalState()
-{
-#if defined(RENDERING_USE_NAMED_OBJECTS)
-
-    defaultBlendState->SetName("BaseRenderer::defaultBlendState");
-    defaultDepthStencilState->SetName("BaseRenderer::defaultDepthStencilState");
-    defaultRasterizerState->SetName("BaseRenderer::defaultRasterizerState");
-
-#endif  // RENDERING_USE_NAMED_OBJECTS
-
-    SetDefaultBlendState();
-    SetDefaultDepthStencilState();
-    SetDefaultRasterizerState();
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -60,13 +42,7 @@ void Rendering::BaseRenderer::CreateDefaultGlobalState()
 bool Rendering::BaseRenderer::IsValid() const noexcept
 {
     if (defaultFont != nullptr &&
-        activeFont != nullptr &&
-        defaultBlendState != nullptr &&
-        activeBlendState != nullptr &&
-        defaultDepthStencilState != nullptr &&
-        activeDepthStencilState != nullptr &&
-        defaultRasterizerState != nullptr &&
-        activeRasterizerState != nullptr)
+        activeFont != nullptr)
     {
         return true;
     }
@@ -185,94 +161,74 @@ Rendering::BaseRenderer::FontSharedPtr Rendering::BaseRenderer::GetDefaultFont()
     return defaultFont;
 }
 
-void Rendering::BaseRenderer::SetActiveBlendState(const BlendStateSharedPtr& state) noexcept
+void Rendering::BaseRenderer::SetActiveBlendState(const BlendStateSharedPtr& state)  
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    activeBlendState = state;
+    globalState.SetActiveBlendState(state);
 }
 
-Rendering::BaseRenderer::BlendStateSharedPtr Rendering::BaseRenderer::GetBlendState() const noexcept
+Rendering::BaseRenderer::BlendStateSharedPtr Rendering::BaseRenderer::GetBlendState() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return activeBlendState;
+    return globalState.GetActiveBlendState();
 }
 
-void Rendering::BaseRenderer::SetDefaultBlendState()
+Rendering::BaseRenderer::BlendStateSharedPtr Rendering::BaseRenderer::GetDefaultBlendState() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return globalState.GetDefaultBlendState();
+}
+
+void Rendering::BaseRenderer::SetActiveDepthStencilState(const DepthStencilStateSharedPtr& state)  
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    SetBlendState(defaultBlendState);
+    globalState.SetActiveDepthStencilState(state);
 }
 
-Rendering::BaseRenderer::BlendStateSharedPtr Rendering::BaseRenderer::GetDefaultBlendState() const noexcept
+Rendering::BaseRenderer::DepthStencilStateSharedPtr Rendering::BaseRenderer::GetDepthStencilState() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return defaultBlendState;
+    return globalState.GetActiveDepthStencilState();
 }
 
-void Rendering::BaseRenderer::SetActiveDepthStencilState(const DepthStencilStateSharedPtr& state) noexcept
+Rendering::BaseRenderer::DepthStencilStateSharedPtr Rendering::BaseRenderer::GetDefaultDepthStencilState() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return globalState.GetDefaultDepthStencilState();
+}
+
+void Rendering::BaseRenderer::SetActiveRasterizerState(const RasterizerStateSharedPtr& state)  
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    activeDepthStencilState = state;
+    globalState.SetActiveRasterizerState(state);
 }
 
-Rendering::BaseRenderer::DepthStencilStateSharedPtr Rendering::BaseRenderer::GetDepthStencilState() const noexcept
+Rendering::BaseRenderer::RasterizerStateSharedPtr Rendering::BaseRenderer::GetRasterizerState() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return activeDepthStencilState;
+    return globalState.GetActiveRasterizerState();
 }
 
-void Rendering::BaseRenderer::SetDefaultDepthStencilState()
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    SetDepthStencilState(defaultDepthStencilState);
-}
-
-Rendering::BaseRenderer::DepthStencilStateSharedPtr Rendering::BaseRenderer::GetDefaultDepthStencilState() const noexcept
+Rendering::BaseRenderer::RasterizerStateSharedPtr Rendering::BaseRenderer::GetDefaultRasterizerState() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return defaultDepthStencilState;
-}
-
-void Rendering::BaseRenderer::SetActiveRasterizerState(const RasterizerStateSharedPtr& state) noexcept
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    activeRasterizerState = state;
-}
-
-Rendering::BaseRenderer::RasterizerStateSharedPtr Rendering::BaseRenderer::GetRasterizerState() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return activeRasterizerState;
-}
-
-void Rendering::BaseRenderer::SetDefaultRasterizerState()
-{
-    RENDERING_CLASS_IS_VALID_1;
-
-    SetRasterizerState(defaultRasterizerState);
-}
-
-Rendering::BaseRenderer::RasterizerStateSharedPtr Rendering::BaseRenderer::GetDefaultRasterizerState() const noexcept
-{
-    RENDERING_CLASS_IS_VALID_CONST_1;
-
-    return defaultRasterizerState;
+    return globalState.GetDefaultRasterizerState();
 }
 
 void Rendering::BaseRenderer::Release()
 {
     RENDERING_CLASS_IS_VALID_1;
 
+    globalState.DestroyDefaultGlobalState();
     renderingEnvironment.Release();
 }
 
@@ -295,4 +251,5 @@ void Rendering::BaseRenderer::InitDevice()
     RENDERING_CLASS_IS_VALID_1;
 
     renderingDevice.InitDevice();
+    globalState.CreateDefaultGlobalState();
 }

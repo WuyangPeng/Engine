@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:36)
+///	引擎测试版本：0.8.1.3 (2022/10/22 20:03)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_SEMAPHORE_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_SEMAPHORE_TESTING_H
@@ -38,12 +38,12 @@ namespace System
         void WaitForSemaphoreTest(const String& semaphoreName);
 
     private:
-        using SemaphoreStandardAccessFlagsCollection = std::vector<MutexStandardAccess>;
-        using SemaphoreSpecificAccessFlagsCollection = std::vector<SemaphoreSpecificAccess>;
+        using SemaphoreStandardAccessFlagsContainer = std::vector<MutexStandardAccess>;
+        using SemaphoreSpecificAccessFlagsContainer = std::vector<SemaphoreSpecificAccess>;
 
     private:
-        SemaphoreStandardAccessFlagsCollection semaphoreStandardAccessFlags;
-        SemaphoreSpecificAccessFlagsCollection semaphoreSpecificAccessFlags;
+        SemaphoreStandardAccessFlagsContainer semaphoreStandardAccessFlags;
+        SemaphoreSpecificAccessFlagsContainer semaphoreSpecificAccessFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

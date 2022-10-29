@@ -69,6 +69,8 @@ namespace Rendering
         void MakeShared() noexcept;
         NODISCARD bool IsShared() const noexcept;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         PackageType impl;
         bool shared;

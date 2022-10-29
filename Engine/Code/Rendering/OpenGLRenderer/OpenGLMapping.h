@@ -15,8 +15,8 @@
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
+#include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/SceneGraph/Flags/VisualFlags.h"
 #include "Rendering/Shaders/Flags/AlphaStateFlags.h"
 #include "Rendering/Shaders/Flags/DepthStateFlags.h"
@@ -32,19 +32,11 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE OpenGLConstant
     {
     public:
-        NODISCARD static Enum GetOpenGLAlphaSrcBlend(int index);
-        NODISCARD static Enum GetOpenGLAlphaDstBlend(int index);
-        NODISCARD static Enum GetOpenGLAlphaCompare(int index);
-        NODISCARD static Enum GetOpenGLDepthCompare(int index);
-        NODISCARD static Enum GetOpenGLStencilCompare(int index);
-        NODISCARD static Enum GetOpenGLStencilOperation(int index);
         NODISCARD static Int GetOpenGLAttributeChannels(int index);
         NODISCARD static UInt GetOpenGLAttributeType(int index);
         NODISCARD static UInt GetOpenGLBufferLocking(int index);
         NODISCARD static UInt GetOpenGLBufferUsage(int index);
-        NODISCARD static Int GetOpenGLMinFilter(int index);
         NODISCARD static UInt GetOpenGLTextureFormat(int index);
-        NODISCARD static UInt GetOpenGLTextureInternalFormat(int index);
         NODISCARD static UInt GetOpenGLTextureTarget(int index);
         NODISCARD static UInt GetOpenGLTextureTargetBinding(int index);
         NODISCARD static UInt GetOpenGLTextureType(int index);

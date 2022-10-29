@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:45)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:24)
 
 #include "WaitForMultipleEventTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -66,19 +66,19 @@ void System::WaitForMultipleEventTesting::WaitMultipleObjectsTest()
     }
 }
 
-void System::WaitForMultipleEventTesting::WaitForManualEventTest0(const std::vector<WindowsHandle>& eventHandle)
+void System::WaitForMultipleEventTesting::WaitForManualEventTest0(const Container& eventHandle)
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 }
 
-void System::WaitForMultipleEventTesting::WaitForManualEventTest1(const std::vector<WindowsHandle>& eventHandle)
+void System::WaitForMultipleEventTesting::WaitForManualEventTest1(const Container& eventHandle)
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 }
 
-void System::WaitForMultipleEventTesting::WaitForManualEventTest2(const std::vector<WindowsHandle>& eventHandle)
+void System::WaitForMultipleEventTesting::WaitForManualEventTest2(const Container& eventHandle)
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);

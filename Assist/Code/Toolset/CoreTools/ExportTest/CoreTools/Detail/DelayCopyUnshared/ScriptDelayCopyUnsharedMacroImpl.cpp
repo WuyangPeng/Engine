@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:13)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:21)
 
 #include "Script/ScriptExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/ScriptClassInvariantMacro.h"
 
 Script::ScriptDelayCopyUnsharedMacroImpl::ScriptDelayCopyUnsharedMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     SCRIPT_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Script::ScriptDelayCopyUnsharedMacroImpl::GetCount() const noexcept
 {
     SCRIPT_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Script::ScriptDelayCopyUnsharedMacroImpl::SetCount(int count) noexcept
+void Script::ScriptDelayCopyUnsharedMacroImpl::SetCount(int aCount) noexcept
 {
     SCRIPT_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

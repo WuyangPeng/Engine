@@ -10,12 +10,15 @@
 #include "Rendering/RenderingExport.h"
 
 #include "TextureDepthStencil.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureDepthStencil.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Resources/DataFormat.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TextureDepthStencil);
@@ -138,4 +141,17 @@ void Rendering::TextureDepthStencil::ReadFromFile(ReadFileManager& inFile)
     ParentType::ReadFromFile(inFile);
 
     inFile.Read(sizeof(bool), &shaderInput);
+}
+
+Rendering::TextureDepthStencil::RendererObjectSharedPtr Rendering::TextureDepthStencil::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLTextureDepthStencil>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

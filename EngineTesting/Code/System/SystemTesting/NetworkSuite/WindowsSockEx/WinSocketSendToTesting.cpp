@@ -74,12 +74,12 @@ void System::WinSocketSendToTesting::SendToTest()
 
     const auto serverHostname = mainTree.get<string>("ConnectHostname");
 
-    WinSockAddrIn addr{};
-    constexpr int length{ sizeof(WinSockAddrIn) };
+    WinSockInternetAddress addr{};
+    constexpr int length{ sizeof(WinSockInternetAddress) };
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(80);
-    addr.sin_addr.s_addr = GetInetAddr(serverHostname.c_str());
+    addr.sin_addr.s_addr = GetInternetAddress(serverHostname.c_str());
 
     const auto socketHandle = GetWinSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp, nullptr, 0, 0);
 

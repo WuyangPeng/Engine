@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:42)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:07)
 
 #include "Framework/FrameworkExport.h"
 
 #include "FrameworkCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/CopyUnshared/FrameworkCopyUnsharedMacroImpl.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Framework, FrameworkCopyUnsharedMacro)
 
 Framework::FrameworkCopyUnsharedMacro::FrameworkCopyUnsharedMacro(int count)
     : impl{ count }
@@ -34,5 +36,3 @@ void Framework::FrameworkCopyUnsharedMacro::SetCount(int count) noexcept
 
     impl->SetCount(count);
 }
-
-COPY_UNSHARED_CLONE_SELF_DEFINE(Framework, FrameworkCopyUnsharedMacro)

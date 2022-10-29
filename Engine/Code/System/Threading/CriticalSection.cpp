@@ -1,20 +1,22 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 18:11)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/21 0:10)
 
 #include "System/SystemExport.h"
 
 #if defined(SYSTEM_USING_VC80) && defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
+
     // 查看评论在
     // http://msdn.microsoft.com/en-us/library/ms683476(VS.85).aspx，
     // 关于为什么这些#defines要在InitializeCriticalSectionAndSpinCount中暴露。
     #define WIN32_LEAN_AND_MEAN
     #define _WIN32_WINNT 0x0500
+
 #endif  // CORE_TOOLS_USING_VC80 && SYSTEM_SPIN_COUNT_CRITICAL_SECTION
 
 #include "CriticalSection.h"

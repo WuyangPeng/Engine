@@ -62,8 +62,8 @@ System::String System::GetEngineeringExeSuffix()
 
 System::String System::GetEngineeringDirectory()
 {
-    array<DynamicLinkCharType, g_MaxPath> moduleFileName{};
-    const auto maxFileNameLength = GetDynamicLinkFileName(nullptr, moduleFileName.data(), g_MaxPath);
+    array<DynamicLinkCharType, gMaxPath> moduleFileName{};
+    const auto maxFileNameLength = GetDynamicLinkFileName(nullptr, moduleFileName.data(), gMaxPath);
 
     if (maxFileNameLength == 0)
     {

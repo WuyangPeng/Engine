@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:48)
+///	引擎测试版本：0.8.1.3 (2022/10/10 20:07)
 
 #include "GetModuleHandleTesting.h"
 #include "System/DynamicLink/Flags/GetModuleHandleFlags.h"

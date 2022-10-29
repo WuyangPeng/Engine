@@ -41,7 +41,7 @@ bool System::WinSocketConnect(WinSocket winSocket,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != g_SocketError)
+    if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != gSocketError)
         return true;
     else
         return false;
@@ -84,7 +84,7 @@ bool System::WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigne
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAHtonl(winSocket, hostlong, netlong) != g_SocketError)
+    if (::WSAHtonl(winSocket, hostlong, netlong) != gSocketError)
         return true;
     else
         return false;
@@ -102,7 +102,7 @@ bool System::WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsig
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAHtons(winSocket, hostshort, netshort) != g_SocketError)
+    if (::WSAHtons(winSocket, hostshort, netshort) != gSocketError)
         return true;
     else
         return false;
@@ -120,7 +120,7 @@ bool System::WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSANtohl(winSocket, netlong, hostlong) != g_SocketError)
+    if (::WSANtohl(winSocket, netlong, hostlong) != gSocketError)
         return true;
     else
         return false;
@@ -138,7 +138,7 @@ bool System::WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsign
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSANtohs(winSocket, netshort, hostshort) != g_SocketError)
+    if (::WSANtohs(winSocket, netshort, hostshort) != gSocketError)
         return true;
     else
         return false;

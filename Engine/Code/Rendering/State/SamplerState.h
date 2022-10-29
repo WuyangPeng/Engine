@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "DrawingState.h"
+#include "StateFwd.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/DataTypes/Colour.h"
@@ -35,7 +36,18 @@ namespace Rendering
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(SamplerState);
 
+        NODISCARD SamplerStateFilter GetFilter() const noexcept;
+        NODISCARD SamplerStateMode GetMode(int index) const;
+        NODISCARD float GetMipLODBias() const noexcept;
+        NODISCARD int GetMaxAnisotropy() const noexcept;
+        NODISCARD SamplerStateComparison GetComparison() const noexcept;
+        NODISCARD Colour GetBorderColor() const noexcept;
+        NODISCARD float GetMinLOD() const noexcept;
+        NODISCARD float GetMaxLOD() const noexcept;
+
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
 
     private:
         PackageType impl;

@@ -80,6 +80,8 @@ namespace Rendering
 
         NODISCARD int GetIndex(int cube, int face, int level) const noexcept;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         static constexpr auto cubeFaceCount = System::EnumCastUnderlying(CubeFaceType::Count);
 

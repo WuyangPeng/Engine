@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 19:00)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:39)
 
 #include "Toolset/CoreTools/ExportTest/ExportTestExport.h"
 
 #include "CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/Export/CopyUnsharedMacroImpl.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(ExportTest, CopyUnsharedMacro)
 
 ExportTest::CopyUnsharedMacro::CopyUnsharedMacro(int count)
     : impl{ count }
@@ -20,7 +22,6 @@ ExportTest::CopyUnsharedMacro::CopyUnsharedMacro(int count)
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ExportTest, CopyUnsharedMacro)
-COPY_UNSHARED_CLONE_SELF_DEFINE(ExportTest, CopyUnsharedMacro)
 
 int ExportTest::CopyUnsharedMacro::GetCount() const noexcept
 {

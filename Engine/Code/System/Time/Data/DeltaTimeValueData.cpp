@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 16:37)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/28 23:51)
 
 #include "System/SystemExport.h"
 
@@ -53,7 +53,7 @@ void System::DeltaTimeValueData::Correction() noexcept
 {
     if (deltaTimeValue.tv_usec < 0)
     {
-        deltaTimeValue.tv_usec += g_Microseconds;
+        deltaTimeValue.tv_usec += gMicroseconds;
         --deltaTimeValue.tv_sec;
     }
 }

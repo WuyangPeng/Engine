@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:40)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:14)
 
 #include "ResourceManager/ResourceManagerExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/ResourceManagerClassInvariantMacro.h"
 
 ResourceManager::ResourceManagerTestExportCopyMacroImpl::ResourceManagerTestExportCopyMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     RESOURCE_MANAGER_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int ResourceManager::ResourceManagerTestExportCopyMacroImpl::GetCount() const no
 {
     RESOURCE_MANAGER_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void ResourceManager::ResourceManagerTestExportCopyMacroImpl::SetCount(int count) noexcept
+void ResourceManager::ResourceManagerTestExportCopyMacroImpl::SetCount(int aCount) noexcept
 {
     RESOURCE_MANAGER_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

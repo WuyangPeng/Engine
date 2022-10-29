@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:48)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/12 23:46)
 
 #include "System/SystemExport.h"
 
@@ -20,10 +20,14 @@
 #ifndef SYSTEM_PLATFORM_WIN32
 
     #ifdef SYSTEM_PLATFORM_ANDROID
+
         #include <iconv.h>
+
     #else  // !SYSTEM_PLATFORM_ANDROID
+
         #include <cstdlib>
         #include <locale>
+
     #endif  // SYSTEM_PLATFORM_ANDROID
 
 #endif  // SYSTEM_PLATFORM_WIN32
@@ -32,7 +36,7 @@
 
 namespace System
 {
-    const char* SYSTEM_HIDDEN_DECLARE GetLocale(CodePage codePage) noexcept
+    NODISCARD const char* SYSTEM_HIDDEN_DECLARE GetLocale(CodePage codePage) noexcept
     {
         if (codePage == CodePage::UTF8)
             return "zh_CN.utf8";
@@ -40,7 +44,7 @@ namespace System
             return "chs";
     }
 
-    int SYSTEM_HIDDEN_DECLARE IncreaseNullNumber(int readSize) noexcept
+    NODISCARD int SYSTEM_HIDDEN_DECLARE IncreaseNullNumber(int readSize) noexcept
     {
         // 错误统一返回0
         if (readSize < 0)
@@ -49,7 +53,7 @@ namespace System
             return readSize + 1;
     }
 
-    int SYSTEM_HIDDEN_DECLARE MultiByteToWideCharUseMbstowcs(CodePage codePage, const char* multiByte, wchar_t* wideChar, int wideCharLength) noexcept
+    NODISCARD int SYSTEM_HIDDEN_DECLARE MultiByteToWideCharUseMbstowcs(CodePage codePage, const char* multiByte, wchar_t* wideChar, int wideCharLength) noexcept
     {
         auto currentLocale = setlocale(LC_ALL, nullptr);
 
@@ -83,13 +87,15 @@ int System::UTF8ConversionWideChar(const char* multiByte, int multiByteLength, w
     return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
 }
 
-int System::MultiByteConversionWideChar(CodePage codePage, MAYBE_UNUSED MultiByte flag, const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
+int System::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     return ::MultiByteToWideChar(EnumCastUnderlying(codePage), EnumCastUnderlying(flag), multiByte, multiByteLength, wideChar, wideCharLength);
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    UnusedFunction(flag);
 
     // 返回值包括空终止符
     if (wideChar != nullptr)
@@ -104,7 +110,7 @@ int System::MultiByteConversionWideChar(CodePage codePage, MAYBE_UNUSED MultiByt
 
 namespace System
 {
-    int SYSTEM_HIDDEN_DECLARE WideCharToMultiByteUseWcstombs(CodePage codePage, const wchar_t* wideChar, char* multiByte, int multiByteLength) noexcept
+    NODISCARD int SYSTEM_HIDDEN_DECLARE WideCharToMultiByteUseWcstombs(CodePage codePage, const wchar_t* wideChar, char* multiByte, int multiByteLength) noexcept
     {
         auto currentLocale = setlocale(LC_ALL, nullptr);
 

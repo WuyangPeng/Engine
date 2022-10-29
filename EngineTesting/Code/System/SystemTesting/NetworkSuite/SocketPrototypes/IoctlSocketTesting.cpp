@@ -42,7 +42,7 @@ void System::IoctlSocketTesting::MainTest()
 
 void System::IoctlSocketTesting::IoctlSocketTest()
 {
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     unsigned long argp{ 0 };

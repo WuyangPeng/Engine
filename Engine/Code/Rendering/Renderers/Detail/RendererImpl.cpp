@@ -29,8 +29,8 @@
 
 #include <memory>
 
-Rendering::RendererImpl::RendererImpl(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
-    : ParentType{ renderingEnvironment, basis },
+Rendering::RendererImpl::RendererImpl(RendererTypes rendererTypes, const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+    : ParentType{ rendererTypes, renderingEnvironment, basis },
 
       defaultAlphaState{ std::make_shared<AlphaState>(CoreTools::DisableNotThrow::Disable) },
       defaultCullState{ std::make_shared<CullState>(CoreTools::DisableNotThrow::Disable) },
@@ -58,7 +58,6 @@ Rendering::RendererImpl::RendererImpl(const RenderingEnvironment& renderingEnvir
       vertexShaderManagement{},
       pixelShaderManagement{},
 
-      globalState{},
       cameraState{},
       clearParameter{},
       viewportManagement{},

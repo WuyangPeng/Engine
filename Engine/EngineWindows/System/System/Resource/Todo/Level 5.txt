@@ -1,14 +1,9 @@
 TODO Level 5
 
-0.8.1.2
+0.8.1.3
 
 1. （Helper）考虑是否添加不同类型枚举之间的数学运算符。
 2. （Helper）ENUM_INCREMENTABLE_OPERATOR_DEFINE和ENUM_DECREMENTABLE_OPERATOR_DEFINE宏使用了reinterpret_cast，考虑是否需要进行修正。
 3. （Helper）枚举的数学运算符：定义枚举的运算符目前使用宏的方式，按照原有设计，应该使用模板定义枚举的数学运算符，考虑是否有解决方案。
 4. （MemoryTools）完成MemoryTools非Windows平台的实现：HeapTools。
 
-
-
-
-
-		

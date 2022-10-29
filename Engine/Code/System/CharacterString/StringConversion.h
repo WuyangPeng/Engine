@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:46)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/12 23:41)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
@@ -35,10 +35,22 @@ namespace System
                                                                      const char* defaultChar,
                                                                      bool* usedDefaultChar) noexcept;
 
-    NODISCARD int SYSTEM_DEFAULT_DECLARE MultiByteConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE UTF8ConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionMultiByte(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionUTF8(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE MultiByteConversionWideChar(const char* multiByte,
+                                                                     int multiByteLength,
+                                                                     wchar_t* wideChar,
+                                                                     int wideCharLength) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE UTF8ConversionWideChar(const char* multiByte,
+                                                                int multiByteLength,
+                                                                wchar_t* wideChar,
+                                                                int wideCharLength) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionMultiByte(const wchar_t* wideChar,
+                                                                     int wideCharLength,
+                                                                     char* multiByte,
+                                                                     int multiByteLength) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionUTF8(const wchar_t* wideChar,
+                                                                int wideCharLength,
+                                                                char* multiByte,
+                                                                int multiByteLength) noexcept;
 
     // lhsCount和rhsCount不包括空终止符
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(LanguageLocale locale,

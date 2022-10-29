@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:10)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:23)
 
 #include "Toolset/CoreTools/ExportTest/ExportTestExport.h"
 
@@ -15,7 +15,7 @@
 using std::make_shared;
 
 ExportTest::CopyUnsharedUseCloneMacroImpl::CopyUnsharedUseCloneMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -26,14 +26,14 @@ int ExportTest::CopyUnsharedUseCloneMacroImpl::GetCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void ExportTest::CopyUnsharedUseCloneMacroImpl::SetCount(int count) noexcept
+void ExportTest::CopyUnsharedUseCloneMacroImpl::SetCount(int aCount) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }
 
 ExportTest::CopyUnsharedUseCloneMacroImpl::SharedPtr ExportTest::CopyUnsharedUseCloneMacroImpl::Clone() const

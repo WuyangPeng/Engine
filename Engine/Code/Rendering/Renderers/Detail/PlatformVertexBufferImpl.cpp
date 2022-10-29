@@ -12,7 +12,6 @@
 #include "PlatformVertexBufferImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Dx9Renderer/Dx9VertexBuffer.h"
-#include "Rendering/OpenGLRenderer/OpenGLVertexBuffer.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/Renderer.h"
 
@@ -38,13 +37,13 @@ Rendering::PlatformVertexBufferImpl::PlatformVertexBufferSharedPtr Rendering::Pl
         case RendererTypes::Windows:
             return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::Glut:
-            return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);
+            return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::OpenGL:
-            return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);
+            return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::Dx11:
             return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         case RendererTypes::OpenGLES:
-            return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);
+            return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
         default:
             return CreateDefault(renderer, vertexBuffer);
     }
@@ -53,5 +52,5 @@ Rendering::PlatformVertexBufferImpl::PlatformVertexBufferSharedPtr Rendering::Pl
 // static
 Rendering::PlatformVertexBufferImpl::PlatformVertexBufferSharedPtr Rendering::PlatformVertexBufferImpl::CreateDefault(Renderer* renderer, const VertexBuffer* vertexBuffer)
 {
-    return make_shared<OpenGLVertexBuffer>(renderer, vertexBuffer);
+    return make_shared<Dx9VertexBuffer>(renderer, vertexBuffer);
 }

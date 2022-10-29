@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:07)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:33)
 
 #include "InputOutput/InputOutputExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/InputOutputClassInvariantMacro.h"
 
 InputOutput::InputOutputNonCopyMacroImpl::InputOutputNonCopyMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     INPUT_OUTPUT_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int InputOutput::InputOutputNonCopyMacroImpl::GetCount() const noexcept
 {
     INPUT_OUTPUT_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void InputOutput::InputOutputNonCopyMacroImpl::SetCount(int count) noexcept
+void InputOutput::InputOutputNonCopyMacroImpl::SetCount(int aCount) noexcept
 {
     INPUT_OUTPUT_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

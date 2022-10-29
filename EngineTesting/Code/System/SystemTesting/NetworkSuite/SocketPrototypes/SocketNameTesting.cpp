@@ -70,24 +70,24 @@ void System::SocketNameTesting::SocketNameTest()
 
     const auto serverHostname = mainTree.get<string>("ConnectHostname");
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
 
-    addr.sin_family = static_cast<short>(AddressFamilies::Inet);
+    addr.sin_family = static_cast<short>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(80);
-    addr.sin_addr.s_addr = GetInetAddr(serverHostname.c_str());
+    addr.sin_addr.s_addr = GetInternetAddress(serverHostname.c_str());
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "ªÒ»°socket ß∞‹°£");
 
     ASSERT_TRUE(Connect(socketHandle, &addr));
 
-    WinSockAddrIn peerName{};
-    int peerNameSize{ sizeof(WinSockAddrIn) };
+    WinSockInternetAddress peerName{};
+    int peerNameSize{ sizeof(WinSockInternetAddress) };
 
     ASSERT_TRUE(GetPeerName(socketHandle, &peerName, &peerNameSize));
 
-    WinSockAddrIn sockName = {};
-    int sockNameSize{ sizeof(WinSockAddrIn) };
+    WinSockInternetAddress sockName = {};
+    int sockNameSize{ sizeof(WinSockInternetAddress) };
 
     ASSERT_TRUE(GetSockName(socketHandle, &sockName, &sockNameSize));
 

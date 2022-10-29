@@ -18,7 +18,7 @@
 
 template <typename AndroidProcess>
 Framework::AndroidFrameBuild<AndroidProcess>::AndroidFrameBuild(AndroidApp* state)
-    : state{ state }, androidProcess{ System::g_Microseconds / interval }, androidMessageLoop{ state, androidProcess.GetDisplay() }
+    : state{ state }, androidProcess{ System::gMicroseconds / interval }, androidMessageLoop{ state, androidProcess.GetDisplay() }
 {
     System::AppDummy();
 

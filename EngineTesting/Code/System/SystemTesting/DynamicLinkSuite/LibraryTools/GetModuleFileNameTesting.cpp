@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:47)
+///	引擎测试版本：0.8.1.3 (2022/10/10 20:07)
 
 #include "GetModuleFileNameTesting.h"
 #include "System/DynamicLink/Flags/GetModuleHandleFlags.h"
@@ -45,12 +45,12 @@ void System::GetModuleFileNameTesting::GetModuleFileNameSucceedTest()
 {
     auto libraryModule = GetDynamicLibrary();
 
-    array<DynamicLinkCharType, g_MaxPath> moduleFileName{};
-    const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), g_MaxPath);
+    array<DynamicLinkCharType, gMaxPath> moduleFileName{};
+    const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), gMaxPath);
 
     DynamicLinkString dllModuleFileName{ moduleFileName.data() };
 
-    ASSERT_TRUE(0 < maxFileNameLength && maxFileNameLength < g_MaxPath);
+    ASSERT_TRUE(0 < maxFileNameLength && maxFileNameLength < gMaxPath);
     ASSERT_EQUAL(dllModuleFileName.size(), maxFileNameLength);
 
     ASSERT_UNEQUAL(dllModuleFileName.find(GetResource()), DynamicLinkString::npos);
@@ -64,8 +64,8 @@ void System::GetModuleFileNameTesting::GetModuleFileNameFailureTest()
     auto libraryModule = GetDynamicLibrary();
     Destroy(libraryModule);
 
-    array<DynamicLinkCharType, g_MaxPath> moduleFileName{};
-    const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), g_MaxPath);
+    array<DynamicLinkCharType, gMaxPath> moduleFileName{};
+    const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), gMaxPath);
 
     ASSERT_EQUAL(0u, maxFileNameLength);
 

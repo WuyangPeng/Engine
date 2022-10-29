@@ -96,3 +96,10 @@ Rendering::GraphicsObjectTest::ObjectInterfaceSharedPtr Rendering::GraphicsObjec
 
     return std::make_shared<ClassType>(*this);
 }
+
+Rendering::GraphicsObjectTest::RendererObjectSharedPtr Rendering::GraphicsObjectTest::CreateRendererObject(MAYBE_UNUSED RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    THROW_EXCEPTION(SYSTEM_TEXT("RendererObject对象不存在。"));
+}

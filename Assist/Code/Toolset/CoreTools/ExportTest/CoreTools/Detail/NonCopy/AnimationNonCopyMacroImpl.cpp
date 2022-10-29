@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:05)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:31)
 
 #include "Animation/AnimationExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/AnimationClassInvariantMacro.h"
 
 Animation::AnimationNonCopyMacroImpl::AnimationNonCopyMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     ANIMATION_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Animation::AnimationNonCopyMacroImpl::GetCount() const noexcept
 {
     ANIMATION_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Animation::AnimationNonCopyMacroImpl::SetCount(int count) noexcept
+void Animation::AnimationNonCopyMacroImpl::SetCount(int aCount) noexcept
 {
     ANIMATION_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

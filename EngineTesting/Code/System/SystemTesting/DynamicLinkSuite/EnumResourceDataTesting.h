@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:46)
+///	引擎测试版本：0.8.1.3 (2022/10/10 19:53)
 
 #ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_ENUM_RESOURCE_DATA_TESTING_H
 #define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_ENUM_RESOURCE_DATA_TESTING_H
@@ -35,20 +35,20 @@ namespace System
         void MainTest();
 
     private:
-        using PrimaryLanguageFlagsCollection = std::vector<PrimaryLanguage>;
-        using SubLanguageFlagsCollection = std::vector<SubLanguage>;
-        using TypeFlagsCollection = std::vector<const DynamicLinkCharType*>;
-        using NameFlagsCollection = std::vector<const DynamicLinkCharType*>;
+        using PrimaryLanguageFlagsContainer = std::vector<PrimaryLanguage>;
+        using SubLanguageFlagsContainer = std::vector<SubLanguage>;
+        using TypeFlagsContainer = std::vector<const DynamicLinkCharType*>;
+        using NameFlagsContainer = std::vector<const DynamicLinkCharType*>;
 
-        NODISCARD static NameFlagsCollection CreateNameFlags();
+        NODISCARD static NameFlagsContainer CreateNameFlags();
         NODISCARD bool RandomShuffleFlags();
         void DataTest();
 
     private:
-        PrimaryLanguageFlagsCollection primaryLanguageFlags;
-        SubLanguageFlagsCollection subLanguageFlags;
-        TypeFlagsCollection typeFlags;
-        NameFlagsCollection nameFlags;
+        PrimaryLanguageFlagsContainer primaryLanguageFlags;
+        SubLanguageFlagsContainer subLanguageFlags;
+        TypeFlagsContainer typeFlags;
+        NameFlagsContainer nameFlags;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

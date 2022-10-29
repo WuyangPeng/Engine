@@ -16,7 +16,7 @@
 #include "Rendering/Renderers/RendererParameter.h"
 
 Rendering::Dx9Renderer::Dx9Renderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
-    : ParentType{ RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
+    : ParentType{ RendererTypes::Dx11, RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

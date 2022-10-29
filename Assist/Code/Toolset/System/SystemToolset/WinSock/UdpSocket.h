@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 17:14)
+///	引擎辅助版本：0.8.1.3 (2022/10/27 23:45)
 
 #ifndef SYSTEM_TOOLSET_UDP_SOCKET_H
 #define SYSTEM_TOOLSET_UDP_SOCKET_H
@@ -15,7 +15,6 @@
 #include "System/Network/Using/SocketPrototypesUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/UserMacro.h"
 #include "Toolset/System/SystemToolset/Helper/UserMacro.h"
 
 namespace SystemToolset
@@ -24,25 +23,30 @@ namespace SystemToolset
     {
     public:
         using ClassType = UdpSocket;
+
         using WinSocket = System::WinSocket;
-        using WinSockAddrIn = System::WinSockAddrIn;
+        using DisableNotThrow = CoreTools::DisableNotThrow;
 
     public:
-        explicit UdpSocket(CoreTools::DisableNotThrow disableNotThrow);
+        NODISCARD static UdpSocket Create();
+
         ~UdpSocket() noexcept;
         UdpSocket(const UdpSocket& rhs) noexcept = delete;
         UdpSocket& operator=(const UdpSocket& rhs) noexcept = delete;
-        UdpSocket(UdpSocket&& rhs) noexcept = delete;
-        UdpSocket& operator=(UdpSocket&& rhs) noexcept = delete;
+        UdpSocket(UdpSocket&& rhs) noexcept;
+        UdpSocket& operator=(UdpSocket&& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD WinSocket GetSocket() noexcept;
+        NODISCARD WinSocket GetWinSocket() noexcept;
+
         void Send();
 
     private:
+        explicit UdpSocket(DisableNotThrow disableNotThrow);
+
+        void InitSocket();
         void CloseSocket();
-        void Send(const WinSockAddrIn& addr);
 
     private:
         WinSocket winSocket;

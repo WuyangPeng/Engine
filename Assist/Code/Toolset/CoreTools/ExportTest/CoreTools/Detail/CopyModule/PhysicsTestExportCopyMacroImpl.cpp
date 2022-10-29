@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:40)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:14)
 
 #include "Physics/PhysicsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 
 Physics::PhysicsTestExportCopyMacroImpl::PhysicsTestExportCopyMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     PHYSICS_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Physics::PhysicsTestExportCopyMacroImpl::GetCount() const noexcept
 {
     PHYSICS_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Physics::PhysicsTestExportCopyMacroImpl::SetCount(int count) noexcept
+void Physics::PhysicsTestExportCopyMacroImpl::SetCount(int aCount) noexcept
 {
     PHYSICS_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

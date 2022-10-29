@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:26)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/15 20:25)
 
 #include "System/SystemExport.h"
 
@@ -23,14 +23,14 @@ System::WindowsHandle System::GetStandardHandle(StandardHandle standardhandle) n
 
     UnusedFunction(standardhandle);
 
-    return g_InvalidHandleValue;
+    return gInvalidHandleValue;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::IsHandleValid(WindowsHandle handle) noexcept
 {
-    if (handle != g_InvalidHandleValue && handle != nullptr)
+    if (handle != gInvalidHandleValue && handle != nullptr)
         return true;
     else
         return false;

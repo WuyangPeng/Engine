@@ -24,5 +24,8 @@ Rendering::RendererObject::RendererObject(const GraphicsObjectSharedPtr& graphic
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererObject)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::GraphicsObjectSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::GraphicsObjectSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetGraphicsObject, Rendering::RendererObject::ConstGraphicsObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, RendererObject, GetName, std::string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererObject, GetGLHandle, System::OpenGLUInt)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, RendererObject, SetGLHandle, OpenGLUInt, void)

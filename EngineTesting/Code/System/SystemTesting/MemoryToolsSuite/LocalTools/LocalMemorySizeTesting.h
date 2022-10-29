@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:50)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:34)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_LOCAL_MEMORY_SIZE_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_LOCAL_MEMORY_SIZE_TESTING_H
@@ -36,10 +36,10 @@ namespace System
         void DoLocalMemorySizeTest(LocalMemory localMemory);
 
     private:
-        using LocalMemoryCollection = std::vector<LocalMemory>;
+        using LocalMemoryContainer = std::vector<LocalMemory>;
 
     private:
-        LocalMemoryCollection localMemoryCollection;
+        LocalMemoryContainer localMemoryCollection;
     };
 }
 

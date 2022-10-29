@@ -75,14 +75,14 @@ void System::RecvFromTesting::RecvFromTest()
     const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("UdpPort") + GetEngineeringOffsetValue());
     const auto address = mainTree.get<string>("Address");
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
     int length{ sizeof(addr) };
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = System::GetHostToNetShort(port);
-    addr.sin_addr.s_addr = System::GetInetAddr(address.c_str());
+    addr.sin_addr.s_addr = System::GetInternetAddress(address.c_str());
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     ASSERT_TRUE_FAILURE_THROW(Bind(socketHandle, &addr), "Bind Error");
@@ -98,9 +98,9 @@ void System::RecvFromTesting::RecvFromTest()
     {
         const auto ret = RecvFrom(socketHandle, &buffer.at(index), remain, SocketRecv::Default, &addr, &length);
 
-        ASSERT_UNEQUAL(ret, g_SocketError);
+        ASSERT_UNEQUAL(ret, gSocketError);
 
-        if (ret == g_SocketError)
+        if (ret == gSocketError)
         {
             break;
         }

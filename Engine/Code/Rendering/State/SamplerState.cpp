@@ -11,12 +11,15 @@
 
 #include "SamplerState.h"
 #include "Detail/SamplerStateImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
+#include "Rendering/OpenGLRenderer/State/OpenGLSamplerState.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SamplerState)
 
@@ -25,12 +28,69 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SamplerState);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, SamplerState);
 
 Rendering::SamplerState::SamplerState(const std::string& name)
-    : ParentType{ GraphicsObjectType::SamplerState, name }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+    : ParentType{ name, GraphicsObjectType::SamplerState },
+      impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SamplerState)
+
+Rendering::SamplerStateFilter Rendering::SamplerState::GetFilter() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetFilter();
+}
+
+Rendering::SamplerStateMode Rendering::SamplerState::GetMode(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMode(index);
+}
+
+float Rendering::SamplerState::GetMipLODBias() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMipLODBias();
+}
+
+int Rendering::SamplerState::GetMaxAnisotropy() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMaxAnisotropy();
+}
+
+Rendering::SamplerStateComparison Rendering::SamplerState::GetComparison() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetComparison();
+}
+
+Rendering::SamplerState::Colour Rendering::SamplerState::GetBorderColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetBorderColor();
+}
+
+float Rendering::SamplerState::GetMinLOD() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMinLOD();
+}
+
+float Rendering::SamplerState::GetMaxLOD() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetMaxLOD();
+}
 
 Rendering::SamplerState::SamplerState(LoadConstructor loadConstructor)
     : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
@@ -90,6 +150,19 @@ void Rendering::SamplerState::Load(CoreTools::BufferSource& source)
     impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+}
+
+Rendering::SamplerState::RendererObjectSharedPtr Rendering::SamplerState::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLSamplerState>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::SamplerState::CloneObject() const

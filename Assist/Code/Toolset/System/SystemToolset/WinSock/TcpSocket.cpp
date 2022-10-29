@@ -5,38 +5,58 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 17:13)
+///	引擎辅助版本：0.8.1.3 (2022/10/27 1:03)
 
 #include "Toolset/System/SystemToolset/SystemToolsetExport.h"
 
 #include "TcpSocket.h"
-#include "System/Helper/EnumCast.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Network/Flags/SocketPrototypesFlags.h"
+#include "Detail/ConnectParameter.h"
+#include "Detail/TcpSocketConnect.h"
+#include "Detail/TcpSocketSend.h"
+#include "System/Helper/Tools.h"
 #include "System/Network/SocketPrototypes.h"
-#include "System/Windows/Engineering.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "Toolset/System/SystemToolset/Helper/SystemToolsetClassInvariantMacro.h"
 
-#include <array>
-#include <exception>
 #include <iostream>
 
-using std::array;
-using std::cout;
-using std::exception;
-using std::string;
+SystemToolset::TcpSocket SystemToolset::TcpSocket::Create()
+{
+    return TcpSocket{ DisableNotThrow::Disable };
+}
 
-SystemToolset::TcpSocket::TcpSocket(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
-    : winSocket{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+SystemToolset::TcpSocket::TcpSocket(DisableNotThrow disableNotThrow)
+    : winSocket{ System::CreateTcpSocket() }
+{
+    InitSocket();
+
+    System::UnusedFunction(disableNotThrow);
+
+    SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_1;
+}
+
+void SystemToolset::TcpSocket::InitSocket()
 {
     if (!System::IsSocketValid(winSocket))
     {
-        throw exception("GetSocket 失败。\n");
+        throw std::runtime_error("CreateTcpSocket 失败。\n");
     }
+}
 
+SystemToolset::TcpSocket::TcpSocket(TcpSocket&& rhs) noexcept
+    : winSocket{ std::move(rhs.winSocket) }
+{
     SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_1;
+}
+
+SystemToolset::TcpSocket& SystemToolset::TcpSocket::operator=(TcpSocket&& rhs) noexcept
+{
+    SYSTEM_TOOLSET_CLASS_IS_VALID_1;
+
+    winSocket = std::move(rhs.winSocket);
+
+    return *this;
 }
 
 SystemToolset::TcpSocket::~TcpSocket() noexcept
@@ -44,6 +64,14 @@ SystemToolset::TcpSocket::~TcpSocket() noexcept
     SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_1;
 
     CoreTools::NoexceptNoReturn(*this, &ClassType::CloseSocket);
+}
+
+void SystemToolset::TcpSocket::CloseSocket()
+{
+    if (!System::CloseSocket(winSocket))
+    {
+        std::cout << "WinSockCleanup失败\n";
+    }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -58,68 +86,27 @@ bool SystemToolset::TcpSocket::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-System::WinSocket SystemToolset::TcpSocket::GetSocket() noexcept
+System::WinSocket SystemToolset::TcpSocket::GetWinSocket() noexcept
 {
     SYSTEM_TOOLSET_CLASS_IS_VALID_CONST_1;
 
     return winSocket;
 }
 
-void SystemToolset::TcpSocket::CloseSocket()
-{
-    if (!System::CloseSocket(winSocket))
-    {
-        cout << "WinSockCleanup失败\n";
-    }
-}
-
 void SystemToolset::TcpSocket::Connect()
 {
     SYSTEM_TOOLSET_CLASS_IS_VALID_CONST_1;
 
-    boost::property_tree::basic_ptree<string, string> mainTree{};
+    TcpSocketConnect tcpSocketConnect{ winSocket };
 
-    read_json("Configuration/EnvironmentVariable.json", mainTree);
-
-    const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("TcpPort") + System::GetEngineeringOffsetValue());
-    const auto address = mainTree.get<string>("Address");
-    const auto connectTime = mainTree.get<int>("ConnectTime");
-
-    WinSockAddrIn addr{};
-
-    addr.sin_family = System::EnumCastUnderlying<uint16_t>(System::AddressFamilies::Inet);
-    addr.sin_port = System::GetHostToNetShort(port);
-    addr.sin_addr.s_addr = System::GetInetAddr(address.c_str());
-
-    Connect(addr, connectTime);
-}
-
-void SystemToolset::TcpSocket::Connect(const WinSockAddrIn& addr, int connectTime)
-{
-    cout << "准备connect服务器\n";
-    auto connectFailureTime = 0;
-    while (!System::Connect(winSocket, &addr))
-    {
-        cout << "connect失败，重新connect服务器\n";
-
-        if (connectTime < connectFailureTime++)
-        {
-            throw exception("Connect 失败。\n");
-        }
-    }
+    tcpSocketConnect.Connect();
 }
 
 void SystemToolset::TcpSocket::Send() noexcept
 {
     SYSTEM_TOOLSET_CLASS_IS_VALID_CONST_1;
 
-    constexpr auto bufferSize = 256;
-    array<char, bufferSize> buffer{ 'H', 'e', 'l', 'l', 'o' };
+    TcpSocketSend tcpSocketSend{ winSocket };
 
-    auto ret = 0;
-    do
-    {
-        ret = System::Send(winSocket, buffer.data(), bufferSize, System::SocketSend::Default);
-
-    } while (ret == System::g_SocketError);
+    tcpSocketSend.Send();
 }

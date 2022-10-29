@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:07)
+///	引擎测试版本：0.8.1.3 (2022/10/14 1:13)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_USE_BUFFER_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_USE_BUFFER_TESTING_H
@@ -35,10 +35,10 @@ namespace System
         void FormatLastErrorUseBufferTest();
 
     private:
-        using WindowErrorFlagsCollection = std::set<WindowError>;
+        using WindowErrorFlagsContainer = std::set<WindowError>;
 
     private:
-        WindowErrorFlagsCollection windowErrorFlags;
+        WindowErrorFlagsContainer windowErrorFlags;
     };
 }
 

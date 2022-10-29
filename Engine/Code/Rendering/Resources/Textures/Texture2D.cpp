@@ -22,6 +22,8 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture2.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture2DImpl.h"
@@ -223,4 +225,17 @@ bool Rendering::Texture2D::IsShared() const noexcept
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return shared;
+}
+
+Rendering::Texture2D::RendererObjectSharedPtr Rendering::Texture2D::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLTexture2>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

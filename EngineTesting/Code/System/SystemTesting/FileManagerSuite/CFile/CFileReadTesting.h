@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:14)
+///	引擎测试版本：0.8.1.3 (2022/10/29 19:52)
 
 #ifndef SYSTEM_FILE_MANAGE_SUITE_CFILE_READ_TESTING_H
 #define SYSTEM_FILE_MANAGE_SUITE_CFILE_READ_TESTING_H

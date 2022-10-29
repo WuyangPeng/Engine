@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:49)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/29 19:29)
 
 #include "System/SystemExport.h"
 
@@ -13,7 +13,9 @@
 #include "System/Helper/EnumCast.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     #include <tchar.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #include <vector>
@@ -142,7 +144,7 @@ bool System::PutCharacter(FILE* file, int character) noexcept
 
 bool System::PutString(FILE* file, const char* str) noexcept
 {
-    if (::fputs(str, file) != g_CFileError)
+    if (::fputs(str, file) != gCFileError)
         return true;
     else
         return false;

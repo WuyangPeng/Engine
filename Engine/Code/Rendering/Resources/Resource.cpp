@@ -69,6 +69,10 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Resource, SetNumActiveEleme
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Resource, SetNewData, StorageType, void)
 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Resource, GetOriginalData, const char*)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Resource, GetOriginalData, int, const char*)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Resource, GetOriginalData, int, char*)
+
 Rendering::Resource::Resource(LoadConstructor loadConstructor)
     : ParentType{ loadConstructor }, impl{ 0, 0 }
 {
@@ -131,4 +135,11 @@ void Rendering::Resource::Load(CoreTools::BufferSource& source)
     impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+}
+
+Rendering::Resource::RendererObjectSharedPtr Rendering::Resource::CreateRendererObject(MAYBE_UNUSED RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ"));
 }

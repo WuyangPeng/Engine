@@ -42,8 +42,8 @@ void CoreTools::DirectoryTesting::MainTest()
 
 void CoreTools::DirectoryTesting::DirectoryTest()
 {
-    array<System::TChar, System::g_MaxPath> systemCurrentDirectory{};
-    auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+    array<System::TChar, System::gMaxPath> systemCurrentDirectory{};
+    auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
     ASSERT_LESS(0u, result);
     System::String oldDirectoryName{ systemCurrentDirectory.data() };
     boost::algorithm::replace_all(oldDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
@@ -54,7 +54,7 @@ void CoreTools::DirectoryTesting::DirectoryTest()
         Directory directory{ directoryName };
 
         systemCurrentDirectory.fill(0);
-        result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+        result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
         ASSERT_LESS(0u, result);
         System::String resultDirectoryName{ systemCurrentDirectory.data() };
         boost::algorithm::replace_all(resultDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));
@@ -62,7 +62,7 @@ void CoreTools::DirectoryTesting::DirectoryTest()
     }
 
     systemCurrentDirectory.fill(0);
-    result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+    result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
     ASSERT_LESS(0u, result);
     System::String resultDirectoryName{ systemCurrentDirectory.data() };
     boost::algorithm::replace_all(resultDirectoryName, SYSTEM_TEXT("\\"), SYSTEM_TEXT("/"));

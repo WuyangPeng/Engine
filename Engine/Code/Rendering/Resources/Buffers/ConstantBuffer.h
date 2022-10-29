@@ -62,6 +62,8 @@ namespace Rendering
             return 0;
         }
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     protected:
         NODISCARD static int GetRoundedNumBytes(int numBytes) noexcept;
 
@@ -71,6 +73,15 @@ namespace Rendering
     private:
         PackageType impl;
     };
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_STREAM_REGISTER(ConstantBuffer);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(ConstantBuffer);
 }
 
 #endif  // RENDERING_RENDERERS_CONSTANT_BUFFER_H

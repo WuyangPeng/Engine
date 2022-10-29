@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Texture1D.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -19,6 +20,8 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture1.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture1DImpl.h"
@@ -186,4 +189,17 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Texture1D::CloneObject() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return Clone();
+}
+
+Rendering::Texture1D::RendererObjectSharedPtr Rendering::Texture1D::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLTexture1>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

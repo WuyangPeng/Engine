@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:03)
+///	引擎测试版本：0.8.1.3 (2022/10/15 21:50)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_MODE_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_MODE_TESTING_H
@@ -37,14 +37,14 @@ namespace System
         void ConsoleOutputModeTest();
 
     private:
-        using StandardHandleFlagsCollection = std::vector<StandardHandle>;
-        using ConsoleInputModeFlagsCollection = std::vector<ConsoleInputMode>;
-        using ConsoleOutputModeFlagsCollection = std::vector<ConsoleOutputMode>;
+        using StandardHandleFlagsContainer = std::vector<StandardHandle>;
+        using ConsoleInputModeFlagsContainer = std::vector<ConsoleInputMode>;
+        using ConsoleOutputModeFlagsContainer = std::vector<ConsoleOutputMode>;
 
     private:
-        StandardHandleFlagsCollection standardOutputHandleFlags;
-        ConsoleInputModeFlagsCollection consoleInputModeFlags;
-        ConsoleOutputModeFlagsCollection consoleOutputModeFlags;
+        StandardHandleFlagsContainer standardOutputHandleFlags;
+        ConsoleInputModeFlagsContainer consoleInputModeFlags;
+        ConsoleOutputModeFlagsContainer consoleOutputModeFlags;
     };
 }
 

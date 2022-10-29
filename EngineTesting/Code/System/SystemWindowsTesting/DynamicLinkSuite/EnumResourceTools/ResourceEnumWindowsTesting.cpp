@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/16 14:31)
+///	引擎测试版本：0.8.1.3 (2022/10/09 23:21)
 
 #include "ResourceEnumWindowsTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
@@ -17,7 +17,7 @@
 
 System::ResourceEnumWindowsTesting::ResourceEnumWindowsTesting(const OStreamShared& stream, WindowsHInstance instance)
     : ParentType{ stream },
-      enumResourceDataGroup{},
+      enumResourceDataContainer{},
       resourceEnum{ ResourceEnum::Default,
                     ResourceEnum::Ln,
                     ResourceEnum::Validate,
@@ -49,16 +49,16 @@ void System::ResourceEnumWindowsTesting::EnumResourceTest()
     {
         ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsPtrLong>(this), GetCurrentResourceEnum(), languageIDData));
 
-        ASSERT_LESS(0u, enumResourceDataGroup.size());
+        ASSERT_LESS(0u, enumResourceDataContainer.size());
 
-        for (const auto& data : enumResourceDataGroup)
+        for (const auto& data : enumResourceDataContainer)
         {
             auto resource = FindResourceInLibrary(instance, data.GetType(), data.GetName(), data.GetLanguage());
 
             ASSERT_UNEQUAL_NULL_PTR(resource);
         }
 
-        enumResourceDataGroup.clear();
+        enumResourceDataContainer.clear();
     }
 }
 
@@ -113,7 +113,7 @@ void System::ResourceEnumWindowsTesting::AddEnumResourceData(const EnumResourceD
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    enumResourceDataGroup.emplace_back(data);
+    enumResourceDataContainer.emplace_back(data);
 }
 
 System::ResourceEnum System::ResourceEnumWindowsTesting::GetCurrentResourceEnum() const

@@ -52,6 +52,8 @@ namespace Rendering
         NODISCARD virtual VertexBufferSharedPtr Clone() const;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     protected:
         enum class VertexBufferCreate
         {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 19:00)
+///	引擎测试版本：0.8.1.3 (2022/10/23 0:05)
 
 #include "WaitForMultipleWaitableTimerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -39,7 +39,7 @@ void System::WaitForMultipleWaitableTimerTesting::MainTest()
 void System::WaitForMultipleWaitableTimerTesting::CreateSynchronizationTest()
 {
     constexpr auto mutexSize = 5;
-    vector<WindowsHandle> waitableTimerHandle{};
+    Container waitableTimerHandle{};
 
     for (auto i = 0; i < mutexSize; ++i)
     {
@@ -75,7 +75,7 @@ void System::WaitForMultipleWaitableTimerTesting::CreateSynchronizationTest()
     }
 }
 
-void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(const vector<WindowsHandle>& waitableTimerHandle)
+void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(const Container& waitableTimerHandle)
 {
     const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandle.size()), waitableTimerHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -83,7 +83,7 @@ void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(cons
     ResetSystemWaitableTimer(waitableTimerHandle);
 }
 
-void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(const vector<WindowsHandle>& waitableTimerHandle)
+void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(const Container& waitableTimerHandle)
 {
     const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandle.size()), waitableTimerHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -91,7 +91,7 @@ void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(cons
     ResetSystemWaitableTimer(waitableTimerHandle);
 }
 
-void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer2Test(const vector<WindowsHandle>& waitableTimerHandle)
+void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer2Test(const Container& waitableTimerHandle)
 {
     const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandle.size()), waitableTimerHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -99,7 +99,7 @@ void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer2Test(cons
     ResetSystemWaitableTimer(waitableTimerHandle);
 }
 
-void System::WaitForMultipleWaitableTimerTesting::ResetSystemWaitableTimer(const vector<WindowsHandle>& waitableTimerHandle)
+void System::WaitForMultipleWaitableTimerTesting::ResetSystemWaitableTimer(const Container& waitableTimerHandle)
 {
     WindowsLargeInteger waitableTimerLargeInteger{};
     waitableTimerLargeInteger.QuadPart = -base / 2;

@@ -11,6 +11,9 @@
 #define RENDERING_BASE_H
 
 #include "GraphicsObject.h"
+#include "RendererObjectBridge.h"
+#include "RendererObject.h"
+#include "RendererDrawTarget.h"
 
 #include "Flags/GraphicsObjectType.h"
 

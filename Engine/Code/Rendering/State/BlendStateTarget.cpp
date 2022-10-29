@@ -21,12 +21,12 @@
 
 Rendering::BlendStateTarget::BlendStateTarget() noexcept
     : enable{ false },
-      srcColor{ BlendStateMode::One },
-      dstColor{ BlendStateMode::Zero },
-      opColor{ BlendStateOperation::Add },
-      srcAlpha{ BlendStateMode::One },
-      dstAlpha{ BlendStateMode::Zero },
-      opAlpha{ BlendStateOperation::Add },
+      sourceColor{ BlendStateMode::One },
+      destinationColor{ BlendStateMode::Zero },
+      operationColor{ BlendStateOperation::Add },
+      sourceAlpha{ BlendStateMode::One },
+      destinationAlpha{ BlendStateMode::Zero },
+      operationAlpha{ BlendStateOperation::Add },
       mask{ BlendStateColorWrite::EnableAll }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
@@ -34,7 +34,7 @@ Rendering::BlendStateTarget::BlendStateTarget() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BlendStateTarget)
 
-bool Rendering::BlendStateTarget::GetEnable() const noexcept
+bool Rendering::BlendStateTarget::IsEnable() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -48,88 +48,88 @@ void Rendering::BlendStateTarget::SetEnable(bool aEnable) noexcept
     enable = aEnable;
 }
 
-Rendering::BlendStateMode Rendering::BlendStateTarget::GetSrcColor() const noexcept
+Rendering::BlendStateMode Rendering::BlendStateTarget::GetSourceColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return srcColor;
+    return sourceColor;
 }
 
-void Rendering::BlendStateTarget::SetSrcColor(BlendStateMode aSrcColor) noexcept
+void Rendering::BlendStateTarget::SetSourceColor(BlendStateMode color) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    srcColor = aSrcColor;
+    sourceColor = color;
 }
 
-Rendering::BlendStateMode Rendering::BlendStateTarget::GetDstColor() const noexcept
+Rendering::BlendStateMode Rendering::BlendStateTarget::GetDestinationColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return dstColor;
+    return destinationColor;
 }
 
-void Rendering::BlendStateTarget::SetDstColor(BlendStateMode aDstColor) noexcept
+void Rendering::BlendStateTarget::SetDestinationColor(BlendStateMode color) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    dstColor = aDstColor;
+    destinationColor = color;
 }
 
-Rendering::BlendStateOperation Rendering::BlendStateTarget::GetOpColor() const noexcept
+Rendering::BlendStateOperation Rendering::BlendStateTarget::GetOperationColor() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return opColor;
+    return operationColor;
 }
 
-void Rendering::BlendStateTarget::SetOpColor(BlendStateOperation aOpColor) noexcept
+void Rendering::BlendStateTarget::SetOperationColor(BlendStateOperation color) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    opColor = aOpColor;
+    operationColor = color;
 }
 
-Rendering::BlendStateMode Rendering::BlendStateTarget::GetSrcAlpha() const noexcept
+Rendering::BlendStateMode Rendering::BlendStateTarget::GetSourceAlpha() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return srcAlpha;
+    return sourceAlpha;
 }
 
-void Rendering::BlendStateTarget::SetSrcAlpha(BlendStateMode aSrcAlpha) noexcept
+void Rendering::BlendStateTarget::SetSourceAlpha(BlendStateMode alpha) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    srcAlpha = aSrcAlpha;
+    sourceAlpha = alpha;
 }
 
-Rendering::BlendStateMode Rendering::BlendStateTarget::GetDstAlpha() const noexcept
+Rendering::BlendStateMode Rendering::BlendStateTarget::GetDestinationAlpha() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return dstAlpha;
+    return destinationAlpha;
 }
 
-void Rendering::BlendStateTarget::SetDstAlpha(BlendStateMode aDstAlpha) noexcept
+void Rendering::BlendStateTarget::SetDestinationAlpha(BlendStateMode alpha) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    dstAlpha = aDstAlpha;
+    destinationAlpha = alpha;
 }
 
-Rendering::BlendStateOperation Rendering::BlendStateTarget::GetOpAlpha() const noexcept
+Rendering::BlendStateOperation Rendering::BlendStateTarget::GetOperationAlpha() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return opAlpha;
+    return operationAlpha;
 }
 
-void Rendering::BlendStateTarget::SetOpAlpha(BlendStateOperation aOpAlpha) noexcept
+void Rendering::BlendStateTarget::SetOperationAlpha(BlendStateOperation alpha) noexcept
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    opAlpha = aOpAlpha;
+    operationAlpha = alpha;
 }
 
 Rendering::BlendStateColorWrite Rendering::BlendStateTarget::GetMask() const noexcept
@@ -146,31 +146,31 @@ void Rendering::BlendStateTarget::SetMask(BlendStateColorWrite aMask) noexcept
     mask = aMask;
 }
 
-void Rendering::BlendStateTarget::Load(CoreTools::BufferSource& source)
+void Rendering::BlendStateTarget::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    enable = source.ReadBool();
-    source.ReadEnum(srcColor);
-    source.ReadEnum(dstColor);
-    source.ReadEnum(opColor);
-    source.ReadEnum(srcAlpha);
-    source.ReadEnum(dstAlpha);
-    source.ReadEnum(opAlpha);
+    source.Read(enable);
+    source.ReadEnum(sourceColor);
+    source.ReadEnum(destinationColor);
+    source.ReadEnum(operationColor);
+    source.ReadEnum(sourceAlpha);
+    source.ReadEnum(destinationAlpha);
+    source.ReadEnum(operationAlpha);
     source.ReadEnum(mask);
 }
 
-void Rendering::BlendStateTarget::Save(CoreTools::BufferTarget& target) const
+void Rendering::BlendStateTarget::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     target.Write(enable);
-    target.WriteEnum(srcColor);
-    target.WriteEnum(dstColor);
-    target.WriteEnum(opColor);
-    target.WriteEnum(srcAlpha);
-    target.WriteEnum(dstAlpha);
-    target.WriteEnum(opAlpha);
+    target.WriteEnum(sourceColor);
+    target.WriteEnum(destinationColor);
+    target.WriteEnum(operationColor);
+    target.WriteEnum(sourceAlpha);
+    target.WriteEnum(destinationAlpha);
+    target.WriteEnum(operationAlpha);
     target.WriteEnum(mask);
 }
 
@@ -180,13 +180,25 @@ int Rendering::BlendStateTarget::GetStreamingSize() const noexcept
 
     auto size = CORE_TOOLS_STREAM_SIZE(enable);
 
-    size += CORE_TOOLS_STREAM_SIZE(srcColor);
-    size += CORE_TOOLS_STREAM_SIZE(dstColor);
-    size += CORE_TOOLS_STREAM_SIZE(opColor);
-    size += CORE_TOOLS_STREAM_SIZE(srcAlpha);
-    size += CORE_TOOLS_STREAM_SIZE(dstAlpha);
-    size += CORE_TOOLS_STREAM_SIZE(opAlpha);
+    size += CORE_TOOLS_STREAM_SIZE(sourceColor);
+    size += CORE_TOOLS_STREAM_SIZE(destinationColor);
+    size += CORE_TOOLS_STREAM_SIZE(operationColor);
+    size += CORE_TOOLS_STREAM_SIZE(sourceAlpha);
+    size += CORE_TOOLS_STREAM_SIZE(destinationAlpha);
+    size += CORE_TOOLS_STREAM_SIZE(operationAlpha);
     size += CORE_TOOLS_STREAM_SIZE(mask);
 
     return size;
+}
+
+bool Rendering::operator==(const BlendStateTarget& lhs, const BlendStateTarget& rhs) noexcept
+{
+    return lhs.IsEnable() == rhs.IsEnable() &&
+           lhs.GetSourceColor() == rhs.GetSourceColor() &&
+           lhs.GetDestinationColor() == rhs.GetDestinationColor() &&
+           lhs.GetOperationColor() == rhs.GetOperationColor() &&
+           lhs.GetSourceAlpha() == rhs.GetSourceAlpha() &&
+           lhs.GetDestinationAlpha() == rhs.GetDestinationAlpha() &&
+           lhs.GetOperationAlpha() == rhs.GetOperationAlpha() &&
+           lhs.GetMask() == rhs.GetMask();
 }

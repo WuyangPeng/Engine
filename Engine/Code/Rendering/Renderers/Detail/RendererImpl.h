@@ -24,7 +24,6 @@
 #include "Rendering/Renderers/ClearParameter.h"
 #include "Rendering/Renderers/DepthRange.h"
 #include "Rendering/Renderers/DrawManagement.h"
-#include "Rendering/Renderers/GlobalState.h"
 #include "Rendering/Renderers/PickRay.h"
 #include "Rendering/Renderers/RendererBasis.h"
 #include "Rendering/Renderers/RenderersFwd.h"
@@ -75,7 +74,7 @@ namespace Rendering
         using FactoryType = RendererFactory;
 
     public:
-        RendererImpl(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
+        RendererImpl(RendererTypes rendererTypes, const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -336,7 +335,6 @@ namespace Rendering
         VertexShaderManagementPtr vertexShaderManagement;
         PixelShaderManagementPtr pixelShaderManagement;
 
-        GlobalState globalState;
         CameraState cameraState;
         ClearParameter clearParameter;
         ViewportManagement viewportManagement;

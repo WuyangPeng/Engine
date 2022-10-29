@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:13)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:23)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_EVENT_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_EVENT_TESTING_H
@@ -38,12 +38,12 @@ namespace System
         void WaitForEventTest(const String& eventName);
 
     private:
-        using EventStandardAccessFlagsCollection = std::vector<MutexStandardAccess>;
-        using EventSpecificAccessFlagsCollection = std::vector<EventSpecificAccess>;
+        using EventStandardAccessFlagsContainer = std::vector<MutexStandardAccess>;
+        using EventSpecificAccessFlagsContainer = std::vector<EventSpecificAccess>;
 
     private:
-        EventStandardAccessFlagsCollection eventStandardAccessFlags;
-        EventSpecificAccessFlagsCollection eventSpecificAccessFlags;
+        EventStandardAccessFlagsContainer eventStandardAccessFlags;
+        EventSpecificAccessFlagsContainer eventSpecificAccessFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

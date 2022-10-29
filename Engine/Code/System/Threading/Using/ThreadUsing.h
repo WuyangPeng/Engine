@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 16:53)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/21 0:03)
 
 #ifndef SYSTEM_THREADING_THREAD_USING_H
 #define SYSTEM_THREADING_THREAD_USING_H
@@ -27,7 +27,7 @@ namespace System
 
     using ThreadHandle = pthread_t;
     using ThreadHandlePtr = ThreadHandle*;
-    using ThreadStartRoutine = WindowsDWord(*)(void* threadParameter);
+    using ThreadStartRoutine = WindowsDWord (*)(void* threadParameter);
 
     using StartAddress = unsigned(__stdcall*)(void*);
 

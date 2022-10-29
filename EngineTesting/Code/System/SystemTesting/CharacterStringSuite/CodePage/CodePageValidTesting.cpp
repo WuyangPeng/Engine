@@ -5,10 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:10)
+///	引擎测试版本：0.8.1.3 (2022/10/14 0:49)
 
 #include "CodePageValidTesting.h"
 #include "System/CharacterString/CodePage.h"
+#include "System/CharacterString/Flags/CodePageFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:45)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/12 23:39)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
@@ -36,7 +36,7 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, WindowError lastError) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, DynamicLinkModule module, WindowError lastError) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(const DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
 
     // resultMessage分配的内存需要使用LocalMemoryFree进行释放。
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, WindowsPtrDWord* arguments) noexcept;

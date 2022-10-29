@@ -5,17 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/16 14:31)
+///	引擎测试版本：0.8.1.3 (2022/10/09 22:26)
 
 #include "EnumResourceToolsWindowsTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
 #include "System/DynamicLink/LoadResourceTools.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::EnumResourceToolsWindowsTesting::EnumResourceToolsWindowsTesting(const OStreamShared& stream, WindowsHInstance instance)
-    : ParentType{ stream }, enumResourceDataGroup{}, instance{ instance }
+    : ParentType{ stream }, enumResourceDataContainer{}, instance{ instance }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -36,9 +37,9 @@ void System::EnumResourceToolsWindowsTesting::EnumResourceTest()
 {
     ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsPtrLong>(this)));
 
-    ASSERT_LESS(0u, enumResourceDataGroup.size());
+    ASSERT_LESS(0u, enumResourceDataContainer.size());
 
-    for (const auto& data : enumResourceDataGroup)
+    for (const auto& data : enumResourceDataContainer)
     {
         auto resource = FindResourceInLibrary(instance, data.GetType(), data.GetName(), data.GetLanguage());
 
@@ -61,8 +62,10 @@ System::WindowsBool System::EnumResourceToolsWindowsTesting::NameProcess(Dynamic
 
 #include STSTEM_WARNING_POP
 
-System::WindowsBool System::EnumResourceToolsWindowsTesting::LanguageProcess(MAYBE_UNUSED DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsPtrLong lParam)
+System::WindowsBool System::EnumResourceToolsWindowsTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsPtrLong lParam)
 {
+    UnusedFunction(module);
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
@@ -79,5 +82,5 @@ void System::EnumResourceToolsWindowsTesting::AddEnumResourceData(const EnumReso
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    enumResourceDataGroup.emplace_back(data);
+    enumResourceDataContainer.emplace_back(data);
 }

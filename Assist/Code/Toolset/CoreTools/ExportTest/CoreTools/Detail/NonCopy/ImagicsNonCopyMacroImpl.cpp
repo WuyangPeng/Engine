@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:07)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:33)
 
 #include "Imagics/ImagicsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/ImagicsClassInvariantMacro.h"
 
 Imagics::ImagicsNonCopyMacroImpl::ImagicsNonCopyMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     IMAGICS_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Imagics::ImagicsNonCopyMacroImpl::GetCount() const noexcept
 {
     IMAGICS_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Imagics::ImagicsNonCopyMacroImpl::SetCount(int count) noexcept
+void Imagics::ImagicsNonCopyMacroImpl::SetCount(int aCount) noexcept
 {
     IMAGICS_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

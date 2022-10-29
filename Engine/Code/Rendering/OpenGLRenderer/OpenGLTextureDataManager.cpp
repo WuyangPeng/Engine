@@ -9,6 +9,7 @@
 
 #include "Rendering/RenderingExport.h"
 
+#include "OpenGLTextureDataDetail.h"
 #include "OpenGLTextureDataManageDetail.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"

@@ -25,7 +25,7 @@
 template <typename Texture>
 Rendering::OpenGLTextureData<Texture>::OpenGLTextureData(const Texture* texture)
     : texture{ 0 },
-      textureInternalFormat{ System::UnderlyingCastEnum<TextureInternalFormat>(OpenGLConstant::GetOpenGLTextureInternalFormat(System::EnumCastUnderlying(texture->GetFormat()))) },
+      textureInternalFormat{},
       textureFormat{ System::UnderlyingCastEnum<TextureFormat>(OpenGLConstant::GetOpenGLTextureFormat(System::EnumCastUnderlying(texture->GetFormat()))) },
       dataType{ System::UnderlyingCastEnum<DataType>(OpenGLConstant::GetOpenGLTextureType(System::EnumCastUnderlying(texture->GetFormat()))) },
       previousTexture{ 0 },

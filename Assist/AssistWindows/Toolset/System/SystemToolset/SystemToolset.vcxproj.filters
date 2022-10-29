@@ -25,6 +25,12 @@
     <Filter Include="WinSock 源文件">
       <UniqueIdentifier>{24bc61e5-96d6-43a4-845d-f90c1fb79952}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WinSock 头文件\Detail">
+      <UniqueIdentifier>{59ec38c3-f95e-4c88-b794-fae38efbec72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinSock 源文件\Detail">
+      <UniqueIdentifier>{42cab95b-11c2-453a-95b7-0c4b73a4c31e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -107,6 +113,27 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\UdpSocket.h">
       <Filter>WinSock 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\WinSock.h">
+      <Filter>WinSock 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\WinSockFwd.h">
+      <Filter>WinSock 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\ConnectParameter.h">
+      <Filter>WinSock 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketConnect.h">
+      <Filter>WinSock 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketSend.h">
+      <Filter>WinSock 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\UdpSocketSend.h">
+      <Filter>WinSock 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\SocketSend.h">
+      <Filter>WinSock 头文件\Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\DllLib.cpp">
@@ -123,6 +150,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\UdpSocket.cpp">
       <Filter>WinSock 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\ConnectParameter.cpp">
+      <Filter>WinSock 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketConnect.cpp">
+      <Filter>WinSock 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketSend.cpp">
+      <Filter>WinSock 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\UdpSocketSend.cpp">
+      <Filter>WinSock 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\SocketSend.cpp">
+      <Filter>WinSock 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

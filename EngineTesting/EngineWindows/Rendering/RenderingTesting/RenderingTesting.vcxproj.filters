@@ -208,6 +208,18 @@
     <Filter Include="BaseSuite 模板文件">
       <UniqueIdentifier>{3b49dc5b-e400-484a-b010-f21d28f8af52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StateSuite 头文件">
+      <UniqueIdentifier>{fbc63f80-2023-4b5a-8453-57283d3f9944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateSuite 源文件">
+      <UniqueIdentifier>{45d0e9ec-c9a6-4399-af05-8c4e23710590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateSuite 头文件\Detail">
+      <UniqueIdentifier>{71574b66-78e1-4f04-97b8-4354b56f1839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateSuite 源文件\Detail">
+      <UniqueIdentifier>{a3b4921d-f130-4ac1-8c78-452051136f62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json">
@@ -953,6 +965,30 @@
     <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBaseDetail.h">
       <Filter>BaseSuite 模板文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\StateSuite.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\Detail\DrawingStateTest.h">
+      <Filter>StateSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\DrawingStateTesting.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\BlendStateTargetTesting.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\BlendStateTesting.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\DepthStencilStateFaceTesting.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\DepthStencilStateTesting.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\RasterizerStateTesting.h">
+      <Filter>StateSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\TestingHelper.cpp">
@@ -1440,6 +1476,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\BaseSuite\GraphicsObjectTestingBase.cpp">
       <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\Detail\DrawingStateTest.cpp">
+      <Filter>StateSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\DrawingStateTesting.cpp">
+      <Filter>StateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\BlendStateTargetTesting.cpp">
+      <Filter>StateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\BlendStateTesting.cpp">
+      <Filter>StateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\DepthStencilStateFaceTesting.cpp">
+      <Filter>StateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\DepthStencilStateTesting.cpp">
+      <Filter>StateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingTesting\StateSuite\RasterizerStateTesting.cpp">
+      <Filter>StateSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -109,7 +109,7 @@ Rendering::Texture2DSharedPtr Rendering::ImageProcessing3::CreateTiledImage(MAYB
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    auto tiled = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::A32B32G32R32F), GetNumCols(), GetNumRows(), 1);
+    auto tiled = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::RGBA32F), GetNumCols(), GetNumRows(), 1);
 
     return tiled;
 }

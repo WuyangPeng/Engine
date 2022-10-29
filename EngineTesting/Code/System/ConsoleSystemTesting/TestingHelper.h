@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/04 20:44)
+///	引擎测试版本：0.8.1.3 (2022/10/15 21:46)
 
 #ifndef CONSOLE_SYSTEM_TESTING_TESTING_HELPER_H
 #define CONSOLE_SYSTEM_TESTING_TESTING_HELPER_H
@@ -24,6 +24,7 @@ namespace ConsoleSystemTesting
     public:
         using ClassType = TestingHelper;
         using ParentType = TestingHelperBase;
+
         using WindowsHInstance = System::WindowsHInstance;
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
         using WindowApplicationInformation = Framework::WindowApplicationInformation;

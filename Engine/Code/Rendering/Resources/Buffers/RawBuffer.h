@@ -33,7 +33,18 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(RawBuffer);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
     };
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_STREAM_REGISTER(RawBuffer);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(RawBuffer);
 }
 
 #endif  // RENDERING_RENDERERS_RAW_BUFFER_H

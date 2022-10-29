@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:49)
+///	引擎测试版本：0.8.1.3 (2022/10/10 20:03)
 
 #include "EnumResourceDataTesting.h"
 #include "System/DynamicLink/Data/EnumResourceData.h"
@@ -191,9 +191,9 @@ System::EnumResourceDataTesting::EnumResourceDataTesting(const OStreamShared& st
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-System::EnumResourceDataTesting::NameFlagsCollection System::EnumResourceDataTesting::CreateNameFlags()
+System::EnumResourceDataTesting::NameFlagsContainer System::EnumResourceDataTesting::CreateNameFlags()
 {
-    NameFlagsCollection result{};
+    NameFlagsContainer result{};
 
     constexpr auto nameBeginIndex = 100;
     constexpr auto nameEndIndex = 200;

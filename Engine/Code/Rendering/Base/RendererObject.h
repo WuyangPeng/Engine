@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "BaseFwd.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
@@ -27,6 +28,8 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(RendererObject);
         using GraphicsObjectSharedPtr = std::shared_ptr<GraphicsObject>;
+        using ConstGraphicsObjectSharedPtr = std::shared_ptr<const GraphicsObject>;
+        using OpenGLUInt = System::OpenGLUInt;
 
     public:
         explicit RendererObject(const GraphicsObjectSharedPtr& graphicsObject, const std::string& name = "");
@@ -38,8 +41,16 @@ namespace Rendering
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        NODISCARD GraphicsObjectSharedPtr GetGraphicsObject() const;
+        NODISCARD GraphicsObjectSharedPtr GetGraphicsObject();
+        NODISCARD ConstGraphicsObjectSharedPtr GetGraphicsObject() const;
         NODISCARD std::string GetName() const;
+
+        virtual void Enable() = 0;
+
+        NODISCARD OpenGLUInt GetGLHandle() const noexcept;
+
+    protected:
+        void SetGLHandle(OpenGLUInt handler) noexcept;
 
     private:
         PackageType impl;

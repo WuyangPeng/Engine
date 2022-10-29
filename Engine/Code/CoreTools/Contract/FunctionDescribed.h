@@ -14,23 +14,10 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#ifndef FUNCTION_DESCRIBED_NO_EXPORT
-
-    #define FUNCTION_DESCRIBED_DEFAULT_DECLARE CORE_TOOLS_DEFAULT_DECLARE
-
-#else  // !FUNCTION_DESCRIBED_NO_EXPORT
-
-    #if !defined(BUILDING_CORE_TOOLS_NO_IMPORT) && !defined(BUILDING_CORE_TOOLS_STATIC)
-        #define FUNCTION_DESCRIBED_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
-    #else  // defined(BUILDING_CORE_TOOLS_NO_IMPORT) || defined(BUILDING_CORE_TOOLS_STATIC)
-        #define FUNCTION_DESCRIBED_DEFAULT_DECLARE
-    #endif  // !defined(BUILDING_CORE_TOOLS_NO_IMPORT) && !defined(BUILDING_CORE_TOOLS_STATIC)
-
-#endif  // FUNCTION_DESCRIBED_NO_EXPORT
-
 namespace CoreTools
 {
-    class FUNCTION_DESCRIBED_DEFAULT_DECLARE FunctionDescribed final
+    // FunctionDescribed类不导出
+    class FunctionDescribed final
     {
     public:
         using ClassType = FunctionDescribed;
@@ -62,7 +49,7 @@ namespace CoreTools
         int line;
     };
 
-    NODISCARD constexpr bool FUNCTION_DESCRIBED_DEFAULT_DECLARE operator==(const FunctionDescribed& lhs, const FunctionDescribed& rhs)
+    NODISCARD constexpr bool operator==(const FunctionDescribed& lhs, const FunctionDescribed& rhs)
     {
         // 这里直接比较字符串指针，而不是实际的值。
         return lhs.GetCurrentFunction() == rhs.GetCurrentFunction() && lhs.GetFileName() == rhs.GetFileName() && lhs.GetLine() == rhs.GetLine();

@@ -22,7 +22,7 @@
 template <typename WindowsProcess>
 Framework::WindowRegisterHandle<WindowsProcess>::WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance, const char* commandLine, const WindowPictorial& pictorial, const WindowName& name, WindowsClassStyle styles)
     : environmentDirectory{ environmentDirectory },
-      windowProcess{ System::g_Microseconds / interval, environmentDirectory },
+      windowProcess{ System::gMicroseconds / interval, environmentDirectory },
       command{ std::make_shared<Command>(commandLine) },
       windowRegisterParameter{ instance, styles },
       windowPictorial{ pictorial },

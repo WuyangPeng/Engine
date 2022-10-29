@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 19:02)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:36)
 
 #include "ArtificialIntellegence/ArtificialIntellegenceExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/ArtificialIntellegenceClassInvariantMacro.h"
 
 ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::ArtificialIntellegenceMacroSharedImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     ARTIFICIAL_INTELLEGENCE_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::GetCount() co
 {
     ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::SetCount(int count) noexcept
+void ArtificialIntellegence::ArtificialIntellegenceMacroSharedImpl::SetCount(int aCount) noexcept
 {
     ARTIFICIAL_INTELLEGENCE_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 19:18)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/21 0:16)
 
 #include "System/SystemExport.h"
 
@@ -19,7 +19,9 @@
 #include "System/Windows/WindowsSystem.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     #include <process.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 System::ThreadHandle System::CreateSystemThread(WindowSecurityAttributesPtr threadAttributes, WindowsSize stackSize, ThreadStartRoutine startAddress, WindowsVoidPtr parameter, ThreadCreation creationFlags, WindowsDWordPtr threadID) noexcept
@@ -249,7 +251,7 @@ void System::EndSystemThread(unsigned retCode) noexcept
 
 bool System::IsThreadHandleValid(ThreadHandle threadHandle) noexcept
 {
-    if (threadHandle != nullptr && threadHandle != g_InvalidHandleValue)
+    if (threadHandle != nullptr && threadHandle != gInvalidHandleValue)
         return true;
     else
         return false;

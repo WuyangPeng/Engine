@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:57)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 0:06)
 
 #ifndef EXPORT_TEST_ASSIST_TOOLS_MACRO_SHARED_H
 #define EXPORT_TEST_ASSIST_TOOLS_MACRO_SHARED_H

@@ -10,10 +10,13 @@
 #include "Rendering/RenderingExport.h"
 
 #include "TextureRenderTarget.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTextureRenderTarget.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, TextureRenderTarget);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextureRenderTarget);
@@ -95,4 +98,17 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::TextureRenderTarget::CloneObject(
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return Clone();
+}
+
+Rendering::TextureRenderTarget::RendererObjectSharedPtr Rendering::TextureRenderTarget::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLTextureRenderTarget>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

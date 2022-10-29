@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:43)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:09)
 
 #include "UserInterface/UserInterfaceExport.h"
 
 #include "UserInterfaceCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/UserInterfaceClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/CopyUnshared/UserInterfaceCopyUnsharedMacroImpl.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(UserInterface, UserInterfaceCopyUnsharedMacro)
 
 UserInterface::UserInterfaceCopyUnsharedMacro::UserInterfaceCopyUnsharedMacro(int count)
     : impl{ count }
@@ -34,5 +36,3 @@ void UserInterface::UserInterfaceCopyUnsharedMacro::SetCount(int count) noexcept
 
     impl->SetCount(count);
 }
-
-COPY_UNSHARED_CLONE_SELF_DEFINE(UserInterface, UserInterfaceCopyUnsharedMacro)

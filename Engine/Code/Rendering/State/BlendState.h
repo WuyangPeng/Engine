@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 18:16)
+///	引擎版本：0.8.1.3 (2022/10/03 14:51)
 
 #ifndef RENDERING_STATE_BLEND_STATE_H
 #define RENDERING_STATE_BLEND_STATE_H
@@ -27,31 +27,45 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(BlendState);
         using ParentType = DrawingState;
+
         using Colour = Colour<float>;
+        using BlendStateSharedPtr = std::shared_ptr<BlendState>;
+
+    private:
+        enum class BlendStateCreate
+        {
+            Init,
+        };
 
     public:
-        explicit BlendState(const std::string& name);
+        NODISCARD static BlendStateSharedPtr Create(const std::string& name);
+        BlendState(BlendStateCreate blendStateCreate, const std::string& name);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(BlendState);
 
-        NODISCARD bool GetEnableAlphaToCoverage() const noexcept;
-        void SetEnableAlphaToCoverage(bool aEnableAlphaToCoverage) noexcept;
+        NODISCARD bool IsEnableAlphaToCoverage() const noexcept;
+        void SetEnableAlphaToCoverage(bool enableAlphaToCoverage) noexcept;
 
-        NODISCARD bool GetEnableIndependentBlend() const noexcept;
-        void SetEnableIndependentBlend(bool aEnableIndependentBlend) noexcept;
+        NODISCARD bool IsEnableIndependentBlend() const noexcept;
+        void SetEnableIndependentBlend(bool enableIndependentBlend) noexcept;
 
         NODISCARD Colour GetBlendColor() const noexcept;
-        void SetBlendColor(Colour aBlendColor) noexcept;
+        void SetBlendColor(Colour blendColor) noexcept;
 
         NODISCARD uint32_t GetSampleMask() const noexcept;
-        void SetSampleMask(uint32_t aSampleMask) noexcept;
+        void SetSampleMask(uint32_t sampleMask) noexcept;
 
         NODISCARD BlendStateTarget GetBlendStateTarget(int index) const;
         void SetBlendStateTarget(int index, const BlendStateTarget& blendStateTarget);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
+    private:
+        void CheckDrawingState();
 
     private:
         PackageType impl;

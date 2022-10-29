@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:49)
+///	引擎测试版本：0.8.1.3 (2022/10/10 20:02)
 
 #include "LibraryDirectoryTesting.h"
 #include "System/DynamicLink/LibraryDirectory.h"
@@ -46,7 +46,7 @@ void System::LibraryDirectoryTesting::DllDirectoryAccessTest()
 
     auto currentLibraryDirectory = GetCurrentLibraryDirectory();
 
-    ASSERT_TRUE(0 < currentLibraryDirectory.size() && currentLibraryDirectory.size() < g_MaxPath);
+    ASSERT_TRUE(0 < currentLibraryDirectory.size() && currentLibraryDirectory.size() < gMaxPath);
 
     ResetLibraryDirectory(DYNAMIC_LINK_TEXT(""s));
 
@@ -57,8 +57,8 @@ void System::LibraryDirectoryTesting::DllDirectoryAccessTest()
 
 System::DynamicLinkString System::LibraryDirectoryTesting::GetCurrentLibraryDirectory()
 {
-    array<DynamicLinkCharType, g_MaxPath> directoryName{};
-    const auto maxFileNameLength = GetLibraryDirectory(g_MaxPath, directoryName.data());
+    array<DynamicLinkCharType, gMaxPath> directoryName{};
+    const auto maxFileNameLength = GetLibraryDirectory(gMaxPath, directoryName.data());
     DynamicLinkString currentLibraryDirectory{ directoryName.data() };
 
     ASSERT_EQUAL(maxFileNameLength, currentLibraryDirectory.size());

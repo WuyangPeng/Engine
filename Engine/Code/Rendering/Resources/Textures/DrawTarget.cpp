@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "DrawTarget.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/NameMacro.h"
@@ -17,6 +18,8 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLDrawTarget.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Resources/Detail/Textures/DrawTargetImpl.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, DrawTarget)
@@ -130,11 +133,34 @@ void Rendering::DrawTarget::Load(CoreTools::BufferSource& source)
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-
-
 CoreTools::ObjectInterfaceSharedPtr Rendering::DrawTarget::CloneObject() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
+}
+
+Rendering::RendererDrawTargetSharedPtr Rendering::DrawTarget::CreateRendererDrawTarget(RendererTypes rendererTypes, const GraphicsObjectContainer& renderTargetTextures, GraphicsObject& depthStencilTexture)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+        {
+            OpenGLDrawTarget::OpenGLTextureRenderTargetContainer container{};
+            for (const auto& renderTargetTexture : renderTargetTextures)
+            {
+                container.emplace_back(boost::polymorphic_pointer_cast<OpenGLTextureRenderTarget>(renderTargetTexture->CreateRendererObject(rendererTypes)));
+            }
+
+            auto depthStencil = boost::polymorphic_pointer_cast<OpenGLTextureDepthStencil>(depthStencilTexture.CreateRendererObject(rendererTypes));
+
+            return std::make_shared<OpenGLDrawTarget>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), container, depthStencil);
+        }
+        default:
+        {
+            THROW_EXCEPTION(SYSTEM_TEXT("渲染类型不存在。"s));
+        }
+    }
 }

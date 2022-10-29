@@ -113,7 +113,7 @@ Rendering::ImageProcessingBase::ImageProcessingBase(int numCols, int numRows, in
 
     for (auto i = 0; i < numTargets; ++i)
     {
-        renderTargets.emplace_back(std::make_shared<DrawTarget>(1, System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::A32B32G32R32F), numCols, numRows));
+        renderTargets.emplace_back(std::make_shared<DrawTarget>(1, System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::RGBA32F), numCols, numRows));
     }
 
     RENDERING_SELF_CLASS_IS_VALID_9;

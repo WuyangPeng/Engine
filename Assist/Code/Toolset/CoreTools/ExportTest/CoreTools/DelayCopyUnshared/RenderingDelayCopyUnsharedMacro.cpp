@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:41)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:12)
 
 #include "Rendering/RenderingExport.h"
 
 #include "RenderingDelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/DelayCopyUnshared/RenderingDelayCopyUnsharedMacroImpl.h"
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RenderingDelayCopyUnsharedMacro)
 
 Rendering::RenderingDelayCopyUnsharedMacro::RenderingDelayCopyUnsharedMacro(int count)
     : impl{ count }
@@ -34,5 +36,3 @@ void Rendering::RenderingDelayCopyUnsharedMacro::SetCount(int count)
 
     impl->SetCount(count);
 }
-
-COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, RenderingDelayCopyUnsharedMacro)

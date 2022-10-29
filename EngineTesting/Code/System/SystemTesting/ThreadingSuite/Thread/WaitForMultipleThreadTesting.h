@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:38)
+///	引擎测试版本：0.8.1.3 (2022/10/22 23:45)
 
 #ifndef SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_THREAD_TESTING_H
 #define SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_THREAD_TESTING_H
@@ -29,6 +29,8 @@ namespace System
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
+        using Container = std::vector<System::ThreadHandle>;
+
     private:
         void DoRunUnitTest() final;
         void MainTest();
@@ -39,8 +41,8 @@ namespace System
         void WaitMultipleObjects1Test();
         void WaitMultipleObjects2Test();
 
-        NODISCARD std::vector<System::ThreadHandle> CreateThread();
-        void CloseThread(const std::vector<System::ThreadHandle>& threadHandle);
+        NODISCARD Container CreateThread();
+        void CloseThread(const Container& threadHandle);
 
         static WindowsDWord SYSTEM_WINAPI ThreadStartRoutine(void* threadParameter);
     };

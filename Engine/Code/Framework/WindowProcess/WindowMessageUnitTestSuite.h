@@ -36,6 +36,7 @@ namespace Framework
 
     public:
         WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName);
+        WindowMessageUnitTestSuite(int64_t delta, const std::string& suiteName, const Framework::EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -11,7 +11,7 @@
 
 #include "ShaderFactory.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
-#include "Rendering/OpenGLRenderer/Detail/GLSLShader.h"
+#include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLShader.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
 using std::make_shared;

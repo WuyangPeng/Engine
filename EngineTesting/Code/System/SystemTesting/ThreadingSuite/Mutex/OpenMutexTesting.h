@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:34)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:31)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_MUTEX_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_MUTEX_TESTING_H
@@ -38,12 +38,12 @@ namespace System
         void WaitForMutexTest(const String& mutexName);
 
     private:
-        using MutexStandardAccessFlagsCollection = std::vector<MutexStandardAccess>;
-        using MutexSpecificAccessFlagsCollection = std::vector<MutexSpecificAccess>;
+        using MutexStandardAccessFlagsContainer = std::vector<MutexStandardAccess>;
+        using MutexSpecificAccessFlagsContainer = std::vector<MutexSpecificAccess>;
 
     private:
-        MutexStandardAccessFlagsCollection mutexStandardAccessFlags;
-        MutexSpecificAccessFlagsCollection mutexSpecificAccessFlags;
+        MutexStandardAccessFlagsContainer mutexStandardAccessFlags;
+        MutexSpecificAccessFlagsContainer mutexSpecificAccessFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

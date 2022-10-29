@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:05)
+///	引擎测试版本：0.8.1.3 (2022/10/15 21:55)
 
 #include "ConsoleFontTesting.h"
 #include "System/Console/ConsoleFont.h"
@@ -89,7 +89,7 @@ void System::ConsoleFontTesting::SetCurrentConsoleFontTest()
     ASSERT_EQUAL(originalConsoleFontInfo.FontFamily, currentConsoleFontInfo.FontFamily);
     ASSERT_EQUAL(originalConsoleFontInfo.FontWeight, currentConsoleFontInfo.FontWeight);
 
-    for (int i = 0; i < gLogicalFontFaceSize; ++i)
+    for (auto i = 0; i < gLogicalFontFaceSize; ++i)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)

@@ -5,18 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 17:27)
+///	引擎辅助版本：0.8.1.3 (2022/10/27 23:48)
 
-#include "UdpClient.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "UdpClient.h" 
 #include "Toolset/System/SystemToolset/WinSock/UdpSocket.h"
 #include "Toolset/System/SystemToolset/WinSock/WinSockStart.h"
 
-void System::UdpClient()
+void SystemToolset::UdpClient()
 {
-    SystemToolset::WinSockStart winSockStart{ CoreTools::DisableNotThrow::Disable };
+    auto winSockStart = SystemToolset::WinSockStart::Create();
 
-    SystemToolset::UdpSocket udpSocket{ CoreTools::DisableNotThrow::Disable };
+    auto udpSocket = SystemToolset::UdpSocket::Create();
 
     udpSocket.Send();
 }

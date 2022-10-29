@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 18:07)
+///	引擎版本：0.8.1.3 (2022/10/03 14:53)
 
 #include "Rendering/RenderingExport.h"
 
@@ -20,7 +20,7 @@
 Rendering::BlendStateImpl::BlendStateImpl() noexcept
     : enableAlphaToCoverage{ false },
       enableIndependentBlend{ false },
-      target{},
+      blendStateTarget{},
       blendColor{ 0.0f, 0.0f, 0.0f, 0.0f },
       sampleMask{ 0xFFFFFFFFu }
 {
@@ -29,7 +29,7 @@ Rendering::BlendStateImpl::BlendStateImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, BlendStateImpl)
 
-bool Rendering::BlendStateImpl::GetEnableAlphaToCoverage() const noexcept
+bool Rendering::BlendStateImpl::IsEnableAlphaToCoverage() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -43,7 +43,7 @@ void Rendering::BlendStateImpl::SetEnableAlphaToCoverage(bool aEnableAlphaToCove
     enableAlphaToCoverage = aEnableAlphaToCoverage;
 }
 
-bool Rendering::BlendStateImpl::GetEnableIndependentBlend() const noexcept
+bool Rendering::BlendStateImpl::IsEnableIndependentBlend() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -89,53 +89,48 @@ Rendering::BlendStateTarget Rendering::BlendStateImpl::GetBlendStateTarget(int i
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    return target.at(index);
+    return blendStateTarget.at(index);
 }
 
-void Rendering::BlendStateImpl::SetBlendStateTarget(int index, const BlendStateTarget& blendStateTarget)
+void Rendering::BlendStateImpl::SetBlendStateTarget(int index, const BlendStateTarget& aBlendStateTarget)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    target.at(index) = blendStateTarget;
+    blendStateTarget.at(index) = aBlendStateTarget;
 }
 
-void Rendering::BlendStateImpl::Load(CoreTools::BufferSource& source)
+void Rendering::BlendStateImpl::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
-    enableAlphaToCoverage = source.ReadBool();
-    enableIndependentBlend = source.ReadBool();
-
-    source.ReadAggregateContainer(target);
+    source.Read(enableAlphaToCoverage);
+    source.Read(enableIndependentBlend);
+    source.ReadAggregateContainer(blendStateTarget);
     source.ReadAggregate(blendColor);
-
     source.Read(sampleMask);
 }
 
-void Rendering::BlendStateImpl::Save(CoreTools::BufferTarget& aTarget) const
+void Rendering::BlendStateImpl::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    aTarget.Write(enableAlphaToCoverage);
-    aTarget.Write(enableIndependentBlend);
-    aTarget.WriteAggregateContainer(target);
-    aTarget.WriteAggregate(blendColor);
-
-    aTarget.Write(sampleMask);
+    target.Write(enableAlphaToCoverage);
+    target.Write(enableIndependentBlend);
+    target.WriteAggregateContainer(blendStateTarget);
+    target.WriteAggregate(blendColor);
+    target.Write(sampleMask);
 }
 
 int Rendering::BlendStateImpl::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    auto size = CORE_TOOLS_STREAM_SIZE(enableAlphaToCoverage);
+    auto size = RENDERING_STREAM_SIZE(enableAlphaToCoverage);
 
-    size += CORE_TOOLS_STREAM_SIZE(enableIndependentBlend);
-
-    size += RENDERING_STREAM_SIZE(target);
+    size += RENDERING_STREAM_SIZE(enableIndependentBlend);
+    size += RENDERING_STREAM_SIZE(blendStateTarget);
     size += RENDERING_STREAM_SIZE(blendColor);
-
-    size += CORE_TOOLS_STREAM_SIZE(sampleMask);
+    size += RENDERING_STREAM_SIZE(sampleMask);
 
     return size;
 }

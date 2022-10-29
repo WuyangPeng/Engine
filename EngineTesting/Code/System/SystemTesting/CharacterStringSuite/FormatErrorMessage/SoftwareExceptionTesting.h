@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:08)
+///	引擎测试版本：0.8.1.3 (2022/10/14 1:15)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_SOFTWARE_EXCEPTION_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_SOFTWARE_EXCEPTION_TESTING_H
@@ -37,12 +37,12 @@ namespace System
         bool MakeSoftwareExceptionTest();
 
     private:
-        using SeverityFlagsCollection = std::vector<Severity>;
-        using FacilityFlagsCollection = std::vector<Facility>;
+        using SeverityFlagsContainer = std::vector<Severity>;
+        using FacilityFlagsContainer = std::vector<Facility>;
 
     private:
-        SeverityFlagsCollection severityFlags;
-        FacilityFlagsCollection facilityFlags;
+        SeverityFlagsContainer severityFlags;
+        FacilityFlagsContainer facilityFlags;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

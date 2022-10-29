@@ -16,8 +16,8 @@
 #include "Rendering/LocalEffects/TextEffect.h"
 #include "Rendering/Resources/Buffers/ConstantBuffer.h"
 
-Rendering::GraphicsRenderer::GraphicsRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
-    : ParentType{ renderingEnvironment, basis },
+Rendering::GraphicsRenderer::GraphicsRenderer(RendererTypes rendererTypes, const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
+    : ParentType{ rendererTypes, renderingEnvironment, basis },
       rendererObject{},
       rendererObjectMutex{},
       rendererDrawTarget{},

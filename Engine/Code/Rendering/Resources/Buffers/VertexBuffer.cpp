@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "VertexBuffer.h"
-#include "VertexBuffer.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -21,6 +21,8 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLVertexBuffer.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/Buffers/StructuredBuffer.h"
 #include "Rendering/Resources/Detail/Buffers/VertexBufferImpl.h"
@@ -172,4 +174,17 @@ Rendering::VertexBuffer::SpanIterator Rendering::VertexBuffer::GetChannel(Semant
     auto offset = impl->GetOffset(index);
 
     return (buffer == nullptr) ? GetData(offset) : buffer->GetData(offset);
+}
+
+Rendering::VertexBuffer::RendererObjectSharedPtr Rendering::VertexBuffer::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLVertexBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

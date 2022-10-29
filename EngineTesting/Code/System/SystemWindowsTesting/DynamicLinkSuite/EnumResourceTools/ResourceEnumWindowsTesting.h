@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/16 14:31)
+///	引擎测试版本：0.8.1.3 (2022/10/09 22:24)
 
 #ifndef SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_RESOURCE_ENUM_WINDOWS_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_RESOURCE_ENUM_WINDOWS_TESTING_H
@@ -53,14 +53,14 @@ namespace System
                                                                       WindowsPtrLong lParam);
 
     private:
-        using EnumResourceDataGroup = std::vector<EnumResourceData>;
+        using EnumResourceDataContainer = std::vector<EnumResourceData>;
         using ResourceEnumContainer = std::vector<ResourceEnum>;
 
     private:
         NODISCARD ResourceEnum GetCurrentResourceEnum() const;
 
     private:
-        EnumResourceDataGroup enumResourceDataGroup;
+        EnumResourceDataContainer enumResourceDataContainer;
         ResourceEnumContainer resourceEnum;
         size_t index;
         WindowsHInstance instance;

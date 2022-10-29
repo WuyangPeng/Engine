@@ -19,6 +19,7 @@
 #include "Rendering/Renderers/RenderingEnvironment.h"
 #include "Rendering/Renderers/Viewport.h"
 #include "Rendering/Resources/ResourcesFwd.h"
+#include "Rendering/State/GlobalState.h"
 
 #include <string>
 
@@ -35,9 +36,10 @@ namespace Rendering
         using RasterizerStateSharedPtr = std::shared_ptr<RasterizerState>;
         using BufferSharedPtr = std::shared_ptr<Buffer>;
         using TextureSharedPtr = std::shared_ptr<Texture>;
+        using RendererObjectBridgeSharedPtr = std::shared_ptr<RendererObjectBridge>;
 
     public:
-        BaseRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
+        BaseRenderer(RendererTypes rendererTypes, const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis);
         virtual ~BaseRenderer() noexcept = default;
         BaseRenderer(const BaseRenderer& rhs) = delete;
         BaseRenderer& operator=(const BaseRenderer& rhs) = delete;
@@ -81,19 +83,16 @@ namespace Rendering
         NODISCARD FontSharedPtr GetDefaultFont() const noexcept;
 
         virtual void SetBlendState(const BlendStateSharedPtr& state) = 0;
-        NODISCARD BlendStateSharedPtr GetBlendState() const noexcept;
-        void SetDefaultBlendState();
-        NODISCARD BlendStateSharedPtr GetDefaultBlendState() const noexcept;
+        NODISCARD BlendStateSharedPtr GetBlendState() noexcept;
+        NODISCARD BlendStateSharedPtr GetDefaultBlendState() noexcept;
 
         virtual void SetDepthStencilState(const DepthStencilStateSharedPtr& state) = 0;
-        NODISCARD DepthStencilStateSharedPtr GetDepthStencilState() const noexcept;
-        void SetDefaultDepthStencilState();
-        NODISCARD DepthStencilStateSharedPtr GetDefaultDepthStencilState() const noexcept;
+        NODISCARD DepthStencilStateSharedPtr GetDepthStencilState() noexcept;
+        NODISCARD DepthStencilStateSharedPtr GetDefaultDepthStencilState() noexcept;
 
         virtual void SetRasterizerState(const RasterizerStateSharedPtr& state) = 0;
-        NODISCARD RasterizerStateSharedPtr GetRasterizerState() const noexcept;
-        void SetDefaultRasterizerState();
-        NODISCARD RasterizerStateSharedPtr GetDefaultRasterizerState() const noexcept;
+        NODISCARD RasterizerStateSharedPtr GetRasterizerState() noexcept;
+        NODISCARD RasterizerStateSharedPtr GetDefaultRasterizerState() noexcept;
 
         NODISCARD virtual bool Update(const BufferSharedPtr& buffer) = 0;
         NODISCARD virtual bool Update(const TextureSharedPtr& texture) = 0;
@@ -105,16 +104,16 @@ namespace Rendering
         void InitDevice();
 
     protected:
-        void CreateDefaultGlobalState();
-        void SetActiveBlendState(const BlendStateSharedPtr& state) noexcept;
-        void SetActiveDepthStencilState(const DepthStencilStateSharedPtr& state) noexcept;
-        void SetActiveRasterizerState(const RasterizerStateSharedPtr& state) noexcept;
+        void SetActiveBlendState(const BlendStateSharedPtr& state);
+        void SetActiveDepthStencilState(const DepthStencilStateSharedPtr& state);
+        void SetActiveRasterizerState(const RasterizerStateSharedPtr& state);
 
     private:
         RenderingEnvironment renderingEnvironment;
         RenderingDevice renderingDevice;
 
         RendererBasis rendererBasis;
+        RendererObjectBridgeSharedPtr rendererObjectBridge;
 
         // Çå³ýÖ¡»º³åÇø¡£
         Colour clearColor;
@@ -124,12 +123,7 @@ namespace Rendering
         FontSharedPtr defaultFont;
         FontSharedPtr activeFont;
 
-        BlendStateSharedPtr defaultBlendState;
-        BlendStateSharedPtr activeBlendState;
-        DepthStencilStateSharedPtr defaultDepthStencilState;
-        DepthStencilStateSharedPtr activeDepthStencilState;
-        RasterizerStateSharedPtr defaultRasterizerState;
-        RasterizerStateSharedPtr activeRasterizerState;
+        GlobalState globalState;
     };
 }
 

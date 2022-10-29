@@ -88,9 +88,9 @@ namespace System
     using WindowsHandlePtr = PHANDLE;
     using WindowsDlgProc = DLGPROC;
 
-    constexpr auto g_MaxModuleName32 = MAX_MODULE_NAME32;
-    constexpr auto g_WindowExceptionMaximumParameters = EXCEPTION_MAXIMUM_PARAMETERS;
-    const WindowsHandle g_InvalidHandleValue{ INVALID_HANDLE_VALUE };
+    constexpr auto gMaxModuleName32 = MAX_MODULE_NAME32;
+    constexpr auto gWindowExceptionMaximumParameters = EXCEPTION_MAXIMUM_PARAMETERS;
+    const WindowsHandle gInvalidHandleValue{ INVALID_HANDLE_VALUE };
 
     using WindowsModuleEntry32 = MODULEENTRY32;
     using WindowsModuleEntry32Ptr = LPMODULEENTRY32;
@@ -104,7 +104,7 @@ namespace System
     using WindowsImageImportDescriptorPtr = PIMAGE_IMPORT_DESCRIPTOR;
     using WindowsTextMetric = TEXTMETRIC;
 
-    constexpr WindowsDWord g_MaxPath{ MAX_PATH };
+    constexpr WindowsDWord gMaxPath{ MAX_PATH };
 
     using SystemHResult = HRESULT;
     using SystemIID = IID;
@@ -303,9 +303,9 @@ namespace System
     using WindowsHandlePtr = WindowsHandle*;
     using WindowsDlgProc = WindowsPtrInt (*)(WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam);
 
-    constexpr int g_MaxModuleName32{ 255 };
-    constexpr int g_WindowExceptionMaximumParameters{ 15 };
-    const WindowsHandle g_InvalidHandleValue{ reinterpret_cast<WindowsHandle>(int(-1)) };
+    constexpr int gMaxModuleName32{ 255 };
+    constexpr int gWindowExceptionMaximumParameters{ 15 };
+    const WindowsHandle gInvalidHandleValue{ reinterpret_cast<WindowsHandle>(int(-1)) };
 
     struct WindowsModuleEntry32
     {
@@ -317,8 +317,8 @@ namespace System
         unsigned char* modBaseAddr;
         uint32_t modBaseSize;
         void* hModule;
-        char szModule[g_MaxModuleName32 + 1];
-        char szExePath[g_MaxPath];
+        char szModule[gMaxModuleName32 + 1];
+        char szExePath[gMaxPath];
     };
     using WindowsModuleEntry32Ptr = WindowsModuleEntry32*;
 
@@ -329,7 +329,7 @@ namespace System
         ExceptionRecord* ExceptionRecord;
         void* ExceptionAddress;
         uint32_t NumberParameters;
-        uint64_t ExceptionInformation[g_WindowExceptionMaximumParameters];
+        uint64_t ExceptionInformation[gWindowExceptionMaximumParameters];
     };
     using WindowsExceptionRecordPtr = WindowsExceptionRecord*;
 
@@ -425,7 +425,7 @@ namespace System
         uint8_t tmCharSet;
     };
 
-    constexpr WindowsDWord g_MaxPath{ 260 };
+    constexpr WindowsDWord gMaxPath{ 260 };
 
     using SystemHResult = long;
 

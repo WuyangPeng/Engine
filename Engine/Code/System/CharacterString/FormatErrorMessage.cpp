@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:47)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/12 23:44)
 
 #include "System/SystemExport.h"
 
@@ -39,13 +39,13 @@ namespace System
 }
 
 System::WindowsDWord System::FormatErrorMessage(FormatMessageOption flag,
-                                               FormatMessageWidth widthFlag,
-                                               WindowsConstVoidPtr source,
-                                               WindowError messageID,
-                                               const LanguageIDData& languageID,
-                                               TChar* buffer,
-                                               WindowsDWord size,
-                                               va_list* arguments) noexcept
+                                                FormatMessageWidth widthFlag,
+                                                WindowsConstVoidPtr source,
+                                                WindowError messageID,
+                                                const LanguageIDData& languageID,
+                                                TChar* buffer,
+                                                WindowsDWord size,
+                                                va_list* arguments) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -94,7 +94,7 @@ bool System::FormatErrorMessage(WindowsHLocal& errorMessage, DynamicLinkModule m
     return size != 0;
 }
 
-System::WindowsDWord System::FormatErrorMessage(const DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept
+System::WindowsDWord System::FormatErrorMessage(DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept
 {
     constexpr LanguageIDData languageID{};
     constexpr auto messageOption = FormatMessageOption::FromHModule | FormatMessageOption::IgnoreInserts;

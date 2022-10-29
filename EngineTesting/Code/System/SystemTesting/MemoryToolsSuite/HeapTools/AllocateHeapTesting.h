@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:49)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:35)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_HEAP_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_HEAP_TESTING_H
@@ -42,10 +42,10 @@ namespace System
         void AllocateIntegerTest();
 
     private:
-        using HeapCreateFlagsCollection = std::vector<HeapCreate>;
+        using HeapCreateFlagsContainer = std::vector<HeapCreate>;
 
     private:
-        HeapCreateFlagsCollection heapCreateFlags;
+        HeapCreateFlagsContainer heapCreateFlags;
     };
 }
 

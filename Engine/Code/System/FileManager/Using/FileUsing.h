@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:47)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/29 19:27)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_USING_H
 #define SYSTEM_FILE_MANAGE_FILE_USING_H
@@ -17,16 +17,16 @@
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    constexpr WindowsDWord g_InvalidFileSize{ INVALID_FILE_SIZE };
-    constexpr WindowsDWord g_InvalidSetFilePointer{ INVALID_SET_FILE_POINTER };
+    constexpr WindowsDWord gInvalidFileSize{ INVALID_FILE_SIZE };
+    constexpr WindowsDWord gInvalidSetFilePointer{ INVALID_SET_FILE_POINTER };
 
     using FileTime = FILETIME;
     using FileTimePtr = LPFILETIME;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    constexpr WindowsDWord g_InvalidFileSize{ 0xFFFFFFFF };
-    constexpr WindowsDWord g_InvalidSetFilePointer{ static_cast<WindowsDWord>(-1) };
+    constexpr WindowsDWord gInvalidFileSize{ 0xFFFFFFFF };
+    constexpr WindowsDWord gInvalidSetFilePointer{ static_cast<WindowsDWord>(-1) };
 
     struct FileTime
     {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 13:39)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:18)
 
 #include "Framework/FrameworkExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::FrameworkCopyUnsharedMacroImpl::FrameworkCopyUnsharedMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Framework::FrameworkCopyUnsharedMacroImpl::GetCount() const noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Framework::FrameworkCopyUnsharedMacroImpl::SetCount(int count) noexcept
+void Framework::FrameworkCopyUnsharedMacroImpl::SetCount(int aCount) noexcept
 {
     FRAMEWORK_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

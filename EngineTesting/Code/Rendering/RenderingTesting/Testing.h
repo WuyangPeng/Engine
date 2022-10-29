@@ -44,6 +44,7 @@
 #include "ShaderFloatsSuite/ShaderFloatsSuite.h"
 #include "ShadersSuite/ShadersSuite.h"
 #include "SortingSuite/SortingSuite.h"
+#include "StateSuite/StateSuite.h"
 #include "TIFFSuite/TIFFSuite.h"
 #include "TerrainSuite/TerrainSuite.h"
 #include "TextFontsSuite/TextFontsSuite.h"

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:35)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:31)
 
 #ifndef SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_MUTEX_TESTING_H
 #define SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_MUTEX_TESTING_H
@@ -28,14 +28,17 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Container = std::vector<WindowsHandle>;
+
+    private:
         void DoRunUnitTest() final;
         void MainTest();
 
         void WaitMultipleObjectsTest();
 
-        void WaitForMutexTest0(const std::vector<WindowsHandle>& mutexHandle);
-        void WaitForMutexTest1(const std::vector<WindowsHandle>& mutexHandle);
-        void WaitForMutexTest2(const std::vector<WindowsHandle>& mutexHandle);
+        void WaitForMutexTest0(const Container& mutexHandle);
+        void WaitForMutexTest1(const Container& mutexHandle);
+        void WaitForMutexTest2(const Container& mutexHandle);
     };
 }
 

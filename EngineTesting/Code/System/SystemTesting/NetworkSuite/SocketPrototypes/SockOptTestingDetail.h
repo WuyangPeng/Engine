@@ -17,7 +17,7 @@
 template <System::SocketLevelOption LevelOption, System::SocketRetrievedOption RetrievedOption, typename Option>
 void System::SockOptTesting::SetAndGetSockOptTest()
 {
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     Option optVal{};
@@ -33,7 +33,7 @@ void System::SockOptTesting::SetAndGetSockOptTest()
 template <System::SocketLevelOption LevelOption, System::SocketRetrievedOption RetrievedOption, typename Option>
 void System::SockOptTesting::GetSockOptTest()
 {
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     Option optVal{};

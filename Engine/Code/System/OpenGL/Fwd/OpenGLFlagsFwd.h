@@ -30,15 +30,21 @@ namespace System
     enum class OpenGLClearMask;
     enum class OpenGLQuery;
     enum class TextureTarget;
+    enum class TexParameter;
+    enum class PixelStore;
     enum class ClientState;
     enum class OpenGLData;
     enum class BindBuffer;
     enum class TextureInternalFormat;
+    enum class TextureExternalFormat;
     enum class TextureFormat;
-    enum class SrcBlendMode;
-    enum class DstBlendMode;
-    enum class CompareMode;
-    enum class OpenGLOperation;
+    enum class BlendStateMode;
+    enum class BlendStateOperation;
+    enum class DepthStencilStateMode;
+    enum class DepthStencilStateOperation;
+    enum class DepthStencilStateWriteMask;
+    enum class RasterizerStateCullFace;
+    enum class RasterizerStateFillMode;
     enum class OpenGLAttribute;
     enum class BufferLocking;
     enum class BufferUsage;
@@ -51,7 +57,11 @@ namespace System
     enum class TextureNumber;
     enum class ColorAttachent;
     enum class CheckFrambufferStatus;
+    enum class FrameBufferType;
     enum class AttributeUsage;
+    enum class OpenGLEnable;
+    enum class OpenGLFrontFace;
+    enum class OpenGLTextureName;
 
     // Wgl
     enum class PixelFormatDescriptorFlags : uint32_t;

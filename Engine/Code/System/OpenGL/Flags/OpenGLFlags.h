@@ -30,6 +30,9 @@ namespace System
         MinorVersion = GL_MINOR_VERSION,
 
         VertexArray = GL_VERTEX_ARRAY,
+
+        Viewport = GL_VIEWPORT,
+        DepthRange = GL_DEPTH_RANGE,
     };
 
     enum class TextureTarget
@@ -38,6 +41,21 @@ namespace System
         Texture2D = GL_TEXTURE_2D,
         Texture3D = GL_TEXTURE_3D,
         TextureCubeMap = GL_TEXTURE_CUBE_MAP,
+        Texture1DArray = GL_TEXTURE_1D_ARRAY,
+        Texture2DArray = GL_TEXTURE_2D_ARRAY,
+        TextureCubeMapArray = GL_TEXTURE_CUBE_MAP_ARRAY,
+    };
+
+    enum class PixelStore
+    {
+        UnpackAlignment = GL_UNPACK_ALIGNMENT,
+        PackAlignment = GL_PACK_ALIGNMENT,
+    };
+
+    enum class TexParameter
+    {
+        TextureBaseLevel = GL_TEXTURE_BASE_LEVEL,
+        TextureMaxLevel = GL_TEXTURE_MAX_LEVEL,
     };
 
     enum class ClientState
@@ -47,7 +65,7 @@ namespace System
 
     enum class OpenGLData
     {
-        None = 0,
+        None = GL_ZERO,
         Short = GL_SHORT,
         Int = GL_INT,
         Float = GL_FLOAT,
@@ -60,7 +78,10 @@ namespace System
         UnsignedShort1555Rev = GL_UNSIGNED_SHORT_1_5_5_5_REV,
         UnsignedShort4444Rev = GL_UNSIGNED_SHORT_4_4_4_4_REV,
         HalfFloat = GL_HALF_FLOAT,
-        UnsignedInt24_8 = GL_UNSIGNED_INT_24_8
+        UnsignedInt24_8 = GL_UNSIGNED_INT_24_8,
+        Int2_10_10_10Rev = GL_INT_2_10_10_10_REV,
+        UnsignedInt2_10_10_10Rev = GL_UNSIGNED_INT_2_10_10_10_REV,
+        UnsignedInt10F11F11FRev = GL_UNSIGNED_INT_10F_11F_11F_REV
     };
 
     enum class BindBuffer
@@ -68,24 +89,80 @@ namespace System
         ArrayBuffer = GL_ARRAY_BUFFER,
         ElementArrayBuffer = GL_ELEMENT_ARRAY_BUFFER,
         PixelUnpackBuffer = GL_PIXEL_UNPACK_BUFFER,
+        PixePackBuffer = GL_PIXEL_PACK_BUFFER,
+        ShaderStorageBuffer = GL_SHADER_STORAGE_BUFFER,
+        UniformBuffer = GL_UNIFORM_BUFFER,
+        CopyReadBuffer = GL_COPY_READ_BUFFER,
+        CopyWriteBuffer = GL_COPY_WRITE_BUFFER,
+        AtomicCounterBuffer = GL_ATOMIC_COUNTER_BUFFER,
     };
 
     enum class TextureInternalFormat
     {
-        R5G6B5 = GL_RGB5,
-        A1R5G5B5 = GL_RGB5_A1,
-        A4R4G4B4 = GL_RGBA4,
-        R8G8B8 = GL_RGB8,
-        A8R8G8B8 = GL_RGBA8,
-        G16R16 = GL_RG16,
-        A16B16G16R16 = GL_RGBA16,
-        R16F = GL_R16F,
-        G16R16F = GL_RG16F,
-        A16B16G16R16F = GL_RGBA16F,
+        None = 0,
+
+        RGBA32F = GL_RGBA32F,
+        RGBA32UI = GL_RGBA32UI,
+        RGBA32I = GL_RGBA32I,
+        RGB32F = GL_RGB32F,
+        RGB32UI = GL_RGB32UI,
+        RGB32I = GL_RGB32I,
+        RGBA16F = GL_RGBA16F,
+        RGBA16 = GL_RGBA16,
+        RGBA16UI = GL_RGBA16UI,
+        RGBA16SNorm = GL_RGBA16_SNORM,
+        RGBA16I = GL_RGBA16I,
+        RG32F = GL_RG32F,
+        RG32UI = GL_RG32UI,
+        RG32I = GL_RG32I,
+        R11F_G11F_B10F = GL_R11F_G11F_B10F,
+        RGBA8 = GL_RGBA8,
+        RGBA8UI = GL_RGBA8UI,
+        RGBA8SNorm = GL_RGBA8_SNORM,
+        RGBA8I = GL_RGBA8I,
+        RG16F = GL_RG16F,
+        RG16 = GL_RG16,
+        RG16UI = GL_RG16UI,
+        R16SNorm = GL_R16_SNORM,
+        R16I = GL_R16I,
         R32F = GL_R32F,
-        G32R32F = GL_RG32F,
-        A32B32G32R32F = GL_RGBA32F,
-        D24S8 = GL_DEPTH24_STENCIL8,
+        R32UI = GL_R32UI,
+        R32I = GL_R32I,
+        RG8 = GL_RG8,
+        RG8UI = GL_RG8UI,
+        RG8SNorm = GL_RG8_SNORM,
+        RG8I = GL_RG8I,
+        R16F = GL_R16F,
+        R16 = GL_R16,
+        R16UI = GL_R16UI,
+        R8 = GL_R8,
+        R8UI = GL_R8UI,
+        R8SNorm = GL_R8_SNORM,
+        R8I = GL_R8I,
+        RGB9E5 = GL_RGB9_E5,
+        RGB565 = GL_RGB565,
+        RGB5A1 = GL_RGB5_A1,
+        RGB10A2 = GL_RGB10_A2,
+
+        DepthComponent32F = GL_DEPTH_COMPONENT32F,
+        Depth24Stencil8 = GL_DEPTH24_STENCIL8,
+        DepthComponent16 = GL_DEPTH_COMPONENT16,
+    };
+
+    enum class TextureExternalFormat
+    {
+        Unknown = 0,
+        RGBA = GL_RGBA,
+        RGBAInteger = GL_RGBA_INTEGER,
+        RGB = GL_RGB,
+        RGBInteger = GL_RGB_INTEGER,
+        RG = GL_RG,
+        RGInteger = GL_RG_INTEGER,
+        Red = GL_RED,
+        RedInteger = GL_RED_INTEGER,
+        DepthComponent = GL_DEPTH_COMPONENT,
+        BGR = GL_BGR,
+        BGRA = GL_BGRA
     };
 
     enum class TextureFormat
@@ -99,52 +176,49 @@ namespace System
         D24S8 = GL_DEPTH_STENCIL
     };
 
-    enum class SrcBlendMode
+    enum class BlendStateMode
     {
         Zero = GL_ZERO,
         One = GL_ONE,
-        DstColor = GL_DST_COLOR,
-        OneMinusDstColor = GL_ONE_MINUS_DST_COLOR,
-        SrcAlpha = GL_SRC_ALPHA,
-        OneMinusSrcAlpha = GL_ONE_MINUS_SRC_ALPHA,
-        DstAlpha = GL_DST_ALPHA,
-        OneMinusDstAlpha = GL_ONE_MINUS_DST_ALPHA,
-        SrcAlphaSaturate = GL_SRC_ALPHA_SATURATE,
+        SourceColor = GL_SRC_COLOR,
+        OneMinusSourceColor = GL_ONE_MINUS_SRC_COLOR,
+        SourceAlpha = GL_SRC_ALPHA,
+        OneMinusSourceAlpha = GL_ONE_MINUS_SRC_ALPHA,
+        DestinationAlpha = GL_SRC_ALPHA,
+        OneMinusDestinationAlpha = GL_ONE_MINUS_DST_ALPHA,
+        DestinationColor = GL_DST_COLOR,
+        OneMinusDestinationColor = GL_ONE_MINUS_DST_COLOR,
+        SourceAlphaSaturate = GL_SRC_ALPHA_SATURATE,
         ConstantColor = GL_CONSTANT_COLOR,
         OneMinusConstantColor = GL_ONE_MINUS_CONSTANT_COLOR,
-        ConstantAlpha = GL_CONSTANT_ALPHA,
-        OneMinusConstantAlpha = GL_ONE_MINUS_CONSTANT_ALPHA
+        Source1Color = GL_SRC1_COLOR,
+        OneMinusSource1Color = GL_ONE_MINUS_SRC1_COLOR,
+        Source1Alpha = GL_SRC1_ALPHA,
+        OneMinusSource1Alpha = GL_ONE_MINUS_SRC1_ALPHA,
     };
 
-    enum class DstBlendMode
+    enum class BlendStateOperation
     {
-        Zero = GL_ZERO,
-        One = GL_ONE,
-        SrcColor = GL_SRC_COLOR,
-        OneMinusSrcColor = GL_ONE_MINUS_SRC_COLOR,
-        SrcAlpha = GL_SRC_ALPHA,
-        OneMinusSrcAlpha = GL_ONE_MINUS_SRC_ALPHA,
-        DstAlpha = GL_SRC_ALPHA,
-        OneMinusDstAlpha = GL_ONE_MINUS_DST_ALPHA,
-        ConstantColor = GL_CONSTANT_COLOR,
-        OneMinusConstantColor = GL_ONE_MINUS_CONSTANT_COLOR,
-        ConstantAlpha = GL_CONSTANT_ALPHA,
-        OneMinusConstantAlpha = GL_ONE_MINUS_CONSTANT_ALPHA
+        FuncAdd = GL_FUNC_ADD,
+        FuncSubtract = GL_FUNC_SUBTRACT,
+        FuncReverseSubtract = GL_FUNC_REVERSE_SUBTRACT,
+        Min = GL_MIN,
+        Max = GL_MAX
     };
 
-    enum class CompareMode
+    enum class DepthStencilStateMode
     {
         Never = GL_NEVER,
         Less = GL_LESS,
         Equal = GL_EQUAL,
-        LEqual = GL_LEQUAL,
+        LessEqual = GL_LEQUAL,
         Greater = GL_GREATER,
         NotEqual = GL_NOTEQUAL,
-        GEqual = GL_GEQUAL,
+        GreaterEqual = GL_GEQUAL,
         Always = GL_ALWAYS
     };
 
-    enum class OpenGLOperation
+    enum class DepthStencilStateOperation
     {
         Keep = GL_KEEP,
         Zero = GL_ZERO,
@@ -152,6 +226,26 @@ namespace System
         Increment = GL_INCR,
         Decrement = GL_DECR,
         Invert = GL_INVERT
+    };
+
+    enum class DepthStencilStateWriteMask
+    {
+        False = GL_FALSE,
+        True = GL_TRUE
+    };
+
+    enum class RasterizerStateFillMode
+    {
+        Fill = GL_FILL,
+        Line = GL_LINE
+    };
+
+    enum class RasterizerStateCullFace
+    {
+        None = 0,
+        Front = GL_FRONT,
+        Back = GL_BACK,
+        FrontAndBack = GL_FRONT_AND_BACK,
     };
 
     enum class OpenGLAttribute
@@ -179,10 +273,10 @@ namespace System
     {
         Nearest = GL_NEAREST,
         Linear = GL_LINEAR,
-        NearestNearest = GL_NEAREST_MIPMAP_NEAREST,
-        NearesLinear = GL_NEAREST_MIPMAP_LINEAR,
-        LinearNeares = GL_LINEAR_MIPMAP_NEAREST,
-        LinearLinear = GL_LINEAR_MIPMAP_LINEAR
+        NearestMipmapNearest = GL_NEAREST_MIPMAP_NEAREST,
+        NearestMipmapLinear = GL_NEAREST_MIPMAP_LINEAR,
+        LinearMipmapNearest = GL_LINEAR_MIPMAP_NEAREST,
+        LinearMipmapLinear = GL_LINEAR_MIPMAP_LINEAR
     };
 
     enum class TextureTargetBinding
@@ -191,6 +285,9 @@ namespace System
         Binding2D = GL_TEXTURE_BINDING_2D,
         Binding3D = GL_TEXTURE_BINDING_3D,
         BindingCube = GL_TEXTURE_BINDING_CUBE_MAP,
+        Binding1DArray = GL_TEXTURE_BINDING_1D_ARRAY,
+        Binding2DArray = GL_TEXTURE_BINDING_2D_ARRAY,
+        BindingCubeArray = GL_TEXTURE_BINDING_CUBE_MAP_ARRAY,
     };
 
     enum class TextureType
@@ -210,8 +307,8 @@ namespace System
     {
         Repeat = GL_REPEAT,
         MirroredRepeat = GL_MIRRORED_REPEAT,
-        ClampBorder = GL_CLAMP_TO_BORDER,
         ClampEdge = GL_CLAMP_TO_EDGE,
+        ClampBorder = GL_CLAMP_TO_BORDER,
     };
 
     enum class PrimitiveType
@@ -288,8 +385,10 @@ namespace System
         Color13 = GL_COLOR_ATTACHMENT13,
         Color14 = GL_COLOR_ATTACHMENT14,
         Color15 = GL_COLOR_ATTACHMENT15,
-        Depth = GL_DEPTH_ATTACHMENT,
-        Stencil = GL_STENCIL_ATTACHMENT
+
+        Stencil = GL_STENCIL_ATTACHMENT,
+        DepthStencilAttachment = GL_DEPTH_STENCIL_ATTACHMENT,
+        DepthAttachment = GL_DEPTH_ATTACHMENT,
     };
 
     enum class CheckFrambufferStatus
@@ -301,6 +400,12 @@ namespace System
         IncompleteReadBuffer = GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER,
         Unsupported = GL_FRAMEBUFFER_UNSUPPORTED,
         Null,
+    };
+
+    enum class FrameBufferType
+    {
+        DrawFramebuffer = GL_DRAW_FRAMEBUFFER,
+        Framebuffer = GL_FRAMEBUFFER,
     };
 
     enum class AttributeUsage
@@ -317,6 +422,37 @@ namespace System
         Binormal = 15,  //   Ù–‘ 15
 
         Quantity
+    };
+
+    enum class OpenGLEnable
+    {
+        Blend = GL_BLEND,
+        DepthTest = GL_DEPTH_TEST,
+        StencilTest = GL_STENCIL_TEST,
+        SampleCoverage = GL_SAMPLE_COVERAGE,
+        CullFace = GL_CULL_FACE,
+        PolygonOffsetFill = GL_POLYGON_OFFSET_FILL,
+        PolygonOffsetLine = GL_POLYGON_OFFSET_LINE,
+        PolygonOffsetPoint = GL_POLYGON_OFFSET_POINT,
+    };
+
+    enum class OpenGLFrontFace
+    {
+        CCW = GL_CCW,
+        CW = GL_CW,
+    };
+
+    enum class OpenGLTextureName
+    {
+        WrapS = GL_TEXTURE_WRAP_S,
+        WrapT = GL_TEXTURE_WRAP_T,
+        WrapR = GL_TEXTURE_WRAP_R,
+        MinLod = GL_TEXTURE_MIN_LOD,
+        MaxLod = GL_TEXTURE_MAX_LOD,
+        LodBias = GL_TEXTURE_LOD_BIAS,
+        MinFilter = GL_TEXTURE_MIN_FILTER,
+        MagFilter = GL_TEXTURE_MAG_FILTER,
+        BorderColor = GL_TEXTURE_BORDER_COLOR,
     };
 
     ENUM_ORABLE_OPERATOR_DEFINE(OpenGLClearMask);

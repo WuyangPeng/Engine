@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:36)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:58)
 
 #ifndef SYSTEM_THREADING_SUITE_PROCESS_TOKEN_TESTING_H
 #define SYSTEM_THREADING_SUITE_PROCESS_TOKEN_TESTING_H
@@ -37,12 +37,12 @@ namespace System
         void ThreadTest();
 
     private:
-        using TokenStandardAccessFlagsCollection = std::vector<TokenStandardAccess>;
-        using TokenSpecificAccessFlagsCollection = std::vector<TokenSpecificAccess>;
+        using TokenStandardAccessFlagsContainer = std::vector<TokenStandardAccess>;
+        using TokenSpecificAccessFlagsContainer = std::vector<TokenSpecificAccess>;
 
     private:
-        TokenStandardAccessFlagsCollection tokenStandardAccessFlags;
-        TokenSpecificAccessFlagsCollection tokenSpecificAccessFlags;
+        TokenStandardAccessFlagsContainer tokenStandardAccessFlags;
+        TokenSpecificAccessFlagsContainer tokenSpecificAccessFlags;
         String processFullPath;
         std::default_random_engine randomEngine;
         size_t maxSize;

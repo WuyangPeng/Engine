@@ -5,15 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 17:13)
+///	引擎辅助版本：0.8.1.3 (2022/10/27 23:45)
 
 #include "Toolset/System/SystemToolset/SystemToolsetExport.h"
 
 #include "WinSockStart.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/Using/WindowsExtensionPrototypesUsing.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "Toolset/System/SystemToolset/Helper/SystemToolsetClassInvariantMacro.h"
 
@@ -23,11 +25,34 @@
 using std::cout;
 using std::exception;
 
-SystemToolset::WinSockStart::WinSockStart(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+SystemToolset::WinSockStart SystemToolset::WinSockStart::Create()
+{
+    return WinSockStart{ DisableNotThrow::Disable };
+}
+
+SystemToolset::WinSockStart::WinSockStart(DisableNotThrow disableNotThrow)
 {
     WinSockStartUp();
 
+    System::UnusedFunction(disableNotThrow);
+
     SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_9;
+}
+
+SystemToolset::WinSockStart::WinSockStart(WinSockStart&& rhs) noexcept
+{
+    System::UnusedFunction(rhs);
+
+    SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_9;
+}
+
+SystemToolset::WinSockStart& SystemToolset::WinSockStart::operator=(WinSockStart&& rhs) noexcept
+{
+    SYSTEM_TOOLSET_CLASS_IS_VALID_9;
+
+    System::UnusedFunction(rhs);
+
+    return *this;
 }
 
 SystemToolset::WinSockStart::~WinSockStart() noexcept
@@ -48,7 +73,7 @@ void SystemToolset::WinSockStart::WinSockStartUp()
 
     if (startUp != System::WinSockStartUpReturn::Successful)
     {
-        throw exception("StartUp 失败。\n");
+        throw std::runtime_error("StartUp 失败。\n");
     }
 }
 

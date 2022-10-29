@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 19:49)
+///	引擎版本：0.8.1.3 (2022/10/04 16:22)
 
 #include "Rendering/RenderingExport.h"
 
 #include "DepthStencilState.h"
 #include "Flags/DepthStencilStateComparison.h"
 #include "Flags/DepthStencilStateWriteMask.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -19,12 +21,19 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
 #include "Rendering/DataTypes/SpecializedIO.h"
+#include "Rendering/OpenGLRenderer/State/OpenGLDepthStencilState.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DepthStencilState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, DepthStencilState);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, DepthStencilState);
 
-Rendering::DepthStencilState::DepthStencilState(const std::string& name)
+Rendering::DepthStencilState::DepthStencilStateSharedPtr Rendering::DepthStencilState::Create(const std::string& name)
+{
+    return std::make_shared<DepthStencilState>(DepthStencilStateCreate::Init, name);
+}
+
+Rendering::DepthStencilState::DepthStencilState(DepthStencilStateCreate depthStencilStateCreate, const std::string& name)
     : ParentType{ name, GraphicsObjectType::DepthStencilState },
       depthEnable{ true },
       writeMask{ DepthStencilStateWriteMask::All },
@@ -36,6 +45,8 @@ Rendering::DepthStencilState::DepthStencilState(const std::string& name)
       backFace{},
       reference{ 0 }
 {
+    System::UnusedFunction(depthStencilStateCreate);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
@@ -62,27 +73,27 @@ int Rendering::DepthStencilState::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += CORE_TOOLS_STREAM_SIZE(depthEnable);
-    size += CORE_TOOLS_STREAM_SIZE(writeMask);
-    size += CORE_TOOLS_STREAM_SIZE(comparison);
-    size += CORE_TOOLS_STREAM_SIZE(stencilEnable);
-    size += CORE_TOOLS_STREAM_SIZE(stencilReadMask);
-    size += CORE_TOOLS_STREAM_SIZE(stencilWriteMask);
+    size += RENDERING_STREAM_SIZE(depthEnable);
+    size += RENDERING_STREAM_SIZE(writeMask);
+    size += RENDERING_STREAM_SIZE(comparison);
+    size += RENDERING_STREAM_SIZE(stencilEnable);
+    size += RENDERING_STREAM_SIZE(stencilReadMask);
+    size += RENDERING_STREAM_SIZE(stencilWriteMask);
     size += RENDERING_STREAM_SIZE(frontFace);
     size += RENDERING_STREAM_SIZE(backFace);
-    size += CORE_TOOLS_STREAM_SIZE(reference);
+    size += RENDERING_STREAM_SIZE(reference);
 
     return size;
 }
 
-int64_t Rendering::DepthStencilState::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::DepthStencilState::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return ParentType::Register(target);
 }
 
-void Rendering::DepthStencilState::Save(CoreTools::BufferTarget& target) const
+void Rendering::DepthStencilState::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -96,16 +107,14 @@ void Rendering::DepthStencilState::Save(CoreTools::BufferTarget& target) const
     target.Write(stencilEnable);
     target.Write(stencilReadMask);
     target.Write(stencilWriteMask);
-
     target.WriteAggregate(frontFace);
     target.WriteAggregate(backFace);
-
     target.Write(reference);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::DepthStencilState::Link(CoreTools::ObjectLink& source)
+void Rendering::DepthStencilState::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -119,7 +128,7 @@ void Rendering::DepthStencilState::PostLink()
     ParentType::PostLink();
 }
 
-void Rendering::DepthStencilState::Load(CoreTools::BufferSource& source)
+void Rendering::DepthStencilState::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -127,19 +136,19 @@ void Rendering::DepthStencilState::Load(CoreTools::BufferSource& source)
 
     ParentType::Load(source);
 
-    depthEnable = source.ReadBool();
+    source.Read(depthEnable);
     source.ReadEnum(writeMask);
     source.ReadEnum(comparison);
-    stencilEnable = source.ReadBool();
+    source.Read(stencilEnable);
     source.Read(stencilReadMask);
     source.Read(stencilWriteMask);
-
     source.ReadAggregate(frontFace);
     source.ReadAggregate(backFace);
-
     source.Read(reference);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+
+    CheckDrawingState();
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::DepthStencilState::CloneObject() const
@@ -147,4 +156,193 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::DepthStencilState::CloneObject() 
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
+}
+
+bool Rendering::DepthStencilState::IsDepthEnable() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return depthEnable;
+}
+
+void Rendering::DepthStencilState::SetDepthEnable(bool aDepthEnable) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    depthEnable = aDepthEnable;
+}
+
+Rendering::DepthStencilStateWriteMask Rendering::DepthStencilState::GetWriteMask() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return writeMask;
+}
+
+void Rendering::DepthStencilState::SetWriteMask(DepthStencilStateWriteMask depthStencilStateWriteMask) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    writeMask = depthStencilStateWriteMask;
+}
+
+Rendering::DepthStencilStateComparison Rendering::DepthStencilState::GetComparison() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return comparison;
+}
+
+void Rendering::DepthStencilState::SetComparison(DepthStencilStateComparison depthStencilStateComparison) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    comparison = depthStencilStateComparison;
+}
+
+bool Rendering::DepthStencilState::IsStencilEnable() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return stencilEnable;
+}
+
+void Rendering::DepthStencilState::SetStencilEnable(bool aStencilEnable) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    stencilEnable = aStencilEnable;
+}
+
+int Rendering::DepthStencilState::GetStencilReadMask() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return stencilReadMask;
+}
+
+void Rendering::DepthStencilState::SetStencilReadMask(int aStencilReadMask) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    stencilReadMask = aStencilReadMask;
+}
+
+int Rendering::DepthStencilState::GetStencilWriteMask() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return stencilWriteMask;
+}
+
+void Rendering::DepthStencilState::SetStencilWriteMask(int aStencilWriteMask) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    stencilWriteMask = aStencilWriteMask;
+}
+
+Rendering::DepthStencilStateFace Rendering::DepthStencilState::GetFrontFace() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return frontFace;
+}
+
+Rendering::DepthStencilStateFace Rendering::DepthStencilState::GetBackFace() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return backFace;
+}
+
+void Rendering::DepthStencilState::SetFrontFaceFail(DepthStencilStateOperation fail) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    frontFace.SetFail(fail);
+}
+
+void Rendering::DepthStencilState::SetFrontFaceDepthFail(DepthStencilStateOperation depthFail) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    frontFace.SetDepthFail(depthFail);
+}
+
+void Rendering::DepthStencilState::SetFrontFacePass(DepthStencilStateOperation pass) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    frontFace.SetPass(pass);
+}
+
+void Rendering::DepthStencilState::SetFrontFaceComparison(DepthStencilStateComparison aComparison) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    frontFace.SetComparison(aComparison);
+}
+
+void Rendering::DepthStencilState::SetBackFaceFail(DepthStencilStateOperation fail) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    backFace.SetFail(fail);
+}
+
+void Rendering::DepthStencilState::SetBackFaceDepthFail(DepthStencilStateOperation depthFail) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    backFace.SetDepthFail(depthFail);
+}
+
+void Rendering::DepthStencilState::SetBackFacePass(DepthStencilStateOperation pass) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    backFace.SetPass(pass);
+}
+
+void Rendering::DepthStencilState::SetBackFaceComparison(DepthStencilStateComparison aComparison) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    backFace.SetComparison(aComparison);
+}
+
+int Rendering::DepthStencilState::GetReference() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return reference;
+}
+
+void Rendering::DepthStencilState::SetReference(int aReference) noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    reference = aReference;
+}
+
+void Rendering::DepthStencilState::CheckDrawingState()
+{
+    if (GetType() != GraphicsObjectType::DepthStencilState)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("GraphicsObject类型错误。"s));
+    }
+}
+
+Rendering::DepthStencilState::RendererObjectSharedPtr Rendering::DepthStencilState::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLDepthStencilState>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

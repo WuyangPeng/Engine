@@ -57,6 +57,7 @@ void Rendering::TestingHelper::InitSuite()
     AddGlutRendererSuite();
     AddGlxRendererSuite();
     AddWglRendererSuite();
+    AddStateSuite();
     AddLib3dsSuite();
     AddAbuseSuite();
     AddDemoglSuite();
@@ -436,6 +437,20 @@ void Rendering::TestingHelper::AddWglRendererSuite()
     auto wglRendererSuite = GenerateSuite("WgläÖÈ¾Æ÷");
 
     AddSuite(wglRendererSuite);
+}
+
+void Rendering::TestingHelper::AddStateSuite()
+{
+    auto stateSuite = GenerateSuite("×´Ì¬");
+
+    ADD_TEST(stateSuite, DrawingStateTesting);
+    ADD_TEST(stateSuite, BlendStateTargetTesting);
+    ADD_TEST(stateSuite, BlendStateTesting);
+    ADD_TEST(stateSuite, DepthStencilStateFaceTesting);
+    ADD_TEST(stateSuite, DepthStencilStateTesting);
+    ADD_TEST(stateSuite, RasterizerStateTesting);
+
+    AddSuite(stateSuite);
 }
 
 void Rendering::TestingHelper::AddLib3dsSuite()

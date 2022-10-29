@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 17:10)
+///	引擎版本：0.8.1.3 (2022/10/02 22:26)
 
 #ifndef RENDERING_STATE_BLEND_STATE_OPERATION_H
 #define RENDERING_STATE_BLEND_STATE_OPERATION_H
 
 #include "System/Helper/EnumMacro.h"
-
-#include <iostream>
 
 namespace Rendering
 {
@@ -20,9 +18,11 @@ namespace Rendering
     {
         Add,
         Subtract,
-        RevSubtract,
+        ReverseSubtract,
         Min,
-        Max
+        Max,
+
+        Count,
     };
 }
 

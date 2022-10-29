@@ -66,6 +66,8 @@ namespace Rendering
         NODISCARD TextureSharedPtr Clone() const override;
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         PackageType impl;
     };

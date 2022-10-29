@@ -12,7 +12,6 @@
 
 #include "GraphicsObjectTestingBase.h"
 #include "Detail/GraphicsObjectTest.h"
-#include "Rendering/Base/BaseFwd.h"
 
 namespace Rendering
 {
@@ -34,24 +33,13 @@ namespace Rendering
 
         void AccessTest();
 
-        void BufferTest(GraphicsObjectType graphicsObjectType, const GraphicsObjectTest& graphicsObjectTest);
-        void TextureTest(GraphicsObjectType graphicsObjectType, const GraphicsObjectTest& graphicsObjectTest);
-        void TextureArrayTest(GraphicsObjectType graphicsObjectType, const GraphicsObjectTest& graphicsObjectTest);
-        void ShaderTest(GraphicsObjectType graphicsObjectType, const GraphicsObjectTest& graphicsObjectTest);
-        void DrawingStateTest(GraphicsObjectType graphicsObjectType, const GraphicsObjectTest& graphicsObjectTest);
+        void BufferTest(GraphicsObjectType type, const GraphicsObjectTest& graphicsObjectTest);
+        void TextureTest(GraphicsObjectType type, const GraphicsObjectTest& graphicsObjectTest);
+        void TextureArrayTest(GraphicsObjectType type, const GraphicsObjectTest& graphicsObjectTest);
+        void ShaderTest(GraphicsObjectType type, const GraphicsObjectTest& graphicsObjectTest);
+        void DrawingStateTest(GraphicsObjectType type, const GraphicsObjectTest& graphicsObjectTest);
 
-        void CloneObjectTest();
-        void GetObjectByNameTest();
-        void IsNullObjectTest();
-        void UniqueIDTest();
-        void StreamTest();
-
-        void FactoryTest();
-        void FactoryExceptionTest();
-        void GetStreamingSizeTest();
-        void RegisterTest();
-        void LinkTest();
-        void SaveTest();
+        NODISCARD GraphicsObjectSharedPtr Create(const std::string& name, GraphicsObjectType graphicsObjectType) const override;
     };
 }
 

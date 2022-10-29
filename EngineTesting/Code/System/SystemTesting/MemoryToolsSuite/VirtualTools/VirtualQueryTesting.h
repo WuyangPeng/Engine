@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:53)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:30)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_QUERY_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_QUERY_TESTING_H
@@ -40,13 +40,13 @@ namespace System
         void DoQueryUseProcessTest(size_t index, const WindowsSystemInfo& systemInfo);
 
     private:
-        using MemoryProtectFlagsCollection = std::vector<MemoryProtect>;
+        using MemoryProtectFlagsContainer = std::vector<MemoryProtect>;
 
     private:
         static constexpr auto pageLimit = 80;
 
     private:
-        MemoryProtectFlagsCollection memoryProtectFlags;
+        MemoryProtectFlagsContainer memoryProtectFlags;
         std::default_random_engine randomEngine;
     };
 }

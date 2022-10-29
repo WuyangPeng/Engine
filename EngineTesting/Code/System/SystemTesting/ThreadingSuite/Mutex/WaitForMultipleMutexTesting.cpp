@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:51)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:33)
 
 #include "WaitForMultipleMutexTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -68,7 +68,7 @@ void System::WaitForMultipleMutexTesting::WaitMultipleObjectsTest()
     }
 }
 
-void System::WaitForMultipleMutexTesting::WaitForMutexTest0(const std::vector<WindowsHandle>& mutexHandle)
+void System::WaitForMultipleMutexTesting::WaitForMutexTest0(const Container& mutexHandle)
 {
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandle.size()), mutexHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -79,7 +79,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest0(const std::vector<Wi
     }
 }
 
-void System::WaitForMultipleMutexTesting::WaitForMutexTest1(const std::vector<WindowsHandle>& mutexHandle)
+void System::WaitForMultipleMutexTesting::WaitForMutexTest1(const Container& mutexHandle)
 {
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandle.size()), mutexHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -90,7 +90,7 @@ void System::WaitForMultipleMutexTesting::WaitForMutexTest1(const std::vector<Wi
     }
 }
 
-void System::WaitForMultipleMutexTesting::WaitForMutexTest2(const std::vector<WindowsHandle>& mutexHandle)
+void System::WaitForMultipleMutexTesting::WaitForMutexTest2(const Container& mutexHandle)
 {
     const auto flag = WaitForSystemMutex(boost::numeric_cast<WindowsDWord>(mutexHandle.size()), mutexHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);

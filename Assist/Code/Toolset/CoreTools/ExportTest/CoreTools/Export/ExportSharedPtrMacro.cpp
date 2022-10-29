@@ -5,19 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 18:58)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:41)
 
 #include "Toolset/CoreTools/ExportTest/ExportTestExport.h"
 
 #include "ExportSharedPtrMacro.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "Toolset/CoreTools/ExportTest/CoreTools/Detail/Export/ExportSharedPtrMacroImpl.h"
 
 using std::make_shared;
 
-ExportTest::ExportSharedPtrMacro::ExportSharedPtrMacro(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+ExportTest::ExportSharedPtrMacro::ExportSharedPtrMacro(DisableNotThrow disableNotThrow)
     : impl{ make_shared<ImplType>() }, constImpl{ make_shared<ImplType>() }
 {
+    System::UnusedFunction(disableNotThrow);
+
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 

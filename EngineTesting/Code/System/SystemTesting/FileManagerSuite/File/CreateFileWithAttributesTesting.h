@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:14)
+///	引擎测试版本：0.8.1.3 (2022/10/29 19:52)
 
 #ifndef SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_ATTRIBUTESTESTING_H
 #define SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_ATTRIBUTESTESTING_H
@@ -38,20 +38,20 @@ namespace System
         void CreateFileTest();
 
     private:
-        using FileHandleDesiredAccessFlagsCollection = std::vector<FileHandleDesiredAccess>;
-        using FileHandleShareModeFlagsCollection = std::vector<FileHandleShareMode>;
-        using FileHandleCreationDispositionFlagsCollection = std::vector<FileHandleCreationDisposition>;
-        using FileHandleAttributesFlagsCollection = std::vector<FileHandleAttributes>;
-        using FileHandleOtherFlagsCollection = std::vector<FileHandleOther>;
-        using FileHandleSecurityFlagsCollection = std::vector<FileHandleSecurity>;
+        using FileHandleDesiredAccessFlagsContainer = std::vector<FileHandleDesiredAccess>;
+        using FileHandleShareModeFlagsContainer = std::vector<FileHandleShareMode>;
+        using FileHandleCreationDispositionFlagsContainer = std::vector<FileHandleCreationDisposition>;
+        using FileHandleAttributesFlagsContainer = std::vector<FileHandleAttributes>;
+        using FileHandleOtherFlagsContainer = std::vector<FileHandleOther>;
+        using FileHandleSecurityFlagsContainer = std::vector<FileHandleSecurity>;
 
     private:
-        FileHandleDesiredAccessFlagsCollection fileHandleDesiredAccessFlags;
-        FileHandleShareModeFlagsCollection fileHandleShareModeFlags;
-        FileHandleCreationDispositionFlagsCollection fileHandleCreationDispositionFlags;
-        FileHandleAttributesFlagsCollection fileHandleAttributesFlags;
-        FileHandleOtherFlagsCollection fileHandleOtherFlags;
-        FileHandleSecurityFlagsCollection fileHandleSecurityFlags;
+        FileHandleDesiredAccessFlagsContainer fileHandleDesiredAccessFlags;
+        FileHandleShareModeFlagsContainer fileHandleShareModeFlags;
+        FileHandleCreationDispositionFlagsContainer fileHandleCreationDispositionFlags;
+        FileHandleAttributesFlagsContainer fileHandleAttributesFlags;
+        FileHandleOtherFlagsContainer fileHandleOtherFlags;
+        FileHandleSecurityFlagsContainer fileHandleSecurityFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

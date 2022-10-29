@@ -10,10 +10,13 @@
 #include "Rendering/RenderingExport.h"
 
 #include "RawBuffer.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLAtomicCounterBuffer.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, RawBuffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RawBuffer);
@@ -94,4 +97,17 @@ void Rendering::RawBuffer::Load(CoreTools::BufferSource& source)
     ParentType::Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+}
+
+Rendering::RawBuffer::RendererObjectSharedPtr Rendering::RawBuffer::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLAtomicCounterBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

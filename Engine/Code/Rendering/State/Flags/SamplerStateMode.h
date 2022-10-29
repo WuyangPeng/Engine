@@ -12,8 +12,6 @@
 
 #include "System/Helper/EnumMacro.h"
 
-#include <iostream>
-
 namespace Rendering
 {
     enum class SamplerStateMode
@@ -22,7 +20,9 @@ namespace Rendering
         Mirror,
         Clamp,
         Border,
-        MirrorOnce
+        MirrorOnce,
+
+        Count,
     };
 }
 

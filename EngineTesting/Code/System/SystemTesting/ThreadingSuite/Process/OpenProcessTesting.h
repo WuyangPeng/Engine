@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:35)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:53)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_PROCESS_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_PROCESS_TESTING_H
@@ -37,12 +37,12 @@ namespace System
         void OpenProcessTest();
 
     private:
-        using ProcessStandardAccessFlagsCollection = std::vector<ProcessStandardAccess>;
-        using ProcessSpecificAccessFlagsCollection = std::vector<ProcessSpecificAccess>;
+        using ProcessStandardAccessFlagsContainer = std::vector<ProcessStandardAccess>;
+        using ProcessSpecificAccessFlagsContainer = std::vector<ProcessSpecificAccess>;
 
     private:
-        ProcessStandardAccessFlagsCollection processStandardAccessFlags;
-        ProcessSpecificAccessFlagsCollection processSpecificAccessFlags;
+        ProcessStandardAccessFlagsContainer processStandardAccessFlags;
+        ProcessSpecificAccessFlagsContainer processSpecificAccessFlags;
         String processFullPath;
         std::default_random_engine randomEngine;
         size_t maxSize;

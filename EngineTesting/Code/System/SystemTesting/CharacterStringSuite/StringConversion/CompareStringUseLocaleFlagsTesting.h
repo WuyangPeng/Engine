@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:09)
+///	引擎测试版本：0.8.1.3 (2022/10/14 1:17)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_USE_LOCALE_FLAGS_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_USE_LOCALE_FLAGS_TESTING_H
@@ -37,14 +37,14 @@ namespace System
         void CompareStringUseLocaleFlagsTest();
 
     private:
-        using LanguageLocaleFlagsCollection = std::vector<LanguageLocale>;
-        using ComparesFlagsCollection = std::vector<Compares>;
-        using ComparesStringCollection = std::vector<String>;
+        using LanguageLocaleFlagsContainer = std::vector<LanguageLocale>;
+        using ComparesFlagsContainer = std::vector<Compares>;
+        using ComparesStringContainer = std::vector<String>;
 
     private:
-        LanguageLocaleFlagsCollection languageLocaleFlags;
-        ComparesFlagsCollection comparesFlags;
-        ComparesStringCollection comparesString;
+        LanguageLocaleFlagsContainer languageLocaleFlags;
+        ComparesFlagsContainer comparesFlags;
+        ComparesStringContainer comparesString;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

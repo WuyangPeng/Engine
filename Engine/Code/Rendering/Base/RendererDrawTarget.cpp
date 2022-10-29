@@ -12,3 +12,5 @@
 #include "RendererDrawTarget.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
+CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererDrawTarget)

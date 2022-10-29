@@ -15,6 +15,7 @@ namespace Rendering
     class GraphicsObject;
     class RendererObject;
     class RendererDrawTarget;
+    class RendererObjectBridge;
 
     enum class GraphicsObjectType;
 }

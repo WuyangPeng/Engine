@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:40)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:16)
 
 #include "ThreadLocalStorageTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -44,7 +44,7 @@ void System::ThreadLocalStorageTesting::ThreadTest()
     ASSERT_TRUE(IsThreadLocalStorageValid(threadLocalStorageIndex));
 
     boost::thread_group threadGroup{};
-    for (int i = 0; i < threadCount; ++i)
+    for (auto i = 0; i < threadCount; ++i)
     {
         threadGroup.create_thread(boost::bind(&ClassType::ThreadLocalStorageThread, this, threadLocalStorageIndex));
     }

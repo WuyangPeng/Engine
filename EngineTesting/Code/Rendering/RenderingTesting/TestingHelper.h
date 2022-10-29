@@ -58,6 +58,7 @@ namespace Rendering
         void AddGlutRendererSuite();
         void AddGlxRendererSuite();
         void AddWglRendererSuite();
+        void AddStateSuite();
         void AddLib3dsSuite();
         void AddAbuseSuite();
         void AddDemoglSuite();

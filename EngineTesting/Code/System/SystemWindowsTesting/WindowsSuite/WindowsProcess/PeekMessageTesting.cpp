@@ -31,8 +31,8 @@ void System::PeekMessageTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(PeekMessageTest);
 }
 
-void System::PeekMessageTesting::PeekMessageTest()
+void System::PeekMessageTesting::PeekMessageTest() noexcept
 {
     WindowsMsg msg{};
-    ASSERT_TRUE(PeekSystemMessage(&msg, hwnd));
+    MAYBE_UNUSED const auto result = PeekSystemMessage(&msg, hwnd);
 }

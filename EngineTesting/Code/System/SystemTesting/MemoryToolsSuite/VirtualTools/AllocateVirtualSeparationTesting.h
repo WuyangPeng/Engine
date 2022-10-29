@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:51)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:32)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_VIRTUAL_SEPARATION_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_VIRTUAL_SEPARATION_TESTING_H
@@ -42,15 +42,15 @@ namespace System
         void DoReadWriteTest(MemoryProtect memoryProtect, char& basePage) noexcept;
 
     private:
-        using MemoryAllocationFlagsCollection = std::vector<MemoryAllocation>;
-        using MemoryProtectFlagsCollection = std::vector<MemoryProtect>;
+        using MemoryAllocationFlagsContainer = std::vector<MemoryAllocation>;
+        using MemoryProtectFlagsContainer = std::vector<MemoryProtect>;
 
     private:
         static constexpr auto pageLimit = 80;
 
     private:
-        MemoryAllocationFlagsCollection memoryAllocationFlags;
-        MemoryProtectFlagsCollection memoryProtectFlags;
+        MemoryAllocationFlagsContainer memoryAllocationFlags;
+        MemoryProtectFlagsContainer memoryProtectFlags;
         std::default_random_engine randomEngine;
     };
 }

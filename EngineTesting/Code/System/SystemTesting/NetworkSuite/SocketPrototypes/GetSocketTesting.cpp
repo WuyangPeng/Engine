@@ -90,7 +90,7 @@ void System::GetSocketTesting::GetSocketTest()
             socketTypes = SocketTypes::Dgram;
         }
 
-        const auto winSocket = GetSocket(protocolFamilies, socketTypes, socketProtocols);
+        const auto winSocket = CreateSocket(protocolFamilies, socketTypes, socketProtocols);
 
         ASSERT_TRUE(IsSocketValid(winSocket));
 

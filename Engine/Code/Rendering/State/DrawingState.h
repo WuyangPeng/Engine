@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/21 10:27)
+///	引擎版本：0.8.1.3 (2022/10/01 23:21)
 
 #ifndef RENDERING_STATE_DRAWING_STATE_H
 #define RENDERING_STATE_DRAWING_STATE_H
@@ -23,11 +23,16 @@ namespace Rendering
         using ParentType = GraphicsObject;
 
     public:
-        DrawingState(GraphicsObjectType type, const std::string& name);
+        DrawingState(const std::string& name, GraphicsObjectType type);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(DrawingState);
+
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
+    private:
+        void CheckDrawingState();
     };
 
 #include STSTEM_WARNING_PUSH

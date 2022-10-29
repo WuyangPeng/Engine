@@ -51,6 +51,8 @@ namespace CoreTools
         NODISCARD BufferTypeIter begin();
         NODISCARD BufferTypeIter end();
 
+        void CopyBuffer(BufferTypeConstIter begin, BufferTypeConstIter end);
+
     private:
         PackageType impl;
     };

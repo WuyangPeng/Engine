@@ -87,15 +87,15 @@ void System::SelectTesting::SelectTest()
 
     thread thread{ &ClassType::SelectThreadTest, this };
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(port);
     addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
     int addrLen{ sizeof(addr) };
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     ASSERT_TRUE(Bind(socketHandle, &addr));
@@ -118,7 +118,7 @@ void System::SelectTesting::SelectThreadTest()
     {
         auto readWinSockFdSet = winSockFdSet;
         const auto result = Select(0, &readWinSockFdSet, nullptr, nullptr, nullptr);
-        if (result != g_SocketError)
+        if (result != gSocketError)
         {
             for (auto i = 0u; i < winSockFdSet.fd_count; i++)
             {
@@ -145,9 +145,9 @@ void System::SelectTesting::SelectThreadTest()
 
 #include STSTEM_WARNING_POP
 
-                        ASSERT_UNEQUAL(ret, g_SocketError);
+                        ASSERT_UNEQUAL(ret, gSocketError);
 
-                        if (ret == g_SocketError)
+                        if (ret == gSocketError)
                         {
                             break;
                         }

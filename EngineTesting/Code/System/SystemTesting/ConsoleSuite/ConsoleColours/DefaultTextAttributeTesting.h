@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:01)
+///	引擎测试版本：0.8.1.3 (2022/10/15 21:53)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING1_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING1_H
@@ -34,10 +34,10 @@ namespace System
         void DefaultTextAttributeTest();
 
     private:
-        using StandardHandleFlagsCollection = std::vector<StandardHandle>;
+        using StandardHandleFlagsContainer = std::vector<StandardHandle>;
 
     private:
-        StandardHandleFlagsCollection standardHandleFlags;
+        StandardHandleFlagsContainer standardHandleFlags;
     };
 }
 

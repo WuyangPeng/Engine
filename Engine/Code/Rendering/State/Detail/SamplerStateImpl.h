@@ -36,6 +36,15 @@ namespace Rendering
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
+        NODISCARD SamplerStateFilter GetFilter() const noexcept;
+        NODISCARD SamplerStateMode GetMode(int index) const;
+        NODISCARD float GetMipLODBias() const noexcept;
+        NODISCARD int GetMaxAnisotropy() const noexcept;
+        NODISCARD SamplerStateComparison GetComparison() const noexcept;
+        NODISCARD Colour GetBorderColor() const noexcept;
+        NODISCARD float GetMinLOD() const noexcept;
+        NODISCARD float GetMaxLOD() const noexcept;
+
     private:
         static constexpr auto numMode = 3;
 

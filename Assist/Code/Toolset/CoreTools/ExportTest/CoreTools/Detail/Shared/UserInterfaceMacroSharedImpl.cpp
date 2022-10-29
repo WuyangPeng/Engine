@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 19:00)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:38)
 
 #include "UserInterface/UserInterfaceExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/UserInterfaceClassInvariantMacro.h"
 
 UserInterface::UserInterfaceMacroSharedImpl::UserInterfaceMacroSharedImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     USER_INTERFACE_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int UserInterface::UserInterfaceMacroSharedImpl::GetCount() const noexcept
 {
     USER_INTERFACE_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void UserInterface::UserInterfaceMacroSharedImpl::SetCount(int count) noexcept
+void UserInterface::UserInterfaceMacroSharedImpl::SetCount(int aCount) noexcept
 {
     USER_INTERFACE_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

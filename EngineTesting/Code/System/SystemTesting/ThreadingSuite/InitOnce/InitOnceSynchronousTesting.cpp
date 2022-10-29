@@ -5,10 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:46)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:27)
 
 #include "InitOnceSynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
+#include "System/Helper/Tools.h"
 #include "System/Threading/Event.h"
 #include "System/Threading/InitOnce.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -60,7 +61,7 @@ void System::InitOnceSynchronousTesting::ExecuteOnceTest(InitOncePtr initOnce)
     WindowsVoidPtr context{ nullptr };
     ASSERT_TRUE(SystemInitOnceExecuteOnce(initOnce, ClassType::InitHandleFunction, &enterInitHandleFunctionCount, &context));
 
-    ASSERT_UNEQUAL(g_InvalidHandleValue, context);
+    ASSERT_UNEQUAL(gInvalidHandleValue, context);
     if (eventHandle != nullptr)
     {
         ASSERT_EQUAL(context, eventHandle);
@@ -71,8 +72,10 @@ void System::InitOnceSynchronousTesting::ExecuteOnceTest(InitOncePtr initOnce)
     }
 }
 
-System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(MAYBE_UNUSED InitOncePtr initOnce, WindowsVoidPtr parameter, WindowsVoidPtr* context) noexcept
+System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(InitOncePtr initOnce, WindowsVoidPtr parameter, WindowsVoidPtr* context) noexcept
 {
+    UnusedFunction(initOnce);
+
     if (context == nullptr || parameter == nullptr)
     {
         return gFalse;
@@ -88,7 +91,7 @@ System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(MAYBE
     }
     else
     {
-        *context = g_InvalidHandleValue;
+        *context = gInvalidHandleValue;
         return gFalse;
     }
 }

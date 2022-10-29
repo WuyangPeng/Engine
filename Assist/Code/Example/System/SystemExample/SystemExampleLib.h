@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/04 20:44)
+///	引擎辅助版本：0.8.1.3 (2022/10/16 21:32)
 
 #ifndef SYSTEM_EXAMPLE_LIB_H
 #define SYSTEM_EXAMPLE_LIB_H
@@ -17,9 +17,13 @@
     #ifndef BUILDING_SYSTEM_EXAMPLE_STATIC
 
         #ifdef _DEBUG
+
             #pragma comment(lib, "SystemExampleD.lib")
+
         #else  // !_DEBUG
+
             #pragma comment(lib, "SystemExample.lib")
+
         #endif  // _DEBUG
 
     #else  // !BUILDING_SYSTEM_EXAMPLE_STATIC
@@ -27,9 +31,13 @@
         #include "DllLib.h"
 
         #ifdef _DEBUG
+
             #pragma comment(lib, "SystemExampleStaticD.lib")
+
         #else  // !_DEBUG
+
             #pragma comment(lib, "SystemExampleStatic.lib")
+
         #endif  // _DEBUG
 
     #endif  // BUILDING_SYSTEM_EXAMPLE_STATIC

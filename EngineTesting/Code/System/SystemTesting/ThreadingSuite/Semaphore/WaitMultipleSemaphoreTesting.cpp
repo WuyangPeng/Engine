@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:54)
+///	引擎测试版本：0.8.1.3 (2022/10/22 20:06)
 
 #include "WaitMultipleSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -42,7 +42,7 @@ void System::WaitMultipleSemaphoreTesting::ThreadTest()
     constexpr WindowsLong maxSemphoreCount{ 5 };
     constexpr auto threadCount = 12;
     constexpr auto semaphoreSize = 5;
-    vector<WindowsHandle> semaphoreHandle{};
+    Container semaphoreHandle{};
 
     for (auto i = 0; i < semaphoreSize; ++i)
     {
@@ -68,7 +68,7 @@ void System::WaitMultipleSemaphoreTesting::ThreadTest()
     }
 }
 
-void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest0(const std::vector<WindowsHandle>& semaphoreHandle)
+void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest0(const Container& semaphoreHandle)
 {
     const auto flag = WaitForSystemSemaphore(boost::numeric_cast<WindowsDWord>(semaphoreHandle.size()), semaphoreHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -82,7 +82,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest0(const std::vect
     }
 }
 
-void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest1(const std::vector<WindowsHandle>& semaphoreHandle)
+void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest1(const Container& semaphoreHandle)
 {
     const auto flag = WaitForSystemSemaphore(boost::numeric_cast<WindowsDWord>(semaphoreHandle.size()), semaphoreHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -96,7 +96,7 @@ void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest1(const std::vect
     }
 }
 
-void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest2(const std::vector<WindowsHandle>& semaphoreHandle)
+void System::WaitMultipleSemaphoreTesting::WaitForSemaphoreTest2(const Container& semaphoreHandle)
 {
     const auto flag = WaitForSystemSemaphore(boost::numeric_cast<WindowsDWord>(semaphoreHandle.size()), semaphoreHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);

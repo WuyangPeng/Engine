@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 17:19)
+///	引擎版本：0.8.1.3 (2022/10/04 10:20)
 
 #ifndef RENDERING_STATE_DEPTH_STENCIL_STATE_FACE_H
 #define RENDERING_STATE_DEPTH_STENCIL_STATE_FACE_H
@@ -22,6 +22,8 @@ namespace Rendering
     {
     public:
         using ClassType = DepthStencilStateFace;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
 
     public:
         DepthStencilStateFace() noexcept;
@@ -40,8 +42,8 @@ namespace Rendering
         NODISCARD DepthStencilStateComparison GetComparison() const noexcept;
         void SetComparison(DepthStencilStateComparison aComparison) noexcept;
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
@@ -50,6 +52,8 @@ namespace Rendering
         DepthStencilStateOperation pass;
         DepthStencilStateComparison comparison;
     };
+
+    NODISCARD bool RENDERING_DEFAULT_DECLARE operator==(const DepthStencilStateFace& lhs, const DepthStencilStateFace& rhs) noexcept;
 }
 
 #endif  // RENDERING_STATE_DEPTH_STENCIL_STATE_FACE_H

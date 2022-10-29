@@ -73,13 +73,13 @@ void System::SendToTesting::SendToTest()
 
     const auto serverHostname = mainTree.get<string>("ConnectHostname");
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(80);
-    addr.sin_addr.s_addr = GetInetAddr(serverHostname.c_str());
+    addr.sin_addr.s_addr = GetInternetAddress(serverHostname.c_str());
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     string sendMessage{ "GET /index.html HTTP/1.0\r\n\r\n" };

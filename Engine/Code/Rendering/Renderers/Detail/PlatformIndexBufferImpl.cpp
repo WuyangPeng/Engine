@@ -11,8 +11,7 @@
 
 #include "PlatformIndexBufferImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "Rendering/Dx9Renderer/Dx9IndexBuffer.h"
-#include "Rendering/OpenGLRenderer/OpenGLIndexBuffer.h"
+#include "Rendering/Dx9Renderer/Dx9IndexBuffer.h" 
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/Renderer.h"
 
@@ -40,13 +39,13 @@ Rendering::PlatformIndexBufferImpl::PlatformIndexBufferSharedPtr Rendering::Plat
         case RendererTypes::Windows:
             return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         case RendererTypes::Glut:
-            return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+            return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         case RendererTypes::OpenGL:
-            return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+            return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         case RendererTypes::Dx11:
             return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         case RendererTypes::OpenGLES:
-            return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+            return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
         default:
             return CreateDefault(renderer, indexBuffer);
     }
@@ -55,5 +54,5 @@ Rendering::PlatformIndexBufferImpl::PlatformIndexBufferSharedPtr Rendering::Plat
 // static
 Rendering::PlatformIndexBufferImpl::PlatformIndexBufferSharedPtr Rendering::PlatformIndexBufferImpl::CreateDefault(Renderer* renderer, const IndexBuffer* indexBuffer)
 {
-    return make_shared<OpenGLIndexBuffer>(renderer, indexBuffer);
+    return make_shared<Dx9IndexBuffer>(renderer, indexBuffer);
 }

@@ -298,13 +298,25 @@
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\SystemToolsetLib.h" />
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\SystemToolsetNoImport.h" />
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\ConnectParameter.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\SocketSend.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketConnect.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketSend.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\UdpSocketSend.h" />
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\TcpSocket.h" />
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\UdpSocket.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\WinSock.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\WinSockFwd.h" />
     <ClInclude Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\WinSockStart.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\DllLib.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\DllMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\ConnectParameter.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\SocketSend.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketConnect.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\TcpSocketSend.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\Detail\UdpSocketSend.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\TcpSocket.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\UdpSocket.cpp" />
     <ClCompile Include="..\..\..\..\Code\Toolset\System\SystemToolset\WinSock\WinSockStart.cpp" />

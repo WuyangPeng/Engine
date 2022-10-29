@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 19:10)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/21 0:10)
 
 #include "System/SystemExport.h"
 
@@ -192,6 +192,7 @@ System::PthreadResult System::PthreadMutexAttributeSetType(PthreadMutexattrT* at
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
+
 System::PthreadResult System::PthreadMutexAttributeInit(PthreadMutexattrT* attribute) noexcept
 {
 #if defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
@@ -265,6 +266,7 @@ System::PthreadResult System::PthreadMutexAttributeDestroy(PthreadMutexattrT* at
 
 #endif  // defined(SYSTEM_PLATFORM_LINUX) || defined(SYSTEM_PLATFORM_MACOS)
 }
+
 #include STSTEM_WARNING_POP
 
 System::PthreadResult System::PthreadMutexDestroy(PthreadMutexT* mutex) noexcept
@@ -365,7 +367,7 @@ System::PthreadResult System::PthreadMutexTrylock(PthreadMutexT* mutex) noexcept
 
 bool System::IsSystemMutexValid(WindowsHandle handle) noexcept
 {
-    if (handle != nullptr && handle != g_InvalidHandleValue)
+    if (handle != nullptr && handle != gInvalidHandleValue)
         return true;
     else
         return false;

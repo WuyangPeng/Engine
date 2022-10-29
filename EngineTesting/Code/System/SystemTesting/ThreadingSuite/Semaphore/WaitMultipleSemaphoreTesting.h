@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:36)
+///	引擎测试版本：0.8.1.3 (2022/10/22 20:04)
 
 #ifndef SYSTEM_THREADING_SUITE_WAIT_MULTIPLE_SEMAPHORE_TESTING_H
 #define SYSTEM_THREADING_SUITE_WAIT_MULTIPLE_SEMAPHORE_TESTING_H
@@ -28,13 +28,16 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Container = std::vector<WindowsHandle>;
+
+    private:
         void DoRunUnitTest() final;
         void MainTest();
 
         void ThreadTest();
-        void WaitForSemaphoreTest0(const std::vector<WindowsHandle>& semaphoreHandle);
-        void WaitForSemaphoreTest1(const std::vector<WindowsHandle>& semaphoreHandle);
-        void WaitForSemaphoreTest2(const std::vector<WindowsHandle>& semaphoreHandle);
+        void WaitForSemaphoreTest0(const Container& semaphoreHandle);
+        void WaitForSemaphoreTest1(const Container& semaphoreHandle);
+        void WaitForSemaphoreTest2(const Container& semaphoreHandle);
     };
 }
 

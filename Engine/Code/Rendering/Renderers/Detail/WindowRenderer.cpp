@@ -16,7 +16,7 @@
 #include "Rendering/Renderers/RendererParameter.h"
 
 Rendering::WindowRenderer::WindowRenderer(const EnvironmentParameter& environmentParameter, const RendererParameter& rendererParameter)
-    : ParentType{ RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
+    : ParentType{ RendererTypes::Windows, RenderingEnvironment{ environmentParameter, rendererParameter }, rendererParameter.GetRendererBasis() }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

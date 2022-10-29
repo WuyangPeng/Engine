@@ -72,13 +72,13 @@ void System::ConnectTesting::ConnectTest()
 
     const auto serverHostname = mainTree.get<string>("ConnectHostname");
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(80);
-    addr.sin_addr.s_addr = GetInetAddr(serverHostname.c_str());
+    addr.sin_addr.s_addr = GetInternetAddress(serverHostname.c_str());
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     ASSERT_TRUE(Connect(socketHandle, &addr));

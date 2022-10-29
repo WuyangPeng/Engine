@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:06)
+///	引擎测试版本：0.8.1.3 (2022/10/14 0:49)
 
 #ifndef SYSTEM_TESTING_CHARACTER_STRING_SUITE_CODE_PAGE_VALID_TESTING_H
 #define SYSTEM_TESTING_CHARACTER_STRING_SUITE_CODE_PAGE_VALID_TESTING_H
 
-#include "System/CharacterString/Flags/CodePageFlags.h"
+#include "System/CharacterString/CharacterStringFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <vector>
@@ -35,10 +35,10 @@ namespace System
         void ValidTest();
 
     private:
-        using CodePageFlagsCollection = std::vector<CodePage>;
+        using CodePageFlagsContainer = std::vector<CodePage>;
 
     private:
-        CodePageFlagsCollection codePageFlags;
+        CodePageFlagsContainer codePageFlags;
     };
 }
 

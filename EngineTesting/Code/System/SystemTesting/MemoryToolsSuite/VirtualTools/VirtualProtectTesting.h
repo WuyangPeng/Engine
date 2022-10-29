@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:51)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:31)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_PROTECT_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_PROTECT_TESTING_H
@@ -41,13 +41,13 @@ namespace System
         void DoProtectUseProcessTest(size_t index, const WindowsSystemInfo& systemInfo);
 
     private:
-        using MemoryProtectFlagsCollection = std::vector<MemoryProtect>;
+        using MemoryProtectFlagsContainer = std::vector<MemoryProtect>;
 
     private:
         static constexpr auto pageLimit = 80;
 
     private:
-        MemoryProtectFlagsCollection memoryProtectFlags;
+        MemoryProtectFlagsContainer memoryProtectFlags;
         std::default_random_engine randomEngine;
     };
 }

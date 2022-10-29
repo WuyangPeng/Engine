@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 18:57)
+///	标准：std:c++20
+///	引擎版本：0.8.1.3 (2022/10/08 21:48)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
@@ -31,11 +31,16 @@ namespace System
                                                                                const DynamicLinkCharType* name,
                                                                                const LanguageIDData& language) noexcept;
 
-    NODISCARD DynamicLinkGlobal SYSTEM_DEFAULT_DECLARE LoadResourceInLibrary(DynamicLinkModule module, DynamicLinkResource resourceInfo) noexcept;
+    NODISCARD DynamicLinkGlobal SYSTEM_DEFAULT_DECLARE LoadResourceInLibrary(DynamicLinkModule module,
+                                                                             DynamicLinkResource resourceInfo) noexcept;
     NODISCARD WindowsVoidPtr SYSTEM_DEFAULT_DECLARE LockResourceInLibrary(DynamicLinkGlobal resourceData) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE SizeofResourceInLibrary(DynamicLinkModule module, DynamicLinkResource resourceInfo) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE SizeofResourceInLibrary(DynamicLinkModule module,
+                                                                          DynamicLinkResource resourceInfo) noexcept;
 
-    NODISCARD int SYSTEM_DEFAULT_DECLARE LoadStringInLibrary(WindowsHInstance instance, WindowsUInt id, DynamicLinkCharType* buffer, int size) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE LoadStringInLibrary(WindowsHInstance instance,
+                                                             WindowsUInt id,
+                                                             DynamicLinkCharType* buffer,
+                                                             int size) noexcept;
 }
 
 #endif  // SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H

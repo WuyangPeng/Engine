@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:55)
+///	引擎测试版本：0.8.1.3 (2022/10/22 23:47)
 
 #include "WaitForMultipleThreadTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -74,10 +74,10 @@ void System::WaitForMultipleThreadTesting::WaitMultipleObjects2Test()
     CloseThread(threadHandle);
 }
 
-vector<System::ThreadHandle> System::WaitForMultipleThreadTesting::CreateThread()
+System::WaitForMultipleThreadTesting::Container System::WaitForMultipleThreadTesting::CreateThread()
 {
     constexpr auto mutexSize = 5;
-    vector<ThreadHandle> threadHandle{};
+    Container threadHandle{};
 
     for (auto i = 0; i < mutexSize; ++i)
     {
@@ -93,7 +93,7 @@ vector<System::ThreadHandle> System::WaitForMultipleThreadTesting::CreateThread(
     return threadHandle;
 }
 
-void System::WaitForMultipleThreadTesting::CloseThread(const vector<System::ThreadHandle>& threadHandle)
+void System::WaitForMultipleThreadTesting::CloseThread(const Container& threadHandle)
 {
     for (auto handle : threadHandle)
     {

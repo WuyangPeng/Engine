@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 16:49)
+///	引擎测试版本：0.8.1.3 (2022/10/29 0:00)
 
 #include "DeltaTimeValueDataTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -94,7 +94,7 @@ void System::DeltaTimeValueDataTesting::TimerSubTest()
     deltaTimeValueData3 = deltaTimeValueData1 - deltaTimeValueData2;
 
     ASSERT_EQUAL(deltaTimeValueData3.GetSecond(), deltaTimeValueData1.GetSecond() - deltaTimeValueData2.GetSecond() - 1);
-    ASSERT_EQUAL(deltaTimeValueData3.GetMicrosecond(), deltaTimeValueData1.GetMicrosecond() - deltaTimeValueData2.GetMicrosecond() + g_Microseconds);
+    ASSERT_EQUAL(deltaTimeValueData3.GetMicrosecond(), deltaTimeValueData1.GetMicrosecond() - deltaTimeValueData2.GetMicrosecond() + gMicroseconds);
 }
 
 void System::DeltaTimeValueDataTesting::CorrectionTest()
@@ -107,5 +107,5 @@ void System::DeltaTimeValueDataTesting::CorrectionTest()
     deltaTimeValueData.Correction();
 
     ASSERT_EQUAL(deltaTimeValueData.GetSecond(), 99);
-    ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), -45 + g_Microseconds);
+    ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), -45 + gMicroseconds);
 }

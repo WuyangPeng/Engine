@@ -22,8 +22,8 @@ using std::array;
 
 System::String CoreTools::DirectoryImpl::GetDirectoryName(const String& directoryName)
 {
-    array<System::TChar, System::g_MaxPath> systemCurrentDirectory{};
-    const auto result = System::GetSystemCurrentDirectory(System::g_MaxPath, systemCurrentDirectory.data());
+    array<System::TChar, System::gMaxPath> systemCurrentDirectory{};
+    const auto result = System::GetSystemCurrentDirectory(System::gMaxPath, systemCurrentDirectory.data());
     if (0 < result && directoryName != systemCurrentDirectory.data())
     {
         String directoryResult{ systemCurrentDirectory.data() };

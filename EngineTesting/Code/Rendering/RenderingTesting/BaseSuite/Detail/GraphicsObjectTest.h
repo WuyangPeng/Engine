@@ -36,6 +36,8 @@ namespace Rendering
         CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(GraphicsObjectTest);
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
     };
 
 #include STSTEM_WARNING_PUSH

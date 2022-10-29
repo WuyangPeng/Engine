@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 17:14)
+///	引擎辅助版本：0.8.1.3 (2022/10/27 0:59)
 
 #ifndef SYSTEM_TOOLSET_TCP_SOCKET_H
 #define SYSTEM_TOOLSET_TCP_SOCKET_H
@@ -14,8 +14,7 @@
 
 #include "System/Network/Using/SocketPrototypesUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
-#include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/UserMacro.h"
+#include "CoreTools/Helper/ExportMacro.h" 
 #include "Toolset/System/SystemToolset/Helper/UserMacro.h"
 
 namespace SystemToolset
@@ -24,27 +23,31 @@ namespace SystemToolset
     {
     public:
         using ClassType = TcpSocket;
+
         using WinSocket = System::WinSocket;
-        using WinSockAddrIn = System::WinSockAddrIn;
+        using DisableNotThrow = CoreTools::DisableNotThrow;
 
     public:
-        explicit TcpSocket(CoreTools::DisableNotThrow disableNotThrow);
+        NODISCARD static TcpSocket Create();
+
         ~TcpSocket() noexcept;
         TcpSocket(const TcpSocket& rhs) noexcept = delete;
         TcpSocket& operator=(const TcpSocket& rhs) noexcept = delete;
-        TcpSocket(TcpSocket&& rhs) noexcept = delete;
-        TcpSocket& operator=(TcpSocket&& rhs) noexcept = delete;
+        TcpSocket(TcpSocket&& rhs) noexcept;
+        TcpSocket& operator=(TcpSocket&& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD WinSocket GetSocket() noexcept;
+        NODISCARD WinSocket GetWinSocket() noexcept;
 
         void Connect();
         void Send() noexcept;
 
     private:
+        explicit TcpSocket(DisableNotThrow disableNotThrow);
+
+        void InitSocket();
         void CloseSocket();
-        void Connect(const WinSockAddrIn& addr, int connectTime);
 
     private:
         WinSocket winSocket;

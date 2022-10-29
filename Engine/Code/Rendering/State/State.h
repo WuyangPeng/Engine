@@ -15,6 +15,7 @@
 #include "DepthStencilState.h"
 #include "DepthStencilStateFace.h"
 #include "DrawingState.h"
+#include "GlobalState.h"
 #include "RasterizerState.h"
 
 #endif  // RENDERING_STATE_H

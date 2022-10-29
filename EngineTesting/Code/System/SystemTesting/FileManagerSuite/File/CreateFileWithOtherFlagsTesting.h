@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:14)
+///	引擎测试版本：0.8.1.3 (2022/10/29 19:54)
 
 #ifndef SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
 #define SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
@@ -37,16 +37,16 @@ namespace System
         void CreateFileTest();
 
     private:
-        using FileHandleDesiredAccessFlagsCollection = std::vector<FileHandleDesiredAccess>;
-        using FileHandleShareModeFlagsCollection = std::vector<FileHandleShareMode>;
-        using FileHandleCreationDispositionFlagsCollection = std::vector<FileHandleCreationDisposition>;
-        using FileHandleOtherFlagsCollection = std::vector<FileHandleOther>;
+        using FileHandleDesiredAccessFlagsContainer = std::vector<FileHandleDesiredAccess>;
+        using FileHandleShareModeFlagsContainer = std::vector<FileHandleShareMode>;
+        using FileHandleCreationDispositionFlagsContainer = std::vector<FileHandleCreationDisposition>;
+        using FileHandleOtherFlagsContainer = std::vector<FileHandleOther>;
 
     private:
-        FileHandleDesiredAccessFlagsCollection fileHandleDesiredAccessFlags;
-        FileHandleShareModeFlagsCollection fileHandleShareModeFlags;
-        FileHandleCreationDispositionFlagsCollection fileHandleCreationDispositionFlags;
-        FileHandleOtherFlagsCollection fileHandleOtherFlags;
+        FileHandleDesiredAccessFlagsContainer fileHandleDesiredAccessFlags;
+        FileHandleShareModeFlagsContainer fileHandleShareModeFlags;
+        FileHandleCreationDispositionFlagsContainer fileHandleCreationDispositionFlags;
+        FileHandleOtherFlagsContainer fileHandleOtherFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

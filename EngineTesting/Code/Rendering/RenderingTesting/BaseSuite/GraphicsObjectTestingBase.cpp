@@ -10,11 +10,36 @@
 #include "GraphicsObjectTestingBase.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-Rendering::GraphicsObjectTestingBase::GraphicsObjectTestingBase(const OStreamShared& stream)
-    : ParentType{ stream }
+Rendering::GraphicsObjectTestingBase::GraphicsObjectTestingBase(const OStreamShared& stream, GraphicsObjectType beginGraphicsObjectType, GraphicsObjectType endGraphicsObjectType, const std::string& graphicsObjectName)
+    : ParentType{ stream }, beginGraphicsObjectType{ beginGraphicsObjectType }, endGraphicsObjectType{ endGraphicsObjectType }, graphicsObjectName{ graphicsObjectName }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, GraphicsObjectTestingBase)
+
+Rendering::GraphicsObjectType Rendering::GraphicsObjectTestingBase::GetGraphicsObjectType() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return beginGraphicsObjectType;
+}
+
+std::string Rendering::GraphicsObjectTestingBase::GetGraphicsObjectName() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return graphicsObjectName;
+}
+
+CoreTools::FileBufferSharedPtr Rendering::GraphicsObjectTestingBase::CorrectFileBuffer(int beginIndex, const OriginalBuffer& buffer)
+{
+    ASSERT_LESS_EQUAL_FAILURE_THROW(beginIndex, boost::numeric_cast<int>(buffer.size()), "缓冲区大小不足于创建GraphicsObject。");
+
+    auto saveFileBuffer = std::make_shared<FileBuffer>(buffer.size());
+    saveFileBuffer->CopyBuffer(buffer.begin() + beginIndex, buffer.end());
+
+    return saveFileBuffer;
+}

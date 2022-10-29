@@ -254,6 +254,15 @@
 
   },
 
+  "stateSuite": {
+    "DrawingStateTesting": 1,
+    "BlendStateTargetTesting": 1,
+    "BlendStateTesting": 1,
+    "DepthStencilStateFaceTesting": 1,
+    "DepthStencilStateTesting": 1,
+    "RasterizerStateTesting": 1
+  },
+
   "lib3dsSuite": {
 
   },

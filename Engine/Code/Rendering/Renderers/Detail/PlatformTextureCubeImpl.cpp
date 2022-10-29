@@ -12,7 +12,6 @@
 #include "PlatformTextureCubeImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Dx9Renderer/Dx9TextureCube.h"
-#include "Rendering/OpenGLRenderer/OpenGLTextureCube.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/Renderer.h"
 
@@ -38,13 +37,13 @@ Rendering::PlatformTextureCubeImpl::PlatformTextureCubeSharedPtr Rendering::Plat
         case RendererTypes::Windows:
             return make_shared<Dx9TextureCube>(renderer, textureCube);
         case RendererTypes::Glut:
-            return make_shared<OpenGLTextureCube>(renderer, textureCube);
+            return make_shared<Dx9TextureCube>(renderer, textureCube);
         case RendererTypes::OpenGL:
-            return make_shared<OpenGLTextureCube>(renderer, textureCube);
+            return make_shared<Dx9TextureCube>(renderer, textureCube);
         case RendererTypes::Dx11:
             return make_shared<Dx9TextureCube>(renderer, textureCube);
         case RendererTypes::OpenGLES:
-            return make_shared<OpenGLTextureCube>(renderer, textureCube);
+            return make_shared<Dx9TextureCube>(renderer, textureCube);
         default:
             return CreateDefault(renderer, textureCube);
     }
@@ -53,5 +52,5 @@ Rendering::PlatformTextureCubeImpl::PlatformTextureCubeSharedPtr Rendering::Plat
 // static
 Rendering::PlatformTextureCubeImpl::PlatformTextureCubeSharedPtr Rendering::PlatformTextureCubeImpl::CreateDefault(Renderer* renderer, const TextureCube* textureCube)
 {
-    return make_shared<OpenGLTextureCube>(renderer, textureCube);
+    return make_shared<Dx9TextureCube>(renderer, textureCube);
 }

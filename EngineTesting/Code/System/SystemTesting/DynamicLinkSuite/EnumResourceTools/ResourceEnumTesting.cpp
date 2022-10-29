@@ -5,19 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:47)
+///	引擎测试版本：0.8.1.3 (2022/10/10 20:08)
 
 #include "ResourceEnumTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
 #include "System/DynamicLink/Flags/EnumResourceToolsFlags.h"
 #include "System/DynamicLink/LoadResourceTools.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::ResourceEnumTesting::ResourceEnumTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      enumResourceDataGroup{},
+      enumResourceDataContainer{},
       resourceEnum{ ResourceEnum::Default,
                     ResourceEnum::Ln,
                     ResourceEnum::Validate,
@@ -50,16 +51,16 @@ void System::ResourceEnumTesting::EnumResourceTest()
     {
         ASSERT_TRUE(EnumResourceTypesInLibrary(GetDllModule(), TypeProcess, reinterpret_cast<WindowsPtrLong>(this), GetCurrentResourceEnum(), languageIDData));
 
-        ASSERT_LESS(0u, enumResourceDataGroup.size());
+        ASSERT_LESS(0u, enumResourceDataContainer.size());
 
-        for (const auto& data : enumResourceDataGroup)
+        for (const auto& data : enumResourceDataContainer)
         {
             auto resource = FindResourceInLibrary(GetDllModule(), data.GetType(), data.GetName(), data.GetLanguage());
 
             ASSERT_UNEQUAL_NULL_PTR(resource);
         }
 
-        enumResourceDataGroup.clear();
+        enumResourceDataContainer.clear();
     }
 }
 
@@ -96,8 +97,10 @@ System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule m
 
 #include STSTEM_WARNING_POP
 
-System::WindowsBool System::ResourceEnumTesting::LanguageProcess(MAYBE_UNUSED DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsPtrLong lParam)
+System::WindowsBool System::ResourceEnumTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsPtrLong lParam)
 {
+    UnusedFunction(module);
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
@@ -114,7 +117,7 @@ void System::ResourceEnumTesting::AddEnumResourceData(const EnumResourceData& da
 {
     SYSTEM_CLASS_IS_VALID_1;
 
-    enumResourceDataGroup.emplace_back(data);
+    enumResourceDataContainer.emplace_back(data);
 }
 
 System::ResourceEnum System::ResourceEnumTesting::GetCurrentResourceEnum() const

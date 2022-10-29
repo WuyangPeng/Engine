@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:56)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:41)
 
 #include "ViewOfFileTesting.h"
 #include "System/MemoryTools/Flags/ViewOfFileFlags.h"
@@ -59,7 +59,7 @@ void System::ViewOfFileTesting::DoViewOfFileTest(FileMapDesiredAccess fileMapDes
 
     auto loopTestFileName = fileMapName + System::ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
 
-    auto fileMappingHandle = CreateSystemFileMapping(g_InvalidHandleValue, MemoryProtect::ReadWrite, FileMapProtection::Default, 0, maximumSizeLow, loopTestFileName.c_str(), nullptr);
+    auto fileMappingHandle = CreateSystemFileMapping(gInvalidHandleValue, MemoryProtect::ReadWrite, FileMapProtection::Default, 0, maximumSizeLow, loopTestFileName.c_str(), nullptr);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(fileMappingHandle, "CreateSystemFileMapping 失败");
 
     auto buffer = MapSystemViewOfFile(fileMappingHandle, fileMapDesiredAccess, 0, 0, 0);
@@ -77,7 +77,7 @@ void System::ViewOfFileTesting::DoViewOfFileUseBaseAddressTest(FileMapDesiredAcc
 
     auto loopTestFileName = fileMapName + System::ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
 
-    auto fileMappingHandle = CreateSystemFileMapping(g_InvalidHandleValue, MemoryProtect::ReadWrite, FileMapProtection::Default, 0, maximumSizeLow, loopTestFileName.c_str(), nullptr);
+    auto fileMappingHandle = CreateSystemFileMapping(gInvalidHandleValue, MemoryProtect::ReadWrite, FileMapProtection::Default, 0, maximumSizeLow, loopTestFileName.c_str(), nullptr);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(fileMappingHandle, "CreateSystemFileMapping 失败");
 
     auto buffer = MapSystemViewOfFile(fileMappingHandle, fileMapDesiredAccess, 0, 0, 0, nullptr);

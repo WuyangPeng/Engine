@@ -63,6 +63,11 @@ namespace Rendering
 
         void SetNewData(const StorageType& newStorage);
 
+        NODISCARD const char* GetOriginalData() const;
+        NODISCARD const char* GetOriginalData(int aOffset) const;
+
+        NODISCARD char* GetOriginalData(int aOffset);
+
     private:
         int numElements;  // д╛хо: 0
         int elementSize;  // д╛хо: 0

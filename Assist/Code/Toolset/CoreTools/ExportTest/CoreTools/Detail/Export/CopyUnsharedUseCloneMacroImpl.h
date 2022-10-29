@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 22:15)
+///	引擎辅助版本：0.8.1.3 (2022/10/17 23:17)
 
 #ifndef EXPORT_TEST_COPY_UNSHARED_USE_CLONE_MACRO_IMPL_H
 #define EXPORT_TEST_COPY_UNSHARED_USE_CLONE_MACRO_IMPL_H
@@ -30,12 +30,12 @@ namespace ExportTest
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD int GetCount() const noexcept;
-        void SetCount(int count) noexcept;
+        void SetCount(int aCount) noexcept;
 
         NODISCARD SharedPtr Clone() const;
 
     private:
-        int mCount;
+        int count;
     };
 }
 

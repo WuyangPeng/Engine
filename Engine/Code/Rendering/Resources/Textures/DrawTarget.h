@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/ObjectSystems/Object.h"
+#include "Rendering/Base/RendererDrawTarget.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/ResourcesFwd.h"
@@ -30,6 +31,7 @@ namespace Rendering
     public:
         COPY_UNSHARED_TYPE_DECLARE(DrawTarget);
         using ParentType = Object;
+        using GraphicsObjectContainer = std::vector<GraphicsObjectSharedPtr>;
 
     public:
         // 支持目标的数量取决于图形硬件和驱动程序。“numRenderTargets”必须至少1。
@@ -68,6 +70,10 @@ namespace Rendering
         NODISCARD bool WantAutogenerateRTMipmaps() const;
 
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD RendererDrawTargetSharedPtr CreateRendererDrawTarget(RendererTypes rendererTypes,
+                                                                       const GraphicsObjectContainer& renderTargetTextures,
+                                                                       GraphicsObject& depthStencilTexture);
 
     private:
         PackageType impl;

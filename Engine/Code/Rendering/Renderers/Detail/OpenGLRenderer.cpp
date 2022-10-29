@@ -15,7 +15,7 @@
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
 Rendering::OpenGLRenderer::OpenGLRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
-    : ParentType{ renderingEnvironment, basis }
+    : ParentType{ RendererTypes::OpenGL, renderingEnvironment, basis }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

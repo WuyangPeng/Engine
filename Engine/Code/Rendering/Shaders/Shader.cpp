@@ -220,3 +220,10 @@ bool Rendering::Shader::IsValid(const ShaderData& goal, const SamplerState* reso
 
     return impl->IsValid(goal, resource);
 }
+
+Rendering::Shader::RendererObjectSharedPtr Rendering::Shader::CreateRendererObject(MAYBE_UNUSED RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    THROW_EXCEPTION(SYSTEM_TEXT("º¯ÊýÎ´ÊµÏÖ"));
+}

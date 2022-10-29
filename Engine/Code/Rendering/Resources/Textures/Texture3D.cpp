@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "Texture3D.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
@@ -19,6 +20,8 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/OpenGLRenderer/Resources/Textures/OpenGLTexture3.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Detail/Textures/Texture3DImpl.h"
@@ -189,4 +192,17 @@ int Rendering::Texture3D::GetNumElementsFor(int level) const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return impl->GetNumLevelBytes(level) / GetElementSize();
+}
+
+Rendering::Texture3D::RendererObjectSharedPtr Rendering::Texture3D::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLTexture3>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

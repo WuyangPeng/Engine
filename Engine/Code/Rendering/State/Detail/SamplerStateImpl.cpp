@@ -88,3 +88,59 @@ int Rendering::SamplerStateImpl::GetStreamingSize() const noexcept
 
     return size;
 }
+
+Rendering::SamplerStateFilter Rendering::SamplerStateImpl::GetFilter() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return filter;
+}
+
+Rendering::SamplerStateMode Rendering::SamplerStateImpl::GetMode(int index) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return mode.at(index);
+}
+
+float Rendering::SamplerStateImpl::GetMipLODBias() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return mipLODBias;
+}
+
+int Rendering::SamplerStateImpl::GetMaxAnisotropy() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return maxAnisotropy;
+}
+
+Rendering::SamplerStateComparison Rendering::SamplerStateImpl::GetComparison() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return comparison;
+}
+
+Rendering::SamplerStateImpl::Colour Rendering::SamplerStateImpl::GetBorderColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return borderColor;
+}
+
+float Rendering::SamplerStateImpl::GetMinLOD() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return minLOD;
+}
+
+float Rendering::SamplerStateImpl::GetMaxLOD() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return maxLOD;
+}

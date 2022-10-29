@@ -216,6 +216,32 @@ void Rendering::ResourceImpl::SetNewData(const StorageType& newStorage)
     storage = newStorage;
 }
 
+const char* Rendering::ResourceImpl::GetOriginalData() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    if (storage.empty())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("Êý¾ÝÎª¿Õ¡£"s));
+    }
+
+    return storage.data();
+}
+
+char* Rendering::ResourceImpl::GetOriginalData(int aOffset)
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return &storage.at(aOffset);
+}
+
+const char* Rendering::ResourceImpl::GetOriginalData(int aOffset) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return &storage.at(aOffset);
+}
+
 void Rendering::ResourceImpl::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/11 16:09)
+///	引擎测试版本：0.8.1.3 (2022/10/15 21:47)
 
 #include "ConsoleHelper.h"
 #include "System/Console/ConsoleCreate.h"
@@ -57,9 +57,9 @@ ConsoleSystemTesting::ConsoleHelper::~ConsoleHelper() noexcept
 // private
 void ConsoleSystemTesting::ConsoleHelper::FreeConsole() noexcept
 {
-    if (!(System::FCloseConsole(out) &&
+    if (!(System::FCloseConsole(error) &&
           System::FCloseConsole(in) &&
-          System::FCloseConsole(error) &&
+          System::FCloseConsole(out) &&
           System::FreeConsole()))
     {
         LOG_SINGLETON_APPENDER(Error, User)

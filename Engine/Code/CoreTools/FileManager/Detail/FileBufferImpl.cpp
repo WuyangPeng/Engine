@@ -84,3 +84,15 @@ char* CoreTools::FileBufferImpl::GetBuffer(int index)
 
     return NON_CONST_MEMBER_CALL_CONST_MEMBER_USE_PARAMETER(char*, GetBuffer, index);
 }
+
+void CoreTools::FileBufferImpl::CopyBuffer(BufferTypeConstIter begin, BufferTypeConstIter end)
+{
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    auto i = 0;
+    for (auto iter = begin; iter != end; ++iter)
+    {
+        buffer.at(i) = *iter;
+        ++i;
+    }
+}

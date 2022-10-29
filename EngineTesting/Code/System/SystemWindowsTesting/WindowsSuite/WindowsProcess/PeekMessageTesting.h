@@ -30,7 +30,7 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void PeekMessageTest();
+        void PeekMessageTest() noexcept;
 
     private:
         WindowsHWnd hwnd;

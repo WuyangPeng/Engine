@@ -59,7 +59,7 @@ bool System::GetHostName(char* name, int namelen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::gethostname(name, namelen) != g_SocketError)
+    if (::gethostname(name, namelen) != gSocketError)
         return true;
     else
         return false;

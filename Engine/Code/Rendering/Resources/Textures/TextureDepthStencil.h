@@ -38,6 +38,8 @@ namespace Rendering
         void SaveToFile(WriteFileManager& outFile) const override;
         void ReadFromFile(ReadFileManager& inFile) override;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         bool shaderInput;
     };

@@ -24,7 +24,7 @@
 
 template <typename OpenGLGlutProcess>
 Framework::OpenGLGlutFrameBuild<OpenGLGlutProcess>::OpenGLGlutFrameBuild(const GLUTApplicationInformation& glutInformation, const EnvironmentDirectory& environmentDirectory)
-    : openGLGlutProcess{ System::g_Microseconds / interval },
+    : openGLGlutProcess{ System::gMicroseconds / interval },
       glutInformation{ glutInformation },
       windowID{ 0 },
       menuID{ 0 },

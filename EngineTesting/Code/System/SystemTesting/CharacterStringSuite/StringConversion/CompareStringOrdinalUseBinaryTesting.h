@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:09)
+///	引擎测试版本：0.8.1.3 (2022/10/14 1:16)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_ORDINAL_USE_BINARY_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_ORDINAL_USE_BINARY_TESTING_H
@@ -36,10 +36,10 @@ namespace System
         void CompareStringOrdinalUseBinaryTest();
 
     private:
-        using ComparesWStringCollection = std::vector<std::wstring>;
+        using ComparesWStringContainer = std::vector<std::wstring>;
 
     private:
-        ComparesWStringCollection wComparesString;
+        ComparesWStringContainer wComparesString;
         std::default_random_engine randomEngine;
     };
 }

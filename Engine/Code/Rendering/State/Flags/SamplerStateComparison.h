@@ -12,8 +12,6 @@
 
 #include "System/Helper/EnumMacro.h"
 
-#include <iostream>
-
 namespace Rendering
 {
     enum class SamplerStateComparison

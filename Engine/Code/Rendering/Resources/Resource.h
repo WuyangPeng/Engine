@@ -70,9 +70,25 @@ namespace Rendering
 
         void SetNewData(const StorageType& newStorage);
 
+        NODISCARD const char* GetOriginalData() const;
+        NODISCARD const char* GetOriginalData(int aOffset) const;
+
+        NODISCARD char* GetOriginalData(int aOffset);
+
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         PackageType impl;
     };
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_STREAM_REGISTER(Resource);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(Resource);
 }
 
 #endif  // RENDERING_RESOURCES_RESOURCE_H

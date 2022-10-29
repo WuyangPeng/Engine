@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 13:02)
+///	引擎测试版本：0.8.1.3 (2022/10/15 21:51)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CREATE_SYSTEM_CONSOLE_SCREEN_BUFFER_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CREATE_SYSTEM_CONSOLE_SCREEN_BUFFER_TESTING_H
@@ -39,12 +39,12 @@ namespace System
         void CreateBInheritHandleFalseConsoleScreenBufferTest();
 
     private:
-        using DesiredAccessGenericFlagsCollection = std::vector<DesiredAccessGeneric>;
-        using ConsoleScreenBufferShareModeFlagsCollection = std::vector<ConsoleScreenBufferShareMode>;
+        using DesiredAccessGenericFlagsContainer = std::vector<DesiredAccessGeneric>;
+        using ConsoleScreenBufferShareModeFlagsContainer = std::vector<ConsoleScreenBufferShareMode>;
 
     private:
-        DesiredAccessGenericFlagsCollection desiredAccessGenericFlags;
-        ConsoleScreenBufferShareModeFlagsCollection consoleScreenBufferShareModeFlags;
+        DesiredAccessGenericFlagsContainer desiredAccessGenericFlags;
+        ConsoleScreenBufferShareModeFlagsContainer consoleScreenBufferShareModeFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

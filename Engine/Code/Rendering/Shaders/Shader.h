@@ -116,6 +116,8 @@ namespace Rendering
         template <typename T>
         std::shared_ptr<const T> Get(int handle) const;
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         PackageType impl;
     };

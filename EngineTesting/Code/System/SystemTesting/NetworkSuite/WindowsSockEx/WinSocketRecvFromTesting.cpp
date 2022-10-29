@@ -76,12 +76,12 @@ void System::WinSocketRecvFromTesting::RecvFromTest()
     const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("UdpPort") + GetEngineeringOffsetValue());
     const auto address = mainTree.get<string>("Address");
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
     int length{ sizeof(addr) };
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = System::GetHostToNetShort(port);
-    addr.sin_addr.s_addr = System::GetInetAddr(address.c_str());
+    addr.sin_addr.s_addr = System::GetInternetAddress(address.c_str());
 
     const auto socketHandle = GetWinSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp, nullptr, 0, 0);
 
@@ -113,9 +113,9 @@ void System::WinSocketRecvFromTesting::RecvFromTest()
 
 #include STSTEM_WARNING_POP
 
-        ASSERT_UNEQUAL(ret, g_SocketError);
+        ASSERT_UNEQUAL(ret, gSocketError);
 
-        if (ret == g_SocketError)
+        if (ret == gSocketError)
         {
             break;
         }

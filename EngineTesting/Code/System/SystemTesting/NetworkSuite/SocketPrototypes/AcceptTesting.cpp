@@ -58,15 +58,15 @@ void System::AcceptTesting::AcceptTest()
 
     const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("TcpPort") + GetEngineeringOffsetValue());
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(port);
     addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
     int addrLen{ sizeof(addr) };
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE(IsSocketValid(socketHandle));
 
     ASSERT_TRUE(Bind(socketHandle, &addr));
@@ -85,9 +85,9 @@ void System::AcceptTesting::AcceptTest()
     {
         const auto ret = Recv(acceptHandle, &buffer.at(index), remain, SocketRecv::Default);
 
-        ASSERT_UNEQUAL(ret, g_SocketError);
+        ASSERT_UNEQUAL(ret, gSocketError);
 
-        if (ret == g_SocketError)
+        if (ret == gSocketError)
         {
             break;
         }

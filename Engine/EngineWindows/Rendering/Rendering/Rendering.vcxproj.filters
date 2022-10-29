@@ -364,6 +364,78 @@
     <Filter Include="WglRenderer 源文件\Detail">
       <UniqueIdentifier>{053e7345-9f4c-404c-a1b8-0ef570043ae6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Detail\State">
+      <UniqueIdentifier>{7600b1ef-aaf9-40ab-af50-1898e2616ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Detail\State">
+      <UniqueIdentifier>{d97a9c4d-bca5-4fe2-9ae9-27ae9e6062c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\State">
+      <UniqueIdentifier>{269fd984-ab28-432e-ac45-441213a71216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\State">
+      <UniqueIdentifier>{59eb584e-b820-49c4-a17e-5095fe1e9b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Resources">
+      <UniqueIdentifier>{35d78dd8-a7fd-4469-b489-e5faedd2b658}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Resources\Buffers">
+      <UniqueIdentifier>{bf121a57-e2f7-4496-b975-5cd330e70242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Resources\Textures">
+      <UniqueIdentifier>{78c47804-5c8f-40d9-9802-75cac79793a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Detail\Resources">
+      <UniqueIdentifier>{be681c59-62eb-4b77-ba3d-16bd4b6b532c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Detail\Resources\Buffers">
+      <UniqueIdentifier>{43660230-0746-43fb-a053-c2e9a9fafb80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Detail\Resources\Textures">
+      <UniqueIdentifier>{c9509b29-2132-44fa-bb6d-16bb74de7590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Detail\Resources">
+      <UniqueIdentifier>{12895451-45ae-4a6f-b747-900e7d51a378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Detail\Resources\Buffers">
+      <UniqueIdentifier>{f8b8fddc-66a4-4998-85c7-39f7ba54021b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Detail\Resources\Textures">
+      <UniqueIdentifier>{d70ac650-0060-4bb0-9041-1737fb19b32b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Resources">
+      <UniqueIdentifier>{1904cdbc-35da-418d-86cc-7b7216182086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Resources\Buffers">
+      <UniqueIdentifier>{e673f2fe-f374-4778-8002-09741df33cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Resources\Textures">
+      <UniqueIdentifier>{e3bf4033-979b-436d-bd1b-7f8c8bca1e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\InputLayout">
+      <UniqueIdentifier>{400f8670-cf30-4ee5-a496-085ac3010ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Detail\InputLayout">
+      <UniqueIdentifier>{08c1c58f-23fe-491b-95d9-01b2b39b7411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Detail\InputLayout">
+      <UniqueIdentifier>{2780833a-64f0-4229-b51d-aa83c5843e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\InputLayout">
+      <UniqueIdentifier>{b1c52966-a11f-43f7-a390-7ac19ce672c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\GLSL">
+      <UniqueIdentifier>{413654ed-b7a9-431a-b177-38562cf33a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Detail\GLSL">
+      <UniqueIdentifier>{e16e01f0-7309-4211-8984-d77adc17b64b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\GLSL">
+      <UniqueIdentifier>{4a44c0c2-35c3-4ebe-8b6b-be3c15d50665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRenderer 源文件\Detail\GLSL">
+      <UniqueIdentifier>{da9083c9-6201-437a-b23c-c58cbd2787f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp">
@@ -729,16 +801,10 @@
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture3D.cpp">
       <Filter>OpenGLRenderer 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureCube.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.cpp">
       <Filter>OpenGLRenderer 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexBuffer.cpp">
       <Filter>OpenGLRenderer 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormat.cpp">
@@ -754,9 +820,6 @@
       <Filter>OpenGLRenderer 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.cpp">
-      <Filter>OpenGLRenderer 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLIndexBuffer.cpp">
       <Filter>OpenGLRenderer 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.cpp">
@@ -838,9 +901,6 @@
       <Filter>Renderers 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\DrawManagement.cpp">
-      <Filter>Renderers 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\Renderers\GlobalState.cpp">
       <Filter>Renderers 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Renderers\PlatformIndexBuffer.cpp">
@@ -1539,9 +1599,6 @@
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderImpl.cpp">
       <Filter>Shaders 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSLShader.cpp">
-      <Filter>OpenGLRenderer 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderFactory.cpp">
       <Filter>Shaders 源文件\Detail</Filter>
     </ClCompile>
@@ -1571,9 +1628,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\Shaders\VisualProgram.cpp">
       <Filter>Shaders 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSLProgramFactory.cpp">
-      <Filter>OpenGLRenderer 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\VisualEffectImpl.cpp">
       <Filter>LocalEffects 源文件\Detail</Filter>
@@ -1643,6 +1697,141 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\State\Detail\GlobalStateImpl.cpp">
       <Filter>State 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\State\Detail\GlobalStateFactory.cpp">
+      <Filter>State 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\State\GlobalState.cpp">
+      <Filter>State 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\Detail\RendererObjectBridgeImpl.cpp">
+      <Filter>Base 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\RendererObjectBridge.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\Base\NullRendererObject.cpp">
+      <Filter>Base 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLRasterizerStateImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLBlendStateImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLDepthStencilStateImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLGlobalState.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLRasterizerState.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLBlendState.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLBlendStateTarget.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLDepthStencilState.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLDepthStencilStateFace.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLDrawingState.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLSamplerState.cpp">
+      <Filter>OpenGLRenderer 源文件\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\OpenGLResource.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLConstantBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLVertexBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLIndexBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLStructuredBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLAtomicCounterBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureSingle.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\Resources\Textures\OpenGLTextureSingleImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture1.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture2.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureRenderTarget.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureDepthStencil.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture3.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureArray.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture2Array.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture1Array.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureCubeArray.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureCube.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLDrawTarget.cpp">
+      <Filter>OpenGLRenderer 源文件\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\Resources\Textures\OpenGLDrawTargetImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\Resources\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\InputLayout\OpenGLInputLayoutManagerImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\InputLayout\OpenGLInputLayoutImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutAttribute.cpp">
+      <Filter>OpenGLRenderer 源文件\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayout.cpp">
+      <Filter>OpenGLRenderer 源文件\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutManager.cpp">
+      <Filter>OpenGLRenderer 源文件\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLProgramFactory.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLShader.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2165,9 +2354,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLBindTexture.h">
       <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLIndexBuffer.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLMapping.h">
       <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
@@ -2204,16 +2390,10 @@
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTexture3D.h">
       <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureCube.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureData.h">
       <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLTextureDataManager.h">
-      <Filter>OpenGLRenderer 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexBuffer.h">
       <Filter>OpenGLRenderer 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\OpenGLVertexFormat.h">
@@ -2334,9 +2514,6 @@
       <Filter>Renderers 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\DrawManagement.h">
-      <Filter>Renderers 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\Renderers\GlobalState.h">
       <Filter>Renderers 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\PlatformIndexBuffer.h">
@@ -3332,9 +3509,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderImpl.h">
       <Filter>Shaders 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSLShader.h">
-      <Filter>OpenGLRenderer 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderFactory.h">
       <Filter>Shaders 头文件\Detail</Filter>
     </ClInclude>
@@ -3377,9 +3551,6 @@
     <ClInclude Include="..\..\..\Code\Rendering\Shaders\Flags\ShaderAPIType.h">
       <Filter>Shaders 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSLProgramFactory.h">
-      <Filter>OpenGLRenderer 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\VisualEffectImpl.h">
       <Filter>LocalEffects 头文件\Detail</Filter>
     </ClInclude>
@@ -3406,9 +3577,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\Detail\RenderingEnvironmentFactory.h">
       <Filter>Renderers 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\OpenGLEnvironment.h">
-      <Filter>OpenGLRenderer 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\WglRenderer\Detail\WglEnvironment.h">
       <Filter>WglRenderer 头文件\Detail</Filter>
@@ -3443,11 +3611,155 @@
     <ClInclude Include="..\..\..\Code\Rendering\Renderers\RenderingDevice.h">
       <Filter>Renderers 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\State\Detail\GlobalStateImpl.h">
+      <Filter>State 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\State\Detail\GlobalStateFactory.h">
+      <Filter>State 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\State\StateInternalFwd.h">
+      <Filter>State 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\State\GlobalState.h">
+      <Filter>State 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\Detail\RendererObjectBridgeImpl.h">
+      <Filter>Base 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\RendererObjectBridge.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Base\NullRendererObject.h">
+      <Filter>Base 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Helper\Constant.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLRasterizerStateImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLBlendStateImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLDepthStencilStateImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\State\OpenGLGlobalState.h">
+      <Filter>OpenGLRenderer 头文件\Detail\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLRasterizerState.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLBlendState.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLBlendStateTarget.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLDepthStencilState.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLDepthStencilStateFace.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLDrawingState.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\State\OpenGLSamplerState.h">
+      <Filter>OpenGLRenderer 头文件\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\OpenGLResource.h">
+      <Filter>OpenGLRenderer 头文件\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLBuffer.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLConstantBuffer.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLVertexBuffer.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLIndexBuffer.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLStructuredBuffer.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Buffers\OpenGLAtomicCounterBuffer.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureSingle.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\Resources\Textures\OpenGLTextureSingleImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture1.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture2.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureRenderTarget.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureDepthStencil.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture3.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureArray.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture1Array.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTexture2Array.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureCubeArray.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLTextureCube.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Resources\Textures\OpenGLDrawTarget.h">
+      <Filter>OpenGLRenderer 头文件\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\Resources\Textures\OpenGLDrawTargetImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\Resources\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\InputLayout\OpenGLInputLayoutImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\InputLayout\OpenGLInputLayoutManagerImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayout.h">
+      <Filter>OpenGLRenderer 头文件\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutAttribute.h">
+      <Filter>OpenGLRenderer 头文件\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\InputLayout\OpenGLInputLayoutManager.h">
+      <Filter>OpenGLRenderer 头文件\InputLayout</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\OpenGLDevice.h">
       <Filter>OpenGLRenderer 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Rendering\State\Detail\GlobalStateImpl.h">
-      <Filter>State 头文件\Detail</Filter>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\OpenGLEnvironment.h">
+      <Filter>OpenGLRenderer 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLShader.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLProgramFactory.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

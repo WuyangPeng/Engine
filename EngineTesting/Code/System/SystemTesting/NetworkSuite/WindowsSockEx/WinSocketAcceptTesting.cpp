@@ -59,9 +59,9 @@ void System::WinSocketAcceptTesting::AcceptTest()
 
     const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("TcpPort") + GetEngineeringOffsetValue());
 
-    WinSockAddrIn addr{};
+    WinSockInternetAddress addr{};
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(port);
     addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
@@ -100,9 +100,9 @@ void System::WinSocketAcceptTesting::AcceptTest()
         buffer.len = remain;
         const auto ret = WinSocketRecv(acceptHandle, &buffer, 1, &numberOfBytesRecvd, &flags, nullptr, nullptr);
 
-        ASSERT_UNEQUAL(ret, g_SocketError);
+        ASSERT_UNEQUAL(ret, gSocketError);
 
-        if (ret == g_SocketError)
+        if (ret == gSocketError)
         {
             break;
         }

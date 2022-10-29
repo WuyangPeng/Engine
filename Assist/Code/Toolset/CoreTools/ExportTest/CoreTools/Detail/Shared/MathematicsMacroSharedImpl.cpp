@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 19:01)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:37)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 Mathematics::MathematicsMacroSharedImpl::MathematicsMacroSharedImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Mathematics::MathematicsMacroSharedImpl::GetCount() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Mathematics::MathematicsMacroSharedImpl::SetCount(int count) noexcept
+void Mathematics::MathematicsMacroSharedImpl::SetCount(int aCount) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

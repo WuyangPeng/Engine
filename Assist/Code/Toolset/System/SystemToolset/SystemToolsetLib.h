@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/05 17:11)
+///	引擎辅助版本：0.8.1.3 (2022/10/24 22:41)
 
 #ifndef SYSTEM_TOOLSET_LIB_H
 #define SYSTEM_TOOLSET_LIB_H
@@ -22,7 +22,7 @@
             #pragma comment(lib, "SystemToolset.lib")
         #endif  // _DEBUG
 
-    #else  // BUILDING_SYSTEM_TOOLSET_STATIC
+    #else  // !BUILDING_SYSTEM_TOOLSET_STATIC
 
         #include "DllLib.h"
 

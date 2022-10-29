@@ -64,18 +64,27 @@
 （1） 消息框标志数据：MessageBoxFlagsDataTesting。
 （2） 语言ID数据：LanguageIDDataTesting。
 （3） 输出信息：OutputDebugStringTesting。
-（4） 消息框选择：MessageBoxSelectionUseYesNoCancelTesting、MessageBoxSelectionUseFlagsDataTesting、MessageBoxSelectionUseLanguageIDDataTesting。
+（4） 消息框选择：MessageBoxSelectionUseYesNoCancelTesting、
+				  MessageBoxSelectionUseFlagsDataTesting、
+				  MessageBoxSelectionUseLanguageIDDataTesting。
 
 ----------------------------
 3.	DynamicLinkSuite 
 
 对动态链接模块的单元测试，包括：
-（1）加载动态链接库：LoadLibraryTesting、GetProcAddressTesting、FreeLibraryTesting。
-（2）库工具：GetModuleHandleTesting、GetModuleFileNameTesting。
+（1）加载动态链接库：LoadLibraryTesting、
+					 GetProcAddressTesting、
+					 FreeLibraryTesting。
+（2）库工具：GetModuleHandleTesting、
+			 GetModuleFileNameTesting。
 （3）库目录：LibraryDirectoryTesting。
-（4）加载资源工具：LoadResourceToolsTesting、FindResourceTesting、LoadResourceTesting、LoadStringTesting。
+（4）加载资源工具：LoadResourceToolsTesting、
+				   FindResourceTesting、
+				   LoadResourceTesting、
+				   LoadStringTesting。
 （5）枚举资源数据：EnumResourceDataTesting。
-（6）枚举资源工具：EnumResourceToolsTesting、ResourceEnumTesting。
+（6）枚举资源工具：EnumResourceToolsTesting、
+				   ResourceEnumTesting。
 
 ----------------------------
 4.	CharacterStringSuite 
@@ -100,7 +109,13 @@
 				CompareStringUseLocaleStringTesting、
 				CompareStringOrdinalUseBinaryTesting、
 				CaseInsensitiveComparisonTesting。
-（4） 格式化字符串：VsnPrintfTesting、StrcatTesting、StrlenTesting、StrcpyTesting、StrtokTesting、StrstrTesting、SNPrintfTesting。 
+（4） 格式化字符串：VsnPrintfTesting、
+					StrcatTesting、
+					StrlenTesting、
+					StrcpyTesting、
+					StrtokTesting、
+					StrstrTesting、
+					SNPrintfTesting。 
 
 ----------------------------
 5.	ConsoleSuite 
@@ -114,7 +129,10 @@
 			      ReadAttributeTesting 、
 				  WriteAttributeTesting、
 				  FillAttributeTesting。
-（3） 控制台屏幕缓冲区：CreateSystemConsoleScreenBufferTesting、ConsoleScreenBufferInfoTesting、SetConsoleHandleScreenBufferInfoTesting、SetSystemConsoleScreenBufferSizeTesting。
+（3） 控制台屏幕缓冲区：CreateSystemConsoleScreenBufferTesting、
+						ConsoleScreenBufferInfoTesting、
+						SetConsoleHandleScreenBufferInfoTesting、
+						SetSystemConsoleScreenBufferSizeTesting。
 （4） 控制台字体：ConsoleFontTesting。 
 （5） 控制台模式：ConsoleModeTesting。 
 （6） 控制台代码页：ConsoleCodePageTesting。 
@@ -131,16 +149,29 @@
 			  ValidateHeapTesting、
 			  CompactHeapTesting、
 			  CurrentProcessHeapTesting 。
-（2） 虚拟内存工具：AllocateVirtualOneStepTesting、AllocateVirtualSeparationTesting、VirtualProtectTesting、VirtualQueryTesting。
-（3） 文件映射：CreateFileMappingTesting、OpenFileMappingTesting、ViewOfFileTesting。
-（4） 内存帮助：MemorySetTesting、MemoryCopyTesting、MallocMemoryTesting、FillMemoryTesting、GetWindowsStructDefaultSizeTesting。
-（5） 局部内存：LocalMemoryAllocTesting、LocalMemorySizeTesting。
+（2） 虚拟内存工具：AllocateVirtualOneStepTesting、
+					AllocateVirtualSeparationTesting、
+					VirtualProtectTesting、
+					VirtualQueryTesting。
+（3） 文件映射：CreateFileMappingTesting、
+				OpenFileMappingTesting、
+				ViewOfFileTesting。
+（4） 内存帮助：MemorySetTesting、
+				MemoryCopyTesting、
+				MallocMemoryTesting、
+				FillMemoryTesting、
+				GetWindowsStructDefaultSizeTesting。
+（5） 局部内存：LocalMemoryAllocTesting、
+				LocalMemorySizeTesting。
  
 ----------------------------
 7.	ThreadingSuite
  
 对线程模块的单元测试，包括： 
-（1） 临界区：CriticalSectionTesting、CriticalSectionThreadTesting、SpecifyCriticalSectionTesting、SpecifyCriticalSectionAndSpinCountTesting。
+（1） 临界区：CriticalSectionTesting、
+			  CriticalSectionThreadTesting、
+			  SpecifyCriticalSectionTesting、
+			  SpecifyCriticalSectionAndSpinCountTesting。
 （2） 信号量：CreateSemaphoreThreadTesting、
 			  CreateSemaphoreThreadUseNameTesting、
 			  ReleaseSemaphoreTesting、
@@ -163,9 +194,13 @@
 			  WaitForMultipleMutexTesting、
 			  OpenMutexTesting、
 			  PThreadMutexTesting。
-（5） 读写锁：SlimReaderWriterInitializeTesting、SlimReaderWriterReaderTesting、SlimReaderWriterWriterTesting。
-（6） 条件变量：ConditionVariableCriticalSectionTesting、ConditionVariableSlimReaderWriterLockTesting。
-（7） 一次对象：InitOnceSynchronousTesting、InitOnceAsynchronousTesting。
+（5） 读写锁：SlimReaderWriterInitializeTesting、
+	          SlimReaderWriterReaderTesting、
+			  SlimReaderWriterWriterTesting。
+（6） 条件变量：ConditionVariableCriticalSectionTesting、
+				ConditionVariableSlimReaderWriterLockTesting。
+（7） 一次对象：InitOnceSynchronousTesting、
+				InitOnceAsynchronousTesting。
 （8） 等待计时器：CreateWaitableTimerManualTesting、
 				  CreateWaitableTimerSynchronizationTesting、
 				  CreateWaitableTimerUseNameTesting、
@@ -176,8 +211,11 @@
 				  WaitForMultipleWaitableTimerTesting、
 				  CancelWaitableTimerTesting、
 				  SetWaitableTimerTesting。
-（9） 同步工具：SleepTesting、SignalObjectAndWaitTesting。
-（10）原子操作：InterlockedTesting、InterlockedSubtractTesting、InterlockedBinaryTesting。
+（9） 同步工具：SleepTesting、
+				SignalObjectAndWaitTesting。
+（10）原子操作：InterlockedTesting、
+				InterlockedSubtractTesting、
+				InterlockedBinaryTesting。
 （11）线程：CreateDefaultThreadTesting、
 			CreateSuspendedThreadTesting、
 			CreateCThreadTesting、
@@ -185,9 +223,16 @@
 		    ThreadPriorityTesting、
 			WaitForThreadTesting、
 			WaitForMultipleThreadTesting。
-（12）线程辅助工具：OpenThreadTesting、PriorityBoostTesting、ThreadTimesTesting、ThreadTokenTesting。
+（12）线程辅助工具：OpenThreadTesting、
+					PriorityBoostTesting、
+					ThreadTimesTesting、
+					ThreadTokenTesting。
 （13）线程局部存储：ThreadLocalStorageTesting。
-（14）进程：CreateDefaultProcessTesting、CreateProcessTesting、GetProcessHandleTesting、ProcessPriorityClassTesting、OpenProcessTesting。
+（14）进程：CreateDefaultProcessTesting、
+			CreateProcessTesting、
+			GetProcessHandleTesting、
+			ProcessPriorityClassTesting、
+			OpenProcessTesting。
 （15）进程工具：ProcessTokenTesting。
 
 ----------------------------

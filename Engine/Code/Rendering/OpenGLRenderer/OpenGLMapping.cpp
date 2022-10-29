@@ -12,108 +12,6 @@
 #include "OpenGLMapping.h"
 #include "System/OpenGL/OpenGLAPI.h"
 
-Rendering::Enum Rendering::OpenGLConstant::GetOpenGLAlphaSrcBlend(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(AlphaStateFlags::SourceBlendMode::Quantity)> result{
-        static_cast<GLenum>(System::SrcBlendMode::Zero),  // GL_ZERO,
-        static_cast<GLenum>(System::SrcBlendMode::One),  // GL_ONE,
-        static_cast<GLenum>(System::SrcBlendMode::DstColor),  // GL_DST_COLOR,
-        static_cast<GLenum>(System::SrcBlendMode::OneMinusDstColor),  // GL_ONE_MINUS_DST_COLOR,
-        static_cast<GLenum>(System::SrcBlendMode::SrcAlpha),  // GL_SRC_ALPHA,
-        static_cast<GLenum>(System::SrcBlendMode::OneMinusSrcAlpha),  // GL_ONE_MINUS_SRC_ALPHA,
-        static_cast<GLenum>(System::SrcBlendMode::DstAlpha),  // GL_DST_ALPHA,
-        static_cast<GLenum>(System::SrcBlendMode::OneMinusDstAlpha),  // GL_ONE_MINUS_DST_ALPHA,
-        static_cast<GLenum>(System::SrcBlendMode::SrcAlphaSaturate),  // GL_SRC_ALPHA_SATURATE,
-        static_cast<GLenum>(System::SrcBlendMode::ConstantColor),  // GL_CONSTANT_COLOR,
-        static_cast<GLenum>(System::SrcBlendMode::OneMinusConstantColor),  // GL_ONE_MINUS_CONSTANT_COLOR,
-        static_cast<GLenum>(System::SrcBlendMode::ConstantAlpha),  // GL_CONSTANT_ALPHA};
-    };
-
-    return result.at(index);
-}
-
-Rendering::Enum Rendering::OpenGLConstant::GetOpenGLAlphaDstBlend(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(AlphaStateFlags::DestinationBlendMode::Quantity)> result{
-        static_cast<GLenum>(System::DstBlendMode::Zero),  // GL_ZERO,
-        static_cast<GLenum>(System::DstBlendMode::One),  // GL_ONE,
-        static_cast<GLenum>(System::DstBlendMode::SrcColor),  // GL_SRC_COLOR,
-        static_cast<GLenum>(System::DstBlendMode::OneMinusSrcColor),  // GL_ONE_MINUS_SRC_COLOR,
-        static_cast<GLenum>(System::DstBlendMode::SrcAlpha),  // GL_SRC_ALPHA,
-        static_cast<GLenum>(System::DstBlendMode::OneMinusSrcAlpha),  // GL_ONE_MINUS_SRC_ALPHA,
-        static_cast<GLenum>(System::DstBlendMode::DstAlpha),  // GL_SRC_ALPHA,
-        static_cast<GLenum>(System::DstBlendMode::OneMinusDstAlpha),  // GL_ONE_MINUS_DST_ALPHA,
-        static_cast<GLenum>(System::DstBlendMode::ConstantColor),  // GL_CONSTANT_COLOR,
-        static_cast<GLenum>(System::DstBlendMode::OneMinusConstantColor),  // GL_ONE_MINUS_CONSTANT_COLOR,
-        static_cast<GLenum>(System::DstBlendMode::ConstantAlpha),  // GL_CONSTANT_ALPHA,
-        static_cast<GLenum>(System::DstBlendMode::OneMinusConstantAlpha),  // GL_ONE_MINUS_CONSTANT_ALPHA
-    };
-
-    return result.at(index);
-}
-
-Rendering::Enum Rendering::OpenGLConstant::GetOpenGLAlphaCompare(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(AlphaStateFlags::CompareMode::Quantity)> result{
-        static_cast<GLenum>(System::CompareMode::Never),  // GL_NEVER,
-        static_cast<GLenum>(System::CompareMode::Less),  // GL_LESS,
-        static_cast<GLenum>(System::CompareMode::Equal),  // GL_EQUAL,
-        static_cast<GLenum>(System::CompareMode::LEqual),  // GL_LEQUAL,
-        static_cast<GLenum>(System::CompareMode::Greater),  // GL_GREATER,
-        static_cast<GLenum>(System::CompareMode::NotEqual),  // GL_NOTEQUAL,
-        static_cast<GLenum>(System::CompareMode::GEqual),  // GL_GEQUAL,
-        static_cast<GLenum>(System::CompareMode::Always),  // GL_ALWAYS
-    };
-
-    return result.at(index);
-}
-
-Rendering::Enum Rendering::OpenGLConstant::GetOpenGLDepthCompare(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(DepthStateFlags::CompareMode::Quantity)> result{
-        static_cast<GLenum>(System::CompareMode::Never),  // GL_NEVER,
-        static_cast<GLenum>(System::CompareMode::Less),  // GL_LESS,
-        static_cast<GLenum>(System::CompareMode::Equal),  // GL_EQUAL,
-        static_cast<GLenum>(System::CompareMode::LEqual),  // GL_LEQUAL,
-        static_cast<GLenum>(System::CompareMode::Greater),  // GL_GREATER,
-        static_cast<GLenum>(System::CompareMode::NotEqual),  // GL_NOTEQUAL,
-        static_cast<GLenum>(System::CompareMode::GEqual),  // GL_GEQUAL,
-        static_cast<GLenum>(System::CompareMode::Always),  // GL_ALWAYS
-    };
-
-    return result.at(index);
-}
-
-Rendering::Enum Rendering::OpenGLConstant::GetOpenGLStencilCompare(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(StencilStateFlags::CompareMode::Quantity)> result{
-        static_cast<GLenum>(System::CompareMode::Never),  // GL_NEVER,
-        static_cast<GLenum>(System::CompareMode::Less),  // GL_LESS,
-        static_cast<GLenum>(System::CompareMode::Equal),  // GL_EQUAL,
-        static_cast<GLenum>(System::CompareMode::LEqual),  // GL_LEQUAL,
-        static_cast<GLenum>(System::CompareMode::Greater),  // GL_GREATER,
-        static_cast<GLenum>(System::CompareMode::NotEqual),  // GL_NOTEQUAL,
-        static_cast<GLenum>(System::CompareMode::GEqual),  // GL_GEQUAL,
-        static_cast<GLenum>(System::CompareMode::Always),  // GL_ALWAYS
-    };
-
-    return result.at(index);
-}
-
-Rendering::Enum Rendering::OpenGLConstant::GetOpenGLStencilOperation(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(StencilStateFlags::OperationType::Quantity)> result{
-        static_cast<GLenum>(System::OpenGLOperation::Keep),  // GL_KEEP,
-        static_cast<GLenum>(System::OpenGLOperation::Zero),  // GL_ZERO,
-        static_cast<GLenum>(System::OpenGLOperation::Replace),  // GL_REPLACE,
-        static_cast<GLenum>(System::OpenGLOperation::Increment),  // GL_INCR,
-        static_cast<GLenum>(System::OpenGLOperation::Decrement),  // GL_DECR,
-        static_cast<GLenum>(System::OpenGLOperation::Invert),  // GL_INVERT
-    };
-
-    return result.at(index);
-}
-
 Rendering::Int Rendering::OpenGLConstant::GetOpenGLAttributeChannels(int index)
 {
     static std::array<Enum, System::EnumCastUnderlying(VertexFormatFlags::AttributeType::Quantity)> result{
@@ -180,21 +78,6 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLBufferUsage(int index)
     return result.at(index);
 }
 
-Rendering::Int Rendering::OpenGLConstant::GetOpenGLMinFilter(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(ShaderFlags::SamplerFilter::Quantity)> result{
-        0,
-        static_cast<GLenum>(System::SamplerFilter::Nearest),  // GL_NEAREST,
-        static_cast<GLenum>(System::SamplerFilter::Linear),  // GL_LINEAR,
-        static_cast<GLenum>(System::SamplerFilter::NearestNearest),  // GL_NEAREST_MIPMAP_NEAREST,
-        static_cast<GLenum>(System::SamplerFilter::NearesLinear),  // GL_NEAREST_MIPMAP_LINEAR,
-        static_cast<GLenum>(System::SamplerFilter::LinearNeares),  // GL_LINEAR_MIPMAP_NEAREST,
-        static_cast<GLenum>(System::SamplerFilter::LinearLinear),  // GL_LINEAR_MIPMAP_LINEAR
-    };
-
-    return result.at(index);
-}
-
 Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureFormat(int index)
 {
     static std::array<Enum, System::EnumCastUnderlying(TextureFormat::Quantity)> result{
@@ -221,37 +104,6 @@ Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureFormat(int index)
         0,  // GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
         0,  // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
         0,  // GL_DEPTH_STENCIL_EXT
-    };
-
-    return result.at(index);
-}
-
-Rendering::UInt Rendering::OpenGLConstant::GetOpenGLTextureInternalFormat(int index)
-{
-    static std::array<Enum, System::EnumCastUnderlying(TextureFormat::Quantity)> result{
-        0,
-        static_cast<GLenum>(System::TextureInternalFormat::R5G6B5),  // GL_RGB5,
-        static_cast<GLenum>(System::TextureInternalFormat::A1R5G5B5),  // GL_RGB5_A1,
-        static_cast<GLenum>(System::TextureInternalFormat::A4R4G4B4),  // GL_RGBA4,
-        0,  // GL_ALPHA8,
-        0,  // GL_LUMINANCE8,
-        0,  // GL_LUMINANCE8_ALPHA8,
-        static_cast<GLenum>(System::TextureInternalFormat::R8G8B8),  // GL_RGB8,
-        static_cast<GLenum>(System::TextureInternalFormat::A8R8G8B8),  // GL_RGBA8,
-        static_cast<GLenum>(System::TextureInternalFormat::A8R8G8B8),  // GL_RGBA8,
-        0,  //GL_LUMINANCE16,
-        static_cast<GLenum>(System::TextureInternalFormat::G16R16),  // GL_RG16,
-        static_cast<GLenum>(System::TextureInternalFormat::A16B16G16R16),  // GL_RGBA16,
-        static_cast<GLenum>(System::TextureInternalFormat::R16F),  // GL_R16F,
-        static_cast<GLenum>(System::TextureInternalFormat::G16R16F),  // GL_RG16F,
-        static_cast<GLenum>(System::TextureInternalFormat::A16B16G16R16F),  // GL_RGBA16F_ARB,
-        static_cast<GLenum>(System::TextureInternalFormat::R32F),  // GL_R32F,
-        static_cast<GLenum>(System::TextureInternalFormat::G32R32F),  // GL_RG32F,
-        static_cast<GLenum>(System::TextureInternalFormat::A32B32G32R32F),  // GL_RGBA32F_ARB,
-        0,  // GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
-        0,  // GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
-        0,  // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
-        0,  // GL_DEPTH24_STENCIL8_EXT
     };
 
     return result.at(index);

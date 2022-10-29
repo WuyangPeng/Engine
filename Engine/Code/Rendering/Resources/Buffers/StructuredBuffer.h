@@ -46,10 +46,21 @@ namespace Rendering
             return 2;
         }
 
+        NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
+
     private:
         CounterType counterType;
         bool keepInternalCount;
     };
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26426)
+
+    CORE_TOOLS_STREAM_REGISTER(StructuredBuffer);
+
+#include STSTEM_WARNING_POP
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(StructuredBuffer);
 }
 
 #endif  // RENDERING_RENDERERS_STRUCTURED_BUFFER_H

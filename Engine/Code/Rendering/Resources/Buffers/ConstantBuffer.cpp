@@ -10,12 +10,15 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ConstantBuffer.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLConstantBuffer.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Resources/Detail/Buffers/BufferLayout.h"
 #include "Rendering/Resources/Flags/UsageType.h"
 
@@ -73,6 +76,19 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::ConstantBuffer::CloneObject() con
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
+}
+
+Rendering::ConstantBuffer::RendererObjectSharedPtr Rendering::ConstantBuffer::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLConstantBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }
 
 Rendering::ConstantBuffer::ConstantBuffer(LoadConstructor loadConstructor)

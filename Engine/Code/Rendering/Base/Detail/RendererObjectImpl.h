@@ -12,6 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Base/BaseFwd.h"
 
 #include <memory>
@@ -24,19 +25,26 @@ namespace Rendering
     public:
         using ClassType = RendererObjectImpl;
         using GraphicsObjectSharedPtr = std::shared_ptr<GraphicsObject>;
+        using ConstGraphicsObjectSharedPtr = std::shared_ptr<const GraphicsObject>;
         using GraphicsObjectWeakPtr = std::weak_ptr<GraphicsObject>;
+        using OpenGLUInt = System::OpenGLUInt;
 
     public:
         RendererObjectImpl(const GraphicsObjectSharedPtr& graphicsObject, const std::string& name);
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD GraphicsObjectSharedPtr GetGraphicsObject() const;
+        NODISCARD GraphicsObjectSharedPtr GetGraphicsObject();
+        NODISCARD ConstGraphicsObjectSharedPtr GetGraphicsObject() const;
         NODISCARD std::string GetName() const;
+
+        NODISCARD OpenGLUInt GetGLHandle() const noexcept;
+        void SetGLHandle(OpenGLUInt handler) noexcept;
 
     private:
         GraphicsObjectWeakPtr graphicsObject;
         std::string name;
+        OpenGLUInt glHandle;
     };
 }
 

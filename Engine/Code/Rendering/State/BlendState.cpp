@@ -5,18 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 18:15)
+///	引擎版本：0.8.1.3 (2022/10/03 14:51)
 
 #include "Rendering/RenderingExport.h"
 
 #include "BlendState.h"
 #include "Detail/BlendStateImpl.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
+#include "Rendering/OpenGLRenderer/State/OpenGLBlendState.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, BlendState)
 
@@ -24,18 +28,26 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, BlendState);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BlendState);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BlendState);
 
-Rendering::BlendState::BlendState(const std::string& name)
-    : ParentType{ GraphicsObjectType::BlendState, name }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+Rendering::BlendState::BlendStateSharedPtr Rendering::BlendState::Create(const std::string& name)
 {
+    return std::make_shared<BlendState>(BlendStateCreate::Init, name);
+}
+
+Rendering::BlendState::BlendState(BlendStateCreate blendStateCreate, const std::string& name)
+    : ParentType{ name, GraphicsObjectType::BlendState },
+      impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    System::UnusedFunction(blendStateCreate);
+
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, BlendState)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, GetEnableAlphaToCoverage, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, IsEnableAlphaToCoverage, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendState, SetEnableAlphaToCoverage, bool, void)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, GetEnableIndependentBlend, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, IsEnableIndependentBlend, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, BlendState, SetEnableIndependentBlend, bool, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendState, GetBlendColor, Rendering::BlendState::Colour)
@@ -66,14 +78,14 @@ int Rendering::BlendState::GetStreamingSize() const
     return ParentType::GetStreamingSize() + impl->GetStreamingSize();
 }
 
-int64_t Rendering::BlendState::Register(CoreTools::ObjectRegister& target) const
+int64_t Rendering::BlendState::Register(ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return ParentType::Register(target);
 }
 
-void Rendering::BlendState::Save(CoreTools::BufferTarget& target) const
+void Rendering::BlendState::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -86,7 +98,7 @@ void Rendering::BlendState::Save(CoreTools::BufferTarget& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::BlendState::Link(CoreTools::ObjectLink& source)
+void Rendering::BlendState::Link(ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -100,7 +112,7 @@ void Rendering::BlendState::PostLink()
     ParentType::PostLink();
 }
 
-void Rendering::BlendState::Load(CoreTools::BufferSource& source)
+void Rendering::BlendState::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -111,6 +123,8 @@ void Rendering::BlendState::Load(CoreTools::BufferSource& source)
     impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+
+    CheckDrawingState();
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::BlendState::CloneObject() const
@@ -118,4 +132,25 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::BlendState::CloneObject() const
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     return std::make_shared<ClassType>(*this);
+}
+
+Rendering::BlendState::RendererObjectSharedPtr Rendering::BlendState::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLBlendState>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
+}
+
+void Rendering::BlendState::CheckDrawingState()
+{
+    if (GetType() != GraphicsObjectType::BlendState)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("GraphicsObject类型错误。"s));
+    }
 }

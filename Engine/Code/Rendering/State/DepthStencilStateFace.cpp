@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 17:19)
+///	引擎版本：0.8.1.3 (2022/10/04 10:20)
 
 #include "Rendering/RenderingExport.h"
 
@@ -84,7 +84,7 @@ void Rendering::DepthStencilStateFace::SetComparison(Rendering::DepthStencilStat
     comparison = aComparison;
 }
 
-void Rendering::DepthStencilStateFace::Load(CoreTools::BufferSource& source)
+void Rendering::DepthStencilStateFace::Load(BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
@@ -94,7 +94,7 @@ void Rendering::DepthStencilStateFace::Load(CoreTools::BufferSource& source)
     source.ReadEnum(comparison);
 };
 
-void Rendering::DepthStencilStateFace::Save(CoreTools::BufferTarget& target) const
+void Rendering::DepthStencilStateFace::Save(BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -115,4 +115,12 @@ int Rendering::DepthStencilStateFace::GetStreamingSize() const noexcept
     size += CORE_TOOLS_STREAM_SIZE(comparison);
 
     return size;
+}
+
+bool Rendering::operator==(const DepthStencilStateFace& lhs, const DepthStencilStateFace& rhs) noexcept
+{
+    return lhs.GetFail() == rhs.GetFail() &&
+           lhs.GetDepthFail() == rhs.GetDepthFail() &&
+           lhs.GetPass() == rhs.GetPass() &&
+           lhs.GetComparison() == rhs.GetComparison();
 }

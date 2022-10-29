@@ -10,10 +10,13 @@
 #include "Rendering/RenderingExport.h"
 
 #include "StructuredBuffer.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLStructuredBuffer.h"
+#include "Rendering/Renderers/Flags/RendererTypes.h"
 #include "Rendering/Resources/Flags/CounterType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
 
@@ -142,4 +145,17 @@ void Rendering::StructuredBuffer::Load(CoreTools::BufferSource& source)
     ParentType::Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+}
+
+Rendering::StructuredBuffer::RendererObjectSharedPtr Rendering::StructuredBuffer::CreateRendererObject(RendererTypes rendererTypes)
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    switch (rendererTypes)
+    {
+        case RendererTypes::OpenGL:
+            return std::make_shared<OpenGLStructuredBuffer>(boost::polymorphic_pointer_cast<ClassType>(shared_from_this()), GetName());
+        default:
+            return ParentType::CreateRendererObject(rendererTypes);
+    }
 }

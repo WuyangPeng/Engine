@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/SharedPtrMacro.h"
 #include "Rendering/LocalEffects/LocalEffectsFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 
@@ -30,7 +31,11 @@ namespace Rendering
         RendererDrawTarget& operator=(const RendererDrawTarget& rhs) noexcept = default;
         RendererDrawTarget(RendererDrawTarget&& rhs) noexcept = default;
         RendererDrawTarget& operator=(RendererDrawTarget&& rhs) noexcept = default;
+
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
     };
+
+    CORE_TOOLS_SHARED_PTR_DECLARE(RendererDrawTarget);
 }
 
 #endif  // RENDERING_RENDERERS_RENDERER_DRAW_TARGET_H

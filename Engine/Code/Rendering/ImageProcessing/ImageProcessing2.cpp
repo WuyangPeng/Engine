@@ -78,7 +78,7 @@ Rendering::Texture2DSharedPtr Rendering::ImageProcessing2::CreateImage(MAYBE_UNU
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    auto reflected = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::A32B32G32R32F), bound0, bound1, 1);
+    auto reflected = std::make_shared<Texture2D>(System::EnumCastUnderlying<DataFormatType>(System::TextureInternalFormat::RGBA32F), bound0, bound1, 1);
 
     return reflected;
 }

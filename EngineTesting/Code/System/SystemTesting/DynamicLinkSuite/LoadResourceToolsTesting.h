@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/15 12:47)
+///	引擎测试版本：0.8.1.3 (2022/10/10 19:54)
 
 #ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_TOOLS_TESTING_H
 #define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_TOOLS_TESTING_H
@@ -29,7 +29,7 @@ namespace System
     protected:
         void LoadTestingLibrary();
 
-        String GetResourcesLibrary() const;
+        NODISCARD String GetResourcesLibrary() const;
         void FreeTestingLibrary();
         NODISCARD DynamicLinkModule GetDllModule() noexcept;
 

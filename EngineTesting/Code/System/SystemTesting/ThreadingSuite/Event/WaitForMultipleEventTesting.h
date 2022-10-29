@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:14)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:23)
 
 #ifndef SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_EVENT_TESTING_H
 #define SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_EVENT_TESTING_H
@@ -28,14 +28,17 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        using Container = std::vector<WindowsHandle>;
+
+    private:
         void DoRunUnitTest() final;
         void MainTest();
 
         void WaitMultipleObjectsTest();
 
-        void WaitForManualEventTest0(const std::vector<WindowsHandle>& eventHandle);
-        void WaitForManualEventTest1(const std::vector<WindowsHandle>& eventHandle);
-        void WaitForManualEventTest2(const std::vector<WindowsHandle>& eventHandle);
+        void WaitForManualEventTest0(const Container& eventHandle);
+        void WaitForManualEventTest1(const Container& eventHandle);
+        void WaitForManualEventTest2(const Container& eventHandle);
     };
 }
 

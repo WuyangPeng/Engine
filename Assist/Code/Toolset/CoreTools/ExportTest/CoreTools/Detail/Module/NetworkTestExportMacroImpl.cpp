@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/01 14:09)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:29)
 
 #include "Network/NetworkExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 Network::NetworkTestExportMacroImpl::NetworkTestExportMacroImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Network::NetworkTestExportMacroImpl::GetCount() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Network::NetworkTestExportMacroImpl::SetCount(int count) noexcept
+void Network::NetworkTestExportMacroImpl::SetCount(int aCount) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

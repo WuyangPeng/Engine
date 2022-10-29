@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:44)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:23)
 
 #include "CreateEventTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -20,17 +20,17 @@
 System::CreateEventTesting::CreateEventTesting(const OStreamShared& stream)
     : ParentType{ stream },
       eventStandardAccessFlags{ MutexStandardAccess::Delete,
-                                  MutexStandardAccess::ReadControl,
-                                  MutexStandardAccess::WriteDac,
-                                  MutexStandardAccess::WriteOwner,
-                                  MutexStandardAccess::Synchronize },
+                                MutexStandardAccess::ReadControl,
+                                MutexStandardAccess::WriteDac,
+                                MutexStandardAccess::WriteOwner,
+                                MutexStandardAccess::Synchronize },
       eventSpecificAccessFlags{ EventSpecificAccess::Default,
-                                  EventSpecificAccess::ModifyState,
-                                  EventSpecificAccess::AllAccess },
+                                EventSpecificAccess::ModifyState,
+                                EventSpecificAccess::AllAccess },
       createEventFlags{ CreateEventType::Default,
-                          CreateEventType::InitalSet,
-                          CreateEventType::ManualReset,
-                          CreateEventType::All },
+                        CreateEventType::InitalSet,
+                        CreateEventType::ManualReset,
+                        CreateEventType::All },
       randomEngine{ GetEngineRandomSeed() },
       maxSize{ CoreTools::MaxElement<size_t>({ eventStandardAccessFlags.size(), eventSpecificAccessFlags.size(), createEventFlags.size() }) }
 {

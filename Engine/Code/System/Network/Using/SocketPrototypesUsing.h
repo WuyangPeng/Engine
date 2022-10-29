@@ -19,12 +19,16 @@
     #include "System/Windows/Using/WindowsUsing.h"
 #endif  // SYSTEM_PLATFORM_WIN32
 
+#include <string>
+
 namespace System
 {
+    const std::string defaultRouteAddress{ "0.0.0.0" };
+
 #ifdef SYSTEM_PLATFORM_WIN32
 
     using WinSockInAddr = in_addr;
-    using WinSockAddrIn = sockaddr_in;
+    using WinSockInternetAddress = sockaddr_in;
     using WinSockIn6Addr = in6_addr;
     using WinSockAddrIn6 = sockaddr_in6;
     using WinSockScopeID = SCOPE_ID;
@@ -35,7 +39,7 @@ namespace System
     using SocketLinger = LINGER;
 
     constexpr WinSocket g_InvalidSocket{ INVALID_SOCKET };
-    constexpr auto g_SocketError = SOCKET_ERROR;
+    constexpr auto gSocketError = SOCKET_ERROR;
     constexpr auto gInAddrAny = INADDR_ANY;
     constexpr auto g_FdSetSize = FD_SETSIZE;
     constexpr auto g_InAddrLoopback = INADDR_LOOPBACK;
@@ -59,7 +63,7 @@ namespace System
         } S_un;
     };
 
-    struct WinSockAddrIn
+    struct WinSockInternetAddress
     {
         int16_t sin_family;
         uint16_t sin_port;
@@ -131,7 +135,7 @@ namespace System
     };
 
     constexpr auto g_InvalidSocket = static_cast<WinSocket>(~0);
-    constexpr auto g_SocketError = -1;
+    constexpr auto gSocketError = -1;
     constexpr auto gInAddrAny = 0x00000000;
     constexpr auto g_InAddrLoopback = 0x7f000001;
     constexpr auto g_SoMaxConn = 0x7fffffff;

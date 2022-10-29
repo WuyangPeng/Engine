@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 18:46)
+///	引擎测试版本：0.8.1.3 (2022/10/22 19:27)
 
 #include "InitOnceAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -56,7 +56,7 @@ void System::InitOnceAsynchronousTesting::AsynchronousTest()
 void System::InitOnceAsynchronousTesting::BeginInitializeTest(InitOncePtr initOnce)
 {
     auto handle = OpenEventHandleAsync(initOnce);
-    ASSERT_UNEQUAL(g_InvalidHandleValue, handle);
+    ASSERT_UNEQUAL(gInvalidHandleValue, handle);
 
     if (eventHandle != nullptr)
     {
@@ -76,7 +76,7 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(
 
     if (!result)
     {
-        return g_InvalidHandleValue;
+        return gInvalidHandleValue;
     }
 
     if (pending == gFalse)
@@ -88,7 +88,7 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(
 
     if (event == nullptr)
     {
-        return g_InvalidHandleValue;
+        return gInvalidHandleValue;
     }
 
     result = SystemInitOnceComplete(initOnce, InitOnceBeginInitialize::Async, event);
@@ -108,6 +108,6 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(
     }
     else
     {
-        return g_InvalidHandleValue;
+        return gInvalidHandleValue;
     }
 }

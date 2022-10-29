@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.1 (2022/08/18 17:19)
+///	引擎版本：0.8.1.3 (2022/10/02 22:13)
 
 #ifndef RENDERING_STATE_BLEND_STATE_TARGET_H
 #define RENDERING_STATE_BLEND_STATE_TARGET_H
@@ -22,50 +22,54 @@ namespace Rendering
     {
     public:
         using ClassType = BlendStateTarget;
+        using BufferSource = CoreTools::BufferSource;
+        using BufferTarget = CoreTools::BufferTarget;
 
     public:
         BlendStateTarget() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD bool GetEnable() const noexcept;
+        NODISCARD bool IsEnable() const noexcept;
         void SetEnable(bool aEnable) noexcept;
 
-        NODISCARD BlendStateMode GetSrcColor() const noexcept;
-        void SetSrcColor(BlendStateMode aSrcColor) noexcept;
+        NODISCARD BlendStateMode GetSourceColor() const noexcept;
+        void SetSourceColor(BlendStateMode color) noexcept;
 
-        NODISCARD BlendStateMode GetDstColor() const noexcept;
-        void SetDstColor(BlendStateMode aDstColor) noexcept;
+        NODISCARD BlendStateMode GetDestinationColor() const noexcept;
+        void SetDestinationColor(BlendStateMode color) noexcept;
 
-        NODISCARD BlendStateOperation GetOpColor() const noexcept;
-        void SetOpColor(BlendStateOperation aOpColor) noexcept;
+        NODISCARD BlendStateOperation GetOperationColor() const noexcept;
+        void SetOperationColor(BlendStateOperation color) noexcept;
 
-        NODISCARD BlendStateMode GetSrcAlpha() const noexcept;
-        void SetSrcAlpha(BlendStateMode aSrcAlpha) noexcept;
+        NODISCARD BlendStateMode GetSourceAlpha() const noexcept;
+        void SetSourceAlpha(BlendStateMode alpha) noexcept;
 
-        NODISCARD BlendStateMode GetDstAlpha() const noexcept;
-        void SetDstAlpha(BlendStateMode aDstAlpha) noexcept;
+        NODISCARD BlendStateMode GetDestinationAlpha() const noexcept;
+        void SetDestinationAlpha(BlendStateMode alpha) noexcept;
 
-        NODISCARD BlendStateOperation GetOpAlpha() const noexcept;
-        void SetOpAlpha(BlendStateOperation aOpAlpha) noexcept;
+        NODISCARD BlendStateOperation GetOperationAlpha() const noexcept;
+        void SetOperationAlpha(BlendStateOperation alpha) noexcept;
 
         NODISCARD BlendStateColorWrite GetMask() const noexcept;
         void SetMask(BlendStateColorWrite aMask) noexcept;
 
-        void Load(CoreTools::BufferSource& source);
-        void Save(CoreTools::BufferTarget& target) const;
+        void Load(BufferSource& source);
+        void Save(BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const noexcept;
 
     private:
         bool enable;
-        BlendStateMode srcColor;
-        BlendStateMode dstColor;
-        BlendStateOperation opColor;
-        BlendStateMode srcAlpha;
-        BlendStateMode dstAlpha;
-        BlendStateOperation opAlpha;
+        BlendStateMode sourceColor;
+        BlendStateMode destinationColor;
+        BlendStateOperation operationColor;
+        BlendStateMode sourceAlpha;
+        BlendStateMode destinationAlpha;
+        BlendStateOperation operationAlpha;
         BlendStateColorWrite mask;
     };
+
+    NODISCARD bool RENDERING_DEFAULT_DECLARE operator==(const BlendStateTarget& lhs, const BlendStateTarget& rhs) noexcept;
 }
 
 #endif  // RENDERING_STATE_BLEND_STATE_TARGET_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:53)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:29)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_H

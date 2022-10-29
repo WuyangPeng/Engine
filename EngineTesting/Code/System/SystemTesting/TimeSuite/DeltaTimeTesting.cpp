@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 16:49)
+///	引擎测试版本：0.8.1.3 (2022/10/29 0:00)
 
 #include "DeltaTimeTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -47,14 +47,14 @@ void System::DeltaTimeTesting::MicrosecondsTest()
     ASSERT_LESS(0, elapsedTime1);
     ASSERT_LESS(elapsedTime0, elapsedTime1);
 
-    ASSERT_TRUE(sleepTime * g_Millisecond - g_Microseconds <= elapsedTime1 - elapsedTime0);
-    ASSERT_TRUE(elapsedTime1 - elapsedTime0 <= sleepTime * g_Millisecond + g_Microseconds);
+    ASSERT_TRUE(sleepTime * gMillisecond - gMicroseconds <= elapsedTime1 - elapsedTime0);
+    ASSERT_TRUE(elapsedTime1 - elapsedTime0 <= sleepTime * gMillisecond + gMicroseconds);
 
     constexpr auto second = 1000;
     constexpr auto microsecond = 800;
     const DeltaTimeValueData deltaTime{ second, microsecond };
     const auto elapsedTime2 = GetTimeInMicroseconds(deltaTime);
-    ASSERT_EQUAL(elapsedTime2, second * g_Microseconds + microsecond);
+    ASSERT_EQUAL(elapsedTime2, second * gMicroseconds + microsecond);
 }
 
 void System::DeltaTimeTesting::SecondsTest()

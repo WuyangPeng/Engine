@@ -69,7 +69,7 @@ void System::WinSockHostTesting::ByAddrTest()
     const auto serverHostname = "www.sina.com.cn"s;
 
     WinSockInAddr addr{};
-    addr.s_addr = GetInetAddr(serverHostname.c_str());
+    addr.s_addr = GetInternetAddress(serverHostname.c_str());
 
     auto winSockHostent0 = GetHostByAddr(&addr, ProtocolFamilies::Inet);
     ASSERT_UNEQUAL_NULL_PTR(winSockHostent0);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/07/02 22:23)
+///	引擎辅助版本：0.8.1.3 (2022/10/17 23:48)
 
 #ifndef EXPORT_TEST_SOUND_EFFECT_PERFORMANCE_UNSHARED_MACRO_IMPL_H
 #define EXPORT_TEST_SOUND_EFFECT_PERFORMANCE_UNSHARED_MACRO_IMPL_H
@@ -26,11 +26,10 @@ namespace SoundEffect
 
         CLASS_INVARIANT_DECLARE;
 
-        NODISCARD int GetCount() const noexcept;
-        void SetCount(int count) noexcept;
+        NODISCARD int GetCount() const noexcept; 
 
     private:
-        int mCount;
+        int count;
     };
 }
 

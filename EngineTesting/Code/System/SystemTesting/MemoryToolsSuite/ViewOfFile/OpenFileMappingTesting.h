@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:51)
+///	引擎测试版本：0.8.1.3 (2022/10/16 19:33)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_OPEN_FILE_MAPPING_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_OPEN_FILE_MAPPING_TESTING_H
@@ -41,15 +41,15 @@ namespace System
         void DoOpenFileMappingTest(size_t index);
 
     private:
-        using MemoryProtectFlagsCollection = std::vector<MemoryProtect>;
-        using FileMapProtectionFlagsCollection = std::vector<FileMapProtection>;
-        using FileMapDesiredAccessFlagsCollection = std::vector<FileMapDesiredAccess>;
+        using MemoryProtectFlagsContainer = std::vector<MemoryProtect>;
+        using FileMapProtectionFlagsContainer = std::vector<FileMapProtection>;
+        using FileMapDesiredAccessFlagsContainer = std::vector<FileMapDesiredAccess>;
         using MappingType = std::map<MemoryProtect, FileHandleDesiredAccess>;
 
     private:
-        MemoryProtectFlagsCollection memoryProtectFlags;
-        FileMapProtectionFlagsCollection fileMapProtectionFlags;
-        FileMapDesiredAccessFlagsCollection fileMapDesiredAccessFlags;
+        MemoryProtectFlagsContainer memoryProtectFlags;
+        FileMapProtectionFlagsContainer fileMapProtectionFlags;
+        FileMapDesiredAccessFlagsContainer fileMapDesiredAccessFlags;
         MappingType mapping;
         std::default_random_engine randomEngine;
     };

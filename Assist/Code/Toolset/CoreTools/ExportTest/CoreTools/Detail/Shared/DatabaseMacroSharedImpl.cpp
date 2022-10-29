@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.0.10 (2022/06/30 19:02)
+///	引擎辅助版本：0.8.1.3 (2022/10/18 22:36)
 
 #include "Database/DatabaseExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 
 Database::DatabaseMacroSharedImpl::DatabaseMacroSharedImpl(int count) noexcept
-    : mCount{ count }
+    : count{ count }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
@@ -24,12 +24,12 @@ int Database::DatabaseMacroSharedImpl::GetCount() const noexcept
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return mCount;
+    return count;
 }
 
-void Database::DatabaseMacroSharedImpl::SetCount(int count) noexcept
+void Database::DatabaseMacroSharedImpl::SetCount(int aCount) noexcept
 {
     DATABASE_CLASS_IS_VALID_9;
 
-    mCount = count;
+    count = aCount;
 }

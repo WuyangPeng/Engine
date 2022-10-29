@@ -28,7 +28,7 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE DebugBreak() noexcept;
     void SYSTEM_DEFAULT_DECLARE Exit() noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
+    int SYSTEM_DEFAULT_DECLARE SystemCommand(const char* command) noexcept;
 
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetSystemCurrentDirectory(WindowsDWord bufferLength, TChar* buffer) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemCurrentDirectory(const TChar* pathName) noexcept;

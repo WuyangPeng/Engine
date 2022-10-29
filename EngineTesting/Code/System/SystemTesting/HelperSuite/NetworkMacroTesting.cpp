@@ -71,12 +71,12 @@ System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 {
     constexpr uint16_t port{ 5300 };
 
-    WinSockAddrIn addr{}; 
-    addr.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Inet);
+    WinSockInternetAddress addr{}; 
+    addr.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(port);
     addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
-    const auto socketHandle = GetSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "socketHandle 是无效的。");
 
     return socketHandle;
