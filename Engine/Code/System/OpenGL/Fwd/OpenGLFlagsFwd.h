@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:31)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:23)
 
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H
@@ -30,7 +30,7 @@ namespace System
     enum class OpenGLClearMask;
     enum class OpenGLQuery;
     enum class TextureTarget;
-    enum class TexParameter;
+    enum class TextureParameter;
     enum class PixelStore;
     enum class ClientState;
     enum class OpenGLData;
@@ -62,6 +62,19 @@ namespace System
     enum class OpenGLEnable;
     enum class OpenGLFrontFace;
     enum class OpenGLTextureName;
+    enum class GLSLReflectionEnumType;
+
+    // OpenGLProgram
+    enum class ProgramStatus;
+    enum class ProgramAttributes;
+    enum class ProgramInterface;
+    enum class ProgramInterfaceName;
+    enum class ProgramProperties;
+
+    // OpenGLShader
+    enum class ShaderType;
+    enum class ShaderStatus;
+    enum class ShaderAttributes;
 
     // Wgl
     enum class PixelFormatDescriptorFlags : uint32_t;

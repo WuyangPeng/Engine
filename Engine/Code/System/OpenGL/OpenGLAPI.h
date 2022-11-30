@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:33)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:30)
 
 #ifndef SYSTEM_OPENGL_OPENGL_API_H
 #define SYSTEM_OPENGL_OPENGL_API_H
@@ -93,7 +93,7 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE SetGLBindTexture(TextureTarget target, OpenGLUInt texture) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLPixelStore(PixelStore pname, OpenGLInt param) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE SetGLTexParameter(TextureTarget target, TexParameter pname, OpenGLInt param) noexcept;
+    void SYSTEM_DEFAULT_DECLARE SetGLTexParameter(TextureTarget target, TextureParameter pname, OpenGLInt param) noexcept;
     void SYSTEM_DEFAULT_DECLARE SetGLGetTexImage(TextureTarget target, OpenGLInt level, TextureExternalFormat format, OpenGLData type, void* pixels) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE SetGLGenerateMipmap(TextureTarget target) noexcept;

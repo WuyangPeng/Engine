@@ -402,3 +402,45 @@ Rendering::ConstGraphicsObjectSharedPtr Rendering::ShaderImpl::GetGraphicsObject
 
     return lookupData.at(index).at(handle).GetGraphicsObject();
 }
+
+void Rendering::ShaderImpl::SetNumThreads(int x, int y, int z) noexcept
+{
+    numXThreads = x;
+    numYThreads = y;
+    numZThreads = z;
+}
+
+void Rendering::ShaderImpl::AddLookupData(int index, GraphicsObjectType inType, const std::string& inName, int inBindPoint, int inNumBytes, int inExtra, bool inIsGpuWritable)
+{
+    lookupData.at(index).emplace_back(inType, inName, inBindPoint, inNumBytes, inExtra, inIsGpuWritable);
+}
+
+void Rendering::ShaderImpl::ResizeConstantBufferLayouts(int size)
+{
+    constantBufferLayouts.resize(size);
+}
+
+void Rendering::ShaderImpl::AddConstantBufferLayouts(int layoutIndex, const MemberLayout& item)
+{
+    constantBufferLayouts.at(layoutIndex).AddLayout(item);
+}
+
+void Rendering::ShaderImpl::ResizeStructuredBufferLayouts(int size)
+{
+    structuredBufferLayouts.resize(size);
+}
+
+void Rendering::ShaderImpl::AddStructuredBufferLayouts(int layoutIndex, const MemberLayout& item)
+{
+    structuredBufferLayouts.at(layoutIndex).AddLayout(item);
+}
+
+int Rendering::ShaderImpl::GetStructuredBufferCounter(int layoutIndex) const
+{
+    return structuredBufferLayouts.at(layoutIndex).GetSize();
+}
+
+void Rendering::ShaderImpl::SortConstantBufferLayouts(int layoutIndex)
+{
+    structuredBufferLayouts.at(layoutIndex).SortLayouts();
+}

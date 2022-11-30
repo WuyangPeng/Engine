@@ -283,18 +283,19 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\System\Android\Android.h" />
     <ClInclude Include="..\..\..\Code\System\Android\AndroidFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputKeyEvent.h" />
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputMotionEvent.h" />
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputQueue.h" />
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputEventFacade.h" />
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputMotionEventFacade.h" />
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputQueueFacade.h" />
     <ClInclude Include="..\..\..\Code\System\Android\AndroidLooper.h" />
     <ClInclude Include="..\..\..\Code\System\Android\AndroidNativeAppGlue.h" />
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidNativeWindow.h" />
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidNativeWindowFacade.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Flags\AndroidInputFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Flags\AndroidKeyCodesFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Flags\AndroidLooperFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Flags\AndroidNativeAppGlueFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Flags\AndroidNativeWindowFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidFlagsFwd.h" />
+    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidUsingFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Using\AndroidInputUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Using\AndroidLooperUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Android\Using\AndroidNativeAppGlueUsing.h" />
@@ -302,6 +303,8 @@
     <ClInclude Include="..\..\..\Code\System\CharacterString\CharacterString.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\CharacterStringFwd.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\CodePage.h" />
+    <ClInclude Include="..\..\..\Code\System\CharacterString\Data\FormatErrorMessageParameter.h" />
+    <ClInclude Include="..\..\..\Code\System\CharacterString\Data\Locale.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\Flags\CodePageFlags.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\Flags\FormatMessageFlags.h" />
     <ClInclude Include="..\..\..\Code\System\CharacterString\Flags\StringConversionFlags.h" />
@@ -329,7 +332,7 @@
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleFontUsing.h" />
     <ClInclude Include="..\..\..\Code\System\Console\Using\ConsoleScreenBufferUsing.h" />
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectX.h" />
-    <ClInclude Include="..\..\..\Code\System\DirectX\DirectXD3D11.h" />
+    <ClInclude Include="..\..\..\Code\System\DirectX\DirectXD3D12.h" />
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectXFwd.h" />
     <ClInclude Include="..\..\..\Code\System\DirectX\Using\D12Using.h" />
     <ClInclude Include="..\..\..\Code\System\DllLib.h" />
@@ -654,9 +657,7 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLShaderFlags.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLWglPrototypesFlags.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\GLPluginFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLProgramFlagsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLFlagsFwd.h" />
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLShaderFlagsFwd.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLProgram.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGL.h" />
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLAPI.h" />
@@ -767,6 +768,9 @@
     <ClInclude Include="..\..\..\Code\System\Time\Time.h" />
     <ClInclude Include="..\..\..\Code\System\Time\TimeFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Time\Using\DeltaTimeUsing.h" />
+    <ClInclude Include="..\..\..\Code\System\Vulkan\Vulkan.h" />
+    <ClInclude Include="..\..\..\Code\System\Vulkan\VulkanFacade.h" />
+    <ClInclude Include="..\..\..\Code\System\Vulkan\VulkanFwd.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Engineering.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\ExceptionFlags.h" />
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\PlatformErrorFlags.h" />
@@ -796,16 +800,17 @@
     <ClInclude Include="..\..\..\Code\System\Windows\WindowsUser.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputKeyEvent.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputMotionEvent.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputQueue.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputEventFacade.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputMotionEventFacade.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputQueueFacade.cpp" />
     <ClCompile Include="..\..\..\Code\System\Android\AndroidLooper.cpp" />
     <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeAppGlue.cpp" />
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeWindow.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeWindowFacade.cpp" />
     <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidInputUsing.cpp" />
     <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeAppGlueUsing.cpp" />
     <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeWindowUsing.cpp" />
     <ClCompile Include="..\..\..\Code\System\CharacterString\CodePage.cpp" />
+    <ClCompile Include="..\..\..\Code\System\CharacterString\Data\Locale.cpp" />
     <ClCompile Include="..\..\..\Code\System\CharacterString\FormatErrorMessage.cpp" />
     <ClCompile Include="..\..\..\Code\System\CharacterString\FormatString.cpp" />
     <ClCompile Include="..\..\..\Code\System\CharacterString\StringConversion.cpp" />
@@ -816,7 +821,7 @@
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleHandle.cpp" />
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleMode.cpp" />
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleScreenBuffer.cpp" />
-    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D11.cpp" />
+    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D12.cpp" />
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\System\DllMain.cpp" />
     <ClCompile Include="..\..\..\Code\System\DynamicLink\EnumResourceTools.cpp" />
@@ -899,6 +904,7 @@
     <ClCompile Include="..\..\..\Code\System\Time\Data\CurrentDeltaTime.cpp" />
     <ClCompile Include="..\..\..\Code\System\Time\Data\DeltaTimeValueData.cpp" />
     <ClCompile Include="..\..\..\Code\System\Time\DeltaTime.cpp" />
+    <ClCompile Include="..\..\..\Code\System\Vulkan\VulkanFacade.cpp" />
     <ClCompile Include="..\..\..\Code\System\Windows\Engineering.cpp" />
     <ClCompile Include="..\..\..\Code\System\Windows\LastPlatformError.cpp" />
     <ClCompile Include="..\..\..\Code\System\Windows\WindowsCreate.cpp" />

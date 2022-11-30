@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:20)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:13)
 
 #ifndef SYSTEM_OPENGL_GL_10_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_10_EXTENSIONS_H
@@ -62,7 +62,7 @@ namespace System
     SYSTEM_HIDDEN_DECLARE NODISCARD GLenum GLGetError() noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetFloatv(GLenum pname, GLfloat* data) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetIntegerv(GLenum pname, GLint* data) noexcept;
-    SYSTEM_HIDDEN_DECLARE NODISCARD const GLubyte* GLGetString(GLenum name) noexcept;
+    SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR const GLubyte* GLGetString(GLenum name) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, void* pixels) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetTexParameteriv(GLenum target, GLenum pname, GLint* params) noexcept;

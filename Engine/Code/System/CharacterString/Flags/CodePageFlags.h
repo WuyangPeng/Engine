@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:43)
+///	引擎版本：0.8.1.4 (2022/11/12 19:21)
 
 #ifndef SYSTEM_CHARACTER_STRING_CODE_PAGE_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_CODE_PAGE_FLAGS_H
@@ -23,6 +23,8 @@ namespace System
         MACCP = CP_MACCP,
         ThreadACP = CP_THREAD_ACP,
         Symbol = CP_SYMBOL,
+
+        GB2312 = 936,
         UTF7 = CP_UTF7,
         UTF8 = CP_UTF8,
     };

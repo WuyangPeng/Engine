@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 0:49)
+///	引擎测试版本：0.8.1.4 (2022/11/26 18:12)
 
 #include "CodePageValidTesting.h"
 #include "System/CharacterString/CodePage.h"
@@ -15,7 +15,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::CodePageValidTesting::CodePageValidTesting(const OStreamShared& stream)
-    : ParentType{ stream }, codePageFlags{ CodePage::UTF7, CodePage::UTF8 }
+    : ParentType{ stream }, codePages{ CodePage::GB2312, CodePage::UTF7, CodePage::UTF8 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -34,7 +34,7 @@ void System::CodePageValidTesting::MainTest()
 
 void System::CodePageValidTesting::ValidTest()
 {
-    for (auto codeFlag : codePageFlags)
+    for (auto codeFlag : codePages)
     {
         ASSERT_TRUE(IsCodePageValid(codeFlag));
     }

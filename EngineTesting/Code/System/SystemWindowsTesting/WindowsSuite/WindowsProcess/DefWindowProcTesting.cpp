@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/16 14:42)
+///	引擎测试版本：0.8.1.4 (2022/11/05 19:44)
 
 #include "DefWindowProcTesting.h"
 #include "System/Windows/Flags/WindowsMessagesFlags.h"
@@ -34,5 +34,5 @@ void System::DefWindowProcTesting::MainTest()
 
 void System::DefWindowProcTesting::DefWindowProcTest()
 {
-    ASSERT_EQUAL(DefSystemWindowProc(hwnd, WindowsMessages::Paint, 0, 0), 0);
+    ASSERT_EQUAL(DefaultSystemWindowProcess(hwnd, WindowsMessages::Paint, 0, 0), 0);
 }

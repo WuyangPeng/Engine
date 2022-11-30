@@ -39,16 +39,16 @@ namespace System
     private:
         NODISCARD static WindowsBool SYSTEM_CALL_BACK TypeProcess(DynamicLinkModule module,
                                                                   DynamicLinkCharType* type,
-                                                                  WindowsPtrLong lParam) noexcept;
+                                                                  WindowsLongPtrSizeType lParam) noexcept;
         NODISCARD static WindowsBool SYSTEM_CALL_BACK NameProcess(DynamicLinkModule module,
                                                                   const DynamicLinkCharType* type,
                                                                   DynamicLinkCharType* name,
-                                                                  WindowsPtrLong lParam) noexcept;
+                                                                  WindowsLongPtrSizeType lParam) noexcept;
         NODISCARD static WindowsBool SYSTEM_CALL_BACK LanguageProcess(DynamicLinkModule module,
                                                                       const DynamicLinkCharType* type,
                                                                       const DynamicLinkCharType* name,
                                                                       WindowsWord language,
-                                                                      WindowsPtrLong lParam);
+                                                                      WindowsLongPtrSizeType lParam);
 
     private:
         using EnumResourceDataContainer = std::vector<EnumResourceData>;

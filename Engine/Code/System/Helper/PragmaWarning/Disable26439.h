@@ -5,9 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/27 22:33)
+///	引擎版本：0.8.1.4 (2022/11/18 23:42)
 
-// 函数可声明为noexcept。
+// 警告：函数可声明为noexcept。
 
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 26439)

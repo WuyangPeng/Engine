@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/05 21:27)
+///	引擎测试版本：0.8.1.4 (2022/11/21 21:37)
 
 #include "Testing.h"
 #include "TestingWindowsMessage.h"
@@ -17,7 +17,7 @@
 using std::string;
 using namespace std::literals;
 
-System::TestingWindowsMessage::TestingWindowsMessage(int64_t delta, const Framework::EnvironmentDirectory& environmentDirectory)
+System::TestingWindowsMessage::TestingWindowsMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
     : ParentType{ delta, "【系统库】Window单元测试套件"s, environmentDirectory }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

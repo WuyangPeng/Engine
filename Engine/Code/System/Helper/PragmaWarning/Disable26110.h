@@ -5,9 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/27 22:30)
+///	引擎版本：0.8.1.4 (2022/11/18 23:38)
 
-// 调用函数ReleaseSRWLockExclusive之前，调用者未能持有锁slimReaderWriterLock。
+// 警告：调用函数ReleaseSRWLockExclusive之前，调用者未能持有锁slimReaderWriterLock。
 
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 26110)

@@ -5,13 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:18)
+///	引擎测试版本：0.8.1.4 (2022/11/29 22:46)
 
 #include "FormatStringMessageUseVaListAndLocalAllocTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/MemoryTools/LocalTools.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -33,44 +30,44 @@ void System::FormatStringMessageUseVaListAndLocalAllocTesting::DoRunUnitTest()
 
 void System::FormatStringMessageUseVaListAndLocalAllocTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(FormatStringUseVaListAndLocalAllocTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(FormatStringMessageUseVaListAndLocalAllocTest);
 }
 
-void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringUseVaListAndLocalAllocTest()
+void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseVaListAndLocalAllocTest()
 {
-    const auto message = SYSTEM_TEXT("%1!*.*s! %3 %4!*s!"s);
-    ExecuteFormatStringUseVaListAndLocalAllocTest(message.c_str(), 4, 2, SYSTEM_TEXT("Bill"), SYSTEM_TEXT("Bob"), 6, SYSTEM_TEXT("Bill"));
+    const auto message = GetMessageVaList();
+    FormatStringMessageUseIndefiniteParameterTest(message.c_str(), 4, 2, SYSTEM_TEXT("Bill"), SYSTEM_TEXT("Bob"), 6, SYSTEM_TEXT("Bill"));
 }
 
-void System::FormatStringMessageUseVaListAndLocalAllocTesting::ExecuteFormatStringUseVaListAndLocalAllocTest(const TChar* message, ...)
+void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseIndefiniteParameterTest(const TChar* message, ...)
 {
 #include STSTEM_WARNING_PUSH
+
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    va_list arguments{};
-    va_start(arguments, message);
-
-    ASSERT_NOT_THROW_EXCEPTION_2(DoExecuteFormatStringUseVaListAndLocalAllocTest, message, arguments);
-
-    va_end(arguments);
+    va_list vaArguments{};
+    va_start(vaArguments, message);
 
 #include STSTEM_WARNING_POP
+
+    WindowsHLocal resultMessage{ nullptr };
+
+    ASSERT_NOT_THROW_EXCEPTION_3(FormatStringMessageUseArgumentsTest, resultMessage, message, vaArguments);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, resultMessage);
+
+    va_end(vaArguments);
 }
 
-void System::FormatStringMessageUseVaListAndLocalAllocTesting::DoExecuteFormatStringUseVaListAndLocalAllocTest(const TChar* message, va_list arguments)
+void System::FormatStringMessageUseVaListAndLocalAllocTesting::FormatStringMessageUseArgumentsTest(WindowsHLocal& resultMessage, const TChar* message, va_list vaArguments)
 {
-    WindowsHLocal resultMessage{ nullptr };
-    const auto helperResult = SYSTEM_TEXT("  Bi Bob   Bill"s);
-
-    const auto size = FormatStringMessage(message, resultMessage, &arguments);
+    const auto size = FormatStringMessage(message, resultMessage, &vaArguments);
     ASSERT_LESS(0u, size);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "FormatStringMessage 失败。");
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultMessage, "FormatStringMessage 失败。"s);
 
     String testMessage{ static_cast<TChar*>(resultMessage) };
 
     ASSERT_EQUAL(testMessage.size(), size);
-    ASSERT_EQUAL(testMessage, helperResult);
-
-    ASSERT_TRUE(LocalMemoryFree(resultMessage));
+    ASSERT_EQUAL(testMessage, GetMessageVaListResult());
 }

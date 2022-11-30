@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Base/GraphicsObject.h"
+#include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/Buffers/MemberLayout.h"
 #include "Rendering/Resources/Detail/Buffers/BufferLayout.h"
@@ -48,7 +50,7 @@ namespace Rendering
         using ShaderDataContainerIter = ShaderDataContainer::iterator;
 
     public:
-        Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes);
+        Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes, const GLSLReflection& reflector, ReferenceType referenceType);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

@@ -37,7 +37,7 @@ void Framework::WindowHIcon::CheckUpHIcon() noexcept
 {
     if (hIcon == nullptr)
     {
-        hIcon = System::LoadSystemIcon(nullptr, System::g_Application);
+        hIcon = System::LoadSystemIcon(nullptr, System::gApplication);
 
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
             << SYSTEM_TEXT("¼ÓÔØÍ¼±êÊ§°Ü£¡")

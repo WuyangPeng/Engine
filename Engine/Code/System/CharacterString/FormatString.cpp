@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:46)
+///	引擎版本：0.8.1.4 (2022/11/13 10:45)
 
 #include "System/SystemExport.h"
 
@@ -20,7 +20,6 @@ int System::VsnPrintf(char* buffer, size_t size, const char* format, va_list arg
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    // 返回存储在buffer中的字符，不包括终止null字符。错误返回 -1。
     return ::_vsnprintf_s(buffer, size, _TRUNCATE, format, argList);
 
 #else  // !SYSTEM_PLATFORM_WIN32

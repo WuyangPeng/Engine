@@ -436,6 +436,12 @@
     <Filter Include="OpenGLRenderer 源文件\Detail\GLSL">
       <UniqueIdentifier>{da9083c9-6201-437a-b23c-c58cbd2787f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OpenGLRenderer 头文件\Flags">
+      <UniqueIdentifier>{2597ebdd-3c48-4493-86d7-21076318538b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders 模板文件\Detail">
+      <UniqueIdentifier>{f1615ef9-fb41-4114-9579-a4a7d240e997}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Rendering\DllLib.cpp">
@@ -1832,6 +1838,81 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLShader.cpp">
       <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInputImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionInput.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutputImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionOutput.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniformImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionUniform.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlockImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionDataBlock.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBufferImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionAtomicCounterBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniformImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionSubroutineUniform.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariableImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionBufferVariable.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVaryingImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackVarying.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBufferImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackBuffer.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionImpl.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionEnumMap.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflection.cpp">
+      <Filter>OpenGLRenderer 源文件\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLVisualProgram.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLComputeProgram.cpp">
+      <Filter>OpenGLRenderer 源文件\Detail\GLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\LocalEffects\Detail\TextEffectImpl.cpp">
+      <Filter>LocalEffects 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3760,6 +3841,87 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLProgramFactory.h">
       <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Flags\ReferenceType.h">
+      <Filter>OpenGLRenderer 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionInputImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionInput.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionOutputImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionOutput.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionUniformImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionUniform.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionDataBlockImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionDataBlock.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionAtomicCounterBufferImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionAtomicCounterBuffer.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionSubroutineUniformImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionSubroutineUniform.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionBufferVariableImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionBufferVariable.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackVaryingImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackVarying.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionTransformFeedbackBufferImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflectionTransformFeedbackBuffer.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionImpl.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLReflectionEnumMap.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\GLSL\GLSLReflection.h">
+      <Filter>OpenGLRenderer 头文件\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\Shaders\Detail\ShaderImplDetail.h">
+      <Filter>Shaders 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLVisualProgram.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\OpenGLRenderer\Detail\GLSL\GLSLComputeProgram.h">
+      <Filter>OpenGLRenderer 头文件\Detail\GLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\FontImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\LocalEffects\Detail\TextEffectImpl.h">
+      <Filter>LocalEffects 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

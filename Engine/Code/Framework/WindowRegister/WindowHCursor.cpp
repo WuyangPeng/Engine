@@ -37,7 +37,7 @@ void Framework::WindowHCursor::CheckUpHCursor() noexcept
 {
     if (hCursor == nullptr)
     {
-        hCursor = System::LoadSystemCursor(nullptr, System::g_Arrow);
+        hCursor = System::LoadSystemCursor(nullptr, System::gArrow);
 
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Framework)
             << SYSTEM_TEXT("¼ÓÔØ¹â±êÊ§°Ü£¡")

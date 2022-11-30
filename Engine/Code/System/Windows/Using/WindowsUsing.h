@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 12:49)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 23:13)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
@@ -13,7 +13,9 @@
 #include "System/Helper/Platform.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     #include <TlHelp32.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System
@@ -59,11 +61,14 @@ namespace System
     using WindowsDWord = DWORD;
     using WindowsDWordPtr = PDWORD;
 
-    using WindowsPtrULong = ULONG_PTR;
-    using WindowsPtrULongPtr = PULONG_PTR;
-    using WindowsPtrLong = LONG_PTR;
-    using WindowsPtrInt = INT_PTR;
-    using WindowsPtrDWord = DWORD_PTR;
+    using WindowsULongPtrSizeType = ULONG_PTR;
+    using WindowsULongPtrSizeTypePtr = PULONG_PTR;
+    using WindowsLongPtrSizeType = LONG_PTR;
+    using WindowsLongPtrSizeTypePtr = PLONG_PTR;
+    using WindowsIntPtrSizeType = INT_PTR;
+    using WindowsIntPtrSizeTypePtr = PINT_PTR;
+    using WindowsDWordPtrSizeType = DWORD_PTR;
+    using WindowsDWordPtrSizeTypePtr = PDWORD_PTR;
 
     using WindowsPointSize = SIZE;
 
@@ -111,12 +116,18 @@ namespace System
     using SystemCLSID = CLSID;
     using SystemGUID = GUID;
 
-    constexpr SystemHResult g_ResultOK{ S_OK };
-    constexpr SystemHResult g_ResultNoInterface{ E_NOINTERFACE };
-    constexpr SystemHResult g_ResultClassNoaggregation{ CLASS_E_NOAGGREGATION };
-    constexpr SystemHResult g_NoError{ NOERROR };
+    constexpr SystemHResult gResultOK{ S_OK };
+    constexpr SystemHResult gResultNoInterface{ E_NOINTERFACE };
+    constexpr SystemHResult gResultClassNoaggregation{ CLASS_E_NOAGGREGATION };
+    constexpr SystemHResult gNoError{ NOERROR };
 
     using GetWindowsInformationFunction = decltype(::GetClassName);
+
+    using WindowOverlapped = OVERLAPPED;
+    using WindowOverlappedPtr = LPOVERLAPPED;
+    using WindowOverlappedCompletionRoutine = LPOVERLAPPED_COMPLETION_ROUTINE;
+    using WindowOverlappedEntry = OVERLAPPED_ENTRY;
+    using WindowOverlappedEntryPtr = LPOVERLAPPED_ENTRY;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -188,11 +199,14 @@ namespace System
     using WindowsDWord = uint32_t;
     using WindowsDWordPtr = WindowsDWord*;
 
-    using WindowsPtrULong = uint64_t;
-    using WindowsPtrULongPtr = uint64_t*;
-    using WindowsPtrLong = int64_t;
-    using WindowsPtrInt = int64_t;
-    using WindowsPtrDWord = uint64_t;
+    using WindowsULongPtrSizeType = uint64_t;
+    using WindowsULongPtrSizeTypePtr = uint64_t*;
+    using WindowsLongPtrSizeType = int64_t;
+    using WindowsLongPtrSizeTypePtr = int64_t*;
+    using WindowsIntPtrSizeType = int64_t;
+    using WindowsIntPtrSizeTypePtr = int64_t*;
+    using WindowsDWordPtrSizeType = uint64_t;
+    using WindowsDWordPtrSizeTypePtr = uint64_t*;
 
     struct WindowsPointSize
     {
@@ -301,7 +315,7 @@ namespace System
 
     using WindowsHandle = void*;
     using WindowsHandlePtr = WindowsHandle*;
-    using WindowsDlgProc = WindowsPtrInt (*)(WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam);
+    using WindowsDlgProc = WindowsIntPtrSizeType (*)(WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam);
 
     constexpr int gMaxModuleName32{ 255 };
     constexpr int gWindowExceptionMaximumParameters{ 15 };
@@ -440,12 +454,41 @@ namespace System
     using SystemCLSID = SystemIID;
     using SystemGUID = SystemIID;
 
-    constexpr SystemHResult g_ResultOK{ 0 };
-    constexpr SystemHResult g_ResultNoInterface{ 0x80004002L };
-    constexpr SystemHResult g_ResultClassNoaggregation{ 0x80040110L };
-    constexpr SystemHResult g_NoError{ 0 };
+    constexpr SystemHResult gResultOK{ 0 };
+    constexpr SystemHResult gResultNoInterface{ 0x80004002L };
+    constexpr SystemHResult gResultClassNoaggregation{ 0x80040110L };
+    constexpr SystemHResult gNoError{ 0 };
 
     using GetWindowsInformationFunction = int (*)(WindowsHWnd, const TChar*, int);
+
+    struct WindowOverlapped
+    {
+        uint64_t Internal;
+        uint64_t InternalHigh;
+        union
+        {
+            struct
+            {
+                uint32_t Offset;
+                uint32_t OffsetHigh;
+            } DUMMYSTRUCTNAME;
+            void* Pointer;
+        } DUMMYUNIONNAME;
+
+        WindowsHandle hEvent;
+    };
+    using WindowOverlappedPtr = WindowOverlapped*;
+
+    using WindowOverlappedCompletionRoutine = void (*)(uint32_t errorCode, uint32_t numberOfBytesTransfered, void* overlapped);
+
+    struct WindowOverlappedEntry
+    {
+        size_t lpCompletionKey;
+        WindowOverlappedPtr lpOverlapped;
+        size_t Internal;
+        uint32_t dwNumberOfBytesTransferred;
+    };
+    using WindowOverlappedEntryPtr = WindowOverlappedEntry*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 

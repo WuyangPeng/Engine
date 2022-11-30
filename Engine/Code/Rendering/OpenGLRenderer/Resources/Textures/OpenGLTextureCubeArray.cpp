@@ -35,8 +35,8 @@ Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArray
     System::SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
     System::SetGLPixelStore(System::PixelStore::PackAlignment, 1);
 
-    System::SetGLTexParameter(TextureTarget::TextureCubeMapArray, System::TexParameter::TextureBaseLevel, 0);
-    System::SetGLTexParameter(TextureTarget::TextureCubeMapArray, System::TexParameter::TextureMaxLevel, GetNumLevels() - 1);
+    System::SetGLTexParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureBaseLevel, 0);
+    System::SetGLTexParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
 
     constexpr auto cubeFaceCount = System::EnumCastUnderlying(CubeFaceType::Count);
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:46)
+///	引擎测试版本：0.8.1.4 (2022/11/03 22:14)
 
 #include "WinSocketHostNetConversionTesting.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
@@ -66,7 +66,7 @@ void System::WinSocketHostNetConversionTesting::ShortTest()
     ASSERT_TRUE(WinSocketHtons(socketHandle, hostShort, &netShort));
 
     uint16_t newHostShort{ 0 };
-    ASSERT_TRUE(WinSocketHtons(socketHandle, netShort, &newHostShort));
+    ASSERT_TRUE(WinSocketNtohs(socketHandle, netShort, &newHostShort));
 
     ASSERT_EQUAL(hostShort, newHostShort);
 
@@ -86,7 +86,7 @@ void System::WinSocketHostNetConversionTesting::LongTest()
     ASSERT_TRUE(WinSocketHtonl(socketHandle, hostLong, &netLong));
 
     unsigned long newHostLong{ 0 };
-    ASSERT_TRUE(WinSocketHtonl(socketHandle, netLong, &newHostLong));
+    ASSERT_TRUE(WinSocketNtohl(socketHandle, netLong, &newHostLong));
 
     ASSERT_EQUAL(hostLong, newHostLong);
 

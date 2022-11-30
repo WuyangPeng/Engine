@@ -1,20 +1,28 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:55)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:25)
 
-#ifndef SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
-#define SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
+#ifndef SYSTEM_ANDROID_ANDROID_WINDOW_USING_H
+#define SYSTEM_ANDROID_ANDROID_WINDOW_USING_H
 
 #include "System/SystemDll.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
 
     #include <android/native_window.h>
+
+#else  // !SYSTEM_PLATFORM_ANDROID
+
+    #include <array>
+
+#endif  // SYSTEM_PLATFORM_ANDROID
+
+#ifdef SYSTEM_PLATFORM_ANDROID
 
 namespace System
 {
@@ -25,11 +33,9 @@ namespace System
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    #include <array>
-
 namespace System
 {
-    class SYSTEM_DEFAULT_DECLARE AndroidNativeWindow
+    class SYSTEM_DEFAULT_DECLARE AndroidNativeWindow final
     {
     };
 
@@ -67,13 +73,13 @@ namespace System
         NODISCARD int GetBottom() const noexcept;
 
     private:
-        int32_t left;
-        int32_t top;
-        int32_t right;
-        int32_t bottom;
+        int left;
+        int top;
+        int right;
+        int bottom;
     };
 }
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 
-#endif  // SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
+#endif  // SYSTEM_ANDROID_ANDROID_WINDOW_USING_H

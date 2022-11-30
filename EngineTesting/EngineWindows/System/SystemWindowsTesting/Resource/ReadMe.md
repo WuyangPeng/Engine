@@ -34,7 +34,11 @@
                    SendMessageTesting、
                    GetCommandLineTesting、
                    WindowPaintTesting。
-（3） Windows注册：GetStockObjectTesting、LoadCursorTesting、LoadIconTesting、RegisterClassTesting、RegisterWindowMessageTesting。
+（3） Windows注册：GetStockObjectTesting、
+                   LoadCursorTesting、
+                   LoadIconTesting、
+                   RegisterClassTesting、
+                   RegisterWindowMessageTesting。
 （4） Windows字体信息：WindowsFontInformationTesting。
 （5） Windows用户：WindowsUserTesting。
 

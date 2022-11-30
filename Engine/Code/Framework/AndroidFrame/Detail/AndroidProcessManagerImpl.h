@@ -27,7 +27,7 @@ namespace Framework
         using AndroidCallBackInterfaceSharedPtr = std::shared_ptr<AndroidCallBackInterface>;
         using HandleCmdFunctionPointer = AndroidCallBackInterface::HandleCmdFunctionPointer;
         using HandleInputFunctionPointer = AndroidCallBackInterface::HandleInputFunctionPointer;
-        using AppCmd = System::AppCmdType;
+        using AppCmd = System::AppCommandType;
         using AndroidApp = System::AndroidApp;
         using AndroidInputEvent = System::AndroidInputEvent;
         using AndroidKeyEventAction = System::AndroidKeyEventAction;

@@ -30,8 +30,8 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Shader);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Shader);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Shader);
 
-Rendering::Shader::Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes)
-    : ParentType{ "Shader", graphicsObjectType }, impl{ CoreTools::ImplCreateUseFactory::Default, rendererTypes }
+Rendering::Shader::Shader(GraphicsObjectType graphicsObjectType, RendererTypes rendererTypes, const GLSLReflection& reflector, ReferenceType referenceType)
+    : ParentType{ "Shader", graphicsObjectType }, impl{ CoreTools::ImplCreateUseFactory::Default, rendererTypes, reflector, referenceType }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -100,7 +100,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::Shader::CloneObject() const
 }
 
 Rendering::Shader::Shader(LoadConstructor loadConstructor)
-    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseFactory::Default, RendererTypes::Default }
+    : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseFactory::Default, RendererTypes::Default, GLSLReflection{ 0 }, ReferenceType::Vertex }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }

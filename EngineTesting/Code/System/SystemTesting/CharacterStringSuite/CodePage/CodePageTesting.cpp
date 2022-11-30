@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 0:49)
+///	引擎测试版本：0.8.1.4 (2022/11/26 18:04)
 
 #include "CodePageTesting.h"
 #include "System/CharacterString/CodePage.h"
@@ -36,7 +36,6 @@ void System::CodePageTesting::MainTest()
 void System::CodePageTesting::ANSICodePageTest()
 {
     const auto ansiCodePage = GetANSICodePage();
-
     ASSERT_TRUE(IsCodePageValid(ansiCodePage));
 }
 

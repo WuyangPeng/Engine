@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/08 21:47)
+///	引擎版本：0.8.1.4 (2022/11/16 22:13)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_H
@@ -25,32 +25,32 @@ namespace System
                                                                          const DynamicLinkCharType* type,
                                                                          const DynamicLinkCharType* name,
                                                                          EnumResourceLanguageProcess enumFunction,
-                                                                         WindowsPtrLong param) noexcept;
+                                                                         WindowsLongPtrSizeType param) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceLanguagesInLibrary(DynamicLinkModule module,
                                                                          const DynamicLinkCharType* type,
                                                                          const DynamicLinkCharType* name,
                                                                          EnumResourceLanguageProcess enumFunction,
-                                                                         WindowsPtrLong param,
+                                                                         WindowsLongPtrSizeType param,
                                                                          ResourceEnum flags,
                                                                          const LanguageIDData& language) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceNamesInLibrary(DynamicLinkModule module,
                                                                      const DynamicLinkCharType* type,
                                                                      EnumResourceNameProcess enumFunction,
-                                                                     WindowsPtrLong param) noexcept;
+                                                                     WindowsLongPtrSizeType param) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceNamesInLibrary(DynamicLinkModule module,
                                                                      const DynamicLinkCharType* type,
                                                                      EnumResourceNameProcess enumFunction,
-                                                                     WindowsPtrLong param,
+                                                                     WindowsLongPtrSizeType param,
                                                                      ResourceEnum flags,
                                                                      const LanguageIDData& language) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceTypesInLibrary(DynamicLinkModule module,
                                                                      EnumResourceTypeProcess enumFunction,
-                                                                     WindowsPtrLong param) noexcept;
+                                                                     WindowsLongPtrSizeType param) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceTypesInLibrary(DynamicLinkModule module,
                                                                      EnumResourceTypeProcess enumFunction,
-                                                                     WindowsPtrLong param,
+                                                                     WindowsLongPtrSizeType param,
                                                                      ResourceEnum flags,
                                                                      const LanguageIDData& language) noexcept;
 }

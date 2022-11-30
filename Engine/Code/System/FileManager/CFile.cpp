@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/29 19:29)
+///	引擎版本：0.8.1.4 (2022/11/18 21:28)
 
 #include "System/SystemExport.h"
 
@@ -20,8 +20,6 @@
 
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 bool System::OpenCFile(FILE*& file, const CFileString& fileName, const CFileString& mode) noexcept
@@ -150,13 +148,13 @@ bool System::PutString(FILE* file, const char* str) noexcept
         return false;
 }
 
-string System::GetString(FILE* file, int count)
+std::string System::GetString(FILE* file, int count)
 {
-    vector<char> str(count);
+    std::vector<char> str(count);
 
     if (::fgets(str.data(), count, file) != nullptr)
     {
-        return string{ str.data() };
+        return std::string{ str.data() };
     }
     else
     {

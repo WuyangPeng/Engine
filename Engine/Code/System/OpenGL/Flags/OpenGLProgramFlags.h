@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:27)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:23)
 
 #ifndef SYSTEM_OPENGL_OPENGL_PROGRAM_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_PROGRAM_FLAGS_H
@@ -29,7 +29,8 @@ namespace System
         ActiveAttributes = GL_ACTIVE_ATTRIBUTES,
         ActiveAttributeMaxLength = GL_ACTIVE_ATTRIBUTE_MAX_LENGTH,
         ActiveUniforms = GL_ACTIVE_UNIFORMS,
-        ActiveUniformMaxLength = GL_ACTIVE_UNIFORM_MAX_LENGTH
+        ActiveUniformMaxLength = GL_ACTIVE_UNIFORM_MAX_LENGTH,
+        ComputeWorkGroupSize = GL_COMPUTE_WORK_GROUP_SIZE,
     };
 
     enum class ProgramInterface
@@ -50,6 +51,7 @@ namespace System
         TessEvaluationSubroutineUniform = GL_TESS_EVALUATION_SUBROUTINE_UNIFORM,
         GeometrySubroutineUniform = GL_GEOMETRY_SUBROUTINE_UNIFORM,
         FragmentSubroutineUniform = GL_FRAGMENT_SUBROUTINE_UNIFORM,
+        ComputeSubroutineUniform = GL_COMPUTE_SUBROUTINE_UNIFORM,
         TransformFeedbackVarying = GL_TRANSFORM_FEEDBACK_VARYING,
         BufferVariable = GL_BUFFER_VARIABLE,
         ShaderStorageBlock = GL_SHADER_STORAGE_BLOCK,
@@ -77,7 +79,23 @@ namespace System
         ReferencedByTessControlShader = GL_REFERENCED_BY_TESS_CONTROL_SHADER,
         ReferencedByTessEvaluationShader = GL_REFERENCED_BY_TESS_EVALUATION_SHADER,
         IsPerPatch = GL_IS_PER_PATCH,
-        Location_Component = GL_LOCATION_COMPONENT
+        LocationComponent = GL_LOCATION_COMPONENT,
+        LocationIndex = GL_LOCATION_INDEX,
+        Offset = GL_OFFSET,
+        BlockIndex = GL_BLOCK_INDEX,
+        ArrayStride = GL_ARRAY_STRIDE,
+        MatrixStride = GL_MATRIX_STRIDE,
+        IsRowMajor = GL_IS_ROW_MAJOR,
+        AtomicCounterBufferIndex = GL_ATOMIC_COUNTER_BUFFER_INDEX,
+        BufferBinding = GL_BUFFER_BINDING,
+        BufferDataSize = GL_BUFFER_DATA_SIZE,
+        NumActiveVariables = GL_NUM_ACTIVE_VARIABLES,
+        ActiveVariables = GL_ACTIVE_VARIABLES,
+        CompatibleSubroutines = GL_COMPATIBLE_SUBROUTINES,
+        TopLevelArraySize = GL_TOP_LEVEL_ARRAY_SIZE,
+        TopLevelArrayStride = GL_TOP_LEVEL_ARRAY_STRIDE,
+        TransformFeedbackBufferIndex = GL_TRANSFORM_FEEDBACK_BUFFER_INDEX,
+        TransformFeedbackBufferStride = GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE,
     };
 }
 

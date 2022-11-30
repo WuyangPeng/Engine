@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 19:10)
+///	引擎测试版本：0.8.1.3 (2022/11/01 21:41)
 
 #ifndef SYSTEM_SECURITY_SUITE_DUPLICATE_TOKEN_TESTING_H
 #define SYSTEM_SECURITY_SUITE_DUPLICATE_TOKEN_TESTING_H
@@ -39,16 +39,16 @@ namespace System
         void DuplicateTokenTest();
 
     private:
-        using SecurityImpersonationLevelCollection = std::vector<SecurityImpersonationLevel>;
-        using SecurityTokenTypeCollection = std::vector<SecurityTokenType>;
-        using TokenStandardAccessFlagsCollection = std::vector<TokenStandardAccess>;
-        using TokenSpecificAccessFlagsCollection = std::vector<TokenSpecificAccess>;
+        using SecurityImpersonationLevelContainer = std::vector<SecurityImpersonationLevel>;
+        using SecurityTokenTypeContainer = std::vector<SecurityTokenType>;
+        using TokenStandardAccessFlagsContainer = std::vector<TokenStandardAccess>;
+        using TokenSpecificAccessFlagsContainer = std::vector<TokenSpecificAccess>;
 
     private:
-        SecurityImpersonationLevelCollection securityImpersonationLevel;
-        SecurityTokenTypeCollection securityTokenType;
-        TokenStandardAccessFlagsCollection tokenStandardAccessFlags;
-        TokenSpecificAccessFlagsCollection tokenSpecificAccessFlags;
+        SecurityImpersonationLevelContainer securityImpersonationLevel;
+        SecurityTokenTypeContainer securityTokenType;
+        TokenStandardAccessFlagsContainer tokenStandardAccessFlags;
+        TokenSpecificAccessFlagsContainer tokenSpecificAccessFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

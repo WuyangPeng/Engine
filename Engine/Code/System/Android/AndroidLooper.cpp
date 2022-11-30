@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 23:01)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/12 9:25)
 
 #include "System/SystemExport.h"
 
@@ -13,7 +13,6 @@
 #include "Flags/AndroidLooperFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/Tools.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsProcess.h"
 
 System::AndroidLooper* System::AndroidLooperForThread() noexcept
@@ -99,14 +98,14 @@ System::AndroidLooperEvent System::AndroidLooperPollAll(int32_t timeoutMillis, i
 
     if (PeekSystemMessage(&msg))
     {
-        auto success = TranslateSystemMessage(&msg);
-        success = DispatchSystemMessage(&msg);
+        TranslateSystemMessage(&msg);
+        DispatchSystemMessage(&msg);
 
         return AndroidLooperEvent::Input;
     }
     else
     {
-        return UnderlyingCastEnum<AndroidLooperEvent>(-1);
+        return AndroidLooperEvent::Null;
     }
 
 #else  // !SYSTEM_PLATFORM_ANDROID && !SYSTEM_PLATFORM_WIN32
@@ -129,7 +128,7 @@ void System::AndroidLooperWake(AndroidLooper* looper) noexcept
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int32_t System::AndroidLooperAddFd(AndroidLooper* looper, int32_t fd, LooperID ident, AndroidLooperEvent events, AndroidLooperCallbackFunc callback, void* data) noexcept
+int32_t System::AndroidLooperAddFd(AndroidLooper* looper, int32_t fd, LooperId ident, AndroidLooperEvent events, AndroidLooperCallbackFunction callback, void* data) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -139,7 +138,7 @@ int32_t System::AndroidLooperAddFd(AndroidLooper* looper, int32_t fd, LooperID i
 
     UnusedFunction(looper, fd, ident, events, callback, data);
 
-    return 1;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -154,7 +153,7 @@ int32_t System::AndroidLooperRemoveFd(AndroidLooper* looper, int32_t fd) noexcep
 
     UnusedFunction(looper, fd);
 
-    return 1;
+    return 0;
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }

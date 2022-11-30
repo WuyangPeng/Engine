@@ -25,7 +25,7 @@
 using std::string;
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
-    : ParentType{}, socketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+    : ParentType{}, socketHandle{ System::CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
     if (!System::IsSocketValid(socketHandle))
     {
@@ -39,7 +39,7 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
         THROW_EXCEPTION(SYSTEM_TEXT("°ó¶¨Ê§°Ü£¡"s));
     }
 
-    if (!System::Listen(socketHandle, System::g_SoMaxConn))
+    if (!System::Listen(socketHandle, System::gSoMaxConn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("¼àÌýÊ§°Ü£¡"s));
     }
@@ -48,7 +48,7 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
 }
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(const string& hostName, int port)
-    : ParentType{}, socketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+    : ParentType{}, socketHandle{ System::CreateSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
     if (!System::IsSocketValid(socketHandle))
     {
@@ -62,7 +62,7 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(const string& hostName, int po
         THROW_EXCEPTION(SYSTEM_TEXT("°ó¶¨Ê§°Ü£¡"s));
     }
 
-    if (!System::Listen(socketHandle, System::g_SoMaxConn))
+    if (!System::Listen(socketHandle, System::gSoMaxConn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("¼àÌýÊ§°Ü£¡"s));
     }

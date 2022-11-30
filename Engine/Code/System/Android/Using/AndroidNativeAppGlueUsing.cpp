@@ -1,35 +1,36 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:59)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:26)
 
 #include "System/SystemExport.h"
 
 #include "AndroidInputUsing.h"
 #include "AndroidNativeAppGlueUsing.h"
 #include "System/Android/Flags/AndroidNativeAppGlueFlags.h"
-#include "System/Helper/PragmaWarning.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID
 
 System::AndroidPollSource::AndroidPollSource() noexcept
-    : id{ EnumCastUnderlying(LooperID::Main) }, app{ nullptr }
+    : id{ LooperId::Main }, app{ nullptr }
 {
 }
 
 System::AndroidApp::AndroidApp() noexcept
-    : userData{ nullptr },
+    : virtualAndroidNativeWindow{},
+      virtualAndroidInputQueue{},
+      userData{ nullptr },
       activity{ nullptr },
       config{ nullptr },
       savedState{ nullptr },
       savedStateSize{ 0 },
       looper{ nullptr },
-      inputQueue{ nullptr },
-      window{ nullptr },
+      inputQueue{ &virtualAndroidInputQueue },
+      window{ &virtualAndroidNativeWindow },
       contentRect{},
       activityState{ 0 },
       destroyRequested{ 0 },
@@ -43,20 +44,18 @@ System::AndroidApp::AndroidApp() noexcept
       redrawNeeded{ 0 },
       pendingInputQueue{ nullptr },
       pendingWindow{ nullptr },
-      pendingContentRect{},
-      virtualAndroidNativeWindow{}
+      pendingContentRect{}
 {
-    window = &virtualAndroidNativeWindow;
 }
 
-System::AndroidNativeWindow* System::AndroidApp::GetAndroidNativeWindow() noexcept
+System::AndroidNativeWindow* System::AndroidApp::GetNativeWindow() noexcept
 {
     return window;
 }
 
-void System::AndroidApp::SetDestroyRequested(int isDestroyRequested) noexcept
+void System::AndroidApp::SetDestroyRequested(int aDestroyRequested) noexcept
 {
-    destroyRequested = isDestroyRequested;
+    destroyRequested = aDestroyRequested;
 }
 
 int System::AndroidApp::GetDestroyRequested() const noexcept
@@ -69,9 +68,9 @@ System::WindowsHWnd System::AndroidApp::GetRunning() const noexcept
     return running;
 }
 
-void System::AndroidApp::SetRunning(WindowsHWnd value) noexcept
+void System::AndroidApp::SetRunning(WindowsHWnd aRunning) noexcept
 {
-    running = value;
+    running = aRunning;
 }
 
 System::AndroidRect System::AndroidApp::GetContentRect() const noexcept
@@ -79,19 +78,14 @@ System::AndroidRect System::AndroidApp::GetContentRect() const noexcept
     return contentRect;
 }
 
-void System::AndroidApp::SetContentRect(const AndroidRect& value) noexcept
+void System::AndroidApp::SetContentRect(const AndroidRect& aContentRect) noexcept
 {
-    contentRect = value;
+    contentRect = aContentRect;
 }
 
-System::AndroidInputQueue* System::AndroidApp::GetInputQueue() const noexcept
+System::AndroidInputQueue* System::AndroidApp::GetInputQueue() noexcept
 {
     return inputQueue;
-}
-
-void System::AndroidApp::SetInputQueue(AndroidInputQueue* value) noexcept
-{
-    inputQueue = value;
 }
 
 #endif  // SYSTEM_PLATFORM_ANDROID

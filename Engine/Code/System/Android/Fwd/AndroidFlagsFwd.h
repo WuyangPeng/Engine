@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:53)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:18)
 
 #ifndef SYSTEM_ANDROID_ANDROID_FLAGS_FWD_H
 #define SYSTEM_ANDROID_ANDROID_FLAGS_FWD_H
@@ -19,16 +19,17 @@ namespace System
     enum class AndroidMeta;
     enum class AndroidInputEventType;
     enum class AndroidKeyEventAction;
-    enum class AndroidKeyEvent;
+    enum class AndroidKeyEventFlag;
     enum class AndroidMotionEventAction;
-    enum class AndroidMotionEvent;
-    enum class AndroidMotionEventEdge;
+    enum class AndroidMotionEventFlag;
+    enum class AndroidMotionEventEdgeFlag;
     enum class AndroidMotionEventAxis;
     enum class AndroidMotionEventButton;
-    enum class AndroidMotionEventTool;
+    enum class AndroidMotionEventToolType;
     enum class AndroidInputSourceClass;
     enum class AndroidInputSource : uint32_t;
-    enum class AndroidInputKeyboard;
+    enum class AndroidInputKeyboardType;
+    enum class AndroidInputMotionRange;
 
     // AndroidKeyCodes
     enum class AndroidKeyCodes;
@@ -39,8 +40,8 @@ namespace System
     enum class AndroidLooperEvent;
 
     // AndroidNativeAppGlue
-    enum class LooperID;
-    enum class AppCmdType;
+    enum class LooperId;
+    enum class AppCommandType;
 
     // AndroidNativeWindow
     enum class WindowFormat;

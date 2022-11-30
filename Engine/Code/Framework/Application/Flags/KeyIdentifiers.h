@@ -131,7 +131,7 @@ namespace Framework
         static constexpr auto keyPageUp = System::EnumCastUnderlying(System::AndroidKeyCodes::PageUp);
         static constexpr auto keyPageDown = System::EnumCastUnderlying(System::AndroidKeyCodes::PageDown);
         static constexpr auto keyInsert = System::EnumCastUnderlying(System::AndroidKeyCodes::Insert);
-        static constexpr auto keyDelete = System::EnumCastUnderlying(System::AndroidKeyCodes::Del);
+        static constexpr auto keyDelete = System::EnumCastUnderlying(System::AndroidKeyCodes::Delete);
         static constexpr auto keyF1 = System::EnumCastUnderlying(System::AndroidKeyCodes::F1);
         static constexpr auto keyF2 = System::EnumCastUnderlying(System::AndroidKeyCodes::F2);
         static constexpr auto keyF3 = System::EnumCastUnderlying(System::AndroidKeyCodes::F3);

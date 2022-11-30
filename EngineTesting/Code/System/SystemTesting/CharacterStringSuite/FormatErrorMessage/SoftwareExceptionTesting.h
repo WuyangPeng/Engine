@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:15)
+///	引擎测试版本：0.8.1.4 (2022/11/26 20:32)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_SOFTWARE_EXCEPTION_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_SOFTWARE_EXCEPTION_TESTING_H
@@ -35,14 +35,15 @@ namespace System
 
         void RandomShuffleFlags();
         bool MakeSoftwareExceptionTest();
+        void DoMakeSoftwareExceptionTest(size_t index);
 
     private:
-        using SeverityFlagsContainer = std::vector<Severity>;
-        using FacilityFlagsContainer = std::vector<Facility>;
+        using SeverityContainer = std::vector<Severity>;
+        using FacilityContainer = std::vector<Facility>;
 
     private:
-        SeverityFlagsContainer severityFlags;
-        FacilityFlagsContainer facilityFlags;
+        SeverityContainer severities;
+        FacilityContainer facilities;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

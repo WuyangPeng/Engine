@@ -140,6 +140,13 @@ Rendering::VisualEffectImpl::ConstVisualProgramSharedPtr Rendering::VisualEffect
     return program;
 }
 
+Rendering::VisualEffectImpl::VisualProgramSharedPtr Rendering::VisualEffectImpl::GetProgram() noexcept
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return program;
+}
+
 Rendering::VisualEffectImpl::ConstShaderSharedPtr Rendering::VisualEffectImpl::GetVertexShader() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -155,6 +162,27 @@ Rendering::VisualEffectImpl::ConstShaderSharedPtr Rendering::VisualEffectImpl::G
 }
 
 Rendering::VisualEffectImpl::ConstShaderSharedPtr Rendering::VisualEffectImpl::GetGeometryShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return program->GetGeometryShader();
+}
+
+Rendering::VisualEffectImpl::ShaderSharedPtr Rendering::VisualEffectImpl::GetVertexShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return program->GetVertexShader();
+}
+
+Rendering::VisualEffectImpl::ShaderSharedPtr Rendering::VisualEffectImpl::GetPixelShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return program->GetPixelShader();
+}
+
+Rendering::VisualEffectImpl::ShaderSharedPtr Rendering::VisualEffectImpl::GetGeometryShader() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 

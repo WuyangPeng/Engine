@@ -5,14 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:16)
+///	引擎测试版本：0.8.1.4 (2022/11/30 10:42)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_STRNG_PRINTF_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_STRNG_PRINTF_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-#include <vector>
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {

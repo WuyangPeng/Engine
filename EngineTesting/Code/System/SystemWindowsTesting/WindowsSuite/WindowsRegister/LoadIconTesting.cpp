@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/16 14:44)
+///	引擎测试版本：0.8.1.4 (2022/11/05 19:45)
 
 #include "LoadIconTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -36,16 +36,16 @@ void System::LoadIconTesting::MainTest()
 
 void System::LoadIconTesting::LoadIconTest()
 {
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Application));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_IDIHand));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Question));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Exclamation));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Asterisk));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_WinLogo));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Shield));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Warning));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Error));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, g_Information));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gApplication));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gIDIHand));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gQuestion));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gExclamation));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gAsterisk));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gWinLogo));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gShield));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gWarning));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gError));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemIcon(nullptr, gInformation));
 
     ASSERT_UNEQUAL_NULL_PTR(System::LoadSystemIcon(instance, MakeIntreSource(IDI_TEST_ICON)));
 }

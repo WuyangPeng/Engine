@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/08 21:48)
+///	引擎版本：0.8.1.4 (2022/11/17 21:41)
 
 #include "System/SystemExport.h"
 
@@ -18,7 +18,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
                                             const DynamicLinkCharType* type,
                                             const DynamicLinkCharType* name,
                                             EnumResourceLanguageProcess enumFunction,
-                                            WindowsPtrLong param) noexcept
+                                            WindowsLongPtrSizeType param) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -40,7 +40,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
                                             const DynamicLinkCharType* type,
                                             const DynamicLinkCharType* name,
                                             EnumResourceLanguageProcess enumFunction,
-                                            WindowsPtrLong param,
+                                            WindowsLongPtrSizeType param,
                                             ResourceEnum flags,
                                             const LanguageIDData& language) noexcept
 {
@@ -63,7 +63,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
                                         const DynamicLinkCharType* type,
                                         EnumResourceNameProcess enumFunction,
-                                        WindowsPtrLong param) noexcept
+                                        WindowsLongPtrSizeType param) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -84,7 +84,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
                                         const DynamicLinkCharType* type,
                                         EnumResourceNameProcess enumFunction,
-                                        WindowsPtrLong param,
+                                        WindowsLongPtrSizeType param,
                                         ResourceEnum flags,
                                         const LanguageIDData& language) noexcept
 {
@@ -104,7 +104,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::EnumResourceTypesInLibrary(DynamicLinkModule module, EnumResourceTypeProcess enumFunction, WindowsPtrLong param) noexcept
+bool System::EnumResourceTypesInLibrary(DynamicLinkModule module, EnumResourceTypeProcess enumFunction, WindowsLongPtrSizeType param) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -124,7 +124,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module, EnumResourceTy
 
 bool System::EnumResourceTypesInLibrary(DynamicLinkModule module,
                                         EnumResourceTypeProcess enumFunction,
-                                        WindowsPtrLong param,
+                                        WindowsLongPtrSizeType param,
                                         ResourceEnum flags,
                                         const LanguageIDData& language) noexcept
 {

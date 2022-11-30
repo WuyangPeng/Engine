@@ -138,6 +138,16 @@ void Rendering::RendererImpl::Bind(const ConstVertexFormatSharedPtr& vertexForma
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
 
+void Rendering::RendererImpl::Bind(MAYBE_UNUSED const std::shared_ptr<const Shader>& shader) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+}
+
+void Rendering::RendererImpl::Unbind(MAYBE_UNUSED const std::shared_ptr<const Shader>& shader) noexcept
+{
+    RENDERING_CLASS_IS_VALID_1;
+}
+
 void Rendering::RendererImpl::Bind(MAYBE_UNUSED const std::shared_ptr<const GraphicsObject>& object) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
@@ -1006,7 +1016,7 @@ void Rendering::RendererImpl::SetFont(const FontSharedPtr& font)
         THROW_EXCEPTION(SYSTEM_TEXT("输入的字体为空。"));
     }
 
-    const auto mctiveFont = GetFont();
+    auto mctiveFont = GetFont();
     if (font != mctiveFont)
     {
         Unbind(mctiveFont->GetVertexBuffer());

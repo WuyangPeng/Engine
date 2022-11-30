@@ -478,6 +478,12 @@
     <Filter Include="HelperSuite 源文件\Tools">
       <UniqueIdentifier>{8667a6d3-8fc1-4196-ae60-128f90bd1b3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VulkanSuite 头文件">
+      <UniqueIdentifier>{6a080266-a2db-48f5-9893-1565001457ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VulkanSuite 源文件">
+      <UniqueIdentifier>{435e0f8e-e0e5-4cda-bbb6-4ee20899b0be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -589,13 +595,13 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\TestingHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputKeyEventTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputEventFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputMotionEventTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputMotionEventFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputQueueTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputQueueFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidLooperTesting.h">
@@ -604,7 +610,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeAppGlueTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeWindowTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeWindowFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidSuite.h">
@@ -1642,6 +1648,33 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\UnusedFunctionTesting.h">
       <Filter>HelperSuite 头文件\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\VulkanSuite\VulkanSuite.h">
+      <Filter>VulkanSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\VulkanSuite\VulkanTesting.h">
+      <Filter>VulkanSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageParameterTesting.h">
+      <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CodePage\LocaleTesting.h">
+      <Filter>CharacterStringSuite 头文件\CodePage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatMessageTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageReturnStringTesting.h">
+      <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseBufferTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingHelper.cpp">
@@ -1707,13 +1740,13 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryDirectoryTesting.cpp">
       <Filter>DynamicLinkSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputKeyEventTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputEventFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputMotionEventTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputMotionEventFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputQueueTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputQueueFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidLooperTesting.cpp">
@@ -1722,7 +1755,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeAppGlueTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeWindowTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeWindowFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageTesting.cpp">
@@ -2636,6 +2669,30 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\UnusedFunctionTesting.cpp">
       <Filter>HelperSuite 源文件\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\VulkanSuite\VulkanTesting.cpp">
+      <Filter>VulkanSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageParameterTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CodePage\LocaleTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\CodePage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatMessageTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageReturnStringTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseBufferTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/29 22:29)
+///	引擎版本：0.8.1.4 (2022/11/18 23:33)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
@@ -401,9 +401,9 @@ namespace System
     SYSTEM_EXIT_FUNCTION(function);                                                                                                 \
     return result
 
-// 宏对于事先存在的函数没有返回值。
-
 #ifdef SYSTEM_PLATFORM_WIN32
+
+    // 宏对于事先存在的函数没有返回值。
 
     #define SYSTEM_PREVIOUSLY_BODY_0(function) \
         SYSTEM_ENTER_FUNCTION(function);       \

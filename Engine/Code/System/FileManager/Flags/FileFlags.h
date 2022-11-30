@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/29 19:26)
+///	引擎版本：0.8.1.4 (2022/11/17 21:56)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_FLAGS_H
 #define SYSTEM_FILE_MANAGE_FILE_FLAGS_H
@@ -46,8 +46,10 @@ namespace System
         OpenExisting = OPEN_EXISTING,
         // 打开现有文件，如果文件不存在则创建它。
         OpenAlways = OPEN_ALWAYS,
-        // 将文件长度置为0。DesiredAccess必须至少指定GENERIC_WRITE访问。
-        // 如果指定的文件存在的话所有内容都会被销毁。如果文件不存在则失败。
+        /// 将文件长度置为0，
+        /// DesiredAccess必须至少指定GENERIC_WRITE访问，
+        /// 如果指定的文件存在的话所有内容都会被销毁，
+        /// 如果文件不存在则失败。
         TruncateExisting = TRUNCATE_EXISTING,
     };
 

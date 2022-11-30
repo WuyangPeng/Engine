@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:13)
+///	引擎测试版本：0.8.1.4 (2022/11/26 22:29)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "FormatMessageTestingBase.h"
 
 namespace System
 {
-    class FormatErrorMessageTesting final : public CoreTools::UnitTest
+    class FormatErrorMessageTesting final : public FormatMessageTestingBase
     {
     public:
         using ClassType = FormatErrorMessageTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatMessageTestingBase;
 
     public:
         explicit FormatErrorMessageTesting(const OStreamShared& stream);
@@ -29,7 +29,7 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void FormatErrorMessageTest();
+        void FormatErrorMessageTest(WindowsHLocal errorMessage);
     };
 }
 

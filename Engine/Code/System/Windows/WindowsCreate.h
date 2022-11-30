@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 13:11)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 23:13)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CREATE_H
 #define SYSTEM_WINDOWS_WINDOWS_CREATE_H
@@ -64,7 +64,7 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveSystemMenu(WindowsHMenu menu, SystemMenuCommand position, MenuItem flags) noexcept;
 
-    bool SYSTEM_DEFAULT_DECLARE GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction);
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction);
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_CREATE_H

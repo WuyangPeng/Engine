@@ -12,7 +12,7 @@ System
 
 ----------------------------
 状态
-	目前版本：0.8.1.2。
+	目前版本：0.8.1.4。
 
 ----------------------------
 实现内容
@@ -27,7 +27,7 @@ System
 	9.	文件管理：操作系统文件读写调用。
 	10.	安全性：操作系统安全性、权限相关调用的实现。
 	11.	网络：操作系统相关的网络调用的实现。	
-	12.	渲染相关：OpenGL、DirectX API的封装。
-	13.	操作系统相关：Windows、Linux、Macintosh、Android API的封装。	 
+	12.	渲染相关：OpenGL/OpenGLES、Vulkan、DirectX的API封装。
+	13.	操作系统相关：Windows、Linux、Macintosh、Android的API封装。	 
 
 ----------------------------

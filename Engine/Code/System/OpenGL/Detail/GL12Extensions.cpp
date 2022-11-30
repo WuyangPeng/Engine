@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:37)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:33)
 
 #include "System/SystemExport.h"
 
@@ -38,22 +38,10 @@ void System::InitOpenGL12() noexcept
     {
         existsOpenGL12 = ExistsOpenGLExtensions::Exists;
 
-        // GL_ARB_imaging
-        // GL_EXT_blend_color
-        // GL_EXT_blend_minmax
-        // GL_EXT_color_subtable
-        // GL_EXT_convolution
-        // GL_EXT_histogram
-        // GL_EXT_paletted_texture
-        // GL_SGI_color_table
-
-        // GL_EXT_copy_texture
         SYSTEM_GET_FUNCTION(glCopyTexSubImage3D);
 
-        // GL_EXT_draw_range_elements
         SYSTEM_GET_FUNCTION(glDrawRangeElements);
 
-        // GL_EXT_texture3D
         SYSTEM_GET_FUNCTION(glTexImage3D);
         SYSTEM_GET_FUNCTION(glTexSubImage3D);
     }

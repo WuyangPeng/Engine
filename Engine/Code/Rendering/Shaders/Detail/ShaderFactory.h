@@ -12,6 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Shaders/ShadersInternalFwd.h"
 
@@ -26,7 +28,7 @@ namespace Rendering
         using ShaderSharedPtr = std::shared_ptr<ShaderImpl>;
 
     public:
-        NODISCARD static ShaderSharedPtr Create(RendererTypes type);
+        NODISCARD static ShaderSharedPtr Create(RendererTypes type, const GLSLReflection& reflector, ReferenceType referenceType);
     };
 }
 

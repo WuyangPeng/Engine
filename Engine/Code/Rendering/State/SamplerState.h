@@ -49,6 +49,12 @@ namespace Rendering
 
         NODISCARD RendererObjectSharedPtr CreateRendererObject(RendererTypes rendererTypes) override;
 
+    public:
+        NODISCARD static constexpr int GetShaderDataLookup() noexcept
+        {
+            return 6;
+        }
+
     private:
         PackageType impl;
     };

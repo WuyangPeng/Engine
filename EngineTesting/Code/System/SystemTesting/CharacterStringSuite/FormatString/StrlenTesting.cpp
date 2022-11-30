@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:22)
+///	引擎测试版本：0.8.1.4 (2022/11/30 14:52)
 
 #include "StrlenTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
+using namespace std::literals;
 
 System::StrlenTesting::StrlenTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -35,7 +35,7 @@ void System::StrlenTesting::MainTest()
 
 void System::StrlenTesting::StrlenTest()
 {
-    const char* testString{ "strlen" };
+    const auto testString = "strlen"s;
 
-    ASSERT_EQUAL(Strlen(testString), string{ testString }.size());
+    ASSERT_EQUAL(Strlen(testString.c_str()), testString.size());
 }

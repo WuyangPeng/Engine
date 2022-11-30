@@ -109,6 +109,19 @@ namespace Rendering
 
         NODISCARD ConstGraphicsObjectSharedPtr GetGraphicsObject(int index, int handle) const;
 
+        template <typename T>
+        int Set(const std::string& name, const std::shared_ptr<T>& object);
+
+    protected:
+        void SetNumThreads(int x, int y, int z) noexcept;
+        void AddLookupData(int index, GraphicsObjectType inType, const std::string& inName, int inBindPoint, int inNumBytes, int inExtra, bool inIsGpuWritable);
+        void ResizeConstantBufferLayouts(int size);
+        void AddConstantBufferLayouts(int layoutIndex, const MemberLayout& item);
+        void ResizeStructuredBufferLayouts(int size);
+        void AddStructuredBufferLayouts(int layoutIndex, const MemberLayout& item);
+        NODISCARD int GetStructuredBufferCounter(int layoutIndex) const;
+        void SortConstantBufferLayouts(int layoutIndex);
+
     private:
         static constexpr auto numLookupIndices = System::EnumCastUnderlying(ShaderDataLookup::NumLookupIndices);
 

@@ -3,7 +3,8 @@
 ----------------------------
 系统库模块
 
-系统库（System）封装了操作系统相关的特殊需求（包括Window，Linux，Macintosh和Android）。
+系统库（System）封装了操作系统相关的特殊需求（包括Window，Linux，Macintosh和Android）,
+渲染相关的API调用（包括OpenGL、OpenGLES、Vulkan和DirectX）。
 系统库位于引擎的最底层，不允许关联引擎中的其他库，工具库只允许使用freeglut、gsl和boost工具库，不使用其他工具库。
 使用函数或类的静态成员函数来封装，且绝大部分函数被定义成noexcept，结果可能通过参数返回。
 当各平台使用的函数差别较大时，可能会舍去返回值或部分参数强制使用默认值，部分平台可能没有正确的实现。
@@ -172,7 +173,13 @@
 （2）DirectX12：对DirectX12 API的封装。
 
 ----------------------------
-14.	Windows（Windows）
+14.	Vulkan（Vulkan）
+
+封装了Vulkan调用的实现。 
+（1）Vulkan：对Vulkan的封装。 
+
+----------------------------
+15.	Windows（Windows）
 
 封装了Windows操作系统调用的实现。包括Window窗口创建、注册、窗口回调、Window标志和其他Windows系统函数。
 （1） 系统错误码：获取和设置系统错误码。
@@ -187,21 +194,21 @@
 （10）Engineering：封装一些工程相关的函数。 
 
 ----------------------------
-15.	Linux（Linux）
+16.	Linux（Linux）
 
 封装了Linux操作系统调用的实现。主要用于在其他系统正常调用虚拟的Linux API。
 （1）Linux API：Linux API以及其他平台对Linux API的虚拟实现。
 
 ----------------------------
-16.	Macintosh（Macintosh）
+17.	Macintosh（Macintosh）
 
 封装了Macintosh操作系统调用的实现。主要用于在其他系统正常调用虚拟的Macintosh API。
 （1）Macintosh API：Macintosh API以及其他平台对Macintosh API的虚拟实现。
 
 ----------------------------
-17.	Android（Android）
+18.	Android（Android）
 
-封装了Android操作系统调用的实现。主要用于在其他系统正常调用虚拟的Android API。
+封装了Android操作系统调用的实现，主要用于在其他系统正常调用虚拟的Android API。
 （1）安卓输入键事件：对安卓输入键事件的封装。
 （2）安卓输入滚动事件：对安卓输入滚动事件的封装。
 （3）安卓循环：对安卓循环的封装。

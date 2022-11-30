@@ -5,23 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:15)
+///	引擎测试版本：0.8.1.4 (2022/11/28 16:20)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_USE_LOCAL_ALLOC_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_FORMAT_ERROR_MESSAGE_USE_LOCAL_ALLOC_TESTING_H
 
-#include "System/Windows/Fwd/WindowsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <set>
+#include "FormatErrorMessageTestingBase.h"
 
 namespace System
 {
-    class FormatErrorMessageUseLocalAllocTesting final : public CoreTools::UnitTest
+    class FormatErrorMessageUseLocalAllocTesting final : public FormatErrorMessageTestingBase
     {
     public:
         using ClassType = FormatErrorMessageUseLocalAllocTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatErrorMessageTestingBase;
 
     public:
         explicit FormatErrorMessageUseLocalAllocTesting(const OStreamShared& stream);
@@ -32,13 +29,15 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void FormatLastErrorUseLocalAllocTest();
+        void FormatErrorMessageUseLocalAllocTest();
+        void FormatComErrorMessageUseLocalAllocTest();
 
-    private:
-        using WindowErrorFlagsContainer = std::set<WindowError>;
-
-    private:
-        WindowErrorFlagsContainer windowErrorFlags;
+        void FormatErrorMessageTest(WindowError windowError, WindowsHLocal& errorMessage);
+        void FormatErrorMessageSuccessTest(WindowError windowError, WindowsHLocal& errorMessage);
+        void FormatErrorMessageFailTest(WindowError windowError, WindowsHLocal& errorMessage);
+        void FormatErrorMessageUnknownTest(WindowError windowError, WindowsHLocal& errorMessage);
+        void FormatErrorMessageValidTest(WindowError windowError, WindowsHLocal& errorMessage);
+        void FormatErrorMessageInvalidTest(WindowError windowError, WindowsHLocal& errorMessage);
     };
 }
 

@@ -16,16 +16,16 @@
 
 using std::make_shared;
 
-Rendering::ShaderFactory::ShaderSharedPtr Rendering::ShaderFactory::Create(RendererTypes type)
+Rendering::ShaderFactory::ShaderSharedPtr Rendering::ShaderFactory::Create(RendererTypes type, const GLSLReflection& reflector, ReferenceType referenceType)
 {
     switch (type)
     {
         case RendererTypes::Glut:
-            return make_shared<GLSLShader>();
+            return make_shared<GLSLShader>(reflector, referenceType);
         case RendererTypes::OpenGL:
-            return make_shared<GLSLShader>();
+            return make_shared<GLSLShader>(reflector, referenceType);
         case RendererTypes::OpenGLES:
-            return make_shared<GLSLShader>();
+            return make_shared<GLSLShader>(reflector, referenceType);
 
         case RendererTypes::Dx11:
         case RendererTypes::Default:

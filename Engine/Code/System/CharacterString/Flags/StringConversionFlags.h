@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:42)
+///	引擎版本：0.8.1.4 (2022/11/12 19:25)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
@@ -62,15 +62,10 @@ namespace System
     {
         SystemDefault = LOCALE_SYSTEM_DEFAULT,
         UserDefault = LOCALE_USER_DEFAULT,
-
         CustomDefault = LOCALE_CUSTOM_DEFAULT,
-
         CustomUnspecified = LOCALE_CUSTOM_UNSPECIFIED,
-
         CustomUIDefault = LOCALE_CUSTOM_UI_DEFAULT,
-
         Neutral = LOCALE_NEUTRAL,
-
         Invariant = LOCALE_INVARIANT,
     };
 
@@ -84,11 +79,10 @@ namespace System
         LinguisticIgnoreDiacritic = LINGUISTIC_IGNOREDIACRITIC,
 
         NormIgnoreKanaType = NORM_IGNOREKANATYPE,
-        IgnoreWidth = NORM_IGNOREWIDTH,
-        LinguisticCasing = NORM_LINGUISTIC_CASING,
+        NormIgnoreWidth = NORM_IGNOREWIDTH,
+        NormLinguisticCasing = NORM_LINGUISTIC_CASING,
 
         SortStringSort = SORT_STRINGSORT,
-
         SortDigitsAsNumbers = SORT_DIGITSASNUMBERS,
     };
 
@@ -158,15 +152,10 @@ namespace System
     {
         SystemDefault = MakeLanguageCID(gLanguageSystemDefault, LocaleSort::Default),
         UserDefault = MakeLanguageCID(gLanguageUserDefault, LocaleSort::Default),
-
         CustomDefault = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomDefault), LocaleSort::Default),
-
         CustomUnspecified = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::CustomUnspecified), LocaleSort::Default),
-
         CustomUIDefault = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::UICustomDefault), LocaleSort::Default),
-
         Neutral = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Neutral, SubLanguage::Neutral), LocaleSort::Default),
-
         Invariant = MakeLanguageCID(MakeLanguageID(PrimaryLanguage::Invariant, SubLanguage::Neutral), LocaleSort::Default),
     };
 
@@ -180,8 +169,8 @@ namespace System
         LinguisticIgnoreDiacritic = 0x00000020,
 
         NormIgnoreKanaType = 0x00010000,
-        IgnoreWidth = 0x00020000,
-        LinguisticCasing = 0x08000000,
+        NormIgnoreWidth = 0x00020000,
+        NormLinguisticCasing = 0x08000000,
 
         SortStringSort = 0x00001000,
         SortDigitsAsNumbers = 0x00000008,

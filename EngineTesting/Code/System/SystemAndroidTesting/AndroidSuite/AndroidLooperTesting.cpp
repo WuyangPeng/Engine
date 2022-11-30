@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 13:40)
+///	引擎测试版本：0.8.1.4 (2022/11/05 22:52)
 
 #include "AndroidLooperTesting.h"
 #include "Detail/CallbackFunction.h"
@@ -17,23 +17,13 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-System::AndroidLooperTesting::AndroidLooperTesting(const OStreamShared& streamShared, AndroidApp* androidApp)
-    : ParentType{ streamShared }, androidApp{ androidApp }
+System::AndroidLooperTesting::AndroidLooperTesting(const OStreamShared& streamShared)
+    : ParentType{ streamShared }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
-#ifdef OPEN_CLASS_INVARIANT
-
-bool System::AndroidLooperTesting::IsValid() const noexcept
-{
-    if (ParentType::IsValid() && androidApp != nullptr)
-        return true;
-    else
-        return false;
-}
-
-#endif  // OPEN_CLASS_INVARIANT
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, AndroidLooperTesting)
 
 void System::AndroidLooperTesting::DoRunUnitTest()
 {
@@ -42,24 +32,53 @@ void System::AndroidLooperTesting::DoRunUnitTest()
 
 void System::AndroidLooperTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperForThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperPrepareTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperPollTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperWakeTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(AndroidLooperFdTest);
 }
 
-void System::AndroidLooperTesting::AndroidLooperTest()
+void System::AndroidLooperTesting::AndroidLooperForThreadTest()
 {
     ASSERT_EQUAL_NULL_PTR(AndroidLooperForThread());
-    ASSERT_EQUAL_NULL_PTR(AndroidLooperPrepare(0));
+}
 
+void System::AndroidLooperTesting::AndroidLooperPrepareTest()
+{
+    ASSERT_EQUAL_NULL_PTR(AndroidLooperPrepare(0));
+}
+
+void System::AndroidLooperTesting::AndroidLooperTest() noexcept
+{
     AndroidLooper looper{};
     AndroidLooperAcquire(&looper);
     AndroidLooperRelease(&looper);
+}
 
-    ASSERT_ENUM_EQUAL(AndroidLooperPollOnce(0, nullptr, nullptr, nullptr), AndroidLooperEvent::Input);
+void System::AndroidLooperTesting::AndroidLooperPollTest()
+{
+    int32_t outFd{};
+    int32_t outEvents{};
 
-    const auto result = AndroidLooperPollAll(0, nullptr, nullptr, nullptr);
-    ASSERT_TRUE(result == AndroidLooperEvent::Input || EnumCastUnderlying(result) == -1);
+    ASSERT_ENUM_EQUAL(AndroidLooperPollOnce(0, &outFd, &outEvents, nullptr), AndroidLooperEvent::Input);
 
-    AndroidLooperWake(&looper);
-    ASSERT_EQUAL(AndroidLooperAddFd(nullptr, 0, LooperID::Main, AndroidLooperEvent::Error, Android::Looper::CallbackFunction, nullptr), 1);
-    ASSERT_EQUAL(AndroidLooperRemoveFd(&looper, 0), 1);
+    const auto result = AndroidLooperPollAll(0, &outFd, &outEvents, nullptr);
+    ASSERT_TRUE(result == AndroidLooperEvent::Input || result == AndroidLooperEvent::Null);
+}
+
+void System::AndroidLooperTesting::AndroidLooperWakeTest() noexcept
+{
+    AndroidLooper* looper{ nullptr };
+
+    AndroidLooperWake(looper);
+}
+
+void System::AndroidLooperTesting::AndroidLooperFdTest()
+{
+    AndroidLooper looper{};
+
+    ASSERT_EQUAL(AndroidLooperAddFd(&looper, 0, LooperId::Main, AndroidLooperEvent::Error, Android::Looper::CallbackFunction, nullptr), 0);
+    ASSERT_EQUAL(AndroidLooperRemoveFd(&looper, 0), 0);
 }

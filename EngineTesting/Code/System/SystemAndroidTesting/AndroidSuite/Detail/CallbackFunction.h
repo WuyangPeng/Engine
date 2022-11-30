@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 13:37)
+///	引擎测试版本：0.8.1.4 (2022/11/05 22:50)
 
-#ifndef SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_CALLBACK_FUNC_H
-#define SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_CALLBACK_FUNC_H
+#ifndef SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_CALLBACK_FUNCTION_H
+#define SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_CALLBACK_FUNCTION_H
 
 #include "System/Android/Using/AndroidInputUsing.h"
 #include "System/Android/Using/AndroidNativeAppGlueUsing.h"
@@ -20,9 +20,9 @@ namespace System
     {
         namespace Looper
         {
-            NODISCARD int CallbackFunction(MAYBE_UNUSED int fd, MAYBE_UNUSED int events, MAYBE_UNUSED void* data) noexcept;
+            NODISCARD int CallbackFunction(int fd, int events, void* data) noexcept;
         }
     }
 }
 
-#endif  // SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_CALLBACK_FUNC_H
+#endif  // SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_CALLBACK_FUNCTION_H

@@ -63,10 +63,15 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::VisualEffect::CloneObject() const
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProgram, Rendering::VisualEffect::ConstVisualProgramSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetProgram, Rendering::VisualEffect::VisualProgramSharedPtr)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetVertexShader, Rendering::VisualEffect::ConstShaderSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetPixelShader, Rendering::VisualEffect::ConstShaderSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetGeometryShader, Rendering::VisualEffect::ConstShaderSharedPtr)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetVertexShader, Rendering::VisualEffect::ShaderSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetPixelShader, Rendering::VisualEffect::ShaderSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetGeometryShader, Rendering::VisualEffect::ShaderSharedPtr)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualEffect, SetPVWMatrixConstant, ConstantBufferSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualEffect, GetPVWMatrixConstant, Rendering::VisualEffect::ConstConstantBufferSharedPtr)

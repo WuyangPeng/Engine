@@ -23,6 +23,9 @@
 #define ASSERT_NOT_THROW_EXCEPTION_2(function, parameter0, parameter1) \
     AssertNotThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), std::string{}, (parameter0), (parameter1))
 
+#define ASSERT_NOT_THROW_EXCEPTION_3(function, parameter0, parameter1, parameter2) \
+    AssertNotThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), std::string{}, (parameter0), (parameter1), (parameter2))
+
 #define ASSERT_THROW_EXCEPTION_0(function) \
     AssertThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), std::string{})
 
@@ -31,6 +34,9 @@
 
 #define ASSERT_THROW_EXCEPTION_2(function, parameter0, parameter1) \
     AssertThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), std::string{}, (parameter0), (parameter1))
+
+#define ASSERT_THROW_EXCEPTION_3(function, parameter0, parameter1, parameter2) \
+    AssertThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), std::string{}, (parameter0), (parameter1), (parameter2))
 
 #define ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_0(function, message) \
     AssertNotThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message))
@@ -41,6 +47,9 @@
 #define ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_2(function, parameter0, parameter1, message) \
     AssertNotThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message), (parameter0), (parameter1))
 
+#define ASSERT_NOT_THROW_EXCEPTION_USE_MESSAGE_3(function, parameter0, parameter1, parameter2, message) \
+    AssertNotThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message), (parameter0), (parameter1), (parameter2))
+
 #define ASSERT_THROW_EXCEPTION_USE_MESSAGE_0(function, message) \
     AssertThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message))
 
@@ -49,6 +58,9 @@
 
 #define ASSERT_THROW_EXCEPTION_USE_MESSAGE_2(function, parameter0, parameter1, message) \
     AssertThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message), (parameter0), (parameter1))
+
+#define ASSERT_THROW_EXCEPTION_USE_MESSAGE_3(function, parameter0, parameter1, parameter2, message) \
+    AssertThrowException(this, &ClassType::function, (CORE_TOOLS_FUNCTION_DESCRIBED), (message), (parameter0), (parameter1), (parameter2))
 
 #define ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(function) \
     AssertNotThrowException<ClassType, decltype(&ClassType::ExecuteLoopTesting<ClassType, decltype(&ClassType::function)>), ClassType*, decltype(&ClassType::function)>(this, &ClassType::ExecuteLoopTesting<ClassType, decltype(&ClassType::function)>, (CORE_TOOLS_FUNCTION_DESCRIBED), std::string{}, this, &ClassType::function)

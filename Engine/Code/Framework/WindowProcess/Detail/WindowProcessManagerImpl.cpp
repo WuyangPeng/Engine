@@ -268,7 +268,7 @@ Framework::WindowProcessManagerImpl::LResult SYSTEM_CALL_BACK Framework::WindowP
             return ((*windowProcessMessage).*(iter->second))(hwnd, wParam, lParam);
         }
 
-        return System::DefSystemWindowProc(hwnd, flag, wParam, lParam);
+        return System::DefaultSystemWindowProcess(hwnd, flag, wParam, lParam);
     }
     EXCEPTION_ALL_CATCH(Framework)
 

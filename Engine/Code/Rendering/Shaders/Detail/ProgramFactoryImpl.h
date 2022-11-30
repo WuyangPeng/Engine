@@ -29,8 +29,17 @@ namespace Rendering
         using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactoryImpl>;
         using VisualProgramSharedPtr = std::shared_ptr<VisualProgram>;
         using ComputeProgramSharedPtr = std::shared_ptr<ComputeProgram>;
+        using DefinesType = std::pair<std::string, std::string>;
+        using Container = std::vector<DefinesType>;
+        using ContainerConstIter = Container::const_iterator;
 
     public:
+        ProgramFactoryImpl(const std::string& version,
+                           const std::string& vsEntry,
+                           const std::string& psEntry,
+                           const std::string& gsEntry,
+                           const std::string& csEntry,
+                           int flags);
         explicit ProgramFactoryImpl(CoreTools::DisableNotThrow disableNotThrow);
         virtual ~ProgramFactoryImpl() noexcept = default;
         ProgramFactoryImpl(const ProgramFactoryImpl& rhs) = delete;
@@ -58,11 +67,20 @@ namespace Rendering
         NODISCARD static ProgramFactorySharedPtr Create(RendererTypes rendererTypes);
 
     protected:
-        NODISCARD virtual VisualProgramSharedPtr CreateFromNamedSources(const std::string& vsName, const std::string& vsSource,
-                                                                        const std::string& psName, const std::string& psSource,
-                                                                        const std::string& gsName, const std::string& gsSource) = 0;
+        NODISCARD virtual VisualProgramSharedPtr CreateFromNamedSources(const std::string& vsName,
+                                                                        const std::string& vsSource,
+                                                                        const std::string& psName,
+                                                                        const std::string& psSource,
+                                                                        const std::string& gsName,
+                                                                        const std::string& gsSource) = 0;
 
         NODISCARD virtual ComputeProgramSharedPtr CreateFromNamedSource(const std::string& csName, const std::string& csSource) = 0;
+
+        NODISCARD std::string GetVersion() const;
+        NODISCARD int GetDefinesSize() const;
+
+        NODISCARD ContainerConstIter begin() const noexcept;
+        NODISCARD ContainerConstIter end() const noexcept;
 
     private:
         using ProgramDefinesContainer = std::stack<ProgramDefines>;

@@ -41,7 +41,7 @@ double Framework::PerformanceMeasurementsImpl::GetFrameRate() const
     FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
     if (0 < accumulatedTime)
-        return accumulatedFrameCount / boost::numeric_cast<double>(accumulatedTime) * System::g_Millisecond;
+        return accumulatedFrameCount / boost::numeric_cast<double>(accumulatedTime) * System::gMillisecond;
     else
         return 0.0;
 }

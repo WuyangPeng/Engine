@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 14:33)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 15:10)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
@@ -13,10 +13,14 @@
 #include "System/Helper/Platform.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     #include <WinSock2.h>
     #include <Ws2ipdef.h>
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     #include "System/Windows/Using/WindowsUsing.h"
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #include <string>
@@ -38,12 +42,12 @@ namespace System
     using WinSockTimeval = timeval;
     using SocketLinger = LINGER;
 
-    constexpr WinSocket g_InvalidSocket{ INVALID_SOCKET };
+    constexpr WinSocket gInvalidSocket{ INVALID_SOCKET };
     constexpr auto gSocketError = SOCKET_ERROR;
     constexpr auto gInAddrAny = INADDR_ANY;
-    constexpr auto g_FdSetSize = FD_SETSIZE;
-    constexpr auto g_InAddrLoopback = INADDR_LOOPBACK;
-    constexpr auto g_SoMaxConn = SOMAXCONN;
+    constexpr auto gFdSetSize = FD_SETSIZE;
+    constexpr auto gInAddrLoopback = INADDR_LOOPBACK;
+    constexpr auto gSoMaxConn = SOMAXCONN;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -114,12 +118,12 @@ namespace System
         char sa_data[14];
     };
 
-    constexpr auto g_FdSetSize = 64;
+    constexpr auto gFdSetSize = 64;
 
     struct WinSockFdSet
     {
         uint32_t fd_count;
-        WinSocket fd_array[g_FdSetSize];
+        WinSocket fd_array[gFdSetSize];
     };
 
     struct WinSockTimeval
@@ -134,11 +138,11 @@ namespace System
         uint16_t l_linger;
     };
 
-    constexpr auto g_InvalidSocket = static_cast<WinSocket>(~0);
+    constexpr auto gInvalidSocket = static_cast<WinSocket>(~0);
     constexpr auto gSocketError = -1;
     constexpr auto gInAddrAny = 0x00000000;
-    constexpr auto g_InAddrLoopback = 0x7f000001;
-    constexpr auto g_SoMaxConn = 0x7fffffff;
+    constexpr auto gInAddrLoopback = 0x7f000001;
+    constexpr auto gSoMaxConn = 0x7fffffff;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

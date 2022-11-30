@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:52)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:13)
 
 #ifndef SYSTEM_ANDROID_ANDROID_KEY_CODES_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_KEY_CODES_FLAGS_H
@@ -15,6 +15,15 @@
 #ifdef SYSTEM_PLATFORM_ANDROID
 
     #include <android/keycodes.h>
+
+#elif defined(SYSTEM_PLATFORM_WIN32)
+
+    #include "System/Helper/EnumCast.h"
+    #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
+
+#endif  // SYSTEM_PLATFORM_ANDROID
+
+#ifdef SYSTEM_PLATFORM_ANDROID
 
 namespace System
 {
@@ -83,11 +92,11 @@ namespace System
         ShiftRight = AKEYCODE_SHIFT_RIGHT,
         Tab = AKEYCODE_TAB,
         Space = AKEYCODE_SPACE,
-        Sym = AKEYCODE_SYM,
+        System = AKEYCODE_SYM,
         Explorer = AKEYCODE_EXPLORER,
         Envelope = AKEYCODE_ENVELOPE,
         Enter = AKEYCODE_ENTER,
-        Del = AKEYCODE_DEL,
+        Delete = AKEYCODE_DEL,
         Grave = AKEYCODE_GRAVE,
         Minus = AKEYCODE_MINUS,
         Equals = AKEYCODE_EQUALS,
@@ -122,17 +131,17 @@ namespace System
         ButtonX = AKEYCODE_BUTTON_X,
         ButtonY = AKEYCODE_BUTTON_Y,
         ButtonZ = AKEYCODE_BUTTON_Z,
-        ButtonL1 = AKEYCODE_BUTTON_L1,
-        ButtonR1 = AKEYCODE_BUTTON_R1,
-        ButtonL2 = AKEYCODE_BUTTON_L2,
-        ButtonR2 = AKEYCODE_BUTTON_R2,
-        ButtonThumbL = AKEYCODE_BUTTON_THUMBL,
-        ButtonThumbR = AKEYCODE_BUTTON_THUMBR,
+        ButtonLeft1 = AKEYCODE_BUTTON_L1,
+        ButtonRight1 = AKEYCODE_BUTTON_R1,
+        ButtonLeft2 = AKEYCODE_BUTTON_L2,
+        ButtonRight2 = AKEYCODE_BUTTON_R2,
+        ButtonThumbLeft = AKEYCODE_BUTTON_THUMBL,
+        ButtonThumbRight = AKEYCODE_BUTTON_THUMBR,
         ButtonStart = AKEYCODE_BUTTON_START,
         ButtonSelect = AKEYCODE_BUTTON_SELECT,
         ButtonMode = AKEYCODE_BUTTON_MODE,
         Escape = AKEYCODE_ESCAPE,
-        ForwardDel = AKEYCODE_FORWARD_DEL,
+        ForwardDelete = AKEYCODE_FORWARD_DEL,
         CtrlLeft = AKEYCODE_CTRL_LEFT,
         CtrlRight = AKEYCODE_CTRL_RIGHT,
         CapsLock = AKEYCODE_CAPS_LOCK,
@@ -314,9 +323,6 @@ namespace System
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-    #include "System/Helper/EnumCast.h"
-    #include "System/Windows/Flags/WindowsKeyCodesFlags.h"
-
 namespace System
 {
     enum class AndroidKeyCodes
@@ -384,11 +390,11 @@ namespace System
         ShiftRight = 60,
         Tab = 61,
         Space = 62,
-        Sym = 63,
+        System = 63,
         Explorer = 64,
         Envelope = 65,
         Enter = 66,
-        Del = 67,
+        Delete = 67,
         Grave = 68,
         Minus = 69,
         Equals = 70,
@@ -423,17 +429,17 @@ namespace System
         ButtonX = 99,
         ButtonY = 100,
         ButtonZ = 101,
-        ButtonL1 = 102,
-        ButtonR1 = 103,
-        ButtonL2 = 104,
-        ButtonR2 = 105,
-        ButtonThumbL = 106,
-        ButtonThumbR = 107,
+        ButtonLeft1 = 102,
+        ButtonRight1 = 103,
+        ButtonLeft2 = 104,
+        ButtonRight2 = 105,
+        ButtonThumbLeft = 106,
+        ButtonThumbRight = 107,
         ButtonStart = 108,
         ButtonSelect = 109,
         ButtonMode = 110,
         Escape = 111,
-        ForwardDel = 112,
+        ForwardDelete = 112,
         CtrlLeft = 113,
         CtrlRight = 114,
         CapsLock = 115,
@@ -682,11 +688,11 @@ namespace System
         ShiftRight = 60,
         Tab = 61,
         Space = 62,
-        Sym = 63,
+        System = 63,
         Explorer = 64,
         Envelope = 65,
         Enter = 66,
-        Del = 67,
+        Delete = 67,
         Grave = 68,
         Minus = 69,
         Equals = 70,
@@ -721,17 +727,17 @@ namespace System
         ButtonX = 99,
         ButtonY = 100,
         ButtonZ = 101,
-        ButtonL1 = 102,
-        ButtonR1 = 103,
-        ButtonL2 = 104,
-        ButtonR2 = 105,
-        ButtonThumbL = 106,
-        ButtonThumbR = 107,
+        ButtonLeft1 = 102,
+        ButtonRight1 = 103,
+        ButtonLeft2 = 104,
+        ButtonRight2 = 105,
+        ButtonThumbLeft = 106,
+        ButtonThumbRight = 107,
         ButtonStart = 108,
         ButtonSelect = 109,
         ButtonMode = 110,
         Escape = 111,
-        ForwardDel = 112,
+        ForwardDelete = 112,
         CtrlLeft = 113,
         CtrlRight = 114,
         CapsLock = 115,

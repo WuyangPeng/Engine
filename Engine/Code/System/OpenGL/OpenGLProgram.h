@@ -1,20 +1,21 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:34)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:31)
 
 #ifndef SYSTEM_OPENGL_OPENGL_PROGRAM_H
 #define SYSTEM_OPENGL_OPENGL_PROGRAM_H
 
 #include "System/SystemDll.h"
 
-#include "Fwd/OpenGLProgramFlagsFwd.h"
+#include "Fwd/OpenGLFlagsFwd.h"
 #include "Using/OpenGLUsing.h"
 
+#include <array>
 #include <string>
 
 namespace System
@@ -27,6 +28,7 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE LinkGLProgram(OpenGLUInt program) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLProgram(OpenGLUInt program, ProgramStatus pname) noexcept;
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLProgram(OpenGLUInt program, ProgramAttributes pname) noexcept;
+    NODISCARD void SYSTEM_DEFAULT_DECLARE GetGLProgram(OpenGLUInt program, ProgramAttributes pname, std::array<OpenGLInt, 3>& params) noexcept;
     NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetGLProgramInfoLog(OpenGLUInt program);
 
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLProgramInterface(OpenGLUInt program, ProgramInterface programInterface, ProgramInterfaceName pname) noexcept;

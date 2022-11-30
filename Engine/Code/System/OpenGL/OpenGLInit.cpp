@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 14:08)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:45)
 
 #include "System/SystemExport.h"
 
@@ -19,8 +19,6 @@
 #include "Detail/WglExtensions.h"
 
 #include <iostream>
-
-using std::cout;
 
 bool System::OpenGLInit()
 {
@@ -49,11 +47,11 @@ namespace System
             auto result = function();
             if (result != nullptr)
             {
-                cout << describe << " = " << result << "\n";
+                std::cout << describe << " = " << result << "\n";
             }
             else
             {
-                cout << describe << " = <null>\n";
+                std::cout << describe << " = <null>\n";
             }
         }
     }
@@ -68,10 +66,10 @@ void System::PrintOpenGLInfo()
 
     const auto numExtensions = GetGLInteger(OpenGLQuery::NumExtensions);
 
-    cout << "extensions =\n";
+    std::cout << "extensions =\n";
     for (auto i = 0; i < numExtensions; i++)
     {
-        cout << "    " << GLGetStringi(GL_EXTENSIONS, i) << "\n";
+        std::cout << "    " << GLGetStringi(GL_EXTENSIONS, i) << "\n";
     }
 
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -87,12 +85,68 @@ void System::PrintWglExtensionsInfo()
 
     if (wglExtensions != nullptr)
     {
-        cout << "WGLextensions =\n";
+        std::cout << "WGLextensions =\n";
 
         PrintExtensionsInfo(wglExtensions);
     }
     else
     {
-        cout << "WGLextensions = <null>\n";
+        std::cout << "WGLextensions = <null>\n";
+    }
+}
+
+std::string System::GetOpenGLVendorString()
+{
+    auto result = GetVendorString();
+
+    if (result != nullptr)
+    {
+        return result;
+    }
+    else
+    {
+        return "";
+    }
+}
+
+std::string System::GetOpenGLVersionString()
+{
+    auto result = GetVersionString();
+
+    if (result != nullptr)
+    {
+        return result;
+    }
+    else
+    {
+        return "";
+    }
+}
+
+std::string System::GetOpenGLRendererString()
+{
+    auto result = GetRendererString();
+
+    if (result != nullptr)
+    {
+        return result;
+    }
+    else
+    {
+        return "";
+    }
+}
+
+std::string System::GetOpenGLShadingLanguageVersion()
+{
+    auto result = GetShadingLanguageVersion();
+
+    if (result != nullptr)
+    {
+        return result;
+    }
+    else
+    {
+        return "";
     }
 }

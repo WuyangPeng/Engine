@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:22)
+///	引擎测试版本：0.8.1.4 (2022/11/30 14:46)
 
 #include "StrcpyTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
@@ -15,8 +15,6 @@
 
 #include <array>
 
-using std::array;
-using std::string;
 using namespace std::literals;
 
 System::StrcpyTesting::StrcpyTesting(const OStreamShared& stream)
@@ -40,12 +38,12 @@ void System::StrcpyTesting::MainTest()
 void System::StrcpyTesting::StrcpyTest()
 {
     constexpr auto maxCharactersSize = 256;
-    array<char, maxCharactersSize> ext{};
+    std::array<char, maxCharactersSize> ext{};
     const auto value = "value"s;
 
     ASSERT_TRUE(Strcpy(ext.data(), value.size() + 1, value.c_str()));
 
-    string result{ ext.data() };
+    std::string result{ ext.data() };
 
     ASSERT_EQUAL(result, value);
 }

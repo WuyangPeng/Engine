@@ -70,7 +70,7 @@ int64_t CoreTools::CustomTime::GetThisElapsedTime() noexcept
 
     MarkTimeThisTick();
 
-    return timeLastTick / System::g_Microseconds;
+    return timeLastTick / System::gMicroseconds;
 }
 
 int64_t CoreTools::CustomTime::GetNowTime() noexcept
@@ -79,7 +79,7 @@ int64_t CoreTools::CustomTime::GetNowTime() noexcept
 
     MarkTimeThisTick();
 
-    return currentTime / System::g_Microseconds;
+    return currentTime / System::gMicroseconds;
 }
 
 int64_t CoreTools::CustomTime::GetThisElapsedMillisecondTime() noexcept
@@ -88,7 +88,7 @@ int64_t CoreTools::CustomTime::GetThisElapsedMillisecondTime() noexcept
 
     MarkTimeThisTick();
 
-    return timeLastTick / System::g_Millisecond;
+    return timeLastTick / System::gMillisecond;
 }
 
 int64_t CoreTools::CustomTime::GetNowMillisecondTime() noexcept
@@ -97,7 +97,7 @@ int64_t CoreTools::CustomTime::GetNowMillisecondTime() noexcept
 
     MarkTimeThisTick();
 
-    return currentTime / System::g_Millisecond;
+    return currentTime / System::gMillisecond;
 }
 
 // private

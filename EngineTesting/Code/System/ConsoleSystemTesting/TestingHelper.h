@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:46)
+///	引擎测试版本：0.8.1.4 (2022/11/20 11:58)
 
 #ifndef CONSOLE_SYSTEM_TESTING_TESTING_HELPER_H
 #define CONSOLE_SYSTEM_TESTING_TESTING_HELPER_H
@@ -38,7 +38,7 @@ namespace ConsoleSystemTesting
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        int EnterMessageLoop() final;
+        NODISCARD int EnterMessageLoop() final;
 
     private:
         ConsoleHelper consoleHelper;

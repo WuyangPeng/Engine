@@ -28,7 +28,7 @@ namespace Framework
         using HInstance = System::WindowsHInstance;
 
     public:
-        explicit WindowHIcon(const TChar* icon = System::g_Application) noexcept;
+        explicit WindowHIcon(const TChar* icon = System::gApplication) noexcept;
         WindowHIcon(HInstance instance, int icon);
 
         NODISCARD static WindowHIcon Create(HInstance instance, bool isDefaultIcon, int icon);

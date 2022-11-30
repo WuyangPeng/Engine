@@ -41,7 +41,7 @@ namespace System
         static constexpr WindowsDWord maxReverseMakeWord{ 1 << reverseMakeWordShiftNum };
 
         std::default_random_engine randomEngine;
-        std::uniform_int_distribution<WindowsPtrDWord> distribution;
+        std::uniform_int_distribution<WindowsDWordPtrSizeType> distribution;
     };
 }
 

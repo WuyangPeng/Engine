@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/29 19:29)
+///	引擎版本：0.8.1.4 (2022/11/18 21:31)
 
 #include "System/SystemExport.h"
 
@@ -121,7 +121,7 @@ bool System::GetFileLength(WindowsHandle file, uint64_t& fileSize) noexcept
 #if defined(SYSTEM_PLATFORM_WIN32)
 
     WindowsDWord fileSizeHigh{ 0 };
-    auto fileSizeLow = ::GetFileSize(file, &fileSizeHigh);
+    const auto fileSizeLow = ::GetFileSize(file, &fileSizeHigh);
     const auto lastError = GetPlatformLastError();
 
     if (lastError == WindowError::Success || fileSizeLow != gInvalidFileSize)
@@ -355,7 +355,7 @@ bool System::SetEndOfSystemFile(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::SetEndOfFile(file)) != gFalse)
+    if (::SetEndOfFile(file) != gFalse)
         return true;
     else
         return false;
@@ -373,7 +373,7 @@ bool System::FlushSystemFileBuffers(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::FlushFileBuffers(file)) != gFalse)
+    if (::FlushFileBuffers(file) != gFalse)
         return true;
     else
         return false;
@@ -391,7 +391,7 @@ bool System::MoveSystemFile(const String& oldFileName, const String& newFileName
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if ((::MoveFile(oldFileName.c_str(), newFileName.c_str())) != gFalse)
+    if (::MoveFile(oldFileName.c_str(), newFileName.c_str()) != gFalse)
         return true;
     else
         return false;

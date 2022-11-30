@@ -1,21 +1,29 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:51)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:09)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 
-#include "System/Helper/EnumCast.h"
 #include "System/Helper/EnumMacro.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
 
     #include <android/input.h>
+
+#elif defined(SYSTEM_PLATFORM_WIN32)
+
+    #include "System/Helper/EnumCast.h"
+    #include "System/Windows/Flags/WindowsMessagesFlags.h"
+
+#endif  // SYSTEM_PLATFORM_ANDROID
+
+#ifdef SYSTEM_PLATFORM_ANDROID
 
 namespace System
 {
@@ -36,14 +44,14 @@ namespace System
         ShiftOn = AMETA_SHIFT_ON,
         ShiftLeftOn = AMETA_SHIFT_LEFT_ON,
         ShiftRightOn = AMETA_SHIFT_RIGHT_ON,
-        SymOn = AMETA_SYM_ON,
+        SystemOn = AMETA_SYM_ON,
         FunctionOn = AMETA_FUNCTION_ON,
         CtrlOn = AMETA_CTRL_ON,
         CtrlLeftOn = AMETA_CTRL_LEFT_ON,
         CtrlRightOn = AMETA_CTRL_RIGHT_ON,
-        On = AMETA_META_ON,
-        LeftOn = AMETA_META_LEFT_ON,
-        RightOn = AMETA_META_RIGHT_ON,
+        MetaOn = AMETA_META_ON,
+        MetaLeftOn = AMETA_META_LEFT_ON,
+        MetaRightOn = AMETA_META_RIGHT_ON,
         CapsLockOn = AMETA_CAPS_LOCK_ON,
         NumLockOn = AMETA_NUM_LOCK_ON,
         ScrollLockOn = AMETA_SCROLL_LOCK_ON,
@@ -63,7 +71,7 @@ namespace System
         Multiple = AKEY_EVENT_ACTION_MULTIPLE
     };
 
-    enum class AndroidKeyEvent
+    enum class AndroidKeyEventFlag
     {
         Null = 0,
         WokeHere = AKEY_EVENT_FLAG_WOKE_HERE,
@@ -98,12 +106,12 @@ namespace System
         ButtonRelease = AMOTION_EVENT_ACTION_BUTTON_RELEASE,
     };
 
-    enum class AndroidMotionEvent
+    enum class AndroidMotionEventFlag
     {
         WindowIsObscured = AMOTION_EVENT_FLAG_WINDOW_IS_OBSCURED,
     };
 
-    enum class AndroidMotionEventEdge
+    enum class AndroidMotionEventEdgeFlag
     {
         None = AMOTION_EVENT_EDGE_FLAG_NONE,
         Top = AMOTION_EVENT_EDGE_FLAG_TOP,
@@ -123,16 +131,16 @@ namespace System
         ToolMajor = AMOTION_EVENT_AXIS_TOOL_MAJOR,
         ToolMinor = AMOTION_EVENT_AXIS_TOOL_MINOR,
         Orientation = AMOTION_EVENT_AXIS_ORIENTATION,
-        VScroll = AMOTION_EVENT_AXIS_VSCROLL,
-        HScroll = AMOTION_EVENT_AXIS_HSCROLL,
+        VerticalScroll = AMOTION_EVENT_AXIS_VSCROLL,
+        HorizontalScroll = AMOTION_EVENT_AXIS_HSCROLL,
         Z = AMOTION_EVENT_AXIS_Z,
         RX = AMOTION_EVENT_AXIS_RX,
         RY = AMOTION_EVENT_AXIS_RY,
         RZ = AMOTION_EVENT_AXIS_RZ,
         HatX = AMOTION_EVENT_AXIS_HAT_X,
         HatY = AMOTION_EVENT_AXIS_HAT_Y,
-        LTrigger = AMOTION_EVENT_AXIS_LTRIGGER,
-        RTrigger = AMOTION_EVENT_AXIS_RTRIGGER,
+        LeftTrigger = AMOTION_EVENT_AXIS_LTRIGGER,
+        RightTrigger = AMOTION_EVENT_AXIS_RTRIGGER,
         Throttle = AMOTION_EVENT_AXIS_THROTTLE,
         Rudder = AMOTION_EVENT_AXIS_RUDDER,
         Wheel = AMOTION_EVENT_AXIS_WHEEL,
@@ -172,7 +180,7 @@ namespace System
         StylusSecondary = AMOTION_EVENT_BUTTON_STYLUS_SECONDARY,
     };
 
-    enum class AndroidMotionEventTool
+    enum class AndroidMotionEventToolType
     {
         Unknown = AMOTION_EVENT_TOOL_TYPE_UNKNOWN,
         Finger = AMOTION_EVENT_TOOL_TYPE_FINGER,
@@ -215,18 +223,28 @@ namespace System
         Any = AINPUT_SOURCE_ANY,
     };
 
-    enum class AndroidInputKeyboard
+    enum class AndroidInputKeyboardType
     {
         None = AINPUT_KEYBOARD_TYPE_NONE,
         NonAlphabetic = AINPUT_KEYBOARD_TYPE_NON_ALPHABETIC,
         Alphabetic = AINPUT_KEYBOARD_TYPE_ALPHABETIC,
     };
+
+    enum class AndroidInputMotionRange
+    {
+        X = AINPUT_MOTION_RANGE_X,
+        Y = AINPUT_MOTION_RANGE_Y,
+        Pressure = AINPUT_MOTION_RANGE_PRESSURE,
+        Size = AINPUT_MOTION_RANGE_SIZE,
+        TouchMajor = AINPUT_MOTION_RANGE_TOUCH_MAJOR,
+        TouchMinor = AINPUT_MOTION_RANGE_TOUCH_MINOR,
+        ToolMajor = AINPUT_MOTION_RANGE_TOOL_MAJOR,
+        ToolMinor = AINPUT_MOTION_RANGE_TOOL_MINOR,
+        Orientation = AINPUT_MOTION_RANGE_ORIENTATION,
+    };
 }
 
-#elif defined(SYSTEM_PLATFORM_WIN32)
-
-    #include "System/Android/Flags/AndroidKeyCodesFlags.h"
-    #include "System/Windows/Flags/WindowsMessagesFlags.h"
+#else  // !SYSTEM_PLATFORM_ANDROID
 
 namespace System
 {
@@ -247,14 +265,14 @@ namespace System
         ShiftOn = 0x01,
         ShiftLeftOn = 0x40,
         ShiftRightOn = 0x80,
-        SymOn = 0x04,
+        SystemOn = 0x04,
         FunctionOn = 0x08,
         CtrlOn = 0x1000,
         CtrlLeftOn = 0x2000,
         CtrlRightOn = 0x4000,
-        On = 0x10000,
-        LeftOn = 0x20000,
-        RightOn = 0x40000,
+        MetaOn = 0x10000,
+        MetaLeftOn = 0x20000,
+        MetaRightOn = 0x40000,
         CapsLockOn = 0x100000,
         NumLockOn = 0x200000,
         ScrollLockOn = 0x400000,
@@ -267,6 +285,8 @@ namespace System
         Focus = 3
     };
 
+    #if defined(SYSTEM_PLATFORM_WIN32)
+
     enum class AndroidKeyEventAction
     {
         Down = EnumCastUnderlying(WindowsMessages::KeyDown),
@@ -274,7 +294,18 @@ namespace System
         Multiple = 2
     };
 
-    enum class AndroidKeyEvent
+    #else  // !SYSTEM_PLATFORM_WIN32
+
+    enum class AndroidKeyEventAction
+    {
+        Down = 0,
+        Up = 1,
+        Multiple = 2
+    };
+
+    #endif  // SYSTEM_PLATFORM_WIN32
+
+    enum class AndroidKeyEventFlag
     {
         Null = 0,
         WokeHere = 0x1,
@@ -290,10 +321,12 @@ namespace System
         Fallback = 0x400,
     };
 
+    #if defined(SYSTEM_PLATFORM_WIN32)
+
     enum class AndroidMotionEventAction
     {
-        Mask = 0xff,
-        PointerIndexMask = 0xff00,
+        Mask = 0xFF,
+        PointerIndexMask = 0xFF00,
         Down = EnumCastUnderlying(WindowsMessages::LButtonDown),
         Up = EnumCastUnderlying(WindowsMessages::LButtonUp),
         Move = EnumCastUnderlying(WindowsMessages::MouseMove),
@@ -309,199 +342,12 @@ namespace System
         ButtonRelease = -12
     };
 
-    enum class AndroidMotionEvent
-    {
-        WindowIsObscured = 0x1,
-    };
-
-    enum class AndroidMotionEventEdge
-    {
-        None = 0,
-        Top = 0x01,
-        Bottom = 0x02,
-        Left = 0x04,
-        Right = 0x08
-    };
-
-    enum class AndroidMotionEventAxis
-    {
-        X = 0,
-        Y = 1,
-        Pressure = 2,
-        Size = 3,
-        TouchMajor = 4,
-        TouchMinor = 5,
-        ToolMajor = 6,
-        ToolMinor = 7,
-        Orientation = 8,
-        VScroll = 9,
-        HScroll = 10,
-        Z = 11,
-        RX = 12,
-        RY = 13,
-        RZ = 14,
-        HatX = 15,
-        HatY = 16,
-        LTrigger = 17,
-        RTrigger = 18,
-        Throttle = 19,
-        Rudder = 20,
-        Wheel = 21,
-        Gas = 22,
-        Brake = 23,
-        Distance = 24,
-        Tilt = 25,
-        Scroll = 26,
-        RelativeX = 27,
-        RelativeY = 28,
-        Generic1 = 32,
-        Generic2 = 33,
-        Generic3 = 34,
-        Generic4 = 35,
-        Generic5 = 36,
-        Generic6 = 37,
-        Generic7 = 38,
-        Generic8 = 39,
-        Generic9 = 40,
-        Generic10 = 41,
-        Generic11 = 42,
-        Generic12 = 43,
-        Generic13 = 44,
-        Generic14 = 45,
-        Generic15 = 46,
-        Generic16 = 47,
-    };
-
-    enum class AndroidMotionEventButton
-    {
-        Primary = 1 << 0,
-        Secondary = 1 << 1,
-        Tertiary = 1 << 2,
-        Back = 1 << 3,
-        Forward = 1 << 4,
-        StylusPrimary = 1 << 5,
-        StylusSecondary = 1 << 6,
-    };
-
-    enum class AndroidMotionEventTool
-    {
-        Unknown = 0,
-        Finger = 1,
-        Stylus = 2,
-        Mouse = 3,
-        Eraser = 4,
-        Palm = 5
-    };
-
-    enum class AndroidInputSourceClass
-    {
-        Mask = 0x000000ff,
-
-        None = 0x00000000,
-        Button = 0x00000001,
-        Pointer = 0x00000002,
-        Navigation = 0x00000004,
-        Position = 0x00000008,
-        Joystick = 0x00000010,
-    };
-
-    enum class AndroidInputSource : uint32_t
-    {
-        Unknown = 0x00000000,
-
-        Keyborad = 0x00000100 | EnumCastUnderlying(AndroidInputSourceClass::Button),
-        Dpad = 0x00000200 | EnumCastUnderlying(AndroidInputSourceClass::Button),
-        Gamepad = 0x00000400 | EnumCastUnderlying(AndroidInputSourceClass::Button),
-        Touchscreen = 0x00001000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
-        Mouse = 0x00002000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
-        Stylus = 0x00004000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
-        BluetoothStylus = 0x00008000 | Stylus,
-        Trackball = 0x00010000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
-        MouseRelative = 0x00020000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
-        Touchpad = 0x00100000 | EnumCastUnderlying(AndroidInputSourceClass::Position),
-        Navigation = 0x00200000 | EnumCastUnderlying(AndroidInputSourceClass::None),
-        Joystick = 0x01000000 | EnumCastUnderlying(AndroidInputSourceClass::Joystick),
-        RotaryEncoder = 0x00400000 | EnumCastUnderlying(AndroidInputSourceClass::None),
-
-        Any = 0xffffff00,
-    };
-
-    enum class AndroidInputKeyboard
-    {
-        None = 0,
-        NonAlphabetic = 1,
-        Alphabetic = 2,
-    };
-}
-
-#else  // !SYSTEM_PLATFORM_ANDROID && !SYSTEM_PLATFORM_WIN32
-
-namespace System
-{
-    enum class AndroidKeyState
-    {
-        UnKnown = -1,
-        Up = 0,
-        Down = 1,
-        Virtual = 2,
-    };
-
-    enum class AndroidMeta
-    {
-        None = 0,
-        AltOn = 0x02,
-        AltLeftOn = 0x10,
-        AltRightOn = 0x20,
-        ShiftOn = 0x01,
-        ShiftLeftOn = 0x40,
-        ShiftRightOn = 0x80,
-        SymOn = 0x04,
-        FunctionOn = 0x08,
-        CtrlOn = 0x1000,
-        CtrlLeftOn = 0x2000,
-        CtrlRightOn = 0x4000,
-        On = 0x10000,
-        LeftOn = 0x20000,
-        RightOn = 0x40000,
-        CapsLockOn = 0x100000,
-        NumLockOn = 0x200000,
-        ScrollLockOn = 0x400000,
-    };
-
-    enum class AndroidInputEventType
-    {
-        Key = 1,
-        Motion = 2,
-        Focus = 3
-    };
-
-    enum class AndroidKeyEventAction
-    {
-        Down = 0,
-        Up = 1,
-        Multiple = 2
-    };
-
-    enum class AndroidKeyEvent
-    {
-        Null = 0,
-        WokeHere = 0x1,
-        SoftKeyboard = 0x2,
-        KeepTouchMode = 0x4,
-        FromSystem = 0x8,
-        EditorAction = 0x10,
-        Canceled = 0x20,
-        VirtualHardKey = 0x40,
-        LongPress = 0x80,
-        CanceledLongPress = 0x100,
-        Tracking = 0x200,
-        Fallback = 0x400,
-    };
+    #else  // !SYSTEM_PLATFORM_WIN32
 
     enum class AndroidMotionEventAction
     {
-        Mask = 0xff,
-        PointerIndexMask = 0xff00,
+        Mask = 0xFF,
+        PointerIndexMask = 0xFF00,
         Down = 0,
         Up = 1,
         Move = 2,
@@ -517,12 +363,14 @@ namespace System
         ButtonRelease = 12
     };
 
-    enum class AndroidMotionEvent
+    #endif  // SYSTEM_PLATFORM_WIN32
+
+    enum class AndroidMotionEventFlag
     {
         WindowIsObscured = 0x1,
     };
 
-    enum class AndroidMotionEventEdge
+    enum class AndroidMotionEventEdgeFlag
     {
         None = 0,
         Top = 0x01,
@@ -542,16 +390,16 @@ namespace System
         ToolMajor = 6,
         ToolMinor = 7,
         Orientation = 8,
-        VScroll = 9,
-        HScroll = 10,
+        VerticalScroll = 9,
+        HorizontalScroll = 10,
         Z = 11,
         RX = 12,
         RY = 13,
         RZ = 14,
         HatX = 15,
         HatY = 16,
-        LTrigger = 17,
-        RTrigger = 18,
+        LeftTrigger = 17,
+        RightTrigger = 18,
         Throttle = 19,
         Rudder = 20,
         Wheel = 21,
@@ -591,7 +439,7 @@ namespace System
         StylusSecondary = 1 << 6,
     };
 
-    enum class AndroidMotionEventTool
+    enum class AndroidMotionEventToolType
     {
         Unknown = 0,
         Finger = 1,
@@ -603,7 +451,7 @@ namespace System
 
     enum class AndroidInputSourceClass
     {
-        Mask = 0x000000ff,
+        Mask = 0x000000FF,
 
         None = 0x00000000,
         Button = 0x00000001,
@@ -631,14 +479,27 @@ namespace System
         Joystick = 0x01000000 | EnumCastUnderlying(AndroidInputSourceClass::Joystick),
         RotaryEncoder = 0x00400000 | EnumCastUnderlying(AndroidInputSourceClass::None),
 
-        Any = 0xffffff00,
+        Any = 0XFFFFFF00,
     };
 
-    enum class AndroidInputKeyboard
+    enum class AndroidInputKeyboardType
     {
         None = 0,
         NonAlphabetic = 1,
         Alphabetic = 2,
+    };
+
+    enum class AndroidInputMotionRange
+    {
+        X = EnumCastUnderlying(AndroidMotionEventAxis::X),
+        Y = EnumCastUnderlying(AndroidMotionEventAxis::Y),
+        Pressure = EnumCastUnderlying(AndroidMotionEventAxis::Pressure),
+        Size = EnumCastUnderlying(AndroidMotionEventAxis::Size),
+        TouchMajor = EnumCastUnderlying(AndroidMotionEventAxis::TouchMajor),
+        TouchMinor = EnumCastUnderlying(AndroidMotionEventAxis::TouchMinor),
+        ToolMajor = EnumCastUnderlying(AndroidMotionEventAxis::ToolMajor),
+        ToolMinor = EnumCastUnderlying(AndroidMotionEventAxis::ToolMinor),
+        Orientation = EnumCastUnderlying(AndroidMotionEventAxis::Orientation),
     };
 }
 
@@ -646,7 +507,7 @@ namespace System
 
 namespace System
 {
-    ENUM_ANDABLE_OPERATOR_DEFINE(AndroidKeyEvent)
+    ENUM_ANDABLE_OPERATOR_DEFINE(AndroidKeyEventFlag)
 }
 
 #endif  // SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H

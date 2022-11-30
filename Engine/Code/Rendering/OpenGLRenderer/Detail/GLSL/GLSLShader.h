@@ -12,6 +12,8 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "Rendering/OpenGLRenderer/Flags/ReferenceType.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Shaders/Detail/ShaderImpl.h"
 
@@ -24,18 +26,21 @@ namespace Rendering
         using ParentType = ShaderImpl;
 
     public:
+        GLSLShader(const GLSLReflection& reflector, ReferenceType referenceType);
+
+    public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Set(const std::string& textureName, const TextureSingleSharedPtr& texture, const std::string& samplerName, const SamplerStateSharedPtr& state) override;
         void Set(const std::string& textureName, const TextureArraySharedPtr& texture, const std::string& samplerName, const SamplerStateSharedPtr& state) override;
 
-        NODISCARD bool IsValid(const ShaderData& goal, const ConstantBuffer* resource) const override;
-        NODISCARD bool IsValid(const ShaderData& goal, const TextureBuffer* resource) const override;
-        NODISCARD bool IsValid(const ShaderData& goal, const StructuredBuffer* resource) const override;
-        NODISCARD bool IsValid(const ShaderData& goal, const RawBuffer* resource) const override;
+        NODISCARD bool IsValid(const ShaderData& goal, const ConstantBuffer* resource) const noexcept override;
+        NODISCARD bool IsValid(const ShaderData& goal, const TextureBuffer* resource) const noexcept override;
+        NODISCARD bool IsValid(const ShaderData& goal, const StructuredBuffer* resource) const noexcept override;
+        NODISCARD bool IsValid(const ShaderData& goal, const RawBuffer* resource) const noexcept override;
         NODISCARD bool IsValid(const ShaderData& goal, const TextureSingle* resource) const override;
         NODISCARD bool IsValid(const ShaderData& goal, const TextureArray* resource) const override;
-        NODISCARD bool IsValid(const ShaderData& goal, const SamplerState* state) const override;
+        NODISCARD bool IsValid(const ShaderData& goal, const SamplerState* state) const noexcept override;
 
         NODISCARD ShaderSharedPtr Clone() const override;
     };

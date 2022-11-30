@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 16:22)
+///	引擎测试版本：0.8.1.4 (2022/11/05 19:05)
 
 #include "WindowsRegisterTesting.h"
 #include "System/Windows/WindowsRegister.h"

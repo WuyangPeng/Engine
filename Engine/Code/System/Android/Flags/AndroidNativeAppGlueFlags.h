@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:53)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:18)
 
 #ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H
@@ -16,16 +16,44 @@
 
     #include <android_native_app_glue.h>
 
+#elif defined(SYSTEM_PLATFORM_WIN32)
+
+    #include "System/Helper/EnumCast.h"
+    #include "System/Windows/Flags/WindowsMessagesFlags.h"
+
+#endif  // SYSTEM_PLATFORM_ANDROID
+
+#ifdef SYSTEM_PLATFORM_ANDROID
+
 namespace System
 {
-    enum class LooperID
+    enum class LooperId
     {
         Main = LOOPER_ID_MAIN,
         Input = LOOPER_ID_INPUT,
         User = LOOPER_ID_USER,
     };
+}
 
-    enum class AppCmdType
+#else  // !SYSTEM_PLATFORM_ANDROID
+
+namespace System
+{
+    enum class LooperId
+    {
+        Main = 1,
+        Input = 2,
+        User = 3,
+    };
+}
+
+#endif  // SYSTEM_PLATFORM_ANDROID
+
+#ifdef SYSTEM_PLATFORM_ANDROID
+
+namespace System
+{
+    enum class AppCommandType
     {
         InputChanged = APP_CMD_INPUT_CHANGED,
         InitWindow = APP_CMD_INIT_WINDOW,
@@ -48,19 +76,9 @@ namespace System
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-    #include "System/Helper/EnumCast.h"
-    #include "System/Windows/Flags/WindowsMessagesFlags.h"
-
 namespace System
 {
-    enum class LooperID
-    {
-        Main = 1,
-        Input = 2,
-        User = 3,
-    };
-
-    enum class AppCmdType
+    enum class AppCommandType
     {
         InputChanged = 0,
         InitWindow = EnumCastUnderlying(WindowsMessages::Create),
@@ -85,14 +103,7 @@ namespace System
 
 namespace System
 {
-    enum class LooperID
-    {
-        Main = 1,
-        Input = 2,
-        User = 3,
-    };
-
-    enum class AppCmdType
+    enum class AppCommandType
     {
         InputChanged = 0,
         InitWindow = 1,
@@ -112,6 +123,7 @@ namespace System
         Destory = 15,
     };
 }
-#endif  // ANDROID
+
+#endif  // SYSTEM_PLATFORM_ANDROID
 
 #endif  // SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H

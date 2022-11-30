@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/27 22:54)
+///	引擎版本：0.8.1.4 (2022/11/18 23:49)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H
@@ -56,8 +56,6 @@
 #include SYSTEM_WARNING_DISABLE(26812)
 #include SYSTEM_WARNING_DISABLE(26814)
 #include SYSTEM_WARNING_DISABLE(26819)
-
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>

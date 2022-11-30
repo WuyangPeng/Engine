@@ -66,7 +66,7 @@ namespace Network
 
     using ACEInetAddressType = ACEInetAddress;
     using BoostInetAddressType = boost::asio::ip::tcp::endpoint;
-    using WinSockInetAddressType = System::WinSockAddrIn;
+    using WinSockInetAddressType = System::WinSockInternetAddress;
 
     using ACESockStreamType = ACESockStreamNativeType;
     using BoostSockStreamType = boost::asio::ip::tcp::socket;

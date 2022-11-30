@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/29 19:27)
+///	引擎版本：0.8.1.4 (2022/11/17 22:18)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_TOOLS_USING_H
 #define SYSTEM_FILE_MANAGE_FILE_TOOLS_USING_H
@@ -39,12 +39,6 @@ namespace System
     using FileEndOfFileInfoTypePtr = PFILE_END_OF_FILE_INFO;
     using FileIOPriorityHintInfoType = FILE_IO_PRIORITY_HINT_INFO;
     using FileIOPriorityHintInfoTypePtr = PFILE_IO_PRIORITY_HINT_INFO;
-
-    using WindowOverlapped = OVERLAPPED;
-    using WindowOverlappedPtr = LPOVERLAPPED;
-    using WindowOverlappedCompletionRoutine = LPOVERLAPPED_COMPLETION_ROUTINE;
-    using WindowOverlappedEntry = OVERLAPPED_ENTRY;
-    using WindowOverlappedEntryPtr = LPOVERLAPPED_ENTRY;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -159,35 +153,6 @@ namespace System
         FilePriorityHint PriorityHint;
     };
     using FileIOPriorityHintInfoTypePtr = FileIOPriorityHintInfoType*;
-
-    struct WindowOverlapped
-    {
-        uint64_t Internal;
-        uint64_t InternalHigh;
-        union
-        {
-            struct
-            {
-                uint32_t Offset;
-                uint32_t OffsetHigh;
-            } DUMMYSTRUCTNAME;
-            void* Pointer;
-        } DUMMYUNIONNAME;
-
-        WindowsHandle hEvent;
-    };
-    using WindowOverlappedPtr = WindowOverlapped*;
-
-    using WindowOverlappedCompletionRoutine = void (*)(uint32_t errorCode, uint32_t numberOfBytesTransfered, void* overlapped);
-
-    struct WindowOverlappedEntry
-    {
-        size_t lpCompletionKey;
-        WindowOverlappedPtr lpOverlapped;
-        size_t Internal;
-        uint32_t dwNumberOfBytesTransferred;
-    };
-    using WindowOverlappedEntryPtr = WindowOverlappedEntry*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

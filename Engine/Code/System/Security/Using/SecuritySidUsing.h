@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 10:44)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:52)
 
 #ifndef SYSTEM_SECURITY_SECURITY_SID_USING_H
 #define SYSTEM_SECURITY_SECURITY_SID_USING_H
@@ -24,8 +24,8 @@ namespace System
     using SecuritySIDPtr = PSID;
     using SecurityWellKnownSidType = WELL_KNOWN_SID_TYPE;
 
-    constexpr WindowsDWord g_SecurityMaxSidSize{ SECURITY_MAX_SID_SIZE };
-    constexpr WindowsDWord g_SecuritySidSubAuthorities{ SID_MAX_SUB_AUTHORITIES };
+    constexpr WindowsDWord gSecurityMaxSidSize{ SECURITY_MAX_SID_SIZE };
+    constexpr WindowsDWord gSecuritySidSubAuthorities{ SID_MAX_SUB_AUTHORITIES };
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -156,8 +156,8 @@ namespace System
         WinAccountProtectedUsersSid = 107,
     };
 
-    constexpr WindowsDWord g_SecuritySidSubAuthorities{ 15 };
-    constexpr WindowsDWord g_SecurityMaxSidSize{ (sizeof(SecuritySID) - sizeof(WindowsDWord) + (g_SecuritySidSubAuthorities * sizeof(WindowsDWord))) };
+    constexpr WindowsDWord gSecuritySidSubAuthorities{ 15 };
+    constexpr WindowsDWord gSecurityMaxSidSize{ (sizeof(SecuritySID) - sizeof(WindowsDWord) + (gSecuritySidSubAuthorities * sizeof(WindowsDWord))) };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

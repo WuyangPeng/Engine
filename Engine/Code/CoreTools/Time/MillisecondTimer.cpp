@@ -51,7 +51,7 @@ uint64_t CoreTools::MillisecondTimer::GetElapsedTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetElapsedTimeInMicroseconds() / System::g_Millisecond;
+    return impl->GetElapsedTimeInMicroseconds() / System::gMillisecond;
 }
 
 bool CoreTools::MillisecondTimer::IsElapsed() const noexcept
@@ -70,7 +70,7 @@ uint64_t CoreTools::MillisecondTimer::GetNowTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return impl->GetNowTimeInMicroseconds() / System::g_Millisecond;
+    return impl->GetNowTimeInMicroseconds() / System::gMillisecond;
 }
 
 void CoreTools::MillisecondTimer::ReTiming(uint64_t millisecond)

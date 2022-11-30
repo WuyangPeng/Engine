@@ -148,7 +148,7 @@ int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(g_Assert < 4 || g_
 
     CORE_TOOLS_ASSERTION_4(false, "CWriteFileManageImpl½ûÖ¹µ÷ÓÃGetCharacter£¡");
 
-    return System::g_CFileError;
+    return System::gCFileError;
 }
 
 bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)

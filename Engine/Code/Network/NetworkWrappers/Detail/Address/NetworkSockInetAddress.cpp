@@ -25,9 +25,9 @@ using namespace std::literals;
 Network::NetworkSockInetAddress::NetworkSockInetAddress(const string& hostName, int port)
     : inetAddress{}, addressName{ hostName }
 {
-    inetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
+    inetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Internet));
     inetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
-    inetAddress.sin_addr.s_addr = System::GetInetAddr(hostName.c_str());
+    inetAddress.sin_addr.s_addr = System::GetInternetAddress(hostName.c_str());
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -35,7 +35,7 @@ Network::NetworkSockInetAddress::NetworkSockInetAddress(const string& hostName, 
 Network::NetworkSockInetAddress::NetworkSockInetAddress(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : inetAddress{}, addressName{ "0.0.0.0" }
 {
-    inetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
+    inetAddress.sin_family = boost::numeric_cast<uint16_t>(System::EnumCastUnderlying(System::AddressFamilies::Internet));
     inetAddress.sin_port = System::GetHostToNetShort(0);
     inetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::gInAddrAny);
 
@@ -45,7 +45,7 @@ Network::NetworkSockInetAddress::NetworkSockInetAddress(MAYBE_UNUSED CoreTools::
 Network::NetworkSockInetAddress::NetworkSockInetAddress(int port)
     : inetAddress{}, addressName{ "0.0.0.0" }
 {
-    inetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Inet));
+    inetAddress.sin_family = boost::numeric_cast<int16_t>(System::EnumCastUnderlying(System::AddressFamilies::Internet));
     inetAddress.sin_port = System::GetHostToNetShort(boost::numeric_cast<uint16_t>(port));
     inetAddress.sin_addr.s_addr = System::GetHostToNetLong(System::gInAddrAny);
 

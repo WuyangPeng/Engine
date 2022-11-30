@@ -5,20 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:19)
+///	引擎测试版本：0.8.1.4 (2022/11/29 23:20)
 
 #include "FormatStringMessageUseVaListAndUseBufferTesting.h"
 #include "System/CharacterString/FormatErrorMessage.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/MemoryTools/LocalTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <array>
-
-using std::array;
-using namespace std::literals;
 
 System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseVaListAndUseBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -35,43 +28,40 @@ void System::FormatStringMessageUseVaListAndUseBufferTesting::DoRunUnitTest()
 
 void System::FormatStringMessageUseVaListAndUseBufferTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(FormatStringUseVaListAndUseBufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(FormatStringMessageUseVaListAndUseBufferTest);
 }
 
-void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringUseVaListAndUseBufferTest()
+void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseVaListAndUseBufferTest()
 {
-    const auto message = SYSTEM_TEXT("%1!*.*s! %3 %4!*s!"s);
-    ExecuteFormatStringUseVaListAndUseBufferTest(message.c_str(), 4, 2, SYSTEM_TEXT("Bill"), SYSTEM_TEXT("Bob"), 6, SYSTEM_TEXT("Bill"));
+    const auto message = GetMessageVaList();
+    FormatStringMessageUseIndefiniteParameterTest(message.c_str(), 4, 2, SYSTEM_TEXT("Bill"), SYSTEM_TEXT("Bob"), 6, SYSTEM_TEXT("Bill"));
 }
 
-void System::FormatStringMessageUseVaListAndUseBufferTesting::ExecuteFormatStringUseVaListAndUseBufferTest(const TChar* message, ...)
+void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseIndefiniteParameterTest(const TChar* message, ...)
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26492)
 
-    va_list arguments{};
-    va_start(arguments, message);
-
-    ASSERT_NOT_THROW_EXCEPTION_2(DoExecuteFormatStringUseVaListAndUseBufferTest, message, arguments);
-
-    va_end(arguments);
+    va_list vaArguments{};
+    va_start(vaArguments, message);
 
 #include STSTEM_WARNING_POP
+
+    ASSERT_NOT_THROW_EXCEPTION_2(FormatStringMessageUseArgumentsTest, message, vaArguments);
+
+    va_end(vaArguments);
 }
 
-void System::FormatStringMessageUseVaListAndUseBufferTesting::DoExecuteFormatStringUseVaListAndUseBufferTest(const TChar* message, va_list arguments)
+void System::FormatStringMessageUseVaListAndUseBufferTesting::FormatStringMessageUseArgumentsTest(const TChar* message, va_list vaArguments)
 {
-    constexpr auto bufferSize = 256;
+    BufferType buffer{};
+    const auto size = FormatStringMessage(message, buffer.data(), bufferSize - 1, &vaArguments);
 
-    array<TChar, bufferSize> buffer{};
-    String helperResult{ SYSTEM_TEXT("  Bi Bob   Bill") };
-
-    const auto size = FormatStringMessage(message, buffer.data(), boost::numeric_cast<WindowsDWord>(buffer.size()), &arguments);
-
-    ASSERT_TRUE(0 < size && size < bufferSize);
+    ASSERT_LESS(0u, size);
+    ASSERT_LESS(size, bufferSize);
 
     String testMessage{ buffer.data() };
     ASSERT_EQUAL(testMessage.size(), size);
-    ASSERT_EQUAL(testMessage, helperResult);
+    ASSERT_EQUAL(testMessage, GetMessageVaListResult());
 }

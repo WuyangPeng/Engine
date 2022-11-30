@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 19:11)
+///	引擎测试版本：0.8.1.3 (2022/11/01 21:33)
 
 #ifndef SYSTEM_SECURITY_SUITE_SECURITY_DESCRIPTOR_CONTROL_TESTING_H
 #define SYSTEM_SECURITY_SUITE_SECURITY_DESCRIPTOR_CONTROL_TESTING_H
@@ -35,10 +35,10 @@ namespace System
         void ControlTest();
 
     private:
-        using SecurityDescriptorControlBitsFlagsCollection = std::vector<SecurityDescriptorControlBits>;
+        using SecurityDescriptorControlBitsFlagsContainer = std::vector<SecurityDescriptorControlBits>;
 
     private:
-        SecurityDescriptorControlBitsFlagsCollection securityDescriptorControlBitsFlags;
+        SecurityDescriptorControlBitsFlagsContainer securityDescriptorControlBitsFlags;
     };
 }
 

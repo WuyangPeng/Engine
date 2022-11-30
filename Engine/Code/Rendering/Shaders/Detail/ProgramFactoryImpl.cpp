@@ -33,6 +33,20 @@ Rendering::ProgramFactoryImpl::ProgramFactoryImpl(CoreTools::DisableNotThrow dis
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
+Rendering::ProgramFactoryImpl::ProgramFactoryImpl(const std::string& version, const std::string& vsEntry, const std::string& psEntry, const std::string& gsEntry, const std::string& csEntry, int flags)
+    : version{ version },
+      vsEntry{ vsEntry },
+      psEntry{ psEntry },
+      gsEntry{ gsEntry },
+      csEntry{ csEntry },
+      defines{ CoreTools::DisableNotThrow::Disable },
+      flags{ flags },
+      definesStack{},
+      flagsStack{}
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
 CLASS_INVARIANT_STUB_DEFINE(Rendering, ProgramFactoryImpl)
 
 Rendering::ProgramFactoryImpl::VisualProgramSharedPtr Rendering::ProgramFactoryImpl::CreateFromFiles(const std::string& vsFile, const std::string& psFile, const std::string& gsFile)
@@ -143,4 +157,32 @@ Rendering::ProgramFactoryImpl::ProgramFactorySharedPtr Rendering::ProgramFactory
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("Program工厂类型未定义。"s));
+}
+
+std::string Rendering::ProgramFactoryImpl::GetVersion() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return version;
+}
+
+int Rendering::ProgramFactoryImpl::GetDefinesSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return defines.GetSize();
+}
+
+Rendering::ProgramFactoryImpl::ContainerConstIter Rendering::ProgramFactoryImpl::begin() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return defines.begin();
+}
+
+Rendering::ProgramFactoryImpl::ContainerConstIter Rendering::ProgramFactoryImpl::end() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return defines.end();
 }

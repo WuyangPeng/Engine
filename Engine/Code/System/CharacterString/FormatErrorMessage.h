@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:39)
+///	引擎版本：0.8.1.4 (2022/11/13 10:38)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_H
@@ -16,12 +16,14 @@
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "System/Helper/WindowsMacro.h"
 #include "System/SystemOutput/Fwd/SystemOutputDataFwd.h"
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
 
+/// 格式化错误消息。
 namespace System
 {
-    // 格式化错误消息。
+    NODISCARD SYSTEM_DEFAULT_DECLARE TChar* ReinterpretCast(WindowsHLocal& errorMessage) noexcept;
 
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(FormatMessageOption flag,
                                                                      FormatMessageWidth widthFlag,
@@ -35,32 +37,18 @@ namespace System
     // errorMessage分配的内存需要使用LocalMemoryFree进行释放。
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, WindowError lastError) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, DynamicLinkModule module, WindowError lastError) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(DynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowsHLocal& errorMessage, ConstDynamicLinkModule module, WindowError lastError) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatErrorMessage(ConstDynamicLinkModule module, WindowError lastError, TChar* buffer, WindowsDWord size) noexcept;
+    NODISCARD String SYSTEM_DEFAULT_DECLARE FormatErrorMessage(WindowError lastError);
 
     // resultMessage分配的内存需要使用LocalMemoryFree进行释放。
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, WindowsPtrDWord* arguments) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, WindowsDWordPtrSizeType* arguments) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, TChar* buffer, WindowsDWord size, va_list* arguments) noexcept;
-    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, WindowsPtrDWord* arguments) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, WindowsDWordPtrSizeType* arguments) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE FormatStringMessage(const TChar* message, WindowsHLocal& resultMessage, va_list* arguments) noexcept;
 
     NODISCARD constexpr WindowsDWord MakeSoftwareException(Severity severity, Facility facility, WindowsDWord exception) noexcept
     {
-        // 异常码
-        constexpr WindowsDWord exceptionShift{ 0 };
-
-        // 设备码
-        constexpr WindowsDWord facilityShift{ 16 };
-
-        // 保留的(0)
-        constexpr WindowsDWord reservedShift{ 28 };
-
-        // MS(0) 或 自定义(1)
-        constexpr WindowsDWord customerShift{ 29 };
-
-        // 严重性
-        constexpr WindowsDWord severityShift{ 30 };
-
         return (EnumCastUnderlying(severity) << severityShift) |
                (1 << customerShift) |
                (0 << reservedShift) |

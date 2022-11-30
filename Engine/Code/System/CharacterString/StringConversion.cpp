@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:46)
+///	引擎版本：0.8.1.4 (2022/11/13 11:00)
 
 #include "System/SystemExport.h"
 
@@ -14,10 +14,14 @@
 #include "Flags/CodePageFlags.h"
 #include "Flags/StringConversionFlags.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
 #ifndef SYSTEM_PLATFORM_WIN32
+
+    #include "Data/Locale.h"
 
     #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -26,9 +30,10 @@
     #else  // !SYSTEM_PLATFORM_ANDROID
 
         #include <cstdlib>
-        #include <locale>
 
     #endif  // SYSTEM_PLATFORM_ANDROID
+
+    #include <gsl/util>
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
@@ -36,14 +41,6 @@
 
 namespace System
 {
-    NODISCARD const char* SYSTEM_HIDDEN_DECLARE GetLocale(CodePage codePage) noexcept
-    {
-        if (codePage == CodePage::UTF8)
-            return "zh_CN.utf8";
-        else
-            return "chs";
-    }
-
     NODISCARD int SYSTEM_HIDDEN_DECLARE IncreaseNullNumber(int readSize) noexcept
     {
         // 错误统一返回0
@@ -55,16 +52,33 @@ namespace System
 
     NODISCARD int SYSTEM_HIDDEN_DECLARE MultiByteToWideCharUseMbstowcs(CodePage codePage, const char* multiByte, wchar_t* wideChar, int wideCharLength) noexcept
     {
-        auto currentLocale = setlocale(LC_ALL, nullptr);
+        Locale locale{ codePage };
 
-        setlocale(LC_ALL, GetLocale(codePage));
-
-        auto readSize = static_cast<int>(::mbstowcs(wideChar, multiByte, wideCharLength));
-
-        setlocale(LC_ALL, currentLocale);
+        const auto readSize = gsl::narrow_cast<int>(::mbstowcs(wideChar, multiByte, wideCharLength));
 
         // 返回值包括空终止符
         return IncreaseNullNumber(readSize);
+    }
+
+    NODISCARD int SYSTEM_HIDDEN_DECLARE WideCharToMultiByteUseWcstombs(CodePage codePage, const wchar_t* wideChar, char* multiByte, int multiByteLength) noexcept
+    {
+        Locale locale{ codePage };
+
+        const auto readSize = gsl::narrow_cast<int>(::wcstombs(multiByte, wideChar, multiByteLength));
+
+        // 返回值包括空终止符
+        return IncreaseNullNumber(readSize);
+    }
+
+    template <typename T>
+    NODISCARD ComparesStringReturn Compares(const T& lhs, const T& rhs)
+    {
+        if (lhs < rhs)
+            return ComparesStringReturn::LessThan;
+        else if (rhs < lhs)
+            return ComparesStringReturn::GreaterThan;
+        else
+            return ComparesStringReturn::Equal;
     }
 }
 
@@ -105,27 +119,6 @@ int System::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
-
-#ifndef SYSTEM_PLATFORM_WIN32
-
-namespace System
-{
-    NODISCARD int SYSTEM_HIDDEN_DECLARE WideCharToMultiByteUseWcstombs(CodePage codePage, const wchar_t* wideChar, char* multiByte, int multiByteLength) noexcept
-    {
-        auto currentLocale = setlocale(LC_ALL, nullptr);
-
-        setlocale(LC_ALL, GetLocale(codePage));
-
-        auto readSize = static_cast<int>(::wcstombs(multiByte, wideChar, multiByteLength));
-
-        setlocale(LC_ALL, currentLocale);
-
-        // 返回值包括空终止符
-        return IncreaseNullNumber(readSize);
-    }
-}
-
-#endif  // SYSTEM_PLATFORM_WIN32
 
 int System::WideCharConversionMultiByte(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
 {
@@ -177,101 +170,53 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 
 System::ComparesStringReturn System::CompareStringUseLocale(LanguageLocale locale,
                                                             Compares comparesFlag,
-                                                            const TChar* lhsString,
-                                                            int lhsCount,
-                                                            const TChar* rhsString,
-                                                            int rhsCount) noexcept
+                                                            const String& lhsString,
+                                                            const String& rhsString)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ComparesStringReturn>(::CompareString(EnumCastUnderlying(locale), EnumCastUnderlying(comparesFlag), lhsString, lhsCount, rhsString, rhsCount));
+    return UnderlyingCastEnum<ComparesStringReturn>(::CompareString(EnumCastUnderlying(locale), EnumCastUnderlying(comparesFlag), lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size())));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(locale, comparesFlag);
 
-    const auto minCount = std::min(lhsCount, rhsCount);
-    for (auto i = 0; i < minCount; ++i)
-    {
-        if (lhsString[i] < rhsString[i])
-            return ComparesStringReturn::LessThan;
-        else if (rhsString[i] < lhsString[i])
-            return ComparesStringReturn::GreaterThan;
-    }
-
-    if (lhsCount < rhsCount)
-        return ComparesStringReturn::LessThan;
-    else if (rhsCount < lhsCount)
-        return ComparesStringReturn::GreaterThan;
-    else
-        return ComparesStringReturn::Equal;
+    return Compares(lhsString, rhsString);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 System::ComparesStringReturn System::CompareStringUseLocale(const wchar_t* localeName,
                                                             Compares comparesFlag,
-                                                            const wchar_t* lhsString,
-                                                            int lhsCount,
-                                                            const wchar_t* rhsString,
-                                                            int rhsCount) noexcept
+                                                            const std::wstring& lhsString,
+                                                            const std::wstring& rhsString)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringEx(localeName, EnumCastUnderlying(comparesFlag), lhsString, lhsCount, rhsString, rhsCount, nullptr, nullptr, 0));
+    return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringEx(localeName, EnumCastUnderlying(comparesFlag), lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size()), nullptr, nullptr, 0));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(localeName, comparesFlag);
 
-    const auto minCount = std::min(lhsCount, rhsCount);
-    for (auto i = 0; i < minCount; ++i)
-    {
-        if (lhsString[i] < rhsString[i])
-            return ComparesStringReturn::LessThan;
-        else if (rhsString[i] < lhsString[i])
-            return ComparesStringReturn::GreaterThan;
-    }
-
-    if (lhsCount < rhsCount)
-        return ComparesStringReturn::LessThan;
-    else if (rhsCount < lhsCount)
-        return ComparesStringReturn::GreaterThan;
-    else
-        return ComparesStringReturn::Equal;
+    return Compares(lhsString, rhsString);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ComparesStringReturn System::CompareStringOrdinalUseBinary(const wchar_t* lhsString,
-                                                                   int lhsCount,
-                                                                   const wchar_t* rhsString,
-                                                                   int rhsCount,
-                                                                   bool ignoreCase) noexcept
+System::ComparesStringReturn System::CompareStringOrdinalUseBinary(const std::wstring& lhsString,
+                                                                   const std::wstring& rhsString,
+                                                                   bool ignoreCase)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringOrdinal(lhsString, lhsCount, rhsString, rhsCount, BoolConversion(ignoreCase)));
+    return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringOrdinal(lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size()), BoolConversion(ignoreCase)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(ignoreCase);
 
-    const auto minCount = std::min(lhsCount, rhsCount);
-    for (auto i = 0; i < minCount; ++i)
-    {
-        if (lhsString[i] < rhsString[i])
-            return ComparesStringReturn::LessThan;
-        else if (rhsString[i] < lhsString[i])
-            return ComparesStringReturn::GreaterThan;
-    }
-
-    if (lhsCount < rhsCount)
-        return ComparesStringReturn::LessThan;
-    else if (rhsCount < lhsCount)
-        return ComparesStringReturn::GreaterThan;
-    else
-        return ComparesStringReturn::Equal;
+    return Compares(lhsString, rhsString);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

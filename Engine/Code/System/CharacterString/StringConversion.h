@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:41)
+///	引擎版本：0.8.1.4 (2022/11/13 11:00)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H
@@ -55,23 +55,17 @@ namespace System
     // lhsCount和rhsCount不包括空终止符
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(LanguageLocale locale,
                                                                                  Compares comparesFlag,
-                                                                                 const TChar* lhsString,
-                                                                                 int lhsCount,
-                                                                                 const TChar* rhsString,
-                                                                                 int rhsCount) noexcept;
+                                                                                 const String& lhsString,
+                                                                                 const String& rhsString);
 
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(const wchar_t* localeName,
                                                                                  Compares comparesFlag,
-                                                                                 const wchar_t* lhsString,
-                                                                                 int lhsCount,
-                                                                                 const wchar_t* rhsString,
-                                                                                 int rhsCount) noexcept;
+                                                                                 const std::wstring& lhsString,
+                                                                                 const std::wstring& rhsString);
 
-    NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringOrdinalUseBinary(const wchar_t* lhsString,
-                                                                                        int lhsCount,
-                                                                                        const wchar_t* rhsString,
-                                                                                        int rhsCount,
-                                                                                        bool ignoreCase) noexcept;
+    NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringOrdinalUseBinary(const std::wstring& lhsString,
+                                                                                        const std::wstring& rhsString,
+                                                                                        bool ignoreCase);
 }
 
 #endif  // SYSTEM_CHARACTER_STRING_STRING_CONVERSION_H

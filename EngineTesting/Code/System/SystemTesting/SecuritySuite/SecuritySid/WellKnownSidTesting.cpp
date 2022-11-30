@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 15:48)
+///	引擎测试版本：0.8.1.3 (2022/11/01 21:33)
 
 #include "WellKnownSidTesting.h"
 #include "System/Security/SecuritySid.h"
@@ -101,12 +101,12 @@ void System::WellKnownSidTesting::MainTest()
 
 void System::WellKnownSidTesting::CreateWellKnownSecurityIdentifierTest()
 {
-    array<WindowsDWord, g_SecurityMaxSidSize> buffer{};
+    array<WindowsDWord, gSecurityMaxSidSize> buffer{};
 
     for (auto wellKnownSidType : securityWellKnownSidType)
     {
         buffer.fill(0);
-        auto sidCount = g_SecurityMaxSidSize;
+        auto sidCount = gSecurityMaxSidSize;
         ASSERT_TRUE(CreateWellKnownSecurityIdentifier(wellKnownSidType, nullptr, buffer.data(), &sidCount));
 
         ASSERT_TRUE(IsWellKnownSecurityIdentifier(buffer.data(), wellKnownSidType));

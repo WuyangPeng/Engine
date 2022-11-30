@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 12:44)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 23:13)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_REGISTRY_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_REGISTRY_USING_H
@@ -21,46 +21,46 @@ namespace System
     using SystemHKey = HKEY;
     using SystemRegSam = REGSAM;
 
-    static const SystemHKey g_ClassesRoot{ HKEY_CLASSES_ROOT };
-    static const SystemHKey g_CurrentUser{ HKEY_CURRENT_USER };
-    static const SystemHKey g_LocalMachine{ HKEY_LOCAL_MACHINE };
-    static const SystemHKey g_Users{ HKEY_USERS };
-    static const SystemHKey g_PerformanceData{ HKEY_PERFORMANCE_DATA };
-    static const SystemHKey g_PerformanceText{ HKEY_PERFORMANCE_TEXT };
-    static const SystemHKey g_PerformanceNlstext{ HKEY_PERFORMANCE_NLSTEXT };
-    static const SystemHKey g_CurrentConfig{ HKEY_CURRENT_CONFIG };
-    static const SystemHKey g_DynData{ HKEY_DYN_DATA };
-    static const SystemHKey g_CurrentUserLocalSettings{ HKEY_CURRENT_USER_LOCAL_SETTINGS };
+    static const SystemHKey gClassesRoot{ HKEY_CLASSES_ROOT };
+    static const SystemHKey gCurrentUser{ HKEY_CURRENT_USER };
+    static const SystemHKey gLocalMachine{ HKEY_LOCAL_MACHINE };
+    static const SystemHKey gUsers{ HKEY_USERS };
+    static const SystemHKey gPerformanceData{ HKEY_PERFORMANCE_DATA };
+    static const SystemHKey gPerformanceText{ HKEY_PERFORMANCE_TEXT };
+    static const SystemHKey gPerformanceNlstext{ HKEY_PERFORMANCE_NLSTEXT };
+    static const SystemHKey gCurrentConfig{ HKEY_CURRENT_CONFIG };
+    static const SystemHKey gDynData{ HKEY_DYN_DATA };
+    static const SystemHKey gCurrentUserLocalSettings{ HKEY_CURRENT_USER_LOCAL_SETTINGS };
 
-    static const TChar* g_Arrow{ IDC_ARROW };
-    static const TChar* g_Ibeam{ IDC_IBEAM };
-    static const TChar* g_Wait{ IDC_WAIT };
-    static const TChar* g_Cross{ IDC_CROSS };
-    static const TChar* g_UpArrow{ IDC_UPARROW };
-    static const TChar* g_Size{ IDC_SIZE };
-    static const TChar* g_Icon{ IDC_ICON };
-    static const TChar* g_SizeNwse{ IDC_SIZENWSE };
-    static const TChar* g_SizeNesw{ IDC_SIZENESW };
-    static const TChar* g_SizeWe{ IDC_SIZEWE };
-    static const TChar* g_SizeNs{ IDC_SIZENS };
-    static const TChar* g_SizeAll{ IDC_SIZEALL };
-    static const TChar* g_No{ IDC_NO };
-    static const TChar* g_IDCHand{ IDC_HAND };
-    static const TChar* g_AppStarting{ IDC_APPSTARTING };
-    static const TChar* g_Help{ IDC_HELP };
-    static const TChar* g_Pin{ IDC_PIN };
-    static const TChar* g_Person{ IDC_PERSON };
+    static const TChar* gArrow{ IDC_ARROW };
+    static const TChar* gIbeam{ IDC_IBEAM };
+    static const TChar* gWait{ IDC_WAIT };
+    static const TChar* gCross{ IDC_CROSS };
+    static const TChar* gUpArrow{ IDC_UPARROW };
+    static const TChar* gSize{ IDC_SIZE };
+    static const TChar* gIcon{ IDC_ICON };
+    static const TChar* gSizeNwse{ IDC_SIZENWSE };
+    static const TChar* gSizeNesw{ IDC_SIZENESW };
+    static const TChar* gSizeWe{ IDC_SIZEWE };
+    static const TChar* gSizeNs{ IDC_SIZENS };
+    static const TChar* gSizeAll{ IDC_SIZEALL };
+    static const TChar* gNo{ IDC_NO };
+    static const TChar* gIDCHand{ IDC_HAND };
+    static const TChar* gAppStarting{ IDC_APPSTARTING };
+    static const TChar* gHelp{ IDC_HELP };
+    static const TChar* gPin{ IDC_PIN };
+    static const TChar* gPerson{ IDC_PERSON };
 
-    static const TChar* g_Application{ IDI_APPLICATION };
-    static const TChar* g_IDIHand{ IDI_HAND };
-    static const TChar* g_Question{ IDI_QUESTION };
-    static const TChar* g_Exclamation{ IDI_EXCLAMATION };
-    static const TChar* g_Asterisk{ IDI_ASTERISK };
-    static const TChar* g_WinLogo{ IDI_WINLOGO };
-    static const TChar* g_Shield{ IDI_SHIELD };
-    static const TChar* g_Warning{ IDI_WARNING };
-    static const TChar* g_Error{ IDI_ERROR };
-    static const TChar* g_Information{ IDI_INFORMATION };
+    static const TChar* gApplication{ IDI_APPLICATION };
+    static const TChar* gIDIHand{ IDI_HAND };
+    static const TChar* gQuestion{ IDI_QUESTION };
+    static const TChar* gExclamation{ IDI_EXCLAMATION };
+    static const TChar* gAsterisk{ IDI_ASTERISK };
+    static const TChar* gWinLogo{ IDI_WINLOGO };
+    static const TChar* gShield{ IDI_SHIELD };
+    static const TChar* gWarning{ IDI_WARNING };
+    static const TChar* gError{ IDI_ERROR };
+    static const TChar* gInformation{ IDI_INFORMATION };
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -76,46 +76,46 @@ namespace System
 
     using SystemRegSam = uint32_t;
 
-    static const SystemHKey g_ClassesRoot{ 0x80000000 };
-    static const SystemHKey g_CurrentUser{ 0x80000001 };
-    static const SystemHKey g_LocalMachine{ 0x80000002 };
-    static const SystemHKey g_Users{ 0x80000003 };
-    static const SystemHKey g_PerformanceData{ 0x80000004 };
-    static const SystemHKey g_PerformanceText{ 0x80000050 };
-    static const SystemHKey g_PerformanceNlstext{ 0x80000060 };
-    static const SystemHKey g_CurrentConfig{ 0x80000005 };
-    static const SystemHKey g_DynData{ 0x80000006 };
-    static const SystemHKey g_CurrentUserLocalSettings{ 0x80000007 };
+    static const SystemHKey gClassesRoot{ 0x80000000 };
+    static const SystemHKey gCurrentUser{ 0x80000001 };
+    static const SystemHKey gLocalMachine{ 0x80000002 };
+    static const SystemHKey gUsers{ 0x80000003 };
+    static const SystemHKey gPerformanceData{ 0x80000004 };
+    static const SystemHKey gPerformanceText{ 0x80000050 };
+    static const SystemHKey gPerformanceNlstext{ 0x80000060 };
+    static const SystemHKey gCurrentConfig{ 0x80000005 };
+    static const SystemHKey gDynData{ 0x80000006 };
+    static const SystemHKey gCurrentUserLocalSettings{ 0x80000007 };
 
-    static const TChar* g_Arrow{ SYSTEM_TEXT("IDC_ARROW") };
-    static const TChar* g_Ibeam{ SYSTEM_TEXT("IDC_IBEAM") };
-    static const TChar* g_Wait{ SYSTEM_TEXT("IDC_WAIT") };
-    static const TChar* g_Cross{ SYSTEM_TEXT("IDC_CROSS") };
-    static const TChar* g_UpArrow{ SYSTEM_TEXT("IDC_UPARROW") };
-    static const TChar* g_Size{ SYSTEM_TEXT("IDC_SIZE") };
-    static const TChar* g_Icon{ SYSTEM_TEXT("IDC_ICON") };
-    static const TChar* g_SizeNwse{ SYSTEM_TEXT("IDC_SIZENWSE") };
-    static const TChar* g_SizeNesw{ SYSTEM_TEXT("IDC_SIZENESW") };
-    static const TChar* g_SizeWe{ SYSTEM_TEXT("IDC_SIZEWE") };
-    static const TChar* g_SizeNs{ SYSTEM_TEXT("IDC_SIZENS") };
-    static const TChar* g_SizeAll{ SYSTEM_TEXT("IDC_SIZEALL") };
-    static const TChar* g_No{ SYSTEM_TEXT("IDC_NO") };
-    static const TChar* g_IDCHand{ SYSTEM_TEXT("IDC_HAND") };
-    static const TChar* g_AppStarting{ SYSTEM_TEXT("IDC_APPSTARTING") };
-    static const TChar* g_Help{ SYSTEM_TEXT("IDC_HELP") };
-    static const TChar* g_Pin{ SYSTEM_TEXT("IDC_PIN") };
-    static const TChar* g_Person{ SYSTEM_TEXT("IDC_PERSON") };
+    static const TChar* gArrow{ SYSTEM_TEXT("IDC_ARROW") };
+    static const TChar* gIbeam{ SYSTEM_TEXT("IDC_IBEAM") };
+    static const TChar* gWait{ SYSTEM_TEXT("IDC_WAIT") };
+    static const TChar* gCross{ SYSTEM_TEXT("IDC_CROSS") };
+    static const TChar* gUpArrow{ SYSTEM_TEXT("IDC_UPARROW") };
+    static const TChar* gSize{ SYSTEM_TEXT("IDC_SIZE") };
+    static const TChar* gIcon{ SYSTEM_TEXT("IDC_ICON") };
+    static const TChar* gSizeNwse{ SYSTEM_TEXT("IDC_SIZENWSE") };
+    static const TChar* gSizeNesw{ SYSTEM_TEXT("IDC_SIZENESW") };
+    static const TChar* gSizeWe{ SYSTEM_TEXT("IDC_SIZEWE") };
+    static const TChar* gSizeNs{ SYSTEM_TEXT("IDC_SIZENS") };
+    static const TChar* gSizeAll{ SYSTEM_TEXT("IDC_SIZEALL") };
+    static const TChar* gNo{ SYSTEM_TEXT("IDC_NO") };
+    static const TChar* gIDCHand{ SYSTEM_TEXT("IDC_HAND") };
+    static const TChar* gAppStarting{ SYSTEM_TEXT("IDC_APPSTARTING") };
+    static const TChar* gHelp{ SYSTEM_TEXT("IDC_HELP") };
+    static const TChar* gPin{ SYSTEM_TEXT("IDC_PIN") };
+    static const TChar* gPerson{ SYSTEM_TEXT("IDC_PERSON") };
 
-    static const TChar* g_Application{ SYSTEM_TEXT("IDI_APPLICATION") };
-    static const TChar* g_IDIHand{ SYSTEM_TEXT("IDI_HAND") };
-    static const TChar* g_Question{ SYSTEM_TEXT("IDI_QUESTION") };
-    static const TChar* g_Exclamation{ SYSTEM_TEXT("IDI_EXCLAMATION") };
-    static const TChar* g_Asterisk{ SYSTEM_TEXT("IDI_ASTERISK") };
-    static const TChar* g_WinLogo{ SYSTEM_TEXT("IDI_WINLOGO") };
-    static const TChar* g_Shield{ SYSTEM_TEXT("IDI_SHIELD") };
-    static const TChar* g_Warning{ SYSTEM_TEXT("IDI_WARNING") };
-    static const TChar* g_Error{ SYSTEM_TEXT("IDI_ERROR") };
-    static const TChar* g_Information{ SYSTEM_TEXT("IDI_INFORMATION") };
+    static const TChar* gApplication{ SYSTEM_TEXT("IDI_APPLICATION") };
+    static const TChar* gIDIHand{ SYSTEM_TEXT("IDI_HAND") };
+    static const TChar* gQuestion{ SYSTEM_TEXT("IDI_QUESTION") };
+    static const TChar* gExclamation{ SYSTEM_TEXT("IDI_EXCLAMATION") };
+    static const TChar* gAsterisk{ SYSTEM_TEXT("IDI_ASTERISK") };
+    static const TChar* gWinLogo{ SYSTEM_TEXT("IDI_WINLOGO") };
+    static const TChar* gShield{ SYSTEM_TEXT("IDI_SHIELD") };
+    static const TChar* gWarning{ SYSTEM_TEXT("IDI_WARNING") };
+    static const TChar* gError{ SYSTEM_TEXT("IDI_ERROR") };
+    static const TChar* gInformation{ SYSTEM_TEXT("IDI_INFORMATION") };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

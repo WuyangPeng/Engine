@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 14:36)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 15:22)
 
 #include "System/SystemExport.h"
 
@@ -16,7 +16,9 @@
 #include "System/Helper/PragmaWarning.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     #include <Ws2tcpip.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #include <array>
@@ -160,7 +162,7 @@ int System::Recv(WinSocket winSocket, char* buf, int len, SocketRecv flags) noex
 
 bool System::IsSocketValid(WinSocket winSocket) noexcept
 {
-    if (winSocket != g_InvalidSocket)
+    if (winSocket != gInvalidSocket)
         return true;
     else
         return false;

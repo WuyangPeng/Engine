@@ -248,7 +248,12 @@
 9.	FileManagerSuite 
  
 对文件管理模块的单元测试，包括：
-（1） C函数文件系统：CFileOpenTesting、CFileReadTesting、CFileWriteTesting、CFileSetvBufTesting、CFileCharacterTesting、CFileOperatorTesting。
+（1） C函数文件系统：CFileOpenTesting、
+					 CFileReadTesting、
+					 CFileWriteTesting、
+					 CFileSetvBufTesting、
+					 CFileCharacterTesting、
+					 CFileOperatorTesting。
 （2） 基础文件系统：CreateExistingFileTesting、
 					CreateFileWithDefaultAttributesTesting、
 					CreateFileWithOtherFlagsTesting、
@@ -281,7 +286,10 @@
 				  SetPrivateObjectSecurityTesting、
 				  ConvertToAutoInheritPrivateObjectSecurityTesting、
 				  SecurityAccessMaskTesting。
-（3） 安全性标识符：InitializeSecurityIdentifierTesting、GetSubAuthorityTesting、WellKnownSidTesting、CopySecurityIdentifierTesting。 
+（3） 安全性标识符：InitializeSecurityIdentifierTesting、
+					GetSubAuthorityTesting、
+					WellKnownSidTesting、
+					CopySecurityIdentifierTesting。 
 （4） 访问控制列表：InitializeAclTesting、AclInformationTesting。 
 （5） 安全描述符：UserObjectSecurityTesting、
 				  InitializeSecurityDescriptorTesting、
@@ -291,7 +299,9 @@
 				  SecurityDescriptorOwnerTesting、
 				  SecurityDescriptorRMControlTesting、
 				  SecurityDescriptorSaclTesting。 
-（6） 访问控制项：AddAccessControlEntriesTesting、FindFirstFreeAccessControlEntriesTesting、AddMandatoryAceTesting。
+（6） 访问控制项：AddAccessControlEntriesTesting、
+				  FindFirstFreeAccessControlEntriesTesting、
+				  AddMandatoryAceTesting。
 （7） 添加访问权限：AddAccessAllowedAceTesting、
 				    AddAccessAllowedAceUseAceFlagsTesting、
 					AddAccessAllowedObjectAceTesting、
@@ -299,7 +309,12 @@
 					AddAccessDeniedObjectAceTesting、
 					AddAuditAccessAceTesting、
 					AddAuditAccessObjectAceTesting。
-（8） 安全基础：TokenInformationTesting、AdjustTokenTesting、AccessesGrantedTesting、DuplicateTokenTesting、RestrictedTokenTesting、QuerySecurityAccessMaskTesting。
+（8） 安全基础：TokenInformationTesting、
+				AdjustTokenTesting、
+				AccessesGrantedTesting、
+				DuplicateTokenTesting、
+				RestrictedTokenTesting、
+				QuerySecurityAccessMaskTesting。
 （9） 访问检查：MapGenericMaskTesting、AccessCheckTesting。
 
 ----------------------------
@@ -346,7 +361,13 @@
 （1） DirectXD3D11：DirectXD3D11Testing。 
 
 ----------------------------
-14.	WindowsSuite 
+14.	VulkanSuite 
+
+对Vulkan模块的单元测试，包括：
+（1） Vulkan：VulkanTesting。 
+
+----------------------------
+15.	WindowsSuite 
 
 对Windows模块的单元测试，包括：
 （1） 系统错误码：LastWindowErrorTesting。
@@ -367,26 +388,26 @@
 （9） Engineering：EngineeringTesting。  
 
 ----------------------------
-15.	LinuxSuite 
+16.	LinuxSuite 
 
 对Linux模块的单元测试，包括：
 （1） Linux原生窗口：LinuxNativeWindowTesting。
 
 ----------------------------
-16.	MacintoshSuite 
+17.	MacintoshSuite 
 
 对Macintosh模块的单元测试，包括：
 （1） Macintosh原生窗口：MacintoshNativeWindowTesting。
 
 ----------------------------
-17.	AndroidSuite
+18.	AndroidSuite
 
 对Android模块的单元测试，包括：
-（1） 安卓输入键事件：AndroidInputKeyEventTesting。  
-（2） 安卓输入滚动事件：AndroidInputMotionEventTesting。  
+（1） 安卓输入键事件：AndroidInputKeyEventFacadeTesting。  
+（2） 安卓输入滚动事件：AndroidInputMotionEventFacadeTesting。  
 （3） 安卓循环：AndroidLooperTesting。
-（4） 安卓输入队列：AndroidInputQueueTesting。 
-（5） 安卓原生窗口：AndroidNativeWindowTesting。
-（6） 安卓原生APP：AndroidNativeAppGlueTesting。
+（4） 安卓输入队列：AndroidInputQueueFacadeTesting。 
+（5） 安卓窗口：AndroidNativeWindowFacadeTesting。
+（6） 安卓应用程序：AndroidNativeAppGlueTesting。
 
 ----------------------------

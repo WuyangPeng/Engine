@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:39)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:34)
 
 #include "System/SystemExport.h"
 
@@ -130,21 +130,19 @@ void System::InitOpenGL20() noexcept
         SYSTEM_GET_FUNCTION(glIsShader);
         SYSTEM_GET_FUNCTION(glStencilMaskSeparate);
 
-        // GL_ARB_draw_buffers
         SYSTEM_GET_FUNCTION(glDrawBuffers);
 
-        // GL_ARB_shader_objects
-        SYSTEM_GET_FUNCTION(glAttachShader);  // glAttachObjectARB
+        SYSTEM_GET_FUNCTION(glAttachShader);
         SYSTEM_GET_FUNCTION(glCompileShader);
-        SYSTEM_GET_FUNCTION(glCreateProgram);  // glCreateProgramObjectARB
-        SYSTEM_GET_FUNCTION(glCreateShader);  // glCreateShaderObjectARB
-        SYSTEM_GET_FUNCTION(glDeleteProgram);  // glDeleteProgramObjectARB
-        SYSTEM_GET_FUNCTION(glDeleteShader);  // glDeleteProgramObjectARB
-        SYSTEM_GET_FUNCTION(glDetachShader);  // glDetachObjectARB
+        SYSTEM_GET_FUNCTION(glCreateProgram);
+        SYSTEM_GET_FUNCTION(glCreateShader);
+        SYSTEM_GET_FUNCTION(glDeleteProgram);
+        SYSTEM_GET_FUNCTION(glDeleteShader);
+        SYSTEM_GET_FUNCTION(glDetachShader);
         SYSTEM_GET_FUNCTION(glGetActiveUniform);
-        SYSTEM_GET_FUNCTION(glGetAttachedShaders);  // glGetAttachObjectsARB
-        SYSTEM_GET_FUNCTION(glGetProgramInfoLog);  // glGetInfoLogARB
-        SYSTEM_GET_FUNCTION(glGetShaderInfoLog);  // glGetInfoLogARB
+        SYSTEM_GET_FUNCTION(glGetAttachedShaders);
+        SYSTEM_GET_FUNCTION(glGetProgramInfoLog);
+        SYSTEM_GET_FUNCTION(glGetShaderInfoLog);
         SYSTEM_GET_FUNCTION(glGetShaderSource);
         SYSTEM_GET_FUNCTION(glGetUniformfv);
         SYSTEM_GET_FUNCTION(glGetUniformiv);
@@ -170,10 +168,9 @@ void System::InitOpenGL20() noexcept
         SYSTEM_GET_FUNCTION(glUniformMatrix2fv);
         SYSTEM_GET_FUNCTION(glUniformMatrix3fv);
         SYSTEM_GET_FUNCTION(glUniformMatrix4fv);
-        SYSTEM_GET_FUNCTION(glUseProgram);  // glUseProgramObjectARB
+        SYSTEM_GET_FUNCTION(glUseProgram);
         SYSTEM_GET_FUNCTION(glValidateProgram);
 
-        // GL_ARB_fragment_program and GL_ARB_vertex_program
         SYSTEM_GET_FUNCTION(glDisableVertexAttribArray);
         SYSTEM_GET_FUNCTION(glEnableVertexAttribArray);
         SYSTEM_GET_FUNCTION(glGetProgramiv);
@@ -220,15 +217,12 @@ void System::InitOpenGL20() noexcept
         SYSTEM_GET_FUNCTION(glVertexAttrib4usv);
         SYSTEM_GET_FUNCTION(glVertexAttribPointer);
 
-        // GL_ARB_vertex_shader
         SYSTEM_GET_FUNCTION(glBindAttribLocation);
         SYSTEM_GET_FUNCTION(glGetActiveAttrib);
         SYSTEM_GET_FUNCTION(glGetAttribLocation);
 
-        // GL_EXT_blend_equation_separate
         SYSTEM_GET_FUNCTION(glBlendEquationSeparate);
 
-        // GL_ATI_separate_stencil
         SYSTEM_GET_FUNCTION(glStencilOpSeparate);
         SYSTEM_GET_FUNCTION(glStencilFuncSeparate);
     }

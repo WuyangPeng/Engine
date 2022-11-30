@@ -5,20 +5,23 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/11 23:15)
+///	引擎版本：0.8.1.4 (2022/11/18 23:30)
 
 #ifndef SYSTEM_HELPER_VISUALC_H
 #define SYSTEM_HELPER_VISUALC_H
 
 #ifdef _MSC_VER
 
-    // Microsoft Visual C++ 编译器设置：
+    /// Microsoft Visual C++ 编译器设置：
 
-    // 我们需要小心这个文件中的检查，因为与通常的理论相反，存在具有_MSC_VER的最终数字非零的版本（主要是MIPS交叉编译器）。
+    /// 我们需要小心这个文件中的检查，
+    /// 因为与通常的理论相反，
+    /// 存在具有_MSC_VER的最终数字非零的版本（主要是MIPS交叉编译器）。
 
-    // 所以我们测试XXXX <= _MSC_VER或者_MSC_VER < XXXX。没有其他比较是安全的。
+    /// 所以我们测试XXXX <= _MSC_VER或者_MSC_VER < XXXX，
+    /// 没有其他比较是安全的。
 
-    // 版本检查：我们不支持版本7.1之前的Visual C++：
+    /// 版本检查：我们不支持版本7.1之前的Visual C++：
     #if _MSC_VER < 1310
 
         #error "编译器未配置"
@@ -127,18 +130,19 @@
             #endif  // _MSC_VER
 
         #else  // !defined(UNDER_CE)
-            // 微软的Visual Studio版本：
-            // MSVC 6是版本12.00
-            // MSVC 7.0是版本13.00（MSVS 2002）
-            // MSVC 7.1是版本13.10（MSVS 2003）
-            // MSVC 8.0是版本14.00（MSVS 2005）
-            // MSVC 9.0是版本15.00（MSVS 2008）
-            // MSVC 10.0是版本16.00（MSVS 2010）
-            // MSVC 11.0是版本17.00（MSVS 2012）
-            // MSVC 12.0是版本18.00（MSVS 2013）
-            // MSVC 14.0是版本19.00（MSVS 2015）
-            // MSVC 14.1是版本19.10（MSVS 2017）
-            // MSVC 14.2是版本19.20（MSVS 2019）
+
+            /// 微软的Visual Studio版本：
+            /// MSVC 6是版本12.00
+            /// MSVC 7.0是版本13.00（MSVS 2002）
+            /// MSVC 7.1是版本13.10（MSVS 2003）
+            /// MSVC 8.0是版本14.00（MSVS 2005）
+            /// MSVC 9.0是版本15.00（MSVS 2008）
+            /// MSVC 10.0是版本16.00（MSVS 2010）
+            /// MSVC 11.0是版本17.00（MSVS 2012）
+            /// MSVC 12.0是版本18.00（MSVS 2013）
+            /// MSVC 14.0是版本19.00（MSVS 2015）
+            /// MSVC 14.1是版本19.10（MSVS 2017）
+            /// MSVC 14.2是版本19.20（MSVS 2019）
             #if _MSC_VER < 1310
 
                 // 注意：不支持7.0以下的版本。
@@ -201,6 +205,7 @@
                 #define MSVC_COMPILER_VERSION _MSC_VER
 
             #endif  // _MSC_VER
+
         #endif  // defined(UNDER_CE)
 
     #endif  // MSVC_COMPILER_VERSION
@@ -217,14 +222,18 @@
 
     #else  // _MSC_VER < 1600
 
-typedef __int8 int8_t;
-typedef __int16 int16_t;
-typedef __int32 int32_t;
-typedef __int64 int64_t;
-typedef unsigned __int8 uint8_t;
-typedef unsigned __int16 uint16_t;
-typedef unsigned __int32 uint32_t;
-typedef unsigned __int64 uint64_t;
+// clang-format off
+
+        typedef __int8 int8_t;
+        typedef __int16 int16_t;
+        typedef __int32 int32_t;
+        typedef __int64 int64_t;
+        typedef unsigned __int8 uint8_t;
+        typedef unsigned __int16 uint16_t;
+        typedef unsigned __int32 uint32_t;
+        typedef unsigned __int64 uint64_t;
+
+        // clang-format on
 
         #define INT8_MIN _I8_MIN
         #define INT8_MAX _I8_MAX

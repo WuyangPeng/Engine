@@ -62,10 +62,10 @@
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\SystemAndroidTestingAndroidCallBack.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidLooperTesting.h">
@@ -74,13 +74,13 @@
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeAppGlueTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidSuite.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputKeyEventTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputEventFacadeTesting.h">
       <Filter>AndroidSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\Detail\CallbackFunction.h">
@@ -100,13 +100,13 @@
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\SystemAndroidTestingAndroidCallBack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputKeyEventTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputEventFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidLooperTesting.cpp">
@@ -115,7 +115,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeAppGlueTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowFacadeTesting.cpp">
       <Filter>AndroidSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\Detail\CallbackFunction.cpp">

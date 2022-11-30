@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:38)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:34)
 
 #include "System/SystemExport.h"
 
@@ -43,25 +43,16 @@ void System::InitOpenGL14() noexcept
     {
         existsOpenGL14 = ExistsOpenGLExtensions::Exists;
 
-        // GL_{EXT,INGR}_blend_func_separate
         SYSTEM_GET_FUNCTION(glBlendFuncSeparate);
 
-        // GL_EXT_fog_coord
-
-        // GL_EXT_multi_draw_arrays
         SYSTEM_GET_FUNCTION(glMultiDrawArrays);
         SYSTEM_GET_FUNCTION(glMultiDrawElements);
 
-        // GL_{ARB,EXT,SGIS}_point_parameters
         SYSTEM_GET_FUNCTION(glPointParameterf);
         SYSTEM_GET_FUNCTION(glPointParameterfv);
 
-        // GL_NV_point_sprite
         SYSTEM_GET_FUNCTION(glPointParameteri);
         SYSTEM_GET_FUNCTION(glPointParameteriv);
-
-        // GL_EXT_secondary_color
-        // GL_{ARB,MESA}_window_pos
     }
     else
     {

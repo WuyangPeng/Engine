@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/08 21:47)
+///	引擎版本：0.8.1.4 (2022/11/16 21:33)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_USING_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_USING_H
@@ -68,8 +68,8 @@ namespace System
     static const DynamicLinkCharType* predefinedResourceTypesAccelerator = MakeIntreSource(9);
     static const DynamicLinkCharType* predefinedResourceTypesRcData = MakeIntreSource(10);
     static const DynamicLinkCharType* predefinedResourceTypesMessageTable = MakeIntreSource(11);
-    static const DynamicLinkCharType* predefinedResourceTypesGroupCursor = MakeIntreSource(reinterpret_cast<WindowsPtrULong>(predefinedResourceTypesCursor) + predefinedResourceTypesDifference);
-    static const DynamicLinkCharType* predefinedResourceTypesGroupIcon = MakeIntreSource(reinterpret_cast<WindowsPtrULong>(predefinedResourceTypesIcon) + predefinedResourceTypesDifference);
+    static const DynamicLinkCharType* predefinedResourceTypesGroupCursor = MakeIntreSource(reinterpret_cast<WindowsULongPtrSizeType>(predefinedResourceTypesCursor) + predefinedResourceTypesDifference);
+    static const DynamicLinkCharType* predefinedResourceTypesGroupIcon = MakeIntreSource(reinterpret_cast<WindowsULongPtrSizeType>(predefinedResourceTypesIcon) + predefinedResourceTypesDifference);
     static const DynamicLinkCharType* predefinedResourceTypesVersion = MakeIntreSource(16);
     static const DynamicLinkCharType* predefinedResourceTypesDlgInclude = MakeIntreSource(17);
     static const DynamicLinkCharType* predefinedResourceTypesPlugplay = MakeIntreSource(19);

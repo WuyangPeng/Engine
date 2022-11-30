@@ -49,7 +49,7 @@ void System::ResourceEnumTesting::EnumResourceTest()
 
     for (index = 0; index < resourceEnum.size(); ++index)
     {
-        ASSERT_TRUE(EnumResourceTypesInLibrary(GetDllModule(), TypeProcess, reinterpret_cast<WindowsPtrLong>(this), GetCurrentResourceEnum(), languageIDData));
+        ASSERT_TRUE(EnumResourceTypesInLibrary(GetDllModule(), TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIDData));
 
         ASSERT_LESS(0u, enumResourceDataContainer.size());
 
@@ -67,7 +67,7 @@ void System::ResourceEnumTesting::EnumResourceTest()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
 
-System::WindowsBool System::ResourceEnumTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsPtrLong lParam)
+System::WindowsBool System::ResourceEnumTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsLongPtrSizeType lParam)
 {
     constexpr LanguageIDData languageIDData{};
 
@@ -81,7 +81,7 @@ System::WindowsBool System::ResourceEnumTesting::TypeProcess(DynamicLinkModule m
     return EnumResourceNamesInLibrary(module, type, NameProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
 }
 
-System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule module, const DynamicLinkCharType* type, DynamicLinkCharType* name, WindowsPtrLong lParam)
+System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule module, const DynamicLinkCharType* type, DynamicLinkCharType* name, WindowsLongPtrSizeType lParam)
 {
     constexpr LanguageIDData languageIDData{};
 
@@ -97,7 +97,7 @@ System::WindowsBool System::ResourceEnumTesting::NameProcess(DynamicLinkModule m
 
 #include STSTEM_WARNING_POP
 
-System::WindowsBool System::ResourceEnumTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsPtrLong lParam)
+System::WindowsBool System::ResourceEnumTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsLongPtrSizeType lParam)
 {
     UnusedFunction(module);
 

@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 
 #include <string>
+#include <vector>
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(ProgramDefines, ProgramDefinesImpl);
 
@@ -24,6 +25,9 @@ namespace Rendering
     {
     public:
         COPY_UNSHARED_TYPE_DECLARE(ProgramDefines);
+        using DefinesType = std::pair<std::string, std::string>;
+        using Container = std::vector<DefinesType>;
+        using ContainerConstIter = Container::const_iterator;
 
     public:
         explicit ProgramDefines(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
@@ -38,6 +42,10 @@ namespace Rendering
         void Update(const std::string& name, const std::string& value);
 
         NODISCARD std::string Get(const std::string& name) const;
+        NODISCARD int GetSize() const;
+
+        NODISCARD ContainerConstIter begin() const noexcept;
+        NODISCARD ContainerConstIter end() const noexcept;
 
     private:
         PackageType impl;

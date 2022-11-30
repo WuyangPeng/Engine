@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/16 19:23)
+///	引擎版本：0.8.1.4 (2022/11/19 14:51)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
@@ -19,10 +19,10 @@ namespace System
 
     enum class LocalMemory
     {
-        // 分配固定内存。返回值是指向内存对象的指针。
+        // 分配固定内存，返回值是指向内存对象的指针。
         Fixed = LMEM_FIXED,
 
-        // 分配可移动内存。返回值是内存对象的句柄。要将句柄转换为指针，请使用LocalLock函数。此值不能与Fixed组合使用。
+        // 分配可移动内存，返回值是内存对象的句柄，要将句柄转换为指针，请使用LocalLock函数，此值不能与Fixed组合使用。
         Moveable = LMEM_MOVEABLE,
 
         // 将存储器内容初始化为零。
@@ -40,7 +40,7 @@ namespace System
         // 同Fixed
         NonZeroLPtr = NONZEROLPTR,
 
-        // ReAlloc选项。如果指定了Modify，则函数仅修改内存对象的属性（忽略bytes参数）。
+        // ReAlloc选项，如果指定了Modify，则函数仅修改内存对象的属性（忽略bytes参数）。
         Modify = LMEM_MODIFY,
 
         InvalidHandle = LMEM_INVALID_HANDLE,

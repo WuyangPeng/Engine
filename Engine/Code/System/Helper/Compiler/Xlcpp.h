@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/11 23:17)
+///	引擎版本：0.8.1.4 (2022/11/18 23:32)
 
 #ifndef SYSTEM_HELPER_XLCPP_H
 #define SYSTEM_HELPER_XLCPP_H
@@ -48,9 +48,10 @@
 
     #endif  // defined(__GNUC__) && (4 <= __GNUC__)
 
-    // 在定义__has_extension之前使用clang进行编译时，
-    // 即使写了'defined(__has_extension) && __has_extension(xxx)'，
-    // clang也报告编译器错误。 因此，找到的唯一解决方法是：
+    /// 在定义__has_extension之前使用clang进行编译时，
+    /// 即使写了'defined(__has_extension) && __has_extension(xxx)'，
+    /// clang也报告编译器错误，
+    /// 因此，找到的唯一解决方法是：
 
     #ifndef __has_extension
 

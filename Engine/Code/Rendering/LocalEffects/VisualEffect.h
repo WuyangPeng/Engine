@@ -48,10 +48,15 @@ namespace Rendering
         NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
 
         NODISCARD ConstVisualProgramSharedPtr GetProgram() const noexcept;
+        NODISCARD VisualProgramSharedPtr GetProgram() noexcept;
 
         NODISCARD ConstShaderSharedPtr GetVertexShader() const noexcept;
         NODISCARD ConstShaderSharedPtr GetPixelShader() const noexcept;
         NODISCARD ConstShaderSharedPtr GetGeometryShader() const noexcept;
+
+        NODISCARD ShaderSharedPtr GetVertexShader() noexcept;
+        NODISCARD ShaderSharedPtr GetPixelShader() noexcept;
+        NODISCARD ShaderSharedPtr GetGeometryShader() noexcept;
 
         virtual void SetPVWMatrixConstant(const ConstantBufferSharedPtr& buffer);
 

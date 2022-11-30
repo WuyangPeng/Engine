@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/16 14:43)
+///	引擎测试版本：0.8.1.4 (2022/11/05 19:45)
 
 #include "LoadCursorTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -36,20 +36,20 @@ void System::LoadCursorTesting::MainTest()
 
 void System::LoadCursorTesting::LoadCursorTest()
 {
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_Arrow));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_Ibeam));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_Wait));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_Cross));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_UpArrow));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_SizeNwse));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_SizeNesw));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_SizeWe));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_SizeNs));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_SizeAll));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_No));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_IDCHand));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_AppStarting));
-    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, g_Help));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gArrow));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gIbeam));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gWait));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gCross));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gUpArrow));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeNwse));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeNesw));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeWe));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeNs));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gSizeAll));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gNo));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gIDCHand));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gAppStarting));
+    ASSERT_UNEQUAL_NULL_PTR(LoadSystemCursor(nullptr, gHelp));
 
     ASSERT_UNEQUAL_NULL_PTR(System::LoadSystemCursor(instance, MakeIntreSource(IDC_TEST_CURSOR)));
 }

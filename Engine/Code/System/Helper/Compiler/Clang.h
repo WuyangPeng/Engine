@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/10 13:12)
+///	引擎版本：0.8.1.4 (2022/11/18 23:27)
 
 #ifndef SYSTEM_HELPER_CLANG_H
 #define SYSTEM_HELPER_CLANG_H
@@ -46,8 +46,10 @@
 
     #endif  // TCRE_SYSTEM_COMPILER
 
-    // 在定义__has_extension之前使用clang进行编译时，即使编写了“defined(__has_extension) && __has_extension(xxx)”，
-    // clang也会报告编译器错误。 所以唯一的解决方法是：
+    /// 在定义__has_extension之前使用clang进行编译时，
+    /// 即使编写了“defined(__has_extension) && __has_extension(xxx)”，
+    /// clang也会报告编译器错误，
+    /// 所以唯一的解决方法是：
     #ifndef __has_extension
 
         #define __has_extension __has_feature

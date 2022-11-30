@@ -12,9 +12,11 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 #include <string>
@@ -33,9 +35,11 @@ namespace Rendering
         using BufferTarget = CoreTools::BufferTarget;
         using BufferSource = CoreTools::BufferSource;
         using ObjectRegister = CoreTools::ObjectRegister;
+        using OpenGLUInt = System::OpenGLUInt;
 
     public:
         explicit VisualProgram(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        VisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
         virtual ~VisualProgram() noexcept = default;
         VisualProgram(const VisualProgram& rhs) = default;
         VisualProgram& operator=(const VisualProgram& rhs) = default;
@@ -48,6 +52,10 @@ namespace Rendering
         NODISCARD ConstShaderSharedPtr GetPixelShader() const noexcept;
         NODISCARD ConstShaderSharedPtr GetGeometryShader() const noexcept;
 
+        NODISCARD ShaderSharedPtr GetVertexShader() noexcept;
+        NODISCARD ShaderSharedPtr GetPixelShader() noexcept;
+        NODISCARD ShaderSharedPtr GetGeometryShader() noexcept;
+
         void SetVertexShader(const ShaderSharedPtr& shader);
         void SetPixelShader(const ShaderSharedPtr& shader);
         void SetGeometryShader(const ShaderSharedPtr& shader);
@@ -59,6 +67,8 @@ namespace Rendering
         void Load(BufferSource& source);
         void Link(ObjectLink& source);
         void Register(ObjectRegister& target) const;
+
+        NODISCARD GLSLReflection GetReflector() const;
 
     private:
         PackageType impl;

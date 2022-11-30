@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 13:40)
+///	引擎测试版本：0.8.1.4 (2022/11/05 22:52)
 
 #include "AndroidNativeAppGlueTesting.h"
 #include "System/Android/AndroidNativeAppGlue.h"
@@ -37,7 +37,7 @@ void System::AndroidNativeAppGlueTesting::MainTest()
 void System::AndroidNativeAppGlueTesting::VirtualAndroidNativeAppGlueTest()
 {
     AppDummy();
-
+    
     AndroidApp androidApp{};
 
     const auto appName = SYSTEM_TEXT("Android Virtual Window Test"s) + ToString(index);

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/10 13:12)
+///	引擎版本：0.8.1.4 (2022/11/18 23:26)
 
 #ifndef SYSTEM_HELPER_BORLAND_H
 #define SYSTEM_HELPER_BORLAND_H
@@ -113,12 +113,17 @@
 
     #endif  // (__BORLANDC__ <= 0x564)
 
-    // Borland C++ Builder 6默认使用STLPort。
-    // 如果定义_USE_OLD_RW_STL，那么我们对Rogue Wave实现具有0x560或更高版本，这可能有std::DBL_MAX错误。
+    /// Borland C++ Builder 6默认使用STLPor，
+    /// 如果定义_USE_OLD_RW_STL，
+    /// 那么我们对Rogue Wave实现具有0x560或更高版本，
+    /// 这可能有std::DBL_MAX错误。
     #if defined(TCRE_BCB_WITH_ROGUE_WAVE)
 
-        // <climits>部分不合标准，一些宏定义了真正在命名空间std中的符号，
-        // 所以你最终不得不使用std::DBL_MAX这样的非法构造，作为一个修复，我们只需要包含float.h。
+        /// <climits>部分不合标准，
+        /// 一些宏定义了真正在命名空间std中的符号，
+        /// 所以你最终不得不使用std::DBL_MAX这样的非法构造，
+        /// 作为一个修复，
+        /// 我们只需要包含float.h。
         #include <float.h>
 
     #endif  // defined(TCRE_BCB_WITH_ROGUE_WAVE)

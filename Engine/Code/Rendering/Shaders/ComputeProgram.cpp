@@ -14,10 +14,16 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ComputeProgram)
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, ComputeProgram)
 
 Rendering::ComputeProgram::ComputeProgram(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::ComputeProgram::ComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, programHandle, computeShaderHandle }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -27,3 +33,4 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, ComputeProgram)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ComputeProgram, GetComputeShader, Rendering::ComputeProgram::ConstShaderSharedPtr)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ComputeProgram, SetComputeShader, ShaderSharedPtr, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ComputeProgram, GetReflector, Rendering::GLSLReflection)

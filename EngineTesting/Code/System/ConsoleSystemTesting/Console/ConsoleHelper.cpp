@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:47)
+///	引擎测试版本：0.8.1.4 (2022/11/20 11:56)
 
 #include "ConsoleHelper.h"
 #include "System/Console/ConsoleCreate.h"
@@ -13,10 +13,6 @@
 #include "CoreTools/Helper/LogMacro.h"
 
 #include <iostream>
-
-using std::cerr;
-using std::cout;
-using std::endl;
 
 ConsoleSystemTesting::ConsoleHelper::ConsoleHelper() noexcept
     : out{ nullptr }, in{ nullptr }, error{ nullptr }, isSuccess{ false }
@@ -29,11 +25,7 @@ ConsoleSystemTesting::ConsoleHelper::ConsoleHelper() noexcept
 // private
 void ConsoleSystemTesting::ConsoleHelper::AllocConsole() noexcept
 {
-    if (System::AllocConsole() &&
-        System::FReOpenConsole(out, "CONOUT$", "w+t", stdout) &&
-        System::FReOpenConsole(in, "CONIN$", "r+t", stdin) &&
-        System::FReOpenConsole(error, "CONOUT$", "w+t", stderr) &&
-        System::RemoveConsoleCloseButton())
+    if (DoAllocConsole())
     {
         isSuccess = true;
     }
@@ -57,10 +49,7 @@ ConsoleSystemTesting::ConsoleHelper::~ConsoleHelper() noexcept
 // private
 void ConsoleSystemTesting::ConsoleHelper::FreeConsole() noexcept
 {
-    if (!(System::FCloseConsole(error) &&
-          System::FCloseConsole(in) &&
-          System::FCloseConsole(out) &&
-          System::FreeConsole()))
+    if (!DoFreeConsole())
     {
         LOG_SINGLETON_APPENDER(Error, User)
             << SYSTEM_TEXT("销毁控制台失败！")
@@ -100,6 +89,23 @@ bool ConsoleSystemTesting::ConsoleHelper::IsSuccess() const noexcept
 
 void ConsoleSystemTesting::ConsoleHelper::PrintConsoleInfo()
 {
-    cout << "一共有两行消息显示在控制台。" << endl;
-    cerr << "控制台没有关闭按钮。" << endl;
+    std::cout << "一共有两行消息显示在控制台。" << std::endl;
+    std::cerr << "控制台没有关闭按钮。" << std::endl;
+}
+
+bool ConsoleSystemTesting::ConsoleHelper::DoAllocConsole() noexcept
+{
+    return System::AllocConsole() &&
+           System::FReOpenConsole(out, "CONOUT$", "w+t", stdout) &&
+           System::FReOpenConsole(in, "CONIN$", "r+t", stdin) &&
+           System::FReOpenConsole(error, "CONOUT$", "w+t", stderr) &&
+           System::RemoveConsoleCloseButton();
+}
+
+bool ConsoleSystemTesting::ConsoleHelper::DoFreeConsole() noexcept
+{
+    return System::FCloseConsole(error) &&
+           System::FCloseConsole(in) &&
+           System::FCloseConsole(out) &&
+           System::FreeConsole();
 }

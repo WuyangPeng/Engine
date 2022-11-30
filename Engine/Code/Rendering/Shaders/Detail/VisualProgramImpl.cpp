@@ -17,10 +17,16 @@
 #include "CoreTools/ObjectSystems/ObjectRegisterDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
+#include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLVisualProgram.h"
 #include "Rendering/Shaders/Shader.h"
 
 using std::string;
 using std::vector;
+
+Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
+{
+    return std::make_shared<GLSLVisualProgram>(programHandle, vertexShaderHandle, pixelShaderHandle, geometryShaderHandle);
+}
 
 Rendering::VisualProgramImpl::VisualProgramImpl() noexcept
     : vertexShader{}, pixelShader{}, geometryShader{}
@@ -45,6 +51,27 @@ Rendering::VisualProgramImpl::ConstShaderSharedPtr Rendering::VisualProgramImpl:
 }
 
 Rendering::VisualProgramImpl::ConstShaderSharedPtr Rendering::VisualProgramImpl::GetGeometryShader() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return geometryShader.object;
+}
+
+Rendering::VisualProgramImpl::ShaderSharedPtr Rendering::VisualProgramImpl::GetVertexShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return vertexShader.object;
+}
+
+Rendering::VisualProgramImpl::ShaderSharedPtr Rendering::VisualProgramImpl::GetPixelShader() noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return pixelShader.object;
+}
+
+Rendering::VisualProgramImpl::ShaderSharedPtr Rendering::VisualProgramImpl::GetGeometryShader() noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -133,6 +160,20 @@ void Rendering::VisualProgramImpl::Register(ObjectRegister& target) const
     target.Register(vertexShader);
     target.Register(pixelShader);
     target.Register(geometryShader);
+}
+
+Rendering::GLSLReflection Rendering::VisualProgramImpl::GetReflector() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return GLSLReflection{ 0 };
+}
+
+Rendering::VisualProgramImpl::VisualProgramSharedPtr Rendering::VisualProgramImpl::Clone() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return std::make_shared<ClassType>(*this);
 }
 
 CoreTools::ObjectSharedPtr Rendering::VisualProgramImpl::GetObjectByName(const string& name)

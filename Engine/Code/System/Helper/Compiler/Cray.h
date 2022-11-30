@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/10 13:14)
+///	引擎版本：0.8.1.4 (2022/11/18 23:28)
 
 #ifndef SYSTEM_HELPER_COMPAQ_CXX_H
 #define SYSTEM_HELPER_COMPAQ_CXX_H
@@ -32,16 +32,19 @@
 
     #if TCRE_CRAY_x == TCRE_CRAY_APPEND(_RELEASE_PATCHLEVEL)
 
-        // 这是一个开发人员构建。
-        // _RELEASE_PATCHLEVEL定义为x，x未定义为宏。
-        // 假装_RELEASE_PATCHLEVEL为99，因此我们获得了此版本中最新补丁级别的配置。
+        /// 这是一个开发人员构建。
+        /// _RELEASE_PATCHLEVEL定义为x，
+        /// x未定义为宏，
+        /// 假装_RELEASE_PATCHLEVEL为99，
+        /// 因此我们获得了此版本中最新补丁级别的配置。
 
         #define CRAY_VERSION (_RELEASE_MAJOR * 10000 + _RELEASE_MINOR * 100 + 99)
 
     #else  // !TCRE_CRAY_x == TCRE_CRAY_APPEND(_RELEASE_PATCHLEVEL)
 
-        // 这是一个生产版本。
-        // _RELEASE_PATCHLEVEL未定义为x，或x被定义为宏。
+        /// 这是一个生产版本,
+        /// _RELEASE_PATCHLEVEL未定义为x，
+        /// 或x被定义为宏。
 
         #define CRAY_VERSION (_RELEASE_MAJOR * 10000 + _RELEASE_MINOR * 100 + _RELEASE_PATCHLEVEL)
 

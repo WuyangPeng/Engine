@@ -33,14 +33,19 @@ namespace Rendering
 
         void SetLayout(const MemberLayoutContainer& memberLayoutContainer);
         NODISCARD MemberLayoutContainer GetLayout() const;
+        void AddLayout(const MemberLayout& memberLayout);
 
         NODISCARD bool HasMember(const std::string& name) const;
 
         NODISCARD MemberLayout GetMember(const std::string& name) const;
 
+        NODISCARD int GetSize() const;
+
         void Load(CoreTools::BufferSource& source);
         void Save(CoreTools::BufferTarget& target) const;
         NODISCARD int GetStreamingSize() const;
+
+        void SortLayouts();
 
     private:
         MemberLayoutContainer layout;

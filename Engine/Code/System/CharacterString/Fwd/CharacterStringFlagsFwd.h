@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:42)
+///	引擎版本：0.8.1.4 (2022/11/12 21:16)
 
 #ifndef SYSTEM_CHARACTER_STRING_CHARACTER_STRING_FLAGS_FWD_H
 #define SYSTEM_CHARACTER_STRING_CHARACTER_STRING_FLAGS_FWD_H
@@ -20,9 +20,6 @@ namespace System
     // FormatMessage
     enum class FormatMessageOption;
     enum class FormatMessageWidth;
-
-    // FormatString
-    enum class StringSafe;
 
     // StringConversion
     enum class MultiByte;

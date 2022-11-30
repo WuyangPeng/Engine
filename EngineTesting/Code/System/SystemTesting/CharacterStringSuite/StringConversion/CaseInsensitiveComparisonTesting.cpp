@@ -42,10 +42,10 @@ void System::CaseInsensitiveComparisonTesting::CaseInsensitiveComparisonTest()
 
     for (auto index = 0; index < letterNum; ++index)
     {
-        auto returnFlag = CompareStringOrdinalUseBinary(&lower, 1, &capital, 1, gTrue);
+        auto returnFlag = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gTrue);
         ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
 
-        returnFlag = CompareStringOrdinalUseBinary(&lower, 1, &capital, 1, gFalse);
+        returnFlag = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gFalse);
         ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::GreaterThan);
 
         lower += 1;

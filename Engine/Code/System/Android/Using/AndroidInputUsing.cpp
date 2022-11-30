@@ -1,141 +1,158 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:59)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:26)
 
 #include "System/SystemExport.h"
 
 #include "AndroidInputUsing.h"
+#include "System/Android/Flags/AndroidInputFlags.h"
+#include "System/Android/Flags/AndroidKeyCodesFlags.h"
 
 #ifndef SYSTEM_PLATFORM_ANDROID
 
 System::AndroidInputEvent::AndroidInputEvent() noexcept
-    : m_AndroidInputEventType{ AndroidInputEventType::Key },
-      m_AndroidInputSource{ AndroidInputSource::Keyborad },
-      m_AndroidMeta{ AndroidMeta::None },
-      m_AndroidKeyEventAction{ AndroidKeyEventAction::Down },
-      m_AndroidKeyEventFlag{ AndroidKeyEvent::SoftKeyboard },
-      m_AndroidKeyCodes{ AndroidKeyCodes::A },
-      m_AndroidMotionEventAction{ AndroidMotionEventAction::Down },
-      m_AndroidMotionEventFlag{ AndroidMotionEvent::WindowIsObscured },
-      m_AndroidMotionEventButton{ AndroidMotionEventButton::Primary },
-      m_AndroidMotionEventEdgeFlag{ AndroidMotionEventEdge::None },
-      m_AndroidMotionEventToolType{ AndroidMotionEventTool::Unknown }
+    : ClassType{ AndroidInputEventType::Key, AndroidMotionEventAction::Mask }
+{
+}
+
+System::AndroidInputEvent::AndroidInputEvent(AndroidInputEventType androidInputEventType, AndroidMotionEventAction androidMotionEventAction) noexcept
+    : ClassType{ androidInputEventType, AndroidKeyEventAction::Down, AndroidKeyCodes::Unknown, androidMotionEventAction }
+{
+}
+
+System::AndroidInputEvent::AndroidInputEvent(AndroidInputEventType androidInputEventType, AndroidKeyEventAction androidKeyEventAction, AndroidKeyCodes androidKeyCodes) noexcept
+    : ClassType{ androidInputEventType, androidKeyEventAction, androidKeyCodes, AndroidMotionEventAction::Mask }
+{
+}
+
+System::AndroidInputEvent::AndroidInputEvent(AndroidInputEventType androidInputEventType, AndroidKeyEventAction androidKeyEventAction, AndroidKeyCodes androidKeyCodes, AndroidMotionEventAction androidMotionEventAction) noexcept
+    : androidInputEventType{ androidInputEventType },
+      androidInputSource{ AndroidInputSource::Unknown },
+      androidMeta{ AndroidMeta::None },
+      androidKeyEventAction{ androidKeyEventAction },
+      androidKeyEventFlag{ AndroidKeyEventFlag::Null },
+      androidKeyCodes{ androidKeyCodes },
+      androidMotionEventAction{ androidMotionEventAction },
+      androidMotionEventFlag{ AndroidMotionEventFlag::WindowIsObscured },
+      androidMotionEventButton{ AndroidMotionEventButton::Primary },
+      androidMotionEventEdgeFlag{ AndroidMotionEventEdgeFlag::None },
+      androidMotionEventToolType{ AndroidMotionEventToolType::Unknown }
 {
 }
 
 System::AndroidInputEventType System::AndroidInputEvent::GetAndroidInputEventType() const noexcept
 {
-    return m_AndroidInputEventType;
+    return androidInputEventType;
 }
 
-void System::AndroidInputEvent::SetAndroidInputEventType(AndroidInputEventType androidInputEventType) noexcept
+void System::AndroidInputEvent::SetAndroidInputEventType(AndroidInputEventType aAndroidInputEventType) noexcept
 {
-    m_AndroidInputEventType = androidInputEventType;
+    androidInputEventType = aAndroidInputEventType;
 }
 
 System::AndroidInputSource System::AndroidInputEvent::GetAndroidInputSource() const noexcept
 {
-    return m_AndroidInputSource;
+    return androidInputSource;
 }
 
-void System::AndroidInputEvent::SetAndroidInputSource(AndroidInputSource androidInputSource) noexcept
+void System::AndroidInputEvent::SetAndroidInputSource(AndroidInputSource aAndroidInputSource) noexcept
 {
-    m_AndroidInputSource = androidInputSource;
+    androidInputSource = aAndroidInputSource;
 }
 
 System::AndroidMeta System::AndroidInputEvent::GetAndroidMeta() const noexcept
 {
-    return m_AndroidMeta;
+    return androidMeta;
 }
 
-void System::AndroidInputEvent::SetAndroidMeta(AndroidMeta androidMeta) noexcept
+void System::AndroidInputEvent::SetAndroidMeta(AndroidMeta aAndroidMeta) noexcept
 {
-    m_AndroidMeta = androidMeta;
+    androidMeta = aAndroidMeta;
 }
 
 System::AndroidKeyEventAction System::AndroidInputEvent::GetAndroidKeyEventAction() const noexcept
 {
-    return m_AndroidKeyEventAction;
+    return androidKeyEventAction;
 }
 
-void System::AndroidInputEvent::SetAndroidKeyEventAction(AndroidKeyEventAction androidKeyEventAction) noexcept
+void System::AndroidInputEvent::SetAndroidKeyEventAction(AndroidKeyEventAction aAndroidKeyEventAction) noexcept
 {
-    m_AndroidKeyEventAction = androidKeyEventAction;
+    androidKeyEventAction = aAndroidKeyEventAction;
 }
 
-System::AndroidKeyEvent System::AndroidInputEvent::GetAndroidKeyEventFlag() const noexcept
+System::AndroidKeyEventFlag System::AndroidInputEvent::GetAndroidKeyEventFlag() const noexcept
 {
-    return m_AndroidKeyEventFlag;
+    return androidKeyEventFlag;
 }
 
-void System::AndroidInputEvent::SetAndroidKeyEventFlag(AndroidKeyEvent androidKeyEvent) noexcept
+void System::AndroidInputEvent::SetAndroidKeyEventFlag(AndroidKeyEventFlag aAndroidKeyEvent) noexcept
 {
-    m_AndroidKeyEventFlag = androidKeyEvent;
+    androidKeyEventFlag = aAndroidKeyEvent;
 }
 
 System::AndroidKeyCodes System::AndroidInputEvent::GetAndroidKeyCodes() const noexcept
 {
-    return m_AndroidKeyCodes;
+    return androidKeyCodes;
 }
 
-void System::AndroidInputEvent::SetAndroidKeyCodes(AndroidKeyCodes androidKeyCodes) noexcept
+void System::AndroidInputEvent::SetAndroidKeyCodes(AndroidKeyCodes aAndroidKeyCodes) noexcept
 {
-    m_AndroidKeyCodes = androidKeyCodes;
+    androidKeyCodes = aAndroidKeyCodes;
 }
 
 System::AndroidMotionEventAction System::AndroidInputEvent::GetAndroidMotionEventAction() const noexcept
 {
-    return m_AndroidMotionEventAction;
+    return androidMotionEventAction;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventAction(AndroidMotionEventAction androidMotionEventAction) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventAction(AndroidMotionEventAction aAndroidMotionEventAction) noexcept
 {
-    m_AndroidMotionEventAction = androidMotionEventAction;
+    androidMotionEventAction = aAndroidMotionEventAction;
 }
 
-System::AndroidMotionEvent System::AndroidInputEvent::GetAndroidMotionEventFlag() const noexcept
+System::AndroidMotionEventFlag System::AndroidInputEvent::GetAndroidMotionEventFlag() const noexcept
 {
-    return m_AndroidMotionEventFlag;
+    return androidMotionEventFlag;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventFlag(AndroidMotionEvent androidMotionEvent) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventFlag(AndroidMotionEventFlag aAndroidMotionEvent) noexcept
 {
-    m_AndroidMotionEventFlag = androidMotionEvent;
+    androidMotionEventFlag = aAndroidMotionEvent;
 }
 
 System::AndroidMotionEventButton System::AndroidInputEvent::GetAndroidMotionEventButton() const noexcept
 {
-    return m_AndroidMotionEventButton;
+    return androidMotionEventButton;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventButton(AndroidMotionEventButton androidMotionEventButton) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventButton(AndroidMotionEventButton aAndroidMotionEventButton) noexcept
 {
-    m_AndroidMotionEventButton = androidMotionEventButton;
+    androidMotionEventButton = aAndroidMotionEventButton;
 }
 
-System::AndroidMotionEventEdge System::AndroidInputEvent::GetAndroidMotionEventEdgeFlag() const noexcept
+System::AndroidMotionEventEdgeFlag System::AndroidInputEvent::GetAndroidMotionEventEdgeFlag() const noexcept
 {
-    return m_AndroidMotionEventEdgeFlag;
+    return androidMotionEventEdgeFlag;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventEdgeFlag(AndroidMotionEventEdge androidMotionEventEdge) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventEdgeFlag(AndroidMotionEventEdgeFlag aAndroidMotionEventEdge) noexcept
 {
-    m_AndroidMotionEventEdgeFlag = androidMotionEventEdge;
+    androidMotionEventEdgeFlag = aAndroidMotionEventEdge;
 }
 
-System::AndroidMotionEventTool System::AndroidInputEvent::GetAndroidMotionEventToolType() const noexcept
+System::AndroidMotionEventToolType System::AndroidInputEvent::GetAndroidMotionEventToolType() const noexcept
 {
-    return m_AndroidMotionEventToolType;
+    return androidMotionEventToolType;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventToolType(AndroidMotionEventTool androidMotionEventTool) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventToolType(AndroidMotionEventToolType aAndroidMotionEventTool) noexcept
 {
-    m_AndroidMotionEventToolType = androidMotionEventTool;
+    androidMotionEventToolType = aAndroidMotionEventTool;
 }
 
 System::AndroidInputQueue::AndroidInputQueue() noexcept

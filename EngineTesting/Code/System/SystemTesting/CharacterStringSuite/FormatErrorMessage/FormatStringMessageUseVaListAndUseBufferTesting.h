@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:15)
+///	引擎测试版本：0.8.1.4 (2022/11/29 23:18)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_FORMAT_STRING_MESSAGE_USE_VA_LIST_AND_USE_BUFFER_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_FORMAT_STRING_MESSAGE_USE_VA_LIST_AND_USE_BUFFER_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "FormatStringMessageUseArgumentTestingBase.h"
 
 namespace System
 {
-    class FormatStringMessageUseVaListAndUseBufferTesting final : public CoreTools::UnitTest
+    class FormatStringMessageUseVaListAndUseBufferTesting final : public FormatStringMessageUseArgumentTestingBase
     {
     public:
         using ClassType = FormatStringMessageUseVaListAndUseBufferTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatStringMessageUseArgumentTestingBase;
 
     public:
         explicit FormatStringMessageUseVaListAndUseBufferTesting(const OStreamShared& stream);
@@ -29,9 +29,9 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void FormatStringUseVaListAndUseBufferTest();
-        void ExecuteFormatStringUseVaListAndUseBufferTest(const TChar* message, ...);
-        void DoExecuteFormatStringUseVaListAndUseBufferTest(const TChar* message, va_list arguments);
+        void FormatStringMessageUseVaListAndUseBufferTest();
+        void FormatStringMessageUseIndefiniteParameterTest(const TChar* message, ...);
+        void FormatStringMessageUseArgumentsTest(const TChar* message, va_list vaArguments);
     };
 }
 

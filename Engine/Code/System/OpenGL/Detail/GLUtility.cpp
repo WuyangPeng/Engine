@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 13:36)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:39)
 
 #include "System/SystemExport.h"
 
@@ -19,61 +19,68 @@
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 
+#if defined(SYSTEM_PLATFORM_MACOS)
+
+    #include <mach-o/dyld.h>
+    #include <cstdlib>
+    #include <cstring>
+
+#elif defined(SYSTEM_PLATFORM_LINUX)
+
+    #include <GL/glx.h>
+    #include <GL/glxext.h>
+
+#endif  //  defined(SYSTEM_PLATFORM_MACOS)
+
 #include <array>
 #include <iostream>
 #include <vector>
 
-using std::array;
-using std::cout;
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 constexpr auto majorCount = 4;
 constexpr auto minorCount = 6;
 constexpr auto versionSize = (majorCount + 1) * (minorCount + 1);
 
-constexpr array<System::OpenGLSystemVersion, versionSize> version{
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
+constexpr std::array<System::OpenGLSystemVersion, versionSize> version{ System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
 
-    System::OpenGLSystemVersion::Version10,
-    System::OpenGLSystemVersion::Version11,
-    System::OpenGLSystemVersion::Version12,
-    System::OpenGLSystemVersion::Version13,
-    System::OpenGLSystemVersion::Version14,
-    System::OpenGLSystemVersion::Version15,
-    System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::Version10,
+                                                                        System::OpenGLSystemVersion::Version11,
+                                                                        System::OpenGLSystemVersion::Version12,
+                                                                        System::OpenGLSystemVersion::Version13,
+                                                                        System::OpenGLSystemVersion::Version14,
+                                                                        System::OpenGLSystemVersion::Version15,
+                                                                        System::OpenGLSystemVersion::VersionNone,
 
-    System::OpenGLSystemVersion::Version20,
-    System::OpenGLSystemVersion::Version21,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::Version20,
+                                                                        System::OpenGLSystemVersion::Version21,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
 
-    System::OpenGLSystemVersion::Version30,
-    System::OpenGLSystemVersion::Version31,
-    System::OpenGLSystemVersion::Version32,
-    System::OpenGLSystemVersion::Version33,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
-    System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::Version30,
+                                                                        System::OpenGLSystemVersion::Version31,
+                                                                        System::OpenGLSystemVersion::Version32,
+                                                                        System::OpenGLSystemVersion::Version33,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
+                                                                        System::OpenGLSystemVersion::VersionNone,
 
-    System::OpenGLSystemVersion::Version40,
-    System::OpenGLSystemVersion::Version41,
-    System::OpenGLSystemVersion::Version42,
-    System::OpenGLSystemVersion::Version43,
-    System::OpenGLSystemVersion::Version44,
-    System::OpenGLSystemVersion::Version45,
-    System::OpenGLSystemVersion::Version46,
-};
+                                                                        System::OpenGLSystemVersion::Version40,
+                                                                        System::OpenGLSystemVersion::Version41,
+                                                                        System::OpenGLSystemVersion::Version42,
+                                                                        System::OpenGLSystemVersion::Version43,
+                                                                        System::OpenGLSystemVersion::Version44,
+                                                                        System::OpenGLSystemVersion::Version45,
+                                                                        System::OpenGLSystemVersion::Version46 };
 
 System::OpenGLSystemVersion System::GetOpenGLVersion(int major, int minor) noexcept
 {
@@ -84,7 +91,9 @@ System::OpenGLSystemVersion System::GetOpenGLVersion(int major, int minor) noexc
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         return version[index];
+
 #include STSTEM_WARNING_POP
     }
     else if (majorCount < major || (major == majorCount && minorCount < minor))
@@ -102,15 +111,15 @@ namespace System
     // 支持错误检查。
     constexpr auto errorStringSize = 9;
 
-    constexpr array<const char*, errorStringSize> errorString{ "GL_INVALID_ENUM",
-                                                               "GL_INVALID_VALUE",
-                                                               "GL_INVALID_OPERATION",
-                                                               "GL_STACK_OVERFLOW",
-                                                               "GL_STACK_UNDERFLOW",
-                                                               "GL_OUT_OF_MEMORY",
-                                                               "GL_INVALID_FRAMEBUFFER_OPERATION",
-                                                               "GL_CONTEXT_LOST",
-                                                               "GL_UNKNOWN_ERROR_CODE" };
+    constexpr std::array<const char*, errorStringSize> errorString{ "GL_INVALID_ENUM",
+                                                                    "GL_INVALID_VALUE",
+                                                                    "GL_INVALID_OPERATION",
+                                                                    "GL_STACK_OVERFLOW",
+                                                                    "GL_STACK_UNDERFLOW",
+                                                                    "GL_OUT_OF_MEMORY",
+                                                                    "GL_INVALID_FRAMEBUFFER_OPERATION",
+                                                                    "GL_CONTEXT_LOST",
+                                                                    "GL_UNKNOWN_ERROR_CODE" };
 }
 
 const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
@@ -122,33 +131,33 @@ const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         return errorString[index];
+
 #include STSTEM_WARNING_POP
     }
     else
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
         return errorString[errorStringSize - 1];
+
 #include STSTEM_WARNING_POP
     }
 }
 
 void System::PrintExtensionsInfo(const char* extensions)
 {
-    vector<string> token{};
+    std::vector<std::string> token{};
     boost::algorithm::split(token, extensions, boost::is_any_of(" \t\n"), boost::token_compress_on);
     for (const auto& value : token)
     {
-        cout << "    " << value << "\n";
+        std::cout << "    " << value << "\n";
     }
 }
 
 #if defined(SYSTEM_PLATFORM_MACOS)
-
-    #include <mach-o/dyld.h>
-    #include <cstdlib>
-    #include <cstring>
 
 namespace System
 {
@@ -173,9 +182,6 @@ void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
 }
 
 #elif defined(SYSTEM_PLATFORM_LINUX)
-
-    #include <GL/glx.h>
-    #include <GL/glxext.h>
 
 void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
 {

@@ -24,7 +24,7 @@ using std::make_shared;
 using std::move;
 
 Framework::CameraModelMiddleLayer::CameraModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, timeDelta{ System::g_Microseconds }
+    : ParentType{ middleLayerPlatform, environmentDirectory }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, timeDelta{ System::gMicroseconds }
 {
     FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -99,7 +99,7 @@ bool Framework::CameraModelMiddleLayer::Idle(int64_t aTimeDelta)
             MoveCamera();
             MoveObject();
 
-            timeDelta += System::g_Microseconds;
+            timeDelta += System::gMicroseconds;
         }
 
         return true;

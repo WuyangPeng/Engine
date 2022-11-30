@@ -12,7 +12,13 @@
 #include "ComputeProgramImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Base/Flags/GraphicsObjectType.h"
+#include "Rendering/OpenGLRenderer/Detail/GLSL/GLSLComputeProgram.h"
 #include "Rendering/Shaders/Shader.h"
+
+Rendering::ComputeProgramImpl::ComputeProgramSharedPtr Rendering::ComputeProgramImpl::Create(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle)
+{
+    return std::make_shared<GLSLComputeProgram>(programHandle, computeShaderHandle);
+}
 
 Rendering::ComputeProgramImpl::ComputeProgramImpl() noexcept
     : computeShader{}
@@ -39,4 +45,18 @@ void Rendering::ComputeProgramImpl::SetComputeShader(const ShaderSharedPtr& shad
     }
 
     computeShader = shader;
+}
+
+Rendering::GLSLReflection Rendering::ComputeProgramImpl::GetReflector() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return GLSLReflection{ 0 };
+}
+
+Rendering::ComputeProgramImpl::ComputeProgramSharedPtr Rendering::ComputeProgramImpl::Clone() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return std::make_shared<ClassType>(*this);
 }

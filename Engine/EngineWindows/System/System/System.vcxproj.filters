@@ -283,6 +283,18 @@
     <Filter Include="DirectX 头文件\Using">
       <UniqueIdentifier>{589f6993-8c78-4f72-922a-10e5054d669b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vulkan 头文件">
+      <UniqueIdentifier>{8ec4337f-2628-493a-b94f-902241a255d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vulkan 源文件">
+      <UniqueIdentifier>{be15ed61-44a7-4d4b-8e1c-721d240a36d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 头文件\Data">
+      <UniqueIdentifier>{5a094d58-d66b-4630-bbc3-06e8f3a19441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterString 源文件\Data">
+      <UniqueIdentifier>{91d2d316-9c9d-4294-a81c-a448953a66c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\System\SystemFwd.h">
@@ -339,7 +351,7 @@
     <ClInclude Include="..\..\..\Code\System\Android\Using\AndroidInputUsing.h">
       <Filter>Android 头文件\Using</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidNativeWindow.h">
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidNativeWindowFacade.h">
       <Filter>Android 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Android\Android.h">
@@ -348,13 +360,13 @@
     <ClInclude Include="..\..\..\Code\System\Android\AndroidFwd.h">
       <Filter>Android 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputKeyEvent.h">
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputEventFacade.h">
       <Filter>Android 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputMotionEvent.h">
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputMotionEventFacade.h">
       <Filter>Android 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputQueue.h">
+    <ClInclude Include="..\..\..\Code\System\Android\AndroidInputQueueFacade.h">
       <Filter>Android 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Android\AndroidLooper.h">
@@ -450,7 +462,7 @@
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectX.h">
       <Filter>DirectX 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\DirectX\DirectXD3D11.h">
+    <ClInclude Include="..\..\..\Code\System\DirectX\DirectXD3D12.h">
       <Filter>DirectX 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\DirectX\DirectXFwd.h">
@@ -1698,17 +1710,11 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLProgramFlags.h">
       <Filter>OpenGL 头文件\Flags</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLProgramFlagsFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLShader.h">
       <Filter>OpenGL 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\Flags\OpenGLShaderFlags.h">
       <Filter>OpenGL 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\Fwd\OpenGLShaderFlagsFwd.h">
-      <Filter>OpenGL 头文件\Fwd</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Windows\WindowsSystem.h">
       <Filter>Windows 头文件</Filter>
@@ -1824,6 +1830,24 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Tools.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Android\Fwd\AndroidUsingFwd.h">
+      <Filter>Android 头文件\Fwd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Vulkan\Vulkan.h">
+      <Filter>Vulkan 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Vulkan\VulkanFacade.h">
+      <Filter>Vulkan 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Vulkan\VulkanFwd.h">
+      <Filter>Vulkan 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\CharacterString\Data\FormatErrorMessageParameter.h">
+      <Filter>CharacterString 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\CharacterString\Data\Locale.h">
+      <Filter>CharacterString 头文件\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
@@ -1841,13 +1865,13 @@
     <ClCompile Include="..\..\..\Code\System\Android\Using\AndroidNativeWindowUsing.cpp">
       <Filter>Android 源文件\Using</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputKeyEvent.cpp">
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputEventFacade.cpp">
       <Filter>Android 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputMotionEvent.cpp">
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputMotionEventFacade.cpp">
       <Filter>Android 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputQueue.cpp">
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidInputQueueFacade.cpp">
       <Filter>Android 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\Android\AndroidLooper.cpp">
@@ -1856,7 +1880,7 @@
     <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeAppGlue.cpp">
       <Filter>Android 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeWindow.cpp">
+    <ClCompile Include="..\..\..\Code\System\Android\AndroidNativeWindowFacade.cpp">
       <Filter>Android 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\CharacterString\FormatErrorMessage.cpp">
@@ -1889,7 +1913,7 @@
     <ClCompile Include="..\..\..\Code\System\Console\ConsoleScreenBuffer.cpp">
       <Filter>Console 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D11.cpp">
+    <ClCompile Include="..\..\..\Code\System\DirectX\DirectXD3D12.cpp">
       <Filter>DirectX 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\DynamicLink\EnumResourceTools.cpp">
@@ -2161,6 +2185,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\Windows\WindowsUser.cpp">
       <Filter>Windows 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\Vulkan\VulkanFacade.cpp">
+      <Filter>Vulkan 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\CharacterString\Data\Locale.cpp">
+      <Filter>CharacterString 源文件\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

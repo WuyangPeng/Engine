@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:35)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:31)
 
 #ifndef SYSTEM_OPENGL_OPENGL_SHADER_H
 #define SYSTEM_OPENGL_OPENGL_SHADER_H
 
 #include "System/SystemDll.h"
 
-#include "Fwd/OpenGLShaderFlagsFwd.h"
+#include "Fwd/OpenGLFlagsFwd.h"
 #include "Using/OpenGLUsing.h"
 
 #include <string>
@@ -29,10 +29,11 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE GetGLShaderSource(OpenGLUInt shader, OpenGLSize count, const OpenGLChar* const* string, const OpenGLInt* length) noexcept;
     void SYSTEM_DEFAULT_DECLARE CompileGLShader(OpenGLUInt shader) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetGLShaderSource(OpenGLUInt shader, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* source) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderStatus pname) noexcept;
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetGLShader(OpenGLUInt shader, ShaderAttributes pname) noexcept;
-    std::string SYSTEM_DEFAULT_DECLARE GetGLShaderInfoLog(OpenGLUInt shader);
+    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetGLShaderInfoLog(OpenGLUInt shader);
 
     NODISCARD OpenGLInt SYSTEM_DEFAULT_DECLARE GetGLUniformLocation(OpenGLUInt program, const OpenGLChar* name) noexcept;
 }

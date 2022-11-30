@@ -13,6 +13,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
+#include "Rendering/OpenGLRenderer/GLSL/GLSLReflection.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
 RENDERING_COPY_UNSHARED_EXPORT_IMPL(ComputeProgram, ComputeProgramImpl);
@@ -25,9 +26,11 @@ namespace Rendering
         COPY_UNSHARED_TYPE_DECLARE(ComputeProgram);
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
+        using OpenGLUInt = System::OpenGLUInt;
 
     public:
         explicit ComputeProgram(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+        ComputeProgram(OpenGLUInt programHandle, OpenGLUInt computeShaderHandle);
         virtual ~ComputeProgram() noexcept = default;
         ComputeProgram(const ComputeProgram& rhs) = default;
         ComputeProgram& operator=(const ComputeProgram& rhs) = default;
@@ -39,6 +42,7 @@ namespace Rendering
         NODISCARD ConstShaderSharedPtr GetComputeShader() const noexcept;
 
         void SetComputeShader(const ShaderSharedPtr& shader);
+        NODISCARD GLSLReflection GetReflector() const;
 
     private:
         PackageType impl;

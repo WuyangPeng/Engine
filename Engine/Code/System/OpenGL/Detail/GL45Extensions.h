@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:24)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:17)
 
 #ifndef SYSTEM_OPENGL_GL_45_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_45_EXTENSIONS_H
@@ -37,8 +37,8 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLCopyNamedBufferSubData(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClearNamedBufferData(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void* data) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClearNamedBufferSubData(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void* data) noexcept;
-    SYSTEM_HIDDEN_DECLARE NODISCARD void* GLMapNamedBuffer(GLuint buffer, GLenum access) noexcept;
-    SYSTEM_HIDDEN_DECLARE NODISCARD void* GLMapNamedBufferRange(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access) noexcept;
+    SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR void* GLMapNamedBuffer(GLuint buffer, GLenum access) noexcept;
+    SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR void* GLMapNamedBufferRange(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access) noexcept;
     SYSTEM_HIDDEN_DECLARE NODISCARD GLboolean GLUnmapNamedBuffer(GLuint buffer) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLFlushMappedNamedBufferRange(GLuint buffer, GLintptr offset, GLsizeiptr length) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetNamedBufferParameteriv(GLuint buffer, GLenum pname, GLint* params) noexcept;

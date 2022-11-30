@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/03 23:27)
+///	引擎版本：0.8.1.4 (2022/11/19 23:16)
 
 #ifndef SYSTEM_FWD_H
 #define SYSTEM_FWD_H
@@ -25,6 +25,7 @@
 #include "SystemOutput/SystemOutputFwd.h"
 #include "Threading/ThreadingFwd.h"
 #include "Time/TimeFwd.h"
+#include "Vulkan/VulkanFwd.h"
 #include "Windows/WindowsFwd.h"
 #include "Network/NetworkFwd.h"
 #include "UserInterface/UserInterfaceFwd.h"

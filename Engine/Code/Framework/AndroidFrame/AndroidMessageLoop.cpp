@@ -10,7 +10,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidMessageLoop.h"
-#include "System/Android/AndroidInputKeyEvent.h"
+#include "System/Android/AndroidInputEventFacade.h"
 #include "System/Android/AndroidLooper.h"
 #include "System/Android/Flags/AndroidLooperFlags.h"
 #include "System/Helper/PragmaWarning.h"

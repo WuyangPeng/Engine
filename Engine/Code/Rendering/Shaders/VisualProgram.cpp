@@ -14,10 +14,16 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, VisualProgram)
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Rendering, VisualProgram)
 
 Rendering::VisualProgram::VisualProgram(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+
+Rendering::VisualProgram::VisualProgram(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, programHandle, vertexShaderHandle, pixelShaderHandle, geometryShaderHandle }
 {
     RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -27,6 +33,10 @@ CLASS_INVARIANT_STUB_DEFINE(Rendering, VisualProgram)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetVertexShader, Rendering::VisualProgram::ConstShaderSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetPixelShader, Rendering::VisualProgram::ConstShaderSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetGeometryShader, Rendering::VisualProgram::ConstShaderSharedPtr)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetVertexShader, Rendering::VisualProgram::ShaderSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetPixelShader, Rendering::VisualProgram::ShaderSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, VisualProgram, GetGeometryShader, Rendering::VisualProgram::ShaderSharedPtr)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, SetVertexShader, ShaderSharedPtr, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, SetPixelShader, ShaderSharedPtr, void)
@@ -43,3 +53,5 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllObjec
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetConstObjectByName, std::string, CoreTools::ConstObjectSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, VisualProgram, GetAllConstObjectsByName, std::string, Rendering::VisualProgram::ConstObjectSharedPtrContainer)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, VisualProgram, GetReflector, Rendering::GLSLReflection)

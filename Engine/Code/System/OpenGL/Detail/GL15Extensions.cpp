@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:38)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:34)
 
 #include "System/SystemExport.h"
 
@@ -53,8 +53,6 @@ void System::InitOpenGL15() noexcept
     {
         existsOpenGL15 = ExistsOpenGLExtensions::Exists;
 
-        // GL_ARB_occlusion_query
-
         SYSTEM_GET_FUNCTION(glGenQueries);
         SYSTEM_GET_FUNCTION(glDeleteQueries);
         SYSTEM_GET_FUNCTION(glIsQuery);
@@ -63,8 +61,6 @@ void System::InitOpenGL15() noexcept
         SYSTEM_GET_FUNCTION(glGetQueryiv);
         SYSTEM_GET_FUNCTION(glGetQueryObjectiv);
         SYSTEM_GET_FUNCTION(glGetQueryObjectuiv);
-
-        // GL_ARB_vertex_buffer_object
 
         SYSTEM_GET_FUNCTION(glBindBuffer);
         SYSTEM_GET_FUNCTION(glDeleteBuffers);

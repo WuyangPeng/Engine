@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 14:58)
+///	引擎测试版本：0.8.1.4 (2022/11/04 23:53)
 
 #include "OpenGLProgramTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -173,7 +173,7 @@ void System::OpenGLProgramTesting::ProgramResourceTest()
                                          EnumCastUnderlying(ProgramProperties::ReferencedByTessControlShader),
                                          EnumCastUnderlying(ProgramProperties::ReferencedByTessEvaluationShader),
                                          EnumCastUnderlying(ProgramProperties::IsPerPatch),
-                                         EnumCastUnderlying(ProgramProperties::Location_Component) };
+                                         EnumCastUnderlying(ProgramProperties::LocationComponent) };
 
     const auto numProperties = boost::numeric_cast<GLsizei>(properties.size());
 

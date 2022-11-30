@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:38)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:33)
 
 #include "System/SystemExport.h"
 
@@ -42,13 +42,10 @@ void System::InitOpenGL13() noexcept
     {
         existsOpenGL13 = ExistsOpenGLExtensions::Exists;
 
-        // GL_ARB_multisample
         SYSTEM_GET_FUNCTION(glSampleCoverage);
 
-        // GL_ARB_multitexture
         SYSTEM_GET_FUNCTION(glActiveTexture);
 
-        // GL_ARB_texture_compression
         SYSTEM_GET_FUNCTION(glCompressedTexImage3D);
         SYSTEM_GET_FUNCTION(glCompressedTexImage2D);
         SYSTEM_GET_FUNCTION(glCompressedTexImage1D);
@@ -56,8 +53,6 @@ void System::InitOpenGL13() noexcept
         SYSTEM_GET_FUNCTION(glCompressedTexSubImage2D);
         SYSTEM_GET_FUNCTION(glCompressedTexSubImage1D);
         SYSTEM_GET_FUNCTION(glGetCompressedTexImage);
-
-        // GL_ARB_transpose_matrix
     }
     else
     {

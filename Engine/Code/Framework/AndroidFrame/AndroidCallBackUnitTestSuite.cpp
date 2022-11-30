@@ -11,7 +11,7 @@
 
 #include "AndroidCallBackUnitTestSuite.h"
 #include "Detail/AndroidCallBackUnitTestSuiteImpl.h"
-#include "System/Android/AndroidInputKeyEvent.h"
+#include "System/Android/AndroidInputEventFacade.h"
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -79,7 +79,9 @@ int Framework::AndroidCallBackUnitTestSuite::KeyDownMessage(AndroidApp* androidA
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
-    const auto keyCode = System::AndroidKeyEventGetKeyCode(androidInputEvent);
+    System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
+
+    const auto keyCode = androidKeyEvent.GetKeyCode();
 
     switch (keyCode)
     {

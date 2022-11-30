@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 11:22)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:15)
 
 #ifndef SYSTEM_OPENGL_GL_30_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_30_EXTENSIONS_H
@@ -80,7 +80,7 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint* value) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat* value) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil) noexcept;
-    SYSTEM_HIDDEN_DECLARE NODISCARD const GLubyte* GLGetStringi(GLenum name, GLuint index) noexcept;
+    SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR const GLubyte* GLGetStringi(GLenum name, GLuint index) noexcept;
     SYSTEM_HIDDEN_DECLARE NODISCARD GLboolean GLIsRenderbuffer(GLuint renderbuffer) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindRenderbuffer(GLenum target, GLuint renderbuffer) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDeleteRenderbuffers(GLsizei n, const GLuint* renderbuffers) noexcept;
@@ -101,7 +101,7 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLBlitFramebuffer(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLRenderbufferStorageMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLFramebufferTextureLayer(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer) noexcept;
-    SYSTEM_HIDDEN_DECLARE NODISCARD void* GLMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) noexcept;
+    SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR void* GLMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBindVertexArray(GLuint array) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLDeleteVertexArrays(GLsizei n, const GLuint* arrays) noexcept;

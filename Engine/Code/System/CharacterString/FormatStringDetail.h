@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:43)
+///	引擎版本：0.8.1.4 (2022/11/12 19:28)
 
-#ifndef SYSTEM_CHARACTER_STRING_FORMAT_STRING_DETAIL_H
-#define SYSTEM_CHARACTER_STRING_FORMAT_STRING_DETAIL_H
+#ifndef SYSTEM_CHARACTER_STRING_FORMAT_DETAIL_H
+#define SYSTEM_CHARACTER_STRING_FORMAT_DETAIL_H
 
 #include "FormatString.h"
 #include "System/Helper/Tools.h"
@@ -32,4 +32,4 @@ int System::SNPrintf(char* buffer, size_t sizeInBytes, size_t maxCount, const ch
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-#endif  // SYSTEM_CHARACTER_STRING_FORMAT_STRING_DETAIL_H
+#endif  // SYSTEM_CHARACTER_STRING_FORMAT_DETAIL_H

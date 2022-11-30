@@ -61,8 +61,8 @@ void Rendering::OpenGLTextureArray::Initialize()
     System::SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
     System::SetGLPixelStore(System::PixelStore::PackAlignment, 1);
 
-    System::SetGLTexParameter(GetTarget(), System::TexParameter::TextureBaseLevel, 0);
-    System::SetGLTexParameter(GetTarget(), System::TexParameter::TextureMaxLevel, GetNumLevels() - 1);
+    System::SetGLTexParameter(GetTarget(), System::TextureParameter::TextureBaseLevel, 0);
+    System::SetGLTexParameter(GetTarget(), System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
 
     auto texture = GetTexture();
     const auto numItems = texture->GetNumItems();

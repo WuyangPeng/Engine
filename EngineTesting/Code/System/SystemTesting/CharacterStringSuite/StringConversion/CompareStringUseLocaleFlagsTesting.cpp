@@ -33,8 +33,8 @@ System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTesting(c
                      Compares::LinguisticIgnoreCase,
                      Compares::LinguisticIgnoreDiacritic,
                      Compares::NormIgnoreKanaType,
-                     Compares::IgnoreWidth,
-                     Compares::LinguisticCasing,
+                     Compares::NormIgnoreWidth,
+                     Compares::NormLinguisticCasing,
                      Compares::SortStringSort,
                      Compares::SortDigitsAsNumbers },
       comparesString{ SYSTEM_TEXT("°¡"),
@@ -102,10 +102,8 @@ void System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTest
 
         const auto returnFlag = CompareStringUseLocale(languageLocale,
                                                        compares,
-                                                       lhsComparesString.c_str(),
-                                                       boost::numeric_cast<int>(lhsComparesString.size()),
-                                                       lhsComparesString.c_str(),
-                                                       boost::numeric_cast<int>(lhsComparesString.size()));
+                                                       lhsComparesString,
+                                                       lhsComparesString);
         ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
 
         const auto nextIndex = (index + 1);
@@ -114,17 +112,13 @@ void System::CompareStringUseLocaleFlagsTesting::CompareStringUseLocaleFlagsTest
 
         const auto lhsCompareRhs = CompareStringUseLocale(languageLocale,
                                                           compares,
-                                                          lhsComparesString.c_str(),
-                                                          boost::numeric_cast<int>(lhsComparesString.size()),
-                                                          rhsComparesString.c_str(),
-                                                          boost::numeric_cast<int>(rhsComparesString.size()));
+                                                          lhsComparesString,
+                                                          rhsComparesString);
 
         const auto rhsCompareLhs = CompareStringUseLocale(languageLocale,
                                                           compares,
-                                                          rhsComparesString.c_str(),
-                                                          boost::numeric_cast<int>(rhsComparesString.size()),
-                                                          lhsComparesString.c_str(),
-                                                          boost::numeric_cast<int>(lhsComparesString.size()));
+                                                          rhsComparesString,
+                                                          lhsComparesString);
 
         CompareTest(lhsCompareRhs, rhsCompareLhs);
     }

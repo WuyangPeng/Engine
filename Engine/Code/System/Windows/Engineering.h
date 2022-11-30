@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/12 13:04)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 23:13)
 
 #ifndef SYSTEM_WINDOWS_ENGINEERING_H
 #define SYSTEM_WINDOWS_ENGINEERING_H
@@ -21,24 +21,36 @@ namespace System
     NODISCARD String SYSTEM_DEFAULT_DECLARE GetEngineeringExeSuffix();
     NODISCARD String SYSTEM_DEFAULT_DECLARE GetEngineeringDirectory();
 
+    NODISCARD size_t SYSTEM_DEFAULT_DECLARE GetLastSlashPosition(const String& path);
+
     NODISCARD constexpr int GetEngineeringOffsetValue() noexcept
     {
 #if defined(_DEBUG) || defined(BUILDING_CORE_TOOLS_STATIC) || defined(_WIN64)
+
         auto offsetValue = 0;
+
 #else  // !defined(_DEBUG) && !defined(BUILDING_CORE_TOOLS_STATIC) && !defined(_WIN64)
+
         constexpr auto offsetValue = 0;
+
 #endif  // defined(_DEBUG) || defined(BUILDING_CORE_TOOLS_STATIC) || defined(_WIN64)
 
 #ifdef _DEBUG
+
         offsetValue += 4;
+
 #endif  // _DEBUG
 
 #ifdef BUILDING_CORE_TOOLS_STATIC
+
         offsetValue += 2;
+
 #endif  // BUILDING_CORE_TOOLS_STATIC
 
 #ifdef _WIN64
+
         offsetValue += 1;
+
 #endif  // _WIN64
 
         return offsetValue;

@@ -42,6 +42,13 @@ Rendering::BufferLayout::MemberLayoutContainer Rendering::BufferLayout::GetLayou
     return layout;
 }
 
+void Rendering::BufferLayout::AddLayout(const MemberLayout& memberLayout)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    layout.emplace_back(memberLayout);
+}
+
 bool Rendering::BufferLayout::HasMember(const std::string& name) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
@@ -78,6 +85,13 @@ Rendering::MemberLayout Rendering::BufferLayout::GetMember(const std::string& na
     }
 }
 
+int Rendering::BufferLayout::GetSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return boost::numeric_cast<int>(layout.size());
+}
+
 void Rendering::BufferLayout::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
@@ -97,4 +111,14 @@ int Rendering::BufferLayout::GetStreamingSize() const
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return RENDERING_STREAM_SIZE(layout);
+}
+
+void Rendering::BufferLayout::SortLayouts()
+{
+    RENDERING_CLASS_IS_VALID_1;
+
+    std::sort(layout.begin(), layout.end(),
+              [](const MemberLayout& lhs, const MemberLayout& rhs) noexcept {
+                  return lhs.GetOffset() < rhs.GetOffset();
+              });
 }

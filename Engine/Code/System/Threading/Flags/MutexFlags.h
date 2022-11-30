@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/20 23:59)
+///	引擎版本：0.8.1.4 (2022/11/19 23:01)
 
 #ifndef SYSTEM_THREADING_MUTEX_FLAGS_H
 #define SYSTEM_THREADING_MUTEX_FLAGS_H
@@ -13,7 +13,9 @@
 #include "System/Helper/Platform.h"
 
 #ifndef SYSTEM_PLATFORM_WIN32
+
     #include <pthread.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System

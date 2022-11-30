@@ -74,7 +74,7 @@ System::WindowsLResult Framework::WindowMessageInterface::CreateMessage(HWnd hwn
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Create, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Create, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::SizeMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -84,7 +84,7 @@ System::WindowsLResult Framework::WindowMessageInterface::SizeMessage(HWnd hwnd,
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Size, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Size, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::CloseMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -94,7 +94,7 @@ System::WindowsLResult Framework::WindowMessageInterface::CloseMessage(HWnd hwnd
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Close, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Close, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::MoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -104,7 +104,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MoveMessage(HWnd hwnd,
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Move, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Move, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::CharMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -114,7 +114,7 @@ System::WindowsLResult Framework::WindowMessageInterface::CharMessage(HWnd hwnd,
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Char, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Char, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -124,7 +124,7 @@ System::WindowsLResult Framework::WindowMessageInterface::KeyDownMessage(HWnd hw
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::KeyDown, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::KeyDown, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -134,7 +134,7 @@ System::WindowsLResult Framework::WindowMessageInterface::KeyUpMessage(HWnd hwnd
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::KeyUp, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::KeyUp, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -144,7 +144,7 @@ System::WindowsLResult Framework::WindowMessageInterface::LeftButtonDownMessage(
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::LButtonDown, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::LButtonDown, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -154,7 +154,7 @@ System::WindowsLResult Framework::WindowMessageInterface::LeftButtonUpMessage(HW
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::LButtonUp, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::LButtonUp, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -164,7 +164,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MiddleButtonDownMessag
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MButtonDown, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::MButtonDown, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -174,7 +174,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MiddleButtonUpMessage(
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MButtonUp, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::MButtonUp, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -184,7 +184,7 @@ System::WindowsLResult Framework::WindowMessageInterface::RightButtonDownMessage
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::RButtonDown, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::RButtonDown, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -194,7 +194,7 @@ System::WindowsLResult Framework::WindowMessageInterface::RightButtonUpMessage(H
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::RButtonUp, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::RButtonUp, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -204,7 +204,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MouseMoveMessage(HWnd 
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MouseMove, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::MouseMove, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -214,7 +214,7 @@ System::WindowsLResult Framework::WindowMessageInterface::MouseWheelMessage(HWnd
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MouseWheel, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::MouseWheel, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -233,7 +233,7 @@ System::WindowsLResult Framework::WindowMessageInterface::DestroyMessage(HWnd hw
     }
     else
     {
-        return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Destroy, wParam, lParam);
+        return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Destroy, wParam, lParam);
     }
 }
 
@@ -244,7 +244,7 @@ System::WindowsLResult Framework::WindowMessageInterface::PaintMessage(HWnd hwnd
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Paint, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::Paint, wParam, lParam);
 }
 
 System::WindowsLResult Framework::WindowMessageInterface::EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam)
@@ -254,7 +254,7 @@ System::WindowsLResult Framework::WindowMessageInterface::EraseBackgroundMessage
 
     CoreTools::DisableNoexcept();
 
-    return System::DefSystemWindowProc(hwnd, System::WindowsMessages::EraseBkgnd, wParam, lParam);
+    return System::DefaultSystemWindowProcess(hwnd, System::WindowsMessages::EraseBkgnd, wParam, lParam);
 }
 
 void Framework::WindowMessageInterface::Display([[maybe_unused]] HWnd hwnd, [[maybe_unused]] int64_t timeDelta)

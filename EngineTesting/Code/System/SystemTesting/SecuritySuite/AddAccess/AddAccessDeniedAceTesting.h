@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 19:08)
+///	引擎测试版本：0.8.1.3 (2022/11/01 21:53)
 
 #ifndef SYSTEM_SECURITY_SUITE_ADD_ACCESS_DENIED_ACE_TESTING_H
 #define SYSTEM_SECURITY_SUITE_ADD_ACCESS_DENIED_ACE_TESTING_H
@@ -37,12 +37,12 @@ namespace System
         void AddAccessDeniedAceTest();
 
     private:
-        using ControlACEInheritanceFlagsCollection = std::vector<ControlACEInheritance>;
-        using SpecificAccessFlagsCollection = std::vector<SpecificAccess>;
+        using ControlACEInheritanceFlagsContainer = std::vector<ControlACEInheritance>;
+        using SpecificAccessFlagsContainer = std::vector<SpecificAccess>;
 
     private:
-        ControlACEInheritanceFlagsCollection controlACEInheritanceFlags;
-        SpecificAccessFlagsCollection specificAccessFlags;
+        ControlACEInheritanceFlagsContainer controlACEInheritanceFlags;
+        SpecificAccessFlagsContainer specificAccessFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

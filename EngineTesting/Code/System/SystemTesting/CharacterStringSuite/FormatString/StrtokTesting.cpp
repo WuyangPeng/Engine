@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:22)
+///	引擎测试版本：0.8.1.4 (2022/11/30 14:54)
 
 #include "StrtokTesting.h"
 #include "System/CharacterString/FormatStringDetail.h"
@@ -15,8 +15,6 @@
 
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 System::StrtokTesting::StrtokTesting(const OStreamShared& stream)
@@ -42,7 +40,7 @@ void System::StrtokTesting::StrtokTest()
     const auto separate = " \t\n"s;
     char* next{ nullptr };
     const auto value = "value\tnullptr"s;
-    vector<char> ext{ value.begin(), value.end() };
+    std::vector<char> ext{ value.begin(), value.end() };
 
     char* token = Strtok(ext.data(), separate.c_str(), &next);
     if (next != nullptr)

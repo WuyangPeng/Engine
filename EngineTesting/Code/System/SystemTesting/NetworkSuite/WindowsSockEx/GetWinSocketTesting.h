@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/14 16:40)
+///	引擎测试版本：0.8.1.4 (2022/11/03 21:59)
 
 #ifndef SYSTEM_SECURITY_SUITE_GET_WINSOCKET_SOCKET_TESTING_H
 #define SYSTEM_SECURITY_SUITE_GET_WINSOCKET_SOCKET_TESTING_H
@@ -40,14 +40,14 @@ namespace System
         void Cleanup();
 
     private:
-        using ProtocolFamiliesFlagsCollection = std::vector<ProtocolFamilies>;
-        using SocketTypesFlagsCollection = std::vector<SocketTypes>;
-        using SocketProtocolsFlagsCollection = std::vector<SocketProtocols>;
+        using ProtocolFamiliesFlagsContainer = std::vector<ProtocolFamilies>;
+        using SocketTypesFlagsContainer = std::vector<SocketTypes>;
+        using SocketProtocolsFlagsContainer = std::vector<SocketProtocols>;
 
     private:
-        ProtocolFamiliesFlagsCollection protocolFamiliesFlags;
-        SocketTypesFlagsCollection socketTypesFlags;
-        SocketProtocolsFlagsCollection socketProtocolsFlags;
+        ProtocolFamiliesFlagsContainer protocolFamiliesFlags;
+        SocketTypesFlagsContainer socketTypesFlags;
+        SocketProtocolsFlagsContainer socketProtocolsFlags;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

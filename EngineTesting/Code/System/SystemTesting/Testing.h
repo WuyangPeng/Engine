@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/04 15:34)
+///	引擎测试版本：0.8.1.4 (2022/11/21 21:47)
 
 #ifndef SYSTEM_TESTING_TESTING_H
 #define SYSTEM_TESTING_TESTING_H
@@ -26,6 +26,7 @@
 #include "SystemOutputSuite/SystemOutputSuite.h"
 #include "ThreadingSuite/ThreadingSuite.h"
 #include "TimeSuite/TimeSuite.h"
+#include "VulkanSuite/VulkanSuite.h"
 #include "WindowsSuite/WindowsSuite.h"
 
 #endif  // SYSTEM_TESTING_TESTING_H

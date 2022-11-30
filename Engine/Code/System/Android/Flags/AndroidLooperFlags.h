@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 22:53)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/22 23:17)
 
 #ifndef SYSTEM_ANDROID_ANDROID_LOOPER_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_LOOPER_FLAGS_H
@@ -16,11 +16,15 @@
 
     #include <android/looper.h>
 
+#endif  // SYSTEM_PLATFORM_ANDROI
+
+#ifdef SYSTEM_PLATFORM_ANDROID
+
 namespace System
 {
     enum class AndroidLooperPrepareAllow
     {
-        AllowNonCallbacks = ALOOPER_PREPARE_ALLOW_NON_CALLBACKS
+        NonCallbacks = ALOOPER_PREPARE_ALLOW_NON_CALLBACKS
     };
 
     enum class AndroidLooperPoll
@@ -31,7 +35,6 @@ namespace System
         Error = ALOOPER_POLL_ERROR,
     };
 
-    // AndroidLooper
     enum class AndroidLooperEvent
     {
         Null = 0,
@@ -50,7 +53,7 @@ namespace System
 {
     enum class AndroidLooperPrepareAllow
     {
-        AllowNonCallbacks = 1 << 0
+        NonCallbacks = 1 << 0
     };
 
     enum class AndroidLooperPoll

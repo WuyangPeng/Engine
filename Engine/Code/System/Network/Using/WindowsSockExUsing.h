@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 14:33)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 15:11)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
@@ -15,7 +15,9 @@
 #include "System/Windows/Using/WindowsUsing.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     #include <WinSock2.h>
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System
@@ -39,10 +41,10 @@ namespace System
     using SocketAddressPtr = PSOCKET_ADDRESS;
     using SocketProtocolInfo = WSAPROTOCOL_INFO;
     using SocketProtocolInfoPtr = LPWSAPROTOCOL_INFO;
-    constexpr WindowsDWord g_ProtocolLen{ WSAPROTOCOL_LEN };
+    constexpr WindowsDWord gProtocolLen{ WSAPROTOCOL_LEN };
     using SocketProtocolChain = WSAPROTOCOLCHAIN;
     using SocketProtocolChainPtr = LPWSAPROTOCOLCHAIN;
-    constexpr WindowsDWord g_ProtocolChain{ MAX_PROTOCOL_CHAIN };
+    constexpr WindowsDWord gProtocolChain{ MAX_PROTOCOL_CHAIN };
     using SocketNetworkEvents = WSANETWORKEVENTS;
     using SocketNetworkEventsPtr = LPWSANETWORKEVENTS;
     using SocketOverlapped = WSAOVERLAPPED;
@@ -114,8 +116,14 @@ namespace System
     };
     using QualityOfServicePtr = QualityOfService*;
 
-    using WinSockConditionProc = int (*)(WinSockBufPtr callerId, WinSockBufPtr callerData, QualityOfServicePtr sQOS, QualityOfServicePtr gQOS,
-                                         WinSockBufPtr calleeId, WinSockBufPtr calleeData, unsigned int* g, WindowsPtrDWord callbackData);
+    using WinSockConditionProc = int (*)(WinSockBufPtr callerId,
+                                         WinSockBufPtr callerData,
+                                         QualityOfServicePtr sQOS,
+                                         QualityOfServicePtr gQOS,
+                                         WinSockBufPtr calleeId,
+                                         WinSockBufPtr calleeData,
+                                         unsigned int* g,
+                                         WindowsDWordPtrSizeType callbackData);
     using WinSockEvent = void*;
 
     struct SocketAddress
@@ -132,15 +140,15 @@ namespace System
     };
     using SocketAddressListPtr = SocketAddressList*;
 
-    constexpr WindowsDWord g_ProtocolChain{ 7 };
+    constexpr WindowsDWord gProtocolChain{ 7 };
     struct SocketProtocolChain
     {
         int ChainLen;
-        uint32_t ChainEntries[g_ProtocolChain];
+        uint32_t ChainEntries[gProtocolChain];
     };
     using SocketProtocolChainPtr = SocketProtocolChain*;
 
-    constexpr WindowsDWord g_ProtocolLen{ 255 };
+    constexpr WindowsDWord gProtocolLen{ 255 };
     struct SocketProtocolInfo
     {
         uint32_t dwServiceFlags1;
@@ -162,7 +170,7 @@ namespace System
         int iSecurityScheme;
         uint32_t dwMessageSize;
         uint32_t dwProviderReserved;
-        wchar_t szProtocol[g_ProtocolLen + 1];
+        wchar_t szProtocol[gProtocolLen + 1];
     };
     using SocketProtocolInfoPtr = SocketProtocolInfo*;
 

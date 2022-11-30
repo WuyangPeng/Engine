@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/11 23:19)
+///	引擎版本：0.8.1.4 (2022/11/18 23:35)
 
 #ifndef SYSTEM_HELPER_LINUX_H
 #define SYSTEM_HELPER_LINUX_H
@@ -23,8 +23,10 @@
     // PC Linux 平台
     #if !defined(__LINUX__) && defined(__linux__)
 
-        // 显然，许多 PC Linux 版本定义__linux__，但是我们使用__LINUX__
-        // 为了避免破坏代码通过__LINUX__替换__linux__，我们只定义__LINUX__。
+        /// 显然，许多 PC Linux 版本定义__linux__，
+        /// 但是我们使用__LINUX__
+        /// 为了避免破坏代码通过__LINUX__替换__linux__，
+        /// 我们只定义__LINUX__。
         #define __LINUX__
 
     #endif  // __LINUX__

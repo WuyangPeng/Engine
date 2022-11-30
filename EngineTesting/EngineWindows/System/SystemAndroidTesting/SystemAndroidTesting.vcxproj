@@ -280,12 +280,12 @@
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\Detail\CallbackFunction.h" />
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\TestingHelper.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputKeyEventTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputEventFacadeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventFacadeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueFacadeTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidLooperTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeAppGlueTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowFacadeTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidSuite.h" />
     <ClInclude Include="..\..\..\Code\System\SystemAndroidTesting\SystemAndroidTestingAndroidCallBack.h" />
   </ItemGroup>
@@ -294,12 +294,12 @@
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\TestingMain.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputKeyEventTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputEventFacadeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputMotionEventFacadeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidInputQueueFacadeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidLooperTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeAppGlueTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\AndroidSuite\AndroidNativeWindowFacadeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemAndroidTesting\SystemAndroidTestingAndroidCallBack.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@ void System::EnumResourceToolsWindowsTesting::MainTest()
 
 void System::EnumResourceToolsWindowsTesting::EnumResourceTest()
 {
-    ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsPtrLong>(this)));
+    ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this)));
 
     ASSERT_LESS(0u, enumResourceDataContainer.size());
 
@@ -50,19 +50,19 @@ void System::EnumResourceToolsWindowsTesting::EnumResourceTest()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26461)
 
-System::WindowsBool System::EnumResourceToolsWindowsTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsPtrLong lParam) noexcept
+System::WindowsBool System::EnumResourceToolsWindowsTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsLongPtrSizeType lParam) noexcept
 {
     return EnumResourceNamesInLibrary(module, type, NameProcess, lParam);
 }
 
-System::WindowsBool System::EnumResourceToolsWindowsTesting::NameProcess(DynamicLinkModule module, const DynamicLinkCharType* type, DynamicLinkCharType* name, WindowsPtrLong lParam) noexcept
+System::WindowsBool System::EnumResourceToolsWindowsTesting::NameProcess(DynamicLinkModule module, const DynamicLinkCharType* type, DynamicLinkCharType* name, WindowsLongPtrSizeType lParam) noexcept
 {
     return EnumResourceLanguagesInLibrary(module, type, name, LanguageProcess, lParam);
 }
 
 #include STSTEM_WARNING_POP
 
-System::WindowsBool System::EnumResourceToolsWindowsTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsPtrLong lParam)
+System::WindowsBool System::EnumResourceToolsWindowsTesting::LanguageProcess(DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsLongPtrSizeType lParam)
 {
     UnusedFunction(module);
 

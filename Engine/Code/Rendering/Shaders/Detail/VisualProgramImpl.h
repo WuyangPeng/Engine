@@ -12,6 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "CoreTools/Helper/NameMacro.h"
 #include "CoreTools/ObjectSystems/ObjectSystemsFwd.h"
 #include "Rendering/Shaders/Shader.h"
@@ -25,6 +26,7 @@ namespace Rendering
     {
     public:
         using ClassType = VisualProgramImpl;
+        using FactoryType = VisualProgramImpl;
         using ShaderSharedPtr = std::shared_ptr<Shader>;
         using ConstShaderSharedPtr = std::shared_ptr<const Shader>;
         using ObjectLink = CoreTools::ObjectLink;
@@ -32,15 +34,28 @@ namespace Rendering
         using BufferSource = CoreTools::BufferSource;
         using ObjectRegister = CoreTools::ObjectRegister;
         using ShaderObjectAssociated = CoreTools::ObjectAssociated<Shader>;
+        using VisualProgramSharedPtr = std::shared_ptr<VisualProgramImpl>;
+        using OpenGLUInt = System::OpenGLUInt;
 
     public:
-        VisualProgramImpl() noexcept;
+        NODISCARD static VisualProgramSharedPtr Create(OpenGLUInt programHandle, OpenGLUInt vertexShaderHandle, OpenGLUInt pixelShaderHandle, OpenGLUInt geometryShaderHandle);
 
-        CLASS_INVARIANT_DECLARE;
+        VisualProgramImpl() noexcept;
+        virtual ~VisualProgramImpl() noexcept = default;
+        VisualProgramImpl(const VisualProgramImpl& rhs) = default;
+        VisualProgramImpl& operator=(const VisualProgramImpl& rhs) = default;
+        VisualProgramImpl(VisualProgramImpl&& rhs) noexcept = default;
+        VisualProgramImpl& operator=(VisualProgramImpl&& rhs) noexcept = default;
+
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         NODISCARD ConstShaderSharedPtr GetVertexShader() const noexcept;
         NODISCARD ConstShaderSharedPtr GetPixelShader() const noexcept;
         NODISCARD ConstShaderSharedPtr GetGeometryShader() const noexcept;
+
+        NODISCARD ShaderSharedPtr GetVertexShader() noexcept;
+        NODISCARD ShaderSharedPtr GetPixelShader() noexcept;
+        NODISCARD ShaderSharedPtr GetGeometryShader() noexcept;
 
         void SetVertexShader(const ShaderSharedPtr& shader);
         void SetPixelShader(const ShaderSharedPtr& shader);
@@ -53,6 +68,9 @@ namespace Rendering
         void Load(BufferSource& source);
         void Link(ObjectLink& source);
         void Register(ObjectRegister& target) const;
+
+        NODISCARD virtual GLSLReflection GetReflector() const;
+        NODISCARD virtual VisualProgramSharedPtr Clone() const;
 
     private:
         ShaderObjectAssociated vertexShader;

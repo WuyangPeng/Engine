@@ -10,35 +10,158 @@
 #include "Rendering/RenderingExport.h"
 
 #include "TextEffect.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "CoreTools/ObjectSystems/ObjectManager.h"
+#include "Rendering/LocalEffects/Detail/TextEffectImpl.h"
 
-#include <stdexcept>
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, TextEffect)
 
-std::shared_ptr<const Rendering::VertexShader> Rendering::TextEffect::GetVertexShader() const
+CORE_TOOLS_RTTI_DEFINE(Rendering, TextEffect);
+CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TextEffect);
+CORE_TOOLS_FACTORY_DEFINE(Rendering, TextEffect);
+
+using namespace std::literals;
+
+namespace
 {
-    RENDERING_CLASS_IS_VALID_CONST_9;
+    const auto vsSource =
+        R"(
+    uniform Translate
+    {
+        vec3 translate;
+    };
 
-    throw std::logic_error("The method or operation is not implemented.");
+    layout(location = 0) in vec2 modelPosition;
+    layout(location = 1) in vec2 modelTCoord;
+    layout(location = 0) out vec2 vertexTCoord;
+
+    void main()
+    {
+        vertexTCoord = modelTCoord;
+        gl_Position.x = 2.0f * modelPosition.x - 1.0f + 2.0f * translate.x;
+        gl_Position.y = 2.0f * modelPosition.y - 1.0f + 2.0f * translate.y;
+        gl_Position.z = translate.z;
+        gl_Position.w = 1.0f;
+    }
+)"s;
+
+    const auto psSource =
+        R"(
+    uniform TextColor
+    {
+        vec4 textColor;
+    };
+
+    layout(location = 0) in vec2 vertexTCoord;
+    layout(location = 0) out vec4 pixelColor;
+
+    uniform sampler2D baseSampler;
+
+    void main()
+    {
+        float bitmapAlpha = texture(baseSampler, vertexTCoord).r;
+        if (bitmapAlpha > 0.5f)
+        {
+            discard;
+        }
+        pixelColor = textColor;
+    }
+)"s;
 }
 
-std::shared_ptr<const Rendering::PixelShader> Rendering::TextEffect::GetPixelShader() const
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+Rendering::TextEffect::TextEffect(const ProgramFactorySharedPtr& factory, const Texture2DSharedPtr& texture)
+    : ParentType{ factory->CreateFromSources(vsSource, psSource, "") }, impl{ texture, *GetProgram() }
 {
-    RENDERING_CLASS_IS_VALID_CONST_9;
+    RENDERING_SELF_CLASS_IS_VALID_9;
+}
+#include STSTEM_WARNING_POP
 
-    throw std::logic_error("The method or operation is not implemented.");
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TextEffect)
+
+Rendering::TextEffect::TextEffect(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ CoreTools::DisableNotThrow::Disable }
+{
+    RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
-std::shared_ptr<const Rendering::ConstantBuffer> Rendering::TextEffect::GetTranslate() const
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, TextEffect)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, TextEffect)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, TextEffect)
+
+int Rendering::TextEffect::GetStreamingSize() const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    throw std::logic_error("The method or operation is not implemented.");
+    return ParentType::GetStreamingSize();
 }
 
-std::shared_ptr<const Rendering::ConstantBuffer> Rendering::TextEffect::GetColor() const
+void Rendering::TextEffect::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-    throw std::logic_error("The method or operation is not implemented.");
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+
+    ParentType::Save(target);
+
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
+}
+
+void Rendering::TextEffect::Load(CoreTools::BufferSource& source)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
+
+    ParentType::Load(source);
+
+    CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+}
+
+Rendering::TextEffect::ObjectInterfaceSharedPtr Rendering::TextEffect::CloneObject() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return std::make_shared<ClassType>(*this);
+}
+
+Rendering::TextEffect::ConstConstantBufferSharedPtr Rendering::TextEffect::GetTranslate() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetTranslate();
+}
+
+Rendering::TextEffect::ConstConstantBufferSharedPtr Rendering::TextEffect::GetColor() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return impl->GetColor();
+}
+
+void Rendering::TextEffect::SetTranslate(float x, float y)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetTranslate(x, y);
+}
+
+void Rendering::TextEffect::SetNormalizedZ(float z)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetNormalizedZ(z);
+}
+
+void Rendering::TextEffect::SetColor(const Colour& aColor)
+{
+    RENDERING_CLASS_IS_VALID_9;
+
+    return impl->SetColor(aColor);
 }

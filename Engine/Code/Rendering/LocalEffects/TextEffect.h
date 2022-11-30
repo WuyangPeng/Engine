@@ -12,23 +12,43 @@
 
 #include "Rendering/RenderingDll.h"
 
+#include "VisualEffect.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "Rendering/DataTypes/Colour.h"
 #include "Rendering/Resources/ResourcesFwd.h"
 #include "Rendering/Shaders/ShadersFwd.h"
 
+RENDERING_COPY_UNSHARED_EXPORT_IMPL(TextEffect, TextEffectImpl);
+
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE TextEffect
+    class RENDERING_DEFAULT_DECLARE TextEffect : public VisualEffect
     {
     public:
-        using ClassType = TextEffect;
+        COPY_UNSHARED_TYPE_DECLARE(TextEffect);
+        using ParentType = VisualEffect;
+        using ProgramFactorySharedPtr = std::shared_ptr<ProgramFactory>;
+        using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
+        using Colour = Colour<float>;
 
     public:
-        NODISCARD std::shared_ptr<const VertexShader> GetVertexShader() const;
-        NODISCARD std::shared_ptr<const PixelShader> GetPixelShader() const;
+        TextEffect(const ProgramFactorySharedPtr& factory, const Texture2DSharedPtr& texture);
 
-        NODISCARD std::shared_ptr<const ConstantBuffer> GetTranslate() const;
-        NODISCARD std::shared_ptr<const ConstantBuffer> GetColor() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(TextEffect);
+
+        NODISCARD ObjectInterfaceSharedPtr CloneObject() const override;
+
+        NODISCARD ConstConstantBufferSharedPtr GetTranslate() const noexcept;
+        NODISCARD ConstConstantBufferSharedPtr GetColor() const noexcept;
+
+        void SetTranslate(float x, float y);
+        void SetNormalizedZ(float z);
+        void SetColor(const Colour& aColor);
+
+    private:
+        PackageType impl;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/08 21:47)
+///	引擎版本：0.8.1.4 (2022/11/16 21:33)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H
@@ -21,6 +21,7 @@ namespace System
 #ifdef SYSTEM_PLATFORM_WIN32
 
     using DynamicLinkModule = HMODULE;
+    using ConstDynamicLinkModule = const std::remove_pointer_t<HMODULE>*;
     using DynamicLinkProcess = FARPROC;
     using DynamicLinkCharType = TCHAR;
     using DynamicLinkString = String;
@@ -31,6 +32,7 @@ namespace System
 #else  // !SYSTEM_PLATFORM_WIN32
 
     using DynamicLinkModule = void*;
+    using ConstDynamicLinkModule = const void*;
     using DynamicLinkProcess = int (*)();
     using DynamicLinkCharType = char;
     using DynamicLinkString = std::string;

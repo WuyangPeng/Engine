@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.0.8 (2022/05/12 13:38)
+///	引擎测试版本：0.8.1.4 (2022/11/05 22:52)
 
 #ifndef SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_TESTING_H
 #define SYSTEM_ANDROID_TESTING_ANDROID_SUITE_ANDROID_LOOPER_TESTING_H
@@ -22,7 +22,7 @@ namespace System
         using ParentType = UnitTest;
 
     public:
-        AndroidLooperTesting(const OStreamShared& streamShared, AndroidApp* androidApp);
+        AndroidLooperTesting(const OStreamShared& streamShared);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -30,10 +30,12 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void AndroidLooperTest();
-
-    private:
-        AndroidApp* androidApp;
+        void AndroidLooperForThreadTest();
+        void AndroidLooperPrepareTest();
+        void AndroidLooperTest() noexcept;
+        void AndroidLooperPollTest();
+        void AndroidLooperWakeTest() noexcept;
+        void AndroidLooperFdTest();
     };
 }
 

@@ -23,6 +23,7 @@ namespace Rendering
         using ClassType = ProgramDefinesImpl;
         using DefinesType = std::pair<std::string, std::string>;
         using Container = std::vector<DefinesType>;
+        using ContainerConstIter = Container::const_iterator;
 
     public:
         ProgramDefinesImpl() noexcept;
@@ -34,6 +35,11 @@ namespace Rendering
         void Update(const std::string& name, const std::string& value);
 
         NODISCARD std::string Get(const std::string& name) const;
+
+        NODISCARD int GetSize() const;
+
+        NODISCARD ContainerConstIter begin() const noexcept;
+        NODISCARD ContainerConstIter end() const noexcept;
 
     private:
         Container definitions;

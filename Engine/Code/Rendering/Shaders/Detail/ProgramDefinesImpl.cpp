@@ -10,6 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "ProgramDefinesImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -67,4 +68,25 @@ std::string Rendering::ProgramDefinesImpl::Get(const std::string& name) const
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("≤È’“ProgramDefines ß∞‹°£"s));
+}
+
+int Rendering::ProgramDefinesImpl::GetSize() const
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(definitions.size());
+}
+
+Rendering::ProgramDefinesImpl::ContainerConstIter Rendering::ProgramDefinesImpl::begin() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return definitions.begin();
+}
+
+Rendering::ProgramDefinesImpl::ContainerConstIter Rendering::ProgramDefinesImpl::end() const noexcept
+{
+    RENDERING_CLASS_IS_VALID_CONST_9;
+
+    return definitions.end();
 }

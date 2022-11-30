@@ -28,6 +28,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ProgramDefines, Remove, st
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ProgramDefines, Clear, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ProgramDefines, Get, std::string, std::string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ProgramDefines, GetSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ProgramDefines, begin, Rendering::ProgramDefines::ContainerConstIter)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ProgramDefines, end, Rendering::ProgramDefines::ContainerConstIter)
 
 void Rendering::ProgramDefines::Update(const std::string& name, const std::string& value)
 {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/12 23:41)
+///	引擎版本：0.8.1.4 (2022/11/13 10:44)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_STRING_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_STRING_H
@@ -18,10 +18,6 @@
 
 namespace System
 {
-    // 格式化字符串。
-
-    NODISCARD int SYSTEM_DEFAULT_DECLARE VsnPrintf(char* buffer, size_t size, const char* format, va_list argList) noexcept;
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE Strcat(char* destination, size_t sizeInBytes, const char* source) noexcept;
 
     NODISCARD size_t SYSTEM_DEFAULT_DECLARE Strlen(const char* str) noexcept;
@@ -29,9 +25,14 @@ namespace System
     NODISCARD SYSTEM_DEFAULT_DECLARE char* Strtok(char* string, char const* delimiter, char** context) noexcept;
     NODISCARD SYSTEM_DEFAULT_DECLARE const char* Strstr(char const* str, char const* subStr) noexcept;
 
-    // 返回存储在buffer中的字符，不包括终止null字符。
-    // 传入的sizeInBytes大小包括终止null字符，buffer的大小至少为sizeInBytes。错误返回-1。
+    // 返回存储在buffer中的字符，不包括终止null字符。错误返回 -1。
+    NODISCARD int SYSTEM_DEFAULT_DECLARE VsnPrintf(char* buffer, size_t size, const char* format, va_list argList) noexcept;
 
+    /// 返回存储在buffer中的字符，
+    /// 不包括终止null字符。
+    /// 传入的sizeInBytes大小包括终止null字符，
+    /// buffer的大小至少为sizeInBytes。
+    /// 错误返回-1。
     template <typename... Types>
     NODISCARD int SNPrintf(char* buffer, size_t sizeInBytes, size_t maxCount, const char* format, Types... args) noexcept;
 }

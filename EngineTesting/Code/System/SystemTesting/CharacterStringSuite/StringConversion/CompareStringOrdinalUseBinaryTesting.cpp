@@ -76,10 +76,8 @@ void System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinary
     {
         auto lhsComparesString = wComparesString.at(index % wComparesString.size());
 
-        const auto returnFlag = CompareStringOrdinalUseBinary(lhsComparesString.c_str(),
-                                                              boost::numeric_cast<int>(lhsComparesString.size()),
-                                                              lhsComparesString.c_str(),
-                                                              boost::numeric_cast<int>(lhsComparesString.size()),
+        const auto returnFlag = CompareStringOrdinalUseBinary(lhsComparesString,
+                                                              lhsComparesString,
                                                               gFalse);
         ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
 
@@ -87,16 +85,12 @@ void System::CompareStringOrdinalUseBinaryTesting::CompareStringOrdinalUseBinary
 
         auto rhsComparesString = wComparesString.at(nextIndex % wComparesString.size());
 
-        const auto lhsCompareRhs = CompareStringOrdinalUseBinary(lhsComparesString.c_str(),
-                                                                 boost::numeric_cast<int>(lhsComparesString.size()),
-                                                                 rhsComparesString.c_str(),
-                                                                 boost::numeric_cast<int>(rhsComparesString.size()),
+        const auto lhsCompareRhs = CompareStringOrdinalUseBinary(lhsComparesString,
+                                                                 rhsComparesString,
                                                                  gFalse);
 
-        const auto rhsCompareLhs = CompareStringOrdinalUseBinary(rhsComparesString.c_str(),
-                                                                 boost::numeric_cast<int>(rhsComparesString.size()),
-                                                                 lhsComparesString.c_str(),
-                                                                 boost::numeric_cast<int>(lhsComparesString.size()),
+        const auto rhsCompareLhs = CompareStringOrdinalUseBinary(rhsComparesString,
+                                                                 lhsComparesString,
                                                                  gFalse);
 
         CompareTest(lhsCompareRhs, rhsCompareLhs);

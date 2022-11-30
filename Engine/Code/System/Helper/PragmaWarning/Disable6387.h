@@ -5,9 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/27 22:30)
+///	引擎版本：0.8.1.4 (2022/11/18 23:38)
 
-// 不符合函数CloseHandle、SetWaitableTimer或GetProcAddress的规范。
+// 警告：不符合函数CloseHandle、SetWaitableTimer或GetProcAddress的规范。
 
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 6387)

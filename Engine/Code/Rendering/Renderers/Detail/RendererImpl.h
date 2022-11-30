@@ -163,6 +163,9 @@ namespace Rendering
         void Enable(const ConstPixelShaderSharedPtr& pixelShader, const ShaderParameters& parameters);
         void Disable(const ConstPixelShaderSharedPtr& pixelShader, const ShaderParameters& parameters);
 
+        void Bind(const std::shared_ptr<const Shader>& shader) noexcept;
+        void Unbind(const std::shared_ptr<const Shader>& shader) noexcept;
+
         void Bind(const std::shared_ptr<const GraphicsObject>& object) noexcept;
         void Unbind(const std::shared_ptr<const GraphicsObject>& object) noexcept;
 

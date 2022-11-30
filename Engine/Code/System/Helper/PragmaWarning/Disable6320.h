@@ -5,9 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/27 22:30)
+///	引擎版本：0.8.1.4 (2022/11/18 23:38)
 
-// 警告：异常筛选器表达式为常量EXCEPTION_EXECUTE_HANDLER。这样可能会屏蔽不打算处理的异常。
+// 警告：异常筛选器表达式为常量EXCEPTION_EXECUTE_HANDLER，这样可能会屏蔽不打算处理的异常。
 
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 6320)

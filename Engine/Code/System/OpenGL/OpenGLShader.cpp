@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 14:10)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:46)
 
 #include "System/SystemExport.h"
 
@@ -17,8 +17,6 @@
 
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 bool System::IsGLShader(OpenGLUInt shader) noexcept
@@ -64,6 +62,11 @@ void System::CompileGLShader(OpenGLUInt shader) noexcept
     GLCompileShader(shader);
 }
 
+void System::GetGLShaderSource(OpenGLUInt shader, OpenGLSize bufSize, OpenGLSize* length, OpenGLChar* source) noexcept
+{
+    GLGetShaderSource(shader, bufSize, length, source);
+}
+
 bool System::GetGLShader(OpenGLUInt shader, ShaderStatus pname) noexcept
 {
     OpenGLInt params{};
@@ -80,16 +83,16 @@ int System::GetGLShader(OpenGLUInt shader, ShaderAttributes pname) noexcept
     return params;
 }
 
-string System::GetGLShaderInfoLog(OpenGLUInt shader)
+std::string System::GetGLShaderInfoLog(OpenGLUInt shader)
 {
     const auto logLength = GetGLShader(shader, ShaderAttributes::InfoLogLength);
 
     if (0 < logLength)
     {
-        vector<GLchar> log(logLength);
+        std::vector<OpenGLChar> log(logLength);
         auto numWritten = 0;
         GLGetShaderInfoLog(shader, logLength, &numWritten, log.data());
-        string message{ log.begin(), log.end() };
+        std::string message{ log.begin(), log.end() };
 
         return message;
     }

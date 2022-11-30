@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/04 20:42)
+///	引擎测试版本：0.8.1.4 (2022/11/05 22:50)
 
 #include "SystemAndroidTestingAndroidCallBack.h"
 #include "Testing.h"
@@ -13,7 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
-using std::string;
 using namespace std::literals;
 
 System::SystemAndroidTestingAndroidCallBack::SystemAndroidTestingAndroidCallBack(int64_t delta)
@@ -35,16 +34,11 @@ void System::SystemAndroidTestingAndroidCallBack::AddAndroidSuite()
 
     auto androidApp = GetAndroidApp();
 
-    ADD_TEST(androidSuite, AndroidInputKeyEventTesting);
-    ADD_TEST(androidSuite, AndroidInputMotionEventTesting);
-    ADD_TEST_USE_PARAMETER_1(androidSuite, AndroidLooperTesting, androidApp);
-    ADD_TEST_USE_PARAMETER_1(androidSuite, AndroidInputQueueTesting, androidApp);
-
-    if (androidApp != nullptr)
-    {
-        ADD_TEST_USE_PARAMETER_1(androidSuite, AndroidNativeWindowTesting, androidApp->GetAndroidNativeWindow());
-    }
-
+    ADD_TEST(androidSuite, AndroidInputEventFacadeTesting);
+    ADD_TEST(androidSuite, AndroidInputMotionEventFacadeTesting);
+    ADD_TEST(androidSuite, AndroidLooperTesting);
+    ADD_TEST_USE_PARAMETER_1(androidSuite, AndroidInputQueueFacadeTesting, androidApp);
+    ADD_TEST_USE_PARAMETER_1(androidSuite, AndroidNativeWindowFacadeTesting, androidApp);
     ADD_TEST(androidSuite, AndroidNativeAppGlueTesting);
 
     AddSuite(androidSuite);

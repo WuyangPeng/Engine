@@ -27,7 +27,7 @@ namespace Framework
         using HInstance = System::WindowsHInstance;
 
     public:
-        explicit WindowHCursor(const TChar* cursor = System::g_Arrow) noexcept;
+        explicit WindowHCursor(const TChar* cursor = System::gArrow) noexcept;
         WindowHCursor(HInstance instance, int cursor);
 
         NODISCARD static WindowHCursor Create(HInstance instance, bool isDefaultCursor, int cursor);

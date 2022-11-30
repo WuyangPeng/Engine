@@ -101,6 +101,12 @@
     ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_DETAIL((lhs), (rhs), (message), (true))
 
 // assert approximate
+#define ASSERT_APPROXIMATE_FLOAT_ZERO(test) \
+    ASSERT_APPROXIMATE((test), (0.0f), (Mathematics::MathF::GetZeroTolerance()))
+
+#define ASSERT_APPROXIMATE_DOUBLE_ZERO(test) \
+    ASSERT_APPROXIMATE((test), (0.0), (Mathematics::MathD::GetZeroTolerance()))
+
 #define ASSERT_APPROXIMATE(lhs, rhs, epsilon) \
     ASSERT_APPROXIMATE_DETAIL((lhs), (rhs), (epsilon), (""), (false))
 

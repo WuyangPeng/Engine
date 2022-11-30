@@ -5,14 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:08)
+///	引擎测试版本：0.8.1.4 (2022/11/26 22:29)
 
 #include "FormatErrorMessageTesting.h"
-#include "System/CharacterString/Flags/FormatMessageFlags.h"
+#include "System/CharacterString/Data/FormatErrorMessageParameter.h"
 #include "System/CharacterString/FormatErrorMessage.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/MemoryTools/LocalTools.h"
-#include "System/SystemOutput/Data/LanguageIDData.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -33,30 +30,24 @@ void System::FormatErrorMessageTesting::DoRunUnitTest()
 
 void System::FormatErrorMessageTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(FormatErrorMessageTest);
+    WindowsHLocal errorMessage{};
+
+    ASSERT_NOT_THROW_EXCEPTION_1(FormatErrorMessageTest, errorMessage);
+    ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, errorMessage);
 }
 
-void System::FormatErrorMessageTesting::FormatErrorMessageTest()
+void System::FormatErrorMessageTesting::FormatErrorMessageTest(WindowsHLocal errorMessage)
 {
-    WindowsHLocal errorMessage{};
-    constexpr LanguageIDData languageID{};
+    constexpr FormatErrorMessageParameter parameter{ FormatMessageOption::FromSystem | FormatMessageOption::IgnoreInserts | FormatMessageOption::AllocateBuffer };
 
-    constexpr auto messageFlag = FormatMessageOption::FromSystem | FormatMessageOption::IgnoreInserts | FormatMessageOption::AllocateBuffer;
-    constexpr auto messageWidthFlag = FormatMessageWidth::NoRestrictions;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    const auto size = FormatErrorMessage(messageFlag,
-                                         messageWidthFlag,
+    const auto size = FormatErrorMessage(parameter.GetOption(),
+                                         parameter.GetWidth(),
                                          nullptr,
                                          WindowError::InvalidAccess,
-                                         languageID,
-                                         reinterpret_cast<TChar*>(&errorMessage),
+                                         parameter.GetLanguageIDData(),
+                                         ReinterpretCast(errorMessage),
                                          0,
                                          nullptr);
-
-#include STSTEM_WARNING_POP
 
     ASSERT_LESS(0u, size);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(errorMessage, "格式化错误码失败。");
@@ -65,6 +56,4 @@ void System::FormatErrorMessageTesting::FormatErrorMessageTest()
 
     ASSERT_EQUAL(errorMessageDescribe.size(), size);
     ASSERT_UNEQUAL(errorMessageDescribe.find(SYSTEM_TEXT("访问码无效。")), String::npos);
-
-    ASSERT_TRUE(LocalMemoryFree(errorMessage));
 }

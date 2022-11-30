@@ -5,13 +5,15 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.3 (2022/10/08 21:49)
+///	引擎版本：0.8.1.4 (2022/11/17 21:41)
 
 #include "System/SystemExport.h"
 
 #include "LibraryTools.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
+
+#include <array>
 
 System::DynamicLinkModule System::GetDynamicLinkHandle(const DynamicLinkCharType* moduleName) noexcept
 {
@@ -59,4 +61,19 @@ bool System::GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCh
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+System::String System::GetDynamicLinkFileName(DynamicLinkModule module)
+{
+    std::array<DynamicLinkCharType, gMaxPath> moduleFileName{};
+    const auto maxFileNameLength = GetDynamicLinkFileName(module, moduleFileName.data(), gMaxPath);
+
+    if (maxFileNameLength == 0)
+    {
+        return String{};
+    }
+
+    String name{ moduleFileName.data() };
+
+    return name;
 }

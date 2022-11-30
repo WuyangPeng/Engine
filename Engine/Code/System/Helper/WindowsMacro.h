@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/04 13:50)
+///	引擎版本：0.8.1.4 (2022/11/19 13:55)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
@@ -126,7 +126,7 @@ namespace System
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 
-    NODISCARD constexpr WindowsWord MakeWord(WindowsPtrDWord low, WindowsPtrDWord high) noexcept
+    NODISCARD constexpr WindowsWord MakeWord(WindowsDWordPtrSizeType low, WindowsDWordPtrSizeType high) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
@@ -142,7 +142,7 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsWord LowWord(WindowsPtrDWord param) noexcept
+    NODISCARD constexpr WindowsWord LowWord(WindowsDWordPtrSizeType param) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
@@ -155,7 +155,7 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    NODISCARD constexpr WindowsWord HighWord(WindowsPtrDWord param) noexcept
+    NODISCARD constexpr WindowsWord HighWord(WindowsDWordPtrSizeType param) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
 
@@ -193,6 +193,25 @@ namespace System
     constexpr WindowsBool gFalse{ 0 };
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
+
+    // 异常码
+    constexpr auto exceptionShift = 0u;
+
+    // 设备码
+    constexpr auto facilityShift = 16u;
+
+    // 保留的(0)
+    constexpr auto reservedShift = 28u;
+
+    // MS(0) 或 自定义(1)
+    constexpr auto customerShift = 29u;
+
+    // 严重性
+    constexpr auto severityShift = 30u;
+
+    constexpr auto exceptionBit = (1u << facilityShift) - 1u;
+
+    constexpr auto facilityBit = 0x0FFF0000u;
 }
 
 #ifdef SYSTEM_USE_WINDOWS_MACRO

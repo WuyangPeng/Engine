@@ -11,9 +11,10 @@
 #define FRAMEWORK_ANDROID_FRAME_ANDROID_CALL_BACK_DETAIL_H
 
 #include "AndroidCallBack.h"
-#include "System/Android/AndroidInputKeyEvent.h"
-#include "System/Android/AndroidInputMotionEvent.h"
-#include "System/Android/AndroidNativeWindow.h"
+#include "System/Android/AndroidInputEventFacade.h"
+#include "System/Android/AndroidInputMotionEventFacade.h"
+#include "System/Android/AndroidNativeWindowFacade.h"
+#include "System/Android/Flags/AndroidInputFlags.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -70,12 +71,13 @@ void Framework::AndroidCallBack<MiddleLayer>::ResizedMessage(AndroidApp* android
     {
         ParentType::ResizedMessage(androidApp);
 
-        auto nativeWindow = androidApp->GetAndroidNativeWindow();
+        auto nativeWindow = androidApp->GetNativeWindow();
 
         if (nativeWindow != nullptr)
         {
-            const auto width = System::AndroidNativeWindowGetWidth(nativeWindow);
-            const auto height = System::AndroidNativeWindowGetHeight(nativeWindow);
+            System::AndroidNativeWindowFacade androidNativeWindow{ nativeWindow };
+            const auto width = androidNativeWindow.GetWidth(nativeWindow);
+            const auto height = androidNativeWindow.GetHeight(nativeWindow);
 
             if (!middleLayer->Resize(System::WindowsDisplay::AndroidUnDefinition, WindowSize{ width, height }))
             {
@@ -159,10 +161,11 @@ int Framework::AndroidCallBack<MiddleLayer>::KeyDownMessage(AndroidApp* androidA
 
     if (androidApp != nullptr)
     {
-        const auto flags = System::AndroidKeyEventGetFlags(androidInputEvent);
-        const auto keyCode = System::EnumCastUnderlying(System::AndroidKeyEventGetKeyCode(androidInputEvent));
+        System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
+        const auto flags = androidKeyEvent.GetFlags();
+        const auto keyCode = System::EnumCastUnderlying(androidKeyEvent.GetKeyCode(androidInputEvent));
 
-        if ((flags & System::AndroidKeyEvent::SoftKeyboard) != System::AndroidKeyEvent::Null)
+        if ((flags & System::AndroidKeyEventFlag::SoftKeyboard) != System::AndroidKeyEventFlag::Null)
         {
             if (!middleLayer->KeyDown(keyCode, WindowPoint{}))
             {
@@ -188,10 +191,11 @@ int Framework::AndroidCallBack<MiddleLayer>::KeyUpMessage(AndroidApp* androidApp
 
     if (androidApp != nullptr)
     {
-        const auto flags = System::AndroidKeyEventGetFlags(androidInputEvent);
-        const auto keyCode = System::EnumCastUnderlying(System::AndroidKeyEventGetKeyCode(androidInputEvent));
+        System::AndroidInputEventFacade androidKeyEvent{ androidInputEvent };
+        const auto flags = androidKeyEvent.GetFlags(androidInputEvent);
+        const auto keyCode = System::EnumCastUnderlying(androidKeyEvent.GetKeyCode(androidInputEvent));
 
-        if ((flags & System::AndroidKeyEvent::SoftKeyboard) != System::AndroidKeyEvent::Null)
+        if ((flags & System::AndroidKeyEventFlag::SoftKeyboard) != System::AndroidKeyEventFlag::Null)
         {
             if (!middleLayer->KeyUp(keyCode, WindowPoint{}))
             {
@@ -217,8 +221,9 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionDownMessage(AndroidApp* andro
 
     if (androidApp != nullptr)
     {
-        const auto xOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetXOffset(androidInputEvent));
-        const auto yOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetYOffset(androidInputEvent));
+        System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
+        const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset(androidInputEvent));
+        const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset(androidInputEvent));
 
         // 可以通过使用AndroidMotionEventGetMetaState和AndroidMotionEventGetButtonState
         // 获取VirtualKeysTypes的值，但对于Android而言，没有太多实际的意义。
@@ -238,8 +243,9 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionUpMessage(AndroidApp* android
 
     if (androidApp != nullptr)
     {
-        const auto xOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetXOffset(androidInputEvent));
-        const auto yOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetYOffset(androidInputEvent));
+        System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
+        const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset(androidInputEvent));
+        const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset(androidInputEvent));
 
         if (!middleLayer->MouseClick(MouseButtonsTypes::LeftButton, MouseStateTypes::MouseUp, WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{}))
         {
@@ -257,8 +263,9 @@ int Framework::AndroidCallBack<MiddleLayer>::ActionMoveMessage(AndroidApp* andro
 
     if (androidApp != nullptr)
     {
-        const auto xOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetXOffset(androidInputEvent));
-        const auto yOffset = boost::numeric_cast<int>(System::AndroidMotionEventGetYOffset(androidInputEvent));
+        System::AndroidInputMotionEventFacade androidKeyEvent{ androidInputEvent };
+        const auto xOffset = boost::numeric_cast<int>(androidKeyEvent.GetXOffset(androidInputEvent));
+        const auto yOffset = boost::numeric_cast<int>(androidKeyEvent.GetYOffset(androidInputEvent));
 
         if (!middleLayer->Motion(WindowPoint{ xOffset, yOffset }, VirtualKeysTypes{}))
         {

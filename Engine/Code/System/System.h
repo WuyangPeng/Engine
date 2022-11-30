@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.2 (2022/09/03 23:26)
+///	引擎版本：0.8.1.4 (2022/11/19 23:16)
 
 #ifndef SYSTEM_H
 #define SYSTEM_H
@@ -25,6 +25,7 @@
 #include "SystemOutput/SystemOutput.h"
 #include "Threading/Threading.h"
 #include "Time/Time.h"
+#include "Vulkan/Vulkan.h"
 #include "Windows/Windows.h"
 #include "Network/Network.h"
 #include "UserInterface/UserInterface.h"

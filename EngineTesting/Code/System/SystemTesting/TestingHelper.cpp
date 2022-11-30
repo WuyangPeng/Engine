@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/04 15:36)
+///	引擎测试版本：0.8.1.4 (2022/11/21 21:47)
 
 #include "Testing.h"
 #include "TestingHelper.h"
@@ -39,6 +39,7 @@ void System::TestingHelper::InitSuite()
     AddNetworkSuite();
     AddOpenGLSuite();
     AddDirectXSuite();
+    AddVulkanSuite();
     AddWindowsSuite();
     AddLinuxSuite();
     AddMacintoshSuite();
@@ -188,7 +189,7 @@ void System::TestingHelper::AddDynamicLinkSuite()
     ADD_TEST(dynamicLinkSuite, LibraryDirectoryTesting);
     dynamicLinkSuite.AddSuite(GetLoadResourceToolsSuite());
     ADD_TEST(dynamicLinkSuite, EnumResourceDataTesting);
-    dynamicLinkSuite.AddSuite(GetEnumResourceToolsSuite()); 
+    dynamicLinkSuite.AddSuite(GetEnumResourceToolsSuite());
 
     AddSuite(dynamicLinkSuite);
 }
@@ -255,12 +256,14 @@ CoreTools::Suite System::TestingHelper::GetFormatErrorMessageSuite()
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseBufferTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseDllMoudleAndLocalAllocTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageUseDllMoudleAndUseBufferTesting);
+    ADD_TEST(formatErrorMessageSuite, FormatErrorMessageReturnStringTesting);
     ADD_TEST(formatErrorMessageSuite, FormatErrorMessageTesting);
     ADD_TEST(formatErrorMessageSuite, FormatStringMessageUseArgumentArrayAndLocalAllocTesting);
     ADD_TEST(formatErrorMessageSuite, FormatStringMessageUseArgumentArrayAndBufferTesting);
     ADD_TEST(formatErrorMessageSuite, FormatStringMessageUseVaListAndLocalAllocTesting);
     ADD_TEST(formatErrorMessageSuite, FormatStringMessageUseVaListAndUseBufferTesting);
     ADD_TEST(formatErrorMessageSuite, SoftwareExceptionTesting);
+    ADD_TEST(formatErrorMessageSuite, FormatErrorMessageParameterTesting);
 
     return formatErrorMessageSuite;
 }
@@ -271,6 +274,7 @@ CoreTools::Suite System::TestingHelper::GetCodePageSuite()
 
     ADD_TEST(codePageSuite, CodePageValidTesting);
     ADD_TEST(codePageSuite, CodePageTesting);
+    ADD_TEST(codePageSuite, LocaleTesting);
 
     return codePageSuite;
 }
@@ -907,6 +911,15 @@ void System::TestingHelper::AddDirectXSuite()
     AddSuite(directXSuite);
 }
 
+void System::TestingHelper::AddVulkanSuite()
+{
+    auto vulkanSuite = GenerateSuite("vulkan"s);
+
+    ADD_TEST(vulkanSuite, VulkanTesting);
+
+    AddSuite(vulkanSuite);
+}
+
 void System::TestingHelper::AddWindowsSuite()
 {
     auto windowsSuite = GenerateSuite("Windows"s);
@@ -962,11 +975,11 @@ void System::TestingHelper::AddAndroidSuite()
 {
     auto androidSuite = GenerateSuite("安卓"s);
 
-    ADD_TEST(androidSuite, AndroidInputKeyEventTesting);
-    ADD_TEST(androidSuite, AndroidInputMotionEventTesting);
+    ADD_TEST(androidSuite, AndroidInputEventFacadeTesting);
+    ADD_TEST(androidSuite, AndroidInputMotionEventFacadeTesting);
     ADD_TEST(androidSuite, AndroidLooperTesting);
-    ADD_TEST(androidSuite, AndroidInputQueueTesting);
-    ADD_TEST(androidSuite, AndroidNativeWindowTesting);
+    ADD_TEST(androidSuite, AndroidInputQueueFacadeTesting);
+    ADD_TEST(androidSuite, AndroidNativeWindowFacadeTesting);
     ADD_TEST(androidSuite, AndroidNativeAppGlueTesting);
 
     AddSuite(androidSuite);

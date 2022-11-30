@@ -118,17 +118,20 @@
     "FormatErrorMessageUseBufferTesting": 1,
     "FormatErrorMessageUseDllMoudleAndLocalAllocTesting": 1,
     "FormatErrorMessageUseDllMoudleAndUseBufferTesting": 1,
+    "FormatErrorMessageReturnStringTesting": 1,
     "FormatErrorMessageTesting": 1,
     "FormatStringMessageUseArgumentArrayAndLocalAllocTesting": 1,
     "FormatStringMessageUseArgumentArrayAndBufferTesting": 1,
     "FormatStringMessageUseVaListAndLocalAllocTesting": 1,
     "FormatStringMessageUseVaListAndUseBufferTesting": 1,
-    "SoftwareExceptionTesting": 100
+    "SoftwareExceptionTesting": 100,
+    "FormatErrorMessageParameterTesting": 1
   },
 
   "codePageSuite": {
     "CodePageValidTesting": 1,
-    "CodePageTesting": 1
+    "CodePageTesting": 1,
+    "LocaleTesting": 1
   },
 
   "stringConversionSuite": {
@@ -493,6 +496,10 @@
     "DirectXD3D11Testing": 1
   },
 
+  "vulkanSuite": {
+    "VulkanTesting": 1
+  },
+
   "windowsSuite": {
     "LastPlatformErrorTesting": 1,
     "WindowsCreateTesting": 1,
@@ -524,11 +531,11 @@
   },
 
   "androidSuite": {
-    "AndroidInputKeyEventTesting": 1,
-    "AndroidInputMotionEventTesting": 1,
+    "AndroidInputEventFacadeTesting": 1,
+    "AndroidInputMotionEventFacadeTesting": 1,
+    "AndroidInputQueueFacadeTesting": 1,
     "AndroidLooperTesting": 1,
-    "AndroidInputQueueTesting": 1,
-    "AndroidNativeWindowTesting": 1,
-    "AndroidNativeAppGlueTesting": 1
+    "AndroidNativeAppGlueTesting": 1,
+    "AndroidNativeWindowFacadeTesting": 1
   }
 }

@@ -5,6 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
+///	引擎测试版本：0.8.1.4 (2022/11/30 14:45)
 ///	引擎测试版本：0.8.1.3 (2022/10/14 21:22)
 
 #include "StrcatTesting.h"
@@ -15,8 +16,6 @@
 
 #include <array>
 
-using std::array;
-using std::string;
 using namespace std::literals;
 
 System::StrcatTesting::StrcatTesting(const OStreamShared& stream)
@@ -42,9 +41,9 @@ void System::StrcatTesting::StrcatTest()
     constexpr auto bufferSize = 256;
     const auto result = "2strcat4"s;
 
-    array<char, bufferSize> buffer{ '2' };
+    std::array<char, bufferSize> buffer{ '2' };
 
     ASSERT_TRUE(Strcat(buffer.data(), bufferSize, "strcat4"));
 
-    ASSERT_EQUAL(string{ buffer.data() }, result);
+    ASSERT_EQUAL(std::string{ buffer.data() }, result);
 }

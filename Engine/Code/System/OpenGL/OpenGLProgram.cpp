@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	标准：std:c++17
-///	引擎版本：0.8.0.0 (2021/12/13 14:09)
+///	标准：std:c++20
+///	引擎版本：0.8.1.4 (2022/11/19 18:46)
 
 #include "System/SystemExport.h"
 
@@ -17,8 +17,6 @@
 
 #include <vector>
 
-using std::string;
-using std::vector;
 using namespace std::literals;
 
 System::OpenGLUInt System::CreateGLProgram() noexcept
@@ -57,6 +55,11 @@ bool System::GetGLProgram(OpenGLUInt program, ProgramStatus pname) noexcept
     return params != GL_FALSE;
 }
 
+void System::GetGLProgram(OpenGLUInt program, ProgramAttributes pname, std::array<OpenGLInt, 3>& params) noexcept
+{
+    GLGetProgramiv(program, EnumCastUnderlying(pname), params.data());
+}
+
 int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pname) noexcept
 {
     OpenGLInt params{};
@@ -65,16 +68,16 @@ int System::GetGLProgram(OpenGLUInt program, ProgramAttributes pname) noexcept
     return params;
 }
 
-string System::GetGLProgramInfoLog(OpenGLUInt program)
+std::string System::GetGLProgramInfoLog(OpenGLUInt program)
 {
     const auto logLength = GetGLProgram(program, ProgramAttributes::InfoLogLength);
 
     if (0 < logLength)
     {
-        vector<GLchar> log(logLength);
+        std::vector<OpenGLChar> log(logLength);
         auto numWritten = 0;
         GLGetProgramInfoLog(program, logLength, &numWritten, log.data());
-        string message{ log.begin(), log.end() };
+        std::string message{ log.begin(), log.end() };
 
         return message;
     }

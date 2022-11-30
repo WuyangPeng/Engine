@@ -10,9 +10,9 @@
 #include "Framework/FrameworkExport.h"
 
 #include "AndroidProcessManagerImpl.h"
-
-#include "System/Android/AndroidInputKeyEvent.h"
-#include "System/Android/AndroidInputMotionEvent.h"
+#include "System/Android/AndroidInputEventFacade.h"
+#include "System/Android/AndroidInputMotionEventFacade.h"
+#include "System/Android/Flags/AndroidInputFlags.h"
 #include "System/Android/Flags/AndroidNativeAppGlueFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -97,7 +97,8 @@ void Framework::AndroidProcessManagerImpl::Terminate()
 
 int Framework::AndroidProcessManagerImpl::HandleInput(AndroidApp* app, AndroidInputEvent* event)
 {
-    const auto eventType = AndroidInputEventGetType(event);
+    System::AndroidInputEventFacade androidInputEvent{ event };
+    const auto eventType = androidInputEvent.GetType();
 
     switch (eventType)
     {
@@ -138,8 +139,8 @@ void Framework::AndroidProcessManagerImpl::Display(AndroidApp* androidApp, int64
 int Framework::AndroidProcessManagerImpl::HandleKeyInput(AndroidApp* androidApp, AndroidInputEvent* event)
 {
     auto handleKeyInputFunctionPointer = GetKeyHandleInputFunctionPointer();
-
-    const auto id = AndroidKeyEventGetAction(event);
+    System::AndroidInputEventFacade androidKeyEvent{ event };
+    const auto id = androidKeyEvent.GetAction();
 
     const auto iter = handleKeyInputFunctionPointer->find(id);
 
@@ -153,7 +154,8 @@ int Framework::AndroidProcessManagerImpl::HandleMotionInput(AndroidApp* androidA
 {
     auto handleMotionInputFunctionPointer = GetMotionHandleInputFunctionPointer();
 
-    const auto id = System::AndroidMotionEventGetAction(event);
+    System::AndroidInputMotionEventFacade androidKeyEvent{ event };
+    const auto id = androidKeyEvent.GetAction();
 
     const auto iter = handleMotionInputFunctionPointer->find(id);
 
