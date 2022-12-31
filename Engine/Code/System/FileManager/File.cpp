@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:31)
+///	引擎版本：0.8.1.5 (2022/12/11 20:41)
 
 #include "System/SystemExport.h"
 
@@ -153,7 +153,7 @@ bool System::GetFileLength(WindowsHandle file, WindowsLargeIntegerPtr fileSize) 
     #if defined(TCRE_USE_GCC)
 
     uint64_t size{ 0 };
-    auto result = GetFileLength(file, size);
+    const auto result = GetFileLength(file, size);
 
     if (result)
     {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 23:30)
+///	引擎版本：0.8.1.5 (2022/12/16 22:10)
 
 #ifndef SYSTEM_HELPER_VISUALC_H
 #define SYSTEM_HELPER_VISUALC_H
@@ -222,31 +222,7 @@
 
     #else  // _MSC_VER < 1600
 
-// clang-format off
-
-        typedef __int8 int8_t;
-        typedef __int16 int16_t;
-        typedef __int32 int32_t;
-        typedef __int64 int64_t;
-        typedef unsigned __int8 uint8_t;
-        typedef unsigned __int16 uint16_t;
-        typedef unsigned __int32 uint32_t;
-        typedef unsigned __int64 uint64_t;
-
-        // clang-format on
-
-        #define INT8_MIN _I8_MIN
-        #define INT8_MAX _I8_MAX
-        #define INT16_MIN _I16_MIN
-        #define INT16_MAX _I16_MAX
-        #define INT32_MIN _I32_MIN
-        #define INT32_MAX _I32_MAX
-        #define INT64_MIN _I64_MIN
-        #define INT64_MAX _I64_MAX
-        #define UINT8_MAX _UI8_MAX
-        #define UINT16_MAX _UI16_MAX
-        #define UINT32_MAX _UI32_MAX
-        #define UINT64_MAX _UI64_MAX
+        #error "不支持低版本的Visual Studio。"
 
     #endif  // 1600 <= _MSC_VER
 

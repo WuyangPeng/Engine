@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/15 21:59)
+///	引擎版本：0.8.1.5 (2022/12/02 16:27)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_MODE_FLAGS_H
 #define SYSTEM_CONSOLE_CONSOLE_MODE_FLAGS_H
@@ -26,13 +26,17 @@ namespace System
         ExtendedFlags = ENABLE_EXTENDED_FLAGS,
         InsertMode = ENABLE_INSERT_MODE | ExtendedFlags,
         QuickEditMode = ENABLE_QUICK_EDIT_MODE | ExtendedFlags,
-        AutoPosition = ENABLE_AUTO_POSITION,
+        AutoPosition = ENABLE_AUTO_POSITION | ExtendedFlags,
+        VirtualTerminalInput = ENABLE_VIRTUAL_TERMINAL_INPUT
     };
 
     enum class ConsoleOutputMode
     {
         ProcessedOutput = ENABLE_PROCESSED_OUTPUT,
         WeapAtEolOutput = ENABLE_WRAP_AT_EOL_OUTPUT,
+        VirtualTerminalProcessing = ENABLE_VIRTUAL_TERMINAL_PROCESSING,
+        DisableNewlineAutoReturn = DISABLE_NEWLINE_AUTO_RETURN,
+        LvbGridWorldwide = ENABLE_LVB_GRID_WORLDWIDE
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32

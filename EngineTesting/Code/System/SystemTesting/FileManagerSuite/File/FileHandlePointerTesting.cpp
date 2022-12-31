@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:59)
+///	引擎测试版本：0.8.1.5 (2022/12/15 0:42)
 
 #include "FileHandlePointerTesting.h"
 #include "System/FileManager/File.h"
@@ -15,13 +15,12 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <vector>
-
-using std::vector;
 using namespace std::literals;
 
 System::FileHandlePointerTesting::FileHandlePointerTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      buffer(100, '\a'),
+      distanceToMove{ 10 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -42,19 +41,26 @@ void System::FileHandlePointerTesting::FilePointerTest()
 {
     const auto fileName = SYSTEM_TEXT("Resource/FileTesting/FilePointerText.txt"s);
 
-    auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::CreateAlways);
+    const auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::CreateAlways);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoFilePointerTest, handle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
+
+void System::FileHandlePointerTesting::DoFilePointerTest(WindowsHandle handle)
+{
     ASSERT_TRUE(IsFileHandleValid(handle));
 
-    vector<char> buffer(100, '\a');
-    WindowsDWord outNumber{ 0 };
-    ASSERT_TRUE(WriteSystemFile(handle, buffer.data(), boost::numeric_cast<WindowsDWord>(buffer.size()), &outNumber));
-    ASSERT_EQUAL(outNumber, buffer.size());
+    ASSERT_NOT_THROW_EXCEPTION_1(FlushSystemFileBuffersTest, handle);
 
-    ASSERT_TRUE(FlushSystemFileBuffers(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(SetFilePointerTest, handle);
 
-    constexpr WindowsLong distanceToMove{ 10 };
+    ASSERT_NOT_THROW_EXCEPTION_1(SetEndOfFileTest, handle);
+}
 
+void System::FileHandlePointerTesting::SetFilePointerTest(WindowsHandle handle)
+{
     WindowsLargeInteger newFilePointer{};
 
     ASSERT_TRUE(SetSystemFilePointer(handle, distanceToMove, &newFilePointer, FilePointer::Begin));
@@ -66,11 +72,22 @@ void System::FileHandlePointerTesting::FilePointerTest()
 
     ASSERT_TRUE(SetSystemFilePointer(handle, distanceToMove, &newFilePointer, FilePointer::Current));
     ASSERT_EQUAL(newFilePointer.QuadPart, boost::numeric_cast<int>(buffer.size()));
+}
 
+void System::FileHandlePointerTesting::FlushSystemFileBuffersTest(WindowsHandle handle)
+{
+    WindowsDWord outNumber{ 0 };
+    ASSERT_TRUE(WriteSystemFile(handle, buffer.data(), boost::numeric_cast<WindowsDWord>(buffer.size()), &outNumber));
+    ASSERT_EQUAL(outNumber, buffer.size());
+
+    ASSERT_TRUE(FlushSystemFileBuffers(handle));
+}
+
+void System::FileHandlePointerTesting::SetEndOfFileTest(WindowsHandle handle)
+{
     ASSERT_TRUE(SetEndOfSystemFile(handle));
 
+    WindowsLargeInteger newFilePointer{};
     ASSERT_TRUE(SetSystemFilePointer(handle, -distanceToMove, &newFilePointer, FilePointer::Current));
     ASSERT_EQUAL(newFilePointer.QuadPart, boost::numeric_cast<int>(buffer.size()) - distanceToMove);
-
-    ASSERT_TRUE(CloseSystemFile(handle));
 }

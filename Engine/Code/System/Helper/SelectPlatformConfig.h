@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 13:44)
+///	引擎版本：0.8.1.5 (2022/12/16 21:44)
 
 #ifndef SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 #define SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 
-// 找到我们所在的平台，并根据需要定义TCRE_PLATFORM_CONFIG。
-// 各个头文件中定义宏TCRE_SYSTEM_PLATFORM表示平台名称。
+/// 找到我们所在的平台，
+/// 并根据需要定义TCRE_PLATFORM_CONFIG。
+/// 各个头文件中定义宏TCRE_SYSTEM_PLATFORM表示平台名称。
 
 #if (defined(linux) || defined(__linux) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)) && !defined(_CRAYC)
 

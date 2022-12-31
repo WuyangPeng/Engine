@@ -5,24 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:51)
+///	引擎测试版本：0.8.1.5 (2022/12/06 16:03)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_SCREEN_BUFFER_INFO_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_SCREEN_BUFFER_INFO_TESTING_H
 
-#include "System/Console/Fwd/ConsoleFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <random>
-#include <vector>
+#include "ConsoleScreenBufferTesting.h"
+#include "System/Console/Using/ConsoleScreenBufferUsing.h"
 
 namespace System
 {
-    class ConsoleScreenBufferInfoTesting final : public CoreTools::UnitTest
+    class ConsoleScreenBufferInfoTesting final : public ConsoleScreenBufferTesting
     {
     public:
         using ClassType = ConsoleScreenBufferInfoTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConsoleScreenBufferTesting;
 
     public:
         explicit ConsoleScreenBufferInfoTesting(const OStreamShared& stream);
@@ -36,15 +33,9 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void ConsoleScreenBufferInfoTest();
 
-    private:
-        using DesiredAccessGenericFlagsContainer = std::vector<DesiredAccessGeneric>;
-        using ConsoleScreenBufferShareModeFlagsContainer = std::vector<ConsoleScreenBufferShareMode>;
-
-    private:
-        DesiredAccessGenericFlagsContainer desiredAccessGenericFlags;
-        ConsoleScreenBufferShareModeFlagsContainer consoleScreenBufferShareModeFlags;
-        std::default_random_engine randomEngine;
-        size_t maxSize;
+        void DoConsoleScreenBufferInfoTest(size_t index);
+        void GetSystemConsoleScreenBufferInfoTest(WindowsHandle attributesConsoleHandle);
+        void EqualTest(const ConsoleScreenBufferInfo& consoleScreenBufferInfo, const ConsoleScreenBufferInfoEx& consoleScreenBufferInfoEx);
     };
 }
 

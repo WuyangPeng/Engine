@@ -5,20 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:57)
+///	引擎测试版本：0.8.1.5 (2022/12/12 21:42)
 
 #include "CFileCharacterTesting.h"
 #include "System/FileManager/CFile.h"
 #include "System/FileManager/Flags/CFileFlags.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <vector>
-
-using std::vector;
 using namespace std::literals;
 
 System::CFileCharacterTesting::CFileCharacterTesting(const OStreamShared& stream)
@@ -43,58 +39,67 @@ void System::CFileCharacterTesting::MainTest()
 
 void System::CFileCharacterTesting::PutCharacterTest()
 {
-    FILE* file{ nullptr };
-    ASSERT_TRUE(OpenCFile(file, GetFileName(), SYSTEM_FILE_TEXT("w+")));
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(file, "打开文件失败。"s);
+    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"s));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoPutCharacterTest, file);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
+}
+
+void System::CFileCharacterTesting::DoPutCharacterTest(FILE* file)
+{
     constexpr int putValue{ 'a' };
 
     ASSERT_TRUE(PutCharacter(file, putValue));
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
-    const auto value = GetCharacter(file);
-    ASSERT_EQUAL(putValue, value);
-
-    ASSERT_TRUE(CloseCFile(file));
+    const auto character = GetCharacter(file);
+    ASSERT_EQUAL(putValue, character);
 }
 
 void System::CFileCharacterTesting::PutStringTest()
 {
-    FILE* file{ nullptr };
-    ASSERT_TRUE(OpenCFile(file, GetFileName(), SYSTEM_FILE_TEXT("w+")));
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(file, "打开文件失败。"s);
+    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"s));
 
-    const auto putString = CoreTools::Version::GetVersion();
+    ASSERT_NOT_THROW_EXCEPTION_1(DoPutStringTest, file);
 
-    ASSERT_TRUE(PutString(file, putString.c_str()));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
+}
+
+void System::CFileCharacterTesting::DoPutStringTest(FILE* file)
+{
+    const auto fileContent = GetFileContent();
+
+    ASSERT_TRUE(PutString(file, fileContent.c_str()));
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
-    auto value = GetCharacter(file);
-    ASSERT_EQUAL(putString.at(0), value);
+    auto character = GetCharacter(file);
+    ASSERT_EQUAL(fileContent.at(0), character);
 
-    ASSERT_TRUE(UnGetCharacter(file, value));
+    ASSERT_TRUE(UnGetCharacter(file, character));
 
-    value = GetCharacter(file);
-    ASSERT_EQUAL(putString.at(0), value);
-
-    ASSERT_TRUE(CloseCFile(file));
+    character = GetCharacter(file);
+    ASSERT_EQUAL(fileContent.at(0), character);
 }
 
 void System::CFileCharacterTesting::GetStringTest()
 {
-    FILE* file{ nullptr };
-    ASSERT_TRUE(OpenCFile(file, GetFileName(), SYSTEM_FILE_TEXT("r")));
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(file, "打开文件失败。"s);
+    auto file = OpenFile(SYSTEM_FILE_TEXT("r"s));
 
-    const auto putString = CoreTools::Version::GetVersion();
+    ASSERT_NOT_THROW_EXCEPTION_1(DoGetStringTest, file);
 
-    auto result = GetString(file, boost::numeric_cast<int>(putString.size() + 1));
-    ASSERT_EQUAL(result, putString);
-
-    ASSERT_TRUE(CloseCFile(file));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
 }
 
-const System::String System::CFileCharacterTesting::GetFileName()
+System::CFileString System::CFileCharacterTesting::GetFileName() const
 {
     return SYSTEM_FILE_TEXT("Resource/CFileTesting/CharacterTest.txt"s);
+}
+
+void System::CFileCharacterTesting::DoGetStringTest(FILE* file)
+{
+    const auto fileContent = GetFileContent();
+
+    const auto result = GetString(file, boost::numeric_cast<int>(fileContent.size() + 1));
+    ASSERT_EQUAL(result, fileContent);
 }

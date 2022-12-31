@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:02)
+///	引擎测试版本：0.8.1.5 (2022/12/06 22:19)
 
 #include "SetConsoleHandleScreenBufferInfoTesting.h"
 #include "System/Console/ConsoleScreenBuffer.h"
@@ -14,6 +14,7 @@
 #include "System/Helper/Tools.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -33,34 +34,28 @@ void System::SetConsoleHandleScreenBufferInfoTesting::DoRunUnitTest()
 
 void System::SetConsoleHandleScreenBufferInfoTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(SetConsoleScreenBufferInfoTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
+
+    const auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(DesiredAccessGeneric::ReadAndWrite, ConsoleScreenBufferShareMode::ReadAndWrite, nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SetConsoleScreenBufferInfoTest, attributesConsoleHandle);
+
+    ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
 }
 
-void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfoTest()
+void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfoTest(WindowsHandle attributesConsoleHandle)
 {
-    constexpr auto size = 96;
-
-    auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(DesiredAccessGeneric::ReadAndWrite, ConsoleScreenBufferShareMode::ReadAndWrite, nullptr);
-
     auto originalConsoleScreenBufferInfo = GetWindowsStructDefaultSize<ConsoleScreenBufferInfoEx>();
-
     ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
 
-    auto setConsoleScreenBufferInfo = originalConsoleScreenBufferInfo;
+    ASSERT_NOT_THROW_EXCEPTION_2(DoSetConsoleScreenBufferInfoTest, attributesConsoleHandle, originalConsoleScreenBufferInfo);
 
-    setConsoleScreenBufferInfo.dwSize.X = size;
-    setConsoleScreenBufferInfo.dwSize.Y = size;
-    setConsoleScreenBufferInfo.dwCursorPosition.X = 0;
-    setConsoleScreenBufferInfo.dwCursorPosition.Y = size / 2;
-    setConsoleScreenBufferInfo.wAttributes = static_cast<WindowsWord>(TextColour::Green);
-    setConsoleScreenBufferInfo.wPopupAttributes = static_cast<WindowsWord>(TextColour::Blue);
-    setConsoleScreenBufferInfo.srWindow.Top = 0;
-    setConsoleScreenBufferInfo.srWindow.Bottom = size - 1;
-    setConsoleScreenBufferInfo.srWindow.Left = 0;
-    setConsoleScreenBufferInfo.srWindow.Right = size - 1;
-    setConsoleScreenBufferInfo.dwMaximumWindowSize.X = size;
-    setConsoleScreenBufferInfo.dwMaximumWindowSize.Y = size;
-    setConsoleScreenBufferInfo.bFullscreenSupported = gTrue;
+    ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
+}
+
+void System::SetConsoleHandleScreenBufferInfoTesting::DoSetConsoleScreenBufferInfoTest(WindowsHandle attributesConsoleHandle, const ConsoleScreenBufferInfoEx& consoleScreenBufferInfo)
+{
+    auto setConsoleScreenBufferInfo = GetConsoleScreenBufferInfoEx(consoleScreenBufferInfo);
 
     ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &setConsoleScreenBufferInfo));
 
@@ -68,31 +63,60 @@ void System::SetConsoleHandleScreenBufferInfoTesting::SetConsoleScreenBufferInfo
 
     ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &currentConsoleScreenBufferInfo));
 
-    ASSERT_EQUAL(currentConsoleScreenBufferInfo.cbSize, setConsoleScreenBufferInfo.cbSize);
-    ASSERT_EQUAL(currentConsoleScreenBufferInfo.dwSize.X, setConsoleScreenBufferInfo.dwSize.X);
-    ASSERT_EQUAL(currentConsoleScreenBufferInfo.dwSize.Y, setConsoleScreenBufferInfo.dwSize.Y);
-    ASSERT_EQUAL(currentConsoleScreenBufferInfo.wAttributes, setConsoleScreenBufferInfo.wAttributes);
-    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Top, setConsoleScreenBufferInfo.srWindow.Top);
-    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Bottom, setConsoleScreenBufferInfo.srWindow.Bottom);
-    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Left, setConsoleScreenBufferInfo.srWindow.Left);
-    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Right, setConsoleScreenBufferInfo.srWindow.Right);
-    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.dwMaximumWindowSize.X, setConsoleScreenBufferInfo.dwMaximumWindowSize.X);
-    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.dwMaximumWindowSize.Y, setConsoleScreenBufferInfo.dwMaximumWindowSize.Y);
-    ASSERT_EQUAL(currentConsoleScreenBufferInfo.wPopupAttributes, setConsoleScreenBufferInfo.wPopupAttributes);
+    ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, setConsoleScreenBufferInfo, currentConsoleScreenBufferInfo);
+}
 
-    constexpr auto colorTableSize = GetArraySize(currentConsoleScreenBufferInfo.ColorTable);
-    for (auto i = 0; i < colorTableSize; ++i)
+System::ConsoleScreenBufferInfoEx System::SetConsoleHandleScreenBufferInfoTesting::GetConsoleScreenBufferInfoEx(ConsoleScreenBufferInfoEx consoleScreenBufferInfo) const noexcept
+{
+    constexpr auto size = 36;
+
+    consoleScreenBufferInfo.dwSize.X = size;
+    consoleScreenBufferInfo.dwSize.Y = size;
+    consoleScreenBufferInfo.dwCursorPosition.X = 0;
+    consoleScreenBufferInfo.dwCursorPosition.Y = size / 2;
+    consoleScreenBufferInfo.wAttributes = static_cast<WindowsWord>(TextColour::Green);
+    consoleScreenBufferInfo.wPopupAttributes = static_cast<WindowsWord>(TextColour::Blue);
+    consoleScreenBufferInfo.srWindow.Top = 0;
+    consoleScreenBufferInfo.srWindow.Bottom = size - 1;
+    consoleScreenBufferInfo.srWindow.Left = 0;
+    consoleScreenBufferInfo.srWindow.Right = size - 1;
+    consoleScreenBufferInfo.dwMaximumWindowSize.X = size;
+    consoleScreenBufferInfo.dwMaximumWindowSize.Y = size;
+    consoleScreenBufferInfo.bFullscreenSupported = gTrue;
+
+    return consoleScreenBufferInfo;
+}
+
+void System::SetConsoleHandleScreenBufferInfoTesting::EqualTest(const ConsoleScreenBufferInfoEx& consoleScreenBufferInfo, const ConsoleScreenBufferInfoEx& currentConsoleScreenBufferInfo)
+{
+    ASSERT_EQUAL(currentConsoleScreenBufferInfo.cbSize, consoleScreenBufferInfo.cbSize);
+    ASSERT_EQUAL(currentConsoleScreenBufferInfo.dwSize.X, consoleScreenBufferInfo.dwSize.X);
+    ASSERT_EQUAL(currentConsoleScreenBufferInfo.dwSize.Y, consoleScreenBufferInfo.dwSize.Y);
+    ASSERT_EQUAL(currentConsoleScreenBufferInfo.wAttributes, consoleScreenBufferInfo.wAttributes);
+    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Top, consoleScreenBufferInfo.srWindow.Top);
+    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Bottom, consoleScreenBufferInfo.srWindow.Bottom);
+    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Left, consoleScreenBufferInfo.srWindow.Left);
+    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.srWindow.Right, consoleScreenBufferInfo.srWindow.Right);
+    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.dwMaximumWindowSize.X, consoleScreenBufferInfo.dwMaximumWindowSize.X);
+    ASSERT_LESS_EQUAL(currentConsoleScreenBufferInfo.dwMaximumWindowSize.Y, consoleScreenBufferInfo.dwMaximumWindowSize.Y);
+    ASSERT_EQUAL(currentConsoleScreenBufferInfo.wPopupAttributes, consoleScreenBufferInfo.wPopupAttributes);
+
+    const auto colorTableSize = GetArraySize(currentConsoleScreenBufferInfo.ColorTable);
+    for (auto i = 0u; i < colorTableSize; ++i)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
 
-        ASSERT_EQUAL(currentConsoleScreenBufferInfo.ColorTable[i], setConsoleScreenBufferInfo.ColorTable[i]);
+        ASSERT_EQUAL(currentConsoleScreenBufferInfo.ColorTable[i], consoleScreenBufferInfo.ColorTable[i]);
 
 #include STSTEM_WARNING_POP
     }
+}
 
-    ASSERT_TRUE(SetConsoleHandleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
+void System::SetConsoleHandleScreenBufferInfoTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试会改变控制台的大小。\n";
 
-    ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
+    SystemPause();
 }

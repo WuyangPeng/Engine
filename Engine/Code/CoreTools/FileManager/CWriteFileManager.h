@@ -30,7 +30,7 @@ namespace CoreTools
         using String = System::String;
         using PosType = System::PosType;
         using FileSeek = System::FileSeek;
-        using FileSetvBuf = System::FileSetvBuf;
+        using FileSetvBuf = System::FileSetVBuffer;
 
     public:
         explicit CWriteFileManager(const String& fileName, bool addition = false);

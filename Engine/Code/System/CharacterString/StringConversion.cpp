@@ -93,14 +93,6 @@ int System::MultiByteConversionWideChar(const char* multiByte, int multiByteLeng
     return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
 }
 
-int System::UTF8ConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
-{
-    const auto codePage = CodePage::UTF8;
-    constexpr auto defaultMultiByte = MultiByte::NoFlags;
-
-    return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
-}
-
 int System::MultiByteConversionWideChar(CodePage codePage, MultiByte flag, const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -124,14 +116,6 @@ int System::WideCharConversionMultiByte(const wchar_t* wideChar, int wideCharLen
 {
     // ´úÂëÒ³
     const auto codePage = GetANSICodePage();
-    constexpr auto defaultWideChar = WideChar::NoFlags;
-
-    return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
-}
-
-int System::WideCharConversionUTF8(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
-{
-    const auto codePage = CodePage::UTF8;
     constexpr auto defaultWideChar = WideChar::NoFlags;
 
     return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
@@ -168,18 +152,34 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
+int System::UTF8ConversionWideChar(const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
+{
+    const auto codePage = CodePage::UTF8;
+    constexpr auto defaultMultiByte = MultiByte::NoFlags;
+
+    return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
+}
+
+int System::WideCharConversionUTF8(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
+{
+    const auto codePage = CodePage::UTF8;
+    constexpr auto defaultWideChar = WideChar::NoFlags;
+
+    return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
+}
+
 System::ComparesStringReturn System::CompareStringUseLocale(LanguageLocale locale,
-                                                            Compares comparesFlag,
+                                                            Compares compares,
                                                             const String& lhsString,
                                                             const String& rhsString)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ComparesStringReturn>(::CompareString(EnumCastUnderlying(locale), EnumCastUnderlying(comparesFlag), lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size())));
+    return UnderlyingCastEnum<ComparesStringReturn>(::CompareString(EnumCastUnderlying(locale), EnumCastUnderlying(compares), lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size())));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(locale, comparesFlag);
+    UnusedFunction(locale, compares);
 
     return Compares(lhsString, rhsString);
 
@@ -187,17 +187,17 @@ System::ComparesStringReturn System::CompareStringUseLocale(LanguageLocale local
 }
 
 System::ComparesStringReturn System::CompareStringUseLocale(const wchar_t* localeName,
-                                                            Compares comparesFlag,
+                                                            Compares compares,
                                                             const std::wstring& lhsString,
                                                             const std::wstring& rhsString)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringEx(localeName, EnumCastUnderlying(comparesFlag), lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size()), nullptr, nullptr, 0));
+    return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringEx(localeName, EnumCastUnderlying(compares), lhsString.c_str(), boost::numeric_cast<int>(lhsString.size()), rhsString.c_str(), boost::numeric_cast<int>(rhsString.size()), nullptr, nullptr, 0));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(localeName, comparesFlag);
+    UnusedFunction(localeName, compares);
 
     return Compares(lhsString, rhsString);
 

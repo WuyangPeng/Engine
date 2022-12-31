@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:52)
+///	引擎测试版本：0.8.1.5 (2022/12/12 21:41)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_CFILE_CHARACTER_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_CFILE_CHARACTER_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_CFILE_CHARACTER_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_CFILE_CHARACTER_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "CFileTestingBase.h"
 
 namespace System
 {
-    class CFileCharacterTesting final : public CoreTools::UnitTest
+    class CFileCharacterTesting final : public CFileTestingBase
     {
     public:
         using ClassType = CFileCharacterTesting;
-        using ParentType = UnitTest;
+        using ParentType = CFileTestingBase;
 
     public:
         explicit CFileCharacterTesting(const OStreamShared& stream);
@@ -33,8 +33,12 @@ namespace System
         void PutStringTest();
         void GetStringTest();
 
-        NODISCARD static const String GetFileName();
+        void DoPutCharacterTest(FILE* file);
+        void DoPutStringTest(FILE* file);
+        void DoGetStringTest(FILE* file);
+
+        NODISCARD CFileString GetFileName() const override;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_CFILE_CHARACTER_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_CFILE_CHARACTER_TESTING_H

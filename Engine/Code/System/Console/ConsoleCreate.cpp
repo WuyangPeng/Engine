@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/16 21:17)
+///	引擎版本：0.8.1.5 (2022/12/02 16:50)
 
 #include "System/SystemExport.h"
 
@@ -58,7 +58,7 @@ bool System::FreeConsole() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::FReOpenConsole(FILE*& file, const char* path, const char* mode, FILE* stream) noexcept
+bool System::ReOpenConsole(FILE*& file, const char* path, const char* mode, FILE* stream) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -81,7 +81,7 @@ bool System::FReOpenConsole(FILE*& file, const char* path, const char* mode, FIL
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::FCloseConsole(FILE* file) noexcept
+bool System::CloseConsole(FILE* file) noexcept
 {
     const auto result = fclose(file);
 

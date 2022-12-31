@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/20 20:36)
+///	引擎测试版本：0.8.1.5 (2022/12/17 18:20)
 
 #include "MakeLanguageCIDTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -14,7 +14,10 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::MakeLanguageCIDTesting::MakeLanguageCIDTesting(const OStreamShared& stream)
-    : ParentType{ stream }, randomEngine{ GetEngineRandomSeed() }, sortDistribution{ 0x0, maxSortID }, languageDistribution{ 0x0, maxLanguageID }
+    : ParentType{ stream },
+      randomEngine{ GetEngineRandomSeed() },
+      sortDistribution{ 0x0, maxSortID },
+      languageDistribution{ 0x0, maxLanguageID }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }

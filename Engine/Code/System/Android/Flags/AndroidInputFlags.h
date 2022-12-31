@@ -10,7 +10,7 @@
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
 
@@ -504,10 +504,5 @@ namespace System
 }
 
 #endif  // SYSTEM_PLATFORM_ANDROID
-
-namespace System
-{
-    ENUM_ANDABLE_OPERATOR_DEFINE(AndroidKeyEventFlag)
-}
 
 #endif  // SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H

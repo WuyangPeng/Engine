@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:06)
+///	引擎测试版本：0.8.1.5 (2022/12/09 20:57)
 
 #include "LoadLibraryTesting.h"
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
@@ -39,7 +39,7 @@ void System::LoadLibraryTesting::LoadLibrarySucceedTest()
 {
     const auto ws2_32Dll = DYNAMIC_LINK_TEXT("ws2_32"s);
 
-    auto module = LoadDynamicLibrary(ws2_32Dll.c_str(), LoadLibraryType::DontResolveDllReferences);
+    const auto module = LoadDynamicLibrary(ws2_32Dll.c_str(), LoadLibraryType::DontResolveDllReferences);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(module, "加载ws2_32失败。"s);
 
@@ -50,7 +50,7 @@ void System::LoadLibraryTesting::LoadLibraryFailureTest()
 {
     const auto errorDll = DYNAMIC_LINK_TEXT("error"s);
 
-    auto module = LoadDynamicLibrary(errorDll.c_str(), LoadLibraryType::DontResolveDllReferences);
+    const auto module = LoadDynamicLibrary(errorDll.c_str(), LoadLibraryType::DontResolveDllReferences);
 
     ASSERT_EQUAL_NULL_PTR(module);
 

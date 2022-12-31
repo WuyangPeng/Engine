@@ -5,22 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/09 22:26)
+///	引擎测试版本：0.8.1.5 (2022/12/10 22:40)
 
-#ifndef SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_WINDOWS_TESTING_H
-#define SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_WINDOWS_TESTING_H
+#ifndef SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_LOAD_RESOURCE_WINDOWS_TESTING_H
+#define SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_LOAD_RESOURCE_WINDOWS_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <map>
+#include "ResourceWindowsTestingBase.h"
+#include "System/DynamicLink/Using/LoadResourceToolsUsing.h"
 
 namespace System
 {
-    class LoadResourceWindowsTesting final : public CoreTools::UnitTest
+    class LoadResourceWindowsTesting final : public ResourceWindowsTestingBase
     {
     public:
         using ClassType = LoadResourceWindowsTesting;
-        using ParentType = UnitTest;
+        using ParentType = ResourceWindowsTestingBase;
 
     public:
         explicit LoadResourceWindowsTesting(const OStreamShared& stream, WindowsHInstance instance);
@@ -33,13 +32,12 @@ namespace System
 
         void LoadResourceTest();
 
-    private:
-        using TypeNameContainer = std::map<WindowsWord, const DynamicLinkCharType*>;
+        void DoLoadResourceTest(const DynamicLinkCharType* type, WindowsWord name);
 
-    private:
-        WindowsHInstance instance;
-        TypeNameContainer container;
+        NODISCARD DynamicLinkGlobal GetResourceInLibrary(DynamicLinkResource resource);
+        void LockResourceInLibraryTest(DynamicLinkGlobal global);
+        void SizeofResourceInLibraryTest(DynamicLinkResource resource);
     };
 }
 
-#endif  // SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_WINDOWS_TESTING_H
+#endif  // SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_LOAD_RESOURCE_WINDOWS_TESTING_H

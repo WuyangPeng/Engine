@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:29)
+///	引擎测试版本：0.8.1.5 (2022/12/19 21:09)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_H
@@ -15,7 +15,6 @@
 #include "HeapTools/CompactHeapTesting.h"
 #include "HeapTools/CreateHeapTesting.h"
 #include "HeapTools/CurrentProcessHeapTesting.h"
-#include "HeapTools/ReAllocateHeapTesting.h"
 #include "HeapTools/ValidateHeapTesting.h"
 #include "LocalTools/LocalMemoryAllocTesting.h"
 #include "LocalTools/LocalMemorySizeTesting.h"

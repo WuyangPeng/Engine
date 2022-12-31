@@ -16,7 +16,7 @@
 using namespace std::literals;
 
 System::DiskFreeTesting::DiskFreeTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, diskName{ SYSTEM_TEXT("C:"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -31,6 +31,7 @@ void System::DiskFreeTesting::DoRunUnitTest()
 void System::DiskFreeTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(DiskFreeSpaceTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DiskFreeSpaceWindowsULargeIntegerTest);
 }
 
 void System::DiskFreeTesting::DiskFreeSpaceTest()
@@ -39,14 +40,16 @@ void System::DiskFreeTesting::DiskFreeSpaceTest()
     WindowsDWord bytesPerSector{ 0 };
     WindowsDWord numberOfFreeClusters{ 0 };
     WindowsDWord totalNumberOfClusters{ 0 };
-    const auto diskName = SYSTEM_TEXT("C:"s);
 
     ASSERT_TRUE(GetDiskFreeSpaceWithRoot(diskName.c_str(), &sectorsPerCluster, &bytesPerSector, &numberOfFreeClusters, &totalNumberOfClusters));
     ASSERT_LESS(0u, sectorsPerCluster);
     ASSERT_LESS(0u, bytesPerSector);
     ASSERT_LESS(0u, numberOfFreeClusters);
     ASSERT_LESS(0u, totalNumberOfClusters);
+}
 
+void System::DiskFreeTesting::DiskFreeSpaceWindowsULargeIntegerTest()
+{
     WindowsULargeInteger freeBytesAvailableToCaller{};
     WindowsULargeInteger totalNumberOfBytes{};
     WindowsULargeInteger totalNumberOfFreeBytes{};

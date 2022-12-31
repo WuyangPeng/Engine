@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/16 21:33)
+///	引擎版本：0.8.1.5 (2022/12/07 22:05)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_USING_H
 
 #include "System/Helper/Platform.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Windows/Using/WindowsUsing.h"
 
 #include <string>
 
@@ -23,7 +22,7 @@ namespace System
     using DynamicLinkModule = HMODULE;
     using ConstDynamicLinkModule = const std::remove_pointer_t<HMODULE>*;
     using DynamicLinkProcess = FARPROC;
-    using DynamicLinkCharType = TCHAR;
+    using DynamicLinkCharType = TChar;
     using DynamicLinkString = String;
     using DynamicLinkStringView = StringView;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:35)
+///	引擎测试版本：0.8.1.5 (2022/12/19 21:25)
 
 #include "AllocateGenerateExceptionsTesting.h"
 #include "System/MemoryTools/HeapToolsDetail.h"
@@ -16,7 +16,7 @@
 using std::numeric_limits;
 
 System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsTesting(const OStreamShared& stream)
-    : ParentType{ stream }, heapCreateFlags{ HeapCreate::Default, HeapCreate::NoSerialize, HeapCreate::ZeroMemory, HeapCreate::ReallocInPlaceOnly }
+    : ParentType{ stream }, size{ 50 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -36,45 +36,57 @@ void System::AllocateGenerateExceptionsTesting::MainTest()
 
 void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapSucceedTest()
 {
-    auto handle = CreateProcessHeap(HeapCreate::GenerateExceptions, 0, 0);
+    const auto handle = CreateProcessHeap(HeapCreate::GenerateExceptions, 0, 0);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap 失败。");
 
-    for (auto flag : heapCreateFlags)
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateGenerateExceptionsHeapSucceedTest, handle, flag);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(AllocateGenerateExceptionsHeapSucceedLoop, handle);
 
-    ASSERT_TRUE(DestroyProcessHeap(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, handle);
+}
+
+void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapSucceedLoop(WindowsHandle handle)
+{
+    for (auto heapCreate : *this)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateGenerateExceptionsHeapSucceedTest, handle, heapCreate);
+    }
 }
 
 void System::AllocateGenerateExceptionsTesting::DoAllocateGenerateExceptionsHeapSucceedTest(WindowsHandle handle, HeapCreate flag)
 {
-    constexpr WindowsSize size{ 50 };
     auto memory = AllocateProcessHeap(handle, flag, size);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(memory, "AllocateProcessHeap 失败。");
 
+    ASSERT_NOT_THROW_EXCEPTION_3(GetProcessHeapSizeSucceedTest, handle, flag, memory);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(FreeHeapTest, handle, memory);
+}
+
+void System::AllocateGenerateExceptionsTesting::GetProcessHeapSizeSucceedTest(WindowsHandle handle, HeapCreate flag, WindowsVoidPtr memory)
+{
     const auto memorySize = GetProcessHeapSize(handle, flag, memory);
     ASSERT_EQUAL(memorySize, size);
-
-    ASSERT_TRUE(FreeProcessHeap(handle, HeapCreate::NoSerialize, memory));
 }
 
 void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapFailureTest()
 {
-    constexpr WindowsSize size{ 50 };
-
-    auto handle = CreateProcessHeap(HeapCreate::GenerateExceptions, size, size);
+    const auto handle = CreateProcessHeap(HeapCreate::GenerateExceptions, size, size);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap 失败。");
 
-    for (auto flag : heapCreateFlags)
-    {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateGenerateExceptionsHeapFailureTest, handle, flag);
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(AllocateGenerateExceptionsHeapFailuredLoop, handle);
 
-    ASSERT_TRUE(DestroyProcessHeap(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, handle);
+}
+
+void System::AllocateGenerateExceptionsTesting::AllocateGenerateExceptionsHeapFailuredLoop(WindowsHandle handle)
+{
+    for (auto heapCreate : *this)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateGenerateExceptionsHeapFailureTest, handle, heapCreate);
+    }
 }
 
 void System::AllocateGenerateExceptionsTesting::DoAllocateGenerateExceptionsHeapFailureTest(WindowsHandle handle, HeapCreate flag)
@@ -87,6 +99,6 @@ void System::AllocateGenerateExceptionsTesting::DoAllocateGenerateExceptionsHeap
 
     if (memory != nullptr)
     {
-        ASSERT_TRUE(FreeProcessHeap(handle, HeapCreate::Default, memory));
+        ASSERT_NOT_THROW_EXCEPTION_2(FreeHeapTest, handle, memory);
     }
 }

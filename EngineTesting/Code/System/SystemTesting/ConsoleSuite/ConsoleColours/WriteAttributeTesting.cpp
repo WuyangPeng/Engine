@@ -5,67 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:07)
+///	引擎测试版本：0.8.1.5 (2022/12/03 23:27)
 
 #include "WriteAttributeTesting.h"
 #include "System/Console/ConsoleColours.h"
 #include "System/Console/ConsoleHandle.h"
-#include "System/Console/Flags/ConsoleColoursFlags.h"
-#include "System/Console/Flags/ConsoleHandleFlags.h"
+#include "System/Console/Using/ConsoleColoursUsing.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
-using std::array;
-
 System::WriteAttributeTesting::WriteAttributeTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      standardHandleFlags{ StandardHandle::Output, StandardHandle::Error },
-      textColourFlags{ TextColour::Black,
-                       TextColour::IntensifiedBlack,
-                       TextColour::Red,
-                       TextColour::IntensifiedRed,
-                       TextColour::Green,
-                       TextColour::IntensifiedGreen,
-                       TextColour::Blue,
-                       TextColour::IntensifiedBlue,
-                       TextColour::Yellow,
-                       TextColour::IntensifiedYellow,
-                       TextColour::Cyan,
-                       TextColour::IntensifiedCyan,
-                       TextColour::Magenta,
-                       TextColour::IntensifiedMagenta,
-                       TextColour::White,
-                       TextColour::IntensifiedWhite },
-      backgroundColourFlags{ BackgroundColour::Black,
-                             BackgroundColour::IntensifiedBlack,
-                             BackgroundColour::Red,
-                             BackgroundColour::IntensifiedRed,
-                             BackgroundColour::Green,
-                             BackgroundColour::IntensifiedGreen,
-                             BackgroundColour::Blue,
-                             BackgroundColour::IntensifiedBlue,
-                             BackgroundColour::Yellow,
-                             BackgroundColour::IntensifiedYellow,
-                             BackgroundColour::Cyan,
-                             BackgroundColour::IntensifiedCyan,
-                             BackgroundColour::Magenta,
-                             BackgroundColour::IntensifiedMagenta,
-                             BackgroundColour::White,
-                             BackgroundColour::IntensifiedWhite },
-      consoleCommonFlags{ ConsoleCommon::Default,
-                          ConsoleCommon::LeadingByte,
-                          ConsoleCommon::TrailingByte,
-                          ConsoleCommon::GridHorizontal,
-                          ConsoleCommon::GridLvertical,
-                          ConsoleCommon::GridRvertical,
-                          ConsoleCommon::ReverseVideo,
-                          ConsoleCommon::Underscore,
-                          ConsoleCommon::SbcsDbcs },
-      randomEngine{ GetEngineRandomSeed() }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -79,61 +32,76 @@ void System::WriteAttributeTesting::DoRunUnitTest()
 
 void System::WriteAttributeTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
+
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
 }
 
 bool System::WriteAttributeTesting::RandomShuffleFlags()
 {
-    shuffle(standardHandleFlags.begin(), standardHandleFlags.end(), randomEngine);
-    shuffle(textColourFlags.begin(), textColourFlags.end(), randomEngine);
-    shuffle(backgroundColourFlags.begin(), backgroundColourFlags.end(), randomEngine);
-    shuffle(consoleCommonFlags.begin(), consoleCommonFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffleConsoleFlags);
 
     ASSERT_NOT_THROW_EXCEPTION_0(WriteAttributeTest);
 
     return true;
 }
 
+void System::WriteAttributeTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试会导致控制台的前512字节被填充为各种颜色。\n";
+
+    SystemPause();
+}
+
 void System::WriteAttributeTesting::WriteAttributeTest()
 {
-    constexpr auto bufferSize = 256u;
-    array<WindowsWord, bufferSize> writeAttribute{};
-    array<WindowsWord, bufferSize> readAttribute{};
-    constexpr ConsoleCoord coord{ 0, 0 };
-
-    for (auto standardHandle : standardHandleFlags)
+    for (auto standardHandle : *this)
     {
-        auto consoleHandle = GetStandardHandle(standardHandle);
+        const auto consoleHandle = GetStandardHandle(standardHandle);
 
-        for (auto index = 0; index < bufferSize; ++index)
-        {
-            const auto textColour = textColourFlags.at(index % textColourFlags.size());
-            const auto backgroundColour = backgroundColourFlags.at(index % backgroundColourFlags.size());
-            const auto consoleCommon = consoleCommonFlags.at(index % consoleCommonFlags.size());
-            const auto attribute = EnumCastUnderlying(textColour) | EnumCastUnderlying(backgroundColour) | EnumCastUnderlying(consoleCommon);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoWriteAttributeTest, consoleHandle);
+    }
+}
 
-            writeAttribute.at(index) = boost::numeric_cast<WindowsWord>(attribute);
-        }
+void System::WriteAttributeTesting::DoWriteAttributeTest(WindowsHandle consoleHandle)
+{
+    constexpr ConsoleCoord coord{ 0, 0 };
+    const auto writeAttribute = GetWriteAttribute();
 
-        WindowsDWord numberOfAttributesWrite{ 0 };
-        ASSERT_TRUE(WriteSystemConsoleOutputAttribute(consoleHandle, writeAttribute.data(), bufferSize, coord, &numberOfAttributesWrite));
+    WindowsDWord numberOfAttributesWrite{ 0 };
+    ASSERT_TRUE(WriteSystemConsoleOutputAttribute(consoleHandle, writeAttribute.data(), bufferSize, coord, &numberOfAttributesWrite));
 
-        ASSERT_EQUAL(numberOfAttributesWrite, writeAttribute.size());
+    ASSERT_EQUAL(numberOfAttributesWrite, writeAttribute.size());
 
-        WindowsDWord numberOfAttributesRead{ 0 };
-        ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, readAttribute.data(), bufferSize, coord, &numberOfAttributesRead));
+    AttributeType readAttribute{};
+    WindowsDWord numberOfAttributesRead{ 0 };
+    ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, readAttribute.data(), bufferSize, coord, &numberOfAttributesRead));
 
-        for (auto index = 0; index < bufferSize; ++index)
-        {
-            const auto writeTextColour = writeAttribute.at(index) & 0x000F;
-            const auto readTextColour = readAttribute.at(index) & 0x000F;
+    ReadAttributeTest(readAttribute, writeAttribute);
+}
 
-            ASSERT_EQUAL(writeTextColour, readTextColour);
+System::WriteAttributeTesting::AttributeType System::WriteAttributeTesting::GetWriteAttribute()
+{
+    AttributeType writeAttribute{};
 
-            const auto writeBackgroundColour = writeAttribute.at(index) & 0x00F0;
-            const auto readBackgroundColour = readAttribute.at(index) & 0x00F0;
+    for (auto index = 0u; index < bufferSize; ++index)
+    {
+        const auto textColour = GetTextColour(index);
+        const auto backgroundColour = GetBackgroundColour(index);
+        const auto consoleCommon = GetConsoleCommon(index);
+        writeAttribute.at(index) = boost::numeric_cast<WindowsWord>(EnumCastUnderlying(textColour) |
+                                                                    EnumCastUnderlying(backgroundColour) |
+                                                                    EnumCastUnderlying(consoleCommon));
+    }
 
-            ASSERT_EQUAL(writeBackgroundColour, readBackgroundColour);
-        }
+    return writeAttribute;
+}
+
+void System::WriteAttributeTesting::ReadAttributeTest(const AttributeType& readAttribute, const AttributeType& writeAttribute)
+{
+    for (auto index = 0u; index < bufferSize; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_3(ColourEqualTest, readAttribute.at(index), writeAttribute.at(index), textColourMask);
+        ASSERT_NOT_THROW_EXCEPTION_3(ColourEqualTest, readAttribute.at(index), writeAttribute.at(index), backgroundColourMask);
     }
 }

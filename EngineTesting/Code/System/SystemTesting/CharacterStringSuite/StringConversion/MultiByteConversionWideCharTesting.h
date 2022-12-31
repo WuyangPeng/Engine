@@ -5,21 +5,23 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:17)
+///	引擎测试版本：0.8.1.5 (2022/11/30 22:09)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_MULTI_BYTE_CONVERSION_WIDE_CHAR_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_MULTI_BYTE_CONVERSION_WIDE_CHAR_TESTING_H
 
+#include "ConversionWideCharTestingBase.h"
 #include "System/CharacterString/Fwd/CharacterStringFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+
+#include <string>
 
 namespace System
 {
-    class MultiByteConversionWideCharTesting final : public CoreTools::UnitTest
+    class MultiByteConversionWideCharTesting final : public ConversionWideCharTestingBase
     {
     public:
         using ClassType = MultiByteConversionWideCharTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConversionWideCharTestingBase;
 
     public:
         explicit MultiByteConversionWideCharTesting(const OStreamShared& stream);
@@ -32,6 +34,11 @@ namespace System
 
         void MultiByteToWideCharTest();
         void MultiByteToWideCharUseFlagTest(MultiByte multiByte);
+
+    private:
+        std::string multiByteInitial;
+        int multiByteInitialLength;
+        CodePage codePage;
     };
 }
 

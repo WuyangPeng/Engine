@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:36)
+///	引擎测试版本：0.8.1.5 (2022/12/21 23:08)
 
 #include "CurrentProcessHeapTesting.h"
 #include "System/MemoryTools/Flags/HeapToolsFlags.h"
@@ -13,10 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <array>
-
-using std::array;
 
 System::CurrentProcessHeapTesting::CurrentProcessHeapTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,42 +35,43 @@ void System::CurrentProcessHeapTesting::MainTest()
 
 void System::CurrentProcessHeapTesting::CurrentProcessHeapTest()
 {
-    auto processHandle = GetCurrentProcessHeap();
+    const auto processHandle = GetCurrentProcessHeap();
     ASSERT_UNEQUAL_NULL_PTR(processHandle);
 }
 
 void System::CurrentProcessHeapTesting::CurrentProcessHeapsTest()
 {
-    auto processHandle = GetCurrentProcessHeap();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(processHandle, "GetCurrentProcessHeap 错误。");
+    const auto defaultHandle = GetCurrentProcessHeap();
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(defaultHandle, "GetCurrentProcessHeap 错误。");
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DefaultHeapTest, processHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(DefaultHeapTest, defaultHandle);
 
-    auto newHandle = CreateProcessHeap(HeapCreate::Default, 0, 0);
+    const auto newHandle = CreateProcessHeap(HeapCreate::Default, 0, 0);
     ASSERT_UNEQUAL_NULL_PTR(newHandle);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(AfterCreateHeapTest, newHandle);
+    ASSERT_NOT_THROW_EXCEPTION_2(AfterCreateHeapTest, defaultHandle, newHandle);
 
-    ASSERT_TRUE(DestroyProcessHeap(newHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, newHandle);
 
-    ASSERT_NOT_THROW_EXCEPTION_1(DefaultHeapTest, processHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(DefaultHeapTest, defaultHandle);
 }
 
-void System::CurrentProcessHeapTesting::AfterCreateHeapTest(WindowsHandle processHandle)
+void System::CurrentProcessHeapTesting::AfterCreateHeapTest(WindowsHandle defaultHandle, WindowsHandle newHandle)
 {
-    array<WindowsHandle, bufferSize> heaps{};
+    HeapsType heaps{};
 
     const auto heapSize = GetCurrentProcessHeaps(bufferSize, heaps.data());
     ASSERT_LESS(2u, heapSize);
 
-    ASSERT_EQUAL(heaps.at(heapSize - 1), processHandle);
+    ASSERT_EQUAL(heaps.at(0), defaultHandle);
+    ASSERT_EQUAL(heaps.at(heapSize - 1), newHandle);
 }
 
-void System::CurrentProcessHeapTesting::DefaultHeapTest(WindowsHandle processHandle)
+void System::CurrentProcessHeapTesting::DefaultHeapTest(WindowsHandle defaultHandle)
 {
-    array<WindowsHandle, bufferSize> heaps{};
+    HeapsType heaps{};
 
     const auto heapSize = GetCurrentProcessHeaps(bufferSize, heaps.data());
     ASSERT_LESS(1u, heapSize);
-    ASSERT_EQUAL(heaps.at(0), processHandle);
+    ASSERT_EQUAL(heaps.at(0), defaultHandle);
 }

@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:56)
+///	引擎测试版本：0.8.1.5 (2022/12/14 17:43)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_MOVE_FILE_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_MOVE_FILE_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_MOVE_FILE_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_MOVE_FILE_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "System/SystemTesting/FileManagerSuite/FileTestingBase.h"
 
 namespace System
 {
-    class MoveFileTesting final : public CoreTools::UnitTest
+    class MoveFileTesting final : public FileTestingBase
     {
     public:
         using ClassType = MoveFileTesting;
-        using ParentType = UnitTest;
+        using ParentType = FileTestingBase;
 
     public:
         explicit MoveFileTesting(const OStreamShared& stream);
@@ -30,7 +30,15 @@ namespace System
         void MainTest();
 
         void MoveFileTest();
+
+        void CreateAlwaysTest();
+        void MoveSuccessTest();
+        void RemoveFileTest();
+
+    private:
+        String oldName;
+        String newName;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_MOVE_FILE_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_MOVE_FILE_TESTING_H

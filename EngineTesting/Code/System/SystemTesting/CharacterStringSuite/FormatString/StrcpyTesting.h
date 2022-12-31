@@ -10,15 +10,15 @@
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_STRCPY_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_STRCPY_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "FormatStringTestingBase.h"
 
 namespace System
 {
-    class StrcpyTesting : public CoreTools::UnitTest
+    class StrcpyTesting : public FormatStringTestingBase
     {
     public:
         using ClassType = StrcpyTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatStringTestingBase;
 
     public:
         explicit StrcpyTesting(const OStreamShared& stream);

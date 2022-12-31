@@ -31,12 +31,6 @@
     <Filter Include="HelperSuite 源文件">
       <UniqueIdentifier>{1a132e85-7534-4c09-b384-78b56556a78d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HelperSuite 头文件\EnumMacro">
-      <UniqueIdentifier>{b499c5e8-879b-4e87-996d-a99f96dd3408}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="HelperSuite 源文件\EnumMacro">
-      <UniqueIdentifier>{7b544fde-0c3c-4067-b16e-1bad1acd7695}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HelperSuite 头文件\OpenGL">
       <UniqueIdentifier>{94a13f47-1d1b-4f4a-8340-cf2c4ff0878f}</UniqueIdentifier>
     </Filter>
@@ -484,6 +478,30 @@
     <Filter Include="VulkanSuite 源文件">
       <UniqueIdentifier>{435e0f8e-e0e5-4cda-bbb6-4ee20899b0be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ConsoleSuite 头文件\ConsoleFont">
+      <UniqueIdentifier>{29ac85c8-1f8d-4f54-9faa-a3a762c2eed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleSuite 源文件\ConsoleFont">
+      <UniqueIdentifier>{68cd2fa4-5172-43b9-9824-bf13e42d8a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleSuite 头文件\ConsoleMode">
+      <UniqueIdentifier>{06dbbf59-83bf-4bb3-a5f7-7b44eaa6898c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleSuite 源文件\ConsoleMode">
+      <UniqueIdentifier>{061bdcf0-6e9b-4ece-b634-f555b33803c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\UnicodeUsing">
+      <UniqueIdentifier>{be81e38b-ef18-40f5-ae5f-78aec11f700f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\UnicodeUsing">
+      <UniqueIdentifier>{f788cfd8-bc29-4f03-a64f-4e5faf44fb34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\EnumOperator">
+      <UniqueIdentifier>{7b544fde-0c3c-4067-b16e-1bad1acd7695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\EnumOperator">
+      <UniqueIdentifier>{b499c5e8-879b-4e87-996d-a99f96dd3408}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -622,19 +640,13 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleCreateTesting.h">
       <Filter>ConsoleSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFontTesting.h">
-      <Filter>ConsoleSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleHandleTesting.h">
-      <Filter>ConsoleSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleModeTesting.h">
       <Filter>ConsoleSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleSuite.h">
       <Filter>ConsoleSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXD3D11Testing.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXD3D12Testing.h">
       <Filter>DirectXSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXSuite.h">
@@ -694,15 +706,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\NumberEnum.h">
       <Filter>HelperSuite 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumXorableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumShiftableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumDecrementableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\VersionTesting.h">
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
@@ -728,9 +731,6 @@
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\HelperSuite.h">
-      <Filter>HelperSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsingTesting.h">
       <Filter>HelperSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\PlatformTesting.h">
@@ -1096,27 +1096,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.h">
       <Filter>HelperSuite 头文件\WindowsMacro</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAddableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumSubtractableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumMultiplicationTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumNegateTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumIncrementableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAndableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumOrableTesting.h">
-      <Filter>HelperSuite 头文件\EnumMacro</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\GlPluginMacroHelper.h">
       <Filter>HelperSuite 头文件\Detail</Filter>
     </ClInclude>
@@ -1291,9 +1270,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.h">
       <Filter>MemoryToolsSuite 头文件\HeapTools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ReAllocateHeapTesting.h">
-      <Filter>MemoryToolsSuite 头文件\HeapTools</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ValidateHeapTesting.h">
       <Filter>MemoryToolsSuite 头文件\HeapTools</Filter>
     </ClInclude>
@@ -1456,13 +1432,10 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOpenTesting.h">
       <Filter>FileManagerSuite 头文件\CFile</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileReadTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileWriteReadTesting.h">
       <Filter>FileManagerSuite 头文件\CFile</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileWriteTesting.h">
-      <Filter>FileManagerSuite 头文件\CFile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileSetvBufTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileSetVBufferTesting.h">
       <Filter>FileManagerSuite 头文件\CFile</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOperatorTesting.h">
@@ -1675,6 +1648,132 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentTestingBase.h">
       <Filter>CharacterStringSuite 头文件\FormatErrorMessage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\FormatStringTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\FormatString</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\ConversionTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\StringConversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\ConversionWideCharTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\StringConversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\WideCharConversionTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\StringConversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringUseLocaleTestingBase.h">
+      <Filter>CharacterStringSuite 头文件\StringConversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleStandardHandlesTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleColours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleAttributeTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleColours</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFont\ConsoleFontSizeTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFont\CurrentConsoleFontTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFont\SetCurrentConsoleFontTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleMode\ConsoleModeTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleMode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleMode\ConsoleInputModeTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleMode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleMode\ConsoleOutputModeTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleMode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\ConsoleScreenBufferTesting.h">
+      <Filter>ConsoleSuite 头文件\ConsoleScreenBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.h">
+      <Filter>DynamicLinkSuite 头文件\EnumResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryTools\GetModuleTestingBase.h">
+      <Filter>DynamicLinkSuite 头文件\LibraryTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\ResourceTestingBase.h">
+      <Filter>DynamicLinkSuite 头文件\LoadResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileTestingBase.h">
+      <Filter>FileManagerSuite 头文件\CFile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithAttributesTestingBase.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadFileUseOverlappedTesting.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadFileUseCompletionRoutineTesting.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadWriteFileTestingBase.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\WriteFileUseOverlappedTesting.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\WriteFileUseCompletionRoutineTesting.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\AppendFileTesting.h">
+      <Filter>FileManagerSuite 头文件\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTestingBase.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\FileStreamMacroTesting.h">
+      <Filter>HelperSuite 头文件\UnicodeUsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\NullCharTesting.h">
+      <Filter>HelperSuite 头文件\UnicodeUsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\StringStreamMacroTesting.h">
+      <Filter>HelperSuite 头文件\UnicodeUsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\ToStringTesting.h">
+      <Filter>HelperSuite 头文件\UnicodeUsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\StringMacroTesting.h">
+      <Filter>HelperSuite 头文件\UnicodeUsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumAddableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumAndableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumDecrementableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumIncrementableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumMultiplicationTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumNegateTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumOrableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumShiftableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumSubtractableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumXorableTesting.h">
+      <Filter>HelperSuite 头文件\EnumOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\HeapTestingBase.h">
+      <Filter>MemoryToolsSuite 头文件\HeapTools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingHelper.cpp">
@@ -1685,15 +1784,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumDecrementableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumXorableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumShiftableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ExportMacroTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
@@ -1717,9 +1807,6 @@
       <Filter>HelperSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\VersionTesting.cpp">
-      <Filter>HelperSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsingTesting.cpp">
       <Filter>HelperSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\PlatformTesting.cpp">
@@ -1782,13 +1869,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleCreateTesting.cpp">
       <Filter>ConsoleSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFontTesting.cpp">
-      <Filter>ConsoleSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleHandleTesting.cpp">
-      <Filter>ConsoleSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleModeTesting.cpp">
       <Filter>ConsoleSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleColoursTesting.cpp">
@@ -1797,7 +1878,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\FillAttributeTesting.cpp">
       <Filter>ConsoleSuite 源文件\ConsoleColours</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXD3D11Testing.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXD3D12Testing.cpp">
       <Filter>DirectXSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithAttributesTesting.cpp">
@@ -2127,27 +2208,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.cpp">
       <Filter>HelperSuite 源文件\WindowsMacro</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAddableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumSubtractableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumMultiplicationTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumNegateTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumIncrementableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAndableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumOrableTesting.cpp">
-      <Filter>HelperSuite 源文件\EnumMacro</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\GlPluginMacroHelper.cpp">
       <Filter>HelperSuite 源文件\Detail</Filter>
     </ClCompile>
@@ -2322,9 +2382,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.cpp">
       <Filter>MemoryToolsSuite 源文件\HeapTools</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ReAllocateHeapTesting.cpp">
-      <Filter>MemoryToolsSuite 源文件\HeapTools</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ValidateHeapTesting.cpp">
       <Filter>MemoryToolsSuite 源文件\HeapTools</Filter>
     </ClCompile>
@@ -2478,10 +2535,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOpenTesting.cpp">
       <Filter>FileManagerSuite 源文件\CFile</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileReadTesting.cpp">
-      <Filter>FileManagerSuite 源文件\CFile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileWriteTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileWriteReadTesting.cpp">
       <Filter>FileManagerSuite 源文件\CFile</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileCharacterTesting.cpp">
@@ -2490,7 +2544,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOperatorTesting.cpp">
       <Filter>FileManagerSuite 源文件\CFile</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileSetvBufTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileSetVBufferTesting.cpp">
       <Filter>FileManagerSuite 源文件\CFile</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateExistingFileTesting.cpp">
@@ -2693,6 +2747,132 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentTestingBase.cpp">
       <Filter>CharacterStringSuite 源文件\FormatErrorMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\FormatStringTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\FormatString</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\ConversionTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\StringConversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\ConversionWideCharTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\StringConversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\WideCharConversionTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\StringConversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringUseLocaleTestingBase.cpp">
+      <Filter>CharacterStringSuite 源文件\StringConversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleStandardHandlesTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleColours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleAttributeTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleColours</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFont\SetCurrentConsoleFontTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFont\ConsoleFontSizeTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFont\CurrentConsoleFontTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleMode\ConsoleModeTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleMode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleMode\ConsoleInputModeTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleMode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleMode\ConsoleOutputModeTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleMode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\ConsoleScreenBufferTesting.cpp">
+      <Filter>ConsoleSuite 源文件\ConsoleScreenBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.cpp">
+      <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryTools\GetModuleTestingBase.cpp">
+      <Filter>DynamicLinkSuite 源文件\LibraryTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\ResourceTestingBase.cpp">
+      <Filter>DynamicLinkSuite 源文件\LoadResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileTestingBase.cpp">
+      <Filter>FileManagerSuite 源文件\CFile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithAttributesTestingBase.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadFileUseOverlappedTesting.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadFileUseCompletionRoutineTesting.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadWriteFileTestingBase.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\WriteFileUseOverlappedTesting.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\WriteFileUseCompletionRoutineTesting.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\AppendFileTesting.cpp">
+      <Filter>FileManagerSuite 源文件\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTestingBase.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\ToStringTesting.cpp">
+      <Filter>HelperSuite 源文件\UnicodeUsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\FileStreamMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\UnicodeUsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\NullCharTesting.cpp">
+      <Filter>HelperSuite 源文件\UnicodeUsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\StringStreamMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\UnicodeUsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsing\StringMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\UnicodeUsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumAndableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumDecrementableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumIncrementableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumMultiplicationTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumNegateTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumOrableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumShiftableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumSubtractableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumXorableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumOperator\EnumAddableTesting.cpp">
+      <Filter>HelperSuite 源文件\EnumOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\HeapTestingBase.cpp">
+      <Filter>MemoryToolsSuite 源文件\HeapTools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

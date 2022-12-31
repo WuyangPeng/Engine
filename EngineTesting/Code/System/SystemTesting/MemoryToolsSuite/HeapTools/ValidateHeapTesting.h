@@ -5,21 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:34)
+///	引擎测试版本：0.8.1.5 (2022/12/21 23:34)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_VALIDATE_HEAP_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_VALIDATE_HEAP_TESTING_H
 
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "HeapTestingBase.h"
 
 namespace System
 {
-    class ValidateHeapTesting final : public CoreTools::UnitTest
+    class ValidateHeapTesting final : public HeapTestingBase
     {
     public:
         using ClassType = ValidateHeapTesting;
-        using ParentType = UnitTest;
+        using ParentType = HeapTestingBase;
 
     public:
         explicit ValidateHeapTesting(const OStreamShared& stream);
@@ -30,6 +29,7 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
+        void ValidateHeapTest();
         void ValidateTest(HeapCreate flag);
         void DoValidateTest(WindowsHandle handle, HeapCreate flag);
     };

@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:56)
+///	引擎测试版本：0.8.1.5 (2022/12/15 0:54)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_OPEN_FILE_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_OPEN_FILE_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_OPEN_FILE_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_OPEN_FILE_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "System/SystemTesting/FileManagerSuite/FileTestingBase.h"
 
 namespace System
 {
-    class OpenFileTesting final : public CoreTools::UnitTest
+    class OpenFileTesting final : public FileTestingBase
     {
     public:
         using ClassType = OpenFileTesting;
-        using ParentType = UnitTest;
+        using ParentType = FileTestingBase;
 
     public:
         explicit OpenFileTesting(const OStreamShared& stream);
@@ -29,8 +29,9 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void OpenFileTest();
+        void OpenValidFileTest();
+        void OpenInvalidFileTest();
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_OPEN_FILE_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_OPEN_FILE_TESTING_H

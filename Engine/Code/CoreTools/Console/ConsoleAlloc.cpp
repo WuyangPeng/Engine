@@ -68,9 +68,9 @@ void CoreTools::ConsoleAlloc::ReOpenConsole()
     const auto outMode = "w+t"s;
     const auto inMode = "r+t"s;
 
-    if (!(System::FReOpenConsole(out, outPath.c_str(), outMode.c_str(), stdout) &&
-          System::FReOpenConsole(in, inPath.c_str(), inMode.c_str(), stdin) &&
-          System::FReOpenConsole(error, outPath.c_str(), outMode.c_str(), stderr) &&
+    if (!(System::ReOpenConsole(out, outPath.c_str(), outMode.c_str(), stdout) &&
+          System::ReOpenConsole(in, inPath.c_str(), inMode.c_str(), stdin) &&
+          System::ReOpenConsole(error, outPath.c_str(), outMode.c_str(), stderr) &&
           System::RemoveConsoleCloseButton()))
     {
         CloseConsole();
@@ -97,7 +97,7 @@ void CoreTools::ConsoleAlloc::CloseConsole(FILE* file) noexcept
 {
     if (file != nullptr)
     {
-        if (!System::FCloseConsole(file))
+        if (!System::CloseConsole(file))
         {
             LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
                 << SYSTEM_TEXT("释放控制台文件描述符错误。")

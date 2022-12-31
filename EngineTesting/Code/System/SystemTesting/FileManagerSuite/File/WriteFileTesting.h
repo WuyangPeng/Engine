@@ -5,22 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:57)
+///	引擎测试版本：0.8.1.5 (2022/12/15 16:11)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_WRITE_FILE_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_WRITE_FILE_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_WRITE_FILE_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_WRITE_FILE_TESTING_H
 
-#include "System/FileManager/Using/FileToolsUsing.h"
-#include "System/Helper/WindowsMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ReadWriteFileTestingBase.h"
 
 namespace System
 {
-    class WriteFileTesting final : public CoreTools::UnitTest
+    class WriteFileTesting final : public ReadWriteFileTestingBase
     {
     public:
         using ClassType = WriteFileTesting;
-        using ParentType = UnitTest;
+        using ParentType = ReadWriteFileTestingBase;
 
     public:
         explicit WriteFileTesting(const OStreamShared& stream);
@@ -32,12 +30,9 @@ namespace System
         void MainTest();
 
         void WriteTest();
-        void WriteFileUseOverlappedTest();
-        void ReadTest();
-        void WriteFileUseCompletionRoutineTest();
 
-        static void SYSTEM_WINAPI OverlappedCompletionRoutine(WindowsDWord errorCode, WindowsDWord numberOfBytesTransfered, WindowOverlappedPtr overlapped) noexcept;
+        void DoWriteTest(WindowsHandle handle);
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_WRITE_FILE_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_WRITE_FILE_TESTING_H

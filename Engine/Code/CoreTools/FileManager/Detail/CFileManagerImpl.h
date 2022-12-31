@@ -35,7 +35,7 @@ namespace CoreTools
         using OffType = System::OffType;
         using PosType = System::PosType;
         using FileSeek = System::FileSeek;
-        using FileSetvBuf = System::FileSetvBuf;
+        using FileSetvBuf = System::FileSetVBuffer;
 
     public:
         CFileManagerImpl(const String& fileName, const String& mode);

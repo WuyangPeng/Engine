@@ -10,7 +10,7 @@
 #ifndef SYSTEM_WINDOWS_WINDOWS_CLASS_STYLE_FLAGS_H
 #define SYSTEM_WINDOWS_WINDOWS_CLASS_STYLE_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -87,7 +87,6 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    ENUM_ORABLE_OPERATOR_DEFINE(WindowsClassStyle)
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOW_CLASS_STYLE_FLAGS_H

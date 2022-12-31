@@ -5,24 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:54)
+///	引擎测试版本：0.8.1.5 (2022/12/03 18:40)
 
 #ifndef SYSTEM_CONSOLE_SUITE_BACKGROUND_COLOUR_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_BACKGROUND_COLOUR_TESTING_H
 
-#include "ConsoleColoursTesting.h"
+#include "ConsoleStandardHandlesTesting.h"
 
-#include <map>
 #include <random>
-#include <vector>
 
 namespace System
 {
-    class BackgroundColourTesting final : public ConsoleColoursTesting
+    class BackgroundColourTesting final : public ConsoleStandardHandlesTesting
     {
     public:
         using ClassType = BackgroundColourTesting;
-        using ParentType = ConsoleColoursTesting;
+        using ParentType = ConsoleStandardHandlesTesting;
 
     public:
         explicit BackgroundColourTesting(const OStreamShared& stream);
@@ -35,17 +33,16 @@ namespace System
 
         NODISCARD bool RandomShuffleFlags();
         void BackgroundColourTest();
-        void SetDefaultTextAttribute();
+
+        void DoBackgroundColourTest(size_t index);
 
     private:
-        using StandardHandleFlagsContainer = std::vector<StandardHandle>;
-        using BackgroundColourFlagsContainer = std::vector<BackgroundColour>;
-        using BackgroundColourFlagsMapping = std::map<BackgroundColour, TextColour>;
+        using BackgroundColourContainer = std::vector<BackgroundColour>;
+        using BackgroundColourMapping = std::map<BackgroundColour, TextColour>;
 
     private:
-        StandardHandleFlagsContainer standardHandleFlags;
-        BackgroundColourFlagsContainer backgroundColourFlags;
-        BackgroundColourFlagsMapping backgroundColourFlagsMapping;
+        BackgroundColourContainer backgroundColours;
+        BackgroundColourMapping backgroundColourMapping;
         std::default_random_engine randomEngine;
     };
 }

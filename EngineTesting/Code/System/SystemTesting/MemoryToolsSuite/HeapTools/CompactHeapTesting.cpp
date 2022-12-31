@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:36)
+///	引擎测试版本：0.8.1.5 (2022/12/21 22:43)
 
 #include "CompactHeapTesting.h"
-#include "System/MemoryTools/Flags/HeapToolsFlags.h"
 #include "System/MemoryTools/HeapTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -29,18 +28,25 @@ void System::CompactHeapTesting::DoRunUnitTest()
 
 void System::CompactHeapTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_1(CompactTest, HeapCreate::Default);
-    ASSERT_NOT_THROW_EXCEPTION_1(CompactTest, HeapCreate::NoSerialize);
+    ASSERT_NOT_THROW_EXCEPTION_0(CompactHeapTest); 
+}
+
+void System::CompactHeapTesting::CompactHeapTest()
+{
+    for (auto heapCreate : *this)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(CompactTest, heapCreate);
+    }
 }
 
 void System::CompactHeapTesting::CompactTest(HeapCreate flag)
 {
-    auto handle = CreateProcessHeap(flag, 0, 0);
+    const auto handle = CreateProcessHeap(flag, 0, 0);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(handle, "CreateProcessHeap 失败。");
 
     ASSERT_NOT_THROW_EXCEPTION_2(DoCompactTest, handle, flag);
 
-    ASSERT_TRUE(DestroyProcessHeap(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, handle);
 }
 
 void System::CompactHeapTesting::DoCompactTest(WindowsHandle handle, HeapCreate flag)
@@ -53,5 +59,5 @@ void System::CompactHeapTesting::DoCompactTest(WindowsHandle handle, HeapCreate 
     const auto memorySize = GetProcessHeapCompact(handle, flag);
     ASSERT_LESS(0u, memorySize);
 
-    ASSERT_TRUE(FreeProcessHeap(handle, flag, memory));
+    ASSERT_NOT_THROW_EXCEPTION_2(FreeHeapTest, handle, memory);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/03 11:48)
+///	引擎测试版本：0.8.1.5 (2022/12/18 13:15)
 
 #include "GlUtilityPreviouslyBodyResultTesting.h"
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
@@ -39,36 +39,36 @@ void System::GlUtilityPreviouslyBodyResultTesting::MainTest()
 
 int System::GlUtilityPreviouslyBodyResultTesting::PreviouslyBody0Test() noexcept
 {
-    auto function = Function0;
+    const auto function = Function0;
     SYSTEM_PREVIOUSLY_BODY_0_RESULT(function, 0);
 }
 
 int System::GlUtilityPreviouslyBodyResultTesting::PreviouslyBody1Test() noexcept
 {
-    auto function = Function1;
+    const auto function = Function1;
     SYSTEM_PREVIOUSLY_BODY_1_RESULT(function, 1, 0);
 }
 
 int System::GlUtilityPreviouslyBodyResultTesting::PreviouslyBody2Test() noexcept
 {
-    auto function = Function2;
+    const auto function = Function2;
     SYSTEM_PREVIOUSLY_BODY_2_RESULT(function, 1, 2, 0);
 }
 
 int System::GlUtilityPreviouslyBodyResultTesting::PreviouslyBody3Test() noexcept
 {
-    auto function = Function3;
+    const auto function = Function3;
     SYSTEM_PREVIOUSLY_BODY_3_RESULT(function, 1, 2, 3, 0);
 }
 
 int System::GlUtilityPreviouslyBodyResultTesting::PreviouslyBody4Test() noexcept
 {
-    auto function = Function4;
+    const auto function = Function4;
     SYSTEM_PREVIOUSLY_BODY_4_RESULT(function, 1, 2, 3, 4, 0);
 }
 
 int System::GlUtilityPreviouslyBodyResultTesting::PreviouslyBody5Test() noexcept
 {
-    auto function = Function5;
+    const auto function = Function5;
     SYSTEM_PREVIOUSLY_BODY_5_RESULT(function, 1, 2, 3, 4, 5, 0);
 }

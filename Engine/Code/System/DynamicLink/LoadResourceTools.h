@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:40)
+///	引擎版本：0.8.1.5 (2022/12/08 0:20)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_RESOURCE_TOOLS_H

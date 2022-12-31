@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 19:54)
+///	引擎测试版本：0.8.1.5 (2022/12/08 21:16)
 
-#ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LIBRARY_DIRECTORY_TESTING_H
-#define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LIBRARY_DIRECTORY_TESTING_H
+#ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_LIBRARY_DIRECTORY_TESTING_H
+#define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_LIBRARY_DIRECTORY_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
@@ -30,10 +30,11 @@ namespace System
         void MainTest();
 
         void DllDirectoryAccessTest();
+        void SetEmptyDllDirectoryTest();
 
         NODISCARD DynamicLinkString GetCurrentLibraryDirectory();
         void ResetLibraryDirectory(const DynamicLinkString& libraryDirectory);
     };
 }
 
-#endif  // SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LIBRARY_DIRECTORY_TESTING_H
+#endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_LIBRARY_DIRECTORY_TESTING_H

@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 19:53)
+///	引擎测试版本：0.8.1.5 (2022/12/08 20:40)
 
-#ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_ENUM_RESOURCE_DATA_TESTING_H
-#define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_ENUM_RESOURCE_DATA_TESTING_H
+#ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_ENUM_RESOURCE_DATA_TESTING_H
+#define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_ENUM_RESOURCE_DATA_TESTING_H
 
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/SystemOutput/Fwd/SystemOutputFlagsFwd.h"
@@ -35,23 +35,25 @@ namespace System
         void MainTest();
 
     private:
-        using PrimaryLanguageFlagsContainer = std::vector<PrimaryLanguage>;
-        using SubLanguageFlagsContainer = std::vector<SubLanguage>;
-        using TypeFlagsContainer = std::vector<const DynamicLinkCharType*>;
-        using NameFlagsContainer = std::vector<const DynamicLinkCharType*>;
+        using PrimaryLanguageContainer = std::vector<PrimaryLanguage>;
+        using SubLanguageContainer = std::vector<SubLanguage>;
+        using TypeContainer = std::vector<const DynamicLinkCharType*>;
+        using NameContainer = std::vector<const DynamicLinkCharType*>;
 
-        NODISCARD static NameFlagsContainer CreateNameFlags();
+        NODISCARD static NameContainer CreateNameFlags();
         NODISCARD bool RandomShuffleFlags();
-        void DataTest();
+        void EnumResourceDataTest();
+
+        void DoEnumResourceDataTest(size_t index);
 
     private:
-        PrimaryLanguageFlagsContainer primaryLanguageFlags;
-        SubLanguageFlagsContainer subLanguageFlags;
-        TypeFlagsContainer typeFlags;
-        NameFlagsContainer nameFlags;
+        PrimaryLanguageContainer primaryLanguages;
+        SubLanguageContainer subLanguages;
+        TypeContainer types;
+        NameContainer names;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };
 }
 
-#endif  // SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_ENUM_RESOURCE_DATA_TESTING_H
+#endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_ENUM_RESOURCE_DATA_TESTING_H

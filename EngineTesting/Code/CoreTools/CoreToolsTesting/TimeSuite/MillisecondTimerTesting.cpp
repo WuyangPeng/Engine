@@ -24,7 +24,7 @@ void CoreTools::MillisecondTimerTesting::MainTest()
 
 void CoreTools::MillisecondTimerTesting::TimeTest()
 {
-    constexpr uint64_t microseconds{ System::g_Millisecond * 1 };
+    constexpr uint64_t microseconds{ System::gMillisecond * 1 };
     MillisecondTimer millisecondTimer{ microseconds };
     constexpr uint32_t epsilon{ 10 };
 

@@ -209,5 +209,5 @@ bool CoreTools::CFileManagerImpl::Setvbuf(FileSetvBuf type, size_t size) noexcep
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::SetvBuf(file, type, size);
+    return System::SetVBuffer(file, type, size);
 }

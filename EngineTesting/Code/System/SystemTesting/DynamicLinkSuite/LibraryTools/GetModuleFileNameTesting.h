@@ -5,21 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 19:56)
+///	引擎测试版本：0.8.1.5 (2022/12/09 13:55)
 
-#ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_GET_MODULE_FILE_NAME_TESTING_H
-#define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_GET_MODULE_FILE_NAME_TESTING_H
+#ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_GET_MODULE_FILE_NAME_TESTING_H
+#define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_GET_MODULE_FILE_NAME_TESTING_H
 
-#include "System/DynamicLink/Using/LoadLibraryUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "GetModuleTestingBase.h"
 
 namespace System
 {
-    class GetModuleFileNameTesting final : public CoreTools::UnitTest
+    class GetModuleFileNameTesting final : public GetModuleTestingBase
     {
     public:
         using ClassType = GetModuleFileNameTesting;
-        using ParentType = UnitTest;
+        using ParentType = GetModuleTestingBase;
 
     public:
         explicit GetModuleFileNameTesting(const OStreamShared& stream);
@@ -31,15 +30,13 @@ namespace System
         void MainTest();
 
         void GetModuleFileNameSucceedTest();
+        void DoGetModuleFileNameSucceedTest(DynamicLinkModule libraryModule);
+        NODISCARD DynamicLinkString GetDynamicLinkFileNameTest(DynamicLinkModule libraryModule);
+        void DllModuleFileNameTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const DynamicLinkString& dllModuleFileName);
+
         void GetModuleFileNameFailureTest();
-
-        NODISCARD DynamicLinkString GetResourcesLibraryName();
-        NODISCARD DynamicLinkModule GetDynamicLibrary();
-        void Destroy(DynamicLinkModule dynamicLinkModule);
-
-        NODISCARD static DynamicLinkString GetResource();
-        NODISCARD static DynamicLinkString GetResourcesLibrary();
+        void DllModuleFileNameFailureTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const BufferType& moduleFileName);
     };
 }
 
-#endif  // SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_GET_MODULE_FILE_NAME_TESTING_H
+#endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_GET_MODULE_FILE_NAME_TESTING_H

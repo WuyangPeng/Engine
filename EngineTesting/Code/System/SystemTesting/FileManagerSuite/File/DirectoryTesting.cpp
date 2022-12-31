@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:59)
+///	引擎测试版本：0.8.1.5 (2022/12/14 17:27)
 
 #include "DirectoryTesting.h"
 #include "System/FileManager/File.h"
@@ -36,14 +36,15 @@ void System::DirectoryTesting::MainTest()
 
 void System::DirectoryTesting::DirectoryTest()
 {
-    auto rootDirectory = CreateSystemFile(SYSTEM_TEXT("Resource"s),
-                                          FileHandleDesiredAccess::Read,
-                                          FileHandleShareMode::ShareRead,
-                                          FileHandleCreationDisposition::OpenExisting,
-                                          FileHandleAttributes::Directory,
-                                          FileHandleOther::BackupSemantics,
-                                          FileHandleSecurity::Default);
-    ASSERT_TRUE(IsFileHandleValid(rootDirectory));
+    const auto rootDirectory = CreateSystemFile(SYSTEM_TEXT("Resource"s),
+                                                FileHandleDesiredAccess::Read,
+                                                FileHandleShareMode::ShareRead,
+                                                FileHandleCreationDisposition::OpenExisting,
+                                                FileHandleAttributes::Directory,
+                                                FileHandleOther::BackupSemantics,
+                                                FileHandleSecurity::Default);
 
-    ASSERT_TRUE(CloseSystemFile(rootDirectory));
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, rootDirectory);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, rootDirectory);
 }

@@ -7,20 +7,17 @@
 ///	标准：std:c++20
 ///	引擎版本：0.8.1.4 (2022/11/18 20:49)
 
-#ifndef SYSTEM_FILE_MANAGE_C_FILE_H
-#define SYSTEM_FILE_MANAGE_C_FILE_H
+#ifndef SYSTEM_FILE_MANAGER_C_FILE_H
+#define SYSTEM_FILE_MANAGER_C_FILE_H
 
 #include "System/SystemDll.h"
 
 #include "Fwd/FileFlagsFwd.h"
 #include "Using/CFileUsing.h"
 
-#include <fstream>
-
+// 通过FILE类型的文件操作
 namespace System
 {
-    // 通过FILE类型的文件操作
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE OpenCFile(FILE*& file, const CFileString& fileName, const CFileString& mode) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseCFile(FILE* file) noexcept;
 
@@ -29,12 +26,14 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetFileLength(const CFileString& fileName, OffType* length) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetvBuf(FILE* file, FileSetvBuf type, size_t size) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetVBuffer(FILE* file, FileSetVBuffer type, size_t size) noexcept;
 
     NODISCARD int SYSTEM_DEFAULT_DECLARE GetCharacter(FILE* file) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE UnGetCharacter(FILE* file, int character) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE PutCharacter(FILE* file, int character) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE PutString(FILE* file, const char* str) noexcept;
+
+    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetString(FILE* file, int count);
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsEOF(FILE* file) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE Flush(FILE* file) noexcept;
@@ -43,8 +42,6 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetPosition(FILE* file, PosType position) noexcept;
     NODISCARD long SYSTEM_DEFAULT_DECLARE Tell(FILE* file) noexcept;
     void SYSTEM_DEFAULT_DECLARE Rewind(FILE* file) noexcept;
-
-    NODISCARD std::string SYSTEM_DEFAULT_DECLARE GetString(FILE* file, int count);
 }
 
-#endif  // SYSTEM_FILE_MANAGE_C_FILE_H
+#endif  // SYSTEM_FILE_MANAGER_C_FILE_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/14 14:51)
+///	引擎测试版本：0.8.1.5 (2022/12/16 22:28)
 
 #include "ConfigMarkTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -37,7 +37,8 @@ void System::ConfigMarkTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FallthroughTest);
     ASSERT_THROW_EXCEPTION_0(NoReturnTest);
 
-#ifdef OPEN_DEPRECATED_MACRO  // 这里开启OPEN_DEPRECATED_MACRO会产生一个编译警告
+    // 这里开启OPEN_DEPRECATED_MACRO会产生一个编译警告
+#ifdef OPEN_DEPRECATED_MACRO
 
     ASSERT_NOT_THROW_EXCEPTION_0(Deprecate);
 
@@ -51,7 +52,7 @@ void System::ConfigMarkTesting::UnusedTest() noexcept
 
 void System::ConfigMarkTesting::MaybeNullptrTest()
 {
-    auto nullPtr = GetNullptr();
+    const auto nullPtr = GetNullptr();
 
     ASSERT_EQUAL_NULL_PTR(nullPtr);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:02)
+///	引擎测试版本：0.8.1.5 (2022/12/08 21:16)
 
 #include "LibraryDirectoryTesting.h"
 #include "System/DynamicLink/LibraryDirectory.h"
@@ -15,7 +15,6 @@
 
 #include <array>
 
-using std::array;
 using namespace std::literals;
 
 System::LibraryDirectoryTesting::LibraryDirectoryTesting(const OStreamShared& stream)
@@ -36,6 +35,7 @@ void System::LibraryDirectoryTesting::MainTest()
     const auto currentLibraryDirectory = GetCurrentLibraryDirectory();
 
     ASSERT_NOT_THROW_EXCEPTION_0(DllDirectoryAccessTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetEmptyDllDirectoryTest);
 
     ResetLibraryDirectory(currentLibraryDirectory);
 }
@@ -44,20 +44,29 @@ void System::LibraryDirectoryTesting::DllDirectoryAccessTest()
 {
     ResetLibraryDirectory(DYNAMIC_LINK_TEXT("D:/"s));
 
-    auto currentLibraryDirectory = GetCurrentLibraryDirectory();
+    const auto currentLibraryDirectory = GetCurrentLibraryDirectory();
 
     ASSERT_TRUE(0 < currentLibraryDirectory.size() && currentLibraryDirectory.size() < gMaxPath);
 
+    ASSERT_EQUAL(GetLibraryDirectory(), currentLibraryDirectory);
+}
+
+void System::LibraryDirectoryTesting::SetEmptyDllDirectoryTest()
+{
     ResetLibraryDirectory(DYNAMIC_LINK_TEXT(""s));
 
-    currentLibraryDirectory = GetCurrentLibraryDirectory();
+    const auto currentLibraryDirectory = GetCurrentLibraryDirectory();
 
     ASSERT_TRUE(currentLibraryDirectory.empty());
+
+    ASSERT_EQUAL(GetLibraryDirectory(), currentLibraryDirectory);
 }
 
 System::DynamicLinkString System::LibraryDirectoryTesting::GetCurrentLibraryDirectory()
 {
-    array<DynamicLinkCharType, gMaxPath> directoryName{};
+    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
+
+    BufferType directoryName{};
     const auto maxFileNameLength = GetLibraryDirectory(gMaxPath, directoryName.data());
     DynamicLinkString currentLibraryDirectory{ directoryName.data() };
 

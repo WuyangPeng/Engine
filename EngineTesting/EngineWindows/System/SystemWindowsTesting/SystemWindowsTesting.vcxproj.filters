@@ -200,6 +200,21 @@
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.h">
       <Filter>WindowsSuite 头文件\WindowsRegister</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceToolsTesting.h">
+      <Filter>DynamicLinkSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.h">
+      <Filter>DynamicLinkSuite 头文件\EnumResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTesting.h">
+      <Filter>DynamicLinkSuite 头文件\EnumResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumTesting.h">
+      <Filter>DynamicLinkSuite 头文件\EnumResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.h">
+      <Filter>DynamicLinkSuite 头文件\LoadResourceTools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp">
@@ -288,6 +303,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.cpp">
       <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceToolsTesting.cpp">
+      <Filter>DynamicLinkSuite 头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.cpp">
+      <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.cpp">
+      <Filter>DynamicLinkSuite 源文件\LoadResourceTools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

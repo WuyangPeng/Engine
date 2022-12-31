@@ -41,13 +41,13 @@ void CoreTools::FormatErrorMessageImpl::InitMessage() noexcept
 // private
 void CoreTools::FormatErrorMessageImpl::AgainInitMessage() noexcept
 {
-    const auto dynamicLinkModule = System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DontResolveDllReferences);
+    ConstDynamicLinkModule dynamicLinkModule{ System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DontResolveDllReferences) };
 
     InitNetworkMessage(dynamicLinkModule);
 }
 
 // private
-void CoreTools::FormatErrorMessageImpl::InitNetworkMessage(DynamicLinkModule module) noexcept
+void CoreTools::FormatErrorMessageImpl::InitNetworkMessage(ConstDynamicLinkModule module) noexcept
 {
     if (module != nullptr)
     {
@@ -60,7 +60,7 @@ void CoreTools::FormatErrorMessageImpl::InitNetworkMessage(DynamicLinkModule mod
 }
 
 // private
-void CoreTools::FormatErrorMessageImpl::LoadedModuleSucceed(DynamicLinkModule module) noexcept
+void CoreTools::FormatErrorMessageImpl::LoadedModuleSucceed(ConstDynamicLinkModule module) noexcept
 {
     if (!System::FormatErrorMessage(errorMessage, module, lastError))
     {

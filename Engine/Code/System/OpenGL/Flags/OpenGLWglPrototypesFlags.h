@@ -10,7 +10,7 @@
 #ifndef SYSTEM_OPENGL_OPENGL_WGL_PROTOTYPES_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_WGL_PROTOTYPES_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System

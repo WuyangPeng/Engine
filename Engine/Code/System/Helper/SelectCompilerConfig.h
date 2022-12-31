@@ -5,12 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 13:43)
+///	引擎版本：0.8.1.5 (2022/12/16 21:45)
 
 #ifndef SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
 #define SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
 
-// 定义宏TCRE_COMPILER_VERSION表示编译器版本，定义TCRE_SYSTEM_COMPILER表示编译器名称。
+/// 定义宏TCRE_COMPILER_VERSION表示编译器版本，
+/// 定义TCRE_SYSTEM_COMPILER表示编译器名称。
 
 #if defined(__CUDACC__)
 

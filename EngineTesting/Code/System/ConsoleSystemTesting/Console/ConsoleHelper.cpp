@@ -96,16 +96,16 @@ void ConsoleSystemTesting::ConsoleHelper::PrintConsoleInfo()
 bool ConsoleSystemTesting::ConsoleHelper::DoAllocConsole() noexcept
 {
     return System::AllocConsole() &&
-           System::FReOpenConsole(out, "CONOUT$", "w+t", stdout) &&
-           System::FReOpenConsole(in, "CONIN$", "r+t", stdin) &&
-           System::FReOpenConsole(error, "CONOUT$", "w+t", stderr) &&
+           System::ReOpenConsole(out, "CONOUT$", "w+t", stdout) &&
+           System::ReOpenConsole(in, "CONIN$", "r+t", stdin) &&
+           System::ReOpenConsole(error, "CONOUT$", "w+t", stderr) &&
            System::RemoveConsoleCloseButton();
 }
 
 bool ConsoleSystemTesting::ConsoleHelper::DoFreeConsole() noexcept
 {
-    return System::FCloseConsole(error) &&
-           System::FCloseConsole(in) &&
-           System::FCloseConsole(out) &&
+    return System::CloseConsole(error) &&
+           System::CloseConsole(in) &&
+           System::CloseConsole(out) &&
            System::FreeConsole();
 }

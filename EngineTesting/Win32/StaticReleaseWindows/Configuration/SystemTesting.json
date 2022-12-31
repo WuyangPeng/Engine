@@ -157,20 +157,30 @@
 
   "consoleSuite": {
     "ConsoleHandleTesting": 1,
-    "ConsoleFontTesting": 1,
     "ConsoleModeTesting": 1,
-    "ConsoleCodePageTesting": 1,
+    "ConsoleCodePageTesting": 0,
     "ConsoleCreateTesting": 1
   },
 
   "consoleColoursSuite": {
-    "TextColourTesting": 0,
-    "BackgroundColourTesting": 0,
-    "ConsoleCommonTesting": 0,
-    "DefaultTextAttributeTesting": 0,
+    "TextColourTesting": 1,
+    "BackgroundColourTesting": 1,
+    "ConsoleCommonTesting": 1,
+    "DefaultTextAttributeTesting": 1,
     "ReadAttributeTesting": 1,
     "WriteAttributeTesting": 0,
     "FillAttributeTesting": 0
+  },
+
+  "consoleFontSuite": {
+    "ConsoleFontSizeTesting": 1,
+    "CurrentConsoleFontTesting": 1,
+    "SetCurrentConsoleFontTesting": 1
+  },
+
+  "consoleModeSuite": {
+    "ConsoleInputModeTesting": 1,
+    "ConsoleOutputModeTesting": 1
   },
 
   "consoleScreenBufferSuite": {
@@ -344,9 +354,8 @@
 
   "cFileSuite": {
     "CFileOpenTesting": 1,
-    "CFileReadTesting": 1,
-    "CFileWriteTesting": 1,
-    "CFileSetvBufTesting": 1,
+    "CFileWriteReadTesting": 1,
+    "CFileSetVBufferTesting": 1,
     "CFileCharacterTesting": 1,
     "CFileOperatorTesting": 1
   },
@@ -356,15 +365,20 @@
     "CreateFileWithDefaultAttributesTesting": 10,
     "CreateFileWithOtherFlagsTesting": 10,
     "CreateFileWithSecurityFlagsTesting": 10,
-    "DirectoryTesting": 1,
     "CreateFileWithAttributesTesting": 10,
+    "DirectoryTesting": 1,
     "MoveFileTesting": 1,
     "FileLengthTesting": 1,
     "CopyFileTesting": 1,
     "FileHandlePointerTesting": 1,
     "OpenFileTesting": 1,
     "ReadFileTesting": 1,
-    "WriteFileTesting": 1
+    "ReadFileUseOverlappedTesting": 1,
+    "ReadFileUseCompletionRoutineTesting": 1,
+    "WriteFileTesting": 1,
+    "WriteFileUseCompletionRoutineTesting": 1,
+    "WriteFileUseOverlappedTesting": 1,
+    "AppendFileTesting": 1
   },
 
   "fileToolsSuite": {
@@ -493,7 +507,7 @@
   },
 
   "directXSuite": {
-    "DirectXD3D11Testing": 1
+    "DirectXD3D12Testing": 1
   },
 
   "vulkanSuite": {

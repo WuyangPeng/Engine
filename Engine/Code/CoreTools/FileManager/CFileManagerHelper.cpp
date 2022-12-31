@@ -16,6 +16,9 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
+#include <fstream>
+#include <sstream>
+
 using namespace std::literals;
 
 // static
@@ -35,6 +38,24 @@ const CoreTools::FileBuffer CoreTools::CFileManagerHelper::LoadFromFile(const St
     }
 
     return buffer;
+}
+
+std::string CoreTools::CFileManagerHelper::LoadFromFile(const std::string& fileName)
+{
+    std::ifstream file{ fileName };
+
+    if (file)
+    {
+        std::stringstream ss{};
+
+        ss << file.rdbuf();
+
+        return ss.str();
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("文件不存在。"s));
+    }
 }
 
 // static

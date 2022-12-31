@@ -10,15 +10,15 @@
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINTF_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_VSN_PRINTF_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "FormatStringTestingBase.h"
 
 namespace System
 {
-    class VsnPrintfTesting : public CoreTools::UnitTest
+    class VsnPrintfTesting : public FormatStringTestingBase
     {
     public:
         using ClassType = VsnPrintfTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatStringTestingBase;
 
     public:
         explicit VsnPrintfTesting(const OStreamShared& stream);
@@ -31,7 +31,7 @@ namespace System
 
         void VsnprintfTest();
 
-        void DoVsnprintfTest(int testStringSize, char* buffer, size_t size, const char* format, ...);
+        void VsnprintfUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...);
     };
 }
 

@@ -10,7 +10,7 @@
 #ifndef SYSTEM_OPENGL_OPENGL_PROGRAM_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_PROGRAM_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/GLExtensionsMacro.h"
 
 namespace System

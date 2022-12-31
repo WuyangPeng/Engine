@@ -11,6 +11,7 @@
 #define SYSTEM_THREADING_SUITE_CREATE_WAITABLE_TIMER_SYNCHRONIZATION_USE_FLAGS_TESTING_H
 
 #include "System/Threading/Fwd/ThreadingFlagsFwd.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <vector>

@@ -5,10 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/25 21:13)
+///	引擎测试版本：0.8.1.5 (2022/12/18 10:42)
 
 #include "NoexceptTesting.h"
 #include "System/Helper/Noexcept.h"
+#include "System/Helper/Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -51,23 +52,31 @@ void System::NoexceptTesting::Function0()
     THROW_WINDOWS_EXCEPTION;
 }
 
-void System::NoexceptTesting::Function1(MAYBE_UNUSED int parameter0)
+void System::NoexceptTesting::Function1(int parameter0)
 {
+    UnusedFunction(parameter0);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
-void System::NoexceptTesting::Function2(MAYBE_UNUSED int parameter0, MAYBE_UNUSED int parameter1)
+void System::NoexceptTesting::Function2(int parameter0, int parameter1)
 {
+    UnusedFunction(parameter0, parameter1);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
-void System::NoexceptTesting::Function3(MAYBE_UNUSED int parameter0, MAYBE_UNUSED int parameter1, MAYBE_UNUSED int parameter2)
+void System::NoexceptTesting::Function3(int parameter0, int parameter1, int parameter2)
 {
+    UnusedFunction(parameter0, parameter1, parameter2);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
-void System::NoexceptTesting::Function4(MAYBE_UNUSED int parameter0, MAYBE_UNUSED int parameter1, MAYBE_UNUSED int parameter2, MAYBE_UNUSED int parameter3)
+void System::NoexceptTesting::Function4(int parameter0, int parameter1, int parameter2, int parameter3)
 {
+    UnusedFunction(parameter0, parameter1, parameter2, parameter3);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
@@ -76,22 +85,30 @@ int System::NoexceptTesting::Function5()
     THROW_WINDOWS_EXCEPTION;
 }
 
-int System::NoexceptTesting::Function6(MAYBE_UNUSED int parameter0)
+int System::NoexceptTesting::Function6(int parameter0)
 {
+    UnusedFunction(parameter0);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
-int System::NoexceptTesting::Function7(MAYBE_UNUSED int parameter0, MAYBE_UNUSED int parameter1)
+int System::NoexceptTesting::Function7(int parameter0, int parameter1)
 {
+    UnusedFunction(parameter0, parameter1);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
-int System::NoexceptTesting::Function8(MAYBE_UNUSED int parameter0, MAYBE_UNUSED int parameter1, MAYBE_UNUSED int parameter2)
+int System::NoexceptTesting::Function8(int parameter0, int parameter1, int parameter2)
 {
+    UnusedFunction(parameter0, parameter1, parameter2);
+
     THROW_WINDOWS_EXCEPTION;
 }
 
-int System::NoexceptTesting::Function9(MAYBE_UNUSED int parameter0, MAYBE_UNUSED int parameter1, MAYBE_UNUSED int parameter2, MAYBE_UNUSED int parameter3)
+int System::NoexceptTesting::Function9(int parameter0, int parameter1, int parameter2, int parameter3)
 {
+    UnusedFunction(parameter0, parameter1, parameter2, parameter3);
+
     THROW_WINDOWS_EXCEPTION;
 }

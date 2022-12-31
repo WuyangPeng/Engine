@@ -53,7 +53,7 @@ void System::TestingHelper::AddHelperSuite()
     helperSuite.AddSuite(GetConfigMacroSuite());
     ADD_TEST(helperSuite, UserMacroTesting);
     ADD_TEST(helperSuite, StringizeMacroTesting);
-    ADD_TEST(helperSuite, UnicodeUsingTesting);
+    helperSuite.AddSuite(GetUnicodeUsingSuite());
     ADD_TEST(helperSuite, PragmaMessageMacroTesting);
     ADD_TEST(helperSuite, VersionTesting);
     ADD_TEST(helperSuite, ExportMacroTesting);
@@ -62,7 +62,7 @@ void System::TestingHelper::AddHelperSuite()
     ADD_TEST(helperSuite, NetworkMacroTesting);
     ADD_TEST(helperSuite, PlatformTesting);
     ADD_TEST(helperSuite, EnumCastTesting);
-    helperSuite.AddSuite(GetEnumMacroSuite());
+    helperSuite.AddSuite(GetEnumOperatorSuite());
     ADD_TEST(helperSuite, NoexceptTesting);
     ADD_TEST(helperSuite, PragmaWarningTesting);
     ADD_TEST(helperSuite, GlExtensionsMacroTesting);
@@ -87,6 +87,19 @@ CoreTools::Suite System::TestingHelper::GetConfigMacroSuite()
     return configMacroSuite;
 }
 
+CoreTools::Suite System::TestingHelper::GetUnicodeUsingSuite()
+{
+    auto unicodeUsingSuite = GenerateSuite("Unicode Using"s);
+
+    ADD_TEST(unicodeUsingSuite, StringMacroTesting);
+    ADD_TEST(unicodeUsingSuite, FileStreamMacroTesting);
+    ADD_TEST(unicodeUsingSuite, NullCharTesting);
+    ADD_TEST(unicodeUsingSuite, StringStreamMacroTesting);
+    ADD_TEST(unicodeUsingSuite, ToStringTesting);
+
+    return unicodeUsingSuite;
+}
+
 CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
 {
     auto windowsMacroSuite = GenerateSuite("Windows宏"s);
@@ -102,22 +115,22 @@ CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
     return windowsMacroSuite;
 }
 
-CoreTools::Suite System::TestingHelper::GetEnumMacroSuite()
+CoreTools::Suite System::TestingHelper::GetEnumOperatorSuite()
 {
-    auto enumMacroSuite = GenerateSuite("枚举宏"s);
+    auto enumOperatorSuite = GenerateSuite("枚举运算符"s);
 
-    ADD_TEST(enumMacroSuite, EnumAddableTesting);
-    ADD_TEST(enumMacroSuite, EnumSubtractableTesting);
-    ADD_TEST(enumMacroSuite, EnumMultiplicationTesting);
-    ADD_TEST(enumMacroSuite, EnumNegateTesting);
-    ADD_TEST(enumMacroSuite, EnumIncrementableTesting);
-    ADD_TEST(enumMacroSuite, EnumDecrementableTesting);
-    ADD_TEST(enumMacroSuite, EnumAndableTesting);
-    ADD_TEST(enumMacroSuite, EnumOrableTesting);
-    ADD_TEST(enumMacroSuite, EnumXorableTesting);
-    ADD_TEST(enumMacroSuite, EnumShiftableTesting);
+    ADD_TEST(enumOperatorSuite, EnumAddableTesting);
+    ADD_TEST(enumOperatorSuite, EnumSubtractableTesting);
+    ADD_TEST(enumOperatorSuite, EnumMultiplicationTesting);
+    ADD_TEST(enumOperatorSuite, EnumNegateTesting);
+    ADD_TEST(enumOperatorSuite, EnumIncrementableTesting);
+    ADD_TEST(enumOperatorSuite, EnumDecrementableTesting);
+    ADD_TEST(enumOperatorSuite, EnumAndableTesting);
+    ADD_TEST(enumOperatorSuite, EnumOrableTesting);
+    ADD_TEST(enumOperatorSuite, EnumXorableTesting);
+    ADD_TEST(enumOperatorSuite, EnumShiftableTesting);
 
-    return enumMacroSuite;
+    return enumOperatorSuite;
 }
 
 CoreTools::Suite System::TestingHelper::GetOpenGLMacroSuite()
@@ -209,8 +222,8 @@ CoreTools::Suite System::TestingHelper::GetLibraryToolsSuite()
 {
     auto libraryToolsSuite = GenerateSuite("动态链接库工具"s);
 
-    ADD_TEST(libraryToolsSuite, GetModuleHandleTesting);
     ADD_TEST(libraryToolsSuite, GetModuleFileNameTesting);
+    ADD_TEST(libraryToolsSuite, GetModuleHandleTesting);
 
     return libraryToolsSuite;
 }
@@ -316,9 +329,9 @@ void System::TestingHelper::AddConsoleSuite()
 
     ADD_TEST(consoleSuite, ConsoleHandleTesting);
     consoleSuite.AddSuite(GetConsoleColoursSuite());
+    consoleSuite.AddSuite(GetConsoleFontSuite());
+    consoleSuite.AddSuite(GetConsoleModeSuite());
     consoleSuite.AddSuite(GetConsoleScreenBufferSuite());
-    ADD_TEST(consoleSuite, ConsoleFontTesting);
-    ADD_TEST(consoleSuite, ConsoleModeTesting);
     ADD_TEST(consoleSuite, ConsoleCodePageTesting);
     ADD_TEST(consoleSuite, ConsoleCreateTesting);
 
@@ -338,6 +351,27 @@ CoreTools::Suite System::TestingHelper::GetConsoleColoursSuite()
     ADD_TEST(consoleColoursSuite, FillAttributeTesting);
 
     return consoleColoursSuite;
+}
+
+CoreTools::Suite System::TestingHelper::GetConsoleFontSuite()
+{
+    auto consoleFontSuite = GenerateSuite("控制台字体"s);
+
+    ADD_TEST(consoleFontSuite, ConsoleFontSizeTesting);
+    ADD_TEST(consoleFontSuite, CurrentConsoleFontTesting);
+    ADD_TEST(consoleFontSuite, SetCurrentConsoleFontTesting);
+
+    return consoleFontSuite;
+}
+
+CoreTools::Suite System::TestingHelper::GetConsoleModeSuite()
+{
+    auto consoleModeSuite = GenerateSuite("控制台模式"s);
+
+    ADD_TEST(consoleModeSuite, ConsoleInputModeTesting);
+    ADD_TEST(consoleModeSuite, ConsoleOutputModeTesting);
+
+    return consoleModeSuite;
 }
 
 CoreTools::Suite System::TestingHelper::GetConsoleScreenBufferSuite()
@@ -372,7 +406,6 @@ CoreTools::Suite System::TestingHelper::GetHeapToolsSuite()
     ADD_TEST(heapToolsSuite, CreateHeapTesting);
     ADD_TEST(heapToolsSuite, AllocateHeapTesting);
     ADD_TEST(heapToolsSuite, AllocateGenerateExceptionsTesting);
-    ADD_TEST(heapToolsSuite, ReAllocateHeapTesting);
     ADD_TEST(heapToolsSuite, ValidateHeapTesting);
     ADD_TEST(heapToolsSuite, CompactHeapTesting);
     ADD_TEST(heapToolsSuite, CurrentProcessHeapTesting);
@@ -656,9 +689,8 @@ CoreTools::Suite System::TestingHelper::GetCFileSuite()
     auto cFileSuite = GenerateSuite("C函数文件"s);
 
     ADD_TEST(cFileSuite, CFileOpenTesting);
-    ADD_TEST(cFileSuite, CFileReadTesting);
-    ADD_TEST(cFileSuite, CFileWriteTesting);
-    ADD_TEST(cFileSuite, CFileSetvBufTesting);
+    ADD_TEST(cFileSuite, CFileWriteReadTesting);
+    ADD_TEST(cFileSuite, CFileSetVBufferTesting);
     ADD_TEST(cFileSuite, CFileCharacterTesting);
     ADD_TEST(cFileSuite, CFileOperatorTesting);
 
@@ -673,15 +705,20 @@ CoreTools::Suite System::TestingHelper::GetFileSuite()
     ADD_TEST(fileSuite, CreateFileWithDefaultAttributesTesting);
     ADD_TEST(fileSuite, CreateFileWithOtherFlagsTesting);
     ADD_TEST(fileSuite, CreateFileWithSecurityFlagsTesting);
-    ADD_TEST(fileSuite, DirectoryTesting);
     ADD_TEST(fileSuite, CreateFileWithAttributesTesting);
+    ADD_TEST(fileSuite, DirectoryTesting);
     ADD_TEST(fileSuite, MoveFileTesting);
     ADD_TEST(fileSuite, FileLengthTesting);
     ADD_TEST(fileSuite, CopyFileTesting);
     ADD_TEST(fileSuite, FileHandlePointerTesting);
     ADD_TEST(fileSuite, OpenFileTesting);
-    ADD_TEST(fileSuite, ReadFileTesting);
     ADD_TEST(fileSuite, WriteFileTesting);
+    ADD_TEST(fileSuite, WriteFileUseCompletionRoutineTesting);
+    ADD_TEST(fileSuite, WriteFileUseOverlappedTesting);
+    ADD_TEST(fileSuite, AppendFileTesting);
+    ADD_TEST(fileSuite, ReadFileTesting);
+    ADD_TEST(fileSuite, ReadFileUseOverlappedTesting);
+    ADD_TEST(fileSuite, ReadFileUseCompletionRoutineTesting);
 
     return fileSuite;
 }
@@ -906,7 +943,7 @@ void System::TestingHelper::AddDirectXSuite()
 {
     auto directXSuite = GenerateSuite("DirectX"s);
 
-    ADD_TEST(directXSuite, DirectXD3D11Testing);
+    ADD_TEST(directXSuite, DirectXD3D12Testing);
 
     AddSuite(directXSuite);
 }

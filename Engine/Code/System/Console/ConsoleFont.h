@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/15 22:00)
+///	引擎版本：0.8.1.5 (2022/12/02 16:50)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_FONT_H
 #define SYSTEM_CONSOLE_CONSOLE_FONT_H
@@ -16,10 +16,9 @@
 #include "Using/ConsoleFontUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
+// 控制台字体信息的设置和获取。
 namespace System
 {
-    // 控制台字体信息的设置和获取。
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoPtr consoleCurrentFont) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoExPtr consoleCurrentFontEx) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoExPtr consoleCurrentFontEx) noexcept;

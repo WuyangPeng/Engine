@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/18 14:42)
+///	引擎测试版本：0.8.1.5 (2022/12/17 15:00)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_EXPORT_MACRO_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_EXPORT_MACRO_TESTING_H

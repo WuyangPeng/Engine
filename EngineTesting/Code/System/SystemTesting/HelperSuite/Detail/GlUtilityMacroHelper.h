@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/03 11:31)
+///	引擎测试版本：0.8.1.5 (2022/12/18 12:42)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_MACRO_HELPER_H
 #define SYSTEM_TESTING_HELPER_SUITE_GL_UTILITY_MACRO_HELPER_H
@@ -45,6 +45,7 @@ namespace System
     int Function11(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10) noexcept;
     int Function12(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11) noexcept;
     int Function15(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13, int a14) noexcept;
+    int Function17(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13, int a14, int a15, int a16) noexcept;
 
     void* GetOpenGLFunctionPointer(const char* glFunction) noexcept;
 }

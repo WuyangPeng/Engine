@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 20:00)
+///	引擎测试版本：0.8.1.5 (2022/12/15 22:12)
 
 #include "FileTimeTesting.h"
 #include "System/FileManager/File.h"
@@ -19,7 +19,11 @@
 using namespace std::literals;
 
 System::FileTimeTesting::FileTimeTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) },
+      creationTime{},
+      lastAccessTime{},
+      lastWriteTime{}
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -38,17 +42,20 @@ void System::FileTimeTesting::MainTest()
 
 void System::FileTimeTesting::FileTimeTest()
 {
-    const auto existingFileName = SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s);
-    auto handle = CreateSystemFile(existingFileName, FileHandleDesiredAccess::Write, FileHandleShareMode::ShareWrite, FileHandleCreationDisposition::CreateAlways);
-    ASSERT_TRUE(IsFileHandleValid(handle));
+    const auto handle = CreateSystemFile(existingFileName, FileHandleDesiredAccess::Write, FileHandleShareMode::ShareWrite, FileHandleCreationDisposition::CreateAlways);
 
-    FileTime creationTime{};
-    FileTime lastAccessTime{};
-    FileTime lastWriteTime{};
+    ASSERT_NOT_THROW_EXCEPTION_1(DoFileTimeTest, handle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
+
+void System::FileTimeTesting::DoFileTimeTest(WindowsHandle handle)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
 
     ASSERT_TRUE(GetSystemFileTime(handle, &creationTime, &lastAccessTime, &lastWriteTime));
 
-    ASSERT_TRUE(SetSystemFileTime(handle, &lastAccessTime, &lastWriteTime, &creationTime));
+    ASSERT_NOT_THROW_EXCEPTION_1(SetSystemFileTimeTest, handle);
 
     FileTime newCreationTime{};
     FileTime newLastAccessTime{};
@@ -56,13 +63,27 @@ void System::FileTimeTesting::FileTimeTest()
 
     ASSERT_TRUE(GetSystemFileTime(handle, &newCreationTime, &newLastAccessTime, &newLastWriteTime));
 
-    ASSERT_EQUAL(lastAccessTime.dwHighDateTime, newCreationTime.dwHighDateTime);
-    ASSERT_EQUAL(lastWriteTime.dwHighDateTime, newLastAccessTime.dwHighDateTime);
-    ASSERT_EQUAL(creationTime.dwHighDateTime, newLastWriteTime.dwHighDateTime);
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, newCreationTime, newLastAccessTime, newLastWriteTime);
+}
 
-    ASSERT_EQUAL(lastAccessTime.dwLowDateTime, newCreationTime.dwLowDateTime);
-    ASSERT_EQUAL(lastWriteTime.dwLowDateTime, newLastAccessTime.dwLowDateTime);
-    ASSERT_EQUAL(creationTime.dwLowDateTime, newLastWriteTime.dwLowDateTime);
+void System::FileTimeTesting::SetSystemFileTimeTest(WindowsHandle handle)
+{
+    ++creationTime.dwLowDateTime;
+    ++creationTime.dwHighDateTime;
+    ++lastAccessTime.dwLowDateTime;
+    ++lastAccessTime.dwHighDateTime;
+    ++lastWriteTime.dwLowDateTime;
+    ++lastWriteTime.dwHighDateTime;
+    ASSERT_TRUE(SetSystemFileTime(handle, &creationTime, &lastAccessTime, &lastWriteTime));
+}
 
-    ASSERT_TRUE(CloseSystemFile(handle));
+void System::FileTimeTesting::ResultTest(const FileTime& newCreationTime, const FileTime& newLastAccessTime, const FileTime& newLastWriteTime)
+{
+    ASSERT_EQUAL(creationTime.dwHighDateTime, newCreationTime.dwHighDateTime);
+    ASSERT_EQUAL(lastAccessTime.dwHighDateTime, newLastAccessTime.dwHighDateTime);
+    ASSERT_EQUAL(lastWriteTime.dwHighDateTime, newLastWriteTime.dwHighDateTime);
+
+    ASSERT_EQUAL(creationTime.dwLowDateTime, newCreationTime.dwLowDateTime);
+    ASSERT_EQUAL(lastAccessTime.dwLowDateTime, newLastAccessTime.dwLowDateTime);
+    ASSERT_EQUAL(lastWriteTime.dwLowDateTime, newLastWriteTime.dwLowDateTime);
 }

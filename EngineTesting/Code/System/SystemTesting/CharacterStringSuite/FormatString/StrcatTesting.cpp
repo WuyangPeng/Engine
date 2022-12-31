@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
 using namespace std::literals;
 
 System::StrcatTesting::StrcatTesting(const OStreamShared& stream)
@@ -38,10 +36,9 @@ void System::StrcatTesting::MainTest()
 
 void System::StrcatTesting::StrcatTest()
 {
-    constexpr auto bufferSize = 256;
     const auto result = "2strcat4"s;
 
-    std::array<char, bufferSize> buffer{ '2' };
+    BufferType buffer{ '2' };
 
     ASSERT_TRUE(Strcat(buffer.data(), bufferSize, "strcat4"));
 

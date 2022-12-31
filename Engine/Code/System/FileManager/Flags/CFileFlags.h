@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:56)
+///	引擎版本：0.8.1.5 (2022/12/11 20:09)
 
-#ifndef SYSTEM_FILE_MANAGE_C_FILE_FLAGS_H
-#define SYSTEM_FILE_MANAGE_C_FILE_FLAGS_H
+#ifndef SYSTEM_FILE_MANAGER_C_FILE_FLAGS_H
+#define SYSTEM_FILE_MANAGER_C_FILE_FLAGS_H
 
 #include "System/Helper/ConfigMacro.h"
 
@@ -23,7 +23,7 @@ namespace System
         End = SEEK_END
     };
 
-    enum class FileSetvBuf
+    enum class FileSetVBuffer
     {
         IOFBF = _IOFBF,
         IOLBF = _IOLBF,
@@ -31,4 +31,4 @@ namespace System
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_C_FILE_FLAGS_H
+#endif  // SYSTEM_FILE_MANAGER_C_FILE_FLAGS_H

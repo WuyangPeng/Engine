@@ -18,7 +18,7 @@
 
 namespace System
 {
-    class SoftwareExceptionTesting : public CoreTools::UnitTest
+    class SoftwareExceptionTesting final : public CoreTools::UnitTest
     {
     public:
         using ClassType = SoftwareExceptionTesting;

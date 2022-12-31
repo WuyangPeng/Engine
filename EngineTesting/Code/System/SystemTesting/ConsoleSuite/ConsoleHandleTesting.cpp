@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:55)
+///	引擎测试版本：0.8.1.5 (2022/12/04 20:37)
 
 #include "ConsoleHandleTesting.h"
 #include "System/Console/ConsoleHandle.h"
@@ -19,7 +19,7 @@
 using namespace std::literals;
 
 System::ConsoleHandleTesting::ConsoleHandleTesting(const OStreamShared& stream)
-    : ParentType{ stream }, standardHandleFlags{ StandardHandle::Input, StandardHandle::Output, StandardHandle::Error }
+    : ParentType{ stream }, standardHandles{ StandardHandle::Input, StandardHandle::Output, StandardHandle::Error }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -38,42 +38,62 @@ void System::ConsoleHandleTesting::MainTest()
 
 void System::ConsoleHandleTesting::HandleTest()
 {
-    const auto inputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/InputHandleTest.txt"s);
+    for (auto standardHandle : standardHandles)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoHandleTest, standardHandle);
+    }
+}
+
+void System::ConsoleHandleTesting::DoHandleTest(StandardHandle standardHandle)
+{
+    if (standardHandle != StandardHandle::Input)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(OutputHandleTest, standardHandle);
+    }
+    else
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(InputHandleTest, standardHandle);
+    }
+}
+
+void System::ConsoleHandleTesting::OutputHandleTest(StandardHandle standardHandle)
+{
     const auto outputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/OutputHandleTest.txt"s);
-
-    auto inputHandle = CreateSystemFile(inputFileName.c_str(), FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenAlways);
-    ASSERT_TRUE(IsFileHandleValid(inputHandle));
-
-    auto outputHandle = CreateSystemFile(outputFileName.c_str(), FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::OpenAlways);
+    const auto outputHandle = CreateSystemFile(outputFileName.c_str(), FileHandleDesiredAccess::Write, FileHandleShareMode::Prevents, FileHandleCreationDisposition::OpenAlways);
     ASSERT_TRUE(IsFileHandleValid(outputHandle));
 
-    for (auto flag : standardHandleFlags)
-    {
-        auto defaultHandle = GetStandardHandle(flag);
-        ASSERT_TRUE(IsHandleValid(defaultHandle));
-
-        WindowsHandle previousHandle{ nullptr };
-
-        if (flag != StandardHandle::Input)
-        {
-            ASSERT_TRUE(SetStandardHandle(flag, outputHandle));
-            ASSERT_EQUAL(outputHandle, GetStandardHandle(flag));
-
-            ASSERT_TRUE(SetStandardHandle(flag, defaultHandle, &previousHandle));
-
-            ASSERT_EQUAL(previousHandle, outputHandle);
-        }
-        else
-        {
-            ASSERT_TRUE(SetStandardHandle(flag, inputHandle));
-            ASSERT_EQUAL(inputHandle, GetStandardHandle(flag));
-
-            ASSERT_TRUE(SetStandardHandle(flag, defaultHandle, &previousHandle));
-
-            ASSERT_EQUAL(previousHandle, inputHandle);
-        }
-    }
+    ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, outputHandle);
 
     ASSERT_TRUE(CloseSystemFile(outputHandle));
+}
+
+void System::ConsoleHandleTesting::InputHandleTest(StandardHandle standardHandle)
+{
+    const auto inputFileName = SYSTEM_TEXT("Resource/ConsoleHandleTesting/InputHandleTest.txt"s);
+    const auto inputHandle = CreateSystemFile(inputFileName.c_str(), FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenAlways);
+    ASSERT_TRUE(IsFileHandleValid(inputHandle));
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SetStandardHandleTest, standardHandle, inputHandle);
+
     ASSERT_TRUE(CloseSystemFile(inputHandle));
+}
+
+void System::ConsoleHandleTesting::SetStandardHandleTest(StandardHandle standardHandle, WindowsHandle windowsHandle)
+{
+    const auto defaultHandle = GetStandardHandle(standardHandle);
+    ASSERT_TRUE(IsHandleValid(defaultHandle));
+
+    ASSERT_TRUE(SetStandardHandle(standardHandle, windowsHandle));
+    ASSERT_EQUAL(windowsHandle, GetStandardHandle(standardHandle));
+
+    ASSERT_NOT_THROW_EXCEPTION_3(PreviousHandleTest, standardHandle, defaultHandle, windowsHandle);
+}
+
+void System::ConsoleHandleTesting::PreviousHandleTest(StandardHandle standardHandle, WindowsHandle defaultHandle, WindowsHandle windowsHandle)
+{
+    WindowsHandle previousHandle{ nullptr };
+
+    ASSERT_TRUE(SetStandardHandle(standardHandle, defaultHandle, &previousHandle));
+
+    ASSERT_EQUAL(previousHandle, windowsHandle);
 }

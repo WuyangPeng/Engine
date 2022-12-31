@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/04 21:41)
+///	引擎测试版本：0.8.1.5 (2022/12/16 22:23)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_H
 #define SYSTEM_TESTING_HELPER_SUITE_H
@@ -17,16 +17,16 @@
 #include "ConfigMacro/PlatformConfigTesting.h"
 #include "ConfigMacro/StdLibConfigTesting.h"
 #include "EnumCastTesting.h"
-#include "EnumMacro/EnumAddableTesting.h"
-#include "EnumMacro/EnumAndableTesting.h"
-#include "EnumMacro/EnumDecrementableTesting.h"
-#include "EnumMacro/EnumIncrementableTesting.h"
-#include "EnumMacro/EnumMultiplicationTesting.h"
-#include "EnumMacro/EnumNegateTesting.h"
-#include "EnumMacro/EnumOrableTesting.h"
-#include "EnumMacro/EnumShiftableTesting.h"
-#include "EnumMacro/EnumSubtractableTesting.h"
-#include "EnumMacro/EnumXorableTesting.h"
+#include "EnumOperator/EnumAddableTesting.h"
+#include "EnumOperator/EnumAndableTesting.h"
+#include "EnumOperator/EnumDecrementableTesting.h"
+#include "EnumOperator/EnumIncrementableTesting.h"
+#include "EnumOperator/EnumMultiplicationTesting.h"
+#include "EnumOperator/EnumNegateTesting.h"
+#include "EnumOperator/EnumOrableTesting.h"
+#include "EnumOperator/EnumShiftableTesting.h"
+#include "EnumOperator/EnumSubtractableTesting.h"
+#include "EnumOperator/EnumXorableTesting.h"
 #include "ExportMacroTesting.h"
 #include "GlExtensionsMacroTesting.h"
 #include "NetworkMacroTesting.h"
@@ -48,7 +48,11 @@
 #include "Tools/DebugTesting.h"
 #include "Tools/GetArraySizeTesting.h"
 #include "Tools/UnusedFunctionTesting.h"
-#include "UnicodeUsingTesting.h"
+#include "UnicodeUsing/FileStreamMacroTesting.h"
+#include "UnicodeUsing/NullCharTesting.h"
+#include "UnicodeUsing/StringMacroTesting.h"
+#include "UnicodeUsing/StringStreamMacroTesting.h"
+#include "UnicodeUsing/ToStringTesting.h"
 #include "UserMacroTesting.h"
 #include "VariableTemplateTypeTesting.h"
 #include "VersionTesting.h"

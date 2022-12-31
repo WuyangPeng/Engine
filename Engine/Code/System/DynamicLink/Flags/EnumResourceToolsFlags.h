@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/16 21:29)
+///	引擎测试版本：0.8.1.5 (2022/12/07 21:38)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_FLAGS_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -41,7 +41,6 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    ENUM_ORABLE_OPERATOR_DEFINE(ResourceEnum)
 }
 
 #endif  // SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_TOOLS_FLAGS_H

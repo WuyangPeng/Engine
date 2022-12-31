@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:05)
+///	引擎测试版本：0.8.1.5 (2022/12/09 21:57)
 
 #include "LoadStringTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
@@ -17,7 +17,6 @@
 
 #include <array>
 
-using std::array;
 using namespace std::literals;
 
 System::LoadStringTesting::LoadStringTesting(const OStreamShared& stream)
@@ -36,7 +35,9 @@ void System::LoadStringTesting::DoRunUnitTest()
 void System::LoadStringTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
+
     ASSERT_NOT_THROW_EXCEPTION_0(LoadStringTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
 
     // SystemWindowsTesting有dllModule为instance的测试。
@@ -44,9 +45,11 @@ void System::LoadStringTesting::MainTest()
 
 void System::LoadStringTesting::LoadStringTest()
 {
-    array<DynamicLinkCharType, gMaxPath> stringTableValue{};
+    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
+    BufferType stringTableValue{};
 
-    const auto maxFileNameLength = LoadStringInLibrary(GetDllModule(), IDS_STRING1, stringTableValue.data(), gMaxPath);
+    const auto maxFileNameLength = LoadStringInLibrary(GetDllModule(), IDS_STRING1, stringTableValue.data(), gMaxPath - 1);
+
     DynamicLinkString result{ stringTableValue.data() };
     ASSERT_EQUAL(boost::numeric_cast<int>(result.size()), maxFileNameLength);
 

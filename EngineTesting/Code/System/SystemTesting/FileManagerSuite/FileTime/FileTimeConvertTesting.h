@@ -5,20 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:57)
+///	引擎测试版本：0.8.1.5 (2022/12/15 22:08)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_FILE_TIME_CONVERT_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_FILE_TIME_CONVERT_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_FILE_TIME_CONVERT_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_FILE_TIME_CONVERT_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "System/FileManager/Using/FileUsing.h"
+#include "System/SystemTesting/FileManagerSuite/FileTestingBase.h"
 
 namespace System
 {
-    class FileTimeConvertTesting final : public CoreTools::UnitTest
+    class FileTimeConvertTesting final : public FileTestingBase
     {
     public:
         using ClassType = FileTimeConvertTesting;
-        using ParentType = UnitTest;
+        using ParentType = FileTestingBase;
 
     public:
         explicit FileTimeConvertTesting(const OStreamShared& stream);
@@ -30,7 +31,13 @@ namespace System
         void MainTest();
 
         void FileTimeTest();
+
+        void DoFileTimeTest(WindowsHandle handle);
+        void ResultTest(const FileTime& creationTime, const FileTime& fileTime);
+
+    private:
+        String existingFileName;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_FILE_TIME_CONVERT_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_FILE_TIME_CONVERT_TESTING_H

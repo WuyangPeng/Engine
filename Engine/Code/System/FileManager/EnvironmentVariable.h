@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:24)
+///	引擎版本：0.8.1.5 (2022/12/11 20:37)
 
-#ifndef SYSTEM_FILE_MANAGE_ENVIRONMENT_VARIABLE_H
-#define SYSTEM_FILE_MANAGE_ENVIRONMENT_VARIABLE_H
+#ifndef SYSTEM_FILE_MANAGER_ENVIRONMENT_VARIABLE_H
+#define SYSTEM_FILE_MANAGER_ENVIRONMENT_VARIABLE_H
 
 #include "System/SystemDll.h"
 
@@ -16,12 +16,11 @@
 
 #include <string>
 
+// 环境变量的获取。
 namespace System
 {
-    // 环境变量的获取。
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetEnvironment(const String& variableName, TChar*& environmentVariable) noexcept;
-    void SYSTEM_DEFAULT_DECLARE FreeEnvironment(TChar*& environmentVariable) noexcept;
+    void SYSTEM_DEFAULT_DECLARE FreeEnvironment(TChar*& environmentVariable) noexcept; 
 }
 
-#endif  // SYSTEM_FILE_MANAGE_ENVIRONMENT_VARIABLE_H
+#endif  // SYSTEM_FILE_MANAGER_ENVIRONMENT_VARIABLE_H

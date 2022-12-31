@@ -10,7 +10,7 @@
 #ifndef CONSOLE_SYSTEM_TESTING_TESTING_HELPER_H
 #define CONSOLE_SYSTEM_TESTING_TESTING_HELPER_H
 
-#include "Console/ConsoleHelper.h"
+#include "Testing.h"
 #include "Framework/MainFunctionHelper/WindowMainFunctionHelper.h"
 #include "Framework/WindowProcess/WindowProcessHandle.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuild.h"

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/20 20:30)
+///	引擎测试版本：0.8.1.5 (2022/12/17 18:12)
 
 #include "MakeLanguageIDTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -14,7 +14,10 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::MakeLanguageIDTesting::MakeLanguageIDTesting(const OStreamShared& stream)
-    : ParentType{ stream }, randomEngine{ GetEngineRandomSeed() }, primaryDistribution{ 0x0, maxPrimaryID }, subDistribution{ 0x0, maxSubID }
+    : ParentType{ stream },
+      randomEngine{ GetEngineRandomSeed() },
+      primaryDistribution{ 0x0, maxPrimaryID },
+      subDistribution{ 0x0, maxSubID }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }

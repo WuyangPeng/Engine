@@ -32,21 +32,26 @@ void System::SetSystemConsoleScreenBufferSizeTesting::DoRunUnitTest()
 
 void System::SetSystemConsoleScreenBufferSizeTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(SetConsoleScreenBufferSizeTest);
+    const auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(DesiredAccessGeneric::ReadAndWrite, ConsoleScreenBufferShareMode::ReadAndWrite, nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SetConsoleScreenBufferSizeTest, attributesConsoleHandle);
+
+    ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
 }
 
-void System::SetSystemConsoleScreenBufferSizeTesting::SetConsoleScreenBufferSizeTest()
+void System::SetSystemConsoleScreenBufferSizeTesting::SetConsoleScreenBufferSizeTest(WindowsHandle attributesConsoleHandle)
 {
-    constexpr auto bufferSize = 256;
-
-    auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(DesiredAccessGeneric::ReadAndWrite, ConsoleScreenBufferShareMode::ReadAndWrite, nullptr);
-
     auto originalConsoleScreenBufferInfo = GetWindowsStructDefaultSize<ConsoleScreenBufferInfoEx>();
     ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &originalConsoleScreenBufferInfo));
 
-    ConsoleCoord consoleCoord{};
-    consoleCoord.X = bufferSize;
-    consoleCoord.Y = bufferSize * 2;
+    ASSERT_NOT_THROW_EXCEPTION_1(DoSetConsoleScreenBufferSizeTest, attributesConsoleHandle);
+
+    ASSERT_TRUE(SetSystemConsoleScreenBufferSize(attributesConsoleHandle, originalConsoleScreenBufferInfo.dwSize));
+}
+
+void System::SetSystemConsoleScreenBufferSizeTesting::DoSetConsoleScreenBufferSizeTest(WindowsHandle attributesConsoleHandle)
+{
+    ConsoleCoord consoleCoord{ 256, 512 };
 
     ASSERT_TRUE(SetSystemConsoleScreenBufferSize(attributesConsoleHandle, consoleCoord));
 
@@ -55,7 +60,4 @@ void System::SetSystemConsoleScreenBufferSizeTesting::SetConsoleScreenBufferSize
 
     ASSERT_EQUAL(currentConsoleScreenBufferInfoEx.dwSize.X, consoleCoord.X);
     ASSERT_EQUAL(currentConsoleScreenBufferInfoEx.dwSize.Y, consoleCoord.Y);
-
-    ASSERT_TRUE(SetSystemConsoleScreenBufferSize(attributesConsoleHandle, originalConsoleScreenBufferInfo.dwSize));
-    ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
 }

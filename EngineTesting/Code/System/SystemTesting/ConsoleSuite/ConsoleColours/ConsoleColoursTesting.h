@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:54)
+///	引擎测试版本：0.8.1.5 (2022/12/03 14:07)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING_H
@@ -29,17 +29,17 @@ namespace System
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     protected:
-        void PrintMessage(StandardHandle standardHandleFlag, TextColour textColourFlag, BackgroundColour backgroundColourFlag, ConsoleCommon consoleCommonFlag);
+        void PrintMessage(StandardHandle standardHandle, TextColour textColour, BackgroundColour backgroundColour, ConsoleCommon consoleCommon) const;
 
     private:
-        using TextColourFlagsContainer = std::map<TextColour, std::string>;
-        using BackgroundColourFlagsContainer = std::map<BackgroundColour, std::string>;
-        using ConsoleCommonFlagsContainer = std::map<ConsoleCommon, std::string>;
+        using TextColourContainer = std::map<TextColour, std::string>;
+        using BackgroundColourContainer = std::map<BackgroundColour, std::string>;
+        using ConsoleCommonContainer = std::map<ConsoleCommon, std::string>;
 
     private:
-        TextColourFlagsContainer textColourFlagsDescription;
-        BackgroundColourFlagsContainer backgroundColourFlagsDescription;
-        ConsoleCommonFlagsContainer consoleCommonFlagsDescription;
+        TextColourContainer textColourDescription;
+        BackgroundColourContainer backgroundColourDescription;
+        ConsoleCommonContainer consoleCommonDescription;
     };
 }
 

@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:56)
+///	引擎版本：0.8.1.5 (2022/12/11 20:11)
 
-#ifndef SYSTEM_FILE_MANAGE_FILE_FLAGS_H
-#define SYSTEM_FILE_MANAGE_FILE_FLAGS_H
+#ifndef SYSTEM_FILE_MANAGER_FILE_FLAGS_H
+#define SYSTEM_FILE_MANAGER_FILE_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -38,14 +38,18 @@ namespace System
 
     enum class FileHandleCreationDisposition
     {
-        // 创建新文件，如果指定文件已经存在则失败。
+        /// 创建新文件，如果指定文件已经存在则失败。
         CreateNew = CREATE_NEW,
-        // 创建新文件，如果指定文件已经存在时覆盖它。
+
+        /// 创建新文件，如果指定文件已经存在时覆盖它。
         CreateAlways = CREATE_ALWAYS,
-        // 打开现有文件，如果文件不存在则失败。
+
+        /// 打开现有文件，如果文件不存在则失败。
         OpenExisting = OPEN_EXISTING,
-        // 打开现有文件，如果文件不存在则创建它。
+
+        /// 打开现有文件，如果文件不存在则创建它。
         OpenAlways = OPEN_ALWAYS,
+
         /// 将文件长度置为0，
         /// DesiredAccess必须至少指定GENERIC_WRITE访问，
         /// 如果指定的文件存在的话所有内容都会被销毁，
@@ -69,7 +73,14 @@ namespace System
         Offline = FILE_ATTRIBUTE_OFFLINE,
         NotContentIndexed = FILE_ATTRIBUTE_NOT_CONTENT_INDEXED,
         Encrypted = FILE_ATTRIBUTE_ENCRYPTED,
+        IntegrityStream = FILE_ATTRIBUTE_INTEGRITY_STREAM,
         Virtual = FILE_ATTRIBUTE_VIRTUAL,
+        NoScrubData = FILE_ATTRIBUTE_NO_SCRUB_DATA,
+        EA = FILE_ATTRIBUTE_EA,
+        Pinned = FILE_ATTRIBUTE_PINNED,
+        Unpinned = FILE_ATTRIBUTE_UNPINNED,
+        RecallOnOpen = FILE_ATTRIBUTE_RECALL_ON_OPEN,
+        RecallOnDataAccess = FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS,
     };
 
     enum class FileHandleOther : uint32_t
@@ -154,7 +165,14 @@ namespace System
         Offline = 0x00001000,
         NotContentIndexed = 0x00002000,
         Encrypted = 0x00004000,
+        IntegrityStream = 0x00008000,
         Virtual = 0x00010000,
+        NoScrubData = 0x00020000,
+        EA = 0x00040000,
+        Pinned = 0x00080000,
+        Unpinned = 0x00100000,
+        RecallOnOpen = 0x00040000,
+        RecallOnDataAccess = 0x00400000,
     };
 
     enum class FileHandleOther : uint32_t
@@ -197,7 +215,6 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    ENUM_ORABLE_OPERATOR_DEFINE(FileHandleDesiredAccess);
 }
 
-#endif  // SYSTEM_FILE_MANAGE_FILE_FLAGS_H
+#endif  // SYSTEM_FILE_MANAGER_FILE_FLAGS_H

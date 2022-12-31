@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:58)
+///	引擎测试版本：0.8.1.5 (2022/12/14 23:13)
 
 #include "CopyFileTesting.h"
 #include "System/FileManager/File.h"
@@ -17,7 +17,9 @@
 using namespace std::literals;
 
 System::CopyFileTesting::CopyFileTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      fileName{ SYSTEM_TEXT("Resource/FileTesting/FileTestingText.txt"s) },
+      copyFileName{ SYSTEM_TEXT("Resource/FileTesting/CopyFileTestingText.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -31,34 +33,37 @@ void System::CopyFileTesting::DoRunUnitTest()
 
 void System::CopyFileTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(EnsureFileNotExist);
     ASSERT_NOT_THROW_EXCEPTION_0(CopyFileTest);
+}
+
+void System::CopyFileTesting::EnsureFileNotExist()
+{
+    MAYBE_UNUSED const auto result = RemoveSystemFile(copyFileName);
+
+    const auto handle = CreateSystemFile(copyFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+
+    ASSERT_FALSE(IsFileHandleValid(handle));
 }
 
 void System::CopyFileTesting::CopyFileTest()
 {
-    const auto fileName = SYSTEM_TEXT("Resource/FileTesting/FileTestingText.txt"s);
-    const auto copyFileName = SYSTEM_TEXT("Resource/FileTesting/CopyFileTestingText.txt"s);
-
-    auto handle = CreateSystemFile(copyFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
-
-    ASSERT_FALSE(IsFileHandleValid(handle));
-
     ASSERT_TRUE(CopySystemFile(fileName, copyFileName));
     ASSERT_FALSE(CopySystemFile(fileName, copyFileName, true));
 
-    handle = CreateSystemFile(copyFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
-
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
-
-    ASSERT_TRUE(RemoveSystemFile(copyFileName));
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyFileResultTest);
 
     ASSERT_TRUE(CopySystemFile(fileName, copyFileName, false));
 
-    handle = CreateSystemFile(copyFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyFileResultTest);
+}
 
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
+void System::CopyFileTesting::CopyFileResultTest()
+{
+    const auto handle = CreateSystemFile(copyFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
 
-    ASSERT_TRUE(RemoveSystemFile(copyFileName));
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(RemoveFile, copyFileName);
 }

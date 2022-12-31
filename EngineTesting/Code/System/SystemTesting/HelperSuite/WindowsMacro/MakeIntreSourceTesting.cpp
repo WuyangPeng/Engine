@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/20 20:35)
+///	引擎测试版本：0.8.1.5 (2022/12/17 18:20)
 
 #include "MakeIntreSourceTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -38,11 +38,11 @@ void System::MakeIntreSourceTesting::MakeIntreSourceTest()
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 
-    auto intrePtr = reinterpret_cast<TChar*>(static_cast<uint64_t>(id));
+    const auto* intrePtr = reinterpret_cast<TChar*>(static_cast<uint64_t>(id));
 
 #include STSTEM_WARNING_POP
 
-    auto intreSource = MakeIntreSource(id);
+    const auto intreSource = MakeIntreSource(id);
 
     ASSERT_EQUAL(intrePtr, intreSource);
 }

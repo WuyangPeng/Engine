@@ -5,22 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 19:56)
+///	引擎测试版本：0.8.1.5 (2022/12/09 15:44)
 
-#ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_GET_MODULE_HANDLE_TESTING_H
-#define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_GET_MODULE_HANDLE_TESTING_H
+#ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_GET_MODULE_HANDLE_TESTING_H
+#define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_GET_MODULE_HANDLE_TESTING_H
 
-#include "System/DynamicLink/Fwd/DynamicLinkFlagsFwd.h"
-#include "System/DynamicLink/Using/LoadLibraryUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "GetModuleTestingBase.h"
+#include "System/DynamicLink/Flags/GetModuleHandleFlags.h"
 
 namespace System
 {
-    class GetModuleHandleTesting final : public CoreTools::UnitTest
+    class GetModuleHandleTesting final : public GetModuleTestingBase
     {
     public:
         using ClassType = GetModuleHandleTesting;
-        using ParentType = UnitTest;
+        using ParentType = GetModuleTestingBase;
 
     public:
         explicit GetModuleHandleTesting(const OStreamShared& stream);
@@ -37,12 +36,15 @@ namespace System
         void GetModuleHandleSucceed3Test();
         void GetModuleHandleFailureTest();
 
-        NODISCARD DynamicLinkString GetResourcesLibraryName();
-        NODISCARD DynamicLinkModule GetDynamicLibrary();
+        void GetHandleUnequalNullPtrTest();
+        NODISCARD DynamicLinkModule GetHandleUseTypeUnequalNullPtrTest(GetModuleHandleType getModuleHandleType);
+        void GetHandleEqualNullPtrTest();
+        void GetHandleUseTypeEqualNullPtrTest(GetModuleHandleType getModuleHandleType);
+
+        NODISCARD DynamicLinkModule GetDynamicLibraryFailureThrow();
         NODISCARD DynamicLinkModule GetHandle();
         NODISCARD DynamicLinkModule GetHandle(GetModuleHandleType getModuleHandleType);
-        void Destroy(DynamicLinkModule dynamicLinkModule);
     };
 }
 
-#endif  // SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_GET_MODULE_HANDLE_TESTING_H
+#endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_GET_MODULE_HANDLE_TESTING_H

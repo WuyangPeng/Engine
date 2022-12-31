@@ -5,24 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:54)
+///	引擎测试版本：0.8.1.5 (2022/12/13 14:54)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
 
-#include "System/FileManager/Fwd/FileFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <random>
-#include <vector>
+#include "CreateFileWithAttributesTestingBase.h"
 
 namespace System
 {
-    class CreateFileWithOtherFlagsTesting final : public CoreTools::UnitTest
+    class CreateFileWithOtherFlagsTesting final : public CreateFileWithAttributesTestingBase
     {
     public:
         using ClassType = CreateFileWithOtherFlagsTesting;
-        using ParentType = UnitTest;
+        using ParentType = CreateFileWithAttributesTestingBase;
 
     public:
         explicit CreateFileWithOtherFlagsTesting(const OStreamShared& stream);
@@ -36,20 +32,10 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void CreateFileTest();
 
-    private:
-        using FileHandleDesiredAccessFlagsContainer = std::vector<FileHandleDesiredAccess>;
-        using FileHandleShareModeFlagsContainer = std::vector<FileHandleShareMode>;
-        using FileHandleCreationDispositionFlagsContainer = std::vector<FileHandleCreationDisposition>;
-        using FileHandleOtherFlagsContainer = std::vector<FileHandleOther>;
-
-    private:
-        FileHandleDesiredAccessFlagsContainer fileHandleDesiredAccessFlags;
-        FileHandleShareModeFlagsContainer fileHandleShareModeFlags;
-        FileHandleCreationDispositionFlagsContainer fileHandleCreationDispositionFlags;
-        FileHandleOtherFlagsContainer fileHandleOtherFlags;
-        std::default_random_engine randomEngine;
-        size_t maxSize;
+        void DoCreateFileTest(size_t index);
+        void CreateNewTest(size_t index, FileHandleCreationDisposition fileHandleCreationDisposition);
+        void ExistingFileTest(size_t index, FileHandleCreationDisposition fileHandleCreationDisposition);
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_OTHER_FLAGS_TESTING_H

@@ -5,23 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:04)
+///	引擎测试版本：0.8.1.5 (2022/12/06 18:19)
 
 #include "CreateSystemConsoleScreenBufferTesting.h"
 #include "System/Console/ConsoleHandle.h"
 #include "System/Console/ConsoleScreenBuffer.h"
-#include "System/Console/Flags/ConsoleScreenBufferFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-
 System::CreateSystemConsoleScreenBufferTesting::CreateSystemConsoleScreenBufferTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      desiredAccessGenericFlags{ DesiredAccessGeneric::Read, DesiredAccessGeneric::Write, DesiredAccessGeneric::ReadAndWrite },
-      consoleScreenBufferShareModeFlags{ ConsoleScreenBufferShareMode::Read, ConsoleScreenBufferShareMode::Write, ConsoleScreenBufferShareMode::ReadAndWrite },
-      maxSize{ max(desiredAccessGenericFlags.size(), consoleScreenBufferShareModeFlags.size()) }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -40,8 +34,7 @@ void System::CreateSystemConsoleScreenBufferTesting::MainTest()
 
 bool System::CreateSystemConsoleScreenBufferTesting::RandomShuffleFlags()
 {
-    shuffle(desiredAccessGenericFlags.begin(), desiredAccessGenericFlags.end(), randomEngine);
-    shuffle(consoleScreenBufferShareModeFlags.begin(), consoleScreenBufferShareModeFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffleConsoleFlags);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateNullSecurityAttributesConsoleScreenBufferTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CreateBInheritHandleTrueConsoleScreenBufferTest);
@@ -52,17 +45,7 @@ bool System::CreateSystemConsoleScreenBufferTesting::RandomShuffleFlags()
 
 void System::CreateSystemConsoleScreenBufferTesting::CreateNullSecurityAttributesConsoleScreenBufferTest()
 {
-    for (auto index = 0u; index < maxSize; ++index)
-    {
-        auto desiredAccessGeneric = desiredAccessGenericFlags.at(index % desiredAccessGenericFlags.size());
-        auto consoleScreenBufferShareMode = consoleScreenBufferShareModeFlags.at(index % consoleScreenBufferShareModeFlags.size());
-
-        auto nullSecurityAttributesConsoleHandle = CreateSystemConsoleScreenBuffer(desiredAccessGeneric, consoleScreenBufferShareMode, nullptr);
-
-        ASSERT_TRUE(IsHandleValid(nullSecurityAttributesConsoleHandle));
-
-        ASSERT_TRUE(CloseSystemConsole(nullSecurityAttributesConsoleHandle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateSystemConsoleScreenBufferTest, nullptr);
 }
 
 void System::CreateSystemConsoleScreenBufferTesting::CreateBInheritHandleTrueConsoleScreenBufferTest()
@@ -70,17 +53,7 @@ void System::CreateSystemConsoleScreenBufferTesting::CreateBInheritHandleTrueCon
     WindowSecurityAttributes securityAttributes{};
     SetDefaultConsoleSecurityAttributes(securityAttributes, true);
 
-    for (auto index = 0u; index < maxSize; ++index)
-    {
-        auto desiredAccessGeneric = desiredAccessGenericFlags.at(index % desiredAccessGenericFlags.size());
-        auto consoleScreenBufferShareMode = consoleScreenBufferShareModeFlags.at(index % consoleScreenBufferShareModeFlags.size());
-
-        auto nullSecurityAttributesConsoleHandle = CreateSystemConsoleScreenBuffer(desiredAccessGeneric, consoleScreenBufferShareMode, &securityAttributes);
-
-        ASSERT_TRUE(IsHandleValid(nullSecurityAttributesConsoleHandle));
-
-        ASSERT_TRUE(CloseSystemConsole(nullSecurityAttributesConsoleHandle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateSystemConsoleScreenBufferTest, &securityAttributes);
 }
 
 void System::CreateSystemConsoleScreenBufferTesting::CreateBInheritHandleFalseConsoleScreenBufferTest()
@@ -88,15 +61,25 @@ void System::CreateSystemConsoleScreenBufferTesting::CreateBInheritHandleFalseCo
     WindowSecurityAttributes securityAttributes{};
     SetDefaultConsoleSecurityAttributes(securityAttributes, false);
 
-    for (auto index = 0u; index < maxSize; ++index)
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateSystemConsoleScreenBufferTest, &securityAttributes);
+}
+
+void System::CreateSystemConsoleScreenBufferTesting::CreateSystemConsoleScreenBufferTest(const WindowSecurityAttributes* securityAttributes)
+{
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        auto desiredAccessGeneric = desiredAccessGenericFlags.at(index % desiredAccessGenericFlags.size());
-        auto consoleScreenBufferShareMode = consoleScreenBufferShareModeFlags.at(index % consoleScreenBufferShareModeFlags.size());
-
-        auto nullSecurityAttributesConsoleHandle = CreateSystemConsoleScreenBuffer(desiredAccessGeneric, consoleScreenBufferShareMode, &securityAttributes);
-
-        ASSERT_TRUE(IsHandleValid(nullSecurityAttributesConsoleHandle));
-
-        ASSERT_TRUE(CloseSystemConsole(nullSecurityAttributesConsoleHandle));
+        ASSERT_NOT_THROW_EXCEPTION_2(DoCreateSystemConsoleScreenBufferTest, index, securityAttributes);
     }
+}
+
+void System::CreateSystemConsoleScreenBufferTesting::DoCreateSystemConsoleScreenBufferTest(size_t index, const WindowSecurityAttributes* securityAttributes)
+{
+    const auto desiredAccessGeneric = GetDesiredAccessGeneric(index);
+    const auto consoleScreenBufferShareMode = GetConsoleScreenBufferShareMode(index);
+
+    const auto securityAttributesConsoleHandle = CreateSystemConsoleScreenBuffer(desiredAccessGeneric, consoleScreenBufferShareMode, securityAttributes);
+
+    ASSERT_TRUE(IsHandleValid(securityAttributesConsoleHandle));
+
+    ASSERT_TRUE(CloseSystemConsole(securityAttributesConsoleHandle));
 }

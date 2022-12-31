@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:59)
+///	引擎测试版本：0.8.1.5 (2022/12/15 0:54)
 
 #include "OpenFileTesting.h"
 #include "System/FileManager/File.h"
@@ -31,20 +31,24 @@ void System::OpenFileTesting::DoRunUnitTest()
 
 void System::OpenFileTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(OpenFileTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenValidFileTest);
 }
 
-void System::OpenFileTesting::OpenFileTest()
+void System::OpenFileTesting::OpenValidFileTest()
 {
     const auto fileName = SYSTEM_TEXT("Resource/FileTesting/FileTestingText.txt"s);
+
+    const auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
+
+void System::OpenFileTesting::OpenInvalidFileTest()
+{
     const auto fileErrorName = SYSTEM_TEXT("Resource/FileTesting/ErrorFileTestingText.txt"s);
 
-    auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
-
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
-
-    handle = CreateSystemFile(fileErrorName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+    const auto handle = CreateSystemFile(fileErrorName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
 
     ASSERT_FALSE(IsFileHandleValid(handle));
 }

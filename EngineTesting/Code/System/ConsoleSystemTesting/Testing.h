@@ -10,4 +10,6 @@
 #ifndef CONSOLE_SYSTEM_TESTING_H
 #define CONSOLE_SYSTEM_TESTING_H
 
+#include "Console/ConsoleHelper.h"
+
 #endif  // CONSOLE_SYSTEM_TESTING_H

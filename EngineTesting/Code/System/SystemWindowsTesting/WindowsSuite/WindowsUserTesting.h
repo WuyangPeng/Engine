@@ -10,6 +10,7 @@
 #ifndef SYSTEM_WINDOWS_TESTING_WINDOWS_SUITE_WINDOWS_USER_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_WINDOWS_SUITE_WINDOWS_USER_TESTING_H
 
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System

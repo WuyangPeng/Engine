@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/15 21:58)
+///	引擎版本：0.8.1.5 (2022/12/02 16:27)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H
 #define SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -136,8 +136,6 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    ENUM_ORABLE_OPERATOR_DEFINE(TextColour);
-    ENUM_ORABLE_OPERATOR_DEFINE(BackgroundColour);
 }
 
 #endif  // SYSTEM_CONSOLE_CONSOLE_COLORS_FLAGS_H

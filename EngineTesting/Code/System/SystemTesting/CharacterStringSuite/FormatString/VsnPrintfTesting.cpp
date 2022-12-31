@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
 using namespace std::literals;
 
 System::VsnPrintfTesting::VsnPrintfTesting(const OStreamShared& stream)
@@ -38,17 +36,16 @@ void System::VsnPrintfTesting::MainTest()
 
 void System::VsnPrintfTesting::VsnprintfTest()
 {
-    constexpr auto bufferSize = 256;
     const auto vsnprintfTestResult = "7vsnprintf1"s;
 
-    std::array<char, bufferSize> buffer{};
+    BufferType buffer{};
 
-    DoVsnprintfTest(boost::numeric_cast<int>(vsnprintfTestResult.size()), buffer.data(), bufferSize, "%d%s%d", 7, "vsnprintf", 1);
+    VsnprintfUseIndefiniteParameterTest(boost::numeric_cast<int>(vsnprintfTestResult.size()), buffer.data(), bufferSize, "%d%s%d", 7, "vsnprintf", 1);
 
     ASSERT_EQUAL(std::string{ buffer.data() }, vsnprintfTestResult);
 }
 
-void System::VsnPrintfTesting::DoVsnprintfTest(int testStringSize, char* buffer, size_t size, const char* format, ...)
+void System::VsnPrintfTesting::VsnprintfUseIndefiniteParameterTest(int testStringSize, char* buffer, size_t size, const char* format, ...)
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)

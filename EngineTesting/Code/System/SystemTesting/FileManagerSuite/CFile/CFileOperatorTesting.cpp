@@ -5,20 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:57)
+///	引擎测试版本：0.8.1.5 (2022/12/12 22:17)
 
 #include "CFileOperatorTesting.h"
 #include "System/FileManager/CFile.h"
 #include "System/FileManager/Flags/CFileFlags.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "CoreTools/Base/Version.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <vector>
-
-using std::vector;
 using namespace std::literals;
 
 System::CFileOperatorTesting::CFileOperatorTesting(const OStreamShared& stream)
@@ -41,24 +37,42 @@ void System::CFileOperatorTesting::MainTest()
 
 void System::CFileOperatorTesting::OperatorTest()
 {
-    FILE* file{ nullptr };
-    ASSERT_TRUE(OpenCFile(file, GetFileName(), SYSTEM_FILE_TEXT("w+")));
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(file, "打开文件失败。"s);
+    auto file = OpenFile(SYSTEM_FILE_TEXT("w+"s));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(IsEOFTest, file);
+    ASSERT_NOT_THROW_EXCEPTION_1(FlushTest, file);
+    ASSERT_NOT_THROW_EXCEPTION_1(TellTest, file);
+    ASSERT_NOT_THROW_EXCEPTION_1(PositionTest, file);
+    ASSERT_NOT_THROW_EXCEPTION_1(RewindTest, file);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, file);
+}
+
+void System::CFileOperatorTesting::IsEOFTest(FILE* file)
+{
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
     ASSERT_FALSE(IsEOF(file));
+}
 
-    Rewind(file);
-
-    const auto putString = CoreTools::Version::GetVersion();
-    ASSERT_TRUE(PutString(file, putString.c_str()));
+void System::CFileOperatorTesting::FlushTest(FILE* file)
+{
+    const auto fileContent = GetFileContent();
+    ASSERT_TRUE(PutString(file, fileContent.c_str()));
 
     ASSERT_TRUE(Flush(file));
+}
+
+void System::CFileOperatorTesting::TellTest(FILE* file)
+{
+    const auto fileContent = GetFileContent();
 
     const auto length = Tell(file);
-    ASSERT_EQUAL(length, boost::numeric_cast<long>(putString.size()));
+    ASSERT_EQUAL(length, boost::numeric_cast<long>(fileContent.size()));
+}
 
+void System::CFileOperatorTesting::PositionTest(FILE* file)
+{
     ASSERT_TRUE(Seek(file, 0, FileSeek::Set));
 
     auto position = GetPosition(file);
@@ -68,12 +82,14 @@ void System::CFileOperatorTesting::OperatorTest()
 
     position = GetPosition(file);
     ASSERT_EQUAL(position, 1);
-    Rewind(file);
-
-    ASSERT_TRUE(CloseCFile(file));
 }
 
-const System::String System::CFileOperatorTesting::GetFileName()
+void System::CFileOperatorTesting::RewindTest(FILE* file) noexcept
+{
+    Rewind(file);
+}
+
+System::CFileString System::CFileOperatorTesting::GetFileName() const
 {
     return SYSTEM_FILE_TEXT("Resource/CFileTesting/OperatorTest.txt"s);
 }

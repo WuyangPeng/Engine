@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 13:53)
+///	引擎版本：0.8.1.5 (2022/12/16 21:41)
 
-#ifndef SYSTEM_HELPER_UNICODE_MACRO_H
-#define SYSTEM_HELPER_UNICODE_MACRO_H
+#ifndef SYSTEM_HELPER_UNICODE_USING_H
+#define SYSTEM_HELPER_UNICODE_USING_H
 
 // Unicode字符和ANSI字符所需要的using声明和宏
 
@@ -25,6 +25,8 @@ namespace System
     using TChar = wchar_t;
     using String = std::wstring;
     using StringView = std::wstring_view;
+    using Regex = std::wregex;
+
     using StringStream = std::wstringstream;
     using OStringStream = std::wostringstream;
     using IStringStream = std::wistringstream;
@@ -34,13 +36,14 @@ namespace System
     using Stream = std::wiostream;
     using OStream = std::wostream;
     using IStream = std::wistream;
-    using Regex = std::wregex;
 
 #else  // !UNICODE
 
     using TChar = char;
     using String = std::string;
     using StringView = std::string_view;
+    using Regex = std::regex;
+
     using StringStream = std::stringstream;
     using OStringStream = std::ostringstream;
     using IStringStream = std::istringstream;
@@ -50,7 +53,6 @@ namespace System
     using Stream = std::iostream;
     using OStream = std::ostream;
     using IStream = std::istream;
-    using Regex = std::regex;
 
 #endif  // UNICODE
 
@@ -94,4 +96,4 @@ namespace System
     constexpr auto nullChar = SYSTEM_TEXT('\0');
 }
 
-#endif  // SYSTEM_HELPER_UNICODE_MACRO_H
+#endif  // SYSTEM_HELPER_UNICODE_USING_H

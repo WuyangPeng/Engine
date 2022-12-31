@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 #include <iostream>
 
@@ -77,20 +77,7 @@ namespace CoreTools
         Refresh,  // 刷新
         TriggerAssert,  // 触发断言
         AlwaysConsole,  // 总是输出至控制台
-    };
-
-    ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE(LogLevel);
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(LogLevel);
-    ENUM_LEFT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(LogLevel);
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(LogLevel);
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(LogLevel);
-
-    ENUM_LEFT_SHIFTABLE_OPERATOR_DEFINE(AppenderPrint);
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(AppenderPrint);
-    ENUM_LEFT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(AppenderPrint);
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(AppenderPrint);
-    ENUM_ANDABLE_OPERATOR_DEFINE(AppenderPrint);
-    ENUM_ORABLE_OPERATOR_DEFINE(AppenderPrint);
+    };    
 }
 
 #endif  // CORE_TOOLS_LOG_MANAGER_LOG_MANAGER_FLAGS_H

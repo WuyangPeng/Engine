@@ -5,21 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:17)
+///	引擎测试版本：0.8.1.5 (2022/12/01 13:14)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_UTF8_CONVERSION_WIDE_CHAR_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_UTF8_CONVERSION_WIDE_CHAR_TESTING_H
 
-#include "System/CharacterString/Fwd/CharacterStringFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "ConversionWideCharTestingBase.h"
 
 namespace System
 {
-    class UTF8ConversionWideCharTesting final : public CoreTools::UnitTest
+    class UTF8ConversionWideCharTesting final : public ConversionWideCharTestingBase
     {
     public:
         using ClassType = UTF8ConversionWideCharTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConversionWideCharTestingBase;
 
     public:
         explicit UTF8ConversionWideCharTesting(const OStreamShared& stream);
@@ -31,7 +30,10 @@ namespace System
         void MainTest();
 
         void UTF8ConversionWideCharTest();
-        NODISCARD std::string GetUTF8();
+
+    private:
+        std::string multiByteInitial;
+        int multiByteInitialLength;
     };
 }
 

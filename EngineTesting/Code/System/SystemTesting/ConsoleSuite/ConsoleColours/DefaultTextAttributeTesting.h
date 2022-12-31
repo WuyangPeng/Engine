@@ -5,22 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:53)
+///	引擎测试版本：0.8.1.5 (2022/12/03 20:11)
 
-#ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING1_H
-#define SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING1_H
+#ifndef SYSTEM_CONSOLE_SUITE_DEFAULT_TEXT_ATTRIBUTE_TESTING_H
+#define SYSTEM_CONSOLE_SUITE_DEFAULT_TEXT_ATTRIBUTE_TESTING_H
 
-#include "ConsoleColoursTesting.h"
-
-#include <vector>
+#include "ConsoleStandardHandlesTesting.h"
 
 namespace System
 {
-    class DefaultTextAttributeTesting final : public ConsoleColoursTesting
+    class DefaultTextAttributeTesting final : public ConsoleStandardHandlesTesting
     {
     public:
         using ClassType = DefaultTextAttributeTesting;
-        using ParentType = ConsoleColoursTesting;
+        using ParentType = ConsoleStandardHandlesTesting;
 
     public:
         explicit DefaultTextAttributeTesting(const OStreamShared& stream);
@@ -32,13 +30,7 @@ namespace System
         void MainTest();
 
         void DefaultTextAttributeTest();
-
-    private:
-        using StandardHandleFlagsContainer = std::vector<StandardHandle>;
-
-    private:
-        StandardHandleFlagsContainer standardHandleFlags;
     };
 }
 
-#endif  // SYSTEM_CONSOLE_SUITE_CONSOLE_COLOURS_TESTING1_H
+#endif  // SYSTEM_CONSOLE_SUITE_DEFAULT_TEXT_ATTRIBUTE_TESTING_H

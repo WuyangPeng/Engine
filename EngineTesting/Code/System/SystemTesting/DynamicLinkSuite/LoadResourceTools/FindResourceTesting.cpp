@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:06)
+///	引擎测试版本：0.8.1.5 (2022/12/09 21:04)
 
 #include "FindResourceTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
@@ -13,16 +13,9 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Toolset/System/ResourcesLibrary/resource.h"
 
 System::FindResourceTesting::FindResourceTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      container{ { static_cast<WindowsWord>(IDI_ICON1), predefinedResourceTypesGroupIcon },
-                 { static_cast<WindowsWord>(IDI_ICON2), predefinedResourceTypesGroupIcon },
-                 { static_cast<WindowsWord>(IDC_CURSOR1), predefinedResourceTypesGroupCursor },
-                 { static_cast<WindowsWord>(IDC_CURSOR2), predefinedResourceTypesGroupCursor },
-                 { static_cast<WindowsWord>(IDB_BITMAP1), predefinedResourceTypesBitmap },
-                 { static_cast<WindowsWord>(IDR_MENU1), predefinedResourceTypesMenu } }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -37,8 +30,10 @@ void System::FindResourceTesting::DoRunUnitTest()
 void System::FindResourceTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
+
     ASSERT_NOT_THROW_EXCEPTION_0(FindResourceTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FindResourceUseLanguageTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
 
     // SystemWindowsTesting有dllModule为instance的测试。
@@ -46,22 +41,31 @@ void System::FindResourceTesting::MainTest()
 
 void System::FindResourceTesting::FindResourceTest()
 {
-    for (const auto& value : container)
+    for (const auto& typeName : *this)
     {
-        const auto resource = FindResourceInLibrary(GetDllModule(), value.second, MakeIntreSource(value.first));
-
-        ASSERT_UNEQUAL_NULL_PTR(resource);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFindResourceTest, typeName.second, typeName.first);
     }
 }
 
 void System::FindResourceTesting::FindResourceUseLanguageTest()
 {
-    constexpr LanguageIDData languageIDData{};
-
-    for (const auto& value : container)
+    for (const auto& typeName : *this)
     {
-        const auto resource = FindResourceInLibrary(GetDllModule(), value.second, MakeIntreSource(value.first), languageIDData);
-
-        ASSERT_UNEQUAL_NULL_PTR(resource);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoFindResourceUseLanguageTest, typeName.second, typeName.first);
     }
+}
+
+void System::FindResourceTesting::DoFindResourceTest(const DynamicLinkCharType* type, WindowsWord name)
+{
+    const auto resource = FindResourceInLibrary(GetDllModule(), type, MakeIntreSource(name));
+
+    ASSERT_UNEQUAL_NULL_PTR(resource);
+}
+
+void System::FindResourceTesting::DoFindResourceUseLanguageTest(const DynamicLinkCharType* type, WindowsWord name)
+{
+    constexpr LanguageIDData languageIDData{};
+    const auto resource = FindResourceInLibrary(GetDllModule(), type, MakeIntreSource(name), languageIDData);
+
+    ASSERT_UNEQUAL_NULL_PTR(resource);
 }

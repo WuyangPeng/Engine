@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/03 12:36)
+///	引擎测试版本：0.8.1.5 (2022/12/18 11:06)
 
 #include "UnusedFunctionTesting.h"
 #include "System/Helper/Tools.h"
@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
 using namespace std::literals;
 
 System::UnusedFunctionTesting::UnusedFunctionTesting(const OStreamShared& stream)

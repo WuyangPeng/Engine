@@ -5,16 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 13:54)
+///	引擎版本：0.8.1.5 (2022/12/16 21:37)
 
 #ifndef SYSTEM_HELPER_VERSION_H
 #define SYSTEM_HELPER_VERSION_H
 
-// gTCREVersion % 100 是修订版本号
-// gTCREVersion / 100 % 100 是内部版本号
-// gTCREVersion / 10000 % 100 是次版本号
-// gTCREVersion / 1000000 % 100 是主版本号
+/// gTCREVersion % 100 是修订版本号
+/// gTCREVersion / 100 % 100 是内部版本号
+/// gTCREVersion / 10000 % 100 是次版本号
+/// gTCREVersion / 1000000 % 100 是主版本号
 
-constexpr auto gTCREVersion = 80103;
+constexpr auto gTCREVersion = 80105;
 
 #endif  // SYSTEM_HELPER_VERSION_H

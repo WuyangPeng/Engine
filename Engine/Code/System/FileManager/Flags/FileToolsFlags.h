@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:57)
+///	引擎版本：0.8.1.5 (2022/12/11 20:22)
 
-#ifndef SYSTEM_FILE_MANAGE_FILE_TOOLS_FLAGS_H
-#define SYSTEM_FILE_MANAGE_FILE_TOOLS_FLAGS_H
+#ifndef SYSTEM_FILE_MANAGER_FILE_TOOLS_FLAGS_H
+#define SYSTEM_FILE_MANAGER_FILE_TOOLS_FLAGS_H
 
 #include "System/Helper/Platform.h"
 
@@ -73,6 +73,9 @@ namespace System
         SupportsSparseFiles = FILE_SUPPORTS_SPARSE_FILES,
         SupportsReparsePoints = FILE_SUPPORTS_REPARSE_POINTS,
         SupportsRemoteStorage = FILE_SUPPORTS_REMOTE_STORAGE,
+        ReturnsCleanupResultInfo = FILE_RETURNS_CLEANUP_RESULT_INFO,
+        SupportsPosixUnlinkRename = FILE_SUPPORTS_POSIX_UNLINK_RENAME,
+
         VolumeIsCompressed = FILE_VOLUME_IS_COMPRESSED,
         SupportsObjectIds = FILE_SUPPORTS_OBJECT_IDS,
         SupportsEncryption = FILE_SUPPORTS_ENCRYPTION,
@@ -84,6 +87,11 @@ namespace System
         SupportsExtendedAttributes = FILE_SUPPORTS_EXTENDED_ATTRIBUTES,
         SupportsOpenByFileID = FILE_SUPPORTS_OPEN_BY_FILE_ID,
         SupportsUsnJournal = FILE_SUPPORTS_USN_JOURNAL,
+        SupportsIntegrityStreams = FILE_SUPPORTS_INTEGRITY_STREAMS,
+        SupportsBlockRefcounting = FILE_SUPPORTS_BLOCK_REFCOUNTING,
+        SupportsSparseVdl = FILE_SUPPORTS_SPARSE_VDL,
+        DaxVolume = FILE_DAX_VOLUME,
+        SupportsGhosting = FILE_SUPPORTS_GHOSTING,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -145,6 +153,9 @@ namespace System
         SupportsSparseFiles = 0x00000040,
         SupportsReparsePoints = 0x00000080,
         SupportsRemoteStorage = 0x00000100,
+        ReturnsCleanupResultInfo = 0x00000200,
+        SupportsPosixUnlinkRename = 0x00000400,
+
         VolumeIsCompressed = 0x00008000,
         SupportsObjectIds = 0x00010000,
         SupportsEncryption = 0x00020000,
@@ -156,9 +167,14 @@ namespace System
         SupportsExtendedAttributes = 0x00800000,
         SupportsOpenByFileID = 0x01000000,
         SupportsUsnJournal = 0x02000000,
+        SupportsIntegrityStreams = 0x04000000,
+        SupportsBlockRefcounting = 0x08000000,
+        SupportsSparseVdl = 0x10000000,
+        DaxVolume = 0x20000000,
+        SupportsGhosting = 0x40000000,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-#endif  // SYSTEM_FILE_MANAGE_FILE_TOOLS_FLAGS_H
+#endif  // SYSTEM_FILE_MANAGER_FILE_TOOLS_FLAGS_H

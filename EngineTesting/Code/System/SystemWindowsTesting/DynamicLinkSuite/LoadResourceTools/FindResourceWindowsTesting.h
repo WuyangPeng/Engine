@@ -5,22 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/09 22:26)
+///	引擎测试版本：0.8.1.5 (2022/12/10 22:25)
 
-#ifndef SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_FIND_RESOURCE_WINDOWS_TESTING_H
-#define SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_FIND_RESOURCE_WINDOWS_TESTING_H
+#ifndef SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_FIND_RESOURCE_WINDOWS_TESTING_H
+#define SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_FIND_RESOURCE_WINDOWS_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <map>
+#include "ResourceWindowsTestingBase.h"
 
 namespace System
 {
-    class FindResourceWindowsTesting final : public CoreTools::UnitTest
+    class FindResourceWindowsTesting final : public ResourceWindowsTestingBase
     {
     public:
         using ClassType = FindResourceWindowsTesting;
-        using ParentType = UnitTest;
+        using ParentType = ResourceWindowsTestingBase;
 
     public:
         explicit FindResourceWindowsTesting(const OStreamShared& stream, WindowsHInstance instance);
@@ -34,13 +32,9 @@ namespace System
         void FindResourceTest();
         void FindResourceUseLanguageTest();
 
-    private:
-        using TypeNameContainer = std::map<WindowsWord, const DynamicLinkCharType*>;
-
-    private:
-        WindowsHInstance instance;
-        TypeNameContainer container;
+        void DoFindResourceTest(const DynamicLinkCharType* type, WindowsWord name);
+        void DoFindResourceUseLanguageTest(const DynamicLinkCharType* type, WindowsWord name);
     };
 }
 
-#endif  // SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_FIND_RESOURCE_WINDOWS_TESTING_H
+#endif  // SYSTEM_WINDOWS_TESTING_DYNAMIC_LINK_SUITE_FIND_RESOURCE_WINDOWS_TESTING_H

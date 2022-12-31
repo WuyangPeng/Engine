@@ -5,18 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:51)
+///	引擎测试版本：0.8.1.5 (2022/12/11 23:16)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_H
-#define SYSTEM_FILE_MANAGE_SUITE_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_H
+#define SYSTEM_FILE_MANAGER_SUITE_H
 
 #include "CFile/CFileCharacterTesting.h"
 #include "CFile/CFileOpenTesting.h"
 #include "CFile/CFileOperatorTesting.h"
-#include "CFile/CFileReadTesting.h"
-#include "CFile/CFileSetvBufTesting.h"
-#include "CFile/CFileWriteTesting.h"
+#include "CFile/CFileSetVBufferTesting.h"
+#include "CFile/CFileWriteReadTesting.h"
 #include "EnvironmentVariableTesting.h"
+#include "File/AppendFileTesting.h"
 #include "File/CopyFileTesting.h"
 #include "File/CreateExistingFileTesting.h"
 #include "File/CreateFileWithAttributesTesting.h"
@@ -29,11 +29,15 @@
 #include "File/MoveFileTesting.h"
 #include "File/OpenFileTesting.h"
 #include "File/ReadFileTesting.h"
+#include "File/ReadFileUseCompletionRoutineTesting.h"
+#include "File/ReadFileUseOverlappedTesting.h"
 #include "File/WriteFileTesting.h"
+#include "File/WriteFileUseCompletionRoutineTesting.h"
+#include "File/WriteFileUseOverlappedTesting.h"
 #include "FileTime/FileTimeCompareTesting.h"
 #include "FileTime/FileTimeConvertTesting.h"
 #include "FileTime/FileTimeTesting.h"
 #include "FileTools/CreateDirectoryTesting.h"
 #include "FileTools/DiskFreeTesting.h"
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_H

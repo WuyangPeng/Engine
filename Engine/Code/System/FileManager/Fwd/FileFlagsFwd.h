@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 22:16)
+///	引擎版本：0.8.1.5 (2022/12/11 20:27)
 
-#ifndef SYSTEM_FILE_FILE_FLAGS_FWD_H
-#define SYSTEM_FILE_FILE_FLAGS_FWD_H
+#ifndef SYSTEM_FILE_MANAGER_FILE_FLAGS_FWD_H
+#define SYSTEM_FILE_MANAGER_FILE_FLAGS_FWD_H
 
 #include "System/Helper/ConfigMacro.h"
 
@@ -16,7 +16,7 @@ namespace System
 {
     // CFile
     enum class FileSeek;
-    enum class FileSetvBuf;
+    enum class FileSetVBuffer;
 
     // File
     enum class FileHandleDesiredAccess : uint32_t;
@@ -39,4 +39,4 @@ namespace System
     enum class FileSystem;
 }
 
-#endif  // SYSTEM_FILE_FILE_FLAGS_FWD_H
+#endif  // SYSTEM_FILE_MANAGER_FILE_FLAGS_FWD_H

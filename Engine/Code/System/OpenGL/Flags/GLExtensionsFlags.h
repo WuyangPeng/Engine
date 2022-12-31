@@ -11,7 +11,7 @@
 #define SYSTEM_OPENGL_GL_EXTENSIONS_FLAGS_H
 
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/GLExtensionsMacro.h"
 
 namespace System

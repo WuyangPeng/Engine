@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:52)
+///	引擎测试版本：0.8.1.5 (2022/12/12 22:17)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_CFILE_OPERATOR_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_CFILE_OPERATOR_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_CFILE_OPERATOR_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_CFILE_OPERATOR_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "CFileTestingBase.h"
 
 namespace System
 {
-    class CFileOperatorTesting final : public CoreTools::UnitTest
+    class CFileOperatorTesting final : public CFileTestingBase
     {
     public:
         using ClassType = CFileOperatorTesting;
-        using ParentType = UnitTest;
+        using ParentType = CFileTestingBase;
 
     public:
         explicit CFileOperatorTesting(const OStreamShared& stream);
@@ -31,8 +31,14 @@ namespace System
 
         void OperatorTest();
 
-        NODISCARD static const String GetFileName();
+        void IsEOFTest(FILE* file);
+        void FlushTest(FILE* file);
+        void TellTest(FILE* file);
+        void PositionTest(FILE* file);
+        void RewindTest(FILE* file) noexcept;
+
+        NODISCARD CFileString GetFileName() const override;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_CFILE_OPERATOR_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_CFILE_OPERATOR_TESTING_H

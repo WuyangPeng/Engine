@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 20:00)
+///	引擎测试版本：0.8.1.5 (2022/12/15 21:15)
 
 #include "CreateDirectoryTesting.h"
 #include "System/FileManager/File.h"
@@ -18,7 +18,9 @@
 using namespace std::literals;
 
 System::CreateDirectoryTesting::CreateDirectoryTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      directoryName{ SYSTEM_TEXT("Resource/NewDirectory"s) },
+      fileName{ directoryName + SYSTEM_TEXT("/CreateDirectory.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -32,30 +34,37 @@ void System::CreateDirectoryTesting::DoRunUnitTest()
 
 void System::CreateDirectoryTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateFileFailTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CreateDirectoryTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateFileSuccessTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(RemoveDirectoryTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateFileFailTest);
+}
+
+void System::CreateDirectoryTesting::CreateFileFailTest()
+{
+    const auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
+
+    ASSERT_FALSE(IsFileHandleValid(handle));
 }
 
 void System::CreateDirectoryTesting::CreateDirectoryTest()
 {
-    const auto directoryName = SYSTEM_TEXT("Resource/NewDirectory"s);
-    const auto fileName = directoryName + SYSTEM_TEXT("/CreateDirectory.txt"s);
-
-    auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
-
-    ASSERT_FALSE(IsFileHandleValid(handle));
-
     ASSERT_TRUE(CreateFileDirectory(directoryName, nullptr));
+}
 
-    handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
+void System::CreateDirectoryTesting::CreateFileSuccessTest()
+{
+    const auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
 
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
+
+void System::CreateDirectoryTesting::RemoveDirectoryTest()
+{
     ASSERT_TRUE(RemoveSystemFile(fileName));
 
     ASSERT_TRUE(RemoveSystemDirectory(directoryName.c_str()));
-
-    handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
-
-    ASSERT_FALSE(IsFileHandleValid(handle));
 }

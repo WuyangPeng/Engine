@@ -5,22 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:07)
+///	引擎测试版本：0.8.1.5 (2022/12/09 13:55)
 
 #include "GetModuleFileNameTesting.h"
-#include "System/DynamicLink/Flags/GetModuleHandleFlags.h"
-#include "System/DynamicLink/Flags/LoadLibraryFlags.h"
 #include "System/DynamicLink/LibraryTools.h"
-#include "System/DynamicLink/LoadLibrary.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <array>
-
-using std::array;
-using namespace std::literals;
 
 System::GetModuleFileNameTesting::GetModuleFileNameTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,61 +34,60 @@ void System::GetModuleFileNameTesting::MainTest()
 
 void System::GetModuleFileNameTesting::GetModuleFileNameSucceedTest()
 {
-    auto libraryModule = GetDynamicLibrary();
+    const auto libraryModule = GetDynamicLibrary();
 
-    array<DynamicLinkCharType, gMaxPath> moduleFileName{};
+    ASSERT_NOT_THROW_EXCEPTION_1(DoGetModuleFileNameSucceedTest, libraryModule);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
+}
+
+void System::GetModuleFileNameTesting::DoGetModuleFileNameSucceedTest(const System::DynamicLinkModule libraryModule)
+{
+    const auto dllModuleFileName = GetDynamicLinkFileNameTest(libraryModule);
+
+    ASSERT_UNEQUAL(dllModuleFileName.find(GetResource()), DynamicLinkString::npos);
+    ASSERT_UNEQUAL(dllModuleFileName.find(GetResourcesLibrary()), DynamicLinkString::npos);
+}
+
+System::DynamicLinkString System::GetModuleFileNameTesting::GetDynamicLinkFileNameTest(System::DynamicLinkModule libraryModule)
+{
+    BufferType moduleFileName{};
     const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), gMaxPath);
 
     DynamicLinkString dllModuleFileName{ moduleFileName.data() };
 
+    ASSERT_NOT_THROW_EXCEPTION_3(DllModuleFileNameTest, maxFileNameLength, libraryModule, dllModuleFileName);
+
+    return dllModuleFileName;
+}
+
+void System::GetModuleFileNameTesting::DllModuleFileNameTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const DynamicLinkString& dllModuleFileName)
+{
     ASSERT_TRUE(0 < maxFileNameLength && maxFileNameLength < gMaxPath);
     ASSERT_EQUAL(dllModuleFileName.size(), maxFileNameLength);
 
-    ASSERT_UNEQUAL(dllModuleFileName.find(GetResource()), DynamicLinkString::npos);
-    ASSERT_UNEQUAL(dllModuleFileName.find(GetResourcesLibrary()), DynamicLinkString::npos);
-
-    Destroy(libraryModule);
+    ASSERT_EQUAL(dllModuleFileName, GetDynamicLinkFileName(libraryModule));
 }
 
 void System::GetModuleFileNameTesting::GetModuleFileNameFailureTest()
 {
-    auto libraryModule = GetDynamicLibrary();
-    Destroy(libraryModule);
+    const auto libraryModule = GetDynamicLibrary();
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    array<DynamicLinkCharType, gMaxPath> moduleFileName{};
+    BufferType moduleFileName{};
     const auto maxFileNameLength = GetDynamicLinkFileName(libraryModule, moduleFileName.data(), gMaxPath);
 
+    ASSERT_NOT_THROW_EXCEPTION_3(DllModuleFileNameFailureTest, maxFileNameLength, libraryModule, moduleFileName);
+}
+
+void System::GetModuleFileNameTesting::DllModuleFileNameFailureTest(WindowsDWord maxFileNameLength, DynamicLinkModule libraryModule, const BufferType& moduleFileName)
+{
     ASSERT_EQUAL(0u, maxFileNameLength);
 
     for (auto value : moduleFileName)
     {
         ASSERT_EQUAL(value, nullDynamicLinkChar);
     }
-}
 
-System::DynamicLinkString System::GetModuleFileNameTesting::GetResourcesLibraryName()
-{
-    return GetResource() + DYNAMIC_LINK_TEXT("/"s) + GetResourcesLibrary() + GetEngineeringSuffix();
-}
-
-System::DynamicLinkModule System::GetModuleFileNameTesting::GetDynamicLibrary()
-{
-    const auto resourcesLibraryDll = GetResourcesLibraryName();
-
-    return LoadDynamicLibrary(resourcesLibraryDll.c_str(), LoadLibraryType::DontResolveDllReferences);
-}
-
-void System::GetModuleFileNameTesting::Destroy(DynamicLinkModule dynamicLinkModule)
-{
-    ASSERT_TRUE(FreeDynamicLibrary(dynamicLinkModule));
-}
-
-System::DynamicLinkString System::GetModuleFileNameTesting::GetResource()
-{
-    return DYNAMIC_LINK_TEXT("Resource"s);
-}
-
-System::DynamicLinkString System::GetModuleFileNameTesting::GetResourcesLibrary()
-{
-    return DYNAMIC_LINK_TEXT("ResourcesLibrary"s);
+    ASSERT_TRUE(GetDynamicLinkFileName(libraryModule).empty());
 }

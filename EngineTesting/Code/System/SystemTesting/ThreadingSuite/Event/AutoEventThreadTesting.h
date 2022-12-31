@@ -10,6 +10,7 @@
 #ifndef SYSTEM_THREADING_SUITE_AUTO_EVENT_THREAD_TESTING_H
 #define SYSTEM_THREADING_SUITE_AUTO_EVENT_THREAD_TESTING_H
 
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System

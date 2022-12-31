@@ -399,7 +399,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\GlxExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Detail\OpenGL\WglExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\EnumCast.h" />
-    <ClInclude Include="..\..\..\Code\System\Helper\EnumMacro.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\EnumOperator.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\ExportMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\GLExtensionsMacro.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\Helper.h" />

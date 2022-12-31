@@ -5,24 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:52)
+///	引擎测试版本：0.8.1.5 (2022/12/03 20:17)
 
 #ifndef SYSTEM_CONSOLE_SUITE_TEXT_COLOUR_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_TEXT_COLOUR_TESTING_H
 
-#include "ConsoleColoursTesting.h"
-
-#include <map>
-#include <random>
-#include <vector>
+#include "ConsoleStandardHandlesTesting.h"
 
 namespace System
 {
-    class TextColourTesting final : public ConsoleColoursTesting
+    class TextColourTesting final : public ConsoleStandardHandlesTesting
     {
     public:
         using ClassType = TextColourTesting;
-        using ParentType = ConsoleColoursTesting;
+        using ParentType = ConsoleStandardHandlesTesting;
 
     public:
         explicit TextColourTesting(const OStreamShared& stream);
@@ -35,17 +31,16 @@ namespace System
 
         NODISCARD bool RandomShuffleFlags();
         void TextColourTest();
-        void SetDefaultTextAttribute();
+
+        void DoTextColourTest(size_t index);
 
     private:
-        using StandardHandleFlagsContainer = std::vector<StandardHandle>;
-        using TextColourFlagsContainer = std::vector<TextColour>;
-        using TextColourFlagsMapping = std::map<TextColour, BackgroundColour>;
+        using TextColourContainer = std::vector<TextColour>;
+        using TextColourMapping = std::map<TextColour, BackgroundColour>;
 
     private:
-        StandardHandleFlagsContainer standardHandleFlags;
-        TextColourFlagsContainer textColourFlags;
-        TextColourFlagsMapping textColourFlagsMapping;
+        TextColourContainer textColours;
+        TextColourMapping textColourMapping;
         std::default_random_engine randomEngine;
     };
 }

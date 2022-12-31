@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/25 21:13)
+///	引擎测试版本：0.8.1.5 (2022/12/18 10:42)
 
 #ifndef SYSTEM_TESTING_HELPER_SUITE_NOEXCEPT_TESTING_H
 #define SYSTEM_TESTING_HELPER_SUITE_NOEXCEPT_TESTING_H

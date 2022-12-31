@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:07)
+///	引擎测试版本：0.8.1.5 (2022/12/03 19:50)
 
 #include "ConsoleCommonTesting.h"
 #include "System/Console/ConsoleColours.h"
@@ -19,7 +19,6 @@
 
 System::ConsoleCommonTesting::ConsoleCommonTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      standardHandleFlags{ StandardHandle::Output, StandardHandle::Error },
       consoleCommonFlags{ ConsoleCommon::Default,
                           ConsoleCommon::LeadingByte,
                           ConsoleCommon::TrailingByte,
@@ -49,7 +48,7 @@ void System::ConsoleCommonTesting::MainTest()
 
 bool System::ConsoleCommonTesting::RandomShuffleFlags()
 {
-    shuffle(standardHandleFlags.begin(), standardHandleFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_1(RandomShuffleStandardHandle, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ConsoleCommonTest);
 
@@ -60,22 +59,18 @@ void System::ConsoleCommonTesting::ConsoleCommonTest()
 {
     for (auto index = 0u; index < consoleCommonFlags.size(); ++index)
     {
-        auto standardHandleFlag = standardHandleFlags.at(index % standardHandleFlags.size());
-        auto consoleCommonFlag = consoleCommonFlags.at(index % consoleCommonFlags.size());
-
-        const auto textColourFlag = TextColour::White;
-        const auto backgroundColourFlag = BackgroundColour::Black;
-
-        ASSERT_TRUE(SetSystemConsoleTextAttribute(GetStandardHandle(standardHandleFlag), textColourFlag, backgroundColourFlag, consoleCommonFlag));
-
-        PrintMessage(standardHandleFlag, textColourFlag, backgroundColourFlag, consoleCommonFlag);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoConsoleCommonTest, index);
     }
 }
 
-void System::ConsoleCommonTesting::SetDefaultTextAttribute()
+void System::ConsoleCommonTesting::DoConsoleCommonTest(size_t index)
 {
-    for (auto value : standardHandleFlags)
-    {
-        ASSERT_TRUE(SetSystemConsoleDefaultTextAttribute(GetStandardHandle(value)));
-    }
+    const auto standardHandle = GetConsoleStandardHandle(index);
+    const auto consoleCommon = consoleCommonFlags.at(index % consoleCommonFlags.size());
+    constexpr auto textColour = TextColour::White;
+    constexpr auto backgroundColour = BackgroundColour::Black;
+
+    ASSERT_TRUE(SetSystemConsoleTextAttribute(GetStandardHandle(standardHandle), textColour, backgroundColour, consoleCommon));
+
+    PrintMessage(standardHandle, textColour, backgroundColour, consoleCommon);
 }

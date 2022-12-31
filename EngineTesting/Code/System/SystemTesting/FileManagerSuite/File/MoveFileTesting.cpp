@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:59)
+///	引擎测试版本：0.8.1.5 (2022/12/14 17:43)
 
 #include "MoveFileTesting.h"
 #include "System/FileManager/File.h"
@@ -17,7 +17,9 @@
 using namespace std::literals;
 
 System::MoveFileTesting::MoveFileTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      oldName{ SYSTEM_TEXT("Resource/FileTesting/Change.txt"s) },
+      newName{ SYSTEM_TEXT("Resource/FileTesting/NewChange.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -36,28 +38,42 @@ void System::MoveFileTesting::MainTest()
 
 void System::MoveFileTesting::MoveFileTest()
 {
-    const auto oldName = SYSTEM_TEXT("Resource/FileTesting/Change.txt"s);
-    const auto newName = SYSTEM_TEXT("Resource/FileTesting/NewChange.txt"s);
-
-    auto handle = CreateSystemFile(oldName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
-
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateAlwaysTest);
 
     ASSERT_TRUE(MoveSystemFile(oldName, newName));
 
-    handle = CreateSystemFile(newName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+    ASSERT_NOT_THROW_EXCEPTION_0(MoveSuccessTest);
 
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
+    ASSERT_NOT_THROW_EXCEPTION_0(RemoveFileTest);
+}
 
-    handle = CreateSystemFile(oldName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+void System::MoveFileTesting::CreateAlwaysTest()
+{
+    const auto handle = CreateSystemFile(oldName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
 
-    ASSERT_FALSE(IsFileHandleValid(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
+
+void System::MoveFileTesting::MoveSuccessTest()
+{
+    const auto invalidHandle = CreateSystemFile(oldName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+
+    ASSERT_FALSE(IsFileHandleValid(invalidHandle));
+
+    const auto validHandle = CreateSystemFile(newName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, validHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, validHandle);
+}
+
+void System::MoveFileTesting::RemoveFileTest()
+{
     ASSERT_TRUE(RemoveSystemFile(newName));
 
-    handle = CreateSystemFile(newName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+    const auto handle = CreateSystemFile(newName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
 
     ASSERT_FALSE(IsFileHandleValid(handle));
 }

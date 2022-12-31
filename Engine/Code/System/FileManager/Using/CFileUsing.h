@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 22:16)
+///	引擎版本：0.8.1.5 (2022/12/11 20:27)
 
-#ifndef SYSTEM_FILE_MANAGE_C_FILE_USING_H
-#define SYSTEM_FILE_MANAGE_C_FILE_USING_H
+#ifndef SYSTEM_FILE_MANAGER_C_FILE_USING_H
+#define SYSTEM_FILE_MANAGER_C_FILE_USING_H
 
 #include "System/Helper/Platform.h"
 #include "System/Helper/UnicodeUsing.h"
@@ -41,6 +41,18 @@ namespace System
     #define SYSTEM_FILE_TEXT(quote) SYSTEM_TEXT(quote)
 
 #endif  // TCRE_USE_GCC
+
+#if defined(SYSTEM_PLATFORM_LINUX)
+
+    #define STAT_STRUCT stat
+    #define STAT_FUNCTION stat
+
+#else  // !SYSTEM_PLATFORM_LINUX
+
+    #define STAT_STRUCT _stat
+    #define STAT_FUNCTION _tstat
+
+#endif  // SYSTEM_PLATFORM_LINUX
 }
 
-#endif  // SYSTEM_FILE_MANAGE_C_FILE_USING_H
+#endif  // SYSTEM_FILE_MANAGER_C_FILE_USING_H

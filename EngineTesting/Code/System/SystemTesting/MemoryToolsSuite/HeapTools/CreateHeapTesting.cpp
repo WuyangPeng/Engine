@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:36)
+///	引擎测试版本：0.8.1.5 (2022/12/21 22:53)
 
 #include "CreateHeapTesting.h"
-#include "System/MemoryTools/Flags/HeapToolsFlags.h"
 #include "System/MemoryTools/HeapTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -17,7 +16,7 @@
 using std::numeric_limits;
 
 System::CreateHeapTesting::CreateHeapTesting(const OStreamShared& stream)
-    : ParentType{ stream }, heapCreateFlags{ HeapCreate::Default, HeapCreate::NoSerialize, HeapCreate::GenerateExceptions, HeapCreate::CreateEnableExecute }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -37,33 +36,37 @@ void System::CreateHeapTesting::MainTest()
 
 void System::CreateHeapTesting::CreateHeapSucceedTest()
 {
-    for (auto flag : heapCreateFlags)
+    for (auto heapCreate : *this)
     {
-        DoCreateHeapSucceedTest(flag);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateHeapSucceedTest, heapCreate);
+        ASSERT_NOT_THROW_EXCEPTION_1(CreateDefaultHeapSucceedTest, heapCreate);
     }
 }
 
 void System::CreateHeapTesting::DoCreateHeapSucceedTest(HeapCreate flag)
 {
-    constexpr WindowsSize initialSize{ 256 };
-    constexpr WindowsSize maximumSize{ 512 };
+    constexpr WindowsSize initialSize{ 256u };
+    constexpr WindowsSize maximumSize{ 512u };
 
-    auto handle = CreateProcessHeap(flag, initialSize, maximumSize);
+    const auto handle = CreateProcessHeap(flag, initialSize, maximumSize);
 
     ASSERT_UNEQUAL_NULL_PTR(handle);
 
-    ASSERT_TRUE(DestroyProcessHeap(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, handle);
+}
 
-    auto defaultHandle = CreateProcessHeap(flag, 0, 0);
+void System::CreateHeapTesting::CreateDefaultHeapSucceedTest(HeapCreate flag)
+{
+    const auto defaultHandle = CreateProcessHeap(flag, 0, 0);
 
     ASSERT_UNEQUAL_NULL_PTR(defaultHandle);
 
-    ASSERT_TRUE(DestroyProcessHeap(defaultHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, defaultHandle);
 }
 
 void System::CreateHeapTesting::CreateHeapFailureTest()
 {
-    for (auto flag : heapCreateFlags)
+    for (auto flag : *this)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(DoCreateHeapFailureTest, flag);
     }
@@ -71,15 +74,12 @@ void System::CreateHeapTesting::CreateHeapFailureTest()
 
 void System::CreateHeapTesting::DoCreateHeapFailureTest(HeapCreate flag)
 {
-    constexpr WindowsSize initialSize{ numeric_limits<WindowsSize>::max() };
-    constexpr WindowsSize maximumSize{ numeric_limits<WindowsSize>::max() };
+    constexpr auto initialSize = numeric_limits<WindowsSize>::max();
+    constexpr auto maximumSize = numeric_limits<WindowsSize>::max();
 
-    auto handle = CreateProcessHeap(flag, initialSize, maximumSize);
+    const auto handle = CreateProcessHeap(flag, initialSize, maximumSize);
 
     ASSERT_EQUAL_NULL_PTR(handle);
 
-    if (handle != nullptr)
-    {
-        ASSERT_TRUE(DestroyProcessHeap(handle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyHeapTest, handle);
 }

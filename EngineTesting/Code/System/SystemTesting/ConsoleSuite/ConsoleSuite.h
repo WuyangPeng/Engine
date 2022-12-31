@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:50)
+///	引擎测试版本：0.8.1.5 (2022/12/03 10:53)
 
 #ifndef SYSTEM_CONSOLE_SUITE_H
 #define SYSTEM_CONSOLE_SUITE_H
@@ -19,9 +19,12 @@
 #include "ConsoleColours/TextColourTesting.h"
 #include "ConsoleColours/WriteAttributeTesting.h"
 #include "ConsoleCreateTesting.h"
-#include "ConsoleFontTesting.h"
+#include "ConsoleFont/ConsoleFontSizeTesting.h"
+#include "ConsoleFont/CurrentConsoleFontTesting.h"
+#include "ConsoleFont/SetCurrentConsoleFontTesting.h"
 #include "ConsoleHandleTesting.h"
-#include "ConsoleModeTesting.h"
+#include "ConsoleMode/ConsoleInputModeTesting.h"
+#include "ConsoleMode/ConsoleOutputModeTesting.h"
 #include "ConsoleScreenBuffer/ConsoleScreenBufferInfoTesting.h"
 #include "ConsoleScreenBuffer/CreateSystemConsoleScreenBufferTesting.h"
 #include "ConsoleScreenBuffer/SetConsoleHandleScreenBufferInfoTesting.h"

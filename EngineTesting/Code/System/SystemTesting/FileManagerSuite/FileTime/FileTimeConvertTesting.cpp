@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 20:00)
+///	引擎测试版本：0.8.1.5 (2022/12/15 22:08)
 
 #include "FileTimeConvertTesting.h"
 #include "System/FileManager/File.h"
@@ -19,7 +19,7 @@
 using namespace std::literals;
 
 System::FileTimeConvertTesting::FileTimeConvertTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -38,15 +38,20 @@ void System::FileTimeConvertTesting::MainTest()
 
 void System::FileTimeConvertTesting::FileTimeTest()
 {
-    const auto existingFileName = SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s);
-
     auto handle = CreateSystemFile(existingFileName, FileHandleDesiredAccess::Write, FileHandleShareMode::ShareWrite, FileHandleCreationDisposition::CreateAlways);
-    ASSERT_TRUE(IsFileHandleValid(handle));
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoFileTimeTest, handle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
+
+void System::FileTimeConvertTesting::DoFileTimeTest(WindowsHandle handle)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
 
     FileTime creationTime{};
     FileTime lastAccessTime{};
     FileTime lastWriteTime{};
-
     ASSERT_TRUE(GetSystemFileTime(handle, &creationTime, &lastAccessTime, &lastWriteTime));
 
     FileTime localFileTime{};
@@ -55,8 +60,11 @@ void System::FileTimeConvertTesting::FileTimeTest()
     FileTime fileTime{};
     ASSERT_TRUE(LocalFileTimeConvertFileTime(&localFileTime, &fileTime));
 
+    ASSERT_NOT_THROW_EXCEPTION_2(ResultTest, creationTime, fileTime);
+}
+
+void System::FileTimeConvertTesting::ResultTest(const FileTime& creationTime, const FileTime& fileTime)
+{
     ASSERT_EQUAL(creationTime.dwLowDateTime, fileTime.dwLowDateTime);
     ASSERT_EQUAL(creationTime.dwHighDateTime, fileTime.dwHighDateTime);
-
-    ASSERT_TRUE(CloseSystemFile(handle));
 }

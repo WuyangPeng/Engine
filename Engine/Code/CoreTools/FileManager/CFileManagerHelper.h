@@ -36,6 +36,8 @@ namespace CoreTools
 
         // 附加缓冲区到一个文件中。
         static void AppendToFile(const String& fileName, bool binaryFile, int bufferSize, const char* buffer);
+
+        NODISCARD static std::string LoadFromFile(const std::string& fileName);
     };
 }
 

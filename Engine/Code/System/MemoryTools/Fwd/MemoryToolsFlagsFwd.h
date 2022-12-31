@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 14:52)
+///	引擎版本：0.8.1.5 (2022/12/18 19:07)
 
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H
@@ -32,7 +32,7 @@ namespace System
 
     // VirtualTools
     enum class MemoryAllocation : uint32_t;
-    enum class MemoryProtect;
+    enum class MemoryProtect : uint32_t;
 }
 
 #endif  // SYSTEM_MEMORY_TOOLS_MEMORY_TOOLS_FLAGS_FWD_H

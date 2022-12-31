@@ -11,6 +11,7 @@
 #define SYSTEM_MEMORY_TOOLS_SUITE_VIRTUAL_QUERY_TESTING_H
 
 #include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <random>

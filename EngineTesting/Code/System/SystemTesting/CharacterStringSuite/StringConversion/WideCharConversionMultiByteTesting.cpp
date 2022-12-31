@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:25)
+///	引擎测试版本：0.8.1.5 (2022/12/01 0:33)
 
 #include "WideCharConversionMultiByteTesting.h"
 #include "System/CharacterString/CodePage.h"
@@ -16,14 +16,13 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
-using std::array;
-using std::string;
-using std::wstring;
+using namespace std::literals;
 
 System::WideCharConversionMultiByteTesting::WideCharConversionMultiByteTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream, 30, "WideChar字符串转换为MultiByte" },  // 英文按1个长度算，中文按2个长度算，包括终止符。
+      wideCharInitial{ L"WideChar字符串转换为MultiByte" },
+      wideCharInitialLength{ boost::numeric_cast<int>(wideCharInitial.size() + 1) },
+      codePage{ GetANSICodePage() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -40,61 +39,78 @@ void System::WideCharConversionMultiByteTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(WideCharToMultiByteTest);
     ASSERT_NOT_THROW_EXCEPTION_1(WideCharToMultiByteUseFlagTest, WideChar::NoFlags);
     ASSERT_NOT_THROW_EXCEPTION_1(WideCharToMultiByteUseFlagTest, WideChar::NoBestFitChars);
+    ASSERT_NOT_THROW_EXCEPTION_1(WideCharToMultiByteUseFlagAndUsedDefaultChar, WideChar::NoFlags);
+    ASSERT_NOT_THROW_EXCEPTION_1(WideCharToMultiByteUseFlagAndUsedDefaultChar, WideChar::NoBestFitChars);
 }
 
 void System::WideCharConversionMultiByteTesting::WideCharToMultiByteTest()
 {
-    constexpr auto bufferSize = 256;
-    const wstring wideCharInitial{ L"WideChar字符串转换为MultiByte" };
-    const string multiByteHelpResult{ "WideChar字符串转换为MultiByte" };
-    constexpr auto minLength = 30;  // 英文按1个长度算，中文按2个长度算，包括终止符。
+    const auto multiByteLength = WideCharConversionMultiByte(wideCharInitial.c_str(),
+                                                             wideCharInitialLength,
+                                                             nullptr,
+                                                             0);
+    LengthChecking(multiByteLength);
 
-    const auto multiByteLength = WideCharConversionMultiByte(wideCharInitial.c_str(), boost::numeric_cast<int>(wideCharInitial.size() + 1), nullptr, 0);
+    MultiByteType multiByte{};
+    const auto multiByteActualLength = WideCharConversionMultiByte(wideCharInitial.c_str(),
+                                                                   wideCharInitialLength,
+                                                                   multiByte.data(),
+                                                                   multiByteLength);
 
-    ASSERT_TRUE_FAILURE_THROW(minLength <= multiByteLength && multiByteLength < bufferSize, "转换字符串失败。");
-
-    array<char, bufferSize> multiByte{};
-
-    const auto multiByteResultLength = WideCharConversionMultiByte(wideCharInitial.c_str(), boost::numeric_cast<int>(wideCharInitial.size() + 1), multiByte.data(), multiByteLength);
-
-    string multiByteResult{ multiByte.data() };
-    ASSERT_EQUAL(multiByteResultLength, boost::numeric_cast<int>(multiByteResult.size() + 1));
-
-    ASSERT_EQUAL(multiByteResult, multiByteHelpResult);
-    ASSERT_EQUAL(multiByteResultLength, multiByteLength);
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultChecking, multiByte, multiByteActualLength, multiByteLength);
 }
 
 void System::WideCharConversionMultiByteTesting::WideCharToMultiByteUseFlagTest(WideChar wideChar)
 {
-    constexpr auto bufferSize = 256;
-    const wstring wideCharInitial{ L"WideChar字符串转换为MultiByte" };
-    const string multiByteHelpResult{ "WideChar字符串转换为MultiByte" };
-    constexpr auto minLength = 30;  // 英文按1个长度算，中文按2个长度算，包括终止符。
-    const auto codePage = GetANSICodePage();
+    const auto multiByteLength = WideCharConversionMultiByte(codePage,
+                                                             wideChar,
+                                                             wideCharInitial.c_str(),
+                                                             wideCharInitialLength,
+                                                             nullptr,
+                                                             0,
+                                                             nullptr,
+                                                             nullptr);
+    LengthChecking(multiByteLength);
 
-    const string defaultChar{ "a" };
-    auto usedDefaultChar = true;
-
-    const auto multiByteLength = WideCharConversionMultiByte(codePage, wideChar, wideCharInitial.c_str(), boost::numeric_cast<int>(wideCharInitial.size() + 1), nullptr, 0, defaultChar.c_str(), &usedDefaultChar);
-
-    ASSERT_EQUAL(usedDefaultChar, false);
-    ASSERT_TRUE_FAILURE_THROW(minLength <= multiByteLength && multiByteLength < bufferSize, "转换字符串失败。");
-
-    array<char, bufferSize> multiByte{};
-
-    const auto multiByteResultLength = WideCharConversionMultiByte(codePage,
+    MultiByteType multiByte{};
+    const auto multiByteActualLength = WideCharConversionMultiByte(codePage,
                                                                    wideChar,
                                                                    wideCharInitial.c_str(),
-                                                                   boost::numeric_cast<int>(wideCharInitial.size() + 1),
+                                                                   wideCharInitialLength,
+                                                                   multiByte.data(),
+                                                                   multiByteLength,
+                                                                   nullptr,
+                                                                   nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultChecking, multiByte, multiByteActualLength, multiByteLength);
+}
+
+void System::WideCharConversionMultiByteTesting::WideCharToMultiByteUseFlagAndUsedDefaultChar(WideChar wideChar)
+{
+    const auto defaultChar = "a"s;
+    auto usedDefaultChar = true;
+
+    const auto multiByteLength = WideCharConversionMultiByte(codePage,
+                                                             wideChar,
+                                                             wideCharInitial.c_str(),
+                                                             wideCharInitialLength,
+                                                             nullptr,
+                                                             0,
+                                                             defaultChar.c_str(),
+                                                             &usedDefaultChar);
+    ASSERT_EQUAL(usedDefaultChar, false);
+    LengthChecking(multiByteLength);
+
+    MultiByteType multiByte{};
+    const auto multiByteActualLength = WideCharConversionMultiByte(codePage,
+                                                                   wideChar,
+                                                                   wideCharInitial.c_str(),
+                                                                   wideCharInitialLength,
                                                                    multiByte.data(),
                                                                    multiByteLength,
                                                                    defaultChar.c_str(),
                                                                    &usedDefaultChar);
 
     ASSERT_EQUAL(usedDefaultChar, false);
-    string multiByteResult{ multiByte.data() };
-    ASSERT_EQUAL(multiByteResultLength, boost::numeric_cast<int>(multiByteResult.size() + 1));
-
-    ASSERT_EQUAL(multiByteResult, multiByteHelpResult);
-    ASSERT_EQUAL(multiByteResultLength, multiByteLength);
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultChecking, multiByte, multiByteActualLength, multiByteLength);
 }

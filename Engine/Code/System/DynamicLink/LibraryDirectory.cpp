@@ -5,12 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:41)
+///	引擎版本：0.8.1.5 (2022/12/08 18:34)
 
 #include "System/SystemExport.h"
 
 #include "LibraryDirectory.h"
 #include "System/Helper/WindowsMacro.h"
+
+#include <array>
 
 bool System::SetLibraryDirectory(const DynamicLinkCharType* pathName) noexcept
 {
@@ -43,4 +45,17 @@ System::WindowsDWord System::GetLibraryDirectory(WindowsDWord bufferLength, Dyna
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+System::String System::GetLibraryDirectory()
+{
+    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
+
+    BufferType buffer{};
+    const auto size = GetLibraryDirectory(gMaxPath - 1, buffer.data());
+
+    if (0 < size)
+        return String{ buffer.data() };
+    else
+        return String{};
 }

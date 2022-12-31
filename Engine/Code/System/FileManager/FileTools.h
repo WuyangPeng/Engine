@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:28)
+///	引擎版本：0.8.1.5 (2022/12/11 20:38)
 
-#ifndef SYSTEM_FILE_MANAGE_FILE_TOOLS_H
-#define SYSTEM_FILE_MANAGE_FILE_TOOLS_H
+#ifndef SYSTEM_FILE_MANAGER_FILE_TOOLS_H
+#define SYSTEM_FILE_MANAGER_FILE_TOOLS_H
 
 #include "System/SystemDll.h"
 
@@ -19,10 +19,9 @@
 
 #include <string>
 
+// 文件管理辅助工具
 namespace System
 {
-    // 文件管理辅助工具
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateFileDirectory(const String& pathName, WindowSecurityAttributesPtr securityAttributes) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveSystemDirectory(const TChar* pathName) noexcept;
 
@@ -37,4 +36,4 @@ namespace System
                                                                    WindowsULargeIntegerPtr totalNumberOfFreeBytes) noexcept;
 }
 
-#endif  // SYSTEM_FILE_MANAGE_FILE_TOOLS_H
+#endif  // SYSTEM_FILE_MANAGER_FILE_TOOLS_H

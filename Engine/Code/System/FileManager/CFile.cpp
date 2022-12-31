@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:28)
+///	引擎版本：0.8.1.5 (2022/12/11 20:39)
 
 #include "System/SystemExport.h"
 
@@ -19,8 +19,6 @@
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #include <vector>
-
-using namespace std::literals;
 
 bool System::OpenCFile(FILE*& file, const CFileString& fileName, const CFileString& mode) noexcept
 {
@@ -62,13 +60,11 @@ size_t System::WriteCFile(const void* buffer, size_t size, size_t count, FILE* s
 
 bool System::GetFileLength(const CFileString& fileName, OffType* length) noexcept
 {
-#if defined(SYSTEM_PLATFORM_LINUX)
-
-    struct stat statistics
+    struct STAT_STRUCT statistics
     {
     };
 
-    if (stat(fileName.c_str(), &statistics) == 0)
+    if (::STAT_FUNCTION(fileName.c_str(), &statistics) == 0)
     {
         if (length != nullptr)
         {
@@ -84,34 +80,9 @@ bool System::GetFileLength(const CFileString& fileName, OffType* length) noexcep
         }
         return false;
     }
-
-#else  // !SYSTEM_PLATFORM_LINUX
-
-    struct _stat statistics
-    {
-    };
-
-    if (::_tstat(fileName.c_str(), &statistics) == 0)
-    {
-        if (length != nullptr)
-        {
-            *length = statistics.st_size;
-        }
-        return true;
-    }
-    else
-    {
-        if (length != nullptr)
-        {
-            *length = 0;
-        }
-        return false;
-    }
-
-#endif  // SYSTEM_PLATFORM_LINUX
 }
 
-bool System::SetvBuf(FILE* file, FileSetvBuf type, size_t size) noexcept
+bool System::SetVBuffer(FILE* file, FileSetVBuffer type, size_t size) noexcept
 {
     if (::setvbuf(file, nullptr, EnumCastUnderlying(type), size) == 0)
         return true;
@@ -150,15 +121,15 @@ bool System::PutString(FILE* file, const char* str) noexcept
 
 std::string System::GetString(FILE* file, int count)
 {
-    std::vector<char> str(count);
+    std::vector<char> result(count);
 
-    if (::fgets(str.data(), count, file) != nullptr)
+    if (::fgets(result.data(), count, file) != nullptr)
     {
-        return std::string{ str.data() };
+        return std::string{ result.data() };
     }
     else
     {
-        return ""s;
+        return std::string{};
     }
 }
 

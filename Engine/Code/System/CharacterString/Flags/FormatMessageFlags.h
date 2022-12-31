@@ -10,7 +10,7 @@
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_MESSAGE_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_MESSAGE_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -80,7 +80,6 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    ENUM_ORABLE_OPERATOR_DEFINE(FormatMessageOption);
 }
 
 #endif  // SYSTEM_CHARACTER_STRING_WINDOW_ERROR_FLAGS_H

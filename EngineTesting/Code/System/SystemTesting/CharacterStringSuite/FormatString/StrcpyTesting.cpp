@@ -13,8 +13,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
 using namespace std::literals;
 
 System::StrcpyTesting::StrcpyTesting(const OStreamShared& stream)
@@ -37,8 +35,7 @@ void System::StrcpyTesting::MainTest()
 
 void System::StrcpyTesting::StrcpyTest()
 {
-    constexpr auto maxCharactersSize = 256;
-    std::array<char, maxCharactersSize> ext{};
+    BufferType ext{};
     const auto value = "value"s;
 
     ASSERT_TRUE(Strcpy(ext.data(), value.size() + 1, value.c_str()));

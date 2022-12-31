@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 14:51)
+///	引擎版本：0.8.1.5 (2022/12/18 18:42)
 
 #ifndef SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/Platform.h"
 
 namespace System
@@ -76,9 +76,6 @@ namespace System
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
-    // 定义operator &和|运算符。
-    ENUM_ANDABLE_OPERATOR_DEFINE(LocalMemory);
-    ENUM_ORABLE_OPERATOR_DEFINE(LocalMemory);
 }
 
 #endif  // SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H

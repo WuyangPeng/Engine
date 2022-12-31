@@ -177,6 +177,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -189,6 +195,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -205,6 +217,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -221,6 +239,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -233,6 +257,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <ClCompile>
@@ -245,6 +275,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -261,6 +297,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -277,6 +319,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTestingBase.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/EnumResourceToolsTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y
+xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/ResourceEnumTesting.*" "../../../Code/System/SystemWindowsTesting/DynamicLinkSuite/EnumResourceTools/" /F /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Configuration\EnvironmentVariable.json" />
@@ -289,11 +337,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\DynamicLinkSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsWindowsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumWindowsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceToolsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\FindResourceWindowsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceWindowsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadStringWindowsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSuite.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\Testing.h" />
@@ -324,11 +377,16 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsWindowsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumWindowsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceToolsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\FindResourceWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadStringWindowsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingMain.cpp" />

@@ -5,24 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:17)
+///	引擎测试版本：0.8.1.5 (2022/12/02 14:40)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_USE_LOCALE_FLAGS_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_USE_LOCALE_FLAGS_TESTING_H
 
-#include "CompareStringTesting.h"
+#include "CompareStringUseLocaleTestingBase.h"
 #include "System/CharacterString/Fwd/CharacterStringFlagsFwd.h"
-
-#include <random>
-#include <vector>
 
 namespace System
 {
-    class CompareStringUseLocaleFlagsTesting final : public CompareStringTesting
+    class CompareStringUseLocaleFlagsTesting final : public CompareStringUseLocaleTestingBase
     {
     public:
         using ClassType = CompareStringUseLocaleFlagsTesting;
-        using ParentType = CompareStringTesting;
+        using ParentType = CompareStringUseLocaleTestingBase;
 
     public:
         explicit CompareStringUseLocaleFlagsTesting(const OStreamShared& stream);
@@ -35,16 +32,18 @@ namespace System
 
         NODISCARD bool RandomShuffleFlags();
         void CompareStringUseLocaleFlagsTest();
+        void CompareStringTest(size_t index);
+
+        void CompareStringEqualTest(LanguageLocale languageLocale, Compares compare, const String& comparesString);
+        void CompareStringOppositeTest(LanguageLocale languageLocale, Compares compare, const String& lhsComparesString, const String& rhsComparesString);
 
     private:
-        using LanguageLocaleFlagsContainer = std::vector<LanguageLocale>;
-        using ComparesFlagsContainer = std::vector<Compares>;
+        using LanguageLocaleContainer = std::vector<LanguageLocale>;
         using ComparesStringContainer = std::vector<String>;
 
     private:
-        LanguageLocaleFlagsContainer languageLocaleFlags;
-        ComparesFlagsContainer comparesFlags;
-        ComparesStringContainer comparesString;
+        LanguageLocaleContainer languageLocales;
+        ComparesStringContainer comparesStrings;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

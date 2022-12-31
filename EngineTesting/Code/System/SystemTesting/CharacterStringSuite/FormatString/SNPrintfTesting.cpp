@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
 using namespace std::literals;
 
 #define OPEN_SNPRINTF_ERROR
@@ -41,10 +39,9 @@ void System::SNPrintfTesting::MainTest()
 
 void System::SNPrintfTesting::SnprintTest()
 {
-    constexpr auto bufferSize = 256;
     const auto result = "5snprintf8"s;
 
-    std::array<char, bufferSize> buffer{ 'a' };
+    BufferType buffer{ 'a' };
 
     const auto count = SNPrintf(buffer.data(), result.size() + 1, bufferSize - 1, "%d%s%d", 5, "snprintf", 8);
 

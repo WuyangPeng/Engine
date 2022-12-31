@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/13 17:06)
+///	引擎测试版本：0.8.1.5 (2022/12/16 22:25)
 
 #include "FixedSizeTesting.h"
 #include "System/Helper/ConfigMacro.h"
@@ -40,6 +40,7 @@ void System::FixedSizeTesting::IntegerSizeTest()
     ASSERT_EQUAL(sizeof(int16_t), 2u);
     ASSERT_EQUAL(sizeof(int32_t), 4u);
     ASSERT_EQUAL(sizeof(int64_t), 8u);
+
     ASSERT_EQUAL(sizeof(uint8_t), 1u);
     ASSERT_EQUAL(sizeof(uint16_t), 2u);
     ASSERT_EQUAL(sizeof(uint32_t), 4u);

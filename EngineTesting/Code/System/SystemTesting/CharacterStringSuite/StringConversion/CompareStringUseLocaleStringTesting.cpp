@@ -5,13 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:23)
+///	引擎测试版本：0.8.1.5 (2022/12/02 15:14)
 
 #include "CompareStringUseLocaleStringTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
 #include "System/CharacterString/StringConversion.h"
 #include "System/CharacterString/Using/StringConversionUsing.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/MaxElement.h"
@@ -19,44 +18,36 @@
 
 System::CompareStringUseLocaleStringTesting::CompareStringUseLocaleStringTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      languageLocaleString{ gLocaleUserDefault, gLocaleNameInvariant, gLocaleSystemDefault },
-      comparesFlags{ Compares::NormIgnoreCase,
-                     Compares::NormIgnoreNonSpace,
-                     Compares::NormIgnoreSymbols,
-                     Compares::LinguisticIgnoreCase,
-                     Compares::LinguisticIgnoreDiacritic,
-                     Compares::NormIgnoreKanaType,
-                     Compares::NormIgnoreWidth,
-                     Compares::NormLinguisticCasing,
-                     Compares::SortStringSort,
-                     Compares::SortDigitsAsNumbers },
-      wComparesString{ L"啊",
-                       L"吧",
-                       L"抽",
-                       L"的",
-                       L"额",
-                       L"发",
-                       L"给",
-                       L"胡",
-                       L"奖",
-                       L"看",
-                       L"了",
-                       L"吗",
-                       L"你",
-                       L"哦",
-                       L"平",
-                       L"气",
-                       L"人",
-                       L"是",
-                       L"他",
-                       L"我",
-                       L"想",
-                       L"要",
-                       L"做",
-                       L"a",
-                       L"A",
-                       L"0" },
-      maxSize{ CoreTools::MaxElement<size_t>({ languageLocaleString.size(), comparesFlags.size(), wComparesString.size() }) },
+      languageLocaleStrings{ gLocaleUserDefault,
+                             gLocaleNameInvariant,
+                             gLocaleSystemDefault },
+      comparesWStrings{ L"啊",
+                        L"吧",
+                        L"抽",
+                        L"的",
+                        L"额",
+                        L"发",
+                        L"给",
+                        L"胡",
+                        L"奖",
+                        L"看",
+                        L"了",
+                        L"吗",
+                        L"你",
+                        L"哦",
+                        L"平",
+                        L"气",
+                        L"人",
+                        L"是",
+                        L"他",
+                        L"我",
+                        L"想",
+                        L"要",
+                        L"做",
+                        L"a",
+                        L"A",
+                        L"0" },
+      maxSize{ CoreTools::MaxElement<size_t>({ languageLocaleStrings.size(), GetComparesSize(), comparesWStrings.size() }) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -76,9 +67,9 @@ void System::CompareStringUseLocaleStringTesting::MainTest()
 
 bool System::CompareStringUseLocaleStringTesting::RandomShuffleFlags()
 {
-    shuffle(languageLocaleString.begin(), languageLocaleString.end(), randomEngine);
-    shuffle(comparesFlags.begin(), comparesFlags.end(), randomEngine);
-    shuffle(wComparesString.begin(), wComparesString.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_1(RandomShuffleCompares, randomEngine);
+    shuffle(languageLocaleStrings.begin(), languageLocaleStrings.end(), randomEngine);
+    shuffle(comparesWStrings.begin(), comparesWStrings.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CompareStringUseLocaleStringTest);
 
@@ -89,30 +80,34 @@ void System::CompareStringUseLocaleStringTesting::CompareStringUseLocaleStringTe
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto languageLocale = languageLocaleString.at(index % languageLocaleString.size());
-        auto compares = comparesFlags.at(index % comparesFlags.size());
-        auto lhsComparesString = wComparesString.at(index % wComparesString.size());
-
-        const auto returnFlag = CompareStringUseLocale(languageLocale,
-                                                       compares,
-                                                       lhsComparesString,
-                                                       lhsComparesString);
-        ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
-
-        const auto nextIndex = (index + 1);
-
-        const auto rhsComparesString = wComparesString.at(nextIndex % wComparesString.size());
-
-        const auto lhsCompareRhs = CompareStringUseLocale(languageLocale,
-                                                          compares,
-                                                          lhsComparesString,
-                                                          rhsComparesString);
-
-        const auto rhsCompareLhs = CompareStringUseLocale(languageLocale,
-                                                          compares,
-                                                          rhsComparesString,
-                                                          lhsComparesString);
-
-        CompareTest(lhsCompareRhs, rhsCompareLhs);
+        ASSERT_NOT_THROW_EXCEPTION_1(CompareStringTest, index);
     }
+}
+
+void System::CompareStringUseLocaleStringTesting::CompareStringTest(size_t index)
+{
+    const auto compare = GetCompares(index);
+    auto languageLocaleString = languageLocaleStrings.at(index % languageLocaleStrings.size());
+    auto lhsComparesWString = comparesWStrings.at(index % comparesWStrings.size());
+
+    ASSERT_NOT_THROW_EXCEPTION_3(CompareStringEqualTest, languageLocaleString, compare, lhsComparesWString);
+
+    const auto nextIndex = index + 1;
+    const auto rhsComparesWString = comparesWStrings.at(nextIndex % comparesWStrings.size());
+
+    CompareStringOppositeTest(languageLocaleString, compare, lhsComparesWString, rhsComparesWString);
+}
+
+void System::CompareStringUseLocaleStringTesting::CompareStringEqualTest(const wchar_t* languageLocaleString, Compares compare, const String& comparesWString)
+{
+    const auto result = CompareStringUseLocale(languageLocaleString, compare, comparesWString, comparesWString);
+    ASSERT_ENUM_EQUAL(result, ComparesStringReturn::Equal);
+}
+
+void System::CompareStringUseLocaleStringTesting::CompareStringOppositeTest(const wchar_t* languageLocaleString, Compares compare, const String& lhsComparesWString, const String& rhsComparesWString)
+{
+    const auto lhsCompareRhs = CompareStringUseLocale(languageLocaleString, compare, lhsComparesWString, rhsComparesWString);
+    const auto rhsCompareLhs = CompareStringUseLocale(languageLocaleString, compare, rhsComparesWString, lhsComparesWString);
+
+    CompareTest(lhsCompareRhs, rhsCompareLhs);
 }

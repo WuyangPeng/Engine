@@ -34,8 +34,9 @@ namespace System
         void AddHelperSuite();
 
         NODISCARD Suite GetConfigMacroSuite();
+        NODISCARD Suite GetUnicodeUsingSuite();
         NODISCARD Suite GetWindowsMacroSuite();
-        NODISCARD Suite GetEnumMacroSuite();
+        NODISCARD Suite GetEnumOperatorSuite();
         NODISCARD Suite GetOpenGLMacroSuite();
         NODISCARD Suite GetGlUtilityMacroSuite();
         NODISCARD Suite GetToolsSuite();
@@ -61,6 +62,8 @@ namespace System
         void AddConsoleSuite();
 
         NODISCARD Suite GetConsoleColoursSuite();
+        NODISCARD Suite GetConsoleFontSuite();
+        NODISCARD Suite GetConsoleModeSuite();
         NODISCARD Suite GetConsoleScreenBufferSuite();
 
         void AddMemoryToolsSuite();

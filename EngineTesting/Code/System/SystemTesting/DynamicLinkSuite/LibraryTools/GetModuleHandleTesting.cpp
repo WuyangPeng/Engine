@@ -5,14 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:07)
+///	引擎测试版本：0.8.1.5 (2022/12/09 15:49)
 
 #include "GetModuleHandleTesting.h"
-#include "System/DynamicLink/Flags/GetModuleHandleFlags.h"
-#include "System/DynamicLink/Flags/LoadLibraryFlags.h"
 #include "System/DynamicLink/LibraryTools.h"
 #include "System/DynamicLink/LoadLibrary.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -49,105 +46,99 @@ void System::GetModuleHandleTesting::MainTest()
 #endif  // OPEN_GET_HANDLE_PIN
 }
 
+void System::GetModuleHandleTesting::GetHandleUnequalNullPtrTest()
+{
+    const auto moduleHandle = GetHandle();
+    ASSERT_UNEQUAL_NULL_PTR(moduleHandle);
+}
+
+System::DynamicLinkModule System::GetModuleHandleTesting::GetHandleUseTypeUnequalNullPtrTest(GetModuleHandleType getModuleHandleType)
+{
+    const auto moduleHandleEx = GetHandle(getModuleHandleType);
+    ASSERT_UNEQUAL_NULL_PTR(moduleHandleEx);
+
+    return moduleHandleEx;
+}
+
+void System::GetModuleHandleTesting::GetHandleEqualNullPtrTest()
+{
+    const auto moduleHandle = GetHandle();
+    ASSERT_EQUAL_NULL_PTR(moduleHandle);
+}
+
+void System::GetModuleHandleTesting::GetHandleUseTypeEqualNullPtrTest(GetModuleHandleType getModuleHandleType)
+{
+    const auto moduleHandleEx = GetHandle(getModuleHandleType);
+    ASSERT_EQUAL_NULL_PTR(moduleHandleEx);
+}
+
 void System::GetModuleHandleTesting::GetModuleHandleSucceed0Test()
 {
-    auto libraryModule = GetDynamicLibrary();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "获取ResourcesLibrary失败。"s);
+    const auto libraryModule = GetDynamicLibraryFailureThrow();
 
-    auto moduleHandle = GetHandle();
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleUnequalNullPtrTest);
 
-    ASSERT_TRUE(FreeDynamicLibrary(libraryModule));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    moduleHandle = GetHandle();
-    ASSERT_EQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleEqualNullPtrTest);
 }
 
 void System::GetModuleHandleTesting::GetModuleHandleSucceed1Test()
 {
-    auto libraryModule = GetDynamicLibrary();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "获取ResourcesLibrary失败。"s);
+    const auto libraryModule = GetDynamicLibraryFailureThrow();
 
-    auto moduleHandleEx = GetHandle(GetModuleHandleType::Default);
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandleEx);
+    const auto moduleHandleEx = GetHandleUseTypeUnequalNullPtrTest(GetModuleHandleType::Default);
 
-    ASSERT_TRUE(FreeDynamicLibrary(libraryModule));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    auto moduleHandle = GetHandle();
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleUnequalNullPtrTest);
 
-    ASSERT_TRUE(FreeDynamicLibrary(moduleHandleEx));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, moduleHandleEx);
 
-    moduleHandle = GetHandle();
-    ASSERT_EQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleEqualNullPtrTest);
 }
 
 void System::GetModuleHandleTesting::GetModuleHandleSucceed2Test()
 {
-    auto libraryModule = GetDynamicLibrary();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "获取ResourcesLibrary失败。"s);
+    const auto libraryModule = GetDynamicLibraryFailureThrow();
 
-    auto moduleHandleEx = GetHandle(GetModuleHandleType::UnchangedRefcount);
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandleEx);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetHandleUseTypeUnequalNullPtrTest, GetModuleHandleType::UnchangedRefcount);
 
-    ASSERT_TRUE(FreeDynamicLibrary(libraryModule));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    auto moduleHandle = GetHandle();
-    ASSERT_EQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleEqualNullPtrTest);
 }
 
 void System::GetModuleHandleTesting::GetModuleHandleSucceed3Test()
 {
     // 这个测试会导致ResourcesLibrary不卸载，从而导致其他测试失败。
 
-    auto libraryModule = GetDynamicLibrary();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "获取ResourcesLibrary失败。"s);
+    const auto libraryModule = GetDynamicLibraryFailureThrow();
 
-    auto moduleHandleEx = GetHandle(GetModuleHandleType::Pin);
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandleEx);
+    const auto moduleHandleEx = GetHandleUseTypeUnequalNullPtrTest(GetModuleHandleType::Pin);
 
-    ASSERT_TRUE(FreeDynamicLibrary(libraryModule));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    auto moduleHandle = GetHandle();
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleUnequalNullPtrTest);
 
-    ASSERT_TRUE(FreeDynamicLibrary(moduleHandleEx));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, moduleHandleEx);
 
-    moduleHandle = GetHandle();
-    ASSERT_UNEQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleUnequalNullPtrTest);
 }
 
 void System::GetModuleHandleTesting::GetModuleHandleFailureTest()
 {
-    const auto resourcesLibraryDll = GetResourcesLibraryName();
+    const auto libraryModule = GetDynamicLibraryFailureThrow();
 
-    auto libraryModule = GetDynamicLibrary();
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "获取ResourcesLibrary失败。"s);
-    ASSERT_TRUE(FreeDynamicLibrary(libraryModule));
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, libraryModule);
 
-    auto moduleHandle = GetHandle();
-    ASSERT_EQUAL_NULL_PTR(moduleHandle);
+    ASSERT_NOT_THROW_EXCEPTION_0(GetHandleEqualNullPtrTest);
 
-    auto moduleHandleEx = GetHandle(GetModuleHandleType::Default);
-    ASSERT_EQUAL_NULL_PTR(moduleHandleEx);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetHandleUseTypeEqualNullPtrTest, GetModuleHandleType::Default);
 
-    moduleHandleEx = GetHandle(GetModuleHandleType::UnchangedRefcount);
-    ASSERT_EQUAL_NULL_PTR(moduleHandleEx);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetHandleUseTypeEqualNullPtrTest, GetModuleHandleType::UnchangedRefcount);
 
-    moduleHandleEx = GetHandle(GetModuleHandleType::Pin);
-    ASSERT_EQUAL_NULL_PTR(moduleHandleEx);
-}
-
-System::DynamicLinkString System::GetModuleHandleTesting::GetResourcesLibraryName()
-{
-    return DYNAMIC_LINK_TEXT("Resource/ResourcesLibrary"s) + GetEngineeringSuffix();
-}
-
-System::DynamicLinkModule System::GetModuleHandleTesting::GetDynamicLibrary()
-{
-    const auto resourcesLibraryDll = GetResourcesLibraryName();
-
-    return LoadDynamicLibrary(resourcesLibraryDll.c_str(), LoadLibraryType::DontResolveDllReferences);
+    ASSERT_NOT_THROW_EXCEPTION_1(GetHandleUseTypeEqualNullPtrTest, GetModuleHandleType::Pin);
 }
 
 System::DynamicLinkModule System::GetModuleHandleTesting::GetHandle()
@@ -168,7 +159,10 @@ System::DynamicLinkModule System::GetModuleHandleTesting::GetHandle(GetModuleHan
     return moduleHandleEx;
 }
 
-void System::GetModuleHandleTesting::Destroy(DynamicLinkModule dynamicLinkModule)
+System::DynamicLinkModule System::GetModuleHandleTesting::GetDynamicLibraryFailureThrow()
 {
-    ASSERT_TRUE(FreeDynamicLibrary(dynamicLinkModule));
+    const auto libraryModule = GetDynamicLibrary();
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(libraryModule, "获取ResourcesLibrary失败。"s);
+
+    return libraryModule;
 }

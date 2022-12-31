@@ -39,14 +39,15 @@ namespace System
                                                                      int multiByteLength,
                                                                      wchar_t* wideChar,
                                                                      int wideCharLength) noexcept;
-    NODISCARD int SYSTEM_DEFAULT_DECLARE UTF8ConversionWideChar(const char* multiByte,
-                                                                int multiByteLength,
-                                                                wchar_t* wideChar,
-                                                                int wideCharLength) noexcept;
     NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionMultiByte(const wchar_t* wideChar,
                                                                      int wideCharLength,
                                                                      char* multiByte,
                                                                      int multiByteLength) noexcept;
+
+    NODISCARD int SYSTEM_DEFAULT_DECLARE UTF8ConversionWideChar(const char* multiByte,
+                                                                int multiByteLength,
+                                                                wchar_t* wideChar,
+                                                                int wideCharLength) noexcept;
     NODISCARD int SYSTEM_DEFAULT_DECLARE WideCharConversionUTF8(const wchar_t* wideChar,
                                                                 int wideCharLength,
                                                                 char* multiByte,
@@ -54,12 +55,12 @@ namespace System
 
     // lhsCountºÍrhsCount²»°üÀ¨¿ÕÖÕÖ¹·û
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(LanguageLocale locale,
-                                                                                 Compares comparesFlag,
+                                                                                 Compares compares,
                                                                                  const String& lhsString,
                                                                                  const String& rhsString);
 
     NODISCARD ComparesStringReturn SYSTEM_DEFAULT_DECLARE CompareStringUseLocale(const wchar_t* localeName,
-                                                                                 Compares comparesFlag,
+                                                                                 Compares compares,
                                                                                  const std::wstring& lhsString,
                                                                                  const std::wstring& rhsString);
 

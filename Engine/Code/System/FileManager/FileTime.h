@@ -5,20 +5,19 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:27)
+///	引擎版本：0.8.1.5 (2022/12/11 20:37)
 
-#ifndef SYSTEM_FILE_MANAGE_FILE_TIME_H
-#define SYSTEM_FILE_MANAGE_FILE_TIME_H
+#ifndef SYSTEM_FILE_MANAGER_FILE_TIME_H
+#define SYSTEM_FILE_MANAGER_FILE_TIME_H
 
 #include "System/SystemDll.h"
 
 #include "Fwd/FileFlagsFwd.h"
 #include "Using/FileUsing.h"
 
+// 文件时间的获取和设置
 namespace System
 {
-    // 文件时间的获取和设置
-
     NODISCARD ComparesFileTimeReturn SYSTEM_DEFAULT_DECLARE FileTimeCompare(const FileTime* lhsFileTime, const FileTime* rhsFileTime) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FileTimeConvertLocalFileTime(const FileTime* fileTime, FileTimePtr localFileTime) noexcept;
@@ -34,4 +33,4 @@ namespace System
                                                             const FileTime* lastWriteTime) noexcept;
 }
 
-#endif  // SYSTEM_FILE_MANAGE_FILE_TIME_H
+#endif  // SYSTEM_FILE_MANAGER_FILE_TIME_H

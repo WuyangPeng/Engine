@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/15 22:00)
+///	引擎版本：0.8.1.5 (2022/12/02 16:49)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_CREATE_H
 #define SYSTEM_CONSOLE_CONSOLE_CREATE_H
@@ -16,16 +16,16 @@
 
 #include <cstdio>
 
+// 控制台窗口的创建的销毁。
 namespace System
 {
-    // 控制台窗口的创建的销毁。
     MAYBE_NULLPTR WindowsHWnd SYSTEM_DEFAULT_DECLARE GetSystemConsoleWindow() noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE AllocConsole() noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FreeConsole() noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE FReOpenConsole(FILE*& file, const char* path, const char* mode, FILE* stream) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE FCloseConsole(FILE* file) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE ReOpenConsole(FILE*& file, const char* path, const char* mode, FILE* stream) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseConsole(FILE* file) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveConsoleCloseButton() noexcept;
 }

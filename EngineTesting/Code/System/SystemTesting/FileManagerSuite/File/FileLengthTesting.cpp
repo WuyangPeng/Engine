@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:59)
+///	引擎测试版本：0.8.1.5 (2022/12/14 22:11)
 
 #include "FileLengthTesting.h"
 #include "System/FileManager/File.h"
@@ -18,11 +18,12 @@
 
 #include <vector>
 
-using std::vector;
 using namespace std::literals;
 
 System::FileLengthTesting::FileLengthTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      fileName{ SYSTEM_TEXT("Resource/FileTesting/FileLength.txt"s) },
+      fileContent{ CoreTools::Version::GetVersion() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -36,37 +37,49 @@ void System::FileLengthTesting::DoRunUnitTest()
 
 void System::FileLengthTesting::MainTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateFileTest);
     ASSERT_NOT_THROW_EXCEPTION_0(FileLengthTest);
+}
+
+void System::FileLengthTesting::CreateFileTest()
+{
+    const auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Write, FileHandleShareMode::ShareWrite, FileHandleCreationDisposition::CreateAlways);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(WriteFileTest, handle);
+
+    ASSERT_TRUE(CloseSystemFile(handle));
+}
+
+void System::FileLengthTesting::WriteFileTest(WindowsHandle handle)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
+
+    std::vector<char> buffer{ fileContent.begin(), fileContent.end() };
+
+    WindowsDWord outNumber{ 0 };
+    ASSERT_TRUE(WriteSystemFile(handle, buffer.data(), boost::numeric_cast<WindowsDWord>(buffer.size()), &outNumber));
+    ASSERT_EQUAL(outNumber, fileContent.size());
 }
 
 void System::FileLengthTesting::FileLengthTest()
 {
-    const auto fileName = SYSTEM_TEXT("Resource/FileTesting/FileLength.txt"s);
+    const auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
 
-    auto handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Write, FileHandleShareMode::ShareWrite, FileHandleCreationDisposition::CreateAlways);
-    ASSERT_TRUE(IsFileHandleValid(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DoFileLengthTest, handle);
 
-    const auto fileContent = CoreTools::Version::GetVersion();
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
+}
 
-    vector<char> buffer{ fileContent.begin(), fileContent.end() };
-
-    WindowsDWord outNumber{ 0 };
-    ASSERT_TRUE(WriteSystemFile(handle, buffer.data(), boost::numeric_cast<WindowsDWord>(buffer.size()), &outNumber));
-
-    ASSERT_TRUE(CloseSystemFile(handle));
-
-    handle = CreateSystemFile(fileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::OpenExisting);
+void System::FileLengthTesting::DoFileLengthTest(WindowsHandle handle)
+{
     ASSERT_TRUE(IsFileHandleValid(handle));
 
     uint64_t size{ 0 };
     ASSERT_TRUE(GetFileLength(handle, size));
+    ASSERT_EQUAL(size, fileContent.size());
 
     WindowsLargeInteger fileLargeInteger{};
-
     ASSERT_TRUE(GetFileLength(handle, &fileLargeInteger));
 
-    ASSERT_EQUAL(size, fileContent.size());
     ASSERT_EQUAL(fileLargeInteger.QuadPart, boost::numeric_cast<int64_t>(fileContent.size()));
-
-    ASSERT_TRUE(CloseSystemFile(handle));
 }

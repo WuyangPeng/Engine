@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/15 22:00)
+///	引擎版本：0.8.1.5 (2022/12/02 16:27)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_COLORS_H
 #define SYSTEM_CONSOLE_CONSOLE_COLORS_H
@@ -16,10 +16,9 @@
 #include "Using/ConsoleColoursUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
+// 控制台颜色的设置。
 namespace System
 {
-    // 控制台颜色的设置。
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleTextAttribute(WindowsHandle handle,
                                                                         TextColour textColour,
                                                                         BackgroundColour backgroundColour,

@@ -573,7 +573,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\ConfigMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\Helper\EnumMacro.h">
+    <ClInclude Include="..\..\..\Code\System\Helper\EnumOperator.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\Helper\ExportMacro.h">

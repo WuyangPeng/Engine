@@ -4,9 +4,9 @@
 //
 #define IDC_TEST_CURSOR                 101
 #define IDI_TEST_ICON                   102
-#define IDS_STRING                      103
-#define IDR_MENU1                       104
-#define IDB_BITMAP1                     105
+#define IDS_STRING                      103 
+#define IDR_TEST_MENU                   104 
+#define IDB_TEST_BITMAP                 105
 
 // Next default values for new objects
 // 

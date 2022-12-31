@@ -5,23 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:35)
+///	引擎测试版本：0.8.1.5 (2022/12/21 22:15)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_HEAP_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_ALLOCATE_HEAP_TESTING_H
 
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "HeapTestingBase.h"
 
 namespace System
 {
-    class AllocateHeapTesting final : public CoreTools::UnitTest
+    class AllocateHeapTesting final : public HeapTestingBase
     {
     public:
         using ClassType = AllocateHeapTesting;
-        using ParentType = UnitTest;
+        using ParentType = HeapTestingBase;
 
     public:
         explicit AllocateHeapTesting(const OStreamShared& stream);
@@ -33,19 +30,18 @@ namespace System
         void MainTest();
 
         void AllocateDefaultHeapSucceedTest();
+        void AllocateDefaultHeapSucceedLoop(WindowsHandle handle);
         void DoAllocateDefaultHeapSucceedTest(WindowsHandle handle, HeapCreate flag);
+        void GetProcessHeapSizeSucceedTest(WindowsHandle handle, HeapCreate flag, WindowsVoidPtr memory);
 
         void AllocateDefaultHeapFailureTest();
-
+        void AllocateDefaultHeapFailureLoop(WindowsHandle handle);
         void DoAllocateDefaultHeapFailureTest(WindowsHandle handle, HeapCreate flag);
 
         void AllocateIntegerTest();
 
     private:
-        using HeapCreateFlagsContainer = std::vector<HeapCreate>;
-
-    private:
-        HeapCreateFlagsContainer heapCreateFlags;
+        WindowsSize size;
     };
 }
 

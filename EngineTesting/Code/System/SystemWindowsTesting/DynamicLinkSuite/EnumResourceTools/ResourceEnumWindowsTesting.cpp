@@ -5,120 +5,42 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/09 23:21)
+///	引擎测试版本：0.8.1.5 (2022/12/10 15:02)
 
 #include "ResourceEnumWindowsTesting.h"
 #include "System/DynamicLink/EnumResourceTools.h"
-#include "System/DynamicLink/Flags/EnumResourceToolsFlags.h"
 #include "System/DynamicLink/LoadResourceTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::ResourceEnumWindowsTesting::ResourceEnumWindowsTesting(const OStreamShared& stream, WindowsHInstance instance)
-    : ParentType{ stream },
-      enumResourceDataContainer{},
-      resourceEnum{ ResourceEnum::Default,
-                    ResourceEnum::Ln,
-                    ResourceEnum::Validate,
-                    ResourceEnum::ModouleExact,
-                    ResourceEnum::Ln | ResourceEnum::Validate },
-      index{ 0 },
-      instance{ instance }
+    : ParentType{ stream }, instance{ instance }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, ResourceEnumWindowsTesting)
 
-void System::ResourceEnumWindowsTesting::DoRunUnitTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
-}
-
-void System::ResourceEnumWindowsTesting::MainTest()
-{
-    ASSERT_NOT_THROW_EXCEPTION_0(EnumResourceTest);
-}
-
-void System::ResourceEnumWindowsTesting::EnumResourceTest()
+void System::ResourceEnumWindowsTesting::DoEnumResourceTest()
 {
     constexpr LanguageIDData languageIDData{};
 
-    for (index = 0; index < resourceEnum.size(); ++index)
+    ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIDData));
+
+    ASSERT_LESS(0u, GetEnumResourceDataSize());
+
+    for (const auto& data : *this)
     {
-        ASSERT_TRUE(EnumResourceTypesInLibrary(instance, TypeProcess, reinterpret_cast<WindowsLongPtrSizeType>(this), GetCurrentResourceEnum(), languageIDData));
-
-        ASSERT_LESS(0u, enumResourceDataContainer.size());
-
-        for (const auto& data : enumResourceDataContainer)
-        {
-            auto resource = FindResourceInLibrary(instance, data.GetType(), data.GetName(), data.GetLanguage());
-
-            ASSERT_UNEQUAL_NULL_PTR(resource);
-        }
-
-        enumResourceDataContainer.clear();
+        ASSERT_NOT_THROW_EXCEPTION_1(EnumResourceExistTest, data);
     }
+
+    ClearEnumResourceData();
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26461)
-
-System::WindowsBool System::ResourceEnumWindowsTesting::TypeProcess(DynamicLinkModule module, DynamicLinkCharType* type, WindowsLongPtrSizeType lParam)
+void System::ResourceEnumWindowsTesting::EnumResourceExistTest(const EnumResourceData& data)
 {
-    constexpr LanguageIDData languageIDData{};
+    const auto resource = FindResourceInLibrary(instance, data.GetType(), data.GetName(), data.GetLanguage());
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto testing = reinterpret_cast<const ClassType*>(lParam);
-
-#include STSTEM_WARNING_POP
-
-    return EnumResourceNamesInLibrary(module, type, NameProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
-}
-
-System::WindowsBool System::ResourceEnumWindowsTesting::NameProcess(DynamicLinkModule module, const DynamicLinkCharType* type, DynamicLinkCharType* name, WindowsLongPtrSizeType lParam)
-{
-    constexpr LanguageIDData languageIDData{};
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto testing = reinterpret_cast<const ClassType*>(lParam);
-
-#include STSTEM_WARNING_POP
-
-    return EnumResourceLanguagesInLibrary(module, type, name, LanguageProcess, lParam, testing->GetCurrentResourceEnum(), languageIDData);
-}
-
-#include STSTEM_WARNING_POP
-
-System::WindowsBool System::ResourceEnumWindowsTesting::LanguageProcess(MAYBE_UNUSED DynamicLinkModule module, const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language, WindowsLongPtrSizeType lParam)
-{
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto testing = reinterpret_cast<ClassType*>(lParam);
-
-#include STSTEM_WARNING_POP
-
-    testing->AddEnumResourceData(EnumResourceData{ type, name, language });
-
-    return gTrue;
-}
-
-void System::ResourceEnumWindowsTesting::AddEnumResourceData(const EnumResourceData& data)
-{
-    SYSTEM_CLASS_IS_VALID_1;
-
-    enumResourceDataContainer.emplace_back(data);
-}
-
-System::ResourceEnum System::ResourceEnumWindowsTesting::GetCurrentResourceEnum() const
-{
-    SYSTEM_CLASS_IS_VALID_CONST_1;
-
-    return resourceEnum.at(index);
+    ASSERT_UNEQUAL_NULL_PTR(resource);
 }

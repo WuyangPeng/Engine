@@ -10,15 +10,15 @@
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_STRCAT_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_STRCAT_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "FormatStringTestingBase.h"
 
 namespace System
 {
-    class StrcatTesting : public CoreTools::UnitTest
+    class StrcatTesting : public FormatStringTestingBase
     {
     public:
         using ClassType = StrcatTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatStringTestingBase;
 
     public:
         explicit StrcatTesting(const OStreamShared& stream);

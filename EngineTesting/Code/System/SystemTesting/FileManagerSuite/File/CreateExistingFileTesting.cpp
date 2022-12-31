@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:58)
+///	引擎测试版本：0.8.1.5 (2022/12/12 23:38)
 
 #include "CreateExistingFileTesting.h"
 #include "System/FileManager/File.h"
@@ -17,7 +17,7 @@
 using namespace std::literals;
 
 System::CreateExistingFileTesting::CreateExistingFileTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream }, existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -36,10 +36,12 @@ void System::CreateExistingFileTesting::MainTest()
 
 void System::CreateExistingFileTesting::CreateExistingFileTest()
 {
-    const auto existingFileName = SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s);
+    const auto handle = CreateSystemFile(existingFileName,
+                                         FileHandleDesiredAccess::Read,
+                                         FileHandleShareMode::ShareRead,
+                                         FileHandleCreationDisposition::CreateAlways);
 
-    auto handle = CreateSystemFile(existingFileName, FileHandleDesiredAccess::Read, FileHandleShareMode::ShareRead, FileHandleCreationDisposition::CreateAlways);
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, handle);
 
-    ASSERT_TRUE(IsFileHandleValid(handle));
-    ASSERT_TRUE(CloseSystemFile(handle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, handle);
 }

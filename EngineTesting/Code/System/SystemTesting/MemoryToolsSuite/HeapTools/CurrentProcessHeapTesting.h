@@ -5,20 +5,22 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:34)
+///	引擎测试版本：0.8.1.5 (2022/12/21 23:08)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_ASSIST_HEAP_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_ASSIST_HEAP_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "HeapTestingBase.h"
+
+#include <array>
 
 namespace System
 {
-    class CurrentProcessHeapTesting final : public CoreTools::UnitTest
+    class CurrentProcessHeapTesting final : public HeapTestingBase
     {
     public:
         using ClassType = CurrentProcessHeapTesting;
-        using ParentType = UnitTest;
+        using ParentType = HeapTestingBase;
 
     public:
         explicit CurrentProcessHeapTesting(const OStreamShared& stream);
@@ -34,8 +36,11 @@ namespace System
 
         void CurrentProcessHeapTest();
         void CurrentProcessHeapsTest();
-        void AfterCreateHeapTest(WindowsHandle processHandle);
-        void DefaultHeapTest(WindowsHandle processHandle);
+        void AfterCreateHeapTest(WindowsHandle defaultHandle, WindowsHandle newHandle);
+        void DefaultHeapTest(WindowsHandle defaultHandle);
+
+    private:
+        using HeapsType = std::array<WindowsHandle, bufferSize>;
     };
 }
 

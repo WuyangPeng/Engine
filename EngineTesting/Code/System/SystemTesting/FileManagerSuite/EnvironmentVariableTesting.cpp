@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:51)
+///	引擎测试版本：0.8.1.5 (2022/12/11 23:19)
 
 #include "EnvironmentVariableTesting.h"
 #include "System/FileManager/EnvironmentVariable.h"
@@ -30,18 +30,35 @@ void System::EnvironmentVariableTesting::DoRunUnitTest()
 
 void System::EnvironmentVariableTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(EnvironmentTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EnvironmentExistTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EnvironmentNonExistentTest);
 }
 
-void System::EnvironmentVariableTesting::EnvironmentTest()
+void System::EnvironmentVariableTesting::EnvironmentExistTest()
 {
     const auto variableName = SYSTEM_TEXT("EngineTestingInclude"s);
 
     TChar* environmentVariable{ nullptr };
 
     ASSERT_TRUE(GetEnvironment(variableName, environmentVariable));
-    ASSERT_UNEQUAL_NULL_PTR(environmentVariable);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(environmentVariable, "测试框架的环境变量不存在。"s);
 
     FreeEnvironment(environmentVariable);
     ASSERT_EQUAL_NULL_PTR(environmentVariable);
+}
+
+void System::EnvironmentVariableTesting::EnvironmentNonExistentTest()
+{
+    const auto variableName = SYSTEM_TEXT("NonExistent"s);
+
+    TChar* environmentVariable{ nullptr };
+
+    ASSERT_TRUE(GetEnvironment(variableName, environmentVariable));
+    ASSERT_EQUAL_NULL_PTR(environmentVariable);
+
+    if (environmentVariable != nullptr)
+    {
+        FreeEnvironment(environmentVariable);
+        ASSERT_EQUAL_NULL_PTR(environmentVariable);
+    }
 }

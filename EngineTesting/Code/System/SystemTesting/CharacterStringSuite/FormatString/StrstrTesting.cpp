@@ -33,8 +33,8 @@ void System::StrstrTesting::MainTest()
 
 void System::StrstrTesting::StrstrTest()
 {
-    char const* str{ "asubStra" };
-    char const* subStr{ "subStr" };
+    auto str = "asubStra";
+    auto subStr = "subStr";
 
     auto result = Strstr(str, subStr);
 

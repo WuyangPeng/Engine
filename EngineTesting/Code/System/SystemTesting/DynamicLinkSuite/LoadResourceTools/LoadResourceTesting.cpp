@@ -5,23 +5,16 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:06)
+///	引擎测试版本：0.8.1.5 (2022/12/09 21:32)
 
 #include "LoadResourceTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-#include "Toolset/System/ResourcesLibrary/resource.h"
 
 System::LoadResourceTesting::LoadResourceTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      container{ { static_cast<WindowsWord>(IDI_ICON1), predefinedResourceTypesGroupIcon },
-                 { static_cast<WindowsWord>(IDI_ICON2), predefinedResourceTypesGroupIcon },
-                 { static_cast<WindowsWord>(IDC_CURSOR1), predefinedResourceTypesGroupCursor },
-                 { static_cast<WindowsWord>(IDC_CURSOR2), predefinedResourceTypesGroupCursor },
-                 { static_cast<WindowsWord>(IDB_BITMAP1), predefinedResourceTypesBitmap },
-                 { static_cast<WindowsWord>(IDR_MENU1), predefinedResourceTypesMenu } }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -36,7 +29,9 @@ void System::LoadResourceTesting::DoRunUnitTest()
 void System::LoadResourceTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LoadTestingLibrary);
+
     ASSERT_NOT_THROW_EXCEPTION_0(LoadResourceTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(FreeTestingLibrary);
 
     // SystemWindowsTesting有dllModule为instance的测试。
@@ -44,22 +39,44 @@ void System::LoadResourceTesting::MainTest()
 
 void System::LoadResourceTesting::LoadResourceTest()
 {
-    for (const auto& value : container)
+    for (const auto& typeName : *this)
     {
-        const auto resource = FindResourceInLibrary(GetDllModule(), value.second, MakeIntreSource(value.first));
-
-        ASSERT_UNEQUAL_NULL_PTR(resource);
-
-        const auto global = LoadResourceInLibrary(GetDllModule(), resource);
-
-        ASSERT_UNEQUAL_NULL_PTR(global);
-
-        const auto resourceLock = LockResourceInLibrary(global);
-
-        ASSERT_UNEQUAL_NULL_PTR(resourceLock);
-
-        const auto size = SizeofResourceInLibrary(GetDllModule(), resource);
-
-        ASSERT_LESS(0u, size);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoLoadResourceTest, typeName.second, typeName.first);
     }
+}
+
+void System::LoadResourceTesting::DoLoadResourceTest(const DynamicLinkCharType* type, WindowsWord name)
+{
+    const auto resource = FindResourceInLibrary(GetDllModule(), type, MakeIntreSource(name));
+
+    ASSERT_UNEQUAL_NULL_PTR(resource);
+
+    const auto global = GetResourceInLibrary(resource);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(LockResourceInLibraryTest, global);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SizeofResourceInLibraryTest, resource);
+}
+
+System::DynamicLinkGlobal System::LoadResourceTesting::GetResourceInLibrary(DynamicLinkResource resource)
+{
+    const auto global = LoadResourceInLibrary(GetDllModule(), resource);
+
+    ASSERT_UNEQUAL_NULL_PTR(global);
+
+    return global;
+}
+
+void System::LoadResourceTesting::LockResourceInLibraryTest(DynamicLinkGlobal global)
+{
+    const auto resourceLock = LockResourceInLibrary(global);
+
+    ASSERT_UNEQUAL_NULL_PTR(resourceLock);
+}
+
+void System::LoadResourceTesting::SizeofResourceInLibraryTest(DynamicLinkResource resource)
+{
+    const auto size = SizeofResourceInLibrary(GetDllModule(), resource);
+
+    ASSERT_LESS(0u, size);
 }

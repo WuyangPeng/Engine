@@ -5,12 +5,11 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:23)
+///	引擎测试版本：0.8.1.5 (2022/12/02 15:20)
 
 #include "CaseInsensitiveComparisonTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"
 #include "System/CharacterString/StringConversion.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/WindowsMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -42,13 +41,18 @@ void System::CaseInsensitiveComparisonTesting::CaseInsensitiveComparisonTest()
 
     for (auto index = 0; index < letterNum; ++index)
     {
-        auto returnFlag = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gTrue);
-        ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::Equal);
-
-        returnFlag = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gFalse);
-        ASSERT_ENUM_EQUAL(returnFlag, ComparesStringReturn::GreaterThan);
+        ASSERT_NOT_THROW_EXCEPTION_2(CompareStringOrdinalUseBinaryTest, lower, capital);
 
         lower += 1;
         capital += 1;
     }
+}
+
+void System::CaseInsensitiveComparisonTesting::CompareStringOrdinalUseBinaryTest(TChar lower, TChar capital)
+{
+    const auto ignoreCaseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gTrue);
+    ASSERT_ENUM_EQUAL(ignoreCaseResult, ComparesStringReturn::Equal);
+
+    const auto caseResult = CompareStringOrdinalUseBinary(std::wstring{ lower }, std::wstring{ capital }, gFalse);
+    ASSERT_ENUM_EQUAL(caseResult, ComparesStringReturn::GreaterThan);
 }

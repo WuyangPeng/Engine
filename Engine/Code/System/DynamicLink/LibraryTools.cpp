@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:41)
+///	引擎版本：0.8.1.5 (2022/12/08 18:37)
 
 #include "System/SystemExport.h"
 
@@ -30,21 +30,6 @@ System::DynamicLinkModule System::GetDynamicLinkHandle(const DynamicLinkCharType
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWord System::GetDynamicLinkFileName(DynamicLinkModule module, DynamicLinkCharType* filename, WindowsDWord size) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-
-    return ::GetModuleFileName(module, filename, size);
-
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    UnusedFunction(moduleName, filename, size);
-
-    return false;
-
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
 bool System::GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCharType* moduleName, DynamicLinkModule* module) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -63,17 +48,30 @@ bool System::GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCh
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::String System::GetDynamicLinkFileName(DynamicLinkModule module)
+System::WindowsDWord System::GetDynamicLinkFileName(DynamicLinkModule module, DynamicLinkCharType* filename, WindowsDWord size) noexcept
 {
-    std::array<DynamicLinkCharType, gMaxPath> moduleFileName{};
-    const auto maxFileNameLength = GetDynamicLinkFileName(module, moduleFileName.data(), gMaxPath);
+#ifdef SYSTEM_PLATFORM_WIN32
 
-    if (maxFileNameLength == 0)
-    {
-        return String{};
-    }
+    return ::GetModuleFileName(module, filename, size);
 
-    String name{ moduleFileName.data() };
+#else  // !SYSTEM_PLATFORM_WIN32
 
-    return name;
+    UnusedFunction(moduleName, filename, size);
+
+    return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
+}
+
+System::DynamicLinkString System::GetDynamicLinkFileName(DynamicLinkModule module)
+{
+    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
+
+    BufferType moduleFileName{};
+    const auto maxFileNameLength = GetDynamicLinkFileName(module, moduleFileName.data(), gMaxPath - 1);
+
+    if (0 < maxFileNameLength)
+        return DynamicLinkString{ moduleFileName.data() };
+    else
+        return DynamicLinkString{};
 }

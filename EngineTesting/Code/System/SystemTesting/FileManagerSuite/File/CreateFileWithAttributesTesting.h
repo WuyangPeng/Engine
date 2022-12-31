@@ -5,24 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:52)
+///	引擎测试版本：0.8.1.5 (2022/12/13 10:42)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_ATTRIBUTESTESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_ATTRIBUTESTESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_ATTRIBUTES_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_ATTRIBUTES_TESTING_H
 
-#include "System/FileManager/Fwd/FileFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <random>
-#include <vector>
+#include "CreateFileWithAttributesTestingBase.h"
 
 namespace System
 {
-    class CreateFileWithAttributesTesting final : public CoreTools::UnitTest
+    class CreateFileWithAttributesTesting final : public CreateFileWithAttributesTestingBase
     {
     public:
         using ClassType = CreateFileWithAttributesTesting;
-        using ParentType = UnitTest;
+        using ParentType = CreateFileWithAttributesTestingBase;
 
     public:
         explicit CreateFileWithAttributesTesting(const OStreamShared& stream);
@@ -37,24 +33,16 @@ namespace System
 
         void CreateFileTest();
 
-    private:
-        using FileHandleDesiredAccessFlagsContainer = std::vector<FileHandleDesiredAccess>;
-        using FileHandleShareModeFlagsContainer = std::vector<FileHandleShareMode>;
-        using FileHandleCreationDispositionFlagsContainer = std::vector<FileHandleCreationDisposition>;
-        using FileHandleAttributesFlagsContainer = std::vector<FileHandleAttributes>;
-        using FileHandleOtherFlagsContainer = std::vector<FileHandleOther>;
-        using FileHandleSecurityFlagsContainer = std::vector<FileHandleSecurity>;
+        void DoCreateFileTest(size_t index);
+        void ReadOnlyTest(FileHandleAttributes fileHandleAttribute);
+        void CommonTest(size_t index, FileHandleAttributes fileHandleAttribute);
+        void ExistingTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition);
+        void DoExistingTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition);
+        void NonExistentTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition);
 
     private:
-        FileHandleDesiredAccessFlagsContainer fileHandleDesiredAccessFlags;
-        FileHandleShareModeFlagsContainer fileHandleShareModeFlags;
-        FileHandleCreationDispositionFlagsContainer fileHandleCreationDispositionFlags;
-        FileHandleAttributesFlagsContainer fileHandleAttributesFlags;
-        FileHandleOtherFlagsContainer fileHandleOtherFlags;
-        FileHandleSecurityFlagsContainer fileHandleSecurityFlags;
-        std::default_random_engine randomEngine;
-        size_t maxSize;
+        String onlyReadFile;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_CREATE_FILE_WITH_ATTRIBUTESTESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_CREATE_FILE_WITH_ATTRIBUTES_TESTING_H

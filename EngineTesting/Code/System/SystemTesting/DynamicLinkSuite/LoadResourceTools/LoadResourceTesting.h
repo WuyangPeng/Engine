@@ -5,22 +5,21 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 19:54)
+///	引擎测试版本：0.8.1.5 (2022/12/09 21:55)
 
-#ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_TESTING_H
-#define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_TESTING_H
+#ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_LOAD_RESOURCE_TESTING_H
+#define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_LOAD_RESOURCE_TESTING_H
 
-#include "System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.h"
-
-#include <map>
+#include "ResourceTestingBase.h"
+#include "System/DynamicLink/Using/LoadResourceToolsUsing.h"
 
 namespace System
 {
-    class LoadResourceTesting final : public LoadResourceToolsTesting
+    class LoadResourceTesting final : public ResourceTestingBase
     {
     public:
         using ClassType = LoadResourceTesting;
-        using ParentType = LoadResourceToolsTesting;
+        using ParentType = ResourceTestingBase;
 
     public:
         explicit LoadResourceTesting(const OStreamShared& stream);
@@ -33,12 +32,12 @@ namespace System
 
         void LoadResourceTest();
 
-    private:
-        using TypeNameContainer = std::map<WindowsWord, const DynamicLinkCharType*>;
+        void DoLoadResourceTest(const DynamicLinkCharType* type, WindowsWord name);
 
-    private:
-        TypeNameContainer container;
+        NODISCARD DynamicLinkGlobal GetResourceInLibrary(DynamicLinkResource resource);
+        void LockResourceInLibraryTest(DynamicLinkGlobal global);
+        void SizeofResourceInLibraryTest(DynamicLinkResource resource);
     };
 }
 
-#endif  // SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_LOAD_RESOURCE_TESTING_H
+#endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_LOAD_RESOURCE_TESTING_H

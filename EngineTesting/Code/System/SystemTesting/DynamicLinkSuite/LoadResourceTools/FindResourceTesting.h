@@ -5,22 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 19:55)
+///	引擎测试版本：0.8.1.5 (2022/12/09 21:04)
 
-#ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_FIND_RESOURCE_TESTING_H
-#define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_FIND_RESOURCE_TESTING_H
+#ifndef SYSTEM_TESTING_DYNAMIC_LINK_SUITE_FIND_RESOURCE_TESTING_H
+#define SYSTEM_TESTING_DYNAMIC_LINK_SUITE_FIND_RESOURCE_TESTING_H
 
-#include "System/SystemTesting/DynamicLinkSuite/LoadResourceToolsTesting.h"
-
-#include <map>
+#include "ResourceTestingBase.h"
 
 namespace System
 {
-    class FindResourceTesting final : public LoadResourceToolsTesting
+    class FindResourceTesting final : public ResourceTestingBase
     {
     public:
         using ClassType = FindResourceTesting;
-        using ParentType = LoadResourceToolsTesting;
+        using ParentType = ResourceTestingBase;
 
     public:
         explicit FindResourceTesting(const OStreamShared& stream);
@@ -34,12 +32,9 @@ namespace System
         void FindResourceTest();
         void FindResourceUseLanguageTest();
 
-    private:
-        using TypeNameContainer = std::map<WindowsWord, const DynamicLinkCharType*>;
-
-    private:
-        TypeNameContainer container;
+        void DoFindResourceTest(const DynamicLinkCharType* type, WindowsWord name);
+        void DoFindResourceUseLanguageTest(const DynamicLinkCharType* type, WindowsWord name);
     };
 }
 
-#endif  // SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_FIND_RESOURCE_TESTING_H
+#endif  // SYSTEM_TESTING_DYNAMIC_LINK_SUITE_FIND_RESOURCE_TESTING_H

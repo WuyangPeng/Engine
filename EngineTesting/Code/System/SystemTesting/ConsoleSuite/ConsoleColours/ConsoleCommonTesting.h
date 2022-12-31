@@ -5,24 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 21:53)
+///	引擎测试版本：0.8.1.5 (2022/12/03 19:49)
 
 #ifndef SYSTEM_CONSOLE_SUITE_CONSOLE_COMMON_TESTING_H
 #define SYSTEM_CONSOLE_SUITE_CONSOLE_COMMON_TESTING_H
 
-#include "ConsoleColoursTesting.h"
-
-#include <map>
-#include <random>
-#include <vector>
+#include "ConsoleStandardHandlesTesting.h"
 
 namespace System
 {
-    class ConsoleCommonTesting final : public ConsoleColoursTesting
+    class ConsoleCommonTesting final : public ConsoleStandardHandlesTesting
     {
     public:
         using ClassType = ConsoleCommonTesting;
-        using ParentType = ConsoleColoursTesting;
+        using ParentType = ConsoleStandardHandlesTesting;
 
     public:
         explicit ConsoleCommonTesting(const OStreamShared& stream);
@@ -35,15 +31,14 @@ namespace System
 
         NODISCARD bool RandomShuffleFlags();
         void ConsoleCommonTest();
-        void SetDefaultTextAttribute();
+
+        void DoConsoleCommonTest(size_t index);
 
     private:
-        using StandardHandleFlagsContainer = std::vector<StandardHandle>;
-        using ConsoleCommonFlagsContainer = std::vector<ConsoleCommon>;
+        using ConsoleCommonContainer = std::vector<ConsoleCommon>;
 
     private:
-        StandardHandleFlagsContainer standardHandleFlags;
-        ConsoleCommonFlagsContainer consoleCommonFlags;
+        ConsoleCommonContainer consoleCommonFlags;
         std::default_random_engine randomEngine;
     };
 }

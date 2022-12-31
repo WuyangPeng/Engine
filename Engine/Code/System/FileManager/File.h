@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:25)
+///	引擎版本：0.8.1.5 (2022/12/11 20:37)
 
-#ifndef SYSTEM_FILE_MANAGE_FILE_H
-#define SYSTEM_FILE_MANAGE_FILE_H
+#ifndef SYSTEM_FILE_MANAGER_FILE_H
+#define SYSTEM_FILE_MANAGER_FILE_H
 
 #include "System/SystemDll.h"
 
@@ -18,10 +18,9 @@
 #include "Using/FileUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
+// 文件的打开、关闭、创建、读写和删除。
 namespace System
 {
-    // 文件的打开、关闭、创建、读写和删除。
-
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFile(const String& fileName,
                                                                     FileHandleDesiredAccess access,
                                                                     FileHandleShareMode shareMode,
@@ -104,4 +103,4 @@ namespace System
                                                            WindowsDWordPtr numberOfBytesWritten) noexcept;
 }
 
-#endif  // SYSTEM_FILE_MANAGE_FILE_H
+#endif  // SYSTEM_FILE_MANAGER_FILE_H

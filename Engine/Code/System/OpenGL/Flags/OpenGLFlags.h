@@ -10,7 +10,7 @@
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/GLExtensionsMacro.h"
 
 namespace System
@@ -573,7 +573,6 @@ namespace System
         UnsignedIntAtomicCounter = GL_UNSIGNED_INT_ATOMIC_COUNTER,
     };
 
-    ENUM_ORABLE_OPERATOR_DEFINE(OpenGLClearMask);
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_FLAGS_H

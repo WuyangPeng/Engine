@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 21:23)
+///	引擎测试版本：0.8.1.5 (2022/12/01 23:19)
 
 #include "CompareStringTesting.h"
 #include "System/CharacterString/Flags/StringConversionFlags.h"

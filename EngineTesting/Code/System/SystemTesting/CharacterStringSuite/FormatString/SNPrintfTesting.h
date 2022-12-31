@@ -10,15 +10,15 @@
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_STRNG_PRINTF_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_STRNG_PRINTF_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "FormatStringTestingBase.h"
 
 namespace System
 {
-    class SNPrintfTesting final : public CoreTools::UnitTest
+    class SNPrintfTesting final : public FormatStringTestingBase
     {
     public:
         using ClassType = SNPrintfTesting;
-        using ParentType = UnitTest;
+        using ParentType = FormatStringTestingBase;
 
     public:
         explicit SNPrintfTesting(const OStreamShared& stream);

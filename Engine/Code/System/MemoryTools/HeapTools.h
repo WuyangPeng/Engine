@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 14:53)
+///	引擎版本：0.8.1.5 (2022/12/19 20:51)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_H
@@ -16,15 +16,13 @@
 #include "Using/HeapToolsUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
+// 分配堆与内存工具。
 namespace System
 {
-    // 分配堆与内存工具。
-
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateProcessHeap(HeapCreate options, WindowsSize initialSize, WindowsSize maximumSize) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE DestroyProcessHeap(WindowsHandle heap) noexcept;
 
     MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE AllocateProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsSize bytes) noexcept;
-    MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE ReAllocateProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVoidPtr memory, WindowsSize bytes) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FreeProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVoidPtr memory) noexcept;
     NODISCARD WindowsSize SYSTEM_DEFAULT_DECLARE GetProcessHeapSize(WindowsHandle heap, HeapCreate flags, WindowsVoidPtr memory) noexcept;
 

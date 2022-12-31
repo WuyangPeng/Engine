@@ -9,18 +9,12 @@
 
 #include "LoadResourceWindowsTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
-#include "System/SystemWindowsTesting/resource.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::LoadResourceWindowsTesting::LoadResourceWindowsTesting(const OStreamShared& stream, WindowsHInstance instance)
-    : ParentType{ stream },
-      instance{ instance },
-      container{ { static_cast<WindowsWord>(IDI_TEST_ICON), predefinedResourceTypesGroupIcon },
-                 { static_cast<WindowsWord>(IDC_TEST_CURSOR), predefinedResourceTypesGroupCursor },
-                 { static_cast<WindowsWord>(IDB_BITMAP1), predefinedResourceTypesBitmap },
-                 { static_cast<WindowsWord>(IDR_MENU1), predefinedResourceTypesMenu } }
+    : ParentType{ stream, instance }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -39,22 +33,44 @@ void System::LoadResourceWindowsTesting::MainTest()
 
 void System::LoadResourceWindowsTesting::LoadResourceTest()
 {
-    for (const auto& value : container)
+    for (const auto& typeName : *this)
     {
-        const auto resource = FindResourceInLibrary(instance, value.second, MakeIntreSource(value.first));
-
-        ASSERT_UNEQUAL_NULL_PTR(resource);
-
-        const auto global = LoadResourceInLibrary(instance, resource);
-
-        ASSERT_UNEQUAL_NULL_PTR(global);
-
-        const auto resourceLock = LockResourceInLibrary(global);
-
-        ASSERT_UNEQUAL_NULL_PTR(resourceLock);
-
-        const auto size = SizeofResourceInLibrary(instance, resource);
-
-        ASSERT_LESS(0u, size);
+        ASSERT_NOT_THROW_EXCEPTION_2(DoLoadResourceTest, typeName.second, typeName.first);
     }
+}
+
+void System::LoadResourceWindowsTesting::DoLoadResourceTest(const DynamicLinkCharType* type, WindowsWord name)
+{
+    const auto resource = FindResourceInLibrary(GetInstance(), type, MakeIntreSource(name));
+
+    ASSERT_UNEQUAL_NULL_PTR(resource);
+
+    const auto global = GetResourceInLibrary(resource);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(LockResourceInLibraryTest, global);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SizeofResourceInLibraryTest, resource);
+}
+
+System::DynamicLinkGlobal System::LoadResourceWindowsTesting::GetResourceInLibrary(DynamicLinkResource resource)
+{
+    const auto global = LoadResourceInLibrary(GetInstance(), resource);
+
+    ASSERT_UNEQUAL_NULL_PTR(global);
+
+    return global;
+}
+
+void System::LoadResourceWindowsTesting::LockResourceInLibraryTest(DynamicLinkGlobal global)
+{
+    const auto resourceLock = LockResourceInLibrary(global);
+
+    ASSERT_UNEQUAL_NULL_PTR(resourceLock);
+}
+
+void System::LoadResourceWindowsTesting::SizeofResourceInLibraryTest(DynamicLinkResource resource)
+{
+    const auto size = SizeofResourceInLibrary(GetInstance(), resource);
+
+    ASSERT_LESS(0u, size);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/03 11:46)
+///	引擎测试版本：0.8.1.5 (2022/12/18 13:00)
 
 #include "GlUtilityBodyResultTesting.h"
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
@@ -38,6 +38,7 @@ void System::GlUtilityBodyResultTesting::MainTest()
     ASSERT_EQUAL(Body6Test(false), 1 + 2 + 3 + 4 + 5 + 6);
     ASSERT_EQUAL(Body7Test(false), 1 + 2 + 3 + 4 + 5 + 6 + 7);
     ASSERT_EQUAL(Body8Test(false), 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8);
+    ASSERT_EQUAL(Body17Test(false), 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17);
 
     ASSERT_EQUAL(Body0Test(true), -1);
     ASSERT_EQUAL(Body1Test(true), -1);
@@ -48,58 +49,65 @@ void System::GlUtilityBodyResultTesting::MainTest()
     ASSERT_EQUAL(Body6Test(true), -1);
     ASSERT_EQUAL(Body7Test(true), -1);
     ASSERT_EQUAL(Body8Test(true), -1);
+    ASSERT_EQUAL(Body17Test(true), -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body0Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function0;
+    const auto function = isNull ? nullptr : Function0;
     SYSTEM_BODY_0_RESULT(function, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body1Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function1;
+    const auto function = isNull ? nullptr : Function1;
     SYSTEM_BODY_1_RESULT(function, 1, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body2Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function2;
+    const auto function = isNull ? nullptr : Function2;
     SYSTEM_BODY_2_RESULT(function, 1, 2, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body3Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function3;
+    const auto function = isNull ? nullptr : Function3;
     SYSTEM_BODY_3_RESULT(function, 1, 2, 3, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body4Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function4;
+    const auto function = isNull ? nullptr : Function4;
     SYSTEM_BODY_4_RESULT(function, 1, 2, 3, 4, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body5Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function5;
+    const auto function = isNull ? nullptr : Function5;
     SYSTEM_BODY_5_RESULT(function, 1, 2, 3, 4, 5, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body6Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function6;
+    const auto function = isNull ? nullptr : Function6;
     SYSTEM_BODY_6_RESULT(function, 1, 2, 3, 4, 5, 6, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body7Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function7;
+    const auto function = isNull ? nullptr : Function7;
     SYSTEM_BODY_7_RESULT(function, 1, 2, 3, 4, 5, 6, 7, -1);
 }
 
 int System::GlUtilityBodyResultTesting::Body8Test(bool isNull) noexcept
 {
-    auto function = isNull ? nullptr : Function8;
+    const auto function = isNull ? nullptr : Function8;
     SYSTEM_BODY_8_RESULT(function, 1, 2, 3, 4, 5, 6, 7, 8, -1);
+}
+
+int System::GlUtilityBodyResultTesting::Body17Test(bool isNull) noexcept
+{
+    const auto function = isNull ? nullptr : Function17;
+    SYSTEM_BODY_17_RESULT(function, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, -1);
 }

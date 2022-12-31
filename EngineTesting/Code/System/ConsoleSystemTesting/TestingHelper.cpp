@@ -14,7 +14,10 @@
 #include "Framework/WindowProcess/WindowProcessHandleDetail.h"
 #include "Framework/WindowsAPIFrame/WindowsAPIFrameBuildDetail.h"
 
-ConsoleSystemTesting::TestingHelper::TestingHelper(WindowsHInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
+ConsoleSystemTesting::TestingHelper::TestingHelper(WindowsHInstance instance,
+                                                   const char* commandLine,
+                                                   const WindowApplicationInformation& information,
+                                                   const EnvironmentDirectory& environmentDirectory)
     : ParentType{ instance, commandLine, information, environmentDirectory }, consoleHelper{}
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;

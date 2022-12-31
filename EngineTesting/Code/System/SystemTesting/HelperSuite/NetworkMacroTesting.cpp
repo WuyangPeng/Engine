@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/20 23:07)
+///	引擎测试版本：0.8.1.5 (2022/12/17 18:55)
 
 #include "NetworkMacroTesting.h"
 #include "System/Helper/WindowsMacro.h"
@@ -71,12 +71,12 @@ System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
 {
     constexpr uint16_t port{ 5300 };
 
-    WinSockInternetAddress addr{}; 
+    WinSockInternetAddress addr{};
     addr.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(port);
     addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
 
-    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateTcpSocket();
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "socketHandle 是无效的。");
 
     return socketHandle;

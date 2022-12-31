@@ -5,67 +5,18 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:07)
+///	引擎测试版本：0.8.1.5 (2022/12/03 21:55)
 
 #include "ReadAttributeTesting.h"
 #include "System/Console/ConsoleColours.h"
 #include "System/Console/ConsoleHandle.h"
-#include "System/Console/Flags/ConsoleColoursFlags.h"
-#include "System/Console/Flags/ConsoleHandleFlags.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Console/Using/ConsoleColoursUsing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
-using std::array;
-
 System::ReadAttributeTesting::ReadAttributeTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      standardHandleFlags{ StandardHandle::Output, StandardHandle::Error },
-      textColourFlags{ TextColour::Black,
-                       TextColour::IntensifiedBlack,
-                       TextColour::Red,
-                       TextColour::IntensifiedRed,
-                       TextColour::Green,
-                       TextColour::IntensifiedGreen,
-                       TextColour::Blue,
-                       TextColour::IntensifiedBlue,
-                       TextColour::Yellow,
-                       TextColour::IntensifiedYellow,
-                       TextColour::Cyan,
-                       TextColour::IntensifiedCyan,
-                       TextColour::Magenta,
-                       TextColour::IntensifiedMagenta,
-                       TextColour::White,
-                       TextColour::IntensifiedWhite },
-      backgroundColourFlags{ BackgroundColour::Black,
-                             BackgroundColour::IntensifiedBlack,
-                             BackgroundColour::Red,
-                             BackgroundColour::IntensifiedRed,
-                             BackgroundColour::Green,
-                             BackgroundColour::IntensifiedGreen,
-                             BackgroundColour::Blue,
-                             BackgroundColour::IntensifiedBlue,
-                             BackgroundColour::Yellow,
-                             BackgroundColour::IntensifiedYellow,
-                             BackgroundColour::Cyan,
-                             BackgroundColour::IntensifiedCyan,
-                             BackgroundColour::Magenta,
-                             BackgroundColour::IntensifiedMagenta,
-                             BackgroundColour::White,
-                             BackgroundColour::IntensifiedWhite },
-      consoleCommonFlags{ ConsoleCommon::Default,
-                          ConsoleCommon::LeadingByte,
-                          ConsoleCommon::TrailingByte,
-                          ConsoleCommon::GridHorizontal,
-                          ConsoleCommon::GridLvertical,
-                          ConsoleCommon::GridRvertical,
-                          ConsoleCommon::ReverseVideo,
-                          ConsoleCommon::Underscore,
-                          ConsoleCommon::SbcsDbcs },
-      randomEngine{ GetEngineRandomSeed() }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -84,7 +35,7 @@ void System::ReadAttributeTesting::MainTest()
 
 bool System::ReadAttributeTesting::RandomShuffleFlags()
 {
-    shuffle(standardHandleFlags.begin(), standardHandleFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffleConsoleFlags);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ReadAttributeTest);
 
@@ -93,25 +44,34 @@ bool System::ReadAttributeTesting::RandomShuffleFlags()
 
 void System::ReadAttributeTesting::ReadAttributeTest()
 {
-    constexpr auto bufferSize = 256u;
-    array<WindowsWord, bufferSize> attribute{};
+    for (auto standardHandle : *this)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoReadAttributeTest, standardHandle);
+    }
+}
+
+void System::ReadAttributeTesting::DoReadAttributeTest(StandardHandle standardHandle)
+{
+    AttributeType attribute{};
     constexpr ConsoleCoord readCoord{ 0, 0 };
 
-    for (auto value : standardHandleFlags)
+    const auto consoleHandle = GetStandardHandle(standardHandle);
+
+    WindowsDWord numberOfAttributesRead{ 0 };
+    ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, attribute.data(), bufferSize, readCoord, &numberOfAttributesRead));
+
+    ASSERT_EQUAL(numberOfAttributesRead, bufferSize);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(AttributeResultTest, attribute);
+}
+
+void System::ReadAttributeTesting::AttributeResultTest(AttributeType attribute)
+{
+    for (auto word : attribute)
     {
-        auto consoleHandle = GetStandardHandle(value);
-
-        WindowsDWord numberOfAttributesRead{ 0 };
-        ASSERT_TRUE(ReadSystemConsoleOutputAttribute(consoleHandle, attribute.data(), bufferSize, readCoord, &numberOfAttributesRead));
-
-        ASSERT_EQUAL(numberOfAttributesRead, bufferSize);
-
-        for (auto word : attribute)
-        {
-            // 根据TextColour、BackgroundColour和ConsoleCommon枚举的实际值所占的位得出0x000F、0x00F0和0xFF00的值。
-            ASSERT_UNEQUAL(textColourFlags.find(UnderlyingCastEnum<TextColour>(word & 0x000F)), textColourFlags.end());
-            ASSERT_UNEQUAL(backgroundColourFlags.find(UnderlyingCastEnum<BackgroundColour>(word & 0x00F0)), backgroundColourFlags.end());
-            ASSERT_UNEQUAL(consoleCommonFlags.find(UnderlyingCastEnum<ConsoleCommon>(word & 0xFF00)), consoleCommonFlags.end());
-        }
+        // 根据TextColour、BackgroundColour和ConsoleCommon枚举的实际值所占的位得出0x000F、0x00F0和0xFF00的值。
+        ASSERT_TRUE(HasTextColour(UnderlyingCastEnum<TextColour>(word & textColourMask)));
+        ASSERT_TRUE(HasBackgroundColour(UnderlyingCastEnum<BackgroundColour>(word & backgroundColourMask)));
+        ASSERT_TRUE(HasConsoleCommon(UnderlyingCastEnum<ConsoleCommon>(word & consoleCommonMask)));
     }
 }

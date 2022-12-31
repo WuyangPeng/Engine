@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/15 19:01)
+///	引擎测试版本：0.8.1.5 (2022/12/16 23:27)
 
 #include "StringizeMacroTesting.h"
 #include "System/Helper/StringizeMacro.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <string>
-
-using std::string;
 
 System::StringizeMacroTesting::StringizeMacroTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,21 +37,21 @@ void System::StringizeMacroTesting::MainTest()
 
 void System::StringizeMacroTesting::StringizeTest()
 {
-    string testValue{ SYSTEM_STRINGIZE(100TestValue) };
+    std::string testValue{ SYSTEM_STRINGIZE(100TestValue) };
 
     ASSERT_EQUAL(testValue, "100TestValue");
 }
 
 void System::StringizeMacroTesting::ConcatenatorTest()
 {
-    string SYSTEM_CONCATENATOR(test, Value){ "TestValue" };
+    std::string SYSTEM_CONCATENATOR(test, Value){ "TestValue" };
 
     ASSERT_EQUAL(testValue, "TestValue");
 }
 
 void System::StringizeMacroTesting::MultipleConcatenatorTest()
 {
-    string SYSTEM_MULTIPLE_CONCATENATOR(test, Value, 1){ "TestValue" };
+    std::string SYSTEM_MULTIPLE_CONCATENATOR(test, Value, 1){ "TestValue" };
 
     ASSERT_EQUAL(testValue1, "TestValue");
 }

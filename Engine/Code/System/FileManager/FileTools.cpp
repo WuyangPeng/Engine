@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/18 21:34)
+///	引擎版本：0.8.1.5 (2022/12/11 20:43)
 
 #include "System/SystemExport.h"
 
@@ -28,6 +28,24 @@ bool System::CreateFileDirectory(const String& pathName, WindowSecurityAttribute
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(pathName, securityAttributes);
+
+    return false;
+
+#endif  // SYSTEM_PLATFORM_WIN32
+}
+
+bool System::RemoveSystemDirectory(const TChar* pathName) noexcept
+{
+#if defined(SYSTEM_PLATFORM_WIN32)
+
+    if (::RemoveDirectory(pathName) != gFalse)
+        return true;
+    else
+        return false;
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    UnusedFunction(pathName);
 
     return false;
 
@@ -71,24 +89,6 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* directoryName,
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes);
-
-    return false;
-
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::RemoveSystemDirectory(const TChar* pathName) noexcept
-{
-#if defined(SYSTEM_PLATFORM_WIN32)
-
-    if (::RemoveDirectory(pathName) != gFalse)
-        return true;
-    else
-        return false;
-
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    UnusedFunction(pathName);
 
     return false;
 

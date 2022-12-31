@@ -5,10 +5,9 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:04)
+///	引擎测试版本：0.8.1.5 (2022/12/06 16:04)
 
 #include "ConsoleScreenBufferInfoTesting.h"
-#include "System/Console/ConsoleHandle.h"
 #include "System/Console/ConsoleScreenBuffer.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
 #include "System/Console/Flags/ConsoleScreenBufferFlags.h"
@@ -17,13 +16,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-
 System::ConsoleScreenBufferInfoTesting::ConsoleScreenBufferInfoTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      desiredAccessGenericFlags{ DesiredAccessGeneric::Read, DesiredAccessGeneric::ReadAndWrite },
-      consoleScreenBufferShareModeFlags{ ConsoleScreenBufferShareMode::Read, ConsoleScreenBufferShareMode::Write, ConsoleScreenBufferShareMode::ReadAndWrite },
-      maxSize{ max(desiredAccessGenericFlags.size(), consoleScreenBufferShareModeFlags.size()) }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -42,8 +36,7 @@ void System::ConsoleScreenBufferInfoTesting::MainTest()
 
 bool System::ConsoleScreenBufferInfoTesting::RandomShuffleFlags()
 {
-    shuffle(desiredAccessGenericFlags.begin(), desiredAccessGenericFlags.end(), randomEngine);
-    shuffle(consoleScreenBufferShareModeFlags.begin(), consoleScreenBufferShareModeFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffleConsoleFlags);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ConsoleScreenBufferInfoTest);
 
@@ -52,35 +45,49 @@ bool System::ConsoleScreenBufferInfoTesting::RandomShuffleFlags()
 
 void System::ConsoleScreenBufferInfoTesting::ConsoleScreenBufferInfoTest()
 {
-    for (auto index = 0u; index < maxSize; ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        auto desiredAccessGenericFlag = desiredAccessGenericFlags.at(index % desiredAccessGenericFlags.size());
-
-        auto consoleScreenBufferShareModeFlag = consoleScreenBufferShareModeFlags.at(index % consoleScreenBufferShareModeFlags.size());
-
-        auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(desiredAccessGenericFlag, consoleScreenBufferShareModeFlag, nullptr);
-
-        ConsoleScreenBufferInfo consoleScreenBufferInfo{};
-        ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &consoleScreenBufferInfo));
-
-        auto consoleScreenBufferInfoEx = GetWindowsStructDefaultSize<ConsoleScreenBufferInfoEx>();
-        ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &consoleScreenBufferInfoEx));
-
-        ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfo.wAttributes), TextColour::White);
-        ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wAttributes), TextColour::White);
-        ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wPopupAttributes), TextColour::White);
-
-        ASSERT_EQUAL(consoleScreenBufferInfo.dwCursorPosition.X, consoleScreenBufferInfoEx.dwCursorPosition.X);
-        ASSERT_EQUAL(consoleScreenBufferInfo.dwCursorPosition.Y, consoleScreenBufferInfoEx.dwCursorPosition.Y);
-        ASSERT_EQUAL(consoleScreenBufferInfo.dwSize.X, consoleScreenBufferInfoEx.dwSize.X);
-        ASSERT_EQUAL(consoleScreenBufferInfo.dwSize.Y, consoleScreenBufferInfoEx.dwSize.Y);
-        ASSERT_EQUAL(consoleScreenBufferInfo.dwMaximumWindowSize.X, consoleScreenBufferInfoEx.dwMaximumWindowSize.X);
-        ASSERT_EQUAL(consoleScreenBufferInfo.dwMaximumWindowSize.Y, consoleScreenBufferInfoEx.dwMaximumWindowSize.Y);
-        ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Bottom, consoleScreenBufferInfoEx.srWindow.Bottom);
-        ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Left, consoleScreenBufferInfoEx.srWindow.Left);
-        ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Right, consoleScreenBufferInfoEx.srWindow.Right);
-        ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Top, consoleScreenBufferInfoEx.srWindow.Top);
-
-        ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoConsoleScreenBufferInfoTest, index);
     }
+}
+
+void System::ConsoleScreenBufferInfoTesting::DoConsoleScreenBufferInfoTest(size_t index)
+{
+    const auto desiredAccessGeneric = GetDesiredAccessGeneric(index) | DesiredAccessGeneric::Read;
+    const auto consoleScreenBufferShareMode = GetConsoleScreenBufferShareMode(index);
+
+    const auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(desiredAccessGeneric, consoleScreenBufferShareMode, nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(GetSystemConsoleScreenBufferInfoTest, attributesConsoleHandle);
+
+    ASSERT_TRUE(CloseSystemConsole(attributesConsoleHandle));
+}
+
+void System::ConsoleScreenBufferInfoTesting::GetSystemConsoleScreenBufferInfoTest(WindowsHandle attributesConsoleHandle)
+{
+    ConsoleScreenBufferInfo consoleScreenBufferInfo{};
+    ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &consoleScreenBufferInfo));
+
+    auto consoleScreenBufferInfoEx = GetWindowsStructDefaultSize<ConsoleScreenBufferInfoEx>();
+    ASSERT_TRUE(GetSystemConsoleScreenBufferInfo(attributesConsoleHandle, &consoleScreenBufferInfoEx));
+
+    ASSERT_NOT_THROW_EXCEPTION_2(EqualTest, consoleScreenBufferInfo, consoleScreenBufferInfoEx);
+}
+
+void System::ConsoleScreenBufferInfoTesting::EqualTest(const ConsoleScreenBufferInfo& consoleScreenBufferInfo, const ConsoleScreenBufferInfoEx& consoleScreenBufferInfoEx)
+{
+    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfo.wAttributes), TextColour::White);
+    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wAttributes), TextColour::White);
+    ASSERT_ENUM_EQUAL(UnderlyingCastEnum<TextColour>(consoleScreenBufferInfoEx.wPopupAttributes), TextColour::White);
+
+    ASSERT_EQUAL(consoleScreenBufferInfo.dwCursorPosition.X, consoleScreenBufferInfoEx.dwCursorPosition.X);
+    ASSERT_EQUAL(consoleScreenBufferInfo.dwCursorPosition.Y, consoleScreenBufferInfoEx.dwCursorPosition.Y);
+    ASSERT_EQUAL(consoleScreenBufferInfo.dwSize.X, consoleScreenBufferInfoEx.dwSize.X);
+    ASSERT_EQUAL(consoleScreenBufferInfo.dwSize.Y, consoleScreenBufferInfoEx.dwSize.Y);
+    ASSERT_EQUAL(consoleScreenBufferInfo.dwMaximumWindowSize.X, consoleScreenBufferInfoEx.dwMaximumWindowSize.X);
+    ASSERT_EQUAL(consoleScreenBufferInfo.dwMaximumWindowSize.Y, consoleScreenBufferInfoEx.dwMaximumWindowSize.Y);
+    ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Bottom, consoleScreenBufferInfoEx.srWindow.Bottom);
+    ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Left, consoleScreenBufferInfoEx.srWindow.Left);
+    ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Right, consoleScreenBufferInfoEx.srWindow.Right);
+    ASSERT_EQUAL(consoleScreenBufferInfo.srWindow.Top, consoleScreenBufferInfoEx.srWindow.Top);
 }

@@ -7,8 +7,8 @@
 ///	标准：std:c++20
 ///	引擎测试版本：0.8.1.3 (2022/10/29 19:57)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_DISK_FREE_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_DISK_FREE_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_DISK_FREE_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_DISK_FREE_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
@@ -30,7 +30,11 @@ namespace System
         void MainTest();
 
         void DiskFreeSpaceTest();
+        void DiskFreeSpaceWindowsULargeIntegerTest();
+
+    private:
+        String diskName;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_DISK_FREE_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_DISK_FREE_TESTING_H

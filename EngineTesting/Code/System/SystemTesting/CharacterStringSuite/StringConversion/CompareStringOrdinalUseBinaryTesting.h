@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/14 1:16)
+///	引擎测试版本：0.8.1.5 (2022/12/02 15:31)
 
 #ifndef SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_ORDINAL_USE_BINARY_TESTING_H
 #define SYSTEM_CHARACTER_STRING_SUITE_COMPARE_STRING_ORDINAL_USE_BINARY_TESTING_H
@@ -34,12 +34,16 @@ namespace System
 
         NODISCARD bool RandomShuffleFlags();
         void CompareStringOrdinalUseBinaryTest();
+        void CompareStringTest(size_t index);
+
+        void CompareStringEqualTest(const std::wstring& comparesWString);
+        void CompareStringOppositeTest(const std::wstring& lhsComparesWString, const std::wstring& rhsComparesWString);
 
     private:
         using ComparesWStringContainer = std::vector<std::wstring>;
 
     private:
-        ComparesWStringContainer wComparesString;
+        ComparesWStringContainer comparesWStrings;
         std::default_random_engine randomEngine;
     };
 }

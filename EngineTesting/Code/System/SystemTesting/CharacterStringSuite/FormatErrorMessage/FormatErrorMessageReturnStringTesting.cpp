@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-ENUM_INCREMENTABLE_OPERATOR_DEFINE(System::WindowError);
-
 System::FormatErrorMessageReturnStringTesting::FormatErrorMessageReturnStringTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {

@@ -10,7 +10,7 @@
 #ifndef SYSTEM_OPENGL_GLUT_FLAGS_H
 #define SYSTEM_OPENGL_GLUT_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 #include "System/Helper/Platform.h"
 
@@ -83,10 +83,5 @@ namespace System
 }
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(WIN32)
-
-namespace System
-{
-    ENUM_ORABLE_OPERATOR_DEFINE(GlutMacro);
-}
 
 #endif  // SYSTEM_OPENGL_GLUT_FLAGS_H

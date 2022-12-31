@@ -5,10 +5,10 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:51)
+///	引擎测试版本：0.8.1.5 (2022/12/11 23:17)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_ENVIRONMENT_VARIABLE_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_ENVIRONMENT_VARIABLE_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_ENVIRONMENT_VARIABLE_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_ENVIRONMENT_VARIABLE_TESTING_H
 
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
@@ -29,8 +29,9 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void EnvironmentTest();
+        void EnvironmentExistTest();
+        void EnvironmentNonExistentTest();
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_ENVIRONMENT_VARIABLE_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_ENVIRONMENT_VARIABLE_TESTING_H

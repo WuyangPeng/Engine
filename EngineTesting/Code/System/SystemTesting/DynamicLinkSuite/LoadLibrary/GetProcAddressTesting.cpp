@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/10 20:06)
+///	引擎测试版本：0.8.1.5 (2022/12/09 20:55)
 
 #include "GetProcAddressTesting.h"
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
@@ -14,7 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::string;
 using namespace std::literals;
 
 System::GetProcAddressTesting::GetProcAddressTesting(const OStreamShared& stream)
@@ -37,7 +36,7 @@ void System::GetProcAddressTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_1(GetProcAddressSucceedTest, dynamicLinkModule);
     ASSERT_NOT_THROW_EXCEPTION_1(GetProcAddressFailureTest, dynamicLinkModule);
 
-    Destroy(dynamicLinkModule);
+    ASSERT_NOT_THROW_EXCEPTION_1(Destroy, dynamicLinkModule);
 }
 
 System::DynamicLinkModule System::GetProcAddressTesting::GetDynamicLibrary()
@@ -56,7 +55,7 @@ void System::GetProcAddressTesting::GetProcAddressSucceedTest(DynamicLinkModule 
 {
     const auto existProcessName = "GetLastError"s;
 
-    auto existProcess = GetProcessAddress(dynamicLinkModule, existProcessName.c_str());
+    const auto existProcess = GetProcessAddress(dynamicLinkModule, existProcessName.c_str());
 
     ASSERT_UNEQUAL_NULL_PTR(existProcess);
 }
@@ -65,7 +64,7 @@ void System::GetProcAddressTesting::GetProcAddressFailureTest(DynamicLinkModule 
 {
     const auto inexistenceProcessName = "GetLastErrorEx"s;
 
-    auto inexistenceProcess = GetProcessAddress(dynamicLinkModule, inexistenceProcessName.c_str());
+    const auto inexistenceProcess = GetProcessAddress(dynamicLinkModule, inexistenceProcessName.c_str());
 
     ASSERT_EQUAL_NULL_PTR(inexistenceProcess);
 }

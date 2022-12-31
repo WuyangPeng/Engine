@@ -8,7 +8,7 @@
 ///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.8.1.4 (2022/11/05 19:05)
 
 #include "LastPlatformErrorTesting.h"
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "System/Windows/LastPlatformError.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -18,8 +18,6 @@
 #include <vector>
 
 using std::vector;
-
-ENUM_INCREMENTABLE_OPERATOR_DEFINE(System::WindowError);
 
 System::LastPlatformErrorTesting::LastPlatformErrorTesting(const OStreamShared& stream)
     : ParentType{ stream }

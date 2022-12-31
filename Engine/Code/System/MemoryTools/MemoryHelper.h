@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:01)
+///	引擎版本：0.8.1.5 (2022/12/19 20:52)
 
 #ifndef SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_H
 #define SYSTEM_MEMORY_TOOLS_MEMORY_HELPER_H
@@ -16,10 +16,9 @@
 #include "Using/MemoryHelperUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
+// 内存工具函数。
 namespace System
 {
-    // 内存工具函数。
-
     void SYSTEM_DEFAULT_DECLARE MemorySet(void* bytes, int value, int byteSize) noexcept;
     void SYSTEM_DEFAULT_DECLARE MemoryCopy(void* dst, const void* src, uint32_t count) noexcept;
     MAYBE_NULLPTR SYSTEM_DEFAULT_DECLARE void* MallocMemory(size_t size) noexcept;

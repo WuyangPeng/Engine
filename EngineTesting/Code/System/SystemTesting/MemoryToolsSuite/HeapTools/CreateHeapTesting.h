@@ -5,23 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:34)
+///	引擎测试版本：0.8.1.5 (2022/12/21 22:53)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_CREATE_HEAP_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_CREATE_HEAP_TESTING_H
 
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "HeapTestingBase.h"
 
 namespace System
 {
-    class CreateHeapTesting final : public CoreTools::UnitTest
+    class CreateHeapTesting final : public HeapTestingBase
     {
     public:
         using ClassType = CreateHeapTesting;
-        using ParentType = UnitTest;
+        using ParentType = HeapTestingBase;
 
     public:
         explicit CreateHeapTesting(const OStreamShared& stream);
@@ -34,15 +31,10 @@ namespace System
 
         void CreateHeapSucceedTest();
         void DoCreateHeapSucceedTest(HeapCreate flag);
+        void CreateDefaultHeapSucceedTest(HeapCreate flag);
 
         void CreateHeapFailureTest();
         void DoCreateHeapFailureTest(HeapCreate flag);
-
-    private:
-        using HeapCreateFlagsContainer = std::vector<HeapCreate>;
-
-    private:
-        HeapCreateFlagsContainer heapCreateFlags;
     };
 }
 

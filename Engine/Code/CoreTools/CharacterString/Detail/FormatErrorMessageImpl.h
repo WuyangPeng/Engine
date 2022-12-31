@@ -15,6 +15,7 @@
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Windows/Fwd/WindowsFlagsFwd.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Base/BaseFwd.h"
 
 #include <memory>
@@ -44,13 +45,14 @@ namespace CoreTools
     private:
         using Local = System::WindowsHLocal;
         using DynamicLinkModule = System::DynamicLinkModule;
+        using ConstDynamicLinkModule = System::ConstDynamicLinkModule;
         using LoadingLibrarySharedPtr = std::shared_ptr<LoadingLibrary>;
 
     private:
         void InitMessage() noexcept;
         void AgainInitMessage() noexcept;
-        void InitNetworkMessage(DynamicLinkModule module) noexcept;
-        void LoadedModuleSucceed(DynamicLinkModule module) noexcept;
+        void InitNetworkMessage(ConstDynamicLinkModule module) noexcept;
+        void LoadedModuleSucceed(ConstDynamicLinkModule module) noexcept;
         void LoadedModuleFailure() noexcept;
         void ReleaseMemory() noexcept;
 

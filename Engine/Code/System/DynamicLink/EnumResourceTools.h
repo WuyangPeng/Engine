@@ -16,11 +16,11 @@
 #include "Using/EnumResourceToolsUsing.h"
 #include "Using/LoadLibraryUsing.h"
 #include "System/SystemOutput/Fwd/SystemOutputDataFwd.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
+// 枚举动态链接库中的资源。
 namespace System
 {
-    // 枚举动态链接库中的资源。
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE EnumResourceLanguagesInLibrary(DynamicLinkModule module,
                                                                          const DynamicLinkCharType* type,
                                                                          const DynamicLinkCharType* name,

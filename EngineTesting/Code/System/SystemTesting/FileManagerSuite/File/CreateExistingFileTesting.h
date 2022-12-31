@@ -5,20 +5,20 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:52)
+///	引擎测试版本：0.8.1.5 (2022/12/12 23:38)
 
-#ifndef SYSTEM_FILE_MANAGE_SUITE_CREATE_EXISTING_FILE_TESTING_H
-#define SYSTEM_FILE_MANAGE_SUITE_CREATE_EXISTING_FILE_TESTING_H
+#ifndef SYSTEM_FILE_MANAGER_SUITE_CREATE_EXISTING_FILE_TESTING_H
+#define SYSTEM_FILE_MANAGER_SUITE_CREATE_EXISTING_FILE_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "System/SystemTesting/FileManagerSuite/FileTestingBase.h"
 
 namespace System
 {
-    class CreateExistingFileTesting final : public CoreTools::UnitTest
+    class CreateExistingFileTesting final : public FileTestingBase
     {
     public:
         using ClassType = CreateExistingFileTesting;
-        using ParentType = UnitTest;
+        using ParentType = FileTestingBase;
 
     public:
         explicit CreateExistingFileTesting(const OStreamShared& stream);
@@ -30,7 +30,10 @@ namespace System
         void MainTest();
 
         void CreateExistingFileTest();
+
+    private:
+        String existingFileName;
     };
 }
 
-#endif  // SYSTEM_FILE_MANAGE_SUITE_CREATE_EXISTING_FILE_TESTING_H
+#endif  // SYSTEM_FILE_MANAGER_SUITE_CREATE_EXISTING_FILE_TESTING_H

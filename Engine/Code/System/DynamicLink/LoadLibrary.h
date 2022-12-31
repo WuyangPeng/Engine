@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/17 21:39)
+///	引擎版本：0.8.1.5 (2022/12/08 0:20)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_H
 #define SYSTEM_DYNAMIC_LINK_LOAD_LIBRARY_H
@@ -15,10 +15,9 @@
 #include "Fwd/DynamicLinkFlagsFwd.h"
 #include "Using/LoadLibraryUsing.h"
 
+// 加载和释放动态链接库。
 namespace System
 {
-    // 加载和释放动态链接库。
-
     NODISCARD DynamicLinkModule SYSTEM_DEFAULT_DECLARE LoadDynamicLibrary(const DynamicLinkCharType* fileName, LoadLibraryType flag) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FreeDynamicLibrary(DynamicLinkModule module) noexcept;
     NODISCARD DynamicLinkProcess SYSTEM_DEFAULT_DECLARE GetProcessAddress(DynamicLinkModule module, const char* processName) noexcept;

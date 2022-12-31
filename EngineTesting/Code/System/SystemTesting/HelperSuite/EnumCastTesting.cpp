@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.2 (2022/09/22 22:42)
+///	引擎测试版本：0.8.1.5 (2022/12/17 18:56)
 
 #include "EnumCastTesting.h"
 #include "Detail/NumberEnum.h"
 #include "System/Helper/EnumCast.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
@@ -46,34 +47,37 @@ void System::EnumCastTesting::CastTest()
     UnderlyingCastEnumPtr(2, &value);
 
     ASSERT_ENUM_EQUAL(value, Number::Two);
+
+    UnderlyingCastEnumPtr<SignedNumber>(2, nullptr);
 }
 
 void System::EnumCastTesting::WindowErrorCastTest()
 {
-    auto windowError = WindowError::Success;
+    auto originalWindowError = WindowError::Success;
+    ++originalWindowError;
 
-    const auto underlyingTypeValue = EnumCastUnderlying(windowError);
+    const auto underlyingTypeValue = EnumCastUnderlying(originalWindowError);
 
-    ASSERT_EQUAL(0, underlyingTypeValue);
+    ASSERT_EQUAL(1, underlyingTypeValue);
 
-    windowError = UnderlyingCastEnum<WindowError>(underlyingTypeValue);
+    const auto resultWindowError = UnderlyingCastEnum<WindowError>(underlyingTypeValue);
 
-    ASSERT_ENUM_EQUAL(windowError, WindowError::Success);
+    ASSERT_ENUM_EQUAL(originalWindowError, resultWindowError);
 }
 
 void System::EnumCastTesting::ConstexprCastTest()
 {
-    constexpr auto windowError0 = WindowError::Success;
+    constexpr auto originalWindowError = WindowError::Success;
 
-    constexpr auto underlyingTypeValue0 = EnumCastUnderlying(windowError0);
+    constexpr auto originalUnderlyingTypeValue = EnumCastUnderlying(originalWindowError);
 
-    ASSERT_EQUAL(0, underlyingTypeValue0);
+    ASSERT_EQUAL(0, originalUnderlyingTypeValue);
 
-    constexpr auto windowError1 = UnderlyingCastEnum<WindowError>(underlyingTypeValue0);
+    constexpr auto resultWindowError = UnderlyingCastEnum<WindowError>(originalUnderlyingTypeValue);
 
-    ASSERT_ENUM_EQUAL(windowError1, WindowError::Success);
+    ASSERT_ENUM_EQUAL(resultWindowError, WindowError::Success);
 
-    constexpr auto underlyingTypeValue1 = EnumCastUnderlying<int>(windowError1);
+    constexpr auto resultUnderlyingTypeValue = EnumCastUnderlying<int>(resultWindowError);
 
-    ASSERT_EQUAL(0, underlyingTypeValue1);
+    ASSERT_EQUAL(0, resultUnderlyingTypeValue);
 }

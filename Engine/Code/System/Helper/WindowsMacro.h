@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 13:55)
+///	引擎版本：0.8.1.5 (2022/12/16 21:37)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
 
-// Windows平台使用的宏，按需要添加于此。
+/// Windows平台使用的宏，按需要添加于此。
 
 #include "Platform.h"
 #include "UnicodeUsing.h"

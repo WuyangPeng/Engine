@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 13:46)
+///	引擎版本：0.8.1.5 (2022/12/16 21:42)
 
 #ifndef SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
 #define SYSTEM_HELPER_SELECT_STDLIB_CONFIG_H
@@ -16,14 +16,24 @@
 
 #if defined(__SGI_STL_PORT) || defined(_STLPORT_VERSION)
 
-    // 这个必须放在第一个，否则由于STLport通常位于一些其他库的顶部，我们可能最终检测到第一个而不是STLport。
+    /// 这个必须放在第一个，
+    /// 否则由于STLport通常位于一些其他库的顶部，
+    /// 我们可能最终检测到第一个而不是STLport。
     #define TCRE_STDLIB_CONFIG "StdLib/STLPort.h"
 
 #else  // !defined(__SGI_STL_PORT) && !defined(_STLPORT_VERSION)
 
-    // 如果我们的std lib不是某个版本的STLport，并且没有被检测到，那么包含<utility>，因为它是包含真正的C++ std的最小的头文件。
-    // 一些std库不包含他们的C++相关的宏在<cstddef>，所以这个额外的包含确保我们得到这些定义。
-    // 注意：不要依赖于包含这个头文件，因为用户可以短路这个#include，如果他们知道他们正在使用哪个std库。
+    /// 如果我们的std lib不是某个版本的STLport，
+    /// 并且没有被检测到，
+    /// 那么包含<utility>，
+    /// 因为它是包含真正的C++ std的最小的头文件。
+
+    /// 一些std库不包含他们的C++相关的宏在<cstddef>，
+    /// 所以这个额外的包含确保我们得到这些定义。
+    /// 注意：不要依赖于包含这个头文件，
+    /// 因为用户可以短路这个#include，
+    /// 如果他们知道他们正在使用哪个std库。
+
     #if !defined(__LIBCOMO__) &&          \
         !defined(__STD_RWCOMPILER_H__) && \
         !defined(_RWSTD_VER) &&           \
@@ -48,7 +58,7 @@
 
     #elif defined(__STD_RWCOMPILER_H__) || defined(_RWSTD_VER)
 
-        // Rogue Wave library
+        // Rogue Wave库
         #define TCRE_STDLIB_CONFIG "StdLib/Roguewave.h"
 
     #elif defined(_LIBCPP_VERSION)
@@ -63,7 +73,7 @@
 
     #elif defined(__STL_CONFIG_H)
 
-        // generic SGI STL
+        // 通用 SGI STL
         #define TCRE_STDLIB_CONFIG "StdLib/Sgi.h"
 
     #elif defined(__MSL_CPP__)

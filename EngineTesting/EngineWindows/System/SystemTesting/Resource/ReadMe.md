@@ -15,7 +15,11 @@
 					ConfigMarkTesting。
 （2） 用户宏：UserMacroTesting。
 （3） 字符串拼接宏：StringizeMacroTesting。 
-（4） Unicode字符 using 声明：UnicodeUsingTesting。 
+（4） Unicode字符 using 声明：StringMacroTesting、
+							  FileStreamMacroTesting、
+							  NullCharTesting、
+							  StringStreamMacroTesting、
+							  ToStringTesting。 
 （5） 打印编译器信息宏：PragmaMessageMacroTesting。
 （6） 版本号：VersionTesting。
 （7） 导出标志宏：ExportMacroTesting。
@@ -30,16 +34,16 @@
 （10）网络宏：NetworkMacroTesting。
 （11）平台头文件：PlatformTesting。
 （12）枚举的转换运算符：EnumCastTesting。
-（13）枚举宏：EnumAddableTesting、
-			  EnumSubtractableTesting、
-			  EnumMultiplicationTesting、
-			  EnumNegateTesting、
-			  EnumIncrementableTesting、
-			  EnumDecrementableTesting、
-			  EnumAndableTesting、
-			  EnumOrableTesting、
-			  EnumXorableTesting、
-			  EnumShiftableTesting。
+（13）枚举运算符：EnumAddableTesting、
+				  EnumSubtractableTesting、
+				  EnumMultiplicationTesting、
+				  EnumNegateTesting、
+				  EnumIncrementableTesting、
+				  EnumDecrementableTesting、
+				  EnumAndableTesting、
+				  EnumOrableTesting、
+				  EnumXorableTesting、
+				  EnumShiftableTesting。
 （14）Noexcept：NoexceptTesting。
 （15）PragmaWarning：PragmaWarningTesting。
 （16）gl扩展宏：GlExtensionsMacroTesting、
@@ -78,8 +82,7 @@
 （2）库工具：GetModuleHandleTesting、
 			 GetModuleFileNameTesting。
 （3）库目录：LibraryDirectoryTesting。
-（4）加载资源工具：LoadResourceToolsTesting、
-				   FindResourceTesting、
+（4）加载资源工具：FindResourceTesting、
 				   LoadResourceTesting、
 				   LoadStringTesting。
 （5）枚举资源数据：EnumResourceDataTesting。
@@ -94,13 +97,17 @@
 					  FormatErrorMessageUseBufferTesting、
 					  FormatErrorMessageUseDllMoudleAndLocalAllocTesting、
 					  FormatErrorMessageUseDllMoudleAndUseBufferTesting、
+					  FormatErrorMessageReturnStringTesting、
 					  FormatErrorMessageTesting、
 					  FormatStringMessageUseArgumentArrayAndLocalAllocTesting、
 					  FormatStringMessageUseArgumentArrayAndBufferTesting、
 					  FormatStringMessageUseVaListAndLocalAllocTesting、
 					  FormatStringMessageUseVaListAndUseBufferTesting、
-					  SoftwareExceptionTesting。
-（2） 代码页：CodePageValidTesting、CodePageTesting。
+					  SoftwareExceptionTesting、
+					  FormatErrorMessageParameterTesting。
+（2） 代码页：CodePageValidTesting、
+			  CodePageTesting、
+			  LocaleTesting。
 （3） 字符转换：MultiByteConversionWideCharTesting、
 				WideCharConversionMultiByteTesting、
 				UTF8ConversionWideCharTesting、
@@ -133,8 +140,11 @@
 						ConsoleScreenBufferInfoTesting、
 						SetConsoleHandleScreenBufferInfoTesting、
 						SetSystemConsoleScreenBufferSizeTesting。
-（4） 控制台字体：ConsoleFontTesting。 
-（5） 控制台模式：ConsoleModeTesting。 
+（4） 控制台字体：ConsoleFontSizeTesting、
+				  CurrentConsoleFontTesting、
+				  SetCurrentConsoleFontTesting。 
+（5） 控制台模式：ConsoleOutputModeTesting、
+				  ConsoleInputModeTesting。 
 （6） 控制台代码页：ConsoleCodePageTesting。 
 （7） 控制台创建：ConsoleCreateTesting。 
 
@@ -142,21 +152,21 @@
 6.	MemoryToolsSuite 
 
 对内存工具模块的单元测试，包括： 
-（1） 堆工具：CreateHeapTesting、
-			  AllocateHeapTesting、
-			  AllocateGenerateExceptionsTesting、
-			  ReAllocateHeapTesting、
-			  ValidateHeapTesting、
-			  CompactHeapTesting、
-			  CurrentProcessHeapTesting 。
-（2） 虚拟内存工具：AllocateVirtualOneStepTesting、
-					AllocateVirtualSeparationTesting、
-					VirtualProtectTesting、
-					VirtualQueryTesting。
-（3） 文件映射：CreateFileMappingTesting、
-				OpenFileMappingTesting、
-				ViewOfFileTesting。
-（4） 内存帮助：MemorySetTesting、
+（1） 堆：CreateHeapTesting、
+		  AllocateHeapTesting、
+		  AllocateGenerateExceptionsTesting、
+		  ReAllocateHeapTesting、
+		  ValidateHeapTesting、
+		  CompactHeapTesting、
+		  CurrentProcessHeapTesting 。
+（2） 虚拟内存：AllocateVirtualOneStepTesting、
+				AllocateVirtualSeparationTesting、
+				VirtualProtectTesting、
+				VirtualQueryTesting。
+（3） 文件映射系统：CreateFileMappingTesting、
+					OpenFileMappingTesting、
+					ViewOfFileTesting。
+（4） 内存工具：MemorySetTesting、
 				MemoryCopyTesting、
 				MallocMemoryTesting、
 				FillMemoryTesting、
@@ -249,28 +259,34 @@
  
 对文件管理模块的单元测试，包括：
 （1） C函数文件系统：CFileOpenTesting、
-					 CFileReadTesting、
-					 CFileWriteTesting、
-					 CFileSetvBufTesting、
+					 CFileWriteReadTesting、
+					 CFileSetVBufferTesting、
 					 CFileCharacterTesting、
 					 CFileOperatorTesting。
 （2） 基础文件系统：CreateExistingFileTesting、
 					CreateFileWithDefaultAttributesTesting、
 					CreateFileWithOtherFlagsTesting、
 					CreateFileWithSecurityFlagsTesting、
-					DirectoryTesting、
 					CreateFileWithAttributesTesting、
+					DirectoryTesting、					
 					MoveFileTesting、
 					FileLengthTesting、
 					CopyFileTesting、
 					FileHandlePointerTesting、
 					OpenFileTesting、
 					ReadFileTesting、
-					WriteFileTesting。
-（3） 文件工具：CreateDirectoryTesting、DiskFreeTesting。
-（4） 文件时间：FileTimeCompareTesting、FileTimeConvertTesting、FileTimeTesting。
-（5） 查找文件：ChangeNotificationTesting、FindFileTesting、FindVolumeTesting。
-（6） 环境变量：EnvironmentVariableTesting。 
+					ReadFileUseOverlappedTesting、
+					ReadFileUseCompletionRoutineTesting、
+					WriteFileTesting、
+					WriteFileUseCompletionRoutineTesting、
+					WriteFileUseOverlappedTesting、
+					AppendFileTesting。
+（3） 辅助工具：CreateDirectoryTesting、
+				DiskFreeTesting。
+（4） 文件时间：FileTimeCompareTesting、
+				FileTimeConvertTesting、
+				FileTimeTesting。 
+（5） 环境变量：EnvironmentVariableTesting。 
 
 ----------------------------
 10.	SecuritySuite

@@ -10,7 +10,7 @@
 #ifndef FRAMEWORK_MAIN_FUNCTION_HELPER_DIRECTORY_H
 #define FRAMEWORK_MAIN_FUNCTION_HELPER_DIRECTORY_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Framework
 {
@@ -64,12 +64,6 @@ namespace Framework
         OpenGL = System::EnumCastUnderlying(AnalysisDirectory::OpenGL),
         DirectX = System::EnumCastUnderlying(AnalysisDirectory::DirectX),
     };
-
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(UpperDirectory);
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(RenderingAnalysisDirectory);
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(AnalysisDirectory);
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(EndianDirectory);
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(RenderingDirectory);
 
     static_assert(System::EnumCastUnderlying(UpperDirectory::Resource) == System::EnumCastUnderlying(AnalysisDirectory::Resource));
     static_assert(System::EnumCastUnderlying(UpperDirectory::Configuration) == System::EnumCastUnderlying(AnalysisDirectory::Configuration));

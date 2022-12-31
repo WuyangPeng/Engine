@@ -28,7 +28,7 @@ void CoreTools::DeltaTimeManagerTesting::TimeTest()
     ASSERT_APPROXIMATE(time.GetElapsedTimeInSeconds(), 0.0, 1e-10);
     ASSERT_LESS(0, time.GetNowTimeInSeconds());
     ASSERT_LESS(0, time.GetNowTimeInMicroseconds());
-    ASSERT_EQUAL(time.GetNowTimeInSeconds(), time.GetNowTimeInMicroseconds() / System::g_Microseconds);
+    ASSERT_EQUAL(time.GetNowTimeInSeconds(), time.GetNowTimeInMicroseconds() / System::gMicroseconds);
 
     System::SystemSleep(5);
 

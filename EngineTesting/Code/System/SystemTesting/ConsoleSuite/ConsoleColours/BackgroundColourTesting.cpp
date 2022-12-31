@@ -5,52 +5,50 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/15 22:08)
+///	引擎测试版本：0.8.1.5 (2022/12/03 18:41)
 
 #include "BackgroundColourTesting.h"
 #include "System/Console/ConsoleColours.h"
 #include "System/Console/ConsoleHandle.h"
 #include "System/Console/Flags/ConsoleColoursFlags.h"
-#include "System/Console/Flags/ConsoleHandleFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::BackgroundColourTesting::BackgroundColourTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      standardHandleFlags{ StandardHandle::Output, StandardHandle::Error },
-      backgroundColourFlags{ BackgroundColour::Black,
-                             BackgroundColour::IntensifiedBlack,
-                             BackgroundColour::Red,
-                             BackgroundColour::IntensifiedRed,
-                             BackgroundColour::Green,
-                             BackgroundColour::IntensifiedGreen,
-                             BackgroundColour::Blue,
-                             BackgroundColour::IntensifiedBlue,
-                             BackgroundColour::Yellow,
-                             BackgroundColour::IntensifiedYellow,
-                             BackgroundColour::Cyan,
-                             BackgroundColour::IntensifiedCyan,
-                             BackgroundColour::Magenta,
-                             BackgroundColour::IntensifiedMagenta,
-                             BackgroundColour::White,
-                             BackgroundColour::IntensifiedWhite },
-      backgroundColourFlagsMapping{ { BackgroundColour::Black, TextColour::White },
-                                    { BackgroundColour::Red, TextColour::White },
-                                    { BackgroundColour::Green, TextColour::Black },
-                                    { BackgroundColour::Blue, TextColour::White },
-                                    { BackgroundColour::Yellow, TextColour::White },
-                                    { BackgroundColour::Cyan, TextColour::Black },
-                                    { BackgroundColour::Magenta, TextColour::White },
-                                    { BackgroundColour::White, TextColour::Black },
-                                    { BackgroundColour::IntensifiedBlack, TextColour::White },
-                                    { BackgroundColour::IntensifiedRed, TextColour::White },
-                                    { BackgroundColour::IntensifiedGreen, TextColour::Black },
-                                    { BackgroundColour::IntensifiedBlue, TextColour::White },
-                                    { BackgroundColour::IntensifiedYellow, TextColour::Black },
-                                    { BackgroundColour::IntensifiedCyan, TextColour::Black },
-                                    { BackgroundColour::IntensifiedMagenta, TextColour::White },
-                                    { BackgroundColour::IntensifiedWhite, TextColour::Black } },
+      backgroundColours{ BackgroundColour::Black,
+                         BackgroundColour::IntensifiedBlack,
+                         BackgroundColour::Red,
+                         BackgroundColour::IntensifiedRed,
+                         BackgroundColour::Green,
+                         BackgroundColour::IntensifiedGreen,
+                         BackgroundColour::Blue,
+                         BackgroundColour::IntensifiedBlue,
+                         BackgroundColour::Yellow,
+                         BackgroundColour::IntensifiedYellow,
+                         BackgroundColour::Cyan,
+                         BackgroundColour::IntensifiedCyan,
+                         BackgroundColour::Magenta,
+                         BackgroundColour::IntensifiedMagenta,
+                         BackgroundColour::White,
+                         BackgroundColour::IntensifiedWhite },
+      backgroundColourMapping{ { BackgroundColour::Black, TextColour::White },
+                               { BackgroundColour::Red, TextColour::White },
+                               { BackgroundColour::Green, TextColour::Black },
+                               { BackgroundColour::Blue, TextColour::White },
+                               { BackgroundColour::Yellow, TextColour::White },
+                               { BackgroundColour::Cyan, TextColour::Black },
+                               { BackgroundColour::Magenta, TextColour::White },
+                               { BackgroundColour::White, TextColour::Black },
+                               { BackgroundColour::IntensifiedBlack, TextColour::White },
+                               { BackgroundColour::IntensifiedRed, TextColour::White },
+                               { BackgroundColour::IntensifiedGreen, TextColour::Black },
+                               { BackgroundColour::IntensifiedBlue, TextColour::White },
+                               { BackgroundColour::IntensifiedYellow, TextColour::Black },
+                               { BackgroundColour::IntensifiedCyan, TextColour::Black },
+                               { BackgroundColour::IntensifiedMagenta, TextColour::White },
+                               { BackgroundColour::IntensifiedWhite, TextColour::Black } },
       randomEngine{ GetEngineRandomSeed() }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
@@ -71,7 +69,7 @@ void System::BackgroundColourTesting::MainTest()
 
 bool System::BackgroundColourTesting::RandomShuffleFlags()
 {
-    shuffle(standardHandleFlags.begin(), standardHandleFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_1(RandomShuffleStandardHandle, randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(BackgroundColourTest);
 
@@ -80,24 +78,20 @@ bool System::BackgroundColourTesting::RandomShuffleFlags()
 
 void System::BackgroundColourTesting::BackgroundColourTest()
 {
-    for (auto index = 0u; index < backgroundColourFlags.size(); ++index)
+    for (auto index = 0u; index < backgroundColours.size(); ++index)
     {
-        const auto standardHandleFlag = standardHandleFlags.at(index % standardHandleFlags.size());
-        const auto backgroundColourFlag = backgroundColourFlags.at(index);
-        const auto textColourFlag = backgroundColourFlagsMapping.at(backgroundColourFlag);
-
-        const auto consoleCommonFlag = ConsoleCommon::Default;
-
-        ASSERT_TRUE(SetSystemConsoleTextAttribute(GetStandardHandle(standardHandleFlag), textColourFlag, backgroundColourFlag, consoleCommonFlag));
-
-        PrintMessage(standardHandleFlag, textColourFlag, backgroundColourFlag, consoleCommonFlag);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoBackgroundColourTest, index);
     }
 }
 
-void System::BackgroundColourTesting::SetDefaultTextAttribute()
+void System::BackgroundColourTesting::DoBackgroundColourTest(size_t index)
 {
-    for (auto value : standardHandleFlags)
-    {
-        ASSERT_TRUE(SetSystemConsoleDefaultTextAttribute(GetStandardHandle(value)));
-    }
+    const auto standardHandle = GetConsoleStandardHandle(index);
+    const auto backgroundColour = backgroundColours.at(index);
+    const auto textColour = backgroundColourMapping.at(backgroundColour);
+    constexpr auto consoleCommon = ConsoleCommon::Default;
+
+    ASSERT_TRUE(SetSystemConsoleTextAttribute(GetStandardHandle(standardHandle), textColour, backgroundColour, consoleCommon));
+
+    PrintMessage(standardHandle, textColour, backgroundColour, consoleCommon);
 }

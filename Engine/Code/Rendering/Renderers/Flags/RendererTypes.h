@@ -10,7 +10,7 @@
 #ifndef RENDERING_RENDERERS_RENDERER_TYPES_H
 #define RENDERING_RENDERERS_RENDERER_TYPES_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 #include <iostream>
 
@@ -34,7 +34,6 @@ namespace Rendering
         Max,
     };
 
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(RendererTypes);
 }
 
 #endif  // RENDERING_RENDERERS_RENDERER_TYPES_H

@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H
 #define MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Mathematics
 {
@@ -24,8 +24,6 @@ namespace Mathematics
         Positive = 1
     };
 
-    ENUM_NEGATE_OPERATOR_DEFINE(NumericalValueSymbol);
-    ENUM_MULTIPLICATION_OPERATOR_DEFINE(NumericalValueSymbol);
 }
 
 #endif  // MATHEMATICS_BASE_NUMERICAL_VALUE_SYMBOL_H

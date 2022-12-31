@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/09 23:22)
+///	引擎测试版本：0.8.1.5 (2022/12/10 22:49)
 
 #include "LoadStringWindowsTesting.h"
 #include "System/DynamicLink/LoadResourceTools.h"
@@ -17,7 +17,6 @@
 
 #include <array>
 
-using std::array;
 using namespace std::literals;
 
 System::LoadStringWindowsTesting::LoadStringWindowsTesting(const OStreamShared& stream, WindowsHInstance instance)
@@ -40,9 +39,11 @@ void System::LoadStringWindowsTesting::MainTest()
 
 void System::LoadStringWindowsTesting::LoadStringTest()
 {
-    array<DynamicLinkCharType, gMaxPath> stringTableValue{};
+    using BufferType = std::array<DynamicLinkCharType, gMaxPath>;
+    BufferType stringTableValue{};
 
     const auto maxFileNameLength = LoadStringInLibrary(instance, IDS_STRING, stringTableValue.data(), gMaxPath);
+
     DynamicLinkString result{ stringTableValue.data() };
     ASSERT_EQUAL(boost::numeric_cast<int>(result.size()), maxFileNameLength);
 

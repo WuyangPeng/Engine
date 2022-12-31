@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-ENUM_INCREMENTABLE_OPERATOR_DEFINE(System::WindowError);
-
 System::FormatErrorMessageUseBufferTesting::FormatErrorMessageUseBufferTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -119,4 +117,3 @@ void System::FormatErrorMessageUseBufferTesting::FormatErrorMessageUnknownTest(W
         ASSERT_NOT_THROW_EXCEPTION_1(NullBufferTest, buffer);
     }
 }
-

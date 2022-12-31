@@ -12,6 +12,7 @@
 
 #include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #include <random>
 #include <vector>

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/15 22:01)
+///	引擎版本：0.8.1.5 (2022/12/02 16:52)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
@@ -17,10 +17,9 @@
 #include "Using/ConsoleScreenBufferUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
+// 控制台缓冲区的设置和获取。
 namespace System
 {
-    // 控制台缓冲区的设置和获取。
-
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemConsoleScreenBuffer(DesiredAccessGeneric desiredAccess,
                                                                                        ConsoleScreenBufferShareMode shareMode,
                                                                                        const WindowSecurityAttributes* securityAttributes) noexcept;

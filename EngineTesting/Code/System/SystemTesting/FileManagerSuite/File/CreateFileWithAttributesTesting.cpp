@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 19:58)
+///	引擎测试版本：0.8.1.5 (2022/12/13 10:42)
 
 #include "CreateFileWithAttributesTesting.h"
 #include "System/FileManager/File.h"
@@ -14,65 +14,12 @@
 #include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
-#include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 using namespace std::literals;
 
 System::CreateFileWithAttributesTesting::CreateFileWithAttributesTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      // FileHandleDesiredAccess::All需要管理员身份运行。
-      fileHandleDesiredAccessFlags{ FileHandleDesiredAccess::Read,
-                                    FileHandleDesiredAccess::Write,
-                                    FileHandleDesiredAccess::Execute,
-                                    FileHandleDesiredAccess::ReadWrite },
-      fileHandleShareModeFlags{ FileHandleShareMode::Prevents,
-                                FileHandleShareMode::ShareDelete,
-                                FileHandleShareMode::ShareRead,
-                                FileHandleShareMode::ShareWrite,
-                                FileHandleShareMode::ReadWrite },
-      fileHandleCreationDispositionFlags{ FileHandleCreationDisposition::CreateNew,
-                                          FileHandleCreationDisposition::CreateAlways,
-                                          FileHandleCreationDisposition::OpenExisting,
-                                          FileHandleCreationDisposition::OpenAlways,
-                                          FileHandleCreationDisposition::TruncateExisting },
-      fileHandleAttributesFlags{ FileHandleAttributes::ReadOnly,
-                                 FileHandleAttributes::Hidden,
-                                 FileHandleAttributes::System,
-                                 FileHandleAttributes::Archive,
-                                 FileHandleAttributes::Device,
-                                 FileHandleAttributes::Normal,
-                                 FileHandleAttributes::Temporary,
-                                 FileHandleAttributes::Offline,
-                                 FileHandleAttributes::Encrypted },
-      fileHandleOtherFlags{ FileHandleOther::Default,
-                            FileHandleOther::WriteThrough,
-                            FileHandleOther::Overlapped,
-                            FileHandleOther::NoBuffering,
-                            FileHandleOther::RandomAccess,
-                            FileHandleOther::SequentialScan,
-                            FileHandleOther::DeleteOnClose,
-                            FileHandleOther::BackupSemantics,
-                            FileHandleOther::PosixSemantics,
-                            FileHandleOther::OpenReparsePoint,
-                            FileHandleOther::OpenNoRecall,
-                            FileHandleOther::FirstPipeInstance },
-      fileHandleSecurityFlags{ FileHandleSecurity::Default,
-                               FileHandleSecurity::Anonymous,
-                               FileHandleSecurity::Identification,
-                               FileHandleSecurity::Impersonation,
-                               FileHandleSecurity::Delegation,
-                               FileHandleSecurity::ContextTracking,
-                               FileHandleSecurity::EffectiveOnly,
-                               FileHandleSecurity::SqosPresent,
-                               FileHandleSecurity::ValidSqosFlags },
-      randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement<size_t>({ fileHandleDesiredAccessFlags.size(),
-                                               fileHandleShareModeFlags.size(),
-                                               fileHandleCreationDispositionFlags.size(),
-                                               fileHandleAttributesFlags.size(),
-                                               fileHandleOtherFlags.size(),
-                                               fileHandleSecurityFlags.size() }) }
+    : ParentType{ stream }, onlyReadFile{ SYSTEM_TEXT("Resource/FileTesting/CreateOnlyReadFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -91,12 +38,7 @@ void System::CreateFileWithAttributesTesting::MainTest()
 
 bool System::CreateFileWithAttributesTesting::RandomShuffleFlags()
 {
-    shuffle(fileHandleDesiredAccessFlags.begin(), fileHandleDesiredAccessFlags.end(), randomEngine);
-    shuffle(fileHandleShareModeFlags.begin(), fileHandleShareModeFlags.end(), randomEngine);
-    shuffle(fileHandleCreationDispositionFlags.begin(), fileHandleCreationDispositionFlags.end(), randomEngine);
-    shuffle(fileHandleOtherFlags.begin(), fileHandleOtherFlags.end(), randomEngine);
-    shuffle(fileHandleSecurityFlags.begin(), fileHandleSecurityFlags.end(), randomEngine);
-    shuffle(fileHandleAttributesFlags.begin(), fileHandleAttributesFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomFileHandleFlags);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFileTest);
 
@@ -105,65 +47,124 @@ bool System::CreateFileWithAttributesTesting::RandomShuffleFlags()
 
 void System::CreateFileWithAttributesTesting::CreateFileTest()
 {
-    const auto extendName = SYSTEM_TEXT(".txt"s);
-    const auto fileNamePrefix = SYSTEM_TEXT("Resource/FileTesting/CreateFile"s);
-    const auto newFileName = fileNamePrefix + System::ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
-    const auto existingFileName = SYSTEM_TEXT("Resource/FileTesting/CreateOnlyReadFile.txt"s);
-
-    for (auto index = 0u; index < maxSize; ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        auto fileHandleDesiredAccess = fileHandleDesiredAccessFlags.at(index % fileHandleDesiredAccessFlags.size());
-        auto fileHandleShareMode = fileHandleShareModeFlags.at(index % fileHandleShareModeFlags.size());
-        auto fileHandleCreationDisposition = fileHandleCreationDispositionFlags.at(index % fileHandleCreationDispositionFlags.size());
-        auto fileHandleOther = fileHandleOtherFlags.at(index % fileHandleOtherFlags.size());
-        auto fileHandleAttributesFlag = fileHandleAttributesFlags.at(index % fileHandleAttributesFlags.size());
-        auto fileHandleSecurityFlag = fileHandleSecurityFlags.at(index % fileHandleSecurityFlags.size());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateFileTest, index);
+    }
+}
 
-        auto createFileName = existingFileName;
+void System::CreateFileWithAttributesTesting::DoCreateFileTest(size_t index)
+{
+    const auto fileHandleAttribute = GetFileHandleAttributes(index);
+    if (fileHandleAttribute == FileHandleAttributes::ReadOnly)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(ReadOnlyTest, fileHandleAttribute);
+    }
+    else
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(CommonTest, index, fileHandleAttribute);
+    }
+}
 
-        if (fileHandleAttributesFlag == FileHandleAttributes::ReadOnly)
-        {
-            fileHandleDesiredAccess = FileHandleDesiredAccess::Read;
-            fileHandleShareMode = FileHandleShareMode::ShareRead;
-            fileHandleCreationDisposition = FileHandleCreationDisposition::OpenAlways;
-            fileHandleOther = FileHandleOther::SequentialScan;
-            fileHandleSecurityFlag = FileHandleSecurity::Default;
-        }
-        else if (fileHandleCreationDisposition != FileHandleCreationDisposition::OpenExisting &&
-                 fileHandleCreationDisposition != FileHandleCreationDisposition::TruncateExisting)
-        {
-            createFileName = newFileName + ToString(index) + extendName;
-        }
+void System::CreateFileWithAttributesTesting::ReadOnlyTest(FileHandleAttributes fileHandleAttribute)
+{
+    constexpr auto fileHandleDesiredAccess = FileHandleDesiredAccess::Read;
+    constexpr auto fileHandleShareMode = FileHandleShareMode::ShareRead;
+    constexpr auto fileHandleCreationDisposition = FileHandleCreationDisposition::OpenAlways;
+    constexpr auto fileHandleOther = FileHandleOther::SequentialScan;
+    constexpr auto fileHandleSecurity = FileHandleSecurity::Default;
 
-        if (fileHandleCreationDisposition == FileHandleCreationDisposition::CreateNew ||
-            fileHandleOther == FileHandleOther::DeleteOnClose)
-        {
-            fileHandleCreationDisposition = FileHandleCreationDisposition::CreateNew;
+    const auto fileHandle = CreateSystemFile(onlyReadFile,
+                                             fileHandleDesiredAccess,
+                                             fileHandleShareMode,
+                                             nullptr,
+                                             fileHandleCreationDisposition,
+                                             fileHandleAttribute,
+                                             fileHandleOther,
+                                             fileHandleSecurity,
+                                             nullptr);
 
-            createFileName = newFileName + ToString(index) + extendName;
-        }
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, fileHandle);
 
-        if (fileHandleCreationDisposition == FileHandleCreationDisposition::TruncateExisting)
-        {
-            fileHandleDesiredAccess |= FileHandleDesiredAccess::Write;
-        }
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, fileHandle);
+}
 
-        auto fileHandle = CreateSystemFile(createFileName,
-                                           fileHandleDesiredAccess,
-                                           fileHandleShareMode,
-                                           nullptr,
-                                           fileHandleCreationDisposition,
-                                           fileHandleAttributesFlag,
-                                           fileHandleOther,
-                                           fileHandleSecurityFlag,
-                                           nullptr);
+void System::CreateFileWithAttributesTesting::CommonTest(size_t index, FileHandleAttributes fileHandleAttribute)
+{
+    const auto fileHandleCreationDisposition = GetFileHandleCreationDisposition(index);
 
-        ASSERT_TRUE(IsFileHandleValid(fileHandle));
-        ASSERT_TRUE(CloseSystemFile(fileHandle));
+    if (fileHandleCreationDisposition == FileHandleCreationDisposition::OpenExisting ||
+        fileHandleCreationDisposition == FileHandleCreationDisposition::TruncateExisting)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_3(ExistingTest, index, fileHandleAttribute, fileHandleCreationDisposition);
+    }
+    else
+    {
+        ASSERT_NOT_THROW_EXCEPTION_3(NonExistentTest, index, fileHandleAttribute, fileHandleCreationDisposition);
+    }
+}
 
-        if (createFileName != existingFileName && fileHandleOther != FileHandleOther::DeleteOnClose)
-        {
-            ASSERT_TRUE(RemoveSystemFile(createFileName));
-        }
+void System::CreateFileWithAttributesTesting::ExistingTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition)
+{
+    const auto fileHandleOther = GetFileHandleOther(index);
+
+    if (fileHandleOther == FileHandleOther::DeleteOnClose)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_3(NonExistentTest, index, fileHandleAttribute, FileHandleCreationDisposition::CreateNew);
+    }
+    else
+    {
+        ASSERT_NOT_THROW_EXCEPTION_3(DoExistingTest, index, fileHandleAttribute, fileHandleCreationDisposition);
+    }
+}
+
+void System::CreateFileWithAttributesTesting::DoExistingTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition)
+{
+    const auto fileHandleShareMode = GetFileHandleShareMode(index);
+    const auto fileHandleOther = GetFileHandleOther(index);
+    const auto fileHandleSecurity = GetFileHandleSecurity(index);
+    const auto fileHandleDesiredAccess = GetFileHandleDesiredAccess(index, fileHandleCreationDisposition);
+
+    const auto fileHandle = CreateSystemFile(onlyReadFile,
+                                             fileHandleDesiredAccess,
+                                             fileHandleShareMode,
+                                             nullptr,
+                                             fileHandleCreationDisposition,
+                                             fileHandleAttribute,
+                                             fileHandleOther,
+                                             fileHandleSecurity,
+                                             nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, fileHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, fileHandle);
+}
+
+void System::CreateFileWithAttributesTesting::NonExistentTest(size_t index, FileHandleAttributes fileHandleAttribute, FileHandleCreationDisposition fileHandleCreationDisposition)
+{
+    const auto createFileName = GetCreateFileName(index);
+
+    const auto fileHandleDesiredAccess = GetFileHandleDesiredAccess(index);
+    const auto fileHandleShareMode = GetFileHandleShareMode(index);
+    const auto fileHandleOther = GetFileHandleOther(index);
+    const auto fileHandleSecurity = GetFileHandleSecurity(index);
+
+    const auto fileHandle = CreateSystemFile(createFileName,
+                                             fileHandleDesiredAccess,
+                                             fileHandleShareMode,
+                                             nullptr,
+                                             fileHandleCreationDisposition,
+                                             fileHandleAttribute,
+                                             fileHandleOther,
+                                             fileHandleSecurity,
+                                             nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(IsFileHandleValidTest, fileHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFile, fileHandle);
+
+    if (fileHandleOther != FileHandleOther::DeleteOnClose)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(RemoveFile, createFileName);
     }
 }
