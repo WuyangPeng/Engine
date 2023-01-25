@@ -10,7 +10,10 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AppenderPrintFlagsExist.h"
+#include "System/Helper/EnumOperator.h"
 #include "CoreTools/LogManager/Flags/LogManagerFlags.h"
+
+using System::operator&;
 
 bool CoreTools::AppenderPrintFlagsExist::IsExist(AppenderPrint lhsAppenderPrintFlags, AppenderPrint rhsAppenderPrint) noexcept
 {

@@ -12,10 +12,11 @@
 #include "OpenGLStructuredBuffer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/CounterType.h"
+#include "System/OpenGL/OpenGLBuffers.h"
 
 Rendering::OpenGLStructuredBuffer::OpenGLStructuredBuffer(const StructuredBufferSharedPtr& buffer, const std::string& name)
     : ParentType{ buffer, name, BindBuffer::ShaderStorageBuffer }, counterOffset{ 0 }
@@ -92,7 +93,7 @@ bool Rendering::OpenGLStructuredBuffer::GetNumActiveElements()
 
     OpenGLInt count{};
     System::SetGLBindBuffer(GetType(), GetGLHandle());
-    System::SetGLGetBufferSubData(GetType(), counterOffset, 4, &count);
+    System::GetGLBufferSubData(GetType(), counterOffset, 4, &count);
     System::SetGLBindBuffer(GetType(), 0);
 
     count = std::max(0, count);

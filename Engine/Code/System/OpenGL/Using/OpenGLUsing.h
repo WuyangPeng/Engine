@@ -1,17 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:29)
+///	引擎版本：0.9.0.0 (2023/01/12 22:41)
 
 #ifndef SYSTEM_OPENGL_OPENGL_USING_H
 #define SYSTEM_OPENGL_OPENGL_USING_H
 
 #include "System/Helper/GLExtensionsMacro.h"
 #include "System/Helper/UserMacro.h"
+
+#include <array>
 
 namespace System
 {
@@ -35,8 +37,13 @@ namespace System
     using OpenGLChar = GLchar;
     using OpenGLInt64 = GLint64;
     using OpenGLUInt64 = GLuint64;
+    using OpenGLHalf = GLhalf;
 
     constexpr auto invalidGLIndex = GL_INVALID_INDEX;
+
+    using ComputeWorkGroupSizeType = std::array<OpenGLInt, 3>;
+    using ViewportQueryType = std::array<OpenGLInt, 4>;
+    using DepthRangeQueryType = std::array<OpenGLDouble, 2>;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_USING_H

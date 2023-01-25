@@ -10,7 +10,7 @@
 #ifndef RENDERING_STATE_DEPTH_STENCIL_STATE_OPERATION_H
 #define RENDERING_STATE_DEPTH_STENCIL_STATE_OPERATION_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {

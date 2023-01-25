@@ -101,12 +101,12 @@ void System::WellKnownSidTesting::MainTest()
 
 void System::WellKnownSidTesting::CreateWellKnownSecurityIdentifierTest()
 {
-    array<WindowsDWord, gSecurityMaxSidSize> buffer{};
+    array<WindowsDWord, securityMaxSidSize> buffer{};
 
     for (auto wellKnownSidType : securityWellKnownSidType)
     {
         buffer.fill(0);
-        auto sidCount = gSecurityMaxSidSize;
+        auto sidCount = securityMaxSidSize;
         ASSERT_TRUE(CreateWellKnownSecurityIdentifier(wellKnownSidType, nullptr, buffer.data(), &sidCount));
 
         ASSERT_TRUE(IsWellKnownSecurityIdentifier(buffer.data(), wellKnownSidType));

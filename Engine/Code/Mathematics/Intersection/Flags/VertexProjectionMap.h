@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_INTERSECTION_VERTEX_PROJECTION_MAP_H
 #define MATHEMATICS_INTERSECTION_VERTEX_PROJECTION_MAP_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Mathematics
 {

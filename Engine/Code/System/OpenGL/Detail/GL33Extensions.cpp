@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:37)
+///	引擎版本：0.9.0.0 (2023/01/12 18:56)
 
 #include "System/SystemExport.h"
 
@@ -18,7 +18,7 @@
 // OpenGL 3.3
 namespace System
 {
-    auto g_ExistsOpenGL33 = ExistsOpenGLExtensions::Unknown;
+    auto existsOpenGL33 = ExistsOpenGLExtensions::Unknown;
 
     PFNGLBINDFRAGDATALOCATIONINDEXEDPROC glBindFragDataLocationIndexed{ nullptr };
     PFNGLGETFRAGDATAINDEXPROC glGetFragDataIndex{ nullptr };
@@ -52,14 +52,14 @@ namespace System
 
 System::ExistsOpenGLExtensions System::IsExistsOpenGL33() noexcept
 {
-    return g_ExistsOpenGL33;
+    return existsOpenGL33;
 }
 
 void System::InitOpenGL33() noexcept
 {
     if (System::OpenGLSystemVersion::Version33 <= System::GetOpenGLVersion())
     {
-        g_ExistsOpenGL33 = ExistsOpenGLExtensions::Exists;
+        existsOpenGL33 = ExistsOpenGLExtensions::Exists;
 
         SYSTEM_GET_FUNCTION(glBindFragDataLocationIndexed);
         SYSTEM_GET_FUNCTION(glGetFragDataIndex);
@@ -92,7 +92,7 @@ void System::InitOpenGL33() noexcept
     }
     else
     {
-        g_ExistsOpenGL33 = ExistsOpenGLExtensions::NotExist;
+        existsOpenGL33 = ExistsOpenGLExtensions::NotExist;
     }
 }
 

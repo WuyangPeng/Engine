@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:21)
+///	引擎版本：0.9.0.0 (2023/01/12 22:39)
 
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_H
@@ -58,6 +58,13 @@ namespace System
         TextureMaxLevel = GL_TEXTURE_MAX_LEVEL,
     };
 
+    enum class TextureLevelParameter
+    {
+        Width = GL_TEXTURE_WIDTH,
+        Height = GL_TEXTURE_HEIGHT,
+        Depth = GL_TEXTURE_DEPTH,
+    };
+
     enum class ClientState
     {
         VertexArray = GL_VERTEX_ARRAY,
@@ -95,6 +102,7 @@ namespace System
         CopyReadBuffer = GL_COPY_READ_BUFFER,
         CopyWriteBuffer = GL_COPY_WRITE_BUFFER,
         AtomicCounterBuffer = GL_ATOMIC_COUNTER_BUFFER,
+        TransformFeedbackBuffer = GL_TRANSFORM_FEEDBACK_BUFFER,
     };
 
     enum class TextureInternalFormat
@@ -267,6 +275,7 @@ namespace System
     {
         Static = GL_STATIC_DRAW,
         Dynamic = GL_DYNAMIC_DRAW,
+        Stream = GL_STREAM_DRAW,
     };
 
     enum class SamplerFilter
@@ -389,6 +398,7 @@ namespace System
         Stencil = GL_STENCIL_ATTACHMENT,
         DepthStencilAttachment = GL_DEPTH_STENCIL_ATTACHMENT,
         DepthAttachment = GL_DEPTH_ATTACHMENT,
+        Back = GL_BACK,
     };
 
     enum class CheckFrambufferStatus

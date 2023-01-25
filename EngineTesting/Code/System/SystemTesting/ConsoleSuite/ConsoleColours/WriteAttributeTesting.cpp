@@ -32,8 +32,6 @@ void System::WriteAttributeTesting::DoRunUnitTest()
 
 void System::WriteAttributeTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
-
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
 }
 

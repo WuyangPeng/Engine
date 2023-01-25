@@ -13,13 +13,14 @@
 #include "OpenGLMapping.h"
 #include "OpenGLRenderTargetDataImpl.h"
 #include "OpenGLTexture2D.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/PlatformTexture2D.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"
 #include "Rendering/Resources/Textures/DrawTarget.h"
+#include "System/OpenGL/OpenGLBase.h"
 
 Rendering::OpenGLRenderTargetDataImpl::OpenGLRenderTargetDataImpl(Renderer* renderer, const DrawTarget* renderTarget)
     : numTargets{ renderTarget != nullptr ? renderTarget->GetNumTargets() : 0 },

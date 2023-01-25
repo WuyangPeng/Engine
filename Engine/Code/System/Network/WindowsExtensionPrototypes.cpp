@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:22)
+///	引擎版本：0.9.0.0 (2023/01/07 13:49)
 
 #include "System/SystemExport.h"
 
@@ -13,15 +13,15 @@
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/EnumCast.h"
 
-System::WinSockStartUpReturn System::WinSockStartUp(WindowsWord versionRequired, WinSockDataPtr wSAData) noexcept
+System::WinSockStartUpReturn System::WinSockStartUp(WindowsWord versionRequired, WinSockDataPtr wsaData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return UnderlyingCastEnum<WinSockStartUpReturn>(::WSAStartup(versionRequired, wSAData));
+    return UnderlyingCastEnum<WinSockStartUpReturn>(::WSAStartup(versionRequired, wsaData));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(versionRequired, wSAData);
+    UnusedFunction(versionRequired, wsaData);
 
     return WinSockStartUpReturn::VerNotSupported;
 

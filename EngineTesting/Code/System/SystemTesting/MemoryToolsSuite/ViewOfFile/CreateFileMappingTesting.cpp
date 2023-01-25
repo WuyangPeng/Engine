@@ -1,20 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒýÇæ²âÊÔ°æ±¾£º0.8.1.3 (2022/10/16 19:40)
+///	ÒýÇæ²âÊÔ°æ±¾£º0.9.0.0 (2023/01/05 21:01)
 
 #include "CreateFileMappingTesting.h"
 #include "System/FileManager/File.h"
 #include "System/FileManager/Flags/FileFlags.h"
-#include "System/MemoryTools/Flags/ViewOfFileFlags.h"
-#include "System/MemoryTools/Flags/VirtualToolsFlags.h"
 #include "System/MemoryTools/ViewOfFile.h"
-#include "System/Time/DeltaTime.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -22,23 +18,7 @@
 using namespace std::literals;
 
 System::CreateFileMappingTesting::CreateFileMappingTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      memoryProtectFlags{ MemoryProtect::WriteCopy,
-                          MemoryProtect::ReadOnly,
-                          MemoryProtect::ReadWrite,
-                          MemoryProtect::ExecuteWriteCopy,
-                          MemoryProtect::ExecuteRead,
-                          MemoryProtect::ExecuteReadWrite },
-      fileMapProtectionFlags{ FileMapProtection::Default,
-                              FileMapProtection::Commit,
-                              FileMapProtection::Reserve },
-      mapping{ { MemoryProtect::WriteCopy, FileHandleDesiredAccess::ReadWrite },
-               { MemoryProtect::ReadOnly, FileHandleDesiredAccess::ReadWrite },
-               { MemoryProtect::ReadWrite, FileHandleDesiredAccess::ReadWrite },
-               { MemoryProtect::ExecuteWriteCopy, FileHandleDesiredAccess::Read | FileHandleDesiredAccess::Execute },
-               { MemoryProtect::ExecuteRead, FileHandleDesiredAccess::Read | FileHandleDesiredAccess::Execute },
-               { MemoryProtect::ExecuteReadWrite, FileHandleDesiredAccess::ReadWrite | FileHandleDesiredAccess::Execute } },
-      randomEngine{ GetEngineRandomSeed() }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -52,13 +32,12 @@ void System::CreateFileMappingTesting::DoRunUnitTest()
 
 void System::CreateFileMappingTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
+    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(CreateFileMappingRandomShuffle);
 }
 
-bool System::CreateFileMappingTesting::RandomShuffleFlags()
+bool System::CreateFileMappingTesting::CreateFileMappingRandomShuffle()
 {
-    shuffle(memoryProtectFlags.begin(), memoryProtectFlags.end(), randomEngine);
-    shuffle(fileMapProtectionFlags.begin(), fileMapProtectionFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFileMappingTest);
 
@@ -67,7 +46,7 @@ bool System::CreateFileMappingTesting::RandomShuffleFlags()
 
 void System::CreateFileMappingTesting::CreateFileMappingTest()
 {
-    for (auto index = 0u; index < memoryProtectFlags.size(); ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(DoCreateFileMappingTest, index);
     }
@@ -75,35 +54,47 @@ void System::CreateFileMappingTesting::CreateFileMappingTest()
 
 void System::CreateFileMappingTesting::DoCreateFileMappingTest(size_t index)
 {
-    constexpr WindowsDWord maximumSizeLow{ 0xFFFF };
-    const auto fileMapName = L"FileMappingTestingFileMap"s;
-    const auto fileMappingName = SYSTEM_TEXT("Resource/FileMappingTesting/FileMappingTest.txt"s);
+    const auto memoryProtect = GetMemoryProtect(index);
 
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
-    auto fileMapProtection = fileMapProtectionFlags.at(index % fileMapProtectionFlags.size());
+    const auto fileHandle = CreateSystemFile(GetFileMappingName(),
+                                             GetMapping(memoryProtect),
+                                             FileHandleShareMode::Prevents,
+                                             FileHandleCreationDisposition::OpenAlways);
+    ASSERT_TRUE_FAILURE_THROW(IsFileHandleValid(fileHandle), "CreateSystemFile Ê§°Ü"s);
 
-    const auto iter = mapping.find(memoryProtect);
-    ASSERT_UNEQUAL_FAILURE_THROW(iter, mapping.end(), "");
+    ASSERT_NOT_THROW_EXCEPTION_2(FileMappingTest, index, fileHandle);
 
-    auto fileHandle = CreateSystemFile(fileMappingName.c_str(),
-                                       iter->second,
-                                       FileHandleShareMode::Prevents,
-                                       FileHandleCreationDisposition::OpenAlways);
-    ASSERT_TRUE_FAILURE_THROW(IsFileHandleValid(fileHandle), "CreateSystemFile Ê§°Ü");
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFileTest, fileHandle);
+}
 
-    auto loopTestFileName = fileMapName + System::ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
+void System::CreateFileMappingTesting::FileMappingTest(size_t index, WindowsHandle fileHandle)
+{
+    const auto fileMappingHandle = Create(index, fileHandle, false);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(FileMappingAgainTest, index, fileHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFileMappingTest, fileMappingHandle);
+}
+
+void System::CreateFileMappingTesting::FileMappingAgainTest(size_t index, WindowsHandle fileHandle)
+{
+    const auto againFileMappingHandle = Create(index, fileHandle, true);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseFileMappingTest, againFileMappingHandle);
+}
+
+System::WindowsHandle System::CreateFileMappingTesting::Create(size_t index, WindowsHandle fileHandle, bool isAgain)
+{
+    const auto memoryProtect = GetMemoryProtect(index);
+    const auto fileMapProtection = GetFileMapProtection(index);
+
+    const auto loopTestFileName = GetLoopTestFileName();
 
     auto isExists = false;
-    auto fileMappingHandle = CreateSystemFileMapping(fileHandle, memoryProtect, fileMapProtection, 0, maximumSizeLow, loopTestFileName.c_str(), &isExists);
 
+    const auto fileMappingHandle = CreateSystemFileMapping(fileHandle, memoryProtect, fileMapProtection, 0, GetMaximumSizeLow(), loopTestFileName.c_str(), &isExists);
     ASSERT_UNEQUAL_NULL_PTR(fileMappingHandle);
-    ASSERT_FALSE(isExists);
+    ASSERT_EQUAL(isExists, isAgain);
 
-    auto againFileMappingHandle = CreateSystemFileMapping(fileHandle, memoryProtect, fileMapProtection, 0, maximumSizeLow, loopTestFileName.c_str(), &isExists);
-    ASSERT_UNEQUAL_NULL_PTR(againFileMappingHandle);
-    ASSERT_TRUE(isExists);
-
-    ASSERT_TRUE(CloseFileMapping(fileMappingHandle));
-    ASSERT_TRUE(CloseFileMapping(againFileMappingHandle));
-    ASSERT_TRUE(CloseSystemFile(fileHandle));
+    return fileMappingHandle;
 }

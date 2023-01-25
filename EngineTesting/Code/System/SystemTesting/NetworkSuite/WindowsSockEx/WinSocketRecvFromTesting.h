@@ -1,25 +1,26 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:00)
+///	引擎测试版本：0.9.0.0 (2023/01/12 12:23)
 
-#ifndef SYSTEM_SECURITY_SUITE_WIN_SOCKET_RECV_FROM_TESTING_H
-#define SYSTEM_SECURITY_SUITE_WIN_SOCKET_RECV_FROM_TESTING_H
+#ifndef SYSTEM_NETWORK_SUITE_WIN_SOCKET_RECV_FROM_TESTING_H
+#define SYSTEM_NETWORK_SUITE_WIN_SOCKET_RECV_FROM_TESTING_H
 
-#include "System/Network/Fwd/NetworkFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "WindowsSockExTestingBase.h"
+#include "System/Network/Using/SocketPrototypesUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
-    class WinSocketRecvFromTesting final : public CoreTools::UnitTest
+    class WinSocketRecvFromTesting final : public WindowsSockExTestingBase
     {
     public:
         using ClassType = WinSocketRecvFromTesting;
-        using ParentType = UnitTest;
+        using ParentType = WindowsSockExTestingBase;
 
     public:
         explicit WinSocketRecvFromTesting(const OStreamShared& stream);
@@ -32,9 +33,9 @@ namespace System
 
         void RecvFromTest();
 
-        void Init();
-        void Cleanup();
+        void DoRecvFromTest(WinSocket socketHandle);
+        NODISCARD int WinSocketRecvFromTest(BufferType& buffer, int index, int remain, WinSockInternetAddress address, WinSocket socketHandle, WindowsDWord& numberOfBytesRecvd);
     };
 }
 
-#endif  // SYSTEM_SECURITY_SUITE_WIN_SOCKET_RECV_FROM_TESTING_H
+#endif  // SYSTEM_NETWORK_SUITE_WIN_SOCKET_RECV_FROM_TESTING_H

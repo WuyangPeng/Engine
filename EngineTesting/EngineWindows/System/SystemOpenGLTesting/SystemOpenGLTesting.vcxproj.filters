@@ -25,6 +25,66 @@
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{a7fc8567-60f7-4bf2-aab2-4b255915d193}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLGlut">
+      <UniqueIdentifier>{60322815-0311-4271-bb65-256c7a3244f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLGlut">
+      <UniqueIdentifier>{2c4a45b0-2490-48f9-a52b-b4df40d96fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLProgram">
+      <UniqueIdentifier>{f05c92e6-55c9-4298-9ae0-7d99e9799189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLProgram">
+      <UniqueIdentifier>{1ab47ce1-1e39-4864-b133-4725014a06fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLShader">
+      <UniqueIdentifier>{02dd7ee5-86f0-436b-aebe-ef288182a3f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLShader">
+      <UniqueIdentifier>{f4be3f81-13d8-43ed-b1cc-e748c9a70ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLUtility">
+      <UniqueIdentifier>{934400e2-79a6-49fc-84fd-27dccc7e9354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLUtility">
+      <UniqueIdentifier>{411b6b71-3c5d-4245-b25f-ffee9d149e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLBase">
+      <UniqueIdentifier>{f14469c1-100e-445d-8c2f-5d0b54c4ef65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLBase">
+      <UniqueIdentifier>{45300262-d34a-4c45-831c-a12d71878207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLBuffers">
+      <UniqueIdentifier>{8eef2d1a-b993-44e3-914f-7a53faa073e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLBuffers">
+      <UniqueIdentifier>{9acc74c6-531b-4fd6-9c44-6ce770b0ca72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLTextures">
+      <UniqueIdentifier>{b11d1962-ab07-4d0a-94c1-acbb19a5d2d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLTextures">
+      <UniqueIdentifier>{24302097-c614-4578-bad9-8df4f7ee3c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLPolygon">
+      <UniqueIdentifier>{e2a931d0-2e89-4659-9ed9-a2f17d33685b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLPolygon">
+      <UniqueIdentifier>{0bc51528-2e92-4d99-be2e-382642ebecd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件\OpenGLSamplers">
+      <UniqueIdentifier>{b8565b7b-7525-4b83-af5e-7974b91835f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件\OpenGLSamplers">
+      <UniqueIdentifier>{82dfdd07-0bc0-44d7-ab4b-f59938056a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 模板文件">
+      <UniqueIdentifier>{868c58b6-6303-4315-86ec-88b9e3c6f7a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 模板文件\OpenGLBuffers">
+      <UniqueIdentifier>{15d7e817-6ed8-4451-888e-d5343f857d51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -56,29 +116,185 @@
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\TestingHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlutTesting.h">
-      <Filter>OpenGLSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLInitTesting.h">
       <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSuite.h">
       <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtilityTesting.h">
-      <Filter>OpenGLSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLAPITesting.h">
-      <Filter>OpenGLSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLGlutCallBack.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShaderTesting.h">
-      <Filter>OpenGLSuite 头文件</Filter>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCallbackTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLGlut</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgramTesting.h">
-      <Filter>OpenGLSuite 头文件</Filter>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCreateWindowTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLGlut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutDestroyTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLGlut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLCreateProgramTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramAttributesTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramLinkTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramResourceTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramStatusTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramTestingBase.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\ComputeWorkGroupSizeTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramResourceTestingBase.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramInterfaceTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLProgram</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLAttachShaderTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLCompileShaderTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLCreateShaderTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLGetUniformLocationTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderAttributesTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderStatusTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderTestingBase.h">
+      <Filter>OpenGLSuite 头文件\OpenGLShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\OpenGLErrorDescriptionTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\OpenGLSupportsExtensionTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\OpenGLVersionTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\WglSupportsExtensionTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBaseTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLQueryTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBlendTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLDepthTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLMaskTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLStateTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLStencilTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLGetBuffersTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBuffersTestingBase.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferSubDataTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetCopyBufferSubDataTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFramebufferTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindFramebufferTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLVertexArraysTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindVertexBufferTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindVertexBufferTestingDetail.h">
+      <Filter>OpenGLSuite 模板文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLDrawBuffersTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLGetTexturesTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesTestingBase.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLBindTexturesTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLPixelStoreTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesParameterTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTextures1DTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTextures2DTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTextures3DTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesCubeTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesCubeArrayTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFramebufferTextures2DTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLTextures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonModeTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLPolygon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonOffsetTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLPolygon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSamplers\OpenGLGetSamplersTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLSamplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSamplers\OpenGLSetSamplerParameterTesting.h">
+      <Filter>OpenGLSuite 头文件\OpenGLSamplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSamplers\OpenGLSamplersTestingBase.h">
+      <Filter>OpenGLSuite 头文件\OpenGLSamplers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,26 +307,179 @@
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\TestingMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLAPITesting.cpp">
-      <Filter>OpenGLSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlutTesting.cpp">
-      <Filter>OpenGLSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLInitTesting.cpp">
-      <Filter>OpenGLSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtilityTesting.cpp">
       <Filter>OpenGLSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLGlutCallBack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgramTesting.cpp">
-      <Filter>OpenGLSuite 源文件</Filter>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutDestroyTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLGlut</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShaderTesting.cpp">
-      <Filter>OpenGLSuite 源文件</Filter>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCallbackTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLGlut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLGlut\OpenGLGlutCreateWindowTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLGlut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLCreateProgramTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramAttributesTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramLinkTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramResourceTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramStatusTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\ComputeWorkGroupSizeTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramResourceTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLProgram\OpenGLProgramInterfaceTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLAttachShaderTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLCompileShaderTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLCreateShaderTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLGetUniformLocationTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderAttributesTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderStatusTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLShader\OpenGLShaderTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\OpenGLErrorDescriptionTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\OpenGLSupportsExtensionTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\OpenGLVersionTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLUtility\WglSupportsExtensionTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBaseTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLQueryTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLBlendTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLDepthTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLMaskTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLStateTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBase\OpenGLStencilTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLGetBuffersTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBuffersTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetBufferSubDataTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLSetCopyBufferSubDataTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLFramebufferTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindFramebufferTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLVertexArraysTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLBindVertexBufferTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLBuffers\OpenGLDrawBuffersTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLGetTexturesTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLBindTexturesTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLPixelStoreTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesParameterTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTextures1DTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTextures2DTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTextures3DTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesCubeTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLTexturesCubeArrayTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLTextures\OpenGLFramebufferTextures2DTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLTextures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonModeTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLPolygon\OpenGLPolygonOffsetTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLPolygon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSamplers\OpenGLGetSamplersTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLSamplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSamplers\OpenGLSetSamplerParameterTesting.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLSamplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemOpenGLTesting\OpenGLSuite\OpenGLSamplers\OpenGLSamplersTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件\OpenGLSamplers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

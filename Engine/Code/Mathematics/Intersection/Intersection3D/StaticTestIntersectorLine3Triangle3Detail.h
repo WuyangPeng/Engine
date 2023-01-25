@@ -81,6 +81,8 @@ void Mathematics::StaticTestIntersectorLine3Triangle3<Real>::Test()
         return;
     }
 
+    using namespace System;
+
     auto directionDotOriginCrossEdge2 = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
     if (Math::GetValue(0) <= directionDotOriginCrossEdge2)
     {

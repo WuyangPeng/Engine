@@ -36,7 +36,7 @@ namespace System
 
         NODISCARD AttributeType GetWriteAttribute();
 
-        void PrintTipsMessage();
+        void PrintTipsMessage() override;
     };
 }
 

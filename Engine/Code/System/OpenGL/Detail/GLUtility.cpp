@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:39)
+///	引擎版本：0.9.0.0 (2023/01/12 18:58)
 
 #include "System/SystemExport.h"
 
@@ -88,13 +88,7 @@ System::OpenGLSystemVersion System::GetOpenGLVersion(int major, int minor) noexc
 
     if (0 <= index && index < versionSize)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        return version[index];
-
-#include STSTEM_WARNING_POP
+        return version.at(index);
     }
     else if (majorCount < major || (major == majorCount && minorCount < minor))
     {
@@ -128,22 +122,11 @@ const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
 
     if (0 <= index && index < errorStringSize)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-        return errorString[index];
-
-#include STSTEM_WARNING_POP
+        return errorString.at(index);
     }
     else
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        return errorString[errorStringSize - 1];
-
-#include STSTEM_WARNING_POP
+        return errorString.at(errorStringSize - 1);
     }
 }
 

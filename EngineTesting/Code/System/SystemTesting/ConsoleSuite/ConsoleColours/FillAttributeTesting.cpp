@@ -31,8 +31,6 @@ void System::FillAttributeTesting::DoRunUnitTest()
 
 void System::FillAttributeTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
-
     ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
 }
 

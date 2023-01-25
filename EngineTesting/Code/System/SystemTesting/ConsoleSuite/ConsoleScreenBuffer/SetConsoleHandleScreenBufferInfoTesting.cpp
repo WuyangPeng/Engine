@@ -34,8 +34,6 @@ void System::SetConsoleHandleScreenBufferInfoTesting::DoRunUnitTest()
 
 void System::SetConsoleHandleScreenBufferInfoTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
-
     const auto attributesConsoleHandle = CreateSystemConsoleScreenBuffer(DesiredAccessGeneric::ReadAndWrite, ConsoleScreenBufferShareMode::ReadAndWrite, nullptr);
 
     ASSERT_NOT_THROW_EXCEPTION_1(SetConsoleScreenBufferInfoTest, attributesConsoleHandle);

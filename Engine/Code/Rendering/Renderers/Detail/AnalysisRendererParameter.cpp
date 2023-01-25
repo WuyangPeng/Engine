@@ -55,7 +55,7 @@ void Rendering::AnalysisRendererParameter::AnalysisJson()
 // private
 void Rendering::AnalysisRendererParameter::AnalysisRendererType()
 {
-    auto rendererType = mainTree.get("RendererType", RendererTypes::Default);
+    auto rendererType = System::UnderlyingCastEnum<RendererTypes>(mainTree.get("RendererType", 0));
 
     if (RendererTypes::First <= rendererType && rendererType < RendererTypes::Max)
     {
@@ -76,8 +76,8 @@ void Rendering::AnalysisRendererParameter::AnalysisRendererTexture()
 {
     textureTree = mainTree.get_child("Texture");
 
-    const auto colorFormat = (textureTree.get("ColorFormat", DataFormatType::R32G32B32A32Float));
-    const auto depthStencilFormat = (textureTree.get("DepthStencilFormat", DataFormatType::D24UNormS8UInt));
+    const auto colorFormat = System::UnderlyingCastEnum<DataFormatType>((textureTree.get("ColorFormat",System::EnumCastUnderlying(DataFormatType::R32G32B32A32Float))));
+    const auto depthStencilFormat =System::UnderlyingCastEnum<DataFormatType>( (textureTree.get("DepthStencilFormat", System::EnumCastUnderlying(DataFormatType::D24UNormS8UInt))));
     const auto numMultisamples = textureTree.get("MultisamplesNumber", 0);
 
     if (DataFormatType::Unknown < colorFormat &&

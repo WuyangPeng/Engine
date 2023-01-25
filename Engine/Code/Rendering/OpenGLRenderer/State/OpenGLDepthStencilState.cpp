@@ -11,10 +11,11 @@
 
 #include "OpenGLDepthStencilState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/State/OpenGLDepthStencilStateImpl.h"
+#include "System/OpenGL/OpenGLBase.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, OpenGLDepthStencilState)
 

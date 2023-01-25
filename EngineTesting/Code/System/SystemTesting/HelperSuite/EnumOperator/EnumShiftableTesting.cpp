@@ -30,8 +30,6 @@ void System::EnumShiftableTesting::DoRunUnitTest()
 
 void System::EnumShiftableTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
-
     ASSERT_NOT_THROW_EXCEPTION_0(ShiftableTest);
 }
 

@@ -627,6 +627,8 @@ void Mathematics::Quaternion<Real>::SlerpChebyshevRatio(Real t, const Quaternion
         sign = NumericalValueSymbol::Negative;
     }
 
+    using System::operator*;
+
     const auto result = ChebyshevRatio<Real>::Get(t, cosA);
     *this = quaternion0 * result[0] + quaternion1 * (sign * result[1]);
 }

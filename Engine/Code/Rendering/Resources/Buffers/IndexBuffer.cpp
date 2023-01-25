@@ -23,6 +23,8 @@
 #include "Rendering/OpenGLRenderer/Resources/Buffers/OpenGLIndexBuffer.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
 
+using System::operator&;
+
 using std::vector;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, IndexBuffer);

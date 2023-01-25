@@ -74,13 +74,13 @@ void Network::AnalysisNetworkConfigurationImpl::InsertStrategy(const String& nam
     const auto wrappersStrategy = GetWrappersStrategy(wrappers);
     const auto connectStrategy = GetConnectStrategy(connect);
 
-    const auto client = basicTree.get(SYSTEM_TEXT("Client"s), ClientStrategy::Disable);
-    const auto server = basicTree.get(SYSTEM_TEXT("Server"s), ServerStrategy::Disable);
-    const auto message = basicTree.get(SYSTEM_TEXT("Message"s), MessageStrategy::Default);
-    const auto parser = basicTree.get(SYSTEM_TEXT("Parser"s), ParserStrategy::LittleEndian);
-    const auto openSSL = basicTree.get(SYSTEM_TEXT("OpenSSL"s), OpenSSLStrategy::Default);
-    const auto encryptedCompression = basicTree.get(SYSTEM_TEXT("EncryptedCompression"s), EncryptedCompressionStrategy::Default);
-    const auto send = basicTree.get(SYSTEM_TEXT("Send"s), SocketSendMessage::Default);
+    const auto client = System::UnderlyingCastEnum<ClientStrategy>(basicTree.get(SYSTEM_TEXT("Client"s), 0));
+    const auto server = System::UnderlyingCastEnum<ServerStrategy>(basicTree.get(SYSTEM_TEXT("Server"s), 0));
+    const auto message = System::UnderlyingCastEnum<MessageStrategy>(basicTree.get(SYSTEM_TEXT("Message"s), 0));
+    const auto parser = System::UnderlyingCastEnum<ParserStrategy>(basicTree.get(SYSTEM_TEXT("Parser"s), 0));
+    const auto openSSL = System::UnderlyingCastEnum<OpenSSLStrategy>(basicTree.get(SYSTEM_TEXT("OpenSSL"s), 0));
+    const auto encryptedCompression = System::UnderlyingCastEnum<EncryptedCompressionStrategy>(basicTree.get(SYSTEM_TEXT("EncryptedCompression"s), 0));
+    const auto send = System::UnderlyingCastEnum<SocketSendMessage>(basicTree.get(SYSTEM_TEXT("Send"s), 0));
 
     if (ClientStrategy::Disable <= client && client < ClientStrategy::End &&
         ServerStrategy::Disable <= server && server < ServerStrategy::End &&

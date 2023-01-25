@@ -22,8 +22,11 @@
     "ResourceEnumWindowsTesting": 1
   },
 
-  "openGLSuite": {
-    "OpenGLWglPrototypesTesting": 1
+  "openGLSuite": { 
+    "OpenGLWglSwapIntervalTesting": 1,
+    "OpenGLGetCurrentWglContextTesting": 1,
+    "OpenGLGetWglProcAddressTesting": 1,
+    "OpenGLSwapDeviceBuffersTesting": 1
   },
 
   "windowsSuite": {

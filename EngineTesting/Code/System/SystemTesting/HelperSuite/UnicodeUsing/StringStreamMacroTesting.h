@@ -31,7 +31,7 @@ namespace System
 
         void StringStreamMacroTest();
 
-        void PrintTipsMessage();
+        void PrintTipsMessage() override;
     };
 }
 

@@ -10,9 +10,10 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLRenderer.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
+#include "System/OpenGL/OpenGLBase.h"
 
 Rendering::OpenGLRenderer::OpenGLRenderer(const RenderingEnvironment& renderingEnvironment, const RendererBasis& basis)
     : ParentType{ RendererTypes::OpenGL, renderingEnvironment, basis }

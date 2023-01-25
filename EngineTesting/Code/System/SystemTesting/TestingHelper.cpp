@@ -748,7 +748,7 @@ void System::TestingHelper::AddSecuritySuite()
 {
     auto securitySuite = GenerateSuite("安全性"s);
 
-    ADD_TEST(securitySuite, LookupPrivilegeTesting);
+    securitySuite.AddSuite(GetLookupPrivilegeSuite());
     securitySuite.AddSuite(GetCreateSecuritySuite());
     securitySuite.AddSuite(GetSecuritySidSuite());
     securitySuite.AddSuite(GetSecurityAclSuite());
@@ -759,6 +759,17 @@ void System::TestingHelper::AddSecuritySuite()
     securitySuite.AddSuite(GetAccessCheckSuite());
 
     AddSuite(securitySuite);
+}
+
+CoreTools::Suite System::TestingHelper::GetLookupPrivilegeSuite()
+{
+    auto lookupPrivilegeSuite = GenerateSuite("查找权限"s);
+
+    ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeDisplayNameTesting);
+    ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeNameTesting);
+    ADD_TEST(lookupPrivilegeSuite, GetLookupPrivilegeValueTesting);
+
+    return lookupPrivilegeSuite;
 }
 
 CoreTools::Suite System::TestingHelper::GetCreateSecuritySuite()
@@ -888,7 +899,7 @@ CoreTools::Suite System::TestingHelper::GetSocketPrototypesSuite()
     ADD_TEST(socketPrototypesSuite, AcceptTesting);
     ADD_TEST(socketPrototypesSuite, ConnectTesting);
     ADD_TEST(socketPrototypesSuite, SocketNameTesting);
-    ADD_TEST(socketPrototypesSuite, SockOptTesting);
+    ADD_TEST(socketPrototypesSuite, SockOptionTesting);
     ADD_TEST(socketPrototypesSuite, IoctlSocketTesting);
     ADD_TEST(socketPrototypesSuite, ShutDownTesting);
     ADD_TEST(socketPrototypesSuite, RecvFromTesting);
@@ -930,7 +941,11 @@ void System::TestingHelper::AddOpenGLSuite()
 
     ADD_TEST(openGLSuite, OpenGLUtilityTesting);
     ADD_TEST(openGLSuite, OpenGLGlutTesting);
-    ADD_TEST(openGLSuite, OpenGLAPITesting);
+    ADD_TEST(openGLSuite, OpenGLBaseTesting);
+    ADD_TEST(openGLSuite, OpenGLBuffersTesting);
+    ADD_TEST(openGLSuite, OpenGLTexturesTesting);
+    ADD_TEST(openGLSuite, OpenGLPolygonTesting);
+    ADD_TEST(openGLSuite, OpenGLSamplersTesting);
     ADD_TEST(openGLSuite, OpenGLProgramTesting);
     ADD_TEST(openGLSuite, OpenGLShaderTesting);
     ADD_TEST(openGLSuite, OpenGLInitTesting);

@@ -11,7 +11,7 @@
 #define FRAMEWORK_OPENGL_GLUT_FRAME_OPENGL_GLUT_CALL_BACK_DETAIL_H
 
 #include "OpenGLGlutCallBack.h"
-#include "System/OpenGL/OpenGLAPI.h"
+#include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLGlut.h"
 #include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"

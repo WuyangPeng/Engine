@@ -188,7 +188,7 @@ Rendering::GLSLProgramFactory::OpenGLUInt Rendering::GLSLProgramFactory::Compile
             code.emplace_back(d.c_str());
         }
 
-        System::GetGLShaderSource(handle, boost::numeric_cast<System::OpenGLSize>(code.size()), code.data(), nullptr);
+        System::SetGLShaderSource(handle, boost::numeric_cast<System::OpenGLSize>(code.size()), code.data(), nullptr);
 
         System::CompileGLShader(handle);
 

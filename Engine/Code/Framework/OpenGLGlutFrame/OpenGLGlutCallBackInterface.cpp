@@ -12,7 +12,7 @@
 #include "OpenGLGlutCallBackInterface.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/OpenGL/OpenGLAPI.h"
+#include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLGlut.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"

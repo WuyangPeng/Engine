@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTION_TYPE_H
 #define MATHEMATICS_INTERSECTION_INTERSECTION_TYPE_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Mathematics
 {
@@ -31,9 +31,7 @@ namespace Mathematics
         Sphere0Point,
         Sphere1,
         Sphere1Point,
-    };
-
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(IntersectionType);
+    };  
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTION_TYPE_H

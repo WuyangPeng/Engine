@@ -74,7 +74,7 @@ System::WinSocket System::NetworkMacroTesting::CreateWinSocket()
     WinSockInternetAddress addr{};
     addr.sin_family = System::EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
     addr.sin_port = GetHostToNetShort(port);
-    addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
+    addr.sin_addr.s_addr = GetHostToNetLong(internetAddrAny);
 
     const auto socketHandle = CreateTcpSocket();
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "socketHandle 是无效的。");

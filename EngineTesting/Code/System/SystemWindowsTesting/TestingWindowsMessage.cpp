@@ -95,7 +95,10 @@ void System::TestingWindowsMessage::AddOpenGLSuite()
 
     auto openGLSuite = GenerateSuite("OpenGL"s);
 
-    ADD_TEST_USE_PARAMETER_1(openGLSuite, OpenGLWglPrototypesTesting, hwnd);
+    ADD_TEST_USE_PARAMETER_1(openGLSuite, OpenGLWglSwapIntervalTesting, hwnd);
+    ADD_TEST_USE_PARAMETER_1(openGLSuite, OpenGLGetCurrentWglContextTesting, hwnd);
+    ADD_TEST_USE_PARAMETER_1(openGLSuite, OpenGLGetWglProcAddressTesting, hwnd);
+    ADD_TEST_USE_PARAMETER_1(openGLSuite, OpenGLSwapDeviceBuffersTesting, hwnd);
 
     AddSuite(openGLSuite);
 }

@@ -92,17 +92,19 @@ void Mathematics::StaticFindIntersectorLine3Triangle3<Real>::Find()
         return;
     }
 
-    auto directionDotOriginCrossEdge2 = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
+    using namespace System;
+
+    auto directionDotOriginCrossEdge2 = System::EnumCastUnderlying(sign) * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
     if (Math::GetValue(0) <= directionDotOriginCrossEdge2)
     {
-        auto directionDotEdge1CrossOrigin = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
+        auto directionDotEdge1CrossOrigin = System::EnumCastUnderlying(sign) * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
 
         if (Math::GetValue(0) <= directionDotEdge1CrossOrigin)
         {
             if (directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin <= directionDotNormal)
             {
                 // 线和三角形相交
-                auto originDotNormal = -sign * data.GetOriginDotNormal();
+                auto originDotNormal = -System::EnumCastUnderlying(sign) * data.GetOriginDotNormal();
 
                 lineParameter = originDotNormal / directionDotNormal;
                 triangleBary1 = directionDotOriginCrossEdge2 / directionDotNormal;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:13)
+///	引擎版本：0.9.0.0 (2023/01/07 13:48)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_H
 #define SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_H
@@ -17,7 +17,7 @@
 
 namespace System
 {
-    NODISCARD WinSockStartUpReturn SYSTEM_DEFAULT_DECLARE WinSockStartUp(WindowsWord versionRequired, WinSockDataPtr wSAData) noexcept;
+    NODISCARD WinSockStartUpReturn SYSTEM_DEFAULT_DECLARE WinSockStartUp(WindowsWord versionRequired, WinSockDataPtr wsaData) noexcept;
     NODISCARD WinSockCleanupReturn SYSTEM_DEFAULT_DECLARE WinSockCleanup() noexcept;
     void SYSTEM_DEFAULT_DECLARE SetWinSockLastError(WinSockLastError error) noexcept;
     NODISCARD WinSockLastError SYSTEM_DEFAULT_DECLARE GetWinSockLastError() noexcept;

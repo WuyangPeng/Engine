@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_CONTENT_FLAGS_H
 #define CORE_TOOLS_TEXT_PARSING_CONTENT_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace CoreTools
 {

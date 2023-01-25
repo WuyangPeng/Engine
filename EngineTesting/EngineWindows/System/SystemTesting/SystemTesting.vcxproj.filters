@@ -502,6 +502,12 @@
     <Filter Include="HelperSuite 头文件\EnumOperator">
       <UniqueIdentifier>{b499c5e8-879b-4e87-996d-a99f96dd3408}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SecuritySuite 头文件\LookupPrivilege">
+      <UniqueIdentifier>{1117692b-8bd7-41e5-8ab0-82aa17b5259e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SecuritySuite 源文件\LookupPrivilege">
+      <UniqueIdentifier>{0bebd630-2020-40f0-adac-fc2a038db5a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -664,7 +670,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MacintoshSuite\MacintoshSuite.h">
       <Filter>MacintoshSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLAPITesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLBaseTesting.h">
       <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLGlutTesting.h">
@@ -859,10 +865,10 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SelectTesting.h">
       <Filter>NetworkSuite 头文件\SocketPrototypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptionTesting.h">
       <Filter>NetworkSuite 头文件\SocketPrototypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptTestingDetail.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptionTestingDetail.h">
       <Filter>NetworkSuite 模板文件\SocketPrototypes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\NetworkSuite.h">
@@ -960,9 +966,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\WellKnownSidTesting.h">
       <Filter>SecuritySuite 头文件\SecuritySid</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilegeTesting.h">
-      <Filter>SecuritySuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySuite.h">
       <Filter>SecuritySuite 头文件</Filter>
@@ -1774,6 +1777,51 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\HeapTestingBase.h">
       <Filter>MemoryToolsSuite 头文件\HeapTools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\LocalTools\LocalMemoryTestingBase.h">
+      <Filter>MemoryToolsSuite 头文件\LocalTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\FileMappingTestingBase.h">
+      <Filter>MemoryToolsSuite 头文件\ViewOfFile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\VirtualToolsTestingBase.h">
+      <Filter>MemoryToolsSuite 头文件\VirtualTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\NetworkTestingBase.h">
+      <Filter>NetworkSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SocketPrototypesTestingBase.h">
+      <Filter>NetworkSuite 头文件\SocketPrototypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WindowsSockExTestingBase.h">
+      <Filter>NetworkSuite 头文件\WindowsSockEx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLBuffersTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLTexturesTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLPolygonTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLSamplersTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\GetLookupPrivilegeDisplayNameTesting.h">
+      <Filter>SecuritySuite 头文件\LookupPrivilege</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\GetLookupPrivilegeNameTesting.h">
+      <Filter>SecuritySuite 头文件\LookupPrivilege</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\GetLookupPrivilegeValueTesting.h">
+      <Filter>SecuritySuite 头文件\LookupPrivilege</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\LookupPrivilegeTestingBase.h">
+      <Filter>SecuritySuite 头文件\LookupPrivilege</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreateSecurityTestingBase.h">
+      <Filter>SecuritySuite 头文件\CreateSecurity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingHelper.cpp">
@@ -1956,13 +2004,13 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SelectTesting.cpp">
       <Filter>NetworkSuite 源文件\SocketPrototypes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptionTesting.cpp">
       <Filter>NetworkSuite 源文件\SocketPrototypes</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsExtensionPrototypesTesting.cpp">
       <Filter>NetworkSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLAPITesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLBaseTesting.cpp">
       <Filter>OpenGLSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLGlutTesting.cpp">
@@ -2063,9 +2111,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\WellKnownSidTesting.cpp">
       <Filter>SecuritySuite 源文件\SecuritySid</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilegeTesting.cpp">
-      <Filter>SecuritySuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\OutputDebugStringTesting.cpp">
       <Filter>SystemOutputSuite 源文件</Filter>
@@ -2873,6 +2918,51 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\HeapTestingBase.cpp">
       <Filter>MemoryToolsSuite 源文件\HeapTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\LocalTools\LocalMemoryTestingBase.cpp">
+      <Filter>MemoryToolsSuite 源文件\LocalTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\FileMappingTestingBase.cpp">
+      <Filter>MemoryToolsSuite 源文件\ViewOfFile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\VirtualToolsTestingBase.cpp">
+      <Filter>MemoryToolsSuite 源文件\VirtualTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\NetworkTestingBase.cpp">
+      <Filter>NetworkSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SocketPrototypesTestingBase.cpp">
+      <Filter>NetworkSuite 源文件\SocketPrototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WindowsSockExTestingBase.cpp">
+      <Filter>NetworkSuite 源文件\WindowsSockEx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLBuffersTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLPolygonTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLSamplersTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLTexturesTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\GetLookupPrivilegeDisplayNameTesting.cpp">
+      <Filter>SecuritySuite 源文件\LookupPrivilege</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\GetLookupPrivilegeNameTesting.cpp">
+      <Filter>SecuritySuite 源文件\LookupPrivilege</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\GetLookupPrivilegeValueTesting.cpp">
+      <Filter>SecuritySuite 源文件\LookupPrivilege</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilege\LookupPrivilegeTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\LookupPrivilege</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreateSecurityTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\CreateSecurity</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

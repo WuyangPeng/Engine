@@ -11,11 +11,13 @@
 
 #include "OpenGLRasterizerState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Rendering/OpenGLRenderer/Detail/State/OpenGLRasterizerStateImpl.h"
+#include "System/OpenGL/OpenGLPolygon.h"
+#include "System/OpenGL/OpenGLBase.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, OpenGLRasterizerState)
 

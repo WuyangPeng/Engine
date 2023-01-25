@@ -10,7 +10,7 @@
 #ifndef RENDERING_STATE_RASTERIZER_STATE_FILL_H
 #define RENDERING_STATE_RASTERIZER_STATE_FILL_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {

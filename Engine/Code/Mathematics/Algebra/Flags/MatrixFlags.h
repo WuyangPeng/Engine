@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H
 #define MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Mathematics
 {
@@ -39,9 +39,7 @@ namespace Mathematics
         Unsolved,
         Succeed,
         Failure
-    };
-
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(MatrixRotationAxis);
+    };   
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX_FLAGS_H

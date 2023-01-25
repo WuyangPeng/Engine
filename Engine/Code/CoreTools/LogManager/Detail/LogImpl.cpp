@@ -17,6 +17,8 @@
 #include "CoreTools/LogManager/LogFilterManager.h"
 #include "CoreTools/LogManager/Logger.h"
 
+using System::operator++;
+
 using boost::property_tree::ptree_error;
 using std::make_shared;
 using std::string;

@@ -420,4 +420,11 @@ void CoreTools::UnitTest::PrintRunUnitTest()
     auto runUnitTest = "正在运行测试 \""s + GetName() + "\"。\n"s;
 
     GetStream() << runUnitTest;
+
+    PrintTipsMessage();
+}
+
+void CoreTools::UnitTest::PrintTipsMessage()
+{
+    DisableNoexcept();
 }

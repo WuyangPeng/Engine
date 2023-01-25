@@ -1,27 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:18)
+///	引擎测试版本：0.9.0.0 (2023/01/11 18:11)
 
 #include "SocketNameTesting.h"
-#include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Helper/WindowsMacro.h"
-#include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
-#include "System/Network/WindowsExtensionPrototypes.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <vector>
-
-using std::string;
-using std::vector;
 
 System::SocketNameTesting::SocketNameTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -33,11 +23,11 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, SocketNameTesting)
 
 void System::SocketNameTesting::DoRunUnitTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(Init);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockStartUpTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(Cleanup);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockCleanupTest);
 }
 
 void System::SocketNameTesting::MainTest()
@@ -45,58 +35,57 @@ void System::SocketNameTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(SocketNameTest);
 }
 
-void System::SocketNameTesting::Init()
-{
-    // 初始化WinSock
-    WinSockData wsaData{};
-
-    constexpr auto versionRequested = MakeWord(2, 2);
-    const auto startUp = WinSockStartUp(versionRequested, &wsaData);
-
-    ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
-}
-
-void System::SocketNameTesting::Cleanup()
-{
-    const auto cleanup = WinSockCleanup();
-    ASSERT_ENUM_EQUAL(cleanup, WinSockCleanupReturn::Successful);
-}
-
 void System::SocketNameTesting::SocketNameTest()
 {
-    boost::property_tree::basic_ptree<string, string> mainTree{};
-
-    read_json("Configuration/EnvironmentVariable.json", mainTree);
-
-    const auto serverHostname = mainTree.get<string>("ConnectHostname");
-
-    WinSockInternetAddress addr{};
-
-    addr.sin_family = static_cast<short>(AddressFamilies::Internet);
-    addr.sin_port = GetHostToNetShort(80);
-    addr.sin_addr.s_addr = GetInternetAddress(serverHostname.c_str());
-
-    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
+    const auto socketHandle = CreateTcpSocket();
     ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "获取socket失败。");
 
-    ASSERT_TRUE(Connect(socketHandle, &addr));
+    ASSERT_NOT_THROW_EXCEPTION_1(DoSocketNameTest, socketHandle);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSocketTest, socketHandle);
+}
+
+void System::SocketNameTesting::DoSocketNameTest(WinSocket socketHandle)
+{
+    const auto address = GetAddress(defaultHttpPort, GetConnectHostname());
+    ASSERT_TRUE(Connect(socketHandle, &address));
+
+    const auto peerName = GetPeerNameTest(socketHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(GetSockNameTest, socketHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(InetNtoaTest, peerName);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(WinSockInternetAddressTest, address, peerName);
+}
+
+void System::SocketNameTesting::InetNtoaTest(const WinSockInternetAddress& peerName)
+{
+    const auto address = InetNtoa(peerName.sin_addr);
+    ASSERT_EQUAL(GetConnectHostname(), address);
+}
+
+void System::SocketNameTesting::WinSockInternetAddressTest(const WinSockInternetAddress& address, const WinSockInternetAddress& peerName)
+{
+    ASSERT_EQUAL(address.sin_family, peerName.sin_family);
+    ASSERT_EQUAL(address.sin_port, peerName.sin_port);
+    ASSERT_EQUAL(address.sin_addr.s_addr, peerName.sin_addr.s_addr);
+}
+
+System::WinSockInternetAddress System::SocketNameTesting::GetPeerNameTest(WinSocket socketHandle)
+{
     WinSockInternetAddress peerName{};
     int peerNameSize{ sizeof(WinSockInternetAddress) };
 
     ASSERT_TRUE(GetPeerName(socketHandle, &peerName, &peerNameSize));
 
-    WinSockInternetAddress sockName = {};
+    return peerName;
+}
+
+void System::SocketNameTesting::GetSockNameTest(WinSocket socketHandle)
+{
+    WinSockInternetAddress sockName{};
     int sockNameSize{ sizeof(WinSockInternetAddress) };
 
     ASSERT_TRUE(GetSockName(socketHandle, &sockName, &sockNameSize));
-
-    auto newAddr = InetNtoa(peerName.sin_addr);
-    ASSERT_EQUAL(serverHostname, newAddr);
-
-    ASSERT_EQUAL(addr.sin_family, peerName.sin_family);
-    ASSERT_EQUAL(addr.sin_port, peerName.sin_port);
-    ASSERT_EQUAL(addr.sin_addr.s_addr, peerName.sin_addr.s_addr);
-
-    ASSERT_TRUE(CloseSocket(socketHandle));
 }

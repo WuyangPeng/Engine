@@ -12,7 +12,7 @@
 #include "OpenGLBindTexture.h"
 #include "OpenGLMapping.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/OpenGL/OpenGLAPI.h"
+#include "System/OpenGL/OpenGLBase.h"
 
 #include <gsl/util>
 

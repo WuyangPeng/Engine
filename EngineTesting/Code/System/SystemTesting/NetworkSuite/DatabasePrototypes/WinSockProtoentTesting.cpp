@@ -1,18 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:18)
+///	引擎测试版本：0.9.0.0 (2023/01/07 22:46)
 
 #include "WinSockProtoentTesting.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Network/DatabasePrototypes.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
-#include "System/Network/SocketPrototypes.h"
-#include "System/Network/WindowsExtensionPrototypes.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -37,15 +33,18 @@ void System::WinSockProtoentTesting::MainTest()
 
 void System::WinSockProtoentTesting::GetProtoentTest()
 {
-    auto winSockProtoent0 = GetProtoentByNumber(0);
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent0);
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent0->p_name);
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent0->p_aliases);
-    ASSERT_EQUAL(winSockProtoent0->p_proto, 0);
+    const auto winSockProtoent0 = GetProtoentByNumber(1);
+    ASSERT_NOT_THROW_EXCEPTION_1(WinSockProtoentTest, winSockProtoent0);
 
-    auto winSockProtoent1 = GetProtoentByName("tcp");
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent1);
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent1->p_name);
-    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent1->p_aliases);
-    ASSERT_UNEQUAL(winSockProtoent1->p_proto, 0);
+    const auto winSockProtoent1 = GetProtoentByName("tcp");
+    ASSERT_NOT_THROW_EXCEPTION_1(WinSockProtoentTest, winSockProtoent1);
+}
+
+void System::WinSockProtoentTesting::WinSockProtoentTest(const WinSockProtoent* winSockProtoent)
+{
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockProtoent, "获取的WinSockProtoent为空。");
+
+    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent->p_name);
+    ASSERT_UNEQUAL_NULL_PTR(winSockProtoent->p_aliases);
+    ASSERT_UNEQUAL(winSockProtoent->p_proto, 0);
 }

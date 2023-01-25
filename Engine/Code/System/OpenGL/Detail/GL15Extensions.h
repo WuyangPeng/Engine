@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:14)
+///	引擎版本：0.9.0.0 (2023/01/12 18:42)
 
 #ifndef SYSTEM_OPENGL_GL_15_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_15_EXTENSIONS_H
 
 #include "System/SystemDll.h"
 
-#include "System/Helper/GLExtensionsMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
 
 namespace System
@@ -38,7 +38,7 @@ namespace System
     SYSTEM_HIDDEN_DECLARE void GLBufferData(GLenum target, GLsizeiptr size, const void* data, GLenum usage) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const void* data) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, void* data) noexcept;
-    SYSTEM_HIDDEN_DECLARE void* GLMapBuffer(GLenum target, GLenum access) noexcept;
+    SYSTEM_HIDDEN_DECLARE MAYBE_NULLPTR void* GLMapBuffer(GLenum target, GLenum access) noexcept;
     SYSTEM_HIDDEN_DECLARE NODISCARD GLboolean GLUnmapBuffer(GLenum target) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetBufferParameteriv(GLenum target, GLenum pname, GLint* params) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetBufferPointerv(GLenum target, GLenum pname, void** params) noexcept;

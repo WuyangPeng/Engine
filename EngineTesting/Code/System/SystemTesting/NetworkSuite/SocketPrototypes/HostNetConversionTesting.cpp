@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:17)
+///	引擎测试版本：0.9.0.0 (2023/01/10 0:24)
 
 #include "HostNetConversionTesting.h"
 #include "System/Network/SocketPrototypes.h"
@@ -34,28 +34,28 @@ void System::HostNetConversionTesting::MainTest()
 
 void System::HostNetConversionTesting::ShortTest()
 {
-    constexpr uint16_t hostShort{ 1250 };
-    const auto netShort = GetHostToNetShort(hostShort);
+    constexpr uint16_t oldHostShort{ 1250 };
+    const auto oldNetShort = GetHostToNetShort(oldHostShort);
 
-    const auto newHostShort = GetNetToHostShort(netShort);
+    const auto newHostShort = GetNetToHostShort(oldNetShort);
 
-    ASSERT_EQUAL(hostShort, newHostShort);
+    ASSERT_EQUAL(oldHostShort, newHostShort);
 
     const auto newNetShort = GetHostToNetShort(newHostShort);
 
-    ASSERT_EQUAL(netShort, newNetShort);
+    ASSERT_EQUAL(oldNetShort, newNetShort);
 }
 
 void System::HostNetConversionTesting::LongTest()
 {
-    constexpr unsigned long hostLong{ 12500000 };
-    const auto netLong = GetHostToNetLong(hostLong);
+    constexpr unsigned long oldHostLong{ 12500000 };
+    const auto oldNetLong = GetHostToNetLong(oldHostLong);
 
-    const auto newHostLong = GetNetToHostLong(netLong);
+    const auto newHostLong = GetNetToHostLong(oldNetLong);
 
-    ASSERT_EQUAL(hostLong, newHostLong);
+    ASSERT_EQUAL(oldHostLong, newHostLong);
 
     const auto newNetLong = GetHostToNetLong(newHostLong);
 
-    ASSERT_EQUAL(netLong, newNetLong);
+    ASSERT_EQUAL(oldNetLong, newNetLong);
 }

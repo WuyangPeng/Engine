@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/OpenGL/OpenGLAPI.h"
+#include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Renderers/Detail/PlatformVertexBufferImpl.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Rendering/Resources/ResourcesFwd.h"

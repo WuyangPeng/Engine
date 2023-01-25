@@ -47,6 +47,8 @@ void Mathematics::SingularValueDecomposition<Real>::Calculate(const VariableMatr
 template <typename Real>
 void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
 {
+    using namespace System;
+
     // 矩阵Real是A的副本，然后在算法中用正确项重写上三角。
     const auto numRows = diagonal.GetRowsNumber();
     const auto numColumns = diagonal.GetColumnsNumber();
@@ -69,7 +71,7 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
             length += vector[row] * vector[row];
         }
         length = Math::Sqrt(length);
-        auto beta = vector[column] + Math::Sign(vector[column]) * length;
+        auto beta = vector[column] + length * System::EnumCastUnderlying(Math::Sign(vector[column]));
         if (Math::GetZeroTolerance() < Math::FAbs(beta))
         {
             for (int i = column + 1; i < numRows; ++i)
@@ -104,9 +106,12 @@ void Mathematics::SingularValueDecomposition<Real>::HouseholderQR()
 template <typename Real>
 typename Mathematics::SingularValueDecomposition<Real>::VariableLengthVector Mathematics::SingularValueDecomposition<Real>::HouseholderVector(const VariableLengthVector& vector)
 {
+    using namespace System;
+    using System::operator*;
+
     auto householderVector = vector;
     auto length = householderVector.Length();
-    auto beta = vector[0] + Math::Sign(vector[0]) * length;
+    auto beta = vector[0] + length * Math::Sign(vector[0]);
     if (Math::GetZeroTolerance() < Math::FAbs(beta))
     {
         for (auto i = 1; i < householderVector.GetSize(); ++i)

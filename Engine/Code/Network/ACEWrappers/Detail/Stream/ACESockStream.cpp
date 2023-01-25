@@ -160,7 +160,7 @@ bool Network::ACESockStream::CloseHandle()
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-        aceSockStream.set_handle(reinterpret_cast<ACEHandle>(System::gInvalidSocket));
+        aceSockStream.set_handle(reinterpret_cast<ACEHandle>(System::invalidSocket));
 
     #include STSTEM_WARNING_POP
 

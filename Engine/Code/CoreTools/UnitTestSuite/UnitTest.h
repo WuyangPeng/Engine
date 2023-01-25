@@ -249,6 +249,8 @@ namespace CoreTools
         template <typename TestClass, typename Function>
         void ExecuteLoopTesting(TestClass* test, Function function);
 
+        virtual void PrintTipsMessage();
+
     private:
         void PrintFailReport(const FunctionDescribed& functionDescribed, const std::string& errorMessage);
 

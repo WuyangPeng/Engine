@@ -12,10 +12,11 @@
 #include "OpenGLAtomicCounterBuffer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/CounterType.h"
+#include "System/OpenGL/OpenGLBuffers.h"
 
 Rendering::OpenGLAtomicCounterBuffer::OpenGLAtomicCounterBuffer(const RawBufferSharedPtr& buffer, const std::string& name)
     : ParentType{ buffer, name, BindBuffer::AtomicCounterBuffer }

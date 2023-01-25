@@ -402,6 +402,12 @@
     "LookupPrivilegeTesting": 1
   },
 
+  "lookupPrivilegeSuite": {
+    "GetLookupPrivilegeDisplayNameTesting": 1,
+    "GetLookupPrivilegeNameTesting": 1,
+    "GetLookupPrivilegeValueTesting": 1
+  },
+
   "createSecuritySuite": {
     "FileSecurityTesting": 1,
     "KernelObjectSecurityTesting": 1,
@@ -475,10 +481,10 @@
   "socketPrototypesSuite": {
     "GetSocketTesting": 10,
     "HostNetConversionTesting": 1,
-    "AcceptTesting": 0,
-    "ConnectTesting": 0,
+    "AcceptTesting": 1,
+    "ConnectTesting": 1,
     "SocketNameTesting": 1,
-    "SockOptTesting": 1,
+    "SockOptionTesting": 1,
     "IoctlSocketTesting": 1,
     "ShutDownTesting": 1,
     "RecvFromTesting": 1,
@@ -494,9 +500,9 @@
 
   "windowsSockExSuite": {
     "GetWinSocketTesting": 1,
-    "WinSocketAcceptTesting": 0,
-    "WinSocketConnectTesting": 0,
-    "WinSocketConnectByNameTesting": 0,
+    "WinSocketAcceptTesting": 1,
+    "WinSocketConnectTesting": 1,
+    "WinSocketConnectByNameTesting": 1,
     "WinSocketHostNetConversionTesting": 1,
     "WinSocketRecvFromTesting": 1,
     "WinSocketSendToTesting": 1
@@ -505,7 +511,11 @@
   "openGLSuite": {
     "OpenGLUtilityTesting": 1,
     "OpenGLInitTesting": 1,
-    "OpenGLAPITesting": 1,
+    "OpenGLBaseTesting": 1,
+    "OpenGLBuffersTesting": 1,
+    "OpenGLTexturesTesting": 1,
+    "OpenGLPolygonTesting": 1,
+    "OpenGLSamplersTesting": 1,
     "OpenGLProgramTesting": 1,
     "OpenGLShaderTesting": 1,
     "OpenGLGlutTesting": 1,

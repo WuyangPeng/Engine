@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:22)
+///	引擎版本：0.9.0.0 (2023/01/07 13:47)
 
 #include "System/SystemExport.h"
 
@@ -22,9 +22,6 @@
 #endif  // SYSTEM_PLATFORM_WIN32
 
 #include <array>
-
-using std::array;
-using std::string;
 
 System::WinSocket System::CreateSocket(ProtocolFamilies addressFamilies, SocketTypes type, SocketProtocols protocol) noexcept
 {
@@ -73,7 +70,7 @@ bool System::Bind(WinSocket winSocket, const WinSockInternetAddress* address) no
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    if (::bind(winSocket, reinterpret_cast<const WinSockAddr*>(address), sizeof(WinSockInternetAddress)) != gSocketError)
+    if (::bind(winSocket, reinterpret_cast<const WinSockAddress*>(address), sizeof(WinSockInternetAddress)) != socketError)
         return true;
     else
         return false;
@@ -96,7 +93,7 @@ System::WinSocket System::Accept(WinSocket winSocket, WinSockInternetAddress* ad
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    return ::accept(winSocket, reinterpret_cast<WinSockAddr*>(address), namelen);
+    return ::accept(winSocket, reinterpret_cast<WinSockAddress*>(address), namelen);
 
     #include STSTEM_WARNING_POP
 
@@ -113,7 +110,7 @@ bool System::Listen(WinSocket winSocket, int backlog) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::listen(winSocket, backlog) != gSocketError)
+    if (::listen(winSocket, backlog) != socketError)
         return true;
     else
         return false;
@@ -131,7 +128,7 @@ bool System::CloseSocket(WinSocket winSocket) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::closesocket(winSocket) != gSocketError)
+    if (::closesocket(winSocket) != socketError)
         return true;
     else
         return false;
@@ -162,7 +159,7 @@ int System::Recv(WinSocket winSocket, char* buf, int len, SocketRecv flags) noex
 
 bool System::IsSocketValid(WinSocket winSocket) noexcept
 {
-    if (winSocket != gInvalidSocket)
+    if (winSocket != invalidSocket)
         return true;
     else
         return false;
@@ -190,7 +187,7 @@ bool System::Connect(WinSocket winSocket, const WinSockInternetAddress* address)
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    if (::connect(winSocket, reinterpret_cast<const WinSockAddr*>(address), sizeof(WinSockInternetAddress)) != gSocketError)
+    if (::connect(winSocket, reinterpret_cast<const WinSockAddress*>(address), sizeof(WinSockInternetAddress)) != socketError)
         return true;
     else
         return false;
@@ -225,7 +222,7 @@ unsigned long System::GetInternetAddress(const char* cp) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    WinSockInAddr address{};
+    InternetAddress address{};
     if (0 < inet_pton(EnumCastUnderlying(ProtocolFamilies::Inet), cp, &address))
     {
         return address.s_addr;
@@ -245,7 +242,7 @@ bool System::IoctlSocket(WinSocket winSocket, IoctlSocketCmd cmd, unsigned long*
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::ioctlsocket(winSocket, EnumCastUnderlying(cmd), argp) != gSocketError)
+    if (::ioctlsocket(winSocket, EnumCastUnderlying(cmd), argp) != socketError)
         return true;
     else
         return false;
@@ -266,7 +263,7 @@ bool System::GetPeerName(WinSocket winSocket, WinSockInternetAddress* name, int*
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    if (::getpeername(winSocket, reinterpret_cast<WinSockAddr*>(name), namelen) != gSocketError)
+    if (::getpeername(winSocket, reinterpret_cast<WinSockAddress*>(name), namelen) != socketError)
         return true;
     else
         return false;
@@ -289,7 +286,7 @@ bool System::GetSockName(WinSocket winSocket, WinSockInternetAddress* name, int*
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    if (::getsockname(winSocket, reinterpret_cast<WinSockAddr*>(name), namelen) != gSocketError)
+    if (::getsockname(winSocket, reinterpret_cast<WinSockAddress*>(name), namelen) != socketError)
         return true;
     else
         return false;
@@ -305,11 +302,11 @@ bool System::GetSockName(WinSocket winSocket, WinSockInternetAddress* name, int*
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, char* optVal, int* optLen) noexcept
+bool System::GetSockOption(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, char* optVal, int* optLen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::getsockopt(winSocket, EnumCastUnderlying(level), EnumCastUnderlying(optName), optVal, optLen) != gSocketError)
+    if (::getsockopt(winSocket, EnumCastUnderlying(level), EnumCastUnderlying(optName), optVal, optLen) != socketError)
         return true;
     else
         return false;
@@ -323,12 +320,12 @@ bool System::GetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetr
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-string System::InetNtoa(const WinSockInAddr& in)
+std::string System::InetNtoa(const InternetAddress& in)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     constexpr auto stringBufSize = 256u;
-    array<char, stringBufSize> stringBuf{};
+    std::array<char, stringBufSize> stringBuf{};
     if (inet_ntop(EnumCastUnderlying(ProtocolFamilies::Inet), &in, stringBuf.data(), stringBuf.size()) != nullptr)
     {
         return stringBuf.data();
@@ -345,11 +342,11 @@ string System::InetNtoa(const WinSockInAddr& in)
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, const char* optVal, int optLen) noexcept
+bool System::SetSockOption(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, const char* optVal, int optLen) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::setsockopt(winSocket, EnumCastUnderlying(level), EnumCastUnderlying(optName), optVal, optLen) != gSocketError)
+    if (::setsockopt(winSocket, EnumCastUnderlying(level), EnumCastUnderlying(optName), optVal, optLen) != socketError)
         return true;
     else
         return false;
@@ -397,7 +394,7 @@ bool System::ShutDown(WinSocket winSocket, ShutdownHow how) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::shutdown(winSocket, EnumCastUnderlying(how)) != gSocketError)
+    if (::shutdown(winSocket, EnumCastUnderlying(how)) != socketError)
         return true;
     else
         return false;
@@ -418,7 +415,7 @@ int System::RecvFrom(WinSocket winSocket, char* buf, int len, SocketRecv flags, 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    return ::recvfrom(winSocket, buf, len, EnumCastUnderlying(flags), reinterpret_cast<WinSockAddr*>(from), fromlen);
+    return ::recvfrom(winSocket, buf, len, EnumCastUnderlying(flags), reinterpret_cast<WinSockAddress*>(from), fromlen);
 
     #include STSTEM_WARNING_POP
 
@@ -438,7 +435,7 @@ int System::SendTo(WinSocket winSocket, const char* buf, int len, SocketSend fla
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    return ::sendto(winSocket, buf, len, EnumCastUnderlying(flags), reinterpret_cast<const WinSockAddr*>(to), sizeof(WinSockInternetAddress));
+    return ::sendto(winSocket, buf, len, EnumCastUnderlying(flags), reinterpret_cast<const WinSockAddress*>(to), sizeof(WinSockInternetAddress));
 
     #include STSTEM_WARNING_POP
 

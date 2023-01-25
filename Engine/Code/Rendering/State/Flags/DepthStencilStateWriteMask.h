@@ -10,7 +10,7 @@
 #ifndef RENDERING_STATE_DEPTH_STENCIL_STATE_WRITE_MASK_H
 #define RENDERING_STATE_DEPTH_STENCIL_STATE_WRITE_MASK_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {

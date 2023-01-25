@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:21)
+///	引擎版本：0.9.0.0 (2023/01/07 13:46)
 
 #include "System/SystemExport.h"
 
@@ -14,7 +14,7 @@
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning.h"
 
-System::WinSockHostent* System::GetHostByAddr(const WinSockInAddr* addr, ProtocolFamilies type) noexcept
+System::WinSockHostent* System::GetHostByAddress(const InternetAddress* address, ProtocolFamilies type) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -22,13 +22,13 @@ System::WinSockHostent* System::GetHostByAddr(const WinSockInAddr* addr, Protoco
     #include SYSTEM_WARNING_DISABLE(4996)
     #include SYSTEM_WARNING_DISABLE(26490)
 
-    return ::gethostbyaddr(reinterpret_cast<const char*>(addr), sizeof(WinSockInAddr), EnumCastUnderlying(type));
+    return ::gethostbyaddr(reinterpret_cast<const char*>(address), sizeof(InternetAddress), EnumCastUnderlying(type));
 
     #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    UnusedFunction(addr, type);
+    UnusedFunction(address, type);
 
     return nullptr;
 
@@ -55,11 +55,11 @@ System::WinSockHostent* System::GetHostByName(const char* name) noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetHostName(char* name, int namelen) noexcept
+bool System::GetHostName(char* name, int nameLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::gethostname(name, namelen) != gSocketError)
+    if (::gethostname(name, nameLength) != socketError)
         return true;
     else
         return false;

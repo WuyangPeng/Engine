@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:37)
+///	引擎测试版本：0.9.0.0 (2023/01/04 21:23)
 
 #include "MemorySetTesting.h"
 #include "System/MemoryTools/MemoryHelper.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <array>
-
-using std::array;
 
 System::MemorySetTesting::MemorySetTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,13 +36,15 @@ void System::MemorySetTesting::MainTest()
 void System::MemorySetTesting::MemorySetTest()
 {
     constexpr auto buffSize = 256;
-    array<char, buffSize> buff{};
+    using BufferType = std::array<char, buffSize>;
+
+    BufferType buffer{};
 
     constexpr auto fillValue = 1;
-    MemorySet(buff.data(), fillValue, buffSize);
+    MemorySet(buffer.data(), fillValue, buffSize);
 
-    array<char, buffSize> result{};
+    BufferType result{};
     result.fill(fillValue);
 
-    ASSERT_EQUAL(buff, result);
+    ASSERT_EQUAL(buffer, result);
 }

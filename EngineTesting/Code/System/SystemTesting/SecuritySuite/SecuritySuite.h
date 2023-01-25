@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:29)
+///	引擎测试版本：0.9.0.0 (2023/01/23 23:35)
 
 #ifndef SYSTEM_SECURITY_SUITE_H
 #define SYSTEM_SECURITY_SUITE_H
@@ -28,7 +28,9 @@
 #include "CreateSecurity/KernelObjectSecurityTesting.h"
 #include "CreateSecurity/SecurityAccessMaskTesting.h"
 #include "CreateSecurity/SetPrivateObjectSecurityTesting.h"
-#include "LookupPrivilegeTesting.h"
+#include "LookupPrivilege/GetLookupPrivilegeDisplayNameTesting.h"
+#include "LookupPrivilege/GetLookupPrivilegeNameTesting.h"
+#include "LookupPrivilege/GetLookupPrivilegeValueTesting.h"
 #include "SecurityAce/AddAccessControlEntriesTesting.h"
 #include "SecurityAce/AddMandatoryAceTesting.h"
 #include "SecurityAce/FindFirstFreeAccessControlEntriesTesting.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:38)
+///	引擎版本：0.9.0.0 (2023/01/12 18:57)
 
 #include "System/SystemExport.h"
 
@@ -26,7 +26,7 @@ namespace System
 {
     void DoReportNullFunction(const char* glFunction)
     {
-        auto msg = glFunction + " = nullptr"s;
+        const auto msg = glFunction + " = nullptr"s;
         std::cout << msg << std::endl;
 
         BOOST_ASSERT_MSG(false, msg.c_str());
@@ -38,7 +38,7 @@ namespace System
         auto code = UnderlyingCastEnum<OpenGLErrorCode>(glGetError());
         while (code != OpenGLErrorCode::NoError)
         {
-            auto errorString = GetOpenGLErrorString(code);
+            const auto errorString = GetOpenGLErrorString(code);
             std::cout << glFunction << ":" << errorString << std::endl;
             BOOST_ASSERT_MSG(false, errorString);
 

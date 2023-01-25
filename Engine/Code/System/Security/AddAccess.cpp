@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:53)
+///	引擎版本：0.9.0.0 (2023/01/23 23:16)
 
 #include "System/SystemExport.h"
 
@@ -105,10 +105,12 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
 bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRevision aceRevision, ControlACEInheritance aceFlags, SpecificAccess accessMask, SecuritySIDPtr sid) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if ((::AddAccessDeniedAceEx(acl, EnumCastUnderlying(aceRevision), EnumCastUnderlying(aceFlags), EnumCastUnderlying(accessMask), sid)) != gFalse)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
     UnusedFunction(acl, aceRevision, aceFlags, accessMask, sid);

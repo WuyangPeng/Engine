@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:53)
+///	引擎版本：0.9.0.0 (2023/01/23 23:17)
 
 #include "System/SystemExport.h"
 
@@ -77,41 +77,41 @@ System::String System::GetLookupPrivilegeNameDescription(LookupPrivilegeNameDesc
 
     using DescriptionType = std::map<LookupPrivilegeNameDescription, String>;
 
-    static const DescriptionType description{ { System::LookupPrivilegeNameDescription::CreateTokenName, SE_CREATE_TOKEN_NAME },
-                                              { System::LookupPrivilegeNameDescription::AssignPrimaryToken, SE_ASSIGNPRIMARYTOKEN_NAME },
-                                              { System::LookupPrivilegeNameDescription::LockMemoryName, SE_LOCK_MEMORY_NAME },
-                                              { System::LookupPrivilegeNameDescription::IncreaseQuotaName, SE_INCREASE_QUOTA_NAME },
-                                              { System::LookupPrivilegeNameDescription::UnsolicitedInputName, SE_UNSOLICITED_INPUT_NAME },
-                                              { System::LookupPrivilegeNameDescription::MachineAccountName, SE_MACHINE_ACCOUNT_NAME },
-                                              { System::LookupPrivilegeNameDescription::TcbName, SE_TCB_NAME },
-                                              { System::LookupPrivilegeNameDescription::SecurityName, SE_SECURITY_NAME },
-                                              { System::LookupPrivilegeNameDescription::TakeOwnershipName, SE_TAKE_OWNERSHIP_NAME },
-                                              { System::LookupPrivilegeNameDescription::LoadDriverName, SE_LOAD_DRIVER_NAME },
-                                              { System::LookupPrivilegeNameDescription::SystemProfileName, SE_SYSTEM_PROFILE_NAME },
-                                              { System::LookupPrivilegeNameDescription::SystemtimeName, SE_SYSTEMTIME_NAME },
-                                              { System::LookupPrivilegeNameDescription::ProfileSingleProcessName, SE_PROF_SINGLE_PROCESS_NAME },
-                                              { System::LookupPrivilegeNameDescription::IncreaseBasePriorityName, SE_INC_BASE_PRIORITY_NAME },
-                                              { System::LookupPrivilegeNameDescription::CreatePagefileName, SE_CREATE_PAGEFILE_NAME },
-                                              { System::LookupPrivilegeNameDescription::CreatePermanentName, SE_CREATE_PERMANENT_NAME },
-                                              { System::LookupPrivilegeNameDescription::BackupName, SE_BACKUP_NAME },
-                                              { System::LookupPrivilegeNameDescription::RestoreName, SE_RESTORE_NAME },
-                                              { System::LookupPrivilegeNameDescription::ShutdownName, SE_SHUTDOWN_NAME },
-                                              { System::LookupPrivilegeNameDescription::DebugName, SE_DEBUG_NAME },
-                                              { System::LookupPrivilegeNameDescription::AuditName, SE_AUDIT_NAME },
-                                              { System::LookupPrivilegeNameDescription::SystemEnvironmentName, SE_SYSTEM_ENVIRONMENT_NAME },
-                                              { System::LookupPrivilegeNameDescription::ChangeNotifyName, SE_CHANGE_NOTIFY_NAME },
-                                              { System::LookupPrivilegeNameDescription::RemoteShutdownName, SE_REMOTE_SHUTDOWN_NAME },
-                                              { System::LookupPrivilegeNameDescription::UndockName, SE_UNDOCK_NAME },
-                                              { System::LookupPrivilegeNameDescription::SyncAgentName, SE_SYNC_AGENT_NAME },
-                                              { System::LookupPrivilegeNameDescription::EnableDelegationName, SE_ENABLE_DELEGATION_NAME },
-                                              { System::LookupPrivilegeNameDescription::ManageVolumeName, SE_MANAGE_VOLUME_NAME },
-                                              { System::LookupPrivilegeNameDescription::ImpersonateName, SE_IMPERSONATE_NAME },
-                                              { System::LookupPrivilegeNameDescription::CreateGlobalName, SE_CREATE_GLOBAL_NAME },
-                                              { System::LookupPrivilegeNameDescription::TrustedCredManAccessName, SE_TRUSTED_CREDMAN_ACCESS_NAME },
-                                              { System::LookupPrivilegeNameDescription::RelabelName, SE_RELABEL_NAME },
-                                              { System::LookupPrivilegeNameDescription::IncreaseWorkingSetName, SE_INC_WORKING_SET_NAME },
-                                              { System::LookupPrivilegeNameDescription::TimeZoneName, SE_TIME_ZONE_NAME },
-                                              { System::LookupPrivilegeNameDescription::CreateSymbolicLinkName, SE_CREATE_SYMBOLIC_LINK_NAME } };
+    static const DescriptionType description{ { LookupPrivilegeNameDescription::CreateTokenName, SE_CREATE_TOKEN_NAME },
+                                              { LookupPrivilegeNameDescription::AssignPrimaryToken, SE_ASSIGNPRIMARYTOKEN_NAME },
+                                              { LookupPrivilegeNameDescription::LockMemoryName, SE_LOCK_MEMORY_NAME },
+                                              { LookupPrivilegeNameDescription::IncreaseQuotaName, SE_INCREASE_QUOTA_NAME },
+                                              { LookupPrivilegeNameDescription::UnsolicitedInputName, SE_UNSOLICITED_INPUT_NAME },
+                                              { LookupPrivilegeNameDescription::MachineAccountName, SE_MACHINE_ACCOUNT_NAME },
+                                              { LookupPrivilegeNameDescription::TcbName, SE_TCB_NAME },
+                                              { LookupPrivilegeNameDescription::SecurityName, SE_SECURITY_NAME },
+                                              { LookupPrivilegeNameDescription::TakeOwnershipName, SE_TAKE_OWNERSHIP_NAME },
+                                              { LookupPrivilegeNameDescription::LoadDriverName, SE_LOAD_DRIVER_NAME },
+                                              { LookupPrivilegeNameDescription::SystemProfileName, SE_SYSTEM_PROFILE_NAME },
+                                              { LookupPrivilegeNameDescription::SystemtimeName, SE_SYSTEMTIME_NAME },
+                                              { LookupPrivilegeNameDescription::ProfileSingleProcessName, SE_PROF_SINGLE_PROCESS_NAME },
+                                              { LookupPrivilegeNameDescription::IncreaseBasePriorityName, SE_INC_BASE_PRIORITY_NAME },
+                                              { LookupPrivilegeNameDescription::CreatePagefileName, SE_CREATE_PAGEFILE_NAME },
+                                              { LookupPrivilegeNameDescription::CreatePermanentName, SE_CREATE_PERMANENT_NAME },
+                                              { LookupPrivilegeNameDescription::BackupName, SE_BACKUP_NAME },
+                                              { LookupPrivilegeNameDescription::RestoreName, SE_RESTORE_NAME },
+                                              { LookupPrivilegeNameDescription::ShutdownName, SE_SHUTDOWN_NAME },
+                                              { LookupPrivilegeNameDescription::DebugName, SE_DEBUG_NAME },
+                                              { LookupPrivilegeNameDescription::AuditName, SE_AUDIT_NAME },
+                                              { LookupPrivilegeNameDescription::SystemEnvironmentName, SE_SYSTEM_ENVIRONMENT_NAME },
+                                              { LookupPrivilegeNameDescription::ChangeNotifyName, SE_CHANGE_NOTIFY_NAME },
+                                              { LookupPrivilegeNameDescription::RemoteShutdownName, SE_REMOTE_SHUTDOWN_NAME },
+                                              { LookupPrivilegeNameDescription::UndockName, SE_UNDOCK_NAME },
+                                              { LookupPrivilegeNameDescription::SyncAgentName, SE_SYNC_AGENT_NAME },
+                                              { LookupPrivilegeNameDescription::EnableDelegationName, SE_ENABLE_DELEGATION_NAME },
+                                              { LookupPrivilegeNameDescription::ManageVolumeName, SE_MANAGE_VOLUME_NAME },
+                                              { LookupPrivilegeNameDescription::ImpersonateName, SE_IMPERSONATE_NAME },
+                                              { LookupPrivilegeNameDescription::CreateGlobalName, SE_CREATE_GLOBAL_NAME },
+                                              { LookupPrivilegeNameDescription::TrustedCredManAccessName, SE_TRUSTED_CREDMAN_ACCESS_NAME },
+                                              { LookupPrivilegeNameDescription::RelabelName, SE_RELABEL_NAME },
+                                              { LookupPrivilegeNameDescription::IncreaseWorkingSetName, SE_INC_WORKING_SET_NAME },
+                                              { LookupPrivilegeNameDescription::TimeZoneName, SE_TIME_ZONE_NAME },
+                                              { LookupPrivilegeNameDescription::CreateSymbolicLinkName, SE_CREATE_SYMBOLIC_LINK_NAME } };
 
     const auto iter = description.find(lookupPrivilegeName);
     if (iter != description.cend())

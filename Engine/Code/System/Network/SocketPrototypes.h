@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:12)
+///	引擎版本：0.9.0.0 (2023/01/07 13:47)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_H
@@ -41,10 +41,10 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetPeerName(WinSocket winSocket, WinSockInternetAddress* name, int* namelen) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSockName(WinSocket winSocket, WinSockInternetAddress* name, int* namelen) noexcept;
-    NODISCARD SYSTEM_DEFAULT_DECLARE std::string InetNtoa(const WinSockInAddr& in);
+    NODISCARD SYSTEM_DEFAULT_DECLARE std::string InetNtoa(const InternetAddress& in);
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, char* optVal, int* optLen) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, const char* optVal, int optLen) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSockOption(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, char* optVal, int* optLen) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSockOption(WinSocket winSocket, SocketLevelOption level, SocketRetrievedOption optName, const char* optVal, int optLen) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IoctlSocket(WinSocket winSocket, IoctlSocketCmd cmd, unsigned long* argp) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE ShutDown(WinSocket winSocket, ShutdownHow how) noexcept;

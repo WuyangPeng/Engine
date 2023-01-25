@@ -12,9 +12,10 @@
 #include "OpenGLIndexBuffer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "System/OpenGL/OpenGLBuffers.h"
 
 Rendering::OpenGLIndexBuffer::OpenGLIndexBuffer(const IndexBufferSharedPtr& buffer, const std::string& name)
     : ParentType{ buffer, name, BindBuffer::ElementArrayBuffer }

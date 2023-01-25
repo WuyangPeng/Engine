@@ -10,7 +10,7 @@
 #ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 #define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Database
 {

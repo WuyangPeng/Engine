@@ -12,12 +12,13 @@
 #include "OpenGLTexture2Array.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTexture2Array::OpenGLTexture2Array(const Texture2DArraySharedPtr& texture2Array, const std::string& name)
     : ParentType{ texture2Array, name, TextureTarget::Texture2DArray, TextureTargetBinding::Binding2DArray }
@@ -29,7 +30,7 @@ Rendering::OpenGLTexture2Array::OpenGLTexture2Array(const Texture2DArraySharedPt
     const auto height = texture2Array->GetDimension(1);
     const auto numItems = texture2Array->GetNumItems();
 
-    System::SetGLTexStorage3D(TextureTarget::Texture2DArray, GetNumLevels(), GetInternalFormat(), width, height, numItems);
+    System::SetGLTexturesStorage3D(TextureTarget::Texture2DArray, GetNumLevels(), GetInternalFormat(), width, height, numItems);
 
     Initialize();
 
@@ -80,6 +81,6 @@ void Rendering::OpenGLTexture2Array::LoadTextureLevel(int item, int level, const
         const auto width = texture->GetDimension(level, 0);
         const auto height = texture->GetDimension(level, 1);
 
-        System::SetGLTexSubImage3D(TextureTarget::Texture2DArray, level, 0, 0, item, width, height, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        System::SetGLTexturesSubImage3D(TextureTarget::Texture2DArray, level, 0, 0, item, width, height, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
 }

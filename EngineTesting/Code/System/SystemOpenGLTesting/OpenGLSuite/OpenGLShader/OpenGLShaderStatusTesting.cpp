@@ -1,0 +1,55 @@
+///	Copyright (c) 2010-2023
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++20
+///	引擎测试版本：0.9.0.0 (2023/01/15 17:05)
+
+#include "OpenGLShaderStatusTesting.h"
+#include "System/OpenGL/Flags/OpenGLShaderFlags.h"
+#include "System/OpenGL/OpenGLShader.h"
+#include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+
+System::OpenGLShaderStatusTesting::OpenGLShaderStatusTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    SYSTEM_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, OpenGLShaderStatusTesting)
+
+void System::OpenGLShaderStatusTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void System::OpenGLShaderStatusTesting::MainTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(ShaderStatusTest);
+}
+
+void System::OpenGLShaderStatusTesting::ShaderStatusTest()
+{
+    const auto shaderHandle = CreateGLShader(ShaderType::Vertex);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoShaderStatusTest, shaderHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DeleteShaderTest, shaderHandle);
+}
+
+void System::OpenGLShaderStatusTesting::DoShaderStatusTest(OpenGLUInt shaderHandle)
+{
+    ASSERT_NOT_THROW_EXCEPTION_1(ShaderSourceTest, shaderHandle);
+
+    ASSERT_EQUAL(GetGLShader(shaderHandle, ShaderStatus::Compile), false);
+
+    CompileGLShader(shaderHandle);
+
+    ASSERT_EQUAL(GetGLShader(shaderHandle, ShaderStatus::Compile), true);
+
+    ASSERT_EQUAL(GetGLShader(shaderHandle, ShaderStatus::Delete), false);
+}

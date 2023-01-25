@@ -10,10 +10,11 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLDevice.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "System/OpenGL/OpenGLBase.h"
 
 Rendering::OpenGLDevice::OpenGLDevice() noexcept
     : ParentType{}

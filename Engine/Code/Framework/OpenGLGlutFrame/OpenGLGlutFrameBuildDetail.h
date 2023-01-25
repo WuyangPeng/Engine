@@ -13,7 +13,7 @@
 #include "OpenGLGlutFrameBuild.h"
 #include "System/Console/ConsoleCreate.h"
 #include "System/OpenGL/Flags/GlutFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+#include "System/OpenGL/OpenGLBase.h"
 #include "System/OpenGL/OpenGLGlut.h"
 #include "System/OpenGL/OpenGLInit.h"
 #include "System/Time/Using/DeltaTimeUsing.h"

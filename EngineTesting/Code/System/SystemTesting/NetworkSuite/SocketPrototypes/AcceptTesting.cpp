@@ -1,30 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:17)
+///	引擎测试版本：0.9.0.0 (2023/01/09 22:07)
 
 #include "AcceptTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
-#include "System/Network/WindowsExtensionPrototypes.h"
-#include "System/Threading/Process.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <array>
-
-using std::array;
-using std::string;
 
 System::AcceptTesting::AcceptTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -36,11 +24,12 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, AcceptTesting)
 
 void System::AcceptTesting::DoRunUnitTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(Init);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockStartUpTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateTcpClientProcessTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(Cleanup);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockCleanupTest);
 }
 
 void System::AcceptTesting::MainTest()
@@ -48,75 +37,75 @@ void System::AcceptTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(AcceptTest);
 }
 
+void System::AcceptTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试失败会导致永久等待。\n";
+}
+
 void System::AcceptTesting::AcceptTest()
 {
-    ASSERT_TRUE(CreateSystemProcess(SYSTEM_TEXT("TcpClient")));
+    const auto socketHandle = CreateTcpSocket();
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "创建Tcp Socket失败。");
 
-    boost::property_tree::basic_ptree<string, string> mainTree{};
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAcceptTest, socketHandle);
 
-    read_json("Configuration/EnvironmentVariable.json", mainTree);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSocketTest, socketHandle);
+}
 
-    const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("TcpPort") + GetEngineeringOffsetValue());
+void System::AcceptTesting::DoAcceptTest(WinSocket socketHandle)
+{
+    auto address = AcceptInit(socketHandle);
 
-    WinSockInternetAddress addr{};
+    int addressLength{ sizeof(address) };
+    const auto acceptHandle = Accept(socketHandle, &address, &addressLength);
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(acceptHandle), "创建Accept Socket失败。");
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
-    addr.sin_port = GetHostToNetShort(port);
-    addr.sin_addr.s_addr = GetHostToNetLong(gInAddrAny);
+    ASSERT_NOT_THROW_EXCEPTION_1(RecvTest, acceptHandle);
 
-    int addrLen{ sizeof(addr) };
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSocketTest, acceptHandle);
+}
 
-    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
-    ASSERT_TRUE(IsSocketValid(socketHandle));
+System::WinSockInternetAddress System::AcceptTesting::AcceptInit(WinSocket socketHandle)
+{
+    auto address = GetAddress(GetTcpPort());
 
-    ASSERT_TRUE(Bind(socketHandle, &addr));
+    ASSERT_TRUE(Bind(socketHandle, &address));
     ASSERT_TRUE(Listen(socketHandle, 5));
 
     GetStream() << "调用accept等待客户端连接！\n";
-    const WinSocket acceptHandle = Accept(socketHandle, &addr, &addrLen);
-    ASSERT_TRUE(IsSocketValid(acceptHandle));
 
-    constexpr auto bufferSize = 256;
-    array<char, bufferSize> buffer{};
-    int index{ 0 };
-    int remain{ bufferSize };
+    return address;
+}
+
+void System::AcceptTesting::RecvTest(WinSocket acceptHandle)
+{
+    BufferType buffer{};
+    auto index = 0;
+    auto remain = bufferSize - 1;
 
     while (0 < remain)
     {
-        const auto ret = Recv(acceptHandle, &buffer.at(index), remain, SocketRecv::Default);
+        const auto recvCount = DoRecvTest(acceptHandle, index, remain, buffer);
 
-        ASSERT_UNEQUAL(ret, gSocketError);
-
-        if (ret == gSocketError)
+        if (recvCount == socketError)
         {
             break;
         }
 
-        remain -= ret;
-        index += ret;
+        remain -= recvCount;
+        index += recvCount;
     }
 
-    string result{ buffer.data() };
+    std::string result{ buffer.data() };
 
     ASSERT_EQUAL(result, "Hello");
-
-    ASSERT_TRUE(CloseSocket(socketHandle));
-    ASSERT_TRUE(CloseSocket(acceptHandle));
 }
 
-void System::AcceptTesting::Init()
+int System::AcceptTesting::DoRecvTest(WinSocket acceptHandle, int index, int remain, BufferType& buffer)
 {
-    // 初始化WinSock
-    WinSockData wsaData{};
+    const auto recvCount = Recv(acceptHandle, &buffer.at(index), remain, SocketRecv::Default);
 
-    constexpr auto versionRequested = MakeWord(2, 2);
-    const auto startUp = WinSockStartUp(versionRequested, &wsaData);
+    ASSERT_UNEQUAL(recvCount, socketError);
 
-    ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
-}
-
-void System::AcceptTesting::Cleanup()
-{
-    const auto cleanup = WinSockCleanup();
-    ASSERT_ENUM_EQUAL(cleanup, WinSockCleanupReturn::Successful);
+    return recvCount;
 }

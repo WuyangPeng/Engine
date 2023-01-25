@@ -11,8 +11,10 @@
 
 #include "OpenGLDrawTargetImpl.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "System/OpenGL/OpenGLBase.h"
+#include "System/OpenGL/OpenGLBuffers.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 #include <array>
 

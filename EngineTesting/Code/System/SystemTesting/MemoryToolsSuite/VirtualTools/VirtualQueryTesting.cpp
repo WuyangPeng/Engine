@@ -1,30 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒýÇæ²âÊÔ°æ±¾£º0.8.1.3 (2022/10/16 19:41)
+///	ÒýÇæ²âÊÔ°æ±¾£º0.9.0.0 (2023/01/06 22:14)
 
 #include "VirtualQueryTesting.h"
 #include "System/MemoryTools/Flags/VirtualToolsFlags.h"
 #include "System/MemoryTools/VirtualTools.h"
 #include "System/Threading/Process.h"
-#include "System/Windows/WindowsSystem.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::VirtualQueryTesting::VirtualQueryTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      memoryProtectFlags{ MemoryProtect::NoAccess,
-                          MemoryProtect::ReadOnly,
-                          MemoryProtect::ReadWrite,
-                          MemoryProtect::Execute,
-                          MemoryProtect::ExecuteRead,
-                          MemoryProtect::ExecuteReadWrite },
-      randomEngine{ GetEngineRandomSeed() }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -38,12 +30,12 @@ void System::VirtualQueryTesting::DoRunUnitTest()
 
 void System::VirtualQueryTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffleFlags);
+    ASSERT_NOT_THROW_EXCEPTION_0(VirtualQueryTest);
 }
 
-bool System::VirtualQueryTesting::RandomShuffleFlags()
+bool System::VirtualQueryTesting::VirtualQueryTest()
 {
-    shuffle(memoryProtectFlags.begin(), memoryProtectFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
     ASSERT_NOT_THROW_EXCEPTION_0(QueryTest);
 
@@ -52,60 +44,64 @@ bool System::VirtualQueryTesting::RandomShuffleFlags()
 
 void System::VirtualQueryTesting::QueryTest()
 {
-    WindowsSystemInfo systemInfo{};
-    GetWindowSystemInfo(systemInfo);
-
-    for (auto index = 0u; index < memoryProtectFlags.size(); ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoQueryTest, index, systemInfo);
-        ASSERT_NOT_THROW_EXCEPTION_2(DoQueryUseProcessTest, index, systemInfo);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoQueryTest, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoQueryUseProcessTest, index);
     }
 }
 
-void System::VirtualQueryTesting::DoQueryTest(size_t index, const WindowsSystemInfo& systemInfo)
+void System::VirtualQueryTesting::DoQueryTest(size_t index)
 {
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
+    const auto memoryProtect = GetMemoryProtect(index);
 
-    const auto size = systemInfo.dwPageSize * pageLimit;
-    auto baseVirtual = AllocateVirtual(nullptr, size, MemoryAllocation::ReserveAndCommit, memoryProtect);
+    auto baseVirtual = AllocateVirtual(nullptr, GetPageSize(), MemoryAllocation::ReserveAndCommit, memoryProtect);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(baseVirtual, "AllocateVirtual Ê§°Ü¡£");
 
-    MemoryBasicInformation memoryBasicInformation{};
+    ASSERT_NOT_THROW_EXCEPTION_2(QueryMemoryBasicInformationTest, index, baseVirtual);
 
-    ASSERT_TRUE(GetVirtualQuery(baseVirtual, &memoryBasicInformation));
-
-    ASSERT_EQUAL(memoryBasicInformation.BaseAddress, baseVirtual);
-    ASSERT_EQUAL(memoryBasicInformation.AllocationBase, baseVirtual);
-    ASSERT_EQUAL(memoryBasicInformation.AllocationProtect, EnumCastUnderlying<WindowsDWord>(memoryProtect));
-    ASSERT_EQUAL(memoryBasicInformation.Protect, EnumCastUnderlying<WindowsDWord>(memoryProtect));
-    ASSERT_EQUAL(memoryBasicInformation.RegionSize, size);
-    ASSERT_LESS(0u, memoryBasicInformation.State);
-    ASSERT_LESS(0u, memoryBasicInformation.Type);
-
-    ASSERT_TRUE(FreeVirtual(baseVirtual));
+    ASSERT_NOT_THROW_EXCEPTION_1(FreeVirtualTest, baseVirtual);
 }
 
-void System::VirtualQueryTesting::DoQueryUseProcessTest(size_t index, const WindowsSystemInfo& systemInfo)
+void System::VirtualQueryTesting::QueryMemoryBasicInformationTest(size_t index, WindowsVoidPtr baseVirtual)
 {
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
+    MemoryBasicInformation memoryBasicInformation{};
+    ASSERT_TRUE(GetVirtualQuery(baseVirtual, &memoryBasicInformation));
 
-    const auto size = systemInfo.dwPageSize * pageLimit;
-    auto baseVirtual = AllocateVirtual(GetCurrentProcessHandle(), nullptr, size, MemoryAllocation::ReserveAndCommit, memoryProtect);
+    ASSERT_NOT_THROW_EXCEPTION_3(MemoryBasicInformationTest, memoryBasicInformation, index, baseVirtual);
+}
+
+void System::VirtualQueryTesting::DoQueryUseProcessTest(size_t index)
+{
+    const auto memoryProtect = GetMemoryProtect(index);
+
+    auto baseVirtual = AllocateVirtual(GetCurrentProcessHandle(), nullptr, GetPageSize(), MemoryAllocation::ReserveAndCommit, memoryProtect);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(baseVirtual, "AllocateVirtual Ê§°Ü¡£");
 
-    MemoryBasicInformation memoryBasicInformation{};
+    ASSERT_NOT_THROW_EXCEPTION_2(QueryMemoryBasicInformationUseProcessTest, index, baseVirtual);
 
+    ASSERT_NOT_THROW_EXCEPTION_2(FreeVirtualUseProcessTest, GetCurrentProcessHandle(), baseVirtual);
+}
+
+void System::VirtualQueryTesting::QueryMemoryBasicInformationUseProcessTest(size_t index, WindowsVoidPtr baseVirtual)
+{
+    MemoryBasicInformation memoryBasicInformation{};
     ASSERT_TRUE(GetVirtualQuery(GetCurrentProcessHandle(), baseVirtual, &memoryBasicInformation));
+
+    ASSERT_NOT_THROW_EXCEPTION_3(MemoryBasicInformationTest, memoryBasicInformation, index, baseVirtual);
+}
+
+void System::VirtualQueryTesting::MemoryBasicInformationTest(const MemoryBasicInformation& memoryBasicInformation, size_t index, WindowsVoidPtr baseVirtual)
+{
+    const auto memoryProtect = GetMemoryProtect(index);
 
     ASSERT_EQUAL(memoryBasicInformation.BaseAddress, baseVirtual);
     ASSERT_EQUAL(memoryBasicInformation.AllocationBase, baseVirtual);
     ASSERT_EQUAL(memoryBasicInformation.AllocationProtect, EnumCastUnderlying<WindowsDWord>(memoryProtect));
     ASSERT_EQUAL(memoryBasicInformation.Protect, EnumCastUnderlying<WindowsDWord>(memoryProtect));
-    ASSERT_EQUAL(memoryBasicInformation.RegionSize, size);
+    ASSERT_EQUAL(memoryBasicInformation.RegionSize, GetPageSize());
     ASSERT_LESS(0u, memoryBasicInformation.State);
     ASSERT_LESS(0u, memoryBasicInformation.Type);
-
-    ASSERT_TRUE(FreeVirtual(GetCurrentProcessHandle(), baseVirtual));
 }

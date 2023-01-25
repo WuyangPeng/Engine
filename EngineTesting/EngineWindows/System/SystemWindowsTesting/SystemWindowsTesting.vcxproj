@@ -347,8 +347,12 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceWindowsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadStringWindowsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetCurrentWglContextTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetWglProcAddressTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSuite.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSwapDeviceBuffersTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglSwapIntervalTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\TestingHelper.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.h" />
@@ -387,7 +391,11 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadStringWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetCurrentWglContextTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetWglProcAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSwapDeviceBuffersTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTestingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglSwapIntervalTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingMain.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.cpp" />

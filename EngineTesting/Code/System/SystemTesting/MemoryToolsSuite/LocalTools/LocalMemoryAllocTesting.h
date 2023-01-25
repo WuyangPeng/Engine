@@ -1,27 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:34)
+///	引擎测试版本：0.9.0.0 (2023/01/04 21:01)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_LOCAL_MEMORY_ALLOC_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_LOCAL_MEMORY_ALLOC_TESTING_H
 
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "LocalMemoryTestingBase.h"
 
 namespace System
 {
-    class LocalMemoryAllocTesting final : public CoreTools::UnitTest
+    class LocalMemoryAllocTesting final : public LocalMemoryTestingBase
     {
     public:
         using ClassType = LocalMemoryAllocTesting;
-        using ParentType = UnitTest;
+        using ParentType = LocalMemoryTestingBase;
 
     public:
         explicit LocalMemoryAllocTesting(const OStreamShared& stream);
@@ -33,12 +30,6 @@ namespace System
         void MainTest();
 
         void LocalMemoryAllocTest();
-
-    private:
-        using LocalMemoryContainer = std::vector<LocalMemory>;
-
-    private:
-        LocalMemoryContainer localMemoryCollection;
     };
 }
 

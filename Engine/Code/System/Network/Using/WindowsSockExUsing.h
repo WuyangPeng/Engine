@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:11)
+///	引擎版本：0.9.0.0 (2023/01/06 23:54)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
@@ -36,15 +36,14 @@ namespace System
 
     using SocketAddressList = SOCKET_ADDRESS_LIST;
     using SocketAddressListPtr = PSOCKET_ADDRESS_LIST;
-    using SocketAddress = SOCKET_ADDRESS;
-    using SocketAddressPtr = LPSOCKET_ADDRESS;
+    using SocketAddress = SOCKET_ADDRESS; 
     using SocketAddressPtr = PSOCKET_ADDRESS;
     using SocketProtocolInfo = WSAPROTOCOL_INFO;
     using SocketProtocolInfoPtr = LPWSAPROTOCOL_INFO;
-    constexpr WindowsDWord gProtocolLen{ WSAPROTOCOL_LEN };
+    constexpr WindowsDWord protocolLen{ WSAPROTOCOL_LEN };
     using SocketProtocolChain = WSAPROTOCOLCHAIN;
     using SocketProtocolChainPtr = LPWSAPROTOCOLCHAIN;
-    constexpr WindowsDWord gProtocolChain{ MAX_PROTOCOL_CHAIN };
+    constexpr WindowsDWord protocolChain{ MAX_PROTOCOL_CHAIN };
     using SocketNetworkEvents = WSANETWORKEVENTS;
     using SocketNetworkEventsPtr = LPWSANETWORKEVENTS;
     using SocketOverlapped = WSAOVERLAPPED;
@@ -128,7 +127,7 @@ namespace System
 
     struct SocketAddress
     {
-        WinSockAddr* lpSockaddr;
+        WinSockAddress* lpSockaddr;
         int iSockaddrLength;
     };
     using SocketAddressPtr = SocketAddress*;
@@ -140,15 +139,15 @@ namespace System
     };
     using SocketAddressListPtr = SocketAddressList*;
 
-    constexpr WindowsDWord gProtocolChain{ 7 };
+    constexpr WindowsDWord protocolChain{ 7 };
     struct SocketProtocolChain
     {
         int ChainLen;
-        uint32_t ChainEntries[gProtocolChain];
+        uint32_t ChainEntries[protocolChain];
     };
     using SocketProtocolChainPtr = SocketProtocolChain*;
 
-    constexpr WindowsDWord gProtocolLen{ 255 };
+    constexpr WindowsDWord protocolLen{ 255 };
     struct SocketProtocolInfo
     {
         uint32_t dwServiceFlags1;
@@ -170,7 +169,7 @@ namespace System
         int iSecurityScheme;
         uint32_t dwMessageSize;
         uint32_t dwProviderReserved;
-        wchar_t szProtocol[gProtocolLen + 1];
+        wchar_t szProtocol[protocolLen + 1];
     };
     using SocketProtocolInfoPtr = SocketProtocolInfo*;
 
@@ -195,7 +194,7 @@ namespace System
 
     struct SocketMsg
     {
-        WinSockAddr* name;
+        WinSockAddress* name;
         int namelen;
         WinSockBufPtr lpBuffers;
         unsigned long dwBufferCount;

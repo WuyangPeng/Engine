@@ -1,27 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:32)
+///	引擎测试版本：0.9.0.0 (2023/01/05 22:36)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_VIEW_OF_FILE_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_VIEW_OF_FILE_TESTING_H
 
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "FileMappingTestingBase.h"
 
 namespace System
 {
-    class ViewOfFileTesting final : public CoreTools::UnitTest
+    class ViewOfFileTesting final : public FileMappingTestingBase
     {
     public:
         using ClassType = ViewOfFileTesting;
-        using ParentType = UnitTest;
+        using ParentType = FileMappingTestingBase;
 
     public:
         explicit ViewOfFileTesting(const OStreamShared& stream);
@@ -35,14 +32,10 @@ namespace System
         void ViewOfFileTest();
 
         void DoViewOfFileTest(FileMapDesiredAccess fileMapDesiredAccess);
-
         void DoViewOfFileUseBaseAddressTest(FileMapDesiredAccess fileMapDesiredAccess);
+        void BufferTest(WindowsVoidPtr buffer);
 
-    private:
-        using FileMapDesiredAccessFlagsContainer = std::vector<FileMapDesiredAccess>;
-
-    private:
-        FileMapDesiredAccessFlagsContainer fileMapDesiredAccessFlags;
+        NODISCARD WindowsHandle Create();
     };
 }
 

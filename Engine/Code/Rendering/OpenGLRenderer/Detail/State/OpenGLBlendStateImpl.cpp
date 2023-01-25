@@ -19,6 +19,8 @@
 
 #include <array>
 
+using System::operator&;
+
 Rendering::OpenGLBlendStateImpl::OpenGLBlendStateImpl() noexcept
     : enableAlphaToCoverage{ false },
       enableIndependentBlend{ false },

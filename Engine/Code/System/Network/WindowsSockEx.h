@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:13)
+///	引擎版本：0.9.0.0 (2023/01/07 13:49)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
@@ -30,13 +30,13 @@ namespace System
                                                             WindowsDWord flags) noexcept;
 
     NODISCARD WinSocket SYSTEM_DEFAULT_DECLARE WinSocketAccept(WinSocket winSocket,
-                                                               WinSockAddr* addr,
+                                                               WinSockAddress* addr,
                                                                WindowsIntPtr addrlen,
                                                                WinSockConditionProc condition,
                                                                WindowsDWordPtrSizeType callbackData) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketConnect(WinSocket winSocket,
-                                                           const WinSockAddr* name,
+                                                           const WinSockAddress* name,
                                                            int namelen,
                                                            WinSockBufPtr callerData,
                                                            WinSockBufPtr calleeData,
@@ -46,15 +46,15 @@ namespace System
                                                                  TChar* nodename,
                                                                  TChar* servicename,
                                                                  WindowsDWordPtr localAddressLength,
-                                                                 WinSockAddr* localAddress,
+                                                                 WinSockAddress* localAddress,
                                                                  WindowsDWordPtr remoteAddressLength,
-                                                                 WinSockAddr* remoteAddress,
+                                                                 WinSockAddress* remoteAddress,
                                                                  const WinSockTimeval* timeout) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetLong(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetShort(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostLong(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostShort(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept;
 
     NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecv(WinSocket winSocket,
                                                        WinSockBufPtr buffers,
@@ -68,7 +68,7 @@ namespace System
                                                            WindowsDWord bufferCount,
                                                            WindowsDWordPtr numberOfBytesRecvd,
                                                            WindowsDWordPtr flags,
-                                                           WinSockAddr* from,
+                                                           WinSockAddress* from,
                                                            WindowsIntPtr fromlen,
                                                            SocketOverlappedPtr overlapped,
                                                            SocketOverlappedCompletionRoutine completionRoutine) noexcept;
@@ -85,7 +85,7 @@ namespace System
                                                          WindowsDWord bufferCount,
                                                          WindowsDWordPtr numberOfBytesSent,
                                                          WindowsDWord flags,
-                                                         const WinSockAddr* to,
+                                                         const WinSockAddress* to,
                                                          int tolen,
                                                          SocketOverlappedPtr overlapped,
                                                          SocketOverlappedCompletionRoutine completionRoutine) noexcept;

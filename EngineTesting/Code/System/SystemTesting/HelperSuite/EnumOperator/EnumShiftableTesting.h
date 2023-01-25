@@ -31,7 +31,7 @@ namespace System
 
         void ShiftableTest();
 
-        void PrintTipsMessage();
+        void PrintTipsMessage() override;
     };
 }
 

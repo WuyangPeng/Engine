@@ -14,7 +14,7 @@
 #include "OpenGLVertexFormatArrayData.h"
 #include "OpenGLVertexFormatDataDetail.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"

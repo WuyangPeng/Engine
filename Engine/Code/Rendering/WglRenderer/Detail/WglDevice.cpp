@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "WglDevice.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 #include "System/Windows/WindowsSystem.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"

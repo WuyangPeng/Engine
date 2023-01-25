@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H
 #define CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace CoreTools
 {
@@ -97,9 +97,7 @@ namespace CoreTools
         Begin,
         Middle,
         End,
-    };
-
-    ENUM_INCREMENTABLE_OPERATOR_DEFINE(CSVType)
+    };    
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_CSV_FLAGS_H

@@ -34,7 +34,7 @@ namespace System
 
         void CodePageTest();
         void OutputCodePageTest();
-        void PrintTipsMessage();
+        void PrintTipsMessage() override;
 
     private:
         using CodePageContainer = std::vector<CodePage>;

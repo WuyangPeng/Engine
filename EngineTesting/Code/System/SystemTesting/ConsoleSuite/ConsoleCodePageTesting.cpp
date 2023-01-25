@@ -30,7 +30,6 @@ void System::ConsoleCodePageTesting::DoRunUnitTest()
 
 void System::ConsoleCodePageTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
     ASSERT_NOT_THROW_EXCEPTION_0(CodePageTest);
     ASSERT_NOT_THROW_EXCEPTION_0(OutputCodePageTest);
 }

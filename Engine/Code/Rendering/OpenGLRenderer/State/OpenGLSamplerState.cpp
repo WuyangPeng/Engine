@@ -11,11 +11,12 @@
 
 #include "OpenGLSamplerState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/State/Flags/SamplerStateFilter.h"
 #include "Rendering/State/Flags/SamplerStateMode.h"
+#include "System/OpenGL/OpenGLSamplers.h"
 
 Rendering::OpenGLSamplerState::OpenGLSamplerState(const SamplerStateSharedPtr& samplerState, const std::string& name)
     : ParentType{ samplerState, name }

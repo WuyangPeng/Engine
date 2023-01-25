@@ -1,32 +1,20 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:36)
+///	引擎测试版本：0.9.0.0 (2023/01/04 21:01)
 
-#include "LocalMemoryAllocTesting.h"
-#include "System/MemoryTools/Flags/LocalMemoryFlags.h"
+#include "LocalMemoryAllocTesting.h" 
 #include "System/MemoryTools/LocalTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::LocalMemoryAllocTesting::LocalMemoryAllocTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      localMemoryCollection{ LocalMemory::Fixed,
-                             LocalMemory::Moveable,
-                             LocalMemory::NoCompact,
-                             LocalMemory::NoDiscard,
-                             LocalMemory::ZeroInit,
-                             LocalMemory::Discardable,
-                             LocalMemory::ValidFlags,
-                             LocalMemory::LHnd,
-                             LocalMemory::LPtr,
-                             LocalMemory::NonZeroLHnd,
-                             LocalMemory::NonZeroLPtr }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -47,11 +35,11 @@ void System::LocalMemoryAllocTesting::LocalMemoryAllocTest()
 {
     constexpr WindowsSize localSize{ 256 * sizeof(TChar) };
 
-    for (const auto localMemory : localMemoryCollection)
+    for (const auto localMemory : *this)
     {
-        auto local = LocalMemoryAlloc(localMemory, localSize);
+        const auto local = LocalMemoryAlloc(localMemory, localSize);
         ASSERT_UNEQUAL_NULL_PTR(local);
 
-        ASSERT_TRUE(LocalMemoryFree(local));
+        ASSERT_NOT_THROW_EXCEPTION_1(LocalMemoryFreeTest, local);
     }
 }

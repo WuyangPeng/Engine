@@ -93,6 +93,8 @@ Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() cons
         proj.at(i) = Vector2Tools::DotProduct(direction, diff);
     }
 
+    using System::operator*;
+
     // 用线计算三角形边缘的横向交点。
 
     auto quantity = 0;

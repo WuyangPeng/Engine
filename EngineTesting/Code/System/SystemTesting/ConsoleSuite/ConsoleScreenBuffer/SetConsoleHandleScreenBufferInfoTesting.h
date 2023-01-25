@@ -36,7 +36,7 @@ namespace System
         void EqualTest(const ConsoleScreenBufferInfoEx& consoleScreenBufferInfo, const ConsoleScreenBufferInfoEx& currentConsoleScreenBufferInfo);
         NODISCARD ConsoleScreenBufferInfoEx GetConsoleScreenBufferInfoEx(ConsoleScreenBufferInfoEx consoleScreenBufferInfo) const noexcept;
 
-        void PrintTipsMessage();
+        void PrintTipsMessage() override;
     };
 }
 

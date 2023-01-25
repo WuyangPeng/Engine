@@ -1,24 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:00)
+///	引擎测试版本：0.9.0.0 (2023/01/12 1:36)
 
-#ifndef SYSTEM_SECURITY_SUITE_WIN_SOCKET_CONNECT_TESTING_H
-#define SYSTEM_SECURITY_SUITE_WIN_SOCKET_CONNECT_TESTING_H
+#ifndef SYSTEM_NETWORK_SUITE_WIN_SOCKET_CONNECT_TESTING_H
+#define SYSTEM_NETWORK_SUITE_WIN_SOCKET_CONNECT_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "WinSocketConnectByNameTesting.h"
 
 namespace System
 {
-    class WinSocketConnectTesting final : public CoreTools::UnitTest
+    class WinSocketConnectTesting final : public WinSocketConnectByNameTesting
     {
     public:
         using ClassType = WinSocketConnectTesting;
-        using ParentType = UnitTest;
+        using ParentType = WinSocketConnectByNameTesting;
 
     public:
         explicit WinSocketConnectTesting(const OStreamShared& stream);
@@ -26,14 +26,8 @@ namespace System
         CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void DoRunUnitTest() final;
-        void MainTest();
-
-        void ConnectTest();
-
-        void Init();
-        void Cleanup();
+        void DoConnectTest(WinSocket socketHandle) override;
     };
 }
 
-#endif  // SYSTEM_SECURITY_SUITE_WIN_SOCKET_CONNECT_TESTING_H
+#endif  // SYSTEM_NETWORK_SUITE_WIN_SOCKET_CONNECT_TESTING_H

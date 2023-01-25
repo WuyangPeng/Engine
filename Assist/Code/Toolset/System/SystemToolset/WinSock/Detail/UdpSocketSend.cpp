@@ -40,5 +40,5 @@ void SystemToolset::UdpSocketSend::Send()
     {
         ret = System::SendTo(GetWinSocket(), GetBuffer(), bufferSize, System::SocketSend::Default, &internetAddress);
 
-    } while (ret == System::gSocketError);
+    } while (ret == System::socketError);
 }

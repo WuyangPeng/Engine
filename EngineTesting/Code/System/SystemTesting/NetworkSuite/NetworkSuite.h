@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 21:59)
+///	引擎测试版本：0.9.0.0 (2023/01/07 13:52)
 
 #ifndef SYSTEM_NETWORK_SUITE_H
 #define SYSTEM_NETWORK_SUITE_H
@@ -22,7 +22,7 @@
 #include "SocketPrototypes/SelectTesting.h"
 #include "SocketPrototypes/SendToTesting.h"
 #include "SocketPrototypes/ShutDownTesting.h"
-#include "SocketPrototypes/SockOptTesting.h"
+#include "SocketPrototypes/SockOptionTesting.h"
 #include "SocketPrototypes/SocketNameTesting.h"
 #include "WindowsExtensionPrototypesTesting.h"
 #include "WindowsSockEx/GetWinSocketTesting.h"

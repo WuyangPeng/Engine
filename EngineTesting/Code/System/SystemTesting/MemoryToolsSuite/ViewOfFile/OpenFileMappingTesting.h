@@ -1,30 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:33)
+///	引擎测试版本：0.9.0.0 (2023/01/05 21:59)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_OPEN_FILE_MAPPING_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_OPEN_FILE_MAPPING_TESTING_H
 
-#include "System/FileManager/Fwd/FileFlagsFwd.h"
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <map>
-#include <random>
-#include <vector>
+#include "FileMappingTestingBase.h"
 
 namespace System
 {
-    class OpenFileMappingTesting final : public CoreTools::UnitTest
+    class OpenFileMappingTesting final : public FileMappingTestingBase
     {
     public:
         using ClassType = OpenFileMappingTesting;
-        using ParentType = UnitTest;
+        using ParentType = FileMappingTestingBase;
 
     public:
         explicit OpenFileMappingTesting(const OStreamShared& stream);
@@ -40,18 +34,8 @@ namespace System
         void OpenFileMappingTest();
         void DoOpenFileMappingTest(size_t index);
 
-    private:
-        using MemoryProtectFlagsContainer = std::vector<MemoryProtect>;
-        using FileMapProtectionFlagsContainer = std::vector<FileMapProtection>;
-        using FileMapDesiredAccessFlagsContainer = std::vector<FileMapDesiredAccess>;
-        using MappingType = std::map<MemoryProtect, FileHandleDesiredAccess>;
-
-    private:
-        MemoryProtectFlagsContainer memoryProtectFlags;
-        FileMapProtectionFlagsContainer fileMapProtectionFlags;
-        FileMapDesiredAccessFlagsContainer fileMapDesiredAccessFlags;
-        MappingType mapping;
-        std::default_random_engine randomEngine;
+        void FileMappingTest(size_t index, WindowsHandle fileHandle);
+        void FileMappingOpenTest(size_t index);
     };
 }
 

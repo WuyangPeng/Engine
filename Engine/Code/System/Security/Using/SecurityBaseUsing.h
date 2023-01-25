@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:51)
+///	引擎版本：0.9.0.0 (2023/01/23 23:11)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_USING_H
 #define SYSTEM_SECURITY_SECURITY_BASE_USING_H
@@ -53,7 +53,7 @@ namespace System
     using SecuritySidHashEntry = SID_HASH_ENTRY;
     using SecurityTokenAuditPolicy = TOKEN_AUDIT_POLICY;
     using SecurityTokenAuditPolicyPtr = PTOKEN_AUDIT_POLICY;
-    constexpr WindowsDWord gTokenSourceLength{ TOKEN_SOURCE_LENGTH };
+    constexpr WindowsDWord tokenSourceLength{ TOKEN_SOURCE_LENGTH };
     using SecurityTokenSource = TOKEN_SOURCE;
     using SecurityTokenSourcePtr = PTOKEN_SOURCE;
     using SecurityTokenStatistics = TOKEN_STATISTICS;
@@ -248,11 +248,11 @@ namespace System
     };
     using SecurityTokenAuditPolicyPtr = SecurityTokenAuditPolicy*;
 
-    constexpr WindowsDWord gTokenSourceLength{ 8 };
+    constexpr WindowsDWord tokenSourceLength{ 8 };
 
     struct SecurityTokenSource
     {
-        char SourceName[gTokenSourceLength];
+        char SourceName[tokenSourceLength];
         LookupPrivilegeLUID SourceIdentifier;
     };
     using SecurityTokenSourcePtr = SecurityTokenSource*;

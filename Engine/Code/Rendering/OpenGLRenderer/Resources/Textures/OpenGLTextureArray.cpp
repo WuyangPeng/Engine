@@ -12,13 +12,16 @@
 #include "OpenGLTextureArray.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/Resources/Textures/OpenGLTextureSingleImpl.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLBuffers.h"
+#include "System/OpenGL/OpenGLBase.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, OpenGLTextureArray)
 
@@ -61,8 +64,8 @@ void Rendering::OpenGLTextureArray::Initialize()
     System::SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
     System::SetGLPixelStore(System::PixelStore::PackAlignment, 1);
 
-    System::SetGLTexParameter(GetTarget(), System::TextureParameter::TextureBaseLevel, 0);
-    System::SetGLTexParameter(GetTarget(), System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
+    System::SetGLTexturesParameter(GetTarget(), System::TextureParameter::TextureBaseLevel, 0);
+    System::SetGLTexturesParameter(GetTarget(), System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
 
     auto texture = GetTexture();
     const auto numItems = texture->GetNumItems();
@@ -248,8 +251,8 @@ bool Rendering::OpenGLTextureArray::CopyGpuToCpu(int item, int level)
     System::SetGLBindTexture(textureTarget, GetGLHandle());
 
     System::SetGLBindBuffer(System::BindBuffer::PixePackBuffer, pixBuffer);
-    System::SetGLGetTexImage(textureTarget, level, GetExternalFormat(), GetExternalType(), nullptr);
-    System::SetGLGetBufferSubData(System::BindBuffer::PixePackBuffer, 0, numBytes, &*data.GetCurrent());
+    System::GetGLTexturesImage(textureTarget, level, GetExternalFormat(), GetExternalType(), nullptr);
+    System::GetGLBufferSubData(System::BindBuffer::PixePackBuffer, 0, numBytes, &*data.GetCurrent());
     System::SetGLBindBuffer(System::BindBuffer::PixePackBuffer, 0);
 
     System::SetGLBindTexture(textureTarget, 0);

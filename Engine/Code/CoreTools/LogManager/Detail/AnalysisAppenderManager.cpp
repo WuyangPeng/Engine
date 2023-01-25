@@ -10,6 +10,7 @@
 #include "CoreTools/CoreToolsExport.h"
 
 #include "AnalysisAppenderManager.h"
+#include "System/Helper/EnumOperator.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -62,13 +63,15 @@ void CoreTools::AnalysisAppenderManager::AnalysisJson()
 // private
 void CoreTools::AnalysisAppenderManager::AnalysisLogger()
 {
+    using UnderlyingType = std::underlying_type_t<LogLevel>;
+
     for (const auto& loggerPtree : mainTree.get_child(g_Logger.data()))
     {
         const auto filterType = LogFilterManager::GetLogFilterType(loggerPtree.first);
 
         if (LogFilter::System <= filterType && filterType < LogFilter::MaxLogFilter)
         {
-            InsertLogger(loggerPtree.second.get_value<LogLevel>(), filterType);
+            InsertLogger(System::UnderlyingCastEnum<LogLevel>(loggerPtree.second.get_value<UnderlyingType>()), filterType);
         }
     }
 }
@@ -102,8 +105,8 @@ bool CoreTools::AnalysisAppenderManager::AnalysisConsoleAppender()
 {
     const auto consoleTree = appenderTree.get_child(AppenderManager::GetConsoleAppenderName());
 
-    const auto appenderFlags = (consoleTree.get(g_Flags.data(), AppenderPrint::None));
-    const auto logLevelType = (consoleTree.get(g_LogLevel.data(), LogLevel::Disabled));
+    const auto appenderFlags = System::UnderlyingCastEnum<AppenderPrint>(consoleTree.get(g_Flags.data(), 0));
+    const auto logLevelType = System::UnderlyingCastEnum<LogLevel>(consoleTree.get(g_LogLevel.data(), 0));
 
     if (LogLevel::Disabled <= logLevelType && logLevelType < LogLevel::MaxLogLevels)
     {
@@ -140,8 +143,8 @@ bool CoreTools::AnalysisAppenderManager::InsertAppender(const BasicTree& fileTre
 {
     const auto directory = fileTreeData.get(g_Directory.data(), System::String{});
     const auto appenderfileName = fileTreeData.get(g_FileName.data(), System::String{});
-    const auto flags = fileTreeData.get(g_Flags.data(), AppenderPrint::None);
-    const auto level = fileTreeData.get(g_LogLevel.data(), LogLevel::Disabled);
+    const auto flags = System::UnderlyingCastEnum<AppenderPrint>(fileTreeData.get(g_Flags.data(), 0));
+    const auto level = System::UnderlyingCastEnum<LogLevel>(fileTreeData.get(g_LogLevel.data(), 0));
     const auto maxFileSize = fileTreeData.get(g_MaxFileSize.data(), 0);
     const auto backup = fileTreeData.get(g_Backup.data(), false);
     const auto extension = fileTreeData.get(g_Extension.data(), System::String{});
@@ -163,8 +166,8 @@ bool CoreTools::AnalysisAppenderManager::AnalysisFileConfigurationAppender()
     const auto fileTreeData = appenderTree.get_child(AppenderManager::GetDefaultAppenderName());
 
     const auto directory = fileTreeData.get(g_Directory.data(), System::String{});
-    const auto flags = fileTreeData.get(g_Flags.data(), AppenderPrint::None);
-    const auto logLevelType = fileTreeData.get(g_LogLevel.data(), LogLevel::Disabled);
+    const auto flags = System::UnderlyingCastEnum<AppenderPrint>(fileTreeData.get(g_Flags.data(), 0));
+    const auto logLevelType = System::UnderlyingCastEnum<LogLevel>(fileTreeData.get(g_LogLevel.data(), 0));
     const auto maxFileSize = fileTreeData.get(g_MaxFileSize.data(), 0);
     const auto backup = fileTreeData.get(g_Backup.data(), false);
     const auto extension = fileTreeData.get(g_Extension.data(), System::String{});

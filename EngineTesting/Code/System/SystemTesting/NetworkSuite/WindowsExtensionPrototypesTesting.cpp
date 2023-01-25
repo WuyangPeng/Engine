@@ -1,14 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 21:59)
+///	引擎测试版本：0.9.0.0 (2023/01/07 22:25)
 
 #include "WindowsExtensionPrototypesTesting.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -25,7 +24,11 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, WindowsExtensionPrototypesTesting
 
 void System::WindowsExtensionPrototypesTesting::DoRunUnitTest()
 {
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockStartUpTest);
+
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockCleanupTest);
 }
 
 void System::WindowsExtensionPrototypesTesting::MainTest()
@@ -35,20 +38,10 @@ void System::WindowsExtensionPrototypesTesting::MainTest()
 
 void System::WindowsExtensionPrototypesTesting::WinSockLastErrorTest()
 {
-    WinSockData wsaData{};
-
-    constexpr auto versionRequested = MakeWord(2, 2);
-    const auto startUp = WinSockStartUp(versionRequested, &wsaData);
-
-    ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
-
-    auto lastError = GetWinSockLastError();
-    ASSERT_ENUM_EQUAL(WinSockLastError::ErrorSuccess, lastError);
+    const auto errorSuccess = GetWinSockLastError();
+    ASSERT_ENUM_EQUAL(WinSockLastError::ErrorSuccess, errorSuccess);
 
     SetWinSockLastError(WinSockLastError::Cancelled);
-    lastError = GetWinSockLastError();
+    const auto lastError = GetWinSockLastError();
     ASSERT_ENUM_EQUAL(WinSockLastError::Cancelled, lastError);
-
-    const auto cleanup = WinSockCleanup();
-    ASSERT_ENUM_EQUAL(cleanup, WinSockCleanupReturn::Successful);
 }

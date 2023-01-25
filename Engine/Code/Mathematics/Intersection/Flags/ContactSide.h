@@ -10,7 +10,7 @@
 #ifndef MATHEMATICS_INTERSECTION_CONTACT_SIDE_H
 #define MATHEMATICS_INTERSECTION_CONTACT_SIDE_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Mathematics
 {

@@ -13,7 +13,7 @@
 #include "OpenGLMapping.h"
 #include "OpenGLVertexFormatData.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Buffers/VertexFormat.h"
 #include "Rendering/Resources/Flags/DataFormatType.h"

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:18)
+///	引擎版本：0.9.0.0 (2023/01/12 18:49)
 
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_H
@@ -115,8 +115,8 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglArbMakeCurrentRead();
 
-    WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeContextCurrentARB(WindowsHDC hDrawDC, WindowsHDC hReadDC, OpenGLHglrc hglrc) noexcept;
-    WindowsHDC SYSTEM_HIDDEN_DECLARE WglGetCurrentReadDCARB() noexcept;
+    NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglMakeContextCurrentARB(WindowsHDC hDrawDC, WindowsHDC hReadDC, OpenGLHglrc hglrc) noexcept;
+    NODISCARD WindowsHDC SYSTEM_HIDDEN_DECLARE WglGetCurrentReadDCARB() noexcept;
 
     // WGL_ARB_multisample
 
@@ -267,7 +267,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglExtExtensionsString() noexcept;
 
-    NODISCARD const char* SYSTEM_HIDDEN_DECLARE WglGetExtensionsStringEXT() noexcept;
+    MAYBE_NULLPTR const char* SYSTEM_HIDDEN_DECLARE WglGetExtensionsStringEXT() noexcept;
 
     // WGL_EXT_framebuffer_sRGB
 
@@ -380,7 +380,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglI3DImageBuffer();
 
-    NODISCARD WindowsVoidPtr SYSTEM_HIDDEN_DECLARE WglCreateImageBufferI3D(WindowsHDC hDC, WindowsDWord dwSize, WindowsUInt uFlags) noexcept;
+    MAYBE_NULLPTR WindowsVoidPtr SYSTEM_HIDDEN_DECLARE WglCreateImageBufferI3D(WindowsHDC hDC, WindowsDWord dwSize, WindowsUInt uFlags) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglDestroyImageBufferI3D(WindowsHDC hDC, WindowsVoidPtr pAddress) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglAssociateImageBufferEventsI3D(WindowsHDC hDC, const WindowsHandle* pEvent, const WindowsVoidPtr* pAddress, const WindowsDWord* pSize, WindowsUInt count) noexcept;
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglReleaseImageBufferEventsI3D(WindowsHDC hDC, const WindowsVoidPtr* pAddress, WindowsUInt count) noexcept;
@@ -517,7 +517,7 @@ namespace System
 
     SYSTEM_HIDDEN_DECLARE void InitWglNVVertexArrayRange();
 
-    NODISCARD void* SYSTEM_HIDDEN_DECLARE WglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority) noexcept;
+    MAYBE_NULLPTR void* SYSTEM_HIDDEN_DECLARE WglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority) noexcept;
     void SYSTEM_HIDDEN_DECLARE WglFreeMemoryNV(void* pointer) noexcept;
 
     // WGL_NV_video_capture
@@ -561,7 +561,7 @@ namespace System
     NODISCARD WindowsBool SYSTEM_HIDDEN_DECLARE WglWaitForSbcOML(WindowsHDC hdc, WindowsInt64 target_sbc, WindowsInt64* ust, WindowsInt64* msc, WindowsInt64* sbc) noexcept;
 
     NODISCARD SYSTEM_HIDDEN_DECLARE bool InitWGL();
-    NODISCARD SYSTEM_HIDDEN_DECLARE const char* GetWglExtensionString() noexcept;
+    MAYBE_NULLPTR SYSTEM_HIDDEN_DECLARE const char* GetWglExtensionString() noexcept;
     NODISCARD SYSTEM_HIDDEN_DECLARE bool SupportsWglExtension(const char* wglExtension);
 }
 

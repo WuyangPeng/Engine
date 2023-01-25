@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:10)
+///	引擎版本：0.9.0.0 (2023/01/06 23:48)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H
@@ -122,13 +122,6 @@ namespace System
         Default = 0x0,
         Oob = MSG_OOB,
         Dontroute = MSG_DONTROUTE,
-    };
-
-    enum class IoctlSocketCmd : uint32_t
-    {
-        FionBio = FIONBIO,
-        FionRead = FIONREAD,
-        Siocatmark = SIOCATMARK,
     };
 
     enum class SocketLevelOption
@@ -279,13 +272,6 @@ namespace System
         Dontroute = 0x4,
     };
 
-    enum class IoctlSocketCmd : uint32_t
-    {
-        FionBio = FIONBIO,
-        FionRead = FIONREAD,
-        Siocatmark = SIOCATMARK,
-    };
-
     enum class SocketLevelOption
     {
         Socket = 0xffff,
@@ -333,6 +319,13 @@ namespace System
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
+
+    enum class IoctlSocketCmd : uint32_t
+    {
+        FionBio = FIONBIO,
+        FionRead = FIONREAD,
+        Siocatmark = SIOCATMARK,
+    };
 }
 
 #endif  // SYSTEM_NETWORK_SOCKET_PROTOTYPES_FLAGS_H

@@ -12,12 +12,13 @@
 #include "OpenGLTextureCube.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTextureCube::OpenGLTextureCube(const TextureCubeSharedPtr& textureCube, const std::string& name)
     : ParentType{ textureCube, name, TextureTarget::TextureCubeMap, TextureTargetBinding::BindingCube }
@@ -28,7 +29,7 @@ Rendering::OpenGLTextureCube::OpenGLTextureCube(const TextureCubeSharedPtr& text
     const auto width = textureCube->GetDimension(0);
     const auto height = textureCube->GetDimension(1);
 
-    System::SetGLTexStorage2D(TextureTarget::TextureCubeMap, GetNumLevels(), GetInternalFormat(), width, height);
+    System::SetGLTexturesStorage2D(TextureTarget::TextureCubeMap, GetNumLevels(), GetInternalFormat(), width, height);
 
     Initialize();
 
@@ -81,6 +82,6 @@ void Rendering::OpenGLTextureCube::LoadTextureLevel(int item, int level, const C
 
         const auto targetFace = GetCubeFaceTarget(item);
 
-        System::SetGLTexSubImage2D(targetFace, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        System::SetGLTexturesSubImage2D(targetFace, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
 }

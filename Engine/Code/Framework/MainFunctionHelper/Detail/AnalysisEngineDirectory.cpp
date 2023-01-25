@@ -15,6 +15,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
+using System::operator++;
+
 using std::exception;
 using std::string;
 

@@ -35,7 +35,7 @@ namespace System
         void DoFillAttributeTest(size_t index);
         void FillAttributeResultTest(const AttributeType& readAttributes, WindowsWord writeAttribute);
 
-        void PrintTipsMessage();
+        void PrintTipsMessage() override;
     };
 }
 

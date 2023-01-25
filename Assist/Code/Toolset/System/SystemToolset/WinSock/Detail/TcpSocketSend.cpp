@@ -31,5 +31,5 @@ void SystemToolset::TcpSocketSend::Send() noexcept
     {
         ret = System::Send(GetWinSocket(), GetBuffer(), bufferSize, System::SocketSend::Default);
 
-    } while (ret == System::gSocketError);
+    } while (ret == System::socketError);
 }

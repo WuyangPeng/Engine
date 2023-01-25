@@ -1,40 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒýÇæ²âÊÔ°æ±¾£º0.8.1.3 (2022/10/16 19:41)
+///	ÒýÇæ²âÊÔ°æ±¾£º0.9.0.0 (2023/01/06 21:39)
 
 #include "AllocateVirtualSeparationTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/MemoryTools/Flags/VirtualToolsFlags.h"
 #include "System/MemoryTools/VirtualTools.h"
 #include "System/Threading/Process.h"
-#include "System/Windows/WindowsSystem.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::default_random_engine;
-using std::ostream;
-using std::vector;
-
 System::AllocateVirtualSeparationTesting::AllocateVirtualSeparationTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      memoryAllocationFlags{ MemoryAllocation::Commit,
-                             MemoryAllocation::ReserveAndCommit,
-                             MemoryAllocation::TopDown | MemoryAllocation::Commit,
-                             MemoryAllocation::TopDown | MemoryAllocation::ReserveAndCommit,
-                             MemoryAllocation::WriteWatch | MemoryAllocation::Commit },
-      memoryProtectFlags{ MemoryProtect::NoAccess,
-                          MemoryProtect::ReadOnly,
-                          MemoryProtect::ReadWrite,
-                          MemoryProtect::Execute,
-                          MemoryProtect::ExecuteRead,
-                          MemoryProtect::ExecuteReadWrite },
-      randomEngine{ GetEngineRandomSeed() }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -48,13 +30,12 @@ void System::AllocateVirtualSeparationTesting::DoRunUnitTest()
 
 void System::AllocateVirtualSeparationTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
+    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(AllocateVirtualTest);
 }
 
-bool System::AllocateVirtualSeparationTesting::RandomShuffleFlags()
+bool System::AllocateVirtualSeparationTesting::AllocateVirtualTest()
 {
-    shuffle(memoryAllocationFlags.begin(), memoryAllocationFlags.end(), randomEngine);
-    shuffle(memoryProtectFlags.begin(), memoryProtectFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
     ASSERT_NOT_THROW_EXCEPTION_0(AllocateVirtualSeparationTest);
 
@@ -63,69 +44,74 @@ bool System::AllocateVirtualSeparationTesting::RandomShuffleFlags()
 
 void System::AllocateVirtualSeparationTesting::AllocateVirtualSeparationTest()
 {
-    WindowsSystemInfo systemInfo{};
-    GetWindowSystemInfo(systemInfo);
-
-    for (auto index = 0u; index < memoryProtectFlags.size(); ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateVirtualSeparationTest, systemInfo, index);
-        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateVirtualSeparationUseProcessTest, systemInfo, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualSeparationTest, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualSeparationUseProcessTest, index);
     }
 }
 
-void System::AllocateVirtualSeparationTesting::DoAllocateVirtualSeparationTest(const WindowsSystemInfo& systemInfo, size_t index)
+void System::AllocateVirtualSeparationTesting::DoAllocateVirtualSeparationTest(size_t index)
 {
-    auto memoryAllocation = memoryAllocationFlags.at(index % memoryAllocationFlags.size());
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
+    const auto memoryAllocation = GetMemoryAllocation(index);
+    const auto memoryProtect = GetMemoryProtect(index);
 
-    const auto size = systemInfo.dwPageSize * pageLimit;
-
-    auto baseVirtual = AllocateVirtual(nullptr, size, memoryAllocation, memoryProtect);
+    auto baseVirtual = static_cast<char*>(AllocateVirtual(nullptr, GetPageSize(), memoryAllocation, memoryProtect));
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(baseVirtual, "AllocateVirtual Ê§°Ü¡£");
+
+    ASSERT_NOT_THROW_EXCEPTION_2(AllocateVirtualOnePageTest, baseVirtual, index);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(FreeVirtualTest, baseVirtual);
+}
+
+void System::AllocateVirtualSeparationTesting::AllocateVirtualOnePageTest(char* baseVirtual, size_t index)
+{
+    const auto memoryProtect = GetMemoryProtect(index);
 
     auto nextVirtual = baseVirtual;
     for (auto page = 0; page < pageLimit; ++page)
     {
-        nextVirtual = AllocateVirtual(nextVirtual, systemInfo.dwPageSize, MemoryAllocation::Commit, memoryProtect);
+        nextVirtual = static_cast<char*>(AllocateVirtual(nextVirtual, GetOnePageSize(), MemoryAllocation::Commit, memoryProtect));
         ASSERT_UNEQUAL_NULL_PTR(nextVirtual);
 
-        auto nextPage = static_cast<char*>(nextVirtual);
-        ReadWriteTest(systemInfo, memoryProtect, nextPage);
+        ASSERT_NOT_THROW_EXCEPTION_2(ReadWriteTest, memoryProtect, nextVirtual);
     }
-
-    ASSERT_TRUE(FreeVirtual(baseVirtual));
 }
 
-void System::AllocateVirtualSeparationTesting::DoAllocateVirtualSeparationUseProcessTest(const WindowsSystemInfo& systemInfo, size_t index)
+void System::AllocateVirtualSeparationTesting::DoAllocateVirtualSeparationUseProcessTest(size_t index)
 {
-    auto memoryAllocation = memoryAllocationFlags.at(index % memoryAllocationFlags.size());
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
+    const auto memoryAllocation = GetMemoryAllocation(index);
+    const auto memoryProtect = GetMemoryProtect(index);
 
-    const auto size = systemInfo.dwPageSize * pageLimit;
-
-    auto baseVirtual = AllocateVirtual(GetCurrentProcessHandle(), nullptr, size, memoryAllocation, memoryProtect);
+    auto baseVirtual = static_cast<char*>(AllocateVirtual(GetCurrentProcessHandle(), nullptr, GetPageSize(), memoryAllocation, memoryProtect));
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(baseVirtual, "AllocateVirtual Ê§°Ü¡£");
+
+    ASSERT_NOT_THROW_EXCEPTION_2(AllocateVirtualOnePageUseProcessTest, baseVirtual, index);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(FreeVirtualUseProcessTest, GetCurrentProcessHandle(), baseVirtual);
+}
+
+void System::AllocateVirtualSeparationTesting::AllocateVirtualOnePageUseProcessTest(char* baseVirtual, size_t index)
+{
+    const auto memoryProtect = GetMemoryProtect(index);
 
     auto nextVirtual = baseVirtual;
     for (auto page = 0; page < pageLimit; ++page)
     {
-        nextVirtual = AllocateVirtual(GetCurrentProcessHandle(), nextVirtual, systemInfo.dwPageSize, MemoryAllocation::Commit, memoryProtect);
+        nextVirtual = static_cast<char*>(AllocateVirtual(GetCurrentProcessHandle(), nextVirtual, GetOnePageSize(), MemoryAllocation::Commit, memoryProtect));
         ASSERT_UNEQUAL_NULL_PTR(nextVirtual);
 
-        auto nextPage = static_cast<char*>(nextVirtual);
-        ReadWriteTest(systemInfo, memoryProtect, nextPage);
+        ASSERT_NOT_THROW_EXCEPTION_2(ReadWriteTest, memoryProtect, nextVirtual);
     }
-
-    ASSERT_TRUE(FreeVirtual(GetCurrentProcessHandle(), baseVirtual));
 }
 
-void System::AllocateVirtualSeparationTesting::ReadWriteTest(const WindowsSystemInfo& systemInfo, MemoryProtect memoryProtect, char* basePage) noexcept
+void System::AllocateVirtualSeparationTesting::ReadWriteTest(MemoryProtect memoryProtect, char* basePage) noexcept
 {
     if (basePage != nullptr)
     {
-        for (auto index = 0u; index < systemInfo.dwPageSize; ++index)
+        for (auto index = 0u; index < GetOnePageSize(); ++index)
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -134,20 +120,5 @@ void System::AllocateVirtualSeparationTesting::ReadWriteTest(const WindowsSystem
 
 #include STSTEM_WARNING_POP
         }
-    }
-}
-
-void System::AllocateVirtualSeparationTesting::DoReadWriteTest(MemoryProtect memoryProtect, char& basePage) noexcept
-{
-    if ((memoryProtect & MemoryProtect::ReadWrite) != MemoryProtect::Zero ||
-        (memoryProtect & MemoryProtect::ExecuteReadWrite) != MemoryProtect::Zero)
-    {
-        basePage = '\0';
-    }
-
-    if ((memoryProtect & MemoryProtect::ReadOnly) != MemoryProtect::Zero ||
-        (memoryProtect & MemoryProtect::ExecuteRead) != MemoryProtect::Zero)
-    {
-        MAYBE_UNUSED const auto value = basePage;
     }
 }

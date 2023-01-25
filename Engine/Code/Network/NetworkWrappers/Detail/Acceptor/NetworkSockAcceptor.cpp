@@ -39,7 +39,7 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
         THROW_EXCEPTION(SYSTEM_TEXT("°ó¶¨Ê§°Ü£¡"s));
     }
 
-    if (!System::Listen(socketHandle, System::gSoMaxConn))
+    if (!System::Listen(socketHandle, System::soMaxConn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("¼àÌýÊ§°Ü£¡"s));
     }
@@ -62,7 +62,7 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(const string& hostName, int po
         THROW_EXCEPTION(SYSTEM_TEXT("°ó¶¨Ê§°Ü£¡"s));
     }
 
-    if (!System::Listen(socketHandle, System::gSoMaxConn))
+    if (!System::Listen(socketHandle, System::soMaxConn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("¼àÌýÊ§°Ü£¡"s));
     }

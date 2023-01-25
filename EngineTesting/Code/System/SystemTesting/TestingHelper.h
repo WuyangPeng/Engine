@@ -101,6 +101,7 @@ namespace System
 
         void AddSecuritySuite();
 
+        NODISCARD Suite GetLookupPrivilegeSuite();
         NODISCARD Suite GetCreateSecuritySuite();
         NODISCARD Suite GetSecurityDescriptorSuite();
         NODISCARD Suite GetAccessCheckSuite();

@@ -157,13 +157,17 @@
 12.	OpenGL（OpenGL）
 
 封装了OpenGL调用的实现。包括OpenGL API、GLUT、GLEW和OpenGL标志。
-（1）OpenGL工具：OpenGL辅助工具。
-（2）OpenGL初始化：OpenGL的环境初始化。
-（3）OpenGL API：对OpenGL API的封装。
-（4）OpenGL Program：对OpenGL Program的封装。
-（5）OpenGL Shader：对OpenGL Shader的封装。
-（6）GLUT：对GLUT API的封装。
-（7）OpenGL Wgl 原型：OpenGL在Windows平台的环境实现。 
+（1） OpenGL工具：OpenGL辅助工具。
+（2） OpenGL初始化：OpenGL的环境初始化。
+（3） OpenGL Base：对OpenGL API的封装。
+（4） OpenGL 缓冲区：对OpenGL 缓冲区的封装。
+（5） OpenGL 纹理：对OpenGL 纹理的封装。
+（6） OpenGL Polygon：对OpenGL Polygon的封装。
+（7） OpenGL Samplers：对OpenGL Samplers的封装。
+（8） OpenGL Program：对OpenGL Program的封装。
+（9） OpenGL Shader：对OpenGL Shader的封装。
+（10）GLUT：对GLUT API的封装。
+（11）OpenGL Wgl 原型：OpenGL在Windows平台的环境实现。 
 
 ----------------------------
 13.	DirectX（DirectX）

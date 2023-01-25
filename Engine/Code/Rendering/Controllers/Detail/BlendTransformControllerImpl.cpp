@@ -33,10 +33,10 @@ Rendering::BlendTransformControllerImpl::BlendTransformControllerImpl() noexcept
 }
 
 Rendering::BlendTransformControllerImpl::BlendTransformControllerImpl(const TransformControllerSharedPtr& firstController,
-                                                                       const TransformControllerSharedPtr& secondController,
-                                                                       bool rotationScaleMatrices,
-                                                                       bool geometricRotation,
-                                                                       bool geometricScale) noexcept
+                                                                      const TransformControllerSharedPtr& secondController,
+                                                                      bool rotationScaleMatrices,
+                                                                      bool geometricRotation,
+                                                                      bool geometricScale) noexcept
     : firstController{ firstController },
       secondController{ secondController },
       weight{ 0.0f },
@@ -301,6 +301,8 @@ Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformControl
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
+    using namespace System;
+
     const auto firstTransform = firstController.object->GetTransform();
     const auto secondTransform = secondController.object->GetTransform();
 
@@ -328,7 +330,7 @@ Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformControl
                 auto pow0 = Mathematics::MathF::Pow(absS0, oneMinusWeight);
                 auto pow1 = Mathematics::MathF::Pow(absS1, weight);
 
-                blendScale[i] = sign0 * (sign1 * pow0) * pow1;
+                blendScale[i] = System::EnumCastUnderlying(sign0) * (System::EnumCastUnderlying(sign1) * pow0) * pow1;
             }
             else
             {
@@ -358,4 +360,3 @@ Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformControl
 
     return oneMinusWeight * firstMatrix + weight * secondMatrix;
 }
-

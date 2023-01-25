@@ -14,6 +14,8 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MainFunctionHelper/Flags/Directory.h"
 
+using System::operator++;
+
 Framework::EngineDirectoryPath::EngineDirectoryPath(const EngineDirectoryResult& result)
     : result{ result }
 {

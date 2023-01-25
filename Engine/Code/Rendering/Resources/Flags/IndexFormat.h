@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {
@@ -46,7 +46,6 @@ namespace Rendering
         NumTypes = 9
     };
 
-    ENUM_ANDABLE_OPERATOR_DEFINE(IndexFormatType)
 }
 
 #endif  // RENDERING_RESOURCES_INDEX_FORMAT_H

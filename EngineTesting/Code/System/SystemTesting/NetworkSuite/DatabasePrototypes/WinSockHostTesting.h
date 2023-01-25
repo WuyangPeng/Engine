@@ -1,24 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:19)
+///	引擎测试版本：0.9.0.0 (2023/01/07 22:32)
 
-#ifndef SYSTEM_SECURITY_SUITE_WINSOCK_HOST_TESTING_H
-#define SYSTEM_SECURITY_SUITE_WINSOCK_HOST_TESTING_H
+#ifndef SYSTEM_NETWORK_SUITE_WINSOCK_HOST_TESTING_H
+#define SYSTEM_NETWORK_SUITE_WINSOCK_HOST_TESTING_H
 
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "System/Network/Using/DatabasePrototypesUsing.h"
+#include "System/SystemTesting/NetworkSuite/NetworkTestingBase.h"
 
 namespace System
 {
-    class WinSockHostTesting final : public CoreTools::UnitTest
+    class WinSockHostTesting final : public NetworkTestingBase
     {
     public:
         using ClassType = WinSockHostTesting;
-        using ParentType = UnitTest;
+        using ParentType = NetworkTestingBase;
 
     public:
         explicit WinSockHostTesting(const OStreamShared& stream);
@@ -29,11 +30,11 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void ByAddrTest();
+        void GetHostByAddressTest();
+        void GetHostNameTest();
 
-        void Init();
-        void Cleanup();
+        void WinSockHostentTest(const WinSockHostent* winSockHostent);
     };
 }
 
-#endif  // SYSTEM_SECURITY_SUITE_WINSOCK_HOST_TESTING_H
+#endif  // SYSTEM_NETWORK_SUITE_WINSOCK_HOST_TESTING_H

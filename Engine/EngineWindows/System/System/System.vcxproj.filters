@@ -1284,7 +1284,7 @@
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGL.h">
       <Filter>OpenGL 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLAPI.h">
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLBase.h">
       <Filter>OpenGL 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLFwd.h">
@@ -1848,6 +1848,18 @@
     <ClInclude Include="..\..\..\Code\System\CharacterString\Data\Locale.h">
       <Filter>CharacterString 头文件\Data</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLTextures.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLBuffers.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLSamplers.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\OpenGL\OpenGLPolygon.h">
+      <Filter>OpenGL 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">
@@ -2045,7 +2057,7 @@
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLGlut.cpp">
       <Filter>OpenGL 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLAPI.cpp">
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLBase.cpp">
       <Filter>OpenGL 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLInit.cpp">
@@ -2191,6 +2203,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\CharacterString\Data\Locale.cpp">
       <Filter>CharacterString 源文件\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLTextures.cpp">
+      <Filter>OpenGL 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLBuffers.cpp">
+      <Filter>OpenGL 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLSamplers.cpp">
+      <Filter>OpenGL 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\OpenGL\OpenGLPolygon.cpp">
+      <Filter>OpenGL 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

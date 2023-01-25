@@ -12,12 +12,13 @@
 #include "OpenGLTexture1.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTexture1::OpenGLTexture1(const Texture1DSharedPtr& texture1D, const std::string& name)
     : ParentType{ texture1D, name, TextureTarget::Texture1D, TextureTargetBinding::Binding1D }
@@ -26,7 +27,7 @@ Rendering::OpenGLTexture1::OpenGLTexture1(const Texture1DSharedPtr& texture1D, c
     System::SetGLBindTexture(TextureTarget::Texture1D, GetGLHandle());
 
     const auto length = texture1D->GetDimension(0);
-    System::SetGLTexStorage1D(TextureTarget::Texture1D, GetNumLevels(), GetInternalFormat(), length);
+    System::SetGLTexturesStorage1D(TextureTarget::Texture1D, GetNumLevels(), GetInternalFormat(), length);
 
     Initialize();
 
@@ -74,6 +75,6 @@ void Rendering::OpenGLTexture1::LoadTextureLevel(int level, const ConstSpanItera
     {
         const auto length = texture->GetDimension(level, 0);
 
-        System::SetGLTexSubImage1D(TextureTarget::Texture1D, level, 0, length, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        System::SetGLTexturesSubImage1D(TextureTarget::Texture1D, level, 0, length, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
 }

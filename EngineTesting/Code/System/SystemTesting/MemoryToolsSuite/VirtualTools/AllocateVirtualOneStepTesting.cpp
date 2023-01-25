@@ -1,15 +1,13 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 ///	ÁªÏµ×÷Õß£º94458936@qq.com
 ///
 ///	±ê×¼£ºstd:c++20
-///	ÒýÇæ²âÊÔ°æ±¾£º0.8.1.3 (2022/10/16 19:41)
+///	ÒýÇæ²âÊÔ°æ±¾£º0.9.0.0 (2023/01/06 20:53)
 
 #include "AllocateVirtualOneStepTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/MemoryTools/Flags/VirtualToolsFlags.h"
 #include "System/MemoryTools/VirtualTools.h"
 #include "System/Threading/Process.h"
 #include "System/Windows/WindowsSystem.h"
@@ -17,24 +15,8 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::default_random_engine;
-using std::ostream;
-using std::vector;
-
 System::AllocateVirtualOneStepTesting::AllocateVirtualOneStepTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      memoryAllocationFlags{ MemoryAllocation::Commit,
-                             MemoryAllocation::ReserveAndCommit,
-                             MemoryAllocation::TopDown | MemoryAllocation::Commit,
-                             MemoryAllocation::TopDown | MemoryAllocation::ReserveAndCommit,
-                             MemoryAllocation::WriteWatch | MemoryAllocation::Commit },
-      memoryProtectFlags{ MemoryProtect::NoAccess,
-                          MemoryProtect::ReadOnly,
-                          MemoryProtect::ReadWrite,
-                          MemoryProtect::Execute,
-                          MemoryProtect::ExecuteRead,
-                          MemoryProtect::ExecuteReadWrite },
-      randomEngine{ GetEngineRandomSeed() }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -48,13 +30,12 @@ void System::AllocateVirtualOneStepTesting::DoRunUnitTest()
 
 void System::AllocateVirtualOneStepTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(RandomShuffleFlags);
+    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(AllocateVirtualTest);
 }
 
-bool System::AllocateVirtualOneStepTesting::RandomShuffleFlags()
+bool System::AllocateVirtualOneStepTesting::AllocateVirtualTest()
 {
-    shuffle(memoryAllocationFlags.begin(), memoryAllocationFlags.end(), randomEngine);
-    shuffle(memoryProtectFlags.begin(), memoryProtectFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
     ASSERT_NOT_THROW_EXCEPTION_0(AllocateVirtualOneStepTest);
 
@@ -63,82 +44,53 @@ bool System::AllocateVirtualOneStepTesting::RandomShuffleFlags()
 
 void System::AllocateVirtualOneStepTesting::AllocateVirtualOneStepTest()
 {
-    WindowsSystemInfo systemInfo{};
-    GetWindowSystemInfo(systemInfo);
-
-    for (auto index = 0u; index < memoryProtectFlags.size(); ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateVirtualOneStepTest, systemInfo, index);
-        ASSERT_NOT_THROW_EXCEPTION_2(DoAllocateVirtualOneStepUseProcessTest, systemInfo, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualOneStepTest, index);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoAllocateVirtualOneStepUseProcessTest, index);
     }
 }
 
-void System::AllocateVirtualOneStepTesting::DoAllocateVirtualOneStepTest(const WindowsSystemInfo& systemInfo, size_t index)
+void System::AllocateVirtualOneStepTesting::DoAllocateVirtualOneStepTest(size_t index)
 {
-    auto memoryAllocation = memoryAllocationFlags.at(index % memoryAllocationFlags.size());
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
+    const auto memoryAllocation = GetMemoryAllocation(index);
+    const auto memoryProtect = GetMemoryProtect(index);
 
-    const auto size = systemInfo.dwPageSize * pageLimit;
-
-    auto baseVirtual = AllocateVirtual(nullptr, size, memoryAllocation, memoryProtect);
+    auto baseVirtual = static_cast<char*>(AllocateVirtual(nullptr, GetPageSize(), memoryAllocation, memoryProtect));
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(baseVirtual, "AllocateVirtual Ê§°Ü¡£");
 
-    auto basePage = static_cast<char*>(baseVirtual);
+    ASSERT_NOT_THROW_EXCEPTION_2(ReadWriteTest, memoryProtect, baseVirtual);
 
-    ReadWriteTest(systemInfo, memoryProtect, basePage);
-
-    ASSERT_TRUE(FreeVirtual(basePage));
+    ASSERT_NOT_THROW_EXCEPTION_1(FreeVirtualTest, baseVirtual);
 }
 
-void System::AllocateVirtualOneStepTesting::DoAllocateVirtualOneStepUseProcessTest(const WindowsSystemInfo& systemInfo, size_t index)
+void System::AllocateVirtualOneStepTesting::DoAllocateVirtualOneStepUseProcessTest(size_t index)
 {
-    auto memoryAllocation = memoryAllocationFlags.at(index % memoryAllocationFlags.size());
-    auto memoryProtect = memoryProtectFlags.at(index % memoryProtectFlags.size());
+    const auto memoryAllocation = GetMemoryAllocation(index);
+    const auto memoryProtect = GetMemoryProtect(index);
 
-    const auto size = systemInfo.dwPageSize * pageLimit;
-
-    auto baseVirtual = AllocateVirtual(GetCurrentProcessHandle(), nullptr, size, memoryAllocation, memoryProtect);
+    auto baseVirtual = static_cast<char*>(AllocateVirtual(GetCurrentProcessHandle(), nullptr, GetPageSize(), memoryAllocation, memoryProtect));
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(baseVirtual, "AllocateVirtual Ê§°Ü¡£");
 
-    auto basePage = static_cast<char*>(baseVirtual);
+    ASSERT_NOT_THROW_EXCEPTION_2(ReadWriteTest, memoryProtect, baseVirtual);
 
-    ReadWriteTest(systemInfo, memoryProtect, basePage);
-
-    ASSERT_TRUE(FreeVirtual(GetCurrentProcessHandle(), basePage));
+    ASSERT_NOT_THROW_EXCEPTION_2(FreeVirtualUseProcessTest, GetCurrentProcessHandle(), baseVirtual);
 }
 
-void System::AllocateVirtualOneStepTesting::ReadWriteTest(const WindowsSystemInfo& systemInfo, MemoryProtect memoryProtect, char* basePage) noexcept
+void System::AllocateVirtualOneStepTesting::ReadWriteTest(MemoryProtect memoryProtect, char* basePage) noexcept
 {
     if (basePage != nullptr)
     {
-        const WindowsDWord maxPageSize{ pageLimit * systemInfo.dwPageSize };
-        for (auto index = 0u; index < maxPageSize; ++index)
+        for (auto index = 0u; index < GetPageSize(); ++index)
         {
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 
             DoReadWriteTest(memoryProtect, basePage[index]);
 
 #include STSTEM_WARNING_POP
-
         }
-    }
-}
-
-void System::AllocateVirtualOneStepTesting::DoReadWriteTest(MemoryProtect memoryProtect, char& basePage) noexcept
-{
-    if ((memoryProtect & MemoryProtect::ReadWrite) != MemoryProtect::Zero ||
-        (memoryProtect & MemoryProtect::ExecuteReadWrite) != MemoryProtect::Zero)
-    {
-        basePage = '\0';
-    }
-
-    if ((memoryProtect & MemoryProtect::ReadOnly) != MemoryProtect::Zero ||
-        (memoryProtect & MemoryProtect::ExecuteRead) != MemoryProtect::Zero)
-    {
-        MAYBE_UNUSED const auto value = basePage;
     }
 }

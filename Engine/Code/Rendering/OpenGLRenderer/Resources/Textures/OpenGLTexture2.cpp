@@ -12,12 +12,13 @@
 #include "OpenGLTexture2.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTexture2::OpenGLTexture2(const Texture2DSharedPtr& texture2D, const std::string& name)
     : ParentType{ texture2D, name, TextureTarget::Texture2D, TextureTargetBinding::Binding2D }
@@ -27,7 +28,7 @@ Rendering::OpenGLTexture2::OpenGLTexture2(const Texture2DSharedPtr& texture2D, c
 
     const auto width = texture2D->GetDimension(0);
     const auto height = texture2D->GetDimension(1);
-    System::SetGLTexStorage2D(TextureTarget::Texture2D, GetNumLevels(), GetInternalFormat(), width, height);
+    System::SetGLTexturesStorage2D(TextureTarget::Texture2D, GetNumLevels(), GetInternalFormat(), width, height);
 
     Initialize();
 
@@ -79,6 +80,6 @@ void Rendering::OpenGLTexture2::LoadTextureLevel(int level, const ConstSpanItera
         const auto width = texture->GetDimension(level, 0);
         const auto height = texture->GetDimension(level, 1);
 
-        System::SetGLTexSubImage2D(TextureTarget::Texture2D, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        System::SetGLTexturesSubImage2D(TextureTarget::Texture2D, level, 0, 0, width, height, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
 }

@@ -1,27 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/16 19:34)
+///	引擎测试版本：0.9.0.0 (2023/01/04 21:13)
 
 #ifndef SYSTEM_MEMORY_TOOLS_SUITE_LOCAL_MEMORY_SIZE_TESTING_H
 #define SYSTEM_MEMORY_TOOLS_SUITE_LOCAL_MEMORY_SIZE_TESTING_H
 
-#include "System/MemoryTools/Fwd/MemoryToolsFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "LocalMemoryTestingBase.h"
 
 namespace System
 {
-    class LocalMemorySizeTesting final : public CoreTools::UnitTest
+    class LocalMemorySizeTesting final : public LocalMemoryTestingBase
     {
     public:
         using ClassType = LocalMemorySizeTesting;
-        using ParentType = UnitTest;
+        using ParentType = LocalMemoryTestingBase;
 
     public:
         explicit LocalMemorySizeTesting(const OStreamShared& stream);
@@ -34,12 +31,6 @@ namespace System
 
         void LocalMemorySizeTest();
         void DoLocalMemorySizeTest(LocalMemory localMemory);
-
-    private:
-        using LocalMemoryContainer = std::vector<LocalMemory>;
-
-    private:
-        LocalMemoryContainer localMemoryCollection;
     };
 }
 

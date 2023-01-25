@@ -1,32 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:17)
+///	引擎测试版本：0.9.0.0 (2023/01/10 21:45)
 
 #include "RecvFromTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
-#include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
-#include "System/Network/WindowsExtensionPrototypes.h"
-#include "System/Threading/Process.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <array>
-#include <vector>
-
-using std::array;
-using std::string;
-using std::vector;
 
 System::RecvFromTesting::RecvFromTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,11 +24,12 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, RecvFromTesting)
 
 void System::RecvFromTesting::DoRunUnitTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(Init);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockStartUpTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateUdpClientProcessTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(Cleanup);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockCleanupTest);
 }
 
 void System::RecvFromTesting::MainTest()
@@ -50,68 +37,50 @@ void System::RecvFromTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(RecvFromTest);
 }
 
-void System::RecvFromTesting::Init()
-{
-    WinSockData wsaData{};
-
-    constexpr auto versionRequested = MakeWord(2, 2);
-    const auto startUp = WinSockStartUp(versionRequested, &wsaData);
-
-    ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
-}
-
-void System::RecvFromTesting::Cleanup()
-{
-    const auto cleanup = WinSockCleanup();
-    ASSERT_ENUM_EQUAL(cleanup, WinSockCleanupReturn::Successful);
-}
-
 void System::RecvFromTesting::RecvFromTest()
 {
-    boost::property_tree::basic_ptree<string, string> mainTree{};
+    const auto socketHandle = CreateUdpSocket();
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "创建Udp Socket失败。");
 
-    read_json("Configuration/EnvironmentVariable.json", mainTree);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoRecvFromTest, socketHandle);
 
-    const auto port = boost::numeric_cast<uint16_t>(mainTree.get<uint16_t>("UdpPort") + GetEngineeringOffsetValue());
-    const auto address = mainTree.get<string>("Address");
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSocketTest, socketHandle);
+}
 
-    WinSockInternetAddress addr{};
-    int length{ sizeof(addr) };
+void System::RecvFromTesting::DoRecvFromTest(WinSocket socketHandle)
+{
+    auto address = BindInit(socketHandle);
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
-    addr.sin_port = System::GetHostToNetShort(port);
-    addr.sin_addr.s_addr = System::GetInternetAddress(address.c_str());
-
-    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Dgram, SocketProtocols::Udp);
-    ASSERT_TRUE(IsSocketValid(socketHandle));
-
-    ASSERT_TRUE_FAILURE_THROW(Bind(socketHandle, &addr), "Bind Error");
-
-    constexpr auto bufferSize = 256;
-    array<char, bufferSize> buffer{};
+    BufferType buffer{};
     auto index = 0;
     auto remain = bufferSize;
-
-    ASSERT_TRUE(CreateSystemProcess(SYSTEM_TEXT("UdpClient")));
+    int length{ sizeof(address) };
 
     while (0 < remain)
     {
-        const auto ret = RecvFrom(socketHandle, &buffer.at(index), remain, SocketRecv::Default, &addr, &length);
+        const auto recvCount = RecvFrom(socketHandle, &buffer.at(index), remain, SocketRecv::Default, &address, &length);
 
-        ASSERT_UNEQUAL(ret, gSocketError);
+        ASSERT_UNEQUAL(recvCount, socketError);
 
-        if (ret == gSocketError)
+        if (recvCount == socketError)
         {
             break;
         }
 
-        remain -= ret;
-        index += ret;
+        remain -= recvCount;
+        index += recvCount;
     }
 
-    string result{ buffer.data() };
+    std::string result{ buffer.data() };
 
     ASSERT_EQUAL(result, "Hello");
+}
 
-    ASSERT_TRUE(CloseSocket(socketHandle));
+System::WinSockInternetAddress System::RecvFromTesting::BindInit(WinSocket socketHandle)
+{
+    auto address = GetAddress(GetUdpPort(), GetAddress());
+
+    ASSERT_TRUE_FAILURE_THROW(Bind(socketHandle, &address), "Bind Error");
+
+    return address;
 }

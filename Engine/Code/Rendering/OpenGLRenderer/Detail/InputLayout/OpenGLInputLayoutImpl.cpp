@@ -11,7 +11,7 @@
 
 #include "OpenGLInputLayoutImpl.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+#include "System/OpenGL/OpenGLBuffers.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/DataFormat.h"
 #include "Rendering/Resources/Flags/ChannelType.h"
@@ -42,7 +42,7 @@ Rendering::OpenGLInputLayoutImpl::OpenGLInputLayoutImpl(MAYBE_UNUSED OpenGLUInt 
 
         System::SetGLEnableVertexAttribArray(attribute.GetLocation());
         System::SetGLBindVertexBuffer(i, vertexBufferHandle, attribute.GetOffset(), attribute.GetStride());
-        System::SetGLVertexAttribFormat(attribute.GetLocation(), attribute.GetNumChannels(), attribute.GetChannelType(), attribute.GetNormalize(), 0);
+        System::SetGLVertexAttribFormat(attribute.GetLocation(), attribute.GetNumChannels(), System::UnderlyingCastEnum<System::OpenGLData>(attribute.GetChannelType()), attribute.GetNormalize(), 0);
         System::SetGLVertexAttribBinding(attribute.GetLocation(), i);
     }
 

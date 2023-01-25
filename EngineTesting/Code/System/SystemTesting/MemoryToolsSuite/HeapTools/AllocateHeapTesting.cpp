@@ -1,19 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.5 (2022/12/21 22:16)
+///	引擎测试版本：0.9.0.0 (2023/01/03 12:10)
 
 #include "AllocateHeapTesting.h"
 #include "System/MemoryTools/HeapToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::numeric_limits;
 
 System::AllocateHeapTesting::AllocateHeapTesting(const OStreamShared& stream)
     : ParentType{ stream }, size{ 50 }
@@ -92,7 +90,7 @@ void System::AllocateHeapTesting::AllocateDefaultHeapFailureLoop(WindowsHandle h
 
 void System::AllocateHeapTesting::DoAllocateDefaultHeapFailureTest(WindowsHandle handle, HeapCreate flag)
 {
-    constexpr WindowsSize maximumSize{ numeric_limits<WindowsSize>::max() };
+    constexpr auto maximumSize = std::numeric_limits<WindowsSize>::max();
 
     auto memory = AllocateProcessHeap(handle, flag, maximumSize);
 

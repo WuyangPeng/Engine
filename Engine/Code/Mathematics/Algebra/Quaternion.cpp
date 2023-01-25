@@ -21,6 +21,8 @@
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 
+using System::operator>>;
+
 namespace Mathematics
 {
     template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Quaternion<float>;

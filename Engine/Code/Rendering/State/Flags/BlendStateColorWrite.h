@@ -10,7 +10,7 @@
 #ifndef RENDERING_STATE_BLEND_STATE_COLOR_WRITE_H
 #define RENDERING_STATE_BLEND_STATE_COLOR_WRITE_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {
@@ -24,7 +24,6 @@ namespace Rendering
         EnableAll = EnableRed | EnableGreen | EnableBlue | EnableAlpha
     };
 
-    ENUM_ANDABLE_OPERATOR_DEFINE(BlendStateColorWrite)
 }
 
 #endif  // RENDERING_STATE_BLEND_STATE_COLOR_WRITE_H

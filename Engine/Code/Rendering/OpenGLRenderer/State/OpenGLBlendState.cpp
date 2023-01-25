@@ -11,7 +11,8 @@
 
 #include "OpenGLBlendState.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
+#include "System/OpenGL/OpenGLBase.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/OpenGLRenderer/Detail/State/OpenGLBlendStateImpl.h"
@@ -60,13 +61,13 @@ void Rendering::OpenGLBlendState::EnableIndependentBlend()
             {
                 System::EnableGLState(System::OpenGLEnable::Blend, index);
                 System::SetGLBlendFuncSeparate(index,
-                                               System::EnumCastUnderlying(target.GetSourceColor()),
-                                               System::EnumCastUnderlying(target.GetDestinationAlpha()),
-                                               System::EnumCastUnderlying(target.GetSourceAlpha()),
-                                               System::EnumCastUnderlying(target.GetDestinationAlpha()));
+                                               target.GetSourceColor(),
+                                               target.GetDestinationColor(),
+                                               target.GetSourceAlpha(),
+                                               target.GetDestinationAlpha());
                 System::SetGLBlendEquationSeparate(index,
-                                                   System::EnumCastUnderlying(target.GetOperationColor()),
-                                                   System::EnumCastUnderlying(target.GetOperationAlpha()));
+                                                   target.GetOperationColor(),
+                                                   target.GetOperationAlpha());
             }
             else
             {
@@ -86,12 +87,12 @@ void Rendering::OpenGLBlendState::EnableIndependentBlend()
         {
             System::EnableGLState(System::OpenGLEnable::Blend);
 
-            System::SetGLBlendFuncSeparate(System::EnumCastUnderlying(target.GetSourceColor()),
-                                           System::EnumCastUnderlying(target.GetDestinationAlpha()),
-                                           System::EnumCastUnderlying(target.GetSourceAlpha()),
-                                           System::EnumCastUnderlying(target.GetDestinationAlpha()));
-            System::SetGLBlendEquationSeparate(System::EnumCastUnderlying(target.GetOperationColor()),
-                                               System::EnumCastUnderlying(target.GetOperationAlpha()));
+            System::SetGLBlendFuncSeparate(target.GetSourceColor(),
+                                           target.GetDestinationColor(),
+                                           target.GetSourceAlpha(),
+                                           target.GetDestinationAlpha());
+            System::SetGLBlendEquationSeparate(target.GetOperationColor(),
+                                               target.GetOperationAlpha());
         }
         else
         {

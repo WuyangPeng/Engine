@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:11)
+///	引擎版本：0.9.0.0 (2023/01/06 23:53)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_USING_H
@@ -27,20 +27,20 @@ namespace System
     using WinSockDataPtr = LPWSADATA;
     using WinSockHandle = HANDLE;
 
-    constexpr WindowsWord gWinSockDescriptionLen{ WSADESCRIPTION_LEN };
-    constexpr WindowsWord gWinSockSystemStatusLen{ WSASYS_STATUS_LEN };
+    constexpr WindowsWord winSockDescriptionLen{ WSADESCRIPTION_LEN };
+    constexpr WindowsWord winSockSystemStatusLen{ WSASYS_STATUS_LEN };
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    constexpr WindowsWord gWinSockDescriptionLen{ 256 };
-    constexpr WindowsWord gWinSockSystemStatusLen{ 128 };
+    constexpr WindowsWord winSockDescriptionLen{ 256 };
+    constexpr WindowsWord winSockSystemStatusLen{ 128 };
 
     struct WinSockData
     {
         uint16_t wVersion;
         uint16_t wHighVersion;
-        char szDescription[gWinSockDescriptionLen + 1];
-        char szSystemStatus[gWinSockSystemStatusLen + 1];
+        char szDescription[winSockDescriptionLen + 1];
+        char szSystemStatus[winSockSystemStatusLen + 1];
         uint16_t iMaxSockets;
         uint16_t iMaxUdpDg;
         char* lpVendorInfo;

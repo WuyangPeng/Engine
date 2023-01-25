@@ -24,7 +24,10 @@
 3.	OpenGLSuite 
 
 对OpenGL模块进行测试：
-（1） OpenGL Wgl 原型：OpenGLWglPrototypesTesting。
+（1） OpenGL Wgl 原型：OpenGLWglSwapIntervalTesting、
+                       OpenGLGetCurrentWglContextTesting、
+                       OpenGLGetWglProcAddressTesting、
+                       OpenGLSwapDeviceBuffersTesting。
 
 ----------------------------
 4.	WindowsSuite 

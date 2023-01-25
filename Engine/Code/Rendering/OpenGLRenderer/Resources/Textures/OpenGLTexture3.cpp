@@ -12,12 +12,13 @@
 #include "OpenGLTexture3.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTexture3::OpenGLTexture3(const Texture3DSharedPtr& texture3D, const std::string& name)
     : ParentType{ texture3D, name, TextureTarget::Texture3D, TextureTargetBinding::Binding3D }
@@ -28,7 +29,7 @@ Rendering::OpenGLTexture3::OpenGLTexture3(const Texture3DSharedPtr& texture3D, c
     const auto width = texture3D->GetDimension(0);
     const auto height = texture3D->GetDimension(1);
     const auto depth = texture3D->GetDimension(2);
-    System::SetGLTexStorage3D(TextureTarget::Texture3D, GetNumLevels(), GetInternalFormat(), width, height, depth);
+    System::SetGLTexturesStorage3D(TextureTarget::Texture3D, GetNumLevels(), GetInternalFormat(), width, height, depth);
 
     Initialize();
 
@@ -80,6 +81,6 @@ void Rendering::OpenGLTexture3::LoadTextureLevel(int level, const ConstSpanItera
         const auto height = texture->GetDimension(level, 1);
         const auto depth = texture->GetDimension(level, 2);
 
-        System::SetGLTexSubImage3D(TextureTarget::Texture2D, level, 0, 0, 0, width, height, depth, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        System::SetGLTexturesSubImage3D(TextureTarget::Texture2D, level, 0, 0, 0, width, height, depth, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
 }

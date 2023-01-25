@@ -1,22 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 15:22)
+///	引擎版本：0.9.0.0 (2023/01/07 13:49)
 
 #include "System/SystemExport.h"
 
 #include "WindowsSockEx.h"
 #include "Using/SocketPrototypesUsing.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Windows/WindowsSystem.h"
 
-System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddr* addr, WindowsIntPtr addrlen, WinSockConditionProc condition, WindowsDWordPtrSizeType callbackData) noexcept
+System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddress* addr, WindowsIntPtr addrlen, WinSockConditionProc condition, WindowsDWordPtrSizeType callbackData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -32,7 +31,7 @@ System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddr* addr
 }
 
 bool System::WinSocketConnect(WinSocket winSocket,
-                              const WinSockAddr* name,
+                              const WinSockAddress* name,
                               int namelen,
                               WinSockBufPtr callerData,
                               WinSockBufPtr calleeData,
@@ -41,7 +40,7 @@ bool System::WinSocketConnect(WinSocket winSocket,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != gSocketError)
+    if (::WSAConnect(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService) != socketError)
         return true;
     else
         return false;
@@ -59,9 +58,9 @@ bool System::WinSocketConnectByName(WinSocket winSocket,
                                     TChar* nodename,
                                     TChar* servicename,
                                     WindowsDWordPtr localAddressLength,
-                                    WinSockAddr* localAddress,
+                                    WinSockAddress* localAddress,
                                     WindowsDWordPtr remoteAddressLength,
-                                    WinSockAddr* remoteAddress,
+                                    WinSockAddress* remoteAddress,
                                     const WinSockTimeval* timeout) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -80,11 +79,11 @@ bool System::WinSocketConnectByName(WinSocket winSocket,
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept
+bool System::WinSocketHostToNetLong(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAHtonl(winSocket, hostlong, netlong) != gSocketError)
+    if (::WSAHtonl(winSocket, hostlong, netlong) != socketError)
         return true;
     else
         return false;
@@ -98,11 +97,11 @@ bool System::WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigne
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept
+bool System::WinSocketHostToNetShort(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSAHtons(winSocket, hostshort, netshort) != gSocketError)
+    if (::WSAHtons(winSocket, hostshort, netshort) != socketError)
         return true;
     else
         return false;
@@ -116,11 +115,11 @@ bool System::WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsig
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept
+bool System::WinSocketNetToHostLong(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSANtohl(winSocket, netlong, hostlong) != gSocketError)
+    if (::WSANtohl(winSocket, netlong, hostlong) != socketError)
         return true;
     else
         return false;
@@ -134,11 +133,11 @@ bool System::WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept
+bool System::WinSocketNetToHostShort(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::WSANtohs(winSocket, netshort, hostshort) != gSocketError)
+    if (::WSANtohs(winSocket, netshort, hostshort) != socketError)
         return true;
     else
         return false;
@@ -178,7 +177,7 @@ int System::WinSocketRecvFrom(WinSocket winSocket,
                               WindowsDWord bufferCount,
                               WindowsDWordPtr numberOfBytesRecvd,
                               WindowsDWordPtr flags,
-                              WinSockAddr* from,
+                              WinSockAddress* from,
                               WindowsIntPtr fromlen,
                               SocketOverlappedPtr overlapped,
                               SocketOverlappedCompletionRoutine completionRoutine) noexcept
@@ -222,7 +221,7 @@ int System::WinSocketSendTo(WinSocket winSocket,
                             WindowsDWord bufferCount,
                             WindowsDWordPtr numberOfBytesSent,
                             WindowsDWord flags,
-                            const WinSockAddr* to,
+                            const WinSockAddress* to,
                             int tolen,
                             SocketOverlappedPtr overlapped,
                             SocketOverlappedCompletionRoutine completionRoutine) noexcept

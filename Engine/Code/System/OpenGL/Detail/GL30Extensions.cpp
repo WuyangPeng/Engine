@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 18:37)
+///	引擎版本：0.9.0.0 (2023/01/12 18:55)
 
 #include "System/SystemExport.h"
 
@@ -176,6 +176,33 @@ void System::InitOpenGL30() noexcept
         SYSTEM_GET_FUNCTION(glClearBufferfv);
         SYSTEM_GET_FUNCTION(glClearBufferfi);
         SYSTEM_GET_FUNCTION(glGetStringi);
+
+        SYSTEM_GET_FUNCTION(glIsRenderbuffer);
+        SYSTEM_GET_FUNCTION(glBindRenderbuffer);
+        SYSTEM_GET_FUNCTION(glDeleteRenderbuffers);
+        SYSTEM_GET_FUNCTION(glGenRenderbuffers);
+        SYSTEM_GET_FUNCTION(glRenderbufferStorage);
+        SYSTEM_GET_FUNCTION(glGetRenderbufferParameteriv);
+        SYSTEM_GET_FUNCTION(glIsFramebuffer);
+        SYSTEM_GET_FUNCTION(glBindFramebuffer);
+        SYSTEM_GET_FUNCTION(glDeleteFramebuffers);
+        SYSTEM_GET_FUNCTION(glGenFramebuffers);
+        SYSTEM_GET_FUNCTION(glCheckFramebufferStatus);
+        SYSTEM_GET_FUNCTION(glFramebufferTexture1D);
+        SYSTEM_GET_FUNCTION(glFramebufferTexture2D);
+        SYSTEM_GET_FUNCTION(glFramebufferTexture3D);
+        SYSTEM_GET_FUNCTION(glFramebufferRenderbuffer);
+        SYSTEM_GET_FUNCTION(glGetFramebufferAttachmentParameteriv);
+        SYSTEM_GET_FUNCTION(glGenerateMipmap);
+        SYSTEM_GET_FUNCTION(glBlitFramebuffer);
+        SYSTEM_GET_FUNCTION(glRenderbufferStorageMultisample);
+        SYSTEM_GET_FUNCTION(glFramebufferTextureLayer);
+        SYSTEM_GET_FUNCTION(glMapBufferRange);
+        SYSTEM_GET_FUNCTION(glFlushMappedBufferRange);
+        SYSTEM_GET_FUNCTION(glBindVertexArray);
+        SYSTEM_GET_FUNCTION(glDeleteVertexArrays);
+        SYSTEM_GET_FUNCTION(glGenVertexArrays);
+        SYSTEM_GET_FUNCTION(glIsVertexArray);
     }
     else
     {

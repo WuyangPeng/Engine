@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/04 23:45)
+///	引擎测试版本：0.9.0.0 (2023/01/12 23:22)
 
 #include "GlutMainLoop.h"
 #include "System/Console/ConsoleCreate.h"
@@ -13,8 +13,6 @@
 #include "System/OpenGL/OpenGLGlut.h"
 
 #include <iostream>
-
-using std::cout;
 
 void GlutMainLoopTesting::GlutMainLoop(int argc, char** argv)
 {
@@ -25,7 +23,7 @@ void GlutMainLoopTesting::GlutMainLoop(int argc, char** argv)
     System::GlutInitWindowPosition(0, 0);
     System::GlutInitDisplayMode(true);
 
-    MAYBE_UNUSED auto windowID = System::GlutCreateWindow("OpenGL Glut Testing");
+    MAYBE_UNUSED const auto windowID = System::GlutCreateWindow("OpenGL Glut Testing");
 
     System::GlutDisplayFunc(RenderSceneCallback);
 
@@ -45,7 +43,7 @@ void GlutMainLoopTesting::GlutLeaveMainLoop(int argc, char** argv)
     System::GlutInitWindowPosition(0, 0);
     System::GlutInitDisplayMode(true);
 
-    MAYBE_UNUSED auto windowID = System::GlutCreateWindow("OpenGL Glut Testing");
+    MAYBE_UNUSED const auto windowID = System::GlutCreateWindow("OpenGL Glut Testing");
 
     System::GlutDisplayFunc(RenderSceneCallback);
     System::GlutTimerFunc(2000, TimerFunctionCallback, 1);
@@ -64,7 +62,7 @@ void GlutMainLoopTesting::RenderSceneCallback() noexcept
 
 void GlutMainLoopTesting::TimerFunctionCallback(int timer)
 {
-    cout << "窗口被GlutLeaveMainLoop关闭，timer = " << timer << "\n";
+    std::cout << "窗口被GlutLeaveMainLoop关闭，timer = " << timer << "\n";
 
     System::GlutLeaveMainLoop();
 }

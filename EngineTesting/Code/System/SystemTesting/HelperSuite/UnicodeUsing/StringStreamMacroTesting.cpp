@@ -33,8 +33,6 @@ void System::StringStreamMacroTesting::DoRunUnitTest()
 
 void System::StringStreamMacroTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PrintTipsMessage);
-
     ASSERT_NOT_THROW_EXCEPTION_0(StringStreamMacroTest);
 }
 

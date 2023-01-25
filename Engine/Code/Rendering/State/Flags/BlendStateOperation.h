@@ -10,7 +10,7 @@
 #ifndef RENDERING_STATE_BLEND_STATE_OPERATION_H
 #define RENDERING_STATE_BLEND_STATE_OPERATION_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {

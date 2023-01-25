@@ -14,7 +14,7 @@
 #include "OpenGLMapping.h"
 #include "OpenGLTextureData.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "Rendering/Resources/Textures/Texture1D.h"
 #include "Rendering/Resources/Textures/Texture2D.h"

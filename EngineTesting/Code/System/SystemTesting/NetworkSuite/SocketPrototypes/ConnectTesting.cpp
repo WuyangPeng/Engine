@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:17)
+///	引擎测试版本：0.9.0.0 (2023/01/09 22:15)
 
 #include "ConnectTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -15,16 +15,10 @@
 #include "System/Network/Flags/WindowsExtensionPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
 #include "System/Network/WindowsExtensionPrototypes.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <array>
-#include <vector>
-
-using std::array;
-using std::string;
-using std::vector;
 
 System::ConnectTesting::ConnectTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -36,11 +30,11 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, ConnectTesting)
 
 void System::ConnectTesting::DoRunUnitTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(Init);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockStartUpTest);
 
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(Cleanup);
+    ASSERT_NOT_THROW_EXCEPTION_0(WinSockCleanupTest);
 }
 
 void System::ConnectTesting::MainTest()
@@ -48,53 +42,41 @@ void System::ConnectTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ConnectTest);
 }
 
-void System::ConnectTesting::Init()
-{
-    WinSockData wsaData{};
-
-    constexpr auto versionRequested = MakeWord(2, 2);
-    const auto startUp = WinSockStartUp(versionRequested, &wsaData);
-
-    ASSERT_ENUM_EQUAL(startUp, WinSockStartUpReturn::Successful);
-}
-
-void System::ConnectTesting::Cleanup()
-{
-    const auto cleanup = WinSockCleanup();
-    ASSERT_ENUM_EQUAL(cleanup, WinSockCleanupReturn::Successful);
-}
-
 void System::ConnectTesting::ConnectTest()
 {
-    boost::property_tree::basic_ptree<string, string> mainTree{};
+    const auto socketHandle = CreateTcpSocket();
+    ASSERT_TRUE_FAILURE_THROW(IsSocketValid(socketHandle), "创建Tcp Socket失败。");
 
-    read_json("Configuration/EnvironmentVariable.json", mainTree);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoConnectTest, socketHandle);
 
-    const auto serverHostname = mainTree.get<string>("ConnectHostname");
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSocketTest, socketHandle);
+}
 
-    WinSockInternetAddress addr{};
+void System::ConnectTesting::DoConnectTest(WinSocket socketHandle)
+{
+    const auto address = GetAddress(defaultHttpPort, GetConnectHostname());
 
-    addr.sin_family = EnumCastUnderlying<uint16_t>(AddressFamilies::Internet);
-    addr.sin_port = GetHostToNetShort(80);
-    addr.sin_addr.s_addr = GetInternetAddress(serverHostname.c_str());
+    ASSERT_TRUE(Connect(socketHandle, &address));
 
-    const auto socketHandle = CreateSocket(ProtocolFamilies::Inet, SocketTypes::Stream, SocketProtocols::Tcp);
-    ASSERT_TRUE(IsSocketValid(socketHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(SendTest, socketHandle);
 
-    ASSERT_TRUE(Connect(socketHandle, &addr));
+    ASSERT_NOT_THROW_EXCEPTION_1(RecvTest, socketHandle);
+}
 
-    string sendMessage{ "GET /index.html HTTP/1.0\r\n\r\n" };
+void System::ConnectTesting::SendTest(WinSocket socketHandle)
+{
+    std::string sendMessage{ "GET /index.html HTTP/1.0\r\n\r\n" };
 
-    vector<char> iov{ sendMessage.begin(), sendMessage.end() };
+    auto sendNum = 0u;
 
-    uint32_t sendNum{ 0 };
+    std::vector<char> iov{ sendMessage.begin(), sendMessage.end() };
 
     do
     {
-        const auto sendResult = Send(socketHandle, iov.data(), boost::numeric_cast<int>(iov.size()), SocketSend::Default);
-        if (sendResult != -1)
+        const auto sendCount = Send(socketHandle, &iov.at(sendNum), boost::numeric_cast<int>(iov.size() - sendNum), SocketSend::Default);
+        if (sendCount != socketError)
         {
-            sendNum += sendResult;
+            sendNum += sendCount;
         }
         else
         {
@@ -102,18 +84,28 @@ void System::ConnectTesting::ConnectTest()
         }
 
     } while (sendNum < iov.size());
+}
 
-    constexpr auto buffSize = 1024;
+void System::ConnectTesting::RecvTest(WinSocket socketHandle)
+{
+    BufferType buffer{};
+    std::string data{};
 
-    array<char, buffSize> buf{};
-
-    auto result = 0;
+    auto recvCount = 0;
     do
     {
-        result = Recv(socketHandle, buf.data(), buffSize, SocketRecv::Default);
-        ASSERT_LESS_EQUAL(result, buffSize);
-        GetStream() << "收到的数据为：" << buf.data() << "\n";
-    } while (0 < result);
+        recvCount = Recv(socketHandle, buffer.data(), bufferSize - 1, SocketRecv::Default);
+        ASSERT_LESS_EQUAL(recvCount, bufferSize - 1);
 
-    ASSERT_TRUE(CloseSocket(socketHandle));
+        if (recvCount == socketError)
+        {
+            break;
+        }
+
+        data += buffer.data();
+
+    } while (0 < recvCount);
+
+    GetStream() << "收到的数据为：" << CoreTools::StringConversion::UTF8ConversionMultiByte(data) << "\n";
+    ASSERT_FALSE(data.empty());
 }

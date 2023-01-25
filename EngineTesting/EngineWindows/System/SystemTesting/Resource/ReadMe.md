@@ -292,7 +292,9 @@
 10.	SecuritySuite
  
 对安全性模块的单元测试，包括：
-（1） 查找权限：LookupPrivilegeTesting。 
+（1） 查找权限：GetLookupPrivilegeDisplayNameTesting、
+			    GetLookupPrivilegeNameTesting、
+				GetLookupPrivilegeValueTesting。 
 （2） 创建安全性：FileSecurityTesting、
 				  KernelObjectSecurityTesting、
 				  CreatePrivateObjectSecurityTesting、
@@ -342,13 +344,15 @@
 				  AcceptTesting、
 				  ConnectTesting、
 				  SocketNameTesting、
-				  SockOptTesting、
+				  SockOptionTesting、
 				  IoctlSocketTesting、
 				  ShutDownTesting、 
 				  RecvFromTesting、
 				  SendToTesting、
 				  SelectTesting。 
-（2） 数据原型：WinSockHostTesting、WinSockServentTesting、WinSockProtoentTesting。
+（2） 数据原型：WinSockHostTesting、
+				WinSockServentTesting、
+				WinSockProtoentTesting。
 （3） Windows扩展原型：WindowsExtensionPrototypesTesting。
 （4） Windows套接字： GetWinSocketTesting、
 					  WinSocketAcceptTesting、
@@ -362,13 +366,17 @@
 12.	OpenGLSuite 
 
 对OpenGL模块的单元测试，包括：
-（1）OpenGL工具：OpenGLUtilityTesting。
-（2）OpenGL初始化：OpenGLInitTesting。
-（3）OpenGL API：OpenGLAPITesting。
-（4）OpenGL Program：OpenGLProgramTesting。
-（5）OpenGL Shader：OpenGLShaderTesting。
-（6）GLUT：OpenGLGlutTesting。
-（7）OpenGL Wgl 原型：OpenGLWglPrototypesTesting。  
+（1） OpenGL工具：OpenGLUtilityTesting。
+（2） OpenGL初始化：OpenGLInitTesting。
+（3） OpenGL Base：OpenGLBaseTesting。
+（4） OpenGL 缓冲区：OpenGLBuffersTesting。
+（5） OpenGL 纹理：OpenGLTexturesTesting。
+（6） OpenGL Polygon：OpenGLPolygonTesting。
+（7） OpenGL Samplers：OpenGLSamplersTesting。
+（8） OpenGL Program：OpenGLProgramTesting。
+（9） OpenGL Shader：OpenGLShaderTesting。
+（10）GLUT：OpenGLGlutTesting。
+（11）OpenGL Wgl 原型：OpenGLWglPrototypesTesting。  
 
 ----------------------------
 13.	DirectXSuite 

@@ -140,9 +140,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSuite.h">
       <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.h">
-      <Filter>OpenGLSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsFontInformationTesting.h">
       <Filter>WindowsSuite 头文件</Filter>
     </ClInclude>
@@ -215,6 +212,21 @@
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.h">
       <Filter>DynamicLinkSuite 头文件\LoadResourceTools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTestingBase.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglSwapIntervalTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetCurrentWglContextTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetWglProcAddressTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSwapDeviceBuffersTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp">
@@ -246,9 +258,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumWindowsTesting.cpp">
       <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.cpp">
-      <Filter>OpenGLSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.cpp">
       <Filter>WindowsSuite 源文件</Filter>
@@ -304,9 +313,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.cpp">
       <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceToolsTesting.cpp">
-      <Filter>DynamicLinkSuite 头文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTestingBase.cpp">
       <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
     </ClCompile>
@@ -318,6 +324,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\ResourceWindowsTestingBase.cpp">
       <Filter>DynamicLinkSuite 源文件\LoadResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTestingBase.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceToolsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglSwapIntervalTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetCurrentWglContextTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLGetWglProcAddressTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSwapDeviceBuffersTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@
 #ifndef RENDERING_STATE_SAMPLER_STATE_FILTER_H
 #define RENDERING_STATE_SAMPLER_STATE_FILTER_H
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 namespace Rendering
 {

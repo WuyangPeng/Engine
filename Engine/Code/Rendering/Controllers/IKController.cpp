@@ -128,6 +128,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, IKController, GetJointsNum, int)
 
 bool Rendering::IKController::Update(double applicationTime)
 {
+    using namespace System;
     if (ParentType::Update(applicationTime))
     {
         // 确保效果都在当前世界空间。

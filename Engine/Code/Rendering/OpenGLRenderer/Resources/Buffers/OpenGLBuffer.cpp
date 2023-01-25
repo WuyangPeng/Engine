@@ -12,10 +12,11 @@
 #include "OpenGLBuffer.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLBuffers.h"
 
 Rendering::OpenGLBuffer::OpenGLBuffer(const BufferSharedPtr& buffer, const std::string& name, BindBuffer type)
     : ParentType{ buffer, name }, type{ type }, usage{}
@@ -155,7 +156,7 @@ bool Rendering::OpenGLBuffer::CopyGpuToCpu()
 
         auto target = buffer->GetOriginalData(offsetInBytes);
         System::SetGLBindBuffer(type, GetGLHandle());
-        System::SetGLGetBufferSubData(type, offsetInBytes, numActiveBytes, target);
+        System::GetGLBufferSubData(type, offsetInBytes, numActiveBytes, target);
         System::SetGLBindBuffer(type, 0);
     }
 

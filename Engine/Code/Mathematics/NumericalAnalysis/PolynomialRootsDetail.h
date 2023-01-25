@@ -539,9 +539,12 @@ typename Mathematics::PolynomialRoots<Real>::Vector3 Mathematics::PolynomialRoot
     }
     length = Math::Sqrt(length);
 
+    using namespace System;
+    using System::operator*;
+
     if (epsilon < length)
     {
-        auto inv = Math::GetValue(1) / (uVector[0] + Math::Sign(uVector[0]) * length);
+        auto inv = Math::GetValue(1) / (uVector[0] + length * Math::Sign(uVector[0]));
         vVector[0] = Math::GetValue(1);
         for (auto i = 1; i < size; ++i)
         {

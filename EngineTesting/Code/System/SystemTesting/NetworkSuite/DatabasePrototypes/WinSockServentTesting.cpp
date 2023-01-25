@@ -1,22 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/03 22:18)
+///	引擎测试版本：0.9.0.0 (2023/01/07 22:49)
 
 #include "WinSockServentTesting.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Network/DatabasePrototypes.h"
 #include "System/Network/SocketPrototypes.h"
-#include "System/Network/WindowsExtensionPrototypes.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::string;
 
 System::WinSockServentTesting::WinSockServentTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,17 +34,19 @@ void System::WinSockServentTesting::MainTest()
 
 void System::WinSockServentTesting::GetServentTest()
 {
-    auto winSockServent0 = GetServentByPort(GetHostToNetShort(80), nullptr);
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent0);
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent0->s_name);
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent0->s_aliases);
-    ASSERT_EQUAL(winSockServent0->s_port, GetHostToNetShort(80));
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent0->s_proto);
+    const auto* winSockServent0 = GetServentByPort(GetHostToNetShort(80), nullptr);
+    WinSockServentTest(winSockServent0);
 
-    auto winSockServent1 = GetServentByName("http", nullptr);
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent1);
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent1->s_name);
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent1->s_aliases);
-    ASSERT_EQUAL(winSockServent1->s_port, GetHostToNetShort(80));
-    ASSERT_UNEQUAL_NULL_PTR(winSockServent1->s_proto);
+    const auto* winSockServent1 = GetServentByName("http", nullptr);
+    WinSockServentTest(winSockServent1);
+}
+
+void System::WinSockServentTesting::WinSockServentTest(const WinSockServent* winSockServent)
+{
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(winSockServent, "获取的WinSockServent为空。");
+
+    ASSERT_UNEQUAL_NULL_PTR(winSockServent->s_name);
+    ASSERT_UNEQUAL_NULL_PTR(winSockServent->s_aliases);
+    ASSERT_EQUAL(winSockServent->s_port, GetHostToNetShort(80));
+    ASSERT_UNEQUAL_NULL_PTR(winSockServent->s_proto);
 }

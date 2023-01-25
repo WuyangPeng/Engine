@@ -10,7 +10,7 @@
 #include "Rendering/RenderingExport.h"
 
 #include "OpenGLMapping.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 
 Rendering::Int Rendering::OpenGLConstant::GetOpenGLAttributeChannels(int index)
 {

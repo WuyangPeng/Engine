@@ -12,7 +12,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/Helper/EnumMacro.h"
+#include "System/Helper/EnumOperator.h"
 
 #include <iostream>
 
@@ -69,7 +69,6 @@ namespace Rendering
         Max = Quantity
     };
 
-    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(TextureFormat);
 }
 
 #endif  // RENDERING_DATA_TYPES_TEXTURE_FORMAT_H

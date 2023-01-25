@@ -12,12 +12,13 @@
 #include "OpenGLTextureCubeArray.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/OpenGL/Flags/OpenGLFlags.h"
-#include "System/OpenGL/OpenGLAPI.h"
+
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
 #include "Rendering/Resources/Flags/CopyType.h"
 #include "Rendering/Resources/Flags/UsageType.h"
+#include "System/OpenGL/OpenGLTextures.h"
 
 Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArraySharedPtr& textureCubeArray, const std::string& name)
     : ParentType{ textureCubeArray, name, TextureTarget::TextureCubeMapArray, TextureTargetBinding::BindingCubeArray }
@@ -30,13 +31,13 @@ Rendering::OpenGLTextureCubeArray::OpenGLTextureCubeArray(const TextureCubeArray
     const auto numItems = textureCubeArray->GetNumItems();
     const auto numCubes = textureCubeArray->GetNumCubes();
 
-    System::SetGLTexStorage3D(TextureTarget::TextureCubeMapArray, GetNumLevels(), GetInternalFormat(), width, height, numItems);
+    System::SetGLTexturesStorage3D(TextureTarget::TextureCubeMapArray, GetNumLevels(), GetInternalFormat(), width, height, numItems);
 
     System::SetGLPixelStore(System::PixelStore::UnpackAlignment, 1);
     System::SetGLPixelStore(System::PixelStore::PackAlignment, 1);
 
-    System::SetGLTexParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureBaseLevel, 0);
-    System::SetGLTexParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
+    System::SetGLTexturesParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureBaseLevel, 0);
+    System::SetGLTexturesParameter(TextureTarget::TextureCubeMapArray, System::TextureParameter::TextureMaxLevel, GetNumLevels() - 1);
 
     constexpr auto cubeFaceCount = System::EnumCastUnderlying(CubeFaceType::Count);
 
@@ -125,6 +126,6 @@ void Rendering::OpenGLTextureCubeArray::LoadTextureLevel(int item, int level, co
 
         const auto targetFace = GetCubeFaceTarget(face);
 
-        System::SetGLTexSubImage3D(targetFace, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
+        System::SetGLTexturesSubImage3D(targetFace, level, 0, 0, cube, width, height, 1, GetExternalFormat(), GetExternalType(), &*data.GetCurrent());
     }
 }
