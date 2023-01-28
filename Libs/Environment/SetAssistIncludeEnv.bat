@@ -56,4 +56,12 @@ echo DirectXInclude = %DirectXInclude%
 echo %cd%
 setx DirectXInclude "%cd%\..\Microsoft DirectX SDK (June 2010)" 
 
+echo GoogleTestInclude = %GoogleTestInclude%
+echo %cd%
+setx GoogleTestInclude "%cd%\..\googletest\googletest\include" 
+
+echo CppunitInclude = %CppunitInclude%
+echo %cd%
+setx CppunitInclude "%cd%\..\cppunit\include\cppunit" 
+
 pause

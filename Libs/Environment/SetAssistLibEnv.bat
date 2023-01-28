@@ -96,4 +96,20 @@ echo DirectXWin32Lib = %DirectXWin32Lib%
 echo %cd%
 setx DirectXWin32Lib "%cd%\..\Microsoft DirectX SDK (June 2010)\Lib\x86" 
 
+echo GoogleTestWin32DebugLib = %GoogleTestWin32DebugLib%
+echo  %cd%
+setx  GoogleTestWin32DebugLib "%cd%\..\googletest\BuildWin32\lib\Debug" 
+
+echo GoogleTestWin32ReleaseLib = %GoogleTestWin32ReleaseLib%
+echo  %cd%
+setx  GoogleTestWin32ReleaseLib "%cd%\..\googletest\BuildWin32\lib\Release" 
+
+echo GoogleTestX64DebugLib = %GoogleTestX64DebugLib%
+echo  %cd%
+setx  GoogleTestX64DebugLib "%cd%\..\googletest\BuildX64\lib\Debug" 
+
+echo  GoogleTestX64ReleaseLib = %GoogleTestX64ReleaseLib%
+echo  %cd%
+setx  GoogleTestX64ReleaseLib "%cd%\..\googletest\BuildX64\lib\Release" 
+
 pause

@@ -28,9 +28,13 @@ echo MysqlConnectorInclude = %MysqlConnectorInclude%
 echo  %cd%
 setx  MysqlConnectorInclude "%cd%\..\mysql-connector-c++\include"
 
+echo MysqlConnectorMqsqlxInclude = %MysqlConnectorMqsqlxInclude%
+echo  %cd%
+setx  MysqlConnectorMqsqlxInclude "%cd%\..\mysql-connector-c++\BuildX64\include\mysqlx"
+
 echo FreeglutInclude = %FreeglutInclude%
 echo  %cd%
-setx  FreeglutInclude "%cd%\..\FreeGLUT\freeglut\freeglut\include"
+setx  FreeglutInclude "%cd%\..\FreeGLUT\include"
 
 echo VisualLeakDetectorInclude = %VisualLeakDetectorInclude%
 echo  %cd%
@@ -62,7 +66,7 @@ setx  OpengEGLlInclude "%cd%\..\EGL-Registry\api"
 
 echo OpenXLSXInclude = %OpenXLSXInclude%
 echo  %cd%
-setx  OpenXLSXInclude "%cd%\..\OpenXLSX\library" 
+setx  OpenXLSXInclude "%cd%\..\OpenXLSX\OpenXLSX" 
 
 echo PugiXmlInclude = %PugiXmlInclude%
 echo  %cd%
@@ -74,6 +78,6 @@ setx  MinizInclude "%cd%\..\miniz"
 
 echo LibsEnvironmentInclude = %LibsEnvironmentInclude%
 echo %cd%
-setx LibsEnvironmentInclude "%GSLInclude%;%BoostInclude%;%StlSoftInclude%;%ACEInclude%;%MysqlInclude%;%MysqlConnectorInclude%;%FreeglutInclude%;%VisualLeakDetectorInclude%;%OpenSSLInclude%;%OpenALSoftInclude%;%ZlibInclude%;%FreetypeInclude%;%LuaInclude%;%OpenglInclude%;%OpengEGLlInclude%;%OpenXLSXInclude%;%PugiXmlInclude%;%MinizInclude%" 
+setx LibsEnvironmentInclude "%GSLInclude%;%BoostInclude%;%StlSoftInclude%;%ACEInclude%;%MysqlInclude%;%MysqlConnectorInclude%;%MysqlConnectorMqsqlxInclude%;%FreeglutInclude%;%VisualLeakDetectorInclude%;%OpenSSLInclude%;%OpenALSoftInclude%;%ZlibInclude%;%FreetypeInclude%;%LuaInclude%;%OpenglInclude%;%OpengEGLlInclude%;%OpenXLSXInclude%;%PugiXmlInclude%;%MinizInclude%" 
 
 pause
