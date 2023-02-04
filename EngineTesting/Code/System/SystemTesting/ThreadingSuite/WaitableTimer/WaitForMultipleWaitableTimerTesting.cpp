@@ -1,22 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:05)
+///	引擎测试版本：0.9.0.1 (2023/02/01 23:12)
 
 #include "WaitForMultipleWaitableTimerTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/WaitableTimer.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::vector;
 
 System::WaitForMultipleWaitableTimerTesting::WaitForMultipleWaitableTimerTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -38,74 +37,91 @@ void System::WaitForMultipleWaitableTimerTesting::MainTest()
 
 void System::WaitForMultipleWaitableTimerTesting::CreateSynchronizationTest()
 {
-    constexpr auto mutexSize = 5;
-    Container waitableTimerHandle{};
+    Container waitableTimerHandles{};
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateWaitableTimerTest, waitableTimerHandles);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandles);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, waitableTimerHandles);
+
+    GetStream() << "等待结束。\n";
+
+    for (auto waitableTimerHandle : waitableTimerHandles)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+    }
+}
+
+void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(const Container& waitableTimerHandles)
+{
+    const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandles.size()), waitableTimerHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite));
+    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+
+    ResetSystemWaitableTimer(waitableTimerHandles);
+}
+
+void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(const Container& waitableTimerHandles)
+{
+    const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandles.size()), waitableTimerHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
+    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+
+    ResetSystemWaitableTimer(waitableTimerHandles);
+}
+
+void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer2Test(const Container& waitableTimerHandles)
+{
+    const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandles.size()), waitableTimerHandles.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
+    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+
+    ResetSystemWaitableTimer(waitableTimerHandles);
+}
+
+void System::WaitForMultipleWaitableTimerTesting::ResetSystemWaitableTimer(const Container& waitableTimerHandles)
+{
+    WindowsLargeInteger waitableTimerLargeInteger{};
+    waitableTimerLargeInteger.QuadPart = -base / 2;
+
+    for (auto handle : waitableTimerHandles)
+    {
+        ASSERT_TRUE(SetSystemWaitableTimer(handle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
+    }
+}
+
+void System::WaitForMultipleWaitableTimerTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试需要等待。\n";
+
+    SystemPause();
+}
+
+void System::WaitForMultipleWaitableTimerTesting::CreateWaitableTimerTest(Container& waitableTimerHandles)
+{
+    constexpr auto mutexSize = 5;
     for (auto i = 0; i < mutexSize; ++i)
     {
-        auto handle = CreateSystemWaitableTimer(nullptr, false, nullptr);
+        const auto handle = CreateSystemWaitableTimer(nullptr, false, nullptr);
         ASSERT_TRUE(IsWaitableTimerValid(handle));
 
-        waitableTimerHandle.emplace_back(handle);
+        waitableTimerHandles.emplace_back(handle);
     }
+}
 
-    ResetSystemWaitableTimer(waitableTimerHandle);
-
+void System::WaitForMultipleWaitableTimerTesting::CreateThread(const Container& waitableTimerHandles)
+{
     constexpr auto threadCount = 4;
 
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer0Test, this, waitableTimerHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer1Test, this, waitableTimerHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer2Test, this, waitableTimerHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer0Test, this, waitableTimerHandles));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer1Test, this, waitableTimerHandles));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer2Test, this, waitableTimerHandles));
     }
 
     GetStream() << "等待" << (threadCount * 3) / 2 << "秒钟。\n";
 
-    ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandles);
 
     threadGroup.join_all();
-
-    GetStream() << "等待结束。\n";
-
-    for (auto handle : waitableTimerHandle)
-    {
-        ASSERT_TRUE(CloseSystemWaitableTimer(handle));
-    }
-}
-
-void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer0Test(const Container& waitableTimerHandle)
-{
-    const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandle.size()), waitableTimerHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
-
-    ResetSystemWaitableTimer(waitableTimerHandle);
-}
-
-void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer1Test(const Container& waitableTimerHandle)
-{
-    const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandle.size()), waitableTimerHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
-
-    ResetSystemWaitableTimer(waitableTimerHandle);
-}
-
-void System::WaitForMultipleWaitableTimerTesting::WaitForWaitableTimer2Test(const Container& waitableTimerHandle)
-{
-    const auto flag = WaitForSystemWaitableTimer(boost::numeric_cast<WindowsDWord>(waitableTimerHandle.size()), waitableTimerHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
-    ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
-
-    ResetSystemWaitableTimer(waitableTimerHandle);
-}
-
-void System::WaitForMultipleWaitableTimerTesting::ResetSystemWaitableTimer(const Container& waitableTimerHandle)
-{
-    WindowsLargeInteger waitableTimerLargeInteger{};
-    waitableTimerLargeInteger.QuadPart = -base / 2;
-
-    for (auto handle : waitableTimerHandle)
-    {
-        ASSERT_TRUE(SetSystemWaitableTimer(handle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
-    }
 }

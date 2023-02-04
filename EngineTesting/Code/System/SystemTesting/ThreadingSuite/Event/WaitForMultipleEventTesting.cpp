@@ -1,21 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:24)
+///	引擎测试版本：0.9.0.1 (2023/02/01 0:05)
 
 #include "WaitForMultipleEventTesting.h"
-#include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Event.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::vector;
 
 System::WaitForMultipleEventTesting::WaitForMultipleEventTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -37,32 +34,13 @@ void System::WaitForMultipleEventTesting::MainTest()
 
 void System::WaitForMultipleEventTesting::WaitMultipleObjectsTest()
 {
-    constexpr auto eventSize = 5;
-    vector<WindowsHandle> eventHandle;
+    const auto eventHandles = GetEventHandle();
 
-    constexpr auto threadCount = 12;
+    ASSERT_NOT_THROW_EXCEPTION_1(WaitForManualEventTest, eventHandles);
 
-    for (auto i = 0; i < eventSize; ++i)
+    for (auto eventHandle : eventHandles)
     {
-        auto handle = CreateSystemEvent(true, true);
-        ASSERT_TRUE(IsSystemEventValid(handle));
-
-        eventHandle.emplace_back(handle);
-    }
-
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest0, this, eventHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest1, this, eventHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest2, this, eventHandle));
-    }
-
-    threadGroup.join_all();
-
-    for (auto handle : eventHandle)
-    {
-        ASSERT_TRUE(CloseSystemEvent(handle));
+        ASSERT_NOT_THROW_EXCEPTION_1(CloseSystemEventTest, eventHandle);
     }
 }
 
@@ -82,4 +60,34 @@ void System::WaitForMultipleEventTesting::WaitForManualEventTest2(const Containe
 {
     const auto flag = WaitForSystemEvent(boost::numeric_cast<WindowsDWord>(eventHandle.size()), eventHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
+}
+
+System::WaitForMultipleEventTesting::Container System::WaitForMultipleEventTesting::GetEventHandle()
+{
+    constexpr auto eventSize = 5;
+
+    Container eventHandle{};
+
+    for (auto i = 0; i < eventSize; ++i)
+    {
+        const auto handle = CreateSystemEvent(true, true);
+        ASSERT_TRUE(IsSystemEventValid(handle));
+
+        eventHandle.emplace_back(handle);
+    }
+
+    return eventHandle;
+}
+
+void System::WaitForMultipleEventTesting::WaitForManualEventTest(const Container& eventHandles)
+{
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest0, this, eventHandles));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest1, this, eventHandles));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForManualEventTest2, this, eventHandles));
+    }
+
+    threadGroup.join_all();
 }

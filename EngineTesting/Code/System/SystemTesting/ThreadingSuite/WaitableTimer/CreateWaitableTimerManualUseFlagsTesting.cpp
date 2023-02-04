@@ -1,31 +1,32 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:05)
+///	引擎测试版本：0.9.0.1 (2023/02/01 20:52)
 
 #include "CreateWaitableTimerManualUseFlagsTesting.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/Flags/WaitableTimerFlags.h"
 #include "System/Threading/WaitableTimer.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::CreateWaitableTimerManualUseFlagsTesting::CreateWaitableTimerManualUseFlagsTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      waitableTimerStandardAccessFlags{ MutexStandardAccess::Delete,
-                                        MutexStandardAccess::ReadControl,
-                                        MutexStandardAccess::WriteDac,
-                                        MutexStandardAccess::WriteOwner,
-                                        MutexStandardAccess::Synchronize },
+      waitableTimerStandardAccesses{ MutexStandardAccess::Delete,
+                                     MutexStandardAccess::ReadControl,
+                                     MutexStandardAccess::WriteDac,
+                                     MutexStandardAccess::WriteOwner,
+                                     MutexStandardAccess::Synchronize },
       waitableTimerSpecificAccess{ WaitableTimerSpecificAccess::AllAccess }
 
 {
-    SYSTEM_SELF_CLASS_IS_VALID_9;
+    SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, CreateWaitableTimerManualUseFlagsTesting)
@@ -42,25 +43,40 @@ void System::CreateWaitableTimerManualUseFlagsTesting::MainTest()
 
 void System::CreateWaitableTimerManualUseFlagsTesting::CreateManualTest()
 {
-    for (const auto waitableTimerStandardAccess : waitableTimerStandardAccessFlags)
+    for (const auto waitableTimerStandardAccess : waitableTimerStandardAccesses)
     {
-        auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, nullptr, CreateWaitableTimerReset::ManualReset, waitableTimerStandardAccess, waitableTimerSpecificAccess);
-
-        ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
-
-        constexpr auto base = 10000000LL;
-
-        WindowsLargeInteger waitableTimerLargeInteger{};
-        waitableTimerLargeInteger.QuadPart = -base;
-        ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
-
-        GetStream() << "等待" << -waitableTimerLargeInteger.QuadPart / base << "秒钟。\n";
-
-        ASSERT_TRUE(WaitForSystemWaitableTimer(waitableTimerHandle));
-        ASSERT_TRUE(WaitForSystemWaitableTimer(waitableTimerHandle));
-
-        GetStream() << "等待结束。\n";
-
-        ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateManualTest, waitableTimerStandardAccess);
     }
+}
+
+void System::CreateWaitableTimerManualUseFlagsTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试需要等待。\n";
+
+    SystemPause();
+}
+
+void System::CreateWaitableTimerManualUseFlagsTesting::DoCreateManualTest(MutexStandardAccess waitableTimerStandardAccess)
+{
+    const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, nullptr, CreateWaitableTimerReset::ManualReset, waitableTimerStandardAccess, waitableTimerSpecificAccess);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ResultTest, waitableTimerHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+}
+
+void System::CreateWaitableTimerManualUseFlagsTesting::ResultTest(WindowsHandle waitableTimerHandle)
+{
+    ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
+
+    WindowsLargeInteger waitableTimerLargeInteger{};
+    waitableTimerLargeInteger.QuadPart = -base;
+    ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
+
+    GetStream() << "等待" << -waitableTimerLargeInteger.QuadPart / base << "秒钟。\n";
+
+    ASSERT_TRUE(WaitForSystemWaitableTimer(waitableTimerHandle));
+    ASSERT_TRUE(WaitForSystemWaitableTimer(waitableTimerHandle));
+
+    GetStream() << "等待结束。\n";
 }

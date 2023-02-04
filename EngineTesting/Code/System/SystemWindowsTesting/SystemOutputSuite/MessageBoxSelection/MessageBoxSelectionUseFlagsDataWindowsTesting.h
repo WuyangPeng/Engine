@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/05 22:16)
+///	引擎测试版本：0.9.0.1 (2023/01/30 0:11)
 
 #ifndef SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_FLAGS_DATA_WINDOWS_TESTING_H
 #define SYSTEM_WINDOWS_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_SELECTION_USE_FLAGS_DATA_WINDOWS_TESTING_H
@@ -39,16 +39,18 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void MessageBoxTest();
 
+        void DoMessageBoxTest(size_t index);
+
         MAYBE_NULLPTR WindowsHWnd GetHwnd(MessageBoxMisc miscFlag) const noexcept;
 
     private:
-        using TypeFlagsCollection = std::vector<MessageBoxType>;
-        using IconFlagsCollection = std::vector<MessageBoxIcon>;
-        using DefaultFlagsCollection = std::vector<MessageBoxDefault>;
-        using ModeFlagsCollection = std::vector<MessageBoxMode>;
-        using MiscFlagsCollection = std::vector<MessageBoxMisc>;
-        using CommandFlagsCollection = std::vector<DialogBoxCommand>;
-        using MessageBoxReturnCollection = std::map<MessageBoxType, CommandFlagsCollection>;
+        using TypeFlagsContainer = std::vector<MessageBoxType>;
+        using IconFlagsContainer = std::vector<MessageBoxIcon>;
+        using DefaultFlagsContainer = std::vector<MessageBoxDefault>;
+        using ModeFlagsContainer = std::vector<MessageBoxMode>;
+        using MiscFlagsContainer = std::vector<MessageBoxMisc>;
+        using CommandFlagsContainer = std::vector<DialogBoxCommand>;
+        using MessageBoxReturnContainer = std::map<MessageBoxType, CommandFlagsContainer>;
         using IconDescription = std::map<MessageBoxIcon, String>;
         using DefaultDescription = std::map<MessageBoxDefault, String>;
         using ModeDescription = std::map<MessageBoxMode, String>;
@@ -56,16 +58,16 @@ namespace System
 
     private:
         WindowsHWnd hwnd;
-        TypeFlagsCollection typeFlags;
-        IconFlagsCollection iconFlags;
-        DefaultFlagsCollection defaultFlags;
-        ModeFlagsCollection modeFlags;
-        MiscFlagsCollection miscFlags;
-        MessageBoxReturnCollection returnCollection;
-        IconDescription iconDescription;
-        DefaultDescription defaultDescription;
-        ModeDescription modeDescription;
-        MiscDescription miscDescription;
+        TypeFlagsContainer typeFlags;
+        IconFlagsContainer iconFlags;
+        DefaultFlagsContainer defaultFlags;
+        ModeFlagsContainer modeFlags;
+        MiscFlagsContainer miscFlags;
+        MessageBoxReturnContainer returnCollections;
+        IconDescription iconDescriptions;
+        DefaultDescription defaultDescriptions;
+        ModeDescription modeDescriptions;
+        MiscDescription miscDescriptions;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

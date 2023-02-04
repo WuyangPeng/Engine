@@ -270,6 +270,7 @@
   "mutexSuite": {
     "CreateDefaultMutexTesting": 1,
     "CreateMutexTesting": 1,
+    "CreateMutexUseNameTesting": 1,
     "CreateMutexUseFlagsTesting": 1,
     "ThreadMutexTesting": 1,
     "WaitForMutexTesting": 1,
@@ -340,7 +341,8 @@
     "CreateProcessTesting": 1,
     "GetProcessHandleTesting": 1,
     "ProcessPriorityClassTesting": 1,
-    "OpenProcessTesting": 1
+    "OpenProcessTesting": 1,
+    "ExitProcessTesting": 1
   },
 
   "processToolsSuite": {
@@ -348,7 +350,7 @@
   },
 
   "timeSuite": {
-    "TimeOfDayDataTesting": 0,
+    "CurrentDeltaTimeTesting": 0,
     "DeltaTimeValueDataTesting": 1,
     "DeltaTimeTesting": 0,
     "SystemPauseTesting": 0
@@ -422,6 +424,7 @@
 
   "securitySidSuite": {
     "InitializeSecurityIdentifierTesting": 1,
+    "AllocateAndInitializeSecurityIdentifierTesting": 1,
     "GetSubAuthorityTesting": 1,
     "WellKnownSidTesting": 1,
     "CopySecurityIdentifierTesting": 1
@@ -435,12 +438,12 @@
   "securityDescriptorSuite": {
     "UserObjectSecurityTesting": 1,
     "InitializeSecurityDescriptorTesting": 1,
-    "SecurityDescriptorDaclTesting": 1,
+    "SecurityDescriptorDiscretionaryAccessControlListTesting": 1,
     "SecurityDescriptorControlTesting": 1,
     "SecurityDescriptorGroupTesting": 1,
     "SecurityDescriptorOwnerTesting": 1,
-    "SecurityDescriptorRMControlTesting": 1,
-    "SecurityDescriptorSaclTesting": 1
+    "SecurityDescriptorResourceManagerControlTesting": 1,
+    "SecurityDescriptorSystemAccessControlListTesting": 1
   },
 
   "securityAceSuite": {
@@ -450,7 +453,7 @@
   },
 
   "addAccessSuite": {
-    "AddAccessAllowedAceTesting": 5,
+    "AddAccessAllowedAceTesting": 1,
     "AddAccessAllowedAceUseAceFlagsTesting": 5,
     "AddAccessAllowedObjectAceTesting": 5,
     "AddAccessDeniedAceTesting": 5,
@@ -462,8 +465,13 @@
   "securityBaseSuite": {
     "IsSystemTokenElevatedTesting": 1,
     "TokenInformationTesting": 1,
-    "AdjustTokenTesting": 1,
-    "AccessesGrantedTesting": 1,
+    "AdjustTokenGroupsTesting": 1,
+    "AdjustTokenPrivilegesTesting": 1,
+    "AccessesGrantedEnlistmentMapTesting": 1,
+    "AccessesGrantedFileMapTesting": 1,
+    "AccessesGrantedResourceManagerMapTesting": 1,
+    "AccessesGrantedTransactionManagerMapTesting": 1,
+    "AccessesGrantedTransactionMapTesting": 1,
     "DuplicateTokenTesting": 10,
     "RestrictedTokenTesting": 1,
     "QuerySecurityAccessMaskTesting": 1
@@ -471,7 +479,14 @@
 
   "accessCheckSuite": {
     "MapGenericMaskTesting": 1,
-    "AccessCheckTesting": 1
+    "EnlistmentMapGenericMaskTesting": 1,
+    "FileMapGenericMaskTesting": 1,
+    "ResourceManagerMapGenericMaskTesting": 1,
+    "TransactionManagerMapGenericMaskTesting": 1,
+    "TransactionMapGenericMaskTesting": 1,
+    "AccessCheckTesting": 1,
+    "AccessCheckByTypeResultListTesting": 1,
+    "AccessCheckByTypeTesting": 1
   },
 
   "networkSuite": {
@@ -532,13 +547,17 @@
 
   "windowsSuite": {
     "LastPlatformErrorTesting": 1,
-    "WindowsCreateTesting": 1,
     "WindowsProcessTesting": 1,
     "WindowsRegisterTesting": 1,
     "WindowsFontInformationTesting": 1,
     "WindowsNamedPipeTesting": 1,
     "WindowsUserTesting": 1,
     "EngineeringTesting": 1
+  },
+
+  "windowsCreateSuite": {
+    "WindowsCreateLParamTesting": 1,
+    "WindowsCreateWParamTesting": 1
   },
 
   "windowsSystemSuite": {
@@ -550,6 +569,14 @@
     "GetSystemUserNameTesting": 1,
     "BoolConversionTesting": 1,
     "GetSystemInputTesting": 0
+  },
+
+  "engineeringSuite": {
+    "EngineeringNumDigitsTesting": 1,
+    "EngineeringOffsetTesting": 1,
+    "EngineeringSuffixTesting": 1,
+    "EngineeringTypeDisplayerTesting": 1,
+    "GetLastSlashPositionTesting": 1
   },
 
   "linuxSuite": {

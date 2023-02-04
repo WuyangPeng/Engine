@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:44)
+///	引擎测试版本：0.9.0.1 (2023/01/28 16:36)
 
 #include "InitializeAclTesting.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
@@ -29,22 +29,14 @@ void System::InitializeAclTesting::DoRunUnitTest()
 
 void System::InitializeAclTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(RevisionInitializeAclTest);
-    ASSERT_NOT_THROW_EXCEPTION_0(RevisionDsInitializeAclTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(RevisionInitializeAclTest, AccessControlListRevision::Revision);
+    ASSERT_NOT_THROW_EXCEPTION_1(RevisionInitializeAclTest, AccessControlListRevision::RevisionDs);
 }
 
-void System::InitializeAclTesting::RevisionInitializeAclTest()
+void System::InitializeAclTesting::RevisionInitializeAclTest(AccessControlListRevision accessControlListRevision)
 {
     AccessCheckACL acl{};
 
-    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), AccessControlListRevision::Revision));
-    ASSERT_TRUE(IsAccessControlListValid(&acl));
-}
-
-void System::InitializeAclTesting::RevisionDsInitializeAclTest()
-{
-    AccessCheckACL acl{};
-
-    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), AccessControlListRevision::RevisionDs));
+    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), accessControlListRevision));
     ASSERT_TRUE(IsAccessControlListValid(&acl));
 }

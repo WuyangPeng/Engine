@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:33)
+///	引擎测试版本：0.9.0.1 (2023/02/01 11:32)
 
 #include "WaitForMutexTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -36,23 +36,12 @@ void System::WaitForMutexTesting::MainTest()
 
 void System::WaitForMutexTesting::WaitMutexTest()
 {
-    constexpr auto threadCount = 12;
-
-    auto mutexHandle = CreateSystemMutex();
+    const auto mutexHandle = CreateSystemMutex();
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest0, this, mutexHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest1, this, mutexHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest2, this, mutexHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest3, this, mutexHandle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, mutexHandle);
 
-    threadGroup.join_all();
-
-    ASSERT_TRUE(CloseSystemMutex(mutexHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
 }
 
 void System::WaitForMutexTesting::WaitForMutexTest0(WindowsHandle mutexHandle)
@@ -84,4 +73,18 @@ void System::WaitForMutexTesting::WaitForMutexTest3(WindowsHandle mutexHandle)
     ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
+}
+
+void System::WaitForMutexTesting::CreateThread(WindowsHandle mutexHandle)
+{
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest0, this, mutexHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest1, this, mutexHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest2, this, mutexHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest3, this, mutexHandle));
+    }
+
+    threadGroup.join_all();
 }

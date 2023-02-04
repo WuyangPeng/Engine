@@ -23,14 +23,14 @@ System::WindowsHandle System::GetStandardHandle(StandardHandle standardhandle) n
 
     UnusedFunction(standardhandle);
 
-    return gInvalidHandleValue;
+    return invalidHandleValue;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 bool System::IsHandleValid(WindowsHandle handle) noexcept
 {
-    if (handle != gInvalidHandleValue && handle != nullptr)
+    if (handle != invalidHandleValue && handle != nullptr)
         return true;
     else
         return false;

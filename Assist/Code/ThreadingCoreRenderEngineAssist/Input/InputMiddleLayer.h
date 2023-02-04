@@ -22,9 +22,10 @@ namespace ThreadingCoreRenderEngineAssist
         using ParentType = Framework::InputManager<ApplicationTrait>;
         using WindowPoint = Framework::WindowPoint;
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        explicit InputMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit InputMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

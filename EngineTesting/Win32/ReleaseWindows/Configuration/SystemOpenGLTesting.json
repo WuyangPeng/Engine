@@ -1,10 +1,83 @@
 {
   "openGLSuite": {
-    "OpenGLUtilityTesting": 1,
     "OpenGLInitTesting": 1,
-    "OpenGLAPITesting": 1,
-    "OpenGLProgramTesting": 1,
-    "OpenGLShaderTesting": 1,
-    "OpenGLGlutTesting": 1
+    "OpenGLAPITesting": 1
+  },
+
+  "openGLUtilitySuite": {
+    "OpenGLErrorDescriptionTesting": 1,
+    "OpenGLSupportsExtensionTesting": 1,
+    "OpenGLVersionTesting": 1,
+    "WglSupportsExtensionTesting": 1
+  },
+
+  "openGLBaseSuite": {
+    "OpenGLBaseTesting": 1,
+    "OpenGLQueryTesting": 1,
+    "OpenGLBlendTesting": 100,
+    "OpenGLDepthTesting": 1,
+    "OpenGLMaskTesting": 1,
+    "OpenGLStateTesting": 1,
+    "OpenGLStencilTesting": 1
+  },
+
+  "openGLBuffersSuite": {
+    "OpenGLGetBuffersTesting": 1,
+    "OpenGLSetBufferTesting": 1,
+    "OpenGLSetBufferSubDataTesting": 1,
+    "OpenGLSetCopyBufferSubDataTesting": 1,
+    "OpenGLFramebufferTesting": 1,
+    "OpenGLBindFramebufferTesting": 1,
+    "OpenGLVertexArraysTesting": 1,
+    "OpenGLBindVertexBufferTesting": 1,
+    "OpenGLDrawBuffersTesting": 1
+  },
+
+  "openGLTexturesSuite": {
+    "OpenGLGetTexturesTesting": 1,
+    "OpenGLBindTexturesTesting": 1,
+    "OpenGLPixelStoreTesting": 1,
+    "OpenGLTexturesParameterTesting": 1,
+    "OpenGLTextures1DTesting": 1,
+    "OpenGLTextures2DTesting": 1,
+    "OpenGLTextures3DTesting": 1,
+    "OpenGLTexturesCubeTesting": 1,
+    "OpenGLTexturesCubeArrayTesting": 1,
+    "OpenGLFramebufferTextures2DTesting": 1
+  },
+
+  "openGLPolygonSuite": {
+    "OpenGLPolygonModeTesting": 1,
+    "OpenGLPolygonOffsetTesting": 1
+  },
+
+  "openGLSamplersSuite": {
+    "OpenGLGetSamplersTesting": 1,
+    "OpenGLSetSamplerParameterTesting": 1
+  },
+
+  "openGLProgramSuite": {
+    "OpenGLCreateProgramTesting": 1,
+    "OpenGLProgramAttributesTesting": 1,
+    "OpenGLProgramLinkTesting": 1,
+    "OpenGLProgramResourceTesting": 1,
+    "OpenGLProgramStatusTesting": 1,
+    "ComputeWorkGroupSizeTesting": 1,
+    "OpenGLProgramInterfaceTesting": 1
+  },
+
+  "openGLShaderSuite": {
+    "OpenGLAttachShaderTesting": 1,
+    "OpenGLCompileShaderTesting": 1,
+    "OpenGLCreateShaderTesting": 1,
+    "OpenGLGetUniformLocationTesting": 1,
+    "OpenGLShaderAttributesTesting": 1,
+    "OpenGLShaderStatusTesting": 1
+  },
+
+  "openGLGlutSuite": {
+    "OpenGLGlutCallbackTesting": 1,
+    "OpenGLGlutCreateWindowTesting": 1,
+    "OpenGLGlutDestroyTesting": 1
   }
 }

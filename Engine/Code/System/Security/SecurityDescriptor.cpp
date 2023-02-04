@@ -166,14 +166,16 @@ bool System::GetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDe
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor, WindowsBoolPtr daclPresent, AccessCheckACLPtr* dacl, bool* daclDefaulted) noexcept
+bool System::GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor, bool* daclPresent, AccessCheckACLPtr* dacl, bool* daclDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    WindowsBool result{ gFalse };
-    if (::GetSecurityDescriptorDacl(securityDescriptor, daclPresent, dacl, &result) != gFalse)
+    WindowsBool daclPresentResult{ gFalse };
+    WindowsBool daclDefaultedResult{ gFalse };
+    if (::GetSecurityDescriptorDacl(securityDescriptor, &daclPresentResult, dacl, &daclDefaultedResult) != gFalse)
     {
-        BoolConversion(result, daclDefaulted);
+        BoolConversion(daclPresentResult, daclPresent);
+        BoolConversion(daclDefaultedResult, daclDefaulted);
 
         return true;
     }
@@ -274,14 +276,16 @@ bool System::GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor, WindowsBoolPtr saclPresent, AccessCheckACLPtr* sacl, bool* saclDefaulted) noexcept
+bool System::GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor, bool* saclPresent, AccessCheckACLPtr* sacl, bool* saclDefaulted) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    WindowsBool result{ gFalse };
-    if (::GetSecurityDescriptorSacl(securityDescriptor, saclPresent, sacl, &result) != gFalse)
+    WindowsBool saclPresentResult{ gFalse };
+    WindowsBool saclDefaultedResult{ gFalse };
+    if (::GetSecurityDescriptorSacl(securityDescriptor, &saclPresentResult, sacl, &saclDefaultedResult) != gFalse)
     {
-        BoolConversion(result, saclDefaulted);
+        BoolConversion(saclPresentResult, saclPresent);
+        BoolConversion(saclDefaultedResult, saclDefaulted);
 
         return true;
     }

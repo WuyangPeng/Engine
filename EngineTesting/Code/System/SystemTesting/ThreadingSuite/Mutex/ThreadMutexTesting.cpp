@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:33)
+///	引擎测试版本：0.9.0.1 (2023/02/01 10:38)
 
 #include "ThreadMutexTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -36,46 +36,30 @@ void System::ThreadMutexTesting::MainTest()
 
 void System::ThreadMutexTesting::ThreadTest()
 {
-    constexpr auto threadCount = 12;
+    const auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
 
-    auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoThreadTest, mutexHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
+}
+
+void System::ThreadMutexTesting::DoThreadTest(WindowsHandle mutexHandle)
+{
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
     threadSum = 0;
 
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest, this, mutexHandle));
-    }
-
-    threadGroup.join_all();
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, mutexHandle);
 
     ASSERT_EQUAL(threadSum, threadCount);
-
-    ASSERT_TRUE(CloseSystemMutex(mutexHandle));
 }
 
 void System::ThreadMutexTesting::TrylockTest()
 {
-    auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
-    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+    const auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
+    DoTrylockTest(mutexHandle);
 
-    threadSum = 0;
-
-    boost::thread thread0{ boost::bind(&ClassType::TrylockSuccessTest, this, mutexHandle) };
-
-    thread0.join();
-
-    ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
-
-    boost::thread thread1{ boost::bind(&ClassType::TrylockTimeoutTest, this, mutexHandle) };
-
-    thread1.join();
-
-    ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
-
-    ASSERT_TRUE(CloseSystemMutex(mutexHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
 }
 
 void System::ThreadMutexTesting::WaitForMutexTest(WindowsHandle mutexHandle)
@@ -97,6 +81,46 @@ void System::ThreadMutexTesting::TrylockTimeoutTest(WindowsHandle mutexHandle)
 void System::ThreadMutexTesting::TrylockSuccessTest(WindowsHandle mutexHandle)
 {
     ASSERT_ENUM_EQUAL(WaitForSystemMutex(mutexHandle, 0), MutexWaitReturn::Object0);
+
+    ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
+}
+
+void System::ThreadMutexTesting::CreateThread(WindowsHandle mutexHandle)
+{
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest, this, mutexHandle));
+    }
+
+    threadGroup.join_all();
+}
+
+void System::ThreadMutexTesting::DoTrylockTest(WindowsHandle mutexHandle)
+{
+    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+
+    threadSum = 0;
+
+    ASSERT_NOT_THROW_EXCEPTION_1(TrylockSuccessThreadTest, mutexHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(TrylockTimeoutThreadTest, mutexHandle);
+}
+
+void System::ThreadMutexTesting::TrylockSuccessThreadTest(WindowsHandle mutexHandle)
+{
+    boost::thread thread{ boost::bind(&ClassType::TrylockSuccessTest, this, mutexHandle) };
+
+    thread.join();
+
+    ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
+}
+
+void System::ThreadMutexTesting::TrylockTimeoutThreadTest(WindowsHandle mutexHandle)
+{
+    boost::thread thread{ boost::bind(&ClassType::TrylockTimeoutTest, this, mutexHandle) };
+
+    thread.join();
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
 }

@@ -1,28 +1,28 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:23)
+///	引擎测试版本：0.9.0.1 (2023/01/31 23:42)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_EVENT_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_EVENT_TESTING_H
 
+#include "EventTestingBase.h"
 #include "System/Threading/Fwd/ThreadingFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <random>
 #include <vector>
 
 namespace System
 {
-    class OpenEventTesting final : public CoreTools::UnitTest
+    class OpenEventTesting final : public EventTestingBase
     {
     public:
         using ClassType = OpenEventTesting;
-        using ParentType = UnitTest;
+        using ParentType = EventTestingBase;
 
     public:
         explicit OpenEventTesting(const OStreamShared& stream);
@@ -36,14 +36,16 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void ThreadTest();
         void WaitForEventTest(const String& eventName);
+        void DoThreadTest(WindowsHandle eventHandle, const String& eventName);
+        void DoWaitForEventTest(size_t index, const String& eventName);
 
     private:
-        using EventStandardAccessFlagsContainer = std::vector<MutexStandardAccess>;
-        using EventSpecificAccessFlagsContainer = std::vector<EventSpecificAccess>;
+        using EventStandardAccessContainer = std::vector<MutexStandardAccess>;
+        using EventSpecificAccessContainer = std::vector<EventSpecificAccess>;
 
     private:
-        EventStandardAccessFlagsContainer eventStandardAccessFlags;
-        EventSpecificAccessFlagsContainer eventSpecificAccessFlags;
+        EventStandardAccessContainer eventStandardAccesses;
+        EventSpecificAccessContainer eventSpecificAccesses;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

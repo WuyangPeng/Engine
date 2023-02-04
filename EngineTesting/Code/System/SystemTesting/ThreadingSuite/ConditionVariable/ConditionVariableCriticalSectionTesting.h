@@ -1,28 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:18)
+///	引擎测试版本：0.9.0.1 (2023/01/30 14:20)
 
 #ifndef SYSTEM_THREADING_SUITE_CONDITION_VARIABLE_CRITICAL_SECTION_TESTING_H
 #define SYSTEM_THREADING_SUITE_CONDITION_VARIABLE_CRITICAL_SECTION_TESTING_H
 
-#include "System/Threading/Using/ConditionVariableUsing.h"
+#include "ConditionVariableTestingBase.h"
 #include "System/Threading/Using/CriticalSectionUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <array>
 
 namespace System
 {
-    class ConditionVariableCriticalSectionTesting : public CoreTools::UnitTest
+    class ConditionVariableCriticalSectionTesting : public ConditionVariableTestingBase
     {
     public:
         using ClassType = ConditionVariableCriticalSectionTesting;
-        using ParentType = UnitTest;
+        using ParentType = ConditionVariableTestingBase;
 
     public:
         explicit ConditionVariableCriticalSectionTesting(const OStreamShared& stream);
@@ -33,26 +30,16 @@ namespace System
         void DoRunUnitTest() final;
         void MainTest();
 
-        void ThreadTest();
-        void ProducerThreadProcedure();
-        void ConsumerThreadProcedure();
+        void ThreadPause() override;
 
-        void Initialize();
+        void DoInitialize() override;
         void Delete() noexcept;
 
-    private:
-        constexpr static auto bufferSize = 10;
-
-        using BufferType = std::array<int, bufferSize>;
+        NODISCARD bool DoProducerThreadProcedure() override;
+        NODISCARD bool DoConsumerThreadProcedure() override;
 
     private:
-        ConditionVariable bufferNotEmpty;
-        ConditionVariable bufferNotFull;
         ThreadingCriticalSection bufferLock;
-        bool stopRequested;
-        BufferType buffer;
-        int queueSize;
-        int queueStartOffset;
     };
 }
 

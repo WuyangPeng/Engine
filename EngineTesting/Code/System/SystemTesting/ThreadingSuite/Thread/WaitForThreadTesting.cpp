@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:47)
+///	引擎测试版本：0.9.0.1 (2023/02/01 19:25)
 
 #include "WaitForThreadTesting.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
@@ -29,36 +29,34 @@ void System::WaitForThreadTesting::DoRunUnitTest()
 
 void System::WaitForThreadTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(WaitThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WaitThreadTest);
 }
 
-bool System::WaitForThreadTesting::WaitThreadTest()
+void System::WaitForThreadTesting::WaitThreadTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WaitThread0Test);
     ASSERT_NOT_THROW_EXCEPTION_0(WaitThread1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(WaitThread2Test);
     ASSERT_NOT_THROW_EXCEPTION_0(WaitThread3Test);
-
-    return true;
 }
 
 void System::WaitForThreadTesting::WaitThread0Test()
 {
     WindowsDWord threadId{ 0 };
-    auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
+    const auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
 
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
 
     ASSERT_TRUE(WaitForSystemThread(threadHandle));
 
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
 void System::WaitForThreadTesting::WaitThread1Test()
 {
     WindowsDWord threadId{ 0 };
-    auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
+    const auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
 
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
@@ -66,13 +64,13 @@ void System::WaitForThreadTesting::WaitThread1Test()
     const auto flag = WaitForSystemThread(threadHandle, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
 
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
 void System::WaitForThreadTesting::WaitThread2Test()
 {
     WindowsDWord threadId{ 0 };
-    auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
+    const auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
 
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
@@ -80,13 +78,13 @@ void System::WaitForThreadTesting::WaitThread2Test()
     const auto flag = WaitForSystemThread(threadHandle, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
 
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
 void System::WaitForThreadTesting::WaitThread3Test()
 {
     WindowsDWord threadId{ 0 };
-    auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
+    const auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
 
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
@@ -94,7 +92,7 @@ void System::WaitForThreadTesting::WaitThread3Test()
     const auto flag = WaitForSystemThread(threadHandle, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_EQUAL(flag, MutexWaitReturn::Object0);
 
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
 System::WindowsDWord System::WaitForThreadTesting::ThreadStartRoutine(void* threadParameter)

@@ -207,10 +207,10 @@ void System::SoftwareExceptionTesting::DoMakeSoftwareExceptionTest(size_t index)
 {
     const std::uniform_int<uint32_t> randomDistribution{ 0u, exceptionBit };
 
-    auto severity = severities.at(index % severities.size());
-    auto facility = facilities.at(index % facilities.size());
+    const auto severity = severities.at(index % severities.size());
+    const auto facility = facilities.at(index % facilities.size());
 
-    auto exception = randomDistribution(randomEngine);
+    const auto exception = randomDistribution(randomEngine);
 
     const auto softwareException = MakeSoftwareException(severity, facility, exception);
 

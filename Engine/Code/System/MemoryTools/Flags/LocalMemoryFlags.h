@@ -75,7 +75,6 @@ namespace System
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
-
 }
 
 #endif  // SYSTEM_MEMORY_TOOLS_LOCAL_MEMORY_FLAGS_H

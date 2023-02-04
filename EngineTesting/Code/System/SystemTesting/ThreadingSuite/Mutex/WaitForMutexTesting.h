@@ -1,25 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:31)
+///	引擎测试版本：0.9.0.1 (2023/02/01 11:29)
 
 #ifndef SYSTEM_THREADING_SUITE_WAIT_FOR_MUTEX_TESTING_H
 #define SYSTEM_THREADING_SUITE_WAIT_FOR_MUTEX_TESTING_H
 
+#include "MutexTestingBase.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {
-    class WaitForMutexTesting final : public CoreTools::UnitTest
+    class WaitForMutexTesting final : public MutexTestingBase
     {
     public:
         using ClassType = WaitForMutexTesting;
-        using ParentType = UnitTest;
+        using ParentType = MutexTestingBase;
 
     public:
         explicit WaitForMutexTesting(const OStreamShared& stream);
@@ -36,6 +36,8 @@ namespace System
         void WaitForMutexTest1(WindowsHandle mutexHandle);
         void WaitForMutexTest2(WindowsHandle mutexHandle);
         void WaitForMutexTest3(WindowsHandle mutexHandle);
+
+        void CreateThread(WindowsHandle mutexHandle);
     };
 }
 

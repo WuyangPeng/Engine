@@ -1,36 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:49)
+///	引擎测试版本：0.9.0.1 (2023/01/25 18:27)
 
 #include "FileSecurityTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityBase.h"
-#include "System/Security/Using/SecurityBaseUsing.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
 using namespace std::literals;
 
 System::FileSecurityTesting::FileSecurityTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformationFlags{ SecurityRequestedInformation::Owner,
-                                         SecurityRequestedInformation::Group,
-                                         SecurityRequestedInformation::Dacl,
-                                         SecurityRequestedInformation::Label }
+      existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) },
+      setFileName{ SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -49,25 +38,30 @@ void System::FileSecurityTesting::MainTest()
 
 void System::FileSecurityTesting::FileSecurityTest()
 {
-    const auto tokenIsElevated = IsSystemTokenElevated();
-
-    const auto existingFileName = SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s);
-    const auto setFileName = SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s);
-
-    for (auto securityRequestedInformation : securityRequestedInformationFlags)
+    for (auto securityRequestedInformation : *this)
     {
-        WindowsDWord neededLength{ 0 };
-        ASSERT_FALSE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, nullptr, 0, &neededLength));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoFileSecurityTest, securityRequestedInformation);
+    }
+}
 
-        vector<char> buffer(boost::numeric_cast<size_t>(neededLength + 1));
+void System::FileSecurityTesting::DoFileSecurityTest(SecurityRequestedInformation securityRequestedInformation)
+{
+    WindowsDWord neededLength{ 0 };
+    ASSERT_FALSE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, nullptr, 0, &neededLength));
 
-        WindowsDWord newNeededLength{ 0 };
-        ASSERT_TRUE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, buffer.data(), neededLength, &newNeededLength));
-        ASSERT_EQUAL(newNeededLength, neededLength);
+    BufferType buffer(boost::numeric_cast<size_t>(neededLength + 1));
 
-        if (tokenIsElevated)
-        {
-            ASSERT_TRUE(SetSystemFileSecurity(setFileName.c_str(), securityRequestedInformation, buffer.data()));
-        }
+    WindowsDWord resultNeededLength{ 0 };
+    ASSERT_TRUE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, buffer.data(), neededLength, &resultNeededLength));
+    ASSERT_EQUAL(resultNeededLength, neededLength);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SetSystemFileSecurityTest, securityRequestedInformation, buffer);
+}
+
+void System::FileSecurityTesting::SetSystemFileSecurityTest(SecurityRequestedInformation securityRequestedInformation, BufferType& buffer)
+{
+    if (GetTokenIsElevated())
+    {
+        ASSERT_TRUE(SetSystemFileSecurity(setFileName, securityRequestedInformation, buffer.data()));
     }
 }

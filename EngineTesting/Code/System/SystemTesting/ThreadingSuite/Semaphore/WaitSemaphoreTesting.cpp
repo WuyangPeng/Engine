@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 20:06)
+///	引擎测试版本：0.9.0.1 (2023/02/01 15:52)
 
 #include "WaitSemaphoreTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -36,21 +36,11 @@ void System::WaitSemaphoreTesting::MainTest()
 void System::WaitSemaphoreTesting::ThreadTest()
 {
     constexpr WindowsLong maxSemphoreCount{ 5 };
-    constexpr auto threadCount = 12;
 
-    auto semaphoreHandle = CreateSystemSemaphore(maxSemphoreCount, maxSemphoreCount);
+    const auto semaphoreHandle = CreateSystemSemaphore(maxSemphoreCount, maxSemphoreCount);
     ASSERT_TRUE(IsSystemSemaphoreValid(semaphoreHandle));
 
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest0, this, semaphoreHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest1, this, semaphoreHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest2, this, semaphoreHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest3, this, semaphoreHandle));
-    }
-
-    threadGroup.join_all();
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, semaphoreHandle);
 
     ASSERT_TRUE(CloseSystemSemaphore(semaphoreHandle));
 }
@@ -100,4 +90,18 @@ void System::WaitSemaphoreTesting::WaitForSemaphoreTest3(WindowsHandle semaphore
     {
         ASSERT_TRUE(ReleaseSystemSemaphore(semaphoreHandle, 1, nullptr));
     }
+}
+
+void System::WaitSemaphoreTesting::CreateThread(WindowsHandle semaphoreHandle)
+{
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest0, this, semaphoreHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest1, this, semaphoreHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest2, this, semaphoreHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForSemaphoreTest3, this, semaphoreHandle));
+    }
+
+    threadGroup.join_all();
 }

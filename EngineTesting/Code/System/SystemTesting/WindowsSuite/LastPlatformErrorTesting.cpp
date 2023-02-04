@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 19:05)
+///	引擎测试版本：0.9.0.1 (2023/02/02 19:09)
 
 #include "LastPlatformErrorTesting.h"
 #include "System/Helper/EnumOperator.h"
@@ -17,10 +17,9 @@
 
 #include <vector>
 
-using std::vector;
-
 System::LastPlatformErrorTesting::LastPlatformErrorTesting(const OStreamShared& stream)
-    : ParentType{ stream }
+    : ParentType{ stream },
+      errorModes{ ErrorMode::FailCriticaleErrors, ErrorMode::NoGPFaultErrorBox, ErrorMode::NoOpenFileErrorBox }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -44,31 +43,33 @@ void System::LastPlatformErrorTesting::LastErrorTest()
 
     for (auto flag = WindowError::Success; flag <= WindowError::AppHang; ++flag)
     {
-        SetPlatformLastError(flag);
-
-        const auto testFlag = GetPlatformLastError();
-
-        ASSERT_ENUM_EQUAL(flag, testFlag);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoLastErrorTest, flag);
     }
+}
+
+void System::LastPlatformErrorTesting::DoLastErrorTest(WindowError flag)
+{
+    SetPlatformLastError(flag);
+
+    const auto result = GetPlatformLastError();
+
+    ASSERT_ENUM_EQUAL(flag, result);
 }
 
 void System::LastPlatformErrorTesting::LastErrorModeTest()
 {
-    constexpr auto defaultFlag = ErrorMode::Default;
-
     ASSERT_ENUM_EQUAL(defaultFlag, GetPlatformErrorMode());
 
-    vector<ErrorMode> modeCollection{ ErrorMode::FailCriticaleErrors, ErrorMode::NoGPFaultErrorBox, ErrorMode::NoOpenFileErrorBox };
-
-    for (auto mode : modeCollection)
+    for (auto errorMode : errorModes)
     {
-        const auto previousMode = GetPlatformErrorMode();
-        const auto testPreviousMode = SetPlatformErrorMode(mode);
-
-        ASSERT_ENUM_EQUAL(previousMode, testPreviousMode);
-        ASSERT_ENUM_EQUAL(mode, GetPlatformErrorMode());
+        ASSERT_NOT_THROW_EXCEPTION_1(DoLastErrorModeTest, errorMode);
     }
 
+    ASSERT_NOT_THROW_EXCEPTION_0(NoAlignmentFaultExceptTest);
+}
+
+void System::LastPlatformErrorTesting::NoAlignmentFaultExceptTest()
+{
     constexpr auto unableRemoveFlag = ErrorMode::NoAlignmentFaultExcept;
 
     MAYBE_UNUSED const auto result = SetPlatformErrorMode(unableRemoveFlag);
@@ -79,4 +80,13 @@ void System::LastPlatformErrorTesting::LastErrorModeTest()
 
     ASSERT_ENUM_EQUAL(unableRemoveFlag, GetPlatformErrorMode());
     ASSERT_ENUM_EQUAL(previousMode, GetPlatformErrorMode());
+}
+
+void System::LastPlatformErrorTesting::DoLastErrorModeTest(ErrorMode mode)
+{
+    const auto previousMode = GetPlatformErrorMode();
+    const auto testPreviousMode = SetPlatformErrorMode(mode);
+
+    ASSERT_ENUM_EQUAL(previousMode, testPreviousMode);
+    ASSERT_ENUM_EQUAL(mode, GetPlatformErrorMode());
 }

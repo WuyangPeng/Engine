@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:59)
+///	引擎测试版本：0.9.0.1 (2023/02/01 20:15)
 
 #include "ThreadTokenTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -18,31 +18,29 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-
 System::ThreadTokenTesting::ThreadTokenTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      tokenStandardAccessFlags{ TokenStandardAccess::Delete,
-                                TokenStandardAccess::ReadControl,
-                                TokenStandardAccess::WriteDac,
-                                TokenStandardAccess::WriteOwner },
-      tokenSpecificAccessFlags{ TokenSpecificAccess::Default,
-                                TokenSpecificAccess::AssignPrimary,
-                                TokenSpecificAccess::Duplicate,
-                                TokenSpecificAccess::Impersonate,
-                                TokenSpecificAccess::Query,
-                                TokenSpecificAccess::QuerySource,
-                                TokenSpecificAccess::AdjustPrivileges,
-                                TokenSpecificAccess::AdjustGroups,
-                                TokenSpecificAccess::AdjustDefault,
-                                TokenSpecificAccess::AdjustSessionID,
-                                TokenSpecificAccess::AllAccessP,
-                                TokenSpecificAccess::AllAccess,
-                                TokenSpecificAccess::Read,
-                                TokenSpecificAccess::Write,
-                                TokenSpecificAccess::Execute },
+      tokenStandardAccesses{ TokenStandardAccess::Delete,
+                             TokenStandardAccess::ReadControl,
+                             TokenStandardAccess::WriteDac,
+                             TokenStandardAccess::WriteOwner },
+      tokenSpecificAccesses{ TokenSpecificAccess::Default,
+                             TokenSpecificAccess::AssignPrimary,
+                             TokenSpecificAccess::Duplicate,
+                             TokenSpecificAccess::Impersonate,
+                             TokenSpecificAccess::Query,
+                             TokenSpecificAccess::QuerySource,
+                             TokenSpecificAccess::AdjustPrivileges,
+                             TokenSpecificAccess::AdjustGroups,
+                             TokenSpecificAccess::AdjustDefault,
+                             TokenSpecificAccess::AdjustSessionID,
+                             TokenSpecificAccess::AllAccessP,
+                             TokenSpecificAccess::AllAccess,
+                             TokenSpecificAccess::Read,
+                             TokenSpecificAccess::Write,
+                             TokenSpecificAccess::Execute },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(tokenStandardAccessFlags.size(), tokenSpecificAccessFlags.size()) }
+      maxSize{ std::max(tokenStandardAccesses.size(), tokenSpecificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -61,8 +59,8 @@ void System::ThreadTokenTesting::MainTest()
 
 bool System::ThreadTokenTesting::RandomShuffleFlags()
 {
-    shuffle(tokenStandardAccessFlags.begin(), tokenStandardAccessFlags.end(), randomEngine);
-    shuffle(tokenSpecificAccessFlags.begin(), tokenSpecificAccessFlags.end(), randomEngine);
+    shuffle(tokenStandardAccesses.begin(), tokenStandardAccesses.end(), randomEngine);
+    shuffle(tokenSpecificAccesses.begin(), tokenSpecificAccesses.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -71,32 +69,10 @@ bool System::ThreadTokenTesting::RandomShuffleFlags()
 
 void System::ThreadTokenTesting::ThreadTest()
 {
-    auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
-    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+    const auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoThreadTest, mutexHandle);
 
-    ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
-
-    ASSERT_TRUE(ImpersonateThreadSelf(SecurityImpersonation));
-
-    WindowsDWord threadID{ 0 };
-    auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, this, ThreadCreation::Default, &threadID);
-
-    ASSERT_TRUE(IsThreadHandleValid(threadHandle));
-    ASSERT_LESS(0u, threadID);
-
-    for (auto index = 0u; index < maxSize; ++index)
-    {
-        auto tokenStandardAccess = tokenStandardAccessFlags.at(index % tokenStandardAccessFlags.size());
-        auto tokenSpecificAccess = tokenSpecificAccessFlags.at(index % tokenSpecificAccessFlags.size());
-
-        TokenTest(threadHandle, tokenStandardAccess, tokenSpecificAccess);
-    }
-
-    ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
-    ASSERT_TRUE(WaitForSystemThread(threadHandle));
-
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
-    ASSERT_TRUE(CloseSystemMutex(mutexHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
 }
 
 void System::ThreadTokenTesting::TokenTest(ThreadHandle threadHandle, TokenStandardAccess tokenStandardAccess, TokenSpecificAccess tokenSpecificAccess)
@@ -118,5 +94,43 @@ System::WindowsDWord System::ThreadTokenTesting::ThreadStartRoutine(void* thread
 
     MAYBE_UNUSED const auto releaseResult = ReleaseSystemMutex(threadParameter);
 
-    return 1u;
+    return exitFunctionCode;
+}
+
+void System::ThreadTokenTesting::DoThreadTest(ThreadHandle mutexHandle)
+{
+    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+
+    ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
+
+    ASSERT_TRUE(ImpersonateThreadSelf(SecurityImpersonation));
+
+    WindowsDWord threadID{ 0 };
+    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, this, ThreadCreation::Default, &threadID);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(TokenThreadTest, threadHandle, threadID, mutexHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+}
+
+void System::ThreadTokenTesting::TokenThreadTest(ThreadHandle threadHandle, WindowsDWord threadID, ThreadHandle mutexHandle)
+{
+    ASSERT_TRUE(IsThreadHandleValid(threadHandle));
+    ASSERT_LESS(0u, threadID);
+
+    for (auto index = 0u; index < maxSize; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(DoTokenThreadTest, index, threadHandle);
+    }
+
+    ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
+    ASSERT_TRUE(WaitForSystemThread(threadHandle));
+}
+
+void System::ThreadTokenTesting::DoTokenThreadTest(size_t index, ThreadHandle threadHandle)
+{
+    const auto tokenStandardAccess = tokenStandardAccesses.at(index % tokenStandardAccesses.size());
+    const auto tokenSpecificAccess = tokenSpecificAccesses.at(index % tokenSpecificAccesses.size());
+
+    ASSERT_NOT_THROW_EXCEPTION_3(TokenTest, threadHandle, tokenStandardAccess, tokenSpecificAccess);
 }

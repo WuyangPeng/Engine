@@ -1,19 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:48)
+///	引擎测试版本：0.9.0.1 (2023/01/25 20:35)
 
 #include "ConvertToAutoInheritPrivateObjectSecurityTesting.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/AccessCheckFlags.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -38,24 +33,30 @@ void System::ConvertToAutoInheritPrivateObjectSecurityTesting::MainTest()
 
 void System::ConvertToAutoInheritPrivateObjectSecurityTesting::ConvertToAutoInheritPrivateObjectSecurityTest()
 {
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    const auto tokenHandle = OpenProcessToken();
 
-    AccessCheckGenericMapping genericMapping{};
-    genericMapping.GenericRead = EnumCastUnderlying(AccessGenericMask::FileGenericRead);
-    genericMapping.GenericWrite = EnumCastUnderlying(AccessGenericMask::FileGenericWrite);
-    genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
-    genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoConvertToAutoInheritPrivateObjectSecurityTest, tokenHandle);
 
-    SecurityDescriptorPtr descriptor0{ nullptr };
-    ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, nullptr, &descriptor0, false, tokenHandle, &genericMapping));
-    ASSERT_UNEQUAL_NULL_PTR(descriptor0);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTokenTest, tokenHandle);
+}
 
-    SecurityDescriptorPtr newDescriptor{ nullptr };
-    ASSERT_TRUE(SystemConvertToAutoInheritPrivateObjectSecurity(nullptr, descriptor0, &newDescriptor, nullptr, false, &genericMapping));
-    ASSERT_UNEQUAL_NULL_PTR(newDescriptor);
+void System::ConvertToAutoInheritPrivateObjectSecurityTesting::DoConvertToAutoInheritPrivateObjectSecurityTest(WindowsHandle tokenHandle)
+{
+    SecurityDescriptorPtr descriptor{ nullptr };
+    CreatePrivateObjectSecurity(tokenHandle, descriptor);
 
-    ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&descriptor0));
-    ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&newDescriptor));
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(ConvertTest, descriptor);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyPrivateObjectSecurityTest, descriptor);
+}
+
+void System::ConvertToAutoInheritPrivateObjectSecurityTesting::ConvertTest(SecurityDescriptorPtr& descriptor)
+{
+    SecurityDescriptorPtr convertDescriptor{ nullptr };
+    auto genericMapping = GetAccessCheckGenericMapping();
+
+    ASSERT_TRUE(SystemConvertToAutoInheritPrivateObjectSecurity(nullptr, descriptor, &convertDescriptor, nullptr, false, &genericMapping));
+    ASSERT_UNEQUAL_NULL_PTR(convertDescriptor);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyPrivateObjectSecurityTest, convertDescriptor);
 }

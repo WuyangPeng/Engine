@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:54)
+///	引擎测试版本：0.9.0.1 (2023/02/01 13:37)
 
 #include "CreateProcessTesting.h"
 #include "System/Threading/Flags/ProcessFlags.h"
@@ -16,38 +16,35 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using namespace std::literals;
-
 System::CreateProcessTesting::CreateProcessTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      processCreationFlags{ ProcessCreation::DebugProcess,
-                            ProcessCreation::DebugOnlyThisProcess,
-                            ProcessCreation::CreateSuspended,
-                            ProcessCreation::DetachedProcess,
-                            ProcessCreation::CreateNewConsole,
-                            ProcessCreation::NormalPriorityClass,
-                            ProcessCreation::IdlePriorityClass,
-                            ProcessCreation::HighPriorityClass,
-                            ProcessCreation::RealTimePriorityClass,
-                            ProcessCreation::CreateNewProcessGroup,
-                            ProcessCreation::CreateUnicodeEnvironment, ProcessCreation::CreateSeparateWowVdm,
-                            ProcessCreation::CreateSharedWowVdm,
-                            ProcessCreation::CreateForcedos,
-                            ProcessCreation::BelowNormalPriorityClass,
-                            ProcessCreation::AboveNormalPriorityClass,
-                            ProcessCreation::InheritParentAffinity,
-                            ProcessCreation::InheritCallerPriority,
-                            ProcessCreation::ProcessModeBackgroundBegin,
-                            ProcessCreation::ProcessModeBackgroundEnd,
-                            ProcessCreation::CreateBreakawayFromJob,
-                            ProcessCreation::CreatePreserveCodeAuthzLevel,
-                            ProcessCreation::CreateDefaultErrorMode,
-                            ProcessCreation::CreateNoWindow,
-                            ProcessCreation::ProfileUser,
-                            ProcessCreation::ProfileKernel,
-                            ProcessCreation::ProfileServer,
-                            ProcessCreation::CreateIgnoreSystemDefault },
-      processFullPath{ GetEngineeringDirectory() + SYSTEM_TEXT("ProcessTest"s) + GetEngineeringSuffix() + GetEngineeringExeSuffix() }
+      processCreations{ ProcessCreation::DebugProcess,
+                        ProcessCreation::DebugOnlyThisProcess,
+                        ProcessCreation::CreateSuspended,
+                        ProcessCreation::DetachedProcess,
+                        ProcessCreation::CreateNewConsole,
+                        ProcessCreation::NormalPriorityClass,
+                        ProcessCreation::IdlePriorityClass,
+                        ProcessCreation::HighPriorityClass,
+                        ProcessCreation::RealTimePriorityClass,
+                        ProcessCreation::CreateNewProcessGroup,
+                        ProcessCreation::CreateUnicodeEnvironment, ProcessCreation::CreateSeparateWowVdm,
+                        ProcessCreation::CreateSharedWowVdm,
+                        ProcessCreation::CreateForcedos,
+                        ProcessCreation::BelowNormalPriorityClass,
+                        ProcessCreation::AboveNormalPriorityClass,
+                        ProcessCreation::InheritParentAffinity,
+                        ProcessCreation::InheritCallerPriority,
+                        ProcessCreation::ProcessModeBackgroundBegin,
+                        ProcessCreation::ProcessModeBackgroundEnd,
+                        ProcessCreation::CreateBreakawayFromJob,
+                        ProcessCreation::CreatePreserveCodeAuthzLevel,
+                        ProcessCreation::CreateDefaultErrorMode,
+                        ProcessCreation::CreateNoWindow,
+                        ProcessCreation::ProfileUser,
+                        ProcessCreation::ProfileKernel,
+                        ProcessCreation::ProfileServer,
+                        ProcessCreation::CreateIgnoreSystemDefault }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -66,21 +63,25 @@ void System::CreateProcessTesting::MainTest()
 
 void System::CreateProcessTesting::ProcessTest()
 {
-    for (auto processCreation : processCreationFlags)
+    for (auto processCreation : processCreations)
     {
-        ProcessStartupinfo startupInfo{};
-        ProcessInformation processInformation{};
-
-        ASSERT_TRUE(CreateSystemProcess(processFullPath.c_str(), nullptr, nullptr, nullptr, true, processCreation, nullptr, nullptr, &startupInfo, &processInformation));
-
-        if (processCreation == ProcessCreation::CreateSuspended)
-        {
-            ASSERT_EQUAL(ResumeSystemThread(processInformation.hThread), 1u);
-        }
-
-        ASSERT_EQUAL(GetProcessHandleID(processInformation.hProcess), processInformation.dwProcessId);
-
-        ASSERT_TRUE(CloseSystemThread(processInformation.hThread));
-        ASSERT_TRUE(CloseSystemProcess(processInformation.hProcess));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoProcessTest, processCreation);
     }
+}
+
+void System::CreateProcessTesting::DoProcessTest(ProcessCreation processCreation)
+{
+    ProcessStartupinfo startupInfo{};
+    ProcessInformation processInformation{};
+
+    ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, processCreation, nullptr, nullptr, &startupInfo, &processInformation));
+
+    if (processCreation == ProcessCreation::CreateSuspended)
+    {
+        ASSERT_EQUAL(ResumeSystemThread(processInformation.hThread), 1u);
+    }
+
+    ASSERT_EQUAL(GetProcessHandleID(processInformation.hProcess), processInformation.dwProcessId);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTest, processInformation);
 }

@@ -1,55 +1,49 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:43)
+///	引擎测试版本：0.9.0.1 (2023/01/29 11:37)
 
 #include "DuplicateTokenTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Security/SecurityBase.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/TemplateTools/MaxElement.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
-using std::array;
-using std::vector;
-
 System::DuplicateTokenTesting::DuplicateTokenTesting(const OStreamShared& osPtr)
     : ParentType{ osPtr },
-      securityImpersonationLevel{ SecurityAnonymous, SecurityIdentification, SecurityImpersonation, SecurityDelegation },
-      securityTokenType{ TokenPrimary, TokenImpersonation },
-      tokenStandardAccessFlags{ TokenStandardAccess::Default,
-                                TokenStandardAccess::Delete,
-                                TokenStandardAccess::ReadControl,
-                                TokenStandardAccess::WriteDac,
-                                TokenStandardAccess::WriteOwner },
-      tokenSpecificAccessFlags{ TokenSpecificAccess::Default,
-                                TokenSpecificAccess::AssignPrimary,
-                                TokenSpecificAccess::Duplicate,
-                                TokenSpecificAccess::Impersonate,
-                                TokenSpecificAccess::Query,
-                                TokenSpecificAccess::QuerySource,
-                                TokenSpecificAccess::AdjustPrivileges,
-                                TokenSpecificAccess::AdjustGroups,
-                                TokenSpecificAccess::AdjustDefault,
-                                TokenSpecificAccess::AdjustSessionID,
-                                TokenSpecificAccess::AllAccessP,
-                                TokenSpecificAccess::AllAccess,
-                                TokenSpecificAccess::Read,
-                                TokenSpecificAccess::Write,
-                                TokenSpecificAccess::Execute },
+      securityImpersonationLevels{ SecurityAnonymous,
+                                   SecurityIdentification,
+                                   SecurityImpersonation,
+                                   SecurityDelegation },
+      securityTokenTypes{ TokenPrimary, TokenImpersonation },
+      tokenStandardAccesses{ TokenStandardAccess::Default,
+                             TokenStandardAccess::Delete,
+                             TokenStandardAccess::ReadControl,
+                             TokenStandardAccess::WriteDac,
+                             TokenStandardAccess::WriteOwner },
+      tokenSpecificAccesses{ TokenSpecificAccess::Default,
+                             TokenSpecificAccess::AssignPrimary,
+                             TokenSpecificAccess::Duplicate,
+                             TokenSpecificAccess::Impersonate,
+                             TokenSpecificAccess::Query,
+                             TokenSpecificAccess::QuerySource,
+                             TokenSpecificAccess::AdjustPrivileges,
+                             TokenSpecificAccess::AdjustGroups,
+                             TokenSpecificAccess::AdjustDefault,
+                             TokenSpecificAccess::AdjustSessionID,
+                             TokenSpecificAccess::AllAccessP,
+                             TokenSpecificAccess::AllAccess,
+                             TokenSpecificAccess::Read,
+                             TokenSpecificAccess::Write,
+                             TokenSpecificAccess::Execute },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ CoreTools::MaxElement({ securityImpersonationLevel.size(), securityTokenType.size(), tokenStandardAccessFlags.size(), tokenSpecificAccessFlags.size() }) }
+      maxSize{ CoreTools::MaxElement({ securityImpersonationLevels.size(), securityTokenTypes.size(), tokenStandardAccesses.size(), tokenSpecificAccesses.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -68,10 +62,10 @@ void System::DuplicateTokenTesting::MainTest()
 
 bool System::DuplicateTokenTesting::RandomShuffleFlags()
 {
-    shuffle(securityImpersonationLevel.begin(), securityImpersonationLevel.end(), randomEngine);
-    shuffle(securityTokenType.begin(), securityTokenType.end(), randomEngine);
-    shuffle(tokenStandardAccessFlags.begin(), tokenStandardAccessFlags.end(), randomEngine);
-    shuffle(tokenSpecificAccessFlags.begin(), tokenSpecificAccessFlags.end(), randomEngine);
+    shuffle(securityImpersonationLevels.begin(), securityImpersonationLevels.end(), randomEngine);
+    shuffle(securityTokenTypes.begin(), securityTokenTypes.end(), randomEngine);
+    shuffle(tokenStandardAccesses.begin(), tokenStandardAccesses.end(), randomEngine);
+    shuffle(tokenSpecificAccesses.begin(), tokenSpecificAccesses.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(DuplicateTokenTest);
 
@@ -80,27 +74,44 @@ bool System::DuplicateTokenTesting::RandomShuffleFlags()
 
 void System::DuplicateTokenTesting::DuplicateTokenTest()
 {
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    const auto tokenHandle = OpenProcessToken();
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoDuplicateTokenTest, tokenHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseTokenTest, tokenHandle);
+}
+
+void System::DuplicateTokenTesting::DoDuplicateTokenTest(WindowsHandle tokenHandle)
+{
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto securityImpersonation = securityImpersonationLevel.at(index % securityImpersonationLevel.size());
-        auto securityToken = securityTokenType.at(index % securityTokenType.size());
-        auto tokenStandardAccess = tokenStandardAccessFlags.at(index % tokenStandardAccessFlags.size());
-        auto tokenSpecificAccess = tokenSpecificAccessFlags.at(index % tokenSpecificAccessFlags.size());
+        const auto securityImpersonation = securityImpersonationLevels.at(index % securityImpersonationLevels.size());
 
-        WindowsHandle duplicateTokenHandle{ nullptr };
-        ASSERT_TRUE(DuplicateSystemToken(tokenHandle, securityImpersonation, &duplicateTokenHandle));
-        ASSERT_UNEQUAL_NULL_PTR(duplicateTokenHandle);
-        ASSERT_TRUE(CloseTokenHandle(duplicateTokenHandle));
+        ASSERT_NOT_THROW_EXCEPTION_2(DuplicateTest, tokenHandle, securityImpersonation);
 
-        WindowsHandle newToken{ nullptr };
-        WindowSecurityAttributes tokenAttributes{};
-        ASSERT_TRUE(DuplicateSystemToken(tokenHandle, tokenStandardAccess, tokenSpecificAccess, &tokenAttributes, securityImpersonation, securityToken, &newToken));
-        ASSERT_UNEQUAL_NULL_PTR(newToken);
-        ASSERT_TRUE(CloseTokenHandle(newToken));
+        ASSERT_NOT_THROW_EXCEPTION_3(WindowSecurityAttributesDuplicateTest, index, tokenHandle, securityImpersonation);
     }
+}
 
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+void System::DuplicateTokenTesting::DuplicateTest(WindowsHandle tokenHandle, SecurityImpersonationLevel securityImpersonation)
+{
+    WindowsHandle duplicateTokenHandle{ nullptr };
+    ASSERT_TRUE(DuplicateSystemToken(tokenHandle, securityImpersonation, &duplicateTokenHandle));
+    ASSERT_UNEQUAL_NULL_PTR(duplicateTokenHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseTokenTest, duplicateTokenHandle);
+}
+
+void System::DuplicateTokenTesting::WindowSecurityAttributesDuplicateTest(size_t index, WindowsHandle tokenHandle, SecurityImpersonationLevel securityImpersonation)
+{
+    const auto securityToken = securityTokenTypes.at(index % securityTokenTypes.size());
+    const auto tokenStandardAccess = tokenStandardAccesses.at(index % tokenStandardAccesses.size());
+    const auto tokenSpecificAccess = tokenSpecificAccesses.at(index % tokenSpecificAccesses.size());
+
+    WindowsHandle duplicateTokenHandle{ nullptr };
+    WindowSecurityAttributes tokenAttributes{};
+    ASSERT_TRUE(DuplicateSystemToken(tokenHandle, tokenStandardAccess, tokenSpecificAccess, &tokenAttributes, securityImpersonation, securityToken, &duplicateTokenHandle));
+    ASSERT_UNEQUAL_NULL_PTR(duplicateTokenHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseTokenTest, duplicateTokenHandle);
 }

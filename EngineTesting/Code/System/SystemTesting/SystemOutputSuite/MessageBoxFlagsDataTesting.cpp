@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/07 19:24)
+///	引擎测试版本：0.9.0.1 (2023/01/30 0:01)
 
 #include "MessageBoxFlagsDataTesting.h"
 #include "System/Helper/EnumCast.h"
@@ -87,26 +87,31 @@ void System::MessageBoxFlagsDataTesting::FlagsTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        const auto typeFlag = typeFlags.at(index % typeFlags.size());
-        const auto iconFlag = iconFlags.at(index % iconFlags.size());
-        const auto defaultFlag = defaultFlags.at(index % defaultFlags.size());
-        const auto modeFlag = modeFlags.at(index % modeFlags.size());
-        const auto miscFlag = miscFlags.at(index % miscFlags.size());
-
-        const auto flag = EnumCastUnderlying<WindowsUInt>(typeFlag) |
-                          EnumCastUnderlying<WindowsUInt>(iconFlag) |
-                          EnumCastUnderlying<WindowsUInt>(defaultFlag) |
-                          EnumCastUnderlying<WindowsUInt>(modeFlag) |
-                          EnumCastUnderlying<WindowsUInt>(miscFlag);
-
-        const MessageBoxFlagsData flagsData{ typeFlag, iconFlag, defaultFlag, modeFlag, miscFlag };
-
-        ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxType(), typeFlag);
-        ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxIcon(), iconFlag);
-        ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxDefault(), defaultFlag);
-        ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxMode(), modeFlag);
-        ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxMisc(), miscFlag);
-
-        ASSERT_EQUAL(flagsData.GetFlag(), flag);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoFlagsTest, index);
     }
+}
+
+void System::MessageBoxFlagsDataTesting::DoFlagsTest(size_t index)
+{
+    const auto typeFlag = typeFlags.at(index % typeFlags.size());
+    const auto iconFlag = iconFlags.at(index % iconFlags.size());
+    const auto defaultFlag = defaultFlags.at(index % defaultFlags.size());
+    const auto modeFlag = modeFlags.at(index % modeFlags.size());
+    const auto miscFlag = miscFlags.at(index % miscFlags.size());
+
+    const auto flag = EnumCastUnderlying<WindowsUInt>(typeFlag) |
+                      EnumCastUnderlying<WindowsUInt>(iconFlag) |
+                      EnumCastUnderlying<WindowsUInt>(defaultFlag) |
+                      EnumCastUnderlying<WindowsUInt>(modeFlag) |
+                      EnumCastUnderlying<WindowsUInt>(miscFlag);
+
+    const MessageBoxFlagsData flagsData{ typeFlag, iconFlag, defaultFlag, modeFlag, miscFlag };
+
+    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxType(), typeFlag);
+    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxIcon(), iconFlag);
+    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxDefault(), defaultFlag);
+    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxMode(), modeFlag);
+    ASSERT_ENUM_EQUAL(flagsData.GetMessageBoxMisc(), miscFlag);
+
+    ASSERT_EQUAL(flagsData.GetFlag(), flag);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:15)
+///	引擎版本：0.9.0.1 (2023/02/02 14:40)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
 #define SYSTEM_WINDOWS_WINDOWS_SYSTEM_H
@@ -18,10 +18,9 @@
 
 #include <iostream>
 
+// 系统相关函数。
 namespace System
 {
-    // 系统相关函数。
-
     void SYSTEM_DEFAULT_DECLARE GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr nodeNumber) noexcept;

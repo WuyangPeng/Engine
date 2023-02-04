@@ -1,23 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:49)
+///	引擎测试版本：0.9.0.1 (2023/01/25 21:07)
 
 #include "CreatePrivateObjectSecurityTesting.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/AccessCheckFlags.h"
-#include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityBase.h"
-#include "System/Security/Using/CreateSecurityUsing.h"
-#include "System/Security/Using/SecurityBaseUsing.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -26,10 +17,7 @@ using namespace std::literals;
 
 System::CreatePrivateObjectSecurityTesting::CreatePrivateObjectSecurityTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformationFlags{ SecurityRequestedInformation::Owner,
-                                         SecurityRequestedInformation::Group,
-                                         SecurityRequestedInformation::Dacl,
-                                         SecurityRequestedInformation::Label }
+      setFileName{ SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -48,31 +36,33 @@ void System::CreatePrivateObjectSecurityTesting::MainTest()
 
 void System::CreatePrivateObjectSecurityTesting::CreatePrivateObjectSecurityTest()
 {
-    const auto setFileName = SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s);
+    const auto tokenHandle = OpenProcessToken();
 
-    const auto tokenIsElevated = IsSystemTokenElevated();
+    ASSERT_NOT_THROW_EXCEPTION_1(DoCreatePrivateObjectSecurityTest, tokenHandle);
 
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTokenTest, tokenHandle);
+}
 
-    AccessCheckGenericMapping genericMapping{};
-    genericMapping.GenericRead = EnumCastUnderlying(AccessGenericMask::FileGenericRead);
-    genericMapping.GenericWrite = EnumCastUnderlying(AccessGenericMask::FileGenericWrite);
-    genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
-    genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
+void System::CreatePrivateObjectSecurityTesting::DoCreatePrivateObjectSecurityTest(WindowsHandle tokenHandle)
+{
+    auto genericMapping = GetAccessCheckGenericMapping();
 
-    SecurityDescriptorPtr newDescriptor{ nullptr };
-    ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, nullptr, &newDescriptor, false, tokenHandle, &genericMapping));
-    ASSERT_UNEQUAL_NULL_PTR(newDescriptor);
+    SecurityDescriptorPtr descriptor{ nullptr };
+    ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, nullptr, &descriptor, false, tokenHandle, &genericMapping));
+    ASSERT_UNEQUAL_NULL_PTR(descriptor);
 
-    if (tokenIsElevated != gFalse)
+    ASSERT_NOT_THROW_EXCEPTION_1(SetSystemFileSecurityTest, descriptor);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyPrivateObjectSecurityTest, descriptor);
+}
+
+void System::CreatePrivateObjectSecurityTesting::SetSystemFileSecurityTest(SecurityDescriptorPtr newDescriptor)
+{
+    if (GetTokenIsElevated())
     {
-        for (auto securityRequestedInformation : securityRequestedInformationFlags)
+        for (auto securityRequestedInformation : *this)
         {
-            ASSERT_TRUE(SetSystemFileSecurity(setFileName.c_str(), securityRequestedInformation, newDescriptor));
+            ASSERT_TRUE(SetSystemFileSecurity(setFileName, securityRequestedInformation, newDescriptor));
         }
     }
-
-    ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&newDescriptor));
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:15)
+///	引擎版本：0.9.0.1 (2023/02/02 14:41)
 
 #include "System/SystemExport.h"
 
@@ -15,7 +15,24 @@
 
 #include <array>
 
-using std::array;
+namespace System
+{
+    bool GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
+    {
+        std::array<TChar, gMaxPath> name{};
+
+        if (getWindowsInformationFunction != nullptr && getWindowsInformationFunction(hwnd, name.data(), gMaxPath) == 0)
+        {
+            result.clear();
+            return false;
+        }
+        else
+        {
+            result = name.data();
+            return true;
+        }
+    }
+}
 
 bool System::AdjustSystemWindowRect(WindowsRect* rect, WindowsStyles styles) noexcept
 {
@@ -47,7 +64,17 @@ System::WindowsHWnd System::CreateSystemWindow(const String& className,
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    return ::CreateWindow(className.c_str(), windowsName.c_str(), EnumCastUnderlying(styles), x, y, rect.right - rect.left + 1, rect.bottom - rect.top + 1, parent, menu, instance, nullptr);
+    return ::CreateWindow(className.c_str(),
+                          windowsName.c_str(),
+                          EnumCastUnderlying(styles),
+                          x,
+                          y,
+                          rect.right - rect.left + 1,
+                          rect.bottom - rect.top + 1,
+                          parent,
+                          menu,
+                          instance,
+                          nullptr);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -64,23 +91,6 @@ System::WindowsHWnd System::CreateSystemWindow(const String& className,
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
-{
-    constexpr auto maxCount = 256;
-    array<TChar, maxCount> name{};
-
-    if (getWindowsInformationFunction != nullptr && getWindowsInformationFunction(hwnd, name.data(), maxCount) == 0)
-    {
-        result.clear();
-        return false;
-    }
-    else
-    {
-        result = name.data();
-        return true;
-    }
 }
 
 bool System::GetSystemClassName(WindowsHWnd hwnd, String& className)
@@ -134,7 +144,7 @@ bool System::RemoveMenuCloseButton(WindowsHWnd hwnd) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    auto hmenu = GetWindowSystemMenu(hwnd);
+    const auto hmenu = GetWindowSystemMenu(hwnd);
     if (hmenu != nullptr && RemoveSystemMenu(hmenu, SystemMenuCommand::Close, MenuItem::ByCommand))
         return true;
     else

@@ -110,7 +110,7 @@ bool System::CloseSystemFile(WindowsHandle file) noexcept
 
 bool System::IsFileHandleValid(WindowsHandle file) noexcept
 {
-    if (file != nullptr && file != gInvalidHandleValue)
+    if (file != nullptr && file != invalidHandleValue)
         return true;
     else
         return false;

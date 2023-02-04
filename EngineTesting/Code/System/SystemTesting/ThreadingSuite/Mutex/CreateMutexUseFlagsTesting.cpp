@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:33)
+///	引擎测试版本：0.9.0.1 (2023/02/01 10:05)
 
 #include "CreateMutexUseFlagsTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -21,17 +21,17 @@
 
 System::CreateMutexUseFlagsTesting::CreateMutexUseFlagsTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      createMutexFlags{ MutexCreate::Default,
-                        MutexCreate::InitialOwner },
-      mutexSpecificAccessFlags{ MutexSpecificAccess::Default,
-                                MutexSpecificAccess::ModifyState,
-                                MutexSpecificAccess::AllAccess },
-      mutexStandardAccessFlags{ MutexStandardAccess::Delete,
-                                MutexStandardAccess::ReadControl,
-                                MutexStandardAccess::WriteDac,
-                                MutexStandardAccess::WriteOwner,
-                                MutexStandardAccess::Synchronize },
-      maxSize{ CoreTools::MaxElement<size_t>({ createMutexFlags.size(), mutexSpecificAccessFlags.size(), mutexStandardAccessFlags.size() }) }
+      createMutexs{ MutexCreate::Default,
+                    MutexCreate::InitialOwner },
+      mutexSpecificAccesses{ MutexSpecificAccess::Default,
+                             MutexSpecificAccess::ModifyState,
+                             MutexSpecificAccess::AllAccess },
+      mutexStandardAccesses{ MutexStandardAccess::Delete,
+                             MutexStandardAccess::ReadControl,
+                             MutexStandardAccess::WriteDac,
+                             MutexStandardAccess::WriteOwner,
+                             MutexStandardAccess::Synchronize },
+      maxSize{ CoreTools::MaxElement<size_t>({ createMutexs.size(), mutexSpecificAccesses.size(), mutexStandardAccesses.size() }) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -50,9 +50,9 @@ void System::CreateMutexUseFlagsTesting::MainTest()
 
 bool System::CreateMutexUseFlagsTesting::RandomShuffleFlags()
 {
-    shuffle(mutexStandardAccessFlags.begin(), mutexStandardAccessFlags.end(), randomEngine);
-    shuffle(mutexSpecificAccessFlags.begin(), mutexSpecificAccessFlags.end(), randomEngine);
-    shuffle(createMutexFlags.begin(), createMutexFlags.end(), randomEngine);
+    shuffle(mutexStandardAccesses.begin(), mutexStandardAccesses.end(), randomEngine);
+    shuffle(mutexSpecificAccesses.begin(), mutexSpecificAccesses.end(), randomEngine);
+    shuffle(createMutexs.begin(), createMutexs.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMutexTest);
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMutexUseNameTest);
@@ -64,30 +64,40 @@ void System::CreateMutexUseFlagsTesting::CreateMutexTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto mutexStandardAccess = mutexStandardAccessFlags.at(index % mutexStandardAccessFlags.size());
-        auto mutexSpecificAccess = mutexSpecificAccessFlags.at(index % mutexSpecificAccessFlags.size());
-        auto createMutex = createMutexFlags.at(index % createMutexFlags.size());
-
-        auto mutexHandle = CreateSystemMutex(nullptr, nullptr, createMutex, mutexStandardAccess, mutexSpecificAccess);
-        ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
-
-        ASSERT_TRUE(CloseSystemMutex(mutexHandle));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateMutexTest, index);
     }
+}
+
+void System::CreateMutexUseFlagsTesting::DoCreateMutexTest(size_t index)
+{
+    const auto mutexStandardAccess = mutexStandardAccesses.at(index % mutexStandardAccesses.size());
+    const auto mutexSpecificAccess = mutexSpecificAccesses.at(index % mutexSpecificAccesses.size());
+    const auto createMutex = createMutexs.at(index % createMutexs.size());
+
+    const auto mutexHandle = CreateSystemMutex(nullptr, nullptr, createMutex, mutexStandardAccess, mutexSpecificAccess);
+    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
 }
 
 void System::CreateMutexUseFlagsTesting::CreateMutexUseNameTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto mutexName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
-
-        auto mutexStandardAccess = mutexStandardAccessFlags.at(index % mutexStandardAccessFlags.size());
-        auto mutexSpecificAccess = mutexSpecificAccessFlags.at(index % mutexSpecificAccessFlags.size());
-        auto createMutex = createMutexFlags.at(index % createMutexFlags.size());
-
-        auto mutexHandle = CreateSystemMutex(nullptr, mutexName.c_str(), createMutex, mutexStandardAccess, mutexSpecificAccess);
-        ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
-
-        ASSERT_TRUE(CloseSystemMutex(mutexHandle));
+        DoCreateMutexUseNameTest(index);
     }
+}
+
+void System::CreateMutexUseFlagsTesting::DoCreateMutexUseNameTest(size_t index)
+{
+    const auto mutexName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
+
+    const auto mutexStandardAccess = mutexStandardAccesses.at(index % mutexStandardAccesses.size());
+    const auto mutexSpecificAccess = mutexSpecificAccesses.at(index % mutexSpecificAccesses.size());
+    const auto createMutex = createMutexs.at(index % createMutexs.size());
+
+    const auto mutexHandle = CreateSystemMutex(nullptr, mutexName.c_str(), createMutex, mutexStandardAccess, mutexSpecificAccess);
+    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
 }

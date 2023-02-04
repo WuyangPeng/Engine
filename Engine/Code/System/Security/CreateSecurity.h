@@ -26,7 +26,7 @@ namespace System
                                                                 SecurityDescriptorPtr securityDescriptor,
                                                                 WindowsDWord length,
                                                                 WindowsDWordPtr lengthNeeded) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemFileSecurity(const TChar* fileName,
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemFileSecurity(const String& fileName,
                                                                 SecurityRequestedInformation securityInformation,
                                                                 SecurityDescriptorPtr securityDescriptor) noexcept;
 

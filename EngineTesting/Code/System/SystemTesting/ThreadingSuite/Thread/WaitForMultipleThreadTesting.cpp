@@ -15,8 +15,6 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
-
 System::WaitForMultipleThreadTesting::WaitForMultipleThreadTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -32,41 +30,39 @@ void System::WaitForMultipleThreadTesting::DoRunUnitTest()
 
 void System::WaitForMultipleThreadTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(WaitMultipleObjectsTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WaitMultipleObjectsTest);
 }
 
-bool System::WaitForMultipleThreadTesting::WaitMultipleObjectsTest()
+void System::WaitForMultipleThreadTesting::WaitMultipleObjectsTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(WaitMultipleObjects0Test);
     ASSERT_NOT_THROW_EXCEPTION_0(WaitMultipleObjects1Test);
     ASSERT_NOT_THROW_EXCEPTION_0(WaitMultipleObjects2Test);
-
-    return true;
 }
 
 void System::WaitForMultipleThreadTesting::WaitMultipleObjects0Test()
 {
-    auto threadHandle = CreateThread();
+    const auto threadHandle = CreateThread();
 
     const auto flag = WaitForSystemThread(boost::numeric_cast<WindowsDWord>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite));
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 
-    CloseThread(threadHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThread, threadHandle);
 }
 
 void System::WaitForMultipleThreadTesting::WaitMultipleObjects1Test()
 {
-    auto threadHandle = CreateThread();
+    const auto threadHandle = CreateThread();
 
     const auto flag = WaitForSystemThread(boost::numeric_cast<WindowsDWord>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), true);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
 
-    CloseThread(threadHandle);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThread, threadHandle);
 }
 
 void System::WaitForMultipleThreadTesting::WaitMultipleObjects2Test()
 {
-    auto threadHandle = CreateThread();
+    const auto threadHandle = CreateThread();
 
     const auto flag = WaitForSystemThread(boost::numeric_cast<WindowsDWord>(threadHandle.size()), threadHandle.data(), true, EnumCastUnderlying(MutexWait::Infinite), false);
     ASSERT_ENUM_UNEQUAL(flag, MutexWaitReturn::Failed);
@@ -82,7 +78,7 @@ System::WaitForMultipleThreadTesting::Container System::WaitForMultipleThreadTes
     for (auto i = 0; i < mutexSize; ++i)
     {
         WindowsDWord threadId{ 0 };
-        auto handle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
+        const auto handle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
 
         ASSERT_TRUE(IsThreadHandleValid(handle));
         ASSERT_LESS(0u, threadId);
@@ -97,7 +93,7 @@ void System::WaitForMultipleThreadTesting::CloseThread(const Container& threadHa
 {
     for (auto handle : threadHandle)
     {
-        ASSERT_TRUE(CloseSystemThread(handle));
+        ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, handle);
     }
 }
 

@@ -508,6 +508,24 @@
     <Filter Include="SecuritySuite 源文件\LookupPrivilege">
       <UniqueIdentifier>{0bebd630-2020-40f0-adac-fc2a038db5a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThreadingSuite 头文件\ConditionVariable\Data">
+      <UniqueIdentifier>{7abfac79-33af-48ed-9433-71dabc626410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadingSuite 源文件\ConditionVariable\Data">
+      <UniqueIdentifier>{cebb3c7e-2941-4c34-a084-03bbd753f6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 头文件\Engineering">
+      <UniqueIdentifier>{95e96a9d-a48a-4040-81e7-54aef7ea76f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件\Engineering">
+      <UniqueIdentifier>{8d380c89-a1cc-45be-b5da-472dfa34e7e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 头文件\WindowsCreate">
+      <UniqueIdentifier>{c56ccf7d-f1ba-4c00-ac94-ac8634e642d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件\WindowsCreate">
+      <UniqueIdentifier>{12512d5f-4ed9-451a-902e-ff48749ce035}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -703,7 +721,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\DeltaTimeValueDataTesting.h">
       <Filter>TimeSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\TimeOfDayDataTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\CurrentDeltaTimeTesting.h">
       <Filter>TimeSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\TimeSuite.h">
@@ -922,10 +940,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAcl\InitializeAclTesting.h">
       <Filter>SecuritySuite 头文件\SecurityAcl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTesting.h">
-      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTestingBase.h">
       <Filter>SecuritySuite 头文件\SecurityBase</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\DuplicateTokenTesting.h">
@@ -943,10 +958,10 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\UserObjectSecurityTesting.h">
       <Filter>SecuritySuite 头文件\SecurityDescriptor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorSaclTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorSystemAccessControlListTesting.h">
       <Filter>SecuritySuite 头文件\SecurityDescriptor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorRMControlTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorResourceManagerControlTesting.h">
       <Filter>SecuritySuite 头文件\SecurityDescriptor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorOwnerTesting.h">
@@ -955,7 +970,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorGroupTesting.h">
       <Filter>SecuritySuite 头文件\SecurityDescriptor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorDaclTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorDiscretionaryAccessControlListTesting.h">
       <Filter>SecuritySuite 头文件\SecurityDescriptor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorControlTesting.h">
@@ -1567,9 +1582,6 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\LastPlatformErrorTesting.h">
       <Filter>WindowsSuite 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreateTesting.h">
-      <Filter>WindowsSuite 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsFontInformationTesting.h">
       <Filter>WindowsSuite 头文件</Filter>
     </ClInclude>
@@ -1610,9 +1622,6 @@
       <Filter>WindowsSuite 头文件\WindowsSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsRegisterTesting.h">
-      <Filter>WindowsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\EngineeringTesting.h">
       <Filter>WindowsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\DebugTesting.h">
@@ -1821,6 +1830,129 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreateSecurityTestingBase.h">
       <Filter>SecuritySuite 头文件\CreateSecurity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckTestingBase.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckByTypeResultListTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckByTypeTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\FileMapGenericMaskTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\ResourceManagerMapGenericMaskTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\TransactionManagerMapGenericMaskTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\TransactionMapGenericMaskTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\EnlistmentMapGenericMaskTesting.h">
+      <Filter>SecuritySuite 头文件\AccessCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessTestingBase.h">
+      <Filter>SecuritySuite 头文件\AddAccess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\SecurityAceTestingBase.h">
+      <Filter>SecuritySuite 头文件\SecurityAce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\SecurityBaseTestingBase.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenGroupsTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenPrivilegesTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTransactionMapTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedEnlistmentMapTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedFileMapTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedResourceManagerMapTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTransactionManagerMapTesting.h">
+      <Filter>SecuritySuite 头文件\SecurityBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorTestingBase.h">
+      <Filter>SecuritySuite 头文件\SecurityDescriptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\AllocateAndInitializeSecurityIdentifierTesting.h">
+      <Filter>SecuritySuite 头文件\SecuritySid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\SecuritySidTestingBase.h">
+      <Filter>SecuritySuite 头文件\SecuritySid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\ConditionVariableTestingBase.h">
+      <Filter>ThreadingSuite 头文件\ConditionVariable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\Data\CriticalSectionPacking.h">
+      <Filter>ThreadingSuite 头文件\ConditionVariable\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\Data\SlimReaderWriterPacking.h">
+      <Filter>ThreadingSuite 头文件\ConditionVariable\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\EventTestingBase.h">
+      <Filter>ThreadingSuite 头文件\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\InitOnce\InitOnceTestingBase.h">
+      <Filter>ThreadingSuite 头文件\InitOnce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\MutexTestingBase.h">
+      <Filter>ThreadingSuite 头文件\Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateMutexUseNameTesting.h">
+      <Filter>ThreadingSuite 头文件\Mutex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\ExitProcessTesting.h">
+      <Filter>ThreadingSuite 头文件\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\ProcessTestingBase.h">
+      <Filter>ThreadingSuite 头文件\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\SemaphoreTestingBase.h">
+      <Filter>ThreadingSuite 头文件\Semaphore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\ThreadTestingBase.h">
+      <Filter>ThreadingSuite 头文件\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\ThreadToolsTestingBase.h">
+      <Filter>ThreadingSuite 头文件\ThreadTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\WaitableTimerTestingBase.h">
+      <Filter>ThreadingSuite 头文件\WaitableTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringNumDigitsTesting.h">
+      <Filter>WindowsSuite 头文件\Engineering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringOffsetTesting.h">
+      <Filter>WindowsSuite 头文件\Engineering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringSuffixTesting.h">
+      <Filter>WindowsSuite 头文件\Engineering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringTypeDisplayerTesting.h">
+      <Filter>WindowsSuite 头文件\Engineering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\GetLastSlashPositionTesting.h">
+      <Filter>WindowsSuite 头文件\Engineering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreate\WindowsCreateLParamTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreate\WindowsCreateWParamTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2067,10 +2199,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAcl\InitializeAclTesting.cpp">
       <Filter>SecuritySuite 源文件\SecurityAcl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTesting.cpp">
-      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTestingBase.cpp">
       <Filter>SecuritySuite 源文件\SecurityBase</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\DuplicateTokenTesting.cpp">
@@ -2088,7 +2217,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorControlTesting.cpp">
       <Filter>SecuritySuite 源文件\SecurityDescriptor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorDaclTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorDiscretionaryAccessControlListTesting.cpp">
       <Filter>SecuritySuite 源文件\SecurityDescriptor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorGroupTesting.cpp">
@@ -2097,10 +2226,10 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorOwnerTesting.cpp">
       <Filter>SecuritySuite 源文件\SecurityDescriptor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorRMControlTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorResourceManagerControlTesting.cpp">
       <Filter>SecuritySuite 源文件\SecurityDescriptor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorSaclTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorSystemAccessControlListTesting.cpp">
       <Filter>SecuritySuite 源文件\SecurityDescriptor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\UserObjectSecurityTesting.cpp">
@@ -2220,7 +2349,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\DeltaTimeValueDataTesting.cpp">
       <Filter>TimeSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\TimeOfDayDataTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\CurrentDeltaTimeTesting.cpp">
       <Filter>TimeSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\StringizeMacroTesting.cpp">
@@ -2715,9 +2844,6 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\LastPlatformErrorTesting.cpp">
       <Filter>WindowsSuite 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreateTesting.cpp">
-      <Filter>WindowsSuite 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsFontInformationTesting.cpp">
       <Filter>WindowsSuite 源文件</Filter>
     </ClCompile>
@@ -2755,9 +2881,6 @@
       <Filter>WindowsSuite 源文件\WindowsSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsRegisterTesting.cpp">
-      <Filter>WindowsSuite 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\EngineeringTesting.cpp">
       <Filter>WindowsSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Tools\DebugTesting.cpp">
@@ -2963,6 +3086,129 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreateSecurityTestingBase.cpp">
       <Filter>SecuritySuite 源文件\CreateSecurity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckByTypeResultListTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckByTypeTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\EnlistmentMapGenericMaskTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\FileMapGenericMaskTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\ResourceManagerMapGenericMaskTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\TransactionManagerMapGenericMaskTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\TransactionMapGenericMaskTesting.cpp">
+      <Filter>SecuritySuite 源文件\AccessCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\AddAccess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\SecurityAceTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\SecurityAce</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\SecurityBaseTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenGroupsTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenPrivilegesTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedEnlistmentMapTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedFileMapTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedResourceManagerMapTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTransactionManagerMapTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTransactionMapTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecurityBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\SecurityDescriptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\AllocateAndInitializeSecurityIdentifierTesting.cpp">
+      <Filter>SecuritySuite 源文件\SecuritySid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\SecuritySidTestingBase.cpp">
+      <Filter>SecuritySuite 源文件\SecuritySid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\ConditionVariableTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\ConditionVariable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\Data\CriticalSectionPacking.cpp">
+      <Filter>ThreadingSuite 源文件\ConditionVariable\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\Data\SlimReaderWriterPacking.cpp">
+      <Filter>ThreadingSuite 源文件\ConditionVariable\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\EventTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\InitOnce\InitOnceTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\InitOnce</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\MutexTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateMutexUseNameTesting.cpp">
+      <Filter>ThreadingSuite 源文件\Mutex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\ExitProcessTesting.cpp">
+      <Filter>ThreadingSuite 源文件\Process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\ProcessTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\Process</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\SemaphoreTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\Semaphore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\ThreadTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\ThreadToolsTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\ThreadTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\WaitableTimerTestingBase.cpp">
+      <Filter>ThreadingSuite 源文件\WaitableTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringNumDigitsTesting.cpp">
+      <Filter>WindowsSuite 源文件\Engineering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringOffsetTesting.cpp">
+      <Filter>WindowsSuite 源文件\Engineering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringSuffixTesting.cpp">
+      <Filter>WindowsSuite 源文件\Engineering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\EngineeringTypeDisplayerTesting.cpp">
+      <Filter>WindowsSuite 源文件\Engineering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\Engineering\GetLastSlashPositionTesting.cpp">
+      <Filter>WindowsSuite 源文件\Engineering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreate\WindowsCreateWParamTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreate\WindowsCreateLParamTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

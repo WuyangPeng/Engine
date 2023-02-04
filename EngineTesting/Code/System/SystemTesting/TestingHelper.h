@@ -123,7 +123,9 @@ namespace System
 
         void AddWindowsSuite();
 
+        NODISCARD Suite GetWindowsCreateSuite();
         NODISCARD Suite GetWindowsSystemSuite();
+        NODISCARD Suite GetEngineeringSuite();
 
         void AddLinuxSuite();
         void AddMacintoshSuite();

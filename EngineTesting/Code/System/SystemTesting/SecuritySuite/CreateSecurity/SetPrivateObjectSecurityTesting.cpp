@@ -1,47 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:49)
+///	引擎测试版本：0.9.0.1 (2023/01/25 19:05)
 
 #include "SetPrivateObjectSecurityTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/WindowsMacro.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/AccessCheckFlags.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityBase.h"
-#include "System/Security/Using/SecurityBaseUsing.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
-using namespace std::literals;
-
 System::SetPrivateObjectSecurityTesting::SetPrivateObjectSecurityTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      securityRequestedInformationFlags{ SecurityRequestedInformation::Owner,
-                                         SecurityRequestedInformation::Group,
-                                         SecurityRequestedInformation::Dacl,
-                                         SecurityRequestedInformation::Label },
-      securityAutoInheritFlags{ SecurityAutoInherit::DaclAutoInherit,
-                                SecurityAutoInherit::SaclAutoInherit,
-                                SecurityAutoInherit::DefaultDescriptorForObject,
-                                SecurityAutoInherit::AvoidPrivilegeCheck,
-                                SecurityAutoInherit::AvoidOwnerCheck,
-                                SecurityAutoInherit::MaclNoWriteUp,
-                                SecurityAutoInherit::MaclNoReadUp,
-                                SecurityAutoInherit::MaclNoExecuteUp,
-                                SecurityAutoInherit::AvoidOwnerRestriction,
-                                SecurityAutoInherit::MaclValidFlags }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -60,38 +35,53 @@ void System::SetPrivateObjectSecurityTesting::MainTest()
 
 void System::SetPrivateObjectSecurityTesting::SetPrivateObjectSecurityTest()
 {
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    const auto tokenHandle = OpenProcessToken();
 
-    AccessCheckGenericMapping genericMapping{};
-    genericMapping.GenericRead = EnumCastUnderlying(AccessGenericMask::FileGenericRead);
-    genericMapping.GenericWrite = EnumCastUnderlying(AccessGenericMask::FileGenericWrite);
-    genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
-    genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoSetPrivateObjectSecurityTest, tokenHandle);
 
-    SecurityDescriptorPtr newDescriptor{ nullptr };
-    ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, nullptr, &newDescriptor, false, tokenHandle, &genericMapping));
-    ASSERT_UNEQUAL_NULL_PTR(newDescriptor);
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTokenTest, tokenHandle);
+}
 
-    for (auto securityRequestedInformation : securityRequestedInformationFlags)
+void System::SetPrivateObjectSecurityTesting::DoSetPrivateObjectSecurityTest(WindowsHandle tokenHandle)
+{
+    SecurityDescriptorPtr descriptor{ nullptr };
+    CreatePrivateObjectSecurity(tokenHandle, descriptor);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(PrivateObjectSecurityTest, descriptor, tokenHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyPrivateObjectSecurityTest, descriptor);
+}
+
+void System::SetPrivateObjectSecurityTesting::PrivateObjectSecurityTest(SecurityDescriptorPtr& descriptor, WindowsHandle tokenHandle)
+{
+    for (auto securityRequestedInformation : *this)
     {
-        WindowsDWord neededLength{ 0 };
-        ASSERT_FALSE(GetSystemPrivateObjectSecurity(newDescriptor, securityRequestedInformation, nullptr, 0, &neededLength));
-
-        vector<char> buffer(boost::numeric_cast<size_t>(neededLength + 1));
-
-        WindowsDWord newNeededLength{ 0 };
-        ASSERT_TRUE(GetSystemPrivateObjectSecurity(newDescriptor, securityRequestedInformation, buffer.data(), neededLength, &newNeededLength));
-        ASSERT_EQUAL(newNeededLength, neededLength);
-
-        ASSERT_TRUE(SetSystemPrivateObjectSecurity(securityRequestedInformation, buffer.data(), &newDescriptor, &genericMapping, tokenHandle));
-
-        for (auto securityAutoInherit : securityAutoInheritFlags)
-        {
-            ASSERT_TRUE(SetSystemPrivateObjectSecurity(securityRequestedInformation, buffer.data(), &newDescriptor, securityAutoInherit, &genericMapping, tokenHandle));
-        }
+        ASSERT_NOT_THROW_EXCEPTION_3(DoPrivateObjectSecurityTest, descriptor, securityRequestedInformation, tokenHandle);
     }
+}
 
-    ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&newDescriptor));
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+void System::SetPrivateObjectSecurityTesting::DoPrivateObjectSecurityTest(SecurityDescriptorPtr& descriptor, SecurityRequestedInformation securityRequestedInformation, WindowsHandle tokenHandle)
+{
+    WindowsDWord neededLength{ 0 };
+    ASSERT_FALSE(GetSystemPrivateObjectSecurity(descriptor, securityRequestedInformation, nullptr, 0, &neededLength));
+
+    BufferType buffer(boost::numeric_cast<size_t>(neededLength + 1));
+
+    WindowsDWord newNeededLength{ 0 };
+    ASSERT_TRUE(GetSystemPrivateObjectSecurity(descriptor, securityRequestedInformation, buffer.data(), neededLength, &newNeededLength));
+    ASSERT_EQUAL(newNeededLength, neededLength);
+
+    SetSystemPrivateObjectSecurityTest(securityRequestedInformation, descriptor, tokenHandle, buffer);
+}
+
+void System::SetPrivateObjectSecurityTesting::SetSystemPrivateObjectSecurityTest(SecurityRequestedInformation securityRequestedInformation, SecurityDescriptorPtr& descriptor, WindowsHandle tokenHandle, BufferType& buffer)
+{
+    auto genericMapping = GetAccessCheckGenericMapping();
+
+    ASSERT_TRUE(SetSystemPrivateObjectSecurity(securityRequestedInformation, buffer.data(), &descriptor, &genericMapping, tokenHandle));
+
+    for (auto iter = GetSecurityAutoInheritBegin(); iter != GetSecurityAutoInheritEnd(); ++iter)
+    {
+        ASSERT_TRUE(SetSystemPrivateObjectSecurity(securityRequestedInformation, buffer.data(), &descriptor, *iter, &genericMapping, tokenHandle));
+    }
 }

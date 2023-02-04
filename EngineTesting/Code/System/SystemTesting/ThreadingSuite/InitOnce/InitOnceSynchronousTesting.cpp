@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:27)
+///	引擎测试版本：0.9.0.1 (2023/02/01 0:48)
 
 #include "InitOnceSynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -17,7 +17,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::InitOnceSynchronousTesting::InitOnceSynchronousTesting(const OStreamShared& stream)
-    : ParentType{ stream }, eventHandle{ nullptr }, enterInitHandleFunctionCount{ 0 }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -36,40 +36,23 @@ void System::InitOnceSynchronousTesting::MainTest()
 
 void System::InitOnceSynchronousTesting::SynchronousTest()
 {
-    constexpr auto threadCount = 12;
+    ASSERT_NOT_THROW_EXCEPTION_1(SetEnterInitHandleFunctionCount, 0);
 
-    InitOnce initOnce{};
-    SystemInitOnceInitialize(&initOnce);
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateThreadTest);
 
-    enterInitHandleFunctionCount = 0;
+    ASSERT_EQUAL(GetEnterInitHandleFunctionCount(), 1);
 
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::ExecuteOnceTest, this, &initOnce));
-    }
-
-    threadGroup.join_all();
-
-    ASSERT_EQUAL(enterInitHandleFunctionCount, 1);
-
-    ASSERT_TRUE(CloseSystemEvent(eventHandle));
+    ASSERT_NOT_THROW_EXCEPTION_0(CloseEventTest);
 }
 
 void System::InitOnceSynchronousTesting::ExecuteOnceTest(InitOncePtr initOnce)
 {
     WindowsVoidPtr context{ nullptr };
-    ASSERT_TRUE(SystemInitOnceExecuteOnce(initOnce, ClassType::InitHandleFunction, &enterInitHandleFunctionCount, &context));
+    ASSERT_TRUE(SystemInitOnceExecuteOnce(initOnce, ClassType::InitHandleFunction, GetEnterInitHandleFunctionCountPtr(), &context));
 
-    ASSERT_UNEQUAL(gInvalidHandleValue, context);
-    if (eventHandle != nullptr)
-    {
-        ASSERT_EQUAL(context, eventHandle);
-    }
-    else
-    {
-        eventHandle = context;
-    }
+    ASSERT_UNEQUAL(invalidHandleValue, context);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SetEventHandle, context);
 }
 
 System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(InitOncePtr initOnce, WindowsVoidPtr parameter, WindowsVoidPtr* context) noexcept
@@ -82,7 +65,7 @@ System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(InitO
     }
 
     ++(*static_cast<int*>(parameter));
-    auto event = CreateSystemEvent(true, true);
+    const auto event = CreateSystemEvent(true, true);
 
     if (event != nullptr)
     {
@@ -91,7 +74,21 @@ System::WindowsBool System::InitOnceSynchronousTesting::InitHandleFunction(InitO
     }
     else
     {
-        *context = gInvalidHandleValue;
+        *context = invalidHandleValue;
         return gFalse;
     }
+}
+
+void System::InitOnceSynchronousTesting::CreateThreadTest()
+{
+    InitOnce initOnce{};
+    SystemInitOnceInitialize(&initOnce);
+
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::ExecuteOnceTest, this, &initOnce));
+    }
+
+    threadGroup.join_all();
 }

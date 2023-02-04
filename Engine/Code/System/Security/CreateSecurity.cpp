@@ -255,11 +255,11 @@ bool System::GetSystemPrivateObjectSecurity(SecurityDescriptorPtr objectDescript
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemFileSecurity(const TChar* fileName, SecurityRequestedInformation securityInformation, SecurityDescriptorPtr securityDescriptor) noexcept
+bool System::SetSystemFileSecurity(const String& fileName, SecurityRequestedInformation securityInformation, SecurityDescriptorPtr securityDescriptor) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::SetFileSecurity(fileName, EnumCastUnderlying(securityInformation), securityDescriptor) != gFalse)
+    if (::SetFileSecurity(fileName.c_str(), EnumCastUnderlying(securityInformation), securityDescriptor) != gFalse)
         return true;
     else
         return false;

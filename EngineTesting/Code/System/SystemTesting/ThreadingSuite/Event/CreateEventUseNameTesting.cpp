@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:23)
+///	引擎测试版本：0.9.0.1 (2023/01/31 19:18)
 
 #include "CreateEventUseNameTesting.h"
 #include "System/Threading/Event.h"
@@ -37,10 +37,10 @@ void System::CreateEventUseNameTesting::MainTest()
 
 void System::CreateEventUseNameTesting::CreateEventTest(bool manualReset, bool initialState)
 {
-    auto eventName = System::ToString(GetTimeInMicroseconds());
+    const auto eventName = System::ToString(GetTimeInMicroseconds());
 
-    auto eventHandle = CreateSystemEvent(nullptr, manualReset, initialState, eventName.c_str());
+    const auto eventHandle = CreateSystemEvent(nullptr, manualReset, initialState, eventName.c_str());
     ASSERT_TRUE(IsSystemEventValid(eventHandle));
 
-    ASSERT_TRUE(CloseSystemEvent(eventHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSystemEventTest, eventHandle);
 }

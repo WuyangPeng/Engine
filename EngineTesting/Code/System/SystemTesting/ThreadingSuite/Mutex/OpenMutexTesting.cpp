@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:33)
+///	引擎测试版本：0.9.0.1 (2023/02/01 10:19)
 
 #include "OpenMutexTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -18,20 +18,18 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-
 System::OpenMutexTesting::OpenMutexTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      mutexStandardAccessFlags{ MutexStandardAccess::Delete,
-                                MutexStandardAccess::ReadControl,
-                                MutexStandardAccess::WriteDac,
-                                MutexStandardAccess::WriteOwner,
-                                MutexStandardAccess::Synchronize },
-      mutexSpecificAccessFlags{ MutexSpecificAccess::Default,
-                                MutexSpecificAccess::ModifyState,
-                                MutexSpecificAccess::AllAccess },
+      mutexStandardAccesses{ MutexStandardAccess::Delete,
+                             MutexStandardAccess::ReadControl,
+                             MutexStandardAccess::WriteDac,
+                             MutexStandardAccess::WriteOwner,
+                             MutexStandardAccess::Synchronize },
+      mutexSpecificAccesses{ MutexSpecificAccess::Default,
+                             MutexSpecificAccess::ModifyState,
+                             MutexSpecificAccess::AllAccess },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(mutexStandardAccessFlags.size(), mutexSpecificAccessFlags.size()) }
+      maxSize{ std::max(mutexStandardAccesses.size(), mutexSpecificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -50,8 +48,8 @@ void System::OpenMutexTesting::MainTest()
 
 bool System::OpenMutexTesting::RandomShuffleFlags()
 {
-    shuffle(mutexStandardAccessFlags.begin(), mutexStandardAccessFlags.end(), randomEngine);
-    shuffle(mutexSpecificAccessFlags.begin(), mutexSpecificAccessFlags.end(), randomEngine);
+    shuffle(mutexStandardAccesses.begin(), mutexStandardAccesses.end(), randomEngine);
+    shuffle(mutexSpecificAccesses.begin(), mutexSpecificAccesses.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -60,12 +58,26 @@ bool System::OpenMutexTesting::RandomShuffleFlags()
 
 void System::OpenMutexTesting::ThreadTest()
 {
-    constexpr auto threadCount = 12;
-    auto mutexName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
+    const auto mutexName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
 
-    auto mutexHandle = CreateSystemMutex(nullptr, true, mutexName.c_str());
+    const auto mutexHandle = CreateSystemMutex(nullptr, true, mutexName.c_str());
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThreadTest, mutexName);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
+}
+
+void System::OpenMutexTesting::WaitForMutexTest(const String& mutexName)
+{
+    for (auto index = 0u; index < maxSize; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(DoWaitForMutexTest, index, mutexName);
+    }
+}
+
+void System::OpenMutexTesting::CreateThreadTest(const String& mutexName)
+{
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
@@ -73,20 +85,15 @@ void System::OpenMutexTesting::ThreadTest()
     }
 
     threadGroup.join_all();
-
-    ASSERT_TRUE(CloseSystemMutex(mutexHandle));
 }
 
-void System::OpenMutexTesting::WaitForMutexTest(const String& mutexName)
+void System::OpenMutexTesting::DoWaitForMutexTest(size_t index, const String& mutexName)
 {
-    for (auto index = 0u; index < maxSize; ++index)
-    {
-        auto mutexStandardAccess = mutexStandardAccessFlags.at(index % mutexStandardAccessFlags.size());
-        auto mutexSpecificAccess = mutexSpecificAccessFlags.at(index % mutexSpecificAccessFlags.size());
+    const auto mutexStandardAccess = mutexStandardAccesses.at(index % mutexStandardAccesses.size());
+    const auto mutexSpecificAccess = mutexSpecificAccesses.at(index % mutexSpecificAccesses.size());
 
-        auto mutexHandle = OpenThreadingMutex(mutexStandardAccess, mutexSpecificAccess, true, mutexName.c_str());
-        ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
+    const auto mutexHandle = OpenThreadingMutex(mutexStandardAccess, mutexSpecificAccess, true, mutexName.c_str());
+    ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
-        ASSERT_TRUE(CloseSystemMutex(mutexHandle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
 }

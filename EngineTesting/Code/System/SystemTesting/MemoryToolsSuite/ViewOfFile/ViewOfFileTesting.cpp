@@ -71,7 +71,7 @@ System::WindowsHandle System::ViewOfFileTesting::Create()
 {
     const auto loopTestFileName = GetLoopTestFileName();
 
-    const auto fileMappingHandle = CreateSystemFileMapping(gInvalidHandleValue, MemoryProtect::ReadWrite, FileMapProtection::Default, 0, GetMaximumSizeLow(), loopTestFileName.c_str(), nullptr);
+    const auto fileMappingHandle = CreateSystemFileMapping(invalidHandleValue, MemoryProtect::ReadWrite, FileMapProtection::Default, 0, GetMaximumSizeLow(), loopTestFileName.c_str(), nullptr);
 
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(fileMappingHandle, "CreateSystemFileMapping Ê§°Ü"s);
 

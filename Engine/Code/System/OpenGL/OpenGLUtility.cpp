@@ -21,7 +21,6 @@
 #include "System/CharacterString/FormatString.h"
 #include "System/Helper/PragmaWarning.h"
 
-using std::string;
 using namespace std::literals;
 
 System::OpenGLSystemVersion System::GetOpenGLVersion() noexcept
@@ -32,7 +31,7 @@ System::OpenGLSystemVersion System::GetOpenGLVersion() noexcept
     return GetOpenGLVersion(major, minor);
 }
 
-bool System::IsOpenGLSupportsExtension(const string& extension)
+bool System::IsOpenGLSupportsExtension(const std::string& extension)
 {
     const auto numExtensions = GetGLInteger(OpenGLQuery::NumExtensions);
 
@@ -62,7 +61,7 @@ void* System::GetFunctionPointer(const char* glFunction) noexcept
     return GetOpenGLFunctionPointer(glFunction);
 }
 
-string System::GetOpenGLErrorDescription(OpenGLErrorCode code)
+std::string System::GetOpenGLErrorDescription(OpenGLErrorCode code)
 {
     auto description = GetOpenGLErrorString(code);
 

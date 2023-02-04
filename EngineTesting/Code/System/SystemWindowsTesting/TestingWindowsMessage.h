@@ -41,8 +41,10 @@ namespace System
         void AddOpenGLSuite();
         void AddWindowsSuite();
 
+        NODISCARD Suite GetWindowsCreateSuite();
         NODISCARD Suite GetWindowsProcessSuite();
         NODISCARD Suite GetWindowsRegisterSuite();
+        NODISCARD Suite GetWindowsSystemSuite();
     };
 }
 

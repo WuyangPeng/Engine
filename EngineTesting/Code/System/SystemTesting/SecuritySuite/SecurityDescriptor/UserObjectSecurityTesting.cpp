@@ -1,28 +1,26 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:40)
+///	引擎测试版本：0.9.0.1 (2023/01/29 19:21)
 
 #include "UserObjectSecurityTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityDescriptor.h"
-#include "System/Threading/Thread.h"
+#include "System/Security/SecurityDescriptor.h" 
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
-
 System::UserObjectSecurityTesting::UserObjectSecurityTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformationFlags{ SecurityRequestedInformation::Owner,
-                                         SecurityRequestedInformation::Group,
-                                         SecurityRequestedInformation::Dacl,
-                                         SecurityRequestedInformation::Label }
+      securityRequestedInformations{ SecurityRequestedInformation::Owner,
+                                     SecurityRequestedInformation::Group,
+                                     SecurityRequestedInformation::Dacl,
+                                     SecurityRequestedInformation::Label }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -41,22 +39,18 @@ void System::UserObjectSecurityTesting::MainTest()
 
 void System::UserObjectSecurityTesting::UserObjectSecurityTest()
 {
-    for (auto requested : securityRequestedInformationFlags)
+    for (auto requested : securityRequestedInformations)
     {
-        WindowsDWord lengthNeeded{ 0 };
-        ASSERT_FALSE(GetUserObjectSystemSecurity(GetCurrentSystemThread(), requested, nullptr, 0, &lengthNeeded));
-
-        ASSERT_LESS(0u, lengthNeeded);
-        vector<char> buffer(lengthNeeded);
-
-        WindowsDWord newLengthNeeded{ 0 };
-        ASSERT_TRUE(GetUserObjectSystemSecurity(GetCurrentSystemThread(), requested, buffer.data(), lengthNeeded, &newLengthNeeded));
-
-        ASSERT_EQUAL(newLengthNeeded, lengthNeeded);
-
-        const auto length = GetSystemSecurityDescriptorLength(buffer.data());
-        ASSERT_EQUAL(newLengthNeeded, length);
-
-        ASSERT_TRUE(IsSecurityDescriptorValid(buffer.data()));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoUserObjectSecurityTest, requested);
     }
+}
+
+void System::UserObjectSecurityTesting::DoUserObjectSecurityTest(SecurityRequestedInformation requested)
+{
+    auto buffer = GetUserObjectSecurity(requested);
+
+    const auto length = GetSystemSecurityDescriptorLength(buffer.data());
+    ASSERT_EQUAL(buffer.size(), length);
+
+    ASSERT_TRUE(IsSecurityDescriptorValid(buffer.data()));
 }

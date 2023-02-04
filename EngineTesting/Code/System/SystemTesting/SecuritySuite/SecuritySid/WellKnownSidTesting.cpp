@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:33)
+///	引擎测试版本：0.9.0.1 (2023/01/29 21:33)
 
 #include "WellKnownSidTesting.h"
 #include "System/Security/SecuritySid.h"
@@ -15,74 +15,72 @@
 
 #include <array>
 
-using std::array;
-
 System::WellKnownSidTesting::WellKnownSidTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityWellKnownSidType{ WinNullSid,
-                                WinWorldSid,
-                                WinLocalSid,
-                                WinCreatorOwnerSid,
-                                WinCreatorGroupSid,
-                                WinCreatorOwnerServerSid,
-                                WinCreatorGroupServerSid,
-                                WinNtAuthoritySid,
-                                WinDialupSid,
-                                WinNetworkSid,
-                                WinBatchSid,
-                                WinInteractiveSid,
-                                WinServiceSid,
-                                WinAnonymousSid,
-                                WinProxySid,
-                                WinEnterpriseControllersSid,
-                                WinSelfSid,
-                                WinAuthenticatedUserSid,
-                                WinRestrictedCodeSid,
-                                WinTerminalServerSid,
-                                WinRemoteLogonIdSid,
-                                WinLocalSystemSid,
-                                WinLocalServiceSid,
-                                WinNetworkServiceSid,
-                                WinBuiltinDomainSid,
-                                WinBuiltinAdministratorsSid,
-                                WinBuiltinUsersSid,
-                                WinBuiltinGuestsSid,
-                                WinBuiltinPowerUsersSid,
-                                WinBuiltinAccountOperatorsSid,
-                                WinBuiltinSystemOperatorsSid,
-                                WinBuiltinPrintOperatorsSid,
-                                WinBuiltinBackupOperatorsSid,
-                                WinBuiltinReplicatorSid,
-                                WinBuiltinPreWindows2000CompatibleAccessSid,
-                                WinBuiltinRemoteDesktopUsersSid,
-                                WinBuiltinNetworkConfigurationOperatorsSid,
-                                WinNTLMAuthenticationSid,
-                                WinDigestAuthenticationSid,
-                                WinSChannelAuthenticationSid,
-                                WinThisOrganizationSid,
-                                WinOtherOrganizationSid,
-                                WinBuiltinIncomingForestTrustBuildersSid,
-                                WinBuiltinPerfMonitoringUsersSid,
-                                WinBuiltinPerfLoggingUsersSid,
-                                WinBuiltinAuthorizationAccessSid,
-                                WinBuiltinTerminalServerLicenseServersSid,
-                                WinBuiltinDCOMUsersSid,
-                                WinBuiltinIUsersSid,
-                                WinIUserSid,
-                                WinBuiltinCryptoOperatorsSid,
-                                WinUntrustedLabelSid,
-                                WinLowLabelSid,
-                                WinMediumLabelSid,
-                                WinHighLabelSid,
-                                WinSystemLabelSid,
-                                WinWriteRestrictedCodeSid,
-                                WinCreatorOwnerRightsSid,
-                                WinEnterpriseReadonlyControllersSid,
-                                WinBuiltinEventLogReadersGroup,
-                                WinBuiltinCertSvcDComAccessGroup,
-                                WinMediumPlusLabelSid,
-                                WinConsoleLogonSid,
-                                WinThisOrganizationCertificateSid }
+      securityWellKnownSidTypes{ WinNullSid,
+                                 WinWorldSid,
+                                 WinLocalSid,
+                                 WinCreatorOwnerSid,
+                                 WinCreatorGroupSid,
+                                 WinCreatorOwnerServerSid,
+                                 WinCreatorGroupServerSid,
+                                 WinNtAuthoritySid,
+                                 WinDialupSid,
+                                 WinNetworkSid,
+                                 WinBatchSid,
+                                 WinInteractiveSid,
+                                 WinServiceSid,
+                                 WinAnonymousSid,
+                                 WinProxySid,
+                                 WinEnterpriseControllersSid,
+                                 WinSelfSid,
+                                 WinAuthenticatedUserSid,
+                                 WinRestrictedCodeSid,
+                                 WinTerminalServerSid,
+                                 WinRemoteLogonIdSid,
+                                 WinLocalSystemSid,
+                                 WinLocalServiceSid,
+                                 WinNetworkServiceSid,
+                                 WinBuiltinDomainSid,
+                                 WinBuiltinAdministratorsSid,
+                                 WinBuiltinUsersSid,
+                                 WinBuiltinGuestsSid,
+                                 WinBuiltinPowerUsersSid,
+                                 WinBuiltinAccountOperatorsSid,
+                                 WinBuiltinSystemOperatorsSid,
+                                 WinBuiltinPrintOperatorsSid,
+                                 WinBuiltinBackupOperatorsSid,
+                                 WinBuiltinReplicatorSid,
+                                 WinBuiltinPreWindows2000CompatibleAccessSid,
+                                 WinBuiltinRemoteDesktopUsersSid,
+                                 WinBuiltinNetworkConfigurationOperatorsSid,
+                                 WinNTLMAuthenticationSid,
+                                 WinDigestAuthenticationSid,
+                                 WinSChannelAuthenticationSid,
+                                 WinThisOrganizationSid,
+                                 WinOtherOrganizationSid,
+                                 WinBuiltinIncomingForestTrustBuildersSid,
+                                 WinBuiltinPerfMonitoringUsersSid,
+                                 WinBuiltinPerfLoggingUsersSid,
+                                 WinBuiltinAuthorizationAccessSid,
+                                 WinBuiltinTerminalServerLicenseServersSid,
+                                 WinBuiltinDCOMUsersSid,
+                                 WinBuiltinIUsersSid,
+                                 WinIUserSid,
+                                 WinBuiltinCryptoOperatorsSid,
+                                 WinUntrustedLabelSid,
+                                 WinLowLabelSid,
+                                 WinMediumLabelSid,
+                                 WinHighLabelSid,
+                                 WinSystemLabelSid,
+                                 WinWriteRestrictedCodeSid,
+                                 WinCreatorOwnerRightsSid,
+                                 WinEnterpriseReadonlyControllersSid,
+                                 WinBuiltinEventLogReadersGroup,
+                                 WinBuiltinCertSvcDComAccessGroup,
+                                 WinMediumPlusLabelSid,
+                                 WinConsoleLogonSid,
+                                 WinThisOrganizationCertificateSid }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -101,14 +99,17 @@ void System::WellKnownSidTesting::MainTest()
 
 void System::WellKnownSidTesting::CreateWellKnownSecurityIdentifierTest()
 {
-    array<WindowsDWord, securityMaxSidSize> buffer{};
-
-    for (auto wellKnownSidType : securityWellKnownSidType)
+    for (auto securityWellKnownSidType : securityWellKnownSidTypes)
     {
-        buffer.fill(0);
-        auto sidCount = securityMaxSidSize;
-        ASSERT_TRUE(CreateWellKnownSecurityIdentifier(wellKnownSidType, nullptr, buffer.data(), &sidCount));
-
-        ASSERT_TRUE(IsWellKnownSecurityIdentifier(buffer.data(), wellKnownSidType));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCreateWellKnownSecurityIdentifierTest, securityWellKnownSidType);
     }
+}
+
+void System::WellKnownSidTesting::DoCreateWellKnownSecurityIdentifierTest(SecurityWellKnownSidType securityWellKnownSidType)
+{
+    BufferType buffer{};
+    auto sidCount = securityMaxSidSize;
+    ASSERT_TRUE(CreateWellKnownSecurityIdentifier(securityWellKnownSidType, nullptr, buffer.data(), &sidCount));
+
+    ASSERT_TRUE(IsWellKnownSecurityIdentifier(buffer.data(), securityWellKnownSidType));
 }

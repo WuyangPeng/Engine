@@ -199,6 +199,7 @@
 （4） 互斥锁：CreateDefaultMutexTesting、
 			  CreateMutexTesting、
 			  CreateMutexUseFlagsTesting、
+			  CreateMutexUseNameTesting、
 			  ThreadMutexTesting、
 			  WaitForMutexTesting、
 			  WaitForMultipleMutexTesting、
@@ -242,14 +243,15 @@
 			CreateProcessTesting、
 			GetProcessHandleTesting、
 			ProcessPriorityClassTesting、
-			OpenProcessTesting。
+			OpenProcessTesting、
+			ExitProcessTesting。
 （15）进程工具：ProcessTokenTesting。
 
 ----------------------------
 8.	TimeSuite 
 
 对时间模块的单元测试，包括：
-（1） 时间：TimeOfDayDataTesting。
+（1） 时间：CurrentDeltaTimeTesting。
 （2） 间隔时间值：DeltaTimeValueDataTesting。
 （3） 间隔时间：DeltaTimeTesting。 
 （4） 暂停控制台：SystemPauseTesting。
@@ -305,18 +307,20 @@
 				  ConvertToAutoInheritPrivateObjectSecurityTesting、
 				  SecurityAccessMaskTesting。
 （3） 安全性标识符：InitializeSecurityIdentifierTesting、
+					AllocateAndInitializeSecurityIdentifierTesting、
 					GetSubAuthorityTesting、
 					WellKnownSidTesting、
 					CopySecurityIdentifierTesting。 
-（4） 访问控制列表：InitializeAclTesting、AclInformationTesting。 
+（4） 访问控制列表：InitializeAclTesting、
+					AclInformationTesting。 
 （5） 安全描述符：UserObjectSecurityTesting、
 				  InitializeSecurityDescriptorTesting、
-				  SecurityDescriptorDaclTesting、
+				  SecurityDescriptorDiscretionaryAccessControlListTesting、
 				  SecurityDescriptorControlTesting、
 				  SecurityDescriptorGroupTesting、
 				  SecurityDescriptorOwnerTesting、
-				  SecurityDescriptorRMControlTesting、
-				  SecurityDescriptorSaclTesting。 
+				  SecurityDescriptorResourceManagerControlTesting、
+				  SecurityDescriptorSystemAccessControlListTesting。 
 （6） 访问控制项：AddAccessControlEntriesTesting、
 				  FindFirstFreeAccessControlEntriesTesting、
 				  AddMandatoryAceTesting。
@@ -328,12 +332,25 @@
 					AddAuditAccessAceTesting、
 					AddAuditAccessObjectAceTesting。
 （8） 安全基础：TokenInformationTesting、
-				AdjustTokenTesting、
-				AccessesGrantedTesting、
+				AdjustTokenPrivilegesTesting、
+				AdjustTokenGroupsTesting、
+				AccessesGrantedEnlistmentMapTesting、
+				AccessesGrantedFileMapTesting、
+				AccessesGrantedResourceManagerMapTesting、
+				AccessesGrantedTransactionManagerMapTesting、
+				AccessesGrantedTransactionMapTesting、
 				DuplicateTokenTesting、
 				RestrictedTokenTesting、
 				QuerySecurityAccessMaskTesting。
-（9） 访问检查：MapGenericMaskTesting、AccessCheckTesting。
+（9） 访问检查：MapGenericMaskTesting、
+				EnlistmentMapGenericMaskTesting、
+				FileMapGenericMaskTesting、
+				ResourceManagerMapGenericMaskTesting、
+				TransactionManagerMapGenericMaskTesting、
+				TransactionMapGenericMaskTesting、
+				AccessCheckTesting、
+				AccessCheckByTypeResultListTesting、
+				AccessCheckByTypeTesting。
 
 ----------------------------
 11.	NetworkSuite 
@@ -395,7 +412,8 @@
 
 对Windows模块的单元测试，包括：
 （1） 系统错误码：LastWindowErrorTesting。
-（2） Window创建：WindowsCreateTesting。
+（2） Window创建：WindowsCreateLParamTesting、
+				  WindowsCreateWParamTesting。
 （3） Window进程：WindowsProcessTesting。
 （4） Window注册：WindowsRegisterTesting。
 （5） Window字体信息：WindowsFontInformationTesting。
@@ -409,7 +427,11 @@
 				  GetSystemInputTesting。
 （7） Window名字管道：WindowsNamedPipeTesting。
 （8） Window用户：WindowsUserTesting。
-（9） Engineering：EngineeringTesting。  
+（9） Engineering：EngineeringNumDigitsTesting、
+				   EngineeringOffsetTesting、
+				   EngineeringSuffixTesting、
+				   EngineeringTypeDisplayerTesting、
+				   GetLastSlashPositionTesting。  
 
 ----------------------------
 16.	LinuxSuite 

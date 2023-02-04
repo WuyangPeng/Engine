@@ -20,9 +20,10 @@ namespace ThreadingCoreRenderEngineAssist
         using ClassType = SystemMiddleLayer;
         using ParentType = SystemManagerInterface;
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        explicit SystemMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit SystemMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

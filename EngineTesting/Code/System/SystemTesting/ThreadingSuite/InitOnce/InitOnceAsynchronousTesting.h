@@ -10,17 +10,17 @@
 #ifndef SYSTEM_THREADING_SUITE_INIT_ONCE_ASYNCHRONOUS_TESTING_H
 #define SYSTEM_THREADING_SUITE_INIT_ONCE_ASYNCHRONOUS_TESTING_H
 
+#include "InitOnceTestingBase.h"
 #include "System/Helper/WindowsMacro.h"
 #include "System/Threading/Using/InitOnceUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {
-    class InitOnceAsynchronousTesting final : public CoreTools::UnitTest
+    class InitOnceAsynchronousTesting final : public InitOnceTestingBase
     {
     public:
         using ClassType = InitOnceAsynchronousTesting;
-        using ParentType = UnitTest;
+        using ParentType = InitOnceTestingBase;
 
     public:
         explicit InitOnceAsynchronousTesting(const OStreamShared& stream);
@@ -32,12 +32,12 @@ namespace System
         void MainTest();
 
         void AsynchronousTest();
+        void CreateThreadTest();
         void BeginInitializeTest(InitOncePtr initOnce);
-        NODISCARD WindowsHandle OpenEventHandleAsync(InitOncePtr initOnce);
 
-    private:
-        WindowsHandle eventHandle;
-        int enterInitHandleFunctionCount;
+        NODISCARD WindowsHandle OpenEventHandleAsync(InitOncePtr initOnce);
+        NODISCARD WindowsHandle GetInitOnceBeginInitializeHandle(InitOncePtr initOnce) noexcept;
+        NODISCARD WindowsHandle GetInitOnceCompleteHandle(InitOncePtr initOnce);
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:21)
+///	引擎测试版本：0.9.0.1 (2023/01/30 23:11)
 
 #include "CriticalSectionThreadTesting.h"
 #include "System/Threading/CriticalSection.h"
@@ -13,10 +13,6 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-#include <thread>
-
-using std::thread;
 
 System::CriticalSectionThreadTesting::CriticalSectionThreadTesting(const OStreamShared& stream)
     : ParentType{ stream }, criticalSection{}
@@ -52,25 +48,11 @@ void System::CriticalSectionThreadTesting::Delete() noexcept
 
 void System::CriticalSectionThreadTesting::ThreadTest()
 {
-    thread thread0{ &ClassType::EnterCriticalSectionTest, this };
+    ASSERT_NOT_THROW_EXCEPTION_0(EnterCriticalSectionThreadTest);
 
-    EnterSystemCriticalSection(&criticalSection);
+    ASSERT_NOT_THROW_EXCEPTION_0(EnterCriticalSectionThreadFailureTest);
 
-    LeaveSystemCriticalSection(&criticalSection);
-
-    thread0.join();
-
-    EnterSystemCriticalSection(&criticalSection);
-
-    thread thread1{ &ClassType::TryEnterCriticalSectionFailureTest, this };
-
-    thread1.join();
-
-    LeaveSystemCriticalSection(&criticalSection);
-
-    thread thread2{ &ClassType::TryEnterCriticalSectionSucceedTest, this };
-
-    thread2.join();
+    ASSERT_NOT_THROW_EXCEPTION_0(EnterCriticalSectionThreadSucceedTest);
 }
 
 void System::CriticalSectionThreadTesting::EnterCriticalSectionTest() noexcept
@@ -100,4 +82,33 @@ void System::CriticalSectionThreadTesting::TryEnterCriticalSectionFailureTest()
     {
         LeaveSystemCriticalSection(&criticalSection);
     }
+}
+
+void System::CriticalSectionThreadTesting::EnterCriticalSectionThreadTest()
+{
+    std::thread thread{ &ClassType::EnterCriticalSectionTest, this };
+
+    EnterSystemCriticalSection(&criticalSection);
+
+    LeaveSystemCriticalSection(&criticalSection);
+
+    thread.join();
+}
+
+void System::CriticalSectionThreadTesting::EnterCriticalSectionThreadFailureTest()
+{
+    EnterSystemCriticalSection(&criticalSection);
+
+    std::thread thread{ &ClassType::TryEnterCriticalSectionFailureTest, this };
+
+    thread.join();
+
+    LeaveSystemCriticalSection(&criticalSection);
+}
+
+void System::CriticalSectionThreadTesting::EnterCriticalSectionThreadSucceedTest()
+{
+    std::thread thread{ &ClassType::TryEnterCriticalSectionSucceedTest, this };
+
+    thread.join();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:05)
+///	引擎测试版本：0.9.0.1 (2023/02/01 20:38)
 
 #include "CancelWaitableTimerTesting.h"
 #include "System/Threading/WaitableTimer.h"
@@ -33,16 +33,20 @@ void System::CancelWaitableTimerTesting::MainTest()
 
 void System::CancelWaitableTimerTesting::CancelTest()
 {
-    auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
-    ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
+    const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
 
-    constexpr auto base = 10000000LL;
+    ASSERT_NOT_THROW_EXCEPTION_1(DoCancelTest, waitableTimerHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+}
+
+void System::CancelWaitableTimerTesting::DoCancelTest(WindowsHandle waitableTimerHandle)
+{
+    ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
 
     WindowsLargeInteger waitableTimerLargeInteger{};
     waitableTimerLargeInteger.QuadPart = -5 * base;
     ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
 
     ASSERT_TRUE(CancelSystemWaitableTimer(waitableTimerHandle));
-
-    ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
 }

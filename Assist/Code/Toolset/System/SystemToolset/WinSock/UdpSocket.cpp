@@ -20,8 +20,6 @@
 #include <exception>
 #include <iostream>
 
-using std::cout;
-
 SystemToolset::UdpSocket SystemToolset::UdpSocket::Create()
 {
     return UdpSocket{ DisableNotThrow::Disable };
@@ -56,7 +54,7 @@ void SystemToolset::UdpSocket::CloseSocket()
 {
     if (!System::CloseSocket(winSocket))
     {
-        cout << "WinSockCleanupÊ§°Ü\n";
+        std::cout << "WinSockCleanupÊ§°Ü\n";
     }
 }
 

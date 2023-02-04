@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:06)
+///	引擎测试版本：0.9.0.1 (2023/02/01 23:25)
 
 #include "WaitForWaitableTimerTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/WaitableTimer.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -35,29 +36,11 @@ void System::WaitForWaitableTimerTesting::MainTest()
 
 void System::WaitForWaitableTimerTesting::CreateSynchronizationTest()
 {
-    auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, false, nullptr);
-    ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
+    const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, false, nullptr);
 
-    constexpr auto threadCount = 3;
+    ASSERT_NOT_THROW_EXCEPTION_1(DoCreateSynchronizationTest, waitableTimerHandle);
 
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer0Test, this, waitableTimerHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer1Test, this, waitableTimerHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer2Test, this, waitableTimerHandle));
-        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer3Test, this, waitableTimerHandle));
-    }
-
-    GetStream() << "等待" << (threadCount * 4) / 2 << "秒钟。\n";
-
-    ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandle);
-
-    threadGroup.join_all();
-
-    GetStream() << "等待结束。\n";
-
-    ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
 }
 
 void System::WaitForWaitableTimerTesting::WaitForWaitableTimer0Test(WindowsHandle waitableTimerHandle)
@@ -94,4 +77,40 @@ void System::WaitForWaitableTimerTesting::ResetSystemWaitableTimer(WindowsHandle
     waitableTimerLargeInteger.QuadPart = -base / 2;
 
     ASSERT_TRUE(SetSystemWaitableTimer(waitableTimerHandle, &waitableTimerLargeInteger, 0, nullptr, nullptr, false));
+}
+
+void System::WaitForWaitableTimerTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试需要等待。\n";
+
+    SystemPause();
+}
+
+void System::WaitForWaitableTimerTesting::DoCreateSynchronizationTest(WindowsHandle waitableTimerHandle)
+{
+    ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, waitableTimerHandle);
+
+    GetStream() << "等待结束。\n";
+}
+
+void System::WaitForWaitableTimerTesting::CreateThread(WindowsHandle waitableTimerHandle)
+{
+    constexpr auto threadCount = 3;
+
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer0Test, this, waitableTimerHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer1Test, this, waitableTimerHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer2Test, this, waitableTimerHandle));
+        threadGroup.create_thread(boost::bind(&ClassType::WaitForWaitableTimer3Test, this, waitableTimerHandle));
+    }
+
+    GetStream() << "等待" << (threadCount * 4) / 2 << "秒钟。\n";
+
+    ASSERT_NOT_THROW_EXCEPTION_1(ResetSystemWaitableTimer, waitableTimerHandle);
+
+    threadGroup.join_all();
 }

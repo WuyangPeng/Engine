@@ -1,23 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:49)
+///	引擎测试版本：0.9.0.1 (2023/01/25 21:38)
 
 #include "CreatePrivateObjectSecurityWithMultipleInheritanceTesting.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/AccessCheckFlags.h"
 #include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityBase.h"
-#include "System/Security/Using/CreateSecurityUsing.h"
-#include "System/Security/Using/SecurityBaseUsing.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -26,16 +18,7 @@ using namespace std::literals;
 
 System::CreatePrivateObjectSecurityWithMultipleInheritanceTesting::CreatePrivateObjectSecurityWithMultipleInheritanceTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityAutoInheritFlags{ SecurityAutoInherit::DaclAutoInherit,
-                                SecurityAutoInherit::SaclAutoInherit,
-                                SecurityAutoInherit::DefaultDescriptorForObject,
-                                SecurityAutoInherit::AvoidPrivilegeCheck,
-                                SecurityAutoInherit::AvoidOwnerCheck,
-                                SecurityAutoInherit::MaclNoWriteUp,
-                                SecurityAutoInherit::MaclNoReadUp,
-                                SecurityAutoInherit::MaclNoExecuteUp,
-                                SecurityAutoInherit::AvoidOwnerRestriction,
-                                SecurityAutoInherit::MaclValidFlags }
+      setFileName{ SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -54,32 +37,32 @@ void System::CreatePrivateObjectSecurityWithMultipleInheritanceTesting::MainTest
 
 void System::CreatePrivateObjectSecurityWithMultipleInheritanceTesting::CreatePrivateObjectSecurityTest()
 {
-    const auto setFileName = SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s);
+    WindowsHandle tokenHandle = OpenProcessToken();
 
-    const auto tokenIsElevated = IsSystemTokenElevated();
+    ASSERT_NOT_THROW_EXCEPTION_1(DoCreatePrivateObjectSecurityTest, tokenHandle);
 
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTokenTest, tokenHandle);
+}
 
-    AccessCheckGenericMapping genericMapping{};
-    genericMapping.GenericRead = EnumCastUnderlying(AccessGenericMask::FileGenericRead);
-    genericMapping.GenericWrite = EnumCastUnderlying(AccessGenericMask::FileGenericWrite);
-    genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
-    genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
-
-    for (auto securityAutoInherit : securityAutoInheritFlags)
+void System::CreatePrivateObjectSecurityWithMultipleInheritanceTesting::DoCreatePrivateObjectSecurityTest(WindowsHandle tokenHandle)
+{
+    for (auto iter = GetSecurityAutoInheritBegin(); iter != GetSecurityAutoInheritEnd(); ++iter)
     {
-        SecurityDescriptorPtr newDescriptor{ nullptr };
-        ASSERT_TRUE(CreateSystemPrivateObjectSecurityWithMultipleInheritance(nullptr, nullptr, &newDescriptor, nullptr, 0, false, securityAutoInherit, tokenHandle, &genericMapping));
-        ASSERT_UNEQUAL_NULL_PTR(newDescriptor);
+        ASSERT_NOT_THROW_EXCEPTION_2(CreateSecurityTest, *iter, tokenHandle);
+    }
+}
 
-        if (tokenIsElevated != gFalse)
-        {
-            ASSERT_TRUE(SetSystemFileSecurity(setFileName.c_str(), SecurityRequestedInformation::Owner, newDescriptor));
-        }
+void System::CreatePrivateObjectSecurityWithMultipleInheritanceTesting::CreateSecurityTest(SecurityAutoInherit securityAutoInherit, WindowsHandle tokenHandle)
+{
+    SecurityDescriptorPtr descriptor{ nullptr };
+    auto genericMapping = GetAccessCheckGenericMapping();
+    ASSERT_TRUE(CreateSystemPrivateObjectSecurityWithMultipleInheritance(nullptr, nullptr, &descriptor, nullptr, 0, false, securityAutoInherit, tokenHandle, &genericMapping));
+    ASSERT_UNEQUAL_NULL_PTR(descriptor);
 
-        ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&newDescriptor));
+    if (GetTokenIsElevated())
+    {
+        ASSERT_TRUE(SetSystemFileSecurity(setFileName, SecurityRequestedInformation::Owner, descriptor));
     }
 
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyPrivateObjectSecurityTest, descriptor);
 }

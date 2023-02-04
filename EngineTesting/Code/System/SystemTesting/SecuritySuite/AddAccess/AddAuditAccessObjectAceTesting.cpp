@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:56)
+///	引擎测试版本：0.9.0.1 (2023/01/28 14:03)
 
 #include "AddAuditAccessObjectAceTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
@@ -27,35 +27,7 @@ using std::max;
 using std::vector;
 
 System::AddAuditAccessObjectAceTesting::AddAuditAccessObjectAceTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      controlACEInheritanceFlags{ ControlACEInheritance::ObjectInheritAce,
-                                  ControlACEInheritance::ContainerInheritAce,
-                                  ControlACEInheritance::NoPropagateInheritAce,
-                                  ControlACEInheritance::InheritOnlyAce,
-                                  ControlACEInheritance::InheritedAce,
-                                  ControlACEInheritance::ValidInheritFlags },
-      specificAccessFlags{ SpecificAccess::DesktopReadObjects,
-                           SpecificAccess::DesktopCreateWindow,
-                           SpecificAccess::DesktopCreateMenu,
-                           SpecificAccess::DesktopHookControl,
-                           SpecificAccess::DesktopJournalRecord,
-                           SpecificAccess::DesktopJournalPlayBack,
-                           SpecificAccess::DesktopEnumerate,
-                           SpecificAccess::DesktopWriteObjects,
-                           SpecificAccess::DesktopSwitchDesktop,
-                           SpecificAccess::DesktopAllAccess,
-                           SpecificAccess::WinstaEnumDesktops,
-                           SpecificAccess::WinstaReadAttributes,
-                           SpecificAccess::WinstaAccessClipboard,
-                           SpecificAccess::WinstaCreateDesktop,
-                           SpecificAccess::WinstaWriteAttributes,
-                           SpecificAccess::WinstaAccessGlobatoms,
-                           SpecificAccess::WinstaExitWindows,
-                           SpecificAccess::WinstaEnumerate,
-                           SpecificAccess::WinstaReadScreen,
-                           SpecificAccess::WinstaAllAccess },
-      randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(controlACEInheritanceFlags.size(), specificAccessFlags.size()) }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -74,47 +46,34 @@ void System::AddAuditAccessObjectAceTesting::MainTest()
 
 bool System::AddAuditAccessObjectAceTesting::RandomShuffleFlags()
 {
-    shuffle(controlACEInheritanceFlags.begin(), controlACEInheritanceFlags.end(), randomEngine);
-    shuffle(specificAccessFlags.begin(), specificAccessFlags.end(), randomEngine);
+    ASSERT_NOT_THROW_EXCEPTION_0(RandomShuffle);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(AddAuditAccessObjectAceTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(AddAuditAccessObjectAceTest, AccessControlListRevision::Revision);
+    ASSERT_NOT_THROW_EXCEPTION_1(AddAuditAccessObjectAceTest, AccessControlListRevision::RevisionDs);
 
     return true;
 }
 
-void System::AddAuditAccessObjectAceTesting::AddAuditAccessObjectAceTest()
+void System::AddAuditAccessObjectAceTesting::AddAuditAccessObjectAceTest(AccessControlListRevision accessControlListRevision)
 {
-    constexpr WindowsDWord newAclSize{ 2048 };
+    auto aclBuffer = GetACLBuffer(accessControlListRevision);
+    auto acl = GetAccessCheckACLPtr(aclBuffer);
 
-    array<char, newAclSize> aclbuffer{};
+    auto sid = GetSecuritySID();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto acl = reinterpret_cast<AccessCheckACLPtr>(aclbuffer.data());
-
-#include STSTEM_WARNING_POP
-
-    ASSERT_TRUE(InitializeAccessControlList(acl, newAclSize, AccessControlListRevision::Revision));
-    ASSERT_TRUE(IsAccessControlListValid(acl));
-
-    SecuritySID sid{};
-
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
-
-    constexpr WindowsByte subAuthorityCount{ 1 };
-
-    ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
-    ASSERT_TRUE(IsSecurityIdentifierValid(&sid));
-
-    for (auto index = 0u; index < maxSize; ++index)
+    for (auto index = 0u; index < GetMaxSize(); ++index)
     {
-        auto controlACEInheritance = controlACEInheritanceFlags.at(index % controlACEInheritanceFlags.size());
-        auto specificAccess = specificAccessFlags.at(index % specificAccessFlags.size());
-
-        ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, AccessControlListRevision::Revision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, false, true));
-        ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, AccessControlListRevision::Revision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, true, true));
-        ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, AccessControlListRevision::Revision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, false, false));
-        ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, AccessControlListRevision::Revision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, true, false));
+        AddAccessTest(index, acl, accessControlListRevision, sid);
     }
+}
+
+void System::AddAuditAccessObjectAceTesting::AddAccessTest(size_t index, AccessCheckACLPtr acl, AccessControlListRevision accessControlListRevision, SecuritySID& sid)
+{
+    const auto controlACEInheritance = GetControlACEInheritance(index);
+    const auto specificAccess = GetSpecificAccess(index);
+
+    ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, false, true));
+    ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, true, true));
+    ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, false, false));
+    ASSERT_TRUE(AddAuditAccessObjectAccessControlEntries(acl, accessControlListRevision, controlACEInheritance, specificAccess, nullptr, nullptr, &sid, true, false));
 }

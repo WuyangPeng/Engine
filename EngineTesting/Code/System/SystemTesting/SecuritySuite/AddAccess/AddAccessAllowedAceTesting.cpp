@@ -1,52 +1,22 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:54)
+///	引擎测试版本：0.9.0.1 (2023/01/27 23:53)
 
 #include "AddAccessAllowedAceTesting.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/SecuritySidMacro.h"
 #include "System/Security/AddAccess.h"
-#include "System/Security/Flags/AddAccessFlags.h"
-#include "System/Security/Flags/SecurityAceFlags.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
 #include "System/Security/SecurityAcl.h"
-#include "System/Security/SecuritySid.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <array>
-
-using std::array;
-using std::vector;
-
 System::AddAccessAllowedAceTesting::AddAccessAllowedAceTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      specificAccessFlags{ SpecificAccess::DesktopReadObjects,
-                           SpecificAccess::DesktopCreateWindow,
-                           SpecificAccess::DesktopCreateMenu,
-                           SpecificAccess::DesktopHookControl,
-                           SpecificAccess::DesktopJournalRecord,
-                           SpecificAccess::DesktopJournalPlayBack,
-                           SpecificAccess::DesktopEnumerate,
-                           SpecificAccess::DesktopWriteObjects,
-                           SpecificAccess::DesktopSwitchDesktop,
-                           SpecificAccess::DesktopAllAccess,
-                           SpecificAccess::WinstaEnumDesktops,
-                           SpecificAccess::WinstaReadAttributes,
-                           SpecificAccess::WinstaAccessClipboard,
-                           SpecificAccess::WinstaCreateDesktop,
-                           SpecificAccess::WinstaWriteAttributes,
-                           SpecificAccess::WinstaAccessGlobatoms,
-                           SpecificAccess::WinstaExitWindows,
-                           SpecificAccess::WinstaEnumerate,
-                           SpecificAccess::WinstaReadScreen,
-                           SpecificAccess::WinstaAllAccess }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -60,36 +30,24 @@ void System::AddAccessAllowedAceTesting::DoRunUnitTest()
 
 void System::AddAccessAllowedAceTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(AddAccessAllowedAccessControlEntriesTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(AddAccessAllowedAccessControlEntriesTest, AccessControlListRevision::Revision);
+    ASSERT_NOT_THROW_EXCEPTION_1(AddAccessAllowedAccessControlEntriesTest, AccessControlListRevision::RevisionDs);
 }
 
-void System::AddAccessAllowedAceTesting::AddAccessAllowedAccessControlEntriesTest()
+void System::AddAccessAllowedAceTesting::AddAccessAllowedAccessControlEntriesTest(AccessControlListRevision accessControlListRevision)
 {
-    constexpr WindowsDWord newAclSize{ 512 };
+    auto aclBuffer = GetACLBuffer(accessControlListRevision);
+    auto acl = GetAccessCheckACLPtr(aclBuffer);
 
-    array<char, newAclSize> aclbuffer{};
+    auto sid = GetSecuritySID();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto acl = reinterpret_cast<AccessCheckACLPtr>(aclbuffer.data());
-
-#include STSTEM_WARNING_POP
-
-    ASSERT_TRUE(InitializeAccessControlList(acl, newAclSize, AccessControlListRevision::Revision));
-    ASSERT_TRUE(IsAccessControlListValid(acl));
-
-    SecuritySID sid{};
-
-    SecuritySIDIndentifierAuthority identifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY;
-
-    constexpr WindowsByte subAuthorityCount{ 1 };
-
-    ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
-    ASSERT_TRUE(IsSecurityIdentifierValid(&sid));
-
-    for (auto specificAccess : specificAccessFlags)
+    for (auto iter = GetSpecificAccessBegin(); iter != GetSpecificAccessEnd(); ++iter)
     {
-        ASSERT_TRUE(AddAccessAllowedAccessControlEntries(acl, AccessControlListRevision::Revision, specificAccess, &sid));
+        AddAccessTest(acl, accessControlListRevision, *iter, sid);
     }
+}
+
+void System::AddAccessAllowedAceTesting::AddAccessTest(AccessCheckACLPtr acl, AccessControlListRevision accessControlListRevision, SpecificAccess specificAccess, SecuritySID& sid)
+{
+    ASSERT_TRUE(AddAccessAllowedAccessControlEntries(acl, accessControlListRevision, specificAccess, &sid));
 }

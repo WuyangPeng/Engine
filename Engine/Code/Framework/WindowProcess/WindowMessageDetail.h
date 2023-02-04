@@ -126,7 +126,7 @@ void Framework::WindowMessage<MiddleLayer>::DoCloseMessage(HWnd hwnd) const
 
     auto result = System::SystemValidateRect(hwnd);
 
-    if (System::MessageBox(hwnd, exitInformation, className))
+    if (System::DefaultMessageBox(hwnd, exitInformation, className))
     {
         result = System::DestroySystemWindow(hwnd);
     }

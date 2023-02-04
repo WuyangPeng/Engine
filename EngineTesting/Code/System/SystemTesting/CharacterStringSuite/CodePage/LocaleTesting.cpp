@@ -18,6 +18,8 @@
 
 #include <locale>
 
+using namespace std::literals;
+
 System::LocaleTesting::LocaleTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -41,10 +43,12 @@ void System::LocaleTesting::LocaleTest()
     const auto defaultLocale = Locale::GetLocaleType(setlocale(LC_ALL, nullptr));
 
     {
-        Locale locale{ CodePage::UTF8 };
+        Locale locale{ CodePage::UTF7 };
 
         const auto currentLocale = Locale::GetLocaleType(setlocale(LC_ALL, nullptr));
-        ASSERT_EQUAL(std::string{ currentLocale.data() }, "zh_CN.utf8");
+        std::string result{ currentLocale.data() };
+
+        ASSERT_UNEQUAL(result.find("936"), std::string::npos);
     }
 
     const auto currentLocale = Locale::GetLocaleType(setlocale(LC_ALL, nullptr));

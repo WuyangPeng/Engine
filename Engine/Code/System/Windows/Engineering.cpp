@@ -1,18 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:15)
+///	引擎版本：0.9.0.1 (2023/02/02 14:41)
 
 #include "System/SystemExport.h"
 
 #include "Engineering.h"
 #include "System/DynamicLink/LibraryTools.h"
-
-#include <array>
 
 using namespace std::literals;
 
@@ -77,14 +75,14 @@ System::String System::GetEngineeringDirectory()
 {
     const auto name = GetDynamicLinkFileName(nullptr);
 
-    const auto pos = GetLastSlashPosition(name);
+    const auto position = GetLastSlashPosition(name);
 
-    if (pos == String::npos)
+    if (position == String::npos)
     {
         return String{};
     }
 
-    return name.substr(0, pos + 1);
+    return name.substr(0, position + 1);
 }
 
 size_t System::GetLastSlashPosition(const String& path)
@@ -102,6 +100,6 @@ size_t System::GetLastSlashPosition(const String& path)
     }
     else
     {
-        return std::max(backSlashPos, backSlashPos);
+        return std::max(backSlashPos, forwardSlashPos);
     }
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:46)
+///	引擎测试版本：0.9.0.1 (2023/02/01 19:01)
 
 #include "CreateCThreadTesting.h"
 #include "System/Threading/Thread.h"
@@ -31,10 +31,10 @@ void System::CreateCThreadTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(BeginThreadExTest);
 }
 
-bool System::CreateCThreadTesting::BeginThreadExTest()
+void System::CreateCThreadTesting::BeginThreadExTest()
 {
     unsigned int threadId{ 0 };
-    auto threadHandle = BeginSystemThread(nullptr, 0, ClassType::ThreadStartRoutineEx, this, 0, &threadId);
+    const auto threadHandle = BeginSystemThread(nullptr, 0, ClassType::ThreadStartRoutineEx, this, 0, &threadId);
 
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadId);
@@ -42,11 +42,9 @@ bool System::CreateCThreadTesting::BeginThreadExTest()
     ASSERT_TRUE(WaitForSystemThread(threadHandle));
 
     ASSERT_TRUE(CloseSystemThread(threadHandle));
-
-    return true;
 }
 
-unsigned System::CreateCThreadTesting::ThreadStartRoutineEx(void* threadParameter)
+unsigned int System::CreateCThreadTesting::ThreadStartRoutineEx(void* threadParameter)
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26471)
@@ -62,5 +60,5 @@ unsigned System::CreateCThreadTesting::ThreadStartRoutineEx(void* threadParamete
 
     EndSystemThread(0);
 
-    return 0;
+    return 0u;
 }

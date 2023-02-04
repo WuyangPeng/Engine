@@ -1,25 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:22)
+///	引擎测试版本：0.9.0.1 (2023/01/31 23:10)
 
 #ifndef SYSTEM_THREADING_SUITE_AUTO_EVENT_THREAD_TESTING_H
 #define SYSTEM_THREADING_SUITE_AUTO_EVENT_THREAD_TESTING_H
 
-#include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
+#include "EventTestingBase.h"
 
 namespace System
 {
-    class AutoEventThreadTesting final : public CoreTools::UnitTest
+    class AutoEventThreadTesting final : public EventTestingBase
     {
     public:
         using ClassType = AutoEventThreadTesting;
-        using ParentType = UnitTest;
+        using ParentType = EventTestingBase;
 
     public:
         explicit AutoEventThreadTesting(const OStreamShared& stream);
@@ -35,6 +34,11 @@ namespace System
         void InitalSetEventThreadTest();
 
         void WaitForAutoEventTest(WindowsHandle eventHandle);
+        void DoAutoEventThreadTest(WindowsHandle eventHandle);
+        void DoDefaultEventThreadTest(WindowsHandle eventHandle);
+        void DoInitalSetEventThreadTest(WindowsHandle eventHandle);
+
+        void CreateThread(boost::thread_group& threadGroup, WindowsHandle eventHandle);
     };
 }
 

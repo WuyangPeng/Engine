@@ -531,6 +531,7 @@ CoreTools::Suite System::TestingHelper::GetMutexSuite()
     ADD_TEST(mutexSuite, CreateDefaultMutexTesting);
     ADD_TEST(mutexSuite, CreateMutexTesting);
     ADD_TEST(mutexSuite, CreateMutexUseFlagsTesting);
+    ADD_TEST(mutexSuite, CreateMutexUseNameTesting);
     ADD_TEST(mutexSuite, ThreadMutexTesting);
     ADD_TEST(mutexSuite, WaitForMutexTesting);
     ADD_TEST(mutexSuite, WaitForMultipleMutexTesting);
@@ -646,6 +647,7 @@ CoreTools::Suite System::TestingHelper::GetProcessSuite()
     ADD_TEST(processSuite, GetProcessHandleTesting);
     ADD_TEST(processSuite, ProcessPriorityClassTesting);
     ADD_TEST(processSuite, OpenProcessTesting);
+    ADD_TEST(processSuite, ExitProcessTesting);
 
     return processSuite;
 }
@@ -663,7 +665,7 @@ void System::TestingHelper::AddTimeSuite()
 {
     auto timeSuite = GenerateSuite("时间"s);
 
-    ADD_TEST(timeSuite, TimeOfDayDataTesting);
+    ADD_TEST(timeSuite, CurrentDeltaTimeTesting);
     ADD_TEST(timeSuite, DeltaTimeValueDataTesting);
     ADD_TEST(timeSuite, DeltaTimeTesting);
     ADD_TEST(timeSuite, SystemPauseTesting);
@@ -794,6 +796,7 @@ CoreTools::Suite System::TestingHelper::GetSecuritySidSuite()
     auto securitySidSuite = GenerateSuite("安全系统识别码"s);
 
     ADD_TEST(securitySidSuite, InitializeSecurityIdentifierTesting);
+    ADD_TEST(securitySidSuite, AllocateAndInitializeSecurityIdentifierTesting);
     ADD_TEST(securitySidSuite, GetSubAuthorityTesting);
     ADD_TEST(securitySidSuite, WellKnownSidTesting);
     ADD_TEST(securitySidSuite, CopySecurityIdentifierTesting);
@@ -817,12 +820,12 @@ CoreTools::Suite System::TestingHelper::GetSecurityDescriptorSuite()
 
     ADD_TEST(securityDescriptorSuite, UserObjectSecurityTesting);
     ADD_TEST(securityDescriptorSuite, InitializeSecurityDescriptorTesting);
-    ADD_TEST(securityDescriptorSuite, SecurityDescriptorDaclTesting);
+    ADD_TEST(securityDescriptorSuite, SecurityDescriptorDiscretionaryAccessControlListTesting);
     ADD_TEST(securityDescriptorSuite, SecurityDescriptorControlTesting);
     ADD_TEST(securityDescriptorSuite, SecurityDescriptorGroupTesting);
     ADD_TEST(securityDescriptorSuite, SecurityDescriptorOwnerTesting);
-    ADD_TEST(securityDescriptorSuite, SecurityDescriptorRMControlTesting);
-    ADD_TEST(securityDescriptorSuite, SecurityDescriptorSaclTesting);
+    ADD_TEST(securityDescriptorSuite, SecurityDescriptorResourceManagerControlTesting);
+    ADD_TEST(securityDescriptorSuite, SecurityDescriptorSystemAccessControlListTesting);
 
     return securityDescriptorSuite;
 }
@@ -859,8 +862,13 @@ CoreTools::Suite System::TestingHelper::GetSecurityBaseSuite()
 
     ADD_TEST(securityBaseSuite, IsSystemTokenElevatedTesting);
     ADD_TEST(securityBaseSuite, TokenInformationTesting);
-    ADD_TEST(securityBaseSuite, AdjustTokenTesting);
-    ADD_TEST(securityBaseSuite, AccessesGrantedTesting);
+    ADD_TEST(securityBaseSuite, AdjustTokenPrivilegesTesting);
+    ADD_TEST(securityBaseSuite, AdjustTokenGroupsTesting);
+    ADD_TEST(securityBaseSuite, AccessesGrantedEnlistmentMapTesting);
+    ADD_TEST(securityBaseSuite, AccessesGrantedFileMapTesting);
+    ADD_TEST(securityBaseSuite, AccessesGrantedResourceManagerMapTesting);
+    ADD_TEST(securityBaseSuite, AccessesGrantedTransactionManagerMapTesting);
+    ADD_TEST(securityBaseSuite, AccessesGrantedTransactionMapTesting);
     ADD_TEST(securityBaseSuite, DuplicateTokenTesting);
     ADD_TEST(securityBaseSuite, RestrictedTokenTesting);
     ADD_TEST(securityBaseSuite, QuerySecurityAccessMaskTesting);
@@ -873,7 +881,14 @@ CoreTools::Suite System::TestingHelper::GetAccessCheckSuite()
     auto accessCheckSuite = GenerateSuite("访问检查"s);
 
     ADD_TEST(accessCheckSuite, MapGenericMaskTesting);
+    ADD_TEST(accessCheckSuite, EnlistmentMapGenericMaskTesting);
+    ADD_TEST(accessCheckSuite, FileMapGenericMaskTesting);
+    ADD_TEST(accessCheckSuite, ResourceManagerMapGenericMaskTesting);
+    ADD_TEST(accessCheckSuite, TransactionManagerMapGenericMaskTesting);
+    ADD_TEST(accessCheckSuite, TransactionMapGenericMaskTesting);
     ADD_TEST(accessCheckSuite, AccessCheckTesting);
+    ADD_TEST(accessCheckSuite, AccessCheckByTypeResultListTesting);
+    ADD_TEST(accessCheckSuite, AccessCheckByTypeTesting);
 
     return accessCheckSuite;
 }
@@ -977,16 +992,39 @@ void System::TestingHelper::AddWindowsSuite()
     auto windowsSuite = GenerateSuite("Windows"s);
 
     ADD_TEST(windowsSuite, LastPlatformErrorTesting);
-    ADD_TEST(windowsSuite, WindowsCreateTesting);
+    AddSuite(GetWindowsCreateSuite());
     ADD_TEST(windowsSuite, WindowsProcessTesting);
     ADD_TEST(windowsSuite, WindowsRegisterTesting);
     ADD_TEST(windowsSuite, WindowsFontInformationTesting);
     AddSuite(GetWindowsSystemSuite());
     ADD_TEST(windowsSuite, WindowsNamedPipeTesting);
     ADD_TEST(windowsSuite, WindowsUserTesting);
-    ADD_TEST(windowsSuite, EngineeringTesting);
+    AddSuite(GetEngineeringSuite());
 
     AddSuite(windowsSuite);
+}
+
+CoreTools::Suite System::TestingHelper::GetWindowsCreateSuite()
+{
+    auto windowsCreateSuite = GenerateSuite("Windows创建"s);
+
+    ADD_TEST(windowsCreateSuite, WindowsCreateLParamTesting);
+    ADD_TEST(windowsCreateSuite, WindowsCreateWParamTesting);
+
+    return windowsCreateSuite;
+}
+
+CoreTools::Suite System::TestingHelper::GetEngineeringSuite()
+{
+    auto engineeringSuite = GenerateSuite("Windows引擎"s);
+
+    ADD_TEST(engineeringSuite, EngineeringNumDigitsTesting);
+    ADD_TEST(engineeringSuite, EngineeringOffsetTesting);
+    ADD_TEST(engineeringSuite, EngineeringSuffixTesting);
+    ADD_TEST(engineeringSuite, EngineeringTypeDisplayerTesting);
+    ADD_TEST(engineeringSuite, GetLastSlashPositionTesting);
+
+    return engineeringSuite;
 }
 
 CoreTools::Suite System::TestingHelper::GetWindowsSystemSuite()

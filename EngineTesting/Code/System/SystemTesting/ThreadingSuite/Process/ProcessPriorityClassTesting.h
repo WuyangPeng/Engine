@@ -1,27 +1,27 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:54)
+///	引擎测试版本：0.9.0.1 (2023/02/01 14:06)
 
 #ifndef SYSTEM_THREADING_SUITE_PROCESS_PRIORITY_CLASS_TESTING_H
 #define SYSTEM_THREADING_SUITE_PROCESS_PRIORITY_CLASS_TESTING_H
 
+#include "ProcessTestingBase.h"
 #include "System/Threading/Fwd/ThreadingFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <vector>
 
 namespace System
 {
-    class ProcessPriorityClassTesting final : public CoreTools::UnitTest
+    class ProcessPriorityClassTesting final : public ProcessTestingBase
     {
     public:
         using ClassType = ProcessPriorityClassTesting;
-        using ParentType = UnitTest;
+        using ParentType = ProcessTestingBase;
 
     public:
         explicit ProcessPriorityClassTesting(const OStreamShared& stream);
@@ -35,12 +35,13 @@ namespace System
         void PriorityClassTest();
         void BackgroundProcessingTest();
 
-    private:
-        using ProcessCreationFlagsContainer = std::vector<ProcessCreation>;
+        void DoPriorityClassTest(ProcessCreation processPriority);
 
     private:
-        ProcessCreationFlagsContainer processCreationFlags;
-        String processFullPath;
+        using ProcessCreationContainer = std::vector<ProcessCreation>;
+
+    private:
+        ProcessCreationContainer processCreations;
     };
 }
 

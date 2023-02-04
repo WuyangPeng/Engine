@@ -28,7 +28,7 @@ namespace System
 
     protected:
         using CodeType = std::vector<const GLchar*>;
-        using ResultType =  std::vector<OpenGLChar>;
+        using ResultType = std::vector<OpenGLChar>;
 
     protected:
         void DeleteProgramTest(OpenGLUInt programHandle) noexcept;

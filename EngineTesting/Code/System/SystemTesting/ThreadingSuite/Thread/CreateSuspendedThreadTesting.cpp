@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:46)
+///	引擎测试版本：0.9.0.1 (2023/02/01 19:12)
 
 #include "CreateSuspendedThreadTesting.h"
 #include "System/Threading/Flags/ThreadFlags.h"
@@ -29,27 +29,17 @@ void System::CreateSuspendedThreadTesting::DoRunUnitTest()
 
 void System::CreateSuspendedThreadTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(ThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 }
 
-bool System::CreateSuspendedThreadTesting::ThreadTest()
+void System::CreateSuspendedThreadTesting::ThreadTest()
 {
     WindowsDWord threadId{ 0 };
-    auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, this, ThreadCreation::CreateSuspended, &threadId);
+    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, this, ThreadCreation::CreateSuspended, &threadId);
 
-    ASSERT_TRUE(IsThreadHandleValid(threadHandle));
-    ASSERT_LESS(0u, threadId);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoThreadTest, threadHandle, threadId);
 
-    // 返回先前的暂停计数。
-    ASSERT_EQUAL(SuspendSystemThread(threadHandle), 1u);
-    ASSERT_EQUAL(ResumeSystemThread(threadHandle), 2u);
-    ASSERT_EQUAL(ResumeSystemThread(threadHandle), 1u);
-
-    ASSERT_TRUE(WaitForSystemThread(threadHandle));
-
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
-
-    return true;
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
 System::WindowsDWord System::CreateSuspendedThreadTesting::ThreadStartRoutine(void* threadParameter)
@@ -67,4 +57,17 @@ System::WindowsDWord System::CreateSuspendedThreadTesting::ThreadStartRoutine(vo
     }
 
     return ExitSystemThread(0);
+}
+
+void System::CreateSuspendedThreadTesting::DoThreadTest(ThreadHandle threadHandle, WindowsDWord threadId)
+{
+    ASSERT_TRUE(IsThreadHandleValid(threadHandle));
+    ASSERT_LESS(0u, threadId);
+
+    // 返回先前的暂停计数。
+    ASSERT_EQUAL(SuspendSystemThread(threadHandle), 1u);
+    ASSERT_EQUAL(ResumeSystemThread(threadHandle), 2u);
+    ASSERT_EQUAL(ResumeSystemThread(threadHandle), 1u);
+
+    ASSERT_TRUE(WaitForSystemThread(threadHandle));
 }

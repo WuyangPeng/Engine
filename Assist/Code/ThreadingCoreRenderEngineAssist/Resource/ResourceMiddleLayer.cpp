@@ -17,19 +17,19 @@
 using std::make_unique;
 using namespace std::literals;
 
-ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::ResourceMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, directory{ System::GetEngineeringDirectory() }, projectName{}
+ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::ResourceMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, directory{ System::GetEngineeringDirectory() }, projectName{}
 {
     ASSIST_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ThreadingCoreRenderEngineAssist, ResourceMiddleLayer)
 
-bool ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::PreCreate(const EnvironmentDirectory& environmentDirectory)
+bool ThreadingCoreRenderEngineAssist::ResourceMiddleLayer::PreCreate()
 {
     ASSIST_CLASS_IS_VALID_1;
 
-    projectName = make_unique<ProjectName>(SYSTEM_TEXT("Project.json"s), environmentDirectory);
+    projectName = make_unique<ProjectName>(SYSTEM_TEXT("Project.json"s), GetEnvironmentDirectory());
 
     return true;
 }

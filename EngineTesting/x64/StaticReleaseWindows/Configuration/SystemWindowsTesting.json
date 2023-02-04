@@ -23,13 +23,26 @@
   },
 
   "openGLSuite": {
-    "OpenGLWglPrototypesTesting": 1
+    "OpenGLWglSwapIntervalTesting": 1,
+    "OpenGLGetCurrentWglContextTesting": 1,
+    "OpenGLGetWglProcAddressTesting": 1,
+    "OpenGLSwapDeviceBuffersTesting": 1
   },
 
   "windowsSuite": {
-    "WindowsCreateTesting": 1,
     "WindowsFontInformationTesting": 1,
     "WindowsUserTesting": 1
+  },
+
+  "windowsCreateSuite": {
+    "CreateSystemWindowTesting": 1,
+    "GetHInstanceTesting": 1,
+    "WindowsCreateMenuTesting": 1
+  },
+
+  "windowsSystemSuite": {
+    "GetActiveWindowTesting": 1,
+    "GetSystemClientRectTesting": 1
   },
 
   "windowsProcessSuite": {

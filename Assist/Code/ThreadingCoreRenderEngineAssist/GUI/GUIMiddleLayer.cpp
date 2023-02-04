@@ -13,8 +13,8 @@
 
 #include <iostream>
 
-ThreadingCoreRenderEngineAssist::GUIMiddleLayer::GUIMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+ThreadingCoreRenderEngineAssist::GUIMiddleLayer::GUIMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
 {
     ASSIST_SELF_CLASS_IS_VALID_1;
 }

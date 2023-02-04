@@ -1,17 +1,19 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:05)
+///	引擎测试版本：0.9.0.1 (2023/02/01 22:59)
 
 #include "SetWaitableTimerTesting.h"
+#include "System/Helper/Tools.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/Flags/SyncToolsFlags.h"
 #include "System/Threading/SyncTools.h"
 #include "System/Threading/WaitableTimer.h"
+#include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -37,9 +39,15 @@ void System::SetWaitableTimerTesting::MainTest()
 
 void System::SetWaitableTimerTesting::AsynchronousTest()
 {
-    static constexpr auto base = 10000000LL;
+    const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
 
-    auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAsynchronousTest, waitableTimerHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+}
+
+void System::SetWaitableTimerTesting::DoAsynchronousTest(WindowsHandle waitableTimerHandle)
+{
     ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
 
     WindowsLargeInteger waitableTimerLargeInteger{};
@@ -55,15 +63,19 @@ void System::SetWaitableTimerTesting::AsynchronousTest()
     GetStream() << "等待" << period / 1000 << "秒钟。\n";
 
     ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
-
-    ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
 }
 
 void System::SetWaitableTimerTesting::AsynchronousUseTolerableDelayTest()
 {
-    static constexpr auto base = 10000000LL;
+    const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
 
-    auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, nullptr);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoAsynchronousUseTolerableDelayTest, waitableTimerHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+}
+
+void System::SetWaitableTimerTesting::DoAsynchronousUseTolerableDelayTest(WindowsHandle waitableTimerHandle)
+{
     ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
 
     WindowsLargeInteger waitableTimerLargeInteger{};
@@ -80,12 +92,12 @@ void System::SetWaitableTimerTesting::AsynchronousUseTolerableDelayTest()
     GetStream() << "等待" << period / 1000 << "秒钟。\n";
 
     ASSERT_ENUM_EQUAL(SystemSleep(EnumCastUnderlying(MutexWait::Infinite), true), SleepReturn::WaitIOCompletion);
-
-    ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
 }
 
-void System::SetWaitableTimerTesting::TimerAPCProcedure(WindowsVoidPtr argToCompletionRoutine, MAYBE_UNUSED WindowsDWord timerLowValue, MAYBE_UNUSED WindowsDWord timerHighValue)
+void System::SetWaitableTimerTesting::TimerAPCProcedure(WindowsVoidPtr argToCompletionRoutine, WindowsDWord timerLowValue, WindowsDWord timerHighValue)
 {
+    UnusedFunction(timerLowValue, timerHighValue);
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26471)
 
@@ -97,4 +109,11 @@ void System::SetWaitableTimerTesting::TimerAPCProcedure(WindowsVoidPtr argToComp
     {
         classType->GetStream() << "这里进行了回调函数的调用。\n";
     }
+}
+
+void System::SetWaitableTimerTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试需要等待。\n";
+
+    SystemPause();
 }

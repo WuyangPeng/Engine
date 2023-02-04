@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:07)
+///	引擎版本：0.9.0.1 (2023/02/01 23:37)
 
 #ifndef SYSTEM_TIME_DELTA_TIME_VALUE_H
 #define SYSTEM_TIME_DELTA_TIME_VALUE_H
@@ -14,9 +14,9 @@
 
 #include "System/Time/Using/DeltaTimeUsing.h"
 
+// 时间差值数据
 namespace System
 {
-    // 时间差值数据
     class SYSTEM_DEFAULT_DECLARE DeltaTimeValueData final
     {
     public:
@@ -27,7 +27,7 @@ namespace System
         DeltaTimeValueData(int64_t second, int32_t microsecond) noexcept;
         explicit DeltaTimeValueData(const DeltaTimeValue& deltaTimeValue) noexcept;
 
-        NODISCARD const DeltaTimeValue GetDeltaTimeValue() const noexcept;
+        NODISCARD DeltaTimeValue GetDeltaTimeValue() const noexcept;
         void SetValue(int64_t second, int32_t microsecond) noexcept;
         NODISCARD int64_t GetSecond() const noexcept;
         NODISCARD int32_t GetMicrosecond() const noexcept;

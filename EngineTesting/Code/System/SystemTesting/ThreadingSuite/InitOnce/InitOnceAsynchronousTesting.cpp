@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:27)
+///	引擎测试版本：0.9.0.1 (2023/02/01 0:26)
 
 #include "InitOnceAsynchronousTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -17,7 +17,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::InitOnceAsynchronousTesting::InitOnceAsynchronousTesting(const OStreamShared& stream)
-    : ParentType{ stream }, eventHandle{ nullptr }, enterInitHandleFunctionCount{ 0 }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -36,12 +36,47 @@ void System::InitOnceAsynchronousTesting::MainTest()
 
 void System::InitOnceAsynchronousTesting::AsynchronousTest()
 {
-    constexpr auto threadCount = 12;
+    ASSERT_NOT_THROW_EXCEPTION_0(SetEventHandleNull);
 
+    ASSERT_NOT_THROW_EXCEPTION_0(CreateThreadTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(CloseEventTest);
+}
+
+void System::InitOnceAsynchronousTesting::BeginInitializeTest(InitOncePtr initOnce)
+{
+    const auto handle = OpenEventHandleAsync(initOnce);
+    ASSERT_UNEQUAL(invalidHandleValue, handle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SetEventHandle, handle);
+}
+
+System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(InitOncePtr initOnce)
+{
+    const auto initOnceBeginInitializeHandle = GetInitOnceBeginInitializeHandle(initOnce);
+    if (initOnceBeginInitializeHandle != nullptr)
+    {
+        return initOnceBeginInitializeHandle;
+    }
+
+    const auto initOnceCompleteHandle = GetInitOnceCompleteHandle(initOnce);
+    if (initOnceCompleteHandle != nullptr)
+    {
+        return initOnceCompleteHandle;
+    }
+
+    const auto result = GetInitOnceBeginInitializeHandle(initOnce);
+    if (result != nullptr)
+    {
+        return result;
+    }
+
+    return nullptr;
+}
+
+void System::InitOnceAsynchronousTesting::CreateThreadTest()
+{
     InitOnce initOnce{};
-
-    eventHandle = nullptr;
-
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
@@ -49,49 +84,37 @@ void System::InitOnceAsynchronousTesting::AsynchronousTest()
     }
 
     threadGroup.join_all();
-
-    ASSERT_TRUE(CloseSystemEvent(eventHandle));
 }
 
-void System::InitOnceAsynchronousTesting::BeginInitializeTest(InitOncePtr initOnce)
-{
-    auto handle = OpenEventHandleAsync(initOnce);
-    ASSERT_UNEQUAL(gInvalidHandleValue, handle);
-
-    if (eventHandle != nullptr)
-    {
-        ASSERT_EQUAL(handle, eventHandle);
-    }
-    else
-    {
-        eventHandle = handle;
-    }
-}
-
-System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(InitOncePtr initOnce)
+System::WindowsHandle System::InitOnceAsynchronousTesting::GetInitOnceBeginInitializeHandle(InitOncePtr initOnce) noexcept
 {
     WindowsBool pending{ gFalse };
     WindowsVoidPtr context{ nullptr };
-    auto result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::Async, &pending, &context);
+    const auto result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::Async, &pending, &context);
 
-    if (!result)
+    if (result)
     {
-        return gInvalidHandleValue;
+        if (pending == gFalse)
+            return context;
+        else
+            return nullptr;
     }
-
-    if (pending == gFalse)
+    else
     {
-        return context;
+        return invalidHandleValue;
     }
+}
 
-    auto event = CreateSystemEvent(true, true);
+System::WindowsHandle System::InitOnceAsynchronousTesting::GetInitOnceCompleteHandle(InitOncePtr initOnce)
+{
+    const auto event = CreateSystemEvent(true, true);
 
     if (event == nullptr)
     {
-        return gInvalidHandleValue;
+        return invalidHandleValue;
     }
 
-    result = SystemInitOnceComplete(initOnce, InitOnceBeginInitialize::Async, event);
+    const auto result = SystemInitOnceComplete(initOnce, InitOnceBeginInitialize::Async, event);
 
     if (result)
     {
@@ -100,14 +123,5 @@ System::WindowsHandle System::InitOnceAsynchronousTesting::OpenEventHandleAsync(
 
     ASSERT_TRUE(CloseSystemEvent(event));
 
-    result = SystemInitOnceBeginInitialize(initOnce, InitOnceBeginInitialize::CheckOnly, &pending, &context);
-
-    if (result && pending == gFalse)
-    {
-        return context;
-    }
-    else
-    {
-        return gInvalidHandleValue;
-    }
+    return nullptr;
 }

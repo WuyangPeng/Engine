@@ -28,11 +28,11 @@ namespace ThreadingCoreRenderEngineAssist
         using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        explicit ResourceMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        ResourceMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        NODISCARD bool PreCreate(const EnvironmentDirectory& environmentDirectory) final;
+        NODISCARD bool PreCreate() final;
         NODISCARD bool Initialize() final;
 
         NODISCARD bool IsSelectValid(int select) const;

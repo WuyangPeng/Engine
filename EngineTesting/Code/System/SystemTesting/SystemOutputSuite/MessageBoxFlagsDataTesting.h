@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/07 19:22)
+///	引擎测试版本：0.9.0.1 (2023/01/30 0:00)
 
 #ifndef SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_FLAGS_DATA_TESTING_H
 #define SYSTEM_TESTING_SYSTEM_OUTPUT_SUITE_MESSAGE_BOX_FLAGS_DATA_TESTING_H
@@ -36,19 +36,21 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void FlagsTest();
 
-    private:
-        using TypeFlagsCollection = std::vector<MessageBoxType>;
-        using IconFlagsCollection = std::vector<MessageBoxIcon>;
-        using DefaultFlagsCollection = std::vector<MessageBoxDefault>;
-        using ModeFlagsCollection = std::vector<MessageBoxMode>;
-        using MiscFlagsCollection = std::vector<MessageBoxMisc>;
+        void DoFlagsTest(size_t index);
 
     private:
-        TypeFlagsCollection typeFlags;
-        IconFlagsCollection iconFlags;
-        DefaultFlagsCollection defaultFlags;
-        ModeFlagsCollection modeFlags;
-        MiscFlagsCollection miscFlags;
+        using TypeFlagsContainer = std::vector<MessageBoxType>;
+        using IconFlagsContainer = std::vector<MessageBoxIcon>;
+        using DefaultFlagsContainer = std::vector<MessageBoxDefault>;
+        using ModeFlagsContainer = std::vector<MessageBoxMode>;
+        using MiscFlagsContainer = std::vector<MessageBoxMisc>;
+
+    private:
+        TypeFlagsContainer typeFlags;
+        IconFlagsContainer iconFlags;
+        DefaultFlagsContainer defaultFlags;
+        ModeFlagsContainer modeFlags;
+        MiscFlagsContainer miscFlags;
         size_t maxSize;
         std::default_random_engine randomEngine;
     };

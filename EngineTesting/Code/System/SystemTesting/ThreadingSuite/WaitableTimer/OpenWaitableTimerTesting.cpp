@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:05)
+///	引擎测试版本：0.9.0.1 (2023/02/01 22:53)
 
 #include "OpenWaitableTimerTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -18,20 +18,18 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-
 System::OpenWaitableTimerTesting::OpenWaitableTimerTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      waitableTimerStandardAccessFlags{ MutexStandardAccess::Delete,
-                                        MutexStandardAccess::ReadControl,
-                                        MutexStandardAccess::WriteDac,
-                                        MutexStandardAccess::WriteOwner,
-                                        MutexStandardAccess::Synchronize },
-      waitableTimerSpecificAccessFlags{ WaitableTimerSpecificAccess::Default,
-                                        WaitableTimerSpecificAccess::ModifyState,
-                                        WaitableTimerSpecificAccess::AllAccess },
+      waitableTimerStandardAccesses{ MutexStandardAccess::Delete,
+                                     MutexStandardAccess::ReadControl,
+                                     MutexStandardAccess::WriteDac,
+                                     MutexStandardAccess::WriteOwner,
+                                     MutexStandardAccess::Synchronize },
+      waitableTimerSpecificAccesses{ WaitableTimerSpecificAccess::Default,
+                                     WaitableTimerSpecificAccess::ModifyState,
+                                     WaitableTimerSpecificAccess::AllAccess },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(waitableTimerStandardAccessFlags.size(), waitableTimerSpecificAccessFlags.size()) }
+      maxSize{ std::max(waitableTimerStandardAccesses.size(), waitableTimerSpecificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -50,8 +48,8 @@ void System::OpenWaitableTimerTesting::MainTest()
 
 bool System::OpenWaitableTimerTesting::RandomShuffleFlags()
 {
-    shuffle(waitableTimerStandardAccessFlags.begin(), waitableTimerStandardAccessFlags.end(), randomEngine);
-    shuffle(waitableTimerSpecificAccessFlags.begin(), waitableTimerSpecificAccessFlags.end(), randomEngine);
+    shuffle(waitableTimerStandardAccesses.begin(), waitableTimerStandardAccesses.end(), randomEngine);
+    shuffle(waitableTimerSpecificAccesses.begin(), waitableTimerSpecificAccesses.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -60,11 +58,27 @@ bool System::OpenWaitableTimerTesting::RandomShuffleFlags()
 
 void System::OpenWaitableTimerTesting::ThreadTest()
 {
-    constexpr auto threadCount = 12;
-    auto waitableTimerName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
+    const auto waitableTimerName = ToString(GetTimeInSeconds()) + GetEngineeringTypesSuffix();
 
-    auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, waitableTimerName.c_str());
+    const auto waitableTimerHandle = CreateSystemWaitableTimer(nullptr, true, waitableTimerName.c_str());
     ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, waitableTimerName);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
+}
+
+void System::OpenWaitableTimerTesting::WaitForWaitableTimerTest(const String& waitableTimerName)
+{
+    for (auto index = 0u; index < maxSize; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(DoWaitForWaitableTimerTest, index, waitableTimerName);
+    }
+}
+
+void System::OpenWaitableTimerTesting::CreateThread(const String& waitableTimerName)
+{
+    constexpr auto threadCount = 12;
 
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
@@ -73,20 +87,15 @@ void System::OpenWaitableTimerTesting::ThreadTest()
     }
 
     threadGroup.join_all();
-
-    ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
 }
 
-void System::OpenWaitableTimerTesting::WaitForWaitableTimerTest(const String& waitableTimerName)
+void System::OpenWaitableTimerTesting::DoWaitForWaitableTimerTest(size_t index, const String& waitableTimerName)
 {
-    for (auto index = 0u; index < maxSize; ++index)
-    {
-        auto waitableTimerStandardAccess = waitableTimerStandardAccessFlags.at(index % waitableTimerStandardAccessFlags.size());
-        auto waitableTimerSpecificAccess = waitableTimerSpecificAccessFlags.at(index % waitableTimerSpecificAccessFlags.size());
+    const auto waitableTimerStandardAccess = waitableTimerStandardAccesses.at(index % waitableTimerStandardAccesses.size());
+    const auto waitableTimerSpecificAccess = waitableTimerSpecificAccesses.at(index % waitableTimerSpecificAccesses.size());
 
-        auto waitableTimerHandle = OpenSystemWaitableTimer(waitableTimerStandardAccess, waitableTimerSpecificAccess, true, waitableTimerName.c_str());
-        ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
+    const auto waitableTimerHandle = OpenSystemWaitableTimer(waitableTimerStandardAccess, waitableTimerSpecificAccess, true, waitableTimerName.c_str());
+    ASSERT_TRUE(IsWaitableTimerValid(waitableTimerHandle));
 
-        ASSERT_TRUE(CloseSystemWaitableTimer(waitableTimerHandle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseWaitableTimerTest, waitableTimerHandle);
 }

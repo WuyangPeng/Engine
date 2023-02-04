@@ -1,27 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:56)
+///	引擎测试版本：0.9.0.1 (2023/01/26 21:24)
 
 #ifndef SYSTEM_SECURITY_SUITE_ACCESS_CHECK_TESTING_H
 #define SYSTEM_SECURITY_SUITE_ACCESS_CHECK_TESTING_H
 
-#include "System/FileManager/Fwd/FileFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "AccessCheckTestingBase.h"
 
 namespace System
 {
-    class AccessCheckTesting final : public CoreTools::UnitTest
+    class AccessCheckTesting final : public AccessCheckTestingBase
     {
     public:
         using ClassType = AccessCheckTesting;
-        using ParentType = UnitTest;
+        using ParentType = AccessCheckTestingBase;
 
     public:
         explicit AccessCheckTesting(const OStreamShared& stream);
@@ -33,14 +30,10 @@ namespace System
         void MainTest();
 
         void AccessCheckTest();
-        void AccessCheckByTypeTest();
-        void AccessCheckByTypeResultListTest();
 
-    private:
-        using FileHandleDesiredAccessContainer = std::vector<FileHandleDesiredAccess>;
-
-    private:
-        FileHandleDesiredAccessContainer fileHandleDesiredAccess;
+        void DuplicateTokenTest(WindowsHandle tokenHandle);
+        void DoAccessCheckTest(WindowsHandle impersonatedToken);
+        void GetAccessCheckTest(FileHandleDesiredAccess accessMask, BufferType& buffer, WindowsHandle impersonatedToken);
     };
 }
 

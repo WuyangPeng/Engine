@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:59)
+///	引擎测试版本：0.9.0.1 (2023/02/01 20:07)
 
 #include "PriorityBoostTesting.h"
 #include "System/Threading/Flags/ThreadFlags.h"
@@ -36,14 +36,38 @@ void System::PriorityBoostTesting::MainTest()
 
 void System::PriorityBoostTesting::ThreadTest()
 {
-    auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
+    const auto mutexHandle = CreateSystemMutex(nullptr, false, nullptr);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DoThreadTest, mutexHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseMutexTest, mutexHandle);
+}
+
+System::WindowsDWord System::PriorityBoostTesting::ThreadStartRoutine(void* threadParameter) noexcept
+{
+    MAYBE_UNUSED const auto waitResult = WaitForSystemMutex(threadParameter);
+
+    MAYBE_UNUSED const auto releaseResult = ReleaseSystemMutex(threadParameter);
+
+    return exitFunctionCode;
+}
+
+void System::PriorityBoostTesting::DoThreadTest(WindowsHandle mutexHandle)
+{
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
     ASSERT_TRUE(WaitForSystemMutex(mutexHandle));
 
     WindowsDWord threadID{ 0 };
-    auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadID);
+    const auto threadHandle = CreateSystemThread(nullptr, 0, ClassType::ThreadStartRoutine, mutexHandle, ThreadCreation::Default, &threadID);
 
+    ASSERT_NOT_THROW_EXCEPTION_3(ResultTest, threadHandle, threadID, mutexHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
+}
+
+void System::PriorityBoostTesting::ResultTest(WindowsHandle threadHandle, WindowsDWord threadID, WindowsHandle mutexHandle)
+{
     ASSERT_TRUE(IsThreadHandleValid(threadHandle));
     ASSERT_LESS(0u, threadID);
 
@@ -57,16 +81,4 @@ void System::PriorityBoostTesting::ThreadTest()
 
     ASSERT_TRUE(ReleaseSystemMutex(mutexHandle));
     ASSERT_TRUE(WaitForSystemThread(threadHandle));
-
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
-    ASSERT_TRUE(CloseSystemMutex(mutexHandle));
-}
-
-System::WindowsDWord System::PriorityBoostTesting::ThreadStartRoutine(void* threadParameter) noexcept
-{
-    MAYBE_UNUSED const auto waitResult = WaitForSystemMutex(threadParameter);
-
-    MAYBE_UNUSED const auto releaseResult = ReleaseSystemMutex(threadParameter);
-
-    return 1u;
 }

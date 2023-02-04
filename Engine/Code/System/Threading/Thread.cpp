@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:06)
+///	引擎版本：0.9.0.1 (2023/01/30 13:23)
 
 #include "System/SystemExport.h"
 
@@ -105,7 +105,7 @@ System::ThreadHandle System::GetCurrentSystemThread() noexcept
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowsDWord System::GetCurrentSystemThreadID() noexcept
+System::WindowsDWord System::GetCurrentSystemThreadId() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -216,7 +216,7 @@ System::MutexWaitReturn System::WaitForSystemThread(WindowsDWord count, const Th
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ThreadHandle System::BeginSystemThread(void* security, unsigned stacksize, StartAddress startAddress, void* argument, unsigned createFlag, unsigned* threadAddress) noexcept
+System::ThreadHandle System::BeginSystemThread(void* security, unsigned int stacksize, StartAddress startAddress, void* argument, unsigned int createFlag, unsigned int* threadAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -236,7 +236,7 @@ System::ThreadHandle System::BeginSystemThread(void* security, unsigned stacksiz
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::EndSystemThread(unsigned retCode) noexcept
+void System::EndSystemThread(unsigned int retCode) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -251,7 +251,7 @@ void System::EndSystemThread(unsigned retCode) noexcept
 
 bool System::IsThreadHandleValid(ThreadHandle threadHandle) noexcept
 {
-    if (threadHandle != nullptr && threadHandle != gInvalidHandleValue)
+    if (threadHandle != nullptr && threadHandle != invalidHandleValue)
         return true;
     else
         return false;

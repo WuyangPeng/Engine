@@ -20,8 +20,8 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 
 template <typename ApplicationTrait>
-ThreadingCoreRenderEngineAssist::InputMiddleLayer<ApplicationTrait>::InputMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }, lastKey{ -1 }
+ThreadingCoreRenderEngineAssist::InputMiddleLayer<ApplicationTrait>::InputMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }, lastKey{ -1 }
 {
     ASSIST_SELF_CLASS_IS_VALID_1;
 }

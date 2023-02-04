@@ -1,25 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:58)
+///	引擎测试版本：0.9.0.1 (2023/02/01 20:07)
 
 #ifndef SYSTEM_THREADING_SUITE_PRIORITY_BOOST_TESTING_H
 #define SYSTEM_THREADING_SUITE_PRIORITY_BOOST_TESTING_H
 
+#include "ThreadToolsTestingBase.h"
 #include "System/Helper/WindowsMacro.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace System
 {
-    class PriorityBoostTesting final : public CoreTools::UnitTest
+    class PriorityBoostTesting final : public ThreadToolsTestingBase
     {
     public:
         using ClassType = PriorityBoostTesting;
-        using ParentType = UnitTest;
+        using ParentType = ThreadToolsTestingBase;
 
     public:
         explicit PriorityBoostTesting(const OStreamShared& stream);
@@ -31,6 +31,9 @@ namespace System
         void MainTest();
 
         void ThreadTest();
+
+        void DoThreadTest(WindowsHandle mutexHandle);
+        void ResultTest(WindowsHandle threadHandle, WindowsDWord threadID, WindowsHandle mutexHandle);
 
         static WindowsDWord SYSTEM_WINAPI ThreadStartRoutine(void* threadParameter) noexcept;
     };

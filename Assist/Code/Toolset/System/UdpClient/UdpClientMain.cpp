@@ -1,19 +1,16 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎辅助版本：0.8.1.3 (2022/10/27 23:48)
+///	引擎辅助版本：0.9.0.2 (2023/02/04 0:15)
 
 #include "UdpClient.h"
 
 #include <exception>
 #include <iostream>
-
-using std::cout;
-using std::exception;
 
 int main()
 {
@@ -21,13 +18,13 @@ int main()
     {
         SystemToolset::UdpClient();
     }
-    catch (const exception& exception)
+    catch (const std::exception& exception)
     {
-        cout << exception.what() << '\n';
+        std::cout << exception.what() << '\n';
     }
     catch (...)
     {
-        cout << "未知错误！\n";
+        std::cout << "未知错误！\n";
     }
 
     return 0;

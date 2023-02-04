@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/05 22:18)
+///	引擎测试版本：0.9.0.1 (2023/01/30 0:15)
 
 #include "MessageBoxSelectionUseLanguageIDDataWindowsTesting.h"
 #include "System/SystemOutput/Data/LanguageIDData.h"
@@ -15,10 +15,6 @@
 #include "System/SystemOutput/MessageBoxSelection.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
-
-#include <algorithm>
-
-using std::max;
 
 System::MessageBoxSelectionUseLanguageIDDataWindowsTesting::MessageBoxSelectionUseLanguageIDDataWindowsTesting(const OStreamShared& stream, WindowsHWnd hwnd)
     : ParentType{ stream },
@@ -174,7 +170,7 @@ System::MessageBoxSelectionUseLanguageIDDataWindowsTesting::MessageBoxSelectionU
                         SubLanguage::SpanishNicaragua,
                         SubLanguage::SpanishPuertoRico,
                         SubLanguage::SpanishUS },
-      maxSize{ max(primaryLanguageFlags.size(), subLanguageFlags.size()) },
+      maxSize{ std::max(primaryLanguageFlags.size(), subLanguageFlags.size()) },
       randomEngine{ GetEngineRandomSeed() }
 {
     SELF_CLASS_IS_VALID_1;
@@ -206,23 +202,28 @@ void System::MessageBoxSelectionUseLanguageIDDataWindowsTesting::MessageBoxTest(
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto primaryLanguageFlag = primaryLanguageFlags.at(index % primaryLanguageFlags.size());
-        auto subLanguageFlag = subLanguageFlags.at(index % subLanguageFlags.size());
-
-        const LanguageIDData languageIDData{ primaryLanguageFlag, subLanguageFlag };
-
-        constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNoCancel,
-                                                 MessageBoxIcon::Error,
-                                                 MessageBoxDefault::Button1,
-                                                 MessageBoxMode::ApplModal,
-                                                 MessageBoxMisc::TopMost };
-
-        const auto flag = MessageBoxSelection(hwnd,
-                                              SYSTEM_TEXT("这个对话框只是测试语言标志，请点击任意按钮。"),
-                                              SYSTEM_TEXT("测试"),
-                                              flagsData,
-                                              languageIDData);
-
-        ASSERT_ENUM_UNEQUAL(DialogBoxCommand::IDCreationFailed, flag);
+        ASSERT_NOT_THROW_EXCEPTION_1(DoMessageBoxTest, index);
     }
+}
+
+void System::MessageBoxSelectionUseLanguageIDDataWindowsTesting::DoMessageBoxTest(size_t index)
+{
+    const auto primaryLanguageFlag = primaryLanguageFlags.at(index % primaryLanguageFlags.size());
+    const auto subLanguageFlag = subLanguageFlags.at(index % subLanguageFlags.size());
+
+    const LanguageIDData languageIDData{ primaryLanguageFlag, subLanguageFlag };
+
+    constexpr MessageBoxFlagsData flagsData{ MessageBoxType::YesNoCancel,
+                                             MessageBoxIcon::Error,
+                                             MessageBoxDefault::Button1,
+                                             MessageBoxMode::ApplModal,
+                                             MessageBoxMisc::TopMost };
+
+    const auto flag = MessageBoxSelection(hwnd,
+                                          SYSTEM_TEXT("这个对话框只是测试语言标志，请点击任意按钮。"),
+                                          SYSTEM_TEXT("测试"),
+                                          flagsData,
+                                          languageIDData);
+
+    ASSERT_ENUM_UNEQUAL(DialogBoxCommand::IDCreationFailed, flag);
 }

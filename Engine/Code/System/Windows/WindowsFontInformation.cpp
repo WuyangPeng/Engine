@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:15)
+///	引擎版本：0.9.0.1 (2023/02/02 14:42)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ int System::GetStringWidth(WindowsHWnd hwnd, const String& text) noexcept
         return 0;
     }
 
-    auto context = GetSystemDC(hwnd);
+    const auto context = GetSystemDC(hwnd);
     WindowsPointSize size{ 0, 0 };
     if (GetSystemTextExtentPoint32(context, text.c_str(), gsl::narrow_cast<int>(text.size()), &size) && ReleaseSystemDC(hwnd, context))
     {
@@ -40,7 +40,7 @@ int System::GetCharacterWidth(WindowsHWnd hwnd, const TChar character)
 
 int System::GetFontHeight(WindowsHWnd hwnd) noexcept
 {
-    auto context = GetSystemDC(hwnd);
+    const auto context = GetSystemDC(hwnd);
     WindowsTextMetric metric{};
     if (GetSystemTextMetrics(context, &metric) && ReleaseSystemDC(hwnd, context))
     {

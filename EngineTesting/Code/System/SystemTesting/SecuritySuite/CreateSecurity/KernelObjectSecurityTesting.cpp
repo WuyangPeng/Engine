@@ -1,32 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:49)
+///	引擎测试版本：0.9.0.1 (2023/01/25 20:16)
 
 #include "KernelObjectSecurityTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
-
 System::KernelObjectSecurityTesting::KernelObjectSecurityTesting(const OStreamShared& stream)
-    : ParentType{ stream },
-      securityRequestedInformationFlags{ SecurityRequestedInformation::Owner,
-                                         SecurityRequestedInformation::Group,
-                                         SecurityRequestedInformation::Dacl,
-                                         SecurityRequestedInformation::Label }
+    : ParentType{ stream }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -45,24 +34,31 @@ void System::KernelObjectSecurityTesting::MainTest()
 
 void System::KernelObjectSecurityTesting::KernelObjectSecurityTest()
 {
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    WindowsHandle tokenHandle = OpenProcessToken();
 
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(tokenHandle, "Token句柄获取失败。");
+    ASSERT_NOT_THROW_EXCEPTION_1(DoKernelObjectSecurityTest, tokenHandle);
 
-    for (auto securityRequestedInformation : securityRequestedInformationFlags)
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTokenTest, tokenHandle);
+}
+
+void System::KernelObjectSecurityTesting::DoKernelObjectSecurityTest(WindowsHandle tokenHandle)
+{
+    for (auto securityRequestedInformation : *this)
     {
-        WindowsDWord neededLength{ 0 };
-        ASSERT_FALSE(GetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, nullptr, 0, &neededLength));
-
-        vector<char> buffer(boost::numeric_cast<size_t>(neededLength + 1));
-
-        WindowsDWord newNeededLength{ 0 };
-        ASSERT_TRUE(GetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, buffer.data(), neededLength, &newNeededLength));
-        ASSERT_EQUAL(newNeededLength, neededLength);
-
-        ASSERT_TRUE(SetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, buffer.data()));
+        ASSERT_NOT_THROW_EXCEPTION_2(SetKernelObjectSecurityTest, tokenHandle, securityRequestedInformation);
     }
+}
 
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+void System::KernelObjectSecurityTesting::SetKernelObjectSecurityTest(WindowsHandle tokenHandle, SecurityRequestedInformation securityRequestedInformation)
+{
+    WindowsDWord neededLength{ 0 };
+    ASSERT_FALSE(GetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, nullptr, 0, &neededLength));
+
+    BufferType buffer(boost::numeric_cast<size_t>(neededLength + 1));
+
+    WindowsDWord newNeededLength{ 0 };
+    ASSERT_TRUE(GetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, buffer.data(), neededLength, &newNeededLength));
+    ASSERT_EQUAL(newNeededLength, neededLength);
+
+    ASSERT_TRUE(SetSystemKernelObjectSecurity(tokenHandle, securityRequestedInformation, buffer.data()));
 }

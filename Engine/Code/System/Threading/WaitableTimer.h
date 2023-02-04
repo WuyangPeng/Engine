@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:04)
+///	引擎版本：0.9.0.1 (2023/01/30 13:20)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_H
@@ -18,10 +18,9 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 
+// 等待计时器的创建、销毁、等待和设置。
 namespace System
 {
-    // 等待计时器的创建、销毁、等待和设置。
-
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,
                                                                                  bool manualReset,
                                                                                  const TChar* timerName) noexcept;
@@ -40,10 +39,20 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemWaitableTimer(WindowsHandle timer) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer) noexcept;
-    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer, WindowsDWord milliseconds) noexcept;
-    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer, WindowsDWord milliseconds, bool alertable) noexcept;
-    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsDWord count, const WindowsHandle* timer, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept;
-    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsDWord count, const WindowsHandle* timer, bool waitAll, WindowsDWord milliseconds) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer,
+                                                                                WindowsDWord milliseconds) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer,
+                                                                                WindowsDWord milliseconds,
+                                                                                bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsDWord count,
+                                                                                const WindowsHandle* timer,
+                                                                                bool waitAll,
+                                                                                WindowsDWord milliseconds,
+                                                                                bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsDWord count,
+                                                                                const WindowsHandle* timer,
+                                                                                bool waitAll,
+                                                                                WindowsDWord milliseconds) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemWaitableTimer(WindowsHandle timer,
                                                                  const WindowsLargeInteger* dueTime,

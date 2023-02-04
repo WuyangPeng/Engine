@@ -22,9 +22,6 @@
 #include <exception>
 #include <iostream>
 
-using std::cout;
-using std::exception;
-
 SystemToolset::WinSockStart SystemToolset::WinSockStart::Create()
 {
     return WinSockStart{ DisableNotThrow::Disable };
@@ -81,6 +78,6 @@ void SystemToolset::WinSockStart::WinSockCleanup()
 {
     if (System::WinSockCleanup() != System::WinSockCleanupReturn::Successful)
     {
-        cout << "WinSockCleanupÊ§°Ü\n";
+        std::cout << "WinSockCleanupÊ§°Ü\n";
     }
 }

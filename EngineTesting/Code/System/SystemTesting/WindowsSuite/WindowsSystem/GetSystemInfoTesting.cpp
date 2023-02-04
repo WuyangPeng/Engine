@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 19:04)
+///	引擎测试版本：0.9.0.1 (2023/02/02 20:39)
 
 #include "GetSystemInfoTesting.h"
 #include "System/Windows/WindowsSystem.h"
@@ -36,6 +36,24 @@ void System::GetSystemInfoTesting::InfoTest()
     WindowsSystemInfo systemInfo{};
     GetWindowSystemInfo(systemInfo);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(GetWindowSystemInfoResultTest, systemInfo);
+
+    const auto numberOfProcessors = systemInfo.dwNumberOfProcessors;
+
+    ASSERT_NOT_THROW_EXCEPTION_1(GetNumaProcessorNodeNumberTest, numberOfProcessors);
+}
+
+void System::GetSystemInfoTesting::GetNumaProcessorNodeNumberTest(WindowsDWord numberOfProcessors)
+{
+    for (WindowsUChar processor{ 0 }; processor < numberOfProcessors; ++processor)
+    {
+        WindowsUChar nodeNumber{ 0 };
+        ASSERT_TRUE(GetNumaProcessorNodeNumber(processor, &nodeNumber));
+    }
+}
+
+void System::GetSystemInfoTesting::GetWindowSystemInfoResultTest(const WindowsSystemInfo& systemInfo)
+{
     ASSERT_LESS(0u, systemInfo.dwPageSize);
     ASSERT_UNEQUAL_NULL_PTR(systemInfo.lpMinimumApplicationAddress);
     ASSERT_UNEQUAL_NULL_PTR(systemInfo.lpMaximumApplicationAddress);
@@ -45,12 +63,4 @@ void System::GetSystemInfoTesting::InfoTest()
     ASSERT_LESS(0u, systemInfo.dwAllocationGranularity);
     ASSERT_LESS(0, systemInfo.wProcessorLevel);
     ASSERT_LESS(0, systemInfo.wProcessorRevision);
-
-    const auto numberOfProcessors = systemInfo.dwNumberOfProcessors;
-
-    for (WindowsUChar processor{ 0 }; processor < numberOfProcessors; ++processor)
-    {
-        WindowsUChar nodeNumber{ 0 };
-        ASSERT_TRUE(GetNumaProcessorNodeNumber(processor, &nodeNumber));
-    }
 }

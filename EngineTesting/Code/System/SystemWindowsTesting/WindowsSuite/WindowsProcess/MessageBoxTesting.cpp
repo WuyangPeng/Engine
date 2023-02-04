@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 19:45)
+///	引擎测试版本：0.9.0.1 (2023/02/02 21:07)
 
 #include "MessageBoxTesting.h"
 #include "System/Windows/WindowsProcess.h"
@@ -33,5 +33,5 @@ void System::MessageBoxTesting::MainTest()
 
 void System::MessageBoxTesting::MessageBoxTest()
 {
-    MAYBE_UNUSED const auto result = MessageBox(hwnd, SYSTEM_TEXT("消息"), SYSTEM_TEXT("消息标题"));
+    MAYBE_UNUSED const auto result = DefaultMessageBox(hwnd, SYSTEM_TEXT("消息"), SYSTEM_TEXT("消息标题"));
 }

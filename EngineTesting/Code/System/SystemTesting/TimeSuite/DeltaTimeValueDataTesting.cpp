@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/29 0:00)
+///	引擎测试版本：0.9.0.1 (2023/02/02 14:18)
 
 #include "DeltaTimeValueDataTesting.h"
 #include "System/Threading/SyncTools.h"
@@ -36,48 +36,11 @@ void System::DeltaTimeValueDataTesting::MainTest()
 
 void System::DeltaTimeValueDataTesting::DataTest()
 {
-    const DeltaTimeValueData deltaTimeValueData0{};
+    ASSERT_NOT_THROW_EXCEPTION_0(DataZeroTest);
 
-    ASSERT_EQUAL(deltaTimeValueData0.GetSecond(), 0);
-    ASSERT_EQUAL(deltaTimeValueData0.GetMicrosecond(), 0);
+    const auto deltaTimeValue = DataNonZeroTest();
 
-    const auto deltaTimeValue0 = deltaTimeValueData0.GetDeltaTimeValue();
-
-    ASSERT_EQUAL(deltaTimeValue0.tv_sec, 0);
-    ASSERT_EQUAL(deltaTimeValue0.tv_usec, 0);
-
-    const DeltaTimeValueData deltaTimeValueData1{ 10, 45 };
-
-    ASSERT_EQUAL(deltaTimeValueData1.GetSecond(), 10);
-    ASSERT_EQUAL(deltaTimeValueData1.GetMicrosecond(), 45);
-
-    auto deltaTimeValue1 = deltaTimeValueData1.GetDeltaTimeValue();
-
-    ASSERT_EQUAL(deltaTimeValue1.tv_sec, 10);
-    ASSERT_EQUAL(deltaTimeValue1.tv_usec, 45);
-
-    deltaTimeValue1.tv_sec = 20;
-    deltaTimeValue1.tv_usec = 50;
-
-    DeltaTimeValueData deltaTimeValueData2{ deltaTimeValue1 };
-
-    ASSERT_EQUAL(deltaTimeValueData2.GetSecond(), 20);
-    ASSERT_EQUAL(deltaTimeValueData2.GetMicrosecond(), 50);
-
-    auto deltaTimeValue2 = deltaTimeValueData2.GetDeltaTimeValue();
-
-    ASSERT_EQUAL(deltaTimeValue2.tv_sec, 20);
-    ASSERT_EQUAL(deltaTimeValue2.tv_usec, 50);
-
-    deltaTimeValueData2.SetValue(4, 5);
-
-    ASSERT_EQUAL(deltaTimeValueData2.GetSecond(), 4);
-    ASSERT_EQUAL(deltaTimeValueData2.GetMicrosecond(), 5);
-
-    deltaTimeValue2 = deltaTimeValueData2.GetDeltaTimeValue();
-
-    ASSERT_EQUAL(deltaTimeValue2.tv_sec, 4);
-    ASSERT_EQUAL(deltaTimeValue2.tv_usec, 5);
+    ASSERT_NOT_THROW_EXCEPTION_1(DataCopyTest, deltaTimeValue);
 }
 
 void System::DeltaTimeValueDataTesting::TimerSubTest()
@@ -86,15 +49,15 @@ void System::DeltaTimeValueDataTesting::TimerSubTest()
     const DeltaTimeValueData deltaTimeValueData1{ 10, 45 };
     const DeltaTimeValueData deltaTimeValueData2{ 8, 60 };
 
-    auto deltaTimeValueData3 = deltaTimeValueData0 - deltaTimeValueData1;
+    const auto deltaTimeValueData3 = deltaTimeValueData0 - deltaTimeValueData1;
 
     ASSERT_EQUAL(deltaTimeValueData3.GetSecond(), deltaTimeValueData0.GetSecond() - deltaTimeValueData1.GetSecond());
     ASSERT_EQUAL(deltaTimeValueData3.GetMicrosecond(), deltaTimeValueData0.GetMicrosecond() - deltaTimeValueData1.GetMicrosecond());
 
-    deltaTimeValueData3 = deltaTimeValueData1 - deltaTimeValueData2;
+    const auto deltaTimeValueData4 = deltaTimeValueData1 - deltaTimeValueData2;
 
-    ASSERT_EQUAL(deltaTimeValueData3.GetSecond(), deltaTimeValueData1.GetSecond() - deltaTimeValueData2.GetSecond() - 1);
-    ASSERT_EQUAL(deltaTimeValueData3.GetMicrosecond(), deltaTimeValueData1.GetMicrosecond() - deltaTimeValueData2.GetMicrosecond() + gMicroseconds);
+    ASSERT_EQUAL(deltaTimeValueData4.GetSecond(), deltaTimeValueData1.GetSecond() - deltaTimeValueData2.GetSecond() - 1);
+    ASSERT_EQUAL(deltaTimeValueData4.GetMicrosecond(), deltaTimeValueData1.GetMicrosecond() - deltaTimeValueData2.GetMicrosecond() + gMicroseconds);
 }
 
 void System::DeltaTimeValueDataTesting::CorrectionTest()
@@ -108,4 +71,58 @@ void System::DeltaTimeValueDataTesting::CorrectionTest()
 
     ASSERT_EQUAL(deltaTimeValueData.GetSecond(), 99);
     ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), -45 + gMicroseconds);
+}
+
+void System::DeltaTimeValueDataTesting::DataZeroTest()
+{
+    const DeltaTimeValueData deltaTimeValueData{};
+
+    ASSERT_EQUAL(deltaTimeValueData.GetSecond(), 0);
+    ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), 0);
+
+    const auto deltaTimeValue = deltaTimeValueData.GetDeltaTimeValue();
+
+    ASSERT_EQUAL(deltaTimeValue.tv_sec, 0);
+    ASSERT_EQUAL(deltaTimeValue.tv_usec, 0);
+}
+
+System::DeltaTimeValue System::DeltaTimeValueDataTesting::DataNonZeroTest()
+{
+    const DeltaTimeValueData deltaTimeValueData{ 10, 45 };
+
+    ASSERT_EQUAL(deltaTimeValueData.GetSecond(), 10);
+    ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), 45);
+
+    auto deltaTimeValue = deltaTimeValueData.GetDeltaTimeValue();
+
+    ASSERT_EQUAL(deltaTimeValue.tv_sec, 10);
+    ASSERT_EQUAL(deltaTimeValue.tv_usec, 45);
+
+    deltaTimeValue.tv_sec = 20;
+    deltaTimeValue.tv_usec = 50;
+
+    return deltaTimeValue;
+}
+
+void System::DeltaTimeValueDataTesting::DataCopyTest(const DeltaTimeValue& deltaTimeValue)
+{
+    DeltaTimeValueData deltaTimeValueData{ deltaTimeValue };
+
+    ASSERT_EQUAL(deltaTimeValueData.GetSecond(), 20);
+    ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), 50);
+
+    auto result = deltaTimeValueData.GetDeltaTimeValue();
+
+    ASSERT_EQUAL(result.tv_sec, 20);
+    ASSERT_EQUAL(result.tv_usec, 50);
+
+    deltaTimeValueData.SetValue(4, 5);
+
+    ASSERT_EQUAL(deltaTimeValueData.GetSecond(), 4);
+    ASSERT_EQUAL(deltaTimeValueData.GetMicrosecond(), 5);
+
+    result = deltaTimeValueData.GetDeltaTimeValue();
+
+    ASSERT_EQUAL(result.tv_sec, 4);
+    ASSERT_EQUAL(result.tv_usec, 5);
 }

@@ -142,7 +142,7 @@ bool System::OpenGLBlendTesting::RandomShuffleFlags()
 
 void System::OpenGLBlendTesting::SetGLBlendFuncSeparateTest()
 {
-    for (auto index = 0; index < maxSize; ++index)
+    for (auto index = 0u; index < maxSize; ++index)
     {
         const auto sourceFactorRGB = sourceFactorRGBs.at(index % sourceFactorRGBs.size());
         const auto destinationFactorRGB = destinationFactorRGBs.at(index % destinationFactorRGBs.size());
@@ -156,7 +156,7 @@ void System::OpenGLBlendTesting::SetGLBlendFuncSeparateTest()
 
 void System::OpenGLBlendTesting::SetGLBlendEquationSeparateTest()
 {
-    for (auto index = 0; index < maxSize; ++index)
+    for (auto index = 0u; index < maxSize; ++index)
     {
         const auto modeRGB = modeRGBs.at(index % modeRGBs.size());
         const auto modeAlpha = modeAlphas.at(index % modeAlphas.size());

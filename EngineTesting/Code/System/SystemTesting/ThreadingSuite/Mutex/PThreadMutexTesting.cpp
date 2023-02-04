@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:33)
+///	引擎测试版本：0.9.0.1 (2023/02/01 11:46)
 
 #include "PThreadMutexTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -36,17 +36,29 @@ void System::PThreadMutexTesting::MainTest()
 
 void System::PThreadMutexTesting::ThreadTest()
 {
-    constexpr auto threadCount = 12;
-
     PthreadMutexattrT attribute{};
     PthreadMutexT mutex{};
 
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeInit(&attribute), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeSetType(&attribute), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexInit(&attribute, &mutex), PthreadResult::Successful);
+    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexInitTest, attribute, mutex);
 
     threadSum = 0;
 
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, mutex);
+
+    ASSERT_EQUAL(threadSum, threadCount);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexDestroyTest, mutex, attribute);
+}
+
+void System::PThreadMutexTesting::PthreadMutexInitTest(PthreadMutexattrT& attribute, PthreadMutexT& mutex)
+{
+    ASSERT_ENUM_EQUAL(PthreadMutexAttributeInit(&attribute), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PthreadMutexAttributeSetType(&attribute), PthreadResult::Successful);
+    ASSERT_ENUM_EQUAL(PthreadMutexInit(&attribute, &mutex), PthreadResult::Successful);
+}
+
+void System::PThreadMutexTesting::CreateThread(PthreadMutexT& mutex)
+{
     boost::thread_group threadGroup{};
     for (auto i = 0; i < threadCount; ++i)
     {
@@ -54,9 +66,10 @@ void System::PThreadMutexTesting::ThreadTest()
     }
 
     threadGroup.join_all();
+}
 
-    ASSERT_EQUAL(threadSum, threadCount);
-
+void System::PThreadMutexTesting::PthreadMutexDestroyTest(PthreadMutexT& mutex, PthreadMutexattrT& attribute)
+{
     ASSERT_ENUM_EQUAL(PthreadMutexDestroy(&mutex), PthreadResult::Successful);
     ASSERT_ENUM_EQUAL(PthreadMutexAttributeDestroy(&attribute), PthreadResult::Successful);
 }
@@ -66,35 +79,40 @@ void System::PThreadMutexTesting::TrylockTest()
     PthreadMutexattrT attribute{};
     PthreadMutexT mutex{};
 
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeInit(&attribute), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeSetType(&attribute), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexInit(&attribute, &mutex), PthreadResult::Successful);
+    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexInitTest, attribute, mutex);
 
+    ASSERT_NOT_THROW_EXCEPTION_1(TrylockTimeoutThreadTest, mutex);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(TrylockSuccessThreadTest, mutex);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(PthreadMutexDestroyTest, mutex, attribute);
+}
+
+void System::PThreadMutexTesting::TrylockTimeoutThreadTest(PthreadMutexT& mutex)
+{
     ASSERT_ENUM_EQUAL(PthreadMutexLock(&mutex), PthreadResult::Successful);
 
-    boost::thread thread0{ boost::bind(&ClassType::TrylockTimeoutTest, this, &mutex) };
+    boost::thread thread{ boost::bind(&ClassType::TrylockTimeoutTest, this, &mutex) };
 
-    thread0.join();
+    thread.join();
 
     ASSERT_ENUM_EQUAL(PthreadMutexUnlock(&mutex), PthreadResult::Successful);
+}
 
+void System::PThreadMutexTesting::TrylockSuccessThreadTest(PthreadMutexT& mutex)
+{
     boost::thread thread1{ boost::bind(&ClassType::TrylockSuccessTest, this, &mutex) };
 
     thread1.join();
-
-    ASSERT_ENUM_EQUAL(PthreadMutexDestroy(&mutex), PthreadResult::Successful);
-    ASSERT_ENUM_EQUAL(PthreadMutexAttributeDestroy(&attribute), PthreadResult::Successful);
 }
 
 void System::PThreadMutexTesting::WaitForMutexTest(PthreadMutexT* mutex)
 {
-    constexpr auto loopCount = 12;
-
     ASSERT_ENUM_EQUAL(PthreadMutexLock(mutex), PthreadResult::Successful);
 
     const auto original = threadSum;
 
-    for (auto i = 0; i < loopCount; ++i)
+    for (auto i = 0; i < threadCount; ++i)
     {
         --threadSum;
     }

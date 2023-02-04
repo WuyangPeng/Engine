@@ -14,8 +14,8 @@
 #include "System/Threading/Process.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-ThreadingCoreRenderEngineAssist::SystemMiddleLayer::SystemMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-    : ParentType{ middleLayerPlatform }
+ThreadingCoreRenderEngineAssist::SystemMiddleLayer::SystemMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ middleLayerPlatform, environmentDirectory }
 {
     ASSIST_SELF_CLASS_IS_VALID_1;
 }

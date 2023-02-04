@@ -1,26 +1,21 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:32)
+///	引擎测试版本：0.9.0.1 (2023/01/29 20:48)
 
 #include "CopySecurityIdentifierTesting.h"
-#include "System/Helper/SecuritySidMacro.h"
 #include "System/Security/SecuritySid.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
-
 System::CopySecurityIdentifierTesting::CopySecurityIdentifierTesting(const OStreamShared& stream)
-    : ParentType{ stream }, securitySIDIndentifierAuthority{}
+    : ParentType{ stream }
 {
-    Init();
-
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
@@ -31,18 +26,6 @@ void System::CopySecurityIdentifierTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::CopySecurityIdentifierTesting::Init()
-{
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NULL_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_WORLD_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_LOCAL_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_CREATOR_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NON_UNIQUE_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_RESOURCE_MANAGER_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NT_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY);
-}
-
 void System::CopySecurityIdentifierTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CopySecurityIdentifierTest);
@@ -50,19 +33,24 @@ void System::CopySecurityIdentifierTesting::MainTest()
 
 void System::CopySecurityIdentifierTesting::CopySecurityIdentifierTest()
 {
+    for (auto& identifierAuthority : *this)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_1(DoCopySecurityIdentifierTest, identifierAuthority);
+    }
+}
+
+void System::CopySecurityIdentifierTesting::DoCopySecurityIdentifierTest(SecuritySIDIndentifierAuthority& identifierAuthority)
+{
     constexpr WindowsByte subAuthorityCount{ 5 };
 
-    for (auto& identifierAuthority : securitySIDIndentifierAuthority)
-    {
-        SecuritySID sid{};
+    SecuritySID sid{};
 
-        ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
-        ASSERT_TRUE(IsSecurityIdentifierValid(&sid));
+    ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
+    ASSERT_TRUE(IsSecurityIdentifierValid(&sid));
 
-        const auto length = GetLengthSecurityIdentifier(&sid);
+    const auto length = GetLengthSecurityIdentifier(&sid);
 
-        vector<char> buffer(length);
+    BufferType buffer(length);
 
-        ASSERT_TRUE(CopySecurityIdentifier(length, &sid, buffer.data()));
-    }
+    ASSERT_TRUE(CopySecurityIdentifier(length, &sid, buffer.data()));
 }

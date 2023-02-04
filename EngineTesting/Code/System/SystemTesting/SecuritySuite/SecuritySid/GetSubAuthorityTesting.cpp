@@ -1,40 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:32)
+///	引擎测试版本：0.9.0.1 (2023/01/29 20:54)
 
 #include "GetSubAuthorityTesting.h"
-#include "System/Helper/SecuritySidMacro.h"
 #include "System/Security/SecuritySid.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 System::GetSubAuthorityTesting::GetSubAuthorityTesting(const OStreamShared& stream)
-    : ParentType{ stream }, securitySIDIndentifierAuthority{}
+    : ParentType{ stream }
 {
-    Init();
-
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(System, GetSubAuthorityTesting)
-
-void System::GetSubAuthorityTesting::Init()
-{
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NULL_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_WORLD_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_LOCAL_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_CREATOR_SID_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NON_UNIQUE_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_RESOURCE_MANAGER_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_NT_AUTHORITY);
-    securitySIDIndentifierAuthority.emplace_back(SecuritySIDIndentifierAuthority SYSTEM_SECURITY_MANDATORY_LABEL_AUTHORITY);
-}
 
 void System::GetSubAuthorityTesting::DoRunUnitTest()
 {
@@ -48,40 +33,56 @@ void System::GetSubAuthorityTesting::MainTest()
 
 void System::GetSubAuthorityTesting::GetSubAuthorityTest()
 {
-    for (const auto& identifierAuthority : securitySIDIndentifierAuthority)
+    for (auto& identifierAuthority : *this)
     {
         ASSERT_NOT_THROW_EXCEPTION_1(DoGetSubAuthorityTest, identifierAuthority);
     }
 }
 
-void System::GetSubAuthorityTesting::DoGetSubAuthorityTest(SecuritySIDIndentifierAuthority identifierAuthority)
+void System::GetSubAuthorityTesting::DoGetSubAuthorityTest(SecuritySIDIndentifierAuthority& identifierAuthority)
 {
-    constexpr WindowsByte subAuthorityCount{ 5 };
+    auto sid = GetSecuritySID(identifierAuthority);
+
+    auto securityIdentifierSubAuthorityCount = GetSecurityIdentifierSubAuthorityCount(&sid);
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(securityIdentifierSubAuthorityCount, "securityIdentifierSubAuthorityCount 是空指针。");
+
+    ASSERT_NOT_THROW_EXCEPTION_2(NextSubAuthorityCountTest, securityIdentifierSubAuthorityCount, sid);
+}
+
+System::SecuritySID System::GetSubAuthorityTesting::GetSecuritySID(SecuritySIDIndentifierAuthority& identifierAuthority)
+{
     SecuritySID sid{};
 
     ASSERT_TRUE(InitializeSecurityIdentifier(&sid, &identifierAuthority, subAuthorityCount));
     ASSERT_TRUE(IsSecurityIdentifierValid(&sid));
 
-    auto resultSubAuthorityCount = GetSecurityIdentifierSubAuthorityCount(&sid);
-    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(resultSubAuthorityCount, "resultSubAuthorityCount 是空指针。");
+    return sid;
+}
 
-    if (resultSubAuthorityCount != nullptr)
+void System::GetSubAuthorityTesting::NextSubAuthorityCountTest(WindowsUCharPtr securityIdentifierSubAuthorityCount, SecuritySID& sid)
+{
+    if (securityIdentifierSubAuthorityCount != nullptr)
     {
-        ASSERT_EQUAL(*resultSubAuthorityCount, subAuthorityCount);
+        ASSERT_EQUAL(*securityIdentifierSubAuthorityCount, subAuthorityCount);
 
-        *resultSubAuthorityCount = subAuthorityCount - 1;
+        *securityIdentifierSubAuthorityCount = subAuthorityCount - 1;
 
-        WindowsUCharPtr nextSubAuthorityCount = GetSecurityIdentifierSubAuthorityCount(&sid);
+        auto nextSubAuthorityCount = GetSecurityIdentifierSubAuthorityCount(&sid);
 
         ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(nextSubAuthorityCount, "nextSubAuthorityCount 是空指针。");
 
-        if (nextSubAuthorityCount != nullptr)
-        {
-            ASSERT_EQUAL(*resultSubAuthorityCount, *nextSubAuthorityCount);
+        ASSERT_NOT_THROW_EXCEPTION_3(GetSecurityIdentifierSubAuthorityTest, securityIdentifierSubAuthorityCount, nextSubAuthorityCount, sid);
+    }
+}
 
-            auto securityIdentifierSubAuthority = GetSecurityIdentifierSubAuthority(&sid, *resultSubAuthorityCount - 1);
+void System::GetSubAuthorityTesting::GetSecurityIdentifierSubAuthorityTest(const WindowsUChar* nextSubAuthorityCount, const WindowsUChar* securityIdentifierSubAuthorityCount, SecuritySID& sid)
+{
+    if (securityIdentifierSubAuthorityCount != nullptr && nextSubAuthorityCount != nullptr)
+    {
+        ASSERT_EQUAL(*securityIdentifierSubAuthorityCount, *nextSubAuthorityCount);
 
-            ASSERT_UNEQUAL_NULL_PTR(securityIdentifierSubAuthority);
-        }
+        auto resultSecurityIdentifierSubAuthority = GetSecurityIdentifierSubAuthority(&sid, *securityIdentifierSubAuthorityCount - 1);
+
+        ASSERT_UNEQUAL_NULL_PTR(resultSecurityIdentifierSubAuthority);
     }
 }

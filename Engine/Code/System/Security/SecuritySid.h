@@ -15,10 +15,9 @@
 #include "Using/SecuritySidUsing.h"
 #include "System/Windows/Using/WindowsRegistryUsing.h"
 
+// 安全标识符
 namespace System
 {
-    // 安全标识符
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE InitializeSecurityIdentifier(SecuritySIDPtr sid,
                                                                        SecuritySIDIndentifierAuthorityPtr identifierAuthority,
                                                                        WindowsByte subAuthorityCount) noexcept;

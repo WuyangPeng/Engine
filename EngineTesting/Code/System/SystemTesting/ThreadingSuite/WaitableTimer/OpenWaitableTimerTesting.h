@@ -1,28 +1,28 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/23 0:03)
+///	引擎测试版本：0.9.0.1 (2023/02/01 22:52)
 
 #ifndef SYSTEM_THREADING_SUITE_OPEN_WAITABLE_TIMER_TESTING_H
 #define SYSTEM_THREADING_SUITE_OPEN_WAITABLE_TIMER_TESTING_H
 
+#include "WaitableTimerTestingBase.h"
 #include "System/Threading/Fwd/ThreadingFlagsFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <random>
 #include <vector>
 
 namespace System
 {
-    class OpenWaitableTimerTesting final : public CoreTools::UnitTest
+    class OpenWaitableTimerTesting final : public WaitableTimerTestingBase
     {
     public:
         using ClassType = OpenWaitableTimerTesting;
-        using ParentType = UnitTest;
+        using ParentType = WaitableTimerTestingBase;
 
     public:
         explicit OpenWaitableTimerTesting(const OStreamShared& stream);
@@ -35,15 +35,18 @@ namespace System
 
         NODISCARD bool RandomShuffleFlags();
         void ThreadTest();
+
         void WaitForWaitableTimerTest(const String& waitableTimerName);
+        void CreateThread(const String& waitableTimerName);
+        void DoWaitForWaitableTimerTest(size_t index, const String& waitableTimerName);
 
     private:
-        using WaitableTimerStandardAccessFlagsContainer = std::vector<MutexStandardAccess>;
-        using WaitableTimerSpecificAccessFlagsContainer = std::vector<WaitableTimerSpecificAccess>;
+        using WaitableTimerStandardAccessContainer = std::vector<MutexStandardAccess>;
+        using WaitableTimerSpecificAccessContainer = std::vector<WaitableTimerSpecificAccess>;
 
     private:
-        WaitableTimerStandardAccessFlagsContainer waitableTimerStandardAccessFlags;
-        WaitableTimerSpecificAccessFlagsContainer waitableTimerSpecificAccessFlags;
+        WaitableTimerStandardAccessContainer waitableTimerStandardAccesses;
+        WaitableTimerSpecificAccessContainer waitableTimerSpecificAccesses;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

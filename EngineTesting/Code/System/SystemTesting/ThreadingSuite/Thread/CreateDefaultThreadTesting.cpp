@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 23:46)
+///	引擎测试版本：0.9.0.1 (2023/02/01 19:06)
 
 #include "CreateDefaultThreadTesting.h"
 #include "System/Threading/Thread.h"
@@ -28,22 +28,17 @@ void System::CreateDefaultThreadTesting::DoRunUnitTest()
 
 void System::CreateDefaultThreadTesting::MainTest()
 {
-    ASSERT_EXECUTE_LOOP_TESTING_NOT_THROW_EXCEPTION(ThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 }
 
-bool System::CreateDefaultThreadTesting::ThreadTest()
+void System::CreateDefaultThreadTesting::ThreadTest()
 {
     WindowsDWord threadId{ 0 };
-    auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
+    const auto threadHandle = CreateSystemThread(0, ClassType::ThreadStartRoutine, this, &threadId);
 
-    ASSERT_TRUE(IsThreadHandleValid(threadHandle));
-    ASSERT_LESS(0u, threadId);
+    ASSERT_NOT_THROW_EXCEPTION_2(DoThreadTest, threadHandle, threadId);
 
-    ASSERT_TRUE(WaitForSystemThread(threadHandle));
-
-    ASSERT_TRUE(CloseSystemThread(threadHandle));
-
-    return true;
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseThreadTest, threadHandle);
 }
 
 System::WindowsDWord System::CreateDefaultThreadTesting::ThreadStartRoutine(void* threadParameter)
@@ -61,4 +56,12 @@ System::WindowsDWord System::CreateDefaultThreadTesting::ThreadStartRoutine(void
     }
 
     return ExitSystemThread(0);
+}
+
+void System::CreateDefaultThreadTesting::DoThreadTest(ThreadHandle threadHandle, WindowsDWord threadId)
+{
+    ASSERT_TRUE(IsThreadHandleValid(threadHandle));
+    ASSERT_LESS(0u, threadId);
+
+    ASSERT_TRUE(WaitForSystemThread(threadHandle));
 }

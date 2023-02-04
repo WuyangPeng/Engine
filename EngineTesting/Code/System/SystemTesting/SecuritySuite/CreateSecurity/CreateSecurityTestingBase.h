@@ -5,12 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.9.0.0 (2023/01/25 13:46)
+///	引擎测试版本：0.9.0.1 (2023/01/25 18:27)
 
 #ifndef SYSTEM_SECURITY_SUITE_CREATE_SECURITY_TESTING_BASE_H
 #define SYSTEM_SECURITY_SUITE_CREATE_SECURITY_TESTING_BASE_H
 
 #include "System/Security/Fwd/SecurityFlagsFwd.h"
+#include "System/Security/Using/CreateSecurityUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <vector>
@@ -28,11 +30,29 @@ namespace System
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-    private:
+    protected:
+        using BufferType = std::vector<char>;
         using SecurityRequestedInformationContainer = std::vector<SecurityRequestedInformation>;
+        using SecurityRequestedInformationContainerConstIter = SecurityRequestedInformationContainer::const_iterator;
+        using SecurityAutoInheritContainer = std::vector<SecurityAutoInherit>;
+        using SecurityAutoInheritContainerConstIter = SecurityAutoInheritContainer::const_iterator;
+
+    protected:
+        NODISCARD SecurityRequestedInformationContainerConstIter begin() const noexcept;
+        NODISCARD SecurityRequestedInformationContainerConstIter end() const noexcept;
+        NODISCARD SecurityAutoInheritContainerConstIter GetSecurityAutoInheritBegin() const noexcept;
+        NODISCARD SecurityAutoInheritContainerConstIter GetSecurityAutoInheritEnd() const noexcept;
+        NODISCARD bool GetTokenIsElevated() const noexcept;
+        NODISCARD WindowsHandle OpenProcessToken();
+        void CloseProcessTokenTest(WindowsHandle tokenHandle);
+        void CreatePrivateObjectSecurity(WindowsHandle tokenHandle, SecurityDescriptorPtr& descriptor);
+        void DestroyPrivateObjectSecurityTest(SecurityDescriptorPtr descriptor);
+        NODISCARD AccessCheckGenericMapping GetAccessCheckGenericMapping() noexcept;
 
     private:
         SecurityRequestedInformationContainer securityRequestedInformations;
+        SecurityAutoInheritContainer securityAutoInherits;
+        bool tokenIsElevated;
     };
 }
 

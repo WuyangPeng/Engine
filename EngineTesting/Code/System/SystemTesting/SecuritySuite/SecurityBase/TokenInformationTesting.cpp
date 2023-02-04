@@ -1,16 +1,15 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:43)
+///	引擎测试版本：0.9.0.1 (2023/01/28 16:59)
 
 #include "TokenInformationTestingDetail.h"
+#include "System/Security/SecurityBase.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
-
-using std::vector;
 
 System::TokenInformationTesting::TokenInformationTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -62,31 +61,36 @@ void System::TokenInformationTesting::TokenInformationTest()
 
 void System::TokenInformationTesting::TokenImpersonationLevelTest()
 {
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    const auto tokenHandle = OpenProcessToken();
 
+    ASSERT_NOT_THROW_EXCEPTION_1(DoTokenImpersonationLevelTest, tokenHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseTokenTest, tokenHandle);
+}
+
+void System::TokenInformationTesting::DoTokenImpersonationLevelTest(WindowsHandle tokenHandle)
+{
     WindowsHandle impersonatedToken{ nullptr };
     ASSERT_TRUE(DuplicateSystemToken(tokenHandle, SecurityImpersonation, &impersonatedToken));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(GetTokenImpersonationLevelTest, impersonatedToken);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseTokenTest, impersonatedToken);
+}
+
+void System::TokenInformationTesting::GetTokenImpersonationLevelTest(WindowsHandle impersonatedToken)
+{
+    const auto bufferLength = GetBufferLength(impersonatedToken, TokenImpersonationLevel);
+
+    ASSERT_NOT_THROW_EXCEPTION_3(LengthTest, bufferLength, impersonatedToken, TokenImpersonationLevel);
+}
+
+void System::TokenInformationTesting::LengthTest(WindowsDWord bufferLength, WindowsHandle impersonatedToken, TokenInformationClass tokenInformation)
+{
+    BufferType buffer(bufferLength);
+
     WindowsDWord returnLength{ 0 };
-    ASSERT_FALSE(GetSystemTokenInformation(impersonatedToken, TokenImpersonationLevel, nullptr, 0, &returnLength));
+    ASSERT_TRUE(GetSystemTokenInformation(impersonatedToken, tokenInformation, buffer.data(), bufferLength, &returnLength));
 
-    ASSERT_LESS_FAILURE_THROW(0u, returnLength, "，获取系统token信息失败。");
-
-    vector<char> buffer(returnLength);
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26490)
-
-    auto tokenInformation = reinterpret_cast<SecurityImpersonationLevel*>(buffer.data());
-
-#include STSTEM_WARNING_POP
-
-    WindowsDWord newReturnLength{ 0 };
-    ASSERT_TRUE(GetSystemTokenInformation(impersonatedToken, TokenImpersonationLevel, tokenInformation, returnLength, &newReturnLength));
-
-    ASSERT_EQUAL(newReturnLength, returnLength);
-
-    ASSERT_TRUE(CloseTokenHandle(impersonatedToken));
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+    ASSERT_LESS_EQUAL(returnLength, bufferLength);
 }

@@ -14,7 +14,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 #include "Framework/WindowProcess/WindowMessageUnitTestSuiteDetail.h"
 
-using std::string;
 using namespace std::literals;
 
 System::TestingWindowsMessage::TestingWindowsMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
@@ -44,7 +43,7 @@ void System::TestingWindowsMessage::AddSystemOutputSuite()
 
 CoreTools::Suite System::TestingWindowsMessage::GetMessageBoxSelectionSuite()
 {
-    auto hwnd = GetHwnd();
+    const auto hwnd = GetHwnd();
 
     auto messageBoxSelectionSuite = GenerateSuite("消息框选择"s);
 
@@ -66,7 +65,7 @@ void System::TestingWindowsMessage::AddDynamicLinkSuite()
 
 CoreTools::Suite System::TestingWindowsMessage::GetLoadResourceToolsSuite()
 {
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     auto loadResourceToolsSuite = GenerateSuite("加载资源工具"s);
 
@@ -79,7 +78,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetLoadResourceToolsSuite()
 
 CoreTools::Suite System::TestingWindowsMessage::GetEnumResourceToolsSuite()
 {
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     auto enumResourceToolsSuite = GenerateSuite("列举资源工具"s);
 
@@ -91,7 +90,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetEnumResourceToolsSuite()
 
 void System::TestingWindowsMessage::AddOpenGLSuite()
 {
-    auto hwnd = GetHwnd();
+    const auto hwnd = GetHwnd();
 
     auto openGLSuite = GenerateSuite("OpenGL"s);
 
@@ -105,23 +104,37 @@ void System::TestingWindowsMessage::AddOpenGLSuite()
 
 void System::TestingWindowsMessage::AddWindowsSuite()
 {
-    auto instance = System::GetHInstance();
-    auto hwnd = GetHwnd();
+    const auto hwnd = GetHwnd();
 
     auto windowsSuite = GenerateSuite("Windows系统"s);
 
-    ADD_TEST_USE_PARAMETER_2(windowsSuite, WindowsCreateTesting, instance, hwnd);
+    windowsSuite.AddSuite(GetWindowsCreateSuite());
     windowsSuite.AddSuite(GetWindowsProcessSuite());
     windowsSuite.AddSuite(GetWindowsRegisterSuite());
     ADD_TEST_USE_PARAMETER_1(windowsSuite, WindowsFontInformationTesting, hwnd);
     ADD_TEST_USE_PARAMETER_1(windowsSuite, WindowsUserTesting, hwnd);
+    windowsSuite.AddSuite(GetWindowsSystemSuite());
 
     AddSuite(windowsSuite);
 }
 
+CoreTools::Suite System::TestingWindowsMessage::GetWindowsCreateSuite()
+{
+    const auto instance = System::GetHInstance();
+    const auto hwnd = GetHwnd();
+
+    auto windowsCreateSuite = GenerateSuite("Windows创建"s);
+
+    ADD_TEST_USE_PARAMETER_2(windowsCreateSuite, CreateSystemWindowTesting, instance, hwnd);
+    ADD_TEST_USE_PARAMETER_1(windowsCreateSuite, GetHInstanceTesting, instance);
+    ADD_TEST_USE_PARAMETER_2(windowsCreateSuite, WindowsCreateMenuTesting, instance, hwnd);
+
+    return windowsCreateSuite;
+}
+
 CoreTools::Suite System::TestingWindowsMessage::GetWindowsProcessSuite()
 {
-    auto hwnd = GetHwnd();
+    const auto hwnd = GetHwnd();
 
     auto windowsProcessSuite = GenerateSuite("Windows进程"s);
 
@@ -141,7 +154,7 @@ CoreTools::Suite System::TestingWindowsMessage::GetWindowsProcessSuite()
 
 CoreTools::Suite System::TestingWindowsMessage::GetWindowsRegisterSuite()
 {
-    auto instance = System::GetHInstance();
+    const auto instance = System::GetHInstance();
 
     auto windowsRegisterSuite = GenerateSuite("Windows注册"s);
 
@@ -152,4 +165,16 @@ CoreTools::Suite System::TestingWindowsMessage::GetWindowsRegisterSuite()
     ADD_TEST(windowsRegisterSuite, RegisterWindowMessageTesting);
 
     return windowsRegisterSuite;
+}
+
+CoreTools::Suite System::TestingWindowsMessage::GetWindowsSystemSuite()
+{
+    const auto hwnd = GetHwnd();
+
+    auto windowsSystemSuite = GenerateSuite("Windows系统"s);
+
+    ADD_TEST(windowsSystemSuite, GetActiveWindowTesting);
+    ADD_TEST_USE_PARAMETER_1(windowsSystemSuite, GetSystemClientRectTesting, hwnd);
+
+    return windowsSystemSuite;
 }

@@ -1,30 +1,28 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:41)
+///	引擎测试版本：0.9.0.1 (2023/01/29 11:34)
 
 #ifndef SYSTEM_SECURITY_SUITE_DUPLICATE_TOKEN_TESTING_H
 #define SYSTEM_SECURITY_SUITE_DUPLICATE_TOKEN_TESTING_H
 
+#include "SecurityBaseTestingBase.h"
 #include "System/Security/Using/SecurityBaseUsing.h"
 #include "System/Threading/Fwd/ThreadingFlagsFwd.h"
-#include "System/Threading/Using/ThreadToolsUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <random>
-#include <vector>
 
 namespace System
 {
-    class DuplicateTokenTesting final : public CoreTools::UnitTest
+    class DuplicateTokenTesting final : public SecurityBaseTestingBase
     {
     public:
         using ClassType = DuplicateTokenTesting;
-        using ParentType = UnitTest;
+        using ParentType = SecurityBaseTestingBase;
 
     public:
         explicit DuplicateTokenTesting(const OStreamShared& stream);
@@ -38,17 +36,21 @@ namespace System
         NODISCARD bool RandomShuffleFlags();
         void DuplicateTokenTest();
 
+        void DoDuplicateTokenTest(WindowsHandle tokenHandle);
+        void DuplicateTest(WindowsHandle tokenHandle, SecurityImpersonationLevel securityImpersonation);
+        void WindowSecurityAttributesDuplicateTest(size_t index, WindowsHandle tokenHandle, SecurityImpersonationLevel securityImpersonation);
+
     private:
         using SecurityImpersonationLevelContainer = std::vector<SecurityImpersonationLevel>;
         using SecurityTokenTypeContainer = std::vector<SecurityTokenType>;
-        using TokenStandardAccessFlagsContainer = std::vector<TokenStandardAccess>;
-        using TokenSpecificAccessFlagsContainer = std::vector<TokenSpecificAccess>;
+        using TokenStandardAccessContainer = std::vector<TokenStandardAccess>;
+        using TokenSpecificAccessContainer = std::vector<TokenSpecificAccess>;
 
     private:
-        SecurityImpersonationLevelContainer securityImpersonationLevel;
-        SecurityTokenTypeContainer securityTokenType;
-        TokenStandardAccessFlagsContainer tokenStandardAccessFlags;
-        TokenSpecificAccessFlagsContainer tokenSpecificAccessFlags;
+        SecurityImpersonationLevelContainer securityImpersonationLevels;
+        SecurityTokenTypeContainer securityTokenTypes;
+        TokenStandardAccessContainer tokenStandardAccesses;
+        TokenSpecificAccessContainer tokenSpecificAccesses;
         std::default_random_engine randomEngine;
         size_t maxSize;
     };

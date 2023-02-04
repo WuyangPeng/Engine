@@ -36,7 +36,7 @@ namespace System
                                                                                               AccessCheckACLPtr dacl,
                                                                                               bool daclDefaulted) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescriptorPtr securityDescriptor,
-                                                                                              WindowsBoolPtr daclPresent,
+                                                                                              bool* daclPresent,
                                                                                               AccessCheckACLPtr* dacl,
                                                                                               bool* daclDefaulted) noexcept;
 
@@ -71,7 +71,7 @@ namespace System
                                                                                        AccessCheckACLPtr sacl,
                                                                                        bool saclDefaulted) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor,
-                                                                                       WindowsBoolPtr saclPresent,
+                                                                                       bool* saclPresent,
                                                                                        AccessCheckACLPtr* sacl,
                                                                                        bool* saclDefaulted) noexcept;
 }

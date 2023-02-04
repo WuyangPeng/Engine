@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:24)
+///	引擎测试版本：0.9.0.1 (2023/01/31 23:43)
 
 #include "OpenEventTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -17,14 +17,18 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-
 System::OpenEventTesting::OpenEventTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      eventStandardAccessFlags{ MutexStandardAccess::Delete, MutexStandardAccess::ReadControl, MutexStandardAccess::WriteDac, MutexStandardAccess::WriteOwner, MutexStandardAccess::Synchronize },
-      eventSpecificAccessFlags{ EventSpecificAccess::Default, EventSpecificAccess::ModifyState, EventSpecificAccess::AllAccess },
+      eventStandardAccesses{ MutexStandardAccess::Delete,
+                             MutexStandardAccess::ReadControl,
+                             MutexStandardAccess::WriteDac,
+                             MutexStandardAccess::WriteOwner,
+                             MutexStandardAccess::Synchronize },
+      eventSpecificAccesses{ EventSpecificAccess::Default,
+                             EventSpecificAccess::ModifyState,
+                             EventSpecificAccess::AllAccess },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(eventStandardAccessFlags.size(), eventSpecificAccessFlags.size()) }
+      maxSize{ std::max(eventStandardAccesses.size(), eventSpecificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -43,8 +47,8 @@ void System::OpenEventTesting::MainTest()
 
 bool System::OpenEventTesting::RandomShuffleFlags()
 {
-    shuffle(eventStandardAccessFlags.begin(), eventStandardAccessFlags.end(), randomEngine);
-    shuffle(eventSpecificAccessFlags.begin(), eventSpecificAccessFlags.end(), randomEngine);
+    shuffle(eventStandardAccesses.begin(), eventStandardAccesses.end(), randomEngine);
+    shuffle(eventSpecificAccesses.begin(), eventSpecificAccesses.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 
@@ -53,10 +57,24 @@ bool System::OpenEventTesting::RandomShuffleFlags()
 
 void System::OpenEventTesting::ThreadTest()
 {
-    constexpr auto threadCount = 12;
-    auto eventName = System::ToString(GetTimeInMicroseconds());
+    const auto eventName = System::ToString(GetTimeInMicroseconds());
 
-    auto eventHandle = CreateSystemEvent(nullptr, true, true, eventName.c_str());
+    const auto eventHandle = CreateSystemEvent(nullptr, true, true, eventName.c_str());
+    ASSERT_NOT_THROW_EXCEPTION_2(DoThreadTest, eventHandle, eventName);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSystemEventTest, eventHandle);
+}
+
+void System::OpenEventTesting::WaitForEventTest(const String& eventName)
+{
+    for (auto index = 0u; index < maxSize; ++index)
+    {
+        ASSERT_NOT_THROW_EXCEPTION_2(DoWaitForEventTest, index, eventName);
+    }
+}
+
+void System::OpenEventTesting::DoThreadTest(WindowsHandle eventHandle, const String& eventName)
+{
     ASSERT_TRUE(IsSystemEventValid(eventHandle));
 
     boost::thread_group threadGroup{};
@@ -66,20 +84,15 @@ void System::OpenEventTesting::ThreadTest()
     }
 
     threadGroup.join_all();
-
-    ASSERT_TRUE(CloseSystemEvent(eventHandle));
 }
 
-void System::OpenEventTesting::WaitForEventTest(const String& eventName)
+void System::OpenEventTesting::DoWaitForEventTest(size_t index, const String& eventName)
 {
-    for (auto index = 0u; index < maxSize; ++index)
-    {
-        auto eventStandardAccess = eventStandardAccessFlags.at(index % eventStandardAccessFlags.size());
-        auto eventSpecificAccess = eventSpecificAccessFlags.at(index % eventSpecificAccessFlags.size());
+    const auto eventStandardAccess = eventStandardAccesses.at(index % eventStandardAccesses.size());
+    const auto eventSpecificAccess = eventSpecificAccesses.at(index % eventSpecificAccesses.size());
 
-        auto eventHandle = OpenSystemEvent(eventStandardAccess, eventSpecificAccess, true, eventName.c_str());
-        ASSERT_TRUE(IsSystemEventValid(eventHandle));
+    const auto eventHandle = OpenSystemEvent(eventStandardAccess, eventSpecificAccess, true, eventName.c_str());
+    ASSERT_TRUE(IsSystemEventValid(eventHandle));
 
-        ASSERT_TRUE(CloseSystemEvent(eventHandle));
-    }
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSystemEventTest, eventHandle);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:13)
+///	引擎版本：0.9.0.1 (2023/02/02 14:38)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
@@ -93,9 +93,9 @@ namespace System
     using WindowsHandlePtr = PHANDLE;
     using WindowsDlgProc = DLGPROC;
 
-    constexpr auto gMaxModuleName32 = MAX_MODULE_NAME32;
-    constexpr auto gWindowExceptionMaximumParameters = EXCEPTION_MAXIMUM_PARAMETERS;
-    const WindowsHandle gInvalidHandleValue{ INVALID_HANDLE_VALUE };
+    constexpr auto maxModuleName32 = MAX_MODULE_NAME32;
+    constexpr auto windowExceptionMaximumParameters = EXCEPTION_MAXIMUM_PARAMETERS;
+    const WindowsHandle invalidHandleValue{ INVALID_HANDLE_VALUE };
 
     using WindowsModuleEntry32 = MODULEENTRY32;
     using WindowsModuleEntry32Ptr = LPMODULEENTRY32;
@@ -317,9 +317,9 @@ namespace System
     using WindowsHandlePtr = WindowsHandle*;
     using WindowsDlgProc = WindowsIntPtrSizeType (*)(WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam);
 
-    constexpr int gMaxModuleName32{ 255 };
-    constexpr int gWindowExceptionMaximumParameters{ 15 };
-    const WindowsHandle gInvalidHandleValue{ reinterpret_cast<WindowsHandle>(int(-1)) };
+    constexpr int maxModuleName32{ 255 };
+    constexpr int windowExceptionMaximumParameters{ 15 };
+    const WindowsHandle invalidHandleValue{ reinterpret_cast<WindowsHandle>(int(-1)) };
 
     struct WindowsModuleEntry32
     {
@@ -331,7 +331,7 @@ namespace System
         unsigned char* modBaseAddr;
         uint32_t modBaseSize;
         void* hModule;
-        char szModule[gMaxModuleName32 + 1];
+        char szModule[maxModuleName32 + 1];
         char szExePath[gMaxPath];
     };
     using WindowsModuleEntry32Ptr = WindowsModuleEntry32*;
@@ -343,7 +343,7 @@ namespace System
         ExceptionRecord* ExceptionRecord;
         void* ExceptionAddress;
         uint32_t NumberParameters;
-        uint64_t ExceptionInformation[gWindowExceptionMaximumParameters];
+        uint64_t ExceptionInformation[windowExceptionMaximumParameters];
     };
     using WindowsExceptionRecordPtr = WindowsExceptionRecord*;
 

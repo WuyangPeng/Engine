@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:59)
+///	引擎测试版本：0.9.0.1 (2023/02/01 14:15)
 
 #include "ProcessTokenTesting.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
@@ -17,33 +17,32 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
 using namespace std::literals;
 
 System::ProcessTokenTesting::ProcessTokenTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      tokenStandardAccessFlags{ TokenStandardAccess::Delete,
-                                TokenStandardAccess::ReadControl,
-                                TokenStandardAccess::WriteDac,
-                                TokenStandardAccess::WriteOwner },
-      tokenSpecificAccessFlags{ TokenSpecificAccess::Default,
-                                TokenSpecificAccess::AssignPrimary,
-                                TokenSpecificAccess::Duplicate,
-                                TokenSpecificAccess::Impersonate,
-                                TokenSpecificAccess::Query,
-                                TokenSpecificAccess::QuerySource,
-                                TokenSpecificAccess::AdjustPrivileges,
-                                TokenSpecificAccess::AdjustGroups,
-                                TokenSpecificAccess::AdjustDefault,
-                                TokenSpecificAccess::AdjustSessionID,
-                                TokenSpecificAccess::AllAccessP,
-                                TokenSpecificAccess::AllAccess,
-                                TokenSpecificAccess::Read,
-                                TokenSpecificAccess::Write,
-                                TokenSpecificAccess::Execute },
+      tokenStandardAccesses{ TokenStandardAccess::Delete,
+                             TokenStandardAccess::ReadControl,
+                             TokenStandardAccess::WriteDac,
+                             TokenStandardAccess::WriteOwner },
+      tokenSpecificAccesses{ TokenSpecificAccess::Default,
+                             TokenSpecificAccess::AssignPrimary,
+                             TokenSpecificAccess::Duplicate,
+                             TokenSpecificAccess::Impersonate,
+                             TokenSpecificAccess::Query,
+                             TokenSpecificAccess::QuerySource,
+                             TokenSpecificAccess::AdjustPrivileges,
+                             TokenSpecificAccess::AdjustGroups,
+                             TokenSpecificAccess::AdjustDefault,
+                             TokenSpecificAccess::AdjustSessionID,
+                             TokenSpecificAccess::AllAccessP,
+                             TokenSpecificAccess::AllAccess,
+                             TokenSpecificAccess::Read,
+                             TokenSpecificAccess::Write,
+                             TokenSpecificAccess::Execute },
       processFullPath{ GetEngineeringDirectory() + SYSTEM_TEXT("ProcessTest"s) + GetEngineeringSuffix() + GetEngineeringExeSuffix() },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(tokenStandardAccessFlags.size(), tokenSpecificAccessFlags.size()) }
+      maxSize{ std::max(tokenStandardAccesses.size(), tokenSpecificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -62,26 +61,31 @@ void System::ProcessTokenTesting::MainTest()
 
 bool System::ProcessTokenTesting::RandomShuffleFlags()
 {
-    shuffle(tokenStandardAccessFlags.begin(), tokenStandardAccessFlags.end(), randomEngine);
-    shuffle(tokenSpecificAccessFlags.begin(), tokenSpecificAccessFlags.end(), randomEngine);
+    shuffle(tokenStandardAccesses.begin(), tokenStandardAccesses.end(), randomEngine);
+    shuffle(tokenSpecificAccesses.begin(), tokenSpecificAccesses.end(), randomEngine);
 
-    ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OpenProcessTokenTest);
 
     return true;
 }
 
-void System::ProcessTokenTesting::ThreadTest()
+void System::ProcessTokenTesting::OpenProcessTokenTest()
 {
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto tokenStandardAccess = tokenStandardAccessFlags.at(index % tokenStandardAccessFlags.size());
-        auto tokenSpecificAccess = tokenSpecificAccessFlags.at(index % tokenSpecificAccessFlags.size());
-
-        WindowsHandle tokenHandle{ nullptr };
-        ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), tokenStandardAccess, tokenSpecificAccess, &tokenHandle));
-
-        ASSERT_UNEQUAL_NULL_PTR(tokenHandle);
-
-        ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+        ASSERT_NOT_THROW_EXCEPTION_1(DoOpenProcessTokenTest, index);
     }
+}
+
+void System::ProcessTokenTesting::DoOpenProcessTokenTest(size_t index)
+{
+    const auto tokenStandardAccess = tokenStandardAccesses.at(index % tokenStandardAccesses.size());
+    const auto tokenSpecificAccess = tokenSpecificAccesses.at(index % tokenSpecificAccesses.size());
+
+    WindowsHandle tokenHandle{ nullptr };
+    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), tokenStandardAccess, tokenSpecificAccess, &tokenHandle));
+
+    ASSERT_UNEQUAL_NULL_PTR(tokenHandle);
+
+    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
 }

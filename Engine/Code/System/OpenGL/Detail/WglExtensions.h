@@ -10,6 +10,8 @@
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_H
 
+#include "System/SystemDll.h"
+
 #include "System/Helper/Detail/OpenGL/WglExtensionsMacro.h"
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
 #include "System/OpenGL/Using/WglExtensionsUsing.h"

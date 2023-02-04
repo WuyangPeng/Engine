@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:14)
+///	引擎版本：0.9.0.1 (2023/02/02 14:40)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_PROCESS_H
 #define SYSTEM_WINDOWS_WINDOWS_PROCESS_H
@@ -16,12 +16,9 @@
 #include "Using/WindowsUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 
-#include <string>
-
+// Windows进程相关函数调用。
 namespace System
 {
-    // Windows进程相关函数调用。
-
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemMessage(WindowsMsg* msg, WindowsHWnd hwnd = nullptr) noexcept;
     bool SYSTEM_DEFAULT_DECLARE TranslateSystemMessage(const WindowsMsg* msg) noexcept;
     bool SYSTEM_DEFAULT_DECLARE DispatchSystemMessage(const WindowsMsg* msg) noexcept;
@@ -33,7 +30,7 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemValidateRect(WindowsHWnd hwnd) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE MessageBox(WindowsHWnd hwnd, const String& information, const String& title) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE DefaultMessageBox(WindowsHWnd hwnd, const String& information, const String& title) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE DestroySystemWindow(WindowsHWnd hwnd) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SendSystemMessage(WindowsHWnd hWnd, WindowsMessages msg, WindowsWParam wParam, WindowsLParam lParam) noexcept;

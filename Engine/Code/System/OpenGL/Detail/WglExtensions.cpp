@@ -20,8 +20,6 @@
 #include "System/OpenGL/OpenGLUtility.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 
-using std::string;
-
 namespace System
 {
     auto existsWgl10 = ExistsOpenGLExtensions::Unknown;
@@ -3275,11 +3273,11 @@ bool System::SupportsWglExtension(const char* wglExtension)
         return false;
     }
 
-    string extension{ wglExtensionString };
+    std::string extension{ wglExtensionString };
 
     const auto pos = extension.find(wglExtension);
 
-    if (pos == string::npos)
+    if (pos == std::string::npos)
     {
         return false;
     }

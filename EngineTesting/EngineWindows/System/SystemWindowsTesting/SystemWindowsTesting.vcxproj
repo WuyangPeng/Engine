@@ -359,7 +359,10 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\SystemOutputSuite.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\TestingWindowsMessage.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateSystemWindowTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateWindowTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\GetHInstanceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\WindowsCreateMenuTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsFontInformationTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DefWindowProcTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DestroyWindowTesting.h" />
@@ -377,6 +380,8 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterClassTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetActiveWindowTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetSystemClientRectTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsUserTesting.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -401,7 +406,10 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingWindowsMessage.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateSystemWindowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateWindowTestingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\GetHInstanceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\WindowsCreateMenuTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsFontInformationTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DefWindowProcTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DestroyWindowTesting.cpp" />
@@ -418,6 +426,8 @@ xcopy "../../../Code/System/SystemTesting/DynamicLinkSuite/EnumResourceTools/Res
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\LoadIconTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterClassTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetActiveWindowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetSystemClientRectTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsUserTesting.cpp" />
   </ItemGroup>
   <ItemGroup>

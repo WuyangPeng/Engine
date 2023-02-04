@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:21)
+///	引擎测试版本：0.9.0.1 (2023/01/30 23:28)
 
 #include "SpecifyCriticalSectionTesting.h"
 #include "System/Threading/CriticalSection.h"
@@ -38,12 +38,17 @@ void System::SpecifyCriticalSectionTesting::SpecifyCriticalSectionTest()
 
     ASSERT_TRUE(InitializeSystemCriticalSection(&criticalSection, 0, CriticalSectionInfo::Default));
 
+    ASSERT_NOT_THROW_EXCEPTION_1(EnterCriticalSectionTest, criticalSection);
+
+    DeleteSystemCriticalSection(&criticalSection);
+}
+
+void System::SpecifyCriticalSectionTesting::EnterCriticalSectionTest(ThreadingCriticalSection& criticalSection)
+{
     EnterSystemCriticalSection(&criticalSection);
 
     ASSERT_TRUE(TryEnterSystemCriticalSection(&criticalSection));
     LeaveSystemCriticalSection(&criticalSection);
 
     LeaveSystemCriticalSection(&criticalSection);
-
-    DeleteSystemCriticalSection(&criticalSection);
 }

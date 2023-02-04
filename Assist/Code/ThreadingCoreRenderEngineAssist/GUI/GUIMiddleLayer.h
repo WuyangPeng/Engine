@@ -23,9 +23,10 @@ namespace ThreadingCoreRenderEngineAssist
         using ParentType = GUIManagerInterface;
         using String = System::String;
         using MiddleLayerPlatform = Framework::MiddleLayerPlatform;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        explicit GUIMiddleLayer(MiddleLayerPlatform middleLayerPlatform);
+        explicit GUIMiddleLayer(MiddleLayerPlatform middleLayerPlatform, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

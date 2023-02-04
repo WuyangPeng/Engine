@@ -44,9 +44,10 @@ namespace ThreadingCoreRenderEngineAssist
         using ClassType = AssistMiddleLayerMessage;
         using ParentType = MessageType;
         using ConsoleAlloc = CoreTools::ConsoleAlloc;
+        using EnvironmentDirectory = Framework::EnvironmentDirectory;
 
     public:
-        explicit AssistMiddleLayerMessage(int64_t delta);
+        explicit AssistMiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 

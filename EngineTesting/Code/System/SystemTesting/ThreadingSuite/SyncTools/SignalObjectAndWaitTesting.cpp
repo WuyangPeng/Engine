@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 22:00)
+///	引擎测试版本：0.9.0.1 (2023/02/01 16:27)
 
 #include "SignalObjectAndWaitTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -39,15 +39,10 @@ void System::SignalObjectAndWaitTesting::MainTest()
 
 void System::SignalObjectAndWaitTesting::SignalObjectAndWaitTest()
 {
-    auto eventHandle = CreateSystemEvent(nullptr, nullptr, CreateEventType::ManualReset, MutexStandardAccess::Synchronize, EventSpecificAccess::ModifyState);
+    const auto eventHandle = CreateSystemEvent(nullptr, nullptr, CreateEventType::ManualReset, MutexStandardAccess::Synchronize, EventSpecificAccess::ModifyState);
     ASSERT_TRUE(IsSystemEventValid(eventHandle));
 
-    boost::thread_group threadGroup{};
-
-    threadGroup.create_thread(boost::bind(&ClassType::WaitForEventTest, this, eventHandle));
-    threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest, this, eventHandle));
-
-    threadGroup.join_all();
+    ASSERT_NOT_THROW_EXCEPTION_1(CreateThread, eventHandle);
 
     ASSERT_TRUE(CloseSystemEvent(eventHandle));
 }
@@ -59,10 +54,20 @@ void System::SignalObjectAndWaitTesting::WaitForEventTest(WindowsHandle eventHan
 
 void System::SignalObjectAndWaitTesting::WaitForMutexTest(WindowsHandle eventHandle)
 {
-    auto mutexHandle = CreateSystemMutex(nullptr, nullptr, MutexCreate::InitialOwner, MutexStandardAccess::Synchronize, MutexSpecificAccess::ModifyState);
+    const auto mutexHandle = CreateSystemMutex(nullptr, nullptr, MutexCreate::InitialOwner, MutexStandardAccess::Synchronize, MutexSpecificAccess::ModifyState);
     ASSERT_TRUE(IsSystemMutexValid(mutexHandle));
 
     ASSERT_ENUM_EQUAL(SystemSignalObjectAndWait(eventHandle, mutexHandle, EnumCastUnderlying(MutexWait::Infinite), false), MutexWaitReturn::Object0);
 
     ASSERT_TRUE(CloseSystemMutex(mutexHandle));
+}
+
+void System::SignalObjectAndWaitTesting::CreateThread(WindowsHandle eventHandle)
+{
+    boost::thread_group threadGroup{};
+
+    threadGroup.create_thread(boost::bind(&ClassType::WaitForEventTest, this, eventHandle));
+    threadGroup.create_thread(boost::bind(&ClassType::WaitForMutexTest, this, eventHandle));
+
+    threadGroup.join_all();
 }

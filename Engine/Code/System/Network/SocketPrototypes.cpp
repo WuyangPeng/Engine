@@ -23,6 +23,29 @@
 
 #include <array>
 
+namespace System
+{
+    NODISCARD const WinSockAddress* ToWinSockAddress(const WinSockInternetAddress* address) noexcept
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        return reinterpret_cast<const WinSockAddress*>(address);
+
+#include STSTEM_WARNING_POP
+    }
+
+    NODISCARD WinSockAddress* ToWinSockAddress(WinSockInternetAddress* address) noexcept
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+
+        return reinterpret_cast<WinSockAddress*>(address);
+
+#include STSTEM_WARNING_POP
+    }
+}
+
 System::WinSocket System::CreateSocket(ProtocolFamilies addressFamilies, SocketTypes type, SocketProtocols protocol) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
@@ -67,15 +90,10 @@ bool System::Bind(WinSocket winSocket, const WinSockInternetAddress* address) no
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    if (::bind(winSocket, reinterpret_cast<const WinSockAddress*>(address), sizeof(WinSockInternetAddress)) != socketError)
+    if (::bind(winSocket, ToWinSockAddress(address), sizeof(WinSockInternetAddress)) != socketError)
         return true;
     else
         return false;
-
-    #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -90,12 +108,7 @@ System::WinSocket System::Accept(WinSocket winSocket, WinSockInternetAddress* ad
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    return ::accept(winSocket, reinterpret_cast<WinSockAddress*>(address), namelen);
-
-    #include STSTEM_WARNING_POP
+    return ::accept(winSocket, ToWinSockAddress(address), namelen);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -184,15 +197,10 @@ bool System::Connect(WinSocket winSocket, const WinSockInternetAddress* address)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    if (::connect(winSocket, reinterpret_cast<const WinSockAddress*>(address), sizeof(WinSockInternetAddress)) != socketError)
+    if (::connect(winSocket, ToWinSockAddress(address), sizeof(WinSockInternetAddress)) != socketError)
         return true;
     else
         return false;
-
-    #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -260,15 +268,10 @@ bool System::GetPeerName(WinSocket winSocket, WinSockInternetAddress* name, int*
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    if (::getpeername(winSocket, reinterpret_cast<WinSockAddress*>(name), namelen) != socketError)
+    if (::getpeername(winSocket, ToWinSockAddress(name), namelen) != socketError)
         return true;
     else
         return false;
-
-    #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -283,15 +286,10 @@ bool System::GetSockName(WinSocket winSocket, WinSockInternetAddress* name, int*
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    if (::getsockname(winSocket, reinterpret_cast<WinSockAddress*>(name), namelen) != socketError)
+    if (::getsockname(winSocket, ToWinSockAddress(name), namelen) != socketError)
         return true;
     else
         return false;
-
-    #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -412,12 +410,7 @@ int System::RecvFrom(WinSocket winSocket, char* buf, int len, SocketRecv flags, 
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    return ::recvfrom(winSocket, buf, len, EnumCastUnderlying(flags), reinterpret_cast<WinSockAddress*>(from), fromlen);
-
-    #include STSTEM_WARNING_POP
+    return ::recvfrom(winSocket, buf, len, EnumCastUnderlying(flags), ToWinSockAddress(from), fromlen);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -432,12 +425,7 @@ int System::SendTo(WinSocket winSocket, const char* buf, int len, SocketSend fla
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include STSTEM_WARNING_PUSH
-    #include SYSTEM_WARNING_DISABLE(26490)
-
-    return ::sendto(winSocket, buf, len, EnumCastUnderlying(flags), reinterpret_cast<const WinSockAddress*>(to), sizeof(WinSockInternetAddress));
-
-    #include STSTEM_WARNING_POP
+    return ::sendto(winSocket, buf, len, EnumCastUnderlying(flags), ToWinSockAddress(to), sizeof(WinSockInternetAddress));
 
 #else  // !SYSTEM_PLATFORM_WIN32
 

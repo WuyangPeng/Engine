@@ -18,9 +18,7 @@
 #include "System/Windows/Engineering.h"
 #include "Toolset/System/SystemToolset/Helper/SystemToolsetClassInvariantMacro.h"
 
-using std::string;
-
-SystemToolset::ConnectParameter::ConnectParameter(const string& jsonRoute, const string& portName)
+SystemToolset::ConnectParameter::ConnectParameter(const std::string& jsonRoute, const std::string& portName)
     : port{ 30000 }, address{}, connectTime{ 20 }
 {
     Init(jsonRoute, portName);
@@ -28,15 +26,15 @@ SystemToolset::ConnectParameter::ConnectParameter(const string& jsonRoute, const
     SYSTEM_TOOLSET_SELF_CLASS_IS_VALID_9;
 }
 
-void SystemToolset::ConnectParameter::Init(const string& jsonRoute, const string& portName)
+void SystemToolset::ConnectParameter::Init(const std::string& jsonRoute, const std::string& portName)
 {
-    using TreeType = boost::property_tree::basic_ptree<string, string>;
+    using TreeType = boost::property_tree::basic_ptree<std::string, std::string>;
 
     TreeType mainTree{};
     read_json(jsonRoute, mainTree);
 
     port = mainTree.get<int>(portName, port) + System::GetEngineeringOffsetValue();
-    address = mainTree.get<string>("Address", System::defaultRouteAddress);
+    address = mainTree.get<std::string>("Address", System::defaultRouteAddress);
     connectTime = mainTree.get<int>("ConnectTime", connectTime);
 }
 

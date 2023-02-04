@@ -32,7 +32,6 @@ namespace System
         Locale(const Locale& rhs) = delete;
         Locale& operator=(const Locale& rhs) = delete;
         Locale(Locale&& rhs) noexcept = delete;
-
         Locale& operator=(Locale&& rhs) noexcept = delete;
 
         NODISCARD static LocaleType GetLocaleType(const char* locale);

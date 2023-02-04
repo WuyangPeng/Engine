@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 22:00)
+///	引擎测试版本：0.9.0.1 (2023/02/01 16:13)
 
 #ifndef SYSTEM_THREADING_SUITE_SLEEP_TESTING_H
 #define SYSTEM_THREADING_SUITE_SLEEP_TESTING_H
@@ -24,6 +24,9 @@ namespace System
         explicit SleepTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_FINAL_DECLARE;
+
+    protected:
+        void PrintTipsMessage() override;
 
     private:
         void DoRunUnitTest() final;

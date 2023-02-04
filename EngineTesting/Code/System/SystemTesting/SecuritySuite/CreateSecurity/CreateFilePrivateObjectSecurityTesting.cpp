@@ -1,37 +1,25 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:48)
+///	引擎测试版本：0.9.0.1 (2023/01/25 20:54)
 
 #include "CreateFilePrivateObjectSecurityTesting.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Security/CreateSecurity.h"
-#include "System/Security/Flags/AccessCheckFlags.h"
-#include "System/Security/Flags/CreateSecurityFlags.h"
-#include "System/Security/SecurityBase.h"
-#include "System/Security/Using/CreateSecurityUsing.h"
-#include "System/Security/Using/SecurityBaseUsing.h"
-#include "System/Threading/Flags/ThreadToolsFlags.h"
-#include "System/Threading/Process.h"
-#include "System/Threading/ProcessTools.h"
-#include "System/Threading/ThreadTools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::vector;
 using namespace std::literals;
 
 System::CreateFilePrivateObjectSecurityTesting::CreateFilePrivateObjectSecurityTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      securityRequestedInformationFlags{ SecurityRequestedInformation::Owner,
-                                         SecurityRequestedInformation::Group,
-                                         SecurityRequestedInformation::Dacl,
-                                         SecurityRequestedInformation::Label }
+      existingFileName{ SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s) },
+      setFileName{ SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_1;
 }
@@ -50,43 +38,53 @@ void System::CreateFilePrivateObjectSecurityTesting::MainTest()
 
 void System::CreateFilePrivateObjectSecurityTesting::CreatePrivateObjectSecurityTest()
 {
-    const auto setFileName = SYSTEM_TEXT("Resource/AttributesTesting/AttributesTestFile.txt"s);
-    const auto existingFileName = SYSTEM_TEXT("Resource/FileTesting/CreateExistingFile.txt"s);
+    const auto tokenHandle = OpenProcessToken();
 
-    const auto tokenIsElevated = IsSystemTokenElevated();
+    ASSERT_NOT_THROW_EXCEPTION_1(DoCreatePrivateObjectSecurityTest, tokenHandle);
 
-    WindowsHandle tokenHandle{ nullptr };
-    ASSERT_TRUE(OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTokenTest, tokenHandle);
+}
 
-    for (auto securityRequestedInformation : securityRequestedInformationFlags)
+void System::CreateFilePrivateObjectSecurityTesting::DoCreatePrivateObjectSecurityTest(WindowsHandle tokenHandle)
+{
+    for (auto securityRequestedInformation : *this)
     {
-        WindowsDWord neededLength{ 0 };
-        ASSERT_FALSE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, nullptr, 0, &neededLength));
-
-        vector<char> buffer(boost::numeric_cast<size_t>(neededLength + 1));
-
-        WindowsDWord newNeededLength{ 0 };
-        ASSERT_TRUE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, buffer.data(), neededLength, &newNeededLength));
-        ASSERT_EQUAL(newNeededLength, neededLength);
-
-        AccessCheckGenericMapping genericMapping{};
-        genericMapping.GenericRead = EnumCastUnderlying(AccessGenericMask::FileGenericRead);
-        genericMapping.GenericWrite = EnumCastUnderlying(AccessGenericMask::FileGenericWrite);
-        genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
-        genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
-
-        SecurityDescriptorPtr newDescriptor{ nullptr };
-
-        ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, buffer.data(), &newDescriptor, false, tokenHandle, &genericMapping));
-        ASSERT_UNEQUAL_NULL_PTR(newDescriptor);
-
-        if (tokenIsElevated != gFalse)
-        {
-            ASSERT_TRUE(SetSystemFileSecurity(setFileName.c_str(), securityRequestedInformation, newDescriptor));
-        }
-
-        ASSERT_TRUE(DestroySystemPrivateObjectSecurity(&newDescriptor));
+        ASSERT_NOT_THROW_EXCEPTION_2(CreateSecurityTest, securityRequestedInformation, tokenHandle);
     }
+}
 
-    ASSERT_TRUE(CloseTokenHandle(tokenHandle));
+void System::CreateFilePrivateObjectSecurityTesting::CreateSecurityTest(SecurityRequestedInformation securityRequestedInformation, WindowsHandle tokenHandle)
+{
+    auto buffer = GetSystemFileSecurityTest(securityRequestedInformation);
+
+    SecurityDescriptorPtr descriptor{ nullptr };
+    AccessCheckGenericMapping genericMapping = GetAccessCheckGenericMapping();
+    ASSERT_TRUE(CreateSystemPrivateObjectSecurity(nullptr, buffer.data(), &descriptor, false, tokenHandle, &genericMapping));
+    ASSERT_UNEQUAL_NULL_PTR(descriptor);
+
+    ASSERT_NOT_THROW_EXCEPTION_2(SetSystemFileSecurityTest, securityRequestedInformation, descriptor);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(DestroyPrivateObjectSecurityTest, descriptor);
+}
+
+System::CreateFilePrivateObjectSecurityTesting::BufferType System::CreateFilePrivateObjectSecurityTesting::GetSystemFileSecurityTest(SecurityRequestedInformation securityRequestedInformation)
+{
+    WindowsDWord neededLength{ 0 };
+    ASSERT_FALSE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, nullptr, 0, &neededLength));
+
+    BufferType buffer(boost::numeric_cast<size_t>(neededLength + 1));
+
+    WindowsDWord resultNeededLength{ 0 };
+    ASSERT_TRUE(GetSystemFileSecurity(existingFileName, securityRequestedInformation, buffer.data(), neededLength, &resultNeededLength));
+    ASSERT_EQUAL(resultNeededLength, neededLength);
+
+    return buffer;
+}
+
+void System::CreateFilePrivateObjectSecurityTesting::SetSystemFileSecurityTest(SecurityRequestedInformation securityRequestedInformation, SecurityDescriptorPtr descriptor)
+{
+    if (GetTokenIsElevated())
+    {
+        ASSERT_TRUE(SetSystemFileSecurity(setFileName, securityRequestedInformation, descriptor));
+    }
 }

@@ -14,8 +14,8 @@
 #include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
 #include "Framework/WindowProcess/WindowMessageDetail.h"
 
-ThreadingCoreRenderEngineAssist::AssistMiddleLayerMessage::AssistMiddleLayerMessage(int64_t delta)
-    : ParentType{ delta }, alloc{ ConsoleAlloc::Create() }
+ThreadingCoreRenderEngineAssist::AssistMiddleLayerMessage::AssistMiddleLayerMessage(int64_t delta, const EnvironmentDirectory& environmentDirectory)
+    : ParentType{ delta, environmentDirectory }, alloc{ ConsoleAlloc::Create() }
 {
     ASSIST_SELF_CLASS_IS_VALID_1;
 }

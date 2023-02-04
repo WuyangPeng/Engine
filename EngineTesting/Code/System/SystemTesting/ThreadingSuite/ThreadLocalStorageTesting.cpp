@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:16)
+///	引擎测试版本：0.9.0.1 (2023/02/01 19:29)
 
 #include "ThreadLocalStorageTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -15,8 +15,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <vector>
-
-using std::vector;
 
 System::ThreadLocalStorageTesting::ThreadLocalStorageTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -43,13 +41,7 @@ void System::ThreadLocalStorageTesting::ThreadTest()
     const auto threadLocalStorageIndex = ThreadLocalStorageAlloc();
     ASSERT_TRUE(IsThreadLocalStorageValid(threadLocalStorageIndex));
 
-    boost::thread_group threadGroup{};
-    for (auto i = 0; i < threadCount; ++i)
-    {
-        threadGroup.create_thread(boost::bind(&ClassType::ThreadLocalStorageThread, this, threadLocalStorageIndex));
-    }
-
-    threadGroup.join_all();
+    ASSERT_NOT_THROW_EXCEPTION_2(CreateThread, threadCount, threadLocalStorageIndex);
 
     ASSERT_TRUE(ThreadLocalStorageFree(threadLocalStorageIndex));
 }
@@ -57,11 +49,22 @@ void System::ThreadLocalStorageTesting::ThreadTest()
 void System::ThreadLocalStorageTesting::ThreadLocalStorageThread(WindowsDWord threadLocalStorageIndex)
 {
     constexpr auto bufferSize = 256;
-    vector<char> buffer(bufferSize);
+    std::vector<char> buffer(bufferSize);
 
     ASSERT_TRUE(SetThreadLocalStorageValue(threadLocalStorageIndex, buffer.data()));
 
-    auto threadLocalStorgae = GetThreadLocalStorageValue(threadLocalStorageIndex);
+    const auto threadLocalStorgae = GetThreadLocalStorageValue(threadLocalStorageIndex);
 
     ASSERT_EQUAL(buffer.data(), threadLocalStorgae);
+}
+
+void System::ThreadLocalStorageTesting::CreateThread(int threadCount, WindowsDWord threadLocalStorageIndex)
+{
+    boost::thread_group threadGroup{};
+    for (auto i = 0; i < threadCount; ++i)
+    {
+        threadGroup.create_thread(boost::bind(&ClassType::ThreadLocalStorageThread, this, threadLocalStorageIndex));
+    }
+
+    threadGroup.join_all();
 }

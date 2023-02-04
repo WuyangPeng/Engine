@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 19:04)
+///	引擎测试版本：0.9.0.1 (2023/02/02 20:50)
 
 #include "SystemDirectoryTesting.h"
 #include "System/Windows/WindowsSystem.h"
@@ -14,8 +14,6 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <vector>
-
-using std::vector;
 
 System::SystemDirectoryTesting::SystemDirectoryTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -39,7 +37,7 @@ void System::SystemDirectoryTesting::SystemDirectoryTest()
 {
     const auto size0 = GetSystemCurrentDirectory(0, nullptr);
 
-    vector<TChar> buffer(size0);
+    std::vector<TChar> buffer(size0);
 
     const auto size1 = GetSystemCurrentDirectory(size0, buffer.data());
     ASSERT_EQUAL(size0, size1 + 1);

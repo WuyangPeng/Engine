@@ -16,8 +16,6 @@
 
 #include <iostream>
 
-using std::cout;
-
 SystemToolset::UdpSocketSend::UdpSocketSend(WinSocket winSocket)
     : ParentType{ winSocket },
       connectParameter{ "Configuration/EnvironmentVariable.json", "UdpPort" }
@@ -33,7 +31,7 @@ void SystemToolset::UdpSocketSend::Send()
 
     const auto internetAddress = connectParameter.GetWinSockInternetAddress();
 
-    cout << "准备发送消息\n";
+    std::cout << "准备发送消息\n";
 
     auto ret = 0;
     do

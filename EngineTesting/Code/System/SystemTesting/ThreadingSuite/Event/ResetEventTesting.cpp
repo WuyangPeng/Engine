@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:24)
+///	引擎测试版本：0.9.0.1 (2023/01/31 23:50)
 
 #include "ResetEventTesting.h"
 #include "System/Helper/PragmaWarning/Thread.h"
@@ -34,9 +34,20 @@ void System::ResetEventTesting::MainTest()
 
 void System::ResetEventTesting::EventThreadTest()
 {
-    constexpr auto threadCount = 12;
+    const auto eventHandle = CreateSystemEvent(true, true);
 
-    auto eventHandle = CreateSystemEvent(true, true);
+    ASSERT_NOT_THROW_EXCEPTION_1(DoEventThreadTest, eventHandle);
+
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseSystemEventTest, eventHandle);
+}
+
+void System::ResetEventTesting::WaitForEventTest(WindowsHandle eventHandle)
+{
+    ASSERT_TRUE(WaitForSystemEvent(eventHandle));
+}
+
+void System::ResetEventTesting::DoEventThreadTest(WindowsHandle eventHandle)
+{
     ASSERT_TRUE(IsSystemEventValid(eventHandle));
 
     ASSERT_TRUE(ResetSystemEvent(eventHandle));
@@ -50,11 +61,4 @@ void System::ResetEventTesting::EventThreadTest()
     ASSERT_TRUE(SetSystemEvent(eventHandle));
 
     threadGroup.join_all();
-
-    ASSERT_TRUE(CloseSystemEvent(eventHandle));
-}
-
-void System::ResetEventTesting::WaitForEventTest(WindowsHandle eventHandle)
-{
-    ASSERT_TRUE(WaitForSystemEvent(eventHandle));
 }

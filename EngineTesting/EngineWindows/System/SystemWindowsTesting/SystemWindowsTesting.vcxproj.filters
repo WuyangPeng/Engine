@@ -73,6 +73,18 @@
     <Filter Include="WindowsSuite 源文件\WindowsRegister">
       <UniqueIdentifier>{85ea9e87-49cd-4f21-9b16-58781ef3a9a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WindowsSuite 头文件\WindowsCreate">
+      <UniqueIdentifier>{1a5d77a2-33e4-47b4-8471-dde7c352d5f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件\WindowsCreate">
+      <UniqueIdentifier>{68bc5cba-5688-4511-b022-2acf4625edb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 头文件\WindowsSystem">
+      <UniqueIdentifier>{6c2c4d0d-e6b8-417d-aa07-2f2997310e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件\WindowsSystem">
+      <UniqueIdentifier>{330819a9-59a0-4c81-8e6b-e7fe82464b5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Log.json">
@@ -147,9 +159,6 @@
       <Filter>WindowsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsUserTesting.h">
-      <Filter>WindowsSuite 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.h">
       <Filter>WindowsSuite 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\GetMessageTesting.h">
@@ -227,6 +236,24 @@
     <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSwapDeviceBuffersTesting.h">
       <Filter>OpenGLSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateSystemWindowTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\GetHInstanceTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\WindowsCreateMenuTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateWindowTestingBase.h">
+      <Filter>WindowsSuite 头文件\WindowsCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetActiveWindowTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetSystemClientRectTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp">
@@ -258,9 +285,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumWindowsTesting.cpp">
       <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.cpp">
-      <Filter>WindowsSuite 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsFontInformationTesting.cpp">
       <Filter>WindowsSuite 源文件</Filter>
@@ -342,6 +366,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSwapDeviceBuffersTesting.cpp">
       <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateSystemWindowTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\GetHInstanceTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\WindowsCreateMenuTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreate\CreateWindowTestingBase.cpp">
+      <Filter>WindowsSuite 源文件\WindowsCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetActiveWindowTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSystem\GetSystemClientRectTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

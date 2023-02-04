@@ -51,10 +51,18 @@ namespace System
                                                                  WinSockAddress* remoteAddress,
                                                                  const WinSockTimeval* timeout) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetLong(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetShort(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostLong(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostShort(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetLong(WinSocket winSocket,
+                                                                 unsigned long hostlong,
+                                                                 unsigned long* netlong) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHostToNetShort(WinSocket winSocket,
+                                                                  unsigned short hostshort,
+                                                                  unsigned short* netshort) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostLong(WinSocket winSocket,
+                                                                 unsigned long netlong,
+                                                                 unsigned long* hostlong) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNetToHostShort(WinSocket winSocket,
+                                                                  unsigned short netshort,
+                                                                  unsigned short* hostshort) noexcept;
 
     NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecv(WinSocket winSocket,
                                                        WinSockBufPtr buffers,

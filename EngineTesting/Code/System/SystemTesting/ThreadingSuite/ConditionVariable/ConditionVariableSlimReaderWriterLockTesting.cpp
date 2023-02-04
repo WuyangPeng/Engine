@@ -1,14 +1,14 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:19)
+///	引擎测试版本：0.9.0.1 (2023/01/30 18:30)
 
 #include "ConditionVariableSlimReaderWriterLockTesting.h"
-#include "System/Helper/PragmaWarning/Thread.h"
+#include "Data/SlimReaderWriterPacking.h" 
 #include "System/Threading/ConditionVariable.h"
 #include "System/Threading/Flags/ConditionVariableFlags.h"
 #include "System/Threading/Flags/SemaphoreFlags.h"
@@ -20,13 +20,7 @@
 
 System::ConditionVariableSlimReaderWriterLockTesting::ConditionVariableSlimReaderWriterLockTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      bufferNotEmpty{},
-      bufferNotFull{},
-      bufferLock{},
-      stopRequested{ false },
-      buffer{},
-      queueSize{ 0 },
-      queueStartOffset{ 0 }
+      bufferLock{}
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -45,98 +39,62 @@ void System::ConditionVariableSlimReaderWriterLockTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ThreadTest);
 }
 
-void System::ConditionVariableSlimReaderWriterLockTesting::Initialize() noexcept
+void System::ConditionVariableSlimReaderWriterLockTesting::DoInitialize() noexcept
 {
-    InitializeSystemConditionVariable(&bufferNotEmpty);
-    InitializeSystemConditionVariable(&bufferNotFull);
-
     InitializeSlimReaderWriterLock(&bufferLock);
 }
 
-void System::ConditionVariableSlimReaderWriterLockTesting::ThreadTest()
+void System::ConditionVariableSlimReaderWriterLockTesting::ThreadPause()
 {
-    boost::thread_group threadGroup{};
-    threadGroup.create_thread(boost::bind(&ClassType::ProducerThreadProcedure, this));
-    threadGroup.create_thread(boost::bind(&ClassType::ConsumerThreadProcedure, this));
-    threadGroup.create_thread(boost::bind(&ClassType::ConsumerThreadProcedure, this));
-
     GetStream() << "按继续后，线程将退出。\n";
 
     SystemPause();
 
     AcquireSlimReaderWriterLockExclusive(&bufferLock);
-    stopRequested = true;
+    SetStopRequested(true);
     ReleaseSlimReaderWriterLockExclusive(&bufferLock);
 
-    WakeAllSystemConditionVariable(&bufferNotEmpty);
-    WakeAllSystemConditionVariable(&bufferNotFull);
-
-    threadGroup.join_all();
+    WakeAllConditionVariable();
 }
 
-void System::ConditionVariableSlimReaderWriterLockTesting::ProducerThreadProcedure()
+bool System::ConditionVariableSlimReaderWriterLockTesting::DoProducerThreadProcedure()
 {
-    for (;;)
+    SlimReaderWriterPacking slimReaderWriterPacking{ bufferLock };
+
+    while (IsFull())
     {
-        AcquireSlimReaderWriterLockExclusive(&bufferLock);
-
-        while (queueSize == bufferSize && !stopRequested)
-        {
-            // Buffer满了。
-            ASSERT_TRUE(SleepConditionVariableSlimReaderWriter(&bufferNotFull, &bufferLock, EnumCastUnderlying<WindowsDWord>(MutexWait::Infinite), ConditionVariableLockMode::Exclusive));
-        }
-
-        if (stopRequested)
-        {
-            ReleaseSlimReaderWriterLockExclusive(&bufferLock);
-            break;
-        }
-
-        const auto offset = queueSize + queueStartOffset;
-        const auto index = offset % buffer.size();
-
-        buffer.at(index) = boost::numeric_cast<int>(index);
-
-        ++queueSize;
-
-        ReleaseSlimReaderWriterLockExclusive(&bufferLock);
-
-        WakeSystemConditionVariable(&bufferNotEmpty);
+        ASSERT_TRUE(SleepConditionVariableSlimReaderWriter(GetBufferNotFull(), &bufferLock, EnumCastUnderlying<WindowsDWord>(MutexWait::Infinite), ConditionVariableLockMode::Exclusive));
     }
+
+    if (IsStopRequested())
+    {
+        return true;
+    }
+
+    ASSERT_NOT_THROW_EXCEPTION_0(PushBuffer);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(WakeNotEmptyConditionVariable);
+
+    return false;
 }
 
-void System::ConditionVariableSlimReaderWriterLockTesting::ConsumerThreadProcedure()
+bool System::ConditionVariableSlimReaderWriterLockTesting::DoConsumerThreadProcedure()
 {
-    for (;;)
+    SlimReaderWriterPacking slimReaderWriterPacking{ bufferLock };
+
+    while (IsEmpty())
     {
-        AcquireSlimReaderWriterLockExclusive(&bufferLock);
-
-        while (queueSize == 0 && !stopRequested)
-        {
-            // Buffer 是空的。
-            ASSERT_TRUE(SleepConditionVariableSlimReaderWriter(&bufferNotEmpty, &bufferLock, static_cast<WindowsDWord>(MutexWait::Infinite), ConditionVariableLockMode::Exclusive));
-        }
-
-        if (stopRequested && queueSize == 0)
-        {
-            ReleaseSlimReaderWriterLockExclusive(&bufferLock);
-            break;
-        }
-
-        auto value = buffer.at(queueStartOffset);
-
-        ASSERT_EQUAL(value, queueStartOffset);
-
-        --queueSize;
-        ++queueStartOffset;
-
-        if (queueStartOffset == boost::numeric_cast<int>(buffer.size()))
-        {
-            queueStartOffset = 0;
-        }
-
-        ReleaseSlimReaderWriterLockExclusive(&bufferLock);
-
-        WakeSystemConditionVariable(&bufferNotFull);
+        ASSERT_TRUE(SleepConditionVariableSlimReaderWriter(GetBufferNotEmpty(), &bufferLock, static_cast<WindowsDWord>(MutexWait::Infinite), ConditionVariableLockMode::Exclusive));
     }
+
+    if (IsStopRequested() && GetQueueSize() == 0)
+    {
+        return true;
+    }
+
+    ASSERT_NOT_THROW_EXCEPTION_0(PopBuffer);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(WakeNotFullConditionVariable);
+
+    return false;
 }

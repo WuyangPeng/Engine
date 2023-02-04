@@ -1,19 +1,18 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 19:04)
+///	引擎测试版本：0.9.0.1 (2023/02/02 20:47)
 
 #include "GetSystemInputTesting.h"
+#include "System/Time/DeltaTime.h"
 #include "System/Windows/WindowsSystem.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
-
-using std::string;
 
 System::GetSystemInputTesting::GetSystemInputTesting(const OStreamShared& stream)
     : ParentType{ stream }
@@ -36,5 +35,12 @@ void System::GetSystemInputTesting::MainTest()
 void System::GetSystemInputTesting::GetSystemInputTest()
 {
     MAYBE_UNUSED const auto value0 = GetSystemInput<int>();
-    MAYBE_UNUSED const auto value1 = GetSystemInput<string>();
+    MAYBE_UNUSED const auto value1 = GetSystemInput<std::string>();
+}
+
+void System::GetSystemInputTesting::PrintTipsMessage()
+{
+    GetStream() << "这个测试需要在控制台上输入任意值。\n";
+
+    SystemPause();
 }

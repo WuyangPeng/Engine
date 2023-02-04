@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:03)
+///	引擎版本：0.9.0.1 (2023/01/30 13:17)
 
 #ifndef SYSTEM_THREADING_CONDITION_VARIABLE_H
 #define SYSTEM_THREADING_CONDITION_VARIABLE_H
@@ -18,10 +18,9 @@
 #include "Using/SlimReaderWriterUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
+// 条件变量
 namespace System
 {
-    // 条件变量
-
     void SYSTEM_DEFAULT_DECLARE InitializeSystemConditionVariable(ConditionVariablePtr conditionVariable) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SleepConditionVariableSlimReaderWriter(ConditionVariablePtr conditionVariable,

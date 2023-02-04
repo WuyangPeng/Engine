@@ -12,22 +12,19 @@
 #include <exception>
 #include <iostream>
 
-using std::cout;
-using std::exception;
-
 int main()
 {
     try
     {
         SystemToolset::TcpClient();
     }
-    catch (const exception& exception)
+    catch (const std::exception& exception)
     {
-        cout << exception.what() << '\n';
+        std::cout << exception.what() << '\n';
     }
     catch (...)
     {
-        cout << "Î´Öª´íÎó£¡\n";
+        std::cout << "Î´Öª´íÎó£¡\n";
     }
 
     return 0;

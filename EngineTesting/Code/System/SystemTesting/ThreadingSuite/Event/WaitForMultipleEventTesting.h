@@ -1,27 +1,24 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:23)
+///	引擎测试版本：0.9.0.1 (2023/02/01 0:05)
 
 #ifndef SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_EVENT_TESTING_H
 #define SYSTEM_THREADING_SUITE_WAIT_FOR_MULTIPLE_EVENT_TESTING_H
 
-#include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/UnitTestSuite/UnitTest.h"
-
-#include <vector>
+#include "EventTestingBase.h"
 
 namespace System
 {
-    class WaitForMultipleEventTesting final : public CoreTools::UnitTest
+    class WaitForMultipleEventTesting final : public EventTestingBase
     {
     public:
         using ClassType = WaitForMultipleEventTesting;
-        using ParentType = UnitTest;
+        using ParentType = EventTestingBase;
 
     public:
         explicit WaitForMultipleEventTesting(const OStreamShared& stream);
@@ -40,6 +37,8 @@ namespace System
         void WaitForManualEventTest0(const Container& eventHandle);
         void WaitForManualEventTest1(const Container& eventHandle);
         void WaitForManualEventTest2(const Container& eventHandle);
+        void WaitForManualEventTest(const Container& eventHandles);
+        NODISCARD Container GetEventHandle();
     };
 }
 

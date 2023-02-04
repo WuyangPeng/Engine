@@ -16,10 +16,9 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
 
+// ×Ö·û´®×ª»»
 namespace System
 {
-    // ×Ö·û´®×ª»»
-
     NODISCARD int SYSTEM_DEFAULT_DECLARE MultiByteConversionWideChar(CodePage codePage,
                                                                      MultiByte flag,
                                                                      const char* multiByte,

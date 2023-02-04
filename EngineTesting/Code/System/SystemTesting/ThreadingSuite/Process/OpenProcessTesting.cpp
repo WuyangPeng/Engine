@@ -1,48 +1,43 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/10/22 19:54)
+///	引擎测试版本：0.9.0.1 (2023/02/01 13:45)
 
 #include "OpenProcessTesting.h"
 #include "System/Threading/Flags/ProcessFlags.h"
 #include "System/Threading/Process.h"
 #include "System/Threading/Thread.h"
-#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-using std::max;
-using namespace std::literals;
-
 System::OpenProcessTesting::OpenProcessTesting(const OStreamShared& stream)
     : ParentType{ stream },
-      processStandardAccessFlags{ ProcessStandardAccess::Delete,
-                                  ProcessStandardAccess::ReadControl,
-                                  ProcessStandardAccess::WriteDac,
-                                  ProcessStandardAccess::WriteOwner,
-                                  ProcessStandardAccess::Synchronize },
-      processSpecificAccessFlags{ ProcessSpecificAccess::Terminate,
-                                  ProcessSpecificAccess::CreateThread,
-                                  ProcessSpecificAccess::SetSessionID,
-                                  ProcessSpecificAccess::VmOperation,
-                                  ProcessSpecificAccess::VmRead,
-                                  ProcessSpecificAccess::VmWrite,
-                                  ProcessSpecificAccess::DupHandle,
-                                  ProcessSpecificAccess::CreateProcess,
-                                  ProcessSpecificAccess::SetQuota,
-                                  ProcessSpecificAccess::SetInformation,
-                                  ProcessSpecificAccess::QueryInformation,
-                                  ProcessSpecificAccess::SuspendResume,
-                                  ProcessSpecificAccess::QueryLimitedInformation,
-                                  ProcessSpecificAccess::AllAccess },
-      processFullPath{ GetEngineeringDirectory() + SYSTEM_TEXT("ProcessTest"s) + GetEngineeringSuffix() + GetEngineeringExeSuffix() },
+      processStandardAccesses{ ProcessStandardAccess::Delete,
+                               ProcessStandardAccess::ReadControl,
+                               ProcessStandardAccess::WriteDac,
+                               ProcessStandardAccess::WriteOwner,
+                               ProcessStandardAccess::Synchronize },
+      processSpecificAccesses{ ProcessSpecificAccess::Terminate,
+                               ProcessSpecificAccess::CreateThread,
+                               ProcessSpecificAccess::SetSessionID,
+                               ProcessSpecificAccess::VmOperation,
+                               ProcessSpecificAccess::VmRead,
+                               ProcessSpecificAccess::VmWrite,
+                               ProcessSpecificAccess::DupHandle,
+                               ProcessSpecificAccess::CreateProcess,
+                               ProcessSpecificAccess::SetQuota,
+                               ProcessSpecificAccess::SetInformation,
+                               ProcessSpecificAccess::QueryInformation,
+                               ProcessSpecificAccess::SuspendResume,
+                               ProcessSpecificAccess::QueryLimitedInformation,
+                               ProcessSpecificAccess::AllAccess },
       randomEngine{ GetEngineRandomSeed() },
-      maxSize{ max(processStandardAccessFlags.size(), processSpecificAccessFlags.size()) }
+      maxSize{ std::max(processStandardAccesses.size(), processSpecificAccesses.size()) }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -61,8 +56,8 @@ void System::OpenProcessTesting::MainTest()
 
 bool System::OpenProcessTesting::RandomShuffleFlags()
 {
-    shuffle(processStandardAccessFlags.begin(), processStandardAccessFlags.end(), randomEngine);
-    shuffle(processSpecificAccessFlags.begin(), processSpecificAccessFlags.end(), randomEngine);
+    shuffle(processStandardAccesses.begin(), processStandardAccesses.end(), randomEngine);
+    shuffle(processSpecificAccesses.begin(), processSpecificAccesses.end(), randomEngine);
 
     ASSERT_NOT_THROW_EXCEPTION_0(OpenProcessTest);
 
@@ -76,20 +71,24 @@ void System::OpenProcessTesting::OpenProcessTest()
     ProcessStartupinfo startupInfo{};
     ProcessInformation processInformation{};
 
-    ASSERT_TRUE(CreateSystemProcess(processFullPath.c_str(), nullptr, nullptr, nullptr, true, creationFlag, nullptr, nullptr, &startupInfo, &processInformation));
+    ASSERT_TRUE(CreateSystemProcess(GetProcessFullPath().c_str(), nullptr, nullptr, nullptr, true, creationFlag, nullptr, nullptr, &startupInfo, &processInformation));
 
     for (auto index = 0u; index < maxSize; ++index)
     {
-        auto processStandardAccessFlag = processStandardAccessFlags.at(index % processStandardAccessFlags.size());
-        auto processSpecificAccessFlag = processSpecificAccessFlags.at(index % processSpecificAccessFlags.size());
-
-        auto processHandle = OpenSystemProcess(processStandardAccessFlag, processSpecificAccessFlag, true, processInformation.dwProcessId);
-
-        ASSERT_UNEQUAL_NULL_PTR(processHandle);
-
-        ASSERT_TRUE(CloseSystemProcess(processHandle));
+        ASSERT_NOT_THROW_EXCEPTION_2(DoOpenProcessTest, index, processInformation);
     }
 
-    ASSERT_TRUE(CloseSystemThread(processInformation.hThread));
-    ASSERT_TRUE(CloseSystemProcess(processInformation.hProcess));
+    ASSERT_NOT_THROW_EXCEPTION_1(CloseProcessTest, processInformation);
+}
+
+void System::OpenProcessTesting::DoOpenProcessTest(size_t index, const ProcessInformation& processInformation)
+{
+    const auto processStandardAccessFlag = processStandardAccesses.at(index % processStandardAccesses.size());
+    const auto processSpecificAccessFlag = processSpecificAccesses.at(index % processSpecificAccesses.size());
+
+    const auto processHandle = OpenSystemProcess(processStandardAccessFlag, processSpecificAccessFlag, true, processInformation.dwProcessId);
+
+    ASSERT_UNEQUAL_NULL_PTR(processHandle);
+
+    ASSERT_TRUE(CloseSystemProcess(processHandle));
 }

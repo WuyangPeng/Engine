@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.3 (2022/11/01 21:44)
+///	引擎测试版本：0.9.0.1 (2023/01/28 16:36)
 
 #include "AclInformationTesting.h"
 #include "System/Security/Flags/SecurityAclFlags.h"
@@ -29,14 +29,15 @@ void System::AclInformationTesting::DoRunUnitTest()
 
 void System::AclInformationTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(InformationTest);
+    ASSERT_NOT_THROW_EXCEPTION_1(InformationTest, AccessControlListRevision::Revision);
+    ASSERT_NOT_THROW_EXCEPTION_1(InformationTest, AccessControlListRevision::RevisionDs);
 }
 
-void System::AclInformationTesting::InformationTest()
+void System::AclInformationTesting::InformationTest(AccessControlListRevision accessControlListRevision)
 {
     AccessCheckACL acl{};
 
-    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), AccessControlListRevision::Revision));
+    ASSERT_TRUE(InitializeAccessControlList(&acl, sizeof(AccessCheckACL), accessControlListRevision));
     ASSERT_TRUE(IsAccessControlListValid(&acl));
 
     SecurityAclRevisionInformation aclRevisionInformation{};

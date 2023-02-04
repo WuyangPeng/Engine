@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎版本：0.8.1.4 (2022/11/19 23:13)
+///	引擎版本：0.9.0.1 (2023/02/02 14:39)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CREATE_H
 #define SYSTEM_WINDOWS_WINDOWS_CREATE_H
@@ -17,12 +17,9 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/WindowsMacro.h"
 
-#include <string>
-
+// 窗口创建和相关函数。
 namespace System
 {
-    // 窗口创建和相关函数。
-
     NODISCARD constexpr int GetLowWord(WindowsLParam param) noexcept
     {
         return LowWord(param);
@@ -63,8 +60,6 @@ namespace System
     NODISCARD WindowsHMenu SYSTEM_DEFAULT_DECLARE GetWindowSystemMenu(WindowsHWnd hwnd) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveSystemMenu(WindowsHMenu menu, SystemMenuCommand position, MenuItem flags) noexcept;
-
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction);
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_CREATE_H

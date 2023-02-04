@@ -39,7 +39,7 @@ void System::StrtokTesting::StrtokTest()
 {
     const auto separate = " \t\n"s;
     char* next{ nullptr };
-    const auto value = "value\tnullptr"s;
+    const auto value = "value\tnullptr\0"s;
     std::vector<char> ext{ value.begin(), value.end() };
 
     char* token = Strtok(ext.data(), separate.c_str(), &next);

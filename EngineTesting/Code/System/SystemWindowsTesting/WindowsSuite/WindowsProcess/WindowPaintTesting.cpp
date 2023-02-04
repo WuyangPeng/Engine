@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2022
+///	Copyright (c) 2010-2023
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++20
-///	引擎测试版本：0.8.1.4 (2022/11/05 19:45)
+///	引擎测试版本：0.9.0.1 (2023/02/02 21:11)
 
 #include "WindowPaintTesting.h"
 #include "System/Windows/WindowsProcess.h"
@@ -28,38 +28,54 @@ void System::WindowPaintTesting::DoRunUnitTest()
 
 void System::WindowPaintTesting::MainTest()
 {
-    ASSERT_NOT_THROW_EXCEPTION_0(PeekMessageTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SystemPaintTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CursorPosTest);
 }
 
-void System::WindowPaintTesting::PeekMessageTest()
+void System::WindowPaintTesting::SystemPaintTest()
 {
-    WindowsPoint point0{};
-
-    ASSERT_TRUE(GetCursorClientPos(hwnd, point0));
-
     WindowsPaintStruct ps{};
     ASSERT_TRUE(SystemBeginPaint(hwnd, &ps));
     ASSERT_TRUE(SystemEndPaint(hwnd, &ps));
+}
 
-    ASSERT_TRUE(SetCursorClientPos(hwnd, point0));
+void System::WindowPaintTesting::CursorPosTest()
+{
+    WindowsPoint point0{};
+
+    ASSERT_NOT_THROW_EXCEPTION_1(SetCursorClientPosTest, point0);
 
     WindowsPoint point1{};
 
-    ASSERT_TRUE(GetCursorClientPos(hwnd, point1));
+    ASSERT_NOT_THROW_EXCEPTION_2(GetCursorClientPosTest, point0, point1);
+    ASSERT_NOT_THROW_EXCEPTION_2(ScreenTest, point0, point1);
+}
 
-    ASSERT_EQUAL(point0.x, point1.x);
-    ASSERT_EQUAL(point0.y, point1.y);
+void System::WindowPaintTesting::SetCursorClientPosTest(WindowsPoint& point)
+{
+    ASSERT_TRUE(GetCursorClientPos(hwnd, point));
+    ASSERT_TRUE(SetCursorClientPos(hwnd, point));
+}
 
-    ASSERT_TRUE(GetSystemCursorPos(point0));
-    ASSERT_TRUE(SystemScreenToClient(hwnd, point0));
+void System::WindowPaintTesting::GetCursorClientPosTest(WindowsPoint& lhsPoint, WindowsPoint& rhsPoint)
+{
+    ASSERT_TRUE(GetCursorClientPos(hwnd, rhsPoint));
+    ASSERT_EQUAL(lhsPoint.x, rhsPoint.x);
+    ASSERT_EQUAL(lhsPoint.y, rhsPoint.y);
 
-    WindowsPoint point2{ point0 };
-    ASSERT_TRUE(SystemClientToScreen(hwnd, point2));
-    ASSERT_TRUE(SetSystemCursorPos(point2));
+    ASSERT_TRUE(GetSystemCursorPos(lhsPoint));
+    ASSERT_TRUE(SystemScreenToClient(hwnd, lhsPoint));
+}
 
-    ASSERT_TRUE(GetSystemCursorPos(point1));
-    ASSERT_TRUE(SystemScreenToClient(hwnd, point1));
+void System::WindowPaintTesting::ScreenTest(const WindowsPoint& lhsPoint, WindowsPoint& rhsPoint)
+{
+    WindowsPoint point{ lhsPoint };
+    ASSERT_TRUE(SystemClientToScreen(hwnd, point));
+    ASSERT_TRUE(SetSystemCursorPos(point));
 
-    ASSERT_EQUAL(point0.x, point1.x);
-    ASSERT_EQUAL(point0.y, point1.y);
+    ASSERT_TRUE(GetSystemCursorPos(rhsPoint));
+    ASSERT_TRUE(SystemScreenToClient(hwnd, rhsPoint));
+
+    ASSERT_EQUAL(lhsPoint.x, rhsPoint.x);
+    ASSERT_EQUAL(lhsPoint.y, rhsPoint.y);
 }
