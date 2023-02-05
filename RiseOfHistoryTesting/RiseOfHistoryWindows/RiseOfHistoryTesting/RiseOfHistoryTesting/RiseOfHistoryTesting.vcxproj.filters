@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{70e2ed91-ac56-4b98-a502-950208811d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{28efa381-d7b8-400b-9078-68e9dee0e969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSuite 头文件">
+      <UniqueIdentifier>{a27de2eb-bb2c-4dec-986c-eab1d638ab9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSuite 源文件">
+      <UniqueIdentifier>{edb7f5f3-0b64-4dd8-9b55-f5a21b50767a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionSuite 头文件">
+      <UniqueIdentifier>{6529c8a1-0a50-47c7-9c60-d67627300043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionSuite 源文件">
+      <UniqueIdentifier>{bb184955-518a-477f-9c84-676fe1a7637b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ProjectTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\RiseOfHistoryTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\Version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\EngineSuite\EngineTesting.h">
+      <Filter>EngineSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\EngineSuite\EngineSuite.h">
+      <Filter>EngineSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\VersionSuite\VersionTesting.h">
+      <Filter>VersionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistoryTesting\VersionSuite\VersionSuite.h">
+      <Filter>VersionSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\RiseOfHistoryTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistoryTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistoryTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistoryTesting\EngineSuite\EngineTesting.cpp">
+      <Filter>EngineSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistoryTesting\VersionSuite\VersionTesting.cpp">
+      <Filter>VersionSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

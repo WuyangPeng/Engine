@@ -1,0 +1,9 @@
+{
+  "versionSuite": {
+    "VersionTesting": 1
+  },
+
+  "engineSuite": {
+    "EngineTesting": 100
+  }
+}

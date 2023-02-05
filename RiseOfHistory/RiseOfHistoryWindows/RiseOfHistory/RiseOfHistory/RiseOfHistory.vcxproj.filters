@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{68841c34-b4d0-4cec-9664-77a1a454d65d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{cf3704dd-48b9-4634-850d-20e0759ec9ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core 头文件">
+      <UniqueIdentifier>{740a1d42-14b0-471c-aa00-b8c9677642ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core 源文件">
+      <UniqueIdentifier>{3417cde2-c47a-4d88-ad98-e6612a54c29a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI 头文件">
+      <UniqueIdentifier>{a1250a0f-edbd-4b3a-80ab-9dd67c694b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI 源文件">
+      <UniqueIdentifier>{51872aa5-9268-454c-8336-deda7c98363a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{7d0045a7-b65b-4dbb-9baf-91cebf449f66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input 头文件">
+      <UniqueIdentifier>{4498257b-12c2-4cd9-9bd2-9b1a2061662c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input 模板文件">
+      <UniqueIdentifier>{6af86ec9-7284-4b18-9d6b-431ebfe70620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 头文件">
+      <UniqueIdentifier>{46b84f91-ff05-4814-9a83-117f1ac9eff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 源文件">
+      <UniqueIdentifier>{b283cc16-3f74-4604-bf5a-da67b3540a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 头文件">
+      <UniqueIdentifier>{7ab2499e-1696-4b77-991b-906724e3e8e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 源文件">
+      <UniqueIdentifier>{67941556-dc84-4910-8468-3aa27c607221}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Project.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\RiseOfHistory.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryMiddleLayerMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\Core\ProjectName.cpp">
+      <Filter>Core 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\GUI\GUIMiddleLayer.cpp">
+      <Filter>GUI 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\Resource\ResourceMiddleLayer.cpp">
+      <Filter>Resource 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\RiseOfHistory\System\SystemMiddleLayer.cpp">
+      <Filter>System 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\RiseOfHistoryMiddleLayerMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Core\Core.h">
+      <Filter>Core 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Core\CoreFwd.h">
+      <Filter>Core 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Core\ProjectName.h">
+      <Filter>Core 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\GUI\GUI.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\GUI\GUIFwd.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\GUI\GUIMiddleLayer.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\Input.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\InputFwd.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\InputMiddleLayer.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Input\InputMiddleLayerDetail.h">
+      <Filter>Input 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Resource\Resource.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Resource\ResourceFwd.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Resource\ResourceMiddleLayer.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\System\System.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\System\SystemFwd.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\System\SystemMiddleLayer.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\RiseOfHistoryClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\RiseOfHistory\Helper\RiseOfHistoryCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
