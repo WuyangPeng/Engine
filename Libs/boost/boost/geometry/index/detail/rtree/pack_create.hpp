@@ -2,10 +2,11 @@
 //
 // R-tree initial packing
 //
-// Copyright (c) 2011-2017 Adam Wulkiewicz, Lodz, Poland.
+// Copyright (c) 2011-2022 Adam Wulkiewicz, Lodz, Poland.
+// Copyright (c) 2020 Caian Benedicto, Campinas, Brazil.
 //
-// This file was modified by Oracle on 2019.
-// Modifications copyright (c) 2019 Oracle and/or its affiliates.
+// This file was modified by Oracle on 2019-2021.
+// Modifications copyright (c) 2019-2021 Oracle and/or its affiliates.
 // Contributed and/or modified by Adam Wulkiewicz, on behalf of Oracle
 //
 // Use, modification and distribution is subject to the Boost Software License,
@@ -17,12 +18,15 @@
 
 #include <boost/core/ignore_unused.hpp>
 
+#include <boost/geometry/algorithms/detail/expand_by_epsilon.hpp>
 #include <boost/geometry/algorithms/expand.hpp>
+
+#include <boost/geometry/index/detail/algorithms/content.hpp>
 #include <boost/geometry/index/detail/algorithms/bounds.hpp>
 #include <boost/geometry/index/detail/algorithms/nth_element.hpp>
+#include <boost/geometry/index/detail/rtree/node/node_elements.hpp>
 #include <boost/geometry/index/detail/rtree/node/subtree_destroyer.hpp>
-
-#include <boost/geometry/algorithms/detail/expand_by_epsilon.hpp>
+#include <boost/geometry/index/parameters.hpp>
 
 namespace boost { namespace geometry { namespace index { namespace detail { namespace rtree {
 
@@ -71,23 +75,28 @@ template <std::size_t I, std::size_t Dimension>
 struct nth_element_and_half_boxes
 {
     template <typename EIt, typename Box>
-    static inline void apply(EIt first, EIt median, EIt last, Box const& box, Box & left, Box & right, std::size_t dim_index)
+    static inline void apply(EIt first, EIt median, EIt last, Box const& box,
+                             Box & left, Box & right, std::size_t dim_index)
     {
-        if ( I == dim_index )
+        if (I == dim_index)
         {
             index::detail::nth_element(first, median, last, point_entries_comparer<I>());
 
             geometry::convert(box, left);
             geometry::convert(box, right);
-            typename coordinate_type<Box>::type edge_len
-                = geometry::get<max_corner, I>(box) - geometry::get<min_corner, I>(box);
-            typename coordinate_type<Box>::type median
-                = geometry::get<min_corner, I>(box) + edge_len / 2;
-            geometry::set<max_corner, I>(left, median);
-            geometry::set<min_corner, I>(right, median);
+            auto const mi = geometry::get<min_corner, I>(box);
+            auto const ma = geometry::get<max_corner, I>(box);
+            auto const center = mi + (ma - mi) / 2;
+            geometry::set<max_corner, I>(left, center);
+            geometry::set<min_corner, I>(right, center);
         }
         else
-            nth_element_and_half_boxes<I+1, Dimension>::apply(first, median, last, box, left, right, dim_index);
+        {
+            nth_element_and_half_boxes
+                <
+                    I + 1, Dimension
+                >::apply(first, median, last, box, left, right, dim_index);
+        }
     }
 };
 
@@ -167,6 +176,19 @@ public:
                        translator_type const& translator,
                        allocators_type & allocators)
     {
+        return apply(first, last, values_count, leafs_level, parameters, translator,
+                     allocators, boost::container::new_allocator<void>());
+    }
+
+    template <typename InIt, typename TmpAlloc> inline static
+    node_pointer apply(InIt first, InIt last,
+                       size_type & values_count,
+                       size_type & leafs_level,
+                       parameters_type const& parameters,
+                       translator_type const& translator,
+                       allocators_type & allocators,
+                       TmpAlloc const& temp_allocator)
+    {
         typedef typename std::iterator_traits<InIt>::difference_type diff_type;
             
         diff_type diff = std::distance(first, last);
@@ -174,12 +196,18 @@ public:
             return node_pointer(0);
 
         typedef std::pair<point_type, InIt> entry_type;
-        std::vector<entry_type> entries;
+        typedef typename boost::container::allocator_traits<TmpAlloc>::
+            template rebind_alloc<entry_type> temp_entry_allocator_type;
+
+        temp_entry_allocator_type temp_entry_allocator(temp_allocator);
+        boost::container::vector<entry_type, temp_entry_allocator_type> entries(temp_entry_allocator);
 
         values_count = static_cast<size_type>(diff);
         entries.reserve(values_count);
+
+        auto const& strategy = index::detail::get_strategy(parameters);
         
-        expandable_box<box_type, strategy_type> hint_box(detail::get_strategy(parameters));
+        expandable_box<box_type, strategy_type> hint_box(strategy);
         for ( ; first != last ; ++first )
         {
             // NOTE: support for iterators not returning true references adapted
@@ -196,7 +224,7 @@ public:
             hint_box.expand(indexable);
 
             point_type pt;
-            geometry::centroid(indexable, pt);
+            geometry::centroid(indexable, pt, strategy);
             entries.push_back(std::make_pair(pt, first));
         }
 

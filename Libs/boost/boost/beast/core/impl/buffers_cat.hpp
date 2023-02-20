@@ -52,7 +52,7 @@ public:
 
 #if defined(_MSC_VER) && ! defined(__clang__)
 # define BOOST_BEAST_UNREACHABLE() __assume(false)
-# define BOOST_BEAST_UNREACHABLE_RETURN(v) __assume(false)
+# define BOOST_BEAST_UNREACHABLE_RETURN(v) return v
 #else
 # define BOOST_BEAST_UNREACHABLE() __builtin_unreachable()
 # define BOOST_BEAST_UNREACHABLE_RETURN(v) \
@@ -100,8 +100,12 @@ struct buffers_cat_view_iterator_base
         net::mutable_buffer
         operator*() const
         {
+        #if 1
+            throw std::logic_error("");
+        #else
             BOOST_BEAST_LOGIC_ERROR_RETURN({},
                 "Dereferencing a one-past-the-end iterator");
+        #endif
         }
 
         operator bool() const noexcept
@@ -188,8 +192,12 @@ private:
         reference
         operator()(mp11::mp_size_t<0>)
         {
+        #if 1
+            throw std::logic_error("");
+        #else
             BOOST_BEAST_LOGIC_ERROR_RETURN({},
                 "Dereferencing a default-constructed iterator");
+        #endif
         }
 
         template<class I>

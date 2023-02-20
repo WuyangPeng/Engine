@@ -56,8 +56,10 @@ public:
             s.get_executor())
         , s_(s)
         , role_(role)
+        , nb_(false)
     {
         (*this)({}, 0, false);
+        this->set_allowed_cancellation(net::cancellation_type::all);
     }
 
     void
@@ -85,9 +87,16 @@ public:
                 if(ec == net::error::would_block)
                 {
                     BOOST_ASIO_CORO_YIELD
-                    s_.async_wait(
-                        net::socket_base::wait_read,
-                            beast::detail::bind_continuation(std::move(*this)));
+                    {
+                        BOOST_ASIO_HANDLER_LOCATION((
+                            __FILE__, __LINE__,
+                            "websocket::tcp::async_teardown"
+                        ));
+
+                        s_.async_wait(
+                            net::socket_base::wait_read,
+                                beast::detail::bind_continuation(std::move(*this)));
+                    }
                     continue;
                 }
                 if(ec)
@@ -113,8 +122,15 @@ public:
             if(! cont)
             {
                 BOOST_ASIO_CORO_YIELD
-                net::post(bind_front_handler(
-                    std::move(*this), ec));
+                {
+                    BOOST_ASIO_HANDLER_LOCATION((
+                        __FILE__, __LINE__,
+                        "websocket::tcp::async_teardown"
+                        ));
+
+                    net::post(bind_front_handler(
+                        std::move(*this), ec));
+                }
             }
             {
                 error_code ignored;

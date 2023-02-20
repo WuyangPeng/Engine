@@ -56,6 +56,7 @@ public:
     {
         _buffer = _load();
         _impl = _load_var(_buffer);
+        _env_impl = _impl.data();
     }
 
     string_type get(const pointer_type id) { return get(string_type(id)); }
@@ -230,7 +231,7 @@ template<typename Char>
 inline auto basic_environment_impl<Char>::get(const string_type &id) -> string_type
 {
     auto itr = std::find_if(_data.begin(), _data.end(), 
-            [&](const string_type & st)
+            [&](const string_type & st) -> bool
             {
                 if (st.size() <= id.size())
                     return false;
@@ -250,7 +251,7 @@ template<typename Char>
 inline void basic_environment_impl<Char>::set(const string_type &id, const string_type &value)
 {
     auto itr = std::find_if(_data.begin(), _data.end(), 
-        [&](const string_type & st)
+        [&](const string_type & st) -> bool
         {
             if (st.size() <= id.size())
                 return false;
@@ -270,7 +271,7 @@ template<typename Char>
 inline void  basic_environment_impl<Char>::reset(const string_type &id)
 {
     auto itr = std::find_if(_data.begin(), _data.end(), 
-        [&](const string_type & st)
+        [&](const string_type & st) -> bool
         {
             if (st.size() <= id.size())
                 return false;

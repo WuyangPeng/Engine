@@ -194,6 +194,7 @@
 
 #if !__has_feature(cxx_override_control)
 #  define BOOST_NO_CXX11_FINAL
+#  define BOOST_NO_CXX11_OVERRIDE
 #endif
 
 #if !__has_feature(cxx_unrestricted_unions)
@@ -269,6 +270,10 @@
 #  define BOOST_NO_CXX14_DIGIT_SEPARATORS
 #endif
 
+// Deprecated symbol markup
+#if __has_attribute(deprecated)
+#define BOOST_DEPRECATED(msg) __attribute__((deprecated(msg)))
+#endif
 
 // Unused attribute:
 #if defined(__GNUC__) && (__GNUC__ >= 4)
@@ -287,3 +292,4 @@
 // Macro used to identify the Clang compiler.
 #define BOOST_CLANG 1
 
+#define BOOST_CLANG_VERSION (__clang_major__ * 10000 + __clang_minor__ * 100 + __clang_patchlevel__)

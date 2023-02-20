@@ -245,7 +245,7 @@ template<class T, class U> inline bool operator!=(T * a, intrusive_ptr<U> const 
     return a != b.get();
 }
 
-#if __GNUC__ == 2 && __GNUC_MINOR__ <= 96
+#if defined(__GNUC__) && __GNUC__ == 2 && __GNUC_MINOR__ <= 96
 
 // Resolve the ambiguity between our op!= and the one in rel_ops
 
@@ -384,5 +384,24 @@ template< class T > std::size_t hash_value( boost::intrusive_ptr<T> const & p ) 
 }
 
 } // namespace boost
+
+// std::hash
+
+#if !defined(BOOST_NO_CXX11_HDR_FUNCTIONAL)
+
+namespace std
+{
+
+template<class T> struct hash< ::boost::intrusive_ptr<T> >
+{
+    std::size_t operator()( ::boost::intrusive_ptr<T> const & p ) const BOOST_SP_NOEXCEPT
+    {
+        return std::hash< T* >()( p.get() );
+    }
+};
+
+} // namespace std
+
+#endif // #if !defined(BOOST_NO_CXX11_HDR_FUNCTIONAL)
 
 #endif  // #ifndef BOOST_SMART_PTR_INTRUSIVE_PTR_HPP_INCLUDED

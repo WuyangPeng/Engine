@@ -17,7 +17,7 @@
 # pragma once
 #endif
 
-#include <boost/variant/detail/multivisitors_cpp14_based.hpp>
+#include <tuple>
 
 namespace boost {
 
